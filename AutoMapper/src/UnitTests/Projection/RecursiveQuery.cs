@@ -21,15 +21,38 @@ namespace AutoMapper.UnitTests.Projection
             public int Id { get; set; }
             public Destination Parent { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c=>
-        {
-            c.CreateProjection<Source, Destination>();
-            c.Internal().RecursiveQueriesMaxDepth = 1;
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.CreateProjection<Source, Destination>();
+                    c.Internal().RecursiveQueriesMaxDepth = 1;
+                }
+            );
         [Fact]
         public void Should_work()
         {
-            var source = new[] { new Source { Id = 1, Parent = new Source { Id = 2, Parent = new Source { } } }, new Source { Id = 3, Parent = new Source { Id = 4, Parent = new Source { } } } };
+            var source = new[]
+            {
+                new Source
+                {
+                    Id = 1,
+                    Parent = new Source
+                    {
+                        Id = 2,
+                        Parent = new Source { }
+                    }
+                },
+                new Source
+                {
+                    Id = 3,
+                    Parent = new Source
+                    {
+                        Id = 4,
+                        Parent = new Source { }
+                    }
+                }
+            };
             var result = ProjectTo<Destination>(source.AsQueryable()).ToArray();
             result[0].Id.ShouldBe(1);
             result[0].Parent.Id.ShouldBe(2);

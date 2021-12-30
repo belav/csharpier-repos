@@ -10,7 +10,10 @@ interface IncrDecr
 struct MyInt : IncrDecr
 {
     int x;
-    public int Val() { return x; }
+    public int Val()
+    {
+        return x;
+    }
 }
 class MyCounter<T> where T : IncrDecr
 {
@@ -71,4 +74,3 @@ class test
         return 100;
     }
 }
-

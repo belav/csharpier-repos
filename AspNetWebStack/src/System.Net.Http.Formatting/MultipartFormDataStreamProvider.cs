@@ -28,8 +28,7 @@ namespace System.Net.Http
         /// Initializes a new instance of the <see cref="MultipartFormDataStreamProvider"/> class.
         /// </summary>
         /// <param name="rootPath">The root path where the content of MIME multipart body parts are written to.</param>
-        public MultipartFormDataStreamProvider(string rootPath)
-            : base(rootPath)
+        public MultipartFormDataStreamProvider(string rootPath) : base(rootPath)
         {
             FormData = HttpValueCollection.Create();
         }
@@ -76,8 +75,11 @@ namespace System.Net.Http
         {
             // This method predates support for cancellation, and we need to make sure it is always invoked when
             // ExecutePostProcessingAsync is called for compatability.
-            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(Contents, FormData,
-                _cancellationToken);
+            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(
+                Contents,
+                FormData,
+                _cancellationToken
+            );
         }
 
         /// <summary>

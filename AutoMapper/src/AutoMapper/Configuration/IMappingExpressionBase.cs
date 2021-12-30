@@ -12,7 +12,12 @@ namespace AutoMapper
     /// <typeparam name="TSource">Source type</typeparam>
     /// <typeparam name="TDestination">Destination type</typeparam>
     /// <typeparam name="TMappingExpression">Concrete return type for fluent interface</typeparam>
-    public interface IProjectionExpressionBase<TSource, TDestination, out TMappingExpression> where TMappingExpression : IProjectionExpressionBase<TSource, TDestination, TMappingExpression>
+    public interface IProjectionExpressionBase<TSource, TDestination, out TMappingExpression>
+        where TMappingExpression : IProjectionExpressionBase<
+                TSource,
+                TDestination,
+                TMappingExpression
+            >
     {
         Features<IMappingFeature> Features { get; }
         /// <summary>
@@ -44,7 +49,10 @@ namespace AutoMapper
         /// <param name="ctorParamName">Constructor parameter name</param>
         /// <param name="paramOptions">Options</param>
         /// <returns>Itself</returns>
-        TMappingExpression ForCtorParam(string ctorParamName, Action<ICtorParamConfigurationExpression<TSource>> paramOptions);
+        TMappingExpression ForCtorParam(
+            string ctorParamName,
+            Action<ICtorParamConfigurationExpression<TSource>> paramOptions
+        );
         /// <summary>
         /// Skip member mapping and use a custom expression to convert to the destination type
         /// </summary>
@@ -57,7 +65,8 @@ namespace AutoMapper
     /// <typeparam name="TSource">Source type</typeparam>
     /// <typeparam name="TDestination">Destination type</typeparam>
     /// <typeparam name="TMappingExpression">Concrete return type for fluent interface</typeparam>
-    public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpression> : IProjectionExpressionBase<TSource, TDestination, TMappingExpression>
+    public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpression>
+        : IProjectionExpressionBase<TSource, TDestination, TMappingExpression>
         where TMappingExpression : IMappingExpressionBase<TSource, TDestination, TMappingExpression>
     {
         /// <summary>
@@ -88,14 +97,17 @@ namespace AutoMapper
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <param name="beforeFunction">Callback for the source/destination types</param>
         /// <returns>Itself</returns>
-        TMappingExpression BeforeMap(Action<TSource, TDestination, ResolutionContext> beforeFunction);
+        TMappingExpression BeforeMap(
+            Action<TSource, TDestination, ResolutionContext> beforeFunction
+        );
         /// <summary>
         /// Execute a custom mapping action before member mapping
         /// </summary>
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <typeparam name="TMappingAction">Mapping action type instantiated during mapping</typeparam>
         /// <returns>Itself</returns>
-        TMappingExpression BeforeMap<TMappingAction>() where TMappingAction : IMappingAction<TSource, TDestination>;
+        TMappingExpression BeforeMap<TMappingAction>()
+            where TMappingAction : IMappingAction<TSource, TDestination>;
         /// <summary>
         /// Execute a custom function to the source and/or destination types after member mapping
         /// </summary>
@@ -116,7 +128,8 @@ namespace AutoMapper
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <typeparam name="TMappingAction">Mapping action type instantiated during mapping</typeparam>
         /// <returns>Itself</returns>
-        TMappingExpression AfterMap<TMappingAction>() where TMappingAction : IMappingAction<TSource, TDestination>;
+        TMappingExpression AfterMap<TMappingAction>()
+            where TMappingAction : IMappingAction<TSource, TDestination>;
         /// <summary>
         /// Include this configuration in all derived types' maps. Works by scanning all type maps for matches during configuration.
         /// </summary>
@@ -142,7 +155,10 @@ namespace AutoMapper
         /// <param name="sourceMemberName">Expression to source member. Must be a member of the <typeparamref name="TSource"/> type</param>
         /// <param name="memberOptions">Callback for member configuration options</param>
         /// <returns>Itself</returns>
-        TMappingExpression ForSourceMember(string sourceMemberName, Action<ISourceMemberConfigurationExpression> memberOptions);
+        TMappingExpression ForSourceMember(
+            string sourceMemberName,
+            Action<ISourceMemberConfigurationExpression> memberOptions
+        );
         /// <summary>
         /// Ignores all <typeparamref name="TDestination"/> properties that have either a private or protected setter, forcing the mapper to respect encapsulation (note: order matters, so place this before explicit configuration of any properties with an inaccessible setter)
         /// </summary>
@@ -186,7 +202,9 @@ namespace AutoMapper
         /// </summary>
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <param name="mappingFunction">Callback to convert from source type to destination type, with source, destination and context</param>
-        void ConvertUsing(Func<TSource, TDestination, ResolutionContext, TDestination> mappingFunction);
+        void ConvertUsing(
+            Func<TSource, TDestination, ResolutionContext, TDestination> mappingFunction
+        );
         /// <summary>
         /// Skip member mapping and use a custom type converter instance to convert to the destination type
         /// </summary>
@@ -198,7 +216,8 @@ namespace AutoMapper
         /// </summary>
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <typeparam name="TTypeConverter">Type converter type</typeparam>
-        void ConvertUsing<TTypeConverter>() where TTypeConverter : ITypeConverter<TSource, TDestination>;
+        void ConvertUsing<TTypeConverter>()
+            where TTypeConverter : ITypeConverter<TSource, TDestination>;
     }
     /// <summary>
     /// Custom mapping action

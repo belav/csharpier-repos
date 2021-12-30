@@ -24,13 +24,8 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
     /// <param name="actionName">The name of the action to use for generating the URL.</param>
     /// <param name="controllerName">The name of the controller to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    public RedirectToActionResult(
-        string? actionName,
-        string? controllerName,
-        object? routeValues)
-        : this(actionName, controllerName, routeValues, permanent: false)
-    {
-    }
+    public RedirectToActionResult(string? actionName, string? controllerName, object? routeValues)
+        : this(actionName, controllerName, routeValues, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -44,10 +39,8 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         string? actionName,
         string? controllerName,
         object? routeValues,
-        string? fragment)
-        : this(actionName, controllerName, routeValues, permanent: false, fragment: fragment)
-    {
-    }
+        string? fragment
+    ) : this(actionName, controllerName, routeValues, permanent: false, fragment: fragment) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -61,10 +54,8 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         string? actionName,
         string? controllerName,
         object? routeValues,
-        bool permanent)
-        : this(actionName, controllerName, routeValues, permanent, fragment: null)
-    {
-    }
+        bool permanent
+    ) : this(actionName, controllerName, routeValues, permanent, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -80,10 +71,8 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         string? controllerName,
         object? routeValues,
         bool permanent,
-        bool preserveMethod)
-        : this(actionName, controllerName, routeValues, permanent, preserveMethod, fragment: null)
-    {
-    }
+        bool preserveMethod
+    ) : this(actionName, controllerName, routeValues, permanent, preserveMethod, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -99,10 +88,16 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         string? controllerName,
         object? routeValues,
         bool permanent,
-        string? fragment)
-        : this(actionName, controllerName, routeValues, permanent, preserveMethod: false, fragment: fragment)
-    {
-    }
+        string? fragment
+    )
+        : this(
+            actionName,
+            controllerName,
+            routeValues,
+            permanent,
+            preserveMethod: false,
+            fragment: fragment
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -120,7 +115,8 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         object? routeValues,
         bool permanent,
         bool preserveMethod,
-        string? fragment)
+        string? fragment
+    )
     {
         ActionName = actionName;
         ControllerName = controllerName;
@@ -173,7 +169,9 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<RedirectToActionResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<RedirectToActionResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

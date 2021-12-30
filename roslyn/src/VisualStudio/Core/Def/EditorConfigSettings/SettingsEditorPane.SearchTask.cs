@@ -18,12 +18,13 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             private readonly IThreadingContext _threadingContext;
             private readonly IWpfTableControl[] _controls;
 
-            public SearchTask(uint dwCookie,
-                              IVsSearchQuery pSearchQuery,
-                              IVsSearchCallback pSearchCallback,
-                              IWpfTableControl[] controls,
-                              IThreadingContext threadingContext)
-                : base(dwCookie, pSearchQuery, pSearchCallback)
+            public SearchTask(
+                uint dwCookie,
+                IVsSearchQuery pSearchQuery,
+                IVsSearchCallback pSearchCallback,
+                IWpfTableControl[] controls,
+                IThreadingContext threadingContext
+            ) : base(dwCookie, pSearchQuery, pSearchCallback)
             {
                 _threadingContext = threadingContext;
                 _controls = controls;
@@ -37,7 +38,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
                         foreach (var control in _controls)
                         {
-                            _ = control.SetFilter(string.Empty, new SearchFilter(SearchQuery, control));
+                            _ = control.SetFilter(
+                                string.Empty,
+                                new SearchFilter(SearchQuery, control)
+                            );
                         }
 
                         await TaskScheduler.Default;
@@ -50,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
                         SearchCallback.ReportComplete(this, dwResultsFound: resultCount);
-                    });
+                    }
+                );
             }
 
             protected override void OnStopSearch()
@@ -63,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                         {
                             _ = control.SetFilter(string.Empty, null);
                         }
-                    });
+                    }
+                );
             }
         }
     }

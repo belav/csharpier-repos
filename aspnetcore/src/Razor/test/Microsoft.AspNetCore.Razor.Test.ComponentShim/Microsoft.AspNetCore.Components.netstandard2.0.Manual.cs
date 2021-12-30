@@ -4,7 +4,9 @@
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
 // https://github.com/dotnet/arcade/pull/2033
-[System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Explicit)]
+[System.Runtime.InteropServices.StructLayoutAttribute(
+    System.Runtime.InteropServices.LayoutKind.Explicit
+)]
 public readonly partial struct RenderTreeFrame
 {
     [System.Runtime.InteropServices.FieldOffsetAttribute(8)]
@@ -41,6 +43,12 @@ public readonly partial struct RenderTreeFrame
     public readonly int Sequence;
     [System.Runtime.InteropServices.FieldOffsetAttribute(16)]
     public readonly string TextContent;
-    public Microsoft.AspNetCore.Components.IComponent Component { get { throw null; } }
-    public override string ToString() { throw null; }
+    public Microsoft.AspNetCore.Components.IComponent Component
+    {
+        get { throw null; }
+    }
+    public override string ToString()
+    {
+        throw null;
+    }
 }

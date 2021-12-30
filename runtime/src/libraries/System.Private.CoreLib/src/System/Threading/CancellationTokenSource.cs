@@ -25,9 +25,11 @@ namespace System.Threading
     public class CancellationTokenSource : IDisposable
     {
         /// <summary>A <see cref="CancellationTokenSource"/> that's already canceled.</summary>
-        internal static readonly CancellationTokenSource s_canceledSource = new CancellationTokenSource() { _state = NotifyingCompleteState };
+        internal static readonly CancellationTokenSource s_canceledSource =
+            new CancellationTokenSource() { _state = NotifyingCompleteState };
         /// <summary>A <see cref="CancellationTokenSource"/> that's never canceled.  This isn't enforced programmatically, only by usage.  Do not cancel!</summary>
-        internal static readonly CancellationTokenSource s_neverCanceledSource = new CancellationTokenSource();
+        internal static readonly CancellationTokenSource s_neverCanceledSource =
+            new CancellationTokenSource();
 
         /// <summary>Delegate used with <see cref="Timer"/> to trigger cancellation of a <see cref="CancellationTokenSource"/>.</summary>
         private static readonly TimerCallback s_timerCallback = TimerCallback;
@@ -189,7 +191,13 @@ namespace System.Threading
             }
             else
             {
-                _timer = new TimerQueueTimer(s_timerCallback, this, millisecondsDelay, Timeout.UnsignedInfinite, flowExecutionContext: false);
+                _timer = new TimerQueueTimer(
+                    s_timerCallback,
+                    this,
+                    millisecondsDelay,
+                    Timeout.UnsignedInfinite,
+                    flowExecutionContext: false
+                );
 
                 // The timer roots this CTS instance while it's scheduled.  That is by design, so
                 // that code like:
@@ -340,8 +348,18 @@ namespace System.Threading
                 // Initially set to "never go off" because we don't want to take a
                 // chance on a timer "losing" the initialization and then
                 // cancelling the token before it (the timer) can be disposed.
-                timer = new TimerQueueTimer(s_timerCallback, this, Timeout.UnsignedInfinite, Timeout.UnsignedInfinite, flowExecutionContext: false);
-                TimerQueueTimer? currentTimer = Interlocked.CompareExchange(ref _timer, timer, null);
+                timer = new TimerQueueTimer(
+                    s_timerCallback,
+                    this,
+                    Timeout.UnsignedInfinite,
+                    Timeout.UnsignedInfinite,
+                    flowExecutionContext: false
+                );
+                TimerQueueTimer? currentTimer = Interlocked.CompareExchange(
+                    ref _timer,
+                    timer,
+                    null
+                );
                 if (currentTimer != null)
                 {
                     // We did not initialize the timer.  Dispose the new timer.
@@ -385,8 +403,14 @@ namespace System.Threading
                 // fired by the time we successfully changed it, and so check to see whether that's possibly the case.
                 // If we successfully reset it and it never fired, then we can be sure it won't trigger cancellation.
                 bool reset =
-                    _timer is not TimerQueueTimer timer ||
-                    (timer.Change(Timeout.UnsignedInfinite, Timeout.UnsignedInfinite, throwIfDisposed: false) && !timer._everQueued);
+                    _timer is not TimerQueueTimer timer
+                    || (
+                        timer.Change(
+                            Timeout.UnsignedInfinite,
+                            Timeout.UnsignedInfinite,
+                            throwIfDisposed: false
+                        ) && !timer._everQueued
+                    );
 
                 if (reset)
                 {
@@ -454,7 +478,10 @@ namespace System.Threading
                 // transitioned to and while it's in the NotifyingState.
                 if (_kernelEvent != null)
                 {
-                    ManualResetEvent? mre = Interlocked.Exchange<ManualResetEvent?>(ref _kernelEvent!, null);
+                    ManualResetEvent? mre = Interlocked.Exchange<ManualResetEvent?>(
+                        ref _kernelEvent!,
+                        null
+                    );
                     if (mre != null && _state != NotifyingState)
                     {
                         mre.Dispose();
@@ -470,7 +497,9 @@ namespace System.Threading
         {
             if (_disposed)
             {
-                ThrowHelper.ThrowObjectDisposedException(ExceptionResource.CancellationTokenSource_Disposed);
+                ThrowHelper.ThrowObjectDisposedException(
+                    ExceptionResource.CancellationTokenSource_Disposed
+                );
             }
         }
 
@@ -479,10 +508,19 @@ namespace System.Threading
         /// callback will have been run by the time this method returns.
         /// </summary>
         internal CancellationTokenRegistration Register(
-            Delegate callback, object? stateForCallback, SynchronizationContext? syncContext, ExecutionContext? executionContext)
+            Delegate callback,
+            object? stateForCallback,
+            SynchronizationContext? syncContext,
+            ExecutionContext? executionContext
+        )
         {
-            Debug.Assert(this != s_neverCanceledSource, "This source should never be exposed via a CancellationToken.");
-            Debug.Assert(callback is Action<object?> || callback is Action<object?, CancellationToken>);
+            Debug.Assert(
+                this != s_neverCanceledSource,
+                "This source should never be exposed via a CancellationToken."
+            );
+            Debug.Assert(
+                callback is Action<object?> || callback is Action<object?, CancellationToken>
+            );
 
             // If not canceled, register the handler; if canceled already, run the callback synchronously.
             if (!IsCancellationRequested)
@@ -501,7 +539,9 @@ namespace System.Threading
                 if (registrations is null)
                 {
                     registrations = new Registrations(this);
-                    registrations = Interlocked.CompareExchange(ref _registrations, registrations, null) ?? registrations;
+                    registrations =
+                        Interlocked.CompareExchange(ref _registrations, registrations, null)
+                        ?? registrations;
                 }
 
                 // If it looks like there's a node in the freelist we could grab, grab the lock and try to get, configure,
@@ -517,7 +557,10 @@ namespace System.Threading
                         node = registrations.FreeNodeList;
                         if (node is not null)
                         {
-                            Debug.Assert(node.Prev == null, "Nodes in the free list should all have a null Prev");
+                            Debug.Assert(
+                                node.Prev == null,
+                                "Nodes in the free list should all have a null Prev"
+                            );
                             registrations.FreeNodeList = node.Next;
 
                             node.Id = id = registrations.NextAvailableId++;
@@ -590,7 +633,11 @@ namespace System.Threading
         private void NotifyCancellation(bool throwOnFirstException)
         {
             // If we're the first to signal cancellation, do the main extra work.
-            if (!IsCancellationRequested && Interlocked.CompareExchange(ref _state, NotifyingState, NotCanceledState) == NotCanceledState)
+            if (
+                !IsCancellationRequested
+                && Interlocked.CompareExchange(ref _state, NotifyingState, NotCanceledState)
+                    == NotCanceledState
+            )
             {
                 // Dispose of the timer, if any.  Dispose may be running concurrently here, but TimerQueueTimer.Close is thread-safe.
                 TimerQueueTimer? timer = _timer;
@@ -619,7 +666,10 @@ namespace System.Threading
         /// <remarks>The handlers are invoked synchronously in LIFO order.</remarks>
         private void ExecuteCallbackHandlers(bool throwOnFirstException)
         {
-            Debug.Assert(IsCancellationRequested, "ExecuteCallbackHandlers should only be called after setting IsCancellationRequested->true");
+            Debug.Assert(
+                IsCancellationRequested,
+                "ExecuteCallbackHandlers should only be called after setting IsCancellationRequested->true"
+            );
 
             // If there are no callbacks to run, we can safely exit.  Any race conditions to lazy initialize it
             // will see IsCancellationRequested and will then run the callback themselves.
@@ -686,13 +736,18 @@ namespace System.Threading
                         if (node.SynchronizationContext != null)
                         {
                             // Transition to the target syncContext and continue there.
-                            node.SynchronizationContext.Send(static s =>
-                            {
-                                var n = (CallbackNode)s!;
-                                n.Registrations.ThreadIDExecutingCallbacks = Environment.CurrentManagedThreadId;
-                                n.ExecuteCallback();
-                            }, node);
-                            registrations.ThreadIDExecutingCallbacks = Environment.CurrentManagedThreadId; // above may have altered ThreadIDExecutingCallbacks, so reset it
+                            node.SynchronizationContext.Send(
+                                static s =>
+                                {
+                                    var n = (CallbackNode)s!;
+                                    n.Registrations.ThreadIDExecutingCallbacks =
+                                        Environment.CurrentManagedThreadId;
+                                    n.ExecuteCallback();
+                                },
+                                node
+                            );
+                            registrations.ThreadIDExecutingCallbacks =
+                                Environment.CurrentManagedThreadId; // above may have altered ThreadIDExecutingCallbacks, so reset it
                         }
                         else
                         {
@@ -733,10 +788,15 @@ namespace System.Threading
         /// <param name="token2">The second <see cref="CancellationToken">CancellationToken</see> to observe.</param>
         /// <returns>A <see cref="CancellationTokenSource"/> that is linked
         /// to the source tokens.</returns>
-        public static CancellationTokenSource CreateLinkedTokenSource(CancellationToken token1, CancellationToken token2) =>
-            !token1.CanBeCanceled ? CreateLinkedTokenSource(token2) :
-            token2.CanBeCanceled ? new Linked2CancellationTokenSource(token1, token2) :
-            (CancellationTokenSource)new Linked1CancellationTokenSource(token1);
+        public static CancellationTokenSource CreateLinkedTokenSource(
+            CancellationToken token1,
+            CancellationToken token2
+        ) =>
+            !token1.CanBeCanceled
+                ? CreateLinkedTokenSource(token2)
+                : token2.CanBeCanceled
+                    ? new Linked2CancellationTokenSource(token1, token2)
+                    : (CancellationTokenSource)new Linked1CancellationTokenSource(token1);
 
         /// <summary>
         /// Creates a <see cref="CancellationTokenSource"/> that will be in the canceled state
@@ -745,7 +805,9 @@ namespace System.Threading
         /// <param name="token">The <see cref="CancellationToken">CancellationToken</see> to observe.</param>
         /// <returns>A <see cref="CancellationTokenSource"/> that is linked to the source token.</returns>
         public static CancellationTokenSource CreateLinkedTokenSource(CancellationToken token) =>
-            token.CanBeCanceled ? new Linked1CancellationTokenSource(token) : new CancellationTokenSource();
+            token.CanBeCanceled
+                ? new Linked1CancellationTokenSource(token)
+                : new CancellationTokenSource();
 
         /// <summary>
         /// Creates a <see cref="CancellationTokenSource"/> that will be in the canceled state
@@ -754,7 +816,9 @@ namespace System.Threading
         /// <param name="tokens">The <see cref="CancellationToken">CancellationToken</see> instances to observe.</param>
         /// <returns>A <see cref="CancellationTokenSource"/> that is linked to the source tokens.</returns>
         /// <exception cref="System.ArgumentNullException"><paramref name="tokens"/> is null.</exception>
-        public static CancellationTokenSource CreateLinkedTokenSource(params CancellationToken[] tokens)
+        public static CancellationTokenSource CreateLinkedTokenSource(
+            params CancellationToken[] tokens
+        )
         {
             if (tokens == null)
             {
@@ -763,7 +827,10 @@ namespace System.Threading
 
             return tokens.Length switch
             {
-                0 => throw new ArgumentException(SR.CancellationToken_CreateLinkedToken_TokensIsEmpty),
+                0
+                  => throw new ArgumentException(
+                      SR.CancellationToken_CreateLinkedToken_TokensIsEmpty
+                  ),
                 1 => CreateLinkedTokenSource(tokens[0]),
                 2 => CreateLinkedTokenSource(tokens[0], tokens[1]),
 
@@ -779,7 +846,10 @@ namespace System.Threading
 
             internal Linked1CancellationTokenSource(CancellationToken token1)
             {
-                _reg1 = token1.UnsafeRegister(LinkedNCancellationTokenSource.s_linkedTokenCancelDelegate, this);
+                _reg1 = token1.UnsafeRegister(
+                    LinkedNCancellationTokenSource.s_linkedTokenCancelDelegate,
+                    this
+                );
             }
 
             protected override void Dispose(bool disposing)
@@ -799,10 +869,19 @@ namespace System.Threading
             private readonly CancellationTokenRegistration _reg1;
             private readonly CancellationTokenRegistration _reg2;
 
-            internal Linked2CancellationTokenSource(CancellationToken token1, CancellationToken token2)
+            internal Linked2CancellationTokenSource(
+                CancellationToken token1,
+                CancellationToken token2
+            )
             {
-                _reg1 = token1.UnsafeRegister(LinkedNCancellationTokenSource.s_linkedTokenCancelDelegate, this);
-                _reg2 = token2.UnsafeRegister(LinkedNCancellationTokenSource.s_linkedTokenCancelDelegate, this);
+                _reg1 = token1.UnsafeRegister(
+                    LinkedNCancellationTokenSource.s_linkedTokenCancelDelegate,
+                    this
+                );
+                _reg2 = token2.UnsafeRegister(
+                    LinkedNCancellationTokenSource.s_linkedTokenCancelDelegate,
+                    this
+                );
             }
 
             protected override void Dispose(bool disposing)
@@ -822,7 +901,10 @@ namespace System.Threading
         {
             internal static readonly Action<object?> s_linkedTokenCancelDelegate = static s =>
             {
-                Debug.Assert(s is CancellationTokenSource, $"Expected {typeof(CancellationTokenSource)}, got {s}");
+                Debug.Assert(
+                    s is CancellationTokenSource,
+                    $"Expected {typeof(CancellationTokenSource)}, got {s}"
+                );
                 ((CancellationTokenSource)s).NotifyCancellation(throwOnFirstException: false); // skip ThrowIfDisposed() check in Cancel()
             };
             private CancellationTokenRegistration[]? _linkingRegistrations;
@@ -835,7 +917,10 @@ namespace System.Threading
                 {
                     if (tokens[i].CanBeCanceled)
                     {
-                        _linkingRegistrations[i] = tokens[i].UnsafeRegister(s_linkedTokenCancelDelegate, this);
+                        _linkingRegistrations[i] = tokens[i].UnsafeRegister(
+                            s_linkedTokenCancelDelegate,
+                            this
+                        );
                     }
                     // Empty slots in the array will be default(CancellationTokenRegistration), which are nops to Dispose.
                     // Based on usage patterns, such occurrences should also be rare, such that it's not worth resizing
@@ -935,7 +1020,10 @@ namespace System.Threading
             public bool Unregister(long id, CallbackNode node)
             {
                 Debug.Assert(node != null, "Expected non-null node");
-                Debug.Assert(node.Registrations == this, "Expected node to come from this registrations instance");
+                Debug.Assert(
+                    node.Registrations == this,
+                    "Expected node to come from this registrations instance"
+                );
 
                 if (id == 0)
                 {
@@ -1021,7 +1109,7 @@ namespace System.Threading
                 SpinWait sw = default;
                 while (Volatile.Read(ref ExecutingCallbackId) == id)
                 {
-                    sw.SpinOnce();  // spin, as we assume callback execution is fast and that this situation is rare.
+                    sw.SpinOnce(); // spin, as we assume callback execution is fast and that this situation is rare.
                 }
             }
 
@@ -1044,14 +1132,27 @@ namespace System.Threading
                 // callback to complete. While such polling isn't ideal, we expect this to be a rare case (disposing while
                 // the associated callback is running), and brief when it happens (so the polling will be minimal), and making
                 // this work with a callback mechanism will add additional cost to other more common cases.
-                return new ValueTask(Task.Factory.StartNew(static async s =>
-                {
-                    var state = (TupleSlim<Registrations, long>)s!;
-                    while (Volatile.Read(ref state.Item1.ExecutingCallbackId) == state.Item2)
-                    {
-                        await Task.Yield();
-                    }
-                }, new TupleSlim<Registrations, long>(this, id), CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap());
+                return new ValueTask(
+                    Task.Factory
+                        .StartNew(
+                            static async s =>
+                            {
+                                var state = (TupleSlim<Registrations, long>)s!;
+                                while (
+                                    Volatile.Read(ref state.Item1.ExecutingCallbackId)
+                                    == state.Item2
+                                )
+                                {
+                                    await Task.Yield();
+                                }
+                            },
+                            new TupleSlim<Registrations, long>(this, id),
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        )
+                        .Unwrap()
+                );
             }
 
             /// <summary>Enters the lock for this instance.  The current thread must not be holding the lock, but that is not validated.</summary>
@@ -1066,7 +1167,10 @@ namespace System.Threading
                     static void Contention(ref int value)
                     {
                         SpinWait sw = default;
-                        do { sw.SpinOnce(); } while (Interlocked.Exchange(ref value, 1) == 1);
+                        do
+                        {
+                            sw.SpinOnce();
+                        } while (Interlocked.Exchange(ref value, 1) == 1);
                     }
                 }
             }
@@ -1108,12 +1212,16 @@ namespace System.Threading
                 }
                 else
                 {
-                    ExecutionContext.RunInternal(context, static s =>
-                    {
-                        var node = (CallbackNode)s!;
-                        Debug.Assert(node.Callback != null);
-                        Invoke(node.Callback, node.CallbackState, node.Registrations.Source);
-                    }, this);
+                    ExecutionContext.RunInternal(
+                        context,
+                        static s =>
+                        {
+                            var node = (CallbackNode)s!;
+                            Debug.Assert(node.Callback != null);
+                            Invoke(node.Callback, node.CallbackState, node.Registrations.Source);
+                        },
+                        this
+                    );
                 }
             }
         }

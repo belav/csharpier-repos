@@ -16,7 +16,10 @@ namespace System.Xml
             {
                 if (s_keepTempFiles == null)
                 {
-                    s_keepTempFiles = new BooleanSwitch("XmlSerialization.Compilation", "Keep XmlSerialization generated (temp) files.");
+                    s_keepTempFiles = new BooleanSwitch(
+                        "XmlSerialization.Compilation",
+                        "Keep XmlSerialization generated (temp) files."
+                    );
                 }
 
                 return s_keepTempFiles;
@@ -29,7 +32,10 @@ namespace System.Xml
             {
                 if (s_nonRecursiveTypeLoading == null)
                 {
-                    s_nonRecursiveTypeLoading = new BooleanSwitch("XmlSerialization.NonRecursiveTypeLoading", "Turn on non-recursive algorithm generating XmlMappings for CLR types.");
+                    s_nonRecursiveTypeLoading = new BooleanSwitch(
+                        "XmlSerialization.NonRecursiveTypeLoading",
+                        "Turn on non-recursive algorithm generating XmlMappings for CLR types."
+                    );
                 }
 
                 return s_nonRecursiveTypeLoading;

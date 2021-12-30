@@ -9,26 +9,26 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 namespace Microsoft.EntityFrameworkCore
 {
     public abstract class GraphUpdatesSqlServerTestBase<TFixture> : GraphUpdatesTestBase<TFixture>
-        where TFixture : GraphUpdatesSqlServerTestBase<TFixture>.GraphUpdatesSqlServerFixtureBase, new()
+        where TFixture : GraphUpdatesSqlServerTestBase<TFixture>.GraphUpdatesSqlServerFixtureBase,
+            new()
     {
-        protected GraphUpdatesSqlServerTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected GraphUpdatesSqlServerTestBase(TFixture fixture) : base(fixture) { }
 
-        protected override IQueryable<Root> ModifyQueryRoot(IQueryable<Root> query)
-            => query.AsSplitQuery();
+        protected override IQueryable<Root> ModifyQueryRoot(IQueryable<Root> query) =>
+            query.AsSplitQuery();
 
-        protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected override void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
         public abstract class GraphUpdatesSqlServerFixtureBase : GraphUpdatesFixtureBase
         {
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -38,15 +38,19 @@ namespace Microsoft.EntityFrameworkCore
                     b =>
                     {
                         b.Property(e => e.AccessStateId).ValueGeneratedNever();
-                        b.HasData(new AccessState {AccessStateId = 1});
-                    });
+                        b.HasData(new AccessState { AccessStateId = 1 });
+                    }
+                );
 
                 modelBuilder.Entity<Cruiser>(
                     b =>
                     {
                         b.Property(e => e.IdUserState).HasDefaultValue(1);
-                        b.HasOne(e => e.UserState).WithMany(e => e.Users).HasForeignKey(e => e.IdUserState);
-                    });
+                        b.HasOne(e => e.UserState)
+                            .WithMany(e => e.Users)
+                            .HasForeignKey(e => e.IdUserState);
+                    }
+                );
             }
         }
     }

@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: ImportedFromTypeLib("MockInterop")]
-[assembly: PrimaryInteropAssembly(30303,33)]
+[assembly: PrimaryInteropAssembly(30303, 33)]
 [assembly: Guid("71B8C65D-7748-447A-B786-64682CBEF136")]
 [assembly: BestFitMapping(false, ThrowOnUnmappableChar = true)]
 
@@ -52,7 +52,10 @@ namespace MockInterop01
         public ulong field04;
     }
 
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 16, Size = 8), ComConversionLoss]
+    [
+        StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 16, Size = 8),
+        ComConversionLoss
+    ]
     public struct ComplexStruct
     {
         [StructLayout(LayoutKind.Sequential)]
@@ -66,18 +69,25 @@ namespace MockInterop01
         public Guid GuidField;
         [DispId(2)]
         public Decimal DecimalField;
-        [DispId(3), ComConversionLoss, ComAliasName("MockInterop01.UnionStruct"), MarshalAs(UnmanagedType.Struct)]
+        [
+            DispId(3),
+            ComConversionLoss,
+            ComAliasName("MockInterop01.UnionStruct"),
+            MarshalAs(UnmanagedType.Struct)
+        ]
         public UnionStruct UnionField;
     }
-     
-    [ComImport /*, TypeIdentifier*/]
+
+    [ComImport /*, TypeIdentifier*/
+    ]
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [Guid("5720C75D-2448-447A-B786-64682CBEF156")]
     [TypeLibType(TypeLibTypeFlags.FAggregatable)]
     public interface IGoo
     {
         [DispId(1010)]
-        InteropEnum IGooReadOnlyProp {
+        InteropEnum IGooReadOnlyProp
+        {
             [return: MarshalAs(UnmanagedType.U4), ComConversionLoss]
             get;
         }
@@ -87,9 +97,12 @@ namespace MockInterop01
         ComplexStruct MethodForStruct(ref UnionStruct p1, out InteropDeleWithStructArray p2);
 
         [DispId(1012)]
-        string this[string p, IGoo p2] {
+        string this[string p, IGoo p2]
+        {
             [return: MarshalAs(UnmanagedType.BStr)]
-            get; set; }
+            get;
+            set;
+        }
 
         [DispId(1013)]
         event InteropDeleWithStructArray IGooEvent;
@@ -102,18 +115,28 @@ namespace MockInterop01
         [AllowReversePInvokeCalls()]
         object DoSomething(params string[] ary);
         [ComRegisterFunction()]
-        object Register([MarshalAs(UnmanagedType.IDispatch), Optional, DefaultParameterValue(null)] ref object o);
+        object Register(
+            [MarshalAs(UnmanagedType.IDispatch), Optional, DefaultParameterValue(null)] ref object o
+        );
         [ComUnregisterFunction()]
-        void UnRegister([MarshalAs(UnmanagedType.IDispatch), Optional, IDispatchConstant()] object o);
+        void UnRegister(
+            [MarshalAs(UnmanagedType.IDispatch), Optional, IDispatchConstant()] object o
+        );
         [TypeLibFunc(TypeLibFuncFlags.FDefaultBind)]
-        void LibFunc([Optional, DecimalConstant(1, 2, (uint)3, (uint)4, (uint)5)] decimal p1, [Optional, In, Out, DateTimeConstant(123456)] DateTime p2);
+        void LibFunc(
+            [Optional, DecimalConstant(1, 2, (uint)3, (uint)4, (uint)5)] decimal p1,
+            [Optional, In, Out, DateTimeConstant(123456)] DateTime p2
+        );
     }
 
     /// <summary>
     /// Source Interface
     /// </summary>
     [ComImport, Guid("904458F3-005B-4DFD-8581-E9832D7FA433")]
-    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch), TypeLibType(TypeLibTypeFlags.FDispatchable)]
+    [
+        InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch),
+        TypeLibType(TypeLibTypeFlags.FDispatchable)
+    ]
     public interface IEventSource
     {
         [DispId(101), PreserveSig]
@@ -141,6 +164,13 @@ namespace MockInterop01
 
     [ComVisible(false)]
     // [TypeIdentifier("71B8C65D-7748-447A-B786-64682CBEF136", "MockInterop01.InteropDeleWithStructArray")]
-    [UnmanagedFunctionPointerAttribute(CallingConvention.StdCall, BestFitMapping = false, CharSet = CharSet.Auto)]
-    public delegate void InteropDeleWithStructArray([In, Out, ComAliasName("MockInterop01.UnionStruct"), MarshalAs(UnmanagedType.LPArray)] UnionStruct[] p);
+    [UnmanagedFunctionPointerAttribute(
+        CallingConvention.StdCall,
+        BestFitMapping = false,
+        CharSet = CharSet.Auto
+    )]
+    public delegate void InteropDeleWithStructArray(
+        [In, Out, ComAliasName("MockInterop01.UnionStruct"), MarshalAs(UnmanagedType.LPArray)]
+            UnionStruct[] p
+    );
 }

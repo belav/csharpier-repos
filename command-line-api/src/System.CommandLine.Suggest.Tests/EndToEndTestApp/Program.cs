@@ -13,7 +13,7 @@ namespace EndToEndTestApp
         {
             var rootCommand = new RootCommand
             {
-                new Option<string>("--apple" ),
+                new Option<string>("--apple"),
                 new Option<string>("--banana"),
                 new Option<string>("--cherry"),
                 new Option<string>("--durian")
@@ -21,13 +21,12 @@ namespace EndToEndTestApp
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
 
-            var commandLine = new CommandLineBuilder(rootCommand)
-                .UseDefaults()
-                .Build();
+            var commandLine = new CommandLineBuilder(rootCommand).UseDefaults().Build();
 
             await commandLine.InvokeAsync(args);
         }
 
-        public static Task Run(string apple, string banana, string cherry, string durian) => Task.CompletedTask;
+        public static Task Run(string apple, string banana, string cherry, string durian) =>
+            Task.CompletedTask;
     }
 }

@@ -35,10 +35,16 @@ public class InputFormatterContext
         string modelName,
         ModelStateDictionary modelState,
         ModelMetadata metadata,
-        Func<Stream, Encoding, TextReader> readerFactory)
-        : this(httpContext, modelName, modelState, metadata, readerFactory, treatEmptyInputAsDefaultValue: false)
-    {
-    }
+        Func<Stream, Encoding, TextReader> readerFactory
+    )
+        : this(
+            httpContext,
+            modelName,
+            modelState,
+            metadata,
+            readerFactory,
+            treatEmptyInputAsDefaultValue: false
+        ) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="InputFormatterContext"/>.
@@ -65,7 +71,8 @@ public class InputFormatterContext
         ModelStateDictionary modelState,
         ModelMetadata metadata,
         Func<Stream, Encoding, TextReader> readerFactory,
-        bool treatEmptyInputAsDefaultValue)
+        bool treatEmptyInputAsDefaultValue
+    )
     {
         if (httpContext == null)
         {

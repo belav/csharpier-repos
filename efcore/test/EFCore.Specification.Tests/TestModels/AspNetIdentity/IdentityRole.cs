@@ -5,15 +5,11 @@ using System;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
 {
-    public class IdentityRole<TKey>
-        where TKey : IEquatable<TKey>
+    public class IdentityRole<TKey> where TKey : IEquatable<TKey>
     {
-        public IdentityRole()
-        {
-        }
+        public IdentityRole() { }
 
-        public IdentityRole(string roleName)
-            : this()
+        public IdentityRole(string roleName) : this()
         {
             Name = roleName;
         }
@@ -39,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
             Id = Guid.NewGuid().ToString();
         }
 
-        public IdentityRole(string roleName)
-            : this()
+        public IdentityRole(string roleName) : this()
         {
             Name = roleName;
         }

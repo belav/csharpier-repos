@@ -11,9 +11,7 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal sealed class SafeServiceHandle : SafeHandle
     {
-        public SafeServiceHandle() : base(IntPtr.Zero, true)
-        {
-        }
+        public SafeServiceHandle() : base(IntPtr.Zero, true) { }
 
         internal SafeServiceHandle(IntPtr handle) : base(IntPtr.Zero, true)
         {
@@ -22,7 +20,11 @@ namespace Microsoft.Win32.SafeHandles
 
         public override bool IsInvalid
         {
-            get { return DangerousGetHandle() == IntPtr.Zero || DangerousGetHandle() == new IntPtr(-1); }
+            get
+            {
+                return DangerousGetHandle() == IntPtr.Zero
+                    || DangerousGetHandle() == new IntPtr(-1);
+            }
         }
 
         protected override bool ReleaseHandle()

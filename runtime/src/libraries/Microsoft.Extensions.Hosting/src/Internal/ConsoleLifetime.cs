@@ -23,15 +23,28 @@ namespace Microsoft.Extensions.Hosting.Internal
         private CancellationTokenRegistration _applicationStartedRegistration;
         private CancellationTokenRegistration _applicationStoppingRegistration;
 
-        public ConsoleLifetime(IOptions<ConsoleLifetimeOptions> options, IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, IOptions<HostOptions> hostOptions)
-            : this(options, environment, applicationLifetime, hostOptions, NullLoggerFactory.Instance) { }
+        public ConsoleLifetime(
+            IOptions<ConsoleLifetimeOptions> options,
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            IOptions<HostOptions> hostOptions
+        ) : this(options, environment, applicationLifetime, hostOptions, NullLoggerFactory.Instance)
+        { }
 
-        public ConsoleLifetime(IOptions<ConsoleLifetimeOptions> options, IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, IOptions<HostOptions> hostOptions, ILoggerFactory loggerFactory)
+        public ConsoleLifetime(
+            IOptions<ConsoleLifetimeOptions> options,
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            IOptions<HostOptions> hostOptions,
+            ILoggerFactory loggerFactory
+        )
         {
             Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
             Environment = environment ?? throw new ArgumentNullException(nameof(environment));
-            ApplicationLifetime = applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
-            HostOptions = hostOptions?.Value ?? throw new ArgumentNullException(nameof(hostOptions));
+            ApplicationLifetime =
+                applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
+            HostOptions =
+                hostOptions?.Value ?? throw new ArgumentNullException(nameof(hostOptions));
             Logger = loggerFactory.CreateLogger("Microsoft.Hosting.Lifetime");
         }
 
@@ -49,16 +62,20 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (!Options.SuppressStatusMessages)
             {
-                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(state =>
-                {
-                    ((ConsoleLifetime)state).OnApplicationStarted();
-                },
-                this);
-                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(state =>
-                {
-                    ((ConsoleLifetime)state).OnApplicationStopping();
-                },
-                this);
+                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(
+                    state =>
+                    {
+                        ((ConsoleLifetime)state).OnApplicationStarted();
+                    },
+                    this
+                );
+                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(
+                    state =>
+                    {
+                        ((ConsoleLifetime)state).OnApplicationStopping();
+                    },
+                    this
+                );
             }
 
             RegisterShutdownHandlers();

@@ -182,11 +182,13 @@ namespace System.CommandLine.Tests.Invocation
                 new Option<string>("--name"),
                 new Option<int>("--age")
             };
-            command.Handler = CommandHandler.Create<string, int>((name, age) =>
-            {
-                boundName = name;
-                boundAge = age;
-            });
+            command.Handler = CommandHandler.Create<string, int>(
+                (name, age) =>
+                {
+                    boundName = name;
+                    boundAge = age;
+                }
+            );
 
             await command.InvokeAsync("command --age 425 --name Gandalf", _console);
 
@@ -199,14 +201,13 @@ namespace System.CommandLine.Tests.Invocation
         {
             int? boundAge = default;
 
-            var command = new Command("command")
-            {
-                new Option<int?>("--age")
-            };
-            command.Handler = CommandHandler.Create<int?>(age =>
-            {
-                boundAge = age;
-            });
+            var command = new Command("command") { new Option<int?>("--age") };
+            command.Handler = CommandHandler.Create<int?>(
+                age =>
+                {
+                    boundAge = age;
+                }
+            );
 
             await command.InvokeAsync("command --age 425", _console);
 
@@ -219,15 +220,14 @@ namespace System.CommandLine.Tests.Invocation
             var wasCalled = false;
             int? boundAge = default;
 
-            var command = new Command("command")
-            {
-                new Option<int?>("--age")
-            };
-            command.Handler = CommandHandler.Create<int?>(age =>
-            {
-                wasCalled = true;
-                boundAge = age;
-            });
+            var command = new Command("command") { new Option<int?>("--age") };
+            command.Handler = CommandHandler.Create<int?>(
+                age =>
+                {
+                    wasCalled = true;
+                    boundAge = age;
+                }
+            );
 
             await command.InvokeAsync("command", _console);
 
@@ -241,14 +241,13 @@ namespace System.CommandLine.Tests.Invocation
             DirectoryInfo boundDirectoryInfo = default;
             var tempPath = Path.GetTempPath();
 
-            var command = new Command("command")
-            {
-                new Option<DirectoryInfo>("--dir")
-            };
-            command.Handler = CommandHandler.Create<DirectoryInfo>(dir =>
-            {
-                boundDirectoryInfo = dir;
-            });
+            var command = new Command("command") { new Option<DirectoryInfo>("--dir") };
+            command.Handler = CommandHandler.Create<DirectoryInfo>(
+                dir =>
+                {
+                    boundDirectoryInfo = dir;
+                }
+            );
 
             await command.InvokeAsync($"command --dir \"{tempPath}\"", _console);
 
@@ -262,11 +261,13 @@ namespace System.CommandLine.Tests.Invocation
 
             var option = new Option<int>("-x");
 
-            var command = new Command("command")
-            {
-                option
-            };
-            command.Handler = CommandHandler.Create<ParseResult>(result => { boundParseResult = result; });
+            var command = new Command("command") { option };
+            command.Handler = CommandHandler.Create<ParseResult>(
+                result =>
+                {
+                    boundParseResult = result;
+                }
+            );
 
             await command.InvokeAsync("command -x 123", _console);
 
@@ -279,11 +280,13 @@ namespace System.CommandLine.Tests.Invocation
             BindingContext boundContext = default;
 
             var option = new Option<int>("-x");
-            var command = new Command("command")
-            {
-                option
-            };
-            command.Handler = CommandHandler.Create<BindingContext>(context => { boundContext = context; });
+            var command = new Command("command") { option };
+            command.Handler = CommandHandler.Create<BindingContext>(
+                context =>
+                {
+                    boundContext = context;
+                }
+            );
 
             await command.InvokeAsync("command -x 123", _console);
 
@@ -293,11 +296,13 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Method_parameters_of_type_IConsole_receive_the_current_console_instance()
         {
-            var command = new Command("command")
-            {
-                new Option<int>("-x")
-            };
-            command.Handler = CommandHandler.Create<IConsole>(console => { console.Out.Write("Hello!"); });
+            var command = new Command("command") { new Option<int>("-x") };
+            command.Handler = CommandHandler.Create<IConsole>(
+                console =>
+                {
+                    console.Out.Write("Hello!");
+                }
+            );
 
             await command.InvokeAsync("command", _console);
 
@@ -311,11 +316,13 @@ namespace System.CommandLine.Tests.Invocation
 
             var option = new Option<int>("-x");
 
-            var command = new Command("command")
-            {
-                option
-            };
-            command.Handler = CommandHandler.Create<InvocationContext>(context => { boundContext = context; });
+            var command = new Command("command") { option };
+            command.Handler = CommandHandler.Create<InvocationContext>(
+                context =>
+                {
+                    boundContext = context;
+                }
+            );
 
             await command.InvokeAsync("command -x 123", _console);
 
@@ -366,7 +373,8 @@ namespace System.CommandLine.Tests.Invocation
             };
             command.Handler = CommandHandler.Create(
                 testClass.GetType().GetMethod(nameof(ExecuteTestClass.Execute)),
-                testClass);
+                testClass
+            );
 
             await command.InvokeAsync("command --age 425 --name Gandalf", _console);
 
@@ -407,10 +415,7 @@ namespace System.CommandLine.Tests.Invocation
                 boundFirstName = firstName;
             }
 
-            var command = new Command("command")
-            {
-                new Argument<string>("first-name")
-            };
+            var command = new Command("command") { new Argument<string>("first-name") };
             command.Handler = CommandHandler.Create<string>(Execute);
 
             await command.InvokeAsync("command Gandalf", _console);
@@ -468,10 +473,15 @@ namespace System.CommandLine.Tests.Invocation
         [InlineData(typeof(ConcreteTestCommandHandler), 42)]
         [InlineData(typeof(VirtualTestCommandHandler), 42)]
         [InlineData(typeof(OverridenVirtualTestCommandHandler), 41)]
-        public async Task Method_invoked_is_matching_to_the_interface_implementation(Type type, int expectedResult)
+        public async Task Method_invoked_is_matching_to_the_interface_implementation(
+            Type type,
+            int expectedResult
+        )
         {
             var command = new Command("command");
-            command.Handler = CommandHandler.Create(type.GetMethod(nameof(ICommandHandler.InvokeAsync)));
+            command.Handler = CommandHandler.Create(
+                type.GetMethod(nameof(ICommandHandler.InvokeAsync))
+            );
 
             var parser = new Parser(command);
 
@@ -484,26 +494,22 @@ namespace System.CommandLine.Tests.Invocation
         {
             public abstract Task<int> DoJobAsync();
 
-            public Task<int> InvokeAsync(InvocationContext context)
-                => DoJobAsync();
+            public Task<int> InvokeAsync(InvocationContext context) => DoJobAsync();
         }
 
         public sealed class ConcreteTestCommandHandler : AbstractTestCommandHandler
         {
-            public override Task<int> DoJobAsync()
-                => Task.FromResult(42);
+            public override Task<int> DoJobAsync() => Task.FromResult(42);
         }
 
         public class VirtualTestCommandHandler : ICommandHandler
         {
-            public virtual Task<int> InvokeAsync(InvocationContext context)
-                => Task.FromResult(42);
+            public virtual Task<int> InvokeAsync(InvocationContext context) => Task.FromResult(42);
         }
 
         public class OverridenVirtualTestCommandHandler : VirtualTestCommandHandler
         {
-            public override Task<int> InvokeAsync(InvocationContext context)
-                => Task.FromResult(41);
+            public override Task<int> InvokeAsync(InvocationContext context) => Task.FromResult(41);
         }
     }
 }

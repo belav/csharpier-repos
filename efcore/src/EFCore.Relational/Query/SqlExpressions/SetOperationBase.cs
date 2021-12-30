@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             string alias,
             SelectExpression source1,
             SelectExpression source2,
-            bool distinct)
-            : base(alias)
+            bool distinct
+        ) : base(alias)
         {
             IsDistinct = distinct;
             Source1 = source1;
@@ -62,19 +62,20 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual SelectExpression Source2 { get; }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is SetOperationBase setOperationBase
-                    && Equals(setOperationBase));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is SetOperationBase setOperationBase && Equals(setOperationBase)
+            );
 
-        private bool Equals(SetOperationBase setOperationBase)
-            => IsDistinct == setOperationBase.IsDistinct
-                && Source1.Equals(setOperationBase.Source1)
-                && Source2.Equals(setOperationBase.Source2);
+        private bool Equals(SetOperationBase setOperationBase) =>
+            IsDistinct == setOperationBase.IsDistinct
+            && Source1.Equals(setOperationBase.Source1)
+            && Source2.Equals(setOperationBase.Source2);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), IsDistinct, Source1, Source2);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), IsDistinct, Source1, Source2);
     }
 }

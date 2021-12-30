@@ -21,8 +21,11 @@ namespace System.Text.Json.SourceGeneration
 
         public HashSet<Type> NumberTypes { private get; init; }
 
-        public bool IsStringBasedType(Type type)
-            => type == StringType || type == DateTimeType || type == DateTimeOffsetType || type == GuidType;
+        public bool IsStringBasedType(Type type) =>
+            type == StringType
+            || type == DateTimeType
+            || type == DateTimeOffsetType
+            || type == GuidType;
 
         public bool IsNumberType(Type type) => NumberTypes.Contains(type);
     }

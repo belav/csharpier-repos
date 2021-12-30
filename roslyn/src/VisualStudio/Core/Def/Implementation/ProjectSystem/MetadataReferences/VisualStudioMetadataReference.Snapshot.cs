@@ -41,32 +41,39 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             private Exception _error;
             private readonly FileChangeTracker _fileChangeTrackerOpt;
 
-            internal Snapshot(VisualStudioMetadataReferenceManager provider, MetadataReferenceProperties properties, string fullPath, FileChangeTracker fileChangeTrackerOpt)
-                : base(properties, fullPath)
+            internal Snapshot(
+                VisualStudioMetadataReferenceManager provider,
+                MetadataReferenceProperties properties,
+                string fullPath,
+                FileChangeTracker fileChangeTrackerOpt
+            ) : base(properties, fullPath)
             {
                 Debug.Assert(Properties.Kind == MetadataImageKind.Assembly);
                 _provider = provider;
                 _fileChangeTrackerOpt = fileChangeTrackerOpt;
 
-                _timestamp = new Lazy<DateTime>(() =>
-                {
-                    try
+                _timestamp = new Lazy<DateTime>(
+                    () =>
                     {
-                        _fileChangeTrackerOpt?.EnsureSubscription();
+                        try
+                        {
+                            _fileChangeTrackerOpt?.EnsureSubscription();
 
-                        return FileUtilities.GetFileTimeStamp(this.FilePath);
-                    }
-                    catch (IOException e)
-                    {
-                        // Reading timestamp of a file might fail. 
-                        // Let's remember the failure and report it to the compiler when it asks for metadata.
-                        // We could let the Lazy hold onto this (since it knows how to rethrow exceptions), but
-                        // our support of GetStorages needs to gracefully handle the case where we have no timestamp.
-                        // If Lazy had a "IsValueFaulted" we could be cleaner here.
-                        _error = e;
-                        return DateTime.MinValue;
-                    }
-                }, LazyThreadSafetyMode.PublicationOnly);
+                            return FileUtilities.GetFileTimeStamp(this.FilePath);
+                        }
+                        catch (IOException e)
+                        {
+                            // Reading timestamp of a file might fail.
+                            // Let's remember the failure and report it to the compiler when it asks for metadata.
+                            // We could let the Lazy hold onto this (since it knows how to rethrow exceptions), but
+                            // our support of GetStorages needs to gracefully handle the case where we have no timestamp.
+                            // If Lazy had a "IsValueFaulted" we could be cleaner here.
+                            _error = e;
+                            return DateTime.MinValue;
+                        }
+                    },
+                    LazyThreadSafetyMode.PublicationOnly
+                );
             }
 
             protected override Metadata GetMetadataImpl()
@@ -91,7 +98,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             private bool SaveMetadataReadingException(Exception e)
             {
-                // Save metadata reading failure so that future compilations created 
+                // Save metadata reading failure so that future compilations created
                 // with this reference snapshot fail consistently in the same way.
                 if (e is IOException or BadImageFormatException)
                 {
@@ -101,17 +108,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return false;
             }
 
-            protected override DocumentationProvider CreateDocumentationProvider()
-                => new VisualStudioDocumentationProvider(this.FilePath, _provider.XmlMemberIndexService);
+            protected override DocumentationProvider CreateDocumentationProvider() =>
+                new VisualStudioDocumentationProvider(
+                    this.FilePath,
+                    _provider.XmlMemberIndexService
+                );
 
-            protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
-                => new Snapshot(_provider, properties, this.FilePath, _fileChangeTrackerOpt);
+            protected override PortableExecutableReference WithPropertiesImpl(
+                MetadataReferenceProperties properties
+            ) => new Snapshot(_provider, properties, this.FilePath, _fileChangeTrackerOpt);
 
-            private string GetDebuggerDisplay()
-                => "Metadata File: " + FilePath;
+            private string GetDebuggerDisplay() => "Metadata File: " + FilePath;
 
-            public IEnumerable<ITemporaryStreamStorage> GetStorages()
-                => _provider.GetStorages(this.FilePath, _timestamp.Value);
+            public IEnumerable<ITemporaryStreamStorage> GetStorages() =>
+                _provider.GetStorages(this.FilePath, _timestamp.Value);
         }
     }
 }

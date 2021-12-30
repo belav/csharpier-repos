@@ -38,8 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual InterceptionResult ConnectionOpening(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
-            => result;
+            InterceptionResult result
+        ) => result;
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.OpenAsync()" />.
@@ -65,17 +65,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbConnection connection,
             ConnectionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
-            => new(result);
+            CancellationToken cancellationToken = default
+        ) => new(result);
 
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.Open()" />.
         /// </summary>
         /// <param name="connection">The connection.</param>
         /// <param name="eventData">Contextual information about the connection.</param>
-        public virtual void ConnectionOpened(DbConnection connection, ConnectionEndEventData eventData)
-        {
-        }
+        public virtual void ConnectionOpened(
+            DbConnection connection,
+            ConnectionEndEventData eventData
+        ) { }
 
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.OpenAsync()" />.
@@ -88,8 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual Task ConnectionOpenedAsync(
             DbConnection connection,
             ConnectionEndEventData eventData,
-            CancellationToken cancellationToken = default)
-            => Task.CompletedTask;
+            CancellationToken cancellationToken = default
+        ) => Task.CompletedTask;
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.Close()" />.
@@ -112,8 +113,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual InterceptionResult ConnectionClosing(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
-            => result;
+            InterceptionResult result
+        ) => result;
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbConnection.CloseAsync()" /> in an async context.
@@ -136,8 +137,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual ValueTask<InterceptionResult> ConnectionClosingAsync(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
-            => new(result);
+            InterceptionResult result
+        ) => new(result);
 
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.Close()" /> in an async context.
@@ -146,9 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <param name="eventData">Contextual information about the connection.</param>
         public virtual void ConnectionClosed(
             DbConnection connection,
-            ConnectionEndEventData eventData)
-        {
-        }
+            ConnectionEndEventData eventData
+        ) { }
 
         /// <summary>
         ///     Called just after EF has called <see cref="DbConnection.CloseAsync()" />.
@@ -158,8 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
         public virtual Task ConnectionClosedAsync(
             DbConnection connection,
-            ConnectionEndEventData eventData)
-            => Task.CompletedTask;
+            ConnectionEndEventData eventData
+        ) => Task.CompletedTask;
 
         /// <summary>
         ///     Called when opening of a connection has failed with an exception.
@@ -168,9 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <param name="eventData">Contextual information about the connection.</param>
         public virtual void ConnectionFailed(
             DbConnection connection,
-            ConnectionErrorEventData eventData)
-        {
-        }
+            ConnectionErrorEventData eventData
+        ) { }
 
         /// <summary>
         ///     Called when opening of a connection has failed with an exception.
@@ -183,7 +182,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual Task ConnectionFailedAsync(
             DbConnection connection,
             ConnectionErrorEventData eventData,
-            CancellationToken cancellationToken = default)
-            => Task.CompletedTask;
+            CancellationToken cancellationToken = default
+        ) => Task.CompletedTask;
     }
 }

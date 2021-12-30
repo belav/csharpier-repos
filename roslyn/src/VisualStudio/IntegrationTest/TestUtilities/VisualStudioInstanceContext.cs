@@ -17,7 +17,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
         public VisualStudioInstance Instance { get; }
 
-        internal VisualStudioInstanceContext(VisualStudioInstance instance, VisualStudioInstanceFactory instanceFactory)
+        internal VisualStudioInstanceContext(
+            VisualStudioInstance instance,
+            VisualStudioInstanceFactory instanceFactory
+        )
         {
             Instance = instance;
             _instanceFactory = instanceFactory;

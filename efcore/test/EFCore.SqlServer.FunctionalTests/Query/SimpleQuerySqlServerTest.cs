@@ -29,7 +29,8 @@ FROM [Appraisals] AS [a]
 INNER JOIN [Staff] AS [s] ON [a].[StaffId] = [s].[Id]
 LEFT JOIN [Staff] AS [s0] ON [s].[ManagerId] = [s0].[Id]
 LEFT JOIN [Staff] AS [s1] ON [s].[SecondaryManagerId] = [s1].[Id]
-WHERE [a].[Id] = @__id_0");
+WHERE [a].[Id] = @__id_0"
+            );
         }
 
         public override async Task Comparing_enum_casted_to_byte_with_int_parameter(bool async)
@@ -41,7 +42,8 @@ WHERE [a].[Id] = @__id_0");
 
 SELECT [i].[IceCreamId], [i].[Name], [i].[Taste]
 FROM [IceCreams] AS [i]
-WHERE [i].[Taste] = @__bitterTaste_0");
+WHERE [i].[Taste] = @__bitterTaste_0"
+            );
         }
 
         public override async Task Comparing_enum_casted_to_byte_with_int_constant(bool async)
@@ -51,26 +53,33 @@ WHERE [i].[Taste] = @__bitterTaste_0");
             AssertSql(
                 @"SELECT [i].[IceCreamId], [i].[Name], [i].[Taste]
 FROM [IceCreams] AS [i]
-WHERE [i].[Taste] = 1");
+WHERE [i].[Taste] = 1"
+            );
         }
 
-        public override async Task Comparing_byte_column_to_enum_in_vb_creating_double_cast(bool async)
+        public override async Task Comparing_byte_column_to_enum_in_vb_creating_double_cast(
+            bool async
+        )
         {
             await base.Comparing_byte_column_to_enum_in_vb_creating_double_cast(async);
 
             AssertSql(
                 @"SELECT [f].[Id], [f].[Taste]
 FROM [Food] AS [f]
-WHERE [f].[Taste] = CAST(1 AS tinyint)");
+WHERE [f].[Taste] = CAST(1 AS tinyint)"
+            );
         }
 
-        public override async Task Null_check_removal_in_ternary_maintain_appropriate_cast(bool async)
+        public override async Task Null_check_removal_in_ternary_maintain_appropriate_cast(
+            bool async
+        )
         {
             await base.Null_check_removal_in_ternary_maintain_appropriate_cast(async);
 
             AssertSql(
                 @"SELECT CAST([f].[Taste] AS tinyint) AS [Bar]
-FROM [Food] AS [f]");
+FROM [Food] AS [f]"
+            );
         }
 
         public override async Task Bool_discriminator_column_works(bool async)
@@ -80,7 +89,8 @@ FROM [Food] AS [f]");
             AssertSql(
                 @"SELECT [a].[Id], [a].[BlogId], [b].[Id], [b].[IsPhotoBlog], [b].[Title], [b].[NumberOfPhotos]
 FROM [Authors] AS [a]
-LEFT JOIN [Blog] AS [b] ON [a].[BlogId] = [b].[Id]");
+LEFT JOIN [Blog] AS [b] ON [a].[BlogId] = [b].[Id]"
+            );
         }
 
         public override async Task Count_member_over_IReadOnlyCollection_works(bool async)
@@ -92,20 +102,26 @@ LEFT JOIN [Blog] AS [b] ON [a].[BlogId] = [b].[Id]");
     SELECT COUNT(*)
     FROM [Books] AS [b]
     WHERE [a].[AuthorId] = [b].[AuthorId]) AS [BooksCount]
-FROM [Authors] AS [a]");
+FROM [Authors] AS [a]"
+            );
         }
 
-        public override async Task Multiple_different_entity_type_from_different_namespaces(bool async)
+        public override async Task Multiple_different_entity_type_from_different_namespaces(
+            bool async
+        )
         {
             await base.Multiple_different_entity_type_from_different_namespaces(async);
 
-            AssertSql(
-                @"SELECT cast(null as int) AS MyValue");
+            AssertSql(@"SELECT cast(null as int) AS MyValue");
         }
 
-        public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(bool async)
+        public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(
+            bool async
+        )
         {
-            await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(async);
+            await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(
+                async
+            );
 
             AssertSql(
                 @"@__currentUserId_0='1'
@@ -121,12 +137,17 @@ SELECT CASE
             WHERE ([m0].[UserId] = @__currentUserId_0) AND ([m0].[GroupId] = [m].[GroupId])) AND ([u0].[Id] = [u].[Id])) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END AS [HasAccess]
-FROM [Users] AS [u]");
+FROM [Users] AS [u]"
+            );
         }
 
-        public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(bool async)
+        public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(
+            bool async
+        )
         {
-            await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(async);
+            await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(
+                async
+            );
 
             AssertSql(
                 @"@__currentUserId_0='1'
@@ -144,12 +165,17 @@ SELECT CASE
             WHERE ([m0].[UserId] = @__currentUserId_0) AND ([g0].[Id] = [g].[Id])) AND ([u0].[Id] = [u].[Id])) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END AS [HasAccess]
-FROM [Users] AS [u]");
+FROM [Users] AS [u]"
+            );
         }
 
-        public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(bool async)
+        public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(
+            bool async
+        )
         {
-            await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(async);
+            await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(
+                async
+            );
 
             AssertSql(
                 @"@__currentUserId_0='1'
@@ -165,7 +191,8 @@ SELECT CASE
             WHERE ([m0].[UserId] = @__currentUserId_0) AND ([m0].[GroupId] = [m].[GroupId])) AND ([u0].[Id] = [u].[Id])) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END AS [HasAccess]
-FROM [Users] AS [u]");
+FROM [Users] AS [u]"
+            );
         }
     }
 }

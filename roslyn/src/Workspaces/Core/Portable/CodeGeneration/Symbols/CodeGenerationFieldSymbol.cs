@@ -24,8 +24,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ITypeSymbol type,
             string name,
             bool hasConstantValue,
-            object constantValue)
-            : base(containingType?.ContainingAssembly, containingType, attributes, accessibility, modifiers, name)
+            object constantValue
+        )
+            : base(
+                containingType?.ContainingAssembly,
+                containingType,
+                attributes,
+                accessibility,
+                modifiers,
+                name
+            )
         {
             this.Type = type;
             this.HasConstantValue = hasConstantValue;
@@ -35,42 +43,39 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         protected override CodeGenerationSymbol Clone()
         {
             return new CodeGenerationFieldSymbol(
-                this.ContainingType, this.GetAttributes(), this.DeclaredAccessibility,
-                this.Modifiers, this.Type, this.Name, this.HasConstantValue, this.ConstantValue);
+                this.ContainingType,
+                this.GetAttributes(),
+                this.DeclaredAccessibility,
+                this.Modifiers,
+                this.Type,
+                this.Name,
+                this.HasConstantValue,
+                this.ConstantValue
+            );
         }
 
         public new IFieldSymbol OriginalDefinition
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public IFieldSymbol CorrespondingTupleField => null;
 
         public override SymbolKind Kind => SymbolKind.Field;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitField(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitField(this);
 
-        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            => visitor.VisitField(this);
+        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+            visitor.VisitField(this);
 
         public bool IsConst
         {
-            get
-            {
-                return this.Modifiers.IsConst;
-            }
+            get { return this.Modifiers.IsConst; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return this.Modifiers.IsReadOnly;
-            }
+            get { return this.Modifiers.IsReadOnly; }
         }
 
         public bool IsVolatile => false;
@@ -81,10 +86,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public ImmutableArray<CustomModifier> CustomModifiers
         {
-            get
-            {
-                return ImmutableArray.Create<CustomModifier>();
-            }
+            get { return ImmutableArray.Create<CustomModifier>(); }
         }
 
         public ISymbol AssociatedSymbol => null;

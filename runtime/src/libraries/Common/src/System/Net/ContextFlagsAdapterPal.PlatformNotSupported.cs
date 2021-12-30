@@ -9,12 +9,18 @@ namespace System.Net
     [UnsupportedOSPlatform("tvos")]
     internal static class ContextFlagsAdapterPal
     {
-        internal static ContextFlagsPal GetContextFlagsPalFromInterop(Interop.NetSecurityNative.GssFlags gssFlags, bool isServer)
+        internal static ContextFlagsPal GetContextFlagsPalFromInterop(
+            Interop.NetSecurityNative.GssFlags gssFlags,
+            bool isServer
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        internal static Interop.NetSecurityNative.GssFlags GetInteropFromContextFlagsPal(ContextFlagsPal flags, bool isServer)
+        internal static Interop.NetSecurityNative.GssFlags GetInteropFromContextFlagsPal(
+            ContextFlagsPal flags,
+            bool isServer
+        )
         {
             throw new PlatformNotSupportedException();
         }

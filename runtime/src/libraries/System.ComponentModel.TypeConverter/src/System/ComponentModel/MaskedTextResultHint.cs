@@ -24,7 +24,6 @@ namespace System.ComponentModel
         // The primary operation succeeded.
         Success = 4,
 
-
         ///////// Failure values (negative values). /////////
 
         // Failure due to mask violation. (values in the range of [-1, -49]

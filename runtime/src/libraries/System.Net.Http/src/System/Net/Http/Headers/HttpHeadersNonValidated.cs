@@ -31,9 +31,9 @@ namespace System.Net.Http.Headers
         /// <param name="headerName">The name of the header.</param>
         /// <returns>true if the collection contains the header; otherwise, false.</returns>
         public bool Contains(string headerName) =>
-            _headers is HttpHeaders headers &&
-            HeaderDescriptor.TryGet(headerName, out HeaderDescriptor descriptor) &&
-            headers.TryGetHeaderValue(descriptor, out _);
+            _headers is HttpHeaders headers
+            && HeaderDescriptor.TryGet(headerName, out HeaderDescriptor descriptor)
+            && headers.TryGetHeaderValue(descriptor, out _);
 
         /// <summary>Gets the values for the specified header name.</summary>
         /// <param name="headerName">The name of the header.</param>
@@ -53,7 +53,8 @@ namespace System.Net.Http.Headers
         }
 
         /// <inheritdoc/>
-        bool IReadOnlyDictionary<string, HeaderStringValues>.ContainsKey(string key) => Contains(key);
+        bool IReadOnlyDictionary<string, HeaderStringValues>.ContainsKey(string key) =>
+            Contains(key);
 
         /// <summary>Attempts to retrieve the values associated with the specified header name.</summary>
         /// <param name="headerName">The name of the header.</param>
@@ -61,15 +62,22 @@ namespace System.Net.Http.Headers
         /// <returns>true if the collection contains the specified header; otherwise, false.</returns>
         public bool TryGetValues(string headerName, out HeaderStringValues values)
         {
-            if (_headers is HttpHeaders headers &&
-                HeaderDescriptor.TryGet(headerName, out HeaderDescriptor descriptor) &&
-                headers.TryGetHeaderValue(descriptor, out object? info))
+            if (
+                _headers is HttpHeaders headers
+                && HeaderDescriptor.TryGet(headerName, out HeaderDescriptor descriptor)
+                && headers.TryGetHeaderValue(descriptor, out object? info)
+            )
             {
-                HttpHeaders.GetStoreValuesAsStringOrStringArray(descriptor, info, out string? singleValue, out string[]? multiValue);
+                HttpHeaders.GetStoreValuesAsStringOrStringArray(
+                    descriptor,
+                    info,
+                    out string? singleValue,
+                    out string[]? multiValue
+                );
                 Debug.Assert(singleValue is not null ^ multiValue is not null);
-                values = singleValue is not null ?
-                    new HeaderStringValues(descriptor, singleValue) :
-                    new HeaderStringValues(descriptor, multiValue!);
+                values = singleValue is not null
+                    ? new HeaderStringValues(descriptor, singleValue)
+                    : new HeaderStringValues(descriptor, multiValue!);
                 return true;
             }
 
@@ -78,17 +86,23 @@ namespace System.Net.Http.Headers
         }
 
         /// <inheritdoc/>
-        bool IReadOnlyDictionary<string, HeaderStringValues>.TryGetValue(string key, out HeaderStringValues value) => TryGetValues(key, out value);
+        bool IReadOnlyDictionary<string, HeaderStringValues>.TryGetValue(
+            string key,
+            out HeaderStringValues value
+        ) => TryGetValues(key, out value);
 
         /// <summary>Gets an enumerator that iterates through the <see cref="HttpHeadersNonValidated"/>.</summary>
         /// <returns>An enumerator that iterates through the <see cref="HttpHeadersNonValidated"/>.</returns>
         public Enumerator GetEnumerator() =>
-            _headers is HttpHeaders headers && headers.HeaderStore is Dictionary<HeaderDescriptor, object> store ?
-                new Enumerator(store.GetEnumerator()) :
-                default;
+            _headers is HttpHeaders headers
+            && headers.HeaderStore is Dictionary<HeaderDescriptor, object> store
+                ? new Enumerator(store.GetEnumerator())
+                : default;
 
         /// <inheritdoc/>
-        IEnumerator<KeyValuePair<string, HeaderStringValues>> IEnumerable<KeyValuePair<string, HeaderStringValues>>.GetEnumerator() => GetEnumerator();
+        IEnumerator<KeyValuePair<string, HeaderStringValues>> IEnumerable<
+            KeyValuePair<string, HeaderStringValues>
+        >.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -129,7 +143,9 @@ namespace System.Net.Http.Headers
 
             /// <summary>Initializes the enumerator.</summary>
             /// <param name="headerStoreEnumerator">The underlying dictionary enumerator.</param>
-            internal Enumerator(Dictionary<HeaderDescriptor, object>.Enumerator headerStoreEnumerator)
+            internal Enumerator(
+                Dictionary<HeaderDescriptor, object>.Enumerator headerStoreEnumerator
+            )
             {
                 _headerStoreEnumerator = headerStoreEnumerator;
                 _current = default;
@@ -143,12 +159,20 @@ namespace System.Net.Http.Headers
                 {
                     KeyValuePair<HeaderDescriptor, object> current = _headerStoreEnumerator.Current;
 
-                    HttpHeaders.GetStoreValuesAsStringOrStringArray(current.Key, current.Value, out string? singleValue, out string[]? multiValue);
+                    HttpHeaders.GetStoreValuesAsStringOrStringArray(
+                        current.Key,
+                        current.Value,
+                        out string? singleValue,
+                        out string[]? multiValue
+                    );
                     Debug.Assert(singleValue is not null ^ multiValue is not null);
 
                     _current = new KeyValuePair<string, HeaderStringValues>(
                         current.Key.Name,
-                        singleValue is not null ? new HeaderStringValues(current.Key, singleValue) : new HeaderStringValues(current.Key, multiValue!));
+                        singleValue is not null
+                          ? new HeaderStringValues(current.Key, singleValue)
+                          : new HeaderStringValues(current.Key, multiValue!)
+                    );
                     return true;
                 }
 

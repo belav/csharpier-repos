@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         string GenerateCSharpIdentifier(
             string identifier,
             ICollection<string>? existingIdentifiers,
-            Func<string, string>? singularizePluralizer);
+            Func<string, string>? singularizePluralizer
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             string identifier,
             ICollection<string>? existingIdentifiers,
             Func<string, string>? singularizePluralizer,
-            Func<string, ICollection<string>?, string> uniquifier);
+            Func<string, ICollection<string>?, string> uniquifier
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

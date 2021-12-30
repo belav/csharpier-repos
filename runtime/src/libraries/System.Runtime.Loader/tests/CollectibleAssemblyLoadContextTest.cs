@@ -10,7 +10,6 @@ using Xunit;
 
 namespace System.Runtime.Loader.Tests
 {
-
     public partial class AssemblyLoadContextTest
     {
         // Tests related to Collectible assemblies
@@ -24,7 +23,9 @@ namespace System.Runtime.Loader.Tests
             alc.Unload();
 
             // Check that any attempt to load an assembly after an explicit Unload will fail
-            Assert.Throws<InvalidOperationException>(() => alc.LoadFromAssemblyPath(Path.GetFullPath("none.dll")));
+            Assert.Throws<InvalidOperationException>(
+                () => alc.LoadFromAssemblyPath(Path.GetFullPath("none.dll"))
+            );
         }
 
         [Fact]
@@ -61,9 +62,7 @@ namespace System.Runtime.Loader.Tests
             protected Type[] _testClassTypes;
             protected CollectibleChecker _checker;
 
-            public TestBase() : this(1)
-            {
-            }
+            public TestBase() : this(1) { }
 
             public TestBase(int numContexts)
             {
@@ -77,12 +76,17 @@ namespace System.Runtime.Loader.Tests
             public void CreateContextAndLoadAssembly(int contextIndex = 0)
             {
                 var asmName = new AssemblyName(TestAssembly);
-                _contexts[contextIndex] = new ResourceAssemblyLoadContext(true) { LoadBy = LoadBy.Path };
+                _contexts[contextIndex] = new ResourceAssemblyLoadContext(true)
+                {
+                    LoadBy = LoadBy.Path
+                };
 
                 Assembly asm = _contexts[contextIndex].LoadFromAssemblyName(asmName);
 
                 Assert.NotNull(asm);
-                _testClassTypes[contextIndex] = asm.DefinedTypes.FirstOrDefault(t => t.Name == "TestClass");
+                _testClassTypes[contextIndex] = asm.DefinedTypes.FirstOrDefault(
+                    t => t.Name == "TestClass"
+                );
                 Assert.NotNull(_testClassTypes[contextIndex]);
 
                 _checker.SetAssemblyLoadContext(contextIndex, _contexts[contextIndex]);
@@ -366,9 +370,7 @@ namespace System.Runtime.Loader.Tests
         {
             object _instance1 = null;
 
-            public TwoCollectibleWithOneAssemblyAndOneInstanceReferencingAnotherTest() : base(2)
-            {
-            }
+            public TwoCollectibleWithOneAssemblyAndOneInstanceReferencingAnotherTest() : base(2) { }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public void Execute()
@@ -446,7 +448,9 @@ namespace System.Runtime.Loader.Tests
 
             Assert.NotNull(asm);
 
-            ReflectionTypeLoadException exception = Assert.Throws<ReflectionTypeLoadException>(() => asm.DefinedTypes);
+            ReflectionTypeLoadException exception = Assert.Throws<ReflectionTypeLoadException>(
+                () => asm.DefinedTypes
+            );
 
             // Expecting two exceptions:
             //  Collectible type 'System.Runtime.Loader.Tests.TestClassNotSupported_FixedAddressValueType' has unsupported FixedAddressValueTypeAttribute applied to a field
@@ -490,7 +494,9 @@ namespace System.Runtime.Loader.Tests
             }
         }
 
-        private static WeakReference<AssemblyLoadContext> CreateCollectible(CollectibleChecker checker)
+        private static WeakReference<AssemblyLoadContext> CreateCollectible(
+            CollectibleChecker checker
+        )
         {
             var expectedContext = new ResourceAssemblyLoadContext(true);
             checker.SetAssemblyLoadContext(0, expectedContext);

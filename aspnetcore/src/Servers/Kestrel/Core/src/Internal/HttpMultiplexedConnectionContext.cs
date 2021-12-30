@@ -20,7 +20,17 @@ internal class HttpMultiplexedConnectionContext : BaseHttpConnectionContext
         IFeatureCollection connectionFeatures,
         MemoryPool<byte> memoryPool,
         IPEndPoint? localEndPoint,
-        IPEndPoint? remoteEndPoint) : base(connectionId, protocols, altSvcHeader, connectionContext, serviceContext, connectionFeatures, memoryPool, localEndPoint, remoteEndPoint)
-    {
-    }
+        IPEndPoint? remoteEndPoint
+    )
+        : base(
+            connectionId,
+            protocols,
+            altSvcHeader,
+            connectionContext,
+            serviceContext,
+            connectionFeatures,
+            memoryPool,
+            localEndPoint,
+            remoteEndPoint
+        ) { }
 }

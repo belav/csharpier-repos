@@ -22,7 +22,9 @@ using System.Globalization;
 
 namespace System
 {
-    [Obsolete("System.TimeZone has been deprecated. Investigate the use of System.TimeZoneInfo instead.")]
+    [Obsolete(
+        "System.TimeZone has been deprecated. Investigate the use of System.TimeZoneInfo instead."
+    )]
     public abstract class TimeZone
     {
         private static volatile TimeZone? currentTimeZone;
@@ -42,9 +44,7 @@ namespace System
             }
         }
 
-        protected TimeZone()
-        {
-        }
+        protected TimeZone() { }
 
         public static TimeZone CurrentTimeZone
         {
@@ -80,15 +80,9 @@ namespace System
             }
         }
 
-        public abstract string StandardName
-        {
-            get;
-        }
+        public abstract string StandardName { get; }
 
-        public abstract string DaylightName
-        {
-            get;
-        }
+        public abstract string DaylightName { get; }
 
         public abstract TimeSpan GetUtcOffset(DateTime time);
 
@@ -123,7 +117,9 @@ namespace System
                 return time;
             }
             bool isAmbiguousLocalDst = false;
-            long offset = ((CurrentSystemTimeZone)(TimeZone.CurrentTimeZone)).GetUtcOffsetFromUniversalTime(time, ref isAmbiguousLocalDst);
+            long offset = (
+                (CurrentSystemTimeZone)(TimeZone.CurrentTimeZone)
+            ).GetUtcOffsetFromUniversalTime(time, ref isAmbiguousLocalDst);
             return new DateTime(time.Ticks + offset, DateTimeKind.Local, isAmbiguousLocalDst);
         }
 

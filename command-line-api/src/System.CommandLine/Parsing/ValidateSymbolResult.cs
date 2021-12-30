@@ -9,6 +9,5 @@ namespace System.CommandLine.Parsing
     /// <typeparam name="T">The type of the <see cref="SymbolResult"/>.</typeparam>
     /// <param name="symbolResult">The symbol result</param>
     /// <returns>An error message to indicate a validation error; otherwise, <c>null</c>.</returns>
-    public delegate string? ValidateSymbolResult<in T>(T symbolResult) 
-        where T : SymbolResult;
+    public delegate string? ValidateSymbolResult<in T>(T symbolResult) where T : SymbolResult;
 }

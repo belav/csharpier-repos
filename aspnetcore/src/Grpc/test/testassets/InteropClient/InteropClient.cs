@@ -53,18 +53,22 @@ public class InteropClient : IDisposable
         [Option("server_host_override")]
         public string? ServerHostOverride { get; set; }
 
-        [Option("server_port"
+        [Option(
+            "server_port"
 #if DEBUG
-                , Default = 50052
+            ,
+            Default = 50052
 #endif
-                )]
+        )]
         public int ServerPort { get; set; }
 
-        [Option("test_case"
+        [Option(
+            "test_case"
 #if DEBUG
-                , Default = "large_unary"
+            ,
+            Default = "large_unary"
 #endif
-                )]
+        )]
         public string? TestCase { get; set; }
 
         // Deliberately using nullable bool type to allow --use_tls=true syntax (as opposed to --use_tls)
@@ -94,17 +98,21 @@ public class InteropClient : IDisposable
         this.options = options;
 
         var services = new ServiceCollection();
-        services.AddLogging(configure =>
-        {
-            configure.SetMinimumLevel(LogLevel.Trace);
-            configure.AddConsole(loggerOptions =>
+        services.AddLogging(
+            configure =>
             {
+                configure.SetMinimumLevel(LogLevel.Trace);
+                configure.AddConsole(
+                    loggerOptions =>
+                    {
 #pragma warning disable CS0618 // Type or member is obsolete
-                    loggerOptions.IncludeScopes = true;
-                loggerOptions.DisableColors = true;
+                        loggerOptions.IncludeScopes = true;
+                        loggerOptions.DisableColors = true;
 #pragma warning restore CS0618 // Type or member is obsolete
-                });
-        });
+                    }
+                );
+            }
+        );
 
         serviceProvider = services.BuildServiceProvider();
 
@@ -118,21 +126,24 @@ public class InteropClient : IDisposable
 
     public static void Run(string[] args)
     {
-        var parserResult = Parser.Default.ParseArguments<ClientOptions>(args)
+        var parserResult = Parser.Default
+            .ParseArguments<ClientOptions>(args)
             .WithNotParsed(errors => Environment.Exit(1))
-            .WithParsed(options =>
-            {
-                Console.WriteLine("Use TLS: " + options.UseTls);
-                Console.WriteLine("Use Test CA: " + options.UseTestCa);
-                Console.WriteLine("Client type: " + options.ClientType);
-                Console.WriteLine("Server host: " + options.ServerHost);
-                Console.WriteLine("Server port: " + options.ServerPort);
-
-                using (var interopClient = new InteropClient(options))
+            .WithParsed(
+                options =>
                 {
-                    interopClient.Run().GetAwaiter().GetResult();
+                    Console.WriteLine("Use TLS: " + options.UseTls);
+                    Console.WriteLine("Use Test CA: " + options.UseTestCa);
+                    Console.WriteLine("Client type: " + options.ClientType);
+                    Console.WriteLine("Server host: " + options.ServerHost);
+                    Console.WriteLine("Server port: " + options.ServerPort);
+
+                    using (var interopClient = new InteropClient(options))
+                    {
+                        interopClient.Run().GetAwaiter().GetResult();
+                    }
                 }
-            });
+            );
     }
 
     private async Task Run()
@@ -149,7 +160,10 @@ public class InteropClient : IDisposable
         string scheme;
         if (!(options.UseTls ?? false))
         {
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            AppContext.SetSwitch(
+                "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport",
+                true
+            );
             scheme = "http";
         }
         else
@@ -158,7 +172,8 @@ public class InteropClient : IDisposable
         }
 
         var httpClientHandler = new HttpClientHandler();
-        httpClientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator!;
+        httpClientHandler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator!;
 
         if (options.UseTestCa ?? false)
         {
@@ -171,12 +186,15 @@ public class InteropClient : IDisposable
 
         var httpClient = new HttpClient(httpClientHandler);
 
-        var channel = GrpcChannel.ForAddress($"{scheme}://{options.ServerHost}:{options.ServerPort}", new GrpcChannelOptions
-        {
-            Credentials = credentials,
-            HttpClient = httpClient,
-            LoggerFactory = loggerFactory
-        });
+        var channel = GrpcChannel.ForAddress(
+            $"{scheme}://{options.ServerHost}:{options.ServerPort}",
+            new GrpcChannelOptions
+            {
+                Credentials = credentials,
+                HttpClient = httpClient,
+                LoggerFactory = loggerFactory
+            }
+        );
 
         return new GrpcChannelWrapper(channel);
     }
@@ -193,14 +211,20 @@ public class InteropClient : IDisposable
         {
             var googleCredential = await GoogleCredential.GetApplicationDefaultAsync();
             Assert.IsTrue(googleCredential.IsCreateScopedRequired);
-            credentials = ChannelCredentials.Create(credentials, googleCredential.ToCallCredentials());
+            credentials = ChannelCredentials.Create(
+                credentials,
+                googleCredential.ToCallCredentials()
+            );
         }
 
         if (options.TestCase == "compute_engine_creds")
         {
             var googleCredential = await GoogleCredential.GetApplicationDefaultAsync();
             Assert.IsFalse(googleCredential.IsCreateScopedRequired);
-            credentials = ChannelCredentials.Create(credentials, googleCredential.ToCallCredentials());
+            credentials = ChannelCredentials.Create(
+                credentials,
+                googleCredential.ToCallCredentials()
+            );
         }
         return credentials;
     }
@@ -261,7 +285,9 @@ public class InteropClient : IDisposable
                 await RunStatusCodeAndMessageAsync(client);
                 break;
             case "unimplemented_service":
-                RunUnimplementedService(CreateClient<UnimplementedService.UnimplementedServiceClient>(channel));
+                RunUnimplementedService(
+                    CreateClient<UnimplementedService.UnimplementedServiceClient>(channel)
+                );
                 break;
             case "special_status_message":
                 await RunSpecialStatusMessageAsync(client);
@@ -312,7 +338,9 @@ public class InteropClient : IDisposable
     {
         Console.WriteLine("running client_streaming");
 
-        var bodySizes = new List<int> { 27182, 8, 1828, 45904 }.Select((size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) });
+        var bodySizes = new List<int> { 27182, 8, 1828, 45904 }.Select(
+            (size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) }
+        );
 
         using (var call = client.StreamingInputCall())
         {
@@ -332,13 +360,19 @@ public class InteropClient : IDisposable
 
         var request = new StreamingOutputCallRequest
         {
-            ResponseParameters = { bodySizes.Select((size) => new ResponseParameters { Size = size }) }
+            ResponseParameters =
+            {
+                bodySizes.Select((size) => new ResponseParameters { Size = size })
+            }
         };
 
         using (var call = client.StreamingOutputCall(request))
         {
             var responseList = await call.ResponseStream.ToListAsync();
-            CollectionAssert.AreEqual(bodySizes, responseList.Select((item) => item.Payload.Body.Length).ToList());
+            CollectionAssert.AreEqual(
+                bodySizes,
+                responseList.Select((item) => item.Payload.Body.Length).ToList()
+            );
         }
         Console.WriteLine("Passed!");
     }
@@ -349,38 +383,46 @@ public class InteropClient : IDisposable
 
         using (var call = client.FullDuplexCall())
         {
-            await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-            {
-                ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                Payload = CreateZerosPayload(27182)
-            });
+            await call.RequestStream.WriteAsync(
+                new StreamingOutputCallRequest
+                {
+                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                    Payload = CreateZerosPayload(27182)
+                }
+            );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
 
-            await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-            {
-                ResponseParameters = { new ResponseParameters { Size = 9 } },
-                Payload = CreateZerosPayload(8)
-            });
+            await call.RequestStream.WriteAsync(
+                new StreamingOutputCallRequest
+                {
+                    ResponseParameters = { new ResponseParameters { Size = 9 } },
+                    Payload = CreateZerosPayload(8)
+                }
+            );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(9, call.ResponseStream.Current.Payload.Body.Length);
 
-            await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-            {
-                ResponseParameters = { new ResponseParameters { Size = 2653 } },
-                Payload = CreateZerosPayload(1828)
-            });
+            await call.RequestStream.WriteAsync(
+                new StreamingOutputCallRequest
+                {
+                    ResponseParameters = { new ResponseParameters { Size = 2653 } },
+                    Payload = CreateZerosPayload(1828)
+                }
+            );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(2653, call.ResponseStream.Current.Payload.Body.Length);
 
-            await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-            {
-                ResponseParameters = { new ResponseParameters { Size = 58979 } },
-                Payload = CreateZerosPayload(45904)
-            });
+            await call.RequestStream.WriteAsync(
+                new StreamingOutputCallRequest
+                {
+                    ResponseParameters = { new ResponseParameters { Size = 58979 } },
+                    Payload = CreateZerosPayload(45904)
+                }
+            );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(58979, call.ResponseStream.Current.Payload.Body.Length);
@@ -405,7 +447,11 @@ public class InteropClient : IDisposable
         Console.WriteLine("Passed!");
     }
 
-    public static void RunComputeEngineCreds(TestService.TestServiceClient client, string defaultServiceAccount, string oauthScope)
+    public static void RunComputeEngineCreds(
+        TestService.TestServiceClient client,
+        string defaultServiceAccount,
+        string oauthScope
+    )
     {
         Console.WriteLine("running compute_engine_creds");
 
@@ -446,18 +492,19 @@ public class InteropClient : IDisposable
         Console.WriteLine("Passed!");
     }
 
-    public static async Task RunOAuth2AuthTokenAsync(TestService.TestServiceClient client, string oauthScope)
+    public static async Task RunOAuth2AuthTokenAsync(
+        TestService.TestServiceClient client,
+        string oauthScope
+    )
     {
         Console.WriteLine("running oauth2_auth_token");
-        ITokenAccess credential = (await GoogleCredential.GetApplicationDefaultAsync()).CreateScoped(new[] { oauthScope });
+        ITokenAccess credential = (
+            await GoogleCredential.GetApplicationDefaultAsync()
+        ).CreateScoped(new[] { oauthScope });
         string oauth2Token = await credential.GetAccessTokenForRequestAsync();
 
         var credentials = GoogleGrpcCredentials.FromAccessToken(oauth2Token);
-        var request = new SimpleRequest
-        {
-            FillUsername = true,
-            FillOauthScope = true
-        };
+        var request = new SimpleRequest { FillUsername = true, FillOauthScope = true };
 
         var response = client.UnaryCall(request, new CallOptions(credentials: credentials));
 
@@ -467,16 +514,16 @@ public class InteropClient : IDisposable
         Console.WriteLine("Passed!");
     }
 
-    public static async Task RunPerRpcCredsAsync(TestService.TestServiceClient client, string oauthScope)
+    public static async Task RunPerRpcCredsAsync(
+        TestService.TestServiceClient client,
+        string oauthScope
+    )
     {
         Console.WriteLine("running per_rpc_creds");
         ITokenAccess googleCredential = await GoogleCredential.GetApplicationDefaultAsync();
 
         var credentials = googleCredential.ToCallCredentials();
-        var request = new SimpleRequest
-        {
-            FillUsername = true,
-        };
+        var request = new SimpleRequest { FillUsername = true, };
 
         var response = client.UnaryCall(request, new CallOptions(credentials: credentials));
 
@@ -508,11 +555,13 @@ public class InteropClient : IDisposable
         var cts = new CancellationTokenSource();
         using (var call = client.FullDuplexCall(cancellationToken: cts.Token))
         {
-            await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-            {
-                ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                Payload = CreateZerosPayload(27182)
-            });
+            await call.RequestStream.WriteAsync(
+                new StreamingOutputCallRequest
+                {
+                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                    Payload = CreateZerosPayload(27182)
+                }
+            );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
@@ -542,7 +591,9 @@ public class InteropClient : IDisposable
         {
             try
             {
-                await call.RequestStream.WriteAsync(new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) });
+                await call.RequestStream.WriteAsync(
+                    new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) }
+                );
             }
             catch (InvalidOperationException)
             {
@@ -583,8 +634,16 @@ public class InteropClient : IDisposable
             var responseHeaders = await call.ResponseHeadersAsync;
             var responseTrailers = call.GetTrailers();
 
-            Assert.AreEqual("test_initial_metadata_value", responseHeaders.First((entry) => entry.Key == "x-grpc-test-echo-initial").Value);
-            CollectionAssert.AreEqual(new byte[] { 0xab, 0xab, 0xab }, responseTrailers.First((entry) => entry.Key == "x-grpc-test-echo-trailing-bin").ValueBytes);
+            Assert.AreEqual(
+                "test_initial_metadata_value",
+                responseHeaders.First((entry) => entry.Key == "x-grpc-test-echo-initial").Value
+            );
+            CollectionAssert.AreEqual(
+                new byte[] { 0xab, 0xab, 0xab },
+                responseTrailers.First(
+                    (entry) => entry.Key == "x-grpc-test-echo-trailing-bin"
+                ).ValueBytes
+            );
         }
 
         {
@@ -604,8 +663,16 @@ public class InteropClient : IDisposable
             var responseHeaders = await call.ResponseHeadersAsync;
             var responseTrailers = call.GetTrailers();
 
-            Assert.AreEqual("test_initial_metadata_value", responseHeaders.First((entry) => entry.Key == "x-grpc-test-echo-initial").Value);
-            CollectionAssert.AreEqual(new byte[] { 0xab, 0xab, 0xab }, responseTrailers.First((entry) => entry.Key == "x-grpc-test-echo-trailing-bin").ValueBytes);
+            Assert.AreEqual(
+                "test_initial_metadata_value",
+                responseHeaders.First((entry) => entry.Key == "x-grpc-test-echo-initial").Value
+            );
+            CollectionAssert.AreEqual(
+                new byte[] { 0xab, 0xab, 0xab },
+                responseTrailers.First(
+                    (entry) => entry.Key == "x-grpc-test-echo-trailing-bin"
+                ).ValueBytes
+            );
         }
 
         Console.WriteLine("Passed!");
@@ -614,11 +681,7 @@ public class InteropClient : IDisposable
     public static async Task RunStatusCodeAndMessageAsync(TestService.TestServiceClient client)
     {
         Console.WriteLine("running status_code_and_message");
-        var echoStatus = new EchoStatus
-        {
-            Code = 2,
-            Message = "test status message"
-        };
+        var echoStatus = new EchoStatus { Code = 2, Message = "test status message" };
 
         {
             // step 1: test unary call
@@ -665,10 +728,7 @@ public class InteropClient : IDisposable
 
         try
         {
-            await client.UnaryCallAsync(new SimpleRequest
-            {
-                ResponseStatus = echoStatus
-            });
+            await client.UnaryCallAsync(new SimpleRequest { ResponseStatus = echoStatus });
             Assert.Fail();
         }
         catch (RpcException e)
@@ -680,7 +740,9 @@ public class InteropClient : IDisposable
         Console.WriteLine("Passed!");
     }
 
-    public static void RunUnimplementedService(UnimplementedService.UnimplementedServiceClient client)
+    public static void RunUnimplementedService(
+        UnimplementedService.UnimplementedServiceClient client
+    )
     {
         Console.WriteLine("running unimplemented_service");
         var e = Assert.Throws<RpcException>(() => client.UnimplementedCall(new Empty()));
@@ -705,20 +767,19 @@ public class InteropClient : IDisposable
         {
             ExpectCompressed = new BoolValue
             {
-                Value = true  // lie about compression
+                Value = true // lie about compression
             },
             ResponseSize = 314159,
             Payload = CreateZerosPayload(271828)
         };
-        var e = Assert.Throws<RpcException>(() => client.UnaryCall(probeRequest, CreateClientCompressionMetadata(false)));
+        var e = Assert.Throws<RpcException>(
+            () => client.UnaryCall(probeRequest, CreateClientCompressionMetadata(false))
+        );
         Assert.AreEqual(StatusCode.InvalidArgument, e.Status.StatusCode);
 
         var compressedRequest = new SimpleRequest
         {
-            ExpectCompressed = new BoolValue
-            {
-                Value = true
-            },
+            ExpectCompressed = new BoolValue { Value = true },
             ResponseSize = 314159,
             Payload = CreateZerosPayload(271828)
         };
@@ -727,14 +788,14 @@ public class InteropClient : IDisposable
 
         var uncompressedRequest = new SimpleRequest
         {
-            ExpectCompressed = new BoolValue
-            {
-                Value = false
-            },
+            ExpectCompressed = new BoolValue { Value = false },
             ResponseSize = 314159,
             Payload = CreateZerosPayload(271828)
         };
-        var response2 = client.UnaryCall(uncompressedRequest, CreateClientCompressionMetadata(false));
+        var response2 = client.UnaryCall(
+            uncompressedRequest,
+            CreateClientCompressionMetadata(false)
+        );
         Assert.AreEqual(314159, response2.Payload.Body.Length);
 
         Console.WriteLine("Passed!");
@@ -746,14 +807,13 @@ public class InteropClient : IDisposable
         try
         {
             var probeCall = client.StreamingInputCall(CreateClientCompressionMetadata(false));
-            await probeCall.RequestStream.WriteAsync(new StreamingInputCallRequest
-            {
-                ExpectCompressed = new BoolValue
+            await probeCall.RequestStream.WriteAsync(
+                new StreamingInputCallRequest
                 {
-                    Value = true
-                },
-                Payload = CreateZerosPayload(27182)
-            });
+                    ExpectCompressed = new BoolValue { Value = true },
+                    Payload = CreateZerosPayload(27182)
+                }
+            );
 
             // cannot use Assert.ThrowsAsync because it uses Task.Wait and would deadlock.
             await probeCall;
@@ -765,24 +825,22 @@ public class InteropClient : IDisposable
         }
 
         var call = client.StreamingInputCall(CreateClientCompressionMetadata(true));
-        await call.RequestStream.WriteAsync(new StreamingInputCallRequest
-        {
-            ExpectCompressed = new BoolValue
+        await call.RequestStream.WriteAsync(
+            new StreamingInputCallRequest
             {
-                Value = true
-            },
-            Payload = CreateZerosPayload(27182)
-        });
+                ExpectCompressed = new BoolValue { Value = true },
+                Payload = CreateZerosPayload(27182)
+            }
+        );
 
         call.RequestStream.WriteOptions = new WriteOptions(WriteFlags.NoCompress);
-        await call.RequestStream.WriteAsync(new StreamingInputCallRequest
-        {
-            ExpectCompressed = new BoolValue
+        await call.RequestStream.WriteAsync(
+            new StreamingInputCallRequest
             {
-                Value = false
-            },
-            Payload = CreateZerosPayload(45904)
-        });
+                ExpectCompressed = new BoolValue { Value = false },
+                Payload = CreateZerosPayload(45904)
+            }
+        );
         await call.RequestStream.CompleteAsync();
 
         var response = await call.ResponseAsync;
@@ -828,14 +886,27 @@ public class InteropClient : IDisposable
 
         var request = new StreamingOutputCallRequest
         {
-            ResponseParameters = { bodySizes.Select((size) => new ResponseParameters { Size = size, Compressed = new BoolValue { Value = true } }) }
+            ResponseParameters =
+            {
+                bodySizes.Select(
+                    (size) =>
+                        new ResponseParameters
+                        {
+                            Size = size,
+                            Compressed = new BoolValue { Value = true }
+                        }
+                )
+            }
         };
 
         using (var call = client.StreamingOutputCall(request))
         {
             // Compression of response message is not verified because there is no API available
             var responseList = await call.ResponseStream.ToListAsync();
-            CollectionAssert.AreEqual(bodySizes, responseList.Select((item) => item.Payload.Body.Length).ToList());
+            CollectionAssert.AreEqual(
+                bodySizes,
+                responseList.Select((item) => item.Payload.Body.Length).ToList()
+            );
         }
 
         Console.WriteLine("Passed!");
@@ -850,9 +921,9 @@ public class InteropClient : IDisposable
     {
         var algorithmName = compressed ? "gzip" : "identity";
         return new Metadata
-            {
-                { new Metadata.Entry(CompressionRequestAlgorithmMetadataKey, algorithmName) }
-            };
+        {
+            { new Metadata.Entry(CompressionRequestAlgorithmMetadataKey, algorithmName) }
+        };
     }
 
     // extracts the client_email field from service account file used for auth test cases
@@ -862,17 +933,17 @@ public class InteropClient : IDisposable
         Assert.IsNotNull(keyFile);
         var jobject = JObject.Parse(File.ReadAllText(keyFile));
         string email = jobject.GetValue("client_email")!.Value<string>()!;
-        Assert.IsTrue(email.Length > 0);  // spec requires nonempty client email.
+        Assert.IsTrue(email.Length > 0); // spec requires nonempty client email.
         return email;
     }
 
     private static Metadata CreateTestMetadata()
     {
         return new Metadata
-            {
-                {"x-grpc-test-echo-initial", "test_initial_metadata_value"},
-                {"x-grpc-test-echo-trailing-bin", new byte[] {0xab, 0xab, 0xab}}
-            };
+        {
+            { "x-grpc-test-echo-initial", "test_initial_metadata_value" },
+            { "x-grpc-test-echo-trailing-bin", new byte[] { 0xab, 0xab, 0xab } }
+        };
     }
 
     // TODO(JamesNK): PEM loading logic from https://stackoverflow.com/a/10498045/11829

@@ -18,7 +18,8 @@ internal class DefaultViewComponentInvokerFactory : IViewComponentInvokerFactory
         IViewComponentFactory viewComponentFactory,
         ViewComponentInvokerCache viewComponentInvokerCache,
         DiagnosticListener diagnosticListener,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         if (viewComponentFactory == null)
         {
@@ -62,6 +63,7 @@ internal class DefaultViewComponentInvokerFactory : IViewComponentInvokerFactory
             _viewComponentFactory,
             _viewComponentInvokerCache,
             _diagnosticListener,
-            _logger);
+            _logger
+        );
     }
 }

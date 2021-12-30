@@ -25,9 +25,7 @@ namespace System.Composition.Lightweight.UnitTests
         [Export(typeof(IService)), ExportMetadata("Name", "1")]
         public class SampleService1 : IService
         {
-            public SampleService1()
-            {
-            }
+            public SampleService1() { }
         }
 
         public class LooseImporter

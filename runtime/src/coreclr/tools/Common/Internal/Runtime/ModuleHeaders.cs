@@ -21,7 +21,7 @@ namespace Internal.Runtime
 #pragma warning disable 0169
     internal struct ReadyToRunHeader
     {
-        private uint Signature;      // ReadyToRunHeaderConstants.Signature
+        private uint Signature; // ReadyToRunHeaderConstants.Signature
         private ushort MajorVersion;
         private ushort MinorVersion;
 

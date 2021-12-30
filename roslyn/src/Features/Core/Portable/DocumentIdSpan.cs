@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis
         public async Task<DocumentSpan?> TryRehydrateAsync(CancellationToken cancellationToken)
         {
             var solution = _workspace.CurrentSolution;
-            var document = await solution.GetDocumentAsync(_documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+            var document = await solution
+                .GetDocumentAsync(_documentId, includeSourceGenerated: true, cancellationToken)
+                .ConfigureAwait(false);
             return document == null ? null : new DocumentSpan(document, SourceSpan);
         }
     }

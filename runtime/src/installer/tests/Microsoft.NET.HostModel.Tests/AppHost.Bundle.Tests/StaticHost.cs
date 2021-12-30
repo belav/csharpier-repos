@@ -24,14 +24,14 @@ namespace AppHost.Bundle.Tests
 
             var appExe = UseSingleFileSelfContainedHost(fixture);
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -41,14 +41,14 @@ namespace AppHost.Bundle.Tests
 
             string singleFile = BundleSelfContainedApp(fixture);
 
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

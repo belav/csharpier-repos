@@ -6,8 +6,14 @@ using System;
 public class Base
 {
     public int value;
-    public void B0() { value += 12; }
-    public virtual void B1() { value += 33; }
+    public void B0()
+    {
+        value += 12;
+    }
+    public virtual void B1()
+    {
+        value += 33;
+    }
 }
 
 // Ensure that D1 and D2 have enough virtuals that the slot number for
@@ -20,7 +26,10 @@ public class D1 : Base
     public virtual void MC() { }
     public virtual void MD() { }
 
-    public virtual void M1() { value += 44; }
+    public virtual void M1()
+    {
+        value += 44;
+    }
 }
 
 public class D2 : Base
@@ -30,7 +39,10 @@ public class D2 : Base
     public virtual void MC() { }
     public virtual void MD() { }
 
-    public virtual void M1() { value += 55; }
+    public virtual void M1()
+    {
+        value += 55;
+    }
 }
 
 // Aggressive use of 'dup' here by CSC will confuse the jit, and it

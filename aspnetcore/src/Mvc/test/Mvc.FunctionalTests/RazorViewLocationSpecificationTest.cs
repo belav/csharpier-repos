@@ -8,7 +8,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RazorViewLocationSpecificationTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
+public class RazorViewLocationSpecificationTest
+    : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
     private const string BaseUrl = "http://localhost/ViewNameSpecification_Home/";
 
@@ -24,11 +25,13 @@ public class RazorViewLocationSpecificationTest : IClassFixture<MvcTestFixture<R
     [InlineData("LayoutSpecifiedWithPartialPathInViewStart_ForViewSpecifiedWithRelativePath")]
     [InlineData("LayoutSpecifiedWithPartialPathInViewStart_ForViewSpecifiedWithPartialName")]
     [InlineData("LayoutSpecifiedWithPartialPathInViewStart_ForViewSpecifiedWithAppRelativePath")]
-    public async Task PartialLayoutPaths_SpecifiedInViewStarts_GetResolvedByViewEngine(string action)
+    public async Task PartialLayoutPaths_SpecifiedInViewStarts_GetResolvedByViewEngine(
+        string action
+    )
     {
         // Arrange
         var expected =
-@"<layout>
+            @"<layout>
 _ViewStart that specifies partial Layout
 </layout>";
 
@@ -48,7 +51,7 @@ _ViewStart that specifies partial Layout
     {
         // Arrange
         var expected =
-@"<non-shared>Layout specified in page
+            @"<non-shared>Layout specified in page
 </non-shared>";
 
         // Act
@@ -65,7 +68,7 @@ _ViewStart that specifies partial Layout
     {
         // Arrange
         var expected =
-@"<non-shared>Page With Non Partial Layout
+            @"<non-shared>Page With Non Partial Layout
 </non-shared>";
 
         // Act
@@ -83,7 +86,7 @@ _ViewStart that specifies partial Layout
     {
         // Arrange
         var expected =
-@"<layout>
+            @"<layout>
 Non Shared Partial
 
 </layout>";
@@ -106,8 +109,9 @@ Non Shared Partial
 
         // Assert
         Assert.Contains(
-            "The layout page '/Views/Shared/_PartialLayout.cshtml' cannot find the section " +
-                "'section' in the content page '/Views/PartialViewEngine/PartialMissingSection.cshtml'.",
-            WebUtility.HtmlDecode(content));
+            "The layout page '/Views/Shared/_PartialLayout.cshtml' cannot find the section "
+                + "'section' in the content page '/Views/PartialViewEngine/PartialMissingSection.cshtml'.",
+            WebUtility.HtmlDecode(content)
+        );
     }
 }

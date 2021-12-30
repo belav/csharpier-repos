@@ -3,11 +3,10 @@
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class GearsOfWarFromSqlQuerySqliteTest : GearsOfWarFromSqlQueryTestBase<GearsOfWarQuerySqliteFixture>
+    public class GearsOfWarFromSqlQuerySqliteTest
+        : GearsOfWarFromSqlQueryTestBase<GearsOfWarQuerySqliteFixture>
     {
         public GearsOfWarFromSqlQuerySqliteTest(GearsOfWarQuerySqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
     }
 }

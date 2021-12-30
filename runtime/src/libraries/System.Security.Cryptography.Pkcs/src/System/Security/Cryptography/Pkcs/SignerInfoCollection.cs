@@ -24,7 +24,10 @@ namespace System.Security.Cryptography.Pkcs
             _signerInfos = signerInfos;
         }
 
-        internal SignerInfoCollection(SignerInfoAsn[] signedDataSignerInfos, SignedCms ownerDocument)
+        internal SignerInfoCollection(
+            SignerInfoAsn[] signedDataSignerInfos,
+            SignedCms ownerDocument
+        )
         {
             Debug.Assert(signedDataSignerInfos != null);
 
@@ -70,7 +73,8 @@ namespace System.Security.Cryptography.Pkcs
 
         // The collections are usually small (usually Count == 1) so there's not value in repeating
         // the validation of the Array overload to defer to a faster copy routine.
-        public void CopyTo(SignerInfo[] array, int index) => ((ICollection)this).CopyTo(array, index);
+        public void CopyTo(SignerInfo[] array, int index) =>
+            ((ICollection)this).CopyTo(array, index);
 
         public bool IsSynchronized => false;
         public object SyncRoot => this;

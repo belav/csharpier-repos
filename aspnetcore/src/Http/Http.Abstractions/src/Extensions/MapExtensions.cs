@@ -20,7 +20,11 @@ public static class MapExtensions
     /// <param name="pathMatch">The request path to match.</param>
     /// <param name="configuration">The branch to take for positive path matches.</param>
     /// <returns>The <see cref="IApplicationBuilder"/> instance.</returns>
-    public static IApplicationBuilder Map(this IApplicationBuilder app, string pathMatch, Action<IApplicationBuilder> configuration)
+    public static IApplicationBuilder Map(
+        this IApplicationBuilder app,
+        string pathMatch,
+        Action<IApplicationBuilder> configuration
+    )
     {
         return Map(app, pathMatch, preserveMatchedPathSegment: false, configuration);
     }
@@ -33,7 +37,11 @@ public static class MapExtensions
     /// <param name="pathMatch">The request path to match.</param>
     /// <param name="configuration">The branch to take for positive path matches.</param>
     /// <returns>The <see cref="IApplicationBuilder"/> instance.</returns>
-    public static IApplicationBuilder Map(this IApplicationBuilder app, PathString pathMatch, Action<IApplicationBuilder> configuration)
+    public static IApplicationBuilder Map(
+        this IApplicationBuilder app,
+        PathString pathMatch,
+        Action<IApplicationBuilder> configuration
+    )
     {
         return Map(app, pathMatch, preserveMatchedPathSegment: false, configuration);
     }
@@ -47,7 +55,12 @@ public static class MapExtensions
     /// <param name="preserveMatchedPathSegment">if false, matched path would be removed from Request.Path and added to Request.PathBase.</param>
     /// <param name="configuration">The branch to take for positive path matches.</param>
     /// <returns>The <see cref="IApplicationBuilder"/> instance.</returns>
-    public static IApplicationBuilder Map(this IApplicationBuilder app, PathString pathMatch, bool preserveMatchedPathSegment, Action<IApplicationBuilder> configuration)
+    public static IApplicationBuilder Map(
+        this IApplicationBuilder app,
+        PathString pathMatch,
+        bool preserveMatchedPathSegment,
+        Action<IApplicationBuilder> configuration
+    )
     {
         if (app == null)
         {

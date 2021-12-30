@@ -105,7 +105,10 @@ namespace System.PrivateUri.Tests
 
             Assert.Equal(@"/catalog/shownew.htm", uri.LocalPath);
 
-            Assert.Equal(@"http://www.contoso.com/catalog/shownew.htm?date=today", uri.OriginalString);
+            Assert.Equal(
+                @"http://www.contoso.com/catalog/shownew.htm?date=today",
+                uri.OriginalString
+            );
 
             Assert.Equal(@"/catalog/shownew.htm?date=today", uri.PathAndQuery);
 
@@ -132,7 +135,10 @@ namespace System.PrivateUri.Tests
             var baseUri = new Uri("http://www.domain.com/");
             var relativeUri = new Uri("/path/", UriKind.Relative);
 #pragma warning disable 0618
-            AssertExtensions.Throws<ArgumentNullException>("toUri", () => baseUri.MakeRelative(null)); // Uri is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "toUri",
+                () => baseUri.MakeRelative(null)
+            ); // Uri is null
 
             Assert.Throws<InvalidOperationException>(() => relativeUri.MakeRelative(baseUri)); // Base uri is relative
             Assert.Throws<InvalidOperationException>(() => baseUri.MakeRelative(relativeUri)); // Uri is relative

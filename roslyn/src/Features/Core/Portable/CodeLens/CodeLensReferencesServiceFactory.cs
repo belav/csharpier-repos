@@ -14,15 +14,13 @@ namespace Microsoft.CodeAnalysis.CodeLens
     [ExportWorkspaceServiceFactory(typeof(ICodeLensReferencesService)), Shared]
     internal sealed class CodeLensReferencesServiceFactory : IWorkspaceServiceFactory
     {
-        public static readonly ICodeLensReferencesService Instance = new CodeLensReferencesService();
+        public static readonly ICodeLensReferencesService Instance =
+            new CodeLensReferencesService();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeLensReferencesServiceFactory()
-        {
-        }
+        public CodeLensReferencesServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => Instance;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => Instance;
     }
 }

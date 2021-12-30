@@ -21,7 +21,10 @@ namespace System.Security.Cryptography
             if (algorithmGroup == null)
                 throw new ArgumentNullException(nameof(algorithmGroup));
             if (algorithmGroup.Length == 0)
-                throw new ArgumentException(SR.Format(SR.Cryptography_InvalidAlgorithmGroup, algorithmGroup), nameof(algorithmGroup));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_InvalidAlgorithmGroup, algorithmGroup),
+                    nameof(algorithmGroup)
+                );
 
             _algorithmGroup = algorithmGroup;
         }
@@ -31,10 +34,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string AlgorithmGroup
         {
-            get
-            {
-                return _algorithmGroup;
-            }
+            get { return _algorithmGroup; }
         }
 
         public static bool operator ==(CngAlgorithmGroup? left, CngAlgorithmGroup? right)

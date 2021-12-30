@@ -44,15 +44,33 @@ public class RuntimePerformanceBenchmarkBase
         void IDisposable.Dispose() { }
         IDisposable ILogger.BeginScope<TState>(TState state) => null;
         bool ILogger.IsEnabled(LogLevel logLevel) => false;
-        void ILogger.Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) { }
+        void ILogger.Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) { }
     }
 
     private class BenchmarkViewExecutor : ViewExecutor
     {
-        public BenchmarkViewExecutor(IOptions<MvcViewOptions> viewOptions, IHttpResponseStreamWriterFactory writerFactory, ICompositeViewEngine viewEngine, ITempDataDictionaryFactory tempDataFactory, DiagnosticListener diagnosticListener, IModelMetadataProvider modelMetadataProvider)
-            : base(viewOptions, writerFactory, viewEngine, tempDataFactory, diagnosticListener, modelMetadataProvider)
-        {
-        }
+        public BenchmarkViewExecutor(
+            IOptions<MvcViewOptions> viewOptions,
+            IHttpResponseStreamWriterFactory writerFactory,
+            ICompositeViewEngine viewEngine,
+            ITempDataDictionaryFactory tempDataFactory,
+            DiagnosticListener diagnosticListener,
+            IModelMetadataProvider modelMetadataProvider
+        )
+            : base(
+                viewOptions,
+                writerFactory,
+                viewEngine,
+                tempDataFactory,
+                diagnosticListener,
+                modelMetadataProvider
+            ) { }
 
         public StringBuilder StringBuilder { get; } = new StringBuilder();
 
@@ -62,7 +80,8 @@ public class RuntimePerformanceBenchmarkBase
             ViewDataDictionary viewData,
             ITempDataDictionary tempData,
             string contentType,
-            int? statusCode)
+            int? statusCode
+        )
         {
             using (var stringWriter = new StringWriter(StringBuilder))
             {
@@ -72,14 +91,13 @@ public class RuntimePerformanceBenchmarkBase
                     viewData,
                     tempData,
                     stringWriter,
-                    ViewOptions.HtmlHelperOptions);
+                    ViewOptions.HtmlHelperOptions
+                );
                 await ExecuteAsync(viewContext, contentType, statusCode);
                 await stringWriter.FlushAsync();
             }
-
         }
     }
-
 
     private class BenchmarkHostingEnvironment : IWebHostEnvironment
     {
@@ -129,12 +147,19 @@ public class RuntimePerformanceBenchmarkBase
     public void GlobalSetup()
     {
         var loader = new RazorCompiledItemLoader();
-        var viewsDll = Path.ChangeExtension(typeof(ViewAssemblyMarker).Assembly.Location, "Views.dll");
+        var viewsDll = Path.ChangeExtension(
+            typeof(ViewAssemblyMarker).Assembly.Location,
+            "Views.dll"
+        );
         var viewsAssembly = Assembly.Load(File.ReadAllBytes(viewsDll));
         var services = new ServiceCollection();
         var listener = new DiagnosticListener(GetType().Assembly.FullName);
         var partManager = new ApplicationPartManager();
-        partManager.ApplicationParts.Add(CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(viewsAssembly).Single());
+        partManager.ApplicationParts.Add(
+            CompiledRazorAssemblyApplicationPartFactory
+                .GetDefaultApplicationParts(viewsAssembly)
+                .Single()
+        );
         var builder = services
             .AddSingleton<ILoggerFactory, NullLoggerFactory>()
             .AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>()
@@ -148,7 +173,8 @@ public class RuntimePerformanceBenchmarkBase
         _serviceProvider = services.BuildServiceProvider();
         _routeData = new RouteData();
         _actionDescriptor = new ActionDescriptor();
-        _tempDataDictionaryFactory = _serviceProvider.GetRequiredService<ITempDataDictionaryFactory>();
+        _tempDataDictionaryFactory =
+            _serviceProvider.GetRequiredService<ITempDataDictionaryFactory>();
         _viewEngine = _serviceProvider.GetRequiredService<ICompositeViewEngine>();
     }
 
@@ -167,18 +193,17 @@ public class RuntimePerformanceBenchmarkBase
         _viewEngineResult.EnsureSuccessful(null);
 
         _actionContext = new ActionContext(
-            new DefaultHttpContext()
-            {
-                RequestServices = _requestScope.ServiceProvider
-            },
+            new DefaultHttpContext() { RequestServices = _requestScope.ServiceProvider },
             _routeData,
-            _actionDescriptor);
+            _actionDescriptor
+        );
 
         _tempData = _tempDataDictionaryFactory.GetTempData(_actionContext.HttpContext);
 
         _viewDataDictionary = new ViewDataDictionary(
             _requestScope.ServiceProvider.GetRequiredService<IModelMetadataProvider>(),
-            _actionContext.ModelState);
+            _actionContext.ModelState
+        );
         _viewDataDictionary.Model = Model;
 
         _executor = _requestScope.ServiceProvider.GetRequiredService<BenchmarkViewExecutor>();
@@ -205,7 +230,8 @@ public class RuntimePerformanceBenchmarkBase
             _viewDataDictionary,
             _tempData,
             "text/html",
-            200);
+            200
+        );
         return _executor.StringBuilder.ToString();
     }
 }

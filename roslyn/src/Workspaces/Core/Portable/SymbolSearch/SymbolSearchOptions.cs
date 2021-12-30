@@ -16,22 +16,34 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolSearchOptions()
-        {
-        }
+        public SymbolSearchOptions() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            SuggestForTypesInReferenceAssemblies,
-            SuggestForTypesInNuGetPackages);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                SuggestForTypesInReferenceAssemblies,
+                SuggestForTypesInNuGetPackages
+            );
 
         private const string FeatureName = "SymbolSearchOptions";
 
         public static PerLanguageOption2<bool> SuggestForTypesInReferenceAssemblies =
-            new(FeatureName, "SuggestForTypesInReferenceAssemblies", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.SuggestForTypesInReferenceAssemblies"));
+            new(
+                FeatureName,
+                "SuggestForTypesInReferenceAssemblies",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.SuggestForTypesInReferenceAssemblies"
+                )
+            );
 
         public static PerLanguageOption2<bool> SuggestForTypesInNuGetPackages =
-            new(FeatureName, "SuggestForTypesInNuGetPackages", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.SuggestForTypesInNuGetPackages"));
+            new(
+                FeatureName,
+                "SuggestForTypesInNuGetPackages",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.SuggestForTypesInNuGetPackages"
+                )
+            );
     }
 }

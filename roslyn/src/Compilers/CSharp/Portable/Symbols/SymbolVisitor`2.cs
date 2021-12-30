@@ -127,7 +127,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="symbol">The visited symbol</param>
         /// <param name="argument">Additional argument</param>
         /// <returns></returns>
-        public virtual TResult VisitFunctionPointerType(FunctionPointerTypeSymbol symbol, TArgument argument)
+        public virtual TResult VisitFunctionPointerType(
+            FunctionPointerTypeSymbol symbol,
+            TArgument argument
+        )
         {
             return DefaultVisit(symbol, argument);
         }

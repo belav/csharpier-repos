@@ -17,15 +17,16 @@ namespace System.Net.Security
 
         private FakeOptions? _sslAuthenticationOptions;
 
-        private void ValidateCreateContext(SslClientAuthenticationOptions sslClientAuthenticationOptions, RemoteCertificateValidationCallback? remoteCallback, LocalCertSelectionCallback? localCallback)
+        private void ValidateCreateContext(
+            SslClientAuthenticationOptions sslClientAuthenticationOptions,
+            RemoteCertificateValidationCallback? remoteCallback,
+            LocalCertSelectionCallback? localCallback
+        )
         {
             // Without setting (or using) these members you will get a build exception in the unit test project.
             // The code that normally uses these in the main solution is in the implementation of SslStream.
 
-            if (_nestedWrite == 0)
-            {
-
-            }
+            if (_nestedWrite == 0) { }
             _context = null;
             _exception = null;
             _internalBuffer = null;
@@ -37,33 +38,42 @@ namespace System.Net.Security
 
         private void ValidateCreateContext(SslAuthenticationOptions sslAuthenticationOptions)
         {
-            _sslAuthenticationOptions = new FakeOptions() { TargetHost = sslAuthenticationOptions.TargetHost };
+            _sslAuthenticationOptions = new FakeOptions()
+            {
+                TargetHost = sslAuthenticationOptions.TargetHost
+            };
         }
 
-        private ValueTask WriteAsyncInternal<TWriteAdapter>(TWriteAdapter writeAdapter, ReadOnlyMemory<byte> buffer)
-            where TWriteAdapter : struct, IReadWriteAdapter => default;
+        private ValueTask WriteAsyncInternal<TWriteAdapter>(
+            TWriteAdapter writeAdapter,
+            ReadOnlyMemory<byte> buffer
+        ) where TWriteAdapter : struct, IReadWriteAdapter => default;
 
-        private ValueTask<int> ReadAsyncInternal<TReadAdapter>(TReadAdapter adapter, Memory<byte> buffer) => default;
+        private ValueTask<int> ReadAsyncInternal<TReadAdapter>(
+            TReadAdapter adapter,
+            Memory<byte> buffer
+        ) => default;
 
         private bool RemoteCertRequired => default;
 
-        private void CloseInternal()
-        {
-        }
+        private void CloseInternal() { }
         //
         // This method assumes that a SSPI context is already in a good shape.
         // For example it is either a fresh context or already authenticated context that needs renegotiation.
         //
-        private Task ProcessAuthenticationAsync(bool isAsync = false, bool isApm = false, CancellationToken cancellationToken = default)
+        private Task ProcessAuthenticationAsync(
+            bool isAsync = false,
+            bool isApm = false,
+            CancellationToken cancellationToken = default
+        )
         {
-            return Task.Run(() => {});
+            return Task.Run(() => { });
         }
 
-        private Task RenegotiateAsync(AsyncReadWriteAdapter adapter) => throw new PlatformNotSupportedException();
+        private Task RenegotiateAsync(AsyncReadWriteAdapter adapter) =>
+            throw new PlatformNotSupportedException();
 
-        private void ReturnReadBufferIfEmpty()
-        {
-        }
+        private void ReturnReadBufferIfEmpty() { }
     }
 
     internal class SecureChannel
@@ -80,7 +90,11 @@ namespace System.Net.Security
         internal X509RevocationMode CheckCertRevocationStatus => default;
         internal ProtocolToken CreateShutdownToken() => default;
 
-        internal static X509Certificate2? FindCertificateWithPrivateKey(object instance, bool isServer, X509Certificate certificate)
+        internal static X509Certificate2? FindCertificateWithPrivateKey(
+            object instance,
+            bool isServer,
+            X509Certificate certificate
+        )
         {
             return certificate as X509Certificate2;
         }

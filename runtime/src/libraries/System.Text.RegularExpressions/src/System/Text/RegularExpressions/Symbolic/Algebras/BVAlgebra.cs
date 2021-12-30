@@ -24,7 +24,11 @@ namespace System.Text.RegularExpressions.Symbolic
         protected readonly int _bits;
         protected readonly BDD[]? _partition;
 
-        internal BVAlgebraBase(MintermClassifier classifier, ulong[] cardinalities, BDD[]? partition)
+        internal BVAlgebraBase(
+            MintermClassifier classifier,
+            ulong[] cardinalities,
+            BDD[]? partition
+        )
         {
             _classifier = classifier;
             _cardinalities = cardinalities;
@@ -56,8 +60,12 @@ namespace System.Text.RegularExpressions.Symbolic
             return size;
         }
 
-        public BVAlgebra(CharSetSolver solver, BDD[] minterms) :
-            base(new MintermClassifier(solver, minterms), solver.ComputeDomainSizes(minterms), minterms)
+        public BVAlgebra(CharSetSolver solver, BDD[] minterms)
+            : base(
+                new MintermClassifier(solver, minterms),
+                solver.ComputeDomainSizes(minterms),
+                minterms
+            )
         {
             _mintermGenerator = new MintermGenerator<BV>(this);
             False = BV.CreateFalse(_bits);
@@ -78,7 +86,8 @@ namespace System.Text.RegularExpressions.Symbolic
         public bool HashCodesRespectEquivalence => true;
         public CharSetSolver CharSetProvider => throw new NotSupportedException();
         public bool AreEquivalent(BV predicate1, BV predicate2) => predicate1.Equals(predicate2);
-        public List<BV> GenerateMinterms(IEnumerable<BV> constraints) => _mintermGenerator.GenerateMinterms(constraints);
+        public List<BV> GenerateMinterms(IEnumerable<BV> constraints) =>
+            _mintermGenerator.GenerateMinterms(constraints);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsSatisfiable(BV predicate) => !predicate.Equals(False);
@@ -105,7 +114,12 @@ namespace System.Text.RegularExpressions.Symbolic
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public BV Or(BV predicate1, BV predicate2) => predicate1 | predicate2;
 
-        public BV RangeConstraint(char lower, char upper, bool caseInsensitive = false, string? culture = null) => throw new NotSupportedException();
+        public BV RangeConstraint(
+            char lower,
+            char upper,
+            bool caseInsensitive = false,
+            string? culture = null
+        ) => throw new NotSupportedException();
 
         public BV CharConstraint(char c, bool caseInsensitive = false, string? culture = null)
         {

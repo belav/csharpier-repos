@@ -21,13 +21,18 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
     public override void FilterInclude()
     {
         // Arrange
-        var provider = GetBindingSourceValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var provider = GetBindingSourceValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
         var originalProviders = ((CompositeValueProvider)provider).ToArray();
         var bindingSource = new BindingSource(
             BindingSource.Query.Id,
             displayName: null,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         // Act
         var result = provider.Filter(bindingSource);
@@ -40,10 +45,19 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
     protected override IEnumerableValueProvider GetEnumerableValueProvider(
         BindingSource bindingSource,
         Dictionary<string, StringValues> values,
-        CultureInfo culture)
+        CultureInfo culture
+    )
     {
-        var emptyValueProvider = new QueryStringValueProvider(bindingSource, new QueryCollection(), culture);
-        var valueProvider = new FormValueProvider(bindingSource, new FormCollection(values), culture);
+        var emptyValueProvider = new QueryStringValueProvider(
+            bindingSource,
+            new QueryCollection(),
+            culture
+        );
+        var valueProvider = new FormValueProvider(
+            bindingSource,
+            new FormCollection(values),
+            culture
+        );
 
         return new CompositeValueProvider() { emptyValueProvider, valueProvider };
     }
@@ -53,11 +67,21 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
     {
         // Arrange
         var factory = new Mock<IValueProviderFactory>();
-        factory.Setup(f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())).ThrowsAsync(new ValueProviderException("Some error"));
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor(), new ModelStateDictionary());
+        factory
+            .Setup(f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>()))
+            .ThrowsAsync(new ValueProviderException("Some error"));
+        var actionContext = new ActionContext(
+            new DefaultHttpContext(),
+            new RouteData(),
+            new ActionDescriptor(),
+            new ModelStateDictionary()
+        );
 
         // Act
-        var (success, result) = await CompositeValueProvider.TryCreateAsync(actionContext, new[] { factory.Object });
+        var (success, result) = await CompositeValueProvider.TryCreateAsync(
+            actionContext,
+            new[] { factory.Object }
+        );
 
         // Assert
         Assert.False(success);
@@ -73,13 +97,11 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
         // Arrange
         var provider1 = Mock.Of<IValueProvider>();
         var dictionary = new Dictionary<string, string>(StringComparer.Ordinal)
-            {
-                { "prefix-test", "some-value" },
-            };
+        {
+            { "prefix-test", "some-value" },
+        };
         var provider2 = new Mock<IEnumerableValueProvider>();
-        provider2.Setup(p => p.GetKeysFromPrefix("prefix"))
-                 .Returns(dictionary)
-                 .Verifiable();
+        provider2.Setup(p => p.GetKeysFromPrefix("prefix")).Returns(dictionary).Verifiable();
         var provider = new CompositeValueProvider() { provider1, provider2.Object };
 
         // Act
@@ -118,7 +140,9 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
 
     [Theory]
     [MemberData(nameof(BinderMetadata))]
-    public void FilterReturnsItself_ForAnyClassRegisteredAsGenericParam(IBindingSourceMetadata metadata)
+    public void FilterReturnsItself_ForAnyClassRegisteredAsGenericParam(
+        IBindingSourceMetadata metadata
+    )
     {
         // Arrange
         var values = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
@@ -126,7 +150,11 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
         var valueProvider1 = GetMockValueProvider("Test");
         var valueProvider2 = GetMockValueProvider("Unrelated");
 
-        var provider = new CompositeValueProvider() { valueProvider1.Object, valueProvider2.Object };
+        var provider = new CompositeValueProvider()
+        {
+            valueProvider1.Object,
+            valueProvider2.Object
+        };
 
         // Act
         var result = provider.Filter(metadata.BindingSource);
@@ -146,20 +174,23 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
             // None filter themselves out.
             var noneRewrite = new[]
             {
-                    GetValueProvider(rewritesKeys: false),
-                    GetValueProvider(rewritesKeys: false),
-                };
+                GetValueProvider(rewritesKeys: false),
+                GetValueProvider(rewritesKeys: false),
+            };
             // None implement IKeyRewriterValueProvider.
-            var noneImplement = new[] { GetMockValueProvider("One").Object, GetMockValueProvider("Two").Object };
+            var noneImplement = new[]
+            {
+                GetMockValueProvider("One").Object,
+                GetMockValueProvider("Two").Object
+            };
 
             return new TheoryData<CompositeValueProvider>
-                {
-                    // Starts empty
-                    new CompositeValueProvider(),
-
-                    new CompositeValueProvider(noneRewrite),
-                    new CompositeValueProvider(noneImplement),
-                };
+            {
+                // Starts empty
+                new CompositeValueProvider(),
+                new CompositeValueProvider(noneRewrite),
+                new CompositeValueProvider(noneImplement),
+            };
         }
     }
 
@@ -182,7 +213,11 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
     public void Filter_ReturnsNull()
     {
         // Arrange
-        var allRewrite = new[] { GetValueProvider(rewritesKeys: true), GetValueProvider(rewritesKeys: true) };
+        var allRewrite = new[]
+        {
+            GetValueProvider(rewritesKeys: true),
+            GetValueProvider(rewritesKeys: true)
+        };
         var provider = new CompositeValueProvider(allRewrite);
 
         // Act
@@ -204,19 +239,19 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
         var rewrites2 = GetValueProvider(rewritesKeys: true);
         var providers = new IValueProvider[]
         {
-                doesNotRewrite1,
-                doesNotImplement1,
-                rewrites1,
-                doesNotRewrite2,
-                doesNotImplement2,
-                rewrites2,
+            doesNotRewrite1,
+            doesNotImplement1,
+            rewrites1,
+            doesNotRewrite2,
+            doesNotImplement2,
+            rewrites2,
         };
         var expectedProviders = new IValueProvider[]
         {
-                doesNotRewrite1,
-                doesNotImplement1,
-                doesNotRewrite2,
-                doesNotImplement2,
+            doesNotRewrite1,
+            doesNotImplement1,
+            doesNotRewrite2,
+            doesNotImplement2,
         };
 
         var provider = new CompositeValueProvider(providers);
@@ -266,7 +301,12 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
         {
             get
             {
-                return new BindingSource("Test", displayName: null, isGreedy: true, isFromRequest: true);
+                return new BindingSource(
+                    "Test",
+                    displayName: null,
+                    isGreedy: true,
+                    isFromRequest: true
+                );
             }
         }
     }
@@ -281,7 +321,12 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
         {
             get
             {
-                return new BindingSource("Unrelated", displayName: null, isGreedy: true, isFromRequest: true);
+                return new BindingSource(
+                    "Unrelated",
+                    displayName: null,
+                    isGreedy: true,
+                    isFromRequest: true
+                );
             }
         }
     }

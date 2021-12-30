@@ -13,6 +13,10 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         bool ShouldNotFormatOrCommitOnPaste(Document document);
         bool ShouldUseBaseIndentation(Document document);
         AbstractFormattingRule CreateRule(Document document, int position);
-        IEnumerable<TextChange> FilterFormattedChanges(Document document, TextSpan span, IList<TextChange> changes);
+        IEnumerable<TextChange> FilterFormattedChanges(
+            Document document,
+            TextSpan span,
+            IList<TextChange> changes
+        );
     }
 }

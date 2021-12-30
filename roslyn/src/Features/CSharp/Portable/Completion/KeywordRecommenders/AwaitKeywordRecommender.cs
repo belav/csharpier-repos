@@ -14,12 +14,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class AwaitKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public AwaitKeywordRecommender()
-            : base(SyntaxKind.AwaitKeyword)
-        {
-        }
+        public AwaitKeywordRecommender() : base(SyntaxKind.AwaitKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (context.IsGlobalStatementContext)
             {
@@ -40,11 +41,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                         return false;
                     }
 
-                    if (node.IsKind(SyntaxKind.LockStatement, out LockStatementSyntax lockStatement))
+                    if (
+                        node.IsKind(SyntaxKind.LockStatement, out LockStatementSyntax lockStatement)
+                    )
                     {
-                        if (lockStatement.Statement != null &&
-                            !lockStatement.Statement.IsMissing &&
-                            lockStatement.Statement.Span.Contains(position))
+                        if (
+                            lockStatement.Statement != null
+                            && !lockStatement.Statement.IsMissing
+                            && lockStatement.Statement.Span.Contains(position)
+                        )
                         {
                             return false;
                         }

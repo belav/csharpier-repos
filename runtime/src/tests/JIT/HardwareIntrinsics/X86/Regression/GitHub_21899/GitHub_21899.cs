@@ -7,7 +7,6 @@ namespace GitHub_21899
 {
     class GitHub_21899
     {
-
         static int Main(string[] args)
         {
             bool pass = true;
@@ -49,12 +48,14 @@ namespace GitHub_21899
 
         static bool test1()
         {
-            return !Bmi2.X64.IsSupported || (MultiplyNoFlags1(1111111111111UL, 1111111111111UL) == 1107357235536201905UL);
+            return !Bmi2.X64.IsSupported
+                || (MultiplyNoFlags1(1111111111111UL, 1111111111111UL) == 1107357235536201905UL);
         }
 
         static bool test2()
         {
-            return !Bmi2.X64.IsSupported || (MultiplyNoFlags2(1111111111111UL, 1111111111111UL) == 66926UL);
+            return !Bmi2.X64.IsSupported
+                || (MultiplyNoFlags2(1111111111111UL, 1111111111111UL) == 66926UL);
         }
 
         static bool test3()

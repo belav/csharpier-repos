@@ -13,6 +13,7 @@ internal static partial class Interop
         internal static partial bool CheckTokenMembership(
             SafeAccessTokenHandle TokenHandle,
             byte[] SidToCheck,
-            ref bool IsMember);
+            ref bool IsMember
+        );
     }
 }

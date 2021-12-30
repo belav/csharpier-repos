@@ -9,10 +9,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 {
     internal abstract class UvStreamHandle : UvHandle
     {
-        private readonly static LibuvFunctions.uv_connection_cb _uv_connection_cb = (handle, status) => UvConnectionCb(handle, status);
+        private readonly static LibuvFunctions.uv_connection_cb _uv_connection_cb = (
+            handle,
+            status
+        ) => UvConnectionCb(handle, status);
         // Ref and out lamda params must be explicitly typed
-        private readonly static LibuvFunctions.uv_alloc_cb _uv_alloc_cb = (IntPtr handle, int suggested_size, out LibuvFunctions.uv_buf_t buf) => UvAllocCb(handle, suggested_size, out buf);
-        private readonly static LibuvFunctions.uv_read_cb _uv_read_cb = (IntPtr handle, int status, ref LibuvFunctions.uv_buf_t buf) => UvReadCb(handle, status, ref buf);
+        private readonly static LibuvFunctions.uv_alloc_cb _uv_alloc_cb = (
+            IntPtr handle,
+            int suggested_size,
+            out LibuvFunctions.uv_buf_t buf
+        ) => UvAllocCb(handle, suggested_size, out buf);
+        private readonly static LibuvFunctions.uv_read_cb _uv_read_cb = (
+            IntPtr handle,
+            int status,
+            ref LibuvFunctions.uv_buf_t buf
+        ) => UvReadCb(handle, status, ref buf);
 
         private Action<UvStreamHandle, int, UvException, object> _listenCallback;
         private object _listenState;
@@ -23,9 +34,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         private object _readState;
         private GCHandle _readVitality;
 
-        protected UvStreamHandle(ILibuvTrace logger) : base(logger)
-        {
-        }
+        protected UvStreamHandle(ILibuvTrace logger) : base(logger) { }
 
         protected override bool ReleaseHandle()
         {
@@ -40,11 +49,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             return base.ReleaseHandle();
         }
 
-        public void Listen(int backlog, Action<UvStreamHandle, int, UvException, object> callback, object state)
+        public void Listen(
+            int backlog,
+            Action<UvStreamHandle, int, UvException, object> callback,
+            object state
+        )
         {
             if (_listenVitality.IsAllocated)
             {
-                throw new InvalidOperationException("TODO: Listen may not be called more than once");
+                throw new InvalidOperationException(
+                    "TODO: Listen may not be called more than once"
+                );
             }
             try
             {
@@ -73,11 +88,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         public void ReadStart(
             Func<UvStreamHandle, int, object, LibuvFunctions.uv_buf_t> allocCallback,
             Action<UvStreamHandle, int, object> readCallback,
-            object state)
+            object state
+        )
         {
             if (_readVitality.IsAllocated)
             {
-                throw new InvalidOperationException("TODO: ReadStop must be called before ReadStart may be called again");
+                throw new InvalidOperationException(
+                    "TODO: ReadStop must be called before ReadStart may be called again"
+                );
             }
 
             try
@@ -136,7 +154,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             }
         }
 
-        private static void UvAllocCb(IntPtr handle, int suggested_size, out LibuvFunctions.uv_buf_t buf)
+        private static void UvAllocCb(
+            IntPtr handle,
+            int suggested_size,
+            out LibuvFunctions.uv_buf_t buf
+        )
         {
             var stream = FromIntPtr<UvStreamHandle>(handle);
             try
@@ -165,6 +187,5 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
                 throw;
             }
         }
-
     }
 }

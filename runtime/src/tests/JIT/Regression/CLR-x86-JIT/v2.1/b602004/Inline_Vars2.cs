@@ -2823,7 +2823,6 @@ public class Test_Inline_Vars2
     }
     static int Main()
     {
-
         (new Test_Inline_Vars2()).RunTest0_Inline();
 
         (new Test_Inline_Vars2()).RunTest1_Inline();
@@ -3626,11 +3625,8 @@ public class Test_Inline_Vars2
 
         (new Test_Inline_Vars2()).RunTest400_Inline();
         return 100;
-
     }
 
 
 
 }
-
-

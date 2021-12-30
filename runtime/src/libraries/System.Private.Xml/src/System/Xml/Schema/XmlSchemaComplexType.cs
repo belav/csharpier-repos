@@ -9,8 +9,12 @@ namespace System.Xml.Schema
 {
     public class XmlSchemaComplexType : XmlSchemaType
     {
-        private static readonly XmlSchemaComplexType s_anyTypeLax = CreateAnyType(XmlSchemaContentProcessing.Lax);
-        private static readonly XmlSchemaComplexType s_anyTypeSkip = CreateAnyType(XmlSchemaContentProcessing.Skip);
+        private static readonly XmlSchemaComplexType s_anyTypeLax = CreateAnyType(
+            XmlSchemaContentProcessing.Lax
+        );
+        private static readonly XmlSchemaComplexType s_anyTypeSkip = CreateAnyType(
+            XmlSchemaContentProcessing.Skip
+        );
         private static readonly XmlSchemaComplexType s_untypedAnyType = CreateUntypedAnyType();
 
         private XmlSchemaDerivationMethod _block = XmlSchemaDerivationMethod.None;
@@ -26,7 +30,6 @@ namespace System.Xml.Schema
         private XmlSchemaObjectTable? _attributeUses;
         private XmlSchemaAnyAttribute? _attributeWildcard;
 
-
         //additional info for Partial validation
         private byte _pvFlags;
         private const byte wildCardMask = 0x01;
@@ -39,7 +42,9 @@ namespace System.Xml.Schema
             // Create xdt:untypedAny
             var untypedAny = new XmlSchemaComplexType();
 
-            untypedAny.SetQualifiedName(new XmlQualifiedName("untypedAny", XmlReservedNs.NsXQueryDataType));
+            untypedAny.SetQualifiedName(
+                new XmlQualifiedName("untypedAny", XmlReservedNs.NsXQueryDataType)
+            );
             untypedAny.IsMixed = true;
             untypedAny.SetContentTypeParticle(s_anyTypeLax.ContentTypeParticle);
             untypedAny.SetContentType(XmlSchemaContentType.Mixed);
@@ -51,7 +56,9 @@ namespace System.Xml.Schema
             return untypedAny;
         }
 
-        private static XmlSchemaComplexType CreateAnyType(XmlSchemaContentProcessing processContents)
+        private static XmlSchemaComplexType CreateAnyType(
+            XmlSchemaContentProcessing processContents
+        )
         {
             XmlSchemaComplexType localAnyType = new XmlSchemaComplexType();
             localAnyType.SetQualifiedName(DatatypeImplementation.QnAnyType);
@@ -72,7 +79,9 @@ namespace System.Xml.Schema
             localAnyType.ElementDecl.SchemaType = localAnyType;
 
             //Create contentValidator for Any
-            ParticleContentValidator contentValidator = new ParticleContentValidator(XmlSchemaContentType.Mixed);
+            ParticleContentValidator contentValidator = new ParticleContentValidator(
+                XmlSchemaContentType.Mixed
+            );
             contentValidator.Start();
             contentValidator.OpenGroup();
             contentValidator.AddNamespaceList(anyElement.NamespaceList!, anyElement);
@@ -89,10 +98,7 @@ namespace System.Xml.Schema
             return localAnyType;
         }
 
-        public XmlSchemaComplexType()
-        {
-        }
-
+        public XmlSchemaComplexType() { }
 
         [XmlIgnore]
         internal static XmlSchemaComplexType AnyType
@@ -114,19 +120,13 @@ namespace System.Xml.Schema
 
         internal static ContentValidator AnyTypeContentValidator
         {
-            get
-            {
-                return s_anyTypeLax.ElementDecl!.ContentValidator!;
-            }
+            get { return s_anyTypeLax.ElementDecl!.ContentValidator!; }
         }
 
         [XmlAttribute("abstract"), DefaultValue(false)]
         public bool IsAbstract
         {
-            get
-            {
-                return (_pvFlags & isAbstractMask) != 0;
-            }
+            get { return (_pvFlags & isAbstractMask) != 0; }
             set
             {
                 if (value)
@@ -150,10 +150,7 @@ namespace System.Xml.Schema
         [XmlAttribute("mixed"), DefaultValue(false)]
         public override bool IsMixed
         {
-            get
-            {
-                return (_pvFlags & isMixedMask) != 0;
-            }
+            get { return (_pvFlags & isMixedMask) != 0; }
             set
             {
                 if (value)
@@ -167,27 +164,32 @@ namespace System.Xml.Schema
             }
         }
 
-
-        [XmlElement("simpleContent", typeof(XmlSchemaSimpleContent)),
-         XmlElement("complexContent", typeof(XmlSchemaComplexContent))]
+        [
+            XmlElement("simpleContent", typeof(XmlSchemaSimpleContent)),
+            XmlElement("complexContent", typeof(XmlSchemaComplexContent))
+        ]
         public XmlSchemaContentModel? ContentModel
         {
             get { return _contentModel; }
             set { _contentModel = value; }
         }
 
-        [XmlElement("group", typeof(XmlSchemaGroupRef)),
-         XmlElement("choice", typeof(XmlSchemaChoice)),
-         XmlElement("all", typeof(XmlSchemaAll)),
-         XmlElement("sequence", typeof(XmlSchemaSequence))]
+        [
+            XmlElement("group", typeof(XmlSchemaGroupRef)),
+            XmlElement("choice", typeof(XmlSchemaChoice)),
+            XmlElement("all", typeof(XmlSchemaAll)),
+            XmlElement("sequence", typeof(XmlSchemaSequence))
+        ]
         public XmlSchemaParticle? Particle
         {
             get { return _particle; }
             set { _particle = value; }
         }
 
-        [XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))]
+        [
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))
+        ]
         public XmlSchemaObjectCollection Attributes
         {
             get
@@ -206,7 +208,6 @@ namespace System.Xml.Schema
             get { return _anyAttribute; }
             set { _anyAttribute = value; }
         }
-
 
         [XmlIgnore]
         public XmlSchemaContentType ContentType
@@ -275,10 +276,7 @@ namespace System.Xml.Schema
 
         internal bool HasWildCard
         {
-            get
-            {
-                return (_pvFlags & wildCardMask) != 0;
-            }
+            get { return (_pvFlags & wildCardMask) != 0; }
             set
             {
                 if (value)
@@ -342,7 +340,9 @@ namespace System.Xml.Schema
 
         internal override XmlSchemaObject Clone()
         {
-            System.Diagnostics.Debug.Fail("Should never call Clone() on XmlSchemaComplexType. Call Clone(XmlSchema) instead.");
+            System.Diagnostics.Debug.Fail(
+                "Should never call Clone() on XmlSchemaComplexType. Call Clone(XmlSchema) instead."
+            );
             return Clone(null);
         }
 
@@ -353,23 +353,29 @@ namespace System.Xml.Schema
             //Deep clone the QNames as these will be updated on chameleon includes
             if (complexType.ContentModel != null)
             { //simpleContent or complexContent
-                XmlSchemaSimpleContent? simpleContent = complexType.ContentModel as XmlSchemaSimpleContent;
+                XmlSchemaSimpleContent? simpleContent =
+                    complexType.ContentModel as XmlSchemaSimpleContent;
                 if (simpleContent != null)
                 {
-                    XmlSchemaSimpleContent newSimpleContent = (XmlSchemaSimpleContent)simpleContent.Clone();
+                    XmlSchemaSimpleContent newSimpleContent =
+                        (XmlSchemaSimpleContent)simpleContent.Clone();
 
-                    XmlSchemaSimpleContentExtension? simpleExt = simpleContent.Content as XmlSchemaSimpleContentExtension;
+                    XmlSchemaSimpleContentExtension? simpleExt =
+                        simpleContent.Content as XmlSchemaSimpleContentExtension;
                     if (simpleExt != null)
                     {
-                        XmlSchemaSimpleContentExtension newSimpleExt = (XmlSchemaSimpleContentExtension)simpleExt.Clone();
+                        XmlSchemaSimpleContentExtension newSimpleExt =
+                            (XmlSchemaSimpleContentExtension)simpleExt.Clone();
                         newSimpleExt.BaseTypeName = simpleExt.BaseTypeName.Clone();
                         newSimpleExt.SetAttributes(CloneAttributes(simpleExt.Attributes));
                         newSimpleContent.Content = newSimpleExt;
                     }
                     else
                     { //simpleContent.Content is XmlSchemaSimpleContentRestriction
-                        XmlSchemaSimpleContentRestriction simpleRest = (XmlSchemaSimpleContentRestriction)simpleContent.Content!;
-                        XmlSchemaSimpleContentRestriction newSimpleRest = (XmlSchemaSimpleContentRestriction)simpleRest.Clone();
+                        XmlSchemaSimpleContentRestriction simpleRest =
+                            (XmlSchemaSimpleContentRestriction)simpleContent.Content!;
+                        XmlSchemaSimpleContentRestriction newSimpleRest =
+                            (XmlSchemaSimpleContentRestriction)simpleRest.Clone();
                         newSimpleRest.BaseTypeName = simpleRest.BaseTypeName.Clone();
                         newSimpleRest.SetAttributes(CloneAttributes(simpleRest.Attributes));
                         newSimpleContent.Content = newSimpleRest;
@@ -379,30 +385,43 @@ namespace System.Xml.Schema
                 }
                 else
                 { // complexType.ContentModel is XmlSchemaComplexContent
-                    XmlSchemaComplexContent complexContent = (XmlSchemaComplexContent)complexType.ContentModel;
-                    XmlSchemaComplexContent newComplexContent = (XmlSchemaComplexContent)complexContent.Clone();
+                    XmlSchemaComplexContent complexContent =
+                        (XmlSchemaComplexContent)complexType.ContentModel;
+                    XmlSchemaComplexContent newComplexContent =
+                        (XmlSchemaComplexContent)complexContent.Clone();
 
-                    XmlSchemaComplexContentExtension? complexExt = complexContent.Content as XmlSchemaComplexContentExtension;
+                    XmlSchemaComplexContentExtension? complexExt =
+                        complexContent.Content as XmlSchemaComplexContentExtension;
                     if (complexExt != null)
                     {
-                        XmlSchemaComplexContentExtension newComplexExt = (XmlSchemaComplexContentExtension)complexExt.Clone();
+                        XmlSchemaComplexContentExtension newComplexExt =
+                            (XmlSchemaComplexContentExtension)complexExt.Clone();
                         newComplexExt.BaseTypeName = complexExt.BaseTypeName.Clone();
                         newComplexExt.SetAttributes(CloneAttributes(complexExt.Attributes));
                         if (HasParticleRef(complexExt.Particle, parentSchema))
                         {
-                            newComplexExt.Particle = CloneParticle(complexExt.Particle, parentSchema);
+                            newComplexExt.Particle = CloneParticle(
+                                complexExt.Particle,
+                                parentSchema
+                            );
                         }
                         newComplexContent.Content = newComplexExt;
                     }
                     else
                     { // complexContent.Content is XmlSchemaComplexContentRestriction
-                        XmlSchemaComplexContentRestriction complexRest = (complexContent.Content as XmlSchemaComplexContentRestriction)!;
-                        XmlSchemaComplexContentRestriction newComplexRest = (XmlSchemaComplexContentRestriction)complexRest.Clone();
+                        XmlSchemaComplexContentRestriction complexRest = (
+                            complexContent.Content as XmlSchemaComplexContentRestriction
+                        )!;
+                        XmlSchemaComplexContentRestriction newComplexRest =
+                            (XmlSchemaComplexContentRestriction)complexRest.Clone();
                         newComplexRest.BaseTypeName = complexRest.BaseTypeName.Clone();
                         newComplexRest.SetAttributes(CloneAttributes(complexRest.Attributes));
                         if (HasParticleRef(newComplexRest.Particle, parentSchema))
                         {
-                            newComplexRest.Particle = CloneParticle(newComplexRest.Particle, parentSchema);
+                            newComplexRest.Particle = CloneParticle(
+                                newComplexRest.Particle,
+                                parentSchema
+                            );
                         }
 
                         newComplexContent.Content = newComplexRest;
@@ -433,7 +452,9 @@ namespace System.Xml.Schema
             _blockResolved = XmlSchemaDerivationMethod.None;
         }
 
-        internal static XmlSchemaObjectCollection CloneAttributes(XmlSchemaObjectCollection attributes)
+        internal static XmlSchemaObjectCollection CloneAttributes(
+            XmlSchemaObjectCollection attributes
+        )
         {
             if (HasAttributeQNameRef(attributes))
             {
@@ -467,7 +488,10 @@ namespace System.Xml.Schema
             return attributes;
         }
 
-        private static XmlSchemaObjectCollection CloneGroupBaseParticles(XmlSchemaObjectCollection groupBaseParticles, XmlSchema? parentSchema)
+        private static XmlSchemaObjectCollection CloneGroupBaseParticles(
+            XmlSchemaObjectCollection groupBaseParticles,
+            XmlSchema? parentSchema
+        )
         {
             XmlSchemaObjectCollection newParticles = groupBaseParticles.Clone();
 
@@ -480,14 +504,20 @@ namespace System.Xml.Schema
         }
 
         [return: NotNullIfNotNull("particle")]
-        internal static XmlSchemaParticle? CloneParticle(XmlSchemaParticle? particle, XmlSchema? parentSchema)
+        internal static XmlSchemaParticle? CloneParticle(
+            XmlSchemaParticle? particle,
+            XmlSchema? parentSchema
+        )
         {
             XmlSchemaGroupBase? groupBase = particle as XmlSchemaGroupBase;
             if (groupBase != null)
             { //Choice or sequence
                 XmlSchemaGroupBase newGroupBase = groupBase;
 
-                XmlSchemaObjectCollection newGroupbaseParticles = CloneGroupBaseParticles(groupBase.Items, parentSchema);
+                XmlSchemaObjectCollection newGroupbaseParticles = CloneGroupBaseParticles(
+                    groupBase.Items,
+                    parentSchema
+                );
                 newGroupBase = (XmlSchemaGroupBase)groupBase.Clone();
                 newGroupBase.SetItems(newGroupbaseParticles);
                 return newGroupBase;
@@ -506,8 +536,14 @@ namespace System.Xml.Schema
                 //   - it references its type by name
                 //   - it's form (effective) is qualified (meaning it will inherint namespace from chameleon includes if that happens)
                 // then the element itself needs to be cloned.
-                if (oldElem != null && (!oldElem.RefName.IsEmpty || !oldElem.SchemaTypeName.IsEmpty ||
-                    GetResolvedElementForm(parentSchema, oldElem) == XmlSchemaForm.Qualified))
+                if (
+                    oldElem != null
+                    && (
+                        !oldElem.RefName.IsEmpty
+                        || !oldElem.SchemaTypeName.IsEmpty
+                        || GetResolvedElementForm(parentSchema, oldElem) == XmlSchemaForm.Qualified
+                    )
+                )
                 {
                     XmlSchemaElement newElem = (XmlSchemaElement)oldElem.Clone(parentSchema);
                     return newElem;
@@ -522,7 +558,10 @@ namespace System.Xml.Schema
         // The element form can be either specified on the element itself via the "form" attribute or
         //   if that one is not present its inheritted from the value of the elementFormDefault attribute on the owning
         //   schema.
-        private static XmlSchemaForm GetResolvedElementForm(XmlSchema? parentSchema, XmlSchemaElement element)
+        private static XmlSchemaForm GetResolvedElementForm(
+            XmlSchema? parentSchema,
+            XmlSchemaElement element
+        )
         {
             if (element.Form == XmlSchemaForm.None && parentSchema != null)
             {
@@ -555,8 +594,15 @@ namespace System.Xml.Schema
                         //   that's on purpose. This method is used to determine if we need to clone the whole particle.
                         //   If we do, then the CloneParticle is called and it will try to clone only
                         //   those elements which need cloning - and those are the ones matching this condition.
-                        if (elem != null && (!elem.RefName.IsEmpty || !elem.SchemaTypeName.IsEmpty ||
-                            GetResolvedElementForm(parentSchema, elem) == XmlSchemaForm.Qualified))
+                        if (
+                            elem != null
+                            && (
+                                !elem.RefName.IsEmpty
+                                || !elem.SchemaTypeName.IsEmpty
+                                || GetResolvedElementForm(parentSchema, elem)
+                                    == XmlSchemaForm.Qualified
+                            )
+                        )
                         {
                             foundRef = true;
                         }

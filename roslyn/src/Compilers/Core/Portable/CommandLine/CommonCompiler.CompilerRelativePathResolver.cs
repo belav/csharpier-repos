@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis
         {
             internal ICommonCompilerFileSystem FileSystem { get; }
 
-            internal CompilerRelativePathResolver(ICommonCompilerFileSystem fileSystem, ImmutableArray<string> searchPaths, string? baseDirectory)
-                : base(searchPaths, baseDirectory)
+            internal CompilerRelativePathResolver(
+                ICommonCompilerFileSystem fileSystem,
+                ImmutableArray<string> searchPaths,
+                string? baseDirectory
+            ) : base(searchPaths, baseDirectory)
             {
                 FileSystem = fileSystem;
             }

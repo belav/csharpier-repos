@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? rootNamespace,
             string? language,
             bool nullable,
-            string[]? args)
+            string[]? args
+        )
         {
             _reporter = reporter;
             _assembly = assembly;
@@ -64,9 +65,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 rootNamespace,
                 language,
                 nullable,
-                _args);
+                _args
+            );
 
-            _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, _args);
+            _servicesBuilder = new DesignTimeServicesBuilder(
+                assembly,
+                startupAssembly,
+                reporter,
+                _args
+            );
         }
 
         /// <summary>
@@ -79,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string name,
             string? outputDir,
             string? contextType,
-            string? @namespace)
+            string? @namespace
+        )
         {
             if (outputDir != null)
             {
@@ -93,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             if (string.Equals(name, contextClassName, StringComparison.Ordinal))
             {
                 throw new OperationException(
-                    DesignStrings.ConflictingContextAndMigrationName(name));
+                    DesignStrings.ConflictingContextAndMigrationName(name)
+                );
             }
 
             var services = _servicesBuilder.Build(context);
@@ -102,11 +111,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             using var scope = services.CreateScope();
             var scaffolder = scope.ServiceProvider.GetRequiredService<IMigrationsScaffolder>();
-            var migration =
-                string.IsNullOrEmpty(@namespace)
-                    // TODO: Honor _nullable (issue #18950)
-                    ? scaffolder.ScaffoldMigration(name, _rootNamespace ?? string.Empty, subNamespace, _language)
-                    : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
+            var migration = string.IsNullOrEmpty(@namespace)
+                // TODO: Honor _nullable (issue #18950)
+                ? scaffolder.ScaffoldMigration(
+                      name,
+                      _rootNamespace ?? string.Empty,
+                      subNamespace,
+                      _language
+                  )
+                : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
             return scaffolder.Save(_projectDir, migration, outputDir);
         }
 
@@ -123,12 +136,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var subPath = outputDir.Substring(_projectDir.Length);
 
             return !string.IsNullOrWhiteSpace(subPath)
-                ? string.Join(
+              ? string.Join(
                     ".",
                     subPath.Split(
                         new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
-                        StringSplitOptions.RemoveEmptyEntries))
-                : null;
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
+              : null;
         }
 
         /// <summary>
@@ -140,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         public virtual IEnumerable<MigrationInfo> GetMigrations(
             string? contextType,
             string? connectionString,
-            bool noConnect)
+            bool noConnect
+        )
         {
             using var context = _contextOperations.CreateContext(contextType);
 
@@ -162,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 {
                     appliedMigrations = new HashSet<string>(
                         context.Database.GetAppliedMigrations(),
-                        StringComparer.OrdinalIgnoreCase);
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -172,12 +189,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             return from id in migrationsAssembly.Migrations.Keys
-                   select new MigrationInfo
-                   {
-                       Id = id,
-                       Name = idGenerator.GetName(id),
-                       Applied = appliedMigrations?.Contains(id)
-                   };
+            select new MigrationInfo
+            {
+                Id = id,
+                Name = idGenerator.GetName(id),
+                Applied = appliedMigrations?.Contains(id)
+            };
         }
 
         /// <summary>
@@ -190,7 +207,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? fromMigration,
             string? toMigration,
             MigrationsSqlGenerationOptions options,
-            string? contextType)
+            string? contextType
+        )
         {
             using var context = _contextOperations.CreateContext(contextType);
             var services = _servicesBuilder.Build(context);
@@ -210,7 +228,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         public virtual void UpdateDatabase(
             string? targetMigration,
             string? connectionString,
-            string? contextType)
+            string? contextType
+        )
         {
             using (var context = _contextOperations.CreateContext(contextType))
             {
@@ -236,9 +255,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual MigrationFiles RemoveMigration(
-            string? contextType,
-            bool force)
+        public virtual MigrationFiles RemoveMigration(string? contextType, bool force)
         {
             using var context = _contextOperations.CreateContext(contextType);
             var services = _servicesBuilder.Build(context);
@@ -261,7 +278,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             if (migrator == null)
             {
                 var databaseProvider = services.GetService<IDatabaseProvider>();
-                throw new OperationException(DesignStrings.NonRelationalProvider(databaseProvider?.Name ?? "Unknown"));
+                throw new OperationException(
+                    DesignStrings.NonRelationalProvider(databaseProvider?.Name ?? "Unknown")
+                );
             }
         }
 
@@ -270,13 +289,20 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var assemblyName = _assembly.GetName();
             var options = services.GetRequiredService<IDbContextOptions>();
             var contextType = services.GetRequiredService<ICurrentDbContext>().Context.GetType();
-            var migrationsAssemblyName = RelationalOptionsExtension.Extract(options).MigrationsAssembly
+            var migrationsAssemblyName =
+                RelationalOptionsExtension.Extract(options).MigrationsAssembly
                 ?? contextType.Assembly.GetName().Name;
-            if (assemblyName.Name != migrationsAssemblyName
-                && assemblyName.FullName != migrationsAssemblyName)
+            if (
+                assemblyName.Name != migrationsAssemblyName
+                && assemblyName.FullName != migrationsAssemblyName
+            )
             {
                 throw new OperationException(
-                    DesignStrings.MigrationsAssemblyMismatch(assemblyName.Name, migrationsAssemblyName));
+                    DesignStrings.MigrationsAssemblyMismatch(
+                        assemblyName.Name,
+                        migrationsAssemblyName
+                    )
+                );
             }
         }
     }

@@ -225,7 +225,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="expandIncludes">Optionally, expand &lt;include&gt; elements.  No impact on non-source documentation comments.</param>
         /// <param name="cancellationToken">Token allowing cancellation of request.</param>
         /// <returns>The XML that would be written to the documentation file for the symbol.</returns>
-        string? GetDocumentationCommentXml(CultureInfo? preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default);
+        string? GetDocumentationCommentXml(
+            CultureInfo? preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Converts the symbol to a string representation.
@@ -256,7 +260,8 @@ namespace Microsoft.CodeAnalysis
         string ToMinimalDisplayString(
             SemanticModel semanticModel,
             int position,
-            SymbolDisplayFormat? format = null);
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Convert a symbol to an array of string parts, each of which has a kind. May be tailored
@@ -271,7 +276,8 @@ namespace Microsoft.CodeAnalysis
         ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
             SemanticModel semanticModel,
             int position,
-            SymbolDisplayFormat? format = null);
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Indicates that this symbol uses metadata that cannot be supported by the language.
@@ -310,6 +316,9 @@ namespace Microsoft.CodeAnalysis
         /// <param name="other">The other symbol to compare against</param>
         /// <param name="equalityComparer">The <see cref="SymbolEqualityComparer"/> to use when comparing symbols</param>
         /// <returns>True if the symbols are equivalent.</returns>
-        bool Equals([NotNullWhen(returnValue: true)] ISymbol? other, SymbolEqualityComparer equalityComparer);
+        bool Equals(
+            [NotNullWhen(returnValue: true)] ISymbol? other,
+            SymbolEqualityComparer equalityComparer
+        );
     }
 }

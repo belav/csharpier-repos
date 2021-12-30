@@ -12,9 +12,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             OperationStatus status,
             Document document,
             SyntaxToken invocationNameToken,
-            SyntaxNode methodDefinition)
-            : base(status.Flag, status.Reasons, document, invocationNameToken, methodDefinition)
-        {
-        }
+            SyntaxNode methodDefinition
+        ) : base(status.Flag, status.Reasons, document, invocationNameToken, methodDefinition) { }
     }
 }

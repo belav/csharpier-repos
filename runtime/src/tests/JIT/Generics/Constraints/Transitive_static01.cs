@@ -39,16 +39,32 @@ public class Test_Transitive_static01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-        Eval(GenClass<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(GenClass<FooStruct>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            GenClass<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            GenClass<FooStruct>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
-        Eval(GenStruct<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(GenStruct<FooStruct>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            GenStruct<FooClass>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            GenStruct<FooStruct>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
         if (result)
         {
@@ -61,6 +77,4 @@ public class Test_Transitive_static01
             return 1;
         }
     }
-
 }
-

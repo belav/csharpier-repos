@@ -26,7 +26,6 @@ class Program
             Console.WriteLine("Did not even get a NullReferenceException, need to know why!");
             return 666;
         }
-
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -34,8 +33,7 @@ class Program
     {
         for (int i = 0; i < 10; ++i)
         {
-            if (String.IsNullOrEmpty(x))
-            { }
+            if (String.IsNullOrEmpty(x)) { }
         }
     }
 }

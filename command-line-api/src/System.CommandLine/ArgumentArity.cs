@@ -10,7 +10,9 @@ using System.Diagnostics;
 namespace System.CommandLine
 {
     /// <inheritdoc />
-    [DebuggerDisplay("\\{{" + nameof(MinimumNumberOfValues) + "},{" + nameof(MaximumNumberOfValues) + "}\\}")]
+    [DebuggerDisplay(
+        "\\{{" + nameof(MinimumNumberOfValues) + "},{" + nameof(MaximumNumberOfValues) + "}\\}"
+    )]
     public class ArgumentArity : IArgumentArity
     {
         private const int MaximumArity = 100_000;
@@ -31,12 +33,16 @@ namespace System.CommandLine
 
             if (maximumNumberOfValues < minimumNumberOfValues)
             {
-                throw new ArgumentException($"{nameof(maximumNumberOfValues)} must be greater than or equal to {nameof(minimumNumberOfValues)}");
+                throw new ArgumentException(
+                    $"{nameof(maximumNumberOfValues)} must be greater than or equal to {nameof(minimumNumberOfValues)}"
+                );
             }
 
             if (maximumNumberOfValues > MaximumArity)
             {
-                throw new ArgumentException($"{nameof(maximumNumberOfValues)} must be less than or equal to {nameof(MaximumArity)}");
+                throw new ArgumentException(
+                    $"{nameof(maximumNumberOfValues)} must be less than or equal to {nameof(MaximumArity)}"
+                );
             }
 
             MinimumNumberOfValues = minimumNumberOfValues;
@@ -53,7 +59,8 @@ namespace System.CommandLine
             SymbolResult symbolResult,
             IArgument argument,
             int minimumNumberOfValues,
-            int maximumNumberOfValues)
+            int maximumNumberOfValues
+        )
         {
             var argumentResult = symbolResult switch
             {
@@ -72,7 +79,8 @@ namespace System.CommandLine
 
                 return new MissingArgumentConversionResult(
                     argument,
-                    symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult));
+                    symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult)
+                );
             }
 
             if (tokenCount > maximumNumberOfValues)
@@ -83,7 +91,8 @@ namespace System.CommandLine
                     {
                         return new TooManyArgumentsConversionResult(
                             argument,
-                            symbolResult!.LocalizationResources.ExpectsOneArgument(symbolResult));
+                            symbolResult!.LocalizationResources.ExpectsOneArgument(symbolResult)
+                        );
                     }
                 }
             }
@@ -125,17 +134,12 @@ namespace System.CommandLine
 
             var parent = parents.Count > 0 ? parents[0] : default;
 
-            if (typeof(IEnumerable).IsAssignableFrom(type) &&
-                type != typeof(string))
+            if (typeof(IEnumerable).IsAssignableFrom(type) && type != typeof(string))
             {
-                return parent is ICommand
-                           ? ZeroOrMore
-                           : OneOrMore;
+                return parent is ICommand ? ZeroOrMore : OneOrMore;
             }
 
-            if (parent is ICommand &&
-                (argument.HasDefaultValue ||
-                 type.IsNullable()))
+            if (parent is ICommand && (argument.HasDefaultValue || type.IsNullable()))
             {
                 return ZeroOrOne;
             }

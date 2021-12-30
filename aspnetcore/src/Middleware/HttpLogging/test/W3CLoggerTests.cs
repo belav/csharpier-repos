@@ -33,11 +33,25 @@ public class W3CLoggerTests
         };
         try
         {
-            await using (var logger = new TestW3CLogger(new OptionsWrapperMonitor<W3CLoggerOptions>(options), new HostingEnvironment(), NullLoggerFactory.Instance))
+            await using (
+                var logger = new TestW3CLogger(
+                    new OptionsWrapperMonitor<W3CLoggerOptions>(options),
+                    new HostingEnvironment(),
+                    NullLoggerFactory.Instance
+                )
+            )
             {
                 var elements = new string[W3CLoggingMiddleware._fieldsLength];
-                AddToList(elements, W3CLoggingMiddleware._dateIndex, _timestampOne.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
-                AddToList(elements, W3CLoggingMiddleware._timeIndex, _timestampOne.ToString("HH:mm:ss", CultureInfo.InvariantCulture));
+                AddToList(
+                    elements,
+                    W3CLoggingMiddleware._dateIndex,
+                    _timestampOne.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                );
+                AddToList(
+                    elements,
+                    W3CLoggingMiddleware._timeIndex,
+                    _timestampOne.ToString("HH:mm:ss", CultureInfo.InvariantCulture)
+                );
 
                 logger.Log(elements);
                 await logger.Processor.WaitForWrites(4).DefaultTimeout();
@@ -46,7 +60,10 @@ public class W3CLoggerTests
                 Assert.Equal("#Version: 1.0", lines[0]);
 
                 Assert.StartsWith("#Start-Date: ", lines[1]);
-                var startDate = DateTime.Parse(lines[1].Substring(13), CultureInfo.InvariantCulture);
+                var startDate = DateTime.Parse(
+                    lines[1].Substring(13),
+                    CultureInfo.InvariantCulture
+                );
                 // Assert that the log was written in the last 10 seconds
                 Assert.True(now.Subtract(startDate).TotalSeconds < 10);
 
@@ -68,12 +85,19 @@ public class W3CLoggerTests
         var now = DateTime.UtcNow;
         var options = new W3CLoggerOptions()
         {
-            LoggingFields = W3CLoggingFields.UriQuery | W3CLoggingFields.Host | W3CLoggingFields.ProtocolStatus,
+            LoggingFields =
+                W3CLoggingFields.UriQuery | W3CLoggingFields.Host | W3CLoggingFields.ProtocolStatus,
             LogDirectory = path
         };
         try
         {
-            await using (var logger = new TestW3CLogger(new OptionsWrapperMonitor<W3CLoggerOptions>(options), new HostingEnvironment(), NullLoggerFactory.Instance))
+            await using (
+                var logger = new TestW3CLogger(
+                    new OptionsWrapperMonitor<W3CLoggerOptions>(options),
+                    new HostingEnvironment(),
+                    NullLoggerFactory.Instance
+                )
+            )
             {
                 var elements = new string[W3CLoggingMiddleware._fieldsLength];
                 AddToList(elements, W3CLoggingMiddleware._uriQueryIndex, null);
@@ -87,7 +111,10 @@ public class W3CLoggerTests
                 Assert.Equal("#Version: 1.0", lines[0]);
 
                 Assert.StartsWith("#Start-Date: ", lines[1]);
-                var startDate = DateTime.Parse(lines[1].Substring(13), CultureInfo.InvariantCulture);
+                var startDate = DateTime.Parse(
+                    lines[1].Substring(13),
+                    CultureInfo.InvariantCulture
+                );
                 // Assert that the log was written in the last 10 seconds
                 Assert.True(now.Subtract(startDate).TotalSeconds < 10);
 

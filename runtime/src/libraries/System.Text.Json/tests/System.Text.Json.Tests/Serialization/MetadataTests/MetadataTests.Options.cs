@@ -32,7 +32,9 @@ namespace System.Text.Json.Serialization.Tests
 
             // Options can be binded only once.
             CauseInvalidOperationException(() => options.AddContext<MyJsonContext>());
-            CauseInvalidOperationException(() => options.AddContext<MyJsonContextThatSetsOptionsInParameterlessCtor>());
+            CauseInvalidOperationException(
+                () => options.AddContext<MyJsonContextThatSetsOptionsInParameterlessCtor>()
+            );
         }
 
         private static void CauseInvalidOperationException(Action action)
@@ -48,14 +50,20 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Context binds with options when instantiated with parameterless ctor.
             MyJsonContextThatSetsOptionsInParameterlessCtor context = new();
-            FieldInfo optionsField = typeof(JsonSerializerContext).GetField("_options", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo optionsField = typeof(JsonSerializerContext).GetField(
+                "_options",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(optionsField);
             Assert.NotNull((JsonSerializerOptions)optionsField.GetValue(context));
 
             // Those options are overwritten when context is binded via options.AddContext<TContext>();
             JsonSerializerOptions options = new();
             options.AddContext<MyJsonContextThatSetsOptionsInParameterlessCtor>(); // No error.
-            FieldInfo contextField = typeof(JsonSerializerOptions).GetField("_context", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo contextField = typeof(JsonSerializerOptions).GetField(
+                "_context",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(contextField);
             Assert.Same(options, ((JsonSerializerContext)contextField.GetValue(options)).Options);
         }
@@ -78,13 +86,17 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new();
             options.PropertyNameCaseInsensitive = true;
             options.AddContext<MyJsonContext>();
-            CauseInvalidOperationException(() => options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
+            CauseInvalidOperationException(
+                () => options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            );
 
             // Bind via context ctor
             options = new JsonSerializerOptions();
             MyJsonContext context = new MyJsonContext(options);
             Assert.Same(options, context.Options);
-            CauseInvalidOperationException(() => options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
+            CauseInvalidOperationException(
+                () => options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            );
         }
 
         private class MyJsonContext : JsonSerializerContext
@@ -93,15 +105,18 @@ namespace System.Text.Json.Serialization.Tests
 
             public MyJsonContext(JsonSerializerOptions options) : base(options) { }
 
-            public override JsonTypeInfo? GetTypeInfo(Type type) => throw new NotImplementedException();
+            public override JsonTypeInfo? GetTypeInfo(Type type) =>
+                throw new NotImplementedException();
 
             protected override JsonSerializerOptions? GeneratedSerializerOptions => null;
         }
 
         private class MyJsonContextThatSetsOptionsInParameterlessCtor : JsonSerializerContext
         {
-            public MyJsonContextThatSetsOptionsInParameterlessCtor() : base(new JsonSerializerOptions()) { }
-            public override JsonTypeInfo? GetTypeInfo(Type type) => throw new NotImplementedException();
+            public MyJsonContextThatSetsOptionsInParameterlessCtor()
+                : base(new JsonSerializerOptions()) { }
+            public override JsonTypeInfo? GetTypeInfo(Type type) =>
+                throw new NotImplementedException();
             protected override JsonSerializerOptions? GeneratedSerializerOptions => null;
         }
     }

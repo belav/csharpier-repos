@@ -17,44 +17,59 @@ using Microsoft.CodeAnalysis.UseCollectionInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseCollectionInitializer), Shared]
-    internal class CSharpUseCollectionInitializerCodeFixProvider :
-        AbstractUseCollectionInitializerCodeFixProvider<
-            SyntaxKind,
-            ExpressionSyntax,
-            StatementSyntax,
-            ObjectCreationExpressionSyntax,
-            MemberAccessExpressionSyntax,
-            InvocationExpressionSyntax,
-            ExpressionStatementSyntax,
-            VariableDeclaratorSyntax>
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseCollectionInitializer
+        ),
+        Shared
+    ]
+    internal class CSharpUseCollectionInitializerCodeFixProvider
+        : AbstractUseCollectionInitializerCodeFixProvider<
+              SyntaxKind,
+              ExpressionSyntax,
+              StatementSyntax,
+              ObjectCreationExpressionSyntax,
+              MemberAccessExpressionSyntax,
+              InvocationExpressionSyntax,
+              ExpressionStatementSyntax,
+              VariableDeclaratorSyntax
+          >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseCollectionInitializerCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseCollectionInitializerCodeFixProvider() { }
 
         protected override StatementSyntax GetNewStatement(
             StatementSyntax statement,
             ObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<ExpressionStatementSyntax> matches)
+            ImmutableArray<ExpressionStatementSyntax> matches
+        )
         {
             return statement.ReplaceNode(
                 objectCreation,
-                GetNewObjectCreation(objectCreation, matches));
+                GetNewObjectCreation(objectCreation, matches)
+            );
         }
 
         private static ObjectCreationExpressionSyntax GetNewObjectCreation(
             ObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<ExpressionStatementSyntax> matches)
+            ImmutableArray<ExpressionStatementSyntax> matches
+        )
         {
             return UseInitializerHelpers.GetNewObjectCreation(
-                objectCreation, CreateExpressions(matches));
+                objectCreation,
+                CreateExpressions(matches)
+            );
         }
 
         private static SeparatedSyntaxList<ExpressionSyntax> CreateExpressions(
-            ImmutableArray<ExpressionStatementSyntax> matches)
+            ImmutableArray<ExpressionStatementSyntax> matches
+        )
         {
             var nodesAndTokens = new List<SyntaxNodeOrToken>();
             for (var i = 0; i < matches.Length; i++)
@@ -68,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 if (i < matches.Length - 1)
                 {
                     nodesAndTokens.Add(newExpression);
-                    var commaToken = SyntaxFactory.Token(SyntaxKind.CommaToken)
+                    var commaToken = SyntaxFactory
+                        .Token(SyntaxKind.CommaToken)
                         .WithTriviaFrom(expressionStatement.SemicolonToken);
 
                     nodesAndTokens.Add(commaToken);
@@ -76,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 else
                 {
                     newExpression = newExpression.WithTrailingTrivia(
-                        expressionStatement.GetTrailingTrivia());
+                        expressionStatement.GetTrailingTrivia()
+                    );
                     nodesAndTokens.Add(newExpression);
                 }
             }
@@ -102,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
         {
             var elementAccess = (ElementAccessExpressionSyntax)assignment.Left;
             return assignment.WithLeft(
-                SyntaxFactory.ImplicitElementAccess(elementAccess.ArgumentList));
+                SyntaxFactory.ImplicitElementAccess(elementAccess.ArgumentList)
+            );
         }
 
         private static ExpressionSyntax ConvertInvocation(InvocationExpressionSyntax invocation)
@@ -111,14 +129,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 
             if (arguments.Count == 1)
             {
-                // Assignment expressions in a collection initializer will cause the compiler to 
+                // Assignment expressions in a collection initializer will cause the compiler to
                 // report an error.  This is because { a = b } is the form for an object initializer,
                 // and the two forms are not allowed to mix/match.  Parenthesize the assignment to
                 // avoid the ambiguity.
                 var expression = arguments[0].Expression;
                 return SyntaxFacts.IsAssignmentExpression(expression.Kind())
-                    ? SyntaxFactory.ParenthesizedExpression(expression)
-                    : expression;
+                  ? SyntaxFactory.ParenthesizedExpression(expression)
+                  : expression;
             }
 
             return SyntaxFactory.InitializerExpression(
@@ -126,8 +144,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 SyntaxFactory.Token(SyntaxKind.OpenBraceToken).WithoutTrivia(),
                 SyntaxFactory.SeparatedList(
                     arguments.Select(a => a.Expression),
-                    arguments.GetSeparators()),
-                SyntaxFactory.Token(SyntaxKind.CloseBraceToken).WithoutTrivia());
+                    arguments.GetSeparators()
+                ),
+                SyntaxFactory.Token(SyntaxKind.CloseBraceToken).WithoutTrivia()
+            );
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,231 +14,235 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Linq;
-	using System.Reflection;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
 
-	public abstract partial class DictionaryAdapterBase
-	{
-		private int suppressEditingCount = 0;
-		private Stack<Dictionary<string, Edit>> updates;
-		private HashSet<IEditableObject> editDependencies;
-		
-		struct Edit
-		{
-			public Edit(PropertyDescriptor property, object propertyValue)
-			{
-				Property = property;
-				PropertyValue = propertyValue;
-			}
-			public readonly PropertyDescriptor Property;
-			public object PropertyValue;
-		}
+    public abstract partial class DictionaryAdapterBase
+    {
+        private int suppressEditingCount = 0;
+        private Stack<Dictionary<string, Edit>> updates;
+        private HashSet<IEditableObject> editDependencies;
 
-		public bool CanEdit
-		{
-			get { return suppressEditingCount == 0 && updates != null; }
-			set { updates = value ? new Stack<Dictionary<string, Edit>>() : null; }
-		}
+        struct Edit
+        {
+            public Edit(PropertyDescriptor property, object propertyValue)
+            {
+                Property = property;
+                PropertyValue = propertyValue;
+            }
+            public readonly PropertyDescriptor Property;
+            public object PropertyValue;
+        }
 
-		public bool IsEditing
-		{
-			get { return CanEdit && updates != null && updates.Count > 0; }
-		}
+        public bool CanEdit
+        {
+            get { return suppressEditingCount == 0 && updates != null; }
+            set { updates = value ? new Stack<Dictionary<string, Edit>>() : null; }
+        }
 
-		public bool SupportsMultiLevelEdit { get; set; }
+        public bool IsEditing
+        {
+            get { return CanEdit && updates != null && updates.Count > 0; }
+        }
 
-		public bool IsChanged
-		{
-			get
-			{
-				if (IsEditing && updates.Any(level => level.Count > 0))
-					return true;
+        public bool SupportsMultiLevelEdit { get; set; }
 
-				return This.Properties.Values
-					.Where(prop => typeof(IChangeTracking).IsAssignableFrom(prop.PropertyType))
-					.Select(prop => GetProperty(prop.PropertyName, true))
-					.Cast<IChangeTracking>().Any(track => track != null && track.IsChanged);
-			}
-		}
+        public bool IsChanged
+        {
+            get
+            {
+                if (IsEditing && updates.Any(level => level.Count > 0))
+                    return true;
 
-		public void BeginEdit()
-		{
-			if (CanEdit && (IsEditing == false || SupportsMultiLevelEdit))
-			{
-				updates.Push(new Dictionary<string, Edit>());
-			}
-		}
+                return This.Properties.Values
+                    .Where(prop => typeof(IChangeTracking).IsAssignableFrom(prop.PropertyType))
+                    .Select(prop => GetProperty(prop.PropertyName, true))
+                    .Cast<IChangeTracking>()
+                    .Any(track => track != null && track.IsChanged);
+            }
+        }
 
-		public void CancelEdit()
-		{
-			if (IsEditing)
-			{
-				if (editDependencies != null)
-				{
-					foreach (var editDependency in editDependencies.ToArray())
-					{
-						editDependency.CancelEdit();
-					}
-					editDependencies.Clear();
-				}
+        public void BeginEdit()
+        {
+            if (CanEdit && (IsEditing == false || SupportsMultiLevelEdit))
+            {
+                updates.Push(new Dictionary<string, Edit>());
+            }
+        }
 
-				using (SuppressEditingBlock())
-				{
-					using (TrackReadonlyPropertyChanges())
-					{
-						var top = updates.Peek();
+        public void CancelEdit()
+        {
+            if (IsEditing)
+            {
+                if (editDependencies != null)
+                {
+                    foreach (var editDependency in editDependencies.ToArray())
+                    {
+                        editDependency.CancelEdit();
+                    }
+                    editDependencies.Clear();
+                }
 
-						if (top.Count > 0)
-						{
-							foreach (var update in top.Values)
-							{
-								var existing = update;
-								existing.PropertyValue = GetProperty(existing.Property.PropertyName, true);
-							}
+                using (SuppressEditingBlock())
+                {
+                    using (TrackReadonlyPropertyChanges())
+                    {
+                        var top = updates.Peek();
 
-							updates.Pop();
+                        if (top.Count > 0)
+                        {
+                            foreach (var update in top.Values)
+                            {
+                                var existing = update;
+                                existing.PropertyValue = GetProperty(
+                                    existing.Property.PropertyName,
+                                    true
+                                );
+                            }
 
-							foreach (var update in top.Values.ToArray())
-							{
-								var oldValue = update.PropertyValue;
-								var newValue = GetProperty(update.Property.PropertyName, true);
-								
-								if (!object.Equals(oldValue, newValue))
-								{
+                            updates.Pop();
 
-									NotifyPropertyChanging(update.Property, oldValue, newValue);
-									NotifyPropertyChanged(update.Property, oldValue, newValue);
+                            foreach (var update in top.Values.ToArray())
+                            {
+                                var oldValue = update.PropertyValue;
+                                var newValue = GetProperty(update.Property.PropertyName, true);
 
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+                                if (!object.Equals(oldValue, newValue))
+                                {
+                                    NotifyPropertyChanging(update.Property, oldValue, newValue);
+                                    NotifyPropertyChanged(update.Property, oldValue, newValue);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		public void EndEdit()
-		{
-			if (IsEditing)
-			{
-				using (SuppressEditingBlock())
-				{
-					var top = updates.Pop();
+        public void EndEdit()
+        {
+            if (IsEditing)
+            {
+                using (SuppressEditingBlock())
+                {
+                    var top = updates.Pop();
 
-					if (top.Count > 0) foreach (var update in top.ToArray())
-					{
-						StoreProperty(null, update.Key, update.Value.PropertyValue);
-					}
-				}
-				
-				if (editDependencies != null)
-				{
-					foreach (var editDependency in editDependencies.ToArray())
-					{
-						editDependency.EndEdit();
-					}
-					editDependencies.Clear();
-				}
-			}
-		}
+                    if (top.Count > 0)
+                        foreach (var update in top.ToArray())
+                        {
+                            StoreProperty(null, update.Key, update.Value.PropertyValue);
+                        }
+                }
 
-		public void RejectChanges()
-		{
-			CancelEdit();
-		}
+                if (editDependencies != null)
+                {
+                    foreach (var editDependency in editDependencies.ToArray())
+                    {
+                        editDependency.EndEdit();
+                    }
+                    editDependencies.Clear();
+                }
+            }
+        }
 
-		public void AcceptChanges()
-		{
-			EndEdit();
-		}
+        public void RejectChanges()
+        {
+            CancelEdit();
+        }
 
-		public IDisposable SuppressEditingBlock()
-		{
-			return new SuppressEditingScope(this);
-		}
+        public void AcceptChanges()
+        {
+            EndEdit();
+        }
 
-		public void SuppressEditing()
-		{
-			++suppressEditingCount;
-		}
+        public IDisposable SuppressEditingBlock()
+        {
+            return new SuppressEditingScope(this);
+        }
 
-		public void ResumeEditing()
-		{
-			--suppressEditingCount;
-		}
+        public void SuppressEditing()
+        {
+            ++suppressEditingCount;
+        }
 
-		protected bool GetEditedProperty(string propertyName, out object propertyValue)
-		{
-			if (updates != null) foreach (var level in updates.ToArray())
-			{
-				Edit edit;
-				if (level.TryGetValue(propertyName, out edit))
-				{
-					propertyValue = edit.PropertyValue;
-					return true;
-				}
-			}
-			propertyValue = null;
-			return false;
-		}
+        public void ResumeEditing()
+        {
+            --suppressEditingCount;
+        }
 
-		protected bool EditProperty(PropertyDescriptor property, string key, object propertyValue)
-		{
-			if (IsEditing)
-			{
-				updates.Peek()[key] = new Edit(property, propertyValue);
-				return true;
-			}
-			return false;
-		}
+        protected bool GetEditedProperty(string propertyName, out object propertyValue)
+        {
+            if (updates != null)
+                foreach (var level in updates.ToArray())
+                {
+                    Edit edit;
+                    if (level.TryGetValue(propertyName, out edit))
+                    {
+                        propertyValue = edit.PropertyValue;
+                        return true;
+                    }
+                }
+            propertyValue = null;
+            return false;
+        }
 
-		protected bool ClearEditProperty(PropertyDescriptor property, string key)
-		{
-			if (IsEditing)
-			{
-				updates.Peek().Remove(key);
-				return true;
-			}
-			return false;
-		}
+        protected bool EditProperty(PropertyDescriptor property, string key, object propertyValue)
+        {
+            if (IsEditing)
+            {
+                updates.Peek()[key] = new Edit(property, propertyValue);
+                return true;
+            }
+            return false;
+        }
 
-		protected void AddEditDependency(IEditableObject editDependency)
-		{
-			if (IsEditing)
-			{
-				if (editDependencies == null)
-				{
-					editDependencies = new HashSet<IEditableObject>();
-				}
+        protected bool ClearEditProperty(PropertyDescriptor property, string key)
+        {
+            if (IsEditing)
+            {
+                updates.Peek().Remove(key);
+                return true;
+            }
+            return false;
+        }
 
-				if (editDependencies.Add(editDependency))
-				{
-					editDependency.BeginEdit();
-				}
-			}
-		}
+        protected void AddEditDependency(IEditableObject editDependency)
+        {
+            if (IsEditing)
+            {
+                if (editDependencies == null)
+                {
+                    editDependencies = new HashSet<IEditableObject>();
+                }
+
+                if (editDependencies.Add(editDependency))
+                {
+                    editDependency.BeginEdit();
+                }
+            }
+        }
 
 		#region Nested Class: SuppressEditingScope
 
-		class SuppressEditingScope : IDisposable
-		{
-			private readonly DictionaryAdapterBase adapter;
+        class SuppressEditingScope : IDisposable
+        {
+            private readonly DictionaryAdapterBase adapter;
 
-			public SuppressEditingScope(DictionaryAdapterBase adapter)
-			{
-				this.adapter = adapter;
-				this.adapter.SuppressEditing();
-			}
+            public SuppressEditingScope(DictionaryAdapterBase adapter)
+            {
+                this.adapter = adapter;
+                this.adapter.SuppressEditing();
+            }
 
-			public void Dispose()
-			{
-				adapter.ResumeEditing();
-			}
-		}
+            public void Dispose()
+            {
+                adapter.ResumeEditing();
+            }
+        }
 
 		#endregion
-	}
+    }
 }

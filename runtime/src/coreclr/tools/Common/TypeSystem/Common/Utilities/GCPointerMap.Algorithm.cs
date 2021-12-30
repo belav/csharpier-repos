@@ -14,7 +14,10 @@ namespace Internal.TypeSystem
         {
             Debug.Assert(type.ContainsGCPointers);
 
-            GCPointerMapBuilder builder = new GCPointerMapBuilder(type.InstanceByteCount.AsInt, type.Context.Target.PointerSize);
+            GCPointerMapBuilder builder = new GCPointerMapBuilder(
+                type.InstanceByteCount.AsInt,
+                type.Context.Target.PointerSize
+            );
             FromInstanceLayoutHelper(ref builder, type);
 
             return builder.ToGCMap();
@@ -25,7 +28,10 @@ namespace Internal.TypeSystem
             if (!type.IsValueType && type.HasBaseType)
             {
                 DefType baseType = type.BaseType;
-                GCPointerMapBuilder baseLayoutBuilder = builder.GetInnerBuilder(0, baseType.InstanceByteCount.AsInt);
+                GCPointerMapBuilder baseLayoutBuilder = builder.GetInnerBuilder(
+                    0,
+                    baseType.InstanceByteCount.AsInt
+                );
                 FromInstanceLayoutHelper(ref baseLayoutBuilder, baseType);
             }
 
@@ -44,8 +50,10 @@ namespace Internal.TypeSystem
                     var fieldDefType = (DefType)fieldType;
                     if (fieldDefType.ContainsGCPointers)
                     {
-                        GCPointerMapBuilder innerBuilder =
-                            builder.GetInnerBuilder(field.Offset.AsInt, fieldDefType.InstanceByteCount.AsInt);
+                        GCPointerMapBuilder innerBuilder = builder.GetInnerBuilder(
+                            field.Offset.AsInt,
+                            fieldDefType.InstanceByteCount.AsInt
+                        );
                         FromInstanceLayoutHelper(ref innerBuilder, fieldDefType);
                     }
                 }

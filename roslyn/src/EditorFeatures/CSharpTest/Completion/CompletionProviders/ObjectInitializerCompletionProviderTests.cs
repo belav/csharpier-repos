@@ -19,13 +19,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 {
     public class ObjectInitializerCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ObjectAndWithInitializerCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ObjectAndWithInitializerCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NothingToInitialize()
         {
-            var markup = @"
+            var markup =
+                @"
 class C { }
 
 class D
@@ -44,7 +45,8 @@ class D
         [WorkItem(46397, "https://github.com/dotnet/roslyn/issues/46397")]
         public async Task ImplicitObjectCreation_NothingToInitialize()
         {
-            var markup = @"
+            var markup =
+                @"
 class C { }
 
 class D
@@ -62,7 +64,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task OneItem1()
         {
-            var markup = @"
+            var markup =
+                @"
 class C { public int value {set; get; }}
 
 class D
@@ -82,7 +85,8 @@ class D
         [WorkItem(46397, "https://github.com/dotnet/roslyn/issues/46397")]
         public async Task ImplicitObjectCreation_OneItem1()
         {
-            var markup = @"
+            var markup =
+                @"
 class C { public int value {set; get; }}
 
 class D
@@ -101,7 +105,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ImplicitObjectCreation_NullableStruct_OneItem1()
         {
-            var markup = @"
+            var markup =
+                @"
 struct S { public int value {set; get; }}
 
 class D
@@ -120,7 +125,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ShowWithEqualsSign()
         {
-            var markup = @"
+            var markup =
+                @"
 class C { public int value {set; get; }}
 
 class D
@@ -139,7 +145,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task OneItem2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public int value {set; get; }
@@ -158,7 +165,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task FieldAndProperty()
         {
-            var markup = @"
+            var markup =
+                @"
 class C 
 { 
     public int value {set; get; }
@@ -181,7 +189,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task HidePreviouslyTyped()
         {
-            var markup = @"
+            var markup =
+                @"
 class C 
 { 
     public int value {set; get; }
@@ -204,7 +213,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInEqualsValue()
         {
-            var markup = @"
+            var markup =
+                @"
 class C 
 { 
     public int value {set; get; }
@@ -225,7 +235,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NothingLeftToShow()
         {
-            var markup = @"
+            var markup =
+                @"
 class C 
 { 
     public int value {set; get; }
@@ -247,7 +258,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NestedObjectInitializers()
         {
-            var markup = @"
+            var markup =
+                @"
 class C 
 { 
     public int value {set; get; }
@@ -275,7 +287,8 @@ class E
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotExclusive1()
         {
-            var markup = @"using System.Collections.Generic;
+            var markup =
+                @"using System.Collections.Generic;
 class C : IEnumerable<int>
 { 
     public void Add(int a) { }
@@ -296,7 +309,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotExclusive2()
         {
-            var markup = @"using System.Collections;
+            var markup =
+                @"using System.Collections;
 class C : IEnumerable
 { 
     public void Add(object a) { }
@@ -318,7 +332,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInArgumentList()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     void M(int i, int j)
     {
@@ -333,7 +348,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInArgumentList2()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
     public int A;
     void M(int i, int j)
@@ -349,7 +365,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DerivedMembers()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text; 
@@ -386,7 +403,8 @@ namespace ConsoleApplication1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInCollectionInitializer()
         {
-            var markup = @"using System.Collections.Generic;
+            var markup =
+                @"using System.Collections.Generic;
 class C
 {
     void goo()
@@ -401,7 +419,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InitializeDerivedType()
         {
-            var markup = @"using System.Collections.Generic;
+            var markup =
+                @"using System.Collections.Generic;
 
 class B {}
 class D : B
@@ -424,7 +443,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ReadOnlyPropertiesShouldNotBePresent()
         {
-            var markup = @"using System.Collections.Generic;
+            var markup =
+                @"using System.Collections.Generic;
 class C
 {
     void goo()
@@ -442,7 +462,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task IndexersShouldNotBePresent()
         {
-            var markup = @"using System.Collections.Generic;
+            var markup =
+                @"using System.Collections.Generic;
 class C
 {
     void goo()
@@ -459,7 +480,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ReadOnlyPropertiesThatFollowTheCollectionPatternShouldBePresent()
         {
-            var markup = @"using System.Collections.Generic;
+            var markup =
+                @"using System.Collections.Generic;
 class C
 {
     public readonly int goo;
@@ -480,7 +502,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DoNotIncludeStaticMember()
         {
-            var markup = @"
+            var markup =
+                @"
 class Goo
 {
     public static int Gibberish { get; set; }
@@ -502,7 +525,8 @@ class Bar
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EditorBrowsable_PropertyInObjectCreationAlways()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     public void M()
@@ -510,7 +534,8 @@ public class C
         var x = new Goo { $$
     }
 }";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class Goo
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
@@ -524,7 +549,8 @@ public class Goo
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -532,7 +558,8 @@ public class Goo
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EditorBrowsable_PropertyInObjectCreationNever()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     public void M()
@@ -540,7 +567,8 @@ public class C
         var x = new Goo { $$
     }
 }";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class Goo
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -553,7 +581,8 @@ public class Goo
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -561,7 +590,8 @@ public class Goo
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EditorBrowsable_PropertyInObjectCreationAdvanced()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     public void M()
@@ -569,7 +599,8 @@ public class C
         var x = new Goo { $$
     }
 }";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class Goo
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -584,7 +615,8 @@ public class Goo
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = false;
 
@@ -595,13 +627,15 @@ public class Goo
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCommitCharacter()
         {
-            const string markup = @"
+            const string markup =
+                @"
 class C { public int value {set; get; }}
 
 class D
@@ -618,7 +652,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestEnter()
         {
-            const string markup = @"
+            const string markup =
+                @"
 class C { public int value {set; get; }}
 
 class D
@@ -629,29 +664,44 @@ class D
     }
 }";
 
-            using var workspace = TestWorkspace.CreateCSharp(markup, exportProvider: ExportProvider);
+            using var workspace = TestWorkspace.CreateCSharp(
+                markup,
+                exportProvider: ExportProvider
+            );
             var hostDocument = workspace.Documents.Single();
             var position = hostDocument.CursorPosition.Value;
             var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
             var triggerInfo = CompletionTrigger.CreateInsertionTrigger('a');
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, position, triggerInfo);
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                position,
+                triggerInfo
+            );
             var item = completionList.Items.First();
 
-            Assert.False(CommitManager.SendEnterThroughToEditor(service.GetRules(CompletionOptions.Default), item, string.Empty), "Expected false from SendEnterThroughToEditor()");
+            Assert.False(
+                CommitManager.SendEnterThroughToEditor(
+                    service.GetRules(CompletionOptions.Default),
+                    item,
+                    string.Empty
+                ),
+                "Expected false from SendEnterThroughToEditor()"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
-        public void TestTrigger()
-            => TestCommonIsTextualTriggerCharacter();
+        public void TestTrigger() => TestCommonIsTextualTriggerCharacter();
 
         [WorkItem(530828, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530828")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task DoNotIncludeIndexedPropertyWithNonOptionalParameter()
         {
             var markup = @"C c01 = new C() {$$ }";
-            var referencedCode = @"Public Class C
+            var referencedCode =
+                @"Public Class C
     Public Property IndexProp(ByVal p1 As Integer) As String
         Get
             Return Nothing
@@ -670,14 +720,16 @@ End Class";
                 expectedSymbolsSameSolution: 0,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.VisualBasic);
+                referencedLanguage: LanguageNames.VisualBasic
+            );
         }
 
         [WorkItem(4754, "https://github.com/dotnet/roslyn/issues/4754")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CollectionInitializerPatternFromBaseType()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Collections;
 
@@ -720,7 +772,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CollectionInitializerPatternFromBaseTypeInaccessible()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Collections;
 
@@ -764,7 +817,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CollectionInitializerForInterfaceType1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Goo
@@ -789,7 +843,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CollectionInitializerForInterfaceType2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public interface ICustomCollection<T> : ICollection<T> { }
@@ -816,7 +871,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CollectionInitializerPatternFromBaseTypeAccessible()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Collections;
 
@@ -856,7 +912,8 @@ class Container
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ObjectInitializerOfGenericTypeConstructedWithInaccessibleType()
         {
-            var markup = @"
+            var markup =
+                @"
 class Generic<T>
 {
     public string Value { get; set; }
@@ -882,7 +939,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ObjectInitializerOfGenericTypeСonstraint1()
         {
-            var markup = @"
+            var markup =
+                @"
 internal interface IExample
 {
     string A { get; set; }
@@ -909,7 +967,8 @@ internal class Example
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ObjectInitializerOfGenericTypeСonstraint2()
         {
-            var markup = @"
+            var markup =
+                @"
 internal class Example
 {
     public static T Create<T>()
@@ -929,7 +988,8 @@ internal class Example
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ObjectInitializerOfGenericTypeСonstraint3()
         {
-            var markup = @"
+            var markup =
+                @"
 internal class Example
 {
     public static T Create<T>()
@@ -950,7 +1010,8 @@ internal class Example
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ObjectInitializerOfGenericTypeСonstraint4()
         {
-            var markup = @"
+            var markup =
+                @"
 internal class Example
 {
     public static T Create<T>()
@@ -970,7 +1031,8 @@ internal class Example
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ObjectInitializerEscapeKeywords()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public int @new { get; set; }
@@ -1000,7 +1062,8 @@ class D
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NestedPropertyInitializers1()
         {
-            var markup = @"
+            var markup =
+                @"
 class A
 {
     public B PropB { get; }
@@ -1027,7 +1090,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NestedPropertyInitializers2()
         {
-            var markup = @"
+            var markup =
+                @"
 class A
 {
     public B PropB { get; }
@@ -1059,7 +1123,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NestedPropertyInitializers3()
         {
-            var markup = @"
+            var markup =
+                @"
 class A
 {
     public B PropB { get; }
@@ -1105,7 +1170,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NestedPropertyInitializers4()
         {
-            var markup = @"
+            var markup =
+                @"
 class A
 {
     public B PropB { get; }
@@ -1137,7 +1203,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NestedPropertyInitializers5()
         {
-            var markup = @"
+            var markup =
+                @"
 class A
 {
     public B PropB { get; }
@@ -1168,7 +1235,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NestedPropertyInitializers6()
         {
-            var markup = @"
+            var markup =
+                @"
 class A
 {
     public B PropB { get; }
@@ -1197,18 +1265,29 @@ class Program
 
         private async Task VerifyExclusiveAsync(string markup, bool exclusive)
         {
-            using var workspace = TestWorkspace.CreateCSharp(markup, exportProvider: ExportProvider);
+            using var workspace = TestWorkspace.CreateCSharp(
+                markup,
+                exportProvider: ExportProvider
+            );
             var hostDocument = workspace.Documents.Single();
             var position = hostDocument.CursorPosition.Value;
             var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
             var triggerInfo = CompletionTrigger.CreateInsertionTrigger('a');
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, position, triggerInfo);
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                position,
+                triggerInfo
+            );
 
             if (completionList != null)
             {
-                Assert.True(exclusive == completionList.GetTestAccessor().IsExclusive, "group.IsExclusive == " + completionList.GetTestAccessor().IsExclusive);
+                Assert.True(
+                    exclusive == completionList.GetTestAccessor().IsExclusive,
+                    "group.IsExclusive == " + completionList.GetTestAccessor().IsExclusive
+                );
             }
         }
     }

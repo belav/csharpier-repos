@@ -16,24 +16,92 @@ public class CL
 }
 internal class test
 {
-    private static int f1(short a1, ushort a2, int a3, uint a4, long a5,
-            ulong a6, byte a7, sbyte a8, Decimal a9, int[] a10,
-            VT a11, CL a12, int a13, int a14, int a15,
-            int a16, int a17, int a18, int a19, int a20,
-            int a21, int a22, int a23, int a24, int a25)
+    private static int f1(
+        short a1,
+        ushort a2,
+        int a3,
+        uint a4,
+        long a5,
+        ulong a6,
+        byte a7,
+        sbyte a8,
+        Decimal a9,
+        int[] a10,
+        VT a11,
+        CL a12,
+        int a13,
+        int a14,
+        int a15,
+        int a16,
+        int a17,
+        int a18,
+        int a19,
+        int a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        int a25
+    )
     {
-        int sum = (int)(a1 + a2 + a3 + a4 + (int)a5 + (int)a6 + a7 + a8 + (int)a9 + a10[0]
-            + a11.m + a12.n + a13 + a14 + a15 + a16 + a17 + a18 + a19
-            + a20 + a21 + a22 + a23 + a24 + a25);
+        int sum = (int)(
+            a1
+            + a2
+            + a3
+            + a4
+            + (int)a5
+            + (int)a6
+            + a7
+            + a8
+            + (int)a9
+            + a10[0]
+            + a11.m
+            + a12.n
+            + a13
+            + a14
+            + a15
+            + a16
+            + a17
+            + a18
+            + a19
+            + a20
+            + a21
+            + a22
+            + a23
+            + a24
+            + a25
+        );
         Console.WriteLine("The sum is {0}", sum);
         return sum;
     }
 
-    private static int f(short a1, ushort a2, int a3, uint a4, long a5,
-            ulong a6, byte a7, sbyte a8, Decimal a9, int[] a10,
-            VT a11, CL a12, int a13, int a14, int a15,
-            int a16, int a17, int a18, int a19, int a20,
-            int a21, int a22, int a23, int a24, int a25)
+    private static int f(
+        short a1,
+        ushort a2,
+        int a3,
+        uint a4,
+        long a5,
+        ulong a6,
+        byte a7,
+        sbyte a8,
+        Decimal a9,
+        int[] a10,
+        VT a11,
+        CL a12,
+        int a13,
+        int a14,
+        int a15,
+        int a16,
+        int a17,
+        int a18,
+        int a19,
+        int a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        int a25
+    )
     {
         Console.WriteLine(a1);
         Console.WriteLine(a2);
@@ -60,8 +128,33 @@ internal class test
         Console.WriteLine(a23);
         Console.WriteLine(a24);
         Console.WriteLine(a25);
-        int sum = f1(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15,
-                a16, a17, a18, a19, a20, a21, a22, a23, a24, a25);
+        int sum = f1(
+            a1,
+            a2,
+            a3,
+            a4,
+            a5,
+            a6,
+            a7,
+            a8,
+            a9,
+            a10,
+            a11,
+            a12,
+            a13,
+            a14,
+            a15,
+            a16,
+            a17,
+            a18,
+            a19,
+            a20,
+            a21,
+            a22,
+            a23,
+            a24,
+            a25
+        );
         return sum;
     }
 
@@ -71,9 +164,36 @@ internal class test
         VT vt = new VT();
         vt.m = 11;
         CL cl = new CL(12);
-        int sum = f(1, 2, 3, 4, 5, 6, 7, 8, 9, new int[1] { 10 }, vt, cl, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25);
-        if (sum == 325) return 100;
-        else return 1;
+        int sum = f(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            new int[1] { 10 },
+            vt,
+            cl,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+        );
+        if (sum == 325)
+            return 100;
+        else
+            return 1;
     }
 }
-

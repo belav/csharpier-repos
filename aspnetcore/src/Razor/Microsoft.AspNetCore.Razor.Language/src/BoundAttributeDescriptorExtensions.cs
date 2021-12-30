@@ -26,7 +26,11 @@ public static class BoundAttributeDescriptorExtensions
             throw new ArgumentNullException(nameof(attribute));
         }
 
-        return string.Equals(attribute.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
+        return string.Equals(
+            attribute.Kind,
+            TagHelperConventions.DefaultKind,
+            StringComparison.Ordinal
+        );
     }
 
     internal static bool ExpectsStringValue(this BoundAttributeDescriptor attribute, string name)
@@ -36,7 +40,10 @@ public static class BoundAttributeDescriptorExtensions
             return true;
         }
 
-        var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(name, attribute);
+        var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(
+            name,
+            attribute
+        );
         return isIndexerNameMatch && attribute.IsIndexerStringProperty;
     }
 
@@ -47,7 +54,10 @@ public static class BoundAttributeDescriptorExtensions
             return true;
         }
 
-        var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(name, attribute);
+        var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(
+            name,
+            attribute
+        );
         return isIndexerNameMatch && attribute.IsIndexerBooleanProperty;
     }
 
@@ -58,9 +68,10 @@ public static class BoundAttributeDescriptorExtensions
             throw new ArgumentNullException(nameof(attribute));
         }
 
-        return
-            attribute.Metadata.TryGetValue(ComponentMetadata.Common.DirectiveAttribute, out var value) &&
-            string.Equals(bool.TrueString, value);
+        return attribute.Metadata.TryGetValue(
+                ComponentMetadata.Common.DirectiveAttribute,
+                out var value
+            ) && string.Equals(bool.TrueString, value);
     }
 
     public static bool IsDefaultKind(this BoundAttributeParameterDescriptor parameter)
@@ -70,7 +81,11 @@ public static class BoundAttributeDescriptorExtensions
             throw new ArgumentNullException(nameof(parameter));
         }
 
-        return string.Equals(parameter.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
+        return string.Equals(
+            parameter.Kind,
+            TagHelperConventions.DefaultKind,
+            StringComparison.Ordinal
+        );
     }
 
     public static string GetPropertyName(this BoundAttributeParameterDescriptor parameter)

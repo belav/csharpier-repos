@@ -9,13 +9,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public static new SqlServerAdventureWorksTestStoreFactory Instance { get; } = new();
 
-        protected SqlServerAdventureWorksTestStoreFactory()
-        {
-        }
+        protected SqlServerAdventureWorksTestStoreFactory() { }
 
-        public override TestStore GetOrCreate(string storeName)
-            => SqlServerTestStore.GetOrCreate(
+        public override TestStore GetOrCreate(string storeName) =>
+            SqlServerTestStore.GetOrCreate(
                 "adventureworks",
-                Path.Combine("SqlAzure", "adventureworks.sql"));
+                Path.Combine("SqlAzure", "adventureworks.sql")
+            );
     }
 }

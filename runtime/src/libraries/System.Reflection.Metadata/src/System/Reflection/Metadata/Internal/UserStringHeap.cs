@@ -16,7 +16,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal string GetString(UserStringHandle handle)
         {
-            int offset, size;
+            int offset,
+                size;
             if (!Block.PeekHeapValueOffsetAndSize(handle.GetHeapOffset(), out offset, out size))
             {
                 return string.Empty;
@@ -29,7 +30,8 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal UserStringHandle GetNextHandle(UserStringHandle handle)
         {
-            int offset, size;
+            int offset,
+                size;
             if (!Block.PeekHeapValueOffsetAndSize(handle.GetHeapOffset(), out offset, out size))
             {
                 return default(UserStringHandle);

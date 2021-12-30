@@ -12,16 +12,35 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
     internal static class UnitTestingBrokeredServiceImplementation
     {
-        public static ValueTask<T> RunServiceAsync<T>(Func<CancellationToken, ValueTask<T>> implementation, CancellationToken cancellationToken)
-            => BrokeredServiceBase.RunServiceImplAsync(implementation, cancellationToken);
+        public static ValueTask<T> RunServiceAsync<T>(
+            Func<CancellationToken, ValueTask<T>> implementation,
+            CancellationToken cancellationToken
+        ) => BrokeredServiceBase.RunServiceImplAsync(implementation, cancellationToken);
 
-        public static ValueTask RunServiceAsync(Func<CancellationToken, ValueTask> implementation, CancellationToken cancellationToken)
-            => BrokeredServiceBase.RunServiceImplAsync(implementation, cancellationToken);
+        public static ValueTask RunServiceAsync(
+            Func<CancellationToken, ValueTask> implementation,
+            CancellationToken cancellationToken
+        ) => BrokeredServiceBase.RunServiceImplAsync(implementation, cancellationToken);
 
-        public static ValueTask<Solution> GetSolutionAsync(this UnitTestingPinnedSolutionInfoWrapper solutionInfo, ServiceBrokerClient client, CancellationToken cancellationToken)
-            => RemoteWorkspaceManager.Default.GetSolutionAsync(client, solutionInfo.UnderlyingObject, cancellationToken);
+        public static ValueTask<Solution> GetSolutionAsync(
+            this UnitTestingPinnedSolutionInfoWrapper solutionInfo,
+            ServiceBrokerClient client,
+            CancellationToken cancellationToken
+        ) =>
+            RemoteWorkspaceManager.Default.GetSolutionAsync(
+                client,
+                solutionInfo.UnderlyingObject,
+                cancellationToken
+            );
 
-        public static UnitTestingIncrementalAnalyzerProvider? TryRegisterAnalyzerProvider(string analyzerName, IUnitTestingIncrementalAnalyzerProviderImplementation provider)
-            => UnitTestingIncrementalAnalyzerProvider.TryRegister(RemoteWorkspaceManager.Default.GetWorkspace(), analyzerName, provider);
+        public static UnitTestingIncrementalAnalyzerProvider? TryRegisterAnalyzerProvider(
+            string analyzerName,
+            IUnitTestingIncrementalAnalyzerProviderImplementation provider
+        ) =>
+            UnitTestingIncrementalAnalyzerProvider.TryRegister(
+                RemoteWorkspaceManager.Default.GetWorkspace(),
+                analyzerName,
+                provider
+            );
     }
 }

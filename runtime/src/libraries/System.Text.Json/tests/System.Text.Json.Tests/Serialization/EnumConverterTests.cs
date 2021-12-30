@@ -16,7 +16,10 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter());
 
-            WhenClass when = JsonSerializer.Deserialize<WhenClass>(@"{""Day"":""Monday""}", options);
+            WhenClass when = JsonSerializer.Deserialize<WhenClass>(
+                @"{""Day"":""Monday""}",
+                options
+            );
             Assert.Equal(DayOfWeek.Monday, when.Day);
             DayOfWeek day = JsonSerializer.Deserialize<DayOfWeek>(@"""Tuesday""", options);
             Assert.Equal(DayOfWeek.Tuesday, day);
@@ -65,19 +68,34 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter());
 
-            FileState state = JsonSerializer.Deserialize<FileState>(@"{""Attributes"":""ReadOnly""}", options);
+            FileState state = JsonSerializer.Deserialize<FileState>(
+                @"{""Attributes"":""ReadOnly""}",
+                options
+            );
             Assert.Equal(FileAttributes.ReadOnly, state.Attributes);
-            state = JsonSerializer.Deserialize<FileState>(@"{""Attributes"":""Directory, ReparsePoint""}", options);
+            state = JsonSerializer.Deserialize<FileState>(
+                @"{""Attributes"":""Directory, ReparsePoint""}",
+                options
+            );
             Assert.Equal(FileAttributes.Directory | FileAttributes.ReparsePoint, state.Attributes);
-            FileAttributes attributes = JsonSerializer.Deserialize<FileAttributes>(@"""Normal""", options);
+            FileAttributes attributes = JsonSerializer.Deserialize<FileAttributes>(
+                @"""Normal""",
+                options
+            );
             Assert.Equal(FileAttributes.Normal, attributes);
-            attributes = JsonSerializer.Deserialize<FileAttributes>(@"""System, SparseFile""", options);
+            attributes = JsonSerializer.Deserialize<FileAttributes>(
+                @"""System, SparseFile""",
+                options
+            );
             Assert.Equal(FileAttributes.System | FileAttributes.SparseFile, attributes);
 
             // We are case insensitive on read
             attributes = JsonSerializer.Deserialize<FileAttributes>(@"""OFFLINE""", options);
             Assert.Equal(FileAttributes.Offline, attributes);
-            attributes = JsonSerializer.Deserialize<FileAttributes>(@"""compressed, notcontentindexed""", options);
+            attributes = JsonSerializer.Deserialize<FileAttributes>(
+                @"""compressed, notcontentindexed""",
+                options
+            );
             Assert.Equal(FileAttributes.Compressed | FileAttributes.NotContentIndexed, attributes);
 
             // Numbers are cool by default
@@ -88,7 +106,10 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = JsonSerializer.Serialize(FileAttributes.Hidden, options);
             Assert.Equal(@"""Hidden""", json);
-            json = JsonSerializer.Serialize(FileAttributes.Temporary | FileAttributes.Offline, options);
+            json = JsonSerializer.Serialize(
+                FileAttributes.Temporary | FileAttributes.Offline,
+                options
+            );
             Assert.Equal(@"""Temporary, Offline""", json);
 
             // Try a unique casing
@@ -97,7 +118,10 @@ namespace System.Text.Json.Serialization.Tests
 
             json = JsonSerializer.Serialize(FileAttributes.NoScrubData, options);
             Assert.Equal(@"""noscrubdata""", json);
-            json = JsonSerializer.Serialize(FileAttributes.System | FileAttributes.Offline, options);
+            json = JsonSerializer.Serialize(
+                FileAttributes.System | FileAttributes.Offline,
+                options
+            );
             Assert.Equal(@"""system, offline""", json);
 
             // Undefined values should come out as a number (not a string)
@@ -107,21 +131,33 @@ namespace System.Text.Json.Serialization.Tests
             // Not permitting integers should throw
             options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter(allowIntegerValues: false));
-            Assert.Throws<JsonException>(() => JsonSerializer.Serialize((FileAttributes)(-1), options));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Serialize((FileAttributes)(-1), options)
+            );
 
             // Flag values honor naming policy correctly
             options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter(new SimpleSnakeCasePolicy()));
 
             json = JsonSerializer.Serialize(
-                FileAttributes.Directory | FileAttributes.Compressed | FileAttributes.IntegrityStream,
-                options);
+                FileAttributes.Directory
+                    | FileAttributes.Compressed
+                    | FileAttributes.IntegrityStream,
+                options
+            );
             Assert.Equal(@"""directory, compressed, integrity_stream""", json);
 
-            json = JsonSerializer.Serialize(FileAttributes.Compressed & FileAttributes.Device, options);
+            json = JsonSerializer.Serialize(
+                FileAttributes.Compressed & FileAttributes.Device,
+                options
+            );
             Assert.Equal(@"0", json);
 
-            json = JsonSerializer.Serialize(FileAttributes.Directory & FileAttributes.Compressed | FileAttributes.IntegrityStream, options);
+            json = JsonSerializer.Serialize(
+                FileAttributes.Directory & FileAttributes.Compressed
+                    | FileAttributes.IntegrityStream,
+                options
+            );
             Assert.Equal(@"""integrity_stream""", json);
         }
 
@@ -141,17 +177,23 @@ namespace System.Text.Json.Serialization.Tests
 
         private class LowerCaseEnumConverter : JsonStringEnumConverter
         {
-            public LowerCaseEnumConverter() : base(new ToLowerNamingPolicy())
-            {
-            }
+            public LowerCaseEnumConverter() : base(new ToLowerNamingPolicy()) { }
         }
 
         [Fact]
         public void ConvertEnumUsingAttributes()
         {
-            Week week = new Week { WorkStart = DayOfWeek.Monday, WorkEnd = DayOfWeek.Friday, WeekEnd = DayOfWeek.Saturday };
+            Week week = new Week
+            {
+                WorkStart = DayOfWeek.Monday,
+                WorkEnd = DayOfWeek.Friday,
+                WeekEnd = DayOfWeek.Saturday
+            };
             string json = JsonSerializer.Serialize(week);
-            Assert.Equal(@"{""WorkStart"":""Monday"",""WorkEnd"":5,""WeekEnd"":""saturday""}", json);
+            Assert.Equal(
+                @"{""WorkStart"":""Monday"",""WorkEnd"":5,""WeekEnd"":""saturday""}",
+                json
+            );
 
             week = JsonSerializer.Deserialize<Week>(json);
             Assert.Equal(DayOfWeek.Monday, week.WorkStart);
@@ -162,7 +204,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public void EnumConverterComposition()
         {
-            JsonSerializerOptions options = new JsonSerializerOptions { Converters = { new NoFlagsStringEnumConverter() } };
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                Converters = { new NoFlagsStringEnumConverter() }
+            };
             string json = JsonSerializer.Serialize(DayOfWeek.Monday, options);
             Assert.Equal(@"""Monday""", json);
             json = JsonSerializer.Serialize(FileAccess.Read);
@@ -171,13 +216,17 @@ namespace System.Text.Json.Serialization.Tests
 
         public class NoFlagsStringEnumConverter : JsonConverterFactory
         {
-            private static JsonStringEnumConverter s_stringEnumConverter = new JsonStringEnumConverter();
+            private static JsonStringEnumConverter s_stringEnumConverter =
+                new JsonStringEnumConverter();
 
-            public override bool CanConvert(Type typeToConvert)
-                => typeToConvert.IsEnum && !typeToConvert.IsDefined(typeof(FlagsAttribute), inherit: false);
+            public override bool CanConvert(Type typeToConvert) =>
+                typeToConvert.IsEnum
+                && !typeToConvert.IsDefined(typeof(FlagsAttribute), inherit: false);
 
-            public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-                => s_stringEnumConverter.CreateConverter(typeToConvert, options);
+            public override JsonConverter CreateConverter(
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => s_stringEnumConverter.CreateConverter(typeToConvert, options);
         }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -313,7 +362,11 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact, OuterLoop]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/42677", platforms: TestPlatforms.Windows, runtimes: TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/42677",
+            platforms: TestPlatforms.Windows,
+            runtimes: TestRuntimes.Mono
+        )]
         public static void VeryLargeAmountOfEnumDictionaryKeysToSerialize()
         {
             // Ensure we don't throw OutOfMemoryException.
@@ -422,7 +475,6 @@ namespace System.Text.Json.Serialization.Tests
             public override Dictionary<SampleEnumSByte, int> BuildDictionary(int i) =>
                 new Dictionary<SampleEnumSByte, int> { { (SampleEnumSByte)i, i } };
         }
-
 
         [Flags]
         public enum SampleEnumInt32

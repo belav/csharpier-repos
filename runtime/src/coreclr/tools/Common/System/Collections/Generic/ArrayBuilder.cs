@@ -74,22 +74,13 @@ namespace System.Collections.Generic
 
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         public T this[int index]
         {
-            get
-            {
-                return _items[index];
-            }
-            set
-            {
-                _items[index] = value;
-            }
+            get { return _items[index]; }
+            set { _items[index] = value; }
         }
 
         public bool Contains(T t)

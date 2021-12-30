@@ -27,16 +27,13 @@ namespace Roslyn.Test.Utilities.TestGenerators
             context.AddSource(this._hintName, SourceText.From(_content, Encoding.UTF8));
         }
 
-        public void Initialize(GeneratorInitializationContext context)
-        {
-        }
+        public void Initialize(GeneratorInitializationContext context) { }
     }
 
     internal class SingleFileTestGenerator2 : SingleFileTestGenerator
     {
-        public SingleFileTestGenerator2(string content, string hintName = "generatedFile") : base(content, hintName)
-        {
-        }
+        public SingleFileTestGenerator2(string content, string hintName = "generatedFile")
+            : base(content, hintName) { }
     }
 
     internal class CallbackGenerator : ISourceGenerator
@@ -45,7 +42,11 @@ namespace Roslyn.Test.Utilities.TestGenerators
         private readonly Action<GeneratorExecutionContext> _onExecute;
         private readonly string? _source;
 
-        public CallbackGenerator(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, string? source = "")
+        public CallbackGenerator(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            string? source = ""
+        )
         {
             _onInit = onInit;
             _onExecute = onExecute;
@@ -65,9 +66,11 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
     internal class CallbackGenerator2 : CallbackGenerator
     {
-        public CallbackGenerator2(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, string? source = "") : base(onInit, onExecute, source)
-        {
-        }
+        public CallbackGenerator2(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            string? source = ""
+        ) : base(onInit, onExecute, source) { }
     }
 
     internal class InMemoryAdditionalText : AdditionalText
@@ -82,44 +85,56 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
         public override string Path { get; }
 
-        public override SourceText GetText(CancellationToken cancellationToken = default) => _content;
-
+        public override SourceText GetText(CancellationToken cancellationToken = default) =>
+            _content;
     }
 
     internal sealed class PipelineCallbackGenerator : IIncrementalGenerator
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _registerPipelineCallback;
 
-        public PipelineCallbackGenerator(Action<IncrementalGeneratorInitializationContext> registerPipelineCallback)
+        public PipelineCallbackGenerator(
+            Action<IncrementalGeneratorInitializationContext> registerPipelineCallback
+        )
         {
             _registerPipelineCallback = registerPipelineCallback;
         }
 
-        public void Initialize(IncrementalGeneratorInitializationContext context) => _registerPipelineCallback(context);
+        public void Initialize(IncrementalGeneratorInitializationContext context) =>
+            _registerPipelineCallback(context);
     }
 
     internal sealed class PipelineCallbackGenerator2 : IIncrementalGenerator
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _registerPipelineCallback;
 
-        public PipelineCallbackGenerator2(Action<IncrementalGeneratorInitializationContext> registerPipelineCallback)
+        public PipelineCallbackGenerator2(
+            Action<IncrementalGeneratorInitializationContext> registerPipelineCallback
+        )
         {
             _registerPipelineCallback = registerPipelineCallback;
         }
 
-        public void Initialize(IncrementalGeneratorInitializationContext context) => _registerPipelineCallback(context);
+        public void Initialize(IncrementalGeneratorInitializationContext context) =>
+            _registerPipelineCallback(context);
     }
 
-    internal sealed class IncrementalAndSourceCallbackGenerator : CallbackGenerator, IIncrementalGenerator
+    internal sealed class IncrementalAndSourceCallbackGenerator
+        : CallbackGenerator,
+          IIncrementalGenerator
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _onInit;
 
-        public IncrementalAndSourceCallbackGenerator(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, Action<IncrementalGeneratorInitializationContext> onIncrementalInit)
-            : base(onInit, onExecute)
+        public IncrementalAndSourceCallbackGenerator(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            Action<IncrementalGeneratorInitializationContext> onIncrementalInit
+        ) : base(onInit, onExecute)
         {
             _onInit = onIncrementalInit;
         }
 
-        public void Initialize(IncrementalGeneratorInitializationContext context) => _onInit(context);
+        public void Initialize(IncrementalGeneratorInitializationContext context) =>
+            _onInit(context);
     }
 }

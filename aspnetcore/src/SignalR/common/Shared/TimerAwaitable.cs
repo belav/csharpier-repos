@@ -44,17 +44,19 @@ internal class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
                     // This fixes the cycle by using a WeakReference to the state object. The object graph now looks like this:
                     // Timer -> TimerHolder -> TimerQueueTimer -> WeakReference<TimerAwaitable> -> Timer -> ...
                     // If TimerAwaitable falls out of scope, the timer should be released.
-                    _timer = NonCapturingTimer.Create(state =>
-                    {
-                        var weakRef = (WeakReference<TimerAwaitable>)state!;
-                        if (weakRef.TryGetTarget(out var thisRef))
+                    _timer = NonCapturingTimer.Create(
+                        state =>
                         {
-                            thisRef.Tick();
-                        }
-                    },
-                    state: new WeakReference<TimerAwaitable>(this),
-                    dueTime: _dueTime,
-                    period: _period);
+                            var weakRef = (WeakReference<TimerAwaitable>)state!;
+                            if (weakRef.TryGetTarget(out var thisRef))
+                            {
+                                thisRef.Tick();
+                            }
+                        },
+                        state: new WeakReference<TimerAwaitable>(this),
+                        dueTime: _dueTime,
+                        period: _period
+                    );
                 }
             }
         }
@@ -78,8 +80,13 @@ internal class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
 
     public void OnCompleted(Action continuation)
     {
-        if (ReferenceEquals(_callback, _callbackCompleted) ||
-            ReferenceEquals(Interlocked.CompareExchange(ref _callback, continuation, null), _callbackCompleted))
+        if (
+            ReferenceEquals(_callback, _callbackCompleted)
+            || ReferenceEquals(
+                Interlocked.CompareExchange(ref _callback, continuation, null),
+                _callbackCompleted
+            )
+        )
         {
             Task.Run(continuation);
         }

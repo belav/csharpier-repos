@@ -8,12 +8,20 @@ namespace System.ComponentModel
     [AttributeUsage(AttributeTargets.Property)]
     public class AttributeProviderAttribute : Attribute
     {
-        private const DynamicallyAccessedMemberTypes RequiredMemberTypes = DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicEvents;
+        private const DynamicallyAccessedMemberTypes RequiredMemberTypes =
+            DynamicallyAccessedMemberTypes.PublicConstructors
+            | DynamicallyAccessedMemberTypes.PublicMethods
+            | DynamicallyAccessedMemberTypes.PublicFields
+            | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            | DynamicallyAccessedMemberTypes.PublicProperties
+            | DynamicallyAccessedMemberTypes.PublicEvents;
 
         /// <summary>
         /// Creates a new AttributeProviderAttribute object.
         /// </summary>
-        public AttributeProviderAttribute([DynamicallyAccessedMembers(RequiredMemberTypes)] string typeName)
+        public AttributeProviderAttribute(
+            [DynamicallyAccessedMembers(RequiredMemberTypes)] string typeName
+        )
         {
             TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
         }
@@ -21,7 +29,10 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a new AttributeProviderAttribute object.
         /// </summary>
-        public AttributeProviderAttribute([DynamicallyAccessedMembers(RequiredMemberTypes)] string typeName, string propertyName)
+        public AttributeProviderAttribute(
+            [DynamicallyAccessedMembers(RequiredMemberTypes)] string typeName,
+            string propertyName
+        )
         {
             TypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
             PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
@@ -30,7 +41,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a new AttributeProviderAttribute object.
         /// </summary>
-        public AttributeProviderAttribute([DynamicallyAccessedMembers(RequiredMemberTypes)] Type type)
+        public AttributeProviderAttribute(
+            [DynamicallyAccessedMembers(RequiredMemberTypes)] Type type
+        )
         {
             if (type == null)
             {

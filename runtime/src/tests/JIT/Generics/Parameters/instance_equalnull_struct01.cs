@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public struct Gen<T>
 {
     public bool EqualNull(T t)
@@ -42,12 +41,10 @@ public class Test_instance_equalnull_struct01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-
         int _int = 0;
         Eval(false == new Gen<int>().EqualNull(_int));
 
@@ -76,5 +73,4 @@ public class Test_instance_equalnull_struct01
             return 1;
         }
     }
-
 }

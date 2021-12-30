@@ -29,15 +29,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         ///          This means the interfaces will be obtained through QI, while the implementation
         ///          will be forwarded to the managed implementation.
         /// </summary>
-        internal static object CreateAggregatedObject(object managedObject)
-            => WrapperPolicy.CreateAggregatedObject(managedObject);
+        internal static object CreateAggregatedObject(object managedObject) =>
+            WrapperPolicy.CreateAggregatedObject(managedObject);
 
         /// <summary>
         /// Return the RCW for the native IComWrapperFixed instance aggregating "managedObject"
         /// if there is one. Return "null" if "managedObject" is not aggregated.
         /// </summary>
-        internal static IComWrapperFixed? TryGetWrapper(object managedObject)
-            => WrapperPolicy.TryGetWrapper(managedObject);
+        internal static IComWrapperFixed? TryGetWrapper(object managedObject) =>
+            WrapperPolicy.TryGetWrapper(managedObject);
 
         internal static T GetManagedObject<T>(object value) where T : class
         {
@@ -48,7 +48,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                 return GetManagedObject<T>(wrapper);
             }
 
-            Debug.Assert(value is T, "Why are you casting an object to an reference type it doesn't support?");
+            Debug.Assert(
+                value is T,
+                "Why are you casting an object to an reference type it doesn't support?"
+            );
             return (T)value;
         }
 
@@ -60,7 +63,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
             var target = handle.Target;
 
             Contract.ThrowIfNull(target, "target");
-            Debug.Assert(target is T, "Why are you casting an object to an reference type it doesn't support?");
+            Debug.Assert(
+                target is T,
+                "Why are you casting an object to an reference type it doesn't support?"
+            );
             return (T)target;
         }
 

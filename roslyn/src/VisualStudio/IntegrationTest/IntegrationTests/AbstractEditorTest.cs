@@ -18,20 +18,18 @@ namespace Roslyn.VisualStudio.IntegrationTests
         private readonly string _projectTemplate;
 
         protected AbstractEditorTest(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
-        protected AbstractEditorTest(VisualStudioInstanceFactory instanceFactory, string solutionName)
-            : this(instanceFactory, solutionName, WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+        protected AbstractEditorTest(
+            VisualStudioInstanceFactory instanceFactory,
+            string solutionName
+        ) : this(instanceFactory, solutionName, WellKnownProjectTemplates.ClassLibrary) { }
 
         protected AbstractEditorTest(
             VisualStudioInstanceFactory instanceFactory,
             string solutionName,
-            string projectTemplate)
-           : base(instanceFactory)
+            string projectTemplate
+        ) : base(instanceFactory)
         {
             _solutionName = solutionName;
             _projectTemplate = projectTemplate;
@@ -46,15 +44,24 @@ namespace Roslyn.VisualStudio.IntegrationTests
             if (_solutionName != null)
             {
                 VisualStudio.SolutionExplorer.CreateSolution(_solutionName);
-                VisualStudio.SolutionExplorer.AddProject(new ProjectUtils.Project(ProjectName), _projectTemplate, LanguageName);
-                VisualStudio.SolutionExplorer.RestoreNuGetPackages(new ProjectUtils.Project(ProjectName));
+                VisualStudio.SolutionExplorer.AddProject(
+                    new ProjectUtils.Project(ProjectName),
+                    _projectTemplate,
+                    LanguageName
+                );
+                VisualStudio.SolutionExplorer.RestoreNuGetPackages(
+                    new ProjectUtils.Project(ProjectName)
+                );
 
                 // Winforms and XAML do not open text files on creation
                 // so these editor tasks will not work if that is the project template being used.
-                if (_projectTemplate is not WellKnownProjectTemplates.WinFormsApplication and
-                    not WellKnownProjectTemplates.WpfApplication and
-                    not WellKnownProjectTemplates.CSharpNetCoreClassLibrary and
-                    not WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary)
+                if (
+                    _projectTemplate
+                    is not WellKnownProjectTemplates.WinFormsApplication
+                        and not WellKnownProjectTemplates.WpfApplication
+                        and not WellKnownProjectTemplates.CSharpNetCoreClassLibrary
+                        and not WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary
+                )
                 {
                     VisualStudio.Editor.SetUseSuggestionMode(false);
                     ClearEditor();
@@ -62,8 +69,7 @@ namespace Roslyn.VisualStudio.IntegrationTests
             }
         }
 
-        protected void ClearEditor()
-            => SetUpEditor("$$");
+        protected void ClearEditor() => SetUpEditor("$$");
 
         protected void SetUpEditor(string markupCode)
         {

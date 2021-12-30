@@ -18,12 +18,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Symbols
     {
         private CSharpCompilation CreateCompilation(string code) =>
             CreateCSharpCompilation(
-                code, referencedAssemblies: TargetFrameworkUtil.GetReferences(TargetFramework.NetStandard20));
+                code,
+                referencedAssemblies: TargetFrameworkUtil.GetReferences(
+                    TargetFramework.NetStandard20
+                )
+            );
 
         [Fact]
         public void TupleReturnMethod()
         {
-            string code = @"
+            string code =
+                @"
 class C
 {
     (int i, int) DoStuff() => default;
@@ -40,7 +45,10 @@ class C
 
             Assert.Equal(expectedDocId, actualDocId);
 
-            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(expectedDocId, comp);
+            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(
+                expectedDocId,
+                comp
+            );
 
             Assert.Equal(new[] { symbol }, foundSymbols);
         }
@@ -48,13 +56,16 @@ class C
         [Theory]
         [InlineData(
             "void DoStuff((int i, int) tuple) {}",
-            "M:C.DoStuff(System.ValueTuple{System.Int32,System.Int32})")]
+            "M:C.DoStuff(System.ValueTuple{System.Int32,System.Int32})"
+        )]
         [InlineData(
             "void DoStuff((int, int, int, int, int, int, int, int, int) tuple) { }",
-            "M:C.DoStuff(System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.ValueTuple{System.Int32,System.Int32}})")]
+            "M:C.DoStuff(System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.ValueTuple{System.Int32,System.Int32}})"
+        )]
         public void TupleParameterMethod(string methodCode, string expectedDocId)
         {
-            string code = $@"
+            string code =
+                $@"
 class C
 {{
     {methodCode}
@@ -66,7 +77,10 @@ class C
             var symbol = comp.GetSymbolsWithName("DoStuff").Single();
             var actualDocId = DocumentationCommentId.CreateDeclarationId(symbol);
             Assert.Equal(expectedDocId, actualDocId);
-            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(expectedDocId, comp);
+            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(
+                expectedDocId,
+                comp
+            );
 
             Assert.Equal(new[] { symbol }, foundSymbols);
         }
@@ -74,7 +88,8 @@ class C
         [Fact]
         public void DynamicParameterMethod()
         {
-            string code = @"
+            string code =
+                @"
 class C
 {
     int DoStuff(dynamic dynamic) => 0;
@@ -90,7 +105,10 @@ class C
 
             Assert.Equal(expectedDocId, actualDocId);
 
-            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(expectedDocId, comp);
+            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(
+                expectedDocId,
+                comp
+            );
 
             Assert.Equal(new[] { symbol }, foundSymbols);
         }
@@ -98,7 +116,8 @@ class C
         [Fact]
         public void NintParameterMethod()
         {
-            string code = @"
+            string code =
+                @"
 class C
 {
     void DoStuff(nint nint) {}
@@ -114,13 +133,19 @@ class C
 
             Assert.Equal(expectedDocId, actualDocId);
 
-            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(expectedDocId, comp);
+            var foundSymbols = DocumentationCommentId.GetSymbolsForDeclarationId(
+                expectedDocId,
+                comp
+            );
 
             Assert.Equal(new[] { symbol }, foundSymbols);
         }
 
         internal override string VisualizeRealIL(
-            IModuleSymbol peModule, CompilationTestData.MethodData methodData, IReadOnlyDictionary<int, string> markers, bool areLocalsZeroed)
-            => throw new NotImplementedException();
+            IModuleSymbol peModule,
+            CompilationTestData.MethodData methodData,
+            IReadOnlyDictionary<int, string> markers,
+            bool areLocalsZeroed
+        ) => throw new NotImplementedException();
     }
 }

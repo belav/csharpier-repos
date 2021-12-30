@@ -17,21 +17,24 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
 {
-    public partial class UseNullPropagationTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseNullPropagationTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseNullPropagationTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public UseNullPropagationTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseNullPropagationDiagnosticAnalyzer(), new CSharpUseNullPropagationCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseNullPropagationDiagnosticAnalyzer(),
+                new CSharpUseNullPropagationCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestLeft_Equals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -40,7 +43,7 @@ class C
         var v = [||]o == null ? null : o.ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -48,14 +51,15 @@ class C
     {
         var v = o?.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestMissingOnCSharp5()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -63,14 +67,20 @@ class C
     {
         var v = [||]o == null ? null : o.ToString();
     }
-}", new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+}",
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp5
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestRight_Equals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -79,7 +89,7 @@ class C
         var v = [||]null == o ? null : o.ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -87,14 +97,15 @@ class C
     {
         var v = o?.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestLeft_NotEquals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -103,7 +114,7 @@ class C
         var v = [||]o != null ? o.ToString() : null;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -111,14 +122,15 @@ class C
     {
         var v = o?.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestWithNullableType()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -127,7 +139,7 @@ class C
         int? x = [||]c != null ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -135,14 +147,15 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestWithNullableTypeAndObjectCast()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -151,7 +164,7 @@ class C
         int? x = (object)[||]c != null ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -159,14 +172,15 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestRight_NotEquals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -175,7 +189,7 @@ class C
         var v = [||]null != o ? o.ToString() : null;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -183,14 +197,15 @@ class C
     {
         var v = o?.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestIndexer()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -199,7 +214,7 @@ class C
         var v = [||]o == null ? null : o[0];
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -207,14 +222,15 @@ class C
     {
         var v = o?[0];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestConditionalAccess()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -223,7 +239,7 @@ class C
         var v = [||]o == null ? null : o.B?.C;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -231,14 +247,15 @@ class C
     {
         var v = o?.B?.C;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestMemberAccess()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -247,7 +264,7 @@ class C
         var v = [||]o == null ? null : o.B;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -255,14 +272,15 @@ class C
     {
         var v = o?.B;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestMissingOnSimpleMatch()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -270,14 +288,15 @@ class C
     {
         var v = [||]o == null ? null : o;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestParenthesizedCondition()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -286,7 +305,7 @@ class C
         var v = [||](o == null) ? null : o.ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -294,14 +313,15 @@ class C
     {
         var v = o?.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -311,7 +331,7 @@ class C
         var v2 = o != null ? o.ToString() : null;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -320,14 +340,15 @@ class C
         var v1 = o?.ToString();
         var v2 = o?.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -336,7 +357,7 @@ class C
         var v1 = {|FixAllInDocument:o1|} == null ? null : o1.ToString(o2 == null ? null : o2.ToString());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -344,7 +365,8 @@ class C
     {
         var v1 = o1?.ToString(o2?.ToString());
     }
-}");
+}"
+            );
         }
 
         [WorkItem(15505, "https://github.com/dotnet/roslyn/issues/15505")]
@@ -352,7 +374,7 @@ class C
         public async Task TestOtherValueIsNotNull1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -360,7 +382,8 @@ class C
     {
         var v = [||]o == null ? 0 : o.ToString();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(15505, "https://github.com/dotnet/roslyn/issues/15505")]
@@ -368,7 +391,7 @@ class C
         public async Task TestOtherValueIsNotNull2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -376,7 +399,8 @@ class C
     {
         var v = [||]o != null ? o.ToString() : 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(16287, "https://github.com/dotnet/roslyn/issues/16287")]
@@ -384,7 +408,7 @@ class C
         public async Task TestMethodGroup()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class D
@@ -395,7 +419,8 @@ class D
         Action<string> a = [||]c != null ? c.M : (Action<string>)null;
     }
 }
-class C { public void M(string s) { } }");
+class C { public void M(string s) { } }"
+            );
         }
 
         [WorkItem(17623, "https://github.com/dotnet/roslyn/issues/17623")]
@@ -403,7 +428,7 @@ class C { public void M(string s) { } }");
         public async Task TestInExpressionTree()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -417,7 +442,8 @@ class Program
     public void Method<T>(Expression<Func<T, string>> functor)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(33992, "https://github.com/dotnet/roslyn/issues/33992")]
@@ -426,7 +452,7 @@ class Program
         public async Task TestInExpressionTree2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System.Linq;
 
 class C
@@ -436,7 +462,8 @@ class C
         _ = from item in Enumerable.Empty<(int? x, int? y)?>().AsQueryable()
             select [||]item == null ? null : item.Value.x;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(33992, "https://github.com/dotnet/roslyn/issues/33992")]
@@ -445,7 +472,7 @@ class C
         public async Task TestInExpressionTree3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System.Linq;
 
 class C
@@ -456,7 +483,8 @@ class C
             where ([||]item == null ? null : item.Value.x) > 0
             select item;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(33992, "https://github.com/dotnet/roslyn/issues/33992")]
@@ -465,7 +493,7 @@ class C
         public async Task TestInExpressionTree4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System.Linq;
 
 class C
@@ -476,7 +504,8 @@ class C
             let x = [||]item == null ? null : item.Value.x
             select x;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(19774, "https://github.com/dotnet/roslyn/issues/19774")]
@@ -484,7 +513,7 @@ class C
         public async Task TestNullableMemberAccess()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -495,8 +524,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class C
@@ -506,7 +534,8 @@ class C
         var v = toDate?.ToString(""yyyy/MM/ dd"");
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(19774, "https://github.com/dotnet/roslyn/issues/19774")]
@@ -514,7 +543,7 @@ class C
         public async Task TestNullableElementAccess()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 struct S
@@ -530,8 +559,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 struct S
@@ -546,7 +574,8 @@ class C
         var x = s?[0];
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -554,7 +583,7 @@ class C
         public async Task TestWithNullableTypeAndIsNull()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -563,7 +592,7 @@ class C
         int? x = [||]c is null ? null : c.f;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -571,7 +600,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -579,7 +609,7 @@ class C
         public async Task TestWithNullableTypeAndIsType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -587,7 +617,8 @@ class C
     {
         int? x = [||]c is C ? null : c.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -595,14 +626,15 @@ class C
         public async Task TestIsOtherConstant()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M(string s)
     {
         int? x = [||]s is """" ? null : (int?)s.Length;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -610,7 +642,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEquals1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -619,7 +651,7 @@ class C
         int? x = [||]ReferenceEquals(c, null) ? null : c.f;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -627,7 +659,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -635,7 +668,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEquals2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -644,7 +677,7 @@ class C
         int? x = [||]ReferenceEquals(null, c) ? null : c.f;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -652,7 +685,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -660,7 +694,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEqualsOtherValue1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -668,7 +702,8 @@ class C
     {
         int? x = [||]ReferenceEquals(c, other) ? null : c.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -676,7 +711,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEqualsOtherValue2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -684,7 +719,8 @@ class C
     {
         int? x = [||]ReferenceEquals(other, c) ? null : c.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -692,7 +728,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEqualsWithObject1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -701,7 +737,7 @@ class C
         int? x = [||]object.ReferenceEquals(c, null) ? null : c.f;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -709,7 +745,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -717,7 +754,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEqualsWithObject2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -726,7 +763,7 @@ class C
         int? x = [||]object.ReferenceEquals(null, c) ? null : c.f;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -734,7 +771,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -742,7 +780,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEqualsOtherValueWithObject1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -750,7 +788,8 @@ class C
     {
         int? x = [||]object.ReferenceEquals(c, other) ? null : c.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -758,7 +797,7 @@ class C
         public async Task TestWithNullableTypeAndReferenceEqualsOtherValueWithObject2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -766,7 +805,8 @@ class C
     {
         int? x = [||]object.ReferenceEquals(other, c) ? null : c.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -774,7 +814,7 @@ class C
         public async Task TestWithNullableTypeAndNotIsNull()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -783,7 +823,7 @@ class C
         int? x = [||]!(c is null) ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -791,7 +831,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -799,7 +840,7 @@ class C
         public async Task TestWithNullableTypeAndNotIsType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -807,7 +848,8 @@ class C
     {
         int? x = [||]!(c is C) ? c.f : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -815,14 +857,15 @@ class C
         public async Task TestWithNullableTypeAndNotIsOtherConstant()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M(string s)
     {
         int? x = [||]!(s is """") ? (int?)s.Length : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -830,7 +873,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEquals1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -839,7 +882,7 @@ class C
         int? x = [||]!ReferenceEquals(c, null) ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -847,7 +890,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -855,7 +899,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEquals2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -864,7 +908,7 @@ class C
         int? x = [||]!ReferenceEquals(null, c) ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -872,7 +916,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -880,7 +925,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEqualsOtherValue1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -888,7 +933,8 @@ class C
     {
         int? x = [||]!ReferenceEquals(c, other) ? c.f : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -896,7 +942,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEqualsOtherValue2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -904,7 +950,8 @@ class C
     {
         int? x = [||]!ReferenceEquals(other, c) ? c.f : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -912,7 +959,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEqualsWithObject1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -921,7 +968,7 @@ class C
         int? x = [||]!object.ReferenceEquals(c, null) ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -929,7 +976,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -937,7 +985,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEqualsWithObject2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -946,7 +994,7 @@ class C
         int? x = [||]!object.ReferenceEquals(null, c) ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -954,7 +1002,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -962,7 +1011,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEqualsOtherValueWithObject1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -970,7 +1019,8 @@ class C
     {
         int? x = [||]!object.ReferenceEquals(c, other) ? c.f : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -978,7 +1028,7 @@ class C
         public async Task TestWithNullableTypeAndLogicalNotReferenceEqualsOtherValueWithObject2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -986,7 +1036,8 @@ class C
     {
         int? x = [||]!object.ReferenceEquals(other, c) ? c.f : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -994,7 +1045,7 @@ class C
         public async Task TestEqualsWithLogicalNot()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -1003,7 +1054,7 @@ class C
         int? x = [||]!(c == null) ? c.f : null;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -1011,7 +1062,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -1019,7 +1071,7 @@ class C
         public async Task TestNotEqualsWithLogicalNot()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public int? f;
@@ -1028,7 +1080,7 @@ class C
         int? x = [||]!(c != null) ? null : c.f;
     }
 }",
-@"
+                @"
 class C
 {
     public int? f;
@@ -1036,7 +1088,8 @@ class C
     {
         int? x = c?.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -1044,7 +1097,7 @@ class C
         public async Task TestEqualsOtherValueWithLogicalNot()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -1052,7 +1105,8 @@ class C
     {
         int? x = [||]!(c == other) ? c.f : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23043, "https://github.com/dotnet/roslyn/issues/23043")]
@@ -1060,7 +1114,7 @@ class C
         public async Task TestNotEqualsOtherValueWithLogicalNot()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public int? f;
@@ -1068,7 +1122,8 @@ class C
     {
         int? x = [||]!(c != other) ? null : c.f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(49517, "https://github.com/dotnet/roslyn/issues/49517")]
@@ -1076,7 +1131,7 @@ class C
         public async Task TestParenthesizedExpression()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1085,7 +1140,7 @@ class C
         var v = [||](o == null) ? null : (o.ToString());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1093,7 +1148,8 @@ class C
     {
         var v = (o?.ToString());
     }
-}");
+}"
+            );
         }
 
         [WorkItem(49517, "https://github.com/dotnet/roslyn/issues/49517")]
@@ -1101,7 +1157,7 @@ class C
         public async Task TestReversedParenthesizedExpression()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1110,7 +1166,7 @@ class C
         var v = [||](o != null) ? (o.ToString()) : null;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1118,7 +1174,8 @@ class C
     {
         var v = (o?.ToString());
     }
-}");
+}"
+            );
         }
 
         [WorkItem(49517, "https://github.com/dotnet/roslyn/issues/49517")]
@@ -1126,7 +1183,7 @@ class C
         public async Task TestParenthesizedNull()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1135,7 +1192,7 @@ class C
         var v = [||]o == null ? (null) : o.ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1143,7 +1200,8 @@ class C
     {
         var v = o?.ToString();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(49517, "https://github.com/dotnet/roslyn/issues/49517")]
@@ -1151,7 +1209,7 @@ class C
         public async Task TestReversedParenthesizedNull()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1160,7 +1218,7 @@ class C
         var v = [||]o != null ? o.ToString() : (null);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1168,7 +1226,8 @@ class C
     {
         var v = o?.ToString();
     }
-}");
+}"
+            );
         }
     }
 }

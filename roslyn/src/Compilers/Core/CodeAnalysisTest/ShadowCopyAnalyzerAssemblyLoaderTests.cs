@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
     [Collection(AssemblyLoadTestFixtureCollection.Name)]
     public sealed class ShadowCopyAnalyzerAssemblyLoaderTests : TestBase
     {
-        private static readonly CSharpCompilationOptions s_dllWithMaxWarningLevel = new(OutputKind.DynamicallyLinkedLibrary, warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel);
+        private static readonly CSharpCompilationOptions s_dllWithMaxWarningLevel =
+            new(
+                OutputKind.DynamicallyLinkedLibrary,
+                warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
+            );
         private readonly AssemblyLoadTestFixture _testFixture;
         public ShadowCopyAnalyzerAssemblyLoaderTests(AssemblyLoadTestFixture testFixture)
         {
@@ -33,9 +37,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             loader.AddDependencyLocation(analyzerDependencyFile.Path);
 
             var analyzerMainReference = new AnalyzerFileReference(analyzerMainFile.Path, loader);
-            analyzerMainReference.AnalyzerLoadFailed += (_, e) => AssertEx.Fail(e.Exception!.Message);
-            var analyzerDependencyReference = new AnalyzerFileReference(analyzerDependencyFile.Path, loader);
-            analyzerDependencyReference.AnalyzerLoadFailed += (_, e) => AssertEx.Fail(e.Exception!.Message);
+            analyzerMainReference.AnalyzerLoadFailed += (_, e) =>
+                AssertEx.Fail(e.Exception!.Message);
+            var analyzerDependencyReference = new AnalyzerFileReference(
+                analyzerDependencyFile.Path,
+                loader
+            );
+            analyzerDependencyReference.AnalyzerLoadFailed += (_, e) =>
+                AssertEx.Fail(e.Exception!.Message);
 
             var analyzers = analyzerMainReference.GetAnalyzersForAllLanguages();
             Assert.Equal(1, analyzers.Length);
@@ -69,18 +78,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
             if (ExecutionConditionUtil.IsCoreClr)
             {
                 Assert.Equal(
-@"Delta: Gamma: Test G
+                    @"Delta: Gamma: Test G
 Delta.2: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
             else
             {
                 Assert.Equal(
-@"Delta: Gamma: Test G
+                    @"Delta: Gamma: Test G
 Delta: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
         }
 
@@ -92,8 +103,12 @@ Delta: Epsilon: Test E
             var loader = new ShadowCopyAnalyzerAssemblyLoader();
 
             var tempDir = Temp.CreateDirectory();
-            var gammaCopy = tempDir.CreateFile("Gamma.dll").CopyContentFrom(_testFixture.Gamma.Path);
-            var deltaCopy = tempDir.CreateFile("Delta.dll").CopyContentFrom(_testFixture.Delta1.Path);
+            var gammaCopy = tempDir
+                .CreateFile("Gamma.dll")
+                .CopyContentFrom(_testFixture.Gamma.Path);
+            var deltaCopy = tempDir
+                .CreateFile("Delta.dll")
+                .CopyContentFrom(_testFixture.Delta1.Path);
             loader.AddDependencyLocation(deltaCopy.Path);
             loader.AddDependencyLocation(gammaCopy.Path);
 
@@ -106,9 +121,10 @@ Delta: Epsilon: Test E
 
             var actual = sb.ToString();
             Assert.Equal(
-@"Delta: Gamma: Test G
+                @"Delta: Gamma: Test G
 ",
-                actual);
+                actual
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
@@ -121,9 +137,15 @@ Delta: Epsilon: Test E
             var tempDir2 = Temp.CreateDirectory();
             var tempDir3 = Temp.CreateDirectory();
 
-            var delta1File = tempDir1.CreateFile("Delta.dll").CopyContentFrom(_testFixture.Delta1.Path);
-            var delta2File = tempDir2.CreateFile("Delta.dll").CopyContentFrom(_testFixture.Delta2.Path);
-            var gammaFile = tempDir3.CreateFile("Gamma.dll").CopyContentFrom(_testFixture.Gamma.Path);
+            var delta1File = tempDir1
+                .CreateFile("Delta.dll")
+                .CopyContentFrom(_testFixture.Delta1.Path);
+            var delta2File = tempDir2
+                .CreateFile("Delta.dll")
+                .CopyContentFrom(_testFixture.Delta2.Path);
+            var gammaFile = tempDir3
+                .CreateFile("Gamma.dll")
+                .CopyContentFrom(_testFixture.Gamma.Path);
 
             loader.AddDependencyLocation(delta1File.Path);
             loader.AddDependencyLocation(delta2File.Path);
@@ -139,8 +161,11 @@ Delta: Epsilon: Test E
             File.Delete(gammaFile.Path);
 
             var actual = sb.ToString();
-            Assert.Equal(@"Delta: Gamma: Test G
-", actual);
+            Assert.Equal(
+                @"Delta: Gamma: Test G
+",
+                actual
+            );
         }
     }
 }

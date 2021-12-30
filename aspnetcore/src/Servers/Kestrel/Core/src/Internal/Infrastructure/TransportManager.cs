@@ -22,7 +22,8 @@ internal class TransportManager
     public TransportManager(
         IConnectionListenerFactory? transportFactory,
         IMultiplexedConnectionListenerFactory? multiplexedTransportFactory,
-        ServiceContext serviceContext)
+        ServiceContext serviceContext
+    )
     {
         _transportFactory = transportFactory;
         _multiplexedTransportFactory = multiplexedTransportFactory;
@@ -32,23 +33,43 @@ internal class TransportManager
     private ConnectionManager ConnectionManager => _serviceContext.ConnectionManager;
     private KestrelTrace Trace => _serviceContext.Log;
 
-    public async Task<EndPoint> BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig? endpointConfig, CancellationToken cancellationToken)
+    public async Task<EndPoint> BindAsync(
+        EndPoint endPoint,
+        ConnectionDelegate connectionDelegate,
+        EndpointConfig? endpointConfig,
+        CancellationToken cancellationToken
+    )
     {
         if (_transportFactory is null)
         {
-            throw new InvalidOperationException($"Cannot bind with {nameof(ConnectionDelegate)} no {nameof(IConnectionListenerFactory)} is registered.");
+            throw new InvalidOperationException(
+                $"Cannot bind with {nameof(ConnectionDelegate)} no {nameof(IConnectionListenerFactory)} is registered."
+            );
         }
 
-        var transport = await _transportFactory.BindAsync(endPoint, cancellationToken).ConfigureAwait(false);
-        StartAcceptLoop(new GenericConnectionListener(transport), c => connectionDelegate(c), endpointConfig);
+        var transport = await _transportFactory
+            .BindAsync(endPoint, cancellationToken)
+            .ConfigureAwait(false);
+        StartAcceptLoop(
+            new GenericConnectionListener(transport),
+            c => connectionDelegate(c),
+            endpointConfig
+        );
         return transport.EndPoint;
     }
 
-    public async Task<EndPoint> BindAsync(EndPoint endPoint, MultiplexedConnectionDelegate multiplexedConnectionDelegate, ListenOptions listenOptions, CancellationToken cancellationToken)
+    public async Task<EndPoint> BindAsync(
+        EndPoint endPoint,
+        MultiplexedConnectionDelegate multiplexedConnectionDelegate,
+        ListenOptions listenOptions,
+        CancellationToken cancellationToken
+    )
     {
         if (_multiplexedTransportFactory is null)
         {
-            throw new InvalidOperationException($"Cannot bind with {nameof(MultiplexedConnectionDelegate)} no {nameof(IMultiplexedConnectionListenerFactory)} is registered.");
+            throw new InvalidOperationException(
+                $"Cannot bind with {nameof(MultiplexedConnectionDelegate)} no {nameof(IMultiplexedConnectionListenerFactory)} is registered."
+            );
         }
 
         var features = new FeatureCollection();
@@ -60,23 +81,51 @@ internal class TransportManager
             features.Set(HttpsConnectionMiddleware.CreateHttp3Options(listenOptions.HttpsOptions));
         }
 
-        var transport = await _multiplexedTransportFactory.BindAsync(endPoint, features, cancellationToken).ConfigureAwait(false);
-        StartAcceptLoop(new GenericMultiplexedConnectionListener(transport), c => multiplexedConnectionDelegate(c), listenOptions.EndpointConfig);
+        var transport = await _multiplexedTransportFactory
+            .BindAsync(endPoint, features, cancellationToken)
+            .ConfigureAwait(false);
+        StartAcceptLoop(
+            new GenericMultiplexedConnectionListener(transport),
+            c => multiplexedConnectionDelegate(c),
+            listenOptions.EndpointConfig
+        );
         return transport.EndPoint;
     }
 
-    private void StartAcceptLoop<T>(IConnectionListener<T> connectionListener, Func<T, Task> connectionDelegate, EndpointConfig? endpointConfig) where T : BaseConnectionContext
+    private void StartAcceptLoop<T>(
+        IConnectionListener<T> connectionListener,
+        Func<T, Task> connectionDelegate,
+        EndpointConfig? endpointConfig
+    ) where T : BaseConnectionContext
     {
-        var transportConnectionManager = new TransportConnectionManager(_serviceContext.ConnectionManager);
-        var connectionDispatcher = new ConnectionDispatcher<T>(_serviceContext, connectionDelegate, transportConnectionManager);
+        var transportConnectionManager = new TransportConnectionManager(
+            _serviceContext.ConnectionManager
+        );
+        var connectionDispatcher = new ConnectionDispatcher<T>(
+            _serviceContext,
+            connectionDelegate,
+            transportConnectionManager
+        );
         var acceptLoopTask = connectionDispatcher.StartAcceptingConnections(connectionListener);
 
-        _transports.Add(new ActiveTransport(connectionListener, acceptLoopTask, transportConnectionManager, endpointConfig));
+        _transports.Add(
+            new ActiveTransport(
+                connectionListener,
+                acceptLoopTask,
+                transportConnectionManager,
+                endpointConfig
+            )
+        );
     }
 
-    public Task StopEndpointsAsync(List<EndpointConfig> endpointsToStop, CancellationToken cancellationToken)
+    public Task StopEndpointsAsync(
+        List<EndpointConfig> endpointsToStop,
+        CancellationToken cancellationToken
+    )
     {
-        var transportsToStop = _transports.Where(t => t.EndpointConfig != null && endpointsToStop.Contains(t.EndpointConfig)).ToList();
+        var transportsToStop = _transports
+            .Where(t => t.EndpointConfig != null && endpointsToStop.Contains(t.EndpointConfig))
+            .ToList();
         return StopTransportsAsync(transportsToStop, cancellationToken);
     }
 
@@ -85,7 +134,10 @@ internal class TransportManager
         return StopTransportsAsync(new List<ActiveTransport>(_transports), cancellationToken);
     }
 
-    private async Task StopTransportsAsync(List<ActiveTransport> transportsToStop, CancellationToken cancellationToken)
+    private async Task StopTransportsAsync(
+        List<ActiveTransport> transportsToStop,
+        CancellationToken cancellationToken
+    )
     {
         var tasks = new Task[transportsToStop.Count];
 
@@ -98,11 +150,19 @@ internal class TransportManager
 
         async Task StopTransportConnection(ActiveTransport transport)
         {
-            if (!await transport.TransportConnectionManager.CloseAllConnectionsAsync(cancellationToken).ConfigureAwait(false))
+            if (
+                !await transport.TransportConnectionManager
+                    .CloseAllConnectionsAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
                 Trace.NotAllConnectionsClosedGracefully();
 
-                if (!await transport.TransportConnectionManager.AbortAllConnectionsAsync().ConfigureAwait(false))
+                if (
+                    !await transport.TransportConnectionManager
+                        .AbortAllConnectionsAsync()
+                        .ConfigureAwait(false)
+                )
                 {
                     Trace.NotAllConnectionsAborted();
                 }
@@ -131,7 +191,12 @@ internal class TransportManager
 
     private class ActiveTransport : IAsyncDisposable
     {
-        public ActiveTransport(IConnectionListenerBase transport, Task acceptLoopTask, TransportConnectionManager transportConnectionManager, EndpointConfig? endpointConfig = null)
+        public ActiveTransport(
+            IConnectionListenerBase transport,
+            Task acceptLoopTask,
+            TransportConnectionManager transportConnectionManager,
+            EndpointConfig? endpointConfig = null
+        )
         {
             ConnectionListener = transport;
             AcceptLoopTask = acceptLoopTask;
@@ -168,34 +233,37 @@ internal class TransportManager
 
         public EndPoint EndPoint => _connectionListener.EndPoint;
 
-        public ValueTask<ConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default)
-             => _connectionListener.AcceptAsync(cancellationToken);
+        public ValueTask<ConnectionContext?> AcceptAsync(
+            CancellationToken cancellationToken = default
+        ) => _connectionListener.AcceptAsync(cancellationToken);
 
-        public ValueTask UnbindAsync(CancellationToken cancellationToken = default)
-            => _connectionListener.UnbindAsync(cancellationToken);
+        public ValueTask UnbindAsync(CancellationToken cancellationToken = default) =>
+            _connectionListener.UnbindAsync(cancellationToken);
 
-        public ValueTask DisposeAsync()
-            => _connectionListener.DisposeAsync();
+        public ValueTask DisposeAsync() => _connectionListener.DisposeAsync();
     }
 
-    private class GenericMultiplexedConnectionListener : IConnectionListener<MultiplexedConnectionContext>
+    private class GenericMultiplexedConnectionListener
+        : IConnectionListener<MultiplexedConnectionContext>
     {
         private readonly IMultiplexedConnectionListener _multiplexedConnectionListener;
 
-        public GenericMultiplexedConnectionListener(IMultiplexedConnectionListener multiplexedConnectionListener)
+        public GenericMultiplexedConnectionListener(
+            IMultiplexedConnectionListener multiplexedConnectionListener
+        )
         {
             _multiplexedConnectionListener = multiplexedConnectionListener;
         }
 
         public EndPoint EndPoint => _multiplexedConnectionListener.EndPoint;
 
-        public ValueTask<MultiplexedConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default)
-             => _multiplexedConnectionListener.AcceptAsync(features: null, cancellationToken);
+        public ValueTask<MultiplexedConnectionContext?> AcceptAsync(
+            CancellationToken cancellationToken = default
+        ) => _multiplexedConnectionListener.AcceptAsync(features: null, cancellationToken);
 
-        public ValueTask UnbindAsync(CancellationToken cancellationToken = default)
-            => _multiplexedConnectionListener.UnbindAsync(cancellationToken);
+        public ValueTask UnbindAsync(CancellationToken cancellationToken = default) =>
+            _multiplexedConnectionListener.UnbindAsync(cancellationToken);
 
-        public ValueTask DisposeAsync()
-            => _multiplexedConnectionListener.DisposeAsync();
+        public ValueTask DisposeAsync() => _multiplexedConnectionListener.DisposeAsync();
     }
 }

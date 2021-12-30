@@ -23,7 +23,8 @@ namespace System.Diagnostics
         /// Returns the amount of time the thread has spent running code inside the operating
         /// system core.
         /// </summary>
-        public TimeSpan PrivilegedProcessorTime => new TimeSpan((long)GetThreadInfo().pth_system_time);
+        public TimeSpan PrivilegedProcessorTime =>
+            new TimeSpan((long)GetThreadInfo().pth_system_time);
 
         private DateTime GetStartTime() => throw new PlatformNotSupportedException(); // macOS does not provide a way to get this data
 
@@ -49,7 +50,10 @@ namespace System.Diagnostics
 
         private Interop.libproc.proc_threadinfo GetThreadInfo()
         {
-            Interop.libproc.proc_threadinfo? info = Interop.libproc.GetThreadInfoById(_processId, _threadInfo._threadId);
+            Interop.libproc.proc_threadinfo? info = Interop.libproc.GetThreadInfoById(
+                _processId,
+                _threadInfo._threadId
+            );
             if (!info.HasValue)
             {
                 throw new InvalidOperationException(SR.Format(SR.ThreadExited, Id));

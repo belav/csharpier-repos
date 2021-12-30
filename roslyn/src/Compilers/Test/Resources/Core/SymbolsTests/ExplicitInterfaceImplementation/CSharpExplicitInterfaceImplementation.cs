@@ -31,7 +31,10 @@ class Generic<S> : IGeneric<S>
     void IGeneric<S>.Method<U>(S s) { }
     void IGeneric<S>.Method<U>(U u, S s) { }
     void IGeneric<S>.Method<U>(S s, ref U u) { }
-    S IGeneric<S>.Method<U>(S s1, S s2) { return s1; }
+    S IGeneric<S>.Method<U>(S s1, S s2)
+    {
+        return s1;
+    }
 
     void IGeneric<S>.Method<V>(S s, V v) { }
 }
@@ -42,14 +45,15 @@ class Constructed : IGeneric<int>
     void IGeneric<int>.Method<U>(int i) { }
     void IGeneric<int>.Method<U>(U u, int i) { }
     void IGeneric<int>.Method<U>(int i, ref U u) { }
-    int IGeneric<int>.Method<U>(int i1, int i2) { return i1; }
+    int IGeneric<int>.Method<U>(int i1, int i2)
+    {
+        return i1;
+    }
 
     void IGeneric<int>.Method<W>(int i, W w) { }
 }
 
-interface IGenericInterface<T> : Interface
-{
-}
+interface IGenericInterface<T> : Interface { }
 
 //we'll see a type def for this class, a type ref for IGenericInterface<int>,
 //and then a type def for Interface (i.e. back and forth)

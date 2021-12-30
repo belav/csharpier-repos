@@ -25,7 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </remarks>
         /// <param name="dbContextTransaction">The transaction to get the <see cref="DbTransaction" /> from.</param>
         /// <returns>The underlying <see cref="DbTransaction" />.</returns>
-        public static DbTransaction GetDbTransaction(this IDbContextTransaction dbContextTransaction)
+        public static DbTransaction GetDbTransaction(
+            this IDbContextTransaction dbContextTransaction
+        )
         {
             if (!(dbContextTransaction is IInfrastructure<DbTransaction> accessor))
             {

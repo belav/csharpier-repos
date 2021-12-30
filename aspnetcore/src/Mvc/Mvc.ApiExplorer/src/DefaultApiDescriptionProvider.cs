@@ -44,12 +44,17 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         IInlineConstraintResolver constraintResolver,
         IModelMetadataProvider modelMetadataProvider,
         IActionResultTypeMapper mapper,
-        IOptions<RouteOptions> routeOptions)
+        IOptions<RouteOptions> routeOptions
+    )
     {
         _mvcOptions = optionsAccessor.Value;
         _constraintResolver = constraintResolver;
         _modelMetadataProvider = modelMetadataProvider;
-        _responseTypeProvider = new ApiResponseTypeProvider(modelMetadataProvider, mapper, _mvcOptions);
+        _responseTypeProvider = new ApiResponseTypeProvider(
+            modelMetadataProvider,
+            mapper,
+            _mvcOptions
+        );
         _routeOptions = routeOptions.Value;
     }
 
@@ -81,21 +86,26 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                 var httpMethods = GetHttpMethods(action);
                 foreach (var httpMethod in httpMethods)
                 {
-                    context.Results.Add(CreateApiDescription(action, httpMethod, GetGroupName(action, extensionData)));
+                    context.Results.Add(
+                        CreateApiDescription(
+                            action,
+                            httpMethod,
+                            GetGroupName(action, extensionData)
+                        )
+                    );
                 }
             }
         }
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ApiDescriptionProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ApiDescriptionProviderContext context) { }
 
     private ApiDescription CreateApiDescription(
         ControllerActionDescriptor action,
         string? httpMethod,
-        string? groupName)
+        string? groupName
+    )
     {
         var parsedTemplate = ParseTemplate(action);
 
@@ -109,7 +119,11 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
 
         var templateParameters = parsedTemplate?.Parameters?.ToList() ?? new List<TemplatePart>();
 
-        var parameterContext = new ApiParameterContext(_modelMetadataProvider, action, templateParameters);
+        var parameterContext = new ApiParameterContext(
+            _modelMetadataProvider,
+            action,
+            templateParameters
+        );
 
         foreach (var parameter in GetParameters(parameterContext))
         {
@@ -146,10 +160,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                     // Add all declared media types since FormFiles do not get processed by formatters.
                     foreach (var contentType in contentTypes)
                     {
-                        apiDescription.SupportedRequestFormats.Add(new ApiRequestFormat
-                        {
-                            MediaType = contentType,
-                        });
+                        apiDescription.SupportedRequestFormats.Add(
+                            new ApiRequestFormat { MediaType = contentType, }
+                        );
                     }
                 }
             }
@@ -168,12 +181,16 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                 var visitor = new PseudoModelBindingVisitor(context, actionParameter);
 
                 ModelMetadata metadata;
-                if (actionParameter is ControllerParameterDescriptor controllerParameterDescriptor &&
-                    _modelMetadataProvider is ModelMetadataProvider provider)
+                if (
+                    actionParameter is ControllerParameterDescriptor controllerParameterDescriptor
+                    && _modelMetadataProvider is ModelMetadataProvider provider
+                )
                 {
                     // The default model metadata provider derives from ModelMetadataProvider
                     // and can therefore supply information about attributes applied to parameters.
-                    metadata = provider.GetMetadataForParameter(controllerParameterDescriptor.ParameterInfo);
+                    metadata = provider.GetMetadataForParameter(
+                        controllerParameterDescriptor.ParameterInfo
+                    );
                 }
                 else
                 {
@@ -181,13 +198,16 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                     // only implements the older IModelMetadataProvider interface, access the more
                     // limited metadata information it supplies. In this scenario, validation attributes
                     // are not supported on parameters.
-                    metadata = _modelMetadataProvider.GetMetadataForType(actionParameter.ParameterType);
+                    metadata = _modelMetadataProvider.GetMetadataForType(
+                        actionParameter.ParameterType
+                    );
                 }
 
                 var bindingContext = new ApiParameterDescriptionContext(
                     metadata,
                     actionParameter.BindingInfo,
-                    propertyName: actionParameter.Name);
+                    propertyName: actionParameter.Name
+                );
                 visitor.WalkParameter(bindingContext);
             }
         }
@@ -199,12 +219,14 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                 var visitor = new PseudoModelBindingVisitor(context, actionParameter);
                 var modelMetadata = context.MetadataProvider.GetMetadataForProperty(
                     containerType: context.ActionDescriptor.ControllerTypeInfo.AsType(),
-                    propertyName: actionParameter.Name);
+                    propertyName: actionParameter.Name
+                );
 
                 var bindingContext = new ApiParameterDescriptionContext(
                     modelMetadata,
                     actionParameter.BindingInfo,
-                    propertyName: actionParameter.Name);
+                    propertyName: actionParameter.Name
+                );
 
                 visitor.WalkParameter(bindingContext);
             }
@@ -236,7 +258,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
 
     private void ProcessRouteParameters(ApiParameterContext context)
     {
-        var routeParameters = new Dictionary<string, ApiParameterRouteInfo>(StringComparer.OrdinalIgnoreCase);
+        var routeParameters = new Dictionary<string, ApiParameterRouteInfo>(
+            StringComparer.OrdinalIgnoreCase
+        );
         foreach (var routeParameter in context.RouteParameters)
         {
             routeParameters.Add(routeParameter.Name!, CreateRouteInfo(routeParameter));
@@ -244,17 +268,21 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
 
         foreach (var parameter in context.Results)
         {
-            if (parameter.Source == BindingSource.Path ||
-                parameter.Source == BindingSource.ModelBinding ||
-                parameter.Source == BindingSource.Custom)
+            if (
+                parameter.Source == BindingSource.Path
+                || parameter.Source == BindingSource.ModelBinding
+                || parameter.Source == BindingSource.Custom
+            )
             {
                 if (routeParameters.TryGetValue(parameter.Name, out var routeInfo))
                 {
                     parameter.RouteInfo = routeInfo;
                     routeParameters.Remove(parameter.Name);
 
-                    if (parameter.Source == BindingSource.ModelBinding &&
-                        !parameter.RouteInfo.IsOptional)
+                    if (
+                        parameter.Source == BindingSource.ModelBinding
+                        && !parameter.RouteInfo.IsOptional
+                    )
                     {
                         // If we didn't see any information about the parameter, but we have
                         // a route parameter that matches, let's switch it to path.
@@ -268,12 +296,14 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         // a partner.
         foreach (var routeParameter in routeParameters)
         {
-            context.Results.Add(new ApiParameterDescription()
-            {
-                Name = routeParameter.Key,
-                RouteInfo = routeParameter.Value,
-                Source = BindingSource.Path,
-            });
+            context.Results.Add(
+                new ApiParameterDescription()
+                {
+                    Name = routeParameter.Key,
+                    RouteInfo = routeParameter.Value,
+                    Source = BindingSource.Path,
+                }
+            );
         }
     }
 
@@ -283,13 +313,18 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         {
             if (parameter.Source == BindingSource.Body)
             {
-                if (parameter.BindingInfo == null || parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Default)
+                if (
+                    parameter.BindingInfo == null
+                    || parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Default
+                )
                 {
                     parameter.IsRequired = !mvcOptions.AllowEmptyInputInBodyModelBinding;
                 }
                 else
                 {
-                    parameter.IsRequired = !(parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Allow);
+                    parameter.IsRequired = !(
+                        parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Allow
+                    );
                 }
             }
 
@@ -298,7 +333,11 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                 parameter.IsRequired = true;
             }
 
-            if (parameter.Source == BindingSource.Path && parameter.RouteInfo != null && !parameter.RouteInfo.IsOptional)
+            if (
+                parameter.Source == BindingSource.Path
+                && parameter.RouteInfo != null
+                && !parameter.RouteInfo.IsOptional
+            )
             {
                 parameter.IsRequired = true;
             }
@@ -315,8 +354,14 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             }
             else
             {
-                if (parameter.ParameterDescriptor is ControllerParameterDescriptor controllerParameter &&
-                    ParameterDefaultValues.TryGetDeclaredParameterDefaultValue(controllerParameter.ParameterInfo, out var defaultValue))
+                if (
+                    parameter.ParameterDescriptor
+                        is ControllerParameterDescriptor controllerParameter
+                    && ParameterDefaultValues.TryGetDeclaredParameterDefaultValue(
+                        controllerParameter.ParameterInfo,
+                        out var defaultValue
+                    )
+                )
                 {
                     parameter.DefaultValue = defaultValue;
                 }
@@ -347,7 +392,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
     {
         if (action.ActionConstraints != null && action.ActionConstraints.Count > 0)
         {
-            return action.ActionConstraints.OfType<HttpMethodActionConstraint>().SelectMany(c => c.HttpMethods);
+            return action.ActionConstraints
+                .OfType<HttpMethodActionConstraint>()
+                .SelectMany(c => c.HttpMethods);
         }
         else
         {
@@ -381,9 +428,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             {
                 if (part.IsLiteral)
                 {
-                    currentSegment += _routeOptions.LowercaseUrls ?
-                        part.Text!.ToLowerInvariant() :
-                        part.Text;
+                    currentSegment += _routeOptions.LowercaseUrls
+                        ? part.Text!.ToLowerInvariant()
+                        : part.Text;
                 }
                 else if (part.IsParameter)
                 {
@@ -397,14 +444,14 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         return string.Join("/", segments);
     }
 
-    private IReadOnlyList<ApiRequestFormat> GetSupportedFormats(MediaTypeCollection contentTypes, Type type)
+    private IReadOnlyList<ApiRequestFormat> GetSupportedFormats(
+        MediaTypeCollection contentTypes,
+        Type type
+    )
     {
         if (contentTypes.Count == 0)
         {
-            contentTypes = new MediaTypeCollection
-                {
-                    (string)null!,
-                };
+            contentTypes = new MediaTypeCollection { (string)null!, };
         }
 
         var results = new List<ApiRequestFormat>();
@@ -414,17 +461,22 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             {
                 if (formatter is IApiRequestFormatMetadataProvider requestFormatMetadataProvider)
                 {
-                    var supportedTypes = requestFormatMetadataProvider.GetSupportedContentTypes(contentType, type);
+                    var supportedTypes = requestFormatMetadataProvider.GetSupportedContentTypes(
+                        contentType,
+                        type
+                    );
 
                     if (supportedTypes != null)
                     {
                         foreach (var supportedType in supportedTypes)
                         {
-                            results.Add(new ApiRequestFormat()
-                            {
-                                Formatter = formatter,
-                                MediaType = supportedType,
-                            });
+                            results.Add(
+                                new ApiRequestFormat()
+                                {
+                                    Formatter = formatter,
+                                    MediaType = supportedType,
+                                }
+                            );
                         }
                     }
                 }
@@ -434,7 +486,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         return results;
     }
 
-    internal static MediaTypeCollection GetDeclaredContentTypes(IReadOnlyList<IApiRequestMetadataProvider>? requestMetadataAttributes)
+    internal static MediaTypeCollection GetDeclaredContentTypes(
+        IReadOnlyList<IApiRequestMetadataProvider>? requestMetadataAttributes
+    )
     {
         // Walk through all 'filter' attributes in order, and allow each one to see or override
         // the results of the previous ones. This is similar to the execution path for content-negotiation.
@@ -450,7 +504,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         return contentTypes;
     }
 
-    private static IApiRequestMetadataProvider[]? GetRequestMetadataAttributes(ControllerActionDescriptor action)
+    private static IApiRequestMetadataProvider[]? GetRequestMetadataAttributes(
+        ControllerActionDescriptor action
+    )
     {
         if (action.FilterDescriptors == null)
         {
@@ -467,7 +523,10 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             .ToArray();
     }
 
-    private static string? GetGroupName(ControllerActionDescriptor action, ApiDescriptionActionData extensionData)
+    private static string? GetGroupName(
+        ControllerActionDescriptor action,
+        ApiDescriptionActionData extensionData
+    )
     {
         // The `GroupName` set in the `ApiDescriptionActionData` is either the
         // group name set via [ApiExplorerSettings(GroupName = "foo")] on the
@@ -476,7 +535,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         // - EndpointGroupName on the controller, if it is set
         // - ApiExplorerSettings.GroupName on the action, if it is set
         // - ApiExplorerSettings.GroupName on the controller, if it is set
-        var endpointGroupName = action.EndpointMetadata.OfType<IEndpointGroupNameMetadata>().LastOrDefault();
+        var endpointGroupName = action.EndpointMetadata
+            .OfType<IEndpointGroupNameMetadata>()
+            .LastOrDefault();
         return endpointGroupName?.EndpointGroupName ?? extensionData.GroupName;
     }
 
@@ -495,7 +556,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         public ApiParameterDescriptionContext(
             ModelMetadata metadata,
             BindingInfo? bindingInfo,
-            string? propertyName)
+            string? propertyName
+        )
         {
             // BindingMetadata can be null if the metadata represents properties.
             ModelMetadata = metadata;
@@ -535,7 +597,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         private void Visit(
             ApiParameterDescriptionContext bindingContext,
             BindingSource ambientSource,
-            string containerName)
+            string containerName
+        )
         {
             var source = bindingContext.BindingSource;
             if (source != null && source.IsGreedy)
@@ -558,11 +621,15 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             //
             //  3)  Types with no properties. Obviously nothing to explore there.
             //
-            if (modelMetadata.IsEnumerableType ||
-                !modelMetadata.IsComplexType ||
-                modelMetadata.Properties.Count == 0)
+            if (
+                modelMetadata.IsEnumerableType
+                || !modelMetadata.IsComplexType
+                || modelMetadata.Properties.Count == 0
+            )
             {
-                Context.Results.Add(CreateResult(bindingContext, source ?? ambientSource, containerName));
+                Context.Results.Add(
+                    CreateResult(bindingContext, source ?? ambientSource, containerName)
+                );
                 return;
             }
 
@@ -599,12 +666,16 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             {
                 var propertyMetadata = metadataProperties[i];
                 var key = new PropertyKey(propertyMetadata, source);
-                var bindingInfo = BindingInfo.GetBindingInfo(Enumerable.Empty<object>(), propertyMetadata);
+                var bindingInfo = BindingInfo.GetBindingInfo(
+                    Enumerable.Empty<object>(),
+                    propertyMetadata
+                );
 
                 var propertyContext = new ApiParameterDescriptionContext(
                     propertyMetadata,
                     bindingInfo: bindingInfo,
-                    propertyName: null);
+                    propertyName: null
+                );
 
                 if (Visited.Add(key))
                 {
@@ -614,7 +685,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                 else
                 {
                     // This is cycle, so just add a result rather than traversing.
-                    Context.Results.Add(CreateResult(propertyContext, source ?? ambientSource, newContainerName));
+                    Context.Results.Add(
+                        CreateResult(propertyContext, source ?? ambientSource, newContainerName)
+                    );
                 }
             }
         }
@@ -622,7 +695,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         private ApiParameterDescription CreateResult(
             ApiParameterDescriptionContext bindingContext,
             BindingSource source,
-            string containerName)
+            string containerName
+        )
         {
             return new ApiParameterDescription()
             {
@@ -637,7 +711,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
 
         private static string GetName(string containerName, ApiParameterDescriptionContext metadata)
         {
-            var propertyName = !string.IsNullOrEmpty(metadata.BinderModelName) ? metadata.BinderModelName : metadata.PropertyName;
+            var propertyName = !string.IsNullOrEmpty(metadata.BinderModelName)
+                ? metadata.BinderModelName
+                : metadata.PropertyName;
             return ModelNames.CreatePropertyModelName(containerName, propertyName);
         }
 
@@ -661,10 +737,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         {
             public bool Equals(PropertyKey x, PropertyKey y)
             {
-                return
-                    x.ContainerType == y.ContainerType &&
-                    x.PropertyName == y.PropertyName &&
-                    x.Source == y.Source;
+                return x.ContainerType == y.ContainerType
+                    && x.PropertyName == y.PropertyName
+                    && x.Source == y.Source;
             }
 
             public int GetHashCode(PropertyKey obj)

@@ -61,11 +61,7 @@ public class StreamResponseBodyFeatureTests
 
 public class TestStreamResponseBodyFeature : StreamResponseBodyFeature
 {
-    public TestStreamResponseBodyFeature(Stream stream)
-        : base(stream)
-    {
-
-    }
+    public TestStreamResponseBodyFeature(Stream stream) : base(stream) { }
 
     public override Task StartAsync(CancellationToken cancellationToken = default)
     {
@@ -79,9 +75,7 @@ public class TestStreamResponseBodyFeature : StreamResponseBodyFeature
 public class InnerDisableBufferingFeature : StreamResponseBodyFeature
 {
     public InnerDisableBufferingFeature(Stream stream, IHttpResponseBodyFeature priorFeature)
-        : base(stream, priorFeature)
-    {
-    }
+        : base(stream, priorFeature) { }
 
     public override void DisableBuffering()
     {

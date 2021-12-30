@@ -14,12 +14,14 @@ namespace System
 {
     public static class TestHelpers
     {
-        public static void Validate<T>(this Span<T> span, params T[] expected) where T : struct, IEquatable<T>
+        public static void Validate<T>(this Span<T> span, params T[] expected)
+            where T : struct, IEquatable<T>
         {
             Assert.True(span.SequenceEqual(expected));
         }
 
-        public static void ValidateReferenceType<T>(this Span<T> span, params T[] expected) where T : class
+        public static void ValidateReferenceType<T>(this Span<T> span, params T[] expected)
+            where T : class
         {
             Assert.Equal(span.Length, expected.Length);
             for (int i = 0; i < expected.Length; i++)
@@ -29,7 +31,10 @@ namespace System
             }
 
             T ignore;
-            AssertThrows<IndexOutOfRangeException, T>(span, (_span) => ignore = _span[expected.Length]);
+            AssertThrows<IndexOutOfRangeException, T>(
+                span,
+                (_span) => ignore = _span[expected.Length]
+            );
         }
 
         public static unsafe void ValidateNonNullEmpty<T>(this Span<T> span)
@@ -43,19 +48,24 @@ namespace System
         public delegate void AssertThrowsAction<T>(Span<T> span);
 
         // Cannot use standard Assert.Throws() when testing Span - Span and closures don't get along.
-        public static void AssertThrows<E, T>(Span<T> span, AssertThrowsAction<T> action) where E : Exception
+        public static void AssertThrows<E, T>(Span<T> span, AssertThrowsAction<T> action)
+            where E : Exception
         {
             try
             {
                 action(span);
                 Assert.False(true, "Expected exception: " + typeof(E).GetType());
             }
-            catch (E)
-            {
-            }
+            catch (E) { }
             catch (Exception wrongException)
             {
-                Assert.False(true, "Wrong exception thrown: Expected " + typeof(E).GetType() + ": Actual: " + wrongException.GetType());
+                Assert.False(
+                    true,
+                    "Wrong exception thrown: Expected "
+                        + typeof(E).GetType()
+                        + ": Actual: "
+                        + wrongException.GetType()
+                );
             }
         }
 
@@ -78,12 +88,14 @@ namespace System
             // This space intentionally left blank.
         }
 
-        public static void Validate<T>(this ReadOnlySpan<T> span, params T[] expected) where T : struct, IEquatable<T>
+        public static void Validate<T>(this ReadOnlySpan<T> span, params T[] expected)
+            where T : struct, IEquatable<T>
         {
             Assert.True(span.SequenceEqual(expected));
         }
 
-        public static void ValidateReferenceType<T>(this ReadOnlySpan<T> span, params T[] expected) where T : class
+        public static void ValidateReferenceType<T>(this ReadOnlySpan<T> span, params T[] expected)
+            where T : class
         {
             Assert.Equal(span.Length, expected.Length);
             for (int i = 0; i < expected.Length; i++)
@@ -93,7 +105,10 @@ namespace System
             }
 
             T ignore;
-            AssertThrows<IndexOutOfRangeException, T>(span, (_span) => ignore = _span[expected.Length]);
+            AssertThrows<IndexOutOfRangeException, T>(
+                span,
+                (_span) => ignore = _span[expected.Length]
+            );
         }
 
         public static unsafe void ValidateNonNullEmpty<T>(this ReadOnlySpan<T> span)
@@ -107,19 +122,26 @@ namespace System
         public delegate void AssertThrowsActionReadOnly<T>(ReadOnlySpan<T> span);
 
         // Cannot use standard Assert.Throws() when testing Span - Span and closures don't get along.
-        public static void AssertThrows<E, T>(ReadOnlySpan<T> span, AssertThrowsActionReadOnly<T> action) where E : Exception
+        public static void AssertThrows<E, T>(
+            ReadOnlySpan<T> span,
+            AssertThrowsActionReadOnly<T> action
+        ) where E : Exception
         {
             try
             {
                 action(span);
                 Assert.False(true, "Expected exception: " + typeof(E).GetType());
             }
-            catch (E)
-            {
-            }
+            catch (E) { }
             catch (Exception wrongException)
             {
-                Assert.False(true, "Wrong exception thrown: Expected " + typeof(E).GetType() + ": Actual: " + wrongException.GetType());
+                Assert.False(
+                    true,
+                    "Wrong exception thrown: Expected "
+                        + typeof(E).GetType()
+                        + ": Actual: "
+                        + wrongException.GetType()
+                );
             }
         }
 
@@ -142,12 +164,14 @@ namespace System
             // This space intentionally left blank.
         }
 
-        public static void Validate<T>(this Memory<T> memory, params T[] expected) where T : IEquatable<T>
+        public static void Validate<T>(this Memory<T> memory, params T[] expected)
+            where T : IEquatable<T>
         {
             Assert.True(memory.Span.SequenceEqual(expected));
         }
 
-        public static void ValidateReferenceType<T>(this Memory<T> memory, params T[] expected) where T : class
+        public static void ValidateReferenceType<T>(this Memory<T> memory, params T[] expected)
+            where T : class
         {
             T[] bufferArray = memory.ToArray();
             Assert.Equal(memory.Length, expected.Length);
@@ -158,12 +182,16 @@ namespace System
             }
         }
 
-        public static void Validate<T>(this ReadOnlyMemory<T> memory, params T[] expected) where T : IEquatable<T>
+        public static void Validate<T>(this ReadOnlyMemory<T> memory, params T[] expected)
+            where T : IEquatable<T>
         {
             Assert.True(memory.Span.SequenceEqual(expected));
         }
 
-        public static void ValidateReferenceType<T>(this ReadOnlyMemory<T> memory, params T[] expected) where T : class
+        public static void ValidateReferenceType<T>(
+            this ReadOnlyMemory<T> memory,
+            params T[] expected
+        ) where T : class
         {
             T[] bufferArray = memory.ToArray();
             Assert.Equal(memory.Length, expected.Length);
@@ -321,9 +349,7 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void DoNotIgnore<T>(T value, int consumed)
-        {
-        }
+        public static void DoNotIgnore<T>(T value, int consumed) { }
 
         //
         // { text, start, length } triplets. A "-1" in start or length means "test the overload that doesn't have that parameter."
@@ -399,150 +425,146 @@ namespace System
             Memory<T> mem = default;
             object boxedMemory = mem;
 
-            typeof(Memory<T>).GetField("_object", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(boxedMemory, obj);
-            typeof(Memory<T>).GetField("_index", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(boxedMemory, offset);
-            typeof(Memory<T>).GetField("_length", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(boxedMemory, length);
+            typeof(Memory<T>)
+                .GetField("_object", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(boxedMemory, obj);
+            typeof(Memory<T>)
+                .GetField("_index", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(boxedMemory, offset);
+            typeof(Memory<T>)
+                .GetField("_length", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(boxedMemory, length);
 
             return (Memory<T>)boxedMemory;
         }
 
         /// <summary>Creates a <see cref="ReadOnlyMemory{T}"/> with the specified values in its backing field.</summary>
-        public static ReadOnlyMemory<T> DangerousCreateReadOnlyMemory<T>(object obj, int offset, int length) =>
-            DangerousCreateMemory<T>(obj, offset, length);
+        public static ReadOnlyMemory<T> DangerousCreateReadOnlyMemory<T>(
+            object obj,
+            int offset,
+            int length
+        ) => DangerousCreateMemory<T>(obj, offset, length);
 
-        public static TheoryData<string[], bool> ContainsNullData => new TheoryData<string[], bool>()
-        {
-            { new string[] { "1", null, "2" }, true},
-            { new string[] { "1", "3", "2" }, false},
-            { null, false},
-            { new string[] { "1", null, null }, true},
-            { new string[] { null, null, null }, true},
-        };
+        public static TheoryData<string[], bool> ContainsNullData =>
+            new TheoryData<string[], bool>()
+            {
+                { new string[] { "1", null, "2" }, true },
+                { new string[] { "1", "3", "2" }, false },
+                { null, false },
+                { new string[] { "1", null, null }, true },
+                { new string[] { null, null, null }, true },
+            };
 
-        public static TheoryData<string[], string[],  bool> SequenceEqualsNullData => new TheoryData<string[], string[], bool>()
-        {
-            { new string[] { "1", null, "2" }, new string[] { "1", null, "2" } , true},
-            { new string[] { "1", null, "2" }, new string[] { "1", "3", "2" } , false},
-            { new string[] { "1", null, "2" }, new string[] { null, "3", "2" } , false},
-            { new string[] { "1", null, "2" }, new string[] { null } , false},
-            { new string[] { "1", null, "2" }, null , false},
+        public static TheoryData<string[], string[], bool> SequenceEqualsNullData =>
+            new TheoryData<string[], string[], bool>()
+            {
+                { new string[] { "1", null, "2" }, new string[] { "1", null, "2" }, true },
+                { new string[] { "1", null, "2" }, new string[] { "1", "3", "2" }, false },
+                { new string[] { "1", null, "2" }, new string[] { null, "3", "2" }, false },
+                { new string[] { "1", null, "2" }, new string[] { null }, false },
+                { new string[] { "1", null, "2" }, null, false },
+                { new string[] { null, "2", "1" }, new string[] { null, "2" }, false },
+                { null, new string[] { null }, false },
+                { null, null, true },
+                { null, new string[] { "1", "3", "2" }, false },
+                { null, new string[] { "1", null, "2" }, false },
+                { new string[] { "1", null, null }, new string[] { "1", null, null }, true },
+                { new string[] { null, null, null }, new string[] { null, null, null }, true },
+            };
 
-            { new string[] { null, "2", "1" }, new string[] { null, "2" } , false},
+        public static TheoryData<string[], int> IndexOfNullData =>
+            new TheoryData<string[], int>()
+            {
+                { new string[] { "1", null, "2" }, 1 },
+                { new string[] { "1", "3", "2" }, -1 },
+                { null, -1 },
+                { new string[] { "1", null, null }, 1 },
+                { new string[] { null, null, null }, 0 },
+            };
 
-            { null, new string[] { null }, false},
-            { null, null , true},
-            { null, new string[] { "1", "3", "2" } , false},
-            { null, new string[] { "1", null, "2" } , false},
+        public static TheoryData<string[], string[], int> IndexOfNullSequenceData =>
+            new TheoryData<string[], string[], int>()
+            {
+                { new string[] { "1", null, "2" }, new string[] { "1", null, "2" }, 0 },
+                { new string[] { "1", null, "2" }, new string[] { null }, 1 },
+                { new string[] { "1", null, "2" }, (string[])null, 0 },
+                { new string[] { "1", "3", "2" }, new string[] { "1", null, "2" }, -1 },
+                { new string[] { "1", "3", "2" }, new string[] { null }, -1 },
+                { new string[] { "1", "3", "2" }, (string[])null, 0 },
+                { null, new string[] { "1", null, "2" }, -1 },
+                { new string[] { "1", null, null }, new string[] { null, null, "2" }, -1 },
+                { new string[] { null, null, null }, new string[] { null, null }, 0 },
+            };
 
-            { new string[] { "1", null, null }, new string[] { "1", null, null }, true},
-            { new string[] { null, null, null }, new string[] { null, null, null }, true},
-        };
+        public static TheoryData<string[], string[], int> IndexOfAnyNullSequenceData =>
+            new TheoryData<string[], string[], int>()
+            {
+                { new string[] { "1", null, "2" }, new string[] { "1", null, "2" }, 0 },
+                { new string[] { "1", null, "2" }, new string[] { null, null }, 1 },
+                { new string[] { "1", null, "2" }, new string[] { "3", null }, 1 },
+                { new string[] { "1", null, "2" }, new string[] { "1", "2" }, 0 },
+                { new string[] { "1", null, "2" }, new string[] { "3", "4" }, -1 },
+                { new string[] { null, null, "2" }, new string[] { "3", null }, 0 },
+                { new string[] { null, null, "2" }, new string[] { null, "1" }, 0 },
+                { new string[] { null, null, "2" }, new string[] { null, "1" }, 0 },
+                { new string[] { "1", "3", "2" }, new string[] { "1", null, "2" }, 0 },
+                { new string[] { "1", "3", "2" }, new string[] { null, null }, -1 },
+                { new string[] { "1", "3", "2" }, new string[] { null, "1" }, 0 },
+                { null, new string[] { "1", null, "2" }, -1 },
+                { new string[] { "1", null, null }, new string[] { null, null, "2" }, 1 },
+                { new string[] { null, null, null }, new string[] { null, null }, 0 },
+                { new string[] { "1", "3", "2" }, null, -1 },
+                { new string[] { "1", null, "2" }, null, -1 },
+            };
 
-        public static TheoryData<string[], int> IndexOfNullData => new TheoryData<string[], int>()
-        {
-            { new string[] { "1", null, "2" }, 1},
-            { new string[] { "1", "3", "2" }, -1},
-            { null, -1},
-            { new string[] { "1", null, null }, 1},
-            { new string[] { null, null, null }, 0},
-        };
+        public static TheoryData<string[], int> LastIndexOfNullData =>
+            new TheoryData<string[], int>()
+            {
+                { new string[] { "1", null, "2" }, 1 },
+                { new string[] { "1", "3", "2" }, -1 },
+                { null, -1 },
+                { new string[] { "1", null, null }, 2 },
+                { new string[] { null, null, null }, 2 },
+                { new string[] { null, null, "3" }, 1 },
+            };
 
-        public static TheoryData<string[], string[], int> IndexOfNullSequenceData => new TheoryData<string[], string[], int>()
-        {
-            { new string[] { "1", null, "2" }, new string[] { "1", null, "2" }, 0},
-            { new string[] { "1", null, "2" }, new string[] { null }, 1},
-            { new string[] { "1", null, "2" }, (string[])null, 0},
+        public static TheoryData<string[], string[], int> LastIndexOfNullSequenceData =>
+            new TheoryData<string[], string[], int>()
+            {
+                { new string[] { "1", null, "2" }, new string[] { "1", null, "2" }, 0 },
+                { new string[] { "1", null, "2" }, new string[] { null }, 1 },
+                { new string[] { "1", null, "2" }, (string[])null, 3 },
+                { new string[] { "1", "3", "1" }, new string[] { "1", null, "2" }, -1 },
+                { new string[] { "1", "3", "1" }, new string[] { "1" }, 2 },
+                { new string[] { "1", "3", "1" }, new string[] { null }, -1 },
+                { new string[] { "1", "3", "1" }, (string[])null, 3 },
+                { null, new string[] { "1", null, "2" }, -1 },
+                { new string[] { "1", null, null }, new string[] { null, null, "2" }, -1 },
+                { new string[] { null, null, null }, new string[] { null, null }, 1 },
+            };
 
-            { new string[] { "1", "3", "2" }, new string[] { "1", null, "2" }, -1},
-            { new string[] { "1", "3", "2" }, new string[] { null }, -1},
-            { new string[] { "1", "3", "2" }, (string[])null, 0},
-
-            { null, new string[] { "1", null, "2" }, -1},
-
-            { new string[] { "1", null, null }, new string[] { null, null, "2" }, -1},
-            { new string[] { null, null, null }, new string[] { null, null }, 0},
-        };
-
-        public static TheoryData<string[], string[], int> IndexOfAnyNullSequenceData => new TheoryData<string[], string[], int>()
-        {
-            { new string[] { "1", null, "2" }, new string[] { "1", null, "2" }, 0},
-            { new string[] { "1", null, "2" }, new string[] { null, null }, 1},
-
-            { new string[] { "1", null, "2" }, new string[] { "3", null }, 1},
-            { new string[] { "1", null, "2" }, new string[] { "1", "2" }, 0},
-            { new string[] { "1", null, "2" }, new string[] { "3", "4" }, -1},
-
-            { new string[] { null, null, "2" }, new string[] { "3", null }, 0},
-            { new string[] { null, null, "2" }, new string[] { null, "1" }, 0},
-            { new string[] { null, null, "2" }, new string[] { null, "1" }, 0},
-
-            { new string[] { "1", "3", "2" }, new string[] { "1", null, "2" }, 0},
-            { new string[] { "1", "3", "2" }, new string[] { null, null }, -1},
-
-            { new string[] { "1", "3", "2" }, new string[] { null, "1" }, 0},
-
-            { null, new string[] { "1", null, "2" }, -1},
-
-            { new string[] { "1", null, null }, new string[] { null, null, "2" }, 1},
-            { new string[] { null, null, null }, new string[] { null, null }, 0},
-
-            { new string[] { "1", "3", "2" }, null, -1},
-            { new string[] { "1", null, "2" }, null, -1},
-        };
-
-        public static TheoryData<string[], int> LastIndexOfNullData => new TheoryData<string[], int>()
-        {
-            { new string[] { "1", null, "2" }, 1},
-            { new string[] { "1", "3", "2" }, -1},
-            { null, -1},
-            { new string[] { "1", null, null }, 2},
-            { new string[] { null, null, null }, 2},
-            { new string[] { null, null, "3" }, 1},
-        };
-
-        public static TheoryData<string[], string[], int> LastIndexOfNullSequenceData => new TheoryData<string[], string[], int>()
-        {
-            { new string[] { "1", null, "2" }, new string[] { "1", null, "2" }, 0},
-            { new string[] { "1", null, "2" }, new string[] { null }, 1},
-            { new string[] { "1", null, "2" }, (string[])null, 3},
-
-            { new string[] { "1", "3", "1" }, new string[] { "1", null, "2" }, -1},
-            { new string[] { "1", "3", "1" }, new string[] { "1" }, 2},
-            { new string[] { "1", "3", "1" }, new string[] { null }, -1},
-            { new string[] { "1", "3", "1" }, (string[])null, 3},
-
-            { null, new string[] { "1", null, "2" }, -1},
-
-            { new string[] { "1", null, null }, new string[] { null, null, "2" }, -1},
-            { new string[] { null, null, null }, new string[] { null, null }, 1},
-        };
-
-        public static TheoryData<string[], string[], int> LastIndexOfAnyNullSequenceData => new TheoryData<string[], string[], int>()
-        {
-            { new string[] { "1", null, "2" }, new string[] { "1", null, "3" }, 1},
-            { new string[] { "1", null, "2" }, new string[] { null, null }, 1},
-            { new string[] { "1", null, "2" }, new string[] { "3", "4" }, -1},
-            { new string[] { "1", null, "2" }, new string[] { "3", null }, 1},
-            { new string[] { "1", null, "2" }, new string[] { "1", null }, 1},
-            { new string[] { "1", null, "2" }, new string[] { null, null }, 1},
-            { new string[] { "1", null, "2" }, new string[] { "1", "2" }, 2},
-            { null, new string[] { "1", null, "2" }, -1},
-
-            { new string[] { null, null, "2" }, new string[] { "3", null }, 1},
-            { new string[] { null, null, "2" }, new string[] { null, "1" }, 1},
-            { new string[] { null, null, "2" }, new string[] { null, "1" }, 1},
-
-            { new string[] { "1", "3", "2" }, new string[] { null, "1" }, 0},
-            { new string[] { "1", "3", "2" }, new string[] { "1", "2", null }, 2},
-            { new string[] { "1", "3", "2" }, new string[] { null, null }, -1},
-
-            { null, new string[] { null, "1" }, -1},
-
-            { new string[] { "1", null, null }, new string[] { null, null, "2" }, 2},
-            { new string[] { null, null, null }, new string[] { null, null }, 2},
-
-            { new string[] { "1", null, "2" }, null, -1},
-            { new string[] { "1", "3", "2" }, null, -1},
-        };
+        public static TheoryData<string[], string[], int> LastIndexOfAnyNullSequenceData =>
+            new TheoryData<string[], string[], int>()
+            {
+                { new string[] { "1", null, "2" }, new string[] { "1", null, "3" }, 1 },
+                { new string[] { "1", null, "2" }, new string[] { null, null }, 1 },
+                { new string[] { "1", null, "2" }, new string[] { "3", "4" }, -1 },
+                { new string[] { "1", null, "2" }, new string[] { "3", null }, 1 },
+                { new string[] { "1", null, "2" }, new string[] { "1", null }, 1 },
+                { new string[] { "1", null, "2" }, new string[] { null, null }, 1 },
+                { new string[] { "1", null, "2" }, new string[] { "1", "2" }, 2 },
+                { null, new string[] { "1", null, "2" }, -1 },
+                { new string[] { null, null, "2" }, new string[] { "3", null }, 1 },
+                { new string[] { null, null, "2" }, new string[] { null, "1" }, 1 },
+                { new string[] { null, null, "2" }, new string[] { null, "1" }, 1 },
+                { new string[] { "1", "3", "2" }, new string[] { null, "1" }, 0 },
+                { new string[] { "1", "3", "2" }, new string[] { "1", "2", null }, 2 },
+                { new string[] { "1", "3", "2" }, new string[] { null, null }, -1 },
+                { null, new string[] { null, "1" }, -1 },
+                { new string[] { "1", null, null }, new string[] { null, null, "2" }, 2 },
+                { new string[] { null, null, null }, new string[] { null, null }, 2 },
+                { new string[] { "1", null, "2" }, null, -1 },
+                { new string[] { "1", "3", "2" }, null, -1 },
+            };
     }
 }

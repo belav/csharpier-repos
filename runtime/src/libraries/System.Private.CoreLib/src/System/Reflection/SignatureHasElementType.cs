@@ -26,14 +26,17 @@ namespace System.Reflection
         public sealed override bool IsGenericParameter => false;
         public sealed override bool IsGenericTypeParameter => false;
         public sealed override bool IsGenericMethodParameter => false;
-        public sealed override bool ContainsGenericParameters => _elementType.ContainsGenericParameters;
+        public sealed override bool ContainsGenericParameters =>
+            _elementType.ContainsGenericParameters;
 
         internal sealed override SignatureType? ElementType => _elementType;
         public abstract override int GetArrayRank();
-        public sealed override Type GetGenericTypeDefinition() => throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
+        public sealed override Type GetGenericTypeDefinition() =>
+            throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
         public sealed override Type[] GetGenericArguments() => Type.EmptyTypes;
         public sealed override Type[] GenericTypeArguments => Type.EmptyTypes;
-        public sealed override int GenericParameterPosition => throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+        public sealed override int GenericParameterPosition =>
+            throw new InvalidOperationException(SR.Arg_NotGenericParameter);
         public sealed override string Name => _elementType.Name + Suffix;
         public sealed override string? Namespace => _elementType.Namespace;
 

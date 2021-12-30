@@ -60,9 +60,7 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Method invoked when the component is ready to start, having received its
     /// initial parameters from its parent in the render tree.
     /// </summary>
-    protected virtual void OnInitialized()
-    {
-    }
+    protected virtual void OnInitialized() { }
 
     /// <summary>
     /// Method invoked when the component is ready to start, having received its
@@ -72,24 +70,20 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// want the component to refresh when that operation is completed.
     /// </summary>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-    protected virtual Task OnInitializedAsync()
-        => Task.CompletedTask;
+    protected virtual Task OnInitializedAsync() => Task.CompletedTask;
 
     /// <summary>
     /// Method invoked when the component has received parameters from its parent in
     /// the render tree, and the incoming values have been assigned to properties.
     /// </summary>
-    protected virtual void OnParametersSet()
-    {
-    }
+    protected virtual void OnParametersSet() { }
 
     /// <summary>
     /// Method invoked when the component has received parameters from its parent in
     /// the render tree, and the incoming values have been assigned to properties.
     /// </summary>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
-    protected virtual Task OnParametersSetAsync()
-        => Task.CompletedTask;
+    protected virtual Task OnParametersSetAsync() => Task.CompletedTask;
 
     /// <summary>
     /// Notifies the component that its state has changed. When applicable, this will
@@ -122,8 +116,7 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Returns a flag to indicate whether the component should render.
     /// </summary>
     /// <returns></returns>
-    protected virtual bool ShouldRender()
-        => true;
+    protected virtual bool ShouldRender() => true;
 
     /// <summary>
     /// Method invoked after each time the component has been rendered.
@@ -138,9 +131,7 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Use the <paramref name="firstRender"/> parameter to ensure that initialization work is only performed
     /// once.
     /// </remarks>
-    protected virtual void OnAfterRender(bool firstRender)
-    {
-    }
+    protected virtual void OnAfterRender(bool firstRender) { }
 
     /// <summary>
     /// Method invoked after each time the component has been rendered. Note that the component does
@@ -158,24 +149,22 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Use the <paramref name="firstRender"/> parameter to ensure that initialization work is only performed
     /// once.
     /// </remarks>
-    protected virtual Task OnAfterRenderAsync(bool firstRender)
-        => Task.CompletedTask;
+    protected virtual Task OnAfterRenderAsync(bool firstRender) => Task.CompletedTask;
 
     /// <summary>
     /// Executes the supplied work item on the associated renderer's
     /// synchronization context.
     /// </summary>
     /// <param name="workItem">The work item to execute.</param>
-    protected Task InvokeAsync(Action workItem)
-        => _renderHandle.Dispatcher.InvokeAsync(workItem);
+    protected Task InvokeAsync(Action workItem) => _renderHandle.Dispatcher.InvokeAsync(workItem);
 
     /// <summary>
     /// Executes the supplied work item on the associated renderer's
     /// synchronization context.
     /// </summary>
     /// <param name="workItem">The work item to execute.</param>
-    protected Task InvokeAsync(Func<Task> workItem)
-        => _renderHandle.Dispatcher.InvokeAsync(workItem);
+    protected Task InvokeAsync(Func<Task> workItem) =>
+        _renderHandle.Dispatcher.InvokeAsync(workItem);
 
     void IComponent.Attach(RenderHandle renderHandle)
     {
@@ -184,12 +173,13 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
         // a component could hold a collection of render handles.
         if (_renderHandle.IsInitialized)
         {
-            throw new InvalidOperationException($"The render handle is already set. Cannot initialize a {nameof(ComponentBase)} more than once.");
+            throw new InvalidOperationException(
+                $"The render handle is already set. Cannot initialize a {nameof(ComponentBase)} more than once."
+            );
         }
 
         _renderHandle = renderHandle;
     }
-
 
     /// <summary>
     /// Sets parameters supplied by the component's parent in the render tree.
@@ -266,16 +256,14 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
         // If no async work is to be performed, i.e. the task has already ran to completion
         // or was canceled by the time we got to inspect it, avoid going async and re-invoking
         // StateHasChanged at the culmination of the async work.
-        var shouldAwaitTask = task.Status != TaskStatus.RanToCompletion &&
-            task.Status != TaskStatus.Canceled;
+        var shouldAwaitTask =
+            task.Status != TaskStatus.RanToCompletion && task.Status != TaskStatus.Canceled;
 
         // We always call StateHasChanged here as we want to trigger a rerender after OnParametersSet and
         // the synchronous part of OnParametersSetAsync has run.
         StateHasChanged();
 
-        return shouldAwaitTask ?
-            CallStateHasChangedOnAsyncCompletion(task) :
-            Task.CompletedTask;
+        return shouldAwaitTask ? CallStateHasChangedOnAsyncCompletion(task) : Task.CompletedTask;
     }
 
     private async Task CallStateHasChangedOnAsyncCompletion(Task task)
@@ -301,17 +289,15 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem callback, object? arg)
     {
         var task = callback.InvokeAsync(arg);
-        var shouldAwaitTask = task.Status != TaskStatus.RanToCompletion &&
-            task.Status != TaskStatus.Canceled;
+        var shouldAwaitTask =
+            task.Status != TaskStatus.RanToCompletion && task.Status != TaskStatus.Canceled;
 
         // After each event, we synchronously re-render (unless !ShouldRender())
         // This just saves the developer the trouble of putting "StateHasChanged();"
         // at the end of every event callback.
         StateHasChanged();
 
-        return shouldAwaitTask ?
-            CallStateHasChangedOnAsyncCompletion(task) :
-            Task.CompletedTask;
+        return shouldAwaitTask ? CallStateHasChangedOnAsyncCompletion(task) : Task.CompletedTask;
     }
 
     Task IHandleAfterRender.OnAfterRenderAsync()

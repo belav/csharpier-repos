@@ -7,8 +7,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
 internal class ManualIntervalControl
 {
-
-    private TaskCompletionSource<object> _pauseCompletionSource = new TaskCompletionSource<object>();
+    private TaskCompletionSource<object> _pauseCompletionSource =
+        new TaskCompletionSource<object>();
     private TaskCompletionSource<object> _resumeCompletionSource;
 
     public Task Pause => _pauseCompletionSource.Task;

@@ -27,17 +27,27 @@ namespace JIT.HardwareIntrinsics.General
             {
                 values[i] = TestLibrary.Generator.GetDouble();
             }
-            
+
             Vector64<Double> vector = Vector64.Create(values[0]);
             string actual = vector.ToString();
 
-            string expected = '<' + string.Join(", ", values.Select(x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture))) + '>';
+            string expected =
+                '<'
+                + string.Join(
+                    ", ",
+                    values.Select(
+                        x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture)
+                    )
+                )
+                + '>';
 
             bool succeeded = string.Equals(expected, actual, StringComparison.Ordinal);
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64DoubleToString: Vector64<Double>.ToString() returned an unexpected result.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64DoubleToString: Vector64<Double>.ToString() returned an unexpected result."
+                );
                 TestLibrary.TestFramework.LogInformation($"Expected: {expected}");
                 TestLibrary.TestFramework.LogInformation($"Actual: {actual}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

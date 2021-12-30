@@ -42,12 +42,14 @@ public class CompositeEndpointDataSourceTest
         var endpoint3 = CreateEndpoint("/c");
         var endpoint4 = CreateEndpoint("/d");
         var endpoint5 = CreateEndpoint("/e");
-        var compositeDataSource = new CompositeEndpointDataSource(new[]
-        {
+        var compositeDataSource = new CompositeEndpointDataSource(
+            new[]
+            {
                 new DefaultEndpointDataSource(new Endpoint[] { endpoint1, endpoint2 }),
                 new DefaultEndpointDataSource(new Endpoint[] { endpoint3, endpoint4 }),
                 new DefaultEndpointDataSource(new Endpoint[] { endpoint5 }),
-            });
+            }
+        );
 
         // Act
         var endpoints = compositeDataSource.Endpoints;
@@ -59,7 +61,8 @@ public class CompositeEndpointDataSourceTest
             (ep) => Assert.Same(endpoint2, ep),
             (ep) => Assert.Same(endpoint3, ep),
             (ep) => Assert.Same(endpoint4, ep),
-            (ep) => Assert.Same(endpoint5, ep));
+            (ep) => Assert.Same(endpoint5, ep)
+        );
     }
 
     [Fact]
@@ -87,7 +90,8 @@ public class CompositeEndpointDataSourceTest
         Assert.Collection(
             compositeDataSource.Endpoints,
             (ep) => Assert.Same(endpoint1, ep),
-            (ep) => Assert.Same(endpoint2, ep));
+            (ep) => Assert.Same(endpoint2, ep)
+        );
 
         // Arrange3
         var endpoint3 = CreateEndpoint("/c");
@@ -100,7 +104,8 @@ public class CompositeEndpointDataSourceTest
             compositeDataSource.Endpoints,
             (ep) => Assert.Same(endpoint1, ep),
             (ep) => Assert.Same(endpoint2, ep),
-            (ep) => Assert.Same(endpoint3, ep));
+            (ep) => Assert.Same(endpoint3, ep)
+        );
     }
 
     [Fact]
@@ -151,14 +156,16 @@ public class CompositeEndpointDataSourceTest
         string template,
         object defaults = null,
         int order = 0,
-        string routeName = null)
+        string routeName = null
+    )
     {
         return new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse(template, defaults, parameterPolicies: null),
             order,
             EndpointMetadataCollection.Empty,
-            null);
+            null
+        );
     }
 
     private class CustomEndpointDataSource : EndpointDataSource

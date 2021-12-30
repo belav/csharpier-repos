@@ -17,7 +17,12 @@ internal class HttpMultiplexedConnectionMiddleware<TContext> where TContext : no
     private readonly HttpProtocols _protocols;
     private readonly bool _addAltSvcHeader;
 
-    public HttpMultiplexedConnectionMiddleware(ServiceContext serviceContext, IHttpApplication<TContext> application, HttpProtocols protocols, bool addAltSvcHeader)
+    public HttpMultiplexedConnectionMiddleware(
+        ServiceContext serviceContext,
+        IHttpApplication<TContext> application,
+        HttpProtocols protocols,
+        bool addAltSvcHeader
+    )
     {
         _serviceContext = serviceContext;
         _application = application;
@@ -29,7 +34,10 @@ internal class HttpMultiplexedConnectionMiddleware<TContext> where TContext : no
     {
         var memoryPoolFeature = connectionContext.Features.Get<IMemoryPoolFeature>();
         var localEndPoint = connectionContext.LocalEndPoint as IPEndPoint;
-        var altSvcHeader = _addAltSvcHeader && localEndPoint != null ? HttpUtilities.GetEndpointAltSvc(localEndPoint, _protocols) : null;
+        var altSvcHeader =
+            _addAltSvcHeader && localEndPoint != null
+                ? HttpUtilities.GetEndpointAltSvc(localEndPoint, _protocols)
+                : null;
 
         var httpConnectionContext = new HttpMultiplexedConnectionContext(
             connectionContext.ConnectionId,
@@ -40,7 +48,8 @@ internal class HttpMultiplexedConnectionMiddleware<TContext> where TContext : no
             connectionContext.Features,
             memoryPoolFeature?.MemoryPool ?? System.Buffers.MemoryPool<byte>.Shared,
             localEndPoint,
-            connectionContext.RemoteEndPoint as IPEndPoint);
+            connectionContext.RemoteEndPoint as IPEndPoint
+        );
 
         var connection = new HttpConnection(httpConnectionContext);
 

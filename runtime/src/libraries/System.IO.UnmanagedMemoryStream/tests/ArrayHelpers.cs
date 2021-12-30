@@ -50,14 +50,15 @@ namespace System.IO.Tests
             public static readonly ArrayComparer<T> Instance = new ArrayComparer<T>();
 
             private ArrayComparer() // use the static Instance singleton
-            {
-            }
+            { }
 
             public bool Equals(T[] x, T[] y) => x.AsSpan().SequenceEqual(y);
 
             public int GetHashCode(T[] obj)
             {
-                throw new NotSupportedException("Avoid using arrays as keys in hashtables. If you really have to do it, write your own comparer; I don't want to be responsible for your slow code.");
+                throw new NotSupportedException(
+                    "Avoid using arrays as keys in hashtables. If you really have to do it, write your own comparer; I don't want to be responsible for your slow code."
+                );
             }
         }
     }

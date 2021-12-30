@@ -14,7 +14,7 @@ namespace System.Xml.Tests
     {
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
-        public TCValidateWhitespace_String(ITestOutputHelper output): base(output)
+        public TCValidateWhitespace_String(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);

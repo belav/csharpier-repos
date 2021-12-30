@@ -19,18 +19,14 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly LocalSymbol _inProgress;
 
-        internal LocalInProgressBinder(LocalSymbol inProgress, Binder next)
-            : base(next)
+        internal LocalInProgressBinder(LocalSymbol inProgress, Binder next) : base(next)
         {
             _inProgress = inProgress;
         }
 
         internal override LocalSymbol LocalInProgress
         {
-            get
-            {
-                return _inProgress;
-            }
+            get { return _inProgress; }
         }
     }
 }

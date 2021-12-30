@@ -7,13 +7,20 @@ using System.Security.Permissions;
 namespace System.Transactions
 {
 #if NET5_0_OR_GREATER
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public sealed class DistributedTransactionPermissionAttribute : CodeAccessSecurityAttribute
     {
         public DistributedTransactionPermissionAttribute(SecurityAction action) : base(action) { }
         public new bool Unrestricted { get; set; }
-        public override IPermission CreatePermission() { return null; }
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

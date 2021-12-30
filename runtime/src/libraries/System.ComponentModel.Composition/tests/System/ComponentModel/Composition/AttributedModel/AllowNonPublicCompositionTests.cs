@@ -149,7 +149,9 @@ namespace System.ComponentModel.Composition
         {
             var cat = CatalogFactory.CreateDefaultAttributed();
             var container = new CompositionContainer(cat);
-            container.GetExportedValue<PublicImportsExpectingProtectedInternalExports>().VerifyIsBound();
+            container
+                .GetExportedValue<PublicImportsExpectingProtectedInternalExports>()
+                .VerifyIsBound();
         }
 
         [Fact]
@@ -158,7 +160,9 @@ namespace System.ComponentModel.Composition
         {
             var cat = CatalogFactory.CreateDefaultAttributed();
             var container = new CompositionContainer(cat);
-            container.GetExportedValue<InternalImportsExpectingProtectedInternalExports>().VerifyIsBound();
+            container
+                .GetExportedValue<InternalImportsExpectingProtectedInternalExports>()
+                .VerifyIsBound();
         }
 
         [Fact]
@@ -180,7 +184,10 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public interface IData { int X { get; set; } }
+    public interface IData
+    {
+        int X { get; set; }
+    }
 
     public class PrivateDataImportExportWithContract
     {
@@ -188,7 +195,10 @@ namespace System.ComponentModel.Composition
         {
             Out = new PrivateDataType() { X = x };
         }
-        public int X { get { return In.X; } }
+        public int X
+        {
+            get { return In.X; }
+        }
         [Export("a")]
         PrivateDataType Out { get; set; }
         [Import("a")]
@@ -201,7 +211,10 @@ namespace System.ComponentModel.Composition
         {
             Out = new PrivateDataType() { X = x };
         }
-        public int X { get { return In.X; } }
+        public int X
+        {
+            get { return In.X; }
+        }
         [Export]
         PrivateDataType Out { get; set; }
         [Import]
@@ -215,10 +228,20 @@ namespace System.ComponentModel.Composition
 
     public class AllPrivateNoAttribute
     {
-        public AllPrivateNoAttribute(int exportA, int exportB) { ExportA = exportA; ExportB = exportB; }
+        public AllPrivateNoAttribute(int exportA, int exportB)
+        {
+            ExportA = exportA;
+            ExportB = exportB;
+        }
 
-        public int PublicImportA { get { return ImportA; } }
-        public int PublicImportB { get { return ImportB; } }
+        public int PublicImportA
+        {
+            get { return ImportA; }
+        }
+        public int PublicImportB
+        {
+            get { return ImportB; }
+        }
 
         [Import("a")]
         int ImportA { get; set; }
@@ -231,8 +254,14 @@ namespace System.ComponentModel.Composition
     }
     public class AllPrivateNoAttributeImportOnly
     {
-        public int PublicImportA { get { return ImportA; } }
-        public int PublicImportB { get { return ImportB; } }
+        public int PublicImportA
+        {
+            get { return ImportA; }
+        }
+        public int PublicImportB
+        {
+            get { return ImportB; }
+        }
 
         [Import("a")]
         int ImportA { get; set; }
@@ -242,10 +271,20 @@ namespace System.ComponentModel.Composition
 
     public class AllPrivate
     {
-        public AllPrivate(int exportA, int exportB) { ExportA = exportA; ExportB = exportB; }
+        public AllPrivate(int exportA, int exportB)
+        {
+            ExportA = exportA;
+            ExportB = exportB;
+        }
 
-        public int PublicImportA { get { return ImportA; } }
-        public int PublicImportB { get { return ImportB; } }
+        public int PublicImportA
+        {
+            get { return ImportA; }
+        }
+        public int PublicImportB
+        {
+            get { return ImportB; }
+        }
 
         [Import("a")]
         int ImportA { get; set; }
@@ -259,8 +298,14 @@ namespace System.ComponentModel.Composition
 
     public class AllPrivateImportOnly
     {
-        public int PublicImportA { get { return ImportA; } }
-        public int PublicImportB { get { return ImportB; } }
+        public int PublicImportA
+        {
+            get { return ImportA; }
+        }
+        public int PublicImportB
+        {
+            get { return ImportB; }
+        }
 
         [Import("a")]
         int ImportA { get; set; }
@@ -270,7 +315,11 @@ namespace System.ComponentModel.Composition
 
     public class AllPrivateExportOnly
     {
-        public AllPrivateExportOnly(int exportA, int exportB) { ExportA = exportA; ExportB = exportB; }
+        public AllPrivateExportOnly(int exportA, int exportB)
+        {
+            ExportA = exportA;
+            ExportB = exportB;
+        }
 
         [Export("a")]
         int ExportA { get; set; }

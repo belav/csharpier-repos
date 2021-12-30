@@ -40,7 +40,6 @@ public class TestClass
             Console.WriteLine("ApplicationException  was expected, but instead got:" + e);
             shouldFail = true;
         }
-
         finally
         {
             Console.WriteLine("In finally");
@@ -67,4 +66,3 @@ public class TestClass
         return true;
     }
 }
-

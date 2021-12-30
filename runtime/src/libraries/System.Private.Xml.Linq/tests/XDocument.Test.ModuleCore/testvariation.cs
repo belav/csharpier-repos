@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;      //BindingFlags
+using System.Reflection; //BindingFlags
 
 namespace Microsoft.Test.ModuleCore
 {
@@ -22,18 +22,11 @@ namespace Microsoft.Test.ModuleCore
         protected TestFunc pfunc = null;
 
         //Constructor
-        public TestVariation()
-            : base(null, null, TestType.TestVariation)
-        {
-        }
+        public TestVariation() : base(null, null, TestType.TestVariation) { }
 
-        public TestVariation(TestFunc func)
-            : this(func, null)
-        {
-        }
+        public TestVariation(TestFunc func) : this(func, null) { }
 
-        public TestVariation(TestFunc func, string desc)
-            : base(null, desc, TestType.TestVariation)
+        public TestVariation(TestFunc func, string desc) : base(null, desc, TestType.TestVariation)
         {
             pfunc = func;
         }

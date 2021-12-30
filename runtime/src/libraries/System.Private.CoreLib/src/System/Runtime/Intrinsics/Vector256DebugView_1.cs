@@ -5,8 +5,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Runtime.Intrinsics
 {
-    internal readonly struct Vector256DebugView<T>
-        where T : struct
+    internal readonly struct Vector256DebugView<T> where T : struct
     {
         private readonly Vector256<T> _value;
 

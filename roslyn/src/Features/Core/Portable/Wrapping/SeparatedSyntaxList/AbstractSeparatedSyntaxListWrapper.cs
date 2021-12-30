@@ -13,9 +13,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
     /// <summary>
     /// Base type for all wrappers that involve wrapping a comma-separated list of items.
     /// </summary>
-    internal abstract partial class AbstractSeparatedSyntaxListWrapper<
-        TListSyntax,
-        TListItemSyntax>
+    internal abstract partial class AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
         : AbstractSyntaxWrapper
         where TListSyntax : SyntaxNode
         where TListItemSyntax : SyntaxNode
@@ -36,17 +34,25 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
         protected abstract string Wrap_every_item { get; }
 
         protected AbstractSeparatedSyntaxListWrapper(IIndentationService indentationService)
-            : base(indentationService)
-        {
-        }
+            : base(indentationService) { }
 
         protected abstract TListSyntax? TryGetApplicableList(SyntaxNode node);
-        protected abstract SeparatedSyntaxList<TListItemSyntax> GetListItems(TListSyntax listSyntax);
+        protected abstract SeparatedSyntaxList<TListItemSyntax> GetListItems(
+            TListSyntax listSyntax
+        );
         protected abstract bool PositionIsApplicable(
-            SyntaxNode root, int position, SyntaxNode declaration, TListSyntax listSyntax);
+            SyntaxNode root,
+            int position,
+            SyntaxNode declaration,
+            TListSyntax listSyntax
+        );
 
         public override async Task<ICodeActionComputer?> TryCreateComputerAsync(
-            Document document, int position, SyntaxNode declaration, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            SyntaxNode declaration,
+            CancellationToken cancellationToken
+        )
         {
             var listSyntax = TryGetApplicableList(declaration);
             if (listSyntax == null)
@@ -54,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 return null;
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!PositionIsApplicable(root, position, declaration, listSyntax))
             {
                 return null;
@@ -70,7 +78,11 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             }
 
             var containsUnformattableContent = await ContainsUnformattableContentAsync(
-                document, listItems.GetWithSeparators(), cancellationToken).ConfigureAwait(false);
+                    document,
+                    listItems.GetWithSeparators(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (containsUnformattableContent)
             {
@@ -80,7 +92,14 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return new SeparatedSyntaxListCodeActionComputer(
-                this, document, sourceText, options, listSyntax, listItems, cancellationToken);
+                this,
+                document,
+                sourceText,
+                options,
+                listSyntax,
+                listItems,
+                cancellationToken
+            );
         }
     }
 }

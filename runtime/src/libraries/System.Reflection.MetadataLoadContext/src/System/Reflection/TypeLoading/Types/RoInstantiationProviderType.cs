@@ -10,10 +10,7 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract partial class RoInstantiationProviderType : RoType
     {
-        protected RoInstantiationProviderType()
-            : base()
-        {
-        }
+        protected RoInstantiationProviderType() : base() { }
 
         internal abstract RoType[] Instantiation { get; }
     }

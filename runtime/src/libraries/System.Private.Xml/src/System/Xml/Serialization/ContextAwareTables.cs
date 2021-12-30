@@ -9,7 +9,10 @@ namespace System.Xml.Serialization
     using System.Runtime.CompilerServices;
     using System.Runtime.Loader;
 
-    internal class ContextAwareTables<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T> where T : class?
+    internal class ContextAwareTables<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            T
+    > where T : class?
     {
         private Hashtable _defaultTable;
         private ConditionalWeakTable<Type, T> _collectibleTable;
@@ -46,7 +49,6 @@ namespace System.Xml.Serialization
                     }
                 }
             }
-
             // Collectible load contexts should use the ConditionalWeakTable so they can be unloaded
             else
             {

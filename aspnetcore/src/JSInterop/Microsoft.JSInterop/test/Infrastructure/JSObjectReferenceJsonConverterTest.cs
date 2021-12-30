@@ -26,7 +26,9 @@ public class JSObjectReferenceJsonConverterTest
         var json = "{}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+        var ex = Assert.Throws<JsonException>(
+            () => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Required property __jsObjectId not found.", ex.Message);
     }
 
@@ -37,7 +39,9 @@ public class JSObjectReferenceJsonConverterTest
         var json = "{\"foo\":2}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+        var ex = Assert.Throws<JsonException>(
+            () => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Unexcepted JSON property foo.", ex.Message);
     }
 
@@ -48,7 +52,9 @@ public class JSObjectReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":5";
 
         // Act & Assert
-        var ex = Record.Exception(() => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+        var ex = Record.Exception(
+            () => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -59,7 +65,9 @@ public class JSObjectReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":3,\"__jsObjectId\":7}}";
 
         // Act & Assert
-        var ex = Record.Exception(() => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions));
+        var ex = Record.Exception(
+            () => JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -71,7 +79,10 @@ public class JSObjectReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":{expectedId}}}";
 
         // Act
-        var deserialized = (JSObjectReference)JsonSerializer.Deserialize<IJSObjectReference>(json, JsonSerializerOptions)!;
+        var deserialized = (JSObjectReference)JsonSerializer.Deserialize<IJSObjectReference>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Equal(expectedId, deserialized?.Id);
@@ -90,11 +101,11 @@ public class JSObjectReferenceJsonConverterTest
         Assert.Equal($"{{\"__jsObjectId\":{jsObjectRef.Id}}}", json);
     }
 
-    private class TestJSUnmarshalledObjectReference : JSInProcessObjectReference, IJSUnmarshalledObjectReference
+    private class TestJSUnmarshalledObjectReference
+        : JSInProcessObjectReference,
+          IJSUnmarshalledObjectReference
     {
-        public TestJSUnmarshalledObjectReference(long id) : base(default!, id)
-        {
-        }
+        public TestJSUnmarshalledObjectReference(long id) : base(default!, id) { }
 
         public TResult InvokeUnmarshalled<TResult>(string identifier)
         {
@@ -111,7 +122,12 @@ public class JSObjectReferenceJsonConverterTest
             throw new NotImplementedException();
         }
 
-        public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2)
+        public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(
+            string identifier,
+            T0 arg0,
+            T1 arg1,
+            T2 arg2
+        )
         {
             throw new NotImplementedException();
         }

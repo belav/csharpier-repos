@@ -14,7 +14,6 @@
 
         public class Source : SourceBase
         {
-            
         }
 
         public class Dest
@@ -26,23 +25,23 @@
         {
             private Dest[] _dest;
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<SourceBase, Dest>()
-                    .Include<Source, Dest>()
-                    .ForMember(d => d.Value, opt => opt.MapFrom(src => src.OtherValue));
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<SourceBase, Dest>()
+                            .Include<Source, Dest>()
+                            .ForMember(d => d.Value, opt => opt.MapFrom(src => src.OtherValue));
 
-                cfg.CreateProjection<Source, Dest>();
-            });
+                        cfg.CreateProjection<Source, Dest>();
+                    }
+                );
 
             protected override void Because_of()
             {
                 IQueryable<Source> sources = new[]
                 {
-                    new Source()
-                    {
-                        OtherValue = 10
-                    }
+                    new Source() { OtherValue = 10 }
                 }.AsQueryable();
 
                 _dest = sources.ProjectTo<Dest>(Configuration).ToArray();

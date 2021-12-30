@@ -24,7 +24,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(3), EntryState.Added);
             var table = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((1, EntryState.Added), (2, EntryState.Added), (3, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (1, EntryState.Added),
+                (2, EntryState.Added),
+                (3, EntryState.Added)
+            );
             AssertTableEntries(table, expected);
         }
 
@@ -37,7 +41,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(7, 8, 9), EntryState.Added);
             var table = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((1, EntryState.Added), (2, EntryState.Added), (3, EntryState.Added), (4, EntryState.Added), (5, EntryState.Added), (6, EntryState.Added), (7, EntryState.Added), (8, EntryState.Added), (9, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (1, EntryState.Added),
+                (2, EntryState.Added),
+                (3, EntryState.Added),
+                (4, EntryState.Added),
+                (5, EntryState.Added),
+                (6, EntryState.Added),
+                (7, EntryState.Added),
+                (8, EntryState.Added),
+                (9, EntryState.Added)
+            );
             AssertTableEntries(table, expected);
         }
 
@@ -50,7 +64,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(o, o, o), EntryState.Added);
             var table = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((o, EntryState.Added), (o, EntryState.Added), (o, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (o, EntryState.Added),
+                (o, EntryState.Added),
+                (o, EntryState.Added)
+            );
             AssertTableEntries(table, expected);
         }
 
@@ -65,7 +83,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntry(o, EntryState.Added);
             var table = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((o, EntryState.Added), (null, EntryState.Added), (o, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (o, EntryState.Added),
+                (null, EntryState.Added),
+                (o, EntryState.Added)
+            );
             AssertTableEntries(table, expected);
         }
 
@@ -83,10 +105,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(10, 11), EntryState.Added);
             builder.TryUseCachedEntries(); // ((2, EntryState.Cached), (3, EntryState.Cached))
             builder.AddEntries(ImmutableArray.Create(20, 21, 22), EntryState.Modified);
-            builder.RemoveEntries(); //((6, EntryState.Removed))); 
+            builder.RemoveEntries(); //((6, EntryState.Removed)));
             var newTable = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((10, EntryState.Added), (11, EntryState.Added), (2, EntryState.Cached), (3, EntryState.Cached), (20, EntryState.Modified), (21, EntryState.Modified), (22, EntryState.Modified), (6, EntryState.Removed));
+            var expected = ImmutableArray.Create(
+                (10, EntryState.Added),
+                (11, EntryState.Added),
+                (2, EntryState.Cached),
+                (3, EntryState.Cached),
+                (20, EntryState.Modified),
+                (21, EntryState.Modified),
+                (22, EntryState.Modified),
+                (6, EntryState.Removed)
+            );
             AssertTableEntries(newTable, expected);
         }
 
@@ -99,11 +130,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(7, 8, 9), EntryState.Added);
             var table = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((1, EntryState.Added), (2, EntryState.Added), (3, EntryState.Added), (4, EntryState.Removed), (5, EntryState.Removed), (6, EntryState.Removed), (7, EntryState.Added), (8, EntryState.Added), (9, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (1, EntryState.Added),
+                (2, EntryState.Added),
+                (3, EntryState.Added),
+                (4, EntryState.Removed),
+                (5, EntryState.Removed),
+                (6, EntryState.Removed),
+                (7, EntryState.Added),
+                (8, EntryState.Added),
+                (9, EntryState.Added)
+            );
             AssertTableEntries(table, expected);
 
             var compactedTable = table.AsCached();
-            expected = ImmutableArray.Create((1, EntryState.Cached), (2, EntryState.Cached), (3, EntryState.Cached), (7, EntryState.Cached), (8, EntryState.Cached), (9, EntryState.Cached));
+            expected = ImmutableArray.Create(
+                (1, EntryState.Cached),
+                (2, EntryState.Cached),
+                (3, EntryState.Cached),
+                (7, EntryState.Cached),
+                (8, EntryState.Cached),
+                (9, EntryState.Cached)
+            );
             AssertTableEntries(compactedTable, expected);
         }
 
@@ -116,11 +164,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(7, 8, 9), EntryState.Added);
             var table = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((1, EntryState.Added), (2, EntryState.Added), (3, EntryState.Added), (4, EntryState.Removed), (5, EntryState.Removed), (6, EntryState.Removed), (7, EntryState.Added), (8, EntryState.Added), (9, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (1, EntryState.Added),
+                (2, EntryState.Added),
+                (3, EntryState.Added),
+                (4, EntryState.Removed),
+                (5, EntryState.Removed),
+                (6, EntryState.Removed),
+                (7, EntryState.Added),
+                (8, EntryState.Added),
+                (9, EntryState.Added)
+            );
             AssertTableEntries(table, expected);
 
             var compactedTable = table.AsCached();
-            expected = ImmutableArray.Create((1, EntryState.Cached), (2, EntryState.Cached), (3, EntryState.Cached), (7, EntryState.Cached), (8, EntryState.Cached), (9, EntryState.Cached));
+            expected = ImmutableArray.Create(
+                (1, EntryState.Cached),
+                (2, EntryState.Cached),
+                (3, EntryState.Cached),
+                (7, EntryState.Cached),
+                (8, EntryState.Cached),
+                (9, EntryState.Cached)
+            );
             AssertTableEntries(compactedTable, expected);
 
             // calling as cached a second time just returns the same instance
@@ -166,16 +231,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(3, 4), EntryState.Added);
             var previousTable = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((1, EntryState.Added), (2, EntryState.Added), (3, EntryState.Added), (4, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (1, EntryState.Added),
+                (2, EntryState.Added),
+                (3, EntryState.Added),
+                (4, EntryState.Added)
+            );
             AssertTableEntries(previousTable, expected);
 
             builder = previousTable.ToBuilder();
-            Assert.True(builder.TryModifyEntries(ImmutableArray.Create(3, 2), EqualityComparer<int>.Default)); // ((3, EntryState.Modified), (2, EntryState.Cached))
-            Assert.True(builder.TryModifyEntries(ImmutableArray<int>.Empty, EqualityComparer<int>.Default)); // nothing
-            Assert.True(builder.TryModifyEntries(ImmutableArray.Create(3, 5), EqualityComparer<int>.Default)); // ((3, EntryState.Cached), (5, EntryState.Modified))
+            Assert.True(
+                builder.TryModifyEntries(ImmutableArray.Create(3, 2), EqualityComparer<int>.Default)
+            ); // ((3, EntryState.Modified), (2, EntryState.Cached))
+            Assert.True(
+                builder.TryModifyEntries(ImmutableArray<int>.Empty, EqualityComparer<int>.Default)
+            ); // nothing
+            Assert.True(
+                builder.TryModifyEntries(ImmutableArray.Create(3, 5), EqualityComparer<int>.Default)
+            ); // ((3, EntryState.Cached), (5, EntryState.Modified))
             var newTable = builder.ToImmutableAndFree();
 
-            expected = ImmutableArray.Create((3, EntryState.Modified), (2, EntryState.Cached), (3, EntryState.Cached), (5, EntryState.Modified));
+            expected = ImmutableArray.Create(
+                (3, EntryState.Modified),
+                (2, EntryState.Cached),
+                (3, EntryState.Cached),
+                (5, EntryState.Modified)
+            );
             AssertTableEntries(newTable, expected);
         }
 
@@ -189,7 +270,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder.AddEntries(ImmutableArray.Create(4), EntryState.Added);
             var previousTable = builder.ToImmutableAndFree();
 
-            var expected = ImmutableArray.Create((1, EntryState.Added), (2, EntryState.Added), (3, EntryState.Added), (4, EntryState.Added));
+            var expected = ImmutableArray.Create(
+                (1, EntryState.Added),
+                (2, EntryState.Added),
+                (3, EntryState.Added),
+                (4, EntryState.Added)
+            );
             AssertTableEntries(previousTable, expected);
 
             builder = previousTable.ToBuilder();
@@ -200,7 +286,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             var newTable = builder.ToImmutableAndFree();
 
-            expected = ImmutableArray.Create((1, EntryState.Cached), (2, EntryState.Cached), (5, EntryState.Modified), (4, EntryState.Cached));
+            expected = ImmutableArray.Create(
+                (1, EntryState.Cached),
+                (2, EntryState.Cached),
+                (5, EntryState.Modified),
+                (4, EntryState.Cached)
+            );
             AssertTableEntries(newTable, expected);
         }
 
@@ -208,11 +299,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         public void Driver_Table_Calls_Into_Node_With_Self()
         {
             DriverStateTable.Builder? passedIn = null;
-            CallbackNode<int> callbackNode = new CallbackNode<int>((b, s) =>
-            {
-                passedIn = b;
-                return s;
-            });
+            CallbackNode<int> callbackNode = new CallbackNode<int>(
+                (b, s) =>
+                {
+                    passedIn = b;
+                    return s;
+                }
+            );
 
             DriverStateTable.Builder builder = GetBuilder(DriverStateTable.Empty);
             builder.GetLatestStateTableForNode(callbackNode);
@@ -224,11 +317,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         public void Driver_Table_Calls_Into_Node_With_EmptyState_FirstTime()
         {
             NodeStateTable<int>? passedIn = null;
-            CallbackNode<int> callbackNode = new CallbackNode<int>((b, s) =>
-            {
-                passedIn = s;
-                return s;
-            });
+            CallbackNode<int> callbackNode = new CallbackNode<int>(
+                (b, s) =>
+                {
+                    passedIn = s;
+                    return s;
+                }
+            );
 
             DriverStateTable.Builder builder = GetBuilder(DriverStateTable.Empty);
             builder.GetLatestStateTableForNode(callbackNode);
@@ -244,11 +339,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             var newTable = nodeBuilder.ToImmutableAndFree();
 
             NodeStateTable<int>? passedIn = null;
-            CallbackNode<int> callbackNode = new CallbackNode<int>((b, s) =>
-            {
-                passedIn = s;
-                return newTable;
-            });
+            CallbackNode<int> callbackNode = new CallbackNode<int>(
+                (b, s) =>
+                {
+                    passedIn = s;
+                    return newTable;
+                }
+            );
 
             // empty first time
             DriverStateTable.Builder builder = GetBuilder(DriverStateTable.Empty);
@@ -261,7 +358,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             builder2.GetLatestStateTableForNode(callbackNode);
 
             Assert.NotNull(passedIn);
-            AssertTableEntries(passedIn!, new[] { (1, EntryState.Cached), (2, EntryState.Cached), (3, EntryState.Cached) });
+            AssertTableEntries(
+                passedIn!,
+                new[] { (1, EntryState.Cached), (2, EntryState.Cached), (3, EntryState.Cached) }
+            );
         }
 
         [Fact]
@@ -275,11 +375,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             var newTable = nodeBuilder.ToImmutableAndFree();
 
             NodeStateTable<int>? passedIn = null;
-            CallbackNode<int> callbackNode = new CallbackNode<int>((b, s) =>
-            {
-                passedIn = s;
-                return newTable;
-            });
+            CallbackNode<int> callbackNode = new CallbackNode<int>(
+                (b, s) =>
+                {
+                    passedIn = s;
+                    return newTable;
+                }
+            );
 
             // empty first time
             DriverStateTable.Builder builder = GetBuilder(DriverStateTable.Empty);
@@ -292,18 +394,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             // table returned from the first instance was compacted by the builder
             Assert.NotNull(passedIn);
-            AssertTableEntries(passedIn!, new[] { (1, EntryState.Cached), (2, EntryState.Cached), (3, EntryState.Cached), (5, EntryState.Cached), (6, EntryState.Cached) });
+            AssertTableEntries(
+                passedIn!,
+                new[]
+                {
+                    (1, EntryState.Cached),
+                    (2, EntryState.Cached),
+                    (3, EntryState.Cached),
+                    (5, EntryState.Cached),
+                    (6, EntryState.Cached)
+                }
+            );
         }
 
         [Fact]
         public void Driver_Table_Builder_Doesnt_Build_Twice()
         {
             int callCount = 0;
-            CallbackNode<int> callbackNode = new CallbackNode<int>((b, s) =>
-            {
-                callCount++;
-                return s;
-            });
+            CallbackNode<int> callbackNode = new CallbackNode<int>(
+                (b, s) =>
+                {
+                    callCount++;
+                    return s;
+                }
+            );
 
             // multiple gets will only call it once
             DriverStateTable.Builder builder = GetBuilder(DriverStateTable.Empty);
@@ -336,7 +450,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             dstBuilder = GetBuilder(dstBuilder.ToImmutable());
             var table = dstBuilder.GetLatestStateTableForNode(batchNode);
 
-            AssertTableEntries(table, new[] { (ImmutableArray.Create(1, 2, 3), EntryState.Cached) });
+            AssertTableEntries(
+                table,
+                new[] { (ImmutableArray.Create(1, 2, 3), EntryState.Cached) }
+            );
         }
 
         [Fact]
@@ -355,14 +472,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             dstBuilder = GetBuilder(dstBuilder.ToImmutable());
             var table = dstBuilder.GetLatestStateTableForNode(batchNode);
 
-            AssertTableEntries(table, new[] { (ImmutableArray.Create(1, 2, 4), EntryState.Modified) });
+            AssertTableEntries(
+                table,
+                new[] { (ImmutableArray.Create(1, 2, 4), EntryState.Modified) }
+            );
         }
 
         [Fact]
         public void User_Comparer_Is_Not_Used_To_Determine_Inputs()
         {
-            var inputNode = new InputNode<int>((_) => ImmutableArray.Create(1, 2, 3))
-                                .WithComparer(new LambdaComparer<int>((a, b) => false));
+            var inputNode = new InputNode<int>((_) => ImmutableArray.Create(1, 2, 3)).WithComparer(
+                new LambdaComparer<int>((a, b) => false)
+            );
 
             // first time through will always be added (because it's not been run before)
             DriverStateTable.Builder dstBuilder = GetBuilder(DriverStateTable.Empty);
@@ -372,10 +493,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             dstBuilder = GetBuilder(dstBuilder.ToImmutable());
             var table = dstBuilder.GetLatestStateTableForNode(inputNode);
 
-            AssertTableEntries(table, new[] { (1, EntryState.Cached), (2, EntryState.Cached), (3, EntryState.Cached) });
+            AssertTableEntries(
+                table,
+                new[] { (1, EntryState.Cached), (2, EntryState.Cached), (3, EntryState.Cached) }
+            );
         }
 
-        private void AssertTableEntries<T>(NodeStateTable<T> table, IList<(T item, EntryState state)> expected)
+        private void AssertTableEntries<T>(
+            NodeStateTable<T> table,
+            IList<(T item, EntryState state)> expected
+        )
         {
             int index = 0;
             foreach (var entry in table)
@@ -386,7 +513,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             }
         }
 
-        private void AssertTableEntries<T>(NodeStateTable<ImmutableArray<T>> table, IList<(ImmutableArray<T> item, EntryState state)> expected)
+        private void AssertTableEntries<T>(
+            NodeStateTable<ImmutableArray<T>> table,
+            IList<(ImmutableArray<T> item, EntryState state)> expected
+        )
         {
             int index = 0;
             foreach (var entry in table)
@@ -401,29 +531,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         {
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10);
             var c = CSharpCompilation.Create("empty");
-            var state = new GeneratorDriverState(options,
-                    CompilerAnalyzerConfigOptionsProvider.Empty,
-                    ImmutableArray<ISourceGenerator>.Empty,
-                    ImmutableArray<IIncrementalGenerator>.Empty,
-                    ImmutableArray<AdditionalText>.Empty,
-                    ImmutableArray<GeneratorState>.Empty,
-                    previous,
-                    disabledOutputs: IncrementalGeneratorOutputKind.None,
-                    runtime: TimeSpan.Zero);
+            var state = new GeneratorDriverState(
+                options,
+                CompilerAnalyzerConfigOptionsProvider.Empty,
+                ImmutableArray<ISourceGenerator>.Empty,
+                ImmutableArray<IIncrementalGenerator>.Empty,
+                ImmutableArray<AdditionalText>.Empty,
+                ImmutableArray<GeneratorState>.Empty,
+                previous,
+                disabledOutputs: IncrementalGeneratorOutputKind.None,
+                runtime: TimeSpan.Zero
+            );
 
             return new DriverStateTable.Builder(c, state, ImmutableArray<ISyntaxInputNode>.Empty);
         }
 
         private class CallbackNode<T> : IIncrementalGeneratorNode<T>
         {
-            private readonly Func<DriverStateTable.Builder, NodeStateTable<T>, NodeStateTable<T>> _callback;
+            private readonly Func<
+                DriverStateTable.Builder,
+                NodeStateTable<T>,
+                NodeStateTable<T>
+            > _callback;
 
-            public CallbackNode(Func<DriverStateTable.Builder, NodeStateTable<T>, NodeStateTable<T>> callback)
+            public CallbackNode(
+                Func<DriverStateTable.Builder, NodeStateTable<T>, NodeStateTable<T>> callback
+            )
             {
                 _callback = callback;
             }
 
-            public NodeStateTable<T> UpdateStateTable(DriverStateTable.Builder graphState, NodeStateTable<T> previousTable, CancellationToken cancellationToken)
+            public NodeStateTable<T> UpdateStateTable(
+                DriverStateTable.Builder graphState,
+                NodeStateTable<T> previousTable,
+                CancellationToken cancellationToken
+            )
             {
                 return _callback(graphState, previousTable);
             }

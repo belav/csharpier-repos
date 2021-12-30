@@ -27,8 +27,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 for (var i = 0; i < 50; i++)
                 {
-                    context.Add(
-                        new Pegasus { Name = "Rainbow Dash " + i });
+                    context.Add(new Pegasus { Name = "Rainbow Dash " + i });
                 }
 
                 await context.SaveChangesAsync();
@@ -67,7 +66,9 @@ namespace Microsoft.EntityFrameworkCore
                                 Name = "Rainbow Dash " + i,
                                 Index = i,
                                 Id = Guid.NewGuid()
-                            }).Entity.Id);
+                            }
+                        ).Entity.Id
+                    );
                 }
 
                 await context.SaveChangesAsync();
@@ -98,9 +99,12 @@ namespace Microsoft.EntityFrameworkCore
 
             public DbSet<Pegasus> Pegasuses { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
+                    .UseSqlServer(
+                        SqlServerTestStore.CreateConnectionString(_databaseName),
+                        b => b.ApplyConfiguration()
+                    )
                     .UseInternalServiceProvider(_serviceProvider);
         }
 
@@ -118,7 +122,6 @@ namespace Microsoft.EntityFrameworkCore
 
         protected SqlServerTestStore TestStore { get; }
 
-        public virtual void Dispose()
-            => TestStore.Dispose();
+        public virtual void Dispose() => TestStore.Dispose();
     }
 }

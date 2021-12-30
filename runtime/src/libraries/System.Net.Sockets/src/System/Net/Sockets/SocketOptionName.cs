@@ -125,9 +125,7 @@ namespace System.Net.Sockets
 
         #region SocketOptionLevel.IPv6
         HopLimit = 21,
-
         IPProtectionLevel = 23,
-
         IPv6Only = 27,
         #endregion
 
@@ -146,9 +144,7 @@ namespace System.Net.Sockets
 
         // Udp-Lite checksum coverage.
         ChecksumCoverage = 20,
-
         UpdateAcceptContext = 0x700B,
-
         UpdateConnectContext = 0x7010,
         #endregion
     }

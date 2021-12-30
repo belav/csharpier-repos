@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// </summary>
             private readonly AsyncBatchingWorkQueue<NormalizedSnapshotSpanCollection> _normalPriTagsChangedQueue;
 
-            private readonly ReferenceCountedDisposable<TagSourceState> _tagSourceState = new(new TagSourceState());
+            private readonly ReferenceCountedDisposable<TagSourceState> _tagSourceState =
+                new(new TagSourceState());
 
             #endregion
 
@@ -87,7 +88,13 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// accumulated text changes since last tag calculation
             /// </summary>
             private TextChangeRange? _accumulatedTextChanges_doNotAccessDirectly;
-            private ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> _cachedTagTrees_doNotAccessDirectly = ImmutableDictionary.Create<ITextBuffer, TagSpanIntervalTree<TTag>>();
+            private ImmutableDictionary<
+                ITextBuffer,
+                TagSpanIntervalTree<TTag>
+            > _cachedTagTrees_doNotAccessDirectly = ImmutableDictionary.Create<
+                ITextBuffer,
+                TagSpanIntervalTree<TTag>
+            >();
             private object? _state_doNotAccessDirecty;
 
             /// <summary>
@@ -103,24 +110,29 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ITextView textViewOpt,
                 ITextBuffer subjectBuffer,
                 AbstractAsynchronousTaggerProvider<TTag> dataSource,
-                IAsynchronousOperationListener asyncListener)
-                : base(dataSource.ThreadingContext)
+                IAsynchronousOperationListener asyncListener
+            ) : base(dataSource.ThreadingContext)
             {
                 this.AssertIsForeground();
                 if (dataSource.SpanTrackingMode == SpanTrackingMode.Custom)
-                    throw new ArgumentException("SpanTrackingMode.Custom not allowed.", "spanTrackingMode");
+                    throw new ArgumentException(
+                        "SpanTrackingMode.Custom not allowed.",
+                        "spanTrackingMode"
+                    );
 
                 _subjectBuffer = subjectBuffer;
                 _textViewOpt = textViewOpt;
                 _dataSource = dataSource;
                 _asyncListener = asyncListener;
 
-                _highPriTagsChangedQueue = new AsyncBatchingWorkQueue<NormalizedSnapshotSpanCollection>(
-                    TaggerDelay.NearImmediate.ComputeTimeDelay(),
-                    ProcessTagsChangedAsync,
-                    equalityComparer: null,
-                    asyncListener,
-                    _tagSourceState.Target.DisposalToken);
+                _highPriTagsChangedQueue =
+                    new AsyncBatchingWorkQueue<NormalizedSnapshotSpanCollection>(
+                        TaggerDelay.NearImmediate.ComputeTimeDelay(),
+                        ProcessTagsChangedAsync,
+                        equalityComparer: null,
+                        asyncListener,
+                        _tagSourceState.Target.DisposalToken
+                    );
 
                 if (_dataSource.AddedTagNotificationDelay == TaggerDelay.NearImmediate)
                 {
@@ -130,12 +142,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 }
                 else
                 {
-                    _normalPriTagsChangedQueue = new AsyncBatchingWorkQueue<NormalizedSnapshotSpanCollection>(
-                        _dataSource.AddedTagNotificationDelay.ComputeTimeDelay(),
-                        ProcessTagsChangedAsync,
-                        equalityComparer: null,
-                        asyncListener,
-                        _tagSourceState.Target.DisposalToken);
+                    _normalPriTagsChangedQueue =
+                        new AsyncBatchingWorkQueue<NormalizedSnapshotSpanCollection>(
+                            _dataSource.AddedTagNotificationDelay.ComputeTimeDelay(),
+                            ProcessTagsChangedAsync,
+                            equalityComparer: null,
+                            asyncListener,
+                            _tagSourceState.Target.DisposalToken
+                        );
                 }
 
                 DebugRecordInitialStackTrace();
@@ -155,17 +169,28 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                     _eventSource.Changed += OnEventSourceChanged;
 
-                    if (_dataSource.TextChangeBehavior.HasFlag(TaggerTextChangeBehavior.TrackTextChanges))
+                    if (
+                        _dataSource.TextChangeBehavior.HasFlag(
+                            TaggerTextChangeBehavior.TrackTextChanges
+                        )
+                    )
                     {
                         _subjectBuffer.Changed += OnSubjectBufferChanged;
                     }
 
-                    if (_dataSource.CaretChangeBehavior.HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag))
+                    if (
+                        _dataSource.CaretChangeBehavior.HasFlag(
+                            TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
+                        )
+                    )
                     {
                         if (_textViewOpt == null)
                         {
                             throw new ArgumentException(
-                                nameof(_dataSource.CaretChangeBehavior) + " can only be specified for an " + nameof(IViewTaggerProvider));
+                                nameof(_dataSource.CaretChangeBehavior)
+                                    + " can only be specified for an "
+                                    + nameof(IViewTaggerProvider)
+                            );
                         }
 
                         _textViewOpt.Caret.PositionChanged += OnCaretPositionChanged;
@@ -194,12 +219,20 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     // Tell the interaction object to stop issuing events.
                     _eventSource.Disconnect();
 
-                    if (_dataSource.CaretChangeBehavior.HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag))
+                    if (
+                        _dataSource.CaretChangeBehavior.HasFlag(
+                            TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
+                        )
+                    )
                     {
                         _textViewOpt.Caret.PositionChanged -= OnCaretPositionChanged;
                     }
 
-                    if (_dataSource.TextChangeBehavior.HasFlag(TaggerTextChangeBehavior.TrackTextChanges))
+                    if (
+                        _dataSource.TextChangeBehavior.HasFlag(
+                            TaggerTextChangeBehavior.TrackTextChanges
+                        )
+                    )
                     {
                         _subjectBuffer.Changed -= OnSubjectBufferChanged;
                     }
@@ -214,9 +247,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // If there are any options specified for this tagger, then also hook up event
                 // notifications for when those options change.
-                var optionChangedEventSources =
-                    _dataSource.Options.Concat<IOption>(_dataSource.PerLanguageOptions)
-                        .Select(o => TaggerEventSources.OnOptionChanged(_subjectBuffer, o)).ToList();
+                var optionChangedEventSources = _dataSource.Options
+                    .Concat<IOption>(_dataSource.PerLanguageOptions)
+                    .Select(o => TaggerEventSources.OnOptionChanged(_subjectBuffer, o))
+                    .ToList();
 
                 if (optionChangedEventSources.Count == 0)
                 {
@@ -235,7 +269,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     this.AssertIsForeground();
                     return _accumulatedTextChanges_doNotAccessDirectly;
                 }
-
                 set
                 {
                     this.AssertIsForeground();
@@ -250,7 +283,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     this.AssertIsForeground();
                     return _cachedTagTrees_doNotAccessDirectly;
                 }
-
                 set
                 {
                     this.AssertIsForeground();
@@ -265,7 +297,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     this.AssertIsForeground();
                     return _state_doNotAccessDirecty;
                 }
-
                 set
                 {
                     this.AssertIsForeground();
@@ -282,9 +313,12 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     return;
                 }
 
-                OnTagsChangedForBuffer(SpecializedCollections.SingletonCollection(
-                    new KeyValuePair<ITextBuffer, DiffResult>(buffer, difference)),
-                    initialTags: false);
+                OnTagsChangedForBuffer(
+                    SpecializedCollections.SingletonCollection(
+                        new KeyValuePair<ITextBuffer, DiffResult>(buffer, difference)
+                    ),
+                    initialTags: false
+                );
             }
         }
     }

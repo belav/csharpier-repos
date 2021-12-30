@@ -8,7 +8,8 @@
     }
 
     [ApiConventionType(typeof(int))]
-    public class GetAttributes_BaseTypeWithAttributesDerived : GetAttributes_BaseTypeWithAttributesBase
+    public class GetAttributes_BaseTypeWithAttributesDerived
+        : GetAttributes_BaseTypeWithAttributesBase
     {
     }
 }

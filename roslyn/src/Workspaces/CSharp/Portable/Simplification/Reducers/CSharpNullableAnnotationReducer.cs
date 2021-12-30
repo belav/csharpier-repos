@@ -15,20 +15,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal sealed partial class CSharpNullableAnnotationReducer : AbstractCSharpReducer
     {
-        private static readonly ObjectPool<IReductionRewriter> s_pool = new(
-            () => new Rewriter(s_pool));
+        private static readonly ObjectPool<IReductionRewriter> s_pool =
+            new(() => new Rewriter(s_pool));
 
-        public CSharpNullableAnnotationReducer() : base(s_pool)
-        {
-        }
+        public CSharpNullableAnnotationReducer() : base(s_pool) { }
 
-        private static readonly Func<NullableTypeSyntax, SemanticModel, OptionSet, CancellationToken, SyntaxNode> s_simplifyNullableType = SimplifyNullableType;
+        private static readonly Func<
+            NullableTypeSyntax,
+            SemanticModel,
+            OptionSet,
+            CancellationToken,
+            SyntaxNode
+        > s_simplifyNullableType = SimplifyNullableType;
 
         private static SyntaxNode SimplifyNullableType(
             NullableTypeSyntax node,
             SemanticModel semanticModel,
             OptionSet optionSet,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // If annotations are enabled, there's no further simplification to do
             var context = semanticModel.GetNullableContext(node.Span.End);
@@ -37,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             if (semanticModel.IsSpeculativeSemanticModel && context.AnnotationsInherited())
             {
                 // Work around bug where GetNullableContext() on a speculative model doesn't inherit automatically
-                context = semanticModel.ParentModel.GetNullableContext(semanticModel.OriginalPositionForSpeculation);
+                context = semanticModel.ParentModel.GetNullableContext(
+                    semanticModel.OriginalPositionForSpeculation
+                );
             }
 
             if (context.AnnotationsEnabled())

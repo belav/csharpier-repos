@@ -13,7 +13,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //<Expects Status=warning>\(10,39\).*CS1066</Expects>
     public class Derived
     {
-        public static explicit operator int (Derived d = null)
+        public static explicit operator int(Derived d = null)
         {
             if (d != null)
                 return 0;
@@ -39,8 +39,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.opOverload.explicit02.explicit02
 {
     // <Area>Declaration of Optional Params</Area>
@@ -52,7 +50,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //<Expects Status=warning>\(12,41\).*CS1066</Expects>
     public class Derived
     {
-        public static explicit operator int (Derived d = default(Derived))
+        public static explicit operator int(Derived d = default(Derived))
         {
             if (d == null)
                 return 0;
@@ -89,8 +87,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.opOverload.explicit04.explicit04
 {
     // <Area>Declaration of Optional Params</Area>
@@ -102,7 +98,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
-        public static explicit operator int (Derived d = x)
+        public static explicit operator int(Derived d = x)
         {
             if (d != null)
                 return 0;
@@ -127,8 +123,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     }
     //</code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.opOverload.explicit05.explicit05
 {
@@ -141,7 +135,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
-        public static explicit operator int (Derived d = true ? x : x)
+        public static explicit operator int(Derived d = true ? x : x)
         {
             if (d != null)
                 return 0;
@@ -167,8 +161,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.opOverload.implicit01.implicit01
 {
     // <Area>Declaration of Optional Params</Area>
@@ -179,7 +171,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //<Expects Status=warning>\(10,39\).*CS1066</Expects>
     public class Derived
     {
-        public static implicit operator int (Derived d = null)
+        public static implicit operator int(Derived d = null)
         {
             if (d != null)
                 return 0;
@@ -205,8 +197,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.opOverload.implicit02.implicit02
 {
     // <Area>Declaration of Optional Params</Area>
@@ -218,7 +208,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //<Expects Status=warning>\(11,39\).*CS1066</Expects>
     public class Derived
     {
-        public static implicit operator int (Derived d = default(Derived))
+        public static implicit operator int(Derived d = default(Derived))
         {
             if (d == null)
                 return 0;
@@ -255,8 +245,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.opOverload.implicit04.implicit04
 {
     // <Area>Declaration of Optional Params</Area>
@@ -268,7 +256,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
-        public static implicit operator int (Derived d = x)
+        public static implicit operator int(Derived d = x)
         {
             if (d != null)
                 return 0;
@@ -294,8 +282,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.opOverload.implicit05.implicit05
 {
     // <Area>Declaration of Optional Params</Area>
@@ -307,7 +293,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
-        public static implicit operator int (Derived d = true ? x : x)
+        public static implicit operator int(Derived d = true ? x : x)
         {
             if (d != null)
                 return 0;

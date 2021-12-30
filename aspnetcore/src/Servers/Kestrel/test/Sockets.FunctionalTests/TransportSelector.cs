@@ -10,18 +10,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 
 public static class TransportSelector
 {
-    public static IHostBuilder GetHostBuilder(Func<MemoryPool<byte>> memoryPoolFactory = null,
-                                                    long? maxReadBufferSize = null)
+    public static IHostBuilder GetHostBuilder(
+        Func<MemoryPool<byte>> memoryPoolFactory = null,
+        long? maxReadBufferSize = null
+    )
     {
-        return new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
+        return new HostBuilder().ConfigureWebHost(
+            webHostBuilder =>
             {
-                webHostBuilder
-                    .UseSockets(options =>
+                webHostBuilder.UseSockets(
+                    options =>
                     {
                         options.MemoryPoolFactory = memoryPoolFactory ?? options.MemoryPoolFactory;
                         options.MaxReadBufferSize = maxReadBufferSize;
-                    });
-            });
+                    }
+                );
+            }
+        );
     }
 }

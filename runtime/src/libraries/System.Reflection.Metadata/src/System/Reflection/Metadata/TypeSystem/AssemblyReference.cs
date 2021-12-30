@@ -21,7 +21,9 @@ namespace System.Reflection.Metadata
             Debug.Assert(treatmentAndRowId != 0);
 
             // only virtual bit can be set in highest byte:
-            Debug.Assert((treatmentAndRowId & ~(TokenTypeIds.VirtualBit | TokenTypeIds.RIDMask)) == 0);
+            Debug.Assert(
+                (treatmentAndRowId & ~(TokenTypeIds.VirtualBit | TokenTypeIds.RIDMask)) == 0
+            );
 
             _reader = reader;
             _treatmentAndRowId = treatmentAndRowId;
@@ -128,7 +130,10 @@ namespace System.Reflection.Metadata
                 return GetVirtualCustomAttributes();
             }
 
-            return new CustomAttributeHandleCollection(_reader, AssemblyReferenceHandle.FromRowId(RowId));
+            return new CustomAttributeHandleCollection(
+                _reader,
+                AssemblyReferenceHandle.FromRowId(RowId)
+            );
         }
 
         #region Virtual Rows
@@ -146,10 +151,14 @@ namespace System.Reflection.Metadata
 
         private StringHandle GetVirtualName()
         {
-            return StringHandle.FromVirtualIndex(GetVirtualNameIndex((AssemblyReferenceHandle.VirtualIndex)RowId));
+            return StringHandle.FromVirtualIndex(
+                GetVirtualNameIndex((AssemblyReferenceHandle.VirtualIndex)RowId)
+            );
         }
 
-        private StringHandle.VirtualIndex GetVirtualNameIndex(AssemblyReferenceHandle.VirtualIndex index)
+        private StringHandle.VirtualIndex GetVirtualNameIndex(
+            AssemblyReferenceHandle.VirtualIndex index
+        )
         {
             switch (index)
             {
@@ -192,8 +201,17 @@ namespace System.Reflection.Metadata
 
                 default:
                     // use contract assembly key or token:
-                    var hasFullKey = (_reader.AssemblyRefTable.GetFlags(_reader.WinMDMscorlibRef) & AssemblyFlags.PublicKey) != 0;
-                    return BlobHandle.FromVirtualIndex(hasFullKey ? BlobHandle.VirtualIndex.ContractPublicKey : BlobHandle.VirtualIndex.ContractPublicKeyToken, 0);
+                    var hasFullKey =
+                        (
+                            _reader.AssemblyRefTable.GetFlags(_reader.WinMDMscorlibRef)
+                            & AssemblyFlags.PublicKey
+                        ) != 0;
+                    return BlobHandle.FromVirtualIndex(
+                        hasFullKey
+                          ? BlobHandle.VirtualIndex.ContractPublicKey
+                          : BlobHandle.VirtualIndex.ContractPublicKeyToken,
+                        0
+                    );
             }
         }
 
@@ -205,7 +223,10 @@ namespace System.Reflection.Metadata
         private CustomAttributeHandleCollection GetVirtualCustomAttributes()
         {
             // return custom attributes applied on mscorlib ref
-            return new CustomAttributeHandleCollection(_reader, AssemblyReferenceHandle.FromRowId(_reader.WinMDMscorlibRef));
+            return new CustomAttributeHandleCollection(
+                _reader,
+                AssemblyReferenceHandle.FromRowId(_reader.WinMDMscorlibRef)
+            );
         }
         #endregion
     }

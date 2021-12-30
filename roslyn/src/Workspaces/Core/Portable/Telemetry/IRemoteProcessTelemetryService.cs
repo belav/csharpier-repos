@@ -14,11 +14,19 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Enables logging of <paramref name="functionIds"/> using loggers of the specified <paramref name="loggerTypeNames"/>.
         /// </summary>
-        ValueTask EnableLoggingAsync(ImmutableArray<string> loggerTypeNames, ImmutableArray<FunctionId> functionIds, CancellationToken cancellationToken);
+        ValueTask EnableLoggingAsync(
+            ImmutableArray<string> loggerTypeNames,
+            ImmutableArray<FunctionId> functionIds,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Initializes telemetry session.
         /// </summary>
-        ValueTask InitializeTelemetrySessionAsync(int hostProcessId, string serializedSession, CancellationToken cancellationToken);
+        ValueTask InitializeTelemetrySessionAsync(
+            int hostProcessId,
+            string serializedSession,
+            CancellationToken cancellationToken
+        );
     }
 }

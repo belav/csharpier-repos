@@ -4,20 +4,11 @@
 
 using System;
 
-public interface IFoo
-{
+public interface IFoo { }
 
-}
+public class FooClass : IFoo { }
 
-public class FooClass : IFoo
-{
-
-}
-
-public struct FooStruct : IFoo
-{
-
-}
+public struct FooStruct : IFoo { }
 
 public class GenClass<T> where T : IFoo
 {
@@ -46,16 +37,35 @@ public class Test_Convert_static01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-        Eval(GenClass<FooClass>.ConvertToConstraint(new FooClass()).GetType().Equals(typeof(FooClass)));
-        Eval(GenClass<FooStruct>.ConvertToConstraint(new FooStruct()).GetType().Equals(typeof(FooStruct)));
+        Eval(
+            GenClass<FooClass>
+                .ConvertToConstraint(new FooClass())
+                .GetType()
+                .Equals(typeof(FooClass))
+        );
+        Eval(
+            GenClass<FooStruct>
+                .ConvertToConstraint(new FooStruct())
+                .GetType()
+                .Equals(typeof(FooStruct))
+        );
 
-        Eval(GenStruct<FooClass>.ConvertToConstraint(new FooClass()).GetType().Equals(typeof(FooClass)));
-        Eval(GenStruct<FooStruct>.ConvertToConstraint(new FooStruct()).GetType().Equals(typeof(FooStruct)));
+        Eval(
+            GenStruct<FooClass>
+                .ConvertToConstraint(new FooClass())
+                .GetType()
+                .Equals(typeof(FooClass))
+        );
+        Eval(
+            GenStruct<FooStruct>
+                .ConvertToConstraint(new FooStruct())
+                .GetType()
+                .Equals(typeof(FooStruct))
+        );
 
         if (result)
         {
@@ -68,6 +78,4 @@ public class Test_Convert_static01
             return 1;
         }
     }
-
 }
-

@@ -17,9 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormattingDescriptionColumnDefinition()
-        {
-        }
+        public FormattingDescriptionColumnDefinition() { }
 
         public override string Name => Description;
         public override string DisplayName => ServicesVSResources.Description;

@@ -21,12 +21,20 @@ namespace Internal.IL.Stubs
             if (method.HasInstantiation && method.Name == "CompareExchange")
             {
                 TypeDesc objectType = method.Context.GetWellKnownType(WellKnownType.Object);
-                MethodDesc compareExchangeObject = method.OwningType.GetKnownMethod("CompareExchange",
+                MethodDesc compareExchangeObject = method.OwningType.GetKnownMethod(
+                    "CompareExchange",
                     new MethodSignature(
                         MethodSignatureFlags.Static,
                         genericParameterCount: 0,
                         returnType: objectType,
-                        parameters: new TypeDesc[] { objectType.MakeByRefType(), objectType, objectType }));
+                        parameters: new TypeDesc[]
+                        {
+                            objectType.MakeByRefType(),
+                            objectType,
+                            objectType
+                        }
+                    )
+                );
 
                 ILEmitter emit = new ILEmitter();
                 ILCodeStream codeStream = emit.NewCodeStream();

@@ -13,16 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStructureTests<ArrowExpressionClauseSyntax>
+    public class ArrowExpressionClauseStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<ArrowExpressionClauseSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider()
-            => new ArrowExpressionClauseStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new ArrowExpressionClauseStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Method1()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:void M(){|textspan: $$=> expression
@@ -30,14 +31,15 @@ class C
         : falseCase;|}|};
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Method2()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:void M(){|textspan: $$=> expression
@@ -46,14 +48,15 @@ class C
     void N() => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Method3()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:void M(){|textspan: $$=> expression
@@ -63,14 +66,15 @@ class C
     void N() => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Method4()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:void M(){|textspan: $$=> expression
@@ -79,14 +83,15 @@ class C
     int N => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Method5()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:void M(){|textspan: $$=> expression
@@ -96,14 +101,15 @@ class C
     int N => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Property1()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:int M{|textspan: $$=> expression
@@ -111,14 +117,15 @@ class C
         : falseCase;|}|};
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Property2()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:int M{|textspan: $$=> expression
@@ -127,14 +134,15 @@ class C
     int N => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Property3()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:int M{|textspan: $$=> expression
@@ -144,14 +152,15 @@ class C
     int N => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Property4()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:int M{|textspan: $$=> expression
@@ -160,14 +169,15 @@ class C
     int N() => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_Property5()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     {|hintspan:int M{|textspan: $$=> expression
@@ -177,14 +187,15 @@ class C
     int N() => 0;
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestArrowExpressionClause_LocalFunction()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -195,7 +206,8 @@ class C
     }
 }
 ",
-                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

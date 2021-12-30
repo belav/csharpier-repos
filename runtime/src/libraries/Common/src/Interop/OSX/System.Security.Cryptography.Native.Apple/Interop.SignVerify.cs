@@ -30,7 +30,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> signature,
             PAL_HashAlgorithm hashAlgorithm,
             PAL_SignatureAlgorithm signatureAlgorithm,
-            out SafeCFErrorHandle pErrorOut)
+            out SafeCFErrorHandle pErrorOut
+        )
         {
             fixed (byte* pDataHash = dataHash)
             fixed (byte* pSignature = signature)
@@ -43,7 +44,8 @@ internal static partial class Interop
                     signature.Length,
                     hashAlgorithm,
                     signatureAlgorithm,
-                    out pErrorOut);
+                    out pErrorOut
+                );
             }
         }
 
@@ -56,7 +58,8 @@ internal static partial class Interop
             int cbSignature,
             PAL_HashAlgorithm hashAlgorithm,
             PAL_SignatureAlgorithm signatureAlgorithm,
-            out SafeCFErrorHandle pErrorOut);
+            out SafeCFErrorHandle pErrorOut
+        );
 
         private static unsafe int AppleCryptoNative_SecKeyCreateSignature(
             SafeSecKeyRefHandle privateKey,
@@ -64,7 +67,8 @@ internal static partial class Interop
             PAL_HashAlgorithm hashAlgorithm,
             PAL_SignatureAlgorithm signatureAlgorithm,
             out SafeCFDataHandle pSignatureOut,
-            out SafeCFErrorHandle pErrorOut)
+            out SafeCFErrorHandle pErrorOut
+        )
         {
             fixed (byte* pDataHash = dataHash)
             {
@@ -75,7 +79,8 @@ internal static partial class Interop
                     hashAlgorithm,
                     signatureAlgorithm,
                     out pSignatureOut,
-                    out pErrorOut);
+                    out pErrorOut
+                );
             }
         }
 
@@ -87,14 +92,16 @@ internal static partial class Interop
             PAL_HashAlgorithm hashAlgorithm,
             PAL_SignatureAlgorithm signatureAlgorithm,
             out SafeCFDataHandle pSignatureOut,
-            out SafeCFErrorHandle pErrorOut);
+            out SafeCFErrorHandle pErrorOut
+        );
 
         internal static bool VerifySignature(
             SafeSecKeyRefHandle publicKey,
             ReadOnlySpan<byte> dataHash,
             ReadOnlySpan<byte> signature,
             PAL_HashAlgorithm hashAlgorithm,
-            PAL_SignatureAlgorithm signatureAlgorithm)
+            PAL_SignatureAlgorithm signatureAlgorithm
+        )
         {
             const int Valid = 1;
             const int Invalid = 0;
@@ -105,7 +112,8 @@ internal static partial class Interop
                 signature,
                 hashAlgorithm,
                 signatureAlgorithm,
-                out SafeCFErrorHandle errorHandle);
+                out SafeCFErrorHandle errorHandle
+            );
 
             using (errorHandle)
             {
@@ -130,7 +138,8 @@ internal static partial class Interop
             SafeSecKeyRefHandle privateKey,
             ReadOnlySpan<byte> dataHash,
             PAL_HashAlgorithm hashAlgorithm,
-            PAL_SignatureAlgorithm signatureAlgorithm)
+            PAL_SignatureAlgorithm signatureAlgorithm
+        )
         {
             int result = AppleCryptoNative_SecKeyCreateSignature(
                 privateKey,
@@ -138,7 +147,8 @@ internal static partial class Interop
                 hashAlgorithm,
                 signatureAlgorithm,
                 out SafeCFDataHandle signature,
-                out SafeCFErrorHandle errorHandle);
+                out SafeCFErrorHandle errorHandle
+            );
 
             using (errorHandle)
             {
@@ -161,9 +171,17 @@ internal static partial class Interop
             SafeSecKeyRefHandle privateKey,
             ReadOnlySpan<byte> dataHash,
             PAL_HashAlgorithm hashAlgorithm,
-            PAL_SignatureAlgorithm signatureAlgorithm)
+            PAL_SignatureAlgorithm signatureAlgorithm
+        )
         {
-            using (SafeCFDataHandle signature = NativeCreateSignature(privateKey, dataHash, hashAlgorithm, signatureAlgorithm))
+            using (
+                SafeCFDataHandle signature = NativeCreateSignature(
+                    privateKey,
+                    dataHash,
+                    hashAlgorithm,
+                    signatureAlgorithm
+                )
+            )
             {
                 return CoreFoundation.CFGetData(signature);
             }
@@ -175,9 +193,17 @@ internal static partial class Interop
             Span<byte> destination,
             PAL_HashAlgorithm hashAlgorithm,
             PAL_SignatureAlgorithm signatureAlgorithm,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
-            using (SafeCFDataHandle signature = NativeCreateSignature(privateKey, dataHash, hashAlgorithm, signatureAlgorithm))
+            using (
+                SafeCFDataHandle signature = NativeCreateSignature(
+                    privateKey,
+                    dataHash,
+                    hashAlgorithm,
+                    signatureAlgorithm
+                )
+            )
             {
                 return CoreFoundation.TryCFWriteData(signature, destination, out bytesWritten);
             }

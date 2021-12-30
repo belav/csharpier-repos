@@ -21,7 +21,8 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding
 {
-    public class SqlServerDatabaseModelFactoryTest : IClassFixture<SqlServerDatabaseModelFactoryTest.SqlServerDatabaseModelFixture>
+    public class SqlServerDatabaseModelFactoryTest
+        : IClassFixture<SqlServerDatabaseModelFactoryTest.SqlServerDatabaseModelFixture>
     {
         protected SqlServerDatabaseModelFixture Fixture { get; }
 
@@ -51,7 +52,9 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var defaultSequence = dbModel.Sequences.First(ds => ds.Name == "DefaultFacetsSequence");
+                    var defaultSequence = dbModel.Sequences.First(
+                        ds => ds.Name == "DefaultFacetsSequence"
+                    );
                     Assert.Equal("dbo", defaultSequence.Schema);
                     Assert.Equal("DefaultFacetsSequence", defaultSequence.Name);
                     Assert.Equal("bigint", defaultSequence.StoreType);
@@ -61,7 +64,9 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                     Assert.Null(defaultSequence.MinValue);
                     Assert.Null(defaultSequence.MaxValue);
 
-                    var customSequence = dbModel.Sequences.First(ds => ds.Name == "CustomFacetsSequence");
+                    var customSequence = dbModel.Sequences.First(
+                        ds => ds.Name == "CustomFacetsSequence"
+                    );
                     Assert.Equal("db2", customSequence.Schema);
                     Assert.Equal("CustomFacetsSequence", customSequence.Name);
                     Assert.Equal("int", customSequence.StoreType);
@@ -74,7 +79,8 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                 @"
 DROP SEQUENCE DefaultFacetsSequence;
 
-DROP SEQUENCE db2.CustomFacetsSequence");
+DROP SEQUENCE db2.CustomFacetsSequence"
+            );
         }
 
         [ConditionalFact]
@@ -100,7 +106,8 @@ CREATE SEQUENCE [BigIntSequence] AS bigint;",
                             Assert.Null(s.StartValue);
                             Assert.Null(s.MinValue);
                             Assert.Null(s.MaxValue);
-                        });
+                        }
+                    );
                 },
                 @"
 DROP SEQUENCE [TinyIntSequence];
@@ -109,7 +116,8 @@ DROP SEQUENCE [SmallIntSequence];
 
 DROP SEQUENCE [IntSequence];
 
-DROP SEQUENCE [BigIntSequence];");
+DROP SEQUENCE [BigIntSequence];"
+            );
         }
 
         [ConditionalFact]
@@ -131,12 +139,14 @@ CREATE SEQUENCE [NumericSequence] AS numeric;",
                             Assert.NotNull(s.StartValue);
                             Assert.NotNull(s.MinValue);
                             Assert.NotNull(s.MaxValue);
-                        });
+                        }
+                    );
                 },
                 @"
 DROP SEQUENCE [DecimalSequence];
 
-DROP SEQUENCE [NumericSequence];");
+DROP SEQUENCE [NumericSequence];"
+            );
         }
 
         [ConditionalFact]
@@ -165,10 +175,12 @@ CREATE SEQUENCE [dbo].[HighDecimalSequence]
                             Assert.Equal(long.MinValue, s.MinValue);
                             Assert.NotNull(s.MaxValue);
                             Assert.Equal(long.MaxValue, s.MaxValue);
-                        });
+                        }
+                    );
                 },
                 @"
-DROP SEQUENCE [HighDecimalSequence];");
+DROP SEQUENCE [HighDecimalSequence];"
+            );
         }
 
         [ConditionalFact]
@@ -176,7 +188,8 @@ DROP SEQUENCE [HighDecimalSequence];");
         {
             Fixture.TestStore.ExecuteNonQuery(
                 @"
-CREATE TYPE [dbo].[TestTypeAlias] FROM int;");
+CREATE TYPE [dbo].[TestTypeAlias] FROM int;"
+            );
 
             Test(
                 @"
@@ -198,7 +211,8 @@ CREATE SEQUENCE [TypeAliasSequence] AS [dbo].[TestTypeAlias];",
                 },
                 @"
 DROP SEQUENCE [TypeAliasSequence];
-DROP TYPE [dbo].[TestTypeAlias];");
+DROP TYPE [dbo].[TestTypeAlias];"
+            );
         }
 
         [ConditionalFact]
@@ -220,7 +234,8 @@ CREATE SEQUENCE [TypeFacetSequence] AS decimal(10, 0);",
                     Assert.Equal(1, sequence.IncrementBy);
                 },
                 @"
-DROP SEQUENCE [TypeFacetSequence];");
+DROP SEQUENCE [TypeFacetSequence];"
+            );
         }
 
         [ConditionalFact]
@@ -246,7 +261,8 @@ CREATE SEQUENCE [db2].[Sequence]",
                 @"
 DROP SEQUENCE [dbo].[Sequence];
 
-DROP SEQUENCE [db2].[Sequence];");
+DROP SEQUENCE [db2].[Sequence];"
+            );
         }
 
         #endregion
@@ -262,10 +278,13 @@ DROP SEQUENCE [db2].[Sequence];");
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var defaultSchema = Fixture.TestStore.ExecuteScalar<string>("SELECT SCHEMA_NAME()");
+                    var defaultSchema = Fixture.TestStore.ExecuteScalar<string>(
+                        "SELECT SCHEMA_NAME()"
+                    );
                     Assert.Equal(defaultSchema, dbModel.DefaultSchema);
                 },
-                null);
+                null
+            );
         }
 
         [ConditionalFact]
@@ -291,12 +310,14 @@ CREATE TABLE [dbo].[Denali] ( id int );",
                         {
                             Assert.Equal("dbo", e.Schema);
                             Assert.Equal("Everest", e.Name);
-                        });
+                        }
+                    );
                 },
                 @"
 DROP TABLE [dbo].[Everest];
 
-DROP TABLE [dbo].[Denali];");
+DROP TABLE [dbo].[Denali];"
+            );
         }
 
         [ConditionalFact]
@@ -307,7 +328,8 @@ DROP TABLE [dbo].[Denali];");
                 Enumerable.Empty<string>(),
                 Enumerable.Empty<string>(),
                 dbModel => Assert.Null(dbModel.Collation),
-                @"");
+                @""
+            );
         }
 
         #endregion
@@ -336,7 +358,8 @@ CREATE TABLE [dbo].[Kilimanjaro] ( Id int, B varchar, UNIQUE (B));",
                 @"
 DROP TABLE [dbo].[Kilimanjaro];
 
-DROP TABLE [db2].[K2];");
+DROP TABLE [db2].[K2];"
+            );
         }
 
         [ConditionalFact]
@@ -361,7 +384,8 @@ CREATE TABLE [dbo].[Kilimanjaro] ( Id int, B varchar, UNIQUE (B), FOREIGN KEY (B
                 @"
 DROP TABLE [dbo].[Kilimanjaro];
 
-DROP TABLE [dbo].[K2];");
+DROP TABLE [dbo].[K2];"
+            );
         }
 
         [ConditionalFact]
@@ -386,7 +410,8 @@ CREATE TABLE [dbo].[Kilimanjaro] ( Id int, B varchar, UNIQUE (B), FOREIGN KEY (B
                 @"
 DROP TABLE [dbo].[Kilimanjaro];
 
-DROP TABLE [dbo].[K2'];");
+DROP TABLE [dbo].[K2'];"
+            );
         }
 
         [ConditionalFact]
@@ -411,7 +436,8 @@ CREATE TABLE [dbo].[Kilimanjaro] ( Id int, B varchar, UNIQUE (B) );",
                 @"
 DROP TABLE [dbo].[Kilimanjaro];
 
-DROP TABLE [dbo].[K.2];");
+DROP TABLE [dbo].[K.2];"
+            );
         }
 
         [ConditionalFact]
@@ -440,7 +466,8 @@ DROP TABLE [dbo].[Kilimanjaro];
 
 DROP TABLE [dbo].[K2];
 
-DROP TABLE [db2].[K2];");
+DROP TABLE [db2].[K2];"
+            );
         }
 
         [ConditionalFact]
@@ -469,7 +496,8 @@ DROP TABLE [db.2].[Kilimanjaro];
 
 DROP TABLE [dbo].[K.2];
 
-DROP TABLE [db.2].[K.2];");
+DROP TABLE [db.2].[K.2];"
+            );
         }
 
         [ConditionalFact]
@@ -498,7 +526,8 @@ DROP TABLE [dbo].[Kilimanjaro];
 
 DROP TABLE [dbo].[K.2];
 
-DROP TABLE [db2].[K.2];");
+DROP TABLE [db2].[K.2];"
+            );
         }
 
         [ConditionalFact]
@@ -527,7 +556,8 @@ DROP TABLE [db.2].[Kilimanjaro];
 
 DROP TABLE [dbo].[K2];
 
-DROP TABLE [db.2].[K2];");
+DROP TABLE [db.2].[K2];"
+            );
         }
 
         [ConditionalFact]
@@ -572,7 +602,11 @@ CREATE TABLE [db2].[DependentTable] (
 );",
                 new[]
                 {
-                    "[db.2].[QuotedTableName]", "[db.2].SimpleTableName", "dbo.[Table.With.Dot]", "dbo.SimpleTableName", "JustTableName"
+                    "[db.2].[QuotedTableName]",
+                    "[db.2].SimpleTableName",
+                    "dbo.[Table.With.Dot]",
+                    "dbo.SimpleTableName",
+                    "JustTableName"
                 },
                 new[] { "db2" },
                 dbModel =>
@@ -581,28 +615,56 @@ CREATE TABLE [db2].[DependentTable] (
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("db2", sequence.Schema);
 
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "QuotedTableName"));
-                    Assert.Empty(dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "Table.With.Dot"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "SimpleTableName"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "JustTableName"));
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "QuotedTableName")
+                    );
+                    Assert.Empty(
+                        dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "Table.With.Dot")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "SimpleTableName")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db.2" && t.Name == "JustTableName")
+                    );
 
-                    Assert.Empty(dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "QuotedTableName"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "Table.With.Dot"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "SimpleTableName"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "JustTableName"));
+                    Assert.Empty(
+                        dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "QuotedTableName")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "Table.With.Dot")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "SimpleTableName")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "dbo" && t.Name == "JustTableName")
+                    );
 
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "QuotedTableName"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "Table.With.Dot"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "SimpleTableName"));
-                    Assert.Single(dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "JustTableName"));
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "QuotedTableName")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "Table.With.Dot")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "SimpleTableName")
+                    );
+                    Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "JustTableName")
+                    );
 
-                    var principalTable = Assert.Single(dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "PrincipalTable"));
+                    var principalTable = Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "PrincipalTable")
+                    );
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.NotNull(principalTable.PrimaryKey);
                     Assert.Single(principalTable.UniqueConstraints);
                     Assert.Single(principalTable.Indexes);
 
-                    var dependentTable = Assert.Single(dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "DependentTable"));
+                    var dependentTable = Assert.Single(
+                        dbModel.Tables.Where(t => t.Schema == "db2" && t.Name == "DependentTable")
+                    );
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Single(dependentTable.ForeignKeys);
                 },
@@ -625,7 +687,8 @@ DROP TABLE [db2].[Table.With.Dot];
 DROP TABLE [db2].[SimpleTableName];
 DROP TABLE [db2].[JustTableName];
 DROP TABLE [db2].[DependentTable];
-DROP TABLE [db2].[PrincipalTable];");
+DROP TABLE [db2].[PrincipalTable];"
+            );
         }
 
         #endregion
@@ -685,7 +748,8 @@ CREATE TABLE [Blogs] (
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.True((bool)table[SqlServerAnnotationNames.MemoryOptimized]);
                 },
-                "DROP TABLE [Blogs]");
+                "DROP TABLE [Blogs]"
+            );
         }
 
         [ConditionalFact]
@@ -714,21 +778,26 @@ EXECUTE sys.sp_addextendedproperty @name = N'MS_Description', @value = N'Blog.Id
 
                     Assert.Equal(2, table.Columns.Count);
                     Assert.All(
-                        table.Columns, c =>
+                        table.Columns,
+                        c =>
                         {
                             Assert.Equal("dbo", c.Table.Schema);
                             Assert.Equal("Blogs", c.Table.Name);
                             Assert.Equal(
                                 @"Blog table comment.
-On multiple lines.", c.Table.Comment);
-                        });
+On multiple lines.",
+                                c.Table.Comment
+                            );
+                        }
+                    );
 
                     Assert.Single(table.Columns.Where(c => c.Name == "Id"));
                     Assert.Single(table.Columns.Where(c => c.Name == "Name"));
                     Assert.Single(table.Columns.Where(c => c.Comment == "Blog.Id column comment."));
                     Assert.Single(table.Columns.Where(c => c.Comment != null));
                 },
-                "DROP TABLE [dbo].[Blogs]");
+                "DROP TABLE [dbo].[Blogs]"
+            );
         }
 
         [ConditionalFact]
@@ -750,16 +819,19 @@ SELECT
                     Assert.Equal(2, table.Columns.Count);
                     Assert.Null(table.PrimaryKey);
                     Assert.All(
-                        table.Columns, c =>
+                        table.Columns,
+                        c =>
                         {
                             Assert.Equal("dbo", c.Table.Schema);
                             Assert.Equal("BlogsView", c.Table.Name);
-                        });
+                        }
+                    );
 
                     Assert.Single(table.Columns.Where(c => c.Name == "Id"));
                     Assert.Single(table.Columns.Where(c => c.Name == "Name"));
                 },
-                "DROP VIEW [dbo].[BlogsView];");
+                "DROP VIEW [dbo].[BlogsView];"
+            );
         }
 
         [ConditionalFact]
@@ -781,9 +853,12 @@ CREATE TABLE PrimaryKeyTable (
                     Assert.StartsWith("PK__PrimaryK", pk.Name);
                     Assert.Null(pk[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Id" }, pk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        pk.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE PrimaryKeyTable;");
+                "DROP TABLE PrimaryKeyTable;"
+            );
         }
 
         [ConditionalFact]
@@ -810,9 +885,12 @@ CREATE INDEX IX_INDEX on UniqueConstraint ( IndexProperty );",
                     Assert.StartsWith("UQ__UniqueCo", uniqueConstraint.Name);
                     Assert.Null(uniqueConstraint[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Name" }, uniqueConstraint.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Name" },
+                        uniqueConstraint.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE UniqueConstraint;");
+                "DROP TABLE UniqueConstraint;"
+            );
         }
 
         [ConditionalFact]
@@ -836,16 +914,19 @@ CREATE INDEX IX_INDEX on IndexTable ( IndexProperty );",
 
                     Assert.Equal(2, table.Indexes.Count);
                     Assert.All(
-                        table.Indexes, c =>
+                        table.Indexes,
+                        c =>
                         {
                             Assert.Equal("dbo", c.Table.Schema);
                             Assert.Equal("IndexTable", c.Table.Name);
-                        });
+                        }
+                    );
 
                     Assert.Single(table.Indexes.Where(c => c.Name == "IX_NAME"));
                     Assert.Single(table.Indexes.Where(c => c.Name == "IX_INDEX"));
                 },
-                "DROP TABLE IndexTable;");
+                "DROP TABLE IndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -868,11 +949,13 @@ CREATE INDEX IX_Two on IndexTable ( IndexProperty ) WITH (FILLFACTOR = 50);",
 
                     Assert.Equal(2, table.Indexes.Count);
                     Assert.All(
-                        table.Indexes, c =>
+                        table.Indexes,
+                        c =>
                         {
                             Assert.Equal("dbo", c.Table.Schema);
                             Assert.Equal("IndexTable", c.Table.Name);
-                        });
+                        }
+                    );
 
                     Assert.Collection(
                         table.Indexes.OrderBy(i => i.Name),
@@ -885,9 +968,11 @@ CREATE INDEX IX_Two on IndexTable ( IndexProperty ) WITH (FILLFACTOR = 50);",
                         {
                             Assert.Equal("IX_Two", index.Name);
                             Assert.Equal(50, index[SqlServerAnnotationNames.FillFactor]);
-                        });
+                        }
+                    );
                 },
-                "DROP TABLE IndexTable;");
+                "DROP TABLE IndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -913,7 +998,9 @@ CREATE TABLE SecondDependent (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var firstFk = Assert.Single(dbModel.Tables.Single(t => t.Name == "FirstDependent").ForeignKeys);
+                    var firstFk = Assert.Single(
+                        dbModel.Tables.Single(t => t.Name == "FirstDependent").ForeignKeys
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", firstFk.Table.Schema);
@@ -921,12 +1008,18 @@ CREATE TABLE SecondDependent (
                     Assert.Equal("dbo", firstFk.PrincipalTable.Schema);
                     Assert.Equal("PrincipalTable", firstFk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "ForeignKeyId" }, firstFk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "ForeignKeyId" },
+                        firstFk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id" }, firstFk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        firstFk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.Cascade, firstFk.OnDelete);
 
-                    var secondFk = Assert.Single(dbModel.Tables.Single(t => t.Name == "SecondDependent").ForeignKeys);
+                    var secondFk = Assert.Single(
+                        dbModel.Tables.Single(t => t.Name == "SecondDependent").ForeignKeys
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", secondFk.Table.Schema);
@@ -934,15 +1027,20 @@ CREATE TABLE SecondDependent (
                     Assert.Equal("dbo", secondFk.PrincipalTable.Schema);
                     Assert.Equal("PrincipalTable", secondFk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "Id" }, secondFk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        secondFk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id" }, secondFk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        secondFk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.NoAction, secondFk.OnDelete);
                 },
                 @"
 DROP TABLE SecondDependent;
 DROP TABLE FirstDependent;
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         #endregion
@@ -955,7 +1053,8 @@ DROP TABLE PrincipalTable;");
             Fixture.TestStore.ExecuteNonQuery(
                 @"
 CREATE TYPE dbo.TestTypeAlias FROM nvarchar(max);
-CREATE TYPE db2.TestTypeAlias FROM int;");
+CREATE TYPE db2.TestTypeAlias FROM int;"
+            );
 
             Test(
                 @"
@@ -967,7 +1066,9 @@ CREATE TABLE TypeAlias (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var column = Assert.Single(dbModel.Tables.Single().Columns.Where(c => c.Name == "typeAliasColumn"));
+                    var column = Assert.Single(
+                        dbModel.Tables.Single().Columns.Where(c => c.Name == "typeAliasColumn")
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("nvarchar(max)", column.StoreType);
@@ -975,7 +1076,8 @@ CREATE TABLE TypeAlias (
                 @"
 DROP TABLE TypeAlias;
 DROP TYPE dbo.TestTypeAlias;
-DROP TYPE db2.TestTypeAlias;");
+DROP TYPE db2.TestTypeAlias;"
+            );
         }
 
         [ConditionalFact]
@@ -991,14 +1093,17 @@ CREATE TABLE TypeAlias (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var column = Assert.Single(dbModel.Tables.Single().Columns.Where(c => c.Name == "typeAliasColumn"));
+                    var column = Assert.Single(
+                        dbModel.Tables.Single().Columns.Where(c => c.Name == "typeAliasColumn")
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("nvarchar(128)", column.StoreType);
                     Assert.False(column.IsNullable);
                 },
                 @"
-DROP TABLE TypeAlias;");
+DROP TABLE TypeAlias;"
+            );
         }
 
         [ConditionalFact]
@@ -1022,15 +1127,37 @@ CREATE TABLE NumericColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("decimal(18, 0)", columns.Single(c => c.Name == "decimalColumn").StoreType);
-                    Assert.Equal("decimal(10, 5)", columns.Single(c => c.Name == "decimal105Column").StoreType);
-                    Assert.Equal("decimal(18, 2)", columns.Single(c => c.Name == "decimalDefaultColumn").StoreType);
-                    Assert.Equal("numeric(18, 0)", columns.Single(c => c.Name == "numericColumn").StoreType);
-                    Assert.Equal("numeric(15, 2)", columns.Single(c => c.Name == "numeric152Column").StoreType);
-                    Assert.Equal("numeric(18, 2)", columns.Single(c => c.Name == "numericDefaultColumn").StoreType);
-                    Assert.Equal("numeric(38, 5)", columns.Single(c => c.Name == "numericDefaultPrecisionColumn").StoreType);
+                    Assert.Equal(
+                        "decimal(18, 0)",
+                        columns.Single(c => c.Name == "decimalColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "decimal(10, 5)",
+                        columns.Single(c => c.Name == "decimal105Column").StoreType
+                    );
+                    Assert.Equal(
+                        "decimal(18, 2)",
+                        columns.Single(c => c.Name == "decimalDefaultColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "numeric(18, 0)",
+                        columns.Single(c => c.Name == "numericColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "numeric(15, 2)",
+                        columns.Single(c => c.Name == "numeric152Column").StoreType
+                    );
+                    Assert.Equal(
+                        "numeric(18, 2)",
+                        columns.Single(c => c.Name == "numericDefaultColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "numeric(38, 5)",
+                        columns.Single(c => c.Name == "numericDefaultPrecisionColumn").StoreType
+                    );
                 },
-                "DROP TABLE NumericColumns;");
+                "DROP TABLE NumericColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1055,15 +1182,37 @@ CREATE TABLE MaxColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("varchar(max)", columns.Single(c => c.Name == "varcharMaxColumn").StoreType);
-                    Assert.Equal("nvarchar(max)", columns.Single(c => c.Name == "nvarcharMaxColumn").StoreType);
-                    Assert.Equal("varbinary(max)", columns.Single(c => c.Name == "varbinaryMaxColumn").StoreType);
-                    Assert.Equal("varbinary(max)", columns.Single(c => c.Name == "binaryVaryingMaxColumn").StoreType);
-                    Assert.Equal("varchar(max)", columns.Single(c => c.Name == "charVaryingMaxColumn").StoreType);
-                    Assert.Equal("nvarchar(max)", columns.Single(c => c.Name == "nationalCharVaryingMaxColumn").StoreType);
-                    Assert.Equal("nvarchar(max)", columns.Single(c => c.Name == "nationalCharacterVaryingMaxColumn").StoreType);
+                    Assert.Equal(
+                        "varchar(max)",
+                        columns.Single(c => c.Name == "varcharMaxColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(max)",
+                        columns.Single(c => c.Name == "nvarcharMaxColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(max)",
+                        columns.Single(c => c.Name == "varbinaryMaxColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(max)",
+                        columns.Single(c => c.Name == "binaryVaryingMaxColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(max)",
+                        columns.Single(c => c.Name == "charVaryingMaxColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(max)",
+                        columns.Single(c => c.Name == "nationalCharVaryingMaxColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(max)",
+                        columns.Single(c => c.Name == "nationalCharacterVaryingMaxColumn").StoreType
+                    );
                 },
-                "DROP TABLE MaxColumns;");
+                "DROP TABLE MaxColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1093,21 +1242,61 @@ CREATE TABLE LengthColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("char(10)", columns.Single(c => c.Name == "char10Column").StoreType);
-                    Assert.Equal("varchar(66)", columns.Single(c => c.Name == "varchar66Column").StoreType);
-                    Assert.Equal("nchar(99)", columns.Single(c => c.Name == "nchar99Column").StoreType);
-                    Assert.Equal("nvarchar(100)", columns.Single(c => c.Name == "nvarchar100Column").StoreType);
-                    Assert.Equal("binary(111)", columns.Single(c => c.Name == "binary111Column").StoreType);
-                    Assert.Equal("varbinary(123)", columns.Single(c => c.Name == "varbinary123Column").StoreType);
-                    Assert.Equal("varbinary(133)", columns.Single(c => c.Name == "binaryVarying133Column").StoreType);
-                    Assert.Equal("varchar(144)", columns.Single(c => c.Name == "charVarying144Column").StoreType);
-                    Assert.Equal("char(155)", columns.Single(c => c.Name == "character155Column").StoreType);
-                    Assert.Equal("varchar(166)", columns.Single(c => c.Name == "characterVarying166Column").StoreType);
-                    Assert.Equal("nchar(171)", columns.Single(c => c.Name == "nationalCharacter171Column").StoreType);
-                    Assert.Equal("nvarchar(177)", columns.Single(c => c.Name == "nationalCharVarying177Column").StoreType);
-                    Assert.Equal("nvarchar(188)", columns.Single(c => c.Name == "nationalCharacterVarying188Column").StoreType);
+                    Assert.Equal(
+                        "char(10)",
+                        columns.Single(c => c.Name == "char10Column").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(66)",
+                        columns.Single(c => c.Name == "varchar66Column").StoreType
+                    );
+                    Assert.Equal(
+                        "nchar(99)",
+                        columns.Single(c => c.Name == "nchar99Column").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(100)",
+                        columns.Single(c => c.Name == "nvarchar100Column").StoreType
+                    );
+                    Assert.Equal(
+                        "binary(111)",
+                        columns.Single(c => c.Name == "binary111Column").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(123)",
+                        columns.Single(c => c.Name == "varbinary123Column").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(133)",
+                        columns.Single(c => c.Name == "binaryVarying133Column").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(144)",
+                        columns.Single(c => c.Name == "charVarying144Column").StoreType
+                    );
+                    Assert.Equal(
+                        "char(155)",
+                        columns.Single(c => c.Name == "character155Column").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(166)",
+                        columns.Single(c => c.Name == "characterVarying166Column").StoreType
+                    );
+                    Assert.Equal(
+                        "nchar(171)",
+                        columns.Single(c => c.Name == "nationalCharacter171Column").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(177)",
+                        columns.Single(c => c.Name == "nationalCharVarying177Column").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(188)",
+                        columns.Single(c => c.Name == "nationalCharacterVarying188Column").StoreType
+                    );
                 },
-                "DROP TABLE LengthColumns;");
+                "DROP TABLE LengthColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1127,11 +1316,21 @@ CREATE TABLE DefaultRequiredLengthBinaryColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("binary(8000)", columns.Single(c => c.Name == "binaryColumn").StoreType);
-                    Assert.Equal("varbinary(8000)", columns.Single(c => c.Name == "binaryVaryingColumn").StoreType);
-                    Assert.Equal("varbinary(8000)", columns.Single(c => c.Name == "varbinaryColumn").StoreType);
+                    Assert.Equal(
+                        "binary(8000)",
+                        columns.Single(c => c.Name == "binaryColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(8000)",
+                        columns.Single(c => c.Name == "binaryVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(8000)",
+                        columns.Single(c => c.Name == "varbinaryColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthBinaryColumns;");
+                "DROP TABLE DefaultRequiredLengthBinaryColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1149,9 +1348,13 @@ CREATE TABLE DefaultRequiredLengthCharColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("char(8000)", columns.Single(c => c.Name == "charColumn").StoreType);
+                    Assert.Equal(
+                        "char(8000)",
+                        columns.Single(c => c.Name == "charColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthCharColumns;");
+                "DROP TABLE DefaultRequiredLengthCharColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1169,9 +1372,13 @@ CREATE TABLE DefaultRequiredLengthCharColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("char(8000)", columns.Single(c => c.Name == "characterColumn").StoreType);
+                    Assert.Equal(
+                        "char(8000)",
+                        columns.Single(c => c.Name == "characterColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthCharColumns;");
+                "DROP TABLE DefaultRequiredLengthCharColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1191,11 +1398,21 @@ CREATE TABLE DefaultRequiredLengthVarcharColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("varchar(8000)", columns.Single(c => c.Name == "charVaryingColumn").StoreType);
-                    Assert.Equal("varchar(8000)", columns.Single(c => c.Name == "characterVaryingColumn").StoreType);
-                    Assert.Equal("varchar(8000)", columns.Single(c => c.Name == "varcharColumn").StoreType);
+                    Assert.Equal(
+                        "varchar(8000)",
+                        columns.Single(c => c.Name == "charVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(8000)",
+                        columns.Single(c => c.Name == "characterVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(8000)",
+                        columns.Single(c => c.Name == "varcharColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthVarcharColumns;");
+                "DROP TABLE DefaultRequiredLengthVarcharColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1213,9 +1430,13 @@ CREATE TABLE DefaultRequiredLengthNcharColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("nchar(4000)", columns.Single(c => c.Name == "nationalCharColumn").StoreType);
+                    Assert.Equal(
+                        "nchar(4000)",
+                        columns.Single(c => c.Name == "nationalCharColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthNcharColumns;");
+                "DROP TABLE DefaultRequiredLengthNcharColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1233,9 +1454,13 @@ CREATE TABLE DefaultRequiredLengthNcharColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("nchar(4000)", columns.Single(c => c.Name == "nationalCharacterColumn").StoreType);
+                    Assert.Equal(
+                        "nchar(4000)",
+                        columns.Single(c => c.Name == "nationalCharacterColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthNcharColumns;");
+                "DROP TABLE DefaultRequiredLengthNcharColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1253,9 +1478,13 @@ CREATE TABLE DefaultRequiredLengthNcharColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("nchar(4000)", columns.Single(c => c.Name == "ncharColumn").StoreType);
+                    Assert.Equal(
+                        "nchar(4000)",
+                        columns.Single(c => c.Name == "ncharColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthNcharColumns;");
+                "DROP TABLE DefaultRequiredLengthNcharColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1275,11 +1504,21 @@ CREATE TABLE DefaultRequiredLengthNvarcharColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("nvarchar(4000)", columns.Single(c => c.Name == "nationalCharVaryingColumn").StoreType);
-                    Assert.Equal("nvarchar(4000)", columns.Single(c => c.Name == "nationalCharacterVaryingColumn").StoreType);
-                    Assert.Equal("nvarchar(4000)", columns.Single(c => c.Name == "nvarcharColumn").StoreType);
+                    Assert.Equal(
+                        "nvarchar(4000)",
+                        columns.Single(c => c.Name == "nationalCharVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(4000)",
+                        columns.Single(c => c.Name == "nationalCharacterVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(4000)",
+                        columns.Single(c => c.Name == "nvarcharColumn").StoreType
+                    );
                 },
-                "DROP TABLE DefaultRequiredLengthNvarcharColumns;");
+                "DROP TABLE DefaultRequiredLengthNvarcharColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1300,10 +1539,17 @@ CREATE TABLE LengthColumns (
                     var columns = dbModel.Tables.Single().Columns;
 
                     Assert.Equal("time(4)", columns.Single(c => c.Name == "time4Column").StoreType);
-                    Assert.Equal("datetime2(4)", columns.Single(c => c.Name == "datetime24Column").StoreType);
-                    Assert.Equal("datetimeoffset(5)", columns.Single(c => c.Name == "datetimeoffset5Column").StoreType);
+                    Assert.Equal(
+                        "datetime2(4)",
+                        columns.Single(c => c.Name == "datetime24Column").StoreType
+                    );
+                    Assert.Equal(
+                        "datetimeoffset(5)",
+                        columns.Single(c => c.Name == "datetimeoffset5Column").StoreType
+                    );
                 },
-                "DROP TABLE LengthColumns;");
+                "DROP TABLE LengthColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1334,22 +1580,62 @@ CREATE TABLE OneLengthColumns (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal("binary(1)", columns.Single(c => c.Name == "binaryColumn").StoreType);
-                    Assert.Equal("varbinary(1)", columns.Single(c => c.Name == "binaryVaryingColumn").StoreType);
-                    Assert.Equal("char(1)", columns.Single(c => c.Name == "characterColumn").StoreType);
-                    Assert.Equal("varchar(1)", columns.Single(c => c.Name == "characterVaryingColumn").StoreType);
+                    Assert.Equal(
+                        "binary(1)",
+                        columns.Single(c => c.Name == "binaryColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(1)",
+                        columns.Single(c => c.Name == "binaryVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "char(1)",
+                        columns.Single(c => c.Name == "characterColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(1)",
+                        columns.Single(c => c.Name == "characterVaryingColumn").StoreType
+                    );
                     Assert.Equal("char(1)", columns.Single(c => c.Name == "charColumn").StoreType);
-                    Assert.Equal("varchar(1)", columns.Single(c => c.Name == "charVaryingColumn").StoreType);
-                    Assert.Equal("nchar(1)", columns.Single(c => c.Name == "nationalCharColumn").StoreType);
-                    Assert.Equal("nchar(1)", columns.Single(c => c.Name == "nationalCharacterColumn").StoreType);
-                    Assert.Equal("nvarchar(1)", columns.Single(c => c.Name == "nationalCharacterVaryingColumn").StoreType);
-                    Assert.Equal("nvarchar(1)", columns.Single(c => c.Name == "nationalCharVaryingColumn").StoreType);
-                    Assert.Equal("nchar(1)", columns.Single(c => c.Name == "ncharColumn").StoreType);
-                    Assert.Equal("nvarchar(1)", columns.Single(c => c.Name == "nvarcharColumn").StoreType);
-                    Assert.Equal("varbinary(1)", columns.Single(c => c.Name == "varbinaryColumn").StoreType);
-                    Assert.Equal("varchar(1)", columns.Single(c => c.Name == "varcharColumn").StoreType);
+                    Assert.Equal(
+                        "varchar(1)",
+                        columns.Single(c => c.Name == "charVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nchar(1)",
+                        columns.Single(c => c.Name == "nationalCharColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nchar(1)",
+                        columns.Single(c => c.Name == "nationalCharacterColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(1)",
+                        columns.Single(c => c.Name == "nationalCharacterVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(1)",
+                        columns.Single(c => c.Name == "nationalCharVaryingColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nchar(1)",
+                        columns.Single(c => c.Name == "ncharColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "nvarchar(1)",
+                        columns.Single(c => c.Name == "nvarcharColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varbinary(1)",
+                        columns.Single(c => c.Name == "varbinaryColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "varchar(1)",
+                        columns.Single(c => c.Name == "varcharColumn").StoreType
+                    );
                 },
-                "DROP TABLE OneLengthColumns;");
+                "DROP TABLE OneLengthColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1399,35 +1685,75 @@ CREATE TABLE RowversionType (
                     Assert.Equal("bigint", columns.Single(c => c.Name == "bigintColumn").StoreType);
                     Assert.Equal("bit", columns.Single(c => c.Name == "bitColumn").StoreType);
                     Assert.Equal("date", columns.Single(c => c.Name == "dateColumn").StoreType);
-                    Assert.Equal("datetime2", columns.Single(c => c.Name == "datetime2Column").StoreType);
-                    Assert.Equal("datetime", columns.Single(c => c.Name == "datetimeColumn").StoreType);
-                    Assert.Equal("datetimeoffset", columns.Single(c => c.Name == "datetimeoffsetColumn").StoreType);
+                    Assert.Equal(
+                        "datetime2",
+                        columns.Single(c => c.Name == "datetime2Column").StoreType
+                    );
+                    Assert.Equal(
+                        "datetime",
+                        columns.Single(c => c.Name == "datetimeColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "datetimeoffset",
+                        columns.Single(c => c.Name == "datetimeoffsetColumn").StoreType
+                    );
                     Assert.Equal("float", columns.Single(c => c.Name == "floatColumn").StoreType);
-                    Assert.Equal("geography", columns.Single(c => c.Name == "geographyColumn").StoreType);
-                    Assert.Equal("geometry", columns.Single(c => c.Name == "geometryColumn").StoreType);
-                    Assert.Equal("hierarchyid", columns.Single(c => c.Name == "hierarchyidColumn").StoreType);
+                    Assert.Equal(
+                        "geography",
+                        columns.Single(c => c.Name == "geographyColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "geometry",
+                        columns.Single(c => c.Name == "geometryColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "hierarchyid",
+                        columns.Single(c => c.Name == "hierarchyidColumn").StoreType
+                    );
                     Assert.Equal("image", columns.Single(c => c.Name == "imageColumn").StoreType);
                     Assert.Equal("int", columns.Single(c => c.Name == "intColumn").StoreType);
                     Assert.Equal("money", columns.Single(c => c.Name == "moneyColumn").StoreType);
                     Assert.Equal("ntext", columns.Single(c => c.Name == "ntextColumn").StoreType);
                     Assert.Equal("real", columns.Single(c => c.Name == "realColumn").StoreType);
-                    Assert.Equal("smalldatetime", columns.Single(c => c.Name == "smalldatetimeColumn").StoreType);
-                    Assert.Equal("smallint", columns.Single(c => c.Name == "smallintColumn").StoreType);
-                    Assert.Equal("smallmoney", columns.Single(c => c.Name == "smallmoneyColumn").StoreType);
-                    Assert.Equal("sql_variant", columns.Single(c => c.Name == "sql_variantColumn").StoreType);
+                    Assert.Equal(
+                        "smalldatetime",
+                        columns.Single(c => c.Name == "smalldatetimeColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "smallint",
+                        columns.Single(c => c.Name == "smallintColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "smallmoney",
+                        columns.Single(c => c.Name == "smallmoneyColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "sql_variant",
+                        columns.Single(c => c.Name == "sql_variantColumn").StoreType
+                    );
                     Assert.Equal("text", columns.Single(c => c.Name == "textColumn").StoreType);
                     Assert.Equal("time", columns.Single(c => c.Name == "timeColumn").StoreType);
-                    Assert.Equal("tinyint", columns.Single(c => c.Name == "tinyintColumn").StoreType);
-                    Assert.Equal("uniqueidentifier", columns.Single(c => c.Name == "uniqueidentifierColumn").StoreType);
+                    Assert.Equal(
+                        "tinyint",
+                        columns.Single(c => c.Name == "tinyintColumn").StoreType
+                    );
+                    Assert.Equal(
+                        "uniqueidentifier",
+                        columns.Single(c => c.Name == "uniqueidentifierColumn").StoreType
+                    );
                     Assert.Equal("xml", columns.Single(c => c.Name == "xmlColumn").StoreType);
 
                     Assert.Equal(
                         "rowversion",
-                        dbModel.Tables.Single(t => t.Name == "RowversionType").Columns.Single(c => c.Name == "rowversionColumn").StoreType);
+                        dbModel.Tables
+                            .Single(t => t.Name == "RowversionType")
+                            .Columns.Single(c => c.Name == "rowversionColumn").StoreType
+                    );
                 },
                 @"
 DROP TABLE NoFacetTypes;
-DROP TABLE RowversionType;");
+DROP TABLE RowversionType;"
+            );
         }
 
         [ConditionalFact]
@@ -1468,7 +1794,8 @@ CREATE TABLE DefaultComputedValues (
                     Assert.Equal("([A]+[B])", sumOfAAndBPersisted.ComputedColumnSql);
                     Assert.True(sumOfAAndBPersisted.IsStored);
                 },
-                "DROP TABLE DefaultComputedValues;");
+                "DROP TABLE DefaultComputedValues;"
+            );
         }
 
         [ConditionalFact]
@@ -1480,7 +1807,8 @@ CREATE TYPE datetime2Alias FROM datetime2(6);
 CREATE TYPE datetimeoffsetAlias FROM datetimeoffset(6);
 CREATE TYPE decimalAlias FROM decimal(17, 0);
 CREATE TYPE numericAlias FROM numeric(17, 0);
-CREATE TYPE timeAlias FROM time(6);");
+CREATE TYPE timeAlias FROM time(6);"
+            );
 
             Test(
                 @"
@@ -1525,9 +1853,7 @@ CREATE TABLE DefaultValues (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.All(
-                        columns,
-                        t => Assert.Null(t.DefaultValueSql));
+                    Assert.All(columns, t => Assert.Null(t.DefaultValueSql));
                 },
                 @"
 DROP TABLE DefaultValues;
@@ -1535,7 +1861,8 @@ DROP TYPE datetime2Alias;
 DROP TYPE datetimeoffsetAlias;
 DROP TYPE decimalAlias;
 DROP TYPE numericAlias;
-DROP TYPE timeAlias;");
+DROP TYPE timeAlias;"
+            );
         }
 
         [ConditionalFact]
@@ -1556,13 +1883,22 @@ CREATE TABLE ValueGeneratedProperties (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.Equal(ValueGenerated.OnAdd, columns.Single(c => c.Name == "Id").ValueGenerated);
-                    Assert.Null(columns.Single(c => c.Name == "NoValueGenerationColumn").ValueGenerated);
+                    Assert.Equal(
+                        ValueGenerated.OnAdd,
+                        columns.Single(c => c.Name == "Id").ValueGenerated
+                    );
+                    Assert.Null(
+                        columns.Single(c => c.Name == "NoValueGenerationColumn").ValueGenerated
+                    );
                     Assert.Null(columns.Single(c => c.Name == "FixedDefaultValue").ValueGenerated);
                     Assert.Null(columns.Single(c => c.Name == "ComputedValue").ValueGenerated);
-                    Assert.Equal(ValueGenerated.OnAddOrUpdate, columns.Single(c => c.Name == "rowversionColumn").ValueGenerated);
+                    Assert.Equal(
+                        ValueGenerated.OnAddOrUpdate,
+                        columns.Single(c => c.Name == "rowversionColumn").ValueGenerated
+                    );
                 },
-                "DROP TABLE ValueGeneratedProperties;");
+                "DROP TABLE ValueGeneratedProperties;"
+            );
         }
 
         [ConditionalFact]
@@ -1580,9 +1916,14 @@ CREATE TABLE RowVersionTable (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.True((bool)columns.Single(c => c.Name == "rowversionColumn")[ScaffoldingAnnotationNames.ConcurrencyToken]);
+                    Assert.True(
+                        (bool)columns.Single(c => c.Name == "rowversionColumn")[
+                            ScaffoldingAnnotationNames.ConcurrencyToken
+                        ]
+                    );
                 },
-                "DROP TABLE RowVersionTable;");
+                "DROP TABLE RowVersionTable;"
+            );
         }
 
         [ConditionalFact]
@@ -1604,7 +1945,8 @@ CREATE TABLE NullableColumns (
                     Assert.True(columns.Single(c => c.Name == "NullableInt").IsNullable);
                     Assert.False(columns.Single(c => c.Name == "NonNullString").IsNullable);
                 },
-                "DROP TABLE NullableColumns;");
+                "DROP TABLE NullableColumns;"
+            );
         }
 
         [ConditionalFact]
@@ -1624,9 +1966,13 @@ CREATE TABLE ColumnsWithCollation (
                     var columns = dbModel.Tables.Single().Columns;
 
                     Assert.Null(columns.Single(c => c.Name == "DefaultCollation").Collation);
-                    Assert.Equal("German_PhoneBook_CI_AS", columns.Single(c => c.Name == "NonDefaultCollation").Collation);
+                    Assert.Equal(
+                        "German_PhoneBook_CI_AS",
+                        columns.Single(c => c.Name == "NonDefaultCollation").Collation
+                    );
                 },
-                "DROP TABLE ColumnsWithCollation;");
+                "DROP TABLE ColumnsWithCollation;"
+            );
         }
 
         [ConditionalFact]
@@ -1645,10 +1991,17 @@ CREATE TABLE ColumnsWithSparseness (
                 {
                     var columns = dbModel.Tables.Single().Columns;
 
-                    Assert.True((bool)columns.Single(c => c.Name == "Sparse")[SqlServerAnnotationNames.Sparse]);
-                    Assert.Null(columns.Single(c => c.Name == "NonSparse")[SqlServerAnnotationNames.Sparse]);
+                    Assert.True(
+                        (bool)columns.Single(c => c.Name == "Sparse")[
+                            SqlServerAnnotationNames.Sparse
+                        ]
+                    );
+                    Assert.Null(
+                        columns.Single(c => c.Name == "NonSparse")[SqlServerAnnotationNames.Sparse]
+                    );
                 },
-                "DROP TABLE ColumnsWithSparseness;");
+                "DROP TABLE ColumnsWithSparseness;"
+            );
         }
 
         [ConditionalFact]
@@ -1679,13 +2032,17 @@ CREATE INDEX IX_HiddenColumnsTable_3 ON dbo.HiddenColumnsTable ( Name );
                     Assert.Equal(2, columns.Count);
                     Assert.DoesNotContain(columns, c => c.Name == "SysStartTime");
                     Assert.DoesNotContain(columns, c => c.Name == "SysEndTime");
-                    Assert.Equal("IX_HiddenColumnsTable_3", dbModel.Tables.Single().Indexes.Single().Name);
+                    Assert.Equal(
+                        "IX_HiddenColumnsTable_3",
+                        dbModel.Tables.Single().Indexes.Single().Name
+                    );
                 },
                 @"
 ALTER TABLE dbo.HiddenColumnsTable SET (SYSTEM_VERSIONING = OFF);
 DROP TABLE dbo.HiddenColumnsTableHistory;
 DROP TABLE dbo.HiddenColumnsTable;
-");
+"
+            );
         }
 
         [ConditionalFact]
@@ -1716,13 +2073,17 @@ CREATE INDEX IX_HiddenColumnsTable_3 ON dbo.HiddenColumnsTable ( Name );
                     Assert.Equal(2, columns.Count);
                     Assert.DoesNotContain(columns, c => c.Name == "SysStartTime");
                     Assert.DoesNotContain(columns, c => c.Name == "SysEndTime");
-                    Assert.Equal("IX_HiddenColumnsTable_3", dbModel.Tables.Single().Indexes.Single().Name);
+                    Assert.Equal(
+                        "IX_HiddenColumnsTable_3",
+                        dbModel.Tables.Single().Indexes.Single().Name
+                    );
                 },
                 @"
 ALTER TABLE dbo.HiddenColumnsTable SET (SYSTEM_VERSIONING = OFF);
 DROP TABLE dbo.HiddenColumnsTableHistory;
 DROP TABLE dbo.HiddenColumnsTable;
-");
+"
+            );
         }
 
         #endregion
@@ -1749,9 +2110,12 @@ CREATE TABLE CompositePrimaryKeyTable (
                     Assert.Equal("CompositePrimaryKeyTable", pk.Table.Name);
                     Assert.StartsWith("PK__Composit", pk.Name);
                     Assert.Equal(
-                        new List<string> { "Id2", "Id1" }, pk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2", "Id1" },
+                        pk.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE CompositePrimaryKeyTable;");
+                "DROP TABLE CompositePrimaryKeyTable;"
+            );
         }
 
         [ConditionalFact]
@@ -1774,9 +2138,12 @@ CREATE TABLE NonClusteredPrimaryKeyTable (
                     Assert.StartsWith("PK__NonClust", pk.Name);
                     Assert.False((bool)pk[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Id1" }, pk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id1" },
+                        pk.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE NonClusteredPrimaryKeyTable;");
+                "DROP TABLE NonClusteredPrimaryKeyTable;"
+            );
         }
 
         [ConditionalFact]
@@ -1801,9 +2168,12 @@ CREATE CLUSTERED INDEX ClusteredIndex ON NonClusteredPrimaryKeyTableWithClustere
                     Assert.StartsWith("PK__NonClust", pk.Name);
                     Assert.False((bool)pk[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Id1" }, pk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id1" },
+                        pk.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE NonClusteredPrimaryKeyTableWithClusteredIndex;");
+                "DROP TABLE NonClusteredPrimaryKeyTableWithClusteredIndex;"
+            );
         }
 
         [ConditionalFact]
@@ -1823,13 +2193,19 @@ CREATE TABLE NonClusteredPrimaryKeyTableWithClusteredConstraint (
                     var pk = dbModel.Tables.Single().PrimaryKey;
 
                     Assert.Equal("dbo", pk.Table.Schema);
-                    Assert.Equal("NonClusteredPrimaryKeyTableWithClusteredConstraint", pk.Table.Name);
+                    Assert.Equal(
+                        "NonClusteredPrimaryKeyTableWithClusteredConstraint",
+                        pk.Table.Name
+                    );
                     Assert.StartsWith("PK__NonClust", pk.Name);
                     Assert.False((bool)pk[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Id1" }, pk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id1" },
+                        pk.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE NonClusteredPrimaryKeyTableWithClusteredConstraint;");
+                "DROP TABLE NonClusteredPrimaryKeyTableWithClusteredConstraint;"
+            );
         }
 
         [ConditionalFact]
@@ -1853,9 +2229,12 @@ CREATE TABLE PrimaryKeyName (
                     Assert.StartsWith("MyPK", pk.Name);
                     Assert.Null(pk[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Id2" }, pk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2" },
+                        pk.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE PrimaryKeyName;");
+                "DROP TABLE PrimaryKeyName;"
+            );
         }
 
         #endregion
@@ -1883,9 +2262,12 @@ CREATE TABLE CompositeUniqueConstraintTable (
                     Assert.Equal("CompositeUniqueConstraintTable", uniqueConstraint.Table.Name);
                     Assert.Equal("UX", uniqueConstraint.Name);
                     Assert.Equal(
-                        new List<string> { "Id2", "Id1" }, uniqueConstraint.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2", "Id1" },
+                        uniqueConstraint.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE CompositeUniqueConstraintTable;");
+                "DROP TABLE CompositeUniqueConstraintTable;"
+            );
         }
 
         [ConditionalFact]
@@ -1909,9 +2291,12 @@ CREATE TABLE ClusteredUniqueConstraintTable (
                     Assert.StartsWith("UQ__Clustere", uniqueConstraint.Name);
                     Assert.True((bool)uniqueConstraint[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Id2" }, uniqueConstraint.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2" },
+                        uniqueConstraint.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE ClusteredUniqueConstraintTable;");
+                "DROP TABLE ClusteredUniqueConstraintTable;"
+            );
         }
 
         [ConditionalFact]
@@ -1935,9 +2320,12 @@ CREATE TABLE UniqueConstraintName (
                     Assert.Equal("UniqueConstraintName", uniqueConstraint.Table.Name);
                     Assert.Equal("MyUC", uniqueConstraint.Name);
                     Assert.Equal(
-                        new List<string> { "Id2" }, uniqueConstraint.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2" },
+                        uniqueConstraint.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE UniqueConstraintName;");
+                "DROP TABLE UniqueConstraintName;"
+            );
         }
 
         #endregion
@@ -1966,9 +2354,12 @@ CREATE INDEX IX_COMPOSITE ON CompositeIndexTable ( Id2, Id1 );",
                     Assert.Equal("CompositeIndexTable", index.Table.Name);
                     Assert.Equal("IX_COMPOSITE", index.Name);
                     Assert.Equal(
-                        new List<string> { "Id2", "Id1" }, index.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2", "Id1" },
+                        index.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE CompositeIndexTable;");
+                "DROP TABLE CompositeIndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -1994,9 +2385,12 @@ CREATE CLUSTERED INDEX IX_CLUSTERED ON ClusteredIndexTable ( Id2 );",
                     Assert.Equal("IX_CLUSTERED", index.Name);
                     Assert.True((bool)index[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
-                        new List<string> { "Id2" }, index.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2" },
+                        index.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE ClusteredIndexTable;");
+                "DROP TABLE ClusteredIndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2023,9 +2417,12 @@ CREATE UNIQUE INDEX IX_UNIQUE ON UniqueIndexTable ( Id2 );",
                     Assert.True(index.IsUnique);
                     Assert.Null(index.Filter);
                     Assert.Equal(
-                        new List<string> { "Id2" }, index.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2" },
+                        index.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE UniqueIndexTable;");
+                "DROP TABLE UniqueIndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2051,9 +2448,12 @@ CREATE UNIQUE INDEX IX_UNIQUE ON FilteredIndexTable ( Id2 ) WHERE Id2 > 10;",
                     Assert.Equal("IX_UNIQUE", index.Name);
                     Assert.Equal("([Id2]>(10))", index.Filter);
                     Assert.Equal(
-                        new List<string> { "Id2" }, index.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2" },
+                        index.Columns.Select(ic => ic.Name).ToList()
+                    );
                 },
-                "DROP TABLE FilteredIndexTable;");
+                "DROP TABLE FilteredIndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2073,7 +2473,8 @@ CREATE INDEX ixHypo ON HypotheticalIndexTable ( Id1 ) WITH STATISTICS_ONLY = -1;
                 {
                     Assert.Empty(dbModel.Tables.Single().Indexes);
                 },
-                "DROP TABLE HypotheticalIndexTable;");
+                "DROP TABLE HypotheticalIndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2093,7 +2494,8 @@ CREATE NONCLUSTERED COLUMNSTORE INDEX ixColumnStore ON ColumnStoreIndexTable ( I
                 {
                     Assert.Empty(dbModel.Tables.Single().Indexes);
                 },
-                "DROP TABLE ColumnStoreIndexTable;");
+                "DROP TABLE ColumnStoreIndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2113,10 +2515,14 @@ CREATE INDEX IX_INCLUDE ON IncludeIndexTable(IndexProperty) INCLUDE (IncludeProp
                 dbModel =>
                 {
                     var index = Assert.Single(dbModel.Tables.Single().Indexes);
-                    Assert.Equal(new[] { "IndexProperty" }, index.Columns.Select(ic => ic.Name).ToList());
+                    Assert.Equal(
+                        new[] { "IndexProperty" },
+                        index.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Null(index[SqlServerAnnotationNames.Include]);
                 },
-                "DROP TABLE IncludeIndexTable;");
+                "DROP TABLE IncludeIndexTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2143,7 +2549,8 @@ WITH (FILLFACTOR = 80) ON [PRIMARY]",
                     Assert.Equal(new[] { "Name" }, index.Columns.Select(ic => ic.Name).ToList());
                     Assert.Equal(80, index[SqlServerAnnotationNames.FillFactor]);
                 },
-                "DROP TABLE IndexFillFactor;");
+                "DROP TABLE IndexFillFactor;"
+            );
         }
 
         #endregion
@@ -2171,7 +2578,9 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var fk = Assert.Single(dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys);
+                    var fk = Assert.Single(
+                        dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", fk.Table.Schema);
@@ -2179,14 +2588,19 @@ CREATE TABLE DependentTable (
                     Assert.Equal("dbo", fk.PrincipalTable.Schema);
                     Assert.Equal("PrincipalTable", fk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "ForeignKeyId1", "ForeignKeyId2" }, fk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "ForeignKeyId1", "ForeignKeyId2" },
+                        fk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id1", "Id2" }, fk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id1", "Id2" },
+                        fk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.Cascade, fk.OnDelete);
                 },
                 @"
 DROP TABLE DependentTable;
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2213,11 +2627,14 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var foreignKeys = dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys;
+                    var foreignKeys =
+                        dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys;
 
                     Assert.Equal(2, foreignKeys.Count);
 
-                    var principalFk = Assert.Single(foreignKeys.Where(f => f.PrincipalTable.Name == "PrincipalTable"));
+                    var principalFk = Assert.Single(
+                        foreignKeys.Where(f => f.PrincipalTable.Name == "PrincipalTable")
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", principalFk.Table.Schema);
@@ -2225,12 +2642,18 @@ CREATE TABLE DependentTable (
                     Assert.Equal("dbo", principalFk.PrincipalTable.Schema);
                     Assert.Equal("PrincipalTable", principalFk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "ForeignKeyId1" }, principalFk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "ForeignKeyId1" },
+                        principalFk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id" }, principalFk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        principalFk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.Cascade, principalFk.OnDelete);
 
-                    var anotherPrincipalFk = Assert.Single(foreignKeys.Where(f => f.PrincipalTable.Name == "AnotherPrincipalTable"));
+                    var anotherPrincipalFk = Assert.Single(
+                        foreignKeys.Where(f => f.PrincipalTable.Name == "AnotherPrincipalTable")
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", anotherPrincipalFk.Table.Schema);
@@ -2238,15 +2661,20 @@ CREATE TABLE DependentTable (
                     Assert.Equal("dbo", anotherPrincipalFk.PrincipalTable.Schema);
                     Assert.Equal("AnotherPrincipalTable", anotherPrincipalFk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "ForeignKeyId2" }, anotherPrincipalFk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "ForeignKeyId2" },
+                        anotherPrincipalFk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id" }, anotherPrincipalFk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        anotherPrincipalFk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.Cascade, anotherPrincipalFk.OnDelete);
                 },
                 @"
 DROP TABLE DependentTable;
 DROP TABLE AnotherPrincipalTable;
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2268,7 +2696,9 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var fk = Assert.Single(dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys);
+                    var fk = Assert.Single(
+                        dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", fk.Table.Schema);
@@ -2276,14 +2706,19 @@ CREATE TABLE DependentTable (
                     Assert.Equal("dbo", fk.PrincipalTable.Schema);
                     Assert.Equal("PrincipalTable", fk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "ForeignKeyId" }, fk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "ForeignKeyId" },
+                        fk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id2" }, fk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id2" },
+                        fk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.Cascade, fk.OnDelete);
                 },
                 @"
 DROP TABLE DependentTable;
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2304,7 +2739,9 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var fk = Assert.Single(dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys);
+                    var fk = Assert.Single(
+                        dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", fk.Table.Schema);
@@ -2312,15 +2749,20 @@ CREATE TABLE DependentTable (
                     Assert.Equal("dbo", fk.PrincipalTable.Schema);
                     Assert.Equal("PrincipalTable", fk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "ForeignKeyId" }, fk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "ForeignKeyId" },
+                        fk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id" }, fk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        fk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.Cascade, fk.OnDelete);
                     Assert.Equal("MYFK", fk.Name);
                 },
                 @"
 DROP TABLE DependentTable;
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2341,7 +2783,9 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var fk = Assert.Single(dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys);
+                    var fk = Assert.Single(
+                        dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys
+                    );
 
                     // ReSharper disable once PossibleNullReferenceException
                     Assert.Equal("dbo", fk.Table.Schema);
@@ -2349,14 +2793,19 @@ CREATE TABLE DependentTable (
                     Assert.Equal("dbo", fk.PrincipalTable.Schema);
                     Assert.Equal("PrincipalTable", fk.PrincipalTable.Name);
                     Assert.Equal(
-                        new List<string> { "ForeignKeyId" }, fk.Columns.Select(ic => ic.Name).ToList());
+                        new List<string> { "ForeignKeyId" },
+                        fk.Columns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(
-                        new List<string> { "Id" }, fk.PrincipalColumns.Select(ic => ic.Name).ToList());
+                        new List<string> { "Id" },
+                        fk.PrincipalColumns.Select(ic => ic.Name).ToList()
+                    );
                     Assert.Equal(ReferentialAction.SetNull, fk.OnDelete);
                 },
                 @"
 DROP TABLE DependentTable;
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         #endregion
@@ -2377,13 +2826,20 @@ CREATE TABLE Blank (
                 {
                     Assert.Empty(dbModel.Tables);
 
-                    var message = Fixture.OperationReporter.Messages.Single(m => m.Level == LogLevel.Warning).Message;
+                    var message =
+                        Fixture.OperationReporter.Messages.Single(
+                            m => m.Level == LogLevel.Warning
+                        ).Message;
 
                     Assert.Equal(
-                        SqlServerResources.LogMissingSchema(new TestLogger<SqlServerLoggingDefinitions>()).GenerateMessage("MySchema"),
-                        message);  
+                        SqlServerResources
+                            .LogMissingSchema(new TestLogger<SqlServerLoggingDefinitions>())
+                            .GenerateMessage("MySchema"),
+                        message
+                    );
                 },
-                "DROP TABLE Blank;");
+                "DROP TABLE Blank;"
+            );
         }
 
         [ConditionalFact]
@@ -2400,13 +2856,20 @@ CREATE TABLE Blank (
                 {
                     Assert.Empty(dbModel.Tables);
 
-                    var message = Fixture.OperationReporter.Messages.Single(m => m.Level == LogLevel.Warning).Message;
+                    var message =
+                        Fixture.OperationReporter.Messages.Single(
+                            m => m.Level == LogLevel.Warning
+                        ).Message;
 
                     Assert.Equal(
-                        SqlServerResources.LogMissingTable(new TestLogger<SqlServerLoggingDefinitions>()).GenerateMessage("MyTable"),
-                        message);
+                        SqlServerResources
+                            .LogMissingTable(new TestLogger<SqlServerLoggingDefinitions>())
+                            .GenerateMessage("MyTable"),
+                        message
+                    );
                 },
-                "DROP TABLE Blank;");
+                "DROP TABLE Blank;"
+            );
         }
 
         [ConditionalFact]
@@ -2427,16 +2890,24 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var message = Fixture.OperationReporter.Messages.Single(m => m.Level == LogLevel.Warning).Message;
+                    var message =
+                        Fixture.OperationReporter.Messages.Single(
+                            m => m.Level == LogLevel.Warning
+                        ).Message;
 
                     Assert.Equal(
-                        SqlServerResources.LogPrincipalTableNotInSelectionSet(new TestLogger<SqlServerLoggingDefinitions>())
-                            .GenerateMessage(
-                                "MYFK", "dbo.DependentTable", "dbo.PrincipalTable"), message);
+                        SqlServerResources
+                            .LogPrincipalTableNotInSelectionSet(
+                                new TestLogger<SqlServerLoggingDefinitions>()
+                            )
+                            .GenerateMessage("MYFK", "dbo.DependentTable", "dbo.PrincipalTable"),
+                        message
+                    );
                 },
                 @"
 DROP TABLE DependentTable;
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2452,9 +2923,16 @@ CREATE TABLE PrincipalTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var level = Fixture.OperationReporter.Messages
-                        .Single(m => m.Message == SqlServerResources.LogReflexiveConstraintIgnored(new TestLogger<SqlServerLoggingDefinitions>())
-                            .GenerateMessage("MYFK", "dbo.PrincipalTable")).Level;
+                    var level =
+                        Fixture.OperationReporter.Messages.Single(
+                            m =>
+                                m.Message
+                                == SqlServerResources
+                                    .LogReflexiveConstraintIgnored(
+                                        new TestLogger<SqlServerLoggingDefinitions>()
+                                    )
+                                    .GenerateMessage("MYFK", "dbo.PrincipalTable")
+                        ).Level;
 
                     Assert.Equal(LogLevel.Debug, level);
 
@@ -2462,7 +2940,8 @@ CREATE TABLE PrincipalTable (
                     Assert.Empty(table.ForeignKeys);
                 },
                 @"
-DROP TABLE PrincipalTable;");
+DROP TABLE PrincipalTable;"
+            );
         }
 
         [ConditionalFact]
@@ -2488,9 +2967,16 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var level = Fixture.OperationReporter.Messages
-                        .Single(m => m.Message == SqlServerResources.LogDuplicateForeignKeyConstraintIgnored(new TestLogger<SqlServerLoggingDefinitions>())
-                            .GenerateMessage("MYFK2", "dbo.DependentTable", "MYFK1")).Level;
+                    var level =
+                        Fixture.OperationReporter.Messages.Single(
+                            m =>
+                                m.Message
+                                == SqlServerResources
+                                    .LogDuplicateForeignKeyConstraintIgnored(
+                                        new TestLogger<SqlServerLoggingDefinitions>()
+                                    )
+                                    .GenerateMessage("MYFK2", "dbo.DependentTable", "MYFK1")
+                        ).Level;
 
                     Assert.Equal(LogLevel.Warning, level);
 
@@ -2500,7 +2986,8 @@ CREATE TABLE DependentTable (
                 @"
 DROP TABLE DependentTable;
 DROP TABLE PrincipalTable;
-DROP TABLE OtherPrincipalTable;");
+DROP TABLE OtherPrincipalTable;"
+            );
         }
 
         #endregion
@@ -2510,7 +2997,8 @@ DROP TABLE OtherPrincipalTable;");
             IEnumerable<string> tables,
             IEnumerable<string> schemas,
             Action<DatabaseModel> asserter,
-            string cleanupSql)
+            string cleanupSql
+        )
         {
             if (!string.IsNullOrEmpty(createSql))
             {
@@ -2519,13 +3007,15 @@ DROP TABLE OtherPrincipalTable;");
 
             try
             {
-                var databaseModelFactory = SqlServerTestHelpers.Instance.CreateDesignServiceProvider(
-                        reporter: Fixture.OperationReporter)
-                    .CreateScope().ServiceProvider.GetRequiredService<IDatabaseModelFactory>();
+                var databaseModelFactory = SqlServerTestHelpers.Instance
+                    .CreateDesignServiceProvider(reporter: Fixture.OperationReporter)
+                    .CreateScope()
+                    .ServiceProvider.GetRequiredService<IDatabaseModelFactory>();
 
                 var databaseModel = databaseModelFactory.Create(
                     Fixture.TestStore.ConnectionString,
-                    new DatabaseModelFactoryOptions(tables, schemas));
+                    new DatabaseModelFactoryOptions(tables, schemas)
+                );
                 Assert.NotNull(databaseModel);
                 asserter(databaseModel);
             }
@@ -2540,13 +3030,13 @@ DROP TABLE OtherPrincipalTable;");
 
         public class SqlServerDatabaseModelFixture : SharedStoreFixtureBase<PoolableDbContext>
         {
-            protected override string StoreName { get; } = nameof(SqlServerDatabaseModelFactoryTest);
+            protected override string StoreName { get; } =
+                nameof(SqlServerDatabaseModelFactoryTest);
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
-            public new SqlServerTestStore TestStore
-                => (SqlServerTestStore)base.TestStore;
+            public new SqlServerTestStore TestStore => (SqlServerTestStore)base.TestStore;
 
             public TestOperationReporter OperationReporter { get; } = new TestOperationReporter();
 
@@ -2557,8 +3047,8 @@ DROP TABLE OtherPrincipalTable;");
                 await TestStore.ExecuteNonQueryAsync("CREATE SCHEMA [db.2]");
             }
 
-            protected override bool ShouldLogCategory(string logCategory)
-                => logCategory == DbLoggerCategory.Scaffolding.Name;
+            protected override bool ShouldLogCategory(string logCategory) =>
+                logCategory == DbLoggerCategory.Scaffolding.Name;
         }
     }
 }

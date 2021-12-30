@@ -5,17 +5,23 @@ using System;
 
 public class RemoteBase
 {
-    protected interface IProtected { string Touch(); }
-    protected static string UseIProtected(IProtected intrf) { return intrf.Touch(); }
+    protected interface IProtected
+    {
+        string Touch();
+    }
+    protected static string UseIProtected(IProtected intrf)
+    {
+        return intrf.Touch();
+    }
 }
 
 class LocalImpl : RemoteBase
 {
     protected class DirectImpl : IProtected
     {
-        string IProtected.Touch() 
-        { 
-            return "IProtected.Touch"; 
+        string IProtected.Touch()
+        {
+            return "IProtected.Touch";
         }
     }
 
@@ -43,9 +49,8 @@ class LocalImpl2 : RemoteBase_InSeparateAssembly
 
 static class App
 {
-
-    public static int Main() 
-    { 
+    public static int Main()
+    {
         string res = LocalImpl.Touch();
         if (res != "IProtected.Touch")
         {
@@ -56,12 +61,13 @@ static class App
         res = LocalImpl2.Touch();
         if (res != "IProtected_InSeparateAssembly.Touch")
         {
-            Console.WriteLine("Fail: Expected 'IProtected_InSeparateAssembly.Touch', got '" + res + "'");
+            Console.WriteLine(
+                "Fail: Expected 'IProtected_InSeparateAssembly.Touch', got '" + res + "'"
+            );
             return -1;
         }
 
         Console.WriteLine("Pass");
         return 100;
     }
-
 }

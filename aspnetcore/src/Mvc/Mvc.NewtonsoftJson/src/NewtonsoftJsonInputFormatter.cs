@@ -50,7 +50,8 @@ public class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterE
         ArrayPool<char> charPool,
         ObjectPoolProvider objectPoolProvider,
         MvcOptions options,
-        MvcNewtonsoftJsonOptions jsonOptions)
+        MvcNewtonsoftJsonOptions jsonOptions
+    )
     {
         if (logger == null)
         {
@@ -112,7 +113,8 @@ public class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterE
     /// <inheritdoc />
     public override async Task<InputFormatterResult> ReadRequestBodyAsync(
         InputFormatterContext context,
-        Encoding encoding)
+        Encoding encoding
+    )
     {
         if (context == null)
         {
@@ -215,7 +217,10 @@ public class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterE
             }
         }
 
-        if (exception is not null && exception is not (JsonException or OverflowException or FormatException))
+        if (
+            exception is not null
+            && exception is not (JsonException or OverflowException or FormatException)
+        )
         {
             // At this point we've already recorded all exceptions as an entry in the ModelStateDictionary.
             // We only need to rethrow an exception if we believe it needs to be handled by something further up
@@ -255,7 +260,8 @@ public class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterE
                     }
                     else
                     {
-                        addMember = !path.EndsWith("." + member, StringComparison.Ordinal)
+                        addMember =
+                            !path.EndsWith("." + member, StringComparison.Ordinal)
                             && !path.EndsWith("['" + member + "']", StringComparison.Ordinal)
                             && !path.EndsWith("[" + member + "]", StringComparison.Ordinal);
                     }
@@ -298,7 +304,9 @@ public class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterE
     {
         if (_jsonSerializerPool == null)
         {
-            _jsonSerializerPool = _objectPoolProvider.Create(new JsonSerializerObjectPolicy(SerializerSettings));
+            _jsonSerializerPool = _objectPoolProvider.Create(
+                new JsonSerializerObjectPolicy(SerializerSettings)
+            );
         }
 
         return _jsonSerializerPool.Get();
@@ -327,8 +335,8 @@ public class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterE
     /// This method works in tandem with <see cref="ReleaseJsonSerializer(JsonSerializer)"/> to
     /// manage the lifetimes of <see cref="JsonSerializer"/> instances.
     /// </remarks>
-    protected virtual void ReleaseJsonSerializer(JsonSerializer serializer)
-        => _jsonSerializerPool!.Return(serializer);
+    protected virtual void ReleaseJsonSerializer(JsonSerializer serializer) =>
+        _jsonSerializerPool!.Return(serializer);
 
     private ModelMetadata GetPathMetadata(ModelMetadata metadata, string path)
     {

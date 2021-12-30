@@ -18,7 +18,7 @@ class M
     static int F(int x, object a)
     {
         int result = 0;
- 
+
         if (a is V)
         {
             int token = ((V)a).Token;
@@ -54,4 +54,3 @@ class M
         return result1 + result2 + 55;
     }
 }
-

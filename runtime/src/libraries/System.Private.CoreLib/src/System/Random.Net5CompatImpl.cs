@@ -17,8 +17,7 @@ namespace System
         {
             private CompatPrng _prng; // mutable struct; do not make this readonly
 
-            public Net5CompatSeedImpl(int seed) =>
-                _prng = new CompatPrng(seed);
+            public Net5CompatSeedImpl(int seed) => _prng = new CompatPrng(seed);
 
             public override double Sample() => _prng.Sample();
 
@@ -29,9 +28,9 @@ namespace System
             public override int Next(int minValue, int maxValue)
             {
                 long range = (long)maxValue - minValue;
-                return range <= int.MaxValue ?
-                    (int)(_prng.Sample() * range) + minValue :
-                    (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
+                return range <= int.MaxValue
+                  ? (int)(_prng.Sample() * range) + minValue
+                  : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
             }
 
             public override long NextInt64()
@@ -76,9 +75,9 @@ namespace System
 
             /// <summary>Produces a value in the range [0, ulong.MaxValue].</summary>
             private ulong NextUInt64() =>
-                 ((ulong)(uint)Next(1 << 22)) |
-                (((ulong)(uint)Next(1 << 22)) << 22) |
-                (((ulong)(uint)Next(1 << 20)) << 44);
+                ((ulong)(uint)Next(1 << 22))
+                | (((ulong)(uint)Next(1 << 22)) << 22)
+                | (((ulong)(uint)Next(1 << 20)) << 44);
 
             public override double NextDouble() => _prng.Sample();
 
@@ -118,9 +117,9 @@ namespace System
             public override int Next(int minValue, int maxValue)
             {
                 long range = (long)maxValue - minValue;
-                return range <= int.MaxValue ?
-                    (int)(_parent.Sample() * range) + minValue :
-                    (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
+                return range <= int.MaxValue
+                  ? (int)(_parent.Sample() * range) + minValue
+                  : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
             }
 
             public override long NextInt64()
@@ -165,9 +164,9 @@ namespace System
 
             /// <summary>Produces a value in the range [0, ulong.MaxValue].</summary>
             private unsafe ulong NextUInt64() =>
-                 ((ulong)(uint)_parent.Next(1 << 22)) |
-                (((ulong)(uint)_parent.Next(1 << 22)) << 22) |
-                (((ulong)(uint)_parent.Next(1 << 20)) << 44);
+                ((ulong)(uint)_parent.Next(1 << 22))
+                | (((ulong)(uint)_parent.Next(1 << 22)) << 22)
+                | (((ulong)(uint)_parent.Next(1 << 20)) << 44);
 
             public override double NextDouble() => _parent.Sample();
 

@@ -18,18 +18,27 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseExplicitTypeForConst), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseExplicitTypeForConst
+        ),
+        Shared
+    ]
     internal sealed class UseExplicitTypeForConstCodeFixProvider : CodeFixProvider
     {
         private const string CS0822 = nameof(CS0822); // Implicitly-typed variables cannot be constant
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseExplicitTypeForConstCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseExplicitTypeForConstCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(CS0822);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(CS0822);
 
         public override FixAllProvider GetFixAllProvider()
         {
@@ -39,14 +48,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
 
-            if (root.FindNode(context.Span) is VariableDeclarationSyntax variableDeclaration &&
-                variableDeclaration.Variables.Count == 1)
+            if (
+                root.FindNode(context.Span) is VariableDeclarationSyntax variableDeclaration
+                && variableDeclaration.Variables.Count == 1
+            )
             {
-                var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+                var semanticModel = await context.Document
+                    .GetSemanticModelAsync(context.CancellationToken)
+                    .ConfigureAwait(false);
 
-                var type = semanticModel.GetTypeInfo(variableDeclaration.Type, context.CancellationToken).ConvertedType;
+                var type =
+                    semanticModel.GetTypeInfo(
+                        variableDeclaration.Type,
+                        context.CancellationToken
+                    ).ConvertedType;
                 if (type == null || type.TypeKind == TypeKind.Error || type.IsAnonymousType)
                 {
                     return;
@@ -54,28 +73,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
 
                 context.RegisterCodeFix(
                     new MyCodeAction(c => FixAsync(context.Document, context.Span, type, c)),
-                    context.Diagnostics);
+                    context.Diagnostics
+                );
             }
         }
 
         private static async Task<Document> FixAsync(
-            Document document, TextSpan span, ITypeSymbol type, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            ITypeSymbol type,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var variableDeclaration = (VariableDeclarationSyntax)root.FindNode(span);
 
-            var newRoot = root.ReplaceNode(variableDeclaration.Type, type.GenerateTypeSyntax(allowVar: false));
+            var newRoot = root.ReplaceNode(
+                variableDeclaration.Type,
+                type.GenerateTypeSyntax(allowVar: false)
+            );
             return document.WithSyntaxRoot(newRoot);
         }
 
         private sealed class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
-                       createChangedDocument,
-                       nameof(CSharpAnalyzersResources.Use_explicit_type_instead_of_var))
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
+                    createChangedDocument,
+                    nameof(CSharpAnalyzersResources.Use_explicit_type_instead_of_var)
+                ) { }
         }
     }
 }

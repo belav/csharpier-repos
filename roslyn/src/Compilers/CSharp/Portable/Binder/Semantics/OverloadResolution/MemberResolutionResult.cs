@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal readonly bool HasTypeArgumentInferredFromFunctionType;
 
-        internal MemberResolutionResult(TMember member, TMember leastOverriddenMember, MemberAnalysisResult result, bool hasTypeArgumentInferredFromFunctionType)
+        internal MemberResolutionResult(
+            TMember member,
+            TMember leastOverriddenMember,
+            MemberAnalysisResult result,
+            bool hasTypeArgumentInferredFromFunctionType
+        )
         {
             _member = member;
             _leastOverriddenMember = leastOverriddenMember;
@@ -32,7 +37,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal MemberResolutionResult<TMember> WithResult(MemberAnalysisResult result)
         {
-            return new MemberResolutionResult<TMember>(Member, LeastOverriddenMember, result, HasTypeArgumentInferredFromFunctionType);
+            return new MemberResolutionResult<TMember>(
+                Member,
+                LeastOverriddenMember,
+                result,
+                HasTypeArgumentInferredFromFunctionType
+            );
         }
 
         internal bool IsNull
@@ -70,10 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public MemberResolutionKind Resolution
         {
-            get
-            {
-                return Result.Kind;
-            }
+            get { return Result.Kind; }
         }
 
         /// <summary>
@@ -81,18 +88,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsValid
         {
-            get
-            {
-                return Result.IsValid;
-            }
+            get { return Result.IsValid; }
         }
 
         public bool IsApplicable
         {
-            get
-            {
-                return Result.IsApplicable;
-            }
+            get { return Result.IsApplicable; }
         }
 
         internal MemberResolutionResult<TMember> Worse()
@@ -107,10 +108,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal bool HasUseSiteDiagnosticToReport
         {
-            get
-            {
-                return _result.HasUseSiteDiagnosticToReportFor(_member);
-            }
+            get { return _result.HasUseSiteDiagnosticToReportFor(_member); }
         }
 
         /// <summary>

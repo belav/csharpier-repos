@@ -43,8 +43,14 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
             _solver = solver;
             _i_Invariant = solver.Or(_solver.CharConstraint('i'), solver.CharConstraint('I'));
             _i_Default = solver.Or(_i_Invariant, solver.CharConstraint(Turkish_I_WithDot));
-            _i_Turkish = solver.Or(solver.CharConstraint('i'), solver.CharConstraint(Turkish_I_WithDot));
-            _I_Turkish = solver.Or(solver.CharConstraint('I'), solver.CharConstraint(Turkish_i_WithoutDot));
+            _i_Turkish = solver.Or(
+                solver.CharConstraint('i'),
+                solver.CharConstraint(Turkish_I_WithDot)
+            );
+            _I_Turkish = solver.Or(
+                solver.CharConstraint('I'),
+                solver.CharConstraint(Turkish_i_WithoutDot)
+            );
         }
 
         /// <summary>
@@ -65,32 +71,42 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
                 // Do not cache in _cultureIndependentChars values that are culture-dependent
 
                 case 'i':
-                    return
-                        culture == string.Empty ? _i_Invariant :
-                        IsTurkishAlphabet(culture) ? _i_Turkish :
-                        _i_Default; // for all other cultures, case-sensitivity is the same as for en-US
+                    return culture == string.Empty
+                      ? _i_Invariant
+                      : IsTurkishAlphabet(culture)
+                          ? _i_Turkish
+                          : _i_Default; // for all other cultures, case-sensitivity is the same as for en-US
 
                 case 'I':
-                    return
-                        culture == string.Empty ? _i_Invariant :
-                        IsTurkishAlphabet(culture) ? _I_Turkish : // different from 'i' above
-                        _i_Default;
+                    return culture == string.Empty
+                      ? _i_Invariant
+                      : IsTurkishAlphabet(culture)
+                          ? _I_Turkish
+                          : // different from 'i' above
+                            _i_Default;
 
                 case Turkish_I_WithDot:
-                    return
-                        culture == string.Empty ? _solver.CharConstraint(Turkish_I_WithDot) :
-                        IsTurkishAlphabet(culture) ? _i_Turkish :
-                        _i_Default;
+                    return culture == string.Empty
+                      ? _solver.CharConstraint(Turkish_I_WithDot)
+                      : IsTurkishAlphabet(culture)
+                          ? _i_Turkish
+                          : _i_Default;
 
                 case Turkish_i_WithoutDot:
-                    return
-                        IsTurkishAlphabet(culture) ? _I_Turkish :
-                        _solver.CharConstraint(Turkish_i_WithoutDot);
+                    return IsTurkishAlphabet(culture)
+                      ? _I_Turkish
+                      : _solver.CharConstraint(Turkish_i_WithoutDot);
 
                 case 'k':
                 case 'K':
                 case KelvinSign:
-                    Volatile.Write(ref _cultureIndependentChars[c], _solver.Or(_solver.Or(_solver.CharConstraint('k'), _solver.CharConstraint('K')), _solver.CharConstraint(KelvinSign)));
+                    Volatile.Write(
+                        ref _cultureIndependentChars[c],
+                        _solver.Or(
+                            _solver.Or(_solver.CharConstraint('k'), _solver.CharConstraint('K')),
+                            _solver.CharConstraint(KelvinSign)
+                        )
+                    );
                     return _cultureIndependentChars[c]!;
 
                 // Cache in _cultureIndependentChars entries that are culture-independent.
@@ -100,13 +116,22 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
                 case <= '\x7F':
                     // For ASCII range other than letters i, I, k, and K, the case-conversion is independent of culture and does
                     // not include case-insensitive-equivalent non-ASCII.
-                    Volatile.Write(ref _cultureIndependentChars[c], _solver.Or(_solver.CharConstraint(char.ToLower(c)), _solver.CharConstraint(char.ToUpper(c))));
+                    Volatile.Write(
+                        ref _cultureIndependentChars[c],
+                        _solver.Or(
+                            _solver.CharConstraint(char.ToLower(c)),
+                            _solver.CharConstraint(char.ToUpper(c))
+                        )
+                    );
                     return _cultureIndependentChars[c]!;
 
                 default:
                     // Bring in the full transfomation relation, but here it does not actually depend on culture
                     // so it is safe to store the result for c.
-                    Volatile.Write(ref _cultureIndependentChars[c], Apply(_solver.CharConstraint(c)));
+                    Volatile.Write(
+                        ref _cultureIndependentChars[c],
+                        Apply(_solver.CharConstraint(c))
+                    );
                     return _cultureIndependentChars[c]!;
             }
         }
@@ -165,7 +190,10 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
             // Deserialize the table for the default culture.
             if (_relationDefault is null)
             {
-                BDD instance = BDD.Deserialize(Unicode.IgnoreCaseRelation.IgnoreCaseEnUsSerializedBDD, _solver);
+                BDD instance = BDD.Deserialize(
+                    Unicode.IgnoreCaseRelation.IgnoreCaseEnUsSerializedBDD,
+                    _solver
+                );
                 byte[] tmp = instance.SerializeToBytes();
                 BDD instance2 = BDD.Deserialize(tmp, _solver);
                 if (instance != instance2)
@@ -191,7 +219,10 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
 
             // Next, remove Turkish_I_withDot from the RHS of the relation.
             // This also effectively removes Turkish_I_withDot from the equivalence sets of 'i' and 'I'.
-            BDD instance = _solver.And(inv_table, _solver.Not(_solver.ShiftLeft(tr_I_withdot_BDD, 16)));
+            BDD instance = _solver.And(
+                inv_table,
+                _solver.Not(_solver.ShiftLeft(tr_I_withdot_BDD, 16))
+            );
 
             // Remove Turkish_I_withDot from the domain of casesensitive characters in the default case
             BDD instanceDomain = _solver.And(instance, _solver.Not(tr_I_withdot_BDD));
@@ -236,6 +267,14 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
         }
 
         private static bool IsTurkishAlphabet(string culture) =>
-            culture is "az" or "az-Cyrl" or "az-Cyrl-AZ" or "az-Latn" or "az-Latn-AZ" or "tr" or "tr-CY" or "tr-TR";
+            culture
+                is "az"
+                    or "az-Cyrl"
+                    or "az-Cyrl-AZ"
+                    or "az-Latn"
+                    or "az-Latn-AZ"
+                    or "tr"
+                    or "tr-CY"
+                    or "tr-TR";
     }
 }

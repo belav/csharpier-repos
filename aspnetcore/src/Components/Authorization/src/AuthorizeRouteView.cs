@@ -21,10 +21,10 @@ public sealed class AuthorizeRouteView : RouteView
     // We expect applications to supply their own authorizing/not-authorized content, but
     // it's better to have defaults than to make the parameters mandatory because in some
     // cases they will never be used (e.g., "authorizing" in out-of-box server-side Blazor)
-    private static readonly RenderFragment<AuthenticationState> _defaultNotAuthorizedContent
-        = state => builder => builder.AddContent(0, "Not authorized");
-    private static readonly RenderFragment _defaultAuthorizingContent
-        = builder => builder.AddContent(0, "Authorizing...");
+    private static readonly RenderFragment<AuthenticationState> _defaultNotAuthorizedContent =
+        state => builder => builder.AddContent(0, "Not authorized");
+    private static readonly RenderFragment _defaultAuthorizingContent = builder =>
+        builder.AddContent(0, "Authorizing...");
 
     private readonly RenderFragment _renderAuthorizeRouteViewCoreDelegate;
     private readonly RenderFragment<AuthenticationState> _renderAuthorizedDelegate;
@@ -41,7 +41,8 @@ public sealed class AuthorizeRouteView : RouteView
         // the NotAuthorized content except when you are displaying that particular state)
         RenderFragment renderBaseRouteViewDelegate = builder => base.Render(builder);
         _renderAuthorizedDelegate = authenticateState => renderBaseRouteViewDelegate;
-        _renderNotAuthorizedDelegate = authenticationState => builder => RenderNotAuthorizedInDefaultLayout(builder, authenticationState);
+        _renderNotAuthorizedDelegate = authenticationState =>
+            builder => RenderNotAuthorizedInDefaultLayout(builder, authenticationState);
         _renderAuthorizingDelegate = RenderAuthorizingInDefaultLayout;
         _renderAuthorizeRouteViewCoreDelegate = RenderAuthorizeRouteViewCore;
     }
@@ -80,7 +81,11 @@ public sealed class AuthorizeRouteView : RouteView
         {
             // Otherwise, implicitly wrap the output in a <CascadingAuthenticationState>
             builder.OpenComponent<CascadingAuthenticationState>(0);
-            builder.AddAttribute(1, nameof(CascadingAuthenticationState.ChildContent), _renderAuthorizeRouteViewCoreDelegate);
+            builder.AddAttribute(
+                1,
+                nameof(CascadingAuthenticationState.ChildContent),
+                _renderAuthorizeRouteViewCoreDelegate
+            );
             builder.CloseComponent();
         }
     }
@@ -89,17 +94,35 @@ public sealed class AuthorizeRouteView : RouteView
     {
         builder.OpenComponent<AuthorizeRouteViewCore>(0);
         builder.AddAttribute(1, nameof(AuthorizeRouteViewCore.RouteData), RouteData);
-        builder.AddAttribute(2, nameof(AuthorizeRouteViewCore.Authorized), _renderAuthorizedDelegate);
-        builder.AddAttribute(3, nameof(AuthorizeRouteViewCore.Authorizing), _renderAuthorizingDelegate);
-        builder.AddAttribute(4, nameof(AuthorizeRouteViewCore.NotAuthorized), _renderNotAuthorizedDelegate);
+        builder.AddAttribute(
+            2,
+            nameof(AuthorizeRouteViewCore.Authorized),
+            _renderAuthorizedDelegate
+        );
+        builder.AddAttribute(
+            3,
+            nameof(AuthorizeRouteViewCore.Authorizing),
+            _renderAuthorizingDelegate
+        );
+        builder.AddAttribute(
+            4,
+            nameof(AuthorizeRouteViewCore.NotAuthorized),
+            _renderNotAuthorizedDelegate
+        );
         builder.AddAttribute(5, nameof(AuthorizeRouteViewCore.Resource), Resource);
         builder.CloseComponent();
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2111:RequiresUnreferencedCode",
-        Justification = "OpenComponent already has the right set of attributes")]
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2110:RequiresUnreferencedCode",
-        Justification = "OpenComponent already has the right set of attributes")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2111:RequiresUnreferencedCode",
+        Justification = "OpenComponent already has the right set of attributes"
+    )]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2110:RequiresUnreferencedCode",
+        Justification = "OpenComponent already has the right set of attributes"
+    )]
     private void RenderContentInDefaultLayout(RenderTreeBuilder builder, RenderFragment content)
     {
         builder.OpenComponent<LayoutView>(0);
@@ -108,7 +131,10 @@ public sealed class AuthorizeRouteView : RouteView
         builder.CloseComponent();
     }
 
-    private void RenderNotAuthorizedInDefaultLayout(RenderTreeBuilder builder, AuthenticationState authenticationState)
+    private void RenderNotAuthorizedInDefaultLayout(
+        RenderTreeBuilder builder,
+        AuthenticationState authenticationState
+    )
     {
         var content = NotAuthorized ?? _defaultNotAuthorizedContent;
         RenderContentInDefaultLayout(builder, content(authenticationState));
@@ -125,7 +151,7 @@ public sealed class AuthorizeRouteView : RouteView
         [Parameter]
         public RouteData RouteData { get; set; } = default!;
 
-        protected override IAuthorizeData[]? GetAuthorizeData()
-            => AttributeAuthorizeDataCache.GetAuthorizeDataForType(RouteData.PageType);
+        protected override IAuthorizeData[]? GetAuthorizeData() =>
+            AttributeAuthorizeDataCache.GetAuthorizeDataForType(RouteData.PageType);
     }
 }

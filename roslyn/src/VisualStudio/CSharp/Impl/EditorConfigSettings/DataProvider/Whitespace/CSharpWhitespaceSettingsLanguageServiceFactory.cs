@@ -12,14 +12,18 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.DataProvider.Whitespace
 {
-    [ExportLanguageServiceFactory(typeof(ILanguageSettingsProviderFactory<WhitespaceSetting>), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(
+            typeof(ILanguageSettingsProviderFactory<WhitespaceSetting>),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
     internal class CSharpWhitespaceSettingsLanguageServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpWhitespaceSettingsLanguageServiceFactory()
-        {
-        }
+        public CSharpWhitespaceSettingsLanguageServiceFactory() { }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
         {

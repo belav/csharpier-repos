@@ -36,8 +36,10 @@ namespace ILCompiler
         class ValidTypeHashTable : LockFreeReaderHashtable<TypeDesc, TypeDesc>
         {
             protected override bool CompareKeyToValue(TypeDesc key, TypeDesc value) => key == value;
-            protected override bool CompareValueToValue(TypeDesc value1, TypeDesc value2) => value1 == value2;
-            protected override TypeDesc CreateValueFromKey(TypeDesc key) => EnsureLoadableTypeUncached(key);
+            protected override bool CompareValueToValue(TypeDesc value1, TypeDesc value2) =>
+                value1 == value2;
+            protected override TypeDesc CreateValueFromKey(TypeDesc key) =>
+                EnsureLoadableTypeUncached(key);
             protected override int GetKeyHashCode(TypeDesc key) => key.GetHashCode();
             protected override int GetValueHashCode(TypeDesc value) => value.GetHashCode();
         }
@@ -75,18 +77,27 @@ namespace ILCompiler
                     if (!elementSize.IsIndeterminate && elementSize.AsInt >= ushort.MaxValue)
                     {
                         // Element size over 64k can't be encoded in the GCDesc
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadValueClassTooLarge, parameterType);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadValueClassTooLarge,
+                            parameterType
+                        );
                     }
 
                     if (((ArrayType)parameterizedType).Rank > 32)
                     {
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadRankTooLarge, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadRankTooLarge,
+                            type
+                        );
                     }
 
                     if (parameterType.IsByRefLike)
                     {
                         // Arrays of byref-like types are not allowed
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            type
+                        );
                     }
 
                     // It might seem reasonable to disallow array of void, but the CLR doesn't prevent that too hard.
@@ -96,7 +107,9 @@ namespace ILCompiler
             else if (type.IsFunctionPointer)
             {
                 var functionPointer = ((FunctionPointerType)type).Signature;
-                ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(functionPointer.ReturnType);
+                ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(
+                    functionPointer.ReturnType
+                );
 
                 foreach (TypeDesc param in functionPointer)
                 {
@@ -123,7 +136,9 @@ namespace ILCompiler
                 // We need to be able to load interfaces
                 foreach (var intf in type.RuntimeInterfaces)
                 {
-                    ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(intf.NormalizeInstantiation());
+                    ((CompilerTypeSystemContext)type.Context).EnsureLoadableType(
+                        intf.NormalizeInstantiation()
+                    );
                 }
 
                 if (type.BaseType != null)
@@ -138,7 +153,9 @@ namespace ILCompiler
                 defType.ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizesAndFields);
 
                 // Make sure instantiation length matches the expectation
-                if (defType.Instantiation.Length != defType.GetTypeDefinition().Instantiation.Length)
+                if (
+                    defType.Instantiation.Length != defType.GetTypeDefinition().Instantiation.Length
+                )
                 {
                     ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
                 }
@@ -146,13 +163,18 @@ namespace ILCompiler
                 foreach (TypeDesc typeArg in defType.Instantiation)
                 {
                     // ByRefs, pointers, function pointers, and System.Void are never valid instantiation arguments
-                    if (typeArg.IsByRef
+                    if (
+                        typeArg.IsByRef
                         || typeArg.IsPointer
                         || typeArg.IsFunctionPointer
                         || typeArg.IsVoid
-                        || typeArg.IsByRefLike)
+                        || typeArg.IsByRefLike
+                    )
                     {
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            type
+                        );
                     }
 
                     // TODO: validate constraints

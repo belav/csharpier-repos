@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         [EntityFrameworkInternal]
         public MigrationsCodeGeneratorDependencies(
             IRelationalTypeMappingSource relationalTypeMappingSource,
-            IAnnotationCodeGenerator annotationCodeGenerator)
+            IAnnotationCodeGenerator annotationCodeGenerator
+        )
         {
             RelationalTypeMappingSource = relationalTypeMappingSource;
             AnnotationCodeGenerator = annotationCodeGenerator;

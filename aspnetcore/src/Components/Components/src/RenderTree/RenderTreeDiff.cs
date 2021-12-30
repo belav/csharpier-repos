@@ -25,9 +25,7 @@ public readonly struct RenderTreeDiff
     /// </summary>
     public readonly ArrayBuilderSegment<RenderTreeEdit> Edits;
 
-    internal RenderTreeDiff(
-        int componentId,
-        ArrayBuilderSegment<RenderTreeEdit> entries)
+    internal RenderTreeDiff(int componentId, ArrayBuilderSegment<RenderTreeEdit> entries)
     {
         ComponentId = componentId;
         Edits = entries;

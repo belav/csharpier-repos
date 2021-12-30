@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 /// <summary>
 /// An <see cref="IModelBinderProvider"/> for complex types.
 /// </summary>
-[Obsolete("This type is obsolete and will be removed in a future version. Use ComplexObjectModelBinderProvider instead.")]
+[Obsolete(
+    "This type is obsolete and will be removed in a future version. Use ComplexObjectModelBinderProvider instead."
+)]
 public class ComplexTypeModelBinderProvider : IModelBinderProvider
 {
     /// <inheritdoc />
@@ -37,7 +39,8 @@ public class ComplexTypeModelBinderProvider : IModelBinderProvider
             return new ComplexTypeModelBinder(
                 propertyBinders,
                 loggerFactory,
-                allowValidatingTopLevelNodes: true);
+                allowValidatingTopLevelNodes: true
+            );
         }
 
         return null;

@@ -44,15 +44,13 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             _uri = new Uri("#" + rule.Id, UriKind.Relative);
         }
-        public SrgsRuleRef(SrgsRule rule, string semanticKey)
-            : this(rule)
+        public SrgsRuleRef(SrgsRule rule, string semanticKey) : this(rule)
         {
             Helpers.ThrowIfEmptyOrNull(semanticKey, nameof(semanticKey));
 
             _semanticKey = semanticKey;
         }
-        public SrgsRuleRef(SrgsRule rule, string semanticKey, string parameters)
-            : this(rule)
+        public SrgsRuleRef(SrgsRule rule, string semanticKey, string parameters) : this(rule)
         {
             Helpers.ThrowIfEmptyOrNull(parameters, nameof(parameters));
 
@@ -81,10 +79,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         // Uri of the rule this rule reference references.
         public Uri Uri
         {
-            get
-            {
-                return _uri;
-            }
+            get { return _uri; }
         }
 
         /// <summary>
@@ -92,10 +87,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string SemanticKey
         {
-            get
-            {
-                return _semanticKey;
-            }
+            get { return _semanticKey; }
         }
 
         /// <summary>
@@ -103,10 +95,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Params
         {
-            get
-            {
-                return _params;
-            }
+            get { return _params; }
         }
         // The Null SpecialRuleRef defines a rule that is automatically matched:
         // that is, matched without the user speaking any word.
@@ -118,7 +107,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         // the next rule match, the next token or until the end of spoken input.
         public static readonly SrgsRuleRef Garbage = new(SpecialRuleRefType.Garbage);
         public static readonly SrgsRuleRef Dictation = new(new Uri("grammar:dictation"));
-        public static readonly SrgsRuleRef MnemonicSpelling = new(new Uri("grammar:dictation#spelling"));
+        public static readonly SrgsRuleRef MnemonicSpelling =
+            new(new Uri("grammar:dictation#spelling"));
 
         #endregion
 
@@ -160,7 +150,12 @@ namespace System.Speech.Recognition.SrgsGrammar
             // Write the 'name' attribute
             if (_semanticKey != null)
             {
-                writer.WriteAttributeString("sapi", "semantic-key", XmlParser.sapiNamespace, _semanticKey);
+                writer.WriteAttributeString(
+                    "sapi",
+                    "semantic-key",
+                    XmlParser.sapiNamespace,
+                    _semanticKey
+                );
             }
 
             // Write the 'params' attribute
@@ -188,7 +183,11 @@ namespace System.Speech.Recognition.SrgsGrammar
                 if (sUri[0] == '#')
                 {
                     bool uriFound = false;
-                    if (sUri.IndexOf("#grammar:dictation", StringComparison.Ordinal) == 0 || sUri.IndexOf("#grammar:dictation#spelling", StringComparison.Ordinal) == 0)
+                    if (
+                        sUri.IndexOf("#grammar:dictation", StringComparison.Ordinal) == 0
+                        || sUri.IndexOf("#grammar:dictation#spelling", StringComparison.Ordinal)
+                            == 0
+                    )
                     {
                         uriFound = true;
                     }

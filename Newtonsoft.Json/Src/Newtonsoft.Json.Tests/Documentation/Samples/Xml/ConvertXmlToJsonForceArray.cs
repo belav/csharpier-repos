@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
         public void Example()
         {
             #region Usage
-            string xml = @"<person id='1'>
+            string xml =
+                @"<person id='1'>
               <name>Alan</name>
               <url>http://www.google.com</url>
               <role>Admin1</role>
@@ -68,7 +69,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
             //   }
             // }
 
-            xml = @"<person xmlns:json='http://james.newtonking.com/projects/json' id='1'>
+            xml =
+                @"<person xmlns:json='http://james.newtonking.com/projects/json' id='1'>
               <name>Alan</name>
               <url>http://www.google.com</url>
               <role json:Array='true'>Admin</role>
@@ -92,7 +94,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
             // }
             #endregion
 
-            Assert.AreEqual(@"{""person"":{""@id"":""1"",""name"":""Alan"",""url"":""http://www.google.com"",""role"":[""Admin""]}}", json);
+            Assert.AreEqual(
+                @"{""person"":{""@id"":""1"",""name"":""Alan"",""url"":""http://www.google.com"",""role"":[""Admin""]}}",
+                json
+            );
         }
     }
 }

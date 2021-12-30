@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
 {
     internal static class PopulateSwitchExpressionHelpers
     {
-        public static ICollection<ISymbol> GetMissingEnumMembers(ISwitchExpressionOperation operation)
+        public static ICollection<ISymbol> GetMissingEnumMembers(
+            ISwitchExpressionOperation operation
+        )
         {
             var switchExpression = operation.Value;
             var switchExpressionType = switchExpression?.Type;
@@ -23,12 +25,19 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             // if the type is both nullable and an INamedTypeSymbol extract the type argument from the nullable
             // and check if it is of enum type
             if (switchExpressionType != null)
-                switchExpressionType = switchExpressionType.IsNullable(out var underlyingType) ? underlyingType : switchExpressionType;
+                switchExpressionType = switchExpressionType.IsNullable(out var underlyingType)
+                    ? underlyingType
+                    : switchExpressionType;
 
             if (switchExpressionType?.TypeKind == TypeKind.Enum)
             {
                 var enumMembers = new Dictionary<long, ISymbol>();
-                if (PopulateSwitchStatementHelpers.TryGetAllEnumMembers(switchExpressionType, enumMembers))
+                if (
+                    PopulateSwitchStatementHelpers.TryGetAllEnumMembers(
+                        switchExpressionType,
+                        enumMembers
+                    )
+                )
                 {
                     RemoveExistingEnumMembers(operation, enumMembers);
                     return enumMembers.Values;
@@ -39,7 +48,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         }
 
         private static void RemoveExistingEnumMembers(
-            ISwitchExpressionOperation operation, Dictionary<long, ISymbol> enumMembers)
+            ISwitchExpressionOperation operation,
+            Dictionary<long, ISymbol> enumMembers
+        )
         {
             foreach (var arm in operation.Arms)
             {
@@ -51,26 +62,43 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             }
         }
 
-        private static void HandleBinaryPattern(IBinaryPatternOperation? binaryPattern, Dictionary<long, ISymbol> enumMembers)
+        private static void HandleBinaryPattern(
+            IBinaryPatternOperation? binaryPattern,
+            Dictionary<long, ISymbol> enumMembers
+        )
         {
             if (binaryPattern?.OperatorKind == BinaryOperatorKind.Or)
             {
                 RemoveIfConstantPatternHasValue(binaryPattern.LeftPattern, enumMembers);
                 RemoveIfConstantPatternHasValue(binaryPattern.RightPattern, enumMembers);
 
-                HandleBinaryPattern(binaryPattern.LeftPattern as IBinaryPatternOperation, enumMembers);
-                HandleBinaryPattern(binaryPattern.RightPattern as IBinaryPatternOperation, enumMembers);
+                HandleBinaryPattern(
+                    binaryPattern.LeftPattern as IBinaryPatternOperation,
+                    enumMembers
+                );
+                HandleBinaryPattern(
+                    binaryPattern.RightPattern as IBinaryPatternOperation,
+                    enumMembers
+                );
             }
         }
 
-        private static void RemoveIfConstantPatternHasValue(IOperation operation, Dictionary<long, ISymbol> enumMembers)
+        private static void RemoveIfConstantPatternHasValue(
+            IOperation operation,
+            Dictionary<long, ISymbol> enumMembers
+        )
         {
-            if (operation is IConstantPatternOperation { Value: { ConstantValue: { HasValue: true, Value: var value } } })
+            if (
+                operation is IConstantPatternOperation
+                {
+                    Value: { ConstantValue: { HasValue: true, Value: var value } }
+                }
+            )
                 enumMembers.Remove(IntegerUtilities.ToInt64(value));
         }
 
-        public static bool HasDefaultCase(ISwitchExpressionOperation operation)
-            => operation.Arms.Any(a => IsDefault(a));
+        public static bool HasDefaultCase(ISwitchExpressionOperation operation) =>
+            operation.Arms.Any(a => IsDefault(a));
 
         public static bool IsDefault(ISwitchExpressionArmOperation arm)
         {

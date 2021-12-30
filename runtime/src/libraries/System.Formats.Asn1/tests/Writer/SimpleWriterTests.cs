@@ -16,7 +16,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "ruleSet",
-                () => new AsnWriter((AsnEncodingRules)value));
+                () => new AsnWriter((AsnEncodingRules)value)
+            );
         }
 
         [Theory]
@@ -123,7 +124,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "other",
-                () => writer.EncodedValueEquals((AsnWriter)null));
+                () => writer.EncodedValueEquals((AsnWriter)null)
+            );
         }
 
         [Theory]
@@ -136,7 +138,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "destination",
-                () => writer.CopyTo(null));
+                () => writer.CopyTo(null)
+            );
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public TestModificationCommandBatchFactory(
             ModificationCommandBatchFactoryDependencies dependencies,
-            IDbContextOptions options)
+            IDbContextOptions options
+        )
         {
             _dependencies = dependencies;
             _options = options;
@@ -27,7 +28,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         {
             CreateCount++;
 
-            var optionsExtension = _options.Extensions.OfType<FakeRelationalOptionsExtension>().FirstOrDefault();
+            var optionsExtension = _options.Extensions
+                .OfType<FakeRelationalOptionsExtension>()
+                .FirstOrDefault();
 
             return new TestModificationCommandBatch(_dependencies, optionsExtension?.MaxBatchSize);
         }

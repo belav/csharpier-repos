@@ -72,7 +72,5 @@ public class Program
             return 100;
         }
         return 101;
-
     }
-
 }

@@ -32,7 +32,9 @@ static class Repro
         Throws.M(false);
         if (b)
         {
-            Console.WriteLine("A really long string to get us past the limits of Lib1.dll's string blob");
+            Console.WriteLine(
+                "A really long string to get us past the limits of Lib1.dll's string blob"
+            );
             throw new Exception("Another really long string just because we can!");
         }
     }

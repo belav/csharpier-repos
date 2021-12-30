@@ -13,11 +13,11 @@ public class Program
 {
     static int Main()
     {
-        return 100 +
-            (Test1.Run() == 0 ? 0 : 1) +
-            (Test2.Run() == 1 ? 0 : 2) +
-            (Test3.Run() == 0 ? 0 : 4) +
-            (Test4.Run() == 0 ? 0 : 8);
+        return 100
+            + (Test1.Run() == 0 ? 0 : 1)
+            + (Test2.Run() == 1 ? 0 : 2)
+            + (Test3.Run() == 0 ? 0 : 4)
+            + (Test4.Run() == 0 ? 0 : 8);
     }
 
     class Test1
@@ -68,12 +68,16 @@ public class Program
     {
         struct vec
         {
-            public int x, y, z, w;
+            public int x,
+                y,
+                z,
+                w;
         }
 
         public static unsafe int Run()
         {
-            if (!Sse2.IsSupported) return 0;
+            if (!Sse2.IsSupported)
+                return 0;
 
             vec v = new vec();
             Vector128<int> o = Vector128.Create(1);

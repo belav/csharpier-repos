@@ -57,7 +57,8 @@ public class ResendEmailConfirmationModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmationModel where TUser : class
+internal class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmationModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly IEmailSender _emailSender;
@@ -68,9 +69,7 @@ internal class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmationMode
         _emailSender = emailSender;
     }
 
-    public override void OnGet()
-    {
-    }
+    public override void OnGet() { }
 
     public override async Task<IActionResult> OnPostAsync()
     {
@@ -82,7 +81,10 @@ internal class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmationMode
         var user = await _userManager.FindByEmailAsync(Input.Email);
         if (user == null)
         {
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(
+                string.Empty,
+                "Verification email sent. Please check your email."
+            );
             return Page();
         }
 
@@ -93,11 +95,13 @@ internal class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmationMode
             "/Account/ConfirmEmail",
             pageHandler: null,
             values: new { userId = userId, code = code },
-            protocol: Request.Scheme);
+            protocol: Request.Scheme
+        );
         await _emailSender.SendEmailAsync(
             Input.Email,
             "Confirm your email",
-            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+        );
 
         ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
         return Page();

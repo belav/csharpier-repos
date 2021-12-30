@@ -12,7 +12,6 @@ namespace SetIPTest
             m_count++;
         }
 
-
         public static void F()
         {
             String s;
@@ -21,23 +20,25 @@ namespace SetIPTest
             if (m_variety != null)
                 _Initialize();
 
-
-            try {
+            try
+            {
                 s = m_variety[MAX].ToString();
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 Object obj;
-
 
                 obj = new SetIP();
                 m_variety[(MAX - 1)] = (SetIP)obj;
             }
-            finally {
+            finally
+            {
                 int index = 0;
 
-
-                for (; index < m_count; index++) {
-                    if ((index >= 0) && (index < (MAX - 1))) {
+                for (; index < m_count; index++)
+                {
+                    if ((index >= 0) && (index < (MAX - 1)))
+                    {
                         if (m_variety[index] != null)
                             s = m_variety[index].ToString();
                     }
@@ -52,14 +53,12 @@ namespace SetIPTest
             d = ((i4 + r4) + 3.0);
         }
 
-
         public static int Main(String[] argv)
         {
             Console.WriteLine("Entering Main of SetIP");
 
             if (Debugger.IsAttached == true)
                 Debugger.Break();
-
 
             SetIP.F();
 
@@ -72,7 +71,8 @@ namespace SetIPTest
 
         private static void _Initialize()
         {
-            for (int i = 0; i < (MAX - 1); i++) {
+            for (int i = 0; i < (MAX - 1); i++)
+            {
                 if ((i >= 0) && (i < (MAX - 1)))
                     m_variety[i] = new SetIP();
             }

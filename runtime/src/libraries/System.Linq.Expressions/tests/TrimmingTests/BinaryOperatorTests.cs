@@ -15,14 +15,17 @@ internal class Program
         ParameterExpression leftParameter = Expression.Parameter(typeof(Class1));
         ParameterExpression rightParameter = Expression.Parameter(typeof(Class1));
         ParameterExpression result = Expression.Variable(typeof(Class1));
-        
-        Func<Class1, Class1, Class1> func =
-            Expression.Lambda<Func<Class1, Class1, Class1>>(
+
+        Func<Class1, Class1, Class1> func = Expression
+            .Lambda<Func<Class1, Class1, Class1>>(
                 Expression.Block(
                     new[] { result },
                     Expression.Assign(result, Expression.Add(leftParameter, rightParameter)),
-                    result),
-                leftParameter, rightParameter)
+                    result
+                ),
+                leftParameter,
+                rightParameter
+            )
             .Compile();
 
         Class1 actual = func(new Class1("left"), new Class1("right"));

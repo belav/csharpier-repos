@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 public abstract class EnumerableValueProviderTest
 {
-    protected static Dictionary<string, StringValues> BackingStore { get; } = new Dictionary<string, StringValues>
+    protected static Dictionary<string, StringValues> BackingStore { get; } =
+        new Dictionary<string, StringValues>
         {
             { "some", new[] { "someValue1", "someValue2" } },
             { "null_value", StringValues.Empty },
@@ -33,7 +34,11 @@ public abstract class EnumerableValueProviderTest
     {
         // Arrange
         var backingStore = new Dictionary<string, StringValues>();
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, backingStore, culture: null);
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            backingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.ContainsPrefix(string.Empty);
@@ -46,7 +51,11 @@ public abstract class EnumerableValueProviderTest
     public void ContainsPrefix_WithNonEmptyCollection_ReturnsTrueForEmptyPrefix()
     {
         // Arrange
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.ContainsPrefix(string.Empty);
@@ -64,7 +73,11 @@ public abstract class EnumerableValueProviderTest
     public void ContainsPrefix_WithNonEmptyCollection_ReturnsTrueForKnownPrefixes(string prefix)
     {
         // Arrange
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act & Assert
         Assert.True(valueProvider.ContainsPrefix(prefix));
@@ -74,7 +87,11 @@ public abstract class EnumerableValueProviderTest
     public void ContainsPrefix_WithNonEmptyCollection_ReturnsFalseForUnknownPrefix()
     {
         // Arrange
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.ContainsPrefix("biff");
@@ -88,13 +105,17 @@ public abstract class EnumerableValueProviderTest
     {
         // Arrange
         var expected = new Dictionary<string, string>
-            {
-                { "index", "[index]" },
-                { "null_value", "null_value" },
-                { "prefix", "prefix" },
-                { "some", "some" },
-            };
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        {
+            { "index", "[index]" },
+            { "null_value", "null_value" },
+            { "prefix", "prefix" },
+            { "some", "some" },
+        };
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.GetKeysFromPrefix(string.Empty);
@@ -107,7 +128,11 @@ public abstract class EnumerableValueProviderTest
     public void GetKeysFromPrefix_UnknownPrefix_ReturnsEmptyDictionary()
     {
         // Arrange
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.GetKeysFromPrefix("abc");
@@ -121,15 +146,19 @@ public abstract class EnumerableValueProviderTest
     {
         // Arrange
         var expected = new Dictionary<string, string>
-            {
-                { "name", "prefix.name" },
-                { "null_value", "prefix.null_value" },
-                { "property1", "prefix.property1" },
-                { "property2", "prefix.property2" },
-                { "index1", "prefix[index1]" },
-                { "index2", "prefix[index2]" },
-            };
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        {
+            { "name", "prefix.name" },
+            { "null_value", "prefix.null_value" },
+            { "property1", "prefix.property1" },
+            { "property2", "prefix.property2" },
+            { "index1", "prefix[index1]" },
+            { "index2", "prefix[index2]" },
+        };
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.GetKeysFromPrefix("prefix");
@@ -143,11 +172,15 @@ public abstract class EnumerableValueProviderTest
     {
         // Arrange
         var expected = new Dictionary<string, string>
-            {
-                { "property", "[index].property" },
-                { "anotherIndex", "[index][anotherIndex]" }
-            };
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        {
+            { "property", "[index].property" },
+            { "anotherIndex", "[index][anotherIndex]" }
+        };
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.GetKeysFromPrefix("[index]");
@@ -208,9 +241,9 @@ public abstract class EnumerableValueProviderTest
     {
         // Arrange
         var backingStore = new Dictionary<string, StringValues>
-            {
-                { "key", new string[] { null, null, "value" } },
-            };
+        {
+            { "key", new string[] { null, null, "value" } },
+        };
         var culture = new CultureInfo("fr-FR");
         var valueProvider = GetEnumerableValueProvider(BindingSource.Query, backingStore, culture);
 
@@ -225,7 +258,11 @@ public abstract class EnumerableValueProviderTest
     public void GetValue_ReturnsNullIfKeyNotFound()
     {
         // Arrange
-        var valueProvider = GetEnumerableValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var valueProvider = GetEnumerableValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         // Act
         var result = valueProvider.GetValue("prefix");
@@ -239,9 +276,9 @@ public abstract class EnumerableValueProviderTest
     {
         // Arrange
         var store = new Dictionary<string, StringValues>(BackingStore)
-            {
-                { string.Empty, "some-value" },
-            };
+        {
+            { string.Empty, "some-value" },
+        };
         var valueProvider = GetEnumerableValueProvider(BindingSource.Query, store, culture: null);
 
         // Act
@@ -255,13 +292,18 @@ public abstract class EnumerableValueProviderTest
     public virtual void FilterInclude()
     {
         // Arrange
-        var provider = GetBindingSourceValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var provider = GetBindingSourceValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         var bindingSource = new BindingSource(
             BindingSource.Query.Id,
             displayName: null,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         // Act
         var result = provider.Filter(bindingSource);
@@ -275,13 +317,18 @@ public abstract class EnumerableValueProviderTest
     public void FilterExclude()
     {
         // Arrange
-        var provider = GetBindingSourceValueProvider(BindingSource.Query, BackingStore, culture: null);
+        var provider = GetBindingSourceValueProvider(
+            BindingSource.Query,
+            BackingStore,
+            culture: null
+        );
 
         var bindingSource = new BindingSource(
             "Test",
             displayName: null,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         // Act
         var result = provider.Filter(bindingSource);
@@ -293,9 +340,12 @@ public abstract class EnumerableValueProviderTest
     protected IBindingSourceValueProvider GetBindingSourceValueProvider(
         BindingSource bindingSource,
         Dictionary<string, StringValues> values,
-        CultureInfo culture)
+        CultureInfo culture
+    )
     {
-        var provider = GetEnumerableValueProvider(bindingSource, values, culture) as IBindingSourceValueProvider;
+        var provider =
+            GetEnumerableValueProvider(bindingSource, values, culture)
+            as IBindingSourceValueProvider;
 
         // All IEnumerableValueProvider implementations also implement IBindingSourceValueProvider.
         Assert.NotNull(provider);
@@ -306,5 +356,6 @@ public abstract class EnumerableValueProviderTest
     protected abstract IEnumerableValueProvider GetEnumerableValueProvider(
         BindingSource bindingSource,
         Dictionary<string, StringValues> values,
-        CultureInfo culture);
+        CultureInfo culture
+    );
 }

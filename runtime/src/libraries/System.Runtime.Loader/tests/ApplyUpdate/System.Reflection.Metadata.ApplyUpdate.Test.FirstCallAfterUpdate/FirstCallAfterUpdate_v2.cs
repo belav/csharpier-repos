@@ -3,9 +3,11 @@
 
 namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
-    public class FirstCallAfterUpdate {
-        public FirstCallAfterUpdate() {}
-        public string Method1(string s) {
+    public class FirstCallAfterUpdate
+    {
+        public FirstCallAfterUpdate() { }
+        public string Method1(string s)
+        {
             return s + "EST STRING";
         }
     }

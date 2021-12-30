@@ -16,22 +16,16 @@ public struct AA
                     break;
                 else
                 {
-                    if (a)
-                    {
-                    }
+                    if (a) { }
                 }
             }
             a = false;
-            do
-            {
-            }
-            while (a);
+            do { } while (a);
 
             // stop the loop
             App.flag = false;
         }
     }
-
 }
 
 class App

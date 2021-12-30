@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// Returns all the active statements in the session. Each <see cref="ManagedActiveStatementDebugInfo"/> has an unique <see cref="ManagedActiveStatementDebugInfo.ActiveInstruction"/>.
         /// For example, if an instruction is active in two different threads, only one active statement will be reported for it.
         /// </returns>
-        ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellation);
+        ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(
+            CancellationToken cancellation
+        );
 
         /// <summary>
         /// Check for Edit and Continue availability on all instances with specified <paramref name="module"/>.
@@ -39,7 +41,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// Otherwise, if there is at least one instance of the module loaded in a debugging session or there are active hot reload agents, returns <see cref="ManagedHotReloadAvailabilityStatus.Available"/>.
         /// Otherwise, returns <see cref="ManagedHotReloadAvailabilityStatus.ModuleNotLoaded"/>.
         /// </returns>
-        ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(Guid module, CancellationToken cancellation);
+        ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(
+            Guid module,
+            CancellationToken cancellation
+        );
 
         /// <summary>
         /// Notifies the debugger that a document has changed, which may affect the given module when that change is applied.

@@ -37,10 +37,7 @@ namespace System.Net.Security
 
         public override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
 
         protected override bool ReleaseHandle()
@@ -50,5 +47,4 @@ namespace System.Net.Security
             return true;
         }
     }
-
 }

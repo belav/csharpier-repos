@@ -24,19 +24,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // Only the compiler can create new instances.
-        internal NamespaceOrTypeSymbol()
-        {
-        }
+        internal NamespaceOrTypeSymbol() { }
 
         /// <summary>
         /// Returns true if this symbol is a namespace. If it is not a namespace, it must be a type.
         /// </summary>
         public bool IsNamespace
         {
-            get
-            {
-                return Kind == SymbolKind.Namespace;
-            }
+            get { return Kind == SymbolKind.Namespace; }
         }
 
         /// <summary>
@@ -44,10 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public bool IsType
         {
-            get
-            {
-                return !IsNamespace;
-            }
+            get { return !IsNamespace; }
         }
 
         /// <summary>
@@ -60,10 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </returns>
         public sealed override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -76,10 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </returns>
         public sealed override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -91,10 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </returns>
         public sealed override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -162,7 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// returns an empty IEnumerable. Never returns null.</returns>
         public virtual ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name, int arity)
         {
-            // default implementation does a post-filter. We can override this if its a performance burden, but 
+            // default implementation does a post-filter. We can override this if its a performance burden, but
             // experience is that it won't be.
             return GetTypeMembers(name).WhereAsArray((t, arity) => t.Arity == arity, arity);
         }
@@ -173,7 +156,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns>Null if there is no matching declaration.</returns>
         internal SourceNamedTypeSymbol? GetSourceTypeMember(TypeDeclarationSyntax syntax)
         {
-            return GetSourceTypeMember(syntax.Identifier.ValueText, syntax.Arity, syntax.Kind(), syntax);
+            return GetSourceTypeMember(
+                syntax.Identifier.ValueText,
+                syntax.Arity,
+                syntax.Kind(),
+                syntax
+            );
         }
 
         /// <summary>
@@ -182,7 +170,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns>Null if there is no matching declaration.</returns>
         internal SourceNamedTypeSymbol? GetSourceTypeMember(DelegateDeclarationSyntax syntax)
         {
-            return GetSourceTypeMember(syntax.Identifier.ValueText, syntax.Arity, syntax.Kind(), syntax);
+            return GetSourceTypeMember(
+                syntax.Identifier.ValueText,
+                syntax.Arity,
+                syntax.Kind(),
+                syntax
+            );
         }
 
         /// <summary>
@@ -194,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             int arity,
             SyntaxKind kind,
-            CSharpSyntaxNode syntax)
+            CSharpSyntaxNode syntax
+        )
         {
             TypeKind typeKind = kind.ToDeclarationKind().ToTypeKind();
 
@@ -207,11 +201,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         // PERF: Avoid accessing Locations for performance, but assert that the alternative approach is
                         // equivalent.
-                        Debug.Assert(memberT.MergedDeclaration.Declarations.SelectAsArray(decl => decl.NameLocation).SequenceEqual(memberT.Locations));
+                        Debug.Assert(
+                            memberT.MergedDeclaration.Declarations
+                                .SelectAsArray(decl => decl.NameLocation)
+                                .SequenceEqual(memberT.Locations)
+                        );
                         foreach (var declaration in memberT.MergedDeclaration.Declarations)
                         {
                             var loc = declaration.NameLocation;
-                            if (loc.IsInSource && loc.SourceTree == syntax.SyntaxTree && syntax.Span.Contains(loc.SourceSpan))
+                            if (
+                                loc.IsInSource
+                                && loc.SourceTree == syntax.SyntaxTree
+                                && syntax.Span.Contains(loc.SourceSpan)
+                            )
                             {
                                 return memberT;
                             }
@@ -246,7 +248,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (scope.Kind == SymbolKind.ErrorType)
             {
-                return new MissingMetadataTypeSymbol.Nested((NamedTypeSymbol)scope, ref emittedTypeName);
+                return new MissingMetadataTypeSymbol.Nested(
+                    (NamedTypeSymbol)scope,
+                    ref emittedTypeName
+                );
             }
 
             NamedTypeSymbol? namedType = null;
@@ -254,16 +259,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<NamedTypeSymbol> namespaceOrTypeMembers;
             bool isTopLevel = scope.IsNamespace;
 
-            Debug.Assert(!isTopLevel || scope.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat) == emittedTypeName.NamespaceName);
+            Debug.Assert(
+                !isTopLevel
+                    || scope.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat)
+                        == emittedTypeName.NamespaceName
+            );
 
             if (emittedTypeName.IsMangled)
             {
-                Debug.Assert(!emittedTypeName.UnmangledTypeName.Equals(emittedTypeName.TypeName) && emittedTypeName.InferredArity > 0);
+                Debug.Assert(
+                    !emittedTypeName.UnmangledTypeName.Equals(emittedTypeName.TypeName)
+                        && emittedTypeName.InferredArity > 0
+                );
 
-                if (emittedTypeName.ForcedArity == -1 || emittedTypeName.ForcedArity == emittedTypeName.InferredArity)
+                if (
+                    emittedTypeName.ForcedArity == -1
+                    || emittedTypeName.ForcedArity == emittedTypeName.InferredArity
+                )
                 {
                     // Let's handle mangling case first.
-                    namespaceOrTypeMembers = scope.GetTypeMembers(emittedTypeName.UnmangledTypeName);
+                    namespaceOrTypeMembers = scope.GetTypeMembers(
+                        emittedTypeName.UnmangledTypeName
+                    );
 
                     foreach (var named in namespaceOrTypeMembers)
                     {
@@ -282,7 +299,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                Debug.Assert(ReferenceEquals(emittedTypeName.UnmangledTypeName, emittedTypeName.TypeName) && emittedTypeName.InferredArity == 0);
+                Debug.Assert(
+                    ReferenceEquals(emittedTypeName.UnmangledTypeName, emittedTypeName.TypeName)
+                        && emittedTypeName.InferredArity == 0
+                );
             }
 
             // Now try lookup without removing generic arity mangling.
@@ -325,16 +345,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-Done:
+            Done:
             if ((object?)namedType == null)
             {
                 if (isTopLevel)
                 {
-                    return new MissingMetadataTypeSymbol.TopLevel(scope.ContainingModule, ref emittedTypeName);
+                    return new MissingMetadataTypeSymbol.TopLevel(
+                        scope.ContainingModule,
+                        ref emittedTypeName
+                    );
                 }
                 else
                 {
-                    return new MissingMetadataTypeSymbol.Nested((NamedTypeSymbol)scope, ref emittedTypeName);
+                    return new MissingMetadataTypeSymbol.Nested(
+                        (NamedTypeSymbol)scope,
+                        ref emittedTypeName
+                    );
                 }
             }
 
@@ -352,7 +378,9 @@ Done:
         /// <remarks>
         /// "C.D" matches C.D, C{T}.D, C{S,T}.D{U}, etc.
         /// </remarks>
-        internal IEnumerable<NamespaceOrTypeSymbol>? GetNamespaceOrTypeByQualifiedName(IEnumerable<string> qualifiedName)
+        internal IEnumerable<NamespaceOrTypeSymbol>? GetNamespaceOrTypeByQualifiedName(
+            IEnumerable<string> qualifiedName
+        )
         {
             NamespaceOrTypeSymbol namespaceOrType = this;
             IEnumerable<NamespaceOrTypeSymbol>? symbols = null;

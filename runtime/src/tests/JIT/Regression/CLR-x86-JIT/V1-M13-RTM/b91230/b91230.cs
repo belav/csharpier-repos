@@ -9,9 +9,7 @@ public struct AA
     static int Main()
     {
         sbyte local2 = 0;
-        while (
-            (new bool[5, 5])[Math.Max(local2, local2), local2]
-            ) { }
+        while ((new bool[5, 5])[Math.Max(local2, local2), local2]) { }
         return 100;
     }
 }

@@ -24,7 +24,12 @@ namespace System.Xml.Tests
             return true;
         }
 
-        public static bool Compare(object actual, object expected1, object expected2, string message)
+        public static bool Compare(
+            object actual,
+            object expected1,
+            object expected2,
+            string message
+        )
         {
             Assert.Equal(expected1, actual);
             Assert.Equal(expected2, actual);

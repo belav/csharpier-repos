@@ -17,10 +17,10 @@ namespace System.Xml.Tests
 
             int count = 0;
             xmlDocument.NodeInserting += (s, e) => count++;
-            xmlDocument.NodeInserting += (s, e) => Assert.Equal(XmlNodeChangedAction.Insert, e.Action);
+            xmlDocument.NodeInserting += (s, e) =>
+                Assert.Equal(XmlNodeChangedAction.Insert, e.Action);
 
             var node = xmlDocument.CreateElement("element");
-
 
             Assert.Equal(0, count);
 
@@ -37,7 +37,8 @@ namespace System.Xml.Tests
 
             int count = 0;
             xmlDocument.NodeInserting += (s, e) => count++;
-            xmlDocument.NodeInserting += (s, e) => Assert.Equal(XmlNodeChangedAction.Insert, e.Action);
+            xmlDocument.NodeInserting += (s, e) =>
+                Assert.Equal(XmlNodeChangedAction.Insert, e.Action);
 
             var node = xmlDocument.CreateElement("element");
             Assert.Equal(0, count);
@@ -55,7 +56,8 @@ namespace System.Xml.Tests
 
             int count = 0;
             xmlDocument.NodeInserting += (s, e) => count++;
-            xmlDocument.NodeInserting += (s, e) => Assert.Equal(XmlNodeChangedAction.Insert, e.Action);
+            xmlDocument.NodeInserting += (s, e) =>
+                Assert.Equal(XmlNodeChangedAction.Insert, e.Action);
 
             var node = xmlDocument.CreateElement("element");
             Assert.Equal(0, count);
@@ -70,7 +72,10 @@ namespace System.Xml.Tests
             var xmlDocument = new XmlDocument();
             var node = xmlDocument.CreateElement("element");
 
-            XmlNodeChangedEventHandler handler = (s, e) => { throw new ShouldNotBeInvokedException(); };
+            XmlNodeChangedEventHandler handler = (s, e) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            };
             xmlDocument.NodeInserting += handler;
             xmlDocument.NodeInserting -= handler;
 

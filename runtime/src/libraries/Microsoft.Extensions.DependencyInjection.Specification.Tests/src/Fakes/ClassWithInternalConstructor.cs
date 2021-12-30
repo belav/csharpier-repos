@@ -5,8 +5,6 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public class ClassWithInternalConstructor
     {
-        internal ClassWithInternalConstructor()
-        {
-        }
+        internal ClassWithInternalConstructor() { }
     }
 }

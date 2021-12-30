@@ -58,20 +58,28 @@ namespace JIT.HardwareIntrinsics.General
 
             Int32 value = TestLibrary.Generator.GetInt32();
             object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.CreateScalar), new Type[] { typeof(Int32) })
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.CreateScalar), new Type[] { typeof(Int32) })
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector64<Int32>)(result), value);
         }
 
-        private void ValidateResult(Vector64<Int32> result, Int32 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector64<Int32> result,
+            Int32 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(Int32[] resultElements, Int32 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int32[] resultElements,
+            Int32 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -93,9 +101,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.CreateScalar(Int32): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.CreateScalar(Int32): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

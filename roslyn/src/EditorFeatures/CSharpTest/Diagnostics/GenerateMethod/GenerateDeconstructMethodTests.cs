@@ -15,28 +15,27 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateDeconstructMethod
 {
-    public class GenerateDeconstructMethodTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class GenerateDeconstructMethodTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateDeconstructMethodTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public GenerateDeconstructMethodTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new GenerateDeconstructMethodCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new GenerateDeconstructMethodCodeFixProvider());
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_Simple()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         (int x, int y) = [|this|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -49,21 +48,22 @@ class Class
     {
         (int x, int y) = this;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_Simple_Record()
         {
             await TestInRegularAndScriptAsync(
-@"record R
+                @"record R
 {
     void Method()
     {
         (int x, int y) = [|this|];
     }
 }",
-@"using System;
+                @"using System;
 
 record R
 {
@@ -76,21 +76,22 @@ record R
     {
         (int x, int y) = this;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_TypeParameters()
         {
             await TestInRegularAndScriptAsync(
-@"class Class<T>
+                @"class Class<T>
 {
     void Method<U>()
     {
         (T x, U y) = [|this|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class<T>
 {
@@ -103,14 +104,15 @@ class Class<T>
     {
         (T x, U y) = this;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_OtherDeconstructMethods()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -119,7 +121,7 @@ class Class<T>
     void Deconstruct(out int x) => throw null;
     void Deconstruct(out int x, out int y, out int z) => throw null;
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -134,35 +136,37 @@ class Class
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_AlreadySuccessfull()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         (int x, int y) = [|this|];
     }
     void Deconstruct(out int x, out int y) => throw null;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_UndeterminedType()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         (var x, var y) = [|this|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private void Deconstruct(out object x, out object y)
     {
@@ -173,21 +177,22 @@ class Class
     {
         (var x, var y) = this;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_UndeterminedType2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         var (x, y) = [|this|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -200,27 +205,29 @@ class Class
     {
         var (x, y) = this;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionDeclaration_BuiltinType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         (int x, int y) = [|1|];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionAssignment()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -228,7 +235,7 @@ class Class
         (x, y) = [|this|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -242,7 +249,8 @@ class Class
         int x, y;
         (x, y) = this;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
@@ -250,42 +258,44 @@ class Class
         {
             // We only offer a fix for non-nested deconstruction, at the moment
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         int x, y, z;
         ((x, y), z) = ([|this|], 0);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestDeconstructionAssignment_Array()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         int x, y;
         (x, y) = [|new[] { this }|];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleDeconstructionForeach()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         foreach ((int x, int y) in new[] { [|this|] }) { }
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -298,14 +308,15 @@ class Class
     {
         foreach ((int x, int y) in new[] { this }) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task TestSimpleDeconstructionForeach_AnotherType()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(D d)
     {
@@ -315,7 +326,7 @@ class Class
 class D
 {
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -330,7 +341,8 @@ class D
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(32510, "https://github.com/dotnet/roslyn/issues/32510")]
@@ -338,7 +350,7 @@ class D
         public async Task TestDeconstructionAssignment_InvalidDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -350,7 +362,8 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
     }
 }

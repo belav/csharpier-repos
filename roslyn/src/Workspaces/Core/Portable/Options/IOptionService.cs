@@ -68,12 +68,19 @@ namespace Microsoft.CodeAnalysis.Options
         IEnumerable<IOption> GetRegisteredOptions();
 
         /// <inheritdoc cref="IGlobalOptionService.TryMapEditorConfigKeyToOption"/>
-        bool TryMapEditorConfigKeyToOption(string key, string? language, [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation, out OptionKey optionKey);
+        bool TryMapEditorConfigKeyToOption(
+            string key,
+            string? language,
+            [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation,
+            out OptionKey optionKey
+        );
 
         /// <summary>
         /// Returns the set of all registered serializable options applicable for the given <paramref name="languages"/>.
         /// </summary>
-        ImmutableHashSet<IOption> GetRegisteredSerializableOptions(ImmutableHashSet<string> languages);
+        ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
+            ImmutableHashSet<string> languages
+        );
 
         event EventHandler<OptionChangedEventArgs> OptionChanged;
 
@@ -86,7 +93,11 @@ namespace Microsoft.CodeAnalysis.Options
         /// <summary>
         /// Returns the <see cref="OptionSet"/> that applies to a specific document, given that document and the global options.
         /// </summary>
-        Task<OptionSet> GetUpdatedOptionSetForDocumentAsync(Document document, OptionSet optionSet, CancellationToken cancellationToken);
+        Task<OptionSet> GetUpdatedOptionSetForDocumentAsync(
+            Document document,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Registers a workspace with the option service.

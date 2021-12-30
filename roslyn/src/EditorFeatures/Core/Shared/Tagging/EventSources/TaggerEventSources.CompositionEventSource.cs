@@ -21,11 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                 _providers = providers;
             }
 
-            public void Connect()
-                => _providers.Do(p => p.Connect());
+            public void Connect() => _providers.Do(p => p.Connect());
 
-            public void Disconnect()
-                => _providers.Do(p => p.Disconnect());
+            public void Disconnect() => _providers.Do(p => p.Disconnect());
 
             public event EventHandler<TaggerEventArgs> Changed
             {

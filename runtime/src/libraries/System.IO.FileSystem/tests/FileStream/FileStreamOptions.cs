@@ -13,7 +13,10 @@ namespace System.IO.Tests
         [Fact]
         public void NullOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("options", () => new FileStream(GetTestFilePath(), options: null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "options",
+                () => new FileStream(GetTestFilePath(), options: null)
+            );
         }
 
         [Theory]
@@ -23,11 +26,13 @@ namespace System.IO.Tests
         [InlineData(FileMode.Truncate)]
         public void ModesThatRequireWriteAccessThrowWhenReadAccessIsProvided(FileMode fileMode)
         {
-            Assert.Throws<ArgumentException>(() => new FileStream(GetTestFilePath(), new FileStreamOptions
-            {
-                Mode = fileMode,
-                Access = FileAccess.Read
-            }));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new FileStream(
+                        GetTestFilePath(),
+                        new FileStreamOptions { Mode = fileMode, Access = FileAccess.Read }
+                    )
+            );
         }
 
         [Theory]
@@ -35,11 +40,13 @@ namespace System.IO.Tests
         [InlineData(FileAccess.ReadWrite)]
         public void AppendWorksOnlyForWriteAccess(FileAccess fileAccess)
         {
-            Assert.Throws<ArgumentException>(() => new FileStream(GetTestFilePath(), new FileStreamOptions
-            {
-                Mode = FileMode.Append,
-                Access = fileAccess
-            }));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new FileStream(
+                        GetTestFilePath(),
+                        new FileStreamOptions { Mode = FileMode.Append, Access = fileAccess }
+                    )
+            );
         }
 
         [Fact]
@@ -54,8 +61,12 @@ namespace System.IO.Tests
                 Assert.Equal(vaidValue, (new FileStreamOptions { Mode = vaidValue }).Mode);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Mode = validValues.Min() - 1 });
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Mode = validValues.Max() + 1 });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Mode = validValues.Min() - 1 }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Mode = validValues.Max() + 1 }
+            );
         }
 
         [Fact]
@@ -70,8 +81,12 @@ namespace System.IO.Tests
                 Assert.Equal(vaidValue, (new FileStreamOptions { Access = vaidValue }).Access);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Access = validValues.Min() - 1 });
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Access = validValues.Max() + 1 });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Access = validValues.Min() - 1 }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Access = validValues.Max() + 1 }
+            );
         }
 
         [Fact]
@@ -89,8 +104,12 @@ namespace System.IO.Tests
             FileShare all = validValues.Aggregate((x, y) => x | y);
             Assert.Equal(all, (new FileStreamOptions { Share = all }).Share);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Share = validValues.Min() - 1 });
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Share = all + 1 });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Share = validValues.Min() - 1 }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Share = all + 1 }
+            );
         }
 
         [Fact]
@@ -108,8 +127,12 @@ namespace System.IO.Tests
             FileOptions all = validValues.Aggregate((x, y) => x | y);
             Assert.Equal(all, (new FileStreamOptions { Options = all }).Options);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Options = validValues.Min() - 1 });
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { Options = all + 1 });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Options = validValues.Min() - 1 }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { Options = all + 1 }
+            );
         }
 
         [Fact]
@@ -121,7 +144,9 @@ namespace System.IO.Tests
             Assert.Equal(1, new FileStreamOptions { PreallocationSize = 1 }.PreallocationSize);
             Assert.Equal(123, new FileStreamOptions { PreallocationSize = 123 }.PreallocationSize);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { PreallocationSize = -1 });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { PreallocationSize = -1 }
+            );
         }
 
         [Fact]
@@ -133,7 +158,9 @@ namespace System.IO.Tests
             Assert.Equal(1, new FileStreamOptions { BufferSize = 1 }.BufferSize);
             Assert.Equal(123, new FileStreamOptions { BufferSize = 123 }.BufferSize);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new FileStreamOptions { BufferSize = -1 });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new FileStreamOptions { BufferSize = -1 }
+            );
         }
 
         public static IEnumerable<object[]> GetSettingsArePropagatedArguments()
@@ -144,9 +171,24 @@ namespace System.IO.Tests
 
             if (PlatformDetection.IsAsyncFileIOSupported)
             {
-                yield return new object[] { FileMode.Create, FileAccess.Write, FileOptions.Asynchronous };
-                yield return new object[] { FileMode.Open, FileAccess.Read, FileOptions.Asynchronous };
-                yield return new object[] { FileMode.Create, FileAccess.ReadWrite, FileOptions.Asynchronous };
+                yield return new object[]
+                {
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileOptions.Asynchronous
+                };
+                yield return new object[]
+                {
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileOptions.Asynchronous
+                };
+                yield return new object[]
+                {
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileOptions.Asynchronous
+                };
             }
         }
 
@@ -177,17 +219,52 @@ namespace System.IO.Tests
 
             if (canWrite)
             {
-                Validate((FileStream)new StreamWriter(filePath, options).BaseStream, filePath, isAsync, canRead, canWrite);
-                Validate((FileStream)new StreamWriter(filePath, Encoding.UTF8, options).BaseStream, filePath, isAsync, canRead, canWrite);
+                Validate(
+                    (FileStream)new StreamWriter(filePath, options).BaseStream,
+                    filePath,
+                    isAsync,
+                    canRead,
+                    canWrite
+                );
+                Validate(
+                    (FileStream)new StreamWriter(filePath, Encoding.UTF8, options).BaseStream,
+                    filePath,
+                    isAsync,
+                    canRead,
+                    canWrite
+                );
             }
 
             if (canRead)
             {
-                Validate((FileStream)new StreamReader(filePath, options).BaseStream, filePath, isAsync, canRead, canWrite);
-                Validate((FileStream)new StreamReader(filePath, Encoding.UTF8, false, options).BaseStream, filePath, isAsync, canRead, canWrite);
+                Validate(
+                    (FileStream)new StreamReader(filePath, options).BaseStream,
+                    filePath,
+                    isAsync,
+                    canRead,
+                    canWrite
+                );
+                Validate(
+                    (FileStream)new StreamReader(
+                        filePath,
+                        Encoding.UTF8,
+                        false,
+                        options
+                    ).BaseStream,
+                    filePath,
+                    isAsync,
+                    canRead,
+                    canWrite
+                );
             }
 
-            static void Validate(FileStream fs, string expectedPath, bool expectedAsync, bool expectedCanRead, bool expectedCanWrite)
+            static void Validate(
+                FileStream fs,
+                string expectedPath,
+                bool expectedAsync,
+                bool expectedCanRead,
+                bool expectedCanWrite
+            )
             {
                 using (fs)
                 {

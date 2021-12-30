@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["RoundCurrentDirectionScalar.Double"] = RoundCurrentDirectionScalarDouble,
                 ["RoundCurrentDirectionScalar.Single"] = RoundCurrentDirectionScalarSingle,
                 ["RoundToNearestIntegerScalar.Double"] = RoundToNearestIntegerScalarDouble,

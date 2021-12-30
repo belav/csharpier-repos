@@ -4,7 +4,6 @@ namespace TestCase
     using System.Linq;
     using System.Reflection;
 
-
     public class MainClass
     {
         public static int Main()
@@ -13,14 +12,11 @@ namespace TestCase
         }
     }
 
-
     interface Param
     {
     }
 
-
-    class GenericDerived<T> :
-        Abstract<GenericDerived<T>>
+    class GenericDerived<T> : Abstract<GenericDerived<T>>
     {
         public int FindMethod()
         {
@@ -28,9 +24,7 @@ namespace TestCase
         }
     }
 
-
-    abstract class Abstract<TDerived>
-        where TDerived : Abstract<TDerived>
+    abstract class Abstract<TDerived> where TDerived : Abstract<TDerived>
     {
         protected virtual int FindGenericMethod<T>()
         {
@@ -42,13 +36,16 @@ namespace TestCase
             Console.WriteLine("method = {0}", method);
             Console.WriteLine("method.DeclaringType = {0}", method.DeclaringType);
             Console.WriteLine("method.IsGenericMethod = {0}", method.IsGenericMethod);
-            Console.WriteLine("method.IsGenericMethodDefinition = {0}", method.IsGenericMethodDefinition);
-			
-			if (!method.IsGenericMethod)
-				return 1;
-			if (!method.IsGenericMethodDefinition)
-				return 2;
-			return 0;
+            Console.WriteLine(
+                "method.IsGenericMethodDefinition = {0}",
+                method.IsGenericMethodDefinition
+            );
+
+            if (!method.IsGenericMethod)
+                return 1;
+            if (!method.IsGenericMethodDefinition)
+                return 2;
+            return 0;
         }
     }
 }

@@ -8,7 +8,9 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
 internal class AzureADB2CJwtBearerOptionsConfiguration : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly IOptions<AzureADB2CSchemeOptions> _schemeOptions;
@@ -16,7 +18,8 @@ internal class AzureADB2CJwtBearerOptionsConfiguration : IConfigureNamedOptions<
 
     public AzureADB2CJwtBearerOptionsConfiguration(
         IOptions<AzureADB2CSchemeOptions> schemeOptions,
-        IOptionsMonitor<AzureADB2COptions> azureADB2COptions)
+        IOptionsMonitor<AzureADB2COptions> azureADB2COptions
+    )
     {
         _schemeOptions = schemeOptions;
         _azureADB2COptions = azureADB2COptions;
@@ -32,12 +35,12 @@ internal class AzureADB2CJwtBearerOptionsConfiguration : IConfigureNamedOptions<
         }
 
         options.Audience = azureADB2COptions.ClientId;
-        options.Authority = AzureADB2COpenIdConnectOptionsConfiguration.BuildAuthority(azureADB2COptions);
+        options.Authority = AzureADB2COpenIdConnectOptionsConfiguration.BuildAuthority(
+            azureADB2COptions
+        );
     }
 
-    public void Configure(JwtBearerOptions options)
-    {
-    }
+    public void Configure(JwtBearerOptions options) { }
 
     private string GetAzureADB2CScheme(string name)
     {

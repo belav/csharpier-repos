@@ -14,8 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
     /// </remarks>
     public class GuidToBytesConverter : ValueConverter<Guid, byte[]>
     {
-        private static readonly ConverterMappingHints _defaultHints
-            = new(size: 16, valueGeneratorFactory: (p, t) => new SequentialGuidValueGenerator());
+        private static readonly ConverterMappingHints _defaultHints =
+            new(size: 16, valueGeneratorFactory: (p, t) => new SequentialGuidValueGenerator());
 
         /// <summary>
         ///     Creates a new instance of this converter.
@@ -30,10 +30,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///         See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         ///     </para>
         /// </remarks>
-        public GuidToBytesConverter()
-            : this(null)
-        {
-        }
+        public GuidToBytesConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter.
@@ -53,17 +50,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public GuidToBytesConverter(ConverterMappingHints? mappingHints)
-            : base(
-                v => v.ToByteArray(),
-                v => new Guid(v),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(v => v.ToByteArray(), v => new Guid(v), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(Guid), typeof(byte[]), i => new GuidToBytesConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(Guid),
+                typeof(byte[]),
+                i => new GuidToBytesConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

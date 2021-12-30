@@ -17,7 +17,9 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         /// <param name="configurationBuilder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddInMemoryCollection(this IConfigurationBuilder configurationBuilder)
+        public static IConfigurationBuilder AddInMemoryCollection(
+            this IConfigurationBuilder configurationBuilder
+        )
         {
             if (configurationBuilder == null)
             {
@@ -36,7 +38,8 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         public static IConfigurationBuilder AddInMemoryCollection(
             this IConfigurationBuilder configurationBuilder,
-            IEnumerable<KeyValuePair<string, string?>>? initialData)
+            IEnumerable<KeyValuePair<string, string?>>? initialData
+        )
         {
             if (configurationBuilder == null)
             {

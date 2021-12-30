@@ -44,7 +44,8 @@ public class ModelAttributes
     internal ModelAttributes(
         IEnumerable<object> typeAttributes,
         IEnumerable<object>? propertyAttributes,
-        IEnumerable<object>? parameterAttributes)
+        IEnumerable<object>? parameterAttributes
+    )
     {
         if (propertyAttributes != null)
         {
@@ -134,7 +135,11 @@ public class ModelAttributes
     /// <returns>
     /// A <see cref="ModelAttributes"/> instance with the attributes of the property and its <see cref="Type"/>.
     /// </returns>
-    public static ModelAttributes GetAttributesForProperty(Type containerType, PropertyInfo property, Type modelType)
+    public static ModelAttributes GetAttributesForProperty(
+        Type containerType,
+        PropertyInfo property,
+        Type modelType
+    )
     {
         if (containerType == null)
         {
@@ -155,7 +160,9 @@ public class ModelAttributes
             var metadataProperty = metadataType.GetRuntimeProperty(property.Name);
             if (metadataProperty != null)
             {
-                propertyAttributes = propertyAttributes.Concat(metadataProperty.GetCustomAttributes());
+                propertyAttributes = propertyAttributes.Concat(
+                    metadataProperty.GetCustomAttributes()
+                );
             }
         }
 
@@ -216,7 +223,10 @@ public class ModelAttributes
     /// <returns>
     /// A <see cref="ModelAttributes"/> instance with the attributes of the parameter and its <see cref="Type"/>.
     /// </returns>
-    public static ModelAttributes GetAttributesForParameter(ParameterInfo parameterInfo, Type modelType)
+    public static ModelAttributes GetAttributesForParameter(
+        ParameterInfo parameterInfo,
+        Type modelType
+    )
     {
         if (parameterInfo == null)
         {

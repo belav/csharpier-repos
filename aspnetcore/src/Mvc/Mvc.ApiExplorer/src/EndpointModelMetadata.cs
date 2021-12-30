@@ -17,7 +17,8 @@ internal class EndpointModelMetadata : ModelMetadata
         IsBindingAllowed = true;
     }
 
-    public override IReadOnlyDictionary<object, object> AdditionalValues { get; } = ImmutableDictionary<object, object>.Empty;
+    public override IReadOnlyDictionary<object, object> AdditionalValues { get; } =
+        ImmutableDictionary<object, object>.Empty;
     public override string? BinderModelName { get; }
     public override Type? BinderType { get; }
     public override BindingSource? BindingSource { get; }
@@ -28,7 +29,9 @@ internal class EndpointModelMetadata : ModelMetadata
     public override string? DisplayName { get; }
     public override string? EditFormatString { get; }
     public override ModelMetadata? ElementMetadata { get; }
-    public override IEnumerable<KeyValuePair<EnumGroupAndName, string>>? EnumGroupedDisplayNamesAndValues { get; }
+    public override IEnumerable<
+        KeyValuePair<EnumGroupAndName, string>
+    >? EnumGroupedDisplayNamesAndValues { get; }
     public override IReadOnlyDictionary<string, string>? EnumNamesAndValues { get; }
     public override bool HasNonDefaultEditFormat { get; }
     public override bool HideSurroundingHtml { get; }
@@ -39,11 +42,13 @@ internal class EndpointModelMetadata : ModelMetadata
     public override bool IsFlagsEnum { get; }
     public override bool IsReadOnly { get; }
     public override bool IsRequired { get; }
-    public override ModelBindingMessageProvider ModelBindingMessageProvider { get; } = new DefaultModelBindingMessageProvider();
+    public override ModelBindingMessageProvider ModelBindingMessageProvider { get; } =
+        new DefaultModelBindingMessageProvider();
     public override string? NullDisplayText { get; }
     public override int Order { get; }
     public override string? Placeholder { get; }
-    public override ModelPropertyCollection Properties { get; } = new(Enumerable.Empty<ModelMetadata>());
+    public override ModelPropertyCollection Properties { get; } =
+        new(Enumerable.Empty<ModelMetadata>());
     public override IPropertyFilterProvider? PropertyFilterProvider { get; }
     public override Func<object, object>? PropertyGetter { get; }
     public override Action<object, object?>? PropertySetter { get; }

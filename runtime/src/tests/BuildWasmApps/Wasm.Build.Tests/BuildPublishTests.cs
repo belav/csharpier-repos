@@ -15,10 +15,10 @@ namespace Wasm.Build.Tests
 {
     public class BuildPublishTests : NativeRebuildTestsBase
     {
-        public BuildPublishTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public BuildPublishTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        ) : base(output, buildContext) { }
 
         [Theory]
         [BuildAndRun(host: RunHost.V8, aot: false, config: "Release")]
@@ -32,12 +32,15 @@ namespace Wasm.Build.Tests
 
             // no relinking for build
             bool relinked = false;
-            BuildProject(buildArgs,
-                        initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                        dotnetWasmFromRuntimePack: !relinked,
-                        id: id,
-                        createProject: true,
-                        publish: false);
+            BuildProject(
+                buildArgs,
+                initProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
+                dotnetWasmFromRuntimePack: !relinked,
+                id: id,
+                createProject: true,
+                publish: false
+            );
 
             Run();
 
@@ -46,24 +49,35 @@ namespace Wasm.Build.Tests
 
             File.Move(product!.LogFile, Path.ChangeExtension(product.LogFile!, ".first.binlog"));
 
-            _testOutput.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
-            Console.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
+            _testOutput.WriteLine(
+                $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+            );
+            Console.WriteLine(
+                $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+            );
 
             // relink by default for Release+publish
             relinked = buildArgs.Config == "Release";
-            BuildProject(buildArgs,
-                        id: id,
-                        dotnetWasmFromRuntimePack: !relinked,
-                        createProject: false,
-                        publish: true,
-                        useCache: false);
+            BuildProject(
+                buildArgs,
+                id: id,
+                dotnetWasmFromRuntimePack: !relinked,
+                createProject: false,
+                publish: true,
+                useCache: false
+            );
 
             Run();
 
-            void Run() => RunAndTestWasmApp(
-                                buildArgs, buildDir: _projectDir, expectedExitCode: 42,
-                                test: output => {},
-                                host: host, id: id);
+            void Run() =>
+                RunAndTestWasmApp(
+                    buildArgs,
+                    buildDir: _projectDir,
+                    expectedExitCode: 42,
+                    test: output => { },
+                    host: host,
+                    id: id
+                );
         }
 
         [Theory]
@@ -74,17 +88,23 @@ namespace Wasm.Build.Tests
             string projectName = $"build_publish_{buildArgs.Config}";
 
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs, extraProperties: "<_WasmDevel>true</_WasmDevel>");
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraProperties: "<_WasmDevel>true</_WasmDevel>"
+            );
 
             // no relinking for build
             bool relinked = false;
-            (_, string output) = BuildProject(buildArgs,
-                                    initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                                    dotnetWasmFromRuntimePack: !relinked,
-                                    id: id,
-                                    createProject: true,
-                                    publish: false,
-                                    label: "first_build");
+            (_, string output) = BuildProject(
+                buildArgs,
+                initProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
+                dotnetWasmFromRuntimePack: !relinked,
+                id: id,
+                createProject: true,
+                publish: false,
+                label: "first_build"
+            );
 
             BuildPaths paths = GetBuildPaths(buildArgs);
             var pathsDict = GetFilesTable(buildArgs, paths, unchanged: false);
@@ -94,7 +114,12 @@ namespace Wasm.Build.Tests
             Assert.False(firstBuildStat["pinvoke.o"].Exists);
             Assert.False(firstBuildStat[$"{mainDll}.bc"].Exists);
 
-            CheckOutputForNativeBuild(expectAOT: false, expectRelinking: relinked, buildArgs, output);
+            CheckOutputForNativeBuild(
+                expectAOT: false,
+                expectRelinking: relinked,
+                buildArgs,
+                output
+            );
 
             Run(expectAOT: false);
 
@@ -103,17 +128,23 @@ namespace Wasm.Build.Tests
 
             File.Move(product!.LogFile, Path.ChangeExtension(product.LogFile!, ".first.binlog"));
 
-            _testOutput.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
-            Console.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
+            _testOutput.WriteLine(
+                $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+            );
+            Console.WriteLine(
+                $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+            );
 
             // relink by default for Release+publish
-            (_, output) = BuildProject(buildArgs,
-                                    id: id,
-                                    dotnetWasmFromRuntimePack: false,
-                                    createProject: false,
-                                    publish: true,
-                                    useCache: false,
-                                    label: "first_publish");
+            (_, output) = BuildProject(
+                buildArgs,
+                id: id,
+                dotnetWasmFromRuntimePack: false,
+                createProject: false,
+                publish: true,
+                useCache: false,
+                label: "first_publish"
+            );
 
             var publishStat = StatFiles(pathsDict.Select(kvp => kvp.Value.fullPath));
             Assert.True(publishStat["pinvoke.o"].Exists);
@@ -124,13 +155,16 @@ namespace Wasm.Build.Tests
             Run(expectAOT: true);
 
             // second build
-            (_, output) = BuildProject(buildArgs,
-                        initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                        dotnetWasmFromRuntimePack: !relinked,
-                        id: id,
-                        createProject: true,
-                        publish: false,
-                        label: "second_build");
+            (_, output) = BuildProject(
+                buildArgs,
+                initProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
+                dotnetWasmFromRuntimePack: !relinked,
+                id: id,
+                createProject: true,
+                publish: false,
+                label: "second_build"
+            );
             var secondBuildStat = StatFiles(pathsDict.Select(kvp => kvp.Value.fullPath));
 
             // no relinking, or AOT
@@ -140,19 +174,38 @@ namespace Wasm.Build.Tests
             pathsDict.UpdateTo(unchanged: true);
             CompareStat(publishStat, secondBuildStat, pathsDict.Values);
 
-            void Run(bool expectAOT) => RunAndTestWasmApp(
-                                buildArgs with { AOT = expectAOT },
-                                buildDir: _projectDir, expectedExitCode: 42,
-                                host: host, id: id);
+            void Run(bool expectAOT) =>
+                RunAndTestWasmApp(
+                    buildArgs with
+                    {
+                        AOT = expectAOT
+                    },
+                    buildDir: _projectDir,
+                    expectedExitCode: 42,
+                    host: host,
+                    id: id
+                );
         }
 
-        void CheckOutputForNativeBuild(bool expectAOT, bool expectRelinking, BuildArgs buildArgs, string buildOutput)
+        void CheckOutputForNativeBuild(
+            bool expectAOT,
+            bool expectRelinking,
+            BuildArgs buildArgs,
+            string buildOutput
+        )
         {
-            AssertSubstring($"{buildArgs.ProjectName}.dll -> {buildArgs.ProjectName}.dll.bc", buildOutput, expectAOT);
-            AssertSubstring($"{buildArgs.ProjectName}.dll.bc -> {buildArgs.ProjectName}.dll.o", buildOutput, expectAOT);
+            AssertSubstring(
+                $"{buildArgs.ProjectName}.dll -> {buildArgs.ProjectName}.dll.bc",
+                buildOutput,
+                expectAOT
+            );
+            AssertSubstring(
+                $"{buildArgs.ProjectName}.dll.bc -> {buildArgs.ProjectName}.dll.o",
+                buildOutput,
+                expectAOT
+            );
 
             AssertSubstring("pinvoke.c -> pinvoke.o", buildOutput, expectRelinking || expectAOT);
         }
-
     }
 }

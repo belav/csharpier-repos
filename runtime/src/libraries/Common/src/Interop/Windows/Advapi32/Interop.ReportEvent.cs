@@ -19,6 +19,7 @@ internal static partial class Interop
             short wNumStrings,
             int dwDataSize,
             IntPtr lpStrings,
-            byte[] lpRawData);
+            byte[] lpRawData
+        );
     }
 }

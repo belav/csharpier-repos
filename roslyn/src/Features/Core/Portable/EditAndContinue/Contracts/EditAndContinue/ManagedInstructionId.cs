@@ -22,9 +22,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         /// <param name="method">Method which the instruction is scoped to.</param>
         /// <param name="ilOffset">IL offset for the instruction.</param>
-        public ManagedInstructionId(
-            ManagedMethodId method,
-            int ilOffset)
+        public ManagedInstructionId(ManagedMethodId method, int ilOffset)
         {
             Method = method;
             ILOffset = ilOffset;
@@ -47,16 +45,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             return Method.Equals(other.Method) && ILOffset == other.ILOffset;
         }
 
-        public override bool Equals(object? obj) => obj is ManagedInstructionId instr && Equals(instr);
+        public override bool Equals(object? obj) =>
+            obj is ManagedInstructionId instr && Equals(instr);
 
         public override int GetHashCode()
         {
             return Method.GetHashCode() ^ ILOffset;
         }
 
-        public static bool operator ==(ManagedInstructionId left, ManagedInstructionId right) => left.Equals(right);
+        public static bool operator ==(ManagedInstructionId left, ManagedInstructionId right) =>
+            left.Equals(right);
 
-        public static bool operator !=(ManagedInstructionId left, ManagedInstructionId right) => !(left == right);
+        public static bool operator !=(ManagedInstructionId left, ManagedInstructionId right) =>
+            !(left == right);
 
         internal string GetDebuggerDisplay() => $"{Method.GetDebuggerDisplay()} IL_{ILOffset:X4}";
     }

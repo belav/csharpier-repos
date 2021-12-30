@@ -12,7 +12,11 @@ internal class NoneAction : UrlAction
         Result = result;
     }
     // Explicitly say that nothing happens
-    public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override void ApplyAction(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         context.Result = Result;
     }

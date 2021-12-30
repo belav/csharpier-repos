@@ -43,7 +43,9 @@ internal class SimpleActivator : IActivator
         }
 
         // If an IServiceProvider was specified or if .ctor() doesn't exist, prefer .ctor(IServiceProvider) [if it exists]
-        var ctorWhichTakesServiceProvider = implementationType.GetConstructor(_serviceProviderTypeArray);
+        var ctorWhichTakesServiceProvider = implementationType.GetConstructor(
+            _serviceProviderTypeArray
+        );
         if (ctorWhichTakesServiceProvider != null)
         {
             return ctorWhichTakesServiceProvider.Invoke(new[] { _services });

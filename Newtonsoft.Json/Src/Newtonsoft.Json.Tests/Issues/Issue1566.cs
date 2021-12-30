@@ -49,8 +49,12 @@ namespace Newtonsoft.Json.Tests.Issues
             var jsonWithLowercase = "{\"state\": \"approved\"}";
 
             // Act
-            var jsonObjectWithUppercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(jsonWithUppercase);
-            var jsonObjectWithLowercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(jsonWithLowercase);
+            var jsonObjectWithUppercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(
+                jsonWithUppercase
+            );
+            var jsonObjectWithLowercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(
+                jsonWithLowercase
+            );
 
             // Assert
             Assert.AreEqual(GitHubPullRequestReviewState.Approved, jsonObjectWithUppercase.State);
@@ -65,28 +69,34 @@ namespace Newtonsoft.Json.Tests.Issues
             var jsonWithLowercase = "{\"state\": \"changes_requested\"}";
 
             // Act
-            var jsonObjectWithUppercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(jsonWithUppercase);
-            var jsonObjectWithLowercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(jsonWithLowercase);
+            var jsonObjectWithUppercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(
+                jsonWithUppercase
+            );
+            var jsonObjectWithLowercase = JsonConvert.DeserializeObject<GitHubPullRequestReview>(
+                jsonWithLowercase
+            );
 
             // Assert
-            Assert.AreEqual(GitHubPullRequestReviewState.ChangesRequested, jsonObjectWithUppercase.State);
-            Assert.AreEqual(GitHubPullRequestReviewState.ChangesRequested, jsonObjectWithLowercase.State);
+            Assert.AreEqual(
+                GitHubPullRequestReviewState.ChangesRequested,
+                jsonObjectWithUppercase.State
+            );
+            Assert.AreEqual(
+                GitHubPullRequestReviewState.ChangesRequested,
+                jsonObjectWithLowercase.State
+            );
         }
 
         public enum GitHubPullRequestReviewState
         {
             [EnumMember(Value = "approved")]
             Approved,
-
             [EnumMember(Value = "changes_requested")]
             ChangesRequested,
-
             [EnumMember(Value = "commented")]
             Commented,
-
             [EnumMember(Value = "dismissed")]
             Dismissed,
-
             [EnumMember(Value = "pending")]
             Pending
         }

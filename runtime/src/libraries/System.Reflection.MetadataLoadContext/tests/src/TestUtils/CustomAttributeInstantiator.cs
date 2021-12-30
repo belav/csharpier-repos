@@ -28,7 +28,14 @@ namespace System.Reflection.Tests
             ConstructorInfo matchingCtor = null;
             ParameterInfo[] matchingParameters = null;
             IList<CustomAttributeTypedArgument> constructorArguments = cad.ConstructorArguments;
-            foreach (ConstructorInfo ctor in attributeType.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            foreach (
+                ConstructorInfo ctor in attributeType.GetConstructors(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                )
+            )
             {
                 ParameterInfo[] parameters = ctor.GetParameters();
                 if (parameters.Length != constructorArguments.Count)
@@ -37,8 +44,12 @@ namespace System.Reflection.Tests
                 for (i = 0; i < parameters.Length; i++)
                 {
                     Type parameterType = parameters[i].ParameterType;
-                    if (!(parameterType.Equals(constructorArguments[i].ArgumentType) ||
-                          parameterType.Equals(typeof(object))))
+                    if (
+                        !(
+                            parameterType.Equals(constructorArguments[i].ArgumentType)
+                            || parameterType.Equals(typeof(object))
+                        )
+                    )
                         break;
                 }
                 if (i == parameters.Length)
@@ -75,14 +86,22 @@ namespace System.Reflection.Tests
                     // Field
                     while (true)
                     {
-                        FieldInfo fieldInfo = walk.GetField(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly);
+                        FieldInfo fieldInfo = walk.GetField(
+                            name,
+                            BindingFlags.Public
+                                | BindingFlags.Instance
+                                | BindingFlags.Static
+                                | BindingFlags.DeclaredOnly
+                        );
                         if (fieldInfo != null)
                         {
                             fieldInfo.SetValue(newAttribute, argumentValue);
                             break;
                         }
                         Type baseType = walk.BaseType;
-                        walk = baseType ?? throw new CustomAttributeFormatException("No such field: " + name);
+                        walk =
+                            baseType
+                            ?? throw new CustomAttributeFormatException("No such field: " + name);
                     }
                 }
                 else
@@ -90,14 +109,24 @@ namespace System.Reflection.Tests
                     // Property
                     while (true)
                     {
-                        PropertyInfo propertyInfo = walk.GetProperty(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly);
+                        PropertyInfo propertyInfo = walk.GetProperty(
+                            name,
+                            BindingFlags.Public
+                                | BindingFlags.Instance
+                                | BindingFlags.Static
+                                | BindingFlags.DeclaredOnly
+                        );
                         if (propertyInfo != null)
                         {
                             propertyInfo.SetValue(newAttribute, argumentValue);
                             break;
                         }
                         Type baseType = walk.BaseType;
-                        walk = baseType ?? throw new CustomAttributeFormatException("No such property: " + name);
+                        walk =
+                            baseType
+                            ?? throw new CustomAttributeFormatException(
+                                "No such property: " + name
+                            );
                     }
                 }
             }
@@ -121,7 +150,8 @@ namespace System.Reflection.Tests
             }
             else
             {
-                IList<CustomAttributeTypedArgument> typedElements = (IList<CustomAttributeTypedArgument>)(typedArgument.Value);
+                IList<CustomAttributeTypedArgument> typedElements =
+                    (IList<CustomAttributeTypedArgument>)(typedArgument.Value);
                 if (typedElements == null)
                     return null;
                 Type elementType = argumentType.GetElementType();
@@ -140,8 +170,16 @@ namespace System.Reflection.Tests
         //
         private static bool IsValidNamedArgumentTarget(this FieldInfo fieldInfo)
         {
-            if ((fieldInfo.Attributes & (FieldAttributes.FieldAccessMask | FieldAttributes.Static | FieldAttributes.Literal)) !=
-                FieldAttributes.Public)
+            if (
+                (
+                    fieldInfo.Attributes
+                    & (
+                        FieldAttributes.FieldAccessMask
+                        | FieldAttributes.Static
+                        | FieldAttributes.Literal
+                    )
+                ) != FieldAttributes.Public
+            )
                 return false;
             return true;
         }
@@ -155,11 +193,17 @@ namespace System.Reflection.Tests
             MethodInfo setter = propertyInfo.SetMethod;
             if (getter == null)
                 return false;
-            if ((getter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask)) != MethodAttributes.Public)
+            if (
+                (getter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask))
+                != MethodAttributes.Public
+            )
                 return false;
             if (setter == null)
                 return false;
-            if ((setter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask)) != MethodAttributes.Public)
+            if (
+                (setter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask))
+                != MethodAttributes.Public
+            )
                 return false;
             return true;
         }

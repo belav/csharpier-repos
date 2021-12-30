@@ -43,7 +43,9 @@ namespace Roslyn.Utilities
             {
                 return new Node(
                     new TextSpan(start: reader.ReadInt32(), length: reader.ReadInt32()),
-                    edgeCount: reader.ReadInt32(), firstEdgeIndex: reader.ReadInt32());
+                    edgeCount: reader.ReadInt32(),
+                    firstEdgeIndex: reader.ReadInt32()
+                );
             }
         }
     }

@@ -24,9 +24,7 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Initializes a new instance of the <see cref='PageSettings'/> class using the default printer.
         /// </summary>
-        public PageSettings() : this(new PrinterSettings())
-        {
-        }
+        public PageSettings() : this(new PrinterSettings()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='PageSettings'/> class using the specified printer.
@@ -60,7 +58,10 @@ namespace System.Drawing.Printing
             get
             {
                 if (_color.IsDefault)
-                    return printerSettings.GetModeField(ModeField.Color, SafeNativeMethods.DMCOLOR_MONOCHROME) == SafeNativeMethods.DMCOLOR_COLOR;
+                    return printerSettings.GetModeField(
+                            ModeField.Color,
+                            SafeNativeMethods.DMCOLOR_MONOCHROME
+                        ) == SafeNativeMethods.DMCOLOR_COLOR;
                 else
                     return (bool)_color;
             }
@@ -79,8 +80,14 @@ namespace System.Drawing.Printing
 
                 try
                 {
-                    int dpiX = Interop.Gdi32.GetDeviceCaps(new HandleRef(dc, dc.Hdc), Interop.Gdi32.DeviceCapability.LOGPIXELSX);
-                    int hardMarginX_DU = Interop.Gdi32.GetDeviceCaps(new HandleRef(dc, dc.Hdc), Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX);
+                    int dpiX = Interop.Gdi32.GetDeviceCaps(
+                        new HandleRef(dc, dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.LOGPIXELSX
+                    );
+                    int hardMarginX_DU = Interop.Gdi32.GetDeviceCaps(
+                        new HandleRef(dc, dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                    );
                     hardMarginX = hardMarginX_DU * 100 / dpiX;
                 }
                 finally
@@ -90,7 +97,6 @@ namespace System.Drawing.Printing
                 return hardMarginX;
             }
         }
-
 
         /// <summary>
         /// Returns the y dimension of the hard margin.
@@ -104,8 +110,14 @@ namespace System.Drawing.Printing
 
                 try
                 {
-                    int dpiY = Interop.Gdi32.GetDeviceCaps(new HandleRef(dc, dc.Hdc), Interop.Gdi32.DeviceCapability.LOGPIXELSY);
-                    int hardMarginY_DU = Interop.Gdi32.GetDeviceCaps(new HandleRef(dc, dc.Hdc), Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY);
+                    int dpiY = Interop.Gdi32.GetDeviceCaps(
+                        new HandleRef(dc, dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.LOGPIXELSY
+                    );
+                    int hardMarginY_DU = Interop.Gdi32.GetDeviceCaps(
+                        new HandleRef(dc, dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                    );
                     hardMarginY = hardMarginY_DU * 100 / dpiY;
                 }
                 finally
@@ -124,7 +136,10 @@ namespace System.Drawing.Printing
             get
             {
                 if (_landscape.IsDefault)
-                    return printerSettings.GetModeField(ModeField.Orientation, SafeNativeMethods.DMORIENT_PORTRAIT) == SafeNativeMethods.DMORIENT_LANDSCAPE;
+                    return printerSettings.GetModeField(
+                            ModeField.Orientation,
+                            SafeNativeMethods.DMORIENT_PORTRAIT
+                        ) == SafeNativeMethods.DMORIENT_LANDSCAPE;
                 else
                     return (bool)_landscape;
             }
@@ -145,10 +160,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public PaperSize PaperSize
         {
-            get
-            {
-                return GetPaperSize(IntPtr.Zero);
-            }
+            get { return GetPaperSize(IntPtr.Zero); }
             set { _paperSize = value; }
         }
 
@@ -162,8 +174,13 @@ namespace System.Drawing.Printing
                 if (_paperSource == null)
                 {
                     IntPtr modeHandle = printerSettings.GetHdevmode();
-                    IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, modeHandle));
-                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
+                    IntPtr modePointer = Interop.Kernel32.GlobalLock(
+                        new HandleRef(this, modeHandle)
+                    );
+                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                        modePointer,
+                        typeof(Interop.Gdi32.DEVMODE)
+                    )!;
 
                     PaperSource result = PaperSourceFromMode(mode);
 
@@ -191,25 +208,71 @@ namespace System.Drawing.Printing
 
                 try
                 {
-                    int dpiX = Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.LOGPIXELSX);
-                    int dpiY = Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.LOGPIXELSY);
+                    int dpiX = Interop.Gdi32.GetDeviceCaps(
+                        hdc,
+                        Interop.Gdi32.DeviceCapability.LOGPIXELSX
+                    );
+                    int dpiY = Interop.Gdi32.GetDeviceCaps(
+                        hdc,
+                        Interop.Gdi32.DeviceCapability.LOGPIXELSY
+                    );
                     if (!Landscape)
                     {
                         //
                         // Need to convert the printable area to 100th of an inch from the device units
-                        printableArea.X = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX) * 100 / dpiX;
-                        printableArea.Y = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY) * 100 / dpiY;
-                        printableArea.Width = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.HORZRES) * 100 / dpiX;
-                        printableArea.Height = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.VERTRES) * 100 / dpiY;
+                        printableArea.X =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                            ) * 100
+                            / dpiX;
+                        printableArea.Y =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                            ) * 100
+                            / dpiY;
+                        printableArea.Width =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.HORZRES
+                            ) * 100
+                            / dpiX;
+                        printableArea.Height =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.VERTRES
+                            ) * 100
+                            / dpiY;
                     }
                     else
                     {
                         //
                         // Need to convert the printable area to 100th of an inch from the device units
-                        printableArea.Y = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX) * 100 / dpiX;
-                        printableArea.X = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY) * 100 / dpiY;
-                        printableArea.Height = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.HORZRES) * 100 / dpiX;
-                        printableArea.Width = (float)Interop.Gdi32.GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.VERTRES) * 100 / dpiY;
+                        printableArea.Y =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                            ) * 100
+                            / dpiX;
+                        printableArea.X =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                            ) * 100
+                            / dpiY;
+                        printableArea.Height =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.HORZRES
+                            ) * 100
+                            / dpiX;
+                        printableArea.Width =
+                            (float)Interop.Gdi32.GetDeviceCaps(
+                                hdc,
+                                Interop.Gdi32.DeviceCapability.VERTRES
+                            ) * 100
+                            / dpiY;
                     }
                 }
                 finally
@@ -231,8 +294,13 @@ namespace System.Drawing.Printing
                 if (_printerResolution == null)
                 {
                     IntPtr modeHandle = printerSettings.GetHdevmode();
-                    IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, modeHandle));
-                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
+                    IntPtr modePointer = Interop.Kernel32.GlobalLock(
+                        new HandleRef(this, modeHandle)
+                    );
+                    Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                        modePointer,
+                        typeof(Interop.Gdi32.DEVMODE)
+                    )!;
 
                     PrinterResolution result = PrinterResolutionFromMode(mode);
 
@@ -244,10 +312,7 @@ namespace System.Drawing.Printing
                 else
                     return _printerResolution;
             }
-            set
-            {
-                _printerResolution = value;
-            }
+            set { _printerResolution = value; }
         }
 
         /// <summary>
@@ -280,16 +345,43 @@ namespace System.Drawing.Printing
         public void CopyToHdevmode(IntPtr hdevmode)
         {
             IntPtr modePointer = Interop.Kernel32.GlobalLock(hdevmode);
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                modePointer,
+                typeof(Interop.Gdi32.DEVMODE)
+            )!;
 
-            if (_color.IsNotDefault && ((mode.dmFields & SafeNativeMethods.DM_COLOR) == SafeNativeMethods.DM_COLOR))
-                mode.dmColor = unchecked((short)(((bool)_color) ? SafeNativeMethods.DMCOLOR_COLOR : SafeNativeMethods.DMCOLOR_MONOCHROME));
-            if (_landscape.IsNotDefault && ((mode.dmFields & SafeNativeMethods.DM_ORIENTATION) == SafeNativeMethods.DM_ORIENTATION))
-                mode.dmOrientation = unchecked((short)(((bool)_landscape) ? SafeNativeMethods.DMORIENT_LANDSCAPE : SafeNativeMethods.DMORIENT_PORTRAIT));
+            if (
+                _color.IsNotDefault
+                && ((mode.dmFields & SafeNativeMethods.DM_COLOR) == SafeNativeMethods.DM_COLOR)
+            )
+                mode.dmColor = unchecked(
+                    (short)(
+                        ((bool)_color)
+                            ? SafeNativeMethods.DMCOLOR_COLOR
+                            : SafeNativeMethods.DMCOLOR_MONOCHROME
+                    )
+                );
+            if (
+                _landscape.IsNotDefault
+                && (
+                    (mode.dmFields & SafeNativeMethods.DM_ORIENTATION)
+                    == SafeNativeMethods.DM_ORIENTATION
+                )
+            )
+                mode.dmOrientation = unchecked(
+                    (short)(
+                        ((bool)_landscape)
+                            ? SafeNativeMethods.DMORIENT_LANDSCAPE
+                            : SafeNativeMethods.DMORIENT_PORTRAIT
+                    )
+                );
 
             if (_paperSize != null)
             {
-                if ((mode.dmFields & SafeNativeMethods.DM_PAPERSIZE) == SafeNativeMethods.DM_PAPERSIZE)
+                if (
+                    (mode.dmFields & SafeNativeMethods.DM_PAPERSIZE)
+                    == SafeNativeMethods.DM_PAPERSIZE
+                )
                 {
                     mode.dmPaperSize = unchecked((short)_paperSize.RawKind);
                 }
@@ -297,17 +389,31 @@ namespace System.Drawing.Printing
                 bool setWidth = false;
                 bool setLength = false;
 
-                if ((mode.dmFields & SafeNativeMethods.DM_PAPERLENGTH) == SafeNativeMethods.DM_PAPERLENGTH)
+                if (
+                    (mode.dmFields & SafeNativeMethods.DM_PAPERLENGTH)
+                    == SafeNativeMethods.DM_PAPERLENGTH
+                )
                 {
                     // dmPaperLength is always in tenths of millimeter but paperSizes are in hundredth of inch ..
                     // so we need to convert :: use PrinterUnitConvert.Convert(value, PrinterUnit.TenthsOfAMillimeter /*fromUnit*/, PrinterUnit.Display /*ToUnit*/)
-                    int length = PrinterUnitConvert.Convert(_paperSize.Height, PrinterUnit.Display, PrinterUnit.TenthsOfAMillimeter);
+                    int length = PrinterUnitConvert.Convert(
+                        _paperSize.Height,
+                        PrinterUnit.Display,
+                        PrinterUnit.TenthsOfAMillimeter
+                    );
                     mode.dmPaperLength = unchecked((short)length);
                     setLength = true;
                 }
-                if ((mode.dmFields & SafeNativeMethods.DM_PAPERWIDTH) == SafeNativeMethods.DM_PAPERWIDTH)
+                if (
+                    (mode.dmFields & SafeNativeMethods.DM_PAPERWIDTH)
+                    == SafeNativeMethods.DM_PAPERWIDTH
+                )
                 {
-                    int width = PrinterUnitConvert.Convert(_paperSize.Width, PrinterUnit.Display, PrinterUnit.TenthsOfAMillimeter);
+                    int width = PrinterUnitConvert.Convert(
+                        _paperSize.Width,
+                        PrinterUnit.Display,
+                        PrinterUnit.TenthsOfAMillimeter
+                    );
                     mode.dmPaperWidth = unchecked((short)width);
                     setWidth = true;
                 }
@@ -317,19 +423,33 @@ namespace System.Drawing.Printing
                     if (!setLength)
                     {
                         mode.dmFields |= SafeNativeMethods.DM_PAPERLENGTH;
-                        int length = PrinterUnitConvert.Convert(_paperSize.Height, PrinterUnit.Display, PrinterUnit.TenthsOfAMillimeter);
+                        int length = PrinterUnitConvert.Convert(
+                            _paperSize.Height,
+                            PrinterUnit.Display,
+                            PrinterUnit.TenthsOfAMillimeter
+                        );
                         mode.dmPaperLength = unchecked((short)length);
                     }
                     if (!setWidth)
                     {
                         mode.dmFields |= SafeNativeMethods.DM_PAPERWIDTH;
-                        int width = PrinterUnitConvert.Convert(_paperSize.Width, PrinterUnit.Display, PrinterUnit.TenthsOfAMillimeter);
+                        int width = PrinterUnitConvert.Convert(
+                            _paperSize.Width,
+                            PrinterUnit.Display,
+                            PrinterUnit.TenthsOfAMillimeter
+                        );
                         mode.dmPaperWidth = unchecked((short)width);
                     }
                 }
             }
 
-            if (_paperSource != null && ((mode.dmFields & SafeNativeMethods.DM_DEFAULTSOURCE) == SafeNativeMethods.DM_DEFAULTSOURCE))
+            if (
+                _paperSource != null
+                && (
+                    (mode.dmFields & SafeNativeMethods.DM_DEFAULTSOURCE)
+                    == SafeNativeMethods.DM_DEFAULTSOURCE
+                )
+            )
             {
                 mode.dmDefaultSource = unchecked((short)_paperSource.RawKind);
             }
@@ -338,18 +458,27 @@ namespace System.Drawing.Printing
             {
                 if (_printerResolution.Kind == PrinterResolutionKind.Custom)
                 {
-                    if ((mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY) == SafeNativeMethods.DM_PRINTQUALITY)
+                    if (
+                        (mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY)
+                        == SafeNativeMethods.DM_PRINTQUALITY
+                    )
                     {
                         mode.dmPrintQuality = unchecked((short)_printerResolution.X);
                     }
-                    if ((mode.dmFields & SafeNativeMethods.DM_YRESOLUTION) == SafeNativeMethods.DM_YRESOLUTION)
+                    if (
+                        (mode.dmFields & SafeNativeMethods.DM_YRESOLUTION)
+                        == SafeNativeMethods.DM_YRESOLUTION
+                    )
                     {
                         mode.dmYResolution = unchecked((short)_printerResolution.Y);
                     }
                 }
                 else
                 {
-                    if ((mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY) == SafeNativeMethods.DM_PRINTQUALITY)
+                    if (
+                        (mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY)
+                        == SafeNativeMethods.DM_PRINTQUALITY
+                    )
                     {
                         mode.dmPrintQuality = unchecked((short)_printerResolution.Kind);
                     }
@@ -365,7 +494,14 @@ namespace System.Drawing.Printing
             // a buffer overrun
             if (mode.dmDriverExtra >= ExtraBytes)
             {
-                int retCode = Interop.Winspool.DocumentProperties(NativeMethods.NullHandleRef, NativeMethods.NullHandleRef, printerSettings.PrinterName, modePointer, modePointer, SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER);
+                int retCode = Interop.Winspool.DocumentProperties(
+                    NativeMethods.NullHandleRef,
+                    NativeMethods.NullHandleRef,
+                    printerSettings.PrinterName,
+                    modePointer,
+                    modePointer,
+                    SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER
+                );
                 if (retCode < 0)
                 {
                     Interop.Kernel32.GlobalFree(modePointer);
@@ -381,7 +517,10 @@ namespace System.Drawing.Printing
             {
                 IntPtr modeHandle = printerSettings.GetHdevmodeInternal();
                 IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, modeHandle));
-                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
+                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                    modePointer,
+                    typeof(Interop.Gdi32.DEVMODE)
+                )!;
 
                 short result = mode?.dmDriverExtra ?? 0;
 
@@ -391,7 +530,6 @@ namespace System.Drawing.Printing
                 return result;
             }
         }
-
 
         // This function shows up big on profiles, so we need to make it fast
         internal Rectangle GetBounds(IntPtr modeHandle)
@@ -409,7 +547,11 @@ namespace System.Drawing.Printing
         private bool GetLandscape(IntPtr modeHandle)
         {
             if (_landscape.IsDefault)
-                return printerSettings.GetModeField(ModeField.Orientation, SafeNativeMethods.DMORIENT_PORTRAIT, modeHandle) == SafeNativeMethods.DMORIENT_LANDSCAPE;
+                return printerSettings.GetModeField(
+                        ModeField.Orientation,
+                        SafeNativeMethods.DMORIENT_PORTRAIT,
+                        modeHandle
+                    ) == SafeNativeMethods.DMORIENT_LANDSCAPE;
             else
                 return (bool)_landscape;
         }
@@ -426,7 +568,10 @@ namespace System.Drawing.Printing
                 }
 
                 IntPtr modePointer = Interop.Kernel32.GlobalLock(modeHandle);
-                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
+                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                    modePointer,
+                    typeof(Interop.Gdi32.DEVMODE)
+                )!;
 
                 PaperSize result = PaperSizeFromMode(mode);
 
@@ -454,16 +599,30 @@ namespace System.Drawing.Printing
                         return sizes[i];
                 }
             }
-            return new PaperSize(PaperKind.Custom, "custom",
-                                     //mode.dmPaperWidth, mode.dmPaperLength);
-                                     PrinterUnitConvert.Convert(mode.dmPaperWidth, PrinterUnit.TenthsOfAMillimeter, PrinterUnit.Display),
-                                     PrinterUnitConvert.Convert(mode.dmPaperLength, PrinterUnit.TenthsOfAMillimeter, PrinterUnit.Display));
+            return new PaperSize(
+                PaperKind.Custom,
+                "custom",
+                //mode.dmPaperWidth, mode.dmPaperLength);
+                PrinterUnitConvert.Convert(
+                    mode.dmPaperWidth,
+                    PrinterUnit.TenthsOfAMillimeter,
+                    PrinterUnit.Display
+                ),
+                PrinterUnitConvert.Convert(
+                    mode.dmPaperLength,
+                    PrinterUnit.TenthsOfAMillimeter,
+                    PrinterUnit.Display
+                )
+            );
         }
 
         private PaperSource PaperSourceFromMode(Interop.Gdi32.DEVMODE mode)
         {
             PaperSource[] sources = printerSettings.Get_PaperSources();
-            if ((mode.dmFields & SafeNativeMethods.DM_DEFAULTSOURCE) == SafeNativeMethods.DM_DEFAULTSOURCE)
+            if (
+                (mode.dmFields & SafeNativeMethods.DM_DEFAULTSOURCE)
+                == SafeNativeMethods.DM_DEFAULTSOURCE
+            )
             {
                 for (int i = 0; i < sources.Length; i++)
                 {
@@ -483,24 +642,43 @@ namespace System.Drawing.Printing
             PrinterResolution[] resolutions = printerSettings.Get_PrinterResolutions();
             for (int i = 0; i < resolutions.Length; i++)
             {
-                if (mode.dmPrintQuality >= 0 && ((mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY) == SafeNativeMethods.DM_PRINTQUALITY)
-                    && ((mode.dmFields & SafeNativeMethods.DM_YRESOLUTION) == SafeNativeMethods.DM_YRESOLUTION))
+                if (
+                    mode.dmPrintQuality >= 0
+                    && (
+                        (mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY)
+                        == SafeNativeMethods.DM_PRINTQUALITY
+                    )
+                    && (
+                        (mode.dmFields & SafeNativeMethods.DM_YRESOLUTION)
+                        == SafeNativeMethods.DM_YRESOLUTION
+                    )
+                )
                 {
-                    if (resolutions[i].X == unchecked((int)(PrinterResolutionKind)mode.dmPrintQuality)
-                        && resolutions[i].Y == unchecked((int)(PrinterResolutionKind)mode.dmYResolution))
+                    if (
+                        resolutions[i].X
+                            == unchecked((int)(PrinterResolutionKind)mode.dmPrintQuality)
+                        && resolutions[i].Y
+                            == unchecked((int)(PrinterResolutionKind)mode.dmYResolution)
+                    )
                         return resolutions[i];
                 }
                 else
                 {
-                    if ((mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY) == SafeNativeMethods.DM_PRINTQUALITY)
+                    if (
+                        (mode.dmFields & SafeNativeMethods.DM_PRINTQUALITY)
+                        == SafeNativeMethods.DM_PRINTQUALITY
+                    )
                     {
                         if (resolutions[i].Kind == (PrinterResolutionKind)mode.dmPrintQuality)
                             return resolutions[i];
                     }
                 }
             }
-            return new PrinterResolution(PrinterResolutionKind.Custom,
-                                         mode.dmPrintQuality, mode.dmYResolution);
+            return new PrinterResolution(
+                PrinterResolutionKind.Custom,
+                mode.dmPrintQuality,
+                mode.dmYResolution
+            );
         }
 
         /// <summary>
@@ -514,14 +692,20 @@ namespace System.Drawing.Printing
             }
 
             IntPtr pointer = Interop.Kernel32.GlobalLock(hdevmode);
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                pointer,
+                typeof(Interop.Gdi32.DEVMODE)
+            )!;
 
             if ((mode.dmFields & SafeNativeMethods.DM_COLOR) == SafeNativeMethods.DM_COLOR)
             {
                 _color = (mode.dmColor == SafeNativeMethods.DMCOLOR_COLOR);
             }
 
-            if ((mode.dmFields & SafeNativeMethods.DM_ORIENTATION) == SafeNativeMethods.DM_ORIENTATION)
+            if (
+                (mode.dmFields & SafeNativeMethods.DM_ORIENTATION)
+                == SafeNativeMethods.DM_ORIENTATION
+            )
             {
                 _landscape = (mode.dmOrientation == SafeNativeMethods.DMORIENT_LANDSCAPE);
             }

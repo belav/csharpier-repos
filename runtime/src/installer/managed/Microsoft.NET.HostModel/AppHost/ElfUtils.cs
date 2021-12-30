@@ -19,10 +19,7 @@ namespace Microsoft.NET.HostModel.AppHost
 
             public bool IsValid()
             {
-                return EI_MAG0 == 0x7f &&
-                       EI_MAG1 == 0x45 &&
-                       EI_MAG2 == 0x4C &&
-                       EI_MAG3 == 0x46;
+                return EI_MAG0 == 0x7f && EI_MAG1 == 0x45 && EI_MAG2 == 0x4C && EI_MAG3 == 0x46;
             }
 
 
@@ -41,10 +38,10 @@ namespace Microsoft.NET.HostModel.AppHost
                 byte[] eIdent = reader.ReadBytes(4);
 
                 // Check that the first four bytes are 0x7f, 'E', 'L', 'F'
-                return eIdent[0] == 0x7f &&
-                       eIdent[1] == 0x45 &&
-                       eIdent[2] == 0x4C &&
-                       eIdent[3] == 0x46;
+                return eIdent[0] == 0x7f
+                    && eIdent[1] == 0x45
+                    && eIdent[2] == 0x4C
+                    && eIdent[3] == 0x46;
             }
         }
     }

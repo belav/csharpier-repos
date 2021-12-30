@@ -7,35 +7,33 @@ using System;
 public struct VT
 {
     public ulong[,] ulong2darr;
-    public ulong[, ,] ulong3darr;
+    public ulong[,,] ulong3darr;
     public ulong[,] ulong2darr_b;
-    public ulong[, ,] ulong3darr_b;
+    public ulong[,,] ulong3darr_b;
 }
 
 public class CL
 {
     public ulong[,] ulong2darr = { { 0, 1 }, { 0, 0 } };
-    public ulong[, ,] ulong3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public ulong[,,] ulong3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     public ulong[,] ulong2darr_b = { { 0, 49 }, { 0, 0 } };
-    public ulong[, ,] ulong3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public ulong[,,] ulong3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 }
 
 public class ulongMDArrTest
 {
-
     static ulong[,] ulong2darr = { { 0, 1 }, { 0, 0 } };
-    static ulong[, ,] ulong3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static ulong[,,] ulong3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     static ulong[,] ulong2darr_b = { { 0, 49 }, { 0, 0 } };
-    static ulong[, ,] ulong3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static ulong[,,] ulong3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 
     static ulong[][,] ja1 = new ulong[2][,];
-    static ulong[][, ,] ja2 = new ulong[2][, ,];
+    static ulong[][,,] ja2 = new ulong[2][,,];
     static ulong[][,] ja1_b = new ulong[2][,];
-    static ulong[][, ,] ja2_b = new ulong[2][, ,];
+    static ulong[][,,] ja2_b = new ulong[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1167,5 +1165,4 @@ public class ulongMDArrTest
 
 
     }
-
 };

@@ -31,7 +31,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(predefName.ToString(), typeName);
         }
 
-        internal static void ArrayNameVerification(ExpressionSyntax nameTree, string arrayName, int numRanks)
+        internal static void ArrayNameVerification(
+            ExpressionSyntax nameTree,
+            string arrayName,
+            int numRanks
+        )
         {
             Assert.IsType<ArrayTypeSyntax>(nameTree);
             var arrayType = nameTree as ArrayTypeSyntax;
@@ -39,7 +43,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(arrayType.RankSpecifiers.Count(), numRanks);
         }
 
-        internal static void AliasedNameVerification(ExpressionSyntax nameTree, string alias, string name)
+        internal static void AliasedNameVerification(
+            ExpressionSyntax nameTree,
+            string alias,
+            string name
+        )
         {
             // Verification of the change
             Assert.IsType<AliasQualifiedNameSyntax>(nameTree);
@@ -48,7 +56,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(aliasName.Name.ToString(), name);
         }
 
-        internal static void DottedNameVerification(ExpressionSyntax nameTree, string left, string right)
+        internal static void DottedNameVerification(
+            ExpressionSyntax nameTree,
+            string left,
+            string right
+        )
         {
             // Verification of the change
             Assert.IsType<QualifiedNameSyntax>(nameTree);
@@ -57,7 +69,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(dottedName.Right.ToString(), right);
         }
 
-        internal static void GenericNameVerification(ExpressionSyntax nameTree, string name, params string[] typeNames)
+        internal static void GenericNameVerification(
+            ExpressionSyntax nameTree,
+            string name,
+            params string[] typeNames
+        )
         {
             // Verification of the change
             Assert.IsType<GenericNameSyntax>(nameTree);

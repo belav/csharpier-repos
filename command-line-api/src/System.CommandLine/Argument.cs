@@ -22,9 +22,7 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        public Argument()
-        {
-        }
+        public Argument() { }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
@@ -52,10 +50,7 @@ namespace System.CommandLine
             {
                 if (_arity is null)
                 {
-                    return ArgumentArity.Default(
-                        ValueType, 
-                        this, 
-                        Parents);
+                    return ArgumentArity.Default(ValueType, this, Parents);
                 }
 
                 return _arity;
@@ -78,10 +73,7 @@ namespace System.CommandLine
         /// Gets the list of suggestion sources for the argument.
         /// </summary>
         public SuggestionSourceList Suggestions =>
-            _suggestions ??= new SuggestionSourceList
-            {
-                SuggestionSource.ForType(ValueType)
-            };
+            _suggestions ??= new SuggestionSourceList { SuggestionSource.ForType(ValueType) };
 
         /// <summary>
         /// Gets or sets the <see cref="Type" /> that the argument token(s) will be converted to.
@@ -118,7 +110,8 @@ namespace System.CommandLine
         /// to provide custom errors based on user input.
         /// </summary>
         /// <param name="validate">The delegate to validate the parsed argument.</param>
-        public void AddValidator(ValidateSymbolResult<ArgumentResult> validate) => Validators.Add(validate);
+        public void AddValidator(ValidateSymbolResult<ArgumentResult> validate) =>
+            Validators.Add(validate);
 
         /// <summary>
         /// Gets the default value for the argument.
@@ -133,7 +126,9 @@ namespace System.CommandLine
         {
             if (_defaultValueFactory is null)
             {
-                throw new InvalidOperationException($"Argument \"{Name}\" does not have a default value");
+                throw new InvalidOperationException(
+                    $"Argument \"{Name}\" does not have a default value"
+                );
             }
 
             return _defaultValueFactory.Invoke(argumentResult);
@@ -162,7 +157,7 @@ namespace System.CommandLine
 
             SetDefaultValueFactory(_ => getDefaultValue());
         }
-        
+
         /// <summary>
         /// Sets a delegate to invoke when the default value for the argument is required.
         /// </summary>
@@ -170,7 +165,8 @@ namespace System.CommandLine
         /// <remarks>In this overload, the <see cref="ArgumentResult"/> is provided to the delegate.</remarks>
         public void SetDefaultValueFactory(Func<ArgumentResult, object?> getDefaultValue)
         {
-            _defaultValueFactory = getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue));
+            _defaultValueFactory =
+                getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue));
         }
 
         /// <summary>
@@ -180,11 +176,8 @@ namespace System.CommandLine
 
         internal virtual bool HasCustomParser => false;
 
-        internal static Argument None() => new()
-        {
-            Arity = ArgumentArity.Zero,
-            ValueType = typeof(bool)
-        };
+        internal static Argument None() =>
+            new() { Arity = ArgumentArity.Zero, ValueType = typeof(bool) };
 
         internal void AddAllowedValues(IEnumerable<string> values)
         {
@@ -197,13 +190,16 @@ namespace System.CommandLine
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
+        public override IEnumerable<string> GetSuggestions(
+            ParseResult? parseResult = null,
+            string? textToMatch = null
+        )
         {
             return Suggestions
-                   .SelectMany(source => source.GetSuggestions(parseResult, textToMatch))
-                   .Distinct()
-                   .OrderBy(c => c, StringComparer.OrdinalIgnoreCase)
-                   .Containing(textToMatch ?? "");
+                .SelectMany(source => source.GetSuggestions(parseResult, textToMatch))
+                .Distinct()
+                .OrderBy(c => c, StringComparer.OrdinalIgnoreCase)
+                .Containing(textToMatch ?? "");
         }
 
         /// <inheritdoc />

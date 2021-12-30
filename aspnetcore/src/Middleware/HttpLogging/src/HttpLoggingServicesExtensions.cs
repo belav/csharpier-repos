@@ -17,7 +17,10 @@ public static class HttpLoggingServicesExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="HttpLoggingOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddHttpLogging(this IServiceCollection services, Action<HttpLoggingOptions> configureOptions)
+    public static IServiceCollection AddHttpLogging(
+        this IServiceCollection services,
+        Action<HttpLoggingOptions> configureOptions
+    )
     {
         if (services == null)
         {
@@ -38,7 +41,10 @@ public static class HttpLoggingServicesExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="W3CLoggerOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddW3CLogging(this IServiceCollection services, Action<W3CLoggerOptions> configureOptions)
+    public static IServiceCollection AddW3CLogging(
+        this IServiceCollection services,
+        Action<W3CLoggerOptions> configureOptions
+    )
     {
         if (services == null)
         {

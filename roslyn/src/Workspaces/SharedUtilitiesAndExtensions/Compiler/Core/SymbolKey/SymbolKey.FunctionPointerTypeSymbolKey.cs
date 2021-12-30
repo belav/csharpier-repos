@@ -26,17 +26,23 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteParameterTypesArray(symbol.Signature.Parameters);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var callingConvention = (SignatureCallingConvention)reader.ReadInteger();
 
                 var callingConventionModifiers = ImmutableArray<INamedTypeSymbol>.Empty;
                 if (callingConvention == SignatureCallingConvention.Unmanaged)
                 {
-                    using var modifiersBuilder = reader.ReadSymbolKeyArray<INamedTypeSymbol>(out var conventionTypesFailureReason);
+                    using var modifiersBuilder = reader.ReadSymbolKeyArray<INamedTypeSymbol>(
+                        out var conventionTypesFailureReason
+                    );
                     if (conventionTypesFailureReason != null)
                     {
-                        failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(callingConventionModifiers)} failed -> {conventionTypesFailureReason})";
+                        failureReason =
+                            $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(callingConventionModifiers)} failed -> {conventionTypesFailureReason})";
                         return default;
                     }
 
@@ -46,17 +52,21 @@ namespace Microsoft.CodeAnalysis
                 var returnRefKind = reader.ReadRefKind();
                 var returnType = reader.ReadSymbolKey(out var returnTypeFailureReason);
                 using var paramRefKinds = reader.ReadRefKindArray();
-                using var parameterTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(out var parameterTypesFailureReason);
+                using var parameterTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(
+                    out var parameterTypesFailureReason
+                );
 
                 if (returnTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(returnType)} failed -> {returnTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(returnType)} failed -> {returnTypeFailureReason})";
                     return default;
                 }
 
                 if (parameterTypesFailureReason != null)
                 {
-                    failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(parameterTypes)} failed -> {parameterTypesFailureReason})";
+                    failureReason =
+                        $"({nameof(FunctionPointerTypeSymbolKey)} {nameof(parameterTypes)} failed -> {parameterTypesFailureReason})";
                     return default;
                 }
 
@@ -74,13 +84,22 @@ namespace Microsoft.CodeAnalysis
 
                 if (reader.Compilation.Language == LanguageNames.VisualBasic)
                 {
-                    failureReason = $"({nameof(FunctionPointerTypeSymbolKey)} is not supported in {LanguageNames.VisualBasic})";
+                    failureReason =
+                        $"({nameof(FunctionPointerTypeSymbolKey)} is not supported in {LanguageNames.VisualBasic})";
                     return default;
                 }
 
                 failureReason = null;
-                return new SymbolKeyResolution(reader.Compilation.CreateFunctionPointerTypeSymbol(
-                    returnTypeSymbol, returnRefKind, parameterTypes.ToImmutable(), paramRefKinds.ToImmutable(), callingConvention, callingConventionModifiers));
+                return new SymbolKeyResolution(
+                    reader.Compilation.CreateFunctionPointerTypeSymbol(
+                        returnTypeSymbol,
+                        returnRefKind,
+                        parameterTypes.ToImmutable(),
+                        paramRefKinds.ToImmutable(),
+                        callingConvention,
+                        callingConventionModifiers
+                    )
+                );
             }
         }
     }

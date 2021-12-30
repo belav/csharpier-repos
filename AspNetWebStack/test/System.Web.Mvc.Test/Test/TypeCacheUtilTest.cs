@@ -21,10 +21,15 @@ namespace System.Web.Mvc.Test
 
             string cacheName = "testCache";
             MockBuildManager buildManager = new MockBuildManager();
-            Predicate<Type> predicate = type => type.IsDefined(typeof(TypeCacheMarkerAttribute), true);
+            Predicate<Type> predicate = type =>
+                type.IsDefined(typeof(TypeCacheMarkerAttribute), true);
 
             // Act
-            List<Type> returnedTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(cacheName, predicate, buildManager);
+            List<Type> returnedTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(
+                cacheName,
+                predicate,
+                buildManager
+            );
 
             // Assert
             Assert.Equal(expectedTypes, returnedTypes.ToArray());
@@ -40,11 +45,7 @@ namespace System.Web.Mvc.Test
             // SAVING
 
             // Arrange
-            Type[] expectedTypes = new Type[]
-            {
-                typeof(object),
-                typeof(string)
-            };
+            Type[] expectedTypes = new Type[] { typeof(object), typeof(string) };
 
             TypeCacheSerializer serializer = new TypeCacheSerializer();
             string cacheName = "testCache";
@@ -67,7 +68,14 @@ namespace System.Web.Mvc.Test
             buildManager.CachedFileStore[cacheName] = readStream;
 
             // Act
-            List<Type> returnedTypes = TypeCacheUtil.ReadTypesFromCache(cacheName, _ => false /* all types are invalid */, buildManager, serializer);
+            List<Type> returnedTypes = TypeCacheUtil.ReadTypesFromCache(
+                cacheName,
+                _ =>
+                    false /* all types are invalid */
+                ,
+                buildManager,
+                serializer
+            );
 
             // Assert
             Assert.Null(returnedTypes);
@@ -79,11 +87,7 @@ namespace System.Web.Mvc.Test
             // SAVING
 
             // Arrange
-            Type[] expectedTypes = new Type[]
-            {
-                typeof(object),
-                typeof(string)
-            };
+            Type[] expectedTypes = new Type[] { typeof(object), typeof(string) };
 
             TypeCacheSerializer serializer = new TypeCacheSerializer();
             string cacheName = "testCache";
@@ -106,7 +110,14 @@ namespace System.Web.Mvc.Test
             buildManager.CachedFileStore[cacheName] = readStream;
 
             // Act
-            List<Type> returnedTypes = TypeCacheUtil.ReadTypesFromCache(cacheName, _ => true /* all types are valid */, buildManager, serializer);
+            List<Type> returnedTypes = TypeCacheUtil.ReadTypesFromCache(
+                cacheName,
+                _ =>
+                    true /* all types are valid */
+                ,
+                buildManager,
+                serializer
+            );
 
             // Assert
             Assert.Equal(expectedTypes, returnedTypes.ToArray());

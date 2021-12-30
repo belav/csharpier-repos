@@ -3,7 +3,6 @@
 
 using System.Globalization;
 
-
 namespace System.Runtime.Serialization
 {
     /// <summary>
@@ -22,9 +21,8 @@ namespace System.Runtime.Serialization
         /// formatProvider.
         /// </summary>
         /// <param name="formatString">Specifies the formatString to be used.</param>
-        public DateTimeFormat(string formatString) : this(formatString, DateTimeFormatInfo.CurrentInfo)
-        {
-        }
+        public DateTimeFormat(string formatString)
+            : this(formatString, DateTimeFormatInfo.CurrentInfo) { }
 
         /// <summary>
         /// Initializes a new <see cref="DateTimeFormat"/> with the specified
@@ -36,12 +34,16 @@ namespace System.Runtime.Serialization
         {
             if (formatString == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(nameof(formatString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    nameof(formatString)
+                );
             }
 
             if (formatProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(nameof(formatProvider));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    nameof(formatProvider)
+                );
             }
 
             _formatString = formatString;
@@ -54,10 +56,7 @@ namespace System.Runtime.Serialization
         /// </summary>
         public string FormatString
         {
-            get
-            {
-                return _formatString;
-            }
+            get { return _formatString; }
         }
 
         /// <summary>
@@ -65,10 +64,7 @@ namespace System.Runtime.Serialization
         /// </summary>
         public IFormatProvider FormatProvider
         {
-            get
-            {
-                return _formatProvider;
-            }
+            get { return _formatProvider; }
         }
 
         /// <summary>
@@ -76,15 +72,8 @@ namespace System.Runtime.Serialization
         /// </summary>
         public DateTimeStyles DateTimeStyles
         {
-            get
-            {
-                return _dateTimeStyles;
-            }
-
-            set
-            {
-                _dateTimeStyles = value;
-            }
+            get { return _dateTimeStyles; }
+            set { _dateTimeStyles = value; }
         }
     }
 }

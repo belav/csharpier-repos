@@ -69,7 +69,14 @@ namespace System.Speech.Internal.Synthesis
         /// <param name="fdwOpen">Flags for opening the device.</param>
         /// <returns>MMSYSERR</returns>
         [DllImport("winmm.dll")]
-        internal static extern MMSYSERR waveOutOpen(ref IntPtr phwo, int uDeviceID, byte[] pwfx, WaveOutProc dwCallback, IntPtr dwInstance, uint fdwOpen);
+        internal static extern MMSYSERR waveOutOpen(
+            ref IntPtr phwo,
+            int uDeviceID,
+            byte[] pwfx,
+            WaveOutProc dwCallback,
+            IntPtr dwInstance,
+            uint fdwOpen
+        );
 
         /// <summary>
         /// This function closes the specified waveform output device.
@@ -108,7 +115,13 @@ namespace System.Speech.Internal.Synthesis
         [DllImport("winmm.dll")]
         internal static extern MMSYSERR waveOutRestart(IntPtr hwo);
 
-        internal delegate void WaveOutProc(IntPtr hwo, MM_MSG uMsg, IntPtr dwInstance, IntPtr dwParam1, IntPtr dwParam2);
+        internal delegate void WaveOutProc(
+            IntPtr hwo,
+            MM_MSG uMsg,
+            IntPtr dwInstance,
+            IntPtr dwParam1,
+            IntPtr dwParam2
+        );
 
 #pragma warning disable CA1823 // unused fields
         internal struct WAVEOUTCAPS
@@ -137,7 +150,11 @@ namespace System.Speech.Internal.Synthesis
         /// <param name="cbwoc">Size, in bytes, of the WAVEOUTCAPS structure.</param>
         /// <returns>MMSYSERR</returns>
         [DllImport("winmm.dll")]
-        internal static extern MMSYSERR waveOutGetDevCaps(IntPtr uDeviceID, ref WAVEOUTCAPS caps, int cbwoc);
+        internal static extern MMSYSERR waveOutGetDevCaps(
+            IntPtr uDeviceID,
+            ref WAVEOUTCAPS caps,
+            int cbwoc
+        );
 
         /// <summary>
         /// This function retrieves the number of waveform output devices present

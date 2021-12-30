@@ -16,21 +16,23 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public Uint16Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Uint16Array(ArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length) { }
+        public Uint16Array(ArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
         public Uint16Array(SharedArrayBuffer buffer) : base(buffer) { }
 
         public Uint16Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Uint16Array(SharedArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length) { }
+        public Uint16Array(SharedArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
-        internal Uint16Array(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal Uint16Array(IntPtr jsHandle) : base(jsHandle) { }
 
         /// <summary>
         /// Defines an implicit conversion of Uint16Array class to a ushort
         /// </summary>
-        public static implicit operator Span<ushort>(Uint16Array typedarray) => typedarray.ToArray();
+        public static implicit operator Span<ushort>(Uint16Array typedarray) =>
+            typedarray.ToArray();
 
         /// <summary>
         /// Defines an implicit conversion of ushort to a Uint16Array class.

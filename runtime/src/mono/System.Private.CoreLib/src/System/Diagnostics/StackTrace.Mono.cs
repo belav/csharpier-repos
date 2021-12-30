@@ -34,10 +34,17 @@ namespace System.Diagnostics
     public partial class StackTrace
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern MonoStackFrame[] get_trace(Exception e, int skipFrames, bool needFileInfo);
+        internal static extern MonoStackFrame[] get_trace(
+            Exception e,
+            int skipFrames,
+            bool needFileInfo
+        );
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "StackFrame.GetMethod is getting compared to null but nothing else on it is touched.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "StackFrame.GetMethod is getting compared to null but nothing else on it is touched."
+        )]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         private void InitializeForCurrentThread(int skipFrames, bool needFileInfo)
         {

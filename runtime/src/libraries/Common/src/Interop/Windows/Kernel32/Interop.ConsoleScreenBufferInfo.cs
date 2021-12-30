@@ -46,7 +46,6 @@ internal static partial class Interop
             BackgroundRed = 0x40,
             BackgroundYellow = 0x60,
             BackgroundIntensity = 0x80,
-
             ForegroundMask = 0xf,
             BackgroundMask = 0xf0,
             ColorMask = 0xff

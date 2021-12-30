@@ -39,21 +39,23 @@ public class ScriptTagHelperTest
     public void Process_SrcDefaultsToTagHelperOutputSrcAttributeAddedByOtherTagHelper(
         string src,
         string srcOutput,
-        string expectedSrcPrefix)
+        string expectedSrcPrefix
+    )
     {
         // Arrange
         var allAttributes = new TagHelperAttributeList(
             new TagHelperAttributeList
             {
-                    { "type", new HtmlString("text/javascript") },
-                    { "asp-append-version", true },
-            });
+                { "type", new HtmlString("text/javascript") },
+                { "asp-append-version", true },
+            }
+        );
         var context = MakeTagHelperContext(allAttributes);
         var outputAttributes = new TagHelperAttributeList
-                {
-                    { "type", new HtmlString("text/javascript") },
-                    { "src", srcOutput },
-                };
+        {
+            { "type", new HtmlString("text/javascript") },
+            { "src", srcOutput },
+        };
         var output = MakeTagHelperOutput("script", outputAttributes);
         var urlHelper = new Mock<IUrlHelper>();
 
@@ -78,11 +80,15 @@ public class ScriptTagHelperTest
         Assert.Equal(
             expectedSrcPrefix + "?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
             (string)output.Attributes["src"].Value,
-            StringComparer.Ordinal);
+            StringComparer.Ordinal
+        );
     }
 
     [Theory]
-    [MemberData(nameof(LinkTagHelperTest.MultiAttributeSameNameData), MemberType = typeof(LinkTagHelperTest))]
+    [MemberData(
+        nameof(LinkTagHelperTest.MultiAttributeSameNameData),
+        MemberType = typeof(LinkTagHelperTest)
+    )]
     public void HandlesMultipleAttributesSameNameCorrectly(TagHelperAttributeList outputAttributes)
     {
         // Arrange
@@ -90,18 +96,19 @@ public class ScriptTagHelperTest
             outputAttributes.Concat(
                 new TagHelperAttributeList
                 {
-                        new TagHelperAttribute("data-extra", "something"),
-                        new TagHelperAttribute("src", "/blank.js"),
-                        new TagHelperAttribute("asp-fallback-src", "http://www.example.com/blank.js"),
-                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                }));
+                    new TagHelperAttribute("data-extra", "something"),
+                    new TagHelperAttribute("src", "/blank.js"),
+                    new TagHelperAttribute("asp-fallback-src", "http://www.example.com/blank.js"),
+                    new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                }
+            )
+        );
         var tagHelperContext = MakeTagHelperContext(allAttributes);
         var combinedOutputAttributes = new TagHelperAttributeList(
             outputAttributes.Concat(
-                new[]
-                {
-                        new TagHelperAttribute("data-extra", new HtmlString("something"))
-                }));
+                new[] { new TagHelperAttribute("data-extra", new HtmlString("something")) }
+            )
+        );
         var output = MakeTagHelperOutput("script", combinedOutputAttributes);
 
         var helper = GetHelper();
@@ -124,151 +131,151 @@ public class ScriptTagHelperTest
         get
         {
             return new TheoryData<TagHelperAttributeList, Action<ScriptTagHelper>>
+            {
                 {
+                    new TagHelperAttributeList
                     {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrc = "test.js";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                        }
+                        new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()")
                     },
+                    tagHelper =>
                     {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                            new TagHelperAttribute("asp-suppress-fallback-integrity", "false")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrc = "test.js";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                            tagHelper.SuppressFallbackIntegrity = false;
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src-include", "*.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrcInclude = "*.css";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            new TagHelperAttribute("asp-fallback-src-include", "*.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrc = "test.js";
-                            tagHelper.FallbackSrcInclude = "*.css";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            new TagHelperAttribute("asp-fallback-src-include", "*.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                            new TagHelperAttribute("asp-suppress-fallback-integrity", "false")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrc = "test.js";
-                            tagHelper.FallbackSrcInclude = "*.css";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                            tagHelper.SuppressFallbackIntegrity = false;
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src-include", "*.js"),
-                            new TagHelperAttribute("asp-fallback-src-exclude", "*.min.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrcInclude = "*.css";
-                            tagHelper.FallbackSrcExclude = "*.min.css";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                        }
-                    },
-                    // File Version
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                            new TagHelperAttribute("asp-append-version", "true")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrc = "test.js";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                            tagHelper.AppendVersion = true;
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src-include", "*.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                            new TagHelperAttribute("asp-append-version", "true")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrcInclude = "*.css";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                            tagHelper.AppendVersion = true;
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            new TagHelperAttribute("asp-fallback-src-include", "*.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                            new TagHelperAttribute("asp-append-version", "true")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrc = "test.js";
-                            tagHelper.FallbackSrcInclude = "*.css";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                            tagHelper.AppendVersion = true;
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src-include", "*.js"),
-                            new TagHelperAttribute("asp-fallback-src-exclude", "*.min.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                            new TagHelperAttribute("asp-append-version", "true")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrcInclude = "*.css";
-                            tagHelper.FallbackSrcExclude = "*.min.css";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                            tagHelper.AppendVersion = true;
-                        }
+                        tagHelper.FallbackSrc = "test.js";
+                        tagHelper.FallbackTestExpression = "isavailable()";
                     }
-                };
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                        new TagHelperAttribute("asp-suppress-fallback-integrity", "false")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrc = "test.js";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                        tagHelper.SuppressFallbackIntegrity = false;
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src-include", "*.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrcInclude = "*.css";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        new TagHelperAttribute("asp-fallback-src-include", "*.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrc = "test.js";
+                        tagHelper.FallbackSrcInclude = "*.css";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        new TagHelperAttribute("asp-fallback-src-include", "*.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                        new TagHelperAttribute("asp-suppress-fallback-integrity", "false")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrc = "test.js";
+                        tagHelper.FallbackSrcInclude = "*.css";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                        tagHelper.SuppressFallbackIntegrity = false;
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src-include", "*.js"),
+                        new TagHelperAttribute("asp-fallback-src-exclude", "*.min.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrcInclude = "*.css";
+                        tagHelper.FallbackSrcExclude = "*.min.css";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                    }
+                },
+                // File Version
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                        new TagHelperAttribute("asp-append-version", "true")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrc = "test.js";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                        tagHelper.AppendVersion = true;
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src-include", "*.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                        new TagHelperAttribute("asp-append-version", "true")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrcInclude = "*.css";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                        tagHelper.AppendVersion = true;
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        new TagHelperAttribute("asp-fallback-src-include", "*.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                        new TagHelperAttribute("asp-append-version", "true")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrc = "test.js";
+                        tagHelper.FallbackSrcInclude = "*.css";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                        tagHelper.AppendVersion = true;
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src-include", "*.js"),
+                        new TagHelperAttribute("asp-fallback-src-exclude", "*.min.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                        new TagHelperAttribute("asp-append-version", "true")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrcInclude = "*.css";
+                        tagHelper.FallbackSrcExclude = "*.min.css";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                        tagHelper.AppendVersion = true;
+                    }
+                }
+            };
         }
     }
 
@@ -276,7 +283,8 @@ public class ScriptTagHelperTest
     [MemberData(nameof(RunsWhenRequiredAttributesArePresent_Data))]
     public void RunsWhenRequiredAttributesArePresent(
         TagHelperAttributeList attributes,
-        Action<ScriptTagHelper> setProperties)
+        Action<ScriptTagHelper> setProperties
+    )
     {
         // Arrange
         var context = MakeTagHelperContext(attributes);
@@ -284,8 +292,10 @@ public class ScriptTagHelperTest
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
             Mock.Of<IMemoryCache>(),
-            PathString.Empty);
-        globbingUrlBuilder.Setup(g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+            PathString.Empty
+        );
+        globbingUrlBuilder
+            .Setup(g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
             .Returns(new[] { "/common.js" });
 
         var helper = GetHelper();
@@ -306,56 +316,56 @@ public class ScriptTagHelperTest
         get
         {
             return new TheoryData<TagHelperAttributeList, Action<ScriptTagHelper>>
+            {
                 {
+                    new TagHelperAttributeList
                     {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-src-include", "*.js")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.SrcInclude = "*.js";
-                        }
+                        new TagHelperAttribute("asp-src-include", "*.js")
                     },
+                    tagHelper =>
                     {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-src-include", "*.js"),
-                            new TagHelperAttribute("asp-src-exclude", "*.min.js")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.SrcInclude = "*.js";
-                            tagHelper.SrcExclude = "*.min.js";
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-src-include", "*.js"),
-                            new TagHelperAttribute("asp-append-version", "true")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.SrcInclude = "*.js";
-                            tagHelper.AppendVersion = true;
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-src-include", "*.js"),
-                            new TagHelperAttribute("asp-src-exclude", "*.min.js"),
-                            new TagHelperAttribute("asp-append-version", "true")
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.SrcInclude = "*.js";
-                            tagHelper.SrcExclude = "*.min.js";
-                            tagHelper.AppendVersion = true;
-                        }
+                        tagHelper.SrcInclude = "*.js";
                     }
-                };
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-src-include", "*.js"),
+                        new TagHelperAttribute("asp-src-exclude", "*.min.js")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.SrcInclude = "*.js";
+                        tagHelper.SrcExclude = "*.min.js";
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-src-include", "*.js"),
+                        new TagHelperAttribute("asp-append-version", "true")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.SrcInclude = "*.js";
+                        tagHelper.AppendVersion = true;
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-src-include", "*.js"),
+                        new TagHelperAttribute("asp-src-exclude", "*.min.js"),
+                        new TagHelperAttribute("asp-append-version", "true")
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.SrcInclude = "*.js";
+                        tagHelper.SrcExclude = "*.min.js";
+                        tagHelper.AppendVersion = true;
+                    }
+                }
+            };
         }
     }
 
@@ -363,7 +373,8 @@ public class ScriptTagHelperTest
     [MemberData(nameof(RunsWhenRequiredAttributesArePresent_NoSrc_Data))]
     public void RunsWhenRequiredAttributesArePresent_NoSrc(
         TagHelperAttributeList attributes,
-        Action<ScriptTagHelper> setProperties)
+        Action<ScriptTagHelper> setProperties
+    )
     {
         // Arrange
         var context = MakeTagHelperContext(attributes);
@@ -371,8 +382,10 @@ public class ScriptTagHelperTest
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
             Mock.Of<IMemoryCache>(),
-            PathString.Empty);
-        globbingUrlBuilder.Setup(g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+            PathString.Empty
+        );
+        globbingUrlBuilder
+            .Setup(g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
             .Returns(new[] { "/common.js" });
 
         var helper = GetHelper();
@@ -394,62 +407,62 @@ public class ScriptTagHelperTest
         get
         {
             return new TheoryData<TagHelperAttributeList, Action<ScriptTagHelper>>
+            {
                 {
+                    new TagHelperAttributeList
                     {
-                        new TagHelperAttributeList
-                        {
-                            // This is commented out on purpose: new TagHelperAttribute("asp-src-include", "*.js"),
-                            // Note asp-src-include attribute isn't included.
-                            new TagHelperAttribute("asp-src-exclude", "*.min.js")
-                        },
-                        tagHelper =>
-                        {
-                            // This is commented out on purpose: tagHelper.SrcInclude = "*.js";
-                            tagHelper.SrcExclude = "*.min.js";
-                        }
+                        // This is commented out on purpose: new TagHelperAttribute("asp-src-include", "*.js"),
+                        // Note asp-src-include attribute isn't included.
+                        new TagHelperAttribute("asp-src-exclude", "*.min.js")
                     },
+                    tagHelper =>
                     {
-                        new TagHelperAttributeList
-                        {
-                            // This is commented out on purpose: new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            // Note asp-src-include attribute isn't included.
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                        },
-                        tagHelper =>
-                        {
-                            // This is commented out on purpose: tagHelper.FallbackSrc = "test.js";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            new TagHelperAttribute("asp-fallback-src", "test.js"),
-                            // This is commented out on purpose: new TagHelperAttribute("asp-fallback-test", "isavailable()")
-                            // Note asp-src-include attribute isn't included.
-                        },
-                        tagHelper =>
-                        {
-                            tagHelper.FallbackSrc = "test.js";
-                            // This is commented out on purpose: tagHelper.FallbackTestExpression = "isavailable()";
-                        }
-                    },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            // This is commented out on purpose: new TagHelperAttribute("asp-fallback-src-include", "test.js"),
-                            // Note asp-src-include attribute isn't included.
-                            new TagHelperAttribute("asp-fallback-src-exclude", "**/*.min.js"),
-                            new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                        },
-                        tagHelper =>
-                        {
-                            // This is commented out on purpose: tagHelper.FallbackSrcInclude = "test.js";
-                            tagHelper.FallbackSrcExclude = "**/*.min.js";
-                            tagHelper.FallbackTestExpression = "isavailable()";
-                        }
+                        // This is commented out on purpose: tagHelper.SrcInclude = "*.js";
+                        tagHelper.SrcExclude = "*.min.js";
                     }
-                };
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        // This is commented out on purpose: new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        // Note asp-src-include attribute isn't included.
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                    },
+                    tagHelper =>
+                    {
+                        // This is commented out on purpose: tagHelper.FallbackSrc = "test.js";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        new TagHelperAttribute("asp-fallback-src", "test.js"),
+                        // This is commented out on purpose: new TagHelperAttribute("asp-fallback-test", "isavailable()")
+                        // Note asp-src-include attribute isn't included.
+                    },
+                    tagHelper =>
+                    {
+                        tagHelper.FallbackSrc = "test.js";
+                        // This is commented out on purpose: tagHelper.FallbackTestExpression = "isavailable()";
+                    }
+                },
+                {
+                    new TagHelperAttributeList
+                    {
+                        // This is commented out on purpose: new TagHelperAttribute("asp-fallback-src-include", "test.js"),
+                        // Note asp-src-include attribute isn't included.
+                        new TagHelperAttribute("asp-fallback-src-exclude", "**/*.min.js"),
+                        new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                    },
+                    tagHelper =>
+                    {
+                        // This is commented out on purpose: tagHelper.FallbackSrcInclude = "test.js";
+                        tagHelper.FallbackSrcExclude = "**/*.min.js";
+                        tagHelper.FallbackTestExpression = "isavailable()";
+                    }
+                }
+            };
         }
     }
 
@@ -457,7 +470,8 @@ public class ScriptTagHelperTest
     [MemberData(nameof(DoesNotRunWhenARequiredAttributeIsMissing_Data))]
     public void DoesNotRunWhenARequiredAttributeIsMissing(
         TagHelperAttributeList attributes,
-        Action<ScriptTagHelper> setProperties)
+        Action<ScriptTagHelper> setProperties
+    )
     {
         // Arrange
         var tagHelperContext = MakeTagHelperContext(attributes);
@@ -504,19 +518,22 @@ public class ScriptTagHelperTest
         var tagHelperContext = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    new TagHelperAttribute("data-extra", "something"),
-                    new TagHelperAttribute("src", "/blank.js"),
-                    new TagHelperAttribute("data-more", "else"),
-                    new TagHelperAttribute("asp-fallback-src", "http://www.example.com/blank.js"),
-                    new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-            });
+                new TagHelperAttribute("data-extra", "something"),
+                new TagHelperAttribute("src", "/blank.js"),
+                new TagHelperAttribute("data-more", "else"),
+                new TagHelperAttribute("asp-fallback-src", "http://www.example.com/blank.js"),
+                new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+            }
+        );
 
-        var output = MakeTagHelperOutput("src",
+        var output = MakeTagHelperOutput(
+            "src",
             attributes: new TagHelperAttributeList
             {
-                    new TagHelperAttribute("data-extra", "something"),
-                    new TagHelperAttribute("data-more", "else"),
-            });
+                new TagHelperAttribute("data-extra", "something"),
+                new TagHelperAttribute("data-more", "else"),
+            }
+        );
 
         var helper = GetHelper();
         helper.FallbackSrc = "~/blank.js";
@@ -536,20 +553,24 @@ public class ScriptTagHelperTest
     public void RendersScriptTagsForGlobbedSrcResults()
     {
         // Arrange
-        var expectedContent = "<script src=\"HtmlEncode[[/js/site.js]]\"></script>" +
-            "<script src=\"HtmlEncode[[/common.js]]\"></script>";
+        var expectedContent =
+            "<script src=\"HtmlEncode[[/js/site.js]]\"></script>"
+            + "<script src=\"HtmlEncode[[/common.js]]\"></script>";
         var context = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    new TagHelperAttribute("src", "/js/site.js"),
-                    new TagHelperAttribute("asp-src-include", "**/*.js")
-            });
+                new TagHelperAttribute("src", "/js/site.js"),
+                new TagHelperAttribute("asp-src-include", "**/*.js")
+            }
+        );
         var output = MakeTagHelperOutput("script", attributes: new TagHelperAttributeList());
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
             Mock.Of<IMemoryCache>(),
-            PathString.Empty);
-        globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/*.js", null))
+            PathString.Empty
+        );
+        globbingUrlBuilder
+            .Setup(g => g.BuildUrlList(null, "**/*.js", null))
             .Returns(new[] { "/common.js" });
 
         var helper = GetHelper();
@@ -572,37 +593,53 @@ public class ScriptTagHelperTest
     {
         // Arrange
         var expectedContent =
-            "<script encoded='contains \"quotes\"' literal=\"HtmlEncode[[all HTML encoded]]\" " +
-            "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' " +
-            "src=\"HtmlEncode[[/js/site.js]]\"></script>" +
-            "<script encoded='contains \"quotes\"' literal=\"HtmlEncode[[all HTML encoded]]\" " +
-            "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' " +
-            "src=\"HtmlEncode[[/common.js]]\"></script>";
+            "<script encoded='contains \"quotes\"' literal=\"HtmlEncode[[all HTML encoded]]\" "
+            + "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' "
+            + "src=\"HtmlEncode[[/js/site.js]]\"></script>"
+            + "<script encoded='contains \"quotes\"' literal=\"HtmlEncode[[all HTML encoded]]\" "
+            + "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' "
+            + "src=\"HtmlEncode[[/common.js]]\"></script>";
         var mixed = new DefaultTagHelperContent();
         mixed.Append("HTML encoded");
         mixed.AppendHtml(" and contains \"quotes\"");
         var context = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    { "asp-src-include", "**/*.js" },
-                    { new TagHelperAttribute("encoded", new HtmlString("contains \"quotes\""), HtmlAttributeValueStyle.SingleQuotes) },
-                    { "literal", "all HTML encoded" },
-                    { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
-                    { "src", "/js/site.js" },
-            });
+                { "asp-src-include", "**/*.js" },
+                {
+                    new TagHelperAttribute(
+                        "encoded",
+                        new HtmlString("contains \"quotes\""),
+                        HtmlAttributeValueStyle.SingleQuotes
+                    )
+                },
+                { "literal", "all HTML encoded" },
+                { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
+                { "src", "/js/site.js" },
+            }
+        );
         var output = MakeTagHelperOutput(
             "script",
             attributes: new TagHelperAttributeList
             {
-                    { new TagHelperAttribute("encoded", new HtmlString("contains \"quotes\""), HtmlAttributeValueStyle.SingleQuotes) },
-                    { "literal", "all HTML encoded"},
-                    { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
-            });
+                {
+                    new TagHelperAttribute(
+                        "encoded",
+                        new HtmlString("contains \"quotes\""),
+                        HtmlAttributeValueStyle.SingleQuotes
+                    )
+                },
+                { "literal", "all HTML encoded" },
+                { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
+            }
+        );
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
             Mock.Of<IMemoryCache>(),
-            PathString.Empty);
-        globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/*.js", null))
+            PathString.Empty
+        );
+        globbingUrlBuilder
+            .Setup(g => g.BuildUrlList(null, "**/*.js", null))
             .Returns(new[] { "/common.js" });
 
         var helper = GetHelper();
@@ -627,9 +664,10 @@ public class ScriptTagHelperTest
         var context = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    new TagHelperAttribute("src", "/js/site.js"),
-                    new TagHelperAttribute("asp-append-version", "true")
-            });
+                new TagHelperAttribute("src", "/js/site.js"),
+                new TagHelperAttribute("asp-append-version", "true")
+            }
+        );
         var output = MakeTagHelperOutput("script", attributes: new TagHelperAttributeList());
 
         var helper = GetHelper();
@@ -641,7 +679,10 @@ public class ScriptTagHelperTest
 
         // Assert
         Assert.Equal("script", output.TagName);
-        Assert.Equal("/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["src"].Value);
+        Assert.Equal(
+            "/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+            output.Attributes["src"].Value
+        );
     }
 
     [Fact]
@@ -651,9 +692,10 @@ public class ScriptTagHelperTest
         var context = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    new TagHelperAttribute("src", "/bar/js/site.js"),
-                    new TagHelperAttribute("asp-append-version", "true")
-            });
+                new TagHelperAttribute("src", "/bar/js/site.js"),
+                new TagHelperAttribute("asp-append-version", "true")
+            }
+        );
         var output = MakeTagHelperOutput("script", attributes: new TagHelperAttributeList());
         var viewContext = MakeViewContext("/bar");
 
@@ -666,7 +708,10 @@ public class ScriptTagHelperTest
 
         // Assert
         Assert.Equal("script", output.TagName);
-        Assert.Equal("/bar/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["src"].Value);
+        Assert.Equal(
+            "/bar/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+            output.Attributes["src"].Value
+        );
     }
 
     [Fact]
@@ -676,11 +721,12 @@ public class ScriptTagHelperTest
         var context = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    new TagHelperAttribute("src", "/js/site.js"),
-                    new TagHelperAttribute("asp-fallback-src-include", "fallback.js"),
-                    new TagHelperAttribute("asp-fallback-test", "isavailable()"),
-                    new TagHelperAttribute("asp-append-version", "true")
-            });
+                new TagHelperAttribute("src", "/js/site.js"),
+                new TagHelperAttribute("asp-fallback-src-include", "fallback.js"),
+                new TagHelperAttribute("asp-fallback-test", "isavailable()"),
+                new TagHelperAttribute("asp-append-version", "true")
+            }
+        );
         var output = MakeTagHelperOutput("script", attributes: new TagHelperAttributeList());
 
         var helper = GetHelper();
@@ -694,10 +740,17 @@ public class ScriptTagHelperTest
 
         // Assert
         Assert.Equal("script", output.TagName);
-        Assert.Equal("/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["src"].Value);
-        Assert.Equal(Environment.NewLine + "<script>(isavailable()||document.write(\"JavaScriptEncode[[<script " +
-            "src=\"HtmlEncode[[fallback.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\">" +
-            "</script>]]\"));</script>", output.PostElement.GetContent());
+        Assert.Equal(
+            "/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+            output.Attributes["src"].Value
+        );
+        Assert.Equal(
+            Environment.NewLine
+                + "<script>(isavailable()||document.write(\"JavaScriptEncode[[<script "
+                + "src=\"HtmlEncode[[fallback.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\">"
+                + "</script>]]\"));</script>",
+            output.PostElement.GetContent()
+        );
     }
 
     [Fact]
@@ -705,36 +758,50 @@ public class ScriptTagHelperTest
     {
         // Arrange
         var expectedContent =
-            "<script encoded='contains \"quotes\"' literal=\"HtmlEncode[[all HTML encoded]]\" " +
-            "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' " +
-            "src=\"HtmlEncode[[/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\"></script>" +
-            Environment.NewLine +
-            "<script>(isavailable()||document.write(\"JavaScriptEncode[[<script encoded=\'contains \"quotes\"\' " +
-            "literal=\"HtmlEncode[[all HTML encoded]]\" mixed=\'HtmlEncode[[HTML encoded]] and contains " +
-            "\"quotes\"' src=\"HtmlEncode[[fallback.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\">" +
-            "</script>]]\"));</script>";
+            "<script encoded='contains \"quotes\"' literal=\"HtmlEncode[[all HTML encoded]]\" "
+            + "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' "
+            + "src=\"HtmlEncode[[/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\"></script>"
+            + Environment.NewLine
+            + "<script>(isavailable()||document.write(\"JavaScriptEncode[[<script encoded=\'contains \"quotes\"\' "
+            + "literal=\"HtmlEncode[[all HTML encoded]]\" mixed=\'HtmlEncode[[HTML encoded]] and contains "
+            + "\"quotes\"' src=\"HtmlEncode[[fallback.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\">"
+            + "</script>]]\"));</script>";
         var mixed = new DefaultTagHelperContent();
         mixed.Append("HTML encoded");
         mixed.AppendHtml(" and contains \"quotes\"");
         var context = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    { "asp-append-version", "true" },
-                    { "asp-fallback-src-include", "fallback.js" },
-                    { "asp-fallback-test", "isavailable()" },
-                    { new TagHelperAttribute("encoded", new HtmlString("contains \"quotes\""), HtmlAttributeValueStyle.SingleQuotes) },
-                    { "literal", "all HTML encoded" },
-                    { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
-                    { "src", "/js/site.js" },
-            });
+                { "asp-append-version", "true" },
+                { "asp-fallback-src-include", "fallback.js" },
+                { "asp-fallback-test", "isavailable()" },
+                {
+                    new TagHelperAttribute(
+                        "encoded",
+                        new HtmlString("contains \"quotes\""),
+                        HtmlAttributeValueStyle.SingleQuotes
+                    )
+                },
+                { "literal", "all HTML encoded" },
+                { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
+                { "src", "/js/site.js" },
+            }
+        );
         var output = MakeTagHelperOutput(
             "script",
             attributes: new TagHelperAttributeList
             {
-                    { new TagHelperAttribute("encoded", new HtmlString("contains \"quotes\""), HtmlAttributeValueStyle.SingleQuotes) },
-                    { "literal", "all HTML encoded" },
-                    { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
-            });
+                {
+                    new TagHelperAttribute(
+                        "encoded",
+                        new HtmlString("contains \"quotes\""),
+                        HtmlAttributeValueStyle.SingleQuotes
+                    )
+                },
+                { "literal", "all HTML encoded" },
+                { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
+            }
+        );
 
         var helper = GetHelper();
         helper.AppendVersion = true;
@@ -747,7 +814,10 @@ public class ScriptTagHelperTest
 
         // Assert
         Assert.Equal("script", output.TagName);
-        Assert.Equal("/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["src"].Value);
+        Assert.Equal(
+            "/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+            output.Attributes["src"].Value
+        );
         var content = HtmlContentUtilities.HtmlContentToString(output, new HtmlTestEncoder());
         Assert.Equal(expectedContent, content);
     }
@@ -756,22 +826,26 @@ public class ScriptTagHelperTest
     public void RenderScriptTags_GlobbedSrc_WithFileVersion()
     {
         // Arrange
-        var expectedContent = "<script " +
-            "src=\"HtmlEncode[[/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\"></script>" +
-            "<script src=\"HtmlEncode[[/common.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\"></script>";
+        var expectedContent =
+            "<script "
+            + "src=\"HtmlEncode[[/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\"></script>"
+            + "<script src=\"HtmlEncode[[/common.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\"></script>";
         var context = MakeTagHelperContext(
             attributes: new TagHelperAttributeList
             {
-                    new TagHelperAttribute("src", "/js/site.js"),
-                    new TagHelperAttribute("asp-src-include", "*.js"),
-                    new TagHelperAttribute("asp-append-version", "true")
-            });
+                new TagHelperAttribute("src", "/js/site.js"),
+                new TagHelperAttribute("asp-src-include", "*.js"),
+                new TagHelperAttribute("asp-append-version", "true")
+            }
+        );
         var output = MakeTagHelperOutput("script", attributes: new TagHelperAttributeList());
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
             Mock.Of<IMemoryCache>(),
-            PathString.Empty);
-        globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "*.js", null))
+            PathString.Empty
+        );
+        globbingUrlBuilder
+            .Setup(g => g.BuildUrlList(null, "*.js", null))
             .Returns(new[] { "/common.js" });
 
         var helper = GetHelper();
@@ -785,7 +859,10 @@ public class ScriptTagHelperTest
 
         // Assert
         Assert.Equal("script", output.TagName);
-        Assert.Equal("/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["src"].Value);
+        Assert.Equal(
+            "/js/site.js?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+            output.Attributes["src"].Value
+        );
         var content = HtmlContentUtilities.HtmlContentToString(output, new HtmlTestEncoder());
         Assert.Equal(expectedContent, content);
     }
@@ -793,14 +870,18 @@ public class ScriptTagHelperTest
     private static ScriptTagHelper GetHelper(
         IWebHostEnvironment hostingEnvironment = null,
         IUrlHelperFactory urlHelperFactory = null,
-        ViewContext viewContext = null)
+        ViewContext viewContext = null
+    )
     {
         hostingEnvironment = hostingEnvironment ?? MakeHostingEnvironment();
         urlHelperFactory = urlHelperFactory ?? MakeUrlHelperFactory();
         viewContext = viewContext ?? MakeViewContext();
 
         var memoryCacheProvider = new TagHelperMemoryCacheProvider();
-        var fileVersionProvider = new DefaultFileVersionProvider(hostingEnvironment, memoryCacheProvider);
+        var fileVersionProvider = new DefaultFileVersionProvider(
+            hostingEnvironment,
+            memoryCacheProvider
+        );
 
         return new ScriptTagHelper(
             hostingEnvironment,
@@ -808,7 +889,8 @@ public class ScriptTagHelperTest
             fileVersionProvider,
             new HtmlTestEncoder(),
             new JavaScriptTestEncoder(),
-            urlHelperFactory)
+            urlHelperFactory
+        )
         {
             ViewContext = viewContext,
         };
@@ -816,7 +898,8 @@ public class ScriptTagHelperTest
 
     private TagHelperContext MakeTagHelperContext(
         TagHelperAttributeList attributes = null,
-        string content = null)
+        string content = null
+    )
     {
         attributes = attributes ?? new TagHelperAttributeList();
 
@@ -824,12 +907,17 @@ public class ScriptTagHelperTest
             tagName: "script",
             allAttributes: attributes,
             items: new Dictionary<object, object>(),
-            uniqueId: Guid.NewGuid().ToString("N"));
+            uniqueId: Guid.NewGuid().ToString("N")
+        );
     }
 
     private static ViewContext MakeViewContext(string requestPathBase = null)
     {
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            new DefaultHttpContext(),
+            new RouteData(),
+            new ActionDescriptor()
+        );
         if (requestPathBase != null)
         {
             actionContext.HttpContext.Request.PathBase = new Http.PathString(requestPathBase);
@@ -843,26 +931,32 @@ public class ScriptTagHelperTest
             viewData,
             Mock.Of<ITempDataDictionary>(),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
 
         return viewContext;
     }
 
-    private TagHelperOutput MakeTagHelperOutput(string tagName, TagHelperAttributeList attributes = null)
+    private TagHelperOutput MakeTagHelperOutput(
+        string tagName,
+        TagHelperAttributeList attributes = null
+    )
     {
         attributes = attributes ?? new TagHelperAttributeList();
 
         return new TagHelperOutput(
             tagName,
             attributes,
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
     }
 
     private static IWebHostEnvironment MakeHostingEnvironment()
     {
         var emptyDirectoryContents = new Mock<IDirectoryContents>();
-        emptyDirectoryContents.Setup(dc => dc.GetEnumerator())
+        emptyDirectoryContents
+            .Setup(dc => dc.GetEnumerator())
             .Returns(Enumerable.Empty<IFileInfo>().GetEnumerator());
         var mockFile = new Mock<IFileInfo>();
         mockFile.SetupGet(f => f.Exists).Returns(true);
@@ -870,11 +964,12 @@ public class ScriptTagHelperTest
             .Setup(m => m.CreateReadStream())
             .Returns(() => new MemoryStream(Encoding.UTF8.GetBytes("Hello World!")));
         var mockFileProvider = new Mock<IFileProvider>();
-        mockFileProvider.Setup(fp => fp.GetDirectoryContents(It.IsAny<string>()))
+        mockFileProvider
+            .Setup(fp => fp.GetDirectoryContents(It.IsAny<string>()))
             .Returns(emptyDirectoryContents.Object);
-        mockFileProvider.Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
-            .Returns(mockFile.Object);
-        mockFileProvider.Setup(fp => fp.Watch(It.IsAny<string>()))
+        mockFileProvider.Setup(fp => fp.GetFileInfo(It.IsAny<string>())).Returns(mockFile.Object);
+        mockFileProvider
+            .Setup(fp => fp.Watch(It.IsAny<string>()))
             .Returns(new TestFileChangeToken());
         var hostingEnvironment = new Mock<IWebHostEnvironment>();
         hostingEnvironment.Setup(h => h.WebRootFileProvider).Returns(mockFileProvider.Object);

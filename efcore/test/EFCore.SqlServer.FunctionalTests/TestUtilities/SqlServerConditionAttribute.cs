@@ -45,9 +45,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             if (Conditions.HasFlag(SqlServerCondition.SupportsAttach))
             {
-                var defaultConnection = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection);
-                isMet &= defaultConnection.DataSource.Contains("(localdb)", StringComparison.OrdinalIgnoreCase)
-                    || defaultConnection.UserInstance;
+                var defaultConnection = new SqlConnectionStringBuilder(
+                    TestEnvironment.DefaultConnection
+                );
+                isMet &=
+                    defaultConnection.DataSource.Contains(
+                        "(localdb)",
+                        StringComparison.OrdinalIgnoreCase
+                    ) || defaultConnection.UserInstance;
             }
 
             if (Conditions.HasFlag(SqlServerCondition.IsNotCI))
@@ -73,15 +78,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             return new ValueTask<bool>(isMet);
         }
 
-        public string SkipReason
-            =>
-                // ReSharper disable once UseStringInterpolation
-                string.Format(
-                    "The test SQL Server does not meet these conditions: '{0}'",
-                    string.Join(
-                        ", ", Enum.GetValues(typeof(SqlServerCondition))
-                            .Cast<Enum>()
-                            .Where(f => Conditions.HasFlag(f))
-                            .Select(f => Enum.GetName(typeof(SqlServerCondition), f))));
+        public string SkipReason =>
+            // ReSharper disable once UseStringInterpolation
+            string.Format(
+                "The test SQL Server does not meet these conditions: '{0}'",
+                string.Join(
+                    ", ",
+                    Enum.GetValues(typeof(SqlServerCondition))
+                        .Cast<Enum>()
+                        .Where(f => Conditions.HasFlag(f))
+                        .Select(f => Enum.GetName(typeof(SqlServerCondition), f))
+                )
+            );
     }
 }

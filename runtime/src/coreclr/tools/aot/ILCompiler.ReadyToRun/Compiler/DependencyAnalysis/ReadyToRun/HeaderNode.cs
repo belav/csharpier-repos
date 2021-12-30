@@ -15,7 +15,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public abstract class HeaderTableNode : ObjectNode, ISymbolDefinitionNode
     {
         public TargetDetails Target { get; private set; }
-        
+
         public HeaderTableNode(TargetDetails target)
         {
             Target = target;
@@ -27,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool IsShareable => false;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -47,7 +48,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         struct HeaderItem
         {
-            public HeaderItem(ReadyToRunSectionType id, DependencyNodeCore<NodeFactory> node, ISymbolNode startSymbol)
+            public HeaderItem(
+                ReadyToRunSectionType id,
+                DependencyNodeCore<NodeFactory> node,
+                ISymbolNode startSymbol
+            )
             {
                 Id = id;
                 Node = node;
@@ -69,7 +74,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _flags = flags;
         }
 
-        public void Add(ReadyToRunSectionType id, DependencyNodeCore<NodeFactory> node, ISymbolNode startSymbol)
+        public void Add(
+            ReadyToRunSectionType id,
+            DependencyNodeCore<NodeFactory> node,
+            ISymbolNode startSymbol
+        )
         {
             _items.Add(new HeaderItem(id, node, startSymbol));
         }
@@ -77,11 +86,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public int Offset => 0;
         public override bool IsShareable => false;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
-        protected abstract void AppendMangledHeaderName(NameMangler nameMangler, Utf8StringBuilder sb);
+        protected abstract void AppendMangledHeaderName(
+            NameMangler nameMangler,
+            Utf8StringBuilder sb
+        );
 
-        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb) => AppendMangledHeaderName(nameMangler, sb);
+        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb) =>
+            AppendMangledHeaderName(nameMangler, sb);
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -118,7 +132,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             foreach (var item in _items)
             {
                 // Skip empty entries
-                if (!relocsOnly && item.Node is ObjectNode on && on.ShouldSkipEmittingObjectNode(factory))
+                if (
+                    !relocsOnly
+                    && item.Node is ObjectNode on
+                    && on.ShouldSkipEmittingObjectNode(factory)
+                )
                     continue;
 
                 // Unmarked nodes are not part of the graph
@@ -134,7 +152,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 // The header entry for the runtime functions table should not include the 4 byte 0xffffffff sentinel
                 // value in the covered range.
-                int delta = item.Id == ReadyToRunSectionType.RuntimeFunctions ? RuntimeFunctionsTableNode.SentinelSizeAdjustment : 0;
+                int delta =
+                    item.Id == ReadyToRunSectionType.RuntimeFunctions
+                        ? RuntimeFunctionsTableNode.SentinelSizeAdjustment
+                        : 0;
                 builder.EmitReloc(item.StartSymbol, RelocType.IMAGE_REL_SYMBOL_SIZE, delta);
 
                 count++;
@@ -152,12 +173,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
     public class GlobalHeaderNode : HeaderNode
     {
-        public GlobalHeaderNode(TargetDetails target, ReadyToRunFlags flags)
-            : base(target, flags)
-        {
-        }
+        public GlobalHeaderNode(TargetDetails target, ReadyToRunFlags flags) : base(target, flags)
+        { }
 
-        protected override void AppendMangledHeaderName(NameMangler nameMangler, Utf8StringBuilder sb)
+        protected override void AppendMangledHeaderName(
+            NameMangler nameMangler,
+            Utf8StringBuilder sb
+        )
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunHeader");
@@ -186,16 +208,17 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _index = index;
         }
 
-        protected override void EmitHeaderPrefix(ref ObjectDataBuilder builder)
-        {
-        }
+        protected override void EmitHeaderPrefix(ref ObjectDataBuilder builder) { }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             return _index - ((AssemblyHeaderNode)other)._index;
         }
 
-        protected override void AppendMangledHeaderName(NameMangler nameMangler, Utf8StringBuilder sb)
+        protected override void AppendMangledHeaderName(
+            NameMangler nameMangler,
+            Utf8StringBuilder sb
+        )
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunAssemblyHeader__");

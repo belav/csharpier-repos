@@ -4,6 +4,9 @@
     {
         public string Model { get; set; }
 
-        public void ActionMethod([Bind(Prefix = "model")] IsProblematicParameter_ReturnsTrue_IfParameterNameWithBinderAttributeIsTheSameNameAsModelProperty different) { }
+        public void ActionMethod(
+            [Bind(Prefix = "model")]
+                IsProblematicParameter_ReturnsTrue_IfParameterNameWithBinderAttributeIsTheSameNameAsModelProperty different
+        ) { }
     }
 }

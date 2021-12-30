@@ -38,12 +38,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IAsynchronousOperationListenerProvider listenerProvider,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             ILspLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(xamlDispatcherFactory, globalOptions, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, lspLoggerFactory, threadingContext, diagnosticsClientName: null)
-        {
-        }
+            IThreadingContext threadingContext
+        )
+            : base(
+                xamlDispatcherFactory,
+                globalOptions,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                lspLoggerFactory,
+                threadingContext,
+                diagnosticsClientName: null
+            ) { }
 
-        protected override ImmutableArray<string> SupportedLanguages => ImmutableArray.Create(StringConstants.XamlLanguageName);
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ImmutableArray.Create(StringConstants.XamlLanguageName);
 
         /// <summary>
         /// Gets the name of the language client (displayed in yellow bars).
@@ -63,7 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         /// </summary>
         public override bool ShowNotificationOnInitializeFailed => IsXamlLspIntelliSenseEnabled();
 
-        private bool IsXamlLspIntelliSenseEnabled()
-            => GlobalOptions.GetOption(XamlOptions.EnableLspIntelliSenseFeatureFlag);
+        private bool IsXamlLspIntelliSenseEnabled() =>
+            GlobalOptions.GetOption(XamlOptions.EnableLspIntelliSenseFeatureFlag);
     }
 }

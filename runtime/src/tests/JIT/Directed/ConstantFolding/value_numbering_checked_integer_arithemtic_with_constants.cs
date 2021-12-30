@@ -11,7 +11,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
     public static int Main()
     {
-        RuntimeHelpers.RunClassConstructor(typeof(ValueNumberingCheckedIntegerArithemticWithConstants).TypeHandle);
+        RuntimeHelpers.RunClassConstructor(
+            typeof(ValueNumberingCheckedIntegerArithemticWithConstants).TypeHandle
+        );
         TestInt32();
         TestUInt32();
         TestInt64();
@@ -42,13 +44,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value + zero) != value)
             {
-                Console.WriteLine($"Addition identity for int 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for int 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(zero + value) != value)
             {
-                Console.WriteLine($"Addition identity for int 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for int 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -63,13 +69,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value - zero) != value)
             {
-                Console.WriteLine($"Subtraction identity for int 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for int 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(value - value) != 0)
             {
-                Console.WriteLine($"Subtraction identity for int 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for int 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
         }
@@ -85,25 +95,33 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value * zero) != 0)
             {
-                Console.WriteLine($"Multiplication identity for int 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for int 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(zero * value) != 0)
             {
-                Console.WriteLine($"Multiplication identity for int 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for int 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(value * one) != value)
             {
-                Console.WriteLine($"Multiplication identity for int 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for int 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(one * value) != value)
             {
-                Console.WriteLine($"Multiplication identity for int 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for int 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -118,7 +136,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min + min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min + min)' did not throw OverflowException.");
         }
@@ -134,7 +155,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min + minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min + minusHalf)' did not throw OverflowException.");
         }
@@ -150,7 +174,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min + minusOne);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min + minusOne)' did not throw OverflowException.");
         }
@@ -166,7 +193,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + zero) != int.MinValue + 0)
             {
-                Console.WriteLine($"'checked(min + zero)' was evaluted to '{checked(min + zero)}'. Expected: '{int.MinValue + 0}'.");
+                Console.WriteLine(
+                    $"'checked(min + zero)' was evaluted to '{checked(min + zero)}'. Expected: '{int.MinValue + 0}'."
+                );
                 _counter++;
             }
         }
@@ -182,7 +211,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + one) != int.MinValue + 1)
             {
-                Console.WriteLine($"'checked(min + one)' was evaluted to '{checked(min + one)}'. Expected: '{int.MinValue + 1}'.");
+                Console.WriteLine(
+                    $"'checked(min + one)' was evaluted to '{checked(min + one)}'. Expected: '{int.MinValue + 1}'."
+                );
                 _counter++;
             }
         }
@@ -198,7 +229,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + half) != int.MinValue + int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(min + half)' was evaluted to '{checked(min + half)}'. Expected: '{int.MinValue + int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(min + half)' was evaluted to '{checked(min + half)}'. Expected: '{int.MinValue + int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -214,7 +247,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + max) != int.MinValue + int.MaxValue)
             {
-                Console.WriteLine($"'checked(min + max)' was evaluted to '{checked(min + max)}'. Expected: '{int.MinValue + int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(min + max)' was evaluted to '{checked(min + max)}'. Expected: '{int.MinValue + int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -230,7 +265,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf + min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf + min)' did not throw OverflowException.");
         }
@@ -245,7 +283,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + minusHalf) != int.MinValue / 2 + int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf + minusHalf)' was evaluted to '{checked(minusHalf + minusHalf)}'. Expected: '{int.MinValue / 2 + int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + minusHalf)' was evaluted to '{checked(minusHalf + minusHalf)}'. Expected: '{int.MinValue / 2 + int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -261,7 +301,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + minusOne) != int.MinValue / 2 + -1)
             {
-                Console.WriteLine($"'checked(minusHalf + minusOne)' was evaluted to '{checked(minusHalf + minusOne)}'. Expected: '{int.MinValue / 2 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + minusOne)' was evaluted to '{checked(minusHalf + minusOne)}'. Expected: '{int.MinValue / 2 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -277,7 +319,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + zero) != int.MinValue / 2 + 0)
             {
-                Console.WriteLine($"'checked(minusHalf + zero)' was evaluted to '{checked(minusHalf + zero)}'. Expected: '{int.MinValue / 2 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + zero)' was evaluted to '{checked(minusHalf + zero)}'. Expected: '{int.MinValue / 2 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -293,7 +337,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + one) != int.MinValue / 2 + 1)
             {
-                Console.WriteLine($"'checked(minusHalf + one)' was evaluted to '{checked(minusHalf + one)}'. Expected: '{int.MinValue / 2 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + one)' was evaluted to '{checked(minusHalf + one)}'. Expected: '{int.MinValue / 2 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -309,7 +355,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + half) != int.MinValue / 2 + int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf + half)' was evaluted to '{checked(minusHalf + half)}'. Expected: '{int.MinValue / 2 + int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + half)' was evaluted to '{checked(minusHalf + half)}'. Expected: '{int.MinValue / 2 + int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -325,7 +373,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + max) != int.MinValue / 2 + int.MaxValue)
             {
-                Console.WriteLine($"'checked(minusHalf + max)' was evaluted to '{checked(minusHalf + max)}'. Expected: '{int.MinValue / 2 + int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + max)' was evaluted to '{checked(minusHalf + max)}'. Expected: '{int.MinValue / 2 + int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -341,7 +391,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusOne + min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusOne + min)' did not throw OverflowException.");
         }
@@ -357,7 +410,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + minusHalf) != -1 + int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne + minusHalf)' was evaluted to '{checked(minusOne + minusHalf)}'. Expected: '{-1 + int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + minusHalf)' was evaluted to '{checked(minusOne + minusHalf)}'. Expected: '{-1 + int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -372,7 +427,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + minusOne) != -1 + -1)
             {
-                Console.WriteLine($"'checked(minusOne + minusOne)' was evaluted to '{checked(minusOne + minusOne)}'. Expected: '{-1 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + minusOne)' was evaluted to '{checked(minusOne + minusOne)}'. Expected: '{-1 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -388,7 +445,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + zero) != -1 + 0)
             {
-                Console.WriteLine($"'checked(minusOne + zero)' was evaluted to '{checked(minusOne + zero)}'. Expected: '{-1 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + zero)' was evaluted to '{checked(minusOne + zero)}'. Expected: '{-1 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -404,7 +463,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + one) != -1 + 1)
             {
-                Console.WriteLine($"'checked(minusOne + one)' was evaluted to '{checked(minusOne + one)}'. Expected: '{-1 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + one)' was evaluted to '{checked(minusOne + one)}'. Expected: '{-1 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -420,7 +481,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + half) != -1 + int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne + half)' was evaluted to '{checked(minusOne + half)}'. Expected: '{-1 + int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + half)' was evaluted to '{checked(minusOne + half)}'. Expected: '{-1 + int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -436,7 +499,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + max) != -1 + int.MaxValue)
             {
-                Console.WriteLine($"'checked(minusOne + max)' was evaluted to '{checked(minusOne + max)}'. Expected: '{-1 + int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + max)' was evaluted to '{checked(minusOne + max)}'. Expected: '{-1 + int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -452,7 +517,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + min) != 0 + int.MinValue)
             {
-                Console.WriteLine($"'checked(zero + min)' was evaluted to '{checked(zero + min)}'. Expected: '{0 + int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero + min)' was evaluted to '{checked(zero + min)}'. Expected: '{0 + int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -468,7 +535,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + minusHalf) != 0 + int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(zero + minusHalf)' was evaluted to '{checked(zero + minusHalf)}'. Expected: '{0 + int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero + minusHalf)' was evaluted to '{checked(zero + minusHalf)}'. Expected: '{0 + int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -484,7 +553,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + minusOne) != 0 + -1)
             {
-                Console.WriteLine($"'checked(zero + minusOne)' was evaluted to '{checked(zero + minusOne)}'. Expected: '{0 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(zero + minusOne)' was evaluted to '{checked(zero + minusOne)}'. Expected: '{0 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -499,7 +570,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + zero) != 0 + 0)
             {
-                Console.WriteLine($"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -515,7 +588,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + one) != 0 + 1)
             {
-                Console.WriteLine($"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -531,7 +606,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + half) != 0 + int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -547,7 +624,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + max) != 0 + int.MaxValue)
             {
-                Console.WriteLine($"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -563,7 +642,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + min) != 1 + int.MinValue)
             {
-                Console.WriteLine($"'checked(one + min)' was evaluted to '{checked(one + min)}'. Expected: '{1 + int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(one + min)' was evaluted to '{checked(one + min)}'. Expected: '{1 + int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -579,7 +660,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + minusHalf) != 1 + int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(one + minusHalf)' was evaluted to '{checked(one + minusHalf)}'. Expected: '{1 + int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one + minusHalf)' was evaluted to '{checked(one + minusHalf)}'. Expected: '{1 + int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -595,7 +678,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + minusOne) != 1 + -1)
             {
-                Console.WriteLine($"'checked(one + minusOne)' was evaluted to '{checked(one + minusOne)}'. Expected: '{1 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(one + minusOne)' was evaluted to '{checked(one + minusOne)}'. Expected: '{1 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -611,7 +696,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + zero) != 1 + 0)
             {
-                Console.WriteLine($"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -626,7 +713,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + one) != 1 + 1)
             {
-                Console.WriteLine($"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -642,7 +731,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + half) != 1 + int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -658,7 +749,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one + max)' did not throw OverflowException.");
         }
@@ -674,7 +768,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + min) != int.MaxValue / 2 + int.MinValue)
             {
-                Console.WriteLine($"'checked(half + min)' was evaluted to '{checked(half + min)}'. Expected: '{int.MaxValue / 2 + int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(half + min)' was evaluted to '{checked(half + min)}'. Expected: '{int.MaxValue / 2 + int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -690,7 +786,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + minusHalf) != int.MaxValue / 2 + int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(half + minusHalf)' was evaluted to '{checked(half + minusHalf)}'. Expected: '{int.MaxValue / 2 + int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half + minusHalf)' was evaluted to '{checked(half + minusHalf)}'. Expected: '{int.MaxValue / 2 + int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -706,7 +804,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + minusOne) != int.MaxValue / 2 + -1)
             {
-                Console.WriteLine($"'checked(half + minusOne)' was evaluted to '{checked(half + minusOne)}'. Expected: '{int.MaxValue / 2 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(half + minusOne)' was evaluted to '{checked(half + minusOne)}'. Expected: '{int.MaxValue / 2 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -722,7 +822,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + zero) != int.MaxValue / 2 + 0)
             {
-                Console.WriteLine($"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{int.MaxValue / 2 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{int.MaxValue / 2 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -738,7 +840,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + one) != int.MaxValue / 2 + 1)
             {
-                Console.WriteLine($"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{int.MaxValue / 2 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{int.MaxValue / 2 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -753,7 +857,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + half) != int.MaxValue / 2 + int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{int.MaxValue / 2 + int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{int.MaxValue / 2 + int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -769,7 +875,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half + max)' did not throw OverflowException.");
         }
@@ -785,7 +894,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + min) != int.MaxValue + int.MinValue)
             {
-                Console.WriteLine($"'checked(max + min)' was evaluted to '{checked(max + min)}'. Expected: '{int.MaxValue + int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(max + min)' was evaluted to '{checked(max + min)}'. Expected: '{int.MaxValue + int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -801,7 +912,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + minusHalf) != int.MaxValue + int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(max + minusHalf)' was evaluted to '{checked(max + minusHalf)}'. Expected: '{int.MaxValue + int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(max + minusHalf)' was evaluted to '{checked(max + minusHalf)}'. Expected: '{int.MaxValue + int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -817,7 +930,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + minusOne) != int.MaxValue + -1)
             {
-                Console.WriteLine($"'checked(max + minusOne)' was evaluted to '{checked(max + minusOne)}'. Expected: '{int.MaxValue + -1}'.");
+                Console.WriteLine(
+                    $"'checked(max + minusOne)' was evaluted to '{checked(max + minusOne)}'. Expected: '{int.MaxValue + -1}'."
+                );
                 _counter++;
             }
         }
@@ -833,7 +948,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + zero) != int.MaxValue + 0)
             {
-                Console.WriteLine($"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{int.MaxValue + 0}'.");
+                Console.WriteLine(
+                    $"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{int.MaxValue + 0}'."
+                );
                 _counter++;
             }
         }
@@ -849,7 +966,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + one)' did not throw OverflowException.");
         }
@@ -865,7 +985,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + half)' did not throw OverflowException.");
         }
@@ -880,7 +1003,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + max)' did not throw OverflowException.");
         }
@@ -896,7 +1022,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - min) != int.MinValue - int.MinValue)
             {
-                Console.WriteLine($"'checked(min - min)' was evaluted to '{checked(min - min)}'. Expected: '{int.MinValue - int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(min - min)' was evaluted to '{checked(min - min)}'. Expected: '{int.MinValue - int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -912,7 +1040,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - minusHalf) != int.MinValue - int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(min - minusHalf)' was evaluted to '{checked(min - minusHalf)}'. Expected: '{int.MinValue - int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(min - minusHalf)' was evaluted to '{checked(min - minusHalf)}'. Expected: '{int.MinValue - int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -928,7 +1058,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - minusOne) != int.MinValue - -1)
             {
-                Console.WriteLine($"'checked(min - minusOne)' was evaluted to '{checked(min - minusOne)}'. Expected: '{int.MinValue - -1}'.");
+                Console.WriteLine(
+                    $"'checked(min - minusOne)' was evaluted to '{checked(min - minusOne)}'. Expected: '{int.MinValue - -1}'."
+                );
                 _counter++;
             }
         }
@@ -944,7 +1076,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - zero) != int.MinValue - 0)
             {
-                Console.WriteLine($"'checked(min - zero)' was evaluted to '{checked(min - zero)}'. Expected: '{int.MinValue - 0}'.");
+                Console.WriteLine(
+                    $"'checked(min - zero)' was evaluted to '{checked(min - zero)}'. Expected: '{int.MinValue - 0}'."
+                );
                 _counter++;
             }
         }
@@ -960,7 +1094,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min - one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min - one)' did not throw OverflowException.");
         }
@@ -976,7 +1113,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min - half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min - half)' did not throw OverflowException.");
         }
@@ -992,7 +1132,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min - max)' did not throw OverflowException.");
         }
@@ -1008,7 +1151,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - min) != int.MinValue / 2 - int.MinValue)
             {
-                Console.WriteLine($"'checked(minusHalf - min)' was evaluted to '{checked(minusHalf - min)}'. Expected: '{int.MinValue / 2 - int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - min)' was evaluted to '{checked(minusHalf - min)}'. Expected: '{int.MinValue / 2 - int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -1023,7 +1168,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - minusHalf) != int.MinValue / 2 - int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf - minusHalf)' was evaluted to '{checked(minusHalf - minusHalf)}'. Expected: '{int.MinValue / 2 - int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - minusHalf)' was evaluted to '{checked(minusHalf - minusHalf)}'. Expected: '{int.MinValue / 2 - int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1039,7 +1186,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - minusOne) != int.MinValue / 2 - -1)
             {
-                Console.WriteLine($"'checked(minusHalf - minusOne)' was evaluted to '{checked(minusHalf - minusOne)}'. Expected: '{int.MinValue / 2 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - minusOne)' was evaluted to '{checked(minusHalf - minusOne)}'. Expected: '{int.MinValue / 2 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -1055,7 +1204,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - zero) != int.MinValue / 2 - 0)
             {
-                Console.WriteLine($"'checked(minusHalf - zero)' was evaluted to '{checked(minusHalf - zero)}'. Expected: '{int.MinValue / 2 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - zero)' was evaluted to '{checked(minusHalf - zero)}'. Expected: '{int.MinValue / 2 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -1071,7 +1222,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - one) != int.MinValue / 2 - 1)
             {
-                Console.WriteLine($"'checked(minusHalf - one)' was evaluted to '{checked(minusHalf - one)}'. Expected: '{int.MinValue / 2 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - one)' was evaluted to '{checked(minusHalf - one)}'. Expected: '{int.MinValue / 2 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -1087,7 +1240,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - half) != int.MinValue / 2 - int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf - half)' was evaluted to '{checked(minusHalf - half)}'. Expected: '{int.MinValue / 2 - int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - half)' was evaluted to '{checked(minusHalf - half)}'. Expected: '{int.MinValue / 2 - int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1103,7 +1258,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf - max)' did not throw OverflowException.");
         }
@@ -1119,7 +1277,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - min) != -1 - int.MinValue)
             {
-                Console.WriteLine($"'checked(minusOne - min)' was evaluted to '{checked(minusOne - min)}'. Expected: '{-1 - int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - min)' was evaluted to '{checked(minusOne - min)}'. Expected: '{-1 - int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -1135,7 +1295,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - minusHalf) != -1 - int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne - minusHalf)' was evaluted to '{checked(minusOne - minusHalf)}'. Expected: '{-1 - int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - minusHalf)' was evaluted to '{checked(minusOne - minusHalf)}'. Expected: '{-1 - int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1150,7 +1312,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - minusOne) != -1 - -1)
             {
-                Console.WriteLine($"'checked(minusOne - minusOne)' was evaluted to '{checked(minusOne - minusOne)}'. Expected: '{-1 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - minusOne)' was evaluted to '{checked(minusOne - minusOne)}'. Expected: '{-1 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -1166,7 +1330,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - zero) != -1 - 0)
             {
-                Console.WriteLine($"'checked(minusOne - zero)' was evaluted to '{checked(minusOne - zero)}'. Expected: '{-1 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - zero)' was evaluted to '{checked(minusOne - zero)}'. Expected: '{-1 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -1182,7 +1348,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - one) != -1 - 1)
             {
-                Console.WriteLine($"'checked(minusOne - one)' was evaluted to '{checked(minusOne - one)}'. Expected: '{-1 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - one)' was evaluted to '{checked(minusOne - one)}'. Expected: '{-1 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -1198,7 +1366,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - half) != -1 - int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne - half)' was evaluted to '{checked(minusOne - half)}'. Expected: '{-1 - int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - half)' was evaluted to '{checked(minusOne - half)}'. Expected: '{-1 - int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1214,7 +1384,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - max) != -1 - int.MaxValue)
             {
-                Console.WriteLine($"'checked(minusOne - max)' was evaluted to '{checked(minusOne - max)}'. Expected: '{-1 - int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - max)' was evaluted to '{checked(minusOne - max)}'. Expected: '{-1 - int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -1230,7 +1402,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - min)' did not throw OverflowException.");
         }
@@ -1246,7 +1421,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - minusHalf) != 0 - int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(zero - minusHalf)' was evaluted to '{checked(zero - minusHalf)}'. Expected: '{0 - int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero - minusHalf)' was evaluted to '{checked(zero - minusHalf)}'. Expected: '{0 - int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1262,7 +1439,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - minusOne) != 0 - -1)
             {
-                Console.WriteLine($"'checked(zero - minusOne)' was evaluted to '{checked(zero - minusOne)}'. Expected: '{0 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(zero - minusOne)' was evaluted to '{checked(zero - minusOne)}'. Expected: '{0 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -1277,7 +1456,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - zero) != 0 - 0)
             {
-                Console.WriteLine($"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -1293,7 +1474,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - one) != 0 - 1)
             {
-                Console.WriteLine($"'checked(zero - one)' was evaluted to '{checked(zero - one)}'. Expected: '{0 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero - one)' was evaluted to '{checked(zero - one)}'. Expected: '{0 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -1309,7 +1492,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - half) != 0 - int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(zero - half)' was evaluted to '{checked(zero - half)}'. Expected: '{0 - int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero - half)' was evaluted to '{checked(zero - half)}'. Expected: '{0 - int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1325,7 +1510,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - max) != 0 - int.MaxValue)
             {
-                Console.WriteLine($"'checked(zero - max)' was evaluted to '{checked(zero - max)}'. Expected: '{0 - int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero - max)' was evaluted to '{checked(zero - max)}'. Expected: '{0 - int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -1341,7 +1528,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one - min)' did not throw OverflowException.");
         }
@@ -1357,7 +1547,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - minusHalf) != 1 - int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(one - minusHalf)' was evaluted to '{checked(one - minusHalf)}'. Expected: '{1 - int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one - minusHalf)' was evaluted to '{checked(one - minusHalf)}'. Expected: '{1 - int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1373,7 +1565,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - minusOne) != 1 - -1)
             {
-                Console.WriteLine($"'checked(one - minusOne)' was evaluted to '{checked(one - minusOne)}'. Expected: '{1 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(one - minusOne)' was evaluted to '{checked(one - minusOne)}'. Expected: '{1 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -1389,7 +1583,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - zero) != 1 - 0)
             {
-                Console.WriteLine($"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -1404,7 +1600,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - one) != 1 - 1)
             {
-                Console.WriteLine($"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -1420,7 +1618,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - half) != 1 - int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(one - half)' was evaluted to '{checked(one - half)}'. Expected: '{1 - int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one - half)' was evaluted to '{checked(one - half)}'. Expected: '{1 - int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1436,7 +1636,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - max) != 1 - int.MaxValue)
             {
-                Console.WriteLine($"'checked(one - max)' was evaluted to '{checked(one - max)}'. Expected: '{1 - int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(one - max)' was evaluted to '{checked(one - max)}'. Expected: '{1 - int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -1452,7 +1654,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half - min)' did not throw OverflowException.");
         }
@@ -1468,7 +1673,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - minusHalf) != int.MaxValue / 2 - int.MinValue / 2)
             {
-                Console.WriteLine($"'checked(half - minusHalf)' was evaluted to '{checked(half - minusHalf)}'. Expected: '{int.MaxValue / 2 - int.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half - minusHalf)' was evaluted to '{checked(half - minusHalf)}'. Expected: '{int.MaxValue / 2 - int.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1484,7 +1691,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - minusOne) != int.MaxValue / 2 - -1)
             {
-                Console.WriteLine($"'checked(half - minusOne)' was evaluted to '{checked(half - minusOne)}'. Expected: '{int.MaxValue / 2 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(half - minusOne)' was evaluted to '{checked(half - minusOne)}'. Expected: '{int.MaxValue / 2 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -1500,7 +1709,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - zero) != int.MaxValue / 2 - 0)
             {
-                Console.WriteLine($"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{int.MaxValue / 2 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{int.MaxValue / 2 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -1516,7 +1727,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - one) != int.MaxValue / 2 - 1)
             {
-                Console.WriteLine($"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{int.MaxValue / 2 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{int.MaxValue / 2 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -1531,7 +1744,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - half) != int.MaxValue / 2 - int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{int.MaxValue / 2 - int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{int.MaxValue / 2 - int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1547,7 +1762,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - max) != int.MaxValue / 2 - int.MaxValue)
             {
-                Console.WriteLine($"'checked(half - max)' was evaluted to '{checked(half - max)}'. Expected: '{int.MaxValue / 2 - int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(half - max)' was evaluted to '{checked(half - max)}'. Expected: '{int.MaxValue / 2 - int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -1563,7 +1780,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max - min)' did not throw OverflowException.");
         }
@@ -1579,7 +1799,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max - minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max - minusHalf)' did not throw OverflowException.");
         }
@@ -1595,7 +1818,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max - minusOne);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max - minusOne)' did not throw OverflowException.");
         }
@@ -1611,7 +1837,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - zero) != int.MaxValue - 0)
             {
-                Console.WriteLine($"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{int.MaxValue - 0}'.");
+                Console.WriteLine(
+                    $"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{int.MaxValue - 0}'."
+                );
                 _counter++;
             }
         }
@@ -1627,7 +1855,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - one) != int.MaxValue - 1)
             {
-                Console.WriteLine($"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{int.MaxValue - 1}'.");
+                Console.WriteLine(
+                    $"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{int.MaxValue - 1}'."
+                );
                 _counter++;
             }
         }
@@ -1643,7 +1873,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - half) != int.MaxValue - int.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{int.MaxValue - int.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{int.MaxValue - int.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -1658,7 +1890,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - max) != int.MaxValue - int.MaxValue)
             {
-                Console.WriteLine($"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{int.MaxValue - int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{int.MaxValue - int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -1674,7 +1908,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * min)' did not throw OverflowException.");
         }
@@ -1690,7 +1927,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * minusHalf)' did not throw OverflowException.");
         }
@@ -1706,7 +1946,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * minusOne);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * minusOne)' did not throw OverflowException.");
         }
@@ -1722,7 +1965,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min * zero) != int.MinValue * 0)
             {
-                Console.WriteLine($"'checked(min * zero)' was evaluted to '{checked(min * zero)}'. Expected: '{int.MinValue * 0}'.");
+                Console.WriteLine(
+                    $"'checked(min * zero)' was evaluted to '{checked(min * zero)}'. Expected: '{int.MinValue * 0}'."
+                );
                 _counter++;
             }
         }
@@ -1738,7 +1983,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min * one) != int.MinValue * 1)
             {
-                Console.WriteLine($"'checked(min * one)' was evaluted to '{checked(min * one)}'. Expected: '{int.MinValue * 1}'.");
+                Console.WriteLine(
+                    $"'checked(min * one)' was evaluted to '{checked(min * one)}'. Expected: '{int.MinValue * 1}'."
+                );
                 _counter++;
             }
         }
@@ -1754,7 +2001,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * half)' did not throw OverflowException.");
         }
@@ -1770,7 +2020,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * max)' did not throw OverflowException.");
         }
@@ -1786,7 +2039,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf * min)' did not throw OverflowException.");
         }
@@ -1801,9 +2057,14 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked(minusHalf * minusHalf)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked(minusHalf * minusHalf)' did not throw OverflowException."
+                );
         }
         ConfirmMinusHalfMultipliedByMinusOneIsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1817,7 +2078,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf * minusOne) != int.MinValue / 2 * -1)
             {
-                Console.WriteLine($"'checked(minusHalf * minusOne)' was evaluted to '{checked(minusHalf * minusOne)}'. Expected: '{int.MinValue / 2 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf * minusOne)' was evaluted to '{checked(minusHalf * minusOne)}'. Expected: '{int.MinValue / 2 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -1833,7 +2096,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf * zero) != int.MinValue / 2 * 0)
             {
-                Console.WriteLine($"'checked(minusHalf * zero)' was evaluted to '{checked(minusHalf * zero)}'. Expected: '{int.MinValue / 2 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf * zero)' was evaluted to '{checked(minusHalf * zero)}'. Expected: '{int.MinValue / 2 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -1849,7 +2114,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf * one) != int.MinValue / 2 * 1)
             {
-                Console.WriteLine($"'checked(minusHalf * one)' was evaluted to '{checked(minusHalf * one)}'. Expected: '{int.MinValue / 2 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf * one)' was evaluted to '{checked(minusHalf * one)}'. Expected: '{int.MinValue / 2 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -1865,7 +2132,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf * half)' did not throw OverflowException.");
         }
@@ -1881,7 +2151,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf * max)' did not throw OverflowException.");
         }
@@ -1897,7 +2170,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusOne * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusOne * min)' did not throw OverflowException.");
         }
@@ -1913,7 +2189,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * minusHalf) != -1 * (int.MinValue / 2))
             {
-                Console.WriteLine($"'checked(minusOne * minusHalf)' was evaluted to '{checked(minusOne * minusHalf)}'. Expected: '{-1 * (int.MinValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * minusHalf)' was evaluted to '{checked(minusOne * minusHalf)}'. Expected: '{-1 * (int.MinValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -1928,7 +2206,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * minusOne) != -1 * -1)
             {
-                Console.WriteLine($"'checked(minusOne * minusOne)' was evaluted to '{checked(minusOne * minusOne)}'. Expected: '{-1 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * minusOne)' was evaluted to '{checked(minusOne * minusOne)}'. Expected: '{-1 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -1944,7 +2224,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * zero) != -1 * 0)
             {
-                Console.WriteLine($"'checked(minusOne * zero)' was evaluted to '{checked(minusOne * zero)}'. Expected: '{-1 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * zero)' was evaluted to '{checked(minusOne * zero)}'. Expected: '{-1 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -1960,7 +2242,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * one) != -1 * 1)
             {
-                Console.WriteLine($"'checked(minusOne * one)' was evaluted to '{checked(minusOne * one)}'. Expected: '{-1 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * one)' was evaluted to '{checked(minusOne * one)}'. Expected: '{-1 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -1976,7 +2260,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * half) != -1 * (int.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(minusOne * half)' was evaluted to '{checked(minusOne * half)}'. Expected: '{-1 * (int.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * half)' was evaluted to '{checked(minusOne * half)}'. Expected: '{-1 * (int.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -1992,7 +2278,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * max) != -1 * int.MaxValue)
             {
-                Console.WriteLine($"'checked(minusOne * max)' was evaluted to '{checked(minusOne * max)}'. Expected: '{-1 * int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * max)' was evaluted to '{checked(minusOne * max)}'. Expected: '{-1 * int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -2008,7 +2296,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * min) != 0 * int.MinValue)
             {
-                Console.WriteLine($"'checked(zero * min)' was evaluted to '{checked(zero * min)}'. Expected: '{0 * int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero * min)' was evaluted to '{checked(zero * min)}'. Expected: '{0 * int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -2024,7 +2314,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * minusHalf) != 0 * (int.MinValue / 2))
             {
-                Console.WriteLine($"'checked(zero * minusHalf)' was evaluted to '{checked(zero * minusHalf)}'. Expected: '{0 * (int.MinValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(zero * minusHalf)' was evaluted to '{checked(zero * minusHalf)}'. Expected: '{0 * (int.MinValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -2040,7 +2332,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * minusOne) != 0 * -1)
             {
-                Console.WriteLine($"'checked(zero * minusOne)' was evaluted to '{checked(zero * minusOne)}'. Expected: '{0 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(zero * minusOne)' was evaluted to '{checked(zero * minusOne)}'. Expected: '{0 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -2055,7 +2349,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * zero) != 0 * 0)
             {
-                Console.WriteLine($"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -2071,7 +2367,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * one) != 0 * 1)
             {
-                Console.WriteLine($"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -2087,7 +2385,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * half) != 0 * (int.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (int.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (int.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -2103,7 +2403,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * max) != 0 * int.MaxValue)
             {
-                Console.WriteLine($"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -2119,7 +2421,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * min) != 1 * int.MinValue)
             {
-                Console.WriteLine($"'checked(one * min)' was evaluted to '{checked(one * min)}'. Expected: '{1 * int.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(one * min)' was evaluted to '{checked(one * min)}'. Expected: '{1 * int.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -2135,7 +2439,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * minusHalf) != 1 * (int.MinValue / 2))
             {
-                Console.WriteLine($"'checked(one * minusHalf)' was evaluted to '{checked(one * minusHalf)}'. Expected: '{1 * (int.MinValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(one * minusHalf)' was evaluted to '{checked(one * minusHalf)}'. Expected: '{1 * (int.MinValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -2151,7 +2457,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * minusOne) != 1 * -1)
             {
-                Console.WriteLine($"'checked(one * minusOne)' was evaluted to '{checked(one * minusOne)}'. Expected: '{1 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(one * minusOne)' was evaluted to '{checked(one * minusOne)}'. Expected: '{1 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -2167,7 +2475,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * zero) != 1 * 0)
             {
-                Console.WriteLine($"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -2182,7 +2492,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * one) != 1 * 1)
             {
-                Console.WriteLine($"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -2198,7 +2510,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * half) != 1 * (int.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (int.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (int.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -2214,7 +2528,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * max) != 1 * int.MaxValue)
             {
-                Console.WriteLine($"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * int.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * int.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -2230,7 +2546,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * min)' did not throw OverflowException.");
         }
@@ -2246,7 +2565,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * minusHalf)' did not throw OverflowException.");
         }
@@ -2262,7 +2584,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * minusOne) != int.MaxValue / 2 * -1)
             {
-                Console.WriteLine($"'checked(half * minusOne)' was evaluted to '{checked(half * minusOne)}'. Expected: '{int.MaxValue / 2 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(half * minusOne)' was evaluted to '{checked(half * minusOne)}'. Expected: '{int.MaxValue / 2 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -2278,7 +2602,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * zero) != int.MaxValue / 2 * 0)
             {
-                Console.WriteLine($"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{int.MaxValue / 2 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{int.MaxValue / 2 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -2294,7 +2620,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * one) != int.MaxValue / 2 * 1)
             {
-                Console.WriteLine($"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{int.MaxValue / 2 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{int.MaxValue / 2 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -2309,7 +2637,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * half)' did not throw OverflowException.");
         }
@@ -2325,7 +2656,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * max)' did not throw OverflowException.");
         }
@@ -2341,7 +2675,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * min)' did not throw OverflowException.");
         }
@@ -2357,7 +2694,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * minusHalf)' did not throw OverflowException.");
         }
@@ -2373,7 +2713,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * minusOne) != int.MaxValue * -1)
             {
-                Console.WriteLine($"'checked(max * minusOne)' was evaluted to '{checked(max * minusOne)}'. Expected: '{int.MaxValue * -1}'.");
+                Console.WriteLine(
+                    $"'checked(max * minusOne)' was evaluted to '{checked(max * minusOne)}'. Expected: '{int.MaxValue * -1}'."
+                );
                 _counter++;
             }
         }
@@ -2389,7 +2731,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * zero) != int.MaxValue * 0)
             {
-                Console.WriteLine($"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{int.MaxValue * 0}'.");
+                Console.WriteLine(
+                    $"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{int.MaxValue * 0}'."
+                );
                 _counter++;
             }
         }
@@ -2405,7 +2749,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * one) != int.MaxValue * 1)
             {
-                Console.WriteLine($"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{int.MaxValue * 1}'.");
+                Console.WriteLine(
+                    $"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{int.MaxValue * 1}'."
+                );
                 _counter++;
             }
         }
@@ -2421,7 +2767,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * half)' did not throw OverflowException.");
         }
@@ -2436,7 +2785,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * max)' did not throw OverflowException.");
         }
@@ -2455,13 +2807,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value + zero) != value)
             {
-                Console.WriteLine($"Addition identity for uint 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for uint 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(zero + value) != value)
             {
-                Console.WriteLine($"Addition identity for uint 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for uint 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -2476,13 +2832,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value - zero) != value)
             {
-                Console.WriteLine($"Subtraction identity for uint 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for uint 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(value - value) != 0)
             {
-                Console.WriteLine($"Subtraction identity for uint 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for uint 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
         }
@@ -2498,25 +2858,33 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value * zero) != 0)
             {
-                Console.WriteLine($"Multiplication identity for uint 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for uint 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(zero * value) != 0)
             {
-                Console.WriteLine($"Multiplication identity for uint 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for uint 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(value * one) != value)
             {
-                Console.WriteLine($"Multiplication identity for uint 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for uint 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(one * value) != value)
             {
-                Console.WriteLine($"Multiplication identity for uint 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for uint 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -2531,7 +2899,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + zero) != 0 + 0)
             {
-                Console.WriteLine($"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -2547,7 +2917,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + one) != 0 + 1)
             {
-                Console.WriteLine($"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -2563,7 +2935,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + half) != 0 + uint.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + uint.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + uint.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -2579,7 +2953,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + max) != 0 + uint.MaxValue)
             {
-                Console.WriteLine($"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + uint.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + uint.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -2595,7 +2971,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + zero) != 1 + 0)
             {
-                Console.WriteLine($"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -2610,7 +2988,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + one) != 1 + 1)
             {
-                Console.WriteLine($"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -2626,7 +3006,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + half) != 1 + uint.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + uint.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + uint.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -2642,7 +3024,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one + max)' did not throw OverflowException.");
         }
@@ -2658,7 +3043,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + zero) != uint.MaxValue / 2 + 0)
             {
-                Console.WriteLine($"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{uint.MaxValue / 2 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{uint.MaxValue / 2 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -2674,7 +3061,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + one) != uint.MaxValue / 2 + 1)
             {
-                Console.WriteLine($"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{uint.MaxValue / 2 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{uint.MaxValue / 2 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -2689,7 +3078,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + half) != uint.MaxValue / 2 + uint.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{uint.MaxValue / 2 + uint.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{uint.MaxValue / 2 + uint.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -2705,7 +3096,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half + max)' did not throw OverflowException.");
         }
@@ -2721,7 +3115,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + zero) != uint.MaxValue + 0)
             {
-                Console.WriteLine($"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{uint.MaxValue + 0}'.");
+                Console.WriteLine(
+                    $"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{uint.MaxValue + 0}'."
+                );
                 _counter++;
             }
         }
@@ -2737,7 +3133,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + one)' did not throw OverflowException.");
         }
@@ -2753,7 +3152,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + half)' did not throw OverflowException.");
         }
@@ -2768,7 +3170,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + max)' did not throw OverflowException.");
         }
@@ -2784,7 +3189,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - zero) != 0 - 0)
             {
-                Console.WriteLine($"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -2800,7 +3207,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - one)' did not throw OverflowException.");
         }
@@ -2816,7 +3226,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - half)' did not throw OverflowException.");
         }
@@ -2832,7 +3245,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - max)' did not throw OverflowException.");
         }
@@ -2848,7 +3264,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - zero) != 1 - 0)
             {
-                Console.WriteLine($"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -2863,7 +3281,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - one) != 1 - 1)
             {
-                Console.WriteLine($"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -2879,7 +3299,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one - half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one - half)' did not throw OverflowException.");
         }
@@ -2895,7 +3318,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one - max)' did not throw OverflowException.");
         }
@@ -2911,7 +3337,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - zero) != uint.MaxValue / 2 - 0)
             {
-                Console.WriteLine($"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{uint.MaxValue / 2 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{uint.MaxValue / 2 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -2927,7 +3355,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - one) != uint.MaxValue / 2 - 1)
             {
-                Console.WriteLine($"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{uint.MaxValue / 2 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{uint.MaxValue / 2 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -2942,7 +3372,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - half) != uint.MaxValue / 2 - uint.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{uint.MaxValue / 2 - uint.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{uint.MaxValue / 2 - uint.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -2958,7 +3390,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half - max)' did not throw OverflowException.");
         }
@@ -2974,7 +3409,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - zero) != uint.MaxValue - 0)
             {
-                Console.WriteLine($"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{uint.MaxValue - 0}'.");
+                Console.WriteLine(
+                    $"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{uint.MaxValue - 0}'."
+                );
                 _counter++;
             }
         }
@@ -2990,7 +3427,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - one) != uint.MaxValue - 1)
             {
-                Console.WriteLine($"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{uint.MaxValue - 1}'.");
+                Console.WriteLine(
+                    $"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{uint.MaxValue - 1}'."
+                );
                 _counter++;
             }
         }
@@ -3006,7 +3445,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - half) != uint.MaxValue - uint.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{uint.MaxValue - uint.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{uint.MaxValue - uint.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3021,7 +3462,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - max) != uint.MaxValue - uint.MaxValue)
             {
-                Console.WriteLine($"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{uint.MaxValue - uint.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{uint.MaxValue - uint.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -3037,7 +3480,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * zero) != 0 * 0)
             {
-                Console.WriteLine($"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -3053,7 +3498,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * one) != 0 * 1)
             {
-                Console.WriteLine($"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -3069,7 +3516,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * half) != 0 * (uint.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (uint.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (uint.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -3085,7 +3534,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * max) != 0 * uint.MaxValue)
             {
-                Console.WriteLine($"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * uint.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * uint.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -3101,7 +3552,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * zero) != 1 * 0)
             {
-                Console.WriteLine($"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -3116,7 +3569,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * one) != 1 * 1)
             {
-                Console.WriteLine($"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -3132,7 +3587,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * half) != 1 * (uint.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (uint.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (uint.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -3148,7 +3605,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * max) != 1 * uint.MaxValue)
             {
-                Console.WriteLine($"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * uint.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * uint.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -3164,7 +3623,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * zero) != uint.MaxValue / 2 * 0)
             {
-                Console.WriteLine($"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{uint.MaxValue / 2 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{uint.MaxValue / 2 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -3180,7 +3641,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * one) != uint.MaxValue / 2 * 1)
             {
-                Console.WriteLine($"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{uint.MaxValue / 2 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{uint.MaxValue / 2 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -3195,7 +3658,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * half)' did not throw OverflowException.");
         }
@@ -3211,7 +3677,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * max)' did not throw OverflowException.");
         }
@@ -3227,7 +3696,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * zero) != uint.MaxValue * 0)
             {
-                Console.WriteLine($"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{uint.MaxValue * 0}'.");
+                Console.WriteLine(
+                    $"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{uint.MaxValue * 0}'."
+                );
                 _counter++;
             }
         }
@@ -3243,7 +3714,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * one) != uint.MaxValue * 1)
             {
-                Console.WriteLine($"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{uint.MaxValue * 1}'.");
+                Console.WriteLine(
+                    $"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{uint.MaxValue * 1}'."
+                );
                 _counter++;
             }
         }
@@ -3259,7 +3732,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * half)' did not throw OverflowException.");
         }
@@ -3274,7 +3750,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * max)' did not throw OverflowException.");
         }
@@ -3293,13 +3772,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value + zero) != value)
             {
-                Console.WriteLine($"Addition identity for long 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for long 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(zero + value) != value)
             {
-                Console.WriteLine($"Addition identity for long 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for long 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -3314,13 +3797,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value - zero) != value)
             {
-                Console.WriteLine($"Subtraction identity for long 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for long 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(value - value) != 0)
             {
-                Console.WriteLine($"Subtraction identity for long 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for long 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
         }
@@ -3336,25 +3823,33 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value * zero) != 0)
             {
-                Console.WriteLine($"Multiplication identity for long 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for long 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(zero * value) != 0)
             {
-                Console.WriteLine($"Multiplication identity for long 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for long 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(value * one) != value)
             {
-                Console.WriteLine($"Multiplication identity for long 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for long 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(one * value) != value)
             {
-                Console.WriteLine($"Multiplication identity for long 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for long 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -3369,7 +3864,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min + min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min + min)' did not throw OverflowException.");
         }
@@ -3385,7 +3883,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min + minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min + minusHalf)' did not throw OverflowException.");
         }
@@ -3401,7 +3902,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min + minusOne);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min + minusOne)' did not throw OverflowException.");
         }
@@ -3417,7 +3921,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + zero) != long.MinValue + 0)
             {
-                Console.WriteLine($"'checked(min + zero)' was evaluted to '{checked(min + zero)}'. Expected: '{long.MinValue + 0}'.");
+                Console.WriteLine(
+                    $"'checked(min + zero)' was evaluted to '{checked(min + zero)}'. Expected: '{long.MinValue + 0}'."
+                );
                 _counter++;
             }
         }
@@ -3433,7 +3939,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + one) != long.MinValue + 1)
             {
-                Console.WriteLine($"'checked(min + one)' was evaluted to '{checked(min + one)}'. Expected: '{long.MinValue + 1}'.");
+                Console.WriteLine(
+                    $"'checked(min + one)' was evaluted to '{checked(min + one)}'. Expected: '{long.MinValue + 1}'."
+                );
                 _counter++;
             }
         }
@@ -3449,7 +3957,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + half) != long.MinValue + long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(min + half)' was evaluted to '{checked(min + half)}'. Expected: '{long.MinValue + long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(min + half)' was evaluted to '{checked(min + half)}'. Expected: '{long.MinValue + long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3465,7 +3975,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min + max) != long.MinValue + long.MaxValue)
             {
-                Console.WriteLine($"'checked(min + max)' was evaluted to '{checked(min + max)}'. Expected: '{long.MinValue + long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(min + max)' was evaluted to '{checked(min + max)}'. Expected: '{long.MinValue + long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -3481,7 +3993,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf + min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf + min)' did not throw OverflowException.");
         }
@@ -3496,7 +4011,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + minusHalf) != long.MinValue / 2 + long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf + minusHalf)' was evaluted to '{checked(minusHalf + minusHalf)}'. Expected: '{long.MinValue / 2 + long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + minusHalf)' was evaluted to '{checked(minusHalf + minusHalf)}'. Expected: '{long.MinValue / 2 + long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3512,7 +4029,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + minusOne) != long.MinValue / 2 + -1)
             {
-                Console.WriteLine($"'checked(minusHalf + minusOne)' was evaluted to '{checked(minusHalf + minusOne)}'. Expected: '{long.MinValue / 2 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + minusOne)' was evaluted to '{checked(minusHalf + minusOne)}'. Expected: '{long.MinValue / 2 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -3528,7 +4047,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + zero) != long.MinValue / 2 + 0)
             {
-                Console.WriteLine($"'checked(minusHalf + zero)' was evaluted to '{checked(minusHalf + zero)}'. Expected: '{long.MinValue / 2 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + zero)' was evaluted to '{checked(minusHalf + zero)}'. Expected: '{long.MinValue / 2 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -3544,7 +4065,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + one) != long.MinValue / 2 + 1)
             {
-                Console.WriteLine($"'checked(minusHalf + one)' was evaluted to '{checked(minusHalf + one)}'. Expected: '{long.MinValue / 2 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + one)' was evaluted to '{checked(minusHalf + one)}'. Expected: '{long.MinValue / 2 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -3560,7 +4083,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + half) != long.MinValue / 2 + long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf + half)' was evaluted to '{checked(minusHalf + half)}'. Expected: '{long.MinValue / 2 + long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + half)' was evaluted to '{checked(minusHalf + half)}'. Expected: '{long.MinValue / 2 + long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3576,7 +4101,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf + max) != long.MinValue / 2 + long.MaxValue)
             {
-                Console.WriteLine($"'checked(minusHalf + max)' was evaluted to '{checked(minusHalf + max)}'. Expected: '{long.MinValue / 2 + long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf + max)' was evaluted to '{checked(minusHalf + max)}'. Expected: '{long.MinValue / 2 + long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -3592,7 +4119,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusOne + min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusOne + min)' did not throw OverflowException.");
         }
@@ -3608,7 +4138,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + minusHalf) != -1 + long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne + minusHalf)' was evaluted to '{checked(minusOne + minusHalf)}'. Expected: '{-1 + long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + minusHalf)' was evaluted to '{checked(minusOne + minusHalf)}'. Expected: '{-1 + long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3623,7 +4155,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + minusOne) != -1 + -1)
             {
-                Console.WriteLine($"'checked(minusOne + minusOne)' was evaluted to '{checked(minusOne + minusOne)}'. Expected: '{-1 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + minusOne)' was evaluted to '{checked(minusOne + minusOne)}'. Expected: '{-1 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -3639,7 +4173,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + zero) != -1 + 0)
             {
-                Console.WriteLine($"'checked(minusOne + zero)' was evaluted to '{checked(minusOne + zero)}'. Expected: '{-1 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + zero)' was evaluted to '{checked(minusOne + zero)}'. Expected: '{-1 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -3655,7 +4191,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + one) != -1 + 1)
             {
-                Console.WriteLine($"'checked(minusOne + one)' was evaluted to '{checked(minusOne + one)}'. Expected: '{-1 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + one)' was evaluted to '{checked(minusOne + one)}'. Expected: '{-1 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -3671,7 +4209,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + half) != -1 + long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne + half)' was evaluted to '{checked(minusOne + half)}'. Expected: '{-1 + long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + half)' was evaluted to '{checked(minusOne + half)}'. Expected: '{-1 + long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3687,7 +4227,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne + max) != -1 + long.MaxValue)
             {
-                Console.WriteLine($"'checked(minusOne + max)' was evaluted to '{checked(minusOne + max)}'. Expected: '{-1 + long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne + max)' was evaluted to '{checked(minusOne + max)}'. Expected: '{-1 + long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -3703,7 +4245,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + min) != 0 + long.MinValue)
             {
-                Console.WriteLine($"'checked(zero + min)' was evaluted to '{checked(zero + min)}'. Expected: '{0 + long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero + min)' was evaluted to '{checked(zero + min)}'. Expected: '{0 + long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -3719,7 +4263,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + minusHalf) != 0 + long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(zero + minusHalf)' was evaluted to '{checked(zero + minusHalf)}'. Expected: '{0 + long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero + minusHalf)' was evaluted to '{checked(zero + minusHalf)}'. Expected: '{0 + long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3735,7 +4281,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + minusOne) != 0 + -1)
             {
-                Console.WriteLine($"'checked(zero + minusOne)' was evaluted to '{checked(zero + minusOne)}'. Expected: '{0 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(zero + minusOne)' was evaluted to '{checked(zero + minusOne)}'. Expected: '{0 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -3750,7 +4298,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + zero) != 0 + 0)
             {
-                Console.WriteLine($"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -3766,7 +4316,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + one) != 0 + 1)
             {
-                Console.WriteLine($"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -3782,7 +4334,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + half) != 0 + long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3798,7 +4352,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + max) != 0 + long.MaxValue)
             {
-                Console.WriteLine($"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -3814,7 +4370,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + min) != 1 + long.MinValue)
             {
-                Console.WriteLine($"'checked(one + min)' was evaluted to '{checked(one + min)}'. Expected: '{1 + long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(one + min)' was evaluted to '{checked(one + min)}'. Expected: '{1 + long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -3830,7 +4388,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + minusHalf) != 1 + long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(one + minusHalf)' was evaluted to '{checked(one + minusHalf)}'. Expected: '{1 + long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one + minusHalf)' was evaluted to '{checked(one + minusHalf)}'. Expected: '{1 + long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3846,7 +4406,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + minusOne) != 1 + -1)
             {
-                Console.WriteLine($"'checked(one + minusOne)' was evaluted to '{checked(one + minusOne)}'. Expected: '{1 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(one + minusOne)' was evaluted to '{checked(one + minusOne)}'. Expected: '{1 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -3862,7 +4424,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + zero) != 1 + 0)
             {
-                Console.WriteLine($"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -3877,7 +4441,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + one) != 1 + 1)
             {
-                Console.WriteLine($"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -3893,7 +4459,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + half) != 1 + long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3909,7 +4477,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one + max)' did not throw OverflowException.");
         }
@@ -3925,7 +4496,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + min) != long.MaxValue / 2 + long.MinValue)
             {
-                Console.WriteLine($"'checked(half + min)' was evaluted to '{checked(half + min)}'. Expected: '{long.MaxValue / 2 + long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(half + min)' was evaluted to '{checked(half + min)}'. Expected: '{long.MaxValue / 2 + long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -3941,7 +4514,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + minusHalf) != long.MaxValue / 2 + long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(half + minusHalf)' was evaluted to '{checked(half + minusHalf)}'. Expected: '{long.MaxValue / 2 + long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half + minusHalf)' was evaluted to '{checked(half + minusHalf)}'. Expected: '{long.MaxValue / 2 + long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -3957,7 +4532,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + minusOne) != long.MaxValue / 2 + -1)
             {
-                Console.WriteLine($"'checked(half + minusOne)' was evaluted to '{checked(half + minusOne)}'. Expected: '{long.MaxValue / 2 + -1}'.");
+                Console.WriteLine(
+                    $"'checked(half + minusOne)' was evaluted to '{checked(half + minusOne)}'. Expected: '{long.MaxValue / 2 + -1}'."
+                );
                 _counter++;
             }
         }
@@ -3973,7 +4550,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + zero) != long.MaxValue / 2 + 0)
             {
-                Console.WriteLine($"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{long.MaxValue / 2 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{long.MaxValue / 2 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -3989,7 +4568,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + one) != long.MaxValue / 2 + 1)
             {
-                Console.WriteLine($"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{long.MaxValue / 2 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{long.MaxValue / 2 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -4004,7 +4585,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + half) != long.MaxValue / 2 + long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{long.MaxValue / 2 + long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{long.MaxValue / 2 + long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4020,7 +4603,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half + max)' did not throw OverflowException.");
         }
@@ -4036,7 +4622,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + min) != long.MaxValue + long.MinValue)
             {
-                Console.WriteLine($"'checked(max + min)' was evaluted to '{checked(max + min)}'. Expected: '{long.MaxValue + long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(max + min)' was evaluted to '{checked(max + min)}'. Expected: '{long.MaxValue + long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -4052,7 +4640,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + minusHalf) != long.MaxValue + long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(max + minusHalf)' was evaluted to '{checked(max + minusHalf)}'. Expected: '{long.MaxValue + long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(max + minusHalf)' was evaluted to '{checked(max + minusHalf)}'. Expected: '{long.MaxValue + long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4068,7 +4658,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + minusOne) != long.MaxValue + -1)
             {
-                Console.WriteLine($"'checked(max + minusOne)' was evaluted to '{checked(max + minusOne)}'. Expected: '{long.MaxValue + -1}'.");
+                Console.WriteLine(
+                    $"'checked(max + minusOne)' was evaluted to '{checked(max + minusOne)}'. Expected: '{long.MaxValue + -1}'."
+                );
                 _counter++;
             }
         }
@@ -4084,7 +4676,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + zero) != long.MaxValue + 0)
             {
-                Console.WriteLine($"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{long.MaxValue + 0}'.");
+                Console.WriteLine(
+                    $"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{long.MaxValue + 0}'."
+                );
                 _counter++;
             }
         }
@@ -4100,7 +4694,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + one)' did not throw OverflowException.");
         }
@@ -4116,7 +4713,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + half)' did not throw OverflowException.");
         }
@@ -4131,7 +4731,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + max)' did not throw OverflowException.");
         }
@@ -4147,7 +4750,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - min) != long.MinValue - long.MinValue)
             {
-                Console.WriteLine($"'checked(min - min)' was evaluted to '{checked(min - min)}'. Expected: '{long.MinValue - long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(min - min)' was evaluted to '{checked(min - min)}'. Expected: '{long.MinValue - long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -4163,7 +4768,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - minusHalf) != long.MinValue - long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(min - minusHalf)' was evaluted to '{checked(min - minusHalf)}'. Expected: '{long.MinValue - long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(min - minusHalf)' was evaluted to '{checked(min - minusHalf)}'. Expected: '{long.MinValue - long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4179,7 +4786,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - minusOne) != long.MinValue - -1)
             {
-                Console.WriteLine($"'checked(min - minusOne)' was evaluted to '{checked(min - minusOne)}'. Expected: '{long.MinValue - -1}'.");
+                Console.WriteLine(
+                    $"'checked(min - minusOne)' was evaluted to '{checked(min - minusOne)}'. Expected: '{long.MinValue - -1}'."
+                );
                 _counter++;
             }
         }
@@ -4195,7 +4804,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min - zero) != long.MinValue - 0)
             {
-                Console.WriteLine($"'checked(min - zero)' was evaluted to '{checked(min - zero)}'. Expected: '{long.MinValue - 0}'.");
+                Console.WriteLine(
+                    $"'checked(min - zero)' was evaluted to '{checked(min - zero)}'. Expected: '{long.MinValue - 0}'."
+                );
                 _counter++;
             }
         }
@@ -4211,7 +4822,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min - one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min - one)' did not throw OverflowException.");
         }
@@ -4227,7 +4841,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min - half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min - half)' did not throw OverflowException.");
         }
@@ -4243,7 +4860,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min - max)' did not throw OverflowException.");
         }
@@ -4259,7 +4879,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - min) != long.MinValue / 2 - long.MinValue)
             {
-                Console.WriteLine($"'checked(minusHalf - min)' was evaluted to '{checked(minusHalf - min)}'. Expected: '{long.MinValue / 2 - long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - min)' was evaluted to '{checked(minusHalf - min)}'. Expected: '{long.MinValue / 2 - long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -4274,7 +4896,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - minusHalf) != long.MinValue / 2 - long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf - minusHalf)' was evaluted to '{checked(minusHalf - minusHalf)}'. Expected: '{long.MinValue / 2 - long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - minusHalf)' was evaluted to '{checked(minusHalf - minusHalf)}'. Expected: '{long.MinValue / 2 - long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4290,7 +4914,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - minusOne) != long.MinValue / 2 - -1)
             {
-                Console.WriteLine($"'checked(minusHalf - minusOne)' was evaluted to '{checked(minusHalf - minusOne)}'. Expected: '{long.MinValue / 2 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - minusOne)' was evaluted to '{checked(minusHalf - minusOne)}'. Expected: '{long.MinValue / 2 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -4306,7 +4932,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - zero) != long.MinValue / 2 - 0)
             {
-                Console.WriteLine($"'checked(minusHalf - zero)' was evaluted to '{checked(minusHalf - zero)}'. Expected: '{long.MinValue / 2 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - zero)' was evaluted to '{checked(minusHalf - zero)}'. Expected: '{long.MinValue / 2 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -4322,7 +4950,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - one) != long.MinValue / 2 - 1)
             {
-                Console.WriteLine($"'checked(minusHalf - one)' was evaluted to '{checked(minusHalf - one)}'. Expected: '{long.MinValue / 2 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - one)' was evaluted to '{checked(minusHalf - one)}'. Expected: '{long.MinValue / 2 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -4338,7 +4968,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf - half) != long.MinValue / 2 - long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusHalf - half)' was evaluted to '{checked(minusHalf - half)}'. Expected: '{long.MinValue / 2 - long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf - half)' was evaluted to '{checked(minusHalf - half)}'. Expected: '{long.MinValue / 2 - long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4354,7 +4986,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf - max)' did not throw OverflowException.");
         }
@@ -4370,7 +5005,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - min) != -1 - long.MinValue)
             {
-                Console.WriteLine($"'checked(minusOne - min)' was evaluted to '{checked(minusOne - min)}'. Expected: '{-1 - long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - min)' was evaluted to '{checked(minusOne - min)}'. Expected: '{-1 - long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -4386,7 +5023,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - minusHalf) != -1 - long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne - minusHalf)' was evaluted to '{checked(minusOne - minusHalf)}'. Expected: '{-1 - long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - minusHalf)' was evaluted to '{checked(minusOne - minusHalf)}'. Expected: '{-1 - long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4401,7 +5040,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - minusOne) != -1 - -1)
             {
-                Console.WriteLine($"'checked(minusOne - minusOne)' was evaluted to '{checked(minusOne - minusOne)}'. Expected: '{-1 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - minusOne)' was evaluted to '{checked(minusOne - minusOne)}'. Expected: '{-1 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -4417,7 +5058,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - zero) != -1 - 0)
             {
-                Console.WriteLine($"'checked(minusOne - zero)' was evaluted to '{checked(minusOne - zero)}'. Expected: '{-1 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - zero)' was evaluted to '{checked(minusOne - zero)}'. Expected: '{-1 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -4433,7 +5076,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - one) != -1 - 1)
             {
-                Console.WriteLine($"'checked(minusOne - one)' was evaluted to '{checked(minusOne - one)}'. Expected: '{-1 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - one)' was evaluted to '{checked(minusOne - one)}'. Expected: '{-1 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -4449,7 +5094,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - half) != -1 - long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(minusOne - half)' was evaluted to '{checked(minusOne - half)}'. Expected: '{-1 - long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - half)' was evaluted to '{checked(minusOne - half)}'. Expected: '{-1 - long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4465,7 +5112,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne - max) != -1 - long.MaxValue)
             {
-                Console.WriteLine($"'checked(minusOne - max)' was evaluted to '{checked(minusOne - max)}'. Expected: '{-1 - long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne - max)' was evaluted to '{checked(minusOne - max)}'. Expected: '{-1 - long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -4481,7 +5130,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - min)' did not throw OverflowException.");
         }
@@ -4497,7 +5149,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - minusHalf) != 0 - long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(zero - minusHalf)' was evaluted to '{checked(zero - minusHalf)}'. Expected: '{0 - long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero - minusHalf)' was evaluted to '{checked(zero - minusHalf)}'. Expected: '{0 - long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4513,7 +5167,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - minusOne) != 0 - -1)
             {
-                Console.WriteLine($"'checked(zero - minusOne)' was evaluted to '{checked(zero - minusOne)}'. Expected: '{0 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(zero - minusOne)' was evaluted to '{checked(zero - minusOne)}'. Expected: '{0 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -4528,7 +5184,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - zero) != 0 - 0)
             {
-                Console.WriteLine($"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -4544,7 +5202,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - one) != 0 - 1)
             {
-                Console.WriteLine($"'checked(zero - one)' was evaluted to '{checked(zero - one)}'. Expected: '{0 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero - one)' was evaluted to '{checked(zero - one)}'. Expected: '{0 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -4560,7 +5220,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - half) != 0 - long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(zero - half)' was evaluted to '{checked(zero - half)}'. Expected: '{0 - long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero - half)' was evaluted to '{checked(zero - half)}'. Expected: '{0 - long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4576,7 +5238,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - max) != 0 - long.MaxValue)
             {
-                Console.WriteLine($"'checked(zero - max)' was evaluted to '{checked(zero - max)}'. Expected: '{0 - long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero - max)' was evaluted to '{checked(zero - max)}'. Expected: '{0 - long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -4592,7 +5256,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one - min)' did not throw OverflowException.");
         }
@@ -4608,7 +5275,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - minusHalf) != 1 - long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(one - minusHalf)' was evaluted to '{checked(one - minusHalf)}'. Expected: '{1 - long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one - minusHalf)' was evaluted to '{checked(one - minusHalf)}'. Expected: '{1 - long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4624,7 +5293,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - minusOne) != 1 - -1)
             {
-                Console.WriteLine($"'checked(one - minusOne)' was evaluted to '{checked(one - minusOne)}'. Expected: '{1 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(one - minusOne)' was evaluted to '{checked(one - minusOne)}'. Expected: '{1 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -4640,7 +5311,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - zero) != 1 - 0)
             {
-                Console.WriteLine($"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -4655,7 +5328,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - one) != 1 - 1)
             {
-                Console.WriteLine($"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -4671,7 +5346,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - half) != 1 - long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(one - half)' was evaluted to '{checked(one - half)}'. Expected: '{1 - long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one - half)' was evaluted to '{checked(one - half)}'. Expected: '{1 - long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4687,7 +5364,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - max) != 1 - long.MaxValue)
             {
-                Console.WriteLine($"'checked(one - max)' was evaluted to '{checked(one - max)}'. Expected: '{1 - long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(one - max)' was evaluted to '{checked(one - max)}'. Expected: '{1 - long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -4703,7 +5382,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half - min)' did not throw OverflowException.");
         }
@@ -4719,7 +5401,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - minusHalf) != long.MaxValue / 2 - long.MinValue / 2)
             {
-                Console.WriteLine($"'checked(half - minusHalf)' was evaluted to '{checked(half - minusHalf)}'. Expected: '{long.MaxValue / 2 - long.MinValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half - minusHalf)' was evaluted to '{checked(half - minusHalf)}'. Expected: '{long.MaxValue / 2 - long.MinValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4735,7 +5419,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - minusOne) != long.MaxValue / 2 - -1)
             {
-                Console.WriteLine($"'checked(half - minusOne)' was evaluted to '{checked(half - minusOne)}'. Expected: '{long.MaxValue / 2 - -1}'.");
+                Console.WriteLine(
+                    $"'checked(half - minusOne)' was evaluted to '{checked(half - minusOne)}'. Expected: '{long.MaxValue / 2 - -1}'."
+                );
                 _counter++;
             }
         }
@@ -4751,7 +5437,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - zero) != long.MaxValue / 2 - 0)
             {
-                Console.WriteLine($"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{long.MaxValue / 2 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{long.MaxValue / 2 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -4767,7 +5455,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - one) != long.MaxValue / 2 - 1)
             {
-                Console.WriteLine($"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{long.MaxValue / 2 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{long.MaxValue / 2 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -4782,7 +5472,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - half) != long.MaxValue / 2 - long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{long.MaxValue / 2 - long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{long.MaxValue / 2 - long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4798,7 +5490,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - max) != long.MaxValue / 2 - long.MaxValue)
             {
-                Console.WriteLine($"'checked(half - max)' was evaluted to '{checked(half - max)}'. Expected: '{long.MaxValue / 2 - long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(half - max)' was evaluted to '{checked(half - max)}'. Expected: '{long.MaxValue / 2 - long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -4814,7 +5508,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max - min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max - min)' did not throw OverflowException.");
         }
@@ -4830,7 +5527,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max - minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max - minusHalf)' did not throw OverflowException.");
         }
@@ -4846,7 +5546,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max - minusOne);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max - minusOne)' did not throw OverflowException.");
         }
@@ -4862,7 +5565,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - zero) != long.MaxValue - 0)
             {
-                Console.WriteLine($"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{long.MaxValue - 0}'.");
+                Console.WriteLine(
+                    $"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{long.MaxValue - 0}'."
+                );
                 _counter++;
             }
         }
@@ -4878,7 +5583,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - one) != long.MaxValue - 1)
             {
-                Console.WriteLine($"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{long.MaxValue - 1}'.");
+                Console.WriteLine(
+                    $"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{long.MaxValue - 1}'."
+                );
                 _counter++;
             }
         }
@@ -4894,7 +5601,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - half) != long.MaxValue - long.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{long.MaxValue - long.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{long.MaxValue - long.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -4909,7 +5618,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - max) != long.MaxValue - long.MaxValue)
             {
-                Console.WriteLine($"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{long.MaxValue - long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{long.MaxValue - long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -4925,7 +5636,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * min)' did not throw OverflowException.");
         }
@@ -4941,7 +5655,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * minusHalf)' did not throw OverflowException.");
         }
@@ -4957,7 +5674,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * minusOne);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * minusOne)' did not throw OverflowException.");
         }
@@ -4973,7 +5693,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min * zero) != long.MinValue * 0)
             {
-                Console.WriteLine($"'checked(min * zero)' was evaluted to '{checked(min * zero)}'. Expected: '{long.MinValue * 0}'.");
+                Console.WriteLine(
+                    $"'checked(min * zero)' was evaluted to '{checked(min * zero)}'. Expected: '{long.MinValue * 0}'."
+                );
                 _counter++;
             }
         }
@@ -4989,7 +5711,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(min * one) != long.MinValue * 1)
             {
-                Console.WriteLine($"'checked(min * one)' was evaluted to '{checked(min * one)}'. Expected: '{long.MinValue * 1}'.");
+                Console.WriteLine(
+                    $"'checked(min * one)' was evaluted to '{checked(min * one)}'. Expected: '{long.MinValue * 1}'."
+                );
                 _counter++;
             }
         }
@@ -5005,7 +5729,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * half)' did not throw OverflowException.");
         }
@@ -5021,7 +5748,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(min * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(min * max)' did not throw OverflowException.");
         }
@@ -5037,7 +5767,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf * min)' did not throw OverflowException.");
         }
@@ -5052,9 +5785,14 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked(minusHalf * minusHalf)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked(minusHalf * minusHalf)' did not throw OverflowException."
+                );
         }
         ConfirmMinusHalfMultipliedByMinusOneIsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -5068,7 +5806,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf * minusOne) != long.MinValue / 2 * -1)
             {
-                Console.WriteLine($"'checked(minusHalf * minusOne)' was evaluted to '{checked(minusHalf * minusOne)}'. Expected: '{long.MinValue / 2 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf * minusOne)' was evaluted to '{checked(minusHalf * minusOne)}'. Expected: '{long.MinValue / 2 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -5084,7 +5824,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf * zero) != long.MinValue / 2 * 0)
             {
-                Console.WriteLine($"'checked(minusHalf * zero)' was evaluted to '{checked(minusHalf * zero)}'. Expected: '{long.MinValue / 2 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf * zero)' was evaluted to '{checked(minusHalf * zero)}'. Expected: '{long.MinValue / 2 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -5100,7 +5842,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusHalf * one) != long.MinValue / 2 * 1)
             {
-                Console.WriteLine($"'checked(minusHalf * one)' was evaluted to '{checked(minusHalf * one)}'. Expected: '{long.MinValue / 2 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusHalf * one)' was evaluted to '{checked(minusHalf * one)}'. Expected: '{long.MinValue / 2 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -5116,7 +5860,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf * half)' did not throw OverflowException.");
         }
@@ -5132,7 +5879,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusHalf * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusHalf * max)' did not throw OverflowException.");
         }
@@ -5148,7 +5898,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(minusOne * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(minusOne * min)' did not throw OverflowException.");
         }
@@ -5164,7 +5917,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * minusHalf) != -1 * (long.MinValue / 2))
             {
-                Console.WriteLine($"'checked(minusOne * minusHalf)' was evaluted to '{checked(minusOne * minusHalf)}'. Expected: '{-1 * (long.MinValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * minusHalf)' was evaluted to '{checked(minusOne * minusHalf)}'. Expected: '{-1 * (long.MinValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -5179,7 +5934,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * minusOne) != -1 * -1)
             {
-                Console.WriteLine($"'checked(minusOne * minusOne)' was evaluted to '{checked(minusOne * minusOne)}'. Expected: '{-1 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * minusOne)' was evaluted to '{checked(minusOne * minusOne)}'. Expected: '{-1 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -5195,7 +5952,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * zero) != -1 * 0)
             {
-                Console.WriteLine($"'checked(minusOne * zero)' was evaluted to '{checked(minusOne * zero)}'. Expected: '{-1 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * zero)' was evaluted to '{checked(minusOne * zero)}'. Expected: '{-1 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -5211,7 +5970,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * one) != -1 * 1)
             {
-                Console.WriteLine($"'checked(minusOne * one)' was evaluted to '{checked(minusOne * one)}'. Expected: '{-1 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * one)' was evaluted to '{checked(minusOne * one)}'. Expected: '{-1 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -5227,7 +5988,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * half) != -1 * (long.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(minusOne * half)' was evaluted to '{checked(minusOne * half)}'. Expected: '{-1 * (long.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * half)' was evaluted to '{checked(minusOne * half)}'. Expected: '{-1 * (long.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -5243,7 +6006,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(minusOne * max) != -1 * long.MaxValue)
             {
-                Console.WriteLine($"'checked(minusOne * max)' was evaluted to '{checked(minusOne * max)}'. Expected: '{-1 * long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(minusOne * max)' was evaluted to '{checked(minusOne * max)}'. Expected: '{-1 * long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -5259,7 +6024,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * min) != 0 * long.MinValue)
             {
-                Console.WriteLine($"'checked(zero * min)' was evaluted to '{checked(zero * min)}'. Expected: '{0 * long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero * min)' was evaluted to '{checked(zero * min)}'. Expected: '{0 * long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -5275,7 +6042,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * minusHalf) != 0 * (long.MinValue / 2))
             {
-                Console.WriteLine($"'checked(zero * minusHalf)' was evaluted to '{checked(zero * minusHalf)}'. Expected: '{0 * (long.MinValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(zero * minusHalf)' was evaluted to '{checked(zero * minusHalf)}'. Expected: '{0 * (long.MinValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -5291,7 +6060,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * minusOne) != 0 * -1)
             {
-                Console.WriteLine($"'checked(zero * minusOne)' was evaluted to '{checked(zero * minusOne)}'. Expected: '{0 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(zero * minusOne)' was evaluted to '{checked(zero * minusOne)}'. Expected: '{0 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -5306,7 +6077,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * zero) != 0 * 0)
             {
-                Console.WriteLine($"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -5322,7 +6095,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * one) != 0 * 1)
             {
-                Console.WriteLine($"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -5338,7 +6113,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * half) != 0 * (long.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (long.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (long.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -5354,7 +6131,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * max) != 0 * long.MaxValue)
             {
-                Console.WriteLine($"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -5370,7 +6149,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * min) != 1 * long.MinValue)
             {
-                Console.WriteLine($"'checked(one * min)' was evaluted to '{checked(one * min)}'. Expected: '{1 * long.MinValue}'.");
+                Console.WriteLine(
+                    $"'checked(one * min)' was evaluted to '{checked(one * min)}'. Expected: '{1 * long.MinValue}'."
+                );
                 _counter++;
             }
         }
@@ -5386,7 +6167,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * minusHalf) != 1 * (long.MinValue / 2))
             {
-                Console.WriteLine($"'checked(one * minusHalf)' was evaluted to '{checked(one * minusHalf)}'. Expected: '{1 * (long.MinValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(one * minusHalf)' was evaluted to '{checked(one * minusHalf)}'. Expected: '{1 * (long.MinValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -5402,7 +6185,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * minusOne) != 1 * -1)
             {
-                Console.WriteLine($"'checked(one * minusOne)' was evaluted to '{checked(one * minusOne)}'. Expected: '{1 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(one * minusOne)' was evaluted to '{checked(one * minusOne)}'. Expected: '{1 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -5418,7 +6203,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * zero) != 1 * 0)
             {
-                Console.WriteLine($"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -5433,7 +6220,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * one) != 1 * 1)
             {
-                Console.WriteLine($"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -5449,7 +6238,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * half) != 1 * (long.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (long.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (long.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -5465,7 +6256,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * max) != 1 * long.MaxValue)
             {
-                Console.WriteLine($"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * long.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * long.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -5481,7 +6274,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * min)' did not throw OverflowException.");
         }
@@ -5497,7 +6293,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * minusHalf)' did not throw OverflowException.");
         }
@@ -5513,7 +6312,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * minusOne) != long.MaxValue / 2 * -1)
             {
-                Console.WriteLine($"'checked(half * minusOne)' was evaluted to '{checked(half * minusOne)}'. Expected: '{long.MaxValue / 2 * -1}'.");
+                Console.WriteLine(
+                    $"'checked(half * minusOne)' was evaluted to '{checked(half * minusOne)}'. Expected: '{long.MaxValue / 2 * -1}'."
+                );
                 _counter++;
             }
         }
@@ -5529,7 +6330,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * zero) != long.MaxValue / 2 * 0)
             {
-                Console.WriteLine($"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{long.MaxValue / 2 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{long.MaxValue / 2 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -5545,7 +6348,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * one) != long.MaxValue / 2 * 1)
             {
-                Console.WriteLine($"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{long.MaxValue / 2 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{long.MaxValue / 2 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -5560,7 +6365,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * half)' did not throw OverflowException.");
         }
@@ -5576,7 +6384,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * max)' did not throw OverflowException.");
         }
@@ -5592,7 +6403,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * min);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * min)' did not throw OverflowException.");
         }
@@ -5608,7 +6422,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * minusHalf);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * minusHalf)' did not throw OverflowException.");
         }
@@ -5624,7 +6441,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * minusOne) != long.MaxValue * -1)
             {
-                Console.WriteLine($"'checked(max * minusOne)' was evaluted to '{checked(max * minusOne)}'. Expected: '{long.MaxValue * -1}'.");
+                Console.WriteLine(
+                    $"'checked(max * minusOne)' was evaluted to '{checked(max * minusOne)}'. Expected: '{long.MaxValue * -1}'."
+                );
                 _counter++;
             }
         }
@@ -5640,7 +6459,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * zero) != long.MaxValue * 0)
             {
-                Console.WriteLine($"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{long.MaxValue * 0}'.");
+                Console.WriteLine(
+                    $"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{long.MaxValue * 0}'."
+                );
                 _counter++;
             }
         }
@@ -5656,7 +6477,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * one) != long.MaxValue * 1)
             {
-                Console.WriteLine($"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{long.MaxValue * 1}'.");
+                Console.WriteLine(
+                    $"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{long.MaxValue * 1}'."
+                );
                 _counter++;
             }
         }
@@ -5672,7 +6495,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * half)' did not throw OverflowException.");
         }
@@ -5687,7 +6513,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * max)' did not throw OverflowException.");
         }
@@ -5706,13 +6535,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value + zero) != value)
             {
-                Console.WriteLine($"Addition identity for ulong 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for ulong 'checked(value + zero)' was evaluted to '{checked(value + zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(zero + value) != value)
             {
-                Console.WriteLine($"Addition identity for ulong 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Addition identity for ulong 'checked(zero + value)' was evaluted to '{checked(zero + value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -5727,13 +6560,17 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value - zero) != value)
             {
-                Console.WriteLine($"Subtraction identity for ulong 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for ulong 'checked(value - zero)' was evaluted to '{checked(value - zero)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(value - value) != 0)
             {
-                Console.WriteLine($"Subtraction identity for ulong 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Subtraction identity for ulong 'checked(value - value)' was evaluted to '{checked(value - value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
         }
@@ -5749,25 +6586,33 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(value * zero) != 0)
             {
-                Console.WriteLine($"Multiplication identity for ulong 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for ulong 'checked(value * zero)' was evaluted to '{checked(value * zero)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(zero * value) != 0)
             {
-                Console.WriteLine($"Multiplication identity for ulong 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for ulong 'checked(zero * value)' was evaluted to '{checked(zero * value)}'. Expected: '{0}'."
+                );
                 _counter++;
             }
 
             if (checked(value * one) != value)
             {
-                Console.WriteLine($"Multiplication identity for ulong 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for ulong 'checked(value * one)' was evaluted to '{checked(value * one)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
 
             if (checked(one * value) != value)
             {
-                Console.WriteLine($"Multiplication identity for ulong 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'.");
+                Console.WriteLine(
+                    $"Multiplication identity for ulong 'checked(one * value)' was evaluted to '{checked(one * value)}'. Expected: '{value}'."
+                );
                 _counter++;
             }
         }
@@ -5782,7 +6627,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + zero) != 0 + 0)
             {
-                Console.WriteLine($"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero + zero)' was evaluted to '{checked(zero + zero)}'. Expected: '{0 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -5798,7 +6645,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + one) != 0 + 1)
             {
-                Console.WriteLine($"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero + one)' was evaluted to '{checked(zero + one)}'. Expected: '{0 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -5814,7 +6663,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + half) != 0 + ulong.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + ulong.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(zero + half)' was evaluted to '{checked(zero + half)}'. Expected: '{0 + ulong.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -5830,7 +6681,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero + max) != 0 + ulong.MaxValue)
             {
-                Console.WriteLine($"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + ulong.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero + max)' was evaluted to '{checked(zero + max)}'. Expected: '{0 + ulong.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -5846,7 +6699,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + zero) != 1 + 0)
             {
-                Console.WriteLine($"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(one + zero)' was evaluted to '{checked(one + zero)}'. Expected: '{1 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -5861,7 +6716,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + one) != 1 + 1)
             {
-                Console.WriteLine($"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(one + one)' was evaluted to '{checked(one + one)}'. Expected: '{1 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -5877,7 +6734,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one + half) != 1 + ulong.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + ulong.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(one + half)' was evaluted to '{checked(one + half)}'. Expected: '{1 + ulong.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -5893,7 +6752,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one + max)' did not throw OverflowException.");
         }
@@ -5909,7 +6771,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + zero) != ulong.MaxValue / 2 + 0)
             {
-                Console.WriteLine($"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{ulong.MaxValue / 2 + 0}'.");
+                Console.WriteLine(
+                    $"'checked(half + zero)' was evaluted to '{checked(half + zero)}'. Expected: '{ulong.MaxValue / 2 + 0}'."
+                );
                 _counter++;
             }
         }
@@ -5925,7 +6789,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + one) != ulong.MaxValue / 2 + 1)
             {
-                Console.WriteLine($"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{ulong.MaxValue / 2 + 1}'.");
+                Console.WriteLine(
+                    $"'checked(half + one)' was evaluted to '{checked(half + one)}'. Expected: '{ulong.MaxValue / 2 + 1}'."
+                );
                 _counter++;
             }
         }
@@ -5940,7 +6806,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half + half) != ulong.MaxValue / 2 + ulong.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{ulong.MaxValue / 2 + ulong.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half + half)' was evaluted to '{checked(half + half)}'. Expected: '{ulong.MaxValue / 2 + ulong.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -5956,7 +6824,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half + max)' did not throw OverflowException.");
         }
@@ -5972,7 +6843,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max + zero) != ulong.MaxValue + 0)
             {
-                Console.WriteLine($"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{ulong.MaxValue + 0}'.");
+                Console.WriteLine(
+                    $"'checked(max + zero)' was evaluted to '{checked(max + zero)}'. Expected: '{ulong.MaxValue + 0}'."
+                );
                 _counter++;
             }
         }
@@ -5988,7 +6861,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + one)' did not throw OverflowException.");
         }
@@ -6004,7 +6880,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + half)' did not throw OverflowException.");
         }
@@ -6019,7 +6898,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max + max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max + max)' did not throw OverflowException.");
         }
@@ -6035,7 +6917,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero - zero) != 0 - 0)
             {
-                Console.WriteLine($"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero - zero)' was evaluted to '{checked(zero - zero)}'. Expected: '{0 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -6051,7 +6935,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - one);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - one)' did not throw OverflowException.");
         }
@@ -6067,7 +6954,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - half)' did not throw OverflowException.");
         }
@@ -6083,7 +6973,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(zero - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(zero - max)' did not throw OverflowException.");
         }
@@ -6099,7 +6992,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - zero) != 1 - 0)
             {
-                Console.WriteLine($"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(one - zero)' was evaluted to '{checked(one - zero)}'. Expected: '{1 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -6114,7 +7009,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one - one) != 1 - 1)
             {
-                Console.WriteLine($"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(one - one)' was evaluted to '{checked(one - one)}'. Expected: '{1 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -6130,7 +7027,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one - half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one - half)' did not throw OverflowException.");
         }
@@ -6146,7 +7046,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(one - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(one - max)' did not throw OverflowException.");
         }
@@ -6162,7 +7065,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - zero) != ulong.MaxValue / 2 - 0)
             {
-                Console.WriteLine($"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{ulong.MaxValue / 2 - 0}'.");
+                Console.WriteLine(
+                    $"'checked(half - zero)' was evaluted to '{checked(half - zero)}'. Expected: '{ulong.MaxValue / 2 - 0}'."
+                );
                 _counter++;
             }
         }
@@ -6178,7 +7083,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - one) != ulong.MaxValue / 2 - 1)
             {
-                Console.WriteLine($"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{ulong.MaxValue / 2 - 1}'.");
+                Console.WriteLine(
+                    $"'checked(half - one)' was evaluted to '{checked(half - one)}'. Expected: '{ulong.MaxValue / 2 - 1}'."
+                );
                 _counter++;
             }
         }
@@ -6193,7 +7100,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half - half) != ulong.MaxValue / 2 - ulong.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{ulong.MaxValue / 2 - ulong.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(half - half)' was evaluted to '{checked(half - half)}'. Expected: '{ulong.MaxValue / 2 - ulong.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -6209,7 +7118,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half - max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half - max)' did not throw OverflowException.");
         }
@@ -6225,7 +7137,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - zero) != ulong.MaxValue - 0)
             {
-                Console.WriteLine($"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{ulong.MaxValue - 0}'.");
+                Console.WriteLine(
+                    $"'checked(max - zero)' was evaluted to '{checked(max - zero)}'. Expected: '{ulong.MaxValue - 0}'."
+                );
                 _counter++;
             }
         }
@@ -6241,7 +7155,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - one) != ulong.MaxValue - 1)
             {
-                Console.WriteLine($"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{ulong.MaxValue - 1}'.");
+                Console.WriteLine(
+                    $"'checked(max - one)' was evaluted to '{checked(max - one)}'. Expected: '{ulong.MaxValue - 1}'."
+                );
                 _counter++;
             }
         }
@@ -6257,7 +7173,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - half) != ulong.MaxValue - ulong.MaxValue / 2)
             {
-                Console.WriteLine($"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{ulong.MaxValue - ulong.MaxValue / 2}'.");
+                Console.WriteLine(
+                    $"'checked(max - half)' was evaluted to '{checked(max - half)}'. Expected: '{ulong.MaxValue - ulong.MaxValue / 2}'."
+                );
                 _counter++;
             }
         }
@@ -6272,7 +7190,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max - max) != ulong.MaxValue - ulong.MaxValue)
             {
-                Console.WriteLine($"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{ulong.MaxValue - ulong.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(max - max)' was evaluted to '{checked(max - max)}'. Expected: '{ulong.MaxValue - ulong.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -6288,7 +7208,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * zero) != 0 * 0)
             {
-                Console.WriteLine($"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(zero * zero)' was evaluted to '{checked(zero * zero)}'. Expected: '{0 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -6304,7 +7226,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * one) != 0 * 1)
             {
-                Console.WriteLine($"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(zero * one)' was evaluted to '{checked(zero * one)}'. Expected: '{0 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -6320,7 +7244,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * half) != 0 * (ulong.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (ulong.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(zero * half)' was evaluted to '{checked(zero * half)}'. Expected: '{0 * (ulong.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -6336,7 +7262,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(zero * max) != 0 * ulong.MaxValue)
             {
-                Console.WriteLine($"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * ulong.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(zero * max)' was evaluted to '{checked(zero * max)}'. Expected: '{0 * ulong.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -6352,7 +7280,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * zero) != 1 * 0)
             {
-                Console.WriteLine($"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(one * zero)' was evaluted to '{checked(one * zero)}'. Expected: '{1 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -6367,7 +7297,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * one) != 1 * 1)
             {
-                Console.WriteLine($"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(one * one)' was evaluted to '{checked(one * one)}'. Expected: '{1 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -6383,7 +7315,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * half) != 1 * (ulong.MaxValue / 2))
             {
-                Console.WriteLine($"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (ulong.MaxValue / 2)}'.");
+                Console.WriteLine(
+                    $"'checked(one * half)' was evaluted to '{checked(one * half)}'. Expected: '{1 * (ulong.MaxValue / 2)}'."
+                );
                 _counter++;
             }
         }
@@ -6399,7 +7333,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(one * max) != 1 * ulong.MaxValue)
             {
-                Console.WriteLine($"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * ulong.MaxValue}'.");
+                Console.WriteLine(
+                    $"'checked(one * max)' was evaluted to '{checked(one * max)}'. Expected: '{1 * ulong.MaxValue}'."
+                );
                 _counter++;
             }
         }
@@ -6415,7 +7351,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * zero) != ulong.MaxValue / 2 * 0)
             {
-                Console.WriteLine($"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{ulong.MaxValue / 2 * 0}'.");
+                Console.WriteLine(
+                    $"'checked(half * zero)' was evaluted to '{checked(half * zero)}'. Expected: '{ulong.MaxValue / 2 * 0}'."
+                );
                 _counter++;
             }
         }
@@ -6431,7 +7369,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(half * one) != ulong.MaxValue / 2 * 1)
             {
-                Console.WriteLine($"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{ulong.MaxValue / 2 * 1}'.");
+                Console.WriteLine(
+                    $"'checked(half * one)' was evaluted to '{checked(half * one)}'. Expected: '{ulong.MaxValue / 2 * 1}'."
+                );
                 _counter++;
             }
         }
@@ -6446,7 +7386,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * half)' did not throw OverflowException.");
         }
@@ -6462,7 +7405,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(half * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(half * max)' did not throw OverflowException.");
         }
@@ -6478,7 +7424,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * zero) != ulong.MaxValue * 0)
             {
-                Console.WriteLine($"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{ulong.MaxValue * 0}'.");
+                Console.WriteLine(
+                    $"'checked(max * zero)' was evaluted to '{checked(max * zero)}'. Expected: '{ulong.MaxValue * 0}'."
+                );
                 _counter++;
             }
         }
@@ -6494,7 +7442,9 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
 
             if (checked(max * one) != ulong.MaxValue * 1)
             {
-                Console.WriteLine($"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{ulong.MaxValue * 1}'.");
+                Console.WriteLine(
+                    $"'checked(max * one)' was evaluted to '{checked(max * one)}'. Expected: '{ulong.MaxValue * 1}'."
+                );
                 _counter++;
             }
         }
@@ -6510,7 +7460,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * half);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * half)' did not throw OverflowException.");
         }
@@ -6525,7 +7478,10 @@ public class ValueNumberingCheckedIntegerArithemticWithConstants
             {
                 _ = checked(max * max);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked(max * max)' did not throw OverflowException.");
         }

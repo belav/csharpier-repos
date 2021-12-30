@@ -21,22 +21,43 @@ namespace IntelHardwareIntrinsicTest
 
             if (Avx.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[8] { 1, -5, 100, 0, 1, -5, 100, 0 }, new float[8] { 22, -5, -50, 0, 22, -1, -50, 0 }, new float[8]))
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[4] { 1, -5, 100, 0 }, new double[4] { 1, 1, 50, 0 }, new double[4]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[8] { 1, -5, 100, 0, 1, -5, 100, 0 },
+                        new float[8] { 22, -5, -50, 0, 22, -1, -50, 0 },
+                        new float[8]
+                    )
+                )
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[4] { 1, -5, 100, 0 },
+                        new double[4] { 1, 1, 50, 0 },
+                        new double[4]
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<float>>(floatTable.inArray2Ptr);
-                    var vf3 = Avx.CompareScalar(vf1, vf2, FloatComparisonMode.OrderedEqualNonSignaling);
+                    var vf3 = Avx.CompareScalar(
+                        vf1,
+                        vf2,
+                        FloatComparisonMode.OrderedEqualNonSignaling
+                    );
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
                     var vd1 = Unsafe.Read<Vector128<double>>(doubleTable.inArray1Ptr);
                     var vd2 = Unsafe.Read<Vector128<double>>(doubleTable.inArray2Ptr);
-                    var vd3 = Avx.CompareScalar(vd1, vd2, FloatComparisonMode.OrderedEqualNonSignaling);
+                    var vd3 = Avx.CompareScalar(
+                        vd1,
+                        vd2,
+                        FloatComparisonMode.OrderedEqualNonSignaling
+                    );
                     Unsafe.Write(doubleTable.outArrayPtr, vd3);
 
-
-                    if (BitConverter.SingleToInt32Bits(floatTable.outArray[0]) != (floatTable.inArray1[0] == floatTable.inArray2[0] ? -1 : 0))
+                    if (
+                        BitConverter.SingleToInt32Bits(floatTable.outArray[0])
+                        != (floatTable.inArray1[0] == floatTable.inArray2[0] ? -1 : 0)
+                    )
                     {
                         Console.WriteLine("Avx CompareScalar failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -59,9 +80,11 @@ namespace IntelHardwareIntrinsicTest
                             return Fail;
                         }
                     }
-                    
-                    
-                    if (BitConverter.DoubleToInt64Bits(doubleTable.outArray[0]) != (doubleTable.inArray1[0] == doubleTable.inArray2[0] ? -1 : 0))
+
+                    if (
+                        BitConverter.DoubleToInt64Bits(doubleTable.outArray[0])
+                        != (doubleTable.inArray1[0] == doubleTable.inArray2[0] ? -1 : 0)
+                    )
                     {
                         Console.WriteLine("Avx CompareScalar failed on double:");
                         foreach (var item in doubleTable.outArray)
@@ -85,11 +108,13 @@ namespace IntelHardwareIntrinsicTest
                         }
                     }
 
-                    try 
+                    try
                     {
                         var ve = Avx.CompareScalar(vf1, vf2, (FloatComparisonMode)32);
                         Unsafe.Write(floatTable.outArrayPtr, ve);
-                        Console.WriteLine("Avx CompareScalar failed on float with out-of-range argument:");
+                        Console.WriteLine(
+                            "Avx CompareScalar failed on float with out-of-range argument:"
+                        );
                         return Fail;
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -97,11 +122,13 @@ namespace IntelHardwareIntrinsicTest
                         testResult = Pass;
                     }
 
-                    try 
+                    try
                     {
                         var ve = Avx.CompareScalar(vd1, vd2, (FloatComparisonMode)32);
                         Unsafe.Write(floatTable.outArrayPtr, ve);
-                        Console.WriteLine("Avx CompareScalar failed on double with out-of-range argument:");
+                        Console.WriteLine(
+                            "Avx CompareScalar failed on double with out-of-range argument:"
+                        );
                         return Fail;
                     }
                     catch (ArgumentOutOfRangeException e)
@@ -109,11 +136,22 @@ namespace IntelHardwareIntrinsicTest
                         testResult = Pass;
                     }
 
-                    try 
+                    try
                     {
-                        var ve = typeof(Avx).GetMethod(nameof(Avx.CompareScalar), new Type[] { typeof(Vector128<Single>), typeof(Vector128<Single>), typeof(FloatComparisonMode) })
-                                     .Invoke(null, new object[] {vf1, vf2, (FloatComparisonMode)32});
-                        Console.WriteLine("Indirect-calling Avx CompareScalar failed on float with out-of-range argument:");
+                        var ve = typeof(Avx)
+                            .GetMethod(
+                                nameof(Avx.CompareScalar),
+                                new Type[]
+                                {
+                                    typeof(Vector128<Single>),
+                                    typeof(Vector128<Single>),
+                                    typeof(FloatComparisonMode)
+                                }
+                            )
+                            .Invoke(null, new object[] { vf1, vf2, (FloatComparisonMode)32 });
+                        Console.WriteLine(
+                            "Indirect-calling Avx CompareScalar failed on float with out-of-range argument:"
+                        );
                         return Fail;
                     }
                     catch (System.Reflection.TargetInvocationException e)
@@ -124,16 +162,29 @@ namespace IntelHardwareIntrinsicTest
                         }
                         else
                         {
-                            Console.WriteLine("Indirect-calling Avx CompareScalar failed on float with out-of-range argument:");
+                            Console.WriteLine(
+                                "Indirect-calling Avx CompareScalar failed on float with out-of-range argument:"
+                            );
                             return Fail;
                         }
                     }
 
-                    try 
+                    try
                     {
-                        var ve = typeof(Avx).GetMethod(nameof(Avx.CompareScalar), new Type[] { typeof(Vector128<Double>), typeof(Vector128<Double>), typeof(FloatComparisonMode) })
-                                     .Invoke(null, new object[] {vd1, vd2, (FloatComparisonMode)32});
-                        Console.WriteLine("Indirect-calling Avx CompareScalar failed on double with out-of-range argument:");
+                        var ve = typeof(Avx)
+                            .GetMethod(
+                                nameof(Avx.CompareScalar),
+                                new Type[]
+                                {
+                                    typeof(Vector128<Double>),
+                                    typeof(Vector128<Double>),
+                                    typeof(FloatComparisonMode)
+                                }
+                            )
+                            .Invoke(null, new object[] { vd1, vd2, (FloatComparisonMode)32 });
+                        Console.WriteLine(
+                            "Indirect-calling Avx CompareScalar failed on double with out-of-range argument:"
+                        );
                         return Fail;
                     }
                     catch (System.Reflection.TargetInvocationException e)
@@ -144,7 +195,9 @@ namespace IntelHardwareIntrinsicTest
                         }
                         else
                         {
-                            Console.WriteLine("Indirect-calling Avx CompareScalar failed on double with out-of-range argument:");
+                            Console.WriteLine(
+                                "Indirect-calling Avx CompareScalar failed on double with out-of-range argument:"
+                            );
                             return Fail;
                         }
                     }
@@ -196,6 +249,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

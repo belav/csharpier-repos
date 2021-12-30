@@ -13,11 +13,11 @@ public static class StackPolicyTests
     [Fact]
     public static void BaseFunctionality()
     {
-        var stack = new StackPolicy(Options.Create(new QueuePolicyOptions
-        {
-            MaxConcurrentRequests = 0,
-            RequestQueueLimit = 2,
-        }));
+        var stack = new StackPolicy(
+            Options.Create(
+                new QueuePolicyOptions { MaxConcurrentRequests = 0, RequestQueueLimit = 2, }
+            )
+        );
 
         var task1 = stack.TryEnterAsync();
 
@@ -31,11 +31,11 @@ public static class StackPolicyTests
     [Fact]
     public static void OldestRequestOverwritten()
     {
-        var stack = new StackPolicy(Options.Create(new QueuePolicyOptions
-        {
-            MaxConcurrentRequests = 0,
-            RequestQueueLimit = 3,
-        }));
+        var stack = new StackPolicy(
+            Options.Create(
+                new QueuePolicyOptions { MaxConcurrentRequests = 0, RequestQueueLimit = 3, }
+            )
+        );
 
         var task1 = stack.TryEnterAsync();
         Assert.False(task1.IsCompleted);
@@ -57,11 +57,11 @@ public static class StackPolicyTests
     [Fact]
     public static void RespectsMaxConcurrency()
     {
-        var stack = new StackPolicy(Options.Create(new QueuePolicyOptions
-        {
-            MaxConcurrentRequests = 2,
-            RequestQueueLimit = 2,
-        }));
+        var stack = new StackPolicy(
+            Options.Create(
+                new QueuePolicyOptions { MaxConcurrentRequests = 2, RequestQueueLimit = 2, }
+            )
+        );
 
         var task1 = stack.TryEnterAsync();
         Assert.True(task1.IsCompleted);
@@ -76,11 +76,11 @@ public static class StackPolicyTests
     [Fact]
     public static void ExitRequestsPreserveSemaphoreState()
     {
-        var stack = new StackPolicy(Options.Create(new QueuePolicyOptions
-        {
-            MaxConcurrentRequests = 1,
-            RequestQueueLimit = 2,
-        }));
+        var stack = new StackPolicy(
+            Options.Create(
+                new QueuePolicyOptions { MaxConcurrentRequests = 1, RequestQueueLimit = 2, }
+            )
+        );
 
         var task1 = stack.TryEnterAsync();
         Assert.True(task1.IsCompleted && task1.Result);
@@ -88,10 +88,10 @@ public static class StackPolicyTests
         var task2 = stack.TryEnterAsync();
         Assert.False(task2.IsCompleted);
 
-        stack.OnExit();  // t1 exits, should free t2 to return
+        stack.OnExit(); // t1 exits, should free t2 to return
         Assert.True(task2.IsCompleted && task2.Result);
 
-        stack.OnExit();  // t2 exists, there's now a free spot in server
+        stack.OnExit(); // t2 exists, there's now a free spot in server
 
         var task3 = stack.TryEnterAsync();
         Assert.True(task3.IsCompleted && task3.Result);
@@ -100,11 +100,11 @@ public static class StackPolicyTests
     [Fact]
     public static void StaleRequestsAreProperlyOverwritten()
     {
-        var stack = new StackPolicy(Options.Create(new QueuePolicyOptions
-        {
-            MaxConcurrentRequests = 0,
-            RequestQueueLimit = 4,
-        }));
+        var stack = new StackPolicy(
+            Options.Create(
+                new QueuePolicyOptions { MaxConcurrentRequests = 0, RequestQueueLimit = 4, }
+            )
+        );
 
         var task1 = stack.TryEnterAsync();
         stack.OnExit();
@@ -118,11 +118,11 @@ public static class StackPolicyTests
     [Fact]
     public static async Task OneTryEnterAsyncOneOnExit()
     {
-        var stack = new StackPolicy(Options.Create(new QueuePolicyOptions
-        {
-            MaxConcurrentRequests = 1,
-            RequestQueueLimit = 4,
-        }));
+        var stack = new StackPolicy(
+            Options.Create(
+                new QueuePolicyOptions { MaxConcurrentRequests = 1, RequestQueueLimit = 4, }
+            )
+        );
 
         Assert.Throws<InvalidOperationException>(() => stack.OnExit());
 

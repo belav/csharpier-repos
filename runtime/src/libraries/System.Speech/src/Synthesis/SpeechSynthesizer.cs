@@ -15,9 +15,7 @@ namespace System.Speech.Synthesis
     public sealed class SpeechSynthesizer : IDisposable
     {
         #region Constructors
-        public SpeechSynthesizer()
-        {
-        }
+        public SpeechSynthesizer() { }
 
         ~SpeechSynthesizer()
         {
@@ -35,7 +33,14 @@ namespace System.Speech.Synthesis
         public void SelectVoice(string name)
         {
             Helpers.ThrowIfEmptyOrNull(name, nameof(name));
-            TTSVoice ttsVoice = VoiceSynthesizer.GetEngine(name, CultureInfo.CurrentUICulture, VoiceGender.NotSet, VoiceAge.NotSet, 1, true);
+            TTSVoice ttsVoice = VoiceSynthesizer.GetEngine(
+                name,
+                CultureInfo.CurrentUICulture,
+                VoiceGender.NotSet,
+                VoiceAge.NotSet,
+                1,
+                true
+            );
 
             if (ttsVoice == null || name != ttsVoice.VoiceInfo.Name)
             {
@@ -56,17 +61,28 @@ namespace System.Speech.Synthesis
         {
             SelectVoiceByHints(gender, age, voiceAlternate, CultureInfo.CurrentUICulture);
         }
-        public void SelectVoiceByHints(VoiceGender gender, VoiceAge age, int voiceAlternate, CultureInfo culture)
+        public void SelectVoiceByHints(
+            VoiceGender gender,
+            VoiceAge age,
+            int voiceAlternate,
+            CultureInfo culture
+        )
         {
             Helpers.ThrowIfNull(culture, nameof(culture));
 
             if (voiceAlternate < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(voiceAlternate), SR.Get(SRID.PromptBuilderInvalidVariant));
+                throw new ArgumentOutOfRangeException(
+                    nameof(voiceAlternate),
+                    SR.Get(SRID.PromptBuilderInvalidVariant)
+                );
             }
             if (!VoiceInfo.ValidateGender(gender))
             {
-                throw new ArgumentException(SR.Get(SRID.EnumInvalid, "VoiceGender"), nameof(gender));
+                throw new ArgumentException(
+                    SR.Get(SRID.EnumInvalid, "VoiceGender"),
+                    nameof(gender)
+                );
             }
 
             if (!VoiceInfo.ValidateAge(age))
@@ -74,7 +90,14 @@ namespace System.Speech.Synthesis
                 throw new ArgumentException(SR.Get(SRID.EnumInvalid, "VoiceAge"), nameof(age));
             }
 
-            TTSVoice ttsVoice = VoiceSynthesizer.GetEngine(null, culture, gender, age, voiceAlternate, true);
+            TTSVoice ttsVoice = VoiceSynthesizer.GetEngine(
+                null,
+                culture,
+                gender,
+                age,
+                voiceAlternate,
+                true
+            );
 
             if (ttsVoice == null)
             {
@@ -189,7 +212,12 @@ namespace System.Speech.Synthesis
             Helpers.ThrowIfEmptyOrNull(path, nameof(path));
 
             SetOutputToNull();
-            SetOutputStream(new FileStream(path, FileMode.Create, FileAccess.Write), null, true, true);
+            SetOutputStream(
+                new FileStream(path, FileMode.Create, FileAccess.Write),
+                null,
+                true,
+                true
+            );
         }
         // The stream is disposed when the speech synthesizer is disposed
         public void SetOutputToWaveFile(string path, SpeechAudioFormatInfo formatInfo)
@@ -198,7 +226,12 @@ namespace System.Speech.Synthesis
             Helpers.ThrowIfNull(formatInfo, nameof(formatInfo));
 
             SetOutputToNull();
-            SetOutputStream(new FileStream(path, FileMode.Create, FileAccess.Write), formatInfo, true, true);
+            SetOutputStream(
+                new FileStream(path, FileMode.Create, FileAccess.Write),
+                formatInfo,
+                true,
+                true
+            );
         }
         public void SetOutputToWaveStream(Stream audioDestination)
         {
@@ -206,7 +239,10 @@ namespace System.Speech.Synthesis
 
             SetOutputStream(audioDestination, null, true, false);
         }
-        public void SetOutputToAudioStream(Stream audioDestination, SpeechAudioFormatInfo formatInfo)
+        public void SetOutputToAudioStream(
+            Stream audioDestination,
+            SpeechAudioFormatInfo formatInfo
+        )
         {
             Helpers.ThrowIfNull(audioDestination, nameof(audioDestination));
             Helpers.ThrowIfNull(formatInfo, nameof(formatInfo));
@@ -305,13 +341,21 @@ namespace System.Speech.Synthesis
             add
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.AddEvent<SpeakProgressEventArgs>(TtsEventId.WordBoundary, ref VoiceSynthesizer._speakProgress, value);
+                VoiceSynthesizer.AddEvent<SpeakProgressEventArgs>(
+                    TtsEventId.WordBoundary,
+                    ref VoiceSynthesizer._speakProgress,
+                    value
+                );
             }
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.RemoveEvent<SpeakProgressEventArgs>(TtsEventId.WordBoundary, ref VoiceSynthesizer._speakProgress, value);
+                VoiceSynthesizer.RemoveEvent<SpeakProgressEventArgs>(
+                    TtsEventId.WordBoundary,
+                    ref VoiceSynthesizer._speakProgress,
+                    value
+                );
             }
         }
         public event EventHandler<BookmarkReachedEventArgs> BookmarkReached
@@ -320,13 +364,21 @@ namespace System.Speech.Synthesis
             add
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.AddEvent<BookmarkReachedEventArgs>(TtsEventId.Bookmark, ref VoiceSynthesizer._bookmarkReached, value);
+                VoiceSynthesizer.AddEvent<BookmarkReachedEventArgs>(
+                    TtsEventId.Bookmark,
+                    ref VoiceSynthesizer._bookmarkReached,
+                    value
+                );
             }
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.RemoveEvent<BookmarkReachedEventArgs>(TtsEventId.Bookmark, ref VoiceSynthesizer._bookmarkReached, value);
+                VoiceSynthesizer.RemoveEvent<BookmarkReachedEventArgs>(
+                    TtsEventId.Bookmark,
+                    ref VoiceSynthesizer._bookmarkReached,
+                    value
+                );
             }
         }
         public event EventHandler<VoiceChangeEventArgs> VoiceChange
@@ -335,13 +387,21 @@ namespace System.Speech.Synthesis
             add
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.AddEvent<VoiceChangeEventArgs>(TtsEventId.VoiceChange, ref VoiceSynthesizer._voiceChange, value);
+                VoiceSynthesizer.AddEvent<VoiceChangeEventArgs>(
+                    TtsEventId.VoiceChange,
+                    ref VoiceSynthesizer._voiceChange,
+                    value
+                );
             }
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.RemoveEvent<VoiceChangeEventArgs>(TtsEventId.VoiceChange, ref VoiceSynthesizer._voiceChange, value);
+                VoiceSynthesizer.RemoveEvent<VoiceChangeEventArgs>(
+                    TtsEventId.VoiceChange,
+                    ref VoiceSynthesizer._voiceChange,
+                    value
+                );
             }
         }
 
@@ -352,13 +412,21 @@ namespace System.Speech.Synthesis
             add
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.AddEvent<PhonemeReachedEventArgs>(TtsEventId.Phoneme, ref VoiceSynthesizer._phonemeReached, value);
+                VoiceSynthesizer.AddEvent<PhonemeReachedEventArgs>(
+                    TtsEventId.Phoneme,
+                    ref VoiceSynthesizer._phonemeReached,
+                    value
+                );
             }
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.RemoveEvent<PhonemeReachedEventArgs>(TtsEventId.Phoneme, ref VoiceSynthesizer._phonemeReached, value);
+                VoiceSynthesizer.RemoveEvent<PhonemeReachedEventArgs>(
+                    TtsEventId.Phoneme,
+                    ref VoiceSynthesizer._phonemeReached,
+                    value
+                );
             }
         }
         public event EventHandler<VisemeReachedEventArgs> VisemeReached
@@ -367,13 +435,21 @@ namespace System.Speech.Synthesis
             add
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.AddEvent<VisemeReachedEventArgs>(TtsEventId.Viseme, ref VoiceSynthesizer._visemeReached, value);
+                VoiceSynthesizer.AddEvent<VisemeReachedEventArgs>(
+                    TtsEventId.Viseme,
+                    ref VoiceSynthesizer._visemeReached,
+                    value
+                );
             }
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
                 Helpers.ThrowIfNull(value, nameof(value));
-                VoiceSynthesizer.RemoveEvent<VisemeReachedEventArgs>(TtsEventId.Viseme, ref VoiceSynthesizer._visemeReached, value);
+                VoiceSynthesizer.RemoveEvent<VisemeReachedEventArgs>(
+                    TtsEventId.Viseme,
+                    ref VoiceSynthesizer._visemeReached,
+                    value
+                );
             }
         }
 
@@ -401,37 +477,34 @@ namespace System.Speech.Synthesis
         #region public Properties
         public SynthesizerState State
         {
-            get
-            {
-                return VoiceSynthesizer.State;
-            }
+            get { return VoiceSynthesizer.State; }
         }
         public int Rate
         {
-            get
-            {
-                return VoiceSynthesizer.Rate;
-            }
+            get { return VoiceSynthesizer.Rate; }
             set
             {
                 if (value < -10 || value > 10)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.RateOutOfRange));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.RateOutOfRange)
+                    );
                 }
                 VoiceSynthesizer.Rate = value;
             }
         }
         public int Volume
         {
-            get
-            {
-                return VoiceSynthesizer.Volume;
-            }
+            get { return VoiceSynthesizer.Volume; }
             set
             {
                 if (value < 0 || value > 100)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.ResourceUsageOutOfRange));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.ResourceUsageOutOfRange)
+                    );
                 }
                 VoiceSynthesizer.Volume = value;
             }
@@ -452,7 +525,12 @@ namespace System.Speech.Synthesis
         #endregion
 
         #region Private Methods
-        private void SetOutputStream(Stream stream, SpeechAudioFormatInfo formatInfo, bool headerInfo, bool closeStreamOnExit)
+        private void SetOutputStream(
+            Stream stream,
+            SpeechAudioFormatInfo formatInfo,
+            bool headerInfo,
+            bool closeStreamOnExit
+        )
         {
             SetOutputToNull();
             _outputStream = stream;

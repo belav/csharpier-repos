@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         SuppressObsoleteChecks = 1 << 1,
         ConstructorInitializer = 1 << 2,
         FieldInitializer = 1 << 3,
-        ObjectInitializerMember = 1 << 4,    // object initializer field/property access
-        CollectionInitializerAddMethod = 1 << 5,   // used for collection initializer add method overload resolution diagnostics
+        ObjectInitializerMember = 1 << 4, // object initializer field/property access
+        CollectionInitializerAddMethod = 1 << 5, // used for collection initializer add method overload resolution diagnostics
         AttributeArgument = 1 << 6,
         GenericConstraintsClause = 1 << 7, // "where" clause (used for cycle checking)
         Cref = 1 << 8, // documentation comment cref
@@ -51,7 +51,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Imports touched by a binder with this flag set are not consider "used".
         /// </remarks>
         SemanticModel = 1 << 12,
-
         EarlyAttributeBinding = 1 << 13,
 
         /// <summary>Remarks, mutually exclusive with <see cref="UncheckedRegion"/>.</summary>
@@ -71,9 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         // This flag is only used to support CS0724. Implies that InFinallyBlock and
         // InCatchBlock are also set.
         InNestedFinallyBlock = 1 << 21,
-
         IgnoreAccessibility = 1 << 22,
-
         ParameterDefaultValue = 1 << 23,
 
         /// <summary>
@@ -114,6 +111,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // Groups
 
-        AllClearedAtExecutableCodeBoundary = InLockBody | InCatchBlock | InCatchFilter | InFinallyBlock | InTryBlockOfTryCatch | InNestedFinallyBlock,
+        AllClearedAtExecutableCodeBoundary =
+            InLockBody
+            | InCatchBlock
+            | InCatchFilter
+            | InFinallyBlock
+            | InTryBlockOfTryCatch
+            | InNestedFinallyBlock,
     }
 }

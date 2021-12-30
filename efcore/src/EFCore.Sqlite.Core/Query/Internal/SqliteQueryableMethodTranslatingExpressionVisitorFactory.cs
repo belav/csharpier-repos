@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class SqliteQueryableMethodTranslatingExpressionVisitorFactory : IQueryableMethodTranslatingExpressionVisitorFactory
+    public class SqliteQueryableMethodTranslatingExpressionVisitorFactory
+        : IQueryableMethodTranslatingExpressionVisitorFactory
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -22,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         /// </summary>
         public SqliteQueryableMethodTranslatingExpressionVisitorFactory(
             QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
-            RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies)
+            RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
@@ -47,11 +49,17 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryableMethodTranslatingExpressionVisitor Create(QueryCompilationContext queryCompilationContext)
+        public virtual QueryableMethodTranslatingExpressionVisitor Create(
+            QueryCompilationContext queryCompilationContext
+        )
         {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
-            return new SqliteQueryableMethodTranslatingExpressionVisitor(Dependencies, RelationalDependencies, queryCompilationContext);
+            return new SqliteQueryableMethodTranslatingExpressionVisitor(
+                Dependencies,
+                RelationalDependencies,
+                queryCompilationContext
+            );
         }
     }
 }

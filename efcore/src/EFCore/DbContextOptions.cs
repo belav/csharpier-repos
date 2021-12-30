@@ -21,7 +21,10 @@ namespace Microsoft.EntityFrameworkCore
     /// </remarks>
     public abstract class DbContextOptions : IDbContextOptions
     {
-        private readonly ImmutableSortedDictionary<Type, (IDbContextOptionsExtension Extension, int Ordinal)> _extensionsMap;
+        private readonly ImmutableSortedDictionary<
+            Type,
+            (IDbContextOptionsExtension Extension, int Ordinal)
+        > _extensionsMap;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,7 +35,10 @@ namespace Microsoft.EntityFrameworkCore
         [EntityFrameworkInternal]
         protected DbContextOptions()
         {
-            _extensionsMap = ImmutableSortedDictionary.Create<Type, (IDbContextOptionsExtension, int)>(TypeFullNameComparer.Instance);
+            _extensionsMap = ImmutableSortedDictionary.Create<
+                Type,
+                (IDbContextOptionsExtension, int)
+            >(TypeFullNameComparer.Instance);
         }
 
         /// <summary>
@@ -42,11 +48,19 @@ namespace Microsoft.EntityFrameworkCore
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected DbContextOptions(
-            IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
+        protected DbContextOptions(IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
         {
-            _extensionsMap = ImmutableSortedDictionary.Create<Type, (IDbContextOptionsExtension, int)>(TypeFullNameComparer.Instance)
-                .AddRange(extensions.Select((p, i) => new KeyValuePair<Type, (IDbContextOptionsExtension, int)>(p.Key, (p.Value, i))));
+            _extensionsMap = ImmutableSortedDictionary
+                .Create<Type, (IDbContextOptionsExtension, int)>(TypeFullNameComparer.Instance)
+                .AddRange(
+                    extensions.Select(
+                        (p, i) =>
+                            new KeyValuePair<Type, (IDbContextOptionsExtension, int)>(
+                                p.Key,
+                                (p.Value, i)
+                            )
+                    )
+                );
         }
 
         /// <summary>
@@ -57,7 +71,11 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         [EntityFrameworkInternal]
         protected DbContextOptions(
-            ImmutableSortedDictionary<Type, (IDbContextOptionsExtension Extension, int Ordinal)> extensions)
+            ImmutableSortedDictionary<
+                Type,
+                (IDbContextOptionsExtension Extension, int Ordinal)
+            > extensions
+        )
         {
             _extensionsMap = extensions;
         }
@@ -65,8 +83,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the extensions that store the configured options.
         /// </summary>
-        public virtual IEnumerable<IDbContextOptionsExtension> Extensions
-            => _extensionsMap.Values.OrderBy(v => v.Ordinal).Select(v => v.Extension);
+        public virtual IEnumerable<IDbContextOptionsExtension> Extensions =>
+            _extensionsMap.Values.OrderBy(v => v.Ordinal).Select(v => v.Extension);
 
         /// <summary>
         ///     Gets the extension of the specified type. Returns <see langword="null" /> if no extension of the specified type is configured.
@@ -74,8 +92,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TExtension">The type of the extension to get.</typeparam>
         /// <returns>The extension, or <see langword="null" /> if none was found.</returns>
         public virtual TExtension? FindExtension<TExtension>()
-            where TExtension : class, IDbContextOptionsExtension
-            => _extensionsMap.TryGetValue(typeof(TExtension), out var value) ? (TExtension)value.Extension : null;
+            where TExtension : class, IDbContextOptionsExtension =>
+            _extensionsMap.TryGetValue(typeof(TExtension), out var value)
+                ? (TExtension)value.Extension
+                : null;
 
         /// <summary>
         ///     Gets the extension of the specified type. Throws if no extension of the specified type is configured.
@@ -88,7 +108,9 @@ namespace Microsoft.EntityFrameworkCore
             var extension = FindExtension<TExtension>();
             if (extension == null)
             {
-                throw new InvalidOperationException(CoreStrings.OptionsExtensionNotFound(typeof(TExtension).ShortDisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.OptionsExtensionNotFound(typeof(TExtension).ShortDisplayName())
+                );
             }
 
             return extension;
@@ -111,8 +133,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual ImmutableSortedDictionary<Type, (IDbContextOptionsExtension Extension, int Ordinal)> ExtensionsMap
-            => _extensionsMap;
+        protected virtual ImmutableSortedDictionary<
+            Type,
+            (IDbContextOptionsExtension Extension, int Ordinal)
+        > ExtensionsMap => _extensionsMap;
 
         /// <summary>
         ///     The type of context that these options are for. Will return <see cref="DbContext" /> if the
@@ -123,8 +147,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Specifies that no further configuration of this options object should occur.
         /// </summary>
-        public virtual void Freeze()
-            => IsFrozen = true;
+        public virtual void Freeze() => IsFrozen = true;
 
         /// <summary>
         ///     Returns <see langword="true" /> if <see cref="Freeze" /> has been called. A frozen options object cannot be further
@@ -133,9 +156,9 @@ namespace Microsoft.EntityFrameworkCore
         public virtual bool IsFrozen { get; private set; }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => ReferenceEquals(this, obj)
-                || (obj is DbContextOptions otherOptions && Equals(otherOptions));
+        public override bool Equals(object? obj) =>
+            ReferenceEquals(this, obj)
+            || (obj is DbContextOptions otherOptions && Equals(otherOptions));
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -144,12 +167,17 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>
         ///     <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.
         /// </returns>
-        protected virtual bool Equals(DbContextOptions other)
-            => _extensionsMap.Count == other._extensionsMap.Count
-                && _extensionsMap.Zip(other._extensionsMap)
-                    .All(
-                        p => p.First.Value.Ordinal == p.Second.Value.Ordinal
-                            && p.First.Value.Extension.Info.ShouldUseSameServiceProvider(p.Second.Value.Extension.Info));
+        protected virtual bool Equals(DbContextOptions other) =>
+            _extensionsMap.Count == other._extensionsMap.Count
+            && _extensionsMap
+                .Zip(other._extensionsMap)
+                .All(
+                    p =>
+                        p.First.Value.Ordinal == p.Second.Value.Ordinal
+                        && p.First.Value.Extension.Info.ShouldUseSameServiceProvider(
+                            p.Second.Value.Extension.Info
+                        )
+                );
 
         /// <inheritdoc />
         public override int GetHashCode()
@@ -159,7 +187,9 @@ namespace Microsoft.EntityFrameworkCore
             foreach (var dbContextOptionsExtension in _extensionsMap)
             {
                 hashCode.Add(dbContextOptionsExtension.Key);
-                hashCode.Add(dbContextOptionsExtension.Value.Extension.Info.GetServiceProviderHashCode());
+                hashCode.Add(
+                    dbContextOptionsExtension.Value.Extension.Info.GetServiceProviderHashCode()
+                );
             }
 
             return hashCode.ToHashCode();

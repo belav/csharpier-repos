@@ -39,7 +39,6 @@ namespace OLEDB.Test.ModuleCore
             public string DoubleQuote = "\"";
         };
 
-
         //Methods
         public static MyDict<string, string> ParseKeywords(string str)
         {

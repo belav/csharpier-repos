@@ -21,7 +21,8 @@ public static class MvcRazorMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddRazorOptions(
         this IMvcBuilder builder,
-        Action<RazorViewEngineOptions> setupAction)
+        Action<RazorViewEngineOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -67,8 +68,8 @@ public static class MvcRazorMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/> instance this method extends.</returns>
     public static IMvcBuilder InitializeTagHelper<TTagHelper>(
         this IMvcBuilder builder,
-        Action<TTagHelper, ViewContext> initialize)
-        where TTagHelper : ITagHelper
+        Action<TTagHelper, ViewContext> initialize
+    ) where TTagHelper : ITagHelper
     {
         if (builder == null)
         {

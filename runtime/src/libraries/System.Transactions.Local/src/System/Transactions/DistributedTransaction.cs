@@ -9,7 +9,11 @@ namespace System.Transactions.Distributed
     {
         internal object? NodeName { get; set; }
 
-        internal IPromotedEnlistment ReenlistTransaction(Guid resourceManagerIdentifier, byte[] resourceManagerRecoveryInformation, RecoveringInternalEnlistment internalEnlistment)
+        internal IPromotedEnlistment ReenlistTransaction(
+            Guid resourceManagerIdentifier,
+            byte[] resourceManagerRecoveryInformation,
+            RecoveringInternalEnlistment internalEnlistment
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
@@ -29,17 +33,24 @@ namespace System.Transactions.Distributed
             throw DistributedTransaction.NotSupported();
         }
 
-        internal static Transaction GetTransactionFromDtcTransaction(IDtcTransaction transactionNative)
+        internal static Transaction GetTransactionFromDtcTransaction(
+            IDtcTransaction transactionNative
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
 
-        internal static DistributedTransaction GetTransactionFromExportCookie(byte[] cookie, Guid txId)
+        internal static DistributedTransaction GetTransactionFromExportCookie(
+            byte[] cookie,
+            Guid txId
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
 
-        internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(byte[] propagationToken)
+        internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(
+            byte[] propagationToken
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
@@ -58,11 +69,12 @@ namespace System.Transactions.Distributed
     /// </summary>
     internal class DistributedTransaction : ISerializable, IObjectReference
     {
-        internal DistributedTransaction()
-        {
-        }
+        internal DistributedTransaction() { }
 
-        protected DistributedTransaction(SerializationInfo serializationInfo, StreamingContext context)
+        protected DistributedTransaction(
+            SerializationInfo serializationInfo,
+            StreamingContext context
+        )
         {
             //if (serializationInfo == null)
             //{
@@ -80,16 +92,22 @@ namespace System.Transactions.Distributed
         internal IsolationLevel IsolationLevel { get; set; }
         internal Transaction? SavedLtmPromotedTransaction { get; set; }
 
-        internal void Dispose()
-        {
-        }
+        internal void Dispose() { }
 
-        internal IPromotedEnlistment EnlistVolatile(InternalEnlistment internalEnlistment, EnlistmentOptions enlistmentOptions)
+        internal IPromotedEnlistment EnlistVolatile(
+            InternalEnlistment internalEnlistment,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             throw NotSupported();
         }
 
-        internal IPromotedEnlistment EnlistDurable(Guid resourceManagerIdentifier, DurableInternalEnlistment internalEnlistment, bool v, EnlistmentOptions enlistmentOptions)
+        internal IPromotedEnlistment EnlistDurable(
+            Guid resourceManagerIdentifier,
+            DurableInternalEnlistment internalEnlistment,
+            bool v,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             throw NotSupported();
         }
@@ -104,7 +122,10 @@ namespace System.Transactions.Distributed
             throw NotSupported();
         }
 
-        internal IPromotedEnlistment EnlistVolatile(VolatileDemultiplexer volatileDemux, EnlistmentOptions enlistmentOptions)
+        internal IPromotedEnlistment EnlistVolatile(
+            VolatileDemultiplexer volatileDemux,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             throw NotSupported();
         }
@@ -129,7 +150,10 @@ namespace System.Transactions.Distributed
             throw NotSupported();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext context)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext context
+        )
         {
             //if (serializationInfo == null)
             //{

@@ -4,9 +4,7 @@
 
 using System;
 
-interface I<T>
-{
-}
+interface I<T> { }
 class C1<T> : I<T>
 {
     public T a;
@@ -34,5 +32,3 @@ class Test_genisinst
         return C2.GetMemberList<int>(ref o);
     }
 }
-
-

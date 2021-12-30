@@ -98,8 +98,12 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { object foo = vmp.ViewData; },
-                "A ViewMasterPage can be used only with content pages that derive from ViewPage or ViewPage<TModel>.");
+                delegate
+                {
+                    object foo = vmp.ViewData;
+                },
+                "A ViewMasterPage can be used only with content pages that derive from ViewPage or ViewPage<TModel>."
+            );
         }
 
         [Fact]
@@ -113,8 +117,12 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { object foo = vmp.ViewData.Model; },
-                "The model item passed into the dictionary is of type 'System.Web.Mvc.SelectListItem', but this dictionary requires a model item of type 'System.Web.Mvc.Test.ViewMasterPageTest+DummyViewData'.");
+                delegate
+                {
+                    object foo = vmp.ViewData.Model;
+                },
+                "The model item passed into the dictionary is of type 'System.Web.Mvc.SelectListItem', but this dictionary requires a model item of type 'System.Web.Mvc.Test.ViewMasterPageTest+DummyViewData'."
+            );
         }
 
         [Fact]
@@ -125,8 +133,12 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { object foo = vmp.ViewData; },
-                "A ViewMasterPage can be used only with content pages that derive from ViewPage or ViewPage<TModel>.");
+                delegate
+                {
+                    object foo = vmp.ViewData;
+                },
+                "A ViewMasterPage can be used only with content pages that derive from ViewPage or ViewPage<TModel>."
+            );
         }
 
         [Fact]
@@ -138,8 +150,12 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { object foo = vmp.ViewData; },
-                "A ViewMasterPage can be used only with content pages that derive from ViewPage or ViewPage<TModel>.");
+                delegate
+                {
+                    object foo = vmp.ViewData;
+                },
+                "A ViewMasterPage can be used only with content pages that derive from ViewPage or ViewPage<TModel>."
+            );
         }
 
         [Fact]
@@ -165,7 +181,10 @@ namespace System.Web.Mvc.Test
             ViewMasterPage vmp = new ViewMasterPage();
             ViewPage vp = new ViewPage();
             vmp.Page = vp;
-            RequestContext rc = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext rc = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             UrlHelper urlHelper = new UrlHelper(rc);
             vp.Url = urlHelper;
 

@@ -18,7 +18,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData("", "_")]
         public void Sanitizes_name_with_no_singularize_or_pluralize(string input, string output)
         {
-            Assert.Equal(output, new CSharpNamer<string>(s => s, new CSharpUtilities(), null).GetName(input));
+            Assert.Equal(
+                output,
+                new CSharpNamer<string>(s => s, new CSharpUtilities(), null).GetName(input)
+            );
         }
 
         [ConditionalTheory]
@@ -27,7 +30,14 @@ namespace Microsoft.EntityFrameworkCore
         public void Sanitizes_name_with_singularizer(string input, string output)
         {
             var pluralizer = new HumanizerPluralizer();
-            Assert.Equal(output, new CSharpNamer<string>(s => s, new CSharpUtilities(), pluralizer.Singularize).GetName(input));
+            Assert.Equal(
+                output,
+                new CSharpNamer<string>(
+                    s => s,
+                    new CSharpUtilities(),
+                    pluralizer.Singularize
+                ).GetName(input)
+            );
         }
 
         [ConditionalTheory]
@@ -36,7 +46,14 @@ namespace Microsoft.EntityFrameworkCore
         public void Sanitizes_name_with_pluralizer(string input, string output)
         {
             var pluralizer = new HumanizerPluralizer();
-            Assert.Equal(output, new CSharpNamer<string>(s => s, new CSharpUtilities(), pluralizer.Pluralize).GetName(input));
+            Assert.Equal(
+                output,
+                new CSharpNamer<string>(
+                    s => s,
+                    new CSharpUtilities(),
+                    pluralizer.Pluralize
+                ).GetName(input)
+            );
         }
     }
 }

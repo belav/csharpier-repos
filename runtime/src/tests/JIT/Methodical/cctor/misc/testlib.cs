@@ -14,9 +14,7 @@ namespace Precise
     public class test
     {
         public static byte b = 0xC;
-        public static void f()
-        {
-        }
+        public static void f() { }
         public static void f(ref byte b)
         {
             return;
@@ -46,4 +44,3 @@ namespace Precise
         }
     }
 }
-

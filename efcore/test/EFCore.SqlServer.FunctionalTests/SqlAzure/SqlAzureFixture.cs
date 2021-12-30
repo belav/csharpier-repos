@@ -10,10 +10,9 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
     {
         protected override string StoreName { get; } = "adventureworks";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerAdventureWorksTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory =>
+            SqlServerAdventureWorksTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

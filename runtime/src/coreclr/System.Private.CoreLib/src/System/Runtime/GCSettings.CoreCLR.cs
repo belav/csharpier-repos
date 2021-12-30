@@ -23,6 +23,8 @@ namespace System.Runtime
         private static extern GCLargeObjectHeapCompactionMode GetLOHCompactionMode();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void SetLOHCompactionMode(GCLargeObjectHeapCompactionMode newLOHCompactionMode);
+        private static extern void SetLOHCompactionMode(
+            GCLargeObjectHeapCompactionMode newLOHCompactionMode
+        );
     }
 }
