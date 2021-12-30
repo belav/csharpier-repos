@@ -652,8 +652,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             var propertyNames = uniqueConstraint.Columns.Select(GetPropertyName).ToArray();
             var indexBuilder = string.IsNullOrEmpty(uniqueConstraint.Name)
-                ? builder.HasIndex(propertyNames)
-                : builder.HasIndex(propertyNames, uniqueConstraint.Name);
+              ? builder.HasIndex(propertyNames)
+              : builder.HasIndex(propertyNames, uniqueConstraint.Name);
             indexBuilder = indexBuilder.IsUnique();
             indexBuilder.Metadata.AddAnnotations(uniqueConstraint.GetAnnotations());
 
@@ -707,8 +707,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             var propertyNames = index.Columns.Select(GetPropertyName).ToArray();
             var indexBuilder = string.IsNullOrEmpty(index.Name)
-                ? builder.HasIndex(propertyNames)
-                : builder.HasIndex(propertyNames, index.Name);
+              ? builder.HasIndex(propertyNames)
+              : builder.HasIndex(propertyNames, index.Name);
 
             indexBuilder = indexBuilder.IsUnique(index.IsUnique);
 
@@ -1048,15 +1048,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 foreignKey.PrincipalEntityType
             );
             var principalEndNavigationPropertyCandidateName = foreignKey.IsSelfReferencing()
-                ? string.Format(
-                      CultureInfo.CurrentCulture,
-                      SelfReferencingPrincipalEndNavigationNamePattern,
-                      dependentEndNavigationPropertyName
-                  )
-                : _candidateNamingService.GetPrincipalEndCandidateNavigationPropertyName(
-                      foreignKey,
-                      dependentEndNavigationPropertyName
-                  );
+              ? string.Format(
+                    CultureInfo.CurrentCulture,
+                    SelfReferencingPrincipalEndNavigationNamePattern,
+                    dependentEndNavigationPropertyName
+                )
+              : _candidateNamingService.GetPrincipalEndCandidateNavigationPropertyName(
+                    foreignKey,
+                    dependentEndNavigationPropertyName
+                );
 
             if (!foreignKey.IsUnique && !foreignKey.IsSelfReferencing())
             {

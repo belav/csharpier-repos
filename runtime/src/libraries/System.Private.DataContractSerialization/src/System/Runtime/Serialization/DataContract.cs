@@ -1877,8 +1877,8 @@ namespace System.Runtime.Serialization
                     localName.Append(
                         (
                             tempLocalName.Equals("KeyValuePairAdapter")
-                                ? "KeyValuePair"
-                                : tempLocalName
+                              ? "KeyValuePair"
+                              : tempLocalName
                         )
                     );
                 }

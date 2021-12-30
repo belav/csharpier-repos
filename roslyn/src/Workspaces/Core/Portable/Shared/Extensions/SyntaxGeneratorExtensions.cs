@@ -285,11 +285,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var condition = factory.SyntaxGeneratorInternal.SupportsPatterns(
                 semanticModel.SyntaxTree.Options
             )
-                ? factory.SyntaxGeneratorInternal.IsPatternExpression(
-                      identifier,
-                      factory.SyntaxGeneratorInternal.ConstantPattern(nullExpr)
-                  )
-                : factory.ReferenceEqualsExpression(identifier, nullExpr);
+              ? factory.SyntaxGeneratorInternal.IsPatternExpression(
+                    identifier,
+                    factory.SyntaxGeneratorInternal.ConstantPattern(nullExpr)
+                )
+              : factory.ReferenceEqualsExpression(identifier, nullExpr);
             return condition;
         }
 

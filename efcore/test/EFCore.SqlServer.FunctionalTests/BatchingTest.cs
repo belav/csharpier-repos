@@ -360,15 +360,15 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Contains(
                         minBatchSize == 3
                           ? RelationalResources
-                            .LogBatchReadyForExecution(
-                                new TestLogger<SqlServerLoggingDefinitions>()
-                            )
-                            .GenerateMessage(3)
+                                .LogBatchReadyForExecution(
+                                    new TestLogger<SqlServerLoggingDefinitions>()
+                                )
+                                .GenerateMessage(3)
                           : RelationalResources
-                            .LogBatchSmallerThanMinBatchSize(
-                                new TestLogger<SqlServerLoggingDefinitions>()
-                            )
-                            .GenerateMessage(3, 4),
+                                .LogBatchSmallerThanMinBatchSize(
+                                    new TestLogger<SqlServerLoggingDefinitions>()
+                                )
+                                .GenerateMessage(3, 4),
                         Fixture.TestSqlLoggerFactory.Log.Select(l => l.Message)
                     );
 

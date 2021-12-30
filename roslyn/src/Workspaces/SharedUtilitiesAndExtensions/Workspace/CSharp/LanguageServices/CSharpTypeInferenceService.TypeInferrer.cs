@@ -1517,10 +1517,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return leftTypes.Select(
                         x =>
                             x.InferredType.IsNullable()
-                                ? new TypeInferenceInfo(
-                                      ((INamedTypeSymbol)x.InferredType).TypeArguments[0]
-                                  ) // nullableExpr ?? Goo()
-                                : x
+                              ? new TypeInferenceInfo(
+                                    ((INamedTypeSymbol)x.InferredType).TypeArguments[0]
+                                ) // nullableExpr ?? Goo()
+                              : x
                     ); // normalExpr ?? Goo()
                 }
 

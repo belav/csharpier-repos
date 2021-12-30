@@ -1547,8 +1547,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             document = document.WithSyntaxRoot(newRoot);
 
             var additionalRules = AddBlankLineToMethodBody(node, newNode)
-                ? SpecializedCollections.SingletonEnumerable(_lineAdjustmentFormattingRule)
-                : null;
+              ? SpecializedCollections.SingletonEnumerable(_lineAdjustmentFormattingRule)
+              : null;
 
             document = FormatAnnotatedNode(
                 document,

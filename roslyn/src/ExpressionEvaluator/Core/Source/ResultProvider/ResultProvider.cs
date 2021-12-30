@@ -827,20 +827,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 if (expansion == null)
                 {
                     expansion = value.HasExceptionThrown()
-                        ? this.GetTypeExpansion(
-                              inspectionContext,
-                              new TypeAndCustomInfo(value.Type),
-                              value,
-                              expansionFlags,
-                              supportsFavorites: false
-                          )
-                        : this.GetTypeExpansion(
-                              inspectionContext,
-                              declaredTypeAndInfo,
-                              value,
-                              expansionFlags,
-                              supportsFavorites: supportsFavorites
-                          );
+                      ? this.GetTypeExpansion(
+                            inspectionContext,
+                            new TypeAndCustomInfo(value.Type),
+                            value,
+                            expansionFlags,
+                            supportsFavorites: false
+                        )
+                      : this.GetTypeExpansion(
+                            inspectionContext,
+                            declaredTypeAndInfo,
+                            value,
+                            expansionFlags,
+                            supportsFavorites: supportsFavorites
+                        );
                 }
             }
 

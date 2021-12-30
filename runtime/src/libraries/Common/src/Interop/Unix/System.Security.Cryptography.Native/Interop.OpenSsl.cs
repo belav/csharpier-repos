@@ -385,8 +385,8 @@ internal static partial class Interop
                 {
                     // The IdnMapping converts unicode input into the IDNA punycode sequence.
                     string punyCode = string.IsNullOrEmpty(sslAuthenticationOptions.TargetHost)
-                        ? string.Empty
-                        : s_idnMapping.GetAscii(sslAuthenticationOptions.TargetHost!);
+                      ? string.Empty
+                      : s_idnMapping.GetAscii(sslAuthenticationOptions.TargetHost!);
 
                     // Similar to windows behavior, set SNI on openssl by default for client context, ignore errors.
                     if (!Ssl.SslSetTlsExtHostName(sslHandle, punyCode))
@@ -619,8 +619,8 @@ internal static partial class Interop
                 case Ssl.SslErrorCode.SSL_ERROR_WANT_READ:
                     // update error code to renegotiate if renegotiate is pending, otherwise make it SSL_ERROR_WANT_READ
                     errorCode = Ssl.IsSslRenegotiatePending(context)
-                        ? Ssl.SslErrorCode.SSL_ERROR_RENEGOTIATE
-                        : Ssl.SslErrorCode.SSL_ERROR_WANT_READ;
+                      ? Ssl.SslErrorCode.SSL_ERROR_RENEGOTIATE
+                      : Ssl.SslErrorCode.SSL_ERROR_WANT_READ;
                     break;
 
                 default:

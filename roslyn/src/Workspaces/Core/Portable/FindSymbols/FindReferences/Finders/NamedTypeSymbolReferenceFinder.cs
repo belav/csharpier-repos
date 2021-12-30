@@ -139,9 +139,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 syntaxFacts,
                 out var simpleName
             )
-                ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
-                      .ConfigureAwait(false)
-                : ImmutableArray<Document>.Empty;
+              ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
+                    .ConfigureAwait(false)
+              : ImmutableArray<Document>.Empty;
 
             result.AddRange(documentsWithName);
             result.AddRange(documentsWithAttribute);

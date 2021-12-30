@@ -126,9 +126,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 project.LanguageServices.GetRequiredService<ISyntaxFactsService>(),
                 out var simpleName
             )
-                ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
-                      .ConfigureAwait(false)
-                : ImmutableArray<Document>.Empty;
+              ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
+                    .ConfigureAwait(false)
+              : ImmutableArray<Document>.Empty;
 
             result.AddRange(documentsWithName);
             result.AddRange(documentsWithAttribute);
@@ -379,8 +379,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     : symbol.Parameters.Length;
 
             var exactArgumentCount = symbol.Parameters.Any(p => p.IsOptional || p.IsParams)
-                ? -1
-                : symbol.Parameters.Length;
+              ? -1
+              : symbol.Parameters.Length;
 
             return FindReferencesInDocumentAsync(
                 document,

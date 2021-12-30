@@ -2130,8 +2130,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                             "@",
                             StringComparison.Ordinal
                         )
-                            ? attributeName.Substring(1)
-                            : attributeName;
+                          ? attributeName.Substring(1)
+                          : attributeName;
 
                         IntermediateNode attributeNode;
                         if (
@@ -2308,8 +2308,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                             "@",
                             StringComparison.Ordinal
                         )
-                            ? attributeName.Substring(1)
-                            : attributeName;
+                          ? attributeName.Substring(1)
+                          : attributeName;
 
                         IntermediateNode attributeNode;
                         if (

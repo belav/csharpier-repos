@@ -942,8 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.ConstructorDeclaration:
                     var newConstructor = (ConstructorDeclarationSyntax)(
                         newBody.Parent.IsKind(SyntaxKind.ArrowExpressionClause)
-                            ? newBody.Parent.Parent
-                            : newBody.Parent
+                          ? newBody.Parent.Parent
+                          : newBody.Parent
                     )!;
                     newStatement = (SyntaxNode?)newConstructor.Initializer ?? newConstructor;
                     return true;

@@ -2230,18 +2230,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                       analysisState,
                       cancellationToken
                   )
-                      ? EventProcessedState.Processed
-                      : EventProcessedState.NotProcessed,
+                    ? EventProcessedState.Processed
+                    : EventProcessedState.NotProcessed,
 
                 CompilationCompletedEvent endEvent
                   => TryProcessCompilationCompleted(endEvent, analysisScope, analysisState)
-                      ? EventProcessedState.Processed
-                      : EventProcessedState.NotProcessed,
+                    ? EventProcessedState.Processed
+                    : EventProcessedState.NotProcessed,
 
                 CompilationStartedEvent startedEvent
                   => TryProcessCompilationStarted(startedEvent, analysisScope, analysisState)
-                      ? EventProcessedState.Processed
-                      : EventProcessedState.NotProcessed,
+                    ? EventProcessedState.Processed
+                    : EventProcessedState.NotProcessed,
 
                 _
                   => throw new InvalidOperationException(

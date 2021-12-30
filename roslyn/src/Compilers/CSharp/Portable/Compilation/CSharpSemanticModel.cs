@@ -1320,8 +1320,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(csnode);
 
             var info = CanGetSemanticInfo(csnode)
-                ? GetTypeInfoWorker(csnode, cancellationToken)
-                : CSharpTypeInfo.None;
+              ? GetTypeInfoWorker(csnode, cancellationToken)
+              : CSharpTypeInfo.None;
 
             return info.ImplicitConversion;
         }
@@ -1424,7 +1424,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                .GetPublicSymbols()
+                    .GetPublicSymbols()
               : ImmutableArray<ISymbol>.Empty;
         }
 
@@ -1446,7 +1446,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                .GetPublicSymbols()
+                    .GetPublicSymbols()
               : ImmutableArray<ISymbol>.Empty;
         }
 
@@ -1468,7 +1468,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                .GetPublicSymbols()
+                    .GetPublicSymbols()
               : ImmutableArray<ISymbol>.Empty;
         }
 
@@ -6923,8 +6923,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Compilation.Options.SyntaxTreeOptionsProvider,
                 CancellationToken.None
             )
-                ? NullableContextOptions.Disable
-                : Compilation.Options.NullableContextOptions;
+              ? NullableContextOptions.Disable
+              : Compilation.Options.NullableContextOptions;
 
             NullableContext context = getFlag(
                 contextState.AnnotationsState,

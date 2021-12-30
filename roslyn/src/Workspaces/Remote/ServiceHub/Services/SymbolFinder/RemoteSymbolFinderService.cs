@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     var documents = documentArgs.IsDefault
                         ? null
                         : documentArgs
-                          .Select(solution.GetDocument)
-                          .WhereNotNull()
-                          .ToImmutableHashSet();
+                              .Select(solution.GetDocument)
+                              .WhereNotNull()
+                              .ToImmutableHashSet();
 
                     await SymbolFinder
                         .FindReferencesInCurrentProcessAsync(

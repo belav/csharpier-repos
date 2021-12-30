@@ -645,17 +645,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogPropertyChangeDetectedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(
-                        nameof(Cat),
-                        nameof(Cat.Name),
-                        "Smokey",
-                        "Smoke-a-doke",
-                        "{Id: 1}"
-                    )
+                        .LogPropertyChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(
+                            nameof(Cat),
+                            nameof(Cat.Name),
+                            "Smokey",
+                            "Smoke-a-doke",
+                            "{Id: 1}"
+                        )
                   : CoreResources
-                    .LogPropertyChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Cat), nameof(Cat.Name)),
+                        .LogPropertyChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(Cat), nameof(Cat.Name)),
                 message
             );
 
@@ -757,11 +759,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogForeignKeyChangeDetectedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.CatId), 1, 2, "{Id: 77}")
+                        .LogForeignKeyChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(nameof(Hat), nameof(Hat.CatId), 1, 2, "{Id: 77}")
                   : CoreResources
-                    .LogForeignKeyChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.CatId)),
+                        .LogForeignKeyChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(Hat), nameof(Hat.CatId)),
                 message
             );
 
@@ -783,11 +787,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogForeignKeyChangeDetectedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.CatId), 2, 1, "{Id: 77}")
+                        .LogForeignKeyChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(nameof(Hat), nameof(Hat.CatId), 2, 1, "{Id: 77}")
                   : CoreResources
-                    .LogForeignKeyChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.CatId)),
+                        .LogForeignKeyChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(Hat), nameof(Hat.CatId)),
                 message
             );
         }
@@ -823,11 +829,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogCollectionChangeDetectedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Hats), "{Id: 1}")
+                        .LogCollectionChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Hats), "{Id: 1}")
                   : CoreResources
-                    .LogCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Hats)),
+                        .LogCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Hats)),
                 message
             );
 
@@ -849,11 +857,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogCollectionChangeDetectedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Hats), "{Id: 1}")
+                        .LogCollectionChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Hats), "{Id: 1}")
                   : CoreResources
-                    .LogCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Hats)),
+                        .LogCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Hats)),
                 message
             );
         }
@@ -892,13 +902,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogSkipCollectionChangeDetectedSensitive(
-                        new TestLogger<TestLoggingDefinitions>()
-                    )
-                    .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Mats), "{Id: 1}")
+                        .LogSkipCollectionChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Mats), "{Id: 1}")
                   : CoreResources
-                    .LogSkipCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Mats)),
+                        .LogSkipCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(0, 1, nameof(Cat), nameof(Cat.Mats)),
                 message
             );
 
@@ -920,13 +930,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogSkipCollectionChangeDetectedSensitive(
-                        new TestLogger<TestLoggingDefinitions>()
-                    )
-                    .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Mats), "{Id: 1}")
+                        .LogSkipCollectionChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Mats), "{Id: 1}")
                   : CoreResources
-                    .LogSkipCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Mats)),
+                        .LogSkipCollectionChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(1, 0, nameof(Cat), nameof(Cat.Mats)),
                 message
             );
         }
@@ -962,11 +972,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogReferenceChangeDetectedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.Cat), "{Id: 77}")
+                        .LogReferenceChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(nameof(Hat), nameof(Hat.Cat), "{Id: 77}")
                   : CoreResources
-                    .LogReferenceChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.Cat)),
+                        .LogReferenceChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(Hat), nameof(Hat.Cat)),
                 message
             );
 
@@ -988,11 +1000,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogReferenceChangeDetectedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.Cat), "{Id: 77}")
+                        .LogReferenceChangeDetectedSensitive(
+                            new TestLogger<TestLoggingDefinitions>()
+                        )
+                        .GenerateMessage(nameof(Hat), nameof(Hat.Cat), "{Id: 77}")
                   : CoreResources
-                    .LogReferenceChangeDetected(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(Hat), nameof(Hat.Cat)),
+                        .LogReferenceChangeDetected(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(Hat), nameof(Hat.Cat)),
                 message
             );
         }
@@ -1015,11 +1029,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogStartedTrackingSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(LikeAZooContextSensitive), nameof(Cat), "{Id: 1}")
+                        .LogStartedTrackingSensitive(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(LikeAZooContextSensitive), nameof(Cat), "{Id: 1}")
                   : CoreResources
-                    .LogStartedTracking(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(LikeAZooContext), nameof(Cat)),
+                        .LogStartedTracking(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(LikeAZooContext), nameof(Cat)),
                 message
             );
         }
@@ -1040,11 +1054,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogStartedTrackingSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(LikeAZooContextSensitive), nameof(Hat), "{Id: 88}")
+                        .LogStartedTrackingSensitive(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(LikeAZooContextSensitive), nameof(Hat), "{Id: 88}")
                   : CoreResources
-                    .LogStartedTracking(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(nameof(LikeAZooContext), nameof(Hat)),
+                        .LogStartedTracking(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(nameof(LikeAZooContext), nameof(Hat)),
                 message
             );
         }
@@ -1070,22 +1084,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 sensitive
                   ? CoreResources
-                    .LogStateChangedSensitive(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(
-                        nameof(Cat),
-                        "{Id: 1}",
-                        nameof(LikeAZooContextSensitive),
-                        EntityState.Unchanged,
-                        EntityState.Deleted
-                    )
+                        .LogStateChangedSensitive(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(
+                            nameof(Cat),
+                            "{Id: 1}",
+                            nameof(LikeAZooContextSensitive),
+                            EntityState.Unchanged,
+                            EntityState.Deleted
+                        )
                   : CoreResources
-                    .LogStateChanged(new TestLogger<TestLoggingDefinitions>())
-                    .GenerateMessage(
-                        nameof(Cat),
-                        nameof(LikeAZooContext),
-                        EntityState.Unchanged,
-                        EntityState.Deleted
-                    ),
+                        .LogStateChanged(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage(
+                            nameof(Cat),
+                            nameof(LikeAZooContext),
+                            EntityState.Unchanged,
+                            EntityState.Deleted
+                        ),
                 message
             );
         }
@@ -1129,16 +1143,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal(
                     sensitive
                       ? CoreResources
-                        .LogTempValueGeneratedSensitive(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(
-                            nameof(LikeAZooContextSensitive),
-                            1,
-                            nameof(Hat.Id),
-                            nameof(Hat)
-                        )
+                            .LogTempValueGeneratedSensitive(
+                                new TestLogger<TestLoggingDefinitions>()
+                            )
+                            .GenerateMessage(
+                                nameof(LikeAZooContextSensitive),
+                                1,
+                                nameof(Hat.Id),
+                                nameof(Hat)
+                            )
                       : CoreResources
-                        .LogTempValueGenerated(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(nameof(LikeAZooContext), nameof(Hat.Id), nameof(Hat)),
+                            .LogTempValueGenerated(new TestLogger<TestLoggingDefinitions>())
+                            .GenerateMessage(nameof(LikeAZooContext), nameof(Hat.Id), nameof(Hat)),
                     message
                 );
             }
@@ -1147,16 +1163,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal(
                     sensitive
                       ? CoreResources
-                        .LogValueGeneratedSensitive(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(
-                            nameof(LikeAZooContextSensitive),
-                            1,
-                            nameof(Hat.Id),
-                            nameof(Hat)
-                        )
+                            .LogValueGeneratedSensitive(new TestLogger<TestLoggingDefinitions>())
+                            .GenerateMessage(
+                                nameof(LikeAZooContextSensitive),
+                                1,
+                                nameof(Hat.Id),
+                                nameof(Hat)
+                            )
                       : CoreResources
-                        .LogValueGenerated(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(nameof(LikeAZooContext), nameof(Hat.Id), nameof(Hat)),
+                            .LogValueGenerated(new TestLogger<TestLoggingDefinitions>())
+                            .GenerateMessage(nameof(LikeAZooContext), nameof(Hat.Id), nameof(Hat)),
                     message
                 );
             }
@@ -1311,17 +1327,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal(
                     sensitive
                       ? CoreResources
-                        .LogCascadeDeleteSensitive(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(
-                            nameof(Hat),
-                            "{Id: 77}",
-                            EntityState.Deleted,
-                            nameof(Cat),
-                            "{Id: 1}"
-                        )
+                            .LogCascadeDeleteSensitive(new TestLogger<TestLoggingDefinitions>())
+                            .GenerateMessage(
+                                nameof(Hat),
+                                "{Id: 77}",
+                                EntityState.Deleted,
+                                nameof(Cat),
+                                "{Id: 1}"
+                            )
                       : CoreResources
-                        .LogCascadeDelete(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(nameof(Hat), EntityState.Deleted, nameof(Cat)),
+                            .LogCascadeDelete(new TestLogger<TestLoggingDefinitions>())
+                            .GenerateMessage(nameof(Hat), EntityState.Deleted, nameof(Cat)),
                     cascadeDeleteMessage
                 );
             }
@@ -1448,11 +1464,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal(
                     sensitive
                       ? CoreResources
-                        .LogCascadeDeleteOrphanSensitive(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(nameof(Hat), "{Id: 77}", EntityState.Deleted, nameof(Cat))
+                            .LogCascadeDeleteOrphanSensitive(
+                                new TestLogger<TestLoggingDefinitions>()
+                            )
+                            .GenerateMessage(
+                                nameof(Hat),
+                                "{Id: 77}",
+                                EntityState.Deleted,
+                                nameof(Cat)
+                            )
                       : CoreResources
-                        .LogCascadeDeleteOrphan(new TestLogger<TestLoggingDefinitions>())
-                        .GenerateMessage(nameof(Hat), EntityState.Deleted, nameof(Cat)),
+                            .LogCascadeDeleteOrphan(new TestLogger<TestLoggingDefinitions>())
+                            .GenerateMessage(nameof(Hat), EntityState.Deleted, nameof(Cat)),
                     deleteOrphansMessage
                 );
             }

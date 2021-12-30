@@ -274,10 +274,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             );
 
             var newPattern = syntaxFacts.IsAndPattern(pattern)
-                ? generatorInternal.OrPattern(newLeft, newRight)
-                : syntaxFacts.IsOrPattern(pattern)
-                    ? generatorInternal.AndPattern(newLeft, newRight)
-                    : throw ExceptionUtilities.UnexpectedValue(pattern.RawKind);
+              ? generatorInternal.OrPattern(newLeft, newRight)
+              : syntaxFacts.IsOrPattern(pattern)
+                  ? generatorInternal.AndPattern(newLeft, newRight)
+                  : throw ExceptionUtilities.UnexpectedValue(pattern.RawKind);
 
             newPattern = newPattern.WithTriviaFrom(pattern);
 
@@ -400,12 +400,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 BinaryOperatorKind.LessThanOrEqual
                   => IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
-                      ? generator.ValueEqualsExpression(leftOperand, rightOperand)
-                      : generator.LessThanOrEqualExpression(leftOperand, rightOperand),
+                    ? generator.ValueEqualsExpression(leftOperand, rightOperand)
+                    : generator.LessThanOrEqualExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.GreaterThanOrEqual
                   => IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
-                      ? generator.ValueEqualsExpression(leftOperand, rightOperand)
-                      : generator.GreaterThanOrEqualExpression(leftOperand, rightOperand),
+                    ? generator.ValueEqualsExpression(leftOperand, rightOperand)
+                    : generator.GreaterThanOrEqualExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.LessThan
                   => generator.LessThanExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.GreaterThan

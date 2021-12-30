@@ -1025,13 +1025,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         getNestedTupleUnderlyingType(this, fieldChainLength - 1).OriginalDefinition;
 
                     var diagnosticInfo = container.IsErrorType()
-                        ? null
-                        : new CSDiagnosticInfo(
-                              ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
-                              TupleMemberName(fieldRemainder),
-                              container,
-                              container.ContainingAssembly
-                          );
+                      ? null
+                      : new CSDiagnosticInfo(
+                            ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
+                            TupleMemberName(fieldRemainder),
+                            container,
+                            container.ContainingAssembly
+                        );
 
                     var providedName = elementNames.IsDefault ? null : elementNames[i];
                     var location = elementLocations.IsDefault ? null : elementLocations[i];

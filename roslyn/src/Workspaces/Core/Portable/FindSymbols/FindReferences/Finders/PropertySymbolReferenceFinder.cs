@@ -71,13 +71,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 .ConfigureAwait(false);
 
             var forEachDocuments = IsForEachProperty(symbol)
-                ? await FindDocumentsWithForEachStatementsAsync(
-                          project,
-                          documents,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
-                : ImmutableArray<Document>.Empty;
+              ? await FindDocumentsWithForEachStatementsAsync(project, documents, cancellationToken)
+                    .ConfigureAwait(false)
+              : ImmutableArray<Document>.Empty;
 
             var elementAccessDocument = symbol.IsIndexer
                 ? await FindDocumentWithElementAccessExpressionsAsync(
@@ -158,14 +154,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             }
 
             var forEachReferences = IsForEachProperty(symbol)
-                ? await FindReferencesInForEachStatementsAsync(
-                          symbol,
-                          document,
-                          semanticModel,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
-                : ImmutableArray<FinderLocation>.Empty;
+              ? await FindReferencesInForEachStatementsAsync(
+                        symbol,
+                        document,
+                        semanticModel,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+              : ImmutableArray<FinderLocation>.Empty;
 
             var indexerReferences = symbol.IsIndexer
                 ? await FindIndexerReferencesAsync(

@@ -433,8 +433,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var keyBuilder = keyToDetach.Builder;
 
             var primaryKeyConfigurationSource = ((IReadOnlyKey)keyToDetach).IsPrimaryKey()
-                ? keyToDetach.DeclaringEntityType.GetPrimaryKeyConfigurationSource()
-                : null;
+              ? keyToDetach.DeclaringEntityType.GetPrimaryKeyConfigurationSource()
+              : null;
 
             if (entityTypeBuilder == null)
             {
@@ -5354,8 +5354,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 var baseName = string.IsNullOrEmpty(propertyBaseName)
-                    ? principalType.ShortName()
-                    : propertyBaseName;
+                  ? principalType.ShortName()
+                  : propertyBaseName;
                 dependentProperties = CreateUniqueProperties(
                     principalKey.Properties,
                     isRequired ?? false,
@@ -5809,8 +5809,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         baseName,
                         StringComparison.OrdinalIgnoreCase
                     )
-                        ? keyPropertyName
-                        : baseName + keyPropertyName;
+                      ? keyPropertyName
+                      : baseName + keyPropertyName;
                     string propertyName;
                     var clrType = keyPropertyType.MakeNullable(!isRequired);
                     var index = -1;
@@ -6282,11 +6282,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 memberInfo.GetMemberType(),
                 configurationSource
             )
-                ? DiscriminatorBuilder(
-                      Metadata.RootType().Builder.Property(memberInfo, configurationSource),
-                      configurationSource
-                  )
-                : null;
+              ? DiscriminatorBuilder(
+                    Metadata.RootType().Builder.Property(memberInfo, configurationSource),
+                    configurationSource
+                )
+              : null;
 
         private static readonly string _defaultDiscriminatorName = "Discriminator";
 

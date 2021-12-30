@@ -517,8 +517,8 @@ namespace Microsoft.CodeAnalysis
             project
         ) =>
             project._projectState.DocumentStates.TryGetState(documentId, out var state)
-                ? new Document(project, state)
-                : null;
+              ? new Document(project, state)
+              : null;
 
         private static readonly Func<
             DocumentId,
@@ -526,8 +526,8 @@ namespace Microsoft.CodeAnalysis
             AdditionalDocument?
         > s_tryCreateAdditionalDocumentFunction = (documentId, project) =>
             project._projectState.AdditionalDocumentStates.TryGetState(documentId, out var state)
-                ? new AdditionalDocument(project, state)
-                : null;
+              ? new AdditionalDocument(project, state)
+              : null;
 
         private static readonly Func<
             DocumentId,
@@ -538,8 +538,8 @@ namespace Microsoft.CodeAnalysis
                 documentId,
                 out var state
             )
-                ? new AnalyzerConfigDocument(project, state)
-                : null;
+              ? new AnalyzerConfigDocument(project, state)
+              : null;
 
         private static readonly Func<
             DocumentId,

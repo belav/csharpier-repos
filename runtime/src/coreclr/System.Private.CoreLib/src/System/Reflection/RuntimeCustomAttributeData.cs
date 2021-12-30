@@ -2448,8 +2448,8 @@ namespace System.Reflection
             RuntimeType? safeArrayUserDefinedType = string.IsNullOrEmpty(
                 safeArrayUserDefinedTypeName
             )
-                ? null
-                : RuntimeTypeHandle.GetTypeByNameUsingCARules(safeArrayUserDefinedTypeName, scope);
+              ? null
+              : RuntimeTypeHandle.GetTypeByNameUsingCARules(safeArrayUserDefinedTypeName, scope);
             RuntimeType? marshalTypeRef = null;
 
             try

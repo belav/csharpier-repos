@@ -120,8 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                 var contentType = httpContext.Request.ContentType;
                 var mediaType = string.IsNullOrEmpty(contentType)
-                    ? (MediaType?)null
-                    : new MediaType(contentType);
+                  ? (MediaType?)null
+                  : new MediaType(contentType);
 
                 var matched = false;
                 for (var j = 0; j < metadata.ContentTypes.Count; j++)

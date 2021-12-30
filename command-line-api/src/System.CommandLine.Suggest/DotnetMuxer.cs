@@ -48,7 +48,7 @@ namespace System.CommandLine.Suggest
 
         public static string ExecutableName(this string withoutExtension) =>
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? withoutExtension + ".exe"
-                : withoutExtension;
+              ? withoutExtension + ".exe"
+              : withoutExtension;
     }
 }

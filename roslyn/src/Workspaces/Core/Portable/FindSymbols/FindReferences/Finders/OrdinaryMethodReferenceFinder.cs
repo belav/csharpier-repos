@@ -84,23 +84,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 )
                 .ConfigureAwait(false);
             var forEachDocuments = IsForEachMethod(methodSymbol)
-                ? await FindDocumentsWithForEachStatementsAsync(
-                          project,
-                          documents,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
-                : ImmutableArray<Document>.Empty;
+              ? await FindDocumentsWithForEachStatementsAsync(project, documents, cancellationToken)
+                    .ConfigureAwait(false)
+              : ImmutableArray<Document>.Empty;
 
             var deconstructDocuments = IsDeconstructMethod(methodSymbol)
-                ? await FindDocumentsWithDeconstructionAsync(project, documents, cancellationToken)
-                      .ConfigureAwait(false)
-                : ImmutableArray<Document>.Empty;
+              ? await FindDocumentsWithDeconstructionAsync(project, documents, cancellationToken)
+                    .ConfigureAwait(false)
+              : ImmutableArray<Document>.Empty;
 
             var awaitExpressionDocuments = IsGetAwaiterMethod(methodSymbol)
-                ? await FindDocumentsWithAwaitExpressionAsync(project, documents, cancellationToken)
-                      .ConfigureAwait(false)
-                : ImmutableArray<Document>.Empty;
+              ? await FindDocumentsWithAwaitExpressionAsync(project, documents, cancellationToken)
+                    .ConfigureAwait(false)
+              : ImmutableArray<Document>.Empty;
 
             var documentsWithGlobalAttributes = await FindDocumentsWithGlobalAttributesAsync(
                     project,
@@ -149,34 +145,34 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 .ConfigureAwait(false);
 
             var forEachMatches = IsForEachMethod(symbol)
-                ? await FindReferencesInForEachStatementsAsync(
-                          symbol,
-                          document,
-                          semanticModel,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
-                : ImmutableArray<FinderLocation>.Empty;
+              ? await FindReferencesInForEachStatementsAsync(
+                        symbol,
+                        document,
+                        semanticModel,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+              : ImmutableArray<FinderLocation>.Empty;
 
             var deconstructMatches = IsDeconstructMethod(symbol)
-                ? await FindReferencesInDeconstructionAsync(
-                          symbol,
-                          document,
-                          semanticModel,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
-                : ImmutableArray<FinderLocation>.Empty;
+              ? await FindReferencesInDeconstructionAsync(
+                        symbol,
+                        document,
+                        semanticModel,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+              : ImmutableArray<FinderLocation>.Empty;
 
             var getAwaiterMatches = IsGetAwaiterMethod(symbol)
-                ? await FindReferencesInAwaitExpressionAsync(
-                          symbol,
-                          document,
-                          semanticModel,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
-                : ImmutableArray<FinderLocation>.Empty;
+              ? await FindReferencesInAwaitExpressionAsync(
+                        symbol,
+                        document,
+                        semanticModel,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+              : ImmutableArray<FinderLocation>.Empty;
 
             var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
                     document,

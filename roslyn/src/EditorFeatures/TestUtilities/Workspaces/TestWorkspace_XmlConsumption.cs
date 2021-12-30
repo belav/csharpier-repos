@@ -902,11 +902,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                             allowUnsafe: allowUnsafe
                         )
                       : new VisualBasicCompilationOptions(OutputKind.WindowsRuntimeMetadata)
-                        .WithGlobalImports(globalImports)
-                        .WithRootNamespace(rootNamespace)
-                        .WithParseOptions(
-                            (VisualBasicParseOptions)parseOptions ?? VisualBasicParseOptions.Default
-                        );
+                            .WithGlobalImports(globalImports)
+                            .WithRootNamespace(rootNamespace)
+                            .WithParseOptions(
+                                (VisualBasicParseOptions)parseOptions
+                                    ?? VisualBasicParseOptions.Default
+                            );
                 }
             }
             else

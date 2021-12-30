@@ -175,8 +175,8 @@ namespace System.Web.Http.Tracing.Tracers
                             MediaTypeFormatterTracer.ActualMediaTypeFormatter(formatter),
                             InnerFormatter
                         )
-                            ? SRResources.TraceGetPerRequestFormatterEndMessage
-                            : SRResources.TraceGetPerRequestFormatterEndMessageNew;
+                          ? SRResources.TraceGetPerRequestFormatterEndMessage
+                          : SRResources.TraceGetPerRequestFormatterEndMessageNew;
 
                         tr.Message = Error.Format(formatMessage, formatter.GetType().Name);
                     }

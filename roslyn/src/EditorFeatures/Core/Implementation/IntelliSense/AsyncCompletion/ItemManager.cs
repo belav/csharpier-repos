@@ -213,8 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 data,
                 out var intialTriggerLocation
             )
-                ? intialTriggerLocation.Snapshot
-                : data.Snapshot;
+              ? intialTriggerLocation.Snapshot
+              : data.Snapshot;
 
             var document = snapshotForDocument?
                 .TextBuffer.AsTextContainer()

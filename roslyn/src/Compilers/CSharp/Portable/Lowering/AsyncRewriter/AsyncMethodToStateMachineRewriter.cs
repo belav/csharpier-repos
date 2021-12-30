@@ -98,12 +98,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             _exitLabel = F.GenerateLabel("exitLabel");
 
             _exprRetValue = method.IsAsyncEffectivelyReturningGenericTask(F.Compilation)
-                ? F.SynthesizedLocal(
-                      asyncMethodBuilderMemberCollection.ResultType,
-                      syntax: F.Syntax,
-                      kind: SynthesizedLocalKind.AsyncMethodReturnValue
-                  )
-                : null;
+              ? F.SynthesizedLocal(
+                    asyncMethodBuilderMemberCollection.ResultType,
+                    syntax: F.Syntax,
+                    kind: SynthesizedLocalKind.AsyncMethodReturnValue
+                )
+              : null;
 
             _dynamicFactory = new LoweredDynamicOperationFactory(F, methodOrdinal);
             _awaiterFields = new Dictionary<TypeSymbol, FieldSymbol>(
@@ -541,8 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AddState(out int stateNumber, out GeneratedLabelSymbol resumeLabel);
 
             TypeSymbol awaiterFieldType = awaiterTemp.Type.IsVerifierReference()
-                ? F.SpecialType(SpecialType.System_Object)
-                : awaiterTemp.Type;
+              ? F.SpecialType(SpecialType.System_Object)
+              : awaiterTemp.Type;
 
             FieldSymbol awaiterField = GetAwaiterField(awaiterFieldType);
 

@@ -416,8 +416,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                                 packageName,
                                 out var result
                             )
-                                ? result
-                                : null;
+                              ? result
+                              : null;
 
                             await UpdateStatusBarAsync(
                                     dte,

@@ -109,10 +109,10 @@ namespace Microsoft.CodeAnalysis.CodeLens
             // To query for the partial locations, filter definition locations that occur in source whose span is part of
             // span of any syntax node from Definition.DeclaringSyntaxReferences except for the queried syntax node.
             var locations = symbol.Locations
-            .Intersect(_queriedSymbol.Locations, LocationComparer.Instance)
-            .Any()
-                ? GetPartialLocations(symbol, _aggregateCancellationTokenSource.Token)
-                : symbol.Locations;
+                .Intersect(_queriedSymbol.Locations, LocationComparer.Instance)
+                .Any()
+              ? GetPartialLocations(symbol, _aggregateCancellationTokenSource.Token)
+              : symbol.Locations;
 
             _locations.AddRange(locations.Where(location => location.IsInSource));
 

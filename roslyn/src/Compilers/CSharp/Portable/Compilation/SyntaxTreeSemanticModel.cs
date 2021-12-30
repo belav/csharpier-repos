@@ -1123,8 +1123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var memberModel = IsNullableAnalysisEnabledAtSpeculativePosition(position, attribute)
-                ? GetMemberModel(position)
-                : null;
+              ? GetMemberModel(position)
+              : null;
             return AttributeSemanticModel.CreateSpeculative(
                 this,
                 attribute,

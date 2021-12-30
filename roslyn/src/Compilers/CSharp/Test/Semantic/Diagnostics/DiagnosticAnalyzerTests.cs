@@ -5343,8 +5343,8 @@ class C
                 ? analysisResult.SyntaxDiagnostics
                 : analysisResult.SemanticDiagnostics;
             var diagnostics = diagnosticsMap.TryGetValue(tree1, out var value)
-                ? value
-                : ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>>.Empty;
+              ? value
+              : ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>>.Empty;
 
             foreach (var analyzer in allAnalyzers)
             {

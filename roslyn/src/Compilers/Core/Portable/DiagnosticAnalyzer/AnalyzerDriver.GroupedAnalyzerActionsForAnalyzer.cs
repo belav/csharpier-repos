@@ -124,11 +124,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         var operationActions = GetFilteredActions(AnalyzerActions.OperationActions);
                         VerifyActions(operationActions, _analyzer);
                         var analyzerActionsByKind = operationActions.Any()
-                            ? AnalyzerExecutor.GetOperationActionsByKind(operationActions)
-                            : ImmutableSegmentedDictionary<
-                                  OperationKind,
-                                  ImmutableArray<OperationAnalyzerAction>
-                              >.Empty;
+                          ? AnalyzerExecutor.GetOperationActionsByKind(operationActions)
+                          : ImmutableSegmentedDictionary<
+                                OperationKind,
+                                ImmutableArray<OperationAnalyzerAction>
+                            >.Empty;
                         RoslynImmutableInterlocked.InterlockedInitialize(
                             ref _lazyOperationActionsByKind,
                             analyzerActionsByKind

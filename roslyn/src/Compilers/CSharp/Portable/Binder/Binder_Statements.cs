@@ -3958,8 +3958,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // Error case: void-returning or async task-returning method or lambda with "return x;"
                             var errorCode = retType.IsVoidType()
-                                ? ErrorCode.ERR_RetNoObjectRequiredLambda
-                                : ErrorCode.ERR_TaskRetNoObjectRequiredLambda;
+                              ? ErrorCode.ERR_RetNoObjectRequiredLambda
+                              : ErrorCode.ERR_TaskRetNoObjectRequiredLambda;
 
                             // Anonymous function converted to a void returning delegate cannot return a value
                             Error(diagnostics, errorCode, syntax.ReturnKeyword);
@@ -3975,8 +3975,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // Error case: void-returning or async task-returning method or lambda with "return x;"
                             var errorCode = retType.IsVoidType()
-                                ? ErrorCode.ERR_RetNoObjectRequired
-                                : ErrorCode.ERR_TaskRetNoObjectRequired;
+                              ? ErrorCode.ERR_RetNoObjectRequired
+                              : ErrorCode.ERR_TaskRetNoObjectRequired;
 
                             Error(diagnostics, errorCode, syntax.ReturnKeyword, container);
                             hasErrors = true;
@@ -3989,8 +3989,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // Error case: non-void-returning or Task<T>-returning method or lambda but just have "return;"
                         var requiredType = IsEffectivelyGenericTaskReturningAsyncMethod()
-                            ? retType.GetMemberTypeArgumentsNoUseSiteDiagnostics().Single()
-                            : retType;
+                          ? retType.GetMemberTypeArgumentsNoUseSiteDiagnostics().Single()
+                          : retType;
 
                         Error(
                             diagnostics,
@@ -4575,14 +4575,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     expression = returnType.IsErrorType()
-                        ? BindToTypeForErrorRecovery(expression)
-                        : CreateReturnConversion(
-                              syntax,
-                              diagnostics,
-                              expression,
-                              refKind,
-                              returnType
-                          );
+                      ? BindToTypeForErrorRecovery(expression)
+                      : CreateReturnConversion(
+                            syntax,
+                            diagnostics,
+                            expression,
+                            refKind,
+                            returnType
+                        );
                     statement = new BoundReturnStatement(syntax, returnRefKind, expression)
                     {
                         WasCompilerGenerated = true

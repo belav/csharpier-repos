@@ -183,8 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
                 var newComments = docAndComments.Comments;
 
                 var oldComments = _documentToInfos.TryGetValue(documentId, out var oldBoxedInfos)
-                    ? oldBoxedInfos
-                    : ImmutableArray<TodoCommentData>.Empty;
+                  ? oldBoxedInfos
+                  : ImmutableArray<TodoCommentData>.Empty;
 
                 // only one thread can be executing ProcessTodoCommentInfosAsync at a time,
                 // so it's safe to remove/add here.

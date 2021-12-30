@@ -621,8 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var fixedArguments = _methodTypeParameters.SelectAsArray(
                 static (typeParameter, i, self) =>
                     self.IsUnfixed(i)
-                        ? TypeWithAnnotations.Create(typeParameter)
-                        : self._fixedResults[i].Type,
+                      ? TypeWithAnnotations.Create(typeParameter)
+                      : self._fixedResults[i].Type,
                 this
             );
             TypeMap typeMap = new TypeMap(

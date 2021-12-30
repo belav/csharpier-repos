@@ -1276,8 +1276,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
         private static Expression ConvertToNonNullable(Expression expression) =>
             expression.Type.IsNullableType()
-                ? Expression.Convert(expression, expression.Type.UnwrapNullableType())
-                : expression;
+              ? Expression.Convert(expression, expression.Type.UnwrapNullableType())
+              : expression;
 
         private IProperty? FindProperty(Expression expression)
         {

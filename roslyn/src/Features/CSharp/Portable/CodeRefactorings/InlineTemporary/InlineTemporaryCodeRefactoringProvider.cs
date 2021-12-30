@@ -437,11 +437,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             var scope = GetScope(variableDeclarator);
 
             var newLocalDeclaration = variableDeclarator.GetLeadingTrivia().Any(t => t.IsDirective)
-                ? localDeclaration.RemoveNode(
-                      variableDeclarator,
-                      SyntaxRemoveOptions.KeepExteriorTrivia
-                  )
-                : localDeclaration.RemoveNode(variableDeclarator, SyntaxRemoveOptions.KeepNoTrivia);
+              ? localDeclaration.RemoveNode(
+                    variableDeclarator,
+                    SyntaxRemoveOptions.KeepExteriorTrivia
+                )
+              : localDeclaration.RemoveNode(variableDeclarator, SyntaxRemoveOptions.KeepNoTrivia);
 
             return scope.ReplaceNode(
                 localDeclaration,

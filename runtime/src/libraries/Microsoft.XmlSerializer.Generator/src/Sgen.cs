@@ -629,8 +629,8 @@ namespace Microsoft.XmlSerializer.Generator
         {
             Assembly assembly = null;
             string path = Path.IsPathRooted(assemblyName)
-                ? assemblyName
-                : Path.GetFullPath(assemblyName);
+              ? assemblyName
+              : Path.GetFullPath(assemblyName);
             assembly = Assembly.LoadFile(path);
             if (assembly == null)
             {

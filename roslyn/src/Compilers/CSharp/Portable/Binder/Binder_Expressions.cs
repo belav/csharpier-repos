@@ -10572,8 +10572,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (instanceReceiver == true)
                 {
                     ErrorCode errorCode = this.Flags.Includes(BinderFlags.ObjectInitializerMember)
-                        ? ErrorCode.ERR_StaticMemberInObjectInitializer
-                        : ErrorCode.ERR_ObjectProhibited;
+                      ? ErrorCode.ERR_StaticMemberInObjectInitializer
+                      : ErrorCode.ERR_ObjectProhibited;
                     Error(diagnostics, errorCode, node, symbol);
                     resultKind = LookupResultKind.StaticInstanceMismatch;
                     return true;

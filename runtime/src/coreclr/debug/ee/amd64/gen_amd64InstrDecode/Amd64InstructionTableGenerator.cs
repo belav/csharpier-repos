@@ -98,12 +98,12 @@ namespace Amd64InstructionTableGenerator
                         return (((int)encoding[opIndex]) << 4)
                             + (
                                 encodingFlags.HasFlag(EncodingFlags.F2)
-                                    ? 0x3
-                                    : (
-                                          encodingFlags.HasFlag(EncodingFlags.P)
-                                              ? 0x1
-                                              : (encodingFlags.HasFlag(EncodingFlags.F3) ? 0x2 : 0)
-                                      )
+                                  ? 0x3
+                                  : (
+                                        encodingFlags.HasFlag(EncodingFlags.P)
+                                          ? 0x1
+                                          : (encodingFlags.HasFlag(EncodingFlags.F3) ? 0x2 : 0)
+                                    )
                             );
                     case Map.NOW3D:
                         return encoding[opIndex + 6] << 4;

@@ -38,8 +38,8 @@ namespace System.Runtime.Serialization
         private bool _serializeReadOnlyTypes;
 
         private static SerializationOption _option = IsReflectionBackupAllowed()
-            ? SerializationOption.ReflectionAsBackup
-            : SerializationOption.CodeGenOnly;
+          ? SerializationOption.ReflectionAsBackup
+          : SerializationOption.CodeGenOnly;
         private static bool _optionAlreadySet;
         internal static SerializationOption Option
         {

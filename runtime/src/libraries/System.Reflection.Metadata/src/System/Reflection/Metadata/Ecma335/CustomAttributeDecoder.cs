@@ -197,8 +197,8 @@ namespace System.Reflection.Metadata.Ecma335
                     EntityHandle handle = signatureReader.ReadTypeHandle();
                     info.Type = GetTypeFromHandle(handle);
                     info.TypeCode = _provider.IsSystemType(info.Type)
-                        ? SerializationTypeCode.Type
-                        : (SerializationTypeCode)_provider.GetUnderlyingEnumType(info.Type);
+                      ? SerializationTypeCode.Type
+                      : (SerializationTypeCode)_provider.GetUnderlyingEnumType(info.Type);
                     break;
 
                 case SignatureTypeCode.SZArray:

@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 AddAccessor(symbol, symbol.GetMethod, SyntaxKind.GetKeyword);
                 var keywordForSetAccessor = IsInitOnly(symbol.SetMethod)
-                    ? SyntaxKind.InitKeyword
-                    : SyntaxKind.SetKeyword;
+                  ? SyntaxKind.InitKeyword
+                  : SyntaxKind.SetKeyword;
                 AddAccessor(symbol, symbol.SetMethod, keywordForSetAccessor);
 
                 AddSpace();

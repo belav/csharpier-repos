@@ -73,13 +73,13 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 entry,
                 out var keyValue
             )
-                ? new KeyValueIndex<TKey>(
-                      foreignKey,
-                      keyValue,
-                      _principalKeyValueFactory.EqualityComparer,
-                      fromOriginalValues: false
-                  )
-                : null;
+              ? new KeyValueIndex<TKey>(
+                    foreignKey,
+                    keyValue,
+                    _principalKeyValueFactory.EqualityComparer,
+                    fromOriginalValues: false
+                )
+              : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,12 +95,12 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 entry,
                 out var keyValue
             )
-                ? new KeyValueIndex<TKey>(
-                      foreignKey,
-                      keyValue,
-                      _principalKeyValueFactory.EqualityComparer,
-                      fromOriginalValues: true
-                  )
-                : null;
+              ? new KeyValueIndex<TKey>(
+                    foreignKey,
+                    keyValue,
+                    _principalKeyValueFactory.EqualityComparer,
+                    fromOriginalValues: true
+                )
+              : null;
     }
 }

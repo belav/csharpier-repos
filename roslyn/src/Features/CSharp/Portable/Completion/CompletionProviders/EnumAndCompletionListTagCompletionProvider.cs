@@ -415,9 +415,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var completionListType =
                 documentation.CompletionListCref != null
                     ? DocumentationCommentId
-                      .GetSymbolsForDeclarationId(documentation.CompletionListCref, compilation)
-                      .OfType<INamedTypeSymbol>()
-                      .FirstOrDefault()
+                          .GetSymbolsForDeclarationId(documentation.CompletionListCref, compilation)
+                          .OfType<INamedTypeSymbol>()
+                          .FirstOrDefault()
                     : null;
 
             return completionListType != null && completionListType.IsAccessibleWithin(within)

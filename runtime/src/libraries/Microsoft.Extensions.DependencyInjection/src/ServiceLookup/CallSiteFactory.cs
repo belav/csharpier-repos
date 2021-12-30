@@ -242,8 +242,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 new ServiceCacheKey(serviceType, DefaultSlot),
                 out ServiceCallSite site
             )
-                ? site
-                : CreateCallSite(serviceType, callSiteChain);
+              ? site
+              : CreateCallSite(serviceType, callSiteChain);
 
         internal ServiceCallSite GetCallSite(
             ServiceDescriptor serviceDescriptor,

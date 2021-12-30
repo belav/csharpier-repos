@@ -472,8 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     Location location = implementingMember.IsFromCompilation(
                                         this.DeclaringCompilation
                                     )
-                                        ? implementingMember.Locations[0]
-                                        : this.Locations[0];
+                                      ? implementingMember.Locations[0]
+                                      : this.Locations[0];
                                     diagnostics.Add(useSiteInfo, location);
                                 }
                             }

@@ -1137,8 +1137,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             var exitCode = ReportDiagnostics(diagnostics, consoleOutput, errorLogger, compilation)
-                ? Failed
-                : Succeeded;
+              ? Failed
+              : Succeeded;
 
             // The act of reporting errors can cause more errors to appear in
             // additional files due to forcing all additional files to fetch text

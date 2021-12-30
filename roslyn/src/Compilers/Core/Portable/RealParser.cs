@@ -774,8 +774,8 @@ namespace Microsoft.CodeAnalysis
             return (value >> shift)
                 + (
                     ShouldRoundUp(lsbBit: lsbBit, roundBit: roundBit, hasTailBits: hasTailBits)
-                        ? 1UL
-                        : 0
+                      ? 1UL
+                      : 0
                 );
         }
 

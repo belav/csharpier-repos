@@ -132,8 +132,8 @@ namespace System.Reflection.TypeLoading
         public sealed override Type? BaseType => GetRoBaseType();
         internal RoType? GetRoBaseType() =>
             object.ReferenceEquals(_lazyBaseType, Sentinels.RoType)
-                ? (_lazyBaseType = ComputeBaseType())
-                : _lazyBaseType;
+              ? (_lazyBaseType = ComputeBaseType())
+              : _lazyBaseType;
         private RoType? ComputeBaseType()
         {
             RoType? baseType = ComputeBaseTypeWithoutDesktopQuirk();

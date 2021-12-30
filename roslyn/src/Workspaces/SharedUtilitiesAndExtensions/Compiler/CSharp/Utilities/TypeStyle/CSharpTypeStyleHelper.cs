@@ -143,24 +143,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             {
                 VariableDeclarationSyntax variableDeclaration
                   => ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken)
-                      ? variableDeclaration.Type
-                      : null,
+                    ? variableDeclaration.Type
+                    : null,
                 ForEachStatementSyntax forEachStatement
                   => ShouldAnalyzeForEachStatement(
                       forEachStatement,
                       semanticModel,
                       cancellationToken
                   )
-                      ? forEachStatement.Type
-                      : null,
+                    ? forEachStatement.Type
+                    : null,
                 DeclarationExpressionSyntax declarationExpression
                   => ShouldAnalyzeDeclarationExpression(
                       declarationExpression,
                       semanticModel,
                       cancellationToken
                   )
-                      ? declarationExpression.Type
-                      : null,
+                    ? declarationExpression.Type
+                    : null,
                 _ => null,
             };
         }

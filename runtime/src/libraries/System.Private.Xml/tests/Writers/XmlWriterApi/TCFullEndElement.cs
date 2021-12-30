@@ -1965,10 +1965,10 @@ namespace System.Xml.Tests
             public void entityRef_2(XmlWriterUtils utils)
             {
                 string exp = utils.IsIndent()
-                    ? "<!DOCTYPE Root [<!ENTITY e \"test\">]>"
-                      + Environment.NewLine
-                      + "<Root>&e;</Root>"
-                    : "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&e;</Root>";
+                  ? "<!DOCTYPE Root [<!ENTITY e \"test\">]>"
+                    + Environment.NewLine
+                    + "<Root>&e;</Root>"
+                  : "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&e;</Root>";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -1987,10 +1987,10 @@ namespace System.Xml.Tests
             public void entityRef_3(XmlWriterUtils utils)
             {
                 string exp = utils.IsIndent()
-                    ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
-                      + Environment.NewLine
-                      + "<root xml:lang=\"&e;&lt;\" />"
-                    : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;&lt;\" />";
+                  ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
+                    + Environment.NewLine
+                    + "<root xml:lang=\"&e;&lt;\" />"
+                  : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;&lt;\" />";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -2012,10 +2012,10 @@ namespace System.Xml.Tests
             public void var_14(XmlWriterUtils utils)
             {
                 string exp = utils.IsIndent()
-                    ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
-                      + Environment.NewLine
-                      + "<root xml:lang=\"&e;\" />"
-                    : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;\" />";
+                  ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
+                    + Environment.NewLine
+                    + "<root xml:lang=\"&e;\" />"
+                  : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;\" />";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {

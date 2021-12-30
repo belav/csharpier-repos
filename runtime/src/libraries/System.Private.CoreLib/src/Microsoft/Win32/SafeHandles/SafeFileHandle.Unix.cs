@@ -44,8 +44,8 @@ namespace Microsoft.Win32.SafeHandles
                 if (supportsRandomAccess == NullableBool.Undefined)
                 {
                     _supportsRandomAccess = supportsRandomAccess = GetCanSeek()
-                        ? NullableBool.True
-                        : NullableBool.False;
+                      ? NullableBool.True
+                      : NullableBool.False;
                 }
 
                 return supportsRandomAccess == NullableBool.True;

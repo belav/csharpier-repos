@@ -565,8 +565,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _diagnostics.Add(syntax, useSiteInfo);
                 if (
                     input.Type.IsDynamic()
-                        ? type.SpecialType == SpecialType.System_Object
-                        : conversion.IsImplicit
+                      ? type.SpecialType == SpecialType.System_Object
+                      : conversion.IsImplicit
                 )
                 {
                     // type test not needed, only the type cast

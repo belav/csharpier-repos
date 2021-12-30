@@ -1329,10 +1329,10 @@ namespace System.Net
                                     // auth incomplete
                                     newContext = context;
                                     challenge = string.IsNullOrEmpty(outBlob)
-                                        ? headerScheme == AuthenticationSchemes.Ntlm
-                                            ? NegotiationInfoClass.NTLM
-                                            : NegotiationInfoClass.Negotiate
-                                        : outBlob;
+                                      ? headerScheme == AuthenticationSchemes.Ntlm
+                                          ? NegotiationInfoClass.NTLM
+                                          : NegotiationInfoClass.Negotiate
+                                      : outBlob;
                                 }
                             }
                             break;

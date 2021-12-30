@@ -316,8 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             ? currentValue.Value
                             : (
                                   typeInfo.IsCompatibleWith(currentValue.Value.FieldType)
-                                      ? currentValue.Value
-                                      : null
+                                    ? currentValue.Value
+                                    : null
                               );
 
                     if (newMatch != null)

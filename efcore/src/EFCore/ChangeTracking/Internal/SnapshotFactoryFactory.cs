@@ -33,12 +33,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             return GetPropertyCount(entityType) == 0
               ? (() => Snapshot.Empty)
               : Expression
-                .Lambda<Func<ISnapshot>>(
-                    // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
-                    // as if always exists.
-                    CreateConstructorExpression(entityType, null!)
-                )
-                .Compile();
+                    .Lambda<Func<ISnapshot>>(
+                        // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
+                        // as if always exists.
+                        CreateConstructorExpression(entityType, null!)
+                    )
+                    .Compile();
         }
 
         /// <summary>
@@ -232,15 +232,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     }
 
                     expression = propertyBase.ClrType.IsNullableType()
-                        ? Expression.Condition(
-                              Expression.Equal(
-                                  expression,
-                                  Expression.Constant(null, propertyBase.ClrType)
-                              ),
-                              Expression.Constant(null, propertyBase.ClrType),
-                              snapshotExpression
-                          )
-                        : snapshotExpression;
+                      ? Expression.Condition(
+                            Expression.Equal(
+                                expression,
+                                Expression.Constant(null, propertyBase.ClrType)
+                            ),
+                            Expression.Constant(null, propertyBase.ClrType),
+                            snapshotExpression
+                        )
+                      : snapshotExpression;
                 }
             }
 

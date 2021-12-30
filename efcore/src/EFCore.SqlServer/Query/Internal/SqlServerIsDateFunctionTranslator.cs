@@ -49,16 +49,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Convert(
-                      _sqlExpressionFactory.Function(
-                          "ISDATE",
-                          new[] { arguments[1] },
-                          nullable: true,
-                          argumentsPropagateNullability: new[] { true },
-                          _methodInfo.ReturnType
-                      ),
-                      _methodInfo.ReturnType
-                  )
-                : null;
+              ? _sqlExpressionFactory.Convert(
+                    _sqlExpressionFactory.Function(
+                        "ISDATE",
+                        new[] { arguments[1] },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { true },
+                        _methodInfo.ReturnType
+                    ),
+                    _methodInfo.ReturnType
+                )
+              : null;
     }
 }

@@ -870,8 +870,8 @@ namespace ILCompiler
                         optimizationMode = (
                             (EcmaAssembly)inputModules[0].Assembly
                         ).HasOptimizationsDisabled()
-                            ? OptimizationMode.None
-                            : OptimizationMode.Blended;
+                          ? OptimizationMode.None
+                          : OptimizationMode.Blended;
                     }
 
                     CompositeImageSettings compositeImageSettings = new CompositeImageSettings();

@@ -1605,13 +1605,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             var possibleLambdaExpression =
                 enclosingStatement == null
                     ? token
-                      .GetAncestors(
-                          n =>
-                              n
-                                  is SimpleLambdaExpressionSyntax
-                                      or ParenthesizedLambdaExpressionSyntax
-                      )
-                      .FirstOrDefault()
+                          .GetAncestors(
+                              n =>
+                                  n
+                                      is SimpleLambdaExpressionSyntax
+                                          or ParenthesizedLambdaExpressionSyntax
+                          )
+                          .FirstOrDefault()
                     : null;
             if (possibleLambdaExpression != null)
             {
@@ -1693,8 +1693,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             }
 
             var escapedIdentifier = replacementText.StartsWith("@", StringComparison.Ordinal)
-                ? replacementText
-                : "@" + replacementText;
+              ? replacementText
+              : "@" + replacementText;
 
             // Make sure we got an identifier.
             if (!syntaxFactsService.IsValidIdentifier(escapedIdentifier))

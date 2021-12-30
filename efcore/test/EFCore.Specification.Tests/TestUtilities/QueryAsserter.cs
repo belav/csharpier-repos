@@ -395,7 +395,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .FirstOrDefaultAsync(actualPredicate)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .FirstOrDefault(actualPredicate);
+                      .FirstOrDefault(actualPredicate);
 
             var rewrittenExpectedPredicate =
                 (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -447,7 +447,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .SingleAsync(actualPredicate)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Single(actualPredicate);
+                      .Single(actualPredicate);
 
             var rewrittenExpectedPredicate =
                 (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -500,7 +500,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .SingleOrDefaultAsync(actualPredicate)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .SingleOrDefault(actualPredicate);
+                      .SingleOrDefault(actualPredicate);
 
             var rewrittenExpectedPredicate =
                 (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -604,7 +604,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .LastOrDefaultAsync(actualPredicate)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .LastOrDefault(actualPredicate);
+                      .LastOrDefault(actualPredicate);
 
             var rewrittenExpectedPredicate =
                 (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -699,7 +699,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .LongCountAsync(actualPredicate)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .LongCount(actualPredicate);
+                      .LongCount(actualPredicate);
 
             var rewrittenExpectedPredicate =
                 (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1521,7 +1521,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, int>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1551,7 +1551,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, int?>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1581,7 +1581,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, long>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1611,7 +1611,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, long?>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1641,7 +1641,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, decimal>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1671,7 +1671,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, decimal?>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1701,7 +1701,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, float>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1731,7 +1731,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, float?>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1761,7 +1761,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, double>>)new ExpectedQueryRewritingVisitor().Visit(
@@ -1791,7 +1791,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
                       .AverageAsync(actualSelector)
                 : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
-                  .Average(actualSelector);
+                      .Average(actualSelector);
 
             var rewrittenExpectedSelector =
                 (Expression<Func<TResult, double?>>)new ExpectedQueryRewritingVisitor().Visit(

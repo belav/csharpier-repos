@@ -209,8 +209,8 @@ namespace ILCompiler
 
                             int index = (
                                 IsFieldThreadStatic(in fieldDef, module.MetadataReader)
-                                    ? StaticIndex.ThreadLocal
-                                    : StaticIndex.Regular
+                                  ? StaticIndex.ThreadLocal
+                                  : StaticIndex.Regular
                             );
                             int alignment;
                             int size;
@@ -581,8 +581,8 @@ namespace ILCompiler
 
                         int index = (
                             IsFieldThreadStatic(in fieldDef, module.MetadataReader)
-                                ? StaticIndex.ThreadLocal
-                                : StaticIndex.Regular
+                              ? StaticIndex.ThreadLocal
+                              : StaticIndex.Regular
                         );
                         int alignment;
                         int size;
@@ -698,8 +698,8 @@ namespace ILCompiler
                     {
                         int index = (
                             IsFieldThreadStatic(in fieldDef, module.MetadataReader)
-                                ? StaticIndex.ThreadLocal
-                                : StaticIndex.Regular
+                              ? StaticIndex.ThreadLocal
+                              : StaticIndex.Regular
                         );
                         int alignment;
                         int size;

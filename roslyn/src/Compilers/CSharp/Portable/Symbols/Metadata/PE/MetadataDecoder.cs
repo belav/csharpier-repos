@@ -609,16 +609,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     !TypeSymbol.Equals(scope, targetTypeSymbol, TypeCompareKind.ConsiderEverything2)
                     && !(
                         targetTypeSymbol.IsInterfaceType()
-                            ? scope.AllInterfacesNoUseSiteDiagnostics.IndexOf(
-                                  (NamedTypeSymbol)targetTypeSymbol,
-                                  0,
-                                  SymbolEqualityComparer.CLRSignature
-                              ) != -1
-                            : scope.IsDerivedFrom(
-                                  targetTypeSymbol,
-                                  TypeCompareKind.CLRSignatureCompareOptions,
-                                  useSiteInfo: ref discardedUseSiteInfo
-                              )
+                          ? scope.AllInterfacesNoUseSiteDiagnostics.IndexOf(
+                                (NamedTypeSymbol)targetTypeSymbol,
+                                0,
+                                SymbolEqualityComparer.CLRSignature
+                            ) != -1
+                          : scope.IsDerivedFrom(
+                                targetTypeSymbol,
+                                TypeCompareKind.CLRSignatureCompareOptions,
+                                useSiteInfo: ref discardedUseSiteInfo
+                            )
                     )
                 )
                 {

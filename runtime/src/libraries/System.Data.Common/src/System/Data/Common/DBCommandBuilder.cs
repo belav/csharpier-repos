@@ -1220,8 +1220,8 @@ namespace System.Data.Common
 
             p.DbType = DbType.Int32;
             p.Value = ADP.IsNull(value)
-                ? DbDataAdapter.s_parameterValueNullValue
-                : DbDataAdapter.s_parameterValueNonNullValue;
+              ? DbDataAdapter.s_parameterValueNullValue
+              : DbDataAdapter.s_parameterValueNonNullValue;
 
             if (!command.Parameters.Contains(p))
             {

@@ -629,8 +629,8 @@ namespace System.Data.Odbc
             _internalValue = Value;
             // we should coerce the parameter value at this time.
             _internalPrecision = ShouldSerializePrecision()
-                ? PrecisionInternal
-                : ValuePrecision(_internalValue);
+              ? PrecisionInternal
+              : ValuePrecision(_internalValue);
             _internalShouldSerializeSize = ShouldSerializeSize();
             _internalSize = _internalShouldSerializeSize ? Size : ValueSize(_internalValue);
             _internalDirection = Direction;

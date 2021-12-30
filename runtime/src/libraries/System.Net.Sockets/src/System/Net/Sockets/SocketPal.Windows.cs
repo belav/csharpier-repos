@@ -1307,8 +1307,8 @@ namespace System.Net.Sockets
                     ref leaseRead,
                     out var tmp
                 )
-                    ? stackalloc IntPtr[StackThreshold]
-                    : tmp;
+                  ? stackalloc IntPtr[StackThreshold]
+                  : tmp;
                 Socket.SocketListToFileDescriptorSet(
                     checkRead,
                     readfileDescriptorSet,
@@ -1319,8 +1319,8 @@ namespace System.Net.Sockets
                     ref leaseWrite,
                     out tmp
                 )
-                    ? stackalloc IntPtr[StackThreshold]
-                    : tmp;
+                  ? stackalloc IntPtr[StackThreshold]
+                  : tmp;
                 Socket.SocketListToFileDescriptorSet(
                     checkWrite,
                     writefileDescriptorSet,
@@ -1331,8 +1331,8 @@ namespace System.Net.Sockets
                     ref leaseError,
                     out tmp
                 )
-                    ? stackalloc IntPtr[StackThreshold]
-                    : tmp;
+                  ? stackalloc IntPtr[StackThreshold]
+                  : tmp;
                 Socket.SocketListToFileDescriptorSet(
                     checkError,
                     errfileDescriptorSet,

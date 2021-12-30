@@ -643,8 +643,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
             usingDirective = namespaceOrTypeSymbol.IsKind(SymbolKind.Namespace)
-                ? usingDirective
-                : usingDirective.WithStaticKeyword(SyntaxFactory.Token(SyntaxKind.StaticKeyword));
+              ? usingDirective
+              : usingDirective.WithStaticKeyword(SyntaxFactory.Token(SyntaxKind.StaticKeyword));
 
             return (
                 usingDirective,
@@ -791,8 +791,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         )
         {
             var leftExpression = syntaxFacts.IsMemberAccessExpression(expression)
-                ? syntaxFacts.GetExpressionOfMemberAccessExpression(expression)
-                : syntaxFacts.GetTargetOfMemberBinding(expression);
+              ? syntaxFacts.GetExpressionOfMemberAccessExpression(expression)
+              : syntaxFacts.GetTargetOfMemberBinding(expression);
             if (leftExpression == null)
             {
                 if (expression.IsKind(SyntaxKind.CollectionInitializerExpression))

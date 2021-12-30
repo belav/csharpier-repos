@@ -123,8 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return (oldGroup.GroupExpression == oldBody)
                       ? (
                             IsReducedSelectOrGroupByClause(newGroup, newGroup.GroupExpression)
-                                ? null
-                                : newGroup.GroupExpression
+                              ? null
+                              : newGroup.GroupExpression
                         )
                       : newGroup.ByExpression;
 

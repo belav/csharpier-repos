@@ -991,8 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!IsDeclared(assemblyCompliance))
                 {
                     ErrorCode code = IsTrue(compliance)
-                        ? ErrorCode.WRN_CLS_AssemblyNotCLS
-                        : ErrorCode.WRN_CLS_AssemblyNotCLS2;
+                      ? ErrorCode.WRN_CLS_AssemblyNotCLS
+                      : ErrorCode.WRN_CLS_AssemblyNotCLS2;
                     this.AddDiagnostic(code, symbol.Locations[0], symbol);
                     return false;
                 }
@@ -1409,8 +1409,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (declaredCompliance.HasValue)
             {
                 compliance = declaredCompliance.GetValueOrDefault()
-                    ? Compliance.DeclaredTrue
-                    : Compliance.DeclaredFalse;
+                  ? Compliance.DeclaredTrue
+                  : Compliance.DeclaredFalse;
             }
             else if (symbol.Kind == SymbolKind.Assembly)
             {
@@ -1420,8 +1420,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 compliance = IsTrue(GetInheritedCompliance(symbol))
-                    ? Compliance.InheritedTrue
-                    : Compliance.InheritedFalse;
+                  ? Compliance.InheritedTrue
+                  : Compliance.InheritedFalse;
             }
 
             // Don't bother caching methods, etc - they won't be reused.

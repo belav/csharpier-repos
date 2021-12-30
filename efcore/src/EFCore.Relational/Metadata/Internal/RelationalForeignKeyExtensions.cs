@@ -31,16 +31,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         )
         {
             var principalType = foreignKey.PrincipalKey.IsPrimaryKey()
-                ? foreignKey.PrincipalEntityType
-                : foreignKey.PrincipalKey.DeclaringEntityType;
+              ? foreignKey.PrincipalEntityType
+              : foreignKey.PrincipalKey.DeclaringEntityType;
             var principalTable = StoreObjectIdentifier.Create(
                 principalType,
                 storeObject.StoreObjectType
             );
 
             var duplicatePrincipalType = duplicateForeignKey.PrincipalKey.IsPrimaryKey()
-                ? duplicateForeignKey.PrincipalEntityType
-                : duplicateForeignKey.PrincipalKey.DeclaringEntityType;
+              ? duplicateForeignKey.PrincipalEntityType
+              : duplicateForeignKey.PrincipalKey.DeclaringEntityType;
             var duplicatePrincipalTable = StoreObjectIdentifier.Create(
                 duplicatePrincipalType,
                 storeObject.StoreObjectType

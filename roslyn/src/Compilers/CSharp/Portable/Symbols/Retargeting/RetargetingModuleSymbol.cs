@@ -203,8 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     referencedAssemblySymbols[i],
                     originatingSourceAssemblyDebugOnly
                 )
-                    ? new AssemblyIdentity(name: originatingSourceAssemblyDebugOnly.Name)
-                    : referencedAssemblySymbols[i].Identity;
+                  ? new AssemblyIdentity(name: originatingSourceAssemblyDebugOnly.Name)
+                  : referencedAssemblySymbols[i].Identity;
 
                 Debug.Assert(
                     identityComparer.Compare(moduleReferences.Identities[i], definitionIdentity)

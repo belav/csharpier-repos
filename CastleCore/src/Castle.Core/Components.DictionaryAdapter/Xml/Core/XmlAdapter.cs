@@ -275,8 +275,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         )
         {
             accessor = property.HasAccessor()
-                ? property.GetAccessor()
-                : CreateAccessor(key, property);
+              ? property.GetAccessor()
+              : CreateAccessor(key, property);
 
             if (accessor.IsIgnored)
                 return Try.Failure(out accessor);

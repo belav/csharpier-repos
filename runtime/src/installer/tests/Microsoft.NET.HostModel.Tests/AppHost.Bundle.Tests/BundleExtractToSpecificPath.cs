@@ -243,8 +243,8 @@ namespace AppHost.Bundle.Tests
 
             string defaultExpansionEnvVariable = OperatingSystem.IsWindows() ? "TMP" : "HOME";
             string expectedErrorMessagePart = OperatingSystem.IsWindows()
-                ? $"Failed to determine default extraction location. Check if 'TMP'"
-                : $"Default extraction directory [{nonExistentPath}] either doesn't exist or is not accessible for read/write.";
+              ? $"Failed to determine default extraction location. Check if 'TMP'"
+              : $"Default extraction directory [{nonExistentPath}] either doesn't exist or is not accessible for read/write.";
 
             Command
                 .Create(sharedTestState.DefaultBundledAppExecutablePath)

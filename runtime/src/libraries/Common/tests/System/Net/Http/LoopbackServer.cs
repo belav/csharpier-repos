@@ -508,8 +508,8 @@ namespace System.Net.Test.Common
             + "\r\n"
             + (
                 string.IsNullOrEmpty(content)
-                    ? ""
-                    : string.Concat(content.Select(c => $"1\r\n{c}\r\n"))
+                  ? ""
+                  : string.Concat(content.Select(c => $"1\r\n{c}\r\n"))
             )
             + $"0\r\n"
             + $"\r\n";

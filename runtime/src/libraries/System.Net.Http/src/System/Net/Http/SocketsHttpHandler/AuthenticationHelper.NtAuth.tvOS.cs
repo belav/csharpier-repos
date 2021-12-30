@@ -30,7 +30,7 @@ namespace System.Net.Http
                         connectionPool,
                         cancellationToken
                     )
-                .AsTask()
+                    .AsTask()
               : SendWithRequestAuthAsync(
                         request,
                         async,
@@ -39,7 +39,7 @@ namespace System.Net.Http
                         connectionPool,
                         cancellationToken
                     )
-                .AsTask();
+                    .AsTask();
         }
 
         public static Task<HttpResponseMessage> SendWithNtProxyAuthAsync(

@@ -437,8 +437,8 @@ namespace System.IO.Strategies
         private int FillReadBufferForReadByte() =>
             _useAsyncIO
                 ? ReadNativeAsync(new Memory<byte>(_buffer), 0, CancellationToken.None)
-                  .GetAwaiter()
-                  .GetResult()
+                      .GetAwaiter()
+                      .GetResult()
                 : ReadNative(_buffer);
 
         private unsafe int ReadNative(Span<byte> buffer)

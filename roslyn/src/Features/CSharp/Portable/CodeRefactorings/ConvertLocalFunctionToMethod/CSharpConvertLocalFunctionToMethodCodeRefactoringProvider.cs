@@ -191,8 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             var hasAdditionalTypeArguments = !additionalTypeParameters.IsEmpty();
             var additionalTypeArguments = hasAdditionalTypeArguments
                 ? additionalTypeParameters
-                  .Select(p => (TypeSyntax)p.Name.ToIdentifierName())
-                  .ToArray()
+                      .Select(p => (TypeSyntax)p.Name.ToIdentifierName())
+                      .ToArray()
                 : null;
 
             var anyDelegatesToReplace = false;

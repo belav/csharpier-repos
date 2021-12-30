@@ -331,8 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Check.NotEmpty(name, nameof(name)),
                 out var ignoredConfigurationSource
             )
-                ? ignoredConfigurationSource
-                : null;
+              ? ignoredConfigurationSource
+              : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

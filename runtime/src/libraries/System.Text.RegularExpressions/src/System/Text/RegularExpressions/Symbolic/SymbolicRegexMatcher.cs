@@ -296,10 +296,10 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
 
                     _asciiCharKinds[i] = _builder._solver
-                    .And(GetMinterm(i), predicate2)
-                    .Equals(_builder._solver.False)
-                        ? 0
-                        : charKind;
+                        .And(GetMinterm(i), predicate2)
+                        .Equals(_builder._solver.False)
+                      ? 0
+                      : charKind;
                 }
             }
         }
@@ -1023,8 +1023,8 @@ namespace System.Text.RegularExpressions.Symbolic
             return nextChar < asciiCharKinds.Length
               ? asciiCharKinds[nextChar]
               : _builder._solver
-                .And(GetMinterm(nextChar), _builder._wordLetterPredicateForAnchors)
-                .Equals(_builder._solver.False)
+                    .And(GetMinterm(nextChar), _builder._wordLetterPredicateForAnchors)
+                    .Equals(_builder._solver.False)
                   ? 0
                   : //apply the wordletter predicate to compute the kind of the next character
                     CharKind.WordLetter;

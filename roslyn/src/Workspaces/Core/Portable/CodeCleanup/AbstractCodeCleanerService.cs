@@ -495,8 +495,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     previousToken.SpanStart,
                     previousToken.Span.Length
                 )
-                    ? previousToken.SpanStart
-                    : startToken.SpanStart;
+                  ? previousToken.SpanStart
+                  : startToken.SpanStart;
 
                 nextToken =
                     (nextToken.RawKind == 0)
@@ -506,8 +506,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     nextToken.SpanStart,
                     nextToken.Span.Length
                 )
-                    ? nextToken.Span.End
-                    : endToken.Span.End;
+                  ? nextToken.Span.End
+                  : endToken.Span.End;
 
                 tokenSpans.Add(TextSpan.FromBounds(start, end));
             }

@@ -361,11 +361,11 @@ namespace System
                         field
                     );
                     bool isInherited = RuntimeFieldHandle.AcquiresContextFromThis(field)
-                        ? !RuntimeTypeHandle.CompareCanonicalHandles(
-                              approxDeclaringType,
-                              ReflectedType
-                          )
-                        : approxDeclaringType != ReflectedType;
+                      ? !RuntimeTypeHandle.CompareCanonicalHandles(
+                            approxDeclaringType,
+                            ReflectedType
+                        )
+                      : approxDeclaringType != ReflectedType;
 
                     BindingFlags bindingFlags = FilterPreCalculate(isPublic, isInherited, isStatic);
 
@@ -1415,8 +1415,8 @@ namespace System
 
                     // Do not create the dictionary if we are filtering the properties by name already
                     Dictionary<string, RuntimeEventInfo>? csEventInfos = filter.CaseSensitive()
-                        ? null
-                        : new Dictionary<string, RuntimeEventInfo>();
+                      ? null
+                      : new Dictionary<string, RuntimeEventInfo>();
 
                     RuntimeType declaringType = ReflectedType;
                     ListBuilder<RuntimeEventInfo> list = default;
@@ -1527,8 +1527,8 @@ namespace System
                         // Do not create the dictionary if we are filtering the properties by name already
                         Dictionary<string, List<RuntimePropertyInfo>>? csPropertyInfos =
                             filter.CaseSensitive()
-                                ? null
-                                : new Dictionary<string, List<RuntimePropertyInfo>>();
+                              ? null
+                              : new Dictionary<string, List<RuntimePropertyInfo>>();
 
                         // All elements automatically initialized to false.
                         bool[] usedSlots = new bool[

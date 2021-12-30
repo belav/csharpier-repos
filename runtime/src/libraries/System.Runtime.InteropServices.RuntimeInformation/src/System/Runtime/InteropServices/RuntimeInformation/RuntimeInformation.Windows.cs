@@ -24,16 +24,16 @@ namespace System.Runtime.InteropServices
                     Span<char> stackBuffer = stackalloc char[256];
                     const string Version = "Microsoft Windows";
                     s_osDescription = osDescription = string.IsNullOrEmpty(os.ServicePack)
-                        ? string.Create(
-                              null,
-                              stackBuffer,
-                              $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}"
-                          )
-                        : string.Create(
-                              null,
-                              stackBuffer,
-                              $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}"
-                          );
+                      ? string.Create(
+                            null,
+                            stackBuffer,
+                            $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}"
+                        )
+                      : string.Create(
+                            null,
+                            stackBuffer,
+                            $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}"
+                        );
                 }
 
                 return osDescription;

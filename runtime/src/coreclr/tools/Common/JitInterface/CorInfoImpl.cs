@@ -447,8 +447,8 @@ namespace Internal.JitInterface
             Array.Sort(relocs, (x, y) => (x.Offset - y.Offset));
 
             int alignment = JitConfigProvider.Instance.HasFlag(CorJitFlag.CORJIT_FLAG_SIZE_OPT)
-                ? _compilation.NodeFactory.Target.MinimumFunctionAlignment
-                : _compilation.NodeFactory.Target.OptimumFunctionAlignment;
+              ? _compilation.NodeFactory.Target.MinimumFunctionAlignment
+              : _compilation.NodeFactory.Target.OptimumFunctionAlignment;
 
             alignment = Math.Max(alignment, _codeAlignment);
 

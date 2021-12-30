@@ -466,8 +466,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     try
                     {
                         var expected = validAnnotations.ContainsKey(annotationName)
-                            ? validAnnotations[annotationName].Expected
-                            : generationDefault(annotationName);
+                          ? validAnnotations[annotationName].Expected
+                          : generationDefault(annotationName);
 
                         Assert.Equal(
                             string.IsNullOrEmpty(expected) ? expected : $"{expected};{_nl}",

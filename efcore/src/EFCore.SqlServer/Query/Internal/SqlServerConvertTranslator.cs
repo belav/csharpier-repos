@@ -86,17 +86,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _supportedMethods.Contains(method)
-                ? _sqlExpressionFactory.Function(
-                      "CONVERT",
-                      new[]
-                      {
-                          _sqlExpressionFactory.Fragment(_typeMapping[method.Name]),
-                          arguments[0]
-                      },
-                      nullable: true,
-                      argumentsPropagateNullability: new[] { false, true },
-                      method.ReturnType
-                  )
-                : null;
+              ? _sqlExpressionFactory.Function(
+                    "CONVERT",
+                    new[]
+                    {
+                        _sqlExpressionFactory.Fragment(_typeMapping[method.Name]),
+                        arguments[0]
+                    },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false, true },
+                    method.ReturnType
+                )
+              : null;
     }
 }

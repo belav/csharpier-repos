@@ -1529,8 +1529,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 newList.Select(
                     token =>
                         Any(original, token.RawKind)
-                            ? original.First(tk => tk.RawKind == token.RawKind)
-                            : token
+                          ? original.First(tk => tk.RawKind == token.RawKind)
+                          : token
                 )
             );
         }

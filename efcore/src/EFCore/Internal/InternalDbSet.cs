@@ -593,14 +593,14 @@ namespace Microsoft.EntityFrameworkCore.Internal
         {
             return entry.EntityState == EntityState.Detached
               ? _context
-                .GetDependencies()
-                .EntityGraphAttacher.AttachGraphAsync(
-                    entry,
-                    entityState,
-                    entityState,
-                    forceStateWhenUnknownKey: true,
-                    cancellationToken: cancellationToken
-                )
+                    .GetDependencies()
+                    .EntityGraphAttacher.AttachGraphAsync(
+                        entry,
+                        entityState,
+                        entityState,
+                        forceStateWhenUnknownKey: true,
+                        cancellationToken: cancellationToken
+                    )
               : entry.SetEntityStateAsync(
                     entityState,
                     acceptChanges: true,

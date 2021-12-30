@@ -351,8 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 ImmutableArray<NamedTypeSymbol> result = declaredInterfaces.SelectAsArray(
                     t =>
                         BaseTypeAnalysis.TypeDependsOn(t, this)
-                            ? CyclicInheritanceError(this, t)
-                            : t
+                          ? CyclicInheritanceError(this, t)
+                          : t
                 );
 
                 ImmutableInterlocked.InterlockedCompareExchange(

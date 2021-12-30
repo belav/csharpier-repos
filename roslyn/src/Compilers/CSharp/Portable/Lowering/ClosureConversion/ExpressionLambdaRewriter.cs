@@ -698,8 +698,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var promotedType = e.IsNullableType()
-                    ? _nullableType.Construct(PromotedType(e.GetNullableUnderlyingType()))
-                    : PromotedType(e);
+                  ? _nullableType.Construct(PromotedType(e.GetNullableUnderlyingType()))
+                  : PromotedType(e);
                 if (!TypeSymbol.Equals(promotedType, type, TypeCompareKind.ConsiderEverything2))
                 {
                     return Convert(node, type, isChecked);

@@ -2450,14 +2450,14 @@ namespace System.Xml.Xsl
                     right.SchemaType, /* except:*/
                     XmlSchemaDerivationMethod.Empty
                 )
-                    ? left.SchemaType
-                    : XmlSchemaType.IsDerivedFrom(
-                          right.SchemaType,
-                          left.SchemaType, /* except:*/
-                          XmlSchemaDerivationMethod.Empty
-                      )
-                        ? right.SchemaType
-                        : null;
+                  ? left.SchemaType
+                  : XmlSchemaType.IsDerivedFrom(
+                        right.SchemaType,
+                        left.SchemaType, /* except:*/
+                        XmlSchemaDerivationMethod.Empty
+                    )
+                      ? right.SchemaType
+                      : null;
                 bool isNillable = left.IsNillable && right.IsNillable;
 
                 if (

@@ -58,8 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 
             protected override RefKind DetermineRefKind(CancellationToken cancellationToken) =>
                 _invocationExpression.IsParentKind(SyntaxKind.RefExpression)
-                    ? RefKind.Ref
-                    : RefKind.None;
+                  ? RefKind.Ref
+                  : RefKind.None;
 
             protected override ITypeSymbol DetermineReturnTypeWorker(
                 CancellationToken cancellationToken

@@ -325,8 +325,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             foreach (var property in entityType.GetProperties())
             {
                 valuesArray[i++] = values.TryGetValue(property.Name, out var value)
-                    ? value
-                    : property.ClrType.GetDefaultValue();
+                  ? value
+                  : property.ClrType.GetDefaultValue();
 
                 if (property.IsShadowProperty())
                 {
@@ -334,8 +334,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         property.Name,
                         out var shadowValue
                     )
-                        ? shadowValue
-                        : property.ClrType.GetDefaultValue();
+                      ? shadowValue
+                      : property.ClrType.GetDefaultValue();
                 }
             }
 
@@ -458,8 +458,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool throwOnNonUniqueness = true
         ) =>
             _entityReferenceMap.TryGet(entity, null, out var entry, throwOnNonUniqueness)
-                ? entry
-                : null;
+              ? entry
+              : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -478,17 +478,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 out var entry,
                 throwOnNonUniqueness: false
             )
-                ? !entityType.IsAssignableFrom(entry.EntityType)
-                    ? throwOnTypeMismatch
-                        ? throw new InvalidOperationException(
-                              CoreStrings.TrackingTypeMismatch(
-                                  entry.EntityType.DisplayName(),
-                                  entityType.DisplayName()
-                              )
-                          )
-                        : null
-                    : entry
-                : null;
+              ? !entityType.IsAssignableFrom(entry.EntityType)
+                  ? throwOnTypeMismatch
+                      ? throw new InvalidOperationException(
+                            CoreStrings.TrackingTypeMismatch(
+                                entry.EntityType.DisplayName(),
+                                entityType.DisplayName()
+                            )
+                        )
+                      : null
+                  : entry
+              : null;
 
         private IIdentityMap GetOrCreateIdentityMap(IKey key)
         {
@@ -1019,8 +1019,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             );
             return dependentIdentityMap != null
               ? dependentIdentityMap
-                .GetDependentsMap(foreignKey)
-                .GetDependentsUsingRelationshipSnapshot(principalEntry)
+                    .GetDependentsMap(foreignKey)
+                    .GetDependentsUsingRelationshipSnapshot(principalEntry)
               : Enumerable.Empty<IUpdateEntry>();
         }
 

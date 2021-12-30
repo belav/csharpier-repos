@@ -2896,8 +2896,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             value.DoubleValue,
                             out _
                         )
-                            ? value.DoubleValue
-                            : 0D;
+                          ? value.DoubleValue
+                          : 0D;
                         switch (destinationType)
                         {
                             case SpecialType.System_Byte:
@@ -2941,8 +2941,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             value.DecimalValue,
                             out _
                         )
-                            ? value.DecimalValue
-                            : 0m;
+                          ? value.DecimalValue
+                          : 0m;
                         switch (destinationType)
                         {
                             case SpecialType.System_Byte:

@@ -314,32 +314,32 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                 == ImplementTypePropertyGenerationBehavior.PreferAutoProperties;
 
             var getMethod = ShouldGenerateAccessor(property.GetMethod)
-                ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
-                      property.GetMethod,
-                      attributes: default,
-                      accessibility: property.GetMethod.ComputeResultantAccessibility(ClassType),
-                      statements: generator.GetGetAccessorStatements(
-                          compilation,
-                          property,
-                          throughMember,
-                          preferAutoProperties
-                      )
-                  )
-                : null;
+              ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
+                    property.GetMethod,
+                    attributes: default,
+                    accessibility: property.GetMethod.ComputeResultantAccessibility(ClassType),
+                    statements: generator.GetGetAccessorStatements(
+                        compilation,
+                        property,
+                        throughMember,
+                        preferAutoProperties
+                    )
+                )
+              : null;
 
             var setMethod = ShouldGenerateAccessor(property.SetMethod)
-                ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
-                      property.SetMethod,
-                      attributes: default,
-                      accessibility: property.SetMethod.ComputeResultantAccessibility(ClassType),
-                      statements: generator.GetSetAccessorStatements(
-                          compilation,
-                          property,
-                          throughMember,
-                          preferAutoProperties
-                      )
-                  )
-                : null;
+              ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
+                    property.SetMethod,
+                    attributes: default,
+                    accessibility: property.SetMethod.ComputeResultantAccessibility(ClassType),
+                    statements: generator.GetSetAccessorStatements(
+                        compilation,
+                        property,
+                        throughMember,
+                        preferAutoProperties
+                    )
+                )
+              : null;
 
             return CodeGenerationSymbolFactory.CreatePropertySymbol(
                 property,

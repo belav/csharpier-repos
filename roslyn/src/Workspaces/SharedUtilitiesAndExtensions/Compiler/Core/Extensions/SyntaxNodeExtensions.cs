@@ -837,12 +837,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         includeDirectives: true,
                         includeDocumentationComments: true
                     )
-                .GetPreviousToken(
-                    includeZeroWidth: false,
-                    includeSkipped: includeSkipped,
-                    includeDirectives: includeDirectives,
-                    includeDocumentationComments: includeDocumentationComments
-                );
+                    .GetPreviousToken(
+                        includeZeroWidth: false,
+                        includeSkipped: includeSkipped,
+                        includeDirectives: includeDirectives,
+                        includeDocumentationComments: includeDocumentationComments
+                    );
         }
 
         /// <summary>

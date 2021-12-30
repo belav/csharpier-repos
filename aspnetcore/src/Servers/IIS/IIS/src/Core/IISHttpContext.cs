@@ -427,8 +427,8 @@ internal abstract partial class IISHttpContext
     {
         // Verifies we have sent the statuscode before writing a header
         var reasonPhrase = string.IsNullOrEmpty(ReasonPhrase)
-            ? ReasonPhrases.GetReasonPhrase(StatusCode)
-            : ReasonPhrase;
+          ? ReasonPhrases.GetReasonPhrase(StatusCode)
+          : ReasonPhrase;
 
         // This copies data into the underlying buffer
         NativeMethods.HttpSetResponseStatusCode(

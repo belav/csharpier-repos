@@ -1215,8 +1215,8 @@ namespace System.Diagnostics.Tests
 
             // Process.ProcessName drops the extension when it's exe.
             string processName = RemoteExecutor.HostRunner.EndsWith(".exe")
-                ? _process.ProcessName
-                : Path.GetFileNameWithoutExtension(_process.ProcessName);
+              ? _process.ProcessName
+              : Path.GetFileNameWithoutExtension(_process.ProcessName);
             Assert.Equal(
                 Path.GetFileNameWithoutExtension(RemoteExecutor.HostRunner),
                 processName,

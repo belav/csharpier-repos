@@ -1189,9 +1189,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             var block =
                 extraNodeInsertedBetweenBraces != null
                     ? GetBlockNode(documentOptions)
-                      .WithStatements(
-                          new SyntaxList<StatementSyntax>(extraNodeInsertedBetweenBraces)
-                      )
+                          .WithStatements(
+                              new SyntaxList<StatementSyntax>(extraNodeInsertedBetweenBraces)
+                          )
                     : GetBlockNode(documentOptions);
 
             return embeddedStatementOwner switch

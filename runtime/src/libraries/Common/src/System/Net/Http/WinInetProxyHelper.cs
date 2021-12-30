@@ -203,8 +203,8 @@ namespace System.Net.Http
                 proxyInfo.AccessType = Interop.WinHttp.WINHTTP_ACCESS_TYPE_NAMED_PROXY;
                 proxyInfo.Proxy = Marshal.StringToHGlobalUni(Proxy);
                 proxyInfo.ProxyBypass = string.IsNullOrEmpty(ProxyBypass)
-                    ? IntPtr.Zero
-                    : Marshal.StringToHGlobalUni(ProxyBypass);
+                  ? IntPtr.Zero
+                  : Marshal.StringToHGlobalUni(ProxyBypass);
 
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(

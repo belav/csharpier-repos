@@ -90,8 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             var param = Expression.Parameter(typeof(TNumber), "v");
 
             var input = typeof(TNumber).IsNullableType()
-                ? Expression.Convert(param, type)
-                : (Expression)param;
+              ? Expression.Convert(param, type)
+              : (Expression)param;
 
             var output =
                 type == typeof(byte)

@@ -385,8 +385,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                 document != null
                     ? document.Id
                     : project.Solution
-                      .GetDocumentIdsWithFilePath(originalFile)
-                      .FirstOrDefault(documentId => documentId.ProjectId == project.Id);
+                          .GetDocumentIdsWithFilePath(originalFile)
+                          .FirstOrDefault(documentId => documentId.ProjectId == project.Id);
 
             return new DiagnosticDataLocation(
                 documentId,

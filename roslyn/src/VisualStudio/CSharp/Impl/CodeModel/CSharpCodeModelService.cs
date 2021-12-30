@@ -2203,8 +2203,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (importNode is UsingDirectiveSyntax usingDirective)
             {
                 namespaceNode = usingDirective.IsParentKind(SyntaxKind.CompilationUnit)
-                    ? null
-                    : usingDirective.Parent;
+                  ? null
+                  : usingDirective.Parent;
 
                 name = usingDirective.Name.ToString();
 

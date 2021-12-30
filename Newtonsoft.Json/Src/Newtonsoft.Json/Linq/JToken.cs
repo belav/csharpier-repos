@@ -2314,8 +2314,8 @@ namespace Newtonsoft.Json.Linq
                         catch (Exception ex)
                         {
                             Type enumType = objectType.IsEnum()
-                                ? objectType
-                                : Nullable.GetUnderlyingType(objectType);
+                              ? objectType
+                              : Nullable.GetUnderlyingType(objectType);
                             throw new ArgumentException(
                                 "Could not convert '{0}' to {1}.".FormatWith(
                                     CultureInfo.InvariantCulture,
@@ -2330,8 +2330,8 @@ namespace Newtonsoft.Json.Linq
                     if (Type == JTokenType.Integer)
                     {
                         Type enumType = objectType.IsEnum()
-                            ? objectType
-                            : Nullable.GetUnderlyingType(objectType);
+                          ? objectType
+                          : Nullable.GetUnderlyingType(objectType);
                         return Enum.ToObject(enumType, ((JValue)this).Value);
                     }
                 }

@@ -7830,9 +7830,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Complex = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault()
                                     != null
                                         ? c.Orders
-                                          .OrderBy(e => e.OrderDate)
-                                          .FirstOrDefault()
-                                          .Customer.Orders.Any(e => e.OrderID < 11000)
+                                              .OrderBy(e => e.OrderDate)
+                                              .FirstOrDefault()
+                                              .Customer.Orders.Any(e => e.OrderID < 11000)
                                         : (bool?)false
                                 }
                         ),
@@ -7983,8 +7983,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     c.CustomerID,
                                     OrderDate = c.Orders.Any()
-                                        ? c.Orders.First().OrderDate
-                                        : default
+                                      ? c.Orders.First().OrderDate
+                                      : default
                                 }
                         ),
                 assertOrder: true,
@@ -8252,8 +8252,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             c =>
                                 c.Orders.Any()
-                                    ? c.Orders.Select(o => o.CustomerID).Distinct().ToArray()
-                                    : Array.Empty<string>()
+                                  ? c.Orders.Select(o => o.CustomerID).Distinct().ToArray()
+                                  : Array.Empty<string>()
                         ),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)

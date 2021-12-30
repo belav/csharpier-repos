@@ -808,8 +808,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (!_lazyNullableContextValue.TryGetByte(out value))
             {
                 value = ContainingPEModule.Module.HasNullableContextAttribute(_handle, out byte arg)
-                    ? arg
-                    : _container.GetNullableContextValue();
+                  ? arg
+                  : _container.GetNullableContextValue();
                 _lazyNullableContextValue = value.ToNullableContextFlags();
             }
             return value;

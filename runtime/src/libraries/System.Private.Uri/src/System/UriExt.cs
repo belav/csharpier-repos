@@ -961,8 +961,8 @@ namespace System
                     string prefix;
                     if (baseUri.InFact(Flags.AuthorityFound))
                         prefix = baseUri.Syntax.InFact(UriSyntaxFlags.PathIsRooted)
-                            ? ":///"
-                            : "://";
+                          ? ":///"
+                          : "://";
                     else
                         prefix = baseUri.Syntax.InFact(UriSyntaxFlags.PathIsRooted) ? ":/" : ":";
 

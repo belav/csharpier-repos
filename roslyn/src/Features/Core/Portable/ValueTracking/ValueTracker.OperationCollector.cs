@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                       => VisitReturnAsync(returnOperation, cancellationToken),
                     IArgumentOperation argumentOperation
                       => ShouldTrackArgument(argumentOperation)
-                          ? VisitAsync(argumentOperation.Value, cancellationToken)
-                          : Task.CompletedTask,
+                        ? VisitAsync(argumentOperation.Value, cancellationToken)
+                        : Task.CompletedTask,
                     ILocalReferenceOperation
                     or IParameterReferenceOperation
                     or IFieldReferenceOperation

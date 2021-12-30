@@ -111,8 +111,8 @@ internal sealed class AcceptsMatcherPolicy
 
             var contentType = httpContext.Request.ContentType;
             var mediaType = string.IsNullOrEmpty(contentType)
-                ? (ReadOnlyMediaTypeHeaderValue?)null
-                : new(contentType);
+              ? (ReadOnlyMediaTypeHeaderValue?)null
+              : new(contentType);
 
             var matched = false;
             for (var j = 0; j < metadata.ContentTypes?.Count; j++)

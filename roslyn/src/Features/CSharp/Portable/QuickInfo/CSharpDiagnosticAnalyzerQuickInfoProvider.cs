@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             {
                 PragmaWarningDirectiveTriviaSyntax directive
                   => token.IsKind(SyntaxKind.EndOfDirectiveToken)
-                      ? directive.ErrorCodes.LastOrDefault()
-                      : directive.ErrorCodes.FirstOrDefault(),
+                    ? directive.ErrorCodes.LastOrDefault()
+                    : directive.ErrorCodes.FirstOrDefault(),
                 { Parent: PragmaWarningDirectiveTriviaSyntax } node => node,
                 _ => null,
             };
@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                     RawKind: (int)SyntaxKind.NumericLiteralExpression
                 } literal
                   => int.TryParse(literal.Token.ValueText, out var errorCodeNumber)
-                      ? $"CS{errorCodeNumber:0000}"
-                      : literal.Token.ValueText,
+                    ? $"CS{errorCodeNumber:0000}"
+                    : literal.Token.ValueText,
                 _ => null,
             };
             if (errorCode is null)

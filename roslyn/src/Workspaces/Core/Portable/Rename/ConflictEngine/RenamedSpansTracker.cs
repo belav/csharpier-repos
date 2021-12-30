@@ -85,10 +85,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         internal int GetAdjustedPosition(int startingPosition, DocumentId documentId)
         {
             var documentReplacementSpans = _documentToModifiedSpansMap.ContainsKey(documentId)
-                ? _documentToModifiedSpansMap[documentId].Where(
-                      pair => pair.oldSpan.Start < startingPosition
-                  )
-                : SpecializedCollections.EmptyEnumerable<(TextSpan oldSpan, TextSpan newSpan)>();
+              ? _documentToModifiedSpansMap[documentId].Where(
+                    pair => pair.oldSpan.Start < startingPosition
+                )
+              : SpecializedCollections.EmptyEnumerable<(TextSpan oldSpan, TextSpan newSpan)>();
 
             var adjustedStartingPosition = startingPosition;
             foreach (var (oldSpan, newSpan) in documentReplacementSpans)
@@ -97,10 +97,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             }
 
             var documentComplexifiedSpans = _documentToComplexifiedSpansMap.ContainsKey(documentId)
-                ? _documentToComplexifiedSpansMap[documentId].Where(
-                      c => c.OriginalSpan.Start <= startingPosition
-                  )
-                : SpecializedCollections.EmptyEnumerable<MutableComplexifiedSpan>();
+              ? _documentToComplexifiedSpansMap[documentId].Where(
+                    c => c.OriginalSpan.Start <= startingPosition
+                )
+              : SpecializedCollections.EmptyEnumerable<MutableComplexifiedSpan>();
 
             var appliedTextSpans = new HashSet<TextSpan>();
             foreach (var c in documentComplexifiedSpans.Reverse())

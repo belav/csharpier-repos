@@ -150,14 +150,14 @@ namespace System.Runtime.Serialization.Json
                 : base(traditionalDataContract)
             {
                 _typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
-                    ? traditionalDataContract.Name.Value
-                    : string.Concat(
-                          traditionalDataContract.Name.Value,
-                          JsonGlobals.NameValueSeparatorString,
-                          XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(
-                              traditionalDataContract.Namespace.Value
-                          )
-                      );
+                  ? traditionalDataContract.Name.Value
+                  : string.Concat(
+                        traditionalDataContract.Name.Value,
+                        JsonGlobals.NameValueSeparatorString,
+                        XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(
+                            traditionalDataContract.Namespace.Value
+                        )
+                    );
                 _traditionalClassDataContract = traditionalDataContract;
                 CopyMembersAndCheckDuplicateNames();
             }

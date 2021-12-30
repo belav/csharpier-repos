@@ -305,8 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? _foreignKeys.Count == 0
                     ? _baseType.FindForeignKeys(properties)
                     : _baseType
-                      .FindForeignKeys(properties)
-                      .Concat(FindDeclaredForeignKeys(properties))
+                          .FindForeignKeys(properties)
+                          .Concat(FindDeclaredForeignKeys(properties))
                 : FindDeclaredForeignKeys(properties);
 
         private SlimForeignKey? FindForeignKey(
@@ -376,8 +376,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? (DeclaredReferencingForeignKeys?.Count ?? 0) == 0
                     ? _baseType.GetReferencingForeignKeys()
                     : _baseType
-                      .GetReferencingForeignKeys()
-                      .Concat(GetDeclaredReferencingForeignKeys())
+                          .GetReferencingForeignKeys()
+                          .Concat(GetDeclaredReferencingForeignKeys())
                 : GetDeclaredReferencingForeignKeys();
 
         private IEnumerable<SlimForeignKey> GetDeclaredReferencingForeignKeys() =>
@@ -574,8 +574,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns> The index, or <see langword="null" /> if none is found. </returns>
         public virtual SlimIndex? FindIndex(IReadOnlyList<IReadOnlyProperty> properties) =>
             _unnamedIndexes.TryGetValue(properties, out var index)
-                ? index
-                : _baseType?.FindIndex(properties);
+              ? index
+              : _baseType?.FindIndex(properties);
 
         /// <summary>
         ///     Gets the index with the given name. Returns <see langword="null" /> if no such index exists.

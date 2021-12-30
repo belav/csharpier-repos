@@ -375,13 +375,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         innerExpression,
                         out var sqlInnerExpression
                     )
-                        ? null
-                        : _memberTranslatorProvider.Translate(
-                              sqlInnerExpression,
-                              memberExpression.Member,
-                              memberExpression.Type,
-                              _queryCompilationContext.Logger
-                          )
+                      ? null
+                      : _memberTranslatorProvider.Translate(
+                            sqlInnerExpression,
+                            memberExpression.Member,
+                            memberExpression.Type,
+                            _queryCompilationContext.Logger
+                        )
                 );
         }
 
@@ -944,8 +944,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             if (IsNullSqlConstantExpression(left) || IsNullSqlConstantExpression(right))
             {
                 var nonNullEntityReference = IsNullSqlConstantExpression(left)
-                    ? rightEntityReference
-                    : leftEntityReference;
+                  ? rightEntityReference
+                  : leftEntityReference;
                 var entityType1 = nonNullEntityReference.EntityType;
                 var primaryKeyProperties1 = entityType1.FindPrimaryKey()?.Properties;
                 if (primaryKeyProperties1 == null)
@@ -1129,17 +1129,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
         private SqlConstantExpression GetConstantOrNull(Expression expression) =>
             CanEvaluate(expression)
-                ? new SqlConstantExpression(
-                      Expression.Constant(
-                          Expression
-                              .Lambda<Func<object>>(Expression.Convert(expression, typeof(object)))
-                              .Compile()
-                              .Invoke(),
-                          expression.Type
-                      ),
-                      null
-                  )
-                : null;
+              ? new SqlConstantExpression(
+                    Expression.Constant(
+                        Expression
+                            .Lambda<Func<object>>(Expression.Convert(expression, typeof(object)))
+                            .Compile()
+                            .Invoke(),
+                        expression.Type
+                    ),
+                    null
+                )
+              : null;
 
         private static bool CanEvaluate(Expression expression)
         {

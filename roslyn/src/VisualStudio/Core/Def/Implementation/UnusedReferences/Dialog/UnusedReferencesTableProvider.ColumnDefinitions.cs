@@ -265,8 +265,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     UnusedReferencesTableKeyNames.ReferenceType,
                     out var referenceType
                 )
-                    ? GetText(referenceType)
-                    : null;
+                  ? GetText(referenceType)
+                  : null;
                 return content != null;
             }
 

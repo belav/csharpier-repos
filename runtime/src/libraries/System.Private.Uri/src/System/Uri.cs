@@ -3098,8 +3098,8 @@ namespace System
                                 ? (UnescapeMode.Unescape | UnescapeMode.UnescapeAll)
                                 : (
                                       InFact(Flags.UserEscaped)
-                                          ? UnescapeMode.Unescape
-                                          : UnescapeMode.EscapeUnescape
+                                        ? UnescapeMode.Unescape
+                                        : UnescapeMode.EscapeUnescape
                                   );
                     }
                     else
@@ -3227,14 +3227,14 @@ namespace System
                             V1ToStringUnescape
                               => (
                                   InFact(Flags.UserEscaped)
-                                      ? UnescapeMode.Unescape
-                                      : UnescapeMode.EscapeUnescape
+                                    ? UnescapeMode.Unescape
+                                    : UnescapeMode.EscapeUnescape
                               ) | UnescapeMode.V1ToStringFlag,
                             UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
                             _
                               => InFact(Flags.UserEscaped)
-                                  ? UnescapeMode.Unescape
-                                  : UnescapeMode.EscapeUnescape
+                                ? UnescapeMode.Unescape
+                                : UnescapeMode.EscapeUnescape
                         };
                     }
                 }
@@ -3285,14 +3285,14 @@ namespace System
                             V1ToStringUnescape
                               => (
                                   InFact(Flags.UserEscaped)
-                                      ? UnescapeMode.Unescape
-                                      : UnescapeMode.EscapeUnescape
+                                    ? UnescapeMode.Unescape
+                                    : UnescapeMode.EscapeUnescape
                               ) | UnescapeMode.V1ToStringFlag,
                             UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
                             _
                               => InFact(Flags.UserEscaped)
-                                  ? UnescapeMode.Unescape
-                                  : UnescapeMode.EscapeUnescape
+                                ? UnescapeMode.Unescape
+                                : UnescapeMode.EscapeUnescape
                         };
                     }
                 }
@@ -5467,8 +5467,8 @@ namespace System
                         mode =
                             (
                                 InFact(Flags.UserEscaped)
-                                    ? UnescapeMode.Unescape
-                                    : UnescapeMode.EscapeUnescape
+                                  ? UnescapeMode.Unescape
+                                  : UnescapeMode.EscapeUnescape
                             ) | UnescapeMode.V1ToStringFlag;
                         if (IsImplicitFile)
                             mode &= ~UnescapeMode.Unescape;
@@ -5483,8 +5483,8 @@ namespace System
                     default: // UriFormat.SafeUnescaped
 
                         mode = InFact(Flags.UserEscaped)
-                            ? UnescapeMode.Unescape
-                            : UnescapeMode.EscapeUnescape;
+                          ? UnescapeMode.Unescape
+                          : UnescapeMode.EscapeUnescape;
                         if (IsImplicitFile)
                             mode &= ~UnescapeMode.Unescape;
                         break;

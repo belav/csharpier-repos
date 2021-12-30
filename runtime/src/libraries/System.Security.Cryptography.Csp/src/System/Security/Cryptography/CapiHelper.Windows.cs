@@ -628,8 +628,8 @@ namespace Internal.NativeCrypto
                     case Constants.CLR_ACCESSIBLE:
                     {
                         retVal = CryptGetUserKey(safeProvHandle, keyNumber, out safeKeyHandle)
-                            ? true
-                            : false;
+                          ? true
+                          : false;
                         break;
                     }
                     case Constants.CLR_UNIQUE_CONTAINER:

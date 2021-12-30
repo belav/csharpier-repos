@@ -513,10 +513,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Type? FindClrType(string name) =>
             _entityTypes.TryGetValue(name, out var entityType)
-                ? entityType.HasSharedClrType
-                    ? null
-                    : entityType.ClrType
-                : null;
+              ? entityType.HasSharedClrType
+                  ? null
+                  : entityType.ClrType
+              : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -661,8 +661,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Check.NotEmpty(name, nameof(name)),
                 out var ignoredConfigurationSource
             )
-                ? ignoredConfigurationSource
-                : null;
+              ? ignoredConfigurationSource
+              : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -837,8 +837,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual ConfigurationSource? FindIsSharedConfigurationSource(Type type) =>
             _sharedTypes.TryGetValue(type, out var existingTypes)
-                ? existingTypes.ConfigurationSource
-                : null;
+              ? existingTypes.ConfigurationSource
+              : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -1363,8 +1363,8 @@ namespace System.Net.Http
                         updateProxySettings = true;
 
                         Uri? proxyUri = state.Proxy.IsBypassed(uri)
-                            ? null
-                            : state.Proxy.GetProxy(uri);
+                          ? null
+                          : state.Proxy.GetProxy(uri);
                         if (proxyUri == null)
                         {
                             proxyInfo.AccessType = Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY;

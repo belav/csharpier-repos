@@ -403,8 +403,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Since we have a concrete member in hand, we can resolve the receiver.
                         var typeOrValue = (BoundTypeOrValueExpression)receiver;
                         receiver = otherSymbol.RequiresInstanceReceiver()
-                            ? typeOrValue.Data.ValueExpression
-                            : null; // no receiver required
+                          ? typeOrValue.Data.ValueExpression
+                          : null; // no receiver required
                     }
                     return new BoundBadExpression(
                         expr.Syntax,

@@ -235,8 +235,8 @@ namespace System.Reflection
             // Strictly speeking, property's don't contain paramter tokens
             // However we need this to make ca's work... oh well...
             m_tkParamDef = MdToken.IsNullToken(accessor.MetadataToken)
-                ? (int)MetadataTokenType.ParamDef
-                : accessor.MetadataToken;
+              ? (int)MetadataTokenType.ParamDef
+              : accessor.MetadataToken;
             m_scope = accessor.m_scope;
         }
 
@@ -262,8 +262,8 @@ namespace System.Reflection
             MemberImpl = member;
             m_signature = signature;
             m_tkParamDef = MdToken.IsNullToken(tkParamDef)
-                ? (int)MetadataTokenType.ParamDef
-                : tkParamDef;
+              ? (int)MetadataTokenType.ParamDef
+              : tkParamDef;
             m_scope = scope;
             AttrsImpl = attributes;
 

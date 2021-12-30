@@ -627,8 +627,8 @@ namespace System.Net.Security
                     ) // guard against malicious endpoints. We should not see ClientHello on client.
                     {
                         TlsFrameHelper.ProcessingOptions options = NetEventSource.Log.IsEnabled()
-                            ? TlsFrameHelper.ProcessingOptions.All
-                            : TlsFrameHelper.ProcessingOptions.ServerName;
+                          ? TlsFrameHelper.ProcessingOptions.All
+                          : TlsFrameHelper.ProcessingOptions.ServerName;
 
                         // Process SNI from Client Hello message
                         if (

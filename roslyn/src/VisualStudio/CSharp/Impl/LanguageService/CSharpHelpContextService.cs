@@ -419,8 +419,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
                 case SyntaxKind.UsingKeyword when token.Parent is UsingDirectiveSyntax:
                     text = token.GetNextToken().IsKind(SyntaxKind.StaticKeyword)
-                        ? "using-static_CSharpKeyword"
-                        : "using_CSharpKeyword";
+                      ? "using-static_CSharpKeyword"
+                      : "using_CSharpKeyword";
                     return true;
                 case SyntaxKind.StaticKeyword when token.Parent is UsingDirectiveSyntax:
                     text = "using-static_CSharpKeyword";

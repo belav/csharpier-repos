@@ -2140,8 +2140,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 var baseType = outerKeySelector.ReturnType.IsAssignableFrom(
                     innerKeySelector.ReturnType
                 )
-                    ? outerKeySelector.ReturnType
-                    : innerKeySelector.ReturnType;
+                  ? outerKeySelector.ReturnType
+                  : innerKeySelector.ReturnType;
 
                 outerKeySelector = ChangeReturnType(outerKeySelector, baseType);
                 innerKeySelector = ChangeReturnType(innerKeySelector, baseType);
@@ -2343,8 +2343,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var enumerableMethod = EnumerableMethods.GetMinWithSelector(resultType);
 
                     enumerableMethod = IsNumericType(resultType)
-                        ? enumerableMethod.MakeGenericMethod(genericTypeArguments[0])
-                        : enumerableMethod.MakeGenericMethod(genericTypeArguments);
+                      ? enumerableMethod.MakeGenericMethod(genericTypeArguments[0])
+                      : enumerableMethod.MakeGenericMethod(genericTypeArguments);
 
                     return Expression.Call(enumerableMethod, enumerableArguments);
                 }
@@ -2371,8 +2371,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var enumerableMethod = EnumerableMethods.GetMaxWithSelector(resultType);
 
                     enumerableMethod = IsNumericType(resultType)
-                        ? enumerableMethod.MakeGenericMethod(genericTypeArguments[0])
-                        : enumerableMethod.MakeGenericMethod(genericTypeArguments);
+                      ? enumerableMethod.MakeGenericMethod(genericTypeArguments[0])
+                      : enumerableMethod.MakeGenericMethod(genericTypeArguments);
 
                     return Expression.Call(enumerableMethod, enumerableArguments);
                 }

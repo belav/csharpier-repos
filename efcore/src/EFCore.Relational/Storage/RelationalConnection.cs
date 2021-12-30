@@ -72,10 +72,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             _defaultCommandTimeout = _commandTimeout = relationalOptions.CommandTimeout;
 
             _connectionString = string.IsNullOrWhiteSpace(relationalOptions.ConnectionString)
-                ? null
-                : dependencies.ConnectionStringResolver.ResolveConnectionString(
-                      relationalOptions.ConnectionString
-                  );
+              ? null
+              : dependencies.ConnectionStringResolver.ResolveConnectionString(
+                    relationalOptions.ConnectionString
+                );
 
             if (relationalOptions.Connection != null)
             {

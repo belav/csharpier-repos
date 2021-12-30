@@ -664,8 +664,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                 _paramValues = paramValues;
             protected override Expression GetValue(string name) =>
                 _paramValues.TryGetValue(name, out object parameterValue)
-                    ? Constant(parameterValue)
-                    : null;
+                  ? Constant(parameterValue)
+                  : null;
         }
     }
     [EditorBrowsable(EditorBrowsableState.Never)]

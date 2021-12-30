@@ -25,12 +25,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // For a public analyzer it is not possible to know the diagnostic categorization, so return a worst-case categorization.
                 _
                   => analyzer.IsCompilerAnalyzer()
-                      ? DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
-                        | DiagnosticAnalyzerCategory.SemanticSpanAnalysis
-                        | DiagnosticAnalyzerCategory.ProjectAnalysis
-                      : DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
-                        | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis
-                        | DiagnosticAnalyzerCategory.ProjectAnalysis
+                    ? DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
+                      | DiagnosticAnalyzerCategory.SemanticSpanAnalysis
+                      | DiagnosticAnalyzerCategory.ProjectAnalysis
+                    : DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
+                      | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis
+                      | DiagnosticAnalyzerCategory.ProjectAnalysis
             };
 
         public static bool SupportAnalysisKind(

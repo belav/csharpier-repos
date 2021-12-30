@@ -139,14 +139,14 @@ namespace JitBench
             string storeDirName = ".store";
             await (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                    ? new ProcessRunner(
-                          "powershell.exe",
-                          $"-ExecutionPolicy Bypass .\\AspNet-GenerateStore.ps1 -InstallDir {storeDirName} -Architecture {dotNetInstall.Architecture} -Runtime win7-{dotNetInstall.Architecture}"
-                      )
-                    : new ProcessRunner(
-                          "bash",
-                          $"./aspnet-generatestore.sh --install-dir {storeDirName} --architecture {dotNetInstall.Architecture} --runtime-id linux-{dotNetInstall.Architecture} -f {tfm} --fx-version {dotNetInstall.FrameworkVersion}"
-                      )
+                  ? new ProcessRunner(
+                        "powershell.exe",
+                        $"-ExecutionPolicy Bypass .\\AspNet-GenerateStore.ps1 -InstallDir {storeDirName} -Architecture {dotNetInstall.Architecture} -Runtime win7-{dotNetInstall.Architecture}"
+                    )
+                  : new ProcessRunner(
+                        "bash",
+                        $"./aspnet-generatestore.sh --install-dir {storeDirName} --architecture {dotNetInstall.Architecture} --runtime-id linux-{dotNetInstall.Architecture} -f {tfm} --fx-version {dotNetInstall.FrameworkVersion}"
+                    )
             )
                 .WithWorkingDirectory(GetJitBenchRepoRootDir(outputDir))
                 .WithEnvironmentVariable(

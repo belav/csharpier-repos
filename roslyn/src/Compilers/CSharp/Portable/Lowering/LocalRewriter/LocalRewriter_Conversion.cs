@@ -1116,10 +1116,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // NOTE: Dev10 converts enum? to underlying?, rather than directly to underlying.
                     rewrittenOperandType = rewrittenOperandType.IsNullableType()
-                        ? ((NamedTypeSymbol)rewrittenOperandType.OriginalDefinition).Construct(
-                              typeFromUnderlying
-                          )
-                        : typeFromUnderlying;
+                      ? ((NamedTypeSymbol)rewrittenOperandType.OriginalDefinition).Construct(
+                            typeFromUnderlying
+                        )
+                      : typeFromUnderlying;
                     rewrittenOperand = BoundConversion.SynthesizedNonUserDefined(
                         syntax,
                         rewrittenOperand,
@@ -1144,8 +1144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var conversionKind = conversion.Kind.IsImplicitConversion()
-                    ? ConversionKind.ImplicitUserDefined
-                    : ConversionKind.ExplicitUserDefined;
+                  ? ConversionKind.ImplicitUserDefined
+                  : ConversionKind.ExplicitUserDefined;
                 var result = new BoundConversion(
                     syntax,
                     rewrittenOperand,
@@ -1769,11 +1769,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol s0 = source.StrippedType();
 
             SpecialType t0Type = t0.IsEnumType()
-                ? t0.GetEnumUnderlyingType()!.SpecialType
-                : t0.SpecialType;
+              ? t0.GetEnumUnderlyingType()!.SpecialType
+              : t0.SpecialType;
             SpecialType s0Type = s0.IsEnumType()
-                ? s0.GetEnumUnderlyingType()!.SpecialType
-                : s0.SpecialType;
+              ? s0.GetEnumUnderlyingType()!.SpecialType
+              : s0.SpecialType;
 
             if (t0Type == SpecialType.System_IntPtr)
             {

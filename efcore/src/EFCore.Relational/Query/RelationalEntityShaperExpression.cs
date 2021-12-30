@@ -98,11 +98,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 var defaultBlock = entityType.IsAbstract()
-                    ? CreateUnableToDiscriminateExceptionExpression(
-                          entityType,
-                          discriminatorValueVariable
-                      )
-                    : Constant(entityType, typeof(IEntityType));
+                  ? CreateUnableToDiscriminateExceptionExpression(
+                        entityType,
+                        discriminatorValueVariable
+                    )
+                  : Constant(entityType, typeof(IEntityType));
 
                 expressions.Add(Switch(discriminatorValueVariable, defaultBlock, switchCases));
                 baseCondition = Lambda(

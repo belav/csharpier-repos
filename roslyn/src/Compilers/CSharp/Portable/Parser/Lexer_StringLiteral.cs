@@ -385,8 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 {
                     Debug.Assert(IsAtEnd());
                     int position = IsAtEnd(allowNewline: true)
-                        ? _lexer.TextWindow.Position - 1
-                        : _lexer.TextWindow.Position;
+                      ? _lexer.TextWindow.Position - 1
+                      : _lexer.TextWindow.Position;
                     TrySetUnrecoverableError(
                         _lexer.MakeError(
                             position,

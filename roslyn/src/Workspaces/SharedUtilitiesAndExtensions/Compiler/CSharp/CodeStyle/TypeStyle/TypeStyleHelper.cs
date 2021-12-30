@@ -203,8 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         {
             var returnType = methodSymbol.ReturnType;
             var returnTypeName = returnType.IsNullable()
-                ? returnType.GetTypeArguments().First().Name
-                : returnType.Name;
+              ? returnType.GetTypeArguments().First().Name
+              : returnType.Name;
 
             return methodSymbol.Name.Equals("To" + returnTypeName, StringComparison.Ordinal);
         }

@@ -519,8 +519,8 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
                     PropertyName = expressionAttribute.GetPropertyName(),
                     TagHelper = node.TagHelper,
                     TypeName = expressionAttribute.IsWeaklyTyped()
-                        ? null
-                        : expressionAttribute.TypeName,
+                      ? null
+                      : expressionAttribute.TypeName,
                 };
 
                 expressionNode.Children.Clear();

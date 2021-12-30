@@ -2027,8 +2027,8 @@ namespace CSharpSyntaxGenerator
                     nd.Fields.Select(
                         f =>
                             factoryWithNoAutoCreatableTokenFields.Contains(f)
-                                ? CamelCase(f.Name)
-                                : GetDefaultValue(nd, f)
+                              ? CamelCase(f.Name)
+                              : GetDefaultValue(nd, f)
                     )
                 )
             );

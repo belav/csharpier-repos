@@ -1626,8 +1626,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if (typeArgument.IsNullableType())
             {
                 errorCode = constraintType.Type.IsInterfaceType()
-                    ? ErrorCode.ERR_GenericConstraintNotSatisfiedNullableInterface
-                    : ErrorCode.ERR_GenericConstraintNotSatisfiedNullableEnum;
+                  ? ErrorCode.ERR_GenericConstraintNotSatisfiedNullableInterface
+                  : ErrorCode.ERR_GenericConstraintNotSatisfiedNullableEnum;
             }
             else if (typeArgument.TypeKind == TypeKind.TypeParameter)
             {

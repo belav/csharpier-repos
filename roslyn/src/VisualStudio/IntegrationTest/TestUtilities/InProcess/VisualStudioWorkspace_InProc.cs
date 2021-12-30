@@ -306,8 +306,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         .GetConverter(option.Type)
                         .ConvertFromString(valueString);
                     var optionKey = string.IsNullOrWhiteSpace(language)
-                        ? new OptionKey(option)
-                        : new OptionKey(option, language);
+                      ? new OptionKey(option)
+                      : new OptionKey(option, language);
 
                     SetOption(optionKey, value);
                 }

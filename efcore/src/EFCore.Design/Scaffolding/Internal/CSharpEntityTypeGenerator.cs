@@ -672,8 +672,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             private static string StripAttribute(string attributeName) =>
                 attributeName.EndsWith("Attribute", StringComparison.Ordinal)
-                    ? attributeName[..^9]
-                    : attributeName;
+                  ? attributeName[..^9]
+                  : attributeName;
         }
     }
 }

@@ -453,8 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
 
         private static string GetConstructorSuffix(ConstructorDeclarationSyntax constructor) =>
             constructor.Modifiers.Any(SyntaxKind.StaticKeyword)
-                ? ".static " + constructor.Identifier + "()"
-                : GetSuffix('(', ')', constructor.ParameterList.Parameters);
+              ? ".static " + constructor.Identifier + "()"
+              : GetSuffix('(', ')', constructor.ParameterList.Parameters);
 
         private static string GetMethodSuffix(MethodDeclarationSyntax method) =>
             GetTypeParameterSuffix(method.TypeParameterList)

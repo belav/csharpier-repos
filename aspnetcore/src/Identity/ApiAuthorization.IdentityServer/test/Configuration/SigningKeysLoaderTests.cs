@@ -17,12 +17,12 @@ public class SigningKeysLoaderTests
     // platforms (all .NET Core) for which the value is defined on the underlying platform.
     private const X509KeyStorageFlags UnsafeEphemeralKeySet = (X509KeyStorageFlags)32;
     private static readonly X509KeyStorageFlags DefaultFlags = OperatingSystem.IsLinux()
-        ? UnsafeEphemeralKeySet
-        : (
-              OperatingSystem.IsMacOS()
-                  ? X509KeyStorageFlags.PersistKeySet
-                  : X509KeyStorageFlags.DefaultKeySet
-          );
+      ? UnsafeEphemeralKeySet
+      : (
+            OperatingSystem.IsMacOS()
+              ? X509KeyStorageFlags.PersistKeySet
+              : X509KeyStorageFlags.DefaultKeySet
+        );
 
     [Fact]
     public void LoadFromFile_ThrowsIfFileDoesNotExist()

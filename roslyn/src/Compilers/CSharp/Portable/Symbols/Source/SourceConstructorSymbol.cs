@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             var methodKind = syntax.Modifiers.Any(SyntaxKind.StaticKeyword)
-                ? MethodKind.StaticConstructor
-                : MethodKind.Constructor;
+              ? MethodKind.StaticConstructor
+              : MethodKind.Constructor;
             return new SourceConstructorSymbol(
                 containingType,
                 syntax.Identifier.GetLocation(),

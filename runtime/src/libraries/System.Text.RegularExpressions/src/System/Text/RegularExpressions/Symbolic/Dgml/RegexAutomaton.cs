@@ -86,8 +86,8 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
 
                             var qp = (q.Id, p.Id);
                             normalizedmoves[qp] = normalizedmoves.ContainsKey(qp)
-                                ? _builder._solver.Or(normalizedmoves[qp], c)
-                                : c;
+                              ? _builder._solver.Or(normalizedmoves[qp], c)
+                              : c;
                         }
                     }
                 }

@@ -252,15 +252,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         _activeSpan.HasValue && spans.Contains(_activeSpan.Value)
                             ? _activeSpan
                             : spans
-                              .Where(
-                                  s =>
-                                      // in tests `ActiveTextview` can be null so don't depend on it
-                                      ActiveTextView == null
-                                      || ActiveTextView.GetSpanInView(
-                                          _subjectBuffer.CurrentSnapshot.GetSpan(s.ToSpan())
-                                      ).Count != 0
-                              ) // spans were successfully projected
-                              .FirstOrNull(); // filter to spans that have a projection
+                                  .Where(
+                                      s =>
+                                          // in tests `ActiveTextview` can be null so don't depend on it
+                                          ActiveTextView == null
+                                          || ActiveTextView.GetSpanInView(
+                                              _subjectBuffer.CurrentSnapshot.GetSpan(s.ToSpan())
+                                          ).Count != 0
+                                  ) // spans were successfully projected
+                                  .FirstOrNull(); // filter to spans that have a projection
 
                     UpdateReadOnlyRegions();
                     this.ApplyReplacementText(updateSelection: false);
@@ -604,8 +604,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         // show any other rename-related spans that overlap a merge conflict comment.
                         var mergeConflictComments =
                             mergeResult.MergeConflictCommentSpans.ContainsKey(document.Id)
-                                ? mergeResult.MergeConflictCommentSpans[document.Id]
-                                : SpecializedCollections.EmptyEnumerable<TextSpan>();
+                              ? mergeResult.MergeConflictCommentSpans[document.Id]
+                              : SpecializedCollections.EmptyEnumerable<TextSpan>();
 
                         foreach (var conflict in mergeConflictComments)
                         {
@@ -1025,12 +1025,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     var snapshot = _openTextBufferManager._subjectBuffer.CurrentSnapshot;
                     var endPoint =
                         _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.ContainsKey(span)
-                            ? _openTextBufferManager._referenceSpanToLinkedRenameSpanMap[
-                                  span
-                              ].TrackingSpan.GetEndPoint(snapshot)
-                            : _openTextBufferManager._referenceSpanToLinkedRenameSpanMap
-                              .First(kvp => kvp.Key.OverlapsWith(span))
-                              .Value.TrackingSpan.GetEndPoint(snapshot);
+                          ? _openTextBufferManager._referenceSpanToLinkedRenameSpanMap[
+                                span
+                            ].TrackingSpan.GetEndPoint(snapshot)
+                          : _openTextBufferManager._referenceSpanToLinkedRenameSpanMap
+                                .First(kvp => kvp.Key.OverlapsWith(span))
+                                .Value.TrackingSpan.GetEndPoint(snapshot);
                     return _openTextBufferManager.ActiveTextView.BufferGraph.MapUpToBuffer(
                         endPoint,
                         PointTrackingMode.Positive,

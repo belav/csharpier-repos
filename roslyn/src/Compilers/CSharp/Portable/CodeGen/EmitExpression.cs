@@ -1715,8 +1715,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     // if method is defined in the struct itself it is assumed to be mutating, unless
                     // it is a member of a readonly struct and is not a constructor
                     var receiverAddresskind = IsReadOnlyCall(method, methodContainingType)
-                        ? AddressKind.ReadOnly
-                        : AddressKind.Writeable;
+                      ? AddressKind.ReadOnly
+                      : AddressKind.Writeable;
                     if (MayUseCallForStructMethod(method))
                     {
                         // NOTE: this should be either a method which overrides some abstract method or
@@ -2069,8 +2069,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             //       a positive native int. We can treat it as either signed or unsigned.
             //       We will use whatever typeTo says so we do not need to convert because of sign.
             var typeFrom = typeTo.IsUnsigned()
-                ? Microsoft.Cci.PrimitiveTypeCode.UIntPtr
-                : Microsoft.Cci.PrimitiveTypeCode.IntPtr;
+              ? Microsoft.Cci.PrimitiveTypeCode.UIntPtr
+              : Microsoft.Cci.PrimitiveTypeCode.IntPtr;
 
             // NOTE: In Dev10 C# this cast is unchecked.
             // That seems to be wrong since that would cause silent truncation on 64bit platform if that implements large arrays.

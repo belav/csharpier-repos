@@ -242,8 +242,8 @@ namespace Microsoft.CodeAnalysis
                     var replacement = outputs[i];
 
                     var entryState = comparer.Equals(previous, replacement)
-                        ? EntryState.Cached
-                        : EntryState.Modified;
+                      ? EntryState.Cached
+                      : EntryState.Modified;
                     modified.Add(replacement, entryState);
                 }
 

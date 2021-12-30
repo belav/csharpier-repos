@@ -601,11 +601,11 @@ namespace System.Net
                             int waitDuration = haveNextTick
                                 ? (int)(
                                       IsTickBetween(now, nextTick, newNow)
-                                          ? Math.Min(
-                                                unchecked((uint)(nextTick - newNow)),
-                                                (uint)(int.MaxValue - TickCountResolution)
-                                            ) + TickCountResolution
-                                          : 0
+                                        ? Math.Min(
+                                              unchecked((uint)(nextTick - newNow)),
+                                              (uint)(int.MaxValue - TickCountResolution)
+                                          ) + TickCountResolution
+                                        : 0
                                   )
                                 : ThreadIdleTimeoutMilliseconds;
 

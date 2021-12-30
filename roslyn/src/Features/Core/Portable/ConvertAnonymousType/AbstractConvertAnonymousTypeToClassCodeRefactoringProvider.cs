@@ -317,7 +317,7 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                     var classNameToken =
                         startingCreationNode == childCreation
                             ? g.Identifier(className)
-                              .WithAdditionalAnnotations(RenameAnnotation.Create())
+                                  .WithAdditionalAnnotations(RenameAnnotation.Create())
                             : g.Identifier(className);
 
                     var classNameNode =

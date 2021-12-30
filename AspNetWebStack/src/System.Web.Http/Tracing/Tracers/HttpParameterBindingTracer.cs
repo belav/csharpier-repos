@@ -113,15 +113,15 @@ namespace System.Web.Http.Tracing.Tracers
                     else
                     {
                         tr.Message = actionContext.ActionArguments.ContainsKey(parameterName)
-                            ? Error.Format(
-                                  SRResources.TraceEndParameterBind,
-                                  parameterName,
-                                  FormattingUtilities.ValueToString(
-                                      actionContext.ActionArguments[parameterName],
-                                      CultureInfo.CurrentCulture
-                                  )
-                              )
-                            : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
+                          ? Error.Format(
+                                SRResources.TraceEndParameterBind,
+                                parameterName,
+                                FormattingUtilities.ValueToString(
+                                    actionContext.ActionArguments[parameterName],
+                                    CultureInfo.CurrentCulture
+                                )
+                            )
+                          : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
                     }
                 },
                 errorTrace: null

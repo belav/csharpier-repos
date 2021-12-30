@@ -95,8 +95,8 @@ namespace Microsoft.CodeAnalysis.Rename
             DocumentId documentId
         ) =>
             _documentToComplexifiedSpansMap.TryGetValue(documentId, out var complexifiedSpans)
-                ? complexifiedSpans.SelectAsArray(c => (c.OriginalSpan, c.NewSpan))
-                : ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>.Empty;
+              ? complexifiedSpans.SelectAsArray(c => (c.OriginalSpan, c.NewSpan))
+              : ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>.Empty;
 
         public ImmutableDictionary<TextSpan, TextSpan> GetModifiedSpanMap(DocumentId documentId)
         {
@@ -123,8 +123,8 @@ namespace Microsoft.CodeAnalysis.Rename
             DocumentId documentId
         ) =>
             _documentToRelatedLocationsMap.TryGetValue(documentId, out var result)
-                ? result
-                : ImmutableArray<RelatedLocation>.Empty;
+              ? result
+              : ImmutableArray<RelatedLocation>.Empty;
 
         internal TextSpan GetResolutionTextSpan(TextSpan originalSpan, DocumentId documentId)
         {

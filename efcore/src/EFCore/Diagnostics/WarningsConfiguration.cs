@@ -151,8 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </summary>
         public virtual WarningBehavior? GetBehavior(EventId eventId) =>
             _explicitBehaviors.TryGetValue(eventId.Id, out var warningBehavior)
-                ? warningBehavior.Behavior
-                : null;
+              ? warningBehavior.Behavior
+              : null;
 
         /// <summary>
         ///     Gets the <see cref="LogLevel" /> set for the given event ID, or <see langword="null" />
@@ -161,8 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <returns>The <see cref="LogLevel" /> set for the given event ID.</returns>
         public virtual LogLevel? GetLevel(EventId eventId) =>
             _explicitBehaviors.TryGetValue(eventId.Id, out var warningBehavior)
-                ? warningBehavior.Level
-                : null;
+              ? warningBehavior.Level
+              : null;
 
         /// <summary>
         ///     Creates a new instance with the given explicit <see cref="WarningBehavior" /> set for
@@ -177,8 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             WarningBehavior warningBehavior
         ) =>
             _explicitBehaviors.ContainsKey(eventId.Id)
-                ? this
-                : WithExplicit(new[] { eventId }, warningBehavior);
+              ? this
+              : WithExplicit(new[] { eventId }, warningBehavior);
 
         /// <summary>
         ///     Returns a value indicating whether all of the options used in <see cref="GetServiceProviderHashCode" />

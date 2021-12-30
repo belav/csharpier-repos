@@ -193,8 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var kind = GetMakeAssemblyReferencesKind();
             var contextId = MetadataContextId.GetContextId(moduleVersionId, kind);
             var assemblyContexts = previous.Matches(metadataBlocks)
-                ? previous.AssemblyContexts
-                : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
+              ? previous.AssemblyContexts
+              : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
             CSharpMetadataContext previousContext;
             assemblyContexts.TryGetValue(contextId, out previousContext);
 

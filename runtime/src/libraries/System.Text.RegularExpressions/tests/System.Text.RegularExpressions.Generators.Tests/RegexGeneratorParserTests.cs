@@ -501,8 +501,8 @@ namespace System.Text.RegularExpressions.Generator.Tests
                 {
                     foreach (
                         bool instance in typeModifier.Contains("static")
-                            ? new[] { false }
-                            : new[] { false, true }
+                          ? new[] { false }
+                          : new[] { false, true }
                     )
                     {
                         string[] methodVisibilities = type switch

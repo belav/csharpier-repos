@@ -611,8 +611,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         dependentEntityType.DisplayName()
                         + (
                             string.IsNullOrEmpty(dependentNavigationSpec)
-                                ? string.Empty
-                                : "." + dependentNavigationSpec
+                              ? string.Empty
+                              : "." + dependentNavigationSpec
                         );
 
                     var principalNavigationSpec = onDependent
@@ -622,8 +622,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         principalEntityType.DisplayName()
                         + (
                             string.IsNullOrEmpty(principalNavigationSpec)
-                                ? string.Empty
-                                : "." + principalNavigationSpec
+                              ? string.Empty
+                              : "." + principalNavigationSpec
                         );
 
                     Dependencies.Logger.IncompatibleMatchingForeignKeyProperties(

@@ -1562,12 +1562,12 @@ namespace System
                 // startTime and endTime represent the period from either the start of
                 // DST to the end and ***includes*** the potentially overlapped times
                 startTime = rule.IsStartDateMarkerForBeginningOfYear()
-                    ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
-                    : daylightTime.Start + daylightTime.Delta;
+                  ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
+                  : daylightTime.Start + daylightTime.Delta;
 
                 endTime = rule.IsEndDateMarkerForEndOfYear()
-                    ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
-                    : daylightTime.End;
+                  ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
+                  : daylightTime.End;
             }
             else
             {
@@ -1591,12 +1591,12 @@ namespace System
                 bool invalidAtStart = rule.DaylightDelta > TimeSpan.Zero;
 
                 startTime = rule.IsStartDateMarkerForBeginningOfYear()
-                    ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
-                    : daylightTime.Start + (invalidAtStart ? rule.DaylightDelta : TimeSpan.Zero); /* FUTURE: - rule.StandardDelta; */
+                  ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
+                  : daylightTime.Start + (invalidAtStart ? rule.DaylightDelta : TimeSpan.Zero); /* FUTURE: - rule.StandardDelta; */
 
                 endTime = rule.IsEndDateMarkerForEndOfYear()
-                    ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
-                    : daylightTime.End + (invalidAtStart ? -rule.DaylightDelta : TimeSpan.Zero);
+                  ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
+                  : daylightTime.End + (invalidAtStart ? -rule.DaylightDelta : TimeSpan.Zero);
             }
 
             bool isDst = CheckIsDst(startTime, time, endTime, false, rule);

@@ -31,8 +31,8 @@ public class TargetingPackTests
         _expectedRid = TestData.GetSharedFxRuntimeIdentifier();
         _targetingPackTfm = TestData.GetDefaultNetCoreTargetFramework();
         var root = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix"))
-            ? TestData.GetTestDataValue("TargetingPackLayoutRoot")
-            : Environment.GetEnvironmentVariable("DOTNET_ROOT");
+          ? TestData.GetTestDataValue("TargetingPackLayoutRoot")
+          : Environment.GetEnvironmentVariable("DOTNET_ROOT");
         _targetingPackRoot = Path.Combine(
             root,
             "packs",
@@ -404,12 +404,12 @@ public class TargetingPackTests
 
         var analyzersDir = Path.Combine(_targetingPackRoot, "analyzers");
         var expectedAnalyzers = Directory.Exists(analyzersDir)
-            ? Directory
-              .GetFiles(analyzersDir, "*.dll", SearchOption.AllDirectories)
-              .Select(p => Path.GetFileNameWithoutExtension(p))
-              .Where(f => !f.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
-              .ToHashSet()
-            : new HashSet<string>();
+          ? Directory
+                .GetFiles(analyzersDir, "*.dll", SearchOption.AllDirectories)
+                .Select(p => Path.GetFileNameWithoutExtension(p))
+                .Where(f => !f.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
+                .ToHashSet()
+          : new HashSet<string>();
 
         CompareFrameworkElements(expectedAssemblies, managedEntries, "managed");
         CompareFrameworkElements(expectedAnalyzers, analyzerEntries, "analyzer");

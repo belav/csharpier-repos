@@ -255,8 +255,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 var inverseNavigation = navigation.Inverse;
                 var includeTree = entityReference.IncludePaths.TryGetValue(navigation, out var tree)
-                    ? tree
-                    : null;
+                  ? tree
+                  : null;
 
                 var primaryExpansion = ExpandForeignKey(
                     root,
@@ -551,18 +551,18 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var predicateBody = Expression.AndAlso(
                         outerKey is NewArrayExpression newArrayExpression
                           ? newArrayExpression.Expressions
-                            .Select(
-                                e =>
-                                {
-                                    var left = (e as UnaryExpression)?.Operand ?? e;
+                                .Select(
+                                    e =>
+                                    {
+                                        var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                    return Expression.NotEqual(
-                                        left,
-                                        Expression.Constant(null, left.Type)
-                                    );
-                                }
-                            )
-                            .Aggregate((l, r) => Expression.AndAlso(l, r))
+                                        return Expression.NotEqual(
+                                            left,
+                                            Expression.Constant(null, left.Type)
+                                        );
+                                    }
+                                )
+                                .Aggregate((l, r) => Expression.AndAlso(l, r))
                           : Expression.NotEqual(outerKey, Expression.Constant(null, outerKey.Type)),
                         Expression.Call(
                             _objectEqualsMethodInfo,
@@ -1685,8 +1685,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 if (left.IsNullConstantExpression() || right.IsNullConstantExpression())
                 {
                     NavigationDataExpression nonNullNavigationData = left.IsNullConstantExpression()
-                        ? rightNavigationData!
-                        : leftNavigationData!;
+                      ? rightNavigationData!
+                      : leftNavigationData!;
 
                     if (nonNullNavigationData.Navigation?.IsCollection == true)
                     {

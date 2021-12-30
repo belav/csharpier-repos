@@ -752,8 +752,8 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
         }
 
         var tagNameToken = At(SyntaxKind.Text)
-            ? EatCurrentToken()
-            : SyntaxFactory.MissingToken(SyntaxKind.Text);
+          ? EatCurrentToken()
+          : SyntaxFactory.MissingToken(SyntaxKind.Text);
 
         var attributes = EmptySyntaxList;
         using (var pooledResult = Pool.Allocate<RazorSyntaxNode>())
@@ -982,8 +982,8 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
 
         var openAngleToken = EatCurrentToken(); // Accept '<'
         var forwardSlashToken = At(SyntaxKind.ForwardSlash)
-            ? EatCurrentToken()
-            : SyntaxFactory.MissingToken(SyntaxKind.ForwardSlash);
+          ? EatCurrentToken()
+          : SyntaxFactory.MissingToken(SyntaxKind.ForwardSlash);
 
         // Whitespace here is invalid (according to the spec)
         var isBangEscape = TryParseBangEscape(out var bangToken);

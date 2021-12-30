@@ -4690,8 +4690,8 @@ namespace System.Net.Sockets
         // Helper for SendFile implementations
         private static SafeFileHandle? OpenFileHandle(string? name) =>
             string.IsNullOrEmpty(name)
-                ? null
-                : File.OpenHandle(name, FileMode.Open, FileAccess.Read);
+              ? null
+              : File.OpenHandle(name, FileMode.Open, FileAccess.Read);
 
         private void UpdateReceiveSocketErrorForDisposed(
             ref SocketError socketError,

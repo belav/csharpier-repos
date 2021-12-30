@@ -156,8 +156,8 @@ internal sealed class QueryParameterValueSupplier
                 var componentParameterName = propertyInfo.Name;
                 var queryParameterName = (
                     string.IsNullOrEmpty(fromQueryAttribute.Name)
-                        ? componentParameterName
-                        : fromQueryAttribute.Name
+                      ? componentParameterName
+                      : fromQueryAttribute.Name
                 ).AsMemory();
 
                 // If it's an array type, capture that info and prepare to parse the element type

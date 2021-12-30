@@ -404,8 +404,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 var startSpan = service.IsMethodLevelMember(startNode)
-                    ? startNode.FullSpan
-                    : span.Value;
+                  ? startNode.FullSpan
+                  : span.Value;
                 var endSpan = service.IsMethodLevelMember(endNode) ? endNode.FullSpan : span.Value;
 
                 return TextSpan.FromBounds(

@@ -79,8 +79,8 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         };
 
         _parsingErrorMessage = string.IsNullOrEmpty(ParsingErrorMessage)
-            ? $"The {{0}} field must be a {formatDescription}."
-            : ParsingErrorMessage;
+          ? $"The {{0}} field must be a {formatDescription}."
+          : ParsingErrorMessage;
     }
 
     /// <inheritdoc />

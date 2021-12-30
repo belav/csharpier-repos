@@ -100,8 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
         {
             return document != null
               ? s_projectToContainerKeyCache
-                .GetValue(document.Project.State, _projectToContainerKeyCacheCallback)
-                .GetDocumentContainerKey(document.State)
+                    .GetValue(document.Project.State, _projectToContainerKeyCacheCallback)
+                    .GetDocumentContainerKey(document.State)
               : ProjectContainerKeyCache.CreateDocumentContainerKey(
                     this.SolutionFilePath,
                     documentKey

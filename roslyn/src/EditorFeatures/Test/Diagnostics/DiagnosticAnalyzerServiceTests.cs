@@ -1731,8 +1731,8 @@ class A
 
                 // Report diagnostic in the second callback.
                 var descriptor = CanceledCompilations.Contains(compilation)
-                    ? s_canceledDescriptor
-                    : s_nonCanceledDescriptor;
+                  ? s_canceledDescriptor
+                  : s_nonCanceledDescriptor;
                 reportDiagnostic(Diagnostic.Create(descriptor, analysisLocation));
             }
         }

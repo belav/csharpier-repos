@@ -949,8 +949,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     {
                                         this.State[memberSlot] =
                                             type.Type.IsPossiblyNullableReferenceTypeTypeParameter()
-                                                ? NullableFlowState.MaybeDefault
-                                                : NullableFlowState.MaybeNull;
+                                              ? NullableFlowState.MaybeDefault
+                                              : NullableFlowState.MaybeNull;
                                     }
                                 }
                             }
@@ -2898,8 +2898,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return;
                         }
                         value = this.State.HasValue(valueMemberSlot)
-                            ? this.State[valueMemberSlot]
-                            : NullableFlowState.NotNull;
+                          ? this.State[valueMemberSlot]
+                          : NullableFlowState.NotNull;
                     }
 
                     SetStateAndTrackForFinally(ref this.State, targetMemberSlot, value);
@@ -7068,8 +7068,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // For CompareExchange method we need more context to determine the state of outbound assignment
                 CompareExchangeInfo compareExchangeInfo = IsCompareExchangeMethod(method)
-                    ? new CompareExchangeInfo(arguments, results, argsToParamsOpt)
-                    : default;
+                  ? new CompareExchangeInfo(arguments, results, argsToParamsOpt)
+                  : default;
 
                 // Visit outbound assignments and post-conditions
                 // Note: the state may get split in this step

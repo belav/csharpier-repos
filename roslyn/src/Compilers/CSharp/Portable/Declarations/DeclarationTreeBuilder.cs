@@ -736,8 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             SingleTypeDeclaration.TypeDeclarationFlags declFlags = node.AttributeLists.Any()
-                ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
-                : SingleTypeDeclaration.TypeDeclarationFlags.None;
+              ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
+              : SingleTypeDeclaration.TypeDeclarationFlags.None;
 
             if (node.BaseList != null)
             {
@@ -804,8 +804,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var declFlags = node.AttributeLists.Any()
-                ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
-                : SingleTypeDeclaration.TypeDeclarationFlags.None;
+              ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
+              : SingleTypeDeclaration.TypeDeclarationFlags.None;
 
             var diagnostics = DiagnosticBag.GetInstance();
             if (node.Arity == 0)
@@ -840,8 +840,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var members = node.Members;
 
             SingleTypeDeclaration.TypeDeclarationFlags declFlags = node.AttributeLists.Any()
-                ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
-                : SingleTypeDeclaration.TypeDeclarationFlags.None;
+              ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
+              : SingleTypeDeclaration.TypeDeclarationFlags.None;
 
             if (node.BaseList != null)
             {

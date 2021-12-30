@@ -262,8 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         var directInvocation = invocation.Expression
                             is MemberAccessExpressionSyntax memberAccess // it's a .Invoke call
                             ? invocation
-                              .WithExpression(memberAccess.Expression)
-                              .WithTriviaFrom(invocation) // remove it
+                                  .WithExpression(memberAccess.Expression)
+                                  .WithTriviaFrom(invocation) // remove it
                             : invocation;
 
                         return WithNewParameterNames(
@@ -309,8 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             var constraintClauses = default(SyntaxList<TypeParameterConstraintClauseSyntax>);
 
             var body = anonymousFunction.Body.IsKind(SyntaxKind.Block, out BlockSyntax block)
-                ? block
-                : null;
+              ? block
+              : null;
 
             var expressionBody = anonymousFunction.Body is ExpressionSyntax expression
                 ? SyntaxFactory.ArrowExpressionClause(

@@ -120,8 +120,8 @@ namespace System.Data
         {
             return (dataSet != null)
               ? dataSet.Tables
-                .Cast<DataTable>()
-                .SelectMany(table => GetPreviouslyDeclaredDataTypes(table))
+                    .Cast<DataTable>()
+                    .SelectMany(table => GetPreviouslyDeclaredDataTypes(table))
               : Enumerable.Empty<Type>();
         }
 

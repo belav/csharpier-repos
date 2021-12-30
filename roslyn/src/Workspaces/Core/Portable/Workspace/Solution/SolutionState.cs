@@ -539,8 +539,8 @@ namespace Microsoft.CodeAnalysis
             var newProjectIds = ProjectIds.ToImmutableArray().Add(projectId);
             var newStateMap = _projectIdToProjectStateMap.Add(projectId, projectState);
             var newLanguages = RemoteSupportedLanguages.IsSupported(projectState.Language)
-                ? _remoteSupportedLanguages.Add(projectState.Language)
-                : _remoteSupportedLanguages;
+              ? _remoteSupportedLanguages.Add(projectState.Language)
+              : _remoteSupportedLanguages;
 
             var newDependencyGraph = _dependencyGraph
                 .WithAdditionalProject(projectId)
@@ -2254,8 +2254,8 @@ namespace Microsoft.CodeAnalysis
         {
             return project.SupportsCompilation
               ? GetCompilationTracker(project.Id)
-                .GetCompilationAsync(this, cancellationToken)
-                .AsNullable()
+                    .GetCompilationAsync(this, cancellationToken)
+                    .AsNullable()
               : SpecializedTasks.Null<Compilation>();
         }
 
@@ -2271,7 +2271,7 @@ namespace Microsoft.CodeAnalysis
             // regardless whether project support compilation or not, if projectInfo is not complete, we can't guarantee its reference completeness
             return project.SupportsCompilation
               ? this.GetCompilationTracker(project.Id)
-                .HasSuccessfullyLoadedAsync(this, cancellationToken)
+                    .HasSuccessfullyLoadedAsync(this, cancellationToken)
               : project.HasAllInformation
                   ? SpecializedTasks.True
                   : SpecializedTasks.False;
@@ -2289,7 +2289,7 @@ namespace Microsoft.CodeAnalysis
         {
             return project.SupportsCompilation
               ? GetCompilationTracker(project.Id)
-                .GetSourceGeneratedDocumentStatesAsync(this, cancellationToken)
+                    .GetSourceGeneratedDocumentStatesAsync(this, cancellationToken)
               : new(TextDocumentStates<SourceGeneratedDocumentState>.Empty);
         }
 

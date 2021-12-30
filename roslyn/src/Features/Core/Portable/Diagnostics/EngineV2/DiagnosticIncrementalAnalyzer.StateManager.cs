@@ -312,8 +312,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         }
 
                         var buildToolName = analyzer.IsBuiltInAnalyzer()
-                            ? PredefinedBuildTools.Live
-                            : analyzer.GetAnalyzerAssemblyName();
+                          ? PredefinedBuildTools.Live
+                          : analyzer.GetAnalyzerAssemblyName();
 
                         builder.Add(analyzer, new StateSet(language, analyzer, buildToolName));
                     }

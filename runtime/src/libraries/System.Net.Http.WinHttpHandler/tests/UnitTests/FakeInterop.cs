@@ -380,10 +380,10 @@ internal static partial class Interop
                 string compression = TestServer.ResponseHeaders.Contains(
                     "Content-Encoding: deflate"
                 )
-                    ? "deflate"
-                    : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
-                        ? "gzip"
-                        : null;
+                  ? "deflate"
+                  : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
+                      ? "gzip"
+                      : null;
 
                 if (compression == null)
                 {

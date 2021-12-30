@@ -269,8 +269,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 // remove any text after dot, including the dot token and optionally append .ConfigureAwait(false)
                 var replacementText = properties.ContainsKey(AppendConfigureAwait)
-                    ? $".{nameof(Task.ConfigureAwait)}({_falseKeyword})"
-                    : "";
+                  ? $".{nameof(Task.ConfigureAwait)}({_falseKeyword})"
+                  : "";
 
                 builder.Add(
                     new TextChange(

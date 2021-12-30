@@ -867,12 +867,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     Token,
                     out bool includesInternals
                 )
-                    ? (
-                          includesInternals
-                              ? NullableMemberMetadata.Internal
-                              : NullableMemberMetadata.Public
-                      )
-                    : NullableMemberMetadata.All;
+                  ? (
+                        includesInternals
+                            ? NullableMemberMetadata.Internal
+                            : NullableMemberMetadata.Public
+                    )
+                  : NullableMemberMetadata.All;
             }
 
             NullableMemberMetadata nullableMemberMetadata = _lazyNullableMemberMetadata;

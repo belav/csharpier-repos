@@ -893,12 +893,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             var root = attributeToRemove.SyntaxTree.GetRoot();
             var previousToken = root.FindToken(attributeToRemove.FullSpan.Start - 1);
             var leading = isComma(previousToken)
-                ? previousToken.LeadingTrivia
-                : attributeToRemove.GetLeadingTrivia();
+              ? previousToken.LeadingTrivia
+              : attributeToRemove.GetLeadingTrivia();
             var nextToken = root.FindToken(attributeToRemove.FullSpan.End + 1);
             var trailing = isComma(nextToken)
-                ? nextToken.TrailingTrivia
-                : attributeToRemove.GetTrailingTrivia();
+              ? nextToken.TrailingTrivia
+              : attributeToRemove.GetTrailingTrivia();
             triviaOfRemovedNode = leading.Concat(trailing);
         }
 

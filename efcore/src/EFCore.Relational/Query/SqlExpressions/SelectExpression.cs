@@ -1562,12 +1562,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     var item = groupByTerms[i];
                     var newItem = subquery._projection.Any(e => e.Expression.Equals(item))
-                        ? sqlRemappingVisitor.Remap(item)
-                        : subquery.GenerateOuterColumn(
-                              subqueryTableReference,
-                              item,
-                              groupByAliases[i] ?? "Key"
-                          );
+                      ? sqlRemappingVisitor.Remap(item)
+                      : subquery.GenerateOuterColumn(
+                            subqueryTableReference,
+                            item,
+                            groupByAliases[i] ?? "Key"
+                        );
                     newGroupByTerms.Add(newItem);
                 }
 
@@ -1638,12 +1638,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     var item = groupByTerms[i];
                     var newItem = subquery._projection.Any(e => e.Expression.Equals(item))
-                        ? sqlRemappingVisitor.Remap(item)
-                        : subquery.GenerateOuterColumn(
-                              subqueryTableReference,
-                              item,
-                              groupByAliases[i] ?? "Key"
-                          );
+                      ? sqlRemappingVisitor.Remap(item)
+                      : subquery.GenerateOuterColumn(
+                            subqueryTableReference,
+                            item,
+                            groupByAliases[i] ?? "Key"
+                        );
                     newGroupByTerms.Add(newItem);
                 }
 

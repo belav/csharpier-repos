@@ -44,12 +44,12 @@ namespace System.DirectoryServices.Tests
         internal bool UseTls { get; set; }
         internal string LdapPath =>
             string.IsNullOrEmpty(Port)
-                ? $"LDAP://{ServerName}/{SearchDn}"
-                : $"LDAP://{ServerName}:{Port}/{SearchDn}";
+              ? $"LDAP://{ServerName}/{SearchDn}"
+              : $"LDAP://{ServerName}:{Port}/{SearchDn}";
         internal string RootDSEPath =>
             string.IsNullOrEmpty(Port)
-                ? $"LDAP://{ServerName}/rootDSE"
-                : $"LDAP://{ServerName}:{Port}/rootDSE";
+              ? $"LDAP://{ServerName}/rootDSE"
+              : $"LDAP://{ServerName}:{Port}/rootDSE";
         internal string UserNameWithNoDomain
         {
             get

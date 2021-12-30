@@ -465,8 +465,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         // do not cache the result, the compiler doesn't use this (it's only exposed through public API):
         public override DllImportData GetDllImportData() =>
             HasFlag(MethodAttributes.PinvokeImpl)
-                ? _containingType.ContainingPEModule.Module.GetDllImportData(_handle)
-                : null;
+              ? _containingType.ContainingPEModule.Module.GetDllImportData(_handle)
+              : null;
 
         internal override bool ReturnValueIsMarshalledExplicitly =>
             ReturnTypeParameter.IsMarshalledExplicitly;
@@ -1172,8 +1172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     _handle,
                     out byte arg
                 )
-                    ? arg
-                    : _containingType.GetNullableContextValue();
+                  ? arg
+                  : _containingType.GetNullableContextValue();
                 _packedFlags.SetNullableContext(value);
             }
             return value;

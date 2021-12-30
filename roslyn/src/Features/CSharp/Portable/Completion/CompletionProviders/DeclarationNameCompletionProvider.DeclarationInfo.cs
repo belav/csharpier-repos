@@ -445,10 +445,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 // If we only have a type, this can still end up being a local function (depending on the modifiers).
                 var possibleDeclarationComputer = token.IsKind(SyntaxKind.CommaToken)
-                    ? (Func<DeclarationModifiers, ImmutableArray<SymbolKindOrTypeKind>>)(
-                          _ => ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))
-                      )
-                    : GetPossibleLocalDeclarations;
+                  ? (Func<DeclarationModifiers, ImmutableArray<SymbolKindOrTypeKind>>)(
+                        _ => ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))
+                    )
+                  : GetPossibleLocalDeclarations;
 
                 result = IsFollowingTypeOrComma<VariableDeclarationSyntax>(
                     token,

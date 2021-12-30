@@ -100,11 +100,11 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var externalProvider = _configureForDebug
                         ? new ServiceCollection()
-                          .AddLogging(b => b.SetMinimumLevel(LogLevel.Debug))
-                          .BuildServiceProvider(validateScopes: true)
+                              .AddLogging(b => b.SetMinimumLevel(LogLevel.Debug))
+                              .BuildServiceProvider(validateScopes: true)
                         : new ServiceCollection()
-                          .AddLogging()
-                          .BuildServiceProvider(validateScopes: true);
+                              .AddLogging()
+                              .BuildServiceProvider(validateScopes: true);
 
                     optionsBuilder
                         .EnableServiceProviderCaching(false)
@@ -2020,18 +2020,18 @@ namespace Microsoft.EntityFrameworkCore
         {
             var appServiceProvider = useDbContext
                 ? new ServiceCollection()
-                  .AddDbContext<ConstructorTestContextWithOC1A>(ServiceLifetime.Singleton)
-                  .BuildServiceProvider(validateScopes: true)
+                      .AddDbContext<ConstructorTestContextWithOC1A>(ServiceLifetime.Singleton)
+                      .BuildServiceProvider(validateScopes: true)
                 : (
                       addSingletonFirst
                           ? new ServiceCollection()
-                            .AddSingleton<ConstructorTestContextWithOC1A>()
-                            .AddDbContext<ConstructorTestContextWithOC1A>()
-                            .BuildServiceProvider(validateScopes: true)
+                                .AddSingleton<ConstructorTestContextWithOC1A>()
+                                .AddDbContext<ConstructorTestContextWithOC1A>()
+                                .BuildServiceProvider(validateScopes: true)
                           : new ServiceCollection()
-                            .AddDbContext<ConstructorTestContextWithOC1A>()
-                            .AddSingleton<ConstructorTestContextWithOC1A>()
-                            .BuildServiceProvider(validateScopes: true)
+                                .AddDbContext<ConstructorTestContextWithOC1A>()
+                                .AddSingleton<ConstructorTestContextWithOC1A>()
+                                .BuildServiceProvider(validateScopes: true)
                   );
 
             var singleton = new object[3];
@@ -2110,37 +2110,41 @@ namespace Microsoft.EntityFrameworkCore
         {
             var appServiceProvider = useDbContext
                 ? new ServiceCollection()
-                  .AddEntityFrameworkInMemoryDatabase()
-                  .AddDbContext<ConstructorTestContextWithOC3A>(
-                      (p, b) =>
-                          b.UseInternalServiceProvider(p)
-                              .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                              .ConfigureWarnings(w => w.Default(WarningBehavior.Throw)),
-                      ServiceLifetime.Singleton
-                  )
-                  .BuildServiceProvider() // No scope validation; legacy test that resolves scoped options from singleton
+                      .AddEntityFrameworkInMemoryDatabase()
+                      .AddDbContext<ConstructorTestContextWithOC3A>(
+                          (p, b) =>
+                              b.UseInternalServiceProvider(p)
+                                  .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                  .ConfigureWarnings(w => w.Default(WarningBehavior.Throw)),
+                          ServiceLifetime.Singleton
+                      )
+                      .BuildServiceProvider() // No scope validation; legacy test that resolves scoped options from singleton
                 : (
                       addSingletonFirst
                           ? new ServiceCollection()
-                            .AddEntityFrameworkInMemoryDatabase()
-                            .AddSingleton<ConstructorTestContextWithOC3A>()
-                            .AddDbContext<ConstructorTestContextWithOC3A>(
-                                (p, b) =>
-                                    b.UseInternalServiceProvider(p)
-                                        .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                                        .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                            )
-                            .BuildServiceProvider() // No scope validation; legacy test that resolves scoped options from singleton
+                                .AddEntityFrameworkInMemoryDatabase()
+                                .AddSingleton<ConstructorTestContextWithOC3A>()
+                                .AddDbContext<ConstructorTestContextWithOC3A>(
+                                    (p, b) =>
+                                        b.UseInternalServiceProvider(p)
+                                            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                            .ConfigureWarnings(
+                                                w => w.Default(WarningBehavior.Throw)
+                                            )
+                                )
+                                .BuildServiceProvider() // No scope validation; legacy test that resolves scoped options from singleton
                           : new ServiceCollection()
-                            .AddEntityFrameworkInMemoryDatabase()
-                            .AddDbContext<ConstructorTestContextWithOC3A>(
-                                (p, b) =>
-                                    b.UseInternalServiceProvider(p)
-                                        .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                                        .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                            )
-                            .AddSingleton<ConstructorTestContextWithOC3A>()
-                            .BuildServiceProvider()
+                                .AddEntityFrameworkInMemoryDatabase()
+                                .AddDbContext<ConstructorTestContextWithOC3A>(
+                                    (p, b) =>
+                                        b.UseInternalServiceProvider(p)
+                                            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                            .ConfigureWarnings(
+                                                w => w.Default(WarningBehavior.Throw)
+                                            )
+                                )
+                                .AddSingleton<ConstructorTestContextWithOC3A>()
+                                .BuildServiceProvider()
                   ); // No scope validation; legacy test that resolves scoped options from singleton
 
             var singleton = new object[3];
@@ -2199,21 +2203,21 @@ namespace Microsoft.EntityFrameworkCore
         {
             var appServiceProvider = useDbContext
                 ? new ServiceCollection()
-                  .AddDbContext<ConstructorTestContextWithOC1A>(
-                      ServiceLifetime.Transient,
-                      optionsLifetime
-                  )
-                  .BuildServiceProvider(validateScopes: true)
+                      .AddDbContext<ConstructorTestContextWithOC1A>(
+                          ServiceLifetime.Transient,
+                          optionsLifetime
+                      )
+                      .BuildServiceProvider(validateScopes: true)
                 : (
                       addTransientFirst
                           ? new ServiceCollection()
-                            .AddTransient<ConstructorTestContextWithOC1A>()
-                            .AddDbContext<ConstructorTestContextWithOC1A>()
-                            .BuildServiceProvider(validateScopes: true)
+                                .AddTransient<ConstructorTestContextWithOC1A>()
+                                .AddDbContext<ConstructorTestContextWithOC1A>()
+                                .BuildServiceProvider(validateScopes: true)
                           : new ServiceCollection()
-                            .AddDbContext<ConstructorTestContextWithOC1A>()
-                            .AddTransient<ConstructorTestContextWithOC1A>()
-                            .BuildServiceProvider(validateScopes: true)
+                                .AddDbContext<ConstructorTestContextWithOC1A>()
+                                .AddTransient<ConstructorTestContextWithOC1A>()
+                                .BuildServiceProvider(validateScopes: true)
                   );
 
             var singleton = new object[3];
@@ -2316,37 +2320,41 @@ namespace Microsoft.EntityFrameworkCore
         {
             var appServiceProvider = useDbContext
                 ? new ServiceCollection()
-                  .AddEntityFrameworkInMemoryDatabase()
-                  .AddDbContext<ConstructorTestContextWithOC3A>(
-                      (p, b) =>
-                          b.UseInternalServiceProvider(p)
-                              .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                              .ConfigureWarnings(w => w.Default(WarningBehavior.Throw)),
-                      ServiceLifetime.Transient
-                  )
-                  .BuildServiceProvider(validateScopes: true)
+                      .AddEntityFrameworkInMemoryDatabase()
+                      .AddDbContext<ConstructorTestContextWithOC3A>(
+                          (p, b) =>
+                              b.UseInternalServiceProvider(p)
+                                  .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                  .ConfigureWarnings(w => w.Default(WarningBehavior.Throw)),
+                          ServiceLifetime.Transient
+                      )
+                      .BuildServiceProvider(validateScopes: true)
                 : (
                       addTransientFirst
                           ? new ServiceCollection()
-                            .AddEntityFrameworkInMemoryDatabase()
-                            .AddTransient<ConstructorTestContextWithOC3A>()
-                            .AddDbContext<ConstructorTestContextWithOC3A>(
-                                (p, b) =>
-                                    b.UseInternalServiceProvider(p)
-                                        .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                                        .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                            )
-                            .BuildServiceProvider(validateScopes: true)
+                                .AddEntityFrameworkInMemoryDatabase()
+                                .AddTransient<ConstructorTestContextWithOC3A>()
+                                .AddDbContext<ConstructorTestContextWithOC3A>(
+                                    (p, b) =>
+                                        b.UseInternalServiceProvider(p)
+                                            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                            .ConfigureWarnings(
+                                                w => w.Default(WarningBehavior.Throw)
+                                            )
+                                )
+                                .BuildServiceProvider(validateScopes: true)
                           : new ServiceCollection()
-                            .AddEntityFrameworkInMemoryDatabase()
-                            .AddDbContext<ConstructorTestContextWithOC3A>(
-                                (p, b) =>
-                                    b.UseInternalServiceProvider(p)
-                                        .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                                        .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                            )
-                            .AddTransient<ConstructorTestContextWithOC3A>()
-                            .BuildServiceProvider(validateScopes: true)
+                                .AddEntityFrameworkInMemoryDatabase()
+                                .AddDbContext<ConstructorTestContextWithOC3A>(
+                                    (p, b) =>
+                                        b.UseInternalServiceProvider(p)
+                                            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                            .ConfigureWarnings(
+                                                w => w.Default(WarningBehavior.Throw)
+                                            )
+                                )
+                                .AddTransient<ConstructorTestContextWithOC3A>()
+                                .BuildServiceProvider(validateScopes: true)
                   );
 
             var singleton = new object[2];
@@ -2403,23 +2411,23 @@ namespace Microsoft.EntityFrameworkCore
         {
             var appServiceProvider = addSingletonFirst
                 ? new ServiceCollection()
-                  .AddSingleton<DbContext>()
-                  .AddDbContext<DbContext>(
-                      b =>
-                          b.EnableServiceProviderCaching(false)
-                              .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                              .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                  )
-                  .BuildServiceProvider() // No scope validation; legacy test that resolves scoped options from singleton
+                      .AddSingleton<DbContext>()
+                      .AddDbContext<DbContext>(
+                          b =>
+                              b.EnableServiceProviderCaching(false)
+                                  .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                  .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
+                      )
+                      .BuildServiceProvider() // No scope validation; legacy test that resolves scoped options from singleton
                 : new ServiceCollection()
-                  .AddDbContext<DbContext>(
-                      b =>
-                          b.EnableServiceProviderCaching(false)
-                              .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                              .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                  )
-                  .AddSingleton<DbContext>()
-                  .BuildServiceProvider(); // No scope validation; legacy test that resolves scoped options from singleton
+                      .AddDbContext<DbContext>(
+                          b =>
+                              b.EnableServiceProviderCaching(false)
+                                  .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                  .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
+                      )
+                      .AddSingleton<DbContext>()
+                      .BuildServiceProvider(); // No scope validation; legacy test that resolves scoped options from singleton
 
             var singleton = new object[3];
             DbContext context1;
@@ -2555,23 +2563,23 @@ namespace Microsoft.EntityFrameworkCore
         {
             var appServiceProvider = addTransientFirst
                 ? new ServiceCollection()
-                  .AddTransient<DbContext>()
-                  .AddDbContext<DbContext>(
-                      b =>
-                          b.EnableServiceProviderCaching(false)
-                              .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                              .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                  )
-                  .BuildServiceProvider(validateScopes: true)
+                      .AddTransient<DbContext>()
+                      .AddDbContext<DbContext>(
+                          b =>
+                              b.EnableServiceProviderCaching(false)
+                                  .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                  .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
+                      )
+                      .BuildServiceProvider(validateScopes: true)
                 : new ServiceCollection()
-                  .AddDbContext<DbContext>(
-                      b =>
-                          b.EnableServiceProviderCaching(false)
-                              .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                              .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
-                  )
-                  .AddTransient<DbContext>()
-                  .BuildServiceProvider(validateScopes: true);
+                      .AddDbContext<DbContext>(
+                          b =>
+                              b.EnableServiceProviderCaching(false)
+                                  .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                                  .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
+                      )
+                      .AddTransient<DbContext>()
+                      .BuildServiceProvider(validateScopes: true);
 
             var singleton = new object[2];
 

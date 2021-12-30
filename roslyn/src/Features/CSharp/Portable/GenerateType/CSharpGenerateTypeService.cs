@@ -741,8 +741,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
                         semanticModel,
                         cancellationToken
                     )
-                        ? Accessibility.Public
-                        : Accessibility.Internal;
+                      ? Accessibility.Public
+                      : Accessibility.Internal;
                 }
             }
 

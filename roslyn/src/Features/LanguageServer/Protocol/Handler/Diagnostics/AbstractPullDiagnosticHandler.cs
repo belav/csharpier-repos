@@ -270,8 +270,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             // Razor has a separate option for determining if they should be in push or pull mode.
             var diagnosticMode = document.IsRazorDocument()
-                ? InternalDiagnosticsOptions.RazorDiagnosticMode
-                : InternalDiagnosticsOptions.NormalDiagnosticMode;
+              ? InternalDiagnosticsOptions.RazorDiagnosticMode
+              : InternalDiagnosticsOptions.NormalDiagnosticMode;
 
             var isPull = context.GlobalOptions.IsPullDiagnostics(diagnosticMode);
 

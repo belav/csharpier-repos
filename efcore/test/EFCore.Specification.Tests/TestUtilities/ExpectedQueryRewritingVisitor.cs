@@ -429,8 +429,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 var methodInfo = (
                     memberExpression.Type.IsNullableValueType()
-                        ? _maybeScalarNullableMethod
-                        : _maybeScalarNonNullableMethod
+                      ? _maybeScalarNullableMethod
+                      : _maybeScalarNonNullableMethod
                 ).MakeGenericMethod(instance.Type, memberExpression.Type.UnwrapNullableType());
 
                 var maybeMethodCall = Expression.Call(methodInfo, instance, maybeLambda);

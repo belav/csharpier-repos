@@ -2551,8 +2551,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if (closestMismatch.DeclaredAccessibility != Accessibility.Public)
             {
                 ErrorCode errorCode = interfaceMember.IsAccessor()
-                    ? ErrorCode.ERR_UnimplementedInterfaceAccessor
-                    : ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic;
+                  ? ErrorCode.ERR_UnimplementedInterfaceAccessor
+                  : ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic;
                 diagnostics.Add(
                     errorCode,
                     interfaceLocation,

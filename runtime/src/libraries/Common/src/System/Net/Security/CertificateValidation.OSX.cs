@@ -25,8 +25,8 @@ namespace System.Net.Security
         )
         {
             SslPolicyErrors errors = chain.Build(remoteCertificate)
-                ? SslPolicyErrors.None
-                : SslPolicyErrors.RemoteCertificateChainErrors;
+              ? SslPolicyErrors.None
+              : SslPolicyErrors.RemoteCertificateChainErrors;
 
             if (!checkCertName)
             {

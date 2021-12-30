@@ -3743,8 +3743,8 @@ namespace System.Text.RegularExpressions.Generator
 
         private static string ToLower(bool hasTextInfo, RegexOptions options, string expression) =>
             UseToLowerInvariant(hasTextInfo, options)
-                ? $"char.ToLowerInvariant({expression})"
-                : $"textInfo.ToLower({expression})";
+              ? $"char.ToLowerInvariant({expression})"
+              : $"textInfo.ToLower({expression})";
 
         private static string ToLowerIfNeeded(
             bool hasTextInfo,

@@ -19,9 +19,7 @@ public class Generic<A, B, C, D, E>
 public interface A { }
 public interface Z<T> { }
 
-public class TypeWithConstraints<T> where T : A, IComparable, IComparable<string>, Z<string>
-{
-}
+public class TypeWithConstraints<T> where T : A, IComparable, IComparable<string>, Z<string> { }
 
 public class Driver
 {

@@ -326,9 +326,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 out var comment,
                 cancellationToken
             )
-                ? node.WithPrependedLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(comment))
-                  .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
-                : node;
+              ? node.WithPrependedLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(comment))
+                    .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
+              : node;
             return result;
         }
 

@@ -566,13 +566,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Visit(memberExpression.Expression),
                         out var sqlInnerExpression
                     )
-                        ? QueryCompilationContext.NotTranslatedExpression
-                        : Dependencies.MemberTranslatorProvider.Translate(
-                              sqlInnerExpression,
-                              memberExpression.Member,
-                              memberExpression.Type,
-                              _queryCompilationContext.Logger
-                          )
+                      ? QueryCompilationContext.NotTranslatedExpression
+                      : Dependencies.MemberTranslatorProvider.Translate(
+                            sqlInnerExpression,
+                            memberExpression.Member,
+                            memberExpression.Type,
+                            _queryCompilationContext.Logger
+                        )
                 )
                 ?? QueryCompilationContext.NotTranslatedExpression;
         }
@@ -926,8 +926,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 return matchingCaseWhenClauses.Count == 1
                                   ? matchingCaseWhenClauses[0].Test
                                   : matchingCaseWhenClauses
-                                    .Select(e => e.Test)
-                                    .Aggregate((l, r) => _sqlExpressionFactory.OrElse(l, r));
+                                        .Select(e => e.Test)
+                                        .Aggregate((l, r) => _sqlExpressionFactory.OrElse(l, r));
                             }
 
                             return discriminatorValues.Count == 1
@@ -1276,17 +1276,17 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static Expression GetConstantOrNotTranslated(Expression expression) =>
             CanEvaluate(expression)
-                ? new SqlConstantExpression(
-                      Expression.Constant(
-                          Expression
-                              .Lambda<Func<object>>(Expression.Convert(expression, typeof(object)))
-                              .Compile()
-                              .Invoke(),
-                          expression.Type
-                      ),
-                      null
-                  )
-                : QueryCompilationContext.NotTranslatedExpression;
+              ? new SqlConstantExpression(
+                    Expression.Constant(
+                        Expression
+                            .Lambda<Func<object>>(Expression.Convert(expression, typeof(object)))
+                            .Compile()
+                            .Invoke(),
+                        expression.Type
+                    ),
+                    null
+                )
+              : QueryCompilationContext.NotTranslatedExpression;
 
         private bool TryRewriteContainsEntity(
             Expression source,

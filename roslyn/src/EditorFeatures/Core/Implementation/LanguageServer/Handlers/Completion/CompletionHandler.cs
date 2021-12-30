@@ -355,8 +355,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 else
                 {
                     completionItem.InsertText = item.Properties.ContainsKey("InsertionText")
-                        ? item.Properties["InsertionText"]
-                        : completeDisplayText;
+                      ? item.Properties["InsertionText"]
+                      : completeDisplayText;
                 }
 
                 var commitCharacters = GetCommitCharacters(

@@ -321,8 +321,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         {
             var (parameterSymbol, expression) = parameterAndExpression;
             var name = renameTable.TryGetValue(parameterSymbol, out var newName)
-                ? newName
-                : parameterSymbol.Name;
+              ? newName
+              : parameterSymbol.Name;
             return (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
                 parameterSymbol.Type,
                 name,

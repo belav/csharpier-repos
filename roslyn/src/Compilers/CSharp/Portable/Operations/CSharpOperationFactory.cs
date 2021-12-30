@@ -2099,8 +2099,8 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             OperationKind operationKind = Helper.IsDecrement(boundIncrementOperator.OperatorKind)
-                ? OperationKind.Decrement
-                : OperationKind.Increment;
+              ? OperationKind.Decrement
+              : OperationKind.Increment;
             bool isPostfix = Helper.IsPostfixIncrementOrDecrement(
                 boundIncrementOperator.OperatorKind
             );
@@ -3312,8 +3312,8 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode declarationSyntax = declarationGroupSyntax.IsKind(
                 SyntaxKind.LocalDeclarationStatement
             )
-                ? ((LocalDeclarationStatementSyntax)declarationGroupSyntax).Declaration
-                : declarationGroupSyntax;
+              ? ((LocalDeclarationStatementSyntax)declarationGroupSyntax).Declaration
+              : declarationGroupSyntax;
 
             bool declarationIsImplicit = boundMultipleLocalDeclarations.WasCompilerGenerated;
             ImmutableArray<IVariableDeclaratorOperation> declarators = CreateVariableDeclarator(

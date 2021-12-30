@@ -1938,8 +1938,8 @@ namespace Microsoft.CodeAnalysis
                         out s,
                         ref argReader
                     )
-                        ? TypedConstantKind.Primitive
-                        : TypedConstantKind.Error;
+                      ? TypedConstantKind.Primitive
+                      : TypedConstantKind.Error;
 
                     return CreateTypedConstant(type, kind, s);
 
@@ -1949,8 +1949,8 @@ namespace Microsoft.CodeAnalysis
                         out typeName,
                         ref argReader
                     )
-                        ? (typeName != null ? GetTypeSymbolForSerializedType(typeName) : null)
-                        : GetUnsupportedMetadataTypeSymbol();
+                      ? (typeName != null ? GetTypeSymbolForSerializedType(typeName) : null)
+                      : GetUnsupportedMetadataTypeSymbol();
 
                     return CreateTypedConstant(type, TypedConstantKind.Type, serializedType);
 

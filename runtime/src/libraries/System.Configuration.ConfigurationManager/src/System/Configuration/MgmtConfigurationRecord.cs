@@ -194,8 +194,8 @@ namespace System.Configuration
         private ConstructorInfo CreateSectionGroupFactory(FactoryRecord factoryRecord)
         {
             Type type = string.IsNullOrEmpty(factoryRecord.FactoryTypeName)
-                ? typeof(ConfigurationSectionGroup)
-                : TypeUtil.GetType(Host, factoryRecord.FactoryTypeName, true);
+              ? typeof(ConfigurationSectionGroup)
+              : TypeUtil.GetType(Host, factoryRecord.FactoryTypeName, true);
 
             ConstructorInfo ctor = TypeUtil.GetConstructor(
                 type,

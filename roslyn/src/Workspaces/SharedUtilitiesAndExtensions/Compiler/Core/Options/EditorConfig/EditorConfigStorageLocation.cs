@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.Options
                 s_parseString,
                 (string value) =>
                     string.IsNullOrEmpty(value)
-                        ? emptyStringRepresentation
-                        : s_getStringEditorConfigStringForValue(value)
+                      ? emptyStringRepresentation
+                      : s_getStringEditorConfigStringForValue(value)
             );
 
         public static EditorConfigStorageLocation<CodeStyleOption2<bool>> ForBoolCodeStyleOption(
@@ -90,8 +90,8 @@ namespace Microsoft.CodeAnalysis.Options
                 defaultValue,
                 out var result
             )
-                ? result
-                : new Optional<CodeStyleOption2<bool>>();
+              ? result
+              : new Optional<CodeStyleOption2<bool>>();
         private static string GetBoolCodeStyleOptionEditorConfigStringForValue(
             CodeStyleOption2<bool> value,
             CodeStyleOption2<bool> defaultValue
@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.Options
                 defaultValue,
                 out var result
             )
-                ? result
-                : new Optional<CodeStyleOption2<string>>();
+              ? result
+              : new Optional<CodeStyleOption2<string>>();
         private static string GetStringCodeStyleOptionEditorConfigStringForValue(
             CodeStyleOption2<string> value,
             CodeStyleOption2<string> defaultValue

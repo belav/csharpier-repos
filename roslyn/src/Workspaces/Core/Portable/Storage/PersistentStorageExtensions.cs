@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.Storage
 
         public static StorageDatabase GetPersistentStorageDatabase(this OptionSet options) =>
             options.GetOption(StorageOptions.CloudCacheFeatureFlag)
-                ? StorageDatabase.CloudCache
-                : options.GetOption(StorageOptions.Database);
+              ? StorageDatabase.CloudCache
+              : options.GetOption(StorageOptions.Database);
 
         public static IChecksummedPersistentStorageService GetPersistentStorageService(
             this HostWorkspaceServices services,

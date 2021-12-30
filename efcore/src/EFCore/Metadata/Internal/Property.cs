@@ -550,10 +550,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             (PropertySaveBehavior?)this[CoreAnnotationNames.AfterSaveBehavior]
             ?? (
                 IsKey()
-                    ? PropertySaveBehavior.Throw
-                    : ValueGenerated.ForUpdate()
-                        ? PropertySaveBehavior.Ignore
-                        : PropertySaveBehavior.Save
+                  ? PropertySaveBehavior.Throw
+                  : ValueGenerated.ForUpdate()
+                      ? PropertySaveBehavior.Ignore
+                      : PropertySaveBehavior.Save
             );
 
         /// <summary>

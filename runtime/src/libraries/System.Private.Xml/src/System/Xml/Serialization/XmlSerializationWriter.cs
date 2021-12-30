@@ -1502,8 +1502,8 @@ namespace System.Xml.Serialization
 #endif
 
                 int arrayLength = typeof(ICollection).IsAssignableFrom(type)
-                    ? ((ICollection)o).Count
-                    : -1;
+                  ? ((ICollection)o).Count
+                  : -1;
                 if (_soap12)
                 {
                     _w.WriteAttributeString(

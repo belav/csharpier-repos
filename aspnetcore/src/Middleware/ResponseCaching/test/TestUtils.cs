@@ -59,8 +59,8 @@ internal class TestUtils
         {
             headers.CacheControl.Public = true;
             headers.CacheControl.MaxAge = string.IsNullOrEmpty(expires)
-                ? TimeSpan.FromSeconds(10)
-                : (TimeSpan?)null;
+              ? TimeSpan.FromSeconds(10)
+              : (TimeSpan?)null;
         }
         headers.Date = DateTimeOffset.UtcNow;
         headers.Headers["X-Value"] = guid;

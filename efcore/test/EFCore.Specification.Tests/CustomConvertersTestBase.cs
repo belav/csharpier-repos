@@ -1733,8 +1733,8 @@ namespace Microsoft.EntityFrameworkCore
                         v =>
                             v.Length > 0
                                 ? v.Split(new[] { ';' })
-                                  .Select(f => (Roles)Enum.Parse(typeof(Roles), f))
-                                  .ToList()
+                                      .Select(f => (Roles)Enum.Parse(typeof(Roles), f))
+                                      .ToList()
                                 : new List<Roles>()
                     ) { }
             }

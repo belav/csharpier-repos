@@ -78,8 +78,8 @@ namespace System.IO.Pipes.Tests
         )
         {
             PipeOptions pipeOptions = bool.Parse(isCurrentUserOnly)
-                ? PipeOptions.CurrentUserOnly
-                : PipeOptions.None;
+              ? PipeOptions.CurrentUserOnly
+              : PipeOptions.None;
             using (
                 var client = new NamedPipeClientStream(
                     ".",

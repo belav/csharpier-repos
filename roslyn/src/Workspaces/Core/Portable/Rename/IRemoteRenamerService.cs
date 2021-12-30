@@ -120,23 +120,26 @@ namespace Microsoft.CodeAnalysis.Rename
                       ImplicitLocations = result.ImplicitLocations.IsDefault
                           ? null
                           : result.ImplicitLocations
-                            .Select(
-                                loc =>
-                                    SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
-                            )
-                            .ToArray(),
+                                .Select(
+                                    loc =>
+                                        SerializableReferenceLocation.Dehydrate(
+                                            loc,
+                                            cancellationToken
+                                        )
+                                )
+                                .ToArray(),
                       ReferencedSymbols = result.ReferencedSymbols.IsDefault
                           ? null
                           : result.ReferencedSymbols
-                            .Select(
-                                s =>
-                                    SerializableSymbolAndProjectId.Dehydrate(
-                                        solution,
-                                        s,
-                                        cancellationToken
-                                    )
-                            )
-                            .ToArray(),
+                                .Select(
+                                    s =>
+                                        SerializableSymbolAndProjectId.Dehydrate(
+                                            solution,
+                                            s,
+                                            cancellationToken
+                                        )
+                                )
+                                .ToArray(),
                   };
 
         public async Task<RenameLocations.SearchResult> RehydrateAsync(

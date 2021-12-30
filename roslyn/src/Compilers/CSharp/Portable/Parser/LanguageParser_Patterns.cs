@@ -605,8 +605,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         out var leftExpr,
                         permitTypeArguments: true
                     )
-                        ? leftExpr
-                        : left;
+                      ? leftExpr
+                      : left;
                     expr = _syntaxFactory.MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         newLeft,

@@ -472,8 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReverseForStatement
         )
         {
             var (left, right) = IsVariableReference(variable, condition.Left)
-                ? (condition.Left, operand)
-                : (operand, condition.Right);
+              ? (condition.Left, operand)
+              : (operand, condition.Right);
 
             var newOperatorKind = condition.Kind()
                 is SyntaxKind.LessThanExpression

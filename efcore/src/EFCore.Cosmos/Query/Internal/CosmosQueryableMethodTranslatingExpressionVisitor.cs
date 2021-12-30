@@ -1295,10 +1295,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         binaryExpression.Left,
                         entityType
                     )
-                        ? binaryExpression.Right
-                        : IsPartitionKeyPropertyAccess(binaryExpression.Right, entityType)
-                            ? binaryExpression.Left
-                            : null;
+                      ? binaryExpression.Right
+                      : IsPartitionKeyPropertyAccess(binaryExpression.Right, entityType)
+                          ? binaryExpression.Left
+                          : null;
 
                     if (
                         valueExpression is ConstantExpression
@@ -1414,16 +1414,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 var resultVariable = Expression.Variable(nullableResultType, "result");
                 var returnValueForNull = resultType.IsNullableType()
-                    ? (Expression)Expression.Constant(null, resultType)
-                    : Expression.Throw(
-                          Expression.New(
-                              typeof(InvalidOperationException)
-                                  .GetConstructors()
-                                  .Single(ci => ci.GetParameters().Length == 1),
-                              Expression.Constant(CoreStrings.SequenceContainsNoElements)
-                          ),
-                          resultType
-                      );
+                  ? (Expression)Expression.Constant(null, resultType)
+                  : Expression.Throw(
+                        Expression.New(
+                            typeof(InvalidOperationException)
+                                .GetConstructors()
+                                .Single(ci => ci.GetParameters().Length == 1),
+                            Expression.Constant(CoreStrings.SequenceContainsNoElements)
+                        ),
+                        resultType
+                    );
 
                 shaper = Expression.Block(
                     new[] { resultVariable },

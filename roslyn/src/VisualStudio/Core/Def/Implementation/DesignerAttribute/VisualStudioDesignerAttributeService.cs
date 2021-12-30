@@ -289,8 +289,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             )
             {
                 var currentStringValue = string.IsNullOrEmpty(currentValue as string)
-                    ? null
-                    : (string)currentValue;
+                  ? null
+                  : (string)currentValue;
                 if (
                     string.Equals(
                         currentStringValue,

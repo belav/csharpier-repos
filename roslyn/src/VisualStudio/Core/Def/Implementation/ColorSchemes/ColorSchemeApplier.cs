@@ -171,8 +171,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             // If this is a supported theme then, use the users configured scheme, otherwise fallback to the VS 2017.
             // Custom themes would be based on the MEF exported color information for classifications which matches the VS 2017 theme.
             var configuredColorScheme = IsSupportedTheme()
-                ? _settings.GetConfiguredColorScheme()
-                : SchemeName.VisualStudio2017;
+              ? _settings.GetConfiguredColorScheme()
+              : SchemeName.VisualStudio2017;
 
             if (appliedColorScheme == configuredColorScheme)
             {

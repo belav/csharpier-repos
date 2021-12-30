@@ -312,8 +312,8 @@ namespace System.Net.Http
             if (_contentReadStream == null) // don't yet have a Stream
             {
                 Stream s = TryGetBuffer(out ArraySegment<byte> buffer)
-                    ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
-                    : CreateContentReadStream(cancellationToken);
+                  ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
+                  : CreateContentReadStream(cancellationToken);
                 _contentReadStream = s;
                 return s;
             }
@@ -341,15 +341,15 @@ namespace System.Net.Http
             if (_contentReadStream == null) // don't yet have a Stream
             {
                 Task<Stream> t = TryGetBuffer(out ArraySegment<byte> buffer)
-                    ? Task.FromResult<Stream>(
-                          new MemoryStream(
-                              buffer.Array!,
-                              buffer.Offset,
-                              buffer.Count,
-                              writable: false
-                          )
-                      )
-                    : CreateContentReadStreamAsync(cancellationToken);
+                  ? Task.FromResult<Stream>(
+                        new MemoryStream(
+                            buffer.Array!,
+                            buffer.Offset,
+                            buffer.Count,
+                            writable: false
+                        )
+                    )
+                  : CreateContentReadStreamAsync(cancellationToken);
                 _contentReadStream = t;
                 return t;
             }
@@ -380,8 +380,8 @@ namespace System.Net.Http
             if (_contentReadStream == null) // don't yet have a Stream
             {
                 Stream? s = TryGetBuffer(out ArraySegment<byte> buffer)
-                    ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
-                    : TryCreateContentReadStream();
+                  ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
+                  : TryCreateContentReadStream();
                 _contentReadStream = s;
                 return s;
             }

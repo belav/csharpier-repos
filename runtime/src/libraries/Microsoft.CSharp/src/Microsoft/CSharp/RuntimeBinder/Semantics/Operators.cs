@@ -2917,8 +2917,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             CType typeDest = kind.IsRelational()
-                ? GetPredefindType(PredefinedType.PT_BOOL)
-                : typeOp;
+              ? GetPredefindType(PredefinedType.PT_BOOL)
+              : typeOp;
 
             ExprOperator exprRes = ExprFactory.CreateOperator(kind, typeDest, op1, op2);
             exprRes.Flags |= flags;
@@ -3014,8 +3014,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // Allocate the result expression.
             CType typeDest = kind.IsRelational()
-                ? GetPredefindType(PredefinedType.PT_BOOL)
-                : op1.Type;
+              ? GetPredefindType(PredefinedType.PT_BOOL)
+              : op1.Type;
 
             ExprOperator exprRes = ExprFactory.CreateOperator(kind, typeDest, op1, op2);
             exprRes.Flags &= ~EXPRFLAG.EXF_CHECKOVERFLOW;

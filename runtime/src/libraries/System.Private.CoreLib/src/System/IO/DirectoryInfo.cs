@@ -44,8 +44,8 @@ namespace System.IO
                 fileName
                 ?? (
                     PathInternal.IsRoot(fullPath.AsSpan())
-                        ? fullPath.AsSpan()
-                        : Path.GetFileName(Path.TrimEndingDirectorySeparator(fullPath.AsSpan()))
+                      ? fullPath.AsSpan()
+                      : Path.GetFileName(Path.TrimEndingDirectorySeparator(fullPath.AsSpan()))
                 ).ToString();
 
             FullPath = fullPath;

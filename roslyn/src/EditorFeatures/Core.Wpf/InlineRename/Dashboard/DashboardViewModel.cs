@@ -124,8 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             else
             {
                 _errorText = string.IsNullOrEmpty(session.ReplacementText)
-                    ? null
-                    : EditorFeaturesResources.The_new_name_is_not_a_valid_identifier;
+                  ? null
+                  : EditorFeaturesResources.The_new_name_is_not_a_valid_identifier;
             }
 
             UpdateSeverity();

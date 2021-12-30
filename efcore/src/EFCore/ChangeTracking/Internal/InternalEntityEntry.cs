@@ -984,8 +984,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public object? ReadPropertyValue(IPropertyBase propertyBase) =>
             propertyBase.IsShadowProperty()
-                ? _shadowValues[propertyBase.GetShadowIndex()]
-                : propertyBase.GetGetter().GetClrValue(Entity);
+              ? _shadowValues[propertyBase.GetShadowIndex()]
+              : propertyBase.GetGetter().GetClrValue(Entity);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -995,8 +995,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         private bool PropertyHasDefaultValue(IPropertyBase propertyBase) =>
             propertyBase.IsShadowProperty()
-                ? propertyBase.ClrType.IsDefaultValue(_shadowValues[propertyBase.GetShadowIndex()])
-                : propertyBase.GetGetter().HasDefaultValue(Entity);
+              ? propertyBase.ClrType.IsDefaultValue(_shadowValues[propertyBase.GetShadowIndex()])
+              : propertyBase.GetGetter().HasDefaultValue(Entity);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1037,8 +1037,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool forMaterialization
         ) =>
             navigationBase.IsShadowProperty()
-                ? GetOrCreateCollectionTyped(navigationBase)
-                : navigationBase.GetCollectionAccessor()!.GetOrCreate(Entity, forMaterialization);
+              ? GetOrCreateCollectionTyped(navigationBase)
+              : navigationBase.GetCollectionAccessor()!.GetOrCreate(Entity, forMaterialization);
 
         private ICollection<object> GetOrCreateCollectionTyped(INavigationBase navigation)
         {
@@ -1059,8 +1059,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public bool CollectionContains(INavigationBase navigationBase, InternalEntityEntry value) =>
             navigationBase.IsShadowProperty()
-                ? GetOrCreateCollectionTyped(navigationBase).Contains(value.Entity)
-                : navigationBase.GetCollectionAccessor()!.Contains(Entity, value.Entity);
+              ? GetOrCreateCollectionTyped(navigationBase).Contains(value.Entity)
+              : navigationBase.GetCollectionAccessor()!.Contains(Entity, value.Entity);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1104,8 +1104,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry value
         ) =>
             navigationBase.IsShadowProperty()
-                ? GetOrCreateCollectionTyped(navigationBase).Remove(value.Entity)
-                : navigationBase.GetCollectionAccessor()!.Remove(Entity, value.Entity);
+              ? GetOrCreateCollectionTyped(navigationBase).Remove(value.Entity)
+              : navigationBase.GetCollectionAccessor()!.Remove(Entity, value.Entity);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

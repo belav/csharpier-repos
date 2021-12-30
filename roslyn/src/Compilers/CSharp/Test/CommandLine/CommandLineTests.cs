@@ -8756,32 +8756,32 @@ class Test { static void Main() {} }"
         {
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? ProcessUtilities.Run(
-                      "cmd",
-                      $@"/C echo  ^
+              ? ProcessUtilities.Run(
+                    "cmd",
+                    $@"/C echo  ^
 class A                                                 ^
 {{                                                      ^
     public static void Main() =^^^>                     ^
         System.Console.WriteLine(""Hello World!"");     ^
 }} | {s_CSharpCompilerExecutable} /nologo /t:exe -".Replace(Environment.NewLine, string.Empty),
-                      workingDirectory: tempDir
-                  )
-                : ProcessUtilities.Run(
-                      "/usr/bin/env",
-                      $@"sh -c ""echo  \
+                    workingDirectory: tempDir
+                )
+              : ProcessUtilities.Run(
+                    "/usr/bin/env",
+                    $@"sh -c ""echo  \
 class A                                                               \
 {{                                                                    \
     public static void Main\(\) =\>                                   \
         System.Console.WriteLine\(\\\""Hello World\!\\\""\)\;         \
 }} | {s_CSharpCompilerExecutable} /nologo /t:exe -""",
-                      workingDirectory: tempDir,
-                      // we are testing shell's piped/redirected stdin behavior explicitly
-                      // instead of using Process.StandardInput.Write(), so we set
-                      // redirectStandardInput to true, which implies that isatty of child
-                      // process is false and thereby Console.IsInputRedirected will return
-                      // true in csc code.
-                      redirectStandardInput: true
-                  );
+                    workingDirectory: tempDir,
+                    // we are testing shell's piped/redirected stdin behavior explicitly
+                    // instead of using Process.StandardInput.Write(), so we set
+                    // redirectStandardInput to true, which implies that isatty of child
+                    // process is false and thereby Console.IsInputRedirected will return
+                    // true in csc code.
+                    redirectStandardInput: true
+                );
 
             Assert.False(
                 result.ContainsErrors,
@@ -8789,18 +8789,18 @@ class A                                                               \
             );
 
             string output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? ProcessUtilities.RunAndGetOutput(
-                      "cmd.exe",
-                      $@"/C ""{s_DotnetCscRun} -.exe""",
-                      expectedRetCode: 0,
-                      startFolder: tempDir
-                  )
-                : ProcessUtilities.RunAndGetOutput(
-                      "sh",
-                      $@"-c ""{s_DotnetCscRun} -.exe""",
-                      expectedRetCode: 0,
-                      startFolder: tempDir
-                  );
+              ? ProcessUtilities.RunAndGetOutput(
+                    "cmd.exe",
+                    $@"/C ""{s_DotnetCscRun} -.exe""",
+                    expectedRetCode: 0,
+                    startFolder: tempDir
+                )
+              : ProcessUtilities.RunAndGetOutput(
+                    "sh",
+                    $@"-c ""{s_DotnetCscRun} -.exe""",
+                    expectedRetCode: 0,
+                    startFolder: tempDir
+                );
 
             Assert.Equal("Hello World!", output.Trim());
         }
@@ -8811,33 +8811,33 @@ class A                                                               \
             var name = Guid.NewGuid().ToString() + ".dll";
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? ProcessUtilities.Run(
-                      "cmd",
-                      $@"/C echo  ^
+              ? ProcessUtilities.Run(
+                    "cmd",
+                    $@"/C echo  ^
 class A                                                 ^
 {{                                                      ^
     public A Get() =^^^> default;                       ^
 }} | {s_CSharpCompilerExecutable} /nologo /t:library /out:{name} -".Replace(
-                          Environment.NewLine,
-                          string.Empty
-                      ),
-                      workingDirectory: tempDir
-                  )
-                : ProcessUtilities.Run(
-                      "/usr/bin/env",
-                      $@"sh -c ""echo  \
+                        Environment.NewLine,
+                        string.Empty
+                    ),
+                    workingDirectory: tempDir
+                )
+              : ProcessUtilities.Run(
+                    "/usr/bin/env",
+                    $@"sh -c ""echo  \
 class A                                                               \
 {{                                                                    \
     public A Get\(\) =\> default\;                                    \
 }} | {s_CSharpCompilerExecutable} /nologo /t:library /out:{name} -""",
-                      workingDirectory: tempDir,
-                      // we are testing shell's piped/redirected stdin behavior explicitly
-                      // instead of using Process.StandardInput.Write(), so we set
-                      // redirectStandardInput to true, which implies that isatty of child
-                      // process is false and thereby Console.IsInputRedirected will return
-                      // true in csc code.
-                      redirectStandardInput: true
-                  );
+                    workingDirectory: tempDir,
+                    // we are testing shell's piped/redirected stdin behavior explicitly
+                    // instead of using Process.StandardInput.Write(), so we set
+                    // redirectStandardInput to true, which implies that isatty of child
+                    // process is false and thereby Console.IsInputRedirected will return
+                    // true in csc code.
+                    redirectStandardInput: true
+                );
 
             Assert.False(
                 result.ContainsErrors,
@@ -8856,21 +8856,21 @@ class A                                                               \
         {
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? ProcessUtilities.Run(
-                      "cmd",
-                      $@"/C echo Console.WriteLine(""Hello World!"") | {s_CSharpScriptExecutable} -"
-                  )
-                : ProcessUtilities.Run(
-                      "/usr/bin/env",
-                      $@"sh -c ""echo Console.WriteLine\(\\\""Hello World\!\\\""\) | {s_CSharpScriptExecutable} -""",
-                      workingDirectory: tempDir,
-                      // we are testing shell's piped/redirected stdin behavior explicitly
-                      // instead of using Process.StandardInput.Write(), so we set
-                      // redirectStandardInput to true, which implies that isatty of child
-                      // process is false and thereby Console.IsInputRedirected will return
-                      // true in csc code.
-                      redirectStandardInput: true
-                  );
+              ? ProcessUtilities.Run(
+                    "cmd",
+                    $@"/C echo Console.WriteLine(""Hello World!"") | {s_CSharpScriptExecutable} -"
+                )
+              : ProcessUtilities.Run(
+                    "/usr/bin/env",
+                    $@"sh -c ""echo Console.WriteLine\(\\\""Hello World\!\\\""\) | {s_CSharpScriptExecutable} -""",
+                    workingDirectory: tempDir,
+                    // we are testing shell's piped/redirected stdin behavior explicitly
+                    // instead of using Process.StandardInput.Write(), so we set
+                    // redirectStandardInput to true, which implies that isatty of child
+                    // process is false and thereby Console.IsInputRedirected will return
+                    // true in csc code.
+                    redirectStandardInput: true
+                );
 
             Assert.False(
                 result.ContainsErrors,
@@ -8899,16 +8899,16 @@ class A                                                               \
 
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? ProcessUtilities.Run(
-                      "cmd",
-                      $@"/C ""{s_CSharpCompilerExecutable} /nologo /t:exe -""",
-                      workingDirectory: tempDir
-                  )
-                : ProcessUtilities.Run(
-                      "/usr/bin/env",
-                      $@"sh -c ""{s_CSharpCompilerExecutable} /nologo /t:exe -""",
-                      workingDirectory: tempDir
-                  );
+              ? ProcessUtilities.Run(
+                    "cmd",
+                    $@"/C ""{s_CSharpCompilerExecutable} /nologo /t:exe -""",
+                    workingDirectory: tempDir
+                )
+              : ProcessUtilities.Run(
+                    "/usr/bin/env",
+                    $@"sh -c ""{s_CSharpCompilerExecutable} /nologo /t:exe -""",
+                    workingDirectory: tempDir
+                );
 
             Assert.True(result.ContainsErrors);
             Assert.Contains(
@@ -8922,31 +8922,31 @@ class A                                                               \
         {
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? ProcessUtilities.Run(
-                      "cmd",
-                      $@"/C echo  ^
+              ? ProcessUtilities.Run(
+                    "cmd",
+                    $@"/C echo  ^
 class A                                                 ^
 {{                                                      ^
     public static void Main() =^^^>                     ^
         System.Console.WriteLine(""Hello World!"");     ^
 }} | {s_CSharpCompilerExecutable} /nologo - /t:exe -".Replace(Environment.NewLine, string.Empty)
-                  )
-                : ProcessUtilities.Run(
-                      "/usr/bin/env",
-                      $@"sh -c ""echo  \
+                )
+              : ProcessUtilities.Run(
+                    "/usr/bin/env",
+                    $@"sh -c ""echo  \
 class A                                                               \
 {{                                                                    \
     public static void Main\(\) =\>                                   \
         System.Console.WriteLine\(\\\""Hello World\!\\\""\)\;         \
 }} | {s_CSharpCompilerExecutable} /nologo - /t:exe -""",
-                      workingDirectory: tempDir,
-                      // we are testing shell's piped/redirected stdin behavior explicitly
-                      // instead of using Process.StandardInput.Write(), so we set
-                      // redirectStandardInput to true, which implies that isatty of child
-                      // process is false and thereby Console.IsInputRedirected will return
-                      // true in csc code.
-                      redirectStandardInput: true
-                  );
+                    workingDirectory: tempDir,
+                    // we are testing shell's piped/redirected stdin behavior explicitly
+                    // instead of using Process.StandardInput.Write(), so we set
+                    // redirectStandardInput to true, which implies that isatty of child
+                    // process is false and thereby Console.IsInputRedirected will return
+                    // true in csc code.
+                    redirectStandardInput: true
+                );
 
             Assert.Contains(((int)ErrorCode.WRN_FileAlreadyIncluded).ToString(), result.Output);
         }

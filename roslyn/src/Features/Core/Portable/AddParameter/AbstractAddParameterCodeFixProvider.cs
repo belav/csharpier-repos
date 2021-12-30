@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
             {
                 // Not supported if this is "new { ... }" (as there are no parameters at all.
                 var typeNode = syntaxFacts.IsImplicitObjectCreationExpression(node)
-                    ? node
-                    : syntaxFacts.GetTypeOfObjectCreationExpression(objectCreation);
+                  ? node
+                  : syntaxFacts.GetTypeOfObjectCreationExpression(objectCreation);
                 if (typeNode == null)
                 {
                     return new RegisterFixData<TArgumentSyntax>();
@@ -474,18 +474,18 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 var cascadingFix = AddParameterService.Instance.HasCascadingDeclarations(
                     methodToUpdate
                 )
-                    ? new Func<CancellationToken, Task<Solution>>(
-                          c =>
-                              FixAsync(
-                                  document,
-                                  methodToUpdate,
-                                  argumentToInsert,
-                                  arguments,
-                                  fixAllReferences: true,
-                                  c
-                              )
-                      )
-                    : null;
+                  ? new Func<CancellationToken, Task<Solution>>(
+                        c =>
+                            FixAsync(
+                                document,
+                                methodToUpdate,
+                                argumentToInsert,
+                                arguments,
+                                fixAllReferences: true,
+                                c
+                            )
+                    )
+                  : null;
 
                 var codeFixData = new CodeFixData(
                     methodToUpdate,

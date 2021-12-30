@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         SyntaxKind.PropertyDeclaration,
                         SyntaxKind.IndexerDeclaration
                     )
-                        ? ((ArrowExpressionClauseSyntax)node).Expression
-                        : null;
+                      ? ((ArrowExpressionClauseSyntax)node).Expression
+                      : null;
                     break;
 
                 default:

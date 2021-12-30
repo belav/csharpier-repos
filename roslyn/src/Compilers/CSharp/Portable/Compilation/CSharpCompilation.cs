@@ -3855,8 +3855,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 var kind = _options.OutputKind.IsValid()
-                    ? _options.OutputKind
-                    : OutputKind.DynamicallyLinkedLibrary;
+                  ? _options.OutputKind
+                  : OutputKind.DynamicallyLinkedLibrary;
                 moduleBeingBuilt = new PEAssemblyBuilder(
                     SourceAssembly,
                     emitOptions,

@@ -1109,8 +1109,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 var adjustedOldStatementStart = oldMember.FullSpan.Contains(
                                     oldStatementSpan.Start
                                 )
-                                    ? oldStatementSpan.Start
-                                    : oldMember.SpanStart;
+                                  ? oldStatementSpan.Start
+                                  : oldMember.SpanStart;
 
                                 // The tracking span might have been moved outside of lambda.
                                 // It is not an error to move the statement - we just ignore it.
@@ -3723,14 +3723,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     if (hasActiveStatement)
                                     {
                                         var newSpan = IsDeclarationWithInitializer(oldDeclaration)
-                                            ? GetDeletedNodeActiveSpan(
-                                                  editScript.Match.Matches,
-                                                  oldDeclaration
-                                              )
-                                            : GetDeletedNodeDiagnosticSpan(
-                                                  editScript.Match.Matches,
-                                                  oldDeclaration
-                                              );
+                                          ? GetDeletedNodeActiveSpan(
+                                                editScript.Match.Matches,
+                                                oldDeclaration
+                                            )
+                                          : GetDeletedNodeDiagnosticSpan(
+                                                editScript.Match.Matches,
+                                                oldDeclaration
+                                            );
 
                                         foreach (var index in activeStatementIndices)
                                         {
@@ -6305,8 +6305,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             return newNode =>
                 newDeclaration.FullSpan.Contains(newNode.SpanStart)
-                    ? FindDeclarationBodyPartner(newDeclaration, oldDeclaration, newNode)
-                    : null;
+                  ? FindDeclarationBodyPartner(newDeclaration, oldDeclaration, newNode)
+                  : null;
         }
 
         private static Func<SyntaxNode, SyntaxNode?> CreateSyntaxMap(

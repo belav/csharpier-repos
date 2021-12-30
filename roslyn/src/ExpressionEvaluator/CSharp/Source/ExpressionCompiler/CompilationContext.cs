@@ -842,12 +842,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // (but not System.Type) that the user can expand to see the
             // base type. Instead, we only allow valid C# expressions.
             var expression = IsDeconstruction(syntax)
-                ? binder.BindDeconstruction(
-                      (AssignmentExpressionSyntax)syntax,
-                      bindingDiagnostics,
-                      resultIsUsedOverride: true
-                  )
-                : binder.BindRValueWithoutTargetType(syntax, bindingDiagnostics);
+              ? binder.BindDeconstruction(
+                    (AssignmentExpressionSyntax)syntax,
+                    bindingDiagnostics,
+                    resultIsUsedOverride: true
+                )
+              : binder.BindRValueWithoutTargetType(syntax, bindingDiagnostics);
             if (diagnostics.HasAnyErrors())
             {
                 resultProperties = default;
@@ -1951,8 +1951,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         // A reference to a parameter or local.
                         variableName = fieldName;
                         variableKind = parameterNames.Contains(variableName)
-                            ? DisplayClassVariableKind.Parameter
-                            : DisplayClassVariableKind.Local;
+                          ? DisplayClassVariableKind.Parameter
+                          : DisplayClassVariableKind.Local;
                         Debug.Assert(!field.IsStatic);
                         break;
 

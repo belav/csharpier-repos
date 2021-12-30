@@ -317,10 +317,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns>The added annotation.</returns>
         protected virtual Annotation AddRuntimeAnnotation(string name, Annotation annotation) =>
             GetOrCreateRuntimeAnnotations().TryAdd(name, annotation)
-                ? annotation
-                : throw new InvalidOperationException(
-                      CoreStrings.DuplicateAnnotation(name, ToString())
-                  );
+              ? annotation
+              : throw new InvalidOperationException(
+                    CoreStrings.DuplicateAnnotation(name, ToString())
+                );
 
         /// <summary>
         ///     Adds runtime annotations to this object.

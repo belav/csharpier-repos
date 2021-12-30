@@ -1023,9 +1023,9 @@ namespace Microsoft.EntityFrameworkCore
                       .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
                       .ToListAsync()
                 : collectionEntry
-                  .Query()
-                  .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
-                  .ToList();
+                      .Query()
+                      .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
+                      .ToList();
 
             Assert.False(collectionEntry.IsLoaded);
             foreach (var entityTwo in left.TwoSkipShared)

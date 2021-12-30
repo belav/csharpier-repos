@@ -312,13 +312,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (PreserveInitialParameterValuesAndThreadId)
                         {
                             var initialThis = containingType.IsStructType()
-                                ? F.StateMachineField(
-                                      containingType,
-                                      GeneratedNames.StateMachineThisParameterProxyName(),
-                                      isPublic: true,
-                                      isThis: true
-                                  )
-                                : proxyField;
+                              ? F.StateMachineField(
+                                    containingType,
+                                    GeneratedNames.StateMachineThisParameterProxyName(),
+                                    isPublic: true,
+                                    isThis: true
+                                )
+                              : proxyField;
 
                             initialParameters.Add(
                                 parameter,

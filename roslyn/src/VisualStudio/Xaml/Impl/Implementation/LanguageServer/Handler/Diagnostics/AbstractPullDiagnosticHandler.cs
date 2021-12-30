@@ -120,8 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 // If we can get a previousId of the document, use it,
                 // otherwise use null as the previousId to pass into the XamlPullDiagnosticService
                 var previousResultId = documentToPreviousResultId.TryGetValue(document, out var id)
-                    ? id
-                    : null;
+                  ? id
+                  : null;
 
                 // Call XamlPullDiagnosticService to get the diagnostic report for this document.
                 // We will compute what to report inside XamlPullDiagnosticService, for example, whether we should keep using the previousId or use a new resultId,

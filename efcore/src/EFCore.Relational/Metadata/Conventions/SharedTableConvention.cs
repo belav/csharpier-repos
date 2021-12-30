@@ -533,14 +533,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
 
                 var principalTable = foreignKey.PrincipalKey.IsPrimaryKey()
-                    ? StoreObjectIdentifier.Create(
-                          foreignKey.PrincipalEntityType,
-                          StoreObjectType.Table
-                      )
-                    : StoreObjectIdentifier.Create(
-                          foreignKey.PrincipalKey.DeclaringEntityType,
-                          StoreObjectType.Table
-                      );
+                  ? StoreObjectIdentifier.Create(
+                        foreignKey.PrincipalEntityType,
+                        StoreObjectType.Table
+                    )
+                  : StoreObjectIdentifier.Create(
+                        foreignKey.PrincipalKey.DeclaringEntityType,
+                        StoreObjectType.Table
+                    );
                 if (principalTable == null || storeObject == principalTable.Value)
                 {
                     continue;

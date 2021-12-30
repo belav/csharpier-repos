@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // then that's all we need to add.  Otherwise, we will add the minimally qualified
             // version of our parent, and then add ourselves to that.
             var symbols = ShouldRestrictMinimallyQualifyLookupToNamespacesAndTypes()
-                ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
-                : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
+              ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
+              : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
             var firstSymbol = symbols.OfType<ISymbol>().FirstOrDefault();
             if (symbols.Length != 1 || firstSymbol == null || !firstSymbol.Equals(symbol))
             {

@@ -1003,8 +1003,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 case SymbolicRegexKind.Singleton:
                     Debug.Assert(_set is not null);
                     deriv = _builder._solver.IsSatisfiable(_builder._solver.And(elem, _set))
-                        ? _builder._epsilon
-                        : _builder._nothing;
+                      ? _builder._epsilon
+                      : _builder._nothing;
                     break;
 
                 case SymbolicRegexKind.Loop:

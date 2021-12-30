@@ -876,30 +876,30 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var result = operatorKind.IsComparison()
-                ? operatorKind.IsUserDefined()
-                    ? LowerLiftedUserDefinedComparisonOperator(
-                          syntax,
-                          operatorKind,
-                          loweredLeft,
-                          loweredRight,
-                          method,
-                          constrainedToTypeOpt
-                      )
-                    : LowerLiftedBuiltInComparisonOperator(
-                          syntax,
-                          operatorKind,
-                          loweredLeft,
-                          loweredRight
-                      )
-                : LowerLiftedBinaryArithmeticOperator(
-                      syntax,
-                      operatorKind,
-                      loweredLeft,
-                      loweredRight,
-                      type,
-                      method,
-                      constrainedToTypeOpt
-                  );
+              ? operatorKind.IsUserDefined()
+                  ? LowerLiftedUserDefinedComparisonOperator(
+                        syntax,
+                        operatorKind,
+                        loweredLeft,
+                        loweredRight,
+                        method,
+                        constrainedToTypeOpt
+                    )
+                  : LowerLiftedBuiltInComparisonOperator(
+                        syntax,
+                        operatorKind,
+                        loweredLeft,
+                        loweredRight
+                    )
+              : LowerLiftedBinaryArithmeticOperator(
+                    syntax,
+                    operatorKind,
+                    loweredLeft,
+                    loweredRight,
+                    type,
+                    method,
+                    constrainedToTypeOpt
+                );
 
             if (optimize)
             {

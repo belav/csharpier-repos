@@ -793,19 +793,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if (
                 !(
                     parameterType.IsTypeParameter()
-                        ? this.ReturnType.Equals(parameterType, ComparisonForUserDefinedOperators)
-                        : (
-                              (
-                                  IsAbstract
-                                  && IsContainingType(parameterType)
-                                  && IsSelfConstrainedTypeParameter(this.ReturnType)
-                              )
-                              || this.ReturnType.EffectiveTypeNoUseSiteDiagnostics.IsEqualToOrDerivedFrom(
-                                  parameterType,
-                                  ComparisonForUserDefinedOperators,
-                                  useSiteInfo: ref useSiteInfo
-                              )
-                          )
+                      ? this.ReturnType.Equals(parameterType, ComparisonForUserDefinedOperators)
+                      : (
+                            (
+                                IsAbstract
+                                && IsContainingType(parameterType)
+                                && IsSelfConstrainedTypeParameter(this.ReturnType)
+                            )
+                            || this.ReturnType.EffectiveTypeNoUseSiteDiagnostics.IsEqualToOrDerivedFrom(
+                                parameterType,
+                                ComparisonForUserDefinedOperators,
+                                useSiteInfo: ref useSiteInfo
+                            )
+                        )
                 )
             )
             {

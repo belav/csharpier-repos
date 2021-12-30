@@ -1270,14 +1270,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             foreach (var foreignKey in mappedTypes.SelectMany(et => et.GetDeclaredForeignKeys()))
             {
                 var principalTable = foreignKey.PrincipalKey.IsPrimaryKey()
-                    ? StoreObjectIdentifier.Create(
-                          foreignKey.PrincipalEntityType,
-                          StoreObjectType.Table
-                      )
-                    : StoreObjectIdentifier.Create(
-                          foreignKey.PrincipalKey.DeclaringEntityType,
-                          StoreObjectType.Table
-                      );
+                  ? StoreObjectIdentifier.Create(
+                        foreignKey.PrincipalEntityType,
+                        StoreObjectType.Table
+                    )
+                  : StoreObjectIdentifier.Create(
+                        foreignKey.PrincipalKey.DeclaringEntityType,
+                        StoreObjectType.Table
+                    );
                 if (principalTable == null)
                 {
                     continue;

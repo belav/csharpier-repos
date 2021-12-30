@@ -163,7 +163,7 @@ namespace Microsoft.CodeAnalysis
               ? text.GetSubText(
                         TextSpan.FromBounds(text.Lines[startLine].Start, text.Lines[endLine].End)
                     )
-                .ToString()
+                    .ToString()
               : null;
         }
     }

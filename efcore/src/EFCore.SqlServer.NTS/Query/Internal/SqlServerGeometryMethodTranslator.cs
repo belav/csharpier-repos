@@ -261,8 +261,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     }
 
                     var resultTypeMapping = typeof(Geometry).IsAssignableFrom(method.ReturnType)
-                        ? _typeMappingSource.FindMapping(method.ReturnType, storeType)
-                        : _typeMappingSource.FindMapping(method.ReturnType);
+                      ? _typeMappingSource.FindMapping(method.ReturnType, storeType)
+                      : _typeMappingSource.FindMapping(method.ReturnType);
 
                     var finalArguments = Simplify(typeMappedArguments, isGeography);
 

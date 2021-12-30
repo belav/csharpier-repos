@@ -1016,8 +1016,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // as. That is, "int + int --> int" in the example above.
             BinaryOperatorKind binaryOperatorKind = GetCorrespondingBinaryOperator(node);
             binaryOperatorKind |= IsIncrement(node)
-                ? BinaryOperatorKind.Addition
-                : BinaryOperatorKind.Subtraction;
+              ? BinaryOperatorKind.Addition
+              : BinaryOperatorKind.Subtraction;
 
             // The input/output type of the binary operand. "int" in the example.
             // The "1" in the example above.

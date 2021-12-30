@@ -326,8 +326,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
                 int GetValue(CodeFixCollection c) =>
                     priorityMap.TryGetValue((CodeFixProvider)c.Provider, out var value)
-                        ? value
-                        : int.MaxValue;
+                      ? value
+                      : int.MaxValue;
             }
 
             // TODO (https://github.com/dotnet/roslyn/issues/4932): Don't restrict CodeFixes in Interactive

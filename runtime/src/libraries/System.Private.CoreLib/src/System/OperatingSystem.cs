@@ -101,12 +101,12 @@ namespace System
 
                     Span<char> stackBuffer = stackalloc char[128];
                     _versionString = string.IsNullOrEmpty(_servicePack)
-                        ? string.Create(null, stackBuffer, $"{os}{_version}")
-                        : string.Create(
-                              null,
-                              stackBuffer,
-                              $"{os}{_version.ToString(3)} {_servicePack}"
-                          );
+                      ? string.Create(null, stackBuffer, $"{os}{_version}")
+                      : string.Create(
+                            null,
+                            stackBuffer,
+                            $"{os}{_version.ToString(3)} {_servicePack}"
+                        );
                 }
 
                 return _versionString;

@@ -304,15 +304,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                 var historyTableName = annotations.ContainsKey(
                     SqlServerAnnotationNames.TemporalHistoryTableName
                 )
-                    ? annotations[SqlServerAnnotationNames.TemporalHistoryTableName].Value as string
-                    : null;
+                  ? annotations[SqlServerAnnotationNames.TemporalHistoryTableName].Value as string
+                  : null;
 
                 var historyTableSchema = annotations.ContainsKey(
                     SqlServerAnnotationNames.TemporalHistoryTableSchema
                 )
-                    ? annotations[SqlServerAnnotationNames.TemporalHistoryTableSchema].Value
-                      as string
-                    : null;
+                  ? annotations[SqlServerAnnotationNames.TemporalHistoryTableSchema].Value as string
+                  : null;
 
                 // for the RevEng path, we avoid adding period properties to the entity
                 // because we don't want code for them to be generated - they need to be in shadow state

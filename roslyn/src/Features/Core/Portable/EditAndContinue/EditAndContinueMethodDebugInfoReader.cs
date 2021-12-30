@@ -166,8 +166,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 Guid kind
             ) =>
                 TryGetCustomDebugInformation(_pdbReader, methodHandle, kind, out var cdi)
-                    ? _pdbReader.GetBlobContent(cdi.Value)
-                    : default;
+                  ? _pdbReader.GetBlobContent(cdi.Value)
+                  : default;
 
             /// <exception cref="BadImageFormatException">Invalid data format.</exception>
             private static bool TryGetCustomDebugInformation(

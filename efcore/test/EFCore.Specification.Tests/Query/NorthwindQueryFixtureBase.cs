@@ -80,8 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     orderDetail.Order = orderDetail.Order.Customer.CompanyName.StartsWith(
                         tenantPrefix
                     )
-                        ? orderDetail.Order
-                        : null;
+                      ? orderDetail.Order
+                      : null;
                     orderDetail.Product = orderDetail.Product.Discontinued
                         ? orderDetail.Product
                         : null;

@@ -276,8 +276,8 @@ namespace System.Net.Sockets
             }
 
             EndPoint ep = IPAddress.TryParse(host, out IPAddress? parsedAddress)
-                ? (EndPoint)new IPEndPoint(parsedAddress, port)
-                : new DnsEndPoint(host, port);
+              ? (EndPoint)new IPEndPoint(parsedAddress, port)
+              : new DnsEndPoint(host, port);
             return ConnectAsync(ep, cancellationToken);
         }
 

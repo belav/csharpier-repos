@@ -427,8 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // and see if the resulting operator is applicable.
                         TypeSymbol nullableFrom = MakeNullableType(convertsFrom);
                         TypeSymbol nullableTo = convertsTo.IsNonNullableValueType()
-                            ? MakeNullableType(convertsTo)
-                            : convertsTo;
+                          ? MakeNullableType(convertsTo)
+                          : convertsTo;
                         Conversion liftedFromConversion = EncompassingImplicitConversion(
                             sourceExpression,
                             source,

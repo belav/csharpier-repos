@@ -1374,8 +1374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var resolved = asValueType
                     ? _compilation
-                      .GetSpecialType(SpecialType.System_Nullable_T)
-                      .Construct(ImmutableArray.Create(_underlying))
+                          .GetSpecialType(SpecialType.System_Nullable_T)
+                          .Construct(ImmutableArray.Create(_underlying))
                     : _underlying.Type;
                 Interlocked.CompareExchange(ref _resolved, resolved, null);
             }

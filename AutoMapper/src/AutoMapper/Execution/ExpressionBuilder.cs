@@ -593,12 +593,12 @@ namespace AutoMapper.Execution
             expression.Type.IsValueType
                 ? (
                       expression.Type.IsNullableType()
-                          ? Condition(
-                                Property(expression, "HasValue"),
-                                ToType(@else, then.Type),
-                                then
-                            )
-                          : @else
+                        ? Condition(
+                              Property(expression, "HasValue"),
+                              ToType(@else, then.Type),
+                              then
+                          )
+                        : @else
                   )
                 : Condition(ReferenceEqual(expression, Null), then, ToType(@else, then.Type));
         class ReplaceVisitorBase : ExpressionVisitor

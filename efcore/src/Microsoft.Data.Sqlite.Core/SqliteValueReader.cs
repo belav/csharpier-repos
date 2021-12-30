@@ -93,8 +93,8 @@ namespace Microsoft.Data.Sqlite
 
         public virtual double GetDouble(int ordinal) =>
             IsDBNull(ordinal)
-                ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
-                : GetDoubleCore(ordinal);
+              ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
+              : GetDoubleCore(ordinal);
 
         protected abstract double GetDoubleCore(int ordinal);
 
@@ -135,15 +135,15 @@ namespace Microsoft.Data.Sqlite
 
         public virtual long GetInt64(int ordinal) =>
             IsDBNull(ordinal)
-                ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
-                : GetInt64Core(ordinal);
+              ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
+              : GetInt64Core(ordinal);
 
         protected abstract long GetInt64Core(int ordinal);
 
         public virtual string GetString(int ordinal) =>
             IsDBNull(ordinal)
-                ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
-                : GetStringCore(ordinal);
+              ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
+              : GetStringCore(ordinal);
 
         protected abstract string GetStringCore(int ordinal);
 
@@ -310,8 +310,8 @@ namespace Microsoft.Data.Sqlite
 
         protected virtual byte[]? GetBlob(int ordinal) =>
             IsDBNull(ordinal)
-                ? GetNull<byte[]>(ordinal)
-                : GetBlobCore(ordinal) ?? Array.Empty<byte>();
+              ? GetNull<byte[]>(ordinal)
+              : GetBlobCore(ordinal) ?? Array.Empty<byte>();
 
         protected abstract byte[] GetBlobCore(int ordinal);
 

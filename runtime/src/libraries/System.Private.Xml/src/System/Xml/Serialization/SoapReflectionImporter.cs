@@ -287,11 +287,11 @@ namespace System.Xml.Serialization
                         )
                             typeNs = baseAttributes.SoapType.Namespace;
                         TypeDesc valueTypeDesc = string.IsNullOrEmpty(dataType)
-                            ? model.TypeDesc.BaseTypeDesc!
-                            : _typeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
+                          ? model.TypeDesc.BaseTypeDesc!
+                          : _typeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
                         string xsdTypeName = string.IsNullOrEmpty(dataType)
-                            ? model.TypeDesc.BaseTypeDesc!.Name
-                            : dataType;
+                          ? model.TypeDesc.BaseTypeDesc!.Name
+                          : dataType;
                         TypeMapping? baseMapping = GetTypeMapping(
                             xsdTypeName,
                             typeNs,

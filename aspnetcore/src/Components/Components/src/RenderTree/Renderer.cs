@@ -602,15 +602,15 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
 
     private ComponentState GetRequiredComponentState(int componentId) =>
         _componentStateById.TryGetValue(componentId, out var componentState)
-            ? componentState
-            : throw new ArgumentException(
-                  $"The renderer does not have a component with ID {componentId}."
-              );
+          ? componentState
+          : throw new ArgumentException(
+                $"The renderer does not have a component with ID {componentId}."
+            );
 
     private ComponentState GetOptionalComponentState(int componentId) =>
         _componentStateById.TryGetValue(componentId, out var componentState)
-            ? componentState
-            : null;
+          ? componentState
+          : null;
 
     private ComponentState GetRequiredRootComponentState(int componentId)
     {

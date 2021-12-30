@@ -368,8 +368,8 @@ namespace System.Xml.Serialization
                         )
                     );
                 element.IsNullable = root.GetIsNullableSpecified()
-                    ? root.IsNullable
-                    : model.TypeDesc.IsNullable || model.TypeDesc.IsOptionalValue;
+                  ? root.IsNullable
+                  : model.TypeDesc.IsNullable || model.TypeDesc.IsOptionalValue;
                 CheckNullable(element.IsNullable, model.TypeDesc, element.Mapping!);
             }
             else
@@ -560,8 +560,8 @@ namespace System.Xml.Serialization
                 if (dataType.Length > 0)
                 {
                     TypeDesc modelTypeDesc = TypeScope.IsOptionalValue(model.Type)
-                        ? model.TypeDesc.BaseTypeDesc!
-                        : model.TypeDesc;
+                      ? model.TypeDesc.BaseTypeDesc!
+                      : model.TypeDesc;
                     if (!modelTypeDesc.IsPrimitive)
                     {
                         throw new InvalidOperationException(
@@ -640,8 +640,8 @@ namespace System.Xml.Serialization
                         if (model.TypeDesc.IsOptionalValue)
                         {
                             TypeDesc valueTypeDesc = string.IsNullOrEmpty(dataType)
-                                ? model.TypeDesc.BaseTypeDesc!
-                                : _typeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
+                              ? model.TypeDesc.BaseTypeDesc!
+                              : _typeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
                             string? xsdTypeName =
                                 valueTypeDesc.DataType == null
                                     ? valueTypeDesc.Name
@@ -1072,8 +1072,8 @@ namespace System.Xml.Serialization
                 typeNs = a.XmlRoot.Namespace;
 
             string? typeName = IsAnonymousType(a, ns)
-                ? null
-                : XsdTypeName(model.Type, a, model.TypeDesc.Name);
+              ? null
+              : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
             StructMapping? mapping = (StructMapping?)GetTypeMapping(
@@ -1657,8 +1657,8 @@ namespace System.Xml.Serialization
                 typeNs = a.XmlType.Namespace;
 
             string? typeName = IsAnonymousType(a, ns)
-                ? null
-                : XsdTypeName(model.Type, a, model.TypeDesc.Name);
+              ? null
+              : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
             EnumMapping? mapping = (EnumMapping?)GetTypeMapping(
@@ -2153,8 +2153,8 @@ namespace System.Xml.Serialization
                         ? arrayItemElement.Mapping.DefaultElementName
                         : XmlConvert.EncodeLocalName(xmlArrayItem.ElementName);
                 arrayItemElement.IsNullable = xmlArrayItem.GetIsNullableSpecified()
-                    ? xmlArrayItem.IsNullable
-                    : targetTypeDesc.IsNullable || targetTypeDesc.IsOptionalValue;
+                  ? xmlArrayItem.IsNullable
+                  : targetTypeDesc.IsNullable || targetTypeDesc.IsOptionalValue;
                 arrayItemElement.Form =
                     xmlArrayItem.Form == XmlSchemaForm.None
                         ? XmlSchemaForm.Qualified
@@ -2415,8 +2415,8 @@ namespace System.Xml.Serialization
                                 )
                             );
                         element.IsNullable = xmlElement.GetIsNullableSpecified()
-                            ? xmlElement.IsNullable
-                            : typeModel.TypeDesc.IsOptionalValue;
+                          ? xmlElement.IsNullable
+                          : typeModel.TypeDesc.IsOptionalValue;
                         element.Form = rpc
                             ? XmlSchemaForm.Unqualified
                             : xmlElement.Form == XmlSchemaForm.None
@@ -2447,10 +2447,10 @@ namespace System.Xml.Serialization
                         Type targetType = typeof(IXmlSerializable).IsAssignableFrom(
                             arrayElementType
                         )
-                            ? arrayElementType
-                            : typeof(XmlNode).IsAssignableFrom(arrayElementType)
-                                ? arrayElementType
-                                : typeof(XmlElement);
+                          ? arrayElementType
+                          : typeof(XmlNode).IsAssignableFrom(arrayElementType)
+                              ? arrayElementType
+                              : typeof(XmlElement);
                         if (!arrayElementType.IsAssignableFrom(targetType))
                             throw new InvalidOperationException(
                                 SR.Format(SR.XmlIllegalAnyElement, arrayElementType.FullName)
@@ -2460,8 +2460,8 @@ namespace System.Xml.Serialization
                                 ? xmlAnyElement.Name
                                 : XmlConvert.EncodeLocalName(xmlAnyElement.Name);
                         string? anyNs = xmlAnyElement.GetNamespaceSpecified()
-                            ? xmlAnyElement.Namespace
-                            : null;
+                          ? xmlAnyElement.Namespace
+                          : null;
                         if (anys[anyName, anyNs] != null)
                         {
                             // ignore duplicate anys
@@ -2717,8 +2717,8 @@ namespace System.Xml.Serialization
                                     )
                                 );
                             element.IsNullable = xmlElement.GetIsNullableSpecified()
-                                ? xmlElement.IsNullable
-                                : typeModel.TypeDesc.IsOptionalValue;
+                              ? xmlElement.IsNullable
+                              : typeModel.TypeDesc.IsOptionalValue;
                             element.Form = rpc
                                 ? XmlSchemaForm.Unqualified
                                 : xmlElement.Form == XmlSchemaForm.None
@@ -2839,8 +2839,8 @@ namespace System.Xml.Serialization
                                 )
                             );
                         element.IsNullable = xmlElement.GetIsNullableSpecified()
-                            ? xmlElement.IsNullable
-                            : typeModel.TypeDesc.IsOptionalValue;
+                          ? xmlElement.IsNullable
+                          : typeModel.TypeDesc.IsOptionalValue;
                         element.Form = rpc
                             ? XmlSchemaForm.Unqualified
                             : xmlElement.Form == XmlSchemaForm.None
@@ -2869,10 +2869,10 @@ namespace System.Xml.Serialization
                     {
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
                         Type targetType = typeof(IXmlSerializable).IsAssignableFrom(accessorType)
-                            ? accessorType
-                            : typeof(XmlNode).IsAssignableFrom(accessorType)
-                                ? accessorType
-                                : typeof(XmlElement);
+                          ? accessorType
+                          : typeof(XmlNode).IsAssignableFrom(accessorType)
+                              ? accessorType
+                              : typeof(XmlElement);
                         if (!accessorType.IsAssignableFrom(targetType))
                             throw new InvalidOperationException(
                                 SR.Format(SR.XmlIllegalAnyElement, accessorType.FullName)
@@ -2883,8 +2883,8 @@ namespace System.Xml.Serialization
                                 ? xmlAnyElement.Name
                                 : XmlConvert.EncodeLocalName(xmlAnyElement.Name);
                         string? anyNs = xmlAnyElement.GetNamespaceSpecified()
-                            ? xmlAnyElement.Namespace
-                            : null;
+                          ? xmlAnyElement.Namespace
+                          : null;
                         if (anys[anyName, anyNs] != null)
                         {
                             // ignore duplicate anys

@@ -114,8 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             var beforeDotExpression = simpleName.IsRightSideOfDot()
-                ? simpleName.GetLeftSideOfDot()
-                : null;
+              ? simpleName.GetLeftSideOfDot()
+              : null;
 
             var semanticModel = await document
                 .ReuseExistingSpeculativeModelAsync(simpleName, cancellationToken)
