@@ -31,10 +31,8 @@ namespace Microsoft.EntityFrameworkCore
                               )
                               .ToListAsync()
                         : c.Products
-                              .FromSqlRaw(
-                                  NormalizeDelimitersInRawString("select * from [Products]")
-                              )
-                              .ToList()
+                          .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
+                          .ToList()
             );
     }
 }

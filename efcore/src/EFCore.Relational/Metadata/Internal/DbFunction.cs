@@ -131,8 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 parameters == null
                     ? new List<DbFunctionParameter>()
                     : parameters
-                          .Select(p => new DbFunctionParameter(this, p.Name, p.Type))
-                          .ToList();
+                      .Select(p => new DbFunctionParameter(this, p.Name, p.Type))
+                      .ToList();
 
             if (IsScalar)
             {

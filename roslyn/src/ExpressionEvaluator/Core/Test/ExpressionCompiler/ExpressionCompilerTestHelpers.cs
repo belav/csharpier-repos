@@ -951,9 +951,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     ilOffset =
                         atLineNumber < 0
                             ? sequencePoints
-                                  .Where(sp => sp.StartLine != Cci.SequencePoint.HiddenLine)
-                                  .Select(sp => sp.Offset)
-                                  .FirstOrDefault()
+                              .Where(sp => sp.StartLine != Cci.SequencePoint.HiddenLine)
+                              .Select(sp => sp.Offset)
+                              .FirstOrDefault()
                             : sequencePoints.First(sp => sp.StartLine == atLineNumber).Offset;
                 }
             }

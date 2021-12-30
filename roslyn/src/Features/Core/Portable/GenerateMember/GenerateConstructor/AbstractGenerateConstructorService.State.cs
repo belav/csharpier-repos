@@ -942,15 +942,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     !withFields && !withProperties
                         ? ImmutableArray<SyntaxNode>.Empty
                         : provider
-                              .GetService<SyntaxGenerator>()
-                              .CreateAssignmentStatements(
-                                  semanticModel,
-                                  _parameters,
-                                  _parameterToExistingMemberMap,
-                                  withFields ? ParameterToNewFieldMap : ParameterToNewPropertyMap,
-                                  addNullChecks: false,
-                                  preferThrowExpression: false
-                              );
+                          .GetService<SyntaxGenerator>()
+                          .CreateAssignmentStatements(
+                              semanticModel,
+                              _parameters,
+                              _parameterToExistingMemberMap,
+                              withFields ? ParameterToNewFieldMap : ParameterToNewPropertyMap,
+                              addNullChecks: false,
+                              preferThrowExpression: false
+                          );
 
                 return (members, assignments);
             }

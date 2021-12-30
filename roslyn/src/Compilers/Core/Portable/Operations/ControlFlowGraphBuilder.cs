@@ -4839,8 +4839,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ITypeSymbol iDisposable = isAsynchronous
                 ? _compilation
-                      .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                      .GetITypeSymbol()
+                  .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
+                  .GetITypeSymbol()
                 : _compilation.GetSpecialType(SpecialType.System_IDisposable);
 
             if (resources is IVariableDeclarationGroupOperation declarationGroup)
@@ -5513,8 +5513,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 bool isAsynchronous = info.IsAsynchronous;
                 var iDisposable = isAsynchronous
                     ? _compilation
-                          .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                          .GetITypeSymbol()
+                      .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
+                      .GetITypeSymbol()
                     : _compilation.GetSpecialType(SpecialType.System_IDisposable);
 
                 AddDisposingFinally(

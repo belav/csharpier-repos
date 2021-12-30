@@ -96,7 +96,7 @@ namespace Microsoft.EntityFrameworkCore
         ) where TContext : DbContext =>
             withDependencyInjection
                 ? BuildServiceProviderWithFactory<TContext>()
-                      .GetService<IDbContextFactory<TContext>>()
+                  .GetService<IDbContextFactory<TContext>>()
                 : new PooledDbContextFactory<TContext>(
                       ConfigureOptions(new DbContextOptionsBuilder<TContext>()).Options
                   );
@@ -107,7 +107,7 @@ namespace Microsoft.EntityFrameworkCore
         ) where TContext : DbContext =>
             withDependencyInjection
                 ? BuildServiceProviderWithFactory<TContext>(poolSize)
-                      .GetService<IDbContextFactory<TContext>>()
+                  .GetService<IDbContextFactory<TContext>>()
                 : new PooledDbContextFactory<TContext>(
                       ConfigureOptions(new DbContextOptionsBuilder<TContext>()).Options,
                       poolSize

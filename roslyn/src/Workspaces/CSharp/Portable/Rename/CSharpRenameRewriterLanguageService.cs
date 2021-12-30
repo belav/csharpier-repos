@@ -1605,13 +1605,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             var possibleLambdaExpression =
                 enclosingStatement == null
                     ? token
-                          .GetAncestors(
-                              n =>
-                                  n
-                                      is SimpleLambdaExpressionSyntax
-                                          or ParenthesizedLambdaExpressionSyntax
-                          )
-                          .FirstOrDefault()
+                      .GetAncestors(
+                          n =>
+                              n
+                                  is SimpleLambdaExpressionSyntax
+                                      or ParenthesizedLambdaExpressionSyntax
+                      )
+                      .FirstOrDefault()
                     : null;
             if (possibleLambdaExpression != null)
             {

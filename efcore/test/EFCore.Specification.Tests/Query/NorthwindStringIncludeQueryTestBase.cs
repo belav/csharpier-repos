@@ -153,10 +153,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                       .Where(o => o.CustomerID == "ALFKI")
                       .ToListAsync()
                 : context
-                      .Set<Order>()
-                      .Include("Customer")
-                      .Where(o => o.CustomerID == "ALFKI")
-                      .ToList();
+                  .Set<Order>()
+                  .Include("Customer")
+                  .Where(o => o.CustomerID == "ALFKI")
+                  .ToList();
 
             Assert.Equal(6, orders.Count);
             Assert.True(orders.All(o => ReferenceEquals(o.Customer, customer)));

@@ -1221,8 +1221,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
               ? _foreignKeys.Count == 0
                   ? _baseType.FindForeignKeys(properties)
                   : _baseType
-                        .FindForeignKeys(properties)
-                        .Concat(FindDeclaredForeignKeys(properties))
+                    .FindForeignKeys(properties)
+                    .Concat(FindDeclaredForeignKeys(properties))
               : FindDeclaredForeignKeys(properties);
         }
 
@@ -1450,9 +1450,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindForeignKey(properties, principalKey, principalEntityType))
                 : ToEnumerable(FindForeignKey(properties, principalKey, principalEntityType))
-                      .Concat(
-                          FindDerivedForeignKeys(properties, principalKey, principalEntityType)
-                      );
+                  .Concat(FindDerivedForeignKeys(properties, principalKey, principalEntityType));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1564,8 +1562,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ? (DeclaredReferencingForeignKeys?.Count ?? 0) == 0
                     ? _baseType.GetReferencingForeignKeys()
                     : _baseType
-                          .GetReferencingForeignKeys()
-                          .Concat(GetDeclaredReferencingForeignKeys())
+                      .GetReferencingForeignKeys()
+                      .Concat(GetDeclaredReferencingForeignKeys())
                 : GetDeclaredReferencingForeignKeys();
 
         /// <summary>
@@ -2051,7 +2049,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindDeclaredSkipNavigation(name))
                 : ToEnumerable(FindDeclaredSkipNavigation(name))
-                      .Concat(FindDerivedSkipNavigations(name));
+                  .Concat(FindDerivedSkipNavigations(name));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2158,8 +2156,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ? (DeclaredReferencingSkipNavigations?.Count ?? 0) == 0
                     ? _baseType.GetReferencingSkipNavigations()
                     : _baseType
-                          .GetReferencingSkipNavigations()
-                          .Concat(GetDeclaredReferencingSkipNavigations())
+                      .GetReferencingSkipNavigations()
+                      .Concat(GetDeclaredReferencingSkipNavigations())
                 : GetDeclaredReferencingSkipNavigations();
 
         /// <summary>
@@ -2461,7 +2459,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindIndex(Check.NotEmpty(name, nameof(name))))
                 : ToEnumerable(FindIndex(Check.NotEmpty(name, nameof(name))))
-                      .Concat(FindDerivedIndexes(name));
+                  .Concat(FindDerivedIndexes(name));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2802,7 +2800,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindDeclaredProperty(propertyName))
                 : ToEnumerable(FindDeclaredProperty(propertyName))
-                      .Concat(FindDerivedProperties(propertyName));
+                  .Concat(FindDerivedProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2814,7 +2812,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindProperty(propertyName))
                 : ToEnumerable(FindProperty(propertyName))
-                      .Concat(FindDerivedProperties(propertyName));
+                  .Concat(FindDerivedProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3246,7 +3244,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindDeclaredServiceProperty(propertyName))
                 : ToEnumerable(FindDeclaredServiceProperty(propertyName))
-                      .Concat(FindDerivedServiceProperties(propertyName));
+                  .Concat(FindDerivedServiceProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3260,7 +3258,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindServiceProperty(propertyName))
                 : ToEnumerable(FindServiceProperty(propertyName))
-                      .Concat(FindDerivedServiceProperties(propertyName));
+                  .Concat(FindDerivedServiceProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

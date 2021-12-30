@@ -252,15 +252,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         _activeSpan.HasValue && spans.Contains(_activeSpan.Value)
                             ? _activeSpan
                             : spans
-                                  .Where(
-                                      s =>
-                                          // in tests `ActiveTextview` can be null so don't depend on it
-                                          ActiveTextView == null
-                                          || ActiveTextView.GetSpanInView(
-                                              _subjectBuffer.CurrentSnapshot.GetSpan(s.ToSpan())
-                                          ).Count != 0
-                                  ) // spans were successfully projected
-                                  .FirstOrNull(); // filter to spans that have a projection
+                              .Where(
+                                  s =>
+                                      // in tests `ActiveTextview` can be null so don't depend on it
+                                      ActiveTextView == null
+                                      || ActiveTextView.GetSpanInView(
+                                          _subjectBuffer.CurrentSnapshot.GetSpan(s.ToSpan())
+                                      ).Count != 0
+                              ) // spans were successfully projected
+                              .FirstOrNull(); // filter to spans that have a projection
 
                     UpdateReadOnlyRegions();
                     this.ApplyReplacementText(updateSelection: false);
@@ -1029,8 +1029,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                 span
                             ].TrackingSpan.GetEndPoint(snapshot)
                           : _openTextBufferManager._referenceSpanToLinkedRenameSpanMap
-                                .First(kvp => kvp.Key.OverlapsWith(span))
-                                .Value.TrackingSpan.GetEndPoint(snapshot);
+                            .First(kvp => kvp.Key.OverlapsWith(span))
+                            .Value.TrackingSpan.GetEndPoint(snapshot);
                     return _openTextBufferManager.ActiveTextView.BufferGraph.MapUpToBuffer(
                         endPoint,
                         PointTrackingMode.Positive,

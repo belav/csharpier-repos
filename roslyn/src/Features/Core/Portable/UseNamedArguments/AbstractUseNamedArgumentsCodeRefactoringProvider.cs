@@ -211,7 +211,7 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                     (argument, i) =>
                         ShouldAddName(argument, i)
                           ? WithName((TSimpleArgumentSyntax)argument, parameters[i].Name)
-                                .WithTriviaFrom(argument)
+                            .WithTriviaFrom(argument)
                           : argument
                 );
 

@@ -1101,14 +1101,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int N.I.implicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int N.I.implicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -1194,14 +1194,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int N.I.explicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int N.I.explicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -1279,14 +1279,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int N.I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int N.I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -1364,14 +1364,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -1874,14 +1874,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int N.I.implicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int N.I.implicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -1971,14 +1971,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int N.I.explicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int N.I.explicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -2060,14 +2060,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int N.I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int N.I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -2149,14 +2149,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // public int I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 12)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,12): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // public int I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 12)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -2808,14 +2808,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int N.I.implicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int N.I.implicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -2900,14 +2900,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int N.I.explicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int N.I.explicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -2984,14 +2984,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int N.I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int N.I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -3068,14 +3068,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -3571,14 +3571,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int N.I.implicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int N.I.implicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -3667,14 +3667,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int N.I.explicit (int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int N.I.explicit (int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -3755,14 +3755,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int N.I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int N.I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -3843,14 +3843,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // int I operator +(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 5)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,5): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // int I operator +(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 5)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -4666,14 +4666,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,1): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // N.I.operator int(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 1)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,1): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // N.I.operator int(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 1)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -4808,14 +4808,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // implicit N.I operator int(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 10)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // implicit N.I operator int(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 10)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -4892,14 +4892,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // explicit I operator int(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 10)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // explicit I operator int(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 10)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -5358,14 +5358,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // implicit N.I int(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 10)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // implicit N.I int(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 10)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -5446,14 +5446,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // explicit N.I. int(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 10)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // explicit N.I. int(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I.")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 10)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -5534,14 +5534,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // implicit N.I operator int(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 10)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // implicit N.I operator int(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "N.I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 10)
+                            )
+                            .ToArray()
                           : errors
                     );
 
@@ -5622,14 +5622,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         options: options.WithLanguageVersion(version),
                         version == LanguageVersion.CSharp9
                           ? errors
-                                .Append(
-                                    // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
-                                    // explicit I operator int(int x) => x;
-                                    Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
-                                        .WithArguments("static abstract members in interfaces")
-                                        .WithLocation(1, 10)
-                                )
-                                .ToArray()
+                            .Append(
+                                // (1,10): error CS8652: The feature 'static abstract members in interfaces' is currently in Preview and *unsupported*. To use Preview features, use the 'preview' language version.
+                                // explicit I operator int(int x) => x;
+                                Diagnostic(ErrorCode.ERR_FeatureInPreview, "I ")
+                                    .WithArguments("static abstract members in interfaces")
+                                    .WithLocation(1, 10)
+                            )
+                            .ToArray()
                           : errors
                     );
 

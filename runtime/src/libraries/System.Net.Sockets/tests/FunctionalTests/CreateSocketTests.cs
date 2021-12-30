@@ -198,13 +198,13 @@ namespace System.Net.Sockets.Tests
                                             ? listener.AcceptAsync().GetAwaiter().GetResult()
                                             : acceptApi == 2
                                                 ? Task.Factory
-                                                      .FromAsync(
-                                                          listener.BeginAccept,
-                                                          listener.EndAccept,
-                                                          null
-                                                      )
-                                                      .GetAwaiter()
-                                                      .GetResult()
+                                                  .FromAsync(
+                                                      listener.BeginAccept,
+                                                      listener.EndAccept,
+                                                      null
+                                                  )
+                                                  .GetAwaiter()
+                                                  .GetResult()
                                                 : throw new Exception(
                                                       $"Unexpected {nameof(acceptApi)}: {acceptApi}"
                                                   );

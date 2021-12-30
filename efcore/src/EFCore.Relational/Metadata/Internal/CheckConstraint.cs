@@ -137,7 +137,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             entityType.BaseType != null
                 ? GetCheckConstraints(entityType.BaseType)
-                      .Concat(GetDeclaredCheckConstraints(entityType))
+                  .Concat(GetDeclaredCheckConstraints(entityType))
                 : GetDeclaredCheckConstraints(entityType);
 
         /// <summary>

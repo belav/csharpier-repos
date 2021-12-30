@@ -1424,7 +1424,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                    .GetPublicSymbols()
+                .GetPublicSymbols()
               : ImmutableArray<ISymbol>.Empty;
         }
 
@@ -1446,7 +1446,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                    .GetPublicSymbols()
+                .GetPublicSymbols()
               : ImmutableArray<ISymbol>.Empty;
         }
 
@@ -1468,7 +1468,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                    .GetPublicSymbols()
+                .GetPublicSymbols()
               : ImmutableArray<ISymbol>.Empty;
         }
 

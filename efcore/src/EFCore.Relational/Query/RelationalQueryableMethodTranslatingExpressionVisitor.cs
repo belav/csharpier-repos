@@ -1463,18 +1463,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ? Expression.AndAlso(
                               outerKey is NewArrayExpression newArrayExpression
                                 ? newArrayExpression.Expressions
-                                      .Select(
-                                          e =>
-                                          {
-                                              var left = (e as UnaryExpression)?.Operand ?? e;
+                                  .Select(
+                                      e =>
+                                      {
+                                          var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                              return Expression.NotEqual(
-                                                  left,
-                                                  Expression.Constant(null, left.Type)
-                                              );
-                                          }
-                                      )
-                                      .Aggregate((l, r) => Expression.AndAlso(l, r))
+                                          return Expression.NotEqual(
+                                              left,
+                                              Expression.Constant(null, left.Type)
+                                          );
+                                      }
+                                  )
+                                  .Aggregate((l, r) => Expression.AndAlso(l, r))
                                 : Expression.NotEqual(
                                       outerKey,
                                       Expression.Constant(null, outerKey.Type)
@@ -1514,14 +1514,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                         || entityType.FindDiscriminatorProperty() != null
                             ? navigation.DeclaringEntityType.GetViewOrTableMappings().Single().Table
                             : navigation.DeclaringEntityType
-                                  .GetViewOrTableMappings()
-                                  .Select(tm => tm.Table)
-                                  .Except(
-                                      navigation.DeclaringEntityType.BaseType
-                                          .GetViewOrTableMappings()
-                                          .Select(tm => tm.Table)
-                                  )
-                                  .Single();
+                              .GetViewOrTableMappings()
+                              .Select(tm => tm.Table)
+                              .Except(
+                                  navigation.DeclaringEntityType.BaseType
+                                      .GetViewOrTableMappings()
+                                      .Select(tm => tm.Table)
+                              )
+                              .Single();
                     if (
                         table.GetReferencingRowInternalForeignKeys(
                             foreignKey.PrincipalEntityType

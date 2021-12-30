@@ -8681,7 +8681,7 @@ class Test<T> where T : I1<T>
                             ErrorCode.ERR_ExpressionTreeContainsAbstractStaticMemberAccess,
                             prefixOp + "b" + postfixOp
                         )
-                        .WithLocation(26, 78)
+                    .WithLocation(26, 78)
                   :
                     // (26,78): error CS0832: An expression tree may not contain an assignment operator
                     //         _ = (System.Linq.Expressions.Expression<System.Action<T>>)((T b) => (b--).ToString());
@@ -8689,7 +8689,7 @@ class Test<T> where T : I1<T>
                             ErrorCode.ERR_ExpressionTreeContainsAssignment,
                             prefixOp + "b" + postfixOp
                         )
-                        .WithLocation(26, 78)
+                    .WithLocation(26, 78)
             );
         }
 
@@ -9101,9 +9101,9 @@ class Test
                           .OfType<PostfixUnaryExpressionSyntax>()
                           .First()
                     : tree.GetRoot()
-                          .DescendantNodes()
-                          .OfType<PrefixUnaryExpressionSyntax>()
-                          .First();
+                      .DescendantNodes()
+                      .OfType<PrefixUnaryExpressionSyntax>()
+                      .First();
 
             Assert.Equal(prefixOp + "x" + postfixOp, node.ToString());
 

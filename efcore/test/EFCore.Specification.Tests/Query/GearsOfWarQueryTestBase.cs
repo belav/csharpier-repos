@@ -5719,30 +5719,30 @@ namespace Microsoft.EntityFrameworkCore.Query
                     orderby t.Note ,g.Nickname descending
                     select g != null
                         ? g.Squad.Members
-                              .Where(m => m.HasSoulPatch)
-                              .OrderBy(m => m.Nickname)
-                              .Select(
-                                  m =>
-                                      new
-                                      {
-                                          m.Nickname,
-                                          AutomaticWeapons = m.Weapons
-                                              .Where(w => w.IsAutomatic)
-                                              .ToList()
-                                      }
-                              )
-                              .ToList()
+                          .Where(m => m.HasSoulPatch)
+                          .OrderBy(m => m.Nickname)
+                          .Select(
+                              m =>
+                                  new
+                                  {
+                                      m.Nickname,
+                                      AutomaticWeapons = m.Weapons
+                                          .Where(w => w.IsAutomatic)
+                                          .ToList()
+                                  }
+                          )
+                          .ToList()
                         : Enumerable
-                              .Empty<int>()
-                              .Select(
-                                  x =>
-                                      new
-                                      {
-                                          Nickname = (string)null,
-                                          AutomaticWeapons = new List<Weapon>()
-                                      }
-                              )
-                              .ToList(),
+                          .Empty<int>()
+                          .Select(
+                              x =>
+                                  new
+                                  {
+                                      Nickname = (string)null,
+                                      AutomaticWeapons = new List<Weapon>()
+                                  }
+                          )
+                          .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
                     AssertCollection(
@@ -5793,29 +5793,29 @@ namespace Microsoft.EntityFrameworkCore.Query
                             w =>
                                 w.Owner != null
                                     ? w.Owner.Squad.Members
-                                          .OrderByDescending(m => m.FullName)
-                                          .Select(
-                                              m =>
-                                                  new
-                                                  {
-                                                      Weapons = m.Weapons
-                                                          .Where(ww => !ww.IsAutomatic)
-                                                          .OrderBy(ww => ww.Id)
-                                                          .ToList(),
-                                                      m.Rank
-                                                  }
-                                          )
-                                          .ToList()
+                                      .OrderByDescending(m => m.FullName)
+                                      .Select(
+                                          m =>
+                                              new
+                                              {
+                                                  Weapons = m.Weapons
+                                                      .Where(ww => !ww.IsAutomatic)
+                                                      .OrderBy(ww => ww.Id)
+                                                      .ToList(),
+                                                  m.Rank
+                                              }
+                                      )
+                                      .ToList()
                                     : Enumerable
-                                          .Empty<int>()
-                                          .Select(
-                                              x =>
-                                                  new
-                                                  {
-                                                      Weapons = new List<Weapon>(),
-                                                      Rank = default(MilitaryRank)
-                                                  }
-                                          )
+                                      .Empty<int>()
+                                      .Select(
+                                          x =>
+                                              new
+                                              {
+                                                  Weapons = new List<Weapon>(),
+                                                  Rank = default(MilitaryRank)
+                                              }
+                                      )
                         ),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -8660,8 +8660,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     Items = t.Gear != null
                                         ? t.Gear.Weapons
-                                              .Select(w => new { w.Owner.Nickname })
-                                              .ToList()
+                                          .Select(w => new { w.Owner.Nickname })
+                                          .ToList()
                                         : null
                                 }
                         ),

@@ -46,10 +46,10 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         {
             var selectedSpans = args.TextView.Selection.IsEmpty
                 ? GetExpandedLineAsync(editorOptions, args, cancellationToken)
-                      .WaitAndGetResult(cancellationToken)
+                  .WaitAndGetResult(cancellationToken)
                 : args.TextView.Selection
-                      .GetSnapshotSpansOnBuffer(args.SubjectBuffer)
-                      .Where(ss => ss.Length > 0);
+                  .GetSnapshotSpansOnBuffer(args.SubjectBuffer)
+                  .Where(ss => ss.Length > 0);
 
             return GetSubmissionFromSelectedSpans(editorOptions, selectedSpans);
         }

@@ -147,8 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return arguments == null
               ? null
               : SyntaxFactory
-                    .ConstructorInitializer(kind)
-                    .WithArgumentList(GenerateArgumentList(arguments));
+                .ConstructorInitializer(kind)
+                .WithArgumentList(GenerateArgumentList(arguments));
         }
 
         private static ArgumentListSyntax GenerateArgumentList(

@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis
         {
             return descendIntoTrivia
               ? DescendantNodesAndTokensImpl(span, descendIntoChildren, true, includeSelf)
-                    .Where(e => e.IsNode)
-                    .Select(e => e.AsNode()!)
+                .Where(e => e.IsNode)
+                .Select(e => e.AsNode()!)
               : DescendantNodesOnly(span, descendIntoChildren, includeSelf);
         }
 

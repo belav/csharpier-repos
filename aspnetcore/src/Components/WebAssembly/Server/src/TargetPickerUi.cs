@@ -90,8 +90,8 @@ public class TargetPickerUi
         var matchingTabs = string.IsNullOrEmpty(targetApplicationUrl)
           ? availableTabs.ToList()
           : availableTabs
-                .Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal))
-                .ToList();
+            .Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal))
+            .ToList();
 
         if (matchingTabs.Count == 1)
         {

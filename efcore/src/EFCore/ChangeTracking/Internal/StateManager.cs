@@ -1019,8 +1019,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             );
             return dependentIdentityMap != null
               ? dependentIdentityMap
-                    .GetDependentsMap(foreignKey)
-                    .GetDependentsUsingRelationshipSnapshot(principalEntry)
+                .GetDependentsMap(foreignKey)
+                .GetDependentsUsingRelationshipSnapshot(principalEntry)
               : Enumerable.Empty<IUpdateEntry>();
         }
 

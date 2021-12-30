@@ -262,8 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         var directInvocation = invocation.Expression
                             is MemberAccessExpressionSyntax memberAccess // it's a .Invoke call
                             ? invocation
-                                  .WithExpression(memberAccess.Expression)
-                                  .WithTriviaFrom(invocation) // remove it
+                              .WithExpression(memberAccess.Expression)
+                              .WithTriviaFrom(invocation) // remove it
                             : invocation;
 
                         return WithNewParameterNames(

@@ -3863,11 +3863,11 @@ namespace Microsoft.CodeAnalysis
         {
             return fieldOrParameterToken.Kind == HandleKind.FieldDefinition
               ? MetadataReader
-                    .GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
-                    .GetMarshallingDescriptor()
+                .GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
+                .GetMarshallingDescriptor()
               : MetadataReader
-                    .GetParameter((ParameterHandle)fieldOrParameterToken)
-                    .GetMarshallingDescriptor();
+                .GetParameter((ParameterHandle)fieldOrParameterToken)
+                .GetMarshallingDescriptor();
         }
 
         internal UnmanagedType GetMarshallingType(EntityHandle fieldOrParameterToken)

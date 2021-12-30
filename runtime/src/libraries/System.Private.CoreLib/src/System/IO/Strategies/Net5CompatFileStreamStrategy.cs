@@ -147,8 +147,8 @@ namespace System.IO.Strategies
         {
             return _useAsyncIO
               ? ReadAsyncTask(buffer, offset, count, CancellationToken.None)
-                    .GetAwaiter()
-                    .GetResult()
+                .GetAwaiter()
+                .GetResult()
               : ReadSpan(new Span<byte>(buffer, offset, count));
         }
 

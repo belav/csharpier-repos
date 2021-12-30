@@ -405,10 +405,10 @@ public class TargetingPackTests
         var analyzersDir = Path.Combine(_targetingPackRoot, "analyzers");
         var expectedAnalyzers = Directory.Exists(analyzersDir)
           ? Directory
-                .GetFiles(analyzersDir, "*.dll", SearchOption.AllDirectories)
-                .Select(p => Path.GetFileNameWithoutExtension(p))
-                .Where(f => !f.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
-                .ToHashSet()
+            .GetFiles(analyzersDir, "*.dll", SearchOption.AllDirectories)
+            .Select(p => Path.GetFileNameWithoutExtension(p))
+            .Where(f => !f.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
+            .ToHashSet()
           : new HashSet<string>();
 
         CompareFrameworkElements(expectedAssemblies, managedEntries, "managed");

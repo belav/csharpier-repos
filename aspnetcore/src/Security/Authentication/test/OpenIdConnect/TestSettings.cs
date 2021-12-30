@@ -169,10 +169,10 @@ internal class TestSettings
         var queryDict = string.IsNullOrEmpty(redirectUri.Query)
           ? new Dictionary<string, string>()
           : redirectUri.Query
-                .TrimStart('?')
-                .Split('&')
-                .Select(part => part.Split('='))
-                .ToDictionary(parts => parts[0], parts => parts[1]);
+            .TrimStart('?')
+            .Split('&')
+            .Select(part => part.Split('='))
+            .ToDictionary(parts => parts[0], parts => parts[1]);
 
         // Validate the query string parameters
         ValidateParameters(queryDict, parametersToValidate, errors, htmlEncoded: true);

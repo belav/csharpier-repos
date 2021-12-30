@@ -308,8 +308,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? _foreignKeys.Count == 0
                     ? _baseType.FindForeignKeys(properties)
                     : _baseType
-                          .FindForeignKeys(properties)
-                          .Concat(FindDeclaredForeignKeys(properties))
+                      .FindForeignKeys(properties)
+                      .Concat(FindDeclaredForeignKeys(properties))
                 : FindDeclaredForeignKeys(properties);
 
         /// <summary>
@@ -391,8 +391,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? (DeclaredReferencingForeignKeys?.Count ?? 0) == 0
                     ? _baseType.GetReferencingForeignKeys()
                     : _baseType
-                          .GetReferencingForeignKeys()
-                          .Concat(GetDeclaredReferencingForeignKeys())
+                      .GetReferencingForeignKeys()
+                      .Concat(GetDeclaredReferencingForeignKeys())
                 : GetDeclaredReferencingForeignKeys();
 
         private IEnumerable<RuntimeForeignKey> GetDeclaredReferencingForeignKeys() =>

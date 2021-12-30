@@ -853,8 +853,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static AccessorDeclarationSyntax WithoutBody(AccessorDeclarationSyntax accessor) =>
             accessor.Body != null
                 ? accessor
-                      .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                      .WithBody(null)
+                  .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                  .WithBody(null)
                 : accessor;
 
         public override SyntaxNode ClassDeclaration(

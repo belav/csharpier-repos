@@ -7830,9 +7830,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Complex = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault()
                                     != null
                                         ? c.Orders
-                                              .OrderBy(e => e.OrderDate)
-                                              .FirstOrDefault()
-                                              .Customer.Orders.Any(e => e.OrderID < 11000)
+                                          .OrderBy(e => e.OrderDate)
+                                          .FirstOrDefault()
+                                          .Customer.Orders.Any(e => e.OrderID < 11000)
                                         : (bool?)false
                                 }
                         ),
