@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.Extensions.SecretManager.Tools.Internal;
 using Xunit;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Tests;
 
 public class MsBuildProjectFinderTest

@@ -351,7 +351,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         }
 
         protected abstract IXmlNode NodeForElement(params string[] xml);
+
         protected abstract IXmlNode NodeForAttribute(params string[] xml);
+
         protected abstract IXmlNode NodeForRoot();
 
         public void OneTimeSetUp()
@@ -377,6 +379,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         protected static XmlKnownTypeSet KnownTypes;
         protected static MockXmlIncludedTypeMap IncludedTypes;
+
         protected sealed class T { }
     }
 }

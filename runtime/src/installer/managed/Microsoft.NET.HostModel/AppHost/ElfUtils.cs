@@ -24,6 +24,7 @@ namespace Microsoft.NET.HostModel.AppHost
 
 
         }
+
 #pragma warning restore 0649
 
         public static bool IsElfImage(string filePath)

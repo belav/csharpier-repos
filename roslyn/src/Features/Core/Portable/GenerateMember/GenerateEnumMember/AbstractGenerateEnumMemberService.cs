@@ -30,6 +30,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
         protected AbstractGenerateEnumMemberService() { }
 
         protected abstract bool IsIdentifierNameGeneration(SyntaxNode node);
+
         protected abstract bool TryInitializeIdentifierNameState(
             SemanticDocument document,
             TSimpleNameSyntax identifierName,

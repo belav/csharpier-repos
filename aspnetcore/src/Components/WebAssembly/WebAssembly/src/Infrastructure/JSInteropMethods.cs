@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Infrastructure;
 
 /// <summary>

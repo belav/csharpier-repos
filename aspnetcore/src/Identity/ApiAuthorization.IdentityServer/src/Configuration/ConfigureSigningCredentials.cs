@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 internal class ConfigureSigningCredentials : IConfigureOptions<ApiAuthorizationOptions>

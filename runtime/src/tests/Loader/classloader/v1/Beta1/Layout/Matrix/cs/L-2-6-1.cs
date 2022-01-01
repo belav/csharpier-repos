@@ -143,6 +143,7 @@ struct A
 #pragma warning disable 0414
     public static Cls ClsPubStat = new Cls();
     private static Cls ClsPrivStat = new Cls();
+
 #pragma warning restore 0414
 
     public static Cls getClsPrivStat()
@@ -215,6 +216,7 @@ struct A
 #pragma warning disable 0414
         public static Cls ClsPubStat = new Cls();
         private static Cls ClsPrivStat = new Cls();
+
 #pragma warning restore 0414
         public static Cls getClsPrivStat()
         {

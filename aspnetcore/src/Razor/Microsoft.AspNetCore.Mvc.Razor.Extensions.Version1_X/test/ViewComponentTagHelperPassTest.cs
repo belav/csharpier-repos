@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 public class ViewComponentTagHelperPassTest

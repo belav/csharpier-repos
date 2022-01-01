@@ -31,6 +31,7 @@ namespace System.Linq.Expressions
         }
 
         private int GetLabelId(LabelTarget label) => GetId(label);
+
         private int GetParamId(ParameterExpression p) => GetId(p);
 
         private int GetId(object o)

@@ -31,6 +31,7 @@ public class MutexWaitOne2
 
     #region Private Fields
     private Mutex m_Mutex = null;
+
     #endregion
 
     #region Public Methods
@@ -391,6 +392,7 @@ public class MutexWaitOne2
 
         return retVal;
     }
+
     #endregion
 
     #region Negative Test Cases
@@ -538,6 +540,7 @@ public class MutexWaitOne2
 
         return retVal;
     }
+
     #endregion
     #endregion
 

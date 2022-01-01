@@ -33,6 +33,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ensureUniqueTag(Asn1Tag.UtcTime, "UtcTime");
             ensureUniqueTag(Asn1Tag.GeneralizedTime, "GeneralTime");
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

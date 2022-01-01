@@ -15,6 +15,7 @@ namespace System.Net.Http.Functional.Tests
 
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+
 #endif
 
     public abstract class HttpClientHandler_DangerousAcceptAllCertificatesValidator_Test
@@ -45,6 +46,7 @@ namespace System.Net.Http.Functional.Tests
                 )
             );
         }
+
 #endif
 
         [Theory]

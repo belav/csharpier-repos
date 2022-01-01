@@ -963,6 +963,7 @@ namespace System.Collections.Immutable.Tests
 
             list.GetEnumerator(); // ensure this doesn't throw
         }
+
 #endif
 
         [Fact]

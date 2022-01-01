@@ -3368,6 +3368,7 @@ namespace System.Xml.Serialization
             return mapping;
         }
     }
+
     internal sealed class ImportStructWorkItem
     {
         private readonly StructModel _model;

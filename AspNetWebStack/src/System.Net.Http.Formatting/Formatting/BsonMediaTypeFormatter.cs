@@ -14,8 +14,10 @@ using Newtonsoft.Json;
 #if NEWTONSOFTJSON10
 using BsonReader = Newtonsoft.Json.Bson.BsonDataReader;
 using BsonWriter = Newtonsoft.Json.Bson.BsonDataWriter;
+
 #else
 using Newtonsoft.Json.Bson;
+
 #endif
 
 namespace System.Net.Http.Formatting
@@ -104,6 +106,7 @@ namespace System.Net.Http.Formatting
                 return base.ReadFromStreamAsync(type, readStream, content, formatterLogger);
             }
         }
+
 #endif
 
         /// <inheritdoc />

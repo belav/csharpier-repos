@@ -70,6 +70,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 _additionalData = new Dictionary<string, JToken>();
             }
         }
+
         #endregion
 
         [Test]

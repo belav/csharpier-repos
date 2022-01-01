@@ -22,6 +22,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] signature,
             HashAlgorithmName hashAlgorithm
         ) => ecdsa.VerifyData(data, offset, count, signature, hashAlgorithm);
+
         protected override byte[] SignData(
             ECDsa ecdsa,
             byte[] data,
@@ -288,6 +289,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] signature,
             HashAlgorithmName hashAlgorithm
         ) => VerifyData(ecdsa, data, 0, data.Length, signature, hashAlgorithm);
+
         protected abstract bool VerifyData(
             ECDsa ecdsa,
             byte[] data,
@@ -299,6 +301,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
         protected byte[] SignData(ECDsa ecdsa, byte[] data, HashAlgorithmName hashAlgorithm) =>
             SignData(ecdsa, data, 0, data.Length, hashAlgorithm);
+
         protected abstract byte[] SignData(
             ECDsa ecdsa,
             byte[] data,

@@ -40,6 +40,7 @@ namespace System.Runtime.Intrinsics.X86
             {
                 throw new PlatformNotSupportedException();
             }
+
             /// <summary>
             /// __int64 _mm_cvtsi128_si64 (__m128i a)
             ///   MOVQ reg/m64, xmm
@@ -112,6 +113,7 @@ namespace System.Runtime.Intrinsics.X86
             {
                 throw new PlatformNotSupportedException();
             }
+
             /// <summary>
             /// void _mm_stream_si64(__int64 *p, __int64 a)
             ///   MOVNTI m64, r64
@@ -131,6 +133,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_add_epi8 (__m128i a,  __m128i b)
         ///   PADDB xmm, xmm/m128
@@ -139,6 +142,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_add_epi16 (__m128i a,  __m128i b)
         ///   PADDW xmm, xmm/m128
@@ -147,6 +151,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_add_epi16 (__m128i a,  __m128i b)
         ///   PADDW xmm, xmm/m128
@@ -155,6 +160,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_add_epi32 (__m128i a,  __m128i b)
         ///   PADDD xmm, xmm/m128
@@ -163,6 +169,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_add_epi32 (__m128i a,  __m128i b)
         ///   PADDD xmm, xmm/m128
@@ -171,6 +178,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_add_epi64 (__m128i a,  __m128i b)
         ///   PADDQ xmm, xmm/m128
@@ -179,6 +187,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_add_epi64 (__m128i a,  __m128i b)
         ///   PADDQ xmm, xmm/m128
@@ -187,6 +196,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_add_pd (__m128d a,  __m128d b)
         ///   ADDPD xmm, xmm/m128
@@ -213,6 +223,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_adds_epu8 (__m128i a,  __m128i b)
         ///   PADDUSB xmm, xmm/m128
@@ -221,6 +232,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_adds_epi16 (__m128i a,  __m128i b)
         ///   PADDSW xmm, xmm/m128
@@ -229,6 +241,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_adds_epu16 (__m128i a,  __m128i b)
         ///   PADDUSW xmm, xmm/m128
@@ -246,6 +259,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a,  __m128i b)
         ///   PAND xmm, xmm/m128
@@ -254,6 +268,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a,  __m128i b)
         ///   PAND xmm, xmm/m128
@@ -262,6 +277,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a,  __m128i b)
         ///   PAND xmm, xmm/m128
@@ -270,6 +286,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a,  __m128i b)
         ///   PAND xmm, xmm/m128
@@ -278,6 +295,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a,  __m128i b)
         ///   PAND xmm, xmm/m128
@@ -286,6 +304,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a,  __m128i b)
         ///   PAND xmm, xmm/m128
@@ -294,6 +313,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a,  __m128i b)
         ///   PAND xmm, xmm/m128
@@ -302,6 +322,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_and_pd (__m128d a, __m128d b)
         ///   ANDPD xmm, xmm/m128
@@ -319,6 +340,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a,  __m128i b)
         ///   PANDN xmm, xmm/m128
@@ -327,6 +349,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a,  __m128i b)
         ///   PANDN xmm, xmm/m128
@@ -335,6 +358,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a,  __m128i b)
         ///   PANDN xmm, xmm/m128
@@ -343,6 +367,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a,  __m128i b)
         ///   PANDN xmm, xmm/m128
@@ -351,6 +376,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a,  __m128i b)
         ///   PANDN xmm, xmm/m128
@@ -359,6 +385,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a,  __m128i b)
         ///   PANDN xmm, xmm/m128
@@ -367,6 +394,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a,  __m128i b)
         ///   PANDN xmm, xmm/m128
@@ -375,6 +403,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_andnot_pd (__m128d a, __m128d b)
         ///   ADDNPD xmm, xmm/m128
@@ -392,6 +421,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_avg_epu16 (__m128i a,  __m128i b)
         ///   PAVGW xmm, xmm/m128
@@ -409,6 +439,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmpeq_epi8 (__m128i a,  __m128i b)
         ///   PCMPEQB xmm, xmm/m128
@@ -417,6 +448,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmpeq_epi16 (__m128i a,  __m128i b)
         ///   PCMPEQW xmm, xmm/m128
@@ -425,6 +457,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmpeq_epi16 (__m128i a,  __m128i b)
         ///   PCMPEQW xmm, xmm/m128
@@ -436,6 +469,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmpeq_epi32 (__m128i a,  __m128i b)
         ///   PCMPEQD xmm, xmm/m128
@@ -444,6 +478,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmpeq_epi32 (__m128i a,  __m128i b)
         ///   PCMPEQD xmm, xmm/m128
@@ -452,6 +487,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_cmpeq_pd (__m128d a,  __m128d b)
         ///   CMPPD xmm, xmm/m128, imm8(0)
@@ -511,6 +547,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmpgt_epi16 (__m128i a,  __m128i b)
         ///   PCMPGTW xmm, xmm/m128
@@ -522,6 +559,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmpgt_epi32 (__m128i a,  __m128i b)
         ///   PCMPGTD xmm, xmm/m128
@@ -530,6 +568,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_cmpgt_pd (__m128d a,  __m128d b)
         ///   CMPPD xmm, xmm/m128, imm8(1) with swapped operands
@@ -637,6 +676,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmplt_epi16 (__m128i a,  __m128i b)
         ///   PCMPGTW xmm, xmm/m128
@@ -648,6 +688,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cmplt_epi32 (__m128i a,  __m128i b)
         ///   PCMPGTD xmm, xmm/m128
@@ -656,6 +697,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_cmplt_pd (__m128d a,  __m128d b)
         ///   CMPPD xmm, xmm/m128, imm8(1)
@@ -952,6 +994,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cvtpd_epi32 (__m128d a)
         ///   CVTPD2DQ xmm, xmm/m128
@@ -960,6 +1003,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm_cvtepi32_ps (__m128i a)
         ///   CVTDQ2PS xmm, xmm/m128
@@ -968,6 +1012,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm_cvtpd_ps (__m128d a)
         ///   CVTPD2PS xmm, xmm/m128
@@ -976,6 +1021,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_cvtepi32_pd (__m128i a)
         ///   CVTDQ2PD xmm, xmm/m128
@@ -984,6 +1030,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_cvtps_pd (__m128 a)
         ///   CVTPS2PD xmm, xmm/m128
@@ -1001,6 +1048,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// int _mm_cvtsi128_si32 (__m128i a)
         ///   MOVD reg/m32, xmm
@@ -1009,6 +1057,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// int _mm_cvtsi128_si32 (__m128i a)
         ///   MOVD reg/m32, xmm
@@ -1029,6 +1078,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_cvtss_sd (__m128d a, __m128 b)
         ///   CVTSS2SD xmm, xmm/m32
@@ -1040,6 +1090,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cvtsi32_si128 (int a)
         ///   MOVD xmm, reg/m32
@@ -1048,6 +1099,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm_cvtsd_ss (__m128 a, __m128d b)
         ///   CVTSD2SS xmm, xmm/m64
@@ -1059,6 +1111,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cvtsi32_si128 (int a)
         ///   MOVD xmm, reg/m32
@@ -1076,6 +1129,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_cvttpd_epi32 (__m128d a)
         ///   CVTTPD2DQ xmm, xmm/m128
@@ -1132,6 +1186,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_insert_epi16 (__m128i a,  int i, int immediate)
         ///   PINSRW xmm, reg/m16, imm8
@@ -1149,6 +1204,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si128 (__m128i const* mem_address)
         ///   MOVDQU xmm, m128
@@ -1157,6 +1213,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si128 (__m128i const* mem_address)
         ///   MOVDQU xmm, m128
@@ -1165,6 +1222,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si128 (__m128i const* mem_address)
         ///   MOVDQU xmm, m128
@@ -1173,6 +1231,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si128 (__m128i const* mem_address)
         ///   MOVDQU xmm, m128
@@ -1181,6 +1240,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si128 (__m128i const* mem_address)
         ///   MOVDQU xmm, m128
@@ -1189,6 +1249,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si128 (__m128i const* mem_address)
         ///   MOVDQU xmm, m128
@@ -1197,6 +1258,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si128 (__m128i const* mem_address)
         ///   MOVDQU xmm, m128
@@ -1205,6 +1267,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_loadu_pd (double const* mem_address)
         ///   MOVUPD xmm, m128
@@ -1231,6 +1294,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_load_si128 (__m128i const* mem_address)
         ///   MOVDQA xmm, m128
@@ -1239,6 +1303,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_load_si128 (__m128i const* mem_address)
         ///   MOVDQA xmm, m128
@@ -1247,6 +1312,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_load_si128 (__m128i const* mem_address)
         ///   MOVDQA xmm, m128
@@ -1255,6 +1321,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_load_si128 (__m128i const* mem_address)
         ///   MOVDQA xmm, m128
@@ -1263,6 +1330,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_load_si128 (__m128i const* mem_address)
         ///   MOVDQA xmm, m128
@@ -1271,6 +1339,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_load_si128 (__m128i const* mem_address)
         ///   MOVDQA xmm, m128
@@ -1279,6 +1348,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_load_si128 (__m128i const* mem_address)
         ///   MOVDQA xmm, m128
@@ -1287,6 +1357,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_load_pd (double const* mem_address)
         ///   MOVAPD xmm, m128
@@ -1331,6 +1402,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadu_si32 (void const* mem_addr)
         ///   MOVD xmm, reg/m32
@@ -1339,6 +1411,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadl_epi64 (__m128i const* mem_addr)
         ///   MOVQ xmm, reg/m64
@@ -1347,6 +1420,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_loadl_epi64 (__m128i const* mem_addr)
         ///   MOVQ xmm, reg/m64
@@ -1368,6 +1442,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_maskmoveu_si128 (__m128i a,  __m128i mask, char* mem_address)
         ///   MASKMOVDQU xmm, xmm
@@ -1389,6 +1464,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_max_epi16 (__m128i a,  __m128i b)
         ///   PMAXSW xmm, xmm/m128
@@ -1397,6 +1473,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_max_pd (__m128d a,  __m128d b)
         ///   MAXPD xmm, xmm/m128
@@ -1432,6 +1509,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_min_epi16 (__m128i a,  __m128i b)
         ///   PMINSW xmm, xmm/m128
@@ -1440,6 +1518,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_min_pd (__m128d a,  __m128d b)
         ///   MINPD xmm, xmm/m128
@@ -1475,6 +1554,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// int _mm_movemask_epi8 (__m128i a)
         ///   PMOVMSKB reg, xmm
@@ -1483,6 +1563,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// int _mm_movemask_pd (__m128d a)
         ///   MOVMSKPD reg, xmm
@@ -1500,6 +1581,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_move_epi64 (__m128i a)
         ///   MOVQ xmm, xmm
@@ -1517,6 +1599,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_mul_pd (__m128d a,  __m128d b)
         ///   MULPD xmm, xmm/m128
@@ -1546,6 +1629,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mulhi_epu16 (__m128i a,  __m128i b)
         ///   PMULHUW xmm, xmm/m128
@@ -1578,6 +1662,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mullo_epi16 (__m128i a,  __m128i b)
         ///   PMULLW xmm, xmm/m128
@@ -1595,6 +1680,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_or_si128 (__m128i a,  __m128i b)
         ///   POR xmm, xmm/m128
@@ -1603,6 +1689,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_or_si128 (__m128i a,  __m128i b)
         ///   POR xmm, xmm/m128
@@ -1611,6 +1698,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_or_si128 (__m128i a,  __m128i b)
         ///   POR xmm, xmm/m128
@@ -1619,6 +1707,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_or_si128 (__m128i a,  __m128i b)
         ///   POR xmm, xmm/m128
@@ -1627,6 +1716,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_or_si128 (__m128i a,  __m128i b)
         ///   POR xmm, xmm/m128
@@ -1635,6 +1725,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_or_si128 (__m128i a,  __m128i b)
         ///   POR xmm, xmm/m128
@@ -1643,6 +1734,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_or_si128 (__m128i a,  __m128i b)
         ///   POR xmm, xmm/m128
@@ -1651,6 +1743,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_or_pd (__m128d a,  __m128d b)
         ///   ORPD xmm, xmm/m128
@@ -1671,6 +1764,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_packs_epi32 (__m128i a,  __m128i b)
         ///   PACKSSDW xmm, xmm/m128
@@ -1712,6 +1806,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_shuffle_epi32 (__m128i a,  int immediate)
         ///   PSHUFD xmm, xmm/m128, imm8
@@ -1720,6 +1815,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_shuffle_pd (__m128d a,  __m128d b, int immediate)
         ///   SHUFPD xmm, xmm/m128, imm8
@@ -1741,6 +1837,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_shufflehi_epi16 (__m128i a,  int control)
         ///   PSHUFHW xmm, xmm/m128, imm8
@@ -1758,6 +1855,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_shufflelo_epi16 (__m128i a,  int control)
         ///   PSHUFLW xmm, xmm/m128, imm8
@@ -1778,6 +1876,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sll_epi16 (__m128i a,  __m128i count)
         ///   PSLLW xmm, xmm/m128
@@ -1789,6 +1888,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sll_epi32 (__m128i a, __m128i count)
         ///   PSLLD xmm, xmm/m128
@@ -1797,6 +1897,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sll_epi32 (__m128i a, __m128i count)
         ///   PSLLD xmm, xmm/m128
@@ -1805,6 +1906,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sll_epi64 (__m128i a, __m128i count)
         ///   PSLLQ xmm, xmm/m128
@@ -1813,6 +1915,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sll_epi64 (__m128i a, __m128i count)
         ///   PSLLQ xmm, xmm/m128
@@ -1833,6 +1936,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_slli_epi16 (__m128i a,  int immediate)
         ///   PSLLW xmm, imm8
@@ -1841,6 +1945,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_slli_epi32 (__m128i a,  int immediate)
         ///   PSLLD xmm, imm8
@@ -1849,6 +1954,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_slli_epi32 (__m128i a,  int immediate)
         ///   PSLLD xmm, imm8
@@ -1857,6 +1963,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_slli_epi64 (__m128i a,  int immediate)
         ///   PSLLQ xmm, imm8
@@ -1865,6 +1972,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_slli_epi64 (__m128i a,  int immediate)
         ///   PSLLQ xmm, imm8
@@ -1885,6 +1993,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bslli_si128 (__m128i a, int imm8)
         ///   PSLLDQ xmm, imm8
@@ -1896,6 +2005,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bslli_si128 (__m128i a, int imm8)
         ///   PSLLDQ xmm, imm8
@@ -1907,6 +2017,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bslli_si128 (__m128i a, int imm8)
         ///   PSLLDQ xmm, imm8
@@ -1918,6 +2029,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bslli_si128 (__m128i a, int imm8)
         ///   PSLLDQ xmm, imm8
@@ -1926,6 +2038,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bslli_si128 (__m128i a, int imm8)
         ///   PSLLDQ xmm, imm8
@@ -1937,6 +2050,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bslli_si128 (__m128i a, int imm8)
         ///   PSLLDQ xmm, imm8
@@ -1948,6 +2062,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bslli_si128 (__m128i a, int imm8)
         ///   PSLLDQ xmm, imm8
@@ -1971,6 +2086,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sra_epi32 (__m128i a, __m128i count)
         ///   PSRAD xmm, xmm/m128
@@ -1991,6 +2107,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srai_epi32 (__m128i a,  int immediate)
         ///   PSRAD xmm, imm8
@@ -2011,6 +2128,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srl_epi16 (__m128i a, __m128i count)
         ///   PSRLW xmm, xmm/m128
@@ -2022,6 +2140,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srl_epi32 (__m128i a, __m128i count)
         ///   PSRLD xmm, xmm/m128
@@ -2030,6 +2149,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srl_epi32 (__m128i a, __m128i count)
         ///   PSRLD xmm, xmm/m128
@@ -2041,6 +2161,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srl_epi64 (__m128i a, __m128i count)
         ///   PSRLQ xmm, xmm/m128
@@ -2052,6 +2173,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srl_epi64 (__m128i a, __m128i count)
         ///   PSRLQ xmm, xmm/m128
@@ -2072,6 +2194,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srli_epi16 (__m128i a,  int immediate)
         ///   PSRLW xmm, imm8
@@ -2080,6 +2203,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srli_epi32 (__m128i a,  int immediate)
         ///   PSRLD xmm, imm8
@@ -2088,6 +2212,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srli_epi32 (__m128i a,  int immediate)
         ///   PSRLD xmm, imm8
@@ -2096,6 +2221,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srli_epi64 (__m128i a,  int immediate)
         ///   PSRLQ xmm, imm8
@@ -2104,6 +2230,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srli_epi64 (__m128i a,  int immediate)
         ///   PSRLQ xmm, imm8
@@ -2124,6 +2251,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8)
         ///   PSRLDQ xmm, imm8
@@ -2135,6 +2263,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8)
         ///   PSRLDQ xmm, imm8
@@ -2146,6 +2275,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8)
         ///   PSRLDQ xmm, imm8
@@ -2157,6 +2287,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8)
         ///   PSRLDQ xmm, imm8
@@ -2168,6 +2299,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8)
         ///   PSRLDQ xmm, imm8
@@ -2179,6 +2311,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8)
         ///   PSRLDQ xmm, imm8
@@ -2190,6 +2323,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8)
         ///   PSRLDQ xmm, imm8
@@ -2238,6 +2372,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si32 (void* mem_addr, __m128i a)
         ///   MOVD m32, xmm
@@ -2246,6 +2381,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storel_epi64 (__m128i* mem_addr, __m128i a)
         ///   MOVQ m64, xmm
@@ -2254,6 +2390,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si32 (void* mem_addr, __m128i a)
         ///   MOVD m32, xmm
@@ -2262,6 +2399,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storel_epi64 (__m128i* mem_addr, __m128i a)
         ///   MOVQ m64, xmm
@@ -2279,6 +2417,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQA m128, xmm
@@ -2287,6 +2426,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQA m128, xmm
@@ -2295,6 +2435,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQA m128, xmm
@@ -2303,6 +2444,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQA m128, xmm
@@ -2311,6 +2453,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQA m128, xmm
@@ -2319,6 +2462,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQA m128, xmm
@@ -2327,6 +2471,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQA m128, xmm
@@ -2335,6 +2480,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_store_pd (double* mem_addr, __m128d a)
         ///   MOVAPD m128, xmm
@@ -2352,6 +2498,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVNTDQ m128, xmm
@@ -2360,6 +2507,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVNTDQ m128, xmm
@@ -2368,6 +2516,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVNTDQ m128, xmm
@@ -2376,6 +2525,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVNTDQ m128, xmm
@@ -2384,6 +2534,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVNTDQ m128, xmm
@@ -2392,6 +2543,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVNTDQ m128, xmm
@@ -2400,6 +2552,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVNTDQ m128, xmm
@@ -2408,6 +2561,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_pd (double* mem_addr, __m128d a)
         ///   MOVNTPD m128, xmm
@@ -2425,6 +2579,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQU m128, xmm
@@ -2433,6 +2588,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQU m128, xmm
@@ -2441,6 +2597,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQU m128, xmm
@@ -2449,6 +2606,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQU m128, xmm
@@ -2457,6 +2615,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQU m128, xmm
@@ -2465,6 +2624,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQU m128, xmm
@@ -2473,6 +2633,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)
         ///   MOVDQU m128, xmm
@@ -2481,6 +2642,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_storeu_pd (double* mem_addr, __m128d a)
         ///   MOVUPD m128, xmm
@@ -2516,6 +2678,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_stream_si32(int *p, int a)
         ///   MOVNTI m32, r32
@@ -2533,6 +2696,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sub_epi8 (__m128i a,  __m128i b)
         ///   PSUBB xmm, xmm/m128
@@ -2541,6 +2705,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sub_epi16 (__m128i a,  __m128i b)
         ///   PSUBW xmm, xmm/m128
@@ -2549,6 +2714,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sub_epi16 (__m128i a,  __m128i b)
         ///   PSUBW xmm, xmm/m128
@@ -2557,6 +2723,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sub_epi32 (__m128i a,  __m128i b)
         ///   PSUBD xmm, xmm/m128
@@ -2565,6 +2732,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sub_epi32 (__m128i a,  __m128i b)
         ///   PSUBD xmm, xmm/m128
@@ -2573,6 +2741,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sub_epi64 (__m128i a,  __m128i b)
         ///   PSUBQ xmm, xmm/m128
@@ -2581,6 +2750,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sub_epi64 (__m128i a,  __m128i b)
         ///   PSUBQ xmm, xmm/m128
@@ -2589,6 +2759,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_sub_pd (__m128d a, __m128d b)
         ///   SUBPD xmm, xmm/m128
@@ -2621,6 +2792,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_subs_epi16 (__m128i a,  __m128i b)
         ///   PSUBSW xmm, xmm/m128
@@ -2632,6 +2804,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_subs_epu8 (__m128i a,  __m128i b)
         ///   PSUBUSB xmm, xmm/m128
@@ -2640,6 +2813,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_subs_epu16 (__m128i a,  __m128i b)
         ///   PSUBUSW xmm, xmm/m128
@@ -2660,6 +2834,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpackhi_epi8 (__m128i a,  __m128i b)
         ///   PUNPCKHBW xmm, xmm/m128
@@ -2668,6 +2843,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpackhi_epi16 (__m128i a,  __m128i b)
         ///   PUNPCKHWD xmm, xmm/m128
@@ -2676,6 +2852,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpackhi_epi16 (__m128i a,  __m128i b)
         ///   PUNPCKHWD xmm, xmm/m128
@@ -2684,6 +2861,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpackhi_epi32 (__m128i a,  __m128i b)
         ///   PUNPCKHDQ xmm, xmm/m128
@@ -2692,6 +2870,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpackhi_epi32 (__m128i a,  __m128i b)
         ///   PUNPCKHDQ xmm, xmm/m128
@@ -2700,6 +2879,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpackhi_epi64 (__m128i a,  __m128i b)
         ///   PUNPCKHQDQ xmm, xmm/m128
@@ -2708,6 +2888,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpackhi_epi64 (__m128i a,  __m128i b)
         ///   PUNPCKHQDQ xmm, xmm/m128
@@ -2716,6 +2897,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_unpackhi_pd (__m128d a,  __m128d b)
         ///   UNPCKHPD xmm, xmm/m128
@@ -2733,6 +2915,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpacklo_epi8 (__m128i a,  __m128i b)
         ///   PUNPCKLBW xmm, xmm/m128
@@ -2741,6 +2924,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpacklo_epi16 (__m128i a,  __m128i b)
         ///   PUNPCKLWD xmm, xmm/m128
@@ -2749,6 +2933,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpacklo_epi16 (__m128i a,  __m128i b)
         ///   PUNPCKLWD xmm, xmm/m128
@@ -2757,6 +2942,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpacklo_epi32 (__m128i a,  __m128i b)
         ///   PUNPCKLDQ xmm, xmm/m128
@@ -2765,6 +2951,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpacklo_epi32 (__m128i a,  __m128i b)
         ///   PUNPCKLDQ xmm, xmm/m128
@@ -2773,6 +2960,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpacklo_epi64 (__m128i a,  __m128i b)
         ///   PUNPCKLQDQ xmm, xmm/m128
@@ -2781,6 +2969,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_unpacklo_epi64 (__m128i a,  __m128i b)
         ///   PUNPCKLQDQ xmm, xmm/m128
@@ -2789,6 +2978,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_unpacklo_pd (__m128d a,  __m128d b)
         ///   UNPCKLPD xmm, xmm/m128
@@ -2806,6 +2996,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_xor_si128 (__m128i a,  __m128i b)
         ///   PXOR xmm, xmm/m128
@@ -2814,6 +3005,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_xor_si128 (__m128i a,  __m128i b)
         ///   PXOR xmm, xmm/m128
@@ -2822,6 +3014,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_xor_si128 (__m128i a,  __m128i b)
         ///   PXOR xmm, xmm/m128
@@ -2830,6 +3023,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_xor_si128 (__m128i a,  __m128i b)
         ///   PXOR xmm, xmm/m128
@@ -2838,6 +3032,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_xor_si128 (__m128i a,  __m128i b)
         ///   PXOR xmm, xmm/m128
@@ -2846,6 +3041,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_xor_si128 (__m128i a,  __m128i b)
         ///   PXOR xmm, xmm/m128
@@ -2854,6 +3050,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_xor_si128 (__m128i a,  __m128i b)
         ///   PXOR xmm, xmm/m128
@@ -2862,6 +3059,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_xor_pd (__m128d a,  __m128d b)
         ///   XORPD xmm, xmm/m128

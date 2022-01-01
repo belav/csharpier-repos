@@ -11,6 +11,7 @@ using OpenQA.Selenium.Interactions;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class JSRootComponentsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>

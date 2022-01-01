@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SpaServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>

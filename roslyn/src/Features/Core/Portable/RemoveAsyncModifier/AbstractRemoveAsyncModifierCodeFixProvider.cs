@@ -28,10 +28,12 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.Compile;
 
         protected abstract bool IsAsyncSupportingFunctionSyntax(SyntaxNode node);
+
         protected abstract SyntaxNode RemoveAsyncModifier(
             SyntaxGenerator generator,
             SyntaxNode methodLikeNode
         );
+
         protected abstract SyntaxNode? ConvertToBlockBody(
             SyntaxNode node,
             TExpressionSyntax expressionBody

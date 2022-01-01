@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly ReaderWriterLockSlim _nodeMapLock = new ReaderWriterLockSlim(
             LockRecursionPolicy.NoRecursion
         );
+
         // The bound nodes associated with a syntax node, from highest in the tree to lowest.
         private readonly Dictionary<SyntaxNode, ImmutableArray<BoundNode>> _guardedBoundNodeMap =
             new Dictionary<SyntaxNode, ImmutableArray<BoundNode>>();
@@ -37,6 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private NullableWalker.SnapshotManager _lazySnapshotManager;
         private ImmutableDictionary<Symbol, Symbol> _lazyRemappedSymbols;
         private readonly ImmutableDictionary<Symbol, Symbol> _parentRemappedSymbolsOpt;
+
         /// <summary>
         /// Only used when this is a speculative semantic model.
         /// </summary>
@@ -931,6 +933,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return originalSymbol;
         }
+
 #nullable disable
 
         private static LocalFunctionSymbol GetDeclaredLocalFunction(
@@ -1498,6 +1501,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                   : null;
             }
         }
+
 #nullable disable
 
         private CSharpSyntaxNode GetBindingRootOrInitializer(CSharpSyntaxNode node)
@@ -1580,6 +1584,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Operation.SetParentOperation(operation, null);
             return operation;
         }
+
 #nullable disable
 
         internal override SymbolInfo GetSymbolInfoWorker(
@@ -2704,6 +2709,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         );
 
         protected abstract bool IsNullableAnalysisEnabled();
+
 #nullable disable
 
         /// <summary>

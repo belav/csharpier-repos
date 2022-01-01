@@ -27,6 +27,7 @@ namespace System.Security.Cryptography.Asn1
             decoded.Critical = reader.ReadBoolean();
             reader.ThrowIfNotEmpty();
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Build.Utilities;
 using Roslyn.Utilities;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.BuildTasks
@@ -162,6 +163,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             s_failedQueue.Enqueue((type, outputAssembly));
         }
     }
+
 #endif
 
     internal static class ValidateBootstrapUtil

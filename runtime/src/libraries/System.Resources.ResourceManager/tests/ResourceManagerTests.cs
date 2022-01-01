@@ -136,6 +136,7 @@ namespace System.Resources.Tests
 
             return null;
         }
+
 #endif
 
         static System.Reflection.Assembly AssemblyResolveEventHandler(

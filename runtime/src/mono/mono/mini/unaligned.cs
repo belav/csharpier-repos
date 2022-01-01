@@ -37,6 +37,7 @@ namespace UnalignedTests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
 
@@ -182,6 +183,7 @@ namespace UnalignedTests
 
             return 0;
         }
+
         public static unsafe int test_0_cpobj()
         {
             byte* dest = stackalloc byte[20];

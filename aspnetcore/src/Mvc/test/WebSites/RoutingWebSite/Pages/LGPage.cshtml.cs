@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 
+
 namespace BasicWebSite.Pages;
 
 public class LGPageModel : PageModel

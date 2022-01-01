@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
+
         protected abstract bool IsTargetTyped(
             SemanticModel semanticModel,
             TConditionalExpressionSyntax conditional,

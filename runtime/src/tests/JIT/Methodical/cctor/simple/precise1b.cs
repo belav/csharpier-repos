@@ -4,10 +4,12 @@
 // static method - inlineable
 
 using System;
+
 internal class measure
 {
     public static int a = 0xCC;
 }
+
 internal class test
 {
     public static void f() { }

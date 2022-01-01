@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Certificate.Test;
 
 public class ClientCertificateAuthenticationTests

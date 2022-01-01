@@ -170,8 +170,11 @@ namespace WebMatrix.WebData
             string password,
             bool requireConfirmationToken
         );
+
         public abstract bool ConfirmAccount(string userName, string accountConfirmationToken);
+
         public abstract bool ConfirmAccount(string accountConfirmationToken);
+
         public abstract bool DeleteAccount(string userName);
 
         public virtual string GeneratePasswordResetToken(string userName)
@@ -186,12 +189,19 @@ namespace WebMatrix.WebData
             string userName,
             int tokenExpirationInMinutesFromNow
         );
+
         public abstract int GetUserIdFromPasswordResetToken(string token);
+
         public abstract bool IsConfirmed(string userName);
+
         public abstract bool ResetPasswordWithToken(string token, string newPassword);
+
         public abstract int GetPasswordFailuresSinceLastSuccess(string userName);
+
         public abstract DateTime GetCreateDate(string userName);
+
         public abstract DateTime GetPasswordChangedDate(string userName);
+
         public abstract DateTime GetLastPasswordFailureDate(string userName);
 
         internal virtual void VerifyInitialized() { }

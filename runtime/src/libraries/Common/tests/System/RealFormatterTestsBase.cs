@@ -11,6 +11,7 @@ namespace System.Tests
     {
         // The following methods need to be implemented for the tests to run:
         protected abstract string InvariantToStringDouble(double d, string format);
+
         protected abstract string InvariantToStringSingle(float f, string format);
 
         [Theory]

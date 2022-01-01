@@ -119,6 +119,7 @@ namespace System.IO.Ports.Tests
                 com.BaseStream.EndWrite(readAsyncResult1);
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

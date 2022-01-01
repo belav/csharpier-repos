@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 namespace RazorPageGenerator;
 
 public class Program

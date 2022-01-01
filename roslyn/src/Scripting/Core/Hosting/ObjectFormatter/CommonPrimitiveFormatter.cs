@@ -22,12 +22,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         protected abstract string NullLiteral { get; }
 
         protected abstract string FormatLiteral(bool value);
+
         protected abstract string FormatLiteral(
             string value,
             bool quote,
             bool escapeNonPrintable,
             int numberRadix = NumberRadixDecimal
         );
+
         protected abstract string FormatLiteral(
             char value,
             bool quote,
@@ -35,49 +37,61 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             bool includeCodePoints = false,
             int numberRadix = NumberRadixDecimal
         );
+
         protected abstract string FormatLiteral(
             sbyte value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(
             byte value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(
             short value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(
             ushort value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(
             int value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(
             uint value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(
             long value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(
             ulong value,
             int numberRadix = NumberRadixDecimal,
             CultureInfo cultureInfo = null
         );
+
         protected abstract string FormatLiteral(double value, CultureInfo cultureInfo = null);
+
         protected abstract string FormatLiteral(float value, CultureInfo cultureInfo = null);
+
         protected abstract string FormatLiteral(decimal value, CultureInfo cultureInfo = null);
+
         protected abstract string FormatLiteral(DateTime value, CultureInfo cultureInfo = null);
 
         /// <summary>

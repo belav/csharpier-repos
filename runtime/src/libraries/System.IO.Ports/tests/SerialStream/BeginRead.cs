@@ -368,6 +368,7 @@ namespace System.IO.Ports.Tests
                 Assert.True(readAsyncResult.IsCompleted);
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
 internal static class HttpContextDatabaseContextDetailsExtensions

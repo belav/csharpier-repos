@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.DotNet.OpenApi;
 
 public interface IHttpResponseMessageWrapper : IDisposable

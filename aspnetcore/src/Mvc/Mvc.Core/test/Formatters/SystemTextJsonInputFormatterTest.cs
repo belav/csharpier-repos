@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
 public class SystemTextJsonInputFormatterTest : JsonInputFormatterTestBase

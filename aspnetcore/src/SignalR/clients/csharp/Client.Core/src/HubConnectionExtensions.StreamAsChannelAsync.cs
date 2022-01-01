@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Threading.Channels;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client;
 
 /// <summary>

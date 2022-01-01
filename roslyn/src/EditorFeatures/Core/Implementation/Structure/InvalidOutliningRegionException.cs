@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         private readonly ITextSnapshot _snapshot;
         private readonly Span _snapshotSpan;
         private readonly Span _regionSpan;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         public InvalidOutliningRegionException(

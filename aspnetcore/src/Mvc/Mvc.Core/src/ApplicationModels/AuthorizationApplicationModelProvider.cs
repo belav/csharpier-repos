@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 internal class AuthorizationApplicationModelProvider : IApplicationModelProvider

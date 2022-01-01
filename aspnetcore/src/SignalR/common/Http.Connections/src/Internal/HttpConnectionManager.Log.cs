@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
 internal partial class HttpConnectionManager

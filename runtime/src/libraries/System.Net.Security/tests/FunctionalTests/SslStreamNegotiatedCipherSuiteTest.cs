@@ -27,6 +27,7 @@ namespace System.Net.Security.Tests
             | SslProtocols.Tls11
             | SslProtocols.Tls12
             | SslProtocols.Tls13;
+
 #pragma warning restore CS0618
 
         public const SslProtocols NonTls13Protocols = AllProtocols & (~SslProtocols.Tls13);

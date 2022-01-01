@@ -95,6 +95,7 @@ namespace SerializerTrimmingTest
     public class MyClass
     {
         public int X { get; set; }
+
         [JsonInclude]
         public int Y;
     }
@@ -102,6 +103,7 @@ namespace SerializerTrimmingTest
     internal struct MyStruct
     {
         public int X { get; }
+
         [JsonInclude]
         public int Y;
 
@@ -112,6 +114,7 @@ namespace SerializerTrimmingTest
     internal class MyClassWithParameterizedCtor
     {
         public int X { get; set; }
+
         [JsonInclude]
         public int Y;
 
@@ -121,12 +124,15 @@ namespace SerializerTrimmingTest
     internal class MyBigClass
     {
         public string A { get; }
+
         [JsonInclude]
         public string B;
         public string C { get; }
+
         [JsonInclude]
         public int One;
         public int Two { get; }
+
         [JsonInclude]
         public int Three;
 

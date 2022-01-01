@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
 public class StartupWithILoggerFactory

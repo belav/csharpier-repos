@@ -58,6 +58,7 @@ namespace System.Reflection
     }
 
     internal delegate object GetterAdapter(object _this);
+
     internal delegate R Getter<T, R>(T _this);
 
     [StructLayout(LayoutKind.Sequential)]
@@ -69,6 +70,7 @@ namespace System.Reflection
         private MonoPropertyInfo info;
         private PInfo cached;
         private GetterAdapter? cached_getter;
+
 #pragma warning restore 649
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -163,6 +165,7 @@ namespace System.Reflection
 
             return sbName.ToString();
         }
+
         #endregion
 
         private void CachePropertyInfo(PInfo flags)
@@ -358,6 +361,7 @@ namespace System.Reflection
         {
             return getter();
         }
+
 #pragma warning restore 169
 
         /*

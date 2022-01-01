@@ -12,6 +12,7 @@ namespace Test
         {
             param3 = (double)param4;
         }
+
         static int Main()
         {
             Method2(1.0d, 1, __arglist());

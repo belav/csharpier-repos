@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Microsoft.JSInterop.WebAssembly;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 /// <summary>

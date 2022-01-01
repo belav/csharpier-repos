@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Options;
 #if !NETCOREAPP
 using System;
 using Roslyn.Utilities;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

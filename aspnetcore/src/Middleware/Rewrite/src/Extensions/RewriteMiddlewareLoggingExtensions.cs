@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Logging;
 
 internal static partial class RewriteMiddlewareLoggingExtensions
@@ -97,6 +98,7 @@ internal static partial class RewriteMiddlewareLoggingExtensions
         EventName = "RedirectedToNonWww"
     )]
     public static partial void RedirectedToNonWww(this ILogger logger);
+
     [LoggerMessage(
         9,
         LogLevel.Information,

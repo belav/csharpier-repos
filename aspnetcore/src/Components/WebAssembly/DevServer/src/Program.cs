@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using DevServerProgram = Microsoft.AspNetCore.Components.WebAssembly.DevServer.Server.Program;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.DevServer;
 
 internal class Program

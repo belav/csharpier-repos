@@ -12,6 +12,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
+
 namespace Templates.Test;
 
 public class BlazorServerTemplateTest : BlazorTemplateTest

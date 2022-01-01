@@ -29,6 +29,7 @@ namespace System.Text
     public sealed class EncoderExceptionFallbackBuffer : EncoderFallbackBuffer
     {
         public EncoderExceptionFallbackBuffer() { }
+
         public override bool Fallback(char charUnknown, int index)
         {
             // Fall back our char

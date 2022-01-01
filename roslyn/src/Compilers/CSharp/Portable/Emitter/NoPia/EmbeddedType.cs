@@ -18,6 +18,7 @@ using FieldSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.FieldSymbol;
 using MethodSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.MethodSymbol;
 using EventSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.EventSymbol;
 using PropertySymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.PropertySymbol;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

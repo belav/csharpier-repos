@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Components.RenderTree;
 
+
 namespace Microsoft.AspNetCore.Components.Rendering;
 
 internal class RenderTreeUpdater

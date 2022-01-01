@@ -31,16 +31,19 @@ namespace ILCompiler.DependencyAnalysisFramework
         {
             WriteEvent(1, id, name);
         }
+
         [Event(2, Keywords = Keywords.Graph, Level = EventLevel.Informational)]
         public void Node(int id, int index, string name)
         {
             WriteEvent(2, id, index, name);
         }
+
         [Event(3, Keywords = Keywords.Graph, Level = EventLevel.Informational)]
         public void Edge(int id, int dependentIndex, int dependencyIndex, string reason)
         {
             WriteEvent(3, id, dependentIndex, dependencyIndex, reason);
         }
+
         [Event(4, Keywords = Keywords.Graph, Level = EventLevel.Informational)]
         public void ConditionalEdge(
             int id,

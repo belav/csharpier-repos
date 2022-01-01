@@ -26,6 +26,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
             }
         }
     }
+
     public class ABC { }
 
     public partial struct NestedStruct

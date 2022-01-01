@@ -51,9 +51,11 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
+
 #endif
 #if !NET20 && !PORTABLE40
 using System.Xml.Linq;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Serialization
@@ -101,6 +103,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.IsNull(deserializedObject[key]);
         }
+
 #endif
 
 #if !(NET20 || NET35)
@@ -169,6 +172,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsTrue(dic2.TryGetValue(1, out i));
             Assert.AreEqual(int.MaxValue, i);
         }
+
 #endif
 
         [Test]
@@ -344,6 +348,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(2L, l[1]);
             Assert.AreEqual(3L, l[2]);
         }
+
 #endif
 
         public class TestDictionaryPrivateParameterized : Dictionary<string, int>
@@ -449,6 +454,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(1L, d["one"]);
             Assert.AreEqual(2L, d["two"]);
         }
+
 #endif
 
 #if !(DNXCORE50) || NETSTANDARD2_0
@@ -466,6 +472,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "Cannot create and populate list type System.Collections.Specialized.NameValueCollection. Path 'Collection', line 1, position 13."
             );
         }
+
 #endif
 
 #if !(NET35 || NET20 || PORTABLE || PORTABLE40) || NETSTANDARD2_0
@@ -512,6 +519,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("value1", d2["key"][0].Text1);
             Assert.AreEqual("value2", d2["key2"][0].Text1);
         }
+
 #endif
 
         [Test]
@@ -963,6 +971,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
         }
+
 #endif
 
         [Test]
@@ -1222,6 +1231,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("Id!", newObject.Id);
             Assert.AreEqual("Name!", newObject.Name);
         }
+
 #endif
 
         [Test]
@@ -1417,6 +1427,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(1, c2.Array.Count);
             Assert.AreEqual(13, c2.Array[0]);
         }
+
 #endif
 
         [Test]
@@ -2001,6 +2012,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(3, ((JArray)o[2]).Count);
             Assert.AreEqual(0, ((JObject)o[3]).Count);
         }
+
 #endif
 
         [Test]
@@ -2271,6 +2283,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
         }
+
 #endif
 
 #if !DNXCORE50 || NETSTANDARD2_0
@@ -2293,6 +2306,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(deserializeTest2["testkey"], "");
         }
+
 #endif
 
         [Test]
@@ -2325,6 +2339,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual("replaced!", result.Person["groups"]);
         }
+
 #endif
 
         [Test]
@@ -2350,6 +2365,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             >(json);
             Assert.AreEqual(2, values.Count);
         }
+
 #endif
 
         [Test]
@@ -2723,6 +2739,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public string OrganizationName { get; private set; }
     }
+
 #endif
 
     public class ReadOnlyCollectionWithArrayArgument<T> : IList<T>
@@ -2771,6 +2788,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public int Count { get; }
         public bool IsReadOnly { get; }
+
         public int IndexOf(T item)
         {
             throw new NotImplementedException();
@@ -2818,6 +2836,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             return GetEnumerator();
         }
     }
+
 #endif
 
     public class Array2D

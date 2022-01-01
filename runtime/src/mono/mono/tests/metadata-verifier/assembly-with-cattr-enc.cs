@@ -14,6 +14,7 @@ public class Target
 public sealed class GenericAttribute : Attribute
 {
     public GenericAttribute() { }
+
     public GenericAttribute(int x) { }
 }
 

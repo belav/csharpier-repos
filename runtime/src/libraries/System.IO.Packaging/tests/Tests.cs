@@ -5064,6 +5064,7 @@ namespace System.IO.Packaging.Tests
         {
             return new MockPackagePart(this, uri);
         }
+
         protected override PackagePart[] GetPartsCore()
         {
             throw new NotImplementedException();

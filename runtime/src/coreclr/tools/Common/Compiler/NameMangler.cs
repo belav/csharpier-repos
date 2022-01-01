@@ -21,6 +21,7 @@ namespace ILCompiler
         }
 
         public NodeMangler NodeMangler { get; private set; }
+
 #endif
 
         public abstract string CompilationUnitPrefix { get; set; }

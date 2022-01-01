@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 internal class HealthChecksBuilder : IHealthChecksBuilder

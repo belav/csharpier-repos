@@ -12,9 +12,11 @@ namespace System.Tests
     {
         // The following methods need to be implemented for the tests to run:
         protected abstract string InvariantToStringDouble(double d);
+
         protected abstract string InvariantToStringSingle(float f);
 
         protected abstract bool InvariantTryParseDouble(string s, out double result);
+
         protected abstract bool InvariantTryParseSingle(string s, out float result);
 
         /// <summary>

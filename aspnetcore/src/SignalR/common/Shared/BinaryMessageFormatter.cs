@@ -4,6 +4,7 @@
 using System;
 using System.Buffers;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal static class BinaryMessageFormatter

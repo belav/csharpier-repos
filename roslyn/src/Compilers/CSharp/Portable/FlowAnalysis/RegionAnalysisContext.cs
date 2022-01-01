@@ -19,13 +19,17 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         /// <summary> Compilation to use </summary>
         public readonly CSharpCompilation Compilation;
+
         /// <summary> Containing symbol if available, null otherwise </summary>
         public readonly Symbol Member;
+
         /// <summary> Bound node, not null </summary>
         public readonly BoundNode BoundNode;
+
         /// <summary> Region to be used </summary>
         public readonly BoundNode FirstInRegion,
             LastInRegion;
+
         /// <summary> True if the input was bad, such as no first and last nodes </summary>
         public readonly bool Failed;
 

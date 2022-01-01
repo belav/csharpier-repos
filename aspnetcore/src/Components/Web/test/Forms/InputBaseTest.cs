@@ -4,6 +4,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Components.Test.Helpers;
 
+
 namespace Microsoft.AspNetCore.Components.Forms;
 
 public class InputBaseTest

@@ -181,6 +181,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// during normal flow analysis, but is needed for DataFlowsOut region analysis.
         /// </summary>
         private readonly Dictionary<BoundLoopStatement, TLocalState> _loopHeadState;
+
         #endregion Region
 
         protected AbstractFlowPass(
@@ -262,6 +263,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             result.Append("}");
             return result.ToString();
         }
+
 #endif
 
         private void EnterRegionIfNeeded(BoundNode node)
@@ -414,6 +416,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             public TLocalState StateWhenFalse;
 #nullable enable
             public readonly LabelSymbol? Label;
+
 #nullable disable
 
             public PendingBranch(
@@ -925,6 +928,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             _labelsSeen.Free();
             _labelsSeen = oldPending.LabelsSeen;
         }
+
 #nullable disable
 
         #region visitors
@@ -1194,6 +1198,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return null;
         }
+
 #nullable disable
 
         public override BoundNode VisitInterpolatedString(BoundInterpolatedString node)
@@ -2765,6 +2770,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return true;
         }
+
 #nullable disable
 
         public override BoundNode VisitUnaryOperator(BoundUnaryOperator node)

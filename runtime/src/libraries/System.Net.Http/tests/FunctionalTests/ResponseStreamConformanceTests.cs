@@ -189,6 +189,7 @@ namespace System.Net.Http.Functional.Tests
 
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(null);
+
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(null);
 

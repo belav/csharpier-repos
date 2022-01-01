@@ -78,6 +78,7 @@ namespace System.Drawing.Internal
 #if GDI_FINALIZATION_WATCH
         private string AllocationSite = DbgUtil.StackTrace;
         private string DeAllocationSite = "";
+
 #endif
 
         /// <summary>

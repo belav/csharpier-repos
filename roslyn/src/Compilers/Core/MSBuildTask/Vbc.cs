@@ -232,6 +232,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             set { _store[nameof(PdbFile)] = value; }
             get { return (string?)_store[nameof(PdbFile)]; }
         }
+
         #endregion
 
         #region Tool Members

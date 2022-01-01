@@ -18,6 +18,7 @@ public class Tests
         public bool b;
         public bool c;
         public string d;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string d2;
     }
@@ -1438,12 +1439,16 @@ public class Tests
         public Int32 dr;
         public Int32 sh;
         public Int32 ra;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public Int32[] angle;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public Int32[] width;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public Int32[] edge;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3 * 1024)]
         public byte[] echo;
     }
@@ -1467,6 +1472,7 @@ public class Tests
     class Worker
     {
         volatile bool stop = false;
+
         public void Stop()
         {
             stop = true;
@@ -1516,6 +1522,7 @@ public class Tests
         t.Join();
         return 43;
     }
+
     /*
 	 * Appdomain save/restore
 	 */

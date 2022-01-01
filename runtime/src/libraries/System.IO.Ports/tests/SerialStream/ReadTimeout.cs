@@ -393,6 +393,7 @@ namespace System.IO.Ports.Tests
                 com2.Write(xmitBuffer, 0, xmitBuffer.Length);
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

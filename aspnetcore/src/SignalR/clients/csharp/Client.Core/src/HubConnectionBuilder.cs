@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client;
 
 /// <summary>

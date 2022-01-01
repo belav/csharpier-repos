@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 /// <summary>

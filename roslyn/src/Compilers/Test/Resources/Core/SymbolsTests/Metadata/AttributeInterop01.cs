@@ -28,10 +28,13 @@ namespace Interop
     {
         [AllowReversePInvokeCalls()]
         void DoSomething();
+
         [ComRegisterFunction()]
         void Register(object o);
+
         [ComUnregisterFunction()]
         void UnRegister();
+
         [TypeLibFunc(TypeLibFuncFlags.FDefaultBind)]
         void LibFunc();
     }
@@ -67,11 +70,14 @@ namespace Interop
     {
         [FieldOffset(0)]
         public sbyte field01;
+
         [FieldOffset(8), TypeLibVar(TypeLibVarFlags.FReadOnly)]
         public byte field02;
+
         [FieldOffset(16), MarshalAs(UnmanagedType.I2)]
         [TypeLibVar(TypeLibVarFlags.FDisplayBind)]
         public short field03;
+
         [
             FieldOffset(24),
             MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.I4, SizeConst = 9)
@@ -153,10 +159,13 @@ namespace Interop
     {
         [MarshalAs(UnmanagedType.BStr)]
         public string s1;
+
         [MarshalAs(UnmanagedType.LPStr)]
         public string s2;
+
         [MarshalAs(UnmanagedType.LPWStr), TypeLibVar(TypeLibVarFlags.FDisplayBind)]
         public object o1;
+
         [MarshalAs(UnmanagedType.Currency), TypeLibVar(TypeLibVarFlags.FReadOnly)]
         public object o2;
     }

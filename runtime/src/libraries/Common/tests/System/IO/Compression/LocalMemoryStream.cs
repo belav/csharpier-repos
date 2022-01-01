@@ -30,6 +30,7 @@ public class LocalMemoryStream : MemoryStream
     {
         _canRead = CanRead;
     }
+
     private bool? _canRead = null;
     public override bool CanRead => _canRead ?? base.CanRead;
 
@@ -37,6 +38,7 @@ public class LocalMemoryStream : MemoryStream
     {
         _canWrite = CanWrite;
     }
+
     private bool? _canWrite = null;
     public override bool CanWrite => _canWrite ?? base.CanWrite;
 
@@ -44,6 +46,7 @@ public class LocalMemoryStream : MemoryStream
     {
         _canSeek = CanSeek;
     }
+
     private bool? _canSeek = null;
     public override bool CanSeek => _canSeek ?? base.CanSeek;
 }

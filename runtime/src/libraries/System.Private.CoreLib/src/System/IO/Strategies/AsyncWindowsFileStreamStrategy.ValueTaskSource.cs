@@ -27,6 +27,7 @@ namespace System.IO.Strategies
             private long _result; // Using long since this needs to be used in Interlocked APIs
 #if DEBUG
             private bool _cancellationHasBeenRegistered;
+
 #endif
 
             internal ValueTaskSource(AsyncWindowsFileStreamStrategy strategy)
@@ -50,13 +51,16 @@ namespace System.IO.Strategies
             }
 
             public ValueTaskSourceStatus GetStatus(short token) => _source.GetStatus(token);
+
             public void OnCompleted(
                 Action<object?> continuation,
                 object? state,
                 short token,
                 ValueTaskSourceOnCompletedFlags flags
             ) => _source.OnCompleted(continuation, state, token, flags);
+
             void IValueTaskSource.GetResult(short token) => GetResultAndRelease(token);
+
             int IValueTaskSource<int>.GetResult(short token) => GetResultAndRelease(token);
 
             private int GetResultAndRelease(short token)

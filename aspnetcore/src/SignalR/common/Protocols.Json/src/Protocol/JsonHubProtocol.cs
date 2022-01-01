@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
 /// <summary>

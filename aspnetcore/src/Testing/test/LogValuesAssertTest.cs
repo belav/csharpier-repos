@@ -6,6 +6,7 @@ using System.Linq;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
 public class LogValuesAssertTest

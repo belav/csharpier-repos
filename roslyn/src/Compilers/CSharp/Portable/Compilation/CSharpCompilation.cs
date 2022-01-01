@@ -72,6 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableArray<AssemblySymbol> _lazyClsComplianceDependencies;
 
         private Conversions? _conversions;
+
         /// <summary>
         /// A conversions object that ignores nullability.
         /// </summary>
@@ -4919,6 +4920,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 cancellationToken
             ).GetSymbolsWithName();
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         #endregion
@@ -5154,6 +5156,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             protected abstract bool Matches(string name);
+
             protected abstract bool ShouldCheckTypeForMembers(MergedTypeDeclaration current);
 
             public IEnumerable<Symbol> GetSymbolsWithName()

@@ -13,8 +13,10 @@ using Microsoft.CodeAnalysis.CodeStyle;
 
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
+
 #else
 using Microsoft.CodeAnalysis.Options;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.AddImports
@@ -33,23 +35,34 @@ namespace Microsoft.CodeAnalysis.AddImports
         protected AbstractAddImportsService() { }
 
         protected abstract SyntaxNode? GetAlias(TUsingOrAliasSyntax usingOrAlias);
+
         protected abstract ImmutableArray<SyntaxNode> GetGlobalImports(
             Compilation compilation,
             SyntaxGenerator generator
         );
+
         protected abstract SyntaxList<TUsingOrAliasSyntax> GetUsingsAndAliases(SyntaxNode node);
+
         protected abstract SyntaxList<TExternSyntax> GetExterns(SyntaxNode node);
+
         protected abstract bool IsStaticUsing(TUsingOrAliasSyntax usingOrAlias);
+
         protected abstract bool PlaceImportsInsideNamespaces(OptionSet options);
 
         private bool IsSimpleUsing(TUsingOrAliasSyntax usingOrAlias) =>
             !IsAlias(usingOrAlias) && !IsStaticUsing(usingOrAlias);
+
         private bool IsAlias(TUsingOrAliasSyntax usingOrAlias) => GetAlias(usingOrAlias) != null;
+
         private bool HasAliases(SyntaxNode node) => GetUsingsAndAliases(node).Any(IsAlias);
+
         private bool HasUsings(SyntaxNode node) => GetUsingsAndAliases(node).Any(IsSimpleUsing);
+
         private bool HasStaticUsings(SyntaxNode node) =>
             GetUsingsAndAliases(node).Any(IsStaticUsing);
+
         private bool HasExterns(SyntaxNode node) => GetExterns(node).Any();
+
         private bool HasAnyImports(SyntaxNode node) =>
             GetUsingsAndAliases(node).Any() || GetExterns(node).Any();
 

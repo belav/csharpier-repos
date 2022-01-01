@@ -185,6 +185,7 @@ namespace System.IO.Compression.Tests
                 ArraysEqual<byte>(e1readnormal, e1selfInterleaved2, e1readnormal.Length);
             }
         }
+
         [Fact]
         public static async Task ReadModeInvalidOpsTest()
         {

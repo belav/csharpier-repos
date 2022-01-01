@@ -3016,6 +3016,7 @@ namespace System.Security.AccessControl
         }
 
         internal virtual void OnAclModificationTried() { }
+
         #endregion
 
         #region Public Properties
@@ -3482,6 +3483,7 @@ namespace System.Security.AccessControl
             null
         );
         private bool everyOneFullAccessForNullDacl;
+
         #endregion
 
         #region Constructors

@@ -20,21 +20,26 @@ public class Test_int
 {
     [DllImport("libtest", EntryPoint = "mono_return_int1")]
     public static extern int1 mono_return_int1(int1 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct int1
     {
         public int f1;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_int2")]
     public static extern int2 mono_return_int2(int2 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct int2
     {
         public int f1,
             f2;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_int3")]
     public static extern int3 mono_return_int3(int3 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct int3
     {
@@ -42,8 +47,10 @@ public class Test_int
             f2,
             f3;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_int4")]
     public static extern int4 mono_return_int4(int4 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct int4
     {
@@ -52,10 +59,12 @@ public class Test_int
             f3,
             f4;
     }
+
     // This structure is 1 element too large to use the special return
     //  rules.
     [DllImport("libtest", EntryPoint = "mono_return_int5")]
     public static extern int5 mono_return_int5(int5 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct int5
     {
@@ -72,12 +81,15 @@ public class Test_int
     {
         public int f1;
     };
+
     public struct int4_nested2
     {
         public int f4;
     };
+
     [DllImport("libtest", EntryPoint = "mono_return_int4_nested")]
     public static extern int4_nested mono_return_int4_nested(int4_nested s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct int4_nested
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
 namespace AutoMapper
 {
     /// <summary>
@@ -152,6 +153,7 @@ namespace AutoMapper
         /// </summary>
         List<ValueTransformerConfiguration> ValueTransformers { get; }
     }
+
     /// <summary>
     /// Member list to check for configuration validation
     /// </summary>

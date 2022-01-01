@@ -51,6 +51,7 @@ namespace System.Composition.UnitTests
         }
 
         private interface IFirst<T> { }
+
         private interface ISecond<T> { }
 
         [Export(typeof(IFirst<>)), Export(typeof(ISecond<>))]

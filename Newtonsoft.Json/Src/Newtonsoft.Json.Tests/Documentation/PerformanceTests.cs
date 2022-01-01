@@ -62,6 +62,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         public string Name { get; set; }
         public IList<string> Likes { get; private set; }
     }
+
     #endregion
 
     #region JsonConverterContractResolver
@@ -83,6 +84,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             return contract;
         }
     }
+
     #endregion
 
     public class PersonConverter : JsonConverter
@@ -246,6 +248,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             return sw.ToString();
         }
+
         #endregion
 
         public static Person ToPerson(this string s)

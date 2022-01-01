@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class HubConnectionStartBenchmark

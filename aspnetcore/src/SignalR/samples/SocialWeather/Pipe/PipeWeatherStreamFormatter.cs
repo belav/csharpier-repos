@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SocialWeather.Pipe;
 
 public class PipeWeatherStreamFormatter : IStreamFormatter<WeatherReport>

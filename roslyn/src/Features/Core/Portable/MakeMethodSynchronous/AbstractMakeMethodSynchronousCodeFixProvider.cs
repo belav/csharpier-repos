@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
         public static readonly string EquivalenceKey = FeaturesResources.Make_method_synchronous;
 
         protected abstract bool IsAsyncSupportingFunctionSyntax(SyntaxNode node);
+
         protected abstract SyntaxNode RemoveAsyncTokenAndFixReturnType(
             IMethodSymbol methodSymbolOpt,
             SyntaxNode node,

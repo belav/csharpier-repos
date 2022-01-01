@@ -4,6 +4,7 @@
 using System.Globalization;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.Extensions.Caching.SqlServer;
 
 internal class SqlQueries

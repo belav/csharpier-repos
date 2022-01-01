@@ -12,6 +12,7 @@ using Cci = Microsoft.Cci;
 
 #if !DEBUG
 using TypeParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.TypeParameterSymbol;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

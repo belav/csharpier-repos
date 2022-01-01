@@ -4,6 +4,7 @@
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
 internal class TestSecurityTokenValidator : ISecurityTokenValidator

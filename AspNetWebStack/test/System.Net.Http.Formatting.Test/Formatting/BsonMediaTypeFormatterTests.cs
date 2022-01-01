@@ -229,6 +229,7 @@ namespace System.Net.Http.Formatting
                 roundTripTestValue: 256
             );
         }
+
 #endif
 
         [Theory]
@@ -655,6 +656,7 @@ namespace System.Net.Http.Formatting
             TestDataHolder<object> readDataHolder = (TestDataHolder<object>)readObj;
             Assert.Null(readDataHolder.V1);
         }
+
 #endif
 
         [Fact]
@@ -694,6 +696,7 @@ namespace System.Net.Http.Formatting
             // Only BSON case where DBNull.Value round-trips
             Assert.Equal(testData, readObj);
         }
+
 #endif
 
         private class TestBsonMediaTypeFormatter : BsonMediaTypeFormatter

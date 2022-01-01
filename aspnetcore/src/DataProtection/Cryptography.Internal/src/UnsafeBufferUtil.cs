@@ -7,6 +7,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Threading;
 using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
+
 namespace Microsoft.AspNetCore.Cryptography;
 
 internal static unsafe class UnsafeBufferUtil

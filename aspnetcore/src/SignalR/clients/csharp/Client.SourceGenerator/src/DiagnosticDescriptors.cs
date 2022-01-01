@@ -3,6 +3,7 @@
 
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.SourceGenerator;
 
 internal static class DiagnosticDescriptors

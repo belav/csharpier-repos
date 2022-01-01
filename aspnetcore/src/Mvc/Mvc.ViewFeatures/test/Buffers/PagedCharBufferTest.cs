@@ -5,6 +5,7 @@ using System.Linq;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
 public class PagedCharBufferTest

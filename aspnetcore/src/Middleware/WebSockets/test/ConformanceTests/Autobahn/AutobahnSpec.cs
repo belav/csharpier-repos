@@ -7,6 +7,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
 namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn;
 
 public class AutobahnSpec

@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 internal static class SigningKeysLoader

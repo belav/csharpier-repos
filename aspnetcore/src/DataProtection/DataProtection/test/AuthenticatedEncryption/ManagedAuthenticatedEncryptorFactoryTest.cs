@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 public class ManagedAuthenticatedEncryptorFactoryTest

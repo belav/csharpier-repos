@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 
 public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest

@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
+
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
 public class TagHelpersInCodeBlocksAnalyzerTest

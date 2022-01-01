@@ -712,6 +712,7 @@ namespace System.Runtime.InteropServices
 
             return (IntPtr)(-1);
         }
+
 #endif
 
         /// <summary>
@@ -951,6 +952,7 @@ namespace System.Runtime.InteropServices
                     return new COMException("", errorCode);
             }
         }
+
 #endif
 
         /// <summary>

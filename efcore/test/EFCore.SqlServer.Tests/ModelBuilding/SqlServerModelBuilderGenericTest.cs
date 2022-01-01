@@ -1579,6 +1579,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             );
 
             public abstract TestTemporalPeriodPropertyBuilder HasPeriodStart(string propertyName);
+
             public abstract TestTemporalPeriodPropertyBuilder HasPeriodEnd(string propertyName);
         }
 

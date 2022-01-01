@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class RuleMatchSegment : PatternSegment

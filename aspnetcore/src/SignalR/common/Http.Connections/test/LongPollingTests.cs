@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
 public class LongPollingTests : VerifiableLoggedTest

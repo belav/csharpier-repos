@@ -46,6 +46,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
 #pragma warning disable CS0618
         public LibuvTransportOptions TransportOptions => TransportContext.Options;
+
 #pragma warning restore CS0618
 
         public EndPoint EndPoint { get; set; }

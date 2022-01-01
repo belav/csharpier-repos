@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
+
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 
 /// <summary>

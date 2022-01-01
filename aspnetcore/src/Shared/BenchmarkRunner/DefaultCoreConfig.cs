@@ -12,6 +12,7 @@ using BenchmarkDotNet.Toolchains.CsProj;
 using BenchmarkDotNet.Toolchains.DotNetCli;
 using BenchmarkDotNet.Validators;
 
+
 namespace BenchmarkDotNet.Attributes;
 
 internal class DefaultCoreConfig : ManualConfig

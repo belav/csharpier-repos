@@ -41,8 +41,10 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
+
 #endif
 
 namespace Newtonsoft.Json.Serialization
@@ -1442,6 +1444,7 @@ namespace Newtonsoft.Json.Serialization
             _serializeStack.RemoveAt(_serializeStack.Count - 1);
             OnSerialized(writer, contract, value);
         }
+
 #endif
 
 #if HAVE_DYNAMIC
@@ -1593,6 +1596,7 @@ namespace Newtonsoft.Json.Serialization
             _serializeStack.RemoveAt(_serializeStack.Count - 1);
             OnSerialized(writer, contract, value);
         }
+
 #endif
 
         private bool ShouldWriteDynamicProperty(object? memberValue)

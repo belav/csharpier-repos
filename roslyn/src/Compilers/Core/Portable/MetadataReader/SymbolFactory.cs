@@ -30,6 +30,7 @@ namespace Microsoft.CodeAnalysis
             TypeSymbol elementType,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
         );
+
         internal abstract TypeSymbol GetMDArrayTypeSymbol(
             ModuleSymbol moduleSymbol,
             int rank,
@@ -66,15 +67,19 @@ namespace Microsoft.CodeAnalysis
             TypeSymbol type,
             ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
         );
+
         internal abstract TypeSymbol MakeFunctionPointerTypeSymbol(
             Cci.CallingConvention callingConvention,
             ImmutableArray<ParamInfo<TypeSymbol>> returnAndParamTypes
         );
+
         internal abstract TypeSymbol GetSpecialType(
             ModuleSymbol moduleSymbol,
             SpecialType specialType
         );
+
         internal abstract TypeSymbol GetSystemTypeSymbol(ModuleSymbol moduleSymbol);
+
         internal abstract TypeSymbol GetEnumUnderlyingType(
             ModuleSymbol moduleSymbol,
             TypeSymbol type

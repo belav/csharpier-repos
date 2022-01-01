@@ -107,6 +107,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         }
 
         public abstract int GetText(out VSTREETEXTOPTIONS tto, out string ppszText);
+
         public abstract int GetTipText(out VSTREETOOLTIPTYPE eTipType, out string ppszText);
 
         public virtual int CanRecurse
@@ -120,6 +121,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         }
 
         public abstract int OnRequestSource(object pIUnknownTextView);
+
         public abstract void UpdatePreview();
     }
 }

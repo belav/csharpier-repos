@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
 public class BinaryBlobTest

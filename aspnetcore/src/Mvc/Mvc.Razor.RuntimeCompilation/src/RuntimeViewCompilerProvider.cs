@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal sealed class RuntimeViewCompilerProvider : IViewCompilerProvider

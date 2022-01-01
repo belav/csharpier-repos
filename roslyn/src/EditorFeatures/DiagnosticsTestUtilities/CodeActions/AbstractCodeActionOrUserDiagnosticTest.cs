@@ -36,8 +36,10 @@ using Xunit.Abstractions;
 #if CODE_STYLE
 using System.Diagnostics;
 using System.IO;
+
 #else
 using Microsoft.CodeAnalysis.Editor.UnitTests.Extensions;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
@@ -213,6 +215,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
 #pragma warning disable IDE0052 // Remove unread private members (unused when CODE_STYLE is set)
         private readonly ITestOutputHelper _logger;
+
 #pragma warning restore
 
         protected AbstractCodeActionOrUserDiagnosticTest(ITestOutputHelper logger = null)
@@ -224,8 +227,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             @"# auto-generated .editorconfig for code style options";
 
         protected internal abstract string GetLanguage();
+
         protected ParenthesesOptionsProvider ParenthesesOptionsProvider =>
             new ParenthesesOptionsProvider(this.GetLanguage());
+
         protected abstract ParseOptions GetScriptOptions();
 
         private protected virtual IDocumentServiceProvider GetDocumentServiceProvider() => null;
@@ -386,6 +391,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 return textBuilder.ToString();
             }
         }
+
 #endif
 
         private static TestParameters WithRegularOptions(TestParameters parameters) =>

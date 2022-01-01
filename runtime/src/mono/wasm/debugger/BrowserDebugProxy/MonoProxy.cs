@@ -657,6 +657,7 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             return false;
         }
+
         private async Task<bool> CallOnFunction(MessageId id, JObject args, CancellationToken token)
         {
             if (!DotnetObjectId.TryParse(args["objectId"], out DotnetObjectId objectId))
@@ -1089,6 +1090,7 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             return true;
         }
+
         private async Task<bool> OnReceiveDebuggerAgentEvent(
             SessionId sessionId,
             JObject args,

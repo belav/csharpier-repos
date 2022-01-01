@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Certificates.Generation;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.AspNetCore.DeveloperCertificates.Tools;
 
 internal class Program

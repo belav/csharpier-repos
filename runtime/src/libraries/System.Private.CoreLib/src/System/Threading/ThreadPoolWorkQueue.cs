@@ -29,6 +29,7 @@ namespace System.Threading
         {
 #pragma warning disable CA1825 // avoid the extra generic instantation for Array.Empty<T>(); this is the only place we'll ever create this array
             private static volatile WorkStealingQueue[] _queues = new WorkStealingQueue[0];
+
 #pragma warning restore CA1825
 
             public static WorkStealingQueue[] Queues => _queues;
@@ -101,8 +102,10 @@ namespace System.Threading
 #if DEBUG
             // in debug builds, start at the end so we exercise the index reset logic.
             private const int START_INDEX = int.MaxValue;
+
 #else
             private const int START_INDEX = 0;
+
 #endif
 
             private volatile int m_headIndex = START_INDEX;
@@ -872,6 +875,7 @@ namespace System.Threading
             Interlocked.MemoryBarrier(); // ensure that an old cached value is not read below
             Debug.Assert(executed != 0, "A QueueUserWorkItemCallback was never called!");
         }
+
 #endif
 
         public virtual void Execute()

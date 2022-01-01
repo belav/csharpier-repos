@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
 /// <summary>

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Rewrite.PatternSegments;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
 public class InputParserTests

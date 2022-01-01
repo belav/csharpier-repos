@@ -5,6 +5,7 @@ using Microsoft.DotNet.OpenApi.Tests;
 using Microsoft.Extensions.Tools.Internal;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.DotNet.OpenApi.Remove.Tests;
 
 public class OpenApiRemoveTests : OpenApiTestBase

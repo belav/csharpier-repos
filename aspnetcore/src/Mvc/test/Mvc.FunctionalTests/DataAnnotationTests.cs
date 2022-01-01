@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using RazorWebSite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class DataAnnotationTests : IClassFixture<MvcTestFixture<StartupDataAnnotations>>

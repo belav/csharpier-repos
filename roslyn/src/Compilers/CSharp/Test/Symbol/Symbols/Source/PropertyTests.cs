@@ -3455,6 +3455,7 @@ unsafe class Test
                         .WithLocation(4, 30)
                 );
         }
+
         [Fact]
         public void RefPropertyWithoutGetter()
         {

@@ -99,6 +99,7 @@ public struct S : I
     {
         throw new Exception("this just exists to stop a compiler warning, don't call it");
     }
+
     public override int GetHashCode()
     {
         throw new Exception("this just exists to stop a compiler warning, don't call it");
@@ -170,6 +171,7 @@ public class RefInst
         m = "six";
         return i;
     }
+
 #endregion
 
 #region Non-overloaded methods to allow for (easier) explicit method selection
@@ -222,6 +224,7 @@ public class RefInst
         m = "iMi";
         return i;
     }
+
 #endregion
 
     public S SMi(int i, out string m)
@@ -312,6 +315,7 @@ public class RefStat
         m = "six";
         return i;
     }
+
 #endregion
 
 #region Non-overloaded methods to allow for (easier) explicit method selection
@@ -364,6 +368,7 @@ public class RefStat
         m = "iMi";
         return i;
     }
+
 #endregion
 
     public static S SMi(int i, out string m)

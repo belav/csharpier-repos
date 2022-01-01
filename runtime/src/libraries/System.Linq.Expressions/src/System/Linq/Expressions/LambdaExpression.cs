@@ -168,11 +168,13 @@ namespace System.Linq.Expressions
 
             Compiler.LambdaCompiler.Compile(this, method);
         }
+
 #endif
 
 
 #if FEATURE_COMPILE
         internal abstract LambdaExpression Accept(Compiler.StackSpiller spiller);
+
 #endif
 
         /// <summary>
@@ -331,6 +333,7 @@ namespace System.Linq.Expressions
 
             return new FullExpression<TDelegate>(body, name, tailCall, parameters);
         }
+
 #endif
 
         /// <summary>
@@ -380,6 +383,7 @@ namespace System.Linq.Expressions
             return new FullExpression<TDelegate>(body, name, tailCall, parameters);
         }
     }
+
 #endif
 
     internal sealed class Expression0<TDelegate> : Expression<TDelegate>

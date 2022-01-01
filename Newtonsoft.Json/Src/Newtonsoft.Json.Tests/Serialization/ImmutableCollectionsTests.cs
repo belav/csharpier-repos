@@ -101,6 +101,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("Teemo", champions[1]);
             Assert.AreEqual("Katarina", champions[2]);
         }
+
         #endregion
 
         #region Array
@@ -149,6 +150,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "This operation cannot be performed on a default instance of ImmutableArray<T>.  Consider initializing the array, or checking the ImmutableArray<T>.IsDefault property."
             );
         }
+
         #endregion
 
         #region Queue
@@ -207,6 +209,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("II", l.ElementAt(1));
             Assert.AreEqual("3", l.ElementAt(2));
         }
+
         #endregion
 
         #region Stack
@@ -265,6 +268,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("II", l.ElementAt(1));
             Assert.AreEqual("One", l.ElementAt(2));
         }
+
         #endregion
 
         #region HashSet
@@ -323,6 +327,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.IsTrue(l is ImmutableHashSet<string>);
         }
+
         #endregion
 
         #region SortedSet
@@ -363,6 +368,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsTrue(l.Contains("II"));
             Assert.IsTrue(l.Contains("One"));
         }
+
         #endregion
 
         #region Dictionary
@@ -422,6 +428,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.IsTrue(l is ImmutableDictionary<int, string>);
         }
+
         #endregion
 
         #region SortedDictionary

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class TagMatchingRuleDescriptorComparer : IEqualityComparer<TagMatchingRuleDescriptor>

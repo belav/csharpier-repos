@@ -30,6 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.KeywordHighlighting
         internal abstract Type GetHighlighterType();
 
         protected abstract IEnumerable<ParseOptions> GetOptions();
+
         protected abstract TestWorkspace CreateWorkspaceFromFile(string code, ParseOptions options);
 
         protected async Task TestAsync(string code)

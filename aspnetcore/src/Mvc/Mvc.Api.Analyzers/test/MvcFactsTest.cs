@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Analyzers;
 using Microsoft.CodeAnalysis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class MvcFactsTest
@@ -301,6 +302,7 @@ public class MvcFactsTest
         var type = compilation.GetSpecialType(SpecialType.System_IDisposable);
         return (IMethodSymbol)type.GetMembers(nameof(IDisposable.Dispose)).First();
     }
+
     #endregion
 
 

@@ -13,6 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization
     public abstract class InitializationTests
     {
         protected abstract AdventureWorksContextBase CreateContext();
+
         protected abstract ConventionSet CreateConventionSet();
 
         [Benchmark]

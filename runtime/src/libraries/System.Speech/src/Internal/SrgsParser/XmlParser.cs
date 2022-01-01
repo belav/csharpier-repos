@@ -286,6 +286,7 @@ namespace System.Speech.Internal.SrgsParser
             internal string _name;
             internal string _value;
         }
+
         #endregion
 
         #region Private Methods
@@ -1764,6 +1765,7 @@ namespace System.Speech.Internal.SrgsParser
             reader.Read(); // Move to next sibling
             return sb.ToString();
         }
+
         private static void ParsePropertyTag(string sTag, out string name, out object value)
         {
             // Default value

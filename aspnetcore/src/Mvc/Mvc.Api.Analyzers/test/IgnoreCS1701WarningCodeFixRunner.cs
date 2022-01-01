@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Analyzer.Testing;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class IgnoreCS1701WarningCodeFixRunner : CodeFixRunner

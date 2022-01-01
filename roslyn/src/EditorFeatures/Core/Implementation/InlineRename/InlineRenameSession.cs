@@ -198,6 +198,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 #pragma warning disable IDE0052 // Remove unread private members
             private readonly Document _document;
             private readonly SourceText _text;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
             public NullTextBufferException(Document document, SourceText text)

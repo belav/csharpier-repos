@@ -52,10 +52,15 @@ namespace System.Collections.Tests
         // common interface. To enable high code reuse, delegates are used to defer to those methods for
         // checking validity.
         protected abstract int Count(IEnumerable<T> enumerable);
+
         protected abstract void Add(IEnumerable<T> enumerable, T value);
+
         protected abstract void Clear(IEnumerable<T> enumerable);
+
         protected abstract bool Contains(IEnumerable<T> enumerable, T value);
+
         protected abstract void CopyTo(IEnumerable<T> enumerable, T[] array, int index);
+
         protected abstract bool Remove(IEnumerable<T> enumerable);
 
         #endregion
@@ -110,6 +115,7 @@ namespace System.Collections.Tests
                 };
             }
         }
+
         #endregion
 
         #region Count

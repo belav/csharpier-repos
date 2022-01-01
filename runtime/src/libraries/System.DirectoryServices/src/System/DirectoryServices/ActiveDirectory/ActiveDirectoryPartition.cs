@@ -18,6 +18,7 @@ namespace System.DirectoryServices.ActiveDirectory
             this.context = context;
             this.partitionName = name;
         }
+
         #endregion constructors
 
         #region IDisposable
@@ -45,6 +46,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 _disposed = true;
             }
         }
+
         #endregion IDisposable
 
         #region public methods
@@ -64,6 +66,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 return partitionName;
             }
         }
+
         #endregion public properties
 
         #region private methods

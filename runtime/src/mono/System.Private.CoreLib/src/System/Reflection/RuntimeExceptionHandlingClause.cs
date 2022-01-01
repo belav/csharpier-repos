@@ -16,6 +16,7 @@ namespace System.Reflection
         internal int try_length;
         internal int handler_offset;
         internal int handler_length;
+
         #endregion
 
         public override ExceptionHandlingClauseOptions Flags => flags;

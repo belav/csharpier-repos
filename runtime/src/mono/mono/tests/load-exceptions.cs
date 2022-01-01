@@ -126,6 +126,7 @@ public class Tests : LoadMissing
     {
         return check_type_load(new TestDel(missing_external_type_reference_on_parameter));
     }
+
     public static int test_0_initobj()
     {
         return check_type_load(new TestDel(missing_initobj));

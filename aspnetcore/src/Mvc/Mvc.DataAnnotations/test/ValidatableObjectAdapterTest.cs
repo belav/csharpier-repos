@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class ValidatableObjectAdapterTest

@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
+
 namespace ThrowingLibrary;
 
 // Throwing an exception in the current assembly always seems to populate the full stack

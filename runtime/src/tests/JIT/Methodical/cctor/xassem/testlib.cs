@@ -2,17 +2,21 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 namespace Precise
 {
     public class measure
     {
         public static int a = 0xCC;
     }
+
     public class test
     {
         public static byte b1 = 0xC;
         public byte b2 = 0xC;
+
         public static void f() { }
+
         public static void f(ref byte b)
         {
             return;

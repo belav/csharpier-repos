@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.E2ETest.Tests;
 using Microsoft.AspNetCore.E2ETesting;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
 public class ServerBindTest : BindTest

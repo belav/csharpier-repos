@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Features;
 
+
 namespace Microsoft.AspNetCore.TestHost;
 
 internal class UpgradeFeature : IHttpUpgradeFeature

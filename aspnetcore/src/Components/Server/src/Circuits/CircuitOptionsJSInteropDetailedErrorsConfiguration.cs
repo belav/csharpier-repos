@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Components.Server;
 
 internal class CircuitOptionsJSInteropDetailedErrorsConfiguration

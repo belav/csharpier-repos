@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal struct SyntaxList<TNode> : IEquatable<SyntaxList<TNode>> where TNode : GreenNode

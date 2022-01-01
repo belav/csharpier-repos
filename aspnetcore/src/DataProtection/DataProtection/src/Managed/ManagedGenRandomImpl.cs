@@ -4,6 +4,7 @@
 using System;
 using System.Security.Cryptography;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
 internal sealed unsafe class ManagedGenRandomImpl : IManagedGenRandom

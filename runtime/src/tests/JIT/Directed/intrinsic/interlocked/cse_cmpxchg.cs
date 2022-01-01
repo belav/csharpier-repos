@@ -5,10 +5,12 @@
 using System;
 using System.Threading;
 using System.Runtime.CompilerServices;
+
 internal class Foo
 {
     private static int s_taskIdCounter;
     private int _taskId = 0;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public int Function()
     {
@@ -19,6 +21,7 @@ internal class Foo
         }
         return _taskId;
     }
+
     public static int Main()
     {
         if (new Foo().Function() == 1)

@@ -67,8 +67,10 @@ namespace Microsoft.CodeAnalysis
     internal static class Environment
     {
         public static void FailFast(string message) => System.Environment.FailFast(message);
+
         public static void FailFast(string message, Exception exception) =>
             System.Environment.FailFast(exception.ToString());
+
         public static string NewLine => System.Environment.NewLine;
         public static int ProcessorCount => System.Environment.ProcessorCount;
     }

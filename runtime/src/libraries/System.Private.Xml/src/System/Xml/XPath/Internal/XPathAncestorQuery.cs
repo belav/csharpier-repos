@@ -20,6 +20,7 @@ namespace MS.Internal.Xml.XPath
         {
             _matchSelf = matchSelf;
         }
+
         private XPathAncestorQuery(XPathAncestorQuery other) : base(other)
         {
             _matchSelf = other._matchSelf;
@@ -67,6 +68,7 @@ namespace MS.Internal.Xml.XPath
         {
             return new XPathAncestorQuery(this);
         }
+
         public override int CurrentPosition
         {
             get { return outputBuffer.Count - count + 1; }

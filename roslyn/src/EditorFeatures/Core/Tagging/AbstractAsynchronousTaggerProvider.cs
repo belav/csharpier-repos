@@ -85,6 +85,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
 #if DEBUG
         public readonly string StackTrace;
+
 #endif
 
         protected AbstractAsynchronousTaggerProvider(

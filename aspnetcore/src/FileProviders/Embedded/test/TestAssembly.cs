@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
+
 namespace Microsoft.Extensions.FileProviders;
 
 internal class TestAssembly : Assembly

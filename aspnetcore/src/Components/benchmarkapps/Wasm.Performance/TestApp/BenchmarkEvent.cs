@@ -3,6 +3,7 @@
 
 using Microsoft.JSInterop;
 
+
 namespace Wasm.Performance.TestApp;
 
 public static class BenchmarkEvent

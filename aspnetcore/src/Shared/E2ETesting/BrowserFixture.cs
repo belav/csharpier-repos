@@ -18,6 +18,7 @@ using OpenQA.Selenium.Safari;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.E2ETesting;
 
 public class BrowserFixture : IAsyncLifetime

@@ -19,5 +19,6 @@ internal class ISect
     {
         return sect == null;
     }
+
     public readonly static ISect Null = null;
 }

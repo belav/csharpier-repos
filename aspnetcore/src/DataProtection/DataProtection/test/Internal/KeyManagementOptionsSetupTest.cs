@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Win32;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
 public class KeyManagementOptionsSetupTest

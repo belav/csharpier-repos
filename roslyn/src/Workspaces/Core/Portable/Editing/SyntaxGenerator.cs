@@ -43,9 +43,11 @@ namespace Microsoft.CodeAnalysis.Editing
         internal abstract SyntaxGeneratorInternal SyntaxGeneratorInternal { get; }
 
         internal abstract SyntaxTrivia Whitespace(string text);
+
         internal abstract SyntaxTrivia SingleLineComment(string text);
 
         internal abstract SyntaxToken CreateInterpolatedStringStartToken(bool isVerbatim);
+
         internal abstract SyntaxToken CreateInterpolatedStringEndToken();
 
         /// <summary>
@@ -1509,6 +1511,7 @@ namespace Microsoft.CodeAnalysis.Editing
 
             return newRoot;
         }
+
         #endregion
 
         #region Utility
@@ -1753,6 +1756,7 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode variableDeclarator,
             SyntaxNode initializer
         ) => SyntaxGeneratorInternal.WithInitializer(variableDeclarator, initializer);
+
         internal SyntaxNode EqualsValueClause(SyntaxToken operatorToken, SyntaxNode value) =>
             SyntaxGeneratorInternal.EqualsValueClause(operatorToken, value);
 
@@ -1951,17 +1955,22 @@ namespace Microsoft.CodeAnalysis.Editing
 
         internal SyntaxToken InterpolatedStringTextToken(string content, string value) =>
             SyntaxGeneratorInternal.InterpolatedStringTextToken(content, value);
+
         internal SyntaxNode InterpolatedStringText(SyntaxToken textToken) =>
             SyntaxGeneratorInternal.InterpolatedStringText(textToken);
+
         internal SyntaxNode Interpolation(SyntaxNode syntaxNode) =>
             SyntaxGeneratorInternal.Interpolation(syntaxNode);
+
         internal SyntaxNode InterpolatedStringExpression(
             SyntaxToken startToken,
             IEnumerable<SyntaxNode> content,
             SyntaxToken endToken
         ) => SyntaxGeneratorInternal.InterpolatedStringExpression(startToken, content, endToken);
+
         internal SyntaxNode InterpolationAlignmentClause(SyntaxNode alignment) =>
             SyntaxGeneratorInternal.InterpolationAlignmentClause(alignment);
+
         internal SyntaxNode InterpolationFormatClause(string format) =>
             SyntaxGeneratorInternal.InterpolationFormatClause(format);
 
@@ -1970,6 +1979,7 @@ namespace Microsoft.CodeAnalysis.Editing
         /// This is typically a null value for reference types or a zero-filled value for value types.
         /// </summary>
         public abstract SyntaxNode DefaultExpression(SyntaxNode type);
+
         public abstract SyntaxNode DefaultExpression(ITypeSymbol type);
 
         /// <summary>
@@ -2015,8 +2025,10 @@ namespace Microsoft.CodeAnalysis.Editing
         public abstract SyntaxNode IdentifierName(string identifier);
 
         internal abstract SyntaxNode IdentifierName(SyntaxToken identifier);
+
         internal SyntaxToken Identifier(string identifier) =>
             SyntaxGeneratorInternal.Identifier(identifier);
+
         internal abstract SyntaxNode NamedAnonymousObjectMemberDeclarator(
             SyntaxNode identifier,
             SyntaxNode expression
@@ -2230,6 +2242,7 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         public SyntaxNode TupleElementExpression(ITypeSymbol type, string name = null) =>
             TupleElementExpression(TypeExpression(type), name);
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         /// <summary>

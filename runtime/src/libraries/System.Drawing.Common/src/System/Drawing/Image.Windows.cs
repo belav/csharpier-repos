@@ -16,6 +16,7 @@ namespace System.Drawing
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
+
 #endif
 
         public static Image FromStream(

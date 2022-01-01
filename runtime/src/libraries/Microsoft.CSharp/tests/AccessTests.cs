@@ -105,6 +105,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             private protected int PrivateProtected;
 #pragma warning disable 414
             private int Private;
+
 #pragma warning restore 414
 
             public TypeWithFields()

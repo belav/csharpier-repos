@@ -22,6 +22,7 @@ namespace Tracing.Tests.Common
         public static Logger logger = new Logger();
         private TextWriter _log;
         private Stopwatch _sw;
+
         public Logger(TextWriter log = null)
         {
             _log = log ?? Console.Out;
@@ -87,7 +88,9 @@ namespace Tracing.Tests.Common
     public sealed class SentinelEventSource : EventSource
     {
         private SentinelEventSource() { }
+
         public static SentinelEventSource Log = new SentinelEventSource();
+
         public void SentinelEvent()
         {
             WriteEvent(1, "SentinelEvent");

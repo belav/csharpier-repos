@@ -178,6 +178,7 @@ namespace JIT.HardwareIntrinsics.X86
                 return (void*)(((ulong)buffer + expectedAlighment - 1) & ~(expectedAlighment - 1));
             }
         }
+
         private struct TestStruct
         {
             public Vector128<Int32> _fld0;
@@ -629,6 +630,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             ValidateResult(inArray0, inArray1, inArray2, outArray, method);
         }
+
         private void ValidateResult(
             Vector128<Int32> addend,
             Vector128<Byte> left,

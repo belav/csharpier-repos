@@ -24,6 +24,7 @@ namespace System.Xml.Xsl
             Debug.Assert(0x00 <= value && value <= 0x07);
             _value = value;
         }
+
         #endregion
 
         #region enum
@@ -90,6 +91,7 @@ namespace System.Xml.Xsl
         {
             get { return new XmlQueryCardinality(0x07); }
         }
+
         #endregion
 
         #region ==
@@ -137,6 +139,7 @@ namespace System.Xml.Xsl
         {
             return _value;
         }
+
         #endregion
 
         #region algebra
@@ -181,6 +184,7 @@ namespace System.Xml.Xsl
         {
             return (this.value & ~other.value) == 0;
         }
+
 #endif
 
         /// <summary>
@@ -288,6 +292,7 @@ namespace System.Xml.Xsl
                 ZeroOrMore
             }
         };
+
         #endregion
 
         #region Serialization

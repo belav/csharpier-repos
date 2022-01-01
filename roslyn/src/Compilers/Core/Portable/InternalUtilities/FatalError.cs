@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 #pragma warning disable IDE0052 // Remove unread private members - We want to hold onto last exception to make investigation easier
         private static Exception? s_reportedException;
         private static string? s_reportedExceptionMessage;
+
 #pragma warning restore IDE0052
 
         /// <summary>

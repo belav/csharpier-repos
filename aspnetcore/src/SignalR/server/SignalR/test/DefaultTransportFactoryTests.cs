@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class DefaultTransportFactoryTests

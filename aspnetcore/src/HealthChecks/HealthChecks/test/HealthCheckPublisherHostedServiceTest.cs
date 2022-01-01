@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
+
 #nullable enable
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -38,6 +39,7 @@ public class HealthCheckPublisherHostedServiceTest
             DefaultHealthCheckService.EventIds.HealthCheckEndName
         );
     }
+
     private static class HealthCheckPublisherEventIds
     {
         public static readonly EventId HealthCheckPublisherProcessingBegin = new EventId(

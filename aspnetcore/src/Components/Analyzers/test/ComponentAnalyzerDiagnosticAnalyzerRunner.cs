@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
 internal class ComponentAnalyzerDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class ClosedGenericMatcherTest

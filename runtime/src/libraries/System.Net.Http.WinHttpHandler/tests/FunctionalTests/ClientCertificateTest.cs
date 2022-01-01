@@ -125,6 +125,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 new Http2Options { ClientCertificateRequired = true }
             );
         }
+
 #endif
         [OuterLoop]
         [ConditionalFact(

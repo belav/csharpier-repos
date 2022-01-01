@@ -8,6 +8,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class HandshakeProtocolBenchmark

@@ -13,9 +13,11 @@
 
 using System.Runtime.InteropServices;
 using System;
+
 internal class DblArray
 {
     private static int s_LOH_GEN = 0;
+
     public static void f0()
     {
         double[] arr = new double[1000];

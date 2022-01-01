@@ -5,12 +5,14 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 
+
 namespace Microsoft.AspNetCore.Rewrite.UrlMatches;
 
 internal class IntegerMatch : UrlMatch
 {
     private readonly int _value;
     private readonly IntegerOperationType _operation;
+
     public IntegerMatch(int value, IntegerOperationType operation)
     {
         _value = value;

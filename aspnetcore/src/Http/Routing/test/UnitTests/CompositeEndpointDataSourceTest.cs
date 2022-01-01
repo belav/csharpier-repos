@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Routing.TestObjects;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 public class CompositeEndpointDataSourceTest
@@ -180,6 +181,7 @@ public class CompositeEndpointDataSourceTest
         }
 
         public override IChangeToken GetChangeToken() => _token;
+
         public override IReadOnlyList<Endpoint> Endpoints => Array.Empty<Endpoint>();
     }
 }

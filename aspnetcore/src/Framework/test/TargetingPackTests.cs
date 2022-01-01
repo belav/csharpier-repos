@@ -15,6 +15,7 @@ using NuGet.Versioning;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore;
 
 public class TargetingPackTests

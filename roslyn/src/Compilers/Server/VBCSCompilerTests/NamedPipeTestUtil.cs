@@ -10,6 +10,7 @@ using System.IO.Pipes;
 using System.Reflection;
 using System.Net.Sockets;
 using Roslyn.Test.Utilities;
+
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
     /// <summary>

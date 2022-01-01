@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.SymbolApiResponseMetadata
 using Microsoft.CodeAnalysis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class SymbolApiResponseMetadataProviderTest

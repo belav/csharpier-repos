@@ -13,6 +13,7 @@ namespace System.IO.Tests
         public static TheoryData ReservedDeviceNames = IOInputs
             .GetReservedDeviceNames()
             .ToTheoryData();
+
         #region Utilities
 
         public virtual DirectoryInfo Create(string path)
@@ -223,6 +224,7 @@ namespace System.IO.Tests
             Assert.Equal(path, result.FullName);
             Assert.True(Directory.Exists(result.FullName));
         }
+
         #endregion
 
         #region PlatformSpecific

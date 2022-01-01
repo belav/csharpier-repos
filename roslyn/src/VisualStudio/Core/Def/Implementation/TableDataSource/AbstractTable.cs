@@ -31,7 +31,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         protected Workspace Workspace { get; }
 
         protected abstract void AddTableSourceIfNecessary(Solution solution);
+
         protected abstract void RemoveTableSourceIfNecessary(Solution solution);
+
         protected abstract void ShutdownSource();
 
         protected void ConnectWorkspaceEvents() => Workspace.WorkspaceChanged += OnWorkspaceChanged;

@@ -58,6 +58,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
         protected abstract int CompilerErrorCodeDigitCount { get; }
         protected abstract ISyntaxFacts SyntaxFacts { get; }
         protected abstract ISemanticFacts SemanticFacts { get; }
+
         protected abstract (Assembly assembly, string typeName) GetCompilerDiagnosticAnalyzerInfo();
 
         private ImmutableHashSet<int> GetSupportedCompilerErrorCodes()

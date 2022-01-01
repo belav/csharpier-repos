@@ -6,6 +6,7 @@ using System;
 public struct GS1<T>
 {
     public T t;
+
     public GS1(T t)
     {
         this.t = t;
@@ -15,6 +16,7 @@ public struct GS1<T>
 public abstract class Base
 {
     public abstract T vMeth1<T>(T t);
+
     public abstract T vMeth2<T>(out T t);
 }
 

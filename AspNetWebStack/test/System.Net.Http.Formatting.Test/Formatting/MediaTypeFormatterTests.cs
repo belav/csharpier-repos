@@ -197,6 +197,7 @@ namespace System.Net.Http.Formatting
 
             Assert.True(standardMappings.SequenceEqual(formatter.MediaTypeMappings));
         }
+
 #endif
 
         [Fact]
@@ -428,6 +429,7 @@ namespace System.Net.Http.Formatting
         public struct TestStruct
         {
             private int I;
+
             public TestStruct(int i)
             {
                 I = i + 1;

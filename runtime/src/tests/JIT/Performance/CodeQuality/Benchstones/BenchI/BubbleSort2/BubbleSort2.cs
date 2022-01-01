@@ -12,9 +12,11 @@ namespace Benchstone.BenchI
 #if DEBUG
         public const int Iterations = 1;
         public const int Bound = 5 * Iterations;
+
 #else
         public const int Iterations = 15;
         public const int Bound = 500 * Iterations;
+
 #endif
 
         static void Inner(int[] x)

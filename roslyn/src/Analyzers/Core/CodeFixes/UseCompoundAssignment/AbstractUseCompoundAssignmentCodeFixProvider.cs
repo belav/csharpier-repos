@@ -46,13 +46,16 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         }
 
         protected abstract SyntaxToken Token(TSyntaxKind kind);
+
         protected abstract TAssignmentSyntax Assignment(
             TSyntaxKind assignmentOpKind,
             TExpressionSyntax left,
             SyntaxToken syntaxToken,
             TExpressionSyntax right
         );
+
         protected abstract TExpressionSyntax Increment(TExpressionSyntax left, bool postfix);
+
         protected abstract TExpressionSyntax Decrement(TExpressionSyntax left, bool postfix);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)

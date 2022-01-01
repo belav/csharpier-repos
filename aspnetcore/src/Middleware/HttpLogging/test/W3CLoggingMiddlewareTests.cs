@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 public class W3CLoggingMiddlewareTests

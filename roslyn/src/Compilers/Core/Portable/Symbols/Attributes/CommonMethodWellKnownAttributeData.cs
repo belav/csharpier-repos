@@ -136,6 +136,7 @@ namespace Microsoft.CodeAnalysis
                 return result;
             }
         }
+
         #endregion
 
         #region SpecialNameAttribute
@@ -154,6 +155,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region DynamicSecurityMethodAttribute
@@ -172,6 +174,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region SuppressUnmanagedCodeSecurityAttribute
@@ -190,6 +193,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region Security Attributes
@@ -229,6 +233,7 @@ namespace Microsoft.CodeAnalysis
                 return _lazySecurityAttributeData;
             }
         }
+
         #endregion
 
         #region ExcludeFromCodeCoverageAttribute

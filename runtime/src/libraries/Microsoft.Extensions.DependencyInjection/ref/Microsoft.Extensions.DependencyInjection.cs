@@ -10,15 +10,18 @@ namespace Microsoft.Extensions.DependencyInjection
         : Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<Microsoft.Extensions.DependencyInjection.IServiceCollection>
     {
         public DefaultServiceProviderFactory() { }
+
         public DefaultServiceProviderFactory(
             Microsoft.Extensions.DependencyInjection.ServiceProviderOptions options
         ) { }
+
         public Microsoft.Extensions.DependencyInjection.IServiceCollection CreateBuilder(
             Microsoft.Extensions.DependencyInjection.IServiceCollection services
         )
         {
             throw null;
         }
+
         public System.IServiceProvider CreateServiceProvider(
             Microsoft.Extensions.DependencyInjection.IServiceCollection containerBuilder
         )
@@ -26,6 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
             throw null;
         }
     }
+
     public static partial class ServiceCollectionContainerBuilderExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.ServiceProvider BuildServiceProvider(
@@ -34,6 +38,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.ServiceProvider BuildServiceProvider(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             Microsoft.Extensions.DependencyInjection.ServiceProviderOptions options
@@ -41,6 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.ServiceProvider BuildServiceProvider(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             bool validateScopes
@@ -49,25 +55,31 @@ namespace Microsoft.Extensions.DependencyInjection
             throw null;
         }
     }
+
     public sealed partial class ServiceProvider
         : System.IAsyncDisposable,
           System.IDisposable,
           System.IServiceProvider
     {
         internal ServiceProvider() { }
+
         public void Dispose() { }
+
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
+
         public object GetService(System.Type serviceType)
         {
             throw null;
         }
     }
+
     public partial class ServiceProviderOptions
     {
         public ServiceProviderOptions() { }
+
         public bool ValidateOnBuild
         {
             get { throw null; }

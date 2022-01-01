@@ -19,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
 public class MiddlewareTests

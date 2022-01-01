@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #if DEBUG
         private bool _sealed;
+
 #endif
 
         internal static QuickAttributeChecker Predefined

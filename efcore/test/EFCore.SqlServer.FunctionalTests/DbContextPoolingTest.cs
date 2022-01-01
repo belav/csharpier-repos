@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
+
 // ReSharper disable MethodHasAsyncOverload
 
 // ReSharper disable InconsistentNaming

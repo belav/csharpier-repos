@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cryptography;
 using Microsoft.AspNetCore.Cryptography.Cng;
 using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
+
 namespace Microsoft.AspNetCore.DataProtection.SP800_108;
 
 internal sealed unsafe class Win7SP800_108_CTR_HMACSHA512Provider

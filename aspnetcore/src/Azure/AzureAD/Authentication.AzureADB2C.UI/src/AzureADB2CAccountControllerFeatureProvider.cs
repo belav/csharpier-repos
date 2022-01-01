@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controllers.I
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 [Obsolete(

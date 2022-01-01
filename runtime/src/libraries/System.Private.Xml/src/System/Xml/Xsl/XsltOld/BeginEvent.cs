@@ -16,8 +16,10 @@ namespace System.Xml.Xsl.XsltOld
         private string _prefix;
         private readonly bool _empty;
         private readonly object? _htmlProps;
+
 #if DEBUG
         private bool _replaceNSAliasesDone;
+
 #endif
 
         public BeginEvent(Compiler compiler)

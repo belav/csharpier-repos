@@ -4,6 +4,7 @@
 using System;
 using System.Collections.ObjectModel;
 
+
 namespace Microsoft.AspNetCore.ResponseCompression;
 
 /// <summary>

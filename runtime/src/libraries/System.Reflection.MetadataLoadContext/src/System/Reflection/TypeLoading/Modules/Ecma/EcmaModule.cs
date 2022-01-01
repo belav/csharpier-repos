@@ -40,9 +40,11 @@ namespace System.Reflection.TypeLoading.Ecma
         }
 
         internal sealed override RoAssembly GetRoAssembly() => _assembly;
+
         internal EcmaAssembly GetEcmaAssembly() => _assembly;
 
         public sealed override bool IsResource() => false;
+
         public sealed override int MDStreamVersion =>
             throw new NotSupportedException(SR.NotSupported_MDStreamVersion);
         public sealed override int MetadataToken => 0x00000001; // The Module Table is exactly 1 record long so the token is always mdtModule | 0x000001
@@ -122,10 +124,13 @@ namespace System.Reflection.TypeLoading.Ecma
         //
         public sealed override FieldInfo? GetField(string name, BindingFlags bindingAttr) =>
             GetModuleType().GetField(name, bindingAttr);
+
         public sealed override FieldInfo[] GetFields(BindingFlags bindingFlags) =>
             GetModuleType().GetFields(bindingFlags);
+
         public sealed override MethodInfo[] GetMethods(BindingFlags bindingFlags) =>
             GetModuleType().GetMethods(bindingFlags);
+
         protected sealed override MethodInfo? GetMethodImpl(
             string name,
             BindingFlags bindingAttr,
@@ -136,6 +141,7 @@ namespace System.Reflection.TypeLoading.Ecma
         ) =>
             GetModuleType()
                 .InternalGetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers);
+
         private RoType GetModuleType() =>
             ModuleTypeToken.ToTypeDefinitionHandle().ResolveTypeDef(this);
 
@@ -165,6 +171,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughModuleDefinitionProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly ModuleDefinition _neverAccessThisExceptThroughModuleDefinitionProperty;
     }

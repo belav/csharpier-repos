@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Rewrite.PatternSegments;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments;
 
 public class HeaderSegmentTests

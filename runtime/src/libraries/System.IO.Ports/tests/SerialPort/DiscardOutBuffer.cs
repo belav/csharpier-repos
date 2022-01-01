@@ -174,6 +174,7 @@ namespace System.IO.Ports.Tests
             // we will catch that exception on the Task.Wait()
             com.Write(buffer, 0, buffer.Length);
         }
+
         #endregion
 
         #region Verification for Test Cases

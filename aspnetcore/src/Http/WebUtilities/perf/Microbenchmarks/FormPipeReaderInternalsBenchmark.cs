@@ -5,6 +5,7 @@ using System.Buffers;
 using System.Text;
 using BenchmarkDotNet.Attributes;
 
+
 namespace Microsoft.AspNetCore.WebUtilities.Microbenchmarks;
 
 /// <summary>

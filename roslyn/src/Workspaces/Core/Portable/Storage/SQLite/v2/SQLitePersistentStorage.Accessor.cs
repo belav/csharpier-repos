@@ -13,6 +13,7 @@ using Roslyn.Utilities;
 
 #if DEBUG
 using System.Diagnostics;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.SQLite.v2
@@ -89,8 +90,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 bool allowWrite,
                 out TDatabaseId dataId
             );
+
             protected abstract void BindFirstParameter(SqlStatement statement, TDatabaseId dataId);
+
             protected abstract TWriteQueueKey GetWriteQueueKey(TKey key);
+
             protected abstract bool TryGetRowId(
                 SqlConnection connection,
                 Database database,

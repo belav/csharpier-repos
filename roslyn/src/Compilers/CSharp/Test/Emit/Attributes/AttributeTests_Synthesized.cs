@@ -56,6 +56,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
+
         #endregion
 
         #region Helpers
@@ -144,6 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             attribute.VerifyValue(0, TypedConstantKind.Enum, (int)expectedDebuggingMode);
         }
+
         #endregion
 
         #region CompilerGeneratedAttribute, DebuggerBrowsableAttribute, DebuggerStepThroughAttribute, DebuggerDisplayAttribute
@@ -1737,6 +1739,7 @@ public class Test
                 }
             );
         }
+
         #endregion
 
         #region UnverifiableCode, SecurityPermission
@@ -1833,6 +1836,7 @@ unsafe class C
                 );
             }
         }
+
         #endregion
 
         #region AsyncStateMachineAttribute
@@ -2057,6 +2061,7 @@ class Test
                 Assert.Empty(asyncMethod.GetAttributes());
             }
         }
+
         #endregion
 
         #region IteratorStateMachineAttribute
@@ -2180,6 +2185,7 @@ public class Test<T>
 
             Assert.Empty(type.GetMember<MethodSymbol>("F").GetAttributes());
         }
+
         #endregion
 
         [Fact, WorkItem(7809, "https://github.com/dotnet/roslyn/issues/7809")]

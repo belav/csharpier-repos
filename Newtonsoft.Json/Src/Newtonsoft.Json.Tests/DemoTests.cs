@@ -45,6 +45,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -653,6 +654,7 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual(4, value.Count);
         }
+
 #endif
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0
@@ -699,6 +701,7 @@ namespace Newtonsoft.Json.Tests
                 json
             );
         }
+
 #endif
 
         [Test]

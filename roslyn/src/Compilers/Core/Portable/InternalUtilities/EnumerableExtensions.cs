@@ -16,6 +16,7 @@ using System.Threading;
 
 #if DEBUG
 using System.Diagnostics;
+
 #endif
 
 namespace Roslyn.Utilities
@@ -678,6 +679,7 @@ namespace Roslyn.Utilities
                 }
             }
         }
+
 #nullable enable
 
         internal static Dictionary<K, ImmutableArray<T>> ToDictionary<K, T>(

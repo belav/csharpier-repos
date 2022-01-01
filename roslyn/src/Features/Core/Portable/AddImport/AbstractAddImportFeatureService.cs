@@ -35,34 +35,42 @@ namespace Microsoft.CodeAnalysis.AddImport
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
         );
+
         protected abstract bool CanAddImportForMethod(
             string diagnosticId,
             ISyntaxFacts syntaxFacts,
             SyntaxNode node,
             out TSimpleNameSyntax nameNode
         );
+
         protected abstract bool CanAddImportForNamespace(
             string diagnosticId,
             SyntaxNode node,
             out TSimpleNameSyntax nameNode
         );
+
         protected abstract bool CanAddImportForDeconstruct(string diagnosticId, SyntaxNode node);
+
         protected abstract bool CanAddImportForGetAwaiter(
             string diagnosticId,
             ISyntaxFacts syntaxFactsService,
             SyntaxNode node
         );
+
         protected abstract bool CanAddImportForGetEnumerator(
             string diagnosticId,
             ISyntaxFacts syntaxFactsService,
             SyntaxNode node
         );
+
         protected abstract bool CanAddImportForGetAsyncEnumerator(
             string diagnosticId,
             ISyntaxFacts syntaxFactsService,
             SyntaxNode node
         );
+
         protected abstract bool CanAddImportForQuery(string diagnosticId, SyntaxNode node);
+
         protected abstract bool CanAddImportForType(
             string diagnosticId,
             SyntaxNode node,
@@ -74,16 +82,19 @@ namespace Microsoft.CodeAnalysis.AddImport
             SyntaxNode node,
             CancellationToken cancellationToken
         );
+
         protected abstract ITypeSymbol GetDeconstructInfo(
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
         );
+
         protected abstract ITypeSymbol GetQueryClauseInfo(
             SemanticModel semanticModel,
             SyntaxNode node,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsViableExtensionMethod(
             IMethodSymbol method,
             SyntaxNode expression,
@@ -99,6 +110,7 @@ namespace Microsoft.CodeAnalysis.AddImport
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<Document> AddImportAsync(
             SyntaxNode contextNode,
             IReadOnlyList<string> nameSpaceParts,
@@ -110,6 +122,7 @@ namespace Microsoft.CodeAnalysis.AddImport
         protected abstract bool IsAddMethodContext(SyntaxNode node, SemanticModel semanticModel);
 
         protected abstract string GetDescription(IReadOnlyList<string> nameParts);
+
         protected abstract (string description, bool hasExistingImport) GetDescription(
             Document document,
             OptionSet options,

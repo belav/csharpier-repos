@@ -120,8 +120,10 @@ namespace Newtonsoft.Json.Serialization
             "DefaultMembersSearchFlags is obsolete. To modify the members serialized inherit from DefaultContractResolver and override the GetSerializableMembers method instead."
         )]
         public BindingFlags DefaultMembersSearchFlags { get; set; }
+
 #else
         private readonly BindingFlags DefaultMembersSearchFlags;
+
 #endif
 
         /// <summary>
@@ -148,6 +150,7 @@ namespace Newtonsoft.Json.Serialization
         /// 	<c>true</c> if the <see cref="SerializableAttribute"/> attribute will be ignored when serializing and deserializing types; otherwise, <c>false</c>.
         /// </value>
         public bool IgnoreSerializableAttribute { get; set; }
+
 #endif
 
         /// <summary>
@@ -376,6 +379,7 @@ namespace Newtonsoft.Json.Serialization
 
             return true;
         }
+
 #endif
 
         /// <summary>
@@ -1490,6 +1494,7 @@ namespace Newtonsoft.Json.Serialization
 
             return contract;
         }
+
 #endif
 
 #if HAVE_DYNAMIC
@@ -1521,6 +1526,7 @@ namespace Newtonsoft.Json.Serialization
 
             return contract;
         }
+
 #endif
 
         /// <summary>
@@ -1641,6 +1647,7 @@ namespace Newtonsoft.Json.Serialization
 
             return false;
         }
+
 #endif
 
         internal static bool CanConvertToString(Type type)

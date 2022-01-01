@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
 using static HubMessageHelpers;

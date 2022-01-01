@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RazorWebSite.Models;
 
+
 namespace RazorWebSite.Controllers;
 
 public class EnumController : Controller

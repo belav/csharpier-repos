@@ -69,6 +69,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             public int X { get; set; }
         }
+
         public class B
         {
             public string X { get; set; }

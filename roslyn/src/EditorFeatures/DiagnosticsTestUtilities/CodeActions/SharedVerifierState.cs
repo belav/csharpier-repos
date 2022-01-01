@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 #if !CODE_STYLE
 using Roslyn.Utilities;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

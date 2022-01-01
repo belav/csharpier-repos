@@ -308,6 +308,7 @@ namespace System.Threading.Tests
             testWaitHandle.ClearHandle();
             Assert.Throws<ObjectDisposedException>(() => testWaitHandle.WaitOne(0));
         }
+
 #pragma warning restore 0618 // 'WaitHandle.Handle' is obsolete: 'Use the SafeWaitHandle property instead.'
 
         [Fact]

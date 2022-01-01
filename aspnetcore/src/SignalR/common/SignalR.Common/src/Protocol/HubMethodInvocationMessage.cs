@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
 /// <summary>

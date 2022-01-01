@@ -3,6 +3,7 @@
 
 using System.Runtime.CompilerServices;
 
+
 namespace System.Buffers;
 
 /// <summary>

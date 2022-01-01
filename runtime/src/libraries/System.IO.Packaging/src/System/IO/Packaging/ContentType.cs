@@ -154,6 +154,7 @@ namespace System.IO.Packaging
                 return _parameterDictionary.GetEnumerator();
             }
         }
+
         #endregion Internal Properties
 
         #region Internal Methods

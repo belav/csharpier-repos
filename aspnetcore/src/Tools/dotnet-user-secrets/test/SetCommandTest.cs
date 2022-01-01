@@ -8,6 +8,7 @@ using Microsoft.Extensions.Tools.Internal;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Tests;
 
 public class SetCommandTest

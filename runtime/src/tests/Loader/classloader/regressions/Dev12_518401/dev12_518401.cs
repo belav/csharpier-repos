@@ -14,6 +14,7 @@ struct MyStruct
         b,
         c;
 }
+
 #pragma warning restore 169
 
 class My

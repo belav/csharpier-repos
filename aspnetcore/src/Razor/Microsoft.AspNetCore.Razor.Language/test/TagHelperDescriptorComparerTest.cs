@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Razor.Serialization;
 using Newtonsoft.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class TagHelperDescriptorComparerTest

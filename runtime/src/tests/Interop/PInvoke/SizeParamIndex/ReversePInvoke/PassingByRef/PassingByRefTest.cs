@@ -17,38 +17,47 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
     private static extern bool DoCallBack_MarshalByteArray_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelByteArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalSbyteArray_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelSbyteArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalShortArray_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelShortArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalShortArrayReturnNegativeSize_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelShortArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalUshortArray_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelUshortArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalInt32Array_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelInt32ArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalUint32Array_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelUint32ArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalLongArray_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelLongArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalUlongArray_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelUlongArrByRefAsCdeclCaller caller
     );
+
     [DllImport("ReversePInvokePassingByRefNative", CallingConvention = CallingConvention.Cdecl)]
     private static extern bool DoCallBack_MarshalStringArray_AsParam_AsByRef(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelStringArrByRefAsCdeclCaller caller
@@ -63,41 +72,49 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref byte[] arrArg,
         ref byte arraySize
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelSbyteArrByRefAsCdeclCaller(
         ref sbyte arraySize,
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] ref sbyte[] arrArg
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelShortArrByRefAsCdeclCaller(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref short[] arrArg,
         ref short arraySize
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelUshortArrByRefAsCdeclCaller(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref ushort[] arrArg,
         ref ushort arraySize
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelInt32ArrByRefAsCdeclCaller(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref Int32[] arrArg,
         ref Int32 arraySize
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelUint32ArrByRefAsCdeclCaller(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref UInt32[] arrArg,
         ref UInt32 arraySize
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelLongArrByRefAsCdeclCaller(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref long[] arrArg,
         ref long arraySize
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelUlongArrByRefAsCdeclCaller(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref ulong[] arrArg,
         ref ulong arraySize
     );
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool DelStringArrByRefAsCdeclCaller(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1, ArraySubType = UnmanagedType.BStr)]

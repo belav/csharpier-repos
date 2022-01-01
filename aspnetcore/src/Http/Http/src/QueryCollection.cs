@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
@@ -18,6 +19,7 @@ public class QueryCollection : IQueryCollection
     /// </summary>
     public static readonly QueryCollection Empty = new QueryCollection();
     private static readonly string[] EmptyKeys = Array.Empty<string>();
+
     // Pre-box
     private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType =
         default(Enumerator);

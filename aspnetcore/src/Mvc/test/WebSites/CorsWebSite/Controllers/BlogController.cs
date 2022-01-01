@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace CorsWebSite;
 
 [Route("Cors/[action]")]

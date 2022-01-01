@@ -11,14 +11,17 @@ namespace MS.Internal.Xml.XPath
         {
             return null;
         }
+
         public override XPathNodeIterator Clone()
         {
             return this;
         }
+
         public override object Evaluate(XPathNodeIterator context)
         {
             return this;
         }
+
         public override int CurrentPosition
         {
             get { return 0; }
@@ -41,7 +44,9 @@ namespace MS.Internal.Xml.XPath
         {
             get { return XPathResultType.NodeSet; }
         }
+
         public override void Reset() { }
+
         public override XPathNavigator? Current
         {
             get { return null; }

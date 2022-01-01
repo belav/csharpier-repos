@@ -13,6 +13,7 @@ using Roslyn.Utilities;
 using Xunit;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
+
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Miscellaneous;
 
 public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtocolTests

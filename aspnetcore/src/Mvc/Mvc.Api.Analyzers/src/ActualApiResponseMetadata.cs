@@ -5,6 +5,7 @@ using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 internal readonly struct ActualApiResponseMetadata

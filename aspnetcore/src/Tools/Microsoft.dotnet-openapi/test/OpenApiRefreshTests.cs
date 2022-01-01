@@ -4,6 +4,7 @@
 using Microsoft.DotNet.OpenApi.Tests;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.DotNet.OpenApi.Refresh.Tests;
 
 public class OpenApiRefreshTests : OpenApiTestBase

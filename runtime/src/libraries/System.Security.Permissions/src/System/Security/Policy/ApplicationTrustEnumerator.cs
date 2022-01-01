@@ -8,6 +8,7 @@ namespace System.Security.Policy
     public sealed partial class ApplicationTrustEnumerator : IEnumerator
     {
         internal ApplicationTrustEnumerator() { }
+
         public ApplicationTrust Current
         {
             get { return default(ApplicationTrust); }
@@ -16,10 +17,12 @@ namespace System.Security.Policy
         {
             get { return null; }
         }
+
         public bool MoveNext()
         {
             return false;
         }
+
         public void Reset() { }
     }
 }

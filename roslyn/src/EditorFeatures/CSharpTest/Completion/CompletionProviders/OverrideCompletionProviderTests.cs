@@ -964,6 +964,7 @@ class Derived<X> : CGoo
 }";
             await VerifyItemExistsAsync(markup, "Something<X>(X arg)");
         }
+
         #endregion
 
         #region "Commit tests"

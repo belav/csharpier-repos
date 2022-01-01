@@ -26,6 +26,7 @@ namespace Test
         {
             throw new Exception();
         }
+
         public ulong Method1()
         {
             String[] local1 = new String[] { };
@@ -139,6 +140,7 @@ namespace Test
             }
             return 101;
         }
+
         public static AA m_xFwd1;
         public static sbyte m_suFwd2;
         public static sbyte[] m_asuFwd3;

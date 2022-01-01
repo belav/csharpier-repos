@@ -301,6 +301,7 @@ public class SafeHandleDangerousGetHandle
 
         return retVal;
     }
+
     #endregion
     #endregion
 

@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 // Integration tests for component directives
@@ -148,7 +149,10 @@ public class ComponentDirectiveIntegrationTest : RazorIntegrationTestBase
     public class TestBaseClass : ComponentBase { }
 
     public interface IMyService1 { }
+
     public interface IMyService2 { }
+
     public class MyService1Impl : IMyService1 { }
+
     public class MyService2Impl : IMyService2 { }
 }

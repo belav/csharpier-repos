@@ -9,6 +9,7 @@ namespace System.Drawing
 {
 #if FEATURE_SYSTEM_EVENTS
     using System.Drawing.Internal;
+
 #endif
 
     public sealed class SolidBrush

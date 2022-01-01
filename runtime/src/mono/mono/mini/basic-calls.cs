@@ -34,6 +34,7 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
     static void dummy() { }
@@ -376,6 +377,7 @@ class Tests
             return -1;
         return v2;
     }
+
     public static int test_1_handle_dup_stloc()
     {
         int index = 0;

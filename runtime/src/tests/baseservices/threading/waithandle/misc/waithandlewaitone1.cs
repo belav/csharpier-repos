@@ -22,6 +22,7 @@ public class WaitHandleWaitOne1
     private const int c_DEFAULT_SLEEP_TIME = 5000; // 1 second
 
     private WaitHandle m_Handle = null;
+
     #endregion
 
     #region Public Methods
@@ -107,6 +108,7 @@ public class WaitHandleWaitOne1
 
         return retVal;
     }
+
     #endregion
 
     #region Negative Test Cases
@@ -245,6 +247,7 @@ public class WaitHandleWaitOne1
 
         return retVal;
     }
+
     #endregion
     #endregion
 

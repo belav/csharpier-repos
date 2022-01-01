@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 public class Base64UrlTextEncoderTests

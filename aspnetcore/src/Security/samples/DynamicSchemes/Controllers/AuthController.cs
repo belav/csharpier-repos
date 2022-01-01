@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
+
 namespace AuthSamples.DynamicSchemes.Controllers;
 
 public class AuthController : Controller

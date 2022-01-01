@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Core.Test;
 
 public class AuthenticationPropertiesTests

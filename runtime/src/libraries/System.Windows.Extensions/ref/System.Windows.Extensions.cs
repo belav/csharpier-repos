@@ -12,12 +12,16 @@ namespace System.Media
           System.Runtime.Serialization.ISerializable
     {
         public SoundPlayer() { }
+
         public SoundPlayer(System.IO.Stream stream) { }
+
         protected SoundPlayer(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public SoundPlayer(string soundLocation) { }
+
         public bool IsLoadCompleted
         {
             get { throw null; }
@@ -57,25 +61,38 @@ namespace System.Media
             add { }
             remove { }
         }
+
         public void Load() { }
+
         public void LoadAsync() { }
+
         protected virtual void OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs e) { }
+
         protected virtual void OnSoundLocationChanged(System.EventArgs e) { }
+
         protected virtual void OnStreamChanged(System.EventArgs e) { }
+
         public void Play() { }
+
         public void PlayLooping() { }
+
         public void PlaySync() { }
+
         public void Stop() { }
+
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
     }
+
     public partial class SystemSound
     {
         internal SystemSound() { }
+
         public void Play() { }
     }
+
     public static partial class SystemSounds
     {
         public static System.Media.SystemSound Asterisk
@@ -100,18 +117,22 @@ namespace System.Media
         }
     }
 }
+
 namespace System.Security.Cryptography.X509Certificates
 {
     public sealed partial class X509Certificate2UI
     {
         public X509Certificate2UI() { }
+
         public static void DisplayCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
         ) { }
+
         public static void DisplayCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
             System.IntPtr hwndParent
         ) { }
+
         public static System.Security.Cryptography.X509Certificates.X509Certificate2Collection SelectFromCollection(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates,
             string title,
@@ -121,6 +142,7 @@ namespace System.Security.Cryptography.X509Certificates
         {
             throw null;
         }
+
         public static System.Security.Cryptography.X509Certificates.X509Certificate2Collection SelectFromCollection(
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates,
             string title,
@@ -132,17 +154,20 @@ namespace System.Security.Cryptography.X509Certificates
             throw null;
         }
     }
+
     public enum X509SelectionFlag
     {
         SingleSelection = 0,
         MultiSelection = 1,
     }
 }
+
 namespace System.Xaml.Permissions
 {
     public partial class XamlAccessLevel
     {
         internal XamlAccessLevel() { }
+
         public System.Reflection.AssemblyName AssemblyAccessToAssemblyName
         {
             get { throw null; }
@@ -151,24 +176,28 @@ namespace System.Xaml.Permissions
         {
             get { throw null; }
         }
+
         public static System.Xaml.Permissions.XamlAccessLevel AssemblyAccessTo(
             System.Reflection.Assembly assembly
         )
         {
             throw null;
         }
+
         public static System.Xaml.Permissions.XamlAccessLevel AssemblyAccessTo(
             System.Reflection.AssemblyName assemblyName
         )
         {
             throw null;
         }
+
         public static System.Xaml.Permissions.XamlAccessLevel PrivateAccessTo(
             string assemblyQualifiedTypeName
         )
         {
             throw null;
         }
+
         public static System.Xaml.Permissions.XamlAccessLevel PrivateAccessTo(System.Type type)
         {
             throw null;

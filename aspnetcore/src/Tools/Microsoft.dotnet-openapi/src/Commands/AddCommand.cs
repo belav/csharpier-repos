@@ -4,6 +4,7 @@
 using System.Threading.Tasks;
 using Microsoft.DotNet.Openapi.Tools;
 
+
 namespace Microsoft.DotNet.OpenApi.Commands;
 
 internal class AddCommand : BaseCommand

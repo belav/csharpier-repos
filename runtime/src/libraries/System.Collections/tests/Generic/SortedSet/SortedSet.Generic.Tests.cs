@@ -432,6 +432,7 @@ namespace System.Collections.Tests
             Assert.True(comparerSet1.SetEquals(set));
             Assert.True(comparerSet2.SetEquals(set));
         }
+
 #endregion
 
 #region TryGetValue

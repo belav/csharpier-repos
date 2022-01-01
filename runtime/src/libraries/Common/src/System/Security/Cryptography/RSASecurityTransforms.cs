@@ -21,6 +21,7 @@ namespace System.Security.Cryptography
             return new RSAImplementation.RSASecurityTransforms();
         }
     }
+
 #endif
 
     internal static partial class RSAImplementation

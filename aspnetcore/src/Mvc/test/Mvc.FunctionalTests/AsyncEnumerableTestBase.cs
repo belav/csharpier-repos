@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using FormatterWebSite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class AsyncEnumerableTestBase : IClassFixture<MvcTestFixture<StartupWithJsonFormatter>>

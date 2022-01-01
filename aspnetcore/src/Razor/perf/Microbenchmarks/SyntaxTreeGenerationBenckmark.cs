@@ -8,6 +8,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
 
+
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
 public class SyntaxTreeGenerationBenchmark

@@ -6,6 +6,7 @@ using System.Diagnostics.Tracing;
 using System.Threading;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
 internal sealed class ConcurrencyLimiterEventSource : EventSource
@@ -19,6 +20,7 @@ internal sealed class ConcurrencyLimiterEventSource : EventSource
 #pragma warning disable IDE0052 // Remove unread private members (2021-02-02: These ARE set in OnEventCommand - the the IDE0052 analyzer is incorrect at this time)
     private PollingCounter? _rejectedRequestsCounter;
     private PollingCounter? _queueLengthCounter;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
     private EventCounter? _queueDuration;

@@ -8,6 +8,7 @@ namespace System.Data.OleDb
 #if DEBUG
     using Globalization;
     using Text;
+
 #endif
 
     internal enum DBBindStatus
@@ -431,6 +432,7 @@ namespace System.Data.OleDb
         internal tagDBIDX columnid;
 
         internal tagDBCOLUMNINFO() { }
+
 #if DEBUG
         public override string ToString()
         {
@@ -529,6 +531,7 @@ namespace System.Data.OleDb
         object? ItagDBPROPINFO.vValue => this.vValue;
 
         string? ItagDBPROPINFO.pwszDescription => this.pwszDescription;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string? pwszDescription;
 

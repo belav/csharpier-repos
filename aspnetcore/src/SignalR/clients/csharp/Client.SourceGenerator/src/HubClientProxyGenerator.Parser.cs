@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.SourceGenerator;
 
 internal partial class HubClientProxyGenerator

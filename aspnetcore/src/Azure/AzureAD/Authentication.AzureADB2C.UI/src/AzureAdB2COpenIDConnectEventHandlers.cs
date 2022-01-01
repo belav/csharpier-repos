@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 [Obsolete(

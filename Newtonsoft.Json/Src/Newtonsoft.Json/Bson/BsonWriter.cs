@@ -466,6 +466,7 @@ namespace Newtonsoft.Json.Bson
             base.WriteValue(value);
             AddValue(value, BsonType.Date);
         }
+
 #endif
 
         /// <summary>
@@ -519,6 +520,7 @@ namespace Newtonsoft.Json.Bson
             base.WriteValue(value);
             AddToken(new BsonString(value.ToString(), true));
         }
+
         #endregion
 
         /// <summary>

@@ -19,6 +19,7 @@ using Moq;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 public class RuntimeViewCompilerTest

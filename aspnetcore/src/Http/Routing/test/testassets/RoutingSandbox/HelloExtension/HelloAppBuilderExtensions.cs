@@ -5,6 +5,7 @@ using System;
 using Microsoft.Extensions.Options;
 using RoutingSample.Web.HelloExtension;
 
+
 namespace Microsoft.AspNetCore.Builder;
 
 public static class HelloAppBuilderExtensions

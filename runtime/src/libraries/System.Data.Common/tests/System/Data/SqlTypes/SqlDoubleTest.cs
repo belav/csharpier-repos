@@ -447,6 +447,7 @@ namespace System.Data.Tests.SqlTypes
             SqlSingle TestSingle64 = new SqlSingle(64);
             Assert.Equal(64, ((SqlDouble)TestSingle64).Value);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

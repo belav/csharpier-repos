@@ -155,6 +155,7 @@ namespace System.Net.Http.Formatting
                 roundTripTestValue: 256
             );
         }
+
 #endif
 
         [Theory]
@@ -404,6 +405,7 @@ namespace System.Net.Http.Formatting
             Assert.NotNull(formatter.InnerDataContractSerializer);
             Assert.Null(formatter.InnerJsonSerializer);
         }
+
 #endif
 
         [Fact]
@@ -662,6 +664,7 @@ namespace System.Net.Http.Formatting
             // Only JSON case where DBNull.Value round-trips
             Assert.Equal(testData, readObj);
         }
+
 #endif
 
         [Fact]

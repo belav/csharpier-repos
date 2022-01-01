@@ -19,9 +19,11 @@ namespace System.IO
 #if MS_IO_REDIST
         internal static string EnsureTrailingSeparator(string path) =>
             EndsInDirectorySeparator(path) ? path : path + DirectorySeparatorCharAsString;
+
 #else
         internal static string EnsureTrailingSeparator(string path) =>
             EndsInDirectorySeparator(path.AsSpan()) ? path : path + DirectorySeparatorCharAsString;
+
 #endif
 
         internal static bool IsRoot(ReadOnlySpan<char> path) => path.Length == GetRootLength(path);

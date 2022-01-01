@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 // We want to generate a HTML document that contains only pure HTML.

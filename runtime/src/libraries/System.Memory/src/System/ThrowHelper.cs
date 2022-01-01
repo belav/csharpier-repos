@@ -29,6 +29,7 @@ namespace System
         {
             throw CreateArgumentNullException(argument);
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateArgumentNullException(ExceptionArgument argument)
         {
@@ -40,6 +41,7 @@ namespace System
         {
             throw CreateArgumentOutOfRangeException(argument);
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateArgumentOutOfRangeException(ExceptionArgument argument)
         {
@@ -51,6 +53,7 @@ namespace System
         {
             throw CreateInvalidOperationException();
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateInvalidOperationException()
         {
@@ -62,6 +65,7 @@ namespace System
         {
             throw CreateInvalidOperationException_EndPositionNotReached();
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateInvalidOperationException_EndPositionNotReached()
         {
@@ -73,6 +77,7 @@ namespace System
         {
             throw CreateArgumentOutOfRangeException_PositionOutOfRange();
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateArgumentOutOfRangeException_PositionOutOfRange()
         {
@@ -84,6 +89,7 @@ namespace System
         {
             throw CreateArgumentOutOfRangeException_OffsetOutOfRange();
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateArgumentOutOfRangeException_OffsetOutOfRange()
         {
@@ -95,6 +101,7 @@ namespace System
         {
             throw CreateObjectDisposedException_ArrayMemoryPoolBuffer();
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateObjectDisposedException_ArrayMemoryPoolBuffer()
         {

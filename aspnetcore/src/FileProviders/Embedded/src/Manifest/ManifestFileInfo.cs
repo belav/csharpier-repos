@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal class ManifestFileInfo : IFileInfo

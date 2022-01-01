@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
 internal class ValidateAntiforgeryTokenAuthorizationFilter

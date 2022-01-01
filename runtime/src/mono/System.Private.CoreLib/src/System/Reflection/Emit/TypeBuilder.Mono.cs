@@ -76,6 +76,7 @@ namespace System.Reflection.Emit
         private TypeInfo? created;
 
         private int state;
+
 #endregion
 
         private ITypeName fullname;
@@ -1313,6 +1314,7 @@ namespace System.Reflection.Emit
                 return t;
             }
         }
+
         /*
                 internal void GenerateDebugInfo (ISymbolWriter symbolWriter)
                 {

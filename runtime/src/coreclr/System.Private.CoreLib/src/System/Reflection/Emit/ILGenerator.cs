@@ -17,6 +17,7 @@ namespace System.Reflection.Emit
         private const int DefaultFixupArraySize = 8;
         private const int DefaultLabelArraySize = 4;
         private const int DefaultExceptionArraySize = 2;
+
         #endregion
 
         #region Internal Statics
@@ -182,6 +183,7 @@ namespace System.Reflection.Emit
                 optionalParameterTypes
             );
         }
+
         internal virtual SignatureHelper GetMemberRefSignature(
             CallingConventions call,
             Type? returnType,
@@ -401,6 +403,7 @@ namespace System.Reflection.Emit
             Array.Copy(m_RelocFixupList!, narrowTokens, m_RelocFixupCount);
             return narrowTokens;
         }
+
         #endregion
 
         #region Public Members
@@ -1011,6 +1014,7 @@ namespace System.Reflection.Emit
                 m_ILStream[m_length++] = (byte)tempVal;
             }
         }
+
         #endregion
 
         #region Exceptions

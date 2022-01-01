@@ -122,19 +122,26 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
 
             protected abstract void AddExtensionPrefix();
+
             protected abstract void AddAwaitablePrefix();
+
             protected abstract void AddAwaitableExtensionPrefix();
+
             protected abstract void AddDeprecatedPrefix();
+
             protected abstract void AddEnumUnderlyingTypeSeparator();
+
             protected abstract Task<
                 ImmutableArray<SymbolDisplayPart>
             > GetInitializerSourcePartsAsync(ISymbol symbol);
+
             protected abstract ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
                 ISymbol symbol,
                 SemanticModel semanticModel,
                 int position,
                 SymbolDisplayFormat format
             );
+
             protected abstract string GetNavigationHint(ISymbol symbol);
 
             protected abstract SymbolDisplayFormat MinimallyQualifiedFormat { get; }

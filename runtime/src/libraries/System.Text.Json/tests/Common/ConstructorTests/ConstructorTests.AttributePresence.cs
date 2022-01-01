@@ -186,6 +186,7 @@ namespace System.Text.Json.Serialization.Tests
             await RunTestAsync<Point_2D_Struct_WithMultipleAttributes>();
             await RunTestAsync<Point_2D_Struct_WithMultipleAttributes_OneNonPublic>();
         }
+
 #endif
 
         [Fact]

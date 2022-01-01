@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HostedBlazorWebassemblyApp.Shared;
 
+
 namespace HostedBlazorWebassemblyApp.Server.Data;
 
 public class WeatherForecastService : IWeatherForecastService

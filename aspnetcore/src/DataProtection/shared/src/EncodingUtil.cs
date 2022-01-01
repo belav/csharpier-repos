@@ -4,6 +4,7 @@
 using System;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 internal static class EncodingUtil

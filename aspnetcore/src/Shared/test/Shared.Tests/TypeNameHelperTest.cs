@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class TypeNameHelperTest

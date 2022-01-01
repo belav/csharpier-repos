@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
 public class HtmlHelperValidationSummaryTest
@@ -948,8 +949,10 @@ public class HtmlHelperValidationSummaryTest
 
         [Display(Order = 23)]
         public string OrderedProperty3 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty2 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty1 { get; set; }
 

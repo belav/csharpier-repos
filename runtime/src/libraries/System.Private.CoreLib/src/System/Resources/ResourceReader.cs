@@ -17,6 +17,7 @@ namespace System.Resources
 {
 #if RESOURCES_EXTENSIONS
     using ResourceReader = DeserializingResourceReader;
+
 #endif
 
     // Provides the default implementation of IResourceReader, reading
@@ -59,6 +60,7 @@ namespace System.Resources
         private const int DefaultFileStreamBufferSize = 4096;
 
         private BinaryReader _store; // backing store we're reading from.
+
         // Used by RuntimeResourceSet and this class's enumerator.  Maps
         // resource name to a value, a ResourceLocator, or a
         // LooselyLinkedManifestResource.

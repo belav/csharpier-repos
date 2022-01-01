@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal static class ResponseContentTypeHelper

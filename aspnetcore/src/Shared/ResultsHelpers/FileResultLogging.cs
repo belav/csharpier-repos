@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal interface IFileResultLogger

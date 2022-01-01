@@ -31,6 +31,7 @@ namespace System.Reflection.Context.Delegation
         {
             get { return UnderlyingAssembly.Location; }
         }
+
 #pragma warning restore IL3003
 
         public override Module ManifestModule
@@ -156,6 +157,7 @@ namespace System.Reflection.Context.Delegation
         {
             return UnderlyingAssembly.GetFiles(getResourceModules);
         }
+
 #pragma warning restore IL3003
 
         public override Module[] GetLoadedModules(bool getResourceModules)

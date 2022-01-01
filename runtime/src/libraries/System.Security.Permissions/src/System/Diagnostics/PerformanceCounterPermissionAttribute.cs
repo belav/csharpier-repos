@@ -3,6 +3,7 @@
 
 using System.Security;
 using System.Security.Permissions;
+
 namespace System.Diagnostics
 {
 #if NET5_0_OR_GREATER
@@ -25,6 +26,7 @@ namespace System.Diagnostics
     public class PerformanceCounterPermissionAttribute : CodeAccessSecurityAttribute
     {
         public PerformanceCounterPermissionAttribute(SecurityAction action) : base(action) { }
+
         public string CategoryName
         {
             get { return null; }
@@ -36,6 +38,7 @@ namespace System.Diagnostics
             set { }
         }
         public PerformanceCounterPermissionAccess PermissionAccess { get; set; }
+
         public override IPermission CreatePermission()
         {
             return null;

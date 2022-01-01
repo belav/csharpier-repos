@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Http.Headers;
 
 internal static class HttpTokenParsingRules

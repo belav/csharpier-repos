@@ -22,6 +22,7 @@ namespace System.DirectoryServices.ActiveDirectory
             string globalCatalogName,
             DirectoryEntryManager directoryEntryMgr
         ) : base(context, globalCatalogName, directoryEntryMgr) { }
+
         #endregion constructors
 
         #region public methods

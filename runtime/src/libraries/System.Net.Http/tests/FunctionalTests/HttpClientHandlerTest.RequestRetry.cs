@@ -209,6 +209,7 @@ namespace System.Net.Http.Functional.Tests
                 TransportContext context,
                 CancellationToken cancellationToken
             ) => SerializeToStreamAsync(stream, context).GetAwaiter().GetResult();
+
 #endif
 
             protected override async Task SerializeToStreamAsync(

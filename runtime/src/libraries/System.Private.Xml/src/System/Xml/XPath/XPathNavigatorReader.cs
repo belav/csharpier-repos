@@ -1110,6 +1110,7 @@ namespace System.Xml.XPath
         {
             return IsReading ? this.lineInfo.HasLineInfo() : false;
         }
+
         public virtual int LineNumber
         {
             get { return IsReading ? this.lineInfo.LineNumber : 0; }
@@ -1164,6 +1165,7 @@ namespace System.Xml.XPath
             get { return IsReading ? this.schemaInfo.SchemaAttribute : null; }
         }
     }
+
 #endif
 
     internal sealed class XPathNavigatorReaderWithSI

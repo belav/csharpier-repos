@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
 public class RouterBenchmarkTest : IDisposable

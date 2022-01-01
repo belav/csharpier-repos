@@ -210,6 +210,7 @@ namespace System
                 // MemberInfo caches
                 private CerHashtable<string, T[]?> m_csMemberInfos;
                 private CerHashtable<string, T[]?> m_cisMemberInfos;
+
                 // List of MemberInfos given out. When m_cacheComplete is false, it may have null entries at the end to avoid
                 // reallocating the list every time a new entry is added.
                 private T[]? m_allMembers;
@@ -217,6 +218,7 @@ namespace System
 
                 // This is the strong reference back to the cache
                 private readonly RuntimeTypeCache m_runtimeTypeCache;
+
                 #endregion
 
                 #region Constructor
@@ -641,6 +643,7 @@ namespace System
 
                     m_allMembers = cachedMembers;
                 }
+
                 #endregion
 
                 #region Population Logic
@@ -1708,6 +1711,7 @@ namespace System
                         list.Add(propertyInfo);
                     }
                 }
+
                 #endregion
 
                 #region NonPrivate Members
@@ -1739,6 +1743,7 @@ namespace System
 
                 #endregion
             }
+
             #endregion
 
             #region Private Data Members
@@ -1775,6 +1780,7 @@ namespace System
                 m_runtimeType = runtimeType;
                 m_isGlobal = RuntimeTypeHandle.GetModule(runtimeType).RuntimeType == runtimeType;
             }
+
             #endregion
 
             #region Private Members
@@ -1808,6 +1814,7 @@ namespace System
 
                 return existingCache;
             }
+
             #endregion
 
             #region Internal Members
@@ -1944,6 +1951,7 @@ namespace System
 
             internal object[] GetEmptyArray() =>
                 _emptyArray ??= (object[])Array.CreateInstance(m_runtimeType, 0);
+
             #endregion
 
             #region Caches Accessors
@@ -2113,6 +2121,7 @@ namespace System
 
             #endregion
         }
+
         #endregion
 
         #region Static Members
@@ -2472,6 +2481,7 @@ namespace System
                 name = fullname;
             }
         }
+
         #endregion
 
         #region Filters
@@ -2910,6 +2920,7 @@ namespace System
 
         private static readonly RuntimeType ObjectType = (RuntimeType)typeof(object);
         private static readonly RuntimeType StringType = (RuntimeType)typeof(string);
+
         #endregion
 
         #region Constructor
@@ -3240,6 +3251,7 @@ namespace System
 
             return candidates;
         }
+
         #endregion
 
         #region Get All XXXInfos
@@ -3447,6 +3459,7 @@ namespace System
 
             return im;
         }
+
         #endregion
 
         #region Find XXXInfo
@@ -4090,6 +4103,7 @@ namespace System
 
             return null;
         }
+
         #endregion
 
         #region Identity
@@ -4122,6 +4136,7 @@ namespace System
                 );
             }
         }
+
         #endregion
 
         #region Hierarchy
@@ -4169,6 +4184,7 @@ namespace System
 
             return RuntimeTypeHandle.IsEquivalentTo(this, otherRtType);
         }
+
 #endif // FEATURE_TYPEEQUIVALENCE
 
         #endregion
@@ -4365,6 +4381,7 @@ namespace System
             Type[] constraints = new RuntimeTypeHandle(this).GetConstraints();
             return constraints ?? Type.EmptyTypes;
         }
+
         #endregion
 
         #region Misc
@@ -4791,6 +4808,7 @@ namespace System
             int culture,
             string[]? namedParameters
         );
+
 #endif // FEATURE_COMINTEROP
 
         #endregion

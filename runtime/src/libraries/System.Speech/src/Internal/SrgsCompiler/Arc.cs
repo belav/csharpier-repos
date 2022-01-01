@@ -806,6 +806,7 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             set { _be = value; }
         }
+
 #endif
         #endregion
 
@@ -874,6 +875,7 @@ namespace System.Speech.Internal.SrgsCompiler
               ? symbols.FromOffset(tag._nameOffset)
               : tag._nameOffset.ToString(CultureInfo.InvariantCulture);
         }
+
 #endif
 
         // Sort arcs in a state based on type, and then on index.

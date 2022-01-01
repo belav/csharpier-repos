@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
+
 // Note that this sample will not run. It is only here to illustrate usage patterns.
 
 namespace SampleStartups;

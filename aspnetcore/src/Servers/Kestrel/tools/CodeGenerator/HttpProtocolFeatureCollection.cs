@@ -3,6 +3,7 @@
 
 using System.Linq;
 
+
 namespace CodeGenerator;
 
 public class HttpProtocolFeatureCollection

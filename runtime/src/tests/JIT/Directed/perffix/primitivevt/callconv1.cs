@@ -24,42 +24,51 @@ namespace PrimitiveVT
         {
             return x.m + y.m;
         }
+
         private VT1B f2a(VT1A x, VT1B y)
         {
             VT1B z;
             z.m = x.m + y.m;
             return z;
         }
+
         private VT1B f2b(VT1A x, VT1B y)
         {
             return f2a(x, y);
         }
+
         private VT1B f2(VT1A x, VT1B y)
         {
             return f2b(x, y);
         }
+
         private static int f3(ref VT1B x, VT1B y)
         {
             return x.m - y.m;
         }
+
         private VT1B f4(VT1A x, VT1B y)
         {
             VT1B z;
             z.m = x.m - y.m;
             return z;
         }
+
         private static int f5(VT1B x, VT1A y)
         {
             return x.m * y.m;
         }
+
         private int f6(VT1B[] x, VT1B y)
         {
             return x[0].m * y.m;
         }
+
         private VT1B f7(VT1A x, VT1B y)
         {
             return f4(x, y);
         }
+
         private float f8(VT1A x, VT1B y)
         {
             return x.m / y.m;
@@ -69,10 +78,12 @@ namespace PrimitiveVT
         {
             return new VT1B[1, 2];
         }
+
         private static VT1B[,] f9()
         {
             return f9a();
         }
+
         private int f10(params VT1B[] args)
         {
             int sum = 0;

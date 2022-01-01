@@ -36,6 +36,7 @@ using NUnit.Framework;
 #endif
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
@@ -108,6 +109,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string LastName { get; set; }
             public IList<string> Roles { get; set; }
         }
+
         #endregion
 
         [Test]

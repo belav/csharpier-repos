@@ -127,6 +127,7 @@ public class BFM_LPStrMarshaler
     public static extern bool LPStrBuffer_InOutByRef_Array_Struct(
         [In, Out] [MarshalAs(UnmanagedType.LPArray)] ref LPStrTestStruct[] structArray
     );
+
 #pragma warning restore 618
 
     static String GetValidString()

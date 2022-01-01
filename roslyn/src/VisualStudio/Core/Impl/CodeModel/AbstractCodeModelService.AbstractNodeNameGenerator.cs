@@ -18,6 +18,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         protected abstract class AbstractNodeNameGenerator
         {
             protected abstract bool IsNameableNode(SyntaxNode node);
+
             protected abstract void AppendNodeName(StringBuilder builder, SyntaxNode node);
 
             protected static void AppendDotIfNeeded(StringBuilder builder)

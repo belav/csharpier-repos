@@ -557,6 +557,7 @@ namespace System.Data.Common
             }
             return false;
         }
+
 #pragma warning restore CA2249 // Consider using 'string.Contains' instead of 'string.IndexOf'
 
 #if DEBUG
@@ -708,6 +709,7 @@ namespace System.Data.Common
                 Debug.Fail("ParseInternal code threw exception vs regex mismatch");
             }
         }
+
 #endif
 
         private static NameValuePair? ParseInternal(

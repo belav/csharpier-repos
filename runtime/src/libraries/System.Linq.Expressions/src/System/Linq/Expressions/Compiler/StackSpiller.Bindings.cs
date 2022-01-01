@@ -25,6 +25,7 @@ namespace System.Linq.Expressions.Compiler
             internal RewriteAction Action => _action;
 
             internal abstract MemberBinding AsBinding();
+
             internal abstract Expression AsExpression(Expression target);
 
             internal static BindingRewriter Create(

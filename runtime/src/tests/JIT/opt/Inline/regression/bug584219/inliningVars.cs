@@ -39,6 +39,7 @@ namespace ConsoleApplication1
                 return BitConverter.ToInt16(buffer, index);
             }
         }
+
         public static class SerializerInt
         {
             public static int Deserialize(byte[] buffer, int index, out int byteCount)

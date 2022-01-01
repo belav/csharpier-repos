@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 #if DEBUG
 using System.Linq;
+
 #endif
 
 namespace Microsoft.CodeAnalysis

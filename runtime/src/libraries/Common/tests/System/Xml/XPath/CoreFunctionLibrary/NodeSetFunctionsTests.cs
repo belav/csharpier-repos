@@ -1016,6 +1016,7 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var expected = new XPathResult(0);
             Utils.XPathNodesetTest(xml, testExpression, expected);
         }
+
 #endif
 
         /// <summary>

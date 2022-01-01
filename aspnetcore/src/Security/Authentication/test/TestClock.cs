@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Authentication;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 public class TestClock : ISystemClock

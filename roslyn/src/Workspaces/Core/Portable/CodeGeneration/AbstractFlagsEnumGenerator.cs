@@ -14,11 +14,13 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         : IComparer<(IFieldSymbol field, ulong value)>
     {
         protected abstract SyntaxGenerator GetSyntaxGenerator();
+
         protected abstract SyntaxNode CreateExplicitlyCastedLiteralValue(
             INamedTypeSymbol enumType,
             SpecialType underlyingSpecialType,
             object? constantValue
         );
+
         protected abstract bool IsValidName(INamedTypeSymbol enumType, string name);
 
         public SyntaxNode? TryCreateEnumConstantValue(

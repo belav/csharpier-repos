@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 internal abstract class AssemblyIdentityEqualityComparer : IEqualityComparer<AssemblyIdentity>

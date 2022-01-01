@@ -72,6 +72,7 @@ namespace System.Data.Tests
             Assert.Equal("NewTable1", ds.Tables[0].TableName);
             Assert.Equal("NewTable2", ds.Tables[1].TableName);
         }
+
         [Fact]
         public void AddRange_NullValue()
         {
@@ -132,6 +133,7 @@ namespace System.Data.Tests
             Assert.False(ds.Tables.CanRemove(ds.Tables[0]));
             Assert.False(ds.Tables.CanRemove(ds.Tables[1]));
         }
+
         [Fact]
         public void CanRemove_PartOfConstraint()
         {

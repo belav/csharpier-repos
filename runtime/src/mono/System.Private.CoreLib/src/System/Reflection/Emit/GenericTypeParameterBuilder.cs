@@ -50,6 +50,7 @@ namespace System.Reflection.Emit
         private Type[]? iface_constraints;
         private CustomAttributeBuilder[]? cattrs;
         private GenericParameterAttributes attrs;
+
 #endregion
 
         [DynamicDependency(nameof(attrs))] // Automatically keeps all previous fields too due to StructLayout

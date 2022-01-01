@@ -6,6 +6,7 @@ using System.Security.Claims;
 using HtmlGenerationWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace HtmlGenerationWebSite.Controllers;
 
 public class Catalog_CacheTagHelperController : Controller

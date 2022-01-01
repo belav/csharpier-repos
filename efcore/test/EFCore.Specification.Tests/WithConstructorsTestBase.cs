@@ -1017,6 +1017,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             private IStateManager _stateManager;
             private bool _setterCalled;
+
             // ReSharper disable once ConvertToAutoProperty
 
             public HasStateManagerPc() { }
@@ -1132,6 +1133,7 @@ namespace Microsoft.EntityFrameworkCore
 #pragma warning disable 649
 #pragma warning disable IDE0044 // Add readonly modifier
             private ILazyLoader _loader;
+
 #pragma warning restore IDE0044 // Add readonly modifier
 #pragma warning restore 649
 
@@ -1152,6 +1154,7 @@ namespace Microsoft.EntityFrameworkCore
 #pragma warning disable 649
 #pragma warning disable IDE0044 // Add readonly modifier
             private ILazyLoader _loader;
+
 #pragma warning restore IDE0044 // Add readonly modifier
 #pragma warning restore 649
 

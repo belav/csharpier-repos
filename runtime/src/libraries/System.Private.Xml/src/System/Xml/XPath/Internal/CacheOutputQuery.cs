@@ -12,6 +12,7 @@ namespace MS.Internal.Xml.XPath
     internal abstract class CacheOutputQuery : Query
     {
         internal Query input;
+
         // int count; -- we reusing it here
         protected List<XPathNavigator> outputBuffer;
 
@@ -21,6 +22,7 @@ namespace MS.Internal.Xml.XPath
             this.outputBuffer = new List<XPathNavigator>();
             this.count = 0;
         }
+
         protected CacheOutputQuery(CacheOutputQuery other) : base(other)
         {
             this.input = Clone(other.input);

@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
 /// <summary>

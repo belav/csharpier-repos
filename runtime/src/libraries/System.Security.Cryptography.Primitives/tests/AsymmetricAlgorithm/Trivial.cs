@@ -60,6 +60,7 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
             s.Clear();
             Assert.True(s.IsDisposed);
         }
+
 #endif
 
         [Fact]

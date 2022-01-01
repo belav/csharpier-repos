@@ -191,6 +191,7 @@ namespace BasicEventSourceTests
             {
                 WriteEvent(1, name, testNumber);
             }
+
             /// <summary>
             /// Sent to make sure the listener is ignoring when it should be.
             /// </summary>
@@ -217,6 +218,7 @@ namespace BasicEventSourceTests
             EventGenerator = eventGenerator;
             EventValidator = eventValidator;
         }
+
         /// <summary>
         /// If a single event does not produce a single response (if you expect additional error messages)
         /// use this constructor to validate the response.
@@ -230,14 +232,17 @@ namespace BasicEventSourceTests
 
         // This action cause the eventSource to emit an event (it is the test)
         public Action EventGenerator { get; private set; }
+
         // This action is given the resulting event and should Assert that it is correct
         public Action<Event> EventValidator { get; private set; }
         public Action<List<Event>> EventListValidator { get; private set; }
         public string Name { get; private set; }
+
         public bool Equals(SubTest other)
         {
             return Name == other.Name;
         }
+
         public override string ToString()
         {
             return Name;

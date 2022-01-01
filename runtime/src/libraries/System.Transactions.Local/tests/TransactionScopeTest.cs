@@ -531,6 +531,7 @@ namespace System.Transactions.Tests
                 }
             );
         }
+
         #endregion
 
         /* Tests using IntResourceManager */

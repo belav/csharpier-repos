@@ -76,6 +76,7 @@ namespace System.Net.Http.Formatting
                 Times.Exactly(expectedErrors)
             );
         }
+
 #endif
 
         [Fact]
@@ -118,6 +119,7 @@ namespace System.Net.Http.Formatting
             return member.Name.StartsWith("Required");
         }
     }
+
 #endif
 
     public class DataContractWithRequiredMembers

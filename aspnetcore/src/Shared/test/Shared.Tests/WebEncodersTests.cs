@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class WebEncodersTests

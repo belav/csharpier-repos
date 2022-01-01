@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 }
+
 namespace Microsoft.Extensions.Hosting.Systemd
 {
     public partial interface ISystemdNotifier
@@ -23,21 +24,25 @@ namespace Microsoft.Extensions.Hosting.Systemd
         bool IsEnabled { get; }
         void Notify(Microsoft.Extensions.Hosting.Systemd.ServiceState state);
     }
+
     public partial struct ServiceState
     {
         private object _dummy;
         private int _dummyPrimitive;
         public static readonly Microsoft.Extensions.Hosting.Systemd.ServiceState Ready;
         public static readonly Microsoft.Extensions.Hosting.Systemd.ServiceState Stopping;
+
         public ServiceState(string state)
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public static partial class SystemdHelpers
     {
         public static bool IsSystemdService()
@@ -45,6 +50,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
             throw null;
         }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatform("ios")]
@@ -60,13 +66,16 @@ namespace Microsoft.Extensions.Hosting.Systemd
             Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier systemdNotifier,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
         ) { }
+
         public void Dispose() { }
+
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
         )
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task WaitForStartAsync(
             System.Threading.CancellationToken cancellationToken
         )
@@ -74,14 +83,17 @@ namespace Microsoft.Extensions.Hosting.Systemd
             throw null;
         }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     public partial class SystemdNotifier : Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier
     {
         public SystemdNotifier() { }
+
         public bool IsEnabled
         {
             get { throw null; }
         }
+
         public void Notify(Microsoft.Extensions.Hosting.Systemd.ServiceState state) { }
     }
 }

@@ -33,6 +33,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 s_spaceCache[i] = new string(' ', i);
             }
         }
+
         #endregion
 
         /// <summary>

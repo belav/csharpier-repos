@@ -259,6 +259,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 _disposed = true;
             }
         }
+
         #endregion IDisposable
 
         #region public methods
@@ -515,6 +516,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
             return DirectoryEntryManager.GetDirectoryEntryInternal(_context, _classEntry.Path);
         }
+
         #endregion public methods
 
         #region public properties

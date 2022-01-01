@@ -129,6 +129,7 @@ namespace System.IO.Strategies
         internal sealed override bool IsClosed => _fileHandle.IsClosed;
 
         internal sealed override bool IsPipe => _isPipe;
+
         // Flushing is the responsibility of BufferedFileStreamStrategy
         internal sealed override SafeFileHandle SafeFileHandle
         {

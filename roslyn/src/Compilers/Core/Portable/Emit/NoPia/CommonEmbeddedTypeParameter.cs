@@ -53,6 +53,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected abstract IEnumerable<Cci.TypeReferenceWithAttributes> GetConstraints(
                 EmitContext context
             );
+
             protected abstract bool MustBeReferenceType { get; }
             protected abstract bool MustBeValueType { get; }
             protected abstract bool MustHaveDefaultConstructor { get; }

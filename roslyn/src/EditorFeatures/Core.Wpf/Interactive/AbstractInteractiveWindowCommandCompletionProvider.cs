@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract string GetCompletionString(string commandName);
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)

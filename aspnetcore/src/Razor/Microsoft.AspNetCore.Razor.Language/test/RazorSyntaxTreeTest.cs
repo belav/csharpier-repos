@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Test;
 
 public class RazorSyntaxTreeTest

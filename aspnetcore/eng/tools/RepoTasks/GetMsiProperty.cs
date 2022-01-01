@@ -7,6 +7,7 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Microsoft.Deployment.WindowsInstaller.Package;
 
+
 namespace RepoTasks;
 
 public class GetMsiProperty : Microsoft.Build.Utilities.Task

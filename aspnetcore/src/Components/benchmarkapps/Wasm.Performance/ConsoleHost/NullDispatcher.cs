@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
+
 namespace Wasm.Performance.ConsoleHost;
 
 internal class NullDispatcher : Dispatcher

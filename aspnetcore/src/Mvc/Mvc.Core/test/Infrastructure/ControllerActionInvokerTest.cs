@@ -26,6 +26,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class ControllerActionInvokerTest : CommonResourceInvokerTest
@@ -2155,11 +2156,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             return await Task.FromResult<TestActionResult>(null);
         }
+
 #pragma warning disable 1998
         public async Task TaskAction(int i, string s)
         {
             return;
         }
+
 #pragma warning restore 1998
 
 #pragma warning disable 1998
@@ -2167,6 +2170,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             return i;
         }
+
 #pragma warning restore 1998
 
 #pragma warning disable 1998
@@ -2174,6 +2178,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             return TaskValueTypeAction(i, s);
         }
+
 #pragma warning restore 1998
 
         public Task<int> TaskValueTypeActionWithoutAsync(int i, string s)
@@ -2186,6 +2191,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             throw new NotImplementedException("Not Implemented Exception");
         }
+
 #pragma warning restore 1998
 
         public Task<int> TaskActionWithExceptionWithoutAsync(int i, string s)

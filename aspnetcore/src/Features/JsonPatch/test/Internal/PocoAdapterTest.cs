@@ -4,6 +4,7 @@
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 public class PocoAdapterTest

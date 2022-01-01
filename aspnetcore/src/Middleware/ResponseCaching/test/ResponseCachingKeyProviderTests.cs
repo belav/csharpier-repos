@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
 public class ResponseCachingKeyProviderTests

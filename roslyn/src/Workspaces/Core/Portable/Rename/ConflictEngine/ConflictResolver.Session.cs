@@ -424,6 +424,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     }
                 }
             }
+
 #endif
 
             /// <summary>

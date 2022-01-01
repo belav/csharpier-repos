@@ -251,6 +251,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return this.ApplicationSyntaxReference; }
         }
+
         #endregion
 
         #region Attribute Decoding

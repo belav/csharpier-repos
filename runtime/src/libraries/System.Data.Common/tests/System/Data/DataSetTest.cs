@@ -1585,6 +1585,7 @@ namespace System.Data.Tests
             Assert.Equal(1, changes.Tables["parent"].Rows.Count);
             Assert.Equal(1, (int)changes.Tables["parent"].Rows[0][0]);
         }
+
         #endregion // DataSet.GetChanges Tests
 
         [Fact]
@@ -1792,6 +1793,7 @@ namespace System.Data.Tests
             internal string _tableName;
             internal int _rowKey;
             internal bool _contFlag;
+
             internal void init(string tbl, int row, bool cont, string err)
             {
                 _tableName = tbl;
@@ -1800,8 +1802,10 @@ namespace System.Data.Tests
                 _error = err;
             }
         }
+
         private readonly FillErrorStruct[] _fillErr = new FillErrorStruct[3];
         private int _fillErrCounter;
+
         private void FillErrorHandler(object sender, FillErrorEventArgs e)
         {
             e.Continue = _fillErr[_fillErrCounter]._contFlag;
@@ -1875,6 +1879,7 @@ namespace System.Data.Tests
             DataTableReader dtr = _ds.CreateDataReader();
             dsLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler, table1, table2);
         }
+
         [Fact]
         public void Load_TableConflictF()
         {

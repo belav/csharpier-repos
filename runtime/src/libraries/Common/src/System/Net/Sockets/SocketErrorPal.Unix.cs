@@ -21,6 +21,7 @@ namespace System.Net.Sockets
                 $"Expected s_socketErrorToNativeError to have {SocketErrorToNativeErrorCount} count instead of {s_socketErrorToNativeError.Count}."
             );
         }
+
 #endif
 
         private const int NativeErrorToSocketErrorCount = 42;

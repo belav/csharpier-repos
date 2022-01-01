@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
 public class WebHostConfigurationTests

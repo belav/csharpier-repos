@@ -412,6 +412,7 @@ namespace Internal.TypeSystem
     {
 #pragma warning disable CA1825 // avoid Array.Empty<T>() instantiation for TypeLoader
         public static readonly MethodDesc[] EmptyMethods = new MethodDesc[0];
+
 #pragma warning restore CA1825
 
         private int _hashcode;

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Net.Http;
 using AngleSharp.Dom.Html;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
 internal class EnableAuthenticator : DefaultUIPage

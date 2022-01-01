@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Internal;
 using Xunit.Abstractions;
 
+
 namespace InteropTests.Helpers;
 
 public class ClientProcess : IDisposable
@@ -45,7 +46,9 @@ public class ClientProcess : IDisposable
     }
 
     public Task WaitForReadyAsync() => _startTcs.Task;
+
     public Task WaitForExitAsync() => _processEx.Exited;
+
     public int ExitCode => _process.ExitCode;
     public bool IsReady => _startTcs.Task.IsCompletedSuccessfully;
 

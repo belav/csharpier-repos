@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Extensions.CommandLineUtils;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class CommandLineApplicationTests

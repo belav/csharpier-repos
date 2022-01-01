@@ -154,6 +154,7 @@ namespace System.Tests
         public class InitiallyExceptionThrowingCtor
         {
             public static int counter = 0;
+
             public static int getValue()
             {
                 if (++counter < 5)
@@ -900,6 +901,7 @@ namespace System.Tests
                 () => LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => null)
             );
         }
+
         private static void VerifyLazy<T>(
             Lazy<T> lazy,
             T expectedValue,
@@ -930,13 +932,16 @@ namespace System.Tests
         private struct LIX
         {
             public int f;
+
             public LIX(int f)
             {
                 this.f = f;
             }
 
             public override bool Equals(object other) => other is LIX && ((LIX)other).f == f;
+
             public override int GetHashCode() => f.GetHashCode();
+
             public override string ToString() => "LIX<" + f + ">";
         }
     }

@@ -29,6 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor
     {
 #if DEBUG
         private static readonly HashSet<ITextView> s_registeredViews = new();
+
 #endif
 
         private static readonly object s_gate = new();

@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using Xunit;
 
+
 namespace Ignitor;
 
 public class RenderBatchReaderTest

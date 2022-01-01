@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public abstract class RazorProjectEngine

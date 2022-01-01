@@ -166,6 +166,7 @@ namespace Microsoft.CodeAnalysis
                 int end,
                 bool hasEmbeddedQuote
             );
+
             protected abstract TStringResult? CreateNullForString();
 
             private void EatDoubleQuote() => Eat(DoubleQuoteChar);

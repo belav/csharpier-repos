@@ -4,6 +4,7 @@
 using Duende.IdentityServer.Models;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
 internal class ConfigureApiScopes : IPostConfigureOptions<ApiAuthorizationOptions>

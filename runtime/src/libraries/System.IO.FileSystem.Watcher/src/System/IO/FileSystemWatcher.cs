@@ -74,6 +74,7 @@ namespace System.IO
                 "The NotifyFilters enum has changed. The c_notifyFiltersValidMask must be updated to reflect the values of the NotifyFilters enum."
             );
         }
+
 #endif
 
         /// <devdoc>

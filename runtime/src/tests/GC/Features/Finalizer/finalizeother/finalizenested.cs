@@ -92,6 +92,7 @@ public class Test_finalizenested
         // disabling unused variable warning
 #pragma warning disable 0414
         Dummy obj;
+
 #pragma warning restore 0414
 
         public CreateObj()

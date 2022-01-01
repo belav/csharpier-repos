@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 
 public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest

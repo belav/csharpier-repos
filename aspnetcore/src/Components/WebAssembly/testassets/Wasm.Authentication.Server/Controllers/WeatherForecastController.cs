@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Wasm.Authentication.Shared;
 
+
 namespace Wasm.Authentication.Server.Controllers;
 
 [ApiController]

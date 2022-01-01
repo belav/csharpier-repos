@@ -67,7 +67,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public abstract ProjectId ProjectId { get; }
 
         public abstract LinePosition GetOriginalPosition();
+
         public abstract string GetOriginalFilePath();
+
         public abstract bool EqualsIgnoringLocation(TableItem other);
 
         public string ProjectName

@@ -61,10 +61,12 @@ namespace AppCS
     {
         CT ContraFooProp { set; }
     }
+
     public interface ICoVar<out CO>
     {
         CO CoFooMethod();
     }
+
     interface INormal<T>
     {
         T NormalFoo(T t);
@@ -95,6 +97,7 @@ namespace AppCS
     }
 
     class Animal { }
+
     class Tiger : Animal { }
 
     public class Test

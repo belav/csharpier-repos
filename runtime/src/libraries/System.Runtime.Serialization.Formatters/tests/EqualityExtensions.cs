@@ -25,6 +25,7 @@ using Xunit;
 // System.Text.Json is a .NET Core 3.0 specific library
 #if NETCOREAPP
 using System.Text.Json;
+
 #endif
 
 namespace System.Runtime.Serialization.Formatters.Tests
@@ -1443,6 +1444,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.LineNumber, other.LineNumber);
             Assert.Equal(@this.BytePositionInLine, other.BytePositionInLine);
         }
+
 #endif
 
         public static void IsEqual(this EventArgs @this, EventArgs other, bool isSamePlatform)

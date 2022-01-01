@@ -104,6 +104,7 @@ namespace Microsoft.VisualStudio.LanguageServices
             Project project,
             CancellationToken cancellationToken
         );
+
         public abstract Task<bool> TryGoToDefinitionAsync(
             ISymbol symbol,
             Project project,

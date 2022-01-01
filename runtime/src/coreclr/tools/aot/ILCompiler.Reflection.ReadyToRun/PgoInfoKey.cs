@@ -144,7 +144,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         }
 
         public override string ToString() => SignatureString;
+
         public override int GetHashCode() => SignatureString.GetHashCode();
+
         public override bool Equals(object obj) => obj is PgoInfoKey other && other.Equals(this);
 
         // Equality check. This isn't precisely accurate, but it should be good enough

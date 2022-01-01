@@ -12,8 +12,10 @@ namespace Benchstone.BenchF
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 4000000;
+
 #endif
 
         private static int s_i,

@@ -103,6 +103,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         {
             System.Threading.Interlocked.Increment(ref misses);
         }
+
 #endif
 
 

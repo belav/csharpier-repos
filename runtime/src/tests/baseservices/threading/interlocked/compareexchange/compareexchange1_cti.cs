@@ -66,6 +66,7 @@ public class InterlockedCompareExchange1
 
         return retVal;
     }
+
     #endregion
 
     #region Negetive Test Cases
@@ -85,6 +86,7 @@ public class InterlockedCompareExchange1
 
         return retVal;
     }
+
     #endregion
     #endregion
 
@@ -107,6 +109,7 @@ public class InterlockedCompareExchange1
             return 0;
         }
     }
+
     public void TestComChange()
     {
         // loop 20 times.  On the 0-9th times,
@@ -133,6 +136,7 @@ public class InterlockedCompareExchange1
             i++;
         }
     }
+
     public void changeGlobal()
     {
         // Thread B is the only place this runs

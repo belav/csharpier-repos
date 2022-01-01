@@ -8,6 +8,7 @@ namespace Test
     internal class Base
     {
         public double m;
+
         public Base()
         {
             m = 1.0;

@@ -54,6 +54,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             protected abstract ImmutableArray<ITypeParameterSymbol> DetermineTypeParametersWorker(
                 CancellationToken cancellationToken
             );
+
             protected abstract RefKind DetermineRefKind(CancellationToken cancellationToken);
 
             public ValueTask<ITypeSymbol> DetermineReturnTypeAsync(
@@ -72,18 +73,23 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             protected abstract ImmutableArray<ITypeSymbol> DetermineTypeArguments(
                 CancellationToken cancellationToken
             );
+
             protected abstract ITypeSymbol DetermineReturnTypeWorker(
                 CancellationToken cancellationToken
             );
+
             protected abstract ImmutableArray<RefKind> DetermineParameterModifiers(
                 CancellationToken cancellationToken
             );
+
             protected abstract ImmutableArray<ITypeSymbol> DetermineParameterTypes(
                 CancellationToken cancellationToken
             );
+
             protected abstract ImmutableArray<bool> DetermineParameterOptionality(
                 CancellationToken cancellationToken
             );
+
             protected abstract ImmutableArray<ParameterName> DetermineParameterNames(
                 CancellationToken cancellationToken
             );

@@ -82,6 +82,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             return property;
         }
     }
+
     #endregion
 
     [TestFixture]
@@ -99,6 +100,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 return (Manager != this);
             }
         }
+
         #endregion
 
         [Test]

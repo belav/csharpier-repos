@@ -17,6 +17,7 @@ namespace TestMono
         {
             return 1 + Do();
         }
+
         public virtual int Do()
         {
             return 1;

@@ -16,6 +16,7 @@ namespace System
 
 #if DEBUG
         static ConsolePal() => Debug.Assert(UnicodeCodePage == Encoding.Unicode.CodePage);
+
 #endif
 
         private static IntPtr InvalidHandleValue => new IntPtr(-1);

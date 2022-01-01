@@ -397,6 +397,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlInt64 Subtract(SqlInt64 x, SqlInt64 y)
         {

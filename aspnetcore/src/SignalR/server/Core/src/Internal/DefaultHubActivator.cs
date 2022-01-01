@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class DefaultHubActivator<THub> : IHubActivator<THub> where THub : Hub

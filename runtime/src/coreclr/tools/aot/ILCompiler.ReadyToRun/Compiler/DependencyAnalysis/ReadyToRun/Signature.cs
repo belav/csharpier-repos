@@ -12,6 +12,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override bool StaticDependenciesAreComputed => true;
 
         public abstract void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb);
+
         public int Offset => 0;
         public override int ClassCode => ClassCode;
 

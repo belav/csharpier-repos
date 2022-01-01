@@ -776,7 +776,9 @@ Environment.ProcessorCount
         public class HostObjectWithOverrides
         {
             public override bool Equals(object obj) => true;
+
             public override int GetHashCode() => 1234567;
+
             public override string ToString() => "HostObjectToString impl";
         }
 
@@ -1792,7 +1794,9 @@ new List<ArgumentException>()
             public static readonly int StaticField = 123;
             public int Y => 2;
             public string N { get; set; } = "2";
+
             public int Z() => 3;
+
             public override int GetHashCode() => 123;
         }
 
@@ -1805,12 +1809,14 @@ new List<ArgumentException>()
         private class PrivateClass : I
         {
             public string N { get; set; } = null;
+
             public int Z() => 3;
         }
 
         public class M<T>
         {
             private int F() => 3;
+
             public T G() => default(T);
         }
 

@@ -249,8 +249,10 @@ namespace System.Threading
         public ApartmentState GetApartmentState() =>
 #if FEATURE_COMINTEROP_APARTMENT_SUPPORT
             (ApartmentState)GetApartmentStateNative();
+
 #else // !FEATURE_COMINTEROP_APARTMENT_SUPPORT
             ApartmentState.Unknown;
+
 #endif // FEATURE_COMINTEROP_APARTMENT_SUPPORT
 
         /// <summary>
@@ -293,6 +295,7 @@ namespace System.Threading
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal extern int SetApartmentStateNative(int state);
+
 #else // FEATURE_COMINTEROP_APARTMENT_SUPPORT
         private static bool SetApartmentStateUnchecked(ApartmentState state, bool throwOnError)
         {
@@ -308,13 +311,16 @@ namespace System.Threading
 
             return true;
         }
+
 #endif // FEATURE_COMINTEROP_APARTMENT_SUPPORT
 
 #if FEATURE_COMINTEROP
         [MethodImpl(MethodImplOptions.InternalCall)]
         public extern void DisableComObjectEagerCleanup();
+
 #else // !FEATURE_COMINTEROP
         public void DisableComObjectEagerCleanup() { }
+
 #endif // FEATURE_COMINTEROP
 
         /// <summary>

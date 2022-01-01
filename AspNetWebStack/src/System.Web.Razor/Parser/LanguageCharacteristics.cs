@@ -21,8 +21,11 @@ namespace System.Web.Razor.Parser
         where TSymbol : SymbolBase<TSymbolType>
     {
         public abstract string GetSample(TSymbolType type);
+
         public abstract TTokenizer CreateTokenizer(ITextDocument source);
+
         public abstract TSymbolType FlipBracket(TSymbolType bracket);
+
         public abstract TSymbol CreateMarkerSymbol(SourceLocation location);
 
         public virtual IEnumerable<TSymbol> TokenizeString(string content)

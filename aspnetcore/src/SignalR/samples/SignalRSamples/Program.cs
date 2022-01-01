@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SignalRSamples.Hubs;
 
+
 namespace SignalRSamples;
 
 public class Program

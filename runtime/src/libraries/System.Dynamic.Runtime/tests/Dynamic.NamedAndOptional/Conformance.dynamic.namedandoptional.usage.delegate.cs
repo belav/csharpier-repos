@@ -11,6 +11,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 0);
+
     public class Test
     {
         private static int Boo(int i)
@@ -41,6 +42,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 0);
+
     public class Test
     {
         public int Boo(int i)
@@ -86,6 +88,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null);
+
     public class Test
     {
         private static int Boo(dynamic i)
@@ -116,6 +119,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null);
+
     public class Test
     {
         public int Boo(dynamic i)
@@ -161,6 +165,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1);
+
     public class Test
     {
         private static int Boo(int j)
@@ -191,6 +196,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1);
+
     public class Test
     {
         public int Boo(int j)
@@ -236,6 +242,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null);
+
     public class Test
     {
         private static int Boo(dynamic j)
@@ -266,6 +273,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = default(dynamic));
+
     public class Test
     {
         public int Boo(dynamic j)
@@ -311,6 +319,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, long z = 1);
+
     public class Test
     {
         public int Boo(int j, int k)
@@ -356,6 +365,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1);
+
     public class Test
     {
         private static int Boo(int j, int k)
@@ -386,6 +396,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1);
+
     public class Test
     {
         public int Boo(int j, int k)
@@ -431,6 +442,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 1);
+
     public class Test
     {
         private static int Boo(dynamic j, int k)
@@ -461,6 +473,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 1);
+
     public class Test
     {
         public int Boo(dynamic j, int k)
@@ -506,6 +519,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1);
+
     public class Test
     {
         private static int Boo(int j)
@@ -552,6 +566,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -582,6 +597,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         public int Boo(int j, int k, params int[] arr)
@@ -627,6 +643,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(dynamic j, int k, params int[] arr)
@@ -657,6 +674,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -687,6 +705,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         public int Boo(int j, int k, params int[] arr)
@@ -732,6 +751,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(dynamic j, int k, params int[] arr)
@@ -762,6 +782,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 1, params int[] arr);
+
     public class Test
     {
         public int Boo(dynamic j, int k, params int[] arr)
@@ -807,6 +828,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -837,6 +859,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         public int Boo(int j, int k, params int[] arr)
@@ -882,6 +905,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(dynamic j, int k, params int[] arr)
@@ -912,6 +936,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -957,6 +982,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -1003,6 +1029,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 5, int z = 6, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -1048,6 +1075,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 5, int z = 6, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -1098,9 +1126,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(13,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 1);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k)
         {
             return k;
@@ -1144,9 +1174,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 1);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k)
         {
             return k;
@@ -1176,9 +1208,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(13,19\).*CS0067</Expects>
     public delegate int Foo(dynamic i = null, int z = 1);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(dynamic j, int k)
         {
             return k;
@@ -1222,9 +1256,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k)
         {
             return k;
@@ -1255,9 +1291,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(13,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k)
         {
             return k;
@@ -1301,9 +1339,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k)
         {
             return k;
@@ -1333,9 +1373,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(13,19\).*CS0067</Expects>
     public delegate int Foo(dynamic i = default(dynamic), int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(dynamic j, int k)
         {
             return k;
@@ -1380,9 +1422,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k)
         {
             return k;
@@ -1426,9 +1470,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k)
         {
             return k;
@@ -1459,9 +1505,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(dynamic i = null, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(dynamic j, int k)
         {
             return k;
@@ -1505,9 +1553,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k)
         {
             return k;
@@ -1539,9 +1589,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k)
         {
             return k;
@@ -1585,9 +1637,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k)
         {
             return k;
@@ -1617,9 +1671,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k)
         {
             return k;
@@ -1652,9 +1708,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k)
         {
             return k;
@@ -1698,9 +1756,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k)
         {
             return k;
@@ -1731,9 +1791,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k, params int[] arr2)
         {
             return k - 1;
@@ -1777,9 +1839,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k, params int[] arr2)
         {
             return k - 1;
@@ -1809,9 +1873,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(dynamic j, int k, params int[] arr2)
         {
             return k - 1;
@@ -1855,9 +1921,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k, params int[] arr2)
         {
             return k - 1;
@@ -1890,9 +1958,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k, params int[] arr2)
         {
             return k;
@@ -1936,9 +2006,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k, params int[] arr2)
         {
             return k;
@@ -1969,9 +2041,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(dynamic j, int k, params int[] arr2)
         {
             return k;
@@ -2016,9 +2090,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k, params int[] arr2)
         {
             return k;
@@ -2062,9 +2138,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k, params int[] arr2)
         {
             return k;
@@ -2095,9 +2173,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(dynamic j, int k, params int[] arr2)
         {
             return k;
@@ -2141,9 +2221,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k, params int[] arr2)
         {
             return k;
@@ -2175,9 +2257,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k, params int[] arr2)
         {
             return k;
@@ -2221,9 +2305,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k, params int[] arr2)
         {
             return k;
@@ -2253,9 +2339,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k, params int[] arr2)
         {
             return k;
@@ -2287,9 +2375,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k, params int[] arr2)
         {
             return k - 1;
@@ -2333,9 +2423,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k, params int[] arr2)
         {
             return k - 1;
@@ -2364,9 +2456,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k, params int[] arr2)
         {
             return k - 1;
@@ -2398,9 +2492,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k, params int[] arr2)
         {
             return k - 1;
@@ -2444,9 +2540,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k, params int[] arr2)
         {
             return k - 1;
@@ -2475,9 +2573,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k, params int[] arr2)
         {
             return k - 1;
@@ -2510,9 +2610,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Code>
     //<Expects Status=warning>\(11,19\).*CS0067</Expects>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         public int Boo(int j, int k, params int[] arr2)
         {
             return arr2[0];
@@ -2556,9 +2658,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(dynamic i = null, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(dynamic j, int k, params int[] arr2)
         {
             return arr2[0];
@@ -2587,9 +2691,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 0, params int[] arr);
+
     public class Test
     {
         private static event Foo eve;
+
         private static int Boo(int j, int k, params int[] arr2)
         {
             return arr2[0];
@@ -2620,6 +2726,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 0);
+
     public class Test
     {
         [Fact]
@@ -2645,6 +2752,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1);
+
     public class Test
     {
         [Fact]
@@ -2670,6 +2778,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1);
+
     public class Test
     {
         [Fact]
@@ -2696,6 +2805,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1);
+
     public class Test
     {
         [Fact]
@@ -2722,6 +2832,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate long Foo(int i = 1, long z = 1);
+
     public class Test
     {
         [Fact]
@@ -2747,6 +2858,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate long Foo(int i = 1, long z = 1);
+
     public class Test
     {
         [Fact]
@@ -2773,6 +2885,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate long Foo(int i = 1, long z = 1);
+
     public class Test
     {
         [Fact]
@@ -2799,6 +2912,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate long Foo(int i = 1, long z = 1);
+
     public class Test
     {
         [Fact]
@@ -2824,6 +2938,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate long Foo(int i = 1, long z = 1);
+
     public class Test
     {
         [Fact]
@@ -2850,6 +2965,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate long Foo(int i = 1, long z = 1);
+
     public class Test
     {
         [Fact]
@@ -2876,6 +2992,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -2901,6 +3018,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -2929,6 +3047,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -2957,6 +3076,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 5, int z = 6, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -2982,6 +3102,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 5, int z = 6, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3010,6 +3131,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 5, int z = 6, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3038,6 +3160,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 5, int z = 6, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3078,6 +3201,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 5, int z = 6, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3121,6 +3245,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3146,6 +3271,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3172,6 +3298,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3198,6 +3325,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -3228,6 +3356,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -3260,6 +3389,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         private static int Boo(int j, int k, params int[] arr)
@@ -3292,6 +3422,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3332,6 +3463,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3373,6 +3505,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3414,6 +3547,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int i = 1, int z = 1, params int[] arr);
+
     public class Test
     {
         [Fact]
@@ -3458,6 +3592,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] int i);
+
     public class Test
     {
         private static int Boo(int i)
@@ -3490,6 +3625,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] int i);
+
     public class Test
     {
         public int Boo(int i)
@@ -3537,6 +3673,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] dynamic i);
+
     public class Test
     {
         private static int Boo(dynamic i)
@@ -3569,6 +3706,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] dynamic i);
+
     public class Test
     {
         private static int Boo(dynamic i)
@@ -3601,6 +3739,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] [DefaultParameterValue(1)] int i);
+
     public class Test
     {
         private static int Boo(int i)
@@ -3633,6 +3772,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] [DefaultParameterValue(1)] int i);
+
     public class Test
     {
         public int Boo(int i)
@@ -3680,6 +3820,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] [DefaultParameterValue(1)] dynamic i);
+
     public class Test
     {
         private static int Boo(dynamic i)
@@ -3712,6 +3853,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     using System.Runtime.InteropServices;
 
     public delegate int Foo([Optional] [DefaultParameterValue(1)] dynamic i);
+
     public class Test
     {
         private static int Boo(dynamic i)
@@ -3747,6 +3889,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] int i,
         [Optional] [DefaultParameterValue(0)] int j
     );
+
     public class Test
     {
         private static int Boo(int i, int j)
@@ -3782,6 +3925,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] int i,
         [Optional] [DefaultParameterValue(0)] int j
     );
+
     public class Test
     {
         public int Boo(int i, int j)
@@ -3832,6 +3976,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] dynamic i,
         [Optional] [DefaultParameterValue(0)] dynamic j
     );
+
     public class Test
     {
         private static int Boo(dynamic i, dynamic j)
@@ -3867,6 +4012,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] dynamic i,
         [Optional] [DefaultParameterValue(0)] dynamic j
     );
+
     public class Test
     {
         private static int Boo(dynamic i, dynamic j)
@@ -3902,6 +4048,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] int i,
         [Optional] [DefaultParameterValue(1)] int j
     );
+
     public class Test
     {
         private static int Boo(int i, int j)
@@ -3937,6 +4084,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] int i,
         [Optional] [DefaultParameterValue(1)] int j
     );
+
     public class Test
     {
         public int Boo(int i, int j)
@@ -3987,6 +4135,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] dynamic i,
         [Optional] [DefaultParameterValue(1)] int j
     );
+
     public class Test
     {
         private static int Boo(dynamic i, int j)
@@ -4022,6 +4171,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] dynamic i,
         [Optional] [DefaultParameterValue(1)] dynamic j
     );
+
     public class Test
     {
         private static int Boo(dynamic i, dynamic j)
@@ -4057,6 +4207,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] int i,
         [Optional] [DefaultParameterValue(1)] int j
     );
+
     public class Test
     {
         private static int Boo(int i, int j)
@@ -4092,6 +4243,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] int i,
         [Optional] [DefaultParameterValue(1)] int j
     );
+
     public class Test
     {
         public int Boo(int i, int j)
@@ -4142,6 +4294,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] int i,
         [Optional] [DefaultParameterValue(1)] dynamic j
     );
+
     public class Test
     {
         private static int Boo(int i, dynamic j)
@@ -4177,6 +4330,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         [Optional] [DefaultParameterValue(1)] dynamic i,
         [Optional] [DefaultParameterValue(1)] dynamic j
     );
+
     public class Test
     {
         private static int Boo(dynamic i, dynamic j)

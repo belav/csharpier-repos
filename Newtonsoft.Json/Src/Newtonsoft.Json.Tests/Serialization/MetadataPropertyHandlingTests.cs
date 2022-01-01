@@ -36,6 +36,7 @@ using Newtonsoft.Json.Utilities;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -530,6 +531,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(4, nested[3]);
             Assert.AreEqual(5, nested[4]);
         }
+
 #endif
 
         public class MetadataPropertyDisabledTestClass

@@ -34,20 +34,25 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
         where TVariableDeclaratorSyntax : SyntaxNode
     {
         protected abstract bool IsMeaningfulBlock(SyntaxNode node);
+
         protected abstract bool CanMoveToBlock(
             ILocalSymbol localSymbol,
             SyntaxNode currentBlock,
             SyntaxNode destinationBlock
         );
+
         protected abstract SyntaxNode GetVariableDeclaratorSymbolNode(
             TVariableDeclaratorSyntax variableDeclarator
         );
+
         protected abstract bool IsValidVariableDeclarator(
             TVariableDeclaratorSyntax variableDeclarator
         );
+
         protected abstract SyntaxToken GetIdentifierOfVariableDeclarator(
             TVariableDeclaratorSyntax variableDeclarator
         );
+
         protected abstract Task<bool> TypesAreCompatibleAsync(
             Document document,
             ILocalSymbol localSymbol,

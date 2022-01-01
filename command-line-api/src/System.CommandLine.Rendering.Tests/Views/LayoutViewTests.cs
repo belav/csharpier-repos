@@ -107,6 +107,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             }
 
             public int OnChildUpdatedInvocationCount { get; set; }
+
             protected override void OnChildUpdated(object sender, EventArgs e)
             {
                 OnChildUpdatedInvocationCount++;

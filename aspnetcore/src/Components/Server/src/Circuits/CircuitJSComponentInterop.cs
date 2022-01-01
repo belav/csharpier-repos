@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Components.Web.Infrastructure;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal class CircuitJSComponentInterop : JSComponentInterop

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
+
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
 internal class TestServerBuilder

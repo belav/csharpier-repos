@@ -349,6 +349,7 @@ namespace Moq.Tests
             public class X
             {
                 public IY NonVirtualProperty { get; set; }
+
                 public void NonVirtual() { }
             }
 

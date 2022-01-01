@@ -3,6 +3,7 @@
 
 using Microsoft.JSInterop.Implementation;
 
+
 namespace Microsoft.JSInterop.WebAssembly;
 
 internal class WebAssemblyJSObjectReference

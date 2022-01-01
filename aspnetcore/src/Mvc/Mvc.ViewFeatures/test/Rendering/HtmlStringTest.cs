@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.Extensions.WebEncoders.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
 public class HtmlStringTest

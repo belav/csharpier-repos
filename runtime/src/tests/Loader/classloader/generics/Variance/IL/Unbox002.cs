@@ -4,21 +4,27 @@
 using System;
 
 public class Base { }
+
 public class Sub : Base { }
 
 public class GBase<T> { }
+
 public class GSubT<T> : GBase<T> { }
 
 public class GTU<T, U> : IPlusT<T>, IMinusT<U>, IMinusTPlusU<T, U> { }
+
 public class GTArrUArr<T, U> : IMinusT<T[]>, IPlusT<U[]>, IMinusTPlusU<T[], U[]> { }
+
 public class GRefTRefU<T, U>
     : IMinusT<IPlusT<T>>,
       IMinusT<IMinusT<U>>,
       IMinusTPlusU<IPlusT<T>, IPlusT<U>> { }
+
 public class GRefTArrRefUArr<T, U>
     : IMinusT<IPlusT<T[]>>,
       IMinusT<IMinusT<U[]>>,
       IMinusTPlusU<IPlusT<T[]>, IPlusT<U[]>> { }
+
 public class GArrRefTArrRefU<T, U>
     : IMinusT<IPlusT<T>[]>,
       IMinusT<IMinusT<U>[]>,
@@ -40,6 +46,7 @@ public class TestClass
             Console.WriteLine("Test Failed at location: {0} @ count {1} ", location, iTestCount);
         }
     }
+
     private static void UnboxUToTInternal<T, U>()
     {
         T t = (T)Activator.CreateInstance(typeof(U));

@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
 public class WebSocketsTests : VerifiableLoggedTest

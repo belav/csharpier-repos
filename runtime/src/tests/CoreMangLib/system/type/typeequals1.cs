@@ -172,6 +172,7 @@ public class TypeEquals1
 
         return retVal;
     }
+
     #endregion
 
     #region Nagetive Test Cases
@@ -198,6 +199,7 @@ public class TypeEquals1
 
         return retVal;
     }
+
     #endregion
     #endregion
 

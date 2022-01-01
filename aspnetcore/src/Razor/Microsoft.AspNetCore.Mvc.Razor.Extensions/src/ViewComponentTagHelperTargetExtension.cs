@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
 internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTargetExtension

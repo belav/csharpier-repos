@@ -32,6 +32,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         public static readonly Guid guidTestWindowCmdSet = new Guid(
             "1E198C22-5980-4E7E-92F3-F73168D1FB63"
         );
+
         #endregion
 
         private static readonly BinaryServerFormatterSinkProvider DefaultSinkProvider =
@@ -47,6 +48,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
 
 #pragma warning disable IDE0052 // Remove unread private members - used to hold the marshalled integration test service
         private ObjRef? _marshalledService;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         private IntegrationTestServiceCommands(Package package)

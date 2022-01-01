@@ -21,6 +21,7 @@ using Roslyn.Utilities;
 
 #if !CODE_STYLE  // https://github.com/dotnet/roslyn/issues/42218 removing dependency on WorkspaceServices.
 using Microsoft.CodeAnalysis.CodeActions.WorkspaceServices;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
@@ -139,6 +140,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
             private readonly Solution _startingSolution;
             private readonly ISymbol _symbol;
             private readonly string _newName;
+
 #endif
 
             private readonly string _title;
@@ -176,6 +178,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
                     )
                 );
             }
+
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
             )

@@ -438,6 +438,7 @@ throw e;",
             var result = fn(5);
             Assert.Equal(25, result);
         }
+
 #endif
 
         [Fact]
@@ -1332,8 +1333,11 @@ return reply;
         private class StreamOffsetResolver : SourceReferenceResolver
         {
             public override bool Equals(object other) => ReferenceEquals(this, other);
+
             public override int GetHashCode() => 42;
+
             public override string ResolveReference(string path, string baseFilePath) => path;
+
             public override string NormalizePath(string path, string baseFilePath) => path;
 
             public override Stream OpenRead(string resolvedPath)

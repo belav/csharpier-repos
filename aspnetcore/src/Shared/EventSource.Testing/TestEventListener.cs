@@ -3,6 +3,7 @@
 
 using System.Diagnostics.Tracing;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal class TestEventListener : EventListener

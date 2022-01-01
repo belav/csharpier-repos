@@ -8,6 +8,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public class ServiceCollectionExtensionsTest

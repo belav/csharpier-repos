@@ -302,6 +302,7 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal("$.$ref", ex.Path);
         }
+
         #endregion
 
         #region Root Dictionary
@@ -441,6 +442,7 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal(1, root[""]);
         }
+
         #endregion
 
         #region Root Array
@@ -707,6 +709,7 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal("$[0]", ex.Path);
         }
+
         #endregion
 
         #region Converter
@@ -787,6 +790,7 @@ namespace System.Text.Json.Serialization.Tests
                 throw new NotImplementedException();
             }
         }
+
         #endregion
 
         #region Null/non-existent reference
@@ -1080,6 +1084,7 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal(expectedPath, ex.Path);
         }
+
         #endregion
 
         #region Throw on immutables
@@ -1364,6 +1369,7 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal("$.$values", ex.Path);
         }
+
         #endregion
 
         #region Ground Rules/Corner cases
@@ -1663,6 +1669,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.NotNull(root);
             Assert.Same(root, root.Manager);
         }
+
         #endregion
 
         #region Preserved arrays ($id and $values)
@@ -1793,6 +1800,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Contains(typeof(List<Employee>).ToString(), ex.Message);
             Assert.Contains("TrailingProperty", ex.Message);
         }
+
         #endregion
 
         #region JSON Objects if not collection
@@ -1874,6 +1882,7 @@ namespace System.Text.Json.Serialization.Tests
             >(json, s_deserializerOptionsPreserve);
             Assert.Equal("test", dictionary["$test"]);
         }
+
         #endregion
 
         #region JSON Objects if collection
@@ -1917,6 +1926,7 @@ namespace System.Text.Json.Serialization.Tests
                 () => JsonSerializer.Deserialize<List<string>>(json, s_deserializerOptionsPreserve)
             );
         }
+
         #endregion
         #endregion
 
@@ -1958,6 +1968,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         private class Derived : Base { }
+
         private class Base { }
     }
 }

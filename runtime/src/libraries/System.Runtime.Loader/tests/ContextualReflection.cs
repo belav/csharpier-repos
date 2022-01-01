@@ -53,6 +53,7 @@ namespace System.Runtime.Loader.Tests
         {
             return Assembly.LoadWithPartialName(name);
         }
+
 #pragma warning restore 618
 
         public Type TypeGetType(string typeName)
@@ -658,6 +659,7 @@ namespace System.Runtime.Loader.Tests
                 () => AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
             );
         }
+
 #endregion
 
 #region Assembly.Load
@@ -802,6 +804,7 @@ namespace System.Runtime.Loader.Tests
                 sharedAssembly
             );
         }
+
 #endregion
 
 #region Type.GetType
@@ -1258,6 +1261,7 @@ namespace System.Runtime.Loader.Tests
                 _fixture.isolatedAlcAssembly
             );
         }
+
 #endregion
 
 #region Activator.CreateInstance

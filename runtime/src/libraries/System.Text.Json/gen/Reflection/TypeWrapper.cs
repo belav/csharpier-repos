@@ -655,6 +655,7 @@ namespace System.Text.Json.Reflection
 
 #pragma warning disable RS1024 // Compare symbols correctly
         public override int GetHashCode() => _typeSymbol.GetHashCode();
+
 #pragma warning restore RS1024 // Compare symbols correctly
 
         public override int GetArrayRank()

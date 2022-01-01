@@ -828,7 +828,9 @@ namespace System.Xml.Xsl.XsltOld
         //
         // Abstract methods
         internal abstract void Write(char outputChar);
+
         internal abstract void Write(string? outputText);
+
         internal abstract void Close();
     }
 }

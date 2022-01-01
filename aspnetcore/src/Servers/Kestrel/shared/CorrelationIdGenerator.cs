@@ -4,6 +4,7 @@
 using System;
 using System.Threading;
 
+
 namespace Microsoft.AspNetCore.Connections;
 
 internal static class CorrelationIdGenerator

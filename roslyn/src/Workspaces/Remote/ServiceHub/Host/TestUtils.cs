@@ -16,6 +16,7 @@ using Roslyn.Utilities;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.CodeAnalysis.Internal.Log;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Remote

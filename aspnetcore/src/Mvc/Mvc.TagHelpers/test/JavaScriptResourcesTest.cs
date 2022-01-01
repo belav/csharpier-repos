@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 public class JavaScriptResourcesTest

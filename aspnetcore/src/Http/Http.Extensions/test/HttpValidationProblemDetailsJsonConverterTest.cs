@@ -7,6 +7,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Http.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http.Extensions;
 
 public class HttpValidationProblemDetailsJsonConverterTest

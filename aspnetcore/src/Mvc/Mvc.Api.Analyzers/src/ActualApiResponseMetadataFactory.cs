@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public static class ActualApiResponseMetadataFactory

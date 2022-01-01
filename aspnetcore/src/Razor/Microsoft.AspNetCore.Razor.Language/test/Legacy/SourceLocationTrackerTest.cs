@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public class SourceLocationTrackerTest

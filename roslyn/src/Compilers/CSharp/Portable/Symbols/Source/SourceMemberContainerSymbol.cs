@@ -102,6 +102,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     EnumUtilities.ContainsAllValues<NullableContextKind>(NullableContextMask)
                 );
             }
+
 #endif
 
             public Flags(SpecialType specialType, TypeKind typeKind)
@@ -563,6 +564,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         protected abstract void CheckBase(BindingDiagnosticBag diagnostics);
+
         protected abstract void CheckInterfaces(BindingDiagnosticBag diagnostics);
 
         internal override void ForceComplete(

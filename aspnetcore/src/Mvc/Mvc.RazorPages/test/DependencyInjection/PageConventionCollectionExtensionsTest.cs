@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public class PageConventionCollectionExtensionsTest
@@ -1193,6 +1194,7 @@ public class PageConventionCollectionExtensionsTest
             }
         }
     }
+
     private static void ApplyConventions(
         PageConventionCollection conventions,
         PageApplicationModel[] models

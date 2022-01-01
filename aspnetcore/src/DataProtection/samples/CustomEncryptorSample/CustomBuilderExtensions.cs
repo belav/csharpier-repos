@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace CustomEncryptorSample;
 
 public static class CustomBuilderExtensions

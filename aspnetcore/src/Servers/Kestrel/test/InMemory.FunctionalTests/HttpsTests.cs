@@ -24,6 +24,7 @@ using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
 public class HttpsTests : LoggedTest

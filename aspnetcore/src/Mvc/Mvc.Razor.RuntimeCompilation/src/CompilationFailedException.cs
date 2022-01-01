@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal class CompilationFailedException : Exception, ICompilationException

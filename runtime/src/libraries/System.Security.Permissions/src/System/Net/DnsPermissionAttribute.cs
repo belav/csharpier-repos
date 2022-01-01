@@ -25,6 +25,7 @@ namespace System.Net
     public sealed class DnsPermissionAttribute : CodeAccessSecurityAttribute
     {
         public DnsPermissionAttribute(SecurityAction action) : base(action) { }
+
         public override IPermission CreatePermission()
         {
             return null;

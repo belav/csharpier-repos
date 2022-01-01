@@ -37,6 +37,7 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             FixableDiagnosticIds = ImmutableArray.Create(diagnosticId);
 
         protected abstract ITypeSymbol GetSwitchType(TSwitchOperation switchStatement);
+
         protected abstract ICollection<ISymbol> GetMissingEnumMembers(
             TSwitchOperation switchOperation
         );
@@ -46,11 +47,14 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             Compilation compilation,
             TMemberAccessExpression caseLabel
         );
+
         protected abstract TSwitchArmSyntax CreateDefaultSwitchArm(
             SyntaxGenerator generator,
             Compilation compilation
         );
+
         protected abstract int InsertPosition(TSwitchOperation switchOperation);
+
         protected abstract TSwitchSyntax InsertSwitchArms(
             SyntaxGenerator generator,
             TSwitchSyntax switchNode,

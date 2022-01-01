@@ -9,6 +9,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.InMemory.Test;
 
 public class InMemoryUserStoreTest

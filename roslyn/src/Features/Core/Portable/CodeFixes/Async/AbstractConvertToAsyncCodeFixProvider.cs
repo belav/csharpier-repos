@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Async
             SemanticModel semanticModel,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<Tuple<SyntaxTree, SyntaxNode>> GetRootInOtherSyntaxTreeAsync(
             SyntaxNode node,
             SemanticModel semanticModel,

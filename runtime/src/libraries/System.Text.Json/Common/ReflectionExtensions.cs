@@ -4,8 +4,10 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Collections.Generic;
+
 #if !BUILDING_SOURCE_GENERATOR
 using System.Diagnostics.CodeAnalysis;
+
 #endif
 
 namespace System.Text.Json.Reflection

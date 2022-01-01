@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal class SyntaxTrivia : GreenNode

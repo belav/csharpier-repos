@@ -37,6 +37,7 @@ using NUnit.Framework;
 #endif
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
@@ -73,6 +74,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string Maker { get; set; }
             public string Model { get; set; }
         }
+
         #endregion
 
         [Test]

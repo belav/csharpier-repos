@@ -33,6 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {0} a specific target and scoped to a namespace, type, member, etc.
 
 ";
+
         protected AbstractSuppressionCodeFixProvider() { }
 
         public FixAllProvider GetFixAllProvider() => SuppressionFixAllProvider.Instance;
@@ -47,6 +48,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             bool needsLeadingEndOfLine,
             bool needsTrailingEndOfLine
         );
+
         protected abstract SyntaxTriviaList CreatePragmaRestoreDirectiveTrivia(
             Diagnostic diagnostic,
             Func<SyntaxNode, SyntaxNode> formatNode,
@@ -74,16 +76,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
         protected abstract string DefaultFileExtension { get; }
         protected abstract string SingleLineCommentStart { get; }
+
         protected abstract bool IsAttributeListWithAssemblyAttributes(SyntaxNode node);
+
         protected abstract bool IsEndOfLine(SyntaxTrivia trivia);
+
         protected abstract bool IsEndOfFileToken(SyntaxToken token);
+
         protected abstract bool IsSingleAttributeInAttributeList(SyntaxNode attribute);
+
         protected abstract bool IsAnyPragmaDirectiveForId(
             SyntaxTrivia trivia,
             string id,
             out bool enableDirective,
             out bool hasMultipleIds
         );
+
         protected abstract SyntaxTrivia TogglePragmaDirective(SyntaxTrivia trivia);
 
         protected string GlobalSuppressionsFileHeaderComment
@@ -104,6 +112,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         }
 
         protected abstract SyntaxNode GetContainingStatement(SyntaxToken token);
+
         protected abstract bool TokenHasTrailingLineContinuationChar(SyntaxToken token);
 
         protected SyntaxToken GetAdjustedTokenForPragmaDisable(

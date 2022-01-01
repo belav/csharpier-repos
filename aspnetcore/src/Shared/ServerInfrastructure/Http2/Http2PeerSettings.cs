@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal class Http2PeerSettings

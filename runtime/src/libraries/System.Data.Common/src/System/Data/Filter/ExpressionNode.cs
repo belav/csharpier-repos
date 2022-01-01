@@ -45,18 +45,26 @@ namespace System.Data
         }
 
         internal abstract void Bind(DataTable table, List<DataColumn> list);
+
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal abstract object Eval();
+
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal abstract object Eval(DataRow? row, DataRowVersion version);
+
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal abstract object Eval(int[] recordNos);
+
         internal abstract bool IsConstant();
+
         internal abstract bool IsTableConstant();
+
         internal abstract bool HasLocalAggregate();
+
         internal abstract bool HasRemoteAggregate();
 
         internal abstract ExpressionNode Optimize();
+
         internal virtual bool DependsOn(DataColumn column)
         {
             return false;

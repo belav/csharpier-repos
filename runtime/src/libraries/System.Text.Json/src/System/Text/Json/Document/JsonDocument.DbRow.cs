@@ -56,6 +56,7 @@ namespace System.Text.Json
             {
                 Debug.Assert(sizeof(DbRow) == Size);
             }
+
 #endif
 
             internal DbRow(JsonTokenType jsonTokenType, int location, int sizeOrLength)

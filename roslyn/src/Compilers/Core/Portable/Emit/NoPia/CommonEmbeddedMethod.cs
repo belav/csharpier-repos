@@ -56,7 +56,9 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             }
 
             protected abstract ImmutableArray<TEmbeddedTypeParameter> GetTypeParameters();
+
             protected abstract ImmutableArray<TEmbeddedParameter> GetParameters();
+
             protected abstract bool IsAbstract { get; }
             protected abstract bool IsAccessCheckedOnOverride { get; }
             protected abstract bool IsConstructor { get; }
@@ -69,9 +71,11 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected abstract bool IsSealed { get; }
             protected abstract bool IsStatic { get; }
             protected abstract bool IsVirtual { get; }
+
             protected abstract System.Reflection.MethodImplAttributes GetImplementationAttributes(
                 EmitContext context
             );
+
             protected abstract bool ReturnValueIsMarshalledExplicitly { get; }
             protected abstract Cci.IMarshallingInformation ReturnValueMarshallingInformation { get; }
             protected abstract ImmutableArray<byte> ReturnValueMarshallingDescriptor { get; }

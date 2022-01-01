@@ -32,8 +32,10 @@ using Newtonsoft.Json.Serialization;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
@@ -48,6 +50,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string Game { get; set; }
             public Dictionary<string, int> UserPoints { get; set; }
         }
+
         #endregion
 
         [Test]

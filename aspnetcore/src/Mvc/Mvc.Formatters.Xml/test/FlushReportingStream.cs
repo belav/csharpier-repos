@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public static class FlushReportingStream

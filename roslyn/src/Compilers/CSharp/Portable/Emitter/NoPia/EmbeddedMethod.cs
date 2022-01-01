@@ -13,6 +13,7 @@ using Cci = Microsoft.Cci;
 
 #if !DEBUG
 using MethodSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.MethodSymbol;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

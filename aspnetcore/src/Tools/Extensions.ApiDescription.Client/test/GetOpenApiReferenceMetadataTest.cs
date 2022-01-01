@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.Build.Utilities;
 using Xunit;
 
+
 namespace Microsoft.Extensions.ApiDescription.Client;
 
 public class GetOpenApiReferenceMetadataTest

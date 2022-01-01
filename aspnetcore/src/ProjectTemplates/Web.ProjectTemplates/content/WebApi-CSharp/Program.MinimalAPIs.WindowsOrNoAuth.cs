@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 #endif
 #if (WindowsAuth)
 builder.Services
@@ -22,6 +23,7 @@ builder.Services.AddAuthorization(
         options.FallbackPolicy = options.DefaultPolicy;
     }
 );
+
 #endif
 
 var app = builder.Build();
@@ -33,13 +35,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 #endif
 #if (RequiresHttps)
 
 app.UseHttpsRedirection();
+
 #endif
 #if (WindowsAuth)
 app.UseAuthentication();
+
 #endif
 
 var summaries = new[]
@@ -76,9 +81,11 @@ app.MapGet(
         }
     )
     .WithName("GetWeatherForecast");
+
 #else
     }
 );
+
 #endif
 
 app.Run();

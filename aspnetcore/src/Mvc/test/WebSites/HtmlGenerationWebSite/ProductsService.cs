@@ -6,6 +6,7 @@ using System.Linq;
 using HtmlGenerationWebSite.Models;
 using Microsoft.Extensions.Caching.Memory;
 
+
 namespace HtmlGenerationWebSite;
 
 public class ProductsService

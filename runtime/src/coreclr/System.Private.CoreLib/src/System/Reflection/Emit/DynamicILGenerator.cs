@@ -628,6 +628,7 @@ namespace System.Reflection.Emit
         private byte[] m_localSignature;
         private int m_stackSize;
         private DynamicScope m_scope;
+
         #endregion
 
         #region Internal Methods
@@ -930,6 +931,7 @@ namespace System.Reflection.Emit
         private byte[] m_localSignature;
         private int m_maxStackSize;
         private int m_methodSignature;
+
         #endregion
 
         #region Constructor
@@ -942,6 +944,7 @@ namespace System.Reflection.Emit
             m_code = Array.Empty<byte>();
             m_localSignature = Array.Empty<byte>();
         }
+
         #endregion
 
         #region Internal Methods
@@ -961,6 +964,7 @@ namespace System.Reflection.Emit
         internal byte[] Exceptions => m_exceptions;
         internal byte[] Code => m_code;
         internal int MaxStackSize => m_maxStackSize;
+
         #endregion
 
         #region Public ILGenerator Methods
@@ -1028,6 +1032,7 @@ namespace System.Reflection.Emit
 
             m_localSignature = new Span<byte>(localSignature, signatureSize).ToArray();
         }
+
         #endregion
 
         #region Public Scope Methods
@@ -1035,30 +1040,37 @@ namespace System.Reflection.Emit
         {
             return DynamicScope.GetTokenFor(method);
         }
+
         public int GetTokenFor(DynamicMethod method)
         {
             return DynamicScope.GetTokenFor(method);
         }
+
         public int GetTokenFor(RuntimeMethodHandle method, RuntimeTypeHandle contextType)
         {
             return DynamicScope.GetTokenFor(method, contextType);
         }
+
         public int GetTokenFor(RuntimeFieldHandle field)
         {
             return DynamicScope.GetTokenFor(field);
         }
+
         public int GetTokenFor(RuntimeFieldHandle field, RuntimeTypeHandle contextType)
         {
             return DynamicScope.GetTokenFor(field, contextType);
         }
+
         public int GetTokenFor(RuntimeTypeHandle type)
         {
             return DynamicScope.GetTokenFor(type);
         }
+
         public int GetTokenFor(string literal)
         {
             return DynamicScope.GetTokenFor(literal);
         }
+
         public int GetTokenFor(byte[] signature)
         {
             return DynamicScope.GetTokenFor(signature);
@@ -1070,6 +1082,7 @@ namespace System.Reflection.Emit
     {
         #region Private Data Members
         internal readonly List<object?> m_tokens = new List<object?> { null };
+
         #endregion
 
         #region Internal Methods
@@ -1091,6 +1104,7 @@ namespace System.Reflection.Emit
             m_tokens.Add(varArgMethod);
             return m_tokens.Count - 1 | (int)MetadataTokenType.MemberRef;
         }
+
         internal string? GetString(int token)
         {
             return this[token] as string;
@@ -1106,6 +1120,7 @@ namespace System.Reflection.Emit
 
             return vaMethod.m_signature.GetSignature(true);
         }
+
         #endregion
 
         #region Public Methods
@@ -1134,36 +1149,43 @@ namespace System.Reflection.Emit
             m_tokens.Add(method);
             return m_tokens.Count - 1 | (int)MetadataTokenType.MethodDef;
         }
+
         public int GetTokenFor(RuntimeMethodHandle method, RuntimeTypeHandle typeContext)
         {
             m_tokens.Add(new GenericMethodInfo(method, typeContext));
             return m_tokens.Count - 1 | (int)MetadataTokenType.MethodDef;
         }
+
         public int GetTokenFor(DynamicMethod method)
         {
             m_tokens.Add(method);
             return m_tokens.Count - 1 | (int)MetadataTokenType.MethodDef;
         }
+
         public int GetTokenFor(RuntimeFieldHandle field)
         {
             m_tokens.Add(field);
             return m_tokens.Count - 1 | (int)MetadataTokenType.FieldDef;
         }
+
         public int GetTokenFor(RuntimeFieldHandle field, RuntimeTypeHandle typeContext)
         {
             m_tokens.Add(new GenericFieldInfo(field, typeContext));
             return m_tokens.Count - 1 | (int)MetadataTokenType.FieldDef;
         }
+
         public int GetTokenFor(RuntimeTypeHandle type)
         {
             m_tokens.Add(type);
             return m_tokens.Count - 1 | (int)MetadataTokenType.TypeDef;
         }
+
         public int GetTokenFor(string literal)
         {
             m_tokens.Add(literal);
             return m_tokens.Count - 1 | (int)MetadataTokenType.String;
         }
+
         public int GetTokenFor(byte[] signature)
         {
             m_tokens.Add(signature);

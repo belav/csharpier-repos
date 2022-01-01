@@ -28,13 +28,16 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
         protected AbstractAddAnonymousTypeMemberNameCodeFixProvider() { }
 
         protected abstract bool HasName(TAnonymousObjectMemberDeclaratorSyntax declarator);
+
         protected abstract TExpressionSyntax GetExpression(
             TAnonymousObjectMemberDeclaratorSyntax declarator
         );
+
         protected abstract TAnonymousObjectMemberDeclaratorSyntax WithName(
             TAnonymousObjectMemberDeclaratorSyntax declarator,
             SyntaxToken name
         );
+
         protected abstract IEnumerable<string> GetAnonymousObjectMemberNames(
             TAnonymousObjectInitializer initializer
         );

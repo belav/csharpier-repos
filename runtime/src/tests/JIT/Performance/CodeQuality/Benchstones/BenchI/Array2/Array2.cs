@@ -11,8 +11,10 @@ namespace Benchstone.BenchI
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 500000;
+
 #endif
 
         static T[][][] AllocArray<T>(int n1, int n2, int n3)

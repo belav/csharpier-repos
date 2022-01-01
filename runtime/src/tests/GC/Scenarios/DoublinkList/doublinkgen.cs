@@ -18,6 +18,7 @@ namespace DoubLink
         // disabling unused variable warning
 #pragma warning disable 0414
         internal DoubLink Mv_Doub;
+
 #pragma warning restore 0414
 
         public static int Main(System.String[] Args)
@@ -181,6 +182,7 @@ namespace DoubLink
         internal DLinkNode Last;
         internal DLinkNode Next;
         internal int[] Size;
+
 #pragma warning restore 0414
 
         public static int FinalCount = 0;

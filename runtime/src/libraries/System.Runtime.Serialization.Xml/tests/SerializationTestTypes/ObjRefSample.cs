@@ -11,7 +11,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public string Data;
+
         public SimpleDC() { }
+
         public SimpleDC(bool init)
         {
             Data = "This is a string";
@@ -28,6 +30,7 @@ namespace SerializationTestTypes
         public string RefData;
 
         public SimpleDCWithSimpleDMRef() { }
+
         public SimpleDCWithSimpleDMRef(bool init)
         {
             Data = "This is a string";
@@ -45,6 +48,7 @@ namespace SerializationTestTypes
         public SimpleDC RefData;
 
         public SimpleDCWithRef() { }
+
         public SimpleDCWithRef(bool init)
         {
             Data = new SimpleDC(true);
@@ -62,6 +66,7 @@ namespace SerializationTestTypes
         public SimpleDCWithRef RefData;
 
         public ContainsSimpleDCWithRef() { }
+
         public ContainsSimpleDCWithRef(bool init)
         {
             Data = new SimpleDCWithRef(true);
@@ -86,7 +91,9 @@ namespace SerializationTestTypes
     {
         [DataMember(IsRequired = false)]
         public string Data;
+
         public SimpleDCWithIsRequiredFalse() { }
+
         public SimpleDCWithIsRequiredFalse(bool init)
         {
             Data = "This is a string";
@@ -101,6 +108,7 @@ namespace SerializationTestTypes
 
         [DataMember]
         public SimpleStructDC RefData;
+
         public SimpleStructDCWithRef(bool init)
         {
             Data = new SimpleStructDC(true);
@@ -127,6 +135,7 @@ namespace SerializationTestTypes
         public SimpleStructDCWithRef Data5;
 
         public Mixed1() { }
+
         public Mixed1(bool init)
         {
             Data1 = new SimpleDC(true);
@@ -149,7 +158,9 @@ namespace SerializationTestTypes
 
         [DataMember]
         public SimpleDC RefData;
+
         public DCVersioned1() { }
+
         public DCVersioned1(bool init)
         {
             this.Data = new SimpleDC(true);
@@ -176,6 +187,7 @@ namespace SerializationTestTypes
         public SimpleDC Data;
 
         public DCVersioned2() { }
+
         public DCVersioned2(bool init)
         {
             this.Data = new SimpleDC(true);
@@ -201,6 +213,7 @@ namespace SerializationTestTypes
         public DCVersioned1 DataVersion1;
 
         public DCVersionedContainer1() { }
+
         public DCVersionedContainer1(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);
@@ -235,6 +248,7 @@ namespace SerializationTestTypes
         public DCVersioned2 RefDataVersion2;
 
         public DCVersionedContainerVersion1() { }
+
         public DCVersionedContainerVersion1(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);
@@ -267,6 +281,7 @@ namespace SerializationTestTypes
         public DCVersioned2 DataVersion2;
 
         public DCVersionedContainerVersion2() { }
+
         public DCVersionedContainerVersion2(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);
@@ -302,6 +317,7 @@ namespace SerializationTestTypes
         public DCVersioned2 NewDataVersion2;
 
         public DCVersionedContainerVersion3() { }
+
         public DCVersionedContainerVersion3(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);

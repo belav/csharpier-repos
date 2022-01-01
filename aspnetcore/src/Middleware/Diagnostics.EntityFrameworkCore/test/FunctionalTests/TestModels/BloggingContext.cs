@@ -5,6 +5,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class BloggingContext : DbContext

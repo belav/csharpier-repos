@@ -32,6 +32,7 @@ namespace System.Net.Mail
     {
 #pragma warning disable CS0067      // Field is not used
         public event SendCompletedEventHandler? SendCompleted;
+
 #pragma warning restore CS0067
         public SmtpClient()
         {

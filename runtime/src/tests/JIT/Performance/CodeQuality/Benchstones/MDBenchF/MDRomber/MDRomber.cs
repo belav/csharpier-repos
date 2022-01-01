@@ -12,8 +12,10 @@ namespace Benchstone.MDBenchF
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 640000;
+
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)]

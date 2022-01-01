@@ -331,10 +331,12 @@ namespace System.Data.Common
         {
             return Argument(SR.Format(SR.ADP_ConnectionStringSyntax, index));
         }
+
         internal static ArgumentException KeywordNotSupported(string keyword)
         {
             return Argument(SR.Format(SR.ADP_KeywordNotSupported, keyword));
         }
+
         internal static ArgumentException ConvertFailed(
             Type fromType,
             Type toType,
@@ -354,6 +356,7 @@ namespace System.Data.Common
         {
             return InvalidConnectionOptionValue(key, null);
         }
+
         internal static Exception InvalidConnectionOptionValue(string key, Exception? inner)
         {
             return Argument(SR.Format(SR.ADP_InvalidConnectionOptionValue, key), inner);
@@ -375,6 +378,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static ArgumentNullException CollectionNullValue(
             string parameter,
             Type collection,
@@ -386,6 +390,7 @@ namespace System.Data.Common
                 SR.Format(SR.ADP_CollectionNullValue, collection.Name, itemType.Name)
             );
         }
+
         internal static IndexOutOfRangeException CollectionIndexInt32(
             int index,
             Type collection,
@@ -401,6 +406,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static IndexOutOfRangeException CollectionIndexString(
             Type itemType,
             string propertyName,
@@ -418,6 +424,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static InvalidCastException CollectionInvalidType(
             Type collection,
             Type itemType,
@@ -527,6 +534,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static ArgumentException ParametersIsParent(
             Type parameterType,
             ICollection collection
@@ -588,6 +596,7 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.Format(SR.ADP_DataReaderClosed, method));
         }
+
         internal static ArgumentOutOfRangeException InvalidSourceBufferIndex(
             int maxLen,
             long srcOffset,
@@ -603,6 +612,7 @@ namespace System.Data.Common
                 parameterName
             );
         }
+
         internal static ArgumentOutOfRangeException InvalidDestinationBufferIndex(
             int maxLen,
             int dstOffset,
@@ -618,6 +628,7 @@ namespace System.Data.Common
                 parameterName
             );
         }
+
         internal static IndexOutOfRangeException InvalidBufferSizeOrIndex(
             int numBytes,
             int bufferIndex
@@ -631,6 +642,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static Exception InvalidDataLength(long length)
         {
             return IndexOutOfRange(

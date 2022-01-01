@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 internal static class MvcRazorLoggerExtensions

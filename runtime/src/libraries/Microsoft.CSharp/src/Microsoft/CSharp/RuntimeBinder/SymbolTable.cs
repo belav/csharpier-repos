@@ -276,6 +276,7 @@ namespace Microsoft.CSharp.RuntimeBinder
             }
             return list;
         }
+
         #endregion
 
         #region GetName
@@ -868,6 +869,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                     as NamespaceSymbol
                 ?? SymFactory.CreateNamespace(name, parent as NamespaceSymbol);
         }
+
         #endregion
 
         #region CTypeFromType
@@ -1096,6 +1098,7 @@ namespace Microsoft.CSharp.RuntimeBinder
             aggregate.SetIfaces(TypeArray.Allocate(GetCTypeArrayFromTypes(interfaces)));
             aggregate.SetIfacesAll(aggregate.GetIfaces());
         }
+
         #endregion
 
         #region Field
@@ -1155,6 +1158,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return field;
         }
+
         #endregion
 
         #region Events
@@ -1228,6 +1232,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                 }
             }
         }
+
         #endregion
 
         #region Properties
@@ -1994,6 +1999,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                 }
             }
         }
+
         #endregion
 
         #region Operators

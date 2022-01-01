@@ -809,6 +809,7 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.MakeMemberAccess(expression, createdProperty)
             );
         }
+
 #endif
 
         [Fact]

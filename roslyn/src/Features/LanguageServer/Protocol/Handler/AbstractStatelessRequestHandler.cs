@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public abstract bool RequiresLSPSolution { get; }
 
         public abstract TextDocumentIdentifier? GetTextDocumentIdentifier(RequestType request);
+
         public abstract Task<ResponseType> HandleRequestAsync(
             RequestType request,
             RequestContext context,

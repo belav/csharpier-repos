@@ -4,6 +4,7 @@
 using System.Text.Json;
 using Xunit;
 
+
 namespace Microsoft.JSInterop.Infrastructure;
 
 public class ByteArrayJsonConverterTest

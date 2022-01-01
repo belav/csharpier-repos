@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 // This MUST be kept in sync with Microsoft.Owin.Security.Interop.AspNetTicketSerializer

@@ -25,6 +25,7 @@ namespace System.Speech.Recognition
             _keyName = keyName;
             _value = value;
         }
+
 #pragma warning restore 6504, 56507
         public SemanticValue(object value) : this(string.Empty, value, -1f) { }
 
@@ -53,6 +54,7 @@ namespace System.Speech.Recognition
             }
             return true;
         }
+
         public override int GetHashCode()
         {
             return Count;
@@ -85,14 +87,17 @@ namespace System.Speech.Recognition
             get { return _dictionary[key]; }
             set { throw new InvalidOperationException(SR.Get(SRID.CollectionReadOnly)); }
         }
+
         public bool Contains(KeyValuePair<string, SemanticValue> item)
         {
             return (_dictionary.ContainsKey(item.Key) && _dictionary.ContainsValue(item.Value));
         }
+
         public bool ContainsKey(string key)
         {
             return _dictionary.ContainsKey(key);
         }
+
         public int Count
         {
             get { return _dictionary.Count; }
@@ -129,6 +134,7 @@ namespace System.Speech.Recognition
         {
             throw new NotSupportedException(SR.Get(SRID.CollectionReadOnly));
         }
+
         void ICollection<KeyValuePair<string, SemanticValue>>.CopyTo(
             KeyValuePair<string, SemanticValue>[] array,
             int index
@@ -136,6 +142,7 @@ namespace System.Speech.Recognition
         {
             ((ICollection<KeyValuePair<string, SemanticValue>>)_dictionary).CopyTo(array, index);
         }
+
         IEnumerator<KeyValuePair<string, SemanticValue>> IEnumerable<
             KeyValuePair<string, SemanticValue>
         >.GetEnumerator()
@@ -157,6 +164,7 @@ namespace System.Speech.Recognition
         {
             get { return _dictionary.Values; }
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<KeyValuePair<string, SemanticValue>>)this).GetEnumerator();
@@ -226,6 +234,7 @@ namespace System.Speech.Recognition
             {
                 get { return _confidence; }
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SemanticValue[] AKeys
             {

@@ -17,6 +17,7 @@ using Xunit;
 using KestrelHttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
 using KestrelHttpVersion = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpVersion;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
 
 public class SocketTransportTests : LoggedTestBase

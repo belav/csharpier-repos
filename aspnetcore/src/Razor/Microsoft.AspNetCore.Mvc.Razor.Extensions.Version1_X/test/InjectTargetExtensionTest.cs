@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 public class InjectTargetExtensionTest

@@ -33,6 +33,7 @@ using Newtonsoft.Json.Utilities;
 using System.Globalization;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
@@ -1242,6 +1243,7 @@ namespace Newtonsoft.Json
         {
             InternalWriteValue(JsonToken.Date);
         }
+
 #endif
 
         /// <summary>
@@ -1506,6 +1508,7 @@ namespace Newtonsoft.Json
                 WriteValue(value.GetValueOrDefault());
             }
         }
+
 #endif
 
         /// <summary>
@@ -1597,6 +1600,7 @@ namespace Newtonsoft.Json
                 WriteValue(this, ConvertUtils.GetTypeCode(value.GetType()), value);
             }
         }
+
         #endregion
 
         /// <summary>
@@ -1851,6 +1855,7 @@ namespace Newtonsoft.Json
                     : typeInformation.Type;
             value = convertible.ToType(resolvedType, CultureInfo.InvariantCulture);
         }
+
 #endif
 
         private static JsonWriterException CreateUnsupportedTypeException(

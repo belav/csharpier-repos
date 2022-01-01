@@ -5188,6 +5188,7 @@ class A { }
                         .WithLocation(1, 8)
                 );
         }
+
         #endregion
 
         #region #line

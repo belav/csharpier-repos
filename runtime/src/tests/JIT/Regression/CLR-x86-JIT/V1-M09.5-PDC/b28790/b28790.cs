@@ -15,6 +15,7 @@ namespace Test
         {
             return null;
         }
+
         static bool Static2()
         {
             return false;

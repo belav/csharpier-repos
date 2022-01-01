@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey>
@@ -61,6 +62,7 @@ public abstract class SqlStoreOnlyUsersTestBase<TUser, TKey>
 #pragma warning disable CA1310 // Specify StringComparison for correctness
     protected override Expression<Func<TUser, bool>> UserNameStartsWithPredicate(string userName) =>
         u => u.UserName.StartsWith(userName);
+
 #pragma warning restore CA1310 // Specify StringComparison for correctness
 
     private TestUserDbContext CreateContext()

@@ -11,16 +11,20 @@ namespace System.Composition.Convention.Tests
     public class ConventionBuilderTests
     {
         private interface IFoo { }
+
         private class FooImpl : IFoo
         {
             public string P1 { get; set; }
             public string P2 { get; set; }
             public IEnumerable<IFoo> P3 { get; set; }
         }
+
         private class FooImplWithConstructors : IFoo
         {
             public FooImplWithConstructors() { }
+
             public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+
             public FooImplWithConstructors(int id, string name) { }
         }
 

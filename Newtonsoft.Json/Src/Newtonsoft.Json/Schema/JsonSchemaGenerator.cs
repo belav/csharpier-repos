@@ -32,6 +32,7 @@ using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Serialization;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
@@ -469,6 +470,7 @@ namespace Newtonsoft.Json.Schema
         {
             CurrentSchema.AllowAdditionalProperties = true;
         }
+
 #endif
 
         internal static bool HasFlag(JsonSchemaType? value, JsonSchemaType flag)

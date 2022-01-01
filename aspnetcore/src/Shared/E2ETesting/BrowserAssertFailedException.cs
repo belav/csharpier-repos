@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using Xunit.Sdk;
 
+
 namespace OpenQA.Selenium;
 
 // Used to report errors when we find errors in the browser. This is useful

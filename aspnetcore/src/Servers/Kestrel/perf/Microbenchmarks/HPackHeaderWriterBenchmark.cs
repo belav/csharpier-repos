@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class HPackHeaderWriterBenchmark

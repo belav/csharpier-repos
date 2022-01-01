@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Identity.ExternalClaims.Services;
 
 // This class is used by the application to send email for account confirmation and password reset.

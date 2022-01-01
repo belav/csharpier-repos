@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
@@ -17,6 +18,7 @@ public class HeaderDictionary : IHeaderDictionary
 {
     private static readonly string[] EmptyKeys = Array.Empty<string>();
     private static readonly StringValues[] EmptyValues = Array.Empty<StringValues>();
+
     // Pre-box
     private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType =
         default(Enumerator);

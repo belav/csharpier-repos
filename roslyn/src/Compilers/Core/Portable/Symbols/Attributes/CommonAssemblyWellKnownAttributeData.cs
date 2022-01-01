@@ -34,6 +34,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyDelaySignAttributeSetting
@@ -52,6 +53,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyKeyFileAttributeSetting
@@ -70,6 +72,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyKeyContainerAttributeSetting
@@ -88,6 +91,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyVersionAttributeSetting
@@ -111,6 +115,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyFileVersionAttributeSetting
@@ -129,6 +134,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyTitleAttributeSetting
@@ -147,6 +153,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyDescriptionAttributeSetting
@@ -165,6 +172,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyCultureAttributeSetting
@@ -183,6 +191,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyCompanyAttributeSetting
@@ -201,6 +210,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyProductAttributeSetting
@@ -219,6 +229,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyInformationalVersionAttributeSetting
@@ -237,6 +248,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyCopyrightAttributeSetting
@@ -255,6 +267,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyTrademarkAttributeSetting
@@ -273,6 +286,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyFlagsAttributeSetting
@@ -291,6 +305,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region AssemblyAlgorithmIdAttribute
@@ -309,6 +324,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region CompilationRelaxationsAttribute
@@ -327,6 +343,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region ReferenceAssemblyAttribute
@@ -345,6 +362,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region RuntimeCompatibilityAttribute
@@ -397,6 +415,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region Security Attributes
@@ -426,6 +445,7 @@ namespace Microsoft.CodeAnalysis
                 return _lazySecurityAttributeData;
             }
         }
+
         #endregion
 
         #region ForwardedTypes

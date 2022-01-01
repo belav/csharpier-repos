@@ -41,6 +41,7 @@ using Newtonsoft.Json.Tests.TestObjects.Organization;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -148,6 +149,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [DataMember(Name = "company_name")]
         public string CompanyName { get; set; }
     }
+
 #endif
 
     public class AutofacContractResolver : DefaultContractResolver

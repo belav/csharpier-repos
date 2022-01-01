@@ -19,6 +19,7 @@ using Microsoft.CodeAnalysis.Text;
 
 #if !CODE_STYLE
 using Roslyn.Utilities;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
@@ -122,6 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 #if !CODE_STYLE
             protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
                 new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
+
 #endif
 
             protected override Diagnostic? TrySelectDiagnosticToFix(

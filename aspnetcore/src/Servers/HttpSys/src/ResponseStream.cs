@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal class ResponseStream : Stream
@@ -55,6 +56,7 @@ internal class ResponseStream : Stream
     {
         return _innerStream.EndRead(asyncResult);
     }
+
     public override void Flush()
     {
         _onStart().GetAwaiter().GetResult();

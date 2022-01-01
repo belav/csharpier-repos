@@ -4,6 +4,7 @@
 using Microsoft.CodeAnalysis;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
 public class AnalyzerAssert

@@ -21,7 +21,9 @@ namespace Roslyn.VisualStudio.Services.Interactive
         private readonly IServiceProvider _serviceProvider;
 
         protected abstract string LanguageName { get; }
+
         protected abstract string CreateReference(string referenceName);
+
         protected abstract string CreateImport(string namespaceName);
 
         public AbstractResetInteractiveCommand(

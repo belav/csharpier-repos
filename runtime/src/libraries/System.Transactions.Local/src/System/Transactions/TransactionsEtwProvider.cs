@@ -59,6 +59,7 @@ namespace System.Transactions
         TraceSourceLtm = 1,
         TraceSourceDistributed = 2
     }
+
     /// <summary>Provides an event source for tracing Transactions information.</summary>
     [EventSource(
         Name = "System.Transactions.TransactionsEventSource",
@@ -75,6 +76,7 @@ namespace System.Transactions
 
 
         internal static readonly TransactionsEtwProvider Log = new TransactionsEtwProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private TransactionsEtwProvider() { }
 
@@ -88,82 +90,121 @@ namespace System.Transactions
 
         /// <summary>The event ID for configured default timeout adjusted event.</summary>
         private const int CONFIGURED_DEFAULT_TIMEOUT_ADJUSTED_EVENTID = 1;
+
         /// <summary>The event ID for the enlistment abort event.</summary>
         private const int ENLISTMENT_ABORTED_EVENTID = 2;
+
         /// <summary>The event ID for the enlistment commit event.</summary>
         private const int ENLISTMENT_COMMITTED_EVENTID = 3;
+
         /// <summary>The event ID for the enlistment done event.</summary>
         private const int ENLISTMENT_DONE_EVENTID = 4;
+
         /// <summary>The event ID for the enlistment status.</summary>
         private const int ENLISTMENT_EVENTID = 5;
+
         /// <summary>The event ID for the enlistment forcerollback event.</summary>
         private const int ENLISTMENT_FORCEROLLBACK_EVENTID = 6;
+
         /// <summary>The event ID for the enlistment indoubt event.</summary>
         private const int ENLISTMENT_INDOUBT_EVENTID = 7;
+
         /// <summary>The event ID for the enlistment prepared event.</summary>
         private const int ENLISTMENT_PREPARED_EVENTID = 8;
+
         /// <summary>The event ID for exception consumed event.</summary>
         private const int EXCEPTION_CONSUMED_BASE_EVENTID = 9;
+
         /// <summary>The event ID for exception consumed event.</summary>
         private const int EXCEPTION_CONSUMED_LTM_EVENTID = 10;
+
         /// <summary>The event ID for method enter event.</summary>
         private const int METHOD_ENTER_LTM_EVENTID = 11;
+
         /// <summary>The event ID for method exit event.</summary>
         private const int METHOD_EXIT_LTM_EVENTID = 12;
+
         /// <summary>The event ID for method enter event.</summary>
         private const int METHOD_ENTER_BASE_EVENTID = 13;
+
         /// <summary>The event ID for method exit event.</summary>
         private const int METHOD_EXIT_BASE_EVENTID = 14;
+
         /// <summary>The event ID for method enter event.</summary>
         private const int METHOD_ENTER_DISTRIBUTED_EVENTID = 15;
+
         /// <summary>The event ID for method exit event.</summary>
         private const int METHOD_EXIT_DISTRIBUTED_EVENTID = 16;
+
         /// <summary>The event ID for transaction aborted event.</summary>
         private const int TRANSACTION_ABORTED_EVENTID = 17;
+
         /// <summary>The event ID for the transaction clone create event.</summary>
         private const int TRANSACTION_CLONECREATE_EVENTID = 18;
+
         /// <summary>The event ID for the transaction commit event.</summary>
         private const int TRANSACTION_COMMIT_EVENTID = 19;
+
         /// <summary>The event ID for transaction committed event.</summary>
         private const int TRANSACTION_COMMITTED_EVENTID = 20;
+
         /// <summary>The event ID for when we encounter a new Transactions object that hasn't had its name traced to the trace file.</summary>
         private const int TRANSACTION_CREATED_EVENTID = 21;
+
         /// <summary>The event ID for the transaction dependent clone complete event.</summary>
         private const int TRANSACTION_DEPENDENT_CLONE_COMPLETE_EVENTID = 22;
+
         /// <summary>The event ID for the transaction exception event.</summary>
         private const int TRANSACTION_EXCEPTION_LTM_EVENTID = 23;
+
         /// <summary>The event ID for the transaction exception event.</summary>
         private const int TRANSACTION_EXCEPTION_BASE_EVENTID = 24;
+
         /// <summary>The event ID for transaction indoubt event.</summary>
         private const int TRANSACTION_INDOUBT_EVENTID = 25;
+
         /// <summary>The event ID for the transaction invalid operation event.</summary>
         private const int TRANSACTION_INVALID_OPERATION_EVENTID = 26;
+
         /// <summary>The event ID for transaction promoted event.</summary>
         private const int TRANSACTION_PROMOTED_EVENTID = 27;
+
         /// <summary>The event ID for the transaction rollback event.</summary>
         private const int TRANSACTION_ROLLBACK_EVENTID = 28;
+
         /// <summary>The event ID for the transaction serialized event.</summary>
         private const int TRANSACTION_SERIALIZED_EVENTID = 29;
+
         /// <summary>The event ID for transaction timeout event.</summary>
         private const int TRANSACTION_TIMEOUT_EVENTID = 30;
+
         /// <summary>The event ID for transactionmanager recovery complete event.</summary>
         private const int TRANSACTIONMANAGER_RECOVERY_COMPLETE_EVENTID = 31;
+
         /// <summary>The event ID for transactionmanager reenlist event.</summary>
         private const int TRANSACTIONMANAGER_REENLIST_EVENTID = 32;
+
         /// <summary>The event ID for transactionscope created event.</summary>
         private const int TRANSACTIONSCOPE_CREATED_EVENTID = 33;
+
         /// <summary>The event ID for transactionscope current changed event.</summary>
         private const int TRANSACTIONSCOPE_CURRENT_CHANGED_EVENTID = 34;
+
         /// <summary>The event ID for transactionscope nested incorrectly event.</summary>
         private const int TRANSACTIONSCOPE_DISPOSED_EVENTID = 35;
+
         /// <summary>The event ID for transactionscope incomplete event.</summary>
         private const int TRANSACTIONSCOPE_INCOMPLETE_EVENTID = 36;
+
         /// <summary>The event ID for transactionscope internal error event.</summary>
         private const int TRANSACTIONSCOPE_INTERNAL_ERROR_EVENTID = 37;
+
         /// <summary>The event ID for transactionscope nested incorrectly event.</summary>
         private const int TRANSACTIONSCOPE_NESTED_INCORRECTLY_EVENTID = 38;
+
         /// <summary>The event ID for transactionscope timeout event.</summary>
         private const int TRANSACTIONSCOPE_TIMEOUT_EVENTID = 39;
+
         /// <summary>The event ID for enlistment event.</summary>
         private const int TRANSACTIONSTATE_ENLIST_EVENTID = 40;
 
@@ -173,6 +214,7 @@ namespace System.Transactions
         //
 
         private const string NullInstance = "(null)";
+
         //-----------------------------------------------------------------------------------
         //
         // Transactions Events
@@ -218,6 +260,7 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_CREATED_EVENTID, transactionIdentifier, type);
         }
+
         #endregion
 
         #region Transaction Clone Create
@@ -257,6 +300,7 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_CLONECREATE_EVENTID, transactionIdentifier, type);
         }
+
         #endregion
 
         #region Transaction Serialized
@@ -296,6 +340,7 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_SERIALIZED_EVENTID, transactionIdentifier, type);
         }
+
         #endregion
 
         #region Transaction Exception
@@ -375,6 +420,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTION_EXCEPTION_LTM_EVENTID, type, message, innerExceptionStr);
         }
+
         #endregion
 
         #region Transaction Invalid Operation
@@ -389,6 +435,7 @@ namespace System.Transactions
                 TransactionInvalidOperation(string.Empty, type, operation);
             }
         }
+
         [Event(
             TRANSACTION_INVALID_OPERATION_EVENTID,
             Keywords = Keywords.TraceBase,
@@ -411,6 +458,7 @@ namespace System.Transactions
                 operation
             );
         }
+
         #endregion
 
         #region Transaction Rollback
@@ -447,6 +495,7 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_ROLLBACK_EVENTID, transactionIdentifier, type);
         }
+
         #endregion
 
         #region Transaction Dependent Clone Complete
@@ -486,6 +535,7 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_DEPENDENT_CLONE_COMPLETE_EVENTID, transactionIdentifier, type);
         }
+
         #endregion
 
         #region Transaction Commit
@@ -522,6 +572,7 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_COMMIT_EVENTID, transactionIdentifier, type);
         }
+
         #endregion
 
         #region Enlistment
@@ -560,6 +611,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_EVENTID, enlistmentIdentifier, notificationCall);
         }
+
         #endregion
 
         #region Enlistment Done
@@ -592,6 +644,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_DONE_EVENTID, enlistmentIdentifier);
         }
+
         #endregion
 
         #region Enlistment Prepared
@@ -624,6 +677,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_PREPARED_EVENTID, enlistmentIdentifier);
         }
+
         #endregion
 
         #region Enlistment ForceRollback
@@ -656,6 +710,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_FORCEROLLBACK_EVENTID, enlistmentIdentifier);
         }
+
         #endregion
 
         #region Enlistment Aborted
@@ -688,6 +743,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_ABORTED_EVENTID, enlistmentIdentifier);
         }
+
         #endregion
 
         #region Enlistment Committed
@@ -720,6 +776,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_COMMITTED_EVENTID, enlistmentIdentifier);
         }
+
         #endregion
 
         #region Enlistment InDoubt
@@ -752,6 +809,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_INDOUBT_EVENTID, enlistmentIdentifier);
         }
+
         #endregion
 
         #region Method Enter
@@ -822,6 +880,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(METHOD_ENTER_LTM_EVENTID, thisOrContextObject, methodname);
         }
+
         [Event(
             METHOD_ENTER_BASE_EVENTID,
             Keywords = Keywords.TraceBase,
@@ -835,6 +894,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(METHOD_ENTER_BASE_EVENTID, thisOrContextObject, methodname);
         }
+
         [Event(
             METHOD_ENTER_DISTRIBUTED_EVENTID,
             Keywords = Keywords.TraceDistributed,
@@ -848,6 +908,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(METHOD_ENTER_DISTRIBUTED_EVENTID, thisOrContextObject, methodname);
         }
+
         #endregion
 
         #region Method Exit
@@ -918,6 +979,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(METHOD_EXIT_LTM_EVENTID, thisOrContextObject, methodname);
         }
+
         [Event(
             METHOD_EXIT_BASE_EVENTID,
             Keywords = Keywords.TraceBase,
@@ -931,6 +993,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(METHOD_EXIT_BASE_EVENTID, thisOrContextObject, methodname);
         }
+
         [Event(
             METHOD_EXIT_DISTRIBUTED_EVENTID,
             Keywords = Keywords.TraceDistributed,
@@ -966,6 +1029,7 @@ namespace System.Transactions
                 }
             }
         }
+
         /// <summary>Trace an event when exception consumed.</summary>
         /// <param name="exception">The exception.</param>
         [NonEvent]
@@ -989,6 +1053,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(EXCEPTION_CONSUMED_BASE_EVENTID, exceptionStr);
         }
+
         [Event(
             EXCEPTION_CONSUMED_LTM_EVENTID,
             Keywords = Keywords.TraceLtm,
@@ -1001,6 +1066,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(EXCEPTION_CONSUMED_LTM_EVENTID, exceptionStr);
         }
+
         #endregion
 
         #region TransactionManager Reenlist
@@ -1028,6 +1094,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONMANAGER_REENLIST_EVENTID, rmID);
         }
+
         #endregion
 
         #region TransactionManager Recovery Complete
@@ -1055,6 +1122,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONMANAGER_RECOVERY_COMPLETE_EVENTID, rmID);
         }
+
         #endregion
 
         #region Configured Default Timeout Adjusted
@@ -1081,6 +1149,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(CONFIGURED_DEFAULT_TIMEOUT_ADJUSTED_EVENTID);
         }
+
         #endregion
 
         #region Transactionscope Created
@@ -1125,6 +1194,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_CREATED_EVENTID, transactionID, transactionScopeResult);
         }
+
         #endregion
 
         #region Transactionscope Current Changed
@@ -1173,6 +1243,7 @@ namespace System.Transactions
                 newtransactionID
             );
         }
+
         #endregion
 
         #region Transactionscope Nested Incorrectly
@@ -1202,6 +1273,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_NESTED_INCORRECTLY_EVENTID, transactionID);
         }
+
         #endregion
 
         #region Transactionscope Disposed
@@ -1229,6 +1301,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_DISPOSED_EVENTID, transactionID);
         }
+
         #endregion
 
         #region Transactionscope Incomplete
@@ -1256,6 +1329,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_INCOMPLETE_EVENTID, transactionID);
         }
+
         #endregion
 
         #region Transactionscope Internal Error
@@ -1283,6 +1357,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONSCOPE_INTERNAL_ERROR_EVENTID, error);
         }
+
         #endregion
 
         #region Transactionscope Timeout
@@ -1310,6 +1385,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_TIMEOUT_EVENTID, transactionID);
         }
+
         #endregion
 
         #region Transaction Timeout
@@ -1337,6 +1413,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_TIMEOUT_EVENTID, transactionID);
         }
+
         #endregion
 
         #region Transactionstate Enlist
@@ -1381,6 +1458,7 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONSTATE_ENLIST_EVENTID, enlistmentID, type, option);
         }
+
         #endregion
 
         #region Transactionstate committed
@@ -1408,6 +1486,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_COMMITTED_EVENTID, transactionID);
         }
+
         #endregion
 
         #region Transactionstate indoubt
@@ -1435,6 +1514,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_INDOUBT_EVENTID, transactionID);
         }
+
         #endregion
 
         #region Transactionstate promoted
@@ -1469,6 +1549,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_PROMOTED_EVENTID, transactionID, distributedTxID);
         }
+
         #endregion
 
         #region Transactionstate aborted
@@ -1496,6 +1577,7 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_ABORTED_EVENTID, transactionID);
         }
+
         #endregion
         public static class Opcodes
         {

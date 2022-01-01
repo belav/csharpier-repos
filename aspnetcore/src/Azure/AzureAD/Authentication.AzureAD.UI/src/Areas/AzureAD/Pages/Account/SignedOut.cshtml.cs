@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.Internal;
 
 /// <summary>

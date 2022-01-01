@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal static class TagHelperBlockRewriter

@@ -20,6 +20,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         }
+
 #pragma warning restore RS1026
 
         /// <summary>

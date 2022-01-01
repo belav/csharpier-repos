@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 internal class ConfigureIdentityResources : IConfigureOptions<ApiAuthorizationOptions>

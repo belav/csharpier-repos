@@ -62,6 +62,7 @@ using System.Diagnostics.Eventing.Reader;
 // System.Text.Json is a .NET Core 3.0 specific library
 #if NETCOREAPP
 using System.Text.Json;
+
 #endif
 
 namespace System.Runtime.Serialization.Formatters.Tests
@@ -72,6 +73,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             "11/3/1989 04:50:29 AM",
             CultureInfo.InvariantCulture.DateTimeFormat
         );
+
         // *** AUTO UPDATED BLOBS ***
 
         public static IEnumerable<object[]> SerializableObjects_MemberData()

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal class ManifestDirectory : ManifestEntry

@@ -6,6 +6,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class StringUtilitiesBenchmark

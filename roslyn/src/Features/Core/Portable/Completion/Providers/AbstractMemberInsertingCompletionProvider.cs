@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItem item,
             CancellationToken cancellationToken
         );
+
         protected abstract int GetTargetCaretPosition(SyntaxNode caretTarget);
+
         protected abstract SyntaxNode GetSyntax(SyntaxToken commonSyntaxToken);
 
         public AbstractMemberInsertingCompletionProvider() { }

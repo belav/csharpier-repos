@@ -74,6 +74,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         #region analysis
 
         protected abstract void DiagnosticAnalyzerInitialize(AnalysisContext context);
+
         protected abstract DiagnosticAnalyzerCategory GetAnalyzerCategory();
 
         protected DiagnosticDescriptor CreateDescriptorWithId(

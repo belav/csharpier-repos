@@ -35,6 +35,7 @@ namespace System.Net.Security.Tests
             bool checkCertificateRevocation,
             SslProtocols? protocols = null
         );
+
         protected abstract Task AuthenticateServerAsync(
             X509Certificate serverCertificate,
             bool clientCertificateRequired,

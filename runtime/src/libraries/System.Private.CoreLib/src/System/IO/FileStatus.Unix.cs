@@ -35,6 +35,7 @@ namespace System.IO
         // Should get reset on refresh
         private uint? _euid;
         private uint? _egid;
+
 #endif
 
         private bool IsFileCacheInitialized => _initializedFileCache == 0;

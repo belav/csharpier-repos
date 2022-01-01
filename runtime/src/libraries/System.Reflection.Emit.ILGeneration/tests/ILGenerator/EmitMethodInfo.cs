@@ -15,6 +15,7 @@ namespace System.Reflection.Emit.Tests
     {
         void Method(in int arg);
     }
+
     public class ILGeneratorEmitMethodInfo
     {
         [Fact]

@@ -115,6 +115,7 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying write method with a large string size");
             VerifyWrite(new UnicodeEncoding(), LARGE_STRING_SIZE, 1);
         }
+
         #endregion
 
         #region Verification for Test Cases

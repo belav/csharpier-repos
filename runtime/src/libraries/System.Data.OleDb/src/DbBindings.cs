@@ -134,6 +134,7 @@ namespace System.Data.OleDb
             //get { return _dbbindings[_index].iOrdinal.ToInt32(); }
             set { _dbbindings[_index].iOrdinal = value; }
         }
+
 #if DEBUG
         /*internal int ValueOffset { // obValue
             get { return _dbbindings[_index].obValue.ToInt32(); }

@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.SpaServices.StaticFiles;
 
 /// <summary>

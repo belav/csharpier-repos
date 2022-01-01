@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal sealed class Utf8BufferTextWriter : TextWriter
@@ -28,6 +29,7 @@ internal sealed class Utf8BufferTextWriter : TextWriter
 
 #if DEBUG
     private bool _inUse;
+
 #endif
 
     public override Encoding Encoding => _utf8NoBom;

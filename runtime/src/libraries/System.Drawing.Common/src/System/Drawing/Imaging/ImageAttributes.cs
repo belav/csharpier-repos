@@ -38,6 +38,7 @@ namespace System.Drawing.Imaging
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
+
 #endif
 
         internal IntPtr nativeImageAttributes;

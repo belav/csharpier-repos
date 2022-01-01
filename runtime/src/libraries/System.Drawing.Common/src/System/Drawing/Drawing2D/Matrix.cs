@@ -237,6 +237,7 @@ namespace System.Drawing.Drawing2D
 
         public void RotateAt(float angle, PointF point) =>
             RotateAt(angle, point, MatrixOrder.Prepend);
+
         public void RotateAt(float angle, PointF point, MatrixOrder order)
         {
             int status;

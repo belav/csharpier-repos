@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 internal class IdentityServerJwtBearerOptionsConfiguration

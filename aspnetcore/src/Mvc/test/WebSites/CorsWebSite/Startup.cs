@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace CorsWebSite;
 
 public class Startup

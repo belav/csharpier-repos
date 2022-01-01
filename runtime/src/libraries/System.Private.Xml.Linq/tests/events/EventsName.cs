@@ -19,6 +19,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 (XName)"{b}newName"
             },
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XElement toChange, XName newName)
         {
@@ -80,6 +81,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
     public class EventsSpecialCases
     {
         private static void ChangingDelegate(object sender, XObjectChangeEventArgs e) { }
+
         private static void ChangedDelegate(object sender, XObjectChangeEventArgs e) { }
 
         [Fact]

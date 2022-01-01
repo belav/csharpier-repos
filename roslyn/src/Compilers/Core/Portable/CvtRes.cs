@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis
 
         internal DWORD DataSize; // size of data without header
         internal DWORD HeaderSize; // Length of the header
+
         // [Ordinal or Name TYPE]
         // [Ordinal or Name NAME]
         internal DWORD DataVersion; // version of data struct
@@ -765,6 +766,7 @@ namespace Microsoft.CodeAnalysis
                 //add previously written 3 WORDS, round up, then subtract the 3 WORDS.
                 return PadToDword(cb + 3 * sizeof(WORD)) - 3 * sizeof(WORD);
             }
+
             /// <summary>
             /// assuming the length of bytes submitted began on a 32-bit boundary,
             /// round up this length as necessary so that it ends at a 32-bit boundary.
@@ -835,6 +837,7 @@ namespace Microsoft.CodeAnalysis
             {
                 return PadKeyLen((sz.Length + 1) * sizeof(WCHAR)) / sizeof(WCHAR);
             }
+
             private static int KEYBYTES(string sz)
             {
                 return KEYSIZE(sz) * sizeof(WCHAR);

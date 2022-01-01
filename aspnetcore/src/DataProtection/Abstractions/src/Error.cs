@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.DataProtection.Abstractions;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 internal static class Error

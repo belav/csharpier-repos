@@ -451,6 +451,7 @@ namespace System.IO
                 }
             }
         }
+
 #endif
 
         public static void WriteAllBytes(string path, byte[] bytes)
@@ -483,6 +484,7 @@ namespace System.IO
                 fs.Write(bytes, 0, bytes.Length);
             }
         }
+
         public static string[] ReadAllLines(string path)
         {
             if (path == null)

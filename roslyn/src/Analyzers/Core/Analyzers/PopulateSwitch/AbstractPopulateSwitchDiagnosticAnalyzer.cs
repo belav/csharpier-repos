@@ -48,7 +48,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         protected abstract OperationKind OperationKind { get; }
 
         protected abstract ICollection<ISymbol> GetMissingEnumMembers(TSwitchOperation operation);
+
         protected abstract bool HasDefaultCase(TSwitchOperation operation);
+
         protected abstract Location GetDiagnosticLocation(TSwitchSyntax switchBlock);
 
         public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>

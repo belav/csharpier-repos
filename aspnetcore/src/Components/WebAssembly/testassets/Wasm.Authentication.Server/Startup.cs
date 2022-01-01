@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Wasm.Authentication.Server.Data;
 using Wasm.Authentication.Server.Models;
 
+
 namespace Wasm.Authentication.Server;
 
 public class Startup

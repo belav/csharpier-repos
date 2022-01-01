@@ -37,6 +37,7 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying read with bytes encoded with UTF32Encoding");
             VerifyRead(new UTF32Encoding());
         }
+
         #endregion
 
         #region Verification for Test Cases

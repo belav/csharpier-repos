@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests;
 
 public class ListLoggerFactory : ILoggerFactory

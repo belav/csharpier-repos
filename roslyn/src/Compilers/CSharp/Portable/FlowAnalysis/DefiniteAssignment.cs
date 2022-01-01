@@ -79,6 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Parameters of record primary constructors that were read anywhere.
         /// </summary>
         private PooledHashSet<ParameterSymbol>? _readParameters;
+
 #nullable disable
 
         /// <summary>
@@ -315,6 +316,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             base.VisitRvalue(node, isKnownToBeAnLvalue);
         }
+
 #endif
 
         protected override bool ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException()
@@ -630,7 +632,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private sealed class SameDiagnosticComparer : EqualityComparer<Diagnostic>
         {
             public static readonly SameDiagnosticComparer Instance = new SameDiagnosticComparer();
+
             public override bool Equals(Diagnostic x, Diagnostic y) => x.Equals(y);
+
             public override int GetHashCode(Diagnostic obj) =>
                 Hash.Combine(
                     Hash.CombineValues(obj.Arguments),
@@ -702,6 +706,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 NoteCaptured(variable);
             }
         }
+
 #nullable disable
 
         /// <summary>
@@ -724,10 +729,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // do not expose PooledHashSet<T> outside of this class
         protected IEnumerable<Symbol> GetCapturedInside() => _capturedInside.ToArray();
+
         protected IEnumerable<Symbol> GetCapturedOutside() => _capturedOutside.ToArray();
+
         protected IEnumerable<Symbol> GetCaptured() => _capturedVariables.ToArray();
+
         protected IEnumerable<Symbol> GetUnsafeAddressTaken() =>
             _unsafeAddressTakenVariables.Keys.ToArray();
+
         protected IEnumerable<MethodSymbol> GetUsedLocalFunctions() =>
             _usedLocalFunctions.ToArray();
 
@@ -746,6 +755,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _readParameters.Add(parameter);
             }
         }
+
         protected virtual void NoteRead(
             Symbol variable,
             ParameterSymbol rangeVariableUnderlyingParameter = null
@@ -2387,6 +2397,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MarkFieldsUsed(type);
             }
         }
+
 #nullable disable
 
         protected void CheckAssigned(BoundExpression expr, SyntaxNode node)
@@ -2468,6 +2479,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return;
             }
         }
+
 #nullable disable
 
         public override BoundNode VisitBaseReference(BoundBaseReference node)

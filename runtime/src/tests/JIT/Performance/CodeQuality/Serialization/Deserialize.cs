@@ -17,9 +17,11 @@ namespace Serialization
 #if DEBUG
         public const int Iterations = 1;
         public const int JsonNetIterations = 1;
+
 #else
         public const int Iterations = 30000;
         public const int JsonNetIterations = 90000;
+
 #endif
 
         const string DataContractXml =

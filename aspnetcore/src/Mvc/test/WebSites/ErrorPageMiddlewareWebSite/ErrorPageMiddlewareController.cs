@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace ErrorPageMiddlewareWebSite;
 
 public class ErrorPageMiddlewareController : Controller

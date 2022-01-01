@@ -23,6 +23,7 @@ using Roslyn.Utilities;
 #if LOG
 using System.IO;
 using System.Text.RegularExpressions;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.SimplifyTypeNames
@@ -35,6 +36,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         private static string _logFile = @"c:\temp\simplifytypenames.txt";
         private static object _logGate = new object();
         private static readonly Regex s_newlinePattern = new Regex(@"[\r\n]+");
+
 #endif
 
         private static readonly LocalizableString s_localizableMessage =
@@ -105,6 +107,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             );
 
         internal abstract bool IsCandidate(SyntaxNode node);
+
         internal abstract bool CanSimplifyTypeNameExpression(
             SemanticModel model,
             SyntaxNode node,
@@ -171,9 +174,11 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         /// blocks may be analyzed by <see cref="AnalyzeCodeBlock"/>, and any remaining spans can be analyzed by
         /// <see cref="AnalyzeSemanticModel"/>.</returns>
         protected abstract bool IsIgnoredCodeBlock(SyntaxNode codeBlock);
+
         protected abstract ImmutableArray<Diagnostic> AnalyzeCodeBlock(
             CodeBlockAnalysisContext context
         );
+
         protected abstract ImmutableArray<Diagnostic> AnalyzeSemanticModel(
             SemanticModelAnalysisContext context,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? codeBlockIntervalTree

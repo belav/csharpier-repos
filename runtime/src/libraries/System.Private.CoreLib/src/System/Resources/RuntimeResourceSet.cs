@@ -13,6 +13,7 @@ namespace System.Resources
 {
 #if RESOURCES_EXTENSIONS
     using ResourceReader = DeserializingResourceReader;
+
 #endif
     // A RuntimeResourceSet stores all the resources defined in one
     // particular CultureInfo, with some loading optimizations.
@@ -183,6 +184,7 @@ namespace System.Resources
             _resCache = new Dictionary<string, ResourceLocator>(FastResourceComparer.Default);
             _defaultReader = new ResourceReader(stream, _resCache, permitDeserialization);
         }
+
 #else
         internal RuntimeResourceSet(IResourceReader reader)
             :
@@ -206,6 +208,7 @@ namespace System.Resources
             // so we must initialize the cache here.
             _defaultReader._resCache = _resCache;
         }
+
 #endif
 
         protected override void Dispose(bool disposing)

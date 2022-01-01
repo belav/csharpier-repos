@@ -225,6 +225,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 writer.Token.ToString()
             );
         }
+
 #endif
 
         [Test]

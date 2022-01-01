@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Win32;
 
+
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
 public class TestRegistryKey : IDisposable

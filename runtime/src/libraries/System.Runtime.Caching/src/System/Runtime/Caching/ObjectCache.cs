@@ -97,6 +97,7 @@ namespace System.Runtime.Caching
             DateTimeOffset absoluteExpiration,
             string regionName = null
         );
+
         public abstract CacheItem AddOrGetExisting(CacheItem value, CacheItemPolicy policy);
 
         public abstract object AddOrGetExisting(

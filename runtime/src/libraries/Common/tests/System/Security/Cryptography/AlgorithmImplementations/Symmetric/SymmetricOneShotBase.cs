@@ -15,6 +15,7 @@ namespace System.Security.Cryptography.Tests
     {
         protected abstract byte[] Key { get; }
         protected abstract byte[] IV { get; }
+
         protected abstract SymmetricAlgorithm CreateAlgorithm();
 
         protected void OneShotRoundtripTest(

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Testing;
 using Newtonsoft.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.Startup>>
@@ -844,6 +845,7 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 .ToArray()
         );
     }
+
     [Fact]
     public async Task ApiExplorer_ResponseType_InheritingFromController()
     {

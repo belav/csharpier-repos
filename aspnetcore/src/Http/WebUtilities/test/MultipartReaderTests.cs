@@ -9,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.WebUtilities;
 
 public class MultipartReaderTests
 {
     private const string Boundary = "9051914041544843365972754266";
+
     // Note that CRLF (\r\n) is required. You can't use multi-line C# strings here because the line breaks on Linux are just LF.
     private const string OnePartBody =
         "--9051914041544843365972754266\r\n"
@@ -34,6 +36,7 @@ public class MultipartReaderTests
         + "\r\n"
         + "text default\r\n"
         + "--9051914041544843365972754266--\r\n";
+
     // It's non-compliant but common to leave off the last CRLF.
     private const string OnePartBodyWithoutFinalCRLF =
         "--9051914041544843365972754266\r\n"

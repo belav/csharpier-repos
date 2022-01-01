@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
 
 #pragma warning disable 67
             public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged;
+
 #pragma warning restore 67
 
             public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)

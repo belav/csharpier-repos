@@ -24,8 +24,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>? LocalFunctions = null;
             public ArrayBuilder<CaptureId>? CaptureIds = null;
             public readonly bool IsStackSpillRegion;
+
 #if DEBUG
             private bool _aboutToFree = false;
+
 #endif
 
             public RegionBuilder(
@@ -59,13 +61,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             [MemberNotNullWhen(true, nameof(Regions))]
             public bool HasRegions => Regions?.Count > 0;
+
             [MemberNotNullWhen(true, nameof(LocalFunctions))]
             public bool HasLocalFunctions => LocalFunctions?.Count > 0;
+
             [MemberNotNullWhen(true, nameof(CaptureIds))]
             public bool HasCaptureIds => CaptureIds?.Count > 0;
 
 #if DEBUG
             public void AboutToFree() => _aboutToFree = true;
+
 #endif
 
             [MemberNotNull(nameof(CaptureIds))]

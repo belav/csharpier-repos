@@ -64,6 +64,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 );
             }
         }
+
 #endif
 
         internal void SetPoolReclamation(IPooledConnectionReclamation poolReclamation)

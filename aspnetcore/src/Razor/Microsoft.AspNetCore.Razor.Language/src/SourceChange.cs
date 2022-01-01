@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class SourceChange : IEquatable<SourceChange>

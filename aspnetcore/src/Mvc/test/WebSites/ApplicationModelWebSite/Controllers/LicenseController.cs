@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace ApplicationModelWebSite.Controllers;
 
 public class LicenseController : Controller

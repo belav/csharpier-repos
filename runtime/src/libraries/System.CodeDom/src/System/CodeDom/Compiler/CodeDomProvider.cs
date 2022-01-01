@@ -141,6 +141,7 @@ namespace System.CodeDom.Compiler
         public virtual ICodeGenerator CreateGenerator(TextWriter output) => CreateGenerator();
 
         public virtual ICodeGenerator CreateGenerator(string fileName) => CreateGenerator();
+
 #pragma warning restore 618
 
         [Obsolete(
@@ -257,11 +258,13 @@ namespace System.CodeDom.Compiler
             }
             return parser;
         }
+
 #pragma warning restore 618
 
         private sealed class ConfigurationErrorsException : SystemException
         {
             public ConfigurationErrorsException(string message) : base(message) { }
+
             public ConfigurationErrorsException(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {

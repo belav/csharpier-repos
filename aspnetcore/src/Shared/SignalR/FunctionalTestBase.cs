@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging.Testing;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class FunctionalTestBase : VerifiableLoggedTest

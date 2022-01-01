@@ -29,6 +29,7 @@ namespace System.Linq.Parallel
 #if DEBUG
         // In debug builds, we keep track of when the producer is done (for asserts).
         private bool _done;
+
 #endif
 
         //-----------------------------------------------------------------------------------

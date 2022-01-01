@@ -12,6 +12,7 @@ public class VectorTests
     {
         return TestDriver.RunTests(typeof(VectorTests), args);
     }
+
 #endif
 
     //

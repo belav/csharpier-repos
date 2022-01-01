@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 [Obsolete("This class is obsolete and will be removed in a future version.")]

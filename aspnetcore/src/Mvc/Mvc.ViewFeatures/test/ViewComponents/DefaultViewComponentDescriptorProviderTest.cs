@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
 public class DefaultViewComponentDescriptorProviderTest

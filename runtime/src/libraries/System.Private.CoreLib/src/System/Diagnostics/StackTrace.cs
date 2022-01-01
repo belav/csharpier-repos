@@ -398,6 +398,7 @@ namespace System.Diagnostics
             if (traceFormat == TraceFormat.TrailingNewLine)
                 sb.AppendLine();
         }
+
 #endif // !CORERT
 
         private static bool ShowInStackTrace(MethodBase mb)

@@ -5880,6 +5880,7 @@ public class Unbound : Constructed<> { }
             Assert.IsType<ImplicitNamedTypeSymbol>(scriptClass);
             Assert.False(((NamedTypeSymbol)scriptClass).IsSerializable);
         }
+
         #endregion
 
         #region ParamArrayAttribute

@@ -418,6 +418,7 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.MemberBind(globalMethodInfo)
             );
         }
+
 #endif
 
         [Fact]

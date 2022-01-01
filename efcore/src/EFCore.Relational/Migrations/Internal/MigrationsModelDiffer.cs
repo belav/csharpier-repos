@@ -136,6 +136,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         /// </summary>
 #pragma warning disable EF1001 // Internal EF Core API usage.
         protected virtual IChangeDetector ChangeDetector { get; }
+
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         /// <summary>

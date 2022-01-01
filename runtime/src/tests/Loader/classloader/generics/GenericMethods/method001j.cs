@@ -4,12 +4,14 @@
 using System;
 
 public class A<T> { }
+
 public struct S<T> { }
 
 public abstract class Base<U>
 {
     public abstract T Function<T>(T i);
 }
+
 public class Foo<U> : Base<U>
 {
     public override T Function<T>(T i)
@@ -22,6 +24,7 @@ public class Test_method001j
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

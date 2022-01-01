@@ -57,6 +57,7 @@ namespace System.Reflection.Emit
         private bool init_locals = true;
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
+
 #endregion
 
         internal bool finished;

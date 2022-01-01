@@ -26,6 +26,7 @@ namespace System.Memory.Tests
             new SegmentsTestSequenceFactory(3);
 
         public abstract ReadOnlySequence<T> CreateOfSize(int size);
+
         public abstract ReadOnlySequence<T> CreateWithContent(T[] data);
 
         internal class ArrayTestSequenceFactory : ReadOnlySequenceFactory<T>

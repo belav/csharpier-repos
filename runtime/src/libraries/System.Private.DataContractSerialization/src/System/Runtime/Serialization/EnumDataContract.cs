@@ -26,6 +26,7 @@ namespace System.Runtime.Serialization
         {
             _helper = (base.Helper as EnumDataContractCriticalHelper)!;
         }
+
         public List<DataMember> Members
         {
             get { return _helper.Members; }
@@ -133,6 +134,7 @@ namespace System.Runtime.Serialization
                     }
                 }
             }
+
             internal List<DataMember> Members
             {
                 get { return _members; }

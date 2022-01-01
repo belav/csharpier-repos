@@ -34,6 +34,7 @@ namespace System
         // instantiating another generic type in addition to ArraySegment<T> for new type parameters.
 #pragma warning disable CA1825
         public static ArraySegment<T> Empty { get; } = new ArraySegment<T>(new T[0]);
+
 #pragma warning restore CA1825
 
         private readonly T[]? _array; // Do not rename (binary serialization)
@@ -211,6 +212,7 @@ namespace System
         void IList<T>.Insert(int index, T item) => ThrowHelper.ThrowNotSupportedException();
 
         void IList<T>.RemoveAt(int index) => ThrowHelper.ThrowNotSupportedException();
+
         #endregion
 
         #region IReadOnlyList<T>
@@ -225,6 +227,7 @@ namespace System
                 return _array![_offset + index];
             }
         }
+
         #endregion IReadOnlyList<T>
 
         #region ICollection<T>
@@ -253,16 +256,19 @@ namespace System
             ThrowHelper.ThrowNotSupportedException();
             return default;
         }
+
         #endregion
 
         #region IEnumerable<T>
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
         #endregion
 
         #region IEnumerable
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
         #endregion
 
         private void ThrowInvalidOperationIfDefault()

@@ -24,9 +24,11 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             base.Dispose(disposing);
         }
     }
+
     public class DelimiterWriteMethodTestsCtorStream : DelimiterWriteMethodTestsBase
     {
         private readonly Stream _stream;
+
         public DelimiterWriteMethodTestsCtorStream()
         {
             CommonUtilities.DeleteFile(_fileName);
@@ -37,6 +39,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         {
             return new DelimitedListTraceListener(_stream);
         }
+
         protected override void Dispose(bool disposing)
         {
             _stream.Dispose();

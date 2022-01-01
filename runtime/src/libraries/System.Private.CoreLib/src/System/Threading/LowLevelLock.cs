@@ -26,6 +26,7 @@ namespace System.Threading
 
 #if DEBUG
         private Thread? _ownerThread;
+
 #endif
 
         // Indicates whether a thread has been signaled, but has not yet been released from the wait. See SignalWaiter. Reads
@@ -63,6 +64,7 @@ namespace System.Threading
                 return isLocked;
             }
         }
+
 #endif
 
         [Conditional("DEBUG")]

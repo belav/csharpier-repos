@@ -141,6 +141,7 @@ namespace System.ComponentModel.DataAnnotations
                 return !_isSingleArgumentMethod;
             }
         }
+
         #endregion
 
         /// <summary>

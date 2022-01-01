@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Test;
 
 public class RenderTreeDiffBuilderTest : IDisposable
@@ -2487,6 +2488,7 @@ public class RenderTreeDiffBuilderTest : IDisposable
         public string NonParameterProperty { get; set; }
 
         public void Attach(RenderHandle renderHandle) { }
+
         public Task SetParametersAsync(ParameterView parameters)
         {
             parameters.SetParameterProperties(this);
@@ -2517,6 +2519,7 @@ public class RenderTreeDiffBuilderTest : IDisposable
     private class DisposableComponent : IComponent, IDisposable
     {
         public int DisposalCount { get; private set; }
+
         public void Dispose() => DisposalCount++;
 
         public void Attach(RenderHandle renderHandle) { }

@@ -132,6 +132,7 @@ namespace System.Net.Http.Functional.Tests
 
                 return response;
             }
+
 #endif
 
             protected override async Task<HttpResponseMessage> SendAsync(

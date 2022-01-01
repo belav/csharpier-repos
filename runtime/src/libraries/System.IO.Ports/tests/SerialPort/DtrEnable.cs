@@ -128,6 +128,7 @@ namespace System.IO.Ports.Tests
                 serPortProp.VerifyPropertiesAndPrint(com1);
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

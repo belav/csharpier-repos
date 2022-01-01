@@ -181,9 +181,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             }
 
             protected abstract IEnumerable<Cci.INamespaceTypeDefinition> GetTopLevelTypes();
+
             protected abstract IEnumerable<Cci.INestedTypeDefinition> GetNestedTypes(
                 Cci.ITypeDefinition def
             );
+
             protected abstract IEnumerable<Cci.IFieldDefinition> GetFields(Cci.ITypeDefinition def);
 
             private Cci.INamespaceTypeDefinition? VisitNamespaceType(

@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public class LifetimeNotImplemented : IHostApplicationLifetime

@@ -32,6 +32,7 @@ using System.Collections;
 
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #endif
 
 namespace Newtonsoft.Json.Serialization

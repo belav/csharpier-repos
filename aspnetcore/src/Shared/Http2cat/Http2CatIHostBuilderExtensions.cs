@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http2Cat;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.Extensions.Hosting;
 
 internal static class Http2CatIHostBuilderExtensions

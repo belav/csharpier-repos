@@ -14,6 +14,7 @@ using Microsoft.JSInterop;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 public class RemoteJSDataStreamTest

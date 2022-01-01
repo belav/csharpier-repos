@@ -47,6 +47,7 @@ namespace System.DirectoryServices.ActiveDirectory
             this.directoryEntryMgr = directoryEntryMgr;
             _schemaEntry = DirectoryEntryManager.GetDirectoryEntry(context, distinguishedName);
         }
+
         #endregion constructors
 
         #region IDisposable
@@ -84,6 +85,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
             }
         }
+
         #endregion IDisposable
 
         #region public methods

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal class UnsupportedJavaScriptRuntime : IJSRuntime

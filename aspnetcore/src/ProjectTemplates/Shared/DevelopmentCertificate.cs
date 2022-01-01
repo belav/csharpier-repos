@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Microsoft.AspNetCore.Certificates.Generation;
 
+
 namespace Templates.Test.Helpers;
 
 public readonly struct DevelopmentCertificate

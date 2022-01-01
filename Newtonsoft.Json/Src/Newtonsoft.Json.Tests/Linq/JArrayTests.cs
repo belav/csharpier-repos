@@ -36,6 +36,7 @@ using NUnit.Framework;
 using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
@@ -510,6 +511,7 @@ Parameter name: index",
             Assert.AreEqual("Test1", propertyDescriptors[0].Name);
             Assert.AreEqual("Test2", propertyDescriptors[1].Name);
         }
+
 #endif
 
         [Test]

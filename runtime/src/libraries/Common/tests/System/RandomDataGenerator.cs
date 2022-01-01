@@ -104,6 +104,7 @@ namespace System
             Seed = newSeed;
             return GetSingle();
         }
+
         public float GetSingle()
         {
             return (float)_rand.NextDouble();
@@ -115,6 +116,7 @@ namespace System
             Seed = newSeed;
             return GetCharLetter();
         }
+
         public char GetCharLetter()
         {
             return GetCharLetter(allowSurrogate: true);

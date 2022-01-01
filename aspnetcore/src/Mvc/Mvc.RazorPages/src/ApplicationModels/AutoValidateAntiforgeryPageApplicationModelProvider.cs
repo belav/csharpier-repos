@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 internal class AutoValidateAntiforgeryPageApplicationModelProvider : IPageApplicationModelProvider

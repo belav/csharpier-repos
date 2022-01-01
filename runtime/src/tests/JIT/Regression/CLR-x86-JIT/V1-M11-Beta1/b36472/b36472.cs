@@ -12,6 +12,7 @@ namespace Test
         {
             return (int)0;
         }
+
         object[] Method2(
             ref object[] param1,
             ref int[] param2,
@@ -23,6 +24,7 @@ namespace Test
         {
             return null;
         }
+
         static int Main()
         {
             return (int)BB.Method1(__arglist()) + 100;

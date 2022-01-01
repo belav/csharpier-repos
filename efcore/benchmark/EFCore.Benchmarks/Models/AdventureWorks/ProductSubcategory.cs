@@ -19,6 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
         public int ProductCategoryID { get; set; }
 #pragma warning disable IDE1006 // Naming Styles
         public Guid rowguid { get; set; }
+
 #pragma warning restore IDE1006 // Naming Styles
 
         public virtual ICollection<Product> Product { get; set; }

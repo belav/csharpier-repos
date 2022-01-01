@@ -21,12 +21,16 @@ namespace System.Threading.Tasks
         /// has completed before OnCompleted is called.
         /// </summary>
         private Action? _continuation;
+
         /// <summary>The exception representing the failed async operation, if it failed.</summary>
         private ExceptionDispatchInfo? _error;
+
         /// <summary>The result of the async operation, if it succeeded.</summary>
         private TResult? _result;
+
 #if DEBUG
         private bool _resultSet;
+
 #endif
 
         /// <summary>true if the producer should invoke the continuation asynchronously; otherwise, false.</summary>

@@ -39,6 +39,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             CanonicalMethodNode.AppendMangledName(nameMangler, sb);
         }
+
         public int Offset => CanonicalMethodNode.Offset;
         public bool RepresentsIndirectionCell => CanonicalMethodNode.RepresentsIndirectionCell;
 
@@ -105,6 +106,7 @@ namespace ILCompiler.DependencyAnalysis
             int firstNode,
             NodeFactory factory
         ) => null;
+
         public sealed override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
             NodeFactory factory
         ) => null;

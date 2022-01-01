@@ -4,6 +4,7 @@
 using System.Reflection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 public class ApiVisibilityConventionTest

@@ -44,6 +44,7 @@ namespace System.Runtime.InteropServices
                 () => RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(Guid.Empty, Guid.Empty)
             );
         }
+
 #pragma warning restore SYSLIB0019
 
         [Fact]

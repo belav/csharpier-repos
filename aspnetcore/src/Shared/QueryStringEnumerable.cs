@@ -8,10 +8,13 @@ using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 
+
 #if QueryStringEnumerable_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;
+
 #else
 namespace Microsoft.AspNetCore.Internal;
+
 #endif
 
 /// <summary>

@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace CorsWebSite;
 
 public class StartupWithoutEndpointRouting : Startup

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 public class DisallowOptionsRequestsPageFilterTest

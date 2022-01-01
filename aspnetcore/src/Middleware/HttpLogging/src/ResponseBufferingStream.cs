@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using static Microsoft.AspNetCore.HttpLogging.MediaTypeOptions;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 /// <summary>

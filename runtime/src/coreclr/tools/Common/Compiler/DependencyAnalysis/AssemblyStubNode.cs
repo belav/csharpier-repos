@@ -24,6 +24,7 @@ namespace ILCompiler.DependencyAnalysis
         public override bool StaticDependenciesAreComputed => true;
 
         public abstract void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb);
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
@@ -76,16 +77,19 @@ namespace ILCompiler.DependencyAnalysis
             ref X64.X64Emitter instructionEncoder,
             bool relocsOnly
         );
+
         protected abstract void EmitCode(
             NodeFactory factory,
             ref X86.X86Emitter instructionEncoder,
             bool relocsOnly
         );
+
         protected abstract void EmitCode(
             NodeFactory factory,
             ref ARM.ARMEmitter instructionEncoder,
             bool relocsOnly
         );
+
         protected abstract void EmitCode(
             NodeFactory factory,
             ref ARM64.ARM64Emitter instructionEncoder,

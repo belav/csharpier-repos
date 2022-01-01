@@ -40,6 +40,7 @@ namespace System.Runtime.Intrinsics.X86
             {
                 throw new PlatformNotSupportedException();
             }
+
             /// <summary>
             /// __m128 _mm_cvtsi64_ss (__m128 a, __int64 b)
             ///   CVTSI2SS xmm, reg/m64

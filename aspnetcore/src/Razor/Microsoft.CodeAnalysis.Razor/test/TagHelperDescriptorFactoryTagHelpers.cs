@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
+
 namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test;
 
 public enum CustomEnum

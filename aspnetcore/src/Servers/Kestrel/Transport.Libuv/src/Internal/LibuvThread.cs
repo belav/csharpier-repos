@@ -97,6 +97,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
 #if DEBUG
         public List<WeakReference> Requests { get; } = new List<WeakReference>();
+
 #endif
 
         public Exception FatalError => _closeError;
@@ -189,6 +190,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 );
             }
         }
+
 #endif
 
         private void AllowStop()

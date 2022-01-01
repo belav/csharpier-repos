@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 public class RootComponentMappingTest

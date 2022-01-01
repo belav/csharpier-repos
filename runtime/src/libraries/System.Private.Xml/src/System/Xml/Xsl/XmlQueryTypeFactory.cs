@@ -153,6 +153,7 @@ namespace System.Xml.Xsl
 
             return PrimeProduct(Choice(types), card);
         }
+
 #endif
 
         /// <summary>
@@ -327,6 +328,7 @@ namespace System.Xml.Xsl
             NodeNotRtf,
             XmlQueryCardinality.ZeroOrMore
         );
+
         #endregion
 
         //-----------------------------------------------
@@ -404,6 +406,7 @@ namespace System.Xml.Xsl
             /* XPathNodeType.Comment */XmlTypeCode.Comment,
             /* XPathNodeType.All */XmlTypeCode.Node,
         };
+
         #endregion
 
         //-----------------------------------------------
@@ -596,6 +599,7 @@ namespace System.Xml.Xsl
                     NodeNotRtf
                 };
             }
+
 #pragma warning restore CA1810
 
             /// <summary>
@@ -1445,6 +1449,7 @@ namespace System.Xml.Xsl
                     return null;
             }
         }
+
         #endregion
 
 #if NEVER   // Remove from code since we don't use and FxCop complains.  May re-add later.
@@ -2368,6 +2373,7 @@ namespace System.Xml.Xsl
         {
             return AddFilteredPrime(list, source, filter, false);
         }
+
         private XmlQueryCardinality AddFilteredPrime(
             List<XmlQueryType> list,
             XmlQueryType source,

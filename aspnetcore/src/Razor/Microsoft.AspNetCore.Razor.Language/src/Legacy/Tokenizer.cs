@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal abstract class Tokenizer : ITokenizer

@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 #if !NETCOREAPP
 using System.Buffers;
+
 #endif
 
 namespace System.IO

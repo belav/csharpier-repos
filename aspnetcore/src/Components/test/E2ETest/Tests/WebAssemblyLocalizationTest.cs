@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class WebAssemblyLocalizationTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>

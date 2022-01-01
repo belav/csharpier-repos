@@ -20,8 +20,10 @@ namespace System.Web.Mvc.Routing
     {
 #if ASPNETWEBAPI
         private static readonly RouteParameter OptionalParameter = RouteParameter.Optional;
+
 #else
         private static readonly UrlParameter OptionalParameter = UrlParameter.Optional;
+
 #endif
 
         [Fact]

@@ -21,12 +21,14 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             _elements = new SrgsElementList();
         }
+
         public SrgsItem(string text) : this()
         {
             Helpers.ThrowIfEmptyOrNull(text, nameof(text));
 
             _elements.Add(new SrgsText(text));
         }
+
         public SrgsItem(params SrgsElement[] elements) : this()
         {
             Helpers.ThrowIfNull(elements, nameof(elements));
@@ -43,10 +45,12 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _elements.Add(elements[iElement]);
             }
         }
+
         public SrgsItem(int repeatCount) : this()
         {
             SetRepeat(repeatCount);
         }
+
         public SrgsItem(int min, int max) : this()
         {
             SetRepeat(min, max);
@@ -57,6 +61,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             SetRepeat(min, max);
         }
+
         public SrgsItem(int min, int max, params SrgsElement[] elements) : this(elements)
         {
             SetRepeat(min, max);
@@ -74,6 +79,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
             _minRepeat = _maxRepeat = count;
         }
+
         public void SetRepeat(int minRepeat, int maxRepeat)
         {
             // Negative values are not allowed
@@ -100,6 +106,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             _minRepeat = minRepeat;
             _maxRepeat = maxRepeat;
         }
+
         public void Add(SrgsElement element)
         {
             Helpers.ThrowIfNull(element, nameof(element));
@@ -114,6 +121,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return _elements; }
         }
+
         // The probability that this item will be repeated.
         public float RepeatProbability
         {
@@ -131,11 +139,13 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _repeatProbability = value;
             }
         }
+
         // The minimum number of occurrences this item can/must be repeated.
         public int MinRepeat
         {
             get { return _minRepeat == NotSet ? 1 : _minRepeat; }
         }
+
         // The maximum number of occurrences this item can/must be repeated.
         public int MaxRepeat
         {
@@ -371,6 +381,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 get { return _elements.Count; }
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsElement[] AKeys
             {

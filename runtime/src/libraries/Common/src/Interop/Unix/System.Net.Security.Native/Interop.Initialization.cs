@@ -30,6 +30,7 @@ internal static partial class Interop
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
         }
+
 #endif
 
         internal static void Initialize()

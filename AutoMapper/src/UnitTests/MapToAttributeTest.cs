@@ -36,6 +36,7 @@ namespace AutoMapper.UnitTests
             string nameToSearch
         ) => string.Compare(MatchingName, nameToSearch, StringComparison.OrdinalIgnoreCase) == 0;
     }
+
     public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinationNameMapper
     {
         private static readonly SourceMember[] Empty = new SourceMember[0];
@@ -71,6 +72,7 @@ namespace AutoMapper.UnitTests
                     )
             ).Member;
         }
+
         readonly struct SourceMember
         {
             public SourceMember(MemberInfo sourceMember)
@@ -85,6 +87,7 @@ namespace AutoMapper.UnitTests
             public SourceToDestinationMapperAttribute Attribute { get; }
         }
     }
+
     public class MapToAttributeTest : AutoMapperSpecBase
     {
         public class CategoryDto

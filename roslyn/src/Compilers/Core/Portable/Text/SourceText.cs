@@ -1128,6 +1128,7 @@ namespace Microsoft.CodeAnalysis.Text
 
             return lineStarts.ToArrayAndFree();
         }
+
         #endregion
 
         /// <summary>

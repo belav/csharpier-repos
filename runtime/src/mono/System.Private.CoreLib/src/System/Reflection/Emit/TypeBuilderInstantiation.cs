@@ -53,6 +53,7 @@ namespace System.Reflection.Emit
 #pragma warning disable 649
         internal Type generic_type;
         private Type[] type_arguments;
+
 #pragma warning restore 649
 #endregion
 

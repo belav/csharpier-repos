@@ -10,6 +10,7 @@ class Program
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool True() => true;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool False() => false;
 

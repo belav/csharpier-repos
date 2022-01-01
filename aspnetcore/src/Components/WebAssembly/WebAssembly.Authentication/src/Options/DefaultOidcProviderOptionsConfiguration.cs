@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 internal class DefaultOidcOptionsConfiguration

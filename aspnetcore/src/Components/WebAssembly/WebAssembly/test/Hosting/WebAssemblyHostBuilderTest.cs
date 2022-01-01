@@ -13,6 +13,7 @@ using Microsoft.JSInterop;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 public class WebAssemblyHostBuilderTest

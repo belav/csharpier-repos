@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace ApiExplorerWebSite;
 
 [Route("ApiExplorerResponseContentType/[Action]")]

@@ -33,7 +33,9 @@ namespace System.Net.Security.Tests
             NetworkCredential credential,
             string targetName
         );
+
         protected abstract Task AuthenticateAsServerAsync(NegotiateStream server);
+
         protected abstract Task<int> ReadAsync(
             Stream stream,
             byte[] buffer,
@@ -41,6 +43,7 @@ namespace System.Net.Security.Tests
             int count,
             CancellationToken cancellationToken = default
         );
+
         protected abstract Task WriteAsync(
             Stream stream,
             byte[] buffer,
@@ -48,6 +51,7 @@ namespace System.Net.Security.Tests
             int count,
             CancellationToken cancellationToken = default
         );
+
         protected virtual bool SupportsCancelableReadsWrites => false;
         protected virtual bool IsEncryptedAndSigned => true;
 

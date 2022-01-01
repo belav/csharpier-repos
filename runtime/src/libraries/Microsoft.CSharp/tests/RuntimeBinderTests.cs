@@ -242,7 +242,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 return this;
             }
         }
+
         public class BuilderBaseEx<T> : BuilderBase<T> where T : BuilderBaseEx<T> { }
+
         public class BuilderBase<T> where T : BuilderBase<T> { }
 
         [Fact]

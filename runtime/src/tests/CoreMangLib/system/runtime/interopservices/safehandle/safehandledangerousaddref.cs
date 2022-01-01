@@ -205,6 +205,7 @@ public class SafeHandleDangerousAddRef
 
         return retVal;
     }
+
     #endregion
     #endregion
 

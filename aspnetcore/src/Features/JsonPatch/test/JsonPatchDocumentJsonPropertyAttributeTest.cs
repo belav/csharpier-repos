@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch;
 
 public class JsonPatchDocumentJsonPropertyAttributeTest

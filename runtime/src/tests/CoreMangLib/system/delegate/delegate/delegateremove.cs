@@ -3,11 +3,14 @@
 
 using System;
 using System.Globalization;
+
 //test case for delegate Remove(System.Delegate,System.Delegate) method.
 namespace DelegateTest
 {
     delegate bool booldelegate();
+
     delegate void voiddelegate();
+
     public class DelegateRemove
     {
         booldelegate starkWork;
@@ -79,6 +82,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest2()
@@ -129,6 +133,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest3()
@@ -236,6 +241,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest5()
@@ -288,6 +294,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool NegTest1()
@@ -324,6 +331,7 @@ namespace DelegateTest
             return retVal;
         }
     }
+
     //create testclass for provding test method and test target.
     class TestClass
     {
@@ -332,21 +340,25 @@ namespace DelegateTest
             TestLibrary.TestFramework.LogInformation("StartWork_Bool method  is running .");
             return true;
         }
+
         public void StartWork_Void()
         {
             TestLibrary.TestFramework.LogInformation("StartWork_Void method  is running .");
         }
+
         public bool Working_Bool()
         {
             TestLibrary.TestFramework.LogInformation("Working_Bool method  is running .");
             return true;
         }
+
         public bool Completed_Bool()
         {
             TestLibrary.TestFramework.LogInformation("Completed_Bool method  is running .");
             return true;
         }
     }
+
     class TestClass1
     {
         public static bool StartWork_Bool()
@@ -354,11 +366,13 @@ namespace DelegateTest
             TestLibrary.TestFramework.LogInformation("StartWork_Bool method  is running .");
             return true;
         }
+
         public static bool Working_Bool()
         {
             TestLibrary.TestFramework.LogInformation("Working_Bool method  is running .");
             return true;
         }
+
         public static bool Completed_Bool()
         {
             TestLibrary.TestFramework.LogInformation("Completed_Bool method  is running .");

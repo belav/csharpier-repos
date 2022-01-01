@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http;
 
 public class HostStringTests

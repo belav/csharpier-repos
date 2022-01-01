@@ -5,6 +5,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace FilesWebSite;
 
 public class EmbeddedFilesController : Controller

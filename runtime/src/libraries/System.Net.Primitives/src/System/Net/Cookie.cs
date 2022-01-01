@@ -44,6 +44,7 @@ namespace System.Net
         internal const string SpecialAttributeLiteral = "$";
 
         internal static readonly char[] PortSplitDelimiters = new char[] { ' ', ',', '\"' };
+
         // Space (' ') should be reserved as well per RFCs, but major web browsers support it and some web sites use it - so we support it too
         internal static readonly char[] ReservedToName = new char[]
         {
@@ -70,6 +71,7 @@ namespace System.Net
         private bool m_port_implicit = true; // Do not rename (binary serialization)
         private int[]? m_port_list; // Do not rename (binary serialization)
         private bool m_secure; // Do not rename (binary serialization)
+
         [System.Runtime.Serialization.OptionalField]
         private bool m_httpOnly = false; // Do not rename (binary serialization)
         private DateTime m_timeStamp = DateTime.Now; // Do not rename (binary serialization)
@@ -91,6 +93,7 @@ namespace System.Net
                     .Equals(MaxSupportedVersionString, StringComparison.Ordinal)
             );
         }
+
 #endif
 
         // These DynamicDependency attributes are a workaround for https://github.com/dotnet/runtime/issues/19348.
@@ -204,6 +207,7 @@ namespace System.Net
                 }
             }
         }
+
         internal bool InternalSetName(string? value)
         {
             if (

@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.Extensions.ApiDescription.Client;
 
 public class CSharpIdentifierTest

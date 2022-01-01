@@ -371,18 +371,22 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 public override bool CanTimeout => _stream.CanTimeout;
 
                 public override void Flush() => _stream.Flush();
+
                 public override Task FlushAsync(CancellationToken cancellationToken) =>
                     _stream.FlushAsync(cancellationToken);
 
                 public override long Seek(long offset, SeekOrigin origin) =>
                     _stream.Seek(offset, origin);
+
                 public override void SetLength(long value) => _stream.SetLength(value);
 
                 public override int ReadByte() => _stream.ReadByte();
+
                 public override void WriteByte(byte value) => _stream.WriteByte(value);
 
                 public override int Read(byte[] buffer, int offset, int count) =>
                     _stream.Read(buffer, offset, count);
+
                 public override void Write(byte[] buffer, int offset, int count) =>
                     _stream.Write(buffer, offset, count);
 
@@ -392,6 +396,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     int count,
                     CancellationToken cancellationToken
                 ) => _stream.ReadAsync(buffer, offset, count, cancellationToken);
+
                 public override Task WriteAsync(
                     byte[] buffer,
                     int offset,
@@ -407,6 +412,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     AsyncCallback? callback,
                     object? state
                 ) => _stream.BeginRead(buffer, offset, count, callback, state);
+
                 public override IAsyncResult BeginWrite(
                     byte[] buffer,
                     int offset,
@@ -414,6 +420,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     AsyncCallback? callback,
                     object? state
                 ) => _stream.BeginWrite(buffer, offset, count, callback, state);
+
 #else
                 public override IAsyncResult BeginRead(
                     byte[] buffer,
@@ -422,6 +429,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     AsyncCallback callback,
                     object? state
                 ) => _stream.BeginRead(buffer, offset, count, callback, state);
+
                 public override IAsyncResult BeginWrite(
                     byte[] buffer,
                     int offset,
@@ -429,9 +437,11 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     AsyncCallback callback,
                     object? state
                 ) => _stream.BeginWrite(buffer, offset, count, callback, state);
+
 #endif
                 public override int EndRead(IAsyncResult asyncResult) =>
                     _stream.EndRead(asyncResult);
+
                 public override void EndWrite(IAsyncResult asyncResult) =>
                     _stream.EndWrite(asyncResult);
 

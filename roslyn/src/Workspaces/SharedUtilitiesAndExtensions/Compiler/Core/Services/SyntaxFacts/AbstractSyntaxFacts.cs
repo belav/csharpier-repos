@@ -17,8 +17,10 @@ using Roslyn.Utilities;
 
 #if CODE_STYLE
 using Microsoft.CodeAnalysis.Internal.Editing;
+
 #else
 using Microsoft.CodeAnalysis.Editing;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.LanguageServices
@@ -97,10 +99,15 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxKinds.EndOfLineTrivia == trivia.RawKind;
 
         public abstract bool IsSingleLineCommentTrivia(SyntaxTrivia trivia);
+
         public abstract bool IsMultiLineCommentTrivia(SyntaxTrivia trivia);
+
         public abstract bool IsSingleLineDocCommentTrivia(SyntaxTrivia trivia);
+
         public abstract bool IsMultiLineDocCommentTrivia(SyntaxTrivia trivia);
+
         public abstract bool IsShebangDirectiveTrivia(SyntaxTrivia trivia);
+
         public abstract bool IsPreprocessorDirective(SyntaxTrivia trivia);
 
         public bool IsOnSingleLine(SyntaxNode node, bool fullSpan)

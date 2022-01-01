@@ -338,6 +338,7 @@ namespace System.Text.Tests
                 () => builder.Append((decimal)1)
             );
         }
+
         public static IEnumerable<object[]> Append_Double_TestData()
         {
             yield return new object[] { "Hello", (double)0, "Hello0" };
@@ -2760,6 +2761,7 @@ namespace System.Text.Tests
         {
             public string Format(string format, object arg, IFormatProvider formatProvider) =>
                 "abc";
+
             public object GetFormat(Type formatType) => this;
         }
 

@@ -483,6 +483,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazySourceName;
             }
         }
+
 #nullable disable
 
         public override string MetadataName
@@ -1516,6 +1517,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return base.EarlyDecodeWellKnownAttribute(ref arguments);
         }
+
 #nullable disable
 
         /// <summary>

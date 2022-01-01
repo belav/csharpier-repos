@@ -4,6 +4,7 @@
 using System.Text.Encodings.Web;
 using Microsoft.Extensions.ObjectPool;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 internal class UriBuilderContextPooledObjectPolicy : IPooledObjectPolicy<UriBuildingContext>

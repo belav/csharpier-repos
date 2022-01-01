@@ -19,6 +19,7 @@ namespace System.Security.Cryptography
             return new DSAImplementation.DSASecurityTransforms();
         }
     }
+
 #endif
 
     internal static partial class DSAImplementation

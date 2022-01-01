@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
 #if DEBUG
         private readonly List<SyntaxListBuilder> _allocated = new List<SyntaxListBuilder>();
+
 #endif
 
         internal SyntaxListPool() { }

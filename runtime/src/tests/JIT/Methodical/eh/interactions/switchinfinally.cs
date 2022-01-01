@@ -10,6 +10,7 @@ namespace test3
     class MyClass
     {
         int m_i;
+
         public MyClass(int i)
         {
             m_i = i;
@@ -48,6 +49,7 @@ namespace test3
             Console.WriteLine("done testing");
         }
     }
+
     /// <summary>
     /// Summary description for Class1.
     /// </summary>
@@ -72,6 +74,7 @@ namespace test3
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

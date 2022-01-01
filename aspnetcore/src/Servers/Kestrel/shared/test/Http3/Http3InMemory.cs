@@ -26,6 +26,7 @@ using Microsoft.Extensions.Primitives;
 using static System.IO.Pipelines.DuplexPipe;
 using Http3SettingType = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.Http3SettingType;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 internal class Http3InMemory
@@ -549,11 +550,13 @@ internal class Http3StreamBase
     {
         return Pair.Application.Input.ReadAsync().AsTask().DefaultTimeout();
     }
+
 #else
     protected ValueTask<ReadResult> ReadApplicationInputAsync()
     {
         return Pair.Application.Input.ReadAsync();
     }
+
 #endif
 
     internal async ValueTask<Http3FrameWithPayload> ReceiveFrameAsync(

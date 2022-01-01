@@ -125,6 +125,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return count;
         }
+
 #endif
 
         #region "Poolable"

@@ -17,6 +17,7 @@ namespace Internal.Cryptography
 
 #if DEBUG
         private bool _isFinalized;
+
 #endif
 
         public int BlockSizeInBytes { get; }

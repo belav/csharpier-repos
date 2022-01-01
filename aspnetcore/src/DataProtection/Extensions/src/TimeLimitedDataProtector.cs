@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using Microsoft.AspNetCore.DataProtection.Extensions;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 /// <summary>

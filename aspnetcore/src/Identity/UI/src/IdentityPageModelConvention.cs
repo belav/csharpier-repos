@@ -4,6 +4,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 namespace Microsoft.AspNetCore.Identity.UI;
 
 internal class IdentityPageModelConvention<TUser> : IPageApplicationModelConvention

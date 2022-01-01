@@ -14,6 +14,7 @@ namespace System
         private RuntimeTypeHandle type;
         private IntPtr Value;
         private IntPtr Type;
+
 #pragma warning restore CA1823
         #endregion
 

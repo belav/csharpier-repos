@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Components.WebView;
 
 /// <summary>
@@ -427,6 +428,7 @@ internal class FileExtensionContentTypeProvider : IContentTypeProvider
                 { ".zip", "application/x-zip-compressed" },
             }
         ) { }
+
     #endregion
 
     /// <summary>

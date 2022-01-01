@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Rendering;
 
 public class ArrayBuilderSegmentTest

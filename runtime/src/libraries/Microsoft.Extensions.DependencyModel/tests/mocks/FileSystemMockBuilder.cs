@@ -57,6 +57,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         private class FileMock : IFile
         {
             private Dictionary<string, string> _files;
+
             public FileMock(Dictionary<string, string> files)
             {
                 _files = files;

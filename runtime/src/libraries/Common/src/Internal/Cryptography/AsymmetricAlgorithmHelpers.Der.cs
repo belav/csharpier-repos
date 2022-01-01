@@ -193,6 +193,7 @@ namespace Internal.Cryptography
                     );
             }
         }
+
 #endif
 
         public static int BitsToBytes(int bitLength)

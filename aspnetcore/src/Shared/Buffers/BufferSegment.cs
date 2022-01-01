@@ -5,6 +5,7 @@ using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
+
 namespace System.IO.Pipelines;
 
 // Copied from https://github.com/dotnet/corefx/blob/de3902bb56f1254ec1af4bf7d092fc2c048734cc/src/System.IO.Pipelines/src/System/IO/Pipelines/BufferSegment.cs

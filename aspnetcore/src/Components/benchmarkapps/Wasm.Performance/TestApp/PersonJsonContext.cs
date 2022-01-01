@@ -3,6 +3,7 @@
 
 using System.Text.Json.Serialization;
 
+
 namespace Wasm.Performance.TestApp;
 
 [JsonSerializable(typeof(Person))]

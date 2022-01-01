@@ -179,6 +179,7 @@ using System.Threading.Tasks;
 
 #if ES_BUILD_STANDALONE
 using System.Security.Permissions;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -267,6 +268,7 @@ namespace System.Diagnostics.Tracing
         private static readonly EventListener? persistent_Xplat_Listener = IsSupported
             ? XplatEventLogger.InitializePersistentListener()
             : null;
+
 #pragma warning restore CA1823
 #endif //FEATURE_EVENTSOURCE_XPLAT
 
@@ -274,6 +276,7 @@ namespace System.Diagnostics.Tracing
         /// The human-friendly name of the eventSource.  It defaults to the simple name of the class
         /// </summary>
         public string Name => m_name;
+
         /// <summary>
         /// Every eventSource is assigned a GUID to uniquely identify it to the system.
         /// </summary>
@@ -371,6 +374,7 @@ namespace System.Diagnostics.Tracing
             }
             return GenerateGuidFromName(name.ToUpperInvariant()); // Make it case insensitive.
         }
+
         /// <summary>
         /// Returns the official ETW Provider name for the eventSource defined by 'eventSourceType'.
         /// This API allows you to compute this without actually creating an instance of the EventSource.
@@ -384,6 +388,7 @@ namespace System.Diagnostics.Tracing
 #if !ES_BUILD_STANDALONE
         private const DynamicallyAccessedMemberTypes ManifestMemberTypes =
             DynamicallyAccessedMemberTypes.All;
+
 #endif
 
         /// <summary>
@@ -419,6 +424,7 @@ namespace System.Diagnostics.Tracing
                 EventManifestOptions.None
             );
         }
+
         /// <summary>
         /// Returns a string of the XML manifest associated with the eventSourceType. The scheme for this XML is
         /// documented at in EventManifest Schema https://docs.microsoft.com/en-us/windows/desktop/WES/eventmanifestschema-schema.
@@ -748,6 +754,7 @@ namespace System.Diagnostics.Tracing
             if (TplEventSource.Log != null)
                 TplEventSource.Log.SetActivityId(activityId);
         }
+
 #endregion
 
 #region protected
@@ -857,6 +864,7 @@ namespace System.Diagnostics.Tracing
                 }
             }
         }
+
 #endif
 
         /// <summary>
@@ -1653,6 +1661,7 @@ namespace System.Diagnostics.Tracing
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         /// <summary>
         /// Disposes of an EventSource.
         /// </summary>
@@ -1705,6 +1714,7 @@ namespace System.Diagnostics.Tracing
             m_eventSourceEnabled = false;
             m_eventSourceDisposed = true;
         }
+
         /// <summary>
         /// Finalizer for EventSource
         /// </summary>
@@ -1712,6 +1722,7 @@ namespace System.Diagnostics.Tracing
         {
             this.Dispose(false);
         }
+
 #endregion
 
 #region private
@@ -2822,6 +2833,7 @@ namespace System.Diagnostics.Tracing
             }
             return true;
         }
+
         [System.Runtime.CompilerServices.MethodImpl(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -2915,6 +2927,7 @@ namespace System.Diagnostics.Tracing
                 this.m_eventSource = eventSource;
                 this.m_eventProviderType = providerType;
             }
+
             protected override void OnControllerCommand(
                 ControllerCommand command,
                 IDictionary<string, string?>? arguments,
@@ -2936,9 +2949,11 @@ namespace System.Diagnostics.Tracing
                     arguments
                 );
             }
+
             private readonly EventSource m_eventSource;
             private readonly EventProviderType m_eventProviderType;
         }
+
 #endif
 
         /// <summary>
@@ -4778,6 +4793,7 @@ namespace System.Diagnostics.Tracing
         private static byte m_EventSourceExceptionRecurenceCount; // current recursion count inside ThrowEventSourceException
 #if FEATURE_MANAGED_ETW_CHANNELS
         internal volatile ulong[]? m_channelData;
+
 #endif
 
         // We use a single instance of ActivityTracker for all EventSources instances to allow correlation between multiple event providers.
@@ -4992,6 +5008,7 @@ namespace System.Diagnostics.Tracing
                 Validate();
             }
         }
+
         // We don't expose a Dispose(bool), because the contract is that you don't have any non-syncronous
         // 'cleanup' associated with this object
 
@@ -5009,6 +5026,7 @@ namespace System.Diagnostics.Tracing
         {
             EnableEvents(eventSource, level, EventKeywords.None);
         }
+
         /// <summary>
         /// Enable all events from the eventSource identified by 'eventSource' to the current
         /// dispatcher that have a verbosity level of 'level' or lower and have a event keyword
@@ -5028,6 +5046,7 @@ namespace System.Diagnostics.Tracing
         {
             EnableEvents(eventSource, level, matchAnyKeyword, null);
         }
+
         /// <summary>
         /// Enable all events from the eventSource identified by 'eventSource' to the current
         /// dispatcher that have a verbosity level of 'level' or lower and have a event keyword
@@ -5077,6 +5096,7 @@ namespace System.Diagnostics.Tracing
             }
 #endif // FEATURE_PERFTRACING
         }
+
         /// <summary>
         /// Disables all events coming from eventSource identified by 'eventSource'.
         ///
@@ -5498,6 +5518,7 @@ namespace System.Diagnostics.Tracing
         /// from this list.   Note that EventSources point to their listener but NOT the reverse.
         /// </summary>
         internal static EventListener? s_Listeners;
+
         /// <summary>
         /// The list of all active eventSources in the appdomain.  Note that eventSources do NOT
         /// remove themselves from this list this is a weak list and the GC that removes them may
@@ -5753,6 +5774,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public EventChannel Channel =>
             EventId <= 0 ? EventChannel.None : (EventChannel)Metadata.Descriptor.Channel;
+
 #endif
 
         /// <summary>
@@ -5902,10 +5924,13 @@ namespace System.Diagnostics.Tracing
 
         /// <summary>Event's ID</summary>
         public int EventId { get; private set; }
+
         /// <summary>Event's severity level: indicates the severity or verbosity of the event</summary>
         public EventLevel Level { get; set; }
+
         /// <summary>Event's keywords: allows classification of events by "categories"</summary>
         public EventKeywords Keywords { get; set; }
+
         /// <summary>Event's operation code: allows defining operations, generally used with Tasks</summary>
         public EventOpcode Opcode
         {
@@ -5921,9 +5946,11 @@ namespace System.Diagnostics.Tracing
 
         /// <summary>Event's task: allows logical grouping of events</summary>
         public EventTask Task { get; set; }
+
 #if FEATURE_MANAGED_ETW_CHANNELS
         /// <summary>Event's channel: defines an event log as an additional destination for the event</summary>
         public EventChannel Channel { get; set; }
+
 #endif
         /// <summary>Event's version</summary>
         public byte Version { get; set; }
@@ -6065,6 +6092,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         Custom,
     }
+
 #endif
 #endif
 
@@ -6573,6 +6601,7 @@ namespace System.Diagnostics.Tracing
 
             templates.AppendLine("/>");
         }
+
         public void EndEvent()
         {
             Debug.Assert(eventName != null);
@@ -6637,6 +6666,7 @@ namespace System.Diagnostics.Tracing
 
             return channelKeyword;
         }
+
 #endif
 
         public byte[] CreateManifest()
@@ -6935,6 +6965,7 @@ namespace System.Diagnostics.Tracing
             stringBuilder.Append(" name=\"").Append(name).Append('"');
             WriteMessageAttrib(sb, elementName, name, name);
         }
+
         private void WriteMessageAttrib(
             StringBuilder stringBuilder,
             string elementName,
@@ -6969,6 +7000,7 @@ namespace System.Diagnostics.Tracing
 
             stringTab[key] = value;
         }
+
         internal string? GetLocalizedMessage(string key, CultureInfo ci, bool etwFormat)
         {
             string? value = null;
@@ -7050,6 +7082,7 @@ namespace System.Diagnostics.Tracing
                 );
             return info.Name;
         }
+
 #endif
         private string GetTaskName(EventTask task, string eventName)
         {
@@ -7226,6 +7259,7 @@ namespace System.Diagnostics.Tracing
             "%n",
             "%t"
         };
+
         // Manifest messages use %N conventions for their message substitutions.   Translate from
         // .NET conventions.   We can't use RegEx for this (we are in mscorlib), so we do it 'by hand'
         private string TranslateToManifestConvention(string eventMessage, string evtName)
@@ -7362,6 +7396,7 @@ namespace System.Diagnostics.Tracing
             public ulong Keywords;
             public EventChannelAttribute? Attribs;
         }
+
 #endif
 
         private readonly Dictionary<int, string> opcodeTab;
@@ -7408,6 +7443,7 @@ namespace System.Diagnostics.Tracing
     internal struct ManifestEnvelope
     {
         public const int MaxChunkSize = 0xFF00;
+
         public enum ManifestFormats : byte
         {
             SimpleXmlFormat = 1, // simply dump the XML manifest as UTF8

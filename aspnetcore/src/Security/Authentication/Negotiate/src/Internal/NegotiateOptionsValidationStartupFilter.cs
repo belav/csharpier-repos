@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Authentication.Negotiate.Internal;
 
 internal class NegotiateOptionsValidationStartupFilter : IStartupFilter

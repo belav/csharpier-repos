@@ -35,6 +35,7 @@ namespace System.Net.Http
                     c => c.GetParameters().Select(p => p.ParameterType).ToArray().EqualTo(types)
                 );
         }
+
 #endif
 
         public static Type ExtractGenericInterface(this Type queryType, Type interfaceType)
@@ -56,6 +57,7 @@ namespace System.Net.Http
         {
             return type.GetTypeInfo().ImplementedInterfaces.ToArray();
         }
+
 #endif
 
 #if NETFX_CORE
@@ -63,6 +65,7 @@ namespace System.Net.Http
         {
             return type.GetTypeInfo().IsAssignableFrom(c.GetTypeInfo());
         }
+
 #endif
 
         public static bool IsGenericType(this Type type)

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Connections.Internal;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
 public class ServerSentEventsMessageFormatterTests

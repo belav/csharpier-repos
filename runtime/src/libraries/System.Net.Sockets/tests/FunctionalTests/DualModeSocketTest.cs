@@ -3634,6 +3634,7 @@ namespace System.Net.Sockets.Tests
                     _waitHandle.Set();
                 }
             }
+
             private void Connected(object sender, SocketAsyncEventArgs e)
             {
                 EventWaitHandle handle = (EventWaitHandle)e.UserToken;

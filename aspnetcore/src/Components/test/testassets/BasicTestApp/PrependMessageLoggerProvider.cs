@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
+
 namespace BasicTestApp;
 
 [ProviderAlias("PrependMessage")]

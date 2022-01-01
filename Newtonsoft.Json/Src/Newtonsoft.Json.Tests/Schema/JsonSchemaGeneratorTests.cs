@@ -132,6 +132,7 @@ namespace Newtonsoft.Json.Tests.Schema
                 json
             );
         }
+
 #endif
 
         [Test]
@@ -359,6 +360,7 @@ namespace Newtonsoft.Json.Tests.Schema
             Assert.AreEqual(true, schema.AllowAdditionalProperties);
             Assert.AreEqual(null, schema.Properties);
         }
+
 #endif
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40)
@@ -372,6 +374,7 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Assert.AreEqual(JsonSchemaType.Null, schema.Type);
         }
+
 #endif
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -402,6 +405,7 @@ namespace Newtonsoft.Json.Tests.Schema
                 return c;
             }
         }
+
 #endif
 
         [Test]
@@ -520,6 +524,7 @@ namespace Newtonsoft.Json.Tests.Schema
             );
             Assert.AreEqual("Name!", c.Name);
         }
+
 #endif
 
         public enum SortTypeFlag

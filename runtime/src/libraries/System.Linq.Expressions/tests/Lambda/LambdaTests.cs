@@ -1384,6 +1384,7 @@ namespace System.Linq.Expressions.Tests
 "
             );
         }
+
 #endif
 
         private struct Mutable
@@ -2057,6 +2058,7 @@ namespace System.Linq.Expressions.Tests
 "
                 );
         }
+
 #endif
 
         [Theory, ClassData(typeof(CompilationTypes))]

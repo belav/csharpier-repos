@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 public class ConfigureApiResourcesTests

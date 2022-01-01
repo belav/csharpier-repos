@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Identity.Core;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Identity;
 
 /// <summary>
@@ -89,6 +90,7 @@ public class PasswordHasher<TUser> : IPasswordHasher<TUser> where TUser : class
         }
         return areSame;
     }
+
 #endif
 
     /// <summary>

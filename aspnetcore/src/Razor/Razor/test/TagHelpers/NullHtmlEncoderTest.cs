@@ -4,6 +4,7 @@
 using System.IO;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
 public class NullHtmlEncoderTest

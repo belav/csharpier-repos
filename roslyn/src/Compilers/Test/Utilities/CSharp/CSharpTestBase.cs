@@ -1977,6 +1977,7 @@ namespace System.Runtime.CompilerServices
             Assert.Equal(bindText, node.ToString());
             return ((TNode)node);
         }
+
         #endregion
 
         #region Attributes
@@ -2913,6 +2914,7 @@ namespace System
             }
         }
     }";
+
         #endregion
 
         #region Index and Range
@@ -2968,6 +2970,7 @@ namespace System
                 parseOptions: parseOptions
             );
         }
+
         #endregion
 
         #region Interpolated string handlers
@@ -3329,6 +3332,7 @@ namespace System.Runtime.CompilerServices
                 return new List<object[]>() { new object[] { ";", "" }, new object[] { "{", "}" } };
             }
         }
+
         #endregion
 
         protected static readonly string s_IAsyncEnumerable =

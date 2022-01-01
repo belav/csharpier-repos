@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 
+
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Experimental;
 
 using WorkspaceDocumentDiagnosticReport = SumType<

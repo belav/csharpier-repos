@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
+
 namespace RoutingSample.Web.HelloExtension;
 
 public class HelloMiddleware

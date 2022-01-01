@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.Classification
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
         );
+
         public abstract void AddSyntacticClassifications(
             SyntaxNode root,
             TextSpan textSpan,
@@ -34,6 +35,7 @@ namespace Microsoft.CodeAnalysis.Classification
         );
 
         public abstract ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers();
+
         public abstract ClassifiedSpan FixClassification(
             SourceText text,
             ClassifiedSpan classifiedSpan

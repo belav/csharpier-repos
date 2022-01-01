@@ -1450,6 +1450,7 @@ namespace System.Configuration
         }
 
         protected abstract ConfigurationElement CreateNewElement();
+
         protected abstract object GetElementKey(ConfigurationElement element);
 
         internal object GetElementKeyInternal(ConfigurationElement element)

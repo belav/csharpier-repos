@@ -3,6 +3,7 @@
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
 namespace Identity.DefaultUI.WebSite.Data.Migrations;
 
 public partial class UpdateIdentitySchema : Migration

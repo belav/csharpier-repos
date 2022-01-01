@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests.Helpers;
 
 public class StringsHelpers

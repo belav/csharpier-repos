@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>

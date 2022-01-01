@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
         protected internal abstract SerializableNavigationBarItem Dehydrate();
 
         public abstract override bool Equals(object? obj);
+
         public abstract override int GetHashCode();
 
         public bool Equals(RoslynNavigationBarItem? other)

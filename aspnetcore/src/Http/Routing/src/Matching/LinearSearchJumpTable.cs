@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Routing.Matching;
 
 internal class LinearSearchJumpTable : JumpTable

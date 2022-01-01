@@ -12,6 +12,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
 public class ResponseCachingMiddlewareTests

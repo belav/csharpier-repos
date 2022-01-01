@@ -2452,6 +2452,7 @@ namespace System.Linq.Expressions.Tests
             public override bool CanReduce => true;
             public override ExpressionType NodeType => ExpressionType.Extension;
             public override Type Type => _reduced.Type;
+
             public override Expression Reduce() => _reduced;
         }
 
@@ -2478,6 +2479,7 @@ namespace System.Linq.Expressions.Tests
 
 #pragma warning disable 0649
             public int Baz;
+
 #pragma warning restore 0649
 
             public int Foo { get; set; }

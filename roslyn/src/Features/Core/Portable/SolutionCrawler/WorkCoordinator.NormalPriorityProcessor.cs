@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 #if DEBUG
 using System.Diagnostics;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler

@@ -856,10 +856,12 @@ namespace MonoTests.System.Configuration
             {
                 return new T();
             }
+
             protected override object GetElementKey(ConfigurationElement element)
             {
                 return ((T)element).GetHashCode();
             }
+
             #endregion
 
             public override ConfigurationElementCollectionType CollectionType

@@ -539,6 +539,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.NotNull(key.KeyName);
             }
         }
+
 #endif
 
         [Fact]

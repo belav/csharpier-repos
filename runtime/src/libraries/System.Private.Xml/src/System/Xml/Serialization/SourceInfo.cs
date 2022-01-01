@@ -19,6 +19,7 @@ namespace System.Xml.Serialization
         private static readonly Regex s_regex = new Regex(
             "([(][(](?<t>[^)]+)[)])?(?<a>[^[]+)[[](?<ia>.+)[]][)]?"
         );
+
         //((global::Microsoft.CFx.Test.Common.TypeLibrary.IXSType_9)o), @"IXSType_9", @"", true, true);
         private static readonly Regex s_regex2 = new Regex(
             "[(][(](?<cast>[^)]+)[)](?<arg>[^)]+)[)]"

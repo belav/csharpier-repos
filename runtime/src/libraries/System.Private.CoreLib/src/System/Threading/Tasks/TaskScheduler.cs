@@ -538,6 +538,7 @@ namespace System.Threading.Tasks
         internal sealed class SystemThreadingTasks_TaskSchedulerDebugView
         {
             private readonly TaskScheduler m_taskScheduler;
+
             public SystemThreadingTasks_TaskSchedulerDebugView(TaskScheduler scheduler)
             {
                 m_taskScheduler = scheduler;
@@ -558,9 +559,13 @@ namespace System.Threading.Tasks
         internal readonly struct TaskSchedulerAwaiter : ICriticalNotifyCompletion
         {
             private readonly TaskScheduler _scheduler;
+
             public TaskSchedulerAwaiter(TaskScheduler scheduler) => _scheduler = scheduler;
+
             public bool IsCompleted => false;
+
             public void GetResult() { }
+
             public void OnCompleted(Action continuation) =>
                 Task.Factory.StartNew(
                     continuation,
@@ -568,6 +573,7 @@ namespace System.Threading.Tasks
                     TaskCreationOptions.DenyChildAttach,
                     _scheduler
                 );
+
             public void UnsafeOnCompleted(Action continuation)
             {
                 if (ReferenceEquals(_scheduler, Default))

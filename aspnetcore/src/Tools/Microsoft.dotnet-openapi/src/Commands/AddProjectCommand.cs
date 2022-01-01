@@ -7,6 +7,7 @@ using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.DotNet.OpenApi.Commands;
 
 internal class AddProjectCommand : BaseCommand

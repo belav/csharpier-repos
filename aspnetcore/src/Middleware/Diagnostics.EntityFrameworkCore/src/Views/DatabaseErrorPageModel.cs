@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Views;
 
 internal class DatabaseErrorPageModel

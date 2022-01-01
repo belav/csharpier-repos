@@ -11,6 +11,7 @@ namespace System
     {
 #if TARGET_UNIX && !TARGET_OSX && !TARGET_MACCATALYST && !TARGET_IOS
         private static readonly string s_osPlatformName = Interop.Sys.GetUnixName();
+
 #endif
 
         private readonly Version _version;
@@ -165,8 +166,10 @@ namespace System
         public static bool IsBrowser() =>
 #if TARGET_BROWSER
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -177,6 +180,7 @@ namespace System
             true;
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -185,8 +189,10 @@ namespace System
         public static bool IsFreeBSD() =>
 #if TARGET_FREEBSD
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -205,8 +211,10 @@ namespace System
         public static bool IsAndroid() =>
 #if TARGET_ANDROID
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -226,8 +234,10 @@ namespace System
         public static bool IsIOS() =>
 #if TARGET_IOS || TARGET_MACCATALYST
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -243,15 +253,19 @@ namespace System
         public static bool IsMacOS() =>
 #if TARGET_OSX
             true;
+
 #else
             false;
+
 #endif
 
         internal static bool IsOSXLike() =>
 #if TARGET_OSX || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -266,8 +280,10 @@ namespace System
         public static bool IsMacCatalyst() =>
 #if TARGET_MACCATALYST
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -282,8 +298,10 @@ namespace System
         public static bool IsTvOS() =>
 #if TARGET_TVOS
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -298,8 +316,10 @@ namespace System
         public static bool IsWatchOS() =>
 #if TARGET_WATCHOS
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>
@@ -314,8 +334,10 @@ namespace System
         public static bool IsWindows() =>
 #if TARGET_WINDOWS
             true;
+
 #else
             false;
+
 #endif
 
         /// <summary>

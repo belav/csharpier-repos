@@ -27,6 +27,7 @@ internal partial class VectorTest
             return Pass;
         }
     }
+
     private class Vector4Test
     {
         public static int VectorSub()
@@ -45,6 +46,7 @@ internal partial class VectorTest
             return Pass;
         }
     }
+
     private class Vector3Test
     {
         public static int VectorSub()
@@ -61,6 +63,7 @@ internal partial class VectorTest
             return Pass;
         }
     }
+
     private class Vector2Test
     {
         public static int VectorSub()
@@ -75,6 +78,7 @@ internal partial class VectorTest
             return Pass;
         }
     }
+
     private static int Main()
     {
         int returnVal = Pass;

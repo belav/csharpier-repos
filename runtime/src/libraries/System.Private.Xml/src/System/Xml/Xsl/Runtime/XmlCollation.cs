@@ -146,6 +146,7 @@ namespace System.Xml.Xsl.Runtime
                 true
             );
         }
+
         // This function is used in both parser and F&O library, so just strictly map valid literals to XmlCollation.
         // Set compare options one by one:
         //     0, false: no effect; 1, true: yes

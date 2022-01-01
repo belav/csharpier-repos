@@ -28,6 +28,7 @@ namespace SerializationTestTypes
     {
         string genericTypeName;
         object[] genericParams;
+
         internal GenericNameProvider(Type type)
             : this(type.GetGenericTypeDefinition().FullName, type.GetGenericArguments()) { }
 
@@ -1177,6 +1178,7 @@ namespace SerializationTestTypes
             {
                 return ((object)x).GetHashCode();
             }
+
             public static DataMemberComparer Singleton = new DataMemberComparer();
         }
 
@@ -1196,6 +1198,7 @@ namespace SerializationTestTypes
             {
                 return ((object)x).GetHashCode();
             }
+
             public static DataMemberOrderComparer Singleton = new DataMemberOrderComparer();
         }
     }
@@ -1387,6 +1390,7 @@ namespace SerializationTestTypes
             Add(new PrimitiveDataContract(typeof(Uri)));
             Add(objectContract);
         }
+
         public static void Add(PrimitiveDataContract primitiveContract)
         {
             typeToContract.Add(primitiveContract.UnderlyingType, primitiveContract);
@@ -1730,6 +1734,7 @@ namespace SerializationTestTypes
             }
             return false;
         }
+
         public override int GetHashCode()
         {
             if (members != null)
@@ -2352,6 +2357,7 @@ namespace SerializationTestTypes
             }
             return null;
         }
+
         public override bool Equals(object other)
         {
             if ((object)this == other)

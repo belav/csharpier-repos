@@ -4,6 +4,7 @@
 using System.Reflection;
 using Microsoft.JSInterop.Infrastructure;
 
+
 namespace Microsoft.JSInterop;
 
 internal static class JSCallResultTypeHelper

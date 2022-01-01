@@ -28,6 +28,7 @@ namespace System.Net.WebSockets
         // this object and another one is still using WaitAsync. According to Dev11 358715, this should be fine as long as we are not accessing the
         // AvailableWaitHandle on this SemaphoreSlim object.
         private readonly SemaphoreSlim _sendFrameThrottle;
+
         // locking _ThisLock protects access to
         // - State
         // - _closeAsyncStartedReceive
@@ -1625,10 +1626,12 @@ namespace System.Net.WebSockets
             public WebSocketReceiveResult? ReceiveResult { get; protected set; }
             protected abstract int BufferCount { get; }
             protected abstract WebSocketProtocolComponent.ActionQueue ActionQueue { get; }
+
             protected abstract void Initialize(
                 Nullable<ArraySegment<byte>> buffer,
                 CancellationToken cancellationToken
             );
+
             protected abstract bool ShouldContinue(CancellationToken cancellationToken);
 
             // Multi-Threading: This method has to be called under a SessionHandle-lock. It returns true if a
@@ -2369,10 +2372,15 @@ namespace System.Net.WebSockets
             // Multi-Threading: only one thread at a time is allowed to call OnDataReceived or OnDataSent
             // - but both methods can be called from different threads at the same time.
             public abstract void OnDataReceived();
+
             public abstract void OnDataSent();
+
             public abstract void Dispose();
+
             public abstract void StartTimer(WebSocketBase webSocket);
+
             public abstract void ResetTimer();
+
             public abstract bool ShouldSendKeepAlive();
 
             public static KeepAliveTracker Create(TimeSpan keepAliveInterval)

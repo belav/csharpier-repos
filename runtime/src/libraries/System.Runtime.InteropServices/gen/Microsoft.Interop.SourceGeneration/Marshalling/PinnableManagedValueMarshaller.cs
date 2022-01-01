@@ -66,6 +66,7 @@ namespace Microsoft.Interop
             }
             return _manualMarshallingGenerator.UsesNativeIdentifier(info, context);
         }
+
         private static bool IsPinningPathSupported(TypePositionInfo info, StubCodeContext context)
         {
             return context.SingleFrameSpansNativeContext

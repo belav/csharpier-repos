@@ -24,6 +24,7 @@ using EventSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.EventSymbol;
 using PropertySymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.PropertySymbol;
 using ParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.ParameterSymbol;
 using TypeParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.TypeParameterSymbol;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

@@ -43,6 +43,7 @@ namespace System.Reflection.Emit
     {
 #region Sync with MonoReflectionDerivedType in object-internals.h
         private protected Type m_baseType;
+
 #endregion
 
         [DynamicDependency(nameof(m_baseType))] // Automatically keeps all previous fields too due to StructLayout
@@ -440,6 +441,7 @@ namespace System.Reflection.Emit
     {
 #region Sync with MonoReflectionArrayType in object-internals.h
         private int rank;
+
 #endregion
 
         [DynamicDependency(nameof(rank))] // Automatically keeps all previous fields too due to StructLayout

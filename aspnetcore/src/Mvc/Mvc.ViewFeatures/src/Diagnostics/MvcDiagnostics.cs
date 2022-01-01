@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 
+
 namespace Microsoft.AspNetCore.Mvc.Diagnostics;
 
 /// <summary>
@@ -165,6 +166,7 @@ public sealed class ViewComponentBeforeViewExecuteEventData : EventData
         ViewComponentContext = viewComponentContext;
         View = view;
     }
+
     /// <summary>
     /// The <see cref="ActionDescriptor"/>.
     /// </summary>

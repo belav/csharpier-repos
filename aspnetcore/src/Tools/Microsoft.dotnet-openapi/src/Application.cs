@@ -9,6 +9,7 @@ using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.DotNet.OpenApi.Commands;
 using Microsoft.Extensions.CommandLineUtils;
 
+
 namespace Microsoft.DotNet.OpenApi;
 
 internal class Application : CommandLineApplication

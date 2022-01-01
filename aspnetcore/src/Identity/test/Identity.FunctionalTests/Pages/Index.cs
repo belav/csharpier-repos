@@ -7,6 +7,7 @@ using AngleSharp.Dom.Html;
 using Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public class Index : DefaultUIPage

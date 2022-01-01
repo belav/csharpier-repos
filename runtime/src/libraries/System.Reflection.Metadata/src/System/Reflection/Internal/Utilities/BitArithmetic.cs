@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
+
 #if NETCOREAPP
 using System.Numerics;
+
 #endif
 
 namespace System.Reflection.Internal

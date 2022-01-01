@@ -11,6 +11,7 @@ using System.Threading.Tasks.Sources;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 
 internal class InMemoryTransportConnection : TransportConnection

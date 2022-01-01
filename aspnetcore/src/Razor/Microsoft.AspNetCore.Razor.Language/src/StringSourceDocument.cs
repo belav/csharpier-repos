@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class StringSourceDocument : RazorSourceDocument

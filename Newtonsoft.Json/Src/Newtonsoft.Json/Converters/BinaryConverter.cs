@@ -29,8 +29,10 @@ using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 #if HAVE_ADO_NET
 using System.Data.SqlTypes;
+
 #endif
 
 namespace Newtonsoft.Json.Converters
@@ -44,6 +46,7 @@ namespace Newtonsoft.Json.Converters
         private const string BinaryTypeName = "System.Data.Linq.Binary";
         private const string BinaryToArrayName = "ToArray";
         private static ReflectionObject? _reflectionObject;
+
 #endif
 
         /// <summary>
@@ -103,6 +106,7 @@ namespace Newtonsoft.Json.Converters
                 );
             }
         }
+
 #endif
 
         /// <summary>

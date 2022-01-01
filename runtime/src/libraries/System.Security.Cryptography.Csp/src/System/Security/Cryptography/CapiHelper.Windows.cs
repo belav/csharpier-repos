@@ -2149,6 +2149,7 @@ namespace Internal.NativeCrypto
             CRYPT_IMPL_UNKNOWN = 0x4,
             CRYPT_IMPL_REMOVABLE = 0x8
         }
+
         //All the flags are capture here
 
         internal enum CryptGetKeyParamQueryType : int
@@ -2160,6 +2161,7 @@ namespace Internal.NativeCrypto
             KP_KEYLEN = 9, // Length of key in bits
             KP_ALGID = 7 // Key algorithm
         }
+
         internal enum CryptGenKeyFlags : int
         {
             // dwFlag definitions for CryptGenKey

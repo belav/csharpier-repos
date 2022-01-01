@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http.Features;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.IISUrlRewrite;
 
 public class TestServerVariablesFeature : IServerVariablesFeature

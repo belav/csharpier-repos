@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
+
 namespace BasicTestApp.InteropTest;
 
 public class JavaScriptInterop

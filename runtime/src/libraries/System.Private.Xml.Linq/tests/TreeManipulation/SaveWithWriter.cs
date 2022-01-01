@@ -380,6 +380,7 @@ namespace XLinqTests
                 TestLog.Compare(expectedXml, actualXml, "XDocumentType writeTo method failed");
             }
         }
+
         #endregion
 
         //

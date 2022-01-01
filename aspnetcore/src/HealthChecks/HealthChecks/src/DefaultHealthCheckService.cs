@@ -13,6 +13,7 @@ using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
 internal partial class DefaultHealthCheckService : HealthCheckService
@@ -36,6 +37,7 @@ internal partial class DefaultHealthCheckService : HealthCheckService
         // actually tries to **run** health checks would be real baaaaad.
         ValidateRegistrations(_options.Value.Registrations);
     }
+
     public override async Task<HealthReport> CheckHealthAsync(
         Func<HealthCheckRegistration, bool>? predicate,
         CancellationToken cancellationToken = default
@@ -304,6 +306,7 @@ internal partial class DefaultHealthCheckService : HealthCheckService
             string? HealthCheckDescription,
             Exception? exception
         );
+
 #pragma warning restore SYSLIB1006
 
         public static void HealthCheckEnd(

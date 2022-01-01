@@ -724,6 +724,7 @@ namespace System.Data.Tests
             Assert.Equal("bookreview", ds.Tables[2].TableName);
             Assert.Equal(2, ds.Tables[2].Columns.Count);
         }
+
         #endregion
 
         #region inferringTables
@@ -860,6 +861,7 @@ namespace System.Data.Tests
             Assert.Equal(1, ds.Tables.Count);
             Assert.Equal("Element1_Text", ds.Tables[0].Columns["Element1_Text"].ColumnName);
         }
+
         #endregion
 
         #region inferringColumns
@@ -1170,6 +1172,7 @@ namespace System.Data.Tests
             // MergeFailed event
             Assert.True(_eventRaised);
         }
+
         private void Merge_Failed(object sender, MergeFailedEventArgs e)
         {
             _eventRaised = true;
@@ -2557,6 +2560,7 @@ namespace System.Data.Tests
             // Tables[2] ParentRelations[0] name
             Assert.Equal("Stock_Price", ds.Tables[2].ParentRelations[0].RelationName);
         }
+
         [ConditionalFact(
             typeof(PlatformDetection),
             nameof(PlatformDetection.IsNotInvariantGlobalization)
@@ -3362,6 +3366,7 @@ namespace System.Data.Tests
                 return ShouldSerializeRelations();
             }
         }
+
         [Fact]
         public void ShouldSerializeTables()
         {
@@ -3378,6 +3383,7 @@ namespace System.Data.Tests
                 return ShouldSerializeTables();
             }
         }
+
         [Fact]
         public void Tables()
         {
@@ -4064,6 +4070,7 @@ namespace System.Data.Tests
                 i++;
             }
         }
+
         [Fact]
         public void LoadTest2()
         {
@@ -4115,6 +4122,7 @@ namespace System.Data.Tests
                 i++;
             }
         }
+
         private void AssertDataTableValues(DataTable dt)
         {
             Assert.Equal("data1", dt.Rows[0]["_ID"]);

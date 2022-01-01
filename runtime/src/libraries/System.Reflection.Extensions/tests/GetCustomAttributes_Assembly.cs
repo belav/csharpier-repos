@@ -230,10 +230,12 @@ namespace System.Reflection.Tests
     public class MyAttributeBase : Attribute
     {
         private string _name;
+
         public MyAttributeBase(string name)
         {
             _name = name;
         }
+
         public override string ToString()
         {
             return this.GetType().ToString() + " " + _name;

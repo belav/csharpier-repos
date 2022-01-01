@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public abstract class RazorEngine
@@ -187,6 +188,7 @@ public abstract class RazorEngine
 
         return default;
     }
+
 #nullable disable
 
     #region Obsolete

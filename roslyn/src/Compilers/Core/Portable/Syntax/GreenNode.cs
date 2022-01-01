@@ -362,6 +362,7 @@ namespace Microsoft.CodeAnalysis
         {
             get { return (this.flags & NodeFlags.ContainsAnnotations) != 0; }
         }
+
         #endregion
 
         #region Spans
@@ -398,6 +399,7 @@ namespace Microsoft.CodeAnalysis
         {
             get { return this.GetTrailingTriviaWidth() != 0; }
         }
+
         #endregion
 
         #region Serialization
@@ -615,6 +617,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal abstract GreenNode SetDiagnostics(DiagnosticInfo[]? diagnostics);
+
         #endregion
 
         #region Text
@@ -749,18 +752,22 @@ namespace Microsoft.CodeAnalysis
         {
             get { return this.RawKind; }
         }
+
         public virtual object? GetValue()
         {
             return null;
         }
+
         public virtual string GetValueText()
         {
             return string.Empty;
         }
+
         public virtual GreenNode? GetLeadingTriviaCore()
         {
             return null;
         }
+
         public virtual GreenNode? GetTrailingTriviaCore()
         {
             return null;
@@ -841,6 +848,7 @@ namespace Microsoft.CodeAnalysis
 
             return node;
         }
+
         #endregion
 
         #region Equivalence
@@ -909,6 +917,7 @@ namespace Microsoft.CodeAnalysis
 
             return true;
         }
+
         #endregion
 
         public abstract SyntaxNode GetStructure(SyntaxTrivia parentTrivia);
@@ -917,6 +926,7 @@ namespace Microsoft.CodeAnalysis
 
         public abstract SyntaxToken CreateSeparator<TNode>(SyntaxNode element)
             where TNode : SyntaxNode;
+
         public abstract bool IsTriviaWithEndOfLine(); // trivia node has end of line
 
         /*
@@ -1063,6 +1073,7 @@ namespace Microsoft.CodeAnalysis
                 && this.GetSlot(1) == child2
                 && this.GetSlot(2) == child3;
         }
+
         #endregion //Caching
 
         /// <summary>

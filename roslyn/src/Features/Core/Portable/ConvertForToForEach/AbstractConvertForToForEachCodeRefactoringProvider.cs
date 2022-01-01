@@ -40,6 +40,7 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
         protected abstract SyntaxList<TStatementSyntax> GetBodyStatements(
             TForStatementSyntax forStatement
         );
+
         protected abstract bool IsValidVariableDeclarator(TVariableDeclaratorSyntax firstVariable);
 
         protected abstract bool TryGetForStatementComponents(

@@ -21,6 +21,7 @@ using PlaywrightSharp;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Templates.Test.Helpers;
 
 [DebuggerDisplay("{ToString(),nq}")]

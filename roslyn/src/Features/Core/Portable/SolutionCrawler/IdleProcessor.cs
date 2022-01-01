@@ -38,6 +38,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         }
 
         protected abstract Task WaitAsync(CancellationToken cancellationToken);
+
         protected abstract Task ExecuteAsync();
 
         protected void Start()

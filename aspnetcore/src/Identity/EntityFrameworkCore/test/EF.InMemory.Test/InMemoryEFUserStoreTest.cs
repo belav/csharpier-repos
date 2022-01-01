@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity.Test;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
 public class InMemoryEFUserStoreTest

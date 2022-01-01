@@ -158,6 +158,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
             string content,
             ExportProvider exportProvider
         );
+
         protected abstract string Language { get; }
 
         public enum Composition

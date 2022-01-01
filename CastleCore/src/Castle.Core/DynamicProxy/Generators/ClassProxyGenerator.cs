@@ -47,6 +47,7 @@ namespace Castle.DynamicProxy.Generators
                 ProxyTypeConstants.Class
             );
         }
+
 #endif
 
         protected override CompositeTypeContributor GetProxyTargetContributor(

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Fakes;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Hosting.Tests.Fakes;
 
 class StartupCaseInsensitive

@@ -9,6 +9,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
+
 #nullable enable
 
 namespace Wasm.Build.Tests;
@@ -120,6 +121,7 @@ public class CleanTests : NativeRebuildTestsBase
 
         AssertEmptyOrNonExistantDirectory(relinkDir);
     }
+
     private void AssertEmptyOrNonExistantDirectory(string dirPath)
     {
         Console.WriteLine($"dirPath: {dirPath}");

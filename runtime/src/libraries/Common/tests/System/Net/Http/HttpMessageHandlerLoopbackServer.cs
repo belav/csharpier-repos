@@ -92,6 +92,7 @@ namespace System.Net.Test.Common
             {
                 return SendAsync(request, cancellationToken).GetAwaiter().GetResult();
             }
+
 #endif
 
             protected override async Task<HttpResponseMessage> SendAsync(

@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Xunit;
 
+
 namespace TestHelper;
 
 /// <summary>
@@ -35,6 +36,7 @@ public abstract partial class DiagnosticVerifier
     {
         return null;
     }
+
     #endregion
 
     #region Verifier wrappers
@@ -322,6 +324,7 @@ public abstract partial class DiagnosticVerifier
             }
         }
     }
+
     #endregion
 
     #region Formatting Diagnostics

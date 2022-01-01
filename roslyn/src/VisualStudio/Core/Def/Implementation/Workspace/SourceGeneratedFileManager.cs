@@ -49,6 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
 #pragma warning disable IDE0052 // Remove unread private members
         private readonly RunningDocumentTableEventTracker _runningDocumentTableEventTracker;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         /// <summary>

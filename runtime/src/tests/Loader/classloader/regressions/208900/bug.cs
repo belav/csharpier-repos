@@ -14,6 +14,7 @@ struct MyStruct
         f1 = _f1;
         f2 = _f2;
     }
+
     object f1;
     int f2;
 }

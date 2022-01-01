@@ -39,13 +39,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             public T this[int index] => _items[index];
             public int Count => _items.Length;
+
             public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
+
             IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
         }
 
         private class SignlessEqualityComparer : IEqualityComparer<int>
         {
             public bool Equals(int x, int y) => Math.Abs(x) == Math.Abs(y);
+
             public int GetHashCode(int obj) => throw new NotImplementedException();
         }
 

@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Operations;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class DeclaredApiResponseMetadataTest

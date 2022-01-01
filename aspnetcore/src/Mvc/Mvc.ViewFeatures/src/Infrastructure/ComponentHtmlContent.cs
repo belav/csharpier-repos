@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal class ComponentHtmlContent : IHtmlContent

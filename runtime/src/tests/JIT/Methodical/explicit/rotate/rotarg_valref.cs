@@ -14,6 +14,7 @@ namespace Rotate
             m_padding2 = "";
             m_padding3 = new App();
         }
+
         public char m_padding1;
         public int m_value;
         public String m_padding2;

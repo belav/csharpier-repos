@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Rewrite.Logging;
 
+
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 internal class IISUrlRewriteRule : IRule

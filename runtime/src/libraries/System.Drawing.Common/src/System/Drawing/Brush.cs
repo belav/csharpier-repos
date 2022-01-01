@@ -13,6 +13,7 @@ namespace System.Drawing
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
+
 #endif
         // Handle to native GDI+ brush object to be used on demand.
         private IntPtr _nativeBrush;
@@ -20,6 +21,7 @@ namespace System.Drawing
         public abstract object Clone();
 
         protected internal void SetNativeBrush(IntPtr brush) => SetNativeBrushInternal(brush);
+
         internal void SetNativeBrushInternal(IntPtr brush) => _nativeBrush = brush;
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]

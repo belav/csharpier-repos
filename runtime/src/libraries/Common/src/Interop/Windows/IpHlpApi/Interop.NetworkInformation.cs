@@ -166,6 +166,7 @@ internal static partial class Interop
             internal string dnsSuffix;
             internal string description;
             internal string friendlyName;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_ADAPTER_ADDRESS_LENGTH)]
             internal byte[] address;
             internal uint addressLength;
@@ -174,6 +175,7 @@ internal static partial class Interop
             internal NetworkInterfaceType type;
             internal OperationalStatus operStatus;
             internal uint ipv6Index;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
             internal uint[] zoneIndices;
             internal IntPtr firstPrefix;
@@ -187,11 +189,13 @@ internal static partial class Interop
             internal ulong luid;
             internal IpSocketAddress dhcpv4Server;
             internal uint compartmentId;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
             internal byte[] networkGuid;
             internal InterfaceConnectionType connectionType;
             internal InterfaceTunnelType tunnelType;
             internal IpSocketAddress dhcpv6Server; // Never available in Windows.
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 130)]
             internal byte[] dhcpv6ClientDuid;
             internal uint dhcpv6ClientDuidLength;
@@ -241,8 +245,10 @@ internal static partial class Interop
         internal struct IpAddrString
         {
             internal IntPtr Next; /* struct _IpAddressList* */
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             internal string IpAddress;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             internal string IpMask;
             internal uint Context;
@@ -257,15 +263,20 @@ internal static partial class Interop
 
             internal ulong interfaceLuid;
             internal uint interfaceIndex;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = GuidLength)]
             internal byte[] interfaceGuid;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = IfMaxStringSize + 1)]
             internal char[] alias; // Null terminated string.
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = IfMaxStringSize + 1)]
             internal char[] description; // Null terminated string.
             internal uint physicalAddressLength;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = IfMaxPhysAddressLength)]
             internal byte[] physicalAddress; // ANSI
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = IfMaxPhysAddressLength)]
             internal byte[] permanentPhysicalAddress; // ANSI
             internal uint mtu;
@@ -279,6 +290,7 @@ internal static partial class Interop
             internal OperationalStatus operStatus;
             internal uint adminStatus; // Enum
             internal uint mediaConnectState; // Enum
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = GuidLength)]
             internal byte[] networkGuid;
             internal InterfaceConnectionType connectionType;
@@ -399,6 +411,7 @@ internal static partial class Interop
         {
             internal uint dwMsgs;
             internal uint dwErrors;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
             internal uint[] rgdwTypeCount;
         }
@@ -416,6 +429,7 @@ internal static partial class Interop
             internal uint localAddr;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;
@@ -423,6 +437,7 @@ internal static partial class Interop
             internal uint remoteAddr;
             internal byte remotePort1;
             internal byte remotePort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreRemotePort3;
@@ -442,6 +457,7 @@ internal static partial class Interop
             internal uint localScopeId;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;
@@ -450,6 +466,7 @@ internal static partial class Interop
             internal uint remoteScopeId;
             internal byte remotePort1;
             internal byte remotePort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreRemotePort3;
@@ -488,6 +505,7 @@ internal static partial class Interop
             internal uint localAddr;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;
@@ -514,6 +532,7 @@ internal static partial class Interop
             internal uint localScopeId;
             internal byte localPort1;
             internal byte localPort2;
+
             // Ports are only 16 bit values (in network WORD order, 3,4,1,2).
             // There are reports where the high order bytes have garbage in them.
             internal byte ignoreLocalPort3;

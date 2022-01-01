@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Connections;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class ConnectionContextTests

@@ -11,6 +11,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
     {
 #pragma warning disable IDE0052 // Remove unread private members - Used for debugging.
         private static Exception? s_lastException = null;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         /// <summary>

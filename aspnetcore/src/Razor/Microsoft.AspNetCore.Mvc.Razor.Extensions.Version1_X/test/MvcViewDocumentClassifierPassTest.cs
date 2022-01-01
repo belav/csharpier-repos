@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 public class MvcViewDocumentClassifierPassTest : RazorProjectEngineTestBase

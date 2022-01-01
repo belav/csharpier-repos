@@ -18,6 +18,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int DestinationFooValue { get; set; }
         }
+
         public class SourceBar
         {
             public int SourceBarValue { get; set; }

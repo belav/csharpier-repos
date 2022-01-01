@@ -29,6 +29,7 @@ class TestAssignFieldsBetweenPromotedNotPromotedStructs
     {
         [FieldOffset(0)]
         public PrimitiveStruct notPromotedField;
+
         [FieldOffset(0)]
         public NonPrimitiveStruct anotherOverlappingStruct;
 
@@ -44,6 +45,7 @@ class TestAssignFieldsBetweenPromotedNotPromotedStructs
     {
         [FieldOffset(0)]
         public PrimitiveStruct promotedField;
+
         [FieldOffset(8)]
         public long anotherField;
 

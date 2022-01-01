@@ -322,6 +322,7 @@ namespace System.Memory.Tests
                 Assert.Equal(i, sequence.GetOffset(new SequencePosition(bufferSegment4, i)));
             }
         }
+
         #endregion
 
         #region First

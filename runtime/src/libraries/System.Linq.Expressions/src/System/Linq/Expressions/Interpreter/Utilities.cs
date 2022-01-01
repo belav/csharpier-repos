@@ -112,6 +112,7 @@ namespace System.Linq.Expressions.Interpreter
             throw ContractUtils.Unreachable;
         }
     }
+
 #endif
 
     internal static class ScriptingRuntimeHelpers

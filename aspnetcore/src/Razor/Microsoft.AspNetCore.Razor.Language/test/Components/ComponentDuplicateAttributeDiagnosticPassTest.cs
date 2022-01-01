@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 // These tests are really basic and cover a few different structures. The components part of this

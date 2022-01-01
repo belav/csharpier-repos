@@ -6,6 +6,7 @@ using Microsoft.JSInterop.Infrastructure;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.JSInterop;
 
 public class JSInProcessRuntimeExtensionsTest

@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
 public class OpenIdConnectChallengeTests

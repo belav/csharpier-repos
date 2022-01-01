@@ -1024,6 +1024,7 @@ namespace System.Linq.Expressions.Compiler
                 il.EmitStoreElement(typeof(T));
             }
         }
+
 #endif
 
         /// <summary>

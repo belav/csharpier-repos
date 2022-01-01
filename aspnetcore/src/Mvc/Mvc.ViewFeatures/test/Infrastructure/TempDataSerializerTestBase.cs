@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
 public abstract class TempDataSerializerTestBase

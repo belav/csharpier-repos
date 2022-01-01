@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 namespace ApplicationModelWebSite;
 
 public class HomeController : Controller

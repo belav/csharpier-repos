@@ -11,6 +11,7 @@ using System.Web.Http.Properties;
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
 using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
 using TRouteDictionary = System.Web.Http.Routing.HttpRouteValueDictionary;
+
 #else
 using System.Text;
 using System.Web.Mvc.Properties;
@@ -18,6 +19,7 @@ using System.Web.Routing;
 using TActionDescriptor = System.Web.Mvc.ActionDescriptor;
 using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
 using TRouteDictionary = System.Web.Routing.RouteValueDictionary;
+
 #endif
 
 #if ASPNETWEBAPI
@@ -33,13 +35,16 @@ namespace System.Web.Mvc.Routing
 
 #if !ASPNETWEBAPI
         private readonly string _controllerName;
+
 #endif
 
 #if ASPNETWEBAPI
         private readonly string _prefix;
+
 #else
         private readonly string _areaPrefix;
         private readonly string _controllerPrefix;
+
 #endif
 
         private readonly IReadOnlyCollection<TActionDescriptor> _actions;
@@ -121,6 +126,7 @@ namespace System.Web.Mvc.Routing
         {
             get { return _prefix; }
         }
+
 #else
         /// <summary>Gets the route prefix, if any, defined by the area.</summary>
         public string AreaPrefix
@@ -133,6 +139,7 @@ namespace System.Web.Mvc.Routing
         {
             get { return _controllerPrefix; }
         }
+
 #endif
 
         /// <summary>Gets the action descriptors to which to create a route.</summary>
@@ -247,6 +254,7 @@ namespace System.Web.Mvc.Routing
                 return routePrefix + '/' + routeTemplate;
             }
         }
+
 #else
         internal static string BuildRouteTemplate(string areaPrefix, string prefix, string template)
         {
@@ -288,6 +296,7 @@ namespace System.Web.Mvc.Routing
 
             return templateBuilder.ToString();
         }
+
 #endif
 
         private void ValidateTemplate(string template)

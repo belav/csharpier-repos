@@ -9,6 +9,7 @@ namespace Test
     public class AA
     {
         public static object m_xStatic1 = null;
+
         public void Method1(ref byte param1) { }
     }
 

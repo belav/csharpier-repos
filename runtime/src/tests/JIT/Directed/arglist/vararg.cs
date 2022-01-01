@@ -26,9 +26,11 @@ namespace NativeVarargTest
 #if WIN32
         [DllImport("msvcrt", CallingConvention = CallingConvention.Cdecl)]
         extern static void printf(string str, __arglist);
+
 #else
         [DllImport("libc", CallingConvention = CallingConvention.Cdecl)]
         extern static void printf(string str, __arglist);
+
 #endif
 
         [DllImport("varargnative", CallingConvention = CallingConvention.Cdecl)]
@@ -4138,6 +4140,7 @@ namespace NativeVarargTest
 
             return returnValue == arg;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TestEchoShortNoVararg(short arg)
         {
@@ -4496,6 +4499,7 @@ namespace NativeVarargTest
 
             return returnValue == arg;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TestEchoShortManagedNoVararg(short arg)
         {
@@ -4851,6 +4855,7 @@ namespace NativeVarargTest
 
             return returnValue == arg;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TestEchoShortManaged(short arg)
         {

@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.ObjectPool;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 public class PageLinkGeneratorExtensionsTest

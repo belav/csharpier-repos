@@ -53,6 +53,7 @@ namespace System.Reflection.Emit
         internal MethodBuilder[]? other_methods;
         internal EventAttributes attrs;
         private int table_idx;
+
 #endregion
 
         [DynamicDependency(nameof(table_idx))] // Automatically keeps all previous fields too due to StructLayout
@@ -100,6 +101,7 @@ namespace System.Reflection.Emit
             RejectIfCreated();
             add_method = mdBuilder;
         }
+
         public void SetRaiseMethod(MethodBuilder mdBuilder)
         {
             if (mdBuilder == null)
@@ -107,6 +109,7 @@ namespace System.Reflection.Emit
             RejectIfCreated();
             raise_method = mdBuilder;
         }
+
         public void SetRemoveOnMethod(MethodBuilder mdBuilder)
         {
             if (mdBuilder == null)

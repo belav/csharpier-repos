@@ -45,6 +45,7 @@ namespace Microsoft.CodeAnalysis.Storage
             string databaseFilePath,
             CancellationToken cancellationToken
         );
+
         protected abstract bool ShouldDeleteDatabase(Exception exception);
 
         public ValueTask<IChecksummedPersistentStorage> GetStorageAsync(

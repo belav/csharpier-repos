@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
+
 namespace Microsoft.Extensions.Internal;
 
 /// <summary>

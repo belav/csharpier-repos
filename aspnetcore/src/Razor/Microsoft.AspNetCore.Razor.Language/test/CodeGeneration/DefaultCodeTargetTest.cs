@@ -4,6 +4,7 @@
 using System.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 public class DefaultCodeTargetTest

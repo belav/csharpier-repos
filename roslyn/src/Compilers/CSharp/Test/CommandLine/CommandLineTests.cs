@@ -741,6 +741,7 @@ d.cs
                 Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
             );
         }
+
 #nullable disable
 
         [Fact, WorkItem(29252, "https://github.com/dotnet/roslyn/issues/29252")]
@@ -9350,6 +9351,7 @@ public class CS1698_a {}
 
             CleanupAllGeneratedFiles(source);
         }
+
 #endif
 
         [WorkItem(545832, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545832")]
@@ -11069,6 +11071,7 @@ class C
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr LoadLibraryEx(string lpFileName, IntPtr hFile, uint dwFlags);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool FreeLibrary([In] IntPtr hFile);
 
@@ -17721,6 +17724,7 @@ System.NotImplementedException: 28
 
             Assert.Equal(0, result.ExitCode);
         }
+
 #endif
 
         private static ImmutableArray<byte> CreateCSharpAnalyzerNetStandard13(
@@ -21596,6 +21600,7 @@ public class Generator : ISourceGenerator
     internal abstract class CompilationStartedAnalyzer : DiagnosticAnalyzer
     {
         public abstract override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
         public abstract void CreateAnalyzerWithinCompilation(
             CompilationStartAnalysisContext context
         );

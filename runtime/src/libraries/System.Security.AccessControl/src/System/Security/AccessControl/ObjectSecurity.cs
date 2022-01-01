@@ -713,6 +713,7 @@ namespace System.Security.AccessControl
             AccessRule rule,
             out bool modified
         );
+
         protected abstract bool ModifyAudit(
             AccessControlModification modification,
             AuditRule rule,

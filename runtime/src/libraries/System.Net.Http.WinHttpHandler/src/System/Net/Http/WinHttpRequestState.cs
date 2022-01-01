@@ -24,6 +24,7 @@ namespace System.Net.Http
         private static int s_dbg_operationHandleFree;
 
         private IntPtr s_dbg_requestHandle;
+
 #endif
 
         // A GCHandle for this operation object.

@@ -197,6 +197,7 @@ public class EnumIConvertibleToSingle
 
         return retVal;
     }
+
     #endregion
 
     #region Nagetive Test Cases
@@ -229,6 +230,7 @@ public class EnumIConvertibleToSingle
         white = 3,
         red,
     }
+
     enum e_test : long
     {
         itemA = -4,

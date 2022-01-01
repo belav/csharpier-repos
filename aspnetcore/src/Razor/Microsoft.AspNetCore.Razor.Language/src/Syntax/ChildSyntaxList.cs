@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnlyList<SyntaxNode>

@@ -106,6 +106,7 @@ public class TypeEquals2
 
         return retVal;
     }
+
     #endregion
     #endregion
 

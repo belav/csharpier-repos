@@ -6,6 +6,7 @@ using System.IO;
 using Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.Rewrite;
 
 /// <summary>

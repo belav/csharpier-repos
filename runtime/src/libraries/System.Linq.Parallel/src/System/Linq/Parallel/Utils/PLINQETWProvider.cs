@@ -31,12 +31,14 @@ namespace System.Linq.Parallel
         /// The PLINQ Event provider GUID is {159eeeec-4a14-4418-a8fe-faabcd987887}.
         /// </summary>
         internal static PlinqEtwProvider Log = new PlinqEtwProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private PlinqEtwProvider() { }
 
         /// <summary>Cached id for the default scheduler.</summary>
         /// <remarks>If PLINQ ever supports other schedulers, that information will need to be passed into the query events.</remarks>
         private static readonly int s_defaultSchedulerId = TaskScheduler.Default.Id;
+
         /// <summary>Static counter used to generate unique IDs</summary>
         private static int s_queryId;
 
@@ -55,6 +57,7 @@ namespace System.Linq.Parallel
         {
             /// <summary>A parallel query.</summary>
             public const EventTask Query = (EventTask)1;
+
             /// <summary>A fork/join task within a query.</summary>
             public const EventTask ForkJoin = (EventTask)2;
         }
@@ -66,10 +69,13 @@ namespace System.Linq.Parallel
 
         /// <summary>The ID of a parallel query begin event.</summary>
         private const int PARALLELQUERYBEGIN_EVENTID = 1;
+
         /// <summary>The ID of a parallel query end event.</summary>
         private const int PARALLELQUERYEND_EVENTID = 2;
+
         /// <summary>The ID of a parallel query fork event.</summary>
         private const int PARALLELQUERYFORK_EVENTID = 3;
+
         /// <summary>The ID of a parallel query join event.</summary>
         private const int PARALLELQUERYJOIN_EVENTID = 4;
 
@@ -111,6 +117,7 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYBEGIN_EVENTID, taskSchedulerId, taskId, queryId);
         }
+
         #endregion
 
         #region ParallelQueryEnd
@@ -144,6 +151,7 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYEND_EVENTID, taskSchedulerId, taskId, queryId);
         }
+
         #endregion
 
         #region ParallelQueryFork
@@ -181,6 +189,7 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYFORK_EVENTID, taskSchedulerId, taskId, queryId);
         }
+
         #endregion
 
         #region ParallelQueryJoin

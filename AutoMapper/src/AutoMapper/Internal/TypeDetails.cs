@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+
 namespace AutoMapper.Internal
 {
     using SourceMembers = Dictionary<string, MemberInfo>;
+
     /// <summary>
     /// Contains cached reflection information for easy retrieval
     /// </summary>
@@ -18,16 +20,19 @@ namespace AutoMapper.Internal
         private ConstructorParameters[] _constructors;
         private MemberInfo[] _readAccessors;
         private MemberInfo[] _writeAccessors;
+
         public TypeDetails(Type type, ProfileMap config)
         {
             Type = type;
             Config = config;
         }
+
         private ConstructorParameters[] GetConstructors() =>
             GetConstructors(Type, Config)
                 .Where(c => c.ParametersCount > 0)
                 .OrderByDescending(c => c.ParametersCount)
                 .ToArray();
+
         public static IEnumerable<ConstructorParameters> GetConstructors(
             Type type,
             ProfileMap profileMap
@@ -35,11 +40,13 @@ namespace AutoMapper.Internal
             type.GetDeclaredConstructors()
                 .Where(profileMap.ShouldUseConstructor)
                 .Select(c => new ConstructorParameters(c));
+
         public MemberInfo GetMember(string name)
         {
             _nameToMember ??= PossibleNames();
             return _nameToMember.GetOrDefault(name);
         }
+
         private SourceMembers PossibleNames()
         {
             var nameToMember = new SourceMembers(
@@ -65,6 +72,7 @@ namespace AutoMapper.Internal
             }
             return nameToMember;
         }
+
         private IEnumerable<MemberInfo> AddMethods(IEnumerable<MemberInfo> accessors)
         {
             var publicNoArgMethods = GetPublicNoArgMethods();
@@ -73,6 +81,7 @@ namespace AutoMapper.Internal
             );
             return accessors.Concat(publicNoArgMethods).Concat(publicNoArgExtensionMethods);
         }
+
         private void CheckPrePostfixes(SourceMembers nameToMember, MemberInfo member)
         {
             foreach (
@@ -85,6 +94,7 @@ namespace AutoMapper.Internal
                 }
             }
         }
+
         public static IEnumerable<string> PossibleNames(
             string memberName,
             List<string> prefixes,
@@ -109,6 +119,7 @@ namespace AutoMapper.Internal
                 yield return s;
             }
         }
+
         private static IEnumerable<string> PostFixes(List<string> postfixes, string name)
         {
             foreach (var postfix in postfixes)
@@ -120,11 +131,13 @@ namespace AutoMapper.Internal
                 yield return name.Remove(name.Length - postfix.Length);
             }
         }
+
         public Type Type { get; }
         public ProfileMap Config { get; }
         public MemberInfo[] ReadAccessors => _readAccessors ??= BuildReadAccessors();
         public MemberInfo[] WriteAccessors => _writeAccessors ??= BuildWriteAccessors();
         public ConstructorParameters[] Constructors => _constructors ??= GetConstructors();
+
         private IEnumerable<MethodInfo> GetPublicNoArgExtensionMethods(
             IEnumerable<MethodInfo> sourceExtensionMethodSearch
         )
@@ -158,6 +171,7 @@ namespace AutoMapper.Internal
                 select methodMatch
             );
         }
+
         private MemberInfo[] BuildReadAccessors()
         {
             // Multiple types may define the same property (e.g. the class and multiple interfaces) - filter this to one of those properties
@@ -170,6 +184,7 @@ namespace AutoMapper.Internal
             }
             return members.ToArray();
         }
+
         private MemberInfo[] BuildWriteAccessors()
         {
             // Multiple types may define the same property (e.g. the class and multiple interfaces) - filter this to one of those properties
@@ -182,15 +197,21 @@ namespace AutoMapper.Internal
             }
             return members.ToArray();
         }
+
         private static bool PropertyReadable(PropertyInfo propertyInfo) => propertyInfo.CanRead;
+
         private static bool FieldReadable(FieldInfo fieldInfo) => true;
+
         private static bool PropertyWritable(PropertyInfo propertyInfo) =>
             propertyInfo.CanWrite || propertyInfo.PropertyType.IsCollection();
+
         private static bool FieldWritable(FieldInfo fieldInfo) => !fieldInfo.IsInitOnly;
+
         private IEnumerable<Type> GetTypeInheritance() =>
             Type.IsInterface
                 ? new[] { Type }.Concat(Type.GetInterfaces())
                 : Type.GetTypeInheritance();
+
         private IEnumerable<PropertyInfo> GetProperties(
             Func<PropertyInfo, bool> propertyAvailableFor
         ) =>
@@ -204,6 +225,7 @@ namespace AutoMapper.Internal
                                     && Config.ShouldMapProperty(property)
                             )
                 );
+
         private IEnumerable<MemberInfo> GetFields(Func<FieldInfo, bool> fieldAvailableFor) =>
             GetTypeInheritance()
                 .SelectMany(
@@ -213,6 +235,7 @@ namespace AutoMapper.Internal
                                 field => fieldAvailableFor(field) && Config.ShouldMapField(field)
                             )
                 );
+
         private IEnumerable<MethodInfo> GetPublicNoArgMethods() =>
             Type.GetMethods(BindingFlags.Instance | BindingFlags.Public)
                 .Where(
@@ -223,16 +246,20 @@ namespace AutoMapper.Internal
                         && m.GetParameters().Length == 0
                 );
     }
+
     public readonly struct ConstructorParameters
     {
         public readonly ConstructorInfo Constructor;
         public readonly ParameterInfo[] Parameters;
+
         public ConstructorParameters(ConstructorInfo constructor)
         {
             Constructor = constructor;
             Parameters = constructor.GetParameters();
         }
+
         public int ParametersCount => Parameters.Length;
+
         public bool AllParametersOptional() => Parameters.All(p => p.IsOptional);
     }
 }

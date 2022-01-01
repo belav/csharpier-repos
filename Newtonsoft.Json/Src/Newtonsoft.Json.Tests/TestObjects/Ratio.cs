@@ -57,6 +57,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             get { return _denominator == 0; }
         }
+
         #endregion
 
         #region Serialization operations
@@ -71,6 +72,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             info.AddValue("n", _numerator);
             info.AddValue("d", _denominator);
         }
+
         #endregion
 
         #region IConvertible Members
@@ -160,6 +162,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             return (ulong)(_numerator / _denominator);
         }
+
         #endregion
 
         #region String operations

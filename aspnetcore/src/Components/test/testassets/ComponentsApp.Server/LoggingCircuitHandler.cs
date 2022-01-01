@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
 
+
 namespace ComponentsApp.Server;
 
 internal class LoggingCircuitHandler : CircuitHandler

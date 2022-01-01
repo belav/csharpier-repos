@@ -20,6 +20,7 @@ namespace Microsoft.Extensions.FileProviders.Composite
                 typeof(System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute)
             );
         }
+
 #endif
 
         private IEnumerable<IFileInfo> _files;

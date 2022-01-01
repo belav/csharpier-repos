@@ -42,14 +42,17 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             TInterpolationSyntax interpolation,
             TExpressionSyntax expression
         );
+
         protected abstract TInterpolationSyntax WithAlignmentClause(
             TInterpolationSyntax interpolation,
             TInterpolationAlignmentClause alignmentClause
         );
+
         protected abstract TInterpolationSyntax WithFormatClause(
             TInterpolationSyntax interpolation,
             TInterpolationFormatClause? formatClause
         );
+
         protected abstract string Escape(
             TInterpolatedStringExpressionSyntax interpolatedString,
             string formatString

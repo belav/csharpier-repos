@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
@@ -503,6 +504,7 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
         var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
         Assert.Equal("RZ3906", Assert.Single(diagnotics).Id);
     }
+
     #endregion
 
     #region DesignTime

@@ -213,6 +213,7 @@ namespace System.Collections.ObjectModel.Tests
         }
 
         public abstract TKey GetKeyForItem(TValue item);
+
         public abstract TValue GenerateValue();
 
         public object GenerateValueObject()

@@ -905,6 +905,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             public Task<bool> ReadAsync(CancellationToken cancellationToken) =>
                 Task.FromResult(Read());
+
 #pragma warning restore IDE0060 // Remove unused parameter
 
             public BufferedDataRecord Initialize(

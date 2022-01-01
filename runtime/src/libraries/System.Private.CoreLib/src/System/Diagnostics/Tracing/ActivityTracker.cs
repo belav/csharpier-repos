@@ -776,10 +776,12 @@ namespace System.Diagnostics.Tracing
         {
             WriteEvent(1, Facility, Message);
         }
+
         public void DebugFacilityMessage1(string Facility, string Message, string Arg)
         {
             WriteEvent(2, Facility, Message, Arg);
         }
+
         public void SetActivityId(Guid Id)
         {
             WriteEvent(3, Id);

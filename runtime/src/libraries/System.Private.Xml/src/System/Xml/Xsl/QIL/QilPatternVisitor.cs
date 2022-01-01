@@ -93,42 +93,52 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitFunctionList(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitGlobalVariableList(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitGlobalParameterList(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitActualParameterList(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitFormalParameterList(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitSortKeyList(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitBranchList(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitOptimizeBarrier(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitUnknown(QilNode n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region specials
@@ -136,18 +146,22 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitNop(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitError(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitWarning(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region variables
@@ -155,30 +169,37 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitForReference(QilIterator n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLet(QilIterator n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLetReference(QilIterator n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitParameter(QilParameter n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitParameterReference(QilParameter n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitPositionOf(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region literals
@@ -186,42 +207,52 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitFalse(QilNode n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralString(QilLiteral n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralInt32(QilLiteral n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralInt64(QilLiteral n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralDouble(QilLiteral n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralDecimal(QilLiteral n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralQName(QilName n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralType(QilLiteral n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLiteralObject(QilLiteral n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region boolean operators
@@ -229,14 +260,17 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitOr(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitNot(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region choice
@@ -244,10 +278,12 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitChoice(QilChoice n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region collection operators
@@ -255,38 +291,47 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitSequence(QilList n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitUnion(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitIntersection(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitDifference(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitAverage(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitSum(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitMinimum(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitMaximum(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region arithmetic operators
@@ -294,26 +339,32 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitAdd(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitSubtract(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitMultiply(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitDivide(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitModulo(QilBinary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region string operators
@@ -321,14 +372,17 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitStrConcat(QilStrConcat n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitStrParseQName(QilBinary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region value comparison operators
@@ -336,26 +390,32 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitEq(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitGt(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitGe(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLt(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLe(QilBinary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region node comparison operators
@@ -363,14 +423,17 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitAfter(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitBefore(QilBinary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region loops
@@ -378,10 +441,12 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitFilter(QilLoop n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region sorting
@@ -389,14 +454,17 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitSortKey(QilSortKey n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitDocOrderDistinct(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region function definition and invocation
@@ -404,14 +472,17 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitFunctionReference(QilFunction n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitInvoke(QilInvoke n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region XML navigation
@@ -419,58 +490,72 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitAttribute(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitParent(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitRoot(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXmlContext(QilNode n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitDescendant(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitDescendantOrSelf(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitAncestor(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitAncestorOrSelf(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitPreceding(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitFollowingSibling(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitPrecedingSibling(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitNodeRange(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitDeref(QilBinary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region XML construction
@@ -478,38 +563,47 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitAttributeCtor(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitCommentCtor(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitPICtor(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitTextCtor(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitRawTextCtor(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitDocumentCtor(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitNamespaceDecl(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitRtfCtor(QilBinary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region Node properties
@@ -517,18 +611,22 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitLocalNameOf(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitNamespaceUriOf(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitPrefixOf(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region Type operators
@@ -536,14 +634,17 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitIsType(QilTargetType n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitIsEmpty(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region XPath operators
@@ -551,18 +652,22 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXPathFollowing(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXPathPreceding(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXPathNamespace(QilUnary n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #region XSLT
@@ -570,26 +675,32 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXsltInvokeLateBound(QilInvokeLateBound n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXsltInvokeEarlyBound(QilInvokeEarlyBound n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXsltCopy(QilBinary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXsltCopyOf(QilUnary n)
         {
             return NoReplace(n);
         }
+
         protected override QilNode VisitXsltConvert(QilTargetType n)
         {
             return NoReplace(n);
         }
+
         #endregion
 
         #endregion

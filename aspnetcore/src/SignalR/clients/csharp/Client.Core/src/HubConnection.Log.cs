@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client;
 
 public partial class HubConnection

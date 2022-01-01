@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Http.Result;
 
 public class VirtualFileResultTest : VirtualFileResultTestBase

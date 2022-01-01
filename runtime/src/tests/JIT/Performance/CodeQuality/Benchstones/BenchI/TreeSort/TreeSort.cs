@@ -11,8 +11,10 @@ namespace Benchstone.BenchI
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 1200;
+
 #endif
 
         const int SortElements = 5000;
@@ -23,6 +25,7 @@ namespace Benchstone.BenchI
             public Node Left;
             public Node Right;
             public int Val;
+
             public Node(int n)
             {
                 Left = null;

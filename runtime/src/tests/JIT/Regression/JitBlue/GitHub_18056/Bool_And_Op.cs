@@ -13,6 +13,7 @@
 #pragma warning disable
 
 using System;
+
 class testout1
 {
     static bool static_field_bool;
@@ -21,14 +22,17 @@ class testout1
     bool mfb;
     bool mfb_false;
     bool mfb_true;
+
     static bool simple_func_bool()
     {
         return true;
     }
+
     static bool func_sb_true()
     {
         return true;
     }
+
     static bool func_sb_false()
     {
         return false;

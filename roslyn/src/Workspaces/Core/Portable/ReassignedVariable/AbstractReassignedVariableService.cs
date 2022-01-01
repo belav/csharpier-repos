@@ -28,10 +28,13 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
         where TIdentifierNameSyntax : SyntaxNode
     {
         protected abstract SyntaxNode GetParentScope(SyntaxNode localDeclaration);
+
         protected abstract SyntaxNode GetMemberBlock(SyntaxNode methodOrPropertyDeclaration);
 
         protected abstract bool HasInitializer(SyntaxNode variable);
+
         protected abstract SyntaxToken GetIdentifierOfVariable(TVariableSyntax variable);
+
         protected abstract SyntaxToken GetIdentifierOfSingleVariableDesignation(
             TSingleVariableDesignationSyntax variable
         );

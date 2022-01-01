@@ -31,6 +31,7 @@ public class SystemMap<a>
         Console.WriteLine("Accessing a static from Node<NodeStruct<NodeSys<a[]>>>...");
         this.root = Node<NodeStruct<NodeSys<a[]>>>.leaf;
     }
+
     public bool Eval()
     {
         Console.WriteLine(

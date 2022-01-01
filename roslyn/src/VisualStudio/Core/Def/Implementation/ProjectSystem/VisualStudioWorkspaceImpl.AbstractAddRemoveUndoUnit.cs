@@ -25,6 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             public abstract void Do(IOleUndoManager pUndoManager);
+
             public abstract void GetDescription(out string pBstr);
 
             public void GetUnitType(out Guid pClsid, out int plID) =>

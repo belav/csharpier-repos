@@ -188,6 +188,7 @@ namespace System.Reflection.Emit
         private byte[]? public_key_token;
         private Module[]? loaded_modules;
         private uint access;
+
 #endregion
 
         private AssemblyName aname;

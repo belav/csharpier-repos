@@ -80,6 +80,7 @@ namespace System.DirectoryServices.ActiveDirectory
             // initialize the callback function
             _syncAllFunctionPointer = new SyncReplicaFromAllServersCallback(SyncAllCallbackRoutine);
         }
+
         #endregion constructors
 
         #region IDisposable
@@ -110,6 +111,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
             }
         }
+
         #endregion IDisposable
 
         #region public methods

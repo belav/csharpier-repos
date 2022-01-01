@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Extensions.Configuration.Memory;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Configuration.Test;
 
 public abstract class ConfigurationProviderTestBase
@@ -476,6 +477,7 @@ Section3:
         }
 
         public static implicit operator TestKeyValue(string value) => new TestKeyValue(value);
+
         public static implicit operator TestKeyValue(string[] values) => new TestKeyValue(values);
 
         public string[] AsArray => Value as string[];

@@ -15,11 +15,17 @@ namespace System.Speech.Internal.Synthesis
         }
 
         internal abstract IntPtr GetOutputFormat(IntPtr targetFormat);
+
         internal abstract void AddLexicon(Uri lexicon, string mediaType);
+
         internal abstract void RemoveLexicon(Uri lexicon);
+
         internal abstract void Speak(List<TextFragment> frags, byte[] wfx);
+
         internal abstract void ReleaseInterface();
+
         internal abstract char[] ConvertPhonemes(char[] phones, AlphabetType alphabet);
+
         internal abstract AlphabetType EngineAlphabet { get; }
         internal AlphabetConverter AlphabetConverter
         {

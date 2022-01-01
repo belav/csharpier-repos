@@ -18,21 +18,26 @@ namespace System.Net.WebSockets
         public abstract WebSocketState State { get; }
 
         public abstract void Abort();
+
         public abstract Task CloseAsync(
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
         );
+
         public abstract Task CloseOutputAsync(
             WebSocketCloseStatus closeStatus,
             string? statusDescription,
             CancellationToken cancellationToken
         );
+
         public abstract void Dispose();
+
         public abstract Task<WebSocketReceiveResult> ReceiveAsync(
             ArraySegment<byte> buffer,
             CancellationToken cancellationToken
         );
+
         public abstract Task SendAsync(
             ArraySegment<byte> buffer,
             WebSocketMessageType messageType,

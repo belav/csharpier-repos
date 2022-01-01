@@ -353,6 +353,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         VType = 0xf2,
         FixedArray = 0xf3
     }
+
     internal enum MonoTypeNameFormat
     {
         FormatIL,
@@ -398,6 +399,7 @@ namespace Microsoft.WebAssembly.Diagnostics
     internal class MonoBinaryReader : BinaryReader
     {
         public bool HasError { get; }
+
         public MonoBinaryReader(Stream stream, bool hasError = false) : base(stream)
         {
             HasError = hasError;
@@ -414,14 +416,21 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         // SDB encodes these as 4 bytes
         public override sbyte ReadSByte() => (sbyte)ReadInt32();
+
         public byte ReadUByte() => (byte)ReadUInt32();
+
         public ushort ReadUShort() => (ushort)ReadUInt32();
+
         public override int ReadInt32() => ReadBigEndian<int>();
 
         public override double ReadDouble() => ReadBigEndian<double>();
+
         public override uint ReadUInt32() => ReadBigEndian<uint>();
+
         public override float ReadSingle() => ReadBigEndian<float>();
+
         public override ulong ReadUInt64() => ReadBigEndian<ulong>();
+
         public override long ReadInt64() => ReadBigEndian<long>();
 
         protected unsafe T ReadBigEndian<T>() where T : struct
@@ -450,6 +459,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         }
 
         public override void Write(long val) => WriteBigEndian<long>(val);
+
         public override void Write(int val) => WriteBigEndian<int>(val);
 
         protected unsafe void WriteBigEndian<T>(T val) where T : struct
@@ -475,6 +485,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 Write(SdbHelper.valueTypes[int.Parse(objectId.Value)].valueTypeBuffer);
             }
         }
+
         public async Task<bool> WriteConst(
             SessionId sessionId,
             LiteralExpressionSyntax constValue,
@@ -578,12 +589,14 @@ namespace Microsoft.WebAssembly.Diagnostics
             return false;
         }
     }
+
     internal class FieldTypeClass
     {
         public int Id { get; }
         public string Name { get; }
         public int TypeId { get; }
         public bool IsPublic { get; }
+
         public FieldTypeClass(int id, string name, int typeId, bool isPublic)
         {
             Id = id;
@@ -592,6 +605,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             IsPublic = isPublic;
         }
     }
+
     internal class ValueTypeClass
     {
         public byte[] valueTypeBuffer;
@@ -602,6 +616,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         public string valueTypeVarName;
         public bool valueTypeAutoExpand;
         public int Id;
+
         public ValueTypeClass(
             string varName,
             byte[] buffer,
@@ -621,11 +636,13 @@ namespace Microsoft.WebAssembly.Diagnostics
             Id = valueTypeId;
         }
     }
+
     internal class PointerValue
     {
         public long address;
         public int typeId;
         public string varName;
+
         public PointerValue(long address, int typeId, string varName)
         {
             this.address = address;
@@ -633,14 +650,17 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.varName = varName;
         }
     }
+
     internal class MonoSDBHelper
     {
         private static int debuggerObjectId;
         private static int cmdId;
+
         private static int GetId()
         {
             return cmdId++;
         }
+
         private static int MINOR_VERSION = 61;
         private static int MAJOR_VERSION = 2;
 
@@ -1884,6 +1904,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
             return null;
         }
+
         public async Task<int> GetArrayLength(
             SessionId sessionId,
             int object_id,
@@ -1903,6 +1924,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             length = retDebuggerCmdReader.ReadInt32();
             return length;
         }
+
         public async Task<List<int>> GetTypeIdFromObject(
             SessionId sessionId,
             int object_id,
@@ -2070,6 +2092,7 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             return $"{returnType} {methodName} {parameters}";
         }
+
         public async Task<JObject> InvokeMethod(
             SessionId sessionId,
             byte[] valueTypeBuffer,
@@ -2208,6 +2231,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
             return ret;
         }
+
         public async Task<JObject> GetPointerContent(
             SessionId sessionId,
             int pointerId,
@@ -2338,6 +2362,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 ret["value"]["isEnum"] = isEnum;
             return ret;
         }
+
         public JObject CreateJObjectForBoolean(int value)
         {
             return CreateJObject<bool>(
@@ -3121,6 +3146,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
             return array;
         }
+
         public async Task<bool> EnableExceptions(
             SessionId sessionId,
             PauseOnExceptionsKind state,

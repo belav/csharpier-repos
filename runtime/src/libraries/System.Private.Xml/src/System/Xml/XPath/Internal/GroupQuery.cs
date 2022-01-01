@@ -8,6 +8,7 @@ namespace MS.Internal.Xml.XPath
     internal sealed class GroupQuery : BaseAxisQuery
     {
         public GroupQuery(Query qy) : base(qy) { }
+
         private GroupQuery(GroupQuery other) : base(other) { }
 
         public override XPathNavigator? Advance()
@@ -29,6 +30,7 @@ namespace MS.Internal.Xml.XPath
         {
             return new GroupQuery(this);
         }
+
         public override XPathResultType StaticType
         {
             get { return qyInput.StaticType; }

@@ -8,10 +8,13 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 #if AspNetCoreTesting
 namespace Microsoft.AspNetCore.Testing;
+
 #else
 namespace System.Threading.Tasks.Extensions;
+
 #endif
 
 
@@ -26,8 +29,10 @@ static class TaskExtensions
     // Shorter duration when running tests with debug.
     // Less time waiting for hang unit tests to fail in aspnetcore solution.
     public const int DefaultTimeoutDuration = 5 * 1000;
+
 #else
     public const int DefaultTimeoutDuration = 30 * 1000;
+
 #endif
 
     public static TimeSpan DefaultTimeoutTimeSpan { get; } =

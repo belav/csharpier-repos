@@ -20,14 +20,18 @@ namespace System.Reflection.TypeLoading
         }
 
         public sealed override string? Name => _lazyName ?? (_lazyName = ComputeName());
+
         protected abstract string? ComputeName();
+
         private volatile string? _lazyName;
 
         public sealed override ParameterAttributes Attributes =>
             (_lazyParameterAttributes == ParameterAttributesSentinel)
                 ? (_lazyParameterAttributes = ComputeAttributes())
                 : _lazyParameterAttributes;
+
         protected abstract ParameterAttributes ComputeAttributes();
+
         private const ParameterAttributes ParameterAttributesSentinel = (ParameterAttributes)(-1);
         private volatile ParameterAttributes _lazyParameterAttributes = ParameterAttributesSentinel;
 

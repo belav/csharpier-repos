@@ -51,6 +51,7 @@ namespace System.IO.PortsTests
 
 #pragma warning disable SYSLIB0001 // Encoding.UTF7 property is obsolete
         protected static Encoding LegacyUTF7Encoding => Encoding.UTF7;
+
 #pragma warning restore SYSLIB0001
 
         /// <summary>

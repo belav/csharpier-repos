@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Rewrite;
 
 internal class DelegateRule : IRule
@@ -13,5 +14,6 @@ internal class DelegateRule : IRule
     {
         _onApplyRule = onApplyRule;
     }
+
     public void ApplyRule(RewriteContext context) => _onApplyRule(context);
 }

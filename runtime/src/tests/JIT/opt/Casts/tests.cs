@@ -90,6 +90,7 @@ class F
     {
         return j is I<object>;
     }
+
 #pragma warning restore CS0184
 
     [MethodImpl(MethodImplOptions.NoInlining)]

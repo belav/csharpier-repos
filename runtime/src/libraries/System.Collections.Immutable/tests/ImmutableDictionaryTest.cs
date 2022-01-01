@@ -559,10 +559,12 @@ namespace System.Collections.Immutable.Tests
             }
 
             public string Value { get; private set; }
+
             public override int GetHashCode()
             {
                 return StringComparer.OrdinalIgnoreCase.GetHashCode(this.Value);
             }
+
             public override bool Equals(object obj)
             {
                 return StringComparer.OrdinalIgnoreCase.Equals(

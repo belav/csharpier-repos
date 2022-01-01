@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http.Features.Authentication;
 
+
 namespace Microsoft.AspNetCore.Authorization.Policy;
 
 /// <summary>

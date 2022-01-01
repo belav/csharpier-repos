@@ -3,6 +3,7 @@
 
 using System.Globalization;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class RemotePortSegment : PatternSegment

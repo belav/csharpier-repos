@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
+
 namespace Microsoft.AspNetCore.Mvc.Testing.Tasks;
 
 /// <summary>

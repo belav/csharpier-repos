@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.Options;
 
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
@@ -333,10 +334,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             TDeclaration declaration,
             SyntaxToken token
         );
+
         protected abstract TDeclaration WithExpressionBody(
             TDeclaration declaration,
             ArrowExpressionClauseSyntax expressionBody
         );
+
         protected abstract TDeclaration WithBody(TDeclaration declaration, BlockSyntax body);
 
         protected virtual TDeclaration WithGenerateBody(

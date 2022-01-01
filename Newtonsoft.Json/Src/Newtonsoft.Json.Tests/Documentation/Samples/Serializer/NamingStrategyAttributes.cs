@@ -32,8 +32,10 @@ using Newtonsoft.Json.Serialization;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
@@ -47,9 +49,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
+
             [JsonProperty(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
             public int SnakeRating { get; set; }
         }
+
         #endregion
 
         [Test]

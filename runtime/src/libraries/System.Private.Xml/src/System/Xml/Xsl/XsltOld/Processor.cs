@@ -92,6 +92,7 @@ namespace System.Xml.Xsl.XsltOld
         private readonly Hashtable _scriptExtensions;
 
         private ArrayList? _numberList;
+
         //
         // Template lookup action
         //
@@ -278,6 +279,7 @@ namespace System.Xml.Xsl.XsltOld
 
 #if DEBUG
         private bool _stringBuilderLocked;
+
 #endif
 
         internal StringBuilder GetSharedStringBuilder()
@@ -773,6 +775,7 @@ namespace System.Xml.Xsl.XsltOld
             Debug.Assert(_builder != null);
             _builder.Reset();
         }
+
         internal bool BeginEvent(
             XPathNodeType nodeType,
             string? prefix,

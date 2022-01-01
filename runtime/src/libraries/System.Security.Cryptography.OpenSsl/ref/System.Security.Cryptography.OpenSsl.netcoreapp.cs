@@ -17,6 +17,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
@@ -25,18 +26,25 @@ namespace System.Security.Cryptography
             throw null;
         }
     }
+
     public sealed partial class ECDiffieHellmanOpenSsl
         : System.Security.Cryptography.ECDiffieHellman
     {
         public ECDiffieHellmanOpenSsl() { }
+
         public ECDiffieHellmanOpenSsl(int keySize) { }
+
         public ECDiffieHellmanOpenSsl(System.IntPtr handle) { }
+
         public ECDiffieHellmanOpenSsl(System.Security.Cryptography.ECCurve curve) { }
+
         public ECDiffieHellmanOpenSsl(System.Security.Cryptography.SafeEvpPKeyHandle pkeyHandle) { }
+
         public override System.Security.Cryptography.ECDiffieHellmanPublicKey PublicKey
         {
             get { throw null; }
         }
+
         public override byte[] DeriveKeyFromHash(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
@@ -46,6 +54,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override byte[] DeriveKeyFromHmac(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
@@ -56,12 +65,14 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override byte[] DeriveKeyMaterial(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey
         )
         {
             throw null;
         }
+
         public override byte[] DeriveKeyTls(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             byte[] prfLabel,
@@ -70,27 +81,33 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public System.Security.Cryptography.SafeEvpPKeyHandle DuplicateKeyHandle()
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+
         public override void ImportParameters(
             System.Security.Cryptography.ECParameters parameters
         ) { }
     }
+
     public sealed partial class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
     {
         public static long OpenSslVersion

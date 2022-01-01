@@ -642,13 +642,16 @@ namespace System.Data.Common
         }
 
         protected abstract object GetEmptyStorage(int recordCount);
+
         protected abstract void CopyValue(
             int record,
             object store,
             BitArray nullbits,
             int storeIndex
         );
+
         protected abstract void SetStorage(object store, BitArray nullbits);
+
         protected void SetNullStorage(BitArray nullbits)
         {
             _dbNullBits = nullbits;

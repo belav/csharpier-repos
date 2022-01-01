@@ -15,6 +15,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             System.Reflection.Assembly assembly,
@@ -23,6 +24,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             System.Reflection.Assembly assembly,
@@ -32,6 +34,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             string userSecretsId
@@ -39,6 +42,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             string userSecretsId,
@@ -47,12 +51,14 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets<T>(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration
         ) where T : class
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets<T>(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             bool optional
@@ -60,6 +66,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets<T>(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             bool optional,
@@ -70,16 +77,19 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 }
+
 namespace Microsoft.Extensions.Configuration.UserSecrets
 {
     public partial class PathHelper
     {
         public PathHelper() { }
+
         public static string GetSecretsPathFromSecretsId(string userSecretsId)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly,
         Inherited = false,
@@ -88,6 +98,7 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
     public partial class UserSecretsIdAttribute : System.Attribute
     {
         public UserSecretsIdAttribute(string userSecretId) { }
+
         public string UserSecretsId
         {
             get { throw null; }

@@ -454,6 +454,7 @@ namespace System.Net.Quic.Implementations.Mock
             public readonly int MaxCount;
 
             private int _actualCount;
+
             // Since this is mock, we don't need to be conservative with the allocations.
             // We keep the TCSes allocated all the time for the simplicity of the code.
             private TaskCompletionSource _availableTcs = new TaskCompletionSource(

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorSourceLineCollection : RazorSourceLineCollection

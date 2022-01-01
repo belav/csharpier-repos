@@ -3,6 +3,7 @@ using System;
 struct Foo<T>
 {
     public T t;
+
     public Foo(T t)
     {
         this.t = t;

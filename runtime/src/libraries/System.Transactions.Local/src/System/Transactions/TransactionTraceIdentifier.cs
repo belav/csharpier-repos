@@ -21,12 +21,14 @@ namespace System.Transactions
         }
 
         private readonly string _transactionIdentifier;
+
         /// <summary>
         /// The string representation of the transaction identifier.
         /// </summary>
         public string TransactionIdentifier => _transactionIdentifier;
 
         private readonly int _cloneIdentifier;
+
         /// <summary>
         /// An integer value that allows different clones of the same
         /// transaction to be distinguished in the tracing.

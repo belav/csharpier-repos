@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal static class HostingEnvironmentExtensions

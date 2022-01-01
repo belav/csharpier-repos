@@ -321,6 +321,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return _lazyAdapter;
         }
+
 #else
         internal FieldSymbol AdaptedFieldSymbol => this;
 
@@ -328,6 +329,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
+
 #endif
 
         internal virtual bool IsMarshalledExplicitly

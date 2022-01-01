@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 internal static class CompilationFeatureDetector

@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Google.Protobuf;
 
+
 namespace SocialWeather.Protobuf;
 
 public class ProtobufWeatherStreamFormatter : IStreamFormatter<SocialWeather.WeatherReport>

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 internal class ViewComponentTypeVisitor : SymbolVisitor

@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Testing;
 using System;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Roslyn.Utilities;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

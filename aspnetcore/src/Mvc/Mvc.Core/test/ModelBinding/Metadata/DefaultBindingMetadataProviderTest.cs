@@ -6,6 +6,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 public class DefaultModelMetadataBindingDetailsProviderTest
@@ -784,6 +785,7 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     private class MultipleConstructorType
     {
         public MultipleConstructorType() { }
+
         public MultipleConstructorType(string prop) { }
     }
 
@@ -887,6 +889,7 @@ public class DefaultModelMetadataBindingDetailsProviderTest
     }
 
     public record BaseModel(int Value);
+
     public record Model(string Name, int Value) : BaseModel(Value);
 
     private record RecordTypeWithConformingSynthesizedConstructor

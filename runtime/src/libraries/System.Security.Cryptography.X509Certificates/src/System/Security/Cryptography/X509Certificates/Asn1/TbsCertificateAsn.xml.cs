@@ -40,6 +40,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
             reader.ThrowIfNotEmpty();
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

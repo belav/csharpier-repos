@@ -35,6 +35,7 @@ using Newtonsoft.Json.Serialization;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -261,6 +262,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             [JsonExtensionData]
             internal IDictionary<string, JToken> _additionalData;
         }
+
 #pragma warning restore 649
 
 #pragma warning disable 169
@@ -273,6 +275,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             [JsonExtensionData]
             private IDictionary<string, JToken> _additionalData;
         }
+
 #pragma warning restore 169
 
         [Test]

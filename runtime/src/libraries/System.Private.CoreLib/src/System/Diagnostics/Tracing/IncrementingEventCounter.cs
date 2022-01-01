@@ -4,6 +4,7 @@
 #if ES_BUILD_STANDALONE
 using System;
 using System.Diagnostics;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -116,6 +117,7 @@ namespace System.Diagnostics.Tracing
         {
             Payload = payload;
         }
+
         public IncrementingCounterPayload Payload { get; set; }
     }
 }

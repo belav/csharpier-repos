@@ -34,6 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
         }
 
         protected abstract bool ShouldSelectEntireTriviaFromStart(SyntaxTrivia trivia);
+
         protected abstract bool IsWithinNaturalLanguage(SyntaxToken token, int position);
 
         protected virtual TextExtent GetExtentOfWordFromToken(

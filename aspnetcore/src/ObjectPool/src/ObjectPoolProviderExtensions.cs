@@ -3,6 +3,7 @@
 
 using System.Text;
 
+
 namespace Microsoft.Extensions.ObjectPool;
 
 /// <summary>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 using Microsoft.AspNetCore.Rewrite.UrlActions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests;
 
 public class RuleBuilderTest

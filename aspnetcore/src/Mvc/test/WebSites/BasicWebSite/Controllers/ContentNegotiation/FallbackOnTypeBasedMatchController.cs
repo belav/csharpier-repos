@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class FallbackOnTypeBasedMatchController : Controller

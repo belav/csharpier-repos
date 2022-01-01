@@ -144,6 +144,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 )
             );
         }
+
 #endif
 
         [Test]
@@ -336,6 +337,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 );
             }
         }
+
 #endif
 
         internal static bool TryParseDateIso(

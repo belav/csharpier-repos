@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class UserManagerTest
@@ -462,6 +463,7 @@ public class UserManagerTest
     private class CustomNormalizer : ILookupNormalizer
     {
         public string NormalizeName(string key) => "#" + key;
+
         public string NormalizeEmail(string key) => "@" + key;
     }
 

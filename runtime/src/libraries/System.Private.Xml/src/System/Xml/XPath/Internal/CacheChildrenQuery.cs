@@ -20,8 +20,10 @@ namespace MS.Internal.Xml.XPath
         private readonly StackNav _elementStk;
         private readonly StackInt _positionStk;
         private bool _needInput;
+
 #if DEBUG
         private XPathNavigator? _lastNode;
+
 #endif
 
         public CacheChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type)
@@ -31,6 +33,7 @@ namespace MS.Internal.Xml.XPath
             _positionStk = new StackInt();
             _needInput = true;
         }
+
         private CacheChildrenQuery(CacheChildrenQuery other) : base(other)
         {
             _nextInput = Clone(other._nextInput);

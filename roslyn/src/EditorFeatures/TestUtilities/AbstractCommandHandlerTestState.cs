@@ -188,6 +188,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
         public IEnumerable<T> GetExportedValues<T>() =>
             Workspace.ExportProvider.GetExportedValues<T>();
+
         #endregion
 
         #region editor related operation
@@ -226,6 +227,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 )
             );
         }
+
         #endregion
 
         #region test/information/verification
@@ -301,6 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 line += 1;
             }
         }
+
         #endregion
 
         #region command handler

@@ -74,6 +74,7 @@ namespace ILCompiler
                 .Append(property.Name)
                 .ToString();
         }
+
 #endif
 
         public static string GetDisplayName(this TypeDesc type)

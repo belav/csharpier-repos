@@ -11,6 +11,7 @@ public class Runtime_57364
 {
     static short s_2;
     static bool s_7;
+
     public static int Main()
     {
         var vr4 = new ulong[][][][] { new ulong[][][] { new ulong[][] { new ulong[] { 0 } } } };

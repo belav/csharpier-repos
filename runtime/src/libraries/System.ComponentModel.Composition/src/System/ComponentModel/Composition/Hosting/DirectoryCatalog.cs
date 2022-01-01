@@ -27,8 +27,10 @@ namespace System.ComponentModel.Composition.Hosting
         private static bool IsWindows =>
 #if NETCOREAPP_5_0_OR_GREATER
             OperatingSystem.IsWindows();
+
 #else
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
 #endif
 
         private readonly Lock _thisLock = new Lock();

@@ -113,6 +113,7 @@ namespace Microsoft.DiaSymReader
                 return null;
             }
         );
+
 #endif
 
         // internal for testing

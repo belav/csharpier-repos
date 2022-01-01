@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Xunit;
 
+
 namespace Microsoft.Extensions.CommandLineUtils;
 
 public class DotNetMuxerTests

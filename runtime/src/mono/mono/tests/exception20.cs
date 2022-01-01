@@ -6,6 +6,7 @@ using System.IO;
 class CustomException : Exception
 {
     public int Value;
+
     public CustomException(int value) => this.Value = value;
 }
 

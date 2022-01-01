@@ -1884,6 +1884,7 @@ namespace System.IO.Ports
 
 #if DEBUG
             private readonly string portName;
+
 #endif
 
             internal unsafe EventLoopRunner(SerialStream stream)

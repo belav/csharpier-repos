@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
 /// <summary>

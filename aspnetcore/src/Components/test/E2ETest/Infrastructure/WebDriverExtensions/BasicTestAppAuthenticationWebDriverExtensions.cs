@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.E2ETesting;
 using OpenQA.Selenium;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest;
 
 internal static class BasicTestAppAuthenticationWebDriverExtensions

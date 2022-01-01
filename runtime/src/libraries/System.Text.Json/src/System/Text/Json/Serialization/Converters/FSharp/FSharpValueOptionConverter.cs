@@ -14,6 +14,7 @@ namespace System.Text.Json.Serialization.Converters
         // Reflect the converter strategy of the element type, since we use the identical contract for ValueSome(_) values.
         internal override ConverterStrategy ConverterStrategy => _converterStrategy;
         internal override Type? ElementType => typeof(TElement);
+
         // 'ValueNone' is encoded using 'default' at runtime and serialized as 'null' in JSON.
         public override bool HandleNull => true;
 

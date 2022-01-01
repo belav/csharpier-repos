@@ -6318,6 +6318,7 @@ class Class
                 iopTree.Value.Type.NullableAnnotation
             );
         }
+
         #endregion
 
         internal class ExpectedSymbolVerifier

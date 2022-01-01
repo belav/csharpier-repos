@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Analyzers;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
 public class CodeAnalysisExtensionsTest

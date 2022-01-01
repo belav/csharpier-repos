@@ -63,11 +63,17 @@ namespace Internal.TypeSystem
         }
 
         public abstract void AppendName(StringBuilder sb, ArrayType type);
+
         public abstract void AppendName(StringBuilder sb, ByRefType type);
+
         public abstract void AppendName(StringBuilder sb, PointerType type);
+
         public abstract void AppendName(StringBuilder sb, FunctionPointerType type);
+
         public abstract void AppendName(StringBuilder sb, GenericParameterDesc type);
+
         public abstract void AppendName(StringBuilder sb, SignatureMethodVariable type);
+
         public abstract void AppendName(StringBuilder sb, SignatureTypeVariable type);
 
         protected abstract void AppendNameForNestedType(
@@ -75,7 +81,9 @@ namespace Internal.TypeSystem
             DefType nestedType,
             DefType containingType
         );
+
         protected abstract void AppendNameForNamespaceType(StringBuilder sb, DefType type);
+
         protected abstract void AppendNameForInstantiatedType(StringBuilder sb, DefType type);
 
         public string FormatName(TypeDesc type)
@@ -125,23 +133,29 @@ namespace Internal.TypeSystem
         }
 
         public abstract TState AppendName(StringBuilder sb, ArrayType type, TOptions options);
+
         public abstract TState AppendName(StringBuilder sb, ByRefType type, TOptions options);
+
         public abstract TState AppendName(StringBuilder sb, PointerType type, TOptions options);
+
         public abstract TState AppendName(
             StringBuilder sb,
             FunctionPointerType type,
             TOptions options
         );
+
         public abstract TState AppendName(
             StringBuilder sb,
             GenericParameterDesc type,
             TOptions options
         );
+
         public abstract TState AppendName(
             StringBuilder sb,
             SignatureMethodVariable type,
             TOptions options
         );
+
         public abstract TState AppendName(
             StringBuilder sb,
             SignatureTypeVariable type,
@@ -154,11 +168,13 @@ namespace Internal.TypeSystem
             DefType containingType,
             TOptions options
         );
+
         protected abstract TState AppendNameForNamespaceType(
             StringBuilder sb,
             DefType type,
             TOptions options
         );
+
         protected abstract TState AppendNameForInstantiatedType(
             StringBuilder sb,
             DefType type,

@@ -170,6 +170,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Where_mathf_square(bool async) =>
             AssertTranslationFailed(() => base.Where_mathf_square(async));
+
         public override Task Where_mathf_sign(bool async) =>
             AssertTranslationFailed(() => base.Where_mathf_sign(async));
 

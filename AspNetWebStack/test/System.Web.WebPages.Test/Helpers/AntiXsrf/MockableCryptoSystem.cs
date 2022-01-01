@@ -7,6 +7,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
     public abstract class MockableCryptoSystem : ICryptoSystem
     {
         public abstract string Protect(byte[] data);
+
         public abstract byte[] Unprotect(string protectedData);
     }
 }

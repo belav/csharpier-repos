@@ -26,33 +26,43 @@ namespace System.Security.Permissions
     public sealed class WebBrowserPermission : CodeAccessPermission, IUnrestrictedPermission
     {
         public WebBrowserPermission() { }
+
         public WebBrowserPermission(PermissionState state) { }
+
         public WebBrowserPermission(WebBrowserPermissionLevel webBrowserPermissionLevel) { }
+
         public bool IsUnrestricted()
         {
             return true;
         }
+
         public override bool IsSubsetOf(IPermission target)
         {
             return true;
         }
+
         public override IPermission Intersect(IPermission target)
         {
             return new WebBrowserPermission();
         }
+
         public override IPermission Union(IPermission target)
         {
             return new WebBrowserPermission();
         }
+
         public override IPermission Copy()
         {
             return new WebBrowserPermission();
         }
+
         public override SecurityElement ToXml()
         {
             return default(SecurityElement);
         }
+
         public override void FromXml(SecurityElement securityElement) { }
+
         public WebBrowserPermissionLevel Level
         {
             get { return WebBrowserPermissionLevel.Unrestricted; }
@@ -79,10 +89,12 @@ namespace System.Security.Permissions
     public sealed class WebBrowserPermissionAttribute : CodeAccessSecurityAttribute
     {
         public WebBrowserPermissionAttribute(SecurityAction action) : base(action) { }
+
         public override IPermission CreatePermission()
         {
             return new WebBrowserPermission();
         }
+
         public WebBrowserPermissionLevel Level
         {
             get { return WebBrowserPermissionLevel.Unrestricted; }

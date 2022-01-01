@@ -3,6 +3,7 @@
 
 using System.Globalization;
 
+
 namespace Microsoft.Extensions.WebEncoders.Sources;
 
 // TODO using a resx file. project.json, unfortunately, fails to embed resx files when there are also compile items

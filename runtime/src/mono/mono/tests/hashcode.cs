@@ -11,6 +11,7 @@ public class Test
     {
         public int v1;
     }
+
     public static int Main()
     {
         test a = new test();

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Filters;
 
+
 namespace BasicWebSite.Filters;
 
 public class RedirectAntiforgeryValidationFailedResultFilter : IAlwaysRunResultFilter

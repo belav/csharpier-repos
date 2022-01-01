@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class ClassifiedSpanVisitor : SyntaxWalker

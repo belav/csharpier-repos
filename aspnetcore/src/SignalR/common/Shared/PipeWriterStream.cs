@@ -5,6 +5,7 @@ using System.Buffers;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace System.IO.Pipelines;
 
 // Write only stream implementation for efficiently writing bytes from the request body
@@ -73,6 +74,7 @@ internal class PipeWriterStream : Stream
     {
         return WriteCoreAsync(source, cancellationToken);
     }
+
 #endif
 
     private ValueTask WriteCoreAsync(

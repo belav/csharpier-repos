@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
+
 namespace Microsoft.Extensions.Tools.Internal;
 
 /// <summary>

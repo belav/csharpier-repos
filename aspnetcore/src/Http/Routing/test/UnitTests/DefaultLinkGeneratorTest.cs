@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Routing.TestObjects;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 // Tests LinkGenerator functionality using GetXyzByAddress - see tests for the extension
@@ -1014,6 +1015,7 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
         {
             Value = value;
         }
+
         public int Value { get; }
     }
 }

@@ -16,6 +16,7 @@ namespace AutoMapper.UnitTests.Bug
         public class SpecificItem : ItemBase { }
 
         public class DifferentItem : GenericItem { }
+
         public class DifferentItem2 : GenericItem { }
 
         public class ItemDto
@@ -31,7 +32,9 @@ namespace AutoMapper.UnitTests.Bug
         public class GenericDescriptionDto : DescriptionBaseDto { }
 
         public class SpecificDescriptionDto : DescriptionBaseDto { }
+
         public class DifferentDescriptionDto : GenericDescriptionDto { }
+
         public class DifferentDescriptionDto2 : GenericDescriptionDto { }
 
         public class Container
@@ -40,6 +43,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 Items = new List<ItemBase>();
             }
+
             public List<ItemBase> Items { get; private set; }
         }
 
@@ -49,6 +53,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 Items = new List<ItemDto>();
             }
+
             public List<ItemDto> Items { get; private set; }
         }
 

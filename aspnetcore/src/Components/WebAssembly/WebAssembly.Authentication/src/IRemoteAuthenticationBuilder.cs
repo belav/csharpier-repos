@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

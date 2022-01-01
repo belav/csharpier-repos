@@ -17,11 +17,13 @@ using Moq;
 using Xunit;
 using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class HttpParserTests : LoggedTest
 {
     private static readonly KestrelTrace _nullTrace = new KestrelTrace(NullLoggerFactory.Instance);
+
     private KestrelTrace CreateEnabledTrace() => new KestrelTrace(LoggerFactory);
 
     [Theory]

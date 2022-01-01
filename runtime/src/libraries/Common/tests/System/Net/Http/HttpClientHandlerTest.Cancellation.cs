@@ -19,6 +19,7 @@ namespace System.Net.Http.Functional.Tests
 {
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+
 #endif
 
     public abstract class HttpClientHandler_Cancellation_Test : HttpClientHandlerTestBase
@@ -355,6 +356,7 @@ namespace System.Net.Http.Functional.Tests
                 );
             }
         }
+
         [Theory]
         [InlineData(CancellationMode.CancelPendingRequests, false)]
         [InlineData(CancellationMode.DisposeHttpClient, false)]
@@ -759,6 +761,7 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
+
 #endif
 
         private async Task ValidateClientCancellationAsync(Func<Task> clientBodyAsync)

@@ -35,6 +35,7 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
     public static int test_0_catch()
@@ -2286,6 +2287,7 @@ class Tests
 	 * one enclosing finally block.
 	 */
     public static int finally_level;
+
     static void do_something()
     {
         int a = 0;
@@ -3139,6 +3141,7 @@ class Tests
     }
 
     interface IFace { }
+
     class Face : IFace { }
 
     public static int test_1_array_mismatch_2()

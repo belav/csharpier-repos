@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public class InstrumentationPassTest

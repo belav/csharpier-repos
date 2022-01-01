@@ -43,6 +43,7 @@ namespace System.Net.WebSockets
         }
 
         private readonly OutstandingOperations _outstandingOperations = new OutstandingOperations();
+
 #endif //DEBUG
 
         public WebSocketHttpListenerDuplexStream(
@@ -849,6 +850,7 @@ namespace System.Net.WebSockets
                     "NativeOverlapped allocated without release."
                 );
             }
+
 #endif
 
             public HttpListenerAsyncEventArgs(

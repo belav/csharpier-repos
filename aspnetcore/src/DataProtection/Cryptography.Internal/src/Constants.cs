@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Cryptography;
 
 // The majority of these are from bcrypt.h

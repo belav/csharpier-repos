@@ -18,6 +18,7 @@ using Xunit.Abstractions;
 using Xunit.Sdk;
 using static Templates.Test.Helpers.ProcessLock;
 
+
 namespace Templates.Test.Helpers;
 
 [DebuggerDisplay("{ToString(),nq}")]

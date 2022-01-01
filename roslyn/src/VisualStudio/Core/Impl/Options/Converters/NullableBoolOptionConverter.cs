@@ -12,6 +12,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Convert
     internal class NullableBoolOptionConverter : IValueConverter
     {
         private readonly Func<bool> _onNullValue;
+
         public NullableBoolOptionConverter(Func<bool> onNullValue)
         {
             _onNullValue = onNullValue;

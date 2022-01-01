@@ -8,6 +8,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class HttpParserBenchmark : IHttpRequestLineHandler, IHttpHeadersHandler

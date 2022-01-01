@@ -175,6 +175,7 @@ namespace System.Net.Mime
         // this method is only called by test code
         internal string TimeZone =>
             _unknownTimeZone ? UnknownTimeZoneDefaultOffset : TimeSpanToOffset(_timeZone);
+
 #endif
 
         #endregion

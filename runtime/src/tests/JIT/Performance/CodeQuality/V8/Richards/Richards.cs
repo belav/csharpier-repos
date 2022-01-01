@@ -458,6 +458,7 @@ namespace V8.Richards
         TaskControlBlock run(Packet packet);
         String toString();
     }
+
 #else
      public abstract class Task
      {

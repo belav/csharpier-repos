@@ -183,6 +183,7 @@ namespace Internal.IL
                 AppendStringLiteral(sb, (string)obj);
             }
         }
+
         #endregion
 
         #region Instruction decoding
@@ -427,6 +428,7 @@ namespace Internal.IL
                     return decodedInstruction.ToString();
             }
         }
+
         #endregion
 
         #region Helpers
@@ -601,6 +603,7 @@ namespace Internal.IL
 
                 AppendNameForNamespaceTypeWithoutAliases(sb, type);
             }
+
             public void AppendNameForNamespaceTypeWithoutAliases(StringBuilder sb, DefType type)
             {
                 ModuleDesc owningModule = (type as MetadataType)?.Module;

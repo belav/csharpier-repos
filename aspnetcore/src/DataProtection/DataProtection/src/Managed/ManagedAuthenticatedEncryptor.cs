@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cryptography;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection.SP800_108;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
 // An encryptor which does Encrypt(CBC) + HMAC using SymmetricAlgorithm and HashAlgorithm.

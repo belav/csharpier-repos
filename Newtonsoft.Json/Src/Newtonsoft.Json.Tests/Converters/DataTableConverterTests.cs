@@ -42,8 +42,10 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Linq;
 using Newtonsoft.Json.Tests.TestObjects;
+
 #if !(NET20 || NET35)
 using System.Numerics;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Converters
@@ -169,6 +171,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 sw.ToString()
             );
         }
+
 #endif
 
         [Test]
@@ -298,6 +301,7 @@ namespace Newtonsoft.Json.Tests.Converters
             );
             Assert.AreEqual(99.9999999999999999999m, dr2["FloatCol"]);
         }
+
 #endif
 
         [Test]
@@ -493,6 +497,7 @@ namespace Newtonsoft.Json.Tests.Converters
             );
             Assert.AreEqual(g, (Guid)dr1["id"]);
         }
+
 #pragma warning restore 618
 
         [Test]
@@ -763,6 +768,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 }
             }
         }
+
 #endif
 
         [Test]

@@ -484,6 +484,7 @@ namespace Dynamic
             obj.Variant_Property = val;
             Assert.Equal(val.WrappedObject, obj.Variant_Property);
         }
+
 #pragma warning restore 618
 
         private void VariantWrapper()

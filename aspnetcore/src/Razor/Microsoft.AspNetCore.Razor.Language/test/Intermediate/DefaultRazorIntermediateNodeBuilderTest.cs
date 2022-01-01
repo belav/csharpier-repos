@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public class DefaultRazorIntermediateNodeBuilderTest

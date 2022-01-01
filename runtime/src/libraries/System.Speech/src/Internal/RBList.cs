@@ -331,6 +331,7 @@ namespace System.Speech.Internal
                 FixInsertCase2(node);
             }
         }
+
         private void FixInsertCase2(TreeNode node)
         {
             if (GetColor(node.Parent) == NodeColor.BLACK)

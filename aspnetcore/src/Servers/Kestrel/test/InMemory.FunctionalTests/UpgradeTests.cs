@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
 public class UpgradeTests : LoggedTest

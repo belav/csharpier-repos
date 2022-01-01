@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cryptography.Internal;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
 public class BCRYPT_KEY_LENGTHS_STRUCT_Tests

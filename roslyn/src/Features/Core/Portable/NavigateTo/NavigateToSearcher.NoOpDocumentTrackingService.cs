@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 #pragma warning disable CS0067
             public event EventHandler<DocumentId>? ActiveDocumentChanged;
             public event EventHandler<EventArgs>? NonRoslynBufferTextChanged;
+
 #pragma warning restore CS0067
 
             public ImmutableArray<DocumentId> GetVisibleDocuments() =>

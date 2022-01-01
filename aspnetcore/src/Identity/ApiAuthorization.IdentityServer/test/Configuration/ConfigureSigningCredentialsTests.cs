@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 public class ConfigureSigningCredentialsTests

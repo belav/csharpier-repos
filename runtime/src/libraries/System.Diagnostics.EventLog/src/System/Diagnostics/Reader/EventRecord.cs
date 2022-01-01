@@ -37,6 +37,7 @@ namespace System.Diagnostics.Eventing.Reader
         public abstract int? Qualifiers { get; }
 
         public abstract string FormatDescription();
+
         public abstract string FormatDescription(IEnumerable<object> values);
 
         public abstract string LevelDisplayName { get; }
@@ -56,6 +57,7 @@ namespace System.Diagnostics.Eventing.Reader
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing) { }
     }
 }

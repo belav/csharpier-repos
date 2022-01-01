@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public static class NamespaceDirective

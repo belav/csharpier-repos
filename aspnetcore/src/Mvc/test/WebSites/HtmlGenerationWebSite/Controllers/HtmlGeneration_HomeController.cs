@@ -7,6 +7,7 @@ using HtmlGenerationWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace HtmlGenerationWebSite.Controllers;
 
 public class HtmlGeneration_HomeController : Controller

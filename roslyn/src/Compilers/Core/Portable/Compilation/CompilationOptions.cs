@@ -532,53 +532,77 @@ namespace Microsoft.CodeAnalysis
             CommonWithMetadataImportOptions(value);
 
         protected abstract CompilationOptions CommonWithConcurrentBuild(bool concurrent);
+
         protected abstract CompilationOptions CommonWithDeterministic(bool deterministic);
+
         protected abstract CompilationOptions CommonWithOutputKind(OutputKind kind);
+
         protected abstract CompilationOptions CommonWithPlatform(Platform platform);
+
         protected abstract CompilationOptions CommonWithPublicSign(bool publicSign);
+
         protected abstract CompilationOptions CommonWithOptimizationLevel(OptimizationLevel value);
+
         protected abstract CompilationOptions CommonWithXmlReferenceResolver(
             XmlReferenceResolver? resolver
         );
+
         protected abstract CompilationOptions CommonWithSourceReferenceResolver(
             SourceReferenceResolver? resolver
         );
+
         protected abstract CompilationOptions CommonWithSyntaxTreeOptionsProvider(
             SyntaxTreeOptionsProvider? resolver
         );
+
         protected abstract CompilationOptions CommonWithMetadataReferenceResolver(
             MetadataReferenceResolver? resolver
         );
+
         protected abstract CompilationOptions CommonWithAssemblyIdentityComparer(
             AssemblyIdentityComparer? comparer
         );
+
         protected abstract CompilationOptions CommonWithStrongNameProvider(
             StrongNameProvider? provider
         );
+
         protected abstract CompilationOptions CommonWithGeneralDiagnosticOption(
             ReportDiagnostic generalDiagnosticOption
         );
+
         protected abstract CompilationOptions CommonWithSpecificDiagnosticOptions(
             ImmutableDictionary<string, ReportDiagnostic>? specificDiagnosticOptions
         );
+
         protected abstract CompilationOptions CommonWithSpecificDiagnosticOptions(
             IEnumerable<KeyValuePair<string, ReportDiagnostic>> specificDiagnosticOptions
         );
+
         protected abstract CompilationOptions CommonWithReportSuppressedDiagnostics(
             bool reportSuppressedDiagnostics
         );
+
         protected abstract CompilationOptions CommonWithModuleName(string? moduleName);
+
         protected abstract CompilationOptions CommonWithMainTypeName(string? mainTypeName);
+
         protected abstract CompilationOptions CommonWithScriptClassName(string scriptClassName);
+
         protected abstract CompilationOptions CommonWithCryptoKeyContainer(
             string? cryptoKeyContainer
         );
+
         protected abstract CompilationOptions CommonWithCryptoKeyFile(string? cryptoKeyFile);
+
         protected abstract CompilationOptions CommonWithCryptoPublicKey(
             ImmutableArray<byte> cryptoPublicKey
         );
+
         protected abstract CompilationOptions CommonWithDelaySign(bool? delaySign);
+
         protected abstract CompilationOptions CommonWithCheckOverflow(bool checkOverflow);
+
         protected abstract CompilationOptions CommonWithMetadataImportOptions(
             MetadataImportOptions value
         );

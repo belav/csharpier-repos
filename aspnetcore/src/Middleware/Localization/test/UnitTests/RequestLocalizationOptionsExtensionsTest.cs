@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Localization;
 
 public class RequestLocalizationOptionsExtensionsTest

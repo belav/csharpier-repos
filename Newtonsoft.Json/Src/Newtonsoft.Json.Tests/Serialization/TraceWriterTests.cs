@@ -24,12 +24,14 @@ using Newtonsoft.Json.Tests.TestObjects.Organization;
 using Newtonsoft.Json.Utilities;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
 #endif
 #if !(NET20 || NET35 || NET40 || PORTABLE40 || PORTABLE) || DNXCORE50
 using System.Threading.Tasks;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Serialization
@@ -131,6 +133,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 traceWriter.TraceRecords[5].Message
             );
         }
+
 #endif
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0
@@ -167,6 +170,7 @@ Newtonsoft.Json Error: 0 : Error!
                 Trace.AutoFlush = false;
             }
         }
+
 #endif
 
         [Test]
@@ -536,6 +540,7 @@ Newtonsoft.Json Error: 0 : Error!
 
             Assert.IsNotNull(s);
         }
+
 #endif
 
         [Test]
@@ -1269,6 +1274,7 @@ Newtonsoft.Json Error: 0 : Error!
 
             Assert.AreEqual(TraceLevel.Error, traceWriter.TraceRecords[1].Level);
         }
+
 #endif
 
         [Test]
@@ -1588,6 +1594,7 @@ Newtonsoft.Json Error: 0 : Error!
                 traceWriter.GetSerializedJsonMessage()
             );
         }
+
 #endif
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0

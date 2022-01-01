@@ -34,6 +34,7 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
     public static int test_0_sin_precision()
@@ -75,6 +76,7 @@ class Tests
     {
         return (int)Math.Sqrt(4);
     }
+
     public static int test_0_sqrt_precision_and_not_spill()
     {
         double expected = 0;

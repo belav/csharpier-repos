@@ -30,6 +30,7 @@ namespace PartialCompactionTest
         {
             public int minsize;
             public int maxsize;
+
             //public float percentage;  //percentage of objects that fall into this bucket
             public SizeBucket(int min, int max)
             {
@@ -51,6 +52,7 @@ namespace PartialCompactionTest
         private const int BUCKET3_MIN = 1000;
         private const int BUCKET4_MIN = 10000;
         private const int BUCKETS_MAX = 80000;
+
         //////
 
         public const int DEFAULT_ITERATIONS = 100;
@@ -60,6 +62,7 @@ namespace PartialCompactionTest
         public static int randomSeed;
 
         public static int pointerSize = 4; //bytes
+
         [ThreadStatic]
         public static Random Rand;
 
@@ -75,6 +78,7 @@ namespace PartialCompactionTest
 
         [ThreadStatic]
         public static List<ObjectWrapper> staticArr = new List<ObjectWrapper>(2500);
+
         [ThreadStatic]
         public static List<Region> regionList = new List<Region>(2500);
         public static int staticIndex = 0;
@@ -265,6 +269,7 @@ namespace PartialCompactionTest
                 }
             }
         }
+
         public static void RemoveObjects(List<ObjectWrapper> Arr)
         {
             /*
@@ -419,6 +424,7 @@ namespace PartialCompactionTest
                 }
             }
         }
+
         //counts the pinned refernces of this objects
         public static int CountPinnedReferences(ObjectWrapper o)
         {
@@ -507,6 +513,7 @@ namespace PartialCompactionTest
             sizeBuckets[2] = new SizeBucket(BUCKET3_MIN, BUCKET4_MIN);
             sizeBuckets[3] = new SizeBucket(BUCKET4_MIN, BUCKETS_MAX);
         }
+
         /// Parse the arguments and also initialize values that are not set by args
         public static bool ParseArgs(string[] args)
         {
@@ -770,6 +777,7 @@ namespace PartialCompactionTest
                 EstimatedHeapSize += size;
                 return ow;
             }
+
             public ObjectWrapper(
                 int datasize,
                 bool pinned,
@@ -799,6 +807,7 @@ namespace PartialCompactionTest
 
 
             }
+
             public void CleanUp()
             {
                 if (m_pinned)
@@ -810,6 +819,7 @@ namespace PartialCompactionTest
                 }
                 GC.SuppressFinalize(this);
             }
+
             ~ObjectWrapper()
             {
                 CleanUp();

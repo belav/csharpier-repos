@@ -7,6 +7,7 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 public class ViewComponentTypeVisitorTest

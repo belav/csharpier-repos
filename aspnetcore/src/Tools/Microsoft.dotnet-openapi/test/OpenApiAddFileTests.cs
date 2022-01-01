@@ -6,6 +6,7 @@ using System.Xml;
 using Microsoft.DotNet.OpenApi.Tests;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.DotNet.OpenApi.Add.Tests;
 
 public class OpenApiAddFileTests : OpenApiTestBase

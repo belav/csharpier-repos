@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Analyzers.RenderTreeBuilder;
 
 internal sealed class WellKnownTypes

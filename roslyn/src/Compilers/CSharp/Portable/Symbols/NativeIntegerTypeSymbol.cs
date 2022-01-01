@@ -220,6 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsRecord => false;
         internal sealed override bool IsRecordStruct => false;
+
         internal sealed override bool HasPossibleWellKnownCloneMethod() => false;
 
         internal override bool Equals(TypeSymbol? other, TypeCompareKind comparison)
@@ -248,6 +249,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Emit should use underlying symbol only.
             throw ExceptionUtilities.Unreachable;
         }
+
 #endif
 
         private ImmutableArray<NamedTypeSymbol> GetInterfaces(

@@ -6,6 +6,7 @@ using System.Buffers;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 
+
 namespace Microsoft.AspNetCore.ResponseCaching;
 
 internal class MemoryResponseCache : IResponseCache

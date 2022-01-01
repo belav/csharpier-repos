@@ -8,6 +8,7 @@ using System.Text.Encodings.Web;
 
 #if !BUILDING_INBOX_LIBRARY
 using System.Runtime.CompilerServices;
+
 #endif
 
 namespace System.Text.Json
@@ -285,6 +286,7 @@ namespace System.Text.Json
 
 #if BUILDING_INBOX_LIBRARY
         private const string HexFormatString = "X4";
+
 #endif
 
         private static readonly StandardFormat s_hexStandardFormat = new StandardFormat('X', 4);

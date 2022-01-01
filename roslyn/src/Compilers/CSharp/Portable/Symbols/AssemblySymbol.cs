@@ -476,6 +476,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <returns></returns>
         internal abstract ImmutableArray<AssemblySymbol> GetNoPiaResolutionAssemblies();
+
         internal abstract void SetNoPiaResolutionAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
         );
@@ -486,6 +487,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// If this AssemblySymbol is linked too, it will be in this array too.
         /// </summary>
         internal abstract ImmutableArray<AssemblySymbol> GetLinkedReferencedAssemblies();
+
         internal abstract void SetLinkedReferencedAssemblies(
             ImmutableArray<AssemblySymbol> assemblies
         );
@@ -493,6 +495,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
             string simpleName
         );
+
         internal abstract bool AreInternalsVisibleToThisAssembly(AssemblySymbol other);
 
         /// <summary>

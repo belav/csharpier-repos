@@ -11,6 +11,7 @@ namespace Benchmark.Flattening
         private Customer _customer;
         private IMapper _mapper;
         public string Name { get; } = "Deep Types";
+
         public void Initialize()
         {
             var config = new MapperConfiguration(
@@ -126,6 +127,7 @@ namespace Benchmark.Flattening
     {
         private Customer _customer;
         public string Name { get; } = "Manual Deep Types";
+
         public void Initialize()
         {
             _customer = new Customer()

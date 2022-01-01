@@ -27,6 +27,7 @@ namespace System.Web.Razor.Test.Framework
         }
 
         public abstract ParserBase CreateMarkupParser();
+
         public abstract ParserBase CreateCodeParser();
 
         protected abstract ParserBase SelectActiveParser(

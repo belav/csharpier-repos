@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.HotReload;
 using Microsoft.AspNetCore.Components.Rendering;
 
+
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
 internal static class RenderTreeDiffBuilder

@@ -19,6 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         private OrdersContextBase _context;
 
         protected abstract OrdersFixtureBase CreateFixture();
+
         protected abstract string StoredProcedureCreationScript { get; }
 
         [Params(true, false)]

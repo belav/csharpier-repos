@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
@@ -63,6 +64,7 @@ internal class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
     }
 
     public TimerAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => ReferenceEquals(_callback, _callbackCompleted);
 
     public bool GetResult()

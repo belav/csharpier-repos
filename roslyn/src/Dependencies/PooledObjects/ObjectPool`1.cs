@@ -18,12 +18,14 @@ using System.Threading;
 
 #if DETECT_LEAKS
 using System.Runtime.CompilerServices;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.PooledObjects
 {
 #if NET20
     internal delegate TReturn Func<TArg, TReturn>(TArg arg);
+
 #endif
 
     /// <summary>
@@ -109,6 +111,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
                 }
             }
         }
+
 #endif
 
         internal ObjectPool(Factory factory) : this(factory, Environment.ProcessorCount * 2) { }
@@ -272,6 +275,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         {
             return Activator.CreateInstance(_stackTraceType.Value);
         }
+
 #endif
 
         [Conditional("DEBUG")]

@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client;
 
 /// <summary>
@@ -1966,6 +1967,7 @@ public partial class HubConnection : IAsyncDisposable
     private class InvocationHandlerList
     {
         private readonly List<InvocationHandler> _invocationHandlers;
+
         // A lazy cached copy of the handlers that doesn't change for thread safety.
         // Adding or removing a handler sets this to null.
         private InvocationHandler[]? _copiedHandlers;

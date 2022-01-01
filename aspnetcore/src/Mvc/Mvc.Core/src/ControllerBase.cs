@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
@@ -1167,6 +1168,7 @@ public abstract class ControllerBase
             fragment: fragment
         );
     }
+
     #endregion
 
     #region FileResult variants
@@ -1971,6 +1973,7 @@ public abstract class ControllerBase
             EnableRangeProcessing = enableRangeProcessing,
         };
     }
+
     #endregion
 
     /// <summary>

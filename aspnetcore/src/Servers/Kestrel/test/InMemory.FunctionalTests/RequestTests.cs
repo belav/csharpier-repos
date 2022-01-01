@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
 public class RequestTests : TestApplicationErrorLoggerLoggedTest
@@ -547,6 +548,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         await using var server = new TestServer(ExecuteApplication, testContext);
         await TestAsyncLocalValues(testContext, server);
     }
+
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
     [Fact]

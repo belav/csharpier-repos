@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal class PrerenderingErrorBoundaryLogger : IErrorBoundaryLogger

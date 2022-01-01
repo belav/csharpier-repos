@@ -5,6 +5,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 public class HttpLoggingServicesExtensionsTests

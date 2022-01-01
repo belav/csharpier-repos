@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.HttpsPolicy;
 
 /// <summary>

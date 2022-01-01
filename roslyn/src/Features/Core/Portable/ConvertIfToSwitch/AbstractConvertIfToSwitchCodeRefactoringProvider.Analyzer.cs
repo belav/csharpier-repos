@@ -51,6 +51,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         internal abstract class Analyzer
         {
             public abstract bool CanConvert(IConditionalOperation operation);
+
             public abstract bool HasUnreachableEndPoint(IOperation operation);
 
             /// <summary>

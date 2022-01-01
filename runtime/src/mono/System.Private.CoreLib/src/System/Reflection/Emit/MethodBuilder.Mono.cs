@@ -70,6 +70,7 @@ namespace System.Reflection.Emit
         private Type[]? returnModOpt;
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
+
 #endregion
 
         private RuntimeMethodInfo? created;

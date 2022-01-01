@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace Wasm.Performance.TestApp;
 
 public class Person

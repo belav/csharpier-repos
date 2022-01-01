@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Sockets.BindTests;
 
 public class SocketTransportOptionsTests : LoggedTestBase

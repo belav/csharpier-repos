@@ -14,6 +14,7 @@ namespace System.Reflection
         // aggressive caching
         private IntPtr m_fieldHandle;
         private FieldAttributes m_fieldAttributes;
+
         // lazy caching
         private string? m_name;
         private RuntimeType? m_fieldType;
@@ -60,6 +61,7 @@ namespace System.Reflection
             // must be last to avoid threading problems
             return m_invocationFlags = invocationFlags | InvocationFlags.Initialized;
         }
+
         #endregion
 
         #region Constructor
@@ -73,6 +75,7 @@ namespace System.Reflection
             m_fieldHandle = handle.Value;
             m_fieldAttributes = RuntimeFieldHandle.GetAttributes(handle);
         }
+
         #endregion
 
         #region Private Members

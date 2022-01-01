@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 namespace ArrayBound
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
@@ -55,6 +56,7 @@ namespace ArrayBound
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
@@ -84,6 +86,7 @@ namespace ArrayBound
                 numbers[index] = 1;
             }
         }
+
         /********************************************************************************************
 		* upper bound is on the edge of the short
 		********************************************************************************************/

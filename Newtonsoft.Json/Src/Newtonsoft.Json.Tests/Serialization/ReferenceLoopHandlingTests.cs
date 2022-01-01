@@ -238,6 +238,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             var c = JsonConvert.SerializeObject(main, settings);
             Assert.AreEqual(@"{""Child"":{""Name"":""Child1""}}", c);
         }
+
 #endif
 
 #if !(NET20 || NET35 || PORTABLE40)
@@ -301,6 +302,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             var c = JsonConvert.SerializeObject(parent, settings);
             Assert.AreEqual(@"{""child"":{""name"":""child""},""name"":""parent""}", c);
         }
+
 #endif
 
         [Test]

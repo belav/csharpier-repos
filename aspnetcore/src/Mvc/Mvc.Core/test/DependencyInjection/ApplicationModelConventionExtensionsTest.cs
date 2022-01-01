@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Xunit;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public class ApplicationModelConventionExtensionsTest

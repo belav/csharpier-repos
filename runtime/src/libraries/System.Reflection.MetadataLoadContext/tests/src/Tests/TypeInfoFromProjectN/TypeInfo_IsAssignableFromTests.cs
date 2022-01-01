@@ -595,6 +595,7 @@ namespace System.Reflection.Tests
                 true
             );
         }
+
         //private helper methods
         private static void VerifyIsAssignableFrom(
             string TestName,
@@ -647,16 +648,21 @@ namespace System.Reflection.Tests
 
     //Metadata for Reflection
     public interface I1 { }
+
     public interface I2 { }
 
     public struct S : I1 { }
 
     public class B : I1, I2 { }
+
     public class D : B { }
+
     public class Gen<T> : D { }
 
     public class I<T> { }
+
     public class G<T> : I<T> { }
+
     public class G2<T> : G<T> { }
 
     public class Gen2<T> where T : Gen<T>, I1, I2 { }
@@ -674,18 +680,24 @@ namespace System.Reflection.Tests
     namespace Case500
     {
         public abstract class A { }
+
         public abstract class B : A { }
+
         public class C : B { }
     }
 
     public class G10<T> where T : I1 { }
 
     public enum Eint : int { }
+
     public enum Euint : uint { }
+
     public enum Eshort : short { }
+
     public enum Eushort : ushort { }
 
     public interface IContraVariant<in T> { }
+
     public interface ICoVariant<out T> { }
 
     public class G5<T, U>

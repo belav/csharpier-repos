@@ -23,10 +23,12 @@ namespace ComWrappersTests.Common
 
         private int id;
         private int value = -1;
+
         public Test()
         {
             id = Interlocked.Increment(ref InstanceCount);
         }
+
         ~Test()
         {
             Interlocked.Decrement(ref InstanceCount);
@@ -34,6 +36,7 @@ namespace ComWrappersTests.Common
         }
 
         public void SetValue(int i) => this.value = i;
+
         public int GetValue() => this.value;
 
         public bool EnableICustomQueryInterface { get; set; } = false;
@@ -126,6 +129,7 @@ namespace ComWrappersTests.Common
         {
             private bool isDisposed = false;
             private ReaderWriterLockSlim allocLock;
+
             public AllocationCountResult(ReaderWriterLockSlim allocLock)
             {
                 this.allocLock = allocLock;

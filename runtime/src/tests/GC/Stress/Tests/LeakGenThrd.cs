@@ -106,6 +106,7 @@ namespace LGen
     {
         internal int[] mem;
         public static int icFinal = 0;
+
         public LeakObject(int num)
         {
             mem = new int[1024 * 250]; //nearly 1MB memory, larger than this will get assert failure.

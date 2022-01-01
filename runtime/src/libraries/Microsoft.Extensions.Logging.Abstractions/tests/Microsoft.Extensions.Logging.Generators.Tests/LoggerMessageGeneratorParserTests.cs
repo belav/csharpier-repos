@@ -440,6 +440,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
 
             Assert.Empty(diagnostics);
         }
+
 #endif
 
         [Theory]

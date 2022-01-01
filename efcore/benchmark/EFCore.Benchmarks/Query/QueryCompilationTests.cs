@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         private IQueryable<Customer> _multipleJoinQuery;
 
         public abstract OrdersFixtureBase CreateFixture();
+
         public abstract IServiceCollection AddProviderServices(IServiceCollection services);
 
         [GlobalSetup]

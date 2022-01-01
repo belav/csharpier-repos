@@ -46,22 +46,29 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             SyntaxNode root,
             List<AnalysisResult> analysisResults
         );
+
         protected abstract bool SupportsReadOnlyProperties(Compilation compilation);
+
         protected abstract bool SupportsPropertyInitializer(Compilation compilation);
+
         protected abstract bool CanExplicitInterfaceImplementationsBeFixed();
+
         protected abstract TExpression? GetFieldInitializer(
             TVariableDeclarator variable,
             CancellationToken cancellationToken
         );
+
         protected abstract TExpression? GetGetterExpression(
             IMethodSymbol getMethod,
             CancellationToken cancellationToken
         );
+
         protected abstract TExpression? GetSetterExpression(
             IMethodSymbol setMethod,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
         );
+
         protected abstract SyntaxNode GetFieldNode(
             TFieldDeclaration fieldDeclaration,
             TVariableDeclarator variableDeclarator

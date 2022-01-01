@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.CodeGen;
 
 #if !DEBUG
 using FieldSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.FieldSymbol;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

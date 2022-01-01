@@ -683,6 +683,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return null;
             }
         }
+
 #endif
 
         public static IEnumerable<DiagnosticData> ConvertToLocalDiagnostics(

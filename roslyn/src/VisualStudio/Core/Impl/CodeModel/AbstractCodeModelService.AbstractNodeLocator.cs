@@ -28,6 +28,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 SyntaxNode node,
                 EnvDTE.vsCMPart part
             );
+
             protected abstract VirtualTreePoint? GetEndPoint(
                 SourceText text,
                 OptionSet options,

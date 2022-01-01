@@ -147,6 +147,7 @@ namespace System.Diagnostics.CodeAnalysis
         /// <summary>Gets the condition parameter value.</summary>
         public bool ParameterValue { get; }
     }
+
 #endif
 
     /// <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>

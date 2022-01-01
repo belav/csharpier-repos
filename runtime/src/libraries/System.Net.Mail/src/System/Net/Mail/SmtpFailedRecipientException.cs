@@ -17,6 +17,7 @@ namespace System.Net.Mail
 
 #pragma warning disable CS0649      // Browser - never assigned to
         internal bool fatal;
+
 #pragma warning restore CS0649
 
         public SmtpFailedRecipientException() : base() { }

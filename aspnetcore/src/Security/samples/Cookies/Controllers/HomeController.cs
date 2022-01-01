@@ -6,6 +6,7 @@ using AuthSamples.Cookies.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace AuthSamples.Cookies.Controllers;
 
 public class HomeController : Controller

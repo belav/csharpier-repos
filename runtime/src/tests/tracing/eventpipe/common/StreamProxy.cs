@@ -89,6 +89,7 @@ namespace Tracing.Tests.Common
         }
 
         protected bool disposed = false;
+
         protected override void Dispose(bool disposing)
         {
             if (!disposed)

@@ -4,6 +4,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 namespace HostedInAspNet.Client;
 
 public class Program

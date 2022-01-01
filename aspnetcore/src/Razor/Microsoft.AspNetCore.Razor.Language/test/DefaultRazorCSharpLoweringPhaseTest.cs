@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class DefaultRazorCSharpLoweringPhaseTest

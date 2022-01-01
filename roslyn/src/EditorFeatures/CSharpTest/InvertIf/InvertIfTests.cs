@@ -704,6 +704,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
 }"
             );
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task TestMultiline_Trivia()
         {

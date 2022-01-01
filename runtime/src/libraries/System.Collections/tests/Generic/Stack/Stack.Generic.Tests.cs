@@ -46,18 +46,24 @@ namespace System.Collections.Tests
         }
 
         protected override int Count(IEnumerable<T> enumerable) => ((Stack<T>)enumerable).Count;
+
         protected override void Add(IEnumerable<T> enumerable, T value) =>
             ((Stack<T>)enumerable).Push(value);
+
         protected override void Clear(IEnumerable<T> enumerable) => ((Stack<T>)enumerable).Clear();
+
         protected override bool Contains(IEnumerable<T> enumerable, T value) =>
             ((Stack<T>)enumerable).Contains(value);
+
         protected override void CopyTo(IEnumerable<T> enumerable, T[] array, int index) =>
             ((Stack<T>)enumerable).CopyTo(array, index);
+
         protected override bool Remove(IEnumerable<T> enumerable)
         {
             ((Stack<T>)enumerable).Pop();
             return true;
         }
+
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
         #endregion

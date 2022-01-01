@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
 public class OpenIdConnectAuthenticateTests

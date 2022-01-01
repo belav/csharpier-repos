@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 internal static class CSharpIdentifier

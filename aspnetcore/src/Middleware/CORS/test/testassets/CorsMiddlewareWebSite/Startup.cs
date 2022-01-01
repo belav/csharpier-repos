@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+
 namespace CorsMiddlewareWebSite;
 
 public class Startup
@@ -21,6 +22,7 @@ public class Startup
         app.UseCors(policy => policy.WithOrigins("http://example.com"));
         app.UseMiddleware<EchoMiddleware>();
     }
+
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()

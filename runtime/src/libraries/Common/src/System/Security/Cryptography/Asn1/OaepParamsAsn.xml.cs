@@ -98,6 +98,7 @@ namespace System.Security.Cryptography.Asn1
             );
             reader.ThrowIfNotEmpty();
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

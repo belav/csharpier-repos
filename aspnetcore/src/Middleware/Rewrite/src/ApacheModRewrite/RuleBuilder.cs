@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Rewrite.UrlActions;
 using Microsoft.AspNetCore.Rewrite.UrlMatches;
 
+
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 internal class RuleBuilder

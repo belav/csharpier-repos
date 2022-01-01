@@ -527,6 +527,7 @@ namespace Microsoft.CodeAnalysis.Collections
             int secondOffset,
             int length
         ) => new(first, firstOffset, second, secondOffset, length);
+
 #pragma warning restore IDE0051 // Remove unused private members
 
         private static UnalignedSegmentEnumerable<T> GetSegmentsUnaligned<T>(

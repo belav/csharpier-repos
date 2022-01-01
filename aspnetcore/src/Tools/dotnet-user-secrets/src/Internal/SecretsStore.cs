@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.Tools.Internal;
 using Newtonsoft.Json.Linq;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 /// <summary>

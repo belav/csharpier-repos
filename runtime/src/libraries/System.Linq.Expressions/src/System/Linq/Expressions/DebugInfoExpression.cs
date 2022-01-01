@@ -145,6 +145,7 @@ namespace System.Linq.Expressions
 
         public override int EndColumn => 0;
     }
+
     #endregion
 
     public partial class Expression

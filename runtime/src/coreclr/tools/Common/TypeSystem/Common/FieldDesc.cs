@@ -12,6 +12,7 @@ namespace Internal.TypeSystem
     {
 #pragma warning disable CA1825 // avoid Array.Empty<T>() instantiation for TypeLoader
         public static readonly FieldDesc[] EmptyFields = new FieldDesc[0];
+
 #pragma warning restore CA1825
 
         public override int GetHashCode()

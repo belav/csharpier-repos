@@ -7,9 +7,11 @@ using AutoMapper.Features;
 using AutoMapper.Internal;
 using AutoMapper.Internal.Mappers;
 using AutoMapper.QueryableExtensions.Impl;
+
 namespace AutoMapper
 {
     using Validator = Action<ValidationContext>;
+
     public interface IMapperConfigurationExpression : IProfileExpression
     {
         /// <summary>
@@ -91,6 +93,7 @@ namespace AutoMapper
         /// <param name="config">Profile configuration</param>
         void CreateProfile(string profileName, Action<IProfileExpression> config);
     }
+
     public class MapperConfigurationExpression : Profile, IGlobalConfigurationExpression
     {
         private readonly List<Profile> _profiles = new List<Profile>();

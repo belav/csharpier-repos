@@ -1001,6 +1001,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             return binders.ToArrayAndFree();
         }
+
 #endif
 
         internal BoundExpression WrapWithVariablesIfAny(

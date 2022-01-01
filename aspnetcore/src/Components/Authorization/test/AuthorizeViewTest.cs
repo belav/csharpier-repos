@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Authorization;
 
 public class AuthorizeViewTest

@@ -37,6 +37,7 @@ public static partial class XmlSerializerTests
         method.Invoke(null, new object[] { 3 });
 #endif
     }
+
 #endif
 
     private static bool IsTimeSpanSerializationAvailable => true;
@@ -341,6 +342,7 @@ public static partial class XmlSerializerTests
         Assert.StrictEqual((int)o, o2);
         Assert.Equal(MyEnum.Three, (MyEnum)o2);
     }
+
 #endif
 
     [Fact]
@@ -1812,6 +1814,7 @@ public static partial class XmlSerializerTests
             && grouplists.Contains("GroupBase");
         Assert.True(b);
     }
+
     private static Stream GetStreamFromString(string s)
     {
         MemoryStream stream = new MemoryStream();
@@ -2506,6 +2509,7 @@ public static partial class XmlSerializerTests
     }
 
     private static readonly string s_defaultNs = "http://tempuri.org/";
+
     private static T RoundTripWithXmlMembersMapping<T>(
         object requestBodyValue,
         string memberName,

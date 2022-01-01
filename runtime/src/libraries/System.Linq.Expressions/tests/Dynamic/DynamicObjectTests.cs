@@ -30,6 +30,7 @@ namespace System.Dynamic.Tests
             public virtual int VirtualReadonlyProperty => 1;
 
             public virtual int VirtualMethod(int argument) => argument;
+
             public int HideProperty { get; set; }
 
             public int HideMethod(int argument) => argument;
@@ -53,6 +54,7 @@ namespace System.Dynamic.Tests
             public new int HideProperty { get; set; }
             public new int HideMethod { get; set; }
         }
+
 #pragma warning restore 649
 
         private class TestDynamicFagile : TestDynamic

@@ -144,6 +144,7 @@ namespace System.Reflection.Tests
                 throw new ArgumentNullException("Input arg cannot be null.");
             }
         }
+
 #pragma warning restore xUnit1013 // Public method should be marked as test
 
         [Fact]

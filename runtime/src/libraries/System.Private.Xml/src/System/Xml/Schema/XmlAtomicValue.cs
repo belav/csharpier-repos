@@ -27,12 +27,16 @@ namespace System.Xml.Schema
         {
             [FieldOffset(0)]
             public bool boolVal;
+
             [FieldOffset(0)]
             public double dblVal;
+
             [FieldOffset(0)]
             public long i64Val;
+
             [FieldOffset(0)]
             public int i32Val;
+
             [FieldOffset(0)]
             public DateTime dtVal;
         }

@@ -29,8 +29,10 @@ namespace System.Reflection.TypeLoading
         public abstract override string? Name { get; }
         public abstract override Type ParameterType { get; }
         public abstract override ParameterAttributes Attributes { get; }
+
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public abstract override bool HasDefaultValue { get; }
@@ -39,6 +41,7 @@ namespace System.Reflection.TypeLoading
         public abstract override object? RawDefaultValue { get; }
 
         public abstract override Type[] GetOptionalCustomModifiers();
+
         public abstract override Type[] GetRequiredCustomModifiers();
 
         public abstract override string ToString();
@@ -62,8 +65,10 @@ namespace System.Reflection.TypeLoading
         // Operations that are illegal on ReflectionOnly objects.
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
     }

@@ -286,18 +286,22 @@ public sealed class ClassVisibleTrueServer
     {
         return 1;
     }
+
     int IInterfaceVisibleTrue.Foo()
     {
         return 2;
     }
+
     int IInterfaceVisibleFalse.Foo()
     {
         return 3;
     }
+
     int IInterfaceWithoutVisible.Foo()
     {
         return 4;
     }
+
     int IInterfaceNotPublic.Foo()
     {
         return 5;
@@ -307,10 +311,12 @@ public sealed class ClassVisibleTrueServer
     {
         return 6;
     }
+
     int IInterfaceVisibleTrueNoGuid.Foo1(UInt16 int16Val, bool boolVal)
     {
         return 7;
     }
+
     int IInterfaceVisibleTrueNoGuid.Foo2(
         string str,
         out int outIntVal,
@@ -323,10 +329,12 @@ public sealed class ClassVisibleTrueServer
         outIntVal = 10;
         return 8;
     }
+
     int IInterfaceVisibleTrueNoGuid.Foo3(ref short refShortVal, params byte[] paramsList)
     {
         return 9;
     }
+
     int IInterfaceVisibleTrueNoGuid.Foo4(
         ref List<short> refShortVal,
         GenericClassW2Pars<int, short> genericClass,
@@ -335,34 +343,42 @@ public sealed class ClassVisibleTrueServer
     {
         return 10;
     }
+
     int IDerivedInterfaceVisibleTrueGuid.Foo()
     {
         return 12;
     }
+
     int IDerivedInterfaceVisibleTrueNoGuid.Foo1(UInt16 int16Val, bool boolVal)
     {
         return 13;
     }
+
     int IDerivedInterfaceVisibleTrueNoGuid.Foo5(Int32 int32Val)
     {
         return 14;
     }
+
     int IDerivedInterfaceWithoutVisibleNoGuid.Foo7(Int32 int32Val)
     {
         return 15;
     }
+
     int IInterfaceNotVisibleNoGuid.Foo()
     {
         return 16;
     }
+
     int IInterfaceVisibleTrueNoGuidGenericInterface.Foo()
     {
         return 17;
     }
+
     int IInterfaceVisibleTrueNoGuidGenericInterface.Foo9(List<int> listInt)
     {
         return 18;
     }
+
     int IInterfaceVisibleTrueNoGuidGenericInterface.Foo10(
         ICollection<int> intCollection,
         ICollection<string> stringCollection
@@ -375,26 +391,32 @@ public sealed class ClassVisibleTrueServer
     {
         return 101;
     }
+
     int IInterfaceVisibleTrue_ComImport.Foo()
     {
         return 102;
     }
+
     int IInterfaceVisibleFalse_ComImport.Foo()
     {
         return 103;
     }
+
     int IInterfaceVisibleTrue_VisibleTrue.Foo()
     {
         return 104;
     }
+
     int IInterfaceVisibleFalse_VisibleTrue.Foo()
     {
         return 105;
     }
+
     int IInterfaceVisibleTrue_VisibleFalse.Foo()
     {
         return 106;
     }
+
     int IInterfaceNotPublic_VisibleTrue.Foo()
     {
         return 107;
@@ -422,22 +444,27 @@ public sealed class ClassVisibleFalseServer
     {
         return 120;
     }
+
     int IInterfaceVisibleTrue.Foo()
     {
         return 121;
     }
+
     int IInterfaceVisibleFalse.Foo()
     {
         return 122;
     }
+
     int IInterfaceWithoutVisible.Foo()
     {
         return 123;
     }
+
     int IInterfaceNotPublic.Foo()
     {
         return 124;
     }
+
     int Foo()
     {
         return 129;
@@ -459,22 +486,27 @@ public sealed class ClassWithoutVisibleServer
     {
         return 130;
     }
+
     int IInterfaceVisibleTrue.Foo()
     {
         return 131;
     }
+
     int IInterfaceVisibleFalse.Foo()
     {
         return 132;
     }
+
     int IInterfaceWithoutVisible.Foo()
     {
         return 133;
     }
+
     int IInterfaceNotPublic.Foo()
     {
         return 134;
     }
+
     int Foo()
     {
         return 139;
@@ -495,14 +527,17 @@ public sealed class ClassGenericServer<T>
     {
         return 140;
     }
+
     int IInterfaceVisibleTrue.Foo()
     {
         return 141;
     }
+
     T IInterfaceGenericVisibleTrue<T>.Foo()
     {
         return default(T);
     }
+
     T Foo()
     {
         return default(T);
@@ -727,18 +762,22 @@ public class ComVisibleServer
         {
             return 10;
         }
+
         int INestedInterfaceVisibleTrue.Foo()
         {
             return 11;
         }
+
         int INestedInterfaceVisibleFalse.Foo()
         {
             return 12;
         }
+
         int INestedInterfaceWithoutVisible.Foo()
         {
             return 13;
         }
+
         int INestedInterfaceNotPublic.Foo()
         {
             return 14;
@@ -748,6 +787,7 @@ public class ComVisibleServer
         {
             return 50;
         }
+
         int NestedClass.INestedInterfaceNestedInClassNoGuid.Foo()
         {
             return 51;
@@ -757,30 +797,37 @@ public class ComVisibleServer
         {
             return 110;
         }
+
         int INestedInterfaceComImport_ComImport.Foo()
         {
             return 111;
         }
+
         int INestedInterfaceVisibleTrue_ComImport.Foo()
         {
             return 112;
         }
+
         int INestedInterfaceVisibleFalse_ComImport.Foo()
         {
             return 113;
         }
+
         int INestedInterfaceVisibleTrue_VisibleTrue.Foo()
         {
             return 114;
         }
+
         int INestedInterfaceVisibleFalse_VisibleTrue.Foo()
         {
             return 115;
         }
+
         int INestedInterfaceVisibleTrue_VisibleFalse.Foo()
         {
             return 116;
         }
+
         int INestedInterfaceNotPublic_VisibleTrue.Foo()
         {
             return 117;
@@ -808,22 +855,27 @@ public class ComVisibleServer
         {
             return 20;
         }
+
         int INestedInterfaceVisibleTrue.Foo()
         {
             return 21;
         }
+
         int INestedInterfaceVisibleFalse.Foo()
         {
             return 22;
         }
+
         int INestedInterfaceWithoutVisible.Foo()
         {
             return 23;
         }
+
         int INestedInterfaceNotPublic.Foo()
         {
             return 24;
         }
+
         int Foo()
         {
             return 29;
@@ -845,22 +897,27 @@ public class ComVisibleServer
         {
             return 30;
         }
+
         int INestedInterfaceVisibleTrue.Foo()
         {
             return 31;
         }
+
         int INestedInterfaceVisibleFalse.Foo()
         {
             return 32;
         }
+
         int INestedInterfaceWithoutVisible.Foo()
         {
             return 33;
         }
+
         int INestedInterfaceNotPublic.Foo()
         {
             return 34;
         }
+
         int Foo()
         {
             return 39;
@@ -881,14 +938,17 @@ public class ComVisibleServer
         {
             return 40;
         }
+
         int INestedInterfaceVisibleTrue.Foo()
         {
             return 41;
         }
+
         T INestedInterfaceGenericVisibleTrue<T>.Foo()
         {
             return default(T);
         }
+
         T Foo()
         {
             return default(T);

@@ -189,6 +189,7 @@ namespace MathFusedMultiplyAddTest
                     .ToScalar()
             );
         }
+
         #endregion
 
         #region Math.FusedMultiplyAdd

@@ -15,7 +15,9 @@ namespace System.Reflection.TypeLoading
 
         // Unlike most apis, this one does not copy the byte array.
         public sealed override byte[]? GetILAsByteArray() => _lazyIL ?? (_lazyIL = ComputeIL());
+
         protected abstract byte[]? ComputeIL();
+
         private volatile byte[]? _lazyIL;
 
         public abstract override IList<LocalVariableInfo> LocalVariables { get; }

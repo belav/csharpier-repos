@@ -93,6 +93,7 @@ namespace Microsoft.CodeAnalysis
         /// symbol isn't contained in a namespace.
         /// </summary>
         INamespaceSymbol ContainingNamespace { get; }
+
 #nullable enable
 #pragma warning restore RS0041 // uses oblivious reference types
 

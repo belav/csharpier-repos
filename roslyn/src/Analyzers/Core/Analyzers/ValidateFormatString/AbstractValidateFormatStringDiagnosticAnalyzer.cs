@@ -42,6 +42,7 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
                 isEnabledByDefault: true,
                 customTags: EnforceOnBuildValues.ValidateFormatString.ToCustomTag()
             );
+
 #pragma warning restore RS0030 // Do not used banned APIs
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
@@ -63,7 +64,9 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
         private const string NameOfFormatStringParameter = "format";
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
+
         protected abstract SyntaxNode GetArgumentExpression(SyntaxNode syntaxNode);
+
         protected abstract SyntaxNode? TryGetMatchingNamedArgument(
             SeparatedSyntaxList<SyntaxNode> arguments,
             string searchArgumentName

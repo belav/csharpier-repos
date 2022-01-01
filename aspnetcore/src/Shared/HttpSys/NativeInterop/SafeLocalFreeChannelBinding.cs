@@ -4,6 +4,7 @@
 using System;
 using System.Security.Authentication.ExtendedProtection;
 
+
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
 internal class SafeLocalFreeChannelBinding : ChannelBinding

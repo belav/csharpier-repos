@@ -177,6 +177,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 "Cannot convert invalid value to System.DateTimeOffset. Path '', line 1, position 5."
             );
         }
+
 #endif
 
         [Test]

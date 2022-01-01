@@ -39,6 +39,7 @@ namespace ILCompiler.DependencyAnalysis
 #if DEBUG
         private int _numReservations;
         private bool _checkAllSymbolDependenciesMustBeMarked;
+
 #endif
 
         public int CountBytes

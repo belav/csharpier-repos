@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 internal class WrappingStream : Stream
@@ -127,6 +128,7 @@ internal class WrappingStream : Stream
 
 #pragma warning disable CS0672, SYSLIB0010 // Overrides obsolete member
     public override object InitializeLifetimeService() => _inner.InitializeLifetimeService();
+
 #pragma warning restore CS0672, SYSLIB0010 // Overrides obsolete member
 
     public override void Close() => _inner.Close();

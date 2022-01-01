@@ -25,7 +25,9 @@ namespace System.IO.Packaging
         string xmlNamespace,
         out string newXmlNamespace
     );
+
     internal delegate void HandleElementCallback(int elementDepth, ref bool more);
+
     internal delegate void HandleAttributeCallback(int elementDepth);
 
     internal sealed class XmlCompatibilityReader : XmlWrappingReader
@@ -92,6 +94,7 @@ namespace System.IO.Packaging
 #if !PBTCOMPILER
         public XmlCompatibilityReader(XmlReader baseReader, IEnumerable<string> supportedNamespaces)
             : this(baseReader, null, supportedNamespaces) { }
+
 #endif
         #endregion Construction
 
@@ -648,6 +651,7 @@ namespace System.IO.Packaging
                 return Reader.Value;
             }
         }
+
 #pragma warning restore CS8764
 
         /// <summary>
@@ -1448,6 +1452,7 @@ namespace System.IO.Packaging
                 info == null ? 1 : info.LinePosition
             );
         }
+
         #endregion Private Methods
 
         #region Private Properties
@@ -1575,6 +1580,7 @@ namespace System.IO.Packaging
                 return _compatibilityUri;
             }
         }
+
         #endregion Private Properties
         #region Nested Classes
         private struct NamespaceElementPair
@@ -1973,6 +1979,7 @@ namespace System.IO.Packaging
                 }
             }
         }
+
         #endregion Nested Classes
 
         #region Private Fields

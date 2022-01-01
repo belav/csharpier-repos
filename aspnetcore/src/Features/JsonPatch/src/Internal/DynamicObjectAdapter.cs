@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using CSharpBinder = Microsoft.CSharp.RuntimeBinder;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 /// <summary>

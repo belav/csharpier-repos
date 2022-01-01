@@ -11,6 +11,7 @@ namespace Test
             return ((MethodInfo)x).Name.CompareTo(((MethodInfo)y).Name);
         }
     }
+
     public class T
     {
         public static int Main(string[] args)

@@ -87,7 +87,9 @@ namespace Internal.Cryptography
         private abstract class SHAManagedImplementationBase
         {
             public abstract void Initialize();
+
             public abstract void HashCore(byte[] partIn, int ibStart, int cbSize);
+
             public abstract byte[] HashFinal();
         }
 

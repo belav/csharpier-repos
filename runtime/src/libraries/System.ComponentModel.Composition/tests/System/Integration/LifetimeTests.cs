@@ -24,6 +24,7 @@ namespace Tests.Integration
         public class AnyPartDisposable : IDisposable
         {
             public bool IsDisposed { get; set; }
+
             public void Dispose()
             {
                 Assert.False(IsDisposed);
@@ -45,6 +46,7 @@ namespace Tests.Integration
             public int Value { get; set; }
 
             public bool IsDisposed { get; set; }
+
             public void Dispose()
             {
                 Assert.False(IsDisposed);
@@ -221,6 +223,7 @@ namespace Tests.Integration
         public class SharedPartDisposable : IDisposable
         {
             public bool IsDisposed { get; set; }
+
             public void Dispose()
             {
                 Assert.False(IsDisposed);
@@ -244,6 +247,7 @@ namespace Tests.Integration
             public int Value { get; set; }
 
             public bool IsDisposed { get; set; }
+
             public void Dispose()
             {
                 Assert.False(IsDisposed);
@@ -394,6 +398,7 @@ namespace Tests.Integration
         public class NonSharedPartDisposable : IDisposable
         {
             public bool IsDisposed { get; set; }
+
             public void Dispose()
             {
                 Assert.False(IsDisposed);
@@ -423,6 +428,7 @@ namespace Tests.Integration
             }
 
             public bool IsDisposed { get; set; }
+
             public void Dispose()
             {
                 Assert.False(IsDisposed);
@@ -534,6 +540,7 @@ namespace Tests.Integration
         public class SharedState
         {
             public static int instanceNumber = 0;
+
             public SharedState()
             {
                 MyInstanceNumber = instanceNumber++;

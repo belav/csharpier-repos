@@ -5,6 +5,7 @@ using System;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal class RuntimeCompilationFileProvider

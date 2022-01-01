@@ -46,6 +46,7 @@ namespace System.Runtime.Caching
 
             return false;
         }
+
         public static bool operator ==(UsageEntryRef r1, UsageEntryRef r2)
         {
             return r1._ref == r2._ref;

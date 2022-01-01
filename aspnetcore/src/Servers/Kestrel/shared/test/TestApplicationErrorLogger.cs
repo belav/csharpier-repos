@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public class TestApplicationErrorLogger : ILogger

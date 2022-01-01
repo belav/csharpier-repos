@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class RoleValidatorTest

@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
+
 namespace RepoTasks;
 
 public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
@@ -147,6 +148,7 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
 
         return !Log.HasLoggedErrors;
     }
+
     private static string GetPackagePath(ITaskItem item)
     {
         string packagePath = item.GetMetadata("PackagePath");

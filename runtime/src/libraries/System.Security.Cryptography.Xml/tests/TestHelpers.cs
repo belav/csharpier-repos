@@ -191,6 +191,7 @@ namespace System.Security.Cryptography.Xml.Tests
                 $"The specified algorithm `{key.GetType().FullName}` is not supported for XML Encryption."
             );
         }
+
 #pragma warning restore SYSLIB0022
 
         /// <summary>

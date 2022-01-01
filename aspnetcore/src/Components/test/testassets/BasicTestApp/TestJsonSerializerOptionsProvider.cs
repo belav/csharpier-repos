@@ -3,6 +3,7 @@
 
 using System.Text.Json;
 
+
 namespace BasicTestApp;
 
 internal static class TestJsonSerializerOptionsProvider

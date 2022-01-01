@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>

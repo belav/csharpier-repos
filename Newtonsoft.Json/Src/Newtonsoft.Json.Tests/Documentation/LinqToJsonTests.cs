@@ -397,6 +397,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             public int Code { get; set; }
             public string ErrorMessage { get; set; }
         }
+
         #endregion
 
         [Test]

@@ -98,6 +98,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             int? i = await token.CreateReader().ReadAsInt32Async();
             Assert.AreEqual(1, i);
         }
+
 #endif
 
         [Test]
@@ -220,6 +221,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.None, reader.TokenType);
             Assert.AreEqual("", reader.Path);
         }
+
 #endif
 
         [Test]
@@ -374,6 +376,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 Assert.IsFalse(await reader.ReadAsync());
             }
         }
+
 #endif
 
         [Test]
@@ -1358,6 +1361,7 @@ third line",
             var i = (BigInteger)((JValue)o["ChildId"]).Value;
             Assert.AreEqual(BigInteger.Parse("333333333333333333333333333333333333333"), i);
         }
+
 #endif
 
         [Test]

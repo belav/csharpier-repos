@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal sealed class ConfigSectionClone
@@ -60,5 +61,6 @@ internal sealed class ConfigSectionClone
 
     public static bool operator ==(ConfigSectionClone lhs, ConfigSectionClone rhs) =>
         lhs is null ? rhs is null : lhs.Equals(rhs);
+
     public static bool operator !=(ConfigSectionClone lhs, ConfigSectionClone rhs) => !(lhs == rhs);
 }

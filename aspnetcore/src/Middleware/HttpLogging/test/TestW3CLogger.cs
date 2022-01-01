@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 internal class TestW3CLogger : W3CLogger

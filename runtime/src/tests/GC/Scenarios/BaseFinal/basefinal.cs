@@ -18,6 +18,7 @@ namespace DefaultNamespace
         // disabling unused variable warning
 #pragma warning disable 0414
         internal static Object StObj;
+
 #pragma warning restore 0414
 
         public static int Main(String[] str)
@@ -80,6 +81,7 @@ namespace DefaultNamespace
         // disabling unused variable warning
 #pragma warning disable 0414
         public BNode obj;
+
 #pragma warning restore 0414
 
 

@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using System.Text;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
 internal class BatchingLogger : ILogger

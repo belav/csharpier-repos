@@ -14,6 +14,7 @@ namespace FractalPerf
             r = a;
             i = b;
         }
+
         public double r;
         public double i;
 
@@ -100,6 +101,7 @@ namespace FractalPerf
     {
         private double Real;
         double Imaginary;
+
         public Julia(double real, double imaginary) : base(-2.0, -1.5, 1.0, 1.5)
         {
             Real = real;
@@ -147,8 +149,10 @@ namespace FractalPerf
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 5;
+
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)]

@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 using static TestData;
 
+
 namespace LPStr;
 
 public class PInvoke_False_False
@@ -117,8 +118,10 @@ public class PInvoke_False_False
 
     private static LPStrTestStruct GetInvalidStruct() =>
         new LPStrTestStruct() { str = InvalidString };
+
     private static LPStrTestStruct GetUnmappableStruct() =>
         new LPStrTestStruct() { str = UnmappableString };
+
     private static LPStrTestStruct GetValidStruct() => new LPStrTestStruct() { str = ValidString };
 
     public static unsafe void RunTest()

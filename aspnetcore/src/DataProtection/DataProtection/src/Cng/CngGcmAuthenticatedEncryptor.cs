@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection.Cng.Internal;
 using Microsoft.AspNetCore.DataProtection.SP800_108;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
 // GCM is defined in NIST SP 800-38D (http://csrc.nist.gov/publications/nistpubs/800-38D/SP-800-38D.pdf).

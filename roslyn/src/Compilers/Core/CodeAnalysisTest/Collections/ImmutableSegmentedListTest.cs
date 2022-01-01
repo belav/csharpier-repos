@@ -1039,6 +1039,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             list.GetEnumerator(); // ensure this doesn't throw
         }
+
 #endif
 
         [Fact]

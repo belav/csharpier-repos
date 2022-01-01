@@ -5,13 +5,17 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal abstract class LanguageCharacteristics<TTokenizer> where TTokenizer : Tokenizer
 {
     public abstract string GetSample(SyntaxKind type);
+
     public abstract TTokenizer CreateTokenizer(ITextDocument source);
+
     public abstract SyntaxKind FlipBracket(SyntaxKind bracket);
+
     public abstract SyntaxToken CreateMarkerToken();
 
     public virtual IEnumerable<SyntaxToken> TokenizeString(string content)

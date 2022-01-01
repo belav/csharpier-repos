@@ -797,6 +797,7 @@ namespace System.Drawing
         {
             throw new PlatformNotSupportedException();
         }
+
 #endif
 
         private void CheckErrorStatus(int status)

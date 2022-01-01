@@ -6,6 +6,7 @@ using System.Buffers;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Http.Extensions;
 
 /// <summary>
@@ -212,6 +213,7 @@ public static class UriHelper
             request.QueryString
         );
     }
+
     /// <summary>
     /// Returns the relative URI.
     /// </summary>

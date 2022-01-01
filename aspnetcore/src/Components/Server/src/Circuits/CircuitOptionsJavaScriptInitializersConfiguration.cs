@@ -5,6 +5,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal class CircuitOptionsJavaScriptInitializersConfiguration : IConfigureOptions<CircuitOptions>

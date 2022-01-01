@@ -37,6 +37,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
         /// completion list.
         /// </summary>
         private readonly List<CacheEntry> _resultIdToCompletionList = new();
+
         #endregion
 
         /// <summary>

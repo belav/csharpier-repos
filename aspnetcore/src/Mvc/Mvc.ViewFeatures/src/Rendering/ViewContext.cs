@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
 /// <summary>
@@ -34,6 +35,7 @@ public class ViewContext : ActionContext
     {
         ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), ModelState);
     }
+
 #nullable enable
 
     /// <summary>

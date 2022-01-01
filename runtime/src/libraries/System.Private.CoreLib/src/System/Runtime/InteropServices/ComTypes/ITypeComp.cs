@@ -18,8 +18,10 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         [FieldOffset(0)]
         public IntPtr lpfuncdesc;
+
         [FieldOffset(0)]
         public IntPtr lpvardesc;
+
         [FieldOffset(0)]
         public IntPtr lptcomp;
     }

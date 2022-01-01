@@ -9,6 +9,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.StaticWebAssets;
 
 internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
@@ -318,6 +319,7 @@ internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
             Name = name;
             _source = source;
         }
+
         public bool Exists => _source.Exists;
 
         public long Length => _source.Length;

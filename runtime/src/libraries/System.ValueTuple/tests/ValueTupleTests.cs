@@ -3,8 +3,10 @@
 
 using System.Collections;
 using Xunit;
+
 #if NETCOREAPP
 using System.Runtime.CompilerServices;
+
 #endif
 
 namespace System.Tests

@@ -32,6 +32,7 @@ namespace System.IO.Compression
 
 #if DEBUG_FORCE_ZIP64
         public bool _forceZip64;
+
 #endif
 
         /// <summary>

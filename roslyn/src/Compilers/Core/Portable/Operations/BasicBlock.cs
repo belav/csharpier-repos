@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 #if DEBUG
         private bool _successorsAreSealed;
         private bool _predecessorsAreSealed;
+
 #endif
 
         private ControlFlowBranch? _lazySuccessor;

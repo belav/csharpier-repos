@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 internal static partial class HttpLoggingExtensions
@@ -15,6 +16,7 @@ internal static partial class HttpLoggingExtensions
             exception: null,
             formatter: HttpRequestLog.Callback
         );
+
     public static void ResponseLog(this ILogger logger, HttpResponseLog responseLog) =>
         logger.Log(
             LogLevel.Information,

@@ -49,6 +49,7 @@ namespace System.Runtime.Loader
 
         // Contains the reference to VM's representation of the AssemblyLoadContext
         private readonly IntPtr _nativeAssemblyLoadContext;
+
 #endregion
 
         // synchronization primitive to protect against usage of this instance while unloading
@@ -246,6 +247,7 @@ namespace System.Runtime.Loader
         [method: DynamicDependency(nameof(OnAssemblyResolve))]
 #endif
         internal static event ResolveEventHandler? AssemblyResolve;
+
 #endregion
 
         public static AssemblyLoadContext Default => DefaultAssemblyLoadContext.s_loadContext;
@@ -322,6 +324,7 @@ namespace System.Runtime.Loader
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return RuntimeAssembly.InternalLoad(assemblyName, ref stackMark, this);
         }
+
 #endif
 
         // These methods load assemblies into the current AssemblyLoadContext
@@ -823,6 +826,7 @@ namespace System.Runtime.Loader
 
             return null;
         }
+
 #endif // !CORERT
 
         [UnconditionalSuppressMessage(

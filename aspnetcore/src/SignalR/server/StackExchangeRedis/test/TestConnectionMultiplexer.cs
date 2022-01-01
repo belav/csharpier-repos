@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using StackExchange.Redis;
 using StackExchange.Redis.Profiling;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class TestConnectionMultiplexer : IConnectionMultiplexer

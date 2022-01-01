@@ -41,6 +41,7 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
+
         protected abstract bool TryMatchPattern(
             IConditionalOperation ifOperation,
             ISymbol containingSymbol

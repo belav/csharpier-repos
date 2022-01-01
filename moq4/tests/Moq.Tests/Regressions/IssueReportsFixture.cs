@@ -88,6 +88,7 @@ namespace Moq.Tests.Regressions
         public class Issue47ClassToMock
         {
             AutoResetEvent reset = new AutoResetEvent(false);
+
             public virtual void M1()
             {
                 //we're inside the interceptor's stack now
@@ -134,6 +135,7 @@ namespace Moq.Tests.Regressions
         public class Issue78TypeOne
         {
         }
+
         public class Issue78TypeTwo
         {
         }
@@ -540,10 +542,12 @@ namespace Moq.Tests.Regressions
                 public abstract class NoSerializableAttribute : ISerializable
                 {
                     protected NoSerializableAttribute() { }
+
                     protected NoSerializableAttribute(
                         SerializationInfo info,
                         StreamingContext context
                     ) { }
+
                     public void GetObjectData(SerializationInfo info, StreamingContext context) { }
                 }
 
@@ -557,10 +561,12 @@ namespace Moq.Tests.Regressions
                     : ISerializable
                 {
                     protected NoSerializableAttributeAndGetObjectDataNotVirtual() { }
+
                     protected NoSerializableAttributeAndGetObjectDataNotVirtual(
                         SerializationInfo info,
                         StreamingContext context
                     ) { }
+
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
@@ -571,10 +577,12 @@ namespace Moq.Tests.Regressions
                 public abstract class CorrectImplementation : ISerializable
                 {
                     protected CorrectImplementation() { }
+
                     protected CorrectImplementation(
                         SerializationInfo info,
                         StreamingContext context
                     ) { }
+
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
@@ -585,7 +593,9 @@ namespace Moq.Tests.Regressions
                 public abstract class NotISerializable
                 {
                     protected NotISerializable() { }
+
                     protected NotISerializable(SerializationInfo info, StreamingContext context) { }
+
                     public void GetObjectData(SerializationInfo info, StreamingContext context) { }
                 }
 
@@ -602,10 +612,12 @@ namespace Moq.Tests.Regressions
                 public abstract class NotISerializableAndGetObjectDataNotVirtual
                 {
                     protected NotISerializableAndGetObjectDataNotVirtual() { }
+
                     protected NotISerializableAndGetObjectDataNotVirtual(
                         SerializationInfo info,
                         StreamingContext context
                     ) { }
+
                     public virtual void GetObjectData(
                         SerializationInfo info,
                         StreamingContext context
@@ -625,14 +637,17 @@ namespace Moq.Tests.Regressions
                 public abstract class GetObjectDataNotVirtual : ISerializable
                 {
                     protected GetObjectDataNotVirtual() { }
+
                     protected GetObjectDataNotVirtual(
                         SerializationInfo info,
                         StreamingContext context
                     ) { }
+
                     public void GetObjectData(SerializationInfo info, StreamingContext context) { }
                 }
             }
         }
+
 #endif
 
 		#endregion
@@ -1059,6 +1074,7 @@ namespace Moq.Tests.Regressions
                 var i1 = Mock.Of<Interface1>(i => i.ABoolean == true);
                 Assert.True(i1.ABoolean);
             }
+
             [Fact]
             public void RedeclaredPropertyInDerivedInterfaceRetainsValueSetUpWithNewMockAndSetupReturns()
             {
@@ -1066,12 +1082,14 @@ namespace Moq.Tests.Regressions
                 i2.Setup(i => i.ABoolean).Returns(true);
                 Assert.True(i2.Object.ABoolean);
             }
+
             [Fact]
             public void RedeclaredPropertyInDerivedInterfaceRetainsValueSetUpWithMockOf()
             {
                 var i2 = Mock.Of<Interface2>(i => i.ABoolean == true);
                 Assert.True(i2.ABoolean);
             }
+
             [Fact]
             public void RedeclaredPropertyInDerivedInterfaceRetainsValueSetUpWitSetupAllPropertiesAndSetter()
             {
@@ -1085,6 +1103,7 @@ namespace Moq.Tests.Regressions
             {
                 bool ABoolean { get; }
             }
+
             public interface Interface2 : Interface1
             {
                 new bool ABoolean { get; set; }
@@ -1616,6 +1635,7 @@ namespace Moq.Tests.Regressions
             public class Foo
             {
                 public Foo() { }
+
                 protected Foo(SerializationInfo info, StreamingContext context) { }
             }
         }
@@ -1627,8 +1647,11 @@ namespace Moq.Tests.Regressions
         public class Issue343
         {
             public class Fruit { }
+
             public class Apple : Fruit { }
+
             public class GreenApple : Apple { }
+
             public class Orange : Fruit { }
 
             public interface IFruitPicker
@@ -1702,6 +1725,7 @@ namespace Moq.Tests.Regressions
                 var values = new Mock<IEnumerable>().Object;
                 mock.Setup(m => m.Bar(values));
             }
+
             public interface IFoo
             {
                 void Bar(IEnumerable values);
@@ -2047,6 +2071,7 @@ namespace Moq.Tests.Regressions
 
             public class MyEntity { }
         }
+
 #endif
 
 		#endregion
@@ -2168,6 +2193,7 @@ namespace Moq.Tests.Regressions
                 Assert.Equal("_", connection.ConnectionString);
             }
         }
+
 #endif
 
 		#endregion
@@ -2683,6 +2709,7 @@ namespace Moq.Tests.Regressions
             public abstract class MyAbstractClass
             {
                 protected abstract void ApplyRule(IDictionary<string, object> tokens);
+
                 protected abstract void ApplyRule(object obj);
 
                 public void InvokeApplyRule(IDictionary<string, object> tokens)
@@ -2839,6 +2866,7 @@ namespace Moq.Tests.Regressions
                 _ = mock.Object.Bar;
             }
         }
+
 		#endregion
 
 		#region 870
@@ -2920,6 +2948,7 @@ namespace Moq.Tests.Regressions
                 Assert.Null(mockedIndexResult());
             }
         }
+
 		#endregion
 
 		#region 883
@@ -3500,6 +3529,7 @@ namespace Moq.Tests.Regressions
                 IList<string> DoTata();
             }
         }
+
 		#endregion
 
 		#region 1031
@@ -3696,6 +3726,7 @@ namespace Moq.Tests.Regressions
 
                 mock.Verify();
             }
+
             public interface IClassA
             {
                 public IList<string> Items { get; set; }
@@ -4127,6 +4158,7 @@ namespace Moq.Tests.Regressions
             {
                 string Bar { get; set; }
             }
+
             public interface Foo : SuperFoo
             {
                 string Baz { get; set; }
@@ -4161,6 +4193,7 @@ namespace Moq.Tests.Regressions
             }
 
             public class DataA { }
+
             public class DataB { }
 
             [Fact]
@@ -4318,6 +4351,7 @@ namespace Moq.Tests.Regressions
             public class Foo : IFoo
             {
                 public long Id { get; set; }
+
                 public void SetIt(long it) { }
             }
 
@@ -4329,6 +4363,7 @@ namespace Moq.Tests.Regressions
             public class Baz
             {
                 private readonly IBar _bar;
+
                 public Baz(IBar bar)
                 {
                     _bar = bar;
@@ -4353,6 +4388,7 @@ namespace Moq.Tests.Regressions
                 Duplicated,
                 Invalid
             }
+
             public interface IMembershipService
             {
                 int MinPasswordLength { get; }
@@ -4540,6 +4576,7 @@ namespace Moq.Tests.Regressions
                 Assert.True(htmlInputTextMock.Object.Visible);
             }
         }
+
 #endif
 
 		#endregion

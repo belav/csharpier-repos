@@ -16,6 +16,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         > s_eventToInfoMap = new();
 
         private readonly bool _isUnsafe;
+
         private CodeGenerationEventInfo(bool isUnsafe) => _isUnsafe = isUnsafe;
 
         public static void Attach(IEventSymbol @event, bool isUnsafe)

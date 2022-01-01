@@ -9,6 +9,7 @@ namespace System
     public sealed partial class ApplicationIdentity : System.Runtime.Serialization.ISerializable
     {
         public ApplicationIdentity(string applicationIdentityFullName) { }
+
         public string CodeBase
         {
             get { throw null; }
@@ -17,16 +18,19 @@ namespace System
         {
             get { throw null; }
         }
+
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public override string ToString()
         {
             throw null;
         }
     }
 }
+
 namespace System.Configuration
 {
 #if NET5_0_OR_GREATER
@@ -41,32 +45,40 @@ namespace System.Configuration
           System.Security.Permissions.IUnrestrictedPermission
     {
         public ConfigurationPermission(System.Security.Permissions.PermissionState state) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -84,12 +96,14 @@ namespace System.Configuration
     {
         public ConfigurationPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Data.Common
 {
 #if NET5_0_OR_GREATER
@@ -104,55 +118,71 @@ namespace System.Data.Common
           System.Security.Permissions.IUnrestrictedPermission
     {
         protected DBDataPermission() { }
+
         protected DBDataPermission(System.Data.Common.DBDataPermission permission) { }
+
         protected DBDataPermission(System.Data.Common.DBDataPermissionAttribute permissionAttribute)
         { }
+
         protected DBDataPermission(System.Security.Permissions.PermissionState state) { }
+
         protected DBDataPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
         ) { }
+
         public bool AllowBlankPassword
         {
             get { throw null; }
             set { }
         }
+
         public virtual void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
         ) { }
+
         protected void Clear() { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         protected virtual System.Data.Common.DBDataPermission CreateInstance()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -174,6 +204,7 @@ namespace System.Data.Common
     {
         protected DBDataPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public bool AllowBlankPassword
         {
             get { throw null; }
@@ -194,6 +225,7 @@ namespace System.Data.Common
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -201,6 +233,7 @@ namespace System.Data.Common
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -210,6 +243,7 @@ namespace System.Data.Common
         }
     }
 }
+
 namespace System.Data.Odbc
 {
 #if NET5_0_OR_GREATER
@@ -222,21 +256,26 @@ namespace System.Data.Odbc
     public sealed partial class OdbcPermission : System.Data.Common.DBDataPermission
     {
         public OdbcPermission() { }
+
         public OdbcPermission(System.Security.Permissions.PermissionState state) { }
+
         public OdbcPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
         ) { }
+
         public override void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -258,12 +297,14 @@ namespace System.Data.Odbc
     {
         public OdbcPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Data.OleDb
 {
 #if NET5_0_OR_GREATER
@@ -276,11 +317,14 @@ namespace System.Data.OleDb
     public sealed partial class OleDbPermission : System.Data.Common.DBDataPermission
     {
         public OleDbPermission() { }
+
         public OleDbPermission(System.Security.Permissions.PermissionState state) { }
+
         public OleDbPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
         ) { }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -290,11 +334,13 @@ namespace System.Data.OleDb
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -316,6 +362,7 @@ namespace System.Data.OleDb
     {
         public OleDbPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -325,12 +372,14 @@ namespace System.Data.OleDb
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Data.OracleClient
 {
 #if NET5_0_OR_GREATER
@@ -345,42 +394,52 @@ namespace System.Data.OracleClient
           System.Security.Permissions.IUnrestrictedPermission
     {
         public OraclePermission(System.Security.Permissions.PermissionState state) { }
+
         public bool AllowBlankPassword
         {
             get { throw null; }
             set { }
         }
+
         public void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -402,6 +461,7 @@ namespace System.Data.OracleClient
     {
         public OraclePermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public bool AllowBlankPassword
         {
             get { throw null; }
@@ -422,10 +482,12 @@ namespace System.Data.OracleClient
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -433,6 +495,7 @@ namespace System.Data.OracleClient
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -442,6 +505,7 @@ namespace System.Data.OracleClient
         }
     }
 }
+
 namespace System.Data.SqlClient
 {
 #if NET5_0_OR_GREATER
@@ -454,21 +518,26 @@ namespace System.Data.SqlClient
     public sealed partial class SqlClientPermission : System.Data.Common.DBDataPermission
     {
         public SqlClientPermission() { }
+
         public SqlClientPermission(System.Security.Permissions.PermissionState state) { }
+
         public SqlClientPermission(
             System.Security.Permissions.PermissionState state,
             bool allowBlankPassword
         ) { }
+
         public override void Add(
             string connectionString,
             string restrictions,
             System.Data.KeyRestrictionBehavior behavior
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -490,12 +559,14 @@ namespace System.Data.SqlClient
     {
         public SqlClientPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Diagnostics
 {
 #if NET5_0_OR_GREATER
@@ -509,19 +580,24 @@ namespace System.Diagnostics
         : System.Security.Permissions.ResourcePermissionBase
     {
         public EventLogPermission() { }
+
         public EventLogPermission(
             System.Diagnostics.EventLogPermissionAccess permissionAccess,
             string machineName
         ) { }
+
         public EventLogPermission(
             System.Diagnostics.EventLogPermissionEntry[] permissionAccessEntries
         ) { }
+
         public EventLogPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Diagnostics.EventLogPermissionEntryCollection PermissionEntries
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum EventLogPermissionAccess
     {
@@ -532,6 +608,7 @@ namespace System.Diagnostics
         Write = 16,
         Administer = 48,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -554,6 +631,7 @@ namespace System.Diagnostics
     {
         public EventLogPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string MachineName
         {
             get { throw null; }
@@ -564,17 +642,20 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public partial class EventLogPermissionEntry
     {
         public EventLogPermissionEntry(
             System.Diagnostics.EventLogPermissionAccess permissionAccess,
             string machineName
         ) { }
+
         public string MachineName
         {
             get { throw null; }
@@ -584,36 +665,51 @@ namespace System.Diagnostics
             get { throw null; }
         }
     }
+
     public partial class EventLogPermissionEntryCollection : System.Collections.CollectionBase
     {
         internal EventLogPermissionEntryCollection() { }
+
         public System.Diagnostics.EventLogPermissionEntry this[int index]
         {
             get { throw null; }
             set { }
         }
+
         public int Add(System.Diagnostics.EventLogPermissionEntry value)
         {
             throw null;
         }
+
         public void AddRange(System.Diagnostics.EventLogPermissionEntryCollection value) { }
+
         public void AddRange(System.Diagnostics.EventLogPermissionEntry[] value) { }
+
         public bool Contains(System.Diagnostics.EventLogPermissionEntry value)
         {
             throw null;
         }
+
         public void CopyTo(System.Diagnostics.EventLogPermissionEntry[] array, int index) { }
+
         public int IndexOf(System.Diagnostics.EventLogPermissionEntry value)
         {
             throw null;
         }
+
         public void Insert(int index, System.Diagnostics.EventLogPermissionEntry value) { }
+
         protected override void OnClear() { }
+
         protected override void OnInsert(int index, object value) { }
+
         protected override void OnRemove(int index, object value) { }
+
         protected override void OnSet(int index, object oldValue, object newValue) { }
+
         public void Remove(System.Diagnostics.EventLogPermissionEntry value) { }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -625,20 +721,25 @@ namespace System.Diagnostics
         : System.Security.Permissions.ResourcePermissionBase
     {
         public PerformanceCounterPermission() { }
+
         public PerformanceCounterPermission(
             System.Diagnostics.PerformanceCounterPermissionAccess permissionAccess,
             string machineName,
             string categoryName
         ) { }
+
         public PerformanceCounterPermission(
             System.Diagnostics.PerformanceCounterPermissionEntry[] permissionAccessEntries
         ) { }
+
         public PerformanceCounterPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Diagnostics.PerformanceCounterPermissionEntryCollection PermissionEntries
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum PerformanceCounterPermissionAccess
     {
@@ -649,6 +750,7 @@ namespace System.Diagnostics
         Instrument = 3,
         Administer = 7,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -672,6 +774,7 @@ namespace System.Diagnostics
         public PerformanceCounterPermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string CategoryName
         {
             get { throw null; }
@@ -687,11 +790,13 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public partial class PerformanceCounterPermissionEntry
     {
         public PerformanceCounterPermissionEntry(
@@ -699,6 +804,7 @@ namespace System.Diagnostics
             string machineName,
             string categoryName
         ) { }
+
         public string CategoryName
         {
             get { throw null; }
@@ -712,46 +818,61 @@ namespace System.Diagnostics
             get { throw null; }
         }
     }
+
     public partial class PerformanceCounterPermissionEntryCollection
         : System.Collections.CollectionBase
     {
         internal PerformanceCounterPermissionEntryCollection() { }
+
         public System.Diagnostics.PerformanceCounterPermissionEntry this[int index]
         {
             get { throw null; }
             set { }
         }
+
         public int Add(System.Diagnostics.PerformanceCounterPermissionEntry value)
         {
             throw null;
         }
+
         public void AddRange(
             System.Diagnostics.PerformanceCounterPermissionEntryCollection value
         ) { }
+
         public void AddRange(System.Diagnostics.PerformanceCounterPermissionEntry[] value) { }
+
         public bool Contains(System.Diagnostics.PerformanceCounterPermissionEntry value)
         {
             throw null;
         }
+
         public void CopyTo(
             System.Diagnostics.PerformanceCounterPermissionEntry[] array,
             int index
         ) { }
+
         public int IndexOf(System.Diagnostics.PerformanceCounterPermissionEntry value)
         {
             throw null;
         }
+
         public void Insert(
             int index,
             System.Diagnostics.PerformanceCounterPermissionEntry value
         ) { }
+
         protected override void OnClear() { }
+
         protected override void OnInsert(int index, object value) { }
+
         protected override void OnRemove(int index, object value) { }
+
         protected override void OnSet(int index, object oldValue, object newValue) { }
+
         public void Remove(System.Diagnostics.PerformanceCounterPermissionEntry value) { }
     }
 }
+
 namespace System.Drawing.Printing
 {
 #if NET5_0_OR_GREATER
@@ -766,38 +887,48 @@ namespace System.Drawing.Printing
           System.Security.Permissions.IUnrestrictedPermission
     {
         public PrintingPermission(System.Drawing.Printing.PrintingPermissionLevel printingLevel) { }
+
         public PrintingPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Drawing.Printing.PrintingPermissionLevel Level
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement element) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -811,16 +942,19 @@ namespace System.Drawing.Printing
     {
         public PrintingPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Drawing.Printing.PrintingPermissionLevel Level
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public enum PrintingPermissionLevel
     {
         NoPrinting = 0,
@@ -829,6 +963,7 @@ namespace System.Drawing.Printing
         AllPrinting = 3,
     }
 }
+
 namespace System.Net
 {
 #if NET5_0_OR_GREATER
@@ -843,32 +978,40 @@ namespace System.Net
           System.Security.Permissions.IUnrestrictedPermission
     {
         public DnsPermission(System.Security.Permissions.PermissionState state) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -890,14 +1033,17 @@ namespace System.Net
     {
         public DnsPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public partial class EndpointPermission
     {
         internal EndpointPermission() { }
+
         public string Hostname
         {
             get { throw null; }
@@ -910,21 +1056,25 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public override bool Equals(object obj)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum NetworkAccess
     {
         Connect = 64,
         Accept = 128,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -937,13 +1087,16 @@ namespace System.Net
           System.Security.Permissions.IUnrestrictedPermission
     {
         public const int AllPorts = -1;
+
         public SocketPermission(
             System.Net.NetworkAccess access,
             System.Net.TransportType transport,
             string hostName,
             int portNumber
         ) { }
+
         public SocketPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Collections.IEnumerator AcceptList
         {
             get { throw null; }
@@ -952,38 +1105,47 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public void AddPermission(
             System.Net.NetworkAccess access,
             System.Net.TransportType transport,
             string hostName,
             int portNumber
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1005,6 +1167,7 @@ namespace System.Net
     {
         public SocketPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string Access
         {
             get { throw null; }
@@ -1025,11 +1188,13 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public enum TransportType
     {
         Connectionless = 1,
@@ -1038,6 +1203,7 @@ namespace System.Net
         Tcp = 2,
         All = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1050,12 +1216,16 @@ namespace System.Net
           System.Security.Permissions.IUnrestrictedPermission
     {
         public WebPermission() { }
+
         public WebPermission(System.Net.NetworkAccess access, string uriString) { }
+
         public WebPermission(
             System.Net.NetworkAccess access,
             System.Text.RegularExpressions.Regex uriRegex
         ) { }
+
         public WebPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Collections.IEnumerator AcceptList
         {
             get { throw null; }
@@ -1064,37 +1234,47 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public void AddPermission(System.Net.NetworkAccess access, string uriString) { }
+
         public void AddPermission(
             System.Net.NetworkAccess access,
             System.Text.RegularExpressions.Regex uriRegex
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1116,6 +1296,7 @@ namespace System.Net
     {
         public WebPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string Accept
         {
             get { throw null; }
@@ -1136,12 +1317,14 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Net.Mail
 {
     public enum SmtpAccess
@@ -1150,6 +1333,7 @@ namespace System.Net.Mail
         Connect = 1,
         ConnectToUnrestrictedPort = 2,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1162,39 +1346,51 @@ namespace System.Net.Mail
           System.Security.Permissions.IUnrestrictedPermission
     {
         public SmtpPermission(bool unrestricted) { }
+
         public SmtpPermission(System.Net.Mail.SmtpAccess access) { }
+
         public SmtpPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Net.Mail.SmtpAccess Access
         {
             get { throw null; }
         }
+
         public void AddPermission(System.Net.Mail.SmtpAccess access) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1216,17 +1412,20 @@ namespace System.Net.Mail
     {
         public SmtpPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string Access
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Net.NetworkInformation
 {
     [System.FlagsAttribute]
@@ -1236,6 +1435,7 @@ namespace System.Net.NetworkInformation
         Read = 1,
         Ping = 4,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1250,38 +1450,49 @@ namespace System.Net.NetworkInformation
         public NetworkInformationPermission(
             System.Net.NetworkInformation.NetworkInformationAccess access
         ) { }
+
         public NetworkInformationPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Net.NetworkInformation.NetworkInformationAccess Access
         {
             get { throw null; }
         }
+
         public void AddPermission(System.Net.NetworkInformation.NetworkInformationAccess access) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1304,17 +1515,20 @@ namespace System.Net.NetworkInformation
         public NetworkInformationPermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string Access
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Net.PeerToPeer
 {
 #if NET5_0_OR_GREATER
@@ -1329,32 +1543,40 @@ namespace System.Net.PeerToPeer
           System.Security.Permissions.IUnrestrictedPermission
     {
         public PnrpPermission(System.Security.Permissions.PermissionState state) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement e) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1376,11 +1598,13 @@ namespace System.Net.PeerToPeer
     {
         public PnrpPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public enum PnrpScope
     {
         All = 0,
@@ -1389,6 +1613,7 @@ namespace System.Net.PeerToPeer
         LinkLocal = 3,
     }
 }
+
 namespace System.Net.PeerToPeer.Collaboration
 {
 #if NET5_0_OR_GREATER
@@ -1403,32 +1628,40 @@ namespace System.Net.PeerToPeer.Collaboration
           System.Security.Permissions.IUnrestrictedPermission
     {
         public PeerCollaborationPermission(System.Security.Permissions.PermissionState state) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement e) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1451,12 +1684,14 @@ namespace System.Net.PeerToPeer.Collaboration
         public PeerCollaborationPermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Security
 {
 #if NET5_0_OR_GREATER
@@ -1472,38 +1707,56 @@ namespace System.Security
           System.Security.IStackWalk
     {
         protected CodeAccessPermission() { }
+
         public void Assert() { }
+
         public abstract System.Security.IPermission Copy();
+
         public void Demand() { }
+
         [System.ObsoleteAttribute]
         public void Deny() { }
+
         public override bool Equals(object obj)
         {
             throw null;
         }
+
         public abstract void FromXml(System.Security.SecurityElement elem);
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public abstract System.Security.IPermission Intersect(System.Security.IPermission target);
+
         public abstract bool IsSubsetOf(System.Security.IPermission target);
+
         public void PermitOnly() { }
+
         public static void RevertAll() { }
+
         public static void RevertAssert() { }
+
         [System.ObsoleteAttribute]
         public static void RevertDeny() { }
+
         public static void RevertPermitOnly() { }
+
         public override string ToString()
         {
             throw null;
         }
+
         public abstract System.Security.SecurityElement ToXml();
+
         public virtual System.Security.IPermission Union(System.Security.IPermission other)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1514,17 +1767,22 @@ namespace System.Security
     public partial class HostProtectionException : System.SystemException
     {
         public HostProtectionException() { }
+
         protected HostProtectionException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public HostProtectionException(string message) { }
+
         public HostProtectionException(string message, System.Exception e) { }
+
         public HostProtectionException(
             string message,
             System.Security.Permissions.HostProtectionResource protectedResources,
             System.Security.Permissions.HostProtectionResource demandedResources
         ) { }
+
         public System.Security.Permissions.HostProtectionResource DemandedResources
         {
             get { throw null; }
@@ -1533,14 +1791,17 @@ namespace System.Security
         {
             get { throw null; }
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public partial class HostSecurityManager
     {
         public HostSecurityManager() { }
+
         public virtual System.Security.Policy.PolicyLevel DomainPolicy
         {
             get { throw null; }
@@ -1549,6 +1810,7 @@ namespace System.Security
         {
             get { throw null; }
         }
+
         public virtual System.Security.Policy.ApplicationTrust DetermineApplicationTrust(
             System.Security.Policy.Evidence applicationEvidence,
             System.Security.Policy.Evidence activatorEvidence,
@@ -1557,12 +1819,14 @@ namespace System.Security
         {
             throw null;
         }
+
         public virtual System.Security.Policy.EvidenceBase GenerateAppDomainEvidence(
             System.Type evidenceType
         )
         {
             throw null;
         }
+
         public virtual System.Security.Policy.EvidenceBase GenerateAssemblyEvidence(
             System.Type evidenceType,
             System.Reflection.Assembly assembly
@@ -1570,22 +1834,26 @@ namespace System.Security
         {
             throw null;
         }
+
         public virtual System.Type[] GetHostSuppliedAppDomainEvidenceTypes()
         {
             throw null;
         }
+
         public virtual System.Type[] GetHostSuppliedAssemblyEvidenceTypes(
             System.Reflection.Assembly assembly
         )
         {
             throw null;
         }
+
         public virtual System.Security.Policy.Evidence ProvideAppDomainEvidence(
             System.Security.Policy.Evidence inputEvidence
         )
         {
             throw null;
         }
+
         public virtual System.Security.Policy.Evidence ProvideAssemblyEvidence(
             System.Reflection.Assembly loadedAssembly,
             System.Security.Policy.Evidence inputEvidence
@@ -1593,6 +1861,7 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public virtual System.Security.PermissionSet ResolvePolicy(
             System.Security.Policy.Evidence evidence
@@ -1601,6 +1870,7 @@ namespace System.Security
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum HostSecurityManagerOptions
     {
@@ -1612,15 +1882,18 @@ namespace System.Security
         HostResolvePolicy = 16,
         AllFlags = 31,
     }
+
     public partial interface IEvidenceFactory
     {
         System.Security.Policy.Evidence Evidence { get; }
     }
+
     public partial interface ISecurityPolicyEncodable
     {
         void FromXml(System.Security.SecurityElement e, System.Security.Policy.PolicyLevel level);
         System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level);
     }
+
 #if !NETCOREAPP
     public partial interface IStackWalk
     {
@@ -1629,6 +1902,7 @@ namespace System.Security
         void Deny();
         void PermitOnly();
     }
+
 #endif
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
@@ -1641,12 +1915,16 @@ namespace System.Security
     {
         public NamedPermissionSet(System.Security.NamedPermissionSet permSet)
             : base(default(System.Security.Permissions.PermissionState)) { }
+
         public NamedPermissionSet(string name)
             : base(default(System.Security.Permissions.PermissionState)) { }
+
         public NamedPermissionSet(string name, System.Security.Permissions.PermissionState state)
             : base(default(System.Security.Permissions.PermissionState)) { }
+
         public NamedPermissionSet(string name, System.Security.PermissionSet permSet)
             : base(default(System.Security.Permissions.PermissionState)) { }
+
         public string Description
         {
             get { throw null; }
@@ -1657,28 +1935,35 @@ namespace System.Security
             get { throw null; }
             set { }
         }
+
         public override System.Security.PermissionSet Copy()
         {
             throw null;
         }
+
         public System.Security.NamedPermissionSet Copy(string name)
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement et) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
     }
+
 #if !NETCOREAPP
     public partial class PermissionSet
         : System.Collections.ICollection,
@@ -1688,7 +1973,9 @@ namespace System.Security
           System.Security.IStackWalk
     {
         public PermissionSet(System.Security.Permissions.PermissionState state) { }
+
         public PermissionSet(System.Security.PermissionSet permSet) { }
+
         public virtual int Count
         {
             get { throw null; }
@@ -1705,111 +1992,142 @@ namespace System.Security
         {
             get { throw null; }
         }
+
         public System.Security.IPermission AddPermission(System.Security.IPermission perm)
         {
             throw null;
         }
+
         protected virtual System.Security.IPermission AddPermissionImpl(
             System.Security.IPermission perm
         )
         {
             throw null;
         }
+
         public void Assert() { }
+
         public bool ContainsNonCodeAccessPermissions()
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static byte[] ConvertPermissionSet(string inFormat, byte[] inData, string outFormat)
         {
             throw null;
         }
+
         public virtual System.Security.PermissionSet Copy()
         {
             throw null;
         }
+
         public virtual void CopyTo(System.Array array, int index) { }
+
         public void Demand() { }
+
         [System.ObsoleteAttribute]
         public void Deny() { }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public virtual void FromXml(System.Security.SecurityElement et) { }
+
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
+
         protected virtual System.Collections.IEnumerator GetEnumeratorImpl()
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public System.Security.IPermission GetPermission(System.Type permClass)
         {
             throw null;
         }
+
         protected virtual System.Security.IPermission GetPermissionImpl(System.Type permClass)
         {
             throw null;
         }
+
         public System.Security.PermissionSet Intersect(System.Security.PermissionSet other)
         {
             throw null;
         }
+
         public bool IsEmpty()
         {
             throw null;
         }
+
         public bool IsSubsetOf(System.Security.PermissionSet target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public void PermitOnly() { }
+
         public System.Security.IPermission RemovePermission(System.Type permClass)
         {
             throw null;
         }
+
         protected virtual System.Security.IPermission RemovePermissionImpl(System.Type permClass)
         {
             throw null;
         }
+
         public static void RevertAssert() { }
+
         public System.Security.IPermission SetPermission(System.Security.IPermission perm)
         {
             throw null;
         }
+
         protected virtual System.Security.IPermission SetPermissionImpl(
             System.Security.IPermission perm
         )
         {
             throw null;
         }
+
         void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
             object sender
         ) { }
+
         public override string ToString()
         {
             throw null;
         }
+
         public virtual System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.PermissionSet Union(System.Security.PermissionSet other)
         {
             throw null;
         }
     }
+
 #endif
     public enum PolicyLevelType
     {
@@ -1818,6 +2136,7 @@ namespace System.Security
         Enterprise = 2,
         AppDomain = 3,
     }
+
 #if NET6_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1828,43 +2147,54 @@ namespace System.Security
     public sealed partial class SecurityContext : System.IDisposable
     {
         internal SecurityContext() { }
+
         public static System.Security.SecurityContext Capture()
         {
             throw null;
         }
+
         public System.Security.SecurityContext CreateCopy()
         {
             throw null;
         }
+
         public void Dispose() { }
+
         public static bool IsFlowSuppressed()
         {
             throw null;
         }
+
         public static bool IsWindowsIdentityFlowSuppressed()
         {
             throw null;
         }
+
         public static void RestoreFlow() { }
+
         public static void Run(
             System.Security.SecurityContext securityContext,
             System.Threading.ContextCallback callback,
             object state
         ) { }
+
         public static System.Threading.AsyncFlowControl SuppressFlow()
         {
             throw null;
         }
+
         public static System.Threading.AsyncFlowControl SuppressFlowWindowsIdentity()
         {
             throw null;
         }
     }
+
     public enum SecurityContextSource
     {
         CurrentAppDomain = 0,
         CurrentAssembly = 1,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1880,22 +2210,26 @@ namespace System.Security
             get { throw null; }
             set { }
         }
+
         [System.ObsoleteAttribute]
         public static bool SecurityEnabled
         {
             get { throw null; }
             set { }
         }
+
         public static bool CurrentThreadRequiresSecurityContextCapture()
         {
             throw null;
         }
+
         public static System.Security.PermissionSet GetStandardSandbox(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public static void GetZoneAndOrigin(
             out System.Collections.ArrayList zone,
             out System.Collections.ArrayList origin
@@ -1903,11 +2237,13 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static bool IsGranted(System.Security.IPermission perm)
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Security.Policy.PolicyLevel LoadPolicyLevelFromFile(
             string path,
@@ -1916,6 +2252,7 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Security.Policy.PolicyLevel LoadPolicyLevelFromString(
             string str,
@@ -1924,11 +2261,13 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Collections.IEnumerator PolicyHierarchy()
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Security.PermissionSet ResolvePolicy(
             System.Security.Policy.Evidence evidence
@@ -1936,6 +2275,7 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Security.PermissionSet ResolvePolicy(
             System.Security.Policy.Evidence evidence,
@@ -1947,6 +2287,7 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Security.PermissionSet ResolvePolicy(
             System.Security.Policy.Evidence[] evidences
@@ -1954,6 +2295,7 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Collections.IEnumerator ResolvePolicyGroups(
             System.Security.Policy.Evidence evidence
@@ -1961,6 +2303,7 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static System.Security.PermissionSet ResolveSystemPolicy(
             System.Security.Policy.Evidence evidence
@@ -1968,20 +2311,26 @@ namespace System.Security
         {
             throw null;
         }
+
         [System.ObsoleteAttribute]
         public static void SavePolicy() { }
+
         [System.ObsoleteAttribute]
         public static void SavePolicyLevel(System.Security.Policy.PolicyLevel level) { }
     }
+
     public abstract partial class SecurityState
     {
         protected SecurityState() { }
+
         public abstract void EnsureState();
+
         public bool IsStateAvailable()
         {
             throw null;
         }
     }
+
     public enum SecurityZone
     {
         NoZone = -1,
@@ -1991,15 +2340,21 @@ namespace System.Security
         Internet = 3,
         Untrusted = 4,
     }
+
     public sealed partial class XmlSyntaxException : System.SystemException
     {
         public XmlSyntaxException() { }
+
         public XmlSyntaxException(int lineNumber) { }
+
         public XmlSyntaxException(int lineNumber, string message) { }
+
         public XmlSyntaxException(string message) { }
+
         public XmlSyntaxException(string message, System.Exception inner) { }
     }
 }
+
 namespace System.Security.Permissions
 {
 #if NET5_0_OR_GREATER
@@ -2016,38 +2371,48 @@ namespace System.Security.Permissions
         public DataProtectionPermission(
             System.Security.Permissions.DataProtectionPermissionFlags flag
         ) { }
+
         public DataProtectionPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Security.Permissions.DataProtectionPermissionFlags Flags
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2069,6 +2434,7 @@ namespace System.Security.Permissions
     {
         public DataProtectionPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.DataProtectionPermissionFlags Flags
         {
             get { throw null; }
@@ -2094,11 +2460,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2116,6 +2484,7 @@ namespace System.Security.Permissions
         UnprotectMemory = 8,
         AllFlags = 15,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2131,45 +2500,57 @@ namespace System.Security.Permissions
             System.Security.Permissions.EnvironmentPermissionAccess flag,
             string pathList
         ) { }
+
         public EnvironmentPermission(System.Security.Permissions.PermissionState state) { }
+
         public void AddPathList(
             System.Security.Permissions.EnvironmentPermissionAccess flag,
             string pathList
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public string GetPathList(System.Security.Permissions.EnvironmentPermissionAccess flag)
         {
             throw null;
         }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public void SetPathList(
             System.Security.Permissions.EnvironmentPermissionAccess flag,
             string pathList
         ) { }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission other)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2185,6 +2566,7 @@ namespace System.Security.Permissions
         Write = 2,
         AllAccess = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2206,6 +2588,7 @@ namespace System.Security.Permissions
     {
         public EnvironmentPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string All
         {
             get { throw null; }
@@ -2221,11 +2604,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2239,38 +2624,48 @@ namespace System.Security.Permissions
     {
         public FileDialogPermission(System.Security.Permissions.FileDialogPermissionAccess access)
         { }
+
         public FileDialogPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Security.Permissions.FileDialogPermissionAccess Access
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2286,6 +2681,7 @@ namespace System.Security.Permissions
         Save = 2,
         OpenSave = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2307,6 +2703,7 @@ namespace System.Security.Permissions
     {
         public FileDialogPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public bool Open
         {
             get { throw null; }
@@ -2317,11 +2714,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2338,20 +2737,25 @@ namespace System.Security.Permissions
             System.Security.AccessControl.AccessControlActions actions,
             string path
         ) { }
+
         public FileIOPermission(
             System.Security.Permissions.FileIOPermissionAccess access,
             System.Security.AccessControl.AccessControlActions actions,
             string[] pathList
         ) { }
+
         public FileIOPermission(
             System.Security.Permissions.FileIOPermissionAccess access,
             string path
         ) { }
+
         public FileIOPermission(
             System.Security.Permissions.FileIOPermissionAccess access,
             string[] pathList
         ) { }
+
         public FileIOPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Security.Permissions.FileIOPermissionAccess AllFiles
         {
             get { throw null; }
@@ -2362,60 +2766,75 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public void AddPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string path
         ) { }
+
         public void AddPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string[] pathList
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public string[] GetPathList(System.Security.Permissions.FileIOPermissionAccess access)
         {
             throw null;
         }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public void SetPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string path
         ) { }
+
         public void SetPathList(
             System.Security.Permissions.FileIOPermissionAccess access,
             string[] pathList
         ) { }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission other)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2433,6 +2852,7 @@ namespace System.Security.Permissions
         PathDiscovery = 8,
         AllAccess = 15,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2454,6 +2874,7 @@ namespace System.Security.Permissions
     {
         public FileIOPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         [System.ObsoleteAttribute]
         public string All
         {
@@ -2505,11 +2926,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2520,29 +2943,37 @@ namespace System.Security.Permissions
     public sealed partial class GacIdentityPermission : System.Security.CodeAccessPermission
     {
         public GacIdentityPermission() { }
+
         public GacIdentityPermission(System.Security.Permissions.PermissionState state) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2564,11 +2995,13 @@ namespace System.Security.Permissions
     {
         public GacIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2591,8 +3024,10 @@ namespace System.Security.Permissions
     {
         public HostProtectionAttribute() : base(default(System.Security.Permissions.SecurityAction))
         { }
+
         public HostProtectionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public bool ExternalProcessMgmt
         {
             get { throw null; }
@@ -2643,11 +3078,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2670,6 +3107,7 @@ namespace System.Security.Permissions
         MayLeakOnAbort = 256,
         All = 511,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2692,6 +3130,7 @@ namespace System.Security.Permissions
         AdministerIsolatedStorageByUser = 112,
         UnrestrictedIsolatedStorage = 240,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2704,27 +3143,33 @@ namespace System.Security.Permissions
     {
         public IsolatedStorageFilePermission(System.Security.Permissions.PermissionState state)
             : base(default(System.Security.Permissions.PermissionState)) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2747,11 +3192,13 @@ namespace System.Security.Permissions
         public IsolatedStorageFilePermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2764,6 +3211,7 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         protected IsolatedStoragePermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Security.Permissions.IsolatedStorageContainment UsageAllowed
         {
             get { throw null; }
@@ -2774,16 +3222,20 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2797,6 +3249,7 @@ namespace System.Security.Permissions
         protected IsolatedStoragePermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.IsolatedStorageContainment UsageAllowed
         {
             get { throw null; }
@@ -2808,6 +3261,7 @@ namespace System.Security.Permissions
             set { }
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2819,6 +3273,7 @@ namespace System.Security.Permissions
     {
         bool IsUnrestricted();
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2832,11 +3287,14 @@ namespace System.Security.Permissions
     {
         public KeyContainerPermission(System.Security.Permissions.KeyContainerPermissionFlags flags)
         { }
+
         public KeyContainerPermission(
             System.Security.Permissions.KeyContainerPermissionFlags flags,
             System.Security.Permissions.KeyContainerPermissionAccessEntry[] accessList
         ) { }
+
         public KeyContainerPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Security.Permissions.KeyContainerPermissionAccessEntryCollection AccessEntries
         {
             get { throw null; }
@@ -2845,32 +3303,40 @@ namespace System.Security.Permissions
         {
             get { throw null; }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2884,10 +3350,12 @@ namespace System.Security.Permissions
             System.Security.Cryptography.CspParameters parameters,
             System.Security.Permissions.KeyContainerPermissionFlags flags
         ) { }
+
         public KeyContainerPermissionAccessEntry(
             string keyContainerName,
             System.Security.Permissions.KeyContainerPermissionFlags flags
         ) { }
+
         public KeyContainerPermissionAccessEntry(
             string keyStore,
             string providerName,
@@ -2896,6 +3364,7 @@ namespace System.Security.Permissions
             int keySpec,
             System.Security.Permissions.KeyContainerPermissionFlags flags
         ) { }
+
         public System.Security.Permissions.KeyContainerPermissionFlags Flags
         {
             get { throw null; }
@@ -2926,15 +3395,18 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2947,6 +3419,7 @@ namespace System.Security.Permissions
           System.Collections.IEnumerable
     {
         public KeyContainerPermissionAccessEntryCollection() { }
+
         public int Count
         {
             get { throw null; }
@@ -2963,34 +3436,43 @@ namespace System.Security.Permissions
         {
             get { throw null; }
         }
+
         public int Add(System.Security.Permissions.KeyContainerPermissionAccessEntry accessEntry)
         {
             throw null;
         }
+
         public void Clear() { }
+
         public void CopyTo(System.Array array, int index) { }
+
         public void CopyTo(
             System.Security.Permissions.KeyContainerPermissionAccessEntry[] array,
             int index
         ) { }
+
         public System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator GetEnumerator()
         {
             throw null;
         }
+
         public int IndexOf(
             System.Security.Permissions.KeyContainerPermissionAccessEntry accessEntry
         )
         {
             throw null;
         }
+
         public void Remove(
             System.Security.Permissions.KeyContainerPermissionAccessEntry accessEntry
         ) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3002,6 +3484,7 @@ namespace System.Security.Permissions
         : System.Collections.IEnumerator
     {
         public KeyContainerPermissionAccessEntryEnumerator() { }
+
         public System.Security.Permissions.KeyContainerPermissionAccessEntry Current
         {
             get { throw null; }
@@ -3010,12 +3493,15 @@ namespace System.Security.Permissions
         {
             get { throw null; }
         }
+
         public bool MoveNext()
         {
             throw null;
         }
+
         public void Reset() { }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3037,6 +3523,7 @@ namespace System.Security.Permissions
     {
         public KeyContainerPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.KeyContainerPermissionFlags Flags
         {
             get { throw null; }
@@ -3067,11 +3554,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3093,6 +3582,7 @@ namespace System.Security.Permissions
         ChangeAcl = 8192,
         AllFlags = 13111,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3105,15 +3595,21 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public MediaPermission() { }
+
         public MediaPermission(System.Security.Permissions.MediaPermissionAudio permissionAudio) { }
+
         public MediaPermission(
             System.Security.Permissions.MediaPermissionAudio permissionAudio,
             System.Security.Permissions.MediaPermissionVideo permissionVideo,
             System.Security.Permissions.MediaPermissionImage permissionImage
         ) { }
+
         public MediaPermission(System.Security.Permissions.MediaPermissionImage permissionImage) { }
+
         public MediaPermission(System.Security.Permissions.MediaPermissionVideo permissionVideo) { }
+
         public MediaPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Security.Permissions.MediaPermissionAudio Audio
         {
             get { throw null; }
@@ -3126,32 +3622,40 @@ namespace System.Security.Permissions
         {
             get { throw null; }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3173,6 +3677,7 @@ namespace System.Security.Permissions
     {
         public MediaPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.MediaPermissionAudio Audio
         {
             get { throw null; }
@@ -3188,11 +3693,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3207,6 +3714,7 @@ namespace System.Security.Permissions
         SafeAudio = 2,
         AllAudio = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3221,6 +3729,7 @@ namespace System.Security.Permissions
         SafeImage = 2,
         AllImage = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3235,6 +3744,7 @@ namespace System.Security.Permissions
         SafeVideo = 2,
         AllVideo = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3256,6 +3766,7 @@ namespace System.Security.Permissions
     {
         public PermissionSetAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string File
         {
             get { throw null; }
@@ -3281,21 +3792,25 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
+
         public System.Security.PermissionSet CreatePermissionSet()
         {
             throw null;
         }
     }
+
 #if !NETCOREAPP
     public enum PermissionState
     {
         None = 0,
         Unrestricted = 1,
     }
+
 #endif
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
@@ -3310,47 +3825,61 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public PrincipalPermission(System.Security.Permissions.PermissionState state) { }
+
         public PrincipalPermission(string name, string role) { }
+
         public PrincipalPermission(string name, string role, bool isAuthenticated) { }
+
         public System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public void Demand() { }
+
         public override bool Equals(object obj)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement elem) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.IPermission Union(System.Security.IPermission other)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3376,6 +3905,7 @@ namespace System.Security.Permissions
 #endif
         public PrincipalPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public bool Authenticated
         {
             get { throw null; }
@@ -3391,11 +3921,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3408,34 +3940,43 @@ namespace System.Security.Permissions
         public PublisherIdentityPermission(
             System.Security.Cryptography.X509Certificates.X509Certificate certificate
         ) { }
+
         public PublisherIdentityPermission(System.Security.Permissions.PermissionState state) { }
+
         public System.Security.Cryptography.X509Certificates.X509Certificate Certificate
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3458,6 +3999,7 @@ namespace System.Security.Permissions
         public PublisherIdentityPermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string CertFile
         {
             get { throw null; }
@@ -3473,11 +4015,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3490,38 +4034,48 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public ReflectionPermission(System.Security.Permissions.PermissionState state) { }
+
         public ReflectionPermission(System.Security.Permissions.ReflectionPermissionFlag flag) { }
+
         public System.Security.Permissions.ReflectionPermissionFlag Flags
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission other)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3543,6 +4097,7 @@ namespace System.Security.Permissions
     {
         public ReflectionPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.ReflectionPermissionFlag Flags
         {
             get { throw null; }
@@ -3553,6 +4108,7 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         [System.ObsoleteAttribute]
         public bool ReflectionEmit
         {
@@ -3564,17 +4120,20 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         [System.ObsoleteAttribute]
         public bool TypeInformation
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3595,6 +4154,7 @@ namespace System.Security.Permissions
         AllFlags = 7,
         RestrictedMemberAccess = 8,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3607,58 +4167,72 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public RegistryPermission(System.Security.Permissions.PermissionState state) { }
+
         public RegistryPermission(
             System.Security.Permissions.RegistryPermissionAccess access,
             System.Security.AccessControl.AccessControlActions control,
             string pathList
         ) { }
+
         public RegistryPermission(
             System.Security.Permissions.RegistryPermissionAccess access,
             string pathList
         ) { }
+
         public void AddPathList(
             System.Security.Permissions.RegistryPermissionAccess access,
             System.Security.AccessControl.AccessControlActions actions,
             string pathList
         ) { }
+
         public void AddPathList(
             System.Security.Permissions.RegistryPermissionAccess access,
             string pathList
         ) { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement elem) { }
+
         public string GetPathList(System.Security.Permissions.RegistryPermissionAccess access)
         {
             throw null;
         }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public void SetPathList(
             System.Security.Permissions.RegistryPermissionAccess access,
             string pathList
         ) { }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission other)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3675,6 +4249,7 @@ namespace System.Security.Permissions
         Create = 4,
         AllAccess = 7,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3696,6 +4271,7 @@ namespace System.Security.Permissions
     {
         public RegistryPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         [System.ObsoleteAttribute]
         public string All
         {
@@ -3732,11 +4308,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3750,8 +4328,11 @@ namespace System.Security.Permissions
     {
         public const string Any = "*";
         public const string Local = ".";
+
         protected ResourcePermissionBase() { }
+
         protected ResourcePermissionBase(System.Security.Permissions.PermissionState state) { }
+
         protected System.Type PermissionAccessType
         {
             get { throw null; }
@@ -3762,43 +4343,55 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         protected void AddPermissionAccess(
             System.Security.Permissions.ResourcePermissionBaseEntry entry
         ) { }
+
         protected void Clear() { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         protected System.Security.Permissions.ResourcePermissionBaseEntry[] GetPermissionEntries()
         {
             throw null;
         }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         protected void RemovePermissionAccess(
             System.Security.Permissions.ResourcePermissionBaseEntry entry
         ) { }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3809,7 +4402,9 @@ namespace System.Security.Permissions
     public partial class ResourcePermissionBaseEntry
     {
         public ResourcePermissionBaseEntry() { }
+
         public ResourcePermissionBaseEntry(int permissionAccess, string[] permissionAccessPath) { }
+
         public int PermissionAccess
         {
             get { throw null; }
@@ -3819,6 +4414,7 @@ namespace System.Security.Permissions
             get { throw null; }
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3831,38 +4427,48 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public SecurityPermission(System.Security.Permissions.PermissionState state) { }
+
         public SecurityPermission(System.Security.Permissions.SecurityPermissionFlag flag) { }
+
         public System.Security.Permissions.SecurityPermissionFlag Flags
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3873,34 +4479,43 @@ namespace System.Security.Permissions
     public sealed partial class SiteIdentityPermission : System.Security.CodeAccessPermission
     {
         public SiteIdentityPermission(System.Security.Permissions.PermissionState state) { }
+
         public SiteIdentityPermission(string site) { }
+
         public string Site
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3922,16 +4537,19 @@ namespace System.Security.Permissions
     {
         public SiteIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string Site
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3944,38 +4562,48 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public StorePermission(System.Security.Permissions.PermissionState state) { }
+
         public StorePermission(System.Security.Permissions.StorePermissionFlags flag) { }
+
         public System.Security.Permissions.StorePermissionFlags Flags
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3997,6 +4625,7 @@ namespace System.Security.Permissions
     {
         public StorePermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public bool AddToStore
         {
             get { throw null; }
@@ -4037,11 +4666,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4062,6 +4693,7 @@ namespace System.Security.Permissions
         EnumerateCertificates = 128,
         AllFlags = 247,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4072,11 +4704,13 @@ namespace System.Security.Permissions
     public sealed partial class StrongNameIdentityPermission : System.Security.CodeAccessPermission
     {
         public StrongNameIdentityPermission(System.Security.Permissions.PermissionState state) { }
+
         public StrongNameIdentityPermission(
             System.Security.Permissions.StrongNamePublicKeyBlob blob,
             string name,
             System.Version version
         ) { }
+
         public string Name
         {
             get { throw null; }
@@ -4092,28 +4726,35 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement e) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4136,6 +4777,7 @@ namespace System.Security.Permissions
         public StrongNameIdentityPermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string Name
         {
             get { throw null; }
@@ -4151,11 +4793,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4166,19 +4810,23 @@ namespace System.Security.Permissions
     public sealed partial class StrongNamePublicKeyBlob
     {
         public StrongNamePublicKeyBlob(byte[] publicKey) { }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4191,40 +4839,50 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public TypeDescriptorPermission(System.Security.Permissions.PermissionState state) { }
+
         public TypeDescriptorPermission(
             System.Security.Permissions.TypeDescriptorPermissionFlags flag
         ) { }
+
         public System.Security.Permissions.TypeDescriptorPermissionFlags Flags
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4246,6 +4904,7 @@ namespace System.Security.Permissions
     {
         public TypeDescriptorPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.TypeDescriptorPermissionFlags Flags
         {
             get { throw null; }
@@ -4256,11 +4915,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4274,6 +4935,7 @@ namespace System.Security.Permissions
         NoFlags = 0,
         RestrictedRegistrationAccess = 1,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4286,12 +4948,16 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public UIPermission(System.Security.Permissions.PermissionState state) { }
+
         public UIPermission(System.Security.Permissions.UIPermissionClipboard clipboardFlag) { }
+
         public UIPermission(System.Security.Permissions.UIPermissionWindow windowFlag) { }
+
         public UIPermission(
             System.Security.Permissions.UIPermissionWindow windowFlag,
             System.Security.Permissions.UIPermissionClipboard clipboardFlag
         ) { }
+
         public System.Security.Permissions.UIPermissionClipboard Clipboard
         {
             get { throw null; }
@@ -4302,32 +4968,40 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4349,6 +5023,7 @@ namespace System.Security.Permissions
     {
         public UIPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.UIPermissionClipboard Clipboard
         {
             get { throw null; }
@@ -4359,11 +5034,13 @@ namespace System.Security.Permissions
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4377,6 +5054,7 @@ namespace System.Security.Permissions
         OwnClipboard = 1,
         AllClipboard = 2,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4391,6 +5069,7 @@ namespace System.Security.Permissions
         SafeTopLevelWindows = 2,
         AllWindows = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4401,34 +5080,43 @@ namespace System.Security.Permissions
     public sealed partial class UrlIdentityPermission : System.Security.CodeAccessPermission
     {
         public UrlIdentityPermission(System.Security.Permissions.PermissionState state) { }
+
         public UrlIdentityPermission(string site) { }
+
         public string Url
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4450,16 +5138,19 @@ namespace System.Security.Permissions
     {
         public UrlIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string Url
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4472,41 +5163,52 @@ namespace System.Security.Permissions
           System.Security.Permissions.IUnrestrictedPermission
     {
         public WebBrowserPermission() { }
+
         public WebBrowserPermission(System.Security.Permissions.PermissionState state) { }
+
         public WebBrowserPermission(
             System.Security.Permissions.WebBrowserPermissionLevel webBrowserPermissionLevel
         ) { }
+
         public System.Security.Permissions.WebBrowserPermissionLevel Level
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4528,16 +5230,19 @@ namespace System.Security.Permissions
     {
         public WebBrowserPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.Permissions.WebBrowserPermissionLevel Level
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4551,6 +5256,7 @@ namespace System.Security.Permissions
         Safe = 1,
         Unrestricted = 2,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4561,34 +5267,43 @@ namespace System.Security.Permissions
     public sealed partial class ZoneIdentityPermission : System.Security.CodeAccessPermission
     {
         public ZoneIdentityPermission(System.Security.Permissions.PermissionState state) { }
+
         public ZoneIdentityPermission(System.Security.SecurityZone zone) { }
+
         public System.Security.SecurityZone SecurityZone
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement esd) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4610,17 +5325,20 @@ namespace System.Security.Permissions
     {
         public ZoneIdentityPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Security.SecurityZone Zone
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Security.Policy
 {
     public sealed partial class AllMembershipCondition
@@ -4629,110 +5347,138 @@ namespace System.Security.Policy
           System.Security.Policy.IMembershipCondition
     {
         public AllMembershipCondition() { }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
     public sealed partial class ApplicationDirectory : System.Security.Policy.EvidenceBase
     {
         public ApplicationDirectory(string name) { }
+
         public string Directory
         {
             get { throw null; }
         }
+
         public object Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class ApplicationDirectoryMembershipCondition
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable,
           System.Security.Policy.IMembershipCondition
     {
         public ApplicationDirectoryMembershipCondition() { }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
     public sealed partial class ApplicationTrust
         : System.Security.Policy.EvidenceBase,
           System.Security.ISecurityEncodable
     {
         public ApplicationTrust() { }
+
         public ApplicationTrust(System.ApplicationIdentity identity) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -4744,6 +5490,7 @@ namespace System.Security.Policy
             System.Security.PermissionSet defaultGrantSet,
             System.Collections.Generic.IEnumerable<System.Security.Policy.StrongName> fullTrustAssemblies
         ) { }
+
         public System.ApplicationIdentity ApplicationIdentity
         {
             get { throw null; }
@@ -4759,6 +5506,7 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -4780,17 +5528,21 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
         public void FromXml(System.Security.SecurityElement element) { }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
     }
+
     public sealed partial class ApplicationTrustCollection
         : System.Collections.ICollection,
           System.Collections.IEnumerable
     {
         internal ApplicationTrustCollection() { }
+
         public int Count
         {
             get { throw null; }
@@ -4811,14 +5563,20 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public int Add(System.Security.Policy.ApplicationTrust trust)
         {
             throw null;
         }
+
         public void AddRange(System.Security.Policy.ApplicationTrustCollection trusts) { }
+
         public void AddRange(System.Security.Policy.ApplicationTrust[] trusts) { }
+
         public void Clear() { }
+
         public void CopyTo(System.Security.Policy.ApplicationTrust[] array, int index) { }
+
         public System.Security.Policy.ApplicationTrustCollection Find(
             System.ApplicationIdentity applicationIdentity,
             System.Security.Policy.ApplicationVersionMatch versionMatch
@@ -4826,26 +5584,35 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
         public System.Security.Policy.ApplicationTrustEnumerator GetEnumerator()
         {
             throw null;
         }
+
         public void Remove(
             System.ApplicationIdentity applicationIdentity,
             System.Security.Policy.ApplicationVersionMatch versionMatch
         ) { }
+
         public void Remove(System.Security.Policy.ApplicationTrust trust) { }
+
         public void RemoveRange(System.Security.Policy.ApplicationTrustCollection trusts) { }
+
         public void RemoveRange(System.Security.Policy.ApplicationTrust[] trusts) { }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
     }
+
     public sealed partial class ApplicationTrustEnumerator : System.Collections.IEnumerator
     {
         internal ApplicationTrustEnumerator() { }
+
         public System.Security.Policy.ApplicationTrust Current
         {
             get { throw null; }
@@ -4854,24 +5621,30 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public bool MoveNext()
         {
             throw null;
         }
+
         public void Reset() { }
     }
+
     public enum ApplicationVersionMatch
     {
         MatchExactVersion = 0,
         MatchAllVersions = 1,
     }
+
     public partial class CodeConnectAccess
     {
         public static readonly string AnyScheme;
         public static readonly int DefaultPort;
         public static readonly int OriginPort;
         public static readonly string OriginScheme;
+
         public CodeConnectAccess(string allowScheme, int allowPort) { }
+
         public int Port
         {
             get { throw null; }
@@ -4880,31 +5653,37 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public static System.Security.Policy.CodeConnectAccess CreateAnySchemeAccess(int allowPort)
         {
             throw null;
         }
+
         public static System.Security.Policy.CodeConnectAccess CreateOriginSchemeAccess(
             int allowPort
         )
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
     }
+
     public abstract partial class CodeGroup
     {
         protected CodeGroup(
             System.Security.Policy.IMembershipCondition membershipCondition,
             System.Security.Policy.PolicyStatement policy
         ) { }
+
         public virtual string AttributeString
         {
             get { throw null; }
@@ -4939,49 +5718,64 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
         public void AddChild(System.Security.Policy.CodeGroup group) { }
+
         public abstract System.Security.Policy.CodeGroup Copy();
+
         protected virtual void CreateXml(
             System.Security.SecurityElement element,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public bool Equals(System.Security.Policy.CodeGroup cg, bool compareChildren)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         protected virtual void ParseXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public void RemoveChild(System.Security.Policy.CodeGroup group) { }
+
         public abstract System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
         );
+
         public abstract System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
         );
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4999,6 +5793,7 @@ namespace System.Security.Policy
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
             ) { }
+
         public override string AttributeString
         {
             get { throw null; }
@@ -5011,32 +5806,39 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public override System.Security.Policy.CodeGroup Copy()
         {
             throw null;
         }
+
         protected override void CreateXml(
             System.Security.SecurityElement element,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         protected override void ParseXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
         )
@@ -5044,6 +5846,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
     [System.ObsoleteAttribute(
         "This type is obsolete. See https://go.microsoft.com/fwlink/?LinkID=155570 for more information."
     )]
@@ -5057,20 +5860,24 @@ namespace System.Security.Policy
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
             ) { }
+
         public override string MergeLogic
         {
             get { throw null; }
         }
+
         public override System.Security.Policy.CodeGroup Copy()
         {
             throw null;
         }
+
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
         )
@@ -5078,6 +5885,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5090,74 +5898,91 @@ namespace System.Security.Policy
           System.Security.Policy.IIdentityPermissionFactory
     {
         public GacInstalled() { }
+
         public object Copy()
         {
             throw null;
         }
+
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class GacMembershipCondition
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable,
           System.Security.Policy.IMembershipCondition
     {
         public GacMembershipCondition() { }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
     public sealed partial class Hash
         : System.Security.Policy.EvidenceBase,
           System.Runtime.Serialization.ISerializable
     {
         public Hash(System.Reflection.Assembly assembly) { }
+
         public byte[] MD5
         {
             get { throw null; }
@@ -5170,31 +5995,38 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public static System.Security.Policy.Hash CreateMD5(byte[] md5)
         {
             throw null;
         }
+
         public static System.Security.Policy.Hash CreateSHA1(byte[] sha1)
         {
             throw null;
         }
+
         public static System.Security.Policy.Hash CreateSHA256(byte[] sha256)
         {
             throw null;
         }
+
         public byte[] GenerateHash(System.Security.Cryptography.HashAlgorithm hashAlg)
         {
             throw null;
         }
+
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class HashMembershipCondition
         : System.Runtime.Serialization.IDeserializationCallback,
           System.Runtime.Serialization.ISerializable,
@@ -5206,6 +6038,7 @@ namespace System.Security.Policy
             System.Security.Cryptography.HashAlgorithm hashAlg,
             byte[] value
         ) { }
+
         public System.Security.Cryptography.HashAlgorithm HashAlgorithm
         {
             get { throw null; }
@@ -5216,47 +6049,59 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(
             object sender
         ) { }
+
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5270,6 +6115,7 @@ namespace System.Security.Policy
             System.Security.Policy.Evidence evidence
         );
     }
+
     public partial interface IMembershipCondition
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable
@@ -5279,15 +6125,18 @@ namespace System.Security.Policy
         bool Equals(object obj);
         string ToString();
     }
+
     public sealed partial class NetCodeGroup : System.Security.Policy.CodeGroup
     {
         public static readonly string AbsentOriginScheme;
         public static readonly string AnyOtherOriginScheme;
+
         public NetCodeGroup(System.Security.Policy.IMembershipCondition membershipCondition)
             : base(
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
             ) { }
+
         public override string AttributeString
         {
             get { throw null; }
@@ -5300,41 +6149,51 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public void AddConnectAccess(
             string originScheme,
             System.Security.Policy.CodeConnectAccess connectAccess
         ) { }
+
         public override System.Security.Policy.CodeGroup Copy()
         {
             throw null;
         }
+
         protected override void CreateXml(
             System.Security.SecurityElement element,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public System.Collections.DictionaryEntry[] GetConnectAccessRules()
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         protected override void ParseXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public void ResetConnectAccess() { }
+
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
         )
@@ -5342,6 +6201,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
     [System.ObsoleteAttribute(
         "This type is obsolete. See https://go.microsoft.com/fwlink/?LinkID=155570 for more information."
     )]
@@ -5352,6 +6212,7 @@ namespace System.Security.Policy
             System.Security.PermissionSet optional,
             System.Security.PermissionSet denied
         ) { }
+
         public System.Security.PermissionSet DeniedPermissions
         {
             get { throw null; }
@@ -5364,28 +6225,36 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public System.Security.Policy.PermissionRequestEvidence Copy()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public partial class PolicyException : System.SystemException
     {
         public PolicyException() { }
+
         protected PolicyException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public PolicyException(string message) { }
+
         public PolicyException(string message, System.Exception exception) { }
     }
+
     public sealed partial class PolicyLevel
     {
         internal PolicyLevel() { }
+
         [System.ObsoleteAttribute]
         public System.Collections.IList FullTrustAssemblies
         {
@@ -5412,12 +6281,15 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute]
         public void AddFullTrustAssembly(System.Security.Policy.StrongName sn) { }
+
         [System.ObsoleteAttribute]
         public void AddFullTrustAssembly(
             System.Security.Policy.StrongNameMembershipCondition snMC
         ) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5426,6 +6298,7 @@ namespace System.Security.Policy
         )]
 #endif
         public void AddNamedPermissionSet(System.Security.NamedPermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5440,6 +6313,7 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
         [System.ObsoleteAttribute(
             "AppDomain policy levels are obsolete. See https://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
@@ -5447,7 +6321,9 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5459,13 +6335,17 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
         public void Recover() { }
+
         [System.ObsoleteAttribute]
         public void RemoveFullTrustAssembly(System.Security.Policy.StrongName sn) { }
+
         [System.ObsoleteAttribute]
         public void RemoveFullTrustAssembly(
             System.Security.Policy.StrongNameMembershipCondition snMC
         ) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5479,6 +6359,7 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5490,24 +6371,29 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
         public void Reset() { }
+
         public System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
     }
+
     public sealed partial class PolicyStatement
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable
@@ -5520,6 +6406,7 @@ namespace System.Security.Policy
         )]
 #endif
         public PolicyStatement(System.Security.PermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5531,6 +6418,7 @@ namespace System.Security.Policy
             System.Security.PermissionSet permSet,
             System.Security.Policy.PolicyStatementAttribute attributes
         ) { }
+
         public System.Security.Policy.PolicyStatementAttribute Attributes
         {
             get { throw null; }
@@ -5540,6 +6428,7 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5552,32 +6441,40 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
         public System.Security.Policy.PolicyStatement Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement et) { }
+
         public void FromXml(
             System.Security.SecurityElement et,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum PolicyStatementAttribute
     {
@@ -5586,6 +6483,7 @@ namespace System.Security.Policy
         LevelFinal = 2,
         All = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5598,33 +6496,40 @@ namespace System.Security.Policy
           System.Security.Policy.IIdentityPermissionFactory
     {
         public Publisher(System.Security.Cryptography.X509Certificates.X509Certificate cert) { }
+
         public System.Security.Cryptography.X509Certificates.X509Certificate Certificate
         {
             get { throw null; }
         }
+
         public object Copy()
         {
             throw null;
         }
+
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class PublisherMembershipCondition
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable,
@@ -5633,45 +6538,56 @@ namespace System.Security.Policy
         public PublisherMembershipCondition(
             System.Security.Cryptography.X509Certificates.X509Certificate certificate
         ) { }
+
         public System.Security.Cryptography.X509Certificates.X509Certificate Certificate
         {
             get { throw null; }
             set { }
         }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5684,82 +6600,101 @@ namespace System.Security.Policy
           System.Security.Policy.IIdentityPermissionFactory
     {
         public Site(string name) { }
+
         public string Name
         {
             get { throw null; }
         }
+
         public object Copy()
         {
             throw null;
         }
+
         public static System.Security.Policy.Site CreateFromUrl(string url)
         {
             throw null;
         }
+
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class SiteMembershipCondition
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable,
           System.Security.Policy.IMembershipCondition
     {
         public SiteMembershipCondition(string site) { }
+
         public string Site
         {
             get { throw null; }
             set { }
         }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5776,6 +6711,7 @@ namespace System.Security.Policy
             string name,
             System.Version version
         ) { }
+
         public string Name
         {
             get { throw null; }
@@ -5788,29 +6724,35 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
         public object Copy()
         {
             throw null;
         }
+
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5828,6 +6770,7 @@ namespace System.Security.Policy
             string name,
             System.Version version
         ) { }
+
         public string Name
         {
             get { throw null; }
@@ -5843,44 +6786,56 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
     public partial class TrustManagerContext
     {
         public TrustManagerContext() { }
+
         public TrustManagerContext(System.Security.Policy.TrustManagerUIContext uiContext) { }
+
         public virtual bool IgnorePersistedDecision
         {
             get { throw null; }
@@ -5912,12 +6867,14 @@ namespace System.Security.Policy
             set { }
         }
     }
+
     public enum TrustManagerUIContext
     {
         Install = 0,
         Upgrade = 1,
         Run = 2,
     }
+
     [System.ObsoleteAttribute(
         "This type is obsolete. See https://go.microsoft.com/fwlink/?LinkID=155570 for more information."
     )]
@@ -5931,20 +6888,24 @@ namespace System.Security.Policy
                 default(System.Security.Policy.IMembershipCondition),
                 default(System.Security.Policy.PolicyStatement)
             ) { }
+
         public override string MergeLogic
         {
             get { throw null; }
         }
+
         public override System.Security.Policy.CodeGroup Copy()
         {
             throw null;
         }
+
         public override System.Security.Policy.PolicyStatement Resolve(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override System.Security.Policy.CodeGroup ResolveMatchingCodeGroups(
             System.Security.Policy.Evidence evidence
         )
@@ -5952,6 +6913,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5964,78 +6926,96 @@ namespace System.Security.Policy
           System.Security.Policy.IIdentityPermissionFactory
     {
         public Url(string name) { }
+
         public string Value
         {
             get { throw null; }
         }
+
         public object Copy()
         {
             throw null;
         }
+
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class UrlMembershipCondition
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable,
           System.Security.Policy.IMembershipCondition
     {
         public UrlMembershipCondition(string url) { }
+
         public string Url
         {
             get { throw null; }
             set { }
         }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object obj)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6048,83 +7028,102 @@ namespace System.Security.Policy
           System.Security.Policy.IIdentityPermissionFactory
     {
         public Zone(System.Security.SecurityZone zone) { }
+
         public System.Security.SecurityZone SecurityZone
         {
             get { throw null; }
         }
+
         public object Copy()
         {
             throw null;
         }
+
         public static System.Security.Policy.Zone CreateFromUrl(string url)
         {
             throw null;
         }
+
         public System.Security.IPermission CreateIdentityPermission(
             System.Security.Policy.Evidence evidence
         )
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class ZoneMembershipCondition
         : System.Security.ISecurityEncodable,
           System.Security.ISecurityPolicyEncodable,
           System.Security.Policy.IMembershipCondition
     {
         public ZoneMembershipCondition(System.Security.SecurityZone zone) { }
+
         public System.Security.SecurityZone SecurityZone
         {
             get { throw null; }
             set { }
         }
+
         public bool Check(System.Security.Policy.Evidence evidence)
         {
             throw null;
         }
+
         public System.Security.Policy.IMembershipCondition Copy()
         {
             throw null;
         }
+
         public override bool Equals(object o)
         {
             throw null;
         }
+
         public void FromXml(System.Security.SecurityElement e) { }
+
         public void FromXml(
             System.Security.SecurityElement e,
             System.Security.Policy.PolicyLevel level
         ) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level)
         {
             throw null;
         }
     }
 }
+
 namespace System.ServiceProcess
 {
 #if NET5_0_OR_GREATER
@@ -6138,20 +7137,25 @@ namespace System.ServiceProcess
         : System.Security.Permissions.ResourcePermissionBase
     {
         public ServiceControllerPermission() { }
+
         public ServiceControllerPermission(System.Security.Permissions.PermissionState state) { }
+
         public ServiceControllerPermission(
             System.ServiceProcess.ServiceControllerPermissionAccess permissionAccess,
             string machineName,
             string serviceName
         ) { }
+
         public ServiceControllerPermission(
             System.ServiceProcess.ServiceControllerPermissionEntry[] permissionAccessEntries
         ) { }
+
         public System.ServiceProcess.ServiceControllerPermissionEntryCollection PermissionEntries
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum ServiceControllerPermissionAccess
     {
@@ -6159,6 +7163,7 @@ namespace System.ServiceProcess
         Browse = 2,
         Control = 6,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6182,6 +7187,7 @@ namespace System.ServiceProcess
         public ServiceControllerPermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public string MachineName
         {
             get { throw null; }
@@ -6197,19 +7203,23 @@ namespace System.ServiceProcess
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public partial class ServiceControllerPermissionEntry
     {
         public ServiceControllerPermissionEntry() { }
+
         public ServiceControllerPermissionEntry(
             System.ServiceProcess.ServiceControllerPermissionAccess permissionAccess,
             string machineName,
             string serviceName
         ) { }
+
         public string MachineName
         {
             get { throw null; }
@@ -6223,46 +7233,61 @@ namespace System.ServiceProcess
             get { throw null; }
         }
     }
+
     public sealed partial class ServiceControllerPermissionEntryCollection
         : System.Collections.CollectionBase
     {
         internal ServiceControllerPermissionEntryCollection() { }
+
         public System.ServiceProcess.ServiceControllerPermissionEntry this[int index]
         {
             get { throw null; }
             set { }
         }
+
         public int Add(System.ServiceProcess.ServiceControllerPermissionEntry value)
         {
             throw null;
         }
+
         public void AddRange(
             System.ServiceProcess.ServiceControllerPermissionEntryCollection value
         ) { }
+
         public void AddRange(System.ServiceProcess.ServiceControllerPermissionEntry[] value) { }
+
         public bool Contains(System.ServiceProcess.ServiceControllerPermissionEntry value)
         {
             throw null;
         }
+
         public void CopyTo(
             System.ServiceProcess.ServiceControllerPermissionEntry[] array,
             int index
         ) { }
+
         public int IndexOf(System.ServiceProcess.ServiceControllerPermissionEntry value)
         {
             throw null;
         }
+
         public void Insert(
             int index,
             System.ServiceProcess.ServiceControllerPermissionEntry value
         ) { }
+
         protected override void OnClear() { }
+
         protected override void OnInsert(int index, object value) { }
+
         protected override void OnRemove(int index, object value) { }
+
         protected override void OnSet(int index, object oldValue, object newValue) { }
+
         public void Remove(System.ServiceProcess.ServiceControllerPermissionEntry value) { }
     }
 }
+
 namespace System.Transactions
 {
 #if NET5_0_OR_GREATER
@@ -6278,32 +7303,40 @@ namespace System.Transactions
     {
         public DistributedTransactionPermission(System.Security.Permissions.PermissionState state)
         { }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6318,17 +7351,20 @@ namespace System.Transactions
         public DistributedTransactionPermissionAttribute(
             System.Security.Permissions.SecurityAction action
         ) : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public new bool Unrestricted
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
 }
+
 namespace System.Web
 {
 #if NET5_0_OR_GREATER
@@ -6343,38 +7379,48 @@ namespace System.Web
           System.Security.Permissions.IUnrestrictedPermission
     {
         public AspNetHostingPermission(System.Security.Permissions.PermissionState state) { }
+
         public AspNetHostingPermission(System.Web.AspNetHostingPermissionLevel level) { }
+
         public System.Web.AspNetHostingPermissionLevel Level
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement securityElement) { }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission target)
         {
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6392,16 +7438,19 @@ namespace System.Web
     {
         public AspNetHostingPermissionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
+
         public System.Web.AspNetHostingPermissionLevel Level
         {
             get { throw null; }
             set { }
         }
+
         public override System.Security.IPermission CreatePermission()
         {
             throw null;
         }
     }
+
     public enum AspNetHostingPermissionLevel
     {
         None = 100,

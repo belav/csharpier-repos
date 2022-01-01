@@ -68,6 +68,7 @@ namespace PInvokeTests
             c = num;
             i = num;
         }
+
         public ExplStruct(DialogResult t, double dnum)
         {
             type = t;
@@ -75,6 +76,7 @@ namespace PInvokeTests
             i = 0;
             c = dnum;
         }
+
         public ExplStruct(DialogResult t, bool bnum)
         {
             type = t;
@@ -97,6 +99,7 @@ namespace PInvokeTests
         OK = 1,
         Cancel = 2
     }
+
     #endregion
 
     class StructureTests
@@ -140,6 +143,7 @@ namespace PInvokeTests
 
         [DllImport("SimpleStructNative")]
         private static extern void Invalid(AutoStruct s);
+
         [DllImport("SimpleStructNative")]
         private static extern AutoStruct InvalidReturn();
 

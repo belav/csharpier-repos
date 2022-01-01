@@ -118,6 +118,7 @@ namespace System.Net.Http.Internal
         {
             return _innerStream.EndRead(asyncResult);
         }
+
 #endif
 
         public override int ReadByte()
@@ -171,6 +172,7 @@ namespace System.Net.Http.Internal
         {
             _innerStream.EndWrite(asyncResult);
         }
+
 #endif
 
         public override void WriteByte(byte value)

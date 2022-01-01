@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
+
 namespace Microsoft.Extensions.Configuration.UserSecrets.Tests;
 
 public class UserSecretsTestFixture : IDisposable

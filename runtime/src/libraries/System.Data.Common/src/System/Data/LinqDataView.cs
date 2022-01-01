@@ -218,6 +218,7 @@ namespace System.Data
                 return base.GetDataRowViewFromRange(range);
             }
         }
+
         #endregion
 
 

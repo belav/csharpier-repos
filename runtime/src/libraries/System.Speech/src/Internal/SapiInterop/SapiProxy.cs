@@ -21,6 +21,7 @@ namespace System.Speech.Internal.SapiInterop
         #region Internal Methods
 
         internal abstract object Invoke(ObjectDelegate pfn);
+
         internal abstract void Invoke2(VoidDelegate pfn);
 
         #endregion
@@ -81,6 +82,7 @@ namespace System.Speech.Internal.SapiInterop
             {
                 Dispose(false);
             }
+
             public override void Dispose()
             {
                 try

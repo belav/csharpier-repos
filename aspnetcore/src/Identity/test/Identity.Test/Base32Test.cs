@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class Base32Test

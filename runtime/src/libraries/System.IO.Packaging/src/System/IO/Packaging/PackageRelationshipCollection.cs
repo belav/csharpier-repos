@@ -41,6 +41,7 @@ namespace System.IO.Packaging
             else
                 return new FilteredEnumerator(relationshipsEnumerator, _filter);
         }
+
         #endregion
 
         #region Internal Members

@@ -171,6 +171,7 @@ namespace System.Diagnostics.Tests
             Assert.True(PerformanceCounterCategory.Exists(categoryName));
             PerformanceCounterCategory.Delete(categoryName);
         }
+
 #pragma warning restore 0618
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteToPerfCounters))]

@@ -18,6 +18,7 @@ namespace System.Runtime.Serialization
         )]
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         object Deserialize(Stream serializationStream);
+
         [Obsolete(
             Obsoletions.BinaryFormatterMessage,
             DiagnosticId = Obsoletions.BinaryFormatterDiagId,

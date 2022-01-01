@@ -30,6 +30,7 @@ using System.Text;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -56,6 +57,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty(IsReference = true)]
             public Employee Manager { get; set; }
         }
+
         #endregion
 
         [Test]

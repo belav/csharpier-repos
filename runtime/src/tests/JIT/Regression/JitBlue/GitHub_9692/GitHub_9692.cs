@@ -40,6 +40,7 @@ namespace N
             }
             return false;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void CallSomeMethod(int n = 0) { }
 
@@ -350,6 +351,7 @@ namespace N
                 throw new Exception("Twenty-One");
             }
         }
+
         static bool InnerInfiniteLoop(int n, int j, int k, int l)
         {
             CallSomeMethod();

@@ -284,6 +284,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 },
             };
         }
+
         public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
             new Dictionary<Type, Func<object, object>>
             {

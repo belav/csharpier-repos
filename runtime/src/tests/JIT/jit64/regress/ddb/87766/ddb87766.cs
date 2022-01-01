@@ -30,6 +30,7 @@ public class VInline
         return i;
     }
 }
+
 public class VIMain
 {
     public static int Main()

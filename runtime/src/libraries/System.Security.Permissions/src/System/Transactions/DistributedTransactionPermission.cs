@@ -18,21 +18,28 @@ namespace System.Transactions
           IUnrestrictedPermission
     {
         public DistributedTransactionPermission(PermissionState state) { }
+
         public override IPermission Copy()
         {
             return null;
         }
+
         public override void FromXml(SecurityElement securityElement) { }
+
         public override IPermission Intersect(IPermission target)
         {
             return null;
         }
+
         public override bool IsSubsetOf(IPermission target) => false;
+
         public bool IsUnrestricted() => false;
+
         public override SecurityElement ToXml()
         {
             return null;
         }
+
         public override IPermission Union(IPermission target)
         {
             return null;

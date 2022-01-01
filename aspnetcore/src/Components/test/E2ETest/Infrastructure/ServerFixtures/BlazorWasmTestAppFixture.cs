@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using DevHostServerProgram = Microsoft.AspNetCore.Components.WebAssembly.DevServer.Server.Program;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
 public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture

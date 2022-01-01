@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.Net.Http.Headers;
 
+
 namespace CodeGenerator;
 
 public static class Http2Connection

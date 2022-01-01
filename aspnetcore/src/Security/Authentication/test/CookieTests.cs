@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
 public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions>

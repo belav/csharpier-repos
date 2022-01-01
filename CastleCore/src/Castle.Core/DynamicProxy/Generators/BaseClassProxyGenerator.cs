@@ -39,6 +39,7 @@ namespace Castle.DynamicProxy.Generators
 
 #if FEATURE_SERIALIZATION
         protected abstract SerializableContributor GetSerializableContributor();
+
 #endif
 
         protected abstract CompositeTypeContributor GetProxyTargetContributor(

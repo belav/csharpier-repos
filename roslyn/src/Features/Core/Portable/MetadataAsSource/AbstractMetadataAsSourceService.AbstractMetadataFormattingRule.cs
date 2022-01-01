@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 SyntaxToken token1,
                 SyntaxToken token2
             );
+
             protected abstract bool IsNewLine(char c);
 
             public override AdjustNewLinesOperation GetAdjustNewLinesOperation(

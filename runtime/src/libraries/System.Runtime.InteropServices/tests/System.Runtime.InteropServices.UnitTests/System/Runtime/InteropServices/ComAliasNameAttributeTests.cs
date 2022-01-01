@@ -12,6 +12,7 @@ namespace System.Runtime.InteropServices.Tests
 #pragma warning disable 0169
         [ComAliasName("foo")]
         private int _foo;
+
 #pragma warning restore 0169
 
         [Fact]

@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Cryptography;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 internal static class AlgorithmAssert

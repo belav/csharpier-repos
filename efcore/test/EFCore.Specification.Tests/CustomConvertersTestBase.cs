@@ -1675,6 +1675,7 @@ namespace Microsoft.EntityFrameworkCore
                     return dictionary;
                 }
             }
+
             private static class LayoutsToStringSerializer
             {
                 public static string Serialize(List<Layout> layouts)

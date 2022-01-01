@@ -395,6 +395,7 @@ namespace System.Runtime.CompilerServices
             sig = args;
             return supported;
         }
+
 #endif
 
         [UnconditionalSuppressMessage(

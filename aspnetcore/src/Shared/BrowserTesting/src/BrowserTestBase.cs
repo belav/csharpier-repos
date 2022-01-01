@@ -13,6 +13,7 @@ using PlaywrightSharp;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.BrowserTesting;
 
 public class BrowserTestBase : LoggedTest, IAsyncLifetime

@@ -60,8 +60,10 @@ namespace Benchstone.MDBenchF
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 4000;
+
 #endif
 
         private const double MaxErr = 1.0e-6;

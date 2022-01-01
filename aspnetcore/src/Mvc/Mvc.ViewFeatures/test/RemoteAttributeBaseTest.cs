@@ -16,6 +16,7 @@ using Moq;
 using Xunit;
 using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Test.Resources;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public class RemoteAttributeBaseTest

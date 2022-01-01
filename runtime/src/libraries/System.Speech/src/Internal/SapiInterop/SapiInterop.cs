@@ -105,42 +105,53 @@ namespace System.Speech.Internal.SapiInterop
             uint cbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pData
         );
+
         [PreserveSig]
         new int GetData(
             [MarshalAs(UnmanagedType.LPWStr)] string pszValueName,
             ref uint pcbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] pData
         );
+
         [PreserveSig]
         new int SetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string pszValueName,
             [MarshalAs(UnmanagedType.LPWStr)] string pszValue
         );
+
         [PreserveSig]
         new int GetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string pszValueName,
             [MarshalAs(UnmanagedType.LPWStr)] out string ppszValue
         );
+
         [PreserveSig]
         new int SetDWORD([MarshalAs(UnmanagedType.LPWStr)] string pszValueName, uint dwValue);
+
         [PreserveSig]
         new int GetDWORD([MarshalAs(UnmanagedType.LPWStr)] string pszValueName, ref uint pdwValue);
+
         [PreserveSig]
         new int OpenKey(
             [MarshalAs(UnmanagedType.LPWStr)] string pszSubKeyName,
             out ISpDataKey ppSubKey
         );
+
         [PreserveSig]
         new int CreateKey(
             [MarshalAs(UnmanagedType.LPWStr)] string pszSubKey,
             out ISpDataKey ppSubKey
         );
+
         [PreserveSig]
         new int DeleteKey([MarshalAs(UnmanagedType.LPWStr)] string pszSubKey);
+
         [PreserveSig]
         new int DeleteValue([MarshalAs(UnmanagedType.LPWStr)] string pszValueName);
+
         [PreserveSig]
         new int EnumKeys(uint Index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszSubKeyName);
+
         [PreserveSig]
         new int EnumValues(uint Index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszValueName);
 
@@ -174,6 +185,7 @@ namespace System.Speech.Internal.SapiInterop
     {
         [PreserveSig]
         int SetObjectToken(ISpObjectToken pToken);
+
         [PreserveSig]
         int GetObjectToken(out ISpObjectToken ppToken);
     };
@@ -192,36 +204,47 @@ namespace System.Speech.Internal.SapiInterop
             uint cbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data
         );
+
         [PreserveSig]
         int GetData(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             ref uint pcbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data
         );
+
         [PreserveSig]
         int SetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.LPWStr)] string value
         );
+
         [PreserveSig]
         int GetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.LPWStr)] out string value
         );
+
         [PreserveSig]
         int SetDWORD([MarshalAs(UnmanagedType.LPWStr)] string valueName, uint dwValue);
+
         [PreserveSig]
         int GetDWORD([MarshalAs(UnmanagedType.LPWStr)] string valueName, ref uint pdwValue);
+
         [PreserveSig]
         int OpenKey([MarshalAs(UnmanagedType.LPWStr)] string subKeyName, out ISpDataKey ppSubKey);
+
         [PreserveSig]
         int CreateKey([MarshalAs(UnmanagedType.LPWStr)] string subKey, out ISpDataKey ppSubKey);
+
         [PreserveSig]
         int DeleteKey([MarshalAs(UnmanagedType.LPWStr)] string subKey);
+
         [PreserveSig]
         int DeleteValue([MarshalAs(UnmanagedType.LPWStr)] string valueName);
+
         [PreserveSig]
         int EnumKeys(uint index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszSubKeyName);
+
         [PreserveSig]
         int EnumValues(uint index, [MarshalAs(UnmanagedType.LPWStr)] out string valueName);
     }
@@ -240,39 +263,50 @@ namespace System.Speech.Internal.SapiInterop
             uint cbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data
         );
+
         [PreserveSig]
         new int GetData(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             ref uint pcbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data
         );
+
         [PreserveSig]
         new int SetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.LPWStr)] string value
         );
+
         [PreserveSig]
         new int GetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string pszValueName,
             [MarshalAs(UnmanagedType.LPWStr)] out string ppszValue
         );
+
         [PreserveSig]
         new int SetDWORD([MarshalAs(UnmanagedType.LPWStr)] string valueName, uint dwValue);
+
         [PreserveSig]
         new int GetDWORD([MarshalAs(UnmanagedType.LPWStr)] string pszValueName, ref uint pdwValue);
+
         [PreserveSig]
         new int OpenKey(
             [MarshalAs(UnmanagedType.LPWStr)] string pszSubKeyName,
             out ISpDataKey ppSubKey
         );
+
         [PreserveSig]
         new int CreateKey([MarshalAs(UnmanagedType.LPWStr)] string subKey, out ISpDataKey ppSubKey);
+
         [PreserveSig]
         new int DeleteKey([MarshalAs(UnmanagedType.LPWStr)] string subKey);
+
         [PreserveSig]
         new int DeleteValue([MarshalAs(UnmanagedType.LPWStr)] string valueName);
+
         [PreserveSig]
         new int EnumKeys(uint index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszSubKeyName);
+
         [PreserveSig]
         new int EnumValues(uint Index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszValueName);
 
@@ -295,39 +329,50 @@ namespace System.Speech.Internal.SapiInterop
             uint cbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data
         );
+
         [PreserveSig]
         new int GetData(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             ref uint pcbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data
         );
+
         [PreserveSig]
         new int SetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.LPWStr)] string value
         );
+
         [PreserveSig]
         new void GetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string pszValueName,
             [MarshalAs(UnmanagedType.LPWStr)] out string ppszValue
         );
+
         [PreserveSig]
         new int SetDWORD([MarshalAs(UnmanagedType.LPWStr)] string valueName, uint dwValue);
+
         [PreserveSig]
         new int GetDWORD([MarshalAs(UnmanagedType.LPWStr)] string pszValueName, ref uint pdwValue);
+
         [PreserveSig]
         new int OpenKey(
             [MarshalAs(UnmanagedType.LPWStr)] string pszSubKeyName,
             out ISpDataKey ppSubKey
         );
+
         [PreserveSig]
         new int CreateKey([MarshalAs(UnmanagedType.LPWStr)] string subKey, out ISpDataKey ppSubKey);
+
         [PreserveSig]
         new int DeleteKey([MarshalAs(UnmanagedType.LPWStr)] string subKey);
+
         [PreserveSig]
         new int DeleteValue([MarshalAs(UnmanagedType.LPWStr)] string valueName);
+
         [PreserveSig]
         new int EnumKeys(uint index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszSubKeyName);
+
         [PreserveSig]
         new int EnumValues(uint Index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszValueName);
 

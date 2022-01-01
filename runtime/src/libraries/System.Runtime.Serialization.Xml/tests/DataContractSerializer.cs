@@ -34,6 +34,7 @@ public static partial class DataContractSerializerTests
         Assert.True(method != null, $"No method named {SerializationOptionSetterName}");
         method.Invoke(null, new object[] { 1 });
     }
+
 #endif
     [Fact]
     [ActiveIssue(
@@ -2208,6 +2209,7 @@ public static partial class DataContractSerializerTests
             return PrivateProperty;
         }
     }
+
 #endregion
 
     [Fact]
@@ -4209,6 +4211,7 @@ public static partial class DataContractSerializerTests
         MemberInfo[] mi4 = t2.GetMember("Items");
         Assert.Equal("/xg0:Line/xg0:Items", GenerateaAndGetXPath(t2, mi4));
     }
+
     static string GenerateaAndGetXPath(Type t, MemberInfo[] mi)
     {
         // Create a new name table and name space manager.
@@ -7113,6 +7116,7 @@ public static partial class DataContractSerializerTests
 
     private static string s_errorMsg =
         "The field/property {0} value of deserialized object is wrong";
+
     private static string getCheckFailureMsg(string propertyName)
     {
         return string.Format(s_errorMsg, propertyName);

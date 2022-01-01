@@ -61,6 +61,7 @@ namespace BasicEventSourceTests
             );
             return (string)getResourceString.Invoke(null, new object[] { key });
         }
+
         #endregion
 
         /// <summary>

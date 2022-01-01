@@ -146,6 +146,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             }
 
             protected abstract Task DoWorkerAsync(IOleUndoManager pUndoManager);
+
             public abstract void GetDescription(out string pBstr);
 
             public void Do(IOleUndoManager pUndoManager)

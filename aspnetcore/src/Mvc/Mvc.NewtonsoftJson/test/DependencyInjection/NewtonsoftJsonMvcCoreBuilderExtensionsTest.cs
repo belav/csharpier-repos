@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public class NewtonsoftJsonMvcCoreBuilderExtensionsTest

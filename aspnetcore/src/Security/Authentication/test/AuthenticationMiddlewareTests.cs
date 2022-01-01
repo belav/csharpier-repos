@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 public class AuthenticationMiddlewareTests

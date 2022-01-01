@@ -12,8 +12,10 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 #if TARGET_BROWSER
 using HttpHandlerType = System.Net.Http.BrowserHttpHandler;
+
 #else
 using HttpHandlerType = System.Net.Http.SocketsHttpHandler;
+
 #endif
 
 namespace System.Net.Http
@@ -25,9 +27,11 @@ namespace System.Net.Http
         private HttpMessageHandler Handler
 #if TARGET_BROWSER
         { get; }
+
 #else
             =>
             _underlyingHandler;
+
 #endif
 
         private ClientCertificateOption _clientCertificateOptions;
@@ -372,6 +376,7 @@ namespace System.Net.Http
             SslPolicyErrors,
             bool
         >? s_dangerousAcceptAnyServerCertificateValidator;
+
         [UnsupportedOSPlatform("browser")]
         public static Func<
             HttpRequestMessage,

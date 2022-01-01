@@ -3,6 +3,7 @@
 
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 internal class StartupSymbols

@@ -233,6 +233,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
 #if DEBUG
         internal static int TokensLexed;
+
 #endif
 
         public SyntaxToken Lex(LexerMode mode)
@@ -1064,6 +1065,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 AddError(info.Code, info.Arguments);
             }
         }
+
 #nullable disable
 
         private bool ScanInteger()

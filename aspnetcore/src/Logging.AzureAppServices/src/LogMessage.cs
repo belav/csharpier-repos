@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
 internal readonly struct LogMessage

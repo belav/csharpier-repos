@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public class MvcDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner

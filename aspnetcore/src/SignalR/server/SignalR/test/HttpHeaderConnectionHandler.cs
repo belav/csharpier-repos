@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class HttpHeaderConnectionHandler : ConnectionHandler

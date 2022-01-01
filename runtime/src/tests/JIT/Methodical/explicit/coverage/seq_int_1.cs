@@ -38,6 +38,7 @@ internal struct AA
     {
         return arg;
     }
+
     public static int call_target_ref(ref int arg)
     {
         return arg;

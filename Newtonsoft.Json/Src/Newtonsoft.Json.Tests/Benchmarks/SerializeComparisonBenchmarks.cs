@@ -130,6 +130,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
             return ser.Serialize(value);
         }
+
 #endif
 
         [Benchmark]
@@ -204,6 +205,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
             return o.ToString(Formatting.None);
         }
+
 #endregion
 
         [Benchmark]
@@ -267,6 +269,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             writer.Flush();
             return sw.ToString();
         }
+
 #endregion
 
         [Benchmark]

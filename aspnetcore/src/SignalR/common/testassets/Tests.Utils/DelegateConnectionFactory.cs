@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class DelegateConnectionFactory : IConnectionFactory

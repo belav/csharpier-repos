@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Components.Server;
 
 // We use a middleware so that we can use DI.

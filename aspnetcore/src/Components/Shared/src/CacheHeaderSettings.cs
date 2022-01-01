@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.StaticFiles;
 
 internal static class CacheHeaderSettings

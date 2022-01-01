@@ -9,6 +9,7 @@ namespace Test
     class AA
     {
         float m_fField1 = 426.19f;
+
         static float Method1(ref object[] param1, int param2, ref bool[] param3, double[] param4)
         {
             while (param2 > (int)param4[2])
@@ -21,6 +22,7 @@ namespace Test
             }
             return 0.0f;
         }
+
         static int Main()
         {
             try

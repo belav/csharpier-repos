@@ -149,7 +149,9 @@ namespace Microsoft.VisualBasic.Tests
         private sealed class Class
         {
             public int Value;
+
             public int Method(int x, int y) => x + y;
+
             public int P
             {
                 get { return Value; }

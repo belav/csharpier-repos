@@ -16,6 +16,7 @@ namespace System.Drawing.Internal
 
 #if GDI_FINALIZATION_WATCH
         private string AllocationSite = DbgUtil.StackTrace;
+
 #endif
 
         private WindowsRegion() { }

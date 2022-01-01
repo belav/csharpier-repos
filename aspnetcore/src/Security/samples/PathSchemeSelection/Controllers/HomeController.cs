@@ -6,6 +6,7 @@ using AuthSamples.PathSchemeSelection.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace AuthSamples.PathSchemeSelection.Controllers;
 
 public class HomeController : Controller

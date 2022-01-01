@@ -6,8 +6,10 @@ using System.Runtime.InteropServices;
 
 #if REGISTRY_ASSEMBLY
 using Microsoft.Win32.SafeHandles;
+
 #else
 using Internal.Win32.SafeHandles;
+
 #endif
 
 internal static partial class Interop

@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class NoopUserStore : IUserStore<PocoUser>

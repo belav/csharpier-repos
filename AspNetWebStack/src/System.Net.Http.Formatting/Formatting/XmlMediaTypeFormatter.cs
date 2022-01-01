@@ -134,6 +134,7 @@ namespace System.Net.Http.Formatting
                 _readerQuotas.MaxDepth = value;
             }
         }
+
 #endif
 
         /// <summary>

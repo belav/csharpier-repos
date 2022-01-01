@@ -28,6 +28,7 @@ public delegate void ValueReferenceParameterVoidDelegate(int val1, object val2);
 public delegate void ReferenceValueParameterVoidDelegate(object val1, int val2);
 
 public delegate object ReferenceValueParameterReferenceDelegate(object val1, int val2);
+
 #endregion
 
 public class DelegateDefinitions
@@ -36,6 +37,7 @@ public class DelegateDefinitions
     public const int c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER = 1;
     public const int c_DELEGATE_TEST_ADDITIONAL_VALUE_PARAMETER = 2;
     public const string c_DELEGATE_TEST_DEFAUTL_REFERENCE_PARAMETER = "abcdefg";
+
     #endregion
 
     #region Public Properties
@@ -121,6 +123,7 @@ public class DelegateDefinitions
     {
         get { return m_VoidParameterVoidDelegateTestValue; }
     }
+
     #endregion
 
     #region Private Properties
@@ -139,11 +142,13 @@ public class DelegateDefinitions
     private ReferenceValueParameterReferenceDelegate m_ReferenceValueParameterReferenceDelegate;
 
     private int m_VoidParameterVoidDelegateTestValue = c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
+
     #endregion
 
     #region Public Static Properties
     public static int VoidParameterVoidDelegateStaticTestValue =
         c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
+
     #endregion
 
     #region Public Static Methods
@@ -215,6 +220,7 @@ public class DelegateDefinitions
 
         return c_DELEGATE_TEST_DEFAUTL_REFERENCE_PARAMETER;
     }
+
     #endregion
 
     #region Public Methods
@@ -372,6 +378,7 @@ public class DelegateDefinitions
 
         return c_DELEGATE_TEST_DEFAUTL_REFERENCE_PARAMETER;
     }
+
     #endregion
 
     #region Nagative Test Callback Methods

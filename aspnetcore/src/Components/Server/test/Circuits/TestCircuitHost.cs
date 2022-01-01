@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal class TestCircuitHost : CircuitHost

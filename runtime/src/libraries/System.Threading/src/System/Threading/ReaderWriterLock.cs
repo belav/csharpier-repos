@@ -1294,22 +1294,30 @@ namespace System.Threading
         {
             // Reader increment
             public const int Reader = 0x1;
+
             // Max number of readers
             public const int ReadersMask = 0x3ff;
+
             // Reader event is or is about to be signaled
             public const int ReaderSignaled = 0x400;
+
             // Writer event is or is about to be signaled
             public const int WriterSignaled = 0x800;
             public const int Writer = 0x1000;
+
             // Waiting reader increment
             public const int WaitingReader = 0x2000;
+
             // Max number of waiting readers (maximum count must be less than or equal to the maximum count of readers)
             public const int WaitingReadersMask = 0x7FE000;
             public const int WaitingReadersShift = 13;
+
             // Waiting writer increment
             public const int WaitingWriter = 0x800000;
+
             // Max number of waiting writers
             public const int WaitingWritersMask = unchecked((int)0xFF800000);
+
             // Events are being cached (for all intents and purposes, "cached" means "disposed of"). New acquire requests cannot
             // become waiters during this time since they need the events for waiting. Once events are disposed of and the
             // state is changed, new to-be-waiters can recreate the events they need.
@@ -1340,6 +1348,7 @@ namespace System.Threading
             }
 
             public bool HasLockID(long lockID) => _lockID == lockID;
+
             public bool IsFree => _readerLevel == 0;
 
             [Conditional("DEBUG")]

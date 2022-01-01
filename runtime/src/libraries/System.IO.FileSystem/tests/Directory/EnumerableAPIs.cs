@@ -49,6 +49,7 @@ namespace System.IO.Tests
             return Directory.EnumerateFiles(path, searchPattern, option).ToArray();
         }
     }
+
     #endregion
 
     #region EnumerateFileSystemEntries

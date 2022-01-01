@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
+
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]

@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Connections;
 
+
 namespace SignalRSamples;
 
 internal class ConnectionList : IReadOnlyCollection<ConnectionContext>

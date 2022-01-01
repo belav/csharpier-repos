@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 internal class StartupAnalysisBuilder

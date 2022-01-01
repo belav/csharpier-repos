@@ -9,12 +9,15 @@ namespace System.Web.Helpers.AntiXsrf.Test
     public abstract class MockableTokenValidator : ITokenValidator
     {
         public abstract object GenerateCookieToken();
+
         public abstract object GenerateFormToken(
             HttpContextBase httpContext,
             IIdentity identity,
             object cookieToken
         );
+
         public abstract bool IsCookieTokenValid(object cookieToken);
+
         public abstract void ValidateTokens(
             HttpContextBase httpContext,
             IIdentity identity,

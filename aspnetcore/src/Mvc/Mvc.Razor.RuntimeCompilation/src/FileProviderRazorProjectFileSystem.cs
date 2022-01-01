@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal sealed class FileProviderRazorProjectFileSystem : RazorProjectFileSystem

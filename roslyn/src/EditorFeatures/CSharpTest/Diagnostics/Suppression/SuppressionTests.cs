@@ -1119,6 +1119,7 @@ class Class
                 );
             }
         }
+
         #endregion
 
         #region "SuppressMessageAttribute tests"

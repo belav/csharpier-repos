@@ -8,6 +8,7 @@ using System.Threading;
 using Microsoft.AspNetCore.HttpSys.Internal;
 using static Microsoft.AspNetCore.HttpSys.Internal.HttpApiTypes;
 
+
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal static unsafe class HttpApi
@@ -351,8 +352,10 @@ internal static unsafe class HttpApi
 
     internal static SafeLibraryHandle? HttpApiModule { get; private set; }
     internal static HttpSetRequestPropertyInvoker? HttpSetRequestProperty { get; private set; }
+
     [MemberNotNullWhen(true, nameof(HttpSetRequestProperty))]
     internal static bool SupportsTrailers { get; private set; }
+
     [MemberNotNullWhen(true, nameof(HttpSetRequestProperty))]
     internal static bool SupportsReset { get; private set; }
     internal static bool SupportsDelegation { get; private set; }

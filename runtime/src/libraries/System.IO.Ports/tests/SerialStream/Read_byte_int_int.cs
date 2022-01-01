@@ -198,6 +198,7 @@ namespace System.IO.Ports.Tests
 
             VerifyRead(new byte[bufferLength], offset, count, largeNumRndBytesToRead);
         }
+
         #endregion
 
         #region Verification for Test Cases

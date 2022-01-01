@@ -134,6 +134,7 @@ public class MyClass: IInterface
 }"
             );
         }
+
         [Fact]
         public async Task AddMissingInheritdocOnOverridenProperty()
         {

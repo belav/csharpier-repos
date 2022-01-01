@@ -21,6 +21,7 @@ namespace System.Net.Http
             HttpRequestMessage request,
             CancellationToken cancellationToken
         );
+
         protected abstract HttpResponseMessage ProcessResponse(
             HttpResponseMessage response,
             CancellationToken cancellationToken

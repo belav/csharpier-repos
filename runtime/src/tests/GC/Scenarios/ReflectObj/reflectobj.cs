@@ -27,6 +27,7 @@ namespace App
         public static int icCreat = 0;
         public static int icFinal = 0;
         public static List<object> al = new List<object>();
+
         public ReflectObj()
         {
             obj = new long[1000];
@@ -66,6 +67,7 @@ namespace App
         class CreateObj
         {
             private Object[] v;
+
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             private Type myClass;
             private Type[] rtype;

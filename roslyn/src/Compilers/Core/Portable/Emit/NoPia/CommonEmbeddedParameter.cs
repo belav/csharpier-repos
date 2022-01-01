@@ -58,7 +58,9 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             }
 
             protected abstract bool HasDefaultValue { get; }
+
             protected abstract MetadataConstant GetDefaultValue(EmitContext context);
+
             protected abstract bool IsIn { get; }
             protected abstract bool IsOut { get; }
             protected abstract bool IsOptional { get; }
@@ -68,6 +70,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected abstract string Name { get; }
             protected abstract Cci.IParameterTypeInformation UnderlyingParameterTypeInformation { get; }
             protected abstract ushort Index { get; }
+
             protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(
                 TPEModuleBuilder moduleBuilder
             );

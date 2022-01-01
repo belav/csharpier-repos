@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Data.Sqlite;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
 public class InMemoryDatabaseFixture : IDisposable

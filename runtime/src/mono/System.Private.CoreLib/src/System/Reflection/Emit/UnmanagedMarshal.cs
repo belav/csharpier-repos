@@ -51,6 +51,7 @@ namespace System.Reflection.Emit
         internal Type? marshaltyperef;
         private int param_num;
         private bool has_size;
+
 #pragma warning restore 169, 414
 
         private UnmanagedMarshal(UnmanagedType maint, int cnt)
@@ -59,6 +60,7 @@ namespace System.Reflection.Emit
             t = maint;
             tbase = maint;
         }
+
         private UnmanagedMarshal(UnmanagedType maint, UnmanagedType elemt)
         {
             count = 0;
@@ -80,6 +82,7 @@ namespace System.Reflection.Emit
         {
             return new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
         }
+
 #if FEATURE_COMINTEROP
 		public static UnmanagedMarshal DefineSafeArray( UnmanagedType elemType) {
 			return new UnmanagedMarshal (UnmanagedType.SafeArray, elemType);
@@ -89,6 +92,7 @@ namespace System.Reflection.Emit
         {
             return new UnmanagedMarshal(unmanagedType, unmanagedType);
         }
+
 #if FEATURE_COMINTEROP
 		internal static UnmanagedMarshal DefineCustom (Type typeref, string cookie, string mtype, Guid id) {
 			UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.CustomMarshaler, UnmanagedType.CustomMarshaler);

@@ -689,6 +689,7 @@ namespace System.Text.RegularExpressions.Tests
                 Assert.Contains("conditional", e.Message);
             }
         }
+
         #endregion
 
         #region Random input generation tests

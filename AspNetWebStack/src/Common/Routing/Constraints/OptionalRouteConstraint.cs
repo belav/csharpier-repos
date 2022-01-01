@@ -4,8 +4,10 @@
 using System.Collections.Generic;
 #if ASPNETWEBAPI
 using System.Net.Http;
+
 #else
 using System.Web.Routing;
+
 #endif
 
 #if ASPNETWEBAPI
@@ -46,8 +48,10 @@ namespace System.Web.Mvc.Routing.Constraints
         /// </summary>
 #if ASPNETWEBAPI
         public IHttpRouteConstraint InnerConstraint { get; private set; }
+
 #else
         public IRouteConstraint InnerConstraint { get; private set; }
+
 #endif
 
         /// <inheritdoc />

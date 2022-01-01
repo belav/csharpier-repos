@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 
+
 namespace BasicWebSite;
 
 public static class Operations

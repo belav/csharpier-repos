@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public abstract class RegistrationTests<TStartup, TContext>

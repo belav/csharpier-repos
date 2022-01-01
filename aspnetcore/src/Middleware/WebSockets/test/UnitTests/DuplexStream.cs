@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
 // A duplex wrapper around a read and write stream.
@@ -139,6 +140,7 @@ public class DuplexStream : Stream
     {
         WriteStream.Write(buffer, offset, count);
     }
+
     public override void WriteByte(byte value)
     {
         WriteStream.WriteByte(value);

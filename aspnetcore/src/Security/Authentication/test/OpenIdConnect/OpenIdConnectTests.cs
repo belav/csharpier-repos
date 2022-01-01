@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
 public class OpenIdConnectTests

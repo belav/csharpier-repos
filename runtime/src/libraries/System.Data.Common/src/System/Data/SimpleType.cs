@@ -185,6 +185,7 @@ namespace System.Data
         {
             get { return _baseSimpleType; }
         }
+
         // return  qualified name of this simple type
         public string? SimpleTypeQualifiedName
         {

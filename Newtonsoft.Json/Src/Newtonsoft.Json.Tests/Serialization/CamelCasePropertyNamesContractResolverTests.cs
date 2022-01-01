@@ -220,6 +220,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 )
             );
         }
+
 #pragma warning restore 618
 #endif
 
@@ -297,6 +298,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
         }
+
 #endif
 
         [Test]

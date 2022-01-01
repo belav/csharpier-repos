@@ -124,6 +124,7 @@ class Program
         uint SEM_NOGPFAULTERRORBOX = 0x0002;
         SetErrorMode(SEM_NOGPFAULTERRORBOX);
     }
+
 #endif
 
     private static bool RunUnhandledExceptionTest(

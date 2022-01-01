@@ -174,6 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 cancellationToken: cancellationToken
             );
         }
+
 #nullable disable
 
         /// <summary>

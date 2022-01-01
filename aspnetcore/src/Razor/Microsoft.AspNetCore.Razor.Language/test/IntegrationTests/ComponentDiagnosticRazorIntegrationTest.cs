@@ -4,6 +4,7 @@
 using System.Globalization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class ComponentDiagnosticRazorIntegrationTest : RazorIntegrationTestBase

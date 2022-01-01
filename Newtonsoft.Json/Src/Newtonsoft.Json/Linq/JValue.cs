@@ -30,12 +30,15 @@ using Newtonsoft.Json.Utilities;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
+
 #if HAVE_DYNAMIC
 using System.Dynamic;
 using System.Linq.Expressions;
+
 #endif
 #if HAVE_BIG_INTEGER
 using System.Numerics;
+
 #endif
 
 namespace Newtonsoft.Json.Linq
@@ -121,6 +124,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(DateTimeOffset value) : this(value, JTokenType.Date) { }
+
 #endif
 
         /// <summary>
@@ -206,6 +210,7 @@ namespace Newtonsoft.Json.Linq
 
             return result;
         }
+
 #endif
 
         internal static int Compare(JTokenType valueType, object? objA, object? objB)
@@ -553,6 +558,7 @@ namespace Newtonsoft.Json.Linq
             result = null;
             return false;
         }
+
 #endif
 
         internal override JToken CloneToken()
@@ -1067,6 +1073,7 @@ namespace Newtonsoft.Json.Linq
                 return false;
             }
         }
+
 #endif
 
         int IComparable.CompareTo(object obj)

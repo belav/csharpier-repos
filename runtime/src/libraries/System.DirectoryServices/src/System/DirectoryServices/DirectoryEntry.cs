@@ -24,6 +24,7 @@ namespace System.DirectoryServices
         private UnsafeNativeMethods.IAds? _adsObject;
         private bool _useCache = true;
         private bool _cacheFilled;
+
         // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         internal bool propertiesAlreadyEnumerated;

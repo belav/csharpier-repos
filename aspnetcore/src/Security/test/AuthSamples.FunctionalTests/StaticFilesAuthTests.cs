@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
+
 namespace AuthSamples.FunctionalTests;
 
 public class StaticFilesAuthTests : IClassFixture<WebApplicationFactory<StaticFilesAuth.Startup>>

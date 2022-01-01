@@ -131,6 +131,7 @@ namespace System.Speech.Internal.SrgsCompiler
                 _flag3 |= varType;
             }
         }
+
 #pragma warning restore 0618
 
         internal uint ArcIndex
@@ -170,6 +171,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         [FieldOffset(20)]
         internal int _valueOffset;
+
         [FieldOffset(24)]
         internal int _varInt;
 

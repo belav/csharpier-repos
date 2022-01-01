@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
 // Integration tests for binding top level models with [BindProperty]
@@ -342,10 +343,13 @@ public class BindPropertyIntegrationTest
     {
         [BindNever]
         public string BindNeverProp { get; set; }
+
         [BindRequired]
         public int BindRequiredProp { get; set; }
+
         [Required, StringLength(3)]
         public string RequiredAndStringLengthProp { get; set; }
+
         [DisplayName("My Display Name"), StringLength(3)]
         public string DisplayNameStringLengthProp { get; set; }
     }

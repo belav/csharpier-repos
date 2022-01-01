@@ -33,6 +33,7 @@ namespace System.Globalization.Tests
         public static List<CharUnicodeInfoTestCase> TestCases => s_testCases.Value;
 
         private static int s_rangeMinCodePoint;
+
         private static void Parse(List<CharUnicodeInfoTestCase> testCases, string line)
         {
             // Data is in the format:

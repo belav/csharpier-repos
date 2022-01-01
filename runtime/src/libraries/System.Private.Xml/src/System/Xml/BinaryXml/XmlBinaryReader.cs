@@ -74,6 +74,7 @@ namespace System.Xml
                 this.localname = lname;
                 this.namespaceUri = nsUri;
             }
+
             public void Set(string prefix, string lname, string nsUri)
             {
                 this.prefix = prefix;
@@ -162,6 +163,7 @@ namespace System.Xml
                 this.xmlSpace = XmlSpace.None;
                 this.xmlspacePreserve = xmlspacePreserve;
             }
+
             public NamespaceDecl? Clear()
             {
                 NamespaceDecl? nsdecls = this.nsdecls;
@@ -263,6 +265,7 @@ namespace System.Xml
             public int symCount;
             public QName[] qnametable;
             public int qnameCount;
+
             public void Init()
             {
                 this.symtable = new string[64];
@@ -278,6 +281,7 @@ namespace System.Xml
             public SymbolTables symbolTables;
             public int docState;
             public NestedBinXml? next;
+
             public NestedBinXml(SymbolTables symbolTables, int docState, NestedBinXml? next)
             {
                 this.symbolTables = symbolTables;
@@ -314,37 +318,49 @@ namespace System.Xml
         private ScanState _state;
         private XmlNodeType _nodetype;
         private BinXmlToken _token;
+
         // current attribute
         private int _attrIndex;
+
         // index of current qname
         private QName _qnameOther;
+
         // saved qname of element (for MoveToElement)
         private QName _qnameElement;
         private XmlNodeType _parentNodeType; // use for MoveToElement()
+
         // stack of current open element tags
         private ElemInfo[] _elementStack;
         private int _elemDepth;
+
         // current attributes
         private AttrInfo[] _attributes;
         private int[] _attrHashTbl;
         private int _attrCount;
         private int _posAfterAttrs;
+
         // xml:space
         private bool _xmlspacePreserve;
+
         // position/parse info for current typed token
         private int _tokLen;
         private int _tokDataPos;
         private bool _hasTypedValue;
         private System.Type _valueType;
+
         // if it is a simple string value, we cache it
         private string? _stringValue;
+
         // hashtable of current namespaces
         private readonly Dictionary<string, NamespaceDecl> _namespaces;
+
         //Hashtable namespaces;
         // linked list of pushed nametables (to support nested binary-xml documents)
         private NestedBinXml? _prevNameInfo;
+
         // XmlTextReader to handle embeded text blocks
         private XmlReader? _textXmlReader;
+
         // close input flag
         private readonly bool _closeInput;
 
@@ -2276,6 +2292,7 @@ namespace System.Xml
             Fill(0);
             return _data[_pos++];
         }
+
         private ushort ReadUShort()
         {
             Fill(1);

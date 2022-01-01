@@ -41,6 +41,7 @@ namespace System.Runtime.Serialization
 
 #pragma warning disable 0649
         private readonly XmlNodeReader? _xmlNodeReader;
+
 #pragma warning restore 0649
 
         private readonly XmlObjectSerializerReadContext _context;
@@ -90,6 +91,7 @@ namespace System.Runtime.Serialization
         {
             get { return (_internalNodeType == ExtensionDataNodeType.Xml); }
         }
+
 #pragma warning restore CS8775 // Member must have a non-null value when exiting in some condition.
 
         public override XmlNodeType NodeType
@@ -136,6 +138,7 @@ namespace System.Runtime.Serialization
         {
             get { return IsXmlDataNode ? _xmlNodeReader.IsDefault : base.IsDefault; }
         }
+
         //public override char QuoteChar { get { return IsXmlDataNode ? xmlNodeReader.QuoteChar : base.QuoteChar; } }
         public override XmlSpace XmlSpace
         {

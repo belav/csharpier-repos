@@ -7,6 +7,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase

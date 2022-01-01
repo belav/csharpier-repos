@@ -124,6 +124,7 @@ namespace Newtonsoft.Json.Tests.Converters
             DateTimeOffset result = JsonConvert.DeserializeObject<DateTimeOffset>(json, converter);
             Assert.AreEqual(new DateTimeOffset(2000, 12, 15, 22, 11, 3, 55, TimeSpan.Zero), result);
         }
+
 #endif
 
         [Test]

@@ -119,8 +119,10 @@ namespace DbConnectionStringBuilderTrimmingTests
 #pragma warning disable CS0067 // The event is never used
         public event EventHandler Disposed;
         public event Action TestEvent;
+
         [DisplayName("Event With DisplayName")]
         public event Action TestEvent2;
+
 #pragma warning restore CS0067
 
         public string TestProperty { get; set; }
@@ -129,6 +131,7 @@ namespace DbConnectionStringBuilderTrimmingTests
             get => new TestSite();
             set => throw new NotImplementedException();
         }
+
         public void Dispose() { }
 
         public Hashtable GetProperties2()
@@ -150,6 +153,7 @@ namespace DbConnectionStringBuilderTrimmingTests
             get => "Test Component Name";
             set => throw new NotImplementedException();
         }
+
         public object GetService(Type serviceType) => null;
     }
 

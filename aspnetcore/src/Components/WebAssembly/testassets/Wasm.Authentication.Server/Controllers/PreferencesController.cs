@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Wasm.Authentication.Server.Data;
 using Wasm.Authentication.Server.Models;
 
+
 namespace Wasm.Authentication.Server.Controllers;
 
 [ApiController]

@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace FormatterWebSite.Controllers;
 
 public class SerializableErrorController : Controller

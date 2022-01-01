@@ -10,6 +10,7 @@ using Microsoft.Extensions.Localization;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class ValidationAttributeAdapterOfTAttributeTest

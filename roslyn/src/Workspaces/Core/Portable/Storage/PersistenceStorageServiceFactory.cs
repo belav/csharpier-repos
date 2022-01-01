@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 // When building for source-build, there is no sqlite dependency
 #if !DOTNET_BUILD_FROM_SOURCE
 using Microsoft.CodeAnalysis.SQLite.v2;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Storage
@@ -20,6 +21,7 @@ namespace Microsoft.CodeAnalysis.Storage
     {
 #if !DOTNET_BUILD_FROM_SOURCE
         private readonly SQLiteConnectionPoolService _connectionPoolService;
+
 #endif
 
         [ImportingConstructor]

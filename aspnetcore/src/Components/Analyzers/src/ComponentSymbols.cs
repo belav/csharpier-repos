@@ -4,6 +4,7 @@
 using System;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
 internal class ComponentSymbols

@@ -182,6 +182,7 @@ namespace Microsoft.Win32.SafeHandles
                 }
             }
         }
+
 #endif
 
         /// <summary>

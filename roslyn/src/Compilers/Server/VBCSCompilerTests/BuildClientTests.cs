@@ -159,6 +159,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     Assert.True(ranLocal);
                 }
             }
+
 #endif
 
             [Fact]

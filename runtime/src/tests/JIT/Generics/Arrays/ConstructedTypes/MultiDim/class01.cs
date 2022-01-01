@@ -7,14 +7,17 @@ using System;
 public struct ValX1<T>
 {
     public T t;
+
     public ValX1(T t)
     {
         this.t = t;
     }
 }
+
 public class RefX1<T>
 {
     public T t;
+
     public RefX1(T t)
     {
         this.t = t;
@@ -37,6 +40,7 @@ public class Test_class01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

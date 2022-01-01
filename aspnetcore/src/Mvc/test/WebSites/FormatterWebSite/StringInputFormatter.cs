@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
+
 namespace FormatterWebSite;
 
 public class StringInputFormatter : TextInputFormatter

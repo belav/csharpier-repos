@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>

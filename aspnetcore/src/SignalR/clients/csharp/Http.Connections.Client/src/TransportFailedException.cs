@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
 /// <summary>

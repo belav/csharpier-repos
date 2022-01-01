@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 internal static unsafe class BitHelpers

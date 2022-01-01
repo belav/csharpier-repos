@@ -1333,6 +1333,7 @@ namespace System.Collections.Concurrent.Tests
         {
             public long L1,
                 L2;
+
             public Struct16(long l1, long l2)
             {
                 L1 = l1;

@@ -82,6 +82,7 @@ namespace Microsoft.Data.Sqlite
 
         public virtual TimeOnly GetTimeOnly(int ordinal) =>
             TimeOnly.Parse(GetString(ordinal), CultureInfo.InvariantCulture);
+
 #endif
 
         public virtual decimal GetDecimal(int ordinal) =>

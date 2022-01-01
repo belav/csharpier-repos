@@ -43,7 +43,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels
         public abstract IQueryable<ILicense> Licenses { get; }
 
         public abstract void SeedUsingFKs();
+
         public abstract void SeedUsingNavigations(bool dependentNavs, bool principalNavs);
+
         public abstract void SeedUsingNavigationsWithDeferredAdd();
     }
 }

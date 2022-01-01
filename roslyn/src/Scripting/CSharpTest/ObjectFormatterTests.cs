@@ -548,6 +548,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
                 (_start, _end) = (start, start + count);
 
             public IEnumerator<int> GetEnumerator() => null;
+
             IEnumerator IEnumerable.GetEnumerator() => null;
         }
 

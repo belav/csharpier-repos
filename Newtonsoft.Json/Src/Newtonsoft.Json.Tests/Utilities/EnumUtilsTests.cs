@@ -35,8 +35,10 @@ using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 using TestCaseSource = Xunit.MemberDataAttribute;
+
 #else
 using NUnit.Framework;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Utilities

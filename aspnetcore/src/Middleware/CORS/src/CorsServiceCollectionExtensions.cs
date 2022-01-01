@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

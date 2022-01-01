@@ -754,6 +754,7 @@ namespace System.Linq
 
             return builder.Count > 0;
         }
+
         #endregion
 
         #region Private Implementation Details

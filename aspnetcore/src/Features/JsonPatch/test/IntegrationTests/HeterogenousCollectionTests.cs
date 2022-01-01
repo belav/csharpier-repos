@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests;
 
 public class HeterogenousCollectionTests

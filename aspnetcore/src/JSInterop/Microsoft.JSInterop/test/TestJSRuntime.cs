@@ -4,6 +4,7 @@
 using System;
 using Microsoft.JSInterop.Infrastructure;
 
+
 namespace Microsoft.JSInterop;
 
 internal class TestJSRuntime : JSRuntime

@@ -31,6 +31,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
             ensureUniqueTag(new Asn1Tag((UniversalTagNumber)16), "Certificate");
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

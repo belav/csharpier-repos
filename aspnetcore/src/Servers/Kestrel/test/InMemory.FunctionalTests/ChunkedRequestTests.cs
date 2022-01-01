@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Xunit;
 using BadHttpRequestException = Microsoft.AspNetCore.Server.Kestrel.Core.BadHttpRequestException;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
 public class ChunkedRequestTests : LoggedTest
@@ -563,6 +564,7 @@ public class ChunkedRequestTests : LoggedTest
             }
         }
     }
+
     [Fact]
     public async Task TrailingHeadersCountTowardsHeadersTotalSizeLimit()
     {

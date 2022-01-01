@@ -14,6 +14,7 @@ namespace System.Reflection.TypeLoading
         {
             return _szArrayDict.GetOrAdd(elementType, s_szArrayTypeFactory);
         }
+
         private static readonly Func<RoType, RoArrayType> s_szArrayTypeFactory = (e) =>
             new RoArrayType(e, multiDim: false, rank: 1);
         private readonly ConcurrentDictionary<RoType, RoArrayType> _szArrayDict =
@@ -29,6 +30,7 @@ namespace System.Reflection.TypeLoading
                 s_mdArrayTypeFactory
             );
         }
+
         private static readonly Func<RoArrayType.Key, RoArrayType> s_mdArrayTypeFactory = (k) =>
             new RoArrayType(k.ElementType, multiDim: true, rank: k.Rank);
         private readonly ConcurrentDictionary<RoArrayType.Key, RoArrayType> _mdArrayDict =
@@ -41,6 +43,7 @@ namespace System.Reflection.TypeLoading
         {
             return _byRefDict.GetOrAdd(elementType, s_byrefTypeFactory);
         }
+
         private static readonly Func<RoType, RoByRefType> s_byrefTypeFactory = (e) =>
             new RoByRefType(e);
         private readonly ConcurrentDictionary<RoType, RoByRefType> _byRefDict =
@@ -53,6 +56,7 @@ namespace System.Reflection.TypeLoading
         {
             return _pointerDict.GetOrAdd(elementType, (e) => new RoPointerType(e));
         }
+
         private readonly ConcurrentDictionary<RoType, RoPointerType> _pointerDict =
             new ConcurrentDictionary<RoType, RoPointerType>();
 
@@ -69,6 +73,7 @@ namespace System.Reflection.TypeLoading
                 s_constructedGenericTypeFactory
             );
         }
+
         private static readonly Func<
             RoConstructedGenericType.Key,
             RoConstructedGenericType

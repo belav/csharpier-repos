@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace SecurityWebSite.Controllers;
 
 // This controller is secured through the globally added authorize filter which

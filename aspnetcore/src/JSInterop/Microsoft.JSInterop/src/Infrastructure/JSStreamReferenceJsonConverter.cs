@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.JSInterop.Implementation;
 
+
 namespace Microsoft.JSInterop.Infrastructure;
 
 internal sealed class JSStreamReferenceJsonConverter : JsonConverter<IJSStreamReference>

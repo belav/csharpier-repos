@@ -30,6 +30,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
 
 #pragma warning disable 108
         TItem Item { get; set; }
+
 #pragma warning restore 108
 
         [OnDemand(5)]

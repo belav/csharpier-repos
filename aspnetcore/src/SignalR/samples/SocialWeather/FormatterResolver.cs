@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace SocialWeather;
 
 public class FormatterResolver

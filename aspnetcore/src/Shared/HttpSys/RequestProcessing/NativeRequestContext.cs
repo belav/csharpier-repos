@@ -15,6 +15,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
 internal unsafe class NativeRequestContext : IDisposable

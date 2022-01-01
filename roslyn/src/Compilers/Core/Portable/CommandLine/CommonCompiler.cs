@@ -99,7 +99,9 @@ namespace Microsoft.CodeAnalysis
         );
 
         public abstract void PrintLogo(TextWriter consoleOutput);
+
         public abstract void PrintHelp(TextWriter consoleOutput);
+
         public abstract void PrintLangVersions(TextWriter consoleOutput);
 
         /// <summary>

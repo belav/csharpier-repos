@@ -4,6 +4,7 @@
 using System.Runtime.Serialization;
 using System.Xml;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 /// <summary>

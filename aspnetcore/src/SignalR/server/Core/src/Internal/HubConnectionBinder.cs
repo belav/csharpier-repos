@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.SignalR.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class HubConnectionBinder<THub> : IInvocationBinder where THub : Hub

@@ -1979,6 +1979,7 @@ class C2
 //]
 }}
 ";
+
         #endregion
 
         #region unused values
@@ -2102,6 +2103,7 @@ class C2
     int Computation() => 0;
 }}
 ";
+
         #endregion
         #endregion
 

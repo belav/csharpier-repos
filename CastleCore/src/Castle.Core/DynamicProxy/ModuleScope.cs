@@ -25,8 +25,10 @@ namespace Castle.DynamicProxy
 
     using Castle.Core.Internal;
     using Castle.DynamicProxy.Generators;
+
 #if FEATURE_SERIALIZATION
     using Castle.DynamicProxy.Serialization;
+
 #endif
 
     public class ModuleScope
@@ -224,6 +226,7 @@ namespace Castle.DynamicProxy
                 return directory;
             }
         }
+
 #endif
 
         /// <summary>
@@ -264,6 +267,7 @@ namespace Castle.DynamicProxy
                 return directory;
             }
         }
+
 #endif
 
         /// <summary>
@@ -509,6 +513,7 @@ namespace Castle.DynamicProxy
             assemblyBuilder.Save(assemblyFileName);
             return assemblyFilePath;
         }
+
 #endif
 
 #if FEATURE_SERIALIZATION
@@ -572,6 +577,7 @@ namespace Castle.DynamicProxy
                 }
             }
         }
+
 #endif
 
         internal TypeBuilder DefineType(

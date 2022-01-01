@@ -1137,6 +1137,7 @@ namespace Microsoft.EntityFrameworkCore
             private string _title;
 #pragma warning disable 649
             private List<PostFull> _posts;
+
 #pragma warning restore 649
 
             [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -1192,6 +1193,7 @@ namespace Microsoft.EntityFrameworkCore
             private int _blogId;
 #pragma warning disable 649
             private BlogFull _blog;
+
 #pragma warning restore 649
 
             [DatabaseGenerated(DatabaseGeneratedOption.None)]

@@ -15,6 +15,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsSemanticInterpretationTag() { }
+
         public SrgsSemanticInterpretationTag(string script)
         {
             Helpers.ThrowIfNull(script, nameof(script));

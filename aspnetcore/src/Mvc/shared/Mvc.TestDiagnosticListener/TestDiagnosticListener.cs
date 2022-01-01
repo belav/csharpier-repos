@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.DiagnosticAdapter;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public class TestDiagnosticListener

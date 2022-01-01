@@ -15,17 +15,22 @@ namespace AutoMapper.UnitTests
             class Source
             {
                 public int Value { get; set; }
+
                 public int GetValue() => 10;
+
                 public int OtherValue { get; set; }
                 public int GetOtherValue { get; set; }
             }
+
             class Destination
             {
                 public int Value { get; set; }
                 public int OtherValue { get; set; }
             }
+
             protected override MapperConfiguration Configuration =>
                 new MapperConfiguration(c => c.CreateMap<Source, Destination>());
+
             [Fact]
             public void Should_prefer_the_property()
             {
@@ -34,6 +39,7 @@ namespace AutoMapper.UnitTests
                 destination.OtherValue.ShouldBe(42);
             }
         }
+
         public class When_mapping_derived_classes_in_arrays : AutoMapperSpecBase
         {
             private DtoObject[] _result;
@@ -1330,6 +1336,7 @@ namespace AutoMapper.UnitTests
             public class Source
             {
                 public int FooValue { get; set; }
+
                 public int GetOtherValue()
                 {
                     return 10;
@@ -1384,6 +1391,7 @@ namespace AutoMapper.UnitTests
             public class Source
             {
                 public int FooValue { get; set; }
+
                 public int GetOtherValue()
                 {
                     return 10;
@@ -1430,6 +1438,7 @@ namespace AutoMapper.UnitTests
             public class Source
             {
                 public int fooValue { get; set; }
+
                 public int GetOtherValue()
                 {
                     return 10;
@@ -1476,6 +1485,7 @@ namespace AutoMapper.UnitTests
             public class Source
             {
                 public int Valuefoo { get; set; }
+
                 public int GetOtherValue()
                 {
                     return 10;
@@ -1523,6 +1533,7 @@ namespace AutoMapper.UnitTests
             public class Source
             {
                 public int FooValueBar { get; set; }
+
                 public int GetOtherValue()
                 {
                     return 10;
@@ -1578,6 +1589,7 @@ namespace AutoMapper.UnitTests
             public class Source
             {
                 public int FooValueBar { get; set; }
+
                 public int GetOtherValue()
                 {
                     return 10;

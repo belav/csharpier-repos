@@ -37,8 +37,10 @@ using System.Xml.Linq;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Issues
@@ -148,6 +150,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             return sw.ToString();
         }
+
 #endif
 
 #if !NET20
@@ -234,6 +237,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 xml
             );
         }
+
 #endif
 
         private const string JsonWithoutNamespace =

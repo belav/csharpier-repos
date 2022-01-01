@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.CodeGen;
 
 #if !DEBUG
 using ParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.ParameterSymbol;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

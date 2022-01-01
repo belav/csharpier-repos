@@ -10,6 +10,7 @@ class COMponent
 {
     [MethodImpl(MethodImplOptions.InternalCall)]
     public static extern void InCOMplete1();
+
     [MethodImpl(MethodImplOptions.InternalCall)]
     public extern void InCOMplete2();
 }

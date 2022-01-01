@@ -142,7 +142,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             string bstrFieldName,
             out IVsExpansionFunction? pFunc
         );
+
         protected abstract ITrackingSpan? InsertEmptyCommentAndGetEndPositionTrackingSpan();
+
         internal abstract Document AddImports(
             Document document,
             OptionSet options,
@@ -151,6 +153,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             bool allowInHiddenRegions,
             CancellationToken cancellationToken
         );
+
         protected abstract string FallbackDefaultLiteral { get; }
 
         public int FormatSpan(IVsTextLines pBuffer, VsTextSpan[] tsInSurfaceBuffer)

@@ -1557,6 +1557,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             [ForeignKey(nameof(AnotherPrincipalField))]
 #pragma warning disable 169
             private readonly int _principalFieldAnotherFk;
+
 #pragma warning restore 169
 
             public PrincipalField AnotherPrincipalField { get; set; }
@@ -1690,6 +1691,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 #pragma warning disable CS0169 // Field never used
             private PrincipalForNavWithBackingField _backingFieldFromAttribute;
             private PrincipalForNavWithBackingField _backingFieldFromFluentApi;
+
 #pragma warning restore CS0169 // Field never used
 #pragma warning restore IDE0044 // Add readonly modifier
 

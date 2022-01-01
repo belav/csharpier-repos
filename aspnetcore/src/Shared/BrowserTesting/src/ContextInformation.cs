@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.Extensions.Logging;
 using PlaywrightSharp;
 
+
 namespace Microsoft.AspNetCore.BrowserTesting;
 
 public class ContextInformation

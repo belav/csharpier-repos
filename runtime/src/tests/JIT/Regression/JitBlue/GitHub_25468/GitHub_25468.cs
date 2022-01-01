@@ -142,6 +142,7 @@ class GitHub_25468
 
         return returnVal;
     }
+
 #pragma warning restore SYSLIB0011
 
     public static int Main()

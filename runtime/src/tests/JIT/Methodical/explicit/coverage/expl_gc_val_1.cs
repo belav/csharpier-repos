@@ -7,10 +7,12 @@ using System.Runtime.InteropServices;
 internal struct QQ
 {
     public int val;
+
     public QQ(int vv)
     {
         val = vv;
     }
+
     public int ret_code()
     {
         return 100;
@@ -22,6 +24,7 @@ internal class AA
 {
     [FieldOffset(0)]
     public sbyte tmp1;
+
     [FieldOffset(7)]
     public double tmp2;
 
@@ -30,8 +33,10 @@ internal class AA
 
     [FieldOffset(48)]
     public double tmp3;
+
     [FieldOffset(36)]
     public float tmp4;
+
     [FieldOffset(51)]
     public long tmp5;
 
@@ -57,6 +62,7 @@ internal class AA
     {
         return arg;
     }
+
     public static QQ call_target_ref(ref QQ arg)
     {
         return arg;

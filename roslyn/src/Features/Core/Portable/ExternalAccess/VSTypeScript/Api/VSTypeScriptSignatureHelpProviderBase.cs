@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         ) => GetItemsAsync(document, position, triggerInfo, cancellationToken);
 
         public abstract bool IsTriggerCharacter(char ch);
+
         public abstract bool IsRetriggerCharacter(char ch);
 
         protected abstract Task<SignatureHelpItems?> GetItemsAsync(

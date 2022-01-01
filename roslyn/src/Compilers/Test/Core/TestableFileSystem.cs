@@ -18,6 +18,7 @@ namespace Roslyn.Test.Utilities
         FileOptions options,
         out string normalizedFilePath
     );
+
     public delegate Stream OpenFileFunc(
         string filePath,
         FileMode mode,

@@ -7,6 +7,7 @@ public abstract class Base
 {
     public abstract T Function<T>(T i);
 }
+
 public class Foo<U> : Base
 {
     public override T Function<T>(T i)
@@ -19,6 +20,7 @@ public class Test_method001g
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

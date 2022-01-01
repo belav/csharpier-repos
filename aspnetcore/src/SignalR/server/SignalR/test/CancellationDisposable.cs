@@ -4,6 +4,7 @@
 using System;
 using System.Threading;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 internal class CancellationDisposable : IDisposable

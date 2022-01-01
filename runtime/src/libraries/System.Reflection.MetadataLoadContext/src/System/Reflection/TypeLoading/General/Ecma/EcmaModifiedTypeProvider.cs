@@ -16,6 +16,7 @@ namespace System.Reflection.TypeLoading.Ecma
             RoType unmodifiedType,
             bool isRequired
         ) => new RoModifiedType(modifier.SkipTypeWrappers(), unmodifiedType, isRequired);
+
         public sealed override RoType GetPinnedType(RoType elementType) => elementType;
     }
 }

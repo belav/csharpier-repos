@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
 public class Manifest

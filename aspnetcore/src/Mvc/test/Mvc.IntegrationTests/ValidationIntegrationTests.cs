@@ -24,6 +24,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
 public class ValidationIntegrationTests
@@ -2708,6 +2709,7 @@ public class ValidationIntegrationTests
 
         public static void SomeMethod() { }
     }
+
 #nullable restore
 
     private static void AssertRequiredError(string key, ModelError error)

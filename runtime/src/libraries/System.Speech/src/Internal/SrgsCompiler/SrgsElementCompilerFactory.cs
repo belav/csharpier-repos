@@ -20,6 +20,7 @@ namespace System.Speech.Internal.SrgsCompiler
             _cg = cg;
             _grammar = new GrammarElement(backend, cg);
         }
+
         #endregion
 
         #region Internal Methods
@@ -214,6 +215,7 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get { return RuleRef.Garbage; }
         }
+
         #endregion
 
         #region Private Methods

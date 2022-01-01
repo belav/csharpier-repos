@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 #if NET461
 using System;
 using System.Configuration;
+
 #endif
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands

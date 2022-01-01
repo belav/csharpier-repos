@@ -142,6 +142,7 @@ namespace System.IO
             public override bool CanSeek => false;
 
             public override void Flush() => ThrowIfDisposed();
+
             public override Task FlushAsync(CancellationToken cancellationToken)
             {
                 ThrowIfDisposed();
@@ -298,8 +299,10 @@ namespace System.IO
                 get => throw new NotSupportedException();
                 set => throw new NotSupportedException();
             }
+
             public override long Seek(long offset, SeekOrigin origin) =>
                 throw new NotSupportedException();
+
             public override void SetLength(long value) => throw new NotSupportedException();
 
             private void ThrowIfDisposed()
@@ -374,6 +377,7 @@ namespace System.IO
             public override bool CanSeek => false;
 
             public override void Flush() => ThrowIfDisposed();
+
             public override Task FlushAsync(CancellationToken cancellationToken)
             {
                 ThrowIfDisposed();
@@ -508,8 +512,10 @@ namespace System.IO
                 get => throw new NotSupportedException();
                 set => throw new NotSupportedException();
             }
+
             public override long Seek(long offset, SeekOrigin origin) =>
                 throw new NotSupportedException();
+
             public override void SetLength(long value) => throw new NotSupportedException();
 
             private void ThrowIfDisposed()

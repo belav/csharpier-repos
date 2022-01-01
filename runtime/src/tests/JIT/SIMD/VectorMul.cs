@@ -62,6 +62,7 @@ internal partial class VectorTest
             return Pass;
         }
     }
+
     private class Vector4Test
     {
         public static int VectorMul(float left, float right, float result)

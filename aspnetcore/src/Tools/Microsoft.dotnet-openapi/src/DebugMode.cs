@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
+
 namespace Microsoft.DotNet.OpenApi;
 
 internal static class DebugMode

@@ -12,10 +12,12 @@ using System.Threading;
 #if ES_BUILD_STANDALONE
 using Microsoft.Win32;
 using System.Security.Permissions;
+
 #endif
 
 #if !ES_BUILD_STANDALONE && TARGET_WINDOWS
 using Internal.Win32;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -1332,6 +1334,7 @@ namespace System.Diagnostics.Tracing
             private object? _arg7;
 #pragma warning restore CA1823, CS0169, IDE0051
         }
+
 #endif
 
         /// <summary>

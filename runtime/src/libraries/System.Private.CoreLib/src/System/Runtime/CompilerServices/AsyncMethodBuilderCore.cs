@@ -90,6 +90,7 @@ namespace System.Runtime.CompilerServices
                     TplEventSource.Keywords.AsyncMethod
                 );
         }
+
 #endif
 
         /// <summary>Gets a description of the state of the state machine object, suitable for debug purposes.</summary>

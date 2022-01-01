@@ -107,6 +107,7 @@ namespace System.Reflection.Tests
                 object value,
                 CultureInfo culture
             ) => throw null;
+
             public sealed override MethodBase BindToMethod(
                 BindingFlags bindingAttr,
                 MethodBase[] match,
@@ -116,11 +117,13 @@ namespace System.Reflection.Tests
                 string[] names,
                 out object state
             ) => throw null;
+
             public sealed override object ChangeType(
                 object value,
                 Type type,
                 CultureInfo culture
             ) => throw null;
+
             public sealed override void ReorderArgumentArray(ref object[] args, object state) =>
                 throw null;
 
@@ -271,6 +274,7 @@ namespace System.Reflection.Tests
                 object value,
                 CultureInfo culture
             ) => throw null;
+
             public sealed override MethodBase BindToMethod(
                 BindingFlags bindingAttr,
                 MethodBase[] match,
@@ -280,11 +284,13 @@ namespace System.Reflection.Tests
                 string[] names,
                 out object state
             ) => throw null;
+
             public sealed override object ChangeType(
                 object value,
                 Type type,
                 CultureInfo culture
             ) => throw null;
+
             public sealed override void ReorderArgumentArray(ref object[] args, object state) =>
                 throw null;
 
@@ -503,10 +509,13 @@ namespace System.Reflection.Tests
         {
             [Marker(0)]
             public static void Moo(int x) { }
+
             [Marker(1)]
             public static void Moo<T1>(int x) { }
+
             [Marker(2)]
             public static void Moo<T1, T2>(int x) { }
+
             [Marker(3)]
             public static void Moo<T1, T2, T3>(int x) { }
         }
@@ -515,12 +524,16 @@ namespace System.Reflection.Tests
         {
             [Marker(0)]
             public static void Moo(int x, int[] y) { }
+
             [Marker(1)]
             public static void Moo<T>(T x, T[] y) { }
+
             [Marker(2)]
             public static void Moo<T>(int x, int[] y) { }
+
             [Marker(3)]
             public static void Moo<T, U>(T x, U[] y) { }
+
             [Marker(4)]
             public static void Moo<T, U>(int x, int[] y) { }
         }
@@ -535,6 +548,7 @@ namespace System.Reflection.Tests
                 TestClass3<T, T> p5,
                 ref TestClass3<T, T[]>[,] p6
             ) { }
+
             public static void Moo(
                 U p1,
                 U[] p2,
@@ -543,6 +557,7 @@ namespace System.Reflection.Tests
                 TestClass3<U, U> p5,
                 ref TestClass3<U, U[]>[,] p6
             ) { }
+
             public static void Moo<M>(
                 T p1,
                 T[] p2,
@@ -551,6 +566,7 @@ namespace System.Reflection.Tests
                 TestClass3<T, T> p5,
                 ref TestClass3<T, T[]>[,] p6
             ) { }
+
             public static void Moo<M>(
                 U p1,
                 U[] p2,
@@ -559,6 +575,7 @@ namespace System.Reflection.Tests
                 TestClass3<U, U> p5,
                 ref TestClass3<U, U[]>[,] p6
             ) { }
+
             public static void Moo<M>(
                 M p1,
                 M[] p2,
@@ -567,6 +584,7 @@ namespace System.Reflection.Tests
                 TestClass3<M, M> p5,
                 ref TestClass3<M, M[]>[,] p6
             ) { }
+
             public static void Moo<M, N>(
                 T p1,
                 T[] p2,
@@ -575,6 +593,7 @@ namespace System.Reflection.Tests
                 TestClass3<T, T> p5,
                 ref TestClass3<T, T[]>[,] p6
             ) { }
+
             public static void Moo<M, N>(
                 U p1,
                 U[] p2,
@@ -583,6 +602,7 @@ namespace System.Reflection.Tests
                 TestClass3<U, U> p5,
                 ref TestClass3<U, U[]>[,] p6
             ) { }
+
             public static void Moo<M, N>(
                 M p1,
                 M[] p2,
@@ -591,6 +611,7 @@ namespace System.Reflection.Tests
                 TestClass3<M, M> p5,
                 ref TestClass3<M, M[]>[,] p6
             ) { }
+
             public static void Moo<M, N>(
                 N p1,
                 N[] p2,
@@ -604,12 +625,15 @@ namespace System.Reflection.Tests
         private class TestClass4<T> where T : NoOneSubclasses, new()
         {
             public static void Moo<M>(int p1, int p2) where M : NoOneSubclassesThisEither { }
+
             public static void Moo<N, O>(TestClass4<N> p1, int p2)
                 where N : NoOneSubclasses, new() { }
+
             public static void Moo<N, O>(O p1, int p2) where N : NoOneSubclasses, new() { }
         }
 
         private class NoOneSubclasses { }
+
         private class NoOneSubclassesThisEither { }
 
         private static void TestSignatureTypeInvariants(Type type)

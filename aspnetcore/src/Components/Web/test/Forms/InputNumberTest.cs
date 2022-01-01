@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Forms;
 
 public class InputNumberTest

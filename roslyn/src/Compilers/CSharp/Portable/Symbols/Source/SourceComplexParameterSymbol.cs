@@ -880,6 +880,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return !hasAnyDiagnostics ? (attributeData, boundAttribute) : (null, null);
         }
+
 #nullable disable
 
         internal override void DecodeWellKnownAttribute(
@@ -1906,6 +1907,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     default;
             }
         }
+
 #nullable disable
 
         internal override void PostDecodeWellKnownAttributes(

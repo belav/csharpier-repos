@@ -8,6 +8,7 @@ using VerifyCS = Microsoft.AspNetCore.Analyzers.RouteHandlers.CSharpRouteHandler
     Microsoft.AspNetCore.Analyzers.RouteHandlers.Fixers.DetectMismatchedParameterOptionalityFixer
 >;
 
+
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
 public partial class DetectMismatchedParameterOptionalityTest

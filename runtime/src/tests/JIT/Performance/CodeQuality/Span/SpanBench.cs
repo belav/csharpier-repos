@@ -14,6 +14,7 @@ namespace Span
     class BenchmarkAttribute : Attribute
     {
         public BenchmarkAttribute() { }
+
         private long _innerIterationsCount = 1;
         public long InnerIterationCount
         {
@@ -30,6 +31,7 @@ namespace Span
         {
             _data = data;
         }
+
         int _data;
         public int Data
         {
@@ -45,12 +47,14 @@ namespace Span
         const int QuickSortIterations = 1;
         const int FillAllIterations = 1;
         const int BaseIterations = 1;
+
 #else
         // Appropriately-scaled iteration counts for the various benchmarks
         const int BubbleSortIterations = 100;
         const int QuickSortIterations = 1000;
         const int FillAllIterations = 100000;
         const int BaseIterations = 10000000;
+
 #endif
 
         // Seed for random set by environment variables
@@ -124,6 +128,7 @@ namespace Span
             }
             return unsortedData;
         }
+
         #endregion // helpers
 
         // Tests that implement some vary basic algorithms (fill/sort) over spans and arrays
@@ -158,6 +163,7 @@ namespace Span
                 span[i] = unchecked((byte)i);
             }
         }
+
         #endregion
 
         #region TestFillAllArray
@@ -188,6 +194,7 @@ namespace Span
                 data[i] = unchecked((byte)i);
             }
         }
+
         #endregion
 
         #region TestFillAllReverseSpan
@@ -219,6 +226,7 @@ namespace Span
                 span[i] = unchecked((byte)i);
             }
         }
+
         #endregion
 
         #region TestFillAllReverseArray
@@ -249,6 +257,7 @@ namespace Span
                 data[i] = unchecked((byte)i);
             }
         }
+
         #endregion
 
         #region TestQuickSortSpan
@@ -316,6 +325,7 @@ namespace Span
             TestQuickSortSpan(data.Slice(0, i));
             TestQuickSortSpan(data.Slice(i + 1));
         }
+
         #endregion
 
         #region TestBubbleSortSpan
@@ -364,6 +374,7 @@ namespace Span
                 --n;
             } while (swap);
         }
+
         #endregion
 
         #region TestQuickSortArray
@@ -427,6 +438,7 @@ namespace Span
             TestQuickSortArray(data, lo, i - 1);
             TestQuickSortArray(data, i + 1, hi);
         }
+
         #endregion
 
         #region TestBubbleSortArray
@@ -473,6 +485,7 @@ namespace Span
                 --n;
             } while (swap);
         }
+
         #endregion
 
         #endregion // Algorithm tests
@@ -526,6 +539,7 @@ namespace Span
                 }
             }
         }
+
         #endregion
 
 #if false // netcoreapp specific API https://github.com/dotnet/runtime/issues/9635
@@ -610,6 +624,7 @@ namespace Span
                 sink.Data = temp;
             }
         }
+
         #endregion
 
         #region TestSpanIndexHoistable<T>
@@ -649,6 +664,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 sink.Data = span[length / 2];
         }
+
         #endregion
 
         #region TestArrayIndexHoistable<T>
@@ -686,6 +702,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 sink.Data = array[length / 2];
         }
+
         #endregion
 
         #region TestSpanIndexVariant<T>
@@ -726,6 +743,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 sink.Data = span[i & mask];
         }
+
         #endregion
 
         #region TestArrayIndexVariant<T>
@@ -767,6 +785,7 @@ namespace Span
                 sink.Data = array[i & mask];
             }
         }
+
         #endregion
 
         #region TestSpanSlice<T>
@@ -816,6 +835,7 @@ namespace Span
                 }
             }
         }
+
         #endregion
 
         #region TestSpanToArray<T>
@@ -854,6 +874,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 sink.Data = span.ToArray();
         }
+
         #endregion
 
         #region TestSpanCopyTo<T>
@@ -894,6 +915,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 span.CopyTo(destination);
         }
+
         #endregion
 
         #region TestArrayCopyTo<T>
@@ -931,6 +953,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 array.CopyTo(destination, 0);
         }
+
         #endregion
 
         #region TestSpanFill<T>
@@ -967,6 +990,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 span.Fill(default(T));
         }
+
         #endregion
 
         #region TestSpanClear<T>
@@ -1003,6 +1027,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 span.Clear();
         }
+
         #endregion
 
         #region TestArrayClear<T>
@@ -1038,6 +1063,7 @@ namespace Span
             for (int i = 0; i < iterationCount; i++)
                 Array.Clear(array, 0, length);
         }
+
         #endregion
 
         #region TestSpanAsBytes<T>
@@ -1086,6 +1112,7 @@ namespace Span
                 }
             }
         }
+
         #endregion
 
         #region TestSpanCast<T>
@@ -1140,6 +1167,7 @@ namespace Span
                 }
             }
         }
+
         #endregion
 
         #region TestSpanAsSpanStringChar<T>

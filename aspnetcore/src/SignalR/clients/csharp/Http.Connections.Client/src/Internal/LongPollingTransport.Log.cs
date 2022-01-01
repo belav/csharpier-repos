@@ -6,6 +6,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal partial class LongPollingTransport

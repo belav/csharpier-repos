@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 public class AssemblyPartExtensionTest

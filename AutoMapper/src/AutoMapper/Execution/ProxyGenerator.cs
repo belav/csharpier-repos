@@ -27,6 +27,7 @@ namespace AutoMapper.Execution
         private static readonly ModuleBuilder ProxyModule = CreateProxyModule();
         private static readonly LockingConcurrentDictionary<TypeDescription, Type> ProxyTypes =
             new LockingConcurrentDictionary<TypeDescription, Type>(EmitProxy);
+
         private static ModuleBuilder CreateProxyModule()
         {
             var builder = AssemblyBuilder.DefineDynamicAssembly(
@@ -35,6 +36,7 @@ namespace AutoMapper.Execution
             );
             return builder.DefineDynamicModule("AutoMapper.Proxies.emit");
         }
+
         private static Type EmitProxy(TypeDescription typeDescription)
         {
             var interfaceType = typeDescription.Type;
@@ -165,12 +167,15 @@ namespace AutoMapper.Execution
                 ctorIl.Emit(OpCodes.Ret);
             }
         }
+
         public static Type GetProxyType(Type interfaceType) =>
             ProxyTypes.GetOrAdd(new TypeDescription(interfaceType));
+
         public static Type GetSimilarType(
             Type sourceType,
             IEnumerable<PropertyDescription> additionalProperties
         ) => ProxyTypes.GetOrAdd(new TypeDescription(sourceType, additionalProperties));
+
         class PropertyEmitter
         {
             private static readonly MethodInfo ProxyBaseNotifyPropertyChanged =
@@ -179,6 +184,7 @@ namespace AutoMapper.Execution
             private readonly MethodBuilder _getterBuilder;
             private readonly PropertyBuilder _propertyBuilder;
             private readonly MethodBuilder _setterBuilder;
+
             public PropertyEmitter(
                 TypeBuilder owner,
                 PropertyDescription property,
@@ -240,20 +246,26 @@ namespace AutoMapper.Execution
                 setterIl.Emit(OpCodes.Ret);
                 _propertyBuilder.SetSetMethod(_setterBuilder);
             }
+
             public Type PropertyType => _propertyBuilder.PropertyType;
         }
     }
+
     public abstract class ProxyBase
     {
         public ProxyBase() { }
+
         protected void NotifyPropertyChanged(PropertyChangedEventHandler handler, string method) =>
             handler?.Invoke(this, new PropertyChangedEventArgs(method));
     }
+
     public readonly struct TypeDescription : IEquatable<TypeDescription>
     {
         public readonly Type Type;
         public readonly PropertyDescription[] AdditionalProperties;
+
         public TypeDescription(Type type) : this(type, Array.Empty<PropertyDescription>()) { }
+
         public TypeDescription(Type type, IEnumerable<PropertyDescription> additionalProperties)
         {
             Type = type ?? throw new ArgumentNullException(nameof(type));
@@ -263,6 +275,7 @@ namespace AutoMapper.Execution
             }
             AdditionalProperties = additionalProperties.OrderBy(p => p.Name).ToArray();
         }
+
         public override int GetHashCode()
         {
             var hashCode = new HashCode();
@@ -273,40 +286,52 @@ namespace AutoMapper.Execution
             }
             return hashCode.ToHashCode();
         }
+
         public override bool Equals(object other) =>
             other is TypeDescription description && Equals(description);
+
         public bool Equals(TypeDescription other) =>
             Type == other.Type && AdditionalProperties.SequenceEqual(other.AdditionalProperties);
+
         public static bool operator ==(in TypeDescription left, in TypeDescription right) =>
             left.Equals(right);
+
         public static bool operator !=(in TypeDescription left, in TypeDescription right) =>
             !left.Equals(right);
     }
+
     [DebuggerDisplay("{Name}-{Type.Name}")]
     public readonly struct PropertyDescription : IEquatable<PropertyDescription>
     {
         public readonly string Name;
         public readonly Type Type;
         public readonly bool CanWrite;
+
         public PropertyDescription(string name, Type type, bool canWrite = true)
         {
             Name = name;
             Type = type;
             CanWrite = canWrite;
         }
+
         public PropertyDescription(PropertyInfo property)
         {
             Name = property.Name;
             Type = property.PropertyType;
             CanWrite = property.CanWrite;
         }
+
         public override int GetHashCode() => HashCode.Combine(Name, Type, CanWrite);
+
         public override bool Equals(object other) =>
             other is PropertyDescription description && Equals(description);
+
         public bool Equals(PropertyDescription other) =>
             Name == other.Name && Type == other.Type && CanWrite == other.CanWrite;
+
         public static bool operator ==(in PropertyDescription left, in PropertyDescription right) =>
             left.Equals(right);
+
         public static bool operator !=(in PropertyDescription left, in PropertyDescription right) =>
             !left.Equals(right);
     }

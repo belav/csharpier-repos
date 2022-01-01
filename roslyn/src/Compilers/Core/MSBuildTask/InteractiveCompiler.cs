@@ -93,6 +93,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             set { _store[nameof(Source)] = value; }
             get { return (ITaskItem?)_store[nameof(Source)]; }
         }
+
         #endregion
 
         #region Tool Members

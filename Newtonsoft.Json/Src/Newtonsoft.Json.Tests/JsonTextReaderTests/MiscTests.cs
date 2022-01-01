@@ -1099,6 +1099,7 @@ null//comment
 
             Assert.IsFalse(r.Read());
         }
+
 #endif
 
         [Test]

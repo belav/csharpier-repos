@@ -74,6 +74,7 @@ namespace System.Globalization
         // Numbers
         private string? _sPositiveSign; // (user can override) positive sign
         private string? _sNegativeSign; // (user can override) negative sign
+
         // (nfi populates these 5, don't have to be = undef)
         private int _iDigits; // (user can override) number of fractional digits
         private int _iNegativeNumber; // (user can override) negative number format
@@ -95,6 +96,7 @@ namespace System.Globalization
         private string? _sIntlMonetarySymbol; // international monetary symbol (RegionInfo)
         private string? _sEnglishCurrency; // English name for this currency
         private string? _sNativeCurrency; // Native name for this currency
+
         // (nfi populates these 4, don't have to be = undef)
         private int _iCurrencyDigits; // (user can override) # local monetary fractional digits
         private int _iCurrency; // (user can override) positive currency format
@@ -125,6 +127,7 @@ namespace System.Globalization
 
         // Text information
         private int _iReadingLayout = undef; // Reading layout data
+
         // 0 - Left to right (eg en-US)
         // 1 - Right to left (eg arabic locales)
         // 2 - Vertical top to bottom with columns to the left and also left to right (ja-JP locales)

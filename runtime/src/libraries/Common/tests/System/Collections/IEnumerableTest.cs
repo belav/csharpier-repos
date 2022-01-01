@@ -25,6 +25,7 @@ namespace Tests.Collections
 
         protected abstract bool IsResetNotSupported { get; }
         protected abstract bool IsGenericCompatibility { get; }
+
         protected abstract object GenerateItem();
 
         protected object[] GenerateItems(int size)

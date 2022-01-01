@@ -33,6 +33,7 @@ namespace System.Xml.Xsl.Xslt
             public ScopeFlags flags;
             public string? ncName; // local-name for variable, prefix for namespace, null for extension or excluded namespace
             public string? nsUri; // namespace uri
+
             [AllowNull]
             public V value; // value for variable, null for namespace
 

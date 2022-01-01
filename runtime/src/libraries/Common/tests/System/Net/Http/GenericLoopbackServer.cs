@@ -20,6 +20,7 @@ namespace System.Net.Test.Common
     public abstract class LoopbackServerFactory
     {
         public abstract GenericLoopbackServer CreateServer(GenericLoopbackOptions options = null);
+
         public abstract Task CreateServerAsync(
             Func<GenericLoopbackServer, Uri, Task> funcAsync,
             int millisecondsTimeout = 60_000,
@@ -97,6 +98,7 @@ namespace System.Net.Test.Common
         {
             _socket = socket;
         }
+
         public SocketWrapper(WebSocket websocket)
         {
             _websocket = websocket;
@@ -107,6 +109,7 @@ namespace System.Net.Test.Common
             _socket?.Dispose();
             _websocket?.Dispose();
         }
+
         public void Close()
         {
             _socket?.Close();
@@ -154,6 +157,7 @@ namespace System.Net.Test.Common
 
         /// <summary>Read request Headers and optionally request body as well.</summary>
         public abstract Task<HttpRequestData> ReadRequestDataAsync(bool readBody = true);
+
         /// <summary>Read complete request body if not done by ReadRequestData.</summary>
         public abstract Task<Byte[]> ReadRequestBodyAsync();
 
@@ -166,18 +170,21 @@ namespace System.Net.Test.Common
             bool isFinal = true,
             int requestId = 0
         );
+
         /// <summary>Sends response headers.</summary>
         public abstract Task SendResponseHeadersAsync(
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             int requestId = 0
         );
+
         /// <summary>Sends valid but incomplete headers. Once called, there is no way to continue the response past this point.</summary>
         public abstract Task SendPartialResponseHeadersAsync(
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             int requestId = 0
         );
+
         /// <summary>Sends Response body after SendResponse was called with isFinal: false.</summary>
         public abstract Task SendResponseBodyAsync(
             byte[] content,

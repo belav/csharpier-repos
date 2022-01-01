@@ -17,6 +17,7 @@ public struct ValueTuple<T1, T2, T3>
     public T1 Item1;
     public T2 Item2;
     public T3 Item3;
+
     public ValueTuple(T1 item1, T2 item2, T3 item3)
     {
         Item1 = item1;
@@ -36,6 +37,7 @@ public struct ValueTuple<T1, T2, T3>
     {
         return Item1.Equals(other.Item1) && Item2.Equals(other.Item2) && Item3.Equals(other.Item3);
     }
+
     public override int GetHashCode()
     {
         return 0;
@@ -48,6 +50,7 @@ public static class TupleExtensions
     {
         return ValueTuple<T1, T2, T3>.Create(value.Item1, value.Item2, value.Item3);
     }
+
     public static Tuple<T1, T2, T3> ToTuple<T1, T2, T3>(this ValueTuple<T1, T2, T3> value)
     {
         return Tuple.Create(value.Item1, value.Item2, value.Item3);

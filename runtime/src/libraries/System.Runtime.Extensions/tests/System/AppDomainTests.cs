@@ -317,6 +317,7 @@ namespace System.Tests
                 }
             );
         }
+
 #pragma warning restore SYSLIB0024
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -521,6 +522,7 @@ namespace System.Tests
                 )
                 .Dispose();
         }
+
 #pragma warning restore SYSLIB0024
 
         [Fact]

@@ -216,6 +216,7 @@ namespace System.Collections.Tests
                 () => collection.CopyTo(arr, 0)
             );
         }
+
 #pragma warning restore xUnit1013
 
         [Theory]

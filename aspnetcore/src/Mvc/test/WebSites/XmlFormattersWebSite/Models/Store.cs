@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace XmlFormattersWebSite;
 
 public class Store

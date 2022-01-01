@@ -419,6 +419,7 @@ namespace System.Text.RegularExpressions
 
             return sb.Length >= 2 ? sb.ToString(2, sb.Length - 2) : "None";
         }
+
 #endif
 
         /// <summary>

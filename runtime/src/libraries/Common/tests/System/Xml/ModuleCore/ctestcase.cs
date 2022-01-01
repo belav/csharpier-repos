@@ -14,6 +14,7 @@ namespace OLEDB.Test.ModuleCore
     public class CTestCase : CTestBase //, ITestCases
     {
         public delegate int dlgtTestVariation();
+
         //Data
         private CVariation _curvariation;
 
@@ -181,6 +182,7 @@ namespace OLEDB.Test.ModuleCore
                 TestModule.FailCount++;
             }
         }
+
         //Accessor
         public CTestModule TestModule
         {
@@ -224,6 +226,7 @@ namespace OLEDB.Test.ModuleCore
             get { return _curvariation; }
             set { _curvariation = value; }
         }
+
         public int GetVariationCount()
         {
             return Children.Count;

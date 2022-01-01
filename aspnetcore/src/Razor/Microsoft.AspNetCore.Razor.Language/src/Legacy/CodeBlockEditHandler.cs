@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class CodeBlockEditHandler : SpanEditHandler

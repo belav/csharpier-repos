@@ -198,6 +198,7 @@ namespace Default
     public class Vertex
     {
         public int Name;
+
         //public bool Visited = false;
 
         public Vertex Next;
@@ -270,6 +271,7 @@ namespace Default
     public class Test
     {
         public static int exitCode = 0;
+
         public static int Main()
         {
             Graph.flag = false;

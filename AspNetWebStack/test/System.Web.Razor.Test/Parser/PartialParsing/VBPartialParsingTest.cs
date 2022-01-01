@@ -221,6 +221,7 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
                 );
             }
         }
+
         [Fact]
         public void ImplicitExpressionAcceptsIdentifierExpansionAtEndOfNonWhitespaceCharacters()
         {

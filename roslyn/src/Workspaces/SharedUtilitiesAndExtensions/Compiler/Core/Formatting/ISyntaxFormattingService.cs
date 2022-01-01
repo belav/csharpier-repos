@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 #if !CODE_STYLE
 using Microsoft.CodeAnalysis.Host;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Formatting

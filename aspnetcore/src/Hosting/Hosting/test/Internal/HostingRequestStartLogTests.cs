@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
 public class HostingRequestStartLogTests

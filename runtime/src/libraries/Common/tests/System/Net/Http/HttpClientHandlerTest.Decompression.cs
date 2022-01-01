@@ -16,15 +16,18 @@ namespace System.Net.Http.Functional.Tests
 {
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+
 #endif
 
     public abstract class HttpClientHandler_Decompression_Test : HttpClientHandlerTestBase
     {
 #if !NETFRAMEWORK
         private static readonly DecompressionMethods _all = DecompressionMethods.All;
+
 #else
         private static readonly DecompressionMethods _all =
             DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
 #endif
         public HttpClientHandler_Decompression_Test(ITestOutputHelper output) : base(output) { }
 

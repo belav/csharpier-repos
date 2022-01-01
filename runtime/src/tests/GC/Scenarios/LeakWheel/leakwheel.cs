@@ -430,6 +430,7 @@ namespace DefaultNamespace
         internal Node Next;
         internal Node Parent;
         internal Node Child;
+
         // disabling unused variable warning
 #pragma warning disable 0414
         internal Object vsMem;
@@ -570,6 +571,7 @@ namespace DefaultNamespace
         internal TreeNode left;
         internal TreeNode right;
         internal byte[] mem;
+
         public TreeNode() { }
 
         // Build tree top down, assigning to older objects.

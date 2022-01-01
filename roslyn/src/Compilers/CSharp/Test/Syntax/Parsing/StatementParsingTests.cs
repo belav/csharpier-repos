@@ -4389,7 +4389,9 @@ System.Console.WriteLine(true)";
         private sealed class TokenAndTriviaWalker : CSharpSyntaxWalker
         {
             public int Tokens;
+
             public TokenAndTriviaWalker() : base(SyntaxWalkerDepth.StructuredTrivia) { }
+
             public override void VisitToken(SyntaxToken token)
             {
                 Tokens++;

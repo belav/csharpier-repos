@@ -18,12 +18,14 @@ public class MutexCtor1
     public const int c_DEFAULT_INT_VALUE = 0;
 
     public volatile static int m_SharedResource = c_DEFAULT_INT_VALUE;
+
     #endregion
 
     #region Private Fields
     private const int c_DEFAULT_SLEEP_TIME = 1000; // 1 second
 
     private Mutex m_Mutex = null;
+
     #endregion
 
     #region Public Methods
@@ -151,6 +153,7 @@ public class MutexCtor1
 
         return retVal;
     }
+
     #endregion
     #endregion
 

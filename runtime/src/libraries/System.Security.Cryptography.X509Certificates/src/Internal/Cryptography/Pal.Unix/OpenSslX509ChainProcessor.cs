@@ -1608,6 +1608,7 @@ namespace Internal.Cryptography.Pal
                 builder.Append(" }");
                 return builder.ToString();
             }
+
 #endif
 
             private static int FindBucket(

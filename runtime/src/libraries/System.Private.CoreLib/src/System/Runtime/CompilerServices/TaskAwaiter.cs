@@ -494,6 +494,7 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>The task being awaited.</summary>
             internal readonly Task m_task;
+
             /// <summary>Whether to attempt marshaling back to the original context.</summary>
             internal readonly bool m_continueOnCapturedContext;
 
@@ -595,6 +596,7 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>The task being awaited.</summary>
             private readonly Task<TResult> m_task;
+
             /// <summary>Whether to attempt marshaling back to the original context.</summary>
             private readonly bool m_continueOnCapturedContext;
 

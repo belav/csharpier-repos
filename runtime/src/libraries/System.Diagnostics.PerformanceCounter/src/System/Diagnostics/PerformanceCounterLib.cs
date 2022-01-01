@@ -16,6 +16,7 @@ using static Interop.Advapi32;
 
 #if !NETCOREAPP
 using MemoryMarshal = System.Diagnostics.PerformanceCounterLib;
+
 #endif
 
 namespace System.Diagnostics
@@ -111,6 +112,7 @@ namespace System.Diagnostics
 
         internal static ref readonly T AsRef<T>(ReadOnlySpan<byte> span) where T : struct =>
             ref System.Runtime.InteropServices.MemoryMarshal.Cast<byte, T>(span)[0];
+
 #endif
 
         private Hashtable CategoryTable

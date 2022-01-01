@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class RazorBuildTest : IClassFixture<MvcTestFixture<RazorBuildWebSite.Startup>>

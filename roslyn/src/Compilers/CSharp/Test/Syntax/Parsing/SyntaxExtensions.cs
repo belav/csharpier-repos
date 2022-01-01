@@ -38,6 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return node.Green.ErrorsAndWarnings();
         }
+
         #endregion
 
         # region SyntaxTokenExtensions
@@ -69,6 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return ((Syntax.InternalSyntax.CSharpSyntaxNode)token.Node).ErrorsAndWarnings();
         }
+
         #endregion
 
         # region SyntaxNodeOrTokenExtensions
@@ -88,6 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return nodeOrToken.UnderlyingNode.ErrorsAndWarnings();
         }
+
         #endregion
 
         # region SyntaxTriviaExtensions
@@ -109,6 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             return ((InternalSyntax.CSharpSyntaxNode)trivia.UnderlyingNode).ErrorsAndWarnings();
         }
+
         #endregion
 
         private static ImmutableArray<DiagnosticInfo> ErrorsOrWarnings(

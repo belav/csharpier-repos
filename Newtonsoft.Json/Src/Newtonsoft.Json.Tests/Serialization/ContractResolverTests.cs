@@ -158,6 +158,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(MemberSerialization.Fields, contract.MemberSerialization);
         }
+
 #endif
 
         [Test]
@@ -485,6 +486,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual("AddressLine1", contract.Properties[0].PropertyName);
         }
+
 #endif
 
         [Test]
@@ -697,6 +699,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("Property", (string)o["<StringProperty>k__BackingField"]);
             Assert.AreEqual(2, (int)o["<IntProperty>k__BackingField"]);
         }
+
 #pragma warning restore 618
 #endif
 
@@ -779,12 +782,16 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             [JsonProperty]
             public string Prop1 { get; set; }
+
             [JsonProperty]
             public string Prop2 { get; set; }
+
             [JsonProperty]
             public string Prop3 { get; set; }
+
             [JsonProperty]
             public string Prop4 { get; set; }
+
             [JsonProperty]
             public string Prop5 { get; set; }
 

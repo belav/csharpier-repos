@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 public class IdentityServerJwtBearerOptionsConfigurationTest

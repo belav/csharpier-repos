@@ -6,6 +6,7 @@ using System.IO.Pipelines;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Features;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared;
 
 public class TestConnectionContext : ConnectionContext

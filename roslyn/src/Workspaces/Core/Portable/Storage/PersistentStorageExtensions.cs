@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Storage.CloudCache;
 
 #if !DOTNET_BUILD_FROM_SOURCE
 using Microsoft.CodeAnalysis.SQLite.v2;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Storage

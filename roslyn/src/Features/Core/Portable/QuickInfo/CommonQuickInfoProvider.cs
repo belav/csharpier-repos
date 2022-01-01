@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             QuickInfoContext context,
             SyntaxToken token
         );
+
         protected abstract Task<QuickInfoItem?> BuildQuickInfoAsync(
             CommonQuickInfoContext context,
             SyntaxToken token

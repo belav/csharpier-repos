@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         Cci.ITypeReference Cci.IMetadataExpression.Type => ArrayType;
+
         void Cci.IMetadataExpression.Dispatch(Cci.MetadataVisitor visitor) => visitor.Visit(this);
     }
 }

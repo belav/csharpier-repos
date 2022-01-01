@@ -9,10 +9,12 @@ namespace SinCalc
     internal class MistakeException : Exception
     {
         public object mistake;
+
         public MistakeException(double m) : base("Mistake!")
         {
             mistake = m;
         }
+
         override public String ToString()
         {
             return "Mistake is " + mistake.ToString();

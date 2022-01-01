@@ -47,7 +47,9 @@ namespace System.Data.ProviderBase
                 | DynamicallyAccessedMemberTypes.PublicFields
         )]
         internal abstract Type GetFieldType(int ordinal);
+
         internal abstract object GetValue(int ordinal);
+
         internal abstract int GetValues(object[] values);
 
         internal string GetName(int ordinal)
@@ -56,10 +58,12 @@ namespace System.Data.ProviderBase
             Debug.Assert(null != fieldName, "null GetName");
             return ((null != fieldName) ? fieldName : "");
         }
+
         internal DataTable? GetSchemaTable()
         {
             return _dataReader.GetSchemaTable();
         }
+
         internal bool NextResult()
         {
             _fieldCount = 0;
@@ -70,6 +74,7 @@ namespace System.Data.ProviderBase
             }
             return false;
         }
+
         internal bool Read()
         {
             return _dataReader.Read();
@@ -111,10 +116,12 @@ namespace System.Data.ProviderBase
                 Debug.Assert(null != fieldType, "null FieldType");
                 return fieldType;
             }
+
             internal override object GetValue(int ordinal)
             {
                 return _providerSpecificDataReader.GetProviderSpecificValue(ordinal);
             }
+
             internal override int GetValues(object[] values)
             {
                 return _providerSpecificDataReader.GetProviderSpecificValues(values);
@@ -150,10 +157,12 @@ namespace System.Data.ProviderBase
             {
                 return _dataReader.GetFieldType(ordinal);
             }
+
             internal override object GetValue(int ordinal)
             {
                 return _dataReader.GetValue(ordinal);
             }
+
             internal override int GetValues(object[] values)
             {
                 return _dataReader.GetValues(values);

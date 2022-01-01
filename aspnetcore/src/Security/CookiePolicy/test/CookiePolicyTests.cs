@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.CookiePolicy.Test;
 
 public class CookiePolicyTests

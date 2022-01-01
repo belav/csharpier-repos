@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 public partial class StartupAnalyzer : DiagnosticAnalyzer

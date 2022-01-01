@@ -15,6 +15,7 @@ using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks;
 
 public class ResponseCachingBenchmark

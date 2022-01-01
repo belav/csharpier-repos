@@ -1854,6 +1854,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return true;
         }
+
 #nullable disable
 
         bool ISymbolInternal.IsStatic

@@ -451,6 +451,7 @@ namespace System.Data
                 return _predicateFilter(row);
             }
         }
+
         #endregion
 
         /// <summary>
@@ -1087,7 +1088,9 @@ namespace System.Data
 
         #region IBindingList implementation
         bool IBindingList.AllowNew => AllowNew;
+
         object IBindingList.AddNew() => AddNew();
+
         bool IBindingList.AllowEdit => AllowEdit;
         bool IBindingList.AllowRemove => AllowDelete;
 
@@ -1111,6 +1114,7 @@ namespace System.Data
             (_index!._indexFields.Length == 1 && _index._indexFields[0].IsDescending)
                 ? ListSortDirection.Descending
                 : ListSortDirection.Ascending;
+
         #endregion
 
         #region ListChanged & Initialized events

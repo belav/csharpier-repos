@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.WsFederation;
 
+
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
 /// <summary>

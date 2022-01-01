@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.Hosting;
 
+
 namespace DeveloperExceptionPageSample;
 
 public class Startup

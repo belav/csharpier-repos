@@ -21,6 +21,7 @@ using Microsoft.Net.Http.Headers;
 using Xunit;
 using Http3SettingType = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.Http3SettingType;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class Http3ConnectionTests : Http3TestBase
@@ -583,20 +584,31 @@ public class Http3ConnectionTests : Http3TestBase
         public ICollection<StringValues> Values => _innerHeaders.Values;
         public int Count => _innerHeaders.Count;
         public bool IsReadOnly => _innerHeaders.IsReadOnly;
+
         public void Add(string key, StringValues value) => _innerHeaders.Add(key, value);
+
         public void Add(KeyValuePair<string, StringValues> item) => _innerHeaders.Add(item);
+
         public void Clear() => _innerHeaders.Clear();
+
         public bool Contains(KeyValuePair<string, StringValues> item) =>
             _innerHeaders.Contains(item);
+
         public bool ContainsKey(string key) => _innerHeaders.ContainsKey(key);
+
         public void CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex) =>
             _innerHeaders.CopyTo(array, arrayIndex);
+
         public IEnumerator<KeyValuePair<string, StringValues>> GetEnumerator() =>
             _innerHeaders.GetEnumerator();
+
         public bool Remove(string key) => _innerHeaders.Remove(key);
+
         public bool Remove(KeyValuePair<string, StringValues> item) => _innerHeaders.Remove(item);
+
         public bool TryGetValue(string key, out StringValues value) =>
             _innerHeaders.TryGetValue(key, out value);
+
         IEnumerator IEnumerable.GetEnumerator() => _innerHeaders.GetEnumerator();
     }
 }

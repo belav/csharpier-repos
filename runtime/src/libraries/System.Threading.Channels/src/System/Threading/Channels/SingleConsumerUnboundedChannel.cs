@@ -19,6 +19,7 @@ namespace System.Threading.Channels
     {
         /// <summary>Task that indicates the channel has completed.</summary>
         private readonly TaskCompletionSource _completion;
+
         /// <summary>
         /// A concurrent queue to hold the items for this channel.  The queue itself supports at most
         /// one writer and one reader at a time; as a result, since this channel supports multiple writers,
@@ -26,6 +27,7 @@ namespace System.Threading.Channels
         /// </summary>
         private readonly SingleProducerSingleConsumerQueue<T> _items =
             new SingleProducerSingleConsumerQueue<T>();
+
         /// <summary>Whether to force continuations to be executed asynchronously from producer writes.</summary>
         private readonly bool _runContinuationsAsynchronously;
 
@@ -225,6 +227,7 @@ namespace System.Threading.Channels
         private sealed class UnboundedChannelWriter : ChannelWriter<T>, IDebugEnumerable<T>
         {
             internal readonly SingleConsumerUnboundedChannel<T> _parent;
+
             internal UnboundedChannelWriter(SingleConsumerUnboundedChannel<T> parent) =>
                 _parent = parent;
 

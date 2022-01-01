@@ -71,6 +71,7 @@ namespace Newtonsoft.Json
         /// <exception cref="SerializationException">The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).</exception>
         public JsonException(SerializationInfo info, StreamingContext context) : base(info, context)
         { }
+
 #endif
 
         internal static JsonException Create(IJsonLineInfo lineInfo, string path, string message)

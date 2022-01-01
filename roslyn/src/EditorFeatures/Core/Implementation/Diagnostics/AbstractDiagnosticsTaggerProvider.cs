@@ -114,7 +114,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         }
 
         protected internal abstract bool IsEnabled { get; }
+
         protected internal abstract bool IncludeDiagnostic(DiagnosticData data);
+
         protected internal abstract ITagSpan<TTag>? CreateTagSpan(
             Workspace workspace,
             bool isLiveUpdate,

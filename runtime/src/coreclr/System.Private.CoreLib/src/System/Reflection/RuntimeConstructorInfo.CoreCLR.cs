@@ -43,6 +43,7 @@ namespace System.Reflection
                 return flags;
             }
         }
+
         #endregion
 
         #region Constructor
@@ -60,6 +61,7 @@ namespace System.Reflection
             m_handle = handle.Value;
             m_methodAttributes = methodAttributes;
         }
+
         #endregion
 
         #region NonPublic Methods
@@ -89,6 +91,7 @@ namespace System.Reflection
         private RuntimeType ReflectedTypeInternal => m_reflectedTypeCache.GetRuntimeType();
 
         internal BindingFlags BindingFlags => m_bindingFlags;
+
         #endregion
 
         #region Object Overrides
@@ -112,6 +115,7 @@ namespace System.Reflection
 
             return m_toString;
         }
+
         #endregion
 
         #region ICustomAttributeProvider
@@ -146,6 +150,7 @@ namespace System.Reflection
         {
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
+
         #endregion
 
         #region MemberInfo Overrides
@@ -168,14 +173,17 @@ namespace System.Reflection
         {
             return m_declaringType;
         }
+
         internal RuntimeModule GetRuntimeModule()
         {
             return RuntimeTypeHandle.GetModule(m_declaringType);
         }
+
         internal RuntimeAssembly GetRuntimeAssembly()
         {
             return GetRuntimeModule().GetRuntimeAssembly();
         }
+
         #endregion
 
         #region MethodBase Overrides

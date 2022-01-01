@@ -83,6 +83,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         internal abstract IHeaderFacts HeaderFacts { get; }
 
         protected abstract AbstractTriviaDataFactory CreateTriviaFactory();
+
         protected abstract AbstractFormattingResult CreateFormattingResult(TokenStream tokenStream);
 
         public AbstractFormattingResult Format(CancellationToken cancellationToken)

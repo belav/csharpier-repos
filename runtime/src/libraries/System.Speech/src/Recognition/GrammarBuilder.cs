@@ -235,6 +235,7 @@ namespace System.Speech.Recognition
 
             AddItem(new GrammarBuilderRuleRef(uri, rule));
         }
+
         public string DebugShowPhrases
         {
             get { return DebugSummary; }
@@ -333,18 +334,22 @@ namespace System.Speech.Recognition
             grammar.Append(builder2);
             return grammar;
         }
+
         public static implicit operator GrammarBuilder(string phrase)
         {
             return new GrammarBuilder(phrase);
         }
+
         public static implicit operator GrammarBuilder(Choices choices)
         {
             return new GrammarBuilder(choices);
         }
+
         public static implicit operator GrammarBuilder(SemanticResultKey semanticKey)
         {
             return new GrammarBuilder(semanticKey);
         }
+
         public static implicit operator GrammarBuilder(SemanticResultValue semanticValue)
         {
             return new GrammarBuilder(semanticValue);

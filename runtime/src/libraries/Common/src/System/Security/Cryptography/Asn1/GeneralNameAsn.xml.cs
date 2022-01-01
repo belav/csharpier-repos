@@ -47,6 +47,7 @@ namespace System.Security.Cryptography.Asn1
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 7), "IPAddress");
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 8), "RegisteredId");
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

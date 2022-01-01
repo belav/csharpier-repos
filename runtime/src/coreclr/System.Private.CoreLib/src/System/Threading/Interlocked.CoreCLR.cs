@@ -22,6 +22,7 @@ namespace System.Threading
         /// <returns>The incremented value.</returns>
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
         public static long Increment(ref long location) => Add(ref location, 1);
+
         #endregion
 
         #region Decrement
@@ -36,6 +37,7 @@ namespace System.Threading
         /// <returns>The decremented value.</returns>
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
         public static long Decrement(ref long location) => Add(ref location, -1);
+
         #endregion
 
         #region Exchange
@@ -99,6 +101,7 @@ namespace System.Threading
         public static T Exchange<T>([NotNullIfNotNull("value")] ref T location1, T value)
             where T : class? =>
             Unsafe.As<T>(Exchange(ref Unsafe.As<T, object?>(ref location1), value));
+
         #endregion
 
         #region CompareExchange
@@ -186,6 +189,7 @@ namespace System.Threading
             Unsafe.As<T>(
                 CompareExchange(ref Unsafe.As<T, object?>(ref location1), value, comparand)
             );
+
         #endregion
 
         #region Add
@@ -212,6 +216,7 @@ namespace System.Threading
         [Intrinsic]
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern long ExchangeAdd(ref long location1, long value);
+
         #endregion
 
         #region Read
@@ -219,6 +224,7 @@ namespace System.Threading
         /// <param name="location">The 64-bit value to be loaded.</param>
         /// <returns>The loaded value.</returns>
         public static long Read(ref long location) => CompareExchange(ref location, 0, 0);
+
         #endregion
 
         #region MemoryBarrier

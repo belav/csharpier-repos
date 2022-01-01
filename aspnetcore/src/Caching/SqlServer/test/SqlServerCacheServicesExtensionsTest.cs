@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Caching.SqlServer;
 
 public class SqlServerCacheServicesExtensionsTest

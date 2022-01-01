@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal sealed class Http2StreamErrorException : Exception

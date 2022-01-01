@@ -15,6 +15,7 @@ namespace JitTest
         WinCE = 3,
         Xbox = 5,
     }
+
     internal enum Mood
     {
         good,

@@ -88,6 +88,7 @@ namespace System.Linq.Expressions.Interpreter
 #if DEBUG
         // list of (instruction index, cookie) sorted by instruction index:
         private List<KeyValuePair<int, object?>>? _debugCookies;
+
 #endif
         #region Debug View
 
@@ -318,6 +319,7 @@ namespace System.Linq.Expressions.Interpreter
                 }
             );
         }
+
 #endif
         public InstructionArray ToArray()
         {

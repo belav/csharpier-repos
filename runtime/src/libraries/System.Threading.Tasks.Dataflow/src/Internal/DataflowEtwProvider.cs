@@ -31,6 +31,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// The dataflow provider GUID is {16F53577-E41D-43D4-B47E-C17025BF4025}.
         /// </summary>
         internal static readonly DataflowEtwProvider Log = new DataflowEtwProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private DataflowEtwProvider() { }
 
@@ -44,12 +45,16 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>The event ID for when we encounter a new dataflow block object that hasn't had its name traced to the trace file.</summary>
         private const int DATAFLOWBLOCKCREATED_EVENTID = 1;
+
         /// <summary>The event ID for the task launched event.</summary>
         private const int TASKLAUNCHED_EVENTID = 2;
+
         /// <summary>The event ID for the block completed event.</summary>
         private const int BLOCKCOMPLETED_EVENTID = 3;
+
         /// <summary>The event ID for the block linked event.</summary>
         private const int BLOCKLINKED_EVENTID = 4;
+
         /// <summary>The event ID for the block unlinked event.</summary>
         private const int BLOCKUNLINKED_EVENTID = 5;
 
@@ -85,6 +90,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(DATAFLOWBLOCKCREATED_EVENTID, blockName, blockId);
         }
+
 #endregion
 
 #region Task Launching
@@ -145,6 +151,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
             /// <summary>A task is being launched to offer outgoing messages to linked targets.</summary>
             OfferingOutputMessages = 2,
         }
+
 #endregion
 
 #region Block Completion
@@ -211,6 +218,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(BLOCKCOMPLETED_EVENTID, blockId, reason, exceptionData);
         }
+
 #endregion
 
 #region Linking
@@ -233,6 +241,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(BLOCKLINKED_EVENTID, sourceId, targetId);
         }
+
 #endregion
 
 #region Unlinking

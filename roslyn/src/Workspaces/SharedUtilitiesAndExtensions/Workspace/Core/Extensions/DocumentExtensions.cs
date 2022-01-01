@@ -16,6 +16,7 @@ using Roslyn.Utilities;
 #if DEBUG
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
@@ -86,6 +87,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
+
 #endif
 
         public static async ValueTask<SyntaxNode> GetRequiredSyntaxRootAsync(
@@ -121,6 +123,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
+
 #endif
 
         public static bool IsOpen(this TextDocument document)
@@ -275,6 +278,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 Debug.Assert(false, message + ". " + diagnostics);
             }
         }
+
 #endif
 
 #if !CODE_STYLE
@@ -288,6 +292,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return generatedCodeRecognitionService?.IsGeneratedCode(document, cancellationToken)
                 == true;
         }
+
 #endif
 
         public static async Task<bool> IsGeneratedCodeAsync(

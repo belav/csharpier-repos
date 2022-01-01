@@ -11,29 +11,53 @@ using System.Runtime.CompilerServices;
 using Xunit;
 
 class TestType1<T> { }
+
 class TestType2<T> { }
+
 class TestType3<T> { }
+
 class TestType4<T> { }
+
 class TestType5<T> { }
+
 class TestType6<T> { }
+
 class TestType7<T> { }
+
 class TestType8<T> { }
+
 class TestType9<T> { }
+
 class TestType10<T> { }
+
 class TestType11<T> { }
+
 class TestType12<T> { }
+
 class TestType13<T> { }
+
 class TestType14<T> { }
+
 class TestType15<T> { }
+
 class TestType16<T> { }
+
 class TestType17<T> { }
+
 class TestType18<T> { }
+
 class TestType19<T> { }
+
 class TestType20<T> { }
+
 class TestType21<T> { }
+
 class TestType22<T> { }
+
 class TestType23<T> { }
+
 class TestType24<T> { }
+
 class TestType25<T> { }
 
 public class GenBase

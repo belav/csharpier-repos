@@ -705,6 +705,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 ImmutableArray<DiagnosticData>.Empty
             );
         }
+
         #endregion
 
         internal enum BuildProgress

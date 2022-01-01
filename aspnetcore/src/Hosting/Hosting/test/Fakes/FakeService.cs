@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
 public class FakeService : IFakeEveryService, IDisposable

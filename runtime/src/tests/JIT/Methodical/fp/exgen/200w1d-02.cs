@@ -3,6 +3,7 @@
 
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_0
@@ -16,6 +17,7 @@ internal unsafe class testout1
         public long a38_0;
         public short a70_0;
         public ushort a74_0;
+
         public VT_0(int i)
         {
             a0_0 = 1;
@@ -29,6 +31,7 @@ internal unsafe class testout1
             a74_0 = 1;
         }
     }
+
     public class CL_0
     {
         public float a6_0 = -11373.0F;
@@ -48,6 +51,7 @@ internal unsafe class testout1
         public long a96_0 = 4L;
         public long a98_0 = 1746910335L;
     }
+
     private static double s_a8_0 = 156520.0;
     private static int[,] s_arr2d_0 = new int[3, 201];
     private static long s_a16_0 = -4000615937921583867L;

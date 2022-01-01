@@ -5,6 +5,7 @@ using System.Globalization;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
+
 namespace Templates.Test.Helpers;
 
 internal class TestOutputLogger : ITestOutputHelper

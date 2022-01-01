@@ -77,15 +77,19 @@ namespace System.Data.Common
             [Obsolete("not used", true)]
             void get_Properties( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_AbsolutePosition( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_AbsolutePosition( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void putref_ActiveConnection( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_ActiveConnection( /*deleted parameters signature*/
             );
@@ -96,57 +100,75 @@ namespace System.Data.Common
             [Obsolete("not used", true)]
             void get_BOF( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Bookmark( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_Bookmark( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_CacheSize( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_CacheSize( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_CursorType( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_CursorType( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_EOF( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Fields( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_LockType( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_LockType( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_MaxRecords( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_MaxRecords( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_RecordCount( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void putref_Source( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_Source( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Source( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void AddNew( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void CancelUpdate( /*deleted parameters signature*/
             );
@@ -157,80 +179,107 @@ namespace System.Data.Common
             [Obsolete("not used", true)]
             void Delete( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void GetRows( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void Move( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void MoveNext();
+
             [Obsolete("not used", true)]
             void MovePrevious();
+
             [Obsolete("not used", true)]
             void MoveFirst();
+
             [Obsolete("not used", true)]
             void MoveLast();
+
             [Obsolete("not used", true)]
             void Open( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void Requery( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void _xResync( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void Update( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_AbsolutePage( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_AbsolutePage( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_EditMode( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Filter( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_Filter( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_PageCount( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_PageSize( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_PageSize( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Sort( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_Sort( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Status( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_State( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void _xClone( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void UpdateBatch( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void CancelBatch( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_CursorLocation( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_CursorLocation( /*deleted parameters signature*/
             );
@@ -267,39 +316,51 @@ namespace System.Data.Common
             [Obsolete("not used", true)]
             void put_ActiveConnection( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void putref_ActiveConnection( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_State( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Source( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_Source( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void putref_Source( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_Mode( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void put_Mode( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void get_ParentURL( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void MoveRecord( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void CopyRecord( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void DeleteRecord( /*deleted parameters signature*/
             );
+
             [Obsolete("not used", true)]
             void Open( /*deleted parameters signature*/
             );
@@ -781,6 +842,7 @@ namespace System.Data.Common
 
             //[ Obsolete("not used", true)] void GetHelpContext(/*deleted parameter signature*/);
         }
+
 #if false
         MIDL_INTERFACE("1CF2B120-547D-101B-8E65-08002B2BD119")
         IErrorInfo : public IUnknown
@@ -828,6 +890,7 @@ namespace System.Data.Common
 
             int GetRecordCount();
         }
+
 #if false
     MIDL_INTERFACE("0c733a67-2a1c-11ce-ade5-00aa0044773d")
     IErrorRecords : public IUnknown
@@ -880,6 +943,7 @@ namespace System.Data.Common
                 [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset
             );
         }
+
 #if false
         enum DBRESULTFLAGENUM {
             DBRESULTFLAG_DEFAULT = 0,
@@ -1141,6 +1205,7 @@ namespace System.Data.Common
             internal int _MultipleTrusteeOperation; // MULTIPLE_TRUSTEE_OPERATION
             internal int _TrusteeForm; // TRUSTEE_FORM
             internal int _TrusteeType; // TRUSTEE_TYPE
+
             [MarshalAs(UnmanagedType.LPTStr)]
             internal string _name;
 

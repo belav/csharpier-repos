@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.SourceGenerator;
 
 internal static class GeneratorHelpers

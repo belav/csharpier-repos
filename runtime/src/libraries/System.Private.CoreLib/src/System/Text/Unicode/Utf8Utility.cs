@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 #if SYSTEM_PRIVATE_CORELIB
 using Internal.Runtime.CompilerServices;
+
 #endif
 
 namespace System.Text.Unicode
@@ -27,8 +28,10 @@ namespace System.Text.Unicode
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
         private static ReadOnlySpan<byte> ReplacementCharSequence =>
             new byte[] { 0xEF, 0xBF, 0xBD };
+
 #else
         private static readonly byte[] ReplacementCharSequence = new byte[] { 0xEF, 0xBF, 0xBD };
+
 #endif
 
         /// <summary>

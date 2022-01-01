@@ -200,6 +200,7 @@ namespace System.Xml.Xsl.XPath
                 new QilNode[] { Double(opCode), left, right }
             );
         }
+
         #endregion
 
         #region Type Conversions
@@ -378,6 +379,7 @@ namespace System.Xml.Xsl.XPath
                 new QilNode[] { n }
             );
         }
+
         #endregion
 
         #region Other XPath Functions

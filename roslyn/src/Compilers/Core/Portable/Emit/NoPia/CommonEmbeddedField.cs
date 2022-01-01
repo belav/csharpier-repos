@@ -53,6 +53,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             }
 
             protected abstract MetadataConstant GetCompileTimeValue(EmitContext context);
+
             protected abstract bool IsCompileTimeConstant { get; }
             protected abstract bool IsNotSerialized { get; }
             protected abstract bool IsReadOnly { get; }

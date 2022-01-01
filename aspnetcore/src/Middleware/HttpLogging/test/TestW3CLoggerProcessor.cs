@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 internal sealed class TestW3CLoggerProcessor : W3CLoggerProcessor

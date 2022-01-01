@@ -228,6 +228,7 @@ namespace System.IO
 
         [CLSCompliant(false)]
         public virtual sbyte ReadSByte() => (sbyte)InternalReadByte();
+
         public virtual bool ReadBoolean() => InternalReadByte() != 0;
 
         public virtual char ReadChar()
@@ -247,17 +248,23 @@ namespace System.IO
             BinaryPrimitives.ReadUInt16LittleEndian(InternalRead(2));
 
         public virtual int ReadInt32() => BinaryPrimitives.ReadInt32LittleEndian(InternalRead(4));
+
         [CLSCompliant(false)]
         public virtual uint ReadUInt32() =>
             BinaryPrimitives.ReadUInt32LittleEndian(InternalRead(4));
+
         public virtual long ReadInt64() => BinaryPrimitives.ReadInt64LittleEndian(InternalRead(8));
+
         [CLSCompliant(false)]
         public virtual ulong ReadUInt64() =>
             BinaryPrimitives.ReadUInt64LittleEndian(InternalRead(8));
+
         public virtual Half ReadHalf() =>
             BitConverter.Int16BitsToHalf(BinaryPrimitives.ReadInt16LittleEndian(InternalRead(2)));
+
         public virtual unsafe float ReadSingle() =>
             BitConverter.Int32BitsToSingle(BinaryPrimitives.ReadInt32LittleEndian(InternalRead(4)));
+
         public virtual unsafe double ReadDouble() =>
             BitConverter.Int64BitsToDouble(BinaryPrimitives.ReadInt64LittleEndian(InternalRead(8)));
 

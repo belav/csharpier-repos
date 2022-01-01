@@ -12,8 +12,10 @@ namespace AnalyzerRunner
     internal sealed class PerformanceTracker
     {
         private readonly Stopwatch _stopwatch;
+
 #if NETCOREAPP
         private readonly long _initialTotalAllocatedBytes;
+
 #endif
 
         public PerformanceTracker(Stopwatch stopwatch, long initialTotalAllocatedBytes)
@@ -39,8 +41,10 @@ namespace AnalyzerRunner
 
 #if NETCOREAPP
         public long AllocatedBytes => GC.GetTotalAllocatedBytes(true) - _initialTotalAllocatedBytes;
+
 #else
         public long AllocatedBytes => 0;
+
 #endif
 
         public string GetSummary(bool preciseMemory = true)

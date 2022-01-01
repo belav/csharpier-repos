@@ -4665,6 +4665,7 @@ namespace System.Configuration
                     return keys;
                 }
             }
+
 #endif
 
             internal void ClearStreamInfos()

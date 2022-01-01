@@ -41,6 +41,7 @@ namespace System.Net.Http.Formatting
         private XmlDictionaryReaderQuotas _readerQuotas =
             FormattingUtilities.CreateDefaultReaderQuotas();
         private RequestHeaderMapping _requestHeaderMapping;
+
 #endif
 
         /// <summary>
@@ -98,6 +99,7 @@ namespace System.Net.Http.Formatting
         ///     <c>true</c> if use <see cref="DataContractJsonSerializer"/> by default; otherwise, <c>false</c>. The default is <c>false</c>.
         /// </value>
         public bool UseDataContractJsonSerializer { get; set; }
+
 #endif
 
         /// <summary>
@@ -116,6 +118,7 @@ namespace System.Net.Http.Formatting
                 _readerQuotas.MaxDepth = value;
             }
         }
+
 #endif
 
         /// <inheritdoc />

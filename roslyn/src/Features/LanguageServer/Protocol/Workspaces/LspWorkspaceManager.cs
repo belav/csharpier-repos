@@ -16,6 +16,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Roslyn.Utilities;
 using static Microsoft.CodeAnalysis.LanguageServer.Handler.RequestExecutionQueue;
 
+
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
 /// <summary>

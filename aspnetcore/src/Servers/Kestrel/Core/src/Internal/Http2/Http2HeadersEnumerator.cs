@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, string>>
@@ -19,6 +20,7 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         Trailers,
         Untyped
     }
+
     private HeadersType _headersType;
     private HttpResponseHeaders.Enumerator _headersEnumerator;
     private HttpResponseTrailers.Enumerator _trailersEnumerator;

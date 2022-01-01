@@ -50,10 +50,12 @@ namespace MS.Internal.Xml.Cache
         public const int MaxLineNumberOffset = 0x20;
         public const int MaxLinePositionOffset = 0x20;
         public const int MaxCollapsedPositionOffset = 0x10;
+
 #else
         public const int MaxLineNumberOffset = 0x3FFF;
         public const int MaxLinePositionOffset = 0xFFFF;
         public const int MaxCollapsedPositionOffset = 0xFF;
+
 #endif
 
         /// <summary>

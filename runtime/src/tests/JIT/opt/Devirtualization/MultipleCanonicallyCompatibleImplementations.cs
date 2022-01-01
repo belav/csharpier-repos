@@ -54,4 +54,5 @@ sealed class Foo<T> : Base, IFooable<T>
 }
 
 class Atom1 { }
+
 class Atom2 { }

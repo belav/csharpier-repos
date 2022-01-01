@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Razor;
 
+
 namespace RazorWebSite;
 
 public class NonMainPageViewLocationExpander : IViewLocationExpander

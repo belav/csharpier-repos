@@ -8,7 +8,9 @@ using Xunit;
 namespace System.ComponentModel.Composition
 {
     public interface IContract { }
+
     public class ContractImpl : IContract { }
+
     public class MyEmptyClass
     {
         public ExportFactory<IContract> MyFactoryProperty { get; set; }
@@ -25,6 +27,7 @@ namespace System.ComponentModel.Composition
             this.MyFactoryProperty = myFactoryProperty;
         }
     }
+
     public class MyEmptyClassWithStandardConstructor : MyEmptyClass
     {
         [ImportingConstructor]

@@ -118,6 +118,7 @@ namespace System.IO.Pipelines
         {
             return ReadAsyncInternal(buffer, cancellationToken);
         }
+
 #endif
 
         private async ValueTask<int> ReadAsyncInternal(

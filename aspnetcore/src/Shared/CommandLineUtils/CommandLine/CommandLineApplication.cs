@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.Extensions.CommandLineUtils;
 
 internal class CommandLineApplication
@@ -176,6 +177,7 @@ internal class CommandLineApplication
     {
         Invoke = () => invoke().Result;
     }
+
     public int Execute(params string[] args)
     {
         CommandLineApplication command = this;

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 /// <summary>
@@ -136,16 +137,19 @@ public class PocoUser<TKey> where TKey : IEquatable<TKey>
     /// </summary>
     public virtual ICollection<PocoUserRole<TKey>> Roles { get; private set; } =
         new List<PocoUserRole<TKey>>();
+
     /// <summary>
     /// Navigation property
     /// </summary>
     public virtual ICollection<PocoUserClaim<TKey>> Claims { get; private set; } =
         new List<PocoUserClaim<TKey>>();
+
     /// <summary>
     /// Navigation property
     /// </summary>
     public virtual ICollection<PocoUserLogin<TKey>> Logins { get; private set; } =
         new List<PocoUserLogin<TKey>>();
+
     /// <summary>
     /// Navigation property
     /// </summary>

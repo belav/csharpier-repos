@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
+
 namespace SampleApp;
 
 public class Program
@@ -116,6 +117,7 @@ public class Program
             Console.ReadKey();
         }
     }
+
     private static void DirectWebHost(string[] args)
     {
         // Using defaults with a Startup class

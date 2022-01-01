@@ -134,6 +134,7 @@ namespace System.Collections.Concurrent
         {
             get { throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported); }
         }
+
         #endregion
 
 
@@ -1162,6 +1163,7 @@ namespace System.Collections.Concurrent
             }
             return -1;
         }
+
         /// <summary>
         /// Local static method, used by TryAddTakeAny to get the wait handles for the collection, with exclude option to exclude the Completed collections
         /// </summary>
@@ -1245,6 +1247,7 @@ namespace System.Collections.Concurrent
 
             return currentWaitTimeout;
         }
+
         /// <summary>
         /// Takes an item from any one of the specified
         /// <see cref="System.Collections.Concurrent.BlockingCollection{T}"/> instances.

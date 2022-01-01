@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.WsFederation;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

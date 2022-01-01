@@ -169,6 +169,7 @@ namespace Newtonsoft.Json.Tests
                 result
             );
         }
+
 #endif
 
         [Test]
@@ -247,6 +248,7 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual("1", sw.ToString());
         }
+
 #endif
 
         [Test]
@@ -1567,6 +1569,7 @@ _____'propertyName': NaN,
                 sw.ToString()
             );
         }
+
 #endif
 
         [Test]

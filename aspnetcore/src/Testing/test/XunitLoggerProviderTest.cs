@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
 public class XunitLoggerProviderTest

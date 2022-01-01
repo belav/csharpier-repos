@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Benchmarks;
 
 public class StartupUsingEndpointRouting

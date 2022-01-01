@@ -29,6 +29,7 @@ public interface IMyInterface
 #if V2
     // Adding new methods to interfaces is incompatible change, but we will make sure that it works anyway
     void NewInterfaceMethod();
+
 #endif
 
     string InterfaceMethod(string s);
@@ -73,6 +74,7 @@ public class MyClass : IMyInterface
 
     [ThreadStatic]
     public static String ThreadStaticStringField;
+
 #else
     public static Object StaticObjectField;
 
@@ -88,6 +90,7 @@ public class MyClass : IMyInterface
 
     [ThreadStatic]
     public static DateTime ThreadStaticDateTimeField;
+
 #endif
 
     public MyClass() { }
@@ -99,6 +102,7 @@ public class MyClass : IMyInterface
     {
         throw new Exception();
     }
+
 #endif
 
     public virtual string VirtualMethod()
@@ -164,6 +168,7 @@ public class MyClass : IMyInterface
     {
         return "MovedToBaseClass";
     }
+
 #endif
 
 #if V2
@@ -230,12 +235,14 @@ public class MyGeneric<T, U>
 
     public object m_unused6;
     static public object m_unused7;
+
 #else
     public string m_Field1;
     public T m_Field2;
     public List<T> m_Field3;
     static public KeyValuePair<T, int> m_Field4;
     static public int m_Field5;
+
 #endif
 
     [ThreadStatic]
@@ -257,6 +264,7 @@ public class MyGeneric<T, U>
         typeof(Dictionary<W, W>).ToString();
         return typeof(List<W>).ToString();
     }
+
 #endif
 
 #if V2
@@ -264,11 +272,13 @@ public class MyGeneric<T, U>
     {
         return null;
     }
+
 #else
     public string ChangedToVirtual<W>()
     {
         return typeof(List<W>).ToString();
     }
+
 #endif
 
     public string NonVirtualMethod()
@@ -311,9 +321,11 @@ public struct MyGrowingStruct
 {
     int x;
     int y;
+
 #if V2
     Object o1;
     Object o2;
+
 #endif
 
     static public MyGrowingStruct Construct()
@@ -333,9 +345,11 @@ public struct MyChangingStruct
 #if V2
     public int y;
     public int x;
+
 #else
     public int x;
     public int y;
+
 #endif
 
     static public MyChangingStruct Construct()
@@ -355,9 +369,11 @@ public struct MyChangingHFAStruct
 #if V2
     float x;
     float y;
+
 #else
     int x;
     int y;
+
 #endif
     static public MyChangingHFAStruct Construct()
     {
@@ -393,6 +409,7 @@ public class ByteBaseClass : List<byte>
 {
     public byte BaseByte;
 }
+
 public class ByteChildClass : ByteBaseClass
 {
     public byte ChildByte;

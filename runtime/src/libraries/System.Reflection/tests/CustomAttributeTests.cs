@@ -83,7 +83,9 @@ namespace System.Reflection.Tests
             {
                 NamedField = s;
             }
+
             public StringValuedAttribute() { }
+
             public string NamedProperty
             {
                 get => NamedField;

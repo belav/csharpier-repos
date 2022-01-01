@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom.Html;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
 public class Email : DefaultUIPage

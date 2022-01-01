@@ -325,6 +325,7 @@ namespace System.IO.Ports.Tests
         {
             VerifyBytesToRead(numRndBytesToRead, new UTF8Encoding());
         }
+
         #endregion
 
         #region Verification for Test Cases

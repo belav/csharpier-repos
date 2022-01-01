@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class HubConnectionHandlerTestUtils
@@ -99,6 +100,7 @@ public class HubConnectionHandlerTestUtils
 public class Result
 {
     public string Message { get; set; }
+
 #pragma warning disable IDE1006 // Naming Styles
     // testing casing
     public string paramName { get; set; }

@@ -37,6 +37,7 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         public abstract void Dispose();
+
         public abstract ValueTask DisposeAsync();
 
         public abstract Task<bool> ChecksumMatchesAsync(
@@ -44,11 +45,13 @@ namespace Microsoft.CodeAnalysis.Host
             Checksum checksum,
             CancellationToken cancellationToken
         );
+
         public abstract Task<Stream?> ReadStreamAsync(
             string name,
             Checksum? checksum,
             CancellationToken cancellationToken
         );
+
         public abstract Task<bool> WriteStreamAsync(
             string name,
             Stream stream,
@@ -63,6 +66,7 @@ namespace Microsoft.CodeAnalysis.Host
             Checksum checksum,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<bool> ChecksumMatchesAsync(
             DocumentKey documentKey,
             Document? document,
@@ -70,6 +74,7 @@ namespace Microsoft.CodeAnalysis.Host
             Checksum checksum,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<Stream?> ReadStreamAsync(
             ProjectKey projectKey,
             Project? project,
@@ -77,6 +82,7 @@ namespace Microsoft.CodeAnalysis.Host
             Checksum? checksum,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<Stream?> ReadStreamAsync(
             DocumentKey documentKey,
             Document? document,
@@ -84,6 +90,7 @@ namespace Microsoft.CodeAnalysis.Host
             Checksum? checksum,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<bool> WriteStreamAsync(
             ProjectKey projectKey,
             Project? project,
@@ -92,6 +99,7 @@ namespace Microsoft.CodeAnalysis.Host
             Checksum? checksum,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<bool> WriteStreamAsync(
             DocumentKey documentKey,
             Document? document,

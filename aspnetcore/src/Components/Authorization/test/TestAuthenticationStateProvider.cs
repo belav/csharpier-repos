@@ -3,6 +3,7 @@
 
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Components.Authorization;
 
 public class TestAuthenticationStateProvider : AuthenticationStateProvider

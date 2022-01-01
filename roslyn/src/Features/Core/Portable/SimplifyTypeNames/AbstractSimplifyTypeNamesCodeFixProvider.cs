@@ -32,6 +32,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         }
 
         protected abstract string GetTitle(string diagnosticId, string nodeText);
+
         protected abstract SyntaxNode AddSimplificationAnnotationTo(SyntaxNode node);
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =

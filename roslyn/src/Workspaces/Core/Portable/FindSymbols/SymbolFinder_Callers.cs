@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 #if !NETCOREAPP
 using Roslyn.Utilities;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.FindSymbols

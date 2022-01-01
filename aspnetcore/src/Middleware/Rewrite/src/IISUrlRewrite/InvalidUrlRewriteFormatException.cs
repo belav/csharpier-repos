@@ -5,6 +5,7 @@ using System;
 using System.Xml;
 using System.Xml.Linq;
 
+
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 internal class InvalidUrlRewriteFormatException : FormatException

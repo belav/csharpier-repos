@@ -26,6 +26,7 @@ namespace System
 
 #if DEBUG
             private readonly RuntimeType _originalRuntimeType;
+
 #endif
 
             internal ActivatorCache(RuntimeType rt)

@@ -10,15 +10,19 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
     internal abstract class InteractiveEvaluatorLanguageInfoProvider
     {
         public abstract string LanguageName { get; }
+
         public abstract CompilationOptions GetSubmissionCompilationOptions(
             string name,
             MetadataReferenceResolver metadataReferenceResolver,
             SourceReferenceResolver sourceReferenceResolver,
             ImmutableArray<string> imports
         );
+
         public abstract ParseOptions ParseOptions { get; }
         public abstract CommandLineParser CommandLineParser { get; }
+
         public abstract bool IsCompleteSubmission(string text);
+
         public abstract string InteractiveResponseFileName { get; }
         public abstract Type ReplServiceProviderType { get; }
     }

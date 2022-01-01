@@ -5,6 +5,7 @@ using System;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
 internal abstract class CommandBase

@@ -26,6 +26,7 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>The core implementation of this message block when in default mode.</summary>
         private readonly TargetCore<TInput>? _defaultTarget;
+
         /// <summary>The core implementation of this message block when in SPSC mode.</summary>
         private readonly SpscTargetCore<TInput>? _spscTarget;
 
@@ -398,8 +399,10 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The action block being viewed.</summary>
             private readonly ActionBlock<TInput> _actionBlock;
+
             /// <summary>The action block's default target being viewed.</summary>
             private readonly TargetCore<TInput>.DebuggingInformation? _defaultDebugInfo;
+
             /// <summary>The action block's SPSC target being viewed.</summary>
             private readonly SpscTargetCore<TInput>.DebuggingInformation? _spscDebugInfo;
 
@@ -432,6 +435,7 @@ namespace System.Threading.Tasks.Dataflow
                       : _spscDebugInfo!.InputQueue;
                 }
             }
+
             /// <summary>Gets any postponed messages.</summary>
             public QueuedMap<ISourceBlock<TInput>, DataflowMessageHeader>? PostponedMessages
             {
@@ -462,6 +466,7 @@ namespace System.Threading.Tasks.Dataflow
                       : _spscDebugInfo!.DataflowBlockOptions;
                 }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             public bool IsDecliningPermanently
             {
@@ -472,6 +477,7 @@ namespace System.Threading.Tasks.Dataflow
                       : _spscDebugInfo!.IsDecliningPermanently;
                 }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             public bool IsCompleted
             {
@@ -482,6 +488,7 @@ namespace System.Threading.Tasks.Dataflow
                       : _spscDebugInfo!.IsCompleted;
                 }
             }
+
             /// <summary>Gets the block's Id.</summary>
             public int Id
             {

@@ -503,6 +503,7 @@ namespace Microsoft.CodeAnalysis
 
         public Compilation WithScriptCompilationInfo(ScriptCompilationInfo? info) =>
             CommonWithScriptCompilationInfo(info);
+
         protected abstract Compilation CommonWithScriptCompilationInfo(ScriptCompilationInfo? info);
 
         #endregion
@@ -1246,6 +1247,7 @@ namespace Microsoft.CodeAnalysis
                 elementNullableAnnotations
             );
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         /// <summary>
@@ -1371,6 +1373,7 @@ namespace Microsoft.CodeAnalysis
                 elementNullableAnnotations
             );
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         /// <summary>
@@ -3350,6 +3353,7 @@ namespace Microsoft.CodeAnalysis
                 cancellationToken
             );
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         internal abstract EmitDifferenceResult EmitDifference(
@@ -4064,6 +4068,7 @@ namespace Microsoft.CodeAnalysis
             SymbolFilter filter = SymbolFilter.TypeAndMember,
             CancellationToken cancellationToken = default(CancellationToken)
         );
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         #endregion

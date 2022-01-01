@@ -360,6 +360,7 @@ namespace System.Diagnostics.Tests
                 OutputString +=
                     $"Mock dialog - message: {message}, detailed message: {detailMessage}";
             }
+
             public string OutputString { get; private set; } = string.Empty;
 
             public override void Fail(string message, string detailMessage)

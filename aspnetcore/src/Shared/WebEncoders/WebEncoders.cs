@@ -11,10 +11,13 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.WebEncoders.Sources;
 
+
 #if WebEncoders_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;
+
 #else
 namespace Microsoft.Extensions.Internal;
+
 #endif
 /// <summary>
 /// Contains utility APIs to assist with common encoding and decoding operations.
@@ -425,6 +428,7 @@ static class WebEncoders
 
         return charsWritten;
     }
+
 #endif
 
     private static int GetNumBase64PaddingCharsToAddForDecode(int inputLength)

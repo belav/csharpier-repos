@@ -55,10 +55,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             f = (float)d;
         }
+
         private static long I64(long x)
         {
             return x;
         }
+
         private static long I64(ulong x)
         {
             return (long)x;
@@ -699,6 +701,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 same
             }
         };
+
 #if DEBUG
         private static volatile bool s_fCheckedBetter;
 
@@ -752,6 +755,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
             s_fCheckedBetter = true;
         }
+
 #endif // DEBUG
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -2330,10 +2334,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             return list == null || list.Count == 0;
         }
+
         public static T Head<T>(this List<T> list)
         {
             return list[0];
         }
+
         public static List<T> Tail<T>(this List<T> list)
         {
             T[] array = new T[list.Count];

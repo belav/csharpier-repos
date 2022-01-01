@@ -188,36 +188,48 @@ namespace System.Reflection.Tests
     public class MI_NonGenericClass
     {
         public void PublicMethod() { }
+
         public static void PublicStaticMethod() { }
 
         public T TestGenericMethod<T, U>(T p1, U p2) => p1;
+
         public void TestPartialGenericMethod<T>(T p1, int val) { }
 
         private void MethodA() { }
+
         public string MethodA(string str) => str;
+
         public void MethodA(int i32) { }
+
         private void MethodA(uint ui32) { }
+
         public int MethodA(string str, int i32) => 0;
+
         public uint MethodA(string str, uint ui32) => 0;
     }
 
     public class MI_GenericClass<T>
     {
         public void TestMultipleGenericMethod<U>(T p1, U p2) { }
+
         public void TestGenericMethod(T p1) { }
+
         public void TestMethod(int val) { }
+
         public T TestGenericReturnTypeMethod() => default(T);
     }
 
     public abstract class MI_AbstractClass
     {
         public abstract void MethodA();
+
         public virtual int MethodA(int i) => i;
     }
 
     public class MI_AbstractSubClass : MI_AbstractClass
     {
         public override void MethodA() { }
+
         public override int MethodA(int i) => 0;
     }
 

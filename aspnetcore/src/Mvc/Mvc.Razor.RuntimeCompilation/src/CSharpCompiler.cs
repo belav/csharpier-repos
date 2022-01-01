@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Hosting;
 using DependencyContextCompilationOptions = Microsoft.Extensions.DependencyModel.CompilationOptions;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal class CSharpCompiler

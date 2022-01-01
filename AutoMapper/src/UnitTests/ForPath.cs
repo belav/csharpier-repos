@@ -27,6 +27,7 @@ namespace AutoMapper.UnitTests
         {
             public string DescendantField { get; set; }
         }
+
         // destination types
         public class DataModel
         {

@@ -4,16 +4,20 @@ using System.Linq.Expressions;
 using System.Reflection;
 using AutoMapper.Execution;
 using StringDictionary = System.Collections.Generic.IDictionary<string, object>;
+
 namespace AutoMapper.Internal.Mappers
 {
     using static Expression;
     using static ExpressionBuilder;
+
     public class FromStringDictionaryMapper : IObjectMapper
     {
         private static readonly MethodInfo MapDynamicMehod =
             typeof(FromStringDictionaryMapper).GetStaticMethod(nameof(MapDynamic));
+
         public bool IsMatch(in TypePair context) =>
             typeof(StringDictionary).IsAssignableFrom(context.SourceType);
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,
@@ -29,11 +33,13 @@ namespace AutoMapper.Internal.Mappers
                 ContextParameter,
                 Constant(profileMap)
             );
+
         struct Match
         {
             public object Value;
             public int Count;
         }
+
         private static object MapDynamic(
             StringDictionary source,
             object boxedDestination,

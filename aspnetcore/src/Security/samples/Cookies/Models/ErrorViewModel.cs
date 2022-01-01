@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace AuthSamples.Cookies.Models;
 
 public class ErrorViewModel

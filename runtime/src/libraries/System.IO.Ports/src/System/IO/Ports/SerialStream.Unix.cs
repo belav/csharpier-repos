@@ -16,6 +16,7 @@ namespace System.IO.Ports
     internal sealed partial class SerialStream : Stream
     {
         private const int TimeoutResolution = 30;
+
         // time [ms] loop has to be idle before it stops
         private const int IOLoopIdleTimeout = 2000;
         private bool _ioLoopFinished;
@@ -550,6 +551,7 @@ namespace System.IO.Ports
 
             return new ValueTask<int>(result.Task);
         }
+
 #endif
 
         public override Task WriteAsync(
@@ -597,6 +599,7 @@ namespace System.IO.Ports
 
             return new ValueTask(result.Task);
         }
+
 #endif
 
         public override IAsyncResult BeginRead(

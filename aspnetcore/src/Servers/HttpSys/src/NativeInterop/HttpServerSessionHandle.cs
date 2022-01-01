@@ -6,6 +6,7 @@ using System.Threading;
 using Microsoft.AspNetCore.HttpSys.Internal;
 using Microsoft.Win32.SafeHandles;
 
+
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal sealed class HttpServerSessionHandle : CriticalHandleZeroOrMinusOneIsInvalid

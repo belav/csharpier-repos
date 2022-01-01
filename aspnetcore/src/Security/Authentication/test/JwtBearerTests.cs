@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
 public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
@@ -1139,6 +1140,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         {
             AuthenticationScheme = authenticationScheme;
         }
+
         public BlobTokenValidator(string authenticationScheme, Action<string> tokenValidator)
         {
             AuthenticationScheme = authenticationScheme;

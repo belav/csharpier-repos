@@ -10,6 +10,7 @@ namespace Test
     {
         public double m_dField2 = 47.26;
         public static float m_fForward1;
+
         public static void Method2(object param2, ref double param4)
         {
             while (param4 != 0.0d)
@@ -17,6 +18,7 @@ namespace Test
                 do { } while ((object)m_fForward1 != param2);
             }
         }
+
         static int Main()
         {
             try

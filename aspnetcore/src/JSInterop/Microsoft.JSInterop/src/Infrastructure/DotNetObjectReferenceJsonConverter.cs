@@ -5,6 +5,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+
 namespace Microsoft.JSInterop.Infrastructure;
 
 internal sealed class DotNetObjectReferenceJsonConverter<TValue>

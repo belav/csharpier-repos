@@ -32,6 +32,7 @@ namespace System.Linq.Expressions.Interpreter
         // When a ThreadAbortException is raised from interpreted code this is the first frame that caught it.
         // No handlers within this handler re-abort the current thread when left.
         public ExceptionHandler CurrentAbortHandler;
+
 #endif
 
         internal InterpretedFrame(Interpreter interpreter, IStrongBox[]? closure)
@@ -173,6 +174,7 @@ namespace System.Linq.Expressions.Interpreter
                 return trace.ToArray();
             }
         }
+
 #endif
 
         internal InterpretedFrame? Enter()

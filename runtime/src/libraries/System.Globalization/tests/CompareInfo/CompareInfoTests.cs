@@ -273,6 +273,7 @@ namespace System.Globalization.Tests
                 s_expectedHiraganaToKatakanaCompare
             };
         }
+
         public static IEnumerable<object[]> SortKey_TestData()
         {
             CompareOptions ignoreKanaIgnoreWidthIgnoreCase =
@@ -1461,6 +1462,7 @@ namespace System.Globalization.Tests
             IntPtr lpReserved,
             int lParam
         );
+
         private const int NORM_LINGUISTIC_CASING = 0x08000000; // use linguistic rules for casing
 
         private static bool WindowsVersionHasTheCompareStringRegression =>

@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     internal abstract class DiagnosticQueue
     {
         public abstract bool TryComplete();
+
         public abstract bool TryDequeue([NotNullWhen(returnValue: true)] out Diagnostic? d);
+
         public abstract void Enqueue(Diagnostic diagnostic);
 
         // Methods specific to CategorizedDiagnosticQueue
@@ -26,13 +28,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             bool isSyntaxDiagnostic
         );
+
         public abstract void EnqueueNonLocal(Diagnostic diagnostic, DiagnosticAnalyzer analyzer);
+
         public abstract ImmutableArray<Diagnostic> DequeueLocalSyntaxDiagnostics(
             DiagnosticAnalyzer analyzer
         );
+
         public abstract ImmutableArray<Diagnostic> DequeueLocalSemanticDiagnostics(
             DiagnosticAnalyzer analyzer
         );
+
         public abstract ImmutableArray<Diagnostic> DequeueNonLocalDiagnostics(
             DiagnosticAnalyzer analyzer
         );

@@ -280,6 +280,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 v.Value
             );
         }
+
 #endif
 
 #if !(PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -288,6 +289,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             Assert.IsTrue(new JValue(0) is IConvertible);
         }
+
 #endif
 
         [Test]
@@ -572,6 +574,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             CustomAssert.IsInstanceOfType(typeof(DateTimeOffset), ((JValue)startDateTime).Value);
         }
+
 #endif
 
 #if !(PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -599,6 +602,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             Assert.AreEqual(123, Convert.ToInt32(new JValue(BigInteger.Parse("123"))));
         }
+
 #endif
 
         [Test]
@@ -741,6 +745,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Convert.ToDateTime(new JValue(offset))
             );
         }
+
 #endif
 
 #if !(PORTABLE40 || NET35 || NET20)
@@ -763,6 +768,7 @@ namespace Newtonsoft.Json.Tests.Linq
             byte[] dataBytes = (byte[])o.data;
             Assert.AreEqual(example, Encoding.UTF8.GetString(dataBytes));
         }
+
 #endif
 
         [Test]
@@ -798,6 +804,7 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(new BigInteger(9), bi);
 #endif
         }
+
 #endif
 
         [Test]
@@ -827,6 +834,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 a.ToString()
             );
         }
+
 #endif
 
         [Test]
@@ -882,6 +890,7 @@ namespace Newtonsoft.Json.Tests.Linq
             JValue date2 = (JValue)JToken.ReadFrom(reader2);
             Assert.AreEqual(expectedDate2, date2.Value);
         }
+
 #endif
 
         public class ReadOnlyStringConverter : JsonConverter
@@ -988,6 +997,7 @@ namespace Newtonsoft.Json.Tests.Linq
             [EnumMember(Value = "value_a")]
             ValueA
         }
+
 #endif
 
         [Test]

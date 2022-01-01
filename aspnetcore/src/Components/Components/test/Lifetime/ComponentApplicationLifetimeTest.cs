@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 public class ComponentApplicationLifetimeTest

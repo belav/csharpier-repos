@@ -774,6 +774,7 @@ namespace System.Xml
                 }
             }
         }
+
 #pragma warning restore 618
 
         private XmlParserContext GetContext(XmlNode? node)
@@ -1100,6 +1101,7 @@ namespace System.Xml
             }
             return tr;
         }
+
 #pragma warning restore 618
 
         internal static void ParseXmlDeclarationValue(

@@ -30,6 +30,7 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         where TPropertySyntax : SyntaxNode
     {
         public abstract SyntaxNode GetPropertyNodeToReplace(SyntaxNode propertyDeclaration);
+
         public abstract Task<ImmutableArray<SyntaxNode>> GetReplacementMembersAsync(
             Document document,
             IPropertySymbol property,
@@ -41,6 +42,7 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         );
 
         protected abstract TCrefSyntax? TryGetCrefSyntax(TIdentifierNameSyntax identifierName);
+
         protected abstract TCrefSyntax CreateCrefSyntax(
             TCrefSyntax originalCref,
             SyntaxToken identifierToken,
@@ -51,6 +53,7 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             SyntaxNode compoundAssignment,
             TExpressionSyntax readExpression
         );
+
         public async Task<SyntaxNode?> GetPropertyDeclarationAsync(
             CodeRefactoringContext context
         ) => await context.TryGetRelevantNodeAsync<TPropertySyntax>().ConfigureAwait(false);

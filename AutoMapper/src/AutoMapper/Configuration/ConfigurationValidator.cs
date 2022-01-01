@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using AutoMapper.Internal;
 using AutoMapper.Internal.Mappers;
+
 namespace AutoMapper.Configuration
 {
     using Validator = Action<ValidationContext>;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ConfigurationValidator
     {
@@ -199,6 +201,7 @@ namespace AutoMapper.Configuration
             }
         }
     }
+
     public readonly struct ValidationContext
     {
         public readonly IObjectMapper ObjectMapper { get; }

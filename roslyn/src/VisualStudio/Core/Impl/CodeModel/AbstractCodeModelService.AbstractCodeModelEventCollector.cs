@@ -36,11 +36,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 SyntaxNode parent,
                 CodeModelEventQueue eventQueue
             );
+
             protected abstract void EnqueueRemoveEvent(
                 SyntaxNode node,
                 SyntaxNode parent,
                 CodeModelEventQueue eventQueue
             );
+
             protected abstract void EnqueueChangeEvent(
                 SyntaxNode node,
                 SyntaxNode parent,

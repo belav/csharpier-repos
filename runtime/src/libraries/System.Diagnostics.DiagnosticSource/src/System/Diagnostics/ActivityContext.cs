@@ -125,8 +125,10 @@ namespace System.Diagnostics
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             (obj is ActivityContext context) ? Equals(context) : false;
+
         public static bool operator ==(ActivityContext left, ActivityContext right) =>
             left.Equals(right);
+
         public static bool operator !=(ActivityContext left, ActivityContext right) =>
             !(left == right);
     }

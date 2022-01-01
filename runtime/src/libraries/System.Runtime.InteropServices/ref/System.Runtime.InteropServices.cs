@@ -9,36 +9,46 @@ namespace System
     public sealed partial class DataMisalignedException : System.SystemException
     {
         public DataMisalignedException() { }
+
         public DataMisalignedException(string? message) { }
+
         public DataMisalignedException(string? message, System.Exception? innerException) { }
     }
+
     public partial class DllNotFoundException : System.TypeLoadException
     {
         public DllNotFoundException() { }
+
         protected DllNotFoundException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public DllNotFoundException(string? message) { }
+
         public DllNotFoundException(string? message, System.Exception? inner) { }
     }
 }
+
 namespace System.IO
 {
     public partial class UnmanagedMemoryAccessor : System.IDisposable
     {
         protected UnmanagedMemoryAccessor() { }
+
         public UnmanagedMemoryAccessor(
             System.Runtime.InteropServices.SafeBuffer buffer,
             long offset,
             long capacity
         ) { }
+
         public UnmanagedMemoryAccessor(
             System.Runtime.InteropServices.SafeBuffer buffer,
             long offset,
             long capacity,
             System.IO.FileAccess access
         ) { }
+
         public bool CanRead
         {
             get { throw null; }
@@ -55,100 +65,134 @@ namespace System.IO
         {
             get { throw null; }
         }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         protected void Initialize(
             System.Runtime.InteropServices.SafeBuffer buffer,
             long offset,
             long capacity,
             System.IO.FileAccess access
         ) { }
+
         public int ReadArray<T>(long position, T[] array, int offset, int count) where T : struct
         {
             throw null;
         }
+
         public bool ReadBoolean(long position)
         {
             throw null;
         }
+
         public byte ReadByte(long position)
         {
             throw null;
         }
+
         public char ReadChar(long position)
         {
             throw null;
         }
+
         public decimal ReadDecimal(long position)
         {
             throw null;
         }
+
         public double ReadDouble(long position)
         {
             throw null;
         }
+
         public short ReadInt16(long position)
         {
             throw null;
         }
+
         public int ReadInt32(long position)
         {
             throw null;
         }
+
         public long ReadInt64(long position)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public sbyte ReadSByte(long position)
         {
             throw null;
         }
+
         public float ReadSingle(long position)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public ushort ReadUInt16(long position)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public uint ReadUInt32(long position)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public ulong ReadUInt64(long position)
         {
             throw null;
         }
+
         public void Read<T>(long position, out T structure) where T : struct
         {
             throw null;
         }
+
         public void Write(long position, bool value) { }
+
         public void Write(long position, byte value) { }
+
         public void Write(long position, char value) { }
+
         public void Write(long position, decimal value) { }
+
         public void Write(long position, double value) { }
+
         public void Write(long position, short value) { }
+
         public void Write(long position, int value) { }
+
         public void Write(long position, long value) { }
+
         [System.CLSCompliantAttribute(false)]
         public void Write(long position, sbyte value) { }
+
         public void Write(long position, float value) { }
+
         [System.CLSCompliantAttribute(false)]
         public void Write(long position, ushort value) { }
+
         [System.CLSCompliantAttribute(false)]
         public void Write(long position, uint value) { }
+
         [System.CLSCompliantAttribute(false)]
         public void Write(long position, ulong value) { }
+
         public void WriteArray<T>(long position, T[] array, int offset, int count)
             where T : struct { }
+
         public void Write<T>(long position, ref T structure) where T : struct { }
     }
 }
+
 namespace System.Runtime.CompilerServices
 {
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -160,11 +204,13 @@ namespace System.Runtime.CompilerServices
         : System.Runtime.CompilerServices.CustomConstantAttribute
     {
         public IDispatchConstantAttribute() { }
+
         public override object Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Parameter,
         Inherited = false
@@ -173,12 +219,14 @@ namespace System.Runtime.CompilerServices
         : System.Runtime.CompilerServices.CustomConstantAttribute
     {
         public IUnknownConstantAttribute() { }
+
         public override object Value
         {
             get { throw null; }
         }
     }
 }
+
 namespace System.Runtime.InteropServices
 {
     [System.ObsoleteAttribute(
@@ -195,36 +243,44 @@ namespace System.Runtime.InteropServices
     {
         public AllowReversePInvokeCallsAttribute() { }
     }
+
     public readonly partial struct ArrayWithOffset
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+
         public ArrayWithOffset(object? array, int offset)
         {
             throw null;
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(System.Runtime.InteropServices.ArrayWithOffset obj)
         {
             throw null;
         }
+
         public object? GetArray()
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public int GetOffset()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Runtime.InteropServices.ArrayWithOffset a,
             System.Runtime.InteropServices.ArrayWithOffset b
@@ -232,6 +288,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Runtime.InteropServices.ArrayWithOffset a,
             System.Runtime.InteropServices.ArrayWithOffset b
@@ -240,6 +297,7 @@ namespace System.Runtime.InteropServices
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly
             | System.AttributeTargets.Class
@@ -249,11 +307,13 @@ namespace System.Runtime.InteropServices
     public sealed partial class AutomationProxyAttribute : System.Attribute
     {
         public AutomationProxyAttribute(bool val) { }
+
         public bool Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly
             | System.AttributeTargets.Class
@@ -264,24 +324,30 @@ namespace System.Runtime.InteropServices
     public sealed partial class BestFitMappingAttribute : System.Attribute
     {
         public bool ThrowOnUnmappableChar;
+
         public BestFitMappingAttribute(bool BestFitMapping) { }
+
         public bool BestFitMapping
         {
             get { throw null; }
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class BStrWrapper
     {
         public BStrWrapper(object? value) { }
+
         public BStrWrapper(string? value) { }
+
         public string? WrappedObject
         {
             get { throw null; }
         }
     }
+
     public enum CallingConvention
     {
         Winapi = 1,
@@ -290,6 +356,7 @@ namespace System.Runtime.InteropServices
         ThisCall = 4,
         FastCall = 5,
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly | System.AttributeTargets.Class,
         Inherited = false
@@ -297,14 +364,17 @@ namespace System.Runtime.InteropServices
     public sealed partial class ClassInterfaceAttribute : System.Attribute
     {
         public ClassInterfaceAttribute(short classInterfaceType) { }
+
         public ClassInterfaceAttribute(
             System.Runtime.InteropServices.ClassInterfaceType classInterfaceType
         ) { }
+
         public System.Runtime.InteropServices.ClassInterfaceType Value
         {
             get { throw null; }
         }
     }
+
     public enum ClassInterfaceType
     {
         None = 0,
@@ -319,49 +389,60 @@ namespace System.Runtime.InteropServices
         [System.ObsoleteAttribute("Support for IDispatch may be unavailable in future releases.")]
         AutoDual = 2,
     }
+
     [System.CLSCompliantAttribute(false)]
     public readonly struct CLong : IEquatable<CLong>
     {
         public CLong(int value) { }
+
         public CLong(nint value) { }
+
         public nint Value
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
         )
         {
             throw null;
         }
+
         public bool Equals(CLong other)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
     public sealed partial class CoClassAttribute : System.Attribute
     {
         public CoClassAttribute(System.Type coClass) { }
+
         public System.Type CoClass
         {
             get { throw null; }
         }
     }
+
     public static partial class CollectionsMarshal
     {
         public static System.Span<T> AsSpan<T>(System.Collections.Generic.List<T>? list)
         {
             throw null;
         }
+
         public static ref TValue GetValueRefOrNullRef<TKey, TValue>(
             System.Collections.Generic.Dictionary<TKey, TValue> dictionary,
             TKey key
@@ -369,6 +450,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static ref TValue? GetValueRefOrAddDefault<TKey, TValue>(
             System.Collections.Generic.Dictionary<TKey, TValue> dictionary,
             TKey key,
@@ -378,6 +460,7 @@ namespace System.Runtime.InteropServices
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -388,11 +471,13 @@ namespace System.Runtime.InteropServices
     public sealed partial class ComAliasNameAttribute : System.Attribute
     {
         public ComAliasNameAttribute(string alias) { }
+
         public string Value
         {
             get { throw null; }
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -405,6 +490,7 @@ namespace System.Runtime.InteropServices
                 System.Type type,
             string eventName
         ) { }
+
         public override System.Reflection.EventAttributes Attributes
         {
             get { throw null; }
@@ -429,47 +515,59 @@ namespace System.Runtime.InteropServices
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public override void AddEventHandler(object target, System.Delegate handler) { }
+
         public override System.Reflection.MethodInfo? GetAddMethod(bool nonPublic)
         {
             throw null;
         }
+
         public override object[] GetCustomAttributes(bool inherit)
         {
             throw null;
         }
+
         public override object[] GetCustomAttributes(System.Type attributeType, bool inherit)
         {
             throw null;
         }
+
         public override System.Collections.Generic.IList<System.Reflection.CustomAttributeData> GetCustomAttributesData()
         {
             throw null;
         }
+
         public override System.Reflection.MethodInfo[] GetOtherMethods(bool nonPublic)
         {
             throw null;
         }
+
         public override System.Reflection.MethodInfo? GetRaiseMethod(bool nonPublic)
         {
             throw null;
         }
+
         public override System.Reflection.MethodInfo? GetRemoveMethod(bool nonPublic)
         {
             throw null;
         }
+
         public override bool IsDefined(System.Type attributeType, bool inherit)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public override void RemoveEventHandler(object target, System.Delegate handler) { }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
     public sealed partial class ComCompatibleVersionAttribute : System.Attribute
     {
         public ComCompatibleVersionAttribute(int major, int minor, int build, int revision) { }
+
         public int BuildNumber
         {
             get { throw null; }
@@ -487,20 +585,24 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.All, Inherited = false)]
     public sealed partial class ComConversionLossAttribute : System.Attribute
     {
         public ComConversionLossAttribute() { }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = false)]
     public sealed partial class ComDefaultInterfaceAttribute : System.Attribute
     {
         public ComDefaultInterfaceAttribute(System.Type defaultInterface) { }
+
         public System.Type Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
@@ -522,6 +624,7 @@ namespace System.Runtime.InteropServices
             )]
                 System.Type EventProvider
         ) { }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -534,6 +637,7 @@ namespace System.Runtime.InteropServices
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
         )]
@@ -542,6 +646,7 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
     }
+
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
@@ -549,6 +654,7 @@ namespace System.Runtime.InteropServices
     public static partial class ComEventsHelper
     {
         public static void Combine(object rcw, System.Guid iid, int dispid, System.Delegate d) { }
+
         public static System.Delegate? Remove(
             object rcw,
             System.Guid iid,
@@ -559,21 +665,28 @@ namespace System.Runtime.InteropServices
             throw null;
         }
     }
+
     public partial class COMException : System.Runtime.InteropServices.ExternalException
     {
         public COMException() { }
+
         protected COMException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public COMException(string? message) { }
+
         public COMException(string? message, System.Exception? inner) { }
+
         public COMException(string? message, int errorCode) { }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Interface,
         Inherited = false
@@ -582,6 +695,7 @@ namespace System.Runtime.InteropServices
     {
         public ComImportAttribute() { }
     }
+
     public enum ComInterfaceType
     {
         InterfaceIsDual = 0,
@@ -589,17 +703,20 @@ namespace System.Runtime.InteropServices
         InterfaceIsIDispatch = 2,
         InterfaceIsIInspectable = 3,
     }
+
     public enum ComMemberType
     {
         Method = 0,
         PropGet = 1,
         PropSet = 2,
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class ComRegisterFunctionAttribute : System.Attribute
     {
         public ComRegisterFunctionAttribute() { }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = true)]
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
@@ -607,60 +724,74 @@ namespace System.Runtime.InteropServices
     public sealed partial class ComSourceInterfacesAttribute : System.Attribute
     {
         public ComSourceInterfacesAttribute(string sourceInterfaces) { }
+
         public ComSourceInterfacesAttribute(System.Type sourceInterface) { }
+
         public ComSourceInterfacesAttribute(
             System.Type sourceInterface1,
             System.Type sourceInterface2
         ) { }
+
         public ComSourceInterfacesAttribute(
             System.Type sourceInterface1,
             System.Type sourceInterface2,
             System.Type sourceInterface3
         ) { }
+
         public ComSourceInterfacesAttribute(
             System.Type sourceInterface1,
             System.Type sourceInterface2,
             System.Type sourceInterface3,
             System.Type sourceInterface4
         ) { }
+
         public string Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class ComUnregisterFunctionAttribute : System.Attribute
     {
         public ComUnregisterFunctionAttribute() { }
     }
+
     [System.CLSCompliantAttribute(false)]
     public readonly struct CULong : IEquatable<CULong>
     {
         public CULong(uint value) { }
+
         public CULong(nuint value) { }
+
         public nuint Value
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
         )
         {
             throw null;
         }
+
         public bool Equals(CULong other)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -670,12 +801,15 @@ namespace System.Runtime.InteropServices
     public sealed partial class CurrencyWrapper
     {
         public CurrencyWrapper(decimal obj) { }
+
         public CurrencyWrapper(object obj) { }
+
         public decimal WrappedObject
         {
             get { throw null; }
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -684,6 +818,7 @@ namespace System.Runtime.InteropServices
         Ignore = 0,
         Allow = 1,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -693,15 +828,18 @@ namespace System.Runtime.InteropServices
         NotHandled = 1,
         Failed = 2,
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Module, Inherited = false)]
     public sealed partial class DefaultCharSetAttribute : System.Attribute
     {
         public DefaultCharSetAttribute(System.Runtime.InteropServices.CharSet charSet) { }
+
         public System.Runtime.InteropServices.CharSet CharSet
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly | System.AttributeTargets.Method,
         AllowMultiple = false
@@ -711,20 +849,24 @@ namespace System.Runtime.InteropServices
         public DefaultDllImportSearchPathsAttribute(
             System.Runtime.InteropServices.DllImportSearchPath paths
         ) { }
+
         public System.Runtime.InteropServices.DllImportSearchPath Paths
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter)]
     public sealed partial class DefaultParameterValueAttribute : System.Attribute
     {
         public DefaultParameterValueAttribute(object? value) { }
+
         public object? Value
         {
             get { throw null; }
         }
     }
+
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
@@ -732,11 +874,13 @@ namespace System.Runtime.InteropServices
     public sealed partial class DispatchWrapper
     {
         public DispatchWrapper(object? obj) { }
+
         public object? WrappedObject
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Event
             | System.AttributeTargets.Field
@@ -747,11 +891,13 @@ namespace System.Runtime.InteropServices
     public sealed partial class DispIdAttribute : System.Attribute
     {
         public DispIdAttribute(int dispId) { }
+
         public int Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class DllImportAttribute : System.Attribute
     {
@@ -763,17 +909,21 @@ namespace System.Runtime.InteropServices
         public bool PreserveSig;
         public bool SetLastError;
         public bool ThrowOnUnmappableChar;
+
         public DllImportAttribute(string dllName) { }
+
         public string Value
         {
             get { throw null; }
         }
     }
+
     public delegate System.IntPtr DllImportResolver(
         string libraryName,
         System.Reflection.Assembly assembly,
         System.Runtime.InteropServices.DllImportSearchPath? searchPath
     );
+
     [System.FlagsAttribute]
     public enum DllImportSearchPath
     {
@@ -785,6 +935,7 @@ namespace System.Runtime.InteropServices
         System32 = 2048,
         SafeDirectories = 4096,
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Interface,
         AllowMultiple = false,
@@ -794,19 +945,24 @@ namespace System.Runtime.InteropServices
     {
         public DynamicInterfaceCastableImplementationAttribute() { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class ErrorWrapper
     {
         public ErrorWrapper(System.Exception e) { }
+
         public ErrorWrapper(int errorCode) { }
+
         public ErrorWrapper(object errorCode) { }
+
         public int ErrorCode
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly
             | System.AttributeTargets.Class
@@ -819,15 +975,19 @@ namespace System.Runtime.InteropServices
     public sealed partial class GuidAttribute : System.Attribute
     {
         public GuidAttribute(string guid) { }
+
         public string Value
         {
             get { throw null; }
         }
     }
+
     public sealed partial class HandleCollector
     {
         public HandleCollector(string? name, int initialThreshold) { }
+
         public HandleCollector(string? name, int initialThreshold, int maximumThreshold) { }
+
         public int Count
         {
             get { throw null; }
@@ -844,17 +1004,22 @@ namespace System.Runtime.InteropServices
         {
             get { throw null; }
         }
+
         public void Add() { }
+
         public void Remove() { }
     }
+
     public readonly partial struct HandleRef
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+
         public HandleRef(object? wrapper, System.IntPtr handle)
         {
             throw null;
         }
+
         public System.IntPtr Handle
         {
             get { throw null; }
@@ -863,17 +1028,20 @@ namespace System.Runtime.InteropServices
         {
             get { throw null; }
         }
+
         public static explicit operator System.IntPtr(
             System.Runtime.InteropServices.HandleRef value
         )
         {
             throw null;
         }
+
         public static System.IntPtr ToIntPtr(System.Runtime.InteropServices.HandleRef value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -881,10 +1049,12 @@ namespace System.Runtime.InteropServices
     {
         object GetUnderlyingObject();
     }
+
     public partial interface ICustomFactory
     {
         System.MarshalByRefObject CreateInstance(System.Type serverType);
     }
+
     public partial interface ICustomMarshaler
     {
         void CleanUpManagedData(object ManagedObj);
@@ -893,6 +1063,7 @@ namespace System.Runtime.InteropServices
         System.IntPtr MarshalManagedToNative(object ManagedObj);
         object MarshalNativeToManaged(System.IntPtr pNativeData);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -903,6 +1074,7 @@ namespace System.Runtime.InteropServices
             out System.IntPtr ppv
         );
     }
+
     public partial interface IDynamicInterfaceCastable
     {
         bool IsInterfaceImplemented(
@@ -911,55 +1083,71 @@ namespace System.Runtime.InteropServices
         );
         System.RuntimeTypeHandle GetInterfaceImplementation(System.RuntimeTypeHandle interfaceType);
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
     public sealed partial class ImportedFromTypeLibAttribute : System.Attribute
     {
         public ImportedFromTypeLibAttribute(string tlbFile) { }
+
         public string Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
     public sealed partial class InterfaceTypeAttribute : System.Attribute
     {
         public InterfaceTypeAttribute(short interfaceType) { }
+
         public InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType interfaceType)
         { }
+
         public System.Runtime.InteropServices.ComInterfaceType Value
         {
             get { throw null; }
         }
     }
+
     public partial class InvalidComObjectException : System.SystemException
     {
         public InvalidComObjectException() { }
+
         protected InvalidComObjectException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public InvalidComObjectException(string? message) { }
+
         public InvalidComObjectException(string? message, System.Exception? inner) { }
     }
+
     public partial class InvalidOleVariantTypeException : System.SystemException
     {
         public InvalidOleVariantTypeException() { }
+
         protected InvalidOleVariantTypeException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public InvalidOleVariantTypeException(string? message) { }
+
         public InvalidOleVariantTypeException(string? message, System.Exception? inner) { }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class LCIDConversionAttribute : System.Attribute
     {
         public LCIDConversionAttribute(int lcid) { }
+
         public int Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Method,
         Inherited = false,
@@ -968,6 +1156,7 @@ namespace System.Runtime.InteropServices
     public sealed partial class ManagedToNativeComInteropStubAttribute : System.Attribute
     {
         public ManagedToNativeComInteropStubAttribute(System.Type classType, string methodName) { }
+
         public System.Type ClassType
         {
             get { throw null; }
@@ -977,30 +1166,37 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
     }
+
     public static partial class Marshal
     {
         public static readonly int SystemDefaultCharSize;
         public static readonly int SystemMaxDBCSCharSize;
+
         public static int AddRef(System.IntPtr pUnk)
         {
             throw null;
         }
+
         public static System.IntPtr AllocCoTaskMem(int cb)
         {
             throw null;
         }
+
         public static System.IntPtr AllocHGlobal(int cb)
         {
             throw null;
         }
+
         public static System.IntPtr AllocHGlobal(System.IntPtr cb)
         {
             throw null;
         }
+
         public static bool AreComObjectsAvailableForCleanup()
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "Built-in COM support is not trim compatible",
             Url = "https://aka.ms/dotnet-illink/com"
@@ -1010,105 +1206,124 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void ChangeWrapperHandleStrength(object otp, bool fIsWeak) { }
+
         public static void CleanupUnusedObjectsInCurrentContext() { }
+
         public static void Copy(
             byte[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         public static void Copy(
             char[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         public static void Copy(
             double[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         public static void Copy(
             short[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         public static void Copy(
             int[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         public static void Copy(
             long[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             byte[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             char[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             double[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             short[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             int[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             long[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             System.IntPtr[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr source,
             float[] destination,
             int startIndex,
             int length
         ) { }
+
         public static void Copy(
             System.IntPtr[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         public static void Copy(
             float[] source,
             int startIndex,
             System.IntPtr destination,
             int length
         ) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1117,12 +1332,14 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.IntPtr CreateAggregatedObject<T>(System.IntPtr pOuter, T o)
             where T : notnull
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1132,32 +1349,42 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static TWrapper CreateWrapperOfType<T, TWrapper>(T? o)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public static void DestroyStructure(System.IntPtr ptr, System.Type structuretype) { }
+
         public static void DestroyStructure<T>(System.IntPtr ptr) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static int FinalReleaseComObject(object o)
         {
             throw null;
         }
+
         public static void FreeBSTR(System.IntPtr ptr) { }
+
         public static void FreeCoTaskMem(System.IntPtr ptr) { }
+
         public static void FreeHGlobal(System.IntPtr hglobal) { }
+
         public static System.Guid GenerateGuidForType(System.Type type)
         {
             throw null;
         }
+
         public static string? GenerateProgIdForType(System.Type type)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1166,6 +1393,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1178,6 +1406,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.IntPtr GetComInterfaceForObject<T, TInterface>(
             [System.Diagnostics.CodeAnalysis.DisallowNullAttribute] T o
@@ -1185,11 +1414,13 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static object? GetComObjectData(object obj, object key)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1200,15 +1431,18 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static TDelegate GetDelegateForFunctionPointer<TDelegate>(System.IntPtr ptr)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static int GetEndComSlot(System.Type t)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1217,18 +1451,22 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static System.Exception? GetExceptionForHR(int errorCode)
         {
             throw null;
         }
+
         public static System.Exception? GetExceptionForHR(int errorCode, System.IntPtr errorInfo)
         {
             throw null;
         }
+
         public static System.IntPtr GetExceptionPointers()
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1236,45 +1474,55 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static System.IntPtr GetFunctionPointerForDelegate<TDelegate>(TDelegate d)
             where TDelegate : notnull
         {
             throw null;
         }
+
         public static System.IntPtr GetHINSTANCE(System.Reflection.Module m)
         {
             throw null;
         }
+
         public static int GetHRForException(System.Exception? e)
         {
             throw null;
         }
+
         public static int GetHRForLastWin32Error()
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.IntPtr GetIDispatchForObject(object o)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.IntPtr GetIUnknownForObject(object o)
         {
             throw null;
         }
+
         public static int GetLastPInvokeError()
         {
             throw null;
         }
+
         public static int GetLastSystemError()
         {
             throw null;
         }
+
         public static int GetLastWin32Error()
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1283,16 +1531,19 @@ namespace System.Runtime.InteropServices
             object? obj,
             System.IntPtr pDstNativeVariant
         ) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public static void GetNativeVariantForObject<T>(T? obj, System.IntPtr pDstNativeVariant) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static object GetObjectForIUnknown(System.IntPtr pUnk)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1301,6 +1552,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1309,6 +1561,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1320,6 +1573,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -1328,21 +1582,25 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static int GetStartComSlot(System.Type t)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static object GetTypedObjectForIUnknown(System.IntPtr pUnk, System.Type t)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.Type? GetTypeFromCLSID(System.Guid clsid)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static string GetTypeInfoName(
             System.Runtime.InteropServices.ComTypes.ITypeInfo typeInfo
@@ -1350,20 +1608,25 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static object GetUniqueObjectForIUnknown(System.IntPtr unknown)
         {
             throw null;
         }
+
         public static void InitHandle(SafeHandle safeHandle, IntPtr handle) { }
+
         public static bool IsComObject(object o)
         {
             throw null;
         }
+
         public static bool IsTypeVisibleFromCom(System.Type t)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1371,52 +1634,66 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static System.IntPtr OffsetOf<T>(string fieldName)
         {
             throw null;
         }
+
         public static void Prelink(System.Reflection.MethodInfo m) { }
+
         public static void PrelinkAll(System.Type c) { }
+
         public static string? PtrToStringAnsi(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static string PtrToStringAnsi(System.IntPtr ptr, int len)
         {
             throw null;
         }
+
         public static string? PtrToStringAuto(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static string? PtrToStringAuto(System.IntPtr ptr, int len)
         {
             throw null;
         }
+
         public static string PtrToStringBSTR(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static string? PtrToStringUni(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static string PtrToStringUni(System.IntPtr ptr, int len)
         {
             throw null;
         }
+
         public static string? PtrToStringUTF8(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static string PtrToStringUTF8(System.IntPtr ptr, int byteLen)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public static void PtrToStructure(System.IntPtr ptr, object structure) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1431,6 +1708,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static T? PtrToStructure<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
@@ -1441,10 +1719,12 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static void PtrToStructure<T>(
             System.IntPtr ptr,
             [System.Diagnostics.CodeAnalysis.DisallowNullAttribute] T structure
         ) { }
+
         public static int QueryInterface(
             System.IntPtr pUnk,
             ref System.Guid iid,
@@ -1453,14 +1733,17 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static byte ReadByte(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static byte ReadByte(System.IntPtr ptr, int ofs)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1469,14 +1752,17 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static short ReadInt16(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static short ReadInt16(System.IntPtr ptr, int ofs)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1487,14 +1773,17 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static int ReadInt32(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static int ReadInt32(System.IntPtr ptr, int ofs)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1505,14 +1794,17 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static long ReadInt64(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static long ReadInt64(System.IntPtr ptr, int ofs)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1523,14 +1815,17 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static System.IntPtr ReadIntPtr(System.IntPtr ptr)
         {
             throw null;
         }
+
         public static System.IntPtr ReadIntPtr(System.IntPtr ptr, int ofs)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1541,56 +1836,69 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static System.IntPtr ReAllocCoTaskMem(System.IntPtr pv, int cb)
         {
             throw null;
         }
+
         public static System.IntPtr ReAllocHGlobal(System.IntPtr pv, System.IntPtr cb)
         {
             throw null;
         }
+
         public static int Release(System.IntPtr pUnk)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static int ReleaseComObject(object o)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToBSTR(System.Security.SecureString s)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToCoTaskMemAnsi(System.Security.SecureString s)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToCoTaskMemUnicode(System.Security.SecureString s)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToGlobalAllocAnsi(System.Security.SecureString s)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToGlobalAllocUnicode(System.Security.SecureString s)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static bool SetComObjectData(object obj, object key, object? data)
         {
             throw null;
         }
+
         public static void SetLastPInvokeError(int error)
         {
             throw null;
         }
+
         public static void SetLastSystemError(int error)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1598,6 +1906,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1605,57 +1914,72 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static int SizeOf<T>()
         {
             throw null;
         }
+
         public static int SizeOf<T>(T structure)
         {
             throw null;
         }
+
         public static System.IntPtr StringToBSTR(string? s)
         {
             throw null;
         }
+
         public static System.IntPtr StringToCoTaskMemAnsi(string? s)
         {
             throw null;
         }
+
         public static System.IntPtr StringToCoTaskMemAuto(string? s)
         {
             throw null;
         }
+
         public static System.IntPtr StringToCoTaskMemUni(string? s)
         {
             throw null;
         }
+
         public static System.IntPtr StringToCoTaskMemUTF8(string? s)
         {
             throw null;
         }
+
         public static System.IntPtr StringToHGlobalAnsi(string? s)
         {
             throw null;
         }
+
         public static System.IntPtr StringToHGlobalAuto(string? s)
         {
             throw null;
         }
+
         public static System.IntPtr StringToHGlobalUni(string? s)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public static void StructureToPtr(object structure, System.IntPtr ptr, bool fDeleteOld) { }
+
         public static void StructureToPtr<T>(
             [System.Diagnostics.CodeAnalysis.DisallowNullAttribute] T structure,
             System.IntPtr ptr,
             bool fDeleteOld
         ) { }
+
         public static void ThrowExceptionForHR(int errorCode) { }
+
         public static void ThrowExceptionForHR(int errorCode, System.IntPtr errorInfo) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1663,12 +1987,16 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static System.IntPtr UnsafeAddrOfPinnedArrayElement<T>(T[] arr, int index)
         {
             throw null;
         }
+
         public static void WriteByte(System.IntPtr ptr, byte val) { }
+
         public static void WriteByte(System.IntPtr ptr, int ofs, byte val) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1676,10 +2004,15 @@ namespace System.Runtime.InteropServices
             "WriteByte(Object, Int32, Byte) may be unavailable in future releases."
         )]
         public static void WriteByte(object ptr, int ofs, byte val) { }
+
         public static void WriteInt16(System.IntPtr ptr, char val) { }
+
         public static void WriteInt16(System.IntPtr ptr, short val) { }
+
         public static void WriteInt16(System.IntPtr ptr, int ofs, char val) { }
+
         public static void WriteInt16(System.IntPtr ptr, int ofs, short val) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1687,6 +2020,7 @@ namespace System.Runtime.InteropServices
             "WriteInt16(Object, Int32, Char) may be unavailable in future releases."
         )]
         public static void WriteInt16(object ptr, int ofs, char val) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1694,8 +2028,11 @@ namespace System.Runtime.InteropServices
             "WriteInt16(Object, Int32, Int16) may be unavailable in future releases."
         )]
         public static void WriteInt16(object ptr, int ofs, short val) { }
+
         public static void WriteInt32(System.IntPtr ptr, int val) { }
+
         public static void WriteInt32(System.IntPtr ptr, int ofs, int val) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1703,8 +2040,11 @@ namespace System.Runtime.InteropServices
             "WriteInt32(Object, Int32, Int32) may be unavailable in future releases."
         )]
         public static void WriteInt32(object ptr, int ofs, int val) { }
+
         public static void WriteInt64(System.IntPtr ptr, int ofs, long val) { }
+
         public static void WriteInt64(System.IntPtr ptr, long val) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1712,8 +2052,11 @@ namespace System.Runtime.InteropServices
             "WriteInt64(Object, Int32, Int64) may be unavailable in future releases."
         )]
         public static void WriteInt64(object ptr, int ofs, long val) { }
+
         public static void WriteIntPtr(System.IntPtr ptr, int ofs, System.IntPtr val) { }
+
         public static void WriteIntPtr(System.IntPtr ptr, System.IntPtr val) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -1721,13 +2064,20 @@ namespace System.Runtime.InteropServices
             "WriteIntPtr(Object, Int32, IntPtr) may be unavailable in future releases."
         )]
         public static void WriteIntPtr(object ptr, int ofs, System.IntPtr val) { }
+
         public static void ZeroFreeBSTR(System.IntPtr s) { }
+
         public static void ZeroFreeCoTaskMemAnsi(System.IntPtr s) { }
+
         public static void ZeroFreeCoTaskMemUnicode(System.IntPtr s) { }
+
         public static void ZeroFreeCoTaskMemUTF8(System.IntPtr s) { }
+
         public static void ZeroFreeGlobalAllocAnsi(System.IntPtr s) { }
+
         public static void ZeroFreeGlobalAllocUnicode(System.IntPtr s) { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -1745,34 +2095,45 @@ namespace System.Runtime.InteropServices
         public System.Type? SafeArrayUserDefinedSubType;
         public int SizeConst;
         public short SizeParamIndex;
+
         public MarshalAsAttribute(short unmanagedType) { }
+
         public MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType unmanagedType) { }
+
         public System.Runtime.InteropServices.UnmanagedType Value
         {
             get { throw null; }
         }
     }
+
     public partial class MarshalDirectiveException : System.SystemException
     {
         public MarshalDirectiveException() { }
+
         protected MarshalDirectiveException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public MarshalDirectiveException(string? message) { }
+
         public MarshalDirectiveException(string? message, System.Exception? inner) { }
     }
+
     public static partial class NativeLibrary
     {
         public static void Free(System.IntPtr handle) { }
+
         public static System.IntPtr GetExport(System.IntPtr handle, string name)
         {
             throw null;
         }
+
         public static System.IntPtr Load(string libraryPath)
         {
             throw null;
         }
+
         public static System.IntPtr Load(
             string libraryName,
             System.Reflection.Assembly assembly,
@@ -1781,10 +2142,12 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static void SetDllImportResolver(
             System.Reflection.Assembly assembly,
             System.Runtime.InteropServices.DllImportResolver resolver
         ) { }
+
         public static bool TryGetExport(
             System.IntPtr handle,
             string name,
@@ -1793,10 +2156,12 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static bool TryLoad(string libraryPath, out System.IntPtr handle)
         {
             throw null;
         }
+
         public static bool TryLoad(
             string libraryName,
             System.Reflection.Assembly assembly,
@@ -1807,6 +2172,7 @@ namespace System.Runtime.InteropServices
             throw null;
         }
     }
+
     public static unsafe partial class NativeMemory
     {
         [System.CLSCompliantAttribute(false)]
@@ -1814,73 +2180,90 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static void AlignedFree(void* ptr) { }
+
         [System.CLSCompliantAttribute(false)]
         public static void* AlignedRealloc(void* ptr, nuint byteCount, nuint alignment)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static void* Alloc(nuint byteCount)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static void* Alloc(nuint elementCount, nuint elementSize)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static void* AllocZeroed(nuint byteCount)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static void* AllocZeroed(nuint elementCount, nuint elementSize)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static void Free(void* ptr) { }
+
         [System.CLSCompliantAttribute(false)]
         public static void* Realloc(void* ptr, nuint byteCount)
         {
             throw null;
         }
     }
+
     public readonly struct NFloat : IEquatable<NFloat>
     {
         public NFloat(float value) { }
+
         public NFloat(double value) { }
+
         public double Value
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o
         )
         {
             throw null;
         }
+
         public bool Equals(NFloat other)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter, Inherited = false)]
     public sealed partial class OptionalAttribute : System.Attribute
     {
         public OptionalAttribute() { }
     }
+
     public enum PosixSignal
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
@@ -1900,9 +2283,11 @@ namespace System.Runtime.InteropServices
         SIGINT = -2,
         SIGHUP = -1,
     }
+
     public sealed partial class PosixSignalContext
     {
         public PosixSignalContext(System.Runtime.InteropServices.PosixSignal signal) { }
+
         public bool Cancel
         {
             get { throw null; }
@@ -1913,9 +2298,11 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
     }
+
     public sealed partial class PosixSignalRegistration : System.IDisposable
     {
         internal PosixSignalRegistration() { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -1927,14 +2314,18 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public void Dispose() { }
+
         ~PosixSignalRegistration() { }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class PreserveSigAttribute : System.Attribute
     {
         public PreserveSigAttribute() { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly,
         Inherited = false,
@@ -1943,6 +2334,7 @@ namespace System.Runtime.InteropServices
     public sealed partial class PrimaryInteropAssemblyAttribute : System.Attribute
     {
         public PrimaryInteropAssemblyAttribute(int major, int minor) { }
+
         public int MajorVersion
         {
             get { throw null; }
@@ -1952,15 +2344,18 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = false)]
     public sealed partial class ProgIdAttribute : System.Attribute
     {
         public ProgIdAttribute(string progId) { }
+
         public string Value
         {
             get { throw null; }
         }
     }
+
     public static partial class RuntimeEnvironment
     {
         [System.ObsoleteAttribute(
@@ -1972,14 +2367,17 @@ namespace System.Runtime.InteropServices
         {
             get { throw null; }
         }
+
         public static bool FromGlobalAccessCache(System.Reflection.Assembly a)
         {
             throw null;
         }
+
         public static string GetRuntimeDirectory()
         {
             throw null;
         }
+
         [System.ObsoleteAttribute(
             "RuntimeEnvironment members SystemConfigurationFile, GetRuntimeInterfaceAsIntPtr, and GetRuntimeInterfaceAsObject are not supported and throw PlatformNotSupportedException.",
             DiagnosticId = "SYSLIB0019",
@@ -1989,6 +2387,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         [System.ObsoleteAttribute(
             "RuntimeEnvironment members SystemConfigurationFile, GetRuntimeInterfaceAsIntPtr, and GetRuntimeInterfaceAsObject are not supported and throw PlatformNotSupportedException.",
             DiagnosticId = "SYSLIB0019",
@@ -1998,49 +2397,65 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static string GetSystemVersion()
         {
             throw null;
         }
     }
+
     public partial class SafeArrayRankMismatchException : System.SystemException
     {
         public SafeArrayRankMismatchException() { }
+
         protected SafeArrayRankMismatchException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public SafeArrayRankMismatchException(string? message) { }
+
         public SafeArrayRankMismatchException(string? message, System.Exception? inner) { }
     }
+
     public partial class SafeArrayTypeMismatchException : System.SystemException
     {
         public SafeArrayTypeMismatchException() { }
+
         protected SafeArrayTypeMismatchException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public SafeArrayTypeMismatchException(string? message) { }
+
         public SafeArrayTypeMismatchException(string? message, System.Exception? inner) { }
     }
+
     public partial class SEHException : System.Runtime.InteropServices.ExternalException
     {
         public SEHException() { }
+
         protected SEHException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public SEHException(string? message) { }
+
         public SEHException(string? message, System.Exception? inner) { }
+
         public virtual bool CanResume()
         {
             throw null;
         }
     }
+
     public partial class StandardOleMarshalObject : System.MarshalByRefObject
     {
         protected StandardOleMarshalObject() { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Delegate
             | System.AttributeTargets.Enum
@@ -2052,7 +2467,9 @@ namespace System.Runtime.InteropServices
     public sealed partial class TypeIdentifierAttribute : System.Attribute
     {
         public TypeIdentifierAttribute() { }
+
         public TypeIdentifierAttribute(string? scope, string? identifier) { }
+
         public string? Identifier
         {
             get { throw null; }
@@ -2062,16 +2479,20 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed partial class TypeLibFuncAttribute : System.Attribute
     {
         public TypeLibFuncAttribute(short flags) { }
+
         public TypeLibFuncAttribute(System.Runtime.InteropServices.TypeLibFuncFlags flags) { }
+
         public System.Runtime.InteropServices.TypeLibFuncFlags Value
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum TypeLibFuncFlags
     {
@@ -2089,15 +2510,18 @@ namespace System.Runtime.InteropServices
         FReplaceable = 2048,
         FImmediateBind = 4096,
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
     public sealed partial class TypeLibImportClassAttribute : System.Attribute
     {
         public TypeLibImportClassAttribute(System.Type importClass) { }
+
         public string Value
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class
             | System.AttributeTargets.Enum
@@ -2108,12 +2532,15 @@ namespace System.Runtime.InteropServices
     public sealed partial class TypeLibTypeAttribute : System.Attribute
     {
         public TypeLibTypeAttribute(short flags) { }
+
         public TypeLibTypeAttribute(System.Runtime.InteropServices.TypeLibTypeFlags flags) { }
+
         public System.Runtime.InteropServices.TypeLibTypeFlags Value
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum TypeLibTypeFlags
     {
@@ -2132,16 +2559,20 @@ namespace System.Runtime.InteropServices
         FDispatchable = 4096,
         FReverseBind = 8192,
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Field, Inherited = false)]
     public sealed partial class TypeLibVarAttribute : System.Attribute
     {
         public TypeLibVarAttribute(short flags) { }
+
         public TypeLibVarAttribute(System.Runtime.InteropServices.TypeLibVarFlags flags) { }
+
         public System.Runtime.InteropServices.TypeLibVarFlags Value
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum TypeLibVarFlags
     {
@@ -2159,10 +2590,12 @@ namespace System.Runtime.InteropServices
         FReplaceable = 2048,
         FImmediateBind = 4096,
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
     public sealed partial class TypeLibVersionAttribute : System.Attribute
     {
         public TypeLibVersionAttribute(int major, int minor) { }
+
         public int MajorVersion
         {
             get { throw null; }
@@ -2172,17 +2605,20 @@ namespace System.Runtime.InteropServices
             get { throw null; }
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class UnknownWrapper
     {
         public UnknownWrapper(object? obj) { }
+
         public object? WrappedObject
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Delegate,
         AllowMultiple = false,
@@ -2194,14 +2630,17 @@ namespace System.Runtime.InteropServices
         public System.Runtime.InteropServices.CharSet CharSet;
         public bool SetLastError;
         public bool ThrowOnUnmappableChar;
+
         public UnmanagedFunctionPointerAttribute(
             System.Runtime.InteropServices.CallingConvention callingConvention
         ) { }
+
         public System.Runtime.InteropServices.CallingConvention CallingConvention
         {
             get { throw null; }
         }
     }
+
     public enum UnmanagedType
     {
         Bool = 2,
@@ -2279,6 +2718,7 @@ namespace System.Runtime.InteropServices
         HString = 47,
         LPUTF8Str = 48,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2329,17 +2769,20 @@ namespace System.Runtime.InteropServices
         VT_ARRAY = 8192,
         VT_BYREF = 16384,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class VariantWrapper
     {
         public VariantWrapper(object? obj) { }
+
         public object? WrappedObject
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum CreateComInterfaceFlags
     {
@@ -2347,6 +2790,7 @@ namespace System.Runtime.InteropServices
         CallerDefinedIUnknown = 1,
         TrackerSupport = 2,
     }
+
     [System.FlagsAttribute]
     public enum CreateObjectFlags
     {
@@ -2356,6 +2800,7 @@ namespace System.Runtime.InteropServices
         Aggregation = 4,
         Unwrap = 8,
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatform("ios")]
@@ -2368,14 +2813,17 @@ namespace System.Runtime.InteropServices
             public System.Guid IID;
             public System.IntPtr Vtable;
         }
+
         public struct ComInterfaceDispatch
         {
             public System.IntPtr Vtable;
+
             public unsafe static T GetInstance<T>(ComInterfaceDispatch* dispatchPtr) where T : class
             {
                 throw null;
             }
         }
+
         public System.IntPtr GetOrCreateComInterfaceForObject(
             object instance,
             CreateComInterfaceFlags flags
@@ -2383,11 +2831,13 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         protected unsafe abstract ComInterfaceEntry* ComputeVtables(
             object obj,
             CreateComInterfaceFlags flags,
             out int count
         );
+
         public object GetOrCreateObjectForComInstance(
             System.IntPtr externalComObject,
             CreateObjectFlags flags
@@ -2395,10 +2845,12 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         protected abstract object? CreateObject(
             System.IntPtr externalComObject,
             CreateObjectFlags flags
         );
+
         public object GetOrRegisterObjectForComInstance(
             System.IntPtr externalComObject,
             CreateObjectFlags flags,
@@ -2407,6 +2859,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public object GetOrRegisterObjectForComInstance(
             System.IntPtr externalComObject,
             CreateObjectFlags flags,
@@ -2416,10 +2869,14 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         protected abstract void ReleaseObjects(System.Collections.IEnumerable objects);
+
         public static void RegisterForTrackerSupport(ComWrappers instance) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void RegisterForMarshalling(ComWrappers instance) { }
+
         protected static void GetIUnknownImpl(
             out System.IntPtr fpQueryInterface,
             out System.IntPtr fpAddRef,
@@ -2429,6 +2886,7 @@ namespace System.Runtime.InteropServices
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Method,
         AllowMultiple = false,
@@ -2437,16 +2895,20 @@ namespace System.Runtime.InteropServices
     public sealed class UnmanagedCallConvAttribute : System.Attribute
     {
         public UnmanagedCallConvAttribute() { }
+
         public System.Type[]? CallConvs;
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
     public sealed class UnmanagedCallersOnlyAttribute : System.Attribute
     {
         public UnmanagedCallersOnlyAttribute() { }
+
         public System.Type[]? CallConvs;
         public string? EntryPoint;
     }
 }
+
 namespace System.Runtime.InteropServices.ComTypes
 {
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -2463,6 +2925,7 @@ namespace System.Runtime.InteropServices.ComTypes
         ADVFCACHE_ONSAVE = 32,
         ADVF_DATAONSTOP = 64,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2473,11 +2936,14 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
         public System.IntPtr lpfuncdesc;
+
         [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
         public System.IntPtr lptcomp;
+
         [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
         public System.IntPtr lpvardesc;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2491,6 +2957,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public int grfFlags;
         public int grfMode;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2507,6 +2974,7 @@ namespace System.Runtime.InteropServices.ComTypes
         CC_MPWPASCAL = 8,
         CC_MAX = 9,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2518,6 +2986,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public int dwCookie;
         public object pUnk;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2526,6 +2995,7 @@ namespace System.Runtime.InteropServices.ComTypes
         DATADIR_GET = 1,
         DATADIR_SET = 2,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2538,6 +3008,7 @@ namespace System.Runtime.InteropServices.ComTypes
         DESCKIND_IMPLICITAPPOBJ = 4,
         DESCKIND_MAX = 5,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2551,6 +3022,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public System.IntPtr rgdispidNamedArgs;
         public System.IntPtr rgvarg;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2562,6 +3034,7 @@ namespace System.Runtime.InteropServices.ComTypes
         DVASPECT_ICON = 4,
         DVASPECT_DOCPRINT = 8,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2572,6 +3045,7 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         public System.Runtime.InteropServices.ComTypes.ELEMDESC.DESCUNION desc;
         public System.Runtime.InteropServices.ComTypes.TYPEDESC tdesc;
+
         [System.Runtime.InteropServices.StructLayoutAttribute(
             System.Runtime.InteropServices.LayoutKind.Explicit
         )]
@@ -2579,10 +3053,12 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
             public System.Runtime.InteropServices.ComTypes.IDLDESC idldesc;
+
             [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
             public System.Runtime.InteropServices.ComTypes.PARAMDESC paramdesc;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2601,6 +3077,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public short wCode;
         public short wReserved;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2612,6 +3089,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public int dwHighDateTime;
         public int dwLowDateTime;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2626,6 +3104,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public System.IntPtr ptd;
         public System.Runtime.InteropServices.ComTypes.TYMED tymed;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2647,6 +3126,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public short oVft;
         public short wFuncFlags;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2667,6 +3147,7 @@ namespace System.Runtime.InteropServices.ComTypes
         FUNCFLAG_FREPLACEABLE = (short)2048,
         FUNCFLAG_FIMMEDIATEBIND = (short)4096,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2678,6 +3159,7 @@ namespace System.Runtime.InteropServices.ComTypes
         FUNC_STATIC = 3,
         FUNC_DISPATCH = 4,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2695,6 +3177,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void OnSave();
         void OnViewChange(int aspect, int index);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2716,6 +3199,7 @@ namespace System.Runtime.InteropServices.ComTypes
         int RevokeObjectParam(string pszKey);
         void SetBindOptions(ref System.Runtime.InteropServices.ComTypes.BIND_OPTS pbindopts);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2732,6 +3216,7 @@ namespace System.Runtime.InteropServices.ComTypes
         );
         void Unadvise(int dwCookie);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2748,6 +3233,7 @@ namespace System.Runtime.InteropServices.ComTypes
             out System.Runtime.InteropServices.ComTypes.IConnectionPoint? ppCP
         );
     }
+
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
@@ -2783,6 +3269,7 @@ namespace System.Runtime.InteropServices.ComTypes
             bool release
         );
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2794,6 +3281,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public System.IntPtr dwReserved;
         public System.Runtime.InteropServices.ComTypes.IDLFLAG wIDLFlags;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2806,6 +3294,7 @@ namespace System.Runtime.InteropServices.ComTypes
         IDLFLAG_FLCID = (short)4,
         IDLFLAG_FRETVAL = (short)8,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2823,6 +3312,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void Reset();
         int Skip(int celt);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2840,6 +3330,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void Reset();
         int Skip(int celt);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2857,6 +3348,7 @@ namespace System.Runtime.InteropServices.ComTypes
         int Reset();
         int Skip(int celt);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2874,6 +3366,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void Reset();
         int Skip(int celt);
     }
+
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
@@ -2888,6 +3381,7 @@ namespace System.Runtime.InteropServices.ComTypes
         int Reset();
         int Skip(int celt);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2901,6 +3395,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void Reset();
         int Skip(int celt);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2914,6 +3409,7 @@ namespace System.Runtime.InteropServices.ComTypes
         int Reset();
         int Skip(int celt);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2989,6 +3485,7 @@ namespace System.Runtime.InteropServices.ComTypes
         );
         void Save(System.Runtime.InteropServices.ComTypes.IStream pStm, bool fClearDirty);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3000,6 +3497,7 @@ namespace System.Runtime.InteropServices.ComTypes
         IMPLTYPEFLAG_FRESTRICTED = 4,
         IMPLTYPEFLAG_FDEFAULTVTABLE = 8,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3011,6 +3509,7 @@ namespace System.Runtime.InteropServices.ComTypes
         INVOKE_PROPERTYPUT = 4,
         INVOKE_PROPERTYPUTREF = 8,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3026,6 +3525,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void Save(string? pszFileName, bool fRemember);
         void SaveCompleted(string pszFileName);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3055,6 +3555,7 @@ namespace System.Runtime.InteropServices.ComTypes
         );
         void Revoke(int dwRegister);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3080,6 +3581,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void UnlockRegion(long libOffset, long cb, int dwLockType);
         void Write(byte[] pv, int cb, System.IntPtr pcbWritten);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3103,6 +3605,7 @@ namespace System.Runtime.InteropServices.ComTypes
             out System.Runtime.InteropServices.ComTypes.ITypeComp ppTComp
         );
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3161,6 +3664,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void ReleaseTypeAttr(System.IntPtr pTypeAttr);
         void ReleaseVarDesc(System.IntPtr pVarDesc);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3251,6 +3755,7 @@ namespace System.Runtime.InteropServices.ComTypes
         new void ReleaseTypeAttr(System.IntPtr pTypeAttr);
         new void ReleaseVarDesc(System.IntPtr pVarDesc);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3288,6 +3793,7 @@ namespace System.Runtime.InteropServices.ComTypes
         bool IsName(string szNameBuf, int lHashVal);
         void ReleaseTLibAttr(System.IntPtr pTLibAttr);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3334,6 +3840,7 @@ namespace System.Runtime.InteropServices.ComTypes
         new bool IsName(string szNameBuf, int lHashVal);
         new void ReleaseTLibAttr(System.IntPtr pTLibAttr);
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3345,6 +3852,7 @@ namespace System.Runtime.InteropServices.ComTypes
         LIBFLAG_FHIDDEN = (short)4,
         LIBFLAG_FHASDISKIMAGE = (short)8,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3356,6 +3864,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public System.IntPtr lpVarValue;
         public System.Runtime.InteropServices.ComTypes.PARAMFLAG wParamFlags;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3371,6 +3880,7 @@ namespace System.Runtime.InteropServices.ComTypes
         PARAMFLAG_FHASDEFAULT = (short)32,
         PARAMFLAG_FHASCUSTDATA = (short)64,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3384,6 +3894,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public int connection;
         public System.Runtime.InteropServices.ComTypes.FORMATETC formatetc;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3404,6 +3915,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public int reserved;
         public int type;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3416,6 +3928,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public System.Runtime.InteropServices.ComTypes.TYMED tymed;
         public System.IntPtr unionmember;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3426,6 +3939,7 @@ namespace System.Runtime.InteropServices.ComTypes
         SYS_MAC = 2,
         SYS_WIN64 = 3,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3441,6 +3955,7 @@ namespace System.Runtime.InteropServices.ComTypes
         TYMED_MFPICT = 32,
         TYMED_ENHMF = 64,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3469,6 +3984,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public short wMinorVerNum;
         public System.Runtime.InteropServices.ComTypes.TYPEFLAGS wTypeFlags;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3480,6 +3996,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public System.IntPtr lpValue;
         public short vt;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3502,6 +4019,7 @@ namespace System.Runtime.InteropServices.ComTypes
         TYPEFLAG_FREVERSEBIND = (short)8192,
         TYPEFLAG_FPROXY = (short)16384,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3517,6 +4035,7 @@ namespace System.Runtime.InteropServices.ComTypes
         TKIND_UNION = 7,
         TKIND_MAX = 8,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3532,6 +4051,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public short wMajorVerNum;
         public short wMinorVerNum;
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3546,6 +4066,7 @@ namespace System.Runtime.InteropServices.ComTypes
         public int memid;
         public System.Runtime.InteropServices.ComTypes.VARKIND varkind;
         public short wVarFlags;
+
         [System.Runtime.InteropServices.StructLayoutAttribute(
             System.Runtime.InteropServices.LayoutKind.Explicit
         )]
@@ -3553,10 +4074,12 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
             public System.IntPtr lpvarValue;
+
             [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
             public int oInst;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3577,6 +4100,7 @@ namespace System.Runtime.InteropServices.ComTypes
         VARFLAG_FREPLACEABLE = (short)2048,
         VARFLAG_FIMMEDIATEBIND = (short)4096,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -3588,6 +4112,7 @@ namespace System.Runtime.InteropServices.ComTypes
         VAR_DISPATCH = 3,
     }
 }
+
 namespace System.Runtime.InteropServices.ObjectiveC
 {
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("macos")]
@@ -3608,16 +4133,19 @@ namespace System.Runtime.InteropServices.ObjectiveC
             System.RuntimeMethodHandle lastMethod,
             out System.IntPtr context
         );
+
         public static unsafe void Initialize(
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<System.IntPtr, int> isReferencedCallback,
             delegate* unmanaged<System.IntPtr, void> trackedObjectEnteredFinalization,
             UnhandledExceptionPropagationHandler unhandledExceptionPropagationHandler
         ) => throw null;
+
         public static GCHandle CreateReferenceTrackingHandle(
             object obj,
             out System.Span<System.IntPtr> taggedMemory
         ) => throw null;
+
         public enum MessageSendFunction
         {
             MsgSend,
@@ -3626,54 +4154,72 @@ namespace System.Runtime.InteropServices.ObjectiveC
             MsgSendSuper,
             MsgSendSuperStret,
         }
+
         public static void SetMessageSendCallback(
             MessageSendFunction msgSendFunction,
             System.IntPtr func
         ) => throw null;
+
         public static void SetMessageSendPendingException(Exception? exception) => throw null;
     }
 }
+
 namespace System.Security
 {
     public sealed partial class SecureString : System.IDisposable
     {
         public SecureString() { }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe SecureString(char* value, int length) { }
+
         public int Length
         {
             get { throw null; }
         }
+
         public void AppendChar(char c) { }
+
         public void Clear() { }
+
         public System.Security.SecureString Copy()
         {
             throw null;
         }
+
         public void Dispose() { }
+
         public void InsertAt(int index, char c) { }
+
         public bool IsReadOnly()
         {
             throw null;
         }
+
         public void MakeReadOnly() { }
+
         public void RemoveAt(int index) { }
+
         public void SetAt(int index, char c) { }
     }
+
     public static partial class SecureStringMarshal
     {
         public static System.IntPtr SecureStringToCoTaskMemAnsi(System.Security.SecureString s)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToCoTaskMemUnicode(System.Security.SecureString s)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToGlobalAllocAnsi(System.Security.SecureString s)
         {
             throw null;
         }
+
         public static System.IntPtr SecureStringToGlobalAllocUnicode(System.Security.SecureString s)
         {
             throw null;

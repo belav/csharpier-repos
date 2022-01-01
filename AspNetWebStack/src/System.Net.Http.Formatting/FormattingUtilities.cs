@@ -119,6 +119,7 @@ namespace System.Net.Http
         /// </summary>
         public static readonly XsdDataContractExporter XsdDataContractExporter =
             new XsdDataContractExporter();
+
 #endif
 
         /// <summary>

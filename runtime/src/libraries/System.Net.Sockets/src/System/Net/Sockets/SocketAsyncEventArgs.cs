@@ -946,7 +946,9 @@ namespace System.Net.Sockets
                 : base(unsafeSuppressExecutionContextFlow: false) { }
 
             public void GetResult(short token) => _mrvtsc.GetResult(token);
+
             public ValueTaskSourceStatus GetStatus(short token) => _mrvtsc.GetStatus(token);
+
             public void OnCompleted(
                 Action<object?> continuation,
                 object? state,
@@ -955,6 +957,7 @@ namespace System.Net.Sockets
             ) => _mrvtsc.OnCompleted(continuation, state, token, flags);
 
             public short Version => _mrvtsc.Version;
+
             public void Reset() => _mrvtsc.Reset();
 
             protected override void OnCompleted(SocketAsyncEventArgs e) => _mrvtsc.SetResult(true);

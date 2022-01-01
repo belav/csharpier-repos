@@ -10,8 +10,10 @@ namespace Inlining
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 275000000;
+
 #endif
 
         static void ThrowIfNull(string s)

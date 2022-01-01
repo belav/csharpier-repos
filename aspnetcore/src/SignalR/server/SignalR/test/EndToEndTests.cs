@@ -23,6 +23,7 @@ using Moq.Protected;
 using Xunit;
 using HttpConnectionOptions = Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class EndToEndTestsCollection : ICollectionFixture<InProcessTestServer<Startup>>

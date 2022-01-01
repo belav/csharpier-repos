@@ -32,8 +32,10 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
+
 #endif
 
 namespace Newtonsoft.Json.Utilities
@@ -73,6 +75,7 @@ namespace Newtonsoft.Json.Utilities
 
             _readOnlyDictionary = dictionary;
         }
+
 #endif
 
         internal IDictionary<TKey, TValue> GenericDictionary

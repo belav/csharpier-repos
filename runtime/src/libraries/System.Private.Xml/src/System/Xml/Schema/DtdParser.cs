@@ -391,6 +391,7 @@ namespace System.Xml
             Parse(false);
             return _schemaInfo;
         }
+
         #endregion
 
         //
@@ -1773,6 +1774,7 @@ namespace System.Xml
                 }
             }
         }
+
         //
         // Scanning methods - works directly with parsing buffer
         //

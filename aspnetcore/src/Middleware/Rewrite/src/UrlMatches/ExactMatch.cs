@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Rewrite.UrlMatches;
 
 internal class ExactMatch : UrlMatch

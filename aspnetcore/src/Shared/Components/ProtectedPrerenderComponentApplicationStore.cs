@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Infrastructure;
 using Microsoft.AspNetCore.DataProtection;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 internal class ProtectedPrerenderComponentApplicationStore : PrerenderComponentApplicationStore

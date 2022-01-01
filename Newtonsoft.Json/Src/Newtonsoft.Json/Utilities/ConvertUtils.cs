@@ -38,8 +38,10 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #endif
 #if HAVE_ADO_NET
 using System.Data.SqlTypes;
@@ -199,6 +201,7 @@ namespace Newtonsoft.Json.Utilities
             new TypeInformation(typeof(object), PrimitiveTypeCode.Empty), // no 17 in TypeCode for some reason
             new TypeInformation(typeof(string), PrimitiveTypeCode.String)
         };
+
 #endif
 
         public static PrimitiveTypeCode GetTypeCode(Type t)
@@ -244,6 +247,7 @@ namespace Newtonsoft.Json.Utilities
             TypeInformation typeInformation = PrimitiveTypeCodes[(int)convertable.GetTypeCode()];
             return typeInformation;
         }
+
 #endif
 
         public static bool IsConvertible(Type t)
@@ -402,6 +406,7 @@ namespace Newtonsoft.Json.Utilities
                 );
             }
         }
+
 #endif
 
 #region TryConvert
@@ -640,6 +645,7 @@ namespace Newtonsoft.Json.Utilities
             value = null;
             return ConvertResult.NoValidConversion;
         }
+
 #endregion
 
 #region ConvertOrCast
@@ -681,6 +687,7 @@ namespace Newtonsoft.Json.Utilities
                 targetType
             );
         }
+
 #endregion
 
         private static object? EnsureTypeAssignable(
@@ -1459,6 +1466,7 @@ namespace Newtonsoft.Json.Utilities
             value = IEEE754.PackDouble(isNegative, mantissa, exponent);
             return double.IsInfinity(value) ? ParseResult.Overflow : ParseResult.Success;
         }
+
 #endif
 
         public static ParseResult DecimalTryParse(

@@ -7,6 +7,7 @@ using System.ServiceProcess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.Hosting.WindowsServices;
 
 /// <summary>

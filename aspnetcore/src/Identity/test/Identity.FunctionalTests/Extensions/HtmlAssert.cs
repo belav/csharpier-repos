@@ -8,6 +8,7 @@ using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public class HtmlAssert

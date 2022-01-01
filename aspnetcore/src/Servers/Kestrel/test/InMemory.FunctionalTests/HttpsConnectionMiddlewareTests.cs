@@ -29,6 +29,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
 public class HttpsConnectionMiddlewareTests : LoggedTest

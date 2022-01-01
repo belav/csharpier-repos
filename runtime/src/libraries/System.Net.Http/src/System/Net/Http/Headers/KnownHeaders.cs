@@ -555,8 +555,10 @@ namespace System.Net.Http.Headers
 #if TARGET_BROWSER
             // Allow for the AltSvcHeaderParser to be trimmed on Browser since Alt-Svc is only for SocketsHttpHandler, which isn't used on Browser.
             null;
+
 #else
             AltSvcHeaderParser.Parser;
+
 #endif
 
         // Helper interface for making GetCandidate generic over strings, utf8, etc

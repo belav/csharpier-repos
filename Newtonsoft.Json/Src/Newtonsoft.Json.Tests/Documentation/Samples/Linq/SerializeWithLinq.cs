@@ -39,6 +39,7 @@ using System.Linq;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -58,6 +59,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             public string Body { get; set; }
             public DateTime PostedDate { get; set; }
         }
+
         #endregion
 
         [Test]

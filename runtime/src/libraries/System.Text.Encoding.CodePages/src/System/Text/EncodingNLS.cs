@@ -31,6 +31,7 @@ namespace System.Text
             : base(codePage, enc, dec) { }
 
         public unsafe abstract int GetByteCount(char* chars, int count, EncoderNLS? encoder);
+
         public unsafe abstract int GetBytes(
             char* chars,
             int charCount,
@@ -38,7 +39,9 @@ namespace System.Text
             int byteCount,
             EncoderNLS? encoder
         );
+
         public unsafe abstract int GetCharCount(byte* bytes, int count, DecoderNLS? decoder);
+
         public unsafe abstract int GetChars(
             byte* bytes,
             int byteCount,

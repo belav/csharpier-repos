@@ -44,16 +44,20 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 
         protected bool IsForEachVariableWrittenInside { get; private set; }
         protected abstract string Title { get; }
+
         protected abstract bool ValidLocation(ForEachInfo foreachInfo);
+
         protected abstract (SyntaxNode start, SyntaxNode end) GetForEachBody(
             TForEachStatement foreachStatement
         );
+
         protected abstract void ConvertToForStatement(
             SemanticModel model,
             ForEachInfo info,
             SyntaxEditor editor,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsValid(TForEachStatement foreachNode);
 
         /// <summary>

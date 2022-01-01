@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 #if TARGET_WINDOWS
 using Internal.Win32;
+
 #endif
 
 namespace System.Globalization
@@ -129,6 +130,7 @@ namespace System.Globalization
             // Return our ranges
             return registryEraRanges;
         }
+
 #else
         // no-op, in Unix we never call this function.
         // the reason to have it is to simplify the build
@@ -139,6 +141,7 @@ namespace System.Globalization
             Debug.Fail("Should never be called non-Windows platforms.");
             throw new PlatformNotSupportedException();
         }
+
 #endif
 
         //

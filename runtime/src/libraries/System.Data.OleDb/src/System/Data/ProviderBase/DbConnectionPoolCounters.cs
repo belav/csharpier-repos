@@ -323,6 +323,7 @@ namespace System.Data.ProviderBase
                 CreationData.NumberOfFreeConnections.CounterType
             );
         }
+
         private string? GetAssemblyName()
         {
             string? result = null;

@@ -200,6 +200,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         {
             return CreateCore(methodBody, nameof(methodBody), cancellationToken);
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         internal static ControlFlowGraph CreateCore(

@@ -11,6 +11,7 @@ using System.Threading;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 [IntializeTestFile]
@@ -32,8 +33,10 @@ public abstract class ParserTestBase
 
 #if GENERATE_BASELINES
     protected bool GenerateBaselines { get; set; } = true;
+
 #else
     protected bool GenerateBaselines { get; set; } = false;
+
 #endif
 
     protected string TestProjectRoot { get; }

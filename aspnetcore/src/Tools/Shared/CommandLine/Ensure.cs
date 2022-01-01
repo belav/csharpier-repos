@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.Tools.Internal;
 
 internal static class Ensure

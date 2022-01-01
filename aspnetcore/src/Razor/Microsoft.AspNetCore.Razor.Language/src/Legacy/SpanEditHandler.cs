@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class SpanEditHandler

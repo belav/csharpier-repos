@@ -42,6 +42,7 @@ namespace Internal.Cryptography
         {
             hasher.AppendData(data.ToArray());
         }
+
 #endif
 
         internal static HashAlgorithmName GetDigestAlgorithm(Oid oid)
@@ -389,6 +390,7 @@ namespace Internal.Cryptography
         {
             return HexConverter.ToString(ba, HexConverter.Casing.Upper);
         }
+
 #else
         private static string ToUpperHexString(ReadOnlySpan<byte> ba)
         {
@@ -401,6 +403,7 @@ namespace Internal.Cryptography
 
             return sb.ToString();
         }
+
 #endif
 
         /// <summary>

@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
     > : CodeRefactoringProvider
     {
         public abstract string GetTitle(bool forSwitchExpression);
+
         public abstract Analyzer CreateAnalyzer(ISyntaxFacts syntaxFacts, ParseOptions options);
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)

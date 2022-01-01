@@ -185,8 +185,10 @@ namespace System.Reflection.Tests
             {
                 _value = value;
             }
+
             public ref T RefReturningProp => ref _value;
             public unsafe ref T NullRefReturningProp => ref Unsafe.AsRef<T>((void*)null);
+
             public static unsafe ref ByRefLike ByRefLikeRefReturningMethod(ByRefLike* a) => ref *a;
         }
 
@@ -198,6 +200,7 @@ namespace System.Reflection.Tests
             {
                 _value = value;
             }
+
             public ref int* RefReturningProp => ref _value;
             public ref int* NullRefReturningProp => ref *(int**)null;
         }

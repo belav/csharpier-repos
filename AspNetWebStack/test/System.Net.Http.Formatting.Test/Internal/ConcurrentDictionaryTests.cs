@@ -22,6 +22,7 @@ namespace System.Collections.Concurrent
             // Act & Assert
             Assert.False(dictionary.IsReadOnly);
         }
+
 #endif
 
         [Fact]

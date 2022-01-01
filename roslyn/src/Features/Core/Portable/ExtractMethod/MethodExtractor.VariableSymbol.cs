@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             public abstract bool GetUseSaferDeclarationBehavior(
                 CancellationToken cancellationToken
             );
+
             public abstract SyntaxAnnotation IdentifierTokenAnnotation { get; }
+
             public abstract SyntaxToken GetOriginalIdentifierToken(
                 CancellationToken cancellationToken
             );

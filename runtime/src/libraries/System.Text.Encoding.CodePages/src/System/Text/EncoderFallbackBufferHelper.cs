@@ -15,6 +15,7 @@ namespace System.Text
             charEnd = charStart = null;
             encoder = null;
         }
+
         // Internal items to help us figure out what we're doing as far as error messages, etc.
         // These help us with our performance and messages internally
         internal unsafe char* charStart;

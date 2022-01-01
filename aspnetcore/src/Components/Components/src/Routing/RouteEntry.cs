@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.AspNetCore.Components.Routing;
 
 [DebuggerDisplay("Handler = {Handler}, Template = {Template}")]

@@ -32,6 +32,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region InAttribute
@@ -50,6 +51,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region MarshalAsAttribute
@@ -78,6 +80,7 @@ namespace Microsoft.CodeAnalysis
                 return _lazyMarshalAsData;
             }
         }
+
         #endregion
 
         #region IDispatchConstantAttribute
@@ -96,6 +99,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region IUnknownConstantAttribute

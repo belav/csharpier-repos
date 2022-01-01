@@ -37,6 +37,7 @@ namespace System.Runtime.Serialization
             _referencedTypes = referencedTypes;
             _referencedCollectionTypes = referencedCollectionTypes;
         }
+
 #endif
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -90,6 +91,7 @@ namespace System.Runtime.Serialization
                 return _processedContracts;
             }
         }
+
 #if SUPPORT_SURROGATE
         private Hashtable SurrogateDataTable
         {
@@ -100,6 +102,7 @@ namespace System.Runtime.Serialization
                 return _surrogateDataTable;
             }
         }
+
 #endif
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -381,6 +384,7 @@ namespace System.Runtime.Serialization
         {
             get { return _dataContractSurrogate; }
         }
+
 #endif
 
         public IEnumerator<KeyValuePair<XmlQualifiedName, DataContract>> GetEnumerator()

@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class HubFilterFactory : IHubFilter

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
+
 namespace LocalizationWebsite;
 
 public class StartupBuilderAPIs

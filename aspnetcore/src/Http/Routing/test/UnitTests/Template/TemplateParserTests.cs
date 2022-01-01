@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Template.Tests;
 
 public class TemplateRouteParserTests

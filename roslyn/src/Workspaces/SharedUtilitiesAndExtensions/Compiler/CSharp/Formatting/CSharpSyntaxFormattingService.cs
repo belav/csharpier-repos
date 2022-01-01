@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System;
 using System.Composition;
 using Microsoft.CodeAnalysis.Host.Mef;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting

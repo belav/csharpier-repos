@@ -23,9 +23,11 @@ using System.Text;
 
 #if ES_BUILD_STANDALONE
 using System.Runtime.CompilerServices;
+
 namespace Microsoft.Diagnostics.Tracing
 #else
 using Internal.Runtime.CompilerServices;
+
 namespace System.Diagnostics.Tracing
 #endif
 {
@@ -41,11 +43,13 @@ namespace System.Diagnostics.Tracing
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type";
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";
+
 #endif
 #endif
 
 #if FEATURE_PERFTRACING
         private readonly TraceLoggingEventHandleTable m_eventHandleTable = null!;
+
 #endif
 
         /// <summary>

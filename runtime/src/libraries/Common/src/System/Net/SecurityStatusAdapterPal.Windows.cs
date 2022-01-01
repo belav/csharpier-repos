@@ -19,6 +19,7 @@ namespace System.Net
                 $"Expected size {StatusDictionarySize}, got size {s_statusDictionary.Count}"
             );
         }
+
 #endif
 
         private static readonly BidirectionalDictionary<

@@ -32,10 +32,12 @@ namespace Microsoft.CodeAnalysis.Editor
             TDirectiveTriviaSyntax directive,
             CancellationToken cancellationToken
         );
+
         internal abstract TDirectiveTriviaSyntax GetMatchingDirective(
             TDirectiveTriviaSyntax directive,
             CancellationToken cancellationToken
         );
+
         internal abstract TextSpan GetSpanForTagging(TDirectiveTriviaSyntax directive);
 
         public async Task<BraceMatchingResult?> FindBracesAsync(

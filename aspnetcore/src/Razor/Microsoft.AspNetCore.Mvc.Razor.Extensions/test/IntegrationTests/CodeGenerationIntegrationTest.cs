@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
@@ -749,6 +750,7 @@ public class FormTagHelper : {typeof(TagHelper).FullName}
         AssertCSharpDocumentMatchesBaseline(csharp);
         CompileToAssembly(generated);
     }
+
     #endregion
 
     #region DesignTime

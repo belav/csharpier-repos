@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
     internal abstract class CommonEmbeddedTypesManager
     {
         public abstract bool IsFrozen { get; }
+
         public abstract ImmutableArray<Cci.INamespaceTypeDefinition> GetTypes(
             DiagnosticBag diagnostics,
             HashSet<string> namesOfTopLevelTypes
@@ -392,6 +393,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
         );
+
         internal abstract void ReportIndirectReferencesToLinkedAssemblies(
             TAssemblySymbol assembly,
             DiagnosticBag diagnostics
@@ -401,15 +403,18 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             ImmutableArray<TEmbeddedType> types,
             DiagnosticBag diagnostics
         );
+
         protected abstract void ReportNameCollisionBetweenEmbeddedTypes(
             TEmbeddedType typeA,
             TEmbeddedType typeB,
             DiagnosticBag diagnostics
         );
+
         protected abstract void ReportNameCollisionWithAlreadyDeclaredType(
             TEmbeddedType type,
             DiagnosticBag diagnostics
         );
+
         protected abstract TAttributeData CreateCompilerGeneratedAttribute();
 
         private sealed class TypeComparer : IComparer<TEmbeddedType>
@@ -477,18 +482,21 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
         );
+
         internal abstract TEmbeddedMethod EmbedMethod(
             TEmbeddedType type,
             TMethodSymbol method,
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
         );
+
         internal abstract TEmbeddedProperty EmbedProperty(
             TEmbeddedType type,
             TPropertySymbol property,
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
         );
+
         internal abstract TEmbeddedEvent EmbedEvent(
             TEmbeddedType type,
             TEventSymbol @event,

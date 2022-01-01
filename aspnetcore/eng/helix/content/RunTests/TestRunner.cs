@@ -8,8 +8,10 @@ using System.IO.Compression;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 #if INSTALLPLAYWRIGHT
 using PlaywrightSharp;
+
 #endif
 
 namespace RunTests
@@ -137,6 +139,7 @@ namespace RunTests
                 return false;
             }
         }
+
 #endif
 
         public async Task<bool> InstallDotnetToolsAsync()

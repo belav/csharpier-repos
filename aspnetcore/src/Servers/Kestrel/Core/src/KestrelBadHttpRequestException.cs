@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
 internal static class KestrelBadHttpRequestException
@@ -173,6 +174,7 @@ internal static class KestrelBadHttpRequestException
         }
         return ex;
     }
+
 #pragma warning restore CS0618 // Type or member is obsolete
 
     [StackTraceHidden]

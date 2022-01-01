@@ -15,6 +15,7 @@ namespace System.Security.Cryptography.Dsa.Tests
     {
         public override byte[] SignData(DSA dsa, byte[] data, HashAlgorithmName hashAlgorithm) =>
             dsa.SignData(data, hashAlgorithm);
+
         public override bool VerifyData(
             DSA dsa,
             byte[] data,
@@ -111,6 +112,7 @@ namespace System.Security.Cryptography.Dsa.Tests
     {
         public override byte[] SignData(DSA dsa, byte[] data, HashAlgorithmName hashAlgorithm) =>
             dsa.SignData(new MemoryStream(data), hashAlgorithm);
+
         public override bool VerifyData(
             DSA dsa,
             byte[] data,
@@ -187,6 +189,7 @@ namespace System.Security.Cryptography.Dsa.Tests
             }
         }
     }
+
 #endif
     [SkipOnPlatform(
         TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
@@ -195,6 +198,7 @@ namespace System.Security.Cryptography.Dsa.Tests
     public abstract partial class DSASignVerify
     {
         public abstract byte[] SignData(DSA dsa, byte[] data, HashAlgorithmName hashAlgorithm);
+
         public abstract bool VerifyData(
             DSA dsa,
             byte[] data,

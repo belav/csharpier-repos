@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.E2ETesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest;
 
 internal static class BasicTestAppWebDriverExtensions

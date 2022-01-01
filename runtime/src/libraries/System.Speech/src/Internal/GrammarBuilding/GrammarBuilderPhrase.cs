@@ -65,6 +65,7 @@ namespace System.Speech.Internal.GrammarBuilding
                 && _matchMode == refObj._matchMode
                 && _subsetMatching == refObj._subsetMatching;
         }
+
         public override int GetHashCode()
         {
             return _phrase.GetHashCode();

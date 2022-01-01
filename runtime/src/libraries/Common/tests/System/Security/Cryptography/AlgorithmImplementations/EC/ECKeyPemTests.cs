@@ -15,6 +15,7 @@ namespace System.Security.Cryptography.Tests
         private const string NoPemExceptionMarker = "No supported key";
 
         protected abstract TAlg CreateKey();
+
         protected abstract ECParameters ExportParameters(TAlg key, bool includePrivateParameters);
 
         [Fact]

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
+
 namespace Microsoft.AspNetCore.JsonPatch;
 
 // Implementation details: the purpose of this type of patch document is to ensure we can do type-checking

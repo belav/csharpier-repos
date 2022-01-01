@@ -13,6 +13,7 @@ namespace System.Data.Odbc
     internal sealed class OdbcConnectionFactory : DbConnectionFactory
     {
         private OdbcConnectionFactory() : base() { }
+
         // At this time, the ODBC Provider doesn't have any connection pool counters
         // because we'd only confuse people with "non-pooled" connections that are
         // actually being pooled by the native pooler.

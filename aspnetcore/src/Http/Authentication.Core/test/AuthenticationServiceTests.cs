@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Core.Test;
 
 public class AuthenticationServiceTests
@@ -354,6 +355,7 @@ public class AuthenticationServiceTests
     private class RunOnce : IClaimsTransformation
     {
         public int Ran = 0;
+
         public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
             Ran++;

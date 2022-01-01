@@ -71,6 +71,7 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(10000000000000000000m, reader.ReadAsDecimal());
             Assert.IsTrue(reader.Read());
         }
+
 #endif
 
         [Test]
@@ -246,6 +247,7 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.AreEqual(new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero), reader.Value);
         }
+
 #endif
 
         [Test]
@@ -902,6 +904,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 reader.ReadAsDateTime()
             );
         }
+
 #endif
 
         [Test]
@@ -961,6 +964,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(true, reader.ReadAsBoolean());
         }
+
 #endif
 
         [Test]
@@ -1013,6 +1017,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(null, reader.ReadAsDateTimeOffset());
         }
+
 #endif
 
         [Test]

@@ -434,10 +434,12 @@ namespace System.Data.Tests
         }
 
         private bool _dvInitialized;
+
         private void OnDataViewInitialized(object src, EventArgs args)
         {
             _dvInitialized = true;
         }
+
         [Fact]
         public void BeginInit2()
         {

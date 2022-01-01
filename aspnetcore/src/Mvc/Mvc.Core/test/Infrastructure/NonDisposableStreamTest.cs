@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class NonDisposableStreamTest

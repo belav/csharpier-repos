@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 internal class ConfigureMethodVisitor : SymbolVisitor

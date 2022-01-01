@@ -4,6 +4,7 @@
 using System.IO;
 using System.Text.Json;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal static class SystemTextJsonExtensions

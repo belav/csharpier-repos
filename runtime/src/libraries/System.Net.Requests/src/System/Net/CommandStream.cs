@@ -425,15 +425,18 @@ namespace System.Net
             {
                 Command = command;
             }
+
             internal PipelineEntry(string command, PipelineEntryFlags flags)
             {
                 Command = command;
                 Flags = flags;
             }
+
             internal bool HasFlag(PipelineEntryFlags flags)
             {
                 return (Flags & flags) != 0;
             }
+
             internal string Command;
             internal PipelineEntryFlags Flags;
         }

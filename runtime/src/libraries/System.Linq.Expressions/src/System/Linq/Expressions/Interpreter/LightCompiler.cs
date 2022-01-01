@@ -246,6 +246,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class RethrowException : Exception
     {
         public RethrowException() : base() { }
+
         internal RethrowException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
     }
@@ -1054,6 +1055,7 @@ namespace System.Linq.Expressions.Interpreter
             var c = e as ConstantExpression;
             return c != null && c.Value == null;
         }
+
 #endif
         private void CompileEqual(Expression left, Expression right, bool liftedToNull)
         {

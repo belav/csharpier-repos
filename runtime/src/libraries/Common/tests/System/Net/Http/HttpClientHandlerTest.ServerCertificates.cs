@@ -22,6 +22,7 @@ namespace System.Net.Http.Functional.Tests
 
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+
 #endif
 
     public abstract partial class HttpClientHandler_ServerCertificates_Test
@@ -35,11 +36,13 @@ namespace System.Net.Http.Functional.Tests
 
         // This enables customizing ServerCertificateCustomValidationCallback in WinHttpHandler variants:
         protected bool AllowAllHttp2Certificates { get; set; } = true;
+
         protected new HttpClientHandler CreateHttpClientHandler() =>
             CreateHttpClientHandler(
                 UseVersion,
                 allowAllHttp2Certificates: AllowAllHttp2Certificates
             );
+
         protected override HttpClient CreateHttpClient() =>
             CreateHttpClient(CreateHttpClientHandler());
 

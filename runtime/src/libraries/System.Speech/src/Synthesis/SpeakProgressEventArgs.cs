@@ -17,6 +17,7 @@ namespace System.Speech.Synthesis
             _iWordPos = iWordPos;
             _cWordLen = cWordLen;
         }
+
         #endregion
 
         #region public Properties

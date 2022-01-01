@@ -16,7 +16,9 @@ namespace System.Security.Cryptography
         private readonly RandomNumberGenerator _impl;
 
         public RNGCryptoServiceProvider() : this((CspParameters?)null) { }
+
         public RNGCryptoServiceProvider(string str) : this((CspParameters?)null) { }
+
         public RNGCryptoServiceProvider(byte[] rgb) : this((CspParameters?)null) { }
 
         public RNGCryptoServiceProvider(CspParameters? cspParams)
@@ -29,10 +31,14 @@ namespace System.Security.Cryptography
         }
 
         public override void GetBytes(byte[] data) => _impl.GetBytes(data);
+
         public override void GetBytes(byte[] data, int offset, int count) =>
             _impl.GetBytes(data, offset, count);
+
         public override void GetBytes(Span<byte> data) => _impl.GetBytes(data);
+
         public override void GetNonZeroBytes(byte[] data) => _impl.GetNonZeroBytes(data);
+
         public override void GetNonZeroBytes(Span<byte> data) => _impl.GetNonZeroBytes(data);
 
         protected override void Dispose(bool disposing)

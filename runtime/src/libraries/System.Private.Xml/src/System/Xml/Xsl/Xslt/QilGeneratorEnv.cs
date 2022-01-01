@@ -68,10 +68,12 @@ namespace System.Xml.Xsl.Xslt
         {
             return this.GetCurrentNode();
         }
+
         QilNode IFocus.GetPosition()
         {
             return this.GetCurrentPosition();
         }
+
         QilNode IFocus.GetLast()
         {
             return this.GetLastPosition();
@@ -436,6 +438,7 @@ namespace System.Xml.Xsl.Xslt
         };
 
         public static Dictionary<string, FunctionInfo> FunctionTable = CreateFunctionTable();
+
         private static Dictionary<string, FunctionInfo> CreateFunctionTable()
         {
             Dictionary<string, FunctionInfo> table = new Dictionary<string, FunctionInfo>(16);

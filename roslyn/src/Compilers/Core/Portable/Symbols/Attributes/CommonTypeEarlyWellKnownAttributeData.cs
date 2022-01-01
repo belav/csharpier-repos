@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region ComImportAttribute
@@ -46,6 +47,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region ConditionalAttribute
@@ -66,6 +68,7 @@ namespace Microsoft.CodeAnalysis
                 return _lazyConditionalSymbols;
             }
         }
+
         #endregion
 
         #region ObsoleteAttribute
@@ -87,6 +90,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region CodeAnalysisEmbeddedAttribute

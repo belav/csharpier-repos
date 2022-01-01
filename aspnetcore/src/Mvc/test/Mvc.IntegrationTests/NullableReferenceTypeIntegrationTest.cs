@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
 public class NullableReferenceTypeIntegrationTest
@@ -23,6 +24,7 @@ public class NullableReferenceTypeIntegrationTest
     {
         public string FirstName { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -72,6 +74,7 @@ public class NullableReferenceTypeIntegrationTest
     {
         public string? FirstName { get; set; }
     }
+
 #nullable restore
 
     [Fact]
@@ -111,6 +114,7 @@ public class NullableReferenceTypeIntegrationTest
         [Required(ErrorMessage = "Test")]
         public string FirstName { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -157,6 +161,7 @@ public class NullableReferenceTypeIntegrationTest
 
 #nullable enable
     private void NonNullableParameter(string param1) { }
+
 #nullable restore
 
     [Fact]

@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public partial class HubConnectionTests

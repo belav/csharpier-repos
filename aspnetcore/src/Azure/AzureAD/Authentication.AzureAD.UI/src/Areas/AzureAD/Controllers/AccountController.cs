@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Internal;
 
 [NonController]

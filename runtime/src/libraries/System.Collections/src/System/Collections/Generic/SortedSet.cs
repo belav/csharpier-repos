@@ -296,6 +296,7 @@ namespace System.Collections.Generic
 
         // Virtual function for TreeSubSet, which may need to update its count.
         internal virtual void VersionCheck(bool updateCount = false) { }
+
         // Virtual function for TreeSubSet, which may need the count variable of the parent set.
         internal virtual int TotalCount()
         {
@@ -1664,6 +1665,7 @@ namespace System.Collections.Generic
         {
             return true;
         }
+
 #endif
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) =>

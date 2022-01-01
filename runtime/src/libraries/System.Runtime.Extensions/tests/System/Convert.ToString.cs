@@ -776,6 +776,7 @@ namespace System.Tests
         private class FooFormattable : IFormattable
         {
             private int _value;
+
             public FooFormattable(int value)
             {
                 _value = value;
@@ -797,6 +798,7 @@ namespace System.Tests
         private class Foo
         {
             private int _value;
+
             public Foo(int value)
             {
                 _value = value;

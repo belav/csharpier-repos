@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
+
 namespace CustomPolicyProvider;
 
 // This class contains logic for determining whether MinimumAgeRequirements in authorization

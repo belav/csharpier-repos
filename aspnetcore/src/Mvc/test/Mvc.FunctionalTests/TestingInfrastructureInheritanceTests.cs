@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class TestingInfrastructureInheritanceTests
@@ -140,6 +141,7 @@ public class TestingInfrastructureInheritanceTests
     private class DisposableService : IAsyncDisposable
     {
         public bool _asyncDisposed = false;
+
         public ValueTask DisposeAsync()
         {
             _asyncDisposed = true;

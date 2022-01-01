@@ -743,6 +743,7 @@ namespace System.Security.AccessControl
             //}
             return ModifyAudit(modification, (ObjectAuditRule)rule, out modified);
         }
+
 #endregion
 
 #region Public Methods

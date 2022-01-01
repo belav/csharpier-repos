@@ -5,18 +5,22 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
 using Microsoft.AspNetCore.ResponseCompression;
+
 #if (IndividualLocalAuth)
 using Microsoft.EntityFrameworkCore;
 #endif
 #if (GenerateGraph)
 using Graph = Microsoft.Graph;
+
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.Identity.Web;
+
 #endif
 #if (IndividualLocalAuth)
 using ComponentsWebAssembly_CSharp.Server.Data;
 using ComponentsWebAssembly_CSharp.Server.Models;
+
 #endif
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,6 +47,7 @@ builder.Services
 builder.Services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
 builder.Services.AddAuthentication().AddIdentityServerJwt();
+
 #endif
 #if (OrganizationalAuth)
 builder.Services
@@ -59,6 +64,7 @@ builder.Services
             .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+
 #endif
 #elif (IndividualB2CAuth)
 builder.Services
@@ -70,6 +76,7 @@ builder.Services
             .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"));
+
 #endif
 #endif
 

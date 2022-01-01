@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting.FunctionalTests;
 
 public class LinkedApplicationTests : LoggedTest

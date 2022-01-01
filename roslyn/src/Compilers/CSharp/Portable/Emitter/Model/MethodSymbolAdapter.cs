@@ -601,6 +601,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return new MethodSymbolAdapter(this);
         }
+
 #else
         internal MethodSymbol AdaptedMethodSymbol => this;
 
@@ -608,6 +609,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
+
 #endif
 
         internal virtual bool IsAccessCheckedOnOverride

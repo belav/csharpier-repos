@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public class InjectIntermediateNode : ExtensionIntermediateNode

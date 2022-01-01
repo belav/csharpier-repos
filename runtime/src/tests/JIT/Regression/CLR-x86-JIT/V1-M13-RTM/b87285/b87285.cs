@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class test1
 {
     public class CL2
@@ -10,11 +11,13 @@ internal unsafe class test1
         public double a52 = 4210752.0019569546;
         public double a62 = -15.797483678888883;
     }
+
     public class CL
     {
         public double a0 = 1.0;
         public double a2 = 0.99999999906867743;
     }
+
     public static CL2 clstatic2 = new CL2();
 
     public static CL clstatic = new CL();
@@ -36,6 +39,7 @@ internal unsafe class test1
         );
         return retval2;
     }
+
     public static double Func(double* a3)
     {
         double val_3 = -1.00000000186265;
@@ -54,6 +58,7 @@ internal unsafe class test1
         );
         return retval;
     }
+
     public static int Main()
     {
         double* a3 = stackalloc double[1];

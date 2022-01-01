@@ -61,6 +61,7 @@ namespace System.Net.Security
         X509Certificate2? remoteCertificate,
         string[] acceptableIssuers
     );
+
     internal delegate X509Certificate ServerCertSelectionCallback(string? hostName);
 
     public partial class SslStream : AuthenticatedStream
@@ -580,6 +581,7 @@ namespace System.Net.Security
             ValidateCreateContext(CreateAuthenticationOptions(sslServerAuthenticationOptions));
             ProcessAuthenticationAsync().GetAwaiter().GetResult();
         }
+
         #endregion
 
         #region Task-based async public methods
@@ -769,6 +771,7 @@ namespace System.Net.Security
             _shutdown = true;
             return InnerStream.WriteAsync(message.Payload, default).AsTask();
         }
+
         #endregion
 
         public override bool IsAuthenticated =>

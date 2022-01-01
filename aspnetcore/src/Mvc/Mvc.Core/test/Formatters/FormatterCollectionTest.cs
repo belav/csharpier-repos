@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
 public class FormatterCollectionTest

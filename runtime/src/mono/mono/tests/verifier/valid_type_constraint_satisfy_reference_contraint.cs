@@ -1,6 +1,7 @@
 ﻿using System;
 
 public class Control { }
+
 public class UserControl : Control { }
 
 namespace test

@@ -20,9 +20,11 @@ namespace System.Text.Json
 #if BUILDING_INBOX_LIBRARY
         public const string DoubleFormatString = null;
         public const string SingleFormatString = null;
+
 #else
         public const string DoubleFormatString = "G17";
         public const string SingleFormatString = "G9";
+
 #endif
 
         public static string NewtonsoftReturnStringHelper(TextReader reader)

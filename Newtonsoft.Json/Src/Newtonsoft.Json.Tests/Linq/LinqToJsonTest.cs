@@ -76,6 +76,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(10000000000000000000m, list[0].maxValue);
         }
+
 #endif
 
         [Test]
@@ -1176,6 +1177,7 @@ keyword such as type of business.""
 
             Assert.AreEqual(4, jsonWriter.Token.Children().Count());
         }
+
 #endif
 
         [Test]
@@ -1354,6 +1356,7 @@ keyword such as type of business.""
             IJEnumerable<JToken> values = o.Properties();
             Assert.AreEqual(4, values.Count());
         }
+
 #endif
 
 #if !NET20
@@ -1367,6 +1370,7 @@ keyword such as type of business.""
             Assert.AreEqual(12, list1[0]);
             Assert.AreEqual(55, list1[1]);
         }
+
 #endif
 
         [Test]
@@ -1533,6 +1537,7 @@ keyword such as type of business.""
                 "The best overloaded method match for 'System.Collections.Generic.IDictionary<string,string>.Add(string, string)' has some invalid arguments"
             );
         }
+
 #endif
 
 #if !(NET20)
@@ -1580,6 +1585,7 @@ keyword such as type of business.""
             FooBarNoEnum e = o["FooBarNoEnum"].ToObject<FooBarNoEnum>();
             Assert.AreEqual(FooBarNoEnum.SomeOtherValue, e);
         }
+
 #endif
 
         [Test]

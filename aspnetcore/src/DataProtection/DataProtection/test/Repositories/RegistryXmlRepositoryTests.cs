@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Win32;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
 public class RegistryXmlRepositoryTests

@@ -111,6 +111,7 @@ namespace Microsoft.Data.Sqlite
 #if NET
         /// <inheritdoc />
         public override bool SupportsSavepoints => true;
+
 #endif
 
         /// <summary>

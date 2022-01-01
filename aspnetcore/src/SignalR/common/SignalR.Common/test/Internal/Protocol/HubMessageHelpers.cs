@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
 internal static class HubMessageHelpers

@@ -16,8 +16,10 @@ using Microsoft.CodeAnalysis.CodeActions;
 
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
+
 #else
 using Microsoft.CodeAnalysis.Options;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
@@ -44,6 +46,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 isEnabledByDefault: true,
                 customTags: DiagnosticCustomTags.NotConfigurable
             );
+
 #pragma warning restore RS0030 // Do not used banned APIs
 
         private readonly DiagnosticDescriptor _unnecessaryClassificationIdDescriptor;
@@ -113,10 +116,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         }
 
         protected abstract LocalizableString GetTitleAndMessageFormatForClassificationIdDescriptor();
+
         protected abstract ImmutableArray<SyntaxNode> MergeImports(
             ImmutableArray<SyntaxNode> unnecessaryImports
         );
+
         protected abstract bool IsRegularCommentOrDocComment(SyntaxTrivia trivia);
+
         protected abstract IUnnecessaryImportsProvider UnnecessaryImportsProvider { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
@@ -134,6 +140,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         }
 
         public CodeActionRequestPriority RequestPriority => CodeActionRequestPriority.Normal;
+
         public bool OpenFileOnly(OptionSet options) => false;
 
         public override void Initialize(AnalysisContext context)

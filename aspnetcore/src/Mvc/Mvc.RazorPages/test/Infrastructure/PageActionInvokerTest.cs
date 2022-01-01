@@ -27,6 +27,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 public class PageActionInvokerTest : CommonResourceInvokerTest
@@ -395,6 +396,7 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var page = Assert.IsType<TestPage>(instance);
         Assert.Equal(relativePath, page.ViewContext.ExecutingFilePath);
     }
+
     #endregion
 
     #region Handler Selection

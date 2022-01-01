@@ -21,6 +21,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
 #pragma warning disable IDE0052 // Remove unread private members - Can this field be removed?
         private readonly string _featureName;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         private readonly HashSet<TaskCompletionSource<bool>> _pendingTasks = new();

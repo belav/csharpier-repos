@@ -100,6 +100,7 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
+
 #endif
 
         internal void Validate()

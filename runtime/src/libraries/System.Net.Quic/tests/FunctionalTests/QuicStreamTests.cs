@@ -17,6 +17,7 @@ namespace System.Net.Quic.Tests
         where T : IQuicImplProviderFactory, new()
     {
         private static byte[] s_data = Encoding.UTF8.GetBytes("Hello world!");
+
         public QuicStreamTests(ITestOutputHelper output) : base(output) { }
 
         [Fact]

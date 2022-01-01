@@ -22,6 +22,7 @@ namespace System.Diagnostics.Tracing
 #if !ES_BUILD_STANDALONE
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";
+
 #endif
         // This value does not seem to be used, leaving it as zero for now. It may be useful for a scenario that may involve
         // multiple instances of the runtime within the same process, but then it seems unlikely that both instances' thread

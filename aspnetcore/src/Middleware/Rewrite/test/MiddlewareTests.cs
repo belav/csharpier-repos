@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.CodeRules;
 
 public class MiddlewareTests

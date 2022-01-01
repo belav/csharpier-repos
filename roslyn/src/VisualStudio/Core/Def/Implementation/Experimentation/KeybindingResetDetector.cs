@@ -78,6 +78,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
         private uint _priorityCommandTargetCookie = VSConstants.VSCOOKIE_NIL;
 
         private CancellationTokenSource _cancellationTokenSource = new();
+
         /// <summary>
         /// If false, ReSharper is either not installed, or has been disabled in the extension manager.
         /// If true, the ReSharper extension is enabled. ReSharper's internal status could be either suspended or enabled.

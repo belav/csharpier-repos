@@ -80,6 +80,7 @@ namespace Castle.DynamicProxy
                 info.GetString("baseTypeForInterfaceProxy.AssemblyQualifiedName")
             );
         }
+
 #endif
 
         public void Initialize()
@@ -111,6 +112,7 @@ namespace Castle.DynamicProxy
                 BaseTypeForInterfaceProxy.AssemblyQualifiedName
             );
         }
+
 #endif
 
         /// <summary>

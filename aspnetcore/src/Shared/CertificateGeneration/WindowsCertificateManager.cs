@@ -8,6 +8,7 @@ using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
 [SupportedOSPlatform("windows")]

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 using Microsoft.CodeAnalysis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ApiConventionAnalyzerIntegrationTest
@@ -262,6 +263,7 @@ namespace Test
             }
         );
     }
+
     private class ApiConventionWith1006DiagnosticEnabledRunner : MvcDiagnosticAnalyzerRunner
     {
         public ApiConventionWith1006DiagnosticEnabledRunner() : base(new ApiConventionAnalyzer())

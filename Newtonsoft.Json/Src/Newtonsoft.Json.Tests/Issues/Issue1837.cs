@@ -30,8 +30,10 @@ using System;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Issues
@@ -154,6 +156,7 @@ namespace Newtonsoft.Json.Tests.Issues
     public class TestData
     {
         public readonly JValue Null;
+
         //JSON.stringify({"undef": undefined}) returns {}
         //public readonly JToken Undefined;
         public readonly JValue[] Nopes;
@@ -162,6 +165,7 @@ namespace Newtonsoft.Json.Tests.Issues
         public readonly JValue OneDotZero;
         public readonly JValue Two;
         public readonly JValue Scientific;
+
         // stringify returns these as 0
         //public readonly JToken NegativeZero;
         //public readonly JToken PositiveZero;
@@ -184,6 +188,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public readonly JValue DateYearMonth;
         public readonly JValue DateYear;
+
         // stringify only ever uses the ISO 8601 zulu date format, so let's just bother with that one.
         public readonly JValue DateISO;
         public readonly JValue OtherISODate;

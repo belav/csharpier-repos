@@ -748,6 +748,7 @@ namespace System.IO.Pipelines.Tests
             {
                 throw new OperationCanceledException();
             }
+
 #if NETCOREAPP
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,
@@ -766,6 +767,7 @@ namespace System.IO.Pipelines.Tests
             public ThrowAfterZeroByteReadStream(byte[] buffer) : base(buffer) { }
 
             private bool _throwOnNextCallToRead;
+
             public override async Task<int> ReadAsync(
                 byte[] buffer,
                 int offset,

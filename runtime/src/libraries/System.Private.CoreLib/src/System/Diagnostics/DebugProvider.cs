@@ -31,6 +31,7 @@ namespace System.Diagnostics
             FailCore(stackTrace, message, detailMessage, "Assertion failed.");
 #pragma warning disable 8763 // "A method marked [DoesNotReturn] should not return."
         }
+
 #pragma warning restore 8763
 
         internal void WriteAssert(string stackTrace, string? message, string? detailMessage)

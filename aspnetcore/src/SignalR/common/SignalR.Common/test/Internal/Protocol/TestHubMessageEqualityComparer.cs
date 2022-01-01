@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
 public class TestHubMessageEqualityComparer : IEqualityComparer<HubMessage>

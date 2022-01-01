@@ -41,13 +41,16 @@ namespace Microsoft.CodeAnalysis.LanguageServices.TypeInferenceService
             protected abstract IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(
                 int position
             );
+
             protected abstract IEnumerable<TypeInferenceInfo> InferTypesWorker_DoNotCallDirectly(
                 SyntaxNode expression
             );
+
             protected abstract IEnumerable<TypeInferenceInfo> GetTypes_DoNotCallDirectly(
                 SyntaxNode expression,
                 bool objectAsDefault
             );
+
             protected abstract bool IsUnusableType(ITypeSymbol arg);
 
             protected Compilation Compilation => SemanticModel.Compilation;

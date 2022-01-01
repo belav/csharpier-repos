@@ -56,6 +56,7 @@ namespace System.Reflection.Emit
         private RuntimeFieldHandle handle;
         private Type[]? modReq;
         private Type[]? modOpt;
+
 #endregion
 
         [DynamicDependency(nameof(modOpt))] // Automatically keeps all previous fields too due to StructLayout

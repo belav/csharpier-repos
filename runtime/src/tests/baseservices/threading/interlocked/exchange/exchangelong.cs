@@ -42,7 +42,9 @@ namespace Exchange
         private long newValueA = 0;
         private long newValueB = Int64.MinValue;
         private bool success;
+
         public ThreadSafe() : this(10000) { }
+
         public ThreadSafe(int loops)
         {
             success = true;
@@ -61,6 +63,7 @@ namespace Exchange
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueA);
         }
+
         public void ThreadWorkerB()
         {
             signal.WaitOne();

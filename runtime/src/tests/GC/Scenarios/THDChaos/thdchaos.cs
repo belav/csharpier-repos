@@ -17,6 +17,7 @@ namespace DefaultNamespace
     public class ThdChaos
     {
         internal static int iThrd = 0;
+
         public static int Main(System.String[] Args)
         {
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");

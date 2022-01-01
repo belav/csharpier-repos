@@ -40,6 +40,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
             public string Name { get; set; }
             public IList<string> Hobbies { get; set; }
         }
+
         #endregion
 
         public void Example()

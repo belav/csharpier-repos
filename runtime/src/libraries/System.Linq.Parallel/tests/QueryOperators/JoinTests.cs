@@ -964,7 +964,9 @@ namespace System.Linq.Parallel.Tests
                 ParallelQuery<int> left,
                 ParallelQuery<int> right
             );
+
             protected abstract void ValidateRightValue(int left, int right, int seenRightCount);
+
             protected abstract int GetExpectedSeenLeftCount(int leftCount, int rightCount);
 
             public void Validate(

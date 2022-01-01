@@ -22,8 +22,10 @@ namespace Inlining
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 350000000;
+
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)]

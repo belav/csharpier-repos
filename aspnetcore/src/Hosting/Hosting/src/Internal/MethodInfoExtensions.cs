@@ -3,6 +3,7 @@
 
 using System.Reflection;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal static class MethodInfoExtensions

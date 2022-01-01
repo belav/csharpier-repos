@@ -187,14 +187,17 @@ public class Tests
     public static extern int mono_test_ccw_class_type_auto_dispatch(
         [MarshalAs(UnmanagedType.Interface)] TestAutoDispatch obj
     );
+
     [DllImport("libtest")]
     public static extern int mono_test_ccw_class_type_auto_dual(
         [MarshalAs(UnmanagedType.Interface)] TestAutoDual obj
     );
+
     [DllImport("libtest")]
     public static extern int mono_test_ccw_class_type_none(
         [MarshalAs(UnmanagedType.Interface)] TestNone obj
     );
+
     [DllImport("libtest")]
     public static extern int mono_test_ccw_query_interface(
         [MarshalAs(UnmanagedType.Interface)] TestParent obj

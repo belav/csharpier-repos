@@ -22,7 +22,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public abstract class BaseTestCase<TX, TA, TB> : XmlAdapterTestCase where TB : TA
         {
             protected abstract TA GetX(TX obj);
+
             protected abstract string GetA(TA obj);
+
             protected abstract string GetB(TB obj);
 
             [Test]
@@ -92,6 +94,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 string A { get; set; }
             }
+
             public interface IB : IA
             {
                 string B { get; set; }
@@ -101,10 +104,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 return obj.X;
             }
+
             protected override string GetA(IA obj)
             {
                 return obj.A;
             }
+
             protected override string GetB(IB obj)
             {
                 return obj.B;
@@ -128,6 +133,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 string A { get; set; }
             }
+
             public interface IB : IA
             {
                 string B { get; set; }
@@ -137,10 +143,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 return obj.X;
             }
+
             protected override string GetA(IA obj)
             {
                 return obj.A;
             }
+
             protected override string GetB(IB obj)
             {
                 return obj.B;
@@ -167,10 +175,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 string A { get; set; }
             }
+
             public interface IB : IA
             {
                 string B { get; set; }
             }
+
             public interface IC
             {
                 string C { get; set; }
@@ -180,10 +190,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 return obj.X;
             }
+
             protected override string GetA(IA obj)
             {
                 return obj.A;
             }
+
             protected override string GetB(IB obj)
             {
                 return obj.B;

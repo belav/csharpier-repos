@@ -104,6 +104,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         protected abstract void ReadEmptyPfx(byte[] pfxBytes, string correctPassword);
+
         protected abstract void ReadWrongPassword(byte[] pfxBytes, string wrongPassword);
 
         protected abstract void ReadUnreadablePfx(

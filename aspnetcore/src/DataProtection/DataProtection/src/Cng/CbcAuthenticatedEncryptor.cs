@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection.Cng.Internal;
 using Microsoft.AspNetCore.DataProtection.SP800_108;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
 // An encryptor which does Encrypt(CBC) + HMAC using the Windows CNG (BCrypt*) APIs.

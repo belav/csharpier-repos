@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class TestTagHelperDescriptors

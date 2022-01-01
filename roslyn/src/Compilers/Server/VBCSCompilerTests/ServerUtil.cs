@@ -204,6 +204,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         }
 
         internal static string GetPipeName() => Guid.NewGuid().ToString().Substring(0, 10);
+
         internal static async Task<ServerData> CreateServer(
             ICompilerServerLogger logger,
             string pipeName = null,

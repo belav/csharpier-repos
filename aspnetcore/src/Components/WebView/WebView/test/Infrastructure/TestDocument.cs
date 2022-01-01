@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Components.RenderTree;
 
+
 namespace Microsoft.AspNetCore.Components.WebView.Document;
 
 public class TestDocument

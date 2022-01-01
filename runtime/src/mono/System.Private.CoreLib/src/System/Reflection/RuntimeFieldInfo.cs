@@ -35,6 +35,7 @@ namespace System.Reflection
     internal abstract class RtFieldInfo : FieldInfo
     {
         internal abstract object UnsafeGetValue(object obj);
+
         internal abstract void UnsafeSetValue(
             object obj,
             object value,
@@ -42,6 +43,7 @@ namespace System.Reflection
             Binder binder,
             CultureInfo culture
         );
+
         internal abstract void CheckConsistency(object target);
     }
 
@@ -54,6 +56,7 @@ namespace System.Reflection
         private string? name;
         private Type? type;
         private FieldAttributes attrs;
+
 #pragma warning restore 649
 
         public override Module Module
@@ -205,6 +208,7 @@ namespace System.Reflection
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);

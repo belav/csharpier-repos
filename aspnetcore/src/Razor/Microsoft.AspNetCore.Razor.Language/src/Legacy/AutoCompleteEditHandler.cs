@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class AutoCompleteEditHandler : SpanEditHandler

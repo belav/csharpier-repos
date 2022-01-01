@@ -10,6 +10,7 @@ using System.Runtime.Loader;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 /// <summary>

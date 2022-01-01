@@ -1437,6 +1437,7 @@ namespace System
         {
             this.v = v.v;
         }
+
         public nint(Int32 v)
         {
             this.v = v;
@@ -1455,6 +1456,7 @@ namespace System
         {
             this.v = (Int32)v;
         }
+
 #else
         public static readonly int Size = 8;
 
@@ -1468,6 +1470,7 @@ namespace System
         {
             this.v = v;
         }
+
 #endif
 
         public static explicit operator nint(nuint v)
@@ -1805,27 +1808,33 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nint operator -(nint v)
         {
             throw new NotImplementedException();
         }
+
         public static nint operator ~(nint v)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static nint operator +(nint v)
         {
             return new nint(+v.v);
         }
+
         public static nint operator -(nint v)
         {
             return new nint(-v.v);
         }
+
         public static nint operator ~(nint v)
         {
             return new nint(~v.v);
         }
+
 #endif
 
 
@@ -1834,30 +1843,37 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nint operator -(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static nint operator *(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static nint operator /(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static nint operator %(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static nint operator &(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static nint operator |(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static nint operator ^(nint l, nint r)
         {
             throw new NotImplementedException();
@@ -1867,39 +1883,48 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nint operator >>(nint l, int r)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static nint operator +(nint l, nint r)
         {
             return new nint(l.v + r.v);
         }
+
         public static nint operator -(nint l, nint r)
         {
             return new nint(l.v - r.v);
         }
+
         public static nint operator *(nint l, nint r)
         {
             return new nint(l.v * r.v);
         }
+
         public static nint operator /(nint l, nint r)
         {
             return new nint(l.v / r.v);
         }
+
         public static nint operator %(nint l, nint r)
         {
             return new nint(l.v % r.v);
         }
+
         public static nint operator &(nint l, nint r)
         {
             return new nint(l.v & r.v);
         }
+
         public static nint operator |(nint l, nint r)
         {
             return new nint(l.v | r.v);
         }
+
         public static nint operator ^(nint l, nint r)
         {
             return new nint(l.v ^ r.v);
@@ -1909,10 +1934,12 @@ namespace System
         {
             return new nint(l.v << r);
         }
+
         public static nint operator >>(nint l, int r)
         {
             return new nint(l.v >> r);
         }
+
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -1920,73 +1947,89 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static bool operator !=(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator <(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator >(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator <=(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator >=(nint l, nint r)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static bool operator ==(nint l, nint r)
         {
             return l.v == r.v;
         }
+
         public static bool operator !=(nint l, nint r)
         {
             return l.v != r.v;
         }
+
         public static bool operator <(nint l, nint r)
         {
             return l.v < r.v;
         }
+
         public static bool operator >(nint l, nint r)
         {
             return l.v > r.v;
         }
+
         public static bool operator <=(nint l, nint r)
         {
             return l.v <= r.v;
         }
+
         public static bool operator >=(nint l, nint r)
         {
             return l.v >= r.v;
         }
+
 #endif
 
         public int CompareTo(nint value)
         {
             return v.CompareTo(value.v);
         }
+
         public int CompareTo(object value)
         {
             if (value is nint)
                 return v.CompareTo(((nint)value).v);
             return v.CompareTo(value);
         }
+
         public bool Equals(nint obj)
         {
             return v.Equals(obj.v);
         }
+
         public override bool Equals(object obj)
         {
             if (obj is nint)
                 return v.Equals(((nint)obj).v);
             return v.Equals(obj);
         }
+
         public override int GetHashCode()
         {
             return v.GetHashCode();
@@ -1997,14 +2040,17 @@ namespace System
         {
             return (nint)Int32.Parse(s, provider);
         }
+
         public static nint Parse(string s, NumberStyles style)
         {
             return (nint)Int32.Parse(s, style);
         }
+
         public static nint Parse(string s)
         {
             return (nint)Int32.Parse(s);
         }
+
         public static nint Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             return (nint)Int32.Parse(s, style, provider);
@@ -2030,19 +2076,23 @@ namespace System
             result = (nint)v;
             return r;
         }
+
 #else
         public static nint Parse(string s, IFormatProvider provider)
         {
             return (nint)Int64.Parse(s, provider);
         }
+
         public static nint Parse(string s, NumberStyles style)
         {
             return (nint)Int64.Parse(s, style);
         }
+
         public static nint Parse(string s)
         {
             return (nint)Int64.Parse(s);
         }
+
         public static nint Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             return (nint)Int64.Parse(s, style, provider);
@@ -2068,20 +2118,24 @@ namespace System
             result = (nint)v;
             return r;
         }
+
 #endif
 
         public override string ToString()
         {
             return v.ToString();
         }
+
         public string ToString(IFormatProvider provider)
         {
             return v.ToString(provider);
         }
+
         public string ToString(string format)
         {
             return v.ToString(format);
         }
+
         public string ToString(string format, IFormatProvider provider)
         {
             return v.ToString(format, provider);
@@ -2096,54 +2150,67 @@ namespace System
         {
             return ((IConvertible)v).ToBoolean(provider);
         }
+
         byte IConvertible.ToByte(IFormatProvider provider)
         {
             return ((IConvertible)v).ToByte(provider);
         }
+
         char IConvertible.ToChar(IFormatProvider provider)
         {
             return ((IConvertible)v).ToChar(provider);
         }
+
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDateTime(provider);
         }
+
         decimal IConvertible.ToDecimal(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDecimal(provider);
         }
+
         double IConvertible.ToDouble(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDouble(provider);
         }
+
         short IConvertible.ToInt16(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt16(provider);
         }
+
         int IConvertible.ToInt32(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt32(provider);
         }
+
         long IConvertible.ToInt64(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt64(provider);
         }
+
         sbyte IConvertible.ToSByte(IFormatProvider provider)
         {
             return ((IConvertible)v).ToSByte(provider);
         }
+
         float IConvertible.ToSingle(IFormatProvider provider)
         {
             return ((IConvertible)v).ToSingle(provider);
         }
+
         ushort IConvertible.ToUInt16(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt16(provider);
         }
+
         uint IConvertible.ToUInt32(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt32(provider);
         }
+
         ulong IConvertible.ToUInt64(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt64(provider);
@@ -2192,6 +2259,7 @@ namespace System
                 Marshal.WriteIntPtr(destination, i * nint.Size, (IntPtr)source[i + startIndex]);
         }
     }
+
     [Serializable]
     [DebuggerDisplay("{v,nq}")]
     public unsafe struct nuint
@@ -2205,6 +2273,7 @@ namespace System
         {
             this.v = v.v;
         }
+
         public nuint(UInt32 v)
         {
             this.v = v;
@@ -2223,6 +2292,7 @@ namespace System
         {
             this.v = (UInt32)v;
         }
+
 #else
         public static readonly int Size = 8;
 
@@ -2236,6 +2306,7 @@ namespace System
         {
             this.v = v;
         }
+
 #endif
 
         public static explicit operator nuint(nfloat v)
@@ -2551,19 +2622,23 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator ~(nuint v)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static nuint operator +(nuint v)
         {
             return new nuint(+v.v);
         }
+
         public static nuint operator ~(nuint v)
         {
             return new nuint(~v.v);
         }
+
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -2571,30 +2646,37 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator -(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator *(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator /(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator %(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator &(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator |(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator ^(nuint l, nuint r)
         {
             throw new NotImplementedException();
@@ -2604,39 +2686,48 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nuint operator >>(nuint l, int r)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static nuint operator +(nuint l, nuint r)
         {
             return new nuint(l.v + r.v);
         }
+
         public static nuint operator -(nuint l, nuint r)
         {
             return new nuint(l.v - r.v);
         }
+
         public static nuint operator *(nuint l, nuint r)
         {
             return new nuint(l.v * r.v);
         }
+
         public static nuint operator /(nuint l, nuint r)
         {
             return new nuint(l.v / r.v);
         }
+
         public static nuint operator %(nuint l, nuint r)
         {
             return new nuint(l.v % r.v);
         }
+
         public static nuint operator &(nuint l, nuint r)
         {
             return new nuint(l.v & r.v);
         }
+
         public static nuint operator |(nuint l, nuint r)
         {
             return new nuint(l.v | r.v);
         }
+
         public static nuint operator ^(nuint l, nuint r)
         {
             return new nuint(l.v ^ r.v);
@@ -2646,10 +2737,12 @@ namespace System
         {
             return new nuint(l.v << r);
         }
+
         public static nuint operator >>(nuint l, int r)
         {
             return new nuint(l.v >> r);
         }
+
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -2657,73 +2750,89 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static bool operator !=(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator <(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator >(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator <=(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator >=(nuint l, nuint r)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static bool operator ==(nuint l, nuint r)
         {
             return l.v == r.v;
         }
+
         public static bool operator !=(nuint l, nuint r)
         {
             return l.v != r.v;
         }
+
         public static bool operator <(nuint l, nuint r)
         {
             return l.v < r.v;
         }
+
         public static bool operator >(nuint l, nuint r)
         {
             return l.v > r.v;
         }
+
         public static bool operator <=(nuint l, nuint r)
         {
             return l.v <= r.v;
         }
+
         public static bool operator >=(nuint l, nuint r)
         {
             return l.v >= r.v;
         }
+
 #endif
 
         public int CompareTo(nuint value)
         {
             return v.CompareTo(value.v);
         }
+
         public int CompareTo(object value)
         {
             if (value is nuint)
                 return v.CompareTo(((nuint)value).v);
             return v.CompareTo(value);
         }
+
         public bool Equals(nuint obj)
         {
             return v.Equals(obj.v);
         }
+
         public override bool Equals(object obj)
         {
             if (obj is nuint)
                 return v.Equals(((nuint)obj).v);
             return v.Equals(obj);
         }
+
         public override int GetHashCode()
         {
             return v.GetHashCode();
@@ -2734,14 +2843,17 @@ namespace System
         {
             return (nuint)UInt32.Parse(s, provider);
         }
+
         public static nuint Parse(string s, NumberStyles style)
         {
             return (nuint)UInt32.Parse(s, style);
         }
+
         public static nuint Parse(string s)
         {
             return (nuint)UInt32.Parse(s);
         }
+
         public static nuint Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             return (nuint)UInt32.Parse(s, style, provider);
@@ -2767,19 +2879,23 @@ namespace System
             result = (nuint)v;
             return r;
         }
+
 #else
         public static nuint Parse(string s, IFormatProvider provider)
         {
             return (nuint)UInt64.Parse(s, provider);
         }
+
         public static nuint Parse(string s, NumberStyles style)
         {
             return (nuint)UInt64.Parse(s, style);
         }
+
         public static nuint Parse(string s)
         {
             return (nuint)UInt64.Parse(s);
         }
+
         public static nuint Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             return (nuint)UInt64.Parse(s, style, provider);
@@ -2805,20 +2921,24 @@ namespace System
             result = (nuint)v;
             return r;
         }
+
 #endif
 
         public override string ToString()
         {
             return v.ToString();
         }
+
         public string ToString(IFormatProvider provider)
         {
             return v.ToString(provider);
         }
+
         public string ToString(string format)
         {
             return v.ToString(format);
         }
+
         public string ToString(string format, IFormatProvider provider)
         {
             return v.ToString(format, provider);
@@ -2833,54 +2953,67 @@ namespace System
         {
             return ((IConvertible)v).ToBoolean(provider);
         }
+
         byte IConvertible.ToByte(IFormatProvider provider)
         {
             return ((IConvertible)v).ToByte(provider);
         }
+
         char IConvertible.ToChar(IFormatProvider provider)
         {
             return ((IConvertible)v).ToChar(provider);
         }
+
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDateTime(provider);
         }
+
         decimal IConvertible.ToDecimal(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDecimal(provider);
         }
+
         double IConvertible.ToDouble(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDouble(provider);
         }
+
         short IConvertible.ToInt16(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt16(provider);
         }
+
         int IConvertible.ToInt32(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt32(provider);
         }
+
         long IConvertible.ToInt64(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt64(provider);
         }
+
         sbyte IConvertible.ToSByte(IFormatProvider provider)
         {
             return ((IConvertible)v).ToSByte(provider);
         }
+
         float IConvertible.ToSingle(IFormatProvider provider)
         {
             return ((IConvertible)v).ToSingle(provider);
         }
+
         ushort IConvertible.ToUInt16(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt16(provider);
         }
+
         uint IConvertible.ToUInt32(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt32(provider);
         }
+
         ulong IConvertible.ToUInt64(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt64(provider);
@@ -2929,6 +3062,7 @@ namespace System
                 Marshal.WriteIntPtr(destination, i * nuint.Size, (IntPtr)source[i + startIndex]);
         }
     }
+
     [Serializable]
     [DebuggerDisplay("{v,nq}")]
     public unsafe struct nfloat
@@ -2942,6 +3076,7 @@ namespace System
         {
             this.v = v.v;
         }
+
         public nfloat(Single v)
         {
             this.v = v;
@@ -2964,6 +3099,7 @@ namespace System
         {
             this.v = (Single)v;
         }
+
 #else
         public static readonly int Size = 8;
 
@@ -2981,6 +3117,7 @@ namespace System
         {
             this.v = v;
         }
+
 #endif
 
         public static explicit operator nfloat(IntPtr v)
@@ -3274,19 +3411,23 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nfloat operator -(nfloat v)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static nfloat operator +(nfloat v)
         {
             return new nfloat(+v.v);
         }
+
         public static nfloat operator -(nfloat v)
         {
             return new nfloat(-v.v);
         }
+
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -3294,19 +3435,23 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nfloat operator --(nfloat v)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static nfloat operator ++(nfloat v)
         {
             return new nfloat(v.v + 1);
         }
+
         public static nfloat operator --(nfloat v)
         {
             return new nfloat(v.v - 1);
         }
+
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -3314,43 +3459,53 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static nfloat operator -(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
         public static nfloat operator *(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
         public static nfloat operator /(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
         public static nfloat operator %(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static nfloat operator +(nfloat l, nfloat r)
         {
             return new nfloat(l.v + r.v);
         }
+
         public static nfloat operator -(nfloat l, nfloat r)
         {
             return new nfloat(l.v - r.v);
         }
+
         public static nfloat operator *(nfloat l, nfloat r)
         {
             return new nfloat(l.v * r.v);
         }
+
         public static nfloat operator /(nfloat l, nfloat r)
         {
             return new nfloat(l.v / r.v);
         }
+
         public static nfloat operator %(nfloat l, nfloat r)
         {
             return new nfloat(l.v % r.v);
         }
+
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -3358,73 +3513,89 @@ namespace System
         {
             throw new NotImplementedException();
         }
+
         public static bool operator !=(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator <(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator >(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator <=(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
         public static bool operator >=(nfloat l, nfloat r)
         {
             throw new NotImplementedException();
         }
+
 #else
         public static bool operator ==(nfloat l, nfloat r)
         {
             return l.v == r.v;
         }
+
         public static bool operator !=(nfloat l, nfloat r)
         {
             return l.v != r.v;
         }
+
         public static bool operator <(nfloat l, nfloat r)
         {
             return l.v < r.v;
         }
+
         public static bool operator >(nfloat l, nfloat r)
         {
             return l.v > r.v;
         }
+
         public static bool operator <=(nfloat l, nfloat r)
         {
             return l.v <= r.v;
         }
+
         public static bool operator >=(nfloat l, nfloat r)
         {
             return l.v >= r.v;
         }
+
 #endif
 
         public int CompareTo(nfloat value)
         {
             return v.CompareTo(value.v);
         }
+
         public int CompareTo(object value)
         {
             if (value is nfloat)
                 return v.CompareTo(((nfloat)value).v);
             return v.CompareTo(value);
         }
+
         public bool Equals(nfloat obj)
         {
             return v.Equals(obj.v);
         }
+
         public override bool Equals(object obj)
         {
             if (obj is nfloat)
                 return v.Equals(((nfloat)obj).v);
             return v.Equals(obj);
         }
+
         public override int GetHashCode()
         {
             return v.GetHashCode();
@@ -3435,14 +3606,17 @@ namespace System
         {
             return Single.IsNaN((Single)f);
         }
+
         public static bool IsInfinity(nfloat f)
         {
             return Single.IsInfinity((Single)f);
         }
+
         public static bool IsPositiveInfinity(nfloat f)
         {
             return Single.IsPositiveInfinity((Single)f);
         }
+
         public static bool IsNegativeInfinity(nfloat f)
         {
             return Single.IsNegativeInfinity((Single)f);
@@ -3452,14 +3626,17 @@ namespace System
         {
             return (nfloat)Single.Parse(s, provider);
         }
+
         public static nfloat Parse(string s, NumberStyles style)
         {
             return (nfloat)Single.Parse(s, style);
         }
+
         public static nfloat Parse(string s)
         {
             return (nfloat)Single.Parse(s);
         }
+
         public static nfloat Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             return (nfloat)Single.Parse(s, style, provider);
@@ -3485,19 +3662,23 @@ namespace System
             result = (nfloat)v;
             return r;
         }
+
 #else
         public static bool IsNaN(nfloat f)
         {
             return Double.IsNaN((Double)f);
         }
+
         public static bool IsInfinity(nfloat f)
         {
             return Double.IsInfinity((Double)f);
         }
+
         public static bool IsPositiveInfinity(nfloat f)
         {
             return Double.IsPositiveInfinity((Double)f);
         }
+
         public static bool IsNegativeInfinity(nfloat f)
         {
             return Double.IsNegativeInfinity((Double)f);
@@ -3507,14 +3688,17 @@ namespace System
         {
             return (nfloat)Double.Parse(s, provider);
         }
+
         public static nfloat Parse(string s, NumberStyles style)
         {
             return (nfloat)Double.Parse(s, style);
         }
+
         public static nfloat Parse(string s)
         {
             return (nfloat)Double.Parse(s);
         }
+
         public static nfloat Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             return (nfloat)Double.Parse(s, style, provider);
@@ -3540,20 +3724,24 @@ namespace System
             result = (nfloat)v;
             return r;
         }
+
 #endif
 
         public override string ToString()
         {
             return v.ToString();
         }
+
         public string ToString(IFormatProvider provider)
         {
             return v.ToString(provider);
         }
+
         public string ToString(string format)
         {
             return v.ToString(format);
         }
+
         public string ToString(string format, IFormatProvider provider)
         {
             return v.ToString(format, provider);
@@ -3568,54 +3756,67 @@ namespace System
         {
             return ((IConvertible)v).ToBoolean(provider);
         }
+
         byte IConvertible.ToByte(IFormatProvider provider)
         {
             return ((IConvertible)v).ToByte(provider);
         }
+
         char IConvertible.ToChar(IFormatProvider provider)
         {
             return ((IConvertible)v).ToChar(provider);
         }
+
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDateTime(provider);
         }
+
         decimal IConvertible.ToDecimal(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDecimal(provider);
         }
+
         double IConvertible.ToDouble(IFormatProvider provider)
         {
             return ((IConvertible)v).ToDouble(provider);
         }
+
         short IConvertible.ToInt16(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt16(provider);
         }
+
         int IConvertible.ToInt32(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt32(provider);
         }
+
         long IConvertible.ToInt64(IFormatProvider provider)
         {
             return ((IConvertible)v).ToInt64(provider);
         }
+
         sbyte IConvertible.ToSByte(IFormatProvider provider)
         {
             return ((IConvertible)v).ToSByte(provider);
         }
+
         float IConvertible.ToSingle(IFormatProvider provider)
         {
             return ((IConvertible)v).ToSingle(provider);
         }
+
         ushort IConvertible.ToUInt16(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt16(provider);
         }
+
         uint IConvertible.ToUInt32(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt32(provider);
         }
+
         ulong IConvertible.ToUInt64(IFormatProvider provider)
         {
             return ((IConvertible)v).ToUInt64(provider);

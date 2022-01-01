@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 #if NETCOREAPP
 using System.Runtime.Intrinsics;
+
 #endif
 
 namespace System.Text.Encodings.Web
@@ -26,6 +27,7 @@ namespace System.Text.Encodings.Web
 #if !TARGET_BROWSER
             [FieldOffset(0)] // ensure same offset with AsBytes field
             internal Vector128<byte> AsVector;
+
 #else
             // This member shouldn't be accessed from browser-based code paths.
             // All call sites should be trimmed away, which will also trim this member

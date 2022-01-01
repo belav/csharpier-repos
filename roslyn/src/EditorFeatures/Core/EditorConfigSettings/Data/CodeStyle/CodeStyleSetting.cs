@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         public abstract string Category { get; }
         public abstract object? Value { get; }
         public abstract Type Type { get; }
+
         public abstract string[] GetValues();
+
         public abstract string GetCurrentValue();
+
         public abstract DiagnosticSeverity Severity { get; }
         public abstract bool IsDefinedInEditorConfig { get; }
         public abstract SettingLocation Location { get; protected set; }
@@ -46,6 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         }
 
         protected abstract void ChangeSeverity(NotificationOption2 severity);
+
         public abstract void ChangeValue(int valueIndex);
 
         internal static CodeStyleSetting Create(

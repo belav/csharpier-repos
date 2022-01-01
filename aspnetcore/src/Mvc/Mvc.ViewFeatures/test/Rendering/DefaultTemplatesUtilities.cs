@@ -24,6 +24,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.WebEncoders.Testing;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
 public class DefaultTemplatesUtilities
@@ -36,6 +37,7 @@ public class DefaultTemplatesUtilities
         }
 
         public string Property1 { get; set; }
+
         [Display(Name = "Prop2")]
         public string Property2 { get; set; }
         public object ComplexInnerModel { get; set; }

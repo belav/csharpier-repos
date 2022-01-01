@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 
+
 namespace SimpleWebSite;
 
 public class Startup

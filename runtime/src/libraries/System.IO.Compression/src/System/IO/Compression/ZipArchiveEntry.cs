@@ -28,6 +28,7 @@ namespace System.IO.Compression
         private long _offsetOfLocalHeader;
         private long? _storedOffsetOfCompressedData;
         private uint _crc32;
+
         // An array of buffers, each a maximum of MaxSingleBufferSize in size
         private byte[][]? _compressedBytes;
         private MemoryStream? _storedUncompressedData;
@@ -37,6 +38,7 @@ namespace System.IO.Compression
         private uint _externalFileAttr;
         private string _storedEntryName;
         private byte[] _storedEntryNameBytes;
+
         // only apply to update mode
         private List<ZipGenericExtraField>? _cdUnknownExtraFields;
         private List<ZipGenericExtraField>? _lhUnknownExtraFields;

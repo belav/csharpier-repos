@@ -564,6 +564,7 @@ class C
 
             VerifyTriggerCharacters(expectedCharacters, unexpectedCharacters);
         }
+
         #endregion
 
         #region "EditorBrowsable tests"

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 public class EventCallbackFactoryBinderExtensionsTest
@@ -743,6 +744,7 @@ public class EventCallbackFactoryBinderExtensionsTest
 
             return false;
         }
+
         public override object ConvertFrom(
             ITypeDescriptorContext context,
             CultureInfo culture,

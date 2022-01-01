@@ -176,6 +176,7 @@ namespace Internal.Cryptography
             int inputOffset,
             int inputCount
         );
+
         protected abstract int UncheckedTransformFinalBlock(
             ReadOnlySpan<byte> inputBuffer,
             Span<byte> outputBuffer

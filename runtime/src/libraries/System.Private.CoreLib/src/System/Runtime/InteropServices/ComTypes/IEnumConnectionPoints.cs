@@ -14,6 +14,7 @@ namespace System.Runtime.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] IConnectionPoint[] rgelt,
             IntPtr pceltFetched
         );
+
         [PreserveSig]
         int Skip(int celt);
         void Reset();

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
 internal class CorsApplicationModelProvider : IApplicationModelProvider

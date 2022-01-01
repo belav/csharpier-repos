@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class BloggingContextWithPendingModelChanges : BloggingContext

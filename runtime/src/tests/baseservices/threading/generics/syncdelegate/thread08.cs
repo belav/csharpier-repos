@@ -11,6 +11,7 @@ struct Gen
         Test_thread08.Eval(typeof(U) != null);
         Interlocked.Increment(ref Test_thread08.Xcounter);
     }
+
     public static void DelegateTest<U>()
     {
         ThreadStart d = new ThreadStart(new Gen().Target<U>);
@@ -27,6 +28,7 @@ public class Test_thread08
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

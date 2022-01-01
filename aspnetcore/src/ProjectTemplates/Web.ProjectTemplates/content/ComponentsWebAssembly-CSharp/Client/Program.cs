@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 #if (Hosted)
 using ComponentsWebAssembly_CSharp.Client;
+
 #else
 using ComponentsWebAssembly_CSharp;
+
 #endif
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -17,6 +19,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(
     sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
 );
+
 #else
 builder.Services
     .AddHttpClient(
@@ -31,6 +34,7 @@ builder.Services.AddScoped(
         sp.GetRequiredService<IHttpClientFactory>()
             .CreateClient("ComponentsWebAssembly_CSharp.ServerAPI")
 );
+
 #endif
 #if(!NoAuth)
 
@@ -49,6 +53,7 @@ builder.Services.AddOidcAuthentication(
         builder.Configuration.Bind("Local", options.ProviderOptions);
     }
 );
+
 #endif
 #endif
 #if (IndividualB2CAuth)
@@ -61,6 +66,7 @@ builder.Services.AddMsalAuthentication(
 #endif
     }
 );
+
 #endif
 #if(OrganizationalAuth)
 builder.Services.AddMsalAuthentication(
@@ -72,6 +78,7 @@ builder.Services.AddMsalAuthentication(
 #endif
     }
 );
+
 #endif
 
 await builder.Build().RunAsync();

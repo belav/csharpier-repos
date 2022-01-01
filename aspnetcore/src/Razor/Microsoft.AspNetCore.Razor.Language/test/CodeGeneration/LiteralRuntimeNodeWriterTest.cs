@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 public class LiteralRuntimeNodeWriterTest

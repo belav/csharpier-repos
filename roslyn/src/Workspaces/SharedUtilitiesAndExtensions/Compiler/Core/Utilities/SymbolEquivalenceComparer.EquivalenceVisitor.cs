@@ -34,6 +34,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
 #if TRACKDEPTH
             private int depth = 0;
+
 #endif
             public bool AreEquivalent(
                 ISymbol? x,

@@ -288,7 +288,9 @@ namespace System.Security.Cryptography
         }
 
         protected abstract void HashCore(byte[] array, int ibStart, int cbSize);
+
         protected abstract byte[] HashFinal();
+
         public abstract void Initialize();
 
         protected virtual void HashCore(ReadOnlySpan<byte> source)

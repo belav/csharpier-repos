@@ -4,6 +4,7 @@
 using System.Globalization;
 using System.Text;
 
+
 // Copied from
 // https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.Language/CSharpIdentifier.cs
 namespace Microsoft.Extensions.ApiDescription.Client;

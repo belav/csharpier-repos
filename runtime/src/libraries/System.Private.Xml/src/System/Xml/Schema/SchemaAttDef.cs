@@ -107,6 +107,7 @@ namespace System.Xml.Schema
         {
             get { return ((SchemaAttDef)this).ValueLinePosition; }
         }
+
         #endregion
 
         //

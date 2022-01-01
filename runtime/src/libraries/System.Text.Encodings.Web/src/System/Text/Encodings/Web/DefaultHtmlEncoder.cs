@@ -91,6 +91,7 @@ namespace System.Text.Encodings.Web
 
         public override bool WillEncode(int unicodeScalar) =>
             !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
+
 #pragma warning restore CS0618
 
         /*

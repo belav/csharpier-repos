@@ -21,6 +21,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             AssemblyIdentity,
             (AssemblyIdentity? Identity, int Count)
         > Requests = new Dictionary<AssemblyIdentity, (AssemblyIdentity? Identity, int Count)>();
+
 #endif
 
         internal EEMetadataReferenceResolver(

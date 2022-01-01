@@ -54,6 +54,7 @@ namespace Microsoft.CodeAnalysis.Editor
         }
 
         public abstract override bool Equals(object? obj);
+
         public abstract override int GetHashCode();
 
         public bool Equals(NavigationBarItem? other)

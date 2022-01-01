@@ -37,6 +37,7 @@ public class Test_RefCharArrayTest
     [DllImport("RefCharArrayNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern DelegatePInvokeStdcall DelegatePinvoke_Stdcall();
+
     #endregion
 
     #region "TestMethod"

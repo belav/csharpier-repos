@@ -4,6 +4,7 @@
 using System;
 using System.Threading;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 internal class HeartbeatManager : IHeartbeatHandler, ISystemClock

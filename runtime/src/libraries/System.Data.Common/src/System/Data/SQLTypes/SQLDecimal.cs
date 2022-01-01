@@ -298,6 +298,7 @@ namespace System.Data.SqlTypes
             0x0785ee10, // precision:38, value:10000000000000000000000000000000000000
             0x4b3b4ca8, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
+
         #endregion
 
         // note that the algorithm covers a range from -5 to +4 from the initial index
@@ -1851,6 +1852,7 @@ namespace System.Data.SqlTypes
             for (int iulData = _bLen; iulData < s_cNumeMax; iulData++)
                 Debug.Assert(rglData[iulData] == 0, "rglData[iulData] == 0", "In AssertValid");
         }
+
         /*
                 // print the data members
                 [System.Diagnostics.Conditional("DEBUG")]
@@ -2180,6 +2182,7 @@ namespace System.Data.SqlTypes
             // If number of significant digits less than scale, return scale
             return (Prec < _bScale ? _bScale : (byte)Prec);
         }
+
 #endif
 
         //    AddULong()
@@ -3010,6 +3013,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlDecimal Subtract(SqlDecimal x, SqlDecimal y)
         {

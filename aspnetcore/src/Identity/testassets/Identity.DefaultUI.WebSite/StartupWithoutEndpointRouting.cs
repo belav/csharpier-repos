@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Identity.DefaultUI.WebSite;
 
 public class StartupWithoutEndpointRouting : StartupBase<IdentityUser, IdentityDbContext>

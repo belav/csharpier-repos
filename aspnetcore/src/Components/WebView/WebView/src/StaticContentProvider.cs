@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.Components.WebView;
 
 internal class StaticContentProvider

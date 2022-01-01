@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.Extensions.Internal;
 
 /// <summary>

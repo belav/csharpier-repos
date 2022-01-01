@@ -31,6 +31,7 @@ public class Ex
         }
         return fin;
     }
+
     public static int Main()
     {
         if (test(0) != 1)

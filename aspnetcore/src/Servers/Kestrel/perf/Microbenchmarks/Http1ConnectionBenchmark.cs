@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Testing;
 using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class Http1ConnectionBenchmark

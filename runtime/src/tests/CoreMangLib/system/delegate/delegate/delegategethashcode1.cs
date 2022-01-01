@@ -3,13 +3,18 @@
 
 using System;
 using System.Globalization;
+
 //test case for delegate GetHashCode method.
 namespace DelegateTest
 {
     delegate bool booldelegate();
+
     delegate void voiddelegate();
+
     delegate bool booldelegate1();
+
     delegate bool booldelegate2(string str);
+
     public class DelegateGetHashCode
     {
         public static int Main()
@@ -31,6 +36,7 @@ namespace DelegateTest
                 return 0;
             }
         }
+
         public bool RunTests()
         {
             bool retVal = true;
@@ -79,6 +85,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         // one delegate object  is booldelegate
@@ -113,6 +120,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         // the same delegate object  is booldelegate
@@ -146,6 +154,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         // the same delegate object  is booldelegate
@@ -179,6 +188,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         // the same delegate object  is booldelegate
@@ -213,6 +223,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         // the same delegate object  is booldelegate
@@ -247,6 +258,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         // one delegate object  is booldelegate
@@ -282,14 +294,17 @@ namespace DelegateTest
             return retVal;
         }
     }
+
     //create testclass for provding test method and test target.
     class TestClass
     {
         private int id;
+
         public TestClass(int id)
         {
             this.id = id;
         }
+
         public bool StartWork_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -297,6 +312,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public bool StartWork_Bool(string str)
         {
             TestLibrary.TestFramework.LogInformation(
@@ -308,6 +324,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public static bool Working_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -315,6 +332,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public static bool Completed_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -322,6 +340,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public void StartWork_Void()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -329,13 +348,16 @@ namespace DelegateTest
             );
         }
     }
+
     class TestClass1
     {
         private int id;
+
         public TestClass1(int id)
         {
             this.id = id;
         }
+
         public bool StartWork_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -351,6 +373,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public static bool Completed_Bool()
         {
             TestLibrary.TestFramework.LogInformation(

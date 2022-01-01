@@ -48,6 +48,7 @@ using System.Xml;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
+
 #if !NET20
 using System.Xml.Linq;
 
@@ -145,6 +146,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             return node;
         }
+
 #endif
 
         private string IndentXml(string xml)
@@ -311,6 +313,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Assert.AreEqual(@"{""root"":""A > B""}", json);
         }
+
 #endif
 
 #if !NET20
@@ -321,6 +324,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Assert.AreEqual("<Time>0001-01-01T00:00:00</Time>", xmlNode.ToString());
         }
+
 #endif
 
         [Test]
@@ -611,6 +615,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             StringAssert.AreEqual(xml, doc.ToString());
         }
+
 #endif
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -687,6 +692,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
         }
+
 #endif
 
 #if !NET20
@@ -852,6 +858,7 @@ namespace Newtonsoft.Json.Tests.Converters
             json = JsonConvert.SerializeXNode(doc1, Formatting.Indented, true);
             Assert.AreEqual(@"""""", json);
         }
+
 #endif
 
         [Test]
@@ -885,6 +892,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Assert.AreEqual(doc.OuterXml, xdoc.ToString());
         }
+
 #endif
 #endif
 
@@ -1232,6 +1240,7 @@ namespace Newtonsoft.Json.Tests.Converters
             StringAssert.AreEqual(xml, ToStringWithDeclaration(doc22));
 #endif
         }
+
 #endif
 
         public class Utf8StringWriter : StringWriter
@@ -1259,6 +1268,7 @@ namespace Newtonsoft.Json.Tests.Converters
             }
             return builder.ToString();
         }
+
 #endif
 
         public static string ToStringWithDeclaration(XmlDocument doc, bool indent = false)
@@ -1715,6 +1725,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'photos', line 1, position 26."
             );
         }
+
 #endif
 
 #if !NET20
@@ -1731,6 +1742,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'photos', line 1, position 26."
             );
         }
+
 #endif
 
         [Test]
@@ -1951,6 +1963,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
         }
+
 #endif
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -2805,6 +2818,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 System.Threading.Thread.CurrentThread.CurrentCulture = originalCulture;
             }
         }
+
 #endif
 
         [Test]
@@ -2920,6 +2934,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 }
             }
         }
+
 #endif
 
 #if !NET20
@@ -3162,6 +3177,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             StringAssert.AreEqual(expectedXaml, xaml2);
         }
+
 #endif
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -3429,6 +3445,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 xmldoc.InnerXml
             );
         }
+
 #endif
 
         [Test]
@@ -3487,6 +3504,7 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(xml.isNull, w2.isNull);
             Assert.AreEqual(xml.notNull.ToString(), w2.notNull.ToString());
         }
+
 #endif
 
 #if !NET20
@@ -3508,6 +3526,7 @@ namespace Newtonsoft.Json.Tests.Converters
             var equals = XElement.DeepEquals(xmlBack, xml);
             Assert.IsTrue(equals);
         }
+
 #endif
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -3547,6 +3566,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Assert.AreEqual(@"{""DocumentId"":""13779965364495889899""}", json2);
         }
+
 #endif
 
         [Test]
@@ -3606,6 +3626,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Assert.AreEqual("null", json);
         }
+
 #endif
 
 #if !NET20

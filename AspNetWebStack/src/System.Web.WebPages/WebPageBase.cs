@@ -22,8 +22,10 @@ namespace System.Web.WebPages
         private readonly HashSet<string> _renderedSections = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase
         );
+
         // Keep track of whether RenderBody has been called
         private bool _renderedBody = false;
+
         // Action for rendering the body within a layout page
         private Action<TextWriter> _body;
 

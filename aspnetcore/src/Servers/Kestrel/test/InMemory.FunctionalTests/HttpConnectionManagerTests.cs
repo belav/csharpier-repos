@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
 public class HttpConnectionManagerTests : LoggedTest
@@ -115,6 +116,7 @@ public class HttpConnectionManagerTests : LoggedTest
             }
 
             public IDisposable BeginScope<TState>(TState state) => null;
+
             public bool IsEnabled(LogLevel logLevel) => true;
 
             public void Log<TState>(
@@ -129,6 +131,7 @@ public class HttpConnectionManagerTests : LoggedTest
             }
         }
     }
+
 #endif
 
     private class NoDebuggerConditionAttribute : Attribute, ITestCondition

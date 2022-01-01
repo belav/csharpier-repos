@@ -9,6 +9,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         private class MyClass
         {
             public void Do(int x)
@@ -40,6 +41,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         private class MyClass
         {
             public static void Do(int x)
@@ -76,6 +78,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         public class MyClass
         {
             public static void Do(int x)
@@ -124,6 +127,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         public class MyClass
         {
             public static void Do(int x)
@@ -159,6 +163,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     public class Test
     {
         public delegate void myDel(int x);
+
         public class MyClass
         {
             public static void Do(int x)
@@ -207,6 +212,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         private class MyClass
         {
             public void Do(int x)
@@ -239,6 +245,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         // static bool Status = false;
         public delegate int myDel(int x);
+
         private class MyClass
         {
             public int Do(int p)
@@ -293,6 +300,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         private class MyClass
         {
             public void Do(int x)
@@ -330,6 +338,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         public class MyClass
         {
             public static void Do(int x)
@@ -366,6 +375,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         public class MyClass
         {
             public static void Do(int x)
@@ -496,6 +506,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         private class MyClass
         {
             public static void Do(int x)
@@ -543,6 +554,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     {
         private static bool s_status = false;
         public delegate void myDel(int x);
+
         private class MyClass
         {
             public void Do(int x)

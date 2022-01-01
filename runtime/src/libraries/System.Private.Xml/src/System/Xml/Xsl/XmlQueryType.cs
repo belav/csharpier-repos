@@ -713,6 +713,7 @@ namespace System.Xml.Xsl
             IsAtomicValue = 2,
             IsNumeric = 4,
         }
+
         #endregion
 
         #region  TypeCodeToFlags
@@ -915,6 +916,7 @@ namespace System.Xml.Xsl
 
             return matrix;
         }
+
         #endregion
 
         /// <summary>

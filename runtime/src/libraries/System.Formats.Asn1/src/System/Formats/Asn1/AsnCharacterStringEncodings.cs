@@ -90,6 +90,7 @@ namespace System.Formats.Asn1
             : base(0, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback) { }
 
         protected abstract int GetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, bool write);
+
         protected abstract int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars, bool write);
 
         public override int GetByteCount(char[] chars, int index, int count)
@@ -456,6 +457,7 @@ namespace System.Formats.Asn1
         {
             return s_utf8Encoding.GetByteCount(chars);
         }
+
 #endif
 
         public override int GetBytes(
@@ -510,6 +512,7 @@ namespace System.Formats.Asn1
                 return s_latin1Encoding.GetCharCount(bytes);
             }
         }
+
 #endif
 
         public override int GetChars(

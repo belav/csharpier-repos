@@ -13,7 +13,9 @@ class Test_GitHub_10940
     abstract class ValueSourceBase
     {
         public abstract string GetString();
+
         public abstract decimal GetDecimal();
+
         public abstract int GetReturnValue();
     }
 

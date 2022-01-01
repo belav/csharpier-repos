@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.ObjectPool;
 
 /// <summary>

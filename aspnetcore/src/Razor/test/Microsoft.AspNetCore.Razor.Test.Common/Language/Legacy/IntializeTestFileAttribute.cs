@@ -5,6 +5,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public class IntializeTestFileAttribute : BeforeAfterTestAttribute

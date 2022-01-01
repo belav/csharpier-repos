@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.JSInterop.Infrastructure;
 
 public class DotNetDispatcherTest
@@ -1059,9 +1060,12 @@ public class DotNetDispatcherTest
 
         [JSInvokable("PrivateMethod")]
         private static void MyPrivateMethod() { }
+
         [JSInvokable("ProtectedMethod")]
         protected static void MyProtectedMethod() { }
+
         protected static void StaticMethodWithoutAttribute() { }
+
         protected static void InstanceMethodWithoutAttribute() { }
 
         [JSInvokable("InvocableStaticVoid")]
@@ -1208,6 +1212,7 @@ public class DotNetDispatcherTest
     {
         [JSInvokable]
         public string EchoStringParameter(string input) => input;
+
         [JSInvokable]
         public TValue EchoParameter(TValue input) => input;
     }
@@ -1216,6 +1221,7 @@ public class DotNetDispatcherTest
     {
         [JSInvokable("StaticGenericMethod")]
         public static string StaticGenericMethod<TValue>(TValue input) => input.ToString();
+
         [JSInvokable("InstanceGenericMethod")]
         public string GenericMethod<TValue>(TValue input) => input.ToString();
     }

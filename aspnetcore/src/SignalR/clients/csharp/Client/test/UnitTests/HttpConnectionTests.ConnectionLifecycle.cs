@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public partial class HttpConnectionTests

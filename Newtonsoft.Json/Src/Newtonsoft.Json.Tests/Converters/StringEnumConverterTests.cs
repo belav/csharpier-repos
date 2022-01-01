@@ -113,6 +113,7 @@ namespace Newtonsoft.Json.Tests.Converters
             [EnumMember(Value = ",")]
             JustComma
         }
+
 #endif
 
         public class NegativeEnumClass
@@ -481,6 +482,7 @@ Parameter name: namingStrategyType",
             );
             Assert.AreEqual(NamedEnum.Third, c.Enum);
         }
+
 #endif
 
         [Test]
@@ -1034,6 +1036,7 @@ Parameter name: namingStrategyType",
 
             Assert.AreEqual(NumberNamesEnum.fourth, e);
         }
+
 #endif
 
         [Test]

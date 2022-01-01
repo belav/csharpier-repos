@@ -23,6 +23,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using IHttpHeadersHandler = System.Net.Http.IHttpHeadersHandler;
 
+
 namespace Microsoft.AspNetCore.Http2Cat;
 
 internal class Http2Utilities : IHttpHeadersHandler

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthenticationTests<TOptions>

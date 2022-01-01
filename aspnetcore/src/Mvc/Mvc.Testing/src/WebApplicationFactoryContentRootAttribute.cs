@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 
+
 namespace Microsoft.AspNetCore.Mvc.Testing;
 
 /// <summary>

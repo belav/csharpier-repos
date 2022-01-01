@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Rendering;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
 public abstract class AutoRenderComponent : IComponent

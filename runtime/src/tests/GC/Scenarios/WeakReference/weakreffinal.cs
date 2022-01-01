@@ -102,6 +102,7 @@ namespace DefaultNamespace
         public static int icFinalNode = 0;
         internal int[] mem;
         public static List<BNode> ResObj = new List<BNode>();
+
         public BNode(int i)
         {
             icCreateNode++;

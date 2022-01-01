@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             bool localFunction,
             OptionSet options
         );
+
         protected abstract TExtractor CreateMethodExtractor(
             TResult selectionResult,
             bool localFunction

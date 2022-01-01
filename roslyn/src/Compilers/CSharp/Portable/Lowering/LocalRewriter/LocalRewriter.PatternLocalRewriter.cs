@@ -99,6 +99,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     poolElement.Free();
                     return result;
                 }
+
 #endif
 
                 public BoundExpression GetTemp(BoundDagTemp dagTemp)

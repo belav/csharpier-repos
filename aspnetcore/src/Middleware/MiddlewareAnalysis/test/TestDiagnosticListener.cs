@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
 
+
 namespace Microsoft.AspNetCore.MiddlewareAnalysis;
 
 public class TestDiagnosticListener

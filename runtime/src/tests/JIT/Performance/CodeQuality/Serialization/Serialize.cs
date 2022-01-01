@@ -15,8 +15,10 @@ namespace Serialization
     {
 #if DEBUG
         public const int Iterations = 1;
+
 #else
         public const int Iterations = 75000;
+
 #endif
 
         static volatile object VolatileObject;

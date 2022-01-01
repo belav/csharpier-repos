@@ -106,6 +106,7 @@ namespace System.Xml.Xsl.Runtime
             "CheckScriptNamespace"
         );
         public static readonly MethodInfo FunctionAvailable = GetFunctionAvailableMethod();
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -114,6 +115,7 @@ namespace System.Xml.Xsl.Runtime
         )]
         private static MethodInfo GetFunctionAvailableMethod() =>
             typeof(XsltLibrary).GetMethod("FunctionAvailable");
+
         public static readonly MethodInfo ElementAvailable = typeof(XsltLibrary).GetMethod(
             "ElementAvailable"
         );
@@ -719,6 +721,7 @@ namespace System.Xml.Xsl.Runtime
                 return CompareValues(op, leftItem, rightItem, TypeCode.Double);
             }
         }
+
         #endregion
 
         // nav1 and nav2 are assumed to belong to the same document

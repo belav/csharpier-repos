@@ -4,10 +4,12 @@
 // instance method
 
 using System;
+
 internal class measure
 {
     public static int a = 0xCC;
 }
+
 internal class test
 {
     static test()

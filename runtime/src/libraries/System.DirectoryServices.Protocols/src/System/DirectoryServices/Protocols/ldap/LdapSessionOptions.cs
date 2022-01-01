@@ -22,6 +22,7 @@ namespace System.DirectoryServices.Protocols
         NetworkCredential credential,
         long currentUserToken
     );
+
     public delegate bool NotifyOfNewConnectionCallback(
         LdapConnection primaryConnection,
         LdapConnection referralFromConnection,
@@ -32,14 +33,17 @@ namespace System.DirectoryServices.Protocols
         long currentUserToken,
         int errorCodeFromBind
     );
+
     public delegate void DereferenceConnectionCallback(
         LdapConnection primaryConnection,
         LdapConnection connectionToDereference
     );
+
     public delegate X509Certificate QueryClientCertificateCallback(
         LdapConnection connection,
         byte[][] trustedCAs
     );
+
     public delegate bool VerifyServerCertificateCallback(
         LdapConnection connection,
         X509Certificate certificate

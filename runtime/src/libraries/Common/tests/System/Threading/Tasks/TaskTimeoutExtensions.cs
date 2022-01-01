@@ -89,6 +89,7 @@ namespace System.Threading.Tasks
                 ).ConfigureAwait(false);
             }
         }
+
         #endregion
 
         public static async Task WhenAllOrAnyFailed(this Task[] tasks, int millisecondsTimeout) =>

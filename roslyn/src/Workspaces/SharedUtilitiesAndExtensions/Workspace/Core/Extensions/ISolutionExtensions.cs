@@ -83,6 +83,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     .GetTextDocumentAsync(documentId, cancellationToken)
                     .ConfigureAwait(false)
             ) ?? throw CreateDocumentNotFoundException();
+
 #endif
 
         public static TextDocument GetRequiredAdditionalDocument(

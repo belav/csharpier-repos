@@ -221,6 +221,7 @@ namespace System.Data
         // ------------- IBindingList: ---------------------------
 
         bool IBindingList.AllowNew => false;
+
         object IBindingList.AddNew()
         {
             throw s_notSupported;

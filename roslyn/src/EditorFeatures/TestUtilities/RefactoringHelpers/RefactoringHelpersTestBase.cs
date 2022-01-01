@@ -73,6 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
 
         protected Task TestMissingAsync<TNode>(string text) where TNode : SyntaxNode =>
             TestMissingAsync<TNode>(text, Functions<TNode>.True);
+
         protected async Task TestMissingAsync<TNode>(string text, Func<TNode, bool> predicate)
             where TNode : SyntaxNode
         {

@@ -1,5 +1,6 @@
 using Microsoft.JSInterop;
 
+
 namespace Company.RazorClassLibrary1;
 
 // This class provides an example of how JavaScript functionality can be wrapped

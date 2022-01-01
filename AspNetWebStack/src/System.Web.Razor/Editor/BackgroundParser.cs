@@ -127,6 +127,7 @@ namespace System.Web.Razor.Editor
         {
 #if DEBUG
             private int _id = -1;
+
 #endif
             protected ThreadStateBase() { }
 

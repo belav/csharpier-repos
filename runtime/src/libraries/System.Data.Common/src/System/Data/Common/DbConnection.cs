@@ -12,6 +12,7 @@ namespace System.Data.Common
     {
 #pragma warning disable 649 // ignore unassigned field warning
         internal bool _suppressStateChangeForReconnection;
+
 #pragma warning restore 649
 
         protected DbConnection() : base() { }

@@ -118,6 +118,7 @@ namespace System.Xml.Xsl.XPath
         //Max depth to avoid StackOverflow
         private const int MaxParseRelativePathDepth = 1024;
         private int _parseRelativePath;
+
         private Node ParseRelativeLocationPath()
         {
             if (++_parseRelativePath > MaxParseRelativePathDepth)
@@ -339,6 +340,7 @@ namespace System.Xml.Xsl.XPath
             _scanner.PassToken(LexKind.RBracket);
             return opnd;
         }
+
         #endregion
 
         #region Expressions
@@ -368,6 +370,7 @@ namespace System.Xml.Xsl.XPath
         //and also ParseSubExpr->ParseUnionExpr->ParsePathExpr->...->ParseExpr->ParseSubExpr
         private const int MaxParseSubExprDepth = 1024;
         private int _parseSubExprDepth;
+
         private Node ParseSubExpr(int callerPrec)
         {
             if (++_parseSubExprDepth > MaxParseSubExprDepth)
@@ -623,6 +626,7 @@ namespace System.Xml.Xsl.XPath
             PopPosInfo();
             return result;
         }
+
         #endregion
 
         /**************************************************************************************************/

@@ -38,8 +38,10 @@ using System.Text;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
+
 #if HAVE_XLINQ
 using System.Xml.Linq;
+
 #endif
 
 namespace Newtonsoft.Json
@@ -173,6 +175,7 @@ namespace Newtonsoft.Json
                 return writer.ToString();
             }
         }
+
 #endif
 
         /// <summary>
@@ -262,6 +265,7 @@ namespace Newtonsoft.Json
         {
             return value.ToString(null, CultureInfo.InvariantCulture);
         }
+
 #endif
 
         /// <summary>
@@ -764,6 +768,7 @@ namespace Newtonsoft.Json
 
             return sw.ToString();
         }
+
         #endregion
 
         #region Deserialize
@@ -941,6 +946,7 @@ namespace Newtonsoft.Json
                 return jsonSerializer.Deserialize(reader, type);
             }
         }
+
         #endregion
 
         #region Populate
@@ -991,6 +997,7 @@ namespace Newtonsoft.Json
                 }
             }
         }
+
         #endregion
 
         #region Xml

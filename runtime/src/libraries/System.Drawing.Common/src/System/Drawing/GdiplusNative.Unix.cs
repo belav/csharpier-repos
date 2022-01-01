@@ -757,9 +757,14 @@ namespace System.Drawing
 
     // These are unix-only
     internal unsafe delegate int StreamGetHeaderDelegate(byte* buf, int bufsz);
+
     internal unsafe delegate int StreamGetBytesDelegate(byte* buf, int bufsz, bool peek);
+
     internal delegate long StreamSeekDelegate(int offset, int whence);
+
     internal unsafe delegate int StreamPutBytesDelegate(byte* buf, int bufsz);
+
     internal delegate void StreamCloseDelegate();
+
     internal delegate long StreamSizeDelegate();
 }

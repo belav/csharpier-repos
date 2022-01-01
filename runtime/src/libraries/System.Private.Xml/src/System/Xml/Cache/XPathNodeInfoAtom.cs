@@ -417,8 +417,10 @@ namespace MS.Internal.Xml.Cache
 
 #if DEBUG
         private const int DefaultTableSize = 2;
+
 #else
         private const int DefaultTableSize = 32;
+
 #endif
 
         /// <summary>

@@ -44,6 +44,7 @@ namespace System
 #pragma warning disable CS8618 // compiler sees this non-nullable static string as uninitialized
         [Intrinsic]
         public static readonly string Empty;
+
 #pragma warning restore CS8618
 #endif
 

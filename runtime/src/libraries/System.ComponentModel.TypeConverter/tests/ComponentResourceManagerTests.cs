@@ -177,6 +177,7 @@ namespace System.ComponentModel.Tests
                 get => throw new NotImplementedException();
                 set => throw new NotImplementedException();
             }
+
             public object GetService(Type serviceType) => null;
         }
 
@@ -186,6 +187,7 @@ namespace System.ComponentModel.Tests
 
 #pragma warning disable 0067
             public event EventHandler Disposed;
+
 #pragma warning restore 0067
 
             public void Dispose() { }

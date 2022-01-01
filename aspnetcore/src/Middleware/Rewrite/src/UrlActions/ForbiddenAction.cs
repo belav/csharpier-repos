@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
 internal class ForbiddenAction : UrlAction

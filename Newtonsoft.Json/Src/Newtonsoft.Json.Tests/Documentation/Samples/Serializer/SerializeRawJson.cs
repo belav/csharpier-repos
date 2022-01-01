@@ -31,6 +31,7 @@ using Newtonsoft.Json.Linq;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -47,6 +48,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public JRaw OnLoadFunction { get; set; }
             public JRaw OnUnloadFunction { get; set; }
         }
+
         #endregion
 
         [Test]

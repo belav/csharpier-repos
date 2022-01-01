@@ -16,6 +16,7 @@ namespace System.Text.Json.Serialization.Converters
 
         private const int MaximumEscapedVersionLength =
             JsonConstants.MaxExpansionFactorWhileEscaping * MaximumVersionLength;
+
 #endif
 
         public override Version Read(

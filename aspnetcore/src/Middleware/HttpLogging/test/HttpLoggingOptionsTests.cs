@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 public class HttpLoggingOptionsTests

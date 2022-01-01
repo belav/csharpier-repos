@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 /// <summary>

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Routing.DecisionTree;
 
 internal class DecisionCriterionValueEqualityComparer : IEqualityComparer<DecisionCriterionValue>

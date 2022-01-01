@@ -2062,6 +2062,7 @@ namespace System.Threading.Tasks
 
             return promise;
         }
+
         /// <summary>
         /// Creates a continuation <see cref="System.Threading.Tasks.Task">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
@@ -2913,6 +2914,7 @@ namespace System.Threading.Tasks
 
             public bool InvokeMayRunArbitraryCode => (_stateFlags & SyncBlockingFlag) == 0;
         }
+
         // Common ContinueWhenAny logic
         // If the tasks list is not an array, it must be an internal defensive copy so that
         // we don't need to be concerned about concurrent modifications to the list.  If the task list

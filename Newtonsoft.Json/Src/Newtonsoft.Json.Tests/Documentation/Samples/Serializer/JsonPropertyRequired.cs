@@ -30,6 +30,7 @@ using System.Text;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -49,6 +50,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty(Required = Required.AllowNull)]
             public DateTime? ReleaseDate { get; set; }
         }
+
         #endregion
 
         [Test]

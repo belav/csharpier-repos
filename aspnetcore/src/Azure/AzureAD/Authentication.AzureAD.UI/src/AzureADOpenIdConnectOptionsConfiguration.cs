@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
 [Obsolete(

@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody

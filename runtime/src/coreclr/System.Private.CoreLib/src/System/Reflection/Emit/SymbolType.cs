@@ -209,12 +209,14 @@ namespace System.Reflection.Emit
         internal TypeKind m_typeKind;
         internal Type m_baseType = null!;
         internal int m_cRank; // count of dimension
+
         // If LowerBound and UpperBound is equal, that means one element.
         // If UpperBound is less than LowerBound, then the size is not specified.
         internal int[] m_iaLowerBound;
         internal int[] m_iaUpperBound; // count of dimension
         private string? m_format; // format string to form the full name.
         private bool m_isSzArray = true;
+
         #endregion
 
         #region Constructor
@@ -264,6 +266,7 @@ namespace System.Reflection.Emit
 
             m_format = format.Substring(curIndex, length);
         }
+
         #endregion
 
         #region Type Overrides

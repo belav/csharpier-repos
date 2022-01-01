@@ -503,6 +503,7 @@ namespace System.Data
                 }
             }
         }
+
         internal void CheckNamespaceValidityForNestedRelations(string ns)
         {
             foreach (DataRelation rel in ChildTable.ParentRelations)

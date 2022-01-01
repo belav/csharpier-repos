@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 internal abstract class ResourceInvoker
@@ -1771,6 +1772,7 @@ internal abstract class ResourceInvoker
         public ExceptionContextSealed(ActionContext actionContext, IList<IFilterMetadata> filters)
             : base(actionContext, filters) { }
     }
+
     private sealed class ResourceExecutedContextSealed : ResourceExecutedContext
     {
         public ResourceExecutedContextSealed(
@@ -1778,6 +1780,7 @@ internal abstract class ResourceInvoker
             IList<IFilterMetadata> filters
         ) : base(actionContext, filters) { }
     }
+
     private sealed class ResourceExecutingContextSealed : ResourceExecutingContext
     {
         public ResourceExecutingContextSealed(
@@ -1786,6 +1789,7 @@ internal abstract class ResourceInvoker
             IList<IValueProviderFactory> valueProviderFactories
         ) : base(actionContext, filters, valueProviderFactories) { }
     }
+
     private sealed class AuthorizationFilterContextSealed : AuthorizationFilterContext
     {
         public AuthorizationFilterContextSealed(

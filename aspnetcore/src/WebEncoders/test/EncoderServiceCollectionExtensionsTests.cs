@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders.Testing;
 using Xunit;
 
+
 namespace Microsoft.Extensions.WebEncoders;
 
 public class EncoderServiceCollectionExtensionsTests

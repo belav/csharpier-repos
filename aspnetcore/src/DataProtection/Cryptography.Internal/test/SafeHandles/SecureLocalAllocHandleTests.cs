@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 public unsafe class SecureLocalAllocHandleTests

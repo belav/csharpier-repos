@@ -26,6 +26,7 @@ namespace System.ComponentModel.DataAnnotations
         private string? _errorMessage;
         private Func<string>? _errorMessageResourceAccessor;
         private string? _errorMessageResourceName;
+
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.NonPublicProperties
@@ -33,6 +34,7 @@ namespace System.ComponentModel.DataAnnotations
         private Type? _errorMessageResourceType;
         private volatile bool _hasBaseIsValid;
         private string? _defaultErrorMessage;
+
         #endregion
 
         #region All Constructors

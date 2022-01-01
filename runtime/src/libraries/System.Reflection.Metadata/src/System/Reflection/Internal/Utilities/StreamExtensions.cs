@@ -91,6 +91,7 @@ namespace System.Reflection.Internal
 
             return totalBytesRead;
         }
+
 #endif
 
         /// <summary>

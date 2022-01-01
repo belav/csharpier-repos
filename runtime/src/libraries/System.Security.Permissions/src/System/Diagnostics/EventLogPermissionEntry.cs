@@ -9,6 +9,7 @@ namespace System.Diagnostics
             EventLogPermissionAccess permissionAccess,
             string machineName
         ) { }
+
         public string MachineName
         {
             get { return null; }

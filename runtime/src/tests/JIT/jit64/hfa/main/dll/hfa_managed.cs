@@ -22,6 +22,7 @@ namespace HFATest
         public const float EXPECTED_SUM_HFA08 = 11;
         public const float EXPECTED_SUM_HFA11 = 15;
         public const float EXPECTED_SUM_HFA19 = 26;
+
 #endif
 #else
 #if FLOAT64
@@ -32,6 +33,7 @@ namespace HFATest
         public const double EXPECTED_SUM_HFA08 = 36;
         public const double EXPECTED_SUM_HFA11 = 66;
         public const double EXPECTED_SUM_HFA19 = 190;
+
 #else
         public const float EXPECTED_SUM_HFA01 = 1;
         public const float EXPECTED_SUM_HFA02 = 3;
@@ -40,6 +42,7 @@ namespace HFATest
         public const float EXPECTED_SUM_HFA08 = 36;
         public const float EXPECTED_SUM_HFA11 = 66;
         public const float EXPECTED_SUM_HFA19 = 190;
+
 #endif
 #endif
 

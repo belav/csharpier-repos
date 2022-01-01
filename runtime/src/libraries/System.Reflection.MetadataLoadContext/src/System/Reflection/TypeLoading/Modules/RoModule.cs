@@ -28,6 +28,7 @@ namespace System.Reflection.TypeLoading
         public sealed override string ToString() => Loader.GetDisposedString() ?? base.ToString();
 
         public sealed override Assembly Assembly => GetRoAssembly();
+
         internal abstract RoAssembly GetRoAssembly();
 
         internal const string UnknownStringMessageInRAF =
@@ -61,18 +62,24 @@ namespace System.Reflection.TypeLoading
 
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
 
         public abstract override FieldInfo? GetField(string name, BindingFlags bindingAttr);
+
         public abstract override FieldInfo[] GetFields(BindingFlags bindingFlags);
+
         public abstract override MethodInfo[] GetMethods(BindingFlags bindingFlags);
+
         protected abstract override MethodInfo? GetMethodImpl(
             string name,
             BindingFlags bindingAttr,
@@ -86,13 +93,16 @@ namespace System.Reflection.TypeLoading
             SerializationInfo info,
             StreamingContext context
         ) => throw new NotSupportedException();
+
         public abstract override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
         );
 
         public abstract override Type[] GetTypes();
+
         internal abstract IEnumerable<RoType>? GetDefinedRoTypes();
+
         public abstract override bool IsResource();
 
         public sealed override FieldInfo ResolveField(
@@ -100,20 +110,25 @@ namespace System.Reflection.TypeLoading
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
         ) => throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override MemberInfo ResolveMember(
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
         ) => throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override MethodBase ResolveMethod(
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
         ) => throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override byte[] ResolveSignature(int metadataToken) =>
             throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override string ResolveString(int metadataToken) =>
             throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override Type ResolveType(
             int metadataToken,
             Type[]? genericTypeArguments,
@@ -175,11 +190,13 @@ namespace System.Reflection.TypeLoading
             e = null;
             return type;
         }
+
         protected abstract RoDefinitionType? GetTypeCoreNoCache(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             out Exception? e
         );
+
         internal readonly GetTypeCoreCache _getTypeCoreCache = new GetTypeCoreCache();
 
         internal MetadataLoadContext Loader => GetRoAssembly().Loader;

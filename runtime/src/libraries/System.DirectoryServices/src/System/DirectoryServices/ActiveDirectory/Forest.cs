@@ -55,6 +55,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
         internal Forest(DirectoryContext context, string name)
             : this(context, name, new DirectoryEntryManager(context)) { }
+
         #endregion constructors
 
         #region IDisposable
@@ -79,6 +80,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 _disposed = true;
             }
         }
+
         #endregion IDisposable
 
         #region public methods

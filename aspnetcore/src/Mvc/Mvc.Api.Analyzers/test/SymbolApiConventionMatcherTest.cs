@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Xunit;
 using static Microsoft.AspNetCore.Mvc.Api.Analyzers.SymbolApiConventionMatcher;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class SymbolApiConventionMatcherTest

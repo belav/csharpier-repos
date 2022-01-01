@@ -92,6 +92,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         }
 
         public abstract DbContextOptionsBuilder AddProviderOptions(DbContextOptionsBuilder builder);
+
         public abstract void Clean(DbContext context);
 
         public virtual Task CleanAsync(DbContext context)

@@ -60,6 +60,7 @@ namespace System.Reflection.Emit
         private CallingConvention unmanagedCallConv;
         private Type[][]? modreqs;
         private Type[][]? modopts;
+
 #endregion
 
         [DynamicDependency(nameof(modopts))] // Automatically keeps all previous fields too due to StructLayout

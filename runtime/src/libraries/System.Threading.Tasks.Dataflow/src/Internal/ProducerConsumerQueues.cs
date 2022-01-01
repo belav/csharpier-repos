@@ -149,11 +149,13 @@ namespace System.Threading.Tasks
 
         /// <summary>The initial size to use for segments (in number of elements).</summary>
         private const int INIT_SEGMENT_SIZE = 32; // must be a power of 2
+
         /// <summary>The maximum size to use for segments (in number of elements).</summary>
         private const int MAX_SEGMENT_SIZE = 0x1000000; // this could be made as large as Int32.MaxValue / 2
 
         /// <summary>The head of the linked list of segments.</summary>
         private volatile Segment _head;
+
         /// <summary>The tail of the linked list of segments.</summary>
         private volatile Segment _tail;
 
@@ -481,6 +483,7 @@ namespace System.Threading.Tasks
                 }
             }
         }
+
         /// <summary>Gets an enumerable for the collection.</summary>
         /// <remarks>WARNING: This should only be used for debugging purposes.  It is not safe to be used concurrently.</remarks>
         IEnumerator IEnumerable.GetEnumerator()
@@ -530,8 +533,10 @@ namespace System.Threading.Tasks
         {
             /// <summary>The next segment in the linked list of segments.</summary>
             internal Segment? _next;
+
             /// <summary>The data stored in this segment.</summary>
             internal readonly T[] _array;
+
             /// <summary>Details about the segment.</summary>
             internal SegmentState _state; // separated out to enable StructLayout attribute to take effect
 
@@ -553,6 +558,7 @@ namespace System.Threading.Tasks
 
             /// <summary>The index of the current head in the segment.</summary>
             internal volatile int _first;
+
             /// <summary>A copy of the current tail index.</summary>
             internal int _lastCopy; // not volatile as read and written by the producer, except for IsEmpty, and there _lastCopy is only read after reading the volatile _first
 
@@ -561,6 +567,7 @@ namespace System.Threading.Tasks
 
             /// <summary>A copy of the current head index.</summary>
             internal int _firstCopy; // not volatile as only read and written by the consumer thread
+
             /// <summary>The index of the current tail in the segment.</summary>
             internal volatile int _last;
 

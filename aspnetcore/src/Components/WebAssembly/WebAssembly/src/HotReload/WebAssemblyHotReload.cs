@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Services;
 using Microsoft.Extensions.HotReload;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload;
 
 /// <summary>

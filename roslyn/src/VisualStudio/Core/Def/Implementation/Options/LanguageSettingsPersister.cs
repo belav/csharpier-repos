@@ -36,6 +36,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
 #pragma warning disable IDE0052 // Remove unread private members - https://github.com/dotnet/roslyn/issues/46167
         private readonly ComEventSink _textManagerEvents2Sink;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         /// <summary>

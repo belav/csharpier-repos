@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
 public class ComplexTypeModelBinderIntegrationTest : ComplexTypeIntegrationTestBase

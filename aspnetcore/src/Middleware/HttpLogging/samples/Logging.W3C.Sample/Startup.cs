@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Logging.W3C.Sample;
 
 public class Startup

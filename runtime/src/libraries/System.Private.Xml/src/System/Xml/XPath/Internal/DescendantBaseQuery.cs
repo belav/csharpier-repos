@@ -24,6 +24,7 @@ namespace MS.Internal.Xml.XPath
             this.matchSelf = matchSelf;
             this.abbrAxis = abbrAxis;
         }
+
         public DescendantBaseQuery(DescendantBaseQuery other) : base(other)
         {
             this.matchSelf = other.matchSelf;

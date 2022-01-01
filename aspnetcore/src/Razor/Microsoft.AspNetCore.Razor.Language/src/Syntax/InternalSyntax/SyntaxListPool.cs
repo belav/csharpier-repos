@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal class SyntaxListPool
@@ -14,6 +15,7 @@ internal class SyntaxListPool
 
 #if DEBUG
     private readonly List<SyntaxListBuilder> _allocated = new List<SyntaxListBuilder>();
+
 #endif
 
     internal SyntaxListPool() { }

@@ -100,6 +100,7 @@ namespace System.IO
 
 #if !NETFRAMEWORK && !NETSTANDARD2_0
         public override int Read(Span<byte> buffer) => ReadBuffer(buffer);
+
 #endif
 
         private int ReadBuffer(Span<byte> buffer)
@@ -151,6 +152,7 @@ namespace System.IO
               ? ValueTask.FromCanceled<int>(cancellationToken)
               : new ValueTask<int>(ReadBuffer(buffer.Span));
         }
+
 #endif
 
         public override IAsyncResult BeginRead(
@@ -190,6 +192,7 @@ namespace System.IO
               ? destination.WriteAsync(_content.Slice(_position), cancellationToken).AsTask()
               : Task.CompletedTask;
         }
+
 #endif
 
         public override void Flush() { }

@@ -13,6 +13,7 @@ namespace System.Xml.Tests
     public class TCConstructor : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCConstructor(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -226,6 +227,7 @@ namespace System.Xml.Tests
     public class TCAddSchema : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCAddSchema(ITestOutputHelper output) : base(output)
         {
             _output = output;

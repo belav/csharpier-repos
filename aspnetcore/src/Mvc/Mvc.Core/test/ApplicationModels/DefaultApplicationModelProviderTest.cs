@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 public class DefaultApplicationModelProviderTest
@@ -1641,6 +1642,7 @@ public class DefaultApplicationModelProviderTest
         }
 
         protected virtual void Dispose(bool disposing) { }
+
         public string Dispose(string s)
         {
             return s;
@@ -1654,8 +1656,10 @@ public class DefaultApplicationModelProviderTest
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing) { }
     }
+
     private class DerivedOverriddenDisposeController : BaseClass
     {
         public override void Dispose()

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Hosting.FunctionalTests;
 
 public class WebHostBuilderTests : LoggedTest

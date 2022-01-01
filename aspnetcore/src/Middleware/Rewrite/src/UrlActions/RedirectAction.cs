@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
 internal class RedirectAction : UrlAction

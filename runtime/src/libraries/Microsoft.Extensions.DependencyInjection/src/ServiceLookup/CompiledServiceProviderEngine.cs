@@ -9,8 +9,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     {
 #if IL_EMIT
         public ILEmitResolverBuilder ResolverBuilder { get; }
+
 #else
         public ExpressionResolverBuilder ResolverBuilder { get; }
+
 #endif
 
         public CompiledServiceProviderEngine(ServiceProvider provider)

@@ -10,9 +10,11 @@ namespace System.Formats.Asn1.Tests.Writer
     public abstract class WriteCharacterString : Asn1WriterTests
     {
         internal abstract void WriteString(AsnWriter writer, string s);
+
         internal abstract void WriteString(AsnWriter writer, Asn1Tag tag, string s);
 
         internal abstract void WriteSpan(AsnWriter writer, ReadOnlySpan<char> s);
+
         internal abstract void WriteSpan(AsnWriter writer, Asn1Tag tag, ReadOnlySpan<char> s);
 
         internal abstract Asn1Tag StandardTag { get; }

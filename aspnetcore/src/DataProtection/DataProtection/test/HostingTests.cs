@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Test;
 
 public class HostingTests

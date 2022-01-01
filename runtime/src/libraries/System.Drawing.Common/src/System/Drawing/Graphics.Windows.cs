@@ -26,6 +26,7 @@ namespace System.Drawing
             "GraphicsFinalization",
             "Tracks the creation and destruction of finalization"
         );
+
         internal static string GetAllocationStack()
         {
             if (GraphicsFinalization.TraceVerbose)
@@ -37,7 +38,9 @@ namespace System.Drawing
                 return "Enabled 'GraphicsFinalization' switch to see stack of allocation";
             }
         }
+
         private string allocationSite = Graphics.GetAllocationStack();
+
 #endif
 
         /// <summary>
@@ -506,6 +509,7 @@ namespace System.Drawing
                 )
             );
         }
+
         public void EnumerateMetafile(
             Metafile metafile,
             Point destPoint,
@@ -918,6 +922,7 @@ namespace System.Drawing
             Vector2 translation = cumulativeTransform.Translation;
             offset = new PointF(translation.X, translation.Y);
         }
+
 #endif
 
         public RectangleF VisibleClipBounds

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class PropertyHelperTest
@@ -166,6 +167,7 @@ public class PropertyHelperTest
         var helper = Assert.Single(PropertyHelper.GetProperties(obj.GetType().GetTypeInfo()));
         Assert.Equal("Prop5", helper.Name);
     }
+
 #elif NETFRAMEWORK
 #else
 #error Unknown TFM - update the set of TFMs where we test for ref structs
@@ -771,6 +773,7 @@ public class PropertyHelperTest
     private readonly ref struct MyRefStruct
     {
     }
+
 #elif NETFRAMEWORK
 #else
 #error Unknown TFM - update the set of TFMs where we test for ref structs

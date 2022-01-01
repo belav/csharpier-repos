@@ -12,14 +12,17 @@ namespace System.IO.Packaging
         {
             throw null;
         }
+
         public static System.Uri Create(System.Uri packageUri)
         {
             throw null;
         }
+
         public static System.Uri Create(System.Uri packageUri, System.Uri? partUri)
         {
             throw null;
         }
+
         public static System.Uri Create(
             System.Uri packageUri,
             System.Uri? partUri,
@@ -28,10 +31,12 @@ namespace System.IO.Packaging
         {
             throw null;
         }
+
         public static System.Uri GetPackageUri(System.Uri packUri)
         {
             throw null;
         }
+
         public static System.Uri? GetPartUri(System.Uri packUri)
         {
             throw null;

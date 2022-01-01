@@ -29,7 +29,9 @@ class C
         public class ValidationException : Exception
         {
             public ValidationException() : base() { }
+
             public ValidationException(string msg) : base(msg) { }
+
             public ValidationException(string msg, Exception inner) : base(msg, inner) { }
         }
 
@@ -255,6 +257,7 @@ class C
 
         private static object jsonGetKey(object o, string key) =>
             (o as Dictionary<string, object>)[key];
+
         private static object jsonGetKeys(object o, params string[] keys)
         {
             try

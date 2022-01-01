@@ -35,8 +35,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         );
 
         protected abstract string WrapInClass(string className, string code);
+
         protected abstract string WrapInExpression(string code);
+
         protected abstract string WrapInMethod(string className, string methodName, string code);
+
         protected abstract string WrapInNamespace(string code);
 
         protected abstract Task DefaultTestAsync(

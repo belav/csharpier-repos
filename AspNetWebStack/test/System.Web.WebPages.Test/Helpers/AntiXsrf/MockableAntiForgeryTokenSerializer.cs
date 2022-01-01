@@ -7,6 +7,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
     public abstract class MockableAntiForgeryTokenSerializer : IAntiForgeryTokenSerializer
     {
         public abstract object Deserialize(string serializedToken);
+
         public abstract string Serialize(object token);
 
         AntiForgeryToken IAntiForgeryTokenSerializer.Deserialize(string serializedToken)

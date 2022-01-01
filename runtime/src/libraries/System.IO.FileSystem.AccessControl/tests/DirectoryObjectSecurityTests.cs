@@ -1082,6 +1082,7 @@ namespace System.Security.AccessControl
                     type
                 );
             }
+
             public override AccessRule AccessRuleFactory(
                 IdentityReference identityReference,
                 int accessMask,
@@ -1104,6 +1105,7 @@ namespace System.Security.AccessControl
                     type
                 );
             }
+
             public override AuditRule AuditRuleFactory(
                 IdentityReference identityReference,
                 int accessMask,
@@ -1122,6 +1124,7 @@ namespace System.Security.AccessControl
                     flags
                 );
             }
+
             public override AuditRule AuditRuleFactory(
                 IdentityReference identityReference,
                 int accessMask,
@@ -1149,46 +1152,57 @@ namespace System.Security.AccessControl
             {
                 base.RemoveAuditRuleAll(rule);
             }
+
             public new void RemoveAuditRuleSpecific(ObjectAuditRule rule)
             {
                 base.RemoveAuditRuleSpecific(rule);
             }
+
             public new bool RemoveAuditRule(ObjectAuditRule rule)
             {
                 return base.RemoveAuditRule(rule);
             }
+
             public new void SetAuditRule(ObjectAuditRule rule)
             {
                 base.SetAuditRule(rule);
             }
+
             public new void AddAuditRule(ObjectAuditRule rule)
             {
                 base.AddAuditRule(rule);
             }
+
             public new void RemoveAccessRuleSpecific(ObjectAccessRule rule)
             {
                 base.RemoveAccessRuleSpecific(rule);
             }
+
             public new void RemoveAccessRuleAll(ObjectAccessRule rule)
             {
                 base.RemoveAccessRuleAll(rule);
             }
+
             public new bool RemoveAccessRule(ObjectAccessRule rule)
             {
                 return base.RemoveAccessRule(rule);
             }
+
             public new void ResetAccessRule(ObjectAccessRule rule)
             {
                 base.ResetAccessRule(rule);
             }
+
             public new void SetAccessRule(ObjectAccessRule rule)
             {
                 base.SetAccessRule(rule);
             }
+
             public new void AddAccessRule(ObjectAccessRule rule)
             {
                 base.AddAccessRule(rule);
             }
+
             public new bool IsDS
             {
                 get { return base.IsDS; }
@@ -1288,6 +1302,7 @@ namespace System.Security.AccessControl
             {
                 get { return AccessMask; }
             }
+
             public CustomAccessRule(
                 IdentityReference identity,
                 int accessMask,

@@ -47,6 +47,7 @@ using System.Globalization;
 using Newtonsoft.Json.Tests.TestObjects.GeoCoding;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
@@ -120,6 +121,7 @@ namespace Newtonsoft.Json.Tests.Bson
                 bson
             );
         }
+
 #endif
 
         [Test]

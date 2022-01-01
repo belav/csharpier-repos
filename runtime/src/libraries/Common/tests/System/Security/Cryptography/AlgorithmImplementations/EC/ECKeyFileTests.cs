@@ -12,20 +12,27 @@ namespace System.Security.Cryptography.Tests
     public abstract partial class ECKeyFileTests<T> where T : AsymmetricAlgorithm
     {
         protected abstract T CreateKey();
+
         protected abstract byte[] ExportECPrivateKey(T key);
+
         protected abstract bool TryExportECPrivateKey(
             T key,
             Span<byte> destination,
             out int bytesWritten
         );
+
         protected abstract void ImportECPrivateKey(
             T key,
             ReadOnlySpan<byte> source,
             out int bytesRead
         );
+
         protected abstract void ImportParameters(T key, ECParameters ecParameters);
+
         protected abstract ECParameters ExportParameters(T key, bool includePrivate);
+
         protected abstract void Exercise(T key);
+
         protected virtual Func<T, byte[]> PublicKeyWriteArrayFunc { get; } = null;
         protected virtual WriteKeyToSpanFunc PublicKeyWriteSpanFunc { get; } = null;
 

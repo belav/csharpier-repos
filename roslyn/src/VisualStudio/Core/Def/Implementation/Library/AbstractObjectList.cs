@@ -23,23 +23,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             this.LibraryManager = libraryManager;
 
         protected abstract bool CanGoToSource(uint index, VSOBJGOTOSRCTYPE srcType);
+
         protected abstract bool TryGetCategoryField(
             uint index,
             int category,
             out uint categoryField
         );
+
         protected abstract void GetDisplayData(uint index, ref VSTREEDISPLAYDATA data);
+
         protected abstract bool GetExpandable(uint index, uint listTypeExcluded);
+
         protected abstract uint GetItemCount();
+
         protected abstract IVsSimpleObjectList2 GetList(
             uint index,
             uint listType,
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch
         );
+
         protected abstract string GetText(uint index, VSTREETEXTOPTIONS tto);
+
         protected abstract string GetTipText(uint index, VSTREETOOLTIPTYPE eTipType);
+
         protected abstract Task GoToSourceAsync(uint index, VSOBJGOTOSRCTYPE srcType);
+
         protected abstract uint GetUpdateCounter();
 
         protected virtual bool SupportsBrowseContainers

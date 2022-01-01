@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace Microsoft.AspNetCore.Components.Authorization;
 
 /// <summary>

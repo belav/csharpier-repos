@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Runtime.CompilerServices;
+
 namespace structinreg
 {
     public class Program
@@ -67,6 +68,7 @@ namespace structinreg
         public object o3;
         public object o4;
     }
+
     struct Test23
     {
         public int i1;

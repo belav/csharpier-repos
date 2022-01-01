@@ -20,6 +20,7 @@ internal static partial class Interop
         /// 100-nanosecond intervals (ticks) since January 1, 1601 (UTC).
         /// </summary>
         internal long TicksSince1601;
+
 #pragma warning restore CS0649
 
         internal DateTimeOffset ToDateTimeOffset() =>

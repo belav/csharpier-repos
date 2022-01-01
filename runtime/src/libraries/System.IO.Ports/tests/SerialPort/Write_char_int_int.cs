@@ -253,6 +253,7 @@ namespace System.IO.Ports.Tests
 
             VerifyWrite(new char[bufferLength], offset, count, 1);
         }
+
         #endregion
 
         #region Verification for Test Cases

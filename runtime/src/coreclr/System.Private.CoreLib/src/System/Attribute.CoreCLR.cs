@@ -478,6 +478,7 @@ namespace System
         {
             return (Attribute[])Array.CreateInstance(elementType, elementCount);
         }
+
         #endregion
 
         #endregion

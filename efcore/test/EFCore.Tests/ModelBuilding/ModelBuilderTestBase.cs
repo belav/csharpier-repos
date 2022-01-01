@@ -214,6 +214,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public abstract class TestEntityTypeBuilder<TEntity> where TEntity : class
         {
             public abstract IMutableEntityType Metadata { get; }
+
             public abstract TestEntityTypeBuilder<TEntity> HasAnnotation(
                 string annotation,
                 object? value
@@ -223,14 +224,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 where TBaseEntity : class;
 
             public abstract TestEntityTypeBuilder<TEntity> HasBaseType(string? baseEntityTypeName);
+
             public abstract TestKeyBuilder<TEntity> HasKey(
                 Expression<Func<TEntity, object?>> keyExpression
             );
+
             public abstract TestKeyBuilder<TEntity> HasKey(params string[] propertyNames);
+
             public abstract TestKeyBuilder<TEntity> HasAlternateKey(
                 Expression<Func<TEntity, object?>> keyExpression
             );
+
             public abstract TestKeyBuilder<TEntity> HasAlternateKey(params string[] propertyNames);
+
             public abstract TestEntityTypeBuilder<TEntity> HasNoKey();
 
             public abstract TestPropertyBuilder<TProperty> Property<TProperty>(
@@ -238,6 +244,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             );
 
             public abstract TestPropertyBuilder<TProperty> Property<TProperty>(string propertyName);
+
             public abstract TestPropertyBuilder<TProperty> IndexerProperty<TProperty>(
                 string propertyName
             );
@@ -259,10 +266,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestIndexBuilder<TEntity> HasIndex(
                 Expression<Func<TEntity, object?>> indexExpression
             );
+
             public abstract TestIndexBuilder<TEntity> HasIndex(
                 Expression<Func<TEntity, object?>> indexExpression,
                 string name
             );
+
             public abstract TestIndexBuilder<TEntity> HasIndex(params string[] propertyNames);
 
             public abstract TestOwnedNavigationBuilder<
@@ -456,28 +465,39 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 string annotation,
                 object? value
             );
+
             public abstract TestIndexBuilder<TEntity> IsUnique(bool isUnique = true);
         }
 
         public abstract class TestPropertyBuilder<TProperty>
         {
             public abstract IMutableProperty Metadata { get; }
+
             public abstract TestPropertyBuilder<TProperty> HasAnnotation(
                 string annotation,
                 object? value
             );
+
             public abstract TestPropertyBuilder<TProperty> IsRequired(bool isRequired = true);
+
             public abstract TestPropertyBuilder<TProperty> HasMaxLength(int maxLength);
+
             public abstract TestPropertyBuilder<TProperty> HasPrecision(int precision, int scale);
+
             public abstract TestPropertyBuilder<TProperty> IsUnicode(bool unicode = true);
+
             public abstract TestPropertyBuilder<TProperty> IsRowVersion();
+
             public abstract TestPropertyBuilder<TProperty> IsConcurrencyToken(
                 bool isConcurrencyToken = true
             );
 
             public abstract TestPropertyBuilder<TProperty> ValueGeneratedNever();
+
             public abstract TestPropertyBuilder<TProperty> ValueGeneratedOnAdd();
+
             public abstract TestPropertyBuilder<TProperty> ValueGeneratedOnAddOrUpdate();
+
             public abstract TestPropertyBuilder<TProperty> ValueGeneratedOnUpdate();
 
             public abstract TestPropertyBuilder<TProperty> HasValueGenerator<TGenerator>()
@@ -486,6 +506,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestPropertyBuilder<TProperty> HasValueGenerator(
                 Type valueGeneratorType
             );
+
             public abstract TestPropertyBuilder<TProperty> HasValueGenerator(
                 Func<IReadOnlyProperty, IReadOnlyEntityType, ValueGenerator> factory
             );
@@ -498,11 +519,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             );
 
             public abstract TestPropertyBuilder<TProperty> HasField(string fieldName);
+
             public abstract TestPropertyBuilder<TProperty> UsePropertyAccessMode(
                 PropertyAccessMode propertyAccessMode
             );
 
             public abstract TestPropertyBuilder<TProperty> HasConversion<TProvider>();
+
             public abstract TestPropertyBuilder<TProperty> HasConversion(Type providerClrType);
 
             public abstract TestPropertyBuilder<TProperty> HasConversion<TProvider>(
@@ -513,11 +536,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestPropertyBuilder<TProperty> HasConversion<TProvider>(
                 ValueConverter<TProperty, TProvider> converter
             );
+
             public abstract TestPropertyBuilder<TProperty> HasConversion(ValueConverter? converter);
+
             public abstract TestPropertyBuilder<TProperty> HasConversion(
                 ValueConverter? converter,
                 ValueComparer? valueComparer
             );
+
             public abstract TestPropertyBuilder<TProperty> HasConversion<TConverter, TComparer>()
                 where TConverter : ValueConverter
                 where TComparer : ValueComparer;
@@ -531,11 +557,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public abstract class TestNavigationBuilder
         {
             public abstract TestNavigationBuilder HasAnnotation(string annotation, object? value);
+
             public abstract TestNavigationBuilder UsePropertyAccessMode(
                 PropertyAccessMode propertyAccessMode
             );
+
             public abstract TestNavigationBuilder HasField(string fieldName);
+
             public abstract TestNavigationBuilder AutoInclude(bool autoInclude = true);
+
             public abstract TestNavigationBuilder IsRequired(bool required = true);
         }
 
@@ -836,9 +866,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestKeyBuilder<TDependentEntity> HasKey(
                 Expression<Func<TDependentEntity, object?>> keyExpression
             );
+
             public abstract TestKeyBuilder<TDependentEntity> HasKey(params string[] propertyNames);
 
             public abstract TestPropertyBuilder<TProperty> Property<TProperty>(string propertyName);
+
             public abstract TestPropertyBuilder<TProperty> IndexerProperty<TProperty>(
                 string propertyName
             );
@@ -866,6 +898,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestIndexBuilder<TDependentEntity> HasIndex(
                 params string[] propertyNames
             );
+
             public abstract TestIndexBuilder<TDependentEntity> HasIndex(
                 Expression<Func<TDependentEntity, object?>> indexExpression
             );

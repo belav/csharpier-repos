@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentInjectIntermediateNode : ExtensionIntermediateNode

@@ -103,6 +103,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             int? i = token.CreateReader().ReadAsInt32();
             Assert.AreEqual(1, i);
         }
+
 #endif
 
         [Test]
@@ -225,6 +226,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.None, reader.TokenType);
             Assert.AreEqual("", reader.Path);
         }
+
 #endif
 
         [Test]
@@ -379,6 +381,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 Assert.IsFalse(reader.Read());
             }
         }
+
 #endif
 
         [Test]
@@ -508,6 +511,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsNull(reader.ReadAsDateTimeOffset());
             Assert.AreEqual(JsonToken.None, reader.TokenType);
         }
+
 #endif
 
 #if !NET20
@@ -535,6 +539,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
+
 #endif
 
 #if !NET20
@@ -562,6 +567,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
+
 #endif
 
 #if !NET20
@@ -586,6 +592,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Could not convert string to DateTimeOffset: blablahbla. Path 'Offset', line 1, position 22."
             );
         }
+
 #endif
 
 #if !NET20
@@ -613,6 +620,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
+
 #endif
 
 #if !NET20
@@ -643,6 +651,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
+
 #endif
 
 #if !NET20
@@ -673,6 +682,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
+
 #endif
 
 #if !NET20
@@ -703,6 +713,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
+
 #endif
 
 #if !NET20
@@ -733,6 +744,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
+
 #endif
 
         [Test]
@@ -1020,6 +1032,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsNull(reader.ReadAsBytes());
             Assert.AreEqual(JsonToken.None, reader.TokenType);
         }
+
 #endif
 
         [Test]
@@ -1383,6 +1396,7 @@ third line",
             var i = (BigInteger)((JValue)o["ChildId"]).Value;
             Assert.AreEqual(BigInteger.Parse("333333333333333333333333333333333333333"), i);
         }
+
 #endif
 
 

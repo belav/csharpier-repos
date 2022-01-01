@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 /// <summary>

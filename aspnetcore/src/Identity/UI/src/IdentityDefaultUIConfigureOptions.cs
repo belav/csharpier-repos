@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Identity.UI;
 
 internal class IdentityDefaultUIConfigureOptions<TUser>

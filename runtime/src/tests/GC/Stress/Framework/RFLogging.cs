@@ -28,6 +28,7 @@ internal class RFLogging
     private bool _reportResults = true;
 #if USE_INSTRUMENTATION
     private FileStream _instrumentationLogFile = null;
+
 #endif
 
     private const string logDirectory = "Logs";

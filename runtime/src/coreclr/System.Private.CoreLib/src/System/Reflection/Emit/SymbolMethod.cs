@@ -15,6 +15,7 @@ namespace System.Reflection.Emit
         private Type m_returnType;
         private int m_token;
         private Type[] m_parameterTypes;
+
         #endregion
 
         #region Constructor
@@ -66,6 +67,7 @@ namespace System.Reflection.Emit
                 null
             );
         }
+
         #endregion
 
         #region Internal Members
@@ -97,6 +99,7 @@ namespace System.Reflection.Emit
         public override string Name => m_name;
 
         public override Type? DeclaringType => m_containingType;
+
         #endregion
 
         #region MethodBase Overrides
@@ -140,6 +143,7 @@ namespace System.Reflection.Emit
         {
             return this;
         }
+
         #endregion
 
         #region ICustomAttributeProvider Implementation

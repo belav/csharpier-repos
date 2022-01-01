@@ -36,6 +36,7 @@ namespace AutoMapper.UnitTests.Mappers.ReadOnlyDictionaryMapper
             dest.Values.ShouldBe(values);
         }
     }
+
     public class When_mapping_to_concrete_readonly_dictionary : AutoMapperSpecBase
     {
         public class Source

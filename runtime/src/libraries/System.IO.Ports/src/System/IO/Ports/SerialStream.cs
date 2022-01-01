@@ -25,6 +25,7 @@ namespace System.IO.Ports
 #pragma warning disable CS0067 // Events shared by Windows and Linux, on Linux we currently never call them
         // called when any runtime error occurs on the port (frame, overrun, parity, etc.)
         internal event SerialErrorReceivedEventHandler ErrorReceived;
+
 #pragma warning restore CS0067
 
         // ----SECTION: inherited properties from Stream class ------------*

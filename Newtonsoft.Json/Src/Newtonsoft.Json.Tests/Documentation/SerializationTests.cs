@@ -128,6 +128,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // not serialized because mode is opt-in
             public string Department { get; set; }
         }
+
         #endregion
 
         #region SerializationCallbacksObject
@@ -181,6 +182,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Member4 = "This value was set after deserialization.";
             }
         }
+
         #endregion
 
         [Test]
@@ -317,6 +319,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 errorContext.Handled = true;
             }
         }
+
         #endregion
 
         [Test]
@@ -459,6 +462,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             public string Name { get; set; }
             public EmployeeReference Manager { get; set; }
         }
+
         #endregion
 
         #region CustomCreationConverterObject
@@ -486,6 +490,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 return new Employee();
             }
         }
+
         #endregion
 
         [Test]
@@ -741,6 +746,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             );
             // {"Details":"Application started.","LogDate":new Date(1234656000000)}
         }
+
         #endregion
 
         #region ReducingSerializedJsonSizeOptOut
@@ -755,6 +761,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             [JsonIgnore]
             public DateTime LastModified { get; set; }
         }
+
         #endregion
 
         #region ReducingSerializedJsonSizeOptIn
@@ -774,6 +781,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             public decimal WholeSalePrice { get; set; }
             public DateTime NextShipmentDate { get; set; }
         }
+
         #endregion
 
         #region ReducingSerializedJsonSizeNullValueHandlingObject
@@ -786,6 +794,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             public DateTime? ReleaseDate { get; set; }
             public List<string> ReleaseCountries { get; set; }
         }
+
         #endregion
 
         [Test]
@@ -852,6 +861,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             // false is default value of bool
             public bool Paid { get; set; }
+
             // null is default value of nullable
             public DateTime? PaidDate { get; set; }
 
@@ -862,6 +872,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             [DefaultValue("")]
             public string FollowUpEmailAddress { get; set; }
         }
+
         #endregion
 
         [Test]
@@ -960,6 +971,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             public int AuthorAge { get; set; }
             public string AuthorCountry { get; set; }
         }
+
         #endregion
 
         [Test]
@@ -1024,6 +1036,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             public string Content { get; set; }
             public string Url { get; set; }
         }
+
         #endregion
 
         [Test]

@@ -236,6 +236,7 @@ internal sealed class RayTracer
     {
         return (x - (_screenWidth / 2.0)) / (2.0 * _screenWidth);
     }
+
     private double RecenterY(double y)
     {
         return -(y - (_screenHeight / 2.0)) / (2.0 * _screenHeight);

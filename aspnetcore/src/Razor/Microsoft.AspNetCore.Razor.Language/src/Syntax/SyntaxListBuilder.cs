@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal class SyntaxListBuilder

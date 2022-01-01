@@ -426,6 +426,7 @@ namespace System.Diagnostics.Metrics
             SourceIndex = sourceIndex;
             LabelName = labelName;
         }
+
         public readonly int SourceIndex { get; }
         public readonly string LabelName { get; }
     }

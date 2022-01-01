@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Options;
 
 #if NETSTANDARD2_0
 using Roslyn.Utilities;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler

@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class RedisHubLifetimeManagerBenchmark

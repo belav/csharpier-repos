@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading;
 using Microsoft.AspNetCore.Http.Features;
 
+
 namespace Microsoft.AspNetCore.SignalR;
 
 /// <summary>

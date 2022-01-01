@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 
 /// <summary>

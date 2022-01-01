@@ -4,6 +4,7 @@
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
 
+
 namespace HealthChecksSample;
 
 public class SqlConnectionHealthCheck : DbConnectionHealthCheck

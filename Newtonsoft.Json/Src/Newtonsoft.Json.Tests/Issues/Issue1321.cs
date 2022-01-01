@@ -41,8 +41,10 @@ using System.Xml.Linq;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Issues
@@ -105,6 +107,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Unexpected end when reading token. Path ''."
             );
         }
+
 #endif
 
         [Test]
@@ -145,6 +148,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Unexpected end when reading token. Path ''."
             );
         }
+
 #endif
 
         [Test]
@@ -187,6 +191,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Unexpected end when reading token. Path ''."
             );
         }
+
 #endif
 
         [Test]

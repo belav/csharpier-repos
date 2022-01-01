@@ -29,6 +29,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref bool location, bool value) =>
             Unsafe.As<bool, VolatileBoolean>(ref location).Value = value;
+
         #endregion
 
         #region Byte
@@ -46,6 +47,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref byte location, byte value) =>
             Unsafe.As<byte, VolatileByte>(ref location).Value = value;
+
         #endregion
 
         #region Double
@@ -61,6 +63,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref double location, double value) =>
             Write(ref Unsafe.As<double, long>(ref location), *(long*)&value);
+
         #endregion
 
         #region Int16
@@ -78,6 +81,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref short location, short value) =>
             Unsafe.As<short, VolatileInt16>(ref location).Value = value;
+
         #endregion
 
         #region Int32
@@ -95,6 +99,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref int location, int value) =>
             Unsafe.As<int, VolatileInt32>(ref location).Value = value;
+
         #endregion
 
         #region Int64
@@ -103,9 +108,11 @@ namespace System.Threading
         public static long Read(ref long location) =>
 #if TARGET_64BIT
             (long)Unsafe.As<long, VolatileIntPtr>(ref location).Value;
+
 #else
             // On 32-bit machines, we use Interlocked, since an ordinary volatile read would not be atomic.
             Interlocked.CompareExchange(ref location, 0, 0);
+
 #endif
 
         [Intrinsic]
@@ -113,9 +120,11 @@ namespace System.Threading
         public static void Write(ref long location, long value) =>
 #if TARGET_64BIT
             Unsafe.As<long, VolatileIntPtr>(ref location).Value = (IntPtr)value;
+
 #else
             // On 32-bit, we use Interlocked, since an ordinary volatile write would not be atomic.
             Interlocked.Exchange(ref location, value);
+
 #endif
         #endregion
 
@@ -134,6 +143,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref IntPtr location, IntPtr value) =>
             Unsafe.As<IntPtr, VolatileIntPtr>(ref location).Value = value;
+
         #endregion
 
         #region SByte
@@ -153,6 +163,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref sbyte location, sbyte value) =>
             Unsafe.As<sbyte, VolatileSByte>(ref location).Value = value;
+
         #endregion
 
         #region Single
@@ -170,6 +181,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref float location, float value) =>
             Unsafe.As<float, VolatileSingle>(ref location).Value = value;
+
         #endregion
 
         #region UInt16
@@ -189,6 +201,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref ushort location, ushort value) =>
             Unsafe.As<ushort, VolatileUInt16>(ref location).Value = value;
+
         #endregion
 
         #region UInt32
@@ -208,6 +221,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref uint location, uint value) =>
             Unsafe.As<uint, VolatileUInt32>(ref location).Value = value;
+
         #endregion
 
         #region UInt64
@@ -222,6 +236,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref ulong location, ulong value) =>
             Write(ref Unsafe.As<ulong, long>(ref location), (long)value);
+
         #endregion
 
         #region UIntPtr
@@ -241,6 +256,7 @@ namespace System.Threading
         [NonVersionable]
         public static void Write(ref UIntPtr location, UIntPtr value) =>
             Unsafe.As<UIntPtr, VolatileUIntPtr>(ref location).Value = value;
+
         #endregion
 
         #region T

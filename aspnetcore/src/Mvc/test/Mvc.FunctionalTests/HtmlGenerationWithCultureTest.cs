@@ -19,6 +19,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class HtmlGenerationWithCultureTest

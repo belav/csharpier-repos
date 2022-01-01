@@ -164,6 +164,7 @@ namespace System.Reflection
 
             return args;
         }
+
         #endregion
 
         #region Private Statics
@@ -171,6 +172,7 @@ namespace System.Reflection
             typeof(DecimalConstantAttribute);
         private static readonly Type s_CustomConstantAttributeType =
             typeof(CustomConstantAttribute);
+
         #endregion
 
         #region Private Data Members
@@ -181,6 +183,7 @@ namespace System.Reflection
         private readonly bool m_noMetadata;
         private bool m_noDefaultValue;
         private MethodBase? m_originalMember;
+
         #endregion
 
         #region Internal Properties
@@ -193,6 +196,7 @@ namespace System.Reflection
                 return result;
             }
         }
+
         #endregion
 
         #region Internal Methods
@@ -205,6 +209,7 @@ namespace System.Reflection
         {
             AttrsImpl = attributes;
         }
+
         #endregion
 
         #region Constructor
@@ -289,6 +294,7 @@ namespace System.Reflection
             m_tkParamDef = (int)MetadataTokenType.ParamDef;
             m_scope = MetadataImport.EmptyImport;
         }
+
         #endregion
 
         #region Public Methods

@@ -29,6 +29,7 @@ namespace System.Net.Security
             ReadOnlyMemory<byte> buffer,
             CancellationToken token
         );
+
         public new abstract ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken

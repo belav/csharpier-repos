@@ -15,6 +15,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class InteropTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>

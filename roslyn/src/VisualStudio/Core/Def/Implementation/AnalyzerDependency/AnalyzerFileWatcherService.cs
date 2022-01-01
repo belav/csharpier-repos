@@ -63,6 +63,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 typeof(SVsFileChangeEx)
             );
         }
+
         internal void RemoveAnalyzerAlreadyLoadedDiagnostics(
             ProjectId projectId,
             string analyzerPath

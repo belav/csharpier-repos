@@ -7,6 +7,7 @@ using System.Dynamic;
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests;
 
 public class ExpandoObjectIntegrationTest

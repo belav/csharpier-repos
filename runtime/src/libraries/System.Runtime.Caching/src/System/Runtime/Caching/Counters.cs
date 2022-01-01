@@ -133,11 +133,13 @@ namespace System.Runtime.Caching
             int idx = (int)name;
             Interlocked.Increment(ref _counterValues[idx]);
         }
+
         internal void IncrementBy(CounterName name, long value)
         {
             int idx = (int)name;
             Interlocked.Add(ref _counterValues[idx], value);
         }
+
         internal void Decrement(CounterName name)
         {
             int idx = (int)name;
@@ -145,9 +147,13 @@ namespace System.Runtime.Caching
         }
 #else
         internal Counters(string cacheName) { }
+
         public new void Dispose() { }
+
         internal void Increment(CounterName name) { }
+
         internal void IncrementBy(CounterName name, long value) { }
+
         internal void Decrement(CounterName name) { }
 #endif
     }

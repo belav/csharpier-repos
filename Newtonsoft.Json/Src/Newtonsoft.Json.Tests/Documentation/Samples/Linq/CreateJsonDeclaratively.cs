@@ -36,6 +36,7 @@ using Newtonsoft.Json.Linq;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -54,6 +55,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             public string Link { get; set; }
             public IList<string> Categories { get; set; }
         }
+
         #endregion
 
         private List<Post> GetPosts()

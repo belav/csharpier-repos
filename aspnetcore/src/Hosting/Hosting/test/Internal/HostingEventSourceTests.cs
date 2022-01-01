@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 public class HostingEventSourceTests

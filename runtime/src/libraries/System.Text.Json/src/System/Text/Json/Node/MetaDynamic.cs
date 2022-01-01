@@ -19,6 +19,7 @@ namespace System.Text.Json.Node
         private static readonly ConstantExpression Int1Expression = Expression.Constant((object)1);
 
         private JsonNode Dynamic { get; }
+
         internal MetaDynamic(Expression expression, JsonNode dynamicObject)
             : base(expression, BindingRestrictions.Empty, dynamicObject)
         {
@@ -73,6 +74,7 @@ namespace System.Text.Json.Node
 
 #pragma warning disable CA1825 // used in reference comparison, requires unique object identity
         private static readonly Expression[] s_noArgs = new Expression[0];
+
 #pragma warning restore CA1825
 
         private static ReadOnlyCollection<Expression> GetConvertedArgs(params Expression[] args)

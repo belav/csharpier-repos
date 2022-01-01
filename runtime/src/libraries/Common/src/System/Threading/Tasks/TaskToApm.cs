@@ -81,6 +81,7 @@ namespace System.Threading.Tasks
         {
             /// <summary>The wrapped Task.</summary>
             internal readonly Task _task;
+
             /// <summary>Callback to invoke when the wrapped task completes.</summary>
             private readonly AsyncCallback? _callback;
 
@@ -123,11 +124,14 @@ namespace System.Threading.Tasks
 
             /// <summary>Gets a user-defined object that qualifies or contains information about an asynchronous operation.</summary>
             public object? AsyncState { get; }
+
             /// <summary>Gets a value that indicates whether the asynchronous operation completed synchronously.</summary>
             /// <remarks>This is set lazily based on whether the <see cref="_task"/> has completed by the time this object is created.</remarks>
             public bool CompletedSynchronously { get; }
+
             /// <summary>Gets a value that indicates whether the asynchronous operation has completed.</summary>
             public bool IsCompleted => _task.IsCompleted;
+
             /// <summary>Gets a <see cref="WaitHandle"/> that is used to wait for an asynchronous operation to complete.</summary>
             public WaitHandle AsyncWaitHandle => ((IAsyncResult)_task).AsyncWaitHandle;
         }

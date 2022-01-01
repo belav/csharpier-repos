@@ -4,6 +4,7 @@
 using System.IO.Pipelines;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal sealed class RemoteJSDataStream : Stream

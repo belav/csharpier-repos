@@ -356,6 +356,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
         }
+
 #endif
 
 #if !(PORTABLE || DNXCORE50) || NETSTANDARD2_0
@@ -384,6 +385,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             // When fixed, this would pass.
             Assert.AreEqual(25, foo.Identifier);
         }
+
 #endif
 
         public class FooEvent
@@ -489,6 +491,7 @@ OnSerialized_Derived_Derived",
                 string.Join(Environment.NewLine, e.ToArray())
             );
         }
+
 #endif
 
         [Test]

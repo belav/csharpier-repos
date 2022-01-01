@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class Http3ConnectionEmptyBenchmark : Http3ConnectionBenchmarkBase

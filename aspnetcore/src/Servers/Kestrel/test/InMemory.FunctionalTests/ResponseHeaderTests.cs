@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
 public class ResponseHeaderTests : TestApplicationErrorLoggerLoggedTest

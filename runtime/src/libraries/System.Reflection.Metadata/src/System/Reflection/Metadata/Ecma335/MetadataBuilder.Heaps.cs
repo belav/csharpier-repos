@@ -189,8 +189,11 @@ namespace System.Reflection.Metadata.Ecma335
         // internal for testing
         internal int SerializeHandle(ImmutableArray<int> map, StringHandle handle) =>
             map[handle.GetWriterVirtualIndex()];
+
         internal int SerializeHandle(BlobHandle handle) => handle.GetHeapOffset();
+
         internal int SerializeHandle(GuidHandle handle) => handle.Index;
+
         internal int SerializeHandle(UserStringHandle handle) => handle.GetHeapOffset();
 
         /// <summary>

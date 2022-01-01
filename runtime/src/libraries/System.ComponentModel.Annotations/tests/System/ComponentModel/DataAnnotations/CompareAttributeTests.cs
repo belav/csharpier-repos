@@ -28,6 +28,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             DisplayName = "CurrentProperty"
         };
+
         protected override IEnumerable<TestCase> InvalidValues() =>
             new TestCase[]
             {

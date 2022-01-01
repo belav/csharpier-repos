@@ -16,6 +16,7 @@ namespace System.Net.Http.Internal
     {
 #if !NETCOREAPP2_0 // Unused on .NET Core 2.0.
         private static readonly int _maxCollectionKeys = 1000;
+
 #endif
 
         private static HttpValueCollection CreateInstance()
@@ -258,6 +259,7 @@ namespace System.Net.Http.Internal
                 }
             );
         }
+
 #endif
 
         [Theory]

@@ -64,12 +64,16 @@ public class WasmAppBuilder : Task
     {
         [JsonPropertyName("assembly_root")]
         public string AssemblyRoot { get; set; } = "managed";
+
         [JsonPropertyName("debug_level")]
         public int DebugLevel { get; set; } = 0;
+
         [JsonPropertyName("assets")]
         public List<object> Assets { get; } = new List<object>();
+
         [JsonPropertyName("remote_sources")]
         public List<string> RemoteSources { get; set; } = new List<string>();
+
         [JsonExtensionData]
         public Dictionary<string, object?> Extra { get; set; } = new();
     }
@@ -81,8 +85,10 @@ public class WasmAppBuilder : Task
             Name = name;
             Behavior = behavior;
         }
+
         [JsonPropertyName("behavior")]
         public string Behavior { get; init; }
+
         [JsonPropertyName("name")]
         public string Name { get; init; }
     }
@@ -106,6 +112,7 @@ public class WasmAppBuilder : Task
     private sealed class VfsEntry : AssetEntry
     {
         public VfsEntry(string name) : base(name, "vfs") { }
+
         [JsonPropertyName("virtual_path")]
         public string? VirtualPath { get; set; }
     }
@@ -113,6 +120,7 @@ public class WasmAppBuilder : Task
     private sealed class IcuData : AssetEntry
     {
         public IcuData(string name) : base(name, "icu") { }
+
         [JsonPropertyName("load_remote")]
         public bool LoadRemote { get; set; }
     }

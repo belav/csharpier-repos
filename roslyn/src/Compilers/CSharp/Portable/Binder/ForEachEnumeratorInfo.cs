@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         // Types identified by the algorithm in the spec (8.8.4).
         public readonly TypeSymbol CollectionType;
+
         // public readonly TypeSymbol EnumeratorType; // redundant - return type of GetEnumeratorMethod
         public readonly TypeWithAnnotations ElementTypeWithAnnotations;
         public TypeSymbol ElementType => ElementTypeWithAnnotations.Type;

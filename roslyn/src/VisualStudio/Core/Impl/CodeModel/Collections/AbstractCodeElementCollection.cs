@@ -25,6 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         internal virtual Snapshot CreateSnapshot() => new CodeElementSnapshot(this);
 
         protected abstract bool TryGetItemByName(string name, out EnvDTE.CodeElement element);
+
         protected abstract bool TryGetItemByIndex(int index, out EnvDTE.CodeElement element);
 
         protected bool MatchesNameOrIndex(

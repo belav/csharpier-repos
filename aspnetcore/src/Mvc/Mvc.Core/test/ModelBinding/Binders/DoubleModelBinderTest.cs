@@ -4,6 +4,7 @@
 using System.Globalization;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 public class DoubleModelBinderTest : FloatingPointTypeModelBinderTest<double>

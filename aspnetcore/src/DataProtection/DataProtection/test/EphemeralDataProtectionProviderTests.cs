@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 public class EphemeralDataProtectionProviderTests

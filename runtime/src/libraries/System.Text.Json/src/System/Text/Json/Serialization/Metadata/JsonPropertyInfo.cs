@@ -353,6 +353,7 @@ namespace System.Text.Json.Serialization.Metadata
             ref WriteStack state,
             Utf8JsonWriter writer
         );
+
         internal abstract bool GetMemberAndWriteJsonExtensionData(
             object obj,
             ref WriteStack state,

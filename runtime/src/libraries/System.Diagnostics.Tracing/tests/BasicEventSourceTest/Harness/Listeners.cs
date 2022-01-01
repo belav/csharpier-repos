@@ -23,7 +23,9 @@ namespace BasicEventSourceTests
     public abstract class Listener : IDisposable
     {
         public Action<Event> OnEvent; // Called when you get events.
+
         public abstract void Dispose();
+
         /// <summary>
         /// Send a command to an eventSource.   Be careful this is async.  You may wish to do a WaitForEnable
         /// </summary>
@@ -41,6 +43,7 @@ namespace BasicEventSourceTests
             EventSourceCommand(eventSource.Name, EventCommand.Enable, options);
             WaitForEnable(eventSource);
         }
+
         public void WaitForEnable(EventSource logger)
         {
             if (!SpinWait.SpinUntil(() => logger.IsEnabled(), TimeSpan.FromSeconds(10)))
@@ -69,6 +72,7 @@ namespace BasicEventSourceTests
             Keywords = EventKeywords.All;
             Level = EventLevel.Verbose;
         }
+
         public EventKeywords Keywords;
         public EventLevel Level;
         public IDictionary<string, string> Args;
@@ -101,8 +105,11 @@ namespace BasicEventSourceTests
         }
         public abstract string ProviderName { get; }
         public abstract string EventName { get; }
+
         public abstract object PayloadValue(int propertyIndex, string propertyName);
+
         public abstract int PayloadCount { get; }
+
         public virtual string PayloadString(int propertyIndex, string propertyName)
         {
             var obj = PayloadValue(propertyIndex, propertyName);
@@ -127,6 +134,7 @@ namespace BasicEventSourceTests
                 return obj.ToString();
             return "";
         }
+
         public abstract IList<string> PayloadNames { get; }
 
         /// <summary>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Web.Infrastructure;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Components.WebView.Services;
 
 internal class WebViewRenderer : WebRenderer

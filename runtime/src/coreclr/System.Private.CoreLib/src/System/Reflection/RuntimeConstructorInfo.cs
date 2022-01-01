@@ -91,6 +91,7 @@ namespace System.Reflection
                 return flags;
             }
         }
+
         #endregion
 
         #region Constructor
@@ -108,6 +109,7 @@ namespace System.Reflection
             m_handle = handle.Value;
             m_methodAttributes = methodAttributes;
         }
+
         #endregion
 
         #region NonPublic Methods
@@ -151,6 +153,7 @@ namespace System.Reflection
         }
 
         internal BindingFlags BindingFlags => m_bindingFlags;
+
         #endregion
 
         #region Object Overrides
@@ -174,6 +177,7 @@ namespace System.Reflection
 
             return m_toString;
         }
+
         #endregion
 
         #region ICustomAttributeProvider
@@ -212,6 +216,7 @@ namespace System.Reflection
         {
             return CustomAttributeData.GetCustomAttributesInternal(this);
         }
+
         #endregion
 
         #region MemberInfo Overrides
@@ -234,14 +239,17 @@ namespace System.Reflection
         {
             return m_declaringType;
         }
+
         internal RuntimeModule GetRuntimeModule()
         {
             return RuntimeTypeHandle.GetModule(m_declaringType);
         }
+
         internal RuntimeAssembly GetRuntimeAssembly()
         {
             return GetRuntimeModule().GetRuntimeAssembly();
         }
+
         #endregion
 
         #region MethodBase Overrides
@@ -413,6 +421,7 @@ namespace System.Reflection
 
         public override bool ContainsGenericParameters =>
             DeclaringType != null && DeclaringType.ContainsGenericParameters;
+
         #endregion
 
         #region ConstructorInfo Overrides

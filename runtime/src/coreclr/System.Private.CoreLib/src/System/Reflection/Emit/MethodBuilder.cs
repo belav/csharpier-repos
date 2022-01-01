@@ -52,6 +52,7 @@ namespace System.Reflection.Emit
         // Generics
         private GenericTypeParameterBuilder[]? m_inst;
         private bool m_bIsGenMethDef;
+
         #endregion
 
         #region Constructor
@@ -401,6 +402,7 @@ namespace System.Reflection.Emit
         {
             return m_module;
         }
+
         #endregion
 
         #region Object Overrides
@@ -497,6 +499,7 @@ namespace System.Reflection.Emit
         public override bool IsSecuritySafeCritical => false;
 
         public override bool IsSecurityTransparent => false;
+
         #endregion
 
         #region MethodInfo Overrides
@@ -535,6 +538,7 @@ namespace System.Reflection.Emit
                 return rmi.ReturnParameter;
             }
         }
+
         #endregion
 
         #region ICustomAttributeProvider Implementation
@@ -612,6 +616,7 @@ namespace System.Reflection.Emit
             if (IsGenericMethod && !IsGenericMethodDefinition)
                 throw new InvalidOperationException();
         }
+
         #endregion
 
         #region Public Members
@@ -921,6 +926,7 @@ namespace System.Reflection.Emit
         internal string[] m_namespace = null!;
         internal int m_iNameSpaceCount;
         internal const int InitialSize = 16;
+
         #endregion
 
         #region Constructor
@@ -930,6 +936,7 @@ namespace System.Reflection.Emit
             m_iLocalSymCount = 0;
             m_iNameSpaceCount = 0;
         }
+
         #endregion
 
         #region Private Members

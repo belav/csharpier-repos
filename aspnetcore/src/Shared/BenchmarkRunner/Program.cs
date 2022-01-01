@@ -14,6 +14,7 @@ using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Toolchains.CsProj;
 using BenchmarkDotNet.Toolchains.DotNetCli;
 
+
 namespace Microsoft.AspNetCore.BenchmarkDotNet.Runner;
 
 partial class Program

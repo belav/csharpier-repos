@@ -64,6 +64,7 @@ namespace Microsoft.CodeAnalysis
             SurLowStart + ((s_NCNameSurCombinedStart - 0x10000) % 1024);
         private const int s_NCNameSurLowEnd =
             SurLowStart + ((s_NCNameSurCombinedEnd - 0x10000) % 1024);
+
 #else
         // Characters defined in the XML 1.0 Fourth Edition
         // Whitespace chars -- Section 2.3 [3]
@@ -80,6 +81,7 @@ namespace Microsoft.CodeAnalysis
         internal const int fNCNameXml4e = 32;
         internal const int fText = 64;
         internal const int fAttrValue = 128;
+
 #endif
 
         // bitmap for public ID characters - 1 bit per character 0x0 - 0x80; no character > 0x80 is a PUBLIC ID char
@@ -8006,6 +8008,7 @@ namespace Microsoft.CodeAnalysis
         {
             return InRange(lowChar, s_NCNameSurLowStart, s_NCNameSurLowEnd);
         }
+
 #endif
 
         public static bool IsStartNCNameSingleChar(char ch)
@@ -8028,6 +8031,7 @@ namespace Microsoft.CodeAnalysis
         {
             return IsNCNameSurrogateChar(lowChar, highChar);
         }
+
 #endif
 
         public static bool IsStartNameSingleChar(char ch)

@@ -6,6 +6,7 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Components.RenderTree;
 
+
 namespace Microsoft.AspNetCore.Components.Web;
 
 internal static class WebEventDescriptorReader

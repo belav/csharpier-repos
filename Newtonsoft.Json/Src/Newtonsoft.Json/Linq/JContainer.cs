@@ -38,8 +38,10 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
+
 #endif
 
 namespace Newtonsoft.Json.Linq
@@ -83,6 +85,7 @@ namespace Newtonsoft.Json.Linq
             add => _addingNew += value;
             remove => _addingNew -= value;
         }
+
 #endif
 #if HAVE_INOTIFY_COLLECTION_CHANGED
         internal NotifyCollectionChangedEventHandler? _collectionChanged;
@@ -95,6 +98,7 @@ namespace Newtonsoft.Json.Linq
             add { _collectionChanged += value; }
             remove { _collectionChanged -= value; }
         }
+
 #endif
 
         /// <summary>
@@ -104,8 +108,10 @@ namespace Newtonsoft.Json.Linq
         protected abstract IList<JToken> ChildrenTokens { get; }
 
         private object? _syncRoot;
+
 #if (HAVE_COMPONENT_MODEL || HAVE_INOTIFY_COLLECTION_CHANGED)
         private bool _busy;
+
 #endif
 
         internal JContainer() { }
@@ -175,6 +181,7 @@ namespace Newtonsoft.Json.Linq
                 }
             }
         }
+
 #endif
 #if HAVE_INOTIFY_COLLECTION_CHANGED
         /// <summary>
@@ -198,6 +205,7 @@ namespace Newtonsoft.Json.Linq
                 }
             }
         }
+
 #endif
 
         /// <summary>
@@ -1048,6 +1056,7 @@ namespace Newtonsoft.Json.Linq
             ICustomTypeDescriptor? d = First as ICustomTypeDescriptor;
             return d?.GetProperties();
         }
+
 #endif
 
         #region IList<JToken> Members
@@ -1071,6 +1080,7 @@ namespace Newtonsoft.Json.Linq
             get => GetItem(index);
             set => SetItem(index, value);
         }
+
         #endregion
 
         #region ICollection<JToken> Members
@@ -1100,6 +1110,7 @@ namespace Newtonsoft.Json.Linq
         {
             return RemoveItem(item);
         }
+
         #endregion
 
         private JToken? EnsureValue(object value)
@@ -1163,6 +1174,7 @@ namespace Newtonsoft.Json.Linq
             get => GetItem(index);
             set => SetItem(index, EnsureValue(value));
         }
+
         #endregion
 
         #region ICollection Members
@@ -1191,6 +1203,7 @@ namespace Newtonsoft.Json.Linq
                 return _syncRoot;
             }
         }
+
         #endregion
 
         #region IBindingList Members
@@ -1261,6 +1274,7 @@ namespace Newtonsoft.Json.Linq
         bool IBindingList.SupportsSearching => false;
 
         bool IBindingList.SupportsSorting => false;
+
 #endif
         #endregion
 

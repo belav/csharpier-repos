@@ -264,6 +264,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         private static dynamic s_mc = new MemberClass();
         private int _loc = (int)s_mc.Method_ReturnsT<int, string>(string.Empty, null, "abc");
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -295,6 +296,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         private Dictionary<int, string> _dic = new Dictionary<int, string>();
         private MemberClass _mc = new MemberClass();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -363,6 +365,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         private static int s_field = 10;
         private static int s_result = -1;
+
         public Test()
         {
             dynamic dy = new MemberClass();
@@ -452,6 +455,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static int s_result = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -491,6 +495,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest : IEnumerable<InnerTest>
         {
             public int Field;
+
             #region IEnumerable<InnerTest> Members
             public IEnumerator<InnerTest> GetEnumerator()
             {
@@ -646,6 +651,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private float _field;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -688,6 +694,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         private float _filed;
         private decimal _dec;
+
         public Test()
         {
             dynamic mc = new MemberClass();
@@ -857,6 +864,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     {
         private static string s_field;
         public static object locker = new object();
+
         ~Test()
         {
             lock (locker)
@@ -944,6 +952,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -979,6 +988,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -1025,6 +1035,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -1065,6 +1076,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -1107,6 +1119,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;

@@ -21,6 +21,7 @@ namespace System.DirectoryServices.ActiveDirectory
         PushChangeOutward = 0x20,
         CrossSite = 0x40
     }
+
     public enum SyncFromAllServersEvent
     {
         Error = 0,
@@ -28,18 +29,21 @@ namespace System.DirectoryServices.ActiveDirectory
         SyncCompleted = 2,
         Finished = 3
     }
+
     public enum SyncFromAllServersErrorCategory
     {
         ErrorContactingServer = 0,
         ErrorReplicating = 1,
         ServerUnreachable = 2
     }
+
     public delegate bool SyncUpdateCallback(
         SyncFromAllServersEvent eventType,
         string? targetServer,
         string? sourceServer,
         SyncFromAllServersOperationException? exception
     );
+
     internal delegate bool SyncReplicaFromAllServersCallback(IntPtr data, IntPtr update);
 
     public class DomainController : DirectoryServer
@@ -93,6 +97,7 @@ namespace System.DirectoryServices.ActiveDirectory
             // initialize the callback function
             syncAllFunctionPointer = new SyncReplicaFromAllServersCallback(SyncAllCallbackRoutine);
         }
+
         #endregion constructors
 
         #region IDisposable
@@ -119,6 +124,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
             }
         }
+
         #endregion IDisposable
 
         #region public methods
@@ -743,6 +749,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 DirectoryContext.ADHandle
             );
         }
+
         #endregion public methods
 
         #region public properties

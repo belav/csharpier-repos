@@ -16,6 +16,7 @@ using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 public class HealthCheckMiddlewareTests

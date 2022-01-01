@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.DependencyModel.Resolution;
 
+
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
 public class DiagnosticProject

@@ -85,6 +85,7 @@ namespace System.Diagnostics.Tracing
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern unsafe IntPtr GetWaitHandle(ulong sessionID);
+
 #endif // FEATURE_PERFTRACING
 
         //

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.JSInterop;
 
 /// <summary>

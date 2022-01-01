@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public class FunctionsDirectivePassTest : RazorProjectEngineTestBase

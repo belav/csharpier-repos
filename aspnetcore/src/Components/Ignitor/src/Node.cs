@@ -5,6 +5,7 @@
 
 using System.Diagnostics;
 
+
 namespace Ignitor;
 
 [DebuggerDisplay("{SerializedValue}")]

@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 using System;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 internal static class PathHelpers

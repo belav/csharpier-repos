@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Duende.IdentityServer.Models;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 /// <summary>

@@ -23,6 +23,7 @@ using System.ComponentModel;
 public sealed class GenericAttribute : Attribute
 {
     public GenericAttribute() { }
+
     public GenericAttribute(int x) { }
 }
 

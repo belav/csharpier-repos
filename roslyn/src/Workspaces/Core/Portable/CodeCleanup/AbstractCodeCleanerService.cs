@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
     internal abstract class AbstractCodeCleanerService : ICodeCleanerService
     {
         public abstract ImmutableArray<ICodeCleanupProvider> GetDefaultProviders();
+
         protected abstract ImmutableArray<TextSpan> GetSpansToAvoid(SyntaxNode root);
 
         public async Task<Document> CleanupAsync(

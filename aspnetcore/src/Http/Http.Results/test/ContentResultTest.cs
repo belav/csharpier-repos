@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http.Result;
 
 public class ContentResultTest

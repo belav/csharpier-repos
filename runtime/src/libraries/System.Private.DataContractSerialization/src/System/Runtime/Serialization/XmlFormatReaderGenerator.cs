@@ -22,6 +22,7 @@ namespace System.Runtime.Serialization
         XmlDictionaryString[]? memberNames,
         XmlDictionaryString[]? memberNamespaces
     );
+
     internal delegate object XmlFormatCollectionReaderDelegate(
         XmlReaderDelegator xmlReader,
         XmlObjectSerializerReadContext context,
@@ -29,6 +30,7 @@ namespace System.Runtime.Serialization
         XmlDictionaryString itemNamespace,
         CollectionDataContract collectionContract
     );
+
     internal delegate void XmlFormatGetOnlyCollectionReaderDelegate(
         XmlReaderDelegator xmlReader,
         XmlObjectSerializerReadContext context,

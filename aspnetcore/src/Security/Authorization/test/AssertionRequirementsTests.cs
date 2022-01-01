@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authorization.Test;
 
 public class AssertionRequirementsTests

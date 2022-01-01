@@ -71,6 +71,7 @@ public class ReliabilityTestSet
         get { return (_loggingLevel); }
         set { _loggingLevel = value; }
     }
+
     /// <summary>
     /// Maximum execution time, in minutes.
     /// </summary>

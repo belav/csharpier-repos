@@ -15,6 +15,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Diagnostics.SourceSwitch sourceSwitch,
@@ -23,6 +24,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string switchName
@@ -30,6 +32,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string switchName,
@@ -40,6 +43,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 }
+
 namespace Microsoft.Extensions.Logging.TraceSource
 {
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("TraceSource")]
@@ -48,14 +52,17 @@ namespace Microsoft.Extensions.Logging.TraceSource
           System.IDisposable
     {
         public TraceSourceLoggerProvider(System.Diagnostics.SourceSwitch rootSourceSwitch) { }
+
         public TraceSourceLoggerProvider(
             System.Diagnostics.SourceSwitch rootSourceSwitch,
             System.Diagnostics.TraceListener rootTraceListener
         ) { }
+
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string name)
         {
             throw null;
         }
+
         public void Dispose() { }
     }
 }

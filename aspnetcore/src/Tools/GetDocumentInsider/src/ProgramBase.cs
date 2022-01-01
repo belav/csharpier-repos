@@ -7,6 +7,7 @@ using Microsoft.Extensions.ApiDescription.Tool.Commands;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
 internal abstract class ProgramBase

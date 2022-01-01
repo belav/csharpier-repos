@@ -160,6 +160,7 @@ public class ArgInput
 abstract class TestAssemblyLoadContextBase : AssemblyLoadContext
 {
     public TestAssemblyLoadContextBase() : base(true) { }
+
     public virtual void Cleanup() { }
 }
 
@@ -233,9 +234,7 @@ class TestAssemblyLoadContextDelegating : TestAssemblyLoadContextBase
     }
 }
 
-public class UnloadFailedException : Exception
-{
-}
+public class UnloadFailedException : Exception { }
 
 public class TestRunner
 {

@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentTemplateTargetExtension : ITemplateTargetExtension

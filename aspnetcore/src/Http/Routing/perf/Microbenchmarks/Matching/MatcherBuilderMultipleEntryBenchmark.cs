@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Routing.Matching;
 
 public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBenchmarkBase
@@ -91,6 +92,7 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
     {
         return new TestNodeBuilderPolicy(order);
     }
+
     private static MatcherPolicy CreateEndpointComparerPolicy(int order)
     {
         return new TestEndpointComparerPolicy(order);

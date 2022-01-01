@@ -18,6 +18,7 @@ namespace System.Threading
     {
         /// <summary>The underlying timer.</summary>
         private readonly TimerQueueTimer _timer;
+
         /// <summary>All state other than the _timer, so that the rooted timer's callback doesn't indirectly root itself by referring to _timer.</summary>
         private readonly State _state;
 
@@ -91,14 +92,19 @@ namespace System.Threading
             /// can be GC'd appropriately.
             /// </remarks>
             private PeriodicTimer? _owner;
+
             /// <summary>Core of the <see cref="IValueTaskSource{TResult}"/> implementation.</summary>
             private ManualResetValueTaskSourceCore<bool> _mrvtsc;
+
             /// <summary>Cancellation registration for any active <see cref="WaitForNextTickAsync"/> call.</summary>
             private CancellationTokenRegistration _ctr;
+
             /// <summary>Whether the timer has been stopped.</summary>
             private bool _stopped;
+
             /// <summary>Whether there's a pending notification to be received.  This could be due to the timer firing, the timer being stopped, or cancellation being requested.</summary>
             private bool _signaled;
+
             /// <summary>Whether there's a <see cref="WaitForNextTickAsync"/> call in flight.</summary>
             private bool _activeWait;
 

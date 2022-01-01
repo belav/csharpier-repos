@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 internal class W3CLogger : IAsyncDisposable

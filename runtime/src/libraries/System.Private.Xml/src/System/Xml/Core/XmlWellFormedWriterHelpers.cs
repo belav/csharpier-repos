@@ -29,6 +29,7 @@ namespace System.Xml
             {
                 throw new NotImplementedException();
             }
+
             string? IXmlNamespaceResolver.LookupNamespace(string prefix)
             {
                 return _wfWriter.LookupNamespace(prefix);

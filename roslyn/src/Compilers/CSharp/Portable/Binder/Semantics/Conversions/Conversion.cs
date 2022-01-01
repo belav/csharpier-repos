@@ -46,8 +46,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             internal readonly MethodSymbol? _conversionMethod;
             internal readonly ImmutableArray<Conversion> _nestedConversionsOpt;
+
 #if DEBUG
             internal bool _nestedConversionsChecked;
+
 #endif
 
             //no effect on Equals/GetHashCode

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 public class WebAssemblyHostTest

@@ -48,8 +48,10 @@ namespace System.Text.RegularExpressions
         private static readonly MethodInfo s_crawlposMethod = RegexRunnerMethod("Crawlpos");
         private static readonly MethodInfo s_charInClassMethod = RegexRunnerMethod("CharInClass");
         private static readonly MethodInfo s_checkTimeoutMethod = RegexRunnerMethod("CheckTimeout");
+
 #if DEBUG
         private static readonly MethodInfo s_dumpStateM = RegexRunnerMethod("DumpState");
+
 #endif
 
         private static readonly MethodInfo s_charIsDigitMethod = typeof(char).GetMethod(

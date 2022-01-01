@@ -25,6 +25,7 @@ namespace System.Speech.Synthesis
             Helpers.ThrowIfEmptyOrNull(name, nameof(name));
             _name = name;
         }
+
         internal VoiceInfo(CultureInfo culture)
         {
             // Fails if no culture is provided
@@ -102,15 +103,18 @@ namespace System.Speech.Synthesis
                 );
             }
         }
+
         internal VoiceInfo(VoiceGender gender)
         {
             _gender = gender;
         }
+
         internal VoiceInfo(VoiceGender gender, VoiceAge age)
         {
             _gender = gender;
             _age = age;
         }
+
         internal VoiceInfo(VoiceGender gender, VoiceAge age, int voiceAlternate)
         {
             if (voiceAlternate < 0)
@@ -190,11 +194,13 @@ namespace System.Speech.Synthesis
         {
             get { return _description != null ? _description : string.Empty; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public ReadOnlyCollection<SpeechAudioFormatInfo> SupportedAudioFormats
         {
             get { return _audioFormats; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IDictionary<string, string> AdditionalInfo
         {

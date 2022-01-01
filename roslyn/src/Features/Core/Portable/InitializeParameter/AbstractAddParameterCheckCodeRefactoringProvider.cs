@@ -48,8 +48,11 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         }
 
         protected abstract bool CanOffer(SyntaxNode body);
+
         protected abstract bool PrefersThrowExpression(DocumentOptionSet options);
+
         protected abstract string EscapeResourceString(string input);
+
         protected abstract TStatementSyntax CreateParameterCheckIfStatement(
             DocumentOptionSet options,
             TExpressionSyntax condition,

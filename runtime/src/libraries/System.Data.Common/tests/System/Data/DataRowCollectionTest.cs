@@ -639,6 +639,7 @@ namespace System.Data.Tests
             index = ds.Tables[0].Rows.IndexOf(dr5);
             Assert.Equal(-1, index);
         }
+
         [Fact]
         public void IndexOfTest()
         {

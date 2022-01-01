@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Caching.Memory;
 
+
 namespace CookieSessionSample;
 
 public class MemoryCacheTicketStore : ITicketStore

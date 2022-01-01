@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
         internal abstract IChainedCommandHandler<TypeCharCommandArgs> CreateCommandHandler(
             TestWorkspace testWorkspace
         );
+
         protected abstract TestWorkspace CreateTestWorkspace(string initialMarkup);
 
         public void Verify(string initialMarkup, string expectedMarkup, char typeChar)

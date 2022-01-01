@@ -23,6 +23,7 @@ class ExplicitLayout
         [FieldOffset(16), MarshalAs(UnmanagedType.Struct, SizeConst = 16)]
         public Guid Guid2;
     }
+
 #pragma warning restore 618
 
     internal class Program

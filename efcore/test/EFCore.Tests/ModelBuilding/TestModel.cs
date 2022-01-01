@@ -271,6 +271,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 #pragma warning disable IDE0051 // Remove unused private members
 #pragma warning disable CS0169 // Remove unused private fields
             private int? _forWierd;
+
 #pragma warning restore CS0169 // Remove unused private fields
 #pragma warning restore IDE0051 // Remove unused private members
 #pragma warning restore IDE0044 // Add readonly modifier
@@ -324,6 +325,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         protected class SelfRef
         {
             public int Id { get; set; }
+
             // TODO: Make both non-nullable when #25830 is fixed
             public SelfRef? SelfRef1 { get; set; }
             public SelfRef? SelfRef2 { get; set; }
@@ -1203,6 +1205,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         protected class KeylessCollectionNavigation
         {
             public List<Store>? Stores { get; set; }
+
             [NotMapped]
             public KeylessReferenceNavigation? Reference { get; set; }
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace FormatterWebSite.Controllers;
 
 public class InputFormatterController : Controller

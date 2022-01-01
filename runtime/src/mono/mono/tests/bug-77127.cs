@@ -1,6 +1,7 @@
 using System;
 
 public interface IX { }
+
 public interface IY : IX { }
 
 public class X : IX

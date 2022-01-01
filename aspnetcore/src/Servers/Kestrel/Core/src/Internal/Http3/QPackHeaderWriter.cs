@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Net.Http.QPack;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
 internal static class QPackHeaderWriter

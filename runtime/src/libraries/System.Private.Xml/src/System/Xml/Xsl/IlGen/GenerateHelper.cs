@@ -547,6 +547,7 @@ namespace System.Xml.Xsl.IlGen
             "GetParameter"
         )!;
         public static readonly MethodInfo InvokeXsltLate = GetInvokeXsltLateBoundFunction();
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -945,6 +946,7 @@ namespace System.Xml.Xsl.IlGen
         private int _numLocals;
         private string? _sourceFile;
         private TextWriter? _writerDump;
+
 #endif
 
         /// <summary>

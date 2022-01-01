@@ -154,6 +154,7 @@ public class BestFitMapping
     )]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern DelegatePInvoke_StdCall SLPStr_DelegatePInvoke();
+
     #endregion
 
     #endregion
@@ -396,6 +397,7 @@ public class BestFitMapping
     public static extern int GetResult();
 
     private static int Fails = 0;
+
     #region "TestMethod"
 
 
@@ -1079,6 +1081,7 @@ public class BestFitMapping
         str = sb.ToString();
         return sb.ToString();
     }
+
     #endregion
 
 

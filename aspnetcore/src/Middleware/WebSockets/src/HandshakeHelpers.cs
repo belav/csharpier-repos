@@ -11,6 +11,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.WebSockets;
 
 internal static class HandshakeHelpers

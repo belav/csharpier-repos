@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
 public abstract class ValidationVisitorBenchmarkBase

@@ -12,9 +12,12 @@ namespace System.Diagnostics.Tests
         public Func<Delegate, object[], object> InvokeDelegate;
 
         public bool InvokeRequired => InvokeRequiredDelegate();
+
         public IAsyncResult BeginInvoke(Delegate method, object[] args) =>
             BeginInvokeDelegate(method, args);
+
         public object EndInvoke(IAsyncResult result) => null;
+
         public object Invoke(Delegate method, object[] args) => InvokeDelegate(method, args);
     }
 }

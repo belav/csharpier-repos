@@ -10,6 +10,7 @@ using Microsoft.Extensions.CommandLineUtils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
 namespace Swaggatherer;
 
 internal class SwaggathererApplication : CommandLineApplication

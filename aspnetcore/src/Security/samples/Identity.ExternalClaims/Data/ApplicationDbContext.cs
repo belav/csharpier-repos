@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Identity.ExternalClaims.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

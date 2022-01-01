@@ -101,6 +101,7 @@ namespace System
             !IsLinqExpressionsBuiltWithIsInterpretingOnly;
         private static readonly Lazy<bool> s_LinqExpressionsBuiltWithIsInterpretingOnly =
             new Lazy<bool>(GetLinqExpressionsBuiltWithIsInterpretingOnly);
+
         private static bool GetLinqExpressionsBuiltWithIsInterpretingOnly()
         {
             Type type = typeof(LambdaExpression);
@@ -159,8 +160,10 @@ namespace System
 #if NETCOREAPP
         public static bool IsReflectionEmitSupported => RuntimeFeature.IsDynamicCodeSupported;
         public static bool IsNotReflectionEmitSupported => !IsReflectionEmitSupported;
+
 #else
         public static bool IsReflectionEmitSupported => true;
+
 #endif
 
         public static bool IsInvokingStaticConstructorsSupported => true;
@@ -216,6 +219,7 @@ namespace System
         // OSX - SecureTransport doesn't expose alpn APIs. TODO https://github.com/dotnet/runtime/issues/27727
         // Android - Platform supports alpn from API level 29 and higher
         private static Lazy<bool> s_supportsAlpn = new Lazy<bool>(GetAlpnSupport);
+
         private static bool GetAlpnSupport()
         {
             if (IsWindows && !IsWindows7 && !IsNetFramework)
@@ -444,6 +448,7 @@ namespace System
 
         private static readonly Lazy<SslProtocols> s_androidSupportedSslProtocols =
             new Lazy<SslProtocols>(Interop.AndroidCrypto.SSLGetSupportedProtocols);
+
         private static bool AndroidGetSslProtocolSupport(SslProtocols protocol)
         {
             Debug.Assert(IsAndroid);

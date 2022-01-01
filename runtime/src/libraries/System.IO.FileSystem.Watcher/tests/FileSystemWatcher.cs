@@ -23,6 +23,7 @@ namespace System.IO.Tests
             public IComponent Component => null;
             public IContainer Container => null;
             public string Name { get; set; }
+
             public object GetService(Type serviceType) => null;
         }
 

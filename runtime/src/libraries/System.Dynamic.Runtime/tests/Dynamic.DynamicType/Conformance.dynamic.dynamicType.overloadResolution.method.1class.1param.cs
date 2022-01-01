@@ -25,6 +25,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -167,6 +168,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     public class Program
     {
         public static int Status = 0;
+
         private static void CallBaz(dynamic x)
         {
             x.Baz();
@@ -506,6 +508,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     //}
     // </Code>
 }
+
 #if CAP_PointerType
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.regr002.regr002
@@ -532,6 +535,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             Assert.AreEqual(0, MainMethod());
         }
+
         public static int MainMethod()
         {
             var c = "abc".ToCharArray();

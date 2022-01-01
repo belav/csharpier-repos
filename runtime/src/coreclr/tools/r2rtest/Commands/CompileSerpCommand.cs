@@ -618,6 +618,7 @@ namespace R2RTest
                 "SparkleAssembly.dll"
             };
         }
+
         private static IEnumerable<string> ResolveReferences(IEnumerable<string> folders)
         {
             foreach (string referenceFolder in folders)

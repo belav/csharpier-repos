@@ -15,6 +15,7 @@ internal class AA
 
     [FieldOffset(37)]
     public int tmp2;
+
     [FieldOffset(44)]
     public int tmp3;
 
@@ -38,6 +39,7 @@ internal class AA
     {
         return arg;
     }
+
     public static byte call_target_ref(ref byte arg)
     {
         return arg;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 // Rewrites type names to use the 'global::' prefix for identifiers.

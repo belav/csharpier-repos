@@ -34,6 +34,7 @@ internal static partial class Interop
             int nSize,
             IntPtr arguments
         );
+
 #pragma warning restore DLLIMPORTGENANALYZER015
 
         /// <summary>

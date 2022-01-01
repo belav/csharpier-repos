@@ -135,6 +135,7 @@ namespace System.Net.Http.Handlers
             Assert.Equal(expectedLength, mockProgressEventHandler.EventArgs.TotalBytes);
             Assert.Equal(100, mockProgressEventHandler.EventArgs.ProgressPercentage);
         }
+
 #endif
 
         [Fact]
@@ -322,6 +323,7 @@ namespace System.Net.Http.Handlers
                 Assert.Equal(100, mockProgressEventHandler.EventArgs.ProgressPercentage);
             }
         }
+
 #endif
 
         [Fact]

@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract override CompletionItemRules GetCompletionItemRules(
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols
         );

@@ -6,20 +6,26 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 namespace FormatterWebSite.Controllers;
 
 public class TopLevelValidationController : Controller
 {
     [BindProperty]
     public int OptionalProp { get; set; }
+
     [BindProperty, Required]
     public int RequiredProp { get; set; }
+
     [BindProperty, BindRequired]
     public int BindRequiredProp { get; set; }
+
     [BindProperty, Required, BindRequired]
     public int RequiredAndBindRequiredProp { get; set; }
+
     [BindProperty, StringLength(5)]
     public string OptionalStringLengthProp { get; set; }
+
     [BindProperty, Range(1, 100), DisplayName("Some Display Name For Prop")]
     public int OptionalRangeDisplayNameProp { get; set; }
 
@@ -27,6 +33,7 @@ public class TopLevelValidationController : Controller
     // because they aren't [BindProperty] properties (hence aren't involved in binding).
     [Required]
     public int UnboundRequiredProp { get; set; }
+
     [BindRequired]
     public int UnboundBindRequiredProp { get; set; }
 

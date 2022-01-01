@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region SerializableAttribute
@@ -53,6 +54,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region DefaultMemberAttribute
@@ -71,6 +73,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region SuppressUnmanagedCodeSecurityAttribute
@@ -89,6 +92,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region Security Attributes
@@ -128,6 +132,7 @@ namespace Microsoft.CodeAnalysis
                 return _lazySecurityAttributeData;
             }
         }
+
         #endregion
 
         #region WindowsRuntimeImportAttribute
@@ -146,6 +151,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region GuidAttribute
@@ -167,6 +173,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region StructLayoutAttribute
@@ -236,6 +243,7 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
+
         #endregion
 
         #region ExcludeFromCodeCoverageAttribute

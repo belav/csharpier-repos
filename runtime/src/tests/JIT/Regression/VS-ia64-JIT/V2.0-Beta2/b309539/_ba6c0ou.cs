@@ -10,12 +10,14 @@ using System.Runtime.InteropServices;
 public struct AA
 {
     public double m_dblField1;
+
     public static uint[][][] Static1(ref char param1)
     {
         AA[,,,] local1 = (new AA[66u, 67u, ((uint)(78.0f)), 114u]);
         int[,,] local2 = (new int[((uint)(72.0f)), 5u, 64u]);
         return (new uint[31u][][]);
     }
+
     public static double[] Static3(
         long[,][,] param1,
         ref Array[,][,,] param2,
@@ -33,6 +35,7 @@ public struct AA
         }
         return ((double[])(((Array)(param3))));
     }
+
     public static char[] Static4()
     {
         char local10 = '\x36';
@@ -90,6 +93,7 @@ public class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static char m_chFwd1;
     public static Array[][] m_axFwd2;
     public static int m_iFwd3;

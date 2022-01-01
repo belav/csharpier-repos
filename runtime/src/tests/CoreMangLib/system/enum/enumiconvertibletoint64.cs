@@ -171,6 +171,7 @@ public class EnumIConvertibleToInt64
 
         return retVal;
     }
+
     #endregion
 
     #region Nagetive Test Cases
@@ -196,12 +197,14 @@ public class EnumIConvertibleToInt64
             return 0;
         }
     }
+
     enum color
     {
         blue = 100,
         white,
         red,
     }
+
     enum e_test : long
     {
         itemA = Int32.MaxValue,

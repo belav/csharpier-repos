@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp.Dom.Html;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
 public class ResendEmailConfirmation : DefaultUIPage

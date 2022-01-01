@@ -27,8 +27,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 #if !(DNXCORE50 || NET20)
 using System.ComponentModel.DataAnnotations;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.TestObjects

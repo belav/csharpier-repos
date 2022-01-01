@@ -85,6 +85,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             ModelLogger = modelDependencies.Logger;
             CommandLogger = commandLogger;
         }
+
 #pragma warning restore CS0618 // Type or member is obsolete
 
         /// <summary>

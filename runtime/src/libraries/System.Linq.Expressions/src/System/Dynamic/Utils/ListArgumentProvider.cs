@@ -14,6 +14,7 @@ namespace System.Dynamic.Utils
     {
         protected abstract T First { get; }
         protected abstract int ElementCount { get; }
+
         protected abstract T GetElement(int index);
 
         #region IList<T> Members
@@ -160,6 +161,7 @@ namespace System.Dynamic.Utils
 
         protected override Expression First => _arg0;
         protected override int ElementCount => _provider.ArgumentCount;
+
         protected override Expression GetElement(int index) => _provider.GetArgument(index);
     }
 }

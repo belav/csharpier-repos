@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace ApiAuthSample.Controllers;
 
 public class ConfigurationController : ControllerBase

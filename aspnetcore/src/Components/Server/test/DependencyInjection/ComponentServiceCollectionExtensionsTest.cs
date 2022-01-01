@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public class ComponentServiceCollectionExtensionsTest

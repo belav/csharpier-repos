@@ -96,21 +96,28 @@ namespace System
         {
             /// <summary>The name of the terminfo file.</summary>
             private readonly string _term;
+
             /// <summary>Raw data of the database instance.</summary>
             private readonly byte[] _data;
 
             /// <summary>The number of bytes in the names section of the database.</summary>
             private readonly int _nameSectionNumBytes;
+
             /// <summary>The number of bytes in the Booleans section of the database.</summary>
             private readonly int _boolSectionNumBytes;
+
             /// <summary>The number of integers in the numbers section of the database.</summary>
             private readonly int _numberSectionNumInts;
+
             /// <summary>The number of offsets in the strings section of the database.</summary>
             private readonly int _stringSectionNumOffsets;
+
             /// <summary>The number of bytes in the strings table of the database.</summary>
             private readonly int _stringTableNumBytes;
+
             /// <summary>Whether or not to read the number section as 32-bit integers.</summary>
             private readonly bool _readAs32Bit;
+
             /// <summary>The size of the integers on the number section.</summary>
             private readonly int _sizeOfInt;
 
@@ -1069,6 +1076,7 @@ namespace System
             {
                 /// <summary>The integer stored in the parameter.</summary>
                 private readonly int _int32;
+
                 /// <summary>The string stored in the parameter.</summary>
                 private readonly string? _string; // null means an Int32 is stored
 

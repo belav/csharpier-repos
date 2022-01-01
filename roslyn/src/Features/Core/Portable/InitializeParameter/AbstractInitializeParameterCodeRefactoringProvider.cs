@@ -38,6 +38,7 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         }
 
         protected abstract bool IsFunctionDeclaration(SyntaxNode node);
+
         protected abstract bool IsImplicitConversion(
             Compilation compilation,
             ITypeSymbol source,

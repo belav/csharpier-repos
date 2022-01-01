@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.SignalR;
 
+
 namespace FunctionalTests;
 
 public class UncreatableHub : Hub

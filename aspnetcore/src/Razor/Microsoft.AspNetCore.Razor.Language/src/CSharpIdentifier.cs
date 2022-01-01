@@ -4,6 +4,7 @@
 using System.Globalization;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal static class CSharpIdentifier

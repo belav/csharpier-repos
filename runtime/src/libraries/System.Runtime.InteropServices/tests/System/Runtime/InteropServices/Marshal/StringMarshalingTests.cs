@@ -186,6 +186,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Null(Marshal.PtrToStringUTF8(IntPtr.Zero));
         }
+
 #endif
 
         [Fact]

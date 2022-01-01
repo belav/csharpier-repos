@@ -874,6 +874,7 @@ namespace System
             item20 = value.Rest.Rest.Item6;
             item21 = value.Rest.Rest.Item7;
         }
+
         #endregion
 
         #region ToValueTuple
@@ -1629,6 +1630,7 @@ namespace System
                 )
             );
         }
+
         #endregion
 
         #region ToTuple
@@ -2372,6 +2374,7 @@ namespace System
                 )
             );
         }
+
         #endregion
 
         private static ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> CreateLong<

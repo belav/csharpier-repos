@@ -59,6 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         public abstract DeclarationKind Kind { get; }
+
         protected abstract ImmutableArray<Declaration> GetDeclarationChildren();
     }
 }

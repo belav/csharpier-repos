@@ -265,6 +265,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig)
             );
         }
+
         #endregion
 
         #region With one pre-release framework
@@ -439,6 +440,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig)
             );
         }
+
         #endregion
 
         #region With many versions

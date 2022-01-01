@@ -64,6 +64,7 @@ namespace System.Reflection.Emit
                 }
             }
         }
+
         #endregion
 
         #region Public Static Methods
@@ -174,10 +175,12 @@ namespace System.Reflection.Emit
 
             return FieldOnTypeBuilderInstantiation.GetField(field, typeBuilderInstantiation);
         }
+
         #endregion
 
         #region Public Const
         public const int UnspecifiedTypeSize = 0;
+
         #endregion
 
         #region Private Static FCalls
@@ -190,6 +193,7 @@ namespace System.Reflection.Emit
             int tdTypeDef,
             int tkInterface
         );
+
         #endregion
 
         #region Internal Static FCalls
@@ -618,6 +622,7 @@ namespace System.Reflection.Emit
         private readonly bool m_bIsGenParam;
         private readonly MethodBuilder? m_declMeth;
         private readonly TypeBuilder? m_genTypeDef;
+
         #endregion
 
         #region Constructor
@@ -882,6 +887,7 @@ namespace System.Reflection.Emit
         {
             return m_hasBeenCreated;
         }
+
         #endregion
 
         #region FCalls
@@ -919,6 +925,7 @@ namespace System.Reflection.Emit
             int tk,
             ObjectHandleOnStack type
         );
+
         #endregion
 
         #region Internal Methods
@@ -967,6 +974,7 @@ namespace System.Reflection.Emit
             m_ca ??= new List<TypeBuilder.CustAttr>();
             m_ca.Add(ca);
         }
+
         #endregion
 
         #region Object Overrides
@@ -1368,14 +1376,17 @@ namespace System.Reflection.Emit
         {
             return false;
         }
+
         protected override bool IsByRefImpl()
         {
             return false;
         }
+
         protected override bool IsPointerImpl()
         {
             return false;
         }
+
         protected override bool IsPrimitiveImpl()
         {
             return false;
@@ -1576,6 +1587,7 @@ namespace System.Reflection.Emit
 
         public override int GenericParameterPosition => m_genParamPos;
         public override MethodBase? DeclaringMethod => m_declMeth;
+
         public override Type GetGenericTypeDefinition()
         {
             if (IsGenericTypeDefinition)
@@ -1584,6 +1596,7 @@ namespace System.Reflection.Emit
                 throw new InvalidOperationException();
             return m_genTypeDef;
         }
+
         #endregion
 
         #region Define Method
@@ -2022,6 +2035,7 @@ namespace System.Reflection.Emit
                 return method;
             }
         }
+
         #endregion
 
         #region Define Constructor

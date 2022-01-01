@@ -8,6 +8,7 @@ using Moq;
 using StackExchange.Redis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis;
 
 public class RedisDataProtectionBuilderExtensionsTest

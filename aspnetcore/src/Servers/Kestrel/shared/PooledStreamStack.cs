@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
+
 #nullable enable
 
 namespace Microsoft.AspNetCore.Server.Kestrel;
@@ -143,8 +144,11 @@ internal struct PooledStreamStack<TValue> where TValue : class, IPooledStream
     internal readonly struct StreamAsValueType
     {
         private readonly TValue _value;
+
         private StreamAsValueType(TValue value) => _value = value;
+
         public static implicit operator StreamAsValueType(TValue s) => new StreamAsValueType(s);
+
         public static implicit operator TValue(StreamAsValueType s) => s._value;
     }
 }

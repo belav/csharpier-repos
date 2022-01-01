@@ -50,6 +50,7 @@ using Newtonsoft.Json.Utilities;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -1528,6 +1529,7 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual(@"""2000-12-31T20:59:59.9999999+11:33""", sw.ToString());
         }
+
 #endif
 
         [Test]
@@ -1575,6 +1577,7 @@ namespace Newtonsoft.Json.Tests
                     + " is too large to parse. Path 'biginteger', line 1, position 395."
             );
         }
+
 #endif
 
         [Test]
@@ -2201,6 +2204,7 @@ namespace Newtonsoft.Json.Tests
             [JsonConstructor]
             public HasReadOnlyDictionary([JsonProperty("bar")] int bar) { }
         }
+
 #endif
 
         public sealed class HasReadOnlyEnumerableObject

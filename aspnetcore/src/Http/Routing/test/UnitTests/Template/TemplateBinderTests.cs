@@ -13,6 +13,7 @@ using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Template.Tests;
 
 public class TemplateBinderTests
@@ -1172,6 +1173,7 @@ public class TemplateBinderTests
         Assert.Equal("bar", vpd.DataTokens["foo"]);
         Assert.Equal("quux", vpd.DataTokens["qux"]);
     }
+
 #endif
 
 #if ROUTE_FORMAT_HELPER

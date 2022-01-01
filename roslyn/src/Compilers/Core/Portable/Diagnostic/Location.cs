@@ -106,6 +106,7 @@ namespace Microsoft.CodeAnalysis
 
         // Derived classes should provide value equality semantics.
         public abstract override bool Equals(object? obj);
+
         public abstract override int GetHashCode();
 
         public override string ToString()

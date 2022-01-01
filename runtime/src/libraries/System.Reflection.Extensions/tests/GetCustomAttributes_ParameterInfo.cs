@@ -489,6 +489,7 @@ namespace System.Reflection.Tests
     public class ParameterInfoAttributeBase : Attribute
     {
         private string _name;
+
         public ParameterInfoAttributeBase(string name)
         {
             _name = name;
@@ -527,6 +528,7 @@ namespace System.Reflection.Tests
     public class TestClass_P
     {
         public void methodWithoutAttribute(int param) { }
+
         public void methodWithAttribute(
             [
                 MyAttribute_Single_P("single"),

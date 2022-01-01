@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography;
 using Microsoft.AspNetCore.DataProtection.Managed;
 
+
 namespace Microsoft.AspNetCore.DataProtection.SP800_108;
 
 internal static class ManagedSP800_108_CTR_HMACSHA512

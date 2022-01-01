@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests.Helpers;
 
 public static class AssertHelpers

@@ -13,6 +13,7 @@ using Moq;
 using Xunit;
 using static Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyCultureProvider;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 public class WebAssemblyCultureProviderTest

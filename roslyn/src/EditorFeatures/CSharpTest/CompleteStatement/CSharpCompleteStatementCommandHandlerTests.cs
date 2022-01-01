@@ -1412,6 +1412,7 @@ class C
 
             VerifyTypingSemicolon(code, expected);
         }
+
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ForLoopInitializers_MissingParen()
         {
@@ -4361,6 +4362,7 @@ public class ClassC
                 }
             );
         }
+
         protected override TestWorkspace CreateTestWorkspace(string code) =>
             TestWorkspace.CreateCSharp(code);
     }

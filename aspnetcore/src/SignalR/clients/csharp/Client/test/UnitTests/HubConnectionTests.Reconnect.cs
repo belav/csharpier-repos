@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public partial class HubConnectionTests
@@ -1464,6 +1465,7 @@ public partial class HubConnectionTests
 
             public override void Abort(ConnectionAbortedException abortReason) =>
                 _inner.Abort(abortReason);
+
             public override void Abort() => _inner.Abort();
 
             public override ValueTask DisposeAsync() =>

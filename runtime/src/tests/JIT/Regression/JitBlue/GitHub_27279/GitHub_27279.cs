@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 class GitHub_27279
 {
     unsafe static int Main()

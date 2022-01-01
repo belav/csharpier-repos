@@ -59,6 +59,7 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
         protected abstract bool ShouldAnalyze(Compilation compilation);
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
+
         protected abstract bool IsInExpressionTree(
             SemanticModel semanticModel,
             SyntaxNode node,

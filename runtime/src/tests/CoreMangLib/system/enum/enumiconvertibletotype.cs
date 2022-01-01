@@ -238,6 +238,7 @@ public class EnumIConvertibleToType
 
         return retVal;
     }
+
     #endregion
     #endregion
 
@@ -267,6 +268,7 @@ public class EnumIConvertibleToType
         white,
         red,
     }
+
     enum e_test : long
     {
         itemA = -123456789,

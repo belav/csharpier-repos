@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.WebSockets.Tests;
 
 public class HandshakeTests

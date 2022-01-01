@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Http.Features;
 
+
 namespace Microsoft.AspNetCore.TestHost;
 
 internal class RequestBodyDetectionFeature : IHttpRequestBodyDetectionFeature

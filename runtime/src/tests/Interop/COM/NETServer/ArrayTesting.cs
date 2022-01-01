@@ -19,6 +19,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(short[] d)
     {
         double t = 0.0;
@@ -28,6 +29,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(ushort[] d)
     {
         double t = 0.0;
@@ -37,6 +39,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(int[] d)
     {
         double t = 0.0;
@@ -46,6 +49,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(uint[] d)
     {
         double t = 0.0;
@@ -55,6 +59,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(long[] d)
     {
         double t = 0.0;
@@ -64,6 +69,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(ulong[] d)
     {
         double t = 0.0;
@@ -73,6 +79,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(float[] d)
     {
         double t = 0.0;
@@ -82,6 +89,7 @@ public class ArrayTesting : Server.Contract.IArrayTesting
         }
         return (t / d.Length);
     }
+
     private static double Mean(double[] d)
     {
         double t = 0.0;

@@ -98,6 +98,7 @@ namespace SingLink
 #pragma warning disable 0414
         internal LinkNode Last;
         internal int[] Size;
+
 #pragma warning restore 0414
 
         public static int FinalCount = 0;

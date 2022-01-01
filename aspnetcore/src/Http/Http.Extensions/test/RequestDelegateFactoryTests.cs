@@ -26,6 +26,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.Routing.Internal;
 
 public class RequestDelegateFactoryTests : LoggedTest

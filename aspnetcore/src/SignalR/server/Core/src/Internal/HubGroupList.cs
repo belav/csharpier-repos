@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class HubGroupList

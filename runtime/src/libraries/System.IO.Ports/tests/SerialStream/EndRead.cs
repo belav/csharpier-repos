@@ -268,6 +268,7 @@ namespace System.IO.Ports.Tests
             // Give the port time to finish closing since we potentially have an unclosed BeginRead/BeginWrite
             Thread.Sleep(200);
         }
+
         #endregion
 
         #region Verification for Test Cases

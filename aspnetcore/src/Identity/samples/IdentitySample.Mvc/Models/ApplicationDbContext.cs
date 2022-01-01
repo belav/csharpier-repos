@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace IdentitySample.Models;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

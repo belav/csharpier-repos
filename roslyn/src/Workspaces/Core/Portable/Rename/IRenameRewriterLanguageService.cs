@@ -123,6 +123,7 @@ namespace Microsoft.CodeAnalysis.Rename
     internal abstract class AbstractRenameRewriterLanguageService : IRenameRewriterLanguageService
     {
         public abstract SyntaxNode AnnotateAndRename(RenameRewriterParameters parameters);
+
         public abstract Task<ImmutableArray<Location>> ComputeDeclarationConflictsAsync(
             string replacementText,
             ISymbol renamedSymbol,
@@ -133,12 +134,14 @@ namespace Microsoft.CodeAnalysis.Rename
             IDictionary<Location, Location> reverseMappedLocations,
             CancellationToken cancellationToken
         );
+
         public abstract Task<ImmutableArray<Location>> ComputeImplicitReferenceConflictsAsync(
             ISymbol renameSymbol,
             ISymbol renamedSymbol,
             IEnumerable<ReferenceLocation> implicitReferenceLocations,
             CancellationToken cancellationToken
         );
+
         public abstract ImmutableArray<Location> ComputePossibleImplicitUsageConflicts(
             ISymbol renamedSymbol,
             SemanticModel semanticModel,
@@ -146,15 +149,19 @@ namespace Microsoft.CodeAnalysis.Rename
             int newDeclarationLocationStartingPosition,
             CancellationToken cancellationToken
         );
+
         public abstract SyntaxNode? GetExpansionTargetForLocation(SyntaxToken token);
+
         public abstract bool IsIdentifierValid(
             string replacementText,
             ISyntaxFactsService syntaxFactsService
         );
+
         public abstract bool LocalVariableConflict(
             SyntaxToken token,
             IEnumerable<ISymbol> newReferencedSymbols
         );
+
         public abstract void TryAddPossibleNameConflicts(
             ISymbol symbol,
             string newName,

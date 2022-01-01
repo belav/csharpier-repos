@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.CompilerServices;
+
 #if !DEBUG
 using Internal.Runtime.CompilerServices;
+
 #endif
 
 namespace System.Runtime
@@ -239,6 +241,7 @@ namespace System.Runtime
 #if DEBUG
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object? InternalGetTarget(IntPtr dependentHandle);
+
 #else
         private static unsafe object? InternalGetTarget(IntPtr dependentHandle)
         {
@@ -247,6 +250,7 @@ namespace System.Runtime
             // The logic below is the inlined copy of ObjectFromHandle in the unmanaged runtime.
             return Unsafe.As<IntPtr, object>(ref *(IntPtr*)(nint)dependentHandle);
         }
+
 #endif
 
         [MethodImpl(MethodImplOptions.InternalCall)]

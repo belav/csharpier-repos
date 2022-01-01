@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace HtmlGenerationWebSite;
 
 public class Startup

@@ -60,6 +60,7 @@ internal class TestStruct
         x.f = new SingleInt();
         x.f.i1 = 77;
     }
+
     public static int Main()
     {
         SimpleStruct st;

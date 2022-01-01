@@ -62,8 +62,10 @@ namespace Newtonsoft.Json
 #endif
 #if DEBUG
         internal int LargeBufferLength { get; set; } = int.MaxValue / 2;
+
 #else
         private const int LargeBufferLength = int.MaxValue / 2;
+
 #endif
 
         private readonly TextReader _reader;
@@ -104,6 +106,7 @@ namespace Newtonsoft.Json
         }
 
         internal int CharPos => _charPos;
+
 #endif
 
         /// <summary>
@@ -1144,6 +1147,7 @@ namespace Newtonsoft.Json
         {
             return (DateTimeOffset?)ReadStringValue(ReadType.ReadAsDateTimeOffset);
         }
+
 #endif
 
         /// <summary>
@@ -2646,6 +2650,7 @@ namespace Newtonsoft.Json
         {
             return System.Numerics.BigInteger.Parse(number, culture);
         }
+
 #endif
 
         private void ParseComment(bool setToken)
@@ -2944,6 +2949,7 @@ namespace Newtonsoft.Json
                 MatchValueWithTrailingSeparator(JsonConvert.PositiveInfinity)
             );
         }
+
         private object ParseNumberPositiveInfinity(ReadType readType, bool matched)
         {
             if (matched)

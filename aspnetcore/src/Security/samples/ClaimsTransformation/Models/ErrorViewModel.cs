@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace AuthSamples.ClaimsTransformer.Models;
 
 public class ErrorViewModel

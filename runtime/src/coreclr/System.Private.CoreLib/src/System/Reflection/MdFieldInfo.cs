@@ -14,6 +14,7 @@ namespace System.Reflection
         private string? m_name;
         private RuntimeType? m_fieldType;
         private FieldAttributes m_fieldAttributes;
+
         #endregion
 
         #region Constructor
@@ -29,6 +30,7 @@ namespace System.Reflection
             m_name = null;
             m_fieldAttributes = fieldAttributes;
         }
+
         #endregion
 
         #region Internal Members
@@ -40,6 +42,7 @@ namespace System.Reflection
                     .GetModuleHandle()
                     .Equals(m.m_declaringType.TypeHandle.GetModuleHandle());
         }
+
         #endregion
 
         #region MemberInfo Overrides
@@ -47,10 +50,12 @@ namespace System.Reflection
             m_name ??= GetRuntimeModule().MetadataImport.GetName(m_tkField).ToString();
 
         public override int MetadataToken => m_tkField;
+
         internal override RuntimeModule GetRuntimeModule()
         {
             return m_declaringType.GetRuntimeModule();
         }
+
         #endregion
 
         #region FieldInfo Overrides

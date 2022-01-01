@@ -242,16 +242,22 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                 ImmutableArray<IParameterSymbol> parameters,
                 int argumentCount
             );
+
             protected abstract TSimpleArgumentSyntax WithName(
                 TSimpleArgumentSyntax argument,
                 string name
             );
+
             protected abstract bool IsPositionalArgument(TSimpleArgumentSyntax argument);
+
             protected abstract SeparatedSyntaxList<TBaseArgumentSyntax> GetArguments(
                 TArgumentListSyntax argumentList
             );
+
             protected abstract SyntaxNode? GetReceiver(SyntaxNode argument);
+
             protected abstract bool SupportsNonTrailingNamedArguments(ParseOptions options);
+
             protected abstract bool IsImplicitIndexOrRangeIndexer(
                 ImmutableArray<IParameterSymbol> parameters,
                 TBaseArgumentSyntax argument,

@@ -354,6 +354,7 @@ namespace System.IO
 
             return n;
         }
+
         #endregion
 
         private sealed class NullTextReader : TextReader

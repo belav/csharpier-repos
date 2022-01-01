@@ -10,11 +10,13 @@ namespace System.Xml
     {
         private readonly string _asterisk = null!;
         private int _changeCount; //recording the total number that the dom tree has been changed ( insertion and deletion )
+
         //the member vars below are saved for further reconstruction
         private readonly string? _name; //only one of 2 string groups will be initialized depends on which constructor is called.
         private string? _localName;
         private string? _namespaceURI;
         private readonly XmlNode _rootNode;
+
         // the member vars below serves the optimization of accessing of the elements in the list
         private int _curInd; // -1 means the starting point for a new search round
         private XmlNode _curElem; // if sets to rootNode, means the starting point for a new search round

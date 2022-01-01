@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
+
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
 internal static class MvcRazorPagesDiagnosticListenerExtensions

@@ -13,6 +13,7 @@ namespace System.Text.Tests
     {
 #pragma warning disable SYSLIB0001 // UTF7Encoding is obsolete
         private static UTF7Encoding _utf7Encoding = new UTF7Encoding();
+
 #pragma warning restore SYSLIB0001
 
         public static IEnumerable<object[]> DisallowedEncodings()
@@ -216,6 +217,7 @@ namespace System.Text.Tests
         private sealed class NullEncodingProvider : EncodingProvider
         {
             public override Encoding GetEncoding(int codepage) => null;
+
             public override Encoding GetEncoding(string name) => null;
         }
 

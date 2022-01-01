@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>

@@ -27,6 +27,7 @@ namespace SerializationTypes
 
         public TypeWithDateTimeStringProperty() { }
     }
+
     public class SimpleType
     {
         public string P1 { get; set; }
@@ -251,6 +252,7 @@ namespace SerializationTypes
             return ((IEnumerable)_items).GetEnumerator();
         }
     }
+
     public enum MyEnum
     {
         [EnumMember]
@@ -271,6 +273,7 @@ namespace SerializationTypes
     {
         [DataMember]
         public string Data;
+
         public DCStruct(bool init)
         {
             Data = "Data";
@@ -287,11 +290,13 @@ namespace SerializationTypes
         public MyEnum MyEnum1;
 
         public DCClassWithEnumAndStruct() { }
+
         public DCClassWithEnumAndStruct(bool init)
         {
             MyStruct = new DCStruct(init);
         }
     }
+
     public class BuiltInTypes
     {
         public byte[] ByteArray { get; set; }
@@ -322,6 +327,7 @@ namespace SerializationTypes
         public TypeA[] Items;
 
         public TypeHasArrayOfASerializedAsB() { }
+
         public TypeHasArrayOfASerializedAsB(bool init)
         {
             Items = new TypeA[]
@@ -399,7 +405,9 @@ namespace SerializationTypes
     {
         [DataMember]
         public string Data;
+
         public SimpleDC() { }
+
         public SimpleDC(bool init)
         {
             Data = DateTime.MaxValue.ToString("T", CultureInfo.InvariantCulture);
@@ -663,6 +671,7 @@ namespace SerializationTypes
             writer.WriteAttributeString("BoolValue", BoolValue.ToString());
         }
     }
+
     public class TypeWithPropertyNameSpecified
     {
         public string MyField;
@@ -714,6 +723,7 @@ namespace SerializationTypes
     public class TypeWithNonPublicDefaultConstructor
     {
         private static string s_prefix;
+
         static TypeWithNonPublicDefaultConstructor()
         {
             s_prefix = "Mr. ";
@@ -723,6 +733,7 @@ namespace SerializationTypes
         {
             Name = s_prefix + "FooName";
         }
+
         public string Name { get; set; }
     }
 
@@ -858,10 +869,13 @@ namespace SerializationTypes
     {
         [XmlElement(Order = 0)]
         public int IntField1;
+
         [XmlElement(Order = 1)]
         public int IntField2;
+
         [XmlElement(Order = 3)]
         public string StringField1;
+
         [XmlElement(Order = 2)]
         public string StringField2;
     }
@@ -923,6 +937,7 @@ public class TypeWithBinaryProperty
 {
     [XmlElement(DataType = "hexBinary")]
     public byte[] BinaryHexContent { get; set; }
+
     [XmlElement(DataType = "base64Binary")]
     public byte[] Base64Content { get; set; }
 }
@@ -1025,6 +1040,7 @@ public class Employee
 {
     [DataMember]
     public string EmployeeName;
+
     [DataMember]
     private string ID = string.Empty;
 }
@@ -1204,6 +1220,7 @@ public class Pet
 {
     [DefaultValueAttribute("Dog")]
     public string Animal;
+
     [XmlIgnoreAttribute]
     public string Comment;
     public string Comment2;
@@ -1339,6 +1356,7 @@ public class TypeWithLinkedProperty
 {
     [DataMember]
     public TypeWithLinkedProperty Child { get; set; }
+
     [DataMember]
     public List<TypeWithLinkedProperty> Children { get; set; }
 }

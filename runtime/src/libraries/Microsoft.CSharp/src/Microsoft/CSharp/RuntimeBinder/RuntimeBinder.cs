@@ -1077,6 +1077,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return StripNamedArgument(pArg);
         }
+
         #endregion
 
         #region Operators
@@ -1126,6 +1127,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return _binder.BindStandardUnaryOperator(op, arg1);
         }
+
         #endregion
 
         #region BinaryOperators
@@ -1160,6 +1162,7 @@ namespace Microsoft.CSharp.RuntimeBinder
             }
             return _binder.BindStandardBinop(ek, arg1, arg2);
         }
+
         #endregion
 
         /////////////////////////////////////////////////////////////////////////////////
@@ -1469,6 +1472,7 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expr rhs = CreateArgumentEXPR(arguments[indexOfLast], locals[indexOfLast]);
             return _binder.BindAssignment(lhs, rhs, bIsCompound);
         }
+
         #endregion
 
         #region Events

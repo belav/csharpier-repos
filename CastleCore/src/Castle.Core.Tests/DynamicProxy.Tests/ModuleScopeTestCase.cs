@@ -185,6 +185,7 @@ namespace Castle.DynamicProxy.Tests
             CheckSignedSavedAssembly(path);
             File.Delete(path);
         }
+
 #endif
 
 #if FEATURE_ASSEMBLYBUILDER_SAVE
@@ -210,6 +211,7 @@ namespace Castle.DynamicProxy.Tests
             CheckUnsignedSavedAssembly(path);
             File.Delete(path);
         }
+
 #endif
 
 #if FEATURE_ASSEMBLYBUILDER_SAVE
@@ -317,6 +319,7 @@ namespace Castle.DynamicProxy.Tests
 
             Assert.Throws<InvalidOperationException>(() => scope.SaveAssembly(true));
         }
+
 #endif
 
 #if FEATURE_SERIALIZATION
@@ -378,6 +381,7 @@ namespace Castle.DynamicProxy.Tests
 
             File.Delete(savedPath);
         }
+
 #endif
 
         [Test]
@@ -447,6 +451,7 @@ namespace Castle.DynamicProxy.Tests
             File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "Strong.dll"));
             File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "Weak.dll"));
         }
+
 #endif // FEATURE_ASSEMBLYBUILDER_SAVE
 
         [Test]

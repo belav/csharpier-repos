@@ -6,6 +6,7 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
 internal static class MvcShim

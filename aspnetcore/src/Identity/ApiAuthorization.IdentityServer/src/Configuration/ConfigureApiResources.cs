@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 internal class ConfigureApiResources : IConfigureOptions<ApiAuthorizationOptions>

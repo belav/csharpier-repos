@@ -8,6 +8,7 @@ class foo
     public static sbyte a,
         b,
         c;
+
 #pragma warning restore 0414
 
     public static int Main()

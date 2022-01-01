@@ -434,6 +434,7 @@ namespace System.IO.Ports.Tests
                 TCSupport.WaitForTaskCompletion(asyncReadTask);
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

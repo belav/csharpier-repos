@@ -17,6 +17,7 @@ namespace DefaultNamespace
             VTestIsTitleCase();
             return 100;
         }
+
         internal static void VTestIsPrintable()
         {
             for (char ch = '\x0'; ch <= '\x255'; ch++)

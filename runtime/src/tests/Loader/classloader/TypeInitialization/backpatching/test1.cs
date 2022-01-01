@@ -26,18 +26,21 @@ public class MyClass
 {
     private static int X;
     public static int X0;
+
     static MyClass()
     {
         X0 = getX(); // expect this to return 0, since this forces a cctor loop.
         Thread.Sleep(1000 * 5); // 5 seconds
         X = 12;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int getX()
     {
         Console.WriteLine("In MyClass.getX(): thread {0}", Thread.CurrentThread.Name);
         return X;
     }
+
     // invoking this should trigger the cctor
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void SomeMethod()
@@ -54,11 +57,13 @@ public class CMain
     {
         MyClass.SomeMethod();
     }
+
     public static void RunGetX()
     {
         X_getX = MyClass.getX();
         Console.WriteLine("X_getX: {0}: thread {1}", X_getX, Thread.CurrentThread.Name);
     }
+
     public static int Main()
     {
         Thread t1 = new Thread(RunSomeMethod);

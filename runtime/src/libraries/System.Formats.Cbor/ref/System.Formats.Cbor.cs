@@ -13,15 +13,19 @@ namespace System.Formats.Cbor
         Canonical = 2,
         Ctap2Canonical = 3,
     }
+
     public partial class CborContentException : System.Exception
     {
         protected CborContentException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public CborContentException(string? message) { }
+
         public CborContentException(string? message, System.Exception? inner) { }
     }
+
     public partial class CborReader
     {
         public CborReader(
@@ -30,6 +34,7 @@ namespace System.Formats.Cbor
                 System.Formats.Cbor.CborConformanceMode.Strict,
             bool allowMultipleRootLevelValues = false
         ) { }
+
         public bool AllowMultipleRootLevelValues
         {
             get { throw null; }
@@ -46,127 +51,163 @@ namespace System.Formats.Cbor
         {
             get { throw null; }
         }
+
         public System.Formats.Cbor.CborReaderState PeekState()
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public System.Formats.Cbor.CborTag PeekTag()
         {
             throw null;
         }
+
         public System.Numerics.BigInteger ReadBigInteger()
         {
             throw null;
         }
+
         public bool ReadBoolean()
         {
             throw null;
         }
+
         public byte[] ReadByteString()
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public ulong ReadCborNegativeIntegerRepresentation()
         {
             throw null;
         }
+
         public System.DateTimeOffset ReadDateTimeOffset()
         {
             throw null;
         }
+
         public decimal ReadDecimal()
         {
             throw null;
         }
+
         public System.ReadOnlyMemory<byte> ReadDefiniteLengthByteString()
         {
             throw null;
         }
+
         public System.ReadOnlyMemory<byte> ReadDefiniteLengthTextStringBytes()
         {
             throw null;
         }
+
         public double ReadDouble()
         {
             throw null;
         }
+
         public System.ReadOnlyMemory<byte> ReadEncodedValue(
             bool disableConformanceModeChecks = false
         )
         {
             throw null;
         }
+
         public void ReadEndArray() { }
+
         public void ReadEndIndefiniteLengthByteString() { }
+
         public void ReadEndIndefiniteLengthTextString() { }
+
         public void ReadEndMap() { }
+
         public System.Half ReadHalf()
         {
             throw null;
         }
+
         public int ReadInt32()
         {
             throw null;
         }
+
         public long ReadInt64()
         {
             throw null;
         }
+
         public void ReadNull() { }
+
         public System.Formats.Cbor.CborSimpleValue ReadSimpleValue()
         {
             throw null;
         }
+
         public float ReadSingle()
         {
             throw null;
         }
+
         public int? ReadStartArray()
         {
             throw null;
         }
+
         public void ReadStartIndefiniteLengthByteString() { }
+
         public void ReadStartIndefiniteLengthTextString() { }
+
         public int? ReadStartMap()
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public System.Formats.Cbor.CborTag ReadTag()
         {
             throw null;
         }
+
         public string ReadTextString()
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public uint ReadUInt32()
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public ulong ReadUInt64()
         {
             throw null;
         }
+
         public System.DateTimeOffset ReadUnixTimeSeconds()
         {
             throw null;
         }
+
         public void SkipToParent(bool disableConformanceModeChecks = false) { }
+
         public void SkipValue(bool disableConformanceModeChecks = false) { }
+
         public bool TryReadByteString(System.Span<byte> destination, out int bytesWritten)
         {
             throw null;
         }
+
         public bool TryReadTextString(System.Span<char> destination, out int charsWritten)
         {
             throw null;
         }
     }
+
     public enum CborReaderState
     {
         Undefined = 0,
@@ -191,6 +232,7 @@ namespace System.Formats.Cbor
         Boolean = 19,
         Finished = 20,
     }
+
     public enum CborSimpleValue : byte
     {
         False = (byte)20,
@@ -198,6 +240,7 @@ namespace System.Formats.Cbor
         Null = (byte)22,
         Undefined = (byte)23,
     }
+
     [System.CLSCompliantAttribute(false)]
     public enum CborTag : ulong
     {
@@ -218,6 +261,7 @@ namespace System.Formats.Cbor
         MimeMessage = (ulong)36,
         SelfDescribeCbor = (ulong)55799,
     }
+
     public partial class CborWriter
     {
         public CborWriter(
@@ -226,6 +270,7 @@ namespace System.Formats.Cbor
             bool convertIndefiniteLengthEncodings = false,
             bool allowMultipleRootLevelValues = false
         ) { }
+
         public bool AllowMultipleRootLevelValues
         {
             get { throw null; }
@@ -250,52 +295,86 @@ namespace System.Formats.Cbor
         {
             get { throw null; }
         }
+
         public byte[] Encode()
         {
             throw null;
         }
+
         public int Encode(System.Span<byte> destination)
         {
             throw null;
         }
+
         public void Reset() { }
+
         public bool TryEncode(System.Span<byte> destination, out int bytesWritten)
         {
             throw null;
         }
+
         public void WriteBigInteger(System.Numerics.BigInteger value) { }
+
         public void WriteBoolean(bool value) { }
+
         public void WriteByteString(byte[] value) { }
+
         public void WriteByteString(System.ReadOnlySpan<byte> value) { }
+
         [System.CLSCompliantAttribute(false)]
         public void WriteCborNegativeIntegerRepresentation(ulong value) { }
+
         public void WriteDateTimeOffset(System.DateTimeOffset value) { }
+
         public void WriteDecimal(decimal value) { }
+
         public void WriteDouble(double value) { }
+
         public void WriteEncodedValue(System.ReadOnlySpan<byte> encodedValue) { }
+
         public void WriteEndArray() { }
+
         public void WriteEndIndefiniteLengthByteString() { }
+
         public void WriteEndIndefiniteLengthTextString() { }
+
         public void WriteEndMap() { }
+
         public void WriteHalf(System.Half value) { }
+
         public void WriteInt32(int value) { }
+
         public void WriteInt64(long value) { }
+
         public void WriteNull() { }
+
         public void WriteSimpleValue(System.Formats.Cbor.CborSimpleValue value) { }
+
         public void WriteSingle(float value) { }
+
         public void WriteStartArray(int? definiteLength) { }
+
         public void WriteStartIndefiniteLengthByteString() { }
+
         public void WriteStartIndefiniteLengthTextString() { }
+
         public void WriteStartMap(int? definiteLength) { }
+
         [System.CLSCompliantAttribute(false)]
         public void WriteTag(System.Formats.Cbor.CborTag tag) { }
+
         public void WriteTextString(System.ReadOnlySpan<char> value) { }
+
         public void WriteTextString(string value) { }
+
         [System.CLSCompliantAttribute(false)]
         public void WriteUInt32(uint value) { }
+
         [System.CLSCompliantAttribute(false)]
         public void WriteUInt64(ulong value) { }
+
         public void WriteUnixTimeSeconds(double seconds) { }
+
         public void WriteUnixTimeSeconds(long seconds) { }
     }
 }

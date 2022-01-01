@@ -23,17 +23,20 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseType
     internal abstract class AbstractUseTypeCodeRefactoringProvider : CodeRefactoringProvider
     {
         protected abstract string Title { get; }
+
         protected abstract Task HandleDeclarationAsync(
             Document document,
             SyntaxEditor editor,
             TypeSyntax type,
             CancellationToken cancellationToken
         );
+
         protected abstract TypeSyntax FindAnalyzableType(
             SyntaxNode node,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
         );
+
         protected abstract TypeStyleResult AnalyzeTypeName(
             TypeSyntax typeName,
             SemanticModel semanticModel,

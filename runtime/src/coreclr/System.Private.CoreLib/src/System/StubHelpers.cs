@@ -243,6 +243,7 @@ namespace System.StubHelpers
     internal static class UTF8Marshaler
     {
         private const int MAX_UTF8_CHAR_SIZE = 3;
+
         internal static unsafe IntPtr ConvertToNative(
             int flags,
             string strManaged,
@@ -931,9 +932,13 @@ namespace System.StubHelpers
         }
 
         private static bool IsIn(int dwFlags) => (dwFlags & (int)AsAnyFlags.In) != 0;
+
         private static bool IsOut(int dwFlags) => (dwFlags & (int)AsAnyFlags.Out) != 0;
+
         private static bool IsAnsi(int dwFlags) => (dwFlags & (int)AsAnyFlags.IsAnsi) != 0;
+
         private static bool IsThrowOn(int dwFlags) => (dwFlags & (int)AsAnyFlags.IsThrowOn) != 0;
+
         private static bool IsBestFit(int dwFlags) => (dwFlags & (int)AsAnyFlags.IsBestFit) != 0;
 
         internal AsAnyMarshaler(IntPtr pvArrayMarshaler)
@@ -1355,6 +1360,7 @@ namespace System.StubHelpers
     internal abstract class CleanupWorkListElement
     {
         private CleanupWorkListElement? m_Next;
+
         protected abstract void DestroyCore();
 
         public void Destroy()
@@ -1570,6 +1576,7 @@ namespace System.StubHelpers
             out IntPtr ppTarget,
             out bool pfNeedsRelease
         );
+
 #endif // FEATURE_COMINTEROP
 
         //-------------------------------------------------------
@@ -1585,6 +1592,7 @@ namespace System.StubHelpers
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void ProfilerEndTransitionCallback(IntPtr pMD, IntPtr pThread);
+
 #endif // PROFILING_SUPPORTED
 
         //------------------------------------------------------
@@ -1609,10 +1617,13 @@ namespace System.StubHelpers
             byte* pNative,
             ref CleanupWorkListElement? pCleanupWorkList
         );
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe void FmtClassUpdateCLRInternal(object obj, byte* pNative);
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe void LayoutDestroyNativeInternal(object obj, byte* pNative);
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern object AllocateInternal(IntPtr typeHandle);
 
@@ -1648,16 +1659,19 @@ namespace System.StubHelpers
 #if TARGET_64BIT
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern IntPtr GetStubContextAddr();
+
 #endif // TARGET_64BIT
 
 #if FEATURE_ARRAYSTUB_AS_IL
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void ArrayTypeCheck(object o, object[] arr);
+
 #endif
 
 #if FEATURE_MULTICASTSTUB_AS_IL
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void MulticastDebuggerTraceHelper(object o, int count);
+
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

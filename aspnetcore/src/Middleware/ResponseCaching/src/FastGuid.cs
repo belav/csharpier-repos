@@ -4,6 +4,7 @@
 using System;
 using System.Threading;
 
+
 namespace Microsoft.AspNetCore.ResponseCaching;
 
 internal class FastGuid
@@ -11,6 +12,7 @@ internal class FastGuid
     // Base32 encoding - in ascii sort order for easy text based sorting
     private static readonly char[] s_encode32Chars =
         "0123456789ABCDEFGHIJKLMNOPQRSTUV".ToCharArray();
+
     // Global ID
     private static long NextId = InitializeNextId();
 

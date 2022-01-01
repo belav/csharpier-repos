@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.TestHost;
 
 public class ResponseResetTests

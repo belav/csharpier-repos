@@ -780,6 +780,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Property<string>(nameof(F.NonUnicodeField)).Metadata.IsUnicode()
             );
         }
+
         #endregion
 
         #region PrecisionAttribute
@@ -851,6 +852,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Property<decimal>(nameof(F.DecimalField)).Metadata.GetScale()
             );
         }
+
         #endregion
         [ConditionalFact]
         public void Property_attribute_convention_runs_for_private_property()

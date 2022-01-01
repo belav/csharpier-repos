@@ -217,6 +217,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest23()
         {
@@ -272,6 +273,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest33()
         {
@@ -285,6 +287,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest34()
         {
@@ -298,6 +301,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest35()
         {
@@ -311,6 +315,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest38()
         {
@@ -352,6 +357,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest43()
         {
@@ -407,6 +413,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest48()
         {
@@ -448,6 +455,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest55()
         {
@@ -629,6 +637,7 @@ namespace System.Threading.Tasks.Tests.FromAsync
             TaskFromAsyncTest test = new TaskFromAsyncTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskFromAsyncTest75()
         {

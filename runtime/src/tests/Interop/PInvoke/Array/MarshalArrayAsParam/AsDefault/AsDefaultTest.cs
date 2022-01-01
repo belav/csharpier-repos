@@ -61,6 +61,7 @@ public class ArrayMarshal
 
     [DllImport("MarshalArrayLPArrayNative")]
     private static extern bool CStyle_Array_Object(object[] actual, int cActual);
+
     #endregion
 
     #region InAttribute attribute applied
@@ -109,6 +110,7 @@ public class ArrayMarshal
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Object")]
     private static extern bool CStyle_Array_Object_In([In] object[] actual, int cActual);
+
     #endregion
 
     #region InAttribute and OutAttribute attributes applied
@@ -163,6 +165,7 @@ public class ArrayMarshal
 
     [DllImport("MarshalArrayLPArrayNative")]
     private static extern bool CStyle_Array_Bool_InOut([In, Out] bool[] actual, int cActual);
+
     #endregion
 
     #region OutAttribute attributes applied
@@ -217,6 +220,7 @@ public class ArrayMarshal
 
     [DllImport("MarshalArrayLPArrayNative")]
     private static extern int Get_Multidimensional_Array_Sum(int[,] array, int rows, int columns);
+
     #endregion
 
     #region Marshal ByVal

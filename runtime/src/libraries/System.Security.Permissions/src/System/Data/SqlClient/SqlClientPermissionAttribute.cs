@@ -20,6 +20,7 @@ namespace System.Data.SqlClient
     {
         public SqlClientPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
         { }
+
         public override IPermission CreatePermission()
         {
             return null;

@@ -10,8 +10,10 @@ namespace System.DirectoryServices.AccountManagement
         public const DebugLevel DefaultDebugLevel =
 #if DEBUG
             DebugLevel.Info;
+
 #else
             DebugLevel.None;
+
 #endif
 
         public static DebugLevel DebugLevel => s_configSettings?.DebugLevel ?? DefaultDebugLevel;

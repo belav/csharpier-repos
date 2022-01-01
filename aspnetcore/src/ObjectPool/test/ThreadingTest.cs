@@ -4,6 +4,7 @@
 using System.Threading;
 using Xunit;
 
+
 namespace Microsoft.Extensions.ObjectPool;
 
 public class ThreadingTest

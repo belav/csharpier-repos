@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
+
 namespace Microsoft.AspNetCore.Analyzers.RenderTreeBuilder;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]

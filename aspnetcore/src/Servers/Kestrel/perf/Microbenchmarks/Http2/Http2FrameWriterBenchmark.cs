@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl;
 using Microsoft.AspNetCore.Testing;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class Http2FrameWriterBenchmark

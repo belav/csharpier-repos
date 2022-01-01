@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.JsonPatch.Adapters;
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Operations;
 
 public class Operation<TModel> : Operation where TModel : class

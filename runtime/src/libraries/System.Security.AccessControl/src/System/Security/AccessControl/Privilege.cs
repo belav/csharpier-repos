@@ -318,6 +318,7 @@ namespace System.Security.AccessControl
                     Dispose(false);
                 }
             }
+
             #endregion
 
             #region IDisposable implementation
@@ -349,6 +350,7 @@ namespace System.Security.AccessControl
 
                 this.disposed = true;
             }
+
             #endregion
 
             #region Reference Counting
@@ -374,6 +376,7 @@ namespace System.Security.AccessControl
             {
                 get { return this.referenceCount; }
             }
+
             #endregion
 
             #region Properties
@@ -401,6 +404,7 @@ namespace System.Security.AccessControl
 
             this.luid = LuidFromPrivilege(privilegeName);
         }
+
         #endregion
 
         //

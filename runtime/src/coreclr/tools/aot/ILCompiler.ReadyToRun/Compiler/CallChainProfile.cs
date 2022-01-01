@@ -46,6 +46,7 @@ namespace ILCompiler
         private int _methodResolvesAttempted = 0;
         private int _methodsSuccessfullyResolved = 0;
         private Dictionary<string, int> _resolveFails = new Dictionary<string, int>();
+
 #endif
 
         public CallChainProfile(
@@ -396,6 +397,7 @@ namespace ILCompiler
                 $"Successfully resolved {_methodsSuccessfullyResolved} methods ({(double)_methodsSuccessfullyResolved / (double)_methodResolvesAttempted:P})"
             );
         }
+
 #endif
 
         public IReadOnlyDictionary<MethodDesc, Dictionary<MethodDesc, int>> ResolvedProfileData =>

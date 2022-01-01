@@ -1414,6 +1414,7 @@ public class C
                 );
             }
         }
+
 #endif
         [Fact, WorkItem(31197, "https://github.com/dotnet/roslyn/issues/31197")]
         public void RefAssembly_CryptoHashFailedIsOnlyReportedOnce()
@@ -4132,6 +4133,7 @@ class C
 
             Assert.True(emitResult.Success);
         }
+
         #region "PE and metadata bits"
 
         [Fact]

@@ -12,6 +12,7 @@ namespace System.Xml.Tests
     public class TCValidateAfterAdd : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterAdd(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -176,6 +177,7 @@ namespace System.Xml.Tests
     public class TCValidateAfterRemove : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterRemove(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -421,6 +423,7 @@ namespace System.Xml.Tests
     public class TCValidateAfterReprocess : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterReprocess(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -563,6 +566,7 @@ namespace System.Xml.Tests
     public class TCValidateAfterAddInvalidSchema : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterAddInvalidSchema(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -791,6 +795,7 @@ namespace System.Xml.Tests
     public class TCXmlSchemaValidatorMisc : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCXmlSchemaValidatorMisc(ITestOutputHelper output) : base(output)
         {
             _output = output;

@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 public class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner

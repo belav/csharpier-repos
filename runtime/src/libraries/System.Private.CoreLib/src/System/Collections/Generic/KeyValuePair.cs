@@ -30,6 +30,7 @@ namespace System.Collections.Generic
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly TKey key; // Do not rename (binary serialization)
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly TValue value; // Do not rename (binary serialization)
 

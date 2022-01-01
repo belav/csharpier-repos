@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Identity.DefaultUI.WebSite;
 
 public class StartupBase<TUser, TContext>

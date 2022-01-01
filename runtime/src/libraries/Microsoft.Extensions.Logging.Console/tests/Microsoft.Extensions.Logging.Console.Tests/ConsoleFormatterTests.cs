@@ -242,6 +242,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
         private class NullNameConsoleFormatter : ConsoleFormatter
         {
             public NullNameConsoleFormatter() : base(null) { }
+
             public override void Write<TState>(
                 in LogEntry<TState> logEntry,
                 IExternalScopeProvider scopeProvider,
@@ -317,6 +318,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
         }
 
         internal SimpleConsoleFormatterOptions FormatterOptions { get; set; }
+
         public override void Write<TState>(
             in LogEntry<TState> logEntry,
             IExternalScopeProvider scopeProvider,

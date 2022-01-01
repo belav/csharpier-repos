@@ -410,6 +410,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             private int GetIndexFromPosition(int position) => position / _chunkSize;
+
             private int GetColumnFromPosition(int position) => position % _chunkSize;
         }
     }

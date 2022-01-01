@@ -211,11 +211,13 @@ namespace System.IO.Tests
             [MarshalAs(UnmanagedType.LPWStr)]
             public string shi502_netname;
             public uint shi502_type;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string shi502_remark;
             public int shi502_permissions;
             public int shi502_max_uses;
             public int shi502_current_uses;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string shi502_path;
             public IntPtr shi502_passwd;
@@ -396,6 +398,7 @@ namespace System.IO.Tests
         struct SP_DEVICE_INTERFACE_DETAIL_DATA
         {
             public int cbSize;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)] // 256 should be always enough for device interface path
             public string DevicePath;
         }

@@ -53,6 +53,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonExtensionData]
             private IDictionary<string, JToken> _additionalData;
         }
+
         #endregion
 
 #pragma warning restore 169

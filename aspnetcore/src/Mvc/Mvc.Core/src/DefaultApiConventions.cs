@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
@@ -39,6 +40,7 @@ public static class DefaultApiConventions
         [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object id
     ) { }
+
     #endregion
 
     /// <summary>
@@ -69,6 +71,7 @@ public static class DefaultApiConventions
         [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object model
     ) { }
+
     #endregion
 
     #region PUT
@@ -128,6 +131,7 @@ public static class DefaultApiConventions
         [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object model
     ) { }
+
     #endregion
 
     #region DELETE

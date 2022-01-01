@@ -258,6 +258,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             public int LastPosition =>
                 CloseBraceMissing ? CloseBracePosition - 1 : CloseBracePosition;
             public int FormatEndPosition => CloseBracePosition - 1;
+
             public Interpolation(
                 int openBracePosition,
                 int colonPosition,

@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 
 internal class NullDispatcher : Dispatcher

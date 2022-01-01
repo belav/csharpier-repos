@@ -24,6 +24,7 @@ namespace System.Drawing
     {
 #if FINALIZATION_WATCH
         private string _allocationSite = Graphics.GetAllocationStack();
+
 #endif
 
         // Handle to native GDI+ pen object.

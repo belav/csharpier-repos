@@ -22,12 +22,14 @@ namespace System.Security.Permissions
     public sealed class KeyContainerPermissionAttribute : CodeAccessSecurityAttribute
     {
         public KeyContainerPermissionAttribute(SecurityAction action) : base(action) { }
+
         public string KeyStore { get; set; }
         public string ProviderName { get; set; }
         public int ProviderType { get; set; }
         public string KeyContainerName { get; set; }
         public int KeySpec { get; set; }
         public KeyContainerPermissionFlags Flags { get; set; }
+
         public override IPermission CreatePermission()
         {
             return null;

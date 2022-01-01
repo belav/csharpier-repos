@@ -20,21 +20,26 @@ public class Test_short
 {
     [DllImport("libtest", EntryPoint = "mono_return_short1")]
     public static extern short1 mono_return_short1(short1 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short1
     {
         public short f1;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_short2")]
     public static extern short2 mono_return_short2(short2 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short2
     {
         public short f1,
             f2;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_short3")]
     public static extern short3 mono_return_short3(short3 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short3
     {
@@ -42,8 +47,10 @@ public class Test_short
             f2,
             f3;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_short4")]
     public static extern short4 mono_return_short4(short4 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short4
     {
@@ -52,8 +59,10 @@ public class Test_short
             f3,
             f4;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_short5")]
     public static extern short5 mono_return_short5(short5 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short5
     {
@@ -63,8 +72,10 @@ public class Test_short
             f4,
             f5;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_short6")]
     public static extern short6 mono_return_short6(short6 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short6
     {
@@ -75,8 +86,10 @@ public class Test_short
             f5,
             f6;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_short7")]
     public static extern short7 mono_return_short7(short7 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short7
     {
@@ -88,8 +101,10 @@ public class Test_short
             f6,
             f7;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_short8")]
     public static extern short8 mono_return_short8(short8 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short8
     {
@@ -102,10 +117,12 @@ public class Test_short
             f7,
             f8;
     }
+
     // This structure is 1 element too large to use the special return
     //  rules.
     [DllImport("libtest", EntryPoint = "mono_return_short9")]
     public static extern short9 mono_return_short9(short9 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short9
     {
@@ -126,12 +143,15 @@ public class Test_short
     {
         public short f1;
     };
+
     public struct short8_nested2
     {
         public short f8;
     };
+
     [DllImport("libtest", EntryPoint = "mono_return_short8_nested")]
     public static extern short8_nested mono_return_short8_nested(short8_nested s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct short8_nested
     {

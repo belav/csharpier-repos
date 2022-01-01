@@ -13,6 +13,7 @@ namespace System.Runtime.Caching
 #if DEBUG
         private static readonly bool s_tracingEnabled =
             Environment.GetEnvironmentVariable("DOTNET_SYSTEM_RUNTIME_CACHING_TRACING") == "true";
+
 #endif
 
         [Conditional("DEBUG")]

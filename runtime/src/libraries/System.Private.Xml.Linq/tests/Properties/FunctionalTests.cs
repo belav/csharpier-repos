@@ -35,6 +35,7 @@ namespace CoreXml.Test.XLinq
 
             Assert.False(module.HasFailures, module.GetFailuresInfo());
         }
+
         #region Class
         public partial class PropertiesTests : XLinqTestCase
         {
@@ -213,6 +214,7 @@ namespace CoreXml.Test.XLinq
                     }
                 );
             }
+
             public partial class XElement_Op_Eplicit : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElement_Op_Eplicit
@@ -293,12 +295,14 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class XElement_Op_Eplicit_Null : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElement_Op_Eplicit_Null
                 // Test Case
                 public override void AddChildren() { }
             }
+
             public partial class XElementName : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElementName
@@ -439,6 +443,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class XElementValue : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElementValue

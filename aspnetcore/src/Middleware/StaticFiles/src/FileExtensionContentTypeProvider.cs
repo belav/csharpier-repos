@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.StaticFiles;
 
 /// <summary>
@@ -422,6 +423,7 @@ public class FileExtensionContentTypeProvider : IContentTypeProvider
                 { ".zip", "application/x-zip-compressed" },
             }
         ) { }
+
     #endregion
 
     /// <summary>

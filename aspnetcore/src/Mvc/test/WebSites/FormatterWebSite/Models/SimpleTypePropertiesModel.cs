@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace FormatterWebSite;
 
 public class SimpleTypePropertiesModel

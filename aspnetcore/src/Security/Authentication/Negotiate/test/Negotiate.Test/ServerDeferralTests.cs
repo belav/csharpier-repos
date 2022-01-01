@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
 public class ServerDeferralTests

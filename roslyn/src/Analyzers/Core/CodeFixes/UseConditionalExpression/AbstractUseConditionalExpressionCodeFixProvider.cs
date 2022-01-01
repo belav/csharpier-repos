@@ -33,13 +33,16 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         protected abstract ISyntaxFacts SyntaxFacts { get; }
+
         protected abstract AbstractFormattingRule GetMultiLineFormattingRule();
 
 #if CODE_STYLE
         protected abstract ISyntaxFormattingService GetSyntaxFormattingService();
+
 #endif
 
         protected abstract TExpressionSyntax ConvertToExpression(IThrowOperation throwOperation);
+
         protected abstract TStatementSyntax WrapWithBlockIfAppropriate(
             TIfStatementSyntax ifStatement,
             TStatementSyntax statement

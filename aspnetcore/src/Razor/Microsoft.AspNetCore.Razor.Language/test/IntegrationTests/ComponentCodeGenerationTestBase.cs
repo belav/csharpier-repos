@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public abstract class ComponentCodeGenerationTestBase : RazorBaselineIntegrationTestBase
@@ -71,6 +72,7 @@ public abstract class ComponentCodeGenerationTestBase : RazorBaselineIntegration
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
+
     [Fact]
     public void ChildComponent_InFunctionsDirective()
     {
@@ -1198,6 +1200,7 @@ namespace Test
 
         Assert.Empty(generated.Diagnostics);
     }
+
     #endregion
 
     #region Bind
@@ -7480,6 +7483,7 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
+
     #endregion
 
     #region Misc

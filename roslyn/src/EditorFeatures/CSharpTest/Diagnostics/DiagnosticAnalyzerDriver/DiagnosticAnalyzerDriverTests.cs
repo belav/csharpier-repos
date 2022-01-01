@@ -1208,6 +1208,7 @@ class C
 
             public bool SymbolActionInvoked { get; set; }
             public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
             public sealed override void Initialize(AnalysisContext context) =>
                 context.RegisterSymbolAction(OnSymbol, SymbolKind.NamedType);
 

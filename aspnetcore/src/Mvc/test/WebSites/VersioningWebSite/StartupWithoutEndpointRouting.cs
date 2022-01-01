@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace VersioningWebSite;
 
 public class StartupWithoutEndpointRouting : Startup

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 internal static class CodeWriterExtensions

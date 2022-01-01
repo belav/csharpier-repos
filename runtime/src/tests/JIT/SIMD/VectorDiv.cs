@@ -28,6 +28,7 @@ internal partial class VectorTest
             return Pass;
         }
     }
+
     private class Vector4Test
     {
         public static int VectorDiv(float left, float right, float result)

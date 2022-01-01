@@ -14,6 +14,7 @@ namespace System.Xml.Serialization
 
 #if DEBUG
     using System.Diagnostics;
+
 #endif
 
     public abstract class SchemaImporter

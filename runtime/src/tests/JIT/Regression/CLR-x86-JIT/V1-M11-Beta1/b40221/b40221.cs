@@ -14,6 +14,7 @@ namespace Test
             while (a == 1)
                 throw new Exception();
         }
+
         static int Main()
         {
             try

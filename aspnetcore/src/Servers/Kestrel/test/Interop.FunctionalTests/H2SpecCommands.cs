@@ -12,6 +12,7 @@ using System.Xml;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Interop.FunctionalTests;
 
 public static class H2SpecCommands
@@ -36,6 +37,7 @@ public static class H2SpecCommands
     private static extern int chmod(string pathname, int mode);
 
     private static int chmod755(string pathname) => chmod(pathname, _0755);
+
     #endregion
 
     private const int TimeoutSeconds = 15;

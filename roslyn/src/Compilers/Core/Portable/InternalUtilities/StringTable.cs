@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis;
 
 #if DEBUG
 using System.Diagnostics;
+
 #endif
 
 namespace Roslyn.Utilities

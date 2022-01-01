@@ -7,6 +7,7 @@ using System.Linq;
 using Xunit;
 using Constants = Microsoft.AspNetCore.Http.Connections.Client.Internal.Constants;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
 public class UserAgentHeaderTest

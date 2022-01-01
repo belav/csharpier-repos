@@ -19,6 +19,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Win32;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 public class RegistryPolicyResolverTests

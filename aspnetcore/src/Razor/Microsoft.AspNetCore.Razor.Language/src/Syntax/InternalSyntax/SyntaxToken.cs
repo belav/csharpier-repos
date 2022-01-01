@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal class SyntaxToken : RazorSyntaxNode

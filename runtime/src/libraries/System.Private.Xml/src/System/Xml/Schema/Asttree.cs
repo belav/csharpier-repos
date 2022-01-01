@@ -292,6 +292,7 @@ namespace System.Xml.Schema
         private int _currentDepth; // current depth, trace the depth by myself... movetochild, movetoparent, movetoattribute
         private bool _isActive; // not active any more after moving out context node
         private readonly Asttree _axisTree; // reference to the whole tree
+
         // for each subtree i need to keep a stack...
         private readonly ArrayList _axisStack; // of AxisStack
 

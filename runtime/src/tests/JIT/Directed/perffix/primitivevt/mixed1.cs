@@ -1,11 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
+
 unsafe class testout1
 {
     public struct VT_0_4_4_4
     {
         public int a5_0_4_4_4;
+
         public VT_0_4_4_4(int i)
         {
             a5_0_4_4_4 = 1;
@@ -15,6 +17,7 @@ unsafe class testout1
     public struct VT_0_4_4_3
     {
         public int a1_0_4_4_3;
+
         public VT_0_4_4_3(int i)
         {
             a1_0_4_4_3 = 1;
@@ -24,6 +27,7 @@ unsafe class testout1
     public struct VT_0_4_4_2
     {
         public int a0_0_4_4_2;
+
         public VT_0_4_4_2(int i)
         {
             a0_0_4_4_2 = 1;
@@ -33,6 +37,7 @@ unsafe class testout1
     public struct VT_0_4_3_3
     {
         public int a6_0_4_3_3;
+
         public VT_0_4_3_3(int i)
         {
             a6_0_4_3_3 = 1;
@@ -42,6 +47,7 @@ unsafe class testout1
     public struct VT_0_4_2_3
     {
         public int a1_0_4_2_3;
+
         public VT_0_4_2_3(int i)
         {
             a1_0_4_2_3 = 1;
@@ -51,6 +57,7 @@ unsafe class testout1
     public struct VT_0_4_2_1
     {
         public int a3_0_4_2_1;
+
         public VT_0_4_2_1(int i)
         {
             a3_0_4_2_1 = 1;
@@ -60,6 +67,7 @@ unsafe class testout1
     public struct VT_0_2_4_4
     {
         public uint a1_0_2_4_4;
+
         public VT_0_2_4_4(int i)
         {
             a1_0_2_4_4 = 1;
@@ -69,6 +77,7 @@ unsafe class testout1
     public struct VT_0_2_3_1
     {
         public int a5_0_2_3_1;
+
         public VT_0_2_3_1(int i)
         {
             a5_0_2_3_1 = 1;
@@ -78,6 +87,7 @@ unsafe class testout1
     public struct VT_0_2_2_4
     {
         public int a2_0_2_2_4;
+
         public VT_0_2_2_4(int i)
         {
             a2_0_2_2_4 = 1;
@@ -87,6 +97,7 @@ unsafe class testout1
     public struct VT_0_2_2_3
     {
         public int a2_0_2_2_3;
+
         public VT_0_2_2_3(int i)
         {
             a2_0_2_2_3 = 1;
@@ -96,6 +107,7 @@ unsafe class testout1
     public struct VT_0_2_2_2
     {
         public int a4_0_2_2_2;
+
         public VT_0_2_2_2(int i)
         {
             a4_0_2_2_2 = 1;
@@ -105,6 +117,7 @@ unsafe class testout1
     public struct VT_0_2_2_1
     {
         public int a0_0_2_2_1;
+
         public VT_0_2_2_1(int i)
         {
             a0_0_2_2_1 = 1;
@@ -114,6 +127,7 @@ unsafe class testout1
     public struct VT_0_1_4_1
     {
         public int a4_0_1_4_1;
+
         public VT_0_1_4_1(int i)
         {
             a4_0_1_4_1 = 1;
@@ -123,6 +137,7 @@ unsafe class testout1
     public struct VT_0_1_3_4
     {
         public uint a2_0_1_3_4;
+
         public VT_0_1_3_4(int i)
         {
             a2_0_1_3_4 = 1;
@@ -132,6 +147,7 @@ unsafe class testout1
     public struct VT_0_1_3_2
     {
         public int a7_0_1_3_2;
+
         public VT_0_1_3_2(int i)
         {
             a7_0_1_3_2 = 1;
@@ -141,6 +157,7 @@ unsafe class testout1
     public struct VT_0_1_3_1
     {
         public int a6_0_1_3_1;
+
         public VT_0_1_3_1(int i)
         {
             a6_0_1_3_1 = 1;
@@ -150,6 +167,7 @@ unsafe class testout1
     public struct VT_0_1_1_2
     {
         public int a9_0_1_1_2;
+
         public VT_0_1_1_2(int i)
         {
             a9_0_1_1_2 = 1;
@@ -159,6 +177,7 @@ unsafe class testout1
     public struct VT_0_1_1_1
     {
         public uint a1_0_1_1_1;
+
         public VT_0_1_1_1(int i)
         {
             a1_0_1_1_1 = 1;
@@ -168,6 +187,7 @@ unsafe class testout1
     public struct VT_0_4_4
     {
         public uint a1_0_4_4;
+
         public VT_0_4_4(int i)
         {
             a1_0_4_4 = 1;
@@ -177,6 +197,7 @@ unsafe class testout1
     public struct VT_0_2_3
     {
         public int a1_0_2_3;
+
         public VT_0_2_3(int i)
         {
             a1_0_2_3 = 1;
@@ -186,6 +207,7 @@ unsafe class testout1
     public struct VT_0_2_2
     {
         public int a3_0_2_2;
+
         public VT_0_2_2(int i)
         {
             a3_0_2_2 = 1;
@@ -195,6 +217,7 @@ unsafe class testout1
     public struct VT_0_1_3
     {
         public int a1_0_1_3;
+
         public VT_0_1_3(int i)
         {
             a1_0_1_3 = 1;
@@ -204,11 +227,13 @@ unsafe class testout1
     public struct VT_0_2
     {
         public uint a1_0_2;
+
         public VT_0_2(int i)
         {
             a1_0_2 = 1;
         }
     }
+
     static ulong[] arr1d_0_4_4_4 = new ulong[21];
     static double a6_0_4_4_4 = 68707.531122278058;
 

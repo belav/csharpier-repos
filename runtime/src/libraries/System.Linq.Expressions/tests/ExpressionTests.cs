@@ -275,6 +275,7 @@ namespace System.Linq.Expressions.Tests
         private static int TestField;
         private const int TestConstant = 0;
         private static readonly int TestInitOnlyField = 0;
+
 #pragma warning restore 0169, 0414
 
         private static int Unreadable

@@ -572,6 +572,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
                 Assert.False(list.Contains(items[items.Length / 2])); //"Should not contain item"
             }
+
             public void ContainsNullWhenReference(T?[] items, T? value)
             {
                 if ((object?)value != null)
@@ -683,6 +684,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 list.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void ClearMultipleTimesEmptyList(int times)
             {
                 SegmentedList<T> list = new SegmentedList<T>();
@@ -693,6 +695,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void ClearNonEmptyList(T[] items)
             {
                 SegmentedList<T> list = new SegmentedList<T>(items);
@@ -718,6 +721,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 _ilist.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void NonGenericIListClearMultipleTimesEmptyList(int times)
             {
                 SegmentedList<T> list = new SegmentedList<T>();
@@ -729,6 +733,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void NonGenericIListClearNonEmptyList(T[] items)
             {
                 SegmentedList<T> list = new SegmentedList<T>(items);

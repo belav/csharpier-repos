@@ -136,6 +136,7 @@ namespace ILCompiler.DependencyAnalysis
             string,
             NodeInfo
         >();
+
 #endif
 
         public ReadyToRunObjectWriter(

@@ -16,6 +16,7 @@ namespace System.Xml.Serialization
 
 #if DEBUG
     using System.Diagnostics;
+
 #endif
 
     public class XmlSchemaImporter : SchemaImporter
@@ -514,6 +515,7 @@ namespace System.Xml.Serialization
         {
             // nop
         }
+
         private string GenerateUniqueTypeName(string desiredName, string? ns)
         {
             int i = 1;

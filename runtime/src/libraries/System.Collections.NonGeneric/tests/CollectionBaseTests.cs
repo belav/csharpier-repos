@@ -382,6 +382,7 @@ namespace System.Collections.Tests
                 () => collBase.Capacity = collBase.Count - 1
             ); // Capacity < list.Count
         }
+
         [Fact]
         public static void Add_Called()
         {

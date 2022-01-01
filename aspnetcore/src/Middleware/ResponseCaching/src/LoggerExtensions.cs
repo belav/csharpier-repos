@@ -5,6 +5,7 @@ using System;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.ResponseCaching;
 
 /// <summary>
@@ -130,6 +131,7 @@ internal static partial class LoggerExtensions
         EventName = "ResponseWithNoStoreNotCacheable"
     )]
     internal static partial void ResponseWithNoStoreNotCacheable(this ILogger logger);
+
     [LoggerMessage(
         13,
         LogLevel.Debug,

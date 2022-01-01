@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Builder;
 
+
 namespace Microsoft.AspNetCore.SpaServices;
 
 /// <summary>

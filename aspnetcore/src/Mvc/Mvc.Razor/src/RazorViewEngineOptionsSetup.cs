@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 internal class RazorViewEngineOptionsSetup : IConfigureOptions<RazorViewEngineOptions>

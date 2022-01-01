@@ -11,6 +11,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public decimal? Number { get; set; }
         }
+
         class Destination
         {
             public decimal? OddNumber { get; set; }

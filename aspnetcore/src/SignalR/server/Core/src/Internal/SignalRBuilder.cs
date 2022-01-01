@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class SignalRServerBuilder : ISignalRServerBuilder

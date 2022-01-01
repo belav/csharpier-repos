@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration.Json;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 /// <summary>

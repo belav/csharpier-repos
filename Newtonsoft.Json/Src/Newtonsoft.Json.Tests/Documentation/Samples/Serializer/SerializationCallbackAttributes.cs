@@ -31,6 +31,7 @@ using System.Text;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -92,6 +93,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Member4 = "This value was set after deserialization.";
             }
         }
+
         #endregion
 
         [Test]

@@ -214,6 +214,7 @@ public class Tests
             return pUnk3;
         }
     }
+
 	#endregion
 
     public class Foo

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 public class DelegatingEnumeratorTest

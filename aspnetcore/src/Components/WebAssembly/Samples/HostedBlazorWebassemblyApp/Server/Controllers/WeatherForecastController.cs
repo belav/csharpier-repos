@@ -7,6 +7,7 @@ using HostedBlazorWebassemblyApp.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+
 namespace HostedBlazorWebassemblyApp.Server.Controllers;
 
 [ApiController]

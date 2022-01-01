@@ -119,6 +119,7 @@ namespace System.Net.Mime
         protected abstract void AppendEncodedCRLF();
 
         protected abstract bool LineBreakNeeded(byte b);
+
         protected abstract bool LineBreakNeeded(byte[] bytes, int count);
 
         protected abstract int GetCodepointSize(string value, int i);

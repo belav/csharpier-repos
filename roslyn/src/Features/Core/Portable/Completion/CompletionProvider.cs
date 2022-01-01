@@ -63,6 +63,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 trigger,
                 options.ToSet(languageServices.Language)
             );
+
 #pragma warning restore
 
         /// <summary>
@@ -104,6 +105,7 @@ namespace Microsoft.CodeAnalysis.Completion
 #pragma warning disable RS0030 // Do not used banned APIs
             =>
             GetDescriptionAsync(document, item, cancellationToken);
+
 #pragma warning restore
 
         /// <summary>

@@ -45,8 +45,10 @@ using NUnit.Framework;
 using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Linq.JsonPath
@@ -105,6 +107,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 }
             );
         }
+
 #endif
 
         [Test]
@@ -1112,6 +1115,7 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0]));
             Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1]));
         }
+
 #endif
 
         [Test]

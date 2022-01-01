@@ -48,6 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         public override IEnumerable<Cci.IFileReference> GetFiles(EmitContext context) =>
             SpecializedCollections.EmptyEnumerable<Cci.IFileReference>();
+
         public override ISourceAssemblySymbolInternal? SourceAssemblyOpt => null;
     }
 }

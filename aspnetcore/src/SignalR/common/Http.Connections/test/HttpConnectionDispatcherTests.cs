@@ -47,6 +47,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
 public class HttpConnectionDispatcherTests : VerifiableLoggedTest
@@ -1224,11 +1225,13 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
     {
         private readonly SyncPoint _sync;
         private bool _isSSE;
+
         public BlockingStream(SyncPoint sync, bool isSSE = false)
         {
             _sync = sync;
             _isSSE = isSSE;
         }
+
         public override bool CanRead => throw new NotImplementedException();
         public override bool CanSeek => throw new NotImplementedException();
         public override bool CanWrite => throw new NotImplementedException();
@@ -1238,6 +1241,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             get => throw new NotImplementedException();
             set => throw new NotImplementedException();
         }
+
         public override Task CopyToAsync(
             Stream destination,
             int bufferSize,
@@ -1246,23 +1250,29 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         {
             throw new NotImplementedException();
         }
+
         public override void Flush() { }
+
         public override int Read(byte[] buffer, int offset, int count)
         {
             throw new NotImplementedException();
         }
+
         public override long Seek(long offset, SeekOrigin origin)
         {
             throw new NotImplementedException();
         }
+
         public override void SetLength(long value)
         {
             throw new NotImplementedException();
         }
+
         public override void Write(byte[] buffer, int offset, int count)
         {
             throw new NotImplementedException();
         }
+
         public override async Task WriteAsync(
             byte[] buffer,
             int offset,
@@ -1279,6 +1289,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             await _sync.WaitToContinue();
             cancellationToken.ThrowIfCancellationRequested();
         }
+
         public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
@@ -2707,6 +2718,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         public CancellationToken RequestAborted { get; set; }
 
         private readonly CancellationTokenSource _cts;
+
         public CustomHttpRequestLifetimeFeature()
         {
             _cts = new CancellationTokenSource();

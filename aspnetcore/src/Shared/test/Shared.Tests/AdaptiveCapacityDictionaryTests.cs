@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Internal.Tests;
 
 public class AdaptiveCapacityDictionaryTests

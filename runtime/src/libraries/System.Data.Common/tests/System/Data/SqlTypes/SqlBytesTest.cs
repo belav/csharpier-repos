@@ -47,6 +47,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Throws<ArgumentOutOfRangeException>(() => bytes[-1]);
             Assert.Throws<ArgumentOutOfRangeException>(() => bytes[10]);
         }
+
         [Fact]
         public void SqlBytesLength()
         {
@@ -61,6 +62,7 @@ namespace System.Data.Tests.SqlTypes
             bytes = new SqlBytes(b);
             Assert.Equal(10, bytes.Length);
         }
+
         [Fact]
         public void SqlBytesMaxLength()
         {
@@ -73,12 +75,14 @@ namespace System.Data.Tests.SqlTypes
             bytes = new SqlBytes(b);
             Assert.Equal(10, bytes.MaxLength);
         }
+
         [Fact]
         public void SqlBytesNull()
         {
             SqlBytes bytes = SqlBytes.Null;
             Assert.True(bytes.IsNull);
         }
+
         [Fact]
         public void SqlBytesStorage()
         {
@@ -97,6 +101,7 @@ namespace System.Data.Tests.SqlTypes
             bytes = new SqlBytes(fs);
             Assert.Throws<SqlNullValueException>(() => bytes.Storage);
         }
+
         [Fact]
         public void SqlBytesValue()
         {
@@ -108,6 +113,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(0, b1[0]);
             Assert.Equal(10, b2[0]);
         }
+
         [Fact]
         public void SqlBytesSetLength()
         {
@@ -123,6 +129,7 @@ namespace System.Data.Tests.SqlTypes
             bytes.SetLength(2);
             Assert.Equal(2, bytes.Length);
         }
+
         [Fact]
         public void SqlBytesSetNull()
         {
@@ -133,6 +140,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Throws<SqlNullValueException>(() => bytes.Length);
             Assert.True(bytes.IsNull);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

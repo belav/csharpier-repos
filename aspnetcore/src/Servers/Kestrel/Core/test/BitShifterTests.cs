@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class BitShifterTests

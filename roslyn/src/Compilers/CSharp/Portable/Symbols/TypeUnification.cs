@@ -68,6 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return type;
         }
+
 #endif
 
         private static bool CanUnifyHelper(

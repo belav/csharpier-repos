@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.DataProtection.Test.Shared;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
 // This class tests both the properties and the output of hash algorithms.

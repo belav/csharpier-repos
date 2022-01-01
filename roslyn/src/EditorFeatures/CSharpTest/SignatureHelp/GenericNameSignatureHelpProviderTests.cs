@@ -1076,6 +1076,7 @@ public class C<T>
                 hideAdvancedMembers: false
             );
         }
+
         #endregion
 
         [WorkItem(1083601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1083601")]

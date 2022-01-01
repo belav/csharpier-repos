@@ -5,6 +5,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.SignalR.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class DefaultHubActivatorBenchmark

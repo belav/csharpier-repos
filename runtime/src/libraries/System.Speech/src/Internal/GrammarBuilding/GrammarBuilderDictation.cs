@@ -28,6 +28,7 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return _category == refObj._category;
         }
+
         public override int GetHashCode()
         {
             return _category == null ? 0 : _category.GetHashCode();

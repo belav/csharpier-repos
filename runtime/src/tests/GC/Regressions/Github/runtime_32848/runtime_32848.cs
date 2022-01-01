@@ -8,10 +8,12 @@ using System.Runtime.CompilerServices;
 public struct MyStruct<TRequest, TResponse>
 {
     int _id;
+
     public MyStruct(int id)
     {
         _id = id;
     }
+
     public override string ToString() => this.GetType().ToString() + " = " + _id;
 }
 
@@ -42,6 +44,7 @@ public class StructCreator : BaseStructCreator
     {
         return new MyStructWrapper<TRequest, TResponse>(CreateCall<TRequest, TResponse>());
     }
+
     protected virtual MyStruct<TRequest, TResponse> CreateCall<TRequest, TResponse>()
         where TRequest : class
     {
@@ -66,6 +69,7 @@ public class Test_runtime_32848
         var wrapper = creator.GetMyStructWrapper<Exception, GenStruct<string>>();
         return wrapper.ToString();
     }
+
     public static int Main()
     {
         Console.WriteLine(

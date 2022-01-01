@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class ComponentGenericTypeIntegrationTest : RazorIntegrationTestBase

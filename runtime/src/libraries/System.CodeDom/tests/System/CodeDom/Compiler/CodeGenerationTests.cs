@@ -118,6 +118,7 @@ namespace System.CodeDom.Compiler.Tests
         }
 
         protected abstract CodeDomProvider GetProvider();
+
         protected abstract string GetEmptyProgramSource();
 
         protected static CodeStatement CreateVariableIncrementExpression(

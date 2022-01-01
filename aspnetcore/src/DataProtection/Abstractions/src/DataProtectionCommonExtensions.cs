@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.DataProtection.Abstractions;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 /// <summary>

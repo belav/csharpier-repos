@@ -19,42 +19,49 @@ namespace BasicEventSourceTests
         Blue,
         Green
     };
+
     internal enum ColorUInt32 : uint
     {
         Red,
         Blue,
         Green
     };
+
     internal enum ColorByte : byte
     {
         Red,
         Blue,
         Green
     };
+
     internal enum ColorSByte : sbyte
     {
         Red,
         Blue,
         Green
     };
+
     internal enum ColorInt16 : short
     {
         Red,
         Blue,
         Green
     };
+
     internal enum ColorUInt16 : ushort
     {
         Red,
         Blue,
         Green
     };
+
     internal enum ColorInt64 : long
     {
         Red,
         Blue,
         Green
     };
+
     internal enum ColorUInt64 : ulong
     {
         Red,

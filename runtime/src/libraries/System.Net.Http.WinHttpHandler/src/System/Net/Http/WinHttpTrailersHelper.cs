@@ -15,9 +15,11 @@ namespace System.Net.Http
         // Trailer property name was chosen to be descriptive and be unlikely to collide with a user set property.
         // Apps and libraries will use this key so it shouldn't change.
         private const string RequestMessagePropertyName = "__ResponseTrailers";
+
         private sealed class HttpResponseTrailers : HttpHeaders
         {
         }
+
 #endif
         private static Lazy<bool> s_trailersSupported = new Lazy<bool>(GetTrailersSupported);
         public static bool OsSupportsTrailers => s_trailersSupported.Value;

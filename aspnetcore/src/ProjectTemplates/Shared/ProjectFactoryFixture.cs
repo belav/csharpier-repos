@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
 
+
 namespace Templates.Test.Helpers;
 
 public class ProjectFactoryFixture : IDisposable

@@ -166,10 +166,12 @@ namespace Microsoft.CodeAnalysis.Operations
             Context = context;
             Original = original;
         }
+
         public IMethodSymbol Symbol => Original.Symbol;
 
         protected override IOperation GetCurrent(int slot, int index) =>
             throw ExceptionUtilities.UnexpectedValue((slot, index));
+
         protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex
@@ -183,6 +185,7 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitFlowAnonymousFunction(this);
         }
+
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
@@ -340,6 +343,7 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitDynamicObjectCreation(this);
         }
+
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
@@ -423,6 +427,7 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitDynamicInvocation(this);
         }
+
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
@@ -506,6 +511,7 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitDynamicIndexerAccess(this);
         }
+
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument

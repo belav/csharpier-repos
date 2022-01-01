@@ -100,6 +100,7 @@ namespace System.Xml
             int offset,
             int count
         );
+
         protected abstract void WriteArray(
             XmlDictionaryWriter writer,
             string prefix,

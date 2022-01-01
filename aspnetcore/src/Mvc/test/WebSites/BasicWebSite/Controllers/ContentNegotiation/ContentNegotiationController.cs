@@ -4,6 +4,7 @@
 using BasicWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class ContentNegotiationController : Controller

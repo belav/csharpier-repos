@@ -18,8 +18,10 @@ namespace System.ComponentModel.Tests
     public abstract class TypeConverterTestBase
     {
         public abstract TypeConverter Converter { get; }
+
         public virtual IEnumerable<ConvertTest> ConvertToTestData() =>
             Enumerable.Empty<ConvertTest>();
+
         public virtual IEnumerable<ConvertTest> ConvertFromTestData() =>
             Enumerable.Empty<ConvertTest>();
 

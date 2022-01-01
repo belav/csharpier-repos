@@ -214,6 +214,7 @@ namespace System.Net.Sockets.Tests
             return ((IPEndPoint)socket.LocalEndPoint).Port;
         }
     }
+
     public abstract class LocalEndPointTestIPv4<T> : LocalEndPointTest<T>
         where T : SocketHelperBase, new()
     {

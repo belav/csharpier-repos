@@ -79,6 +79,7 @@ namespace System.Web.Razor.Parser
         {
             return ParseCore(new SeekableTextReader(input));
         }
+
 #pragma warning restore 0618
 
         public virtual Task CreateParseTask(

@@ -14,11 +14,14 @@ using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
 #if TESTUTILS
 using Microsoft.AspNetCore.Testing;
+
 #else
 using System.Threading.Tasks.Extensions;
+
 #endif
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
+
 #if TESTUTILS
 public
 #else

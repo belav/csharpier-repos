@@ -249,6 +249,7 @@ namespace System.Net.Http.Formatting
             // Lower levels convert DBNull.Value to empty string on read
             Assert.Equal(String.Empty, readObj);
         }
+
 #endif
 
         [Fact]

@@ -7,6 +7,7 @@ using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 internal class ClientErrorResultFilter : IAlwaysRunResultFilter, IOrderedFilter

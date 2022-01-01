@@ -32,6 +32,7 @@ public static partial class DataContractJsonSerializerTests
         Assert.True(method != null, $"No method named {SerializationOptionSetterName}");
         method.Invoke(null, new object[] { 1 });
     }
+
 #endif
     [Fact]
     public static void DCJS_BoolAsRoot()
@@ -1822,6 +1823,7 @@ public static partial class DataContractJsonSerializerTests
             return PrivateProperty;
         }
     }
+
 #endregion
 
     [Fact]
@@ -4114,6 +4116,7 @@ public static partial class DataContractJsonSerializerTests
 
     private static string s_errorMsg =
         "The field/property {0} value of deserialized object is wrong";
+
     private static string getCheckFailureMsg(string propertyName)
     {
         return string.Format(s_errorMsg, propertyName);

@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Text;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 internal static class TextSpanExtensions

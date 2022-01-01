@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 #if NETSTANDARD2_0 || NETFRAMEWORK
 using System.Numerics.Hashing;
+
 #endif
 
 namespace System

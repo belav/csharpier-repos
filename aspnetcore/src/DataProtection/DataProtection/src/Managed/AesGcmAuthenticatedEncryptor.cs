@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.SP800_108;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
 // An encryptor that uses AesGcm to do encryption

@@ -73,6 +73,7 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.Unknown(t);
         }
+
         #endregion
 
         #region meta
@@ -409,6 +410,7 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.Sum(collection);
         }
+
         #endregion // collection operators
 
         #region arithmetic operators
@@ -490,6 +492,7 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.StrParseQName(str, ns);
         }
+
         #endregion // string operators
 
         #region value comparison operators
@@ -612,6 +615,7 @@ namespace System.Xml.Xsl.Qil
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);
             return _f.Function(args, sideEffects, resultType);
         }
+
         public QilFunction Function(QilList args, QilNode defn, QilNode sideEffects)
         {
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);
@@ -624,6 +628,7 @@ namespace System.Xml.Xsl.Qil
             Debug.Assert(func.Arguments.Count == args.Count);
             return _f.Invoke(func, args);
         }
+
         #endregion // function definition and invocation
 
         #region XML navigation
@@ -694,6 +699,7 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.Deref(context, id);
         }
+
         #endregion // XML navigation
 
         #region XML construction

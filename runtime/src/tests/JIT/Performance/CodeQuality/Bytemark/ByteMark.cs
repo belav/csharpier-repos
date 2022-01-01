@@ -72,13 +72,16 @@ internal class global
     public const long MINIMUM_TICKS = 60; // 60 msecs
 #if DEBUG
     public const int MINIMUM_SECONDS = 1;
+
 #else
     public const int MINIMUM_SECONDS = 1;
+
 #endif
 
     public const int NUMNUMARRAYS = 1000;
     public const int NUMARRAYSIZE = 8111;
     public const int STRINGARRAYSIZE = 8111;
+
     // This is the upper limit of number of string arrays to sort in one
     // iteration. If we can sort more than this number of arrays in less
     // than MINIMUM_TICKS an exception is thrown.
@@ -94,8 +97,10 @@ internal class global
     // BitOps constants
 #if LONG64
     public const int BITFARRAYSIZE = 16384;
+
 #else
     public const int BITFARRAYSIZE = 32768;
+
 #endif
 
     // IDEA constants
@@ -130,7 +135,9 @@ public abstract class HarnessTest
     public int request_secs; /* # of seconds requested */
 
     public abstract string Name();
+
     public abstract void ShowStats();
+
     public abstract double Run();
 }
 
@@ -138,6 +145,7 @@ public abstract class SortStruct : HarnessTest
 {
     public short numarrays = global.NUMNUMARRAYS; /* # of arrays */
     public int arraysize = global.NUMARRAYSIZE; /* # of elements in array */
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
@@ -149,6 +157,7 @@ public abstract class StringSortStruct : HarnessTest
 {
     public short numarrays = global.NUMNUMARRAYS; /* # of arrays */
     public int arraysize = global.STRINGARRAYSIZE; /* # of elements in array */
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
@@ -160,6 +169,7 @@ public abstract class HuffStruct : HarnessTest
 {
     public int arraysize = global.HUFFARRAYSIZE;
     public int loops = 0;
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Array size: {0}", arraysize));
@@ -170,6 +180,7 @@ public abstract class HuffStruct : HarnessTest
 public abstract class FourierStruct : HarnessTest
 {
     public int arraysize = global.FOURIERARRAYSIZE;
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Number of coefficients: {0}", arraysize));
@@ -179,6 +190,7 @@ public abstract class FourierStruct : HarnessTest
 public abstract class AssignStruct : HarnessTest
 {
     public short numarrays = global.NUMNUMARRAYS; /* # of elements in array */
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
@@ -189,6 +201,7 @@ public abstract class BitOpStruct : HarnessTest
 {
     public int bitoparraysize; /* Total # of bitfield ops */
     public int bitfieldarraysize = global.BITFARRAYSIZE; /* Bit field array size */
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Operations array size: {0}", bitoparraysize));
@@ -200,6 +213,7 @@ public abstract class IDEAStruct : HarnessTest
 {
     public int arraysize = global.IDEAARRAYSIZE; /* Size of array */
     public int loops; /* # of times to convert */
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Array size: {0}", arraysize));
@@ -210,6 +224,7 @@ public abstract class IDEAStruct : HarnessTest
 public abstract class LUStruct : HarnessTest
 {
     public int numarrays;
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Number of arrays: {0}", numarrays));
@@ -220,6 +235,7 @@ public abstract class NNetStruct : HarnessTest
 {
     public int loops; /* # of times to learn */
     public double iterspersec; /* Results */
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Number of loops: {0}", loops));
@@ -230,6 +246,7 @@ public abstract class EmFloatStruct : HarnessTest
 {
     public int arraysize = global.EMFARRAYSIZE; /* Size of array */
     public int loops; /* Loops per iterations */
+
     public override void ShowStats()
     {
         ByteMark.OutputString(string.Format("  Number of loops: {0}", loops));

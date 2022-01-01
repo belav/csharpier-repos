@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Internal;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
 public class MemoryBufferWriterTests
@@ -394,6 +395,7 @@ public class MemoryBufferWriterTests
             Assert.Equal(4, data[3]);
         }
     }
+
 #endif
 
     [Fact]

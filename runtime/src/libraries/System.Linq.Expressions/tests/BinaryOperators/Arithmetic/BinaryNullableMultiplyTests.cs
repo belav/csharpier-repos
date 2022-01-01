@@ -268,6 +268,7 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(expected, f());
         }
+
         private static void VerifyNullableShortMultiply(short? a, short? b, bool useInterpreter)
         {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(

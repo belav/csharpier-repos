@@ -85,6 +85,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 GetApplicationPartitionType(context),
                 directoryEntryMgr
             ) { }
+
         #endregion constructors
 
         #region IDisposable
@@ -118,6 +119,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
             }
         }
+
         #endregion IDisposable
 
         #region public methods
@@ -1029,6 +1031,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
             }
         }
+
         #endregion public properties
 
         #region private methods

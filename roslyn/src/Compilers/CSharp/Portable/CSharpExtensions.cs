@@ -435,6 +435,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return ((CSharpSyntaxNode)node).GetLastDirective(predicate);
         }
+
         #endregion
 
         #region SyntaxTree
@@ -488,6 +489,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return ((CSharpSyntaxTree)tree).GetPragmaDirectiveWarningState(id, position);
         }
+
         #endregion
 
         #region Compilation
@@ -513,6 +515,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return Conversion.NoConversion;
             }
         }
+
         #endregion
 
         #region SemanticModel

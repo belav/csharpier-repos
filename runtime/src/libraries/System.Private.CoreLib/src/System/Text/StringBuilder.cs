@@ -1273,6 +1273,7 @@ namespace System.Text
 
 #pragma warning disable CA1830 // Prefer strongly-typed Append and Insert method overloads on StringBuilder. No need to fix for the builder itself
         public StringBuilder Append(bool value) => Append(value.ToString());
+
 #pragma warning restore CA1830
 
         public StringBuilder Append(char value)
@@ -2963,8 +2964,10 @@ namespace System.Text
 
             /// <summary>The associated StringBuilder to which to append.</summary>
             internal readonly StringBuilder _stringBuilder;
+
             /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
             private readonly IFormatProvider? _provider;
+
             /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
             /// <remarks>
             /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive
@@ -3200,6 +3203,7 @@ namespace System.Text
                 AppendFormatted(handler.Text, alignment);
                 handler.Clear();
             }
+
             #endregion
 
             #region AppendFormatted ReadOnlySpan<char>
@@ -3247,6 +3251,7 @@ namespace System.Text
                     }
                 }
             }
+
             #endregion
 
             #region AppendFormatted string
@@ -3273,6 +3278,7 @@ namespace System.Text
                 // simply to disambiguate between ROS<char> and object, just in case someone does specify a format, as
                 // string is implicitly convertible to both. Just delegate to the T-based implementation.
                 AppendFormatted<string?>(value, alignment, format);
+
             #endregion
 
             #region AppendFormatted object
@@ -3285,6 +3291,7 @@ namespace System.Text
                 // formatted with both an alignment and a format, or b) the compiler is unable to target type to T. It
                 // exists purely to help make cases from (b) compile. Just delegate to the T-based implementation.
                 AppendFormatted<object?>(value, alignment, format);
+
             #endregion
             #endregion
 

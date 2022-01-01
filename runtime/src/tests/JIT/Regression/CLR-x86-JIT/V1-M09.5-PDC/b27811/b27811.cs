@@ -15,6 +15,7 @@ namespace Test
         {
             return null;
         }
+
         public static bool Static4(uint[] param1)
         {
             return false;

@@ -54,24 +54,29 @@ namespace Microsoft.CodeAnalysis.GenerateType
             CancellationToken cancellationToken,
             out GenerateTypeServiceStateOptions generateTypeServiceStateOptions
         );
+
         protected abstract TExpressionSyntax GetLeftSideOfDot(TSimpleNameSyntax simpleName);
+
         protected abstract bool TryGetArgumentList(
             TObjectCreationExpressionSyntax objectCreationExpression,
             out IList<TArgumentSyntax> argumentList
         );
 
         protected abstract string DefaultFileExtension { get; }
+
         protected abstract ImmutableArray<ITypeParameterSymbol> GetTypeParameters(
             State state,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
         );
+
         protected abstract Accessibility GetAccessibility(
             State state,
             SemanticModel semanticModel,
             bool intoNamespace,
             CancellationToken cancellationToken
         );
+
         protected abstract IList<ParameterName> GenerateParameterNames(
             SemanticModel semanticModel,
             IList<TArgumentSyntax> arguments,
@@ -83,6 +88,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
             TSimpleNameSyntax simpleName,
             CancellationToken cancellationToken
         );
+
         protected abstract ITypeSymbol DetermineArgumentType(
             SemanticModel semanticModel,
             TArgumentSyntax argument,
@@ -90,24 +96,33 @@ namespace Microsoft.CodeAnalysis.GenerateType
         );
 
         protected abstract bool IsInCatchDeclaration(TExpressionSyntax expression);
+
         protected abstract bool IsArrayElementType(TExpressionSyntax expression);
+
         protected abstract bool IsInVariableTypeContext(TExpressionSyntax expression);
+
         protected abstract bool IsInValueTypeConstraintContext(
             SemanticModel semanticModel,
             TExpressionSyntax expression,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsInInterfaceList(TExpressionSyntax expression);
+
         internal abstract bool TryGetBaseList(
             TExpressionSyntax expression,
             out TypeKindOptions returnValue
         );
+
         internal abstract bool IsPublicOnlyAccessibility(
             TExpressionSyntax expression,
             Project project
         );
+
         internal abstract bool IsGenericName(TSimpleNameSyntax simpleName);
+
         internal abstract bool IsSimpleName(TExpressionSyntax expression);
+
         internal abstract Task<Solution> TryAddUsingsOrImportToDocumentAsync(
             Solution updatedSolution,
             SyntaxNode modifiedRoot,

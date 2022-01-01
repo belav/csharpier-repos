@@ -84,6 +84,7 @@ namespace System.Tests
         }
 
         private class DummyClass { }
+
         private struct DummyStruct { }
 
         private static void VerifyTypes(Type[] types, __arglist)

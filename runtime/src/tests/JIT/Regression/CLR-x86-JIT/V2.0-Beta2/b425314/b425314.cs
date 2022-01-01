@@ -245,6 +245,7 @@ public class ScenarioMonitor
     {
         _fMinimumTimeHasElapsed = true;
     }
+
     private void MaximumTimeHasElapsed(object state)
     {
         _fMaximumTimeHasElapsed = true;
@@ -356,6 +357,7 @@ public class ScenarioMonitor
 
     // This non-volatile data and data accessor can only be used on the check thread.
     private long _checkIterations;
+
     public void RecordCheckIteration()
     {
         _checkIterations += 1;
@@ -370,6 +372,7 @@ public class ScenarioMonitor
 
     // This non-volatile data and data accessor can only be used on the flip thread.
     private long _flipIterations;
+
     public void RecordFlipIteration()
     {
         _flipIterations += 1;

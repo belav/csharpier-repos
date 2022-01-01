@@ -50,6 +50,7 @@ namespace System.Transactions
         internal const int MaxStateHist = 20;
         internal readonly TransactionState[] _stateHistory = new TransactionState[MaxStateHist];
         internal int _currentStateHist;
+
 #endif
 
         // Finalized object see class definition for the use of this object

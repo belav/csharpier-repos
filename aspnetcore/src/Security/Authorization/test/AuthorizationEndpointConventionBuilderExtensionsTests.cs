@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authorization.Test;
 
 public class AuthorizationEndpointConventionBuilderExtensionsTests

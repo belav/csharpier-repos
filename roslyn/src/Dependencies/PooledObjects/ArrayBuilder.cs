@@ -368,6 +368,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         // 2) Expose the pool or the way to create a pool or the way to get an instance.
         //    for now we will expose both and figure which way works better
         private static readonly ObjectPool<ArrayBuilder<T>> s_poolInstance = CreatePool();
+
         public static ArrayBuilder<T> GetInstance()
         {
             var builder = s_poolInstance.Allocate();

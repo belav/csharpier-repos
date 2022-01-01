@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 internal static class MvcRazorDiagnosticListenerExtensions

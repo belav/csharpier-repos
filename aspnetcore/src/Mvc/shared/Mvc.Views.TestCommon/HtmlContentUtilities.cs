@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
 using Microsoft.Extensions.WebEncoders.Testing;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public class HtmlContentUtilities

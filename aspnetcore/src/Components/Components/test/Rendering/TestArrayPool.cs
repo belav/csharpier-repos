@@ -4,6 +4,7 @@
 using System.Buffers;
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
 internal class TestArrayPool<T> : ArrayPool<T>

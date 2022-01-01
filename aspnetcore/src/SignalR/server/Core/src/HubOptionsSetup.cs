@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.SignalR;
 
 /// <summary>

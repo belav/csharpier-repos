@@ -144,6 +144,7 @@ public class EnumIConvertibleToUint32
 
         return retVal;
     }
+
     #endregion
 
     #region Nagetive Test Cases
@@ -204,6 +205,7 @@ public class EnumIConvertibleToUint32
 
         return retVal;
     }
+
     #endregion
     #endregion
 
@@ -233,6 +235,7 @@ public class EnumIConvertibleToUint32
         white = UInt32.MaxValue,
         red = -0,
     }
+
     enum e_test : long
     {
         itemA = -123,

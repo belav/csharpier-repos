@@ -66,6 +66,7 @@ namespace Newtonsoft.Json.Serialization
         private static readonly ThreadSafeStore<Type, Type?> AssociatedMetadataTypesCache =
             new ThreadSafeStore<Type, Type?>(GetAssociateMetadataTypeFromAttribute);
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
+
 #endif
 
         public static T? GetCachedAttribute<T>(object attributeProvider) where T : Attribute
@@ -111,6 +112,7 @@ namespace Newtonsoft.Json.Serialization
 
             return false;
         }
+
 #endif
 
 #if HAVE_DATA_CONTRACTS
@@ -176,6 +178,7 @@ namespace Newtonsoft.Json.Serialization
 
             return result;
         }
+
 #endif
 
         public static MemberSerialization GetObjectMemberSerialization(
@@ -387,6 +390,7 @@ namespace Newtonsoft.Json.Serialization
 
             return null;
         }
+
 #endif
 
         private static T? GetAttribute<T>(Type type) where T : Attribute
@@ -495,6 +499,7 @@ namespace Newtonsoft.Json.Serialization
             return false;
 #endif
         }
+
 #endif
 
 #if HAVE_BINARY_SERIALIZATION
@@ -516,6 +521,7 @@ namespace Newtonsoft.Json.Serialization
             return false;
 #endif
         }
+
 #endif
 
         public static T? GetAttribute<T>(object provider) where T : Attribute
@@ -543,6 +549,7 @@ namespace Newtonsoft.Json.Serialization
         {
             _dynamicCodeGeneration = dynamicCodeGeneration;
         }
+
 #endif
 
         public static bool DynamicCodeGeneration

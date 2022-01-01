@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>

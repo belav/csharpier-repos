@@ -395,6 +395,7 @@ namespace System.IO.Tests
             string testFile2 = Path.Combine(testDirectory.FullName, GetTestFileName());
             Assert.Throws<IOException>(() => Move(testFileAlternateStream, testFile2));
         }
+
         #endregion
 
         [Fact]

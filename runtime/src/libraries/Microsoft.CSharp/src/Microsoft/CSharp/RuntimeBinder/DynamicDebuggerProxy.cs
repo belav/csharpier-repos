@@ -499,6 +499,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static readonly Type ComObjectType = Type.GetType(
             "System.__ComObject, System.Private.CoreLib"
         );
+
 #endif
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

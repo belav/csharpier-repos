@@ -14,11 +14,13 @@ internal struct vt
 internal class cl
 {
     public double[,,] x;
+
     public cl()
     {
         x = new double[6, 5, 4];
     }
 }
+
 internal class pow2
 {
     public static double CalculateSinh(double x)

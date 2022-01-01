@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ActualApiResponseMetadataFactoryTest

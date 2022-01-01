@@ -149,6 +149,7 @@ namespace System.IO.Packaging
         {
             ThrowIfStreamDisposed();
         }
+
         #endregion Methods
 
         /// <summary>

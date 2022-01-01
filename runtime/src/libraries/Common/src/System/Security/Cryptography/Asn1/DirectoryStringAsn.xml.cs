@@ -39,6 +39,7 @@ namespace System.Security.Cryptography.Asn1
             ensureUniqueTag(new Asn1Tag(UniversalTagNumber.UTF8String), "Utf8String");
             ensureUniqueTag(new Asn1Tag(UniversalTagNumber.BMPString), "BmpString");
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

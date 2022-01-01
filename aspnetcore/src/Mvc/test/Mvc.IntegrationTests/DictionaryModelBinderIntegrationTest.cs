@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
 // Integration tests targeting the behavior of the DictionaryModelBinder with other model binders.
@@ -1397,6 +1398,7 @@ public class DictionaryModelBinderIntegrationTest
         // This should be implicitly required
         public string Name { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -1489,6 +1491,7 @@ public class DictionaryModelBinderIntegrationTest
         [Required]
         public string? Name { get; set; }
     }
+
 #nullable restore
 
     [Fact]

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Analyzer.Testing;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
 public abstract class AnalyzerTestBase

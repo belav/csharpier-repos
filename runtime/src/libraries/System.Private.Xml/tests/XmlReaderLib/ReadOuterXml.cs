@@ -581,11 +581,13 @@ namespace System.Xml.Tests
             Foo(DataReader.ReadSubtree());
             return TEST_PASS;
         }
+
         private void Foo(XmlReader reader)
         {
             reader.Read();
             Bar(reader.ReadSubtree());
         }
+
         private void Bar(XmlReader reader)
         {
             reader.Read();

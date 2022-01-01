@@ -24,6 +24,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
         decimal Decimal { get; set; }
         string String { get; set; }
         DateTime DateTime { get; set; }
+
         [NewGuid]
         Guid Guid { get; set; }
         int? NullInt { get; set; }

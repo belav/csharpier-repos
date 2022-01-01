@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.SignalR.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.SignalR;
 
 /// <summary>

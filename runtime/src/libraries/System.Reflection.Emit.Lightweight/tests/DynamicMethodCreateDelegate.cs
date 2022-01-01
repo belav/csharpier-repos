@@ -205,11 +205,15 @@ namespace System.Reflection.Emit.Tests
     public class IDSubClass : IDClass
     {
         public IDSubClass(int id) : base(id) { }
+
         public IDSubClass() : base() { }
     }
 
     public delegate int IDClassDelegate(IDClass owner, int id);
+
     public delegate IDClass InvalidRetType(int id);
+
     public delegate int WrongParamNumber(int id, int m);
+
     public delegate int InvalidParamType(IDClass owner);
 }

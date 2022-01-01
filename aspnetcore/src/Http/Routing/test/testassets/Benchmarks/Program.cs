@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Benchmarks;
 
 public class Program

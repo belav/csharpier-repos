@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace HealthChecksSample;
 
 // Pass in `--scenario dbcontext` at the command line to run this sample.

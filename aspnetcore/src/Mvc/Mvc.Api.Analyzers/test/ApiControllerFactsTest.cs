@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ApiControllerFactsTest;
 using Microsoft.CodeAnalysis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ApiControllerFactsTest

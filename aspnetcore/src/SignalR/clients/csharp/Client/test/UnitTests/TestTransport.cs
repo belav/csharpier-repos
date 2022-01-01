@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections.Client;
 using Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public class TestTransport : ITransport

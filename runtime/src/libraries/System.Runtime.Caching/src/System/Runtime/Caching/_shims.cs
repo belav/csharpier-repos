@@ -9,9 +9,13 @@ namespace System.Runtime.Caching
     internal sealed class PerfCounters : IDisposable
     {
         internal PerfCounters(string cacheName) { }
+
         public void Dispose() { }
+
         internal void Increment(PerfCounterName name) { }
+
         internal void IncrementBy(PerfCounterName name, long value) { }
+
         internal void Decrement(PerfCounterName name) { }
     }
 }

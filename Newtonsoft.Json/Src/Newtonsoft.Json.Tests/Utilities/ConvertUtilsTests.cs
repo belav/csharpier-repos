@@ -189,6 +189,7 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             AssertDoubleTryParse("4.94065645841247E+555", ParseResult.Overflow, null);
         }
+
 #endif
 
         private void AssertDecimalTryParse(

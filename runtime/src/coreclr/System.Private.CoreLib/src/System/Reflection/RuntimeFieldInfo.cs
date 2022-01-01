@@ -12,6 +12,7 @@ namespace System.Reflection
         private BindingFlags m_bindingFlags;
         protected RuntimeTypeCache m_reflectedTypeCache;
         protected RuntimeType m_declaringType;
+
         #endregion
 
         #region Constructor
@@ -25,6 +26,7 @@ namespace System.Reflection
             m_declaringType = declaringType;
             m_reflectedTypeCache = reflectedTypeCache;
         }
+
         #endregion
 
         #region NonPublic Members
@@ -40,7 +42,9 @@ namespace System.Reflection
         {
             return m_declaringType;
         }
+
         internal abstract RuntimeModule GetRuntimeModule();
+
         #endregion
 
         #region MemberInfo Overrides
@@ -56,6 +60,7 @@ namespace System.Reflection
 
         public override Module Module => GetRuntimeModule();
         public override bool IsCollectible => m_declaringType.IsCollectible;
+
         #endregion
 
         #region Object Overrides
@@ -63,6 +68,7 @@ namespace System.Reflection
         {
             return FieldType.FormatTypeName() + " " + Name;
         }
+
         #endregion
 
         #region ICustomAttributeProvider

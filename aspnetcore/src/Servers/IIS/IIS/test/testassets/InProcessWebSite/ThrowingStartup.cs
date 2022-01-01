@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace TestSite;
 
 public class ThrowingStartup

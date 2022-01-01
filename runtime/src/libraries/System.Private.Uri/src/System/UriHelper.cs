@@ -425,6 +425,7 @@ namespace System
                 );
             }
         }
+
         internal static unsafe void UnescapeString(
             ReadOnlySpan<char> input,
             ref ValueStringBuilder dest,
@@ -452,6 +453,7 @@ namespace System
                 );
             }
         }
+
         internal static unsafe void UnescapeString(
             char* pStr,
             int start,

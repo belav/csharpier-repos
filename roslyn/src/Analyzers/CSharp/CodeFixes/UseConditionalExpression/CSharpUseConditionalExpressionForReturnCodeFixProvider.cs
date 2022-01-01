@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.UseConditionalExpression;
 
 #if CODE_STYLE
 using Microsoft.CodeAnalysis.CSharp.Formatting;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression

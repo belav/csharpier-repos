@@ -72,6 +72,7 @@ namespace Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests
         {
             throw new NotImplementedException();
         }
+
 #endif
 
         public override decimal? ReadAsDecimal()

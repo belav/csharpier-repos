@@ -48,6 +48,7 @@ namespace System.Reflection.Emit
         internal bool is_pinned;
         internal ushort position;
         private string? name;
+
 #endregion
 
         internal ILGenerator ilgen;

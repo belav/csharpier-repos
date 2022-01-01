@@ -7,6 +7,7 @@ class T
     static int loops = 80;
     static int threads = 10;
     static object global_obj;
+
     static void stress_loop()
     {
         object obj = new object();
@@ -53,6 +54,7 @@ class T
         for (int i = 0; i < loops; ++i)
             stress_loop();
     }
+
     static void Main(string[] args)
     {
         if (args.Length > 0)

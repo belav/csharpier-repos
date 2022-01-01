@@ -1647,24 +1647,29 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> replacementNodes
         );
+
         protected internal abstract SyntaxNode InsertNodesInListCore(
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> nodesToInsert,
             bool insertBefore
         );
+
         protected internal abstract SyntaxNode ReplaceTokenInListCore(
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens
         );
+
         protected internal abstract SyntaxNode InsertTokensInListCore(
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens,
             bool insertBefore
         );
+
         protected internal abstract SyntaxNode ReplaceTriviaInListCore(
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia
         );
+
         protected internal abstract SyntaxNode InsertTriviaInListCore(
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia,

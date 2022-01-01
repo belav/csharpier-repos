@@ -10,6 +10,7 @@ namespace System.Reflection.TypeLoading
     {
         public sealed override MemberInfo[] GetMembers(BindingFlags bindingAttr) =>
             GetMemberImpl(null, MemberTypes.All, bindingAttr);
+
         public sealed override MemberInfo[] GetMember(string name, BindingFlags bindingAttr)
         {
             if (name == null)

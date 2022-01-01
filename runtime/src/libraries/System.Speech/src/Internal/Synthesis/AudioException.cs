@@ -10,6 +10,7 @@ namespace System.Speech.Internal.Synthesis
     {
         #region Constructors
         internal AudioException() { }
+
         internal AudioException(MMSYSERR errorCode)
             : base(
                 string.Format(
@@ -19,6 +20,7 @@ namespace System.Speech.Internal.Synthesis
                     (int)errorCode
                 )
             ) { }
+
         protected AudioException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 

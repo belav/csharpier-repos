@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.DataProtection.Internal;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
 /// <summary>

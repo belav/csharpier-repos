@@ -1587,6 +1587,7 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.AreEqual(i, c.Blah);
         }
+
 #endif
 
         public class RegexTestClass
@@ -1676,6 +1677,7 @@ namespace Newtonsoft.Json.Tests.Bson
                 BindToNameCalled = true;
                 base.BindToName(serializedType, out assemblyName, out typeName);
             }
+
 #endif
 
             public override Type BindToType(string assemblyName, string typeName)

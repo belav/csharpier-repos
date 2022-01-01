@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.Extensions.CommandLineUtils;
 
 internal static class CommandLineApplicationExtensions

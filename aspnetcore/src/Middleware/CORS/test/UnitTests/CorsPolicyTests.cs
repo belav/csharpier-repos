@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 public class CorsPolicyTest

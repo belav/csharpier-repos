@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public static partial class DumpCollector

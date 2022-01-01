@@ -4,6 +4,7 @@
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
 namespace ApiAuthSample.Data.Migrations;
 
 public partial class InitialMigration : Migration

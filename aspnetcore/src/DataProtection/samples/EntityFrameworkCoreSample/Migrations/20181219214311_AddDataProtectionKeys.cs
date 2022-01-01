@@ -4,6 +4,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
 namespace EntityFrameworkCoreSample.Migrations;
 
 public partial class AddDataProtectionKeys : Migration

@@ -29,6 +29,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
         TextWriter textWriter,
         IAnalyzerAssemblyLoader analyzerAssemblyLoader
     );
+
     internal delegate Task<BuildResponse> CompileOnServerFunc(
         BuildRequest buildRequest,
         string pipeName,

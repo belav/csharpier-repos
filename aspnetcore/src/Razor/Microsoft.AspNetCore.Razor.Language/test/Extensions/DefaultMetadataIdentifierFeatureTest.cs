@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public class DefaultMetadataIdentifierFeatureTest : RazorProjectEngineTestBase

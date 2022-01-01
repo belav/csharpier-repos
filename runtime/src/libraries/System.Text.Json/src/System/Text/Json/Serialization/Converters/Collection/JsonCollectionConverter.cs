@@ -22,11 +22,13 @@ namespace System.Text.Json.Serialization
         internal override Type ElementType => typeof(TElement);
 
         protected abstract void Add(in TElement value, ref ReadStack state);
+
         protected abstract void CreateCollection(
             ref Utf8JsonReader reader,
             ref ReadStack state,
             JsonSerializerOptions options
         );
+
         protected virtual void ConvertCollection(
             ref ReadStack state,
             JsonSerializerOptions options

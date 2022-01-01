@@ -13,6 +13,7 @@ namespace System.Reflection
         }
 
         public abstract bool Matches(string name);
+
         protected string ExpectedName { get; }
     }
 

@@ -11,6 +11,7 @@ using Microsoft.Extensions.StackTrace.Sources;
 using ThrowingLibrary;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class StackTraceHelperTest

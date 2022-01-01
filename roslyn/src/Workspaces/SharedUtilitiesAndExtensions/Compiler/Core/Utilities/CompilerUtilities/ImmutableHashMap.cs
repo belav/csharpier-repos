@@ -627,12 +627,15 @@ namespace Roslyn.Collections.Immutable
                 IEqualityComparer<TValue> valueComparer,
                 bool overwriteExistingValue
             );
+
             internal abstract Bucket? Remove(int hash, TKey key, IEqualityComparer<TKey> comparer);
+
             internal abstract ValueBucket? Get(
                 int hash,
                 TKey key,
                 IEqualityComparer<TKey> comparer
             );
+
             internal abstract IEnumerable<Bucket> GetAll();
         }
 

@@ -17,10 +17,12 @@ using System.Runtime.CompilerServices;
 using System.Numerics;
 #else
 using System.Runtime.InteropServices;
+
 #endif
 
 #if !NET5_0_OR_GREATER
 using Half = System.Single;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Collections.Internal
@@ -1453,6 +1455,7 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 04,
                 31,
             };
+
 #endif
 
         public static int MoveNansToFront<TKey, TValue>(

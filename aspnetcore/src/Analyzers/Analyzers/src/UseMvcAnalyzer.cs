@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 internal class UseMvcAnalyzer

@@ -43,6 +43,7 @@ class Program
     }
 
     interface ITypedClientB { }
+
     class TypedClientB : ITypedClientB
     {
         public TypedClientB(HttpClient httpClient) { }
@@ -54,6 +55,7 @@ class Program
     }
 
     interface ITypedClientD { }
+
     class TypedClientD : ITypedClientD
     {
         public TypedClientD(HttpClient httpClient) { }

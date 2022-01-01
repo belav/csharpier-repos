@@ -125,6 +125,7 @@ public class SafeHandleCtor
 
         return retVal;
     }
+
     #endregion
     #endregion
 

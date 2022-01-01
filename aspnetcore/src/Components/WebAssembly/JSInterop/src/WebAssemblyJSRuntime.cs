@@ -8,6 +8,7 @@ using System.Text.Json;
 using Microsoft.JSInterop.Infrastructure;
 using WebAssembly.JSInterop;
 
+
 namespace Microsoft.JSInterop.WebAssembly;
 
 /// <summary>

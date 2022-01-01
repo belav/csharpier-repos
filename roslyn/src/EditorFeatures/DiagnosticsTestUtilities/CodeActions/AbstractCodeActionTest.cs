@@ -227,6 +227,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             MemberNames = memberNames;
             OptionsCallback = optionsCallback;
         }
+
 #pragma warning restore RS0034 // Exported parts should be marked with 'ImportingConstructorAttribute'
 
         public PickMembersResult PickMembers(

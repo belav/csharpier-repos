@@ -33,6 +33,7 @@ namespace System.Net
                 "NativeOverlapped allocated without release."
             );
         }
+
 #endif
 
         internal AsyncRequestContext(ThreadPoolBoundHandle boundHandle, ListenerAsyncResult result)

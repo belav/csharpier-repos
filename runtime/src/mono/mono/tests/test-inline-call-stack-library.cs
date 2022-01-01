@@ -81,26 +81,32 @@ namespace Library
         {
             return MethodBase.GetCurrentMethod();
         }
+
         public static Assembly GetExecutingAssembly()
         {
             return Assembly.GetExecutingAssembly();
         }
+
         public static Assembly GetCallingAssembly()
         {
             return Assembly.GetCallingAssembly();
         }
+
         public static Assembly CallCallingAssembly()
         {
             return GetCallingAssembly();
         }
+
         public static StackFrame GetStackFrame()
         {
             return new StackFrame();
         }
+
         public static ResourceRelaxedFieldInit GetResourceRelaxedFieldInit()
         {
             return ResourceRelaxedFieldInit.Single;
         }
+
         public static ResourceStrictFieldInit GetResourceStrictFieldInit()
         {
             return ResourceStrictFieldInit.Single;

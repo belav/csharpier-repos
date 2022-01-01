@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 #if !DEBUG
 using EventSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.EventSymbol;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

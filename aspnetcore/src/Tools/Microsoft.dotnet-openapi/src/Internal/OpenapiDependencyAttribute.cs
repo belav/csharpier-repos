@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.DotNet.OpenApi;
 
+
 namespace Microsoft.DotNet.Openapi.Tools.Internal;
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]

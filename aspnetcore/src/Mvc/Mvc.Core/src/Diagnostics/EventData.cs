@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Mvc.Diagnostics;
 
 /// <summary>
@@ -77,7 +78,9 @@ public abstract class EventData : IReadOnlyList<KeyValuePair<string, object>>
 
         /// <inheritdoc/>
         public void Dispose() { }
+
         object IEnumerator.Current => Current;
+
         void IEnumerator.Reset() => throw new NotSupportedException();
     }
 }

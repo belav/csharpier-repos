@@ -5,6 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Antiforgery;
 
 internal class AntiforgerySerializationContext

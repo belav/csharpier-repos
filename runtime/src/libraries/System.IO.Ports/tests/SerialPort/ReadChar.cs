@@ -528,6 +528,7 @@ namespace System.IO.Ports.Tests
                 PerformReadOnCom1FromCom2(com1, com2, additionalChars);
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

@@ -37,6 +37,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
         );
 
         protected abstract bool IsValidSymbol(ISymbol symbol, SemanticModel semanticModel);
+
         protected abstract bool AreSpecialOptionsActive(SemanticModel semanticModel);
 
         protected virtual bool ContainingTypesOrSelfHasUnsafeKeyword(

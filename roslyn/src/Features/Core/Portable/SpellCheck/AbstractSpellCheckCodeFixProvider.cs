@@ -32,8 +32,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
         }
 
         protected abstract bool IsGeneric(SyntaxToken nameToken);
+
         protected abstract bool IsGeneric(TSimpleName nameNode);
+
         protected abstract bool IsGeneric(CompletionItem completionItem);
+
         protected abstract SyntaxToken CreateIdentifier(SyntaxToken nameToken, string newName);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
@@ -131,6 +134,7 @@ namespace Microsoft.CodeAnalysis.SpellCheck
         }
 
         protected abstract bool ShouldSpellCheck(TSimpleName name);
+
         protected abstract bool DescendIntoChildren(SyntaxNode arg);
 
         private async Task CreateSpellCheckCodeIssueAsync(

@@ -22,6 +22,7 @@ namespace Internal.Runtime.InteropServices
             )
                 ? isSupported
                 : true;
+
 #endif
 
         /// <summary>

@@ -14,6 +14,7 @@ namespace System.Xml.XPath
         {
             throw null;
         }
+
         public static System.Xml.XPath.XPathNavigator CreateNavigator(
             this System.Xml.Linq.XNode node,
             System.Xml.XmlNameTable? nameTable
@@ -21,10 +22,12 @@ namespace System.Xml.XPath
         {
             throw null;
         }
+
         public static object XPathEvaluate(this System.Xml.Linq.XNode node, string expression)
         {
             throw null;
         }
+
         public static object XPathEvaluate(
             this System.Xml.Linq.XNode node,
             string expression,
@@ -33,6 +36,7 @@ namespace System.Xml.XPath
         {
             throw null;
         }
+
         public static System.Xml.Linq.XElement? XPathSelectElement(
             this System.Xml.Linq.XNode node,
             string expression
@@ -40,6 +44,7 @@ namespace System.Xml.XPath
         {
             throw null;
         }
+
         public static System.Xml.Linq.XElement? XPathSelectElement(
             this System.Xml.Linq.XNode node,
             string expression,
@@ -48,6 +53,7 @@ namespace System.Xml.XPath
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> XPathSelectElements(
             this System.Xml.Linq.XNode node,
             string expression
@@ -55,6 +61,7 @@ namespace System.Xml.XPath
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> XPathSelectElements(
             this System.Xml.Linq.XNode node,
             string expression,
@@ -64,6 +71,7 @@ namespace System.Xml.XPath
             throw null;
         }
     }
+
     public static partial class XDocumentExtensions
     {
         public static System.Xml.XPath.IXPathNavigable ToXPathNavigable(

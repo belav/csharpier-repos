@@ -44,6 +44,7 @@ class Tests
             return true;
         }
     }
+
 #endif
 
 #if !__MOBILE__
@@ -51,6 +52,7 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
     public static int test_1_nullable_unbox()
@@ -527,6 +529,7 @@ class Tests
             return 6;
         return 0;
     }
+
 #endif
 
     public static int test_0_ldvirtftn_generic_method()
@@ -1188,6 +1191,7 @@ class Tests
     struct Record : Foo2<Record>.IRecord
     {
         int counter;
+
         int Foo2<Record>.IRecord.DoSomething()
         {
             return counter++;

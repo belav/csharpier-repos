@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Identity.DefaultUI.WebSite;
 
 public class PocoUserStartup : StartupBase<PocoUser, IdentityDbContext>

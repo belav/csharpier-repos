@@ -82,6 +82,7 @@ namespace Castle.DynamicProxy.Tests
         public abstract class Class
         {
             public abstract void ClassMethod();
+
             public abstract void Method();
         }
 

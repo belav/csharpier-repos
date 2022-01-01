@@ -56,6 +56,7 @@ namespace System.Reflection.Emit
         internal string scopename;
         internal bool is_resource;
         internal int token;
+
 #endregion
 
         private UIntPtr dynamic_image; /* GC-tracked */
@@ -70,11 +71,13 @@ namespace System.Reflection.Emit
         private object? resources;
         private IntPtr unparented_classes;
         private int[]? table_indexes;
+
 #endregion
 
         private byte[] guid;
         private TypeBuilder? global_type;
         private Type? global_type_created;
+
         // name_cache keys are display names
         private Dictionary<ITypeName, TypeBuilder> name_cache;
         private Dictionary<string, int> us_string_cache;
@@ -710,6 +713,7 @@ namespace System.Reflection.Emit
         {
             SetCustomAttribute(new CustomAttributeBuilder(con, binaryAttribute));
         }
+
         /*
                 internal ISymbolDocumentWriter? DefineDocument (string url, Guid language, Guid languageVendor, Guid documentType)
                 {

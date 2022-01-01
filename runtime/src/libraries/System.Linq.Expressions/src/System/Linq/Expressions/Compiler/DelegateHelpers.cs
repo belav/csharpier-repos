@@ -121,6 +121,7 @@ namespace System.Linq.Expressions.Compiler
             | MethodAttributes.NewSlot
             | MethodAttributes.Virtual;
         private static readonly Type[] s_delegateCtorSignature = { typeof(object), typeof(IntPtr) };
+
 #endif
 
         private static Type MakeNewCustomDelegate(Type[] types)

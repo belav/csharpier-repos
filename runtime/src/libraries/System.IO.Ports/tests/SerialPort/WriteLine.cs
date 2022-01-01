@@ -209,6 +209,7 @@ namespace System.IO.Ports.Tests
                 VerifyWriteLine(com1, com2, strBldrToWrite.ToString());
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

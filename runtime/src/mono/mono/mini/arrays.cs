@@ -34,6 +34,7 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
     public static int test_10_create()
@@ -200,6 +201,7 @@ class Tests
     }
 
     interface IFace { }
+
     class Face : IFace { }
 
     public static int test_0_stelemref_3()

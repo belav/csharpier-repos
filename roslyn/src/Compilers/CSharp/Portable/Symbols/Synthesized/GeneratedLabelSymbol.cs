@@ -30,6 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal string NameNoSequence { get; }
 
         private static int s_sequence = 1;
+
 #endif
         private static string LabelName(string name)
         {

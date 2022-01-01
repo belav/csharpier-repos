@@ -26,6 +26,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -67,6 +68,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -108,6 +110,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -149,6 +152,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -190,6 +194,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -231,6 +236,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -276,6 +282,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -353,6 +360,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<T>
         {
             public int x;
+
             public class A3<U>
             {
                 public int x;
@@ -402,6 +410,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<V>
         {
             public int x;
+
             public class A3<V>
             {
                 public int x;
@@ -453,9 +462,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<U>
         {
             public int x;
+
             public class A3<T>
             {
                 public int x;
+
                 public class A4<U>
                 {
                     public int x;
@@ -517,9 +528,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<U>
         {
             public int x;
+
             public class A3<T>
             {
                 public int x;
+
                 public class A4<U>
                 {
                     public int x;
@@ -533,9 +546,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<U>
         {
             public int x;
+
             public class A3<T>
             {
                 public int x;
+
                 public class A4<U>
                 {
                     public int x;
@@ -642,6 +657,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<T, U>
         {
             public int x;
+
             public class A3<U>
             {
                 public int x;
@@ -732,6 +748,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<T>
         {
             public int x;
+
             public struct A3<U>
             {
                 public int x;
@@ -781,6 +798,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<V>
         {
             public int x;
+
             public struct A3<V>
             {
                 public int x;
@@ -832,9 +850,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<U>
         {
             public int x;
+
             public struct A3<T>
             {
                 public int x;
+
                 public struct A4<U>
                 {
                     public int x;
@@ -896,9 +916,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<U>
         {
             public int x;
+
             public struct A3<T>
             {
                 public int x;
+
                 public struct A4<U>
                 {
                     public int x;
@@ -912,9 +934,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<U>
         {
             public int x;
+
             public struct A3<T>
             {
                 public int x;
+
                 public struct A4<U>
                 {
                     public int x;
@@ -1021,6 +1045,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<T, U>
         {
             public int x;
+
             public struct A3<U>
             {
                 public int x;

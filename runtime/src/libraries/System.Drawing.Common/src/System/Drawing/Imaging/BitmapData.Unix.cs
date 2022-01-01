@@ -46,6 +46,7 @@ namespace System.Drawing.Imaging
         private PixelFormat _pixelFormat;
         private IntPtr _scan0;
         private int _reserved;
+
 #pragma warning disable 169
         // *** Warning ***    don't depend on those fields in managed
         //            code as they won't exists when using MS

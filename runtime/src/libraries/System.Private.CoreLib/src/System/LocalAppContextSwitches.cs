@@ -73,6 +73,7 @@ namespace System
         }
 
         private static int s_showILOffset;
+
         private static bool GetDefaultShowILOffsetSetting()
         {
             if (s_showILOffset < 0)

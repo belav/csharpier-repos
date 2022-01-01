@@ -6,6 +6,7 @@ using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal interface IHttpOutputProducer
@@ -23,6 +24,7 @@ internal interface IHttpOutputProducer
         bool autoChunk,
         bool appCompleted
     );
+
     // This takes ReadOnlySpan instead of ReadOnlyMemory because it always synchronously copies data before flushing.
     ValueTask<FlushResult> WriteDataToPipeAsync(
         ReadOnlySpan<byte> data,

@@ -56,6 +56,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Enabled = enabled;
             }
         }
+
         #endregion
 
         [Test]

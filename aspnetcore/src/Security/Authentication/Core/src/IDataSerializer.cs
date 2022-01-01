@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 /// <summary>

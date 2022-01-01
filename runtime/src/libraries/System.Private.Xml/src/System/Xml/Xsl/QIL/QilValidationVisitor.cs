@@ -28,6 +28,7 @@ namespace System.Xml.Xsl.Qil
     {
 #if DEBUG
         private readonly QilTypeChecker _typeCheck = new QilTypeChecker();
+
 #endif
 
         //-----------------------------------------------
@@ -170,6 +171,7 @@ namespace System.Xml.Xsl.Qil
                 return false;
             }
         }
+
 #endif // DEBUG
 
         [Conditional("DEBUG")]

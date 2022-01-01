@@ -4,6 +4,7 @@
 using System;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 internal static class StartupFacts

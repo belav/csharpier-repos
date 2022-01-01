@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public class NamespaceDirectiveTest

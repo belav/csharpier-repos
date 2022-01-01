@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.TestHost.Tests;
 
 public class WebSocketClientTests

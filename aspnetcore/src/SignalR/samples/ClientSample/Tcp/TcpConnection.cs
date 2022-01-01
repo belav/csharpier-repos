@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
 
+
 namespace ClientSample;
 
 public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeature
@@ -107,6 +108,7 @@ public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeat
             _application.Input.Complete(sendError);
         }
     }
+
     private async Task DoReceive()
     {
         Exception error = null;

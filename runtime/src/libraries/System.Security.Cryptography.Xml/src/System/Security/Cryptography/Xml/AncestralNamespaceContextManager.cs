@@ -71,12 +71,14 @@ namespace System.Security.Cryptography.Xml
             SortedList nsListToRender,
             Hashtable nsLocallyDeclared
         );
+
         internal abstract void TrackXmlNamespaceNode(
             XmlAttribute attr,
             SortedList nsListToRender,
             SortedList attrListToRender,
             Hashtable nsLocallyDeclared
         );
+
         internal abstract void GetNamespacesToRender(
             XmlElement element,
             SortedList attrListToRender,

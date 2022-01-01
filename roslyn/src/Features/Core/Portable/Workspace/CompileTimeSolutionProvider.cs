@@ -58,10 +58,12 @@ namespace Microsoft.CodeAnalysis.Host
 #if NETCOREAPP
         private readonly ConditionalWeakTable<Solution, Solution> _designTimeToCompileTimeSoution =
             new();
+
 #else
         // Framework lacks both a .Clear() method.  So for Framework we simulate that by just overwriting this with a
         // new instance.  This happens under a lock, so everyone sees a consistent dictionary.
         private ConditionalWeakTable<Solution, Solution> _designTimeToCompileTimeSoution = new();
+
 #endif
 
         public CompileTimeSolutionProvider(Workspace workspace)

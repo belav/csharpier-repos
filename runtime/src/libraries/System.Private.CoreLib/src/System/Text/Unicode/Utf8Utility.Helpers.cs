@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 
 #if SYSTEM_PRIVATE_CORELIB
 using Internal.Runtime.CompilerServices;
+
 #endif
 
 namespace System.Text.Unicode

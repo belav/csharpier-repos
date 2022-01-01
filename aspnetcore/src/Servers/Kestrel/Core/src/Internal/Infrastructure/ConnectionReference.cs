@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 internal class ConnectionReference

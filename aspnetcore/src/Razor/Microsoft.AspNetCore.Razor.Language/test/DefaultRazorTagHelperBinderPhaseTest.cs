@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
@@ -1198,6 +1199,7 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
             ruleBuilders
         );
     }
+
     #endregion
 
     #region Components
@@ -1631,6 +1633,7 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
             childContent
         );
     }
+
     #endregion
 
     private static TagHelperDescriptor CreateDescriptor(

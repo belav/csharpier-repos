@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 internal class DefaultPageHandlerMethodSelector : IPageHandlerMethodSelector

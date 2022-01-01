@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
 public class ResponseCachingTests

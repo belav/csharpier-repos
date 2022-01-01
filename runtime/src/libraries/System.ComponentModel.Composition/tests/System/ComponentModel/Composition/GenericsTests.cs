@@ -21,13 +21,19 @@ namespace System.ComponentModel.Composition
         public struct FooStruct { }
 
         public interface IFoo { }
+
         public interface IFoo2 : IFoo { }
+
         public interface IBar { }
+
         public interface IExport<T1, T2> { }
+
         public class ExportImpl<T1, T2> : IExport<T1, T2> { }
 
         public interface IExport<T> { }
+
         public interface IImport<T1, T2> { }
+
         public interface IImport<T> { }
 
         [Export(typeof(IFoo))]
@@ -780,6 +786,7 @@ namespace System.ComponentModel.Composition
         }
 
         public interface IA<T> { }
+
         public interface IB<T> { }
 
         [Export(typeof(IA<>)), Export(typeof(IB<>))]

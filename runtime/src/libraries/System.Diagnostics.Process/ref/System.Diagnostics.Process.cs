@@ -10,43 +10,52 @@ namespace Microsoft.Win32.SafeHandles
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeProcessHandle() : base(default(bool)) { }
+
         public SafeProcessHandle(System.IntPtr existingHandle, bool ownsHandle)
             : base(default(bool)) { }
+
         protected override bool ReleaseHandle()
         {
             throw null;
         }
     }
 }
+
 namespace System.Diagnostics
 {
     public partial class DataReceivedEventArgs : System.EventArgs
     {
         internal DataReceivedEventArgs() { }
+
         public string? Data
         {
             get { throw null; }
         }
     }
+
     public delegate void DataReceivedEventHandler(
         object sender,
         System.Diagnostics.DataReceivedEventArgs e
     );
+
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
     public partial class MonitoringDescriptionAttribute : System.ComponentModel.DescriptionAttribute
     {
         public MonitoringDescriptionAttribute(string description) { }
+
         public override string Description
         {
             get { throw null; }
         }
     }
+
     [System.ComponentModel.DesignerAttribute(
         "System.Diagnostics.Design.ProcessDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     public partial class Process : System.ComponentModel.Component, System.IDisposable
     {
         public Process() { }
+
         public int BasePriority
         {
             get { throw null; }
@@ -128,6 +137,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.NonpagedSystemMemorySize has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.NonpagedSystemMemorySize64 instead."
         )]
@@ -139,6 +149,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.PagedMemorySize has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.PagedMemorySize64 instead."
         )]
@@ -150,6 +161,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.PagedSystemMemorySize has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.PagedSystemMemorySize64 instead."
         )]
@@ -161,6 +173,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.PeakPagedMemorySize has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.PeakPagedMemorySize64 instead."
         )]
@@ -172,6 +185,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.PeakVirtualMemorySize has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.PeakVirtualMemorySize64 instead."
         )]
@@ -183,6 +197,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.PeakWorkingSet has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.PeakWorkingSet64 instead."
         )]
@@ -204,6 +219,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ObsoleteAttribute(
             "Process.PrivateMemorySize has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.PrivateMemorySize64 instead."
         )]
@@ -223,6 +239,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatform("windows")]
         [System.Runtime.Versioning.SupportedOSPlatform("linux")]
         public System.IntPtr ProcessorAffinity
@@ -280,6 +297,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.VirtualMemorySize has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.VirtualMemorySize64 instead."
         )]
@@ -291,6 +309,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "Process.WorkingSet has been deprecated because the type of the property can't represent all valid results. Use System.Diagnostics.Process.WorkingSet64 instead."
         )]
@@ -317,41 +336,56 @@ namespace System.Diagnostics
             add { }
             remove { }
         }
+
         public void BeginErrorReadLine() { }
+
         public void BeginOutputReadLine() { }
+
         public void CancelErrorRead() { }
+
         public void CancelOutputRead() { }
+
         public void Close() { }
+
         public bool CloseMainWindow()
         {
             throw null;
         }
+
         protected override void Dispose(bool disposing) { }
+
         public static void EnterDebugMode() { }
+
         public static System.Diagnostics.Process GetCurrentProcess()
         {
             throw null;
         }
+
         public static System.Diagnostics.Process GetProcessById(int processId)
         {
             throw null;
         }
+
         public static System.Diagnostics.Process GetProcessById(int processId, string machineName)
         {
             throw null;
         }
+
         public static System.Diagnostics.Process[] GetProcesses()
         {
             throw null;
         }
+
         public static System.Diagnostics.Process[] GetProcesses(string machineName)
         {
             throw null;
         }
+
         public static System.Diagnostics.Process[] GetProcessesByName(string? processName)
         {
             throw null;
         }
+
         public static System.Diagnostics.Process[] GetProcessesByName(
             string? processName,
             string machineName
@@ -359,21 +393,28 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public void Kill() { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public void Kill(bool entireProcessTree) { }
+
         public static void LeaveDebugMode() { }
+
         protected void OnExited() { }
+
         public void Refresh() { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public bool Start()
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static System.Diagnostics.Process? Start(
@@ -382,18 +423,21 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static System.Diagnostics.Process Start(string fileName)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static System.Diagnostics.Process Start(string fileName, string arguments)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static System.Diagnostics.Process Start(
@@ -403,6 +447,7 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.Diagnostics.Process? Start(
@@ -414,6 +459,7 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static System.Diagnostics.Process? Start(
@@ -426,15 +472,19 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public void WaitForExit() { }
+
         public bool WaitForExit(int milliseconds)
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task WaitForExitAsync(
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
@@ -442,21 +492,25 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         public bool WaitForInputIdle()
         {
             throw null;
         }
+
         public bool WaitForInputIdle(int milliseconds)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.DesignerAttribute(
         "System.Diagnostics.Design.ProcessModuleDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     public partial class ProcessModule : System.ComponentModel.Component
     {
         internal ProcessModule() { }
+
         public System.IntPtr BaseAddress
         {
             get { throw null; }
@@ -481,29 +535,37 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public partial class ProcessModuleCollection : System.Collections.ReadOnlyCollectionBase
     {
         protected ProcessModuleCollection() { }
+
         public ProcessModuleCollection(System.Diagnostics.ProcessModule[] processModules) { }
+
         public System.Diagnostics.ProcessModule this[int index]
         {
             get { throw null; }
         }
+
         public bool Contains(System.Diagnostics.ProcessModule module)
         {
             throw null;
         }
+
         public void CopyTo(System.Diagnostics.ProcessModule[] array, int index) { }
+
         public int IndexOf(System.Diagnostics.ProcessModule module)
         {
             throw null;
         }
     }
+
     public enum ProcessPriorityClass
     {
         Normal = 32,
@@ -513,15 +575,20 @@ namespace System.Diagnostics
         BelowNormal = 16384,
         AboveNormal = 32768,
     }
+
     public sealed partial class ProcessStartInfo
     {
         public ProcessStartInfo() { }
+
         public ProcessStartInfo(string fileName) { }
+
         public ProcessStartInfo(string fileName, string arguments) { }
+
         public System.Collections.ObjectModel.Collection<string> ArgumentList
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Arguments
         {
@@ -533,6 +600,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Domain
@@ -544,6 +612,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ComponentModel.EditorAttribute(
             "System.Diagnostics.Design.StringDictionaryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
             "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
@@ -562,6 +631,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorAttribute(
             "System.Diagnostics.Design.StartFileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
             "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
@@ -572,12 +642,14 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public bool LoadUserProfile
         {
             get { throw null; }
             set { }
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public System.Security.SecureString? Password
@@ -585,6 +657,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public string? PasswordInClearText
         {
@@ -621,6 +694,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string UserName
         {
@@ -632,6 +706,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.DefaultValueAttribute("")]
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Verb
@@ -643,12 +718,14 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ComponentModel.DefaultValueAttribute(System.Diagnostics.ProcessWindowStyle.Normal)]
         public System.Diagnostics.ProcessWindowStyle WindowStyle
         {
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorAttribute(
             "System.Diagnostics.Design.WorkingDirectoryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
             "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
@@ -660,12 +737,14 @@ namespace System.Diagnostics
             set { }
         }
     }
+
     [System.ComponentModel.DesignerAttribute(
         "System.Diagnostics.Design.ProcessThreadDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     public partial class ProcessThread : System.ComponentModel.Component
     {
         internal ProcessThread() { }
+
         public int BasePriority
         {
             get { throw null; }
@@ -700,6 +779,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public System.IntPtr ProcessorAffinity
         {
@@ -709,6 +789,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatform("windows")]
         [System.Runtime.Versioning.SupportedOSPlatform("linux")]
         public System.DateTime StartTime
@@ -731,32 +812,43 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         public void ResetIdealProcessor() { }
     }
+
     public partial class ProcessThreadCollection : System.Collections.ReadOnlyCollectionBase
     {
         protected ProcessThreadCollection() { }
+
         public ProcessThreadCollection(System.Diagnostics.ProcessThread[] processThreads) { }
+
         public System.Diagnostics.ProcessThread this[int index]
         {
             get { throw null; }
         }
+
         public int Add(System.Diagnostics.ProcessThread thread)
         {
             throw null;
         }
+
         public bool Contains(System.Diagnostics.ProcessThread thread)
         {
             throw null;
         }
+
         public void CopyTo(System.Diagnostics.ProcessThread[] array, int index) { }
+
         public int IndexOf(System.Diagnostics.ProcessThread thread)
         {
             throw null;
         }
+
         public void Insert(int index, System.Diagnostics.ProcessThread thread) { }
+
         public void Remove(System.Diagnostics.ProcessThread thread) { }
     }
+
     public enum ProcessWindowStyle
     {
         Normal = 0,
@@ -764,6 +856,7 @@ namespace System.Diagnostics
         Minimized = 2,
         Maximized = 3,
     }
+
     public enum ThreadPriorityLevel
     {
         Idle = -15,
@@ -774,6 +867,7 @@ namespace System.Diagnostics
         Highest = 2,
         TimeCritical = 15,
     }
+
     public enum ThreadState
     {
         Initialized = 0,
@@ -785,6 +879,7 @@ namespace System.Diagnostics
         Transition = 6,
         Unknown = 7,
     }
+
     public enum ThreadWaitReason
     {
         Executive = 0,

@@ -41,6 +41,7 @@ using Newtonsoft.Json.Utilities;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
 
@@ -182,6 +183,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("Child text!", n.DynamicChildObject.Text);
             Assert.AreEqual(int.MinValue, n.DynamicChildObject.Integer);
         }
+
 #endif
 
         [Test]

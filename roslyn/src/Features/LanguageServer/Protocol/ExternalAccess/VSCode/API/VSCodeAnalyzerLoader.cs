@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.SolutionCrawler;
 
+
 namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSCode.API;
 
 [Export(typeof(VSCodeAnalyzerLoader)), Shared]

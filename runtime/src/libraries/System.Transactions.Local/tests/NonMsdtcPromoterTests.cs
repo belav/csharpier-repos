@@ -674,6 +674,7 @@ namespace System.Transactions.Tests
                 return _promotedToken;
             }
         }
+
         #endregion
 
         #region MyEnlistment
@@ -819,6 +820,7 @@ namespace System.Transactions.Tests
                 _outcomeReceived.Set();
             }
         }
+
         #endregion
 
         #region DummyDurableEnlistment
@@ -844,6 +846,7 @@ namespace System.Transactions.Tests
                 throw new NotImplementedException();
             }
         }
+
         #endregion
 
         #region DummyDurableEnlistmentSPC
@@ -874,6 +877,7 @@ namespace System.Transactions.Tests
                 throw new NotImplementedException();
             }
         }
+
         #endregion
 
         // This class is used in conjunction with SubordinateTransaction. When asked via the Promote
@@ -917,6 +921,7 @@ namespace System.Transactions.Tests
                 get { return s_trace; }
                 set { s_trace = value; }
             }
+
             public static void Trace(string stringToTrace, params object[] args)
             {
                 if (s_trace)

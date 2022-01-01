@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class InvalidContentTypeController : Controller

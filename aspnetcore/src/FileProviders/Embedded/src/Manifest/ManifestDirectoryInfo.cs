@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal class ManifestDirectoryInfo : IFileInfo

@@ -54,6 +54,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ListConverter<T> : JsonConverter<List<T>>
         {
             private int _offset;
+
             public ListConverter(int offset)
             {
                 _offset = offset;

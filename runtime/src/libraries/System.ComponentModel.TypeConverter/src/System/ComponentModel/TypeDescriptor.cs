@@ -3007,6 +3007,7 @@ namespace System.ComponentModel
             /// Returns the COM handler object.
             /// </summary>
             internal IComNativeDescriptorHandler Handler { get; set; }
+
 #pragma warning restore 618
 
             /// <summary>
@@ -3061,6 +3062,7 @@ namespace System.ComponentModel
                     _handler = handler;
                     _instance = instance;
                 }
+
 #pragma warning restore 618
 
                 AttributeCollection ICustomTypeDescriptor.GetAttributes() =>
@@ -4150,6 +4152,7 @@ namespace System.ComponentModel
             private readonly struct DefaultTypeDescriptor : ICustomTypeDescriptor
             {
                 private readonly TypeDescriptionNode _node;
+
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 private readonly Type _objectType;
                 private readonly object? _instance;

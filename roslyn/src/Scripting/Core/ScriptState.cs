@@ -57,6 +57,7 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// The final value produced by running the script.
         /// </summary>
         public object ReturnValue => GetReturnValue();
+
         internal abstract object GetReturnValue();
 
         /// <summary>
@@ -315,6 +316,7 @@ namespace Microsoft.CodeAnalysis.Scripting
     public sealed class ScriptState<T> : ScriptState
     {
         public new T ReturnValue { get; }
+
         internal override object GetReturnValue() => ReturnValue;
 
         internal ScriptState(

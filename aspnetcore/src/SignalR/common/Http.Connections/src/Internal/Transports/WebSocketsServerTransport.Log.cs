@@ -5,6 +5,7 @@ using System;
 using System.Net.WebSockets;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports;
 
 internal partial class WebSocketsServerTransport

@@ -62,18 +62,21 @@ namespace System.Security.Cryptography.Algorithms.Tests
             byte[] hash,
             DSASignatureFormat signatureFormat
         );
+
         protected abstract bool VerifyHash(
             KeyDescription key,
             byte[] hash,
             byte[] signature,
             DSASignatureFormat signatureFormat
         );
+
         protected abstract byte[] SignData(
             KeyDescription key,
             byte[] data,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat
         );
+
         protected abstract bool VerifyData(
             KeyDescription key,
             byte[] data,

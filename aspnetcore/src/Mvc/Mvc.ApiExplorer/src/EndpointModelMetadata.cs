@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 internal class EndpointModelMetadata : ModelMetadata

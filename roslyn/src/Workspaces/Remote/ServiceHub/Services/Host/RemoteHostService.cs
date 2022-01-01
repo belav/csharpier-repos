@@ -47,6 +47,7 @@ namespace Microsoft.CodeAnalysis.Remote
 #if DEBUG
 #pragma warning disable IDE0052 // Remove unread private members
         private PerformanceReporter? _performanceReporter;
+
 #pragma warning restore
 #endif
 

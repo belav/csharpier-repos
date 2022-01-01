@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 internal class AbsoluteUrlFactory : IAbsoluteUrlFactory

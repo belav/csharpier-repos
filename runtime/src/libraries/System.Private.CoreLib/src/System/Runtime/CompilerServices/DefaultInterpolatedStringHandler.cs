@@ -27,18 +27,23 @@ namespace System.Runtime.CompilerServices
         /// since the compiler-provided base length won't include the equivalent character count.
         /// </remarks>
         private const int GuessedLengthPerHole = 11;
+
         /// <summary>Minimum size array to rent from the pool.</summary>
         /// <remarks>Same as stack-allocation size used today by string.Format.</remarks>
         private const int MinimumArrayPoolLength = 256;
 
         /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
         private readonly IFormatProvider? _provider;
+
         /// <summary>Array rented from the array pool and used to back <see cref="_chars"/>.</summary>
         private char[]? _arrayToReturnToPool;
+
         /// <summary>The span to write into.</summary>
         private Span<char> _chars;
+
         /// <summary>Position at which to write the next character.</summary>
         private int _pos;
+
         /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
         /// <remarks>
         /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive
@@ -359,6 +364,7 @@ namespace System.Runtime.CompilerServices
                 AppendStringDirect(s);
             }
         }
+
         /// <summary>Writes the specified value to the handler.</summary>
         /// <param name="value">The value to write.</param>
         /// <param name="format">The format string.</param>
@@ -443,6 +449,7 @@ namespace System.Runtime.CompilerServices
                 AppendOrInsertAlignmentIfNeeded(startingPos, alignment);
             }
         }
+
         #endregion
 
         #region AppendFormatted ReadOnlySpan<char>
@@ -504,6 +511,7 @@ namespace System.Runtime.CompilerServices
                 _pos += value.Length;
             }
         }
+
         #endregion
 
         #region AppendFormatted string
@@ -552,6 +560,7 @@ namespace System.Runtime.CompilerServices
             // simply to disambiguate between ROS<char> and object, just in case someone does specify a format, as
             // string is implicitly convertible to both. Just delegate to the T-based implementation.
             AppendFormatted<string?>(value, alignment, format);
+
         #endregion
 
         #region AppendFormatted object
@@ -564,6 +573,7 @@ namespace System.Runtime.CompilerServices
             // formatted with both an alignment and a format, or b) the compiler is unable to target type to T. It
             // exists purely to help make cases from (b) compile. Just delegate to the T-based implementation.
             AppendFormatted<object?>(value, alignment, format);
+
         #endregion
         #endregion
 

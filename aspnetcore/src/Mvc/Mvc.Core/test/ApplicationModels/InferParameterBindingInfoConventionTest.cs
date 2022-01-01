@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 public class InferParameterBindingInfoConventionTest

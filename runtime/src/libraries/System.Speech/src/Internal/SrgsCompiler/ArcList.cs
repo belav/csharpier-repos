@@ -66,6 +66,7 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 _item = item;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public Arc[] AKeys
             {

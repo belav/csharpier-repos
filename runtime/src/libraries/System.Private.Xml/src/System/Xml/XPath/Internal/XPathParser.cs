@@ -896,6 +896,7 @@ namespace MS.Internal.Xml.XPath
 
         private static readonly Dictionary<string, ParamInfo> s_functionTable =
             CreateFunctionTable();
+
         private static Dictionary<string, ParamInfo> CreateFunctionTable()
         {
             Dictionary<string, ParamInfo> table = new Dictionary<string, ParamInfo>(36);
@@ -978,6 +979,7 @@ namespace MS.Internal.Xml.XPath
         }
 
         private static readonly Dictionary<string, Axis.AxisType> s_AxesTable = CreateAxesTable();
+
         private static Dictionary<string, Axis.AxisType> CreateAxesTable()
         {
             Dictionary<string, Axis.AxisType> table = new Dictionary<string, Axis.AxisType>(13);

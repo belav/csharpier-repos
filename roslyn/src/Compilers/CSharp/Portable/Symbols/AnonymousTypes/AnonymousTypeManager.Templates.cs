@@ -116,6 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         private readonly ConcurrentDictionary<Location, bool> _sourceLocationsSeen =
             new ConcurrentDictionary<Location, bool>();
+
 #endif
 
         [Conditional("DEBUG")]
@@ -323,6 +324,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var typeArguments = typeDescr.Fields.SelectAsArray(f => f.Type);
             return template.Construct(typeArguments);
         }
+
 #nullable disable
 
         private AnonymousTypeTemplateSymbol CreatePlaceholderTemplate(

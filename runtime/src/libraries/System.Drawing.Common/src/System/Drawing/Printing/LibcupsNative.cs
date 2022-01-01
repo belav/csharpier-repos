@@ -35,6 +35,7 @@ namespace System.Drawing.Printing
         [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Ansi)]
 #pragma warning disable CA1838 // not hot-path enough to worry about the overheads of StringBuilder marshaling
         internal static extern IntPtr cupsTempFd([Out] StringBuilder sb, int len);
+
 #pragma warning restore CA1838
 
         [DllImport(LibraryName, ExactSpelling = true)]

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
 internal class GetDocumentCommandWorker

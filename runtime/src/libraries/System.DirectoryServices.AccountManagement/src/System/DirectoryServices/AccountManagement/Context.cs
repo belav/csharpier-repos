@@ -386,6 +386,7 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
     }
+
     // ********************************************
     public class PrincipalContext : IDisposable
     {

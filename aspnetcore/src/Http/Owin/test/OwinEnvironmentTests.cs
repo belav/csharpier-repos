@@ -10,6 +10,7 @@ using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Owin;
 
 public class OwinEnvironmentTests

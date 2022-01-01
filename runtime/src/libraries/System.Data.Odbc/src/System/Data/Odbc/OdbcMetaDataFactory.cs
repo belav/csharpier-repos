@@ -18,6 +18,7 @@ namespace System.Data.Odbc
                 _schemaName = schemaName;
                 _odbcFunction = odbcFunction;
             }
+
             internal readonly string _schemaName;
             internal readonly ODBC32.SQL_API _odbcFunction;
         }

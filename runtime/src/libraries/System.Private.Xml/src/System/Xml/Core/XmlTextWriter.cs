@@ -182,8 +182,10 @@ namespace System.Xml
         private const int NamespaceStackInitialSize = 8;
 #if DEBUG
         private const int MaxNamespacesWalkCount = 3;
+
 #else
         private const int MaxNamespacesWalkCount = 16;
+
 #endif
 
         private static readonly string[] s_stateName =

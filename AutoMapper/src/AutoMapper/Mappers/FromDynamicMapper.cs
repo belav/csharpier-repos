@@ -5,14 +5,17 @@ using System.Runtime.CompilerServices;
 using AutoMapper.Execution;
 using Microsoft.CSharp.RuntimeBinder;
 using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
+
 namespace AutoMapper.Internal.Mappers
 {
     using static Expression;
     using static ExpressionBuilder;
+
     public class FromDynamicMapper : IObjectMapper
     {
         private static readonly MethodInfo MapMethodInfo =
             typeof(FromDynamicMapper).GetStaticMethod(nameof(Map));
+
         private static object Map(
             object source,
             object destination,
@@ -43,6 +46,7 @@ namespace AutoMapper.Internal.Mappers
             }
             return destination;
         }
+
         private static object GetDynamically(string memberName, object target)
         {
             var binder = Binder.GetMember(
@@ -54,8 +58,10 @@ namespace AutoMapper.Internal.Mappers
             var callsite = CallSite<Func<CallSite, object, object>>.Create(binder);
             return callsite.Target(callsite, target);
         }
+
         public bool IsMatch(in TypePair context) =>
             context.SourceType.IsDynamic() && !context.DestinationType.IsDynamic();
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,

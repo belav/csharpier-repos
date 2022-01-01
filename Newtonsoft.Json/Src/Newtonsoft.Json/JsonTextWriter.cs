@@ -773,6 +773,7 @@ namespace Newtonsoft.Json
             _writeBuffer[pos++] = _quoteChar;
             return pos;
         }
+
 #endif
 
         /// <summary>
@@ -832,6 +833,7 @@ namespace Newtonsoft.Json
                 WriteEscapedString(value.OriginalString, true);
             }
         }
+
         #endregion
 
         /// <summary>

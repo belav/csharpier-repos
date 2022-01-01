@@ -13,6 +13,7 @@ namespace System.Drawing
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -26,11 +27,13 @@ namespace System.Drawing
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public void GetContextInfo(out PointF offset)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public void GetContextInfo(out PointF offset, out Region? clip)
         {
@@ -38,11 +41,13 @@ namespace System.Drawing
         }
     }
 }
+
 namespace System.Drawing.Drawing2D
 {
     public sealed partial class Matrix
     {
         public Matrix(System.Numerics.Matrix3x2 matrix) { }
+
         public System.Numerics.Matrix3x2 MatrixElements
         {
             get { throw null; }

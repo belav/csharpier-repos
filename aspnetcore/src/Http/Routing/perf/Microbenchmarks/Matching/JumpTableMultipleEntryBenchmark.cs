@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
 
+
 namespace Microsoft.AspNetCore.Routing.Matching;
 
 public class JumpTableMultipleEntryBenchmark

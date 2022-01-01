@@ -195,6 +195,7 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
+
         public override void Write(
             Utf8JsonWriter writer,
             ListWrapper value,
@@ -229,6 +230,7 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
+
         public override void Write(
             Utf8JsonWriter writer,
             StringIEnumerableWrapper value,
@@ -263,6 +265,7 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
+
         public override void Write(
             Utf8JsonWriter writer,
             DictionaryWrapper value,
@@ -297,6 +300,7 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
+
         public override void Write(
             Utf8JsonWriter writer,
             UnsupportedDictionaryWrapper value,

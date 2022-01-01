@@ -4,6 +4,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 internal class TestRedisServer

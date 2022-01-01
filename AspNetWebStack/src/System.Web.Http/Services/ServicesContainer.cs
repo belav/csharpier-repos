@@ -28,6 +28,7 @@ namespace System.Web.Http.Controllers
         }
 
         public abstract object GetService(Type serviceType);
+
         public abstract IEnumerable<object> GetServices(Type serviceType);
 
         // critical method for mutation operations (Add,Insert,Clear,Replace, etc)

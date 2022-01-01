@@ -2115,6 +2115,7 @@ namespace System.Net.Http.Functional.Tests
     public sealed class HttpClientSendTest_Sync : HttpClientTest.HttpClientSendTest
     {
         public HttpClientSendTest_Sync(ITestOutputHelper output) : base(output) { }
+
         protected override bool TestAsync => false;
     }
 

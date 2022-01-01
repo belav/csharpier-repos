@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Net;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal class HostingRequestStartingLog : IReadOnlyList<KeyValuePair<string, object?>>

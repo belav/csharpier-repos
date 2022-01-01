@@ -13,6 +13,7 @@ namespace System.Reflection.Emit
     {
         #region Consts Fields
         private const int NO_SIZE_IN_SIG = -1;
+
         #endregion
 
         #region Static Members
@@ -239,6 +240,7 @@ namespace System.Reflection.Emit
                 optionalParameterTypeCustomModifiers
             );
         }
+
         public static SignatureHelper GetPropertySigHelper(
             Module? mod,
             CallingConventions callingConvention,
@@ -288,6 +290,7 @@ namespace System.Reflection.Emit
 
             return new SignatureHelper(module, type);
         }
+
         #endregion
 
         #region Private Data Members
@@ -477,6 +480,7 @@ namespace System.Reflection.Emit
         {
             AddOneArgTypeHelperWorker(clsArgument, false);
         }
+
         private void AddOneArgTypeHelperWorker(Type clsArgument, bool lastWasGenericInst)
         {
             if (clsArgument.IsGenericParameter)

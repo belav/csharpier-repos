@@ -438,6 +438,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             get { return _assemblyReferences; }
             set { throw new InvalidOperationException(); }
         }
+
         #endregion
 
         #region Internal Properties
@@ -582,6 +583,7 @@ namespace System.Speech.Recognition.SrgsGrammar
                 writer.WriteEndElement();
             }
         }
+
         #endregion
 
         #region Private Fields

@@ -4,6 +4,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 namespace RazorPagesWebSite.Conventions;
 
 internal class CustomModelTypeConvention : IPageApplicationModelConvention

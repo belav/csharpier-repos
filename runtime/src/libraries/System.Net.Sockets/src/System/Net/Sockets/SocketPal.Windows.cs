@@ -12,6 +12,7 @@ using Microsoft.Win32.SafeHandles;
 
 #if BIGENDIAN
 using System.Buffers.Binary;
+
 #endif
 
 namespace System.Net.Sockets

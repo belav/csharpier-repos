@@ -1796,6 +1796,7 @@ namespace ClassLibrary2
             Assert.True(giver.Assembly.GivesAccessTo(requestor.Assembly));
             Assert.Empty(requestor.GetDiagnostics());
         }
+
         #endregion
 
         #region IVT instantiations
@@ -3221,6 +3222,7 @@ e29df38b5c72727c1333f32001949a0a0e2c10f8af0a344300ab2123052840cb16e30176c7281810
             // EXPECTED: no errors
             compilation.VerifyEmitDiagnostics();
         }
+
 #endif
 
         [ConditionalTheory(
@@ -3729,6 +3731,7 @@ public class C
 
             Assert.True(IsFileFullSigned(tempFile));
         }
+
         #endregion
 
         [Theory]

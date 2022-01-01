@@ -4,6 +4,7 @@
 using BasicWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Areas.Area1.Controllers;
 
 [Area("Area1")]

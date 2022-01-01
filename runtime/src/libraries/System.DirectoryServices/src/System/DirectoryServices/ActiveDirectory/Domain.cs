@@ -40,6 +40,7 @@ namespace System.DirectoryServices.ActiveDirectory
         private DomainController? _cachedInfrastructureRoleOwner;
         private Domain? _cachedParent;
         private Forest? _cachedForest;
+
         // this is needed because null value for parent is valid
         private bool _isParentInitialized;
 
@@ -53,8 +54,10 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             this.directoryEntryMgr = directoryEntryMgr;
         }
+
         internal Domain(DirectoryContext context, string domainName)
             : this(context, domainName, new DirectoryEntryManager(context)) { }
+
         #endregion constructors
 
         #region public methods

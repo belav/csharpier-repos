@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json;
 
+
 namespace FormatterWebSite.Controllers;
 
 public class JsonFormatterController : Controller

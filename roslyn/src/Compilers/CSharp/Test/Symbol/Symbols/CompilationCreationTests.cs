@@ -4369,6 +4369,7 @@ class Module1
             }
 
             public override bool Equals(object other) => true;
+
             public override int GetHashCode() => 1;
         }
 
@@ -4491,6 +4492,7 @@ System.Diagnostics.Process.GetCurrentProcess();
             }
 
             public override bool Equals(object other) => true;
+
             public override int GetHashCode() => 1;
         }
 

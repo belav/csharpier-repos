@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.FileProviders;
 using PhotinoNET;
 
+
 namespace Microsoft.AspNetCore.Components.WebView.Photino;
 
 internal class PhotinoWebViewManager : WebViewManager

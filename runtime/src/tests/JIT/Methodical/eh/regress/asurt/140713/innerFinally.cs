@@ -27,6 +27,7 @@ namespace test
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         static int Main(string[] args)
         {
             int x = 7,

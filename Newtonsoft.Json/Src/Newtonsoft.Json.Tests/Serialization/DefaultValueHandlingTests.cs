@@ -401,6 +401,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual("{}", json);
         }
+
 #endif
 
         [Test]
@@ -492,6 +493,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual("fff", obj.Field1);
         }
+
 #endif
 
         [Test]
@@ -596,6 +598,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [DefaultValue("fff")]
         public string Field1 { set; get; }
     }
+
 #endif
 
     public class DefaultValueHandlingDeserialize
@@ -724,6 +727,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [DataMember(EmitDefaultValue = false)]
         public object Object { get; set; }
     }
+
 #endif
 
     public enum ExportFormat

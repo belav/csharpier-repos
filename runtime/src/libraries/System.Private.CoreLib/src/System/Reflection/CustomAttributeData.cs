@@ -41,6 +41,7 @@ namespace System.Reflection
 
             return target.GetCustomAttributesData();
         }
+
         #endregion
 
         protected CustomAttributeData() { }
@@ -80,8 +81,11 @@ namespace System.Reflection
 
             return vsb.ToString();
         }
+
         public override int GetHashCode() => base.GetHashCode();
+
         public override bool Equals(object? obj) => obj == (object)this;
+
         #endregion
 
         #region Public Members

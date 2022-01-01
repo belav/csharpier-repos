@@ -485,6 +485,7 @@ namespace System.Dynamic
 
 #pragma warning disable CA1825 // used in reference comparison, requires unique object identity
             private static readonly Expression[] s_noArgs = new Expression[0];
+
 #pragma warning restore CA1825
 
             private static ReadOnlyCollection<Expression> GetConvertedArgs(params Expression[] args)

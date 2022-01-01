@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
 internal class DatabaseContextDetails

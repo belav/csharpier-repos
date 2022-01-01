@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Test;
 
 public class RendererTest
@@ -6804,12 +6805,16 @@ public class RendererTest
     {
         [Parameter]
         public Exception ThrowDuringRender { get; set; }
+
         [Parameter]
         public Exception ThrowDuringEventSync { get; set; }
+
         [Parameter]
         public Task ThrowDuringEventAsync { get; set; }
+
         [Parameter]
         public Exception ThrowDuringParameterSettingSync { get; set; }
+
         [Parameter]
         public Task ThrowDuringParameterSettingAsync { get; set; }
 

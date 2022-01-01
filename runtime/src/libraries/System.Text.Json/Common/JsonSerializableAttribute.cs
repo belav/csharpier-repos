@@ -3,6 +3,7 @@
 
 #if !BUILDING_SOURCE_GENERATOR
 using System.Text.Json.Serialization.Metadata;
+
 #endif
 
 namespace System.Text.Json.Serialization

@@ -77,6 +77,7 @@ namespace System.Security.AccessControl
         private readonly AceType _type;
         private AceFlags _flags;
         internal ushort _indexInAcl;
+
         #endregion
 
         #region Internal Constants

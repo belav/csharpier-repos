@@ -182,6 +182,7 @@ namespace System
                 name = fullname;
             }
         }
+
         #endregion
 
         #region Filters
@@ -635,6 +636,7 @@ namespace System
         {
             throw new NotSupportedException();
         }
+
         #endregion
 
         #region Type Overrides
@@ -1654,6 +1656,7 @@ namespace System
 
             return null;
         }
+
         #endregion
 
         #region Hierarchy
@@ -1996,6 +1999,7 @@ namespace System
         {
             public Enum.EnumInfo? EnumInfo;
             public TypeCode TypeCode;
+
             // this is the displayed form: special characters
             // ,+*&*[]\ in the identifier portions of the names
             // have been escaped with a leading backslash (\)
@@ -2079,6 +2083,7 @@ namespace System
         }
 
         private RuntimeConstructorInfo? m_serializationCtor;
+
         internal RuntimeConstructorInfo? GetSerializationCtor()
         {
             if (m_serializationCtor == null)

@@ -530,6 +530,7 @@ namespace System.Resources.Extensions.Tests
                 }
             }
         }
+
         [Fact]
         [ActiveIssue(
             "https://github.com/dotnet/runtime/issues/34495",

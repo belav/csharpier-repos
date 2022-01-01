@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
 internal class TestBlobSink : BlobLoggerProvider

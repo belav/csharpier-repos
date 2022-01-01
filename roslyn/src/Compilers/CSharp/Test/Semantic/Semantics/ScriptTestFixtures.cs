@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             public static readonly int StaticField = 123;
             public int Y => 2;
             public string N { get; set; } = "2";
+
             public int Z() => 3;
+
             public override int GetHashCode() => 123;
         }
 
@@ -43,6 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         private class PrivateClass : I
         {
             public string N { get; set; } = null;
+
             public int Z() => 3;
         }
 

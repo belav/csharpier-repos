@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInterop;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal sealed class RemoteNavigationInterception : INavigationInterception

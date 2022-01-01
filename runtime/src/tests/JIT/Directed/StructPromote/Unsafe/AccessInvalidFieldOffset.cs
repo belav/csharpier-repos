@@ -17,6 +17,7 @@ class TestStructAccessThroughRef
     {
         [FieldOffset(0)]
         public long anotherField;
+
         [FieldOffset(4)] // Offset doesn't correspond to a valid offset in PromotedStructSize.
         public long overlappingField;
 
@@ -29,6 +30,7 @@ class TestStructAccessThroughRef
     {
         [FieldOffset(0)]
         public long anotherField;
+
         [FieldOffset(8)]
         public int smallField;
 

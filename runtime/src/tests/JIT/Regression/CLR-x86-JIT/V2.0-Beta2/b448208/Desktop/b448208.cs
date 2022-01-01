@@ -24,6 +24,7 @@ public class cs1
 {
 #pragma warning disable 0414
     internal static int s_i = 0;
+
 #pragma warning restore 0414
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]

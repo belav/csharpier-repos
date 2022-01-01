@@ -31,6 +31,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             decoded.CertReq = reader.ReadBoolean();
             reader.ThrowIfNotEmpty();
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

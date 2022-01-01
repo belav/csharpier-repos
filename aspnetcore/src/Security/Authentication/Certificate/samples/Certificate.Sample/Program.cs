@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Certificate.Sample;
 
 public class Program

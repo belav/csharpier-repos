@@ -16,12 +16,17 @@ namespace Microsoft.CodeAnalysis.TodoComments
     internal abstract class AbstractTodoCommentService : ITodoCommentService
     {
         protected abstract bool PreprocessorHasComment(SyntaxTrivia trivia);
+
         protected abstract bool IsSingleLineComment(SyntaxTrivia trivia);
+
         protected abstract bool IsMultilineComment(SyntaxTrivia trivia);
+
         protected abstract bool IsIdentifierCharacter(char ch);
 
         protected abstract string GetNormalizedText(string message);
+
         protected abstract int GetCommentStartingIndex(string message);
+
         protected abstract void AppendTodoComments(
             ImmutableArray<TodoCommentDescriptor> commentDescriptors,
             SyntacticDocument document,

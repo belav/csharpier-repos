@@ -22,6 +22,7 @@ namespace System.Runtime.Serialization.Json
         ClassDataContract dataContract,
         XmlDictionaryString[]? memberNames
     );
+
     internal delegate void JsonFormatCollectionWriterDelegate(
         XmlWriterDelegator xmlWriter,
         object obj,

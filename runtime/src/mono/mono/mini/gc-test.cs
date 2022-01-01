@@ -18,6 +18,7 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
     public static int test_36_simple()

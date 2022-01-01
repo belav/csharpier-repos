@@ -5,6 +5,7 @@ using System;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Localization;
 
 public class StringLocalizerOfTTest
@@ -129,5 +130,6 @@ public class StringLocalizerOfTTest
     }
 
     private class BaseType { }
+
     private class DerivedType : BaseType { }
 }

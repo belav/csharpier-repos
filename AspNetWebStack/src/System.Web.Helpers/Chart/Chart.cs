@@ -40,6 +40,7 @@ namespace System.Web.Helpers
         private string _path;
 
         private DataSourceData _dataSource;
+
         [SuppressMessage(
             "StyleCop.CSharp.NamingRules",
             "SA1305:FieldNamesMustNotUseHungarianNotation",

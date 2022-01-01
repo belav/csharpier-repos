@@ -119,12 +119,14 @@ namespace Dynamic.Tests
           SubInterfaceWithOneMember1
     {
         int BaseInterfaceWithOneMember1.Foo() => 0;
+
         public int Bar() => 1;
     }
 
     public class ExplicitlyImplementedSubInterface : SubInterfaceWithOneMember1
     {
         int BaseInterfaceWithOneMember1.Foo() => 0;
+
         public int Bar() => 1;
     }
 
@@ -144,13 +146,16 @@ namespace Dynamic.Tests
     public class ExplicitlyImplementedBaseInterfaceWithTwoMembers : BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
+
         public int Bar() => 1;
     }
 
     public class ExplicitlyImplementedSubInterfaceWithNewMember : SubInterfaceWithNewMember
     {
         int SubInterfaceWithNewMember.Foo() => 0;
+
         int BaseInterfaceWithTwoMembers.Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -159,7 +164,9 @@ namespace Dynamic.Tests
           SubInterfaceWithNoMembers
     {
         int SubInterfaceWithNewMember.Foo() => 0;
+
         int BaseInterfaceWithTwoMembers.Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -170,6 +177,7 @@ namespace Dynamic.Tests
           BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
+
         public int Bar() => 1;
     }
 
@@ -177,6 +185,7 @@ namespace Dynamic.Tests
         : BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
+
         public int Bar() => 1;
     }
 
@@ -188,6 +197,7 @@ namespace Dynamic.Tests
     public partial class ExplicitlyImplementedInterfaceInPartialClass : BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
+
         public int Bar() => 1;
     }
 
@@ -204,6 +214,7 @@ namespace Dynamic.Tests
     public class ExplicitlyImlementedPartialInterface : PartialInterfaceWithTwoMembers
     {
         int PartialInterfaceWithTwoMembers.Foo() => 0;
+
         public int Bar() => 1;
     }
 
@@ -227,7 +238,9 @@ namespace Dynamic.Tests
           SubInterfaceWithOneMember2
     {
         int SubInterfaceWithOneMember2.Foo() => -1;
+
         public override int Foo() => 1;
+
         public int Bar() => 1;
     }
 }

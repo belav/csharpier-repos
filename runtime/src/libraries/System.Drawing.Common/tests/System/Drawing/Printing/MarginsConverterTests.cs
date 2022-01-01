@@ -187,11 +187,14 @@ namespace System.Drawing.Printing.Tests
             {
                 get { return null; }
             }
+
             public bool OnComponentChanging()
             {
                 return true;
             }
+
             public void OnComponentChanged() { }
+
             public object GetService(Type serviceType)
             {
                 return null;

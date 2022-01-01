@@ -43,6 +43,7 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SymbolFilter filter,
                 SearchQuery query
             );
+
             public abstract SymbolReference CreateReference<T>(SymbolResult<T> symbol)
                 where T : INamespaceOrTypeSymbol;
 

@@ -11,19 +11,24 @@ namespace System.Web.Http
         {
             return null;
         }
+
         public User GetUser([FromUri(Name = "id")] int myId)
         {
             return null;
         }
+
         public List<User> PostUserNameFromUri(int id, [FromUri] string name)
         {
             return null;
         }
+
         public List<User> PostUserNameFromBody(int id, [FromBody] string name)
         {
             return null;
         }
+
         public void DeleteUserWithNullableIdAndName(int? id, string name) { }
+
         public void DeleteUser(string address) { }
     }
 }

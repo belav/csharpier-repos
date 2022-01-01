@@ -100,6 +100,7 @@ namespace System.IO.Pipelines
 
             return new ValueTask(GetFlushResultAsTask(valueTask));
         }
+
 #endif
 
         public override Task FlushAsync(CancellationToken cancellationToken)

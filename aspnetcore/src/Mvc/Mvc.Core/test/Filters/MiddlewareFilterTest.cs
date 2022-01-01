@@ -23,6 +23,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
 public class MiddlewareFilterTest
@@ -551,6 +552,7 @@ public class MiddlewareFilterTest
     private class TestResourceFilter : IAsyncResourceFilter
     {
         private readonly TestResourceFilterAction _action;
+
         public TestResourceFilter(TestResourceFilterAction action)
         {
             _action = action;

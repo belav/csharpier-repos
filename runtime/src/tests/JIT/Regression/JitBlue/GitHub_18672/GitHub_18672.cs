@@ -13,6 +13,7 @@ struct S24
     public int FI2;
     public ulong FU3;
     public S4 FS4;
+
     public S24(int i, S4 s) : this()
     {
         FI2 = i;
@@ -24,6 +25,7 @@ struct S24
 struct S24W
 {
     public S24 FS24;
+
     public S24W(S24 s) : this()
     {
         FS24 = s;

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class DummyHubProtocol : IHubProtocol

@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
+
 namespace ControllersFromServicesClassLibrary;
 
 public class QueryValueService

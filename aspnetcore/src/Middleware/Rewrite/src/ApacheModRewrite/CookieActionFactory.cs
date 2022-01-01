@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Microsoft.AspNetCore.Rewrite.UrlActions;
 
+
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 internal class CookieActionFactory

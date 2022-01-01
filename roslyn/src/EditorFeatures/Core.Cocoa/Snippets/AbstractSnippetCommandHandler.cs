@@ -52,11 +52,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             ITextView textView,
             ITextBuffer subjectBuffer
         );
+
         protected abstract bool IsSnippetExpansionContext(
             Document document,
             int startPosition,
             CancellationToken cancellationToken
         );
+
         protected abstract bool TryInvokeInsertionUI(
             ITextView textView,
             ITextBuffer subjectBuffer,

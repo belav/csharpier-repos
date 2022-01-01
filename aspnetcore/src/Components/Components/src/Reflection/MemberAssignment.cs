@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.AspNetCore.Components.Reflection;
 
 internal class MemberAssignment

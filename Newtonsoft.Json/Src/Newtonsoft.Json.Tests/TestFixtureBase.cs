@@ -52,6 +52,7 @@ using System.Threading.Tasks;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 using Action = Newtonsoft.Json.Serialization.Action;
+
 #else
 using System.Linq;
 
@@ -192,6 +193,7 @@ namespace Newtonsoft.Json.Tests
             XAssert.Equal(expected, actual);
         }
     }
+
 #endif
 
     [TestFixture]
@@ -207,6 +209,7 @@ namespace Newtonsoft.Json.Tests
             var data = ms.ToArray();
             return Encoding.UTF8.GetString(data, 0, data.Length);
         }
+
 #endif
 
         public static string ResolvePath(string path)

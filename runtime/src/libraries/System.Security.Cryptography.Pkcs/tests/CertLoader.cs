@@ -172,6 +172,7 @@ namespace Test.Cryptography
         }
 
         internal abstract CertLoader CloneAsEphemeralLoader();
+
         internal abstract CertLoader CloneAsPerphemeralLoader();
 
         private bool _alreadySearchedMyStore = false;

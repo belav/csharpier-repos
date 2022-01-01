@@ -17,8 +17,11 @@ class Program
     }
 
     static void CallB() => new B();
+
     static void CallC() => new C();
+
     static void CallB2() => new B2();
+
     static void CallC2() => new C2();
 }
 

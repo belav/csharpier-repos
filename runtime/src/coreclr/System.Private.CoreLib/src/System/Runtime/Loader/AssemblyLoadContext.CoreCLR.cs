@@ -201,6 +201,7 @@ namespace System.Runtime.Loader
                 return loadedAssembly!;
             }
         }
+
 #endif
 
         // This method is invoked by the VM to resolve a satellite assembly reference

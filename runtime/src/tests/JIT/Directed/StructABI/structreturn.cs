@@ -283,6 +283,7 @@ class TestStructReturns
         TestNativeIntMixedFieldsCall2();
     }
 }
+
 #endregion
 
 #region Test struct unsafe casts
@@ -866,6 +867,7 @@ class TestMergeReturnBlocks
     {
         [FieldOffset(0)]
         public int val;
+
         [FieldOffset(0)]
         public ReturnStruct s;
 
@@ -918,6 +920,7 @@ class TestMergeReturnBlocks
         TestNoFieldSeqPropogation();
     }
 }
+
 #endregion
 
 class TestHFAandHVA
@@ -1014,6 +1017,7 @@ class TestHFAandHVA
     {
         return new Doubles2Wrapper();
     }
+
     struct Floats3Wrapper
     {
         public float f1;

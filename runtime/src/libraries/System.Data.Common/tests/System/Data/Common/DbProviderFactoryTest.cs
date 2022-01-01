@@ -27,9 +27,11 @@ namespace System.Data.Tests.Common
         {
             public static readonly ProviderFactoryWithExtras Instance =
                 new ProviderFactoryWithExtras();
+
             private ProviderFactoryWithExtras() { }
 
             public override DbDataAdapter CreateDataAdapter() => new MyAdapter();
+
             public override DbCommandBuilder CreateCommandBuilder() => new MyCommandBuilder();
         }
 
@@ -37,6 +39,7 @@ namespace System.Data.Tests.Common
         {
             public static readonly ProviderFactoryWithoutExtras Instance =
                 new ProviderFactoryWithoutExtras();
+
             private ProviderFactoryWithoutExtras() { }
         }
 
@@ -45,14 +48,18 @@ namespace System.Data.Tests.Common
         private class MyCommandBuilder : DbCommandBuilder
         {
             protected override string GetParameterPlaceholder(int parameterOrdinal) => null;
+
             protected override string GetParameterName(string parameterName) => null;
+
             protected override string GetParameterName(int parameterOrdinal) => null;
+
             protected override void ApplyParameterInfo(
                 DbParameter parameter,
                 DataRow row,
                 StatementType statementType,
                 bool whereClause
             ) { }
+
             protected override void SetRowUpdatingHandler(DbDataAdapter adapter) { }
         }
     }

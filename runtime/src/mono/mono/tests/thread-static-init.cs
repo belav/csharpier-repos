@@ -46,8 +46,10 @@ class X
 public struct Test
 {
     public static float Zero = 0.0f;
+
     [ThreadStatic]
     public static float One = 1.0f;
+
     [ContextStatic]
     public static float Two = 2.0f;
 }
@@ -55,8 +57,10 @@ public struct Test
 public struct Test2
 {
     public static float Zero = 0.0f;
+
     [ThreadStatic]
     public static float One = 1.0f;
+
     [ContextStatic]
     public static float Two = 2.0f;
 }

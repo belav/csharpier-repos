@@ -87,6 +87,7 @@ namespace Microsoft.CodeAnalysis.Remote
             ) => WriteValue(writer, (T)value, serializer);
 
             protected abstract T ReadValue(JsonReader reader, JsonSerializer serializer);
+
             protected abstract void WriteValue(
                 JsonWriter writer,
                 T value,

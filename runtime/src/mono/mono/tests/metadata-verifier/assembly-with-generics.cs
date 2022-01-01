@@ -7,6 +7,7 @@ public class Simple<T, K>
     {
         Simple<D, T>.Gen<K>();
     }
+
     public T t;
 }
 
@@ -17,11 +18,10 @@ public class Generic<A, B, C, D, E>
     where E : class, new() { }
 
 public interface A { }
+
 public interface Z<T> { }
 
-public class TypeWithConstraints<T> where T : A, IComparable, IComparable<string>, Z<string>
-{
-}
+public class TypeWithConstraints<T> where T : A, IComparable, IComparable<string>, Z<string> { }
 
 public class Driver
 {

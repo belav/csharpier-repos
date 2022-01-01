@@ -71,6 +71,7 @@ public class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
+
 #endif
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -803,6 +804,7 @@ public class Tests
         {
             return t;
         }
+
         public T return_t_iface(T t)
         {
             return t;
@@ -1159,9 +1161,13 @@ public class Tests
     public class ClassIFace<T> : IFace1<T>
     {
         public void m1() { }
+
         public void m2() { }
+
         public void m3() { }
+
         public void m4() { }
+
         public void m5() { }
     }
 
@@ -1362,6 +1368,7 @@ public class Tests
         {
             return new Pair<int, int>() { First = 1, Second = 2 };
         }
+
         public AnEnum return_enum()
         {
             return AnEnum.Two;
@@ -2216,6 +2223,7 @@ public class Tests
         {
             return b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8;
         }
+
         public int SBytes(
             T t,
             int dummy1,
@@ -2234,6 +2242,7 @@ public class Tests
         {
             return b1 + b2 + b3 + b4;
         }
+
         public int Shorts(
             T t,
             int dummy1,
@@ -2252,6 +2261,7 @@ public class Tests
         {
             return b1 + b2 + b3 + b4;
         }
+
         public int UShorts(
             T t,
             int dummy1,
@@ -2270,6 +2280,7 @@ public class Tests
         {
             return b1 + b2 + b3 + b4;
         }
+
         public int Ints(
             T t,
             int a1,
@@ -2288,6 +2299,7 @@ public class Tests
         {
             return i1 + i2 + i3 + i4;
         }
+
         public int UInts(
             T t,
             int a1,
@@ -2306,6 +2318,7 @@ public class Tests
         {
             return (int)(i1 + i2 + i3 + i4);
         }
+
         public int Structs(
             T t,
             int dummy1,
@@ -2321,6 +2334,7 @@ public class Tests
         {
             return s.a + s.b + s.c + s.d;
         }
+
         public int Floats(
             T t,
             double d1,
@@ -2339,6 +2353,7 @@ public class Tests
         {
             return (int)d9 + (int)d10 + (int)s11 + (int)s12;
         }
+
         public void Generic<T2>(
             T t,
             T2[] arr,
@@ -2674,6 +2689,7 @@ public class Tests
             return 2;
         }
     }
+
     static int test_0_out_sbyte()
     {
         return SByteTestClass.execute();
@@ -2697,6 +2713,7 @@ public class Tests
             return 2;
         }
     }
+
     static int test_0_out_int16()
     {
         return Int16TestClass.execute();
@@ -2997,6 +3014,7 @@ public class Tests
         c.prop = new H();
         return (c.Foo() == "abcd") ? 0 : 1;
     }
+
 #endif
 
     class KvpList<T>
@@ -3102,6 +3120,7 @@ public class H : Outer<object>.ID
         return "abcd";
     }
 }
+
 #endif
 
 #if !__MOBILE__

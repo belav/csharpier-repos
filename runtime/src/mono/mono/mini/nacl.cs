@@ -24,15 +24,18 @@ class ThreadRunner
     {
         return Inc1(a);
     }
+
     public Int32 Inc1(Int32 a)
     {
         return a + 2;
     }
+
     public void PrintA(A a)
     {
         a.Print();
         ((B)a).Print();
     }
+
     public void Run()
     {
         Console.WriteLine("Running thread");
@@ -56,6 +59,7 @@ class Extensions
 class RuntimeServices
 {
     public System.Reflection.MemberInfo[] members = typeof(Extensions).GetMembers();
+
     public void Run()
     {
         foreach (var m in members)
@@ -122,6 +126,7 @@ class Tests
         }
         return sum;
     }
+
     static int test_21_vararg_test()
     {
         int sum = 0;
@@ -164,6 +169,7 @@ class Tests
     public class LongClass : BaseClass
     {
         public long Value;
+
         public LongClass(long val)
         {
             Value = val;

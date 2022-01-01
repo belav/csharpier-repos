@@ -151,19 +151,32 @@ namespace Roslyn.Utilities
         }
 
         public bool ReadBoolean() => _reader.ReadBoolean();
+
         public byte ReadByte() => _reader.ReadByte();
+
         // read as ushort because BinaryWriter fails on chars that are unicode surrogates
         public char ReadChar() => (char)_reader.ReadUInt16();
+
         public decimal ReadDecimal() => _reader.ReadDecimal();
+
         public double ReadDouble() => _reader.ReadDouble();
+
         public float ReadSingle() => _reader.ReadSingle();
+
         public int ReadInt32() => _reader.ReadInt32();
+
         public long ReadInt64() => _reader.ReadInt64();
+
         public sbyte ReadSByte() => _reader.ReadSByte();
+
         public short ReadInt16() => _reader.ReadInt16();
+
         public uint ReadUInt32() => _reader.ReadUInt32();
+
         public ulong ReadUInt64() => _reader.ReadUInt64();
+
         public ushort ReadUInt16() => _reader.ReadUInt16();
+
         public string ReadString() => ReadStringValue();
 
         public Guid ReadGuid()

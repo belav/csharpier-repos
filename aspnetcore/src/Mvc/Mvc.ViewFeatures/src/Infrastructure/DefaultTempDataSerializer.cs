@@ -6,6 +6,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Text.Json;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
 internal class DefaultTempDataSerializer : TempDataSerializer

@@ -33,6 +33,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ensureUniqueTag(Asn1Tag.Sequence, "Ktri");
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 1), "Kari");
         }
+
 #endif
 
         internal void Encode(AsnWriter writer)

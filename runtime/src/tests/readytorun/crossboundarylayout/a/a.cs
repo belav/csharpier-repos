@@ -24,6 +24,7 @@ namespace CrossBoundaryLayout
     public class ATest
     {
         public static volatile object s_testFailObj;
+
         public static void ReportTestFailure(string test, object o, ref int failCount)
         {
             Console.WriteLine(test);

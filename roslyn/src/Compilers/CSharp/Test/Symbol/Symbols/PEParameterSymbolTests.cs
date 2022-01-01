@@ -64,6 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     .WithLocation(5, 16)
             );
         }
+
 #endif
 
         [Fact]

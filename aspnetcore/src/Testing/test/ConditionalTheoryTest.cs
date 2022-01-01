@@ -6,6 +6,7 @@ using System.Globalization;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 [TestCaseOrderer(
@@ -98,6 +99,7 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     {
         Asserter.TestRan = true;
     }
+
 #elif NET472
     [ConditionalTheory]
     [FrameworkSkipCondition(RuntimeFrameworks.CoreCLR)]
@@ -106,6 +108,7 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     {
         Asserter.TestRan = true;
     }
+
 #else
 #error Target frameworks need to be updated.
 #endif
@@ -145,6 +148,7 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     public class Skippable : IXunitSerializable
     {
         public Skippable() { }
+
         public int Data { get; set; }
         public string Skip { get; set; }
 

@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 /// <summary>

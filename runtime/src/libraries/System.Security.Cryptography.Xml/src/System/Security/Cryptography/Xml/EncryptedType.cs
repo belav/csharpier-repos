@@ -118,6 +118,7 @@ namespace System.Security.Cryptography.Xml
         }
 
         public abstract void LoadXml(XmlElement value);
+
         public abstract XmlElement GetXml();
     }
 }

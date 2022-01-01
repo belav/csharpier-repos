@@ -150,7 +150,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         }
 
         protected abstract string GetDisplayText();
+
         internal abstract Solution AddToSolution(Solution solution);
+
         internal abstract Solution RemoveFromSolution(Solution solution);
 
         public override int GetText(out VSTREETEXTOPTIONS tto, out string pbstrText)

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.Performance;
 
 public class RenderTreeDiffBuilderBenchmark

@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Http.Extensions;
 
 internal static class ProblemDetailsDefaults

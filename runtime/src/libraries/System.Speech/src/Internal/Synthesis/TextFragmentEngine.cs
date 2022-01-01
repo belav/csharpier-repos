@@ -344,6 +344,7 @@ namespace System.Speech.Internal.Synthesis
         }
 
         public void EndPromptEngineRule(object voice, string name) { }
+
         #endregion
 
         public void EndElement() { }

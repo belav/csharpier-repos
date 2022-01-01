@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if DEBUG_ALPHA
         private static int _nextSequence = 1;
         private readonly int _mySequence;
+
 #endif
 
         internal SubstitutedTypeParameterSymbol(

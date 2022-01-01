@@ -124,6 +124,7 @@ namespace System.Reflection
         public int Value;
 
         public static implicit operator int(MetadataToken token) => token.Value;
+
         public static implicit operator MetadataToken(int token) => new MetadataToken(token);
 
         public static bool IsTokenOfType(int token, params MetadataTokenType[] types)
@@ -231,6 +232,7 @@ namespace System.Reflection
             out string? marshalCookie,
             out int iidParamIndex
         );
+
         internal static void GetMarshalAs(
             ConstArray nativeType,
             out UnmanagedType unmanagedType,
@@ -261,6 +263,7 @@ namespace System.Reflection
             safeArraySubType = (VarEnum)_safeArraySubType;
             arraySubType = (UnmanagedType)_arraySubType;
         }
+
         #endregion
 
         #region Internal Static Members
@@ -268,6 +271,7 @@ namespace System.Reflection
         {
             throw new MetadataException(hResult);
         }
+
         #endregion
 
         #region Constructor
@@ -276,6 +280,7 @@ namespace System.Reflection
             m_metadataImport2 = metadataImport2;
             m_keepalive = keepalive;
         }
+
         #endregion
 
         #region FCalls
@@ -330,6 +335,7 @@ namespace System.Reflection
             out int length,
             out int corElementType
         );
+
         public string? GetDefaultValue(
             int mdToken,
             out long value,
@@ -355,6 +361,7 @@ namespace System.Reflection
             void** name,
             out int length
         );
+
         public unsafe string? GetUserString(int mdToken)
         {
             void* name;
@@ -365,6 +372,7 @@ namespace System.Reflection
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern unsafe void _GetName(IntPtr scope, int mdToken, void** name);
+
         public unsafe MdUtf8String GetName(int mdToken)
         {
             void* name;
@@ -375,6 +383,7 @@ namespace System.Reflection
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern unsafe void _GetNamespace(IntPtr scope, int mdToken, void** namesp);
+
         public unsafe MdUtf8String GetNamespace(int mdToken)
         {
             void* namesp;
@@ -390,6 +399,7 @@ namespace System.Reflection
             void** name,
             out int eventAttributes
         );
+
         public unsafe void GetEventProps(
             int mdToken,
             out void* name,
@@ -408,6 +418,7 @@ namespace System.Reflection
             int mdToken,
             out int fieldAttributes
         );
+
         public void GetFieldDefProps(int mdToken, out FieldAttributes fieldAttributes)
         {
             _GetFieldDefProps(m_metadataImport2, mdToken, out int _fieldAttributes);
@@ -422,6 +433,7 @@ namespace System.Reflection
             out int propertyAttributes,
             out ConstArray signature
         );
+
         public unsafe void GetPropertyProps(
             int mdToken,
             out void* name,
@@ -443,6 +455,7 @@ namespace System.Reflection
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void _GetParentToken(IntPtr scope, int mdToken, out int tkParent);
+
         public int GetParentToken(int tkToken)
         {
             _GetParentToken(m_metadataImport2, tkToken, out int tkParent);
@@ -456,6 +469,7 @@ namespace System.Reflection
             out int sequence,
             out int attributes
         );
+
         public void GetParamDefProps(
             int parameterToken,
             out int sequence,
@@ -574,6 +588,7 @@ namespace System.Reflection
             out int packSize,
             out int classSize
         );
+
         public void GetClassLayout(int typeTokenDef, out int packSize, out int classSize)
         {
             _GetClassLayout(m_metadataImport2, typeTokenDef, out packSize, out classSize);
@@ -586,6 +601,7 @@ namespace System.Reflection
             int fieldTokenDef,
             out int offset
         );
+
         public bool GetFieldOffset(int typeTokenDef, int fieldTokenDef, out int offset)
         {
             return _GetFieldOffset(m_metadataImport2, typeTokenDef, fieldTokenDef, out offset);
@@ -656,6 +672,7 @@ namespace System.Reflection
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern bool _IsValidToken(IntPtr scope, int token);
+
         public bool IsValidToken(int token)
         {
             return _IsValidToken(m_metadataImport2, token);
@@ -666,6 +683,7 @@ namespace System.Reflection
     internal sealed class MetadataException : Exception
     {
         private int m_hr;
+
         internal MetadataException(int hr)
         {
             m_hr = hr;

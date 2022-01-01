@@ -8,8 +8,10 @@ using System.Runtime.CompilerServices;
 
 #if TARGET_32BIT
 using nint = System.Int32;
+
 #else
 using nint = System.Int64;
+
 #endif
 
 namespace GitHub_23199

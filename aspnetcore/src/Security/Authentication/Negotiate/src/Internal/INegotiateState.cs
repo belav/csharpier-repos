@@ -4,6 +4,7 @@
 using System;
 using System.Security.Principal;
 
+
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
 // For testing

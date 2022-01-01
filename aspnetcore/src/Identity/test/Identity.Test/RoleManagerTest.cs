@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class RoleManagerTest

@@ -42,6 +42,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             [MemberNotNullWhen(true, nameof(StatementsOpt))]
 #pragma warning disable CS8775
             public bool HasStatements => _statements?.Count > 0;
+
 #pragma warning restore
 
             public ArrayBuilder<IOperation>? StatementsOpt => _statements;

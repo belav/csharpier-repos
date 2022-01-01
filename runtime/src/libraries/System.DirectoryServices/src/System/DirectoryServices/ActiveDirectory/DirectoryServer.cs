@@ -33,6 +33,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
         #region constructors
         protected DirectoryServer() { }
+
         #endregion constructors
 
         #region IDisposable
@@ -66,6 +67,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 _disposed = true;
             }
         }
+
         #endregion IDisposable
 
         #region public methods

@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 // TODO: Add test variation with non IdentityDbContext
@@ -114,6 +115,7 @@ public abstract class SqlStoreTestBase<TUser, TRole, TKey>
 
     protected override Expression<Func<TUser, bool>> UserNameStartsWithPredicate(string userName) =>
         u => u.UserName.StartsWith(userName);
+
 #pragma warning restore CA1310 // Specify StringComparison for correctness
 
     protected virtual TestDbContext CreateContext()

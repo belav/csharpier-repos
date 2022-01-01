@@ -1231,6 +1231,7 @@ namespace StaticTestGenerator
         {
             /// <summary>The method, property, or field to invoke or access to retrieve theory data.</summary>
             public MemberInfo? MemberDataMember;
+
             /// <summary>
             /// If <see cref="MemberDataMember"/> is a MethodInfo, the arguments to the test method, if there are any.
             /// Otherwise, the arguments to the member data method, or null if there aren't any.

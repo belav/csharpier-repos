@@ -8,10 +8,12 @@ using Microsoft.CodeAnalysis.Options;
 
 #if CODE_STYLE
 using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
+
 #else
 using System.Composition;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options.Providers;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Formatting
@@ -31,6 +33,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             public ImmutableArray<IOption> Options { get; } = FormattingOptions2.Options;
         }
+
 #endif
         private const string FeatureName = "FormattingOptions";
 

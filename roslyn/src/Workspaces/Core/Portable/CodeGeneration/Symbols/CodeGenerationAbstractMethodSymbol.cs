@@ -56,10 +56,13 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public abstract bool IsInitOnly { get; }
         public abstract IMethodSymbol OverriddenMethod { get; }
         public abstract IMethodSymbol ReducedFrom { get; }
+
         public abstract ITypeSymbol GetTypeInferredDuringReduction(
             ITypeParameterSymbol reducedFromTypeParameter
         );
+
         public abstract IMethodSymbol ReduceExtensionMethod(ITypeSymbol receiverType);
+
         public abstract ImmutableArray<IMethodSymbol> ExplicitInterfaceImplementations { get; }
         public abstract IMethodSymbol PartialDefinitionPart { get; }
         public abstract IMethodSymbol PartialImplementationPart { get; }

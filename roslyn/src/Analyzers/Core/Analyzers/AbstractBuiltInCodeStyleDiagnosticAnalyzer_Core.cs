@@ -86,6 +86,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     enforceOnBuild
                 )
             );
+
 #pragma warning restore RS0030 // Do not used banned APIs
 
         /// <summary>

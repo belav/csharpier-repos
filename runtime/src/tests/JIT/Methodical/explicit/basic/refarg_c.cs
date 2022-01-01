@@ -35,6 +35,7 @@ namespace Test
     {
         private static AA s_aa = new AA();
         public static int exitCode = 1;
+
         private static void Litter()
         {
             GC.Collect();

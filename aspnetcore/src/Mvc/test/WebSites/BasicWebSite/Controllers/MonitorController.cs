@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 
+
 namespace BasicWebSite;
 
 public class MonitorController : Controller

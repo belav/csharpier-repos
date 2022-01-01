@@ -389,6 +389,7 @@ namespace Microsoft.Data.Sqlite
                 File.Delete("encrypted2.db");
             }
         }
+
 #endif
 
         [Theory]

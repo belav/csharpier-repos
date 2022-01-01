@@ -14,6 +14,7 @@ using FormatterWebSite.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>

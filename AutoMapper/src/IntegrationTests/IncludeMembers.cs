@@ -19,12 +19,14 @@ namespace AutoMapper.IntegrationTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -32,6 +34,7 @@ namespace AutoMapper.IntegrationTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -39,6 +42,7 @@ namespace AutoMapper.IntegrationTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -74,6 +78,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -87,6 +92,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class IncludeMembersExplicitExpansion : AutoMapperSpecBase
     {
         class Source
@@ -96,12 +102,14 @@ namespace AutoMapper.IntegrationTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -109,6 +117,7 @@ namespace AutoMapper.IntegrationTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -116,6 +125,7 @@ namespace AutoMapper.IntegrationTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -153,6 +163,7 @@ namespace AutoMapper.IntegrationTests
                         .ForMember(d => d.Title, o => o.ExplicitExpansion());
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -177,6 +188,7 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -184,6 +196,7 @@ namespace AutoMapper.IntegrationTests
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -192,6 +205,7 @@ namespace AutoMapper.IntegrationTests
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -201,6 +215,7 @@ namespace AutoMapper.IntegrationTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -210,6 +225,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -230,6 +246,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -243,6 +260,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -270,6 +288,7 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -277,6 +296,7 @@ namespace AutoMapper.IntegrationTests
             public string Description1 { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -285,6 +305,7 @@ namespace AutoMapper.IntegrationTests
             public string Title1 { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -294,6 +315,7 @@ namespace AutoMapper.IntegrationTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -303,6 +325,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -323,6 +346,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -338,6 +362,7 @@ namespace AutoMapper.IntegrationTests
                         .ForMember(d => d.Title, o => o.MapFrom(s => s.Title1));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -354,6 +379,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class IncludeMembersFirstOrDefaultWithSubqueryMapFrom : AutoMapperSpecBase
     {
         class Source
@@ -364,6 +390,7 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -371,12 +398,14 @@ namespace AutoMapper.IntegrationTests
             public List<InnerSourceDetails> InnerSourceDetails { get; } =
                 new List<InnerSourceDetails>();
         }
+
         class InnerSourceDetails
         {
             public int Id { get; set; }
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -385,12 +414,14 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSourceDetails> OtherInnerSourceDetails { get; } =
                 new List<OtherInnerSourceDetails>();
         }
+
         class OtherInnerSourceDetails
         {
             public int Id { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -398,16 +429,19 @@ namespace AutoMapper.IntegrationTests
             public DestinationDetails Details { get; set; }
             public OtherDestinationDetails OtherDetails { get; set; }
         }
+
         class DestinationDetails
         {
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherDestinationDetails
         {
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -417,6 +451,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -453,6 +488,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -476,6 +512,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<OtherInnerSourceDetails, OtherDestinationDetails>();
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -492,6 +529,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class IncludeMembersSelectFirstOrDefaultWithSubqueryMapFrom : AutoMapperSpecBase
     {
         class Source
@@ -503,11 +541,13 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSourceWrapper
         {
             public int Id { get; set; }
             public InnerSource InnerSource { get; set; }
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -515,17 +555,20 @@ namespace AutoMapper.IntegrationTests
             public List<InnerSourceDetailsWrapper> InnerSourceDetailsWrapper { get; } =
                 new List<InnerSourceDetailsWrapper>();
         }
+
         class InnerSourceDetailsWrapper
         {
             public int Id { get; set; }
             public InnerSourceDetails InnerSourceDetails { get; set; }
         }
+
         class InnerSourceDetails
         {
             public int Id { get; set; }
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -534,12 +577,14 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSourceDetails> OtherInnerSourceDetails { get; } =
                 new List<OtherInnerSourceDetails>();
         }
+
         class OtherInnerSourceDetails
         {
             public int Id { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -547,16 +592,19 @@ namespace AutoMapper.IntegrationTests
             public DestinationDetails Details { get; set; }
             public OtherDestinationDetails OtherDetails { get; set; }
         }
+
         class DestinationDetails
         {
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherDestinationDetails
         {
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -566,6 +614,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -608,6 +657,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -640,6 +690,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<OtherInnerSourceDetails, OtherDestinationDetails>();
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -656,6 +707,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class SubqueryMapFromWithIncludeMembersFirstOrDefault : AutoMapperSpecBase
     {
         class Source
@@ -666,6 +718,7 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -673,12 +726,14 @@ namespace AutoMapper.IntegrationTests
             public List<InnerSourceDetails> InnerSourceDetails { get; } =
                 new List<InnerSourceDetails>();
         }
+
         class InnerSourceDetails
         {
             public int Id { get; set; }
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -687,12 +742,14 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSourceDetails> OtherInnerSourceDetails { get; } =
                 new List<OtherInnerSourceDetails>();
         }
+
         class OtherInnerSourceDetails
         {
             public int Id { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -700,16 +757,19 @@ namespace AutoMapper.IntegrationTests
             public DestinationDetails Details { get; set; }
             public OtherDestinationDetails OtherDetails { get; set; }
         }
+
         class DestinationDetails
         {
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherDestinationDetails
         {
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -719,6 +779,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -755,6 +816,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -776,6 +838,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<OtherInnerSourceDetails, OtherDestinationDetails>();
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -792,6 +855,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class SubqueryMapFromWithIncludeMembersSelectFirstOrDefault : AutoMapperSpecBase
     {
         class Source
@@ -802,6 +866,7 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -809,12 +874,14 @@ namespace AutoMapper.IntegrationTests
             public List<InnerSourceDetails> InnerSourceDetails { get; } =
                 new List<InnerSourceDetails>();
         }
+
         class InnerSourceDetails
         {
             public int Id { get; set; }
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -823,12 +890,14 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSourceDetails> OtherInnerSourceDetails { get; } =
                 new List<OtherInnerSourceDetails>();
         }
+
         class OtherInnerSourceDetails
         {
             public int Id { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -836,16 +905,19 @@ namespace AutoMapper.IntegrationTests
             public DestinationDetails Details { get; set; }
             public OtherDestinationDetails OtherDetails { get; set; }
         }
+
         class DestinationDetails
         {
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherDestinationDetails
         {
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -855,6 +927,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -891,6 +964,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -914,6 +988,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<OtherInnerSourceDetails, OtherDestinationDetails>();
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -930,6 +1005,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class SubqueryMapFromWithIncludeMembersSelectMemberFirstOrDefault : AutoMapperSpecBase
     {
         class Source
@@ -941,11 +1017,13 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSourceWrapper
         {
             public int Id { get; set; }
             public InnerSource InnerSource { get; set; }
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -953,17 +1031,20 @@ namespace AutoMapper.IntegrationTests
             public List<InnerSourceDetailsWrapper> InnerSourceDetailsWrapper { get; } =
                 new List<InnerSourceDetailsWrapper>();
         }
+
         class InnerSourceDetailsWrapper
         {
             public int Id { get; set; }
             public InnerSourceDetails InnerSourceDetails { get; set; }
         }
+
         class InnerSourceDetails
         {
             public int Id { get; set; }
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -972,12 +1053,14 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSourceDetails> OtherInnerSourceDetails { get; } =
                 new List<OtherInnerSourceDetails>();
         }
+
         class OtherInnerSourceDetails
         {
             public int Id { get; set; }
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -985,16 +1068,19 @@ namespace AutoMapper.IntegrationTests
             public DestinationDetails Details { get; set; }
             public OtherDestinationDetails OtherDetails { get; set; }
         }
+
         class DestinationDetails
         {
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherDestinationDetails
         {
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -1004,6 +1090,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -1046,6 +1133,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1080,6 +1168,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<OtherInnerSourceDetails, OtherDestinationDetails>();
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1096,6 +1185,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class IncludeMembersWithMapFromExpression : AutoMapperSpecBase
     {
         class Source
@@ -1105,12 +1195,14 @@ namespace AutoMapper.IntegrationTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public string Description1 { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -1118,6 +1210,7 @@ namespace AutoMapper.IntegrationTests
             public string Description { get; set; }
             public string Title1 { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -1125,6 +1218,7 @@ namespace AutoMapper.IntegrationTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -1149,6 +1243,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1161,6 +1256,7 @@ namespace AutoMapper.IntegrationTests
                         .ForMember(d => d.Title, o => o.MapFrom(s => s.Title1));
                 }
             );
+
         [Fact]
         public void Should_flatten_with_MapFrom()
         {
@@ -1183,12 +1279,14 @@ namespace AutoMapper.IntegrationTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public int? Code { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -1196,6 +1294,7 @@ namespace AutoMapper.IntegrationTests
             public int? Code { get; set; }
             public int? OtherCode { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -1203,6 +1302,7 @@ namespace AutoMapper.IntegrationTests
             public int Code { get; set; }
             public int OtherCode { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -1235,6 +1335,7 @@ namespace AutoMapper.IntegrationTests
                         .ForMember(d => d.OtherCode, o => o.NullSubstitute(7));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1247,6 +1348,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class IncludeMembersMembersFirstOrDefaultWithNullSubstitute : AutoMapperSpecBase
     {
         class Source
@@ -1257,12 +1359,14 @@ namespace AutoMapper.IntegrationTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public int? Code { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -1270,6 +1374,7 @@ namespace AutoMapper.IntegrationTests
             public int? Code { get; set; }
             public int? OtherCode { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -1277,6 +1382,7 @@ namespace AutoMapper.IntegrationTests
             public int Code { get; set; }
             public int OtherCode { get; set; }
         }
+
         class Context : DbContext
         {
             public Context()
@@ -1286,6 +1392,7 @@ namespace AutoMapper.IntegrationTests
 
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -1295,6 +1402,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1310,6 +1418,7 @@ namespace AutoMapper.IntegrationTests
                         .ForMember(d => d.OtherCode, o => o.NullSubstitute(7));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1324,6 +1433,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class CascadedIncludeMembers : AutoMapperSpecBase
     {
         public class Source
@@ -1331,21 +1441,25 @@ namespace AutoMapper.IntegrationTests
             public int Id { get; set; }
             public Level1 FieldLevel1 { get; set; }
         }
+
         public class Level1
         {
             public int Id { get; set; }
             public Level2 FieldLevel2 { get; set; }
         }
+
         public class Level2
         {
             public int Id { get; set; }
             public long TheField { get; set; }
         }
+
         public class Destination
         {
             public int Id { get; set; }
             public long TheField { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1356,14 +1470,17 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<Level2, Destination>(MemberList.None);
                 }
             );
+
         class Context : DbContext
         {
             public Context()
             {
                 Database.SetInitializer(new DatabaseInitializer());
             }
+
             public DbSet<Source> Sources { get; set; }
         }
+
         class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -1377,6 +1494,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         [Fact]
         public void Should_flatten()
         {

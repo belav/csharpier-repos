@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xunit.Abstractions;
 using static Microsoft.AspNetCore.Testing.TestApplicationErrorLogger;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public class TestApplicationErrorLoggerLoggedTest : LoggedTest

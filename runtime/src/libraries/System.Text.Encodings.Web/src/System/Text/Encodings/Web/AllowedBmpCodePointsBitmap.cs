@@ -8,6 +8,7 @@ using System.Text.Unicode;
 
 #if NETCOREAPP
 using System.Numerics;
+
 #endif
 
 namespace System.Text.Encodings.Web

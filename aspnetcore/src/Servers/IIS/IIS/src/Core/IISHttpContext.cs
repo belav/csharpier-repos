@@ -26,6 +26,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
@@ -47,6 +48,7 @@ internal abstract partial class IISHttpContext
 
     private int _statusCode;
     private string? _reasonPhrase;
+
     // Used to synchronize callback registration and native method calls
     internal readonly object _contextLock = new object();
 

@@ -124,6 +124,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.NotSame(signature, signature2);
             Assert.Equal(signature, signature2);
         }
+
 #endif
 
         [Fact]
@@ -152,6 +153,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.NotSame(oid, oid2);
         }
+
 #endif
 
         [Fact]

@@ -6,6 +6,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 /// <summary>

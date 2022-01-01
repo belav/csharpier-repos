@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.Telemetry;
 
 #if !COCOA
 using System.Linq;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename

@@ -15,6 +15,7 @@ using System.Web.Http;
 
 #if NETFX_CORE
 using NameValueCollection = System.Net.Http.Formatting.HttpValueCollection;
+
 #endif
 
 namespace System.Net.Http.Formatting

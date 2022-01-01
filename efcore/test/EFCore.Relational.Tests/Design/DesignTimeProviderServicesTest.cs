@@ -10,6 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Design
     public abstract class DesignTimeProviderServicesTest
     {
         protected abstract Assembly GetRuntimeAssembly();
+
         protected abstract Type GetDesignTimeServicesType();
 
         [ConditionalFact]

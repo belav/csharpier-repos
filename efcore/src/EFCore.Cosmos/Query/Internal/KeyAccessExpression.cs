@@ -49,6 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
 #pragma warning disable 109
         public new virtual IProperty Property { get; }
+
 #pragma warning restore 109
 
         /// <summary>

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
 public class RedisProtocolTests

@@ -9,6 +9,7 @@ public enum DisappearingEnum
 {
     V0
 }
+
 #endif
 
 

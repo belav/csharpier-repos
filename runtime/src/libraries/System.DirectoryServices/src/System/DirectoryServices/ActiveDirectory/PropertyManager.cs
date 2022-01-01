@@ -22,6 +22,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public static string DnsRoot = "dnsRoot";
         public static string DistinguishedName = "distinguishedName";
         public static string TrustParent = "trustParent";
+
         // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         public static string FlatName = "flatName";
@@ -45,6 +46,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public static string MsDSHasFullReplicaNCs = "msDS-hasFullReplicaNCs";
         public static string NCName = "nCName";
         public static string Cn = "cn";
+
         // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         public static string NETBIOSName = "nETBIOSName";
@@ -64,6 +66,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public static string ServiceBindingInformation = "serviceBindingInformation";
         public static string MsDSReplAuthenticationMode = "msDS-ReplAuthenticationMode";
         public static string HasPartialReplicaNCs = "hasPartialReplicaNCs";
+
         // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         public static string Container = "container";
@@ -80,6 +83,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public static string RangeUpper = "rangeUpper";
         public static string RangeLower = "rangeLower";
         public static string IsMemberOfPartialAttributeSet = "isMemberOfPartialAttributeSet";
+
         // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         public static string ObjectVersion = "objectVersion";
@@ -97,12 +101,14 @@ namespace System.DirectoryServices.ActiveDirectory
         public static string SystemMayContain = "systemMayContain";
         public static string GovernsID = "governsID";
         public static string IsGlobalCatalogReady = "isGlobalCatalogReady";
+
         // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         public static string NTSecurityDescriptor = "ntSecurityDescriptor";
 #pragma warning restore 0414
         public static string DsServiceName = "dsServiceName";
         public static string ReplicateSingleObject = "replicateSingleObject";
+
         // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         public static string MsDSMasteredBy = "msDS-masteredBy";

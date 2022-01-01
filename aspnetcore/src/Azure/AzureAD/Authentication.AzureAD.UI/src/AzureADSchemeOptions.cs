@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
 internal class AzureADSchemeOptions

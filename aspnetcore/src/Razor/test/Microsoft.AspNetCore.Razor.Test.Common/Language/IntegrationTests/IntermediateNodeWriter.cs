@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 // Serializes single IR nodes (shallow).

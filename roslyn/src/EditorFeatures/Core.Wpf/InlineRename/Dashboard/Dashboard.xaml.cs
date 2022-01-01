@@ -365,6 +365,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             get { return EditorFeaturesResources.Cancel + " (Esc)"; }
         }
+
 #pragma warning restore CA1822 // Mark members as static
 
         private void OnElementSizeChanged(object sender, SizeChangedEventArgs e)

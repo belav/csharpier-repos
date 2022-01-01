@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
+
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace

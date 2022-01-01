@@ -1102,6 +1102,7 @@ namespace Castle.Core.Internal.Tests
         }
 
         private sealed class TKey { }
+
         private sealed class TValue { }
     }
 }

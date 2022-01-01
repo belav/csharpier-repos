@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 public class ComponentMarkupEncodingPassTest

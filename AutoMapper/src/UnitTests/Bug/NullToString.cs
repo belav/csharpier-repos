@@ -12,9 +12,11 @@ namespace AutoMapper.UnitTests.Bug
         {
             public InnerSource Inner { get; set; }
         }
+
         class InnerSource
         {
         }
+
         class Destination
         {
             public string Inner { get; set; }

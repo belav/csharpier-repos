@@ -206,6 +206,7 @@ namespace System.IO.Ports.Tests
                 com2.RtsEnable = false;
             }
         }
+
         #endregion
 
         #region Verification for Test Cases

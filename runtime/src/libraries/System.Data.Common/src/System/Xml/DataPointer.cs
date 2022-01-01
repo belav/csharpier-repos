@@ -89,6 +89,7 @@ namespace System.Xml
             _fOnValue = pointer._fOnValue;
             AssertValid();
         }
+
         private void MoveTo(XmlNode node)
         {
             // You should not move outside of this document

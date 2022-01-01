@@ -18,6 +18,7 @@ namespace System.Net.Http.Functional.Tests
 
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+
 #endif
 
     public abstract class HttpClientHandler_ClientCertificates_Test : HttpClientHandlerTestBase

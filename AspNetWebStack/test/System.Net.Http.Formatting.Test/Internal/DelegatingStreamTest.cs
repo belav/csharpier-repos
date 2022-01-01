@@ -230,6 +230,7 @@ namespace System.Net.Http.Internal
             // Assert
             mockInnerStream.Verify(s => s.EndRead(mockIAsyncResult.Object), Times.Once());
         }
+
 #endif
 
         [Fact]
@@ -348,6 +349,7 @@ namespace System.Net.Http.Internal
             // Assert
             mockInnerStream.Verify(s => s.EndWrite(mockIAsyncResult.Object), Times.Once());
         }
+
 #endif
 
         [Fact]

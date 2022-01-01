@@ -1556,6 +1556,7 @@ namespace System.Threading.Tasks
 
             /// <summary>A reference to the object on which the begin/end methods are invoked.</summary>
             private TInstance? m_thisRef;
+
             /// <summary>The end method.</summary>
             private Func<TInstance, IAsyncResult, TResult>? m_endMethod;
 

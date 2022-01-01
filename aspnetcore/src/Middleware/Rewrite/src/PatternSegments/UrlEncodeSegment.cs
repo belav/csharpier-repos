@@ -4,6 +4,7 @@
 using System.Text;
 using System.Text.Encodings.Web;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class UrlEncodeSegment : PatternSegment

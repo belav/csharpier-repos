@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Authorization.Test.TestObjects;
 
 public class TestAuthenticationService : IAuthenticationService

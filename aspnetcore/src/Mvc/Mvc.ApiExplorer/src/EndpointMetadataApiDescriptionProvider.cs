@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider

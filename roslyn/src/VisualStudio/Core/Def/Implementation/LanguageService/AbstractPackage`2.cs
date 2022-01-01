@@ -133,6 +133,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         );
 
         protected abstract IEnumerable<IVsEditorFactory> CreateEditorFactories();
+
         protected abstract TLanguageService CreateLanguageService();
 
         protected void RegisterService<T>(Func<CancellationToken, Task<T>> serviceCreator) =>

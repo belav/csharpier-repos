@@ -36,6 +36,7 @@ using NUnit.Framework;
 using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 

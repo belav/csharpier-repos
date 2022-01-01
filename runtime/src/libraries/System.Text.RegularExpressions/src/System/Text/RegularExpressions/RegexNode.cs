@@ -304,6 +304,7 @@ namespace System.Text.RegularExpressions
                 }
             }
         }
+
 #endif
 
         /// <summary>Performs additional optimizations on an entire tree prior to being used.</summary>

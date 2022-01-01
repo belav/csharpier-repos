@@ -41,8 +41,10 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
+
 #endif
 
 namespace Newtonsoft.Json.Linq
@@ -84,6 +86,7 @@ namespace Newtonsoft.Json.Linq
         /// Occurs when a property value is changing.
         /// </summary>
         public event PropertyChangingEventHandler? PropertyChanging;
+
 #endif
 
         /// <summary>
@@ -764,6 +767,7 @@ namespace Newtonsoft.Json.Linq
             ((IDictionary<string, JToken>)this).Remove(item.Key);
             return true;
         }
+
         #endregion
 
         internal override int GetDeepHashCode()

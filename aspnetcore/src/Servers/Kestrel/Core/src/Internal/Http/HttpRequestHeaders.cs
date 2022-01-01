@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal sealed partial class HttpRequestHeaders : HttpHeaders
@@ -212,6 +213,7 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
         /// Enumerator created from previous request
         /// </summary>
         public EnumeratorBox? CachedEnumerator { get; set; }
+
         /// <summary>
         /// Enumerator used on this request
         /// </summary>

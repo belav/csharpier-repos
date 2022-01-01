@@ -422,6 +422,7 @@ namespace System.Linq.Expressions.Tests
             var invFunc = invLambda.Compile(useInterpreter);
             Assert.Equal(42, invFunc());
         }
+
 #endif
 
         private delegate void RefIntAction(ref int x);

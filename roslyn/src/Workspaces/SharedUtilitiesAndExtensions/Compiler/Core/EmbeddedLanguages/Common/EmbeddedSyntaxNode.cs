@@ -45,6 +45,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         }
 
         internal abstract int ChildCount { get; }
+
         internal abstract EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode> ChildAt(int index);
 
         public EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode> this[int index] =>

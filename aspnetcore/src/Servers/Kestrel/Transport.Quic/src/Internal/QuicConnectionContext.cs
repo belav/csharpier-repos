@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
 internal partial class QuicConnectionContext : TransportMultiplexedConnection
@@ -20,6 +21,7 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
     internal PooledStreamStack<QuicStreamContext> StreamPool;
 
     private bool _streamPoolHeartbeatInitialized;
+
     // Ticks updated once per-second in heartbeat event.
     private long _heartbeatTicks;
     private readonly object _poolLock = new object();

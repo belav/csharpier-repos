@@ -45,6 +45,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 using System.Text;
 #else
 using NUnit.Framework;
+
 #endif
 
 namespace Newtonsoft.Json.Tests.Issues
@@ -92,10 +93,12 @@ namespace Newtonsoft.Json.Tests.Issues
                 get { return default(MyByRefLikeType); }
                 set { }
             }
+
             private static void DoNothing(Span<int> param)
             {
                 throw new InvalidOperationException("Should never be called.");
             }
+
             public string PrintMySpan(string str, Span<int> mySpan = default)
             {
                 return str;
@@ -110,6 +113,7 @@ namespace Newtonsoft.Json.Tests.Issues
         public ref struct MyByRefLikeType
         {
             public MyByRefLikeType(int i) { }
+
             public static int Index;
         }
     }

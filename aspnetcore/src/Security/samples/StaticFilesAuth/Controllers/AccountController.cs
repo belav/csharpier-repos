@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace StaticFilesAuth.Controllers;
 
 public class AccountController : Controller

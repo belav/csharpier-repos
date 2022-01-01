@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
 // By inheriting from ComponentRenderingTest, this test class also copies

@@ -70,6 +70,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         }
 
         protected abstract string GetMemberDisplayString(ISymbol memberSymbol);
+
         protected abstract string GetMemberAndTypeDisplayString(ISymbol memberSymbol);
 
         protected MemberListItem CreateFullyQualifiedMemberListItem(

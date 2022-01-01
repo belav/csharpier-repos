@@ -108,6 +108,7 @@ namespace System.Data
         private readonly TreeAccessMethod _accessMethod;
 
         protected abstract int CompareNode(K? record1, K? record2);
+
         protected abstract int CompareSateliteTreeNode(K? record1, K? record2);
 
         protected RBTree(TreeAccessMethod accessMethod)
@@ -593,6 +594,7 @@ namespace System.Data
               ? CompareNode(Key(x_id), Key(z_id))
               : CompareSateliteTreeNode(Key(x_id), Key(z_id));
         }
+
 #endif
 
         /*
@@ -1656,6 +1658,7 @@ namespace System.Data
 
             return true;
         }
+
 #endif
 
         public int Insert(K item)

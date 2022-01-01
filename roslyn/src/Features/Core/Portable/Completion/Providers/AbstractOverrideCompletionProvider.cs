@@ -25,10 +25,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             CancellationToken cancellationToken
         );
+
         public abstract ImmutableArray<ISymbol> FilterOverrides(
             ImmutableArray<ISymbol> members,
             ITypeSymbol? returnType
         );
+
         public abstract bool TryDetermineModifiers(
             SyntaxToken startToken,
             SourceText text,

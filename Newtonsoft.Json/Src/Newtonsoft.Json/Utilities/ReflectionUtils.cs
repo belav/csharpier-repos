@@ -52,6 +52,7 @@ namespace Newtonsoft.Json.Utilities
         Method = 8,
         Property = 16
     }
+
 #endif
 
 #if PORTABLE && !NETSTANDARD2_0
@@ -79,6 +80,7 @@ namespace Newtonsoft.Json.Utilities
         OptionalParamBinding = 262144,
         IgnoreReturn = 16777216
     }
+
 #endif
 
     internal static class ReflectionUtils
@@ -937,6 +939,7 @@ namespace Newtonsoft.Json.Utilities
 #endif
             }
         }
+
 #else
         public static T[] GetAttributes<T>(object attributeProvider, bool inherit)
             where T : Attribute
@@ -977,6 +980,7 @@ namespace Newtonsoft.Json.Utilities
                 )
             );
         }
+
 #endif
 
         public static StructMultiKey<string?, string> SplitFullyQualifiedTypeName(
@@ -1108,6 +1112,7 @@ namespace Newtonsoft.Json.Utilities
                 }
             }
         }
+
 #endif
 
         public static IEnumerable<PropertyInfo> GetProperties(

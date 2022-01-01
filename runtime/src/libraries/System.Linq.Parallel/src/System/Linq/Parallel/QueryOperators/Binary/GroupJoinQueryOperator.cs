@@ -628,6 +628,7 @@ namespace System.Linq.Parallel
         protected abstract Pair<IEnumerable<TElement>, TOrderKey> CreateValuePair(
             TBaseElement baseValue
         );
+
         protected abstract TOrderKey EmptyValueKey { get; }
     }
 }

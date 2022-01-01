@@ -21,6 +21,7 @@ namespace Roslyn.Test.Utilities
         /// The source with markers stripped out, that was used to produce the tree
         /// </summary>
         public readonly string Source;
+
         /// <summary>
         /// The original input source, with markers in tact
         /// </summary>

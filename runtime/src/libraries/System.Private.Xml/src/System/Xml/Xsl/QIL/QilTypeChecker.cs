@@ -1053,6 +1053,7 @@ namespace System.Xml.Xsl.Qil
             CheckClassAndNodeType(node[1], typeof(QilLiteral), QilNodeType.LiteralType);
             return node.TargetType;
         }
+
         #endregion // Xslt operators
 
 

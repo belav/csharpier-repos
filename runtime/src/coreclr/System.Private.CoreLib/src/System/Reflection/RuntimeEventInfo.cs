@@ -21,6 +21,7 @@ namespace System.Reflection
         private MethodInfo[]? m_otherMethod;
         private RuntimeType m_declaringType;
         private BindingFlags m_bindingFlags;
+
         #endregion
 
         #region Constructor
@@ -60,6 +61,7 @@ namespace System.Reflection
                 out m_bindingFlags
             );
         }
+
         #endregion
 
         #region Internal Members
@@ -73,6 +75,7 @@ namespace System.Reflection
         }
 
         internal BindingFlags BindingFlags => m_bindingFlags;
+
         #endregion
 
         #region Object Overrides
@@ -83,6 +86,7 @@ namespace System.Reflection
 
             return m_addMethod.GetParametersNoCopy()[0].ParameterType.FormatTypeName() + " " + Name;
         }
+
         #endregion
 
         #region ICustomAttributeProvider
@@ -117,24 +121,29 @@ namespace System.Reflection
         {
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
+
         #endregion
 
         #region MemberInfo Overrides
         public override MemberTypes MemberType => MemberTypes.Event;
         public override string Name => m_name ??= new MdUtf8String(m_utf8name).ToString();
         public override Type? DeclaringType => m_declaringType;
+
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             HasSameMetadataDefinitionAsCore<RuntimeEventInfo>(other);
+
         public override Type? ReflectedType => ReflectedTypeInternal;
 
         private RuntimeType ReflectedTypeInternal => m_reflectedTypeCache.GetRuntimeType();
 
         public override int MetadataToken => m_token;
         public override Module Module => GetRuntimeModule();
+
         internal RuntimeModule GetRuntimeModule()
         {
             return m_declaringType.GetRuntimeModule();
         }
+
         #endregion
 
         #region EventInfo Overrides

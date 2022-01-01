@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
 public class HostingApplicationDiagnosticsTests
@@ -753,6 +754,7 @@ public class HostingApplicationDiagnosticsTests
     private class NullScopeLogger : ILogger
     {
         private readonly bool _isEnabled;
+
         public NullScopeLogger(bool isEnabled = false)
         {
             _isEnabled = isEnabled;
@@ -774,6 +776,7 @@ public class HostingApplicationDiagnosticsTests
     private class LoggerWithScopes : ILogger
     {
         private readonly bool _isEnabled;
+
         public LoggerWithScopes(bool isEnabled = false)
         {
             _isEnabled = isEnabled;

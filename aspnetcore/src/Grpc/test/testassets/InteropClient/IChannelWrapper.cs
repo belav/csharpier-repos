@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
 
+
 namespace InteropTestsClient;
 
 public interface IChannelWrapper

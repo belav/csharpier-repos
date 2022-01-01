@@ -33,6 +33,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 Marshal.SizeOf(typeof(ExcepInfo)) == Marshal.SizeOf(typeof(ComTypes.EXCEPINFO))
             );
         }
+
 #endif
 
         private static string ConvertAndFreeBstr(ref IntPtr bstr)

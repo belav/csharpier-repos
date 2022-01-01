@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cryptography;
 using Microsoft.AspNetCore.DataProtection.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 /// <summary>

@@ -92,6 +92,7 @@ namespace Newtonsoft.Json.Utilities
             // because earlier versions of .NET didn't support covariant generics
             initial.AddRange(collection.Cast<T>());
         }
+
 #endif
 
         public static bool IsDictionaryType(Type type)
@@ -294,6 +295,7 @@ namespace Newtonsoft.Json.Utilities
                 j--;
             }
         }
+
 #endif
 
         private static IList<int> GetDimensions(IList values, int dimensionsCount)

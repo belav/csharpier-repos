@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using XmlFormattersWebSite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<Startup>>

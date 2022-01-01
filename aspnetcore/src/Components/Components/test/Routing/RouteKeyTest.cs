@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Routing;
 
 public class RouteKeyTest

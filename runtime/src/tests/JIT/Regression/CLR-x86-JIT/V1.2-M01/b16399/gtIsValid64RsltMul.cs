@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public struct AA
 {
     public static char[,,,,][,,] Static1(
@@ -45,6 +46,7 @@ public class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static int m1;
     public static byte[,][,,,] m2;
 }

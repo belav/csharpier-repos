@@ -15,6 +15,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public static int Status;
+
         public static int operator +(short x, Base b)
         {
             return int.MinValue;

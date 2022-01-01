@@ -39,6 +39,7 @@ namespace System.ComponentModel.Tests
         {
             LicenseManager.Validate(typeof(RuntimeLicensedObject));
         }
+
         public RuntimeLicensedObject(int a) : this() { }
     }
 

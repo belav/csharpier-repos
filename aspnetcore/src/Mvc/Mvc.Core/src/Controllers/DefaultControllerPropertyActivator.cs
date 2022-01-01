@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.Core;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
 internal sealed class DefaultControllerPropertyActivator : IControllerPropertyActivator

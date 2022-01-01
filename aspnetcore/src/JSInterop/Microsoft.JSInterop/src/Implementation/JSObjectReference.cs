@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.JSInterop.Implementation;
 
 /// <summary>

@@ -8,12 +8,14 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using AutoMapper.Execution;
 using AutoMapper.Internal;
+
 namespace AutoMapper.QueryableExtensions.Impl
 {
     using static Expression;
     using static ExpressionBuilder;
     using ParameterBag = IDictionary<string, object>;
     using TypePairCount = IDictionary<ProjectionRequest, int>;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IProjectionBuilder
     {
@@ -33,6 +35,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             LetPropertyMaps letPropertyMaps
         );
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IProjectionMapper
     {
@@ -46,6 +49,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             LetPropertyMaps letPropertyMaps
         );
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ProjectionBuilder : IProjectionBuilder
     {
@@ -60,12 +64,14 @@ namespace AutoMapper.QueryableExtensions.Impl
                 new StringProjectionMapper(),
                 new EnumProjectionMapper(),
             };
+
         private readonly LockingConcurrentDictionary<
             ProjectionRequest,
             QueryExpressions
         > _projectionCache;
         private readonly IGlobalConfiguration _configurationProvider;
         private readonly IProjectionMapper[] _projectionMappers;
+
         public ProjectionBuilder(
             IGlobalConfiguration configurationProvider,
             IProjectionMapper[] projectionMappers
@@ -77,6 +83,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                 CreateProjection
             );
         }
+
         public QueryExpressions GetProjection(
             Type sourceType,
             Type destinationType,
@@ -100,6 +107,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                 parameters
             );
         }
+
         private QueryExpressions CreateProjection(ProjectionRequest request) =>
             CreateProjection(
                 request,
@@ -109,6 +117,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                     new Dictionary<ProjectionRequest, int>()
                 )
             );
+
         public QueryExpressions CreateProjection(
             in ProjectionRequest request,
             LetPropertyMaps letPropertyMaps
@@ -131,11 +140,13 @@ namespace AutoMapper.QueryableExtensions.Impl
                 )
               : new QueryExpressions(projection, instanceParameter);
         }
+
         public Expression CreateInnerProjection(
             in ProjectionRequest request,
             Expression instanceParameter,
             LetPropertyMaps letPropertyMaps
         ) => CreateProjectionCore(request, instanceParameter, letPropertyMaps, out var _);
+
         private Expression CreateProjectionCore(
             in ProjectionRequest request,
             Expression instanceParameter,
@@ -151,6 +162,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                 );
             return CreateProjectionCore(request, instanceParameter, typeMap, letPropertyMaps);
         }
+
         private Expression CreateProjectionCore(
             ProjectionRequest request,
             Expression instanceParameter,
@@ -327,23 +339,27 @@ namespace AutoMapper.QueryableExtensions.Impl
                     _ => New(typeMap.DestinationTypeToUse)
                 };
         }
+
         private static AutoMapperMappingException CannotMap(MemberMap memberMap, Type sourceType) =>
             new AutoMapperMappingException(
                 $"Unable to create a map expression from {memberMap.SourceMember?.DeclaringType?.Name}.{memberMap.SourceMember?.Name} ({sourceType}) to {memberMap.DestinationType.Name}.{memberMap.DestinationName} ({memberMap.DestinationType})",
                 null,
                 memberMap
             );
+
         [EditorBrowsable(EditorBrowsableState.Never)]
         class FirstPassLetPropertyMaps : LetPropertyMaps
         {
             readonly Stack<MemberProjection> _currentPath = new Stack<MemberProjection>();
             readonly List<SubQueryPath> _savedPaths = new List<SubQueryPath>();
             readonly MemberPath _parentPath;
+
             public FirstPassLetPropertyMaps(
                 IGlobalConfiguration configurationProvider,
                 MemberPath parentPath,
                 TypePairCount builtProjections
             ) : base(configurationProvider, builtProjections) => _parentPath = parentPath;
+
             public override Expression GetSubQueryMarker(LambdaExpression letExpression)
             {
                 var subQueryPath = new SubQueryPath(
@@ -358,8 +374,10 @@ namespace AutoMapper.QueryableExtensions.Impl
                 _savedPaths.Add(subQueryPath);
                 return subQueryPath.Marker;
             }
+
             public override void Push(MemberProjection memberProjection) =>
                 _currentPath.Push(memberProjection);
+
             public override MemberPath GetCurrentPath() =>
                 _parentPath.Concat(
                     _currentPath
@@ -367,14 +385,18 @@ namespace AutoMapper.QueryableExtensions.Impl
                         .Select(p => (p.MemberMap as PropertyMap)?.DestinationMember)
                         .Where(p => p != null)
                 );
+
             public override void Pop() => _currentPath.Pop();
+
             public override int Count => _savedPaths.Count;
+
             public override LetPropertyMaps New() =>
                 new FirstPassLetPropertyMaps(
                     ConfigurationProvider,
                     GetCurrentPath(),
                     BuiltProjections
                 );
+
             public override QueryExpressions GetSubQueryExpression(
                 ProjectionBuilder builder,
                 Expression projection,
@@ -440,17 +462,20 @@ namespace AutoMapper.QueryableExtensions.Impl
                     ).Visit(projection);
                 }
             }
+
             readonly struct SubQueryPath
             {
                 private readonly MemberProjection[] _members;
                 public readonly Expression Marker;
                 public readonly LambdaExpression LetExpression;
+
                 public SubQueryPath(MemberProjection[] members, LambdaExpression letExpression)
                 {
                     _members = members;
                     Marker = Default(letExpression.Body.Type);
                     LetExpression = letExpression;
                 }
+
                 public Expression GetSourceExpression(Expression parameter) =>
                     _members
                         .Take(_members.Length - 1)
@@ -462,11 +487,13 @@ namespace AutoMapper.QueryableExtensions.Impl
                                     ? lambda.ReplaceParameters(left)
                                     : right.Replace(right.GetChain().Peek().Target, left)
                         );
+
                 public PropertyDescription GetPropertyDescription() =>
                     new PropertyDescription(
                         "__" + string.Join("#", _members.Select(p => p.MemberMap.DestinationName)),
                         LetExpression.Body.Type
                     );
+
                 internal bool IsEquivalentTo(in SubQueryPath other) =>
                     LetExpression == other.LetExpression
                     && _members.Length == other._members.Length
@@ -475,11 +502,14 @@ namespace AutoMapper.QueryableExtensions.Impl
                         .Zip(other._members, (left, right) => left.MemberMap == right.MemberMap)
                         .All(item => item);
             }
+
             class GetMemberAccessesVisitor : ExpressionVisitor
             {
                 private readonly Expression _target;
                 public List<MemberInfo> Members { get; } = new List<MemberInfo>();
+
                 public GetMemberAccessesVisitor(Expression target) => _target = target;
+
                 protected override Expression VisitMember(MemberExpression node)
                 {
                     if (node.Expression == _target)
@@ -488,6 +518,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                     }
                     return base.VisitMember(node);
                 }
+
                 public static IEnumerable<PropertyDescription> Retrieve(
                     Expression expression,
                     Expression target
@@ -500,15 +531,18 @@ namespace AutoMapper.QueryableExtensions.Impl
                     );
                 }
             }
+
             class ReplaceMemberAccessesVisitor : ExpressionVisitor
             {
                 private readonly Expression _oldObject,
                     _newObject;
+
                 public ReplaceMemberAccessesVisitor(Expression oldObject, Expression newObject)
                 {
                     _oldObject = oldObject;
                     _newObject = newObject;
                 }
+
                 protected override Expression VisitMember(MemberExpression node)
                 {
                     if (node.Expression != _oldObject)
@@ -520,6 +554,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             }
         }
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class LetPropertyMaps
     {
@@ -531,7 +566,9 @@ namespace AutoMapper.QueryableExtensions.Impl
             ConfigurationProvider = configurationProvider;
             BuiltProjections = builtProjections;
         }
+
         protected TypePairCount BuiltProjections { get; }
+
         public int IncrementDepth(in ProjectionRequest request)
         {
             if (BuiltProjections.TryGetValue(request, out var depth))
@@ -541,14 +578,21 @@ namespace AutoMapper.QueryableExtensions.Impl
             BuiltProjections[request] = depth;
             return depth;
         }
+
         public virtual Expression GetSubQueryMarker(LambdaExpression letExpression) => null;
+
         public virtual void Push(MemberProjection memberProjection) { }
+
         public virtual MemberPath GetCurrentPath() => MemberPath.Empty;
+
         public virtual void Pop() { }
+
         public virtual int Count => 0;
         public IGlobalConfiguration ConfigurationProvider { get; }
+
         public virtual LetPropertyMaps New() =>
             new LetPropertyMaps(ConfigurationProvider, BuiltProjections);
+
         public virtual QueryExpressions GetSubQueryExpression(
             ProjectionBuilder builder,
             Expression projection,
@@ -557,23 +601,29 @@ namespace AutoMapper.QueryableExtensions.Impl
             ParameterExpression instanceParameter
         ) => default;
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public readonly struct QueryExpressions
     {
         public readonly LambdaExpression LetClause;
         public readonly LambdaExpression Projection;
+
         public QueryExpressions(Expression projection, ParameterExpression parameter)
             : this(projection == null ? null : Lambda(projection, parameter)) { }
+
         public QueryExpressions(LambdaExpression projection, LambdaExpression letClause = null)
         {
             LetClause = letClause;
             Projection = projection;
         }
+
         public bool Empty => Projection == null;
+
         internal T Chain<T>(T source, Func<T, LambdaExpression, T> select) =>
             LetClause == null
                 ? select(source, Projection)
                 : select(select(source, LetClause), Projection);
+
         internal QueryExpressions Prepare(
             bool enableNullPropagationForQueryMapping,
             object parameters
@@ -594,6 +644,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             }
         }
     }
+
     public static class ExpressionBuilderExtensions
     {
         public static Expression<Func<TSource, TDestination>> GetMapExpression<
@@ -607,12 +658,15 @@ namespace AutoMapper.QueryableExtensions.Impl
                 Array.Empty<MemberPath>()
             ).Projection;
     }
+
     public class MemberProjection
     {
         public MemberProjection(MemberMap memberMap) => MemberMap = memberMap;
+
         public Expression Expression { get; set; }
         public MemberMap MemberMap { get; }
     }
+
     abstract class ParameterExpressionVisitor : ExpressionVisitor
     {
         public static Expression SetParameters(object parameters, Expression expression)
@@ -622,7 +676,9 @@ namespace AutoMapper.QueryableExtensions.Impl
                 : new ObjectParameterExpressionReplacementVisitor(parameters);
             return visitor.Visit(expression);
         }
+
         protected abstract Expression GetValue(string name);
+
         protected override Expression VisitMember(MemberExpression node)
         {
             if (!node.Member.DeclaringType.Has<CompilerGeneratedAttribute>())
@@ -644,11 +700,14 @@ namespace AutoMapper.QueryableExtensions.Impl
             }
             return ToType(parameterValue, node.Member.GetMemberType());
         }
+
         class ObjectParameterExpressionReplacementVisitor : ParameterExpressionVisitor
         {
             private readonly object _parameters;
+
             public ObjectParameterExpressionReplacementVisitor(object parameters) =>
                 _parameters = parameters;
+
             protected override Expression GetValue(string name)
             {
                 var matchingMember = _parameters.GetType().GetProperty(name);
@@ -657,17 +716,21 @@ namespace AutoMapper.QueryableExtensions.Impl
                   : null;
             }
         }
+
         class ConstantExpressionReplacementVisitor : ParameterExpressionVisitor
         {
             private readonly ParameterBag _paramValues;
+
             public ConstantExpressionReplacementVisitor(ParameterBag paramValues) =>
                 _paramValues = paramValues;
+
             protected override Expression GetValue(string name) =>
                 _paramValues.TryGetValue(name, out object parameterValue)
                     ? Constant(parameterValue)
                     : null;
         }
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     [DebuggerDisplay("{SourceType.Name}, {DestinationType.Name}")]
     public readonly struct ProjectionRequest : IEquatable<ProjectionRequest>
@@ -676,6 +739,7 @@ namespace AutoMapper.QueryableExtensions.Impl
         public readonly Type DestinationType;
         public readonly MemberPath[] MembersToExpand;
         private readonly ICollection<ProjectionRequest> _previousRequests;
+
         public ProjectionRequest(
             Type sourceType,
             Type destinationType,
@@ -688,15 +752,20 @@ namespace AutoMapper.QueryableExtensions.Impl
             MembersToExpand = membersToExpand;
             _previousRequests = previousRequests;
         }
+
         internal bool AlreadyExists => _previousRequests.Contains(this);
+
         internal ICollection<ProjectionRequest> GetPreviousRequestsAndSelf() =>
             new HashSet<ProjectionRequest>(_previousRequests.Concat(new[] { this }));
+
         public bool Equals(ProjectionRequest other) =>
             SourceType == other.SourceType
             && DestinationType == other.DestinationType
             && MembersToExpand.SequenceEqual(other.MembersToExpand);
+
         public override bool Equals(object obj) =>
             obj is ProjectionRequest request && Equals(request);
+
         public override int GetHashCode()
         {
             var hashCode = new HashCode();
@@ -708,10 +777,13 @@ namespace AutoMapper.QueryableExtensions.Impl
             }
             return hashCode.ToHashCode();
         }
+
         public static bool operator ==(in ProjectionRequest left, in ProjectionRequest right) =>
             Equals(left, right);
+
         public static bool operator !=(in ProjectionRequest left, in ProjectionRequest right) =>
             !Equals(left, right);
+
         public bool ShouldExpand(in MemberPath currentPath)
         {
             foreach (var memberToExpand in MembersToExpand)

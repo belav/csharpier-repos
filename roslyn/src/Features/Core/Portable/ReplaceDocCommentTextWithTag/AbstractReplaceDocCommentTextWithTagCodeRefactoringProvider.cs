@@ -21,8 +21,11 @@ namespace Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag
         : CodeRefactoringProvider
     {
         protected abstract bool IsInXMLAttribute(SyntaxToken token);
+
         protected abstract bool IsKeyword(string text);
+
         protected abstract bool IsXmlTextToken(SyntaxToken token);
+
         protected abstract SyntaxNode ParseExpression(string text);
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)

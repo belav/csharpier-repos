@@ -19,6 +19,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 public class XmlSerializerOutputFormatterTest
@@ -681,6 +682,7 @@ public class XmlSerializerOutputFormatterTest
 
         public int MyProperty { get; set; }
     }
+
     private class IndentingXmlSerializerOutputFormatter : XmlSerializerOutputFormatter
     {
         public override XmlWriter CreateXmlWriter(

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
 public class ActionParameterIntegrationTest
@@ -980,6 +981,7 @@ public class ActionParameterIntegrationTest
             X = x;
             Y = y;
         }
+
         public double X { get; }
         public double Y { get; }
     }
@@ -996,6 +998,7 @@ public class ActionParameterIntegrationTest
         {
             Id = id;
         }
+
         public string City { get; set; }
         public int Id { get; }
     }

@@ -33,6 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
         private SolutionChecksumUpdater? _checksumUpdater;
 #pragma warning disable IDE0044 // Add readonly modifier
         private CancellationTokenSource _disposalCancellationSource;
+
 #pragma warning restore IDE0044 // Add readonly modifier
 
         [ImportingConstructor]

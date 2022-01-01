@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace ServerComparison.TestSites;
 
 public class StartupResponseCompression

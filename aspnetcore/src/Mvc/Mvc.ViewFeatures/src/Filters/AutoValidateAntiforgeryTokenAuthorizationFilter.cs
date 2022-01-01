@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
 internal class AutoValidateAntiforgeryTokenAuthorizationFilter

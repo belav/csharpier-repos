@@ -67,8 +67,11 @@ namespace ILCompiler
     public abstract class ProfileData
     {
         public abstract bool PartialNGen { get; }
+
         public abstract MethodProfileData GetMethodProfileData(MethodDesc m);
+
         public abstract IEnumerable<MethodProfileData> GetAllMethodProfileData();
+
         public abstract byte[] GetMethodBlockCount(MethodDesc m);
 
         public static void MergeProfileData(

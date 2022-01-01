@@ -495,6 +495,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             public bool IsReadOnly { get; private set; }
         }
+
 #pragma warning restore CA1061 // Do not hide base class methods
 
         private class Role2014 : IRole2014

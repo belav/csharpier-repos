@@ -38,6 +38,7 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying empty string NewLine");
             VerifyException("", typeof(ArgumentException));
         }
+
         #endregion
 
         #region Verification for Test Cases

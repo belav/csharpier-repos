@@ -14,6 +14,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsText() { }
+
         public SrgsText(string text)
         {
             Helpers.ThrowIfNull(text, nameof(text));

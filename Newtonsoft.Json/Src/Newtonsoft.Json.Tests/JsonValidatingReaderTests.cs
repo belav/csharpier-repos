@@ -473,6 +473,7 @@ namespace Newtonsoft.Json.Tests
             );
             Assert.AreEqual("", validationEventArgs.Path);
         }
+
 #endif
 
         [Test]
@@ -889,6 +890,7 @@ namespace Newtonsoft.Json.Tests
 
             Assert.IsNull(validationEventArgs);
         }
+
 #endif
 
         [Test]

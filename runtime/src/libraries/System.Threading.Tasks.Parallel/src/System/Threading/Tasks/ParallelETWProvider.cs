@@ -23,6 +23,7 @@ namespace System.Threading.Tasks
 #if !ES_BUILD_STANDALONE
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";
+
 #endif
         /// <summary>
         /// Defines the singleton instance for the Task.Parallel ETW provider.
@@ -48,6 +49,7 @@ namespace System.Threading.Tasks
         { // this name is important for EventSource
             /// <summary>A parallel loop.</summary>
             public const EventTask Loop = (EventTask)1;
+
             /// <summary>A parallel invoke.</summary>
             public const EventTask Invoke = (EventTask)2;
 
@@ -166,6 +168,7 @@ namespace System.Threading.Tasks
                 }
             }
         }
+
         #endregion ParallelLoopBegin
 
         #region ParallelLoopEnd
@@ -230,6 +233,7 @@ namespace System.Threading.Tasks
                 }
             }
         }
+
         #endregion ParallelLoopEnd
 
         #region ParallelInvokeBegin
@@ -299,6 +303,7 @@ namespace System.Threading.Tasks
                 }
             }
         }
+
         #endregion ParallelInvokeBegin
 
         #region ParallelInvokeEnd
@@ -328,6 +333,7 @@ namespace System.Threading.Tasks
                     ForkJoinContextID
                 );
         }
+
         #endregion ParallelInvokeEnd
 
         #region ParallelFork
@@ -359,6 +365,7 @@ namespace System.Threading.Tasks
                     ForkJoinContextID
                 );
         }
+
         #endregion ParallelFork
 
         #region ParallelJoin

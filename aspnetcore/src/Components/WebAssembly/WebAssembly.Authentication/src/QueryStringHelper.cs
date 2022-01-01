@@ -4,6 +4,7 @@
 using System;
 using System.Text.Encodings.Web;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 internal static class QueryStringHelper

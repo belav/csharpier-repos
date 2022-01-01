@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public class CSharpTokenizerLiteralTest : CSharpTokenizerTestBase

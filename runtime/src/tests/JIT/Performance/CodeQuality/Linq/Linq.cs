@@ -655,11 +655,13 @@ public class LinqBenchmarks
     public const int IterationsWhere01 = 1;
     public const int IterationsCount00 = 1;
     public const int IterationsOrder00 = 1;
+
 #else
     public const int IterationsWhere00 = 1000000;
     public const int IterationsWhere01 = 250000;
     public const int IterationsCount00 = 1000000;
     public const int IterationsOrder00 = 25000;
+
 #endif
 
     private static volatile object s_volatileObject;
@@ -748,6 +750,7 @@ public class LinqBenchmarks
 
         return (count == 5 * IterationsWhere00);
     }
+
     #endregion
 
     #region Where01
@@ -840,6 +843,7 @@ public class LinqBenchmarks
 
         return (count == 4 * IterationsWhere01);
     }
+
     #endregion
 
     #region Count00
@@ -880,6 +884,7 @@ public class LinqBenchmarks
 
         return (count == 5 * IterationsCount00);
     }
+
     #endregion
 
     #region Order00
@@ -946,6 +951,7 @@ public class LinqBenchmarks
 
         return (medianPricedProduct.ProductID == 57);
     }
+
     #endregion
 
     public static int Main()

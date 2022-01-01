@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class CompilationFailedException : XunitException

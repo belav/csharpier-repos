@@ -5,8 +5,10 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
+
 #if DETECT_LEAKS
 using System.Runtime.CompilerServices;
+
 
 #endif
 
@@ -110,6 +112,7 @@ internal class ObjectPool<T> where T : class
             }
         }
     }
+
 #endif
 
     internal ObjectPool(Factory factory) : this(factory, Environment.ProcessorCount * 2) { }

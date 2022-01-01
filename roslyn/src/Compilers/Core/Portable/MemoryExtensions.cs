@@ -54,6 +54,7 @@ namespace Microsoft.CodeAnalysis
 
         internal static ReadOnlyMemory<char> Trim(this ReadOnlyMemory<char> memory) =>
             memory.TrimStart().TrimEnd();
+
 #endif
 
         internal static bool IsNullOrEmpty(this ReadOnlyMemory<char>? memory) =>

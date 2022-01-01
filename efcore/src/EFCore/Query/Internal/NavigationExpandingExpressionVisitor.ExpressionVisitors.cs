@@ -1218,6 +1218,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 TJoin joinEntity,
                 TTarget targetEntity
             ) => targetEntity;
+
 #pragma warning restore IDE0060 // Remove unused parameter
 
             private static Expression RemapFilterExpressionForJoinEntity(

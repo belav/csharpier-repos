@@ -31,6 +31,7 @@ namespace Roslyn.Test.Utilities
 
         public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) =>
             throw new NotImplementedException();
+
         public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
             throw new NotImplementedException();
     }

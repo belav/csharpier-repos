@@ -30,6 +30,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
 
+
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
 public class HelperPerformanceBenchmark : RuntimePerformanceBenchmarkBase

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PlaywrightSharp;
 
+
 namespace Microsoft.AspNetCore.BrowserTesting;
 
 public class BrowserManager

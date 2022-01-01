@@ -17,6 +17,7 @@ namespace System.Net.Http.Functional.Tests
 
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+
 #endif
 
     public abstract class HttpClientHandler_DefaultProxyCredentials_Test : HttpClientHandlerTestBase
@@ -216,6 +217,7 @@ namespace System.Net.Http.Functional.Tests
                     )
             );
         }
+
 #endif
 
         // The purpose of this test is mainly to validate the .NET Framework OOB System.Net.Http implementation

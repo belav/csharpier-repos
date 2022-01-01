@@ -1134,6 +1134,7 @@ namespace test
                     .WithLocation(5, 26)
             );
         }
+
         [WorkItem(911913, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/911913")]
         [Fact]
         public void UnimplementedInterfaceSquiggleLocation_InterfaceInheritanceScenario02()
@@ -1665,6 +1666,7 @@ public interface IBase3
                     .WithLocation(9, 28)
             );
         }
+
         [WorkItem(541466, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541466")]
         [Fact]
         public void UseSiteErrorViaAliasTest04()
@@ -2560,6 +2562,7 @@ class Program
                     .WithLocation(6, 14)
             );
         }
+
         [Fact, WorkItem(543426, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543426")]
         private void NestedInterfaceImplementationWithOuterGenericType()
         {

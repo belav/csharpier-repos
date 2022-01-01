@@ -172,6 +172,7 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(12, d.Month);
             Assert.AreEqual(2006, d.Year);
         }
+
 #endif
 
 #if !NET20
@@ -359,6 +360,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 Assert.AreNotEqual(json, json2);
             }
         }
+
 #endif
 
         [Test]

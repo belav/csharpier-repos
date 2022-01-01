@@ -192,6 +192,7 @@ namespace System.ComponentModel.Composition.Primitives
     {
         public const string RootTemporaryDirectoryName = "RootTempDirectory";
         private static string _temporaryDirectory;
+
         public static string GetRootTemporaryDirectory()
         {
             if (_temporaryDirectory == null)

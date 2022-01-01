@@ -76,6 +76,7 @@ public class WaitHandleDispose2
 
         return retVal;
     }
+
     #endregion
     #endregion
 

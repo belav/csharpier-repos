@@ -77,6 +77,7 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
 
         // Learn more about these methods here: https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/defining-default-values-with-the-shouldserialize-and-reset-methods?view=netframeworkdesktop-4.8
         private void ResetHostPage() => HostPage = null;
+
         private bool ShouldSerializeHostPage() => !string.IsNullOrEmpty(HostPage);
 
         /// <summary>
@@ -218,8 +219,11 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             public override bool IsReadOnly => true;
 
             public override void Add(Control value) => throw new NotSupportedException();
+
             public override void Clear() => throw new NotSupportedException();
+
             public override void Remove(Control value) => throw new NotSupportedException();
+
             public override void SetChildIndex(Control child, int newIndex) =>
                 throw new NotSupportedException();
         }

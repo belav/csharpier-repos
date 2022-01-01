@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis
     public class RuleSetInclude
     {
         private readonly string _includePath;
+
         /// <summary>
         /// The path of the included file.
         /// </summary>
@@ -23,6 +24,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private readonly ReportDiagnostic _action;
+
         /// <summary>
         /// The effective action to apply on this included ruleset.
         /// </summary>

@@ -252,8 +252,11 @@ namespace System.Transactions
         }
 
         protected abstract void InternalPrepare();
+
         protected abstract void InternalCommit();
+
         protected abstract void InternalRollback();
+
         protected abstract void InternalInDoubt();
 
         #region IEnlistmentNotification Members

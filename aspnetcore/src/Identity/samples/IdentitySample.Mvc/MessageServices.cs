@@ -3,6 +3,7 @@
 
 using System.Threading.Tasks;
 
+
 namespace IdentitySamples;
 
 public static class MessageServices

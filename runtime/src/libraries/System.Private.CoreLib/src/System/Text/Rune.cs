@@ -364,6 +364,7 @@ namespace System.Text
                 );
             }
         }
+
 #else
         private static Rune ChangeCaseCultureAware(Rune rune, CultureInfo culture, bool toUpper)
         {
@@ -404,6 +405,7 @@ namespace System.Text
                 );
             }
         }
+
 #endif
 
         public int CompareTo(Rune other) => this.Value - other.Value; // values don't span entire 32-bit domain; won't integer overflow
@@ -1109,6 +1111,7 @@ namespace System.Text
         ) => TryEncodeToUtf16(destination, out charsWritten);
 
         string IFormattable.ToString(string? format, IFormatProvider? formatProvider) => ToString();
+
 #endif
 
         /// <summary>

@@ -24,17 +24,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
         protected const char DoubleQuote = '"';
 
         protected abstract bool IsInterpolation { get; }
+
         protected abstract bool IsAppropriateLiteralKind(TStringExpressionSyntax literalExpression);
+
         protected abstract void AddSubStringTokens(
             TStringExpressionSyntax literalExpression,
             ArrayBuilder<SyntaxToken> subTokens
         );
+
         protected abstract bool IsVerbatim(TStringExpressionSyntax literalExpression);
+
         protected abstract TStringExpressionSyntax CreateVerbatimStringExpression(
             IVirtualCharService charService,
             StringBuilder sb,
             TStringExpressionSyntax stringExpression
         );
+
         protected abstract TStringExpressionSyntax CreateRegularStringExpression(
             IVirtualCharService charService,
             StringBuilder sb,

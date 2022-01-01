@@ -29,6 +29,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         public static readonly RoslynEventSource Instance = new();
 
         private readonly bool _initialized;
+
         private RoslynEventSource() => _initialized = true;
 
         // Do not change the parameter order for this method: it must match the parameter order

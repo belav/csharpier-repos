@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Identity;
 
 /// <summary>

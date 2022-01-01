@@ -213,6 +213,7 @@ namespace Newtonsoft.Json.Linq
         }
 
         internal abstract JToken CloneToken();
+
         internal abstract bool DeepEquals(JToken node);
 
         /// <summary>
@@ -662,6 +663,7 @@ namespace Newtonsoft.Json.Linq
 
             return new DateTimeOffset(Convert.ToDateTime(v.Value, CultureInfo.InvariantCulture));
         }
+
 #endif
 
         /// <summary>
@@ -802,6 +804,7 @@ namespace Newtonsoft.Json.Linq
 
             return new DateTimeOffset(Convert.ToDateTime(v.Value, CultureInfo.InvariantCulture));
         }
+
 #endif
 
         /// <summary>
@@ -1853,6 +1856,7 @@ namespace Newtonsoft.Json.Linq
 
             return ConvertUtils.ToBigInteger(v.Value);
         }
+
 #endif
         #endregion
 
@@ -1877,6 +1881,7 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
+
 #endif
 
         /// <summary>
@@ -1961,6 +1966,7 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
+
 #endif
 
         /// <summary>
@@ -2220,6 +2226,7 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
+
         #endregion
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -2813,6 +2820,7 @@ namespace Newtonsoft.Json.Linq
         {
             return GetMetaObject(parameter);
         }
+
 #endif
 
 #if HAVE_ICLONEABLE
@@ -2820,6 +2828,7 @@ namespace Newtonsoft.Json.Linq
         {
             return DeepClone();
         }
+
 #endif
 
         /// <summary>

@@ -4,6 +4,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
 public class ViewFeaturesAnalyzerContext

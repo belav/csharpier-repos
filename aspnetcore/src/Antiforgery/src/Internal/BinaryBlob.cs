@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Antiforgery;
 
 // Represents a binary blob (token) that contains random data.

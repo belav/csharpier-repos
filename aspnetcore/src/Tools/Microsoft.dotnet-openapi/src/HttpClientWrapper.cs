@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.DotNet.OpenApi;
 using Microsoft.DotNet.OpenApi.Commands;
 
+
 namespace Microsoft.DotNet.Openapi.Tools;
 
 public class HttpClientWrapper : IHttpClientWrapper

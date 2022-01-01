@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.Logging.Testing;
 
 public class TestLogger : ILogger

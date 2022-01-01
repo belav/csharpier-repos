@@ -5047,6 +5047,7 @@ namespace System
 
         internal const char c_DummyChar = (char)0xFFFF; //An Invalid Unicode character used as a dummy char passed into the parameter
         internal const char c_EOL = (char)0xFFFE; //An Invalid Unicode character used by CheckCanonical as "no delimiter condition"
+
         [Flags]
         private enum Check
         {

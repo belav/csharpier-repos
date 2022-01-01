@@ -4,6 +4,7 @@
 using System.Net.Http.HPack;
 using BenchmarkDotNet.Attributes;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class IntegerDecoderBenchmark

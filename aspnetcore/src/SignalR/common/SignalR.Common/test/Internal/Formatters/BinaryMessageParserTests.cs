@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.AspNetCore.Internal;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters;
 
 public class BinaryMessageParserTests

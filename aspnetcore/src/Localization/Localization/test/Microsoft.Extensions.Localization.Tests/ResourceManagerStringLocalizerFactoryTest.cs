@@ -12,6 +12,7 @@ using Moq;
 using MyNamespace;
 using Xunit;
 
+
 // This namespace intentionally matches the default assembly namespace.
 namespace Microsoft.Extensions.Localization.Tests;
 

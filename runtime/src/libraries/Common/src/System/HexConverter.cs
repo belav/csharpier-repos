@@ -3,11 +3,13 @@
 
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+
 #if SYSTEM_PRIVATE_CORELIB
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 using Internal.Runtime.CompilerServices;
+
 #endif
 
 namespace System
@@ -220,6 +222,7 @@ namespace System
                 );
             }
         }
+
 #endif
 
         public static void EncodeToUtf16(

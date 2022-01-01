@@ -17,6 +17,7 @@ namespace System.ComponentModel.Composition.Registration
             {
                 return t;
             }
+
             public override Assembly MapAssembly(Assembly a)
             {
                 return a;

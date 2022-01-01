@@ -1406,6 +1406,7 @@ namespace System.CodeDom.Compiler
         }
 
         protected abstract void GenerateArrayCreateExpression(CodeArrayCreateExpression e);
+
         protected abstract void GenerateBaseReferenceExpression(CodeBaseReferenceExpression e);
 
         protected virtual void GenerateBinaryOperatorExpression(CodeBinaryOperatorExpression e)
@@ -1451,21 +1452,33 @@ namespace System.CodeDom.Compiler
         protected virtual void ContinueOnNewLine(string st) => Output.WriteLine(st);
 
         protected abstract void GenerateCastExpression(CodeCastExpression e);
+
         protected abstract void GenerateDelegateCreateExpression(CodeDelegateCreateExpression e);
+
         protected abstract void GenerateFieldReferenceExpression(CodeFieldReferenceExpression e);
+
         protected abstract void GenerateArgumentReferenceExpression(
             CodeArgumentReferenceExpression e
         );
+
         protected abstract void GenerateVariableReferenceExpression(
             CodeVariableReferenceExpression e
         );
+
         protected abstract void GenerateIndexerExpression(CodeIndexerExpression e);
+
         protected abstract void GenerateArrayIndexerExpression(CodeArrayIndexerExpression e);
+
         protected abstract void GenerateSnippetExpression(CodeSnippetExpression e);
+
         protected abstract void GenerateMethodInvokeExpression(CodeMethodInvokeExpression e);
+
         protected abstract void GenerateMethodReferenceExpression(CodeMethodReferenceExpression e);
+
         protected abstract void GenerateEventReferenceExpression(CodeEventReferenceExpression e);
+
         protected abstract void GenerateDelegateInvokeExpression(CodeDelegateInvokeExpression e);
+
         protected abstract void GenerateObjectCreateExpression(CodeObjectCreateExpression e);
 
         protected virtual void GenerateParameterDeclarationExpression(
@@ -1609,8 +1622,11 @@ namespace System.CodeDom.Compiler
         }
 
         protected abstract void GenerateExpressionStatement(CodeExpressionStatement e);
+
         protected abstract void GenerateIterationStatement(CodeIterationStatement e);
+
         protected abstract void GenerateThrowExceptionStatement(CodeThrowExceptionStatement e);
+
         protected virtual void GenerateCommentStatement(CodeCommentStatement e)
         {
             if (e == null)
@@ -1641,13 +1657,21 @@ namespace System.CodeDom.Compiler
         }
 
         protected abstract void GenerateComment(CodeComment e);
+
         protected abstract void GenerateMethodReturnStatement(CodeMethodReturnStatement e);
+
         protected abstract void GenerateConditionStatement(CodeConditionStatement e);
+
         protected abstract void GenerateTryCatchFinallyStatement(CodeTryCatchFinallyStatement e);
+
         protected abstract void GenerateAssignStatement(CodeAssignStatement e);
+
         protected abstract void GenerateAttachEventStatement(CodeAttachEventStatement e);
+
         protected abstract void GenerateRemoveEventStatement(CodeRemoveEventStatement e);
+
         protected abstract void GenerateGotoStatement(CodeGotoStatement e);
+
         protected abstract void GenerateLabeledStatement(CodeLabeledStatement e);
 
         protected virtual void GenerateSnippetStatement(CodeSnippetStatement e)
@@ -1663,20 +1687,32 @@ namespace System.CodeDom.Compiler
         protected abstract void GenerateVariableDeclarationStatement(
             CodeVariableDeclarationStatement e
         );
+
         protected abstract void GenerateLinePragmaStart(CodeLinePragma e);
+
         protected abstract void GenerateLinePragmaEnd(CodeLinePragma e);
+
         protected abstract void GenerateEvent(CodeMemberEvent e, CodeTypeDeclaration c);
+
         protected abstract void GenerateField(CodeMemberField e);
+
         protected abstract void GenerateSnippetMember(CodeSnippetTypeMember e);
+
         protected abstract void GenerateEntryPointMethod(
             CodeEntryPointMethod e,
             CodeTypeDeclaration c
         );
+
         protected abstract void GenerateMethod(CodeMemberMethod e, CodeTypeDeclaration c);
+
         protected abstract void GenerateProperty(CodeMemberProperty e, CodeTypeDeclaration c);
+
         protected abstract void GenerateConstructor(CodeConstructor e, CodeTypeDeclaration c);
+
         protected abstract void GenerateTypeConstructor(CodeTypeConstructor e);
+
         protected abstract void GenerateTypeStart(CodeTypeDeclaration e);
+
         protected abstract void GenerateTypeEnd(CodeTypeDeclaration e);
 
         protected virtual void GenerateCompileUnitStart(CodeCompileUnit e)
@@ -1706,15 +1742,21 @@ namespace System.CodeDom.Compiler
         }
 
         protected abstract void GenerateNamespaceStart(CodeNamespace e);
+
         protected abstract void GenerateNamespaceEnd(CodeNamespace e);
+
         protected abstract void GenerateNamespaceImport(CodeNamespaceImport e);
+
         protected abstract void GenerateAttributeDeclarationsStart(
             CodeAttributeDeclarationCollection attributes
         );
+
         protected abstract void GenerateAttributeDeclarationsEnd(
             CodeAttributeDeclarationCollection attributes
         );
+
         protected abstract bool Supports(GeneratorSupport support);
+
         protected abstract bool IsValidIdentifier(string value);
 
         protected virtual void ValidateIdentifier(string value)
@@ -1726,8 +1768,11 @@ namespace System.CodeDom.Compiler
         }
 
         protected abstract string CreateEscapedIdentifier(string value);
+
         protected abstract string CreateValidIdentifier(string value);
+
         protected abstract string GetTypeOutput(CodeTypeReference value);
+
         protected abstract string QuoteSnippetString(string value);
 
         public static bool IsValidLanguageIndependentIdentifier(string value) =>

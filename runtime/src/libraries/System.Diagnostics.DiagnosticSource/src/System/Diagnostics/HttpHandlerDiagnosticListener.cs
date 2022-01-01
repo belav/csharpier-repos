@@ -130,46 +130,57 @@ namespace System.Diagnostics
             {
                 get { return this._table.Values; }
             }
+
             internal HashtableWrapper(Hashtable table) : base()
             {
                 this._table = table;
             }
+
             public override void Add(object key, object value)
             {
                 this._table.Add(key, value);
             }
+
             public override void Clear()
             {
                 this._table.Clear();
             }
+
             public override bool Contains(object key)
             {
                 return this._table.Contains(key);
             }
+
             public override bool ContainsKey(object key)
             {
                 return this._table.ContainsKey(key);
             }
+
             public override bool ContainsValue(object key)
             {
                 return this._table.ContainsValue(key);
             }
+
             public override void CopyTo(Array array, int arrayIndex)
             {
                 this._table.CopyTo(array, arrayIndex);
             }
+
             public override object Clone()
             {
                 return new HashtableWrapper((Hashtable)this._table.Clone());
             }
+
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return this._table.GetEnumerator();
             }
+
             public override IDictionaryEnumerator GetEnumerator()
             {
                 return this._table.GetEnumerator();
             }
+
             public override void Remove(object key)
             {
                 this._table.Remove(key);
@@ -286,138 +297,172 @@ namespace System.Diagnostics
             {
                 get { return this._list.SyncRoot; }
             }
+
             internal ArrayListWrapper(ArrayList list) : base()
             {
                 this._list = list;
             }
+
             public override int Add(object value)
             {
                 return this._list.Add(value);
             }
+
             public override void AddRange(ICollection c)
             {
                 this._list.AddRange(c);
             }
+
             public override int BinarySearch(object value)
             {
                 return this._list.BinarySearch(value);
             }
+
             public override int BinarySearch(object value, IComparer comparer)
             {
                 return this._list.BinarySearch(value, comparer);
             }
+
             public override int BinarySearch(int index, int count, object value, IComparer comparer)
             {
                 return this._list.BinarySearch(index, count, value, comparer);
             }
+
             public override void Clear()
             {
                 this._list.Clear();
             }
+
             public override object Clone()
             {
                 return new ArrayListWrapper((ArrayList)this._list.Clone());
             }
+
             public override bool Contains(object item)
             {
                 return this._list.Contains(item);
             }
+
             public override void CopyTo(Array array)
             {
                 this._list.CopyTo(array);
             }
+
             public override void CopyTo(Array array, int index)
             {
                 this._list.CopyTo(array, index);
             }
+
             public override void CopyTo(int index, Array array, int arrayIndex, int count)
             {
                 this._list.CopyTo(index, array, arrayIndex, count);
             }
+
             public override IEnumerator GetEnumerator()
             {
                 return this._list.GetEnumerator();
             }
+
             public override IEnumerator GetEnumerator(int index, int count)
             {
                 return this._list.GetEnumerator(index, count);
             }
+
             public override int IndexOf(object value)
             {
                 return this._list.IndexOf(value);
             }
+
             public override int IndexOf(object value, int startIndex)
             {
                 return this._list.IndexOf(value, startIndex);
             }
+
             public override int IndexOf(object value, int startIndex, int count)
             {
                 return this._list.IndexOf(value, startIndex, count);
             }
+
             public override void Insert(int index, object value)
             {
                 this._list.Insert(index, value);
             }
+
             public override void InsertRange(int index, ICollection c)
             {
                 this._list.InsertRange(index, c);
             }
+
             public override int LastIndexOf(object value)
             {
                 return this._list.LastIndexOf(value);
             }
+
             public override int LastIndexOf(object value, int startIndex)
             {
                 return this._list.LastIndexOf(value, startIndex);
             }
+
             public override int LastIndexOf(object value, int startIndex, int count)
             {
                 return this._list.LastIndexOf(value, startIndex, count);
             }
+
             public override void Remove(object value)
             {
                 this._list.Remove(value);
             }
+
             public override void RemoveAt(int index)
             {
                 this._list.RemoveAt(index);
             }
+
             public override void RemoveRange(int index, int count)
             {
                 this._list.RemoveRange(index, count);
             }
+
             public override void Reverse(int index, int count)
             {
                 this._list.Reverse(index, count);
             }
+
             public override void SetRange(int index, ICollection c)
             {
                 this._list.SetRange(index, c);
             }
+
             public override ArrayList GetRange(int index, int count)
             {
                 return this._list.GetRange(index, count);
             }
+
             public override void Sort()
             {
                 this._list.Sort();
             }
+
             public override void Sort(IComparer comparer)
             {
                 this._list.Sort(comparer);
             }
+
             public override void Sort(int index, int count, IComparer comparer)
             {
                 this._list.Sort(index, count, comparer);
             }
+
             public override object[] ToArray()
             {
                 return this._list.ToArray();
             }
+
             public override Array ToArray(Type type)
             {
                 return this._list.ToArray(type);
             }
+
             public override void TrimToSize()
             {
                 this._list.TrimToSize();

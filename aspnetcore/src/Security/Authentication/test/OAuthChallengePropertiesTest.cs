@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Test;
 
 public class OAuthChallengePropertiesTest

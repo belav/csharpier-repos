@@ -26,17 +26,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 _provider = provider;
 
             protected abstract TExpressionSyntax GetExpressionOfArgument(TArgumentSyntax argument);
+
             protected abstract TArgumentSyntax GenerateNewArgument(
                 TArgumentSyntax oldArgument,
                 ITypeSymbol conversionType
             );
+
             protected abstract TArgumentListSyntax GenerateNewArgumentList(
                 TArgumentListSyntax oldArgumentList,
                 ArrayBuilder<TArgumentSyntax> newArguments
             );
+
             protected abstract SeparatedSyntaxList<TArgumentSyntax> GetArgumentsOfArgumentList(
                 TArgumentListSyntax argumentList
             );
+
             protected abstract SymbolInfo GetSpeculativeSymbolInfo(
                 SemanticModel semanticModel,
                 TArgumentListSyntax newArgumentList

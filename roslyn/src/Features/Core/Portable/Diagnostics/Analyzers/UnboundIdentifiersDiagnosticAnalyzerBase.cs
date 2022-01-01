@@ -36,6 +36,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
     {
         protected abstract DiagnosticDescriptor DiagnosticDescriptor { get; }
         protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
         protected abstract bool IsNameOf(SyntaxNode node);
 
         // High priority as we need to know about unbound identifiers so that we can run add-using to fix them.

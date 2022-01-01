@@ -2247,6 +2247,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
             }
         }
+
 #endif
 
         private void PushOperand(IOperation operation)

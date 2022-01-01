@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
 internal static class Exe

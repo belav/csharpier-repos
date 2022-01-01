@@ -297,6 +297,7 @@ namespace System.Threading.Tasks.Tests
             await Task.Yield();
             Assert.Equal(1, sc.PostCount);
         }
+
         #region Helper Methods / Classes
 
         private class ValidateCorrectContextSynchronizationContext : SynchronizationContext

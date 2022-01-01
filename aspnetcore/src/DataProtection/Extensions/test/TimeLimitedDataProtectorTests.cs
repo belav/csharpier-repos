@@ -9,6 +9,7 @@ using Moq;
 using Xunit;
 using ExtResources = Microsoft.AspNetCore.DataProtection.Extensions.Resources;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 public class TimeLimitedDataProtectorTests

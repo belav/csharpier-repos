@@ -11,8 +11,10 @@ namespace Functions
     {
 #if DEBUG
         private const int defaultIterations = 1;
+
 #else
         private const int defaultIterations = 1000;
+
 #endif
 
         private static readonly IDictionary<string, Action> TestList = new Dictionary<

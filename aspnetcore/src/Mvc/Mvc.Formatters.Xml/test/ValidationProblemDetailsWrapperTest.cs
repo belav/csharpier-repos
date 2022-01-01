@@ -8,6 +8,7 @@ using System.Text;
 using System.Xml;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 public class ValidationProblemDetailsWrapperTest

@@ -38,6 +38,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using Newtonsoft.Json.Tests.TestObjects;
 using Newtonsoft.Json.Tests.TestObjects.Organization;
+
 #if !(DNXCORE50)
 using System.Data;
 

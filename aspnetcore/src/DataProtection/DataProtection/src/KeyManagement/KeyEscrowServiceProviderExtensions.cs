@@ -7,6 +7,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 internal static class KeyEscrowServiceProviderExtensions

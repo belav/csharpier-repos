@@ -10,6 +10,7 @@ namespace System.Buffers
     {
         /// <summary>The default maximum length of each array in the pool (2^20).</summary>
         private const int DefaultMaxArrayLength = 1024 * 1024;
+
         /// <summary>The default maximum number of arrays per bucket that are available for rent.</summary>
         private const int DefaultMaxNumberOfArraysPerBucket = 50;
 

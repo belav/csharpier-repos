@@ -25,6 +25,7 @@ public abstract class SymbolProvider
     };
 
     public abstract UInt32 GetGlobalRVA(String symbolName, SymType symType);
+
     public abstract UInt32 GetVTableRVA(String symbolName, String keyBaseName);
 }
 
@@ -140,6 +141,7 @@ public class PdbSymbolProvider : SymbolProvider
     FileInfo fPDB = null;
     DiaFile df = null;
 }
+
 #endif // !TARGET_UNIX
 
 public class Shell

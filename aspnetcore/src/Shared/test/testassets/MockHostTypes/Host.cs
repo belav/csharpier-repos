@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace MockHostTypes;
 
 public class Host : IHost

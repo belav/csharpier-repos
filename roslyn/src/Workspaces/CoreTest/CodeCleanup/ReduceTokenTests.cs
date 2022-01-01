@@ -22,8 +22,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
     {
 #if NETCOREAPP
         private static bool IsNetCoreApp => true;
+
 #else
         private static bool IsNetCoreApp => false;
+
 #endif
 
         [Fact]

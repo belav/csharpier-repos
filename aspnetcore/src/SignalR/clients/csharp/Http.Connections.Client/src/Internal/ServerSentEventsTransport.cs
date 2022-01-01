@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal partial class ServerSentEventsTransport : ITransport
@@ -19,6 +20,7 @@ internal partial class ServerSentEventsTransport : ITransport
     private readonly HttpClient _httpClient;
     private readonly ILogger _logger;
     private readonly HttpConnectionOptions _httpConnectionOptions;
+
     // Volatile so that the SSE loop sees the updated value set from a different thread
     private volatile Exception? _error;
     private readonly CancellationTokenSource _transportCts = new CancellationTokenSource();

@@ -217,7 +217,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         }
 
         public abstract string GetGenericMethodParameter(TGenericContext genericContext, int index);
+
         public abstract string GetGenericTypeParameter(TGenericContext genericContext, int index);
+
         public abstract string GetTypeFromSpecification(
             MetadataReader reader,
             TGenericContext genericContext,

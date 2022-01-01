@@ -4,6 +4,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 internal sealed class TestCompilation

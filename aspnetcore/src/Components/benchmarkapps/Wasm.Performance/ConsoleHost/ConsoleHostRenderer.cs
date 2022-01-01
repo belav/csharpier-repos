@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.Extensions.Logging;
 
+
 namespace Wasm.Performance.ConsoleHost;
 
 internal class ConsoleHostRenderer : Renderer

@@ -100,6 +100,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     ref nextOperationCopy
                 );
             }
+
 #pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
 
             /// <summary>

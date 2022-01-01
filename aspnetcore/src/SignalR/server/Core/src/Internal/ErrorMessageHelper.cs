@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal static class ErrorMessageHelper

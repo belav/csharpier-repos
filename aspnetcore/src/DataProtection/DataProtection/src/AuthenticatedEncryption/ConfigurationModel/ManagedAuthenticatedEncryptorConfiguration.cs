@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
 /// <summary>

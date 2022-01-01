@@ -14,15 +14,18 @@ namespace System.IO.Pipelines
         private AwaitableState _awaitableState;
         private Action<object?>? _completion;
         private object? _completionState;
+
         // It's rare to have to capture custom context here
         private SchedulingContext? _schedulingContext;
         private CancellationTokenRegistration _cancellationTokenRegistration;
 
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
         private CancellationToken CancellationToken => _cancellationTokenRegistration.Token;
+
 #else
         private CancellationToken _cancellationToken;
         private CancellationToken CancellationToken => _cancellationToken;
+
 #endif
 
         public PipeAwaitable(bool completed, bool useSynchronizationContext)

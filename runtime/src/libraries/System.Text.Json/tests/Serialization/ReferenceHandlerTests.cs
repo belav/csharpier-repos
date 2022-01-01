@@ -321,6 +321,7 @@ namespace System.Text.Json.Serialization.Tests
                 objCopy.A\u046734567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
             );
         }
+
         #endregion Root Object
 
         #region Root Dictionary
@@ -591,6 +592,7 @@ namespace System.Text.Json.Serialization.Tests
             objCopy = JsonSerializer.Deserialize<Dictionary<string, int>>(json, optionsWithEncoder);
             Assert.Equal(1, objCopy[longPropertyName]);
         }
+
         #endregion
 
         #region Root Array
@@ -729,6 +731,7 @@ namespace System.Text.Json.Serialization.Tests
                 );
             Assert.Same(rootCopy[0], rootCopy[1]);
         }
+
         #endregion
 
         #region ReferenceResolver
@@ -830,6 +833,7 @@ namespace System.Text.Json.Serialization.Tests
         internal class PresistentGuidReferenceHandler : ReferenceHandler
         {
             public ReferenceResolver PersistentResolver { get; set; }
+
             public override ReferenceResolver CreateResolver() => PersistentResolver;
         }
 
@@ -890,6 +894,7 @@ namespace System.Text.Json.Serialization.Tests
         class BadReferenceResolver : ReferenceResolver
         {
             private int _count;
+
             public override void AddReference(string referenceId, object value)
             {
                 throw new NotImplementedException();
@@ -908,6 +913,7 @@ namespace System.Text.Json.Serialization.Tests
                 throw new NotImplementedException();
             }
         }
+
         #endregion
 
         [Fact]

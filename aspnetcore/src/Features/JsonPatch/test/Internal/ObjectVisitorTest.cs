@@ -6,6 +6,7 @@ using System.Dynamic;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 public class ObjectVisitorTest

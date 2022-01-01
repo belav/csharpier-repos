@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public partial class HttpConnectionTests

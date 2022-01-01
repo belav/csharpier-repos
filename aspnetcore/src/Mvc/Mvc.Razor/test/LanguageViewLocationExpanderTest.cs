@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 public class LanguageViewLocationExpanderTest

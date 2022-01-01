@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Routing.Tree;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 public abstract class EndpointRoutingBenchmarkBase

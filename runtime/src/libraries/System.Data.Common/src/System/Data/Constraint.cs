@@ -95,9 +95,11 @@ namespace System.Data
             _extendedProperties ?? (_extendedProperties = new PropertyCollection());
 
         internal abstract bool ContainsColumn(DataColumn column);
+
         internal abstract bool CanEnableConstraint();
 
         internal abstract Constraint? Clone(DataSet destination);
+
         internal abstract Constraint? Clone(DataSet destination, bool ignoreNSforTableLookup);
 
         internal void CheckConstraint()
@@ -109,12 +111,14 @@ namespace System.Data
         }
 
         internal abstract void CheckCanAddToCollection(ConstraintCollection constraint);
+
         internal abstract bool CanBeRemovedFromCollection(
             ConstraintCollection constraint,
             bool fThrowException
         );
 
         internal abstract void CheckConstraint(DataRow row, DataRowAction action);
+
         internal abstract void CheckState();
 
         protected void CheckStateForProperty()

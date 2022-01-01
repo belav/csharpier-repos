@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.ResponseCompression;
 
 /// <summary>

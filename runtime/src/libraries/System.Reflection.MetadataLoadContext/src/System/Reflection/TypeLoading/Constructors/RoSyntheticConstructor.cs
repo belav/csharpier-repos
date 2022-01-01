@@ -30,18 +30,23 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType GetRoDeclaringType() => _declaringType;
+
         internal sealed override RoModule GetRoModule() => GetRoDeclaringType().GetRoModule();
 
         protected sealed override string ComputeName() => ConstructorInfo.ConstructorName;
+
         public sealed override int MetadataToken => 0x06000000;
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
             Array.Empty<CustomAttributeData>();
+
         protected sealed override MethodAttributes ComputeAttributes() =>
             MethodAttributes.PrivateScope
             | MethodAttributes.Public
             | MethodAttributes.RTSpecialName;
+
         protected sealed override CallingConventions ComputeCallingConvention() =>
             CallingConventions.Standard | CallingConventions.HasThis;
+
         protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
             MethodImplAttributes.IL;
 

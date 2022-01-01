@@ -8,6 +8,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Identity.ExternalClaims.Services;
 
+
 namespace Identity.ExternalClaims.Services;
 
 public static class EmailSenderExtensions

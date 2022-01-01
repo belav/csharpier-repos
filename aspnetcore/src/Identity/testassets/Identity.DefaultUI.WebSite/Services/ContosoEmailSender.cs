@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
+
 namespace Identity.DefaultUI.WebSite;
 
 public class ContosoEmailSender : IEmailSender

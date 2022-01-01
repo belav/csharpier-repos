@@ -12,6 +12,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
@@ -21,6 +22,7 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
 
 #if DEBUG
     private bool _inUse;
+
 #endif
 
     private readonly int _minimumSegmentSize;
@@ -281,10 +283,14 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
     }
 
     public override void Flush() { }
+
     public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
     public override int Read(byte[] buffer, int offset, int count) =>
         throw new NotSupportedException();
+
     public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+
     public override void SetLength(long value) => throw new NotSupportedException();
 
     public override void WriteByte(byte value)
@@ -332,6 +338,7 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
             BuffersExtensions.Write(this, span);
         }
     }
+
 #endif
 
     protected override void Dispose(bool disposing)

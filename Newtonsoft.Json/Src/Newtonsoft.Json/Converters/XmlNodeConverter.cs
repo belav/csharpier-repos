@@ -346,6 +346,7 @@ namespace Newtonsoft.Json.Converters
 
         public string? NamespaceUri => _node.NamespaceURI;
     }
+
 #endif
 #endregion
 
@@ -404,6 +405,7 @@ namespace Newtonsoft.Json.Converters
         string? NamespaceUri { get; }
         object? WrappedNode { get; }
     }
+
 #endregion
 
 #region XNodeWrappers
@@ -937,6 +939,7 @@ namespace Newtonsoft.Json.Converters
 
         public bool IsEmpty => Element.IsEmpty;
     }
+
 #endif
 #endregion
 
@@ -1540,6 +1543,7 @@ namespace Newtonsoft.Json.Converters
             }
             return true;
         }
+
 #endregion
 
         #region Reading
@@ -2485,6 +2489,7 @@ namespace Newtonsoft.Json.Converters
 
             return false;
         }
+
 #endregion
 
         /// <summary>
@@ -2518,6 +2523,7 @@ namespace Newtonsoft.Json.Converters
         {
             return typeof(XObject).IsAssignableFrom(valueType);
         }
+
 #endif
 
 #if HAVE_XML_DOCUMENT

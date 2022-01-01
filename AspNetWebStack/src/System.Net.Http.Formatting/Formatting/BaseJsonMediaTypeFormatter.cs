@@ -10,8 +10,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Newtonsoft.Json;
+
 #if !NETFX_CORE
 using Newtonsoft.Json.Serialization;
+
 #endif
 
 namespace System.Net.Http.Formatting
@@ -26,6 +28,7 @@ namespace System.Net.Http.Formatting
 
 #if !NETFX_CORE // DataContractResolver is not supported in portable library
         private readonly IContractResolver _defaultContractResolver;
+
 #endif
 
         private JsonSerializerSettings _jsonSerializerSettings;
@@ -117,6 +120,7 @@ namespace System.Net.Http.Formatting
                 _maxDepth = value;
             }
         }
+
 #endif
 
         /// <summary>

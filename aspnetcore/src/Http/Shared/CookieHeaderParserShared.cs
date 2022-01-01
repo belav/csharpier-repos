@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.Net.Http.Headers;
 
 internal static class CookieHeaderParserShared

@@ -12,6 +12,7 @@ namespace Program
             Control = control;
         }
     }
+
     public class AxControlEventArgs : AxControlEventArgs<WindowlessControl>
     {
         public AxControlEventArgs(WindowlessControl c) : base(c) { }
@@ -31,6 +32,7 @@ namespace Program
     }
 
     public class GroupBox : AlignPadLayoutPanel { } //NOT OK
+
     //public class GroupBox : AlignPadLayoutPanel<WindowlessControl> {} //OK
 
     public class Program

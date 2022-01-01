@@ -51,6 +51,7 @@ namespace System.Xml
             await ParseAsync(false).ConfigureAwait(false);
             return _schemaInfo;
         }
+
         #endregion
 
         //
@@ -1393,6 +1394,7 @@ namespace System.Xml
 
             return (publicId, systemId);
         }
+
         //
         // Scanning methods - works directly with parsing buffer
         //

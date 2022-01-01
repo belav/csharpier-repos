@@ -3,6 +3,7 @@
 
 using System.Net.WebSockets;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public static class TestHelpers

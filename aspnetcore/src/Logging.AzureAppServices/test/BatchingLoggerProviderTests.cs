@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
 public class BatchingLoggerProviderTests

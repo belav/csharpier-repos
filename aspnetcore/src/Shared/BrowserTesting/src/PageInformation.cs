@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using PlaywrightSharp;
 
+
 namespace Microsoft.AspNetCore.BrowserTesting;
 
 public class PageInformation : IDisposable

@@ -8,6 +8,7 @@ using FormatterWebSite.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class SystemTextJsonOutputFormatterTest

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 public class GenericTypeNameRewriterTest

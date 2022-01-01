@@ -5,6 +5,7 @@ using System;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 /// <summary>

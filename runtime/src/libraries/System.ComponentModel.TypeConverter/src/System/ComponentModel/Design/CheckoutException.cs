@@ -16,6 +16,7 @@ namespace System.ComponentModel.Design
     public class CheckoutException : ExternalException
     {
         private const int E_ABORT = unchecked((int)0x80004004);
+
         /// <summary>
         /// Initializes a <see cref='System.ComponentModel.Design.CheckoutException'/> that specifies that the checkout
         /// was canceled. This field is read-only.
