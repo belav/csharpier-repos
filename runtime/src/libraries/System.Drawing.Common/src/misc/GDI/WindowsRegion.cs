@@ -13,10 +13,8 @@ namespace System.Drawing.Internal
     {
         private IntPtr _nativeHandle; // The hRegion, this class always takes ownership of the hRegion.
         private bool _ownHandle;
-
 #if GDI_FINALIZATION_WATCH
         private string AllocationSite = DbgUtil.StackTrace;
-
 #endif
 
         private WindowsRegion() { }

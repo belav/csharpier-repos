@@ -676,7 +676,6 @@ namespace System.Data.OleDb
         {
             return enumOleDbType.ToString();
         }
-
 #endif
 
         internal static NativeDBType FromDataType(OleDbType enumOleDbType) =>

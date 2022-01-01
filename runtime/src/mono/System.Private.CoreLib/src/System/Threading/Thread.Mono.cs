@@ -70,10 +70,8 @@ namespace System.Threading
         private StartHelper? _startHelper;
         internal ExecutionContext? _executionContext;
         internal SynchronizationContext? _synchronizationContext;
-
 #if TARGET_UNIX || TARGET_BROWSER
         internal WaitSubsystem.ThreadWaitInfo? _waitInfo;
-
 #endif
 
         // This is used for a quick check on thread pool threads after running a work item to determine if the name, background
@@ -143,7 +141,6 @@ namespace System.Threading
                 return 7;
             }
         }
-
 #if TARGET_UNIX || TARGET_BROWSER
         internal WaitSubsystem.ThreadWaitInfo WaitInfo
         {
@@ -162,7 +159,6 @@ namespace System.Threading
                 }
             }
         }
-
 #endif
 
         public ThreadPriority Priority

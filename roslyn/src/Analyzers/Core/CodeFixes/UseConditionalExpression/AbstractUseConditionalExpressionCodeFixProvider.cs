@@ -38,7 +38,6 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
 #if CODE_STYLE
         protected abstract ISyntaxFormattingService GetSyntaxFormattingService();
-
 #endif
 
         protected abstract TExpressionSyntax ConvertToExpression(IThrowOperation throwOperation);

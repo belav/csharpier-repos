@@ -16,7 +16,6 @@ namespace System.Linq.Expressions.Compiler
     {
 #if FEATURE_COMPILE_TO_METHODBUILDER
         private static int s_counter;
-
 #endif
 
         internal void EmitConstantArray<T>(T[] array)
@@ -198,7 +197,6 @@ namespace System.Linq.Expressions.Compiler
                 + System.Threading.Interlocked.Increment(ref s_counter)
                 + "}lambda_method";
         }
-
 #endif
 
         private void EmitLambdaBody()

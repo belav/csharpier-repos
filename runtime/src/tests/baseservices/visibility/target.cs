@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Runtime.CompilerServices;
-using System.Security;[assembly: InternalsVisibleTo(
+using System.Security;
+
+[assembly: InternalsVisibleTo(
     "ClassFriend, PublicKey=00240000048000009400000006020000002400005253413100040000010001000fc5993e0f511ad5e16e8b226553493e09067afc41039f70daeb94a968d664f40e69a46b617d15d3d5328be7dbedd059eb98495a3b03cb4ea4ba127444671c3c84cbc1fdc393d7e10b5ee3f31f5a29f005e5eed7e3c9c8af74f413f0004f0c2cabb22f9dd4f75a6f599784e1bab70985ef8174ca6c684278be82ce055a03ebaf"
 )]
 [assembly: InternalsVisibleTo(
@@ -11,6 +13,7 @@ using System.Security;[assembly: InternalsVisibleTo(
 [assembly: InternalsVisibleTo(
     "StructFriend, PublicKey=00240000048000009400000006020000002400005253413100040000010001000fc5993e0f511ad5e16e8b226553493e09067afc41039f70daeb94a968d664f40e69a46b617d15d3d5328be7dbedd059eb98495a3b03cb4ea4ba127444671c3c84cbc1fdc393d7e10b5ee3f31f5a29f005e5eed7e3c9c8af74f413f0004f0c2cabb22f9dd4f75a6f599784e1bab70985ef8174ca6c684278be82ce055a03ebaf"
 )]
+
 
 //
 // This file can be compiled in two ways: ALL public (ALL_PUB), or Restricted.
@@ -43,14 +46,12 @@ public enum InternalEnum
     VALUE1,
     VALUE3
 }
-
 #else
 internal enum InternalEnum
 {
     VALUE1,
     VALUE3
 }
-
 #endif
 
 
@@ -85,7 +86,6 @@ public class PublicClass
     public PublicClass(int i1, int i2, int i3, int i4, int i5) { }
 
     public PublicClass(int i1, int i2, int i3, int i4, int i5, int i6) { }
-
 #else
     protected PublicClass(int i1, int i2, int i3) { }
 
@@ -94,7 +94,6 @@ public class PublicClass
     protected internal PublicClass(int i1, int i2, int i3, int i4, int i5) { }
 
     private PublicClass(int i1, int i2, int i3, int i4, int i5, int i6) { }
-
 #endif
 
 
@@ -112,13 +111,11 @@ public class PublicClass
     public static int internalStaticField = 0;
     public static int protectedInternalStaticField = 0;
     public static int privateStaticField;
-
 #else
     protected static int protectedStaticField = 0;
     internal static int internalStaticField = 0;
     protected internal static int protectedInternalStaticField = 0;
     private static int privateStaticField;
-
 #endif
 
 
@@ -135,13 +132,11 @@ public class PublicClass
     public int internalField;
     public int protectedInternalField;
     public int privateField;
-
 #else
     protected int protectedField;
     internal int internalField;
     protected internal int protectedInternalField;
     private int privateField;
-
 #endif
 
 #pragma warning restore 169
@@ -182,7 +177,6 @@ public class PublicClass
         get { return 0; }
         set { ; }
     }
-
 #else
     protected static int ProtectedStaticProperty
     {
@@ -204,7 +198,6 @@ public class PublicClass
         get { return 0; }
         set { ; }
     }
-
 #endif
 
     //
@@ -244,7 +237,6 @@ public class PublicClass
         get { return 0; }
         set { ; }
     }
-
 #else
     protected int ProtectedProperty
     {
@@ -266,7 +258,6 @@ public class PublicClass
         get { return 0; }
         set { ; }
     }
-
 #endif
 
 
@@ -306,7 +297,6 @@ public class PublicClass
     {
         return 1;
     }
-
 #else
     protected static int ProtectedStaticMethod()
     {
@@ -327,7 +317,6 @@ public class PublicClass
     {
         return 1;
     }
-
 #endif
 
 
@@ -483,7 +472,6 @@ public struct PublicStruct
     {
         defaultField = publicField = internalField = privateField = 0;
     }
-
 #else
     internal PublicStruct(int i1, int i2, int i3)
     {
@@ -494,7 +482,6 @@ public struct PublicStruct
     {
         defaultField = publicField = internalField = privateField = 0;
     }
-
 #endif
 
 #pragma warning disable 414
@@ -509,11 +496,9 @@ public struct PublicStruct
 #if ALL_PUB
     public static int internalStaticField = 0;
     public static int privateStaticField = 0;
-
 #else
     internal static int internalStaticField = 0;
     private static int privateStaticField = 0;
-
 #endif
 
 
@@ -528,11 +513,9 @@ public struct PublicStruct
 #if ALL_PUB
     public int internalField;
     public int privateField;
-
 #else
     internal int internalField;
     private int privateField;
-
 #endif
 
 #pragma warning restore 414
@@ -563,7 +546,6 @@ public struct PublicStruct
         get { return 0; }
         set { ; }
     }
-
 #else
     internal static int InternalStaticProperty
     {
@@ -575,7 +557,6 @@ public struct PublicStruct
         get { return 0; }
         set { ; }
     }
-
 #endif
 
     //
@@ -605,7 +586,6 @@ public struct PublicStruct
         get { return 0; }
         set { ; }
     }
-
 #else
     internal int InternalProperty
     {
@@ -617,7 +597,6 @@ public struct PublicStruct
         get { return 0; }
         set { ; }
     }
-
 #endif
 
 
@@ -647,7 +626,6 @@ public struct PublicStruct
     {
         return 1;
     }
-
 #else
     internal static int InternalStaticMethod()
     {
@@ -658,7 +636,6 @@ public struct PublicStruct
     {
         return 1;
     }
-
 #endif
 
 

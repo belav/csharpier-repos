@@ -78,7 +78,6 @@ namespace System.Runtime.CompilerServices
             // do anything here, and thus assert to ensure we're not calling this from our own implementations.
             Debug.Fail("SetStateMachine should not be used.");
         }
-
 #if !CORERT
         /// <summary>Gets whether we should be tracking async method completions for eventing.</summary>
         internal static bool TrackAsyncMethodCompletion
@@ -90,7 +89,6 @@ namespace System.Runtime.CompilerServices
                     TplEventSource.Keywords.AsyncMethod
                 );
         }
-
 #endif
 
         /// <summary>Gets a description of the state of the state machine object, suitable for debug purposes.</summary>

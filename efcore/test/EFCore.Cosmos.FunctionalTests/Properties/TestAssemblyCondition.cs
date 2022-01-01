@@ -3,6 +3,7 @@
 
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
+
 // Skip the entire assembly if cannot connect to CosmosDb
 [assembly: CosmosDbConfiguredCondition]
 

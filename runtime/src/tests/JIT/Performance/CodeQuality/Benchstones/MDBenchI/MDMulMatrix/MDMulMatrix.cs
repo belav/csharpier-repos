@@ -11,10 +11,8 @@ namespace Benchstone.MDBenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 100;
-
 #endif
 
         const int Size = 75;

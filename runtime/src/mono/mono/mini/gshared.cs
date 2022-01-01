@@ -71,7 +71,6 @@ public class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
-
 #endif
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -3006,7 +3005,6 @@ public class Tests
         var res = (Nullable<int>)iface.AMethod<Nullable<int>>();
         return res == 42 ? 0 : 1;
     }
-
 #if !__MonoCS__
     public static int test_0_gsharedvt_out_dim()
     {
@@ -3014,7 +3012,6 @@ public class Tests
         c.prop = new H();
         return (c.Foo() == "abcd") ? 0 : 1;
     }
-
 #endif
 
     class KvpList<T>
@@ -3092,7 +3089,6 @@ internal struct SparseArrayBuilder<T>
 
     public ArrayBuilder<Marker> Markers => _markers;
 }
-
 // #18276
 #if !__MonoCS__
 public class Outer<Q>
@@ -3120,7 +3116,6 @@ public class H : Outer<object>.ID
         return "abcd";
     }
 }
-
 #endif
 
 #if !__MOBILE__

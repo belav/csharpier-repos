@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using Xunit;
 using Xunit.Abstractions;
+
 #nullable enable
 
 namespace Wasm.Build.Tests

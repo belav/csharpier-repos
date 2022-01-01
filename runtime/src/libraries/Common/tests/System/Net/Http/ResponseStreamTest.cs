@@ -404,7 +404,6 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
-
 #endif
 
         public enum TransferType

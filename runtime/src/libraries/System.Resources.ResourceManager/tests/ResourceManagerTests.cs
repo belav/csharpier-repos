@@ -11,7 +11,9 @@ using System.Linq;
 using System.Resources;
 using System.Diagnostics;
 using Microsoft.DotNet.RemoteExecutor;
-using Xunit;[assembly: NeutralResourcesLanguage("en")]
+using Xunit;
+
+[assembly: NeutralResourcesLanguage("en")]
 
 
 namespace System.Resources.Tests
@@ -135,7 +137,6 @@ namespace System.Resources.Tests
 
             return null;
         }
-
 #endif
 
         static System.Reflection.Assembly AssemblyResolveEventHandler(

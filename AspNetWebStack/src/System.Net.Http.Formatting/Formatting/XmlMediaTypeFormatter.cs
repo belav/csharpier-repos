@@ -112,7 +112,6 @@ namespace System.Net.Http.Formatting
         /// Gets the <see cref="XmlWriterSettings"/> to be used while writing.
         /// </summary>
         public XmlWriterSettings WriterSettings { get; private set; }
-
 #if !NETFX_CORE // MaxDepth is not supported in portable libraries
         /// <summary>
         /// Gets or sets the maximum depth allowed by this formatter.
@@ -134,7 +133,6 @@ namespace System.Net.Http.Formatting
                 _readerQuotas.MaxDepth = value;
             }
         }
-
 #endif
 
         /// <summary>

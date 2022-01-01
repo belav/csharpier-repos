@@ -155,7 +155,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     EnumUtilities.ContainsAllValues<NullableContextKind>(NullableContextMask)
                 );
             }
-
 #endif
 
             private static bool BitsAreUnsetOrSame(int bits, int mask)

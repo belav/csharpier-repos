@@ -438,7 +438,6 @@ throw e;",
             var result = fn(5);
             Assert.Equal(25, result);
         }
-
 #endif
 
         [Fact]

@@ -1665,7 +1665,6 @@ namespace System.Collections.Generic
         {
             return true;
         }
-
 #endif
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) =>

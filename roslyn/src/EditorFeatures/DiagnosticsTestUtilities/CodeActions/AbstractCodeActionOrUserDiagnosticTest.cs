@@ -389,7 +389,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 return textBuilder.ToString();
             }
         }
-
 #endif
 
         private static TestParameters WithRegularOptions(TestParameters parameters) =>

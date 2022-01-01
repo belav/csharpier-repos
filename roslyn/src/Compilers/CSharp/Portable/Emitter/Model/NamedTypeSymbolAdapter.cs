@@ -1047,7 +1047,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return _lazyAdapter;
         }
-
 #else
         internal NamedTypeSymbol AdaptedNamedTypeSymbol => this;
 
@@ -1055,7 +1054,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
-
 #endif
 
         internal virtual IEnumerable<EventSymbol> GetEventsToEmit()

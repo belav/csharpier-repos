@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.UriIdnScope))]
 [assembly: TypeForwardedTo(typeof(System.Drawing.Configuration.SystemDrawingSection))]
 [assembly: TypeForwardedTo(typeof(System.Configuration.ApplicationScopedSettingAttribute))]

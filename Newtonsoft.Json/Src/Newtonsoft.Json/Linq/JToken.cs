@@ -631,7 +631,6 @@ namespace Newtonsoft.Json.Linq
 
             return Convert.ToBoolean(v.Value, CultureInfo.InvariantCulture);
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Performs an explicit conversion from <see cref="Newtonsoft.Json.Linq.JToken"/> to <see cref="System.DateTimeOffset"/>.
@@ -663,7 +662,6 @@ namespace Newtonsoft.Json.Linq
 
             return new DateTimeOffset(Convert.ToDateTime(v.Value, CultureInfo.InvariantCulture));
         }
-
 #endif
 
         /// <summary>
@@ -763,7 +761,6 @@ namespace Newtonsoft.Json.Linq
               ? (DateTime?)Convert.ToDateTime(v.Value, CultureInfo.InvariantCulture)
               : null;
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Performs an explicit conversion from <see cref="JToken"/> to <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>.
@@ -804,7 +801,6 @@ namespace Newtonsoft.Json.Linq
 
             return new DateTimeOffset(Convert.ToDateTime(v.Value, CultureInfo.InvariantCulture));
         }
-
 #endif
 
         /// <summary>
@@ -1818,7 +1814,6 @@ namespace Newtonsoft.Json.Linq
               ? uri
               : new Uri(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
         }
-
 #if HAVE_BIG_INTEGER
         private static BigInteger ToBigInteger(JToken value)
         {
@@ -1856,7 +1851,6 @@ namespace Newtonsoft.Json.Linq
 
             return ConvertUtils.ToBigInteger(v.Value);
         }
-
 #endif
         #endregion
 
@@ -1870,7 +1864,6 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Performs an implicit conversion from <see cref="DateTimeOffset"/> to <see cref="JToken"/>.
@@ -1881,7 +1874,6 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
-
 #endif
 
         /// <summary>
@@ -1955,7 +1947,6 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Performs an implicit conversion from <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/> to <see cref="JToken"/>.
@@ -1966,7 +1957,6 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
-
 #endif
 
         /// <summary>
@@ -2795,7 +2785,6 @@ namespace Newtonsoft.Json.Linq
             var p = new JPath(path);
             return p.Evaluate(this, this, settings);
         }
-
 #if HAVE_DYNAMIC
         /// <summary>
         /// Returns the <see cref="DynamicMetaObject"/> responsible for binding operations performed on this object.
@@ -2820,7 +2809,6 @@ namespace Newtonsoft.Json.Linq
         {
             return GetMetaObject(parameter);
         }
-
 #endif
 
 #if HAVE_ICLONEABLE
@@ -2828,7 +2816,6 @@ namespace Newtonsoft.Json.Linq
         {
             return DeepClone();
         }
-
 #endif
 
         /// <summary>

@@ -6,7 +6,6 @@ public static class Library
     private static string s_name
 #if NoCCtor
     = "Library";
-
 #else
     ;
 
@@ -14,7 +13,6 @@ public static class Library
     {
         s_name = "Library";
     }
-
 #endif
 
     public static string Name

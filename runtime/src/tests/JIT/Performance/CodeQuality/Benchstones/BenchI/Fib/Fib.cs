@@ -11,10 +11,8 @@ namespace Benchstone.BenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 3500;
-
 #endif
 
         const int Number = 24;

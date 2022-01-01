@@ -5,6 +5,7 @@ using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
+
 #nullable disable
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

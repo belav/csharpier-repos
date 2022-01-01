@@ -77,7 +77,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
             );
         }
-
 #endif
 
         [Fact]

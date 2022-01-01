@@ -14,7 +14,6 @@ namespace System.Drawing
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
-
 #endif
 
         internal IntPtr NativeRegion { get; private set; }

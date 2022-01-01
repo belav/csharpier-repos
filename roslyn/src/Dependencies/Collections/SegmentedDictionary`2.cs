@@ -37,10 +37,8 @@ namespace Microsoft.CodeAnalysis.Collections
         private const bool SupportsComparerDevirtualization
 #if NETCOREAPP
         = true;
-
 #else
         = false;
-
 #endif
 
         private SegmentedArray<int> _buckets;

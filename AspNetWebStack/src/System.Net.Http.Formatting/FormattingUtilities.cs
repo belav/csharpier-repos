@@ -112,14 +112,12 @@ namespace System.Net.Http
         /// A <see cref="Type"/> representing <see cref="IQueryable{T}"/>.
         /// </summary>
         public static readonly Type QueryableInterfaceGenericType = typeof(IQueryable<>);
-
 #if !NETFX_CORE // XsdDataContractExporter is not supported in portable libraries
         /// <summary>
         /// An instance of <see cref="XsdDataContractExporter"/>.
         /// </summary>
         public static readonly XsdDataContractExporter XsdDataContractExporter =
             new XsdDataContractExporter();
-
 #endif
 
         /// <summary>

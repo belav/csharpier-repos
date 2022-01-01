@@ -30,7 +30,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 #if DEBUG
         internal bool WithImportChainEntry => _withImportChainEntry;
-
 #endif
 
         internal abstract ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(

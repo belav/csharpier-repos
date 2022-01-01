@@ -371,10 +371,8 @@ namespace System.Net.Quic.Implementations.Mock
             private const int MaxBufferSize =
 #if DEBUG
                 4096;
-
 #else
                 32 * 1024;
-
 #endif
             public StreamState(long streamId, bool bidirectional)
             {

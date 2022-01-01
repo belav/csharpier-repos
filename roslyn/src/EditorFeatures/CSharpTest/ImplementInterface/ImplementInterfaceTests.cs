@@ -6972,7 +6972,6 @@ class C : I
             test.Options.AddRange(AllOptionsOff);
             await test.RunAsync();
         }
-
 #if false
         [WorkItem(13677)]
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]

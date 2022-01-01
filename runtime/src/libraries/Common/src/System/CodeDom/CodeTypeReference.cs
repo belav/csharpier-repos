@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+
 #nullable enable
 
 #if CODEDOM
@@ -297,7 +298,6 @@ namespace System.Runtime.Serialization
         {
             Options = CodeTypeReferenceOptions.GenericTypeParameter;
         }
-
 #endif
 
         public CodeTypeReference(string baseType, int rank)

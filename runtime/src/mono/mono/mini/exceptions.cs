@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 /*
  * Regression tests for the mono JIT.
  *
@@ -34,7 +35,6 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
-
 #endif
 
     public static int test_0_catch()

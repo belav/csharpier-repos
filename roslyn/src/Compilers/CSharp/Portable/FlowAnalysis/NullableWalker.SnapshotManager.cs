@@ -169,7 +169,6 @@ Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}"
                     );
                 }
             }
-
 #endif
 
             internal sealed class Builder

@@ -6,7 +6,9 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-using System.Threading;[assembly: DefaultDllImportSearchPaths(DllImportSearchPath.SafeDirectories)]
+using System.Threading;
+
+[assembly: DefaultDllImportSearchPaths(DllImportSearchPath.SafeDirectories)]
 
 
 public class CallbackStressTest

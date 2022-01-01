@@ -316,7 +316,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 /// expression tree conversion.
                 /// </summary>
                 private readonly HashSet<Symbol> _freeVariables = new HashSet<Symbol>();
-
 #endif
 
                 private readonly MethodSymbol _topLevelMethod;

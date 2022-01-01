@@ -550,13 +550,11 @@ internal class Http3StreamBase
     {
         return Pair.Application.Input.ReadAsync().AsTask().DefaultTimeout();
     }
-
 #else
     protected ValueTask<ReadResult> ReadApplicationInputAsync()
     {
         return Pair.Application.Input.ReadAsync();
     }
-
 #endif
 
     internal async ValueTask<Http3FrameWithPayload> ReceiveFrameAsync(

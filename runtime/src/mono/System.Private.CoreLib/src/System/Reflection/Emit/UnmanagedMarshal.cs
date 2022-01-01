@@ -82,7 +82,6 @@ namespace System.Reflection.Emit
         {
             return new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
         }
-
 #if FEATURE_COMINTEROP
 		public static UnmanagedMarshal DefineSafeArray( UnmanagedType elemType) {
 			return new UnmanagedMarshal (UnmanagedType.SafeArray, elemType);
@@ -92,7 +91,6 @@ namespace System.Reflection.Emit
         {
             return new UnmanagedMarshal(unmanagedType, unmanagedType);
         }
-
 #if FEATURE_COMINTEROP
 		internal static UnmanagedMarshal DefineCustom (Type typeref, string cookie, string mtype, Guid id) {
 			UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.CustomMarshaler, UnmanagedType.CustomMarshaler);

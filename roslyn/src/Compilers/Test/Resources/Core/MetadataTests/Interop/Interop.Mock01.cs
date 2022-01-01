@@ -5,6 +5,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
 [assembly: ImportedFromTypeLib("MockInterop")]
 [assembly: PrimaryInteropAssembly(30303, 33)]
 [assembly: Guid("71B8C65D-7748-447A-B786-64682CBEF136")]

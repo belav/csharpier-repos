@@ -37,7 +37,6 @@ public static partial class XmlSerializerTests
         method.Invoke(null, new object[] { 3 });
 #endif
     }
-
 #endif
 
     private static bool IsTimeSpanSerializationAvailable => true;
@@ -327,7 +326,6 @@ public static partial class XmlSerializerTests
         Assert.StrictEqual(x.F1, y.F1);
         Assert.StrictEqual(x.P1, y.P1);
     }
-
 #if !XMLSERIALIZERGENERATORTESTS
     [Fact]
     public static void Xml_EnumAsObject()
@@ -342,7 +340,6 @@ public static partial class XmlSerializerTests
         Assert.StrictEqual((int)o, o2);
         Assert.Equal(MyEnum.Three, (MyEnum)o2);
     }
-
 #endif
 
     [Fact]

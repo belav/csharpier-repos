@@ -14,10 +14,8 @@ namespace System.Net.Sockets
         private const int EventBufferCount =
 #if DEBUG
             32;
-
 #else
             1024;
-
 #endif
 
         // Socket continuations are dispatched to the ThreadPool from the event thread.

@@ -263,7 +263,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             result.Append("}");
             return result.ToString();
         }
-
 #endif
 
         private void EnterRegionIfNeeded(BoundNode node)

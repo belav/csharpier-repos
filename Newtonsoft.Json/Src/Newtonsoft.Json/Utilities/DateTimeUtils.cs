@@ -77,7 +77,6 @@ namespace Newtonsoft.Json.Utilities
                     );
             }
         }
-
 #else
         public static string ToDateTimeFormat(DateTimeKind kind)
         {
@@ -340,7 +339,6 @@ namespace Newtonsoft.Json.Utilities
             dt = new DateTimeOffset(d, offset);
             return true;
         }
-
 #endif
 
         private static DateTime CreateDateTime(DateTimeParser dateTimeParser)
@@ -599,7 +597,6 @@ namespace Newtonsoft.Json.Utilities
             dt = default;
             return false;
         }
-
 #endif
 
         private static bool TryParseMicrosoftDate(
@@ -740,7 +737,6 @@ namespace Newtonsoft.Json.Utilities
             dt = default;
             return false;
         }
-
 #endif
 
         private static bool TryReadOffset(
@@ -970,7 +966,6 @@ namespace Newtonsoft.Json.Utilities
                 writer.Write(value.ToString(formatString, culture));
             }
         }
-
 #endif
         #endregion
 

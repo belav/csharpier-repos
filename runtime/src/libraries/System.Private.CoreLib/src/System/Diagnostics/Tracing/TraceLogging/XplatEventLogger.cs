@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
 #if FEATURE_EVENTSOURCE_XPLAT
 
 namespace System.Diagnostics.Tracing

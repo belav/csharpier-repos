@@ -43,7 +43,6 @@ namespace System.Security.Cryptography
             ecdsa.ImportParameters(parameters);
             return ecdsa;
         }
-
 #endif
         internal static partial class ECDsaImplementation
         {

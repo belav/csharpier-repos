@@ -7,6 +7,7 @@ using System.Diagnostics;
 #endif
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else
@@ -307,10 +308,8 @@ namespace System.Diagnostics.Tracing
                 (Func<TContainer, TProperty>)property.GetMethod!.CreateDelegate(
                     typeof(Func<TContainer, TProperty>)
                 );
-
 #else
                 property.GetMethod!.CreateDelegate<Func<TContainer, TProperty>>();
-
 #endif
 
             public override Func<PropertyValue, PropertyValue> GetPropertyGetter(

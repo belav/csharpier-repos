@@ -116,7 +116,6 @@ namespace Internal.NativeFormat
         // State used by compression
         List<Tentative> _tentativelyWritten = new List<Tentative>(); // Tentatively written Vertices.
         int _compressionDepth = 0;
-
 #endif
 
         public NativeWriter()
@@ -444,7 +443,6 @@ namespace Internal.NativeFormat
                 }
             }
         }
-
 #if NATIVEFORMAT_COMPRESSION
         // TODO:
 #else
@@ -454,7 +452,6 @@ namespace Internal.NativeFormat
 
             internal void Pack(Vertex vertex) { }
         }
-
 #endif
 
         T Unify<T>(T vertex) where T : Vertex

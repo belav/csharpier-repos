@@ -532,7 +532,6 @@ namespace System.IO.Ports
 
             return result.Task;
         }
-
 #if !NETFRAMEWORK && !NETSTANDARD2_0
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
@@ -551,7 +550,6 @@ namespace System.IO.Ports
 
             return new ValueTask<int>(result.Task);
         }
-
 #endif
 
         public override Task WriteAsync(
@@ -577,7 +575,6 @@ namespace System.IO.Ports
 
             return result.Task;
         }
-
 #if !NETFRAMEWORK && !NETSTANDARD2_0
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
@@ -599,7 +596,6 @@ namespace System.IO.Ports
 
             return new ValueTask(result.Task);
         }
-
 #endif
 
         public override IAsyncResult BeginRead(

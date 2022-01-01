@@ -20,7 +20,6 @@ using ComponentsWebAssembly_CSharp.Server.Models;
 #endif
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 #if (IndividualLocalAuth)
 var connectionString =
@@ -43,7 +42,6 @@ builder.Services
 builder.Services.AddIdentityServer().AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
 builder.Services.AddAuthentication().AddIdentityServerJwt();
-
 #endif
 #if (OrganizationalAuth)
 builder.Services
@@ -60,7 +58,6 @@ builder.Services
             .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
 #endif
 #elif (IndividualB2CAuth)
 builder.Services
@@ -72,7 +69,6 @@ builder.Services
             .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"));
-
 #endif
 #endif
 
@@ -97,16 +93,13 @@ else
     app.UseHsts();
 #endif
 }
-
 #if (RequiresHttps)
 app.UseHttpsRedirection();
-
 #endif
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 #if (IndividualLocalAuth)
 app.UseIdentityServer();
 #endif
@@ -115,7 +108,6 @@ app.UseAuthentication();
 #endif
 #if (!NoAuth)
 app.UseAuthorization();
-
 #endif
 
 app.MapRazorPages();

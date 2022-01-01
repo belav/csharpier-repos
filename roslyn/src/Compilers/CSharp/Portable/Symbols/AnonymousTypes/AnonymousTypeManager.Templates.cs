@@ -116,7 +116,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         private readonly ConcurrentDictionary<Location, bool> _sourceLocationsSeen =
             new ConcurrentDictionary<Location, bool>();
-
 #endif
 
         [Conditional("DEBUG")]

@@ -10,20 +10,16 @@ class StringMarshalingTestNative
 #if LPTSTR
     private const string NativeLibraryName = "LPTStrTestNative";
     private const UnmanagedType StringMarshalingType = UnmanagedType.LPTStr;
-
 #elif LPSTR
     private const string NativeLibraryName = "LPStrTestNative";
     private const UnmanagedType StringMarshalingType = UnmanagedType.LPStr;
-
 #elif BSTR
     private const string NativeLibraryName = "BStrTestNative";
     private const UnmanagedType StringMarshalingType = UnmanagedType.BStr;
-
 #elif ANSIBSTR
     private const string NativeLibraryName = "AnsiBStrTestNative";
 #pragma warning disable 0618
     private const UnmanagedType StringMarshalingType = UnmanagedType.AnsiBStr;
-
 #pragma warning restore 0618
 #else
 #error A string marshaling type must be specified.

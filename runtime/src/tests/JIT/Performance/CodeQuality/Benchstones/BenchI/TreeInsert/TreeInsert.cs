@@ -11,10 +11,8 @@ namespace Benchstone.BenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 15000;
-
 #endif
 
         private struct Node

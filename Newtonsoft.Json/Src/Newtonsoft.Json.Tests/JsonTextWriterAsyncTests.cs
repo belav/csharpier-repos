@@ -233,7 +233,6 @@ namespace Newtonsoft.Json.Tests
                 sw.ToString()
             );
         }
-
 #endif
 
         [Test]
@@ -395,7 +394,6 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual("1", sw.ToString());
         }
-
 #endif
 
         [Test]

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
+
 #pragma warning disable CA5373 // Call to obsolete key derivation function PasswordDeriveBytes.*
 
 namespace System.Security.Cryptography

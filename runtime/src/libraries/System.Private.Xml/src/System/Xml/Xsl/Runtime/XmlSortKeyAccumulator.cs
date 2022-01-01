@@ -20,10 +20,8 @@ namespace System.Xml.Xsl.Runtime
 
 #if DEBUG
         private const int DefaultSortKeyCount = 4;
-
 #else
         private const int DefaultSortKeyCount = 64;
-
 #endif
 
         /// <summary>

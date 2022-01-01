@@ -21,7 +21,6 @@ namespace Microsoft.CodeAnalysis.GeneratedCodeRecognition
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
             return IsGeneratedCode(syntaxTree, document, cancellationToken);
         }
-
 #endif
 
         public async Task<bool> IsGeneratedCodeAsync(

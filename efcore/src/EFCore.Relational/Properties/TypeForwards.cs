@@ -3,6 +3,7 @@
 
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore.Design;
+
 [assembly: TypeForwardedTo(typeof(AttributeCodeFragment))]
 [assembly: TypeForwardedTo(typeof(MethodCallCodeFragment))]
 [assembly: TypeForwardedTo(typeof(NestedClosureCodeFragment))]

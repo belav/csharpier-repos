@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Speech.Synthesis;
 using System.Speech.Synthesis.TtsEngine;
 using System.Xml;
+
 #pragma warning disable 56524 // The _xmlWriter member is not created in this module and should not be disposed
 
 namespace System.Speech.Internal.Synthesis

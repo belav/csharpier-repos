@@ -16,13 +16,10 @@ namespace System.Threading
         private const int SmallStackSizeBytes = 256 * 1024;
 
         private const short MaxPossibleThreadCount = short.MaxValue;
-
 #if TARGET_64BIT
         private const short DefaultMaxWorkerThreadCount = MaxPossibleThreadCount;
-
 #elif TARGET_32BIT
         private const short DefaultMaxWorkerThreadCount = 1023;
-
 #else
 #error Unknown platform
 #endif

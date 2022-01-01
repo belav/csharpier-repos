@@ -348,7 +348,6 @@ namespace System.Net.NetworkInformation
                 "The size of an ICMP Header must be 8 bytes."
             );
         }
-
 #endif
 
         [StructLayout(LayoutKind.Sequential)]

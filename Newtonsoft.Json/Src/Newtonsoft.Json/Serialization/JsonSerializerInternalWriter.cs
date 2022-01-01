@@ -1353,7 +1353,6 @@ namespace Newtonsoft.Json.Serialization
 
             return writeMetadataObject;
         }
-
 #if HAVE_BINARY_SERIALIZATION
 #if HAVE_SECURITY_SAFE_CRITICAL_ATTRIBUTE
         [SecuritySafeCritical]
@@ -1442,7 +1441,6 @@ namespace Newtonsoft.Json.Serialization
             _serializeStack.RemoveAt(_serializeStack.Count - 1);
             OnSerialized(writer, contract, value);
         }
-
 #endif
 
 #if HAVE_DYNAMIC
@@ -1594,7 +1592,6 @@ namespace Newtonsoft.Json.Serialization
             _serializeStack.RemoveAt(_serializeStack.Count - 1);
             OnSerialized(writer, contract, value);
         }
-
 #endif
 
         private bool ShouldWriteDynamicProperty(object? memberValue)

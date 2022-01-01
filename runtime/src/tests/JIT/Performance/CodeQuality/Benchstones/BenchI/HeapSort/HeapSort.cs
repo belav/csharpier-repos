@@ -11,10 +11,8 @@ namespace Benchstone.BenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 2500;
-
 #endif
 
         const int ArraySize = 5500;

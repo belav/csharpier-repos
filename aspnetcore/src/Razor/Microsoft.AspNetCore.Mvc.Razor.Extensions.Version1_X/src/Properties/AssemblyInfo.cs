@@ -4,6 +4,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 using Microsoft.AspNetCore.Razor.Language;
+
 [assembly: ProvideRazorExtensionInitializer("MVC-1.0", typeof(ExtensionInitializer))]
 [assembly: ProvideRazorExtensionInitializer("MVC-1.1", typeof(ExtensionInitializer))]
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
+
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringStartsWithIsCultureSpecific
 // ReSharper disable StringEndsWithIsCultureSpecific

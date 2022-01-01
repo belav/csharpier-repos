@@ -232,7 +232,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return _lazyAdapter;
         }
-
 #else
         internal ParameterSymbol AdaptedParameterSymbol => this;
 
@@ -240,7 +239,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
-
 #endif
 
         internal virtual bool HasMetadataConstantValue

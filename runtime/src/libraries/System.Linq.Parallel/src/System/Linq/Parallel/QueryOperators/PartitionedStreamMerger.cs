@@ -25,10 +25,8 @@ namespace System.Linq.Parallel
         private readonly int _queryId; // ID of the current query execution
 
         private readonly CancellationState _cancellationState;
-
 #if DEBUG
         private bool _received;
-
 #endif
         // Returns the merge executor which merges the received partitioned stream.
         internal MergeExecutor<TOutput>? MergeExecutor

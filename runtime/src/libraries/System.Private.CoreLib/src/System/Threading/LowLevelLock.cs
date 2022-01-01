@@ -23,10 +23,8 @@ namespace System.Threading
         //   - Bit 0: 1 if the lock is locked, 0 otherwise
         //   - Remaining bits: Number of threads waiting to acquire a lock
         private int _state;
-
 #if DEBUG
         private Thread? _ownerThread;
-
 #endif
 
         // Indicates whether a thread has been signaled, but has not yet been released from the wait. See SignalWaiter. Reads
@@ -64,7 +62,6 @@ namespace System.Threading
                 return isLocked;
             }
         }
-
 #endif
 
         [Conditional("DEBUG")]

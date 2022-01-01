@@ -99,7 +99,6 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     {
         Asserter.TestRan = true;
     }
-
 #elif NET472
     [ConditionalTheory]
     [FrameworkSkipCondition(RuntimeFrameworks.CoreCLR)]
@@ -108,7 +107,6 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     {
         Asserter.TestRan = true;
     }
-
 #else
 #error Target frameworks need to be updated.
 #endif

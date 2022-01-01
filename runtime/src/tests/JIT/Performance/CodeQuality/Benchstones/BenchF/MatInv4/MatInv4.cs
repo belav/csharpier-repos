@@ -10,10 +10,8 @@ namespace Benchstone.BenchF
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 60;
-
 #endif
 
         private static float s_det;

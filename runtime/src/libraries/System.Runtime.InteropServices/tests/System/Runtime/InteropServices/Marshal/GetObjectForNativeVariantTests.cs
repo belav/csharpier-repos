@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 #pragma warning disable 618
 
 namespace System.Runtime.InteropServices.Tests

@@ -47,7 +47,6 @@ namespace System.Threading
         //
 
         private const int BARRIER_PHASEFINISHED_ID = 3;
-
         //
         // Events below this point are used by the CDS types in System.dll
         //

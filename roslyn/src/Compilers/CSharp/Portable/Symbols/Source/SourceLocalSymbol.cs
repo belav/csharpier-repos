@@ -356,7 +356,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if DEBUG
         // We use this to detect infinite recursion in type inference.
         private int concurrentTypeResolutions = 0;
-
 #endif
 
         public override TypeWithAnnotations TypeWithAnnotations

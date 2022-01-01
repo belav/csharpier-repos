@@ -823,7 +823,6 @@ namespace System.Xml.Schema
         }
 #endif
     }
-
 #if EXPANDRANGE
     /// <summary>
     /// Temporary node to occurrence range. Will be expended to a sequence of terminals
@@ -964,7 +963,6 @@ namespace System.Xml.Schema
             bb.Append(NumberFormatInfo.InvariantInfo, $"{{{min}, {max}}}");
         }
     }
-
 #endif
 
 
@@ -1347,13 +1345,11 @@ namespace System.Xml.Schema
             Closure(sequence);
             _minMaxNodesCount++;
         }
-
 #if EXPANDRANGE
         public void AddRange(int min, int max)
         {
             Closure(new RangeNode(min, max));
         }
-
 #endif
         private void Closure(InteriorNode node)
         {
@@ -2013,7 +2009,6 @@ namespace System.Xml.Schema
             }
             return false;
         }
-
 #endif
 
         public override bool CompleteValidation(ValidationState context)

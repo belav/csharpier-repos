@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+
 #pragma warning disable RCS1102 // Make class static.
 namespace Microsoft.EntityFrameworkCore.Design.Internal
 {

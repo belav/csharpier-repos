@@ -863,7 +863,6 @@ namespace System.Net
                 Debug.Assert(s_lookupTable[ToUInt64Key("alpha")] == '\x03b1');
                 Debug.Assert(s_lookupTable[ToUInt64Key("diams")] == '\x2666');
             }
-
 #endif
 
             // The list is from http://www.w3.org/TR/REC-html40/sgml/entities.html, except for &apos;, which

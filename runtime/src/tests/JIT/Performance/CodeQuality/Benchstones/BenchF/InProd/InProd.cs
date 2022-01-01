@@ -11,10 +11,8 @@ namespace Benchstone.BenchF
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 70;
-
 #endif
 
         private const int RowSize = 10 * Iterations;

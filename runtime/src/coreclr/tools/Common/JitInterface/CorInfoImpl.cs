@@ -51,10 +51,8 @@ namespace Internal.JitInterface
 
 #if SUPPORT_JIT
         private const string JitSupportLibrary = "*";
-
 #else
         internal const string JitSupportLibrary = "jitinterface";
-
 #endif
 
         private IntPtr _jit;
@@ -664,11 +662,9 @@ namespace Internal.JitInterface
 
         private const int handleMultipler = 8;
         private const int handleBase = 0x420000;
-
 #if DEBUG
         private static readonly IntPtr s_handleHighBitSet =
             (sizeof(IntPtr) == 4) ? new IntPtr(0x40000000) : new IntPtr(0x4000000000000000);
-
 #endif
 
         private IntPtr ObjectToHandle(Object obj)

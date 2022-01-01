@@ -81,7 +81,6 @@ namespace System
             buffer[startingIndex + 1] = (byte)packedResult;
             buffer[startingIndex] = (byte)(packedResult >> 8);
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -100,7 +99,6 @@ namespace System
             buffer[startingIndex + 1] = (char)(packedResult & 0xFF);
             buffer[startingIndex] = (char)(packedResult >> 8);
         }
-
 #if SYSTEM_PRIVATE_CORELIB
         private static void EncodeToUtf16_Ssse3(
             ReadOnlySpan<byte> bytes,
@@ -220,7 +218,6 @@ namespace System
                 );
             }
         }
-
 #endif
 
         public static void EncodeToUtf16(
@@ -243,7 +240,6 @@ namespace System
                 ToCharsBuffer(bytes[pos], chars, pos * 2, casing);
             }
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif

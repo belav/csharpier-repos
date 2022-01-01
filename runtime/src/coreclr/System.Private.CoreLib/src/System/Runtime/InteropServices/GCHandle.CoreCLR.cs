@@ -20,11 +20,9 @@ namespace System.Runtime.InteropServices
         // The runtime performs additional checks in debug builds
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern object? InternalGet(IntPtr handle);
-
 #else
         internal static unsafe object? InternalGet(IntPtr handle) =>
             Unsafe.As<IntPtr, object>(ref *(IntPtr*)(nint)handle);
-
 #endif
 
         [MethodImpl(MethodImplOptions.InternalCall)]

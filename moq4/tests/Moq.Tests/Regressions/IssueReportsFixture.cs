@@ -23,6 +23,7 @@ using Moq.Properties;
 using Moq.Protected;
 
 using Xunit;
+
 #region #181
 
 // NOTE class without namespace
@@ -441,7 +442,6 @@ namespace Moq.Tests.Regressions
                 new decimal? Value { get; set; }
             }
         }
-
 		#endregion
 
 		#region 163
@@ -646,7 +646,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 #endif
 
 		#endregion
@@ -2035,7 +2034,6 @@ namespace Moq.Tests.Regressions
 
             public class Foo : IFoo { }
         }
-
 		#endregion
 
 		#region 464
@@ -2070,7 +2068,6 @@ namespace Moq.Tests.Regressions
 
             public class MyEntity { }
         }
-
 #endif
 
 		#endregion
@@ -2160,7 +2157,6 @@ namespace Moq.Tests.Regressions
                 } while (result != default(int));
             }
         }
-
 		#endregion
 
 
@@ -2192,7 +2188,6 @@ namespace Moq.Tests.Regressions
                 Assert.Equal("_", connection.ConnectionString);
             }
         }
-
 #endif
 
 		#endregion
@@ -4556,7 +4551,6 @@ namespace Moq.Tests.Regressions
                 Assert.Contains("once, but was", ex.Message); // has Moq's default message
             }
         }
-
 		#endregion
 
 		#region #160
@@ -4575,7 +4569,6 @@ namespace Moq.Tests.Regressions
                 Assert.True(htmlInputTextMock.Object.Visible);
             }
         }
-
 #endif
 
 		#endregion
@@ -5367,7 +5360,6 @@ namespace Moq.Tests.Regressions
                 var bar = foo.Object;
             }
         }
-
 #endif
 
 		#endregion

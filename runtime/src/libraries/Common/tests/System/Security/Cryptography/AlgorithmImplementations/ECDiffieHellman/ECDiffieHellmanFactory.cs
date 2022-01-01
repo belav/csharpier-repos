@@ -32,7 +32,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         {
             return s_provider.Create(curve);
         }
-
 #endif
 
         public static bool IsCurveValid(Oid oid)

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 // Tests could run slower if PLINQ itself is run in parallel, especially as concurrent
 // queries compete for thread pool resources.  Further, the ETW tests must not be run
 // concurrently with any other tests.

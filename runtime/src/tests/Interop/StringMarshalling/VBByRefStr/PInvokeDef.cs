@@ -4,6 +4,7 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
+
 #pragma warning disable 0618 // disable the obsolete warning
 
 class VBByRefStrNative

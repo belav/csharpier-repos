@@ -34,7 +34,6 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 0), "FullName");
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 1), "NameRelativeToCRLIssuer");
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

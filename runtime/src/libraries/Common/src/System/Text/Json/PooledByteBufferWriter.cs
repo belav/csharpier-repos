@@ -125,7 +125,6 @@ namespace System.Text.Json
         {
             destination.Write(WrittenMemory.Span);
         }
-
 #else
         internal Task WriteToStreamAsync(Stream destination, CancellationToken cancellationToken)
         {
@@ -136,7 +135,6 @@ namespace System.Text.Json
         {
             destination.Write(_rentedBuffer, 0, _index);
         }
-
 #endif
 
         private void CheckAndResizeBuffer(int sizeHint)

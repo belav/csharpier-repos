@@ -655,13 +655,11 @@ public class LinqBenchmarks
     public const int IterationsWhere01 = 1;
     public const int IterationsCount00 = 1;
     public const int IterationsOrder00 = 1;
-
 #else
     public const int IterationsWhere00 = 1000000;
     public const int IterationsWhere01 = 250000;
     public const int IterationsCount00 = 1000000;
     public const int IterationsOrder00 = 25000;
-
 #endif
 
     private static volatile object s_volatileObject;

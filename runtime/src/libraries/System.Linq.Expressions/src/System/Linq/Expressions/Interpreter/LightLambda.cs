@@ -17,11 +17,9 @@ namespace System.Linq.Expressions.Interpreter
     {
         private readonly IStrongBox[]? _closure;
         private readonly Interpreter _interpreter;
-
 #if NO_FEATURE_STATIC_DELEGATE
         private static readonly CacheDict<Type, Func<LightLambda, Delegate>> _runCache =
             new CacheDict<Type, Func<LightLambda, Delegate>>(100);
-
 #endif
 
         // Adaptive compilation support
@@ -217,7 +215,6 @@ namespace System.Linq.Expressions.Interpreter
                 }
             }
         }
-
 #if NO_FEATURE_STATIC_DELEGATE
         private static Func<LightLambda, Delegate> GetRunDelegateCtor(Type delegateType)
         {
@@ -396,7 +393,6 @@ namespace System.Linq.Expressions.Interpreter
             //return System.Linq.Expressions.Compiler.LambdaCompiler.Compile(lambda, null);
             throw new NotImplementedException("byref delegate");
         }
-
 #endif
 
         internal Delegate MakeDelegate(Type delegateType)
@@ -437,7 +433,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             return new InterpretedFrame(_interpreter, _closure);
         }
-
 #if NO_FEATURE_STATIC_DELEGATE
         internal void RunVoidRef2<T0, T1>(ref T0 arg0, ref T1 arg1)
         {
@@ -457,7 +452,6 @@ namespace System.Linq.Expressions.Interpreter
                 arg1 = (T1)frame.Data[1];
             }
         }
-
 #endif
 
         public object? Run(params object?[] arguments)

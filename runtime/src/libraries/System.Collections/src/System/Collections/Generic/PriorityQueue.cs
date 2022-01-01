@@ -61,7 +61,6 @@ namespace System.Collections.Generic
         {
             Debug.Assert(Log2Arity > 0 && Math.Pow(2, Log2Arity) == Arity);
         }
-
 #endif
 
         /// <summary>

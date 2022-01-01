@@ -17,6 +17,7 @@ namespace Castle.Core.Logging
     using System;
     using System.IO;
     using System.Text;
+
     /// <summary>
 	///   Creates <see cref = "StreamLogger" /> outputting
 	///   to files. The name of the file is derived from the log name

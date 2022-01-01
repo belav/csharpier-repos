@@ -33,7 +33,6 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ensureUniqueTag(Asn1Tag.Sequence, "IssuerAndSerialNumber");
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 0), "SubjectKeyIdentifier");
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

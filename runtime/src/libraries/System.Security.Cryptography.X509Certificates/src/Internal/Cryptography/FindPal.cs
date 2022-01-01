@@ -35,7 +35,6 @@ namespace Internal.Cryptography.Pal
         {
             Debug.Assert(s_keyUsages.Count == NamedKeyUsageFlagsCount);
         }
-
 #endif
 
         public static X509Certificate2Collection FindFromCollection(

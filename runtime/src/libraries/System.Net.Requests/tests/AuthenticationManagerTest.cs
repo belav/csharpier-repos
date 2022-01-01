@@ -4,6 +4,7 @@
 using System.Collections;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
+
 #pragma warning disable CS0618 // obsolete warnings
 
 namespace System.Net.Tests

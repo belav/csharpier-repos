@@ -82,10 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// This controls what delay tagger will use to let editor know about newly inserted tags
         /// </summary>
         protected virtual TaggerDelay AddedTagNotificationDelay => TaggerDelay.NearImmediate;
-
 #if DEBUG
         public readonly string StackTrace;
-
 #endif
 
         protected AbstractAsynchronousTaggerProvider(

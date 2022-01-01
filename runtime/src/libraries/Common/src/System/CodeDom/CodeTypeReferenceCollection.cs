@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
+
 #if CODEDOM
 namespace System.CodeDom
 #else

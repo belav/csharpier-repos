@@ -84,11 +84,9 @@ namespace System.Linq.Expressions.Interpreter
         private int _maxContinuationDepth;
         private int _runtimeLabelCount;
         private List<BranchLabel>? _labels;
-
 #if DEBUG
         // list of (instruction index, cookie) sorted by instruction index:
         private List<KeyValuePair<int, object?>>? _debugCookies;
-
 #endif
         #region Debug View
 
@@ -319,7 +317,6 @@ namespace System.Linq.Expressions.Interpreter
                 }
             );
         }
-
 #endif
         public InstructionArray ToArray()
         {

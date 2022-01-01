@@ -11,10 +11,8 @@ namespace Benchstone.BenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 100000;
-
 #endif
 
         static int[] m_c = new int[15];

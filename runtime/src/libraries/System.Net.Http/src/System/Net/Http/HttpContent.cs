@@ -143,7 +143,6 @@ namespace System.Net.Http
                 );
             }
         }
-
 #endif
 
         public HttpContentHeaders Headers

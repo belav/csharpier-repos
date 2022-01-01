@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Mono;
+
 /*
  * Regression tests for the mono JIT.
  *
@@ -36,7 +37,6 @@ namespace UnalignedTests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
-
 #endif
 
 

@@ -276,10 +276,8 @@ namespace System.Xml.Xsl.XsltOld
         {
             get { return _document; }
         }
-
 #if DEBUG
         private bool _stringBuilderLocked;
-
 #endif
 
         internal StringBuilder GetSharedStringBuilder()

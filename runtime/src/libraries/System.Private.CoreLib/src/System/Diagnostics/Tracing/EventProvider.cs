@@ -1315,7 +1315,6 @@ namespace System.Diagnostics.Tracing
 
             return true;
         }
-
 #if !ES_BUILD_STANDALONE
         /// <summary>Workaround for inability to stackalloc object[EtwAPIMaxRefObjCount == 8].</summary>
         private struct EightObjects
@@ -1331,7 +1330,6 @@ namespace System.Diagnostics.Tracing
             private object? _arg7;
 #pragma warning restore CA1823, CS0169, IDE0051
         }
-
 #endif
 
         /// <summary>
@@ -1562,7 +1560,6 @@ namespace System.Diagnostics.Tracing
             throw new System.NotSupportedException();
         }
     }
-
 #endif
     internal sealed class NoOpEventProvider : IEventProvider
     {

@@ -455,7 +455,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(expectedHasPrivateKeys, actualHasPrivateKeys);
             }
         }
-
 #if !NO_EPHEMERALKEYSET_AVAILABLE
         [Fact]
         public static void InvalidStorageFlags()
@@ -496,7 +495,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 () => coll.Import(string.Empty, string.Empty, PersistedEphemeral)
             );
         }
-
 #endif
 
         public static IEnumerable<object[]> StorageFlags

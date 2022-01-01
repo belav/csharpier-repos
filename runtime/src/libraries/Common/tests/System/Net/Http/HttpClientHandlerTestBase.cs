@@ -107,7 +107,6 @@ namespace System.Net.Http.Functional.Tests
             {
                 _expectedVersion = expectedVersion;
             }
-
 #if NETCOREAPP
             protected override HttpResponseMessage Send(
                 HttpRequestMessage request,
@@ -132,7 +131,6 @@ namespace System.Net.Http.Functional.Tests
 
                 return response;
             }
-
 #endif
 
             protected override async Task<HttpResponseMessage> SendAsync(

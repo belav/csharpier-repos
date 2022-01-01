@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using Xunit;
+
 #pragma warning disable xUnit1025 // analyzer is flagging unique InlineDatas as duplicates
 
 namespace System.MemoryTests

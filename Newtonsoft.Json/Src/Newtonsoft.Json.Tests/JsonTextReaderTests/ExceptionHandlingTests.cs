@@ -145,7 +145,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "After parsing a value an unexpected character was encountered: '. Path '[0]', line 1, position 24."
             );
         }
-
 #endif
 
         [Test]
@@ -842,7 +841,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 Assert.AreEqual(typeof(BigInteger), reader.ValueType);
             }
         }
-
 #endif
 
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -869,7 +867,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 Assert.AreEqual(typeof(BigInteger), reader.ValueType);
             }
         }
-
 #endif
 
         [Test]
@@ -1188,7 +1185,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Unexpected character encountered while parsing value: e. Path '', line 1, position 2."
             );
         }
-
 #endif
 
         [Test]

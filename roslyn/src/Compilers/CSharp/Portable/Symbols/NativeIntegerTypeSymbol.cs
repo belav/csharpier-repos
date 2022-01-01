@@ -242,14 +242,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         public override int GetHashCode() => _underlyingType.GetHashCode();
-
 #if !DEBUG
         void Cci.IReference.Dispatch(Cci.MetadataVisitor visitor)
         {
             // Emit should use underlying symbol only.
             throw ExceptionUtilities.Unreachable;
         }
-
 #endif
 
         private ImmutableArray<NamedTypeSymbol> GetInterfaces(

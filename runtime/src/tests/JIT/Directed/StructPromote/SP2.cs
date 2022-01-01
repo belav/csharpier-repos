@@ -15,7 +15,6 @@ class SP2
         public int i0;
         public long l1;
     }
-
 #endif
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -24,7 +23,6 @@ class SP2
     {
         return 10 * (long)s.i0 + s.l1;
     }
-
 #else
     static long Foo(int i0, long l1) {
         return 10*(long)i0 + l1;

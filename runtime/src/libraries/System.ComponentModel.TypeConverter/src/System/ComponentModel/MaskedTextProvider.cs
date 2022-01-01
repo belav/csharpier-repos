@@ -2334,7 +2334,6 @@ namespace System.ComponentModel
             // Exception: PromptChar == space.
             mtp.ResetOnSpace = !includePrompt;
         }
-
 #endif
 
         /// <summary>

@@ -23,10 +23,8 @@ namespace System.Net.Http
             private const int InitialStreamBufferSize =
 #if DEBUG
                 10;
-
 #else
                 1024;
-
 #endif
 
             private static ReadOnlySpan<byte> StatusHeaderName =>

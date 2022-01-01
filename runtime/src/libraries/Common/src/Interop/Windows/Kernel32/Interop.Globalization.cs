@@ -13,10 +13,8 @@ internal static partial class Interop
 
 #if DEBUG
         private const bool SetLastErrorForDebug = true;
-
 #else
         private const bool SetLastErrorForDebug = false;
-
 #endif
 
         internal const uint LOCALE_ALLOW_NEUTRAL_NAMES = 0x08000000; // Flag to allow returning neutral names/lcids for name conversion

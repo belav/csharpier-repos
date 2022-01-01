@@ -3,6 +3,7 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 [assembly: AssemblyTitle("System.Web.Http.SignalR")]
 [assembly: AssemblyDescription("")]
 

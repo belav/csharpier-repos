@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.Security.AccessControl.EventWaitHandleAccessRule))]
 [assembly: TypeForwardedTo(typeof(System.Security.AccessControl.EventWaitHandleAuditRule))]
 [assembly: TypeForwardedTo(typeof(System.Security.AccessControl.EventWaitHandleRights))]

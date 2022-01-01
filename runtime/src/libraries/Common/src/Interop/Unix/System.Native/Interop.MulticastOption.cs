@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.InteropServices;
+
 #pragma warning disable CA1823 // unused private padding fields in MulticastOption structs
 
 internal static partial class Interop

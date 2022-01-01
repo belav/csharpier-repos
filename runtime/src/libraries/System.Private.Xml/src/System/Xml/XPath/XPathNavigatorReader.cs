@@ -1165,7 +1165,6 @@ namespace System.Xml.XPath
             get { return IsReading ? this.schemaInfo.SchemaAttribute : null; }
         }
     }
-
 #endif
 
     internal sealed class XPathNavigatorReaderWithSI

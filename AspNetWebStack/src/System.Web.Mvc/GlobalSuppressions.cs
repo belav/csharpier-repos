@@ -11,7 +11,9 @@
 // "In Project Suppression File".
 // You do not need to add suppressions to this file manually.
 
-using System.Diagnostics.CodeAnalysis;[assembly: SuppressMessage(
+using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage(
     "Microsoft.Design",
     "CA2210:AssembliesShouldHaveValidStrongNames",
     Justification = "Assembly is delay-signed."

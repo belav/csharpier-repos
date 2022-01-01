@@ -239,7 +239,6 @@ namespace System.Runtime
 #if DEBUG
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object? InternalGetTarget(IntPtr dependentHandle);
-
 #else
         private static unsafe object? InternalGetTarget(IntPtr dependentHandle)
         {
@@ -248,7 +247,6 @@ namespace System.Runtime
             // The logic below is the inlined copy of ObjectFromHandle in the unmanaged runtime.
             return Unsafe.As<IntPtr, object>(ref *(IntPtr*)(nint)dependentHandle);
         }
-
 #endif
 
         [MethodImpl(MethodImplOptions.InternalCall)]

@@ -120,10 +120,8 @@ namespace Newtonsoft.Json.Serialization
             "DefaultMembersSearchFlags is obsolete. To modify the members serialized inherit from DefaultContractResolver and override the GetSerializableMembers method instead."
         )]
         public BindingFlags DefaultMembersSearchFlags { get; set; }
-
 #else
         private readonly BindingFlags DefaultMembersSearchFlags;
-
 #endif
 
         /// <summary>
@@ -133,7 +131,6 @@ namespace Newtonsoft.Json.Serialization
         /// 	<c>true</c> if serialized compiler generated members; otherwise, <c>false</c>.
         /// </value>
         public bool SerializeCompilerGeneratedMembers { get; set; }
-
 #if HAVE_BINARY_SERIALIZATION
         /// <summary>
         /// Gets or sets a value indicating whether to ignore the <see cref="ISerializable"/> interface when serializing and deserializing types.
@@ -150,7 +147,6 @@ namespace Newtonsoft.Json.Serialization
         /// 	<c>true</c> if the <see cref="SerializableAttribute"/> attribute will be ignored when serializing and deserializing types; otherwise, <c>false</c>.
         /// </value>
         public bool IgnoreSerializableAttribute { get; set; }
-
 #endif
 
         /// <summary>
@@ -361,7 +357,6 @@ namespace Newtonsoft.Json.Serialization
 
             return serializableMembers;
         }
-
 #if HAVE_DATA_CONTRACTS
         private bool ShouldSerializeEntityMember(MemberInfo memberInfo)
         {
@@ -379,7 +374,6 @@ namespace Newtonsoft.Json.Serialization
 
             return true;
         }
-
 #endif
 
         /// <summary>
@@ -1023,7 +1017,6 @@ namespace Newtonsoft.Json.Serialization
                 createdType
             );
         }
-
 #if NET35
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Portability",
@@ -1461,7 +1454,6 @@ namespace Newtonsoft.Json.Serialization
 
             return contract;
         }
-
 #if HAVE_BINARY_SERIALIZATION
         /// <summary>
         /// Creates a <see cref="JsonISerializableContract"/> for the given type.
@@ -1494,7 +1486,6 @@ namespace Newtonsoft.Json.Serialization
 
             return contract;
         }
-
 #endif
 
 #if HAVE_DYNAMIC
@@ -1526,7 +1517,6 @@ namespace Newtonsoft.Json.Serialization
 
             return contract;
         }
-
 #endif
 
         /// <summary>
@@ -1630,7 +1620,6 @@ namespace Newtonsoft.Json.Serialization
 
             return (typeCode != PrimitiveTypeCode.Empty && typeCode != PrimitiveTypeCode.Object);
         }
-
 #if HAVE_ICONVERTIBLE
         internal static bool IsIConvertible(Type t)
         {
@@ -1647,7 +1636,6 @@ namespace Newtonsoft.Json.Serialization
 
             return false;
         }
-
 #endif
 
         internal static bool CanConvertToString(Type type)

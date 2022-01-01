@@ -54,14 +54,12 @@ namespace System
 
             [FieldOffset(12)]
             private uint ulo;
-
 #else
             [FieldOffset(8)]
             private uint ulo;
 
             [FieldOffset(12)]
             private uint umid;
-
 #endif
 
             /// <summary>

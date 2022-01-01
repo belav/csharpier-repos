@@ -28,7 +28,6 @@ namespace Microsoft.CodeAnalysis
 #if DEBUG
         private bool _isSealed;
         private bool _anyDataStored;
-
 #endif
 
         public WellKnownAttributeData()

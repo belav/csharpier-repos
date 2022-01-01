@@ -940,7 +940,6 @@ public class BuiltinTests
             return 1;
         return 0;
     }
-
 #if FALSE
 	static int test_0_nfloat_inc ()
 	{
@@ -1456,7 +1455,6 @@ namespace System
         {
             this.v = (Int32)v;
         }
-
 #else
         public static readonly int Size = 8;
 
@@ -1470,7 +1468,6 @@ namespace System
         {
             this.v = v;
         }
-
 #endif
 
         public static explicit operator nint(nuint v)
@@ -1818,7 +1815,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static nint operator +(nint v)
         {
@@ -1834,7 +1830,6 @@ namespace System
         {
             return new nint(~v.v);
         }
-
 #endif
 
 
@@ -1888,7 +1883,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static nint operator +(nint l, nint r)
         {
@@ -1939,7 +1933,6 @@ namespace System
         {
             return new nint(l.v >> r);
         }
-
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -1972,7 +1965,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static bool operator ==(nint l, nint r)
         {
@@ -2003,7 +1995,6 @@ namespace System
         {
             return l.v >= r.v;
         }
-
 #endif
 
         public int CompareTo(nint value)
@@ -2076,7 +2067,6 @@ namespace System
             result = (nint)v;
             return r;
         }
-
 #else
         public static nint Parse(string s, IFormatProvider provider)
         {
@@ -2118,7 +2108,6 @@ namespace System
             result = (nint)v;
             return r;
         }
-
 #endif
 
         public override string ToString()
@@ -2292,7 +2281,6 @@ namespace System
         {
             this.v = (UInt32)v;
         }
-
 #else
         public static readonly int Size = 8;
 
@@ -2306,7 +2294,6 @@ namespace System
         {
             this.v = v;
         }
-
 #endif
 
         public static explicit operator nuint(nfloat v)
@@ -2627,7 +2614,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static nuint operator +(nuint v)
         {
@@ -2638,7 +2624,6 @@ namespace System
         {
             return new nuint(~v.v);
         }
-
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -2691,7 +2676,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static nuint operator +(nuint l, nuint r)
         {
@@ -2742,7 +2726,6 @@ namespace System
         {
             return new nuint(l.v >> r);
         }
-
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -2775,7 +2758,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static bool operator ==(nuint l, nuint r)
         {
@@ -2806,7 +2788,6 @@ namespace System
         {
             return l.v >= r.v;
         }
-
 #endif
 
         public int CompareTo(nuint value)
@@ -2879,7 +2860,6 @@ namespace System
             result = (nuint)v;
             return r;
         }
-
 #else
         public static nuint Parse(string s, IFormatProvider provider)
         {
@@ -2921,7 +2901,6 @@ namespace System
             result = (nuint)v;
             return r;
         }
-
 #endif
 
         public override string ToString()
@@ -3099,7 +3078,6 @@ namespace System
         {
             this.v = (Single)v;
         }
-
 #else
         public static readonly int Size = 8;
 
@@ -3117,7 +3095,6 @@ namespace System
         {
             this.v = v;
         }
-
 #endif
 
         public static explicit operator nfloat(IntPtr v)
@@ -3416,7 +3393,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static nfloat operator +(nfloat v)
         {
@@ -3427,7 +3403,6 @@ namespace System
         {
             return new nfloat(-v.v);
         }
-
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -3440,7 +3415,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static nfloat operator ++(nfloat v)
         {
@@ -3451,7 +3425,6 @@ namespace System
         {
             return new nfloat(v.v - 1);
         }
-
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -3479,7 +3452,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static nfloat operator +(nfloat l, nfloat r)
         {
@@ -3505,7 +3477,6 @@ namespace System
         {
             return new nfloat(l.v % r.v);
         }
-
 #endif
 
 #if NINT_JIT_OPTIMIZED
@@ -3538,7 +3509,6 @@ namespace System
         {
             throw new NotImplementedException();
         }
-
 #else
         public static bool operator ==(nfloat l, nfloat r)
         {
@@ -3569,7 +3539,6 @@ namespace System
         {
             return l.v >= r.v;
         }
-
 #endif
 
         public int CompareTo(nfloat value)
@@ -3662,7 +3631,6 @@ namespace System
             result = (nfloat)v;
             return r;
         }
-
 #else
         public static bool IsNaN(nfloat f)
         {
@@ -3724,7 +3692,6 @@ namespace System
             result = (nfloat)v;
             return r;
         }
-
 #endif
 
         public override string ToString()

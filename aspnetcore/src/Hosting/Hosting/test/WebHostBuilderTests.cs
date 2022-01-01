@@ -23,6 +23,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
+
 [assembly: HostingStartup(typeof(WebHostBuilderTests.TestHostingStartup))]
 
 

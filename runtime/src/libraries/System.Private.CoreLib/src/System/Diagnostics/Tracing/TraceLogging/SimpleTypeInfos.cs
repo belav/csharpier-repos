@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else
@@ -451,7 +452,6 @@ namespace System.Diagnostics.Tracing
     internal sealed class NullableTypeInfo : TraceLoggingTypeInfo
     {
         private readonly TraceLoggingTypeInfo valueInfo;
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
@@ -474,7 +474,6 @@ namespace System.Diagnostics.Tracing
             group.AddScalar("HasValue", TraceLoggingDataType.Boolean8);
             this.valueInfo.WriteMetadata(group, "Value", format);
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

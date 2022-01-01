@@ -5,6 +5,7 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+
 #pragma warning disable 1717, 0252, 1718, 0162, 0219
 
 public enum TestEnum

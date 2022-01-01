@@ -529,7 +529,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(4, nested[3]);
             Assert.AreEqual(5, nested[4]);
         }
-
 #endif
 
         public class MetadataPropertyDisabledTestClass

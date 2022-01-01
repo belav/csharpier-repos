@@ -11,7 +11,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis.Host;
-using Microsoft.CodeAnalysis.Host.Mef;[assembly: DebuggerTypeProxy(
+using Microsoft.CodeAnalysis.Host.Mef;
+
+[assembly: DebuggerTypeProxy(
     typeof(MefWorkspaceServices.LazyServiceMetadataDebuggerProxy),
     Target = typeof(ImmutableArray<Lazy<IWorkspaceService, WorkspaceServiceMetadata>>)
 )]

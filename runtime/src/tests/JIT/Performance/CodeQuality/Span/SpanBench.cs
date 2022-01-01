@@ -47,14 +47,12 @@ namespace Span
         const int QuickSortIterations = 1;
         const int FillAllIterations = 1;
         const int BaseIterations = 1;
-
 #else
         // Appropriately-scaled iteration counts for the various benchmarks
         const int BubbleSortIterations = 100;
         const int QuickSortIterations = 1000;
         const int FillAllIterations = 100000;
         const int BaseIterations = 10000000;
-
 #endif
 
         // Seed for random set by environment variables
@@ -539,7 +537,6 @@ namespace Span
                 }
             }
         }
-
         #endregion
 
 #if false // netcoreapp specific API https://github.com/dotnet/runtime/issues/9635

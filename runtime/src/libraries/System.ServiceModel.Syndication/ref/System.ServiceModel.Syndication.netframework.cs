@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.Atom10FeedFormatter))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.Atom10FeedFormatter<>))]
 [assembly: TypeForwardedTo(typeof(System.ServiceModel.Syndication.Atom10ItemFormatter))]

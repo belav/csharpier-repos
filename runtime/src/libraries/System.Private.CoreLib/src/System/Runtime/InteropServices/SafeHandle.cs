@@ -66,7 +66,6 @@ namespace System.Runtime.InteropServices
 
             _fullyInitialized = true;
         }
-
 #if !CORERT // CoreRT doesn't correctly support CriticalFinalizerObject
         ~SafeHandle()
         {
@@ -75,7 +74,6 @@ namespace System.Runtime.InteropServices
                 Dispose(disposing: false);
             }
         }
-
 #endif
 
         internal bool OwnsHandle => _ownsHandle;

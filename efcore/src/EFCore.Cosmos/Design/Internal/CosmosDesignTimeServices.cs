@@ -4,6 +4,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.Extensions.DependencyInjection;
+
 [assembly: DesignTimeProviderServices(
     "Microsoft.EntityFrameworkCore.Cosmos.Design.Internal.CosmosDesignTimeServices"
 )]

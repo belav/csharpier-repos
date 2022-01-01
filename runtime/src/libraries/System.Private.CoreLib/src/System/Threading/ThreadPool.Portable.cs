@@ -27,14 +27,12 @@ namespace System.Threading
 
 #if CORERT
         private const bool IsWorkerTrackingEnabledInConfig = false;
-
 #else
         private static readonly bool IsWorkerTrackingEnabledInConfig =
             AppContextConfigHelper.GetBooleanConfig(
                 "System.Threading.ThreadPool.EnableWorkerTracking",
                 false
             );
-
 #endif
 
         // Threadpool specific initialization of a new thread. Used by OS-provided threadpools. No-op for portable threadpool.

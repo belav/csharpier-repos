@@ -23,7 +23,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 {
 #if NET20
     internal delegate TReturn Func<TArg, TReturn>(TArg arg);
-
 #endif
 
     /// <summary>
@@ -66,7 +65,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         // expand. compared to "new T()", Func gives more flexibility to implementers and faster
         // than "new T()".
         private readonly Factory _factory;
-
 #if DETECT_LEAKS
         private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers =
             new ConditionalWeakTable<T, LeakTracker>();
@@ -74,7 +72,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         private class LeakTracker : IDisposable
         {
             private volatile bool disposed;
-
 #if TRACE_LEAKS
             internal volatile object Trace = null;
 #endif
@@ -109,7 +106,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
                 }
             }
         }
-
 #endif
 
         internal ObjectPool(Factory factory) : this(factory, Environment.ProcessorCount * 2) { }
@@ -263,7 +259,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             }
 #endif
         }
-
 #if DETECT_LEAKS
         private static Lazy<Type> _stackTraceType = new Lazy<Type>(
             () => Type.GetType("System.Diagnostics.StackTrace")
@@ -273,7 +268,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         {
             return Activator.CreateInstance(_stackTraceType.Value);
         }
-
 #endif
 
         [Conditional("DEBUG")]

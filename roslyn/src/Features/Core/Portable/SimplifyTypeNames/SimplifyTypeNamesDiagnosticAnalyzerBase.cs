@@ -34,7 +34,6 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         private static string _logFile = @"c:\temp\simplifytypenames.txt";
         private static object _logGate = new object();
         private static readonly Regex s_newlinePattern = new Regex(@"[\r\n]+");
-
 #endif
 
         private static readonly LocalizableString s_localizableMessage =

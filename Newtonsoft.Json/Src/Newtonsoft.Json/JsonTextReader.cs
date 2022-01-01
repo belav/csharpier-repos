@@ -62,10 +62,8 @@ namespace Newtonsoft.Json
 #endif
 #if DEBUG
         internal int LargeBufferLength { get; set; } = int.MaxValue / 2;
-
 #else
         private const int LargeBufferLength = int.MaxValue / 2;
-
 #endif
 
         private readonly TextReader _reader;
@@ -97,7 +95,6 @@ namespace Newtonsoft.Json
             _safeAsync = GetType() == typeof(JsonTextReader);
 #endif
         }
-
 #if DEBUG
         internal char[]? CharBuffer
         {
@@ -106,7 +103,6 @@ namespace Newtonsoft.Json
         }
 
         internal int CharPos => _charPos;
-
 #endif
 
         /// <summary>
@@ -1137,7 +1133,6 @@ namespace Newtonsoft.Json
                     throw new ArgumentOutOfRangeException(nameof(readType));
             }
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>.
@@ -1147,7 +1142,6 @@ namespace Newtonsoft.Json
         {
             return (DateTimeOffset?)ReadStringValue(ReadType.ReadAsDateTimeOffset);
         }
-
 #endif
 
         /// <summary>
@@ -2639,7 +2633,6 @@ namespace Newtonsoft.Json
             SetToken(JsonToken.Undefined, null, false);
             return JsonReaderException.Create(this, message, ex);
         }
-
 #if HAVE_BIG_INTEGER
         // By using the BigInteger type in a separate method,
         // the runtime can execute the ParseNumber even if
@@ -2650,7 +2643,6 @@ namespace Newtonsoft.Json
         {
             return System.Numerics.BigInteger.Parse(number, culture);
         }
-
 #endif
 
         private void ParseComment(bool setToken)

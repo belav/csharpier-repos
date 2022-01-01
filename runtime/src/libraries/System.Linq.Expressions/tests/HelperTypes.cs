@@ -491,7 +491,6 @@ namespace System.Linq.Expressions.Tests
             }
         }
     }
-
 #endif
 
     public class FakeExpression : Expression

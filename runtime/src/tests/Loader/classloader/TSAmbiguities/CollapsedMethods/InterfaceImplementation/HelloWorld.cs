@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 #pragma warning disable 1956 //this is exactly what this is testing.
 
 class HelloWorld

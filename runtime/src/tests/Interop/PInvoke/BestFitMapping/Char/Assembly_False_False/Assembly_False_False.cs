@@ -5,6 +5,7 @@ using System;
 using System.Text;
 using System.Runtime.InteropServices;
 using TestLibrary;
+
 [assembly: BestFitMapping(false, ThrowOnUnmappableChar = false)]
 
 

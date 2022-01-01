@@ -4,4 +4,5 @@
 using System;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Xunit;
+
 [assembly: UserSecretsId("Microsoft.Extensions.Hosting.Unit.Tests")]

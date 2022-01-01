@@ -33,7 +33,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal abstract TreeDumperNode DumpCore();
 
         internal string Dump() => TreeDumper.DumpCompact(DumpCore());
-
 #endif
 
         private TupleBinaryOperatorInfo(

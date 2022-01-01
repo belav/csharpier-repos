@@ -218,7 +218,6 @@ namespace SdtEventSources
         }
     #endregion
     }
-
 #endif
 
     public sealed class EventWithAdminChannelNoMessageEventSource : EventSource

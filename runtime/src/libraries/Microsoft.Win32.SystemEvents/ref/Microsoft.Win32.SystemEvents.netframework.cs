@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(Microsoft.Win32.PowerModeChangedEventArgs))]
 [assembly: TypeForwardedTo(typeof(Microsoft.Win32.PowerModeChangedEventHandler))]
 [assembly: TypeForwardedTo(typeof(Microsoft.Win32.PowerModes))]

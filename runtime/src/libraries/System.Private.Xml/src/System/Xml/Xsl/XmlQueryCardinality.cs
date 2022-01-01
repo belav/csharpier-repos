@@ -184,7 +184,6 @@ namespace System.Xml.Xsl
         {
             return (this.value & ~other.value) == 0;
         }
-
 #endif
 
         /// <summary>

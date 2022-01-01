@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+
 [assembly: TypeForwardedTo(typeof(ObservableBackedBindingList<>))]
 [assembly: TypeForwardedTo(typeof(ObservableCollectionExtensions))]
 [assembly: TypeForwardedTo(typeof(ObservableCollectionListSource<>))]

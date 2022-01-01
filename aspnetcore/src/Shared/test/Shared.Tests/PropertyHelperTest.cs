@@ -155,7 +155,6 @@ public class PropertyHelperTest
         var helper = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()));
         Assert.Equal("Prop5", helper.Name);
     }
-
 #if NETSTANDARD || NETCOREAPP
     [Fact]
     public void PropertyHelper_RefStructProperties()
@@ -167,7 +166,6 @@ public class PropertyHelperTest
         var helper = Assert.Single(PropertyHelper.GetProperties(obj.GetType().GetTypeInfo()));
         Assert.Equal("Prop5", helper.Name);
     }
-
 #elif NETFRAMEWORK
 #else
 #error Unknown TFM - update the set of TFMs where we test for ref structs
@@ -760,7 +758,6 @@ public class PropertyHelperTest
         public static int Prop2 { get; set; }
         public int Prop5 { get; set; }
     }
-
 #if NETSTANDARD || NETCOREAPP
     private class RefStructProperties
     {
@@ -773,7 +770,6 @@ public class PropertyHelperTest
     private readonly ref struct MyRefStruct
     {
     }
-
 #elif NETFRAMEWORK
 #else
 #error Unknown TFM - update the set of TFMs where we test for ref structs

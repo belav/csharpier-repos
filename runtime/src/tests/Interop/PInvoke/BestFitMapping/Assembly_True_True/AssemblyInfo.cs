@@ -2,4 +2,5 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.InteropServices;
+
 [assembly: BestFitMapping(true, ThrowOnUnmappableChar = true)]

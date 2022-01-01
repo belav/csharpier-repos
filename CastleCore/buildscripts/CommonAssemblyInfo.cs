@@ -13,5 +13,7 @@
 // limitations under the License.
 
 using System;
-using System.Runtime.InteropServices;[assembly: ComVisible(false)]
+using System.Runtime.InteropServices;
+
+[assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]

@@ -54,7 +54,6 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Name"": ""Bad Boys III"",
   ""Description"": ""It's no Bad Boys""
 }";
-
 #if !NET20
         [Test]
         public void DeserializeNullIntoDateTime()
@@ -75,7 +74,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
             Assert.AreEqual(c.DateTimeField, default(DateTime));
         }
-
 #endif
 
         [Test]

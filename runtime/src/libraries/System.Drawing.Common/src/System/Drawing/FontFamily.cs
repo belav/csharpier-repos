@@ -18,12 +18,10 @@ namespace System.Drawing
         private const int NeutralLanguage = 0;
         private IntPtr _nativeFamily;
         private readonly bool _createDefaultOnFail;
-
 #if DEBUG
         private static readonly object s_lockObj = new object();
         private static int s_idCount;
         private int _id;
-
 #endif
 
         private void SetNativeFamily(IntPtr family)

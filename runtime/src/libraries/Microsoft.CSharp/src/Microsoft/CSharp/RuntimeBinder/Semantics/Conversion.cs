@@ -701,7 +701,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 same
             }
         };
-
 #if DEBUG
         private static volatile bool s_fCheckedBetter;
 
@@ -755,7 +754,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
             s_fCheckedBetter = true;
         }
-
 #endif // DEBUG
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

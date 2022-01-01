@@ -205,7 +205,6 @@ namespace System.Net.Security
             Debug.Fail("This method should never be called for this type");
             throw NotImplemented.ByDesign;
         }
-
 #endif
 
         public static unsafe int AcquireDefaultCredential(

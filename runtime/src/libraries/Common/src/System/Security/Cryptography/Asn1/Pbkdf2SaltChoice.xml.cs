@@ -33,7 +33,6 @@ namespace System.Security.Cryptography.Asn1
             ensureUniqueTag(Asn1Tag.PrimitiveOctetString, "Specified");
             ensureUniqueTag(Asn1Tag.Sequence, "OtherSource");
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

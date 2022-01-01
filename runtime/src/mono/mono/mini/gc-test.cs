@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Threading;
+
 /*
  * Regression tests for the GC support in the JIT
  */
@@ -17,7 +18,6 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
-
 #endif
 
     public static int test_36_simple()

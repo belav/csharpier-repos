@@ -286,7 +286,6 @@ namespace System.Text.RegularExpressions
         private StringBuilder? _categories;
         private RegexCharClass? _subtractor;
         private bool _negate;
-
 #if DEBUG
         static RegexCharClass()
         {
@@ -308,7 +307,6 @@ namespace System.Text.RegularExpressions
                     $"RegexCharClass s_propTable is out of order at ({s_propTable[i][0]}, {s_propTable[i + 1][0]})"
                 );
         }
-
 #endif
 
         /// <summary>

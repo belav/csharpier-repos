@@ -729,7 +729,6 @@ namespace Newtonsoft.Json
                 _writer.Write(_quoteChar);
             }
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Writes a <see cref="DateTimeOffset"/> value.
@@ -773,7 +772,6 @@ namespace Newtonsoft.Json
             _writeBuffer[pos++] = _quoteChar;
             return pos;
         }
-
 #endif
 
         /// <summary>

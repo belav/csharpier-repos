@@ -12,10 +12,8 @@ internal class SyntaxListPool
 {
     private ArrayElement<SyntaxListBuilder>[] _freeList = new ArrayElement<SyntaxListBuilder>[10];
     private int _freeIndex;
-
 #if DEBUG
     private readonly List<SyntaxListBuilder> _allocated = new List<SyntaxListBuilder>();
-
 #endif
 
     internal SyntaxListPool() { }

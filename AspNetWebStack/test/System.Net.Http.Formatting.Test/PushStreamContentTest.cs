@@ -112,7 +112,6 @@ namespace System.Net.Http
             Assert.Equal(TaskStatus.RanToCompletion, serializeToStreamTask.Task.Status);
             Assert.True(await serializeToStreamTask.Task);
         }
-
 #else
         [Fact]
         public async Task CompleteTaskOnCloseStream_Dispose_CompletesTaskButDoNotCloseInnerStream()
@@ -155,7 +154,6 @@ namespace System.Net.Http
             Assert.Equal(TaskStatus.RanToCompletion, serializeToStreamTask.Task.Status);
             Assert.True(await serializeToStreamTask.Task);
         }
-
 #endif
 
         [Fact]

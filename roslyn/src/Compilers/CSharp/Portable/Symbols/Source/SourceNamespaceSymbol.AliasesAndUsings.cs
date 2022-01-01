@@ -113,7 +113,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return _aliasesAndUsingsForAsserts[singleDeclaration];
         }
-
 #endif
 
         public ImmutableArray<AliasAndExternAliasDirective> GetExternAliases(

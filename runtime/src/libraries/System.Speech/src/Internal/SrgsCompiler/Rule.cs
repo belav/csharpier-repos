@@ -100,7 +100,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
-
 #endif
 
         internal void Validate()
@@ -313,7 +312,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal int _iSerialize;
         internal int _iSerialize2;
-
 #if DEBUG
         internal int _cStates;
 #endif

@@ -11,6 +11,7 @@
 */
 
 using System;
+
 #pragma warning disable 0649
 
 sealed class C

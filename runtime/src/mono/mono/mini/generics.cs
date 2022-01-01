@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 #if __MOBILE__
 class GenericsTests
 #else
@@ -43,7 +44,6 @@ class Tests
             return true;
         }
     }
-
 #endif
 
 #if !__MOBILE__
@@ -51,7 +51,6 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
-
 #endif
 
     public static int test_1_nullable_unbox()
@@ -528,7 +527,6 @@ class Tests
             return 6;
         return 0;
     }
-
 #endif
 
     public static int test_0_ldvirtftn_generic_method()
@@ -1280,7 +1278,6 @@ class Tests
         Volatile.Write(ref foo, "DEF");
         return Volatile.Read(ref foo) == "DEF" ? 0 : 1;
     }
-
     // FIXME: Doesn't work with --regression as Interlocked.Add(ref long) is only implemented as an intrinsic
 #if FALSE
 	public static async Task<T> FooAsync<T> (int i, int j) {

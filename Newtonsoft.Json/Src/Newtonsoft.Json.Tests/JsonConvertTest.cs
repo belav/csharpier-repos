@@ -1481,7 +1481,6 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual("Bad Boys", m.Name);
         }
-
 #if !NET20
         [Test]
         public void TestJsonDateTimeOffsetRoundtrip()
@@ -1527,7 +1526,6 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual(@"""2000-12-31T20:59:59.9999999+11:33""", sw.ToString());
         }
-
 #endif
 
         [Test]
@@ -1556,7 +1554,6 @@ namespace Newtonsoft.Json.Tests
             writer.WriteValue(dt);
             writer.Flush();
         }
-
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void IntegerLengthOverflows()
@@ -1575,7 +1572,6 @@ namespace Newtonsoft.Json.Tests
                     + " is too large to parse. Path 'biginteger', line 1, position 395."
             );
         }
-
 #endif
 
         [Test]
@@ -1588,7 +1584,6 @@ namespace Newtonsoft.Json.Tests
             Assert.IsTrue(jsonReader.Read());
             Assert.AreEqual(typeof(DateTime), jsonReader.ValueType);
         }
-
 #if false
         [Test]
         public void StackOverflowTest()
@@ -2182,7 +2177,6 @@ namespace Newtonsoft.Json.Tests
             object actual = JsonConvert.DeserializeObject<HasEnumerableObject>("{\"foo\":{}}");
             Assert.IsNotNull(actual);
         }
-
 #if !(NET40 || NET35 || NET20 || PORTABLE40)
         [Test]
         public void ShouldNotPopulateReadOnlyDictionaryObjectWithNonDefaultConstructor()
@@ -2202,7 +2196,6 @@ namespace Newtonsoft.Json.Tests
             [JsonConstructor]
             public HasReadOnlyDictionary([JsonProperty("bar")] int bar) { }
         }
-
 #endif
 
         public sealed class HasReadOnlyEnumerableObject

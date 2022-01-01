@@ -712,7 +712,6 @@ namespace System.Runtime.InteropServices
 
             return (IntPtr)(-1);
         }
-
 #endif
 
         /// <summary>
@@ -730,7 +729,6 @@ namespace System.Runtime.InteropServices
 
             return GetExceptionForHRInternal(errorCode, errorInfo);
         }
-
 #if !CORECLR
         private static Exception? GetExceptionForHRInternal(int errorCode, IntPtr errorInfo)
         {
@@ -952,7 +950,6 @@ namespace System.Runtime.InteropServices
                     return new COMException("", errorCode);
             }
         }
-
 #endif
 
         /// <summary>

@@ -3208,7 +3208,6 @@ namespace System.Xml.Schema
                 );
             }
         }
-
 #endif
 
         private void BuildParticleContentModel(

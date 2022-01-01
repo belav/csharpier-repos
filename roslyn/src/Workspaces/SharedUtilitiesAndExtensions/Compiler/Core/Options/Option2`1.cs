@@ -122,7 +122,6 @@ namespace Microsoft.CodeAnalysis.Options
         object? IOption2.DefaultValue => this.DefaultValue;
 
         bool IOption2.IsPerLanguage => false;
-
 #else
         object? IOption.DefaultValue => this.DefaultValue;
 
@@ -130,7 +129,6 @@ namespace Microsoft.CodeAnalysis.Options
 
         ImmutableArray<OptionStorageLocation> IOption.StorageLocations =>
             this.StorageLocations.As<OptionStorageLocation>();
-
 #endif
 
         OptionGroup IOptionWithGroup.Group => this.Group;

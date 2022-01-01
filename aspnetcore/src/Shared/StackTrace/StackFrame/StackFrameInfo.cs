@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 
+
 #nullable enable
 
 namespace Microsoft.Extensions.StackTrace.Sources;

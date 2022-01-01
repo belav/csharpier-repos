@@ -355,7 +355,6 @@ namespace Microsoft.Data.Sqlite
             );
             connection.Open();
         }
-
 #if E_SQLCIPHER || SQLCIPHER
         [Fact]
         public void Open_decrypts_lazily_when_no_password()
@@ -389,7 +388,6 @@ namespace Microsoft.Data.Sqlite
                 File.Delete("encrypted2.db");
             }
         }
-
 #endif
 
         [Theory]

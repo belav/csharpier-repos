@@ -229,7 +229,6 @@ namespace System.Net.Http.Formatting
                 roundTripTestValue: 256
             );
         }
-
 #endif
 
         [Theory]
@@ -548,7 +547,6 @@ namespace System.Net.Http.Formatting
             // DBNull.Value can be read back as null object.
             Assert.Null(readObj);
         }
-
 #if !NETCOREAPP2_0 // DBNull not serializable on .NET Core 2.0 except at top level (using BsonMediaTypeformatter special case).
         [Theory]
         [TestDataSet(
@@ -656,7 +654,6 @@ namespace System.Net.Http.Formatting
             TestDataHolder<object> readDataHolder = (TestDataHolder<object>)readObj;
             Assert.Null(readDataHolder.V1);
         }
-
 #endif
 
         [Fact]
@@ -696,7 +693,6 @@ namespace System.Net.Http.Formatting
             // Only BSON case where DBNull.Value round-trips
             Assert.Equal(testData, readObj);
         }
-
 #endif
 
         private class TestBsonMediaTypeFormatter : BsonMediaTypeFormatter

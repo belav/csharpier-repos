@@ -7,7 +7,6 @@ namespace Missing
     {
         public class InnerFoo { }
     }
-
 #endif
 
     public class Foo2

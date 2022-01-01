@@ -1560,7 +1560,6 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.AreEqual(badText, (string)o["test"]);
         }
-
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
         public class BigIntegerTestClass
         {
@@ -1587,7 +1586,6 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.AreEqual(i, c.Blah);
         }
-
 #endif
 
         public class RegexTestClass
@@ -1664,7 +1662,6 @@ namespace Newtonsoft.Json.Tests.Bson
         public class MyBinder : DefaultSerializationBinder
         {
             public bool BindToTypeCalled { get; set; }
-
 #if !(NET20 || NET35)
             public bool BindToNameCalled { get; set; }
 
@@ -1677,7 +1674,6 @@ namespace Newtonsoft.Json.Tests.Bson
                 BindToNameCalled = true;
                 base.BindToName(serializedType, out assemblyName, out typeName);
             }
-
 #endif
 
             public override Type BindToType(string assemblyName, string typeName)

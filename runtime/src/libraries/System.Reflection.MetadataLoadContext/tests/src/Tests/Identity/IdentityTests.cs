@@ -3,6 +3,7 @@
 
 using System.Linq;
 using Xunit;
+
 #pragma warning disable 0067 // Event not used
 #pragma warning disable 0649 // Field not used
 

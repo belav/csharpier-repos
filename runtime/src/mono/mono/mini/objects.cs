@@ -227,7 +227,6 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
-
 #endif
 
     public static int test_0_return()
@@ -1756,7 +1755,6 @@ class Tests
         float f = return_float();
         return (float)o == f ? 0 : 1;
     }
-
 #endif
 
     class R4Holder
@@ -1878,7 +1876,6 @@ class Tests
 
         return array[1].val;
     }
-
     /* mcs can't compile this (#646744) */
 #if FALSE
 	static void InitMe (out Gamma noMercyWithTheStack) {

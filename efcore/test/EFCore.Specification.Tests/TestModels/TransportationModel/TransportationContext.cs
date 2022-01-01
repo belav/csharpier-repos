@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
+
 #pragma warning disable RCS1202 // Avoid NullReferenceException.
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel

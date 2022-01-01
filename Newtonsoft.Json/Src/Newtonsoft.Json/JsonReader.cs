@@ -1070,7 +1070,6 @@ namespace Newtonsoft.Json
                 )
             );
         }
-
 #endif
 
         internal void ReaderReadAndAssert()

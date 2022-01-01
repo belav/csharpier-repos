@@ -18,6 +18,7 @@ namespace Castle.Services.Logging.SerilogIntegration
 
     using Serilog;
     using Serilog.Events;
+
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

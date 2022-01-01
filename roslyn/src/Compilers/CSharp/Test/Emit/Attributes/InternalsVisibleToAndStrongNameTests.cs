@@ -3178,7 +3178,6 @@ public class C
                 );
             }
         }
-
 #if !NETCOREAPP
         [ConditionalFact(
             typeof(WindowsDesktopOnly),
@@ -3222,7 +3221,6 @@ e29df38b5c72727c1333f32001949a0a0e2c10f8af0a344300ab2123052840cb16e30176c7281810
             // EXPECTED: no errors
             compilation.VerifyEmitDiagnostics();
         }
-
 #endif
 
         [ConditionalTheory(

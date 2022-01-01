@@ -1673,7 +1673,6 @@ namespace System.Data.Common
                     throw ADP.InvalidParameterDirection(value);
             }
         }
-
 #endif
 
         internal static bool IsEmpty([NotNullWhen(false)] string? str)

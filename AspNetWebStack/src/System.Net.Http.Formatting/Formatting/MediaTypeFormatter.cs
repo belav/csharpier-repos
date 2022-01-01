@@ -44,11 +44,9 @@ namespace System.Net.Http.Formatting
 
         private readonly List<MediaTypeHeaderValue> _supportedMediaTypes;
         private readonly List<Encoding> _supportedEncodings;
-
 #if !NETFX_CORE // No MediaTypeMappings in portable library or IRequiredMemberSelector (no model state on client)
         private readonly List<MediaTypeMapping> _mediaTypeMappings;
         private IRequiredMemberSelector _requiredMemberSelector;
-
 #endif
 
         /// <summary>
@@ -139,7 +137,6 @@ namespace System.Net.Http.Formatting
         {
             get { return _supportedEncodings; }
         }
-
 #if !NETFX_CORE // No MediaTypeMappings in portable library
         /// <summary>
         /// Gets the mutable collection of <see cref="MediaTypeMapping"/> elements used
@@ -152,7 +149,6 @@ namespace System.Net.Http.Formatting
         {
             get { return _mediaTypeMappings; }
         }
-
 #endif
 
 #if !NETFX_CORE // IRequiredMemberSelector is not in portable libraries because there is no model state on the client.
@@ -164,7 +160,6 @@ namespace System.Net.Http.Formatting
             get { return _requiredMemberSelector; }
             set { _requiredMemberSelector = value; }
         }
-
 #endif
 
         internal virtual bool CanWriteAnyTypes

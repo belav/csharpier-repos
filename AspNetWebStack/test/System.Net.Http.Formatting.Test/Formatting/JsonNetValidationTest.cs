@@ -50,7 +50,6 @@ namespace System.Net.Http.Formatting
                 };
             }
         }
-
 #if !NETFX_CORE // IRequiredMemeberSelector is not in portable libraries because there is no model state on the client.
         [Theory]
         [PropertyData("Theories")]
@@ -76,7 +75,6 @@ namespace System.Net.Http.Formatting
                 Times.Exactly(expectedErrors)
             );
         }
-
 #endif
 
         [Fact]
@@ -109,7 +107,6 @@ namespace System.Net.Http.Formatting
             );
         }
     }
-
 #if !NETFX_CORE // IRequiredMemeberSelector is not in portable libraries because there is no model state on the client.
     // this IRMS treats all member names that start with "Required" as required
     public class SimpleRequiredMemberSelector : IRequiredMemberSelector
@@ -119,7 +116,6 @@ namespace System.Net.Http.Formatting
             return member.Name.StartsWith("Required");
         }
     }
-
 #endif
 
     public class DataContractWithRequiredMembers

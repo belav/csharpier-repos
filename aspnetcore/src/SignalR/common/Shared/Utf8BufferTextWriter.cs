@@ -26,10 +26,8 @@ internal sealed class Utf8BufferTextWriter : TextWriter
     private IBufferWriter<byte>? _bufferWriter;
     private Memory<byte> _memory;
     private int _memoryUsed;
-
 #if DEBUG
     private bool _inUse;
-
 #endif
 
     public override Encoding Encoding => _utf8NoBom;

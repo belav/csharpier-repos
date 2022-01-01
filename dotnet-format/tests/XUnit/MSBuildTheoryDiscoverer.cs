@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit.Abstractions;
 using Xunit.Sdk;
+
 #nullable enable
 
 namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit

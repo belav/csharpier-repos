@@ -20,7 +20,6 @@ internal static partial class Interop
                 );
             }
         }
-
 #endif
 
         private const int MountPointFormatBufferSizeInBytes = 32;

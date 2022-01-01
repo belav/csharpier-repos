@@ -90,11 +90,9 @@ namespace System.IO.Packaging
                 _namespaceMap[xmlNamespace] = xmlNamespace;
             }
         }
-
 #if !PBTCOMPILER
         public XmlCompatibilityReader(XmlReader baseReader, IEnumerable<string> supportedNamespaces)
             : this(baseReader, null, supportedNamespaces) { }
-
 #endif
         #endregion Construction
 

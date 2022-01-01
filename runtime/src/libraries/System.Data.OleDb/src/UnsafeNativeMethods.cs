@@ -3,6 +3,7 @@
 
 using System.Runtime.InteropServices;
 using System.Security;
+
 #pragma warning disable 0618 // ComInterfaceType.InterfaceIsDual is obsolete
 
 namespace System.Data.Common
@@ -841,7 +842,6 @@ namespace System.Data.Common
 
             //[ Obsolete("not used", true)] void GetHelpContext(/*deleted parameter signature*/);
         }
-
 #if false
         MIDL_INTERFACE("1CF2B120-547D-101B-8E65-08002B2BD119")
         IErrorInfo : public IUnknown
@@ -889,7 +889,6 @@ namespace System.Data.Common
 
             int GetRecordCount();
         }
-
 #if false
     MIDL_INTERFACE("0c733a67-2a1c-11ce-ade5-00aa0044773d")
     IErrorRecords : public IUnknown
@@ -942,7 +941,6 @@ namespace System.Data.Common
                 [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset
             );
         }
-
 #if false
         enum DBRESULTFLAGENUM {
             DBRESULTFLAG_DEFAULT = 0,

@@ -160,10 +160,8 @@ namespace System
 #if NETCOREAPP
         public static bool IsReflectionEmitSupported => RuntimeFeature.IsDynamicCodeSupported;
         public static bool IsNotReflectionEmitSupported => !IsReflectionEmitSupported;
-
 #else
         public static bool IsReflectionEmitSupported => true;
-
 #endif
 
         public static bool IsInvokingStaticConstructorsSupported => true;

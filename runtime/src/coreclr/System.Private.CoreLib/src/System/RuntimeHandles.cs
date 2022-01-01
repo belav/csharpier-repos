@@ -362,13 +362,11 @@ namespace System
             delegate* <object, void>* ppfnCtor,
             Interop.BOOL* pfCtorIsPublic
         );
-
 #if FEATURE_COMINTEROP
         // Referenced by unmanaged layer (see GetActivationInfo).
         // First parameter is ComClassFactory*.
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object AllocateComObject(void* pClassFactory);
-
 #endif
 
         internal RuntimeType GetRuntimeType()

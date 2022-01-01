@@ -1206,7 +1206,6 @@ namespace System.Linq.Expressions.Tests
                 }"
             );
         }
-
 #endif
 
         [Theory, ClassData(typeof(CompilationTypes))]

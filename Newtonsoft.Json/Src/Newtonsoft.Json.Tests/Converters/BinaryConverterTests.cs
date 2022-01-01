@@ -55,7 +55,6 @@ namespace Newtonsoft.Json.Tests.Converters
             public byte[] ByteArray { get; set; }
             public byte[] NullByteArray { get; set; }
         }
-
 #if !(NET20 || PORTABLE || PORTABLE40 || DNXCORE50)
         [Test]
         public void DeserializeBinaryClass()
@@ -120,7 +119,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
         }
-
 #endif
 
         [Test]
@@ -192,7 +190,6 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(new SqlBinary(TestData), sqlBinaryClass.NullableSqlBinary1);
             Assert.AreEqual(null, sqlBinaryClass.NullableSqlBinary2);
         }
-
 #endif
 
         [Test]

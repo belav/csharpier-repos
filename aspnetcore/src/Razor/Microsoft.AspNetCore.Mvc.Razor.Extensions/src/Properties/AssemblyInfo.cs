@@ -4,6 +4,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
+
 [assembly: ProvideRazorExtensionInitializer("MVC-3.0", typeof(ExtensionInitializer))]
 
 [assembly: InternalsVisibleTo(

@@ -24,10 +24,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>? LocalFunctions = null;
             public ArrayBuilder<CaptureId>? CaptureIds = null;
             public readonly bool IsStackSpillRegion;
-
 #if DEBUG
             private bool _aboutToFree = false;
-
 #endif
 
             public RegionBuilder(
@@ -70,7 +68,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
 #if DEBUG
             public void AboutToFree() => _aboutToFree = true;
-
 #endif
 
             [MemberNotNull(nameof(CaptureIds))]

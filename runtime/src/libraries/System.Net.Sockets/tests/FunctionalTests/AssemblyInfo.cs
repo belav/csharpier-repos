@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 [assembly: SkipOnCoreClr(
     "System.Net.Tests are flaky and/or long running: https://github.com/dotnet/runtime/issues/131",
     RuntimeConfiguration.Checked

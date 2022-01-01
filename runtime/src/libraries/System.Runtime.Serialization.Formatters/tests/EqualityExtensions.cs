@@ -1442,7 +1442,6 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.LineNumber, other.LineNumber);
             Assert.Equal(@this.BytePositionInLine, other.BytePositionInLine);
         }
-
 #endif
 
         public static void IsEqual(this EventArgs @this, EventArgs other, bool isSamePlatform)

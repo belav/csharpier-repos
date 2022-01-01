@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceHub.Framework.Services;
+
 #pragma warning disable CS0067 // events that are never used
 
 namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks

@@ -95,7 +95,6 @@ namespace Castle.DynamicProxy.Generators
             base.CreateTypeAttributes(emitter);
             emitter.DefineCustomAttribute<SerializableAttribute>();
         }
-
 #endif
 
         protected override CacheKey GetCacheKey()

@@ -270,7 +270,6 @@ namespace System.Runtime.CompilerServices
 
             return box;
         }
-
 #if !CORERT
         // Avoid forcing the JIT to build DebugFinalizableAsyncStateMachineBox<TStateMachine> unless it's actually needed.
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -298,7 +297,6 @@ namespace System.Runtime.CompilerServices
                 }
             }
         }
-
 #endif
 
         /// <summary>A strongly-typed box for Task-based async state machines.</summary>

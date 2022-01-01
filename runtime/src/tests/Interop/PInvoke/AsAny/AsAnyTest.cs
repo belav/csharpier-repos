@@ -7,6 +7,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using Xunit;
+
 #pragma warning disable CS0612, CS0618
 
 struct A

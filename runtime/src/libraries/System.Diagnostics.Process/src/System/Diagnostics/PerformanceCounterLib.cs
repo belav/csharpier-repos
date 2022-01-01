@@ -249,7 +249,6 @@ namespace System.Diagnostics
                     _perfDataKey = Registry.PerformanceData;
                 }
             }
-
 #endif
 
             // Win32 RegQueryValueEx for perf data could deadlock (for a Mutex) up to 2mins in some

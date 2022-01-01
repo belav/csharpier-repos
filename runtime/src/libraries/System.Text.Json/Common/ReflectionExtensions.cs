@@ -94,7 +94,6 @@ namespace System.Text.Json.Reflection
 
             return null;
         }
-
 #if !BUILDING_SOURCE_GENERATOR
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

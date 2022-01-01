@@ -3,6 +3,7 @@
 using System.IO;
 using System.Threading;
 using Xunit;
+
 // Implementation is not robust with respect to modifying counter categories
 // while concurrently reading counters
 [assembly: CollectionBehavior(DisableTestParallelization = true)]

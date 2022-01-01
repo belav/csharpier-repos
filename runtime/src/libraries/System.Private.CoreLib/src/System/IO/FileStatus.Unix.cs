@@ -29,13 +29,11 @@ namespace System.IO
 
         // Exists as of the last refresh
         private bool _exists;
-
 #if !TARGET_BROWSER
         // Caching the euid/egid to avoid extra p/invokes
         // Should get reset on refresh
         private uint? _euid;
         private uint? _egid;
-
 #endif
 
         private bool IsFileCacheInitialized => _initializedFileCache == 0;

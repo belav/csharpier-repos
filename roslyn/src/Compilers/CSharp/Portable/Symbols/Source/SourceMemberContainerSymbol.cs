@@ -102,7 +102,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     EnumUtilities.ContainsAllValues<NullableContextKind>(NullableContextMask)
                 );
             }
-
 #endif
 
             public Flags(SpecialType specialType, TypeKind typeKind)

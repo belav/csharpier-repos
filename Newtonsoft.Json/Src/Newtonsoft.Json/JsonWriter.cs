@@ -1231,7 +1231,6 @@ namespace Newtonsoft.Json
         {
             InternalWriteValue(JsonToken.Date);
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Writes a <see cref="DateTimeOffset"/> value.
@@ -1241,7 +1240,6 @@ namespace Newtonsoft.Json
         {
             InternalWriteValue(JsonToken.Date);
         }
-
 #endif
 
         /// <summary>
@@ -1489,7 +1487,6 @@ namespace Newtonsoft.Json
                 WriteValue(value.GetValueOrDefault());
             }
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Writes a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/> value.
@@ -1506,7 +1503,6 @@ namespace Newtonsoft.Json
                 WriteValue(value.GetValueOrDefault());
             }
         }
-
 #endif
 
         /// <summary>
@@ -1853,7 +1849,6 @@ namespace Newtonsoft.Json
                     : typeInformation.Type;
             value = convertible.ToType(resolvedType, CultureInfo.InvariantCulture);
         }
-
 #endif
 
         private static JsonWriterException CreateUnsupportedTypeException(

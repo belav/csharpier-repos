@@ -805,7 +805,6 @@ public class TemplateBinderTests
         Assert.True(templateValuesResult.CombinedValues.TryGetValue("action", out routeValue));
         Assert.Equal("Index", routeValue?.ToString());
     }
-
 #if ROUTE_COLLECTION
 
     [Fact]
@@ -1141,7 +1140,6 @@ public class TemplateBinderTests
         Assert.NotNull(vpd);
         Assert.Equal<string>("Bank.mvc/AttemptLogin", vpd.VirtualPath);
     }
-
 #endif
 
 #if DATA_TOKENS
@@ -1173,7 +1171,6 @@ public class TemplateBinderTests
         Assert.Equal("bar", vpd.DataTokens["foo"]);
         Assert.Equal("quux", vpd.DataTokens["qux"]);
     }
-
 #endif
 
 #if ROUTE_FORMAT_HELPER
@@ -1228,7 +1225,6 @@ public class TemplateBinderTests
         GetRouteDataHelper(r, requestUrl, defaults);
         GetVirtualPathHelper(r, new RouteValueDictionary(), null, Uri.EscapeUriString(requestUrl));
     }
-
 #endif
 
 #if CONSTRAINTS
@@ -1305,7 +1301,6 @@ public class TemplateBinderTests
         Assert.Equal("action", r.ConstraintData.ParameterName);
         Assert.Equal("list", r.ConstraintData.ParameterValue);
     }
-
 #endif
 
     private static void RunTest(

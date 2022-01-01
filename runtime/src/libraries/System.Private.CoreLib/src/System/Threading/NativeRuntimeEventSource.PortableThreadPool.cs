@@ -18,11 +18,9 @@ namespace System.Diagnostics.Tracing
             public const EventKeywords ThreadingKeyword = (EventKeywords)0x10000;
             public const EventKeywords ThreadTransferKeyword = (EventKeywords)0x80000000;
         }
-
 #if !ES_BUILD_STANDALONE
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";
-
 #endif
         // This value does not seem to be used, leaving it as zero for now. It may be useful for a scenario that may involve
         // multiple instances of the runtime within the same process, but then it seems unlikely that both instances' thread
@@ -75,7 +73,6 @@ namespace System.Diagnostics.Tracing
             ThreadTimedOut,
             CooperativeBlocking,
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -165,7 +162,6 @@ namespace System.Diagnostics.Tracing
                 WriteThreadEvent(57, ActiveWorkerThreadCount);
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -200,7 +196,6 @@ namespace System.Diagnostics.Tracing
             data[1].Reserved = 0;
             WriteEventCore(54, 2, data);
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -243,7 +238,6 @@ namespace System.Diagnostics.Tracing
             data[3].Reserved = 0;
             WriteEventCore(55, 4, data);
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -314,7 +308,6 @@ namespace System.Diagnostics.Tracing
             data[10].Reserved = 0;
             WriteEventCore(56, 11, data);
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -375,7 +368,6 @@ namespace System.Diagnostics.Tracing
                 );
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -427,7 +419,6 @@ namespace System.Diagnostics.Tracing
                 ThreadPoolIODequeue((IntPtr)registeredWaitHandle.GetHashCode(), IntPtr.Zero);
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",

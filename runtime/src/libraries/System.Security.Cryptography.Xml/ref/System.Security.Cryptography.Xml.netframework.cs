@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.CipherData))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.CipherReference))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.DataObject))]

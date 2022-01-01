@@ -4,6 +4,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Web;
+
 [assembly: AssemblyTitle("Microsoft.Web.WebPages.OAuth")]
 [assembly: AssemblyDescription("")]
 

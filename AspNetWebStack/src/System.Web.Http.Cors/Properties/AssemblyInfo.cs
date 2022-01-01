@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 [assembly: AssemblyTitle("System.Web.Http.Cors")]
 [assembly: AssemblyDescription("")]
 [assembly: InternalsVisibleTo(

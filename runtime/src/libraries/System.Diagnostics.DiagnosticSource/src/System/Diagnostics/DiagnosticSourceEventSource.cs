@@ -236,7 +236,6 @@ namespace System.Diagnostics
         {
             WriteEvent(1, Message);
         }
-
         /// <summary>
         /// Events from DiagnosticSource can be forwarded to EventSource using this event.
         /// </summary>
@@ -266,7 +265,6 @@ namespace System.Diagnostics
         {
             WriteEvent(3, SourceName, EventName, ArgmentsJson);
         }
-
         /// <summary>
         /// Used to mark the beginning of an activity
         /// </summary>
@@ -286,7 +284,6 @@ namespace System.Diagnostics
         {
             WriteEvent(4, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the end of an activity
         /// </summary>
@@ -306,7 +303,6 @@ namespace System.Diagnostics
         {
             WriteEvent(5, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the beginning of an activity
         /// </summary>
@@ -326,7 +322,6 @@ namespace System.Diagnostics
         {
             WriteEvent(6, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the end of an activity that can be recursive.
         /// </summary>
@@ -346,7 +341,6 @@ namespace System.Diagnostics
         {
             WriteEvent(7, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the beginning of an activity
         /// </summary>
@@ -366,7 +360,6 @@ namespace System.Diagnostics
         {
             WriteEvent(8, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the end of an activity that can be recursive.
         /// </summary>
@@ -396,7 +389,6 @@ namespace System.Diagnostics
         {
             WriteEvent(10, SourceName);
         }
-
         /// <summary>
         /// Fires when the Activity start.
         /// </summary>
@@ -416,7 +408,6 @@ namespace System.Diagnostics
             string ActivityName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
         ) => WriteEvent(11, SourceName, ActivityName, Arguments);
-
         /// <summary>
         /// Fires when the Activity stop.
         /// </summary>

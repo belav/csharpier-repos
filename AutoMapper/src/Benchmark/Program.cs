@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security;
 using Benchmark.Flattening;
+
 [assembly: AllowPartiallyTrustedCallers]
 
 

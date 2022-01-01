@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+
 #if CODE_STYLE
 namespace Microsoft.CodeAnalysis.Internal.Editing
 #else

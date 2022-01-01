@@ -11,6 +11,7 @@ using System.Speech.AudioFormat;
 using System.Speech.Internal;
 using System.Speech.Internal.SapiInterop;
 using System.Text;
+
 #pragma warning disable 56507 // check for null or empty strings
 
 namespace System.Speech.Recognition

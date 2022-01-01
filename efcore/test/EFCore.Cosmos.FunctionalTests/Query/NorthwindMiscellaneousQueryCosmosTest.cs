@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
 using Xunit.Abstractions;
+
 #pragma warning disable RCS1202 // Avoid NullReferenceException.
 
 namespace Microsoft.EntityFrameworkCore.Query

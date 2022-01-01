@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.WebAssembly.Diagnostics;
 using Newtonsoft.Json.Linq;
 using Xunit;
+
 #nullable enable
 
 namespace DebuggerTests

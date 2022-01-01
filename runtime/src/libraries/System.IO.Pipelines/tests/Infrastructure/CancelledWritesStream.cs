@@ -40,7 +40,6 @@ namespace System.IO.Pipelines.Tests
 
             cancellationToken.ThrowIfCancellationRequested();
         }
-
 #endif
 
         public override async Task FlushAsync(CancellationToken cancellationToken)

@@ -84,7 +84,6 @@ namespace Newtonsoft.Json.Converters
                 _document.CreateXmlDeclaration(version, encoding, standalone)
             );
         }
-
 #if HAVE_XML_DOCUMENT_TYPE
         public IXmlNode CreateXmlDocumentType(string? name, string? publicId, string? systemId, string? internalSubset)
         {
@@ -186,7 +185,6 @@ namespace Newtonsoft.Json.Converters
             set => _declaration.Standalone = value;
         }
     }
-
 #if HAVE_XML_DOCUMENT_TYPE
     internal class XmlDocumentTypeWrapper : XmlNodeWrapper, IXmlDocumentType
     {
@@ -346,7 +344,6 @@ namespace Newtonsoft.Json.Converters
 
         public string? NamespaceUri => _node.NamespaceURI;
     }
-
 #endif
 #endregion
 
@@ -405,7 +402,6 @@ namespace Newtonsoft.Json.Converters
         string? NamespaceUri { get; }
         object? WrappedNode { get; }
     }
-
 #endregion
 
 #region XNodeWrappers
@@ -939,7 +935,6 @@ namespace Newtonsoft.Json.Converters
 
         public bool IsEmpty => Element.IsEmpty;
     }
-
 #endif
 #endregion
 
@@ -2278,7 +2273,6 @@ namespace Newtonsoft.Json.Converters
                 currentNode.AppendChild(instruction);
             }
         }
-
 #if HAVE_XML_DOCUMENT_TYPE
         private void CreateDocumentType(JsonReader reader, IXmlDocument document, IXmlNode currentNode)
         {
@@ -2516,14 +2510,12 @@ namespace Newtonsoft.Json.Converters
 
             return false;
         }
-
 #if HAVE_XLINQ
         [MethodImpl(MethodImplOptions.NoInlining)]
         private bool IsXObject(Type valueType)
         {
             return typeof(XObject).IsAssignableFrom(valueType);
         }
-
 #endif
 
 #if HAVE_XML_DOCUMENT

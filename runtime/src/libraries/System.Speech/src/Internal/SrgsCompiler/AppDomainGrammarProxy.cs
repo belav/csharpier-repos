@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Speech.Recognition.SrgsGrammar;
 using System.Text;
+
 #endregion
 
 #pragma warning disable 56500 // Remove all the catch all statements warnings used by the interop layer

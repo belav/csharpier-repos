@@ -209,7 +209,6 @@ namespace System.Diagnostics
             ToString(traceFormat, sb);
             return sb.ToString();
         }
-
 #if !CORERT
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -398,7 +397,6 @@ namespace System.Diagnostics
             if (traceFormat == TraceFormat.TrailingNewLine)
                 sb.AppendLine();
         }
-
 #endif // !CORERT
 
         private static bool ShowInStackTrace(MethodBase mb)

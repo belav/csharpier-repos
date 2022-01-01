@@ -98,7 +98,6 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
-
 #if !WINHTTPHANDLER_TEST
         [PlatformSpecific(TestPlatforms.AnyUnix)] // The default proxy is resolved via WinINet on Windows.
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -215,7 +214,6 @@ namespace System.Net.Http.Functional.Tests
                     )
             );
         }
-
 #endif
 
         // The purpose of this test is mainly to validate the .NET Framework OOB System.Net.Http implementation

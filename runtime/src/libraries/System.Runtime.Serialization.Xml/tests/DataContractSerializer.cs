@@ -34,7 +34,6 @@ public static partial class DataContractSerializerTests
         Assert.True(method != null, $"No method named {SerializationOptionSetterName}");
         method.Invoke(null, new object[] { 1 });
     }
-
 #endif
     [Fact]
     [ActiveIssue(

@@ -13,7 +13,6 @@ namespace System.Drawing
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
-
 #endif
         // Handle to native GDI+ brush object to be used on demand.
         private IntPtr _nativeBrush;

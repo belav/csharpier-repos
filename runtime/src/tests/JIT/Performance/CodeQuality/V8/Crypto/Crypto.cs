@@ -245,7 +245,6 @@ namespace V8.Crypto
         public delegate int AMSig(BigInteger bi, int i, int x, BigInteger w, int j, int c, int n);
 
         private static AMSig s_am;
-
         // am: Compute w_j += (x*this_i), propagate carries,
         // c is initial carry, returns final carry.
         // c < 3*dvalue, x < 2*dvalue, this_i < dvalue
@@ -306,7 +305,6 @@ namespace V8.Crypto
             }
             return c;
         }
-
 #if false
     // This is tailored to VMs with 2-bit tagging. It makes sure
     // that all the computations stay within the 29 bits available.

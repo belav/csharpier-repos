@@ -3170,7 +3170,6 @@ public class SimdTests
 
         return 0;
     }
-
 #if FALSE
 	// Fails with -O=float32
 	public static int test_0_regs_pressure_fp_and_simd_share_bank_2 () {

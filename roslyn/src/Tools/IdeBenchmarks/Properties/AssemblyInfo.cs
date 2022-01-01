@@ -6,4 +6,5 @@
 
 using BenchmarkDotNet.Attributes;
 using IdeBenchmarks;
+
 [assembly: Config(typeof(MemoryDiagnoserConfig))]

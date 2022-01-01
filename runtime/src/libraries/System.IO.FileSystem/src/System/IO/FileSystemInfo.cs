@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
+
 #if MS_IO_REDIST
 namespace Microsoft.IO
 #else

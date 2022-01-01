@@ -206,7 +206,6 @@ namespace System.Net.Http.Formatting
                 Assert.Equal(testData, readObj);
             }
         }
-
 #if !NETCOREAPP2_0 // DBNull not serializable on .NET Core 2.0.
         // Test alternate null value
         [Fact]
@@ -249,7 +248,6 @@ namespace System.Net.Http.Formatting
             // Lower levels convert DBNull.Value to empty string on read
             Assert.Equal(String.Empty, readObj);
         }
-
 #endif
 
         [Fact]

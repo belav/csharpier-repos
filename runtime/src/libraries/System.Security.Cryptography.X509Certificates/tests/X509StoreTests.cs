@@ -34,7 +34,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal("MY", store.Name);
             }
         }
-
 #if HAVE_STORE_ISOPEN
         [Fact]
         public static void Constructor_IsNotOpen()
@@ -44,7 +43,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.False(store.IsOpen);
             }
         }
-
 #endif
 
         [Fact]
@@ -108,7 +106,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             Assert.Throws<PlatformNotSupportedException>(() => new X509Chain(IntPtr.Zero));
         }
-
 #if HAVE_STORE_ISOPEN
         [Fact]
         public static void Constructor_OpenFlags()
@@ -160,7 +157,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     )
             );
         }
-
 #endif
 
         [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.OSX)] // StoreHandle not supported via OpenSSL
@@ -210,7 +206,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
             }
         }
-
 #if HAVE_STORE_ISOPEN
         [Fact]
         public static void Open_IsOpenTrue()
@@ -240,7 +235,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             store.Open(OpenFlags.ReadOnly);
             Assert.True(store.IsOpen);
         }
-
 #endif
 
         [Fact]

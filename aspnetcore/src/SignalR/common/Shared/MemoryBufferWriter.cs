@@ -19,10 +19,8 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
 {
     [ThreadStatic]
     private static MemoryBufferWriter? _cachedInstance;
-
 #if DEBUG
     private bool _inUse;
-
 #endif
 
     private readonly int _minimumSegmentSize;
@@ -338,7 +336,6 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
             BuffersExtensions.Write(this, span);
         }
     }
-
 #endif
 
     protected override void Dispose(bool disposing)

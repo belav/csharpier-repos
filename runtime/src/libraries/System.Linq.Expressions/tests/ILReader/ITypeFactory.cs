@@ -34,7 +34,6 @@ namespace System.Linq.Expressions.Tests
 
         public Type MakeGenericType(Type definition, Type[] arguments) =>
             definition.MakeGenericType(arguments);
-
 #else
         public virtual Type FromHandle(IntPtr handle) => typeof(Unknown);
 
@@ -52,7 +51,6 @@ namespace System.Linq.Expressions.Tests
 
             return definition.MakeGenericType(arguments);
         }
-
 #endif
         public Type MakeArrayType(Type type) => type.MakeArrayType();
 

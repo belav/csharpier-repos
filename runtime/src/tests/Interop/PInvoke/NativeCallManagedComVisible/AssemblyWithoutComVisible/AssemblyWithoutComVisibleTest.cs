@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using NativeCallManagedComVisible;
 using Xunit;
+
 // Don't set ComVisible.
 // [assembly: ComVisible(true)]
 

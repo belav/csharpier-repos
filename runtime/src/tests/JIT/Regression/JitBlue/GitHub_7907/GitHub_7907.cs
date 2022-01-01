@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 #pragma warning disable 472
 
 public class Bug7907

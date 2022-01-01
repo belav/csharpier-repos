@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
 /*
  * Regression tests for the AOT/FULL-AOT code.
  */
@@ -22,7 +23,6 @@ class Tests
     {
         return TestDriver.RunTests(typeof(Tests), args);
     }
-
 #endif
 
     public delegate void ArrayDelegate(int[,] arr);
@@ -1026,7 +1026,6 @@ class Tests
         dict[1] = new Struct1();
         return 0;
     }
-
     // Requires c# 7.2
 #if !__MonoCS__
     public interface GameComponent
@@ -1068,7 +1067,6 @@ class Tests
             .Invoke(null, null);
         return 0;
     }
-
 #endif
 
     struct DummyStruct

@@ -31,7 +31,6 @@ namespace System.Runtime.InteropServices
                 Debug.Assert(variantSize == (3 * IntPtr.Size));
             }
         }
-
 #endif
 
         // Most of the data types in the Variant are carried in _typeUnion

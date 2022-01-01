@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
+
 #pragma warning disable 0618   // Obsolete members
 
 namespace System.Reflection.TypeLoading.Ecma

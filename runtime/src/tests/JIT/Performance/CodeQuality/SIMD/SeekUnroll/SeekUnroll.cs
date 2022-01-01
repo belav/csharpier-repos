@@ -57,10 +57,8 @@ public static class SeekUnroll
     // 2 seconds or so in release, finish quickly in debug.
 #if DEBUG
     static int InnerIterations = 1;
-
 #else
     static int InnerIterations = 1000000000;
-
 #endif
 
     // Function to measure InnerLoop with manual use of a stopwatch timer

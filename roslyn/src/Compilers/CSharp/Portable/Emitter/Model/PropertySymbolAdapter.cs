@@ -320,7 +320,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return _lazyAdapter;
         }
-
 #else
         internal PropertySymbol AdaptedPropertySymbol => this;
 
@@ -328,7 +327,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
-
 #endif
 
         internal virtual bool HasRuntimeSpecialName

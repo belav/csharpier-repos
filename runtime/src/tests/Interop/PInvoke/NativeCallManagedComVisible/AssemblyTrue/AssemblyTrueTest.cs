@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using NativeCallManagedComVisible;
 using Xunit;
+
 // Setting ComVisible to true makes the types in this assembly visible
 // to COM components by default.  If you don't need to access a type in
 // this assembly from COM, set the ComVisible attribute to false on that type.

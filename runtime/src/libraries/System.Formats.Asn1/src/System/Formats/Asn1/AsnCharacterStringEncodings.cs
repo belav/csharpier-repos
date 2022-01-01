@@ -457,7 +457,6 @@ namespace System.Formats.Asn1
         {
             return s_utf8Encoding.GetByteCount(chars);
         }
-
 #endif
 
         public override int GetBytes(
@@ -512,7 +511,6 @@ namespace System.Formats.Asn1
                 return s_latin1Encoding.GetCharCount(bytes);
             }
         }
-
 #endif
 
         public override int GetChars(

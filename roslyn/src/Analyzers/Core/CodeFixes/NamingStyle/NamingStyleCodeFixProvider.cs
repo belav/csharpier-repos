@@ -138,7 +138,6 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
             private readonly Solution _startingSolution;
             private readonly ISymbol _symbol;
             private readonly string _newName;
-
 #endif
 
             private readonly string _title;

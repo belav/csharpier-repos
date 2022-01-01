@@ -18,10 +18,8 @@ namespace System.Xml.Xsl.Runtime
         private int _sp; // Stack pointer (size of stack)
 #if DEBUG
         private const int InitialStackSize = 2;
-
 #else
         private const int InitialStackSize = 8;
-
 #endif
 
         /// <summary>

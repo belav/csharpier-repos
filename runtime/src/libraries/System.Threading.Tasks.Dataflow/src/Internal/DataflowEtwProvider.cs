@@ -124,7 +124,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 );
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -201,7 +200,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
             /// <summary>The block completed due to cancellation.</summary>
             Canceled = (int)TaskStatus.Canceled
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

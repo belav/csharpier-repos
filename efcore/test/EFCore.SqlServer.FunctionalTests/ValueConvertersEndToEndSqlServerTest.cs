@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
+
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore

@@ -94,10 +94,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         public MemoryPool<byte> MemoryPool { get; }
 
         public WriteReqPool WriteReqPool { get; }
-
 #if DEBUG
         public List<WeakReference> Requests { get; } = new List<WeakReference>();
-
 #endif
 
         public Exception FatalError => _closeError;
@@ -173,7 +171,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 ExceptionDispatchInfo.Capture(_closeError).Throw();
             }
         }
-
 #if DEBUG && !INNER_LOOP
         private void CheckUvReqLeaks()
         {
@@ -190,7 +187,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 );
             }
         }
-
 #endif
 
         private void AllowStop()

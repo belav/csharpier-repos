@@ -10,7 +10,6 @@ namespace System.Drawing.Drawing2D
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
-
 #endif
 
         // Handle to native line cap object

@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions

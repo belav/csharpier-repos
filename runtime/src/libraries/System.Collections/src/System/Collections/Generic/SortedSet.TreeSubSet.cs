@@ -37,7 +37,6 @@ namespace System.Collections.Generic
             {
                 return (version == _underlying.version);
             }
-
 #endif
 
             public TreeSubSet(
@@ -386,7 +385,6 @@ namespace System.Collections.Generic
                 base.IntersectWithEnumerable(other);
                 Debug.Assert(versionUpToDate() && root == _underlying.FindRange(_min, _max));
             }
-
 #endif
 
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) =>

@@ -2695,7 +2695,6 @@ namespace Newtonsoft.Json.Serialization
             return underlyingList;
 #pragma warning restore CS8600, CS8602, CS8603, CS8604
         }
-
 #if HAVE_BINARY_SERIALIZATION
         private object CreateISerializable(
             JsonReader reader,
@@ -2853,7 +2852,6 @@ namespace Newtonsoft.Json.Serialization
 
             return result;
         }
-
 #endif
 
 #if HAVE_DYNAMIC
@@ -3053,7 +3051,6 @@ namespace Newtonsoft.Json.Serialization
 
             return newObject;
         }
-
 #endif
 
         internal class CreatorPropertyContext

@@ -51,7 +51,6 @@ namespace System.Web.Mvc.Razor.Test
             Assert.Equal("foo.vbhtml", result.SourceFileName);
             Assert.Same(host, result.Host);
         }
-
 #endif
 
         [Fact]

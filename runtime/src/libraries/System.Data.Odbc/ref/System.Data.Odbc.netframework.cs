@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.Data.Odbc.OdbcCommand))]
 [assembly: TypeForwardedTo(typeof(System.Data.Odbc.OdbcCommandBuilder))]
 [assembly: TypeForwardedTo(typeof(System.Data.Odbc.OdbcConnection))]

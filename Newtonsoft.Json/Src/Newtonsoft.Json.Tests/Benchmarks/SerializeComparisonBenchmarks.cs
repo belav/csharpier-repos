@@ -130,7 +130,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
             return ser.Serialize(value);
         }
-
 #endif
 
         [Benchmark]

@@ -25,7 +25,6 @@ namespace System.Reflection.Tests
         public static bool IsByRefLike(this Type t) => t.IsByRefLike;
 
         public static Type[] GetForwardedTypesThunk(this Assembly a) => a.GetForwardedTypes();
-
 #else
         public static bool IsSZArray(this Type t) =>
             t.IsImplementedByRuntime()
@@ -71,7 +70,6 @@ namespace System.Reflection.Tests
 
         public static Type[] GetForwardedTypesThunk(this Assembly a) =>
             a.CallUsingReflection<Type[]>("GetForwardedTypes");
-
 #endif
 
         //

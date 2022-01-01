@@ -43,13 +43,11 @@ namespace System.Diagnostics.Tracing
             "EventSource will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type";
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";
-
 #endif
 #endif
 
 #if FEATURE_PERFTRACING
         private readonly TraceLoggingEventHandleTable m_eventHandleTable = null!;
-
 #endif
 
         /// <summary>
@@ -106,7 +104,6 @@ namespace System.Diagnostics.Tracing
                 throw new ArgumentNullException(nameof(eventSourceName));
             }
         }
-
         /// <summary>
         /// Writes an event with no fields and default options.
         /// (Native API: EventWriteTransfer)
@@ -136,7 +133,6 @@ namespace System.Diagnostics.Tracing
                 SimpleEventTypes<EmptyStruct>.Instance
             );
         }
-
         /// <summary>
         /// Writes an event with no fields.
         /// (Native API: EventWriteTransfer)

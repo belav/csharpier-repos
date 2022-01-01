@@ -35,12 +35,10 @@ namespace System.IO
             fixed (byte* ptr = &MemoryMarshal.GetReference((Span<byte>)array))
                 Initialize(ptr, len, len, FileAccess.Read);
         }
-
 #if !RESOURCES_EXTENSIONS
         public override int Read(Span<byte> buffer) => ReadCore(buffer);
 
         public override void Write(ReadOnlySpan<byte> buffer) => WriteCore(buffer);
-
 #endif
 
         ~PinnedBufferMemoryStream()

@@ -429,7 +429,6 @@ namespace System.Threading
         private static extern void QueueWaitCompletionNative(
             CompleteWaitThreadPoolWorkItem completeWaitWorkItem
         );
-
 #endif
 
         internal static void RequestWorkerThread()

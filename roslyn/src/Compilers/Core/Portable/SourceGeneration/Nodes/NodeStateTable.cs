@@ -390,7 +390,6 @@ namespace Microsoft.CodeAnalysis
                     return sb.ToStringAndFree();
                 }
             }
-
 #endif
 
             public sealed class Builder

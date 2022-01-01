@@ -5,6 +5,7 @@
 #nullable disable
 
 using System.Runtime.CompilerServices;
+
 // Microsoft.CodeAnalysis.FileTextLoader has been moved to Microsoft.CodeAnalysis.Workspaces.dll.
 [assembly: TypeForwardedTo(typeof(Microsoft.CodeAnalysis.FileTextLoader))]
 

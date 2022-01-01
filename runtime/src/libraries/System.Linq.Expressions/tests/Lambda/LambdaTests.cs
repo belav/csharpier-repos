@@ -1384,7 +1384,6 @@ namespace System.Linq.Expressions.Tests
 "
             );
         }
-
 #endif
 
         private struct Mutable
@@ -2058,7 +2057,6 @@ namespace System.Linq.Expressions.Tests
 "
                 );
         }
-
 #endif
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -2158,7 +2156,6 @@ namespace System.Linq.Expressions.Tests
             Assert.IsType(delType, del);
             Assert.Equal(42, del.DynamicInvoke());
         }
-
 #endif
 
         [Fact]

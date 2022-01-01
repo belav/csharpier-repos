@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 [assembly: CollectionBehavior(DisableTestParallelization = true, MaxParallelThreads = 1)]
 
 [assembly: SkipOnPlatform(

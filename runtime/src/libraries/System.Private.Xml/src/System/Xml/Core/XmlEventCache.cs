@@ -53,10 +53,8 @@ namespace System.Xml
 
 #if DEBUG
         private const int InitialPageSize = 4;
-
 #else
         private const int InitialPageSize = 32;
-
 #endif
 
         public XmlEventCache(string baseUri, bool hasRootNode)

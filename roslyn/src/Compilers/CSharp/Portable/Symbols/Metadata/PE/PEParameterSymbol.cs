@@ -94,7 +94,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     )
                 );
             }
-
 #endif
 
             public PackedFlags(RefKind refKind, bool attributesAreComplete, bool hasNameInMetadata)

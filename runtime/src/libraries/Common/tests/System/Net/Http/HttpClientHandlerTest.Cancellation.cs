@@ -760,7 +760,6 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
-
 #endif
 
         private async Task ValidateClientCancellationAsync(Func<Task> clientBodyAsync)

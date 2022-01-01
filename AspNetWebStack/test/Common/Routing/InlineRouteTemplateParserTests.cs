@@ -9,6 +9,7 @@ using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
 #endif
 using Microsoft.TestCommon;
+
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing
 #else
@@ -19,10 +20,8 @@ namespace System.Web.Mvc.Routing
     {
 #if ASPNETWEBAPI
         private static readonly RouteParameter OptionalParameter = RouteParameter.Optional;
-
 #else
         private static readonly UrlParameter OptionalParameter = UrlParameter.Optional;
-
 #endif
 
         [Fact]

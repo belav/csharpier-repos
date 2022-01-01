@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 using Xunit;
+
 [assembly:
     Attr(77, name = "AttrSimple"),
     Int32Attr(77, name = "Int32AttrSimple"),

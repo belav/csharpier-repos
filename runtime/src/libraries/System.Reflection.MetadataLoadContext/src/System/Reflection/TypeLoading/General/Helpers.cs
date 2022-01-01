@@ -422,7 +422,6 @@ namespace System.Reflection.TypeLoading
 
 #if NETCOREAPP
         public static string ToUtf16(this ReadOnlySpan<byte> utf8) => Encoding.UTF8.GetString(utf8);
-
 #else
         public static unsafe string ToUtf16(this ReadOnlySpan<byte> utf8)
         {
@@ -436,7 +435,6 @@ namespace System.Reflection.TypeLoading
                 return Encoding.UTF8.GetString(ptr, utf8.Length);
             }
         }
-
 #endif
 
         // Guards ToString() implementations. Sample usage:

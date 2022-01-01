@@ -8,6 +8,7 @@ using System.IO;
 using System.Reflection;
 using System.Speech.Internal.SrgsParser;
 using System.Text;
+
 #pragma warning disable 56507 // check for null or empty strings
 
 namespace System.Speech.Internal.SrgsCompiler

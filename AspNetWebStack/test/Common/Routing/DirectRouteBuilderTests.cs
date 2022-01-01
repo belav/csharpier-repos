@@ -175,7 +175,6 @@ namespace System.Web.Mvc.Routing
 
             return actions.AsReadOnly();
         }
-
 #else
         private IReadOnlyCollection<TActionDescriptor> GetActions()
         {
@@ -187,7 +186,6 @@ namespace System.Web.Mvc.Routing
 
             return actions.AsReadOnly();
         }
-
 #endif
 
         private class MockDirectRouteBuilder : DirectRouteBuilder

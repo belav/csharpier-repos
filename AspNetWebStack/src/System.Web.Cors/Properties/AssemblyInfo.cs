@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+
 [assembly: AssemblyTitle("System.Web.Cors")]
 [assembly: AssemblyDescription("")]
 [assembly: SuppressMessage(

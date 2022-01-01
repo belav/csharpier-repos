@@ -13,7 +13,9 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Resources;[assembly: CLSCompliant(true)]
+using System.Resources;
+
+[assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
 [assembly: DefaultDllImportSearchPaths(

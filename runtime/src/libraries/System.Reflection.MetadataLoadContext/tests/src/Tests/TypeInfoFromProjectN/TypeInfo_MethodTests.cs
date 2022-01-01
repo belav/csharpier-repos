@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using Xunit;
+
 #pragma warning disable 0067 // Unused event
 
 namespace System.Reflection.Tests

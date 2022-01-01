@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using Xunit;
+
 #pragma warning disable 0618
 
 namespace System.ComponentModel.Tests

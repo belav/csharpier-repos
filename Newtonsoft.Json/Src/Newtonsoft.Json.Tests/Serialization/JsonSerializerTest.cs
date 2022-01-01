@@ -247,7 +247,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
             Assert.AreEqual("53443333222211111117", largeOddWorkingNumber.Blah);
         }
-
 #endif
 
 #if !NET20
@@ -265,7 +264,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(1418924498000, initialTicks);
             Assert.AreEqual(8, d.Offset.Hours);
         }
-
 #endif
 
         [Test]
@@ -382,7 +380,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, l[i++]);
             Assert.AreEqual(null, l[i++]);
         }
-
 #endif
 
         [Test]
@@ -572,7 +569,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             var e2 = JsonConvert.DeserializeObject<EnumA>("'value_a'", new StringEnumConverter());
             Assert.AreEqual(EnumA.ValueA, e2);
         }
-
 #endif
 
         [Test]
@@ -706,7 +702,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual("Name!", c2.Name);
         }
-
 #if !(NET20 || NET35 || PORTABLE40)
         [Test]
         public void SerializeValueTuple()
@@ -732,7 +727,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(2, t2.Item2);
             Assert.AreEqual("string", t2.Item3);
         }
-
 #endif
 
         [Test]
@@ -756,7 +750,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             public string Value { get; }
         }
-
 #if !(DNXCORE50 || NET20)
         [Test]
         public void SerializeMetadataType()
@@ -829,7 +822,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(1, c2.FaqId);
             Assert.AreEqual(1, c2.Sections.Count);
         }
-
 #endif
 
         [Test]
@@ -868,7 +860,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(0, l.ChildId);
         }
-
 #endif
 
 #if !(NET20 || NET35)
@@ -898,7 +889,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("1", c2[0]);
             Assert.AreEqual("2", c2[1]);
         }
-
 #endif
 
         [Test]
@@ -931,7 +921,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(DateParseHandling.DateTime, reader.DateParseHandling);
         }
-
 #endif
 
         [Test]
@@ -1611,7 +1600,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(obj2._person2.Spouse, obj2._person1);
             Assert.AreEqual(obj2._parent, obj2);
         }
-
 #endif
 
         [Test]
@@ -1921,7 +1909,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             return jsonNetJson.ToString();
         }
-
 #endif
 
         [Test]
@@ -2092,7 +2079,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 p.Hash["UntypedArray"].ToString()
             );
         }
-
 #endif
 
         [Test]
@@ -2401,7 +2387,6 @@ keyword such as type of business.""
                 result
             );
         }
-
 #endif
 
         [Test]
@@ -3673,7 +3658,6 @@ keyword such as type of business.""
             Assert.AreEqual("id", n.FidOrder[0]);
             Assert.AreEqual("titleId", n.FidOrder[n.FidOrder.Count - 1]);
         }
-
 #if !(NET20 || DNXCORE50)
         [Test]
         public void OptInClassMetadataSerialization()
@@ -3704,7 +3688,6 @@ keyword such as type of business.""
             Assert.AreEqual("James NK", newOptInClass.Name);
             Assert.AreEqual(null, newOptInClass.NotIncluded);
         }
-
 #endif
 
 #if !NET20
@@ -3729,7 +3712,6 @@ keyword such as type of business.""
                 JsonConvert.DeserializeObject<DataContractPrivateMembers>(json);
             Assert.AreEqual("_name: Jeff, _age: 26, Rank: 10, JsonTitle: Dr", cc.ToString());
         }
-
 #endif
 
         [Test]
@@ -3974,7 +3956,6 @@ keyword such as type of business.""
             );
             Assert.AreEqual(null, c.DateTimeField);
         }
-
 #endif
 
         [Test]
@@ -4074,7 +4055,6 @@ To fix this error either change the JSON to a JSON object (e.g. {""name"":""valu
 Path '', line 1, position 1."
             );
         }
-
 #endif
 
         [Test]
@@ -4090,7 +4070,6 @@ Path '', line 1, position 1."
                 @"Unexpected character encountered while parsing value: [. Path '', line 1, position 1."
             );
         }
-
 #if !(NET35 || NET20 || PORTABLE40)
         [Test]
         public void CannotDeserializeArrayIntoDynamic()
@@ -4107,7 +4086,6 @@ To fix this error either change the JSON to a JSON object (e.g. {""name"":""valu
 Path '', line 1, position 1."
             );
         }
-
 #endif
 
         [Test]
@@ -4726,7 +4704,6 @@ Path '', line 1, position 1."
 
             Assert.AreEqual(c.DateTimeOffsetValue, cISO.DateTimeOffsetValue);
         }
-
 #endif
 
         [Test]
@@ -4811,7 +4788,6 @@ Path '', line 1, position 1."
             //    //               TypeNameHandling = TypeNameHandling.Objects
             //  }));
         }
-
 #endif
 
         [Test]
@@ -4830,7 +4806,6 @@ Path '', line 1, position 1."
             Assert.AreEqual(1, newModelStateDictionary.Count);
             Assert.AreEqual("value", newModelStateDictionary["key"]);
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
 #if DEBUG
         [Test]
@@ -4936,7 +4911,6 @@ Path '', line 1, position 1."
                 JsonTypeReflector.SetFullyTrusted(null);
             }
         }
-
 #endif
 
         [Test]
@@ -5093,7 +5067,6 @@ Path '', line 1, position 1."
             Assert.AreEqual(null, o2._nullPersonValue);
             Assert.AreEqual(null, o2._nullableInt);
         }
-
 #endif
 
         [Test]
@@ -5406,7 +5379,6 @@ Path '', line 1, position 1."
                 )
             );
         }
-
 #endif
 
 #if !(NET20 || PORTABLE40)
@@ -5441,7 +5413,6 @@ Path '', line 1, position 1."
 
             Assert.IsNull(newTestObject.Element.Parent);
         }
-
 #endif
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -5467,7 +5438,6 @@ Path '', line 1, position 1."
             );
             Assert.AreEqual(testObject.Document.InnerXml, newTestObject.Document.InnerXml);
         }
-
 #endif
 
         [Test]
@@ -5694,7 +5664,6 @@ Path '', line 1, position 1."
             Assert.IsTrue(d.Contains("2"));
             Assert.IsTrue(d.Contains("III"));
         }
-
 #endif
 
         [Test]
@@ -5759,7 +5728,6 @@ Path '', line 1, position 1."
                 );
             }
         }
-
 #endif
 
         [Test]
@@ -5859,7 +5827,6 @@ Path '', line 1, position 1."
                 d.DateTimeOffsetField
             );
         }
-
 #endif
 
         [Test]
@@ -5874,7 +5841,6 @@ Path '', line 1, position 1."
                 json
             );
         }
-
 #if !(NET35 || NET20 || PORTABLE40)
         [Test]
         public void SerializeExpandoObject()
@@ -5918,7 +5884,6 @@ Path '', line 1, position 1."
             CustomAssert.IsInstanceOfType(typeof(DateTime), o["DateTime"]);
             Assert.AreEqual(expando.Complex.DateTime, o["DateTime"]);
         }
-
 #endif
 
         [Test]
@@ -6050,7 +6015,6 @@ Path '', line 1, position 1."
                 }
             );
         }
-
 #endif
 
         [Test]
@@ -6306,7 +6270,6 @@ Path '', line 1, position 1."
                 xml
             );
         }
-
 #endif
 
         [Test]
@@ -6520,7 +6483,6 @@ Path '', line 1, position 1."
                 json
             );
         }
-
 #endif
 
         public class CustomClass
@@ -6563,7 +6525,6 @@ Path '', line 1, position 1."
             dex = JsonConvert.DeserializeObject<ClassWithException>(sex); // this fails!
             Assert.AreEqual(dex.Exceptions[0].ToString(), dex.Exceptions[0].ToString());
         }
-
 #endif
 
         [Test]
@@ -6800,7 +6761,6 @@ Path '', line 1, position 1."
                 Thread.CurrentThread.CurrentUICulture = initialCulture;
             }
         }
-
 #endif
 
         [Test]
@@ -6917,7 +6877,6 @@ Path '', line 1, position 1."
                 "Error converting value 1 to type 'Newtonsoft.Json.Tests.TestObjects.ConvertibleInt'. Path 'Integer', line 2, position 14."
             );
         }
-
 #endif
 
         [Test]
@@ -7310,7 +7269,6 @@ Path '', line 1, position 1."
 
             Assert.AreEqual(person.Name, roundtrippedPerson.Name);
         }
-
 #endif
 
 #if !(DNXCORE50)
@@ -7394,7 +7352,6 @@ Path '', line 1, position 1."
                 json2
             );
         }
-
 #endif
 
         [Test]
@@ -7664,7 +7621,6 @@ Path '', line 1, position 1."
             Assert.AreEqual(1, dic2[new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero)]);
             Assert.AreEqual(2, dic2[new DateTimeOffset(2013, 12, 12, 12, 12, 12, TimeSpan.Zero)]);
         }
-
 #endif
 
         [Test]
@@ -7804,7 +7760,6 @@ Path '', line 1, position 1."
 
             return serializer.Deserialize(jsonReader, typeof(T)) as T;
         }
-
 #endif
 
         [Test]
@@ -7863,7 +7818,6 @@ Path '', line 1, position 1."
             );
             Assert.AreEqual(@"{}", json);
         }
-
 #endif
 
 #if !(NET20 || NET35)
@@ -7912,7 +7866,6 @@ Path '', line 1, position 1."
                 json
             );
         }
-
 #endif
 
         [Test]
@@ -8011,7 +7964,6 @@ lines.*/
                 "Additional text encountered after finished reading JSON content: {. Path '', line 7, position 0."
             );
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40)
         [Test]
         public void DeserializeException()
@@ -8050,7 +8002,6 @@ lines.*/
 
             Assert.AreEqual("Outter exception...", exception.Message);
         }
-
 #endif
 
         [Test]
@@ -8218,7 +8169,6 @@ This is just junk, though.";
 
             Assert.AreEqual("[1.1,0.0,0.0]", json);
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
@@ -8239,7 +8189,6 @@ This is just junk, though.";
                 nineQuindecillion
             );
         }
-
 #endif
 
         [Test]
@@ -8272,7 +8221,6 @@ This is just junk, though.";
             Assert.AreEqual(1, l[0]);
             Assert.AreEqual(null, l[1]);
         }
-
 #endif
 
         [Test]
@@ -8299,7 +8247,6 @@ This is just junk, though.";
             );
 #endif
         }
-
 #if DEBUG
         [Test]
         public void SerializeCustomTupleWithSerializableAttributeInPartialTrust()
@@ -8322,7 +8269,6 @@ This is just junk, though.";
                 JsonTypeReflector.SetFullyTrusted(true);
             }
         }
-
 #endif
 
 #if !(PORTABLE || NET35 || NET20 || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0
@@ -8345,7 +8291,6 @@ This is just junk, though.";
             );
             Assert.AreEqual(500, obj.Item1);
         }
-
 #endif
 
 #if !NET20
@@ -8514,7 +8459,6 @@ This is just junk, though.";
             Assert.AreEqual(500, tuple2.Item1);
             Assert.AreEqual(20, tuple2.Item2);
         }
-
 #endif
 
         [Test]
@@ -8552,7 +8496,6 @@ This is just junk, though.";
                 "Cannot deserialize readonly or fixed size list: Newtonsoft.Json.Tests.TestObjects.NoConstructorReadOnlyCollection`1[System.Int32]. Path '', line 1, position 1."
             );
         }
-
 #if !(NET40 || NET35 || NET20 || PORTABLE40)
         [Test]
         public void NoConstructorReadOnlyDictionaryTest()
@@ -8565,7 +8508,6 @@ This is just junk, though.";
                 "Cannot deserialize readonly or fixed size dictionary: Newtonsoft.Json.Tests.TestObjects.NoConstructorReadOnlyDictionary`2[System.Int32,System.Int32]. Path '1', line 1, position 5."
             );
         }
-
 #endif
 
 #if !(PORTABLE || NET35 || NET20 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -8586,7 +8528,6 @@ This is just junk, though.";
                 "Error converting value 999999999999999999999999999999999999999999999999 to type 'System.Int64'. Path '[0]', line 1, position 49."
             );
         }
-
 #endif
 
         [Test]
@@ -8670,7 +8611,6 @@ This is just junk, though.";
 
             Assert.AreEqual(expected, actual);
         }
-
 #endif
 
 #if !NET20
@@ -8693,7 +8633,6 @@ This is just junk, though.";
             Assert.IsNull(c2.MyNullableDateTimeOffset);
             Assert.IsNull(c2.MyNullableDecimal);
         }
-
 #endif
 
 #if !(NET20 || NET35)
@@ -8712,7 +8651,6 @@ This is just junk, though.";
                 Assert.IsTrue(s2.Contains(s));
             }
         }
-
 #endif
 
         [Test]
@@ -8754,7 +8692,6 @@ This is just junk, though.";
                 json
             );
         }
-
 #endif
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -8774,7 +8711,6 @@ This is just junk, though.";
                 json
             );
         }
-
 #endif
 
         [Test]
@@ -8890,7 +8826,6 @@ This is just junk, though.";
                 json
             );
         }
-
 #if !(PORTABLE || PORTABLE40 || DNXCORE50)
         [Test]
         public void SerializeDictionaryWithStructKey()
@@ -8906,7 +8841,6 @@ This is just junk, though.";
             Assert.AreEqual(new Size(1, 2), d.Keys.First());
             Assert.AreEqual(new Size(3, 4), d.Values.First());
         }
-
 #endif
 
 #if !(PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD1_0 || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -8929,7 +8863,6 @@ This is just junk, though.";
             Assert.AreEqual(new TypeConverterSize(1, 2), d.Keys.First());
             Assert.AreEqual(new TypeConverterSize(3, 4), d.Values.First());
         }
-
 #endif
 
         [Test]
@@ -9079,7 +9012,6 @@ This is just junk, though.";
             );
             Assert.AreEqual("ConsoleWriter", restoredDict2.First().Value.PrintTest());
         }
-
 #endif
 
         [Test]
@@ -9112,7 +9044,6 @@ This is just junk, though.";
                 s
             );
         }
-
 #endif
 
         [Test]
@@ -9392,7 +9323,6 @@ This is just junk, though.";
 
             JsonConvert.DeserializeObject<ConstantTestClass>(json);
         }
-
 #endif
 
         [Test]
@@ -9475,7 +9405,6 @@ This is just junk, though.";
 
             Assert.AreEqual(ulong.MaxValue, result.Value);
         }
-
 #endif
 
 #if !(DNXCORE50) || NETSTANDARD2_0
@@ -9536,7 +9465,6 @@ This is just junk, though.";
                 "Cannot populate list type System.Net.Mime.HeaderCollection. Path 'Headers', line 26, position 14."
             );
         }
-
 #endif
 
         [Test]

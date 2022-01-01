@@ -105,7 +105,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Unexpected end when reading token. Path ''."
             );
         }
-
 #endif
 
         [Test]
@@ -146,7 +145,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Unexpected end when reading token. Path ''."
             );
         }
-
 #endif
 
         [Test]
@@ -189,7 +187,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 "Unexpected end when reading token. Path ''."
             );
         }
-
 #endif
 
         [Test]

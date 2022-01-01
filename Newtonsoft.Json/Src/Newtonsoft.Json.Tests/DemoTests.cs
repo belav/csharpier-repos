@@ -635,7 +635,6 @@ namespace Newtonsoft.Json.Tests
                 json
             );
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0
         [Test]
         public void ArrayPooling()
@@ -652,7 +651,6 @@ namespace Newtonsoft.Json.Tests
 
             Assert.AreEqual(4, value.Count);
         }
-
 #endif
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0
@@ -699,7 +697,6 @@ namespace Newtonsoft.Json.Tests
                 json
             );
         }
-
 #endif
 
         [Test]

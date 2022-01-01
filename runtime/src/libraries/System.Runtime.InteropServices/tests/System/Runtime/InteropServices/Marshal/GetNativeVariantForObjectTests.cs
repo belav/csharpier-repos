@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices.Tests.Common;
 using Xunit;
+
 #pragma warning disable 618
 
 namespace System.Runtime.InteropServices.Tests

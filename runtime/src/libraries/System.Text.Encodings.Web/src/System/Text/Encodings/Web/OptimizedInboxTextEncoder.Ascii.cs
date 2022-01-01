@@ -20,12 +20,10 @@ namespace System.Text.Encodings.Web
         {
             [FieldOffset(0)] // ensure same offset with AsVector field
             private fixed byte AsBytes[16];
-
 #if NETCOREAPP
 #if !TARGET_BROWSER
             [FieldOffset(0)] // ensure same offset with AsBytes field
             internal Vector128<byte> AsVector;
-
 #else
             // This member shouldn't be accessed from browser-based code paths.
             // All call sites should be trimmed away, which will also trim this member

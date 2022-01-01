@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Tests;
 using Xunit;
+
 [module: Attr(77, name = "AttrSimple")]
 [module: Int32Attr(77, name = "Int32AttrSimple")]
 [module: Int64Attr(77, name = "Int64AttrSimple")]

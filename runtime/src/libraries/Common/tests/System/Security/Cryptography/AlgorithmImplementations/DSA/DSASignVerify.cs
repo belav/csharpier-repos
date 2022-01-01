@@ -189,7 +189,6 @@ namespace System.Security.Cryptography.Dsa.Tests
             }
         }
     }
-
 #endif
     [SkipOnPlatform(
         TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,

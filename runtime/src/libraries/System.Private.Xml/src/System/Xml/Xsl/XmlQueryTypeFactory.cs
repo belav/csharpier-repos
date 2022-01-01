@@ -137,7 +137,6 @@ namespace System.Xml.Xsl
                 left.Cardinality + right.Cardinality
             );
         }
-
 #if NEVER
         /// <summary>
         /// Construct the sequence of several XmlQueryTypes
@@ -153,7 +152,6 @@ namespace System.Xml.Xsl
 
             return PrimeProduct(Choice(types), card);
         }
-
 #endif
 
         /// <summary>

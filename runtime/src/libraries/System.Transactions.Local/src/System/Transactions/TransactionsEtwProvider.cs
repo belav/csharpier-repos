@@ -1170,7 +1170,6 @@ namespace System.Transactions
                 );
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

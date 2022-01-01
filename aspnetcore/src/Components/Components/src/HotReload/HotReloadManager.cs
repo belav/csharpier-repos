@@ -3,6 +3,7 @@
 
 using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Components.HotReload;
+
 [assembly: MetadataUpdateHandler(typeof(HotReloadManager))]
 
 

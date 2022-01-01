@@ -3,6 +3,7 @@
 
 using Microsoft.Win32.SafeHandles;
 using System;
+
 #if REGISTRY_ASSEMBLY
 namespace Microsoft.Win32.SafeHandles
 #else

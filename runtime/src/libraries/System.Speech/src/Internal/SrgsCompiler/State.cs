@@ -247,7 +247,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
-
 #endif
 
         internal void CheckLeftRecursion(out bool fReachedEndState)
@@ -500,7 +499,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             return sb.ToString();
         }
-
 #endif
 
         #endregion

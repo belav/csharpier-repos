@@ -82,10 +82,8 @@ namespace System.Net.Http
 #if DEBUG
         // In debug builds, start with a very small buffer to induce buffer growing logic.
         private const int InitialConnectionBufferSize = 4;
-
 #else
         private const int InitialConnectionBufferSize = 4096;
-
 #endif
         // The default initial window size for streams and connections according to the RFC:
         // https://datatracker.ietf.org/doc/html/rfc7540#section-5.2.1

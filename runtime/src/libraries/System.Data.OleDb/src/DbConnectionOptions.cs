@@ -1093,7 +1093,6 @@ namespace System.Data.Common
                 Debug.Assert(false, "ParseInternal code threw exception vs regex mismatch");
             }
         }
-
 #endif
         private static NameValuePair? ParseInternal(
             Hashtable parsetable,

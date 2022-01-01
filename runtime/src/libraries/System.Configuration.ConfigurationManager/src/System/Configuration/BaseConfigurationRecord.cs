@@ -4654,7 +4654,6 @@ namespace System.Configuration
                 _streamInfos ?? (_streamInfos = new HybridDictionary(true));
 
             internal bool HasStreamInfos => _streamInfos != null;
-
 #if DEBUG
             internal string[] Keys
             {
@@ -4665,7 +4664,6 @@ namespace System.Configuration
                     return keys;
                 }
             }
-
 #endif
 
             internal void ClearStreamInfos()

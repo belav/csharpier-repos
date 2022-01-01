@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Reflection;
+
 [assembly: AssemblyVersionAttribute("1.0.0.0")]
 
 

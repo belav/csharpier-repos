@@ -972,7 +972,6 @@ namespace System.Diagnostics
                 && ('0' <= id[1] && id[1] <= '9' || 'a' <= id[1] && id[1] <= 'f')
                 && (id[0] != 'f' || id[1] != 'f');
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -1313,7 +1312,6 @@ namespace System.Diagnostics
             string overflowSuffix = ((int)GetRandomNumber()).ToString("x8");
             return parentId.Substring(0, trimPosition) + overflowSuffix + '#';
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -1334,7 +1332,6 @@ namespace System.Diagnostics
 
             return canSet;
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -1359,7 +1356,6 @@ namespace System.Diagnostics
 
             return _traceId != null;
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -1778,7 +1774,6 @@ namespace System.Diagnostics
         Hierarchical = 1, //|XXXX.XX.X_X ... see https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/ActivityUserGuide.md#id-format
         W3C = 2, // 00-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX-XX see https://w3c.github.io/trace-context/
     };
-
     /// <summary>
     /// A TraceId is the format the W3C standard requires for its ID for the entire trace.
     /// It represents 16 binary bytes of information, typically displayed as 32 characters
@@ -1973,7 +1968,6 @@ namespace System.Diagnostics
             return isNonZero;
         }
     }
-
     /// <summary>
     /// A SpanId is the format the W3C standard requires for its ID for a single span in a trace.
     /// It represents 8 binary bytes of information, typically displayed as 16 characters

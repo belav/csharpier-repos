@@ -54,7 +54,6 @@ namespace Roslyn.Utilities
                 $"Instance of CancellationSeries not disposed before being finalized{Environment.NewLine}Stack at construction:{Environment.NewLine}{_ctorStack}"
             );
         }
-
 #endif
 
         /// <summary>

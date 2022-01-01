@@ -181,7 +181,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("Child text!", n.DynamicChildObject.Text);
             Assert.AreEqual(int.MinValue, n.DynamicChildObject.Integer);
         }
-
 #endif
 
         [Test]

@@ -319,7 +319,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 Debug.Assert((int)GetPropInfo((PREDEFPROP)i).property == i);
             }
         }
-
 #endif
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

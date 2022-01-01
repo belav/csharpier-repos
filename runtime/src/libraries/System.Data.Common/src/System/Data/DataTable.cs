@@ -7878,7 +7878,6 @@ namespace System.Data
             // do not allocate TLS data in RETAIL bits!
             [ThreadStatic]
             internal static List<DataTable>? t_usedTables;
-
 #endif //DEBUG
 
             private DataTable _targetTable;

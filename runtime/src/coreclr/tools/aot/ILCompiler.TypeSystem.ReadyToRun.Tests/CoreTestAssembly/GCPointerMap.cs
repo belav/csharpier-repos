@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 #pragma warning disable 169 // Field 'blah' is never used
 
 namespace GCPointerMap

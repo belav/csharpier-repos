@@ -19,7 +19,6 @@ namespace Microsoft.CodeAnalysis.Storage
     {
 #if !DOTNET_BUILD_FROM_SOURCE
         private readonly SQLiteConnectionPoolService _connectionPoolService;
-
 #endif
 
         [ImportingConstructor]

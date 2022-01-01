@@ -35,7 +35,6 @@ namespace Microsoft.CodeAnalysis.Remote
 
 #pragma warning disable IDE0052 // Remove unread private members
         private PerformanceReporter? _performanceReporter;
-
 #pragma warning restore
 #endif
         public RemoteProcessTelemetryService(ServiceConstructionArguments arguments)

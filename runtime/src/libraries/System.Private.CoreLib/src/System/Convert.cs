@@ -214,7 +214,6 @@ namespace System
                 "[Convert.cctor]ConvertTypes[(int)TypeCode.Int32]==typeof(int)"
             );
         }
-
 #endif
 
         public static readonly object DBNull = System.DBNull.Value;

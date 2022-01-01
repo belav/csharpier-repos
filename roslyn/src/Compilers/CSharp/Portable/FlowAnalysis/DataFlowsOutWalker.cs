@@ -88,7 +88,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
         // we'd like to ensure that only variables get returned in DataFlowsOut that were assigned to inside the region.
         private readonly HashSet<Symbol> _assignedInside = new HashSet<Symbol>();
-
 #endif
 
         private HashSet<Symbol> Analyze(ref bool badRegion)
@@ -234,7 +233,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return null;
         }
-
 #endif
 
         protected override void AssignImpl(

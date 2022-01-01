@@ -74,7 +74,6 @@ internal class PipeWriterStream : Stream
     {
         return WriteCoreAsync(source, cancellationToken);
     }
-
 #endif
 
     private ValueTask WriteCoreAsync(

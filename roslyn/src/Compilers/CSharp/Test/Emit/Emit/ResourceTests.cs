@@ -982,7 +982,6 @@ class C
                 Assert.True(result6.Success);
             }
         }
-
 #endif
         [Fact]
         public void AddManagedLinkedResourceFail()

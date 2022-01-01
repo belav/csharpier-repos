@@ -16,10 +16,8 @@ namespace Benchstone.MDBenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 7000000;
-
 #endif
 
         enum Enumeration

@@ -86,7 +86,6 @@ namespace System.Net.Http.Handlers
             Assert.Equal(expectedLength, mockProgressEventHandler.EventArgs.TotalBytes);
             Assert.Equal(100, mockProgressEventHandler.EventArgs.ProgressPercentage);
         }
-
 #if !NETFX_CORE // BeginX and EndX not supported on Streams in portable libraries
         [Fact]
         public async Task BeginEndRead_ReportsBytesRead()
@@ -135,7 +134,6 @@ namespace System.Net.Http.Handlers
             Assert.Equal(expectedLength, mockProgressEventHandler.EventArgs.TotalBytes);
             Assert.Equal(100, mockProgressEventHandler.EventArgs.ProgressPercentage);
         }
-
 #endif
 
         [Fact]
@@ -261,7 +259,6 @@ namespace System.Net.Http.Handlers
             Assert.Equal(expectedLength, mockProgressEventHandler.EventArgs.TotalBytes);
             Assert.Equal(100, mockProgressEventHandler.EventArgs.ProgressPercentage);
         }
-
 #if !NETFX_CORE // BeginX and EndX not supported on Streams in portable libraries
         [Fact]
         public void BeginEndWrite_ReportsBytesWritten()
@@ -323,7 +320,6 @@ namespace System.Net.Http.Handlers
                 Assert.Equal(100, mockProgressEventHandler.EventArgs.ProgressPercentage);
             }
         }
-
 #endif
 
         [Fact]

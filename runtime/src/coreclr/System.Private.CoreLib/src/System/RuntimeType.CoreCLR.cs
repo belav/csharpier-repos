@@ -4167,7 +4167,6 @@ namespace System
 
             return false;
         }
-
 #if FEATURE_TYPEEQUIVALENCE
         // Reflexive, symmetric, transitive.
         public override bool IsEquivalentTo([NotNullWhen(true)] Type? other)
@@ -4184,7 +4183,6 @@ namespace System
 
             return RuntimeTypeHandle.IsEquivalentTo(this, otherRtType);
         }
-
 #endif // FEATURE_TYPEEQUIVALENCE
 
         #endregion
@@ -4808,7 +4806,6 @@ namespace System
             int culture,
             string[]? namedParameters
         );
-
 #endif // FEATURE_COMINTEROP
 
         #endregion

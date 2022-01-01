@@ -479,7 +479,6 @@ class C { void c() { } }
                 SyntaxKind.SemicolonToken
             );
         }
-
         #region "Regression"
 
 #if false
@@ -549,7 +548,6 @@ class C { void c() { } }
             var fullText = newTree.GetCompilationUnitRoot().ToFullString();
             Assert.Equal("//", fullText);
         }
-
 #if false
         [WorkItem(896260, "Personal")]
         [Fact]//(Skip = "Bug")]

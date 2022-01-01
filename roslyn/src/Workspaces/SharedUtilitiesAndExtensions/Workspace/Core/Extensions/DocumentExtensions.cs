@@ -69,7 +69,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
-
 #if !CODE_STYLE
         public static SyntaxTree GetRequiredSyntaxTreeSynchronously(
             this Document document,
@@ -85,7 +84,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
-
 #endif
 
         public static async ValueTask<SyntaxNode> GetRequiredSyntaxRootAsync(
@@ -105,7 +103,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
-
 #if !CODE_STYLE
         public static SyntaxNode GetRequiredSyntaxRootSynchronously(
             this Document document,
@@ -121,7 +118,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
-
 #endif
 
         public static bool IsOpen(this TextDocument document)
@@ -220,7 +216,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 cancellationToken
             );
         }
-
 #if DEBUG
         public static async Task<bool> HasAnyErrorsAsync(
             this Document document,
@@ -276,7 +271,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 Debug.Assert(false, message + ". " + diagnostics);
             }
         }
-
 #endif
 
 #if !CODE_STYLE
@@ -290,7 +284,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return generatedCodeRecognitionService?.IsGeneratedCode(document, cancellationToken)
                 == true;
         }
-
 #endif
 
         public static async Task<bool> IsGeneratedCodeAsync(

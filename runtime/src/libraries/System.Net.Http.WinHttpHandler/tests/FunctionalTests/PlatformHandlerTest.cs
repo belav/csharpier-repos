@@ -100,7 +100,6 @@ namespace System.Net.Http.Functional.Tests
     {
         public PlatformHandler_HttpClientEKUTest(ITestOutputHelper output) : base(output) { }
     }
-
 #if NETCOREAPP
     public sealed class PlatformHandler_HttpClientHandler_Decompression_Tests
         : HttpClientHandler_Decompression_Test
@@ -116,7 +115,6 @@ namespace System.Net.Http.Functional.Tests
             ITestOutputHelper output
         ) : base(output) { }
     }
-
 #endif
 
     public sealed class PlatformHandler_HttpClientHandler_ClientCertificates_Test
@@ -227,7 +225,6 @@ namespace System.Net.Http.Functional.Tests
         public PlatformHandler_HttpClientHandler_Authentication_Test(ITestOutputHelper output)
             : base(output) { }
     }
-
 #if NETCOREAPP
 #if !WINHTTPHANDLER_TEST // [ActiveIssue("https://github.com/dotnet/runtime/issues/33930")]
     [ConditionalClass(
@@ -240,7 +237,6 @@ namespace System.Net.Http.Functional.Tests
 
         public PlatformHandlerTest_Cookies_Http2(ITestOutputHelper output) : base(output) { }
     }
-
 #endif
 
     public sealed class PlatformHandler_HttpClientHandler_Asynchrony_Http2_Test
@@ -443,7 +439,6 @@ namespace System.Net.Http.Functional.Tests
         public PlatformHandler_HttpClientHandler_Authentication_Http2_Test(ITestOutputHelper output)
             : base(output) { }
     }
-
 #endif
     public sealed class PlatformHandler_ResponseStream_Http2_Test : ResponseStreamTest
     {

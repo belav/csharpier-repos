@@ -79,10 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 internal sealed class RelationalDispatch : ValueDispatchNode
                 {
                     private int _height;
-
 #if DEBUG
                     private int _weight;
-
 #endif
 
                     protected override int Height => _height;

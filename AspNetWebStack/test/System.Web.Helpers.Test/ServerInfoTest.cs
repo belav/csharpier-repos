@@ -69,7 +69,6 @@ namespace System.Web.Helpers.Test
                 Assert.Equal(serverVariables[item.Key], item.Value);
             }
         }
-
 #if false // Avoid an NRE when accessing HttpRuntime.BinDirectory without initializing the runtime.
         [Fact]
         public void HttpRuntimeInfoReturnsExpectedInfo()
@@ -129,7 +128,6 @@ namespace System.Web.Helpers.Test
                 action
             );
         }
-
         //[Fact]
         //public void SqlServerInfoReturnsExpectedInfo() {
         //    var sqlInfo = ServerInfo.SqlServerInfo();

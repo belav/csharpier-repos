@@ -26,7 +26,6 @@ namespace Microsoft.Win32.SafeHandles
                 );
             }
         }
-
 #endif
 
         internal static readonly SafeX509Handle InvalidHandle = new SafeX509Handle();

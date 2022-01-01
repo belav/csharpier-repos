@@ -78,7 +78,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(null, v.Value);
             Assert.IsNull((string)o.title);
         }
-
 #endif
 
         [Test]
@@ -901,7 +900,6 @@ Parameter name: arrayIndex",
             Assert.AreEqual(4, changingCount);
             Assert.AreEqual(4, changedCount);
         }
-
 #endif
 
         [Test]
@@ -1619,7 +1617,6 @@ Parameter name: arrayIndex",
             Assert.AreEqual(index, 0);
             Assert.AreEqual(2, (int)o["Test1"]);
         }
-
 #endif
 
 #if !(NET20 || NET35 || PORTABLE40) || NETSTANDARD2_0
@@ -1660,7 +1657,6 @@ Parameter name: arrayIndex",
             Assert.AreEqual(index, 0);
             Assert.AreEqual(2, (int)o["Test1"]);
         }
-
 #endif
 
         [Test]
@@ -1837,7 +1833,6 @@ Parameter name: arrayIndex",
                 output
             );
         }
-
 #endif
 
         [Test]
@@ -1993,7 +1988,6 @@ Parameter name: arrayIndex",
             Assert.AreEqual(false, prop4.CanResetValue(o));
             Assert.AreEqual(false, prop4.ShouldSerializeValue(o));
         }
-
 #endif
 
         [Test]
@@ -2330,7 +2324,6 @@ Parameter name: arrayIndex",
             object value = pd.GetValue(owner);
             Assert.AreEqual(1, (int)(JToken)value);
         }
-
 #endif
 
         [Test]

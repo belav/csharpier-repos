@@ -96,7 +96,6 @@ namespace Newtonsoft.Json.Tests
 #endif
         }
     }
-
 #if DNXCORE50
     public class TestFixtureAttribute : Attribute
     {
@@ -191,7 +190,6 @@ namespace Newtonsoft.Json.Tests
             XAssert.Equal(expected, actual);
         }
     }
-
 #endif
 
     [TestFixture]
@@ -207,7 +205,6 @@ namespace Newtonsoft.Json.Tests
             var data = ms.ToArray();
             return Encoding.UTF8.GetString(data, 0, data.Length);
         }
-
 #endif
 
         public static string ResolvePath(string path)

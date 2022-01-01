@@ -61,10 +61,8 @@ namespace System.Collections.Concurrent.Tests
         private const double ConcurrencyTestSeconds =
 #if StressTest
             8.0;
-
 #else
             1.0;
-
 #endif
 
         protected virtual string CopyToNoLengthParamName => "destinationArray";

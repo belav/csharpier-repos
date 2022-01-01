@@ -25,7 +25,6 @@ namespace System.Threading.Tasks
 #if !ES_BUILD_STANDALONE
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";
-
 #endif
         /// Used to determine if tasks should generate Activity IDs for themselves
         internal bool TasksSetActivityIds; // This keyword is set

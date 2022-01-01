@@ -471,18 +471,14 @@ namespace System.Runtime.CompilerServices
 
 #if TARGET_64BIT
         private const int ElementTypeOffset = 0x30 + DebugClassNamePtr;
-
 #else
         private const int ElementTypeOffset = 0x20 + DebugClassNamePtr;
-
 #endif
 
 #if TARGET_64BIT
         private const int InterfaceMapOffset = 0x38 + DebugClassNamePtr;
-
 #else
         private const int InterfaceMapOffset = 0x24 + DebugClassNamePtr;
-
 #endif
 
         public bool HasComponentSize

@@ -66,7 +66,6 @@ namespace Newtonsoft.Json.Tests.Converters
             object[] value = (object[])dt.Rows[0]["col1"];
             Assert.AreEqual(0, value.Length);
         }
-
 #if !(NET20 || NET35)
         [Test]
         public void SerializeNullValues()
@@ -169,7 +168,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 sw.ToString()
             );
         }
-
 #endif
 
         [Test]
@@ -249,7 +247,6 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(1L, ((long[])dr2["ArrayCol"])[0]);
             Assert.AreEqual(new DateTime(2000, 12, 29, 0, 0, 0, DateTimeKind.Utc), dr2["DateCol"]);
         }
-
 #if !NET20
         [Test]
         public void DeserializeParseHandling()
@@ -299,7 +296,6 @@ namespace Newtonsoft.Json.Tests.Converters
             );
             Assert.AreEqual(99.9999999999999999999m, dr2["FloatCol"]);
         }
-
 #endif
 
         [Test]
@@ -687,7 +683,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             StringAssert.AreEqual(@"null", json);
         }
-
 #if !(NET20 || PORTABLE || PORTABLE40)
         [Test]
         public void DeserializedTypedDataTableWithConverter()
@@ -766,7 +761,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 }
             }
         }
-
 #endif
 
         [Test]

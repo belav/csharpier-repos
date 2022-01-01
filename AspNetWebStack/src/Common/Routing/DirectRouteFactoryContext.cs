@@ -30,19 +30,15 @@ namespace System.Web.Mvc.Routing
     public class DirectRouteFactoryContext
     {
         private readonly string _actionName;
-
 #if !ASPNETWEBAPI
         private readonly string _controllerName;
-
 #endif
 
 #if ASPNETWEBAPI
         private readonly string _prefix;
-
 #else
         private readonly string _areaPrefix;
         private readonly string _controllerPrefix;
-
 #endif
 
         private readonly IReadOnlyCollection<TActionDescriptor> _actions;
@@ -124,7 +120,6 @@ namespace System.Web.Mvc.Routing
         {
             get { return _prefix; }
         }
-
 #else
         /// <summary>Gets the route prefix, if any, defined by the area.</summary>
         public string AreaPrefix
@@ -137,7 +132,6 @@ namespace System.Web.Mvc.Routing
         {
             get { return _controllerPrefix; }
         }
-
 #endif
 
         /// <summary>Gets the action descriptors to which to create a route.</summary>
@@ -252,7 +246,6 @@ namespace System.Web.Mvc.Routing
                 return routePrefix + '/' + routeTemplate;
             }
         }
-
 #else
         internal static string BuildRouteTemplate(string areaPrefix, string prefix, string template)
         {
@@ -294,7 +287,6 @@ namespace System.Web.Mvc.Routing
 
             return templateBuilder.ToString();
         }
-
 #endif
 
         private void ValidateTemplate(string template)

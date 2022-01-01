@@ -25,11 +25,9 @@ namespace System.Net.Http
         private HttpMessageHandler Handler
 #if TARGET_BROWSER
         { get; }
-
 #else
             =>
             _underlyingHandler;
-
 #endif
 
         private ClientCertificateOption _clientCertificateOptions;

@@ -58,7 +58,6 @@ namespace System.Net.Http.Formatting
         {
             get { return MediaTypeConstants.ApplicationBsonMediaType; }
         }
-
 #if !NETFX_CORE // MaxDepth and DBNull not supported in portable library; no need to override there
         /// <inheritdoc />
         public sealed override int MaxDepth
@@ -104,7 +103,6 @@ namespace System.Net.Http.Formatting
                 return base.ReadFromStreamAsync(type, readStream, content, formatterLogger);
             }
         }
-
 #endif
 
         /// <inheritdoc />

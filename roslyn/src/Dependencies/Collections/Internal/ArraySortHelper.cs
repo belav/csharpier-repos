@@ -1453,7 +1453,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 04,
                 31,
             };
-
 #endif
 
         public static int MoveNansToFront<TKey, TValue>(

@@ -25,10 +25,8 @@ namespace System.IO.Pipes
         private NativeOverlapped* _overlapped;
         private MemoryHandle _pinnedMemory;
         private int _state;
-
 #if DEBUG
         private bool _cancellationHasBeenRegistered;
-
 #endif
 
         // Using RunContinuationsAsynchronously for compat reasons (old API used ThreadPool.QueueUserWorkItem for continuations)

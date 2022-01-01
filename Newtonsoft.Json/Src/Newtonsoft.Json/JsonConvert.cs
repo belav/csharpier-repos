@@ -139,7 +139,6 @@ namespace Newtonsoft.Json
                 return writer.ToString();
             }
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Converts the <see cref="DateTimeOffset"/> to its JSON string representation.
@@ -173,7 +172,6 @@ namespace Newtonsoft.Json
                 return writer.ToString();
             }
         }
-
 #endif
 
         /// <summary>
@@ -257,13 +255,11 @@ namespace Newtonsoft.Json
         {
             return value.ToString(null, CultureInfo.InvariantCulture);
         }
-
 #if HAVE_BIG_INTEGER
         private static string ToStringInternal(BigInteger value)
         {
             return value.ToString(null, CultureInfo.InvariantCulture);
         }
-
 #endif
 
         /// <summary>

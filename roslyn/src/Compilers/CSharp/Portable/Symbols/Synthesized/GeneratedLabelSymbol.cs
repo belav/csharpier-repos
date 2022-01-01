@@ -25,12 +25,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return _name; }
         }
-
 #if DEBUG
         internal string NameNoSequence { get; }
 
         private static int s_sequence = 1;
-
 #endif
         private static string LabelName(string name)
         {

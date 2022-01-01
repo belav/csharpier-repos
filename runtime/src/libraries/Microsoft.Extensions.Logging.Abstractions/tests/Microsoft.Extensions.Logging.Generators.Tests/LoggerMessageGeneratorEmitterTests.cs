@@ -189,7 +189,6 @@ internal static partial class TestWithDefaultValues
                 testSourceCode
             );
         }
-
 #endif
 
         private async Task VerifyAgainstBaselineUsingFile(string filename, string testSourceCode)

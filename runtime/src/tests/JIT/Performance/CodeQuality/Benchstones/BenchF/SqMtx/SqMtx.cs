@@ -11,10 +11,8 @@ namespace Benchstone.BenchF
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 4000;
-
 #endif
 
         private const int MatrixSize = 40;

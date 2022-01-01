@@ -5,6 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 #pragma warning disable CS0649
 
 // This test is to validate that SKIP_ALLOC_FRAME() procedure used by UnwindEspFrameProlog() in eetwain.cpp

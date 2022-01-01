@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
+
 #nullable disable
 
 namespace Newtonsoft.Json.Utilities.LinqBridge

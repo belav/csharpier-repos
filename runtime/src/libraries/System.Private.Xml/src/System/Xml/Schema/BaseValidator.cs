@@ -9,6 +9,7 @@ namespace System.Xml.Schema
     using System.Text;
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
+
 #pragma warning disable 618
 
     internal class BaseValidator

@@ -19,7 +19,6 @@ namespace System.Net.Http
         private sealed class HttpResponseTrailers : HttpHeaders
         {
         }
-
 #endif
         private static Lazy<bool> s_trailersSupported = new Lazy<bool>(GetTrailersSupported);
         public static bool OsSupportsTrailers => s_trailersSupported.Value;

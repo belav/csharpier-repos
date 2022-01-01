@@ -12,6 +12,7 @@ using System.Speech.Internal;
 using System.Speech.Internal.SrgsCompiler;
 using System.Speech.Recognition.SrgsGrammar;
 using System.Text;
+
 #pragma warning disable 56500 // Remove all the catch all statements warnings used by the interop layer
 
 namespace System.Speech.Recognition
@@ -1336,10 +1337,8 @@ namespace System.Speech.Recognition
         private string _grammarName = string.Empty;
         private Collection<Grammar> _ruleRefs;
         private static ResourceLoader s_resourceLoader = new();
-
 #if DEBUG
         private bool _loaded;
-
 #endif
 
         #endregion

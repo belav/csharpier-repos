@@ -17,6 +17,7 @@ namespace Castle.Core.Logging
     using System;
     using System.IO;
     using System.Text;
+
     /// <summary>
 	///	The Stream Logger class.  This class can stream log information
 	///	to any stream, it is suitable for storing a log file to disk,

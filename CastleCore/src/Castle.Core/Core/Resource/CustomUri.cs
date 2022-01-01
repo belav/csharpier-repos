@@ -16,6 +16,7 @@ namespace Castle.Core.Resource
 {
     using System;
     using System.Text;
+
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

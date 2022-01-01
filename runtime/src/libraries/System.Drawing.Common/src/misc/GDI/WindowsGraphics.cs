@@ -27,7 +27,6 @@ namespace System.Drawing.Internal
         private Graphics? _graphics; // cached when initialized FromGraphics to be able to call g.ReleaseHdc from Dispose.
 #if GDI_FINALIZATION_WATCH
         private string AllocationSite = DbgUtil.StackTrace;
-
 #endif
 
         public WindowsGraphics(DeviceContext dc)

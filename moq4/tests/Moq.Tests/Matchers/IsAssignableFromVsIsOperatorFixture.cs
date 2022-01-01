@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 
 using Xunit;
+
 #pragma warning disable CS0183, CS0184
 
 namespace Moq.Tests.Matchers

@@ -124,7 +124,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Logger = logger;
         }
     }
-
 #if !NET20
     [DataContract]
     public class User
@@ -147,7 +146,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         [DataMember(Name = "company_name")]
         public string CompanyName { get; set; }
     }
-
 #endif
 
     public class AutofacContractResolver : DefaultContractResolver

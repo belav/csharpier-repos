@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+
 #if MS_IO_REDIST
 namespace Microsoft.IO.Enumeration
 #else

@@ -260,7 +260,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 return c;
             }
         }
-
 #endif
         #endregion
 
@@ -360,7 +359,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
-
 #endif
         /// <summary>
         /// Description:
@@ -1013,7 +1011,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             private Graph _states;
         }
-
 #endif
 
         #endregion

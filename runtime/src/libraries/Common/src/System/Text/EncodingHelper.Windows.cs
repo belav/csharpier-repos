@@ -13,7 +13,6 @@ namespace System.Text
 
 #if DEBUG
         static EncodingHelper() => Debug.Assert(Utf8CodePage == Encoding.UTF8.CodePage);
-
 #endif
 
         // Since only a minimum set of encodings are available by default,

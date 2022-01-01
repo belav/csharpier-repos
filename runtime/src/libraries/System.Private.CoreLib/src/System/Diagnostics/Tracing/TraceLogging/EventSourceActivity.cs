@@ -52,7 +52,6 @@ namespace System.Diagnostics.Tracing
         /// event source was disabled when the activity was initialized.
         /// </summary>
         public Guid Id => this.activityId;
-
 #if false // don't expose RelatedActivityId unless there is a need.
         /// <summary>
         /// Gets the unique identifier of this activity's related (parent)

@@ -29,7 +29,6 @@ namespace Microsoft.CodeAnalysis
 
             return GetOption(analyzerConfigOptions, option);
         }
-
 #else
         public static T GetOption<T>(
             this AnalyzerConfigOptions analyzerConfigOptions,
@@ -40,7 +39,6 @@ namespace Microsoft.CodeAnalysis
             this AnalyzerConfigOptions analyzerConfigOptions,
             Options.PerLanguageOption<T> option
         ) => GetOptionWithAssertOnFailure<T>(analyzerConfigOptions, option);
-
 #endif
 
         public static T GetOption<T>(

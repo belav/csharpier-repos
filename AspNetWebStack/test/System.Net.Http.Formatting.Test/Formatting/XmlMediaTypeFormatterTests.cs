@@ -99,7 +99,6 @@ namespace System.Net.Http.Formatting
             Assert.NotNull(mediaType);
             Assert.Equal("application/xml", mediaType.MediaType);
         }
-
 #if !NETFX_CORE // We don't support MaxDepth in the portable library
         [Fact]
         public void MaxDepthReturnsCorrectValue()
@@ -134,7 +133,6 @@ namespace System.Net.Http.Formatting
                 () => formatter.ReadFromStreamAsync(typeof(SampleType), stream, null, null)
             );
         }
-
 #endif
 
         [Fact]
@@ -733,7 +731,6 @@ namespace System.Net.Http.Formatting
             // Lower levels convert DBNull.Value to empty string on read
             Assert.Equal(String.Empty, readObj);
         }
-
 #endif
 
         public override Task ReadFromStreamAsync_UsesCorrectCharacterEncoding(
@@ -1007,7 +1004,6 @@ namespace System.Net.Http.Formatting
 
             Assert.False(formatter.CanWriteType(typeof(InvalidDataContract)));
         }
-
 #else
         [Fact]
         public void CanReadType_InPortableLibrary_ReturnsFalse_ForInvalidDataContracts()
@@ -1026,7 +1022,6 @@ namespace System.Net.Http.Formatting
             // The formatter is unable to positively identify non readable types, so true is always returned
             Assert.True(formatter.CanWriteType(typeof(InvalidDataContract)));
         }
-
 #endif
 
         public class InvalidDataContract

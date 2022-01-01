@@ -11,7 +11,6 @@ namespace System.Xml.Xsl.XsltOld
     {
 #if DEBUG
         private readonly XmlNameTable _NameTable;
-
 #endif
         internal OutKeywords(XmlNameTable nameTable)
         {

@@ -150,7 +150,6 @@ namespace Newtonsoft.Json.Utilities
                         setMemberMethod
                     );
             }
-
 #endif
 
             public static CallSiteBinder GetMember(string name, Type context)

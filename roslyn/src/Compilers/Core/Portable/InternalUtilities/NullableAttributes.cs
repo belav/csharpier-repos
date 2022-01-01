@@ -106,7 +106,6 @@ namespace System.Diagnostics.CodeAnalysis
         /// <summary>Gets the condition parameter value.</summary>
         public bool ParameterValue { get; }
     }
-
 #endif
 
 #if !NETCOREAPP || NETCOREAPP3_1

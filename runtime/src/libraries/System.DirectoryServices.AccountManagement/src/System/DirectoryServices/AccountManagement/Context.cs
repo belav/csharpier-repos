@@ -1261,7 +1261,6 @@ namespace System.DirectoryServices.AccountManagement
                 return ctx;
             }
         }
-
 #endif // TESTHOOK
 
         //

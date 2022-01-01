@@ -174,13 +174,11 @@ namespace System.Xml.Xsl.Xslt
                 return _compiler.Version == 1;
             }
         }
-
 #if XSLT2
         private bool V2
         {
             get { return !V1; }
         }
-
 #endif
 
         // Import/Include XsltInput management
@@ -1556,7 +1554,6 @@ namespace System.Xml.Xsl.Xslt
             );
             input.SkipNode();
         }
-
 #endif
 
         private readonly XsltAttribute[] _scriptAttributes =
@@ -3221,7 +3218,6 @@ namespace System.Xml.Xsl.Xslt
             LoadInstructions();
             return null;
         }
-
 #endif
 
         // http://www.w3.org/TR/xslt#literal-result-element

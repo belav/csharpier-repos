@@ -27,7 +27,6 @@ namespace System.IO.Strategies
             private long _result; // Using long since this needs to be used in Interlocked APIs
 #if DEBUG
             private bool _cancellationHasBeenRegistered;
-
 #endif
 
             internal ValueTaskSource(AsyncWindowsFileStreamStrategy strategy)

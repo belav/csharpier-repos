@@ -82,7 +82,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(ListChangedType.ItemChanged, listChangedType.Value);
             Assert.AreEqual(0, index.Value);
         }
-
 #endif
 
         [Test]

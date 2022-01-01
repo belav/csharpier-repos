@@ -898,7 +898,6 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.New(constructor, arguments, members)
             );
         }
-
 #endif
 
         static class StaticCtor

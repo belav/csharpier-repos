@@ -1878,7 +1878,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return sb.ToString();
         }
-
 #endif
 
         #region "Poolable"

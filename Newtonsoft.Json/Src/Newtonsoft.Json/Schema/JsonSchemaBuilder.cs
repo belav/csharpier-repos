@@ -34,6 +34,7 @@ using System.Linq;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
+
 #nullable disable
 
 namespace Newtonsoft.Json.Schema

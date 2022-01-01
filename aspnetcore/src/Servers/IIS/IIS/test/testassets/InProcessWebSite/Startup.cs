@@ -64,7 +64,6 @@ public partial class Startup
         await ctx.Response.WriteAsync(
             ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().WebRootPath
         );
-
 #else
     private async Task ContentRootPath(HttpContext ctx) =>
         await ctx.Response.WriteAsync(
@@ -75,7 +74,6 @@ public partial class Startup
         await ctx.Response.WriteAsync(
             ctx.RequestServices.GetService<IWebHostEnvironment>().WebRootPath
         );
-
 #endif
 
     private async Task CurrentDirectory(HttpContext ctx) =>
@@ -423,7 +421,6 @@ public partial class Startup
             await ctx.Response.WriteAsync(new string('a', length));
         }
     }
-
 #if !FORWARDCOMPAT
     private Task UnflushedResponsePipe(HttpContext ctx)
     {
@@ -445,7 +442,6 @@ public partial class Startup
         Assert.True(10 <= memory.Length);
         writer.Advance(10);
     }
-
 #endif
     private async Task ResponseHeaders(HttpContext ctx)
     {

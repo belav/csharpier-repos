@@ -709,7 +709,6 @@ namespace System.Data.Common
                 Debug.Fail("ParseInternal code threw exception vs regex mismatch");
             }
         }
-
 #endif
 
         private static NameValuePair? ParseInternal(

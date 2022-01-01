@@ -72,10 +72,8 @@ internal class global
     public const long MINIMUM_TICKS = 60; // 60 msecs
 #if DEBUG
     public const int MINIMUM_SECONDS = 1;
-
 #else
     public const int MINIMUM_SECONDS = 1;
-
 #endif
 
     public const int NUMNUMARRAYS = 1000;
@@ -97,10 +95,8 @@ internal class global
     // BitOps constants
 #if LONG64
     public const int BITFARRAYSIZE = 16384;
-
 #else
     public const int BITFARRAYSIZE = 32768;
-
 #endif
 
     // IDEA constants

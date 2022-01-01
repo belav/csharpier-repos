@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+
 #if MS_IO_REDIST
 namespace Microsoft.IO.Enumeration
 #else

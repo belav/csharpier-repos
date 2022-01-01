@@ -68,7 +68,6 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreSame(one, three);
             Assert.AreSame(two, four);
         }
-
 #if FEATURE_ASSEMBLYBUILDER_SAVE
         [Test]
         [Platform(
@@ -185,7 +184,6 @@ namespace Castle.DynamicProxy.Tests
             CheckSignedSavedAssembly(path);
             File.Delete(path);
         }
-
 #endif
 
 #if FEATURE_ASSEMBLYBUILDER_SAVE
@@ -211,7 +209,6 @@ namespace Castle.DynamicProxy.Tests
             CheckUnsignedSavedAssembly(path);
             File.Delete(path);
         }
-
 #endif
 
 #if FEATURE_ASSEMBLYBUILDER_SAVE
@@ -319,7 +316,6 @@ namespace Castle.DynamicProxy.Tests
 
             Assert.Throws<InvalidOperationException>(() => scope.SaveAssembly(true));
         }
-
 #endif
 
 #if FEATURE_SERIALIZATION
@@ -381,7 +377,6 @@ namespace Castle.DynamicProxy.Tests
 
             File.Delete(savedPath);
         }
-
 #endif
 
         [Test]
@@ -412,7 +407,6 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreEqual("Strong", strong.Assembly.GetName().Name);
             Assert.AreEqual("Weak", weak.Assembly.GetName().Name);
         }
-
 #if FEATURE_ASSEMBLYBUILDER_SAVE
         [Test]
         public void ModuleScopeDoesntTryToDeleteFromCurrentDirectory()
@@ -451,7 +445,6 @@ namespace Castle.DynamicProxy.Tests
             File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "Strong.dll"));
             File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "Weak.dll"));
         }
-
 #endif // FEATURE_ASSEMBLYBUILDER_SAVE
 
         [Test]

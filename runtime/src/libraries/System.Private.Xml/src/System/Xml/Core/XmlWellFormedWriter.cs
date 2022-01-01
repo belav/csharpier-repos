@@ -71,11 +71,9 @@ namespace System.Xml
 #if DEBUG
         private const int MaxAttrDuplWalkCount = 2;
         private const int MaxNamespacesWalkCount = 3;
-
 #else
         private const int MaxAttrDuplWalkCount = 14;
         private const int MaxNamespacesWalkCount = 16;
-
 #endif
 
         //

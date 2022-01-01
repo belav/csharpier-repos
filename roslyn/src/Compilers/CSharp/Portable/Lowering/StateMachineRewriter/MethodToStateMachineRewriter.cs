@@ -277,7 +277,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return base.VisitSequence(node);
         }
-
 #endif
 
         /// <summary>

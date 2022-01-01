@@ -93,7 +93,6 @@ namespace System.Net
                     .Equals(MaxSupportedVersionString, StringComparison.Ordinal)
             );
         }
-
 #endif
 
         // These DynamicDependency attributes are a workaround for https://github.com/dotnet/runtime/issues/19348.

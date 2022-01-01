@@ -25,10 +25,8 @@ namespace ILCompiler
         {
             _mangleForCplusPlus = mangleForCplusPlus;
         }
-
 #else
         private readonly bool _mangleForCplusPlus = false;
-
 #endif
 
         private string _compilationUnitPrefix;

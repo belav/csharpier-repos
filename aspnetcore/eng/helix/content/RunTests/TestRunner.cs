@@ -137,7 +137,6 @@ namespace RunTests
                 return false;
             }
         }
-
 #endif
 
         public async Task<bool> InstallDotnetToolsAsync()

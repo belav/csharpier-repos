@@ -39,7 +39,6 @@ namespace System.Net.Security
         {
             return $"Kx={KeyExchangeAlgorithm} Enc={CipherAlgorithm} [{CipherAlgorithmStrength}] Mac={MACAlgorithm} [{MACAlgorithmStrength}]";
         }
-
 #endif
 
         public static TlsCipherSuiteData GetCipherSuiteData(TlsCipherSuite cipherSuite)

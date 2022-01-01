@@ -64,7 +64,6 @@ namespace Microsoft.CodeAnalysis
             SurLowStart + ((s_NCNameSurCombinedStart - 0x10000) % 1024);
         private const int s_NCNameSurLowEnd =
             SurLowStart + ((s_NCNameSurCombinedEnd - 0x10000) % 1024);
-
 #else
         // Characters defined in the XML 1.0 Fourth Edition
         // Whitespace chars -- Section 2.3 [3]
@@ -81,7 +80,6 @@ namespace Microsoft.CodeAnalysis
         internal const int fNCNameXml4e = 32;
         internal const int fText = 64;
         internal const int fAttrValue = 128;
-
 #endif
 
         // bitmap for public ID characters - 1 bit per character 0x0 - 0x80; no character > 0x80 is a PUBLIC ID char
@@ -7537,7 +7535,6 @@ namespace Microsoft.CodeAnalysis
             byte table = s_charPropertiesIndex[i >> innerSizeBits];
             return s_charProperties[unchecked((table << innerSizeBits) + (i & innerSizeMask))];
         }
-
 #else
         private static byte[][] s_charProperties = InitInstance();
 
@@ -7979,7 +7976,6 @@ namespace Microsoft.CodeAnalysis
         {
             return (charProperties(ch) & fNCNameSC) != 0;
         }
-
 #if XML10_FIFTH_EDITION
         public static bool IsNCNameSurrogateChar(string str, int index)
         {
@@ -8008,14 +8004,12 @@ namespace Microsoft.CodeAnalysis
         {
             return InRange(lowChar, s_NCNameSurLowStart, s_NCNameSurLowEnd);
         }
-
 #endif
 
         public static bool IsStartNCNameSingleChar(char ch)
         {
             return (charProperties(ch) & fNCStartNameSC) != 0;
         }
-
 #if XML10_FIFTH_EDITION
         // !!! NOTE: These is no IsStartNCNameSurrogateChar, use IsNCNameSurrogateChar instead.
         // Surrogate ranges for start name characters are the same as for name characters.
@@ -8025,13 +8019,11 @@ namespace Microsoft.CodeAnalysis
         {
             return IsNCNameSingleChar(ch) || ch == ':';
         }
-
 #if XML10_FIFTH_EDITION
         static bool IsNameSurrogateChar(char lowChar, char highChar)
         {
             return IsNCNameSurrogateChar(lowChar, highChar);
         }
-
 #endif
 
         public static bool IsStartNameSingleChar(char ch)

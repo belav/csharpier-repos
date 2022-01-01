@@ -60,7 +60,6 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(10000000000000000000d, await reader.ReadAsDoubleAsync());
             Assert.IsTrue(await reader.ReadAsync());
         }
-
 #endif
 
         [Test]
@@ -821,7 +820,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(true, await reader.ReadAsBooleanAsync());
         }
-
 #endif
 
         [Test]

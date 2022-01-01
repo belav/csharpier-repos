@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
+
 #pragma warning disable SA1001
 
 // This file contains the handling of Windows OS specific culture features.

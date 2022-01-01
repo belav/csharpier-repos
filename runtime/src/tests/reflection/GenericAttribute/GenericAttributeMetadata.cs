@@ -7,6 +7,7 @@ using System;
 using System.Reflection;
 using System.Collections;
 using System.Runtime.CompilerServices;
+
 [assembly: SingleAttribute<int>()]
 [assembly: SingleAttribute<bool>()]
 

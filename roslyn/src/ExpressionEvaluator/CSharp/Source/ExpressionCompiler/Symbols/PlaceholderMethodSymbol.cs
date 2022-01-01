@@ -296,7 +296,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal PlaceholderMethodSymbolAdapter(MethodSymbol underlyingMethodSymbol)
             : base(underlyingMethodSymbol) { }
     }
-
 #endif
 
 #if DEBUG

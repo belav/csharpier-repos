@@ -200,7 +200,6 @@ namespace Newtonsoft.Json.Serialization
                 base.WriteUndefined();
             }
         }
-
 #endif
 
         public override void WriteValue(double value)

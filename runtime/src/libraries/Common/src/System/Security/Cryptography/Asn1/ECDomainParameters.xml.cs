@@ -33,7 +33,6 @@ namespace System.Security.Cryptography.Asn1
             ensureUniqueTag(Asn1Tag.Sequence, "Specified");
             ensureUniqueTag(Asn1Tag.ObjectIdentifier, "Named");
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

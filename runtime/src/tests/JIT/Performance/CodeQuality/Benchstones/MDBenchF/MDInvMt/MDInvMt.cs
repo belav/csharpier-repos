@@ -12,10 +12,8 @@ namespace Benchstone.MDBenchF
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 80;
-
 #endif
 
         private const int MatSize = Iterations;

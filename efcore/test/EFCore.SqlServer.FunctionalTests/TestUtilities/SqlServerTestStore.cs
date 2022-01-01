@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+
 #pragma warning disable IDE0022 // Use block body for methods
 // ReSharper disable SuggestBaseTypeForParameter
 namespace Microsoft.EntityFrameworkCore.TestUtilities

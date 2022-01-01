@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.Security.IPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.ISecurityEncodable))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.CodeAccessSecurityAttribute))]

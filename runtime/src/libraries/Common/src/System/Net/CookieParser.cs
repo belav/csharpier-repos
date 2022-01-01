@@ -491,7 +491,6 @@ namespace System.Net
         {
             return cookie.InternalSetName(value);
         }
-
 #else
         private static Func<Cookie, string?, bool>? s_internalSetNameMethod;
         private static Func<Cookie, string?, bool> InternalSetNameMethod
@@ -522,7 +521,6 @@ namespace System.Net
                 return s_internalSetNameMethod;
             }
         }
-
 #endif
 
         private static FieldInfo? s_isQuotedDomainField;

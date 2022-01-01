@@ -35,7 +35,6 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 0), "SubjectKeyIdentifier");
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 1), "OriginatorKey");
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

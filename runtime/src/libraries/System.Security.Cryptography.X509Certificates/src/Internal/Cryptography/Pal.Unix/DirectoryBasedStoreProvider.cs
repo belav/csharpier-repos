@@ -41,7 +41,6 @@ namespace Internal.Cryptography.Pal
                 "OpenFlags.ReadOnly is not zero, read-only detection will not work"
             );
         }
-
 #endif
 
         internal DirectoryBasedStoreProvider(string storeName, OpenFlags openFlags)

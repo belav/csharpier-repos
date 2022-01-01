@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Api.Analyzers;
+
 [assembly: ApiConventionType(typeof(DiagnosticsAreReturned_ForControllerWithCustomConvention))]
 
 

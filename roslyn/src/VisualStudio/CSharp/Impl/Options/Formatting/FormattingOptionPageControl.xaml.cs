@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.BraceCompletion;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Options;
 using System.Runtime.CompilerServices;
+
 // 🐉 The XAML markup compiler does not recognize InternalsVisibleTo. However, since it allows type
 // forwarding, we use TypeForwardedTo to make CodeStyleNoticeTextBlock appear to the markup compiler
 // as an internal type in the current assembly instead of an internal type in one of the referenced

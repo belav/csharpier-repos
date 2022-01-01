@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 #region Sequential
 #region sequential stuct definition
 [StructLayout(LayoutKind.Sequential)]

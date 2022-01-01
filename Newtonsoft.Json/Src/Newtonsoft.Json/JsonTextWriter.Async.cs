@@ -43,7 +43,6 @@ namespace Newtonsoft.Json
         // has been overriden then the asychronous method will no longer be doing the same operation.
 #if HAVE_ASYNC // Double-check this isn't included inappropriately.
         private readonly bool _safeAsync;
-
 #endif
 
         /// <summary>
@@ -1266,7 +1265,6 @@ namespace Newtonsoft.Json
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
-
 #if HAVE_BIG_INTEGER
         internal Task WriteValueAsync(BigInteger value, CancellationToken cancellationToken)
         {

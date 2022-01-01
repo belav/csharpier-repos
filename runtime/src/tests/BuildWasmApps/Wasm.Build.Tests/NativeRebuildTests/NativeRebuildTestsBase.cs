@@ -10,6 +10,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 using System.Text;
+
 #nullable enable
 
 namespace Wasm.Build.NativeRebuild.Tests

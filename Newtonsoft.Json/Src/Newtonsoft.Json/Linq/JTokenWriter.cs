@@ -443,7 +443,6 @@ namespace Newtonsoft.Json.Linq
             base.WriteValue(value);
             AddValue(value, JsonToken.Date);
         }
-
 #endif
 
         /// <summary>

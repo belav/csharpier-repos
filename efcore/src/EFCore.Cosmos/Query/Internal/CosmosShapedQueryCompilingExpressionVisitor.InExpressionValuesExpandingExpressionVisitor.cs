@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Storage;
+
 #nullable disable
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

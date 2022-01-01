@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Speech.Synthesis;
 using System.Speech.Synthesis.TtsEngine;
 using System.Text;
+
 // Exceptions cannot get through the COM code.
 // The engine site saves the last exception before sending it back to the client.
 #pragma warning disable 6500

@@ -1700,7 +1700,6 @@ public unsafe class Tests
     {
         return string_marshal_test3(null);
     }
-
 #if FALSE
 	[DllImport ("libtest", EntryPoint="mono_test_stdcall_mismatch_1", CallingConvention=CallingConvention.StdCall)]
 	public static extern int mono_test_stdcall_mismatch_1 (int a, int b, int c);

@@ -12,6 +12,7 @@ using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 #if MS_IO_REDIST
 namespace Microsoft.IO
 #else
@@ -405,7 +406,6 @@ namespace System.IO
                 return bytes;
             }
         }
-
 #if !MS_IO_REDIST
         private static byte[] ReadAllBytesUnknownLength(FileStream fs)
         {
@@ -450,7 +450,6 @@ namespace System.IO
                 }
             }
         }
-
 #endif
 
         public static void WriteAllBytes(string path, byte[] bytes)

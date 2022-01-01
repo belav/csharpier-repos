@@ -28,7 +28,6 @@ namespace HostApiInvokerApp
                 int size
             );
         }
-
 #endif
 
         public static void LogModulePath(string moduleName)

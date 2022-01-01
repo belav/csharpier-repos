@@ -1026,7 +1026,6 @@ namespace System.Dynamic.Utils
                     return false;
             }
         }
-
 #endif
 
         [UnconditionalSuppressMessage(

@@ -367,7 +367,6 @@ namespace System.Linq.Expressions.Tests
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
             return module.DefineType("Type");
         }
-
 #endif
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -446,7 +445,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyMethodInfoConstant(value, useInterpreter);
             }
         }
-
 #endif
 
         [Theory, ClassData(typeof(CompilationTypes))]

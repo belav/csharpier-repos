@@ -802,7 +802,6 @@ namespace System.Linq.Expressions
         /// </summary>
         internal static string MethodBuilderDoesNotHaveTypeBuilder =>
             SR.MethodBuilderDoesNotHaveTypeBuilder;
-
 #endif
 
         /// <summary>
@@ -890,7 +889,6 @@ namespace System.Linq.Expressions
         /// </summary>
         internal static string PdbGeneratorNeedsExpressionCompiler =>
             SR.PdbGeneratorNeedsExpressionCompiler;
-
 #endif
 
         /// <summary>

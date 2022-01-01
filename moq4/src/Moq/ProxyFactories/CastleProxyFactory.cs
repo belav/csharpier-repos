@@ -450,7 +450,6 @@ namespace Moq
 
             return thunk.Invoke(instance, arguments);
         }
-
 #endif
 
         /// <summary>

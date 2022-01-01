@@ -302,7 +302,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
         }
-
 #if DEBUG
         protected override void VisitRvalue(BoundExpression node, bool isKnownToBeAnLvalue = false)
         {
@@ -316,7 +315,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             base.VisitRvalue(node, isKnownToBeAnLvalue);
         }
-
 #endif
 
         protected override bool ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException()

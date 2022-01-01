@@ -14,29 +14,24 @@ namespace System.Net.Http
     public partial class HttpClientHandler : HttpMessageHandler
     {
         private static MethodInfo? _nativeHandlerMethod;
-
 #if TARGET_ANDROID
         private const string NativeHandlerType = "Xamarin.Android.Net.AndroidMessageHandler";
         private const string AssemblyName = "Mono.Android";
         private const string GetHttpMessageHandlerType =
             "Android.Runtime.AndroidEnvironment, Mono.Android";
-
 #elif TARGET_IOS
         private const string NativeHandlerType = "System.Net.Http.NSUrlSessionHandler";
         private const string AssemblyName = "Xamarin.iOS";
         private const string GetHttpMessageHandlerType = "ObjCRuntime.RuntimeOptions, Xamarin.iOS";
-
 #elif TARGET_MACCATALYST
         private const string NativeHandlerType = "System.Net.Http.NSUrlSessionHandler";
         private const string AssemblyName = "Xamarin.MacCatalyst";
         private const string GetHttpMessageHandlerType =
             "ObjCRuntime.RuntimeOptions, Xamarin.MacCatalyst";
-
 #elif TARGET_TVOS
         private const string NativeHandlerType = "System.Net.Http.NSUrlSessionHandler";
         private const string AssemblyName = "Xamarin.TVOS";
         private const string GetHttpMessageHandlerType = "ObjCRuntime.RuntimeOptions, Xamarin.TVOS";
-
 #else
 #error Unknown target
 #endif

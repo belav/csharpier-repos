@@ -21,11 +21,9 @@ namespace System.IO.Pipelines
 
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
         private CancellationToken CancellationToken => _cancellationTokenRegistration.Token;
-
 #else
         private CancellationToken _cancellationToken;
         private CancellationToken CancellationToken => _cancellationToken;
-
 #endif
 
         public PipeAwaitable(bool completed, bool useSynchronizationContext)

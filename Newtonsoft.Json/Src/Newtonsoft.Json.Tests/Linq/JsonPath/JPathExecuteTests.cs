@@ -72,7 +72,6 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             var dd = jObj.SelectToken("$..[?(@.usingmem>21438)]"); //null,21,438
             Assert.AreEqual(jObj, dd);
         }
-
 #if HAVE_REGEX_TIMEOUTS
         [Test]
         public void BacktrackingRegex_SingleMatch_TimeoutRespected()
@@ -105,7 +104,6 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 }
             );
         }
-
 #endif
 
         [Test]
@@ -1113,7 +1111,6 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 2)), t[0]));
             Assert.IsTrue(JToken.DeepEquals(new JObject(new JProperty("hi", 3)), t[1]));
         }
-
 #endif
 
         [Test]

@@ -4,6 +4,7 @@
 #region Using directives
 
 using System.Speech.Internal.SrgsParser;
+
 #endregion
 
 namespace System.Speech.Internal.SrgsCompiler

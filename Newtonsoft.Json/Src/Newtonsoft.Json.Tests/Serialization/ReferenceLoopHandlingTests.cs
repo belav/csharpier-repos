@@ -174,7 +174,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Serializable]
         public class MainClass : ISerializable
@@ -238,7 +237,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             var c = JsonConvert.SerializeObject(main, settings);
             Assert.AreEqual(@"{""Child"":{""Name"":""Child1""}}", c);
         }
-
 #endif
 
 #if !(NET20 || NET35 || PORTABLE40)
@@ -302,7 +300,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             var c = JsonConvert.SerializeObject(parent, settings);
             Assert.AreEqual(@"{""child"":{""name"":""child""},""name"":""parent""}", c);
         }
-
 #endif
 
         [Test]

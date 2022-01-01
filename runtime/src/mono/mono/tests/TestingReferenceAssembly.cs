@@ -1,4 +1,6 @@
-using System.Runtime.CompilerServices;[assembly: ReferenceAssemblyAttribute]
+using System.Runtime.CompilerServices;
+
+[assembly: ReferenceAssemblyAttribute]
 
 
 public class X

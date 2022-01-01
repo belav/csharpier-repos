@@ -13,7 +13,6 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <value>The timeout that will be used when executing regular expressions.</value>
         public TimeSpan? RegexMatchTimeout { get; set; }
-
 #endif
 
         /// <summary>

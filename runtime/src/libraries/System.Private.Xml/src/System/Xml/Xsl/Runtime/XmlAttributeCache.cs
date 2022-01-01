@@ -365,10 +365,8 @@ namespace System.Xml.Xsl.Runtime
 
 #if DEBUG
         private const int DefaultCacheSize = 2;
-
 #else
         private const int DefaultCacheSize = 32;
-
 #endif
 
         /// <summary>

@@ -34,7 +34,6 @@ namespace System.Xml.Xsl
         {
             return 0 == (~DblHi(dbl) & 0x7FF00000);
         }
-
 #if DEBUG
         // Returns the next representable neighbor of x in the direction toward y
         public static double NextAfter(double x, double y)
@@ -85,7 +84,6 @@ namespace System.Xml.Xsl
         {
             return NextAfter(x, double.NegativeInfinity);
         }
-
 #endif
 
         // Small powers of ten. These are all the powers of ten that have an exact
@@ -407,7 +405,6 @@ namespace System.Xml.Xsl
                     _exp++;
                 }
             }
-
 #endif
 
             // Test to see if the num is zero. This works even if we're not normalized.
@@ -1928,7 +1925,6 @@ namespace System.Xml.Xsl
 
                 AssertValid();
             }
-
 #endif
 
             public void MulAdd(uint uMul, uint uAdd)
@@ -2506,7 +2502,6 @@ namespace System.Xml.Xsl
                 }
 #endif
             }
-
 #if DEBUG
             private bool Equals(FloatingDecimal other)
             {
@@ -2527,7 +2522,6 @@ namespace System.Xml.Xsl
                 }
                 return true;
             }
-
 #endif
 
 #if NEVER
@@ -2594,7 +2588,6 @@ namespace System.Xml.Xsl
                     exponent = 0;
                 }
             }
-
 #endif
 
 #if !NOPARSE || DEBUG
@@ -2971,7 +2964,6 @@ namespace System.Xml.Xsl
                 }
                 return dbl;
             }
-
 #endif
 
             private void InitFromDouble(double dbl)

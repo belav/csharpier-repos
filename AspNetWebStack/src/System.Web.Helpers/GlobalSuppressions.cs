@@ -12,6 +12,7 @@
 // You do not need to add suppressions to this file manually.
 
 using System.Diagnostics.CodeAnalysis;
+
 [assembly: SuppressMessage(
     "Microsoft.Naming",
     "CA1703:ResourceStringsShouldBeSpelledCorrectly",

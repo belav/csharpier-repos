@@ -111,7 +111,6 @@ namespace System.Net
             string context,
             Interop.SspiCli.ContextFlags inFlags
         ) => WriteEvent(AcceptSecuritContextId, credential, context, (int)inFlags);
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -131,7 +130,6 @@ namespace System.Net
                 WriteEvent(OperationReturnedSomethingId, operation, errorCode);
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

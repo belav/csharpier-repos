@@ -11,10 +11,8 @@ namespace System.Runtime.Loader
         private const string LibraryNamePrefix = "lib";
 #if TARGET_OSX || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
         private const string LibraryNameSuffix = ".dylib";
-
 #else
         private const string LibraryNameSuffix = ".so";
-
 #endif
 
         internal static IEnumerable<LibraryNameVariation> DetermineLibraryNameVariations(

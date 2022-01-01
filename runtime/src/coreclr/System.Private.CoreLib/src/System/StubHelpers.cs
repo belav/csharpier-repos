@@ -1492,7 +1492,6 @@ namespace System.StubHelpers
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern Exception InternalGetHRExceptionObject(int hr);
-
 #if FEATURE_COMINTEROP
         internal static Exception GetCOMHRExceptionObject(int hr, IntPtr pCPCMD, object pThis)
         {
@@ -1507,7 +1506,6 @@ namespace System.StubHelpers
             IntPtr pCPCMD,
             object? pThis
         );
-
 #endif // FEATURE_COMINTEROP
 
         [ThreadStatic]
@@ -1567,7 +1565,6 @@ namespace System.StubHelpers
 
             pHandle.DangerousRelease();
         }
-
 #if FEATURE_COMINTEROP
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern IntPtr GetCOMIPFromRCW(
@@ -1576,7 +1573,6 @@ namespace System.StubHelpers
             out IntPtr ppTarget,
             out bool pfNeedsRelease
         );
-
 #endif // FEATURE_COMINTEROP
 
         //-------------------------------------------------------
@@ -1592,7 +1588,6 @@ namespace System.StubHelpers
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void ProfilerEndTransitionCallback(IntPtr pMD, IntPtr pThread);
-
 #endif // PROFILING_SUPPORTED
 
         //------------------------------------------------------
@@ -1655,23 +1650,19 @@ namespace System.StubHelpers
         [Intrinsic]
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern IntPtr GetStubContext();
-
 #if TARGET_64BIT
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern IntPtr GetStubContextAddr();
-
 #endif // TARGET_64BIT
 
 #if FEATURE_ARRAYSTUB_AS_IL
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void ArrayTypeCheck(object o, object[] arr);
-
 #endif
 
 #if FEATURE_MULTICASTSTUB_AS_IL
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void MulticastDebuggerTraceHelper(object o, int count);
-
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

@@ -19,11 +19,9 @@ namespace Benchstone.BenchI
 #if DEBUG
         private const int Iterations = 1;
         private const int Maxnum = 100;
-
 #else
         private const int Iterations = 125;
         private const int Maxnum = 1000;
-
 #endif
 
         private const int Modulus = ((int)0x20000);

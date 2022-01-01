@@ -660,7 +660,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(!(node is BoundStatement));
             return base.DefaultVisit(node);
         }
-
 #endif
 
         #endregion
@@ -1468,7 +1467,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
             // we must replace exactly one node
             private int _replaced;
-
 #endif
 
             private ConditionalReceiverReplacer(

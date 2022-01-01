@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.Composition;
 using Xunit;
 using Xunit.Abstractions;
+
 #nullable enable
 
 namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters

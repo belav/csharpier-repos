@@ -48,7 +48,6 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             );
             reader.ThrowIfNotEmpty();
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

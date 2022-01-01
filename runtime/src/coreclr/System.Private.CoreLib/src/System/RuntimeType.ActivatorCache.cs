@@ -23,10 +23,8 @@ namespace System
             // The managed calli to the parameterless ctor, taking "this" (as object) as its first argument.
             private readonly delegate* <object?, void> _pfnCtor;
             private readonly bool _ctorIsPublic;
-
 #if DEBUG
             private readonly RuntimeType _originalRuntimeType;
-
 #endif
 
             internal ActivatorCache(RuntimeType rt)

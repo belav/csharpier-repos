@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.ServiceProcess.PowerBroadcastStatus))]
 [assembly: TypeForwardedTo(typeof(System.ServiceProcess.ServiceBase))]
 [assembly: TypeForwardedTo(typeof(System.ServiceProcess.ServiceController))]

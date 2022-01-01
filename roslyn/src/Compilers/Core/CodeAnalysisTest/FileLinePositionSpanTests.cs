@@ -118,7 +118,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
             );
         }
-
         // In general, different values are not required to have different hash codes.
         // But for perf reasons we want hash functions with a good distribution,
         // so we expect hash codes to differ if a single component is incremented.
@@ -166,7 +165,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotEqual(hash4, hash5);
             Assert.NotEqual(hash5, hash6);
         }
-
 #endif
 
         [Fact]

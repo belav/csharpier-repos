@@ -17,10 +17,8 @@ internal sealed class Utf8BufferTextReader : TextReader
 
     [ThreadStatic]
     private static Utf8BufferTextReader? _cachedInstance;
-
 #if DEBUG
     private bool _inUse;
-
 #endif
 
     public Utf8BufferTextReader()

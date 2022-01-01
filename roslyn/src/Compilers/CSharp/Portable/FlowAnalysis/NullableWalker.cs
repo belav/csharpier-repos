@@ -261,7 +261,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundKind.CollectionInitializerExpression,
                 BoundKind.DynamicCollectionElementInitializer
             );
-
 #endif
 
         /// <summary>
@@ -3873,7 +3872,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                   )
             };
         }
-
 #endif
 
         private static bool AreLambdaAndNewDelegateSimilar(LambdaSymbol l, NamedTypeSymbol n)

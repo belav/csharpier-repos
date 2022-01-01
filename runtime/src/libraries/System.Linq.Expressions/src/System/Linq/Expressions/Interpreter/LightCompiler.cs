@@ -1055,7 +1055,6 @@ namespace System.Linq.Expressions.Interpreter
             var c = e as ConstantExpression;
             return c != null && c.Value == null;
         }
-
 #endif
         private void CompileEqual(Expression left, Expression right, bool liftedToNull)
         {

@@ -916,7 +916,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 errors[1]
             );
         }
-
 #if !(NET35 || NET20 || PORTABLE40)
         [Test]
         public void ErrorHandlingEndOfContentDynamic()
@@ -961,7 +960,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 errors[1]
             );
         }
-
 #endif
 
         [Test]

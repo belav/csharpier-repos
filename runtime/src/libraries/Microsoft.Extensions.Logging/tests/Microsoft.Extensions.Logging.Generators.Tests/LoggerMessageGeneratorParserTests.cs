@@ -242,7 +242,6 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
 
             Assert.Empty(diagnostics);
         }
-
 #if false
         // TODO: can't have the same template with different casing
         [Fact]

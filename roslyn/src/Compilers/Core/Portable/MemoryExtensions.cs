@@ -26,7 +26,6 @@ namespace Microsoft.CodeAnalysis
 
             return -1;
         }
-
 #if !NETCOREAPP
         internal static ReadOnlyMemory<char> TrimStart(this ReadOnlyMemory<char> memory)
         {
@@ -54,7 +53,6 @@ namespace Microsoft.CodeAnalysis
 
         internal static ReadOnlyMemory<char> Trim(this ReadOnlyMemory<char> memory) =>
             memory.TrimStart().TrimEnd();
-
 #endif
 
         internal static bool IsNullOrEmpty(this ReadOnlyMemory<char>? memory) =>

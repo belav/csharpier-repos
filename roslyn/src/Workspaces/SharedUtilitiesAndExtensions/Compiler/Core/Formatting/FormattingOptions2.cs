@@ -31,7 +31,6 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             public ImmutableArray<IOption> Options { get; } = FormattingOptions2.Options;
         }
-
 #endif
         private const string FeatureName = "FormattingOptions";
 

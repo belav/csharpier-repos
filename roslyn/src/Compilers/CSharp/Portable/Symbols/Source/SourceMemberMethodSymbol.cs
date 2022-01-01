@@ -128,7 +128,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     EnumUtilities.ContainsAllValues<NullableContextKind>(NullableContextMask)
                 );
             }
-
 #endif
 
             private static bool ModifiersRequireMetadataVirtual(DeclarationModifiers modifiers)

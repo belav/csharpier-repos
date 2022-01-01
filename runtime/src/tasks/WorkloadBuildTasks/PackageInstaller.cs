@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+
 #nullable enable
 
 namespace Microsoft.Workload.Build.Tasks

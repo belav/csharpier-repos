@@ -182,7 +182,6 @@ namespace System.Net
         {
             get { return (_flags & StateFlags.CaptureIdentity) != 0; }
         }
-
 #endif
 
         internal object StartPostingAsyncOp()

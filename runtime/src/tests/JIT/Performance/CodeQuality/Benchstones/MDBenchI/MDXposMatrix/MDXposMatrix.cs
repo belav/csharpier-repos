@@ -13,10 +13,8 @@ namespace Benchstone.MDBenchI
 
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 25000;
-
 #endif
 
         static void Inner(int[,] x, int n)

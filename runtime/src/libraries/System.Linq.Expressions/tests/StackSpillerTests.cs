@@ -2359,7 +2359,6 @@ namespace System.Linq.Expressions.Tests
                 }"
             );
         }
-
 #endif
 
         private static void Test(Func<Expression, Expression> factory, Expression arg1)

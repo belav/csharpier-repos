@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 [assembly: ActiveIssue(
     "https://github.com/dotnet/runtime/issues/35917",
     typeof(PlatformDetection),

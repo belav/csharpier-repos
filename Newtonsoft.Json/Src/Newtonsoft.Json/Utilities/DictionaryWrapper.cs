@@ -73,7 +73,6 @@ namespace Newtonsoft.Json.Utilities
 
             _readOnlyDictionary = dictionary;
         }
-
 #endif
 
         internal IDictionary<TKey, TValue> GenericDictionary

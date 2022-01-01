@@ -138,7 +138,6 @@ namespace Castle.DynamicProxy.Generators
         {
             AddMapping(typeof(ISerializable), instance, typeImplementerMapping);
         }
-
 #endif
 
         /// <summary>

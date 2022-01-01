@@ -9,26 +9,20 @@ namespace HFATest
     {
 #if NESTED_HFA
         public const string hfaType = "nested";
-
 #else
         public const string hfaType = "simple";
-
 #endif
 
 #if NATIVE_IJW
         public const string dllType = "native_ijw";
-
 #else
         public const string dllType = "native_cpp";
-
 #endif
 
 #if FLOAT64
         public const string floatType = "f64";
-
 #else
         public const string floatType = "f32";
-
 #endif
 
         public const string DllName = "hfa" + "_" + hfaType + "_" + floatType + "_" + dllType;

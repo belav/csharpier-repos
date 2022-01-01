@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using Xunit;
+
 #pragma warning disable 414, 169, 649
 
 namespace System.Reflection.Tests

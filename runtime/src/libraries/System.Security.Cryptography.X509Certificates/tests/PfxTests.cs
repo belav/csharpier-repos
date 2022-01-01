@@ -450,7 +450,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
             }
         }
-
 #if !NO_EPHEMERALKEYSET_AVAILABLE
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
@@ -539,7 +538,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.NotNull(key.KeyName);
             }
         }
-
 #endif
 
         [Fact]

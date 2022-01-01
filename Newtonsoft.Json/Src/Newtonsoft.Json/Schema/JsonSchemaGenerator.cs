@@ -462,13 +462,11 @@ namespace Newtonsoft.Json.Schema
                 CurrentSchema.AllowAdditionalProperties = false;
             }
         }
-
 #if HAVE_BINARY_SERIALIZATION
         private void GenerateISerializableContract(Type type, JsonISerializableContract contract)
         {
             CurrentSchema.AllowAdditionalProperties = true;
         }
-
 #endif
 
         internal static bool HasFlag(JsonSchemaType? value, JsonSchemaType flag)

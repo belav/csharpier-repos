@@ -173,7 +173,6 @@ namespace Newtonsoft.Json.Utilities
             { typeof(DBNull), PrimitiveTypeCode.DBNull }
 #endif
         };
-
 #if HAVE_ICONVERTIBLE
         private static readonly TypeInformation[] PrimitiveTypeCodes =
         {
@@ -198,7 +197,6 @@ namespace Newtonsoft.Json.Utilities
             new TypeInformation(typeof(object), PrimitiveTypeCode.Empty), // no 17 in TypeCode for some reason
             new TypeInformation(typeof(string), PrimitiveTypeCode.String)
         };
-
 #endif
 
         public static PrimitiveTypeCode GetTypeCode(Type t)
@@ -237,14 +235,12 @@ namespace Newtonsoft.Json.Utilities
             isEnum = false;
             return PrimitiveTypeCode.Object;
         }
-
 #if HAVE_ICONVERTIBLE
         public static TypeInformation GetTypeInformation(IConvertible convertable)
         {
             TypeInformation typeInformation = PrimitiveTypeCodes[(int)convertable.GetTypeCode()];
             return typeInformation;
         }
-
 #endif
 
         public static bool IsConvertible(Type t)
@@ -309,7 +305,6 @@ namespace Newtonsoft.Json.Utilities
 
             return o => call(null, o);
         }
-
 #if HAVE_BIG_INTEGER
         internal static BigInteger ToBigInteger(object value)
         {
@@ -403,7 +398,6 @@ namespace Newtonsoft.Json.Utilities
                 );
             }
         }
-
 #endif
 
 #region TryConvert
@@ -1463,7 +1457,6 @@ namespace Newtonsoft.Json.Utilities
             value = IEEE754.PackDouble(isNegative, mantissa, exponent);
             return double.IsInfinity(value) ? ParseResult.Overflow : ParseResult.Success;
         }
-
 #endif
 
         public static ParseResult DecimalTryParse(

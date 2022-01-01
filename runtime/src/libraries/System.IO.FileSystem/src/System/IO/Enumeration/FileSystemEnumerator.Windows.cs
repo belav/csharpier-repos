@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Threading;
+
 #if MS_IO_REDIST
 namespace Microsoft.IO.Enumeration
 #else

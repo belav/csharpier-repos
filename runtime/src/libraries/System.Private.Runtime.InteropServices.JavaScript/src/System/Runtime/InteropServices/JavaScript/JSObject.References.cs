@@ -92,7 +92,6 @@ namespace System.Runtime.InteropServices.JavaScript
                     $"Invalid InFlightCounter for JSObject {JSHandle}, expected: {expectedInFlightCount}, actual: {InFlightCounter}"
                 );
         }
-
 #endif
 
         protected override bool ReleaseHandle()

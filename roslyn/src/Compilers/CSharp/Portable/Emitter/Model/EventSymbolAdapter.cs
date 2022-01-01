@@ -183,7 +183,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return _lazyAdapter;
         }
-
 #else
         internal EventSymbol AdaptedEventSymbol => this;
 
@@ -191,7 +190,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
-
 #endif
 
         internal virtual bool HasRuntimeSpecialName

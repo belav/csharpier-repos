@@ -18,6 +18,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.CodeAnalysis.SolutionCrawler;
 using Roslyn.Utilities;
+
 #pragma warning disable CA1200 // Avoid using cref tags with a prefix
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList

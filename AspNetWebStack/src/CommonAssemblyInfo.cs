@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+
 #if !BUILD_GENERATED_VERSION
 [assembly: AssemblyCompany(".NET Foundation")]
 [assembly: AssemblyCopyright("Copyright © .NET Foundation. All rights reserved.")]

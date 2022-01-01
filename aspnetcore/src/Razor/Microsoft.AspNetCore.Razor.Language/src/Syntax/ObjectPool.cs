@@ -59,7 +59,6 @@ internal class ObjectPool<T> where T : class
     // expand. compared to "new T()", Func gives more flexibility to implementers and faster
     // than "new T()".
     private readonly Factory _factory;
-
 #if DETECT_LEAKS
     private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers =
         new ConditionalWeakTable<T, LeakTracker>();
@@ -67,7 +66,6 @@ internal class ObjectPool<T> where T : class
     private class LeakTracker : IDisposable
     {
         private volatile bool disposed;
-
 #if TRACE_LEAKS
             internal volatile System.Diagnostics.StackTrace Trace = null;
 #endif
@@ -110,7 +108,6 @@ internal class ObjectPool<T> where T : class
             }
         }
     }
-
 #endif
 
     internal ObjectPool(Factory factory) : this(factory, Environment.ProcessorCount * 2) { }

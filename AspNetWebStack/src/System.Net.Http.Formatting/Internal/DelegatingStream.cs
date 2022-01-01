@@ -101,7 +101,6 @@ namespace System.Net.Http.Internal
         {
             return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
-
 #if !NETFX_CORE // BeginX and EndX not supported on Streams in portable libraries
         public override IAsyncResult BeginRead(
             byte[] buffer,
@@ -118,7 +117,6 @@ namespace System.Net.Http.Internal
         {
             return _innerStream.EndRead(asyncResult);
         }
-
 #endif
 
         public override int ReadByte()
@@ -155,7 +153,6 @@ namespace System.Net.Http.Internal
         {
             return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
-
 #if !NETFX_CORE // BeginX and EndX not supported on Streams in portable libraries
         public override IAsyncResult BeginWrite(
             byte[] buffer,
@@ -172,7 +169,6 @@ namespace System.Net.Http.Internal
         {
             _innerStream.EndWrite(asyncResult);
         }
-
 #endif
 
         public override void WriteByte(byte value)

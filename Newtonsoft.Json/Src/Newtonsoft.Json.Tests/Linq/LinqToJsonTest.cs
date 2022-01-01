@@ -61,7 +61,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(@"['We\'re offline!']", v.Path);
         }
-
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         public class DemoClass
         {
@@ -76,7 +75,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(10000000000000000000m, list[0].maxValue);
         }
-
 #endif
 
         [Test]
@@ -1117,7 +1115,6 @@ keyword such as type of business.""
                 @"Accessed JConstructor values with invalid key value: ""purple"". Argument position index expected."
             );
         }
-
 #if !NET20
         [Test]
         public void ToStringJsonConverter()
@@ -1177,7 +1174,6 @@ keyword such as type of business.""
 
             Assert.AreEqual(4, jsonWriter.Token.Children().Count());
         }
-
 #endif
 
         [Test]
@@ -1342,7 +1338,6 @@ keyword such as type of business.""
 
             Assert.AreEqual(new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc), d);
         }
-
 #if !(NET20 || NET35 || PORTABLE40)
         [Test]
         public void CovariantIJEnumerable()
@@ -1356,7 +1351,6 @@ keyword such as type of business.""
             IJEnumerable<JToken> values = o.Properties();
             Assert.AreEqual(4, values.Count());
         }
-
 #endif
 
 #if !NET20
@@ -1370,7 +1364,6 @@ keyword such as type of business.""
             Assert.AreEqual(12, list1[0]);
             Assert.AreEqual(55, list1[1]);
         }
-
 #endif
 
         [Test]
@@ -1517,7 +1510,6 @@ keyword such as type of business.""
             JArray a = JArray.Parse(json);
             Assert.AreEqual("hi!", (string)a[0]);
         }
-
 #if !(NET35 || NET20)
         [Test]
         public void ExceptionFromOverloadWithJValue()
@@ -1537,7 +1529,6 @@ keyword such as type of business.""
                 "The best overloaded method match for 'System.Collections.Generic.IDictionary<string,string>.Add(string, string)' has some invalid arguments"
             );
         }
-
 #endif
 
 #if !(NET20)
@@ -1585,7 +1576,6 @@ keyword such as type of business.""
             FooBarNoEnum e = o["FooBarNoEnum"].ToObject<FooBarNoEnum>();
             Assert.AreEqual(FooBarNoEnum.SomeOtherValue, e);
         }
-
 #endif
 
         [Test]

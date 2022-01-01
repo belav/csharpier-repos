@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 // For testing purposes, we keep the output of the Transform in a file.
 // Since the content of the file ends up affecting the result of each test,
 // we want to avoid parallelism so that one test doesn't affect another.

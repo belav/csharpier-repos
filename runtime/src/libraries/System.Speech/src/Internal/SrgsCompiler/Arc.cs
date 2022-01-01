@@ -710,7 +710,6 @@ namespace System.Speech.Internal.SrgsCompiler
             }
             return sb.ToString();
         }
-
 #endif
 
         #endregion
@@ -794,7 +793,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get { return _specialTransitionIndex; }
         }
-
 #if DEBUG
         internal bool CheckingForExitPath
         {
@@ -806,7 +804,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             set { _be = value; }
         }
-
 #endif
         #endregion
 
@@ -875,7 +872,6 @@ namespace System.Speech.Internal.SrgsCompiler
               ? symbols.FromOffset(tag._nameOffset)
               : tag._nameOffset.ToString(CultureInfo.InvariantCulture);
         }
-
 #endif
 
         // Sort arcs in a state based on type, and then on index.

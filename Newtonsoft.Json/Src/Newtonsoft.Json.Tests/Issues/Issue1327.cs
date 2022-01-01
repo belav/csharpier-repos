@@ -56,7 +56,6 @@ namespace Newtonsoft.Json.Tests.Issues
 
             public int IdNumber { get; set; }
         }
-
 #endif
 
 #if !NET20
@@ -70,7 +69,6 @@ namespace Newtonsoft.Json.Tests.Issues
 
             public int IdNumber { get; set; }
         }
-
 #endif
 
 #if !PORTABLE || NETSTANDARD2_0
@@ -96,7 +94,6 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.AreEqual("Kumar", p.Name);
             Assert.AreEqual("vinoth", p.TestXml.SelectSingleNode("//name").InnerText);
         }
-
 #endif
 
 #if !NET20

@@ -3,6 +3,7 @@
 
 using System.Numerics;
 using System.Runtime.InteropServices;
+
 #pragma warning disable 0618
 static class Vector2_3_4TestNative
 {

@@ -11,10 +11,8 @@ namespace Benchstone.MDBenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 3000;
-
 #endif
 
         struct Workarea

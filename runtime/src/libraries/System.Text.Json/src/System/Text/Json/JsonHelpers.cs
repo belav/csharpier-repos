@@ -34,7 +34,6 @@ namespace System.Text.Json
 
             return IsInRangeInclusive(value ^ 0xD800U, 0x800U, 0x10FFFFU);
         }
-
 #endif
 
         /// <summary>

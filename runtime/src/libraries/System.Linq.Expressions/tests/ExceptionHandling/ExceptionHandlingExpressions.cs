@@ -313,7 +313,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal("An Exceptional Exception!", func());
             }
         }
-
 #endif
 
         [Theory]

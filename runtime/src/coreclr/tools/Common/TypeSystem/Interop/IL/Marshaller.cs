@@ -1703,7 +1703,6 @@ namespace Internal.TypeSystem.Interop
         const int MAX_LOCAL_BUFFER_LENGTH = 260 + 1; // MAX_PATH + 1
 
         private ILLocalVariable? _localBuffer = null;
-
 #endif
 
         internal override bool CleanupRequired
@@ -1883,7 +1882,6 @@ namespace Internal.TypeSystem.Interop
 #endif
         }
     }
-
 #if !READYTORUN
     class UTF8StringMarshaller : Marshaller
     {
@@ -1940,7 +1938,6 @@ namespace Internal.TypeSystem.Interop
             codeStream.EmitLabel(lNullCheck);
         }
     }
-
 #endif
 
     class SafeHandleMarshaller : Marshaller

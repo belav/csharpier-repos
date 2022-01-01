@@ -3,4 +3,5 @@
 
 using Microsoft.AspNetCore.Testing;
 using Templates.Test.Helpers;
+
 [assembly: AssemblyFixture(typeof(ProjectFactoryFixture))]

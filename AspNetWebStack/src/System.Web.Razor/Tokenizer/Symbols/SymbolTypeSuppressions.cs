@@ -5,6 +5,7 @@
 // not in the CodeAnalysisDictionary because they are special case exclusions
 
 using System.Diagnostics.CodeAnalysis;
+
 [assembly: SuppressMessage(
     "Microsoft.Naming",
     "CA1704:IdentifiersShouldBeSpelledCorrectly",

@@ -1343,7 +1343,6 @@ namespace System.Linq.Expressions
         {
             return new ArgumentException(Strings.MethodBuilderDoesNotHaveTypeBuilder);
         }
-
 #endif
         /// <summary>
         /// InvalidOperationException with message like "Invalid lvalue for assignment: {0}."
@@ -1467,7 +1466,6 @@ namespace System.Linq.Expressions
         {
             return new NotSupportedException(Strings.PdbGeneratorNeedsExpressionCompiler);
         }
-
 #endif
 
         /// <summary>

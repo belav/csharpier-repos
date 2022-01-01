@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 using Microsoft.Extensions.DependencyInjection;
+
 [assembly: DesignTimeProviderServices(
     "Microsoft.EntityFrameworkCore.SqlServer.Design.Internal.SqlServerDesignTimeServices"
 )]

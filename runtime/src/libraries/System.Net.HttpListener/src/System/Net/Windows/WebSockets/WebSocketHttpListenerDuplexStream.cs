@@ -8,6 +8,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 #pragma warning disable CA1844 // Memory-based Read/WriteAsync
 
 namespace System.Net.WebSockets
@@ -42,7 +43,6 @@ namespace System.Net.WebSockets
         }
 
         private readonly OutstandingOperations _outstandingOperations = new OutstandingOperations();
-
 #endif //DEBUG
 
         public WebSocketHttpListenerDuplexStream(
@@ -828,7 +828,6 @@ namespace System.Net.WebSockets
             private bool _shouldCloseOutput;
             private readonly WebSocketBase _webSocket;
             private readonly WebSocketHttpListenerDuplexStream _currentStream;
-
 #if DEBUG
             private volatile int _nativeOverlappedCounter;
             private volatile int _nativeOverlappedUsed;
@@ -849,7 +848,6 @@ namespace System.Net.WebSockets
                     "NativeOverlapped allocated without release."
                 );
             }
-
 #endif
 
             public HttpListenerAsyncEventArgs(

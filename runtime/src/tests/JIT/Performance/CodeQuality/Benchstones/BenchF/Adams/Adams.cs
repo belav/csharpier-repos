@@ -14,10 +14,8 @@ namespace Benchstone.BenchF
     {
 #if DEBUG
         public static int Iterations = 1;
-
 #else
         public static int Iterations = 200000;
-
 #endif // DEBUG
 
         static double g_xn,

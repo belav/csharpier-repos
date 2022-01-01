@@ -15,13 +15,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string,
             ImmutableArray<(AssemblyIdentity Identity, MetadataReference Reference)>
         > _referencesBySimpleName;
-
 #if DEBUG
         internal readonly Dictionary<
             AssemblyIdentity,
             (AssemblyIdentity? Identity, int Count)
         > Requests = new Dictionary<AssemblyIdentity, (AssemblyIdentity? Identity, int Count)>();
-
 #endif
 
         internal EEMetadataReferenceResolver(

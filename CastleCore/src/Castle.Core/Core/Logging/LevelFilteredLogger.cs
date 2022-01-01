@@ -16,6 +16,7 @@ namespace Castle.Core.Logging
 {
     using System;
     using System.Globalization;
+
     /// <summary>
 	/// The Level Filtered Logger class.  This is a base class which
 	/// provides a LogLevel attribute and reroutes all functions into

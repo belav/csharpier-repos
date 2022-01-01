@@ -26,11 +26,9 @@ namespace NativeVarargTest
 #if WIN32
         [DllImport("msvcrt", CallingConvention = CallingConvention.Cdecl)]
         extern static void printf(string str, __arglist);
-
 #else
         [DllImport("libc", CallingConvention = CallingConvention.Cdecl)]
         extern static void printf(string str, __arglist);
-
 #endif
 
         [DllImport("varargnative", CallingConvention = CallingConvention.Cdecl)]

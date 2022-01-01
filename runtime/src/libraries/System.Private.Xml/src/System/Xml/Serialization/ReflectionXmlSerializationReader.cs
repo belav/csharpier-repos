@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Extensions;
 using System.Xml.Schema;
+
 // UnconditionalSuppressMessage that specify a Target need to be at the assembly or module level for now. Also,
 // they won't consider Target unless you also specify Scope to be either "member" or "type"
 [assembly: UnconditionalSuppressMessage(

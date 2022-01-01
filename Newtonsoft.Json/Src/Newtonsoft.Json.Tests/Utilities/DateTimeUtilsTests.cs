@@ -111,7 +111,6 @@ namespace Newtonsoft.Json.Tests.Utilities
                 )
             );
         }
-
 #if !NET20
         [Test]
         public void Parse24HourDateTimeOffset()
@@ -144,7 +143,6 @@ namespace Newtonsoft.Json.Tests.Utilities
                 )
             );
         }
-
 #endif
 
         [Test]
@@ -248,7 +246,6 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             AssertNewDateTimeParseEqual(text, oldDt);
         }
-
 #if !NET20
         [Test]
         public void ReadOffsetMSDateTimeOffset()
@@ -337,7 +334,6 @@ namespace Newtonsoft.Json.Tests.Utilities
                 );
             }
         }
-
 #endif
 
         internal static bool TryParseDateIso(

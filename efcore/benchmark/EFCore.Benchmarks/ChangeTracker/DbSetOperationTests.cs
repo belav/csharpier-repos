@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
 using Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders;
+
 #pragma warning disable CA1034 // Nested types should not be visible
 
 namespace Microsoft.EntityFrameworkCore.Benchmarks.ChangeTracker

@@ -127,7 +127,6 @@ namespace System.Net.Http.Functional.Tests
             SslPolicyErrors,
             bool
         > AllowAllCertificates = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-
 #else
         public static Func<
             HttpRequestMessage,
@@ -136,7 +135,6 @@ namespace System.Net.Http.Functional.Tests
             SslPolicyErrors,
             bool
         > AllowAllCertificates = (_, __, ___, ____) => true;
-
 #endif
 
         public static IPAddress GetIPv6LinkLocalAddress() =>

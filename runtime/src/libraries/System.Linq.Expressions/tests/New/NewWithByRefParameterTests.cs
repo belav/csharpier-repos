@@ -84,7 +84,6 @@ namespace System.Linq.Expressions.Tests
         {
             CreateByRefAliasing(useInterpreter: false);
         }
-
 #endif
 
         [Theory, ClassData(typeof(CompilationTypes))]

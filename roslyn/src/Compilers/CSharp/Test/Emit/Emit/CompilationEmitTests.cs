@@ -1414,7 +1414,6 @@ public class C
                 );
             }
         }
-
 #endif
         [Fact, WorkItem(31197, "https://github.com/dotnet/roslyn/issues/31197")]
         public void RefAssembly_CryptoHashFailedIsOnlyReportedOnce()

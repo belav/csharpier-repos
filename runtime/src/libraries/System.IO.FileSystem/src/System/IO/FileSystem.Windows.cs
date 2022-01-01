@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Text;
+
 #if MS_IO_REDIST
 namespace Microsoft.IO
 #else

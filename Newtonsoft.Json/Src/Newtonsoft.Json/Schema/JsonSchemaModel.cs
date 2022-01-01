@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Utilities;
+
 #nullable disable
 
 namespace Newtonsoft.Json.Schema

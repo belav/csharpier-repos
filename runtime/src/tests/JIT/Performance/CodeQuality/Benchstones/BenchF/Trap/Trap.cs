@@ -12,10 +12,8 @@ namespace Benchstone.BenchF
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 240000;
-
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)]

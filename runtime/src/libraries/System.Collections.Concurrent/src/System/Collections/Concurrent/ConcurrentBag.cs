@@ -750,7 +750,6 @@ namespace System.Collections.Concurrent
                 int.MaxValue; // in debug builds, start at the end so we exercise the index reset logic
 #else
                 0;
-
 #endif
             /// <summary>Head index from which to steal.  This and'd with the <see cref="_mask"/> is the index into <see cref="_array"/>.</summary>
             private volatile int _headIndex = StartIndex;

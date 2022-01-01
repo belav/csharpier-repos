@@ -15,10 +15,8 @@ namespace System.Runtime.InteropServices.Tests
         // vs Unix.
 #if Windows
         public const string LibcLibrary = "msvcrt.dll";
-
 #else
         public const string LibcLibrary = "libc";
-
 #endif
 
         public static void CustomMarshaler_StringType_Success()

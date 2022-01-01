@@ -74,7 +74,6 @@ namespace Newtonsoft.Json.Utilities
 
             return null;
         }
-
 #endif
 
         public static bool IsSubclassOf(this Type type, Type c)
@@ -87,7 +86,6 @@ namespace Newtonsoft.Json.Utilities
         {
             return type.GetTypeInfo().IsAssignableFrom(c.GetTypeInfo());
         }
-
 #endif
 
         public static bool IsInstanceOfType(this Type type, object? o)
@@ -99,7 +97,6 @@ namespace Newtonsoft.Json.Utilities
 
             return type.IsAssignableFrom(o.GetType());
         }
-
 #endif
 
         public static MethodInfo Method(this Delegate d)
@@ -287,7 +284,6 @@ namespace Newtonsoft.Json.Utilities
                 );
 #endif
         }
-
 #endif
 
 #if (DOTNET || PORTABLE)
@@ -295,7 +291,6 @@ namespace Newtonsoft.Json.Utilities
         {
             return method.GetRuntimeBaseDefinition();
         }
-
 #endif
 
 #if (DOTNET || PORTABLE)
@@ -620,7 +615,6 @@ namespace Newtonsoft.Json.Utilities
         {
             return type.GetTypeInfo().DeclaredMethods;
         }
-
 #endif
 #endif
 

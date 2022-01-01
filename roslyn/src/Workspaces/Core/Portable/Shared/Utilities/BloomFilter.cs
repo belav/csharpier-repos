@@ -246,7 +246,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Debug.Assert(index <= 3);
             return (char)(key >> (16 * index));
         }
-
 #if false
         //-----------------------------------------------------------------------------
         // MurmurHash2, by Austin Appleby

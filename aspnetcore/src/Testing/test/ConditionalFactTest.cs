@@ -40,7 +40,6 @@ public class ConditionalFactTest : IClassFixture<ConditionalFactTest.Conditional
     {
         Asserter.TestRan = true;
     }
-
 #elif NET472
     [ConditionalFact]
     [FrameworkSkipCondition(RuntimeFrameworks.CoreCLR)]
@@ -48,7 +47,6 @@ public class ConditionalFactTest : IClassFixture<ConditionalFactTest.Conditional
     {
         Asserter.TestRan = true;
     }
-
 #else
 #error Target frameworks need to be updated.
 #endif

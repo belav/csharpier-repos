@@ -33,10 +33,8 @@ public abstract class ParserTestBase
 
 #if GENERATE_BASELINES
     protected bool GenerateBaselines { get; set; } = true;
-
 #else
     protected bool GenerateBaselines { get; set; } = false;
-
 #endif
 
     protected string TestProjectRoot { get; }

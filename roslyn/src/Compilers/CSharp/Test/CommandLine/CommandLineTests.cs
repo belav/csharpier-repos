@@ -9351,7 +9351,6 @@ public class CS1698_a {}
 
             CleanupAllGeneratedFiles(source);
         }
-
 #endif
 
         [WorkItem(545832, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545832")]
@@ -17724,7 +17723,6 @@ System.NotImplementedException: 28
 
             Assert.Equal(0, result.ExitCode);
         }
-
 #endif
 
         private static ImmutableArray<byte> CreateCSharpAnalyzerNetStandard13(

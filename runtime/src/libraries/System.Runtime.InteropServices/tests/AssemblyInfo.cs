@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 [assembly: ActiveIssue(
     "https://github.com/dotnet/runtime/issues/34748",
     TestPlatforms.Windows,

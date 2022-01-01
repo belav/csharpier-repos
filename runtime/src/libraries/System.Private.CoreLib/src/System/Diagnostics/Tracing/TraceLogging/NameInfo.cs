@@ -6,6 +6,7 @@ using System;
 #endif
 using System.Collections.Generic;
 using System.Threading;
+
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else

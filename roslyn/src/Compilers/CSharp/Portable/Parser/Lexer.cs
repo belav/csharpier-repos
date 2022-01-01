@@ -233,7 +233,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
 #if DEBUG
         internal static int TokensLexed;
-
 #endif
 
         public SyntaxToken Lex(LexerMode mode)

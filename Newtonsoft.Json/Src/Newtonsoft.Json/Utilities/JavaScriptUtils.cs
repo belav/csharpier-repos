@@ -423,7 +423,6 @@ namespace Newtonsoft.Json.Utilities
 
             return -1;
         }
-
 #if HAVE_ASYNC
         public static Task WriteEscapedJavaScriptStringAsync(
             TextWriter writer,
@@ -740,7 +739,6 @@ namespace Newtonsoft.Json.Utilities
                     .ConfigureAwait(false);
             }
         }
-
 #endif
 
         public static bool TryGetDateFromConstructorJson(

@@ -104,7 +104,6 @@ namespace System.IO.Pipelines
             return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken)
                 .AsTask();
         }
-
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
         public override int Read(Span<byte> buffer)
         {
@@ -118,7 +117,6 @@ namespace System.IO.Pipelines
         {
             return ReadAsyncInternal(buffer, cancellationToken);
         }
-
 #endif
 
         private async ValueTask<int> ReadAsyncInternal(

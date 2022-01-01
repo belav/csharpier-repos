@@ -89,7 +89,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 traceWriter.TraceRecords[5].Message
             );
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40 || PORTABLE) || DNXCORE50
         [Test]
         public async Task DeserializedJsonWithAlreadyReadReader_Async()
@@ -131,7 +130,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 traceWriter.TraceRecords[5].Message
             );
         }
-
 #endif
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0
@@ -168,7 +166,6 @@ Newtonsoft.Json Error: 0 : Error!
                 Trace.AutoFlush = false;
             }
         }
-
 #endif
 
         [Test]
@@ -462,7 +459,6 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(traceMessages.First().EndsWith(" 6"));
             Assert.IsTrue(traceMessages.Last().EndsWith(" 1005"));
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40 || PORTABLE) || DNXCORE50
         [Test]
         public async Task MemoryTraceWriterThreadSafety_Trace()
@@ -538,7 +534,6 @@ Newtonsoft.Json Error: 0 : Error!
 
             Assert.IsNotNull(s);
         }
-
 #endif
 
         [Test]
@@ -1229,7 +1224,6 @@ Newtonsoft.Json Error: 0 : Error!
                 )
             );
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0
         [Test]
         public void DeserializeISerializable()
@@ -1272,7 +1266,6 @@ Newtonsoft.Json Error: 0 : Error!
 
             Assert.AreEqual(TraceLevel.Error, traceWriter.TraceRecords[1].Level);
         }
-
 #endif
 
         [Test]
@@ -1592,7 +1585,6 @@ Newtonsoft.Json Error: 0 : Error!
                 traceWriter.GetSerializedJsonMessage()
             );
         }
-
 #endif
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0

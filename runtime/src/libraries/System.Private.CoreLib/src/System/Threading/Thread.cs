@@ -250,7 +250,6 @@ namespace System.Threading
 
             StartCore();
         }
-
 #endif
 
         private void RequireCurrentThread()
@@ -407,7 +406,6 @@ namespace System.Threading
                 ThreadNameChanged(ThreadPool.WorkerThreadName);
             }
         }
-
 #if !CORECLR
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ResetThreadPoolThread()
@@ -420,7 +418,6 @@ namespace System.Threading
                 ResetThreadPoolThreadSlow();
             }
         }
-
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)]

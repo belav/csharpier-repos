@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+
 #nullable disable
 
 namespace Newtonsoft.Json.Schema

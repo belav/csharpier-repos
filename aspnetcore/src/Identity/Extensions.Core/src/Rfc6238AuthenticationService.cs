@@ -14,7 +14,6 @@ internal static class Rfc6238AuthenticationService
 {
     private static readonly TimeSpan _timestep = TimeSpan.FromMinutes(3);
     private static readonly Encoding _encoding = new UTF8Encoding(false, true);
-
 #if NETSTANDARD2_0 || NETFRAMEWORK
     private static readonly DateTime _unixEpoch = new DateTime(
         1970,
@@ -26,7 +25,6 @@ internal static class Rfc6238AuthenticationService
         DateTimeKind.Utc
     );
     private static readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
-
 #endif
 
     // Generates a new 80-bit security token

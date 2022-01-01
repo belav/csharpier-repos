@@ -25,11 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly SyntaxNode _syntaxOpt;
         private readonly bool _isPinned;
         private readonly RefKind _refKind;
-
 #if DEBUG
         private readonly int _createdAtLineNumber;
         private readonly string _createdAtFilePath;
-
 #endif
 
         internal SynthesizedLocal(
@@ -213,7 +211,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             builder.Append(_sequence);
             return builder.ToString();
         }
-
 #endif
 
         internal sealed override string GetDebuggerDisplay()

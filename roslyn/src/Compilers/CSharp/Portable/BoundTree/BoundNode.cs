@@ -332,7 +332,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
         }
-
 #endif
 
         public BoundKind Kind
@@ -378,7 +377,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return MyTreeDumper.DumpCompact(BoundTreeDumperNodeProducer.MakeTree(this));
         }
-
 #endif
 
         internal string GetDebuggerDisplay()

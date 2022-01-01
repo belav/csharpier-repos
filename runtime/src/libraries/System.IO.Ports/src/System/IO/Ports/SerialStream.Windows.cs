@@ -1881,10 +1881,8 @@ namespace System.IO.Ports
             private readonly WaitCallback callReceiveEvents;
             private readonly WaitCallback callPinEvents;
             private readonly IOCompletionCallback freeNativeOverlappedCallback;
-
 #if DEBUG
             private readonly string portName;
-
 #endif
 
             internal unsafe EventLoopRunner(SerialStream stream)

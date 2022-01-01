@@ -11,10 +11,8 @@ namespace Benchstone.MDBenchI
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 70000;
-
 #endif
 
         static int Inner(ref int x, ref int y, ref int z)

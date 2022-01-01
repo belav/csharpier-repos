@@ -131,7 +131,6 @@ public class HttpConnectionManagerTests : LoggedTest
             }
         }
     }
-
 #endif
 
     private class NoDebuggerConditionAttribute : Attribute, ITestCondition

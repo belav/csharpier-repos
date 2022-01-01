@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
     using static Microsoft.CodeAnalysis.CommandLine.BuildResponse;
+
 #if DEBUG || BOOTSTRAP
     /// <summary>
     /// This task exists to help us validate our bootstrap building phase is executing correctly.  The bootstrap
@@ -160,7 +161,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             s_failedQueue.Enqueue((type, outputAssembly));
         }
     }
-
 #endif
 
     internal static class ValidateBootstrapUtil

@@ -40,7 +40,6 @@ namespace System.Drawing
         }
 
         private string allocationSite = Graphics.GetAllocationStack();
-
 #endif
 
         /// <summary>
@@ -922,7 +921,6 @@ namespace System.Drawing
             Vector2 translation = cumulativeTransform.Translation;
             offset = new PointF(translation.X, translation.Y);
         }
-
 #endif
 
         public RectangleF VisibleClipBounds

@@ -570,7 +570,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
             new(NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Silent),
             "csharp_style_namespace_declarations"
         );
-
 #if false
 
         public static readonly Option2<CodeStyleOption2<bool>> VarElsewhere = CreateOption(

@@ -103,7 +103,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// and LocalState instances are mismatched.
             /// </summary>
             private readonly Random _nextIdOffset;
-
 #endif
 
             /// <summary>

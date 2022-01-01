@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Xunit;
+
 #pragma warning disable 0649  // field is never assigned to
 
 public static class TypeTests_GetMember

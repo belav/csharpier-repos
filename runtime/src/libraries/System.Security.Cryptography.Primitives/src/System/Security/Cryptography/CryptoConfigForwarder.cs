@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+
 [assembly: UnconditionalSuppressMessage(
     "ReflectionAnalysis",
     "IL2026:RequiresUnreferencedCode",

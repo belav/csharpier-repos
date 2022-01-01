@@ -82,7 +82,6 @@ namespace Newtonsoft.Json.Tests.Converters
             Two = 2,
             Four = 4
         }
-
 #if !NET20
         public enum NamedEnum
         {
@@ -113,7 +112,6 @@ namespace Newtonsoft.Json.Tests.Converters
             [EnumMember(Value = ",")]
             JustComma
         }
-
 #endif
 
         public class NegativeEnumClass
@@ -349,7 +347,6 @@ Parameter name: namingStrategyType",
             );
             Assert.AreEqual(9, (int)e);
         }
-
 #if !NET20
         [Test]
         public void NamedEnumDuplicateTest()
@@ -482,7 +479,6 @@ Parameter name: namingStrategyType",
             );
             Assert.AreEqual(NamedEnum.Third, c.Enum);
         }
-
 #endif
 
         [Test]
@@ -851,7 +847,6 @@ Parameter name: namingStrategyType",
 
             Assert.Fail();
         }
-
 #if !NET20
         [Test]
         public void EnumMemberPlusFlags()
@@ -1036,7 +1031,6 @@ Parameter name: namingStrategyType",
 
             Assert.AreEqual(NumberNamesEnum.fourth, e);
         }
-
 #endif
 
         [Test]

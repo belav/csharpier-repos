@@ -1311,10 +1311,8 @@ public static class TestFramework
 public static class Logging
 {
     static TextWriter stdout = Console.Out;
-
 #if (!WIN_8_P)
     static TextWriter loggingFile = null;
-
 #endif
 
     public static void SetConsole(string fileName)
@@ -1488,14 +1486,12 @@ public static class Logging
         Console.Write(buffer);
         Console.Out.Flush();
     }
-
 #if (!WIN_8_P)
     public static void Write(char[] buffer, int index, int count)
     {
         Console.Write(buffer, index, count);
         Console.Out.Flush();
     }
-
 #endif
 
     public static void Write(double value)

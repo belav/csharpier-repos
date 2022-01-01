@@ -16,7 +16,6 @@ namespace System.Threading
     {
 #if DEBUG
         private Thread? _ownerThread;
-
 #endif
 
         public void Dispose()
@@ -27,7 +26,6 @@ namespace System.Threading
 
 #if DEBUG
         public bool IsLocked => _ownerThread == Thread.CurrentThread;
-
 #endif
 
         [Conditional("DEBUG")]

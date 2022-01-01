@@ -37,7 +37,6 @@ namespace System.Linq.Expressions.Compiler
 #if FEATURE_COMPILE_TO_METHODBUILDER
         // The TypeBuilder backing this method, if any
         private readonly TypeBuilder _typeBuilder;
-
 #endif
 
         private readonly MethodInfo _method;
@@ -148,7 +147,6 @@ namespace System.Linq.Expressions.Compiler
 
             InitializeMethod();
         }
-
 #endif
 
         /// <summary>
@@ -183,10 +181,8 @@ namespace System.Linq.Expressions.Compiler
         internal ILGenerator IL => _ilg;
 
         internal IParameterProvider Parameters => _lambda;
-
 #if FEATURE_COMPILE_TO_METHODBUILDER
         internal bool CanEmitBoundConstants => _method is DynamicMethod;
-
 #endif
 
         #region Compiler entry points
@@ -231,7 +227,6 @@ namespace System.Linq.Expressions.Compiler
             // 3. Emit
             c.EmitLambdaBody();
         }
-
 #endif
 
         #endregion
@@ -307,7 +302,6 @@ namespace System.Linq.Expressions.Compiler
                 FieldAttributes.Static | FieldAttributes.Private
             );
         }
-
 #endif
 
         /// <summary>

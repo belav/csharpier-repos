@@ -2182,7 +2182,6 @@ namespace System.Data.SqlTypes
             // If number of significant digits less than scale, return scale
             return (Prec < _bScale ? _bScale : (byte)Prec);
         }
-
 #endif
 
         //    AddULong()

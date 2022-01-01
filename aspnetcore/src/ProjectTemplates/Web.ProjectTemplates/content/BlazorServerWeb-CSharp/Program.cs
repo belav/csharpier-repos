@@ -38,7 +38,6 @@ using BlazorServerWeb_CSharp.Areas.Identity;
 using BlazorServerWeb_CSharp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 #if (IndividualLocalAuth)
 var connectionString =
@@ -104,7 +103,6 @@ builder.Services.AddAuthorization(
         options.FallbackPolicy = options.DefaultPolicy;
     }
 );
-
 #elif (WindowsAuth)
 builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
@@ -117,7 +115,6 @@ builder.Services.AddAuthorization(
         options.FallbackPolicy = options.DefaultPolicy;
     }
 );
-
 #endif
 builder.Services.AddRazorPages();
 #if (OrganizationalAuth || IndividualB2CAuth)
@@ -153,20 +150,16 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 #else
 }
-
 #endif
 
 app.UseStaticFiles();
 
 app.UseRouting();
-
 #if (OrganizationalAuth || IndividualAuth || WindowsAuth)
 app.UseAuthentication();
 app.UseAuthorization();
-
 #endif
 #if (OrganizationalAuth || IndividualAuth)
 app.MapControllers();

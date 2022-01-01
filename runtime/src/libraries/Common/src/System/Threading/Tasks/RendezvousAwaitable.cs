@@ -27,10 +27,8 @@ namespace System.Threading.Tasks
 
         /// <summary>The result of the async operation, if it succeeded.</summary>
         private TResult? _result;
-
 #if DEBUG
         private bool _resultSet;
-
 #endif
 
         /// <summary>true if the producer should invoke the continuation asynchronously; otherwise, false.</summary>

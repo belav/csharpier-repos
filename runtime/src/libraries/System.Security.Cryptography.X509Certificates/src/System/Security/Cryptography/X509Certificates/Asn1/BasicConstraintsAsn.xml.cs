@@ -26,7 +26,6 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             decoded.CA = reader.ReadBoolean();
             reader.ThrowIfNotEmpty();
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

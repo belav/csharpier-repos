@@ -32,7 +32,6 @@ builder.Services
             .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
 #endif
 #elif (IndividualB2CAuth)
 builder.Services
@@ -44,17 +43,14 @@ builder.Services
             .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"));
-
 #endif
 #endif
 
 builder.Services.AddControllers();
-
 #if (EnableOpenAPI)
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 #endif
 #if (WindowsAuth)
 
@@ -69,11 +65,9 @@ builder.Services.AddAuthorization(
         options.FallbackPolicy = options.DefaultPolicy;
     }
 );
-
 #endif
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 #if (EnableOpenAPI)
 if (app.Environment.IsDevelopment())
@@ -81,12 +75,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 #endif
 #if (RequiresHttps)
 
 app.UseHttpsRedirection();
-
 #endif
 
 #if (OrganizationalAuth || IndividualAuth || WindowsAuth)

@@ -9,6 +9,7 @@ using System.Reflection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 
+
 #nullable enable
 
 namespace Microsoft.Extensions.StackTrace.Sources;

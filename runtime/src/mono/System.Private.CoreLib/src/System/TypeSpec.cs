@@ -180,7 +180,6 @@ namespace System
         {
             return GetDisplayFullName(DisplayNameFormat.WANT_ASSEMBLY);
         }
-
 #endif
 
         private string GetDisplayFullName(DisplayNameFormat flags)

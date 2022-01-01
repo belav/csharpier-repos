@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 #pragma warning disable CS0618 // Type or member is obsolete
 namespace Microsoft.Extensions.Hosting
 {

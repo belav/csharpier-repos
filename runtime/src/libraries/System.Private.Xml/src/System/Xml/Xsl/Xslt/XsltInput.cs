@@ -17,10 +17,8 @@ namespace System.Xml.Xsl.Xslt
     {
 #if DEBUG
         private const int InitRecordsSize = 1;
-
 #else
         private const int InitRecordsSize = 1 + 21;
-
 #endif
 
         private readonly XmlReader _reader;

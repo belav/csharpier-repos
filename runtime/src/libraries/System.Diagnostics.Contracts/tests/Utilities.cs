@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 // Contract.ContractFailed is non-local; changes in one test will affect any others running concurrently
 [assembly: CollectionBehavior(
     CollectionBehavior.CollectionPerAssembly,

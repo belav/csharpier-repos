@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(typeof(System.IO.Ports.Handshake))]
 [assembly: TypeForwardedTo(typeof(System.IO.Ports.Parity))]
 [assembly: TypeForwardedTo(typeof(System.IO.Ports.SerialData))]

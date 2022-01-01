@@ -13,6 +13,7 @@ using System.Diagnostics.Tracing;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
 #pragma warning disable CA1823 // not all IDs are used by all partial providers
 
 namespace System.Net
@@ -40,7 +41,6 @@ namespace System.Net
 #if !ES_BUILD_STANDALONE
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";
-
 #endif
 
         /// <summary>The single event source instance to use for all logging.</summary>
@@ -483,7 +483,6 @@ namespace System.Net
         }
 
         static partial void AdditionalCustomizedToString<T>(T value, ref string? result);
-
         #endregion
 
         #region Custom WriteEvent overloads
@@ -548,7 +547,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -597,7 +595,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -631,7 +628,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -671,7 +667,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -711,7 +706,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -765,7 +759,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -813,7 +806,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

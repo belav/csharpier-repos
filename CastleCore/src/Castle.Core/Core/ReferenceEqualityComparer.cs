@@ -18,6 +18,7 @@ namespace Castle.Core
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

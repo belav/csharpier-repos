@@ -827,7 +827,6 @@ namespace DispatchProxyTests
                 )
             );
         }
-
 #endif
 
         [Fact]

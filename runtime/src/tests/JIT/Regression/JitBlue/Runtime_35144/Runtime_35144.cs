@@ -9,6 +9,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
+
 #pragma warning disable 0169 // warning CS0169: The field '{0}' is never used
 struct WrappedVector64
 {

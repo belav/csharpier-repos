@@ -457,7 +457,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return sb.ToString();
         }
-
 #endif
 
         private RefKind GetRefKind(int index)

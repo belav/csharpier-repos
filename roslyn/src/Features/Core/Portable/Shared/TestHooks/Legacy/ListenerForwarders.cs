@@ -5,6 +5,7 @@
 #nullable disable
 
 using System.Runtime.CompilerServices;
+
 [assembly: TypeForwardedTo(
     typeof(Microsoft.CodeAnalysis.Shared.TestHooks.AsynchronousOperationListener)
 )]

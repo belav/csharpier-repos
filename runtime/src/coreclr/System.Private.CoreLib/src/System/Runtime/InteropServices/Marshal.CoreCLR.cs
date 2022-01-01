@@ -21,7 +21,6 @@ namespace System.Runtime.InteropServices
         /// IUnknown is {00000000-0000-0000-C000-000000000046}
         /// </summary>
         internal static Guid IID_IUnknown = new Guid(0, 0, 0, 0xC0, 0, 0, 0, 0, 0, 0, 0x46);
-
 #endif //FEATURE_COMINTEROP
 
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -287,7 +286,6 @@ namespace System.Runtime.InteropServices
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern bool IsPinnable(object? obj);
-
 #if TARGET_WINDOWS
         internal static bool IsBuiltInComSupported { get; } = IsBuiltInComSupportedInternal();
 
@@ -315,13 +313,11 @@ namespace System.Runtime.InteropServices
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "MarshalNative_GetHINSTANCE")]
         private static extern IntPtr GetHINSTANCE(QCallModule m);
-
 #endif // TARGET_WINDOWS
 
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern Exception GetExceptionForHRInternal(int errorCode, IntPtr errorInfo);
-
 #if FEATURE_COMINTEROP
         /// <summary>
         /// Converts the CLR exception to an HRESULT. This function also sets
@@ -926,7 +922,6 @@ namespace System.Runtime.InteropServices
         [SupportedOSPlatform("windows")]
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern void ChangeWrapperHandleStrength(object otp, bool fIsWeak);
-
 #endif // FEATURE_COMINTEROP
 
         [MethodImpl(MethodImplOptions.InternalCall)]

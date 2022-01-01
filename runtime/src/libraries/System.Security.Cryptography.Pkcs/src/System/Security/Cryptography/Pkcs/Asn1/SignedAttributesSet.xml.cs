@@ -32,7 +32,6 @@ namespace System.Security.Cryptography.Pkcs
 
             ensureUniqueTag(new Asn1Tag(TagClass.ContextSpecific, 0), "SignedAttributes");
         }
-
 #endif
 
         internal void Encode(AsnWriter writer)

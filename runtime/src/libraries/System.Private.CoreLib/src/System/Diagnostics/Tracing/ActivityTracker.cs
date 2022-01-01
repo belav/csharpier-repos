@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 #endif
 using System.Threading;
+
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else

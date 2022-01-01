@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+
 #if MS_IO_REDIST
 namespace Microsoft.IO
 #else

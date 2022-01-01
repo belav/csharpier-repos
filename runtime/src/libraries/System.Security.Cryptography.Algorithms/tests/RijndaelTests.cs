@@ -4,6 +4,7 @@
 using System.Text;
 using Test.Cryptography;
 using Xunit;
+
 #pragma warning disable SYSLIB0022 // Rijndael types are obsolete
 
 namespace System.Security.Cryptography.Encryption.Rijndael.Tests

@@ -27,7 +27,6 @@ namespace System.Drawing
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
-
 #endif
 
         private static int s_bitDepth;

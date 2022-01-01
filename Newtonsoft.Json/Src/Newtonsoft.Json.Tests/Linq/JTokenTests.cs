@@ -1526,7 +1526,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.IsTrue(a.DeepEquals(a2));
         }
-
 #endif
 
         [Test]

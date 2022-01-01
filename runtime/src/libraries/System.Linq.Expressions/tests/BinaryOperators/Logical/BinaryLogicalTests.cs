@@ -1267,7 +1267,6 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
             );
         }
-
 #endif
 
         [Fact]
@@ -1411,7 +1410,6 @@ namespace System.Linq.Expressions.Tests
             module.CreateGlobalFunctions();
             return module.GetMethod(globalMethod.Name);
         }
-
 #endif
 
         public class NonGenericClass

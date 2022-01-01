@@ -1,4 +1,5 @@
 using System;
+
 #if WITH_MEMBERS
 public class DisappearingType { }
 
@@ -8,7 +9,6 @@ public enum DisappearingEnum
 {
     V0
 }
-
 #endif
 
 

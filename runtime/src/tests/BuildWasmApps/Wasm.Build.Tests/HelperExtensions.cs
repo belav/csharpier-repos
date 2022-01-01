@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Collections;
+
 #nullable enable
 
 namespace Wasm.Build.Tests

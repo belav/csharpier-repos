@@ -3,9 +3,9 @@
 
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;[assembly: TypeForwardedTo(
-    typeof(InputFormatterException)
-)]
+using Microsoft.AspNetCore.Mvc.Formatters;
+
+[assembly: TypeForwardedTo(typeof(InputFormatterException))]
 #pragma warning disable RS0016 // Suppress PublicAPI analyzer
 [assembly: TypeForwardedTo(typeof(ProblemDetails))]
 #pragma warning restore RS0016

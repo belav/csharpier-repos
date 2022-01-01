@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else
@@ -24,7 +25,6 @@ namespace System.Diagnostics.Tracing
         internal readonly EventLevel level = (EventLevel)(-1);
         internal readonly EventOpcode opcode = (EventOpcode)(-1);
         internal readonly EventTags tags;
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"

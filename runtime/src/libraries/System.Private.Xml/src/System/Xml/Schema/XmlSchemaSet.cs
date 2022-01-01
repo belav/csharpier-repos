@@ -907,7 +907,6 @@ namespace System.Xml.Schema
 
             return true;
         }
-
 #endif
 
         //For use by the validator when loading schemaLocations in the instance

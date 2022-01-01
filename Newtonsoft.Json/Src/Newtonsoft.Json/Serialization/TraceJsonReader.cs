@@ -117,7 +117,6 @@ namespace Newtonsoft.Json.Serialization
             WriteCurrentToken();
             return value;
         }
-
 #endif
 
         public void WriteCurrentToken()

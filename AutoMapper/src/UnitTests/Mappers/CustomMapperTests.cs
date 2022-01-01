@@ -27,7 +27,6 @@ namespace AutoMapper.UnitTests.Mappers
                   : null;
             };
         }
-
 #endif
         [TypeConverter(typeof(CustomTypeConverter))]
         public class Source

@@ -148,7 +148,6 @@ namespace Newtonsoft.Json.Tests.Issues
 
             return sw.ToString();
         }
-
 #endif
 
 #if !NET20
@@ -235,7 +234,6 @@ namespace Newtonsoft.Json.Tests.Issues
                 xml
             );
         }
-
 #endif
 
         private const string JsonWithoutNamespace =

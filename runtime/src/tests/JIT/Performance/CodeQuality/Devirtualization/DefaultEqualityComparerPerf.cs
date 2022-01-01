@@ -98,10 +98,8 @@ namespace Devirtualization
     {
 #if DEBUG
         public const int Iterations = 1;
-
 #else
         public const int Iterations = 150 * 1000 * 1000;
-
 #endif
 
         public enum E

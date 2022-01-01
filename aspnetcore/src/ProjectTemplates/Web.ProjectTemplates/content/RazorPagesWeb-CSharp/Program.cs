@@ -32,7 +32,6 @@ using Company.WebApplication1.Data;
 
 #endif
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 #if (IndividualLocalAuth)
 var connectionString =
@@ -51,7 +50,6 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services
     .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
@@ -71,7 +69,6 @@ builder.Services
             .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
-
 #endif
 #elif (IndividualB2CAuth)
 #if (GenerateApi)
@@ -99,12 +96,10 @@ builder.Services.AddAuthorization(
     }
 );
 builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
-
 #elif (IndividualB2CAuth)
 builder.Services
     .AddRazorPages()
     .AddMicrosoftIdentityUI();
-
 #elif (WindowsAuth)
 
 builder.Services
@@ -119,10 +114,8 @@ builder.Services.AddAuthorization(
     }
 );
 builder.Services.AddRazorPages();
-
 #else
 builder.Services.AddRazorPages();
-
 #endif
 
 var app = builder.Build();
@@ -151,17 +144,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 #if (OrganizationalAuth || IndividualAuth || WindowsAuth)
 app.UseAuthentication();
 #endif
 app.UseAuthorization();
 
 app.MapRazorPages();
-
 #if (IndividualB2CAuth || OrganizationalAuth)
 app.MapControllers();
-
 #endif
 
 app.Run();

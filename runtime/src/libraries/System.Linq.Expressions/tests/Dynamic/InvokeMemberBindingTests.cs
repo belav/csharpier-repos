@@ -535,7 +535,6 @@ namespace System.Dynamic.Tests
             bool equal = dX.Equals(dY);
             Assert.Equal(x == y, equal);
         }
-
 #endif
 
         public class FuncWrapper<TResult>

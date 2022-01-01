@@ -46,10 +46,8 @@ namespace System.Web.Mvc.Routing.Constraints
         /// </summary>
 #if ASPNETWEBAPI
         public IHttpRouteConstraint InnerConstraint { get; private set; }
-
 #else
         public IRouteConstraint InnerConstraint { get; private set; }
-
 #endif
 
         /// <inheritdoc />
