@@ -4,7 +4,6 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
-
 // disable warnings about various Monitor members being obsolete
 #pragma warning disable 0618
 

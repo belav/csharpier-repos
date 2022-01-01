@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Microsoft.TestCommon;
-
 #if NETFX_CORE
 namespace System.Net.Http.Internal
 #else

@@ -15,7 +15,6 @@
 namespace Castle.Core.Configuration
 {
     using System;
-
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

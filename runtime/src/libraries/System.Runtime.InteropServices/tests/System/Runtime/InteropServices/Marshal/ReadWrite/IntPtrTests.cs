@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Xunit;
-
 #pragma warning disable CS0618 // Type or member is obsolete
 
 namespace System.Runtime.InteropServices.Tests

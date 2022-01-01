@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Hosting;
-
 [assembly: HostingStartup(
     typeof(Microsoft.AspNetCore.AzureAppServices.HostingStartup.AzureAppServicesHostingStartup)
 )]
+
 
 
 namespace Microsoft.AspNetCore.AzureAppServices.HostingStartup;

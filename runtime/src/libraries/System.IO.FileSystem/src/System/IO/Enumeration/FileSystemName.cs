@@ -3,7 +3,6 @@
 
 using System;
 using System.Text;
-
 #if MS_IO_REDIST
 namespace Microsoft.IO.Enumeration
 #else

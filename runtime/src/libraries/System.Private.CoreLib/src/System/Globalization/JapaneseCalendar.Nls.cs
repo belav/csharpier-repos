@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 #if TARGET_WINDOWS
 using Internal.Win32;
-
 #endif
 
 namespace System.Globalization

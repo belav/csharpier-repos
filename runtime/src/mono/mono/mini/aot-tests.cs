@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 /*
  * Regression tests for the AOT/FULL-AOT code.
  */

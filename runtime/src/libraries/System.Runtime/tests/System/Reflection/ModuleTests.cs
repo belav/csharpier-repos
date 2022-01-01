@@ -6,10 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Tests;
 using Xunit;
-using TestAttributes;
-
-[module: Foo]
+using TestAttributes;[module: Foo]
 [module: Complicated(1, Stuff = 2)]
+
 
 namespace TestAttributes
 {

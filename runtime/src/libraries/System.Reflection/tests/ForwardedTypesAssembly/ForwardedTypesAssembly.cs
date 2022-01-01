@@ -3,9 +3,9 @@
 
 using System;
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(object))]
 [assembly: TypeForwardedTo(typeof(TypeInUnloadableAssembly))]
+
 
 public static class TypeInForwardedAssembly
 {

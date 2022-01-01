@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
-
 #nullable disable warnings
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

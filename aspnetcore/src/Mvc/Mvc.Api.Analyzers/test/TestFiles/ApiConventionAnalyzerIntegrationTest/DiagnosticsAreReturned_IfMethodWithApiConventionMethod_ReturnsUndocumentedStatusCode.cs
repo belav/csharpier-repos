@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Mvc;
-
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
+
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {

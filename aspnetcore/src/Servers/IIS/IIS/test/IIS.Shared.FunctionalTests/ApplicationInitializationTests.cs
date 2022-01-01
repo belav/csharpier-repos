@@ -14,8 +14,6 @@ using Xunit;
 
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
-
-
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 

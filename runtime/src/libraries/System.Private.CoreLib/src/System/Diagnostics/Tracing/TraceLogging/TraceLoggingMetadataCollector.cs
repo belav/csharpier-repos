@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Speech.Internal.SrgsParser;
 using System.Text;
-
 #endregion
 
 namespace System.Speech.Internal.SrgsCompiler

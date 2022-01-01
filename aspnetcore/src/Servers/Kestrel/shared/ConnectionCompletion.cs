@@ -3,7 +3,6 @@
 
 using Microsoft.Extensions.Logging;
 
-
 #nullable enable
 
 namespace Microsoft.AspNetCore.Connections;

@@ -13,9 +13,9 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using System.Net;
 using HttpStress;
-
 [assembly: SupportedOSPlatform("windows")]
 [assembly: SupportedOSPlatform("linux")]
+
 
 namespace HttpStress
 {

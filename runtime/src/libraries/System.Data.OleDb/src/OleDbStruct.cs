@@ -8,7 +8,6 @@ namespace System.Data.OleDb
 #if DEBUG
     using Globalization;
     using Text;
-
 #endif
 
     internal enum DBBindStatus

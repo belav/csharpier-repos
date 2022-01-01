@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.Utilities

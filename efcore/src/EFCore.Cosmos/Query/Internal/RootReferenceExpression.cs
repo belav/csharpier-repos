@@ -4,7 +4,6 @@
 using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Metadata;
-
 #nullable disable
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

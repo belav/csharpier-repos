@@ -7,7 +7,6 @@ using System;
 using System.Reflection;
 using System.Collections;
 using System.Runtime.CompilerServices;
-
 [assembly: SingleAttribute<int>()]
 [assembly: SingleAttribute<bool>()]
 
@@ -16,6 +15,7 @@ using System.Runtime.CompilerServices;
 [assembly: MultiAttribute<int>(Value = 2)]
 [assembly: MultiAttribute<bool>()]
 [assembly: MultiAttribute<bool>(true)]
+
 
 [AttributeUsage(
     AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Property,

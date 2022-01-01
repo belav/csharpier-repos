@@ -11,7 +11,6 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-
 #nullable enable
 
 namespace Microsoft.AspNetCore.Certificates.Generation;

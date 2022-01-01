@@ -16,10 +16,8 @@ using Xunit;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.Text;
-
 #if !CODE_STYLE
 using Roslyn.Utilities;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 #pragma warning disable 0618 // ignore obsolete warning about XmlDataDocument
 
 namespace System.Xml

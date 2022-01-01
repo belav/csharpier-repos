@@ -11,7 +11,6 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.WebEncoders.Sources;
 
-
 #if WebEncoders_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;
 

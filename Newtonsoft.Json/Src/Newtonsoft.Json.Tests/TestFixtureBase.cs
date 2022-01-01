@@ -52,10 +52,8 @@ using System.Threading.Tasks;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 using Action = Newtonsoft.Json.Serialization.Action;
-
 #else
 using System.Linq;
-
 #endif
 
 namespace Newtonsoft.Json.Tests

@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.WebAssembly.Diagnostics;
 using Newtonsoft.Json.Linq;
-
 #nullable enable
 
 namespace DebuggerTests

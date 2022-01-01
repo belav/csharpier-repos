@@ -3,8 +3,8 @@
 
 using System.Globalization;
 using Microsoft.AspNetCore.Hosting;
-
 [assembly: HostingStartup(typeof(TestStartupAssembly1.TestHostingStartup1))]
+
 
 
 namespace TestStartupAssembly1;

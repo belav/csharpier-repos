@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Threading;
-
 /*
  * Regression tests for the GC support in the JIT
  */

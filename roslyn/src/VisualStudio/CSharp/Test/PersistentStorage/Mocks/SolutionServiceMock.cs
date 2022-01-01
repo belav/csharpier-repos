@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using Microsoft.VisualStudio.RpcContracts.Solution;
 using Microsoft.VisualStudio.Threading;
-
 #pragma warning disable CS0067 // events that are never used
 
 namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks

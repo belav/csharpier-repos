@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using Xunit;
-
 #pragma warning disable 0649 // unused fields there for future testing needs
 
 namespace System.Threading.Channels.Tests

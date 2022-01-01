@@ -9,7 +9,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 #nullable enable
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local

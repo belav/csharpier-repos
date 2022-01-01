@@ -20,7 +20,6 @@ namespace System.Net.Http.Functional.Tests
 {
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
-
 #endif
 
     // Note:  Disposing the HttpClient object automatically disposes the handler within. So, it is not necessary

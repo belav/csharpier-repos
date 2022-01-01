@@ -5,7 +5,6 @@
 
 using System.Collections;
 using System.Collections.Specialized;
-
 #if CODEDOM
 namespace System.CodeDom
 #else

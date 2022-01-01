@@ -11,12 +11,10 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Serialization;
 using Microsoft.CodeAnalysis.Options;
 using Roslyn.Utilities;
-
 #if DEBUG
 using System.Diagnostics;
 using System.Text;
 using Microsoft.CodeAnalysis.Internal.Log;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Remote

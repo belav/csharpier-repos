@@ -17,7 +17,6 @@
 namespace Castle.DynamicProxy.Tests
 {
     using System;
-
 #if FEATURE_SERIALIZATION
 	[Serializable]
 #endif

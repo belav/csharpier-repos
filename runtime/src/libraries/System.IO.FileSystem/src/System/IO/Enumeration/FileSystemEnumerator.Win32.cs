@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 #if MS_IO_REDIST
 namespace Microsoft.IO.Enumeration
 #else

@@ -3,7 +3,6 @@
 
 using System.Runtime.Versioning;
 using System.Xml;
-
 #pragma warning disable CA5384 // Do Not Use Digital Signature Algorithm (DSA)
 
 namespace System.Security.Cryptography.Xml

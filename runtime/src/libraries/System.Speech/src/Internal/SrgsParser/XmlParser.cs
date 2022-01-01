@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Speech.Recognition.SrgsGrammar;
 using System.Text;
 using System.Xml;
-
 #pragma warning disable 56524 // The _reader and _xmlReader are not created in this module and should not be disposed
 
 // Remove all the check for null or empty warnings

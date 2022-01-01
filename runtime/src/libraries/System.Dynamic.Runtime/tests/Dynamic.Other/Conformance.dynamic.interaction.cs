@@ -44,7 +44,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
-
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined types which return dynamic used in test.
@@ -1190,7 +1189,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
-
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined generic types which return dynamic used in test.
@@ -3289,7 +3287,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
-
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined types used in test.
@@ -4436,7 +4433,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
-
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined generic types used in test.

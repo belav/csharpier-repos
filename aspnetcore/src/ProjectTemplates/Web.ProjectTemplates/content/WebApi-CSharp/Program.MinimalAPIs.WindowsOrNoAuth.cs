@@ -1,6 +1,5 @@
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
-
 #endif
 var builder = WebApplication.CreateBuilder(args);
 

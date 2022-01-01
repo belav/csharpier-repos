@@ -18,7 +18,6 @@ using Microsoft.AspNetCore.Testing;
 using Moq;
 using Xunit;
 
-
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests.Http2;
 

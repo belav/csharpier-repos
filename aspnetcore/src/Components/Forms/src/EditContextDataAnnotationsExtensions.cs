@@ -10,10 +10,10 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Components.HotReload;
-
 [assembly: MetadataUpdateHandler(
     typeof(Microsoft.AspNetCore.Components.Forms.EditContextDataAnnotationsExtensions)
 )]
+
 
 
 namespace Microsoft.AspNetCore.Components.Forms;

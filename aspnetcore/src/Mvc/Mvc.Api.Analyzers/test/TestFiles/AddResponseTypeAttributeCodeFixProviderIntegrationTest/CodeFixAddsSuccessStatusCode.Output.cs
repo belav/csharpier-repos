@@ -3,8 +3,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
+
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._OUTPUT_
 {

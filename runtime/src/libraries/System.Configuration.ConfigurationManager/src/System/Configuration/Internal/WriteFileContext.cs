@@ -9,10 +9,8 @@ using System.Threading;
 // TempFileCollection was moved around in .NET Core.
 #if CODEDOM
 using System.CodeDom.Compiler;
-
 #else
 using System.IO.Internal;
-
 #endif
 
 namespace System.Configuration.Internal

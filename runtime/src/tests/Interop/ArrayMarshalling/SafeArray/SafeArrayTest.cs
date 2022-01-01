@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading;
 using System.Runtime.InteropServices;
 using Xunit;
-
 #pragma warning disable CS0612, CS0618
 
 public class Tester

@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
 #nullable disable warnings
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

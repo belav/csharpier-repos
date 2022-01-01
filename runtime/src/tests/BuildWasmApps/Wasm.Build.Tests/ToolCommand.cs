@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 #nullable enable
 
 namespace Wasm.Build.Tests

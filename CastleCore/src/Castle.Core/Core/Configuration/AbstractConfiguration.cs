@@ -16,7 +16,6 @@ namespace Castle.Core.Configuration
 {
     using System;
     using System.Globalization;
-
     /// <summary>
 	///   This is an abstract <see cref = "IConfiguration" /> implementation
 	///   that deals with methods that can be abstracted away

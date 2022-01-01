@@ -31,7 +31,6 @@ using Microsoft.Extensions.Primitives;
 using Moq;
 using Xunit;
 
-
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
 

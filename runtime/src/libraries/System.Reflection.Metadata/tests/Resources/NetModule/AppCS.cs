@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Linq.Expressions;
-
 [assembly: System.Reflection.AssemblyTitle("MetadataReaderModuleTestData")]
 [assembly: System.Reflection.AssemblyVersion("1.2.3.4")]
 [assembly: System.Reflection.AssemblyCulture("")]
+
 
 namespace AppCS
 {

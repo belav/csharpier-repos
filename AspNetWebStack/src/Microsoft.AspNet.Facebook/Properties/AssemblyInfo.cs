@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Web;
 using Microsoft.AspNet.Facebook;
-
 [assembly: AssemblyTitle("Microsoft.AspNet.Facebook")]
 [assembly: AssemblyDescription("")]
 

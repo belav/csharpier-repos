@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding

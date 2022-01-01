@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
-
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
 namespace IOperationGenerator

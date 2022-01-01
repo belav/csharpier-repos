@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-
 #nullable enable
 
 namespace Microsoft.WebAssembly.Build.Tasks

@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using NS.Module.CS01;
-
 [assembly: System.Reflection.AssemblyTitle("MetadataReaderModuleTestData")]
 [assembly: System.Reflection.AssemblyVersion("1.2.3.4")]
 [assembly: System.Reflection.AssemblyCulture("")]
+
 
 namespace AppCS
 {

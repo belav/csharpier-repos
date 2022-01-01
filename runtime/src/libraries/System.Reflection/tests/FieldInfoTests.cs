@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-
 #pragma warning disable 0414
 
 namespace System.Reflection.Tests

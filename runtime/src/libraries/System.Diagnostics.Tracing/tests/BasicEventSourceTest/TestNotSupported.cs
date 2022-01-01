@@ -7,10 +7,8 @@ using SdtEventSources;
 using Microsoft.DotNet.RemoteExecutor;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
-
 #else
 using System.Diagnostics.Tracing;
-
 #endif
 
 namespace BasicEventSourceTests

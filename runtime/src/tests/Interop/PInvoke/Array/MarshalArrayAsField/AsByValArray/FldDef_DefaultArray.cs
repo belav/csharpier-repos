@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 #pragma warning disable 618
 
 #region Struct Definition

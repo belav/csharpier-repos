@@ -6,7 +6,6 @@ using System.CommandLine.Binding;
 using System.CommandLine.Help;
 using System.CommandLine.Parsing;
 using System.Threading;
-
 #nullable enable
 
 namespace System.CommandLine.Invocation

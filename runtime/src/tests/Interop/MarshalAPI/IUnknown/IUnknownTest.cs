@@ -7,7 +7,6 @@ using System.Security;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using Xunit;
-
 #pragma warning disable 618
 
 public class TestClass

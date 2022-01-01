@@ -16,7 +16,6 @@ namespace Castle.Core.Logging
 {
     using System;
     using System.Globalization;
-
     /// <summary>
 	/// The Logger sending everything to the standard output streams.
 	/// This is mainly for the cases when you have a utility that

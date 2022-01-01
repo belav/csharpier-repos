@@ -5,7 +5,6 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.CodeDom.CodeArgumentReferenceExpression))]
 [assembly: TypeForwardedTo(typeof(System.CodeDom.CodeArrayCreateExpression))]
 [assembly: TypeForwardedTo(typeof(System.CodeDom.CodeArrayIndexerExpression))]

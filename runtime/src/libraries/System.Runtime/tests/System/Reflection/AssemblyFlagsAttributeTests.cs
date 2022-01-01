@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-
 #pragma warning disable 0618
 
 namespace System.Reflection.Tests

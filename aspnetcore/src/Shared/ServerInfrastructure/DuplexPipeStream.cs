@@ -10,7 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Internal;
 
-
 #nullable enable
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;

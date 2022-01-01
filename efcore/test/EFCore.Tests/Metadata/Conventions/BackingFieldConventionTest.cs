@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-
 // ReSharper disable ArrangeAccessorOwnerBody
 // ReSharper disable MemberCanBePrivate.Local
 // ReSharper disable UnusedMember.Local

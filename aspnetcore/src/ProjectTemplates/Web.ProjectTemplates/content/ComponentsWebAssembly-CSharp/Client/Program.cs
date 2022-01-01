@@ -5,10 +5,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 #if (Hosted)
 using ComponentsWebAssembly_CSharp.Client;
-
 #else
 using ComponentsWebAssembly_CSharp;
-
 #endif
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

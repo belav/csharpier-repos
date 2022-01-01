@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.Versioning;
-
 // This type is obsolete, and is expected to be used in very specific ways or it may
 // throw null reference exceptions.
 #pragma warning disable CS8610

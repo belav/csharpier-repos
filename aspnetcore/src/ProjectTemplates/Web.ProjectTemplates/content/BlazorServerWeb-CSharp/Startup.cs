@@ -41,10 +41,8 @@ using Microsoft.IdentityModel.Tokens;
 using BlazorServerWeb_CSharp.Areas.Identity;
 #endif
 using BlazorServerWeb_CSharp.Data;
-
 #if (GenerateGraph)
 using Microsoft.Graph;
-
 #endif
 
 namespace BlazorServerWeb_CSharp

@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 // Test includes an intentional unreachable return
 #pragma warning disable 162
 

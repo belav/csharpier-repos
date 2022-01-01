@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
-
 // ReSharper disable AccessToModifiedClosure
 // ReSharper disable SimplifyConditionalTernaryExpression
 // ReSharper disable ArgumentsStyleAnonymousFunction

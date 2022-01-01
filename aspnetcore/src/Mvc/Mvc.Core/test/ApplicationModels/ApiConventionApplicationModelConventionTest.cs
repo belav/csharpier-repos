@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Xunit;
-
 [assembly: ProducesErrorResponseType(typeof(InvalidEnumArgumentException))]
+
 
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;

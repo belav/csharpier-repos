@@ -36,10 +36,8 @@ using Xunit.Abstractions;
 #if CODE_STYLE
 using System.Diagnostics;
 using System.IO;
-
 #else
 using Microsoft.CodeAnalysis.Editor.UnitTests.Extensions;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

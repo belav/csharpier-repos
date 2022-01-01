@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.InteropServices;
 using Xunit;
-
 #region Sequential
 #region sequential struct definition
 [StructLayout(LayoutKind.Sequential)]

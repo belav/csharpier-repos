@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-
 #pragma warning disable 618 // obsolete types
 
 namespace System.Collections.Tests

@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Microsoft.EntityFrameworkCore.Utilities;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.Internal

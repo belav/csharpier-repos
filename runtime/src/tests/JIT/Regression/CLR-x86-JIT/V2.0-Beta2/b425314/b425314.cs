@@ -10,7 +10,6 @@ using System.Threading;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Collections;
-
 #if false
 Here is the bug text from the bugs that motivated this regression case.  I've annotated
 the text to hopefully make it clearer where the type safety violations were occurring.

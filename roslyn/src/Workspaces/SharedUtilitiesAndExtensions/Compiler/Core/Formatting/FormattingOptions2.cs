@@ -8,12 +8,10 @@ using Microsoft.CodeAnalysis.Options;
 
 #if CODE_STYLE
 using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
-
 #else
 using System.Composition;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options.Providers;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Formatting

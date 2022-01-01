@@ -7,10 +7,8 @@ using System.Threading;
 using Microsoft.CodeAnalysis.Formatting.Rules;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
-
 #if !CODE_STYLE
 using Microsoft.CodeAnalysis.Host;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Formatting

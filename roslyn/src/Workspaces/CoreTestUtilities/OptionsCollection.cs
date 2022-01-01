@@ -6,11 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Options;
-
 #if !NETCOREAPP
 using System;
 using Roslyn.Utilities;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

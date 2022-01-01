@@ -11,8 +11,8 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.Configuration.UserSecrets.Test;
 using Newtonsoft.Json.Linq;
 using Xunit;
-
 [assembly: UserSecretsId(ConfigurationExtensionTest.TestSecretsId)]
+
 
 namespace Microsoft.Extensions.Configuration.UserSecrets.Test
 {

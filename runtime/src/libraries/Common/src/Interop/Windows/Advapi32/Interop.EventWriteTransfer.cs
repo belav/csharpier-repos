@@ -5,10 +5,8 @@ using System;
 using System.Runtime.InteropServices;
 #if ES_BUILD_STANDALONE
 using Microsoft.Diagnostics.Tracing;
-
 #else
 using System.Diagnostics.Tracing;
-
 #endif
 
 internal static partial class Interop

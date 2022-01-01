@@ -4,7 +4,6 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-
 #nullable enable
 
 namespace Microsoft.DotNet.CoreSetup.Test

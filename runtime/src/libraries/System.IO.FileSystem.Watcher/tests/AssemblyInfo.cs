@@ -3,7 +3,6 @@
 
 using System;
 using Xunit;
-
 [assembly: SkipOnPlatform(
     TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS,
     "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS"

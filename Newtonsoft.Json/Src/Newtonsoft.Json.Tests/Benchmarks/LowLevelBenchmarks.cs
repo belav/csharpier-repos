@@ -38,7 +38,6 @@ using Newtonsoft.Json.Utilities;
 #if !PORTABLE || NETSTANDARD2_0
 using MemberTypes = System.Reflection.MemberTypes;
 using BindingFlags = System.Reflection.BindingFlags;
-
 #else
 using MemberTypes = Newtonsoft.Json.Utilities.MemberTypes;
 using BindingFlags = Newtonsoft.Json.Utilities.BindingFlags;

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Security;
 using Xunit;
 using Assembly = System.Reflection.Tests;
-
 [assembly:
     Assembly.MyAttribute_Single("single"),
     Assembly.MyAttribute_AllowMultiple("multiple1"),
     Assembly.MyAttribute_AllowMultiple("multiple2")
 ]
+
 
 namespace System.Reflection.Tests
 {

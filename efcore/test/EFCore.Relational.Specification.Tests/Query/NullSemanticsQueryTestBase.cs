@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
-
 // ReSharper disable SimplifyConditionalTernaryExpression
 // ReSharper disable AccessToModifiedClosure
 // ReSharper disable PossibleMultipleEnumeration

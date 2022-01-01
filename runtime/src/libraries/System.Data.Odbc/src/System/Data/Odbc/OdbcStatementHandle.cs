@@ -3,7 +3,6 @@
 
 using System.Data.Common;
 using System.Runtime.InteropServices;
-
 #pragma warning disable CA1419 // TODO https://github.com/dotnet/roslyn-analyzers/issues/5232: not intended for use with P/Invoke
 
 namespace System.Data.Odbc

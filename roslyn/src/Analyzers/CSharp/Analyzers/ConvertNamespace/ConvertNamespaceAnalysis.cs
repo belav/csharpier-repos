@@ -13,10 +13,8 @@ using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;
-
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace

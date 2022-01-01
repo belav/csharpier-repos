@@ -4,7 +4,6 @@
 using Xunit;
 using Xunit.Sdk;
 using System.Collections.Generic;
-
 #pragma warning disable xUnit1025 // reporting duplicate test cases due to not distinguishing 0.0 from -0.0
 
 namespace System.Tests

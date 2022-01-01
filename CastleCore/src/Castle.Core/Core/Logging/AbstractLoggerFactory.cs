@@ -16,7 +16,6 @@ namespace Castle.Core.Logging
 {
     using System;
     using System.IO;
-
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

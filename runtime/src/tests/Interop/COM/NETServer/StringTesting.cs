@@ -5,7 +5,6 @@ using System;
 using System.Globalization;
 using System.Text;
 using System.Runtime.InteropServices;
-
 #pragma warning disable 618 // Must test deprecated features
 
 [ComVisible(true)]

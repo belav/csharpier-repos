@@ -31,7 +31,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using Xunit;
-
 #endregion
 
 namespace System.Data.Tests.Common

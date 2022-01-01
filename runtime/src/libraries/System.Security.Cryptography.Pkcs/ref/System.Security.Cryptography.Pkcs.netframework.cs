@@ -5,7 +5,6 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.CryptographicAttributeObject))]
 [assembly: TypeForwardedTo(
     typeof(System.Security.Cryptography.CryptographicAttributeObjectCollection)

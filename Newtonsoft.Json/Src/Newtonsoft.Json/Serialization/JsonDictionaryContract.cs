@@ -29,10 +29,8 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using Newtonsoft.Json.Utilities;
 using System.Collections;
-
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
-
 #endif
 
 namespace Newtonsoft.Json.Serialization

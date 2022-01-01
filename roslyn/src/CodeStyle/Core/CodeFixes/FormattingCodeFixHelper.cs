@@ -12,12 +12,10 @@ using Microsoft.CodeAnalysis.Text;
 using Formatter = Microsoft.CodeAnalysis.Formatting.FormatterHelper;
 using FormatterState = Microsoft.CodeAnalysis.Formatting.ISyntaxFormattingService;
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
-
 #else
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Options;
 using FormatterState = Microsoft.CodeAnalysis.Workspace;
-
 #endif
 
 namespace Microsoft.CodeAnalysis

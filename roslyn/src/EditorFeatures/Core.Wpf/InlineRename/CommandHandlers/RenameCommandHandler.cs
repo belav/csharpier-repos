@@ -13,10 +13,8 @@ using Microsoft.CodeAnalysis.Notification;
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CodeAnalysis.Extensions;
 using Microsoft.CodeAnalysis.Telemetry;
-
 #if !COCOA
 using System.Linq;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename

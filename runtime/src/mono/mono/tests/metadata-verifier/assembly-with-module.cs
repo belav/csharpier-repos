@@ -1,8 +1,8 @@
 using System;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(AssemblyBuilder))]
+
 
 class Driver
 {

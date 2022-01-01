@@ -6,7 +6,6 @@
  * Change description: Store the callee saved registers more often in hand generated assembly helper.
 */
 using System;
-
 #pragma warning disable 169
 struct MyStruct
 {

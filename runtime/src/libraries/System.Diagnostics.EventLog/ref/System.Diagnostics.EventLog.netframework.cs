@@ -5,7 +5,6 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.EntryWrittenEventArgs))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.EntryWrittenEventHandler))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.EventInstance))]

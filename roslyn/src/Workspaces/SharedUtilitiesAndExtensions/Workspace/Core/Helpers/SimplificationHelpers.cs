@@ -11,10 +11,8 @@ using Roslyn.Utilities;
 
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
-
 #else
 using OptionSet = Microsoft.CodeAnalysis.Options.OptionSet;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Simplification

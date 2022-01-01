@@ -4,10 +4,8 @@
 using System.Collections.Generic;
 #if ASPNETWEBAPI
 using System.Net.Http;
-
 #else
 using System.Web.Routing;
-
 #endif
 
 #if ASPNETWEBAPI

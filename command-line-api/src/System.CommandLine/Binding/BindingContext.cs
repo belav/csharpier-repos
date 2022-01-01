@@ -8,7 +8,6 @@ using System.CommandLine.IO;
 using System.CommandLine.Parsing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-
 #nullable enable
 
 namespace System.CommandLine.Binding

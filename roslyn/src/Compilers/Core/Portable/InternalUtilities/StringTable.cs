@@ -7,10 +7,8 @@ using System.Text;
 using System.Threading;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
-
 #if DEBUG
 using System.Diagnostics;
-
 #endif
 
 namespace Roslyn.Utilities

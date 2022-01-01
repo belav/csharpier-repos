@@ -14,7 +14,6 @@ using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 #pragma warning disable CA1823 // not all IDs are used by all partial providers
 
 namespace System.Net

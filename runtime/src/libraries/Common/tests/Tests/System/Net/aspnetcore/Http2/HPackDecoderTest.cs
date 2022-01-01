@@ -7,10 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Http.HPack;
 using Xunit;
-
 #if KESTREL
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-
 #endif
 
 namespace System.Net.Http.Unit.Tests.HPack

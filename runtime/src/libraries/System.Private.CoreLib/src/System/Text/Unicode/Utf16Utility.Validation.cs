@@ -7,10 +7,8 @@ using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
 using System.Numerics;
-
 #if SYSTEM_PRIVATE_CORELIB
 using Internal.Runtime.CompilerServices;
-
 #endif
 
 namespace System.Text.Unicode

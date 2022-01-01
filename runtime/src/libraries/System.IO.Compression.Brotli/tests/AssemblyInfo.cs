@@ -3,7 +3,6 @@
 
 using System;
 using Xunit;
-
 [assembly: SkipOnPlatform(
     TestPlatforms.Browser,
     "System.IO.Compression.Brotli is not supported on Browser"

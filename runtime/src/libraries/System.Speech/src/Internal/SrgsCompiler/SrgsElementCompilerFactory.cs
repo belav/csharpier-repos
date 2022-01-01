@@ -5,7 +5,6 @@
 
 using System.Globalization;
 using System.Speech.Internal.SrgsParser;
-
 #endregion
 
 namespace System.Speech.Internal.SrgsCompiler

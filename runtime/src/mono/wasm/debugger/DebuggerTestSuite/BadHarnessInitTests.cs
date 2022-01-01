@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WebAssembly.Diagnostics;
 using Xunit;
-
 #nullable enable
 
 namespace DebuggerTests

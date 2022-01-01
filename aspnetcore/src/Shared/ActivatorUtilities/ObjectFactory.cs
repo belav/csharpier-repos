@@ -3,7 +3,6 @@
 
 using System;
 
-
 #if ActivatorUtilities_In_DependencyInjection
 namespace Microsoft.Extensions.DependencyInjection;
 

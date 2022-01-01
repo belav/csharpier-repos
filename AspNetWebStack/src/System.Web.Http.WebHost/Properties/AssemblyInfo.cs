@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Http.WebHost;
-
 [assembly: AssemblyTitle("System.Web.Http.WebHost")]
 [assembly: AssemblyDescription("")]
 [assembly: InternalsVisibleTo(

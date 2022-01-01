@@ -4,15 +4,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
-
 #endif
 #if (GenerateGraph)
 using Graph = Microsoft.Graph;
-
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.Identity.Web;
-
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth || GenerateGraph || WindowsAuth)
 

@@ -8,10 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
-
 #if SYSTEM_PRIVATE_CORELIB
 using Internal.Runtime.CompilerServices;
-
 #endif
 
 namespace System.Text.Unicode

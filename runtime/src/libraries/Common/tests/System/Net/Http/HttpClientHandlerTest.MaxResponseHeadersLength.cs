@@ -13,10 +13,8 @@ using Xunit.Abstractions;
 namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
-
 #endif
 
     public abstract class HttpClientHandler_MaxResponseHeadersLength_Test

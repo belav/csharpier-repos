@@ -34,7 +34,6 @@ using System.Text;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
-
 #nullable disable
 
 namespace Newtonsoft.Json.Bson

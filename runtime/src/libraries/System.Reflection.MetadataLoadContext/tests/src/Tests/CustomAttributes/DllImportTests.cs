@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using SampleMetadata;
 using Xunit;
-
 #pragma warning disable 0618 // Obsolete
 
 namespace System.Reflection.Tests

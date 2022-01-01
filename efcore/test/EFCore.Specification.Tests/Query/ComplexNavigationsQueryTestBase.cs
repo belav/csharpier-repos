@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
-
 // ReSharper disable ConvertClosureToMethodGroup
 // ReSharper disable PossibleUnintendedReferenceComparison
 // ReSharper disable ArgumentsStyleLiteral

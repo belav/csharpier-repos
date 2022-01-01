@@ -11,9 +11,8 @@ using System.Linq;
 using System.Resources;
 using System.Diagnostics;
 using Microsoft.DotNet.RemoteExecutor;
-using Xunit;
+using Xunit;[assembly: NeutralResourcesLanguage("en")]
 
-[assembly: NeutralResourcesLanguage("en")]
 
 namespace System.Resources.Tests
 {

@@ -16,7 +16,6 @@ namespace Castle.Core.Configuration
 {
     using System;
     using System.Collections.Generic;
-
     /// <summary>
 	/// A collection of <see cref="IConfiguration"/> objects.
 	/// </summary>

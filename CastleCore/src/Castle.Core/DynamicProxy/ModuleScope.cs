@@ -25,10 +25,8 @@ namespace Castle.DynamicProxy
 
     using Castle.Core.Internal;
     using Castle.DynamicProxy.Generators;
-
 #if FEATURE_SERIALIZATION
     using Castle.DynamicProxy.Serialization;
-
 #endif
 
     public class ModuleScope

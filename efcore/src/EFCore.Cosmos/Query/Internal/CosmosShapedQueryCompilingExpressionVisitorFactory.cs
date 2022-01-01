@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.EntityFrameworkCore.Query;
-
 #nullable disable
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

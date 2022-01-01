@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging.Testing;
 using Microsoft.Extensions.Options;
 using Xunit;
 
-
 #nullable enable
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;

@@ -13,10 +13,8 @@ namespace System.Xml.Serialization
     using System.Xml.Serialization.Configuration;
     using System.Collections.Specialized;
     using System.Globalization;
-
 #if DEBUG
     using System.Diagnostics;
-
 #endif
 
     public class XmlSchemaImporter : SchemaImporter

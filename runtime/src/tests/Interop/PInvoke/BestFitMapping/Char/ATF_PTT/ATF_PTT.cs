@@ -5,8 +5,8 @@ using System;
 using System.Text;
 using System.Runtime.InteropServices;
 using TestLibrary;
-
 [assembly: BestFitMapping(true, ThrowOnUnmappableChar = false)]
+
 
 public class BFM_CharMarshaler
 {

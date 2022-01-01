@@ -15,12 +15,10 @@ using Moq;
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
 using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
 using TRouteValueDictionary = System.Web.Http.Routing.HttpRouteValueDictionary;
-
 #else
 using TActionDescriptor = System.Web.Mvc.ActionDescriptor;
 using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
 using TRouteValueDictionary = System.Web.Routing.RouteValueDictionary;
-
 #endif
 
 #if ASPNETWEBAPI

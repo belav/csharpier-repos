@@ -8,7 +8,6 @@ using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-
 #nullable enable
 
 namespace Wasm.Build.Tests

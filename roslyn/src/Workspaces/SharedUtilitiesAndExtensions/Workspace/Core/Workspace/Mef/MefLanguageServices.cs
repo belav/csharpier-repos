@@ -10,12 +10,11 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis.Host;
-using Microsoft.CodeAnalysis.Host.Mef;
-
-[assembly: DebuggerTypeProxy(
+using Microsoft.CodeAnalysis.Host.Mef;[assembly: DebuggerTypeProxy(
     typeof(MefLanguageServices.LazyServiceMetadataDebuggerProxy),
     Target = typeof(ImmutableArray<Lazy<ILanguageService, WorkspaceServiceMetadata>>)
 )]
+
 
 namespace Microsoft.CodeAnalysis.Host.Mef
 {

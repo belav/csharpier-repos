@@ -1,5 +1,4 @@
 using System;
-
 #if WITH_MEMBERS
 public class DisappearingType { }
 

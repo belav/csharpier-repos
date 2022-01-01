@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Test.Console;
 using Microsoft.Extensions.Options;
 using Xunit;
-
 #pragma warning disable CS0618
 
 namespace Microsoft.Extensions.Logging.Console.Test

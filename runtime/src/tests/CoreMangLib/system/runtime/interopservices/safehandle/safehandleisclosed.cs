@@ -3,8 +3,8 @@
 using System.Security;
 using System;
 using System.Runtime.InteropServices; // For SafeHandle
-
 [assembly: SecurityCritical]
+
 
 /// <summary>
 ///IsClosed

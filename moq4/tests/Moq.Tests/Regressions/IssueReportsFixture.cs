@@ -23,7 +23,6 @@ using Moq.Properties;
 using Moq.Protected;
 
 using Xunit;
-
 #region #181
 
 // NOTE class without namespace

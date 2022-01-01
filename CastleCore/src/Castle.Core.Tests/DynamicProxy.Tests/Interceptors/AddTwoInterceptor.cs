@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
     using System;
-
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

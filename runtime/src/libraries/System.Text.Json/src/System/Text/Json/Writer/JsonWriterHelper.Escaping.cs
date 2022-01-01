@@ -5,10 +5,8 @@ using System.Buffers;
 using System.Buffers.Text;
 using System.Diagnostics;
 using System.Text.Encodings.Web;
-
 #if !BUILDING_INBOX_LIBRARY
 using System.Runtime.CompilerServices;
-
 #endif
 
 namespace System.Text.Json

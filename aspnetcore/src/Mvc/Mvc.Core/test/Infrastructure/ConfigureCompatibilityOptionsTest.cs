@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Xunit;
 
-
 #pragma warning disable ASP5001 // Type or member is obsolete
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 

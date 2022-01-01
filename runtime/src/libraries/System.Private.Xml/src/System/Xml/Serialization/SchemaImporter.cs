@@ -11,10 +11,8 @@ namespace System.Xml.Serialization
     using System.Reflection;
     using System.Configuration;
     using System.Xml.Serialization.Configuration;
-
 #if DEBUG
     using System.Diagnostics;
-
 #endif
 
     public abstract class SchemaImporter

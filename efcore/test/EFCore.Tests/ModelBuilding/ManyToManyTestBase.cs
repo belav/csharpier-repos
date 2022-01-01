@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Xunit;
-
 #nullable enable
 
 // ReSharper disable InconsistentNaming

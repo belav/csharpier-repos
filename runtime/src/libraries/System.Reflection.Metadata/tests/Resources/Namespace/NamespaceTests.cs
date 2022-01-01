@@ -14,9 +14,9 @@
  */
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(Forwarder.FwdType))]
 [assembly: TypeForwardedTo(typeof(Forwarder.NoDefs.FwdType))]
+
 
 class GlobalClassA { }
 

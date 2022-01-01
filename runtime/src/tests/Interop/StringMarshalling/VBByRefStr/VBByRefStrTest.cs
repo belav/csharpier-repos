@@ -6,7 +6,6 @@ using System;
 using System.Reflection;
 using System.Text;
 using Xunit;
-
 #pragma warning disable CS0612, CS0618
 
 class Test

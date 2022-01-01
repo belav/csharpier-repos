@@ -4,12 +4,12 @@
 using System.Collections.Generic;
 using Xunit;
 using Assembly = System.Reflection.Tests;
-
 [module:
     Assembly.MyAttribute_Single_P("single"),
     Assembly.MyAttribute_AllowMultiple_P("multiple1"),
     Assembly.MyAttribute_AllowMultiple_P("multiple2")
 ]
+
 
 namespace System.Reflection.Tests
 {

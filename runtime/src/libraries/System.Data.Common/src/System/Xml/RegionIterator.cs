@@ -4,7 +4,6 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-
 #pragma warning disable 618 // ignore obsolete warning about XmlDataDocument
 
 namespace System.Xml

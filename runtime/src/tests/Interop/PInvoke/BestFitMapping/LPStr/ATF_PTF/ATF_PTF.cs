@@ -5,8 +5,8 @@ using System;
 using System.Text;
 using System.Runtime.InteropServices;
 using TestLibrary;
-
 [assembly: BestFitMapping(true, ThrowOnUnmappableChar = false)]
+
 
 [StructLayout(LayoutKind.Sequential)]
 [BestFitMapping(true, ThrowOnUnmappableChar = false)]

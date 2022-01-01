@@ -4,10 +4,10 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.Extensions.DependencyInjection;
-
 [assembly: DesignTimeProviderServices(
     "Microsoft.EntityFrameworkCore.InMemory.Design.Internal.InMemoryDesignTimeServices"
 )]
+
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Design.Internal
 {

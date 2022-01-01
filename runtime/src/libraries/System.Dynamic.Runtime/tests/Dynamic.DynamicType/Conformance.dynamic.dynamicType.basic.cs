@@ -8036,7 +8036,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     // <Expects Status=success></Expects>
     // <Code>
     using Microsoft.CSharp.RuntimeBinder;
-
     #region "Type definition"
     public enum MyEnum
     {

@@ -5,11 +5,9 @@ using System.Diagnostics.Contracts;
 
 #if ASPNETWEBAPI
 using TRouteInfoProvider = System.Web.Http.Routing.IHttpRouteInfoProvider;
-
 #else
 using System.Web.Mvc.Properties;
 using TRouteInfoProvider = System.Web.Mvc.Routing.IRouteInfoProvider;
-
 #endif
 
 #if ASPNETWEBAPI

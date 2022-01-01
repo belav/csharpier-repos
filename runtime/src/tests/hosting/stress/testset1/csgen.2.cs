@@ -3,7 +3,6 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
-
 #pragma warning disable 1717
 #pragma warning disable 0219
 #pragma warning disable 1718

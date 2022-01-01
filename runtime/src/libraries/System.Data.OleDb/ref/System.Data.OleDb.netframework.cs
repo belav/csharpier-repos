@@ -5,7 +5,6 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.Data.OleDb.OleDbCommand))]
 [assembly: TypeForwardedTo(typeof(System.Data.OleDb.OleDbCommandBuilder))]
 [assembly: TypeForwardedTo(typeof(System.Data.OleDb.OleDbConnection))]

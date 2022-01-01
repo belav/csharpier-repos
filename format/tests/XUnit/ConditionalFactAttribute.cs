@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Xunit;
-
 #nullable enable
 
 namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit

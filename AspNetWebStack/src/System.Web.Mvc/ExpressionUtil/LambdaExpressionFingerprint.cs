@@ -3,7 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-
 #pragma warning disable 659 // overrides AddToHashCodeCombiner instead
 
 namespace System.Web.Mvc.ExpressionUtil

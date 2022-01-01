@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 #pragma warning disable 618 // Must test deprecated features
 
 [ComVisible(true)]

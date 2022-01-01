@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-
 #pragma warning disable CS0618 // Type or member is obsolete
 
 namespace System.Runtime.InteropServices.Tests

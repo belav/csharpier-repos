@@ -4,7 +4,6 @@
 using System;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.InteropServices;
-
 #pragma warning disable 0618
 static class DecimalTestNative
 {

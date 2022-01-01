@@ -4,7 +4,6 @@
 using System;
 using System.Threading.Tasks.Sources;
 
-
 #nullable enable
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;

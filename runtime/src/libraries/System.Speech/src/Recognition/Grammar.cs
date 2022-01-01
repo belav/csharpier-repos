@@ -12,7 +12,6 @@ using System.Speech.Internal;
 using System.Speech.Internal.SrgsCompiler;
 using System.Speech.Recognition.SrgsGrammar;
 using System.Text;
-
 #pragma warning disable 56500 // Remove all the catch all statements warnings used by the interop layer
 
 namespace System.Speech.Recognition

@@ -5,7 +5,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 [assembly: ImportedFromTypeLib("InteropAttributes")]
 [assembly: PrimaryInteropAssembly(1, 2)]
 [assembly: Guid("1234C65D-1234-447A-B786-64682CBEF136")]
@@ -18,6 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: ComConversionLoss()] // not embed
 [assembly: ComVisible(true)] // not embed
 [assembly: TypeLibVersion(1, 0)] // not embed
+
 
 namespace Interop
 {

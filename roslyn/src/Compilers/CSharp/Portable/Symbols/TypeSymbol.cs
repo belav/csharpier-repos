@@ -16,7 +16,6 @@ using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Symbols;
 using Roslyn.Utilities;
-
 #pragma warning disable CS0660
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols

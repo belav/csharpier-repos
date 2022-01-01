@@ -4,8 +4,8 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Xunit;
-
 [assembly: PrimaryInteropAssembly(1, 2)]
+
 
 namespace System.Runtime.InteropServices.Tests
 {

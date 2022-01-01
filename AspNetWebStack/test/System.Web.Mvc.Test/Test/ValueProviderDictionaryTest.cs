@@ -7,7 +7,6 @@ using System.Web.Routing;
 using System.Web.TestUtil;
 using Microsoft.TestCommon;
 using Moq;
-
 #pragma warning disable 0618    // ValueProviderDictionary is now obsolete
 
 namespace System.Web.Mvc.Test

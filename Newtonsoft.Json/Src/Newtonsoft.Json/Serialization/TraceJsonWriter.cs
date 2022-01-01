@@ -26,10 +26,8 @@
 using System;
 using System.Globalization;
 using System.IO;
-
 #if HAVE_BIG_INTEGER
 using System.Numerics;
-
 #endif
 
 namespace Newtonsoft.Json.Serialization

@@ -8,7 +8,6 @@ namespace System.Xml.Schema
     using System.IO;
     using System.Diagnostics;
     using System.Runtime.Versioning;
-
 #pragma warning disable 618
     internal sealed class SchemaCollectionPreprocessor : BaseProcessor
     {

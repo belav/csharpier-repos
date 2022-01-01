@@ -12,10 +12,8 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 #if TARGET_BROWSER
 using HttpHandlerType = System.Net.Http.BrowserHttpHandler;
-
 #else
 using HttpHandlerType = System.Net.Http.SocketsHttpHandler;
-
 #endif
 
 namespace System.Net.Http

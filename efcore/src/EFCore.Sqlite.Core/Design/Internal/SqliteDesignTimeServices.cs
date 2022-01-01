@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.EntityFrameworkCore.Scaffolding;
 using Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal;
 using Microsoft.Extensions.DependencyInjection;
-
 [assembly: DesignTimeProviderServices(
     "Microsoft.EntityFrameworkCore.Sqlite.Design.Internal.SqliteDesignTimeServices"
 )]
+
 
 namespace Microsoft.EntityFrameworkCore.Sqlite.Design.Internal
 {

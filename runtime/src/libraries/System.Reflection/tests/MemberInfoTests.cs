@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Xunit;
-
 #pragma warning disable 0414
 #pragma warning disable 0649 // Yes, we know - test class have fields we don't assign to.
 

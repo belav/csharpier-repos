@@ -20,7 +20,6 @@ namespace Castle.Services.Logging.Log4netIntegration
     using log4net;
     using log4net.Core;
     using log4net.Util;
-
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

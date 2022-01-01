@@ -12,7 +12,6 @@ namespace System.Xml.Schema
     using System.Xml.XPath;
     using System.Runtime.Versioning;
     using System.Diagnostics.CodeAnalysis;
-
 #pragma warning disable 618
     internal sealed class XsdValidator : BaseValidator
     {

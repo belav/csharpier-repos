@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif

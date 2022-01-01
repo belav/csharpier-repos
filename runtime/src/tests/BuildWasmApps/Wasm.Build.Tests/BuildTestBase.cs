@@ -16,7 +16,6 @@ using System.Xml;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-
 #nullable enable
 
 // [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]

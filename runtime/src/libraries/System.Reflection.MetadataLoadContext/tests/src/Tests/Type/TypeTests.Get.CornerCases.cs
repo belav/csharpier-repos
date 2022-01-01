@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Xunit;
-
 #pragma warning disable 0067  // Unused events
 #pragma warning disable 0649  // Uninitialized fields
 

@@ -3,7 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Versioning;
-
 #if !FEATURE_GENERIC_MATH
 #error FEATURE_GENERIC_MATH is not defined
 #endif

@@ -10,10 +10,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
-
 #else
 using Microsoft.CodeAnalysis.Options;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Utilities

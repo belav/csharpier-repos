@@ -3,5 +3,4 @@
 
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore.Design;
-
 [assembly: TypeForwardedTo(typeof(ICSharpHelper))]

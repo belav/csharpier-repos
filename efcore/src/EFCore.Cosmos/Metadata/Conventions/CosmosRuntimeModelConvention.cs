@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions

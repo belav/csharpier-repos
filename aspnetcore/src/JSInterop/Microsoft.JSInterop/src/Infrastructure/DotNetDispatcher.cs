@@ -13,8 +13,8 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
 [assembly: MetadataUpdateHandler(typeof(Microsoft.JSInterop.Infrastructure.DotNetDispatcher))]
+
 
 
 namespace Microsoft.JSInterop.Infrastructure;

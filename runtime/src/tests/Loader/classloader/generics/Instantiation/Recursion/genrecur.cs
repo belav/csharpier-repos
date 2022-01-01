@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 #pragma warning disable 0414
 
 // Some generally-useful stuff

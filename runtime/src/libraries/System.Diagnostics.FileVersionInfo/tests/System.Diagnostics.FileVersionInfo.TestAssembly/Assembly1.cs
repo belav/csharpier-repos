@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
-
 // Comments
 [assembly: AssemblyDescriptionAttribute("Have you played a Contoso amusement device today?")]
 // CompanyName
@@ -19,6 +18,7 @@ using System.Reflection;
 [assembly: AssemblyTrademarkAttribute("TM")]
 // Product
 [assembly: AssemblyProductAttribute("The greatest product EVER")]
+
 
 namespace System.Diagnostics.Tests
 {

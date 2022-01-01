@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.Serialization;
-
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else

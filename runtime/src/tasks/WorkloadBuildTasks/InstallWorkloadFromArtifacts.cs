@@ -11,7 +11,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-
 #nullable enable
 
 namespace Microsoft.Workload.Build.Tasks

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
-
 #if DEBUG || BOOTSTRAP
 using System;
 using System.Collections.Concurrent;
@@ -13,13 +12,11 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Build.Utilities;
 using Roslyn.Utilities;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
     using static Microsoft.CodeAnalysis.CommandLine.BuildResponse;
-
 #if DEBUG || BOOTSTRAP
     /// <summary>
     /// This task exists to help us validate our bootstrap building phase is executing correctly.  The bootstrap

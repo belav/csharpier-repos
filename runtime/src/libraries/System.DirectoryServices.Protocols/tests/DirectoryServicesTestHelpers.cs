@@ -2,9 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.InteropServices;
-using Xunit;
+using Xunit;[assembly: ActiveIssue(
+    "https://github.com/dotnet/runtime/issues/35912",
+    TestRuntimes.Mono
+)]
 
-[assembly: ActiveIssue("https://github.com/dotnet/runtime/issues/35912", TestRuntimes.Mono)]
 
 namespace System.DirectoryServices.Protocols.Tests
 {

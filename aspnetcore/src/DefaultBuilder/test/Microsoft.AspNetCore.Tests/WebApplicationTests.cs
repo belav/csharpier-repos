@@ -24,8 +24,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
 [assembly: HostingStartup(typeof(WebApplicationTests.TestHostingStartup))]
+
 
 
 namespace Microsoft.AspNetCore.Tests;

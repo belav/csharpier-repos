@@ -9,7 +9,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.TestUtilities;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding

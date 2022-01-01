@@ -6,10 +6,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CustomAttribute;
-
 [assembly: @AttrName()]
 [assembly: @AttrName(UShortField = 321)]
 [module: AttrNameAttribute(TypeField = typeof(Dictionary<string, int>))]
+
 
 namespace AttributeUse
 {

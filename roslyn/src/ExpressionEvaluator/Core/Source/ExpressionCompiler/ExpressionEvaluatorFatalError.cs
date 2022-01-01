@@ -7,10 +7,8 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.VisualStudio.Debugger;
 using Roslyn.Utilities;
-
 #if !EXPRESSIONCOMPILER
 using Microsoft.CodeAnalysis.ErrorReporting;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator

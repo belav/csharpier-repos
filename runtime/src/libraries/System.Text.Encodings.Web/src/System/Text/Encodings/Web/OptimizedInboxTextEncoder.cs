@@ -4,15 +4,12 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 #if NETCOREAPP
 using System.Runtime.Intrinsics.X86;
-
 #endif
 
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
-
 #endif
 
 namespace System.Text.Encodings.Web

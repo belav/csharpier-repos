@@ -25,7 +25,6 @@
 
 using System;
 using Newtonsoft.Json.Utilities;
-
 #nullable disable
 
 namespace Newtonsoft.Json.Schema

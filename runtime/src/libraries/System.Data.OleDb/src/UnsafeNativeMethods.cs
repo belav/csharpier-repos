@@ -3,7 +3,6 @@
 
 using System.Runtime.InteropServices;
 using System.Security;
-
 #pragma warning disable 0618 // ComInterfaceType.InterfaceIsDual is obsolete
 
 namespace System.Data.Common

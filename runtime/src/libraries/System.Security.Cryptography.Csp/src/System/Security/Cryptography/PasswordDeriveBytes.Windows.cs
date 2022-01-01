@@ -3,7 +3,6 @@
 
 using Internal.NativeCrypto;
 using System.Runtime.Versioning;
-
 #pragma warning disable CA5373 // Call to obsolete key derivation function PasswordDeriveBytes.*
 
 namespace System.Security.Cryptography

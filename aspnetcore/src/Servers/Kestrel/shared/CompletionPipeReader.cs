@@ -3,7 +3,6 @@
 
 using System.IO.Pipelines;
 
-
 #nullable enable
 
 namespace Microsoft.AspNetCore.Connections;

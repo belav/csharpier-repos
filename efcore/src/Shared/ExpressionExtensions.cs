@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-
 #nullable enable
 
 // ReSharper disable once CheckNamespace

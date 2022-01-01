@@ -17,7 +17,6 @@ namespace Castle.Core.Logging
     using System;
     using System.Diagnostics;
     using System.Globalization;
-
     /// <summary>
 	///   The Logger using standard Diagnostics namespace.
 	/// </summary>

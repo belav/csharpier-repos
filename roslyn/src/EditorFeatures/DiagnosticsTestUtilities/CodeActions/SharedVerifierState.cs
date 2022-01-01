@@ -5,10 +5,8 @@
 using System;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
-
 #if !CODE_STYLE
 using Roslyn.Utilities;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

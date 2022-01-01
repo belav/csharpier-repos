@@ -3,10 +3,10 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Api.Analyzers;
-
 [assembly: ApiConventionType(
     typeof(DiagnosticsAreReturned_IfMethodWithConvention_ReturnsUndocumentedStatusCodeConvention)
 )]
+
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {

@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
-
 #pragma warning disable RCS1202 // Avoid NullReferenceException.
 
 // ReSharper disable InconsistentNaming

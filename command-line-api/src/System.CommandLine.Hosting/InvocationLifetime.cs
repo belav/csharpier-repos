@@ -9,11 +9,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
-
 #if NETSTANDARD2_0
 using IHostEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 using IHostApplicationLifetime = Microsoft.Extensions.Hosting.IApplicationLifetime;
-
 #endif
 
 namespace System.CommandLine.Hosting

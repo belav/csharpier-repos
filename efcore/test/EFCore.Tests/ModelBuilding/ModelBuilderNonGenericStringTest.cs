@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.TestUtilities;
 using Xunit;
 using Xunit.Sdk;
-
 #nullable enable
 
 // ReSharper disable AssignNullToNotNullAttribute

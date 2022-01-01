@@ -5,7 +5,6 @@ namespace System.Xml.Schema
 {
     using System.Diagnostics;
     using System.Globalization;
-
 #pragma warning disable 618
 
     internal sealed class AutoValidator : BaseValidator

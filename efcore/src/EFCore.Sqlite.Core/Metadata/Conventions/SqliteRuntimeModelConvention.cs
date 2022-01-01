@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions

@@ -1,8 +1,6 @@
 ﻿using System;
-
 #if SIGN2048
-using System.Reflection;
-[assembly: AssemblyDelaySign(true)]
+using System.Reflection;[assembly: AssemblyDelaySign(true)]
 [assembly: AssemblyKeyFile(@"internalsvisibleto-2048.snk")]
 
 #endif

@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 /*
  * Regression tests for the mono JIT.
  *

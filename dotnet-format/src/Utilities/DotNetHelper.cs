@@ -4,7 +4,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Tools.Utilities;
 using Microsoft.Extensions.Logging;
-
 #nullable enable
 
 namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities

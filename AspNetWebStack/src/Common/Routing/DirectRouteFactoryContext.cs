@@ -11,7 +11,6 @@ using System.Web.Http.Properties;
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
 using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
 using TRouteDictionary = System.Web.Http.Routing.HttpRouteValueDictionary;
-
 #else
 using System.Text;
 using System.Web.Mvc.Properties;
@@ -19,7 +18,6 @@ using System.Web.Routing;
 using TActionDescriptor = System.Web.Mvc.ActionDescriptor;
 using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
 using TRouteDictionary = System.Web.Routing.RouteValueDictionary;
-
 #endif
 
 #if ASPNETWEBAPI

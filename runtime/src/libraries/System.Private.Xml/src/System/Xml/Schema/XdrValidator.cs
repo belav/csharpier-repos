@@ -10,7 +10,6 @@ namespace System.Xml.Schema
     using System.Globalization;
     using System.Runtime.Versioning;
     using System.Diagnostics.CodeAnalysis;
-
 #pragma warning disable 618
     internal sealed class XdrValidator : BaseValidator
     {

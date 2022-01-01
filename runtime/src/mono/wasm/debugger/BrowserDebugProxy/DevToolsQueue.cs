@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-
 #nullable enable
 
 namespace Microsoft.WebAssembly.Diagnostics

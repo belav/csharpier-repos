@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.WebAssembly.Diagnostics;
 using Newtonsoft.Json.Linq;
 using Xunit;
-
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
+
 
 namespace DebuggerTests
 {

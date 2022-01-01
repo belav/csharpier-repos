@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-
 #pragma warning disable 219
 public class Test_b19679
 {

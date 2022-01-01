@@ -9,7 +9,6 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-
 //Disable the warning about having variables that are not used
 #pragma warning disable 219
 public class Test_Inline_Vars2

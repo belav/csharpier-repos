@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities

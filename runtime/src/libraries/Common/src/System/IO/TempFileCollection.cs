@@ -3,7 +3,6 @@
 
 using System.Collections;
 using System.IO;
-
 // We keep this class in Common to allow utilizing it without taking a dependency on System.CodeDom
 #if CODEDOM
 namespace System.CodeDom.Compiler

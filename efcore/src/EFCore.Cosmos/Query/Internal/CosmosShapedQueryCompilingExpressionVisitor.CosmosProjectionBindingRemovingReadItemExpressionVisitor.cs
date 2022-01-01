@@ -3,7 +3,6 @@
 
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
-
 #nullable disable
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

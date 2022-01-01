@@ -38,14 +38,11 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
-
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
-
 #endif
 #if HAVE_ADO_NET
 using System.Data.SqlTypes;
-
 #endif
 
 namespace Newtonsoft.Json.Utilities

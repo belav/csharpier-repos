@@ -8,7 +8,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
-
 #pragma warning disable CS0436 // Type conflicts with imported type: SuppressUnmanagedCodeSecurity
 
 namespace Microsoft.CodeAnalysis.Interop

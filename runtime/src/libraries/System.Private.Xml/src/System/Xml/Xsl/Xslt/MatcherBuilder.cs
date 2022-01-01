@@ -10,7 +10,6 @@ using System.Xml.Xsl.XPath;
 namespace System.Xml.Xsl.Xslt
 {
     using T = XmlQueryTypeFactory;
-
     #region Comments
     /*  The MatcherBuilder class implements xsl:apply-templates/imports logic, grouping patterns
      *  first by node type, then by node name of their last StepPattern. For example, suppose that

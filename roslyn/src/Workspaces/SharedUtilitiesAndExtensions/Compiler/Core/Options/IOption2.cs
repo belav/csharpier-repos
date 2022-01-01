@@ -3,10 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
 #if CODE_STYLE
 using System.Collections.Immutable;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Options

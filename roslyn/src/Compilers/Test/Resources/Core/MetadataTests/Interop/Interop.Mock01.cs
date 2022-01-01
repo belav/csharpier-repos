@@ -5,7 +5,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 [assembly: ImportedFromTypeLib("MockInterop")]
 [assembly: PrimaryInteropAssembly(30303, 33)]
 [assembly: Guid("71B8C65D-7748-447A-B786-64682CBEF136")]
@@ -17,6 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: ComConversionLoss()] // not embed
 [assembly: ComVisible(true)] // not embed
 [assembly: TypeLibVersion(1, 0)] // not embed
+
 
 // [assembly: SetWin32ContextInIDispatch()]
 // [assembly: IDispatchImpl(IDispatchImplType.CompatibleImpl)] // not embed

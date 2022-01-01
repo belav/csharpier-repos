@@ -7,7 +7,6 @@ using System.Diagnostics;
 #endif
 using System.Collections;
 using System.Collections.Generic;
-
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else

@@ -6,7 +6,6 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
 // disable warning about unused weakref
 #pragma warning disable 414
 

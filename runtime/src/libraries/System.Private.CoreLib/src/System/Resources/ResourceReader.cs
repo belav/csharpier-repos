@@ -17,7 +17,6 @@ namespace System.Resources
 {
 #if RESOURCES_EXTENSIONS
     using ResourceReader = DeserializingResourceReader;
-
 #endif
 
     // Provides the default implementation of IResourceReader, reading

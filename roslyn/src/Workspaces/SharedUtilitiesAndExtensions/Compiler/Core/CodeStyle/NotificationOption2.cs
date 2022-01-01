@@ -3,10 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
 #if CODE_STYLE
 using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.CodeStyle

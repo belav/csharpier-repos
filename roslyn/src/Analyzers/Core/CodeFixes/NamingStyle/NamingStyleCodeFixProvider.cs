@@ -18,10 +18,8 @@ using Microsoft.CodeAnalysis.NamingStyles;
 using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;
-
 #if !CODE_STYLE  // https://github.com/dotnet/roslyn/issues/42218 removing dependency on WorkspaceServices.
 using Microsoft.CodeAnalysis.CodeActions.WorkspaceServices;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles

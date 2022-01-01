@@ -5,7 +5,6 @@
 // not in the CodeAnalysisDictionary because they are special case exclusions
 
 using System.Diagnostics.CodeAnalysis;
-
 [assembly: SuppressMessage(
     "Microsoft.Naming",
     "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -118,6 +117,7 @@ using System.Diagnostics.CodeAnalysis;
     Target = "System.Web.Razor.Tokenizer.Symbols.VBKeyword.#CStr",
     Justification = Justifications.SymbolTypeNames
 )]
+
 
 internal static partial class Justifications
 {

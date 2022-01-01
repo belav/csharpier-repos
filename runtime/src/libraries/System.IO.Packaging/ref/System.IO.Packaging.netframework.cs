@@ -5,7 +5,6 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.IO.FileFormatException))]
 [assembly: TypeForwardedTo(typeof(System.IO.Packaging.CompressionOption))]
 [assembly: TypeForwardedTo(typeof(System.IO.Packaging.EncryptionOption))]

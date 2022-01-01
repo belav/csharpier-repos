@@ -5,10 +5,8 @@
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
-
 #if CODE_STYLE
 using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf

@@ -11,7 +11,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Extensions;
 using System.Xml.Schema;
-
 // UnconditionalSuppressMessage that specify a Target need to be at the assembly or module level for now. Also,
 // they won't consider Target unless you also specify Scope to be either "member" or "type"
 [assembly: UnconditionalSuppressMessage(
@@ -23,6 +22,7 @@ using System.Xml.Schema;
         + "ImportTypeDesc() when the passed in type is not considered a primitive type. That said, for both properties here we are passing in string "
         + "and XmlQualifiedName which are considered primitive, so they are trim safe."
 )]
+
 
 namespace System.Xml.Serialization
 {

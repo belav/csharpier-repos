@@ -12,7 +12,6 @@ namespace System.Net.Http.Functional.Tests
 {
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
-
 #endif
 
     public abstract class SchSendAuxRecordHttpTest : HttpClientHandlerTestBase

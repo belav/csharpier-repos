@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.Extensions.Logging;
-
 #pragma warning disable EF1001
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal

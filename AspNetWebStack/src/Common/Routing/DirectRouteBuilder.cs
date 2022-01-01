@@ -20,7 +20,6 @@ using TResources = System.Web.Http.Properties.SRResources;
 using TRoute = System.Web.Http.Routing.IHttpRoute;
 using TRouteDictionary = System.Collections.Generic.IDictionary<string, object>;
 using TRouteDictionaryConcrete = System.Web.Http.Routing.HttpRouteValueDictionary;
-
 #else
 
 using TActionDescriptor = System.Web.Mvc.ActionDescriptor;
@@ -29,7 +28,6 @@ using TResources = System.Web.Mvc.Properties.MvcResources;
 using TRoute = System.Web.Routing.Route;
 using TRouteDictionary = System.Web.Routing.RouteValueDictionary;
 using TRouteDictionaryConcrete = System.Web.Routing.RouteValueDictionary;
-
 #endif
 
 #if ASPNETWEBAPI

@@ -13,7 +13,6 @@ namespace System.Resources
 {
 #if RESOURCES_EXTENSIONS
     using ResourceReader = DeserializingResourceReader;
-
 #endif
     // A RuntimeResourceSet stores all the resources defined in one
     // particular CultureInfo, with some loading optimizations.

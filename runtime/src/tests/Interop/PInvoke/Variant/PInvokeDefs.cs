@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 #pragma warning disable CS0612, CS0618
 class VariantNative
 {

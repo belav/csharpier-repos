@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using PhotinoNET;
 
-
 #nullable disable warnings
 
 namespace Microsoft.AspNetCore.Components.WebView.Photino;

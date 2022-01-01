@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Runtime.Versioning;
-
 #if MS_IO_REDIST
 namespace Microsoft.IO
 #else

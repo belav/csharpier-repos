@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Xunit;
-
 #pragma warning disable CS0618 // obsolete warnings
 
 namespace System.Net.Tests

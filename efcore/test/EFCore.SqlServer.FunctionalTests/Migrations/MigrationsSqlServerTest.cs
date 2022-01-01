@@ -15,7 +15,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
-
 #nullable enable
 
 namespace Microsoft.EntityFrameworkCore.Migrations

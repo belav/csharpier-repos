@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
-
 #if MS_IO_REDIST
 namespace Microsoft.IO.Enumeration
 #else

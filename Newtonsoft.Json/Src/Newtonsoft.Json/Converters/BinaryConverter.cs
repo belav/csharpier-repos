@@ -29,10 +29,8 @@ using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 #if HAVE_ADO_NET
 using System.Data.SqlTypes;
-
 #endif
 
 namespace Newtonsoft.Json.Converters

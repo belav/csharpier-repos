@@ -30,15 +30,12 @@ using Newtonsoft.Json.Utilities;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
-
 #if HAVE_DYNAMIC
 using System.Dynamic;
 using System.Linq.Expressions;
-
 #endif
 #if HAVE_BIG_INTEGER
 using System.Numerics;
-
 #endif
 
 namespace Newtonsoft.Json.Linq

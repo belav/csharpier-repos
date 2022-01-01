@@ -5,10 +5,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.PooledObjects;
-
 #if !NETCOREAPP
 using Roslyn.Utilities;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Diagnostics

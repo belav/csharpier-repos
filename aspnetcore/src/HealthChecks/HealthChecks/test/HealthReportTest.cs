@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-
 #nullable enable
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;

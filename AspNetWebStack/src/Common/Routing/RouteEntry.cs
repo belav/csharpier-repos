@@ -3,10 +3,8 @@
 
 #if ASPNETWEBAPI
 using TRoute = System.Web.Http.Routing.IHttpRoute;
-
 #else
 using TRoute = System.Web.Routing.Route;
-
 #endif
 
 #if ASPNETWEBAPI

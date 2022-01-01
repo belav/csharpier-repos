@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Local
 #pragma warning disable RCS1102 // Make class static.

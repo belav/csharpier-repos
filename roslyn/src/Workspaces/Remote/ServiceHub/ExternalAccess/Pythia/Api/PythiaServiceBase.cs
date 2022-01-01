@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Remote;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 #pragma warning disable CS0618 // Type or member is obsolete - this should become error once we provide infra for migrating to ISB (https://github.com/dotnet/roslyn/issues/44326)
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api

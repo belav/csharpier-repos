@@ -5,7 +5,6 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.Drawing.Bitmap))]
 [assembly: TypeForwardedTo(typeof(System.Drawing.BitmapSuffixInSameAssemblyAttribute))]
 [assembly: TypeForwardedTo(typeof(System.Drawing.BitmapSuffixInSatelliteAssemblyAttribute))]

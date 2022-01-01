@@ -5,7 +5,6 @@
 #nullable disable
 
 using System.Collections.Immutable;
-
 #pragma warning disable CS0660 // Warning is reported only for Full Solution Analysis
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols

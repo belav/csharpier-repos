@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Speech.Synthesis;
 using System.Speech.Synthesis.TtsEngine;
-
 #pragma warning disable 56524 // The _voiceSynthesis member is not created in this module and should not be disposed
 
 namespace System.Speech.Internal.Synthesis

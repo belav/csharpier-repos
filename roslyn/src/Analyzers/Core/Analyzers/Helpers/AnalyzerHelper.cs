@@ -7,10 +7,8 @@ using Microsoft.CodeAnalysis.Options;
 
 #if CODE_STYLE
 using TOption = Microsoft.CodeAnalysis.Options.IOption2;
-
 #else
 using TOption = Microsoft.CodeAnalysis.Options.IOption;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.Diagnostics

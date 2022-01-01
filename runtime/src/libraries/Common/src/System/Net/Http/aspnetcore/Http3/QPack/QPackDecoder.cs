@@ -6,10 +6,8 @@ using System.Buffers;
 using System.Diagnostics;
 using System.Net.Http.HPack;
 using System.Numerics;
-
 #if KESTREL
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-
 #endif
 
 namespace System.Net.Http.QPack

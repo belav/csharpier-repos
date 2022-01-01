@@ -14,7 +14,6 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.Emit;
 using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Emit.NoPia;
-
 #if !DEBUG
 using SymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbol;
 using NamedTypeSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.NamedTypeSymbol;
@@ -24,7 +23,6 @@ using EventSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.EventSymbol;
 using PropertySymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.PropertySymbol;
 using ParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.ParameterSymbol;
 using TypeParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.TypeParameterSymbol;
-
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

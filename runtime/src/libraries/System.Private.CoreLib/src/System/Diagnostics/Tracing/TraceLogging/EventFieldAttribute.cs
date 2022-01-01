@@ -3,7 +3,6 @@
 
 #if ES_BUILD_STANDALONE
 using System;
-
 #endif
 
 #if ES_BUILD_STANDALONE

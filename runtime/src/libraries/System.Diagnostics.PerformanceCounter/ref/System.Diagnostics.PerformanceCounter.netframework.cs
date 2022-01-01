@@ -5,7 +5,6 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.CounterCreationData))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.CounterCreationDataCollection))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.CounterSample))]

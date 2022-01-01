@@ -5,6 +5,5 @@
 // ------------------------------------------------------------------------------
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.DataProtectionScope))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.ProtectedData))]

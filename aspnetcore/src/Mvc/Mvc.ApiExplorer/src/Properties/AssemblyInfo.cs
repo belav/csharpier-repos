@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.CompilerServices;
-
 [assembly: TypeForwardedTo(typeof(Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider))]
 [assembly: TypeForwardedTo(typeof(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription))]
 [assembly: TypeForwardedTo(
