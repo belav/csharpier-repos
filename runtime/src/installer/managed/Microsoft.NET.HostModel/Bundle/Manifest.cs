@@ -86,14 +86,30 @@ namespace Microsoft.NET.HostModel.Bundle
             Flags = (netcoreapp3CompatMode) ? HeaderFlags.NetcoreApp3CompatMode : HeaderFlags.None;
         }
 
-        public FileEntry AddEntry(FileType type, FileStream fileContent, string relativePath, long offset, long compressedSize, uint bundleMajorVersion)
+        public FileEntry AddEntry(
+            FileType type,
+            FileStream fileContent,
+            string relativePath,
+            long offset,
+            long compressedSize,
+            uint bundleMajorVersion
+        )
         {
             if (bundleHash == null)
             {
-                throw new InvalidOperationException("It is forbidden to change Manifest state after it was written or BundleId was obtained.");
+                throw new InvalidOperationException(
+                    "It is forbidden to change Manifest state after it was written or BundleId was obtained."
+                );
             }
 
-            FileEntry entry = new FileEntry(type, relativePath, offset, fileContent.Length, compressedSize, bundleMajorVersion);
+            FileEntry entry = new FileEntry(
+                type,
+                relativePath,
+                offset,
+                fileContent.Length,
+                compressedSize,
+                bundleMajorVersion
+            );
             Files.Add(entry);
 
             fileContent.Position = 0;

@@ -32,8 +32,15 @@ internal static partial class Interop
             ReadOnlySpan<byte> from,
             Span<byte> to,
             SafeRsaHandle rsa,
-            RsaPadding padding) =>
-            RsaPublicEncrypt(flen, ref MemoryMarshal.GetReference(from), ref MemoryMarshal.GetReference(to), rsa, padding);
+            RsaPadding padding
+        ) =>
+            RsaPublicEncrypt(
+                flen,
+                ref MemoryMarshal.GetReference(from),
+                ref MemoryMarshal.GetReference(to),
+                rsa,
+                padding
+            );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_RsaPublicEncrypt")]
         private static extern int RsaPublicEncrypt(
@@ -41,25 +48,38 @@ internal static partial class Interop
             ref byte from,
             ref byte to,
             SafeRsaHandle rsa,
-            RsaPadding padding);
+            RsaPadding padding
+        );
 
         internal static int RsaVerificationPrimitive(
             ReadOnlySpan<byte> from,
             Span<byte> to,
-            SafeRsaHandle rsa) =>
-            RsaVerificationPrimitive(from.Length, ref MemoryMarshal.GetReference(from), ref MemoryMarshal.GetReference(to), rsa);
+            SafeRsaHandle rsa
+        ) =>
+            RsaVerificationPrimitive(
+                from.Length,
+                ref MemoryMarshal.GetReference(from),
+                ref MemoryMarshal.GetReference(to),
+                rsa
+            );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_RsaVerificationPrimitive")]
         private static extern int RsaVerificationPrimitive(
             int flen,
             ref byte from,
             ref byte to,
-            SafeRsaHandle rsa);
+            SafeRsaHandle rsa
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_RsaSize")]
         internal static extern int RsaSize(SafeRsaHandle rsa);
 
-        internal static bool RsaVerify(int type, ReadOnlySpan<byte> m, ReadOnlySpan<byte> sigbuf, SafeRsaHandle rsa)
+        internal static bool RsaVerify(
+            int type,
+            ReadOnlySpan<byte> m,
+            ReadOnlySpan<byte> sigbuf,
+            SafeRsaHandle rsa
+        )
         {
             bool ret = RsaVerify(
                 type,
@@ -67,7 +87,8 @@ internal static partial class Interop
                 m.Length,
                 ref MemoryMarshal.GetReference(sigbuf),
                 sigbuf.Length,
-                rsa);
+                rsa
+            );
 
             if (!ret)
             {
@@ -77,16 +98,26 @@ internal static partial class Interop
             return ret;
         }
 
-
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_RsaVerify")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool RsaVerify(int type, ref byte m, int m_len, ref byte sigbuf, int siglen, SafeRsaHandle rsa);
+        private static extern bool RsaVerify(
+            int type,
+            ref byte m,
+            int m_len,
+            ref byte sigbuf,
+            int siglen,
+            SafeRsaHandle rsa
+        );
 
-        internal static RSAParameters ExportRsaParameters(SafeRsaHandle key, bool includePrivateParameters)
+        internal static RSAParameters ExportRsaParameters(
+            SafeRsaHandle key,
+            bool includePrivateParameters
+        )
         {
             Debug.Assert(
                 key != null && !key.IsInvalid,
-                "Callers should check the key is invalid and throw an exception with a message");
+                "Callers should check the key is invalid and throw an exception with a message"
+            );
 
             if (key == null || key.IsInvalid)
             {
@@ -99,8 +130,27 @@ internal static partial class Interop
             {
                 key.DangerousAddRef(ref addedRef);
 
-                IntPtr n, e, d, p, dmp1, q, dmq1, iqmp;
-                if (!GetRsaParameters(key, out n, out e, out d, out p, out dmp1, out q, out dmq1, out iqmp))
+                IntPtr n,
+                    e,
+                    d,
+                    p,
+                    dmp1,
+                    q,
+                    dmq1,
+                    iqmp;
+                if (
+                    !GetRsaParameters(
+                        key,
+                        out n,
+                        out e,
+                        out d,
+                        out p,
+                        out dmp1,
+                        out q,
+                        out dmq1,
+                        out iqmp
+                    )
+                )
                 {
                     throw new CryptographicException();
                 }
@@ -147,7 +197,8 @@ internal static partial class Interop
             out IntPtr dmp1,
             out IntPtr q,
             out IntPtr dmq1,
-            out IntPtr iqmp);
+            out IntPtr iqmp
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SetRsaParameters")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -168,7 +219,8 @@ internal static partial class Interop
             byte[]? dmq1,
             int dmq1Length,
             byte[]? iqmp,
-            int iqmpLength);
+            int iqmpLength
+        );
 
         internal enum RsaPadding : int
         {

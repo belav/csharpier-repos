@@ -12,10 +12,10 @@ namespace Wasm.Build.Tests
 {
     public class NativeLibraryTests : BuildTestBase
     {
-        public NativeLibraryTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public NativeLibraryTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        ) : base(output, buildContext) { }
 
         [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
         [BuildAndRun(aot: false)]
@@ -24,7 +24,10 @@ namespace Wasm.Build.Tests
         {
             string projectName = $"AppUsingNativeLib-a";
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs, extraItems: "<NativeFileReference Include=\"native-lib.o\" />");
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraItems: "<NativeFileReference Include=\"native-lib.o\" />"
+            );
 
             if (!_buildContext.TryGetBuildFor(buildArgs, out BuildProduct? _))
             {
@@ -32,17 +35,26 @@ namespace Wasm.Build.Tests
                 if (Directory.Exists(_projectDir))
                     Directory.Delete(_projectDir, recursive: true);
 
-                Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "AppUsingNativeLib"), _projectDir);
-                File.Copy(Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", "native-lib.o"), Path.Combine(_projectDir, "native-lib.o"));
+                Utils.DirectoryCopy(
+                    Path.Combine(BuildEnvironment.TestAssetsPath, "AppUsingNativeLib"),
+                    _projectDir
+                );
+                File.Copy(
+                    Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", "native-lib.o"),
+                    Path.Combine(_projectDir, "native-lib.o")
+                );
             }
 
-            BuildProject(buildArgs,
-                        dotnetWasmFromRuntimePack: false,
-                        id: id);
+            BuildProject(buildArgs, dotnetWasmFromRuntimePack: false, id: id);
 
-            string output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 0,
-                                test: output => {},
-                                host: host, id: id);
+            string output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 0,
+                test: output => { },
+                host: host,
+                id: id
+            );
 
             Assert.Contains("print_line: 100", output);
             Assert.Contains("from pinvoke: 142", output);
@@ -55,16 +67,19 @@ namespace Wasm.Build.Tests
         {
             string projectName = $"AppUsingSkiaSharp";
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs,
-                            extraItems: @$"
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraItems: @$"
                                 <PackageReference Include=""SkiaSharp"" Version=""2.80.3"" />
                                 <PackageReference Include=""SkiaSharp.NativeAssets.WebAssembly"" Version=""2.80.3"" />
 
                                 <NativeFileReference Include=""$(SkiaSharpStaticLibraryPath)\2.0.9\*.a"" />
                                 <WasmFilesToIncludeInFileSystem Include=""{Path.Combine(BuildEnvironment.TestAssetsPath, "mono.png")}"" />
-                            ");
+                            "
+            );
 
-            string programText = @"
+            string programText =
+                @"
 using System;
 using SkiaSharp;
 
@@ -80,15 +95,23 @@ public class Test
     }
 }";
 
-            BuildProject(buildArgs,
-                        initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
-                        dotnetWasmFromRuntimePack: false,
-                        id: id);
+            BuildProject(
+                buildArgs,
+                initProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
+                dotnetWasmFromRuntimePack: false,
+                id: id
+            );
 
-            string output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 0,
-                                test: output => {},
-                                host: host, id: id,
-                                args: "mono.png");
+            string output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 0,
+                test: output => { },
+                host: host,
+                id: id,
+                args: "mono.png"
+            );
 
             Assert.Contains("Size: 26462 Height: 599, Width: 499", output);
         }

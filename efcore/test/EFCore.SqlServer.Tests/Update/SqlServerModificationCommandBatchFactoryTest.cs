@@ -23,28 +23,38 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             var typeMapper = new SqlServerTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
             var factory = new SqlServerModificationCommandBatchFactory(
                 new ModificationCommandBatchFactoryDependencies(
                     new RelationalCommandBuilderFactory(
-                        new RelationalCommandBuilderDependencies(
-                            typeMapper)),
+                        new RelationalCommandBuilderDependencies(typeMapper)
+                    ),
                     new SqlServerSqlGenerationHelper(
-                        new RelationalSqlGenerationHelperDependencies()),
+                        new RelationalSqlGenerationHelperDependencies()
+                    ),
                     new SqlServerUpdateSqlGenerator(
                         new UpdateSqlGeneratorDependencies(
                             new SqlServerSqlGenerationHelper(
-                                new RelationalSqlGenerationHelperDependencies()),
-                            typeMapper)),
+                                new RelationalSqlGenerationHelperDependencies()
+                            ),
+                            typeMapper
+                        )
+                    ),
                     new TypedRelationalValueBufferFactoryFactory(
                         new RelationalValueBufferFactoryDependencies(
-                            typeMapper, new CoreSingletonOptions())),
+                            typeMapper,
+                            new CoreSingletonOptions()
+                        )
+                    ),
                     new CurrentDbContext(new FakeDbContext()),
-                    logger),
-                optionsBuilder.Options);
+                    logger
+                ),
+                optionsBuilder.Options
+            );
 
             var batch = factory.Create();
 
@@ -60,28 +70,38 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             var typeMapper = new SqlServerTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
             var factory = new SqlServerModificationCommandBatchFactory(
                 new ModificationCommandBatchFactoryDependencies(
                     new RelationalCommandBuilderFactory(
-                        new RelationalCommandBuilderDependencies(
-                            typeMapper)),
+                        new RelationalCommandBuilderDependencies(typeMapper)
+                    ),
                     new SqlServerSqlGenerationHelper(
-                        new RelationalSqlGenerationHelperDependencies()),
+                        new RelationalSqlGenerationHelperDependencies()
+                    ),
                     new SqlServerUpdateSqlGenerator(
                         new UpdateSqlGeneratorDependencies(
                             new SqlServerSqlGenerationHelper(
-                                new RelationalSqlGenerationHelperDependencies()),
-                            typeMapper)),
+                                new RelationalSqlGenerationHelperDependencies()
+                            ),
+                            typeMapper
+                        )
+                    ),
                     new TypedRelationalValueBufferFactoryFactory(
                         new RelationalValueBufferFactoryDependencies(
-                            typeMapper, new CoreSingletonOptions())),
+                            typeMapper,
+                            new CoreSingletonOptions()
+                        )
+                    ),
                     new CurrentDbContext(new FakeDbContext()),
-                    logger),
-                optionsBuilder.Options);
+                    logger
+                ),
+                optionsBuilder.Options
+            );
 
             var batch = factory.Create();
 
@@ -96,13 +116,18 @@ namespace Microsoft.EntityFrameworkCore.Update
         private static IModificationCommand CreateModificationCommand(
             string name,
             string schema,
-            bool sensitiveLoggingEnabled)
+            bool sensitiveLoggingEnabled
+        )
         {
             var modificationCommandParameters = new ModificationCommandParameters(
-                name, schema, sensitiveLoggingEnabled);
+                name,
+                schema,
+                sensitiveLoggingEnabled
+            );
 
             var modificationCommand = new ModificationCommandFactory().CreateModificationCommand(
-                modificationCommandParameters);
+                modificationCommandParameters
+            );
 
             return modificationCommand;
         }

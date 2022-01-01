@@ -11,9 +11,14 @@ namespace System.Text.Json.Serialization.Converters
     {
         private const int MinimumTimeSpanFormatLength = 8; // hh:mm:ss
         private const int MaximumTimeSpanFormatLength = 26; // -dddddddd.hh:mm:ss.fffffff
-        private const int MaximumEscapedTimeSpanFormatLength = JsonConstants.MaxExpansionFactorWhileEscaping * MaximumTimeSpanFormatLength;
+        private const int MaximumEscapedTimeSpanFormatLength =
+            JsonConstants.MaxExpansionFactorWhileEscaping * MaximumTimeSpanFormatLength;
 
-        public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TimeSpan Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.String)
             {
@@ -21,7 +26,9 @@ namespace System.Text.Json.Serialization.Converters
             }
 
             bool isEscaped = reader._stringHasEscaping;
-            int maximumLength = isEscaped ? MaximumEscapedTimeSpanFormatLength : MaximumTimeSpanFormatLength;
+            int maximumLength = isEscaped
+                ? MaximumEscapedTimeSpanFormatLength
+                : MaximumTimeSpanFormatLength;
 
             ReadOnlySpan<byte> source = stackalloc byte[0];
 
@@ -30,12 +37,21 @@ namespace System.Text.Json.Serialization.Converters
                 ReadOnlySequence<byte> valueSequence = reader.ValueSequence;
                 long sequenceLength = valueSequence.Length;
 
-                if (!JsonHelpers.IsInRangeInclusive(sequenceLength, MinimumTimeSpanFormatLength, maximumLength))
+                if (
+                    !JsonHelpers.IsInRangeInclusive(
+                        sequenceLength,
+                        MinimumTimeSpanFormatLength,
+                        maximumLength
+                    )
+                )
                 {
                     throw ThrowHelper.GetFormatException(DataType.TimeSpan);
                 }
 
-                Span<byte> stackSpan = stackalloc byte[isEscaped ? MaximumEscapedTimeSpanFormatLength : MaximumTimeSpanFormatLength];
+                Span<byte> stackSpan =
+                    stackalloc byte[
+                        isEscaped ? MaximumEscapedTimeSpanFormatLength : MaximumTimeSpanFormatLength
+                    ];
                 valueSequence.CopyTo(stackSpan);
                 source = stackSpan.Slice(0, (int)sequenceLength);
             }
@@ -43,7 +59,13 @@ namespace System.Text.Json.Serialization.Converters
             {
                 source = reader.ValueSpan;
 
-                if (!JsonHelpers.IsInRangeInclusive(source.Length, MinimumTimeSpanFormatLength, maximumLength))
+                if (
+                    !JsonHelpers.IsInRangeInclusive(
+                        source.Length,
+                        MinimumTimeSpanFormatLength,
+                        maximumLength
+                    )
+                )
                 {
                     throw ThrowHelper.GetFormatException(DataType.TimeSpan);
                 }
@@ -71,7 +93,12 @@ namespace System.Text.Json.Serialization.Converters
                 throw ThrowHelper.GetFormatException(DataType.TimeSpan);
             }
 
-            bool result = Utf8Parser.TryParse(source, out TimeSpan tmpValue, out int bytesConsumed, 'c');
+            bool result = Utf8Parser.TryParse(
+                source,
+                out TimeSpan tmpValue,
+                out int bytesConsumed,
+                'c'
+            );
 
             // Note: Utf8Parser.TryParse will return true for invalid input so
             // long as it starts with an integer. Example: "2021-06-18" or
@@ -86,7 +113,11 @@ namespace System.Text.Json.Serialization.Converters
             throw ThrowHelper.GetFormatException(DataType.TimeSpan);
         }
 
-        public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            TimeSpan value,
+            JsonSerializerOptions options
+        )
         {
             Span<byte> output = stackalloc byte[MaximumTimeSpanFormatLength];
 

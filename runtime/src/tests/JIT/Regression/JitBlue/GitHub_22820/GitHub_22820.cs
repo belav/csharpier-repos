@@ -25,12 +25,12 @@ class Program
         GC.Collect();
         return e is OperationCanceledException;
     }
-    
+
     public static IDisposable AllocateObject()
     {
         return new DisposableObject();
     }
-    
+
     static int Main(string[] args)
     {
         int result = 0;

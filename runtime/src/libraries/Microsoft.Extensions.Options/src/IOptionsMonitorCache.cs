@@ -10,8 +10,9 @@ namespace Microsoft.Extensions.Options
     /// Used by <see cref="IOptionsMonitor{TOptions}"/> to cache <typeparamref name="TOptions"/> instances.
     /// </summary>
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
-    public interface IOptionsMonitorCache<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions>
-        where TOptions : class
+    public interface IOptionsMonitorCache<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
+    > where TOptions : class
     {
         /// <summary>
         /// Gets a named options instance, or adds a new instance created with <paramref name="createOptions"/>.

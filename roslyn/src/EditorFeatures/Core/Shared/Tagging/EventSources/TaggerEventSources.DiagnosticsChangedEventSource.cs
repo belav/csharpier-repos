@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             private readonly ITextBuffer _subjectBuffer;
             private readonly IDiagnosticService _service;
 
-            public DiagnosticsChangedEventSource(ITextBuffer subjectBuffer, IDiagnosticService service)
+            public DiagnosticsChangedEventSource(
+                ITextBuffer subjectBuffer,
+                IDiagnosticService service
+            )
             {
                 _subjectBuffer = subjectBuffer;
                 _service = service;
@@ -26,17 +29,20 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             {
                 var document = _subjectBuffer.AsTextContainer().GetOpenDocumentInCurrentContext();
 
-                if (document != null && document.Project.Solution.Workspace == e.Workspace && document.Id == e.DocumentId)
+                if (
+                    document != null
+                    && document.Project.Solution.Workspace == e.Workspace
+                    && document.Id == e.DocumentId
+                )
                 {
                     this.RaiseChanged();
                 }
             }
 
-            public override void Connect()
-                => _service.DiagnosticsUpdated += OnDiagnosticsUpdated;
+            public override void Connect() => _service.DiagnosticsUpdated += OnDiagnosticsUpdated;
 
-            public override void Disconnect()
-                => _service.DiagnosticsUpdated -= OnDiagnosticsUpdated;
+            public override void Disconnect() =>
+                _service.DiagnosticsUpdated -= OnDiagnosticsUpdated;
         }
     }
 }

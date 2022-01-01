@@ -38,22 +38,29 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             };
 
             var restoreResult = ProcessUtilities.Run(
-                DotNetCoreSdk.ExePath, arguments,
+                DotNetCoreSdk.ExePath,
+                arguments,
                 workingDirectory: SolutionDirectory.Path,
-                additionalEnvironmentVars: environmentVariables);
+                additionalEnvironmentVars: environmentVariables
+            );
 
-            Assert.True(restoreResult.ExitCode == 0, $"{DotNetCoreSdk.ExePath} failed with exit code {restoreResult.ExitCode}: {restoreResult.Output}");
+            Assert.True(
+                restoreResult.ExitCode == 0,
+                $"{DotNetCoreSdk.ExePath} failed with exit code {restoreResult.ExitCode}: {restoreResult.Output}"
+            );
         }
 
         private void DotNetRestore(string solutionOrProjectFileName)
         {
-            var arguments = $@"msbuild ""{solutionOrProjectFileName}"" /t:restore /bl:{Path.Combine(SolutionDirectory.Path, "restore.binlog")}";
+            var arguments =
+                $@"msbuild ""{solutionOrProjectFileName}"" /t:restore /bl:{Path.Combine(SolutionDirectory.Path, "restore.binlog")}";
             RunDotNet(arguments);
         }
 
         private void DotNetBuild(string solutionOrProjectFileName, string configuration = null)
         {
-            var arguments = $@"msbuild ""{solutionOrProjectFileName}"" /bl:{Path.Combine(SolutionDirectory.Path, "build.binlog")}";
+            var arguments =
+                $@"msbuild ""{solutionOrProjectFileName}"" /bl:{Path.Combine(SolutionDirectory.Path, "build.binlog")}";
 
             if (configuration != null)
             {
@@ -123,7 +130,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             var projectRefId = projectReference.ProjectId;
             Assert.Equal(libraryProject.Id, projectRefId);
-            Assert.Equal(libraryProject.FilePath, workspace.CurrentSolution.GetProject(projectRefId).FilePath);
+            Assert.Equal(
+                libraryProject.FilePath,
+                workspace.CurrentSolution.GetProject(projectRefId).FilePath
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled), typeof(DotNetCoreSdk.IsAvailable))]
@@ -170,7 +180,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 var projectReference = Assert.Single(project.ProjectReferences);
 
                 var projectRefId = projectReference.ProjectId;
-                Assert.Equal(projectRefFilePath, project.Solution.GetProject(projectRefId).FilePath);
+                Assert.Equal(
+                    projectRefFilePath,
+                    project.Solution.GetProject(projectRefId).FilePath
+                );
             }
         }
 
@@ -237,7 +250,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 Assert.Equal(3, workspace.CurrentSolution.ProjectIds.Count);
 
                 // Assert the TFM is accessible from project extensions.
-                // The test project extension sets the default namespace based on the TFM.  
+                // The test project extension sets the default namespace based on the TFM.
                 foreach (var project in workspace.CurrentSolution.Projects)
                 {
                     switch (project.Name)
@@ -314,9 +327,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 foreach (var project in workspace.CurrentSolution.Projects)
                 {
                     var dotIndex = project.Name.IndexOf('.');
-                    var projectName = dotIndex >= 0
-                        ? project.Name.Substring(0, dotIndex)
-                        : project.Name;
+                    var projectName =
+                        dotIndex >= 0 ? project.Name.Substring(0, dotIndex) : project.Name;
 
                     actualNames.Add(projectName);
                     var fileName = PathUtilities.GetFileName(project.FilePath);
@@ -334,7 +346,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                             break;
 
                         default:
-                            Assert.True(false, $"Encountered unexpected project: {project.FilePath}");
+                            Assert.True(
+                                false,
+                                $"Encountered unexpected project: {project.FilePath}"
+                            );
                             return;
                     }
 
@@ -344,15 +359,22 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     Assert.Empty(diagnostics);
                 }
 
-                Assert.True(actualNames.SetEquals(expectedNames), $"Project names differ!{Environment.NewLine}Actual: {{{actualNames.Join(",")}}}{Environment.NewLine}Expected: {{{expectedNames.Join(",")}}}");
+                Assert.True(
+                    actualNames.SetEquals(expectedNames),
+                    $"Project names differ!{Environment.NewLine}Actual: {{{actualNames.Join(",")}}}{Environment.NewLine}Expected: {{{expectedNames.Join(",")}}}"
+                );
 
                 // Verify that the projects reference the correct TFMs
-                var projects = workspace.CurrentSolution.Projects.Where(p => p.FilePath.EndsWith("Project.csproj"));
+                var projects = workspace.CurrentSolution.Projects.Where(
+                    p => p.FilePath.EndsWith("Project.csproj")
+                );
                 foreach (var project in projects)
                 {
                     var projectReference = Assert.Single(project.ProjectReferences);
 
-                    var referencedProject = workspace.CurrentSolution.GetProject(projectReference.ProjectId);
+                    var referencedProject = workspace.CurrentSolution.GetProject(
+                        projectReference.ProjectId
+                    );
 
                     if (project.OutputFilePath.Contains("netcoreapp2"))
                     {
@@ -370,7 +392,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             }
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), typeof(DotNetCoreSdk.IsAvailable), AlwaysSkip = "https://github.com/dotnet/roslyn/issues/41917")]
+        [ConditionalFact(
+            typeof(VisualStudioMSBuildInstalled),
+            typeof(DotNetCoreSdk.IsAvailable),
+            AlwaysSkip = "https://github.com/dotnet/roslyn/issues/41917"
+        )]
         [Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
         [Trait(Traits.Feature, Traits.Features.NetCore)]
         public async Task TestOpenSolution_NetCoreMultiTFMWithProjectReferenceToFSharp()
@@ -405,10 +431,22 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             var files = GetBaseFiles()
                 .WithFile(@"Solution.sln", Resources.SolutionFiles.Issue30174_Solution)
-                .WithFile(@"InspectedLibrary\InspectedLibrary.csproj", Resources.ProjectFiles.CSharp.Issue30174_InspectedLibrary)
-                .WithFile(@"InspectedLibrary\InspectedClass.cs", Resources.SourceFiles.CSharp.Issue30174_InspectedClass)
-                .WithFile(@"ReferencedLibrary\ReferencedLibrary.csproj", Resources.ProjectFiles.CSharp.Issue30174_ReferencedLibrary)
-                .WithFile(@"ReferencedLibrary\SomeMetadataAttribute.cs", Resources.SourceFiles.CSharp.Issue30174_SomeMetadataAttribute);
+                .WithFile(
+                    @"InspectedLibrary\InspectedLibrary.csproj",
+                    Resources.ProjectFiles.CSharp.Issue30174_InspectedLibrary
+                )
+                .WithFile(
+                    @"InspectedLibrary\InspectedClass.cs",
+                    Resources.SourceFiles.CSharp.Issue30174_InspectedClass
+                )
+                .WithFile(
+                    @"ReferencedLibrary\ReferencedLibrary.csproj",
+                    Resources.ProjectFiles.CSharp.Issue30174_ReferencedLibrary
+                )
+                .WithFile(
+                    @"ReferencedLibrary\SomeMetadataAttribute.cs",
+                    Resources.SourceFiles.CSharp.Issue30174_SomeMetadataAttribute
+                );
 
             CreateFiles(files);
 
@@ -442,15 +480,26 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             DotNetRestore(@"Library\Library.csproj");
 
             // Override the TFM properties defined in the file
-            using (var workspace = CreateMSBuildWorkspace((PropertyNames.TargetFramework, ""), (PropertyNames.TargetFrameworks, "netcoreapp2.1;net461")))
+            using (
+                var workspace = CreateMSBuildWorkspace(
+                    (PropertyNames.TargetFramework, ""),
+                    (PropertyNames.TargetFrameworks, "netcoreapp2.1;net461")
+                )
+            )
             {
                 await workspace.OpenProjectAsync(projectFilePath);
 
                 // Assert that two projects have been loaded, one for each TFM.
                 Assert.Equal(2, workspace.CurrentSolution.ProjectIds.Count);
 
-                Assert.Contains(workspace.CurrentSolution.Projects, p => p.Name == "Library(netcoreapp2.1)");
-                Assert.Contains(workspace.CurrentSolution.Projects, p => p.Name == "Library(net461)");
+                Assert.Contains(
+                    workspace.CurrentSolution.Projects,
+                    p => p.Name == "Library(netcoreapp2.1)"
+                );
+                Assert.Contains(
+                    workspace.CurrentSolution.Projects,
+                    p => p.Name == "Library(net461)"
+                );
             }
         }
 
@@ -485,7 +534,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
                 var compilation = await project.GetCompilationAsync();
                 var option = compilation.Options as VisualBasicCompilationOptions;
-                Assert.Contains("LibraryHelperClass = Library.MyHelperClass", option.GlobalImports.Select(i => i.Name));
+                Assert.Contains(
+                    "LibraryHelperClass = Library.MyHelperClass",
+                    option.GlobalImports.Select(i => i.Name)
+                );
             }
 
             static void AssertSingleProjectReference(Project project, string projectRefFilePath)
@@ -493,7 +545,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 var projectReference = Assert.Single(project.ProjectReferences);
 
                 var projectRefId = projectReference.ProjectId;
-                Assert.Equal(projectRefFilePath, project.Solution.GetProject(projectRefId).FilePath);
+                Assert.Equal(
+                    projectRefFilePath,
+                    project.Solution.GetProject(projectRefId).FilePath
+                );
             }
         }
     }

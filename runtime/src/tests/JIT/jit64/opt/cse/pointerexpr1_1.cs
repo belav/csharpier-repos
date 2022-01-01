@@ -20,7 +20,6 @@ namespace CseTest
 {
     using System;
 
-
     public class TestClass
     {
         static int Main()
@@ -142,4 +141,3 @@ namespace CseTest
         }
     }
 }
-

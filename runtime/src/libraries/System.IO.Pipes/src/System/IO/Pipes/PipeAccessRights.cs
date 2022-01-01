@@ -20,22 +20,27 @@ namespace System.IO.Pipes
         // PipeAccessRights (PipeDirection.In/Out maps to GENERIC_READ/WRITE access).
         ReadExtendedAttributes = 0x000008,
         WriteExtendedAttributes = 0x000010,
-
         CreateNewInstance = 0x000004, // AppendData
 
         // Again, this is not needed but it should be here so that our FullControl matches windows.
         Delete = 0x010000,
-
         ReadPermissions = 0x020000,
         ChangePermissions = 0x040000,
         TakeOwnership = 0x080000,
         Synchronize = 0x100000,
-
-        FullControl = ReadData | WriteData | ReadAttributes | ReadExtendedAttributes |
-                                       WriteAttributes | WriteExtendedAttributes | CreateNewInstance |
-                                       Delete | ReadPermissions | ChangePermissions | TakeOwnership |
-                                       Synchronize,
-
+        FullControl =
+            ReadData
+            | WriteData
+            | ReadAttributes
+            | ReadExtendedAttributes
+            | WriteAttributes
+            | WriteExtendedAttributes
+            | CreateNewInstance
+            | Delete
+            | ReadPermissions
+            | ChangePermissions
+            | TakeOwnership
+            | Synchronize,
         Read = ReadData | ReadAttributes | ReadExtendedAttributes | ReadPermissions,
         Write = WriteData | WriteAttributes | WriteExtendedAttributes, // | CreateNewInstance, For security, I really don't this CreateNewInstance belongs here.
         ReadWrite = Read | Write,

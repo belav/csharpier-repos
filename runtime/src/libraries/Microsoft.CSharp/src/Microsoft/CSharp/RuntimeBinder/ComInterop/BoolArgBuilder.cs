@@ -10,8 +10,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
     internal sealed class BoolArgBuilder : SimpleArgBuilder
     {
-        internal BoolArgBuilder(Type parameterType)
-            : base(parameterType)
+        internal BoolArgBuilder(Type parameterType) : base(parameterType)
         {
             Debug.Assert(parameterType == typeof(bool));
         }
@@ -30,12 +29,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal override Expression UnmarshalFromRef(Expression value)
         {
             //parameter = temp != 0
-            return base.UnmarshalFromRef(
-                Expression.NotEqual(
-                     value,
-                     Expression.Constant((short)0)
-                )
-            );
+            return base.UnmarshalFromRef(Expression.NotEqual(value, Expression.Constant((short)0)));
         }
     }
 }

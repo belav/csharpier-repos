@@ -21,34 +21,29 @@ namespace Tests.Integration
 
         public interface ICreationPolicyExport
         {
-
         }
 
         [Export(typeof(ICreationPolicyExport))]
         public class CreationPolicyAnyExportImplicit : ICreationPolicyExport
         {
-
         }
 
         [Export(typeof(ICreationPolicyExport))]
         [PartCreationPolicy(CreationPolicy.Any)]
         public class CreationPolicyAnyExportExplicit : ICreationPolicyExport
         {
-
         }
 
         [Export(typeof(ICreationPolicyExport))]
         [PartCreationPolicy(CreationPolicy.Shared)]
         public class CreationPolicySharedExport : ICreationPolicyExport
         {
-
         }
 
         [Export(typeof(ICreationPolicyExport))]
         [PartCreationPolicy(CreationPolicy.NonShared)]
         public class CreationPolicyNonSharedExport : ICreationPolicyExport
         {
-
         }
 
         [Export]
@@ -83,16 +78,15 @@ namespace Tests.Integration
         {
             return ContainerFactory.CreateWithAttributedCatalog(
                 typeof(ICreationPolicyExport),
-
                 typeof(CreationPolicyAnyExportImplicit),
                 typeof(CreationPolicyAnyExportExplicit),
                 typeof(CreationPolicySharedExport),
                 typeof(CreationPolicyNonSharedExport),
-
                 typeof(RequiredAnyImporterImplicit),
                 typeof(RequiredAnyImporterExplicit),
                 typeof(RequiredSharedImporter),
-                typeof(RequiredNonSharedImporter));
+                typeof(RequiredNonSharedImporter)
+            );
         }
 
         [Fact]
@@ -102,12 +96,16 @@ namespace Tests.Integration
 
             var importer = container.GetExportedValue<RequiredAnyImporterImplicit>();
 
-            Assert.Equal(new Type[] {
+            Assert.Equal(
+                new Type[]
+                {
                     typeof(CreationPolicyAnyExportImplicit),
                     typeof(CreationPolicyAnyExportExplicit),
                     typeof(CreationPolicySharedExport),
-                    typeof(CreationPolicyNonSharedExport) },
-                importer.Exports.Select(obj => obj.GetType()));
+                    typeof(CreationPolicyNonSharedExport)
+                },
+                importer.Exports.Select(obj => obj.GetType())
+            );
         }
 
         [Fact]
@@ -117,12 +115,16 @@ namespace Tests.Integration
 
             var importer = container.GetExportedValue<RequiredAnyImporterExplicit>();
 
-            Assert.Equal(new Type[] {
+            Assert.Equal(
+                new Type[]
+                {
                     typeof(CreationPolicyAnyExportImplicit),
                     typeof(CreationPolicyAnyExportExplicit),
                     typeof(CreationPolicySharedExport),
-                    typeof(CreationPolicyNonSharedExport) },
-                importer.Exports.Select(obj => obj.GetType()));
+                    typeof(CreationPolicyNonSharedExport)
+                },
+                importer.Exports.Select(obj => obj.GetType())
+            );
         }
 
         [Fact]
@@ -132,12 +134,15 @@ namespace Tests.Integration
 
             var importer = container.GetExportedValue<RequiredSharedImporter>();
 
-            Assert.Equal(new Type[] {
+            Assert.Equal(
+                new Type[]
+                {
                     typeof(CreationPolicyAnyExportImplicit),
                     typeof(CreationPolicyAnyExportExplicit),
-                    typeof(CreationPolicySharedExport) },
-                importer.Exports.Select(obj => obj.GetType()));
-
+                    typeof(CreationPolicySharedExport)
+                },
+                importer.Exports.Select(obj => obj.GetType())
+            );
         }
 
         [Fact]
@@ -147,11 +152,15 @@ namespace Tests.Integration
 
             var importer = container.GetExportedValue<RequiredNonSharedImporter>();
 
-            Assert.Equal(new Type[] {
+            Assert.Equal(
+                new Type[]
+                {
                     typeof(CreationPolicyAnyExportImplicit),
                     typeof(CreationPolicyAnyExportExplicit),
-                    typeof(CreationPolicyNonSharedExport) },
-                importer.Exports.Select(obj => obj.GetType()));
+                    typeof(CreationPolicyNonSharedExport)
+                },
+                importer.Exports.Select(obj => obj.GetType())
+            );
         }
     }
 }

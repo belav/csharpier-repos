@@ -22,5 +22,4 @@ public abstract class RazorPage<TModel> : RazorPage
     /// </summary>
     [RazorInject]
     public ViewDataDictionary<TModel> ViewData { get; set; } = default!;
-
 }

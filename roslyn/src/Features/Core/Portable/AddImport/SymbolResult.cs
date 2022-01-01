@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.AddImport
         {
             public readonly IReadOnlyList<string> NameParts;
 
-            // How good a match this was.  0 means it was a perfect match.  Larger numbers are less 
+            // How good a match this was.  0 means it was a perfect match.  Larger numbers are less
             // and less good.
             public readonly double Weight;
 
@@ -27,11 +27,19 @@ namespace Microsoft.CodeAnalysis.AddImport
             public readonly TSimpleNameSyntax NameNode;
 
             public SearchResult(SymbolResult<INamespaceOrTypeSymbol> result)
-                : this(result.DesiredName, result.NameNode, INamespaceOrTypeSymbolExtensions.GetNameParts(result.Symbol), result.Weight)
-            {
-            }
+                : this(
+                    result.DesiredName,
+                    result.NameNode,
+                    INamespaceOrTypeSymbolExtensions.GetNameParts(result.Symbol),
+                    result.Weight
+                ) { }
 
-            public SearchResult(string? desiredName, TSimpleNameSyntax nameNode, IReadOnlyList<string> nameParts, double weight)
+            public SearchResult(
+                string? desiredName,
+                TSimpleNameSyntax nameNode,
+                IReadOnlyList<string> nameParts,
+                double weight
+            )
             {
                 DesiredName = desiredName;
                 Weight = weight;
@@ -41,16 +49,18 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             public bool DesiredNameDiffersFromSourceName()
             {
-                return !string.IsNullOrEmpty(DesiredName) &&
-                    NameNode != null &&
-                    NameNode.GetFirstToken().ValueText != DesiredName;
+                return !string.IsNullOrEmpty(DesiredName)
+                    && NameNode != null
+                    && NameNode.GetFirstToken().ValueText != DesiredName;
             }
 
             public bool DesiredNameDiffersFromSourceNameOnlyByCase()
             {
                 Debug.Assert(DesiredNameDiffersFromSourceName());
                 return StringComparer.OrdinalIgnoreCase.Equals(
-                    NameNode.GetFirstToken().ValueText, DesiredName);
+                    NameNode.GetFirstToken().ValueText,
+                    DesiredName
+                );
             }
 
             public bool DesiredNameMatchesSourceName(Document document)
@@ -64,8 +74,7 @@ namespace Microsoft.CodeAnalysis.AddImport
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
                 // Names differ.  But in a case insensitive language they may match.
-                if (!syntaxFacts.IsCaseSensitive &&
-                    DesiredNameDiffersFromSourceNameOnlyByCase())
+                if (!syntaxFacts.IsCaseSensitive && DesiredNameDiffersFromSourceNameOnlyByCase())
                 {
                     return true;
                 }
@@ -80,7 +89,7 @@ namespace Microsoft.CodeAnalysis.AddImport
             // The symbol that matched the string being searched for.
             public readonly T Symbol;
 
-            // How good a match this was.  0 means it was a perfect match.  Larger numbers are less 
+            // How good a match this was.  0 means it was a perfect match.  Larger numbers are less
             // and less good.
             public readonly double Weight;
 
@@ -90,7 +99,12 @@ namespace Microsoft.CodeAnalysis.AddImport
             // The node to convert to the desired name
             public readonly TSimpleNameSyntax NameNode;
 
-            public SymbolResult(string desiredName, TSimpleNameSyntax nameNode, T symbol, double weight)
+            public SymbolResult(
+                string desiredName,
+                TSimpleNameSyntax nameNode,
+                T symbol,
+                double weight
+            )
             {
                 DesiredName = desiredName;
                 Symbol = symbol;
@@ -98,17 +112,21 @@ namespace Microsoft.CodeAnalysis.AddImport
                 NameNode = nameNode;
             }
 
-            public SymbolResult<T2> WithSymbol<T2>(T2 symbol) where T2 : ISymbol
-                => new(DesiredName, NameNode, symbol, Weight);
+            public SymbolResult<T2> WithSymbol<T2>(T2 symbol) where T2 : ISymbol =>
+                new(DesiredName, NameNode, symbol, Weight);
 
-            internal SymbolResult<T> WithDesiredName(string desiredName)
-                => new(desiredName, NameNode, Symbol, Weight);
+            internal SymbolResult<T> WithDesiredName(string desiredName) =>
+                new(desiredName, NameNode, Symbol, Weight);
         }
 
         private struct SymbolResult
         {
-            public static SymbolResult<T> Create<T>(string desiredName, TSimpleNameSyntax nameNode, T symbol, double weight) where T : ISymbol
-                => new(desiredName, nameNode, symbol, weight);
+            public static SymbolResult<T> Create<T>(
+                string desiredName,
+                TSimpleNameSyntax nameNode,
+                T symbol,
+                double weight
+            ) where T : ISymbol => new(desiredName, nameNode, symbol, weight);
         }
     }
 }

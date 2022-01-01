@@ -5,12 +5,11 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindAsTrackingQuerySqlServerTest : NorthwindAsTrackingQueryTestBase<
-        NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+    public class NorthwindAsTrackingQuerySqlServerTest
+        : NorthwindAsTrackingQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
     {
-        public NorthwindAsTrackingQuerySqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture)
-            : base(fixture)
-        {
-        }
+        public NorthwindAsTrackingQuerySqlServerTest(
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
+        ) : base(fixture) { }
     }
 }

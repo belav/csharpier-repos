@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public SequenceEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            IReadOnlySequence sequence)
-            : base(eventDefinition, messageGenerator)
+            IReadOnlySequence sequence
+        ) : base(eventDefinition, messageGenerator)
         {
             Sequence = sequence;
         }

@@ -31,7 +31,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         string name,
         IHealthCheck instance,
         HealthStatus? failureStatus,
-        IEnumerable<string> tags)
+        IEnumerable<string> tags
+    )
     {
         return AddCheck(builder, name, instance, failureStatus, tags, default);
     }
@@ -49,14 +50,19 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
     /// <param name="timeout">An optional <see cref="TimeSpan"/> representing the timeout of the check.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static IHealthChecksBuilder AddCheck(
         this IHealthChecksBuilder builder,
         string name,
         IHealthCheck instance,
         HealthStatus? failureStatus = null,
         IEnumerable<string>? tags = null,
-        TimeSpan? timeout = null)
+        TimeSpan? timeout = null
+    )
     {
         if (builder == null)
         {
@@ -73,7 +79,9 @@ public static class HealthChecksBuilderAddCheckExtensions
             throw new ArgumentNullException(nameof(instance));
         }
 
-        return builder.Add(new HealthCheckRegistration(name, instance, failureStatus, tags, timeout));
+        return builder.Add(
+            new HealthCheckRegistration(name, instance, failureStatus, tags, timeout)
+        );
     }
 
     /// <summary>
@@ -99,7 +107,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus,
-        IEnumerable<string> tags) where T : class, IHealthCheck
+        IEnumerable<string> tags
+    ) where T : class, IHealthCheck
     {
         return AddCheck<T>(builder, name, failureStatus, tags, default);
     }
@@ -123,13 +132,18 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// with any lifetime it will be used. Otherwise an instance of type <typeparamref name="T"/> will be constructed with
     /// access to services from the dependency injection container.
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.",
+        Justification = "Required to maintain compatibility"
+    )]
     public static IHealthChecksBuilder AddCheck<T>(
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus = null,
         IEnumerable<string>? tags = null,
-        TimeSpan? timeout = null) where T : class, IHealthCheck
+        TimeSpan? timeout = null
+    ) where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -141,7 +155,15 @@ public static class HealthChecksBuilderAddCheckExtensions
             throw new ArgumentNullException(nameof(name));
         }
 
-        return builder.Add(new HealthCheckRegistration(name, s => ActivatorUtilities.GetServiceOrCreateInstance<T>(s), failureStatus, tags, timeout));
+        return builder.Add(
+            new HealthCheckRegistration(
+                name,
+                s => ActivatorUtilities.GetServiceOrCreateInstance<T>(s),
+                failureStatus,
+                tags,
+                timeout
+            )
+        );
     }
 
     // NOTE: AddTypeActivatedCheck has overloads rather than default parameters values, because default parameter values don't
@@ -159,7 +181,11 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider, object[])"/> to create the health check
     /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
     /// </remarks>
-    public static IHealthChecksBuilder AddTypeActivatedCheck<T>(this IHealthChecksBuilder builder, string name, params object[] args) where T : class, IHealthCheck
+    public static IHealthChecksBuilder AddTypeActivatedCheck<T>(
+        this IHealthChecksBuilder builder,
+        string name,
+        params object[] args
+    ) where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -194,7 +220,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus,
-        params object[] args) where T : class, IHealthCheck
+        params object[] args
+    ) where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -231,7 +258,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         string name,
         HealthStatus? failureStatus,
         IEnumerable<string>? tags,
-        params object[] args) where T : class, IHealthCheck
+        params object[] args
+    ) where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -243,7 +271,14 @@ public static class HealthChecksBuilderAddCheckExtensions
             throw new ArgumentNullException(nameof(name));
         }
 
-        return builder.Add(new HealthCheckRegistration(name, s => ActivatorUtilities.CreateInstance<T>(s, args), failureStatus, tags));
+        return builder.Add(
+            new HealthCheckRegistration(
+                name,
+                s => ActivatorUtilities.CreateInstance<T>(s, args),
+                failureStatus,
+                tags
+            )
+        );
     }
 
     /// <summary>
@@ -270,7 +305,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         HealthStatus? failureStatus,
         IEnumerable<string> tags,
         TimeSpan timeout,
-        params object[] args) where T : class, IHealthCheck
+        params object[] args
+    ) where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -282,6 +318,14 @@ public static class HealthChecksBuilderAddCheckExtensions
             throw new ArgumentNullException(nameof(name));
         }
 
-        return builder.Add(new HealthCheckRegistration(name, s => ActivatorUtilities.CreateInstance<T>(s, args), failureStatus, tags, timeout));
+        return builder.Add(
+            new HealthCheckRegistration(
+                name,
+                s => ActivatorUtilities.CreateInstance<T>(s, args),
+                failureStatus,
+                tags,
+                timeout
+            )
+        );
     }
 }

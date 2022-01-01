@@ -23,7 +23,10 @@ namespace System.ComponentModel.Composition.Hosting
             private readonly Func<ImportDefinition, bool> _importFilter;
             private Dictionary<string, List<ComposablePartDefinition>>? _importersIndex;
 
-            public DependentsTraversal(FilteredCatalog catalog, Func<ImportDefinition, bool> importFilter)
+            public DependentsTraversal(
+                FilteredCatalog catalog,
+                Func<ImportDefinition, bool> importFilter
+            )
             {
                 if (catalog == null)
                 {
@@ -60,7 +63,12 @@ namespace System.ComponentModel.Composition.Hosting
 
             private void AddToImportersIndex(string contractName, ComposablePartDefinition part)
             {
-                if (!_importersIndex!.TryGetValue(contractName, out List<ComposablePartDefinition>? parts))
+                if (
+                    !_importersIndex!.TryGetValue(
+                        contractName,
+                        out List<ComposablePartDefinition>? parts
+                    )
+                )
                 {
                     parts = new List<ComposablePartDefinition>();
                     _importersIndex.Add(contractName, parts);
@@ -68,7 +76,10 @@ namespace System.ComponentModel.Composition.Hosting
                 parts.Add(part);
             }
 
-            public bool TryTraverse(ComposablePartDefinition part, [NotNullWhen(true)] out IEnumerable<ComposablePartDefinition>? reachableParts)
+            public bool TryTraverse(
+                ComposablePartDefinition part,
+                [NotNullWhen(true)] out IEnumerable<ComposablePartDefinition>? reachableParts
+            )
             {
                 reachableParts = null;
                 List<ComposablePartDefinition>? reachablePartList = null;
@@ -79,14 +90,29 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     // Find all parts that we know will import each export
                     List<ComposablePartDefinition>? candidateReachableParts = null;
-                    if (_importersIndex.TryGetValue(export.ContractName, out candidateReachableParts))
+                    if (
+                        _importersIndex.TryGetValue(
+                            export.ContractName,
+                            out candidateReachableParts
+                        )
+                    )
                     {
                         // find if they actually match
                         foreach (var candidateReachablePart in candidateReachableParts)
                         {
-                            foreach (ImportDefinition import in candidateReachablePart.ImportDefinitions.Where(_importFilter))
+                            foreach (
+                                ImportDefinition import in candidateReachablePart.ImportDefinitions.Where(
+                                    _importFilter
+                                )
+                            )
                             {
-                                if (import.IsImportDependentOnPart(part, export, part.IsGeneric() != candidateReachablePart.IsGeneric()))
+                                if (
+                                    import.IsImportDependentOnPart(
+                                        part,
+                                        export,
+                                        part.IsGeneric() != candidateReachablePart.IsGeneric()
+                                    )
+                                )
                                 {
                                     if (reachablePartList == null)
                                     {

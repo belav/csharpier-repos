@@ -7,7 +7,6 @@ namespace System.Reflection.Metadata.Ecma335
     internal enum TypeDefTreatment : byte
     {
         None = 0,
-
         KindMask = 0x0f,
         NormalNonAttribute = 1,
         NormalAttribute = 2,
@@ -15,7 +14,6 @@ namespace System.Reflection.Metadata.Ecma335
         PrefixWinRTName = 4,
         RedirectedToClrType = 5,
         RedirectedToClrAttribute = 6,
-
         MarkAbstractFlag = 0x10,
         MarkInternalFlag = 0x20
     }
@@ -41,7 +39,6 @@ namespace System.Reflection.Metadata.Ecma335
     internal enum MethodDefTreatment : byte
     {
         None = 0,
-
         KindMask = 0x0f,
         Other = 1,
         DelegateMethod = 2,
@@ -50,7 +47,6 @@ namespace System.Reflection.Metadata.Ecma335
         Implementation = 5,
         HiddenInterfaceImplementation = 6,
         DisposeMethod = 7,
-
         MarkAbstractFlag = 0x10,
         MarkPublicFlag = 0x20,
         // TODO: In the latest Adapter.cpp sources this seems to be no longer applicable (confirm?)

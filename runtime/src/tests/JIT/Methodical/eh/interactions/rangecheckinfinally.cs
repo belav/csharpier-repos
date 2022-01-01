@@ -28,9 +28,7 @@ namespace hello
             //Start recording
             testLog.StartRecording();
             a = new int[2];
-            try
-            {
-            }
+            try { }
             finally
             {
                 a[0] = 1234;
@@ -46,4 +44,3 @@ namespace hello
         }
     }
 }
-

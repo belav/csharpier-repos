@@ -43,7 +43,11 @@ public class TemporaryDirectory : IDisposable
         return project;
     }
 
-    public TemporaryCSharpProject WithCSharpProject(string name, out TemporaryCSharpProject project, string sdk = "Microsoft.NET.Sdk")
+    public TemporaryCSharpProject WithCSharpProject(
+        string name,
+        out TemporaryCSharpProject project,
+        string sdk = "Microsoft.NET.Sdk"
+    )
     {
         project = WithCSharpProject(name, sdk);
         return project;

@@ -25,16 +25,15 @@ namespace Microsoft.CodeAnalysis.Completion
         /// Indicates this <see cref="CompletionItem"/> should be shown only when expanded items is requested.
         /// </summary>
         Expanded = 0x2,
-
         CachedAndExpanded = Cached | Expanded,
     }
 
     internal static class CompletionItemFlagsExtensions
     {
-        public static bool IsCached(this CompletionItemFlags flags)
-            => (flags & CompletionItemFlags.Cached) != 0;
+        public static bool IsCached(this CompletionItemFlags flags) =>
+            (flags & CompletionItemFlags.Cached) != 0;
 
-        public static bool IsExpanded(this CompletionItemFlags flags)
-            => (flags & CompletionItemFlags.Expanded) != 0;
+        public static bool IsExpanded(this CompletionItemFlags flags) =>
+            (flags & CompletionItemFlags.Expanded) != 0;
     }
 }

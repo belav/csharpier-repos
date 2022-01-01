@@ -10,6 +10,11 @@ internal static partial class Interop
     {
         [GeneratedDllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static partial bool GetProcessTimes(
-            SafeProcessHandle handle, out long creation, out long exit, out long kernel, out long user);
+            SafeProcessHandle handle,
+            out long creation,
+            out long exit,
+            out long kernel,
+            out long user
+        );
     }
 }

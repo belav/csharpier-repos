@@ -4,7 +4,6 @@
 
 using System;
 
-
 public struct ValX1<T>
 {
     public T t;
@@ -12,7 +11,6 @@ public struct ValX1<T>
     {
         this.t = t;
     }
-
 }
 public class RefX1<T>
 {
@@ -22,7 +20,6 @@ public class RefX1<T>
         this.t = t;
     }
 }
-
 
 public struct Gen<T>
 {
@@ -38,7 +35,7 @@ public struct Gen<T>
 
 public class ArrayHolder
 {
-    public Gen<int>[, ,] GenArray = new Gen<int>[10, 10, 10];
+    public Gen<int>[,,] GenArray = new Gen<int>[10, 10, 10];
 }
 
 public class Test_struct01_Instance
@@ -53,13 +50,14 @@ public class Test_struct01_Instance
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
         int size = 10;
-        int i, j, k;
+        int i,
+            j,
+            k;
         double sum = 0;
         int cLoc = 0;
 
@@ -89,9 +87,6 @@ public class Test_struct01_Instance
             }
         }
 
-
-
-
         Eval(sum == 499500);
         sum = 0;
 
@@ -106,6 +101,4 @@ public class Test_struct01_Instance
             return 1;
         }
     }
-
 }
-

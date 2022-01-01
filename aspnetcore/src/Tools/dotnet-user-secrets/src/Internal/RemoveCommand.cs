@@ -15,17 +15,21 @@ internal class RemoveCommand : ICommand
         command.HelpOption();
 
         var keyArg = command.Argument("[name]", "Name of the secret");
-        command.OnExecute(() =>
-        {
-            if (keyArg.Value == null)
+        command.OnExecute(
+            () =>
             {
-                throw new CommandParsingException(command, Resources.FormatError_MissingArgument("name"));
+                if (keyArg.Value == null)
+                {
+                    throw new CommandParsingException(
+                        command,
+                        Resources.FormatError_MissingArgument("name")
+                    );
+                }
+
+                options.Command = new RemoveCommand(keyArg.Value);
             }
-
-            options.Command = new RemoveCommand(keyArg.Value);
-        });
+        );
     }
-
 
     public RemoveCommand(string keyName)
     {

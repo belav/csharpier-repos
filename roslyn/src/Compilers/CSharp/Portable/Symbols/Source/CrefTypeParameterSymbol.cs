@@ -68,7 +68,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly int _ordinal;
         private readonly SyntaxReference _declaringSyntax;
 
-        public CrefTypeParameterSymbol(string name, int ordinal, IdentifierNameSyntax declaringSyntax)
+        public CrefTypeParameterSymbol(
+            string name,
+            int ordinal,
+            IdentifierNameSyntax declaringSyntax
+        )
         {
             _name = name;
             _ordinal = ordinal;
@@ -77,10 +81,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeParameterKind TypeParameterKind
         {
-            get
-            {
-                return TypeParameterKind.Cref;
-            }
+            get { return TypeParameterKind.Cref; }
         }
 
         public override string Name
@@ -106,10 +107,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             CrefTypeParameterSymbol other = t2 as CrefTypeParameterSymbol;
-            return (object)other != null &&
-                other._name == _name &&
-                other._ordinal == _ordinal &&
-                other._declaringSyntax.GetSyntax() == _declaringSyntax.GetSyntax();
+            return (object)other != null
+                && other._name == _name
+                && other._ordinal == _ordinal
+                && other._declaringSyntax.GetSyntax() == _declaringSyntax.GetSyntax();
         }
 
         public override int GetHashCode()
@@ -163,43 +164,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray.Create<Location>(_declaringSyntax.GetLocation());
-            }
+            get { return ImmutableArray.Create<Location>(_declaringSyntax.GetLocation()); }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray.Create<SyntaxReference>(_declaringSyntax);
-            }
+            get { return ImmutableArray.Create<SyntaxReference>(_declaringSyntax); }
         }
 
-        internal override void EnsureAllConstraintsAreResolved()
-        {
-        }
+        internal override void EnsureAllConstraintsAreResolved() { }
 
-        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(ConsList<TypeParameterSymbol> inProgress)
+        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             return ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(ConsList<TypeParameterSymbol> inProgress)
+        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        internal override NamedTypeSymbol GetEffectiveBaseClass(ConsList<TypeParameterSymbol> inProgress)
+        internal override NamedTypeSymbol GetEffectiveBaseClass(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             // Constraints are not checked in crefs, so this should never be examined.
             throw ExceptionUtilities.Unreachable;

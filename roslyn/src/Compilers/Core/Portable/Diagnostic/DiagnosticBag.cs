@@ -99,7 +99,10 @@ namespace Microsoft.CodeAnalysis
 
             foreach (Diagnostic diagnostic in Bag)
             {
-                if ((diagnostic as DiagnosticWithInfo)?.HasLazyInfo != true && diagnostic.DefaultSeverity == DiagnosticSeverity.Error)
+                if (
+                    (diagnostic as DiagnosticWithInfo)?.HasLazyInfo != true
+                    && diagnostic.DefaultSeverity == DiagnosticSeverity.Error
+                )
                 {
                     return true;
                 }
@@ -167,7 +170,8 @@ namespace Microsoft.CodeAnalysis
         /// Seal the bag so no further errors can be added, while clearing it and returning the old set of errors.
         /// Return the bag to the pool.
         /// </summary>
-        public ImmutableArray<TDiagnostic> ToReadOnlyAndFree<TDiagnostic>() where TDiagnostic : Diagnostic
+        public ImmutableArray<TDiagnostic> ToReadOnlyAndFree<TDiagnostic>()
+            where TDiagnostic : Diagnostic
         {
             ConcurrentQueue<Diagnostic>? oldBag = _lazyBag;
             Free();
@@ -191,7 +195,9 @@ namespace Microsoft.CodeAnalysis
             return ToReadOnly<Diagnostic>();
         }
 
-        private static ImmutableArray<TDiagnostic> ToReadOnlyCore<TDiagnostic>(ConcurrentQueue<Diagnostic>? oldBag) where TDiagnostic : Diagnostic
+        private static ImmutableArray<TDiagnostic> ToReadOnlyCore<TDiagnostic>(
+            ConcurrentQueue<Diagnostic>? oldBag
+        ) where TDiagnostic : Diagnostic
         {
             if (oldBag == null)
             {
@@ -212,7 +218,6 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutableAndFree();
         }
 
-
         /// <remarks>
         /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
         /// if you need more info, pass more info).
@@ -232,9 +237,7 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return foundVoid
-                ? AsEnumerableFiltered()
-                : bag;
+            return foundVoid ? AsEnumerableFiltered() : bag;
         }
 
         /// <remarks>

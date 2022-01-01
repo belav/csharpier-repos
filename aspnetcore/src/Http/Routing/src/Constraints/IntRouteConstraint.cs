@@ -19,7 +19,8 @@ public class IntRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchin
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {

@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             string? description = null,
             string? prettyPrintedSignature = null,
             bool isSelected = false,
-            ImmutableArray<string>? classificationTypeNames = null)
+            ImmutableArray<string>? classificationTypeNames = null
+        )
         {
             this.Signature = signature;
             this.MethodDocumentation = methodDocumentation;

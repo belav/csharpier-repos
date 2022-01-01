@@ -21,7 +21,8 @@ public class Test_KeepAliveRecur
 
     public static void foo(Object o)
     {
-        if (count == 10) return;
+        if (count == 10)
+            return;
         Console.WriteLine("Count: {0}", count);
         count++;
 
@@ -29,9 +30,9 @@ public class Test_KeepAliveRecur
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        foo(o);     //Recursive call
+        foo(o); //Recursive call
 
-        GC.KeepAlive(o);    // Keeping object alive 
+        GC.KeepAlive(o); // Keeping object alive
     }
 
     public static int Main()
@@ -42,7 +43,7 @@ public class Test_KeepAliveRecur
         Console.WriteLine("After call to foo()");
 
         if (Dummy.visited == false)
-        {  // has not visited the Finalize()
+        { // has not visited the Finalize()
             Console.WriteLine("Test for KeepAlive() recursively passed!");
             return 100;
         }

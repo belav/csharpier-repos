@@ -19,15 +19,17 @@ namespace Microsoft.Web.Mvc
     {
         private string _extensions;
 
-        public FileExtensionsAttribute()
-            : base("upload")
+        public FileExtensionsAttribute() : base("upload")
         {
             ErrorMessage = MvcResources.FileExtensionsAttribute_Invalid;
         }
 
         public string Extensions
         {
-            get { return String.IsNullOrWhiteSpace(_extensions) ? "png,jpg,jpeg,gif" : _extensions; }
+            get
+            {
+                return String.IsNullOrWhiteSpace(_extensions) ? "png,jpg,jpeg,gif" : _extensions;
+            }
             set { _extensions = value; }
         }
 
@@ -36,10 +38,20 @@ namespace Microsoft.Web.Mvc
             get { return ExtensionsParsed.Aggregate((left, right) => left + ", " + right); }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format"
+        )]
         private string ExtensionsNormalized
         {
-            get { return Extensions.Replace(" ", String.Empty).Replace(".", String.Empty).ToLowerInvariant(); }
+            get
+            {
+                return Extensions
+                    .Replace(" ", String.Empty)
+                    .Replace(".", String.Empty)
+                    .ToLowerInvariant();
+            }
         }
 
         private IEnumerable<string> ExtensionsParsed
@@ -49,10 +61,18 @@ namespace Microsoft.Web.Mvc
 
         public override string FormatErrorMessage(string name)
         {
-            return String.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, ExtensionsFormatted);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                ExtensionsFormatted
+            );
         }
 
-        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             var rule = new ModelClientValidationRule
             {
@@ -85,7 +105,11 @@ namespace Microsoft.Web.Mvc
             return false;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "These strings are normalized to lowercase because they are presented to the user in lowercase format"
+        )]
         private bool ValidateExtension(string fileName)
         {
             try

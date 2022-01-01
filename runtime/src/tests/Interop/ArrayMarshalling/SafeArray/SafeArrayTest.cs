@@ -26,7 +26,7 @@ public class Tester
             SafeArrayNative.SumCurrencyArray(decimalArray, out var sumCurrencyValue);
             Assert.Equal(decimalArray.Sum(), sumCurrencyValue);
 
-            var strings = new [] {"ABCDE", "12345", "Microsoft"};
+            var strings = new[] { "ABCDE", "12345", "Microsoft" };
             var reversedStrings = strings.Select(str => Reverse(str)).ToArray();
 
             var ansiTest = strings.ToArray();
@@ -50,16 +50,24 @@ public class Tester
                 new SafeArrayNative.BlittableRecord { a = 9 },
                 new SafeArrayNative.BlittableRecord { a = 15 },
             };
-            AssertExtensions.CollectionEqual(blittableRecords, SafeArrayNative.CreateSafeArrayOfRecords(blittableRecords));
+            AssertExtensions.CollectionEqual(
+                blittableRecords,
+                SafeArrayNative.CreateSafeArrayOfRecords(blittableRecords)
+            );
 
-            var nonBlittableRecords = boolArray.Select(b => new SafeArrayNative.NonBlittableRecord{ b = b }).ToArray();
-            AssertExtensions.CollectionEqual(nonBlittableRecords, SafeArrayNative.CreateSafeArrayOfRecords(nonBlittableRecords));
+            var nonBlittableRecords = boolArray
+                .Select(b => new SafeArrayNative.NonBlittableRecord { b = b })
+                .ToArray();
+            AssertExtensions.CollectionEqual(
+                nonBlittableRecords,
+                SafeArrayNative.CreateSafeArrayOfRecords(nonBlittableRecords)
+            );
 
             var objects = new object[] { new object(), new object(), new object() };
             SafeArrayNative.VerifyIUnknownArray(objects);
             SafeArrayNative.VerifyIDispatchArray(objects);
 
-            var variantInts = new object[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            var variantInts = new object[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             SafeArrayNative.MeanVariantIntArray(variantInts, out var variantMean);
             Assert.Equal(variantInts.OfType<int>().Average(), variantMean);
@@ -69,11 +77,9 @@ public class Tester
             Assert.Equal((dates[1] - dates[0]).TotalDays, numDays);
 
             SafeArrayNative.XorBoolArrayInStruct(
-                new SafeArrayNative.StructWithSafeArray
-                {
-                    values = boolArray
-                },
-                out var structXor);
+                new SafeArrayNative.StructWithSafeArray { values = boolArray },
+                out var structXor
+            );
 
             Assert.Equal(XorArray(boolArray), structXor);
         }
@@ -123,7 +129,7 @@ class SafeArrayNative
 
     [DllImport(nameof(SafeArrayNative))]
     [return: MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_RECORD)]
-    private static extern  BlittableRecord[] CreateSafeArrayOfRecords(
+    private static extern BlittableRecord[] CreateSafeArrayOfRecords(
         BlittableRecord[] records,
         int numElements
     );
@@ -165,28 +171,33 @@ class SafeArrayNative
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "ReverseStrings")]
     public static extern void ReverseStringsAnsi(
-        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPSTR), In, Out] string[] strings
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPSTR), In, Out]
+            string[] strings
     );
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "ReverseStrings")]
     public static extern void ReverseStringsUnicode(
-        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPWSTR), In, Out] string[] strings
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPWSTR), In, Out]
+            string[] strings
     );
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "ReverseStrings")]
     public static extern void ReverseStringsBSTR(
-        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR), In, Out] string[] strings
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR), In, Out]
+            string[] strings
     );
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "VerifyInterfaceArray")]
     private static extern void VerifyInterfaceArrayIUnknown(
-        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_UNKNOWN)] object[] objects,
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_UNKNOWN)]
+            object[] objects,
         short expectedVarType
     );
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "VerifyInterfaceArray")]
     private static extern void VerifyInterfaceArrayIDispatch(
-        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_DISPATCH)] object[] objects,
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_DISPATCH)]
+            object[] objects,
         short expectedVarType
     );
 
@@ -203,7 +214,7 @@ class SafeArrayNative
     [DllImport(nameof(SafeArrayNative), PreserveSig = false)]
     public static extern void MeanVariantIntArray(
         [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
-        object[] objects,
+            object[] objects,
         out int result
     );
 

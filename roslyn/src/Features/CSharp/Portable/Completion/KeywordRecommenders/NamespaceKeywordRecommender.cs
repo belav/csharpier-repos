@@ -14,12 +14,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NamespaceKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public NamespaceKeywordRecommender()
-            : base(SyntaxKind.NamespaceKeyword)
-        {
-        }
+        public NamespaceKeywordRecommender() : base(SyntaxKind.NamespaceKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
 
@@ -83,8 +84,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // a namespace can't come before usings/externs
             // a child namespace can't come before usings/externs
             var nextToken = leftToken.GetNextToken(includeSkipped: true);
-            if (nextToken.IsUsingOrExternKeyword() ||
-                (nextToken.Kind() == SyntaxKind.GlobalKeyword && nextToken.GetAncestor<UsingDirectiveSyntax>()?.GlobalKeyword == nextToken))
+            if (
+                nextToken.IsUsingOrExternKeyword()
+                || (
+                    nextToken.Kind() == SyntaxKind.GlobalKeyword
+                    && nextToken.GetAncestor<UsingDirectiveSyntax>()?.GlobalKeyword == nextToken
+                )
+            )
             {
                 return false;
             }
@@ -94,8 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             {
                 // root namespace
                 var root = syntaxTree.GetRoot(cancellationToken) as CompilationUnitSyntax;
-                if (root.Externs.Count > 0 ||
-                    root.Usings.Count > 0)
+                if (root.Externs.Count > 0 || root.Usings.Count > 0)
                 {
                     return false;
                 }
@@ -103,8 +108,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 return true;
             }
 
-            if (token.Kind() == SyntaxKind.OpenBraceToken &&
-                token.Parent.IsKind(SyntaxKind.NamespaceDeclaration))
+            if (
+                token.Kind() == SyntaxKind.OpenBraceToken
+                && token.Parent.IsKind(SyntaxKind.NamespaceDeclaration)
+            )
             {
                 return true;
             }
@@ -116,8 +123,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // |
             if (token.Kind() == SyntaxKind.SemicolonToken)
             {
-                if (token.Parent.IsKind(SyntaxKind.ExternAliasDirective, SyntaxKind.UsingDirective)
-                    && !token.Parent.Parent.IsKind(SyntaxKind.FileScopedNamespaceDeclaration))
+                if (
+                    token.Parent.IsKind(SyntaxKind.ExternAliasDirective, SyntaxKind.UsingDirective)
+                    && !token.Parent.Parent.IsKind(SyntaxKind.FileScopedNamespaceDeclaration)
+                )
                 {
                     return true;
                 }
@@ -127,8 +136,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // |
             if (token.Kind() == SyntaxKind.CloseBraceToken)
             {
-                if (token.Parent is TypeDeclarationSyntax &&
-                    !(token.Parent.Parent is TypeDeclarationSyntax))
+                if (
+                    token.Parent is TypeDeclarationSyntax
+                    && !(token.Parent.Parent is TypeDeclarationSyntax)
+                )
                 {
                     return true;
                 }
@@ -143,8 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             if (token.Kind() == SyntaxKind.SemicolonToken)
             {
-                if (token.Parent.IsKind(SyntaxKind.DelegateDeclaration) &&
-                    !(token.Parent.Parent is TypeDeclarationSyntax))
+                if (
+                    token.Parent.IsKind(SyntaxKind.DelegateDeclaration)
+                    && !(token.Parent.Parent is TypeDeclarationSyntax)
+                )
                 {
                     return true;
                 }
@@ -153,9 +166,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // [assembly: goo]
             // |
 
-            if (token.Kind() == SyntaxKind.CloseBracketToken &&
-                token.Parent.IsKind(SyntaxKind.AttributeList) &&
-                token.Parent.IsParentKind(SyntaxKind.CompilationUnit))
+            if (
+                token.Kind() == SyntaxKind.CloseBracketToken
+                && token.Parent.IsKind(SyntaxKind.AttributeList)
+                && token.Parent.IsParentKind(SyntaxKind.CompilationUnit)
+            )
             {
                 return true;
             }

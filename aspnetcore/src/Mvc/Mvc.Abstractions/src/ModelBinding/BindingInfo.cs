@@ -18,9 +18,7 @@ public class BindingInfo
     /// <summary>
     /// Creates a new <see cref="BindingInfo"/>.
     /// </summary>
-    public BindingInfo()
-    {
-    }
+    public BindingInfo() { }
 
     /// <summary>
     /// Creates a copy of a <see cref="BindingInfo"/>.
@@ -69,8 +67,10 @@ public class BindingInfo
                 throw new ArgumentException(
                     Resources.FormatBinderType_MustBeIModelBinder(
                         value.FullName,
-                        typeof(IModelBinder).FullName),
-                    nameof(value));
+                        typeof(IModelBinder).FullName
+                    ),
+                    nameof(value)
+                );
             }
 
             _binderType = value;
@@ -152,7 +152,9 @@ public class BindingInfo
         else if (propertyFilterProviders.Length > 1)
         {
             isBindingInfoPresent = true;
-            bindingInfo.PropertyFilterProvider = new CompositePropertyFilterProvider(propertyFilterProviders);
+            bindingInfo.PropertyFilterProvider = new CompositePropertyFilterProvider(
+                propertyFilterProviders
+            );
         }
 
         // RequestPredicate
@@ -182,7 +184,10 @@ public class BindingInfo
     /// <param name="attributes">A collection of attributes which are used to construct <see cref="BindingInfo"/>.</param>
     /// <param name="modelMetadata">The <see cref="ModelMetadata"/>.</param>
     /// <returns>A new instance of <see cref="BindingInfo"/> if any binding metadata was discovered; otherwise or <see langword="null"/>.</returns>
-    public static BindingInfo? GetBindingInfo(IEnumerable<object> attributes, ModelMetadata modelMetadata)
+    public static BindingInfo? GetBindingInfo(
+        IEnumerable<object> attributes,
+        ModelMetadata modelMetadata
+    )
     {
         if (attributes == null)
         {
@@ -267,9 +272,7 @@ public class BindingInfo
 
         private Func<ModelMetadata, bool> CreatePropertyFilter()
         {
-            var propertyFilters = _providers
-                .Select(p => p.PropertyFilter)
-                .Where(p => p != null);
+            var propertyFilters = _providers.Select(p => p.PropertyFilter).Where(p => p != null);
 
             return (m) =>
             {

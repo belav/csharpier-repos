@@ -17,6 +17,7 @@ namespace System.Net.Http
         internal static bool IsBlobScheme(string scheme) =>
             string.Equals(scheme, "blob", StringComparison.OrdinalIgnoreCase);
 
-        internal static string InvalidUriMessage => SR.net_http_client_http_browser_baseaddress_required;
+        internal static string InvalidUriMessage =>
+            SR.net_http_client_http_browser_baseaddress_required;
     }
 }

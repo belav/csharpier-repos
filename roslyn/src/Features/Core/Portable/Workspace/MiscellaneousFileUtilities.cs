@@ -19,26 +19,37 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
             TextLoader textLoader,
             LanguageInformation languageInformation,
             HostWorkspaceServices services,
-            ImmutableArray<MetadataReference> metadataReferences)
+            ImmutableArray<MetadataReference> metadataReferences
+        )
         {
             var fileExtension = PathUtilities.GetExtension(filePath);
 
             var languageServices = services.GetLanguageServices(languageInformation.LanguageName);
-            var compilationOptions = languageServices.GetService<ICompilationFactoryService>()?.GetDefaultCompilationOptions();
+            var compilationOptions =
+                languageServices.GetService<ICompilationFactoryService>()?.GetDefaultCompilationOptions();
 
             // Use latest language version which is more permissive, as we cannot find out language version of the project which the file belongs to
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/575761
-            var parseOptions = languageServices.GetService<ISyntaxTreeFactoryService>()?.GetDefaultParseOptionsWithLatestLanguageVersion();
+            var parseOptions =
+                languageServices.GetService<ISyntaxTreeFactoryService>()?.GetDefaultParseOptionsWithLatestLanguageVersion();
 
-            if (parseOptions != null &&
-                compilationOptions != null &&
-                fileExtension == languageInformation.ScriptExtension)
+            if (
+                parseOptions != null
+                && compilationOptions != null
+                && fileExtension == languageInformation.ScriptExtension
+            )
             {
                 parseOptions = parseOptions.WithKind(SourceCodeKind.Script);
-                compilationOptions = GetCompilationOptionsWithScriptReferenceResolvers(services, compilationOptions, filePath);
+                compilationOptions = GetCompilationOptionsWithScriptReferenceResolvers(
+                    services,
+                    compilationOptions,
+                    filePath
+                );
             }
 
-            var projectId = ProjectId.CreateNewId(debugName: "Miscellaneous Files Project for " + filePath);
+            var projectId = ProjectId.CreateNewId(
+                debugName: "Miscellaneous Files Project for " + filePath
+            );
             var documentId = DocumentId.CreateNewId(projectId, debugName: filePath);
 
             var sourceCodeKind = parseOptions?.Kind ?? SourceCodeKind.Regular;
@@ -47,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
                 filePath,
                 sourceCodeKind: sourceCodeKind,
                 loader: textLoader,
-                filePath: filePath);
+                filePath: filePath
+            );
 
             // The assembly name must be unique for each collection of loose files. Since the name doesn't matter
             // a random GUID can be used.
@@ -62,16 +74,23 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
                 compilationOptions: compilationOptions,
                 parseOptions: parseOptions,
                 documents: SpecializedCollections.SingletonEnumerable(documentInfo),
-                metadataReferences: metadataReferences);
+                metadataReferences: metadataReferences
+            );
 
             // Miscellaneous files projects are never fully loaded since, by definition, it won't know
             // what the full set of information is except when the file is script code.
-            return projectInfo.WithHasAllInformation(hasAllInformation: sourceCodeKind == SourceCodeKind.Script);
+            return projectInfo.WithHasAllInformation(
+                hasAllInformation: sourceCodeKind == SourceCodeKind.Script
+            );
         }
 
         // Do not inline this to avoid loading Microsoft.CodeAnalysis.Scripting unless a script file is opened in the workspace.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static CompilationOptions GetCompilationOptionsWithScriptReferenceResolvers(HostWorkspaceServices services, CompilationOptions compilationOptions, string filePath)
+        private static CompilationOptions GetCompilationOptionsWithScriptReferenceResolvers(
+            HostWorkspaceServices services,
+            CompilationOptions compilationOptions,
+            string filePath
+        )
         {
             var metadataService = services.GetRequiredService<IMetadataService>();
 
@@ -85,11 +104,15 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
             var referenceResolver = RuntimeMetadataReferenceResolver.CreateCurrentPlatformResolver(
                 searchPaths: ImmutableArray.Create(RuntimeEnvironment.GetRuntimeDirectory()),
                 baseDirectory: baseDirectory,
-                fileReferenceProvider: (path, properties) => metadataService.GetReference(path, properties));
+                fileReferenceProvider: (path, properties) =>
+                    metadataService.GetReference(path, properties)
+            );
 
             return compilationOptions
                 .WithMetadataReferenceResolver(referenceResolver)
-                .WithSourceReferenceResolver(new SourceFileResolver(searchPaths: ImmutableArray<string>.Empty, baseDirectory));
+                .WithSourceReferenceResolver(
+                    new SourceFileResolver(searchPaths: ImmutableArray<string>.Empty, baseDirectory)
+                );
         }
     }
 
@@ -105,4 +128,3 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
         public string ScriptExtension { get; }
     }
 }
-

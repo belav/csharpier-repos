@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static bool IsDefaultValue(this Type type, object? value)
-            => (value?.Equals(type.GetDefaultValue()) != false);
+        public static bool IsDefaultValue(this Type type, object? value) =>
+            (value?.Equals(type.GetDefaultValue()) != false);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static FieldInfo? GetFieldInfo(this Type type, string fieldName)
-            => type.GetRuntimeFields().FirstOrDefault(f => f.Name == fieldName && !f.IsStatic);
+        public static FieldInfo? GetFieldInfo(this Type type, string fieldName) =>
+            type.GetRuntimeFields().FirstOrDefault(f => f.Name == fieldName && !f.IsStatic);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,7 +46,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
             var sb = new StringBuilder();
             var removeLowerCase = sb.Append(type.Name.Where(char.IsUpper).ToArray()).ToString();
 
-            return removeLowerCase.Length > 0 ? removeLowerCase.ToLowerInvariant() : type.Name.ToLowerInvariant().Substring(0, 1);
+            return removeLowerCase.Length > 0
+              ? removeLowerCase.ToLowerInvariant()
+              : type.Name.ToLowerInvariant().Substring(0, 1);
         }
 
         /// <summary>
@@ -57,18 +59,20 @@ namespace Microsoft.EntityFrameworkCore.Internal
         /// </summary>
         public static PropertyInfo? FindIndexerProperty(this Type type)
         {
-            var defaultPropertyAttribute = type.GetCustomAttributes<DefaultMemberAttribute>().FirstOrDefault();
+            var defaultPropertyAttribute = type.GetCustomAttributes<DefaultMemberAttribute>()
+                .FirstOrDefault();
 
             return defaultPropertyAttribute == null
-                ? null
-                : type.GetRuntimeProperties()
-                    .FirstOrDefault(
-                        pi =>
-                            pi.Name == defaultPropertyAttribute.MemberName
-                            && pi.IsIndexerProperty()
-                            && pi.SetMethod?.GetParameters() is ParameterInfo[] parameters
-                            && parameters.Length == 2
-                            && parameters[0].ParameterType == typeof(string));
+              ? null
+              : type.GetRuntimeProperties()
+                .FirstOrDefault(
+                    pi =>
+                        pi.Name == defaultPropertyAttribute.MemberName
+                        && pi.IsIndexerProperty()
+                        && pi.SetMethod?.GetParameters() is ParameterInfo[] parameters
+                        && parameters.Length == 2
+                        && parameters[0].ParameterType == typeof(string)
+                );
         }
     }
 }

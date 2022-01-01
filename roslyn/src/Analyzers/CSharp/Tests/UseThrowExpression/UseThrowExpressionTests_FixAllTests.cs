@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
         public async Task FixAllInDocument1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -37,7 +37,7 @@ class C
         _t = t;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -46,14 +46,15 @@ class C
         _s = s ?? throw new ArgumentNullException(nameof(s));
         _t = t ?? throw new ArgumentNullException(nameof(t));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task FixAllInDocument2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -73,7 +74,7 @@ class C
         _t = t;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -82,14 +83,15 @@ class C
         _s = s ?? throw new ArgumentNullException(nameof(s));
         _t = t ?? throw new ArgumentNullException(nameof(t));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task FixAllInDocument3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -109,7 +111,7 @@ class C
         _t = t;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -118,14 +120,15 @@ class C
         _s = s ?? throw new ArgumentNullException(nameof(s));
         _t = t ?? throw new ArgumentNullException(nameof(t));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task FixAllInDocument4()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -145,7 +148,7 @@ class C
         _t = t;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -154,14 +157,15 @@ class C
         _s = s ?? throw new ArgumentNullException(nameof(s));
         _t = t ?? throw new ArgumentNullException(nameof(t));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task FixAllInDocumentDoNotTouchOtherDocuments()
         {
             await TestInRegularAndScriptAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 using System;
@@ -197,7 +201,7 @@ class D
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 using System;
@@ -227,14 +231,15 @@ class D
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
         public async Task FixAllInProject1()
         {
             await TestInRegularAndScriptAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 using System;
@@ -270,7 +275,7 @@ class D
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 using System;
@@ -295,7 +300,8 @@ class D
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
     }
 }

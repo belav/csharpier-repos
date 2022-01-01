@@ -21,20 +21,19 @@
             public string NotifyEmail { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Model, Entity>()
-                            .ForMember(e => e.ClientIPAddress, opts => opts.NullSubstitute(""))
-                            .ForMember(e => e.NotifyEmail, opts => opts.NullSubstitute(""));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Model, Entity>()
+                        .ForMember(e => e.ClientIPAddress, opts => opts.NullSubstitute(""))
+                        .ForMember(e => e.NotifyEmail, opts => opts.NullSubstitute(""));
+                }
+            );
 
         protected override void Because_of()
         {
-            var model = new Model
-            {
-                Name = "Eric Cartman",
-                Age = 12
-            };
+            var model = new Model { Name = "Eric Cartman", Age = 12 };
 
             _destination = new Entity
             {

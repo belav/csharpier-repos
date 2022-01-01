@@ -20,13 +20,14 @@ public static class IHostPortExtensions
 
     public static IEnumerable<int> GetPorts(this IHost host)
     {
-        return host.GetUris()
-            .Select(u => u.Port);
+        return host.GetUris().Select(u => u.Port);
     }
 
     public static IEnumerable<Uri> GetUris(this IHost host)
     {
-        return host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses
-            .Select(a => new Uri(a));
+        return host.Services
+            .GetService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Select(a => new Uri(a));
     }
 }

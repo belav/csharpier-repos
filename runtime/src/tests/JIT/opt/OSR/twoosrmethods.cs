@@ -29,7 +29,6 @@ class TwoOSRMethods
             {
                 result += i;
             }
-
         }
         return result;
     }
@@ -40,5 +39,5 @@ class TwoOSRMethods
         int result1 = F(0, final, true);
         int result2 = F(0, final, false);
         return (result1 == result2) && (result1 == 1783293664) ? 100 : -1;
-    }  
+    }
 }

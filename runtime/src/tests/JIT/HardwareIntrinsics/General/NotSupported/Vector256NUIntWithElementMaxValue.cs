@@ -23,7 +23,10 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                Vector256<nuint> result = default(Vector256<nuint>).WithElement(int.MaxValue, (nuint)0);
+                Vector256<nuint> result = default(Vector256<nuint>).WithElement(
+                    int.MaxValue,
+                    (nuint)0
+                );
             }
             catch (NotSupportedException)
             {
@@ -32,7 +35,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256NUIntWithElementMaxValue: RunNotSupportedScenario failed to throw NotSupportedException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256NUIntWithElementMaxValue: RunNotSupportedScenario failed to throw NotSupportedException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 throw new Exception("One or more scenarios did not complete as expected.");

@@ -176,7 +176,10 @@ namespace System.IO
                 }
             }
 
-            Debug.Assert(result == int.Parse(ExtractCurrent()), "Expected manually parsed result to match Parse result");
+            Debug.Assert(
+                result == int.Parse(ExtractCurrent()),
+                "Expected manually parsed result to match Parse result"
+            );
             return result;
         }
 
@@ -221,7 +224,10 @@ namespace System.IO
                 }
             }
 
-            Debug.Assert(result == long.Parse(ExtractCurrent()), "Expected manually parsed result to match Parse result");
+            Debug.Assert(
+                result == long.Parse(ExtractCurrent()),
+                "Expected manually parsed result to match Parse result"
+            );
             return result;
         }
 
@@ -252,7 +258,10 @@ namespace System.IO
                 }
             }
 
-            Debug.Assert(result == uint.Parse(ExtractCurrent()), "Expected manually parsed result to match Parse result");
+            Debug.Assert(
+                result == uint.Parse(ExtractCurrent()),
+                "Expected manually parsed result to match Parse result"
+            );
             return result;
         }
 
@@ -279,7 +288,10 @@ namespace System.IO
                 }
             }
 
-            Debug.Assert(result == ulong.Parse(ExtractCurrent()), "Expected manually parsed result to match Parse result");
+            Debug.Assert(
+                result == ulong.Parse(ExtractCurrent()),
+                "Expected manually parsed result to match Parse result"
+            );
             return result;
         }
 
@@ -294,7 +306,10 @@ namespace System.IO
             }
             char result = _buffer[_startIndex];
 
-            Debug.Assert(result == char.Parse(ExtractCurrent()), "Expected manually parsed result to match Parse result");
+            Debug.Assert(
+                result == char.Parse(ExtractCurrent()),
+                "Expected manually parsed result to match Parse result"
+            );
             return result;
         }
 

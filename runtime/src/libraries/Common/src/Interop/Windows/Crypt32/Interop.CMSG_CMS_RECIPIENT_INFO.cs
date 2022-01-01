@@ -18,13 +18,15 @@ internal static partial class Interop
             //  PCMSG_MAIL_LIST_RECIPIENT_INFO pMailList;   // CMSG_MAIL_LIST_RECIPIENT
             // }
             //
-            private void* pRecipientInfo;  // Do NOT add an underscore - this name still maps to a C++ Win32 header definition.
+            private void* pRecipientInfo; // Do NOT add an underscore - this name still maps to a C++ Win32 header definition.
 
             internal unsafe CMSG_KEY_TRANS_RECIPIENT_INFO* KeyTrans
             {
                 get
                 {
-                    Debug.Assert(dwRecipientChoice == CMsgCmsRecipientChoice.CMSG_KEY_TRANS_RECIPIENT);
+                    Debug.Assert(
+                        dwRecipientChoice == CMsgCmsRecipientChoice.CMSG_KEY_TRANS_RECIPIENT
+                    );
                     return (CMSG_KEY_TRANS_RECIPIENT_INFO*)pRecipientInfo;
                 }
             }
@@ -33,7 +35,9 @@ internal static partial class Interop
             {
                 get
                 {
-                    Debug.Assert(dwRecipientChoice == CMsgCmsRecipientChoice.CMSG_KEY_AGREE_RECIPIENT);
+                    Debug.Assert(
+                        dwRecipientChoice == CMsgCmsRecipientChoice.CMSG_KEY_AGREE_RECIPIENT
+                    );
                     return (CMSG_KEY_AGREE_RECIPIENT_INFO*)pRecipientInfo;
                 }
             }

@@ -33,7 +33,10 @@ public class RazorProjectTest
         var project = new TestRazorProject();
 
         // Act and Assert
-        ExceptionAssert.ThrowsArgumentNullOrEmptyString(() => project.NormalizeAndEnsureValidPath(path), "path");
+        ExceptionAssert.ThrowsArgumentNullOrEmptyString(
+            () => project.NormalizeAndEnsureValidPath(path),
+            "path"
+        );
     }
 
     [Theory]
@@ -49,7 +52,8 @@ public class RazorProjectTest
         ExceptionAssert.ThrowsArgument(
             () => project.NormalizeAndEnsureValidPath(path),
             "path",
-            "Path must begin with a forward slash '/'.");
+            "Path must begin with a forward slash '/'."
+        );
     }
 
     [Fact]
@@ -73,11 +77,11 @@ public class RazorProjectTest
         // Arrange
         var path = "/Views/Home/Index.cshtml";
         var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem($"/{fileName}"),
-                CreateProjectItem($"/Views/{fileName}"),
-                CreateProjectItem($"/Views/Home/{fileName}")
-            };
+        {
+            CreateProjectItem($"/{fileName}"),
+            CreateProjectItem($"/Views/{fileName}"),
+            CreateProjectItem($"/Views/Home/{fileName}")
+        };
         var project = new TestRazorProject(items);
 
         // Act
@@ -88,7 +92,8 @@ public class RazorProjectTest
             result,
             item => Assert.Equal($"/Views/Home/{fileName}", item.FilePath),
             item => Assert.Equal($"/Views/{fileName}", item.FilePath),
-            item => Assert.Equal($"/{fileName}", item.FilePath));
+            item => Assert.Equal($"/{fileName}", item.FilePath)
+        );
     }
 
     [Fact]
@@ -96,19 +101,14 @@ public class RazorProjectTest
     {
         // Arrange
         var path = "/Index.cshtml";
-        var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/File.cshtml")
-            };
+        var items = new List<RazorProjectItem> { CreateProjectItem("/File.cshtml") };
         var project = new TestRazorProject(items);
 
         // Act
         var result = project.FindHierarchicalItems(path, "File.cshtml");
 
         // Assert
-        Assert.Collection(
-            result,
-            item => Assert.Equal("/File.cshtml", item.FilePath));
+        Assert.Collection(result, item => Assert.Equal("/File.cshtml", item.FilePath));
     }
 
     [Fact]
@@ -117,13 +117,13 @@ public class RazorProjectTest
         // Arrange
         var path = "/Areas/MyArea/Views/Home/File.cshtml";
         var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/Areas/MyArea/Views/Home/File.cshtml"),
-                CreateProjectItem("/Areas/MyArea/Views/File.cshtml"),
-                CreateProjectItem("/Areas/MyArea/File.cshtml"),
-                CreateProjectItem("/Areas/File.cshtml"),
-                CreateProjectItem("/File.cshtml"),
-            };
+        {
+            CreateProjectItem("/Areas/MyArea/Views/Home/File.cshtml"),
+            CreateProjectItem("/Areas/MyArea/Views/File.cshtml"),
+            CreateProjectItem("/Areas/MyArea/File.cshtml"),
+            CreateProjectItem("/Areas/File.cshtml"),
+            CreateProjectItem("/File.cshtml"),
+        };
         var project = new TestRazorProject(items);
 
         // Act
@@ -135,7 +135,8 @@ public class RazorProjectTest
             item => Assert.Equal("/Areas/MyArea/Views/File.cshtml", item.FilePath),
             item => Assert.Equal("/Areas/MyArea/File.cshtml", item.FilePath),
             item => Assert.Equal("/Areas/File.cshtml", item.FilePath),
-            item => Assert.Equal("/File.cshtml", item.FilePath));
+            item => Assert.Equal("/File.cshtml", item.FilePath)
+        );
     }
 
     [Fact]
@@ -143,10 +144,7 @@ public class RazorProjectTest
     {
         // Arrange
         var path = "/File.cshtml";
-        var items = new List<RazorProjectItem>
-            {
-                 CreateProjectItem("/File.cshtml")
-            };
+        var items = new List<RazorProjectItem> { CreateProjectItem("/File.cshtml") };
         var project = new TestRazorProject(items);
 
         // Act
@@ -162,10 +160,10 @@ public class RazorProjectTest
         // Arrange
         var path = "/Areas/MyArea/Views/Home/Test.cshtml";
         var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/Areas/MyArea/File.cshtml"),
-                CreateProjectItem("/File.cshtml")
-            };
+        {
+            CreateProjectItem("/Areas/MyArea/File.cshtml"),
+            CreateProjectItem("/File.cshtml")
+        };
         var project = new TestRazorProject(items);
 
         // Act
@@ -198,7 +196,8 @@ public class RazorProjectTest
             {
                 Assert.Equal("/File.cshtml", item.FilePath);
                 Assert.True(item.Exists);
-            });
+            }
+        );
     }
 
     [Theory]
@@ -209,10 +208,10 @@ public class RazorProjectTest
         // Arrange
         var path = "/Areas/MyArea/Views/Home/Test.cshtml";
         var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/Areas/MyArea/File.cshtml"),
-                CreateProjectItem("/File.cshtml")
-            };
+        {
+            CreateProjectItem("/Areas/MyArea/File.cshtml"),
+            CreateProjectItem("/File.cshtml")
+        };
         var project = new TestRazorProject(items);
 
         // Act
@@ -240,7 +239,8 @@ public class RazorProjectTest
             {
                 Assert.Equal("/Areas/File.cshtml", item.FilePath);
                 Assert.False(item.Exists);
-            });
+            }
+        );
     }
 
     [Theory]
@@ -251,10 +251,10 @@ public class RazorProjectTest
         // Arrange
         var path = "/Areas/MyArea/Views/Home/Test.cshtml";
         var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/Areas/MyArea/File.cshtml"),
-                CreateProjectItem("/File.cshtml")
-            };
+        {
+            CreateProjectItem("/Areas/MyArea/File.cshtml"),
+            CreateProjectItem("/File.cshtml")
+        };
         var project = new TestRazorProject(items);
 
         // Act
@@ -272,7 +272,8 @@ public class RazorProjectTest
             {
                 Assert.Equal("/Areas/MyArea/Views/File.cshtml", item.FilePath);
                 Assert.False(item.Exists);
-            });
+            }
+        );
     }
 
     [Theory]
@@ -283,10 +284,10 @@ public class RazorProjectTest
         // Arrange
         var path = "/Areas/MyArea/Views/Home/Test.cshtml";
         var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/Areas/MyArea/File.cshtml"),
-                CreateProjectItem("/File.cshtml"),
-            };
+        {
+            CreateProjectItem("/Areas/MyArea/File.cshtml"),
+            CreateProjectItem("/File.cshtml"),
+        };
         var project = new TestRazorProject(items);
 
         // Act
@@ -299,7 +300,8 @@ public class RazorProjectTest
             {
                 Assert.Equal("/Areas/MyArea/Views/Home/File.cshtml", item.FilePath);
                 Assert.False(item.Exists);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -309,10 +311,10 @@ public class RazorProjectTest
         var basePath = "/Pages";
         var path = "/Areas/MyArea/Views/Home/Test.cshtml";
         var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/Areas/MyArea/File.cshtml"),
-                CreateProjectItem("/File.cshtml"),
-            };
+        {
+            CreateProjectItem("/Areas/MyArea/File.cshtml"),
+            CreateProjectItem("/File.cshtml"),
+        };
         var project = new TestRazorProject(items);
 
         // Act

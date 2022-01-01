@@ -16,16 +16,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 {
     public class CSharpErrorListCommon : AbstractEditorTest
     {
-        public CSharpErrorListCommon(VisualStudioInstanceFactory instanceFactory, string templateName)
-            : base(instanceFactory, nameof(CSharpErrorListCommon), templateName)
-        {
-        }
+        public CSharpErrorListCommon(
+            VisualStudioInstanceFactory instanceFactory,
+            string templateName
+        ) : base(instanceFactory, nameof(CSharpErrorListCommon), templateName) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
         public virtual void ErrorList()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 class C
 {
     void M(P p)
@@ -37,28 +38,33 @@ class C
     {
     }
 }
-");
+"
+            );
             VisualStudio.ErrorList.ShowErrorList();
-            var expectedContents = new[] {
+            var expectedContents = new[]
+            {
                 new ErrorListItem(
                     severity: "Error",
                     description: "The type or namespace name 'P' could not be found (are you missing a using directive or an assembly reference?)",
                     project: "TestProj",
                     fileName: "Class1.cs",
                     line: 4,
-                    column: 12),
+                    column: 12
+                ),
                 new ErrorListItem(
                     severity: "Error",
                     description: "'Console' does not contain a definition for 'WriteLin'",
                     project: "TestProj",
                     fileName: "Class1.cs",
                     line: 6,
-                    column: 24)
+                    column: 24
+                )
             };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
 
             var target = VisualStudio.ErrorList.NavigateToErrorListItem(0);
             Assert.Equal(expectedContents[0], target);
@@ -68,12 +74,14 @@ class C
             actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
         }
 
         public virtual void ErrorLevelWarning()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 class C
 {
     static void Main(string[] args)
@@ -81,26 +89,31 @@ class C
         int unused = 0;
     }
 }
-");
+"
+            );
             VisualStudio.ErrorList.ShowErrorList();
-            var expectedContents = new[] {
+            var expectedContents = new[]
+            {
                 new ErrorListItem(
                     severity: "Warning",
                     description: "The variable 'unused' is assigned but its value is never used",
                     project: "TestProj",
                     fileName: "Class1.cs",
                     line: 6,
-                    column: 13)
+                    column: 13
+                )
             };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
         }
 
         public virtual void ErrorsDuringMethodBodyEditing()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 class Program2
 {
     static void Main(string[] args)
@@ -109,31 +122,36 @@ class Program2
         int a = aa;
     }
 }
-");
+"
+            );
             VisualStudio.ErrorList.ShowErrorList();
             var expectedContents = new ErrorListItem[] { };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
 
             VisualStudio.Editor.Activate();
             VisualStudio.Editor.PlaceCaret("a = aa", charsOffset: -1);
             VisualStudio.Editor.SendKeys("a");
             VisualStudio.ErrorList.ShowErrorList();
-            expectedContents = new[] {
+            expectedContents = new[]
+            {
                 new ErrorListItem(
                     severity: "Error",
                     description: "A local variable or function named 'aa' is already defined in this scope",
                     project: "TestProj",
                     fileName: "Class1.cs",
                     line: 7,
-                    column: 13)
+                    column: 13
+                )
             };
             actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
 
             VisualStudio.Editor.Activate();
             VisualStudio.Editor.PlaceCaret("aa = aa", charsOffset: -1);
@@ -143,12 +161,14 @@ class Program2
             actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
         }
 
         public virtual void ErrorsAfterClosingFile()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 class Program2
 {
     static void Main(string[] args)
@@ -157,31 +177,36 @@ class Program2
         int a = aa;
     }
 }
-");
+"
+            );
             VisualStudio.ErrorList.ShowErrorList();
             var expectedContents = new ErrorListItem[] { };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
 
             VisualStudio.Editor.Activate();
             VisualStudio.Editor.PlaceCaret("a = aa", charsOffset: -1);
             VisualStudio.Editor.SendKeys("a");
             VisualStudio.ErrorList.ShowErrorList();
-            expectedContents = new[] {
+            expectedContents = new[]
+            {
                 new ErrorListItem(
                     severity: "Error",
                     description: "A local variable or function named 'aa' is already defined in this scope",
                     project: "TestProj",
                     fileName: "Class1.cs",
                     line: 7,
-                    column: 13)
+                    column: 13
+                )
             };
             actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
 
             // Close the current document and verify diagnostics for closed document are not removed from error list.
             VisualStudio.SolutionExplorer.SaveAll();
@@ -191,7 +216,8 @@ class Program2
             actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
-                string.Join<ErrorListItem>(Environment.NewLine, actualContents));
+                string.Join<ErrorListItem>(Environment.NewLine, actualContents)
+            );
         }
     }
 }

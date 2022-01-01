@@ -9,21 +9,35 @@ namespace System.Net.Http.Headers
     {
         private readonly Func<MediaTypeHeaderValue> _mediaTypeCreator;
 
-        internal static readonly MediaTypeHeaderParser SingleValueParser = new MediaTypeHeaderParser(false, CreateMediaType);
-        internal static readonly MediaTypeHeaderParser SingleValueWithQualityParser = new MediaTypeHeaderParser(false, CreateMediaTypeWithQuality);
-        internal static readonly MediaTypeHeaderParser MultipleValuesParser = new MediaTypeHeaderParser(true, CreateMediaTypeWithQuality);
+        internal static readonly MediaTypeHeaderParser SingleValueParser =
+            new MediaTypeHeaderParser(false, CreateMediaType);
+        internal static readonly MediaTypeHeaderParser SingleValueWithQualityParser =
+            new MediaTypeHeaderParser(false, CreateMediaTypeWithQuality);
+        internal static readonly MediaTypeHeaderParser MultipleValuesParser =
+            new MediaTypeHeaderParser(true, CreateMediaTypeWithQuality);
 
-        private MediaTypeHeaderParser(bool supportsMultipleValues, Func<MediaTypeHeaderValue> mediaTypeCreator)
-            : base(supportsMultipleValues)
+        private MediaTypeHeaderParser(
+            bool supportsMultipleValues,
+            Func<MediaTypeHeaderValue> mediaTypeCreator
+        ) : base(supportsMultipleValues)
         {
             Debug.Assert(mediaTypeCreator != null);
             _mediaTypeCreator = mediaTypeCreator;
         }
 
-        protected override int GetParsedValueLength(string? value, int startIndex, object? storeValue,
-            out object? parsedValue)
+        protected override int GetParsedValueLength(
+            string? value,
+            int startIndex,
+            object? storeValue,
+            out object? parsedValue
+        )
         {
-            int resultLength = MediaTypeHeaderValue.GetMediaTypeLength(value, startIndex, _mediaTypeCreator, out MediaTypeHeaderValue? temp);
+            int resultLength = MediaTypeHeaderValue.GetMediaTypeLength(
+                value,
+                startIndex,
+                _mediaTypeCreator,
+                out MediaTypeHeaderValue? temp
+            );
 
             parsedValue = temp;
             return resultLength;

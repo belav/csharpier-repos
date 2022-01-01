@@ -75,7 +75,10 @@ namespace Microsoft.CodeAnalysis.Options
         /// <summary>
         /// Gets force computed serializable options snapshot with prefetched values for the registered options applicable to the given <paramref name="languages"/> by quering the option persisters.
         /// </summary>
-        SerializableOptionSet GetSerializableOptionsSnapshot(ImmutableHashSet<string> languages, IOptionService optionService);
+        SerializableOptionSet GetSerializableOptionsSnapshot(
+            ImmutableHashSet<string> languages,
+            IOptionService optionService
+        );
 
         /// <summary>
         /// Returns the set of all registered options.
@@ -92,12 +95,19 @@ namespace Microsoft.CodeAnalysis.Options
         /// <param name="storageLocation">The <see cref="IEditorConfigStorageLocation2"/> for the key.</param>
         /// <param name="optionKey">The <see cref="OptionKey"/> for the key and language.</param>
         /// <returns><see langword="true"/> if a matching option was found; otherwise, <see langword="false"/>.</returns>
-        bool TryMapEditorConfigKeyToOption(string key, string? language, [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation, out OptionKey optionKey);
+        bool TryMapEditorConfigKeyToOption(
+            string key,
+            string? language,
+            [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation,
+            out OptionKey optionKey
+        );
 
         /// <summary>
         /// Returns the set of all registered serializable options applicable for the given <paramref name="languages"/>.
         /// </summary>
-        ImmutableHashSet<IOption> GetRegisteredSerializableOptions(ImmutableHashSet<string> languages);
+        ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
+            ImmutableHashSet<string> languages
+        );
 
         event EventHandler<OptionChangedEventArgs>? OptionChanged;
 

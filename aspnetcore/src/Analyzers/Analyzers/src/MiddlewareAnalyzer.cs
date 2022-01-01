@@ -26,22 +26,34 @@ internal class MiddlewareAnalyzer
         // analysis in order to determine the actual order in which middleware are ordered.
         //
         // This can currently be confused by things like Map(...)
-        context.RegisterOperationAction(context =>
-        {
+        context.RegisterOperationAction(
+            context =>
+            {
                 // We're looking for usage of extension methods, so we need to look at the 'this' parameter
                 // rather than invocation.Instance.
-                if (context.Operation is IInvocationOperation invocation &&
-                invocation.Instance == null &&
-                invocation.Arguments.Length >= 1 &&
-                SymbolEqualityComparer.Default.Equals(invocation.Arguments[0].Parameter?.Type, _context.StartupSymbols.IApplicationBuilder))
-            {
-                middleware.Add(new MiddlewareItem(invocation));
-            }
-        }, OperationKind.Invocation);
+                if (
+                    context.Operation is IInvocationOperation invocation
+                    && invocation.Instance == null
+                    && invocation.Arguments.Length >= 1
+                    && SymbolEqualityComparer.Default.Equals(
+                        invocation.Arguments[0].Parameter?.Type,
+                        _context.StartupSymbols.IApplicationBuilder
+                    )
+                )
+                {
+                    middleware.Add(new MiddlewareItem(invocation));
+                }
+            },
+            OperationKind.Invocation
+        );
 
-        context.RegisterOperationBlockEndAction(context =>
-        {
-            _context.ReportAnalysis(new MiddlewareAnalysis(configureMethod, middleware.ToImmutable()));
-        });
+        context.RegisterOperationBlockEndAction(
+            context =>
+            {
+                _context.ReportAnalysis(
+                    new MiddlewareAnalysis(configureMethod, middleware.ToImmutable())
+                );
+            }
+        );
     }
 }

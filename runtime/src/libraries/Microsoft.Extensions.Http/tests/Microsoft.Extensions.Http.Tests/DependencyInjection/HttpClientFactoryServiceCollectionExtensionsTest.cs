@@ -85,7 +85,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(_ => new HttpClient() { Timeout = TimeSpan.FromSeconds(42) });
+            serviceCollection.AddTransient(
+                _ => new HttpClient() { Timeout = TimeSpan.FromSeconds(42) }
+            );
 
             // Act
             serviceCollection.AddHttpClient();
@@ -109,7 +111,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
 
             // Act1
-            serviceCollection.AddHttpClient(Options.Options.DefaultName, c => c.BaseAddress = new Uri("http://example.com/"));
+            serviceCollection.AddHttpClient(
+                Options.Options.DefaultName,
+                c => c.BaseAddress = new Uri("http://example.com/")
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -130,7 +135,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com/"));
+            serviceCollection.AddHttpClient(
+                "example.com",
+                c => c.BaseAddress = new Uri("http://example.com/")
+            );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -149,10 +157,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>(nameof(TestTypedClient), options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                nameof(TestTypedClient),
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
             serviceCollection.AddHttpClient<TestTypedClient>();
@@ -172,10 +185,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("TestGenericTypedClient<string>", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "TestGenericTypedClient<string>",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
             serviceCollection.AddHttpClient<TestGenericTypedClient<string>>();
@@ -195,10 +213,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>(nameof(ITestTypedClient), options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                nameof(ITestTypedClient),
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
             serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>();
@@ -218,10 +241,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
             serviceCollection.AddHttpClient<TestTypedClient>("test");
@@ -241,10 +269,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
             serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>("test");
@@ -264,17 +297,24 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>(nameof(TestTypedClient), options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                nameof(TestTypedClient),
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient<TestTypedClient>((c) =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-            });
+            serviceCollection.AddHttpClient<TestTypedClient>(
+                (c) =>
+                {
+                    Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                    c.BaseAddress = new Uri("http://example2.com");
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -291,17 +331,24 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>(nameof(ITestTypedClient), options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                nameof(ITestTypedClient),
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>((c) =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-            });
+            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
+                (c) =>
+                {
+                    Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                    c.BaseAddress = new Uri("http://example2.com");
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -318,10 +365,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
             serviceCollection.AddHttpClient("test").AddTypedClient<TestTypedClient>();
@@ -341,13 +393,20 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient("test").AddTypedClient<ITestTypedClient, TestTypedClient>();
+            serviceCollection
+                .AddHttpClient("test")
+                .AddTypedClient<ITestTypedClient, TestTypedClient>();
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -364,18 +423,27 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient("test").AddTypedClient<TestTypedClient>((c) =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-                return new TestTypedClient(c);
-            });
+            serviceCollection
+                .AddHttpClient("test")
+                .AddTypedClient<TestTypedClient>(
+                    (c) =>
+                    {
+                        Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                        c.BaseAddress = new Uri("http://example2.com");
+                        return new TestTypedClient(c);
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -386,25 +454,32 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal("http://example2.com/", client.HttpClient.BaseAddress.AbsoluteUri);
         }
 
-
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddHttpClient_WithTypedClient_WithFactory_ConfiguresNamedClient()
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>("test", c =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-                return new TestTypedClient(c);
-            });
+            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
+                "test",
+                c =>
+                {
+                    Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                    c.BaseAddress = new Uri("http://example2.com");
+                    return new TestTypedClient(c);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -421,18 +496,26 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>("test", c =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-                return new TestTypedClient(c);
-            });
+            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
+                "test",
+                c =>
+                {
+                    Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                    c.BaseAddress = new Uri("http://example2.com");
+                    return new TestTypedClient(c);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -449,18 +532,26 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>("test", (c, s) =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-                return new TestTypedClient(c);
-            });
+            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
+                "test",
+                (c, s) =>
+                {
+                    Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                    c.BaseAddress = new Uri("http://example2.com");
+                    return new TestTypedClient(c);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -477,18 +568,26 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>("test", (c, s) =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-                return new TestTypedClient(c);
-            });
+            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
+                "test",
+                (c, s) =>
+                {
+                    Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                    c.BaseAddress = new Uri("http://example2.com");
+                    return new TestTypedClient(c);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -507,10 +606,12 @@ namespace Microsoft.Extensions.DependencyInjection
             serviceCollection.AddHttpClient<TestTypedClient>();
 
             // Act
-            serviceCollection.AddHttpClient<TestTypedClient>(c =>
-            {
-                c.BaseAddress = new Uri("http://example.com");
-            });
+            serviceCollection.AddHttpClient<TestTypedClient>(
+                c =>
+                {
+                    c.BaseAddress = new Uri("http://example.com");
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -529,11 +630,15 @@ namespace Microsoft.Extensions.DependencyInjection
             serviceCollection.AddHttpClient<TestTypedClient>();
 
             // Act
-            serviceCollection.AddHttpClient(nameof(TestTypedClient), c =>
-            {
-                c.BaseAddress = new Uri("http://example.com");
-            })
-            .AddTypedClient<TestTypedClient>();
+            serviceCollection
+                .AddHttpClient(
+                    nameof(TestTypedClient),
+                    c =>
+                    {
+                        c.BaseAddress = new Uri("http://example.com");
+                    }
+                )
+                .AddTypedClient<TestTypedClient>();
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -586,14 +691,17 @@ namespace Microsoft.Extensions.DependencyInjection
             serviceCollection.AddHttpClient<TestTypedClient>();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>()
+            );
 
             // Assert
             Assert.Equal(
-                "The HttpClient factory already has a registered client with the name 'TestTypedClient', bound to the type 'Microsoft.Extensions.Http.TestTypedClient'. " +
-                "Client names are computed based on the type name without considering the namespace ('TestTypedClient'). " +
-                "Use an overload of AddHttpClient that accepts a string and provide a unique name to resolve the conflict.",
-                ex.Message);
+                "The HttpClient factory already has a registered client with the name 'TestTypedClient', bound to the type 'Microsoft.Extensions.Http.TestTypedClient'. "
+                    + "Client names are computed based on the type name without considering the namespace ('TestTypedClient'). "
+                    + "Use an overload of AddHttpClient that accepts a string and provide a unique name to resolve the conflict.",
+                ex.Message
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -601,13 +709,17 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient<TestTypedClient>(c =>
-            {
-                c.BaseAddress = new Uri("http://example.com");
-            });
+            serviceCollection.AddHttpClient<TestTypedClient>(
+                c =>
+                {
+                    c.BaseAddress = new Uri("http://example.com");
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient("TestTypedClient").AddTypedClient<AnotherNamespace.TestTypedClient>();
+            serviceCollection
+                .AddHttpClient("TestTypedClient")
+                .AddTypedClient<AnotherNamespace.TestTypedClient>();
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -629,10 +741,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient<TestTypedClient>(c =>
-            {
-                c.BaseAddress = new Uri("http://example.com");
-            });
+            serviceCollection.AddHttpClient<TestTypedClient>(
+                c =>
+                {
+                    c.BaseAddress = new Uri("http://example.com");
+                }
+            );
 
             // Act
             serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>("TestTypedClient");
@@ -659,12 +773,16 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
 
             // Act
-            serviceCollection.AddHttpClient("Test", c =>
-            {
-                c.BaseAddress = new Uri("http://example.com");
-            })
-            .AddTypedClient<TestTypedClient>()
-            .AddTypedClient<AnotherNamespace.TestTypedClient>();
+            serviceCollection
+                .AddHttpClient(
+                    "Test",
+                    c =>
+                    {
+                        c.BaseAddress = new Uri("http://example.com");
+                    }
+                )
+                .AddTypedClient<TestTypedClient>()
+                .AddTypedClient<AnotherNamespace.TestTypedClient>();
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -687,18 +805,27 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient("test").AddTypedClient<TestTypedClient>((c, s) =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-                return new TestTypedClient(c);
-            });
+            serviceCollection
+                .AddHttpClient("test")
+                .AddTypedClient<TestTypedClient>(
+                    (c, s) =>
+                    {
+                        Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                        c.BaseAddress = new Uri("http://example2.com");
+                        return new TestTypedClient(c);
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -715,17 +842,25 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", options =>
-            {
-                options.HttpClientActions.Add((c) => c.BaseAddress = new Uri("http://example.com"));
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                options =>
+                {
+                    options.HttpClientActions.Add(
+                        (c) => c.BaseAddress = new Uri("http://example.com")
+                    );
+                }
+            );
 
             // Act
-            serviceCollection.AddHttpClient<TestTypedClient>("test", (c) =>
-            {
-                Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
-                c.BaseAddress = new Uri("http://example2.com");
-            });
+            serviceCollection.AddHttpClient<TestTypedClient>(
+                "test",
+                (c) =>
+                {
+                    Assert.Equal("http://example.com/", c.BaseAddress.AbsoluteUri);
+                    c.BaseAddress = new Uri("http://example2.com");
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -736,7 +871,11 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal("http://example2.com/", client.HttpClient.BaseAddress.AbsoluteUri);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void AddHttpMessageHandler_WithName_NewHandlerIsSurroundedByLogging_ForHttpClient()
         {
             // Arrange
@@ -745,12 +884,16 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com").ConfigureHttpMessageHandlerBuilder(b =>
-            {
-                builder = b;
+            serviceCollection
+                .AddHttpClient("example.com")
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        builder = b;
 
-                b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
-            });
+                        b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var options = services.GetRequiredService<IOptionsMonitor<HttpClientFactoryOptions>>();
@@ -767,7 +910,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.NotNull(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -776,17 +920,21 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(options =>
-            {
-                options.BaseAddress = "http://example.com/";
-            });
+            serviceCollection.Configure<OtherTestOptions>(
+                options =>
+                {
+                    options.BaseAddress = "http://example.com/";
+                }
+            );
 
             // Act1
-            serviceCollection.AddHttpClient<TestTypedClient>((s, c) =>
-            {
-                var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
-                c.BaseAddress = new Uri(options.Value.BaseAddress);
-            });
+            serviceCollection.AddHttpClient<TestTypedClient>(
+                (s, c) =>
+                {
+                    var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
+                    c.BaseAddress = new Uri(options.Value.BaseAddress);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -803,17 +951,21 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(options =>
-            {
-                options.BaseAddress = "http://example.com/";
-            });
+            serviceCollection.Configure<OtherTestOptions>(
+                options =>
+                {
+                    options.BaseAddress = "http://example.com/";
+                }
+            );
 
             // Act1
-            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>((s, c) =>
-            {
-                var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
-                c.BaseAddress = new Uri(options.Value.BaseAddress);
-            });
+            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
+                (s, c) =>
+                {
+                    var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
+                    c.BaseAddress = new Uri(options.Value.BaseAddress);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -830,17 +982,22 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(options =>
-            {
-                options.BaseAddress = "http://example.com/";
-            });
+            serviceCollection.Configure<OtherTestOptions>(
+                options =>
+                {
+                    options.BaseAddress = "http://example.com/";
+                }
+            );
 
             // Act1
-            serviceCollection.AddHttpClient<TestTypedClient>("test", (s, c) =>
-            {
-                var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
-                c.BaseAddress = new Uri(options.Value.BaseAddress);
-            });
+            serviceCollection.AddHttpClient<TestTypedClient>(
+                "test",
+                (s, c) =>
+                {
+                    var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
+                    c.BaseAddress = new Uri(options.Value.BaseAddress);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -857,17 +1014,22 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(options =>
-            {
-                options.BaseAddress = "http://example.com/";
-            });
+            serviceCollection.Configure<OtherTestOptions>(
+                options =>
+                {
+                    options.BaseAddress = "http://example.com/";
+                }
+            );
 
             // Act1
-            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>("test", (s, c) =>
-            {
-                var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
-                c.BaseAddress = new Uri(options.Value.BaseAddress);
-            });
+            serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
+                "test",
+                (s, c) =>
+                {
+                    var options = s.GetRequiredService<IOptions<OtherTestOptions>>();
+                    c.BaseAddress = new Uri(options.Value.BaseAddress);
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -878,7 +1040,11 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal("http://example.com/", client.HttpClient.BaseAddress.AbsoluteUri);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void AddHttpMessageHandler_WithName_NewHandlerIsSurroundedByLogging_ForHttpMessageHandler()
         {
             var serviceCollection = new ServiceCollection();
@@ -886,12 +1052,16 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com").ConfigureHttpMessageHandlerBuilder(b =>
-            {
-                builder = b;
+            serviceCollection
+                .AddHttpClient("example.com")
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        builder = b;
 
-                b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
-            });
+                        b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -908,7 +1078,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.NotNull(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
         }
 
         [Fact] // Verifies IHttpClientFactory and IHttpMessageHandlerFactory are backed by the same internal handlers
@@ -952,22 +1123,20 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
             Assert.Same(
                 services.GetRequiredService<SingletonService>(),
-                request.Properties[nameof(SingletonService)]);
+                request.Properties[nameof(SingletonService)]
+            );
 
-            Assert.Same(
-                client.Service,
-                request.Properties[nameof(SingletonService)]);
+            Assert.Same(client.Service, request.Properties[nameof(SingletonService)]);
 #else
 #nullable enable
-            request.Options.TryGetValue(new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)), out SingletonService? optService);
+            request.Options.TryGetValue(
+                new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
+                out SingletonService? optService
+            );
 #nullable disable
-            Assert.Same(
-                services.GetRequiredService<SingletonService>(),
-                optService);
+            Assert.Same(services.GetRequiredService<SingletonService>(), optService);
 
-            Assert.Same(
-                client.Service,
-                optService);
+            Assert.Same(client.Service, optService);
 #endif
         }
 
@@ -987,7 +1156,8 @@ namespace Microsoft.Extensions.DependencyInjection
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // Act
-                var client = scope.ServiceProvider.GetRequiredService<TypedClientWithSingletonService>();
+                var client =
+                    scope.ServiceProvider.GetRequiredService<TypedClientWithSingletonService>();
 
                 // Assert
                 var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com/");
@@ -996,31 +1166,31 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
                 Assert.Same(
                     services.GetRequiredService<SingletonService>(),
-                    request.Properties[nameof(SingletonService)]);
+                    request.Properties[nameof(SingletonService)]
+                );
 
                 Assert.Same(
                     scope.ServiceProvider.GetRequiredService<SingletonService>(),
-                    request.Properties[nameof(SingletonService)]);
+                    request.Properties[nameof(SingletonService)]
+                );
 
-                Assert.Same(
-                    client.Service,
-                    request.Properties[nameof(SingletonService)]);
+                Assert.Same(client.Service, request.Properties[nameof(SingletonService)]);
 #else
 #nullable enable
-                request.Options.TryGetValue(new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)), out SingletonService? optService);
+                request.Options.TryGetValue(
+                    new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
+                    out SingletonService? optService
+                );
 #nullable disable
 
-                Assert.Same(
-                    services.GetRequiredService<SingletonService>(),
-                    optService);
+                Assert.Same(services.GetRequiredService<SingletonService>(), optService);
 
                 Assert.Same(
                     scope.ServiceProvider.GetRequiredService<SingletonService>(),
-                    optService);
+                    optService
+                );
 
-                Assert.Same(
-                    client.Service,
-                    optService);
+                Assert.Same(client.Service, optService);
 #endif
             }
         }
@@ -1039,10 +1209,12 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                services.GetRequiredService<TypedClientWithScopedService>();
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    services.GetRequiredService<TypedClientWithScopedService>();
+                }
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1061,7 +1233,8 @@ namespace Microsoft.Extensions.DependencyInjection
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // Act
-                var client = scope.ServiceProvider.GetRequiredService<TypedClientWithScopedService>();
+                var client =
+                    scope.ServiceProvider.GetRequiredService<TypedClientWithScopedService>();
 
                 // Assert
                 var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com/");
@@ -1070,30 +1243,33 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
                 Assert.NotSame(
                     scope.ServiceProvider.GetRequiredService<ScopedService>(),
-                    request.Properties[nameof(ScopedService)]);
+                    request.Properties[nameof(ScopedService)]
+                );
 
                 Assert.Same(
                     scope.ServiceProvider.GetRequiredService<ScopedService>(),
-                    client.Service);
+                    client.Service
+                );
 
-                Assert.NotSame(
-                    client.Service,
-                    request.Properties[nameof(ScopedService)]);
+                Assert.NotSame(client.Service, request.Properties[nameof(ScopedService)]);
 #else
 #nullable enable
-                request.Options.TryGetValue(new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)), out ScopedService? optService);
+                request.Options.TryGetValue(
+                    new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)),
+                    out ScopedService? optService
+                );
 #nullable disable
                 Assert.NotSame(
                     scope.ServiceProvider.GetRequiredService<ScopedService>(),
-                    optService);
+                    optService
+                );
 
                 Assert.Same(
                     scope.ServiceProvider.GetRequiredService<ScopedService>(),
-                    client.Service);
+                    client.Service
+                );
 
-                Assert.NotSame(
-                    client.Service,
-                    optService);
+                Assert.NotSame(client.Service, optService);
 #endif
             }
         }
@@ -1121,22 +1297,20 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
             Assert.NotSame(
                 services.GetRequiredService<TransientService>(),
-                request.Properties[nameof(TransientService)]);
+                request.Properties[nameof(TransientService)]
+            );
 
-            Assert.NotSame(
-                client.Service,
-                request.Properties[nameof(TransientService)]);
+            Assert.NotSame(client.Service, request.Properties[nameof(TransientService)]);
 #else
 #nullable enable
-            request.Options.TryGetValue(new HttpRequestOptionsKey<TransientService>(nameof(TransientService)), out TransientService? optService);
+            request.Options.TryGetValue(
+                new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
+                out TransientService? optService
+            );
 #nullable disable
-            Assert.NotSame(
-                services.GetRequiredService<TransientService>(),
-                optService);
+            Assert.NotSame(services.GetRequiredService<TransientService>(), optService);
 
-            Assert.NotSame(
-                client.Service,
-                optService);
+            Assert.NotSame(client.Service, optService);
 #endif
         }
 
@@ -1156,7 +1330,8 @@ namespace Microsoft.Extensions.DependencyInjection
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // Act
-                var client = scope.ServiceProvider.GetRequiredService<TypedClientWithTransientService>();
+                var client =
+                    scope.ServiceProvider.GetRequiredService<TypedClientWithTransientService>();
 
                 // Assert
                 var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com/");
@@ -1165,27 +1340,29 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
                 Assert.NotSame(
                     services.GetRequiredService<TransientService>(),
-                    request.Properties[nameof(TransientService)]);
+                    request.Properties[nameof(TransientService)]
+                );
 
-                Assert.NotSame(
-                    client.Service,
-                    request.Properties[nameof(TransientService)]);
+                Assert.NotSame(client.Service, request.Properties[nameof(TransientService)]);
 #else
 #nullable enable
-            request.Options.TryGetValue(new HttpRequestOptionsKey<TransientService>(nameof(TransientService)), out TransientService? optService);
+                request.Options.TryGetValue(
+                    new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
+                    out TransientService? optService
+                );
 #nullable disable
-                Assert.NotSame(
-                    services.GetRequiredService<TransientService>(),
-                    optService);
+                Assert.NotSame(services.GetRequiredService<TransientService>(), optService);
 
-                Assert.NotSame(
-                    client.Service,
-                    optService);
+                Assert.NotSame(client.Service, optService);
 #endif
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void AddHttpClient_GetAwaiterAndResult_InSingleThreadedSynchronizationContext_ShouldNotHangs()
         {
             // Arrange
@@ -1194,42 +1371,53 @@ namespace Microsoft.Extensions.DependencyInjection
                 var token = cts.Token;
                 token.Register(() => throw new OperationCanceledException(token));
                 var serviceCollection = new ServiceCollection();
-                serviceCollection.AddHttpClient("example.com")
-                    .ConfigurePrimaryHttpMessageHandler(() =>
-                    {
-                        var mockHandler = new Mock<HttpMessageHandler>();
-                        mockHandler
-                        .Protected()
-                        .Setup<Task<HttpResponseMessage>>(
-                            "SendAsync",
-                            ItExpr.IsAny<HttpRequestMessage>(),
-                            ItExpr.IsAny<CancellationToken>()
-                        )
-                        .Returns(async () =>
+                serviceCollection
+                    .AddHttpClient("example.com")
+                    .ConfigurePrimaryHttpMessageHandler(
+                        () =>
                         {
-                            await Task.Delay(1).ConfigureAwait(false);
-                            return new HttpResponseMessage(HttpStatusCode.OK);
-                        });
-                        return mockHandler.Object;
-                    });
+                            var mockHandler = new Mock<HttpMessageHandler>();
+                            mockHandler
+                                .Protected()
+                                .Setup<Task<HttpResponseMessage>>(
+                                    "SendAsync",
+                                    ItExpr.IsAny<HttpRequestMessage>(),
+                                    ItExpr.IsAny<CancellationToken>()
+                                )
+                                .Returns(
+                                    async () =>
+                                    {
+                                        await Task.Delay(1).ConfigureAwait(false);
+                                        return new HttpResponseMessage(HttpStatusCode.OK);
+                                    }
+                                );
+                            return mockHandler.Object;
+                        }
+                    );
 
                 var services = serviceCollection.BuildServiceProvider();
                 var factory = services.GetRequiredService<IHttpClientFactory>();
                 var client = factory.CreateClient("example.com");
                 var hangs = true;
-                SingleThreadedSynchronizationContext.Run(() =>
-                {
-                    // Act
-                    client.GetAsync("http://example.com", token).GetAwaiter().GetResult();
-                    hangs = false;
-                });
+                SingleThreadedSynchronizationContext.Run(
+                    () =>
+                    {
+                        // Act
+                        client.GetAsync("http://example.com", token).GetAwaiter().GetResult();
+                        hangs = false;
+                    }
+                );
 
                 // Assert
                 Assert.False(hangs);
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void SuppressScope_False_CreatesNewScope()
         {
             // Arrange
@@ -1238,16 +1426,21 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(s =>
-                {
-                    capturedServices = s;
-                    return Mock.Of<DelegatingHandler>();
-                });
+                .AddHttpMessageHandler(
+                    s =>
+                    {
+                        capturedServices = s;
+                        return Mock.Of<DelegatingHandler>();
+                    }
+                );
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", o =>
-            {
-                o.SuppressHandlerScope = false;
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                o =>
+                {
+                    o.SuppressHandlerScope = false;
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
@@ -1257,7 +1450,11 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.NotSame(services, capturedServices);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void SuppressScope_False_InScope_CreatesNewScope()
         {
             // Arrange
@@ -1266,16 +1463,21 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(s =>
-                {
-                    capturedServices = s;
-                    return Mock.Of<DelegatingHandler>();
-                });
+                .AddHttpMessageHandler(
+                    s =>
+                    {
+                        capturedServices = s;
+                        return Mock.Of<DelegatingHandler>();
+                    }
+                );
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", o =>
-            {
-                o.SuppressHandlerScope = false;
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                o =>
+                {
+                    o.SuppressHandlerScope = false;
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
@@ -1289,7 +1491,11 @@ namespace Microsoft.Extensions.DependencyInjection
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void SuppressScope_True_DoesNotCreateScope()
         {
             // Arrange
@@ -1298,16 +1504,21 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(s =>
-                {
-                    capturedServices = s;
-                    return Mock.Of<DelegatingHandler>();
-                });
+                .AddHttpMessageHandler(
+                    s =>
+                    {
+                        capturedServices = s;
+                        return Mock.Of<DelegatingHandler>();
+                    }
+                );
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", o =>
-            {
-                o.SuppressHandlerScope = true;
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                o =>
+                {
+                    o.SuppressHandlerScope = true;
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
@@ -1317,7 +1528,11 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.NotSame(services, capturedServices);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void SuppressScope_True_InScope_DoesNotCreateScope()
         {
             // Arrange
@@ -1326,16 +1541,21 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(s =>
-                {
-                    capturedServices = s;
-                    return Mock.Of<DelegatingHandler>();
-                });
+                .AddHttpMessageHandler(
+                    s =>
+                    {
+                        capturedServices = s;
+                        return Mock.Of<DelegatingHandler>();
+                    }
+                );
 
-            serviceCollection.Configure<HttpClientFactoryOptions>("test", o =>
-            {
-                o.SuppressHandlerScope = true;
-            });
+            serviceCollection.Configure<HttpClientFactoryOptions>(
+                "test",
+                o =>
+                {
+                    o.SuppressHandlerScope = true;
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
@@ -1350,10 +1570,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private class TestGenericTypedClient<T> : TestTypedClient
         {
-            public TestGenericTypedClient(HttpClient httpClient)
-                : base(httpClient)
-            {
-            }
+            public TestGenericTypedClient(HttpClient httpClient) : base(httpClient) { }
         }
 
         private class SingletonService
@@ -1377,12 +1594,18 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public SingletonService Service { get; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
 #if NETFRAMEWORK
                 request.Properties[nameof(SingletonService)] = Service;
 #else
-                request.Options.Set(new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)), Service);
+                request.Options.Set(
+                    new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
+                    Service
+                );
 #endif
                 return Task.FromResult(new HttpResponseMessage());
             }
@@ -1397,12 +1620,18 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public ScopedService Service { get; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
 #if NETFRAMEWORK
                 request.Properties[nameof(ScopedService)] = Service;
-#else                
-                request.Options.Set(new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)), Service);
+#else
+                request.Options.Set(
+                    new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)),
+                    Service
+                );
 #endif
                 return Task.FromResult(new HttpResponseMessage());
             }
@@ -1417,12 +1646,18 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public TransientService Service { get; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
 #if NETFRAMEWORK
                 request.Properties[nameof(TransientService)] = Service;
 #else
-                request.Options.Set(new HttpRequestOptionsKey<TransientService>(nameof(TransientService)), Service);
+                request.Options.Set(
+                    new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
+                    Service
+                );
 #endif
                 return Task.FromResult(new HttpResponseMessage());
             }

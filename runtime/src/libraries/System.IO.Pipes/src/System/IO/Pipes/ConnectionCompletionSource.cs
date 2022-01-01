@@ -35,10 +35,16 @@ namespace System.IO.Pipes
         }
 
         protected override void HandleError(int errorCode) =>
-            TrySetException(ExceptionDispatchInfo.SetCurrentStackTrace(Win32Marshal.GetExceptionForWin32Error(errorCode)));
+            TrySetException(
+                ExceptionDispatchInfo.SetCurrentStackTrace(
+                    Win32Marshal.GetExceptionForWin32Error(errorCode)
+                )
+            );
 
         protected override void HandleUnexpectedCancellation() =>
-            TrySetException(ExceptionDispatchInfo.SetCurrentStackTrace(Error.GetOperationAborted()));
+            TrySetException(
+                ExceptionDispatchInfo.SetCurrentStackTrace(Error.GetOperationAborted())
+            );
     }
 
     internal struct VoidResult { }

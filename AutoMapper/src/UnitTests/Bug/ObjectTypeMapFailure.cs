@@ -8,12 +8,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_map_the_object_type()
         {
-            var displayModel = new DisplayModel
-            {
-                Radius = 300
-            };
+            var displayModel = new DisplayModel { Radius = 300 };
             object vm = new SomeViewModel();
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<DisplayModel, SomeViewModel>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateMap<DisplayModel, SomeViewModel>()
+            );
 
             var mapper = config.CreateMapper();
             mapper.Map(displayModel, vm);

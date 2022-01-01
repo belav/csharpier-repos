@@ -17,7 +17,10 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 if (rules[iRule] == null)
                 {
-                    throw new ArgumentNullException(nameof(rules), SR.Get(SRID.ParamsEntryNullIllegal));
+                    throw new ArgumentNullException(
+                        nameof(rules),
+                        SR.Get(SRID.ParamsEntryNullIllegal)
+                    );
                 }
                 base.Add(rules[iRule]);
             }

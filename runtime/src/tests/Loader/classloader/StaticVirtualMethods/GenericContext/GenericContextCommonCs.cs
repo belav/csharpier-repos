@@ -17,12 +17,16 @@ public static class Statics
     {
         if (expectedResult != actualResult)
         {
-            Console.WriteLine($"FAILURE({Failures}) - Scenario {scenario} failed - expected {expectedResult ?? "<null>"}, got {actualResult ?? "<null>"}");
+            Console.WriteLine(
+                $"FAILURE({Failures}) - Scenario {scenario} failed - expected {expectedResult ?? "<null>"}, got {actualResult ?? "<null>"}"
+            );
             Failures++;
         }
         else
         {
-            Console.WriteLine($"Scenario {scenario} succeeded ({expectedResult ?? "<null>"}) Success ({Successes})");
+            Console.WriteLine(
+                $"Scenario {scenario} succeeded ({expectedResult ?? "<null>"}) Success ({Successes})"
+            );
             Successes++;
         }
     }

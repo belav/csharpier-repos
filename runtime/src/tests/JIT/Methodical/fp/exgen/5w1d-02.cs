@@ -7,7 +7,6 @@ internal unsafe class testout1
     private static double[] s_arr1d_0 = new double[6];
     private static double s_a2_0 = 128.0;
 
-
     public static double Func_0()
     {
         s_arr1d_0[0] = 3758096384.0;

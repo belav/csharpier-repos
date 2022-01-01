@@ -376,7 +376,11 @@ namespace System.Data.Tests
 
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void DataColumnTypeSerialization()
         {
             DataTable dt = new DataTable("MyTable");
@@ -767,7 +771,9 @@ Assert.False(true);
             dt2.Columns.Add();
 
             // PrimaryKey columns do not belong to this table.
-            Assert.Throws<ArgumentException>(() => dt.PrimaryKey = new DataColumn[] { dt2.Columns[0] });
+            Assert.Throws<ArgumentException>(
+                () => dt.PrimaryKey = new DataColumn[] { dt2.Columns[0] }
+            );
 
             Assert.Equal(0, dt.Constraints.Count);
 
@@ -813,20 +819,27 @@ Assert.False(true);
             DataRelation dr = new DataRelation("DR", table.Columns[0], table1.Columns[0]);
             set.Relations.Add(dr);
 
-            Assert.Throws<ArgumentException>(() =>
-            {
-                // Set to a different sensitivity than before: this breaks the DataRelation constraint
-                // because it is not the sensitivity of the related table
-                table.CaseSensitive = true;
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    // Set to a different sensitivity than before: this breaks the DataRelation constraint
+                    // because it is not the sensitivity of the related table
+                    table.CaseSensitive = true;
+                }
+            );
 
-            Assert.Throws<ArgumentException>(() =>
-            {
-                // Set to a different culture than before: this breaks the DataRelation constraint
-                // because it is not the locale of the related table
-                CultureInfo cultureInfo = table.Locale.Name == "en-US" ? new CultureInfo("en-GB") : new CultureInfo("en-US");
-                table.Locale = cultureInfo;
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    // Set to a different culture than before: this breaks the DataRelation constraint
+                    // because it is not the locale of the related table
+                    CultureInfo cultureInfo =
+                        table.Locale.Name == "en-US"
+                            ? new CultureInfo("en-GB")
+                            : new CultureInfo("en-US");
+                    table.Locale = cultureInfo;
+                }
+            );
 
             Assert.Throws<DataException>(() => table.Prefix = "Prefix#1");
         }
@@ -1004,10 +1017,12 @@ Assert.False(true);
         {
             DataTable table1 = new DataTable("Table1");
 
-            Assert.Throws<EvaluateException>(() =>
-            {
-                DataColumn c1 = table1.Columns.Add("c1", typeof(string), "'hello ' + c2"); /* Should cause an exception */
-            });
+            Assert.Throws<EvaluateException>(
+                () =>
+                {
+                    DataColumn c1 = table1.Columns.Add("c1", typeof(string), "'hello ' + c2"); /* Should cause an exception */
+                }
+            );
         }
 
         [Fact]
@@ -1118,9 +1133,9 @@ Assert.False(true);
             src.Rows.Add(new object[] { 3, "mono 3" });
             src.AcceptChanges();
 
-            src.Rows[0][1] = "mono changed 1";  // modify 1st row
-            src.Rows[1].Delete();              // delete 2nd row
-                                               // 3rd row is unchanged
+            src.Rows[0][1] = "mono changed 1"; // modify 1st row
+            src.Rows[1].Delete(); // delete 2nd row
+            // 3rd row is unchanged
             src.Rows.Add(new object[] { 4, "mono 4" }); // add 4th row
 
             // build target table
@@ -1131,13 +1146,15 @@ Assert.False(true);
             target.PrimaryKey = new DataColumn[] { target.Columns[0] };
 
             // import all rows
-            target.ImportRow(src.Rows[0]);     // import 1st row
-            target.ImportRow(src.Rows[1]);     // import 2nd row
-            target.ImportRow(src.Rows[2]);     // import 3rd row
-            target.ImportRow(src.Rows[3]);     // import 4th row
+            target.ImportRow(src.Rows[0]); // import 1st row
+            target.ImportRow(src.Rows[1]); // import 2nd row
+            target.ImportRow(src.Rows[2]); // import 3rd row
+            target.ImportRow(src.Rows[3]); // import 4th row
 
             // import 3rd row again
-            ConstraintException ex = Assert.Throws<ConstraintException>(() => target.ImportRow(src.Rows[2]));
+            ConstraintException ex = Assert.Throws<ConstraintException>(
+                () => target.ImportRow(src.Rows[2])
+            );
             // Column 'id' is constrained to be unique.
             // Value '3' is already present
             Assert.Null(ex.InnerException);
@@ -1148,8 +1165,6 @@ Assert.False(true);
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "id" + @"[\p{Pf}\p{Po}]", ex.Message);
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "3" + @"[\p{Pf}\p{Po}]", ex.Message);
 
-
-
             // check row states
             Assert.Equal(src.Rows[0].RowState, target.Rows[0].RowState);
             Assert.Equal(src.Rows[1].RowState, target.Rows[1].RowState);
@@ -1158,24 +1173,51 @@ Assert.False(true);
 
             // check for modified row (1st row)
             Assert.Equal((string)src.Rows[0][1], (string)target.Rows[0][1]);
-            Assert.Equal((string)src.Rows[0][1, DataRowVersion.Default], (string)target.Rows[0][1, DataRowVersion.Default]);
-            Assert.Equal((string)src.Rows[0][1, DataRowVersion.Original], (string)target.Rows[0][1, DataRowVersion.Original]);
-            Assert.Equal((string)src.Rows[0][1, DataRowVersion.Current], (string)target.Rows[0][1, DataRowVersion.Current]);
+            Assert.Equal(
+                (string)src.Rows[0][1, DataRowVersion.Default],
+                (string)target.Rows[0][1, DataRowVersion.Default]
+            );
+            Assert.Equal(
+                (string)src.Rows[0][1, DataRowVersion.Original],
+                (string)target.Rows[0][1, DataRowVersion.Original]
+            );
+            Assert.Equal(
+                (string)src.Rows[0][1, DataRowVersion.Current],
+                (string)target.Rows[0][1, DataRowVersion.Current]
+            );
             Assert.False(target.Rows[0].HasVersion(DataRowVersion.Proposed));
 
             // check for deleted row (2nd row)
-            Assert.Equal((string)src.Rows[1][1, DataRowVersion.Original], (string)target.Rows[1][1, DataRowVersion.Original]);
+            Assert.Equal(
+                (string)src.Rows[1][1, DataRowVersion.Original],
+                (string)target.Rows[1][1, DataRowVersion.Original]
+            );
 
             // check for unchanged row (3rd row)
             Assert.Equal((string)src.Rows[2][1], (string)target.Rows[2][1]);
-            Assert.Equal((string)src.Rows[2][1, DataRowVersion.Default], (string)target.Rows[2][1, DataRowVersion.Default]);
-            Assert.Equal((string)src.Rows[2][1, DataRowVersion.Original], (string)target.Rows[2][1, DataRowVersion.Original]);
-            Assert.Equal((string)src.Rows[2][1, DataRowVersion.Current], (string)target.Rows[2][1, DataRowVersion.Current]);
+            Assert.Equal(
+                (string)src.Rows[2][1, DataRowVersion.Default],
+                (string)target.Rows[2][1, DataRowVersion.Default]
+            );
+            Assert.Equal(
+                (string)src.Rows[2][1, DataRowVersion.Original],
+                (string)target.Rows[2][1, DataRowVersion.Original]
+            );
+            Assert.Equal(
+                (string)src.Rows[2][1, DataRowVersion.Current],
+                (string)target.Rows[2][1, DataRowVersion.Current]
+            );
 
             // check for newly added row (4th row)
             Assert.Equal((string)src.Rows[3][1], (string)target.Rows[3][1]);
-            Assert.Equal((string)src.Rows[3][1, DataRowVersion.Default], (string)target.Rows[3][1, DataRowVersion.Default]);
-            Assert.Equal((string)src.Rows[3][1, DataRowVersion.Current], (string)target.Rows[3][1, DataRowVersion.Current]);
+            Assert.Equal(
+                (string)src.Rows[3][1, DataRowVersion.Default],
+                (string)target.Rows[3][1, DataRowVersion.Default]
+            );
+            Assert.Equal(
+                (string)src.Rows[3][1, DataRowVersion.Current],
+                (string)target.Rows[3][1, DataRowVersion.Current]
+            );
         }
 
         [Fact]
@@ -1238,7 +1280,9 @@ Assert.False(true);
             Assert.Equal(2, table.Rows.Count);
             Assert.Equal(DataRowState.Deleted, table.Rows[1].RowState);
 
-            ConstraintException ex = Assert.Throws<ConstraintException>(() => table.RejectChanges());
+            ConstraintException ex = Assert.Throws<ConstraintException>(
+                () => table.RejectChanges()
+            );
             // Column 'col' is constrained to be unique.
             // Value '1' is already present
             Assert.Null(ex.InnerException);
@@ -1255,42 +1299,75 @@ Assert.False(true);
         {
             // this is from http://bugzilla.xamarin.com/show_bug.cgi?id=2926
 
-            Type[] types = new Type[] { typeof(string), typeof(sbyte), typeof(byte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong), typeof(float), typeof(double), typeof(char), typeof(decimal), typeof(DateTime) };
-            object[] values = new object[] { "1", (sbyte)1, (byte)2, (short)3, (ushort)4, 5, (uint)6, (long)7, (ulong)8, (float)9, (double)10, 'z', (decimal)13, new DateTime(24) };
+            Type[] types = new Type[]
+            {
+                typeof(string),
+                typeof(sbyte),
+                typeof(byte),
+                typeof(short),
+                typeof(ushort),
+                typeof(int),
+                typeof(uint),
+                typeof(long),
+                typeof(ulong),
+                typeof(float),
+                typeof(double),
+                typeof(char),
+                typeof(decimal),
+                typeof(DateTime)
+            };
+            object[] values = new object[]
+            {
+                "1",
+                (sbyte)1,
+                (byte)2,
+                (short)3,
+                (ushort)4,
+                5,
+                (uint)6,
+                (long)7,
+                (ulong)8,
+                (float)9,
+                (double)10,
+                'z',
+                (decimal)13,
+                new DateTime(24)
+            };
             int length = types.Length;
 
-            HashSet<Tuple<Type, Type>> invalid = new HashSet<Tuple<Type, Type>>() {
-                Tuple.Create (typeof (string), typeof (DateTime)),
-                Tuple.Create (typeof (sbyte), typeof (DateTime)),
-                Tuple.Create (typeof (byte), typeof (DateTime)),
-                Tuple.Create (typeof (short), typeof (DateTime)),
-                Tuple.Create (typeof (ushort), typeof (DateTime)),
-                Tuple.Create (typeof (int), typeof (DateTime)),
-                Tuple.Create (typeof (uint), typeof (DateTime)),
-                Tuple.Create (typeof (long), typeof (DateTime)),
-                Tuple.Create (typeof (ulong), typeof (DateTime)),
-                Tuple.Create (typeof (float), typeof (char)),
-                Tuple.Create (typeof (float), typeof (DateTime)),
-                Tuple.Create (typeof (double), typeof (char)),
-                Tuple.Create (typeof (double), typeof (DateTime)),
-                Tuple.Create (typeof (char), typeof (float)),
-                Tuple.Create (typeof (char), typeof (double)),
-                Tuple.Create (typeof (char), typeof (decimal)),
-                Tuple.Create (typeof (char), typeof (DateTime)),
-                Tuple.Create (typeof (decimal), typeof (char)),
-                Tuple.Create (typeof (decimal), typeof (DateTime)),
-                Tuple.Create (typeof (DateTime), typeof (sbyte)),
-                Tuple.Create (typeof (DateTime), typeof (byte)),
-                Tuple.Create (typeof (DateTime), typeof (short)),
-                Tuple.Create (typeof (DateTime), typeof (ushort)),
-                Tuple.Create (typeof (DateTime), typeof (int)),
-                Tuple.Create (typeof (DateTime), typeof (uint)),
-                Tuple.Create (typeof (DateTime), typeof (long)),
-                Tuple.Create (typeof (DateTime), typeof (ulong)),
-                Tuple.Create (typeof (DateTime), typeof (float)),
-                Tuple.Create (typeof (DateTime), typeof (double)),
-                Tuple.Create (typeof (DateTime), typeof (char)),
-                Tuple.Create (typeof (DateTime), typeof (decimal)),
+            HashSet<Tuple<Type, Type>> invalid = new HashSet<Tuple<Type, Type>>()
+            {
+                Tuple.Create(typeof(string), typeof(DateTime)),
+                Tuple.Create(typeof(sbyte), typeof(DateTime)),
+                Tuple.Create(typeof(byte), typeof(DateTime)),
+                Tuple.Create(typeof(short), typeof(DateTime)),
+                Tuple.Create(typeof(ushort), typeof(DateTime)),
+                Tuple.Create(typeof(int), typeof(DateTime)),
+                Tuple.Create(typeof(uint), typeof(DateTime)),
+                Tuple.Create(typeof(long), typeof(DateTime)),
+                Tuple.Create(typeof(ulong), typeof(DateTime)),
+                Tuple.Create(typeof(float), typeof(char)),
+                Tuple.Create(typeof(float), typeof(DateTime)),
+                Tuple.Create(typeof(double), typeof(char)),
+                Tuple.Create(typeof(double), typeof(DateTime)),
+                Tuple.Create(typeof(char), typeof(float)),
+                Tuple.Create(typeof(char), typeof(double)),
+                Tuple.Create(typeof(char), typeof(decimal)),
+                Tuple.Create(typeof(char), typeof(DateTime)),
+                Tuple.Create(typeof(decimal), typeof(char)),
+                Tuple.Create(typeof(decimal), typeof(DateTime)),
+                Tuple.Create(typeof(DateTime), typeof(sbyte)),
+                Tuple.Create(typeof(DateTime), typeof(byte)),
+                Tuple.Create(typeof(DateTime), typeof(short)),
+                Tuple.Create(typeof(DateTime), typeof(ushort)),
+                Tuple.Create(typeof(DateTime), typeof(int)),
+                Tuple.Create(typeof(DateTime), typeof(uint)),
+                Tuple.Create(typeof(DateTime), typeof(long)),
+                Tuple.Create(typeof(DateTime), typeof(ulong)),
+                Tuple.Create(typeof(DateTime), typeof(float)),
+                Tuple.Create(typeof(DateTime), typeof(double)),
+                Tuple.Create(typeof(DateTime), typeof(char)),
+                Tuple.Create(typeof(DateTime), typeof(decimal)),
             };
 
             for (int a = 0; a < length; a++)
@@ -1582,7 +1659,11 @@ Assert.False(true);
             Assert.Equal(expected, textString.ReplaceLineEndings());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void Serialize()
         {
             // Create an array with multiple elements refering to
@@ -1639,7 +1720,9 @@ Assert.False(true);
             dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
             dt.Rows.Add(new object[] { 1, 3 });
 
-            Assert.Throws<NoNullAllowedException>(() => dt.Rows.Add(new object[] { DBNull.Value, 3 }));
+            Assert.Throws<NoNullAllowedException>(
+                () => dt.Rows.Add(new object[] { DBNull.Value, 3 })
+            );
         }
 
         [Fact]
@@ -1673,7 +1756,8 @@ Assert.False(true);
             _rowChangingRowChanged = true;
         }
 
-        private bool _rowChangingRowChanging,_rowChangingRowChanged;
+        private bool _rowChangingRowChanging,
+            _rowChangingRowChanged;
         private DataRowAction _rowChangingExpectedAction;
 
         [Fact]
@@ -1734,12 +1818,15 @@ Assert.False(true);
         [Fact]
         public void ColumnObjectTypeTest()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Series Label", typeof(SqlInt32));
-                dt.Rows.Add(new object[] { "sss" });
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("Series Label", typeof(SqlInt32));
+                    dt.Rows.Add(new object[] { "sss" });
+                }
+            );
         }
 
         private bool _tableInitialized;
@@ -1955,12 +2042,24 @@ Assert.False(true);
         public void Load_IncompatibleEHandlerT()
         {
             _fillErrCounter = 0;
-            _fillErr[0].init("LoadIncompatible", 1, true,
-                 "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double.");
-            _fillErr[1].init("LoadIncompatible", 2, true,
-                "Input string was not in a correct format.Couldn't store <mono 2> in name Column.  Expected type is Double.");
-            _fillErr[2].init("LoadIncompatible", 3, true,
-                "Input string was not in a correct format.Couldn't store <mono 3> in name Column.  Expected type is Double.");
+            _fillErr[0].init(
+                "LoadIncompatible",
+                1,
+                true,
+                "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double."
+            );
+            _fillErr[1].init(
+                "LoadIncompatible",
+                2,
+                true,
+                "Input string was not in a correct format.Couldn't store <mono 2> in name Column.  Expected type is Double."
+            );
+            _fillErr[2].init(
+                "LoadIncompatible",
+                3,
+                true,
+                "Input string was not in a correct format.Couldn't store <mono 3> in name Column.  Expected type is Double."
+            );
             LocalSetup();
             DataTable dtLoad = new DataTable("LoadIncompatible");
             dtLoad.Columns.Add("name", typeof(double));
@@ -1974,13 +2073,19 @@ Assert.False(true);
         public void Load_IncompatibleEHandlerF()
         {
             _fillErrCounter = 0;
-            _fillErr[0].init("LoadIncompatible", 1, false,
-                "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double.");
+            _fillErr[0].init(
+                "LoadIncompatible",
+                1,
+                false,
+                "Input string was not in a correct format.Couldn't store <mono 1> in name Column.  Expected type is Double."
+            );
             LocalSetup();
             DataTable dtLoad = new DataTable("LoadIncompatible");
             dtLoad.Columns.Add("name", typeof(double));
             DataTableReader dtr = _dt.CreateDataReader();
-            Assert.Throws<ArgumentException>(() => dtLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler));
+            Assert.Throws<ArgumentException>(
+                () => dtLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler)
+            );
         }
 
         [Fact]
@@ -2152,7 +2257,8 @@ Assert.False(true);
 
         private DataRowAction[] _rowChangeAction = new DataRowAction[5];
         private bool _checkAction;
-        private int _rowChagedCounter,_rowChangingCounter;
+        private int _rowChagedCounter,
+            _rowChangingCounter;
         private void rowActionInit(DataRowAction[] act)
         {
             _checkAction = true;
@@ -2194,12 +2300,14 @@ Assert.False(true);
             _dt.AcceptChanges();
             DataTableReader dtr = _dt.CreateDataReader();
             DataTable dtLoad = setupRowState();
-            DataRowAction[] dra = new DataRowAction[] {
+            DataRowAction[] dra = new DataRowAction[]
+            {
                 DataRowAction.ChangeCurrentAndOriginal,
                 DataRowAction.ChangeOriginal,
                 DataRowAction.ChangeOriginal,
                 DataRowAction.ChangeOriginal,
-                DataRowAction.ChangeCurrentAndOriginal};
+                DataRowAction.ChangeCurrentAndOriginal
+            };
             rowActionInit(dra);
             dtLoad.Load(dtr);
             rowActionEnd();
@@ -2240,7 +2348,9 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr);
 
-            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[2][1, DataRowVersion.Current]);
+            Assert.Throws<VersionNotFoundException>(
+                () => dtLoad.Rows[2][1, DataRowVersion.Current]
+            );
         }
 
         [Fact]
@@ -2252,12 +2362,14 @@ Assert.False(true);
             _dt.AcceptChanges();
             DataTableReader dtr = _dt.CreateDataReader();
             DataTable dtLoad = setupRowState();
-            DataRowAction[] dra = new DataRowAction[] {
+            DataRowAction[] dra = new DataRowAction[]
+            {
                 DataRowAction.ChangeCurrentAndOriginal,
                 DataRowAction.ChangeOriginal,
                 DataRowAction.ChangeOriginal,
                 DataRowAction.ChangeOriginal,
-                DataRowAction.ChangeCurrentAndOriginal};
+                DataRowAction.ChangeCurrentAndOriginal
+            };
             rowActionInit(dra);
             dtLoad.Load(dtr, LoadOption.PreserveChanges);
             rowActionEnd();
@@ -2298,7 +2410,9 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.PreserveChanges);
 
-            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[2][1, DataRowVersion.Current]);
+            Assert.Throws<VersionNotFoundException>(
+                () => dtLoad.Rows[2][1, DataRowVersion.Current]
+            );
         }
 
         [Fact]
@@ -2310,12 +2424,14 @@ Assert.False(true);
             _dt.AcceptChanges();
             DataTableReader dtr = _dt.CreateDataReader();
             DataTable dtLoad = setupRowState();
-            DataRowAction[] dra = new DataRowAction[] {
+            DataRowAction[] dra = new DataRowAction[]
+            {
                 DataRowAction.ChangeCurrentAndOriginal,
                 DataRowAction.ChangeCurrentAndOriginal,
                 DataRowAction.ChangeCurrentAndOriginal,
                 DataRowAction.ChangeCurrentAndOriginal,
-                DataRowAction.ChangeCurrentAndOriginal};
+                DataRowAction.ChangeCurrentAndOriginal
+            };
             rowActionInit(dra);
             dtLoad.Load(dtr, LoadOption.OverwriteChanges);
             rowActionEnd();
@@ -2352,12 +2468,14 @@ Assert.False(true);
             DataTable dtLoad = setupRowState();
             // Notice rowChange-Actions only occur 5 times, as number
             // of actual rows, ignoring row duplication of the deleted row.
-            DataRowAction[] dra = new DataRowAction[] {
+            DataRowAction[] dra = new DataRowAction[]
+            {
                 DataRowAction.Change,
                 DataRowAction.Change,
                 DataRowAction.Add,
                 DataRowAction.Change,
-                DataRowAction.Add};
+                DataRowAction.Add
+            };
             rowActionInit(dra);
             dtLoad.Load(dtr, LoadOption.Upsert);
             rowActionEnd();
@@ -2458,7 +2576,9 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[2][1, DataRowVersion.Current]);
+            Assert.Throws<VersionNotFoundException>(
+                () => dtLoad.Rows[2][1, DataRowVersion.Current]
+            );
         }
 
         [Fact]
@@ -2477,7 +2597,9 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[3][1, DataRowVersion.Original]);
+            Assert.Throws<VersionNotFoundException>(
+                () => dtLoad.Rows[3][1, DataRowVersion.Original]
+            );
         }
 
         [Fact]
@@ -2500,7 +2622,9 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[3][1, DataRowVersion.Original]);
+            Assert.Throws<VersionNotFoundException>(
+                () => dtLoad.Rows[3][1, DataRowVersion.Original]
+            );
         }
 
         [Fact]
@@ -2519,7 +2643,9 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(() => dtLoad.Rows[3][1, DataRowVersion.Original]);
+            Assert.Throws<VersionNotFoundException>(
+                () => dtLoad.Rows[3][1, DataRowVersion.Original]
+            );
         }
 
         [Fact]
@@ -2533,12 +2659,14 @@ Assert.False(true);
             dtLoad.Rows.Add(new object[] { 1, "mono 1" });
             dtLoad.AcceptChanges();
             DataTableReader dtr = _dt.CreateDataReader();
-            DataRowAction[] dra = new DataRowAction[] {
-                DataRowAction.Nothing,// REAL action
-                DataRowAction.Nothing,// dummy
-                DataRowAction.Nothing,// dummy
-                DataRowAction.Nothing,// dummy
-                DataRowAction.Nothing};// dummy
+            DataRowAction[] dra = new DataRowAction[]
+            {
+                DataRowAction.Nothing, // REAL action
+                DataRowAction.Nothing, // dummy
+                DataRowAction.Nothing, // dummy
+                DataRowAction.Nothing, // dummy
+                DataRowAction.Nothing
+            }; // dummy
             rowActionInit(dra);
             dtLoad.Load(dtr, LoadOption.Upsert);
             rowActionEnd();
@@ -2563,8 +2691,7 @@ Assert.False(true);
 
             //Update existing row with LoadOptions = OverwriteChanges
             dt.BeginLoadData();
-            dt.LoadDataRow(new object[] { 1, null, "Changed" },
-                LoadOption.OverwriteChanges);
+            dt.LoadDataRow(new object[] { 1, null, "Changed" }, LoadOption.OverwriteChanges);
             dt.EndLoadData();
 
             // LoadDataRow(update1) - check column String2
@@ -2576,8 +2703,7 @@ Assert.False(true);
 
             //Add New row with LoadOptions = Upsert
             dt.BeginLoadData();
-            dt.LoadDataRow(new object[] { 99, null, "Changed" },
-                LoadOption.Upsert);
+            dt.LoadDataRow(new object[] { 99, null, "Changed" }, LoadOption.Upsert);
             dt.EndLoadData();
 
             // LoadDataRow(insert1) - check column String2
@@ -2600,12 +2726,72 @@ Assert.False(true);
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent.Rows.Add(new object[] { 1, "1-String1", "1-String2", new DateTime(2005, 1, 1, 0, 0, 0, 0), 1.534, true });
-            dtParent.Rows.Add(new object[] { 2, "2-String1", "2-String2", new DateTime(2004, 1, 1, 0, 0, 0, 1), -1.534, true });
-            dtParent.Rows.Add(new object[] { 3, "3-String1", "3-String2", new DateTime(2003, 1, 1, 0, 0, 1, 0), double.MinValue * 10000, false });
-            dtParent.Rows.Add(new object[] { 4, "4-String1", "4-String2", new DateTime(2002, 1, 1, 0, 1, 0, 0), double.MaxValue / 10000, true });
-            dtParent.Rows.Add(new object[] { 5, "5-String1", "5-String2", new DateTime(2001, 1, 1, 1, 0, 0, 0), 0.755, true });
-            dtParent.Rows.Add(new object[] { 6, "6-String1", "6-String2", new DateTime(2000, 1, 1, 0, 0, 0, 0), 0.001, false });
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                    1.534,
+                    true
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    2,
+                    "2-String1",
+                    "2-String2",
+                    new DateTime(2004, 1, 1, 0, 0, 0, 1),
+                    -1.534,
+                    true
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    3,
+                    "3-String1",
+                    "3-String2",
+                    new DateTime(2003, 1, 1, 0, 0, 1, 0),
+                    double.MinValue * 10000,
+                    false
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    4,
+                    "4-String1",
+                    "4-String2",
+                    new DateTime(2002, 1, 1, 0, 1, 0, 0),
+                    double.MaxValue / 10000,
+                    true
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    5,
+                    "5-String1",
+                    "5-String2",
+                    new DateTime(2001, 1, 1, 1, 0, 0, 0),
+                    0.755,
+                    true
+                }
+            );
+            dtParent.Rows.Add(
+                new object[]
+                {
+                    6,
+                    "6-String1",
+                    "6-String2",
+                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                    0.001,
+                    false
+                }
+            );
             dtParent.AcceptChanges();
             return dtParent;
         }
@@ -2702,14 +2888,19 @@ Assert.False(true);
             Assert.True(column3.Unique);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadXmlSchema_2()
         {
             DataTable dt = new DataTable();
             string xmlData = string.Empty;
             xmlData += "<?xml version=\"1.0\"?>";
-            xmlData += "<xs:schema id=\"SiteConfiguration\" targetNamespace=\"http://tempuri.org/PortalCfg.xsd\" xmlns:mstns=\"http://tempuri.org/PortalCfg.xsd\" xmlns=\"http://tempuri.org/PortalCfg.xsd\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" attributeFormDefault=\"qualified\" elementFormDefault=\"qualified\">";
-            xmlData += "<xs:element name=\"SiteConfiguration\" msdata:IsDataSet=\"true\" msdata:EnforceConstraints=\"False\">";
+            xmlData +=
+                "<xs:schema id=\"SiteConfiguration\" targetNamespace=\"http://tempuri.org/PortalCfg.xsd\" xmlns:mstns=\"http://tempuri.org/PortalCfg.xsd\" xmlns=\"http://tempuri.org/PortalCfg.xsd\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" attributeFormDefault=\"qualified\" elementFormDefault=\"qualified\">";
+            xmlData +=
+                "<xs:element name=\"SiteConfiguration\" msdata:IsDataSet=\"true\" msdata:EnforceConstraints=\"False\">";
             xmlData += "<xs:complexType>";
             xmlData += "<xs:choice  minOccurs=\"0\" maxOccurs=\"unbounded\">";
             xmlData += "<xs:element name=\"Tab\">";
@@ -2792,8 +2983,14 @@ Assert.False(true);
         [Fact]
         public void ReadWriteXmlSchema_ByFileName()
         {
-            string sTempFileName1 = Path.Combine(Path.GetTempPath(), "tmpDataSet_ReadWriteXml_43899-1.xml");
-            string sTempFileName2 = Path.Combine(Path.GetTempPath(), "tmpDataSet_ReadWriteXml_43899-2.xml");
+            string sTempFileName1 = Path.Combine(
+                Path.GetTempPath(),
+                "tmpDataSet_ReadWriteXml_43899-1.xml"
+            );
+            string sTempFileName2 = Path.Combine(
+                Path.GetTempPath(),
+                "tmpDataSet_ReadWriteXml_43899-2.xml"
+            );
 
             DataSet ds1 = new DataSet();
             ds1.Tables.Add(DataProvider.CreateParentDataTable());
@@ -2926,7 +3123,10 @@ Assert.False(true);
             Assert.Equal(0, dt2.Rows.Count);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void WriteXmlSchema()
         {
             using (new ThreadCultureChange("en-GB"))
@@ -2963,8 +3163,10 @@ Assert.False(true);
         [Fact]
         public void WriteXmlSchema2()
         {
-            string xml = @"<myDataSet xmlns='NetFrameWork'><myTable><id>0</id><item>item 0</item></myTable><myTable><id>1</id><item>item 1</item></myTable><myTable><id>2</id><item>item 2</item></myTable><myTable><id>3</id><item>item 3</item></myTable><myTable><id>4</id><item>item 4</item></myTable><myTable><id>5</id><item>item 5</item></myTable><myTable><id>6</id><item>item 6</item></myTable><myTable><id>7</id><item>item 7</item></myTable><myTable><id>8</id><item>item 8</item></myTable><myTable><id>9</id><item>item 9</item></myTable></myDataSet>";
-            string schema = @"<?xml version='1.0' encoding='utf-16'?>
+            string xml =
+                @"<myDataSet xmlns='NetFrameWork'><myTable><id>0</id><item>item 0</item></myTable><myTable><id>1</id><item>item 1</item></myTable><myTable><id>2</id><item>item 2</item></myTable><myTable><id>3</id><item>item 3</item></myTable><myTable><id>4</id><item>item 4</item></myTable><myTable><id>5</id><item>item 5</item></myTable><myTable><id>6</id><item>item 6</item></myTable><myTable><id>7</id><item>item 7</item></myTable><myTable><id>8</id><item>item 8</item></myTable><myTable><id>9</id><item>item 9</item></myTable></myDataSet>";
+            string schema =
+                @"<?xml version='1.0' encoding='utf-16'?>
 <xs:schema id='myDataSet' targetNamespace='NetFrameWork' xmlns:mstns='NetFrameWork' xmlns='NetFrameWork' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata' attributeFormDefault='qualified' elementFormDefault='qualified'>
   <xs:element name='myDataSet' msdata:IsDataSet='true' msdata:MainDataTable='NetFrameWork_x003A_myTable' msdata:UseCurrentLocale='true'>
     <xs:complexType>
@@ -3021,7 +3223,8 @@ Assert.False(true);
         [Fact]
         public void WriteXmlSchema3()
         {
-            string xmlschema = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""ExampleDataSet"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""ExampleDataSet"" msdata:IsDataSet=""true"" msdata:MainDataTable=""ExampleDataTable"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -3043,13 +3246,15 @@ Assert.False(true);
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
             ds.Tables["ExampleDataTable"].Columns.Add(
-                new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute));
+                new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
+            );
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
             ds.Tables["ExampleDataTable"].Constraints.Add(
                 "PK_ExampleDataTable",
                 ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
-                true);
+                true
+            );
 
             ds.AcceptChanges();
             StringWriter sw = new StringWriter();
@@ -3063,7 +3268,8 @@ Assert.False(true);
         [Fact]
         public void WriteXmlSchema4()
         {
-            string xmlschema = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:MainDataTable=""MyType"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -3084,12 +3290,10 @@ Assert.False(true);
             DataTable dt = new DataTable("MyType");
             ds.Tables.Add(dt);
 
-            dt.Columns.Add(new DataColumn("ID", typeof(int), "",
-                MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("ID", typeof(int), "", MappingType.Attribute));
             dt.Columns["ID"].AllowDBNull = false;
 
-            dt.Columns.Add(new DataColumn("Desc", typeof
-                (string), "", MappingType.Attribute));
+            dt.Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
 
             ds.AcceptChanges();
 
@@ -3104,7 +3308,8 @@ Assert.False(true);
         [Fact]
         public void WriteXmlSchema5()
         {
-            string xmlschema1 = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema1 =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:MainDataTable=""StandAlone"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -3119,7 +3324,8 @@ Assert.False(true);
     </xs:complexType>
   </xs:element>
 </xs:schema>";
-            string xmlschema2 = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema2 =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:MainDataTable=""Dimension"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -3138,7 +3344,8 @@ Assert.False(true);
     </xs:unique>
   </xs:element>
 </xs:schema>";
-            string xmlschema3 = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema3 =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:MainDataTable=""Element"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -3166,24 +3373,20 @@ Assert.False(true);
             ds.Tables.Add(dt1);
 
             // Add a ReadOnly column
-            dt1.Columns.Add(new DataColumn("ID", typeof(int), "",
-                MappingType.Attribute));
+            dt1.Columns.Add(new DataColumn("ID", typeof(int), "", MappingType.Attribute));
             dt1.Columns["ID"].AllowDBNull = false;
 
-            dt1.Columns.Add(new DataColumn("Desc", typeof
-                (string), "", MappingType.Attribute));
+            dt1.Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             dt1.Columns["Desc"].AllowDBNull = false;
 
             // Add related DataTables with ReadOnly columns
             DataTable dt2 = new DataTable("Dimension");
             ds.Tables.Add(dt2);
-            dt2.Columns.Add(new DataColumn("Number", typeof
-                (int), "", MappingType.Attribute));
+            dt2.Columns.Add(new DataColumn("Number", typeof(int), "", MappingType.Attribute));
             dt2.Columns["Number"].AllowDBNull = false;
             dt2.Columns["Number"].ReadOnly = true;
 
-            dt2.Columns.Add(new DataColumn("Title", typeof
-                (string), "", MappingType.Attribute));
+            dt2.Columns.Add(new DataColumn("Title", typeof(string), "", MappingType.Attribute));
             dt2.Columns["Title"].AllowDBNull = false;
 
             dt2.Constraints.Add("PK_Dimension", dt2.Columns["Number"], true);
@@ -3191,23 +3394,22 @@ Assert.False(true);
             DataTable dt3 = new DataTable("Element");
             ds.Tables.Add(dt3);
 
-            dt3.Columns.Add(new DataColumn("Dimension", typeof
-                (int), "", MappingType.Attribute));
+            dt3.Columns.Add(new DataColumn("Dimension", typeof(int), "", MappingType.Attribute));
             dt3.Columns["Dimension"].AllowDBNull = false;
             dt3.Columns["Dimension"].ReadOnly = true;
 
-            dt3.Columns.Add(new DataColumn("Number", typeof
-                (int), "", MappingType.Attribute));
+            dt3.Columns.Add(new DataColumn("Number", typeof(int), "", MappingType.Attribute));
             dt3.Columns["Number"].AllowDBNull = false;
             dt3.Columns["Number"].ReadOnly = true;
 
-            dt3.Columns.Add(new DataColumn("Title", typeof
-                (string), "", MappingType.Attribute));
+            dt3.Columns.Add(new DataColumn("Title", typeof(string), "", MappingType.Attribute));
             dt3.Columns["Title"].AllowDBNull = false;
 
-            dt3.Constraints.Add("PK_Element", new DataColumn[] {
-                dt3.Columns ["Dimension"],
-                dt3.Columns ["Number"] }, true);
+            dt3.Constraints.Add(
+                "PK_Element",
+                new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
+                true
+            );
 
             ds.AcceptChanges();
 
@@ -3230,7 +3432,8 @@ Assert.False(true);
         [Fact]
         public void WriteXmlSchema6()
         {
-            string xmlschema = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string xmlschema =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <xs:schema id=""Example"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""Example"" msdata:IsDataSet=""true"" msdata:MainDataTable=""MyType"" msdata:UseCurrentLocale=""true"">
     <xs:complexType>
@@ -3255,8 +3458,9 @@ Assert.False(true);
             // Add MyType DataTable
             ds.Tables.Add("MyType");
 
-            ds.Tables["MyType"].Columns.Add(new DataColumn(
-                "Desc", typeof(string), "", MappingType.Attribute));
+            ds.Tables["MyType"].Columns.Add(
+                new DataColumn("Desc", typeof(string), "", MappingType.Attribute)
+            );
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
             ds.AcceptChanges();
@@ -3325,7 +3529,11 @@ Assert.False(true);
             StringWriter sw2 = new StringWriter();
             ds1.Tables[1].WriteXmlSchema(sw2);
             string xml2 = sw2.ToString();
-            Assert.DoesNotContain(@"<xs:unique name=""Constraint1"">", xml2, StringComparison.Ordinal);
+            Assert.DoesNotContain(
+                @"<xs:unique name=""Constraint1"">",
+                xml2,
+                StringComparison.Ordinal
+            );
         }
 
         [Fact]
@@ -3357,20 +3565,28 @@ Assert.False(true);
             DataColumn col2_6 = table2.Columns.Add("col 6", typeof(int));
             DataColumn col2_7 = table2.Columns.Add("col 7", typeof(int));
 
-            ds1.Relations.Add("rel 1",
+            ds1.Relations.Add(
+                "rel 1",
                 new DataColumn[] { col1_1, col1_2 },
                 new DataColumn[] { col2_1, col2_2 },
-                false);
-            ds1.Relations.Add("rel 2",
+                false
+            );
+            ds1.Relations.Add(
+                "rel 2",
                 new DataColumn[] { col1_3, col1_4 },
                 new DataColumn[] { col2_3, col2_4 },
-                true);
-            table2.Constraints.Add("fk 1",
+                true
+            );
+            table2.Constraints.Add(
+                "fk 1",
                 new DataColumn[] { col1_5, col1_6 },
-                new DataColumn[] { col2_5, col2_6 });
-            table1.Constraints.Add("fk 2",
+                new DataColumn[] { col2_5, col2_6 }
+            );
+            table1.Constraints.Add(
+                "fk 2",
                 new DataColumn[] { col2_5, col2_6 },
-                new DataColumn[] { col1_5, col1_6 });
+                new DataColumn[] { col1_5, col1_6 }
+            );
 
             table1.Constraints.Add("pk 1", col1_7, true);
             table2.Constraints.Add("pk 2", col2_7, true);
@@ -3413,18 +3629,23 @@ Assert.False(true);
             table2.PrimaryKey = new DataColumn[] { table2.Columns[0] };
             ds.Tables.Add(table1);
             ds.Tables.Add(table2);
-            ds.Relations.Add("CustomerOrder",
+            ds.Relations.Add(
+                "CustomerOrder",
                 new DataColumn[] { table1.Columns[0] },
-                new DataColumn[] { table2.Columns[1] }, true);
+                new DataColumn[] { table2.Columns[1] },
+                true
+            );
 
             StringWriter writer1 = new StringWriter();
             table1.WriteXmlSchema(writer1, false);
-            string expected1 = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<xs:schema id=\"NewDataSet\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">\n  <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\" msdata:MainDataTable=\"Table1\" msdata:UseCurrentLocale=\"true\">\n    <xs:complexType>\n      <xs:choice minOccurs=\"0\" maxOccurs=\"unbounded\">\n        <xs:element name=\"Table1\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"ID\" type=\"xs:int\" />\n              <xs:element name=\"Name\" type=\"xs:string\" minOccurs=\"0\" />\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n      </xs:choice>\n    </xs:complexType>\n    <xs:unique name=\"Constraint1\" msdata:PrimaryKey=\"true\">\n      <xs:selector xpath=\".//Table1\" />\n      <xs:field xpath=\"ID\" />\n    </xs:unique>\n  </xs:element>\n</xs:schema>";
+            string expected1 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<xs:schema id=\"NewDataSet\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">\n  <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\" msdata:MainDataTable=\"Table1\" msdata:UseCurrentLocale=\"true\">\n    <xs:complexType>\n      <xs:choice minOccurs=\"0\" maxOccurs=\"unbounded\">\n        <xs:element name=\"Table1\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"ID\" type=\"xs:int\" />\n              <xs:element name=\"Name\" type=\"xs:string\" minOccurs=\"0\" />\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n      </xs:choice>\n    </xs:complexType>\n    <xs:unique name=\"Constraint1\" msdata:PrimaryKey=\"true\">\n      <xs:selector xpath=\".//Table1\" />\n      <xs:field xpath=\"ID\" />\n    </xs:unique>\n  </xs:element>\n</xs:schema>";
             Assert.Equal(expected1, writer1.ToString().Replace("\r\n", "\n"));
 
             StringWriter writer2 = new StringWriter();
             table1.WriteXmlSchema(writer2, true);
-            string expected2 = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<xs:schema id=\"NewDataSet\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">\n  <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\" msdata:MainDataTable=\"Table1\" msdata:UseCurrentLocale=\"true\">\n    <xs:complexType>\n      <xs:choice minOccurs=\"0\" maxOccurs=\"unbounded\">\n        <xs:element name=\"Table1\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"ID\" type=\"xs:int\" />\n              <xs:element name=\"Name\" type=\"xs:string\" minOccurs=\"0\" />\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"Table2\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"OrderID\" type=\"xs:int\" />\n              <xs:element name=\"CustomerID\" type=\"xs:int\" minOccurs=\"0\" />\n              <xs:element name=\"OrderDate\" type=\"xs:dateTime\" minOccurs=\"0\" />\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n      </xs:choice>\n    </xs:complexType>\n    <xs:unique name=\"Constraint1\" msdata:PrimaryKey=\"true\">\n      <xs:selector xpath=\".//Table1\" />\n      <xs:field xpath=\"ID\" />\n    </xs:unique>\n    <xs:unique name=\"Table2_Constraint1\" msdata:ConstraintName=\"Constraint1\" msdata:PrimaryKey=\"true\">\n      <xs:selector xpath=\".//Table2\" />\n      <xs:field xpath=\"OrderID\" />\n    </xs:unique>\n    <xs:keyref name=\"CustomerOrder\" refer=\"Constraint1\">\n      <xs:selector xpath=\".//Table2\" />\n      <xs:field xpath=\"CustomerID\" />\n    </xs:keyref>\n  </xs:element>\n</xs:schema>";
+            string expected2 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<xs:schema id=\"NewDataSet\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">\n  <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\" msdata:MainDataTable=\"Table1\" msdata:UseCurrentLocale=\"true\">\n    <xs:complexType>\n      <xs:choice minOccurs=\"0\" maxOccurs=\"unbounded\">\n        <xs:element name=\"Table1\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"ID\" type=\"xs:int\" />\n              <xs:element name=\"Name\" type=\"xs:string\" minOccurs=\"0\" />\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"Table2\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"OrderID\" type=\"xs:int\" />\n              <xs:element name=\"CustomerID\" type=\"xs:int\" minOccurs=\"0\" />\n              <xs:element name=\"OrderDate\" type=\"xs:dateTime\" minOccurs=\"0\" />\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n      </xs:choice>\n    </xs:complexType>\n    <xs:unique name=\"Constraint1\" msdata:PrimaryKey=\"true\">\n      <xs:selector xpath=\".//Table1\" />\n      <xs:field xpath=\"ID\" />\n    </xs:unique>\n    <xs:unique name=\"Table2_Constraint1\" msdata:ConstraintName=\"Constraint1\" msdata:PrimaryKey=\"true\">\n      <xs:selector xpath=\".//Table2\" />\n      <xs:field xpath=\"OrderID\" />\n    </xs:unique>\n    <xs:keyref name=\"CustomerOrder\" refer=\"Constraint1\">\n      <xs:selector xpath=\".//Table2\" />\n      <xs:field xpath=\"CustomerID\" />\n    </xs:keyref>\n  </xs:element>\n</xs:schema>";
             Assert.Equal(expected2, writer2.ToString().Replace("\r\n", "\n"));
         }
 
@@ -3504,7 +3725,8 @@ Assert.False(true);
         [Fact]
         public void ReadXmlSchemeWithScheme()
         {
-            const string xml = @"<CustomElement>
+            const string xml =
+                @"<CustomElement>
                   <xs:schema id='NewDataSet' xmlns='' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
                     <xs:element name='NewDataSet' msdata:IsDataSet='true' msdata:MainDataTable='row' msdata:Locale=''>
                       <xs:complexType>
@@ -3530,16 +3752,20 @@ Assert.False(true);
         [Fact]
         public void ReadXmlSchemeWithBadScheme()
         {
-            const string xml = @"<CustomElement>
+            const string xml =
+                @"<CustomElement>
                   <xs:schema id='NewDataSet' xmlns='' xmlns:xs='http://www.w3.org/2001/BAD' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
                   </xs:schema>
                 </CustomElement>";
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                using var s = new StringReader(xml);
-                DataTable dt = new DataTable();
-                dt.ReadXmlSchema(s);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    using var s = new StringReader(xml);
+                    DataTable dt = new DataTable();
+                    dt.ReadXmlSchema(s);
+                }
+            );
         }
 
         #endregion // Read/Write XML Tests
@@ -3582,17 +3808,21 @@ Assert.False(true);
             }
 
             DataView dv = dt.DefaultView;
-            dv.RowFilter = string.Format(CultureInfo.InvariantCulture,
-                                "StartDate >= #{0}# and StartDate <= #{1}#",
-                                DateTime.Now.AddDays(2),
-                                DateTime.Now.AddDays(4));
+            dv.RowFilter = string.Format(
+                CultureInfo.InvariantCulture,
+                "StartDate >= #{0}# and StartDate <= #{1}#",
+                DateTime.Now.AddDays(2),
+                DateTime.Now.AddDays(4)
+            );
             Assert.Equal(10, dt.Rows.Count);
 
             int expectedRowCount = 2;
             if (dv.Count != expectedRowCount)
             {
                 StringBuilder sb = new();
-                sb.AppendLine($"DataView.Rows.Count: Expected: {expectedRowCount}, Actual: {dv.Count}. Debug data: RowFilter: {dv.RowFilter}, date: {date}");
+                sb.AppendLine(
+                    $"DataView.Rows.Count: Expected: {expectedRowCount}, Actual: {dv.Count}. Debug data: RowFilter: {dv.RowFilter}, date: {date}"
+                );
                 for (int i = 0; i < dv.Count; i++)
                 {
                     sb.Append($"row#{i}: ");
@@ -3633,7 +3863,10 @@ Assert.False(true);
         private static void Select(DataTable tbl)
         {
             tbl.Locale = CultureInfo.InvariantCulture;
-            string filter = string.Format("Data = '{0}'", new DateTime(2007, 7, 1).ToString(CultureInfo.InvariantCulture));
+            string filter = string.Format(
+                "Data = '{0}'",
+                new DateTime(2007, 7, 1).ToString(CultureInfo.InvariantCulture)
+            );
             DataRow[] rows = tbl.Select(filter);
             Assert.Equal(1, rows.Length);
         }

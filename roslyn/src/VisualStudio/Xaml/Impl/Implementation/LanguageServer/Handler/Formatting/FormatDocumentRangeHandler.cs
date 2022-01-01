@@ -15,19 +15,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(Methods.TextDocumentRangeFormattingName)]
-    internal class FormatDocumentRangeHandler : AbstractFormatDocumentHandlerBase<DocumentRangeFormattingParams, TextEdit[]>
+    internal class FormatDocumentRangeHandler
+        : AbstractFormatDocumentHandlerBase<DocumentRangeFormattingParams, TextEdit[]>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentRangeHandler()
-        {
-        }
+        public FormatDocumentRangeHandler() { }
 
         public override string Method => Methods.TextDocumentRangeFormattingName;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(DocumentRangeFormattingParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            DocumentRangeFormattingParams request
+        ) => request.TextDocument;
 
-        public override Task<TextEdit[]> HandleRequestAsync(DocumentRangeFormattingParams request, RequestContext context, CancellationToken cancellationToken)
-            => GetTextEditsAsync(request.Options, context, cancellationToken, range: request.Range);
+        public override Task<TextEdit[]> HandleRequestAsync(
+            DocumentRangeFormattingParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) => GetTextEditsAsync(request.Options, context, cancellationToken, range: request.Range);
     }
 }

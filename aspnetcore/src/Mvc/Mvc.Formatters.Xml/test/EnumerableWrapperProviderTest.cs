@@ -12,20 +12,29 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 public class EnumerableWrapperProviderTest
 {
     [Theory]
-    [InlineData(typeof(IEnumerable<SerializableError>),
-        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>))]
-    [InlineData(typeof(IQueryable<SerializableError>),
-        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>))]
-    [InlineData(typeof(ICollection<SerializableError>),
-        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>))]
-    [InlineData(typeof(IList<SerializableError>),
-        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>))]
+    [InlineData(
+        typeof(IEnumerable<SerializableError>),
+        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>)
+    )]
+    [InlineData(
+        typeof(IQueryable<SerializableError>),
+        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>)
+    )]
+    [InlineData(
+        typeof(ICollection<SerializableError>),
+        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>)
+    )]
+    [InlineData(
+        typeof(IList<SerializableError>),
+        typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>)
+    )]
     public void Gets_DelegatingWrappingType(Type declaredEnumerableOfT, Type expectedType)
     {
         // Arrange
         var wrapperProvider = new EnumerableWrapperProvider(
-                                                        declaredEnumerableOfT,
-                                                        new SerializableErrorWrapperProvider());
+            declaredEnumerableOfT,
+            new SerializableErrorWrapperProvider()
+        );
 
         // Act
         var wrappingType = wrapperProvider.WrappingType;
@@ -41,8 +50,9 @@ public class EnumerableWrapperProviderTest
         // Arrange
         var declaredEnumerableOfT = typeof(IEnumerable<int>);
         var wrapperProvider = new EnumerableWrapperProvider(
-                                            declaredEnumerableOfT,
-                                            elementWrapperProvider: null);
+            declaredEnumerableOfT,
+            elementWrapperProvider: null
+        );
 
         // Act
         var wrapped = wrapperProvider.Wrap(new int[] { });
@@ -61,8 +71,9 @@ public class EnumerableWrapperProviderTest
         // Arrange
         var declaredEnumerableOfT = typeof(IEnumerable<int>);
         var wrapperProvider = new EnumerableWrapperProvider(
-                                    declaredEnumerableOfT,
-                                    elementWrapperProvider: null);
+            declaredEnumerableOfT,
+            elementWrapperProvider: null
+        );
 
         // Act
         var wrapped = wrapperProvider.Wrap(null);
@@ -81,13 +92,14 @@ public class EnumerableWrapperProviderTest
     public void ThrowsArgumentExceptionFor_ConcreteEnumerableOfT(Type declaredType)
     {
         // Arrange
-        var expectedMessage = "The type must be an interface and must be or derive from 'IEnumerable`1'.";
+        var expectedMessage =
+            "The type must be an interface and must be or derive from 'IEnumerable`1'.";
 
         // Act and Assert
-        ExceptionAssert.ThrowsArgument(() => new EnumerableWrapperProvider(
-            declaredType,
-            elementWrapperProvider: null),
+        ExceptionAssert.ThrowsArgument(
+            () => new EnumerableWrapperProvider(declaredType, elementWrapperProvider: null),
             "sourceEnumerableOfT",
-            expectedMessage);
+            expectedMessage
+        );
     }
 }

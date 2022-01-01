@@ -55,13 +55,17 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
             context.ServiceContext.Log,
             _streamIdFeature,
             context.ClientPeerSettings,
-            this);
+            this
+        );
         _frameWriter.Reset(context.Transport.Output, context.ConnectionId);
     }
 
     private void OnStreamClosed()
     {
-        Abort(new ConnectionAbortedException("HTTP_CLOSED_CRITICAL_STREAM"), Http3ErrorCode.InternalError);
+        Abort(
+            new ConnectionAbortedException("HTTP_CLOSED_CRITICAL_STREAM"),
+            Http3ErrorCode.InternalError
+        );
     }
 
     public PipeReader Input => _context.Transport.Input;
@@ -132,7 +136,11 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
             {
                 if (!readableBuffer.IsEmpty)
                 {
-                    var id = VariableLengthIntegerHelper.GetInteger(readableBuffer, out consumed, out examined);
+                    var id = VariableLengthIntegerHelper.GetInteger(
+                        readableBuffer,
+                        out consumed,
+                        out examined
+                    );
                     if (id != -1)
                     {
                         return id;
@@ -153,7 +161,8 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
         return -1;
     }
 
-    public async Task ProcessRequestAsync<TContext>(IHttpApplication<TContext> application) where TContext : notnull
+    public async Task ProcessRequestAsync<TContext>(IHttpApplication<TContext> application)
+        where TContext : notnull
     {
         try
         {
@@ -166,7 +175,12 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
                     if (!_context.StreamLifetimeHandler.OnInboundControlStream(this))
                     {
                         // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-6.2.1
-                        throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams("control"), Http3ErrorCode.StreamCreationError);
+                        throw new Http3ConnectionErrorException(
+                            CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
+                                "control"
+                            ),
+                            Http3ErrorCode.StreamCreationError
+                        );
                     }
 
                     await HandleControlStream();
@@ -175,7 +189,12 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
                     if (!_context.StreamLifetimeHandler.OnInboundEncoderStream(this))
                     {
                         // https://quicwg.org/base-drafts/draft-ietf-quic-qpack.html#section-4.2
-                        throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams("encoder"), Http3ErrorCode.StreamCreationError);
+                        throw new Http3ConnectionErrorException(
+                            CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
+                                "encoder"
+                            ),
+                            Http3ErrorCode.StreamCreationError
+                        );
                     }
 
                     await HandleEncodingDecodingTask();
@@ -184,13 +203,21 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
                     if (!_context.StreamLifetimeHandler.OnInboundDecoderStream(this))
                     {
                         // https://quicwg.org/base-drafts/draft-ietf-quic-qpack.html#section-4.2
-                        throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams("decoder"), Http3ErrorCode.StreamCreationError);
+                        throw new Http3ConnectionErrorException(
+                            CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
+                                "decoder"
+                            ),
+                            Http3ErrorCode.StreamCreationError
+                        );
                     }
                     await HandleEncodingDecodingTask();
                     break;
                 default:
                     // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-6.2-6
-                    throw new Http3StreamErrorException(CoreStrings.FormatHttp3ControlStreamErrorUnsupportedType(_headerType), Http3ErrorCode.StreamCreationError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.FormatHttp3ControlStreamErrorUnsupportedType(_headerType),
+                        Http3ErrorCode.StreamCreationError
+                    );
             }
         }
         catch (Http3StreamErrorException ex)
@@ -222,9 +249,19 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
                 if (!readableBuffer.IsEmpty)
                 {
                     // need to kick off httpprotocol process request async here.
-                    while (Http3FrameReader.TryReadFrame(ref readableBuffer, _incomingFrame, out var framePayload))
+                    while (
+                        Http3FrameReader.TryReadFrame(
+                            ref readableBuffer,
+                            _incomingFrame,
+                            out var framePayload
+                        )
+                    )
                     {
-                        Log.Http3FrameReceived(_context.ConnectionId, _streamIdFeature.StreamId, _incomingFrame);
+                        Log.Http3FrameReceived(
+                            _context.ConnectionId,
+                            _streamIdFeature.StreamId,
+                            _incomingFrame
+                        );
 
                         consumed = examined = framePayload.End;
                         await ProcessHttp3ControlStream(framePayload);
@@ -236,7 +273,10 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
                     if (!_context.StreamContext.ConnectionClosed.IsCancellationRequested)
                     {
                         // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-6.2.1-2
-                        throw new Http3ConnectionErrorException(CoreStrings.Http3ErrorControlStreamClientClosedInbound, Http3ErrorCode.ClosedCriticalStream);
+                        throw new Http3ConnectionErrorException(
+                            CoreStrings.Http3ErrorControlStreamClientClosedInbound,
+                            Http3ErrorCode.ClosedCriticalStream
+                        );
                     }
 
                     return;
@@ -271,7 +311,12 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
             case Http3FrameType.Headers:
             case Http3FrameType.PushPromise:
                 // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-7.2
-                throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ErrorUnsupportedFrameOnControlStream(_incomingFrame.FormattedType), Http3ErrorCode.UnexpectedFrame);
+                throw new Http3ConnectionErrorException(
+                    CoreStrings.FormatHttp3ErrorUnsupportedFrameOnControlStream(
+                        _incomingFrame.FormattedType
+                    ),
+                    Http3ErrorCode.UnexpectedFrame
+                );
             case Http3FrameType.Settings:
                 return ProcessSettingsFrameAsync(payload);
             case Http3FrameType.GoAway:
@@ -290,11 +335,17 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
         if (_haveReceivedSettingsFrame)
         {
             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#name-settings
-            throw new Http3ConnectionErrorException(CoreStrings.Http3ErrorControlStreamMultipleSettingsFrames, Http3ErrorCode.UnexpectedFrame);
+            throw new Http3ConnectionErrorException(
+                CoreStrings.Http3ErrorControlStreamMultipleSettingsFrames,
+                Http3ErrorCode.UnexpectedFrame
+            );
         }
 
         _haveReceivedSettingsFrame = true;
-        using var closedRegistration = _context.StreamContext.ConnectionClosed.Register(state => ((Http3ControlStream)state!).OnStreamClosed(), this);
+        using var closedRegistration = _context.StreamContext.ConnectionClosed.Register(
+            state => ((Http3ControlStream)state!).OnStreamClosed(),
+            this
+        );
 
         while (true)
         {
@@ -331,12 +382,17 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
             case 0x5:
                 // HTTP/2 settings are reserved.
                 // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-7.2.4.1-5
-                var message = CoreStrings.FormatHttp3ErrorControlStreamReservedSetting("0x" + id.ToString("X", CultureInfo.InvariantCulture));
+                var message = CoreStrings.FormatHttp3ErrorControlStreamReservedSetting(
+                    "0x" + id.ToString("X", CultureInfo.InvariantCulture)
+                );
                 throw new Http3ConnectionErrorException(message, Http3ErrorCode.SettingsError);
             case (long)Http3SettingType.QPackMaxTableCapacity:
             case (long)Http3SettingType.MaxFieldSectionSize:
             case (long)Http3SettingType.QPackBlockedStreams:
-                _context.StreamLifetimeHandler.OnInboundControlStreamSetting((Http3SettingType)id, value);
+                _context.StreamLifetimeHandler.OnInboundControlStreamSetting(
+                    (Http3SettingType)id,
+                    value
+                );
                 break;
             default:
                 // Ignore all unknown settings.
@@ -389,19 +445,28 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
     {
         if (!_haveReceivedSettingsFrame)
         {
-            var message = CoreStrings.FormatHttp3ErrorControlStreamFrameReceivedBeforeSettings(Http3Formatting.ToFormattedType(frameType));
+            var message = CoreStrings.FormatHttp3ErrorControlStreamFrameReceivedBeforeSettings(
+                Http3Formatting.ToFormattedType(frameType)
+            );
             throw new Http3ConnectionErrorException(message, Http3ErrorCode.MissingSettings);
         }
     }
 
-    public void StopProcessingNextRequest()
-        => StopProcessingNextRequest(serverInitiated: true);
+    public void StopProcessingNextRequest() => StopProcessingNextRequest(serverInitiated: true);
 
     public void StopProcessingNextRequest(bool serverInitiated)
     {
-        var initiator = serverInitiated ? GracefulCloseInitiator.Server : GracefulCloseInitiator.Client;
+        var initiator = serverInitiated
+            ? GracefulCloseInitiator.Server
+            : GracefulCloseInitiator.Client;
 
-        if (Interlocked.CompareExchange(ref _gracefulCloseInitiator, initiator, GracefulCloseInitiator.None) == GracefulCloseInitiator.None)
+        if (
+            Interlocked.CompareExchange(
+                ref _gracefulCloseInitiator,
+                initiator,
+                GracefulCloseInitiator.None
+            ) == GracefulCloseInitiator.None
+        )
         {
             Input.CancelPendingRead();
         }

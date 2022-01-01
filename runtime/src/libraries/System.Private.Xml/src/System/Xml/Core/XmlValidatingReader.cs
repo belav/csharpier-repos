@@ -10,7 +10,9 @@ using System.Collections.Generic;
 
 namespace System.Xml
 {
-    [Obsolete("XmlValidatingReader has been deprecated. Use XmlReader created by XmlReader.Create() method using appropriate XmlReaderSettings instead.")]
+    [Obsolete(
+        "XmlValidatingReader has been deprecated. Use XmlReader created by XmlReader.Create() method using appropriate XmlReaderSettings instead."
+    )]
     public class XmlValidatingReader : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
     {
         //
@@ -27,7 +29,11 @@ namespace System.Xml
             _impl.OuterReader = this;
         }
 
-        public XmlValidatingReader(string xmlFragment, XmlNodeType fragType, XmlParserContext context)
+        public XmlValidatingReader(
+            string xmlFragment,
+            XmlNodeType fragType,
+            XmlParserContext context
+        )
         {
             if (xmlFragment == null)
             {
@@ -38,7 +44,11 @@ namespace System.Xml
             _impl.OuterReader = this;
         }
 
-        public XmlValidatingReader(Stream xmlFragment, XmlNodeType fragType, XmlParserContext context)
+        public XmlValidatingReader(
+            Stream xmlFragment,
+            XmlNodeType fragType,
+            XmlParserContext context
+        )
         {
             if (xmlFragment == null)
             {
@@ -123,7 +133,10 @@ namespace System.Xml
 
         // XmlTextReader does not override SchemaInfo, ValueType and ReadTypeValue
 
-        public override int AttributeCount { get { return _impl.AttributeCount; } }
+        public override int AttributeCount
+        {
+            get { return _impl.AttributeCount; }
+        }
 
         public override string? GetAttribute(string name)
         {
@@ -258,16 +271,27 @@ namespace System.Xml
         //
         // IXmlLineInfo members
         //
-        public bool HasLineInfo() { return true; }
+        public bool HasLineInfo()
+        {
+            return true;
+        }
 
-        public int LineNumber { get { return _impl.LineNumber; } }
+        public int LineNumber
+        {
+            get { return _impl.LineNumber; }
+        }
 
-        public int LinePosition { get { return _impl.LinePosition; } }
+        public int LinePosition
+        {
+            get { return _impl.LinePosition; }
+        }
 
         //
         // IXmlNamespaceResolver members
         //
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return _impl.GetNamespacesInScope(scope);
         }

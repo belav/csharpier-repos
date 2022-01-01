@@ -22,40 +22,34 @@ public class AuthorizationFailure
     /// <summary>
     /// Failure was due to these requirements not being met via <see cref="AuthorizationHandlerContext.Succeed(IAuthorizationRequirement)"/>.
     /// </summary>
-    public IEnumerable<IAuthorizationRequirement> FailedRequirements { get; private set; } = Array.Empty<IAuthorizationRequirement>();
+    public IEnumerable<IAuthorizationRequirement> FailedRequirements { get; private set; } =
+        Array.Empty<IAuthorizationRequirement>();
 
     /// <summary>
     /// Allows <see cref="IAuthorizationHandler"/> to flow more detailed reasons for why authorization failed.
     /// </summary>
-    public IEnumerable<AuthorizationFailureReason> FailureReasons { get; private set; } = Array.Empty<AuthorizationFailureReason>();
+    public IEnumerable<AuthorizationFailureReason> FailureReasons { get; private set; } =
+        Array.Empty<AuthorizationFailureReason>();
 
     /// <summary>
     /// Return a failure due to <see cref="AuthorizationHandlerContext.Fail()"/> being called.
     /// </summary>
     /// <returns>The failure.</returns>
-    public static AuthorizationFailure ExplicitFail()
-        => new AuthorizationFailure
-        {
-            FailCalled = true
-        };
+    public static AuthorizationFailure ExplicitFail() =>
+        new AuthorizationFailure { FailCalled = true };
 
     /// <summary>
     /// Return a failure due to <see cref="AuthorizationHandlerContext.Fail(AuthorizationFailureReason)"/> being called.
     /// </summary>
     /// <returns>The failure.</returns>
-    public static AuthorizationFailure Failed(IEnumerable<AuthorizationFailureReason> reasons)
-        => new AuthorizationFailure
-        {
-            FailCalled = true,
-            FailureReasons = reasons
-        };
+    public static AuthorizationFailure Failed(IEnumerable<AuthorizationFailureReason> reasons) =>
+        new AuthorizationFailure { FailCalled = true, FailureReasons = reasons };
 
     /// <summary>
     /// Return a failure due to some requirements not being met via <see cref="AuthorizationHandlerContext.Succeed(IAuthorizationRequirement)"/>.
     /// </summary>
     /// <param name="failed">The requirements that were not met.</param>
     /// <returns>The failure.</returns>
-    public static AuthorizationFailure Failed(IEnumerable<IAuthorizationRequirement> failed)
-        => new AuthorizationFailure { FailedRequirements = failed };
-
+    public static AuthorizationFailure Failed(IEnumerable<IAuthorizationRequirement> failed) =>
+        new AuthorizationFailure { FailedRequirements = failed };
 }

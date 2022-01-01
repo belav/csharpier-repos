@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CodeActionsCache codeActionsCache,
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _codeActionsCache = codeActionsCache;
             _codeFixService = codeFixService;
@@ -52,7 +53,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public override bool MutatesSolutionState => true;
         public override bool RequiresLSPSolution => true;
 
-        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.ExecuteCommandParams request)
+        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.ExecuteCommandParams request
+        )
         {
             var runRequest = ((JToken)request.Arguments.Single()).ToObject<CodeActionResolveData>();
             Assumes.Present(runRequest);
@@ -60,7 +63,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             return runRequest.TextDocument;
         }
 
-        public override async Task<object> HandleRequestAsync(LSP.ExecuteCommandParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<object> HandleRequestAsync(
+            LSP.ExecuteCommandParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             Contract.ThrowIfNull(document);
@@ -68,13 +75,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var runRequest = ((JToken)request.Arguments.Single()).ToObject<CodeActionResolveData>();
             Assumes.Present(runRequest);
 
-            var codeActions = await CodeActionHelpers.GetCodeActionsAsync(
-                _codeActionsCache, document, runRequest.Range, _codeFixService, _codeRefactoringService, cancellationToken).ConfigureAwait(false);
+            var codeActions = await CodeActionHelpers
+                .GetCodeActionsAsync(
+                    _codeActionsCache,
+                    document,
+                    runRequest.Range,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var actionToRun = CodeActionHelpers.GetCodeActionToResolve(runRequest.UniqueIdentifier, codeActions);
+            var actionToRun = CodeActionHelpers.GetCodeActionToResolve(
+                runRequest.UniqueIdentifier,
+                codeActions
+            );
             Contract.ThrowIfNull(actionToRun);
 
-            var operations = await actionToRun.GetOperationsAsync(cancellationToken).ConfigureAwait(false);
+            var operations = await actionToRun
+                .GetOperationsAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // TODO - This UI thread dependency should be removed.
             // https://github.com/dotnet/roslyn/projects/45#card-20619668

@@ -13,7 +13,11 @@ using Microsoft.AspNetCore.Routing.Matching;
 
 namespace Microsoft.AspNetCore.Mvc.Routing
 {
-    internal class ConsumesMatcherPolicy : MatcherPolicy, IEndpointComparerPolicy, INodeBuilderPolicy, IEndpointSelectorPolicy
+    internal class ConsumesMatcherPolicy
+        : MatcherPolicy,
+          IEndpointComparerPolicy,
+          INodeBuilderPolicy,
+          IEndpointSelectorPolicy
     {
         internal const string Http415EndpointDisplayName = "415 HTTP Unsupported Media Type";
         internal const string AnyContentType = "*/*";
@@ -51,7 +55,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private bool AppliesToEndpointsCore(IReadOnlyList<Endpoint> endpoints)
         {
-            return endpoints.Any(e => e.Metadata.GetMetadata<IConsumesMetadata>()?.ContentTypes.Count > 0);
+            return endpoints.Any(
+                e => e.Metadata.GetMetadata<IConsumesMetadata>()?.ContentTypes.Count > 0
+            );
         }
 
         public Task ApplyAsync(HttpContext httpContext, CandidateSet candidates)
@@ -95,7 +101,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     {
                         for (var j = 0; j < metadata.ContentTypes.Count; j++)
                         {
-                            if (string.Equals("*/*", metadata.ContentTypes[j], StringComparison.Ordinal))
+                            if (
+                                string.Equals(
+                                    "*/*",
+                                    metadata.ContentTypes[j],
+                                    StringComparison.Ordinal
+                                )
+                            )
                             {
                                 needs415Endpoint = false;
                                 break;
@@ -107,7 +119,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 }
 
                 var contentType = httpContext.Request.ContentType;
-                var mediaType = string.IsNullOrEmpty(contentType) ? (MediaType?)null : new MediaType(contentType);
+                var mediaType = string.IsNullOrEmpty(contentType)
+                    ? (MediaType?)null
+                    : new MediaType(contentType);
 
                 var matched = false;
                 for (var j = 0; j < metadata.ContentTypes.Count; j++)
@@ -124,7 +138,6 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     {
                         continue;
                     }
-
                     // We have a ContentType but it's not a match.
                     else if (mediaType != null && !mediaType.Value.IsSubsetOf(candidateMediaType))
                     {
@@ -193,7 +206,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             for (var i = 0; i < endpoints.Count; i++)
             {
                 var endpoint = endpoints[i];
-                var contentTypes = endpoint.Metadata.GetMetadata<IConsumesMetadata>()?.ContentTypes ?? Array.Empty<string>();
+                var contentTypes =
+                    endpoint.Metadata.GetMetadata<IConsumesMetadata>()?.ContentTypes
+                    ?? Array.Empty<string>();
                 if (contentTypes.Count == 0)
                 {
                     // OK this means that this endpoint matches *all* content methods.
@@ -241,10 +256,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // endpoint that always returns a 415.
             if (!edges.TryGetValue(AnyContentType, out var anyEndpoints))
             {
-                edges.Add(AnyContentType, new List<Endpoint>()
-                {
-                    CreateRejectionEndpoint(),
-                });
+                edges.Add(AnyContentType, new List<Endpoint>() { CreateRejectionEndpoint(), });
 
                 // Add a node to use when there is no request content type.
                 // When there is no content type we want the policy to no-op
@@ -256,10 +268,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 edges.Add(string.Empty, anyEndpoints.ToList());
             }
 
-
-            return edges
-                .Select(kvp => new PolicyNodeEdge(kvp.Key, kvp.Value))
-                .ToArray();
+            return edges.Select(kvp => new PolicyNodeEdge(kvp.Key, kvp.Value)).ToArray();
         }
 
         private Endpoint CreateRejectionEndpoint()
@@ -271,10 +280,14 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     return Task.CompletedTask;
                 },
                 EndpointMetadataCollection.Empty,
-                Http415EndpointDisplayName);
+                Http415EndpointDisplayName
+            );
         }
 
-        public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
+        public PolicyJumpTable BuildJumpTable(
+            int exitDestination,
+            IReadOnlyList<PolicyJumpTableEdge> edges
+        )
         {
             if (edges == null)
             {
@@ -304,7 +317,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             return new ConsumesPolicyJumpTable(exitDestination, noContentTypeDestination, ordered);
         }
 
-        private static int GetNoContentTypeDestination((MediaType mediaType, int destination)[] destinations)
+        private static int GetNoContentTypeDestination(
+            (MediaType mediaType, int destination)[] destinations
+        )
         {
             for (var i = 0; i < destinations.Length; i++)
             {
@@ -351,7 +366,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 // Ignore the metadata if it has an empty list of content types.
                 return base.CompareMetadata(
                     x?.ContentTypes.Count > 0 ? x : null,
-                    y?.ContentTypes.Count > 0 ? y : null);
+                    y?.ContentTypes.Count > 0 ? y : null
+                );
             }
         }
 
@@ -361,7 +377,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             private readonly int _exitDestination;
             private readonly int _noContentTypeDestination;
 
-            public ConsumesPolicyJumpTable(int exitDestination, int noContentTypeDestination, (MediaType mediaType, int destination)[] destinations)
+            public ConsumesPolicyJumpTable(
+                int exitDestination,
+                int noContentTypeDestination,
+                (MediaType mediaType, int destination)[] destinations
+            )
             {
                 _exitDestination = exitDestination;
                 _noContentTypeDestination = noContentTypeDestination;

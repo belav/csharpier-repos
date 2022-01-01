@@ -18,9 +18,7 @@ internal sealed class PageViewDataAttributeFilter : IPageFilter, IViewDataValues
 
     public object? Subject { get; set; }
 
-    public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-    {
-    }
+    public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
 
     public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
@@ -28,9 +26,7 @@ internal sealed class PageViewDataAttributeFilter : IPageFilter, IViewDataValues
         context.HttpContext.Features.Set<IViewDataValuesProviderFeature>(this);
     }
 
-    public void OnPageHandlerSelected(PageHandlerSelectedContext context)
-    {
-    }
+    public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
 
     public void ProvideViewDataValues(ViewDataDictionary viewData)
     {

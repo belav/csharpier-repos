@@ -9,17 +9,13 @@ namespace Hashcode
     {
         class NestedType
         {
-
         }
 
-        void GenericMethod<T>()
-        { }
+        void GenericMethod<T>() { }
     }
 
-    class GenericType<X,Y>
+    class GenericType<X, Y>
     {
-        void GenericMethod<T>()
-        {
-        }
+        void GenericMethod<T>() { }
     }
 }

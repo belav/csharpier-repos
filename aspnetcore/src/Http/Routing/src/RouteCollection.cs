@@ -22,8 +22,10 @@ public class RouteCollection : IRouteCollection
     private static readonly char[] UrlQueryDelimiters = new char[] { '?', '#' };
     private readonly List<IRouter> _routes = new List<IRouter>();
     private readonly List<IRouter> _unnamedRoutes = new List<IRouter>();
-    private readonly Dictionary<string, INamedRouter> _namedRoutes =
-                                new Dictionary<string, INamedRouter>(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, INamedRouter> _namedRoutes = new Dictionary<
+        string,
+        INamedRouter
+    >(StringComparer.OrdinalIgnoreCase);
 
     private RouteOptions? _options;
 
@@ -180,7 +182,10 @@ public class RouteCollection : IRouteCollection
                 queryString = queryString.ToLowerInvariant();
             }
 
-            if (_options.AppendTrailingSlash && !urlWithoutQueryString.EndsWith("/", StringComparison.Ordinal))
+            if (
+                _options.AppendTrailingSlash
+                && !urlWithoutQueryString.EndsWith("/", StringComparison.Ordinal)
+            )
             {
                 urlWithoutQueryString += "/";
             }

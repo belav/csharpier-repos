@@ -26,10 +26,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public TemporalContainedInQueryRootExpression(
             IEntityType entityType,
             DateTime from,
-            DateTime to)
-            : base(entityType, from, to)
-        {
-        }
+            DateTime to
+        ) : base(entityType, from, to) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,10 +39,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IAsyncQueryProvider queryProvider,
             IEntityType entityType,
             DateTime from,
-            DateTime to)
-            : base(queryProvider, entityType, from, to)
-        {
-        }
+            DateTime to
+        ) : base(queryProvider, entityType, from, to) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Expression DetachQueryProvider()
-            => new TemporalContainedInQueryRootExpression(EntityType, From, To);
+        public override Expression DetachQueryProvider() =>
+            new TemporalContainedInQueryRootExpression(EntityType, From, To);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,11 +57,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override QueryRootExpression UpdateEntityType(IEntityType entityType)
-            => entityType.ClrType != EntityType.ClrType
-                || entityType.Name != EntityType.Name
-                    ? throw new InvalidOperationException(CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName()))
-                    : new TemporalContainedInQueryRootExpression(entityType, From, To);
+        public override QueryRootExpression UpdateEntityType(IEntityType entityType) =>
+            entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
+                ? throw new InvalidOperationException(
+                      CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+                  )
+                : new TemporalContainedInQueryRootExpression(entityType, From, To);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,14 +82,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is TemporalContainedInQueryRootExpression queryRootExpression
-                    && Equals(queryRootExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is TemporalContainedInQueryRootExpression queryRootExpression
+                    && Equals(queryRootExpression)
+            );
 
-        private bool Equals(TemporalContainedInQueryRootExpression queryRootExpression)
-            => base.Equals(queryRootExpression);
+        private bool Equals(TemporalContainedInQueryRootExpression queryRootExpression) =>
+            base.Equals(queryRootExpression);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -100,7 +99,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

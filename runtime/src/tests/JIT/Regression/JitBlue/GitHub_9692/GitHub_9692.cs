@@ -29,7 +29,7 @@ namespace N
         {
             foreach (int[] innerValues in values)
             {
-                foreach(int value in innerValues)
+                foreach (int value in innerValues)
                 {
                     if (value == 5)
                     {
@@ -124,7 +124,10 @@ namespace N
                         return (node.next.value == 7);
                     }
                 }
-                catch (NullReferenceException) { return true; }
+                catch (NullReferenceException)
+                {
+                    return true;
+                }
                 node = node.next;
             }
             return (r < 13);
@@ -170,17 +173,17 @@ namespace N
         {
             CallSomeMethod();
 
-            do  // Loop 1
+            do // Loop 1
             {
                 CallSomeMethod(1);
-                goto StillInLoop;  // this goto will become goto-next when Call(2) gets moved
+                goto StillInLoop; // this goto will become goto-next when Call(2) gets moved
 
-                EarlyReturn:   // this should get moved out-of-line
+                EarlyReturn: // this should get moved out-of-line
                 CallSomeMethod(2);
                 return false;
 
-                StillInLoop:  // make this the top of a loop so assertion would fire if goto left
-                do  // Loop 2
+                StillInLoop: // make this the top of a loop so assertion would fire if goto left
+                do // Loop 2
                 {
                     n = ((n & 1) == 0 ? n / 2 : 3 * n + 1);
                 } while (n == 0);
@@ -189,7 +192,6 @@ namespace N
                 {
                     goto EarlyReturn;
                 }
-
             } while (n != 1);
 
             return true;
@@ -213,7 +215,7 @@ namespace N
                 n = ((n & 1) == 0 ? n / 2 : 3 * n + 1);
                 continue;
                 MovingLabel: // This gets moved out, just after its goto, requring cleanup
-                do  // Loop 2 (gets moved out of Loop 1)
+                do // Loop 2 (gets moved out of Loop 1)
                 {
                     CallSomeMethod(3);
                 } while (--j != 0);
@@ -232,7 +234,7 @@ namespace N
             do
             {
                 CallSomeMethod(2);
-                if (n == 1)  // There is an exit here but it's fall-through
+                if (n == 1) // There is an exit here but it's fall-through
                 {
                     CallSomeMethod(3);
                     break;
@@ -241,7 +243,7 @@ namespace N
                 // would make us think it is and we might hoist this big expression.
                 CallSomeMethod(k * j + k * k + j * j + k * l + j * l + l * l);
                 n = ((n & 1) == 0 ? n / 2 : 3 * n + 1);
-            } while (n > 1);  // This will be the only exit we see if we miss the other
+            } while (n > 1); // This will be the only exit we see if we miss the other
             CallSomeMethod(4);
             return true;
         }
@@ -256,12 +258,11 @@ namespace N
 
             try
             {
-
-                do  // Loop 1
+                do // Loop 1
                 {
                     CallSomeMethod(1);
 
-                    if (n == 5)  // The body of this `if` will get moved out of Loop 1
+                    if (n == 5) // The body of this `if` will get moved out of Loop 1
                     {
                         MaybeThrow(k);
                         result += 6;
@@ -307,7 +308,14 @@ namespace N
                 do // Loop 3
                 {
                     result += 13;
-                    try { CallSomeMethod(); } catch { goto Finish; } // EH here to trigger right path processing Loop 3
+                    try
+                    {
+                        CallSomeMethod();
+                    }
+                    catch
+                    {
+                        goto Finish;
+                    } // EH here to trigger right path processing Loop 3
                     if (k == 88)
                     {
                         CallSomeMethod(7);
@@ -322,14 +330,14 @@ namespace N
 
                 CallSomeMethod(9);
             }
-            catch {
+            catch
+            {
                 // Getting an exception here is expected when k == 21
             }
 
             Finish:
             return result;
         }
-
 
         // Test to make sure we can safely handle single-exit loops when the
         // algorithm to compact loops decrements the exit count from two back
@@ -350,7 +358,7 @@ namespace N
             {
                 CallSomeMethod(1);
 
-                if (n == 1)  // This is the first exit
+                if (n == 1) // This is the first exit
                 {
                     break;
                 }
@@ -361,8 +369,8 @@ namespace N
 
                 try
                 {
-                    if (n == 23)  // This is the second exit, but the exit path
-                    {             // cannot be moved out due to the try block.
+                    if (n == 23) // This is the second exit, but the exit path
+                    { // cannot be moved out due to the try block.
                         CallSomeMethod(3);
                         do
                         {
@@ -399,23 +407,23 @@ namespace N
             int target = 0;
             int result = 0;
 
-            do  // Outer loop starts here
+            do // Outer loop starts here
             {
-                result += box.Data;  // Hoisting this is illegal due to the write in the inner loop
+                result += box.Data; // Hoisting this is illegal due to the write in the inner loop
                 goto enterInnerLoop; // branch around 'continueOuterLoop'
 
-                continueOuterLoop:  // Target for lexically-backward exit from inner loop that
-                ++result;           // is not an exit from the outer loop
+                continueOuterLoop: // Target for lexically-backward exit from inner loop that
+                ++result; // is not an exit from the outer loop
                 continue;
 
                 enterInnerLoop:
                 --result;
-                do  // Inner loop starts here
+                do // Inner loop starts here
                 {
-                    if (target == 0)  // Conditional exit from inner loop that we'll want to move out
-                    {                 // but need to be careful not to move it out of the outer loop
-                        box.Data = value + 1;  // ValueNumbering needs to see that this store is part of
-                        target = value * n;    // the outer loop, else we'll think the load above is invariant.
+                    if (target == 0) // Conditional exit from inner loop that we'll want to move out
+                    { // but need to be careful not to move it out of the outer loop
+                        box.Data = value + 1; // ValueNumbering needs to see that this store is part of
+                        target = value * n; // the outer loop, else we'll think the load above is invariant.
                         goto continueOuterLoop;
                     }
                 } while (box.Data < 0);
@@ -430,9 +438,29 @@ namespace N
             int[] no5 = new int[] { 6, 7, 8, 9 };
             int[][] has5jagged = new int[][] { no5, has5 };
             int[][] no5jagged = new int[][] { no5, no5 };
-            Node faultHead = new Node { value = 6, next = new Node { value = 13, next = new Node { value = 5, next = null } } };
-            Node trueHead = new Node { value = 23, next = new Node { value = 5, next = new Node { value = 7, next = null } } };
-            Node falseHead = new Node { value = 5, next = new Node { value = 8, next = null } };
+            Node faultHead = new Node
+            {
+                value = 6,
+                next = new Node
+                {
+                    value = 13,
+                    next = new Node { value = 5, next = null }
+                }
+            };
+            Node trueHead = new Node
+            {
+                value = 23,
+                next = new Node
+                {
+                    value = 5,
+                    next = new Node { value = 7, next = null }
+                }
+            };
+            Node falseHead = new Node
+            {
+                value = 5,
+                next = new Node { value = 8, next = null }
+            };
 
             int result = 100; // 100 indicates success; increment for errors.
 
@@ -456,7 +484,9 @@ namespace N
             {
                 ++result;
             }
-            if (!CrossTry(trueHead, 8, 4) || CrossTry(falseHead, 8, 4) || !CrossTry(faultHead, 8, 4))
+            if (
+                !CrossTry(trueHead, 8, 4) || CrossTry(falseHead, 8, 4) || !CrossTry(faultHead, 8, 4)
+            )
             {
                 ++result;
             }
@@ -482,7 +512,12 @@ namespace N
             {
                 ++result;
             }
-            if (!InnerInfiniteLoop(8, 5, 3, 18) || InnerInfiniteLoop(16, -5, 2, 4) || InnerInfiniteLoop(23, 7, 6, 5) || !InnerInfiniteLoop(1, 0, 11, 22))
+            if (
+                !InnerInfiniteLoop(8, 5, 3, 18)
+                || InnerInfiniteLoop(16, -5, 2, 4)
+                || InnerInfiniteLoop(23, 7, 6, 5)
+                || !InnerInfiniteLoop(1, 0, 11, 22)
+            )
             {
                 ++result;
             }

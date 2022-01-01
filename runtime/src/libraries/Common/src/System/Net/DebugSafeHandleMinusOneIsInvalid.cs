@@ -16,13 +16,18 @@ namespace System.Net
 
         protected DebugSafeHandleMinusOneIsInvalid(bool ownsHandle) : base(ownsHandle)
         {
-            _trace = "WARNING! GC-ed  >>" + this.GetType().FullName + "<< (should be explicitly closed) \r\n";
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Creating SafeHandle");
+            _trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().FullName
+                + "<< (should be explicitly closed) \r\n";
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, "Creating SafeHandle");
         }
 
         ~DebugSafeHandleMinusOneIsInvalid()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, _trace);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, _trace);
         }
     }
 #endif // DEBUG

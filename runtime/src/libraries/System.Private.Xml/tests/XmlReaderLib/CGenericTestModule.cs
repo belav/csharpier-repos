@@ -15,41 +15,26 @@ namespace System.Xml.Tests
     ////////////////////////////////////////////////////////////////
     public class CGenericTestModule : CTestModule
     {
-        public CGenericTestModule()
-            : base()
-        {
-        }
+        public CGenericTestModule() : base() { }
 
         private string _TestData = null;
         public string TestData
         {
-            get
-            {
-                return _TestData;
-            }
+            get { return _TestData; }
         }
 
         private string _standardpath = null;
         public string StandardPath
         {
-            get
-            {
-                return _standardpath;
-            }
+            get { return _standardpath; }
         }
 
         private ReaderFactory _ReaderFactory = null;
 
         public ReaderFactory ReaderFactory
         {
-            get
-            {
-                return _ReaderFactory;
-            }
-            set
-            {
-                _ReaderFactory = value;
-            }
+            get { return _ReaderFactory; }
+            set { _ReaderFactory = value; }
         }
 
         private DateTime _StartTime;
@@ -85,25 +70,16 @@ namespace System.Xml.Tests
     ////////////////////////////////////////////////////////////////
     public class CGenericTestCase : CTestCase
     {
-        public CGenericTestCase()
-            : base()
-        {
-        }
+        public CGenericTestCase() : base() { }
 
         public string TestData
         {
-            get
-            {
-                return TestModule.TestData;
-            }
+            get { return TestModule.TestData; }
         }
 
         public string StandardPath
         {
-            get
-            {
-                return TestModule.StandardPath;
-            }
+            get { return TestModule.StandardPath; }
         }
 
         public virtual new CGenericTestModule TestModule

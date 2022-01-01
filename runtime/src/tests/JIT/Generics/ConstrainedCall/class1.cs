@@ -12,9 +12,18 @@ interface IncrDecr
 class MyInt : IncrDecr
 {
     int x;
-    public void Incr(int a) { x += a; }
-    public void Decr(int a) { x -= a; }
-    public int Val() { return x; }
+    public void Incr(int a)
+    {
+        x += a;
+    }
+    public void Decr(int a)
+    {
+        x -= a;
+    }
+    public int Val()
+    {
+        return x;
+    }
 }
 class MyCounter<T> where T : IncrDecr, new()
 {
@@ -108,4 +117,3 @@ class test
         return 100;
     }
 }
-

@@ -49,16 +49,18 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JArray items = JArray.Parse(@"[
+            JArray items = JArray.Parse(
+                @"[
               {
                 'Name': 'John Doe',
               },
               {
                 'Name': 'Jane Doe',
               }
-            ]");
+            ]"
+            );
 
-            // A true value for errorWhenNoMatch will result in an error if the queried value is missing 
+            // A true value for errorWhenNoMatch will result in an error if the queried value is missing
             string result;
             try
             {

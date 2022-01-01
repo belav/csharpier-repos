@@ -24,7 +24,8 @@ public class FormCollectionModelBinderProviderTest
 
         Assert.Equal(
             $"The '{typeof(FormCollectionModelBinder).FullName}' cannot bind to a model of type '{modelType.FullName}'. Change the model type to '{typeof(IFormCollection).FullName}' instead.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Theory]

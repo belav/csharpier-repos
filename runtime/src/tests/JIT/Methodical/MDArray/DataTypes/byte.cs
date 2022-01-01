@@ -7,36 +7,33 @@ using System;
 public struct VT
 {
     public byte[,] byte2darr;
-    public byte[, ,] byte3darr;
+    public byte[,,] byte3darr;
     public byte[,] byte2darr_b;
-    public byte[, ,] byte3darr_b;
+    public byte[,,] byte3darr_b;
 }
 
 public class CL
 {
     public byte[,] byte2darr = { { 0, 1 }, { 0, 0 } };
-    public byte[, ,] byte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public byte[,,] byte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     public byte[,] byte2darr_b = { { 0, 49 }, { 0, 0 } };
-    public byte[, ,] byte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public byte[,,] byte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 }
 
 public class byteMDArrTest
 {
-
     static byte[,] byte2darr = { { 0, 1 }, { 0, 0 } };
-    static byte[, ,] byte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static byte[,,] byte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     static byte[,] byte2darr_b = { { 0, 49 }, { 0, 0 } };
-    static byte[, ,] byte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
-
+    static byte[,,] byte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 
     static byte[][,] ja1 = new byte[2][,];
-    static byte[][, ,] ja2 = new byte[2][, ,];
+    static byte[][,,] ja2 = new byte[2][,,];
     static byte[][,] ja1_b = new byte[2][,];
-    static byte[][, ,] ja2_b = new byte[2][, ,];
+    static byte[][,,] ja2_b = new byte[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1169,5 +1166,4 @@ public class byteMDArrTest
 
 
     }
-
 };

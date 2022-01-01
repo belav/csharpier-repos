@@ -5,7 +5,6 @@ using System.Speech.Internal.SrgsParser;
 
 namespace System.Speech.Internal.GrammarBuilding
 {
-
     internal sealed class GrammarBuilderRuleRef : GrammarBuilderBase
     {
         #region Constructors
@@ -46,7 +45,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return new GrammarBuilderRuleRef(_uri);
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             Uri ruleUri = new(_uri, UriKind.RelativeOrAbsolute);
             return elementFactory.CreateRuleRef(parent, ruleUri, null, null);
@@ -58,10 +62,7 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal override string DebugSummary
         {
-            get
-            {
-                return "#" + _uri;
-            }
+            get { return "#" + _uri; }
         }
 
         #endregion

@@ -30,7 +30,8 @@ class X : B
 
     public override bool F(B b, int x)
     {
-        if (x == 0) return true;
+        if (x == 0)
+            return true;
         return b.H(b, x - 1);
     }
 

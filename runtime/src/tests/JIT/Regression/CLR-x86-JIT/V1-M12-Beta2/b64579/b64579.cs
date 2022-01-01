@@ -9,7 +9,10 @@ public class Padre
     {
         _x = _x + a;
     }
-    public void print() { Console.WriteLine(_x); }
+    public void print()
+    {
+        Console.WriteLine(_x);
+    }
 }
 
 public class Hijo : Padre

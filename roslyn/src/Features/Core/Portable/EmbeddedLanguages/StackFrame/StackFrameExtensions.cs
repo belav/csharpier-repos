@@ -15,8 +15,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// Creates an <see cref="ImmutableArray{StackFrameTrivia}"/> with a single value or empty 
         /// if the <paramref name="trivia"/> has no value
         /// </summary>
-        public static ImmutableArray<StackFrameTrivia> ToImmutableArray(this StackFrameTrivia? trivia)
-            => trivia.HasValue ? ImmutableArray.Create(trivia.Value) : ImmutableArray<StackFrameTrivia>.Empty;
+        public static ImmutableArray<StackFrameTrivia> ToImmutableArray(
+            this StackFrameTrivia? trivia
+        ) =>
+            trivia.HasValue
+                ? ImmutableArray.Create(trivia.Value)
+                : ImmutableArray<StackFrameTrivia>.Empty;
 
         /// <summary>
         /// Creates an <see cref="ImmutableArray{StackFrameTrivia}"/> with a single trivia item in it
@@ -25,7 +29,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// This is created for convenience so callers don't have to have different patterns between nullable and 
         /// non nullable calues
         /// </remarks>
-        public static ImmutableArray<StackFrameTrivia> ToImmutableArray(this StackFrameTrivia trivia)
-            => ImmutableArray.Create(trivia);
+        public static ImmutableArray<StackFrameTrivia> ToImmutableArray(
+            this StackFrameTrivia trivia
+        ) => ImmutableArray.Create(trivia);
     }
 }

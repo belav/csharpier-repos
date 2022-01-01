@@ -42,8 +42,12 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyRead(Encoding encoding)
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var rndGen = new Random(-55);
 

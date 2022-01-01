@@ -16,10 +16,10 @@ namespace System.Net.Test.Common
         public class Options
         {
             public const string DefaultResponseString =
-                "HTTP/1.1 200 OK\r\n" +
-                "Connection: close\r\n" +
-                "\r\n" +
-                "<html><head><title>Test Server</title></head><body><h1>TLS test server</h1></body></html>\r\n";
+                "HTTP/1.1 200 OK\r\n"
+                + "Connection: close\r\n"
+                + "\r\n"
+                + "<html><head><title>Test Server</title></head><body><h1>TLS test server</h1></body></html>\r\n";
 
             public IPAddress Address { get; set; } = IPAddress.Loopback;
 
@@ -79,7 +79,11 @@ namespace System.Net.Test.Common
             _listener.Start(_options.ListenBacklog);
             var ipEndpoint = (IPEndPoint)_listener.LocalEndpoint;
             _port = ipEndpoint.Port;
-            _log.WriteLine("[Server] waiting for connections ({0}:{1})", ipEndpoint.Address, ipEndpoint.Port);
+            _log.WriteLine(
+                "[Server] waiting for connections ({0}:{1})",
+                ipEndpoint.Address,
+                ipEndpoint.Port
+            );
         }
 
         public async Task AcceptHttpsClientAsync(Func<string, Task<string>> httpConversation = null)
@@ -90,7 +94,9 @@ namespace System.Net.Test.Common
             {
                 try
                 {
-                    using (Socket accepted = await _listener.AcceptSocketAsync().ConfigureAwait(false))
+                    using (
+                        Socket accepted = await _listener.AcceptSocketAsync().ConfigureAwait(false)
+                    )
                     {
                         _log.WriteLine("[Server] Client connected.");
 
@@ -101,15 +107,22 @@ namespace System.Net.Test.Common
                                 "[Server] Authenticating. Protocols = {0}, Certificate = {1}, ClientCertRequired = {2}",
                                 _options.AllowedProtocols,
                                 _options.ServerCertificate.Subject,
-                                _options.RequireClientAuthentication);
+                                _options.RequireClientAuthentication
+                            );
 
-                            await Stream.AuthenticateAsServerAsync(
-                                _options.ServerCertificate,
-                                _options.RequireClientAuthentication,
-                                _options.AllowedProtocols,
-                                false).ConfigureAwait(false);
+                            await Stream
+                                .AuthenticateAsServerAsync(
+                                    _options.ServerCertificate,
+                                    _options.RequireClientAuthentication,
+                                    _options.AllowedProtocols,
+                                    false
+                                )
+                                .ConfigureAwait(false);
 
-                            _log.WriteLine("[Server] Client authenticated: Protocol: {0}", Stream.SslProtocol);
+                            _log.WriteLine(
+                                "[Server] Client authenticated: Protocol: {0}",
+                                Stream.SslProtocol
+                            );
 
                             _log.WriteLine("[Server] Starting HTTP conversation.");
 
@@ -132,15 +145,25 @@ namespace System.Net.Test.Common
             }
         }
 
-        private bool RemoteCertificateCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        private bool RemoteCertificateCallback(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             if (!_options.RequireClientAuthentication)
             {
                 return true;
             }
 
-            _log.WriteLine("[Server] RemoteCertificateCallback (SslPolicyErrors = {0})", sslPolicyErrors.ToString());
-            if ((sslPolicyErrors | _options.IgnoreSslPolicyErrors) == _options.IgnoreSslPolicyErrors)
+            _log.WriteLine(
+                "[Server] RemoteCertificateCallback (SslPolicyErrors = {0})",
+                sslPolicyErrors.ToString()
+            );
+            if (
+                (sslPolicyErrors | _options.IgnoreSslPolicyErrors) == _options.IgnoreSslPolicyErrors
+            )
             {
                 return true;
             }
@@ -153,7 +176,9 @@ namespace System.Net.Test.Common
             while (true)
             {
                 var requestBuffer = new byte[2048];
-                int bytesRead = await Stream.ReadAsync(requestBuffer, 0, requestBuffer.Length).ConfigureAwait(false);
+                int bytesRead = await Stream
+                    .ReadAsync(requestBuffer, 0, requestBuffer.Length)
+                    .ConfigureAwait(false);
 
                 string requestString = Encoding.UTF8.GetString(requestBuffer, 0, bytesRead);
 
@@ -171,7 +196,9 @@ namespace System.Net.Test.Common
                 {
                     byte[] responseBuffer = Encoding.UTF8.GetBytes(responseString);
 
-                    await Stream.WriteAsync(responseBuffer, 0, responseBuffer.Length).ConfigureAwait(false);
+                    await Stream
+                        .WriteAsync(responseBuffer, 0, responseBuffer.Length)
+                        .ConfigureAwait(false);
                     _log.WriteLine("[Server] Replied with {0} bytes.", responseBuffer.Length);
                     return true;
                 }

@@ -70,13 +70,16 @@ public class FilterCollectionTest
         // Arrange
         var collection = new FilterCollection();
 
-        var expectedMessage = $"The type '{typeof(NonFilter).FullName}' must derive from " + $"'{typeof(IFilterMetadata).FullName}'.";
+        var expectedMessage =
+            $"The type '{typeof(NonFilter).FullName}' must derive from "
+            + $"'{typeof(IFilterMetadata).FullName}'.";
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
             () => collection.Add(typeof(NonFilter)),
             "filterType",
-            expectedMessage);
+            expectedMessage
+        );
     }
 
     [Fact]
@@ -141,22 +144,23 @@ public class FilterCollectionTest
         // Arrange
         var collection = new FilterCollection();
 
-        var expectedMessage = $"The type '{typeof(NonFilter).FullName}' must derive from '{typeof(IFilterMetadata).FullName}'.";
+        var expectedMessage =
+            $"The type '{typeof(NonFilter).FullName}' must derive from '{typeof(IFilterMetadata).FullName}'.";
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
-            () => { collection.AddService(typeof(NonFilter)); },
+            () =>
+            {
+                collection.AddService(typeof(NonFilter));
+            },
             "filterType",
-            expectedMessage);
+            expectedMessage
+        );
     }
 
     private class MyFilter : IFilterMetadata, IOrderedFilter
     {
-        public int Order
-        {
-            get;
-            set;
-        }
+        public int Order { get; set; }
     }
 
     private class NonFilter

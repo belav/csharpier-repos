@@ -18,11 +18,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
     internal class ListenerContext
     {
         // Single reader, single writer queue since all writes happen from the uv thread and reads happen sequentially
-        private readonly Channel<LibuvConnection> _acceptQueue = Channel.CreateUnbounded<LibuvConnection>(new UnboundedChannelOptions
-        {
-            SingleReader = true,
-            SingleWriter = true
-        });
+        private readonly Channel<LibuvConnection> _acceptQueue =
+            Channel.CreateUnbounded<LibuvConnection>(
+                new UnboundedChannelOptions { SingleReader = true, SingleWriter = true }
+            );
 
         public ListenerContext(LibuvTransportContext transportContext)
         {
@@ -39,7 +38,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         public PipeOptions OutputOptions { get; set; }
 
-        public async ValueTask<LibuvConnection> AcceptAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<LibuvConnection> AcceptAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             while (await _acceptQueue.Reader.WaitToReadAsync())
             {
@@ -110,7 +111,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
                 var options = TransportContext.Options;
 #pragma warning disable CS0618
-                var connection = new LibuvConnection(socket, TransportContext.Log, Thread, remoteEndPoint, localEndPoint, InputOptions, OutputOptions, options.MaxReadBufferSize, options.MaxWriteBufferSize);
+                var connection = new LibuvConnection(
+                    socket,
+                    TransportContext.Log,
+                    Thread,
+                    remoteEndPoint,
+                    localEndPoint,
+                    InputOptions,
+                    OutputOptions,
+                    options.MaxReadBufferSize,
+                    options.MaxWriteBufferSize
+                );
 #pragma warning restore CS0618
                 connection.Start();
 
@@ -119,7 +130,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             }
             catch (Exception ex)
             {
-                TransportContext.Log.LogCritical(ex, $"Unexpected exception in {nameof(ListenerContext)}.{nameof(HandleConnection)}.");
+                TransportContext.Log.LogCritical(
+                    ex,
+                    $"Unexpected exception in {nameof(ListenerContext)}.{nameof(HandleConnection)}."
+                );
             }
         }
 
@@ -172,7 +186,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             switch (fileHandleEndPoint.FileHandleType)
             {
                 case FileHandleType.Auto:
-                    throw new InvalidOperationException("Cannot accept on a non-specific file handle, listen should be performed first.");
+                    throw new InvalidOperationException(
+                        "Cannot accept on a non-specific file handle, listen should be performed first."
+                    );
                 case FileHandleType.Tcp:
                     return AcceptTcp();
                 case FileHandleType.Pipe:

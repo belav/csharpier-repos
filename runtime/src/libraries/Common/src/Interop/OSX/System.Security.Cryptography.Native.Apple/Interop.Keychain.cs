@@ -18,53 +18,64 @@ internal static partial class Interop
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainItemCopyKeychain(
             IntPtr item,
-            out SafeKeychainHandle keychain);
+            out SafeKeychainHandle keychain
+        );
 
         [DllImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_SecKeychainCreate")]
         private static extern unsafe int AppleCryptoNative_SecKeychainCreateTemporary(
             string path,
             int utf8PassphraseLength,
             byte* utf8Passphrase,
-            out SafeTemporaryKeychainHandle keychain);
+            out SafeTemporaryKeychainHandle keychain
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainCreate(
             string path,
             int utf8PassphraseLength,
             byte[] utf8Passphrase,
-            out SafeKeychainHandle keychain);
+            out SafeKeychainHandle keychain
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainDelete(IntPtr keychain);
 
         [DllImport(Libraries.AppleCryptoNative)]
-        private static extern int AppleCryptoNative_SecKeychainCopyDefault(out SafeKeychainHandle keychain);
+        private static extern int AppleCryptoNative_SecKeychainCopyDefault(
+            out SafeKeychainHandle keychain
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainOpen(
             string keychainPath,
-            out SafeKeychainHandle keychain);
+            out SafeKeychainHandle keychain
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainUnlock(
             SafeKeychainHandle keychain,
             int utf8PassphraseLength,
-            byte[] utf8Passphrase);
+            byte[] utf8Passphrase
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
-        private static extern int AppleCryptoNative_SetKeychainNeverLock(SafeKeychainHandle keychain);
+        private static extern int AppleCryptoNative_SetKeychainNeverLock(
+            SafeKeychainHandle keychain
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainEnumerateCerts(
             SafeKeychainHandle keychain,
             out SafeCFArrayHandle matches,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainEnumerateIdentities(
             SafeKeychainHandle keychain,
             out SafeCFArrayHandle matches,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
         internal static SafeKeychainHandle SecKeychainItemCopyKeychain(SafeKeychainItemHandle item)
         {
@@ -137,7 +148,11 @@ internal static partial class Interop
         {
             SafeCFArrayHandle matches;
             int osStatus;
-            int result = AppleCryptoNative_SecKeychainEnumerateCerts(keychainHandle, out matches, out osStatus);
+            int result = AppleCryptoNative_SecKeychainEnumerateCerts(
+                keychainHandle,
+                out matches,
+                out osStatus
+            );
 
             if (result == 1)
             {
@@ -149,15 +164,23 @@ internal static partial class Interop
             if (result == 0)
                 throw CreateExceptionForOSStatus(osStatus);
 
-            Debug.Fail($"Unexpected result from AppleCryptoNative_SecKeychainEnumerateCerts: {result}");
+            Debug.Fail(
+                $"Unexpected result from AppleCryptoNative_SecKeychainEnumerateCerts: {result}"
+            );
             throw new CryptographicException();
         }
 
-        internal static SafeCFArrayHandle KeychainEnumerateIdentities(SafeKeychainHandle keychainHandle)
+        internal static SafeCFArrayHandle KeychainEnumerateIdentities(
+            SafeKeychainHandle keychainHandle
+        )
         {
             SafeCFArrayHandle matches;
             int osStatus;
-            int result = AppleCryptoNative_SecKeychainEnumerateIdentities(keychainHandle, out matches, out osStatus);
+            int result = AppleCryptoNative_SecKeychainEnumerateIdentities(
+                keychainHandle,
+                out matches,
+                out osStatus
+            );
 
             if (result == 1)
             {
@@ -169,11 +192,16 @@ internal static partial class Interop
             if (result == 0)
                 throw CreateExceptionForOSStatus(osStatus);
 
-            Debug.Fail($"Unexpected result from AppleCryptoNative_SecKeychainEnumerateCerts: {result}");
+            Debug.Fail(
+                $"Unexpected result from AppleCryptoNative_SecKeychainEnumerateCerts: {result}"
+            );
             throw new CryptographicException();
         }
 
-        internal static SafeKeychainHandle CreateOrOpenKeychain(string keychainPath, bool createAllowed)
+        internal static SafeKeychainHandle CreateOrOpenKeychain(
+            string keychainPath,
+            bool createAllowed
+        )
         {
             const int errSecAuthFailed = -25293;
             const int errSecDuplicateKeychain = -25296;
@@ -188,7 +216,8 @@ internal static partial class Interop
                     keychainPath,
                     0,
                     Array.Empty<byte>(),
-                    out keychain);
+                    out keychain
+                );
 
                 if (osStatus == 0)
                 {
@@ -224,7 +253,8 @@ internal static partial class Interop
             const int randomSize = 256;
             string tmpKeychainPath = Path.Combine(
                 Path.GetTempPath(),
-                Guid.NewGuid().ToString("N") + ".keychain");
+                Guid.NewGuid().ToString("N") + ".keychain"
+            );
 
             // Use a random password so that if a keychain is abandoned it isn't recoverable.
             // We use stack to minimize lingering
@@ -232,15 +262,15 @@ internal static partial class Interop
             RandomNumberGenerator.Fill(random);
 
             // Create hex-like UTF8 string.
-            Span<byte> utf8Passphrase =  stackalloc byte[randomSize * 2 +1];
+            Span<byte> utf8Passphrase = stackalloc byte[randomSize * 2 + 1];
             utf8Passphrase[randomSize * 2] = 0; // null termination for C string.
 
             for (int i = 0; i < random.Length; i++)
             {
                 // Instead of true hexadecimal, we simply take lower and upper 4 bits and we offset them from ASCII 'A'
                 // to get printable form. We dont use managed string to avoid lingering copies.
-                utf8Passphrase[i*2] = (byte)((random[i] & 0x0F) + 65);
-                utf8Passphrase[i*2 + 1] = (byte)((random[i] >> 4) & 0x0F + 65);
+                utf8Passphrase[i * 2] = (byte)((random[i] & 0x0F) + 65);
+                utf8Passphrase[i * 2 + 1] = (byte)((random[i] >> 4) & 0x0F + 65);
             }
 
             // clear the binary bits.
@@ -255,7 +285,8 @@ internal static partial class Interop
                     tmpKeychainPath,
                     utf8Passphrase.Length,
                     ptr,
-                    out keychain);
+                    out keychain
+                );
             }
 
             CryptographicOperations.ZeroMemory(utf8Passphrase);
@@ -275,7 +306,7 @@ internal static partial class Interop
             return keychain;
         }
 
-        internal static void SecKeychainDelete(IntPtr handle, bool throwOnError=true)
+        internal static void SecKeychainDelete(IntPtr handle, bool throwOnError = true)
         {
             int osStatus = AppleCryptoNative_SecKeychainDelete(handle);
 
@@ -291,10 +322,7 @@ namespace System.Security.Cryptography.Apple
 {
     internal class SafeKeychainItemHandle : SafeHandle
     {
-        public SafeKeychainItemHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeKeychainItemHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -309,15 +337,9 @@ namespace System.Security.Cryptography.Apple
 
     internal class SafeKeychainHandle : SafeHandle
     {
-        public SafeKeychainHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeKeychainHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
-        internal SafeKeychainHandle(IntPtr handle)
-            : base(handle, ownsHandle: true)
-        {
-        }
+        internal SafeKeychainHandle(IntPtr handle) : base(handle, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -334,9 +356,7 @@ namespace System.Security.Cryptography.Apple
         private static readonly Dictionary<IntPtr, SafeTemporaryKeychainHandle> s_lookup =
             new Dictionary<IntPtr, SafeTemporaryKeychainHandle>();
 
-        internal SafeTemporaryKeychainHandle()
-        {
-        }
+        internal SafeTemporaryKeychainHandle() { }
 
         protected override bool ReleaseHandle()
         {
@@ -351,7 +371,10 @@ namespace System.Security.Cryptography.Apple
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && SafeHandleCache<SafeTemporaryKeychainHandle>.IsCachedInvalidHandle(this))
+            if (
+                disposing
+                && SafeHandleCache<SafeTemporaryKeychainHandle>.IsCachedInvalidHandle(this)
+            )
             {
                 return;
             }
@@ -360,7 +383,9 @@ namespace System.Security.Cryptography.Apple
         }
 
         public static SafeTemporaryKeychainHandle InvalidHandle =>
-            SafeHandleCache<SafeTemporaryKeychainHandle>.GetInvalidHandle(() => new SafeTemporaryKeychainHandle());
+            SafeHandleCache<SafeTemporaryKeychainHandle>.GetInvalidHandle(
+                () => new SafeTemporaryKeychainHandle()
+            );
 
         internal static void TrackKeychain(SafeTemporaryKeychainHandle toTrack)
         {
@@ -382,7 +407,11 @@ namespace System.Security.Cryptography.Apple
             if (keychainItem.IsInvalid)
                 return;
 
-            using (SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(keychainItem))
+            using (
+                SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(
+                    keychainItem
+                )
+            )
             {
                 if (keychain.IsInvalid)
                 {
@@ -404,7 +433,11 @@ namespace System.Security.Cryptography.Apple
 
         internal static void UntrackItem(IntPtr keychainItem)
         {
-            using (SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(keychainItem))
+            using (
+                SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(
+                    keychainItem
+                )
+            )
             {
                 if (keychain.IsInvalid)
                 {

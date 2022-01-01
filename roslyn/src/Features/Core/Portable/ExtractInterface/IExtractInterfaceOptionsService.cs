@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             List<string> conflictingTypeNames,
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
-            string languageName);
+            string languageName
+        );
     }
 }

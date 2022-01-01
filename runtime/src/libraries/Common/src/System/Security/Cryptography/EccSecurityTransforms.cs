@@ -59,7 +59,11 @@ namespace System.Security.Cryptography
                     break;
                 default:
                     throw new PlatformNotSupportedException(
-                        SR.Format(SR.Cryptography_CurveNotSupported, curve.Oid.Value ?? curve.Oid.FriendlyName));
+                        SR.Format(
+                            SR.Cryptography_CurveNotSupported,
+                            curve.Oid.Value ?? curve.Oid.FriendlyName
+                        )
+                    );
             }
 
             GenerateKey(keySize);
@@ -127,7 +131,8 @@ namespace System.Security.Cryptography
 
             bool gotKeyBlob = Interop.AppleCrypto.TrySecKeyCopyExternalRepresentation(
                 includePrivateParameters ? keys.PrivateKey! : keys.PublicKey,
-                out byte[] keyBlob);
+                out byte[] keyBlob
+            );
 
             if (!gotKeyBlob)
             {
@@ -139,13 +144,20 @@ namespace System.Security.Cryptography
                 AsymmetricAlgorithmHelpers.DecodeFromUncompressedAnsiX963Key(
                     keyBlob,
                     includePrivateParameters,
-                    out ECParameters key);
+                    out ECParameters key
+                );
 
                 switch (GetKeySize(keys))
                 {
-                    case 256: key.Curve = ECCurve.NamedCurves.nistP256; break;
-                    case 384: key.Curve = ECCurve.NamedCurves.nistP384; break;
-                    case 521: key.Curve = ECCurve.NamedCurves.nistP521; break;
+                    case 256:
+                        key.Curve = ECCurve.NamedCurves.nistP256;
+                        break;
+                    case 384:
+                        key.Curve = ECCurve.NamedCurves.nistP384;
+                        break;
+                    case 521:
+                        key.Curve = ECCurve.NamedCurves.nistP521;
+                        break;
                     default:
                         Debug.Fail("Unsupported curve");
                         throw new CryptographicException();
@@ -177,7 +189,11 @@ namespace System.Security.Cryptography
                     break;
                 default:
                     throw new PlatformNotSupportedException(
-                        SR.Format(SR.Cryptography_CurveNotSupported, parameters.Curve.Oid.Value ?? parameters.Curve.Oid.FriendlyName));
+                        SR.Format(
+                            SR.Cryptography_CurveNotSupported,
+                            parameters.Curve.Oid.Value ?? parameters.Curve.Oid.FriendlyName
+                        )
+                    );
             }
 
             if (parameters.Q.X == null || parameters.Q.Y == null)
@@ -234,12 +250,14 @@ namespace System.Security.Cryptography
                     parameters.Q.X,
                     parameters.Q.Y,
                     parameters.D,
-                    dataKey);
+                    dataKey
+                );
 
                 return Interop.AppleCrypto.CreateDataKey(
                     dataKey,
                     Interop.AppleCrypto.PAL_KeyAlgorithm.EC,
-                    isPublic: parameters.D == null);
+                    isPublic: parameters.D == null
+                );
             }
             finally
             {

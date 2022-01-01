@@ -5,9 +5,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Management
 {
-
-    [ComImport, Guid("87A5AD68-A38A-43ef-ACA9-EFE910E5D24C"),
-     InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport,
+        Guid("87A5AD68-A38A-43ef-ACA9-EFE910E5D24C"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface IWmiEventSource
     {
         void Indicate(IntPtr pIWbemClassObject);
@@ -29,7 +31,11 @@ namespace System.Management
             if (IntPtr.Zero != pErrorInfo && new IntPtr(-1) != pErrorInfo)
             {
                 IntPtr pIWbemClassObject;
-                Marshal.QueryInterface(pErrorInfo, ref IWbemClassObjectFreeThreaded.IID_IWbemClassObject, out pIWbemClassObject);
+                Marshal.QueryInterface(
+                    pErrorInfo,
+                    ref IWbemClassObjectFreeThreaded.IID_IWbemClassObject,
+                    out pIWbemClassObject
+                );
                 Marshal.Release(pErrorInfo);
 
                 // The IWbemClassObjectFreeThreaded instance will own reference count on pIWbemClassObject
@@ -59,5 +65,4 @@ namespace System.Management
 
         uint GetHelpContext();
     }
-
 }

@@ -10,14 +10,11 @@ namespace Roslyn.Utilities
     /// A simple collection of values held as weak references. Objects in the set are compared by reference equality.
     /// </summary>
     /// <typeparam name="T">The type of object stored in the set.</typeparam>
-    internal sealed class WeakSet<T>
-        where T : class?
+    internal sealed class WeakSet<T> where T : class?
     {
         private readonly HashSet<ReferenceHolder<T>> _values = new();
 
-        public WeakSet()
-        {
-        }
+        public WeakSet() { }
 
         public bool Add(T value)
         {

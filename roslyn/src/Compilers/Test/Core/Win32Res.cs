@@ -26,7 +26,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern uint SizeofResource(IntPtr hModule, IntPtr hResInfo);
 
-        public static IntPtr GetResource(IntPtr lib, string resourceId, string resourceType, out uint size)
+        public static IntPtr GetResource(
+            IntPtr lib,
+            string resourceId,
+            string resourceType,
+            out uint size
+        )
         {
             IntPtr hrsrc = FindResource(lib, resourceId, resourceType);
             if (hrsrc == IntPtr.Zero)
@@ -44,7 +49,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             return manifest;
         }
 
-        private static string GetManifestString(IntPtr ptr, int offset, int length, Encoding encoding)
+        private static string GetManifestString(
+            IntPtr ptr,
+            int offset,
+            int length,
+            Encoding encoding
+        )
         {
             byte[] fullmanif = new byte[length];
             Marshal.Copy((IntPtr)(ptr.ToInt64() + offset), fullmanif, 0, length);
@@ -114,8 +124,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             do
             {
                 cbuffer[i] = reader.ReadChar();
-            }
-            while (cbuffer[i] != '\0' && ++i < cbuffer.Length);
+            } while (cbuffer[i] != '\0' && ++i < cbuffer.Length);
 
             return new string(cbuffer).TrimEnd(new char[] { '\0' });
         }
@@ -126,16 +135,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string s;
 
             us = reader.ReadUInt16();
-            us = reader.ReadUInt16();    //0
-            us = reader.ReadUInt16();    //1
-            s = ReadString(reader);            //"Translation"
+            us = reader.ReadUInt16(); //0
+            us = reader.ReadUInt16(); //1
+            s = ReadString(reader); //"Translation"
             reader.BaseStream.Position = (reader.BaseStream.Position + 3) & ~3; //round up to 32bit boundary
 
-            us = reader.ReadUInt16();    //langId; MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL)) = 0
-            us = reader.ReadUInt16();    //codepage; 1200 = CP_WINUNICODE
+            us = reader.ReadUInt16(); //langId; MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL)) = 0
+            us = reader.ReadUInt16(); //codepage; 1200 = CP_WINUNICODE
         }
 
-        public static IEnumerable<Tuple<string, string>> ReadStringFileInfo(BinaryReader reader, int sizeTotalStringFileInfo)
+        public static IEnumerable<Tuple<string, string>> ReadStringFileInfo(
+            BinaryReader reader,
+            int sizeTotalStringFileInfo
+        )
         {
             var result = new List<Tuple<string, string>>();
             int sizeConsumed = 2 + 2 + 2 + (16 * 2);
@@ -143,13 +155,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             string s;
 
-            reader.ReadUInt16();   //length
-            reader.ReadUInt16();    //0
-            reader.ReadUInt16();    //1
-            s = ReadString(reader);    //"12345678"
+            reader.ReadUInt16(); //length
+            reader.ReadUInt16(); //0
+            reader.ReadUInt16(); //1
+            s = ReadString(reader); //"12345678"
             reader.BaseStream.Position = (reader.BaseStream.Position + 3) & ~3; //round up to 32bit boundary
 
-            while (reader.BaseStream.Position - startPosition + sizeConsumed < sizeTotalStringFileInfo)
+            while (
+                reader.BaseStream.Position - startPosition + sizeConsumed < sizeTotalStringFileInfo
+            )
             {
                 result.Add(GetVerStringPair(reader));
                 reader.BaseStream.Position = (reader.BaseStream.Position + 3) & ~3; //round up to 32bit boundary
@@ -183,10 +197,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 reader.BaseStream.Seek(0x8, SeekOrigin.Current);
 
                 xw.WriteStartElement("VS_FIXEDFILEINFO");
-                xw.WriteAttributeString("FileVersionMS", String.Format("{0:x8}", reader.ReadUInt32()));
-                xw.WriteAttributeString("FileVersionLS", String.Format("{0:x8}", reader.ReadUInt32()));
-                xw.WriteAttributeString("ProductVersionMS", String.Format("{0:x8}", reader.ReadUInt32()));
-                xw.WriteAttributeString("ProductVersionLS", String.Format("{0:x8}", reader.ReadUInt32()));
+                xw.WriteAttributeString(
+                    "FileVersionMS",
+                    String.Format("{0:x8}", reader.ReadUInt32())
+                );
+                xw.WriteAttributeString(
+                    "FileVersionLS",
+                    String.Format("{0:x8}", reader.ReadUInt32())
+                );
+                xw.WriteAttributeString(
+                    "ProductVersionMS",
+                    String.Format("{0:x8}", reader.ReadUInt32())
+                );
+                xw.WriteAttributeString(
+                    "ProductVersionLS",
+                    String.Format("{0:x8}", reader.ReadUInt32())
+                );
                 xw.WriteEndElement();
 
                 long l;
@@ -206,8 +232,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     string s;
 
                     ushort length = reader.ReadUInt16();
-                    us = reader.ReadUInt16();    //0
-                    us = reader.ReadUInt16();    //1
+                    us = reader.ReadUInt16(); //0
+                    us = reader.ReadUInt16(); //1
                     //must decide if this is a VarFileInfo or a StringFileInfo
 
                     s = ReadString(reader);
@@ -223,7 +249,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         {
                             xw.WriteStartElement("KeyValuePair");
                             xw.WriteAttributeString("Key", pair.Item1.TrimEnd(new char[] { '\0' }));
-                            xw.WriteAttributeString("Value", pair.Item2.TrimEnd(new char[] { '\0' }));
+                            xw.WriteAttributeString(
+                                "Value",
+                                pair.Item2.TrimEnd(new char[] { '\0' })
+                            );
                             xw.WriteEndElement();
                         }
                     }
@@ -242,10 +271,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             System.Diagnostics.Debug.Assert((reader.BaseStream.Position & 3) == 0);
             long startPos = reader.BaseStream.Position;
 
-            int length = reader.ReadUInt16();       //the whole structure in bytes, does not include padding
-                                                    //at the end to bring the structure to a dword boundary.
+            int length = reader.ReadUInt16(); //the whole structure in bytes, does not include padding
+            //at the end to bring the structure to a dword boundary.
 
-            int valueLength = reader.ReadUInt16();  //in words
+            int valueLength = reader.ReadUInt16(); //in words
 
             System.Diagnostics.Debug.Assert(length > valueLength);
 

@@ -15,13 +15,17 @@ public class MvcViewDocumentClassifierPass : DocumentClassifierPassBase
 
     protected override string DocumentKind => MvcViewDocumentKind;
 
-    protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode) => true;
+    protected override bool IsMatch(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    ) => true;
 
     protected override void OnDocumentStructureCreated(
         RazorCodeDocument codeDocument,
         NamespaceDeclarationIntermediateNode @namespace,
         ClassDeclarationIntermediateNode @class,
-        MethodDeclarationIntermediateNode method)
+        MethodDeclarationIntermediateNode method
+    )
     {
         base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 

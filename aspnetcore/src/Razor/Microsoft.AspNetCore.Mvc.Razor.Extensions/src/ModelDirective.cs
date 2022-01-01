@@ -16,10 +16,14 @@ public static class ModelDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddTypeToken(RazorExtensionsResources.ModelDirective_TypeToken_Name, RazorExtensionsResources.ModelDirective_TypeToken_Description);
+            builder.AddTypeToken(
+                RazorExtensionsResources.ModelDirective_TypeToken_Name,
+                RazorExtensionsResources.ModelDirective_TypeToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
             builder.Description = RazorExtensionsResources.ModelDirective_Description;
-        });
+        }
+    );
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
@@ -74,10 +78,15 @@ public static class ModelDirective
         // Runs after the @inherits directive
         public override int Order => 5;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
-            if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
-               documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind)
+            if (
+                documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind
+                && documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind
+            )
             {
                 // Not a MVC file. Skip.
                 return;
@@ -110,7 +119,8 @@ public static class ModelDirective
 
         public ClassDeclarationIntermediateNode Class { get; private set; }
 
-        public IList<DirectiveIntermediateNode> ModelDirectives { get; } = new List<DirectiveIntermediateNode>();
+        public IList<DirectiveIntermediateNode> ModelDirectives { get; } =
+            new List<DirectiveIntermediateNode>();
 
         public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
         {

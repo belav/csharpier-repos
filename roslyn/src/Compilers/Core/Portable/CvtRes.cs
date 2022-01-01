@@ -23,16 +23,16 @@ namespace Microsoft.CodeAnalysis
         internal RESOURCE_STRING? pstringType;
         internal RESOURCE_STRING? pstringName;
 
-        internal DWORD DataSize;               // size of data without header
-        internal DWORD HeaderSize;     // Length of the header
+        internal DWORD DataSize; // size of data without header
+        internal DWORD HeaderSize; // Length of the header
         // [Ordinal or Name TYPE]
         // [Ordinal or Name NAME]
-        internal DWORD DataVersion;    // version of data struct
-        internal WORD MemoryFlags;    // state of the resource
-        internal WORD LanguageId;     // Unicode support for NLS
-        internal DWORD Version;        // Version of the resource data
-        internal DWORD Characteristics;        // Characteristics of the data
-        internal byte[]? data;       //data
+        internal DWORD DataVersion; // version of data struct
+        internal WORD MemoryFlags; // state of the resource
+        internal WORD LanguageId; // Unicode support for NLS
+        internal DWORD Version; // Version of the resource data
+        internal DWORD Characteristics; // Characteristics of the data
+        internal byte[]? data; //data
     };
 
     internal class RESOURCE_STRING
@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis
 
             //RC.EXE output starts with a resource that contains no data.
             if (initial32Bits != 0)
-                throw new ResourceException("Stream does not begin with a null resource and is not in .RES format.");
+                throw new ResourceException(
+                    "Stream does not begin with a null resource and is not in .RES format."
+                );
 
             stream.Position = startPos;
 
@@ -75,7 +77,12 @@ namespace Microsoft.CodeAnalysis
 
                 if (cbHdr < 2 * sizeof(DWORD))
                 {
-                    throw new ResourceException(String.Format("Resource header beginning at offset 0x{0:x} is malformed.", stream.Position - 8));
+                    throw new ResourceException(
+                        String.Format(
+                            "Resource header beginning at offset 0x{0:x} is malformed.",
+                            stream.Position - 8
+                        )
+                    );
                     //ErrorPrint(ERR_FILECORRUPT, szFilename);
                 }
 
@@ -87,11 +94,7 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                var pAdditional = new RESOURCE()
-                {
-                    HeaderSize = cbHdr,
-                    DataSize = cbData
-                };
+                var pAdditional = new RESOURCE() { HeaderSize = cbHdr, DataSize = cbData };
 
                 // Read the TYPE and NAME
 
@@ -113,7 +116,10 @@ namespace Microsoft.CodeAnalysis
 
                 stream.Position = (stream.Position + 3) & ~3;
 
-                if (pAdditional.pstringType.theString == null && (pAdditional.pstringType.Ordinal == (WORD)RT_DLGINCLUDE))
+                if (
+                    pAdditional.pstringType.theString == null
+                    && (pAdditional.pstringType.Ordinal == (WORD)RT_DLGINCLUDE)
+                )
                 {
                     // Ignore DLGINCLUDE resources
                     continue;
@@ -156,9 +162,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     sb.Append(curChar);
                     curChar = fhIn.ReadChar();
-                }
-                while (curChar != 0);
-
+                } while (curChar != 0);
 
                 pstring.theString = sb.ToString();
             }
@@ -204,7 +208,9 @@ namespace Microsoft.CodeAnalysis
 
             //This will be the final resource section bytes without a header. It contains the concatenation
             //of .rsrc$02 on to the end of .rsrc$01.
-            var imageResourceSectionBytes = new byte[checked(rsrc1.SizeOfRawData + rsrc2.SizeOfRawData)];
+            var imageResourceSectionBytes = new byte[
+                checked(rsrc1.SizeOfRawData + rsrc2.SizeOfRawData)
+            ];
 
             stream.Seek(rsrc1.PointerToRawData, SeekOrigin.Begin);
             stream.TryReadAll(imageResourceSectionBytes, 0, rsrc1.SizeOfRawData); // ConfirmSectionValues ensured that data are available
@@ -215,10 +221,14 @@ namespace Microsoft.CodeAnalysis
 
             try
             {
-                var relocLastAddress = checked(rsrc1.PointerToRelocations + (rsrc1.NumberOfRelocations * SizeOfRelocationEntry));
+                var relocLastAddress = checked(
+                    rsrc1.PointerToRelocations + (rsrc1.NumberOfRelocations * SizeOfRelocationEntry)
+                );
 
                 if (relocLastAddress > stream.Length)
-                    throw new ResourceException(CodeAnalysisResources.CoffResourceInvalidRelocation);
+                    throw new ResourceException(
+                        CodeAnalysisResources.CoffResourceInvalidRelocation
+                    );
             }
             catch (OverflowException)
             {
@@ -228,7 +238,7 @@ namespace Microsoft.CodeAnalysis
             //.rsrc$01 contains the directory tree. .rsrc$02 contains the raw resource data.
             //.rsrc$01 has references to spots in .rsrc$02. Those spots are expressed as relocations.
             //These will need to be fixed up when the RVA of the .rsrc section in the final image is known.
-            var relocationOffsets = new uint[rsrc1.NumberOfRelocations];    //offsets into .rsrc$01
+            var relocationOffsets = new uint[rsrc1.NumberOfRelocations]; //offsets into .rsrc$01
 
             var relocationSymbolIndices = new uint[rsrc1.NumberOfRelocations];
 
@@ -250,7 +260,10 @@ namespace Microsoft.CodeAnalysis
 
             try
             {
-                var lastSymAddress = checked(peHeaders.CoffHeader.PointerToSymbolTable + peHeaders.CoffHeader.NumberOfSymbols * ImageSizeOfSymbol);
+                var lastSymAddress = checked(
+                    peHeaders.CoffHeader.PointerToSymbolTable
+                    + peHeaders.CoffHeader.NumberOfSymbols * ImageSizeOfSymbol
+                );
 
                 if (lastSymAddress > stream.Length)
                     throw new ResourceException(CodeAnalysisResources.CoffResourceInvalidSymbol);
@@ -261,14 +274,18 @@ namespace Microsoft.CodeAnalysis
             }
 
             var outputStream = new MemoryStream(imageResourceSectionBytes);
-            var writer = new BinaryWriter(outputStream);  //encoding shouldn't matter. There are no strings being written.
+            var writer = new BinaryWriter(outputStream); //encoding shouldn't matter. There are no strings being written.
 
             for (int i = 0; i < relocationSymbolIndices.Length; i++)
             {
                 if (relocationSymbolIndices[i] > peHeaders.CoffHeader.NumberOfSymbols)
-                    throw new ResourceException(CodeAnalysisResources.CoffResourceInvalidRelocation);
+                    throw new ResourceException(
+                        CodeAnalysisResources.CoffResourceInvalidRelocation
+                    );
 
-                var offsetOfSymbol = peHeaders.CoffHeader.PointerToSymbolTable + relocationSymbolIndices[i] * ImageSizeOfSymbol;
+                var offsetOfSymbol =
+                    peHeaders.CoffHeader.PointerToSymbolTable
+                    + relocationSymbolIndices[i] * ImageSizeOfSymbol;
 
                 stream.Position = offsetOfSymbol;
                 stream.Position += 8; //skip over symbol name
@@ -279,8 +296,7 @@ namespace Microsoft.CodeAnalysis
 
                 const ushort IMAGE_SYM_TYPE_NULL = 0x0000;
 
-                if (symType != IMAGE_SYM_TYPE_NULL ||
-                    symSection != 3)  //3rd section is .rsrc$02
+                if (symType != IMAGE_SYM_TYPE_NULL || symSection != 3) //3rd section is .rsrc$02
                     throw new ResourceException(CodeAnalysisResources.CoffResourceInvalidSymbol);
 
                 //perform relocation. We are concatenating the contents of .rsrc$02 (the raw resource data)
@@ -288,8 +304,8 @@ namespace Microsoft.CodeAnalysis
                 //The directory tree has references into the raw resource data. These references are expressed
                 //in the final image as file positions, not positions relative to the beginning of the section.
                 //First make the resources be relative to the beginning of the section by adding the size
-                //of .rsrc$01 to them. They will ultimately need the RVA of the final image resource section added 
-                //to them. We don't know that yet. That is why the array of offsets is preserved. 
+                //of .rsrc$01 to them. They will ultimately need the RVA of the final image resource section added
+                //to them. We don't know that yet. That is why the array of offsets is preserved.
 
                 outputStream.Position = relocationOffsets[i];
                 writer.Write((uint)(symValue + rsrc1.SizeOfRawData));
@@ -348,7 +364,7 @@ namespace Microsoft.CodeAnalysis
             // the ICONDIRENTRY, get the info from the BITMAPINFOHEADER at the beginning
             // of the data here:
             //EDMAURER: PNG compressed icons must be treated differently. Do what has always
-            //been done for uncompressed icons. Assume modern, compressed icons set the 
+            //been done for uncompressed icons. Assume modern, compressed icons set the
             //ICONDIRENTRY fields correctly.
             //if (*(DWORD*)icoBuffer == sizeof(BITMAPINFOHEADER))
             //{
@@ -399,9 +415,9 @@ namespace Microsoft.CodeAnalysis
                 resWriter.Write((WORD)0xFFFF);
                 resWriter.Write((WORD)RT_ICON);
                 resWriter.Write((WORD)0xFFFF);
-                resWriter.Write((WORD)(i + 1));       //EDMAURER this is not general. Implies you can only append one icon to the resources.
-                                                      //This icon ID would seem to be global among all of the icons not just this group.
-                                                      //Zero appears to not be an acceptable ID. Note that this ID is referred to below.
+                resWriter.Write((WORD)(i + 1)); //EDMAURER this is not general. Implies you can only append one icon to the resources.
+                //This icon ID would seem to be global among all of the icons not just this group.
+                //Zero appears to not be an acceptable ID. Note that this ID is referred to below.
                 resWriter.Write((DWORD)0x00000000);
                 resWriter.Write((WORD)0x1010);
                 resWriter.Write((WORD)0x0000);
@@ -440,12 +456,19 @@ namespace Microsoft.CodeAnalysis
 
             resStream.Position = (resStream.Position + 3) & ~3; //align 4-byte boundary
             //write the icon group. first a RESOURCEHEADER. the data is the ICONDIR
-            resWriter.Write((DWORD)(3 * sizeof(WORD) + count * /*sizeof(ICONRESDIR)*/ 14));
+            resWriter.Write(
+                (DWORD)(
+                    3 * sizeof(WORD)
+                    + count
+                        * /*sizeof(ICONRESDIR)*/
+                        14
+                )
+            );
             resWriter.Write((DWORD)0x00000020);
             resWriter.Write((WORD)0xFFFF);
             resWriter.Write((WORD)RT_GROUP_ICON);
             resWriter.Write((WORD)0xFFFF);
-            resWriter.Write((WORD)0x7F00);  //IDI_APPLICATION
+            resWriter.Write((WORD)0x7F00); //IDI_APPLICATION
             resWriter.Write((DWORD)0x00000000);
             resWriter.Write((WORD)0x1030);
             resWriter.Write((WORD)0x0000);
@@ -466,7 +489,7 @@ namespace Microsoft.CodeAnalysis
                 resWriter.Write((WORD)iconDirEntries[i].wPlanes);
                 resWriter.Write((WORD)iconDirEntries[i].wBitCount);
                 resWriter.Write((DWORD)iconDirEntries[i].dwBytesInRes);
-                resWriter.Write((WORD)(i + 1));   //ID
+                resWriter.Write((WORD)(i + 1)); //ID
             }
         }
 
@@ -498,25 +521,29 @@ namespace Microsoft.CodeAnalysis
                 }
                 */
 
-        internal static void AppendVersionToResourceStream(Stream resStream, bool isDll,
+        internal static void AppendVersionToResourceStream(
+            Stream resStream,
+            bool isDll,
             string fileVersion, //should be [major.minor.build.rev] but doesn't have to be
             string originalFileName,
             string internalName,
-            string productVersion,  //4 ints
+            string productVersion, //4 ints
             Version assemblyVersion, //individual values must be smaller than 65535
-            string fileDescription = " ",   //the old compiler put blank here if nothing was user-supplied
-            string legalCopyright = " ",    //the old compiler put blank here if nothing was user-supplied
+            string fileDescription = " ", //the old compiler put blank here if nothing was user-supplied
+            string legalCopyright = " ", //the old compiler put blank here if nothing was user-supplied
             string? legalTrademarks = null,
             string? productName = null,
             string? comments = null,
-            string? companyName = null)
+            string? companyName = null
+        )
         {
             var resWriter = new BinaryWriter(resStream, Encoding.Unicode);
             resStream.Position = (resStream.Position + 3) & ~3;
 
             const DWORD RT_VERSION = 16;
 
-            var ver = new VersionResourceSerializer(isDll,
+            var ver = new VersionResourceSerializer(
+                isDll,
                 comments,
                 companyName,
                 fileDescription,
@@ -527,46 +554,51 @@ namespace Microsoft.CodeAnalysis
                 originalFileName,
                 productName,
                 productVersion,
-                assemblyVersion);
+                assemblyVersion
+            );
 
             var startPos = resStream.Position;
             var dataSize = ver.GetDataSize();
             const int headerSize = 0x20;
 
-            resWriter.Write((DWORD)dataSize);    //data size
-            resWriter.Write((DWORD)headerSize);                 //header size
-            resWriter.Write((WORD)0xFFFF);                      //identifies type as ordinal.
-            resWriter.Write((WORD)RT_VERSION);                 //type
-            resWriter.Write((WORD)0xFFFF);                      //identifies name as ordinal.
-            resWriter.Write((WORD)0x0001);                      //only ever 1 ver resource (what Dev10 does)
-            resWriter.Write((DWORD)0x00000000);                 //data version
-            resWriter.Write((WORD)0x0030);                      //memory flags (this is what the Dev10 compiler uses)
-            resWriter.Write((WORD)0x0000);                      //languageId
-            resWriter.Write((DWORD)0x00000000);                 //version
-            resWriter.Write((DWORD)0x00000000);                 //characteristics
+            resWriter.Write((DWORD)dataSize); //data size
+            resWriter.Write((DWORD)headerSize); //header size
+            resWriter.Write((WORD)0xFFFF); //identifies type as ordinal.
+            resWriter.Write((WORD)RT_VERSION); //type
+            resWriter.Write((WORD)0xFFFF); //identifies name as ordinal.
+            resWriter.Write((WORD)0x0001); //only ever 1 ver resource (what Dev10 does)
+            resWriter.Write((DWORD)0x00000000); //data version
+            resWriter.Write((WORD)0x0030); //memory flags (this is what the Dev10 compiler uses)
+            resWriter.Write((WORD)0x0000); //languageId
+            resWriter.Write((DWORD)0x00000000); //version
+            resWriter.Write((DWORD)0x00000000); //characteristics
 
             ver.WriteVerResource(resWriter);
 
             System.Diagnostics.Debug.Assert(resStream.Position - startPos == dataSize + headerSize);
         }
 
-        internal static void AppendManifestToResourceStream(Stream resStream, Stream manifestStream, bool isDll)
+        internal static void AppendManifestToResourceStream(
+            Stream resStream,
+            Stream manifestStream,
+            bool isDll
+        )
         {
             resStream.Position = (resStream.Position + 3) & ~3;
             const WORD RT_MANIFEST = 24;
 
             var resWriter = new BinaryWriter(resStream);
-            resWriter.Write((DWORD)(manifestStream.Length));    //data size
-            resWriter.Write((DWORD)0x00000020);                 //header size
-            resWriter.Write((WORD)0xFFFF);                      //identifies type as ordinal.
-            resWriter.Write((WORD)RT_MANIFEST);                 //type
-            resWriter.Write((WORD)0xFFFF);                      //identifies name as ordinal.
-            resWriter.Write((WORD)((isDll) ? 0x0002 : 0x0001));  //EDMAURER executables are named "1", DLLs "2"
-            resWriter.Write((DWORD)0x00000000);                 //data version
-            resWriter.Write((WORD)0x1030);                      //memory flags
-            resWriter.Write((WORD)0x0000);                      //languageId
-            resWriter.Write((DWORD)0x00000000);                 //version
-            resWriter.Write((DWORD)0x00000000);                 //characteristics
+            resWriter.Write((DWORD)(manifestStream.Length)); //data size
+            resWriter.Write((DWORD)0x00000020); //header size
+            resWriter.Write((WORD)0xFFFF); //identifies type as ordinal.
+            resWriter.Write((WORD)RT_MANIFEST); //type
+            resWriter.Write((WORD)0xFFFF); //identifies name as ordinal.
+            resWriter.Write((WORD)((isDll) ? 0x0002 : 0x0001)); //EDMAURER executables are named "1", DLLs "2"
+            resWriter.Write((DWORD)0x00000000); //data version
+            resWriter.Write((WORD)0x1030); //memory flags
+            resWriter.Write((WORD)0x0000); //languageId
+            resWriter.Write((DWORD)0x00000000); //version
+            resWriter.Write((DWORD)0x00000000); //characteristics
 
             manifestStream.CopyTo(resStream);
         }
@@ -595,9 +627,20 @@ namespace Microsoft.CodeAnalysis
             private const ushort sizeVS_FIXEDFILEINFO = sizeof(DWORD) * 13;
             private readonly bool _isDll;
 
-            internal VersionResourceSerializer(bool isDll, string? comments, string? companyName, string fileDescription, string fileVersion,
-                string internalName, string legalCopyright, string? legalTrademark, string originalFileName, string? productName, string productVersion,
-                Version assemblyVersion)
+            internal VersionResourceSerializer(
+                bool isDll,
+                string? comments,
+                string? companyName,
+                string fileDescription,
+                string fileVersion,
+                string internalName,
+                string legalCopyright,
+                string? legalTrademark,
+                string originalFileName,
+                string? productName,
+                string productVersion,
+                Version assemblyVersion
+            )
             {
                 _isDll = isDll;
                 _commentsContents = comments;
@@ -611,7 +654,12 @@ namespace Microsoft.CodeAnalysis
                 _productNameContents = productName;
                 _productVersionContents = productVersion;
                 _assemblyVersionContents = assemblyVersion;
-                _langIdAndCodePageKey = System.String.Format("{0:x4}{1:x4}", 0 /*langId*/, CP_WINUNICODE /*codepage*/);
+                _langIdAndCodePageKey = System.String.Format(
+                    "{0:x4}{1:x4}",
+                    0 /*langId*/
+                    ,
+                    CP_WINUNICODE /*codepage*/
+                );
             }
 
             private const uint VFT_APP = 0x00000001;
@@ -619,24 +667,63 @@ namespace Microsoft.CodeAnalysis
 
             private IEnumerable<KeyValuePair<string, string>> GetVerStrings()
             {
-                if (_commentsContents != null) yield return new KeyValuePair<string, string>("Comments", _commentsContents);
-                if (_companyNameContents != null) yield return new KeyValuePair<string, string>("CompanyName", _companyNameContents);
-                if (_fileDescriptionContents != null) yield return new KeyValuePair<string, string>("FileDescription", _fileDescriptionContents);
+                if (_commentsContents != null)
+                    yield return new KeyValuePair<string, string>("Comments", _commentsContents);
+                if (_companyNameContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "CompanyName",
+                        _companyNameContents
+                    );
+                if (_fileDescriptionContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "FileDescription",
+                        _fileDescriptionContents
+                    );
 
                 yield return new KeyValuePair<string, string>("FileVersion", _fileVersionContents);
 
-                if (_internalNameContents != null) yield return new KeyValuePair<string, string>("InternalName", _internalNameContents);
-                if (_legalCopyrightContents != null) yield return new KeyValuePair<string, string>("LegalCopyright", _legalCopyrightContents);
-                if (_legalTrademarksContents != null) yield return new KeyValuePair<string, string>("LegalTrademarks", _legalTrademarksContents);
-                if (_originalFileNameContents != null) yield return new KeyValuePair<string, string>("OriginalFilename", _originalFileNameContents);
-                if (_productNameContents != null) yield return new KeyValuePair<string, string>("ProductName", _productNameContents);
+                if (_internalNameContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "InternalName",
+                        _internalNameContents
+                    );
+                if (_legalCopyrightContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "LegalCopyright",
+                        _legalCopyrightContents
+                    );
+                if (_legalTrademarksContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "LegalTrademarks",
+                        _legalTrademarksContents
+                    );
+                if (_originalFileNameContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "OriginalFilename",
+                        _originalFileNameContents
+                    );
+                if (_productNameContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "ProductName",
+                        _productNameContents
+                    );
 
-                yield return new KeyValuePair<string, string>("ProductVersion", _productVersionContents);
+                yield return new KeyValuePair<string, string>(
+                    "ProductVersion",
+                    _productVersionContents
+                );
 
-                if (_assemblyVersionContents != null) yield return new KeyValuePair<string, string>("Assembly Version", _assemblyVersionContents.ToString());
+                if (_assemblyVersionContents != null)
+                    yield return new KeyValuePair<string, string>(
+                        "Assembly Version",
+                        _assemblyVersionContents.ToString()
+                    );
             }
 
-            private uint FileType { get { return (_isDll) ? VFT_DLL : VFT_APP; } }
+            private uint FileType
+            {
+                get { return (_isDll) ? VFT_DLL : VFT_APP; }
+            }
 
             private void WriteVSFixedFileInfo(BinaryWriter writer)
             {
@@ -645,7 +732,6 @@ namespace Microsoft.CodeAnalysis
                 Version fileVersion;
                 VersionHelper.TryParse(_fileVersionContents, version: out fileVersion);
 
-
                 Version productVersion;
                 VersionHelper.TryParse(_productVersionContents, version: out productVersion);
 
@@ -653,15 +739,19 @@ namespace Microsoft.CodeAnalysis
                 writer.Write((DWORD)0x00010000);
                 writer.Write((DWORD)((uint)fileVersion.Major << 16) | (uint)fileVersion.Minor);
                 writer.Write((DWORD)((uint)fileVersion.Build << 16) | (uint)fileVersion.Revision);
-                writer.Write((DWORD)((uint)productVersion.Major << 16) | (uint)productVersion.Minor);
-                writer.Write((DWORD)((uint)productVersion.Build << 16) | (uint)productVersion.Revision);
-                writer.Write((DWORD)0x0000003F);   //VS_FFI_FILEFLAGSMASK  (EDMAURER) really? all these bits are valid?
-                writer.Write((DWORD)0);    //file flags
-                writer.Write((DWORD)0x00000004);   //VOS__WINDOWS32
+                writer.Write(
+                    (DWORD)((uint)productVersion.Major << 16) | (uint)productVersion.Minor
+                );
+                writer.Write(
+                    (DWORD)((uint)productVersion.Build << 16) | (uint)productVersion.Revision
+                );
+                writer.Write((DWORD)0x0000003F); //VS_FFI_FILEFLAGSMASK  (EDMAURER) really? all these bits are valid?
+                writer.Write((DWORD)0); //file flags
+                writer.Write((DWORD)0x00000004); //VOS__WINDOWS32
                 writer.Write((DWORD)this.FileType);
-                writer.Write((DWORD)0);    //file subtype
-                writer.Write((DWORD)0);    //date most sig
-                writer.Write((DWORD)0);    //date least sig
+                writer.Write((DWORD)0); //file subtype
+                writer.Write((DWORD)0); //date most sig
+                writer.Write((DWORD)0); //date least sig
             }
 
             /// <summary>
@@ -690,23 +780,33 @@ namespace Microsoft.CodeAnalysis
 
             private static ushort SizeofVerString(string lpszKey, string lpszValue)
             {
-                int cbKey, cbValue;
+                int cbKey,
+                    cbValue;
 
-                cbKey = (lpszKey.Length + 1) * 2;  // Make room for the NULL
+                cbKey = (lpszKey.Length + 1) * 2; // Make room for the NULL
                 cbValue = (lpszValue.Length + 1) * 2;
 
-                return checked((ushort)(PadKeyLen(cbKey) +    // key, 0 padded to DWORD boundary
-                                cbValue +               // value
-                                HDRSIZE));             // block header.
+                return checked(
+                    (ushort)(
+                        PadKeyLen(cbKey)
+                        + // key, 0 padded to DWORD boundary
+                        cbValue
+                        + // value
+                        HDRSIZE
+                    )
+                ); // block header.
             }
 
-            private static void WriteVersionString(KeyValuePair<string, string> keyValuePair, BinaryWriter writer)
+            private static void WriteVersionString(
+                KeyValuePair<string, string> keyValuePair,
+                BinaryWriter writer
+            )
             {
                 RoslynDebug.Assert(keyValuePair.Value != null);
 
                 ushort cbBlock = SizeofVerString(keyValuePair.Key, keyValuePair.Value);
-                int cbKey = (keyValuePair.Key.Length + 1) * 2;     // includes terminating NUL
-                int cbVal = (keyValuePair.Value.Length + 1) * 2;     // includes terminating NUL
+                int cbKey = (keyValuePair.Key.Length + 1) * 2; // includes terminating NUL
+                int cbVal = (keyValuePair.Value.Length + 1) * 2; // includes terminating NUL
 
                 var startPos = writer.BaseStream.Position;
                 Debug.Assert((startPos & 3) == 0);
@@ -746,7 +846,7 @@ namespace Microsoft.CodeAnalysis
 
                 foreach (var verString in GetVerStrings())
                 {
-                    sum = (sum + 3) & ~3;   //ensure that each String data structure starts on a 32bit boundary.
+                    sum = (sum + 3) & ~3; //ensure that each String data structure starts on a 32bit boundary.
                     sum += SizeofVerString(verString.Key, verString.Value);
                 }
 
@@ -755,13 +855,16 @@ namespace Microsoft.CodeAnalysis
 
             internal int GetDataSize()
             {
-                int sizeEXEVERRESOURCE = sizeof(WORD) * 3 * 5 + 2 * sizeof(WORD) + //five headers + two words for CP and lang
-                    KEYBYTES(vsVersionInfoKey) +
-                    KEYBYTES(varFileInfoKey) +
-                    KEYBYTES(translationKey) +
-                    KEYBYTES(stringFileInfoKey) +
-                    KEYBYTES(_langIdAndCodePageKey) +
-                    sizeVS_FIXEDFILEINFO;
+                int sizeEXEVERRESOURCE =
+                    sizeof(WORD) * 3 * 5
+                    + 2 * sizeof(WORD)
+                    + //five headers + two words for CP and lang
+                    KEYBYTES(vsVersionInfoKey)
+                    + KEYBYTES(varFileInfoKey)
+                    + KEYBYTES(translationKey)
+                    + KEYBYTES(stringFileInfoKey)
+                    + KEYBYTES(_langIdAndCodePageKey)
+                    + sizeVS_FIXEDFILEINFO;
 
                 return GetStringsSize() + sizeEXEVERRESOURCE;
             }
@@ -813,36 +916,54 @@ namespace Microsoft.CodeAnalysis
                 writer.Write(new byte[KEYBYTES(vsVersionInfoKey) - vsVersionInfoKey.Length * 2]);
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
                 WriteVSFixedFileInfo(writer);
-                writer.Write((WORD)(sizeof(WORD) * 2 + 2 * HDRSIZE + KEYBYTES(varFileInfoKey) + KEYBYTES(translationKey)));
+                writer.Write(
+                    (WORD)(
+                        sizeof(WORD) * 2
+                        + 2 * HDRSIZE
+                        + KEYBYTES(varFileInfoKey)
+                        + KEYBYTES(translationKey)
+                    )
+                );
                 writer.Write((WORD)0);
                 writer.Write((WORD)1);
                 writer.Write(varFileInfoKey.ToCharArray());
-                writer.Write(new byte[KEYBYTES(varFileInfoKey) - varFileInfoKey.Length * 2]);   //padding
+                writer.Write(new byte[KEYBYTES(varFileInfoKey) - varFileInfoKey.Length * 2]); //padding
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
                 writer.Write((WORD)(sizeof(WORD) * 2 + HDRSIZE + KEYBYTES(translationKey)));
                 writer.Write((WORD)(sizeof(WORD) * 2));
                 writer.Write((WORD)0);
                 writer.Write(translationKey.ToCharArray());
-                writer.Write(new byte[KEYBYTES(translationKey) - translationKey.Length * 2]);   //padding
+                writer.Write(new byte[KEYBYTES(translationKey) - translationKey.Length * 2]); //padding
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
-                writer.Write((WORD)0);      //langId; MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL)) = 0
-                writer.Write((WORD)CP_WINUNICODE);   //codepage; 1200 = CP_WINUNICODE
+                writer.Write((WORD)0); //langId; MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL)) = 0
+                writer.Write((WORD)CP_WINUNICODE); //codepage; 1200 = CP_WINUNICODE
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
-                writer.Write((WORD)(2 * HDRSIZE + KEYBYTES(stringFileInfoKey) + KEYBYTES(_langIdAndCodePageKey) + GetStringsSize()));
+                writer.Write(
+                    (WORD)(
+                        2 * HDRSIZE
+                        + KEYBYTES(stringFileInfoKey)
+                        + KEYBYTES(_langIdAndCodePageKey)
+                        + GetStringsSize()
+                    )
+                );
                 writer.Write((WORD)0);
                 writer.Write((WORD)1);
-                writer.Write(stringFileInfoKey.ToCharArray());      //actually preceded by 5 WORDS so not consistent with the
-                                                                    //assumptions of KEYBYTES, but equivalent.
-                writer.Write(new byte[KEYBYTES(stringFileInfoKey) - stringFileInfoKey.Length * 2]); //padding. 
+                writer.Write(stringFileInfoKey.ToCharArray()); //actually preceded by 5 WORDS so not consistent with the
+                //assumptions of KEYBYTES, but equivalent.
+                writer.Write(new byte[KEYBYTES(stringFileInfoKey) - stringFileInfoKey.Length * 2]); //padding.
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
                 writer.Write((WORD)(HDRSIZE + KEYBYTES(_langIdAndCodePageKey) + GetStringsSize()));
                 writer.Write((WORD)0);
                 writer.Write((WORD)1);
                 writer.Write(_langIdAndCodePageKey.ToCharArray());
-                writer.Write(new byte[KEYBYTES(_langIdAndCodePageKey) - _langIdAndCodePageKey.Length * 2]); //padding
+                writer.Write(
+                    new byte[KEYBYTES(_langIdAndCodePageKey) - _langIdAndCodePageKey.Length * 2]
+                ); //padding
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
 
-                System.Diagnostics.Debug.Assert(writer.BaseStream.Position - debugPos == dataSize - GetStringsSize());
+                System.Diagnostics.Debug.Assert(
+                    writer.BaseStream.Position - debugPos == dataSize - GetStringsSize()
+                );
                 debugPos = writer.BaseStream.Position;
 
                 foreach (var entry in GetVerStrings())
@@ -856,7 +977,9 @@ namespace Microsoft.CodeAnalysis
                     WriteVersionString(entry, writer);
                 }
 
-                System.Diagnostics.Debug.Assert(writer.BaseStream.Position - debugPos == GetStringsSize());
+                System.Diagnostics.Debug.Assert(
+                    writer.BaseStream.Position - debugPos == GetStringsSize()
+                );
             }
         }
     }

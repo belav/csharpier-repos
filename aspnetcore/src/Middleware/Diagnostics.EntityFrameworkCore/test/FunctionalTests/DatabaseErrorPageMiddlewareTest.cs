@@ -29,16 +29,21 @@ public class DatabaseErrorPageMiddlewareTest
     public async Task Successful_requests_pass_thru()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseTestServer()
 #pragma warning disable CS0618 // Type or member is obsolete
-                    .Configure(app => app
-                .UseDatabaseErrorPage()
+                        .Configure(
+                            app =>
+                                app.UseDatabaseErrorPage()
 #pragma warning restore CS0618 // Type or member is obsolete
-                    .UseMiddleware<SuccessMiddleware>());
-            }).Build();
+                                    .UseMiddleware<SuccessMiddleware>()
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -52,8 +57,7 @@ public class DatabaseErrorPageMiddlewareTest
 
     class SuccessMiddleware
     {
-        public SuccessMiddleware(RequestDelegate next)
-        { }
+        public SuccessMiddleware(RequestDelegate next) { }
 
         public virtual async Task Invoke(HttpContext context)
         {
@@ -66,31 +70,36 @@ public class DatabaseErrorPageMiddlewareTest
     public async Task Non_database_exceptions_pass_thru()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseTestServer()
 #pragma warning disable CS0618 // Type or member is obsolete
-                    .Configure(app => app
-                .UseDatabaseErrorPage()
+                        .Configure(
+                            app =>
+                                app.UseDatabaseErrorPage()
 #pragma warning restore CS0618 // Type or member is obsolete
-                    .UseMiddleware<ExceptionMiddleware>());
-            }).Build();
+                                    .UseMiddleware<ExceptionMiddleware>()
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await server.CreateClient().GetAsync("http://localhost/"));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await server.CreateClient().GetAsync("http://localhost/")
+        );
 
         Assert.Equal("Exception requested from TestMiddleware", ex.Message);
     }
 
     class ExceptionMiddleware
     {
-        public ExceptionMiddleware(RequestDelegate next)
-        { }
+        public ExceptionMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -105,10 +114,14 @@ public class DatabaseErrorPageMiddlewareTest
     {
         using (var database = SqlTestStore.CreateScratch())
         {
-            using var host = await SetupServer<BloggingContext, DatabaseErrorButNoMigrationsMiddleware>(database);
+            using var host = await SetupServer<
+                BloggingContext,
+                DatabaseErrorButNoMigrationsMiddleware
+            >(database);
             using var server = host.GetTestServer();
-            var ex = await Assert.ThrowsAsync<DbUpdateException>(async () =>
-                await server.CreateClient().GetAsync("http://localhost/"));
+            var ex = await Assert.ThrowsAsync<DbUpdateException>(
+                async () => await server.CreateClient().GetAsync("http://localhost/")
+            );
 
             Assert.Equal("SQLite Error 1: 'no such table: Blogs'.", ex.InnerException.Message);
         }
@@ -116,8 +129,7 @@ public class DatabaseErrorPageMiddlewareTest
 
     class DatabaseErrorButNoMigrationsMiddleware
     {
-        public DatabaseErrorButNoMigrationsMiddleware(RequestDelegate next)
-        { }
+        public DatabaseErrorButNoMigrationsMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -140,22 +152,39 @@ public class DatabaseErrorPageMiddlewareTest
         {
             using var host = await SetupServer<BloggingContext, NoMigrationsMiddleware>(database);
             using var server = host.GetTestServer();
-            HttpResponseMessage response = await server.CreateClient().GetAsync("http://localhost/");
+            HttpResponseMessage response = await server
+                .CreateClient()
+                .GetAsync("http://localhost/");
 
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             var content = await response.Content.ReadAsStringAsync();
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsTitle"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsInfo"), content);
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsTitle"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsInfo"),
+                content
+            );
             Assert.Contains(typeof(BloggingContext).Name, content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_AddMigrationCommandPMC").Replace(">", "&gt;"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandPMC").Replace(">", "&gt;"), content);
+            Assert.Contains(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_AddMigrationCommandPMC")
+                    .Replace(">", "&gt;"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandPMC")
+                    .Replace(">", "&gt;"),
+                content
+            );
         }
     }
 
     class NoMigrationsMiddleware
     {
-        public NoMigrationsMiddleware(RequestDelegate next)
-        { }
+        public NoMigrationsMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -173,7 +202,9 @@ public class DatabaseErrorPageMiddlewareTest
     {
         using (var database = SqlTestStore.CreateScratch())
         {
-            using (var server = await SetupServer<BloggingContext, NoMigrationsMiddleware>(database))
+            using (
+                var server = await SetupServer<BloggingContext, NoMigrationsMiddleware>(database)
+            )
             {
                 using (var db = server.Services.GetService<BloggingContext>())
                 {
@@ -199,28 +230,48 @@ public class DatabaseErrorPageMiddlewareTest
     {
         using (var database = SqlTestStore.CreateScratch())
         {
-            using var host = await SetupServer<BloggingContextWithMigrations, PendingMigrationsMiddleware>(database);
+            using var host = await SetupServer<
+                BloggingContextWithMigrations,
+                PendingMigrationsMiddleware
+            >(database);
             using var server = host.GetTestServer();
-            HttpResponseMessage response = await server.CreateClient().GetAsync("http://localhost/");
+            HttpResponseMessage response = await server
+                .CreateClient()
+                .GetAsync("http://localhost/");
 
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
 
             var content = await response.Content.ReadAsStringAsync();
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_PendingMigrationsTitle"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_PendingMigrationsInfo"), content);
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_PendingMigrationsTitle"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_PendingMigrationsInfo"),
+                content
+            );
             Assert.Contains(typeof(BloggingContextWithMigrations).Name, content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandPMC").Replace(">", "&gt;"), content);
+            Assert.Contains(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandPMC")
+                    .Replace(">", "&gt;"),
+                content
+            );
             Assert.Contains("<li>111111111111111_MigrationOne</li>", content);
             Assert.Contains("<li>222222222222222_MigrationTwo</li>", content);
 
-            Assert.DoesNotContain(StringsHelpers.GetResourceString("DatabaseErrorPage_AddMigrationCommandPMC").Replace(">", "&gt;"), content);
+            Assert.DoesNotContain(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_AddMigrationCommandPMC")
+                    .Replace(">", "&gt;"),
+                content
+            );
         }
     }
 
     class PendingMigrationsMiddleware
     {
-        public PendingMigrationsMiddleware(RequestDelegate next)
-        { }
+        public PendingMigrationsMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -238,27 +289,57 @@ public class DatabaseErrorPageMiddlewareTest
     {
         using (var database = SqlTestStore.CreateScratch())
         {
-            using var host = await SetupServer<BloggingContextWithPendingModelChanges, PendingModelChangesMiddleware>(database);
+            using var host = await SetupServer<
+                BloggingContextWithPendingModelChanges,
+                PendingModelChangesMiddleware
+            >(database);
             using var server = host.GetTestServer();
-            HttpResponseMessage response = await server.CreateClient().GetAsync("http://localhost/");
+            HttpResponseMessage response = await server
+                .CreateClient()
+                .GetAsync("http://localhost/");
 
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
 
             var content = await response.Content.ReadAsStringAsync();
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_PendingChangesTitle"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_PendingChangesInfo"), content);
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_PendingChangesTitle"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_PendingChangesInfo"),
+                content
+            );
             Assert.Contains(typeof(BloggingContextWithPendingModelChanges).Name, content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_AddMigrationCommandCLI").Replace(">", "&gt;"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_AddMigrationCommandPMC").Replace(">", "&gt;"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandCLI").Replace(">", "&gt;"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandPMC").Replace(">", "&gt;"), content);
+            Assert.Contains(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_AddMigrationCommandCLI")
+                    .Replace(">", "&gt;"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_AddMigrationCommandPMC")
+                    .Replace(">", "&gt;"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandCLI")
+                    .Replace(">", "&gt;"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers
+                    .GetResourceString("DatabaseErrorPage_ApplyMigrationsCommandPMC")
+                    .Replace(">", "&gt;"),
+                content
+            );
         }
     }
 
     class PendingModelChangesMiddleware
     {
-        public PendingModelChangesMiddleware(RequestDelegate next)
-        { }
+        public PendingModelChangesMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -278,7 +359,10 @@ public class DatabaseErrorPageMiddlewareTest
     {
         using (var database = SqlTestStore.CreateScratch())
         {
-            using var host = await SetupServer<BloggingContextWithMigrations, ApplyMigrationsMiddleware>(database);
+            using var host = await SetupServer<
+                BloggingContextWithMigrations,
+                ApplyMigrationsMiddleware
+            >(database);
             using var server = host.GetTestServer();
             var client = server.CreateClient();
 
@@ -292,16 +376,29 @@ public class DatabaseErrorPageMiddlewareTest
 
             // Ensure the url we're going to test is what the page is using in it's JavaScript
             var javaScriptEncoder = JavaScriptEncoder.Default;
-            Assert.Contains("req.open(\"POST\", \"" + JavaScriptEncode(expectedMigrationsEndpoint) + "\", true);", content);
-            Assert.Contains("data-assemblyname=\"" + JavaScriptEncode(expectedContextType) + "\"", content);
+            Assert.Contains(
+                "req.open(\"POST\", \""
+                    + JavaScriptEncode(expectedMigrationsEndpoint)
+                    + "\", true);",
+                content
+            );
+            Assert.Contains(
+                "data-assemblyname=\"" + JavaScriptEncode(expectedContextType) + "\"",
+                content
+            );
 
             // Step Two: Request to migrations endpoint
-            var formData = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
+            var formData = new FormUrlEncodedContent(
+                new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("context", expectedContextType)
-                });
+                }
+            );
 
-            response = await client.PostAsync("http://localhost" + expectedMigrationsEndpoint, formData);
+            response = await client.PostAsync(
+                "http://localhost" + expectedMigrationsEndpoint,
+                formData
+            );
             content = await response.Content.ReadAsStringAsync();
             Console.WriteLine(content);
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -315,8 +412,7 @@ public class DatabaseErrorPageMiddlewareTest
 
     class ApplyMigrationsMiddleware
     {
-        public ApplyMigrationsMiddleware(RequestDelegate next)
-        { }
+        public ApplyMigrationsMiddleware(RequestDelegate next) { }
 
         public virtual async Task Invoke(HttpContext context)
         {
@@ -337,38 +433,56 @@ public class DatabaseErrorPageMiddlewareTest
         using (var database = SqlTestStore.CreateScratch())
         {
             using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        app.UseDatabaseErrorPage(new DatabaseErrorPageOptions
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        MigrationsEndPointPath = new PathString(migrationsEndpoint)
-                    });
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+#pragma warning disable CS0618 // Type or member is obsolete
+                                    app.UseDatabaseErrorPage(
+                                        new DatabaseErrorPageOptions
+                                        {
+                                            MigrationsEndPointPath = new PathString(
+                                                migrationsEndpoint
+                                            )
+                                        }
+                                    );
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                        app.UseMiddleware<PendingMigrationsMiddleware>();
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddDbContext<BloggingContextWithMigrations>(
-                        optionsBuilder => optionsBuilder.UseSqlite(database.ConnectionString));
-                });
-            }).Build();
+                                    app.UseMiddleware<PendingMigrationsMiddleware>();
+                                }
+                            )
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddDbContext<BloggingContextWithMigrations>(
+                                        optionsBuilder =>
+                                            optionsBuilder.UseSqlite(database.ConnectionString)
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
             var server = host.GetTestServer();
 
-            HttpResponseMessage response = await server.CreateClient().GetAsync("http://localhost/");
+            HttpResponseMessage response = await server
+                .CreateClient()
+                .GetAsync("http://localhost/");
 
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
 
             var content = await response.Content.ReadAsStringAsync();
-            Assert.Contains("req.open(\"POST\", \"" + JavaScriptEncode(migrationsEndpoint) + "\", true);", content);
+            Assert.Contains(
+                "req.open(\"POST\", \"" + JavaScriptEncode(migrationsEndpoint) + "\", true);",
+                content
+            );
         }
     }
 
@@ -380,24 +494,30 @@ public class DatabaseErrorPageMiddlewareTest
         var logProvider = new TestLoggerProvider();
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
 #pragma warning disable CS0618 // Type or member is obsolete
-                        app.UseDatabaseErrorPage();
+                                app.UseDatabaseErrorPage();
 #pragma warning restore CS0618 // Type or member is obsolete
-                        app.UseMiddleware<ContextNotRegisteredInServicesMiddleware>();
+                                app.UseMiddleware<ContextNotRegisteredInServicesMiddleware>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                        app.ApplicationServices.GetService<ILoggerFactory>().AddProvider(logProvider);
+                                app.ApplicationServices
+                                    .GetService<ILoggerFactory>()
+                                    .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
-                    });
-            }).Build();
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
-
 
         try
         {
@@ -408,17 +528,26 @@ public class DatabaseErrorPageMiddlewareTest
         {
             Assert.True(
                 exception.GetType().Name == "SqliteException"
-                || exception.InnerException?.GetType().Name == "SqliteException");
+                    || exception.InnerException?.GetType().Name == "SqliteException"
+            );
         }
 
-        Assert.Contains(logProvider.Logger.Messages.ToList(), m =>
-            m.StartsWith(StringsHelpers.GetResourceString("FormatDatabaseErrorPageMiddleware_ContextNotRegistered", typeof(BloggingContext)), StringComparison.Ordinal));
+        Assert.Contains(
+            logProvider.Logger.Messages.ToList(),
+            m =>
+                m.StartsWith(
+                    StringsHelpers.GetResourceString(
+                        "FormatDatabaseErrorPageMiddleware_ContextNotRegistered",
+                        typeof(BloggingContext)
+                    ),
+                    StringComparison.Ordinal
+                )
+        );
     }
 
     class ContextNotRegisteredInServicesMiddleware
     {
-        public ContextNotRegisteredInServicesMiddleware(RequestDelegate next)
-        { }
+        public ContextNotRegisteredInServicesMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -445,7 +574,10 @@ public class DatabaseErrorPageMiddlewareTest
         {
             var logProvider = new TestLoggerProvider();
 
-            using var host = await SetupServer<BloggingContextWithSnapshotThatThrows, ExceptionInLogicMiddleware>(database, logProvider);
+            using var host = await SetupServer<
+                BloggingContextWithSnapshotThatThrows,
+                ExceptionInLogicMiddleware
+            >(database, logProvider);
 
             try
             {
@@ -456,18 +588,24 @@ public class DatabaseErrorPageMiddlewareTest
             {
                 Assert.True(
                     exception.GetType().Name == "SqliteException"
-                    || exception.InnerException?.GetType().Name == "SqliteException");
+                        || exception.InnerException?.GetType().Name == "SqliteException"
+                );
             }
 
-            Assert.Contains(logProvider.Logger.Messages.ToList(), m =>
-                m.StartsWith(StringsHelpers.GetResourceString("DatabaseErrorPageMiddleware_Exception"), StringComparison.Ordinal));
+            Assert.Contains(
+                logProvider.Logger.Messages.ToList(),
+                m =>
+                    m.StartsWith(
+                        StringsHelpers.GetResourceString("DatabaseErrorPageMiddleware_Exception"),
+                        StringComparison.Ordinal
+                    )
+            );
         }
     }
 
     class ExceptionInLogicMiddleware
     {
-        public ExceptionInLogicMiddleware(RequestDelegate next)
-        { }
+        public ExceptionInLogicMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -485,23 +623,32 @@ public class DatabaseErrorPageMiddlewareTest
     {
         using (var database = SqlTestStore.CreateScratch())
         {
-            using var host = await SetupServer<BloggingContext, WrappedExceptionMiddleware>(database);
+            using var host = await SetupServer<BloggingContext, WrappedExceptionMiddleware>(
+                database
+            );
             using var server = host.GetTestServer();
-            HttpResponseMessage response = await server.CreateClient().GetAsync("http://localhost/");
+            HttpResponseMessage response = await server
+                .CreateClient()
+                .GetAsync("http://localhost/");
 
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             var content = await response.Content.ReadAsStringAsync();
             Assert.Contains("I wrapped your exception", content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsTitle"), content);
-            Assert.Contains(StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsInfo"), content);
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsTitle"),
+                content
+            );
+            Assert.Contains(
+                StringsHelpers.GetResourceString("DatabaseErrorPage_NoDbOrMigrationsInfo"),
+                content
+            );
             Assert.Contains(typeof(BloggingContext).Name, content);
         }
     }
 
     class WrappedExceptionMiddleware
     {
-        public WrappedExceptionMiddleware(RequestDelegate next)
-        { }
+        public WrappedExceptionMiddleware(RequestDelegate next) { }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -519,34 +666,48 @@ public class DatabaseErrorPageMiddlewareTest
         }
     }
 
-    private static async Task<IHost> SetupServer<TContext, TMiddleware>(SqlTestStore database, ILoggerProvider logProvider = null)
-        where TContext : DbContext
+    private static async Task<IHost> SetupServer<TContext, TMiddleware>(
+        SqlTestStore database,
+        ILoggerProvider logProvider = null
+    ) where TContext : DbContext
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
 #pragma warning disable CS0618 // Type or member is obsolete
-                        app.UseDatabaseErrorPage();
+                                app.UseDatabaseErrorPage();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                        app.UseMiddleware<TMiddleware>();
+                                app.UseMiddleware<TMiddleware>();
 
-                    if (logProvider != null)
-                    {
+                                if (logProvider != null)
+                                {
 #pragma warning disable CS0618 // Type or member is obsolete
-                            app.ApplicationServices.GetService<ILoggerFactory>().AddProvider(logProvider);
+                                    app.ApplicationServices
+                                        .GetService<ILoggerFactory>()
+                                        .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
-                        }
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddDbContext<TContext>(optionsBuilder => optionsBuilder.UseSqlite(database.ConnectionString));
-                });
-            }).Build();
+                                }
+                            }
+                        )
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.AddDbContext<TContext>(
+                                    optionsBuilder =>
+                                        optionsBuilder.UseSqlite(database.ConnectionString)
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 

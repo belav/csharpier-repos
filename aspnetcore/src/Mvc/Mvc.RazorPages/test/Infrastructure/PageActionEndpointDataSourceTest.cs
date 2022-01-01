@@ -20,25 +20,26 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>
+        {
+            new ActionDescriptor
             {
-                new ActionDescriptor
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/test",
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Test" },
-                        { "controller", "Test" },
-                    },
+                    { "action", "Test" },
+                    { "controller", "Test" },
                 },
-            };
+            },
+        };
 
         var mockDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
-        mockDescriptorProvider.Setup(m => m.ActionDescriptors).Returns(new ActionDescriptorCollection(actions, 0));
+        mockDescriptorProvider
+            .Setup(m => m.ActionDescriptors)
+            .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (PageActionEndpointDataSource)CreateDataSource(mockDescriptorProvider.Object);
+        var dataSource = (PageActionEndpointDataSource)CreateDataSource(
+            mockDescriptorProvider.Object
+        );
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -51,30 +52,33 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>
+        {
+            new PageActionDescriptor
             {
-                new PageActionDescriptor
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/test",
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Test" },
-                        { "controller", "Test" },
-                    },
+                    { "action", "Test" },
+                    { "controller", "Test" },
                 },
-            };
+            },
+        };
 
         var mockDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
-        mockDescriptorProvider.Setup(m => m.ActionDescriptors).Returns(new ActionDescriptorCollection(actions, 0));
+        mockDescriptorProvider
+            .Setup(m => m.ActionDescriptors)
+            .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (PageActionEndpointDataSource)CreateDataSource(mockDescriptorProvider.Object);
+        var dataSource = (PageActionEndpointDataSource)CreateDataSource(
+            mockDescriptorProvider.Object
+        );
 
-        dataSource.DefaultBuilder.Add((b) =>
-        {
-            b.Metadata.Add("Hi there");
-        });
+        dataSource.DefaultBuilder.Add(
+            (b) =>
+            {
+                b.Metadata.Add("Hi there");
+            }
+        );
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -87,18 +91,28 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
                 Assert.Equal("/test", e.RoutePattern.RawText);
                 Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>());
                 Assert.Equal("Hi there", e.Metadata.GetMetadata<string>());
-            });
+            }
+        );
     }
 
-    private protected override ActionEndpointDataSourceBase CreateDataSource(IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory)
+    private protected override ActionEndpointDataSourceBase CreateDataSource(
+        IActionDescriptorCollectionProvider actions,
+        ActionEndpointFactory endpointFactory
+    )
     {
-        return new PageActionEndpointDataSource(new PageActionEndpointDataSourceIdProvider(), actions, endpointFactory, new OrderedEndpointsSequenceProvider());
+        return new PageActionEndpointDataSource(
+            new PageActionEndpointDataSourceIdProvider(),
+            actions,
+            endpointFactory,
+            new OrderedEndpointsSequenceProvider()
+        );
     }
 
     protected override ActionDescriptor CreateActionDescriptor(
         object values,
         string pattern = null,
-        IList<object> metadata = null)
+        IList<object> metadata = null
+    )
     {
         var action = new PageActionDescriptor();
 

@@ -68,7 +68,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 this.alignment = (ulong)alignment;
             }
 
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -83,7 +84,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<SByte>>() / sizeof(SByte);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<SByte>>() / sizeof(SByte);
 
         private DataTable _dataTable;
 
@@ -102,9 +104,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario));
 
-            var result = AdvSimd.DuplicateToVector128(
-                (SByte)31
-            );
+            var result = AdvSimd.DuplicateToVector128((SByte)31);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -114,10 +114,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.DuplicateToVector128), new Type[] { typeof(SByte) })
-                                     .Invoke(null, new object[] {
-                                        (SByte)31
-                                     });
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.DuplicateToVector128), new Type[] { typeof(SByte) })
+                .Invoke(null, new object[] { (SByte)31 });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<SByte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -147,7 +146,11 @@ namespace JIT.HardwareIntrinsics.Arm
         private void ValidateResult(void* result, [CallerMemberName] string method = "")
         {
             SByte[] outArray = new SByte[RetElementCount];
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<SByte, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<SByte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<SByte, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<SByte>>()
+            );
             ValidateResult(outArray, method);
         }
 
@@ -173,8 +176,12 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector128)}<SByte>(31): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.DuplicateToVector128)}<SByte>(31): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

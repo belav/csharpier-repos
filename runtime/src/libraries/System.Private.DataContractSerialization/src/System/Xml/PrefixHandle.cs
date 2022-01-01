@@ -11,7 +11,32 @@ namespace System.Xml
     internal enum PrefixHandleType
     {
         Empty,
-        A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
+        A,
+        B,
+        C,
+        D,
+        E,
+        F,
+        G,
+        H,
+        I,
+        J,
+        K,
+        L,
+        M,
+        N,
+        O,
+        P,
+        Q,
+        R,
+        S,
+        T,
+        U,
+        V,
+        W,
+        X,
+        Y,
+        Z,
         Buffer,
         Max,
     }
@@ -22,8 +47,65 @@ namespace System.Xml
         private PrefixHandleType _type;
         private int _offset;
         private int _length;
-        private static readonly string[] s_prefixStrings = { "", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-        private static readonly byte[] s_prefixBuffer = { (byte)'a', (byte)'b', (byte)'c', (byte)'d', (byte)'e', (byte)'f', (byte)'g', (byte)'h', (byte)'i', (byte)'j', (byte)'k', (byte)'l', (byte)'m', (byte)'n', (byte)'o', (byte)'p', (byte)'q', (byte)'r', (byte)'s', (byte)'t', (byte)'u', (byte)'v', (byte)'w', (byte)'x', (byte)'y', (byte)'z' };
+        private static readonly string[] s_prefixStrings =
+        {
+            "",
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z"
+        };
+        private static readonly byte[] s_prefixBuffer =
+        {
+            (byte)'a',
+            (byte)'b',
+            (byte)'c',
+            (byte)'d',
+            (byte)'e',
+            (byte)'f',
+            (byte)'g',
+            (byte)'h',
+            (byte)'i',
+            (byte)'j',
+            (byte)'k',
+            (byte)'l',
+            (byte)'m',
+            (byte)'n',
+            (byte)'o',
+            (byte)'p',
+            (byte)'q',
+            (byte)'r',
+            (byte)'s',
+            (byte)'t',
+            (byte)'u',
+            (byte)'v',
+            (byte)'w',
+            (byte)'x',
+            (byte)'y',
+            (byte)'z'
+        };
 
         public PrefixHandle(XmlBufferReader bufferReader)
         {
@@ -68,10 +150,7 @@ namespace System.Xml
 
         public bool IsEmpty
         {
-            get
-            {
-                return _type == PrefixHandleType.Empty;
-            }
+            get { return _type == PrefixHandleType.Empty; }
         }
 
         public bool IsXmlns
@@ -84,11 +163,11 @@ namespace System.Xml
                     return false;
                 byte[] buffer = _bufferReader.Buffer;
                 int offset = _offset;
-                return buffer[offset + 0] == 'x' &&
-                       buffer[offset + 1] == 'm' &&
-                       buffer[offset + 2] == 'l' &&
-                       buffer[offset + 3] == 'n' &&
-                       buffer[offset + 4] == 's';
+                return buffer[offset + 0] == 'x'
+                    && buffer[offset + 1] == 'm'
+                    && buffer[offset + 2] == 'l'
+                    && buffer[offset + 3] == 'n'
+                    && buffer[offset + 4] == 's';
             }
         }
 
@@ -102,9 +181,9 @@ namespace System.Xml
                     return false;
                 byte[] buffer = _bufferReader.Buffer;
                 int offset = _offset;
-                return buffer[offset + 0] == 'x' &&
-                       buffer[offset + 1] == 'm' &&
-                       buffer[offset + 2] == 'l';
+                return buffer[offset + 0] == 'x'
+                    && buffer[offset + 1] == 'm'
+                    && buffer[offset + 2] == 'l';
             }
         }
 
@@ -190,7 +269,13 @@ namespace System.Xml
             if (_bufferReader == prefix2._bufferReader)
                 return _bufferReader.Equals2(_offset, _length, prefix2._offset, prefix2._length);
             else
-                return _bufferReader.Equals2(_offset, _length, prefix2._bufferReader, prefix2._offset, prefix2._length);
+                return _bufferReader.Equals2(
+                    _offset,
+                    _length,
+                    prefix2._bufferReader,
+                    prefix2._offset,
+                    prefix2._length
+                );
         }
 
         private bool Equals2(string prefix2)

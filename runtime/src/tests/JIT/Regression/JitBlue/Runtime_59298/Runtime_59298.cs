@@ -31,29 +31,35 @@ public class Runtime_59298
         switch (long_7)
         {
             case -5:
+            {
+                do
                 {
-                    do
+                    try
                     {
-                        try
-                        {
-                            int_6 ^= int_6;
-                        }
-                        finally
-                        {
-                            // The expression doesn't matter, it just has to be long enough
-                            // to have few extra blocks which we don't walk when doing inverse
-                            // post order while computing dominance information.
-                            long_7 &= long_7;
-                            int_6 &= (int_6 /= (int_6 -= LeafMethod6() - int_6) + 69) / ((int_6 << (int_6 - int_6)) + (int_6 |= LeafMethod6()) + (LeafMethod6() >> s_int_6) + 62);
-                        }
+                        int_6 ^= int_6;
                     }
-                    while (long_7 == 8);
-                    break;
-                }
+                    finally
+                    {
+                        // The expression doesn't matter, it just has to be long enough
+                        // to have few extra blocks which we don't walk when doing inverse
+                        // post order while computing dominance information.
+                        long_7 &= long_7;
+                        int_6 &=
+                            (int_6 /= (int_6 -= LeafMethod6() - int_6) + 69)
+                            / (
+                                (int_6 << (int_6 - int_6))
+                                + (int_6 |= LeafMethod6())
+                                + (LeafMethod6() >> s_int_6)
+                                + 62
+                            );
+                    }
+                } while (long_7 == 8);
+                break;
+            }
             default:
-                {
-                    break;
-                }
+            {
+                break;
+            }
         }
         return s_s2_16;
     }

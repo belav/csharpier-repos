@@ -34,16 +34,24 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void CtorTests()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>(dictionary, expectedArr, s_generateItemFunc);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >(dictionary, expectedArr, s_generateItemFunc);
             helper.InitialItems_Tests();
 
             IDictionary<int, string> dictAsIDictionary = dictionary;
@@ -61,7 +69,10 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void CtorTests_Negative()
         {
-            AssertExtensions.Throws<ArgumentNullException>("dictionary", () => new ReadOnlyDictionary<int, string>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dictionary",
+                () => new ReadOnlyDictionary<int, string>(null)
+            );
         }
 
         /// <summary>
@@ -71,16 +82,24 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void ContainsKeyTests()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>(dictionary, expectedArr, s_generateItemFunc);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >(dictionary, expectedArr, s_generateItemFunc);
             helper.ContainsKey_Tests();
         }
 
@@ -91,16 +110,24 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void TryGetValueTests()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>(dictionary, expectedArr, s_generateItemFunc);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >(dictionary, expectedArr, s_generateItemFunc);
             helper.TryGetValue_Tests();
         }
 
@@ -110,16 +137,24 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void GetKeysTests()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>(dictionary, expectedArr, s_generateItemFunc);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >(dictionary, expectedArr, s_generateItemFunc);
             helper.Keys_get_Tests();
         }
 
@@ -129,16 +164,24 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void GetValuesTests()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>(dictionary, expectedArr, s_generateItemFunc);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >(dictionary, expectedArr, s_generateItemFunc);
             helper.Values_get_Tests();
         }
 
@@ -148,10 +191,13 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void IDictionaryItemTests()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
             IDictionary dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
             Assert.Null(dictionary[2]);
         }
@@ -162,16 +208,24 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void GetItemTests()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>(dictionary, expectedArr, s_generateItemFunc);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >(dictionary, expectedArr, s_generateItemFunc);
             helper.Item_get_Tests();
         }
 
@@ -182,16 +236,24 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void GetItemTests_Negative()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>(dictionary, expectedArr, s_generateItemFunc);
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >(dictionary, expectedArr, s_generateItemFunc);
             helper.Item_get_Tests_Negative();
         }
 
@@ -202,21 +264,33 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void CannotModifyDictionaryTests_Negative()
         {
-            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[] {
+            KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
+            {
                 new KeyValuePair<int, string>(1, "one"),
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(expectedArr);
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<int, string>();
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
+                expectedArr
+            );
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
+                dummyExpectedDict
+            );
+            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
+                int,
+                string
+            >();
             IDictionary<int, string> dictAsIDictionary = dictionary;
 
-            Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Add(new KeyValuePair<int, string>(7, "seven")));
+            Assert.Throws<NotSupportedException>(
+                () => dictAsIDictionary.Add(new KeyValuePair<int, string>(7, "seven"))
+            );
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Add(7, "seven"));
-            Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Remove(new KeyValuePair<int, string>(1, "one")));
+            Assert.Throws<NotSupportedException>(
+                () => dictAsIDictionary.Remove(new KeyValuePair<int, string>(1, "one"))
+            );
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Remove(1));
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Clear());
 
@@ -224,54 +298,108 @@ namespace System.Collections.ObjectModel.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57588", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57588",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void DebuggerAttributeTests()
         {
-            ReadOnlyDictionary<int, int> dict = new ReadOnlyDictionary<int, int>(new Dictionary<int, int>{{1, 2}, {2, 4}, {3, 6}});
+            ReadOnlyDictionary<int, int> dict = new ReadOnlyDictionary<int, int>(
+                new Dictionary<int, int> { { 1, 2 }, { 2, 4 }, { 3, 6 } }
+            );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(dict);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(dict);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
-            KeyValuePair<int, int>[] pairs = itemProperty.GetValue(info.Instance) as KeyValuePair<int, int>[];
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                dict
+            );
+            PropertyInfo itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
+            KeyValuePair<int, int>[] pairs =
+                itemProperty.GetValue(info.Instance) as KeyValuePair<int, int>[];
             Assert.Equal(dict, pairs);
 
             DebuggerAttributes.ValidateDebuggerDisplayReferences(dict.Keys);
-            info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(ReadOnlyDictionary<int, int>.KeyCollection), new Type[] { typeof(int) }, dict.Keys);
-            itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                typeof(ReadOnlyDictionary<int, int>.KeyCollection),
+                new Type[] { typeof(int) },
+                dict.Keys
+            );
+            itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(dict.Keys, items);
 
             DebuggerAttributes.ValidateDebuggerDisplayReferences(dict.Values);
-            info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(ReadOnlyDictionary<int, int>.KeyCollection), new Type[] { typeof(int) }, dict.Values);
-            itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                typeof(ReadOnlyDictionary<int, int>.KeyCollection),
+                new Type[] { typeof(int) },
+                dict.Values
+            );
+            itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
             items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(dict.Values, items);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57588", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57588",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void DebuggerAttribute_NullDictionary_ThrowsArgumentNullException()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>   DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(ReadOnlyDictionary<int, int>), null));
-            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(ex.InnerException);
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
+                () =>
+                    DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                        typeof(ReadOnlyDictionary<int, int>),
+                        null
+                    )
+            );
+            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
+                ex.InnerException
+            );
             Assert.Equal("dictionary", argumentNullException.ParamName);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57588", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57588",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void DebuggerAttribute_NullDictionaryKeys_ThrowsArgumentNullException()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() => DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(ReadOnlyDictionary<int, int>.KeyCollection), new Type[] { typeof(int) }, null));
-            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(ex.InnerException);
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
+                () =>
+                    DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                        typeof(ReadOnlyDictionary<int, int>.KeyCollection),
+                        new Type[] { typeof(int) },
+                        null
+                    )
+            );
+            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
+                ex.InnerException
+            );
             Assert.Equal("collection", argumentNullException.ParamName);
         }
     }
 
     public class TestReadOnlyDictionary<TKey, TValue> : ReadOnlyDictionary<TKey, TValue>
     {
-        public TestReadOnlyDictionary(IDictionary<TKey, TValue> dict)
-            : base(dict)
-        {
-        }
+        public TestReadOnlyDictionary(IDictionary<TKey, TValue> dict) : base(dict) { }
 
         public IDictionary<TKey, TValue> GetDictionary()
         {
@@ -295,7 +423,7 @@ namespace System.Collections.ObjectModel.Tests
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable) _inner).GetEnumerator();
+            return ((IEnumerable)_inner).GetEnumerator();
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
@@ -370,19 +498,27 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class ReadOnlyDictionaryOverNonGenericTests
-        : IDictionaryTest<string, int>
+    public class ReadOnlyDictionaryOverNonGenericTests : IDictionaryTest<string, int>
     {
-        public ReadOnlyDictionaryOverNonGenericTests()
-            : base(false)
-        {
-        }
+        public ReadOnlyDictionaryOverNonGenericTests() : base(false) { }
 
         private int m_next_item = 1;
-        protected override bool IsResetNotSupported { get { return false; } }
-        protected override bool IsGenericCompatibility { get { return false; } }
-        protected override bool ItemsMustBeUnique { get { return true; } }
-        protected override bool ItemsMustBeNonNull { get { return true; } }
+        protected override bool IsResetNotSupported
+        {
+            get { return false; }
+        }
+        protected override bool IsGenericCompatibility
+        {
+            get { return false; }
+        }
+        protected override bool ItemsMustBeUnique
+        {
+            get { return true; }
+        }
+        protected override bool ItemsMustBeNonNull
+        {
+            get { return true; }
+        }
         protected override object GenerateItem()
         {
             return new KeyValuePair<string, int>(m_next_item.ToString(), m_next_item++);
@@ -390,7 +526,9 @@ namespace System.Collections.ObjectModel.Tests
 
         protected override IEnumerable GetEnumerable(object[] items)
         {
-            var dict = new DictionaryThatDoesntImplementNonGeneric<string, int>(new Dictionary<string, int>());
+            var dict = new DictionaryThatDoesntImplementNonGeneric<string, int>(
+                new Dictionary<string, int>()
+            );
             foreach (KeyValuePair<string, int> p in items)
                 dict[p.Key] = p.Value;
             return new TestReadOnlyDictionary<string, int>(dict);
@@ -408,19 +546,27 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class ReadOnlyDictionaryTestsStringInt
-        : IDictionaryTest<string, int>
+    public class ReadOnlyDictionaryTestsStringInt : IDictionaryTest<string, int>
     {
-        public ReadOnlyDictionaryTestsStringInt()
-            : base(false)
-        {
-        }
+        public ReadOnlyDictionaryTestsStringInt() : base(false) { }
 
         private int m_next_item = 1;
-        protected override bool IsResetNotSupported { get { return false; } }
-        protected override bool IsGenericCompatibility { get { return false; } }
-        protected override bool ItemsMustBeUnique { get { return true; } }
-        protected override bool ItemsMustBeNonNull { get { return true; } }
+        protected override bool IsResetNotSupported
+        {
+            get { return false; }
+        }
+        protected override bool IsGenericCompatibility
+        {
+            get { return false; }
+        }
+        protected override bool ItemsMustBeUnique
+        {
+            get { return true; }
+        }
+        protected override bool ItemsMustBeNonNull
+        {
+            get { return true; }
+        }
         protected override object GenerateItem()
         {
             return new KeyValuePair<string, int>(m_next_item.ToString(), m_next_item++);
@@ -460,18 +606,17 @@ namespace System.Collections.ObjectModel.Tests
         /// Initializes a new instance of the IReadOnlyDictionary_T_Test.
         /// </summary>
         public IReadOnlyDictionary_T_Test(
-            IReadOnlyDictionary<TKey, TValue> collection, KeyValuePair<TKey, TValue>[] expectedItems,
-            Func<KeyValuePair<TKey, TValue>> generateItem)
+            IReadOnlyDictionary<TKey, TValue> collection,
+            KeyValuePair<TKey, TValue>[] expectedItems,
+            Func<KeyValuePair<TKey, TValue>> generateItem
+        )
         {
             _collection = collection;
             _expectedItems = expectedItems;
             _generateItem = generateItem;
         }
 
-        public IReadOnlyDictionary_T_Test()
-        {
-
-        }
+        public IReadOnlyDictionary_T_Test() { }
 
         /// <summary>
         /// Tests that the initial items in the readonly collection
@@ -495,8 +640,12 @@ namespace System.Collections.ObjectModel.Tests
 
             for (int i = 0; i < _collection.Count; i++)
             {
-                Assert.True(_collection.ContainsKey(_expectedItems[i].Key),
-                    "Err_5983muqjl Verifying ContainsKey the item in the collection and the expected existing items(" + _expectedItems[i].Key + ")");
+                Assert.True(
+                    _collection.ContainsKey(_expectedItems[i].Key),
+                    "Err_5983muqjl Verifying ContainsKey the item in the collection and the expected existing items("
+                        + _expectedItems[i].Key
+                        + ")"
+                );
             }
 
             //Verify that the collection was not mutated
@@ -508,7 +657,11 @@ namespace System.Collections.ObjectModel.Tests
                 nonExistingItem = _generateItem();
             }
             TKey nonExistingKey = nonExistingItem.Key;
-            Assert.False(_collection.ContainsKey(nonExistingKey), "Err_4713ebda Verifying ContainsKey the non-existing item in the collection and the expected non-existing items key:" + nonExistingKey);
+            Assert.False(
+                _collection.ContainsKey(nonExistingKey),
+                "Err_4713ebda Verifying ContainsKey the non-existing item in the collection and the expected non-existing items key:"
+                    + nonExistingKey
+            );
 
             //Verify that the collection was not mutated
             VerifyCollection(_collection, _expectedItems);
@@ -525,8 +678,12 @@ namespace System.Collections.ObjectModel.Tests
             for (int i = 0; i < _collection.Count; i++)
             {
                 TValue itemValue;
-                Assert.True(_collection.TryGetValue(_expectedItems[i].Key, out itemValue),
-                    "Err_2621pnyan Verifying TryGetValue the item in the collection and the expected existing items(" + _expectedItems[i].Value + ")");
+                Assert.True(
+                    _collection.TryGetValue(_expectedItems[i].Key, out itemValue),
+                    "Err_2621pnyan Verifying TryGetValue the item in the collection and the expected existing items("
+                        + _expectedItems[i].Value
+                        + ")"
+                );
                 Assert.Equal(_expectedItems[i].Value, itemValue);
             }
 
@@ -539,8 +696,12 @@ namespace System.Collections.ObjectModel.Tests
                 nonExistingItem = _generateItem();
             }
             TValue nonExistingItemValue;
-            Assert.False(_collection.TryGetValue(nonExistingItem.Key, out nonExistingItemValue),
-                "Err_4561rtio Verifying TryGetValue returns false when looking for a non-existing item in the collection (" + nonExistingItem.Key + ")");
+            Assert.False(
+                _collection.TryGetValue(nonExistingItem.Key, out nonExistingItemValue),
+                "Err_4561rtio Verifying TryGetValue returns false when looking for a non-existing item in the collection ("
+                    + nonExistingItem.Key
+                    + ")"
+            );
 
             //Verify that the collection was not mutated
             VerifyCollection(_collection, _expectedItems);
@@ -557,7 +718,10 @@ namespace System.Collections.ObjectModel.Tests
             {
                 numItemsSeen++;
                 TValue value;
-                Assert.True(_collection.TryGetValue(key, out value), "Items in the Keys collection should exist in the dictionary!");
+                Assert.True(
+                    _collection.TryGetValue(key, out value),
+                    "Items in the Keys collection should exist in the dictionary!"
+                );
             }
             Assert.Equal(_collection.Count, numItemsSeen);
         }
@@ -577,7 +741,10 @@ namespace System.Collections.ObjectModel.Tests
             foreach (TValue value in _collection.Values)
             {
                 numItemsSeen++;
-                Assert.True(knownValuesList.Contains(value), "Items in the Values collection should exist in the dictionary!");
+                Assert.True(
+                    knownValuesList.Contains(value),
+                    "Items in the Values collection should exist in the dictionary!"
+                );
             }
             Assert.Equal(_collection.Count, numItemsSeen);
         }
@@ -608,7 +775,12 @@ namespace System.Collections.ObjectModel.Tests
         {
             // Verify get_Item with non-existing on Collection
             TKey nonExistingKey = _generateItem().Key;
-            Assert.Throws<KeyNotFoundException>(() => { TValue itemValue = _collection[nonExistingKey]; });
+            Assert.Throws<KeyNotFoundException>(
+                () =>
+                {
+                    TValue itemValue = _collection[nonExistingKey];
+                }
+            );
 
             //Verify that the collection was not mutated
             VerifyCollection(_collection, _expectedItems);
@@ -617,7 +789,10 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Verifies that the items in the given collection match the expected items.
         /// </summary>
-        public void VerifyCollection(IReadOnlyDictionary<TKey, TValue> collection, KeyValuePair<TKey, TValue>[] expectedItems)
+        public void VerifyCollection(
+            IReadOnlyDictionary<TKey, TValue> collection,
+            KeyValuePair<TKey, TValue>[] expectedItems
+        )
         {
             // verify that you can get all items in collection.
             Assert.Equal(expectedItems.Length, collection.Count);
@@ -636,7 +811,10 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Verifies that the generic enumerator retrieves the correct items.
         /// </summary>
-        private void VerifyGenericEnumerator(IReadOnlyDictionary<TKey, TValue> collection, KeyValuePair<TKey, TValue>[] expectedItems)
+        private void VerifyGenericEnumerator(
+            IReadOnlyDictionary<TKey, TValue> collection,
+            KeyValuePair<TKey, TValue>[] expectedItems
+        )
         {
             IEnumerator<KeyValuePair<TKey, TValue>> enumerator = collection.GetEnumerator();
             int iterations = 0;
@@ -652,8 +830,14 @@ namespace System.Collections.ObjectModel.Tests
                 KeyValuePair<TKey, TValue> tempItem;
 
                 // Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) then are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) then are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 // Verify Current returned the correct value
                 itemFound = false;
@@ -667,7 +851,10 @@ namespace System.Collections.ObjectModel.Tests
                         break;
                     }
                 }
-                Assert.True(itemFound, "Err_1432pauy Current returned unexpected value=" + currentItem);
+                Assert.True(
+                    itemFound,
+                    "Err_1432pauy Current returned unexpected value=" + currentItem
+                );
 
                 // Verify Current always returns the same value every time it is called
                 for (int i = 0; i < 3; i++)
@@ -681,14 +868,25 @@ namespace System.Collections.ObjectModel.Tests
 
             for (int i = 0; i < expectedCount; ++i)
             {
-                Assert.True(itemsVisited[i], "Err_052848ahiedoi Expected Current to return true for item: " + expectedItems[i] + "index: " + i);
+                Assert.True(
+                    itemsVisited[i],
+                    "Err_052848ahiedoi Expected Current to return true for item: "
+                        + expectedItems[i]
+                        + "index: "
+                        + i
+                );
             }
 
             Assert.Equal(expectedCount, iterations);
 
             for (int i = 0; i < 3; i++)
             {
-                Assert.False(enumerator.MoveNext(), "Err_2929ahiea Expected MoveNext to return false after" + iterations + " iterations");
+                Assert.False(
+                    enumerator.MoveNext(),
+                    "Err_2929ahiea Expected MoveNext to return false after"
+                        + iterations
+                        + " iterations"
+                );
             }
 
             enumerator.Dispose();
@@ -697,7 +895,10 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Verifies that the non-generic enumerator retrieves the correct items.
         /// </summary>
-        private void VerifyEnumerator(IReadOnlyDictionary<TKey, TValue> collection, KeyValuePair<TKey, TValue>[] expectedItems)
+        private void VerifyEnumerator(
+            IReadOnlyDictionary<TKey, TValue> collection,
+            KeyValuePair<TKey, TValue>[] expectedItems
+        )
         {
             IEnumerator enumerator = collection.GetEnumerator();
             int iterations = 0;
@@ -713,8 +914,14 @@ namespace System.Collections.ObjectModel.Tests
                 object tempItem;
 
                 // Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) then are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) then are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 // Verify Current returned the correct value
                 itemFound = false;
@@ -728,7 +935,10 @@ namespace System.Collections.ObjectModel.Tests
                         break;
                     }
                 }
-                Assert.True(itemFound, "Err_1432pauy Current returned unexpected value=" + currentItem);
+                Assert.True(
+                    itemFound,
+                    "Err_1432pauy Current returned unexpected value=" + currentItem
+                );
 
                 // Verify Current always returns the same value every time it is called
                 for (int i = 0; i < 3; i++)
@@ -742,14 +952,25 @@ namespace System.Collections.ObjectModel.Tests
 
             for (int i = 0; i < expectedCount; ++i)
             {
-                Assert.True(itemsVisited[i], "Err_052848ahiedoi Expected Current to return true for item: " + expectedItems[i] + "index: " + i);
+                Assert.True(
+                    itemsVisited[i],
+                    "Err_052848ahiedoi Expected Current to return true for item: "
+                        + expectedItems[i]
+                        + "index: "
+                        + i
+                );
             }
 
             Assert.Equal(expectedCount, iterations);
 
             for (int i = 0; i < 3; i++)
             {
-                Assert.False(enumerator.MoveNext(), "Err_2929ahiea Expected MoveNext to return false after" + iterations + " iterations");
+                Assert.False(
+                    enumerator.MoveNext(),
+                    "Err_2929ahiea Expected MoveNext to return false after"
+                        + iterations
+                        + " iterations"
+                );
             }
         }
 
@@ -757,7 +978,10 @@ namespace System.Collections.ObjectModel.Tests
         /// tests whether the given item's key is unique in a collection.
         /// returns true if it is and false otherwise.
         /// </summary>
-        private bool IsUniqueKey(KeyValuePair<TKey, TValue>[] items, KeyValuePair<TKey, TValue> item)
+        private bool IsUniqueKey(
+            KeyValuePair<TKey, TValue>[] items,
+            KeyValuePair<TKey, TValue> item
+        )
         {
             for (int i = 0; i < items.Length; ++i)
             {
@@ -852,10 +1076,7 @@ namespace System.Collections.ObjectModel.Tests
                 }
                 throw new KeyNotFoundException("key does not exist");
             }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            set { throw new NotImplementedException(); }
         }
 
         public bool TryGetValue(TKey key, out TValue value)
@@ -880,22 +1101,30 @@ namespace System.Collections.ObjectModel.Tests
 
         public void Add(TKey key, TValue value)
         {
-            throw new NotImplementedException("Should not have been able to add to the collection.");
+            throw new NotImplementedException(
+                "Should not have been able to add to the collection."
+            );
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException("Should not have been able to add to the collection.");
+            throw new NotImplementedException(
+                "Should not have been able to add to the collection."
+            );
         }
 
         public bool Remove(TKey key)
         {
-            throw new NotImplementedException("Should not have been able remove items from the collection.");
+            throw new NotImplementedException(
+                "Should not have been able remove items from the collection."
+            );
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException("Should not have been able remove items from the collection.");
+            throw new NotImplementedException(
+                "Should not have been able remove items from the collection."
+            );
         }
 
         public void Clear()

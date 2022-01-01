@@ -17,14 +17,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicF1Help(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicF1Help))
-        {
-        }
+            : base(instanceFactory, nameof(BasicF1Help)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.F1Help)]
         private void F1Help()
         {
-            var text = @"
+            var text =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -48,7 +47,6 @@ End Module";
             Verify("From", "vb.QueryFrom");
             Verify("+=", "vb.+=");
             Verify("Nothing", "vb.Nothing");
-
         }
 
         private void Verify(string word, string expectedKeyword)

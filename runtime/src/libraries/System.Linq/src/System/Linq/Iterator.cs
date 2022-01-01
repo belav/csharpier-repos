@@ -78,7 +78,8 @@ namespace System.Linq
             /// </remarks>
             public IEnumerator<TSource> GetEnumerator()
             {
-                Iterator<TSource> enumerator = _state == 0 && _threadId == Environment.CurrentManagedThreadId ? this : Clone();
+                Iterator<TSource> enumerator =
+                    _state == 0 && _threadId == Environment.CurrentManagedThreadId ? this : Clone();
                 enumerator._state = 1;
                 return enumerator;
             }

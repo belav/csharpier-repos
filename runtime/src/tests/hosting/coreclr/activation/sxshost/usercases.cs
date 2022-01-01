@@ -9,11 +9,11 @@ using System.Collections.Generic;
 // this file, the first argument to SameStackHost2 should be: UserCases_Calls_Foo.
 class Calls
 {
-	static int Return100()
-	{
-		Console.WriteLine("Returning 100...");
-		return 100;
-	}
+    static int Return100()
+    {
+        Console.WriteLine("Returning 100...");
+        return 100;
+    }
 
     static int ThrowManaged()
     {
@@ -21,7 +21,7 @@ class Calls
         throw new NotSupportedException("blagh");
         return 100;
     }
-    
+
     static int InterfaceThrow()
     {
         Console.WriteLine("Interface call to null object");

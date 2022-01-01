@@ -20,12 +20,34 @@ using System.Threading.Tasks;
 
 public static class MountHelper
 {
-    [DllImport("kernel32.dll", EntryPoint = "GetVolumeNameForVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
-    private static extern bool GetVolumeNameForVolumeMountPoint(string volumeName, StringBuilder uniqueVolumeName, int uniqueNameBufferCapacity);
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "GetVolumeNameForVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
+    private static extern bool GetVolumeNameForVolumeMountPoint(
+        string volumeName,
+        StringBuilder uniqueVolumeName,
+        int uniqueNameBufferCapacity
+    );
     // unique volume name must be "\\?\Volume{GUID}\"
-    [DllImport("kernel32.dll", EntryPoint = "SetVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "SetVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
     private static extern bool SetVolumeMountPoint(string mountPoint, string uniqueVolumeName);
-    [DllImport("kernel32.dll", EntryPoint = "DeleteVolumeMountPointW", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
+    [DllImport(
+        "kernel32.dll",
+        EntryPoint = "DeleteVolumeMountPointW",
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false,
+        SetLastError = true
+    )]
     private static extern bool DeleteVolumeMountPoint(string mountPoint);
 
     /// <summary>Creates a symbolic link using command line tools.</summary>
@@ -35,12 +57,21 @@ public static class MountHelper
         if (OperatingSystem.IsWindows())
         {
             symLinkProcess.StartInfo.FileName = "cmd";
-            symLinkProcess.StartInfo.Arguments = string.Format("/c mklink{0} \"{1}\" \"{2}\"", isDirectory ? " /D" : "", linkPath, targetPath);
+            symLinkProcess.StartInfo.Arguments = string.Format(
+                "/c mklink{0} \"{1}\" \"{2}\"",
+                isDirectory ? " /D" : "",
+                linkPath,
+                targetPath
+            );
         }
         else
         {
             symLinkProcess.StartInfo.FileName = "/bin/ln";
-            symLinkProcess.StartInfo.Arguments = string.Format("-s \"{0}\" \"{1}\"", targetPath, linkPath);
+            symLinkProcess.StartInfo.Arguments = string.Format(
+                "-s \"{0}\" \"{1}\"",
+                targetPath,
+                linkPath
+            );
         }
         symLinkProcess.StartInfo.UseShellExecute = false;
         symLinkProcess.StartInfo.RedirectStandardOutput = true;
@@ -58,7 +89,9 @@ public static class MountHelper
             throw new PlatformNotSupportedException();
         }
 
-        return RunProcess(CreateProcessStartInfo("cmd", "/c", "mklink", "/J", junctionPath, targetPath));
+        return RunProcess(
+            CreateProcessStartInfo("cmd", "/c", "mklink", "/J", junctionPath, targetPath)
+        );
     }
 
     ///<summary>
@@ -73,10 +106,14 @@ public static class MountHelper
         }
 
         char driveLetter = GetNextAvailableDriveLetter();
-        bool success = RunProcess(CreateProcessStartInfo("cmd", "/c", SubstPath, $"{driveLetter}:", targetDir));
+        bool success = RunProcess(
+            CreateProcessStartInfo("cmd", "/c", SubstPath, $"{driveLetter}:", targetDir)
+        );
         if (!success || !DriveInfo.GetDrives().Any(x => x.Name[0] == driveLetter))
         {
-            throw new InvalidOperationException($"Could not create virtual drive {driveLetter}: with subst");
+            throw new InvalidOperationException(
+                $"Could not create virtual drive {driveLetter}: with subst"
+            );
         }
         return driveLetter;
 
@@ -109,10 +146,14 @@ public static class MountHelper
             throw new PlatformNotSupportedException();
         }
 
-        bool success = RunProcess(CreateProcessStartInfo("cmd", "/c", SubstPath, "/d", $"{driveLetter}:"));
+        bool success = RunProcess(
+            CreateProcessStartInfo("cmd", "/c", SubstPath, "/d", $"{driveLetter}:")
+        );
         if (!success || DriveInfo.GetDrives().Any(x => x.Name[0] == driveLetter))
         {
-            throw new InvalidOperationException($"Could not delete virtual drive {driveLetter}: with subst");
+            throw new InvalidOperationException(
+                $"Could not delete virtual drive {driveLetter}: with subst"
+            );
         }
     }
 
@@ -149,7 +190,10 @@ public static class MountHelper
             throw new Exception(string.Format("Win32 error: {0}", Marshal.GetLastPInvokeError()));
     }
 
-    private static ProcessStartInfo CreateProcessStartInfo(string fileName, params string[] arguments)
+    private static ProcessStartInfo CreateProcessStartInfo(
+        string fileName,
+        params string[] arguments
+    )
     {
         var info = new ProcessStartInfo
         {
@@ -191,17 +235,16 @@ public static class MountHelper
     /// For standalone debugging help. Change Main0 to Main
     public static void Main0(string[] args)
     {
-         try
+        try
         {
-            if (args[0]=="-m")
+            if (args[0] == "-m")
                 Mount(args[1], args[2]);
-            if (args[0]=="-u")
+            if (args[0] == "-u")
                 Unmount(args[1]);
-         }
+        }
         catch (Exception ex)
         {
-             Console.WriteLine(ex);
+            Console.WriteLine(ex);
         }
     }
-
 }

@@ -11,16 +11,22 @@ public sealed class ReferenceCaptureIntermediateNode : IntermediateNode
 {
     public ReferenceCaptureIntermediateNode(IntermediateToken identifierToken)
     {
-        IdentifierToken = identifierToken ?? throw new ArgumentNullException(nameof(identifierToken));
+        IdentifierToken =
+            identifierToken ?? throw new ArgumentNullException(nameof(identifierToken));
         Source = IdentifierToken.Source;
     }
 
-    public ReferenceCaptureIntermediateNode(IntermediateToken identifierToken, string componentCaptureTypeName)
-        : this(identifierToken)
+    public ReferenceCaptureIntermediateNode(
+        IntermediateToken identifierToken,
+        string componentCaptureTypeName
+    ) : this(identifierToken)
     {
         if (string.IsNullOrEmpty(componentCaptureTypeName))
         {
-            throw new ArgumentException("Cannot be null or empty", nameof(componentCaptureTypeName));
+            throw new ArgumentException(
+                "Cannot be null or empty",
+                nameof(componentCaptureTypeName)
+            );
         }
 
         IsComponentCapture = true;
@@ -35,7 +41,10 @@ public sealed class ReferenceCaptureIntermediateNode : IntermediateNode
 
     public string ComponentCaptureTypeName { get; set; }
 
-    public string FieldTypeName => IsComponentCapture ? ComponentCaptureTypeName : "global::" + ComponentsApi.ElementReference.FullTypeName;
+    public string FieldTypeName =>
+        IsComponentCapture
+            ? ComponentCaptureTypeName
+            : "global::" + ComponentsApi.ElementReference.FullTypeName;
 
     public string TypeName => $"global::System.Action<{FieldTypeName}>";
 

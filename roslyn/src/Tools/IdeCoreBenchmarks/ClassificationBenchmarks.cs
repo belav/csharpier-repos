@@ -45,9 +45,14 @@ namespace IdeCoreBenchmarks
 
         private void RestoreCompilerSolution()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             _solutionPath = Path.Combine(roslynRoot, @"Roslyn.sln");
-            var restoreOperation = Process.Start("dotnet", $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {_solutionPath}");
+            var restoreOperation = Process.Start(
+                "dotnet",
+                $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {_solutionPath}"
+            );
             restoreOperation.WaitForExit();
             if (restoreOperation.ExitCode != 0)
                 throw new ArgumentException($"Unable to restore {_solutionPath}");
@@ -57,14 +62,19 @@ namespace IdeCoreBenchmarks
         {
             // QueryVisualStudioInstances returns Visual Studio installations on .NET Framework, and .NET Core SDK
             // installations on .NET Core. We use the one with the most recent version.
-            var msBuildInstance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version).First();
+            var msBuildInstance = MSBuildLocator
+                .QueryVisualStudioInstances()
+                .OrderByDescending(x => x.Version)
+                .First();
 
             MSBuildLocator.RegisterInstance(msBuildInstance);
         }
 
         private async Task LoadSolutionAsync()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             var solutionPath = Path.Combine(roslynRoot, "Roslyn.sln");
 
             if (!File.Exists(solutionPath))
@@ -77,31 +87,53 @@ namespace IdeCoreBenchmarks
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
 
-            _workspace = MSBuildWorkspace.Create(new Dictionary<string, string>
+            _workspace = MSBuildWorkspace.Create(
+                new Dictionary<string, string>
                 {
                     // Use the latest language version to force the full set of available analyzers to run on the project.
                     { "LangVersion", "preview" },
-                }, services);
+                },
+                services
+            );
 
             if (_workspace == null)
                 throw new ArgumentException("Couldn't create workspace");
 
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(
+                        StorageOptions.Database,
+                        StorageDatabase.SQLite
+                    )
+                )
+            );
 
             Console.WriteLine("Opening roslyn.  Attach to: " + Process.GetCurrentProcess().Id);
 
             var start = DateTime.Now;
-            _solution = await _workspace.OpenSolutionAsync(solutionPath, progress: null, CancellationToken.None);
+            _solution = await _workspace.OpenSolutionAsync(
+                solutionPath,
+                progress: null,
+                CancellationToken.None
+            );
             Console.WriteLine("Finished opening roslyn: " + (DateTime.Now - start));
         }
 
-        protected static async Task<ImmutableArray<ClassifiedSpan>> GetSemanticClassificationsAsync(Document document, TextSpan span)
+        protected static async Task<ImmutableArray<ClassifiedSpan>> GetSemanticClassificationsAsync(
+            Document document,
+            TextSpan span
+        )
         {
             var service = document.GetRequiredLanguageService<IClassificationService>();
             var options = ClassificationOptions.From(document.Project);
             using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var result);
-            await service.AddSemanticClassificationsAsync(document, span, options, result, CancellationToken.None);
+            await service.AddSemanticClassificationsAsync(
+                document,
+                span,
+                options,
+                result,
+                CancellationToken.None
+            );
             return result.ToImmutable();
         }
 

@@ -51,8 +51,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             ImmutableArray<string> supportedLanguages,
             string? clientName,
             string userVisibleServerName,
-            string telemetryServerTypeName)
-            : base(requestDispatcherFactory, jsonRpc, capabilitiesProvider, workspaceRegistrationService, lspMiscellaneousFilesWorkspace: null, globalOptions, listenerProvider, logger, supportedLanguages, clientName, userVisibleServerName, telemetryServerTypeName)
+            string telemetryServerTypeName
+        )
+            : base(
+                requestDispatcherFactory,
+                jsonRpc,
+                capabilitiesProvider,
+                workspaceRegistrationService,
+                lspMiscellaneousFilesWorkspace: null,
+                globalOptions,
+                listenerProvider,
+                logger,
+                supportedLanguages,
+                clientName,
+                userVisibleServerName,
+                telemetryServerTypeName
+            )
         {
             _supportedLanguages = supportedLanguages;
             _diagnosticService = diagnosticService;
@@ -63,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 (ids, ct) => ProcessDiagnosticUpdatedBatchAsync(_diagnosticService, ids, ct),
                 EqualityComparer<DocumentId>.Default,
                 Listener,
-                Queue.CancellationToken);
+                Queue.CancellationToken
+            );
 
             if (_diagnosticService != null)
                 _diagnosticService.DiagnosticsUpdated += DiagnosticService_DiagnosticsUpdated;
@@ -97,51 +112,139 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             }
         }
 
-        [JsonRpcMethod(VSInternalMethods.DocumentPullDiagnosticName, UseSingleObjectParameterDeserialization = true)]
-        public Task<VSInternalDiagnosticReport[]?> GetDocumentPullDiagnosticsAsync(VSInternalDocumentDiagnosticsParams diagnosticsParams, CancellationToken cancellationToken)
+        [JsonRpcMethod(
+            VSInternalMethods.DocumentPullDiagnosticName,
+            UseSingleObjectParameterDeserialization = true
+        )]
+        public Task<VSInternalDiagnosticReport[]?> GetDocumentPullDiagnosticsAsync(
+            VSInternalDocumentDiagnosticsParams diagnosticsParams,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfNull(_clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
+            Contract.ThrowIfNull(
+                _clientCapabilities,
+                $"{nameof(InitializeAsync)} has not been called."
+            );
 
-            return RequestDispatcher.ExecuteRequestAsync<VSInternalDocumentDiagnosticsParams, VSInternalDiagnosticReport[]?>(
-                Queue, VSInternalMethods.DocumentPullDiagnosticName,
-                diagnosticsParams, _clientCapabilities, ClientName, cancellationToken);
+            return RequestDispatcher.ExecuteRequestAsync<
+                VSInternalDocumentDiagnosticsParams,
+                VSInternalDiagnosticReport[]?
+            >(
+                Queue,
+                VSInternalMethods.DocumentPullDiagnosticName,
+                diagnosticsParams,
+                _clientCapabilities,
+                ClientName,
+                cancellationToken
+            );
         }
 
-        [JsonRpcMethod(VSInternalMethods.WorkspacePullDiagnosticName, UseSingleObjectParameterDeserialization = true)]
-        public Task<VSInternalWorkspaceDiagnosticReport[]?> GetWorkspacePullDiagnosticsAsync(VSInternalWorkspaceDiagnosticsParams diagnosticsParams, CancellationToken cancellationToken)
+        [JsonRpcMethod(
+            VSInternalMethods.WorkspacePullDiagnosticName,
+            UseSingleObjectParameterDeserialization = true
+        )]
+        public Task<VSInternalWorkspaceDiagnosticReport[]?> GetWorkspacePullDiagnosticsAsync(
+            VSInternalWorkspaceDiagnosticsParams diagnosticsParams,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfNull(_clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
+            Contract.ThrowIfNull(
+                _clientCapabilities,
+                $"{nameof(InitializeAsync)} has not been called."
+            );
 
-            return RequestDispatcher.ExecuteRequestAsync<VSInternalWorkspaceDiagnosticsParams, VSInternalWorkspaceDiagnosticReport[]?>(
-                Queue, VSInternalMethods.WorkspacePullDiagnosticName,
-                diagnosticsParams, _clientCapabilities, ClientName, cancellationToken);
+            return RequestDispatcher.ExecuteRequestAsync<
+                VSInternalWorkspaceDiagnosticsParams,
+                VSInternalWorkspaceDiagnosticReport[]?
+            >(
+                Queue,
+                VSInternalMethods.WorkspacePullDiagnosticName,
+                diagnosticsParams,
+                _clientCapabilities,
+                ClientName,
+                cancellationToken
+            );
         }
 
-        [JsonRpcMethod(VSMethods.GetProjectContextsName, UseSingleObjectParameterDeserialization = true)]
-        public Task<VSProjectContextList?> GetProjectContextsAsync(VSGetProjectContextsParams textDocumentWithContextParams, CancellationToken cancellationToken)
+        [JsonRpcMethod(
+            VSMethods.GetProjectContextsName,
+            UseSingleObjectParameterDeserialization = true
+        )]
+        public Task<VSProjectContextList?> GetProjectContextsAsync(
+            VSGetProjectContextsParams textDocumentWithContextParams,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfNull(_clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
+            Contract.ThrowIfNull(
+                _clientCapabilities,
+                $"{nameof(InitializeAsync)} has not been called."
+            );
 
-            return RequestDispatcher.ExecuteRequestAsync<VSGetProjectContextsParams, VSProjectContextList?>(Queue, VSMethods.GetProjectContextsName,
-                textDocumentWithContextParams, _clientCapabilities, ClientName, cancellationToken);
+            return RequestDispatcher.ExecuteRequestAsync<
+                VSGetProjectContextsParams,
+                VSProjectContextList?
+            >(
+                Queue,
+                VSMethods.GetProjectContextsName,
+                textDocumentWithContextParams,
+                _clientCapabilities,
+                ClientName,
+                cancellationToken
+            );
         }
 
-        [JsonRpcMethod(VSInternalMethods.OnAutoInsertName, UseSingleObjectParameterDeserialization = true)]
-        public Task<VSInternalDocumentOnAutoInsertResponseItem?> GetDocumentOnAutoInsertAsync(VSInternalDocumentOnAutoInsertParams autoInsertParams, CancellationToken cancellationToken)
+        [JsonRpcMethod(
+            VSInternalMethods.OnAutoInsertName,
+            UseSingleObjectParameterDeserialization = true
+        )]
+        public Task<VSInternalDocumentOnAutoInsertResponseItem?> GetDocumentOnAutoInsertAsync(
+            VSInternalDocumentOnAutoInsertParams autoInsertParams,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfNull(_clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
+            Contract.ThrowIfNull(
+                _clientCapabilities,
+                $"{nameof(InitializeAsync)} has not been called."
+            );
 
-            return RequestDispatcher.ExecuteRequestAsync<VSInternalDocumentOnAutoInsertParams, VSInternalDocumentOnAutoInsertResponseItem?>(Queue, VSInternalMethods.OnAutoInsertName,
-                autoInsertParams, _clientCapabilities, ClientName, cancellationToken);
+            return RequestDispatcher.ExecuteRequestAsync<
+                VSInternalDocumentOnAutoInsertParams,
+                VSInternalDocumentOnAutoInsertResponseItem?
+            >(
+                Queue,
+                VSInternalMethods.OnAutoInsertName,
+                autoInsertParams,
+                _clientCapabilities,
+                ClientName,
+                cancellationToken
+            );
         }
 
-        [JsonRpcMethod(Methods.TextDocumentLinkedEditingRangeName, UseSingleObjectParameterDeserialization = true)]
-        public Task<LinkedEditingRanges?> GetLinkedEditingRangesAsync(LinkedEditingRangeParams renameParams, CancellationToken cancellationToken)
+        [JsonRpcMethod(
+            Methods.TextDocumentLinkedEditingRangeName,
+            UseSingleObjectParameterDeserialization = true
+        )]
+        public Task<LinkedEditingRanges?> GetLinkedEditingRangesAsync(
+            LinkedEditingRangeParams renameParams,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfNull(_clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
+            Contract.ThrowIfNull(
+                _clientCapabilities,
+                $"{nameof(InitializeAsync)} has not been called."
+            );
 
-            return RequestDispatcher.ExecuteRequestAsync<LinkedEditingRangeParams, LinkedEditingRanges?>(Queue, Methods.TextDocumentLinkedEditingRangeName,
-                renameParams, _clientCapabilities, ClientName, cancellationToken);
+            return RequestDispatcher.ExecuteRequestAsync<
+                LinkedEditingRangeParams,
+                LinkedEditingRanges?
+            >(
+                Queue,
+                Methods.TextDocumentLinkedEditingRangeName,
+                renameParams,
+                _clientCapabilities,
+                ClientName,
+                cancellationToken
+            );
         }
 
         protected override void ShutdownImpl()
@@ -151,10 +254,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 _diagnosticService.DiagnosticsUpdated -= DiagnosticService_DiagnosticsUpdated;
         }
 
-        private void DiagnosticService_DiagnosticsUpdated(object? _, DiagnosticsUpdatedArgs e)
-            => DiagnosticService_DiagnosticsUpdated(e.Solution, e.DocumentId);
+        private void DiagnosticService_DiagnosticsUpdated(object? _, DiagnosticsUpdatedArgs e) =>
+            DiagnosticService_DiagnosticsUpdated(e.Solution, e.DocumentId);
 
-        private void DiagnosticService_DiagnosticsUpdated(Solution? solution, DocumentId? documentId)
+        private void DiagnosticService_DiagnosticsUpdated(
+            Solution? solution,
+            DocumentId? documentId
+        )
         {
             // LSP doesn't support diagnostics without a document. So if we get project level diagnostics without a document, ignore them.
             if (documentId != null && solution != null)
@@ -184,7 +290,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// This dictionary stores the previously computed diagnostics for the published file so that we can
         /// union the currently computed diagnostics (e.g. for dA) with previously computed diagnostics (e.g. from dB).
         /// </summary>
-        private readonly Dictionary<Uri, Dictionary<DocumentId, ImmutableArray<LSP.Diagnostic>>> _publishedFileToDiagnostics = new();
+        private readonly Dictionary<
+            Uri,
+            Dictionary<DocumentId, ImmutableArray<LSP.Diagnostic>>
+        > _publishedFileToDiagnostics = new();
 
         /// <summary>
         /// Stores the mapping of a document to the uri(s) of diagnostics previously produced for this document.  When
@@ -194,17 +303,29 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// report URIs.  While it's not necessary to publish a document's mapped file diagnostics in a particular
         /// order, it does make it much easier to write tests and debug issues if we have a consistent ordering.
         /// </summary>
-        private readonly Dictionary<DocumentId, ImmutableSortedSet<Uri>> _documentsToPublishedUris = new();
+        private readonly Dictionary<DocumentId, ImmutableSortedSet<Uri>> _documentsToPublishedUris =
+            new();
 
         /// <summary>
         /// Basic comparer for Uris used by <see cref="_documentsToPublishedUris"/> when publishing notifications.
         /// </summary>
-        private static readonly Comparer<Uri> s_uriComparer = Comparer<Uri>.Create((uri1, uri2)
-            => Uri.Compare(uri1, uri2, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase));
+        private static readonly Comparer<Uri> s_uriComparer = Comparer<Uri>.Create(
+            (uri1, uri2) =>
+                Uri.Compare(
+                    uri1,
+                    uri2,
+                    UriComponents.AbsoluteUri,
+                    UriFormat.SafeUnescaped,
+                    StringComparison.OrdinalIgnoreCase
+                )
+        );
 
         // internal for testing purposes
         internal async ValueTask ProcessDiagnosticUpdatedBatchAsync(
-            IDiagnosticService? diagnosticService, ImmutableArray<DocumentId> documentIds, CancellationToken cancellationToken)
+            IDiagnosticService? diagnosticService,
+            ImmutableArray<DocumentId> documentIds,
+            CancellationToken cancellationToken
+        )
         {
             if (diagnosticService == null)
                 return;
@@ -212,32 +333,51 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             foreach (var documentId in documentIds)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                var document = WorkspaceRegistrationService.GetAllRegistrations().Select(w => w.CurrentSolution.GetDocument(documentId)).FirstOrDefault();
+                var document = WorkspaceRegistrationService
+                    .GetAllRegistrations()
+                    .Select(w => w.CurrentSolution.GetDocument(documentId))
+                    .FirstOrDefault();
 
                 if (document != null)
                 {
                     // If this is a `pull` client, and `pull` diagnostics is on, then we should not `publish` (push) the
-                    // diagnostics here. 
+                    // diagnostics here.
                     var diagnosticMode = document.IsRazorDocument()
                         ? InternalDiagnosticsOptions.RazorDiagnosticMode
                         : InternalDiagnosticsOptions.NormalDiagnosticMode;
                     if (GlobalOptions.IsPushDiagnostics(diagnosticMode))
-                        await PublishDiagnosticsAsync(diagnosticService, document, cancellationToken).ConfigureAwait(false);
+                        await PublishDiagnosticsAsync(
+                                diagnosticService,
+                                document,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                 }
             }
         }
 
-        private async Task PublishDiagnosticsAsync(IDiagnosticService diagnosticService, Document document, CancellationToken cancellationToken)
+        private async Task PublishDiagnosticsAsync(
+            IDiagnosticService diagnosticService,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             // Retrieve all diagnostics for the current document grouped by their actual file uri.
-            var fileUriToDiagnostics = await GetDiagnosticsAsync(diagnosticService, document, cancellationToken).ConfigureAwait(false);
+            var fileUriToDiagnostics = await GetDiagnosticsAsync(
+                    diagnosticService,
+                    document,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Get the list of file uris with diagnostics (for the document).
             // We need to join the uris from current diagnostics with those previously published
             // so that we clear out any diagnostics in mapped files that are no longer a part
             // of the current diagnostics set (because the diagnostics were fixed).
             // Use sorted set to have consistent publish ordering for tests and debugging.
-            var urisForCurrentDocument = _documentsToPublishedUris.GetValueOrDefault(document.Id, ImmutableSortedSet.Create<Uri>(s_uriComparer)).Union(fileUriToDiagnostics.Keys);
+            var urisForCurrentDocument = _documentsToPublishedUris
+                .GetValueOrDefault(document.Id, ImmutableSortedSet.Create<Uri>(s_uriComparer))
+                .Union(fileUriToDiagnostics.Keys);
 
             // Update the mapping for this document to be the uris we're about to publish diagnostics for.
             _documentsToPublishedUris[document.Id] = urisForCurrentDocument;
@@ -246,13 +386,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             foreach (var fileUri in urisForCurrentDocument)
             {
                 // Get the updated diagnostics for a single uri that were contributed by the current document.
-                var diagnostics = fileUriToDiagnostics.GetValueOrDefault(fileUri, ImmutableArray<LSP.Diagnostic>.Empty);
+                var diagnostics = fileUriToDiagnostics.GetValueOrDefault(
+                    fileUri,
+                    ImmutableArray<LSP.Diagnostic>.Empty
+                );
 
                 if (_publishedFileToDiagnostics.ContainsKey(fileUri))
                 {
                     // Get all previously published diagnostics for this uri excluding those that were contributed from the current document.
                     // We don't need those since we just computed the updated values above.
-                    var diagnosticsFromOtherDocuments = _publishedFileToDiagnostics[fileUri].Where(kvp => kvp.Key != document.Id).SelectMany(kvp => kvp.Value);
+                    var diagnosticsFromOtherDocuments = _publishedFileToDiagnostics[fileUri]
+                        .Where(kvp => kvp.Key != document.Id)
+                        .SelectMany(kvp => kvp.Value);
 
                     // Since diagnostics are replaced per uri, we must publish both contributions from this document and any other document
                     // that has diagnostic contributions to this uri, so union the two sets.
@@ -280,33 +425,63 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 {
                     // We do have diagnostics from the current document - update the published diagnostics map
                     // to contain the new diagnostics contributed by this document for this uri.
-                    var documentsToPublishedDiagnostics = _publishedFileToDiagnostics.GetOrAdd(fileUri, (_) =>
-                        new Dictionary<DocumentId, ImmutableArray<LSP.Diagnostic>>());
+                    var documentsToPublishedDiagnostics = _publishedFileToDiagnostics.GetOrAdd(
+                        fileUri,
+                        (_) => new Dictionary<DocumentId, ImmutableArray<LSP.Diagnostic>>()
+                    );
                     documentsToPublishedDiagnostics[document.Id] = fileUriToDiagnostics[fileUri];
                 }
                 else
                 {
                     // There were diagnostics from other documents, but none from the current document.
                     // If we're tracking the current document, we can stop.
-                    IReadOnlyDictionaryExtensions.GetValueOrDefault(_publishedFileToDiagnostics, fileUri)?.Remove(document.Id);
+                    IReadOnlyDictionaryExtensions.GetValueOrDefault(
+                        _publishedFileToDiagnostics,
+                        fileUri
+                    )?.Remove(document.Id);
                     _documentsToPublishedUris.MultiRemove(document.Id, fileUri);
                 }
             }
         }
 
-        private async Task SendDiagnosticsNotificationAsync(Uri uri, ImmutableArray<LSP.Diagnostic> diagnostics)
+        private async Task SendDiagnosticsNotificationAsync(
+            Uri uri,
+            ImmutableArray<LSP.Diagnostic> diagnostics
+        )
         {
-            var publishDiagnosticsParams = new PublishDiagnosticParams { Diagnostics = diagnostics.ToArray(), Uri = uri };
-            await JsonRpc.NotifyWithParameterObjectAsync(Methods.TextDocumentPublishDiagnosticsName, publishDiagnosticsParams).ConfigureAwait(false);
+            var publishDiagnosticsParams = new PublishDiagnosticParams
+            {
+                Diagnostics = diagnostics.ToArray(),
+                Uri = uri
+            };
+            await JsonRpc
+                .NotifyWithParameterObjectAsync(
+                    Methods.TextDocumentPublishDiagnosticsName,
+                    publishDiagnosticsParams
+                )
+                .ConfigureAwait(false);
         }
 
         private async Task<Dictionary<Uri, ImmutableArray<LSP.Diagnostic>>> GetDiagnosticsAsync(
-            IDiagnosticService diagnosticService, Document document, CancellationToken cancellationToken)
+            IDiagnosticService diagnosticService,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var option = document.IsRazorDocument()
                 ? InternalDiagnosticsOptions.RazorDiagnosticMode
                 : InternalDiagnosticsOptions.NormalDiagnosticMode;
-            var pushDiagnostics = await diagnosticService.GetPushDiagnosticsAsync(document.Project.Solution.Workspace, document.Project.Id, document.Id, id: null, includeSuppressedDiagnostics: false, option, cancellationToken).ConfigureAwait(false);
+            var pushDiagnostics = await diagnosticService
+                .GetPushDiagnosticsAsync(
+                    document.Project.Solution.Workspace,
+                    document.Project.Id,
+                    document.Id,
+                    id: null,
+                    includeSuppressedDiagnostics: false,
+                    option,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var diagnostics = pushDiagnostics.WhereAsArray(IncludeDiagnostic);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -318,23 +493,37 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // https://docs.microsoft.com/en-us/aspnet/core/blazor/layouts?view=aspnetcore-3.1#centralized-layout-selection
             // So we get the diagnostics and group them by the actual mapped path so we can publish notifications
             // for each mapped file's diagnostics.
-            var fileUriToDiagnostics = diagnostics.GroupBy(diagnostic => GetDiagnosticUri(document, diagnostic)).ToDictionary(
-                group => group.Key,
-                group => group.Select(diagnostic => ConvertToLspDiagnostic(diagnostic, text)).ToImmutableArray());
+            var fileUriToDiagnostics = diagnostics
+                .GroupBy(diagnostic => GetDiagnosticUri(document, diagnostic))
+                .ToDictionary(
+                    group => group.Key,
+                    group =>
+                        group
+                            .Select(diagnostic => ConvertToLspDiagnostic(diagnostic, text))
+                            .ToImmutableArray()
+                );
             return fileUriToDiagnostics;
 
             static Uri GetDiagnosticUri(Document document, DiagnosticData diagnosticData)
             {
-                Contract.ThrowIfNull(diagnosticData.DataLocation, "Diagnostic data location should not be null here");
+                Contract.ThrowIfNull(
+                    diagnosticData.DataLocation,
+                    "Diagnostic data location should not be null here"
+                );
 
                 // Razor wants to handle all span mapping themselves.  So if we are in razor, return the raw doc spans, and
                 // do not map them.
-                var filePath = diagnosticData.DataLocation.MappedFilePath ?? diagnosticData.DataLocation.OriginalFilePath;
+                var filePath =
+                    diagnosticData.DataLocation.MappedFilePath
+                    ?? diagnosticData.DataLocation.OriginalFilePath;
                 return ProtocolConversions.GetUriFromFilePath(filePath);
             }
         }
 
-        private LSP.Diagnostic ConvertToLspDiagnostic(DiagnosticData diagnosticData, SourceText text)
+        private LSP.Diagnostic ConvertToLspDiagnostic(
+            DiagnosticData diagnosticData,
+            SourceText text
+        )
         {
             Contract.ThrowIfNull(diagnosticData.DataLocation);
 
@@ -356,8 +545,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             return diagnostic;
         }
 
-        private static LSP.DiagnosticSeverity Convert(CodeAnalysis.DiagnosticSeverity severity)
-            => severity switch
+        private static LSP.DiagnosticSeverity Convert(CodeAnalysis.DiagnosticSeverity severity) =>
+            severity switch
             {
                 CodeAnalysis.DiagnosticSeverity.Hidden => LSP.DiagnosticSeverity.Hint,
                 CodeAnalysis.DiagnosticSeverity.Info => LSP.DiagnosticSeverity.Hint,
@@ -374,12 +563,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         // if we were working with a non-C#/VB file, then the property should have been populated.
         // In this case, unless we have a null client name, we don't want to publish the diagnostic
         // (since a null client name represents the C#/VB language server).
-        private bool IncludeDiagnostic(DiagnosticData diagnostic)
-            => IReadOnlyDictionaryExtensions.GetValueOrDefault(diagnostic.Properties, nameof(DocumentPropertiesService.DiagnosticsLspClientName)) == ClientName;
+        private bool IncludeDiagnostic(DiagnosticData diagnostic) =>
+            IReadOnlyDictionaryExtensions.GetValueOrDefault(
+                diagnostic.Properties,
+                nameof(DocumentPropertiesService.DiagnosticsLspClientName)
+            ) == ClientName;
 
-        private static LSP.Range GetDiagnosticRange(DiagnosticDataLocation diagnosticDataLocation, SourceText text)
+        private static LSP.Range GetDiagnosticRange(
+            DiagnosticDataLocation diagnosticDataLocation,
+            SourceText text
+        )
         {
-            var linePositionSpan = DiagnosticData.GetLinePositionSpan(diagnosticDataLocation, text, useMapped: true);
+            var linePositionSpan = DiagnosticData.GetLinePositionSpan(
+                diagnosticDataLocation,
+                text,
+                useMapped: true
+            );
             return ProtocolConversions.LinePositionToRange(linePositionSpan);
         }
 
@@ -394,18 +593,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 _server = server;
             }
 
-            internal ImmutableArray<Uri> GetFileUrisInPublishDiagnostics()
-                => _server._publishedFileToDiagnostics.Keys.ToImmutableArray();
+            internal ImmutableArray<Uri> GetFileUrisInPublishDiagnostics() =>
+                _server._publishedFileToDiagnostics.Keys.ToImmutableArray();
 
-            internal ImmutableArray<DocumentId> GetDocumentIdsInPublishedUris()
-                => _server._documentsToPublishedUris.Keys.ToImmutableArray();
+            internal ImmutableArray<DocumentId> GetDocumentIdsInPublishedUris() =>
+                _server._documentsToPublishedUris.Keys.ToImmutableArray();
 
-            internal IImmutableSet<Uri> GetFileUrisForDocument(DocumentId documentId)
-                => _server._documentsToPublishedUris.GetValueOrDefault(documentId, ImmutableSortedSet<Uri>.Empty);
+            internal IImmutableSet<Uri> GetFileUrisForDocument(DocumentId documentId) =>
+                _server._documentsToPublishedUris.GetValueOrDefault(
+                    documentId,
+                    ImmutableSortedSet<Uri>.Empty
+                );
 
-            internal ImmutableArray<LSP.Diagnostic> GetDiagnosticsForUriAndDocument(DocumentId documentId, Uri uri)
+            internal ImmutableArray<LSP.Diagnostic> GetDiagnosticsForUriAndDocument(
+                DocumentId documentId,
+                Uri uri
+            )
             {
-                if (_server._publishedFileToDiagnostics.TryGetValue(uri, out var dict) && dict.TryGetValue(documentId, out var diagnostics))
+                if (
+                    _server._publishedFileToDiagnostics.TryGetValue(uri, out var dict)
+                    && dict.TryGetValue(documentId, out var diagnostics)
+                )
                     return diagnostics;
 
                 return ImmutableArray<LSP.Diagnostic>.Empty;

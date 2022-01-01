@@ -44,9 +44,7 @@ class C2
 class C3
 {
     public int F0;
-    public C3(int f0)
-    {
-    }
+    public C3(int f0) { }
 }
 
 public class Program
@@ -59,7 +57,18 @@ public class Program
     internal static C1 s_34 = new C1(new C0(), false);
     internal static C2 s_35 = new C2();
     internal static C1 s_114 = new C1(new C0(), false);
-    internal static ushort[][] s_133 = new ushort[][] { new ushort[] { 0 }, new ushort[] { 0 }, new ushort[] { 0 }, new ushort[] { 1, 1, 1 }, new ushort[] { 0 }, new ushort[] { 0 }, new ushort[] { 0 }, new ushort[] { 0 }, new ushort[] { 0 } };
+    internal static ushort[][] s_133 = new ushort[][]
+    {
+        new ushort[] { 0 },
+        new ushort[] { 0 },
+        new ushort[] { 0 },
+        new ushort[] { 1, 1, 1 },
+        new ushort[] { 0 },
+        new ushort[] { 0 },
+        new ushort[] { 0 },
+        new ushort[] { 0 },
+        new ushort[] { 0 }
+    };
     internal static long[] s_138 = new long[] { 0 };
 
     public static int Main()
@@ -76,7 +85,14 @@ public class Program
             short var1 = s_32;
             try
             {
-                var vr8 = new bool[][] { new bool[] { true }, new bool[] { false }, new bool[] { false }, new bool[] { true }, new bool[] { false } };
+                var vr8 = new bool[][]
+                {
+                    new bool[] { true },
+                    new bool[] { false },
+                    new bool[] { false },
+                    new bool[] { true },
+                    new bool[] { false }
+                };
             }
             finally
             {
@@ -86,10 +102,26 @@ public class Program
             System.GC.KeepAlive(var1);
         }
 
-        long[][] var16 = new long[][] { new long[] { -1, 0, 0, -1, -1, 0, 0, 0, 0 }, new long[] { 1, 0, -1, 0, 0, 0, 0, 0, 1, 0 }, new long[] { 1, 0, 0, 1, -1, 0 }, new long[] { 1, 1, -1, 0 } };
+        long[][] var16 = new long[][]
+        {
+            new long[] { -1, 0, 0, -1, -1, 0, 0, 0, 0 },
+            new long[] { 1, 0, -1, 0, 0, 0, 0, 0, 1, 0 },
+            new long[] { 1, 0, 0, 1, -1, 0 },
+            new long[] { 1, 1, -1, 0 }
+        };
         C2 var17 = s_35;
         S0 var18 = s_17;
-        var vr6 = new bool[][] { new bool[] { true, true, true, false, false, false, false, false, true }, new bool[] { false, false, true, false, true, false }, new bool[] { true }, new bool[] { true }, new bool[] { false }, new bool[] { false, false, true }, new bool[] { true }, new bool[] { false, true, false } };
+        var vr6 = new bool[][]
+        {
+            new bool[] { true, true, true, false, false, false, false, false, true },
+            new bool[] { false, false, true, false, true, false },
+            new bool[] { true },
+            new bool[] { true },
+            new bool[] { false },
+            new bool[] { false, false, true },
+            new bool[] { true },
+            new bool[] { false, true, false }
+        };
         if (0 >= var17.F0)
         {
             var18.F0.F1 = 1;

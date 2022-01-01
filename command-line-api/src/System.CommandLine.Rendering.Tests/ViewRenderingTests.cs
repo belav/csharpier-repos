@@ -29,22 +29,22 @@ namespace System.CommandLine.Rendering.Tests
                     {
                         parseResult = r;
                         c.Append(new ParseResultView(r));
-                    })
+                    }
+                )
             };
 
             var parser = new CommandLineBuilder(command)
-                         .AddMiddleware(c =>
-                         {
-                             c.BindingContext
-                              .AddService(
-                                  s => new ParseResultView(s.GetService<ParseResult>()));
-                         })
-                         .Build();
+                .AddMiddleware(
+                    c =>
+                    {
+                        c.BindingContext.AddService(
+                            s => new ParseResultView(s.GetService<ParseResult>())
+                        );
+                    }
+                )
+                .Build();
 
-            var terminal = new TestTerminal
-            {
-                IsAnsiTerminal = false
-            };
+            var terminal = new TestTerminal { IsAnsiTerminal = false };
 
             parser.Invoke("", terminal);
 
@@ -56,47 +56,41 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.Ansi)]
         public void Views_can_be_appended_to_output(OutputMode outputMode)
         {
-            var view = new StringsView(new[]
-            {
-                "1",
-                "2",
-                "3"
-            });
+            var view = new StringsView(new[] { "1", "2", "3" });
 
             _terminal.Append(view, outputMode);
 
-            _terminal.RenderOperations()
-                     .Should()
-                     .BeEquivalentSequenceTo(
-                         new TextRendered("1", new Point(0, 0)),
-                         new TextRendered("2", new Point(0, 1)),
-                         new TextRendered("3" + Environment.NewLine, new Point(0, 2)));
+            _terminal
+                .RenderOperations()
+                .Should()
+                .BeEquivalentSequenceTo(
+                    new TextRendered("1", new Point(0, 0)),
+                    new TextRendered("2", new Point(0, 1)),
+                    new TextRendered("3" + Environment.NewLine, new Point(0, 2))
+                );
         }
 
         [Theory]
         [InlineData(OutputMode.NonAnsi)]
         [InlineData(OutputMode.Ansi)]
-        public void ConsoleView_keeps_track_of_position_so_that_multiple_WriteLine_statements_do_not_overwrite_the_target_region(OutputMode outputMode)
+        public void ConsoleView_keeps_track_of_position_so_that_multiple_WriteLine_statements_do_not_overwrite_the_target_region(
+            OutputMode outputMode
+        )
         {
-            var renderer = new ConsoleRenderer(
-                _terminal,
-                outputMode);
+            var renderer = new ConsoleRenderer(_terminal, outputMode);
 
-            var view = new StringsView(new[]
-            {
-                "1",
-                "2",
-                "3"
-            });
+            var view = new StringsView(new[] { "1", "2", "3" });
 
             view.Render(renderer, new Region(3, 5, 1, 3));
 
-            _terminal.RenderOperations()
-                     .Should()
-                     .BeEquivalentSequenceTo(
-                         new TextRendered("1", new Point(3, 5)),
-                         new TextRendered("2", new Point(3, 6)),
-                         new TextRendered("3", new Point(3, 7)));
+            _terminal
+                .RenderOperations()
+                .Should()
+                .BeEquivalentSequenceTo(
+                    new TextRendered("1", new Point(3, 5)),
+                    new TextRendered("2", new Point(3, 6)),
+                    new TextRendered("3", new Point(3, 7))
+                );
         }
 
         private class StringsView : StackLayoutView
@@ -113,8 +107,6 @@ namespace System.CommandLine.Rendering.Tests
 
     public class ParseResultView : ContentView<ParseResult>
     {
-        public ParseResultView(ParseResult value) : base(value)
-        {
-        }
+        public ParseResultView(ParseResult value) : base(value) { }
     }
 }

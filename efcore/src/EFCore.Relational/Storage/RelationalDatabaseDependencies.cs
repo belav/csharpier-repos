@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public RelationalDatabaseDependencies(
             ICommandBatchPreparer batchPreparer,
             IBatchExecutor batchExecutor,
-            IRelationalConnection connection)
+            IRelationalConnection connection
+        )
         {
             BatchPreparer = batchPreparer;
             BatchExecutor = batchExecutor;

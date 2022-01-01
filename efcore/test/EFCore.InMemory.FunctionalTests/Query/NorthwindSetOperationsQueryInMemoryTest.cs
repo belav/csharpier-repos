@@ -10,13 +10,14 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindSetOperationsQueryInMemoryTest : NorthwindSetOperationsQueryTestBase<
-        NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+    public class NorthwindSetOperationsQueryInMemoryTest
+        : NorthwindSetOperationsQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
     {
         public NorthwindSetOperationsQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
 #pragma warning disable IDE0060 // Remove unused parameter
-            ITestOutputHelper testOutputHelper)
+            ITestOutputHelper testOutputHelper
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
             : base(fixture)
         {
@@ -25,8 +26,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Collection_projection_before_set_operation_fails(bool async)
         {
-            var message = (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Collection_projection_before_set_operation_fails(async))).Message;
+            var message =
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Collection_projection_before_set_operation_fails(async)
+                    )
+                ).Message;
 
             Assert.Equal(InMemoryStrings.SetOperationsNotAllowedAfterClientEvaluation, message);
         }

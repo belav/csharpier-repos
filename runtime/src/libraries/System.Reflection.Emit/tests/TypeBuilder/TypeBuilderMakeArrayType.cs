@@ -52,7 +52,9 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void IsArray()
         {
-            TypeBuilder typeBuilder = Helpers.DynamicType(TypeAttributes.Public | TypeAttributes.Abstract);
+            TypeBuilder typeBuilder = Helpers.DynamicType(
+                TypeAttributes.Public | TypeAttributes.Abstract
+            );
             Assert.False(typeBuilder.IsArray);
             Assert.False(typeBuilder.IsSZArray);
 

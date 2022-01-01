@@ -46,7 +46,14 @@ namespace System.Drawing
     {
         private const byte DefaultCharSet = 1;
 
-        private void CreateFont(string familyName, float emSize, FontStyle style, GraphicsUnit unit, byte charSet, bool isVertical)
+        private void CreateFont(
+            string familyName,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte charSet,
+            bool isVertical
+        )
         {
             _originalFontName = familyName;
             FontFamily family;
@@ -62,7 +69,13 @@ namespace System.Drawing
             }
 
             Initialize(family, emSize, style, unit, charSet, isVertical);
-            int status = Gdip.GdipCreateFont(new HandleRef(this, family.NativeFamily), emSize, style, unit, out _nativeFont);
+            int status = Gdip.GdipCreateFont(
+                new HandleRef(this, family.NativeFamily),
+                emSize,
+                style,
+                unit,
+                out _nativeFont
+            );
 
             if (status == Gdip.FontStyleNotFound)
                 throw new ArgumentException($"Style {style} isn't supported by font {familyName}.");
@@ -70,7 +83,12 @@ namespace System.Drawing
             Gdip.CheckStatus(status);
         }
 
-        internal void unitConversion(GraphicsUnit fromUnit, GraphicsUnit toUnit, float nSrc, out float nTrg)
+        internal void unitConversion(
+            GraphicsUnit fromUnit,
+            GraphicsUnit toUnit,
+            float nSrc,
+            out float nTrg
+        )
         {
             float inchs = 0;
             nTrg = 0;
@@ -126,7 +144,14 @@ namespace System.Drawing
             }
         }
 
-        private void Initialize(string familyName, float emSize, FontStyle style, GraphicsUnit unit, byte charSet, bool isVertical)
+        private void Initialize(
+            string familyName,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte charSet,
+            bool isVertical
+        )
         {
             _originalFontName = familyName;
             FontFamily family;
@@ -144,7 +169,14 @@ namespace System.Drawing
             Initialize(family, emSize, style, unit, charSet, isVertical);
         }
 
-        private void Initialize(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit, byte charSet, bool isVertical)
+        private void Initialize(
+            FontFamily family,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte charSet,
+            bool isVertical
+        )
         {
             _fontFamily = family;
             _fontSize = emSize;
@@ -226,76 +258,105 @@ namespace System.Drawing
         public Font(Font prototype, FontStyle newStyle)
         {
             // no null checks, MS throws a NullReferenceException if original is null
-            Initialize(prototype.FontFamily, prototype.Size, newStyle, prototype.Unit, prototype.GdiCharSet, prototype.GdiVerticalFont);
+            Initialize(
+                prototype.FontFamily,
+                prototype.Size,
+                newStyle,
+                prototype.Unit,
+                prototype.GdiCharSet,
+                prototype.GdiVerticalFont
+            );
 
-            int status = Gdip.GdipCreateFont(new HandleRef(_fontFamily, _fontFamily.NativeFamily), Size, Style, Unit, out _nativeFont);
+            int status = Gdip.GdipCreateFont(
+                new HandleRef(_fontFamily, _fontFamily.NativeFamily),
+                Size,
+                Style,
+                Unit,
+                out _nativeFont
+            );
             Gdip.CheckStatus(status);
         }
 
         public Font(FontFamily family, float emSize, GraphicsUnit unit)
-            : this(family, emSize, FontStyle.Regular, unit, DefaultCharSet, false)
-        {
-        }
+            : this(family, emSize, FontStyle.Regular, unit, DefaultCharSet, false) { }
 
         public Font(string familyName, float emSize, GraphicsUnit unit)
-            : this(new FontFamily(familyName), emSize, FontStyle.Regular, unit, DefaultCharSet, false)
-        {
-        }
+            : this(
+                new FontFamily(familyName),
+                emSize,
+                FontStyle.Regular,
+                unit,
+                DefaultCharSet,
+                false
+            ) { }
 
         public Font(FontFamily family, float emSize)
-            : this(family, emSize, FontStyle.Regular, GraphicsUnit.Point, DefaultCharSet, false)
-        {
-        }
+            : this(family, emSize, FontStyle.Regular, GraphicsUnit.Point, DefaultCharSet, false) { }
 
         public Font(FontFamily family, float emSize, FontStyle style)
-            : this(family, emSize, style, GraphicsUnit.Point, DefaultCharSet, false)
-        {
-        }
+            : this(family, emSize, style, GraphicsUnit.Point, DefaultCharSet, false) { }
 
         public Font(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit)
-            : this(family, emSize, style, unit, DefaultCharSet, false)
-        {
-        }
+            : this(family, emSize, style, unit, DefaultCharSet, false) { }
 
-        public Font(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet)
-            : this(family, emSize, style, unit, gdiCharSet, false)
-        {
-        }
+        public Font(
+            FontFamily family,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet
+        ) : this(family, emSize, style, unit, gdiCharSet, false) { }
 
-        public Font(FontFamily family, float emSize, FontStyle style,
-                GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
+        public Font(
+            FontFamily family,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet,
+            bool gdiVerticalFont
+        )
         {
             if (family == null)
                 throw new ArgumentNullException(nameof(family));
 
             int status;
             Initialize(family, emSize, style, unit, gdiCharSet, gdiVerticalFont);
-            status = Gdip.GdipCreateFont(new HandleRef(this, family.NativeFamily), emSize, style, unit, out _nativeFont);
+            status = Gdip.GdipCreateFont(
+                new HandleRef(this, family.NativeFamily),
+                emSize,
+                style,
+                unit,
+                out _nativeFont
+            );
             Gdip.CheckStatus(status);
         }
 
         public Font(string familyName, float emSize)
             : this(familyName, emSize, FontStyle.Regular, GraphicsUnit.Point, DefaultCharSet, false)
-        {
-        }
+        { }
 
         public Font(string familyName, float emSize, FontStyle style)
-            : this(familyName, emSize, style, GraphicsUnit.Point, DefaultCharSet, false)
-        {
-        }
+            : this(familyName, emSize, style, GraphicsUnit.Point, DefaultCharSet, false) { }
 
         public Font(string familyName, float emSize, FontStyle style, GraphicsUnit unit)
-            : this(familyName, emSize, style, unit, DefaultCharSet, false)
-        {
-        }
+            : this(familyName, emSize, style, unit, DefaultCharSet, false) { }
 
-        public Font(string familyName, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet)
-            : this(familyName, emSize, style, unit, gdiCharSet, false)
-        {
-        }
+        public Font(
+            string familyName,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet
+        ) : this(familyName, emSize, style, unit, gdiCharSet, false) { }
 
-        public Font(string familyName, float emSize, FontStyle style,
-                GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
+        public Font(
+            string familyName,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet,
+            bool gdiVerticalFont
+        )
         {
             CreateFont(familyName, emSize, style, unit, gdiCharSet, gdiVerticalFont);
         }

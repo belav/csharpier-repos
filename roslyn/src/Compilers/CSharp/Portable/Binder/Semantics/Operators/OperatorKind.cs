@@ -14,7 +14,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         // NOTE: these types should line up with the elements in BinaryOperatorKind
 
         TypeMask = 0x00000FF,
-
         SByte = 0x00000001,
         Byte = 0x00000002,
         Short = 0x00000003,
@@ -34,7 +33,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         _String = 0x00000011, // reserved for binary op
         _StringAndObject = 0x00000012, // reserved for binary op
         _ObjectAndString = 0x00000013, // reserved for binary op
-
         Enum = 0x00000014,
         _EnumAndUnderlying = 0x00000015, // reserved for binary op
         _UnderlyingAndEnum = 0x00000016, // reserved for binary op
@@ -51,7 +49,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         _NullableNull = 0x00000027, // reserved for binary op
         UserDefined = 0x00000028,
         Dynamic = 0x00000029,
-
         OpMask = 0x0000FF00,
         PostfixIncrement = 0x00001000,
         PostfixDecrement = 0x00001100,
@@ -63,13 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         BitwiseComplement = 0x00001700,
         True = 0x00001800,
         False = 0x00001900,
-
         Lifted = 0x00010000,
-        _Logical = 0x00020000, // reserved for binary op              
+        _Logical = 0x00020000, // reserved for binary op
         Checked = 0x00040000,
-
         Error = 0x00000000,
-
         SBytePostfixIncrement = SByte | PostfixIncrement,
         BytePostfixIncrement = Byte | PostfixIncrement,
         ShortPostfixIncrement = Short | PostfixIncrement,
@@ -104,7 +98,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedPostfixIncrement = Lifted | UserDefined | PostfixIncrement,
         PointerPostfixIncrement = Pointer | PostfixIncrement,
         DynamicPostfixIncrement = Dynamic | PostfixIncrement,
-
         SBytePrefixIncrement = SByte | PrefixIncrement,
         BytePrefixIncrement = Byte | PrefixIncrement,
         ShortPrefixIncrement = Short | PrefixIncrement,
@@ -139,7 +132,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedPrefixIncrement = Lifted | UserDefined | PrefixIncrement,
         PointerPrefixIncrement = Pointer | PrefixIncrement,
         DynamicPrefixIncrement = Dynamic | PrefixIncrement,
-
         SBytePostfixDecrement = SByte | PostfixDecrement,
         BytePostfixDecrement = Byte | PostfixDecrement,
         ShortPostfixDecrement = Short | PostfixDecrement,
@@ -174,7 +166,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedPostfixDecrement = Lifted | UserDefined | PostfixDecrement,
         PointerPostfixDecrement = Pointer | PostfixDecrement,
         DynamicPostfixDecrement = Dynamic | PostfixDecrement,
-
         SBytePrefixDecrement = SByte | PrefixDecrement,
         BytePrefixDecrement = Byte | PrefixDecrement,
         ShortPrefixDecrement = Short | PrefixDecrement,
@@ -209,7 +200,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedPrefixDecrement = Lifted | UserDefined | PrefixDecrement,
         PointerPrefixDecrement = Pointer | PrefixDecrement,
         DynamicPrefixDecrement = Dynamic | PrefixDecrement,
-
         IntUnaryPlus = Int | UnaryPlus,
         UIntUnaryPlus = UInt | UnaryPlus,
         LongUnaryPlus = Long | UnaryPlus,
@@ -231,7 +221,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedDecimalUnaryPlus = Lifted | Decimal | UnaryPlus,
         LiftedUserDefinedUnaryPlus = Lifted | UserDefined | UnaryPlus,
         DynamicUnaryPlus = Dynamic | UnaryPlus,
-
         IntUnaryMinus = Int | UnaryMinus,
         LongUnaryMinus = Long | UnaryMinus,
         NIntUnaryMinus = NInt | UnaryMinus,
@@ -247,13 +236,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedDecimalUnaryMinus = Lifted | Decimal | UnaryMinus,
         LiftedUserDefinedUnaryMinus = Lifted | UserDefined | UnaryMinus,
         DynamicUnaryMinus = Dynamic | UnaryMinus,
-
         BoolLogicalNegation = Bool | LogicalNegation,
         UserDefinedLogicalNegation = UserDefined | LogicalNegation,
         LiftedBoolLogicalNegation = Lifted | Bool | LogicalNegation,
         LiftedUserDefinedLogicalNegation = Lifted | UserDefined | LogicalNegation,
         DynamicLogicalNegation = Dynamic | LogicalNegation,
-
         IntBitwiseComplement = Int | BitwiseComplement,
         UIntBitwiseComplement = UInt | BitwiseComplement,
         LongBitwiseComplement = Long | BitwiseComplement,
@@ -277,7 +264,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         UserDefinedFalse = UserDefined | False,
 
         // The one time operator true is not user-defined is "if(dyn)" where dyn is of type dynamic.
-        // In that case we bind this as a dynamic "operator true" invocation, rather than as a 
+        // In that case we bind this as a dynamic "operator true" invocation, rather than as a
         // dynamic conversion to bool.
         DynamicTrue = Dynamic | True,
 
@@ -291,7 +278,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         // NOTE: these types should line up with the elements in UnaryOperatorKind
 
         TypeMask = UnaryOperatorKind.TypeMask,
-
         Int = UnaryOperatorKind.Int,
         UInt = UnaryOperatorKind.UInt,
         Long = UnaryOperatorKind.Long,
@@ -307,7 +293,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         String = UnaryOperatorKind._String,
         StringAndObject = UnaryOperatorKind._StringAndObject,
         ObjectAndString = UnaryOperatorKind._ObjectAndString,
-
         Enum = UnaryOperatorKind.Enum,
         EnumAndUnderlying = UnaryOperatorKind._EnumAndUnderlying,
         UnderlyingAndEnum = UnaryOperatorKind._UnderlyingAndEnum,
@@ -324,7 +309,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         NullableNull = UnaryOperatorKind._NullableNull,
         UserDefined = UnaryOperatorKind.UserDefined,
         Dynamic = UnaryOperatorKind.Dynamic,
-
         OpMask = 0x0000FF00,
         Multiplication = 0x00001000,
         Addition = 0x00001100,
@@ -342,13 +326,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         And = 0x00001D00,
         Xor = 0x00001E00,
         Or = 0x00001F00,
-
         Lifted = UnaryOperatorKind.Lifted,
         Logical = UnaryOperatorKind._Logical,
         Checked = UnaryOperatorKind.Checked,
-
         Error = 0x00000000,
-
         IntMultiplication = Int | Multiplication,
         UIntMultiplication = UInt | Multiplication,
         LongMultiplication = Long | Multiplication,
@@ -370,7 +351,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedDecimalMultiplication = Lifted | Decimal | Multiplication,
         LiftedUserDefinedMultiplication = Lifted | UserDefined | Multiplication,
         DynamicMultiplication = Dynamic | Multiplication,
-
         IntDivision = Int | Division,
         UIntDivision = UInt | Division,
         LongDivision = Long | Division,
@@ -392,7 +372,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedDecimalDivision = Lifted | Decimal | Division,
         LiftedUserDefinedDivision = Lifted | UserDefined | Division,
         DynamicDivision = Dynamic | Division,
-
         IntRemainder = Int | Remainder,
         UIntRemainder = UInt | Remainder,
         LongRemainder = Long | Remainder,
@@ -414,7 +393,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedDecimalRemainder = Lifted | Decimal | Remainder,
         LiftedUserDefinedRemainder = Lifted | UserDefined | Remainder,
         DynamicRemainder = Dynamic | Remainder,
-
         IntAddition = Int | Addition,
         UIntAddition = UInt | Addition,
         LongAddition = Long | Addition,
@@ -452,7 +430,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         ObjectAndStringConcatenation = ObjectAndString | Addition,
         DelegateCombination = Delegate | Addition,
         DynamicAddition = Dynamic | Addition,
-
         IntSubtraction = Int | Subtraction,
         UIntSubtraction = UInt | Subtraction,
         LongSubtraction = Long | Subtraction,
@@ -486,7 +463,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         PointerAndULongSubtraction = PointerAndULong | Subtraction,
         PointerSubtraction = Pointer | Subtraction,
         DynamicSubtraction = Dynamic | Subtraction,
-
         IntLeftShift = Int | LeftShift,
         UIntLeftShift = UInt | LeftShift,
         LongLeftShift = Long | LeftShift,
@@ -502,7 +478,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedNUIntLeftShift = Lifted | NUInt | LeftShift,
         LiftedUserDefinedLeftShift = Lifted | UserDefined | LeftShift,
         DynamicLeftShift = Dynamic | LeftShift,
-
         IntRightShift = Int | RightShift,
         UIntRightShift = UInt | RightShift,
         LongRightShift = Long | RightShift,
@@ -518,7 +493,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedNUIntRightShift = Lifted | NUInt | RightShift,
         LiftedUserDefinedRightShift = Lifted | UserDefined | RightShift,
         DynamicRightShift = Dynamic | RightShift,
-
         IntEqual = Int | Equal,
         UIntEqual = UInt | Equal,
         LongEqual = Long | Equal,
@@ -549,7 +523,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         DelegateEqual = Delegate | Equal,
         PointerEqual = Pointer | Equal,
         DynamicEqual = Dynamic | Equal,
-
         IntNotEqual = Int | NotEqual,
         UIntNotEqual = UInt | NotEqual,
         LongNotEqual = Long | NotEqual,
@@ -580,7 +553,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         DelegateNotEqual = Delegate | NotEqual,
         PointerNotEqual = Pointer | NotEqual,
         DynamicNotEqual = Dynamic | NotEqual,
-
         IntLessThan = Int | LessThan,
         UIntLessThan = UInt | LessThan,
         LongLessThan = Long | LessThan,
@@ -605,7 +577,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedLessThan = Lifted | UserDefined | LessThan,
         PointerLessThan = Pointer | LessThan,
         DynamicLessThan = Dynamic | LessThan,
-
         IntGreaterThan = Int | GreaterThan,
         UIntGreaterThan = UInt | GreaterThan,
         LongGreaterThan = Long | GreaterThan,
@@ -630,7 +601,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedGreaterThan = Lifted | UserDefined | GreaterThan,
         PointerGreaterThan = Pointer | GreaterThan,
         DynamicGreaterThan = Dynamic | GreaterThan,
-
         IntLessThanOrEqual = Int | LessThanOrEqual,
         UIntLessThanOrEqual = UInt | LessThanOrEqual,
         LongLessThanOrEqual = Long | LessThanOrEqual,
@@ -655,7 +625,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedLessThanOrEqual = Lifted | UserDefined | LessThanOrEqual,
         PointerLessThanOrEqual = Pointer | LessThanOrEqual,
         DynamicLessThanOrEqual = Dynamic | LessThanOrEqual,
-
         IntGreaterThanOrEqual = Int | GreaterThanOrEqual,
         UIntGreaterThanOrEqual = UInt | GreaterThanOrEqual,
         LongGreaterThanOrEqual = Long | GreaterThanOrEqual,
@@ -680,7 +649,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedUserDefinedGreaterThanOrEqual = Lifted | UserDefined | GreaterThanOrEqual,
         PointerGreaterThanOrEqual = Pointer | GreaterThanOrEqual,
         DynamicGreaterThanOrEqual = Dynamic | GreaterThanOrEqual,
-
         IntAnd = Int | And,
         UIntAnd = UInt | And,
         LongAnd = Long | And,
@@ -700,12 +668,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedBoolAnd = Lifted | Bool | And,
         LiftedUserDefinedAnd = Lifted | UserDefined | And,
         DynamicAnd = Dynamic | And,
-
         LogicalAnd = And | Logical,
         LogicalBoolAnd = Bool | LogicalAnd,
         LogicalUserDefinedAnd = UserDefined | LogicalAnd,
         DynamicLogicalAnd = Dynamic | LogicalAnd,
-
         IntOr = Int | Or,
         UIntOr = UInt | Or,
         LongOr = Long | Or,
@@ -725,12 +691,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         LiftedBoolOr = Lifted | Bool | Or,
         LiftedUserDefinedOr = Lifted | UserDefined | Or,
         DynamicOr = Dynamic | Or,
-
         LogicalOr = Or | Logical,
         LogicalBoolOr = Bool | LogicalOr,
         LogicalUserDefinedOr = UserDefined | LogicalOr,
         DynamicLogicalOr = Dynamic | LogicalOr,
-
         IntXor = Int | Xor,
         UIntXor = UInt | Xor,
         LongXor = Long | Xor,

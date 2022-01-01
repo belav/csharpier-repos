@@ -27,8 +27,7 @@ class OpenMutexNeg
         }
         catch (Exception e)
         {
-            Console.WriteLine("Caught unexpected exception: " +
-                e.ToString());
+            Console.WriteLine("Caught unexpected exception: " + e.ToString());
         }
 
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");

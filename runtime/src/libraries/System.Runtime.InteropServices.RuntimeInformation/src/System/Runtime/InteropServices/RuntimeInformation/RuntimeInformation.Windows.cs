@@ -23,9 +23,17 @@ namespace System.Runtime.InteropServices
 
                     Span<char> stackBuffer = stackalloc char[256];
                     const string Version = "Microsoft Windows";
-                    s_osDescription = osDescription = string.IsNullOrEmpty(os.ServicePack) ?
-                        string.Create(null, stackBuffer, $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}") :
-                        string.Create(null, stackBuffer, $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}");
+                    s_osDescription = osDescription = string.IsNullOrEmpty(os.ServicePack)
+                        ? string.Create(
+                              null,
+                              stackBuffer,
+                              $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}"
+                          )
+                        : string.Create(
+                              null,
+                              stackBuffer,
+                              $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}"
+                          );
                 }
 
                 return osDescription;
@@ -48,7 +56,9 @@ namespace System.Runtime.InteropServices
                         Interop.Kernel32.GetNativeSystemInfo(&sysInfo);
                     }
 
-                    osArch = s_osArch = (int)Map((Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture);
+                    osArch = s_osArch = (int)Map(
+                        (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
+                    );
                 }
 
                 return (Architecture)osArch;
@@ -71,14 +81,18 @@ namespace System.Runtime.InteropServices
                         Interop.Kernel32.GetSystemInfo(&sysInfo);
                     }
 
-                    processArch = s_processArch = (int)Map((Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture);
+                    processArch = s_processArch = (int)Map(
+                        (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
+                    );
                 }
 
                 return (Architecture)processArch;
             }
         }
 
-        private static Architecture Map(Interop.Kernel32.ProcessorArchitecture processorArchitecture)
+        private static Architecture Map(
+            Interop.Kernel32.ProcessorArchitecture processorArchitecture
+        )
         {
             switch (processorArchitecture)
             {
@@ -90,7 +104,11 @@ namespace System.Runtime.InteropServices
                     return Architecture.X64;
                 case Interop.Kernel32.ProcessorArchitecture.Processor_Architecture_INTEL:
                 default:
-                    Debug.Assert(processorArchitecture == Interop.Kernel32.ProcessorArchitecture.Processor_Architecture_INTEL, "Unidentified Architecture");
+                    Debug.Assert(
+                        processorArchitecture
+                            == Interop.Kernel32.ProcessorArchitecture.Processor_Architecture_INTEL,
+                        "Unidentified Architecture"
+                    );
                     return Architecture.X86;
             }
         }

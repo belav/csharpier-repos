@@ -19,7 +19,9 @@ public class BringUpTest_Gt1
     public static int Main()
     {
         bool y = Gt1(1);
-        if (y == false) return Pass;
-        else return Fail;
+        if (y == false)
+            return Pass;
+        else
+            return Fail;
     }
 }

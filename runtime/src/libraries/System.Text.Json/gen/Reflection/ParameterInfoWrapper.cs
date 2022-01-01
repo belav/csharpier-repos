@@ -13,7 +13,10 @@ namespace System.Text.Json.Reflection
 
         private readonly MetadataLoadContextInternal _metadataLoadContext;
 
-        public ParameterInfoWrapper(IParameterSymbol parameter, MetadataLoadContextInternal metadataLoadContext)
+        public ParameterInfoWrapper(
+            IParameterSymbol parameter,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             _parameter = parameter;
             _metadataLoadContext = metadataLoadContext;
@@ -25,9 +28,10 @@ namespace System.Text.Json.Reflection
 
         public override bool HasDefaultValue => _parameter.HasExplicitDefaultValue;
 
-        public override object DefaultValue => HasDefaultValue ? _parameter.ExplicitDefaultValue : null;
+        public override object DefaultValue =>
+            HasDefaultValue ? _parameter.ExplicitDefaultValue : null;
 
-        public override int Position => _parameter.Ordinal; 
+        public override int Position => _parameter.Ordinal;
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {

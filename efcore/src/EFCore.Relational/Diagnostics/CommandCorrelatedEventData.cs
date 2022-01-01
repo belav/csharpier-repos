@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid commandId,
             Guid connectionId,
             bool async,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime
+        )
             : this(
                 eventDefinition,
                 messageGenerator,
@@ -48,9 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 connectionId,
                 async,
                 startTime,
-                CommandSource.Unknown)
-        {
-        }
+                CommandSource.Unknown
+            ) { }
 
         /// <summary>
         ///     Constructs the event payload.
@@ -75,8 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid connectionId,
             bool async,
             DateTimeOffset startTime,
-            CommandSource commandSource)
-            : base(eventDefinition, messageGenerator, context)
+            CommandSource commandSource
+        ) : base(eventDefinition, messageGenerator, context)
         {
             Connection = connection;
             CommandId = commandId;

@@ -10,6 +10,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     internal interface IRazorDocumentExcerptService
     {
-        Task<RazorExcerptResult?> TryExcerptAsync(Document document, TextSpan span, RazorExcerptMode mode, CancellationToken cancellationToken);
+        Task<RazorExcerptResult?> TryExcerptAsync(
+            Document document,
+            TextSpan span,
+            RazorExcerptMode mode,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -30,4 +30,3 @@ class C : IFoo<A>, IFoo<B>
         return 100;
     }
 }
-

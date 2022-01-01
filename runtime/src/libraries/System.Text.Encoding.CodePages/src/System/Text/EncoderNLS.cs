@@ -50,10 +50,7 @@ namespace System.Text
 
         internal bool InternalHasFallbackBuffer
         {
-            get
-            {
-                return m_fallbackBuffer != null;
-            }
+            get { return m_fallbackBuffer != null; }
         }
 
         public new EncoderFallbackBuffer FallbackBuffer
@@ -65,7 +62,8 @@ namespace System.Text
                     if (m_fallback != null)
                         m_fallbackBuffer = m_fallback.CreateFallbackBuffer();
                     else
-                        m_fallbackBuffer = EncoderFallback.ReplacementFallback.CreateFallbackBuffer();
+                        m_fallbackBuffer =
+                            EncoderFallback.ReplacementFallback.CreateFallbackBuffer();
                 }
 
                 return m_fallbackBuffer;
@@ -86,10 +84,16 @@ namespace System.Text
                 throw new ArgumentNullException(nameof(chars), SR.ArgumentNull_Array);
 
             if (index < 0 || count < 0)
-                throw new ArgumentOutOfRangeException((index < 0 ? nameof(index) : nameof(count)), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    (index < 0 ? nameof(index) : nameof(count)),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (chars.Length - index < count)
-                throw new ArgumentOutOfRangeException(nameof(chars), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             // Avoid empty input problem
             if (chars.Length == 0)
@@ -111,28 +115,49 @@ namespace System.Text
                 throw new ArgumentNullException(nameof(chars), SR.ArgumentNull_Array);
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             m_mustFlush = flush;
             m_throwOnOverflow = true;
             return m_encoding.GetByteCount(chars, count, this);
         }
 
-        public override unsafe int GetBytes(char[] chars, int charIndex, int charCount,
-                                              byte[] bytes, int byteIndex, bool flush)
+        public override unsafe int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            bool flush
+        )
         {
             // Validate parameters
             if (chars == null || bytes == null)
-                throw new ArgumentNullException((chars == null ? nameof(chars) : nameof(bytes)), SR.ArgumentNull_Array);
+                throw new ArgumentNullException(
+                    (chars == null ? nameof(chars) : nameof(bytes)),
+                    SR.ArgumentNull_Array
+                );
 
             if (charIndex < 0 || charCount < 0)
-                throw new ArgumentOutOfRangeException((charIndex < 0 ? nameof(charIndex) : nameof(charCount)), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    (charIndex < 0 ? nameof(charIndex) : nameof(charCount)),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (chars.Length - charIndex < charCount)
-                throw new ArgumentOutOfRangeException(nameof(chars), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (byteIndex < 0 || byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex), SR.ArgumentOutOfRange_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.ArgumentOutOfRange_Index
+                );
 
             if (chars.Length == 0)
                 chars = new char[1];
@@ -145,17 +170,35 @@ namespace System.Text
             fixed (char* pChars = &chars[0])
             fixed (byte* pBytes = &bytes[0])
                 // Remember that charCount is # to decode, not size of array.
-                return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, flush);
+                return GetBytes(
+                    pChars + charIndex,
+                    charCount,
+                    pBytes + byteIndex,
+                    byteCount,
+                    flush
+                );
         }
 
-        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount, bool flush)
+        public override unsafe int GetBytes(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            bool flush
+        )
         {
             // Validate parameters
             if (chars == null || bytes == null)
-                throw new ArgumentNullException((chars == null ? nameof(chars) : nameof(bytes)), SR.ArgumentNull_Array);
+                throw new ArgumentNullException(
+                    (chars == null ? nameof(chars) : nameof(bytes)),
+                    SR.ArgumentNull_Array
+                );
 
             if (byteCount < 0 || charCount < 0)
-                throw new ArgumentOutOfRangeException((byteCount < 0 ? nameof(byteCount) : nameof(charCount)), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    (byteCount < 0 ? nameof(byteCount) : nameof(charCount)),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             m_mustFlush = flush;
             m_throwOnOverflow = true;
@@ -164,25 +207,49 @@ namespace System.Text
 
         // This method is used when your output buffer might not be large enough for the entire result.
         // Just call the pointer version.  (This gets bytes)
-        public override unsafe void Convert(char[] chars, int charIndex, int charCount,
-                                              byte[] bytes, int byteIndex, int byteCount, bool flush,
-                                              out int charsUsed, out int bytesUsed, out bool completed)
+        public override unsafe void Convert(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            bool flush,
+            out int charsUsed,
+            out int bytesUsed,
+            out bool completed
+        )
         {
             // Validate parameters
             if (chars == null || bytes == null)
-                throw new ArgumentNullException((chars == null ? nameof(chars) : nameof(bytes)), SR.ArgumentNull_Array);
+                throw new ArgumentNullException(
+                    (chars == null ? nameof(chars) : nameof(bytes)),
+                    SR.ArgumentNull_Array
+                );
 
             if (charIndex < 0 || charCount < 0)
-                throw new ArgumentOutOfRangeException((charIndex < 0 ? nameof(charIndex) : nameof(charCount)), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    (charIndex < 0 ? nameof(charIndex) : nameof(charCount)),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (byteIndex < 0 || byteCount < 0)
-                throw new ArgumentOutOfRangeException((byteIndex < 0 ? nameof(byteIndex) : nameof(byteCount)), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    (byteIndex < 0 ? nameof(byteIndex) : nameof(byteCount)),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (chars.Length - charIndex < charCount)
-                throw new ArgumentOutOfRangeException(nameof(chars), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (bytes.Length - byteIndex < byteCount)
-                throw new ArgumentOutOfRangeException(nameof(bytes), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             // Avoid empty input problem
             if (chars.Length == 0)
@@ -195,24 +262,45 @@ namespace System.Text
             {
                 fixed (byte* pBytes = &bytes[0])
                 {
-                    Convert(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, flush,
-                        out charsUsed, out bytesUsed, out completed);
+                    Convert(
+                        pChars + charIndex,
+                        charCount,
+                        pBytes + byteIndex,
+                        byteCount,
+                        flush,
+                        out charsUsed,
+                        out bytesUsed,
+                        out completed
+                    );
                 }
             }
         }
 
         // This is the version that uses pointers.  We call the base encoding worker function
         // after setting our appropriate internal variables.  This is getting bytes
-        public override unsafe void Convert(char* chars, int charCount,
-                                              byte* bytes, int byteCount, bool flush,
-                                              out int charsUsed, out int bytesUsed, out bool completed)
+        public override unsafe void Convert(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            bool flush,
+            out int charsUsed,
+            out int bytesUsed,
+            out bool completed
+        )
         {
             // Validate input parameters
             if (bytes == null || chars == null)
-                throw new ArgumentNullException(bytes == null ? nameof(bytes) : nameof(chars), SR.ArgumentNull_Array);
+                throw new ArgumentNullException(
+                    bytes == null ? nameof(bytes) : nameof(chars),
+                    SR.ArgumentNull_Array
+                );
 
             if (charCount < 0 || byteCount < 0)
-                throw new ArgumentOutOfRangeException((charCount < 0 ? nameof(charCount) : nameof(byteCount)), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    (charCount < 0 ? nameof(charCount) : nameof(byteCount)),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // We don't want to throw
             m_mustFlush = flush;
@@ -224,35 +312,27 @@ namespace System.Text
             charsUsed = m_charsUsed;
 
             // Its completed if they've used what they wanted AND if they didn't want flush or if we are flushed
-            completed = (charsUsed == charCount) && (!flush || !HasState) &&
-                (m_fallbackBuffer == null || m_fallbackBuffer.Remaining == 0);
+            completed =
+                (charsUsed == charCount)
+                && (!flush || !HasState)
+                && (m_fallbackBuffer == null || m_fallbackBuffer.Remaining == 0);
             // Our data thingies are now full, we can return
         }
 
         public Encoding Encoding
         {
-            get
-            {
-                return m_encoding;
-            }
+            get { return m_encoding; }
         }
 
         public bool MustFlush
         {
-            get
-            {
-                return m_mustFlush;
-            }
+            get { return m_mustFlush; }
         }
-
 
         // Anything left in our encoder?
         internal virtual bool HasState
         {
-            get
-            {
-                return (charLeftOver != (char)0);
-            }
+            get { return (charLeftOver != (char)0); }
         }
 
         // Allow encoding to clear our must flush instead of throwing (in ThrowBytesOverflow)

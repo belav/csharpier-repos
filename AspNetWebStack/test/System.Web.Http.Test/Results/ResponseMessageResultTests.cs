@@ -14,7 +14,13 @@ namespace System.Web.Http.Results
         public void Constructor_Throws_WhenResponseIsNull()
         {
             // Arrange, Act & Assert
-            Assert.ThrowsArgumentNull(() => { new ResponseMessageResult(null); }, "response");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new ResponseMessageResult(null);
+                },
+                "response"
+            );
         }
 
         [Fact]

@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<UInt64>>() / sizeof(UInt64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<UInt64>>() / sizeof(UInt64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -58,20 +59,28 @@ namespace JIT.HardwareIntrinsics.General
 
             UInt64 value = TestLibrary.Generator.GetUInt64();
             object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.CreateScalar), new Type[] { typeof(UInt64) })
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector256.CreateScalar), new Type[] { typeof(UInt64) })
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector256<UInt64>)(result), value);
         }
 
-        private void ValidateResult(Vector256<UInt64> result, UInt64 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<UInt64> result,
+            UInt64 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt64[] resultElements = new UInt64[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt64, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(UInt64[] resultElements, UInt64 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64[] resultElements,
+            UInt64 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -93,9 +102,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.CreateScalar(UInt64): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.CreateScalar(UInt64): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

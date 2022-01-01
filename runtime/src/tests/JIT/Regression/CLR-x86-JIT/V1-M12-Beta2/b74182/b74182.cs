@@ -34,10 +34,13 @@ class bug1
         vtstatic.a1 = 9;
         vtstatic.a2 = 0L;
         vtstatic.a3 = 1L;
-        long retval = (long)(Convert.ToInt32((Convert.ToInt32(((double)(vtstatic.a3 * (vt.a1 - cl.arr1d[0]))) - (vt.a1 - (a5))))) - (long)(((vtstatic.a3 + vtstatic.a2) + (vtstatic.a3 + 5L))));
+        long retval = (long)(
+            Convert.ToInt32(
+                (Convert.ToInt32(((double)(vtstatic.a3 * (vt.a1 - cl.arr1d[0]))) - (vt.a1 - (a5))))
+            ) - (long)(((vtstatic.a3 + vtstatic.a2) + (vtstatic.a3 + 5L)))
+        );
         Console.WriteLine("The correct value is -8");
         Console.WriteLine("The actual value is {0}", retval);
         return 100;
     }
-
 }

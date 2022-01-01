@@ -27,12 +27,16 @@ namespace System.Net
 
         private void Trace()
         {
-            _trace = "WARNING! GC-ed  >>" + this.GetType().ToString() + "<< (should be explicitly closed) \r\n";
+            _trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().ToString()
+                + "<< (should be explicitly closed) \r\n";
         }
 
         ~DebugSafeHandle()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, _trace);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, _trace);
         }
     }
 #endif // DEBUG

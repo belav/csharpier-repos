@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
@@ -89,7 +89,10 @@ public abstract partial class MatcherConformanceTest
     [Theory]
     [InlineData("/S%mple", "/S%mple")]
     [InlineData("/S\\imple", "/S\\imple")] // surrogate pair
-    public virtual async Task Match_SingleLiteralSegment_PercentEncoded(string template, string path)
+    public virtual async Task Match_SingleLiteralSegment_PercentEncoded(
+        string template,
+        string path
+    )
     {
         // Arrange
         var (matcher, endpoint) = CreateMatcher(template);
@@ -245,11 +248,11 @@ public abstract partial class MatcherConformanceTest
         var (matcher, endpoint) = CreateMatcher("/foo/{ }/{.!$%}/{dynamic.data}");
         var httpContext = CreateContext("/foo/space/weirdmatch/matcherid");
         var values = new RouteValueDictionary()
-            {
-                { " ", "space" },
-                { ".!$%", "weirdmatch" },
-                { "dynamic.data", "matcherid" },
-            };
+        {
+            { " ", "space" },
+            { ".!$%", "weirdmatch" },
+            { "dynamic.data", "matcherid" },
+        };
 
         // Act
         await matcher.MatchAsync(httpContext);
@@ -283,8 +286,18 @@ public abstract partial class MatcherConformanceTest
     [InlineData("/a/{b}/c", "/a/b/c", new string[] { "b", }, new string[] { "b", })]
     [InlineData("/a/{b}/c/", "/a/b/c", new string[] { "b", }, new string[] { "b", })]
     [InlineData("/{a}/b/{c}", "/54/b/c", new string[] { "a", "c", }, new string[] { "54", "c", })]
-    [InlineData("/{a}/{b}/{c}", "/54/b/c", new string[] { "a", "b", "c", }, new string[] { "54", "b", "c", })]
-    public virtual async Task Match_MultipleParameters(string template, string path, string[] keys, string[] values)
+    [InlineData(
+        "/{a}/{b}/{c}",
+        "/54/b/c",
+        new string[] { "a", "b", "c", },
+        new string[] { "54", "b", "c", }
+    )]
+    public virtual async Task Match_MultipleParameters(
+        string template,
+        string path,
+        string[] keys,
+        string[] values
+    )
     {
         // Arrange
         var (matcher, endpoint) = CreateMatcher(template);

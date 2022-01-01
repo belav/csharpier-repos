@@ -10,7 +10,6 @@ namespace Test
 {
     class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -48,9 +47,7 @@ namespace Test
                     test();
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             // stop recoding
             testLog.StopRecording();
@@ -78,7 +75,5 @@ namespace Test
                 Console.WriteLine("finally 1");
             }
         }
-
     }
-
 }

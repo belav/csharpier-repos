@@ -4,15 +4,18 @@
     {
     }
 
-    public class IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceA : IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterface
+    public class IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceA
+        : IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterface
     {
     }
 
-    public class IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceB : IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceA
+    public class IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceB
+        : IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceA
     {
     }
 
-    public class IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceTest : IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceB
+    public class IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceTest
+        : IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceB
     {
     }
 }

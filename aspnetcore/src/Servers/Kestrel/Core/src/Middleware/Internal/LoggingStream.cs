@@ -24,47 +24,28 @@ internal sealed class LoggingStream : Stream
 
     public override bool CanRead
     {
-        get
-        {
-            return _inner.CanRead;
-        }
+        get { return _inner.CanRead; }
     }
 
     public override bool CanSeek
     {
-        get
-        {
-            return _inner.CanSeek;
-        }
+        get { return _inner.CanSeek; }
     }
 
     public override bool CanWrite
     {
-        get
-        {
-            return _inner.CanWrite;
-        }
+        get { return _inner.CanWrite; }
     }
 
     public override long Length
     {
-        get
-        {
-            return _inner.Length;
-        }
+        get { return _inner.Length; }
     }
 
     public override long Position
     {
-        get
-        {
-            return _inner.Position;
-        }
-
-        set
-        {
-            _inner.Position = value;
-        }
+        get { return _inner.Position; }
+        set { _inner.Position = value; }
     }
 
     public override void Flush()
@@ -91,14 +72,22 @@ internal sealed class LoggingStream : Stream
         return read;
     }
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         int read = await _inner.ReadAsync(buffer.AsMemory(offset, count), cancellationToken);
         Log("ReadAsync", new ReadOnlySpan<byte>(buffer, offset, read));
         return read;
     }
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> destination,
+        CancellationToken cancellationToken = default
+    )
     {
         int read = await _inner.ReadAsync(destination, cancellationToken);
         Log("ReadAsync", destination.Span.Slice(0, read));
@@ -127,13 +116,21 @@ internal sealed class LoggingStream : Stream
         _inner.Write(source);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         Log("WriteAsync", new ReadOnlySpan<byte>(buffer, offset, count));
         return _inner.WriteAsync(buffer, offset, count, cancellationToken);
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         Log("WriteAsync", source.Span);
         return _inner.WriteAsync(source, cancellationToken);
@@ -213,7 +210,13 @@ internal sealed class LoggingStream : Stream
     }
 
     // The below APM methods call the underlying Read/WriteAsync methods which will still be logged.
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
     }
@@ -223,7 +226,13 @@ internal sealed class LoggingStream : Stream
         return TaskToApm.End<int>(asyncResult);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
     }

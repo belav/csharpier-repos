@@ -26,13 +26,15 @@ public class RoutingBuilderExtensionsTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => applicationBuilderMock.Object.UseRouter(router));
+            () => applicationBuilderMock.Object.UseRouter(router)
+        );
 
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'" +
-            " in the application startup code.",
-            exception.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'"
+                + " in the application startup code.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -46,10 +48,11 @@ public class RoutingBuilderExtensionsTest
 
         // Assert
         Assert.Equal(
-            "Unable to find the required services. " +
-            "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-            "inside the call to 'ConfigureServices(...)' in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. "
+                + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -63,10 +66,11 @@ public class RoutingBuilderExtensionsTest
 
         // Assert
         Assert.Equal(
-            "Unable to find the required services. " +
-            "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-            "inside the call to 'ConfigureServices(...)' in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. "
+                + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -108,10 +112,12 @@ public class RoutingBuilderExtensionsTest
             .Returns(Task.CompletedTask)
             .Verifiable();
 
-        app.UseRouter(b =>
-        {
-            b.Routes.Add(router.Object);
-        });
+        app.UseRouter(
+            b =>
+            {
+                b.Routes.Add(router.Object);
+            }
+        );
 
         var appFunc = app.Build();
 

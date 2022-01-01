@@ -80,20 +80,14 @@ namespace System.Xml
         // Gets the XmlDocument that contains this node.
         public override XmlDocument OwnerDocument
         {
-            get
-            {
-                return (XmlDocument)parentNode!;
-            }
+            get { return (XmlDocument)parentNode!; }
         }
 
         // Gets or sets the markup representing just
         // the children of this node.
         public override string InnerXml
         {
-            get
-            {
-                return base.InnerXml;
-            }
+            get { return base.InnerXml; }
             set
             {
                 RemoveAll();
@@ -191,6 +185,9 @@ namespace System.Xml
             }
         }
 
-        internal override XPathNodeType XPNodeType { get { return XPathNodeType.Root; } }
+        internal override XPathNodeType XPNodeType
+        {
+            get { return XPathNodeType.Root; }
+        }
     }
 }

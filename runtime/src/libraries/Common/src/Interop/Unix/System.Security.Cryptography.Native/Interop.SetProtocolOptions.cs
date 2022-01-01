@@ -14,6 +14,9 @@ internal static partial class Interop
         internal static extern void SslCtxSetProtocolOptions(IntPtr ctx, SslProtocols protocols);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetProtocolOptions")]
-        internal static extern void SslCtxSetProtocolOptions(SafeSslContextHandle ctx, SslProtocols protocols);
+        internal static extern void SslCtxSetProtocolOptions(
+            SafeSslContextHandle ctx,
+            SslProtocols protocols
+        );
     }
 }

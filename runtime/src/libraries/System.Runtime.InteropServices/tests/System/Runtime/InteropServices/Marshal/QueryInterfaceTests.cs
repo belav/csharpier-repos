@@ -55,7 +55,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new int[][] { new int[] { 10 } }, IID_IUNKNOWN };
             yield return new object[] { new int[,] { { 10 } }, IID_IUNKNOWN };
 
-            MethodInfo method = typeof(GetObjectForIUnknownTests).GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = typeof(GetObjectForIUnknownTests).GetMethod(
+                nameof(NonGenericMethod),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return new object[] { d, IID_IUNKNOWN };
             yield return new object[] { d, IID_IDISPATCH };
@@ -127,12 +130,19 @@ namespace System.Runtime.InteropServices.Tests
         public void QueryInterface_ZeroPointer_ThrowsArgumentNullException()
         {
             Guid iid = Guid.Empty;
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.QueryInterface(IntPtr.Zero, ref iid, out IntPtr ppv));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.QueryInterface(IntPtr.Zero, ref iid, out IntPtr ppv)
+            );
         }
 
         private static void NonGenericMethod(int i) { }
         public delegate void NonGenericDelegate(int i);
 
-        public enum Int32Enum : int { Value1, Value2 }
+        public enum Int32Enum : int
+        {
+            Value1,
+            Value2
+        }
     }
 }

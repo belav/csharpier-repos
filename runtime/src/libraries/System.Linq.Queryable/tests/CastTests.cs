@@ -10,23 +10,35 @@ namespace System.Linq.Tests
         [Fact]
         public void CastIntToLongThrows()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             var rst = q.AsQueryable().Cast<long>();
 
-            Assert.Throws<InvalidCastException>(() => { foreach (var t in rst) ; });
+            Assert.Throws<InvalidCastException>(
+                () =>
+                {
+                    foreach (var t in rst)
+                        ;
+                }
+            );
         }
 
         [Fact]
         public void CastByteToUShortThrows()
         {
-            var q = from x in new byte[] { 0, 255, 127, 128, 1, 33, 99 }
-                    select x;
+            var q = from x in new byte[] { 0, 255, 127, 128, 1, 33, 99 } select x;
 
             var rst = q.AsQueryable().Cast<ushort>();
-            Assert.Throws<InvalidCastException>(() => { foreach (var t in rst) ; });
+            Assert.Throws<InvalidCastException>(
+                () =>
+                {
+                    foreach (var t in rst)
+                        ;
+                }
+            );
         }
 
         [Fact]
@@ -34,7 +46,6 @@ namespace System.Linq.Tests
         {
             object[] source = { };
             Assert.Empty(source.AsQueryable().Cast<int>());
-
         }
 
         [Fact]
@@ -126,7 +137,9 @@ namespace System.Linq.Tests
         [Fact]
         public void ArrayConversionThrows()
         {
-            Assert.Throws<InvalidCastException>(() => new[] { -4 }.AsQueryable().Cast<long>().ToList());
+            Assert.Throws<InvalidCastException>(
+                () => new[] { -4 }.AsQueryable().Cast<long>().ToList()
+            );
         }
 
         [Fact]
@@ -203,7 +216,10 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<object>)null).Cast<string>());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<object>)null).Cast<string>()
+            );
         }
 
         [Fact]

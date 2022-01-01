@@ -34,9 +34,9 @@ public class ControllerSaveTempDataPropertyFilterTest
 
         filter.Properties = new[]
         {
-                new LifecycleProperty(property1, "TempDataProperty-Test"),
-                new LifecycleProperty(property1, "TempDataProperty-Test2"),
-            };
+            new LifecycleProperty(property1, "TempDataProperty-Test"),
+            new LifecycleProperty(property1, "TempDataProperty-Test2"),
+        };
 
         var context = new ActionExecutingContext(
             new ActionContext
@@ -47,7 +47,8 @@ public class ControllerSaveTempDataPropertyFilterTest
             },
             new List<IFilterMetadata>(),
             new Dictionary<string, object>(),
-            controller);
+            controller
+        );
 
         // Act
         filter.OnActionExecuting(context);
@@ -80,9 +81,9 @@ public class ControllerSaveTempDataPropertyFilterTest
 
         filter.Properties = new[]
         {
-                new LifecycleProperty(property1, "TempDataProperty-Test"),
-                new LifecycleProperty(property2, "TempDataProperty-Test2"),
-            };
+            new LifecycleProperty(property1, "TempDataProperty-Test"),
+            new LifecycleProperty(property2, "TempDataProperty-Test2"),
+        };
 
         var context = new ActionExecutingContext(
             new ActionContext
@@ -93,7 +94,8 @@ public class ControllerSaveTempDataPropertyFilterTest
             },
             new List<IFilterMetadata>(),
             new Dictionary<string, object>(),
-            controller);
+            controller
+        );
 
         // Act
         filter.OnActionExecuting(context);
@@ -123,9 +125,9 @@ public class ControllerSaveTempDataPropertyFilterTest
 
         filter.Properties = new[]
         {
-                new LifecycleProperty(property1, "Test"),
-                new LifecycleProperty(property2, "Test2"),
-            };
+            new LifecycleProperty(property1, "Test"),
+            new LifecycleProperty(property2, "Test2"),
+        };
 
         var context = new ActionExecutingContext(
             new ActionContext
@@ -136,7 +138,8 @@ public class ControllerSaveTempDataPropertyFilterTest
             },
             new List<IFilterMetadata>(),
             new Dictionary<string, object>(),
-            controller);
+            controller
+        );
 
         // Act
         filter.OnActionExecuting(context);
@@ -162,9 +165,9 @@ public class ControllerSaveTempDataPropertyFilterTest
 
         filter.Properties = new[]
         {
-                new LifecycleProperty(property1, "Test"),
-                new LifecycleProperty(property2, "Test2"),
-            };
+            new LifecycleProperty(property1, "Test"),
+            new LifecycleProperty(property2, "Test2"),
+        };
 
         var context = new ActionExecutingContext(
             new ActionContext
@@ -175,7 +178,8 @@ public class ControllerSaveTempDataPropertyFilterTest
             },
             new List<IFilterMetadata>(),
             new Dictionary<string, object>(),
-            controller);
+            controller
+        );
 
         // Act
         filter.OnActionExecuting(context);
@@ -196,17 +200,17 @@ public class ControllerSaveTempDataPropertyFilterTest
             {
                 Assert.Equal(nameof(TestController.Test2), item.Key);
                 Assert.Equal(42, item.Value);
-            });
+            }
+        );
     }
 
     private ControllerSaveTempDataPropertyFilter CreateControllerSaveTempDataPropertyFilter(
         HttpContext httpContext,
-        TempDataDictionary tempData)
+        TempDataDictionary tempData
+    )
     {
         var factory = new Mock<ITempDataDictionaryFactory>();
-        factory
-            .Setup(f => f.GetTempData(httpContext))
-            .Returns(tempData);
+        factory.Setup(f => f.GetTempData(httpContext)).Returns(tempData);
 
         return new ControllerSaveTempDataPropertyFilter(factory.Object);
     }

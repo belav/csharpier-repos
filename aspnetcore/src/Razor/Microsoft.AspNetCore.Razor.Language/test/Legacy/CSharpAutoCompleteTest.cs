@@ -34,14 +34,20 @@ public class CSharpAutoCompleteTest : ParserTestBase
     public void FunctionsDirectiveAutoCompleteAtStartOfFile()
     {
         // Arrange, Act & Assert
-        ParseDocumentTest("@functions{" + Environment.NewLine + "foo", new[] { FunctionsDirective.Directive });
+        ParseDocumentTest(
+            "@functions{" + Environment.NewLine + "foo",
+            new[] { FunctionsDirective.Directive }
+        );
     }
 
     [Fact]
     public void SectionDirectiveAutoCompleteAtStartOfFile()
     {
         // Arrange, Act & Assert
-        ParseDocumentTest("@section Header {" + Environment.NewLine + "<p>Foo</p>", new[] { SectionDirective.Directive });
+        ParseDocumentTest(
+            "@section Header {" + Environment.NewLine + "<p>Foo</p>",
+            new[] { SectionDirective.Directive }
+        );
     }
 
     [Fact]

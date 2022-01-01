@@ -58,20 +58,28 @@ namespace JIT.HardwareIntrinsics.General
 
             Byte value = TestLibrary.Generator.GetByte();
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.CreateScalarUnsafe), new Type[] { typeof(Byte) })
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.CreateScalarUnsafe), new Type[] { typeof(Byte) })
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<Byte>)(result), value);
         }
 
-        private void ValidateResult(Vector128<Byte> result, Byte expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Byte> result,
+            Byte expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] resultElements = new Byte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(Byte[] resultElements, Byte expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Byte[] resultElements,
+            Byte expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -83,7 +91,9 @@ namespace JIT.HardwareIntrinsics.General
             {
                 for (var i = 1; i < ElementCount; i++)
                 {
-                    if (false /* value is uninitialized */)
+                    if (
+                        false /* value is uninitialized */
+                    )
                     {
                         succeeded = false;
                         break;
@@ -93,9 +103,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.CreateScalarUnsafe(Byte): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.CreateScalarUnsafe(Byte): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

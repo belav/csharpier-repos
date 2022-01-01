@@ -209,7 +209,11 @@ public sealed class EventCallbackFactory
     /// <param name="value"></param>
     /// <returns></returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public EventCallback<TValue> CreateInferred<TValue>(object receiver, Action<TValue> callback, TValue value)
+    public EventCallback<TValue> CreateInferred<TValue>(
+        object receiver,
+        Action<TValue> callback,
+        TValue value
+    )
     {
         return Create(receiver, callback);
     }
@@ -223,18 +227,28 @@ public sealed class EventCallbackFactory
     /// <param name="value"></param>
     /// <returns></returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public EventCallback<TValue> CreateInferred<TValue>(object receiver, Func<TValue, Task> callback, TValue value)
+    public EventCallback<TValue> CreateInferred<TValue>(
+        object receiver,
+        Func<TValue, Task> callback,
+        TValue value
+    )
     {
         return Create(receiver, callback);
     }
 
     private EventCallback CreateCore(object receiver, MulticastDelegate callback)
     {
-        return new EventCallback(callback?.Target as IHandleEvent ?? receiver as IHandleEvent, callback);
+        return new EventCallback(
+            callback?.Target as IHandleEvent ?? receiver as IHandleEvent,
+            callback
+        );
     }
 
     private EventCallback<TValue> CreateCore<TValue>(object receiver, MulticastDelegate callback)
     {
-        return new EventCallback<TValue>(callback?.Target as IHandleEvent ?? receiver as IHandleEvent, callback);
+        return new EventCallback<TValue>(
+            callback?.Target as IHandleEvent ?? receiver as IHandleEvent,
+            callback
+        );
     }
 }

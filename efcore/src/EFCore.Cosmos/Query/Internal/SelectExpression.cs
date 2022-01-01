@@ -24,7 +24,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     {
         private const string RootAlias = "c";
 
-        private IDictionary<ProjectionMember, Expression> _projectionMapping = new Dictionary<ProjectionMember, Expression>();
+        private IDictionary<ProjectionMember, Expression> _projectionMapping = new Dictionary<
+            ProjectionMember,
+            Expression
+        >();
         private readonly List<ProjectionExpression> _projection = new();
         private readonly List<OrderingExpression> _orderings = new();
 
@@ -41,7 +44,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             Container = entityType.GetContainer();
             FromExpression = new RootReferenceExpression(entityType, RootAlias);
-            _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(entityType, FromExpression);
+            _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(
+                entityType,
+                FromExpression
+            );
         }
 
         /// <summary>
@@ -55,7 +61,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             Container = entityType.GetContainer();
             FromExpression = new FromSqlExpression(entityType, RootAlias, sql, argument);
             _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(
-                entityType, new RootReferenceExpression(entityType, RootAlias));
+                entityType,
+                new RootReferenceExpression(entityType, RootAlias)
+            );
         }
 
         /// <summary>
@@ -67,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public SelectExpression(
             List<ProjectionExpression> projections,
             RootReferenceExpression fromExpression,
-            List<OrderingExpression> orderings)
+            List<OrderingExpression> orderings
+        )
         {
             _projection = projections;
             FromExpression = fromExpression;
@@ -78,8 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             List<ProjectionExpression> projections,
             RootReferenceExpression fromExpression,
             List<OrderingExpression> orderings,
-            string container)
-            : this(projections, fromExpression, orderings)
+            string container
+        ) : this(projections, fromExpression, orderings)
         {
             Container = container;
         }
@@ -98,8 +107,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IReadOnlyList<ProjectionExpression> Projection
-            => _projection;
+        public virtual IReadOnlyList<ProjectionExpression> Projection => _projection;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -115,8 +123,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IReadOnlyList<OrderingExpression> Orderings
-            => _orderings;
+        public virtual IReadOnlyList<OrderingExpression> Orderings => _orderings;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -156,8 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Expression GetMappedProjection(ProjectionMember projectionMember)
-            => _projectionMapping[projectionMember];
+        public virtual Expression GetMappedProjection(ProjectionMember projectionMember) =>
+            _projectionMapping[projectionMember];
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -182,16 +189,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             return _partitionKeyValue switch
             {
                 ConstantExpression constantExpression
-                    => GetString(_partitionKeyValueConverter, constantExpression.Value),
-                ParameterExpression parameterExpression when parameterValues.TryGetValue(parameterExpression.Name, out var value)
-                    => GetString(_partitionKeyValueConverter, value),
+                  => GetString(_partitionKeyValueConverter, constantExpression.Value),
+                ParameterExpression parameterExpression
+                    when parameterValues.TryGetValue(parameterExpression.Name, out var value)
+                  => GetString(_partitionKeyValueConverter, value),
                 _ => null
             };
 
-            static string GetString(ValueConverter converter, object value)
-                => converter is null
-                    ? (string)value
-                    : (string)converter.ConvertToProvider(value);
+            static string GetString(ValueConverter converter, object value) =>
+                converter is null ? (string)value : (string)converter.ConvertToProvider(value);
         }
 
         /// <summary>
@@ -211,9 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             foreach (var keyValuePair in _projectionMapping)
             {
                 result[keyValuePair.Key] = Constant(
-                    AddToProjection(
-                        keyValuePair.Value,
-                        keyValuePair.Key.Last?.Name));
+                    AddToProjection(keyValuePair.Value, keyValuePair.Key.Last?.Name)
+                );
             }
 
             _projectionMapping = result;
@@ -225,7 +230,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void ReplaceProjectionMapping(IDictionary<ProjectionMember, Expression> projectionMapping)
+        public virtual void ReplaceProjectionMapping(
+            IDictionary<ProjectionMember, Expression> projectionMapping
+        )
         {
             _projectionMapping.Clear();
             foreach (var kvp in projectionMapping)
@@ -240,8 +247,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual int AddToProjection(SqlExpression sqlExpression)
-            => AddToProjection(sqlExpression, null);
+        public virtual int AddToProjection(SqlExpression sqlExpression) =>
+            AddToProjection(sqlExpression, null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -249,8 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual int AddToProjection(EntityProjectionExpression entityProjection)
-            => AddToProjection(entityProjection, null);
+        public virtual int AddToProjection(EntityProjectionExpression entityProjection) =>
+            AddToProjection(entityProjection, null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -258,8 +265,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual int AddToProjection(ObjectArrayProjectionExpression objectArrayProjection)
-            => AddToProjection(objectArrayProjection, null);
+        public virtual int AddToProjection(ObjectArrayProjectionExpression objectArrayProjection) =>
+            AddToProjection(objectArrayProjection, null);
 
         private int AddToProjection(Expression expression, string alias)
         {
@@ -269,13 +276,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 return existingIndex;
             }
 
-            var baseAlias = alias
-                ?? (expression as IAccessExpression)?.Name
-                ?? "c";
+            var baseAlias = alias ?? (expression as IAccessExpression)?.Name ?? "c";
 
             var currentAlias = baseAlias;
             var counter = 0;
-            while (_projection.Any(pe => string.Equals(pe.Alias, currentAlias, StringComparison.OrdinalIgnoreCase)))
+            while (
+                _projection.Any(
+                    pe => string.Equals(pe.Alias, currentAlias, StringComparison.OrdinalIgnoreCase)
+                )
+            )
             {
                 currentAlias = $"{baseAlias}{counter++}";
             }
@@ -315,21 +324,25 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual void ApplyPredicate(SqlExpression expression)
         {
-            if (expression is SqlConstantExpression sqlConstant
+            if (
+                expression is SqlConstantExpression sqlConstant
                 && sqlConstant.Value is bool boolValue
-                && boolValue)
+                && boolValue
+            )
             {
                 return;
             }
 
-            Predicate = Predicate == null
-                ? expression
-                : new SqlBinaryExpression(
-                    ExpressionType.AndAlso,
-                    Predicate,
-                    expression,
-                    typeof(bool),
-                    expression.TypeMapping);
+            Predicate =
+                Predicate == null
+                    ? expression
+                    : new SqlBinaryExpression(
+                          ExpressionType.AndAlso,
+                          Predicate,
+                          expression,
+                          typeof(bool),
+                          expression.TypeMapping
+                      );
         }
 
         /// <summary>
@@ -356,8 +369,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual void ApplyOffset(SqlExpression sqlExpression)
         {
-            if (Limit != null
-                || Offset != null)
+            if (Limit != null || Offset != null)
             {
                 throw new InvalidOperationException("See issue#16156");
             }
@@ -373,9 +385,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual void ApplyOrdering(OrderingExpression orderingExpression)
         {
-            if (IsDistinct
-                || Limit != null
-                || Offset != null)
+            if (IsDistinct || Limit != null || Offset != null)
             {
                 throw new InvalidOperationException("See issue#16156");
             }
@@ -392,7 +402,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual void AppendOrdering(OrderingExpression orderingExpression)
         {
-            if (_orderings.FirstOrDefault(o => o.Expression.Equals(orderingExpression.Expression)) == null)
+            if (
+                _orderings.FirstOrDefault(o => o.Expression.Equals(orderingExpression.Expression))
+                == null
+            )
             {
                 _orderings.Add(orderingExpression);
             }
@@ -406,8 +419,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual void ReverseOrderings()
         {
-            if (Limit != null
-                || Offset != null)
+            if (Limit != null || Offset != null)
             {
                 throw new InvalidOperationException(CosmosStrings.ReverseAfterSkipTakeNotSupported);
             }
@@ -421,7 +433,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 _orderings.Add(
                     new OrderingExpression(
                         existingOrdering.Expression,
-                        !existingOrdering.IsAscending));
+                        !existingOrdering.IsAscending
+                    )
+                );
             }
         }
 
@@ -431,8 +445,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Type Type
-            => typeof(object);
+        public override Type Type => typeof(object);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -440,8 +453,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -500,7 +512,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             if (changed)
             {
-                var newSelectExpression = new SelectExpression(projections, fromExpression, orderings)
+                var newSelectExpression = new SelectExpression(
+                    projections,
+                    fromExpression,
+                    orderings
+                )
                 {
                     _projectionMapping = projectionMapping,
                     Predicate = predicate,
@@ -527,7 +543,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression? predicate,
             List<OrderingExpression>? orderings,
             SqlExpression? limit,
-            SqlExpression? offset)
+            SqlExpression? offset
+        )
         {
             var projectionMapping = new Dictionary<ProjectionMember, Expression>();
             foreach (var kvp in _projectionMapping)

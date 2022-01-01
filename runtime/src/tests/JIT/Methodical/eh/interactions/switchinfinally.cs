@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// switch statement in a finally 
+// switch statement in a finally
 
 using System;
 
@@ -18,23 +18,13 @@ namespace test3
 
         public int val
         {
-            get
-            {
-                return m_i;
-            }
-            set
-            {
-                m_i = value;
-            }
+            get { return m_i; }
+            set { m_i = value; }
         }
-
 
         public void testit(int i)
         {
-            try
-            {
-
-            }
+            try { }
             finally
             {
                 switch (i)

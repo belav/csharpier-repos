@@ -15,16 +15,25 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
 {
     internal sealed class SnippetFunctionClassName : AbstractSnippetFunctionClassName
     {
-        public SnippetFunctionClassName(SnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer, string fieldName)
-            : base(snippetExpansionClient, subjectBuffer, fieldName)
-        {
-        }
+        public SnippetFunctionClassName(
+            SnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer,
+            string fieldName
+        ) : base(snippetExpansionClient, subjectBuffer, fieldName) { }
 
-        protected override int GetContainingClassName(Document document, SnapshotSpan fieldSpan, CancellationToken cancellationToken, ref string value, ref int hasDefaultValue)
+        protected override int GetContainingClassName(
+            Document document,
+            SnapshotSpan fieldSpan,
+            CancellationToken cancellationToken,
+            ref string value,
+            ref int hasDefaultValue
+        )
         {
             // Find the nearest enclosing type declaration and use its name
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
-            var type = syntaxTree.FindTokenOnLeftOfPosition(fieldSpan.Start.Position, cancellationToken).GetAncestor<TypeDeclarationSyntax>();
+            var type = syntaxTree
+                .FindTokenOnLeftOfPosition(fieldSpan.Start.Position, cancellationToken)
+                .GetAncestor<TypeDeclarationSyntax>();
 
             if (type != null)
             {

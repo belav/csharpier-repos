@@ -25,14 +25,15 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         /// <param name="debuggeeSideVisualizerTypeName">[Required] The full name of the debuggee-side visualizer type</param>
         /// <param name="debuggeeSideVisualizerAssemblyName">[Required] The full name of the debuggee-side visualizer assembly</param>
         /// <param name="visualizerDescription">[Required] The visualizer description</param>
-        internal DkmClrDebuggerVisualizerAttribute(string targetMember,
+        internal DkmClrDebuggerVisualizerAttribute(
+            string targetMember,
             string uiSideVisualizerTypeName,
             string uiSideVisualizerAssemblyName,
             DkmClrCustomVisualizerAssemblyLocation uiSideVisualizerAssemblyLocation,
             string debuggeeSideVisualizerTypeName,
             string debuggeeSideVisualizerAssemblyName,
-            string visualizerDescription) :
-            base(null)
+            string visualizerDescription
+        ) : base(null)
         {
             UISideVisualizerTypeName = uiSideVisualizerTypeName;
             UISideVisualizerAssemblyName = uiSideVisualizerAssemblyName;

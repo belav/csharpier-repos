@@ -266,7 +266,9 @@ class Runtime_34587
 
             if (X86Base.IsSupported)
             {
-                succeeded &= (RuntimeInformation.OSArchitecture == Architecture.X86) || (RuntimeInformation.OSArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.OSArchitecture == Architecture.X86)
+                    || (RuntimeInformation.OSArchitecture == Architecture.X64);
             }
 
             if (X86Base.X64.IsSupported)
@@ -446,7 +448,9 @@ class Runtime_34587
 
             if (Bmi1.IsSupported)
             {
-                succeeded &= (RuntimeInformation.OSArchitecture == Architecture.X86) || (RuntimeInformation.OSArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.OSArchitecture == Architecture.X86)
+                    || (RuntimeInformation.OSArchitecture == Architecture.X64);
             }
 
             if (Bmi1.X64.IsSupported)
@@ -464,7 +468,9 @@ class Runtime_34587
 
             if (Bmi2.IsSupported)
             {
-                succeeded &= (RuntimeInformation.OSArchitecture == Architecture.X86) || (RuntimeInformation.OSArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.OSArchitecture == Architecture.X86)
+                    || (RuntimeInformation.OSArchitecture == Architecture.X64);
             }
 
             if (Bmi2.X64.IsSupported)
@@ -500,7 +506,9 @@ class Runtime_34587
 
             if (Lzcnt.IsSupported)
             {
-                succeeded &= (RuntimeInformation.OSArchitecture == Architecture.X86) || (RuntimeInformation.OSArchitecture == Architecture.X64);
+                succeeded &=
+                    (RuntimeInformation.OSArchitecture == Architecture.X86)
+                    || (RuntimeInformation.OSArchitecture == Architecture.X64);
             }
 
             if (Lzcnt.X64.IsSupported)

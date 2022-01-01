@@ -10,7 +10,15 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void EnsureKeyIsolation()
         {
-            byte[] key = new[] { (byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, };
+            byte[] key = new[]
+            {
+                (byte)0x00,
+                (byte)0x01,
+                (byte)0x02,
+                (byte)0x03,
+                (byte)0x04,
+                (byte)0x05,
+            };
             byte[] keyCopy = (byte[])key.Clone();
 
             using (var keyedHash = new TestKeyedHashAlgorithm())
@@ -29,7 +37,15 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void EnsureGetKeyCopies()
         {
-            byte[] key = new[] { (byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, };
+            byte[] key = new[]
+            {
+                (byte)0x00,
+                (byte)0x01,
+                (byte)0x02,
+                (byte)0x03,
+                (byte)0x04,
+                (byte)0x05,
+            };
 
             using (var keyedHash = new TestKeyedHashAlgorithm())
             {
@@ -50,7 +66,15 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void EnsureDisposeFreesKey()
         {
-            byte[] key = new[] { (byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, };
+            byte[] key = new[]
+            {
+                (byte)0x00,
+                (byte)0x01,
+                (byte)0x02,
+                (byte)0x03,
+                (byte)0x04,
+                (byte)0x05,
+            };
 
             using (var keyedHash = new TestKeyedHashAlgorithm())
             {
@@ -77,18 +101,14 @@ namespace System.Security.Cryptography.Tests
 
         private class TestKeyedHashAlgorithm : KeyedHashAlgorithm
         {
-            protected override void HashCore(byte[] array, int ibStart, int cbSize)
-            {
-            }
+            protected override void HashCore(byte[] array, int ibStart, int cbSize) { }
 
             protected override byte[] HashFinal()
             {
                 return Array.Empty<byte>();
             }
 
-            public override void Initialize()
-            {
-            }
+            public override void Initialize() { }
         }
     }
 }

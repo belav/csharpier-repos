@@ -20,23 +20,20 @@ namespace AutoMapper.UnitTests.Bug
             public string UserId { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.ReplaceMemberName("Account", "User");
-            cfg.ReplaceMemberName("User", "Account");
-            cfg.CreateMap<Source, Destination>().ReverseMap();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.ReplaceMemberName("Account", "User");
+                    cfg.ReplaceMemberName("User", "Account");
+                    cfg.CreateMap<Source, Destination>().ReverseMap();
+                }
+            );
 
         protected override void Because_of()
         {
-            _source = Mapper.Map<Destination, Source>(new Destination
-            {
-                UserId = SomeId
-            });
-            _destination = Mapper.Map<Source, Destination>(new Source
-            {
-                AccountId = SomeOtherId
-            });
+            _source = Mapper.Map<Destination, Source>(new Destination { UserId = SomeId });
+            _destination = Mapper.Map<Source, Destination>(new Source { AccountId = SomeOtherId });
         }
 
         [Fact]
@@ -74,21 +71,18 @@ namespace AutoMapper.UnitTests.Bug
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<MyProfile>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.AddProfile<MyProfile>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _source = Mapper.Map<Destination, Source>(new Destination
-            {
-                UserId = SomeId
-            });
-            _destination = Mapper.Map<Source, Destination>(new Source
-            {
-                AccountId = SomeOtherId
-            });
+            _source = Mapper.Map<Destination, Source>(new Destination { UserId = SomeId });
+            _destination = Mapper.Map<Source, Destination>(new Source { AccountId = SomeOtherId });
         }
 
         [Fact]

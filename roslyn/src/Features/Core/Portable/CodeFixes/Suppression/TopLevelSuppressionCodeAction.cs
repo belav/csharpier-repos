@@ -9,11 +9,16 @@ using Microsoft.CodeAnalysis.CodeActions;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
-    internal sealed class TopLevelSuppressionCodeAction : AbstractConfigurationActionWithNestedActions
+    internal sealed class TopLevelSuppressionCodeAction
+        : AbstractConfigurationActionWithNestedActions
     {
-        public TopLevelSuppressionCodeAction(Diagnostic diagnostic, ImmutableArray<NestedSuppressionCodeAction> nestedActions)
-            : base(ImmutableArray<CodeAction>.CastUp(nestedActions), string.Format(FeaturesResources.Suppress_0, diagnostic.Id))
-        {
-        }
+        public TopLevelSuppressionCodeAction(
+            Diagnostic diagnostic,
+            ImmutableArray<NestedSuppressionCodeAction> nestedActions
+        )
+            : base(
+                ImmutableArray<CodeAction>.CastUp(nestedActions),
+                string.Format(FeaturesResources.Suppress_0, diagnostic.Id)
+            ) { }
     }
 }

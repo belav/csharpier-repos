@@ -6,7 +6,10 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-[TestCaseOrderer("Microsoft.AspNetCore.Testing.AlphabeticalOrderer", "Microsoft.AspNetCore.Testing.Tests")]
+[TestCaseOrderer(
+    "Microsoft.AspNetCore.Testing.AlphabeticalOrderer",
+    "Microsoft.AspNetCore.Testing.Tests"
+)]
 public class ConditionalFactTest : IClassFixture<ConditionalFactTest.ConditionalFactAsserter>
 {
     public ConditionalFactTest(ConditionalFactAsserter collector)
@@ -58,9 +61,6 @@ public class ConditionalFactTest : IClassFixture<ConditionalFactTest.Conditional
     {
         public bool TestRan { get; set; }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }
-

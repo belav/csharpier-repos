@@ -13,7 +13,12 @@ namespace System.Text.Json.Nodes
         public string ToJsonString(JsonSerializerOptions? options = null)
         {
             using var output = new PooledByteBufferWriter(JsonSerializerOptions.BufferSizeDefault);
-            using (var writer = new Utf8JsonWriter(output, options == null ? default(JsonWriterOptions) : options.GetWriterOptions()))
+            using (
+                var writer = new Utf8JsonWriter(
+                    output,
+                    options == null ? default(JsonWriterOptions) : options.GetWriterOptions()
+                )
+            )
             {
                 WriteTo(writer, options);
             }
@@ -35,15 +40,19 @@ namespace System.Text.Json.Nodes
                     return jsonString.Value;
                 }
 
-                if (this is JsonValue<JsonElement> jsonElement &&
-                    jsonElement.Value.ValueKind == JsonValueKind.String)
+                if (
+                    this is JsonValue<JsonElement> jsonElement
+                    && jsonElement.Value.ValueKind == JsonValueKind.String
+                )
                 {
                     return jsonElement.Value.GetString()!;
                 }
             }
 
             using var output = new PooledByteBufferWriter(JsonSerializerOptions.BufferSizeDefault);
-            using (var writer = new Utf8JsonWriter(output, new JsonWriterOptions { Indented = true }))
+            using (
+                var writer = new Utf8JsonWriter(output, new JsonWriterOptions { Indented = true })
+            )
             {
                 WriteTo(writer);
             }

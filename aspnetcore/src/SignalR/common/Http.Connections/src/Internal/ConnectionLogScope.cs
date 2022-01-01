@@ -56,7 +56,8 @@ internal class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, object?>>
                 _cachedToString = string.Format(
                     CultureInfo.InvariantCulture,
                     "TransportConnectionId:{0}",
-                    ConnectionId);
+                    ConnectionId
+                );
             }
         }
 

@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 void IDisposable.Dispose()
                 {
-                    // Stop computing any initial tags if we've been asked for them. 
+                    // Stop computing any initial tags if we've been asked for them.
                     _disposalTokenSource.Cancel();
                     _disposalTokenSource.Dispose();
                     _cancellationSeries.Dispose();
@@ -56,25 +56,29 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 /// (i.e. <paramref name="initialTags"/>) tag request we make.  We don't want that to be cancellable as
                 /// we want that result to be shown as soon as possible.
                 /// </summary>
-                public CancellationToken GetCancellationToken(bool initialTags)
-                    => initialTags ? _disposalTokenSource.Token : _cancellationSeries.CreateNext();
+                public CancellationToken GetCancellationToken(bool initialTags) =>
+                    initialTags ? _disposalTokenSource.Token : _cancellationSeries.CreateNext();
 
                 public void EnqueueWork(
                     Func<Task> workAsync,
                     TaggerDelay delay,
                     IExpeditableDelaySource delaySource,
                     IAsyncToken asyncToken,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
                     lock (this)
                     {
-                        _eventWorkQueue = _eventWorkQueue.ContinueWithAfterDelayFromAsync(
-                            _ => workAsync(),
-                            cancellationToken,
-                            delay.ComputeTimeDelay(),
-                            delaySource,
-                            TaskContinuationOptions.None,
-                            TaskScheduler.Default).CompletesAsyncOperation(asyncToken);
+                        _eventWorkQueue = _eventWorkQueue
+                            .ContinueWithAfterDelayFromAsync(
+                                _ => workAsync(),
+                                cancellationToken,
+                                delay.ComputeTimeDelay(),
+                                delaySource,
+                                TaskContinuationOptions.None,
+                                TaskScheduler.Default
+                            )
+                            .CompletesAsyncOperation(asyncToken);
                     }
                 }
             }

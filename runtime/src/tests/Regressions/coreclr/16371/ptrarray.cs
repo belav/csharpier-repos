@@ -12,7 +12,7 @@ unsafe class Program
 
     static Program()
     {
-        s_mdArray = new int*[2,2];
+        s_mdArray = new int*[2, 2];
         Init(ref s_mdArray[0, 0]);
         s_mdArray[1, 1] = (int*)2;
     }

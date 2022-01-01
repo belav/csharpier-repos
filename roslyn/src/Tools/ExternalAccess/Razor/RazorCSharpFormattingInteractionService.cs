@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         public static bool SupportsFormattingOnTypedCharacter(Document document, char ch)
         {
             Contract.ThrowIfFalse(document.Project.Language is LanguageNames.CSharp);
-            var formattingService = document.GetRequiredLanguageService<IFormattingInteractionService>();
+            var formattingService =
+                document.GetRequiredLanguageService<IFormattingInteractionService>();
             return formattingService.SupportsFormattingOnTypedCharacter(document, ch);
         }
 
@@ -37,11 +38,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             Document document,
             TextSpan? textSpan,
             DocumentOptionSet? documentOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(document.Project.Language is LanguageNames.CSharp);
-            var formattingService = document.GetRequiredLanguageService<IFormattingInteractionService>();
-            return formattingService.GetFormattingChangesAsync(document, textSpan, documentOptions, cancellationToken);
+            var formattingService =
+                document.GetRequiredLanguageService<IFormattingInteractionService>();
+            return formattingService.GetFormattingChangesAsync(
+                document,
+                textSpan,
+                documentOptions,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -54,11 +62,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             char typedChar,
             int position,
             DocumentOptionSet? documentOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(document.Project.Language is LanguageNames.CSharp);
-            var formattingService = document.GetRequiredLanguageService<IFormattingInteractionService>();
-            return formattingService.GetFormattingChangesAsync(document, typedChar, position, documentOptions, cancellationToken);
+            var formattingService =
+                document.GetRequiredLanguageService<IFormattingInteractionService>();
+            return formattingService.GetFormattingChangesAsync(
+                document,
+                typedChar,
+                position,
+                documentOptions,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -68,11 +84,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             Document document,
             TextSpan textSpan,
             DocumentOptionSet? documentOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(document.Project.Language is LanguageNames.CSharp);
-            var formattingService = document.GetRequiredLanguageService<IFormattingInteractionService>();
-            return formattingService.GetFormattingChangesOnPasteAsync(document, textSpan, documentOptions, cancellationToken);
+            var formattingService =
+                document.GetRequiredLanguageService<IFormattingInteractionService>();
+            return formattingService.GetFormattingChangesOnPasteAsync(
+                document,
+                textSpan,
+                documentOptions,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -83,11 +106,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             Document document,
             int position,
             DocumentOptionSet? documentOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(document.Project.Language is LanguageNames.CSharp);
-            var formattingService = document.GetRequiredLanguageService<IFormattingInteractionService>();
-            return formattingService.GetFormattingChangesOnReturnAsync(document, position, documentOptions, cancellationToken);
+            var formattingService =
+                document.GetRequiredLanguageService<IFormattingInteractionService>();
+            return formattingService.GetFormattingChangesOnReturnAsync(
+                document,
+                position,
+                documentOptions,
+                cancellationToken
+            );
         }
     }
 }

@@ -14,18 +14,17 @@ public class TestClientModelValidatorProvider : CompositeClientModelValidatorPro
     {
         var providers = new IClientModelValidatorProvider[]
         {
-                new DefaultClientModelValidatorProvider(),
-                new DataAnnotationsClientModelValidatorProvider(
-                    new ValidationAttributeAdapterProvider(),
-                    Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                    stringLocalizerFactory: null),
+            new DefaultClientModelValidatorProvider(),
+            new DataAnnotationsClientModelValidatorProvider(
+                new ValidationAttributeAdapterProvider(),
+                Options.Create(new MvcDataAnnotationsLocalizationOptions()),
+                stringLocalizerFactory: null
+            ),
         };
 
         return new TestClientModelValidatorProvider(providers);
     }
 
     public TestClientModelValidatorProvider(IEnumerable<IClientModelValidatorProvider> providers)
-        : base(providers)
-    {
-    }
+        : base(providers) { }
 }

@@ -19,7 +19,10 @@ public static class TestRazorCodeDocument
         return new DefaultRazorCodeDocument(source, imports: null);
     }
 
-    public static RazorCodeDocument Create(RazorSourceDocument source, IEnumerable<RazorSourceDocument> imports)
+    public static RazorCodeDocument Create(
+        RazorSourceDocument source,
+        IEnumerable<RazorSourceDocument> imports
+    )
     {
         return new DefaultRazorCodeDocument(source, imports);
     }

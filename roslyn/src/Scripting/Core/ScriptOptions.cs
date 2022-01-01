@@ -23,19 +23,21 @@ namespace Microsoft.CodeAnalysis.Scripting
     /// </summary>
     public sealed class ScriptOptions
     {
-        public static ScriptOptions Default { get; } = new ScriptOptions(
-            filePath: string.Empty,
-            references: GetDefaultMetadataReferences(),
-            namespaces: ImmutableArray<string>.Empty,
-            metadataResolver: ScriptMetadataResolver.Default,
-            sourceResolver: SourceFileResolver.Default,
-            emitDebugInformation: false,
-            fileEncoding: null,
-            OptimizationLevel.Debug,
-            checkOverflow: false,
-            allowUnsafe: true,
-            warningLevel: 4,
-            parseOptions: null);
+        public static ScriptOptions Default { get; } =
+            new ScriptOptions(
+                filePath: string.Empty,
+                references: GetDefaultMetadataReferences(),
+                namespaces: ImmutableArray<string>.Empty,
+                metadataResolver: ScriptMetadataResolver.Default,
+                sourceResolver: SourceFileResolver.Default,
+                emitDebugInformation: false,
+                fileEncoding: null,
+                OptimizationLevel.Debug,
+                checkOverflow: false,
+                allowUnsafe: true,
+                warningLevel: 4,
+                parseOptions: null
+            );
 
         private static ImmutableArray<MetadataReference> GetDefaultMetadataReferences()
         {
@@ -153,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             bool checkOverflow,
             bool allowUnsafe,
             int warningLevel,
-            ParseOptions parseOptions)
+            ParseOptions parseOptions
+        )
         {
             Debug.Assert(filePath != null);
             Debug.Assert(!references.IsDefault);
@@ -176,20 +179,20 @@ namespace Microsoft.CodeAnalysis.Scripting
         }
 
         private ScriptOptions(ScriptOptions other)
-            : this(filePath: other.FilePath,
-                   references: other.MetadataReferences,
-                   namespaces: other.Imports,
-                   metadataResolver: other.MetadataResolver,
-                   sourceResolver: other.SourceResolver,
-                   emitDebugInformation: other.EmitDebugInformation,
-                   fileEncoding: other.FileEncoding,
-                   optimizationLevel: other.OptimizationLevel,
-                   checkOverflow: other.CheckOverflow,
-                   allowUnsafe: other.AllowUnsafe,
-                   warningLevel: other.WarningLevel,
-                   parseOptions: other.ParseOptions)
-        {
-        }
+            : this(
+                filePath: other.FilePath,
+                references: other.MetadataReferences,
+                namespaces: other.Imports,
+                metadataResolver: other.MetadataResolver,
+                sourceResolver: other.SourceResolver,
+                emitDebugInformation: other.EmitDebugInformation,
+                fileEncoding: other.FileEncoding,
+                optimizationLevel: other.OptimizationLevel,
+                checkOverflow: other.CheckOverflow,
+                allowUnsafe: other.AllowUnsafe,
+                warningLevel: other.WarningLevel,
+                parseOptions: other.ParseOptions
+            ) { }
 
         // a reference to an assembly should by default be equivalent to #r, which applies recursive global alias:
         private static readonly MetadataReferenceProperties s_assemblyReferenceProperties =
@@ -209,7 +212,12 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="references"/> is null or contains a null reference.</exception>
         private ScriptOptions WithReferences(ImmutableArray<MetadataReference> references) =>
-            MetadataReferences.Equals(references) ? this : new ScriptOptions(this) { MetadataReferences = CheckImmutableArray(references, nameof(references)) };
+            MetadataReferences.Equals(references)
+                ? this
+                : new ScriptOptions(this)
+                  {
+                      MetadataReferences = CheckImmutableArray(references, nameof(references))
+                  };
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with the references changed.
@@ -244,7 +252,9 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <exception cref="ArgumentNullException"><paramref name="references"/> is null or contains a null reference.</exception>
         /// <exception cref="NotSupportedException">Specified assembly is not supported (e.g. it's a dynamic assembly).</exception>
         public ScriptOptions WithReferences(IEnumerable<Assembly> references) =>
-            WithReferences(SelectChecked(references, nameof(references), CreateReferenceFromAssembly));
+            WithReferences(
+                SelectChecked(references, nameof(references), CreateReferenceFromAssembly)
+            );
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with the references changed.
@@ -260,11 +270,16 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <exception cref="ArgumentNullException"><paramref name="references"/> is null or contains a null reference.</exception>
         /// <exception cref="NotSupportedException">Specified assembly is not supported (e.g. it's a dynamic assembly).</exception>
         public ScriptOptions AddReferences(IEnumerable<Assembly> references) =>
-            AddReferences(SelectChecked(references, nameof(references), CreateReferenceFromAssembly));
+            AddReferences(
+                SelectChecked(references, nameof(references), CreateReferenceFromAssembly)
+            );
 
         private static MetadataReference CreateReferenceFromAssembly(Assembly assembly)
         {
-            return MetadataReference.CreateFromAssemblyInternal(assembly, s_assemblyReferenceProperties);
+            return MetadataReference.CreateFromAssemblyInternal(
+                assembly,
+                s_assemblyReferenceProperties
+            );
         }
 
         /// <summary>
@@ -280,7 +295,9 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="references"/> is null or contains a null reference.</exception>
         public ScriptOptions WithReferences(IEnumerable<string> references) =>
-            WithReferences(SelectChecked(references, nameof(references), CreateUnresolvedReference));
+            WithReferences(
+                SelectChecked(references, nameof(references), CreateUnresolvedReference)
+            );
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with the references changed.
@@ -306,20 +323,29 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// Creates a new <see cref="ScriptOptions"/> with specified <see cref="MetadataResolver"/>.
         /// </summary>
         public ScriptOptions WithMetadataResolver(MetadataReferenceResolver resolver) =>
-            MetadataResolver == resolver ? this : new ScriptOptions(this) { MetadataResolver = resolver };
+            MetadataResolver == resolver
+                ? this
+                : new ScriptOptions(this) { MetadataResolver = resolver };
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with specified <see cref="SourceResolver"/>.
         /// </summary>
         public ScriptOptions WithSourceResolver(SourceReferenceResolver resolver) =>
-            SourceResolver == resolver ? this : new ScriptOptions(this) { SourceResolver = resolver };
+            SourceResolver == resolver
+                ? this
+                : new ScriptOptions(this) { SourceResolver = resolver };
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with the <see cref="Imports"/> changed.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="imports"/> is null or contains a null reference.</exception>
         private ScriptOptions WithImports(ImmutableArray<string> imports) =>
-            Imports.Equals(imports) ? this : new ScriptOptions(this) { Imports = CheckImmutableArray(imports, nameof(imports)) };
+            Imports.Equals(imports)
+                ? this
+                : new ScriptOptions(this)
+                  {
+                      Imports = CheckImmutableArray(imports, nameof(imports))
+                  };
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with the <see cref="Imports"/> changed.
@@ -353,7 +379,9 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// Creates a new <see cref="ScriptOptions"/> with debugging information enabled.
         /// </summary>
         public ScriptOptions WithEmitDebugInformation(bool emitDebugInformation) =>
-            emitDebugInformation == EmitDebugInformation ? this : new ScriptOptions(this) { EmitDebugInformation = emitDebugInformation };
+            emitDebugInformation == EmitDebugInformation
+                ? this
+                : new ScriptOptions(this) { EmitDebugInformation = emitDebugInformation };
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with specified <see cref="FileEncoding"/>.
@@ -366,27 +394,37 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </summary>
         /// <returns></returns>
         public ScriptOptions WithOptimizationLevel(OptimizationLevel optimizationLevel) =>
-            optimizationLevel == OptimizationLevel ? this : new ScriptOptions(this) { OptimizationLevel = optimizationLevel };
+            optimizationLevel == OptimizationLevel
+                ? this
+                : new ScriptOptions(this) { OptimizationLevel = optimizationLevel };
 
         /// <summary>
         /// Create a new <see cref="ScriptOptions"/> with unsafe code regions allowed.
         /// </summary>
         public ScriptOptions WithAllowUnsafe(bool allowUnsafe) =>
-            allowUnsafe == AllowUnsafe ? this : new ScriptOptions(this) { AllowUnsafe = allowUnsafe };
+            allowUnsafe == AllowUnsafe
+                ? this
+                : new ScriptOptions(this) { AllowUnsafe = allowUnsafe };
 
         /// <summary>
         /// Create a new <see cref="ScriptOptions"/> with bounds checking on integer arithmetic enforced.
         /// </summary>
         public ScriptOptions WithCheckOverflow(bool checkOverflow) =>
-            checkOverflow == CheckOverflow ? this : new ScriptOptions(this) { CheckOverflow = checkOverflow };
+            checkOverflow == CheckOverflow
+                ? this
+                : new ScriptOptions(this) { CheckOverflow = checkOverflow };
 
         /// <summary>
         /// Create a new <see cref="ScriptOptions"/> with the specific <see cref="WarningLevel"/>.
         /// </summary>
         public ScriptOptions WithWarningLevel(int warningLevel) =>
-            warningLevel == WarningLevel ? this : new ScriptOptions(this) { WarningLevel = warningLevel };
+            warningLevel == WarningLevel
+                ? this
+                : new ScriptOptions(this) { WarningLevel = warningLevel };
 
         internal ScriptOptions WithParseOptions(ParseOptions parseOptions) =>
-            parseOptions == ParseOptions ? this : new ScriptOptions(this) { ParseOptions = parseOptions };
+            parseOptions == ParseOptions
+                ? this
+                : new ScriptOptions(this) { ParseOptions = parseOptions };
     }
 }

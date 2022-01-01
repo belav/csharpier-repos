@@ -118,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool key,
             bool condition,
             bool sensitiveLoggingEnabled,
-            bool? isNullable = null)
+            bool? isNullable = null
+        )
         {
             ColumnName = columnName;
             OriginalValue = originalValue;
@@ -162,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool valueIsWrite,
             bool columnIsKey,
             bool columnIsCondition,
-            bool sensitiveLoggingEnabled)
+            bool sensitiveLoggingEnabled
+        )
         {
             ColumnName = column.Name;
             OriginalValue = null;

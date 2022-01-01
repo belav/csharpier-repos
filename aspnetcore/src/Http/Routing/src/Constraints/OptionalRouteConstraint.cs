@@ -36,7 +36,8 @@ public class OptionalRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -50,11 +51,7 @@ public class OptionalRouteConstraint : IRouteConstraint
 
         if (values.TryGetValue(routeKey, out var value))
         {
-            return InnerConstraint.Match(httpContext,
-                                         route,
-                                         routeKey,
-                                         values,
-                                         routeDirection);
+            return InnerConstraint.Match(httpContext, route, routeKey, values, routeDirection);
         }
 
         return true;

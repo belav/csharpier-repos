@@ -46,10 +46,7 @@ namespace System.Speech.Recognition
 
         internal TagElement Tag
         {
-            get
-            {
-                return _tag;
-            }
+            get { return _tag; }
         }
 
         #endregion

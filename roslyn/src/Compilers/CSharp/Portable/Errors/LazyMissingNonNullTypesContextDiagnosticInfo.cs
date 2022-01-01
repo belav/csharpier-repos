@@ -18,26 +18,48 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly TypeWithAnnotations _type;
         private readonly DiagnosticInfo _info;
 
-        private LazyMissingNonNullTypesContextDiagnosticInfo(TypeWithAnnotations type, DiagnosticInfo info)
+        private LazyMissingNonNullTypesContextDiagnosticInfo(
+            TypeWithAnnotations type,
+            DiagnosticInfo info
+        )
         {
             Debug.Assert(type.HasType);
             _type = type;
             _info = info;
         }
 
-        public static void AddAll(bool isNullableEnabled, bool isGeneratedCode, TypeWithAnnotations type, Location location, DiagnosticBag diagnostics)
+        public static void AddAll(
+            bool isNullableEnabled,
+            bool isGeneratedCode,
+            TypeWithAnnotations type,
+            Location location,
+            DiagnosticBag diagnostics
+        )
         {
             var rawInfos = ArrayBuilder<DiagnosticInfo>.GetInstance();
-            GetRawDiagnosticInfos(isNullableEnabled, isGeneratedCode, (CSharpSyntaxTree)location.SourceTree, rawInfos);
+            GetRawDiagnosticInfos(
+                isNullableEnabled,
+                isGeneratedCode,
+                (CSharpSyntaxTree)location.SourceTree,
+                rawInfos
+            );
             foreach (var rawInfo in rawInfos)
             {
-                diagnostics.Add(new LazyMissingNonNullTypesContextDiagnosticInfo(type, rawInfo), location);
+                diagnostics.Add(
+                    new LazyMissingNonNullTypesContextDiagnosticInfo(type, rawInfo),
+                    location
+                );
             }
             rawInfos.Free();
         }
 
 #nullable enable
-        private static void GetRawDiagnosticInfos(bool isNullableEnabled, bool isGeneratedCode, CSharpSyntaxTree tree, ArrayBuilder<DiagnosticInfo> infos)
+        private static void GetRawDiagnosticInfos(
+            bool isNullableEnabled,
+            bool isGeneratedCode,
+            CSharpSyntaxTree tree,
+            ArrayBuilder<DiagnosticInfo> infos
+        )
         {
             const MessageID featureId = MessageID.IDS_FeatureNullableReferenceTypes;
             var info = featureId.GetFeatureAvailabilityDiagnosticInfo(tree.Options);
@@ -56,10 +78,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 #nullable disable
 
-        private static bool IsNullableReference(TypeSymbol type)
-            => type is null || !(type.IsValueType || type.IsErrorType());
+        private static bool IsNullableReference(TypeSymbol type) =>
+            type is null || !(type.IsValueType || type.IsErrorType());
 
-        protected override DiagnosticInfo ResolveInfo() => IsNullableReference(_type.Type) ? _info : null;
+        protected override DiagnosticInfo ResolveInfo() =>
+            IsNullableReference(_type.Type) ? _info : null;
 
         /// <summary>
         /// A `?` annotation on a type that isn't a value type causes:
@@ -71,11 +94,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isGeneratedCode,
             TypeWithAnnotations type,
             Location location,
-            DiagnosticBag diagnostics)
+            DiagnosticBag diagnostics
+        )
         {
             if (IsNullableReference(type.Type))
             {
-                ReportNullableReferenceTypesIfNeeded(isNullableEnabled, isGeneratedCode, location, diagnostics);
+                ReportNullableReferenceTypesIfNeeded(
+                    isNullableEnabled,
+                    isGeneratedCode,
+                    location,
+                    diagnostics
+                );
             }
         }
 
@@ -83,10 +112,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isNullableEnabled,
             bool isGeneratedCode,
             Location location,
-            DiagnosticBag diagnostics)
+            DiagnosticBag diagnostics
+        )
         {
             var rawInfos = ArrayBuilder<DiagnosticInfo>.GetInstance();
-            GetRawDiagnosticInfos(isNullableEnabled, isGeneratedCode, (CSharpSyntaxTree)location.SourceTree, rawInfos);
+            GetRawDiagnosticInfos(
+                isNullableEnabled,
+                isGeneratedCode,
+                (CSharpSyntaxTree)location.SourceTree,
+                rawInfos
+            );
             foreach (var rawInfo in rawInfos)
             {
                 diagnostics.Add(rawInfo, location);
@@ -95,4 +130,3 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 }
-

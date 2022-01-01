@@ -16,8 +16,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ContextVariableArgumentProvider()
-        {
-        }
+        public ContextVariableArgumentProvider() { }
     }
 }

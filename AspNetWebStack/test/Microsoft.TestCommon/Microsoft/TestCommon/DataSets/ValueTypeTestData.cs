@@ -12,14 +12,21 @@ namespace Microsoft.TestCommon
         private static readonly Type OpenNullableType = typeof(Nullable<>);
         private T[] testData;
 
-        public ValueTypeTestData(params T[] testData)
-            : base()
+        public ValueTypeTestData(params T[] testData) : base()
         {
             this.testData = testData;
 
             Type[] typeParams = new Type[] { this.Type };
-            this.RegisterTestDataVariation(TestDataVariations.WithNull, OpenNullableType.MakeGenericType(typeParams), GetNullTestData);
-            this.RegisterTestDataVariation(TestDataVariations.AsNullable, OpenNullableType.MakeGenericType(typeParams), GetTestDataAsNullable);
+            this.RegisterTestDataVariation(
+                TestDataVariations.WithNull,
+                OpenNullableType.MakeGenericType(typeParams),
+                GetNullTestData
+            );
+            this.RegisterTestDataVariation(
+                TestDataVariations.AsNullable,
+                OpenNullableType.MakeGenericType(typeParams),
+                GetTestDataAsNullable
+            );
         }
 
         public object GetNullTestData()

@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["CarrylessMultiply.UInt64.0"] = CarrylessMultiplyUInt640,
                 ["CarrylessMultiply.UInt64.1"] = CarrylessMultiplyUInt641,
                 ["CarrylessMultiply.UInt64.16"] = CarrylessMultiplyUInt6416,

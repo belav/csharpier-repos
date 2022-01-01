@@ -98,8 +98,15 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetInt32(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int32>, byte>(ref testStruct._fld), ref Unsafe.As<Int32, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector256<Int32>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data[i] = TestLibrary.Generator.GetInt32();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Int32>, byte>(ref testStruct._fld),
+                    ref Unsafe.As<Int32, byte>(ref _data[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Int32>>()
+                );
 
                 return testStruct;
             }
@@ -113,7 +120,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector256<Int32>>() / sizeof(Int32);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector256<Int32>>() / sizeof(Int32);
 
         private static Int32[] _data = new Int32[Op1ElementCount];
 
@@ -125,18 +133,35 @@ namespace JIT.HardwareIntrinsics.X86
 
         static SimdScalarUnaryOpTest__ConvertToInt32Int32()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetInt32(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int32>, byte>(ref _clsVar), ref Unsafe.As<Int32, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector256<Int32>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetInt32();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int32>, byte>(ref _clsVar),
+                ref Unsafe.As<Int32, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
         }
 
         public SimdScalarUnaryOpTest__ConvertToInt32Int32()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetInt32(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int32>, byte>(ref _fld), ref Unsafe.As<Int32, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector256<Int32>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetInt32();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int32>, byte>(ref _fld),
+                ref Unsafe.As<Int32, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetInt32(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetInt32();
+            }
             _dataTable = new SimdScalarUnaryOpTest__DataTable<Int32>(_data, LargestVectorSize);
         }
 
@@ -148,9 +173,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Avx2.ConvertToInt32(
-                Unsafe.Read<Vector256<Int32>>(_dataTable.inArrayPtr)
-            );
+            var result = Avx2.ConvertToInt32(Unsafe.Read<Vector256<Int32>>(_dataTable.inArrayPtr));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -159,9 +182,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Avx2.ConvertToInt32(
-                Avx.LoadVector256((Int32*)(_dataTable.inArrayPtr))
-            );
+            var result = Avx2.ConvertToInt32(Avx.LoadVector256((Int32*)(_dataTable.inArrayPtr)));
 
             ValidateResult(_dataTable.inArrayPtr, result);
         }
@@ -181,10 +202,12 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Avx2).GetMethod(nameof(Avx2.ConvertToInt32), new Type[] { typeof(Vector256<Int32>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector256<Int32>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Avx2)
+                .GetMethod(nameof(Avx2.ConvertToInt32), new Type[] { typeof(Vector256<Int32>) })
+                .Invoke(
+                    null,
+                    new object[] { Unsafe.Read<Vector256<Int32>>(_dataTable.inArrayPtr) }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
         }
@@ -193,10 +216,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx2).GetMethod(nameof(Avx2.ConvertToInt32), new Type[] { typeof(Vector256<Int32>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadVector256((Int32*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Avx2)
+                .GetMethod(nameof(Avx2.ConvertToInt32), new Type[] { typeof(Vector256<Int32>) })
+                .Invoke(null, new object[] { Avx.LoadVector256((Int32*)(_dataTable.inArrayPtr)) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
         }
@@ -205,10 +227,12 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Avx2).GetMethod(nameof(Avx2.ConvertToInt32), new Type[] { typeof(Vector256<Int32>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadAlignedVector256((Int32*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Avx2)
+                .GetMethod(nameof(Avx2.ConvertToInt32), new Type[] { typeof(Vector256<Int32>) })
+                .Invoke(
+                    null,
+                    new object[] { Avx.LoadAlignedVector256((Int32*)(_dataTable.inArrayPtr)) }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, (Int32)(result));
         }
@@ -217,9 +241,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Avx2.ConvertToInt32(
-                _clsVar
-            );
+            var result = Avx2.ConvertToInt32(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -312,21 +334,37 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector256<Int32> firstOp, Int32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<Int32> firstOp,
+            Int32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] inArray = new Int32[Op1ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref inArray[0]), firstOp);
             ValidateResult(inArray, result, method);
         }
 
-        private void ValidateResult(void* firstOp, Int32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* firstOp,
+            Int32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] inArray = new Int32[Op1ElementCount];
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector256<Int32>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
             ValidateResult(inArray, result, method);
         }
 
-        private void ValidateResult(Int32[] firstOp, Int32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int32[] firstOp,
+            Int32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -337,8 +375,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Avx2)}.{nameof(Avx2.ConvertToInt32)}<Int32>(Vector256<Int32>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Avx2)}.{nameof(Avx2.ConvertToInt32)}<Int32>(Vector256<Int32>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

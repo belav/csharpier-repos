@@ -6,20 +6,28 @@ namespace System.Globalization
     // Gregorian Calendars use Era Info
     internal sealed class EraInfo
     {
-        internal int era;          // The value of the era.
-        internal long ticks;    // The time in ticks when the era starts
-        internal int yearOffset;   // The offset to Gregorian year when the era starts.
-                                   // Gregorian Year = Era Year + yearOffset
-                                   // Era Year = Gregorian Year - yearOffset
-        internal int minEraYear;   // Min year value in this era. Generally, this value is 1, but this may
-                                   // be affected by the DateTime.MinValue;
-        internal int maxEraYear;   // Max year value in this era. (== the year length of the era + 1)
+        internal int era; // The value of the era.
+        internal long ticks; // The time in ticks when the era starts
+        internal int yearOffset; // The offset to Gregorian year when the era starts.
+        // Gregorian Year = Era Year + yearOffset
+        // Era Year = Gregorian Year - yearOffset
+        internal int minEraYear; // Min year value in this era. Generally, this value is 1, but this may
+        // be affected by the DateTime.MinValue;
+        internal int maxEraYear; // Max year value in this era. (== the year length of the era + 1)
 
-        internal string? eraName;    // The era name
-        internal string? abbrevEraName;  // Abbreviated Era Name
+        internal string? eraName; // The era name
+        internal string? abbrevEraName; // Abbreviated Era Name
         internal string? englishEraName; // English era name
 
-        internal EraInfo(int era, int startYear, int startMonth, int startDay, int yearOffset, int minEraYear, int maxEraYear)
+        internal EraInfo(
+            int era,
+            int startYear,
+            int startMonth,
+            int startDay,
+            int yearOffset,
+            int minEraYear,
+            int maxEraYear
+        )
         {
             this.era = era;
             this.yearOffset = yearOffset;
@@ -28,8 +36,18 @@ namespace System.Globalization
             this.ticks = new DateTime(startYear, startMonth, startDay).Ticks;
         }
 
-        internal EraInfo(int era, int startYear, int startMonth, int startDay, int yearOffset, int minEraYear, int maxEraYear,
-                          string eraName, string abbrevEraName, string englishEraName)
+        internal EraInfo(
+            int era,
+            int startYear,
+            int startMonth,
+            int startDay,
+            int yearOffset,
+            int minEraYear,
+            int maxEraYear,
+            string eraName,
+            string abbrevEraName,
+            string englishEraName
+        )
         {
             this.era = era;
             this.yearOffset = yearOffset;
@@ -55,12 +73,36 @@ namespace System.Globalization
 
         internal static readonly int[] DaysToMonth365 =
         {
-            0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
+            0,
+            31,
+            59,
+            90,
+            120,
+            151,
+            181,
+            212,
+            243,
+            273,
+            304,
+            334,
+            365
         };
 
         internal static readonly int[] DaysToMonth366 =
         {
-            0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366
+            0,
+            31,
+            60,
+            91,
+            121,
+            152,
+            182,
+            213,
+            244,
+            274,
+            305,
+            335,
+            366
         };
 
         private readonly int m_maxYear;
@@ -87,7 +129,10 @@ namespace System.Globalization
             {
                 if (throwOnError)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(year), SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(year),
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 }
                 return -1;
             }
@@ -137,11 +182,13 @@ namespace System.Globalization
                     if (throwOnError)
                     {
                         throw new ArgumentOutOfRangeException(
-                                    nameof(year),
-                                    SR.Format(
-                                        SR.ArgumentOutOfRange_Range,
-                                        eraInfo.minEraYear,
-                                        eraInfo.maxEraYear));
+                            nameof(year),
+                            SR.Format(
+                                SR.ArgumentOutOfRange_Range,
+                                eraInfo.minEraYear,
+                                eraInfo.maxEraYear
+                            )
+                        );
                     }
 
                     break; // no need to iterate more on eras.
@@ -150,7 +197,10 @@ namespace System.Globalization
 
             if (throwOnError)
             {
-                throw new ArgumentOutOfRangeException(nameof(era), SR.ArgumentOutOfRange_InvalidEraValue);
+                throw new ArgumentOutOfRangeException(
+                    nameof(era),
+                    SR.ArgumentOutOfRange_InvalidEraValue
+                );
             }
             return -1;
         }
@@ -197,11 +247,15 @@ namespace System.Globalization
         {
             if (year >= 1 && year <= 9999 && month >= 1 && month <= 12)
             {
-                int[] days = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) ? DaysToMonth366 : DaysToMonth365;
+                int[] days =
+                    (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+                        ? DaysToMonth366
+                        : DaysToMonth365;
                 if (day >= 1 && (day <= days[month] - days[month - 1]))
                 {
                     int y = year - 1;
-                    int absoluteDate = y * 365 + y / 4 - y / 100 + y / 400 + days[month - 1] + day - 1;
+                    int absoluteDate =
+                        y * 365 + y / 4 - y / 100 + y / 400 + days[month - 1] + day - 1;
                     return absoluteDate;
                 }
             }
@@ -217,15 +271,19 @@ namespace System.Globalization
 
         internal void CheckTicksRange(long ticks)
         {
-            if (ticks < m_Cal.MinSupportedDateTime.Ticks || ticks > m_Cal.MaxSupportedDateTime.Ticks)
+            if (
+                ticks < m_Cal.MinSupportedDateTime.Ticks || ticks > m_Cal.MaxSupportedDateTime.Ticks
+            )
             {
                 throw new ArgumentOutOfRangeException(
-                            "time",
-                            SR.Format(
-                                CultureInfo.InvariantCulture,
-                                SR.ArgumentOutOfRange_CalendarRange,
-                                m_Cal.MinSupportedDateTime,
-                                m_Cal.MaxSupportedDateTime));
+                    "time",
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.ArgumentOutOfRange_CalendarRange,
+                        m_Cal.MinSupportedDateTime,
+                        m_Cal.MaxSupportedDateTime
+                    )
+                );
             }
         }
 
@@ -251,11 +309,9 @@ namespace System.Globalization
             if (months < -120000 || months > 120000)
             {
                 throw new ArgumentOutOfRangeException(
-                            nameof(months),
-                            SR.Format(
-                                SR.ArgumentOutOfRange_Range,
-                                -120000,
-                                120000));
+                    nameof(months),
+                    SR.Format(SR.ArgumentOutOfRange_Range, -120000, 120000)
+                );
             }
             CheckTicksRange(time.Ticks);
 
@@ -271,7 +327,8 @@ namespace System.Globalization
                 m = 12 + (i + 1) % 12;
                 y += (i - 11) / 12;
             }
-            int[] daysArray = (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)) ? DaysToMonth366 : DaysToMonth365;
+            int[] daysArray =
+                (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)) ? DaysToMonth366 : DaysToMonth365;
             int days = (daysArray[m] - daysArray[m - 1]);
 
             if (d > days)
@@ -338,7 +395,11 @@ namespace System.Globalization
             {
                 ThrowHelper.ThrowArgumentOutOfRange_Month(month);
             }
-            int[] days = ((year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) ? DaysToMonth366 : DaysToMonth365);
+            int[] days = (
+                (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+                    ? DaysToMonth366
+                    : DaysToMonth365
+            );
             return days[month] - days[month - 1];
         }
 
@@ -447,11 +508,9 @@ namespace System.Globalization
             if (day < 1 || day > GetDaysInMonth(year, month, era))
             {
                 throw new ArgumentOutOfRangeException(
-                            nameof(day),
-                            SR.Format(
-                                SR.ArgumentOutOfRange_Range,
-                                1,
-                                GetDaysInMonth(year, month, era)));
+                    nameof(day),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, GetDaysInMonth(year, month, era))
+                );
             }
 
             if (!IsLeapYear(year, era))
@@ -469,7 +528,8 @@ namespace System.Globalization
 
         // Giving the calendar year and era, ValidateYearInEra will validate the existence of the input year in the input era.
         // This method will throw if the year or the era is invalid.
-        public void ValidateYearInEra(int year, int era) => GetYearOffset(year, era, throwOnError: true);
+        public void ValidateYearInEra(int year, int era) =>
+            GetYearOffset(year, era, throwOnError: true);
 
         // Returns the leap month in a calendar year of the specified era.
         // This method always returns 0 as all calendars using this method don't have leap months.
@@ -487,11 +547,9 @@ namespace System.Globalization
             if (month < 1 || month > 12)
             {
                 throw new ArgumentOutOfRangeException(
-                            nameof(month),
-                            SR.Format(
-                                SR.ArgumentOutOfRange_Range,
-                                1,
-                                12));
+                    nameof(month),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, 12)
+                );
             }
             return false;
         }
@@ -507,10 +565,21 @@ namespace System.Globalization
 
         // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is invalid.
         //
-        public DateTime ToDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, int era)
+        public DateTime ToDateTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int millisecond,
+            int era
+        )
         {
             year = GetGregorianYear(year, era);
-            long ticks = DateToTicks(year, month, day) + Calendar.TimeToTicks(hour, minute, second, millisecond);
+            long ticks =
+                DateToTicks(year, month, day)
+                + Calendar.TimeToTicks(hour, minute, second, millisecond);
             CheckTicksRange(ticks);
             return new DateTime(ticks);
         }
@@ -527,8 +596,10 @@ namespace System.Globalization
         {
             if (year < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(year),
-                    SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(year),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             if (year < 100)
@@ -540,8 +611,9 @@ namespace System.Globalization
             if (year < m_minYear || year > m_maxYear)
             {
                 throw new ArgumentOutOfRangeException(
-                            nameof(year),
-                            SR.Format(SR.ArgumentOutOfRange_Range, m_minYear, m_maxYear));
+                    nameof(year),
+                    SR.Format(SR.ArgumentOutOfRange_Range, m_minYear, m_maxYear)
+                );
             }
             // If the year value is above 100, just return the year value.  Don't have to do
             // the TwoDigitYearMax comparison.

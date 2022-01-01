@@ -26,7 +26,12 @@ public class DelegationRule : IDisposable
     public string UrlPrefix { get; }
     internal RequestQueue Queue { get; }
 
-    internal DelegationRule(UrlGroup sourceQueueUrlGroup, string queueName, string urlPrefix, ILogger logger)
+    internal DelegationRule(
+        UrlGroup sourceQueueUrlGroup,
+        string queueName,
+        string urlPrefix,
+        ILogger logger
+    )
     {
         _sourceQueueUrlGroup = sourceQueueUrlGroup;
         _logger = logger;
@@ -50,7 +55,9 @@ public class DelegationRule : IDisposable
         {
             _sourceQueueUrlGroup.UnSetDelegationProperty(Queue, throwOnError: false);
         }
-        catch (ObjectDisposedException) { /* Server may have been shutdown */ }
+        catch (ObjectDisposedException)
+        { /* Server may have been shutdown */
+        }
         _urlGroup.Dispose();
         Queue.Dispose();
     }

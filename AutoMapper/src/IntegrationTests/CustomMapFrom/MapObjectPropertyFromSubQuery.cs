@@ -48,21 +48,40 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer
-                {
-                    Id = 1, FirstName = "Bob", LastName = "Smith", Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
-                });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new[]
+                        {
+                            new Item { Code = 1 },
+                            new Item { Code = 3 },
+                            new Item { Code = 5 }
+                        }
+                    }
+                );
                 base.Seed(context);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Customer, CustomerViewModel>()
-                .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.LastName != null ? src : null))
-                .ForMember(dst => dst.FirstItem, opt => opt.MapFrom(src => src.Items.FirstOrDefault()));
-            cfg.CreateProjection<Customer, CustomerNameModel>();
-            cfg.CreateProjection<Item, ItemModel>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerViewModel>()
+                        .ForMember(
+                            dst => dst.Name,
+                            opt => opt.MapFrom(src => src.LastName != null ? src : null)
+                        )
+                        .ForMember(
+                            dst => dst.FirstItem,
+                            opt => opt.MapFrom(src => src.Items.FirstOrDefault())
+                        );
+                    cfg.CreateProjection<Customer, CustomerNameModel>();
+                    cfg.CreateProjection<Item, ItemModel>();
+                }
+            );
         [Fact]
         public void Should_work()
         {
@@ -111,23 +130,39 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer
-                {
-                    Id = 1,
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
-                });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new[]
+                        {
+                            new Item { Code = 1 },
+                            new Item { Code = 3 },
+                            new Item { Code = 5 }
+                        }
+                    }
+                );
                 base.Seed(context);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Customer, CustomerViewModel>()
-                .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.LastName != null ? src.LastName : null))
-                .ForMember(dst => dst.FirstItem, opt => opt.MapFrom(src => src.Items.FirstOrDefault()));
-            cfg.CreateProjection<Item, ItemModel>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerViewModel>()
+                        .ForMember(
+                            dst => dst.Name,
+                            opt => opt.MapFrom(src => src.LastName != null ? src.LastName : null)
+                        )
+                        .ForMember(
+                            dst => dst.FirstItem,
+                            opt => opt.MapFrom(src => src.Items.FirstOrDefault())
+                        );
+                    cfg.CreateProjection<Item, ItemModel>();
+                }
+            );
         [Fact]
         public void Should_work()
         {
@@ -143,18 +178,35 @@ namespace AutoMapper.IntegrationTests
     }
     public class MapObjectPropertyFromSubQueryTypeNameMax : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Product, ProductModel>()
-                .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateProjection<Article, PriceModel>()
-                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Product, ProductModel>()
+                        .ForMember(
+                            d => d.Price,
+                            o =>
+                                o.MapFrom(
+                                    source =>
+                                        source.Articles
+                                            .Where(
+                                                x =>
+                                                    x.IsDefault
+                                                    && x.NationId == 1
+                                                    && source.ECommercePublished
+                                            )
+                                            .FirstOrDefault()
+                                )
+                        );
+                    cfg.CreateProjection<Article, PriceModel>()
+                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+                }
+            );
 
         [Fact]
         public void Should_cache_the_subquery()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<ProductModel>(context.Products);
                 var counter = new FirstOrDefaultCounter();
@@ -174,7 +226,7 @@ namespace AutoMapper.IntegrationTests
 
             protected override Expression VisitMethodCall(MethodCallExpression node)
             {
-                if(node.Method.Name == "FirstOrDefault")
+                if (node.Method.Name == "FirstOrDefault")
                 {
                     Count++;
                 }
@@ -242,7 +294,21 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+                context.Products.Add(
+                    new Product
+                    {
+                        ECommercePublished = true,
+                        Articles = new[]
+                        {
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
+                        }
+                    }
+                );
             }
         }
 
@@ -259,22 +325,38 @@ namespace AutoMapper.IntegrationTests
 
     public class MapObjectPropertyFromSubQueryExplicitExpansion : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Product, ProductModel>()
-                .ForMember(d => d.Price, o =>
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
                 {
-                    o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault());
-                    o.ExplicitExpansion();
-                });
-            cfg.CreateProjection<Article, PriceModel>()
-                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-        });
+                    cfg.CreateProjection<Product, ProductModel>()
+                        .ForMember(
+                            d => d.Price,
+                            o =>
+                            {
+                                o.MapFrom(
+                                    source =>
+                                        source.Articles
+                                            .Where(
+                                                x =>
+                                                    x.IsDefault
+                                                    && x.NationId == 1
+                                                    && source.ECommercePublished
+                                            )
+                                            .FirstOrDefault()
+                                );
+                                o.ExplicitExpansion();
+                            }
+                        );
+                    cfg.CreateProjection<Article, PriceModel>()
+                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+                }
+            );
 
         [Fact]
         public void Should_map_ok()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<ProductModel>(context.Products);
                 var counter = new FirstOrDefaultCounter();
@@ -292,7 +374,7 @@ namespace AutoMapper.IntegrationTests
 
             protected override Expression VisitMethodCall(MethodCallExpression node)
             {
-                if(node.Method.Name == "FirstOrDefault")
+                if (node.Method.Name == "FirstOrDefault")
                 {
                     Count++;
                 }
@@ -336,7 +418,21 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+                context.Products.Add(
+                    new Product
+                    {
+                        ECommercePublished = true,
+                        Articles = new[]
+                        {
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
+                        }
+                    }
+                );
             }
         }
 
@@ -353,18 +449,35 @@ namespace AutoMapper.IntegrationTests
 
     public class MapObjectPropertyFromSubQuery : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-        {
-            cfg.CreateProjection<Product, ProductModel>()
-                .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateProjection<Article, PriceModel>()
-                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Product, ProductModel>()
+                        .ForMember(
+                            d => d.Price,
+                            o =>
+                                o.MapFrom(
+                                    source =>
+                                        source.Articles
+                                            .Where(
+                                                x =>
+                                                    x.IsDefault
+                                                    && x.NationId == 1
+                                                    && source.ECommercePublished
+                                            )
+                                            .FirstOrDefault()
+                                )
+                        );
+                    cfg.CreateProjection<Article, PriceModel>()
+                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+                }
+            );
 
         [Fact]
         public void Should_cache_the_subquery()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<ProductModel>(context.Products);
                 var counter = new FirstOrDefaultCounter();
@@ -384,7 +497,7 @@ namespace AutoMapper.IntegrationTests
 
             protected override Expression VisitMethodCall(MethodCallExpression node)
             {
-                if(node.Method.Name == "FirstOrDefault")
+                if (node.Method.Name == "FirstOrDefault")
                 {
                     Count++;
                 }
@@ -430,7 +543,21 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+                context.Products.Add(
+                    new Product
+                    {
+                        ECommercePublished = true,
+                        Articles = new[]
+                        {
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
+                        }
+                    }
+                );
             }
         }
 
@@ -447,19 +574,36 @@ namespace AutoMapper.IntegrationTests
 
     public class MapObjectPropertyFromSubQueryWithInnerObject : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-            cfg.CreateProjection<Product, ProductModel>()
-                .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateProjection<Article, PriceModel>()
-                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+                    cfg.CreateProjection<Product, ProductModel>()
+                        .ForMember(
+                            d => d.Price,
+                            o =>
+                                o.MapFrom(
+                                    source =>
+                                        source.Articles
+                                            .Where(
+                                                x =>
+                                                    x.IsDefault
+                                                    && x.NationId == 1
+                                                    && source.ECommercePublished
+                                            )
+                                            .FirstOrDefault()
+                                )
+                        );
+                    cfg.CreateProjection<Article, PriceModel>()
+                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+                }
+            );
 
         [Fact]
         public void Should_cache_the_subquery()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<ProductArticleModel>(context.ProductArticles);
                 var counter = new FirstOrDefaultCounter();
@@ -527,9 +671,39 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                var product1 = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
-                var product2 = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 2 } } });
-                context.ProductArticles.Add(new ProductArticle { Product = product1, OtherProduct = product2 });
+                var product1 = context.Products.Add(
+                    new Product
+                    {
+                        ECommercePublished = true,
+                        Articles = new[]
+                        {
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
+                        }
+                    }
+                );
+                var product2 = context.Products.Add(
+                    new Product
+                    {
+                        ECommercePublished = true,
+                        Articles = new[]
+                        {
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 2
+                            }
+                        }
+                    }
+                );
+                context.ProductArticles.Add(
+                    new ProductArticle { Product = product1, OtherProduct = product2 }
+                );
             }
         }
 
@@ -547,19 +721,36 @@ namespace AutoMapper.IntegrationTests
 
     public class MapObjectPropertyFromSubQueryWithCollection : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-            cfg.CreateProjection<Product, ProductModel>()
-                .ForMember(d => d.Price, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateProjection<Article, PriceModel>()
-                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+                    cfg.CreateProjection<Product, ProductModel>()
+                        .ForMember(
+                            d => d.Price,
+                            o =>
+                                o.MapFrom(
+                                    source =>
+                                        source.Articles
+                                            .Where(
+                                                x =>
+                                                    x.IsDefault
+                                                    && x.NationId == 1
+                                                    && source.ECommercePublished
+                                            )
+                                            .FirstOrDefault()
+                                )
+                        );
+                    cfg.CreateProjection<Article, PriceModel>()
+                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+                }
+            );
 
         [Fact]
         public void Should_cache_the_subquery()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<ProductArticleModel>(context.ProductArticles);
                 var counter = new FirstOrDefaultCounter();
@@ -579,7 +770,7 @@ namespace AutoMapper.IntegrationTests
 
             protected override Expression VisitMethodCall(MethodCallExpression node)
             {
-                if(node.Method.Name == "FirstOrDefault")
+                if (node.Method.Name == "FirstOrDefault")
                 {
                     Count++;
                 }
@@ -633,7 +824,21 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                var product = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+                var product = context.Products.Add(
+                    new Product
+                    {
+                        ECommercePublished = true,
+                        Articles = new[]
+                        {
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
+                        }
+                    }
+                );
                 context.ProductArticles.Add(new ProductArticle { Products = new[] { product } });
             }
         }
@@ -652,21 +857,38 @@ namespace AutoMapper.IntegrationTests
 
     public class MapObjectPropertyFromSubQueryWithCollectionSameName : NonValidatingSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-            cfg.CreateProjection<Product, ProductModel>()
-                .ForMember(d=>d.ArticlesModel, o=>o.MapFrom(s=>s))
-                .ForMember(d => d.Articles, o => o.MapFrom(source => source.Articles.Where(x => x.IsDefault && x.NationId == 1 && source.ECommercePublished).FirstOrDefault()));
-            cfg.CreateProjection<Product, ArticlesModel>();
-            cfg.CreateProjection<Article, PriceModel>()
-                .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+                    cfg.CreateProjection<Product, ProductModel>()
+                        .ForMember(d => d.ArticlesModel, o => o.MapFrom(s => s))
+                        .ForMember(
+                            d => d.Articles,
+                            o =>
+                                o.MapFrom(
+                                    source =>
+                                        source.Articles
+                                            .Where(
+                                                x =>
+                                                    x.IsDefault
+                                                    && x.NationId == 1
+                                                    && source.ECommercePublished
+                                            )
+                                            .FirstOrDefault()
+                                )
+                        );
+                    cfg.CreateProjection<Product, ArticlesModel>();
+                    cfg.CreateProjection<Article, PriceModel>()
+                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+                }
+            );
 
         [Fact]
         public void Should_cache_the_subquery()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<ProductArticleModel>(context.ProductArticles);
                 var counter = new FirstOrDefaultCounter();
@@ -694,7 +916,7 @@ namespace AutoMapper.IntegrationTests
 
             protected override Expression VisitMethodCall(MethodCallExpression node)
             {
-                if(node.Method.Name == "FirstOrDefault")
+                if (node.Method.Name == "FirstOrDefault")
                 {
                     Count++;
                 }
@@ -755,7 +977,21 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                var product = context.Products.Add(new Product { ECommercePublished = true, Articles = new[] { new Article { IsDefault = true, NationId = 1, ProductId = 1 } } });
+                var product = context.Products.Add(
+                    new Product
+                    {
+                        ECommercePublished = true,
+                        Articles = new[]
+                        {
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
+                        }
+                    }
+                );
                 context.ProductArticles.Add(new ProductArticle { Products = new[] { product } });
             }
         }
@@ -846,7 +1082,7 @@ namespace AutoMapper.IntegrationTests
                 {
                     Ends = new List<CableEnd>()
                     {
-                        new CableEnd { Name = "A", Rack = rack},
+                        new CableEnd { Name = "A", Rack = rack },
                         new CableEnd { Name = "B" },
                     }
                 };
@@ -854,18 +1090,31 @@ namespace AutoMapper.IntegrationTests
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<CableEnd, CableEndModel>().ForMember(dest => dest.DataHallId, opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId));
-            cfg.CreateProjection<Cable, CableListModel>()
-                .ForMember(dest => dest.AEnd, opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "A")))
-                .ForMember(dest => dest.AnotherEnd, opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "B")));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<CableEnd, CableEndModel>()
+                        .ForMember(
+                            dest => dest.DataHallId,
+                            opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId)
+                        );
+                    cfg.CreateProjection<Cable, CableListModel>()
+                        .ForMember(
+                            dest => dest.AEnd,
+                            opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "A"))
+                        )
+                        .ForMember(
+                            dest => dest.AnotherEnd,
+                            opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "B"))
+                        );
+                }
+            );
 
         [Fact]
         public void Should_project_ok()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<CableListModel>(context.Cables);
                 var result = projection.Single();
@@ -877,14 +1126,23 @@ namespace AutoMapper.IntegrationTests
 
     public class MapObjectPropertyFromSubQueryCustomSource : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Owner, OwnerDto>();
-            cfg.CreateProjection<Brand, BrandDto>()
-                .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.Owners.FirstOrDefault()));
-            cfg.CreateProjection<ProductReview, ProductReviewDto>()
-                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Product.Brand));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Owner, OwnerDto>();
+                    cfg.CreateProjection<Brand, BrandDto>()
+                        .ForMember(
+                            dest => dest.Owner,
+                            opt => opt.MapFrom(src => src.Owners.FirstOrDefault())
+                        );
+                    cfg.CreateProjection<ProductReview, ProductReviewDto>()
+                        .ForMember(
+                            dest => dest.Brand,
+                            opt => opt.MapFrom(src => src.Product.Brand)
+                        );
+                }
+            );
 
         public class Owner
         {
@@ -939,17 +1197,27 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.ProductReviews.AddRange(new[]{
-                    new ProductReview { Product = new Product { Brand = new Brand{ Owners = { new Owner{ Name = "Owner" } } } } },
-                    new ProductReview { Product = new Product { Brand = new Brand { } } },
-                    new ProductReview { Product = new Product { } } });
+                context.ProductReviews.AddRange(
+                    new[]
+                    {
+                        new ProductReview
+                        {
+                            Product = new Product
+                            {
+                                Brand = new Brand { Owners = { new Owner { Name = "Owner" } } }
+                            }
+                        },
+                        new ProductReview { Product = new Product { Brand = new Brand { } } },
+                        new ProductReview { Product = new Product { } }
+                    }
+                );
             }
         }
 
         [Fact]
         public void Should_project_ok()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 var projection = ProjectTo<ProductReviewDto>(context.ProductReviews);
                 var results = projection.ToArray();

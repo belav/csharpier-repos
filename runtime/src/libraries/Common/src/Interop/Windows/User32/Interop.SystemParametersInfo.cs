@@ -15,6 +15,11 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.User32, ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public static extern unsafe bool SystemParametersInfoW(SystemParametersAction uiAction, uint uiParam, void* pvParam, uint fWinIni);
+        public static extern unsafe bool SystemParametersInfoW(
+            SystemParametersAction uiAction,
+            uint uiParam,
+            void* pvParam,
+            uint fWinIni
+        );
     }
 }

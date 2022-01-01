@@ -6,7 +6,8 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Xunit;
 
-enum TestResult {
+enum TestResult
+{
     Success,
     ReturnFailure,
     ReturnNull,
@@ -18,7 +19,7 @@ enum TestResult {
     InvalidOperation,
     EntryPointNotFound,
     GenericException
-    };
+};
 
 public class NativeLibraryTest
 {
@@ -53,8 +54,10 @@ public class NativeLibraryTest
 
             // Calls on an invalid file
             libName = Path.Combine(testBinDir, "NativeLibrary.cpp");
-            success &= EXPECT(LoadLibrarySimple(libName),
-                (TestLibrary.Utilities.IsWindows) ? TestResult.BadImage : TestResult.DllNotFound);
+            success &= EXPECT(
+                LoadLibrarySimple(libName),
+                (TestLibrary.Utilities.IsWindows) ? TestResult.BadImage : TestResult.DllNotFound
+            );
             success &= EXPECT(TryLoadLibrarySimple(libName), TestResult.ReturnFailure);
 
             // Calls on null input
@@ -75,14 +78,22 @@ public class NativeLibraryTest
             // Calls on non-existant file
             libName = Path.Combine(testBinDir, "notfound");
             success &= EXPECT(LoadLibraryAdvanced(libName, assembly, null), TestResult.DllNotFound);
-            success &= EXPECT(TryLoadLibraryAdvanced(libName, assembly, null), TestResult.ReturnFailure);
+            success &= EXPECT(
+                TryLoadLibraryAdvanced(libName, assembly, null),
+                TestResult.ReturnFailure
+            );
 
             // Calls on an invalid file
             libName = Path.Combine(testBinDir, "NativeLibrary.cpp");
             // The VM can only distinguish BadImageFormatException from DllNotFoundException on Windows.
-            success &= EXPECT(LoadLibraryAdvanced(libName, assembly, null),
-                (TestLibrary.Utilities.IsWindows) ? TestResult.BadImage : TestResult.DllNotFound);
-            success &= EXPECT(TryLoadLibraryAdvanced(libName, assembly, null), TestResult.ReturnFailure);
+            success &= EXPECT(
+                LoadLibraryAdvanced(libName, assembly, null),
+                (TestLibrary.Utilities.IsWindows) ? TestResult.BadImage : TestResult.DllNotFound
+            );
+            success &= EXPECT(
+                TryLoadLibraryAdvanced(libName, assembly, null),
+                TestResult.ReturnFailure
+            );
 
             // Calls on just Native Library name
             libName = NativeLibraryToLoad.Name;
@@ -98,30 +109,57 @@ public class NativeLibraryTest
             libName = Path.Combine(testBinDir, NativeLibraryToLoad.Name);
             // DllImport doesn't add a prefix if the name is preceeded by a path specification.
             // Windows only needs a suffix, but Linux and Mac need both prefix and suffix
-            success &= EXPECT(LoadLibraryAdvanced(libName, assembly, null),
-                (TestLibrary.Utilities.IsWindows) ? TestResult.Success : TestResult.DllNotFound);
-            success &= EXPECT(TryLoadLibraryAdvanced(libName, assembly, null),
-                (TestLibrary.Utilities.IsWindows) ? TestResult.Success : TestResult.ReturnFailure);
+            success &= EXPECT(
+                LoadLibraryAdvanced(libName, assembly, null),
+                (TestLibrary.Utilities.IsWindows) ? TestResult.Success : TestResult.DllNotFound
+            );
+            success &= EXPECT(
+                TryLoadLibraryAdvanced(libName, assembly, null),
+                (TestLibrary.Utilities.IsWindows) ? TestResult.Success : TestResult.ReturnFailure
+            );
 
             // Check for loading a native binary in the system32 directory.
             // The choice of the binary is arbitrary, and may not be available on
             // all Windows platforms (ex: Nano server)
             libName = "url.dll";
-            if (TestLibrary.Utilities.IsWindows &&
-                File.Exists(Path.Combine(Environment.SystemDirectory, libName)))
+            if (
+                TestLibrary.Utilities.IsWindows
+                && File.Exists(Path.Combine(Environment.SystemDirectory, libName))
+            )
             {
                 // Calls on a valid library from System32 directory
-                success &= EXPECT(LoadLibraryAdvanced(libName, assembly, DllImportSearchPath.System32));
-                success &= EXPECT(TryLoadLibraryAdvanced(libName, assembly, DllImportSearchPath.System32));
+                success &= EXPECT(
+                    LoadLibraryAdvanced(libName, assembly, DllImportSearchPath.System32)
+                );
+                success &= EXPECT(
+                    TryLoadLibraryAdvanced(libName, assembly, DllImportSearchPath.System32)
+                );
 
                 // Calls on a valid library from application directory
-                success &= EXPECT(LoadLibraryAdvanced(libName, assembly, DllImportSearchPath.ApplicationDirectory), TestResult.DllNotFound);
-                success &= EXPECT(TryLoadLibraryAdvanced(libName, assembly, DllImportSearchPath.ApplicationDirectory), TestResult.ReturnFailure);
+                success &= EXPECT(
+                    LoadLibraryAdvanced(
+                        libName,
+                        assembly,
+                        DllImportSearchPath.ApplicationDirectory
+                    ),
+                    TestResult.DllNotFound
+                );
+                success &= EXPECT(
+                    TryLoadLibraryAdvanced(
+                        libName,
+                        assembly,
+                        DllImportSearchPath.ApplicationDirectory
+                    ),
+                    TestResult.ReturnFailure
+                );
             }
 
             // Calls with null libName input
             success &= EXPECT(LoadLibraryAdvanced(null, assembly, null), TestResult.ArgumentNull);
-            success &= EXPECT(TryLoadLibraryAdvanced(null, assembly, null), TestResult.ArgumentNull);
+            success &= EXPECT(
+                TryLoadLibraryAdvanced(null, assembly, null),
+                TestResult.ArgumentNull
+            );
 
             // Calls with null assembly
             libName = NativeLibraryToLoad.Name;
@@ -131,8 +169,14 @@ public class NativeLibraryTest
             // Ensure that a lib is not picked up from current directory when
             // a different full-path is specified.
             libName = Path.Combine(testBinDir, Path.Combine("lib", NativeLibraryToLoad.Name));
-            success &= EXPECT(LoadLibraryAdvanced(libName, assembly, DllImportSearchPath.AssemblyDirectory), TestResult.DllNotFound);
-            success &= EXPECT(TryLoadLibraryAdvanced(libName, assembly, DllImportSearchPath.AssemblyDirectory), TestResult.ReturnFailure);
+            success &= EXPECT(
+                LoadLibraryAdvanced(libName, assembly, DllImportSearchPath.AssemblyDirectory),
+                TestResult.DllNotFound
+            );
+            success &= EXPECT(
+                TryLoadLibraryAdvanced(libName, assembly, DllImportSearchPath.AssemblyDirectory),
+                TestResult.ReturnFailure
+            );
 
             // -----------------------------------------------
             //         FreeLibrary Tests
@@ -163,20 +207,36 @@ public class NativeLibraryTest
             handle = NativeLibrary.Load(libName);
 
             // Valid Call (with some hard-coded name mangling)
-            success &= EXPECT(GetLibraryExport(handle, TestLibrary.Utilities.IsX86 ? "_NativeSum@8" : "NativeSum"));
-            success &= EXPECT(TryGetLibraryExport(handle, TestLibrary.Utilities.IsX86 ? "_NativeSum@8" : "NativeSum"));
+            success &= EXPECT(
+                GetLibraryExport(handle, TestLibrary.Utilities.IsX86 ? "_NativeSum@8" : "NativeSum")
+            );
+            success &= EXPECT(
+                TryGetLibraryExport(
+                    handle,
+                    TestLibrary.Utilities.IsX86 ? "_NativeSum@8" : "NativeSum"
+                )
+            );
 
             // Call with null handle
             success &= EXPECT(GetLibraryExport(IntPtr.Zero, "NativeSum"), TestResult.ArgumentNull);
-            success &= EXPECT(TryGetLibraryExport(IntPtr.Zero, "NativeSum"), TestResult.ArgumentNull);
+            success &= EXPECT(
+                TryGetLibraryExport(IntPtr.Zero, "NativeSum"),
+                TestResult.ArgumentNull
+            );
 
             // Call with null string
             success &= EXPECT(GetLibraryExport(handle, null), TestResult.ArgumentNull);
             success &= EXPECT(TryGetLibraryExport(handle, null), TestResult.ArgumentNull);
 
             // Call with wrong string
-            success &= EXPECT(GetLibraryExport(handle, "NonNativeSum"), TestResult.EntryPointNotFound);
-            success &= EXPECT(TryGetLibraryExport(handle, "NonNativeSum"), TestResult.ReturnFailure);
+            success &= EXPECT(
+                GetLibraryExport(handle, "NonNativeSum"),
+                TestResult.EntryPointNotFound
+            );
+            success &= EXPECT(
+                TryGetLibraryExport(handle, "NonNativeSum"),
+                TestResult.ReturnFailure
+            );
 
             NativeLibrary.Free(handle);
         }
@@ -207,7 +267,7 @@ public class NativeLibraryTest
         }
     }
 
-    static TestResult Run (Func<TestResult> test)
+    static TestResult Run(Func<TestResult> test)
     {
         TestResult result;
 
@@ -253,12 +313,15 @@ public class NativeLibraryTest
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
-            handle = NativeLibrary.Load(libPath);
-            if (handle == IntPtr.Zero)
-                return TestResult.ReturnNull;
-            return TestResult.Success;
-        });
+        TestResult result = Run(
+            () =>
+            {
+                handle = NativeLibrary.Load(libPath);
+                if (handle == IntPtr.Zero)
+                    return TestResult.ReturnNull;
+                return TestResult.Success;
+            }
+        );
 
         NativeLibrary.Free(handle);
 
@@ -271,53 +334,69 @@ public class NativeLibraryTest
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
-            bool success = NativeLibrary.TryLoad(libPath, out handle);
-            if (!success)
-                return TestResult.ReturnFailure;
-            if (handle == IntPtr.Zero)
-                return TestResult.ReturnNull;
-            return TestResult.Success;
-        });
+        TestResult result = Run(
+            () =>
+            {
+                bool success = NativeLibrary.TryLoad(libPath, out handle);
+                if (!success)
+                    return TestResult.ReturnFailure;
+                if (handle == IntPtr.Zero)
+                    return TestResult.ReturnNull;
+                return TestResult.Success;
+            }
+        );
 
         NativeLibrary.Free(handle);
 
         return result;
     }
 
-
-    static TestResult LoadLibraryAdvanced(string libName, Assembly assembly, DllImportSearchPath? searchPath)
+    static TestResult LoadLibraryAdvanced(
+        string libName,
+        Assembly assembly,
+        DllImportSearchPath? searchPath
+    )
     {
         CurrentTest = String.Format("LoadLibrary({0}, {1}, {2})", libName, assembly, searchPath);
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
-            handle = NativeLibrary.Load(libName, assembly, searchPath);
-            if (handle == IntPtr.Zero)
-                return TestResult.ReturnNull;
-            return TestResult.Success;
-        });
+        TestResult result = Run(
+            () =>
+            {
+                handle = NativeLibrary.Load(libName, assembly, searchPath);
+                if (handle == IntPtr.Zero)
+                    return TestResult.ReturnNull;
+                return TestResult.Success;
+            }
+        );
 
         NativeLibrary.Free(handle);
 
         return result;
     }
 
-    static TestResult TryLoadLibraryAdvanced(string libName, Assembly assembly, DllImportSearchPath? searchPath)
+    static TestResult TryLoadLibraryAdvanced(
+        string libName,
+        Assembly assembly,
+        DllImportSearchPath? searchPath
+    )
     {
         CurrentTest = String.Format("TryLoadLibrary({0}, {1}, {2})", libName, assembly, searchPath);
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
-            bool success = NativeLibrary.TryLoad(libName, assembly, searchPath, out handle);
-            if (!success)
-                return TestResult.ReturnFailure;
-            if (handle == IntPtr.Zero)
-                return TestResult.ReturnNull;
-            return TestResult.Success;
-        });
+        TestResult result = Run(
+            () =>
+            {
+                bool success = NativeLibrary.TryLoad(libName, assembly, searchPath, out handle);
+                if (!success)
+                    return TestResult.ReturnFailure;
+                if (handle == IntPtr.Zero)
+                    return TestResult.ReturnNull;
+                return TestResult.Success;
+            }
+        );
 
         NativeLibrary.Free(handle);
 
@@ -328,41 +407,50 @@ public class NativeLibraryTest
     {
         CurrentTest = String.Format("FreeLibrary({0})", handle);
 
-        return Run(() => {
-            NativeLibrary.Free(handle);
-            return TestResult.Success;
-        });
+        return Run(
+            () =>
+            {
+                NativeLibrary.Free(handle);
+                return TestResult.Success;
+            }
+        );
     }
 
     static TestResult GetLibraryExport(IntPtr handle, string name)
     {
         CurrentTest = String.Format("GetLibraryExport({0}, {1})", handle, name);
 
-        return Run(() => {
-            IntPtr address = NativeLibrary.GetExport(handle, name);
-            if (address == IntPtr.Zero)
-                return TestResult.ReturnNull;
-            if (RunExportedFunction(address, 1, 1) != 2)
-                return TestResult.IncorrectEvaluation;
-            return TestResult.Success;
-        });
+        return Run(
+            () =>
+            {
+                IntPtr address = NativeLibrary.GetExport(handle, name);
+                if (address == IntPtr.Zero)
+                    return TestResult.ReturnNull;
+                if (RunExportedFunction(address, 1, 1) != 2)
+                    return TestResult.IncorrectEvaluation;
+                return TestResult.Success;
+            }
+        );
     }
 
     static TestResult TryGetLibraryExport(IntPtr handle, string name)
     {
         CurrentTest = String.Format("TryGetLibraryExport({0}, {1})", handle, name);
 
-        return Run(() => {
-            IntPtr address = IntPtr.Zero;
-            bool success = NativeLibrary.TryGetExport(handle, name, out address);
-            if (!success)
-                return TestResult.ReturnFailure;
-            if (address == IntPtr.Zero)
-                return TestResult.ReturnNull;
-            if (RunExportedFunction(address, 1, 1) != 2)
-                return TestResult.IncorrectEvaluation;
-            return TestResult.Success;
-        });
+        return Run(
+            () =>
+            {
+                IntPtr address = IntPtr.Zero;
+                bool success = NativeLibrary.TryGetExport(handle, name, out address);
+                if (!success)
+                    return TestResult.ReturnFailure;
+                if (address == IntPtr.Zero)
+                    return TestResult.ReturnNull;
+                if (RunExportedFunction(address, 1, 1) != 2)
+                    return TestResult.IncorrectEvaluation;
+                return TestResult.Success;
+            }
+        );
     }
 
     [DllImport(NativeLibraryToLoad.Name)]

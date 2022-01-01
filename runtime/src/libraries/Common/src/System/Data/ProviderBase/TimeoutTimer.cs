@@ -60,7 +60,9 @@ namespace System.Data.ProviderBase
             //--------------------
             // Method body
             var timeout = new TimeoutTimer();
-            timeout._timerExpire = checked(ADP.TimerCurrent() + (milliseconds * TimeSpan.TicksPerMillisecond));
+            timeout._timerExpire = checked(
+                ADP.TimerCurrent() + (milliseconds * TimeSpan.TicksPerMillisecond)
+            );
             timeout._isInfiniteTimeout = false;
 
             //---------------------
@@ -78,7 +80,7 @@ namespace System.Data.ProviderBase
         {
             //--------------------
             // Preconditions
-            Debug.Assert(0 <= seconds || InfiniteTimeout == seconds);  // no need to support negative seconds at present
+            Debug.Assert(0 <= seconds || InfiniteTimeout == seconds); // no need to support negative seconds at present
 
             //--------------------
             // Method body
@@ -106,28 +108,19 @@ namespace System.Data.ProviderBase
         // Is this timer in an expired state?
         internal bool IsExpired
         {
-            get
-            {
-                return !IsInfinite && ADP.TimerHasExpired(_timerExpire);
-            }
+            get { return !IsInfinite && ADP.TimerHasExpired(_timerExpire); }
         }
 
         // is this an infinite-timeout timer?
         internal bool IsInfinite
         {
-            get
-            {
-                return _isInfiniteTimeout;
-            }
+            get { return _isInfiniteTimeout; }
         }
 
         // Special accessor for TimerExpire for use when thunking to legacy timeout methods.
         internal long LegacyTimerExpire
         {
-            get
-            {
-                return (_isInfiniteTimeout) ? long.MaxValue : _timerExpire;
-            }
+            get { return (_isInfiniteTimeout) ? long.MaxValue : _timerExpire; }
         }
 
         // Returns milliseconds remaining trimmed to zero for none remaining

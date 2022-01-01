@@ -20,7 +20,10 @@ namespace Microsoft.Win32.SystemEventsTests
         /// </summary>
         public const int TimerInterval = 10;
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void CreateTimerInvalidInterval()
         {
             Assert.Throws<ArgumentException>(() => SystemEvents.CreateTimer(0));
@@ -29,7 +32,10 @@ namespace Microsoft.Win32.SystemEventsTests
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/25920")]
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void TimerElapsedSignaled()
         {
             var elapsed = new AutoResetEvent(false);
@@ -57,17 +63,23 @@ namespace Microsoft.Win32.SystemEventsTests
 
                 timer = SystemEvents.CreateTimer(TimerInterval);
 
-                Assert.True(elapsed.WaitOne(TimerInterval * SystemEventsTest.ExpectedEventMultiplier));
+                Assert.True(
+                    elapsed.WaitOne(TimerInterval * SystemEventsTest.ExpectedEventMultiplier)
+                );
                 Assert.IsType<SystemEvents>(elapsedSender);
 
                 // Timer should fire more than once
-                Assert.True(elapsed.WaitOne(TimerInterval * SystemEventsTest.ExpectedEventMultiplier));
+                Assert.True(
+                    elapsed.WaitOne(TimerInterval * SystemEventsTest.ExpectedEventMultiplier)
+                );
 
                 SystemEvents.KillTimer(timer);
                 elapsed.Reset();
 
                 // Timer should not fire once killed
-                Assert.False(elapsed.WaitOne(TimerInterval * SystemEventsTest.UnexpectedEventMultiplier));
+                Assert.False(
+                    elapsed.WaitOne(TimerInterval * SystemEventsTest.UnexpectedEventMultiplier)
+                );
             }
             finally
             {
@@ -76,7 +88,10 @@ namespace Microsoft.Win32.SystemEventsTests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void ConcurrentTimers()
         {
             const int NumConcurrentTimers = 10;
@@ -89,8 +104,10 @@ namespace Microsoft.Win32.SystemEventsTests
                 // A timer might fire more than once.  When it fires the first time, track it by adding
                 // it to a set and then increment the number of timers that have ever fired.  When all
                 // timers have fired, set the event.
-                if (timersSignaled.TryAdd(args.TimerId, true) &&
-                    Interlocked.Increment(ref numSignaled) == NumConcurrentTimers)
+                if (
+                    timersSignaled.TryAdd(args.TimerId, true)
+                    && Interlocked.Increment(ref numSignaled) == NumConcurrentTimers
+                )
                 {
                     elapsed.Set();
                 }
@@ -130,10 +147,13 @@ namespace Microsoft.Win32.SystemEventsTests
         }
 
         [OuterLoop]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
-        [InlineData(500)]  // .5s
-        [InlineData(1000)]  // 1s
-        [InlineData(2000)]  // 2s
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
+        [InlineData(500)] // .5s
+        [InlineData(1000)] // 1s
+        [InlineData(2000)] // 2s
         [InlineData(10000)] // 10s
         [InlineData(30000)] // 30s
         public void TimerElapsedIsRoughlyEquivalentToInterval(int interval)
@@ -160,9 +180,13 @@ namespace Microsoft.Win32.SystemEventsTests
                 stopwatch.Start();
                 Assert.True(elapsed.WaitOne(interval * SystemEventsTest.ExpectedEventMultiplier));
 
-                var proportionDifference = (double)(stopwatch.ElapsedMilliseconds - interval) / interval;
-                Assert.True(permittedProportionUnder < proportionDifference && proportionDifference < permittedProportionOver,
-                    $"Timer should fire less than {permittedProportionUnder * 100.0}% before and less than {permittedProportionOver * 100.0}% after expected interval {interval}, actual: {stopwatch.ElapsedMilliseconds}, difference: {proportionDifference * 100.0}%");
+                var proportionDifference =
+                    (double)(stopwatch.ElapsedMilliseconds - interval) / interval;
+                Assert.True(
+                    permittedProportionUnder < proportionDifference
+                        && proportionDifference < permittedProportionOver,
+                    $"Timer should fire less than {permittedProportionUnder * 100.0}% before and less than {permittedProportionOver * 100.0}% after expected interval {interval}, actual: {stopwatch.ElapsedMilliseconds}, difference: {proportionDifference * 100.0}%"
+                );
             }
             finally
             {

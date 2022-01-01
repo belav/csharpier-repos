@@ -22,7 +22,6 @@ public class Test_Finalize
     {
         public Dummy obj;
 
-
         public CreateObj()
         {
             obj = new Dummy();
@@ -41,7 +40,7 @@ public class Test_Finalize
         temp.RunTest();
 
         GC.Collect();
-        GC.WaitForPendingFinalizers();  // makes sure Finalize() is called.
+        GC.WaitForPendingFinalizers(); // makes sure Finalize() is called.
         GC.Collect();
 
         if (visited)

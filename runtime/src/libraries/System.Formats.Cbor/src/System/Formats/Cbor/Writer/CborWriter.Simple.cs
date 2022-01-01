@@ -20,7 +20,9 @@ namespace System.Formats.Cbor
         public void WriteHalf(Half value)
         {
             EnsureWriteCapacity(1 + HalfHelpers.SizeOfHalf);
-            WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional16BitData));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional16BitData)
+            );
             HalfHelpers.WriteHalfBigEndian(_buffer.AsSpan(_offset), value);
             _offset += HalfHelpers.SizeOfHalf;
             AdvanceDataItemCounters();
@@ -35,8 +37,10 @@ namespace System.Formats.Cbor
         /// The written data is not accepted under the current conformance mode.</exception>
         public void WriteSingle(float value)
         {
-            if (!CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode) &&
-                 FloatSerializationHelpers.TryConvertSingleToHalf(value, out Half half))
+            if (
+                !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode)
+                && FloatSerializationHelpers.TryConvertSingleToHalf(value, out Half half)
+            )
             {
                 WriteHalf(half);
             }
@@ -55,8 +59,10 @@ namespace System.Formats.Cbor
         /// The written data is not accepted under the current conformance mode.</exception>
         public void WriteDouble(double value)
         {
-            if (!CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode) &&
-                 FloatSerializationHelpers.TryConvertDoubleToSingle(value, out float single))
+            if (
+                !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode)
+                && FloatSerializationHelpers.TryConvertDoubleToSingle(value, out float single)
+            )
             {
                 if (FloatSerializationHelpers.TryConvertSingleToHalf(single, out Half half))
                 {
@@ -76,7 +82,9 @@ namespace System.Formats.Cbor
         private void WriteSingleCore(float value)
         {
             EnsureWriteCapacity(1 + sizeof(float));
-            WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional32BitData));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional32BitData)
+            );
             BinaryPrimitives.WriteSingleBigEndian(_buffer.AsSpan(_offset), value);
             _offset += sizeof(float);
             AdvanceDataItemCounters();
@@ -85,7 +93,9 @@ namespace System.Formats.Cbor
         private void WriteDoubleCore(double value)
         {
             EnsureWriteCapacity(1 + sizeof(double));
-            WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional64BitData));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional64BitData)
+            );
             BinaryPrimitives.WriteDoubleBigEndian(_buffer.AsSpan(_offset), value);
             _offset += sizeof(double);
             AdvanceDataItemCounters();
@@ -127,17 +137,25 @@ namespace System.Formats.Cbor
             if (value < (CborSimpleValue)CborAdditionalInfo.Additional8BitData)
             {
                 EnsureWriteCapacity(1);
-                WriteInitialByte(new CborInitialByte(CborMajorType.Simple, (CborAdditionalInfo)value));
+                WriteInitialByte(
+                    new CborInitialByte(CborMajorType.Simple, (CborAdditionalInfo)value)
+                );
             }
-            else if (value <= (CborSimpleValue)CborAdditionalInfo.IndefiniteLength &&
-                     CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(ConformanceMode))
+            else if (
+                value <= (CborSimpleValue)CborAdditionalInfo.IndefiniteLength
+                && CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(ConformanceMode)
+            )
             {
-                throw new ArgumentOutOfRangeException(SR.Format(SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding, ConformanceMode));
+                throw new ArgumentOutOfRangeException(
+                    SR.Format(SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding, ConformanceMode)
+                );
             }
             else
             {
                 EnsureWriteCapacity(2);
-                WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional8BitData));
+                WriteInitialByte(
+                    new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional8BitData)
+                );
                 _buffer[_offset++] = (byte)value;
             }
 
@@ -150,14 +168,16 @@ namespace System.Formats.Cbor
             public static bool TryConvertDoubleToSingle(double value, out float result)
             {
                 result = (float)value;
-                return BitConverter.DoubleToInt64Bits(result) == BitConverter.DoubleToInt64Bits(value);
+                return BitConverter.DoubleToInt64Bits(result)
+                    == BitConverter.DoubleToInt64Bits(value);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool TryConvertSingleToHalf(float value, out Half result)
             {
                 result = (Half)value;
-                return BitConverter.SingleToInt32Bits((float)result) == BitConverter.SingleToInt32Bits(value);
+                return BitConverter.SingleToInt32Bits((float)result)
+                    == BitConverter.SingleToInt32Bits(value);
             }
         }
     }

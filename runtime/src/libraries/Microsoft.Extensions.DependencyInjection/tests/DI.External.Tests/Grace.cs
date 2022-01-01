@@ -7,17 +7,21 @@ using Grace.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public class GraceDependencyInjectionSpecificationTests: SkippableDependencyInjectionSpecificationTests
+    public class GraceDependencyInjectionSpecificationTests
+        : SkippableDependencyInjectionSpecificationTests
     {
         public override bool SupportsIServiceProviderIsService => false;
 
-        public override string[] SkippedTests => new[]
-        {
-            "ResolvesMixedOpenClosedGenericsAsEnumerable",
-            "TypeActivatorWorksWithCtorWithOptionalArgs_WithStructDefaults"
-        };
+        public override string[] SkippedTests =>
+            new[]
+            {
+                "ResolvesMixedOpenClosedGenericsAsEnumerable",
+                "TypeActivatorWorksWithCtorWithOptionalArgs_WithStructDefaults"
+            };
 
-        protected override IServiceProvider CreateServiceProviderImpl(IServiceCollection serviceCollection)
+        protected override IServiceProvider CreateServiceProviderImpl(
+            IServiceCollection serviceCollection
+        )
         {
             return new DependencyInjectionContainer().Populate(serviceCollection);
         }

@@ -33,8 +33,10 @@ namespace System.Net
         protected override bool ReleaseHandle()
         {
             // Closing server session also closes all open url groups under that server session.
-            return (Interop.HttpApi.HttpCloseServerSession(_serverSessionId) ==
-                Interop.HttpApi.ERROR_SUCCESS);
+            return (
+                Interop.HttpApi.HttpCloseServerSession(_serverSessionId)
+                == Interop.HttpApi.ERROR_SUCCESS
+            );
         }
     }
 }

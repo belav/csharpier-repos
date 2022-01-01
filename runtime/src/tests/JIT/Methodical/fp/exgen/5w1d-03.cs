@@ -18,7 +18,17 @@ internal unsafe class testout1
         CL_0 cl_0 = new CL_0();
 
         cl_0.arr3d_0[4, 0, 3] = 16M;
-        int retval_0 = Convert.ToInt32(Convert.ToInt32(cl_0.arr3d_0[4, 0, 3] - ((Convert.ToDecimal((Convert.ToUInt64(clstatic_0.a2_0 / 16UL))) / clstatic_0.a1_0))));
+        int retval_0 = Convert.ToInt32(
+            Convert.ToInt32(
+                cl_0.arr3d_0[4, 0, 3]
+                    - (
+                        (
+                            Convert.ToDecimal((Convert.ToUInt64(clstatic_0.a2_0 / 16UL)))
+                            / clstatic_0.a1_0
+                        )
+                    )
+            )
+        );
         return retval_0;
     }
 

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #nullable disable warnings
@@ -16,86 +16,86 @@ public class MultipartReaderTests
     private const string Boundary = "9051914041544843365972754266";
     // Note that CRLF (\r\n) is required. You can't use multi-line C# strings here because the line breaks on Linux are just LF.
     private const string OnePartBody =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266--\r\n";
+        "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266--\r\n";
     private const string OnePartBodyTwoHeaders =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"Custom-header: custom-value\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266--\r\n";
+        "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "Custom-header: custom-value\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266--\r\n";
     private const string OnePartBodyWithTrailingWhitespace =
-"--9051914041544843365972754266             \r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266--\r\n";
+        "--9051914041544843365972754266             \r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266--\r\n";
     // It's non-compliant but common to leave off the last CRLF.
     private const string OnePartBodyWithoutFinalCRLF =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266--";
+        "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266--";
     private const string TwoPartBody =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n" +
-"Content-Type: text/plain\r\n" +
-"\r\n" +
-"Content of a.txt.\r\n" +
-"\r\n" +
-"--9051914041544843365972754266--\r\n";
+        "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n"
+        + "Content-Type: text/plain\r\n"
+        + "\r\n"
+        + "Content of a.txt.\r\n"
+        + "\r\n"
+        + "--9051914041544843365972754266--\r\n";
     private const string TwoPartBodyWithUnicodeFileName =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"file1\"; filename=\"a色.txt\"\r\n" +
-"Content-Type: text/plain\r\n" +
-"\r\n" +
-"Content of a.txt.\r\n" +
-"\r\n" +
-"--9051914041544843365972754266--\r\n";
+        "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"file1\"; filename=\"a色.txt\"\r\n"
+        + "Content-Type: text/plain\r\n"
+        + "\r\n"
+        + "Content of a.txt.\r\n"
+        + "\r\n"
+        + "--9051914041544843365972754266--\r\n";
     private const string ThreePartBody =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n" +
-"Content-Type: text/plain\r\n" +
-"\r\n" +
-"Content of a.txt.\r\n" +
-"\r\n" +
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"file2\"; filename=\"a.html\"\r\n" +
-"Content-Type: text/html\r\n" +
-"\r\n" +
-"<!DOCTYPE html><title>Content of a.html.</title>\r\n" +
-"\r\n" +
-"--9051914041544843365972754266--\r\n";
+        "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n"
+        + "Content-Type: text/plain\r\n"
+        + "\r\n"
+        + "Content of a.txt.\r\n"
+        + "\r\n"
+        + "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"file2\"; filename=\"a.html\"\r\n"
+        + "Content-Type: text/html\r\n"
+        + "\r\n"
+        + "<!DOCTYPE html><title>Content of a.html.</title>\r\n"
+        + "\r\n"
+        + "--9051914041544843365972754266--\r\n";
 
     private const string TwoPartBodyIncompleteBuffer =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n" +
-"Content-Type: text/plain\r\n" +
-"\r\n" +
-"Content of a.txt.\r\n" +
-"\r\n" +
-"--9051914041544843365";
+        "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"text\"\r\n"
+        + "\r\n"
+        + "text default\r\n"
+        + "--9051914041544843365972754266\r\n"
+        + "Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n"
+        + "Content-Type: text/plain\r\n"
+        + "\r\n"
+        + "Content of a.txt.\r\n"
+        + "\r\n"
+        + "--9051914041544843365";
 
     private static MemoryStream MakeStream(string text)
     {
@@ -128,12 +128,11 @@ public class MultipartReaderTests
     public async Task MultipartReader_HeaderCountExceeded_Throws()
     {
         var stream = MakeStream(OnePartBodyTwoHeaders);
-        var reader = new MultipartReader(Boundary, stream)
-        {
-            HeadersCountLimit = 1,
-        };
+        var reader = new MultipartReader(Boundary, stream) { HeadersCountLimit = 1, };
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() => reader.ReadNextSectionAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => reader.ReadNextSectionAsync()
+        );
         Assert.Equal("Multipart headers count limit 1 exceeded.", exception.Message);
     }
 
@@ -141,12 +140,11 @@ public class MultipartReaderTests
     public async Task MultipartReader_HeadersLengthExceeded_Throws()
     {
         var stream = MakeStream(OnePartBodyTwoHeaders);
-        var reader = new MultipartReader(Boundary, stream)
-        {
-            HeadersLengthLimit = 60,
-        };
+        var reader = new MultipartReader(Boundary, stream) { HeadersLengthLimit = 60, };
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() => reader.ReadNextSectionAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => reader.ReadNextSectionAsync()
+        );
         Assert.Equal("Line length limit 17 exceeded.", exception.Message);
     }
 
@@ -201,7 +199,10 @@ public class MultipartReaderTests
         section = await reader.ReadNextSectionAsync();
         Assert.NotNull(section);
         Assert.Equal(2, section.Headers.Count);
-        Assert.Equal("form-data; name=\"file1\"; filename=\"a.txt\"", section.Headers["Content-Disposition"][0]);
+        Assert.Equal(
+            "form-data; name=\"file1\"; filename=\"a.txt\"",
+            section.Headers["Content-Disposition"][0]
+        );
         Assert.Equal("text/plain", section.Headers["Content-Type"][0]);
         buffer = new MemoryStream();
         await section.Body.CopyToAsync(buffer);
@@ -227,7 +228,10 @@ public class MultipartReaderTests
         section = await reader.ReadNextSectionAsync();
         Assert.NotNull(section);
         Assert.Equal(2, section.Headers.Count);
-        Assert.Equal("form-data; name=\"file1\"; filename=\"a色.txt\"", section.Headers["Content-Disposition"][0]);
+        Assert.Equal(
+            "form-data; name=\"file1\"; filename=\"a色.txt\"",
+            section.Headers["Content-Disposition"][0]
+        );
         Assert.Equal("text/plain", section.Headers["Content-Type"][0]);
         buffer = new MemoryStream();
         await section.Body.CopyToAsync(buffer);
@@ -253,7 +257,10 @@ public class MultipartReaderTests
         section = await reader.ReadNextSectionAsync();
         Assert.NotNull(section);
         Assert.Equal(2, section.Headers.Count);
-        Assert.Equal("form-data; name=\"file1\"; filename=\"a.txt\"", section.Headers["Content-Disposition"][0]);
+        Assert.Equal(
+            "form-data; name=\"file1\"; filename=\"a.txt\"",
+            section.Headers["Content-Disposition"][0]
+        );
         Assert.Equal("text/plain", section.Headers["Content-Type"][0]);
         buffer = new MemoryStream();
         await section.Body.CopyToAsync(buffer);
@@ -262,11 +269,17 @@ public class MultipartReaderTests
         section = await reader.ReadNextSectionAsync();
         Assert.NotNull(section);
         Assert.Equal(2, section.Headers.Count);
-        Assert.Equal("form-data; name=\"file2\"; filename=\"a.html\"", section.Headers["Content-Disposition"][0]);
+        Assert.Equal(
+            "form-data; name=\"file2\"; filename=\"a.html\"",
+            section.Headers["Content-Disposition"][0]
+        );
         Assert.Equal("text/html", section.Headers["Content-Type"][0]);
         buffer = new MemoryStream();
         await section.Body.CopyToAsync(buffer);
-        Assert.Equal("<!DOCTYPE html><title>Content of a.html.</title>\r\n", Encoding.ASCII.GetString(buffer.ToArray()));
+        Assert.Equal(
+            "<!DOCTYPE html><title>Content of a.html.</title>\r\n",
+            Encoding.ASCII.GetString(buffer.ToArray())
+        );
 
         Assert.Null(await reader.ReadNextSectionAsync());
     }
@@ -275,10 +288,12 @@ public class MultipartReaderTests
     public void MultipartReader_BufferSizeMustBeLargerThanBoundary_Throws()
     {
         var stream = MakeStream(ThreePartBody);
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var reader = new MultipartReader(Boundary, stream, 5);
-        });
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () =>
+            {
+                var reader = new MultipartReader(Boundary, stream, 5);
+            }
+        );
     }
 
     [Fact]
@@ -300,30 +315,32 @@ public class MultipartReaderTests
         section = await reader.ReadNextSectionAsync();
         Assert.NotNull(section);
         Assert.Equal(2, section.Headers.Count);
-        Assert.Equal("form-data; name=\"file1\"; filename=\"a.txt\"", section.Headers["Content-Disposition"][0]);
+        Assert.Equal(
+            "form-data; name=\"file1\"; filename=\"a.txt\"",
+            section.Headers["Content-Disposition"][0]
+        );
         Assert.Equal("text/plain", section.Headers["Content-Type"][0]);
         read = section.Body.Read(buffer, 0, buffer.Length);
         Assert.Equal("Content of a.txt.\r\n", GetString(buffer, read));
 
-        await Assert.ThrowsAsync<IOException>(async () =>
-        {
+        await Assert.ThrowsAsync<IOException>(
+            async () =>
+            {
                 // we'll be unable to ensure enough bytes are buffered to even contain a final boundary
                 section = await reader.ReadNextSectionAsync();
-        });
+            }
+        );
     }
 
     [Fact]
     public async Task MultipartReader_ReadInvalidUtf8Header_ReplacementCharacters()
     {
         var body1 =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\" filename=\"a";
+            "--9051914041544843365972754266\r\n"
+            + "Content-Disposition: form-data; name=\"text\" filename=\"a";
 
         var body2 =
-".txt\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266--\r\n";
+            ".txt\"\r\n" + "\r\n" + "text default\r\n" + "--9051914041544843365972754266--\r\n";
         var stream = new MemoryStream();
         var bytes = Encoding.UTF8.GetBytes(body1);
         stream.Write(bytes, 0, bytes.Length);
@@ -339,7 +356,10 @@ public class MultipartReaderTests
         var section = await reader.ReadNextSectionAsync();
         Assert.NotNull(section);
         Assert.Single(section.Headers);
-        Assert.Equal("form-data; name=\"text\" filename=\"a\uFFFD!.txt\"", section.Headers["Content-Disposition"][0]);
+        Assert.Equal(
+            "form-data; name=\"text\" filename=\"a\uFFFD!.txt\"",
+            section.Headers["Content-Disposition"][0]
+        );
         var buffer = new MemoryStream();
         await section.Body.CopyToAsync(buffer);
         Assert.Equal("text default", Encoding.ASCII.GetString(buffer.ToArray()));
@@ -351,14 +371,11 @@ public class MultipartReaderTests
     public async Task MultipartReader_ReadInvalidUtf8SurrogateHeader_ReplacementCharacters()
     {
         var body1 =
-"--9051914041544843365972754266\r\n" +
-"Content-Disposition: form-data; name=\"text\" filename=\"a";
+            "--9051914041544843365972754266\r\n"
+            + "Content-Disposition: form-data; name=\"text\" filename=\"a";
 
         var body2 =
-".txt\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-"--9051914041544843365972754266--\r\n";
+            ".txt\"\r\n" + "\r\n" + "text default\r\n" + "--9051914041544843365972754266--\r\n";
         var stream = new MemoryStream();
         var bytes = Encoding.UTF8.GetBytes(body1);
         stream.Write(bytes, 0, bytes.Length);
@@ -374,7 +391,10 @@ public class MultipartReaderTests
         var section = await reader.ReadNextSectionAsync();
         Assert.NotNull(section);
         Assert.Single(section.Headers);
-        Assert.Equal("form-data; name=\"text\" filename=\"a\uFFFD\uFFFDU.txt\"", section.Headers["Content-Disposition"][0]);
+        Assert.Equal(
+            "form-data; name=\"text\" filename=\"a\uFFFD\uFFFDU.txt\"",
+            section.Headers["Content-Disposition"][0]
+        );
         var buffer = new MemoryStream();
         await section.Body.CopyToAsync(buffer);
         Assert.Equal("text default", Encoding.ASCII.GetString(buffer.ToArray()));

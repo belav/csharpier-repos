@@ -15,9 +15,7 @@ public class ServiceFilterAttributeTest
     {
         // Arrange
         var expected = new TestFilter();
-        var serviceProvider = new ServiceCollection()
-            .AddSingleton(expected)
-            .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection().AddSingleton(expected).BuildServiceProvider();
 
         var serviceFilter = new ServiceFilterAttribute(typeof(TestFilter));
 

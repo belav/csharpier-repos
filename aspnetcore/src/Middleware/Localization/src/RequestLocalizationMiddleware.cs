@@ -37,7 +37,11 @@ public class RequestLocalizationMiddleware
     /// <param name="options">The <see cref="RequestLocalizationOptions"/> representing the options for the
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used for logging.</param>
     /// <see cref="RequestLocalizationMiddleware"/>.</param>
-    public RequestLocalizationMiddleware(RequestDelegate next, IOptions<RequestLocalizationOptions> options, ILoggerFactory loggerFactory)
+    public RequestLocalizationMiddleware(
+        RequestDelegate next,
+        IOptions<RequestLocalizationOptions> options,
+        ILoggerFactory loggerFactory
+    )
     {
         if (options == null)
         {
@@ -45,7 +49,9 @@ public class RequestLocalizationMiddleware
         }
 
         _next = next ?? throw new ArgumentNullException(nameof(next));
-        _logger = loggerFactory?.CreateLogger<RequestLocalizationMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
+        _logger =
+            loggerFactory?.CreateLogger<RequestLocalizationMiddleware>()
+            ?? throw new ArgumentNullException(nameof(loggerFactory));
         _options = options.Value;
     }
 
@@ -84,7 +90,8 @@ public class RequestLocalizationMiddleware
                     cultureInfo = GetCultureInfo(
                         cultures,
                         _options.SupportedCultures,
-                        _options.FallBackToParentCultures);
+                        _options.FallBackToParentCultures
+                    );
 
                     if (cultureInfo == null)
                     {
@@ -97,7 +104,8 @@ public class RequestLocalizationMiddleware
                     uiCultureInfo = GetCultureInfo(
                         uiCultures,
                         _options.SupportedUICultures,
-                        _options.FallBackToParentUICultures);
+                        _options.FallBackToParentUICultures
+                    );
 
                     if (uiCultureInfo == null)
                     {
@@ -120,7 +128,9 @@ public class RequestLocalizationMiddleware
             }
         }
 
-        context.Features.Set<IRequestCultureFeature>(new RequestCultureFeature(requestCulture, winningProvider));
+        context.Features.Set<IRequestCultureFeature>(
+            new RequestCultureFeature(requestCulture, winningProvider)
+        );
 
         SetCurrentThreadCulture(requestCulture);
 
@@ -142,7 +152,8 @@ public class RequestLocalizationMiddleware
     private static CultureInfo? GetCultureInfo(
         IList<StringSegment> cultureNames,
         IList<CultureInfo> supportedCultures,
-        bool fallbackToParentCultures)
+        bool fallbackToParentCultures
+    )
     {
         foreach (var cultureName in cultureNames)
         {
@@ -150,7 +161,12 @@ public class RequestLocalizationMiddleware
             // the CultureInfo ctor
             if (cultureName != null)
             {
-                var cultureInfo = GetCultureInfo(cultureName, supportedCultures, fallbackToParentCultures, currentDepth: 0);
+                var cultureInfo = GetCultureInfo(
+                    cultureName,
+                    supportedCultures,
+                    fallbackToParentCultures,
+                    currentDepth: 0
+                );
                 if (cultureInfo != null)
                 {
                     return cultureInfo;
@@ -161,7 +177,10 @@ public class RequestLocalizationMiddleware
         return null;
     }
 
-    private static CultureInfo? GetCultureInfo(StringSegment name, IList<CultureInfo>? supportedCultures)
+    private static CultureInfo? GetCultureInfo(
+        StringSegment name,
+        IList<CultureInfo>? supportedCultures
+    )
     {
         // Allow only known culture names as this API is called with input from users (HTTP requests) and
         // creating CultureInfo objects is expensive and we don't want it to throw either.
@@ -170,7 +189,13 @@ public class RequestLocalizationMiddleware
             return null;
         }
         var culture = supportedCultures.FirstOrDefault(
-            supportedCulture => StringSegment.Equals(supportedCulture.Name, name, StringComparison.OrdinalIgnoreCase));
+            supportedCulture =>
+                StringSegment.Equals(
+                    supportedCulture.Name,
+                    name,
+                    StringComparison.OrdinalIgnoreCase
+                )
+        );
 
         if (culture == null)
         {
@@ -184,7 +209,8 @@ public class RequestLocalizationMiddleware
         StringSegment cultureName,
         IList<CultureInfo> supportedCultures,
         bool fallbackToParentCultures,
-        int currentDepth)
+        int currentDepth
+    )
     {
         var culture = GetCultureInfo(cultureName, supportedCultures);
 
@@ -197,7 +223,12 @@ public class RequestLocalizationMiddleware
                 // Trim the trailing section from the culture name, e.g. "fr-FR" becomes "fr"
                 var parentCultureName = cultureName.Subsegment(0, lastIndexOfHyphen);
 
-                culture = GetCultureInfo(parentCultureName, supportedCultures, fallbackToParentCultures, currentDepth + 1);
+                culture = GetCultureInfo(
+                    parentCultureName,
+                    supportedCultures,
+                    fallbackToParentCultures,
+                    currentDepth + 1
+                );
             }
         }
 

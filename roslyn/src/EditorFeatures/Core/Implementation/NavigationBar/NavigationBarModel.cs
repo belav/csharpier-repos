@@ -13,19 +13,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         public INavigationBarItemService ItemService { get; }
         public ImmutableArray<NavigationBarItem> Types { get; }
 
-        public NavigationBarModel(INavigationBarItemService itemService, ImmutableArray<NavigationBarItem> types)
+        public NavigationBarModel(
+            INavigationBarItemService itemService,
+            ImmutableArray<NavigationBarItem> types
+        )
         {
             ItemService = itemService;
             Types = types;
         }
 
-        public override bool Equals(object? obj)
-            => Equals(obj as NavigationBarModel);
+        public override bool Equals(object? obj) => Equals(obj as NavigationBarModel);
 
-        public bool Equals(NavigationBarModel? other)
-            => other != null && Types.SequenceEqual(other.Types);
+        public bool Equals(NavigationBarModel? other) =>
+            other != null && Types.SequenceEqual(other.Types);
 
-        public override int GetHashCode()
-            => throw new NotImplementedException();
+        public override int GetHashCode() => throw new NotImplementedException();
     }
 }

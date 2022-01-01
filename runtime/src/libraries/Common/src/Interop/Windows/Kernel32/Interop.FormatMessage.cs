@@ -16,8 +16,15 @@ internal static partial class Interop
         private const int ERROR_INSUFFICIENT_BUFFER = 0x7A;
 
 #pragma warning disable DLLIMPORTGENANALYZER015 // Use 'GeneratedDllImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time
-                                                // Disabled since FormatMessage is a QCall in some scenarios and DllImportGenerator doesn't support QCalls.
-        [DllImport(Libraries.Kernel32, EntryPoint = "FormatMessageW", BestFitMapping = true, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        // Disabled since FormatMessage is a QCall in some scenarios and DllImportGenerator doesn't support QCalls.
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "FormatMessageW",
+            BestFitMapping = true,
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true,
+            SetLastError = true
+        )]
         private static extern unsafe int FormatMessage(
             int dwFlags,
             IntPtr lpSource,
@@ -25,18 +32,21 @@ internal static partial class Interop
             int dwLanguageId,
             void* lpBuffer,
             int nSize,
-            IntPtr arguments);
+            IntPtr arguments
+        );
 #pragma warning restore DLLIMPORTGENANALYZER015
 
         /// <summary>
         ///     Returns a string message for the specified Win32 error code.
         /// </summary>
-        internal static string GetMessage(int errorCode) =>
-            GetMessage(errorCode, IntPtr.Zero);
+        internal static string GetMessage(int errorCode) => GetMessage(errorCode, IntPtr.Zero);
 
         internal static unsafe string GetMessage(int errorCode, IntPtr moduleHandle)
         {
-            int flags = FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ARGUMENT_ARRAY;
+            int flags =
+                FORMAT_MESSAGE_IGNORE_INSERTS
+                | FORMAT_MESSAGE_FROM_SYSTEM
+                | FORMAT_MESSAGE_ARGUMENT_ARRAY;
             if (moduleHandle != IntPtr.Zero)
             {
                 flags |= FORMAT_MESSAGE_FROM_HMODULE;
@@ -46,7 +56,15 @@ internal static partial class Interop
             Span<char> stackBuffer = stackalloc char[256]; // arbitrary stack limit
             fixed (char* bufferPtr = stackBuffer)
             {
-                int length = FormatMessage(flags, moduleHandle, unchecked((uint)errorCode), 0, bufferPtr, stackBuffer.Length, IntPtr.Zero);
+                int length = FormatMessage(
+                    flags,
+                    moduleHandle,
+                    unchecked((uint)errorCode),
+                    0,
+                    bufferPtr,
+                    stackBuffer.Length,
+                    IntPtr.Zero
+                );
                 if (length > 0)
                 {
                     return GetAndTrimString(stackBuffer.Slice(0, length));
@@ -61,7 +79,15 @@ internal static partial class Interop
                 IntPtr nativeMsgPtr = default;
                 try
                 {
-                    int length = FormatMessage(flags | FORMAT_MESSAGE_ALLOCATE_BUFFER, moduleHandle, unchecked((uint)errorCode), 0, &nativeMsgPtr, 0, IntPtr.Zero);
+                    int length = FormatMessage(
+                        flags | FORMAT_MESSAGE_ALLOCATE_BUFFER,
+                        moduleHandle,
+                        unchecked((uint)errorCode),
+                        0,
+                        &nativeMsgPtr,
+                        0,
+                        IntPtr.Zero
+                    );
                     if (length > 0)
                     {
                         return GetAndTrimString(new Span<char>((char*)nativeMsgPtr, length));

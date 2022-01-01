@@ -64,7 +64,8 @@ namespace System.Data.Tests
         {
             DataTableCollection tbcol = _dataset[0].Tables;
             tbcol.Add(_tables[0]);
-            int i, j;
+            int i,
+                j;
             i = 0;
 
             foreach (DataTable table in tbcol)
@@ -97,46 +98,55 @@ namespace System.Data.Tests
         [Fact]
         public void AddException1()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-           {
-               DataTableCollection tbcol = _dataset[0].Tables;
-               DataTable tb = null;
-               tbcol.Add(tb);
-           });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    DataTableCollection tbcol = _dataset[0].Tables;
+                    DataTable tb = null;
+                    tbcol.Add(tb);
+                }
+            );
         }
 
         [Fact]
         public void AddException2()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               /* table already exist in the collection */
-               DataTableCollection tbcol = _dataset[0].Tables;
-               tbcol.Add(_tables[0]);
-               tbcol.Add(_tables[0]);
-           });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    /* table already exist in the collection */
+                    DataTableCollection tbcol = _dataset[0].Tables;
+                    tbcol.Add(_tables[0]);
+                    tbcol.Add(_tables[0]);
+                }
+            );
         }
 
         [Fact]
         public void AddException3()
         {
-            Assert.Throws<DuplicateNameException>(() =>
-           {
-               DataTableCollection tbcol = _dataset[0].Tables;
-               tbcol.Add(new DataTable("SameTableName"));
-               tbcol.Add(new DataTable("SameTableName"));
-           });
+            Assert.Throws<DuplicateNameException>(
+                () =>
+                {
+                    DataTableCollection tbcol = _dataset[0].Tables;
+                    tbcol.Add(new DataTable("SameTableName"));
+                    tbcol.Add(new DataTable("SameTableName"));
+                }
+            );
         }
 
         [Fact]
         public void AddException4()
         {
-            Assert.Throws<DuplicateNameException>(() =>
-           {
-               DataTableCollection tbcol = _dataset[0].Tables;
-               tbcol.Add("SameTableName");
-               tbcol.Add("SameTableName");
-           });
+            Assert.Throws<DuplicateNameException>(
+                () =>
+                {
+                    DataTableCollection tbcol = _dataset[0].Tables;
+                    tbcol.Add("SameTableName");
+                    tbcol.Add("SameTableName");
+                }
+            );
         }
 
         [Fact]
@@ -156,7 +166,8 @@ namespace System.Data.Tests
             tbcol.Clear();
             /* _tables is array of type DataTable defined in Setup */
             tbcol.AddRange(_tables);
-            int i, j;
+            int i,
+                j;
             i = 0;
             foreach (DataTable table in tbcol)
             {

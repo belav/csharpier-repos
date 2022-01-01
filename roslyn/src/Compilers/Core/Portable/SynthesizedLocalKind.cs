@@ -144,7 +144,6 @@ namespace Microsoft.CodeAnalysis
         /// C#: Stores the return value of a method/lambda with a block body, so that we can put a sequence point on the closing brace of the body.
         /// </summary>
         FunctionReturnValue = 21,
-
         TryAwaitPendingException = 22,
         TryAwaitPendingBranch = 23,
         TryAwaitPendingCatch = 24,
@@ -168,7 +167,6 @@ namespace Microsoft.CodeAnalysis
         /// after an await expression.
         /// </summary>
         Spill = 28,
-
         AwaitByRefSpill = 29,
 
         /// <summary>
@@ -244,14 +242,14 @@ namespace Microsoft.CodeAnalysis
 
         public static bool MustSurviveStateMachineSuspension(this SynthesizedLocalKind kind)
         {
-            // Conditional branch discriminator doesn't need to be hoisted. 
+            // Conditional branch discriminator doesn't need to be hoisted.
             // Its lifetime never spans across await expression/yield statement.
             // This is true even in cases like:
-            // 
+            //
             //   if (F(arg, await G())) { ... }
             //
             // Which is emitted as:
-            // 
+            //
             //   $result = taskAwaiter.GetResult();
             //   $cbd = C.F(sm.spilled_arg, $result);
             //   if ($cbd) { ... }
@@ -259,7 +257,10 @@ namespace Microsoft.CodeAnalysis
             return IsLongLived(kind) && kind != SynthesizedLocalKind.ConditionalBranchDiscriminator;
         }
 
-        public static bool IsSlotReusable(this SynthesizedLocalKind kind, OptimizationLevel optimizations)
+        public static bool IsSlotReusable(
+            this SynthesizedLocalKind kind,
+            OptimizationLevel optimizations
+        )
         {
             return kind.IsSlotReusable(optimizations != OptimizationLevel.Release);
         }
@@ -268,7 +269,7 @@ namespace Microsoft.CodeAnalysis
         {
             if (isDebug)
             {
-                // Don't reuse any long-lived locals in debug builds to provide good debugging experience 
+                // Don't reuse any long-lived locals in debug builds to provide good debugging experience
                 // for user-defined locals and to allow EnC.
                 return !IsLongLived(kind);
             }
@@ -291,9 +292,13 @@ namespace Microsoft.CodeAnalysis
             // Marking variables with hidden attribute is only needed for compat with Dev12 EE.
             // We mark all synthesized locals, other than lambda display class as hidden so that they don't show up in Dev12 EE.
             // Display class is special - it is used by the EE to access variables lifted into a closure.
-            return (kind != SynthesizedLocalKind.LambdaDisplayClass && kind != SynthesizedLocalKind.UserDefined && kind != SynthesizedLocalKind.With)
-                ? LocalVariableAttributes.DebuggerHidden
-                : LocalVariableAttributes.None;
+            return (
+                kind != SynthesizedLocalKind.LambdaDisplayClass
+                && kind != SynthesizedLocalKind.UserDefined
+                && kind != SynthesizedLocalKind.With
+            )
+              ? LocalVariableAttributes.DebuggerHidden
+              : LocalVariableAttributes.None;
         }
     }
 }

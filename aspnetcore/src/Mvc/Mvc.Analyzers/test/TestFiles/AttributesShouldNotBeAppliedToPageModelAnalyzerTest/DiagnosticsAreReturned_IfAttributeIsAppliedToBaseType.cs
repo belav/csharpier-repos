@@ -7,11 +7,13 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [PageModel]
     public abstract class DiagnosticsAreReturned_IfAttributeIsAppliedToBaseTypeBase
     {
-        [/*MM*/Authorize]
+        [ /*MM*/
+        Authorize]
         public void OnGet() { }
     }
 
-    public class DiagnosticsAreReturned_IfAttributeIsAppliedToBaseType : DiagnosticsAreReturned_IfAttributeIsAppliedToBaseTypeBase
+    public class DiagnosticsAreReturned_IfAttributeIsAppliedToBaseType
+        : DiagnosticsAreReturned_IfAttributeIsAppliedToBaseTypeBase
     {
     }
 }

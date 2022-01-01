@@ -17,7 +17,8 @@ internal class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TValue> w
 
     public CopyOnWriteDictionary(
         IDictionary<TKey, TValue> sourceDictionary,
-        IEqualityComparer<TKey> comparer)
+        IEqualityComparer<TKey> comparer
+    )
     {
         if (sourceDictionary == null)
         {
@@ -35,10 +36,7 @@ internal class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TValue> w
 
     private IDictionary<TKey, TValue> ReadDictionary
     {
-        get
-        {
-            return _innerDictionary ?? _sourceDictionary;
-        }
+        get { return _innerDictionary ?? _sourceDictionary; }
     }
 
     private IDictionary<TKey, TValue> WriteDictionary
@@ -47,8 +45,7 @@ internal class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TValue> w
         {
             if (_innerDictionary == null)
             {
-                _innerDictionary = new Dictionary<TKey, TValue>(_sourceDictionary,
-                                                                _comparer);
+                _innerDictionary = new Dictionary<TKey, TValue>(_sourceDictionary, _comparer);
             }
 
             return _innerDictionary;
@@ -57,46 +54,28 @@ internal class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TValue> w
 
     public virtual ICollection<TKey> Keys
     {
-        get
-        {
-            return ReadDictionary.Keys;
-        }
+        get { return ReadDictionary.Keys; }
     }
 
     public virtual ICollection<TValue> Values
     {
-        get
-        {
-            return ReadDictionary.Values;
-        }
+        get { return ReadDictionary.Values; }
     }
 
     public virtual int Count
     {
-        get
-        {
-            return ReadDictionary.Count;
-        }
+        get { return ReadDictionary.Count; }
     }
 
     public virtual bool IsReadOnly
     {
-        get
-        {
-            return false;
-        }
+        get { return false; }
     }
 
     public virtual TValue this[TKey key]
     {
-        get
-        {
-            return ReadDictionary[key];
-        }
-        set
-        {
-            WriteDictionary[key] = value;
-        }
+        get { return ReadDictionary[key]; }
+        set { WriteDictionary[key] = value; }
     }
 
     public virtual bool ContainsKey(TKey key)

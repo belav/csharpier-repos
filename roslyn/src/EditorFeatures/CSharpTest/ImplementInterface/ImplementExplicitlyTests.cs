@@ -21,17 +21,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         private const int SameInterface = 1;
         private const int AllInterfaces = 2;
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpImplementExplicitlyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpImplementExplicitlyCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestSingleMember()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 interface IGoo { void Goo1(); void Goo2(); }
 interface IBar { void Bar(); }
 
@@ -43,7 +46,7 @@ class C : IGoo, IBar
 
     public void Bar() { }
 }",
-@"
+                @"
 interface IGoo { void Goo1(); void Goo2(); }
 interface IBar { void Bar(); }
 
@@ -54,14 +57,16 @@ class C : IGoo, IBar
     public void Goo2() { }
 
     public void Bar() { }
-}", index: SingleMember);
+}",
+                index: SingleMember
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestSameInterface()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 interface IGoo { void Goo1(); void Goo2(); }
 interface IBar { void Bar(); }
 
@@ -73,7 +78,7 @@ class C : IGoo, IBar
 
     public void Bar() { }
 }",
-@"
+                @"
 interface IGoo { void Goo1(); void Goo2(); }
 interface IBar { void Bar(); }
 
@@ -84,14 +89,16 @@ class C : IGoo, IBar
     void IGoo.Goo2() { }
 
     public void Bar() { }
-}", index: SameInterface);
+}",
+                index: SameInterface
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestAllInterfaces()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 interface IGoo { void Goo1(); void Goo2(); }
 interface IBar { void Bar(); }
 
@@ -103,7 +110,7 @@ class C : IGoo, IBar
 
     public void Bar() { }
 }",
-@"
+                @"
 interface IGoo { void Goo1(); void Goo2(); }
 interface IBar { void Bar(); }
 
@@ -114,80 +121,88 @@ class C : IGoo, IBar
     void IGoo.Goo2() { }
 
     void IBar.Bar() { }
-}", index: AllInterfaces);
+}",
+                index: AllInterfaces
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestProperty()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 interface IGoo { int Goo1 { get; } }
 
 class C : IGoo
 {
     public int [||]Goo1 { get { } }
 }",
-@"
+                @"
 interface IGoo { int Goo1 { get; } }
 
 class C : IGoo
 {
     int IGoo.Goo1 { get { } }
-}", index: SingleMember);
+}",
+                index: SingleMember
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestEvent()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 interface IGoo { event Action E; }
 
 class C : IGoo
 {
     public event Action [||]E { add { } remove { } }
 }",
-@"
+                @"
 interface IGoo { event Action E; }
 
 class C : IGoo
 {
     event Action IGoo.E { add { } remove { } }
-}", index: SingleMember);
+}",
+                index: SingleMember
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNotOnExplicitMember()
         {
             await TestMissingAsync(
-@"
+                @"
 interface IGoo { void Goo1(); }
 
 class C : IGoo
 {
     void IGoo.[||]Goo1() { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNotOnUnboundImplicitImpl()
         {
             await TestMissingAsync(
-@"
+                @"
 interface IGoo { void Goo1(); }
 
 class C
 {
     public void [||]Goo1() { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUpdateReferences_InsideDeclarations_Explicit()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -197,7 +212,7 @@ class C : IGoo
     public int M(int i) { return this.M(i); }
     public event Action Ev { add { this.Ev += value; } remove { this.Ev -= value; } }
 }",
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -206,14 +221,16 @@ class C : IGoo
     int IGoo.Prop { get { return ((IGoo)this).Prop; } set { ((IGoo)this).Prop = value; } }
     int IGoo.M(int i) { return ((IGoo)this).M(i); }
     event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
-}", index: SameInterface);
+}",
+                index: SameInterface
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUpdateReferences_InsideDeclarations_Implicit()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -223,7 +240,7 @@ class C : IGoo
     public int M(int i) { return M(i); }
     public event Action Ev { add { Ev += value; } remove { Ev -= value; } }
 }",
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -232,14 +249,16 @@ class C : IGoo
     int IGoo.Prop { get { return ((IGoo)this).Prop; } set { ((IGoo)this).Prop = value; } }
     int IGoo.M(int i) { return ((IGoo)this).M(i); }
     event Action IGoo.Ev { add { ((IGoo)this).Ev += value; } remove { ((IGoo)this).Ev -= value; } }
-}", index: SameInterface);
+}",
+                index: SameInterface
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUpdateReferences_InternalImplicit()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -264,7 +283,7 @@ class C : IGoo
         var v1 = nameof(Prop);
     }
 }",
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -288,14 +307,16 @@ class C : IGoo
 
         var v1 = nameof(((IGoo)this).Prop);
     }
-}", index: SameInterface);
+}",
+                index: SameInterface
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUpdateReferences_InternalExplicit()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -320,7 +341,7 @@ class C : IGoo
         var v1 = nameof(this.Prop);
     }
 }",
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -344,14 +365,16 @@ class C : IGoo
 
         var v1 = nameof(((IGoo)this).Prop);
     }
-}", index: SameInterface);
+}",
+                index: SameInterface
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUpdateReferences_External()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -384,7 +407,7 @@ class T
         var v1 = nameof(c.Prop);
     }
 }",
-@"
+                @"
 using System;
 interface IGoo { int Prop { get; set; } int M(int i); event Action Ev; }
 
@@ -416,14 +439,16 @@ class T
 
         var v1 = nameof(((IGoo)c).Prop);
     }
-}", index: SameInterface);
+}",
+                index: SameInterface
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUpdateReferences_CrossLanguage()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""A1"">
         <Document FilePath=""File.cs"">
@@ -460,7 +485,7 @@ end class
     </Project>
 </Workspace>
 ",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""A1"">
         <Document FilePath=""File.cs"">
@@ -496,14 +521,16 @@ end class
         </Document>
     </Project>
 </Workspace>
-", index: SameInterface);
+",
+                index: SameInterface
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestMemberWhichImplementsMultipleMembers()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 interface IGoo { int M(int i); }
 interface IBar { int M(int i); }
 
@@ -514,7 +541,7 @@ class C : IGoo, IBar
         throw new System.Exception();
     }
 }",
-@"
+                @"
 interface IGoo { int M(int i); }
 interface IBar { int M(int i); }
 
@@ -528,14 +555,16 @@ class C : IGoo, IBar
     {
         throw new System.Exception();
     }
-}", index: SingleMember);
+}",
+                index: SingleMember
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestMemberWhichImplementsMultipleMembers2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 interface IGoo { int M(int i); }
 interface IBar { int M(int i); }
 
@@ -546,7 +575,7 @@ class C : IGoo, IBar
         return this.M(1);
     }
 }",
-@"
+                @"
 interface IGoo { int M(int i); }
 interface IBar { int M(int i); }
 
@@ -560,7 +589,9 @@ class C : IGoo, IBar
     {
         return ((IGoo)this).M(1);
     }
-}", index: SingleMember);
+}",
+                index: SingleMember
+            );
         }
     }
 }

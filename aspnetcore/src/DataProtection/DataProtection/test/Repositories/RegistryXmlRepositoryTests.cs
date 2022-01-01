@@ -18,8 +18,9 @@ public class RegistryXmlRepositoryTests
     [ConditionalRunTestOnlyIfHkcuRegistryAvailable]
     public void RegistryKey_Property()
     {
-        WithUniqueTempRegKey(regKey =>
-        {
+        WithUniqueTempRegKey(
+            regKey =>
+            {
                 // Arrange
                 var repository = new RegistryXmlRepository(regKey, NullLoggerFactory.Instance);
 
@@ -28,15 +29,17 @@ public class RegistryXmlRepositoryTests
 
                 // Assert
                 Assert.Equal(regKey, retVal);
-        });
+            }
+        );
     }
 
     [ConditionalFact]
     [ConditionalRunTestOnlyIfHkcuRegistryAvailable]
     public void GetAllElements_EmptyOrNonexistentDirectory_ReturnsEmptyCollection()
     {
-        WithUniqueTempRegKey(regKey =>
-        {
+        WithUniqueTempRegKey(
+            regKey =>
+            {
                 // Arrange
                 var repository = new RegistryXmlRepository(regKey, NullLoggerFactory.Instance);
 
@@ -45,33 +48,36 @@ public class RegistryXmlRepositoryTests
 
                 // Assert
                 Assert.Equal(0, allElements.Count);
-        });
+            }
+        );
     }
 
     [ConditionalFact]
     [ConditionalRunTestOnlyIfHkcuRegistryAvailable]
     public void StoreElement_WithValidFriendlyName_UsesFriendlyName()
     {
-        WithUniqueTempRegKey(regKey =>
-        {
+        WithUniqueTempRegKey(
+            regKey =>
+            {
                 // Arrange
                 var element = XElement.Parse("<element1 />");
-            var repository = new RegistryXmlRepository(regKey, NullLoggerFactory.Instance);
+                var repository = new RegistryXmlRepository(regKey, NullLoggerFactory.Instance);
 
                 // Act
                 repository.StoreElement(element, "valid-friendly-name");
 
                 // Assert
                 var valueNames = regKey.GetValueNames();
-            var valueName = valueNames.Single(); // only one value should've been created
+                var valueName = valueNames.Single(); // only one value should've been created
 
                 // value name should be "valid-friendly-name"
                 Assert.Equal("valid-friendly-name", valueName, StringComparer.OrdinalIgnoreCase);
 
                 // value contents should be "<element1 />"
                 var parsedElement = XElement.Parse(regKey.GetValue(valueName) as string);
-            XmlAssert.Equal("<element1 />", parsedElement);
-        });
+                XmlAssert.Equal("<element1 />", parsedElement);
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -83,48 +89,54 @@ public class RegistryXmlRepositoryTests
     [InlineData("not*friendly")]
     public void StoreElement_WithInvalidFriendlyName_CreatesNewGuidAsName(string friendlyName)
     {
-        WithUniqueTempRegKey(regKey =>
-        {
+        WithUniqueTempRegKey(
+            regKey =>
+            {
                 // Arrange
                 var element = XElement.Parse("<element1 />");
-            var repository = new RegistryXmlRepository(regKey, NullLoggerFactory.Instance);
+                var repository = new RegistryXmlRepository(regKey, NullLoggerFactory.Instance);
 
                 // Act
                 repository.StoreElement(element, friendlyName);
 
                 // Assert
                 var valueNames = regKey.GetValueNames();
-            var valueName = valueNames.Single(); // only one value should've been created
+                var valueName = valueNames.Single(); // only one value should've been created
 
                 // value name should be "{GUID}"
                 Guid parsedGuid = Guid.Parse(valueName as string);
-            Assert.NotEqual(Guid.Empty, parsedGuid);
+                Assert.NotEqual(Guid.Empty, parsedGuid);
 
                 // value contents should be "<element1 />"
                 var parsedElement = XElement.Parse(regKey.GetValue(valueName) as string);
-            XmlAssert.Equal("<element1 />", parsedElement);
-        });
+                XmlAssert.Equal("<element1 />", parsedElement);
+            }
+        );
     }
 
     [ConditionalFact]
     [ConditionalRunTestOnlyIfHkcuRegistryAvailable]
     public void StoreElements_ThenRetrieve_SeesAllElements()
     {
-        WithUniqueTempRegKey(regKey =>
-        {
+        WithUniqueTempRegKey(
+            regKey =>
+            {
                 // Arrange
                 var repository = new RegistryXmlRepository(regKey, NullLoggerFactory.Instance);
 
                 // Act
                 repository.StoreElement(new XElement("element1"), friendlyName: null);
-            repository.StoreElement(new XElement("element2"), friendlyName: null);
-            repository.StoreElement(new XElement("element3"), friendlyName: null);
-            var allElements = repository.GetAllElements();
+                repository.StoreElement(new XElement("element2"), friendlyName: null);
+                repository.StoreElement(new XElement("element3"), friendlyName: null);
+                var allElements = repository.GetAllElements();
 
                 // Assert
-                var orderedNames = allElements.Select(el => el.Name.LocalName).OrderBy(name => name);
-            Assert.Equal(new[] { "element1", "element2", "element3" }, orderedNames);
-        });
+                var orderedNames = allElements
+                    .Select(el => el.Name.LocalName)
+                    .OrderBy(name => name);
+                Assert.Equal(new[] { "element1", "element2", "element3" }, orderedNames);
+            }
+        );
     }
 
     /// <summary>
@@ -145,22 +157,25 @@ public class RegistryXmlRepositoryTests
         }
     }
 
-    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(() =>
-    {
-        try
+    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(
+        () =>
         {
-            return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
-        }
-        catch
-        {
+            try
+            {
+                return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
+            }
+            catch
+            {
                 // swallow all failures
                 return null;
+            }
         }
-    });
+    );
 
     private class ConditionalRunTestOnlyIfHkcuRegistryAvailable : Attribute, ITestCondition
     {
-        public bool IsMet => (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LazyHkcuTempKey.Value != null);
+        public bool IsMet =>
+            (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LazyHkcuTempKey.Value != null);
 
         public string SkipReason { get; } = "HKCU registry couldn't be opened.";
     }

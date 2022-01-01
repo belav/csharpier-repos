@@ -34,8 +34,10 @@ namespace System.Drawing
         protected virtual void Dispose(bool disposing)
         {
 #if FINALIZATION_WATCH
-            if (!disposing && nativeBrush != IntPtr.Zero )
-                Debug.WriteLine("**********************\nDisposed through finalization:\n" + allocationSite);
+            if (!disposing && nativeBrush != IntPtr.Zero)
+                Debug.WriteLine(
+                    "**********************\nDisposed through finalization:\n" + allocationSite
+                );
 #endif
 
             if (_nativeBrush != IntPtr.Zero)
@@ -43,11 +45,16 @@ namespace System.Drawing
                 try
                 {
 #if DEBUG
-                    int status = !Gdip.Initialized ? Gdip.Ok :
+                    int status = !Gdip.Initialized
+                        ? Gdip.Ok
+                        :
 #endif
-                    Gdip.GdipDeleteBrush(new HandleRef(this, _nativeBrush));
+                          Gdip.GdipDeleteBrush(new HandleRef(this, _nativeBrush));
 #if DEBUG
-                    Debug.Assert(status == Gdip.Ok, $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}");
+                    Debug.Assert(
+                        status == Gdip.Ok,
+                        $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}"
+                    );
 #endif
                 }
                 catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex))

@@ -5,13 +5,13 @@ using System.ComponentModel;
 
 namespace Moq.Language
 {
-	/// <summary>
+    /// <summary>
 	/// Defines the <c>Verifiable</c> verb.
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public interface IVerifies : IFluentInterface
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IVerifies : IFluentInterface
+    {
+        /// <summary>
 		/// Marks the expectation as verifiable, meaning that a call 
 		/// to <see cref="Mock.Verify()"/> will check if this particular 
 		/// expectation was met.
@@ -24,9 +24,9 @@ namespace Moq.Language
 		///     .Verifiable();
 		/// </code>
 		/// </example>
-		void Verifiable();
+        void Verifiable();
 
-		/// <summary>
+        /// <summary>
 		/// Marks the expectation as verifiable, meaning that a call 
 		/// to <see cref="Mock.Verify()"/> will check if this particular 
 		/// expectation was met, and specifies a message for failures.
@@ -39,6 +39,6 @@ namespace Moq.Language
 		///     .Verifiable("Ping should be executed always!");
 		/// </code>
 		/// </example>
-		void Verifiable(string failMessage);
-	}
+        void Verifiable(string failMessage);
+    }
 }

@@ -36,7 +36,9 @@ namespace System.Runtime.Loader.Tests
         protected override Assembly Load(AssemblyName assemblyName)
         {
             // Override the assembly that was loaded in DefaultContext.
-            string dirName = Path.GetDirectoryName(AssemblyPathHelper.GetAssemblyLocation(typeof(string).Assembly));
+            string dirName = Path.GetDirectoryName(
+                AssemblyPathHelper.GetAssemblyLocation(typeof(string).Assembly)
+            );
             string assemblyPath = Path.Combine(dirName, assemblyName.Name + ".dll");
             Assembly assembly = LoadFromAssemblyPath(assemblyPath);
             LoadedFromContext = true;
@@ -57,17 +59,25 @@ namespace System.Runtime.Loader.Tests
         public DefaultLoadContextTests()
         {
             _defaultLoadDirectory = GetDefaultAssemblyLoadDirectory();
-            _assemblyPath = Path.Combine(_defaultLoadDirectory, "System.Runtime.Loader.Noop.Assembly_test.dll");
+            _assemblyPath = Path.Combine(
+                _defaultLoadDirectory,
+                "System.Runtime.Loader.Noop.Assembly_test.dll"
+            );
         }
 
         private static string GetDefaultAssemblyLoadDirectory()
         {
-            return Path.GetDirectoryName(AssemblyPathHelper.GetAssemblyLocation(Assembly.GetExecutingAssembly()));
+            return Path.GetDirectoryName(
+                AssemblyPathHelper.GetAssemblyLocation(Assembly.GetExecutingAssembly())
+            );
         }
 
         private Assembly ResolveAssembly(AssemblyLoadContext sender, AssemblyName assembly)
         {
-            string resolvedAssemblyPath = Path.Combine(_defaultLoadDirectory, assembly.Name + "_test.dll");
+            string resolvedAssemblyPath = Path.Combine(
+                _defaultLoadDirectory,
+                assembly.Name + "_test.dll"
+            );
             _numNonNullResolutions++;
 
             return sender.LoadFromAssemblyPath(resolvedAssemblyPath);
@@ -179,7 +189,12 @@ namespace System.Runtime.Loader.Tests
         public static void LoadNonExistentInDefaultContext()
         {
             // Now, try to load an assembly that does not exist
-            Assert.Throws<FileNotFoundException>(() => AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName("System.Runtime.Loader.NonExistent.Assembly")));
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    AssemblyLoadContext.Default.LoadFromAssemblyName(
+                        new AssemblyName("System.Runtime.Loader.NonExistent.Assembly")
+                    )
+            );
         }
 
         private void DefaultContextFallback()
@@ -203,7 +218,7 @@ namespace System.Runtime.Loader.Tests
             // Load System.Runtime - since this is on TPA, it should get resolved from DefaultContext
             // since FallbackLoadContext does not override the Load method to specify its location.
             var assemblyName = "System.Runtime, Version=4.0.0.0";
-            Assembly asmLoaded = (Assembly)method.Invoke(null, new object[] {assemblyName});
+            Assembly asmLoaded = (Assembly)method.Invoke(null, new object[] { assemblyName });
             loadedContext = AssemblyLoadContext.GetLoadContext(asmLoaded);
 
             // Confirm assembly Loaded from DefaultContext
@@ -214,7 +229,7 @@ namespace System.Runtime.Loader.Tests
             // in the caller of this method. We should get it from FallbackLoadContext since we
             // explicitly loaded it there as well.
             assemblyName = TestAssemblyName;
-            Assembly asmLoaded2 = (Assembly)method.Invoke(null, new object[] {assemblyName});
+            Assembly asmLoaded2 = (Assembly)method.Invoke(null, new object[] { assemblyName });
             loadedContext = AssemblyLoadContext.GetLoadContext(asmLoaded2);
 
             Assert.NotEqual(lcDefault, loadedContext);
@@ -227,7 +242,7 @@ namespace System.Runtime.Loader.Tests
             Exception ex = null;
             try
             {
-                method.Invoke(null, new object[] {assemblyName});
+                method.Invoke(null, new object[] { assemblyName });
             }
             catch (TargetInvocationException tie)
             {
@@ -260,7 +275,7 @@ namespace System.Runtime.Loader.Tests
             // Load System.Runtime - since this is on TPA, it should get resolved from our custom load context
             // since the Load method has been implemented to override TPA assemblies.
             var assemblyName = "System.Runtime, Version=4.0.0.0";
-            Assembly asmLoaded = (Assembly)method.Invoke(null, new object[] {assemblyName});
+            Assembly asmLoaded = (Assembly)method.Invoke(null, new object[] { assemblyName });
             loadedContext = AssemblyLoadContext.GetLoadContext(asmLoaded);
 
             // Confirm assembly did not load from DefaultContext
@@ -273,7 +288,7 @@ namespace System.Runtime.Loader.Tests
             // without invoking the Load override, since it is already loaded.
             assemblyName = TestAssemblyName;
             olc.LoadedFromContext = false;
-            Assembly asmLoaded2 = (Assembly)method.Invoke(null, new object[] {assemblyName});
+            Assembly asmLoaded2 = (Assembly)method.Invoke(null, new object[] { assemblyName });
             loadedContext = AssemblyLoadContext.GetLoadContext(asmLoaded2);
 
             // Confirm assembly loaded from the intended LoadContext

@@ -38,11 +38,17 @@ internal class ResponseFeature : IHttpResponseFeature, IHttpResponseBodyFeature
         {
             if (HasStarted)
             {
-                throw new InvalidOperationException("The status code cannot be set, the response has already started.");
+                throw new InvalidOperationException(
+                    "The status code cannot be set, the response has already started."
+                );
             }
             if (value < 100)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "The status code cannot be set to a value less than 100");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "The status code cannot be set to a value less than 100"
+                );
             }
 
             _statusCode = value;
@@ -56,7 +62,9 @@ internal class ResponseFeature : IHttpResponseFeature, IHttpResponseBodyFeature
         {
             if (HasStarted)
             {
-                throw new InvalidOperationException("The reason phrase cannot be set, the response has already started.");
+                throw new InvalidOperationException(
+                    "The reason phrase cannot be set, the response has already started."
+                );
             }
 
             _reasonPhrase = value;
@@ -140,9 +148,7 @@ internal class ResponseFeature : IHttpResponseFeature, IHttpResponseBodyFeature
         }
     }
 
-    public void DisableBuffering()
-    {
-    }
+    public void DisableBuffering() { }
 
     public Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellation)
     {

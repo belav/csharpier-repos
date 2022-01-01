@@ -27,9 +27,10 @@ public class CertificateForwardingMiddleware
     /// <param name="loggerFactory"></param>
     /// <param name="options"></param>
     public CertificateForwardingMiddleware(
-            RequestDelegate next,
-            ILoggerFactory loggerFactory,
-            IOptions<CertificateForwardingOptions> options)
+        RequestDelegate next,
+        ILoggerFactory loggerFactory,
+        IOptions<CertificateForwardingOptions> options
+    )
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
 
@@ -58,7 +59,9 @@ public class CertificateForwardingMiddleware
         var header = httpContext.Request.Headers[_options.CertificateHeader];
         if (!StringValues.IsNullOrEmpty(header))
         {
-            httpContext.Features.Set<ITlsConnectionFeature>(new CertificateForwardingFeature(_logger, header, _options));
+            httpContext.Features.Set<ITlsConnectionFeature>(
+                new CertificateForwardingFeature(_logger, header, _options)
+            );
         }
         return _next(httpContext);
     }

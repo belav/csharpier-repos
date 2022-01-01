@@ -12,7 +12,8 @@ namespace System.Security.Cryptography
         {
             public override void ImportSubjectPublicKeyInfo(
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 KeySizeValue = _ecc.ImportSubjectPublicKeyInfo(source, out bytesRead);
             }

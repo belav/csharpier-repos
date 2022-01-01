@@ -62,8 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
         ///     </para>
         /// </remarks>
-        public virtual IReadOnlyList<MigrationOperation> UpOperations
-            => _upOperations ??= BuildOperations(Up);
+        public virtual IReadOnlyList<MigrationOperation> UpOperations =>
+            _upOperations ??= BuildOperations(Up);
 
         /// <summary>
         ///     The <see cref="MigrationOperation" />s that will migrate the database 'down'.
@@ -78,8 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
         ///     </para>
         /// </remarks>
-        public virtual IReadOnlyList<MigrationOperation> DownOperations
-            => _downOperations ??= BuildOperations(Down);
+        public virtual IReadOnlyList<MigrationOperation> DownOperations =>
+            _downOperations ??= BuildOperations(Down);
 
         /// <summary>
         ///     The name of the current database provider.
@@ -103,9 +103,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
         /// </remarks>
         /// <param name="modelBuilder">The <see cref="ModelBuilder" /> to use to build the model.</param>
-        protected virtual void BuildTargetModel(ModelBuilder modelBuilder)
-        {
-        }
+        protected virtual void BuildTargetModel(ModelBuilder modelBuilder) { }
 
         /// <summary>
         ///     Builds the operations that will migrate the database 'up'.
@@ -143,8 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     </para>
         /// </remarks>
         /// <param name="migrationBuilder">The <see cref="MigrationBuilder" /> that will build the operations.</param>
-        protected virtual void Down(MigrationBuilder migrationBuilder)
-            => throw new NotSupportedException(RelationalStrings.MigrationDownMissing);
+        protected virtual void Down(MigrationBuilder migrationBuilder) =>
+            throw new NotSupportedException(RelationalStrings.MigrationDownMissing);
 
         private List<MigrationOperation> BuildOperations(Action<MigrationBuilder> buildAction)
         {

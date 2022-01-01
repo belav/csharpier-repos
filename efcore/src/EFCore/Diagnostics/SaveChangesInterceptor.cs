@@ -33,8 +33,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in.
         /// </returns>
-        public virtual InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
-            => result;
+        public virtual InterceptionResult<int> SavingChanges(
+            DbContextEventData eventData,
+            InterceptionResult<int> result
+        ) => result;
 
         /// <summary>
         ///     Called at the end of <see cref="O:DbContext.SaveChanges" />.
@@ -54,16 +56,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in.
         /// </returns>
-        public virtual int SavedChanges(SaveChangesCompletedEventData eventData, int result)
-            => result;
+        public virtual int SavedChanges(SaveChangesCompletedEventData eventData, int result) =>
+            result;
 
         /// <summary>
         ///     Called when an exception has been thrown in <see cref="O:DbContext.SaveChanges" />.
         /// </summary>
         /// <param name="eventData">Contextual information about the failure.</param>
-        public virtual void SaveChangesFailed(DbContextErrorEventData eventData)
-        {
-        }
+        public virtual void SaveChangesFailed(DbContextErrorEventData eventData) { }
 
         /// <summary>
         ///     Called at the start of <see cref="O:DbContext.SaveChangesAsync" />.
@@ -87,8 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData,
             InterceptionResult<int> result,
-            CancellationToken cancellationToken = default)
-            => new(result);
+            CancellationToken cancellationToken = default
+        ) => new(result);
 
         /// <summary>
         ///     Called at the end of <see cref="O:DbContext.SaveChangesAsync" />.
@@ -113,8 +113,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public virtual ValueTask<int> SavedChangesAsync(
             SaveChangesCompletedEventData eventData,
             int result,
-            CancellationToken cancellationToken = default)
-            => new(result);
+            CancellationToken cancellationToken = default
+        ) => new(result);
 
         /// <summary>
         ///     Called when an exception has been thrown in <see cref="O:DbContext.SaveChangesAsync" />.
@@ -125,7 +125,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual Task SaveChangesFailedAsync(
             DbContextErrorEventData eventData,
-            CancellationToken cancellationToken = default)
-            => Task.CompletedTask;
+            CancellationToken cancellationToken = default
+        ) => Task.CompletedTask;
     }
 }

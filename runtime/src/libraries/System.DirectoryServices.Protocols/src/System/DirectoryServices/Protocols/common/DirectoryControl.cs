@@ -57,9 +57,7 @@ namespace System.DirectoryServices.Protocols
         private string _rule;
         private bool _order;
 
-        public SortKey()
-        {
-        }
+        public SortKey() { }
 
         public SortKey(string attributeName, string matchingRule, bool reverseOrder)
         {
@@ -144,7 +142,12 @@ namespace System.DirectoryServices.Protocols
                     // user expects cookie with length 0 as paged search is done.
                     byte[] cookie = (byte[])result[1] ?? Array.Empty<byte>();
 
-                    PageResultResponseControl pageControl = new PageResultResponseControl(size, cookie, controls[i].IsCritical, controls[i].GetValue());
+                    PageResultResponseControl pageControl = new PageResultResponseControl(
+                        size,
+                        cookie,
+                        controls[i].IsCritical,
+                        controls[i].GetValue()
+                    );
                     controls[i] = pageControl;
                 }
                 else if (controls[i].Type == "1.2.840.113556.1.4.1504")
@@ -154,7 +157,11 @@ namespace System.DirectoryServices.Protocols
                     Debug.Assert((o != null) && (o.Length == 1));
 
                     int result = (int)o[0];
-                    AsqResponseControl asq = new AsqResponseControl(result, controls[i].IsCritical, controls[i].GetValue());
+                    AsqResponseControl asq = new AsqResponseControl(
+                        result,
+                        controls[i].IsCritical,
+                        controls[i].GetValue()
+                    );
                     controls[i] = asq;
                 }
                 else if (controls[i].Type == "1.2.840.113556.1.4.841")
@@ -167,7 +174,13 @@ namespace System.DirectoryServices.Protocols
                     int count = (int)o[1];
                     byte[] dirsyncCookie = (byte[])o[2];
 
-                    DirSyncResponseControl dirsync = new DirSyncResponseControl(dirsyncCookie, (moreData == 0 ? false : true), count, controls[i].IsCritical, controls[i].GetValue());
+                    DirSyncResponseControl dirsync = new DirSyncResponseControl(
+                        dirsyncCookie,
+                        (moreData == 0 ? false : true),
+                        count,
+                        controls[i].IsCritical,
+                        controls[i].GetValue()
+                    );
                     controls[i] = dirsync;
                 }
                 else if (controls[i].Type == "1.2.840.113556.1.4.474")
@@ -193,7 +206,12 @@ namespace System.DirectoryServices.Protocols
                         result = (int)o[0];
                     }
 
-                    SortResponseControl sort = new SortResponseControl((ResultCode)result, attribute, controls[i].IsCritical, controls[i].GetValue());
+                    SortResponseControl sort = new SortResponseControl(
+                        (ResultCode)result,
+                        attribute,
+                        controls[i].IsCritical,
+                        controls[i].GetValue()
+                    );
                     controls[i] = sort;
                 }
                 else if (controls[i].Type == "2.16.840.1.113730.3.4.10")
@@ -222,7 +240,14 @@ namespace System.DirectoryServices.Protocols
                         result = (int)o[2];
                     }
 
-                    VlvResponseControl vlv = new VlvResponseControl(position, count, context, (ResultCode)result, controls[i].IsCritical, controls[i].GetValue());
+                    VlvResponseControl vlv = new VlvResponseControl(
+                        position,
+                        count,
+                        context,
+                        (ResultCode)result,
+                        controls[i].IsCritical,
+                        controls[i].GetValue()
+                    );
                     controls[i] = vlv;
                 }
             }
@@ -231,9 +256,7 @@ namespace System.DirectoryServices.Protocols
 
     public class AsqRequestControl : DirectoryControl
     {
-        public AsqRequestControl() : base("1.2.840.113556.1.4.1504", null, true, true)
-        {
-        }
+        public AsqRequestControl() : base("1.2.840.113556.1.4.1504", null, true, true) { }
 
         public AsqRequestControl(string attributeName) : this()
         {
@@ -251,7 +274,8 @@ namespace System.DirectoryServices.Protocols
 
     public class AsqResponseControl : DirectoryControl
     {
-        internal AsqResponseControl(int result, bool criticality, byte[] controlValue) : base("1.2.840.113556.1.4.1504", controlValue, criticality, true)
+        internal AsqResponseControl(int result, bool criticality, byte[] controlValue)
+            : base("1.2.840.113556.1.4.1504", controlValue, criticality, true)
         {
             Result = (ResultCode)result;
         }
@@ -261,9 +285,7 @@ namespace System.DirectoryServices.Protocols
 
     public class CrossDomainMoveControl : DirectoryControl
     {
-        public CrossDomainMoveControl() : base("1.2.840.113556.1.4.521", null, true, true)
-        {
-        }
+        public CrossDomainMoveControl() : base("1.2.840.113556.1.4.521", null, true, true) { }
 
         public CrossDomainMoveControl(string targetDomainController) : this()
         {
@@ -292,18 +314,14 @@ namespace System.DirectoryServices.Protocols
 
     public class DomainScopeControl : DirectoryControl
     {
-        public DomainScopeControl() : base("1.2.840.113556.1.4.1339", null, true, true)
-        {
-        }
+        public DomainScopeControl() : base("1.2.840.113556.1.4.1339", null, true, true) { }
     }
 
     public class ExtendedDNControl : DirectoryControl
     {
         private ExtendedDNFlag _flag = ExtendedDNFlag.HexString;
 
-        public ExtendedDNControl() : base("1.2.840.113556.1.4.529", null, true, true)
-        {
-        }
+        public ExtendedDNControl() : base("1.2.840.113556.1.4.529", null, true, true) { }
 
         public ExtendedDNControl(ExtendedDNFlag flag) : this()
         {
@@ -316,7 +334,11 @@ namespace System.DirectoryServices.Protocols
             set
             {
                 if (value < ExtendedDNFlag.HexString || value > ExtendedDNFlag.StandardString)
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ExtendedDNFlag));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(ExtendedDNFlag)
+                    );
 
                 _flag = value;
             }
@@ -345,7 +367,8 @@ namespace System.DirectoryServices.Protocols
 
     public class SecurityDescriptorFlagControl : DirectoryControl
     {
-        public SecurityDescriptorFlagControl() : base("1.2.840.113556.1.4.801", null, true, true) { }
+        public SecurityDescriptorFlagControl() : base("1.2.840.113556.1.4.801", null, true, true)
+        { }
 
         public SecurityDescriptorFlagControl(SecurityMasks masks) : this()
         {
@@ -358,7 +381,10 @@ namespace System.DirectoryServices.Protocols
 
         public override byte[] GetValue()
         {
-            _directoryControlValue = BerConverter.Encode("{i}", new object[] { (int)SecurityMasks });
+            _directoryControlValue = BerConverter.Encode(
+                "{i}",
+                new object[] { (int)SecurityMasks }
+            );
             return base.GetValue();
         }
     }
@@ -379,7 +405,11 @@ namespace System.DirectoryServices.Protocols
             set
             {
                 if (value < SearchOption.DomainScope || value > SearchOption.PhantomRoot)
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(SearchOption));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(SearchOption)
+                    );
 
                 _searchOption = value;
             }
@@ -451,12 +481,17 @@ namespace System.DirectoryServices.Protocols
             _dirsyncCookie = cookie;
         }
 
-        public DirSyncRequestControl(byte[] cookie, DirectorySynchronizationOptions option) : this(cookie)
+        public DirSyncRequestControl(byte[] cookie, DirectorySynchronizationOptions option)
+            : this(cookie)
         {
             Option = option;
         }
 
-        public DirSyncRequestControl(byte[] cookie, DirectorySynchronizationOptions option, int attributeCount) : this(cookie, option)
+        public DirSyncRequestControl(
+            byte[] cookie,
+            DirectorySynchronizationOptions option,
+            int attributeCount
+        ) : this(cookie, option)
         {
             AttributeCount = attributeCount;
         }
@@ -511,7 +546,13 @@ namespace System.DirectoryServices.Protocols
     {
         private readonly byte[] _dirsyncCookie;
 
-        internal DirSyncResponseControl(byte[] cookie, bool moreData, int resultSize, bool criticality, byte[] controlValue) : base("1.2.840.113556.1.4.841", controlValue, criticality, true)
+        internal DirSyncResponseControl(
+            byte[] cookie,
+            bool moreData,
+            int resultSize,
+            bool criticality,
+            byte[] controlValue
+        ) : base("1.2.840.113556.1.4.841", controlValue, criticality, true)
         {
             _dirsyncCookie = cookie;
             MoreData = moreData;
@@ -605,7 +646,12 @@ namespace System.DirectoryServices.Protocols
     {
         private readonly byte[] _pageCookie;
 
-        internal PageResultResponseControl(int count, byte[] cookie, bool criticality, byte[] controlValue) : base("1.2.840.113556.1.4.319", controlValue, criticality, true)
+        internal PageResultResponseControl(
+            int count,
+            byte[] cookie,
+            bool criticality,
+            byte[] controlValue
+        ) : base("1.2.840.113556.1.4.319", controlValue, criticality, true)
         {
             TotalCount = count;
             _pageCookie = cookie;
@@ -635,7 +681,8 @@ namespace System.DirectoryServices.Protocols
     public class SortRequestControl : DirectoryControl
     {
         private SortKey[] _keys = Array.Empty<SortKey>();
-        public SortRequestControl(params SortKey[] sortKeys) : base("1.2.840.113556.1.4.473", null, true, true)
+        public SortRequestControl(params SortKey[] sortKeys)
+            : base("1.2.840.113556.1.4.473", null, true, true)
         {
             if (sortKeys == null)
             {
@@ -653,15 +700,19 @@ namespace System.DirectoryServices.Protocols
             _keys = new SortKey[sortKeys.Length];
             for (int i = 0; i < sortKeys.Length; i++)
             {
-                _keys[i] = new SortKey(sortKeys[i].AttributeName, sortKeys[i].MatchingRule, sortKeys[i].ReverseOrder);
+                _keys[i] = new SortKey(
+                    sortKeys[i].AttributeName,
+                    sortKeys[i].MatchingRule,
+                    sortKeys[i].ReverseOrder
+                );
             }
         }
 
-        public SortRequestControl(string attributeName, bool reverseOrder) : this(attributeName, null, reverseOrder)
-        {
-        }
+        public SortRequestControl(string attributeName, bool reverseOrder)
+            : this(attributeName, null, reverseOrder) { }
 
-        public SortRequestControl(string attributeName, string matchingRule, bool reverseOrder) : base("1.2.840.113556.1.4.473", null, true, true)
+        public SortRequestControl(string attributeName, string matchingRule, bool reverseOrder)
+            : base("1.2.840.113556.1.4.473", null, true, true)
         {
             SortKey key = new SortKey(attributeName, matchingRule, reverseOrder);
             _keys = new SortKey[] { key };
@@ -679,7 +730,11 @@ namespace System.DirectoryServices.Protocols
                 SortKey[] tempKeys = new SortKey[_keys.Length];
                 for (int i = 0; i < _keys.Length; i++)
                 {
-                    tempKeys[i] = new SortKey(_keys[i].AttributeName, _keys[i].MatchingRule, _keys[i].ReverseOrder);
+                    tempKeys[i] = new SortKey(
+                        _keys[i].AttributeName,
+                        _keys[i].MatchingRule,
+                        _keys[i].ReverseOrder
+                    );
                 }
                 return tempKeys;
             }
@@ -701,7 +756,11 @@ namespace System.DirectoryServices.Protocols
                 _keys = new SortKey[value.Length];
                 for (int i = 0; i < value.Length; i++)
                 {
-                    _keys[i] = new SortKey(value[i].AttributeName, value[i].MatchingRule, value[i].ReverseOrder);
+                    _keys[i] = new SortKey(
+                        value[i].AttributeName,
+                        value[i].MatchingRule,
+                        value[i].ReverseOrder
+                    );
                 }
             }
         }
@@ -729,7 +788,12 @@ namespace System.DirectoryServices.Protocols
                 Marshal.WriteIntPtr(tempPtr, IntPtr.Zero);
 
                 bool critical = IsCritical;
-                int error = LdapPal.CreateDirectorySortControl(UtilityHandle.GetHandle(), memHandle, critical ? (byte)1 : (byte)0, ref control);
+                int error = LdapPal.CreateDirectorySortControl(
+                    UtilityHandle.GetHandle(),
+                    memHandle,
+                    critical ? (byte)1 : (byte)0,
+                    ref control
+                );
 
                 if (error != 0)
                 {
@@ -796,7 +860,12 @@ namespace System.DirectoryServices.Protocols
 
     public class SortResponseControl : DirectoryControl
     {
-        internal SortResponseControl(ResultCode result, string attributeName, bool critical, byte[] value) : base("1.2.840.113556.1.4.474", value, critical, true)
+        internal SortResponseControl(
+            ResultCode result,
+            string attributeName,
+            bool critical,
+            byte[] value
+        ) : base("1.2.840.113556.1.4.474", value, critical, true)
         {
             Result = result;
             AttributeName = attributeName;
@@ -988,7 +1057,14 @@ namespace System.DirectoryServices.Protocols
     {
         private readonly byte[] _context;
 
-        internal VlvResponseControl(int targetPosition, int count, byte[] context, ResultCode result, bool criticality, byte[] value) : base("2.16.840.1.113730.3.4.10", value, criticality, true)
+        internal VlvResponseControl(
+            int targetPosition,
+            int count,
+            byte[] context,
+            ResultCode result,
+            bool criticality,
+            byte[] value
+        ) : base("2.16.840.1.113730.3.4.10", value, criticality, true)
         {
             TargetPosition = targetPosition;
             ContentCount = count;
@@ -1042,9 +1118,7 @@ namespace System.DirectoryServices.Protocols
 
     public class DirectoryControlCollection : CollectionBase
     {
-        public DirectoryControlCollection()
-        {
-        }
+        public DirectoryControlCollection() { }
 
         public DirectoryControl this[int index]
         {
@@ -1120,7 +1194,10 @@ namespace System.DirectoryServices.Protocols
             }
             if (!(value is DirectoryControl))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidValueType, nameof(DirectoryControl)), nameof(value));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidValueType, nameof(DirectoryControl)),
+                    nameof(value)
+                );
             }
         }
     }

@@ -5,9 +5,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
 {
     public class DiagnosticsAreReturned_IfAuthorizeAttributeIsAppliedToPageHandlerMethod : PageModel
     {
-        [/*MM*/Authorize]
-        public void OnPost()
-        {
-        }
+        [ /*MM*/
+        Authorize]
+        public void OnPost() { }
     }
 }

@@ -28,7 +28,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
     /// <remarks>This type is not thread-safe.</remarks>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(EnumerableDebugView<,>))]
-    internal sealed class QueuedMap<TKey, TValue> where TKey: notnull
+    internal sealed class QueuedMap<TKey, TValue> where TKey : notnull
     {
         /// <summary>
         /// A queue structure that uses an array-based list to store its items
@@ -75,7 +75,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // If there is a free slot, reuse it
                 if (_freeIndex != TERMINATOR_INDEX)
                 {
-                    Debug.Assert(0 <= _freeIndex && _freeIndex < _storage.Count, "Index is out of range.");
+                    Debug.Assert(
+                        0 <= _freeIndex && _freeIndex < _storage.Count,
+                        "Index is out of range."
+                    );
                     newIndex = _freeIndex;
                     _freeIndex = _storage[_freeIndex].Key;
                     _storage[newIndex] = new KeyValuePair<int, T>(TERMINATOR_INDEX, item);
@@ -90,14 +93,23 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 if (_headIndex == TERMINATOR_INDEX)
                 {
                     // Point _headIndex to newIndex if the queue was empty
-                    Debug.Assert(_tailIndex == TERMINATOR_INDEX, "If head indicates empty, so too should tail.");
+                    Debug.Assert(
+                        _tailIndex == TERMINATOR_INDEX,
+                        "If head indicates empty, so too should tail."
+                    );
                     _headIndex = newIndex;
                 }
                 else
                 {
                     // Point the tail slot to newIndex if the queue was not empty
-                    Debug.Assert(_tailIndex != TERMINATOR_INDEX, "If head does not indicate empty, neither should tail.");
-                    _storage[_tailIndex] = new KeyValuePair<int, T>(newIndex, _storage[_tailIndex].Value);
+                    Debug.Assert(
+                        _tailIndex != TERMINATOR_INDEX,
+                        "If head does not indicate empty, neither should tail."
+                    );
+                    _storage[_tailIndex] = new KeyValuePair<int, T>(
+                        newIndex,
+                        _storage[_tailIndex].Value
+                    );
                 }
 
                 // Point the tail slot newIndex
@@ -113,13 +125,19 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // If the queue is empty, just initialize the output item and return false
                 if (_headIndex == TERMINATOR_INDEX)
                 {
-                    Debug.Assert(_tailIndex == TERMINATOR_INDEX, "If head indicates empty, so too should tail.");
+                    Debug.Assert(
+                        _tailIndex == TERMINATOR_INDEX,
+                        "If head indicates empty, so too should tail."
+                    );
                     item = default(T);
                     return false;
                 }
 
                 // If there are items in the queue, start with populating the output item
-                Debug.Assert(0 <= _headIndex && _headIndex < _storage.Count, "Head is out of range.");
+                Debug.Assert(
+                    0 <= _headIndex && _headIndex < _storage.Count,
+                    "Head is out of range."
+                );
                 item = _storage[_headIndex].Value;
 
                 // Move the popped slot to the head of the free list
@@ -127,7 +145,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 _storage[_headIndex] = new KeyValuePair<int, T>(_freeIndex, default(T)!);
                 _freeIndex = _headIndex;
                 _headIndex = newHeadIndex;
-                if (_headIndex == TERMINATOR_INDEX) _tailIndex = TERMINATOR_INDEX;
+                if (_headIndex == TERMINATOR_INDEX)
+                    _tailIndex = TERMINATOR_INDEX;
 
                 return true;
             }
@@ -141,12 +160,18 @@ namespace System.Threading.Tasks.Dataflow.Internal
 #if DEBUG
                 // Also assert that index does not belong to the list of free slots
                 for (int idx = _freeIndex; idx != TERMINATOR_INDEX; idx = _storage[idx].Key)
-                    Debug.Assert(idx != index, "Index should not belong to the list of free slots.");
+                    Debug.Assert(
+                        idx != index,
+                        "Index should not belong to the list of free slots."
+                    );
 #endif
                 _storage[index] = new KeyValuePair<int, T>(_storage[index].Key, item);
             }
 
-            internal bool IsEmpty { get { return _headIndex == TERMINATOR_INDEX; } }
+            internal bool IsEmpty
+            {
+                get { return _headIndex == TERMINATOR_INDEX; }
+            }
         }
 
         /// <summary>The queue of elements.</summary>
@@ -195,7 +220,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         internal bool TryPop(out KeyValuePair<TKey, TValue> item)
         {
             bool popped = _queue.TryDequeue(out item);
-            if (popped) _mapKeyToIndex.Remove(item.Key);
+            if (popped)
+                _mapKeyToIndex.Remove(item.Key);
             return popped;
         }
 
@@ -217,14 +243,19 @@ namespace System.Threading.Tasks.Dataflow.Internal
             for (int i = arrayOffset; actualCount < count; i++, actualCount++)
             {
                 KeyValuePair<TKey, TValue> item;
-                if (TryPop(out item)) items[i] = item;
-                else break;
+                if (TryPop(out item))
+                    items[i] = item;
+                else
+                    break;
             }
 
             return actualCount;
         }
 
         /// <summary>Gets the number of items in the data structure.</summary>
-        internal int Count { get { return _mapKeyToIndex.Count; } }
+        internal int Count
+        {
+            get { return _mapKeyToIndex.Count; }
+        }
     }
 }

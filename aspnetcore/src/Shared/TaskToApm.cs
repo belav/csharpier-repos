@@ -92,9 +92,10 @@ internal static class TaskToApm
                 // order to avoid running synchronously if the task has already completed by the time we get here but still run
                 // synchronously as part of the task's completion if the task completes after (the more common case).
                 _callback = callback;
-                _task.ConfigureAwait(continueOnCapturedContext: false)
-                     .GetAwaiter()
-                     .OnCompleted(InvokeCallback); // allocates a delegate, but avoids a closure
+                _task
+                    .ConfigureAwait(continueOnCapturedContext: false)
+                    .GetAwaiter()
+                    .OnCompleted(InvokeCallback); // allocates a delegate, but avoids a closure
             }
         }
 

@@ -223,7 +223,9 @@ namespace System.Text.Json.Node.Tests
         {
             using (JsonDocument document = JsonDocument.Parse(json))
             {
-                Assert.Throws<InvalidOperationException>(() => JsonObject.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(
+                    () => JsonObject.Create(document.RootElement)
+                );
             }
         }
 
@@ -294,30 +296,19 @@ namespace System.Text.Json.Node.Tests
                 ["MyString"] = JsonValue.Create("Hello!"),
                 ["MyNull"] = null,
                 ["MyBoolean"] = JsonValue.Create(false),
-
                 // Nested array
-                ["MyArray"] = new JsonArray
-                (
+                ["MyArray"] = new JsonArray(
                     JsonValue.Create(2),
                     JsonValue.Create(3),
                     JsonValue.Create(42)
                 ),
-
                 // Additional primitives
                 ["MyInt"] = JsonValue.Create(43),
                 ["MyDateTime"] = JsonValue.Create(new DateTime(2020, 7, 8)),
                 ["MyGuid"] = JsonValue.Create(new Guid("ed957609-cdfe-412f-88c1-02daca1b4f51")),
-
                 // Nested objects
-                ["MyObject"] = new JsonObject
-                {
-                    ["MyString"] = JsonValue.Create("Hello!!")
-                },
-
-                ["Child"] = new JsonObject
-                {
-                    ["ChildProp"] = JsonValue.Create(1)
-                }
+                ["MyObject"] = new JsonObject { ["MyString"] = JsonValue.Create("Hello!!") },
+                ["Child"] = new JsonObject { ["ChildProp"] = JsonValue.Create(1) }
             };
 
             string json = jObj.ToJsonString();
@@ -333,25 +324,15 @@ namespace System.Text.Json.Node.Tests
                 ["MyString"] = "Hello!",
                 ["MyNull"] = null,
                 ["MyBoolean"] = false,
-
                 // Nested array
                 ["MyArray"] = new JsonArray(2, 3, 42),
-
                 // Additional primitives
                 ["MyInt"] = 43,
                 ["MyDateTime"] = new DateTime(2020, 7, 8),
                 ["MyGuid"] = new Guid("ed957609-cdfe-412f-88c1-02daca1b4f51"),
-
                 // Nested objects
-                ["MyObject"] = new JsonObject
-                {
-                    ["MyString"] = "Hello!!"
-                },
-
-                ["Child"] = new JsonObject()
-                {
-                    ["ChildProp"] = 1
-                }
+                ["MyObject"] = new JsonObject { ["MyString"] = "Hello!!" },
+                ["Child"] = new JsonObject() { ["ChildProp"] = 1 }
             };
 
             string json = jObj.ToJsonString();
@@ -430,8 +411,12 @@ namespace System.Text.Json.Node.Tests
         [Fact]
         public static void DynamicObject_LINQ_Query()
         {
-            JsonArray allOrders = JsonSerializer.Deserialize<JsonArray>(JsonNodeTests.Linq_Query_Json);
-            IEnumerable<JsonNode> orders = allOrders.Where(o => o["Customer"]["City"].GetValue<string>() == "Fargo");
+            JsonArray allOrders = JsonSerializer.Deserialize<JsonArray>(
+                JsonNodeTests.Linq_Query_Json
+            );
+            IEnumerable<JsonNode> orders = allOrders.Where(
+                o => o["Customer"]["City"].GetValue<string>() == "Fargo"
+            );
 
             Assert.Equal(2, orders.Count());
             Assert.Equal(100, orders.ElementAt(0)["OrderId"].GetValue<int>());
@@ -452,7 +437,8 @@ namespace System.Text.Json.Node.Tests
         [Fact]
         public static void DynamicObject_LINQ_Convert()
         {
-            string json = @"
+            string json =
+                @"
             [
               {
                 ""Title"": ""TITLE."",
@@ -470,16 +456,21 @@ namespace System.Text.Json.Node.Tests
             JsonArray arr = JsonSerializer.Deserialize<JsonArray>(json);
 
             // Convert nested JSON to a flat POCO.
-            IList<BlogPost> blogPosts = arr.Select(p => new BlogPost
-            {
-                Title = p["Title"].GetValue<string>(),
-                AuthorName = p["Author"]["Name"].GetValue<string>(),
-                AuthorTwitter = p["Author"]["Mail"].GetValue<string>(),
-                PostedDate = p["Date"].GetValue<DateTime>(),
-                Body = p["BodyHtml"].GetValue<string>()
-            }).ToList();
+            IList<BlogPost> blogPosts = arr.Select(
+                    p =>
+                        new BlogPost
+                        {
+                            Title = p["Title"].GetValue<string>(),
+                            AuthorName = p["Author"]["Name"].GetValue<string>(),
+                            AuthorTwitter = p["Author"]["Mail"].GetValue<string>(),
+                            PostedDate = p["Date"].GetValue<DateTime>(),
+                            Body = p["BodyHtml"].GetValue<string>()
+                        }
+                )
+                .ToList();
 
-            const string expected = "[{\"Title\":\"TITLE.\",\"AuthorName\":\"NAME.\",\"AuthorTwitter\":\"MAIL.\",\"Body\":\"Content.\",\"PostedDate\":\"2021-01-20T19:30:00\"}]";
+            const string expected =
+                "[{\"Title\":\"TITLE.\",\"AuthorName\":\"NAME.\",\"AuthorTwitter\":\"MAIL.\",\"Body\":\"Content.\",\"PostedDate\":\"2021-01-20T19:30:00\"}]";
 
             string json_out = JsonSerializer.Serialize(blogPosts);
             Assert.Equal(expected, json_out);

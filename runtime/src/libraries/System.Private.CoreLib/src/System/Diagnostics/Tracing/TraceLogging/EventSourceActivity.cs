@@ -16,8 +16,7 @@ namespace System.Diagnostics.Tracing
     /// Provides support for EventSource activities by marking the start and
     /// end of a particular operation.
     /// </summary>
-    internal sealed class EventSourceActivity
-        : IDisposable
+    internal sealed class EventSourceActivity : IDisposable
     {
         /// <summary>
         /// Initializes a new instance of the EventSourceActivity class that
@@ -208,7 +207,12 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Writes an event to a arbitrary eventSource stamped with the activity ID of this activity.
         /// </summary>
-        public void Write<T>(EventSource source, string? eventName, EventSourceOptions options, T data)
+        public void Write<T>(
+            EventSource source,
+            string? eventName,
+            EventSourceOptions options,
+            T data
+        )
         {
             this.Write(source, eventName, ref options, ref data);
         }
@@ -227,7 +231,11 @@ namespace System.Diagnostics.Tracing
         }
 
 #region private
-        private EventSourceActivity Start<T>(string? eventName, ref EventSourceOptions options, ref T data)
+        private EventSourceActivity Start<T>(
+            string? eventName,
+            ref EventSourceOptions options,
+            ref T data
+        )
         {
             if (this.state != State.Started)
                 throw new InvalidOperationException();
@@ -245,7 +253,13 @@ namespace System.Diagnostics.Tracing
                 newActivity.startStopOptions = options;
                 newActivity.eventName = eventName;
                 newActivity.startStopOptions.Opcode = EventOpcode.Start;
-                this.eventSource.Write(eventName, ref newActivity.startStopOptions, ref newActivity.activityId, ref relatedActivityId, ref data);
+                this.eventSource.Write(
+                    eventName,
+                    ref newActivity.startStopOptions,
+                    ref newActivity.activityId,
+                    ref relatedActivityId,
+                    ref data
+                );
             }
             else
             {
@@ -256,10 +270,15 @@ namespace System.Diagnostics.Tracing
             return newActivity;
         }
 
-        private void Write<T>(EventSource eventSource, string? eventName, ref EventSourceOptions options, ref T data)
+        private void Write<T>(
+            EventSource eventSource,
+            string? eventName,
+            ref EventSourceOptions options,
+            ref T data
+        )
         {
             if (this.state != State.Started)
-                throw new InvalidOperationException();      // Write after stop.
+                throw new InvalidOperationException(); // Write after stop.
             if (eventName == null)
                 throw new ArgumentNullException();
 
@@ -286,7 +305,13 @@ namespace System.Diagnostics.Tracing
                 eventName += "Stop";
             }
             this.startStopOptions.Opcode = EventOpcode.Stop;
-            this.eventSource.Write(eventName, ref this.startStopOptions, ref this.activityId, ref s_empty, ref data);
+            this.eventSource.Write(
+                eventName,
+                ref this.startStopOptions,
+                ref this.activityId,
+                ref s_empty,
+                ref data
+            );
         }
 
         private enum State

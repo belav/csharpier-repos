@@ -22,7 +22,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hmac = new TestHMAC())
             {
-                const string UnknownAlgorithmName = "No known algorithm name has spaces, so this better be invalid...";
+                const string UnknownAlgorithmName =
+                    "No known algorithm name has spaces, so this better be invalid...";
 
                 // Assert.NoThrows is implicit
                 hmac.HashName = UnknownAlgorithmName;
@@ -71,7 +72,9 @@ namespace System.Security.Cryptography.Tests
                 hmac.Key = Array.Empty<byte>();
 
                 byte[] ignored;
-                Assert.Throws<PlatformNotSupportedException>(() => ignored = hmac.ComputeHash(Array.Empty<byte>()));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ignored = hmac.ComputeHash(Array.Empty<byte>())
+                );
             }
         }
 

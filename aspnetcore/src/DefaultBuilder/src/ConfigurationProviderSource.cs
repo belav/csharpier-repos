@@ -23,7 +23,10 @@ internal sealed class ConfigurationProviderSource : IConfigurationSource
 
     // These providers have already been loaded, so no need to reload initially.
     // Otherwise, providers that cannot be reloaded like StreamConfigurationProviders will fail.
-    private sealed class IgnoreFirstLoadConfigurationProvider : IConfigurationProvider, IEnumerable<IConfigurationProvider>, IDisposable
+    private sealed class IgnoreFirstLoadConfigurationProvider
+        : IConfigurationProvider,
+          IEnumerable<IConfigurationProvider>,
+          IDisposable
     {
         private readonly IConfigurationProvider _provider;
 
@@ -66,7 +69,8 @@ internal sealed class ConfigurationProviderSource : IConfigurationSource
         }
 
         // Provide access to the original IConfigurationProvider via a single-element IEnumerable to code that goes out of its way to look for it.
-        public IEnumerator<IConfigurationProvider> GetEnumerator() => GetUnwrappedEnumerable().GetEnumerator();
+        public IEnumerator<IConfigurationProvider> GetEnumerator() =>
+            GetUnwrappedEnumerable().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetUnwrappedEnumerable().GetEnumerator();
 

@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public ForeignKeyEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            IReadOnlyForeignKey foreignKey)
-            : base(eventDefinition, messageGenerator)
+            IReadOnlyForeignKey foreignKey
+        ) : base(eventDefinition, messageGenerator)
         {
             ForeignKey = foreignKey;
         }

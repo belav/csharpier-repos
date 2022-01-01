@@ -25,16 +25,28 @@ internal static partial class Interop
             public TcpState State;
         }
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetEstimatedTcpConnectionCount")]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetEstimatedTcpConnectionCount"
+        )]
         public static extern int GetEstimatedTcpConnectionCount();
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetActiveTcpConnectionInfos")]
-        public static extern unsafe int GetActiveTcpConnectionInfos(NativeTcpConnectionInformation* infos, int* infoCount);
+        public static extern unsafe int GetActiveTcpConnectionInfos(
+            NativeTcpConnectionInformation* infos,
+            int* infoCount
+        );
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetEstimatedUdpListenerCount")]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetEstimatedUdpListenerCount"
+        )]
         public static extern int GetEstimatedUdpListenerCount();
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetActiveUdpListeners")]
-        public static extern unsafe int GetActiveUdpListeners(IPEndPointInfo* infos, int* infoCount);
+        public static extern unsafe int GetActiveUdpListeners(
+            IPEndPointInfo* infos,
+            int* infoCount
+        );
     }
 }

@@ -4,13 +4,13 @@
 // RunBenchmark - .NET Benchmark Performance Harness
 //
 // Note: This harness is currently built as a CoreCLR test case for ease of running
-// against test CORE_ROOT assemblies.   As such, when run with out any parameters, 
+// against test CORE_ROOT assemblies.   As such, when run with out any parameters,
 // it will do nothing and simply return 100.   Use "-run" to actually run tests cases.
 //
 // Usage: RunBenchmarks [options]
-//  
+//
 //  options:
-//  
+//
 //     -f <xmlFile>               specify benchmark xml control file (default benchmarks.xml)
 //     -n <number>                specify number of runs for each benchmark (default is 1)
 //     -w                         specify that warmup run should be done first
@@ -85,10 +85,7 @@ namespace BenchmarkConsoleApplication
         public string SuiteName;
         public List<Benchmark> BenchmarkList;
 
-        public BenchmarkSuite
-        (
-            string suiteName
-        )
+        public BenchmarkSuite(string suiteName)
         {
             SuiteName = suiteName;
             BenchmarkList = new List<Benchmark>();
@@ -102,10 +99,7 @@ namespace BenchmarkConsoleApplication
         public string TagName;
         public List<Benchmark> BenchmarkList;
 
-        public BenchmarkTagSet
-        (
-            string tagName
-        )
+        public BenchmarkTagSet(string tagName)
         {
             TagName = tagName;
             BenchmarkList = new List<Benchmark>();
@@ -129,8 +123,7 @@ namespace BenchmarkConsoleApplication
         public bool UseAVX;
         public int ExpectedResults;
 
-        public Benchmark
-        (
+        public Benchmark(
             string name,
             string suiteName,
             string tags,
@@ -159,7 +152,7 @@ namespace BenchmarkConsoleApplication
     // Benchmark Results - includes benchmark, array of times for each iteration of the benchmark
     //                     minimum time, maximum time, average time, standard deviation and number
     //                     of failures.
- 
+
     internal class Results
     {
         public Benchmark Benchmark;
@@ -170,11 +163,7 @@ namespace BenchmarkConsoleApplication
         public double StandardDeviation;
         public int Failures;
 
-        public Results
-        (
-            Benchmark benchmark,
-            int numberOfRuns
-        )
+        public Results(Benchmark benchmark, int numberOfRuns)
         {
             Benchmark = benchmark;
             Times = new long[numberOfRuns + 1]; // leave empty slot at index 0, not used.
@@ -186,7 +175,7 @@ namespace BenchmarkConsoleApplication
         }
     }
 
-    // Controls - command line controls used to 
+    // Controls - command line controls used to
 
     internal class Controls
     {
@@ -246,16 +235,17 @@ namespace BenchmarkConsoleApplication
             ExcludeTagList = new List<string>()
         };
 
-        public Dictionary<string, BenchmarkSuite>
-            BenchmarkSuiteTable = new Dictionary<string, BenchmarkSuite>();
-        public Dictionary<string, BenchmarkTagSet>
-            BenchmarkTagSetTable = new Dictionary<string, BenchmarkTagSet>();
-        public List<Benchmark>
-            BenchmarkList = new List<Benchmark>();
-        public List<Benchmark>
-            SelectedBenchmarkList = new List<Benchmark>();
-        public List<Results>
-            ResultsList = new List<Results>();
+        public Dictionary<string, BenchmarkSuite> BenchmarkSuiteTable = new Dictionary<
+            string,
+            BenchmarkSuite
+        >();
+        public Dictionary<string, BenchmarkTagSet> BenchmarkTagSetTable = new Dictionary<
+            string,
+            BenchmarkTagSet
+        >();
+        public List<Benchmark> BenchmarkList = new List<Benchmark>();
+        public List<Benchmark> SelectedBenchmarkList = new List<Benchmark>();
+        public List<Results> ResultsList = new List<Results>();
 
         public int NumberOfBenchmarksRun;
         public int Failures = 0;
@@ -309,7 +299,7 @@ namespace BenchmarkConsoleApplication
             Controls controls = Controls;
             try
             {
-                for (int i = 0; i < args.Length;)
+                for (int i = 0; i < args.Length; )
                 {
                     string arg = args[i++];
                     string benchmark;
@@ -387,12 +377,18 @@ namespace BenchmarkConsoleApplication
                             break;
                         case "-tags":
                             arg = args[i++];
-                            tags = arg.Split(ListSeparatorCharSet, StringSplitOptions.RemoveEmptyEntries);
+                            tags = arg.Split(
+                                ListSeparatorCharSet,
+                                StringSplitOptions.RemoveEmptyEntries
+                            );
                             controls.IncludeTagList.AddRange(tags);
                             break;
                         case "-notags":
                             arg = args[i++];
-                            tags = arg.Split(ListSeparatorCharSet, StringSplitOptions.RemoveEmptyEntries);
+                            tags = arg.Split(
+                                ListSeparatorCharSet,
+                                StringSplitOptions.RemoveEmptyEntries
+                            );
                             controls.ExcludeTagList.AddRange(tags);
                             break;
                         case "-runner":
@@ -428,35 +424,62 @@ namespace BenchmarkConsoleApplication
             Console.WriteLine("");
             Console.WriteLine("   options: ");
             Console.WriteLine("");
-            Console.WriteLine("   -f <xmlFile>   specify benchmark xml file (default coreclr_benchmarks.xml)");
-            Console.WriteLine("   -n <number>    specify number of runs for each benchmark (default is 1)");
+            Console.WriteLine(
+                "   -f <xmlFile>   specify benchmark xml file (default coreclr_benchmarks.xml)"
+            );
+            Console.WriteLine(
+                "   -n <number>    specify number of runs for each benchmark (default is 1)"
+            );
             Console.WriteLine("   -w             specify that warmup run should be done first");
             Console.WriteLine("   -v             run in verbose mode");
             Console.WriteLine("   -r <rootDir>   specify root directory to run from");
-            Console.WriteLine("   -s <suite>     specify a single benchmark suite to run (by name)");
-            Console.WriteLine("   -i <benchmark> specify benchmark to include by name (multiple -i's allowed)");
-            Console.WriteLine("   -e <benchmark> specify benchmark to exclude by name (multiple -e's allowed)");
-            Console.WriteLine("   -list          prints a list of the benchmark names and does nothing else");
-            Console.WriteLine("   -listsuites    prints a list of the suite names and does nothing else");
-            Console.WriteLine("   -listtags      prints a list of the tag names and does nothing else");
-            Console.WriteLine("   -listexes      prints a list of the benchmark executables and does nothing else");
-            Console.WriteLine("   -runner        runner to be used to run benchmarks (e.g. corerun, default is DesktopCLR)");
-            Console.WriteLine("   -complus_version <version> run benchmarks on particular DesktopCLR version");
+            Console.WriteLine(
+                "   -s <suite>     specify a single benchmark suite to run (by name)"
+            );
+            Console.WriteLine(
+                "   -i <benchmark> specify benchmark to include by name (multiple -i's allowed)"
+            );
+            Console.WriteLine(
+                "   -e <benchmark> specify benchmark to exclude by name (multiple -e's allowed)"
+            );
+            Console.WriteLine(
+                "   -list          prints a list of the benchmark names and does nothing else"
+            );
+            Console.WriteLine(
+                "   -listsuites    prints a list of the suite names and does nothing else"
+            );
+            Console.WriteLine(
+                "   -listtags      prints a list of the tag names and does nothing else"
+            );
+            Console.WriteLine(
+                "   -listexes      prints a list of the benchmark executables and does nothing else"
+            );
+            Console.WriteLine(
+                "   -runner        runner to be used to run benchmarks (e.g. corerun, default is DesktopCLR)"
+            );
+            Console.WriteLine(
+                "   -complus_version <version> run benchmarks on particular DesktopCLR version"
+            );
             Console.WriteLine("   -run           run benchmarks");
-            Console.WriteLine("   -norun         prints what would be run, but nothing is executed");
+            Console.WriteLine(
+                "   -norun         prints what would be run, but nothing is executed"
+            );
             Console.WriteLine("   -testcase      run as CoreCLR test case (default)");
-            Console.WriteLine("   -norun         prints what would be run, but don't run benchmarks");
+            Console.WriteLine(
+                "   -norun         prints what would be run, but don't run benchmarks"
+            );
             Console.WriteLine("   -tags <tags>   specify benchmarks with tags to include");
             Console.WriteLine("   -notags <tags> specify benchmarks with tags to exclude");
-            Console.WriteLine("   -csvfile       specify name of Comma Seperated Value output file (default coreclr_benchmarks.csv)");
+            Console.WriteLine(
+                "   -csvfile       specify name of Comma Seperated Value output file (default coreclr_benchmarks.csv)"
+            );
 
             Exit(-1);
         }
 
         // Add a benchmark to the list of benchmarks read in from the .XML file.
 
-        public void AddBenchmark
-        (
+        public void AddBenchmark(
             string name,
             string suiteName,
             string tags,
@@ -473,8 +496,18 @@ namespace BenchmarkConsoleApplication
             BenchmarkTagSet benchmarkTagSet;
             Benchmark benchmark;
 
-            benchmark = new Benchmark(name, suiteName, tags,
-                workingDirectory, exeName, exeArgs, doRunInShell, useSSE, useAVX, expectedResults);
+            benchmark = new Benchmark(
+                name,
+                suiteName,
+                tags,
+                workingDirectory,
+                exeName,
+                exeArgs,
+                doRunInShell,
+                useSSE,
+                useAVX,
+                expectedResults
+            );
             BenchmarkList.Add(benchmark);
 
             if (!BenchmarkSuiteTable.TryGetValue(suiteName, out benchmarkSuite))
@@ -484,7 +517,10 @@ namespace BenchmarkConsoleApplication
             }
             benchmarkSuite.BenchmarkList.Add(benchmark);
 
-            string[] tagList = tags.Split(ListSeparatorCharSet, StringSplitOptions.RemoveEmptyEntries);
+            string[] tagList = tags.Split(
+                ListSeparatorCharSet,
+                StringSplitOptions.RemoveEmptyEntries
+            );
             foreach (string tag in tagList)
             {
                 if (!BenchmarkTagSetTable.TryGetValue(tag, out benchmarkTagSet))
@@ -514,17 +550,16 @@ namespace BenchmarkConsoleApplication
 
         // Constructed platform specific field name given either Unix style or Windows style
         // directory name.
-   
-        public string PlatformSpecificDirectoryName
-        (
-            string directoryName
-        )
+
+        public string PlatformSpecificDirectoryName(string directoryName)
         {
             if (directoryName == "")
                 return "";
 
-            string[] path = directoryName.Split(DirectorySeparatorCharSet,
-                    StringSplitOptions.RemoveEmptyEntries);
+            string[] path = directoryName.Split(
+                DirectorySeparatorCharSet,
+                StringSplitOptions.RemoveEmptyEntries
+            );
             string platformSpecificDirectoryName = System.IO.Path.Combine(path);
 
             bool absolutePath = false;
@@ -541,18 +576,15 @@ namespace BenchmarkConsoleApplication
 
             if (absolutePath)
             {
-                platformSpecificDirectoryName = (Path.DirectorySeparatorChar + platformSpecificDirectoryName);
+                platformSpecificDirectoryName = (
+                    Path.DirectorySeparatorChar + platformSpecificDirectoryName
+                );
             }
 
             return platformSpecificDirectoryName;
         }
 
-        public static bool GetBool
-        (
-            XElement node,
-            string name,
-            bool optional = true
-        )
+        public static bool GetBool(XElement node, string name, bool optional = true)
         {
             string value = node.Element(name)?.Value;
 
@@ -566,12 +598,7 @@ namespace BenchmarkConsoleApplication
             throw new Exception("bad boolean value: " + value);
         }
 
-        public static int GetInteger
-        (
-            XElement node,
-            string name,
-            bool optional = true
-        )
+        public static int GetInteger(XElement node, string name, bool optional = true)
         {
             string value = node.Element(name)?.Value;
 
@@ -610,7 +637,7 @@ namespace BenchmarkConsoleApplication
             // If we aren't being asked to run benchmarks or print results
             // then we must be being executed as a simple CoreCLR test case.
             // Don't bother reading XML file.
- 
+
             if (doRunAsTestCase)
             {
                 return;
@@ -622,14 +649,14 @@ namespace BenchmarkConsoleApplication
 
             XElement benchmarkXml = XElement.Load(benchmarkXmlFullFileName);
 
-            // Get root directory for benchmark system.  Command line argument overrides 
+            // Get root directory for benchmark system.  Command line argument overrides
             // specification in benchmark control file.
 
             benchmarkRootDirectoryName = Controls.BenchmarksRootDirectory;
             if (benchmarkRootDirectoryName == "")
             {
-                benchmarkRootDirectoryName = 
-                Controls.BenchmarksRootDirectory = benchmarkRootDirectoryName;
+                benchmarkRootDirectoryName = Controls.BenchmarksRootDirectory =
+                    benchmarkRootDirectoryName;
             }
             benchmarkRootDirectoryName = PlatformSpecificDirectoryName(benchmarkRootDirectoryName);
             Controls.BenchmarksRootDirectory = benchmarkRootDirectoryName;
@@ -656,8 +683,18 @@ namespace BenchmarkConsoleApplication
                     doRunInShell = GetBool(benchmark, "run-in-shell");
                     expectedResults = GetInteger(benchmark, "expected-results");
                     tags = benchmark.Element("tags")?.Value ?? "";
-                    AddBenchmark(benchmarkName, benchmarkSuiteName, tags, benchmarkDirectoryName,
-                        benchmarkExecutableName, benchmarkArgs, doRunInShell, useSSE, useAVX, expectedResults);
+                    AddBenchmark(
+                        benchmarkName,
+                        benchmarkSuiteName,
+                        tags,
+                        benchmarkDirectoryName,
+                        benchmarkExecutableName,
+                        benchmarkArgs,
+                        doRunInShell,
+                        useSSE,
+                        useAVX,
+                        expectedResults
+                    );
                 }
             }
 
@@ -737,7 +774,10 @@ namespace BenchmarkConsoleApplication
             foreach (var benchmark in benchmarkList)
             {
                 string benchmarksRootDirectory = Controls.BenchmarksRootDirectory;
-                string benchmarkDirectory = System.IO.Path.Combine(benchmarksRootDirectory, benchmark.WorkingDirectory);
+                string benchmarkDirectory = System.IO.Path.Combine(
+                    benchmarksRootDirectory,
+                    benchmark.WorkingDirectory
+                );
                 string workingDirectory = benchmarkDirectory;
                 string executableName = System.IO.Path.Combine(workingDirectory, benchmark.ExeName);
 
@@ -745,7 +785,7 @@ namespace BenchmarkConsoleApplication
             }
         }
 
-        // Select benchmarks to run based on controls for suite, tag, or specfic 
+        // Select benchmarks to run based on controls for suite, tag, or specfic
         // benchmark inclusion/exclusion.
 
         public void SelectBenchmarks()
@@ -830,7 +870,10 @@ namespace BenchmarkConsoleApplication
             bool doVerbose = Controls.DoVerbose;
             string complusVersion = Controls.ComplusVersion;
             string benchmarksRootDirectory = Controls.BenchmarksRootDirectory;
-            string benchmarkDirectory = System.IO.Path.Combine(benchmarksRootDirectory, benchmark.WorkingDirectory);
+            string benchmarkDirectory = System.IO.Path.Combine(
+                benchmarksRootDirectory,
+                benchmark.WorkingDirectory
+            );
             bool doRunInShell = benchmark.DoRunInShell;
             bool useSSE = benchmark.UseSSE;
             bool useAVX = benchmark.UseAVX;
@@ -918,8 +961,11 @@ namespace BenchmarkConsoleApplication
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine("Could not launch test {0} exception: {1}",
-                        startInfo.FileName, exception);
+                    Console.WriteLine(
+                        "Could not launch test {0} exception: {1}",
+                        startInfo.FileName,
+                        exception
+                    );
                     exitCode = failureResults;
                 }
                 clockTime.Stop();
@@ -942,7 +988,11 @@ namespace BenchmarkConsoleApplication
                     }
                     else
                     {
-                        Console.Write("FAILED(expected={0}, actual={1})", expectedResults, actualResults);
+                        Console.Write(
+                            "FAILED(expected={0}, actual={1})",
+                            expectedResults,
+                            actualResults
+                        );
                     }
                     if (run == 0)
                     {
@@ -990,7 +1040,11 @@ namespace BenchmarkConsoleApplication
                 else
                 {
                     standardDeviation = 100.0 * (Math.Sqrt(variance) / a); // stddev as a percentage
-                    standardDeviation = Math.Round(standardDeviation, 2, MidpointRounding.AwayFromZero);
+                    standardDeviation = Math.Round(
+                        standardDeviation,
+                        2,
+                        MidpointRounding.AwayFromZero
+                    );
                 }
             }
 
@@ -1049,18 +1103,26 @@ namespace BenchmarkConsoleApplication
 
             using (TextWriter outputFile = File.CreateText(benchmarkCsvFileName))
             {
-                outputFile.WriteLine("Benchmark,Minimum(ms),Maximum(ms),Average(ms),StdDev(%),Passed/Failed(#)");
+                outputFile.WriteLine(
+                    "Benchmark,Minimum(ms),Maximum(ms),Average(ms),StdDev(%),Passed/Failed(#)"
+                );
                 foreach (Results results in ResultsList)
                 {
                     string name = results.Benchmark.Name;
                     outputFile.Write("{0},", name);
-    
+
                     long minimum = results.Minimum;
                     long maximum = results.Maximum;
                     long average = results.Average;
                     double standardDeviation = results.StandardDeviation;
-                    outputFile.Write("{0},{1},{2},{3}", minimum, maximum, average, standardDeviation);
-    
+                    outputFile.Write(
+                        "{0},{1},{2},{3}",
+                        minimum,
+                        maximum,
+                        average,
+                        standardDeviation
+                    );
+
                     numberOfFailuresPerBenchmark = results.Failures;
                     numberOfPasses = (numberOfPasses < 0) ? 0 : numberOfPasses;
                     if (numberOfFailuresPerBenchmark > 0)
@@ -1073,9 +1135,13 @@ namespace BenchmarkConsoleApplication
                     }
                     outputFile.WriteLine("");
                 }
-    
-                outputFile.WriteLine("TOTAL BENCHMARKS({0}), PASSED({1}), FAILED({2})",
-                        numberOfBenchmarksRun, numberOfPasses, numberOfFailures);
+
+                outputFile.WriteLine(
+                    "TOTAL BENCHMARKS({0}), PASSED({1}), FAILED({2})",
+                    numberOfBenchmarksRun,
+                    numberOfPasses,
+                    numberOfFailures
+                );
             }
         }
     }

@@ -21,7 +21,10 @@ namespace Microsoft.AspNetCore.Http.Features
         /// <summary>
         /// Gets the default <see cref="FeatureReference{T}"/>.
         /// </summary>
-        public static readonly FeatureReference<T> Default = new FeatureReference<T>(default(T), -1);
+        public static readonly FeatureReference<T> Default = new FeatureReference<T>(
+            default(T),
+            -1
+        );
 
         /// <summary>
         /// Gets the feature of type <typeparamref name="T"/> from <paramref name="features"/>.

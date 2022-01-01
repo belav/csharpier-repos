@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var selector = new TestLanguageBasedSelector(
                 new TestLanguageBasedService("C#"),
                 new TestLanguageBasedService("F#"),
-                vbService);
+                vbService
+            );
 
             var result = selector.Select("VB");
 
@@ -28,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var legacyService = new TestLanguageBasedService(null);
             var selector = new TestLanguageBasedSelector(
                 legacyService,
-                new TestLanguageBasedService("C#"));
+                new TestLanguageBasedService("C#")
+            );
 
             var result = selector.Select("C#");
 
@@ -53,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var selector = new TestLanguageBasedSelector(
                 csharpService,
                 new TestLanguageBasedService("F#"),
-                new TestLanguageBasedService("VB"));
+                new TestLanguageBasedService("VB")
+            );
 
             var result = selector.Select(null);
 
@@ -67,7 +70,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             var ex = Assert.Throws<OperationException>(() => selector.Select("VB"));
 
-            Assert.Equal(DesignStrings.NoLanguageService("VB", "TestLanguageBasedService"), ex.Message);
+            Assert.Equal(
+                DesignStrings.NoLanguageService("VB", "TestLanguageBasedService"),
+                ex.Message
+            );
         }
 
         [ConditionalFact]
@@ -76,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var lastService = new TestLanguageBasedService("C#");
             var selector = new TestLanguageBasedSelector(
                 new TestLanguageBasedService("C#"),
-                lastService);
+                lastService
+            );
 
             var result = selector.Select("C#");
 
@@ -86,15 +93,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private class TestLanguageBasedSelector : LanguageBasedSelector<TestLanguageBasedService>
         {
             public TestLanguageBasedSelector(params TestLanguageBasedService[] services)
-                : base(services)
-            {
-            }
+                : base(services) { }
         }
 
         private class TestLanguageBasedService : ILanguageBasedService
         {
-            public TestLanguageBasedService(string language)
-                => Language = language;
+            public TestLanguageBasedService(string language) => Language = language;
 
             public string Language { get; }
         }

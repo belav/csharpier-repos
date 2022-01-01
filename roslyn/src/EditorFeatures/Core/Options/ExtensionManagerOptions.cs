@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExtensionManagerOptions()
-        {
-        }
+        public ExtensionManagerOptions() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            DisableCrashingExtensions);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(DisableCrashingExtensions);
 
-        public static readonly Option<bool> DisableCrashingExtensions = new(
-            nameof(ExtensionManagerOptions), nameof(DisableCrashingExtensions), defaultValue: true);
+        public static readonly Option<bool> DisableCrashingExtensions =
+            new(
+                nameof(ExtensionManagerOptions),
+                nameof(DisableCrashingExtensions),
+                defaultValue: true
+            );
     }
 }

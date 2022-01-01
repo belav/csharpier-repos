@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             int lineNumber,
             ImmutableArray<TaggedText> displayTexts,
             Glyph glyph,
-            ImmutableArray<InheritanceTargetItem> targetItems)
+            ImmutableArray<InheritanceTargetItem> targetItems
+        )
         {
             LineNumber = lineNumber;
             DisplayTexts = displayTexts;
@@ -45,11 +46,22 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         public static async ValueTask<InheritanceMarginItem> ConvertAsync(
             Solution solution,
             SerializableInheritanceMarginItem serializableItem,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var targetItems = await serializableItem.TargetItems.SelectAsArrayAsync(
-                    (item, _) => InheritanceTargetItem.ConvertAsync(solution, item, cancellationToken), cancellationToken).ConfigureAwait(false);
-            return new InheritanceMarginItem(serializableItem.LineNumber, serializableItem.DisplayTexts, serializableItem.Glyph, targetItems);
+            var targetItems = await serializableItem.TargetItems
+                .SelectAsArrayAsync(
+                    (item, _) =>
+                        InheritanceTargetItem.ConvertAsync(solution, item, cancellationToken),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return new InheritanceMarginItem(
+                serializableItem.LineNumber,
+                serializableItem.DisplayTexts,
+                serializableItem.Glyph,
+                targetItems
+            );
         }
     }
 }

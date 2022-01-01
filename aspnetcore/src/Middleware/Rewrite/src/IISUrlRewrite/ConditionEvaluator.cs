@@ -5,7 +5,11 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 internal static class ConditionEvaluator
 {
-    public static MatchResults Evaluate(ConditionCollection conditions, RewriteContext context, BackReferenceCollection? backReferences)
+    public static MatchResults Evaluate(
+        ConditionCollection conditions,
+        RewriteContext context,
+        BackReferenceCollection? backReferences
+    )
     {
         BackReferenceCollection? prevBackReferences = null;
         MatchResults? condResult = null;

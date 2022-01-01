@@ -12,9 +12,7 @@ namespace AutoMapper.Internal
     {
         public static readonly MemberPath Empty = new MemberPath(Array.Empty<MemberInfo>());
         public readonly MemberInfo[] Members;
-        public MemberPath(Stack<Member> members) : this(members.ToMemberInfos())
-        {
-        }
+        public MemberPath(Stack<Member> members) : this(members.ToMemberInfos()) { }
 
         public MemberPath(MemberInfo[] members) => Members = members;
 
@@ -28,26 +26,28 @@ namespace AutoMapper.Internal
 
         public override bool Equals(object obj)
         {
-            if(obj is null) return false;
+            if (obj is null)
+                return false;
             return obj is MemberPath path && Equals(path);
         }
 
         public override int GetHashCode()
         {
             var hashCode = new HashCode();
-            foreach(var member in Members)
+            foreach (var member in Members)
             {
                 hashCode.Add(member);
             }
             return hashCode.ToHashCode();
         }
 
-        public override string ToString()
-            => string.Join(".", Members.Select(mi => mi.Name));
+        public override string ToString() => string.Join(".", Members.Select(mi => mi.Name));
 
-        public static bool operator==(in MemberPath left, in MemberPath right) => left.Equals(right);
+        public static bool operator ==(in MemberPath left, in MemberPath right) =>
+            left.Equals(right);
 
-        public static bool operator!=(in MemberPath left, in MemberPath right) => !left.Equals(right);
+        public static bool operator !=(in MemberPath left, in MemberPath right) =>
+            !left.Equals(right);
 
         public bool StartsWith(in MemberPath path)
         {
@@ -65,6 +65,7 @@ namespace AutoMapper.Internal
             return true;
         }
 
-        public MemberPath Concat(IEnumerable<MemberInfo> memberInfos) => new MemberPath(Members.Concat(memberInfos).ToArray());
+        public MemberPath Concat(IEnumerable<MemberInfo> memberInfos) =>
+            new MemberPath(Members.Concat(memberInfos).ToArray());
     }
 }

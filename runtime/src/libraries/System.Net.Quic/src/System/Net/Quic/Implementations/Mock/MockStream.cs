@@ -40,7 +40,8 @@ namespace System.Net.Quic.Implementations.Mock
             }
         }
 
-        private StreamBuffer? ReadStreamBuffer => _isInitiator ? _streamState._inboundStreamBuffer : _streamState._outboundStreamBuffer;
+        private StreamBuffer? ReadStreamBuffer =>
+            _isInitiator ? _streamState._inboundStreamBuffer : _streamState._outboundStreamBuffer;
 
         internal override bool CanTimeout => false;
 
@@ -73,7 +74,10 @@ namespace System.Net.Quic.Implementations.Mock
             return streamBuffer.Read(buffer);
         }
 
-        internal override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        internal override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
@@ -83,7 +87,9 @@ namespace System.Net.Quic.Implementations.Mock
                 throw new NotSupportedException();
             }
 
-            int bytesRead = await streamBuffer.ReadAsync(buffer, cancellationToken).ConfigureAwait(false);
+            int bytesRead = await streamBuffer
+                .ReadAsync(buffer, cancellationToken)
+                .ConfigureAwait(false);
             if (bytesRead == 0)
             {
                 if (_connection.ConnectionError is long connectonError)
@@ -91,17 +97,22 @@ namespace System.Net.Quic.Implementations.Mock
                     throw new QuicConnectionAbortedException(connectonError);
                 }
 
-                long errorCode = _isInitiator ? _streamState._inboundReadErrorCode : _streamState._outboundReadErrorCode;
+                long errorCode = _isInitiator
+                    ? _streamState._inboundReadErrorCode
+                    : _streamState._outboundReadErrorCode;
                 if (errorCode != 0)
                 {
-                    throw (errorCode == -1) ? new QuicOperationAbortedException() : new QuicStreamAbortedException(errorCode);
+                    throw (errorCode == -1)
+                        ? new QuicOperationAbortedException()
+                        : new QuicStreamAbortedException(errorCode);
                 }
             }
 
             return bytesRead;
         }
 
-        private StreamBuffer? WriteStreamBuffer => _isInitiator ? _streamState._outboundStreamBuffer : _streamState._inboundStreamBuffer;
+        private StreamBuffer? WriteStreamBuffer =>
+            _isInitiator ? _streamState._outboundStreamBuffer : _streamState._inboundStreamBuffer;
 
         internal override bool CanWrite => !_disposed && WriteStreamBuffer is not null;
 
@@ -122,12 +133,19 @@ namespace System.Net.Quic.Implementations.Mock
             streamBuffer.Write(buffer);
         }
 
-        internal override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             return WriteAsync(buffer, endStream: false, cancellationToken);
         }
 
-        internal override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, bool endStream, CancellationToken cancellationToken = default)
+        internal override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            bool endStream,
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
             if (Volatile.Read(ref _writesCanceled))
@@ -147,17 +165,22 @@ namespace System.Net.Quic.Implementations.Mock
                 throw new QuicConnectionAbortedException(connectonError);
             }
 
-            long errorCode = _isInitiator ? _streamState._inboundWriteErrorCode : _streamState._outboundWriteErrorCode;
+            long errorCode = _isInitiator
+                ? _streamState._inboundWriteErrorCode
+                : _streamState._outboundWriteErrorCode;
             if (errorCode != 0)
             {
                 throw new QuicStreamAbortedException(errorCode);
             }
 
-            using var registration = cancellationToken.UnsafeRegister(static s =>
-            {
-                var stream = (MockStream)s!;
-                Volatile.Write(ref stream._writesCanceled, true);
-            }, this);
+            using var registration = cancellationToken.UnsafeRegister(
+                static s =>
+                {
+                    var stream = (MockStream)s!;
+                    Volatile.Write(ref stream._writesCanceled, true);
+                },
+                this
+            );
 
             await streamBuffer.WriteAsync(buffer, cancellationToken).ConfigureAwait(false);
 
@@ -168,16 +191,26 @@ namespace System.Net.Quic.Implementations.Mock
             }
         }
 
-        internal override ValueTask WriteAsync(ReadOnlySequence<byte> buffers, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlySequence<byte> buffers,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }
-        internal override ValueTask WriteAsync(ReadOnlySequence<byte> buffers, bool endStream, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlySequence<byte> buffers,
+            bool endStream,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }
 
-        internal override async ValueTask WriteAsync(ReadOnlyMemory<ReadOnlyMemory<byte>> buffers, CancellationToken cancellationToken = default)
+        internal override async ValueTask WriteAsync(
+            ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
+            CancellationToken cancellationToken = default
+        )
         {
             for (int i = 0; i < buffers.Length; i++)
             {
@@ -185,7 +218,11 @@ namespace System.Net.Quic.Implementations.Mock
             }
         }
 
-        internal override ValueTask WriteAsync(ReadOnlyMemory<ReadOnlyMemory<byte>> buffers, bool endStream, CancellationToken cancellationToken = default)
+        internal override ValueTask WriteAsync(
+            ReadOnlyMemory<ReadOnlyMemory<byte>> buffers,
+            bool endStream,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new NotImplementedException();
         }
@@ -207,12 +244,16 @@ namespace System.Net.Quic.Implementations.Mock
             if (_isInitiator)
             {
                 _streamState._outboundWriteErrorCode = errorCode;
-                _streamState._inboundWritesCompletedTcs.TrySetException(new QuicStreamAbortedException(errorCode));
+                _streamState._inboundWritesCompletedTcs.TrySetException(
+                    new QuicStreamAbortedException(errorCode)
+                );
             }
             else
             {
                 _streamState._inboundWriteErrorCode = errorCode;
-                _streamState._outboundWritesCompletedTcs.TrySetException(new QuicOperationAbortedException());
+                _streamState._outboundWritesCompletedTcs.TrySetException(
+                    new QuicOperationAbortedException()
+                );
             }
 
             ReadStreamBuffer?.AbortRead();
@@ -223,12 +264,16 @@ namespace System.Net.Quic.Implementations.Mock
             if (_isInitiator)
             {
                 _streamState._outboundReadErrorCode = errorCode;
-                _streamState._outboundWritesCompletedTcs.TrySetException(new QuicStreamAbortedException(errorCode));
+                _streamState._outboundWritesCompletedTcs.TrySetException(
+                    new QuicStreamAbortedException(errorCode)
+                );
             }
             else
             {
                 _streamState._inboundReadErrorCode = errorCode;
-                _streamState._inboundWritesCompletedTcs.TrySetException(new QuicOperationAbortedException());
+                _streamState._inboundWritesCompletedTcs.TrySetException(
+                    new QuicOperationAbortedException()
+                );
             }
 
             WriteStreamBuffer?.EndWrite();
@@ -290,16 +335,19 @@ namespace System.Net.Quic.Implementations.Mock
             return default;
         }
 
-        internal override ValueTask WaitForWriteCompletionAsync(CancellationToken cancellationToken = default)
+        internal override ValueTask WaitForWriteCompletionAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
             return new ValueTask(WritesCompletedTcs.Task);
         }
 
-        private TaskCompletionSource WritesCompletedTcs => _isInitiator
-            ? _streamState._outboundWritesCompletedTcs
-            : _streamState._inboundWritesCompletedTcs;
+        private TaskCompletionSource WritesCompletedTcs =>
+            _isInitiator
+                ? _streamState._outboundWritesCompletedTcs
+                : _streamState._inboundWritesCompletedTcs;
 
         internal sealed class StreamState
         {
@@ -328,10 +376,17 @@ namespace System.Net.Quic.Implementations.Mock
             public StreamState(long streamId, bool bidirectional)
             {
                 _streamId = streamId;
-                _outboundStreamBuffer = new StreamBuffer(initialBufferSize: InitialBufferSize, maxBufferSize: MaxBufferSize);
+                _outboundStreamBuffer = new StreamBuffer(
+                    initialBufferSize: InitialBufferSize,
+                    maxBufferSize: MaxBufferSize
+                );
                 _inboundStreamBuffer = (bidirectional ? new StreamBuffer() : null);
-                _outboundWritesCompletedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-                _inboundWritesCompletedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                _outboundWritesCompletedTcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+                _inboundWritesCompletedTcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
             }
         }
     }

@@ -13,12 +13,14 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
 public class AvoidHtmlPartialAnalyzerTest
 {
-    private static readonly DiagnosticDescriptor DiagnosticDescriptor = DiagnosticDescriptors.MVC1000_HtmlHelperPartialShouldBeAvoided;
+    private static readonly DiagnosticDescriptor DiagnosticDescriptor =
+        DiagnosticDescriptors.MVC1000_HtmlHelperPartialShouldBeAvoided;
 
     [Fact]
     public Task NoDiagnosticsAreReturned_ForNonUseOfHtmlPartial()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -60,7 +62,8 @@ namespace AspNetCore
     [Fact]
     public Task NoDiagnosticsAreReturned_ForUseOfHtmlPartialAsync()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -92,14 +95,14 @@ namespace AspNetCore
 }
 #pragma warning restore 1591";
 
-
         return VerifyAnalyzerAsync(source, DiagnosticResult.EmptyDiagnosticResults);
     }
 
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfHtmlPartial()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -144,7 +147,8 @@ namespace AspNetCore
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfHtmlPartial_WithAdditionalParameters()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -190,7 +194,8 @@ namespace AspNetCore
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfHtmlPartial_InSections()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -237,7 +242,8 @@ namespace AspNetCore
     [Fact]
     public Task NoDiagnosticsAreReturned_ForUseOfRenderPartialAsync()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -278,7 +284,8 @@ namespace AspNetCore
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfRenderPartial()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -322,7 +329,8 @@ namespace AspNetCore
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfRenderPartial_WithAdditionalParameters()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -367,7 +375,8 @@ namespace AspNetCore
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfRenderPartial_InSections()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     using System;
@@ -423,13 +432,17 @@ namespace AspNetCore
         return test.RunAsync();
     }
 
-    internal sealed class AvoidHtmlPartialCSharpAnalzyerTest : CSharpAnalyzerTest<AvoidHtmlPartialAnalyzer, XUnitVerifier>
+    internal sealed class AvoidHtmlPartialCSharpAnalzyerTest
+        : CSharpAnalyzerTest<AvoidHtmlPartialAnalyzer, XUnitVerifier>
     {
-        public AvoidHtmlPartialCSharpAnalzyerTest(ImmutableArray<MetadataReference> metadataReferences)
+        public AvoidHtmlPartialCSharpAnalzyerTest(
+            ImmutableArray<MetadataReference> metadataReferences
+        )
         {
             TestState.AdditionalReferences.AddRange(metadataReferences);
         }
 
-        protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() => new[] { new AvoidHtmlPartialAnalyzer() };
+        protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() =>
+            new[] { new AvoidHtmlPartialAnalyzer() };
     }
 }

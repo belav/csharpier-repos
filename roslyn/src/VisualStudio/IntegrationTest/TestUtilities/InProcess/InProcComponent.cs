@@ -32,8 +32,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected InProcComponent() { }
 
-        private static Dispatcher CurrentApplicationDispatcher
-            => Application.Current.Dispatcher;
+        private static Dispatcher CurrentApplicationDispatcher => Application.Current.Dispatcher;
 
         protected static JoinableTaskFactory JoinableTaskFactory
         {
@@ -41,7 +40,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 if (_joinableTaskFactory is null)
                 {
-                    Interlocked.CompareExchange(ref _joinableTaskFactory, ThreadHelper.JoinableTaskFactory.WithPriority(CurrentApplicationDispatcher, DispatcherPriority.Background), null);
+                    Interlocked.CompareExchange(
+                        ref _joinableTaskFactory,
+                        ThreadHelper.JoinableTaskFactory.WithPriority(
+                            CurrentApplicationDispatcher,
+                            DispatcherPriority.Background
+                        ),
+                        null
+                    );
                 }
 
                 return _joinableTaskFactory;
@@ -50,26 +56,38 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected static void InvokeOnUIThread(Action<CancellationToken> action)
         {
-            using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
-            var operation = JoinableTaskFactory.RunAsync(async () =>
-            {
-                await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
+            using var cancellationTokenSource = new CancellationTokenSource(
+                Helper.HangMitigatingTimeout
+            );
+            var operation = JoinableTaskFactory.RunAsync(
+                async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
 
-                action(cancellationTokenSource.Token);
-            });
+                    action(cancellationTokenSource.Token);
+                }
+            );
 
             operation.Task.Wait(cancellationTokenSource.Token);
         }
 
         protected static T InvokeOnUIThread<T>(Func<CancellationToken, T> action)
         {
-            using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
-            var operation = JoinableTaskFactory.RunAsync(async () =>
-            {
-                await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
+            using var cancellationTokenSource = new CancellationTokenSource(
+                Helper.HangMitigatingTimeout
+            );
+            var operation = JoinableTaskFactory.RunAsync(
+                async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
 
-                return action(cancellationTokenSource.Token);
-            });
+                    return action(cancellationTokenSource.Token);
+                }
+            );
 
             operation.Task.Wait(cancellationTokenSource.Token);
             return operation.Task.Result;
@@ -77,24 +95,25 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected static TInterface GetGlobalService<TService, TInterface>()
             where TService : class
-            where TInterface : class
-        => InvokeOnUIThread(cancellationToken => (TInterface)ServiceProvider.GlobalProvider.GetService(typeof(TService)));
+            where TInterface : class =>
+            InvokeOnUIThread(
+                cancellationToken =>
+                    (TInterface)ServiceProvider.GlobalProvider.GetService(typeof(TService))
+            );
 
-        protected static TService GetComponentModelService<TService>()
-            where TService : class
-         => InvokeOnUIThread(cancellationToken => GetComponentModel().GetService<TService>());
+        protected static TService GetComponentModelService<TService>() where TService : class =>
+            InvokeOnUIThread(cancellationToken => GetComponentModel().GetService<TService>());
 
-        protected static TestingOnly_WaitingService GetWaitingService()
-            => GetComponentModel().DefaultExportProvider.GetExport<TestingOnly_WaitingService>().Value;
+        protected static TestingOnly_WaitingService GetWaitingService() =>
+            GetComponentModel().DefaultExportProvider.GetExport<TestingOnly_WaitingService>().Value;
 
-        protected static DTE GetDTE()
-            => GetGlobalService<SDTE, DTE>();
+        protected static DTE GetDTE() => GetGlobalService<SDTE, DTE>();
 
-        protected static IComponentModel GetComponentModel()
-            => GetGlobalService<SComponentModel, IComponentModel>();
+        protected static IComponentModel GetComponentModel() =>
+            GetGlobalService<SComponentModel, IComponentModel>();
 
-        protected static bool IsCommandAvailable(string commandName)
-            => GetDTE().Commands.Item(commandName).IsAvailable;
+        protected static bool IsCommandAvailable(string commandName) =>
+            GetDTE().Commands.Item(commandName).IsAvailable;
 
         protected static void ExecuteCommand(string commandName, string args = "")
         {
@@ -107,12 +126,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// </summary>
         protected static void WaitForApplicationIdle(TimeSpan timeout)
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
-            => CurrentApplicationDispatcher.InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle).Wait(timeout);
+            =>
+            CurrentApplicationDispatcher
+                .InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle)
+                .Wait(timeout);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
 
         protected static void WaitForSystemIdle()
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
-            => CurrentApplicationDispatcher.Invoke(() => { }, DispatcherPriority.SystemIdle);
+            =>
+            CurrentApplicationDispatcher.Invoke(() => { }, DispatcherPriority.SystemIdle);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
 
         // Ensure InProcComponents live forever

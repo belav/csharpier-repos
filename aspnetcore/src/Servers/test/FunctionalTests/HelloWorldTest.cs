@@ -15,12 +15,16 @@ namespace ServerComparison.FunctionalTests;
 
 public class HelloWorldTests : LoggedTest
 {
-    public HelloWorldTests(ITestOutputHelper output) : base(output)
-    {
-    }
+    public HelloWorldTests(ITestOutputHelper output) : base(output) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(ServerType.IISExpress, ServerType.Kestrel, ServerType.Nginx, ServerType.HttpSys)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(
+                ServerType.IISExpress,
+                ServerType.Kestrel,
+                ServerType.Nginx,
+                ServerType.HttpSys
+            )
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels()
@@ -30,10 +34,15 @@ public class HelloWorldTests : LoggedTest
     [MemberData(nameof(TestVariants))]
     public async Task HelloWorld(TestVariant variant)
     {
-        var testName = $"HelloWorld_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
-        using (StartLog(out var loggerFactory,
-            variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
-            testName))
+        var testName =
+            $"HelloWorld_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
+        using (
+            StartLog(
+                out var loggerFactory,
+                variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
+                testName
+            )
+        )
         {
             var logger = loggerFactory.CreateLogger("HelloWorld");
 
@@ -44,18 +53,29 @@ public class HelloWorldTests : LoggedTest
 
             if (variant.Server == ServerType.Nginx)
             {
-                deploymentParameters.ServerConfigTemplateContent = Helpers.GetNginxConfigContent("nginx.conf");
+                deploymentParameters.ServerConfigTemplateContent = Helpers.GetNginxConfigContent(
+                    "nginx.conf"
+                );
             }
 
-            using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, loggerFactory))
+            using (
+                var deployer = IISApplicationDeployerFactory.Create(
+                    deploymentParameters,
+                    loggerFactory
+                )
+            )
             {
                 var deploymentResult = await deployer.DeployAsync();
 
                 // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
-                var response = await RetryHelper.RetryRequest(() =>
-                {
-                    return deploymentResult.HttpClient.GetAsync(string.Empty);
-                }, logger, deploymentResult.HostShutdownToken);
+                var response = await RetryHelper.RetryRequest(
+                    () =>
+                    {
+                        return deploymentResult.HttpClient.GetAsync(string.Empty);
+                    },
+                    logger,
+                    deploymentResult.HostShutdownToken
+                );
 
                 var responseText = await response.Content.ReadAsStringAsync();
                 try

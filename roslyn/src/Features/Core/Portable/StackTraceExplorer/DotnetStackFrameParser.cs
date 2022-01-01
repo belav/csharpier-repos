@@ -30,7 +30,12 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 return false;
             }
 
-            var success = StackFrameParserHelpers.TryParseMethodSignature(line.AsSpan(), out var classSpan, out var methodSpan, out var argsSpan);
+            var success = StackFrameParserHelpers.TryParseMethodSignature(
+                line.AsSpan(),
+                out var classSpan,
+                out var methodSpan,
+                out var argsSpan
+            );
             if (!success)
             {
                 return false;
@@ -42,9 +47,18 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             if (splitIndex > 0)
             {
                 var fileInformationStart = splitIndex + StackTraceSymbolAndFileSplit.Length;
-                var fileInformationSpan = new TextSpan(fileInformationStart, line.Length - fileInformationStart);
+                var fileInformationSpan = new TextSpan(
+                    fileInformationStart,
+                    line.Length - fileInformationStart
+                );
 
-                parsedFrame = new ParsedStackFrame(line, classSpan, methodSpan, argsSpan, fileInformationSpan);
+                parsedFrame = new ParsedStackFrame(
+                    line,
+                    classSpan,
+                    methodSpan,
+                    argsSpan,
+                    fileInformationSpan
+                );
                 return true;
             }
 

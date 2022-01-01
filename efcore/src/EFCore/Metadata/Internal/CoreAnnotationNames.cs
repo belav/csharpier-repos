@@ -148,7 +148,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        [Obsolete("Use ValueComparer. Only a single value comparer is allowed for a given property.")]
+        [Obsolete(
+            "Use ValueComparer. Only a single value comparer is allowed for a given property."
+        )]
         public const string KeyValueComparer = "KeyValueComparer";
 
         /// <summary>
@@ -157,7 +159,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        [Obsolete("Use ValueComparer. Only a single value comparer is allowed for a given property.")]
+        [Obsolete(
+            "Use ValueComparer. Only a single value comparer is allowed for a given property."
+        )]
         public const string StructuralValueComparer = "StructuralValueComparer";
 
         /// <summary>
@@ -239,7 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public const string InverseNavigations = "InversePropertyAttributeConvention:InverseNavigations";
+        public const string InverseNavigations =
+            "InversePropertyAttributeConvention:InverseNavigations";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -247,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public const string InverseNavigationCandidates = "RelationshipDiscoveryConvention:InverseNavigationCandidates";
+        public const string InverseNavigationCandidates =
+            "RelationshipDiscoveryConvention:InverseNavigationCandidates";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -255,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public const string NavigationCandidates = "RelationshipDiscoveryConvention:NavigationCandidates";
+        public const string NavigationCandidates =
+            "RelationshipDiscoveryConvention:NavigationCandidates";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -271,7 +278,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public const string AmbiguousNavigations = "RelationshipDiscoveryConvention:AmbiguousNavigations";
+        public const string AmbiguousNavigations =
+            "RelationshipDiscoveryConvention:AmbiguousNavigations";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -287,7 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public const string DuplicateServiceProperties = "ServicePropertyDiscoveryConvention:DuplicateServiceProperties";
+        public const string DuplicateServiceProperties =
+            "ServicePropertyDiscoveryConvention:DuplicateServiceProperties";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -295,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public const string FullChangeTrackingNotificationsRequired = "ModelValidator.FullChangeTrackingNotificationsRequired";
+        public const string FullChangeTrackingNotificationsRequired =
+            "ModelValidator.FullChangeTrackingNotificationsRequired";
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

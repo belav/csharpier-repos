@@ -20,7 +20,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void GetHashCode_DefaultValues_Success()
         {
-            Assert.Equal(default(IPPacketInformation).GetHashCode(), default(IPPacketInformation).GetHashCode());
+            Assert.Equal(
+                default(IPPacketInformation).GetHashCode(),
+                default(IPPacketInformation).GetHashCode()
+            );
         }
 
         [Fact]
@@ -52,14 +55,27 @@ namespace System.Net.Sockets.Tests
         {
             const int ReceiveTimeout = 10000;
 
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
             {
                 int port = receiver.BindToAnonymousPort(IPAddress.Loopback);
 
                 var waitHandle = new ManualResetEvent(false);
 
-                SocketAsyncEventArgs receiveArgs = new SocketAsyncEventArgs {
+                SocketAsyncEventArgs receiveArgs = new SocketAsyncEventArgs
+                {
                     RemoteEndPoint = new IPEndPoint(IPAddress.Loopback, port),
                     UserToken = waitHandle
                 };
@@ -67,7 +83,10 @@ namespace System.Net.Sockets.Tests
                 receiveArgs.SetBuffer(new byte[1], 0, 1);
                 receiveArgs.Completed += (_, args) => ((ManualResetEvent)args.UserToken).Set();
 
-                Assert.True(receiver.ReceiveMessageFromAsync(receiveArgs), "receiver.ReceiveMessageFromAsync");
+                Assert.True(
+                    receiver.ReceiveMessageFromAsync(receiveArgs),
+                    "receiver.ReceiveMessageFromAsync"
+                );
 
                 // Send a few packets, in case they aren't delivered reliably.
                 sender.SendTo(new byte[1], new IPEndPoint(IPAddress.Loopback, port));

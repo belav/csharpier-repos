@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Guid[]? modules = null,
             int[]? methodVersions = null,
             int[]? ilOffsets = null,
-            ActiveStatementFlags[]? flags = null)
+            ActiveStatementFlags[]? flags = null
+        )
         {
             return ActiveStatementsDescription.GetActiveStatementDebugInfos(
                 (source, path) => SyntaxFactory.ParseSyntaxTree(source, path: path),
@@ -33,8 +34,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 modules,
                 methodVersions,
                 ilOffsets,
-                flags);
-
+                flags
+            );
         }
         public static string Delete(string src, string marker)
         {
@@ -71,43 +72,58 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                 var startOfLineCount = start + startStr.Length;
                 var endOfLineCount = src.IndexOf(']', startOfLineCount);
-                var lineCount = int.Parse(src.Substring(startOfLineCount, endOfLineCount - startOfLineCount));
+                var lineCount = int.Parse(
+                    src.Substring(startOfLineCount, endOfLineCount - startOfLineCount)
+                );
 
                 var end = src.IndexOf(endStr, endOfLineCount) + endStr.Length;
 
-                src = src.Substring(0, start) + string.Join("", Enumerable.Repeat(Environment.NewLine, lineCount)) + src.Substring(end);
+                src =
+                    src.Substring(0, start)
+                    + string.Join("", Enumerable.Repeat(Environment.NewLine, lineCount))
+                    + src.Substring(end);
             }
         }
 
-        public static string Update(string src, string marker)
-            => InsertNewLines(Delete(src, marker), marker);
+        public static string Update(string src, string marker) =>
+            InsertNewLines(Delete(src, marker), marker);
 
-        public static string InspectActiveStatement(ActiveStatement statement)
-            => $"{statement.Ordinal}: {statement.FileSpan} flags=[{statement.Flags}]";
+        public static string InspectActiveStatement(ActiveStatement statement) =>
+            $"{statement.Ordinal}: {statement.FileSpan} flags=[{statement.Flags}]";
 
-        public static string InspectActiveStatementAndInstruction(ActiveStatement statement)
-            => InspectActiveStatement(statement) + " " + statement.InstructionId.GetDebuggerDisplay();
+        public static string InspectActiveStatementAndInstruction(ActiveStatement statement) =>
+            InspectActiveStatement(statement) + " " + statement.InstructionId.GetDebuggerDisplay();
 
-        public static string InspectActiveStatementAndInstruction(ActiveStatement statement, SourceText text)
-            => InspectActiveStatementAndInstruction(statement) + $" '{GetFirstLineText(statement.Span, text)}'";
+        public static string InspectActiveStatementAndInstruction(
+            ActiveStatement statement,
+            SourceText text
+        ) =>
+            InspectActiveStatementAndInstruction(statement)
+            + $" '{GetFirstLineText(statement.Span, text)}'";
 
-        public static string InspectActiveStatementUpdate(ManagedActiveStatementUpdate update)
-            => $"{update.Method.GetDebuggerDisplay()} IL_{update.ILOffset:X4}: {update.NewSpan.GetDebuggerDisplay()}";
+        public static string InspectActiveStatementUpdate(ManagedActiveStatementUpdate update) =>
+            $"{update.Method.GetDebuggerDisplay()} IL_{update.ILOffset:X4}: {update.NewSpan.GetDebuggerDisplay()}";
 
-        public static IEnumerable<string> InspectNonRemappableRegions(ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>> regions)
-            => regions.OrderBy(r => r.Key.Token).Select(r => $"{r.Key.Method.GetDebuggerDisplay()} | {string.Join(", ", r.Value.Select(r => r.GetDebuggerDisplay()))}");
+        public static IEnumerable<string> InspectNonRemappableRegions(
+            ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>> regions
+        ) =>
+            regions
+                .OrderBy(r => r.Key.Token)
+                .Select(
+                    r =>
+                        $"{r.Key.Method.GetDebuggerDisplay()} | {string.Join(", ", r.Value.Select(r => r.GetDebuggerDisplay()))}"
+                );
 
-        public static string InspectExceptionRegionUpdate(ManagedExceptionRegionUpdate r)
-            => $"{r.Method.GetDebuggerDisplay()} | {r.NewSpan.GetDebuggerDisplay()} Delta={r.Delta}";
+        public static string InspectExceptionRegionUpdate(ManagedExceptionRegionUpdate r) =>
+            $"{r.Method.GetDebuggerDisplay()} | {r.NewSpan.GetDebuggerDisplay()} Delta={r.Delta}";
 
-        public static string GetFirstLineText(LinePositionSpan span, SourceText text)
-            => text.Lines[span.Start.Line].ToString().Trim();
+        public static string GetFirstLineText(LinePositionSpan span, SourceText text) =>
+            text.Lines[span.Start.Line].ToString().Trim();
 
-        public static string InspectSequencePointUpdates(SequencePointUpdates updates)
-            => $"{updates.FileName}: [{string.Join(", ", updates.LineUpdates.Select(u => $"{u.OldLine} -> {u.NewLine}"))}]";
+        public static string InspectSequencePointUpdates(SequencePointUpdates updates) =>
+            $"{updates.FileName}: [{string.Join(", ", updates.LineUpdates.Select(u => $"{u.OldLine} -> {u.NewLine}"))}]";
 
-        public static IEnumerable<string> Inspect(this IEnumerable<SequencePointUpdates> updates)
-            => updates.Select(InspectSequencePointUpdates);
-
+        public static IEnumerable<string> Inspect(this IEnumerable<SequencePointUpdates> updates) =>
+            updates.Select(InspectSequencePointUpdates);
     }
 }

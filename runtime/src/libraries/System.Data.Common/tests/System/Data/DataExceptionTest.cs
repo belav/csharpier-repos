@@ -39,7 +39,8 @@ namespace System.Data.Tests
         {
             public CustomDataException() { }
             public CustomDataException(string message) : base(message) { }
-            public CustomDataException(string message, Exception innerException) : base(message, innerException) { }
+            public CustomDataException(string message, Exception innerException)
+                : base(message, innerException) { }
         }
     }
 }

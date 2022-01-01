@@ -35,7 +35,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void CreateDefaultBuilder_IncludesContentRootByDefault()
         {
             var expected = Directory.GetCurrentDirectory();
@@ -48,7 +53,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void CreateDefaultBuilder_IncludesCommandLineArguments()
         {
             var expected = Directory.GetParent(Directory.GetCurrentDirectory()).FullName; // It must exist
@@ -59,24 +69,36 @@ namespace Microsoft.Extensions.Hosting.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void CreateDefaultBuilder_RegistersEventSourceLogger()
         {
             var listener = new TestEventListener();
-            using var host = Host.CreateDefaultBuilder()
-                .Build();
+            using var host = Host.CreateDefaultBuilder().Build();
 
             var logger = host.Services.GetRequiredService<ILogger<HostTests>>();
             logger.LogInformation("Request starting");
 
             var events = listener.EventData.ToArray();
-            Assert.Contains(events, args =>
-                args.EventSource.Name == "Microsoft-Extensions-Logging" &&
-                args.Payload.OfType<string>().Any(p => p.Contains("Request starting")));
+            Assert.Contains(
+                events,
+                args =>
+                    args.EventSource.Name == "Microsoft-Extensions-Logging"
+                    && args.Payload.OfType<string>().Any(p => p.Contains("Request starting"))
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void CreateDefaultBuilder_EnablesActivityTracking()
         {
             var parentActivity = new Activity("ParentActivity");
@@ -84,61 +106,95 @@ namespace Microsoft.Extensions.Hosting.Tests
             var activity = new Activity("ChildActivity");
             activity.Start();
             var id = activity.Id;
-            var logger = new ScopeDelegateLogger((scopeObjectList) =>
-            {
-                Assert.Equal(1, scopeObjectList.Count);
-                var activityDictionary = (scopeObjectList.FirstOrDefault() as IEnumerable<KeyValuePair<string, object>>)
-                                                .ToDictionary(x => x.Key, x => x.Value);
-                switch (activity.IdFormat)
+            var logger = new ScopeDelegateLogger(
+                (scopeObjectList) =>
                 {
-                    case ActivityIdFormat.Hierarchical:
-                        Assert.Equal(activity.Id, activityDictionary["SpanId"]);
-                        Assert.Equal(activity.RootId, activityDictionary["TraceId"]);
-                        Assert.Equal(activity.ParentId, activityDictionary["ParentId"]);
-                        break;
-                    case ActivityIdFormat.W3C:
-                        Assert.Equal(activity.SpanId.ToHexString(), activityDictionary["SpanId"]);
-                        Assert.Equal(activity.TraceId.ToHexString(), activityDictionary["TraceId"]);
-                        Assert.Equal(activity.ParentSpanId.ToHexString(), activityDictionary["ParentId"]);
-                        break;
+                    Assert.Equal(1, scopeObjectList.Count);
+                    var activityDictionary = (
+                        scopeObjectList.FirstOrDefault()
+                        as IEnumerable<KeyValuePair<string, object>>
+                    ).ToDictionary(x => x.Key, x => x.Value);
+                    switch (activity.IdFormat)
+                    {
+                        case ActivityIdFormat.Hierarchical:
+                            Assert.Equal(activity.Id, activityDictionary["SpanId"]);
+                            Assert.Equal(activity.RootId, activityDictionary["TraceId"]);
+                            Assert.Equal(activity.ParentId, activityDictionary["ParentId"]);
+                            break;
+                        case ActivityIdFormat.W3C:
+                            Assert.Equal(
+                                activity.SpanId.ToHexString(),
+                                activityDictionary["SpanId"]
+                            );
+                            Assert.Equal(
+                                activity.TraceId.ToHexString(),
+                                activityDictionary["TraceId"]
+                            );
+                            Assert.Equal(
+                                activity.ParentSpanId.ToHexString(),
+                                activityDictionary["ParentId"]
+                            );
+                            break;
+                    }
                 }
-            });
+            );
             var loggerProvider = new ScopeDelegateLoggerProvider(logger);
             using var host = Host.CreateDefaultBuilder()
-                .ConfigureLogging(logging =>
-                {
-                    logging.AddProvider(loggerProvider);
-                })
+                .ConfigureLogging(
+                    logging =>
+                    {
+                        logging.AddProvider(loggerProvider);
+                    }
+                )
                 .Build();
 
             logger.LogInformation("Dummy log");
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void CreateDefaultBuilder_EnablesScopeValidation()
         {
             using var host = Host.CreateDefaultBuilder()
                 .UseEnvironment(Environments.Development)
-                .ConfigureServices(serices =>
-                {
-                    serices.AddScoped<ServiceA>();
-                })
+                .ConfigureServices(
+                    serices =>
+                    {
+                        serices.AddScoped<ServiceA>();
+                    }
+                )
                 .Build();
 
-            Assert.Throws<InvalidOperationException>(() => { host.Services.GetRequiredService<ServiceA>(); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    host.Services.GetRequiredService<ServiceA>();
+                }
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void CreateDefaultBuilder_EnablesValidateOnBuild()
         {
             var hostBuilder = Host.CreateDefaultBuilder()
                 .UseEnvironment(Environments.Development)
-                .ConfigureServices(serices =>
-                {
-                    serices.AddSingleton<ServiceB>();
-                });
+                .ConfigureServices(
+                    serices =>
+                    {
+                        serices.AddSingleton<ServiceB>();
+                    }
+                );
 
             Assert.Throws<AggregateException>(() => hostBuilder.Build());
         }
@@ -150,14 +206,20 @@ namespace Microsoft.Extensions.Hosting.Tests
             var expectedEnvironment = "SomeOtherEnvironment";
             using var host = new HostBuilder()
                 .UseEnvironment(environment)
-                .ConfigureHostConfiguration(configBuilder =>
-                {
-                    configBuilder.AddInMemoryCollection(new[]
+                .ConfigureHostConfiguration(
+                    configBuilder =>
                     {
-                        new KeyValuePair<string, string>(
-                            HostDefaults.EnvironmentKey, expectedEnvironment)
-                    });
-                }) // This overwrites the call to UseEnvironment
+                        configBuilder.AddInMemoryCollection(
+                            new[]
+                            {
+                                new KeyValuePair<string, string>(
+                                    HostDefaults.EnvironmentKey,
+                                    expectedEnvironment
+                                )
+                            }
+                        );
+                    }
+                ) // This overwrites the call to UseEnvironment
                 .Build();
 
             var hostEnv = host.Services.GetRequiredService<IHostEnvironment>();
@@ -170,14 +232,20 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var willBeOverwritten = "SomeOtherEnvironment";
             using var host = new HostBuilder()
-                .ConfigureHostConfiguration(configBuilder =>
-                {
-                    configBuilder.AddInMemoryCollection(new[]
+                .ConfigureHostConfiguration(
+                    configBuilder =>
                     {
-                        new KeyValuePair<string, string>(
-                            HostDefaults.EnvironmentKey, willBeOverwritten)
-                    });
-                })
+                        configBuilder.AddInMemoryCollection(
+                            new[]
+                            {
+                                new KeyValuePair<string, string>(
+                                    HostDefaults.EnvironmentKey,
+                                    willBeOverwritten
+                                )
+                            }
+                        );
+                    }
+                )
                 .UseEnvironment(Guid.NewGuid().ToString())
                 .UseEnvironment(environment) // Last one wins...
                 .Build();
@@ -187,11 +255,19 @@ namespace Microsoft.Extensions.Hosting.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/48696")]
         public async Task CreateDefaultBuilder_ConfigJsonDoesNotReload()
         {
-            var reloadFlagConfig = new Dictionary<string, string>() { { "hostbuilder:reloadConfigOnChange", "false" } };
+            var reloadFlagConfig = new Dictionary<string, string>()
+            {
+                { "hostbuilder:reloadConfigOnChange", "false" }
+            };
             var appSettingsPath = Path.Combine(Path.GetTempPath(), "appsettings.json");
 
             string SaveRandomConfig()
@@ -205,10 +281,12 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using var host = Host.CreateDefaultBuilder()
                 .UseContentRoot(Path.GetDirectoryName(appSettingsPath))
-                .ConfigureHostConfiguration(builder =>
-                {
-                    builder.AddInMemoryCollection(reloadFlagConfig);
-                })
+                .ConfigureHostConfiguration(
+                    builder =>
+                    {
+                        builder.AddInMemoryCollection(reloadFlagConfig);
+                    }
+                )
                 .Build();
 
             var config = host.Services.GetRequiredService<IConfiguration>();
@@ -222,10 +300,18 @@ namespace Microsoft.Extensions.Hosting.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public async Task CreateDefaultBuilder_ConfigJsonDoesReload()
         {
-            var reloadFlagConfig = new Dictionary<string, string>() { { "hostbuilder:reloadConfigOnChange", "true" } };
+            var reloadFlagConfig = new Dictionary<string, string>()
+            {
+                { "hostbuilder:reloadConfigOnChange", "true" }
+            };
             var appSettingsPath = Path.Combine(Path.GetTempPath(), "appsettings.json");
 
             try
@@ -241,10 +327,12 @@ namespace Microsoft.Extensions.Hosting.Tests
 
                 using var host = Host.CreateDefaultBuilder()
                     .UseContentRoot(Path.GetDirectoryName(appSettingsPath))
-                    .ConfigureHostConfiguration(builder =>
-                    {
-                        builder.AddInMemoryCollection(reloadFlagConfig);
-                    })
+                    .ConfigureHostConfiguration(
+                        builder =>
+                        {
+                            builder.AddInMemoryCollection(reloadFlagConfig);
+                        }
+                    )
                     .Build();
 
                 var config = host.Services.GetRequiredService<IConfiguration>();
@@ -253,8 +341,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 var configReloadedCancelTokenSource = new CancellationTokenSource();
                 var configReloadedCancelToken = configReloadedCancelTokenSource.Token;
 
-                config.GetReloadToken().RegisterChangeCallback(
-                    _ => configReloadedCancelTokenSource.Cancel(), null);
+                config
+                    .GetReloadToken()
+                    .RegisterChangeCallback(_ => configReloadedCancelTokenSource.Cancel(), null);
 
                 // Only update the config after we've registered the change callback
                 var dynamicConfigMessage2 = SaveRandomConfig(appSettingsPath);
@@ -274,11 +363,19 @@ namespace Microsoft.Extensions.Hosting.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public async Task CreateDefaultBuilder_SecretsDoesReload()
         {
             var secretId = Assembly.GetExecutingAssembly().GetName().Name;
-            var reloadFlagConfig = new Dictionary<string, string>() { { "hostbuilder:reloadConfigOnChange", "true" } };
+            var reloadFlagConfig = new Dictionary<string, string>()
+            {
+                { "hostbuilder:reloadConfigOnChange", "true" }
+            };
             var secretPath = PathHelper.GetSecretsPathFromSecretsId(secretId);
             var secretFileInfo = new FileInfo(secretPath);
 
@@ -292,11 +389,15 @@ namespace Microsoft.Extensions.Hosting.Tests
             }
 
             var dynamicSecretMessage1 = SaveRandomSecret(secretPath);
-            var host = Host.CreateDefaultBuilder(new[] { "environment=Development", $"applicationName={secretId}" })
-                .ConfigureHostConfiguration(builder =>
-                {
-                    builder.AddInMemoryCollection(reloadFlagConfig);
-                })
+            var host = Host.CreateDefaultBuilder(
+                    new[] { "environment=Development", $"applicationName={secretId}" }
+                )
+                .ConfigureHostConfiguration(
+                    builder =>
+                    {
+                        builder.AddInMemoryCollection(reloadFlagConfig);
+                    }
+                )
                 .Build();
 
             var config = host.Services.GetRequiredService<IConfiguration>();
@@ -305,8 +406,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             using CancellationTokenSource configReloadedCancelTokenSource = new();
             var configReloadedCancelToken = configReloadedCancelTokenSource.Token;
 
-            config.GetReloadToken().RegisterChangeCallback(
-                _ => configReloadedCancelTokenSource.Cancel(), null);
+            config
+                .GetReloadToken()
+                .RegisterChangeCallback(_ => configReloadedCancelTokenSource.Cancel(), null);
 
             // Only update the secrets after we've registered the change callback
             var dynamicSecretMessage2 = SaveRandomSecret(secretPath);
@@ -318,18 +420,35 @@ namespace Microsoft.Extensions.Hosting.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void CreateDefaultBuilder_RespectShutdownTimeout()
         {
             var notDefaultTimeoutSeconds = 99;
-            Assert.True(notDefaultTimeoutSeconds != new HostOptions().ShutdownTimeout.TotalSeconds, "Test value must be not equal to default");
-            var host = Host.CreateDefaultBuilder().ConfigureHostConfiguration(configBuilder =>
-            {
-                configBuilder.AddInMemoryCollection(new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("SHUTDOWNTIMEOUTSECONDS", notDefaultTimeoutSeconds.ToString())
-                });
-            }).Build();
+            Assert.True(
+                notDefaultTimeoutSeconds != new HostOptions().ShutdownTimeout.TotalSeconds,
+                "Test value must be not equal to default"
+            );
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureHostConfiguration(
+                    configBuilder =>
+                    {
+                        configBuilder.AddInMemoryCollection(
+                            new KeyValuePair<string, string>[]
+                            {
+                                new KeyValuePair<string, string>(
+                                    "SHUTDOWNTIMEOUTSECONDS",
+                                    notDefaultTimeoutSeconds.ToString()
+                                )
+                            }
+                        );
+                    }
+                )
+                .Build();
 
             var hostOptions = host.Services.GetRequiredService<IOptions<HostOptions>>();
             Assert.Equal(notDefaultTimeoutSeconds, hostOptions.Value.ShutdownTimeout.TotalSeconds);
@@ -339,10 +458,7 @@ namespace Microsoft.Extensions.Hosting.Tests
 
         internal class ServiceB
         {
-            public ServiceB(ServiceC c)
-            {
-
-            }
+            public ServiceB(ServiceC c) { }
         }
 
         internal class ServiceC { }
@@ -361,9 +477,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                 return _logger;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void SetScopeProvider(IExternalScopeProvider scopeProvider)
             {
@@ -389,20 +503,27 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             public bool IsEnabled(LogLevel logLevel) => true;
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            )
             {
-                ScopeProvider.ForEachScope((scopeObject, state) =>
-                {
-                    Scopes.Add(scopeObject);
-                }, 0);
+                ScopeProvider.ForEachScope(
+                    (scopeObject, state) =>
+                    {
+                        Scopes.Add(scopeObject);
+                    },
+                    0
+                );
                 _logDelegate(Scopes);
             }
 
             private class Scope : IDisposable
             {
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
 
@@ -410,7 +531,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             private volatile bool _disposed;
 
-            private ConcurrentQueue<EventWrittenEventArgs> _events = new ConcurrentQueue<EventWrittenEventArgs>();
+            private ConcurrentQueue<EventWrittenEventArgs> _events =
+                new ConcurrentQueue<EventWrittenEventArgs>();
 
             public IEnumerable<EventWrittenEventArgs> EventData => _events;
 

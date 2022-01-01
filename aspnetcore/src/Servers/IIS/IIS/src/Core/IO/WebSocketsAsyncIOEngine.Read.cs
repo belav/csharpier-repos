@@ -14,7 +14,11 @@ internal partial class WebSocketsAsyncIOEngine
     internal class WebSocketReadOperation : AsyncIOOperation
     {
         [UnmanagedCallersOnly]
-        public static NativeMethods.REQUEST_NOTIFICATION_STATUS ReadCallback(IntPtr httpContext, IntPtr completionInfo, IntPtr completionContext)
+        public static NativeMethods.REQUEST_NOTIFICATION_STATUS ReadCallback(
+            IntPtr httpContext,
+            IntPtr completionInfo,
+            IntPtr completionContext
+        )
         {
             var context = (WebSocketReadOperation)GCHandle.FromIntPtr(completionContext).Target!;
 
@@ -52,7 +56,8 @@ internal partial class WebSocketsAsyncIOEngine
                 &ReadCallback,
                 (IntPtr)_thisHandle,
                 out bytes,
-                out var completionExpected);
+                out var completionExpected
+            );
 
             return !completionExpected;
         }

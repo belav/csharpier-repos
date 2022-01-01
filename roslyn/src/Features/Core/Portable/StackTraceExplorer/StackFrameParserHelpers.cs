@@ -25,9 +25,13 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// https://github.com/dotnet/runtime/blob/72d643d05ab23888f30a57d447154e36f979f3d1/src/libraries/System.Private.CoreLib/src/System/Diagnostics/StackTrace.cs#L206
         /// </remarks>
 
-        public static bool TryParseMethodSignature(ReadOnlySpan<char> line, out TextSpan classSpan, out TextSpan methodSpan, out TextSpan argsSpan)
+        public static bool TryParseMethodSignature(
+            ReadOnlySpan<char> line,
+            out TextSpan classSpan,
+            out TextSpan methodSpan,
+            out TextSpan argsSpan
+        )
         {
-
             var state = new ParseStateMachine();
 
             for (var i = 0; i < line.Length; i++)
@@ -51,7 +55,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 // When starting to parse an identifier we want the first character to be valid. Arguments will
                 // be an exception here so don't check validity of those characters for the first item
                 //
-                if (state.CurrentSpanLength == 1 && state.CurrentParsingSpan != CurrentParsingSpan.Arguments)
+                if (
+                    state.CurrentSpanLength == 1
+                    && state.CurrentParsingSpan != CurrentParsingSpan.Arguments
+                )
                 {
                     // When starting to parse an identifier we want the first character to be valid
                     if (!UnicodeCharacterUtilities.IsIdentifierStartCharacter(c))
@@ -94,19 +101,25 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                     // 1. We are parsing the fully qualified type portion
                     // 2. We are parsing arguments which could use a dot to fully qualify a type
                     // 3. We are inside of a generic context, which could use dot to fully qualify a type
-                    if (state.CurrentParsingSpan == CurrentParsingSpan.Type || state.CurrentParsingSpan == CurrentParsingSpan.Arguments)
+                    if (
+                        state.CurrentParsingSpan == CurrentParsingSpan.Type
+                        || state.CurrentParsingSpan == CurrentParsingSpan.Arguments
+                    )
                     {
                         // Check that the previous item was a valid identifier character or ] (generic closure)
                         if (i > 0)
                         {
                             var previousChar = line[i - 1];
-                            if (UnicodeCharacterUtilities.IsIdentifierPartCharacter(previousChar) || previousChar == ']')
+                            if (
+                                UnicodeCharacterUtilities.IsIdentifierPartCharacter(previousChar)
+                                || previousChar == ']'
+                            )
                             {
                                 continue;
                             }
                         }
 
-                        // Either there is no previous character, or the previous character does not allow for a '.' 
+                        // Either there is no previous character, or the previous character does not allow for a '.'
                         // following it. Reset and continue parsing
                         state.Reset();
                         continue;
@@ -169,9 +182,12 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 
                 if (c == ',')
                 {
-                    // Comma is allowed if we are parsing arguments or are currently going through a generic list. 
+                    // Comma is allowed if we are parsing arguments or are currently going through a generic list.
                     // As of now, no validation is done that the comma is valid in this location
-                    if (state.CurrentParsingSpan != CurrentParsingSpan.Arguments && state.GenericDepth == 0)
+                    if (
+                        state.CurrentParsingSpan != CurrentParsingSpan.Arguments
+                        && state.GenericDepth == 0
+                    )
                     {
                         state.Reset();
                     }
@@ -179,8 +195,8 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                     continue;
                 }
 
-                // In cases where we have no explicitly handled a character, our last effort is to make sure 
-                // we are only accepting valid identifier characters. Every character that needs to be handled 
+                // In cases where we have no explicitly handled a character, our last effort is to make sure
+                // we are only accepting valid identifier characters. Every character that needs to be handled
                 // differently should be before this check
                 if (!UnicodeCharacterUtilities.IsIdentifierPartCharacter(c))
                 {
@@ -193,20 +209,22 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             methodSpan = state.MethodSpan;
             argsSpan = state.ArgumentsSpan;
 
-            return state.CurrentParsingSpan == CurrentParsingSpan.Finished &&
-                classSpan != default &&
-                methodSpan != default &&
-                argsSpan != default;
+            return state.CurrentParsingSpan == CurrentParsingSpan.Finished
+                && classSpan != default
+                && methodSpan != default
+                && argsSpan != default;
         }
 
         private struct ParseStateMachine
         {
             public int GenericDepth;
             public bool InsideGeneric => GenericDepth > 0;
-            public bool AllowSpace => InsideGeneric || CurrentParsingSpan == CurrentParsingSpan.Arguments;
+            public bool AllowSpace =>
+                InsideGeneric || CurrentParsingSpan == CurrentParsingSpan.Arguments;
             public int CurrentSpanStart { get; private set; }
             public int CurrentSpanLength;
-            public CurrentParsingSpan CurrentParsingSpan { get; private set; } = CurrentParsingSpan.Type;
+            public CurrentParsingSpan CurrentParsingSpan { get; private set; } =
+                CurrentParsingSpan.Type;
 
             /// <summary>
             /// [|ConsoleApp4.MyClass|].M(string s, int i) 
@@ -281,7 +299,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                     throw new InvalidOperationException();
                 }
 
-                TypeSpan = new TextSpan(typeAndMethodSpan.Start, (dotIndex - typeAndMethodSpan.Start) + 1);
+                TypeSpan = new TextSpan(
+                    typeAndMethodSpan.Start,
+                    (dotIndex - typeAndMethodSpan.Start) + 1
+                );
 
                 var methodStart = dotIndex + 1;
                 var methodLength = (typeAndMethodSpan.End - 1) - methodStart;

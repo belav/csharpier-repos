@@ -17,7 +17,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public QueryTranslationPostprocessorFactory(QueryTranslationPostprocessorDependencies dependencies)
+        public QueryTranslationPostprocessorFactory(
+            QueryTranslationPostprocessorDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -36,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryTranslationPostprocessor Create(QueryCompilationContext queryCompilationContext)
-            => new QueryTranslationPostprocessor(Dependencies, queryCompilationContext);
+        public virtual QueryTranslationPostprocessor Create(
+            QueryCompilationContext queryCompilationContext
+        ) => new QueryTranslationPostprocessor(Dependencies, queryCompilationContext);
     }
 }

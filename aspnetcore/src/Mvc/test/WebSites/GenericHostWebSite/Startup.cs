@@ -15,12 +15,13 @@ public class Startup
     {
         services.AddSingleton(new TestGenericService { Message = "true" });
 
-        services
-            .AddControllers(options =>
+        services.AddControllers(
+            options =>
             {
-                    // Remove when all URL generation tests are passing - https://github.com/aspnet/Routing/issues/590
-                    options.EnableEndpointRouting = false;
-            });
+                // Remove when all URL generation tests are passing - https://github.com/aspnet/Routing/issues/590
+                options.EnableEndpointRouting = false;
+            }
+        );
 
         services.AddLogging();
         services.AddHttpContextAccessor();
@@ -35,17 +36,23 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllerRoute(
-                "areaRoute",
-                "{area:exists}/{controller}/{action}",
-                new { controller = "Home", action = "Index" });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    "areaRoute",
+                    "{area:exists}/{controller}/{action}",
+                    new { controller = "Home", action = "Index" }
+                );
 
-            endpoints.MapControllerRoute("ActionAsMethod", "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index" });
+                endpoints.MapControllerRoute(
+                    "ActionAsMethod",
+                    "{controller}/{action}",
+                    defaults: new { controller = "Home", action = "Index" }
+                );
 
-            endpoints.MapControllerRoute("PageRoute", "{controller}/{action}/{page}");
-        });
+                endpoints.MapControllerRoute("PageRoute", "{controller}/{action}/{page}");
+            }
+        );
     }
 }

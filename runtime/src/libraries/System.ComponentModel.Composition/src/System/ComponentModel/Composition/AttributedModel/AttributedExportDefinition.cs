@@ -18,8 +18,13 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         private IDictionary<string, object?>? _metadata;
 
-        public AttributedExportDefinition(AttributedPartCreationInfo partCreationInfo, MemberInfo member, ExportAttribute exportAttribute, Type? typeIdentityType, string contractName)
-            : base(contractName, (IDictionary<string, object?>?)null)
+        public AttributedExportDefinition(
+            AttributedPartCreationInfo partCreationInfo,
+            MemberInfo member,
+            ExportAttribute exportAttribute,
+            Type? typeIdentityType,
+            string contractName
+        ) : base(contractName, (IDictionary<string, object?>?)null)
         {
             if (partCreationInfo == null)
             {
@@ -50,21 +55,36 @@ namespace System.ComponentModel.Composition.AttributedModel
                 {
                     _member.TryExportMetadataForMember(out IDictionary<string, object?> metadata);
 
-                    string typeIdentity = _exportAttribute.IsContractNameSameAsTypeIdentity() ?
-                        ContractName :
-                        _member.GetTypeIdentityFromExport(_typeIdentityType);
+                    string typeIdentity = _exportAttribute.IsContractNameSameAsTypeIdentity()
+                        ? ContractName
+                        : _member.GetTypeIdentityFromExport(_typeIdentityType);
 
                     metadata.Add(CompositionConstants.ExportTypeIdentityMetadataName, typeIdentity);
 
                     var partMetadata = _partCreationInfo.GetMetadata();
-                    if (partMetadata != null && partMetadata.ContainsKey(CompositionConstants.PartCreationPolicyMetadataName))
+                    if (
+                        partMetadata != null
+                        && partMetadata.ContainsKey(
+                            CompositionConstants.PartCreationPolicyMetadataName
+                        )
+                    )
                     {
-                        metadata.Add(CompositionConstants.PartCreationPolicyMetadataName, partMetadata[CompositionConstants.PartCreationPolicyMetadataName]);
+                        metadata.Add(
+                            CompositionConstants.PartCreationPolicyMetadataName,
+                            partMetadata[CompositionConstants.PartCreationPolicyMetadataName]
+                        );
                     }
 
-                    if ((_typeIdentityType != null) && (_member.MemberType != MemberTypes.Method) && _typeIdentityType.ContainsGenericParameters)
+                    if (
+                        (_typeIdentityType != null)
+                        && (_member.MemberType != MemberTypes.Method)
+                        && _typeIdentityType.ContainsGenericParameters
+                    )
                     {
-                        metadata.Add(CompositionConstants.GenericExportParametersOrderMetadataName, GenericServices.GetGenericParametersOrder(_typeIdentityType));
+                        metadata.Add(
+                            CompositionConstants.GenericExportParametersOrderMetadataName,
+                            GenericServices.GetGenericParametersOrder(_typeIdentityType)
+                        );
                     }
 
                     _metadata = metadata;
@@ -73,5 +93,4 @@ namespace System.ComponentModel.Composition.AttributedModel
             }
         }
     }
-
 }

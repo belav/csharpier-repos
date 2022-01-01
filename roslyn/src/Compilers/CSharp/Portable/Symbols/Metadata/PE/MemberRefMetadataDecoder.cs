@@ -29,10 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// </summary>
         private readonly TypeSymbol _containingType;
 
-        public MemberRefMetadataDecoder(
-            PEModuleSymbol moduleSymbol,
-            TypeSymbol containingType) :
-            base(moduleSymbol, containingType as PENamedTypeSymbol)
+        public MemberRefMetadataDecoder(PEModuleSymbol moduleSymbol, TypeSymbol containingType)
+            : base(moduleSymbol, containingType as PENamedTypeSymbol)
         {
             Debug.Assert((object)containingType != null);
             _containingType = containingType;
@@ -67,7 +65,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 int cumulativeArity;
                 TypeParameterSymbol typeParameter;
-                GetGenericTypeParameterSymbol(position, namedType, out cumulativeArity, out typeParameter);
+                GetGenericTypeParameterSymbol(
+                    position,
+                    namedType,
+                    out cumulativeArity,
+                    out typeParameter
+                );
                 if ((object)typeParameter != null)
                 {
                     return typeParameter;
@@ -82,7 +85,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return new UnsupportedMetadataTypeSymbol(); // associated type does not have type parameters
         }
 
-        private static void GetGenericTypeParameterSymbol(int position, NamedTypeSymbol namedType, out int cumulativeArity, out TypeParameterSymbol typeArgument)
+        private static void GetGenericTypeParameterSymbol(
+            int position,
+            NamedTypeSymbol namedType,
+            out int cumulativeArity,
+            out TypeParameterSymbol typeArgument
+        )
         {
             cumulativeArity = namedType.Arity;
             typeArgument = null;
@@ -93,7 +101,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if ((object)containingType != null)
             {
                 int containingTypeCumulativeArity;
-                GetGenericTypeParameterSymbol(position, containingType, out containingTypeCumulativeArity, out typeArgument);
+                GetGenericTypeParameterSymbol(
+                    position,
+                    containingType,
+                    out containingTypeCumulativeArity,
+                    out typeArgument
+                );
                 cumulativeArity += containingTypeCumulativeArity;
                 arityOffset = containingTypeCumulativeArity;
             }
@@ -121,15 +134,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 BlobHandle signatureHandle = Module.GetSignatureOrThrow(memberRef);
 
                 SignatureHeader signatureHeader;
-                BlobReader signaturePointer = this.DecodeSignatureHeaderOrThrow(signatureHandle, out signatureHeader);
+                BlobReader signaturePointer = this.DecodeSignatureHeaderOrThrow(
+                    signatureHandle,
+                    out signatureHeader
+                );
 
                 switch (signatureHeader.RawValue & SignatureHeader.CallingConventionOrKindMask)
                 {
                     case (byte)SignatureCallingConvention.Default:
                     case (byte)SignatureCallingConvention.VarArgs:
                         int typeParamCount;
-                        ParamInfo<TypeSymbol>[] targetParamInfo = this.DecodeSignatureParametersOrThrow(ref signaturePointer, signatureHeader, out typeParamCount);
-                        return FindMethodBySignature(_containingType, memberName, signatureHeader, typeParamCount, targetParamInfo);
+                        ParamInfo<TypeSymbol>[] targetParamInfo =
+                            this.DecodeSignatureParametersOrThrow(
+                                ref signaturePointer,
+                                signatureHeader,
+                                out typeParamCount
+                            );
+                        return FindMethodBySignature(
+                            _containingType,
+                            memberName,
+                            signatureHeader,
+                            typeParamCount,
+                            targetParamInfo
+                        );
 
                     case (byte)SignatureKind.Field:
                         if (methodsOnly)
@@ -139,8 +166,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         }
 
                         ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers;
-                        TypeSymbol type = this.DecodeFieldSignature(ref signaturePointer, out customModifiers);
-                        return FindFieldBySignature(_containingType, memberName, customModifiers, type);
+                        TypeSymbol type = this.DecodeFieldSignature(
+                            ref signaturePointer,
+                            out customModifiers
+                        );
+                        return FindFieldBySignature(
+                            _containingType,
+                            memberName,
+                            customModifiers,
+                            type
+                        );
 
                     default:
                         // error: unexpected calling convention
@@ -153,16 +188,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             }
         }
 
-        private static FieldSymbol FindFieldBySignature(TypeSymbol targetTypeSymbol, string targetMemberName, ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers, TypeSymbol type)
+        private static FieldSymbol FindFieldBySignature(
+            TypeSymbol targetTypeSymbol,
+            string targetMemberName,
+            ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers,
+            TypeSymbol type
+        )
         {
             foreach (Symbol member in targetTypeSymbol.GetMembers(targetMemberName))
             {
                 var field = member as FieldSymbol;
                 TypeWithAnnotations fieldType;
 
-                if ((object)field != null &&
-                    TypeSymbol.Equals((fieldType = field.TypeWithAnnotations).Type, type, TypeCompareKind.CLRSignatureCompareOptions) &&
-                    CustomModifiersMatch(fieldType.CustomModifiers, customModifiers))
+                if (
+                    (object)field != null
+                    && TypeSymbol.Equals(
+                        (fieldType = field.TypeWithAnnotations).Type,
+                        type,
+                        TypeCompareKind.CLRSignatureCompareOptions
+                    )
+                    && CustomModifiersMatch(fieldType.CustomModifiers, customModifiers)
+                )
                 {
                     // Behavior in the face of multiple matching signatures is
                     // implementation defined - we'll just pick the first one.
@@ -173,15 +219,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return null;
         }
 
-        private static MethodSymbol FindMethodBySignature(TypeSymbol targetTypeSymbol, string targetMemberName, SignatureHeader targetMemberSignatureHeader, int targetMemberTypeParamCount, ParamInfo<TypeSymbol>[] targetParamInfo)
+        private static MethodSymbol FindMethodBySignature(
+            TypeSymbol targetTypeSymbol,
+            string targetMemberName,
+            SignatureHeader targetMemberSignatureHeader,
+            int targetMemberTypeParamCount,
+            ParamInfo<TypeSymbol>[] targetParamInfo
+        )
         {
             foreach (Symbol member in targetTypeSymbol.GetMembers(targetMemberName))
             {
                 var method = member as MethodSymbol;
-                if ((object)method != null &&
-                    ((byte)method.CallingConvention == targetMemberSignatureHeader.RawValue) &&
-                    (targetMemberTypeParamCount == method.Arity) &&
-                    MethodSymbolMatchesParamInfo(method, targetParamInfo))
+                if (
+                    (object)method != null
+                    && ((byte)method.CallingConvention == targetMemberSignatureHeader.RawValue)
+                    && (targetMemberTypeParamCount == method.Arity)
+                    && MethodSymbolMatchesParamInfo(method, targetParamInfo)
+                )
                 {
                     // Behavior in the face of multiple matching signatures is
                     // implementation defined - we'll just pick the first one.
@@ -192,7 +246,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return null;
         }
 
-        private static bool MethodSymbolMatchesParamInfo(MethodSymbol candidateMethod, ParamInfo<TypeSymbol>[] targetParamInfo)
+        private static bool MethodSymbolMatchesParamInfo(
+            MethodSymbol candidateMethod,
+            ParamInfo<TypeSymbol>[] targetParamInfo
+        )
         {
             int numParams = targetParamInfo.Length - 1; //don't count return type
 
@@ -205,7 +262,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             // so we'll cheat and use it here for comparison purposes.
             TypeMap candidateMethodTypeMap = new TypeMap(
                 candidateMethod.TypeParameters,
-                IndexedTypeParameterSymbol.Take(candidateMethod.Arity), true);
+                IndexedTypeParameterSymbol.Take(candidateMethod.Arity),
+                true
+            );
 
             if (!ReturnTypesMatch(candidateMethod, candidateMethodTypeMap, ref targetParamInfo[0]))
             {
@@ -214,7 +273,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             for (int i = 0; i < numParams; i++)
             {
-                if (!ParametersMatch(candidateMethod.Parameters[i], candidateMethodTypeMap, ref targetParamInfo[i + 1 /*for return type*/]))
+                if (
+                    !ParametersMatch(
+                        candidateMethod.Parameters[i],
+                        candidateMethodTypeMap,
+                        ref targetParamInfo[
+                            i + 1 /*for return type*/
+                        ]
+                    )
+                )
                 {
                     return false;
                 }
@@ -223,7 +290,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return true;
         }
 
-        private static bool ParametersMatch(ParameterSymbol candidateParam, TypeMap candidateMethodTypeMap, ref ParamInfo<TypeSymbol> targetParam)
+        private static bool ParametersMatch(
+            ParameterSymbol candidateParam,
+            TypeMap candidateMethodTypeMap,
+            ref ParamInfo<TypeSymbol> targetParam
+        )
         {
             Debug.Assert(candidateMethodTypeMap != null);
 
@@ -236,14 +307,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             }
 
             // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just fail to match.
-            var substituted = candidateParam.TypeWithAnnotations.SubstituteType(candidateMethodTypeMap);
-            if (!TypeSymbol.Equals(substituted.Type, targetParam.Type, TypeCompareKind.CLRSignatureCompareOptions))
+            var substituted = candidateParam.TypeWithAnnotations.SubstituteType(
+                candidateMethodTypeMap
+            );
+            if (
+                !TypeSymbol.Equals(
+                    substituted.Type,
+                    targetParam.Type,
+                    TypeCompareKind.CLRSignatureCompareOptions
+                )
+            )
             {
                 return false;
             }
 
-            if (!CustomModifiersMatch(substituted.CustomModifiers, targetParam.CustomModifiers) ||
-                !CustomModifiersMatch(candidateMethodTypeMap.SubstituteCustomModifiers(candidateParam.RefCustomModifiers), targetParam.RefCustomModifiers))
+            if (
+                !CustomModifiersMatch(substituted.CustomModifiers, targetParam.CustomModifiers)
+                || !CustomModifiersMatch(
+                    candidateMethodTypeMap.SubstituteCustomModifiers(
+                        candidateParam.RefCustomModifiers
+                    ),
+                    targetParam.RefCustomModifiers
+                )
+            )
             {
                 return false;
             }
@@ -251,7 +337,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return true;
         }
 
-        private static bool ReturnTypesMatch(MethodSymbol candidateMethod, TypeMap candidateMethodTypeMap, ref ParamInfo<TypeSymbol> targetReturnParam)
+        private static bool ReturnTypesMatch(
+            MethodSymbol candidateMethod,
+            TypeMap candidateMethodTypeMap,
+            ref ParamInfo<TypeSymbol> targetReturnParam
+        )
         {
             Debug.Assert(candidateMethodTypeMap != null);
 
@@ -265,13 +355,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just fail to match.
             var substituted = candidateMethodType.SubstituteType(candidateMethodTypeMap);
-            if (!TypeSymbol.Equals(substituted.Type, targetReturnType, TypeCompareKind.CLRSignatureCompareOptions))
+            if (
+                !TypeSymbol.Equals(
+                    substituted.Type,
+                    targetReturnType,
+                    TypeCompareKind.CLRSignatureCompareOptions
+                )
+            )
             {
                 return false;
             }
 
-            if (!CustomModifiersMatch(substituted.CustomModifiers, targetReturnParam.CustomModifiers) ||
-                !CustomModifiersMatch(candidateMethodTypeMap.SubstituteCustomModifiers(candidateMethod.RefCustomModifiers), targetReturnParam.RefCustomModifiers))
+            if (
+                !CustomModifiersMatch(
+                    substituted.CustomModifiers,
+                    targetReturnParam.CustomModifiers
+                )
+                || !CustomModifiersMatch(
+                    candidateMethodTypeMap.SubstituteCustomModifiers(
+                        candidateMethod.RefCustomModifiers
+                    ),
+                    targetReturnParam.RefCustomModifiers
+                )
+            )
             {
                 return false;
             }
@@ -279,7 +385,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return true;
         }
 
-        private static bool CustomModifiersMatch(ImmutableArray<CustomModifier> candidateCustomModifiers, ImmutableArray<ModifierInfo<TypeSymbol>> targetCustomModifiers)
+        private static bool CustomModifiersMatch(
+            ImmutableArray<CustomModifier> candidateCustomModifiers,
+            ImmutableArray<ModifierInfo<TypeSymbol>> targetCustomModifiers
+        )
         {
             if (targetCustomModifiers.IsDefault || targetCustomModifiers.IsEmpty)
             {
@@ -301,8 +410,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 var targetCustomModifier = targetCustomModifiers[i];
                 CustomModifier candidateCustomModifier = candidateCustomModifiers[i];
 
-                if (targetCustomModifier.IsOptional != candidateCustomModifier.IsOptional ||
-                    !object.Equals(targetCustomModifier.Modifier, ((CSharpCustomModifier)candidateCustomModifier).ModifierSymbol))
+                if (
+                    targetCustomModifier.IsOptional != candidateCustomModifier.IsOptional
+                    || !object.Equals(
+                        targetCustomModifier.Modifier,
+                        ((CSharpCustomModifier)candidateCustomModifier).ModifierSymbol
+                    )
+                )
                 {
                     return false;
                 }

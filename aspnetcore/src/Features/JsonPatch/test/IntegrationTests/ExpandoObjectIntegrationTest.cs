@@ -36,10 +36,7 @@ public class ExpandoObjectIntegrationTest
         dynamic dynamicProperty = new ExpandoObject();
         dynamicProperty.StringProperty = "A";
 
-        var targetObject = new NestedObject()
-        {
-            DynamicProperty = dynamicProperty
-        };
+        var targetObject = new NestedObject() { DynamicProperty = dynamicProperty };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Add("DynamicProperty/StringProperty", "B");
@@ -144,14 +141,18 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Test("Test", "TestValue");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(() =>
-        {
-            patchDocument.ApplyTo(targetObject);
-        });
+        var exception = Assert.Throws<JsonPatchException>(
+            () =>
+            {
+                patchDocument.ApplyTo(targetObject);
+            }
+        );
 
         // Assert
-        Assert.Equal("The current value '' at path 'Test' is not equal to the test value 'TestValue'.",
-            exception.Message);
+        Assert.Equal(
+            "The current value '' at path 'Test' is not equal to the test value 'TestValue'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -165,14 +166,18 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Test("Test", "TestValue");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(() =>
-        {
-            patchDocument.ApplyTo(targetObject);
-        });
+        var exception = Assert.Throws<JsonPatchException>(
+            () =>
+            {
+                patchDocument.ApplyTo(targetObject);
+            }
+        );
 
         // Assert
-        Assert.Equal("The current value 'Value' at path 'Test' is not equal to the test value 'TestValue'.",
-            exception.Message);
+        Assert.Equal(
+            "The current value 'Value' at path 'Test' is not equal to the test value 'TestValue'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -269,13 +274,18 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Remove("NonExisting");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(() =>
-        {
-            patchDocument.ApplyTo(targetObject);
-        });
+        var exception = Assert.Throws<JsonPatchException>(
+            () =>
+            {
+                patchDocument.ApplyTo(targetObject);
+            }
+        );
 
         // Assert
-        Assert.Equal("The target location specified by path segment 'NonExisting' was not found.", exception.Message);
+        Assert.Equal(
+            "The target location specified by path segment 'NonExisting' was not found.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -309,13 +319,18 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Remove("test");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(() =>
-        {
-            patchDocument.ApplyTo(targetObject);
-        });
+        var exception = Assert.Throws<JsonPatchException>(
+            () =>
+            {
+                patchDocument.ApplyTo(targetObject);
+            }
+        );
 
         // Assert
-        Assert.Equal("The target location specified by path segment 'test' was not found.", exception.Message);
+        Assert.Equal(
+            "The target location specified by path segment 'test' was not found.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -351,13 +366,18 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Remove("test");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(() =>
-        {
-            patchDocument.ApplyTo(targetObject);
-        });
+        var exception = Assert.Throws<JsonPatchException>(
+            () =>
+            {
+                patchDocument.ApplyTo(targetObject);
+            }
+        );
 
         // Assert
-        Assert.Equal("The target location specified by path segment 'test' was not found.", exception.Message);
+        Assert.Equal(
+            "The target location specified by path segment 'test' was not found.",
+            exception.Message
+        );
     }
 
     [Fact]

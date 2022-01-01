@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// whether to emit an executable or a library, whether to optimize
     /// generated code, and so on.
     /// </summary>
-    public sealed class CSharpCompilationOptions : CompilationOptions, IEquatable<CSharpCompilationOptions>
+    public sealed class CSharpCompilationOptions
+        : CompilationOptions,
+          IEquatable<CSharpCompilationOptions>
     {
         /// <summary>
         /// Allow unsafe regions (i.e. unsafe modifiers on members and unsafe blocks).
@@ -70,27 +72,42 @@ namespace Microsoft.CodeAnalysis.CSharp
             StrongNameProvider? strongNameProvider = null,
             bool publicSign = false,
             MetadataImportOptions metadataImportOptions = MetadataImportOptions.Public,
-            NullableContextOptions nullableContextOptions = NullableContextOptions.Disable)
-            : this(outputKind, reportSuppressedDiagnostics, moduleName, mainTypeName, scriptClassName,
-                   usings, optimizationLevel, checkOverflow, allowUnsafe,
-                   cryptoKeyContainer, cryptoKeyFile, cryptoPublicKey, delaySign, platform,
-                   generalDiagnosticOption, warningLevel,
-                   specificDiagnosticOptions, concurrentBuild, deterministic,
-                   currentLocalTime: default,
-                   debugPlusMode: false,
-                   xmlReferenceResolver: xmlReferenceResolver,
-                   sourceReferenceResolver: sourceReferenceResolver,
-                   syntaxTreeOptionsProvider: null,
-                   metadataReferenceResolver: metadataReferenceResolver,
-                   assemblyIdentityComparer: assemblyIdentityComparer,
-                   strongNameProvider: strongNameProvider,
-                   metadataImportOptions: metadataImportOptions,
-                   referencesSupersedeLowerVersions: false,
-                   publicSign: publicSign,
-                   topLevelBinderFlags: BinderFlags.None,
-                   nullableContextOptions: nullableContextOptions)
-        {
-        }
+            NullableContextOptions nullableContextOptions = NullableContextOptions.Disable
+        )
+            : this(
+                outputKind,
+                reportSuppressedDiagnostics,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                usings,
+                optimizationLevel,
+                checkOverflow,
+                allowUnsafe,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions,
+                concurrentBuild,
+                deterministic,
+                currentLocalTime: default,
+                debugPlusMode: false,
+                xmlReferenceResolver: xmlReferenceResolver,
+                sourceReferenceResolver: sourceReferenceResolver,
+                syntaxTreeOptionsProvider: null,
+                metadataReferenceResolver: metadataReferenceResolver,
+                assemblyIdentityComparer: assemblyIdentityComparer,
+                strongNameProvider: strongNameProvider,
+                metadataImportOptions: metadataImportOptions,
+                referencesSupersedeLowerVersions: false,
+                publicSign: publicSign,
+                topLevelBinderFlags: BinderFlags.None,
+                nullableContextOptions: nullableContextOptions
+            ) { }
 
         // 15.9 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public CSharpCompilationOptions(
@@ -119,22 +136,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             AssemblyIdentityComparer? assemblyIdentityComparer,
             StrongNameProvider? strongNameProvider,
             bool publicSign,
-            MetadataImportOptions metadataImportOptions)
-            : this(outputKind, reportSuppressedDiagnostics, moduleName, mainTypeName, scriptClassName,
-                   usings, optimizationLevel, checkOverflow, allowUnsafe,
-                   cryptoKeyContainer, cryptoKeyFile, cryptoPublicKey, delaySign, platform,
-                   generalDiagnosticOption, warningLevel,
-                   specificDiagnosticOptions, concurrentBuild, deterministic,
-                   xmlReferenceResolver,
-                   sourceReferenceResolver,
-                   metadataReferenceResolver,
-                   assemblyIdentityComparer,
-                   strongNameProvider,
-                   publicSign,
-                   metadataImportOptions,
-                   nullableContextOptions: NullableContextOptions.Disable)
-        {
-        }
+            MetadataImportOptions metadataImportOptions
+        )
+            : this(
+                outputKind,
+                reportSuppressedDiagnostics,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                usings,
+                optimizationLevel,
+                checkOverflow,
+                allowUnsafe,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions,
+                concurrentBuild,
+                deterministic,
+                xmlReferenceResolver,
+                sourceReferenceResolver,
+                metadataReferenceResolver,
+                assemblyIdentityComparer,
+                strongNameProvider,
+                publicSign,
+                metadataImportOptions,
+                nullableContextOptions: NullableContextOptions.Disable
+            ) { }
 
         // 15.6 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -163,21 +195,36 @@ namespace Microsoft.CodeAnalysis.CSharp
             MetadataReferenceResolver? metadataReferenceResolver,
             AssemblyIdentityComparer? assemblyIdentityComparer,
             StrongNameProvider? strongNameProvider,
-            bool publicSign)
-            : this(outputKind, reportSuppressedDiagnostics, moduleName, mainTypeName, scriptClassName,
-                   usings, optimizationLevel, checkOverflow, allowUnsafe,
-                   cryptoKeyContainer, cryptoKeyFile, cryptoPublicKey, delaySign, platform,
-                   generalDiagnosticOption, warningLevel,
-                   specificDiagnosticOptions, concurrentBuild, deterministic,
-                   xmlReferenceResolver,
-                   sourceReferenceResolver,
-                   metadataReferenceResolver,
-                   assemblyIdentityComparer,
-                   strongNameProvider,
-                   publicSign,
-                   MetadataImportOptions.Public)
-        {
-        }
+            bool publicSign
+        )
+            : this(
+                outputKind,
+                reportSuppressedDiagnostics,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                usings,
+                optimizationLevel,
+                checkOverflow,
+                allowUnsafe,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions,
+                concurrentBuild,
+                deterministic,
+                xmlReferenceResolver,
+                sourceReferenceResolver,
+                metadataReferenceResolver,
+                assemblyIdentityComparer,
+                strongNameProvider,
+                publicSign,
+                MetadataImportOptions.Public
+            ) { }
 
         // Expects correct arguments.
         internal CSharpCompilationOptions(
@@ -212,13 +259,38 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool referencesSupersedeLowerVersions,
             bool publicSign,
             BinderFlags topLevelBinderFlags,
-            NullableContextOptions nullableContextOptions)
-            : base(outputKind, reportSuppressedDiagnostics, moduleName, mainTypeName, scriptClassName,
-                   cryptoKeyContainer, cryptoKeyFile, cryptoPublicKey, delaySign, publicSign, optimizationLevel, checkOverflow,
-                   platform, generalDiagnosticOption, warningLevel, specificDiagnosticOptions.ToImmutableDictionaryOrEmpty(),
-                   concurrentBuild, deterministic, currentLocalTime, debugPlusMode, xmlReferenceResolver,
-                   sourceReferenceResolver, syntaxTreeOptionsProvider, metadataReferenceResolver,
-                   assemblyIdentityComparer, strongNameProvider, metadataImportOptions, referencesSupersedeLowerVersions)
+            NullableContextOptions nullableContextOptions
+        )
+            : base(
+                outputKind,
+                reportSuppressedDiagnostics,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                publicSign,
+                optimizationLevel,
+                checkOverflow,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions.ToImmutableDictionaryOrEmpty(),
+                concurrentBuild,
+                deterministic,
+                currentLocalTime,
+                debugPlusMode,
+                xmlReferenceResolver,
+                sourceReferenceResolver,
+                syntaxTreeOptionsProvider,
+                metadataReferenceResolver,
+                assemblyIdentityComparer,
+                strongNameProvider,
+                metadataImportOptions,
+                referencesSupersedeLowerVersions
+            )
         {
             this.Usings = usings.AsImmutableOrEmpty();
             this.AllowUnsafe = allowUnsafe;
@@ -226,47 +298,49 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.NullableContextOptions = nullableContextOptions;
         }
 
-        private CSharpCompilationOptions(CSharpCompilationOptions other) : this(
-            outputKind: other.OutputKind,
-            moduleName: other.ModuleName,
-            mainTypeName: other.MainTypeName,
-            scriptClassName: other.ScriptClassName,
-            usings: other.Usings,
-            optimizationLevel: other.OptimizationLevel,
-            checkOverflow: other.CheckOverflow,
-            allowUnsafe: other.AllowUnsafe,
-            cryptoKeyContainer: other.CryptoKeyContainer,
-            cryptoKeyFile: other.CryptoKeyFile,
-            cryptoPublicKey: other.CryptoPublicKey,
-            delaySign: other.DelaySign,
-            platform: other.Platform,
-            generalDiagnosticOption: other.GeneralDiagnosticOption,
-            warningLevel: other.WarningLevel,
-            specificDiagnosticOptions: other.SpecificDiagnosticOptions,
-            concurrentBuild: other.ConcurrentBuild,
-            deterministic: other.Deterministic,
-            currentLocalTime: other.CurrentLocalTime,
-            debugPlusMode: other.DebugPlusMode,
-            xmlReferenceResolver: other.XmlReferenceResolver,
-            sourceReferenceResolver: other.SourceReferenceResolver,
-            syntaxTreeOptionsProvider: other.SyntaxTreeOptionsProvider,
-            metadataReferenceResolver: other.MetadataReferenceResolver,
-            assemblyIdentityComparer: other.AssemblyIdentityComparer,
-            strongNameProvider: other.StrongNameProvider,
-            metadataImportOptions: other.MetadataImportOptions,
-            referencesSupersedeLowerVersions: other.ReferencesSupersedeLowerVersions,
-            reportSuppressedDiagnostics: other.ReportSuppressedDiagnostics,
-            publicSign: other.PublicSign,
-            topLevelBinderFlags: other.TopLevelBinderFlags,
-            nullableContextOptions: other.NullableContextOptions)
-        {
-        }
+        private CSharpCompilationOptions(CSharpCompilationOptions other)
+            : this(
+                outputKind: other.OutputKind,
+                moduleName: other.ModuleName,
+                mainTypeName: other.MainTypeName,
+                scriptClassName: other.ScriptClassName,
+                usings: other.Usings,
+                optimizationLevel: other.OptimizationLevel,
+                checkOverflow: other.CheckOverflow,
+                allowUnsafe: other.AllowUnsafe,
+                cryptoKeyContainer: other.CryptoKeyContainer,
+                cryptoKeyFile: other.CryptoKeyFile,
+                cryptoPublicKey: other.CryptoPublicKey,
+                delaySign: other.DelaySign,
+                platform: other.Platform,
+                generalDiagnosticOption: other.GeneralDiagnosticOption,
+                warningLevel: other.WarningLevel,
+                specificDiagnosticOptions: other.SpecificDiagnosticOptions,
+                concurrentBuild: other.ConcurrentBuild,
+                deterministic: other.Deterministic,
+                currentLocalTime: other.CurrentLocalTime,
+                debugPlusMode: other.DebugPlusMode,
+                xmlReferenceResolver: other.XmlReferenceResolver,
+                sourceReferenceResolver: other.SourceReferenceResolver,
+                syntaxTreeOptionsProvider: other.SyntaxTreeOptionsProvider,
+                metadataReferenceResolver: other.MetadataReferenceResolver,
+                assemblyIdentityComparer: other.AssemblyIdentityComparer,
+                strongNameProvider: other.StrongNameProvider,
+                metadataImportOptions: other.MetadataImportOptions,
+                referencesSupersedeLowerVersions: other.ReferencesSupersedeLowerVersions,
+                reportSuppressedDiagnostics: other.ReportSuppressedDiagnostics,
+                publicSign: other.PublicSign,
+                topLevelBinderFlags: other.TopLevelBinderFlags,
+                nullableContextOptions: other.NullableContextOptions
+            ) { }
 
         public override string Language => LanguageNames.CSharp;
 
         internal CSharpCompilationOptions WithTopLevelBinderFlags(BinderFlags flags)
         {
-            return (flags == TopLevelBinderFlags) ? this : new CSharpCompilationOptions(this) { TopLevelBinderFlags = flags };
+            return (flags == TopLevelBinderFlags)
+              ? this
+              : new CSharpCompilationOptions(this) { TopLevelBinderFlags = flags };
         }
 
         internal override ImmutableArray<string> GetImports() => Usings;
@@ -374,7 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public CSharpCompilationOptions WithUsings(IEnumerable<string>? usings) =>
             new CSharpCompilationOptions(this) { Usings = usings.AsImmutableOrEmpty() };
 
-        public CSharpCompilationOptions WithUsings(params string[]? usings) => WithUsings((IEnumerable<string>?)usings);
+        public CSharpCompilationOptions WithUsings(params string[]? usings) =>
+            WithUsings((IEnumerable<string>?)usings);
 
         public new CSharpCompilationOptions WithOptimizationLevel(OptimizationLevel value)
         {
@@ -436,16 +511,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { PublicSign = publicSign };
         }
 
-        protected override CompilationOptions CommonWithGeneralDiagnosticOption(ReportDiagnostic value) => WithGeneralDiagnosticOption(value);
+        protected override CompilationOptions CommonWithGeneralDiagnosticOption(
+            ReportDiagnostic value
+        ) => WithGeneralDiagnosticOption(value);
 
-        protected override CompilationOptions CommonWithSpecificDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic>? specificDiagnosticOptions) =>
-            WithSpecificDiagnosticOptions(specificDiagnosticOptions);
+        protected override CompilationOptions CommonWithSpecificDiagnosticOptions(
+            ImmutableDictionary<string, ReportDiagnostic>? specificDiagnosticOptions
+        ) => WithSpecificDiagnosticOptions(specificDiagnosticOptions);
 
-        protected override CompilationOptions CommonWithSpecificDiagnosticOptions(IEnumerable<KeyValuePair<string, ReportDiagnostic>>? specificDiagnosticOptions) =>
-            WithSpecificDiagnosticOptions(specificDiagnosticOptions);
+        protected override CompilationOptions CommonWithSpecificDiagnosticOptions(
+            IEnumerable<KeyValuePair<string, ReportDiagnostic>>? specificDiagnosticOptions
+        ) => WithSpecificDiagnosticOptions(specificDiagnosticOptions);
 
-        protected override CompilationOptions CommonWithReportSuppressedDiagnostics(bool reportSuppressedDiagnostics) =>
-            WithReportSuppressedDiagnostics(reportSuppressedDiagnostics);
+        protected override CompilationOptions CommonWithReportSuppressedDiagnostics(
+            bool reportSuppressedDiagnostics
+        ) => WithReportSuppressedDiagnostics(reportSuppressedDiagnostics);
 
         public new CSharpCompilationOptions WithGeneralDiagnosticOption(ReportDiagnostic value)
         {
@@ -457,7 +537,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { GeneralDiagnosticOption = value };
         }
 
-        public new CSharpCompilationOptions WithSpecificDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic>? values)
+        public new CSharpCompilationOptions WithSpecificDiagnosticOptions(
+            ImmutableDictionary<string, ReportDiagnostic>? values
+        )
         {
             if (values == null)
             {
@@ -472,17 +554,27 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { SpecificDiagnosticOptions = values };
         }
 
-        public new CSharpCompilationOptions WithSpecificDiagnosticOptions(IEnumerable<KeyValuePair<string, ReportDiagnostic>>? values) =>
-            new CSharpCompilationOptions(this) { SpecificDiagnosticOptions = values.ToImmutableDictionaryOrEmpty() };
+        public new CSharpCompilationOptions WithSpecificDiagnosticOptions(
+            IEnumerable<KeyValuePair<string, ReportDiagnostic>>? values
+        ) =>
+            new CSharpCompilationOptions(this)
+            {
+                SpecificDiagnosticOptions = values.ToImmutableDictionaryOrEmpty()
+            };
 
-        public new CSharpCompilationOptions WithReportSuppressedDiagnostics(bool reportSuppressedDiagnostics)
+        public new CSharpCompilationOptions WithReportSuppressedDiagnostics(
+            bool reportSuppressedDiagnostics
+        )
         {
             if (reportSuppressedDiagnostics == this.ReportSuppressedDiagnostics)
             {
                 return this;
             }
 
-            return new CSharpCompilationOptions(this) { ReportSuppressedDiagnostics = reportSuppressedDiagnostics };
+            return new CSharpCompilationOptions(this)
+            {
+                ReportSuppressedDiagnostics = reportSuppressedDiagnostics
+            };
         }
 
         public CSharpCompilationOptions WithWarningLevel(int warningLevel)
@@ -565,7 +657,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { XmlReferenceResolver = resolver };
         }
 
-        public new CSharpCompilationOptions WithSourceReferenceResolver(SourceReferenceResolver? resolver)
+        public new CSharpCompilationOptions WithSourceReferenceResolver(
+            SourceReferenceResolver? resolver
+        )
         {
             if (ReferenceEquals(resolver, this.SourceReferenceResolver))
             {
@@ -575,7 +669,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { SourceReferenceResolver = resolver };
         }
 
-        public new CSharpCompilationOptions WithSyntaxTreeOptionsProvider(SyntaxTreeOptionsProvider? provider)
+        public new CSharpCompilationOptions WithSyntaxTreeOptionsProvider(
+            SyntaxTreeOptionsProvider? provider
+        )
         {
             if (ReferenceEquals(provider, this.SyntaxTreeOptionsProvider))
             {
@@ -585,7 +681,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { SyntaxTreeOptionsProvider = provider };
         }
 
-        public new CSharpCompilationOptions WithMetadataReferenceResolver(MetadataReferenceResolver? resolver)
+        public new CSharpCompilationOptions WithMetadataReferenceResolver(
+            MetadataReferenceResolver? resolver
+        )
         {
             if (ReferenceEquals(resolver, this.MetadataReferenceResolver))
             {
@@ -595,7 +693,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { MetadataReferenceResolver = resolver };
         }
 
-        public new CSharpCompilationOptions WithAssemblyIdentityComparer(AssemblyIdentityComparer? comparer)
+        public new CSharpCompilationOptions WithAssemblyIdentityComparer(
+            AssemblyIdentityComparer? comparer
+        )
         {
             comparer = comparer ?? AssemblyIdentityComparer.Default;
 
@@ -617,37 +717,51 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(this) { StrongNameProvider = provider };
         }
 
-        protected override CompilationOptions CommonWithConcurrentBuild(bool concurrent) => WithConcurrentBuild(concurrent);
-        protected override CompilationOptions CommonWithDeterministic(bool deterministic) => WithDeterministic(deterministic);
+        protected override CompilationOptions CommonWithConcurrentBuild(bool concurrent) =>
+            WithConcurrentBuild(concurrent);
+        protected override CompilationOptions CommonWithDeterministic(bool deterministic) =>
+            WithDeterministic(deterministic);
 
-        protected override CompilationOptions CommonWithOutputKind(OutputKind kind) => WithOutputKind(kind);
+        protected override CompilationOptions CommonWithOutputKind(OutputKind kind) =>
+            WithOutputKind(kind);
 
-        protected override CompilationOptions CommonWithPlatform(Platform platform) => WithPlatform(platform);
+        protected override CompilationOptions CommonWithPlatform(Platform platform) =>
+            WithPlatform(platform);
 
-        protected override CompilationOptions CommonWithPublicSign(bool publicSign) => WithPublicSign(publicSign);
+        protected override CompilationOptions CommonWithPublicSign(bool publicSign) =>
+            WithPublicSign(publicSign);
 
-        protected override CompilationOptions CommonWithOptimizationLevel(OptimizationLevel value) => WithOptimizationLevel(value);
+        protected override CompilationOptions CommonWithOptimizationLevel(
+            OptimizationLevel value
+        ) => WithOptimizationLevel(value);
 
-        protected override CompilationOptions CommonWithAssemblyIdentityComparer(AssemblyIdentityComparer? comparer) =>
-            WithAssemblyIdentityComparer(comparer);
+        protected override CompilationOptions CommonWithAssemblyIdentityComparer(
+            AssemblyIdentityComparer? comparer
+        ) => WithAssemblyIdentityComparer(comparer);
 
-        protected override CompilationOptions CommonWithXmlReferenceResolver(XmlReferenceResolver? resolver) =>
-            WithXmlReferenceResolver(resolver);
+        protected override CompilationOptions CommonWithXmlReferenceResolver(
+            XmlReferenceResolver? resolver
+        ) => WithXmlReferenceResolver(resolver);
 
-        protected override CompilationOptions CommonWithSourceReferenceResolver(SourceReferenceResolver? resolver) =>
-            WithSourceReferenceResolver(resolver);
+        protected override CompilationOptions CommonWithSourceReferenceResolver(
+            SourceReferenceResolver? resolver
+        ) => WithSourceReferenceResolver(resolver);
 
-        protected override CompilationOptions CommonWithSyntaxTreeOptionsProvider(SyntaxTreeOptionsProvider? provider)
-            => WithSyntaxTreeOptionsProvider(provider);
+        protected override CompilationOptions CommonWithSyntaxTreeOptionsProvider(
+            SyntaxTreeOptionsProvider? provider
+        ) => WithSyntaxTreeOptionsProvider(provider);
 
-        protected override CompilationOptions CommonWithMetadataReferenceResolver(MetadataReferenceResolver? resolver) =>
-            WithMetadataReferenceResolver(resolver);
+        protected override CompilationOptions CommonWithMetadataReferenceResolver(
+            MetadataReferenceResolver? resolver
+        ) => WithMetadataReferenceResolver(resolver);
 
-        protected override CompilationOptions CommonWithStrongNameProvider(StrongNameProvider? provider) =>
-            WithStrongNameProvider(provider);
+        protected override CompilationOptions CommonWithStrongNameProvider(
+            StrongNameProvider? provider
+        ) => WithStrongNameProvider(provider);
 
-        protected override CompilationOptions CommonWithMetadataImportOptions(MetadataImportOptions value) =>
-            WithMetadataImportOptions(value);
+        protected override CompilationOptions CommonWithMetadataImportOptions(
+            MetadataImportOptions value
+        ) => WithMetadataImportOptions(value);
 
         [Obsolete]
         protected override CompilationOptions CommonWithFeatures(ImmutableArray<string> features)
@@ -664,61 +778,133 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (this.OutputKind.IsValid() && !this.OutputKind.IsApplication())
                 {
-                    builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_NoMainOnDLL));
+                    builder.Add(
+                        Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_NoMainOnDLL)
+                    );
                 }
 
                 if (!MainTypeName.IsValidClrTypeName())
                 {
-                    builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadCompilationOptionValue, nameof(MainTypeName), MainTypeName));
+                    builder.Add(
+                        Diagnostic.Create(
+                            MessageProvider.Instance,
+                            (int)ErrorCode.ERR_BadCompilationOptionValue,
+                            nameof(MainTypeName),
+                            MainTypeName
+                        )
+                    );
                 }
             }
 
             if (!Platform.IsValid())
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadPlatformType, Platform.ToString()));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadPlatformType,
+                        Platform.ToString()
+                    )
+                );
             }
 
             if (ModuleName != null)
             {
-                MetadataHelpers.CheckAssemblyOrModuleName(ModuleName, MessageProvider.Instance, (int)ErrorCode.ERR_BadModuleName, builder);
+                MetadataHelpers.CheckAssemblyOrModuleName(
+                    ModuleName,
+                    MessageProvider.Instance,
+                    (int)ErrorCode.ERR_BadModuleName,
+                    builder
+                );
             }
 
             if (!OutputKind.IsValid())
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadCompilationOptionValue, nameof(OutputKind), OutputKind.ToString()));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadCompilationOptionValue,
+                        nameof(OutputKind),
+                        OutputKind.ToString()
+                    )
+                );
             }
 
             if (!OptimizationLevel.IsValid())
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadCompilationOptionValue, nameof(OptimizationLevel), OptimizationLevel.ToString()));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadCompilationOptionValue,
+                        nameof(OptimizationLevel),
+                        OptimizationLevel.ToString()
+                    )
+                );
             }
 
             if (ScriptClassName == null || !ScriptClassName.IsValidClrTypeName())
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadCompilationOptionValue, nameof(ScriptClassName), ScriptClassName ?? "null"));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadCompilationOptionValue,
+                        nameof(ScriptClassName),
+                        ScriptClassName ?? "null"
+                    )
+                );
             }
 
             if (WarningLevel < 0)
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadCompilationOptionValue, nameof(WarningLevel), WarningLevel));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadCompilationOptionValue,
+                        nameof(WarningLevel),
+                        WarningLevel
+                    )
+                );
             }
 
             if (Usings != null && Usings.Any(u => !u.IsValidClrNamespaceName()))
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadCompilationOptionValue, nameof(Usings), Usings.Where(u => !u.IsValidClrNamespaceName()).First() ?? "null"));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadCompilationOptionValue,
+                        nameof(Usings),
+                        Usings.Where(u => !u.IsValidClrNamespaceName()).First() ?? "null"
+                    )
+                );
             }
 
-            if (Platform == Platform.AnyCpu32BitPreferred && OutputKind.IsValid() && !(OutputKind == OutputKind.ConsoleApplication || OutputKind == OutputKind.WindowsApplication || OutputKind == OutputKind.WindowsRuntimeApplication))
+            if (
+                Platform == Platform.AnyCpu32BitPreferred
+                && OutputKind.IsValid()
+                && !(
+                    OutputKind == OutputKind.ConsoleApplication
+                    || OutputKind == OutputKind.WindowsApplication
+                    || OutputKind == OutputKind.WindowsRuntimeApplication
+                )
+            )
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadPrefer32OnLib));
+                builder.Add(
+                    Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadPrefer32OnLib)
+                );
             }
 
             if (!MetadataImportOptions.IsValid())
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadCompilationOptionValue, nameof(MetadataImportOptions), MetadataImportOptions.ToString()));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadCompilationOptionValue,
+                        nameof(MetadataImportOptions),
+                        MetadataImportOptions.ToString()
+                    )
+                );
             }
 
-            // TODO: add check for 
+            // TODO: add check for
             //          (kind == 'arm' || kind == 'appcontainer' || kind == 'winmdobj') &&
             //          (version >= "6.2")
         }
@@ -735,10 +921,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            return this.AllowUnsafe == other.AllowUnsafe &&
-                   this.TopLevelBinderFlags == other.TopLevelBinderFlags &&
-                   (this.Usings == null ? other.Usings == null : this.Usings.SequenceEqual(other.Usings, StringComparer.Ordinal) &&
-                   this.NullableContextOptions == other.NullableContextOptions);
+            return this.AllowUnsafe == other.AllowUnsafe
+                && this.TopLevelBinderFlags == other.TopLevelBinderFlags
+                && (
+                    this.Usings == null
+                        ? other.Usings == null
+                        : this.Usings.SequenceEqual(other.Usings, StringComparer.Ordinal)
+                          && this.NullableContextOptions == other.NullableContextOptions
+                );
         }
 
         public override bool Equals(object? obj)
@@ -748,13 +938,25 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override int GetHashCode()
         {
-            return Hash.Combine(base.GetHashCodeHelper(),
-                   Hash.Combine(this.AllowUnsafe,
-                   Hash.Combine(Hash.CombineValues(this.Usings, StringComparer.Ordinal),
-                   Hash.Combine(TopLevelBinderFlags.GetHashCode(), this.NullableContextOptions.GetHashCode()))));
+            return Hash.Combine(
+                base.GetHashCodeHelper(),
+                Hash.Combine(
+                    this.AllowUnsafe,
+                    Hash.Combine(
+                        Hash.CombineValues(this.Usings, StringComparer.Ordinal),
+                        Hash.Combine(
+                            TopLevelBinderFlags.GetHashCode(),
+                            this.NullableContextOptions.GetHashCode()
+                        )
+                    )
+                )
+            );
         }
 
-        internal override Diagnostic? FilterDiagnostic(Diagnostic diagnostic, CancellationToken cancellationToken)
+        internal override Diagnostic? FilterDiagnostic(
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             return CSharpDiagnosticFilter.Filter(
                 diagnostic,
@@ -763,7 +965,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 GeneralDiagnosticOption,
                 SpecificDiagnosticOptions,
                 SyntaxTreeOptionsProvider,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         protected override CompilationOptions CommonWithModuleName(string? moduleName)
@@ -781,7 +984,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return WithScriptClassName(scriptClassName);
         }
 
-        protected override CompilationOptions CommonWithCryptoKeyContainer(string? cryptoKeyContainer)
+        protected override CompilationOptions CommonWithCryptoKeyContainer(
+            string? cryptoKeyContainer
+        )
         {
             return WithCryptoKeyContainer(cryptoKeyContainer);
         }
@@ -791,7 +996,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return WithCryptoKeyFile(cryptoKeyFile);
         }
 
-        protected override CompilationOptions CommonWithCryptoPublicKey(ImmutableArray<byte> cryptoPublicKey)
+        protected override CompilationOptions CommonWithCryptoPublicKey(
+            ImmutableArray<byte> cryptoPublicKey
+        )
         {
             return WithCryptoPublicKey(cryptoPublicKey);
         }
@@ -831,20 +1038,35 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceReferenceResolver? sourceReferenceResolver,
             MetadataReferenceResolver? metadataReferenceResolver,
             AssemblyIdentityComparer? assemblyIdentityComparer,
-            StrongNameProvider? strongNameProvider)
-            : this(outputKind, false, moduleName, mainTypeName, scriptClassName, usings,
-                   optimizationLevel, checkOverflow, allowUnsafe, cryptoKeyContainer, cryptoKeyFile,
-                   cryptoPublicKey, delaySign, platform, generalDiagnosticOption, warningLevel,
-                   specificDiagnosticOptions, concurrentBuild, deterministic,
-                   xmlReferenceResolver: xmlReferenceResolver,
-                   sourceReferenceResolver: sourceReferenceResolver,
-                   metadataReferenceResolver: metadataReferenceResolver,
-                   assemblyIdentityComparer: assemblyIdentityComparer,
-                   strongNameProvider: strongNameProvider,
-                   publicSign: false)
-        {
-        }
-
+            StrongNameProvider? strongNameProvider
+        )
+            : this(
+                outputKind,
+                false,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                usings,
+                optimizationLevel,
+                checkOverflow,
+                allowUnsafe,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions,
+                concurrentBuild,
+                deterministic,
+                xmlReferenceResolver: xmlReferenceResolver,
+                sourceReferenceResolver: sourceReferenceResolver,
+                metadataReferenceResolver: metadataReferenceResolver,
+                assemblyIdentityComparer: assemblyIdentityComparer,
+                strongNameProvider: strongNameProvider,
+                publicSign: false
+            ) { }
 
         // 1.0 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -870,20 +1092,33 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceReferenceResolver? sourceReferenceResolver,
             MetadataReferenceResolver? metadataReferenceResolver,
             AssemblyIdentityComparer? assemblyIdentityComparer,
-            StrongNameProvider? strongNameProvider)
-            : this(outputKind, moduleName, mainTypeName, scriptClassName, usings,
-                   optimizationLevel, checkOverflow, allowUnsafe,
-                   cryptoKeyContainer, cryptoKeyFile, cryptoPublicKey, delaySign,
-                   platform, generalDiagnosticOption, warningLevel,
-                   specificDiagnosticOptions, concurrentBuild,
-                   deterministic: false,
-                   xmlReferenceResolver: xmlReferenceResolver,
-                   sourceReferenceResolver: sourceReferenceResolver,
-                   metadataReferenceResolver: metadataReferenceResolver,
-                   assemblyIdentityComparer: assemblyIdentityComparer,
-                   strongNameProvider: strongNameProvider)
-        {
-        }
+            StrongNameProvider? strongNameProvider
+        )
+            : this(
+                outputKind,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                usings,
+                optimizationLevel,
+                checkOverflow,
+                allowUnsafe,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions,
+                concurrentBuild,
+                deterministic: false,
+                xmlReferenceResolver: xmlReferenceResolver,
+                sourceReferenceResolver: sourceReferenceResolver,
+                metadataReferenceResolver: metadataReferenceResolver,
+                assemblyIdentityComparer: assemblyIdentityComparer,
+                strongNameProvider: strongNameProvider
+            ) { }
 
         // Bad constructor -- DO NOT USE
         // Violates the rules for optional parameter overloads detailed at
@@ -913,26 +1148,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceReferenceResolver? sourceReferenceResolver,
             MetadataReferenceResolver? metadataReferenceResolver,
             AssemblyIdentityComparer? assemblyIdentityComparer,
-            StrongNameProvider? strongNameProvider)
-            : this(outputKind, false, moduleName, mainTypeName, scriptClassName, usings, optimizationLevel,
-                   checkOverflow, allowUnsafe, cryptoKeyContainer, cryptoKeyFile, cryptoPublicKey,
-                   delaySign, platform, generalDiagnosticOption, warningLevel,
-                   specificDiagnosticOptions, concurrentBuild,
-                   deterministic: deterministic,
-                   currentLocalTime: default,
-                   debugPlusMode: false,
-                   xmlReferenceResolver: xmlReferenceResolver,
-                   sourceReferenceResolver: sourceReferenceResolver,
-                   syntaxTreeOptionsProvider: null,
-                   metadataReferenceResolver: metadataReferenceResolver,
-                   assemblyIdentityComparer: assemblyIdentityComparer,
-                   strongNameProvider: strongNameProvider,
-                   metadataImportOptions: MetadataImportOptions.Public,
-                   referencesSupersedeLowerVersions: false,
-                   publicSign: false,
-                   topLevelBinderFlags: BinderFlags.None,
-                   nullableContextOptions: NullableContextOptions.Disable)
-        {
-        }
+            StrongNameProvider? strongNameProvider
+        )
+            : this(
+                outputKind,
+                false,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                usings,
+                optimizationLevel,
+                checkOverflow,
+                allowUnsafe,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions,
+                concurrentBuild,
+                deterministic: deterministic,
+                currentLocalTime: default,
+                debugPlusMode: false,
+                xmlReferenceResolver: xmlReferenceResolver,
+                sourceReferenceResolver: sourceReferenceResolver,
+                syntaxTreeOptionsProvider: null,
+                metadataReferenceResolver: metadataReferenceResolver,
+                assemblyIdentityComparer: assemblyIdentityComparer,
+                strongNameProvider: strongNameProvider,
+                metadataImportOptions: MetadataImportOptions.Public,
+                referencesSupersedeLowerVersions: false,
+                publicSign: false,
+                topLevelBinderFlags: BinderFlags.None,
+                nullableContextOptions: NullableContextOptions.Disable
+            ) { }
     }
 }

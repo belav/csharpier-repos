@@ -8,7 +8,8 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public partial class DebugNameFormatter : TypeNameFormatter<DebugNameFormatter.Void, DebugNameFormatter.FormatOptions>
+    public partial class DebugNameFormatter
+        : TypeNameFormatter<DebugNameFormatter.Void, DebugNameFormatter.FormatOptions>
     {
         public static readonly DebugNameFormatter Instance = new DebugNameFormatter();
 
@@ -46,7 +47,11 @@ namespace Internal.TypeSystem
             return Void.Value;
         }
 
-        public override Void AppendName(StringBuilder sb, FunctionPointerType type, FormatOptions options)
+        public override Void AppendName(
+            StringBuilder sb,
+            FunctionPointerType type,
+            FormatOptions options
+        )
         {
             MethodSignature signature = type.Signature;
 
@@ -64,13 +69,21 @@ namespace Internal.TypeSystem
             return Void.Value;
         }
 
-        public override Void AppendName(StringBuilder sb, GenericParameterDesc type, FormatOptions options)
+        public override Void AppendName(
+            StringBuilder sb,
+            GenericParameterDesc type,
+            FormatOptions options
+        )
         {
             sb.Append(type.DiagnosticName);
             return Void.Value;
         }
 
-        public override Void AppendName(StringBuilder sb, SignatureMethodVariable type, FormatOptions options)
+        public override Void AppendName(
+            StringBuilder sb,
+            SignatureMethodVariable type,
+            FormatOptions options
+        )
         {
             sb.Append("!!");
             sb.Append(type.Index.ToStringInvariant());
@@ -78,7 +91,11 @@ namespace Internal.TypeSystem
             return Void.Value;
         }
 
-        public override Void AppendName(StringBuilder sb, SignatureTypeVariable type, FormatOptions options)
+        public override Void AppendName(
+            StringBuilder sb,
+            SignatureTypeVariable type,
+            FormatOptions options
+        )
         {
             sb.Append('!');
             sb.Append(type.Index.ToStringInvariant());
@@ -86,7 +103,12 @@ namespace Internal.TypeSystem
             return Void.Value;
         }
 
-        protected override Void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType, FormatOptions options)
+        protected override Void AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType,
+            FormatOptions options
+        )
         {
             if ((options & FormatOptions.NamespaceQualify) != 0)
             {
@@ -99,7 +121,11 @@ namespace Internal.TypeSystem
             return Void.Value;
         }
 
-        protected override Void AppendNameForNamespaceType(StringBuilder sb, DefType type, FormatOptions options)
+        protected override Void AppendNameForNamespaceType(
+            StringBuilder sb,
+            DefType type,
+            FormatOptions options
+        )
         {
             int initialLen = sb.Length;
             try
@@ -184,9 +210,11 @@ namespace Internal.TypeSystem
 
         private void AssemblyQualify(StringBuilder sb, DefType type, FormatOptions options)
         {
-            if (((options & FormatOptions.AssemblyQualify) != 0)
+            if (
+                ((options & FormatOptions.AssemblyQualify) != 0)
                 && type is MetadataType mdType
-                && mdType.Module is IAssemblyDesc)
+                && mdType.Module is IAssemblyDesc
+            )
             {
                 sb.Append('[');
 
@@ -228,7 +256,11 @@ namespace Internal.TypeSystem
             }
         }
 
-        protected override Void AppendNameForInstantiatedType(StringBuilder sb, DefType type, FormatOptions options)
+        protected override Void AppendNameForInstantiatedType(
+            StringBuilder sb,
+            DefType type,
+            FormatOptions options
+        )
         {
             AppendName(sb, type.GetTypeDefinition(), options);
 
@@ -249,7 +281,10 @@ namespace Internal.TypeSystem
             return Void.Value;
         }
 
-        protected override DefType GetContainingType(DefType possibleInnerType, FormatOptions options)
+        protected override DefType GetContainingType(
+            DefType possibleInnerType,
+            FormatOptions options
+        )
         {
             try
             {
@@ -272,7 +307,6 @@ namespace Internal.TypeSystem
             None = 0,
             AssemblyQualify = 0x1,
             NamespaceQualify = 0x2,
-
             Default = AssemblyQualify | NamespaceQualify,
         }
     }

@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 string name,
                 object? tag,
                 string filePath,
-                int lineNumber)
-                : base(listener)
+                int lineNumber
+            ) : base(listener)
             {
                 Name = name;
                 Tag = tag;
@@ -35,10 +35,10 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 LineNumber = lineNumber;
             }
 
-            internal void AssociateWithTask(Task task)
-                => Task = task;
+            internal void AssociateWithTask(Task task) => Task = task;
 
-            public override string ToString() => $"{Name} {Path.GetFileName(FilePath)} {LineNumber}";
+            public override string ToString() =>
+                $"{Name} {Path.GetFileName(FilePath)} {LineNumber}";
         }
     }
 }

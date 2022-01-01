@@ -35,7 +35,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void ObservableCollectionListSource_ContainsListCollection_returns_false()
         {
-            Assert.False(((IListSource)new ObservableCollectionListSource<FakeEntity>()).ContainsListCollection);
+            Assert.False(
+                (
+                    (IListSource)new ObservableCollectionListSource<FakeEntity>()
+                ).ContainsListCollection
+            );
         }
 
         [ConditionalFact]

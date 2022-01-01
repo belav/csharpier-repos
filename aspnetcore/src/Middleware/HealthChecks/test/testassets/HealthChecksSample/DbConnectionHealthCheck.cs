@@ -12,13 +12,12 @@ namespace HealthChecksSample;
 public abstract class DbConnectionHealthCheck : IHealthCheck
 {
     protected DbConnectionHealthCheck(string connectionString)
-        : this(connectionString, testQuery: null)
-    {
-    }
+        : this(connectionString, testQuery: null) { }
 
     protected DbConnectionHealthCheck(string connectionString, string testQuery)
     {
-        ConnectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+        ConnectionString =
+            connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         TestQuery = testQuery;
     }
 
@@ -33,7 +32,10 @@ public abstract class DbConnectionHealthCheck : IHealthCheck
 
     protected abstract DbConnection CreateConnection(string connectionString);
 
-    public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<HealthCheckResult> CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         using (var connection = CreateConnection(ConnectionString))
         {
@@ -51,7 +53,10 @@ public abstract class DbConnectionHealthCheck : IHealthCheck
             }
             catch (DbException ex)
             {
-                return new HealthCheckResult(status: context.Registration.FailureStatus, exception: ex);
+                return new HealthCheckResult(
+                    status: context.Registration.FailureStatus,
+                    exception: ex
+                );
             }
         }
 

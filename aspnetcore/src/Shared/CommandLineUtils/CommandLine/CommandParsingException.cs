@@ -7,8 +7,7 @@ namespace Microsoft.Extensions.CommandLineUtils;
 
 internal class CommandParsingException : Exception
 {
-    public CommandParsingException(CommandLineApplication command, string message)
-        : base(message)
+    public CommandParsingException(CommandLineApplication command, string message) : base(message)
     {
         Command = command;
     }

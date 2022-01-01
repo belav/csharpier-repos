@@ -35,15 +35,18 @@ namespace System.Net.Test.Common
         private readonly QuicConnection _connection;
 
         // This is specifically request streams, not control streams
-        private readonly Dictionary<int, Http3LoopbackStream> _openStreams = new Dictionary<int, Http3LoopbackStream>();
+        private readonly Dictionary<int, Http3LoopbackStream> _openStreams = new Dictionary<
+            int,
+            Http3LoopbackStream
+        >();
 
         private Http3LoopbackStream _currentStream;
         // We can't retrieve the stream ID after the stream is disposed, so store it separately
         // Initialize it to -4 so that the firstInvalidStreamId calculation will work even if we never process a request
         private long _currentStreamId = -4;
 
-        private Http3LoopbackStream _inboundControlStream;      // Inbound control stream from client
-        private Http3LoopbackStream _outboundControlStream;     // Our outbound control stream
+        private Http3LoopbackStream _inboundControlStream; // Inbound control stream from client
+        private Http3LoopbackStream _outboundControlStream; // Our outbound control stream
 
         public Http3LoopbackConnection(QuicConnection connection)
         {
@@ -58,9 +61,9 @@ namespace System.Net.Test.Common
                 stream.Dispose();
             }
 
-// We don't dispose the connection currently, because this causes races when the server connection is closed before
-// the client has received and handled all response data.
-// See discussion in https://github.com/dotnet/runtime/pull/57223#discussion_r687447832
+            // We don't dispose the connection currently, because this causes races when the server connection is closed before
+            // the client has received and handled all response data.
+            // See discussion in https://github.com/dotnet/runtime/pull/57223#discussion_r687447832
 #if false
             // Dispose the connection
             // If we already waited for graceful shutdown from the client, then the connection is already closed and this will simply release the handle.
@@ -131,7 +134,8 @@ namespace System.Net.Test.Common
             long? streamType = await controlStream.ReadIntegerAsync();
             Assert.Equal(Http3LoopbackStream.ControlStream, streamType);
 
-            List<(long settingId, long settingValue)> settings = await controlStream.ReadSettingsAsync();
+            List<(long settingId, long settingValue)> settings =
+                await controlStream.ReadSettingsAsync();
             (long settingId, long settingValue) = Assert.Single(settings);
 
             Assert.Equal(Http3LoopbackStream.MaxHeaderListSize, settingId);
@@ -160,7 +164,8 @@ namespace System.Net.Test.Common
 
         public async Task<(Http3LoopbackStream clientControlStream, Http3LoopbackStream requestStream)> AcceptControlAndRequestStreamAsync()
         {
-            Http3LoopbackStream streamA = null, streamB = null;
+            Http3LoopbackStream streamA = null,
+                streamB = null;
 
             try
             {
@@ -171,7 +176,10 @@ namespace System.Net.Test.Common
                 {
                     (false, true) => (streamA, streamB),
                     (true, false) => (streamB, streamA),
-                    _ => throw new Exception("Expected one unidirectional and one bidirectional stream; received something else.")
+                    _
+                      => throw new Exception(
+                          "Expected one unidirectional and one bidirectional stream; received something else."
+                      )
                 };
             }
             catch
@@ -185,9 +193,11 @@ namespace System.Net.Test.Common
         public async Task EstablishControlStreamAsync()
         {
             _outboundControlStream = OpenUnidirectionalStream();
-            await _outboundControlStream.SendUnidirectionalStreamTypeAsync(Http3LoopbackStream.ControlStream);
+            await _outboundControlStream.SendUnidirectionalStreamTypeAsync(
+                Http3LoopbackStream.ControlStream
+            );
             await _outboundControlStream.SendSettingsFrameAsync();
-       }
+        }
 
         public override async Task<byte[]> ReadRequestBodyAsync()
         {
@@ -200,27 +210,50 @@ namespace System.Net.Test.Common
             return await stream.ReadRequestDataAsync(readBody).ConfigureAwait(false);
         }
 
-        public override Task SendResponseAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "", bool isFinal = true, int requestId = 0)
+        public override Task SendResponseAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = "",
+            bool isFinal = true,
+            int requestId = 0
+        )
         {
-            return GetOpenRequest(requestId).SendResponseAsync(statusCode, headers, content, isFinal);
+            return GetOpenRequest(requestId)
+                .SendResponseAsync(statusCode, headers, content, isFinal);
         }
 
-        public override Task SendResponseBodyAsync(byte[] content, bool isFinal = true, int requestId = 0)
+        public override Task SendResponseBodyAsync(
+            byte[] content,
+            bool isFinal = true,
+            int requestId = 0
+        )
         {
             return GetOpenRequest(requestId).SendResponseBodyAsync(content, isFinal);
         }
 
-        public override Task SendResponseHeadersAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, int requestId = 0)
+        public override Task SendResponseHeadersAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            int requestId = 0
+        )
         {
             return GetOpenRequest(requestId).SendResponseHeadersAsync(statusCode, headers);
         }
 
-        public override Task SendPartialResponseHeadersAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, int requestId = 0)
+        public override Task SendPartialResponseHeadersAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            int requestId = 0
+        )
         {
             return GetOpenRequest(requestId).SendPartialResponseHeadersAsync(statusCode, headers);
         }
 
-        public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
             Http3LoopbackStream stream = await AcceptRequestStreamAsync().ConfigureAwait(false);
 
@@ -246,7 +279,8 @@ namespace System.Net.Test.Common
                 long firstInvalidStreamId = _currentStreamId + 4;
                 await _outboundControlStream.SendGoAwayFrameAsync(firstInvalidStreamId);
             }
-            catch (QuicConnectionAbortedException abortException) when (abortException.ErrorCode == H3_NO_ERROR)
+            catch (QuicConnectionAbortedException abortException)
+                when (abortException.ErrorCode == H3_NO_ERROR)
             {
                 // Client must have closed the connection already because the HttpClientHandler instance was disposed.
                 // So nothing to do.
@@ -280,10 +314,13 @@ namespace System.Net.Test.Common
 
                     if (!refuseNewRequests)
                     {
-                        throw new Exception("Unexpected request stream received while waiting for client disconnect");
+                        throw new Exception(
+                            "Unexpected request stream received while waiting for client disconnect"
+                        );
                     }
                 }
-                catch (QuicConnectionAbortedException abortException) when (abortException.ErrorCode == H3_NO_ERROR)
+                catch (QuicConnectionAbortedException abortException)
+                    when (abortException.ErrorCode == H3_NO_ERROR)
                 {
                     break;
                 }
@@ -296,15 +333,21 @@ namespace System.Net.Test.Common
 
             // The client's control stream should throw QuicConnectionAbortedException, indicating that it was
             // aborted because the connection was closed (and was not explicitly closed or aborted prior to the connection being closed)
-            await Assert.ThrowsAsync<QuicConnectionAbortedException>(async () => await _inboundControlStream.ReadFrameAsync());
+            await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                async () => await _inboundControlStream.ReadFrameAsync()
+            );
 
             await CloseAsync(H3_NO_ERROR);
         }
 
-        public override async Task WaitForCancellationAsync(bool ignoreIncomingData = true, int requestId = 0)
+        public override async Task WaitForCancellationAsync(
+            bool ignoreIncomingData = true,
+            int requestId = 0
+        )
         {
-            await GetOpenRequest(requestId).WaitForCancellationAsync(ignoreIncomingData).ConfigureAwait(false);
+            await GetOpenRequest(requestId)
+                .WaitForCancellationAsync(ignoreIncomingData)
+                .ConfigureAwait(false);
         }
     }
-
 }

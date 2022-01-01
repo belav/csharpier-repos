@@ -23,8 +23,14 @@ internal class WebViewRenderer : WebRenderer
         IpcSender ipcSender,
         ILoggerFactory loggerFactory,
         WebViewJSRuntime jsRuntime,
-        JSComponentInterop jsComponentInterop) :
-        base(serviceProvider, loggerFactory, jsRuntime.ReadJsonSerializerOptions(), jsComponentInterop)
+        JSComponentInterop jsComponentInterop
+    )
+        : base(
+            serviceProvider,
+            loggerFactory,
+            jsRuntime.ReadJsonSerializerOptions(),
+            jsComponentInterop
+        )
     {
         _dispatcher = dispatcher;
         _ipcSender = ipcSender;
@@ -47,11 +53,9 @@ internal class WebViewRenderer : WebRenderer
     {
         var batchId = nextRenderBatchId++;
         var tcs = new TaskCompletionSource();
-        _unacknowledgedRenderBatches.Enqueue(new UnacknowledgedRenderBatch
-        {
-            BatchId = batchId,
-            CompletionSource = tcs,
-        });
+        _unacknowledgedRenderBatches.Enqueue(
+            new UnacknowledgedRenderBatch { BatchId = batchId, CompletionSource = tcs, }
+        );
 
         _ipcSender.ApplyRenderBatch(batchId, renderBatch);
         return tcs.Task;
@@ -62,21 +66,22 @@ internal class WebViewRenderer : WebRenderer
         _ipcSender.AttachToDocument(componentId, domElementSelector);
     }
 
-    public new int AddRootComponent(Type componentType, string domElementSelector)
-       => base.AddRootComponent(componentType, domElementSelector);
+    public new int AddRootComponent(Type componentType, string domElementSelector) =>
+        base.AddRootComponent(componentType, domElementSelector);
 
-    public new Task RenderRootComponentAsync(int componentId, ParameterView parameters)
-       => base.RenderRootComponentAsync(componentId, parameters);
+    public new Task RenderRootComponentAsync(int componentId, ParameterView parameters) =>
+        base.RenderRootComponentAsync(componentId, parameters);
 
-    public new void RemoveRootComponent(int componentId)
-       => base.RemoveRootComponent(componentId);
+    public new void RemoveRootComponent(int componentId) => base.RemoveRootComponent(componentId);
 
     public void NotifyRenderCompleted(long batchId)
     {
         var nextUnacknowledgedBatch = _unacknowledgedRenderBatches.Dequeue();
         if (nextUnacknowledgedBatch.BatchId != batchId)
         {
-            throw new InvalidOperationException($"Received unexpected acknowledgement for render batch {batchId} (next batch should be {nextUnacknowledgedBatch.BatchId})");
+            throw new InvalidOperationException(
+                $"Received unexpected acknowledgement for render batch {batchId} (next batch should be {nextUnacknowledgedBatch.BatchId})"
+            );
         }
 
         nextUnacknowledgedBatch.CompletionSource.SetResult();

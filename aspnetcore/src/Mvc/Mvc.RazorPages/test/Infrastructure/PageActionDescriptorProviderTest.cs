@@ -22,7 +22,8 @@ public class PageActionDescriptorProviderTest
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            GetRazorPagesOptions());
+            GetRazorPagesOptions()
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
@@ -39,21 +40,19 @@ public class PageActionDescriptorProviderTest
         var model = new PageRouteModel("/Test.cshtml", "/Test")
         {
             Selectors =
+            {
+                new SelectorModel
                 {
-                    new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel
-                        {
-                            Template = "/Test/{id:int?}",
-                        }
-                    }
+                    AttributeRouteModel = new AttributeRouteModel { Template = "/Test/{id:int?}", }
                 }
+            }
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            GetRazorPagesOptions());
+            GetRazorPagesOptions()
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
@@ -73,26 +72,21 @@ public class PageActionDescriptorProviderTest
         // Arrange
         var model = new PageRouteModel("/Test.cshtml", "/Test")
         {
-            RouteValues =
-                {
-                    { "custom-key", "custom-value" },
-                },
+            RouteValues = { { "custom-key", "custom-value" }, },
             Selectors =
+            {
+                new SelectorModel
                 {
-                    new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel
-                        {
-                            Template = "/Test/{id:int?}",
-                        }
-                    }
+                    AttributeRouteModel = new AttributeRouteModel { Template = "/Test/{id:int?}", }
                 }
+            }
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            GetRazorPagesOptions());
+            GetRazorPagesOptions()
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
@@ -113,7 +107,8 @@ public class PageActionDescriptorProviderTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Test", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -122,27 +117,24 @@ public class PageActionDescriptorProviderTest
         // Arrange
         var model = new PageRouteModel("/Areas/Accounts/Pages/Test.cshtml", "/Test", "Accounts")
         {
-            RouteValues =
-                {
-                    { "page", "/Test" },
-                    { "area", "Accounts" },
-                },
+            RouteValues = { { "page", "/Test" }, { "area", "Accounts" }, },
             Selectors =
+            {
+                new SelectorModel
                 {
-                    new SelectorModel
+                    AttributeRouteModel = new AttributeRouteModel
                     {
-                        AttributeRouteModel = new AttributeRouteModel
-                        {
-                            Template = "Accounts/Test/{id:int?}",
-                        }
+                        Template = "Accounts/Test/{id:int?}",
                     }
                 }
+            }
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            GetRazorPagesOptions());
+            GetRazorPagesOptions()
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
@@ -163,7 +155,8 @@ public class PageActionDescriptorProviderTest
             {
                 Assert.Equal("page", kvp.Key);
                 Assert.Equal("/Test", kvp.Value);
-            });
+            }
+        );
         Assert.Equal("Accounts", descriptor.AreaName);
         Assert.Equal("Accounts/Test/{id:int?}", descriptor.AttributeRouteInfo.Template);
     }
@@ -176,19 +169,20 @@ public class PageActionDescriptorProviderTest
         var model = new PageRouteModel("/Areas/Accounts/Pages/Test.cshtml", "/Test", "Accounts")
         {
             Selectors =
+            {
+                new SelectorModel
                 {
-                    new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel(),
-                        ActionConstraints = { expected }
-                    }
-                },
+                    AttributeRouteModel = new AttributeRouteModel(),
+                    ActionConstraints = { expected }
+                }
+            },
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            GetRazorPagesOptions());
+            GetRazorPagesOptions()
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
@@ -210,19 +204,20 @@ public class PageActionDescriptorProviderTest
         var model = new PageRouteModel("/Test.cshtml", "/Test", "Accounts")
         {
             Selectors =
+            {
+                new SelectorModel
                 {
-                    new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel(),
-                        EndpointMetadata = { expected }
-                    }
-                },
+                    AttributeRouteModel = new AttributeRouteModel(),
+                    EndpointMetadata = { expected }
+                }
+            },
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            GetRazorPagesOptions());
+            GetRazorPagesOptions()
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
@@ -242,64 +237,59 @@ public class PageActionDescriptorProviderTest
         var applicationModelProvider = new TestPageRouteModelProvider(
             new PageRouteModel("/base-path/Test.cshtml", "/base-path/Test")
             {
-                Selectors =
-                {
-                        CreateSelectorModel("base-path/Test/Home")
-                }
+                Selectors = { CreateSelectorModel("base-path/Test/Home") }
             },
             new PageRouteModel("/base-path/Index.cshtml", "/base-path/Index")
             {
                 Selectors =
                 {
-                         CreateSelectorModel("base-path/Index"),
-                         CreateSelectorModel("base-path/"),
+                    CreateSelectorModel("base-path/Index"),
+                    CreateSelectorModel("base-path/"),
                 }
             },
             new PageRouteModel("/base-path/Admin/Index.cshtml", "/base-path/Admin/Index")
             {
                 Selectors =
                 {
-                         CreateSelectorModel("base-path/Admin/Index"),
-                         CreateSelectorModel("base-path/Admin"),
+                    CreateSelectorModel("base-path/Admin/Index"),
+                    CreateSelectorModel("base-path/Admin"),
                 }
             },
             new PageRouteModel("/base-path/Admin/User.cshtml", "/base-path/Admin/User")
             {
-                Selectors =
-                {
-                         CreateSelectorModel("base-path/Admin/User"),
-                },
-            });
+                Selectors = { CreateSelectorModel("base-path/Admin/User"), },
+            }
+        );
 
         var options = GetRazorPagesOptions();
 
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            options);
+            options
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
         provider.OnProvidersExecuting(context);
 
         // Assert
-        Assert.Collection(context.Results,
+        Assert.Collection(
+            context.Results,
             result => Assert.Equal("base-path/Test/Home", result.AttributeRouteInfo.Template),
             result => Assert.Equal("base-path/Index", result.AttributeRouteInfo.Template),
             result => Assert.Equal("base-path/", result.AttributeRouteInfo.Template),
             result => Assert.Equal("base-path/Admin/Index", result.AttributeRouteInfo.Template),
             result => Assert.Equal("base-path/Admin", result.AttributeRouteInfo.Template),
-            result => Assert.Equal("base-path/Admin/User", result.AttributeRouteInfo.Template));
+            result => Assert.Equal("base-path/Admin/User", result.AttributeRouteInfo.Template)
+        );
     }
 
     private static SelectorModel CreateSelectorModel(string template)
     {
         return new SelectorModel
         {
-            AttributeRouteModel = new AttributeRouteModel
-            {
-                Template = template,
-            }
+            AttributeRouteModel = new AttributeRouteModel { Template = template, }
         };
     }
 
@@ -312,28 +302,34 @@ public class PageActionDescriptorProviderTest
             {
                 Selectors =
                 {
-                         CreateSelectorModel("/Catalog/Details/Index/{id:int?}"),
-                         CreateSelectorModel("/Catalog/Details/{id:int?}"),
+                    CreateSelectorModel("/Catalog/Details/Index/{id:int?}"),
+                    CreateSelectorModel("/Catalog/Details/{id:int?}"),
                 },
-            });
+            }
+        );
 
         var provider = new PageActionDescriptorProvider(
             new[] { applicationModelProvider },
             GetAccessor<MvcOptions>(),
-            GetRazorPagesOptions());
+            GetRazorPagesOptions()
+        );
         var context = new ActionDescriptorProviderContext();
 
         // Act
         provider.OnProvidersExecuting(context);
 
         // Assert
-        Assert.Collection(context.Results,
+        Assert.Collection(
+            context.Results,
             result =>
             {
                 var descriptor = Assert.IsType<PageActionDescriptor>(result);
                 Assert.Equal("/Catalog/Details/Index.cshtml", descriptor.RelativePath);
                 Assert.Equal("/Catalog/Details/Index", descriptor.RouteValues["page"]);
-                Assert.Equal("/Catalog/Details/Index/{id:int?}", descriptor.AttributeRouteInfo.Template);
+                Assert.Equal(
+                    "/Catalog/Details/Index/{id:int?}",
+                    descriptor.AttributeRouteInfo.Template
+                );
             },
             result =>
             {
@@ -341,7 +337,8 @@ public class PageActionDescriptorProviderTest
                 Assert.Equal("/Catalog/Details/Index.cshtml", descriptor.RelativePath);
                 Assert.Equal("/Catalog/Details/Index", descriptor.RouteValues["page"]);
                 Assert.Equal("/Catalog/Details/{id:int?}", descriptor.AttributeRouteInfo.Template);
-            });
+            }
+        );
     }
 
     private static PageRouteModel CreateModel()
@@ -349,15 +346,12 @@ public class PageActionDescriptorProviderTest
         return new PageRouteModel("/Home.cshtml", "/Home")
         {
             Selectors =
+            {
+                new SelectorModel
                 {
-                    new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel
-                        {
-                            Template = "Home",
-                        }
-                    }
+                    AttributeRouteModel = new AttributeRouteModel { Template = "Home", }
                 }
+            }
         };
     }
 
@@ -371,7 +365,12 @@ public class PageActionDescriptorProviderTest
 
     private static IOptions<RazorPagesOptions> GetRazorPagesOptions()
     {
-        return Options.Create(new RazorPagesOptions { Conventions = new PageConventionCollection(Mock.Of<IServiceProvider>()) });
+        return Options.Create(
+            new RazorPagesOptions
+            {
+                Conventions = new PageConventionCollection(Mock.Of<IServiceProvider>())
+            }
+        );
     }
 
     private class TestPageRouteModelProvider : IPageRouteModelProvider
@@ -385,9 +384,7 @@ public class PageActionDescriptorProviderTest
 
         public int Order => -1000;
 
-        public void OnProvidersExecuted(PageRouteModelProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(PageRouteModelProviderContext context) { }
 
         public void OnProvidersExecuting(PageRouteModelProviderContext context)
         {

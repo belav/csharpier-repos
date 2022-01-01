@@ -13,20 +13,32 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "RegOpenKeyExW", CharSet = CharSet.Unicode, ExactSpelling = true)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegOpenKeyExW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true
+        )]
         internal static partial int RegOpenKeyEx(
             SafeRegistryHandle hKey,
             string? lpSubKey,
             int ulOptions,
             int samDesired,
-            out SafeRegistryHandle hkResult);
+            out SafeRegistryHandle hkResult
+        );
 
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "RegOpenKeyExW", CharSet = CharSet.Unicode, ExactSpelling = true)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegOpenKeyExW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true
+        )]
         internal static partial int RegOpenKeyEx(
             IntPtr hKey,
             string? lpSubKey,
             int ulOptions,
             int samDesired,
-            out SafeRegistryHandle hkResult);
+            out SafeRegistryHandle hkResult
+        );
     }
 }
