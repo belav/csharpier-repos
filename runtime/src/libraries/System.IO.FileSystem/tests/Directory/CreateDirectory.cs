@@ -13,6 +13,7 @@ namespace System.IO.Tests
         public static TheoryData ReservedDeviceNames = IOInputs
             .GetReservedDeviceNames()
             .ToTheoryData();
+
         #region Utilities
 
         public virtual DirectoryInfo Create(string path)
@@ -21,7 +22,6 @@ namespace System.IO.Tests
         }
 
         public virtual bool IsDirectoryCreate => true;
-
         #endregion
 
         #region UniversalTests

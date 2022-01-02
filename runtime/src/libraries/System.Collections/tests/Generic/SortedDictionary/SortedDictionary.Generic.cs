@@ -35,6 +35,7 @@ namespace System.Collections.Tests
         {
             get { return true; }
         }
+
         protected override KeyValuePair<int, int> CreateT(int seed)
         {
             Random rand = new Random(seed);

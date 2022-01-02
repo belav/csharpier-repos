@@ -44,6 +44,7 @@ internal class NonDisposableStream : Stream
 
     /// <inheritdoc />
     public override long Length => _innerStream.Length;
+
     /// <inheritdoc />
     public override long Position
     {

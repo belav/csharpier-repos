@@ -26,6 +26,7 @@ public class GenericClass<T>
 public class SimpleClass
 {
     public static bool cond;
+
     public void GenericMethod<T>()
     {
         T a = default(T);
@@ -42,6 +43,7 @@ public class SimpleClass
 public class ComplexClass<K>
 {
     public static bool cond;
+
     public void GenericMethod<T>(K k)
     {
         T a = default(T);

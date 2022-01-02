@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+
 //
 //  Test case for a GC Stress 4 failure
 //

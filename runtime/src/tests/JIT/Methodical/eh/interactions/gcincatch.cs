@@ -37,6 +37,7 @@ namespace test2
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

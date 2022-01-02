@@ -241,10 +241,12 @@ namespace BasicEventSourceTests
     internal class BadEventSource_MismatchedIds : EventSource
     {
         public BadEventSource_MismatchedIds(EventSourceSettings settings) : base(settings) { }
+
         public void Event1(int arg)
         {
             WriteEvent(1, arg);
         }
+
         // Error Used the same event ID for this event.
         public void Event2(int arg)
         {

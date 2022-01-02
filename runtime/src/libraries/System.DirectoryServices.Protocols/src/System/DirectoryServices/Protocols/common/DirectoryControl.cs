@@ -343,6 +343,7 @@ namespace System.DirectoryServices.Protocols
                 _flag = value;
             }
         }
+
         public override byte[] GetValue()
         {
             _directoryControlValue = BerConverter.Encode("{i}", new object[] { (int)Flag });
@@ -392,6 +393,7 @@ namespace System.DirectoryServices.Protocols
     public class SearchOptionsControl : DirectoryControl
     {
         private SearchOption _searchOption = SearchOption.DomainScope;
+
         public SearchOptionsControl() : base("1.2.840.113556.1.4.1340", null, true, true) { }
 
         public SearchOptionsControl(SearchOption flags) : this()
@@ -476,6 +478,7 @@ namespace System.DirectoryServices.Protocols
         private int _count = 1048576;
 
         public DirSyncRequestControl() : base("1.2.840.113556.1.4.841", null, true, true) { }
+
         public DirSyncRequestControl(byte[] cookie) : this()
         {
             _dirsyncCookie = cookie;
@@ -681,6 +684,7 @@ namespace System.DirectoryServices.Protocols
     public class SortRequestControl : DirectoryControl
     {
         private SortKey[] _keys = Array.Empty<SortKey>();
+
         public SortRequestControl(params SortKey[] sortKeys)
             : base("1.2.840.113556.1.4.473", null, true, true)
         {

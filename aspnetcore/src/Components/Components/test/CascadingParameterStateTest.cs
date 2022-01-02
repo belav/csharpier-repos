@@ -490,8 +490,10 @@ public class CascadingParameterStateTest
     {
         [Parameter]
         public bool RegularParam { get; set; }
+
         [CascadingParameter]
         internal ValueType1 CascadingParam1 { get; set; }
+
         [CascadingParameter]
         internal ValueType2 CascadingParam2 { get; set; }
     }
@@ -523,12 +525,16 @@ public class CascadingParameterStateTest
     }
 
     class ValueType1 { }
+
     class ValueType2 { }
+
     class ValueType3 { }
 
     class CascadingValueTypeBaseClass { }
+
     class CascadingValueTypeDerivedClass
         : CascadingValueTypeBaseClass,
           ICascadingValueTypeDerivedClassInterface { }
+
     interface ICascadingValueTypeDerivedClassInterface { }
 }

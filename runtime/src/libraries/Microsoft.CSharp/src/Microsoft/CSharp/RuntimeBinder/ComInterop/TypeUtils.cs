@@ -39,6 +39,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             }
             return false;
         }
+
         //CONFORMING
         internal static bool AreAssignable(Type dest, Type src)
         {

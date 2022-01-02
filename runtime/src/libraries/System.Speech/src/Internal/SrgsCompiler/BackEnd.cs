@@ -24,7 +24,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             InitFromBinaryGrammar(streamHelper);
         }
-
         #endregion
 
         #region Internal Methods
@@ -891,7 +890,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             return new string(achSrc, 0, iDest);
         }
-
         #endregion
 
         #region Internal Property
@@ -905,7 +903,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get { return _symbols; }
         }
-
         #endregion
 
         #region Private Methods
@@ -1460,7 +1457,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             _states.Add(state);
         }
-
         #endregion
 
         #region Internal Properties
@@ -1498,7 +1494,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             set { _scriptRefs = value; }
         }
-
         #endregion
 
         #region Private Fields

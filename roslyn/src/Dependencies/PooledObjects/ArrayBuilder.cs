@@ -39,7 +39,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
                 }
             }
         }
-
         #endregion
 
         private readonly ImmutableArray<T>.Builder _builder;
@@ -368,6 +367,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         // 2) Expose the pool or the way to create a pool or the way to get an instance.
         //    for now we will expose both and figure which way works better
         private static readonly ObjectPool<ArrayBuilder<T>> s_poolInstance = CreatePool();
+
         public static ArrayBuilder<T> GetInstance()
         {
             var builder = s_poolInstance.Allocate();
@@ -406,7 +406,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             pool = new ObjectPool<ArrayBuilder<T>>(() => new ArrayBuilder<T>(pool!), size);
             return pool;
         }
-
         #endregion
 
         public Enumerator GetEnumerator()

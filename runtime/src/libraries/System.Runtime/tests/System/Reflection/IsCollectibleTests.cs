@@ -14,6 +14,7 @@ namespace System.Reflection.Tests
     public class TestAssemblyLoadContext : AssemblyLoadContext
     {
         public TestAssemblyLoadContext() : base(true) { }
+
         protected override Assembly Load(AssemblyName assemblyName) => null;
     }
 

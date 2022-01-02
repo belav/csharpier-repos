@@ -58,6 +58,7 @@ namespace Microsoft.Win32.SafeHandles
             internal ManualResetValueTaskSourceCore<int> _source; // mutable struct; do not make this readonly
             private NativeOverlapped* _overlapped;
             private CancellationTokenRegistration _cancellationRegistration;
+
             /// <summary>
             /// 0 when the operation hasn't been scheduled, non-zero when either the operation has completed,
             /// in which case its value is a packed combination of the error code and number of bytes, or when
@@ -114,13 +115,16 @@ namespace Microsoft.Win32.SafeHandles
             }
 
             public ValueTaskSourceStatus GetStatus(short token) => _source.GetStatus(token);
+
             public void OnCompleted(
                 Action<object?> continuation,
                 object? state,
                 short token,
                 ValueTaskSourceOnCompletedFlags flags
             ) => _source.OnCompleted(continuation, state, token, flags);
+
             void IValueTaskSource.GetResult(short token) => GetResult(token);
+
             public int GetResult(short token)
             {
                 try

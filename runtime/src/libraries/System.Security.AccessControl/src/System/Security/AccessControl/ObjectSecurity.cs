@@ -54,7 +54,6 @@ namespace System.Security.AccessControl
             ControlFlags.DiscretionaryAclPresent
             | ControlFlags.DiscretionaryAclAutoInherited
             | ControlFlags.DiscretionaryAclProtected;
-
         #endregion
 
         #region Constructors
@@ -85,7 +84,6 @@ namespace System.Security.AccessControl
 
             _securityDescriptor = securityDescriptor;
         }
-
         #endregion
 
         #region Private methods
@@ -161,7 +159,6 @@ namespace System.Security.AccessControl
                 );
             }
         }
-
         #endregion
 
         #region Protected Properties and Methods
@@ -357,7 +354,6 @@ namespace System.Security.AccessControl
         {
             throw NotImplemented.ByDesign;
         }
-
         #endregion
 
         #region Public Methods

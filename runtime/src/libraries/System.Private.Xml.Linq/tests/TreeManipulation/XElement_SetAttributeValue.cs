@@ -15,7 +15,6 @@ namespace XLinqTests
 
         private EventsHelper _eHelper;
         private bool _runWithEvents;
-
         #endregion
 
         #region Public Methods and Operators
@@ -342,7 +341,6 @@ namespace XLinqTests
 
             e.Verify();
         }
-
         #endregion
 
         #region Methods

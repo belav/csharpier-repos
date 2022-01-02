@@ -7,6 +7,7 @@ namespace ExceptionFilterTestLauncher
     class Program
     {
         public static object newObject = null;
+
         public static bool SubTest(int i)
         {
             return newObject.GetHashCode() == i;

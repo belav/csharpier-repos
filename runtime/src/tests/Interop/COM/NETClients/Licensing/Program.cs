@@ -17,6 +17,7 @@ namespace NetClient
     class Program
     {
         static readonly string DefaultLicKey = "__MOCK_LICENSE_KEY__";
+
         static void ActivateLicensedObject()
         {
             Console.WriteLine($"Calling {nameof(ActivateLicensedObject)}...");

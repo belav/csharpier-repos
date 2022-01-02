@@ -503,6 +503,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         }
 
         public sealed class TX { }
+
         public sealed class TY { }
     }
 }

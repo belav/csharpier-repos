@@ -10,6 +10,7 @@ namespace System.Net.Primitives.Functional.Tests
     public sealed class IPAddressParsing_String : IPAddressParsing
     {
         public override IPAddress Parse(string ipString) => IPAddress.Parse(ipString);
+
         public override bool TryParse(string ipString, out IPAddress address) =>
             IPAddress.TryParse(ipString, out address);
 

@@ -115,6 +115,7 @@ public class HttpConnectionManagerTests : LoggedTest
             }
 
             public IDisposable BeginScope<TState>(TState state) => null;
+
             public bool IsEnabled(LogLevel logLevel) => true;
 
             public void Log<TState>(

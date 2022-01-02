@@ -133,6 +133,7 @@ namespace System.Reflection.Emit
         internal AssemblyBuilderData _assemblyData;
         private readonly InternalAssemblyBuilder _internalAssemblyBuilder;
         private ModuleBuilder _manifestModuleBuilder;
+
         // Set to true if the manifest module was returned by code:DefineDynamicModule to the user
         private bool _isManifestModuleUsedAsDefinedModule;
 
@@ -158,7 +159,6 @@ namespace System.Reflection.Emit
         internal object SyncRoot => InternalAssembly.SyncRoot;
 
         internal InternalAssemblyBuilder InternalAssembly => _internalAssemblyBuilder;
-
         #endregion
 
         #region Constructor
@@ -246,7 +246,6 @@ namespace System.Reflection.Emit
 
             _isManifestModuleUsedAsDefinedModule = false;
         }
-
         #endregion
 
         #region DefineDynamicAssembly
@@ -377,7 +376,6 @@ namespace System.Reflection.Emit
 
             return dynModule;
         }
-
         #endregion
 
         internal static void CheckContext(params Type[]?[]? typess)
@@ -439,7 +437,6 @@ namespace System.Reflection.Emit
 
         public override IList<CustomAttributeData> GetCustomAttributesData() =>
             InternalAssembly.GetCustomAttributesData();
-
         #endregion
 
         #region Assembly overrides
@@ -481,7 +478,6 @@ namespace System.Reflection.Emit
             InternalAssembly.GetSatelliteAssembly(culture, version);
 
         public override bool IsCollectible => InternalAssembly.IsCollectible;
-
         #endregion
 
         /// <param name="name">The name of module for the look up.</param>

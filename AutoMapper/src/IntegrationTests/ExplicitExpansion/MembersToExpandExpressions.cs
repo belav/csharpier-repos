@@ -12,12 +12,14 @@ namespace AutoMapper.UnitTests.Projection
             public int Desc { get; set; }
             public int Id { get; set; }
         }
+
         public class SourceInner
         {
             public int Id { get; set; }
             public int Desc { get; set; }
             public SourceDeepInner Deep { get; set; }
         }
+
         public class Source
         {
             public int Id { get; set; }
@@ -25,6 +27,7 @@ namespace AutoMapper.UnitTests.Projection
             public int Desc { get; set; }
             public SourceInner Inner { get; set; }
         }
+
         public class Dto
         {
             public string Name { get; set; }
@@ -32,6 +35,7 @@ namespace AutoMapper.UnitTests.Projection
             public int? InnerDescFlattened { get; set; }
             public int? DeepFlattened { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -53,11 +57,14 @@ namespace AutoMapper.UnitTests.Projection
                             }
                         )
             );
+
         public class TestContext : DbContext
         {
             public TestContext() : base() => Database.SetInitializer(new DatabaseInitializer());
+
             public DbSet<Source> Sources { get; set; }
         }
+
         static Source _source = new Source()
         {
             Name = "Name1",
@@ -68,6 +75,7 @@ namespace AutoMapper.UnitTests.Projection
                 Deep = new SourceDeepInner() { Desc = 28 }
             }
         };
+
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext testContext)
@@ -76,6 +84,7 @@ namespace AutoMapper.UnitTests.Projection
                 base.Seed(testContext);
             }
         }
+
         [Fact]
         public void Should_project_ok()
         {

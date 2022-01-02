@@ -47,6 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
             new CSharpRemoveUnnecessaryInlineSuppressionsDiagnosticAnalyzer();
 
         protected sealed override ParseOptions GetScriptOptions() => Options.Script;
+
         protected internal sealed override string GetLanguage() => LanguageNames.CSharp;
 
         protected override TestParameters SetParameterDefaults(TestParameters parameters) =>
@@ -154,12 +155,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
             );
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context) =>
                 context.RegisterCompilationStartAction(
                     context => context.RegisterCompilationEndAction(_ => { })
                 );
         }
-
         #endregion
 
         #region Single analyzer tests (Compiler OR Analyzer)
@@ -1105,7 +1106,6 @@ class Class
                 );
             }
         }
-
         #endregion
 
         #region Multiple analyzer tests (Compiler AND Analyzer)

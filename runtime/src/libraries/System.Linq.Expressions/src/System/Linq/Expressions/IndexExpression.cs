@@ -205,7 +205,6 @@ namespace System.Linq.Expressions
 
             return new IndexExpression(array, null, indexList);
         }
-
         #endregion
 
         #region Property
@@ -377,7 +376,6 @@ namespace System.Linq.Expressions
             }
             return true;
         }
-
         #endregion
 
         /// <summary>

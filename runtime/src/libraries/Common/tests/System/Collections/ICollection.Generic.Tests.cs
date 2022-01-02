@@ -60,7 +60,6 @@ namespace System.Collections.Tests
 
         protected virtual Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentException);
-
         #endregion
 
         #region IEnumerable<T> Helper Methods
@@ -122,7 +121,6 @@ namespace System.Collections.Tests
                 };
             }
         }
-
         #endregion
 
         #region IsReadOnly
@@ -134,7 +132,6 @@ namespace System.Collections.Tests
             ICollection<T> collection = GenericICollectionFactory(count);
             Assert.Equal(IsReadOnly_ValidityValue, collection.IsReadOnly);
         }
-
         #endregion
 
         #region Count
@@ -146,7 +143,6 @@ namespace System.Collections.Tests
             ICollection<T> collection = GenericICollectionFactory(count);
             Assert.Equal(count, collection.Count);
         }
-
         #endregion
 
         #region Add
@@ -316,7 +312,6 @@ namespace System.Collections.Tests
                 collection.Add(toAdd);
             }
         }
-
         #endregion
 
         #region Clear
@@ -406,7 +401,6 @@ namespace System.Collections.Tests
                 return new WeakReference<object>(value);
             }
         }
-
         #endregion
 
         #region Contains
@@ -503,7 +497,6 @@ namespace System.Collections.Tests
                     Assert.False(collection.Contains(default(T)));
             }
         }
-
         #endregion
 
         #region CopyTo
@@ -591,7 +584,6 @@ namespace System.Collections.Tests
             collection.CopyTo(array, 0);
             Assert.True(Enumerable.SequenceEqual(collection, array.Take(count)));
         }
-
         #endregion
 
         #region Remove

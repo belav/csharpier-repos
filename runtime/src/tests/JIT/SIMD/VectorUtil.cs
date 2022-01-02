@@ -196,6 +196,7 @@ internal partial class VectorTest
             throw new ArgumentException();
         }
     }
+
     private static T Multiply<T>(T left, T right) where T : struct, IComparable<T>, IEquatable<T>
     {
         if (typeof(T) == typeof(float))
@@ -302,6 +303,7 @@ class JitLog : IDisposable
             fileStream.Dispose();
         }
     }
+
     public bool IsEnabled()
     {
         return (fileStream != null);

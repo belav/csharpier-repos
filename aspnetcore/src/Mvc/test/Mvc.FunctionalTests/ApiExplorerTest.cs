@@ -844,6 +844,7 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 .ToArray()
         );
     }
+
     [Fact]
     public async Task ApiExplorer_ResponseType_InheritingFromController()
     {

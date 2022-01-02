@@ -179,7 +179,6 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             return documentUri != null && trackedDocuments.ContainsKey(documentUri);
         }
     }
-
     #endregion
 
     #region Implementation of IDocumentChangeTracker
@@ -313,7 +312,6 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             return _trackedDocuments;
         }
     }
-
     #endregion
 
     #region LSP Solution Retrieval
@@ -373,7 +371,6 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             return documentInProjectContext;
         }
     }
-
     #endregion
 
     /// <summary>

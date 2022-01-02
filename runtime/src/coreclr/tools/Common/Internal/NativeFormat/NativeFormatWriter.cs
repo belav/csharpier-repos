@@ -134,42 +134,52 @@ namespace Internal.NativeFormat
         {
             _encoder.WriteByte(b);
         }
+
         public void WriteUInt8(byte value)
         {
             _encoder.WriteUInt8(value);
         }
+
         public void WriteUInt16(ushort value)
         {
             _encoder.WriteUInt16(value);
         }
+
         public void WriteUInt32(uint value)
         {
             _encoder.WriteUInt32(value);
         }
+
         public void WriteUInt64(ulong value)
         {
             _encoder.WriteUInt64(value);
         }
+
         public void WriteUnsigned(uint d)
         {
             _encoder.WriteUnsigned(d);
         }
+
         public void WriteSigned(int i)
         {
             _encoder.WriteSigned(i);
         }
+
         public void WriteUnsignedLong(ulong i)
         {
             _encoder.WriteUnsignedLong(i);
         }
+
         public void WriteSignedLong(long i)
         {
             _encoder.WriteSignedLong(i);
         }
+
         public void WriteFloat(float value)
         {
             _encoder.WriteFloat(value);
         }
+
         public void WriteDouble(double value)
         {
             _encoder.WriteDouble(value);
@@ -440,6 +450,7 @@ namespace Internal.NativeFormat
         internal struct TypeSignatureCompressor
         {
             internal TypeSignatureCompressor(NativeWriter pWriter) { }
+
             internal void Pack(Vertex vertex) { }
         }
 #endif
@@ -648,6 +659,7 @@ namespace Internal.NativeFormat
         {
             return 6659 + ((int)_value) * 19;
         }
+
         public override bool Equals(object other)
         {
             if (!(other is UnsignedConstant))

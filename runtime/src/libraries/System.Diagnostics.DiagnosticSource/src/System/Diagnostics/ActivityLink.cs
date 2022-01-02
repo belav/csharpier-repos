@@ -39,7 +39,9 @@ namespace System.Diagnostics
             (obj is ActivityLink link) && this.Equals(link);
 
         public bool Equals(ActivityLink value) => Context == value.Context && value.Tags == Tags;
+
         public static bool operator ==(ActivityLink left, ActivityLink right) => left.Equals(right);
+
         public static bool operator !=(ActivityLink left, ActivityLink right) =>
             !left.Equals(right);
     }

@@ -2216,6 +2216,7 @@ namespace Microsoft.CodeAnalysis.Operations
                 isImplicit
             );
         }
+
         private IOperation CreateBoundBinaryOperatorBase(
             BoundBinaryOperatorBase boundBinaryOperatorBase
         )

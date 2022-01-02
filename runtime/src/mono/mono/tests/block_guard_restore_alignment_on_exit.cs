@@ -5,6 +5,7 @@ class Driver
 {
     static volatile bool foo = false;
     static int res = 1;
+
     static void InnerFunc()
     {
         res = 2;

@@ -19,6 +19,7 @@ namespace System.Text.Json.Node
         private static readonly ConstantExpression Int1Expression = Expression.Constant((object)1);
 
         private JsonNode Dynamic { get; }
+
         internal MetaDynamic(Expression expression, JsonNode dynamicObject)
             : base(expression, BindingRestrictions.Empty, dynamicObject)
         {

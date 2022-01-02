@@ -274,7 +274,6 @@ namespace System.Linq.Expressions.Interpreter
         #region Instruction
 
         public override int ConsumedStack => ArgumentCount;
-
         #endregion
 
         /// <summary>

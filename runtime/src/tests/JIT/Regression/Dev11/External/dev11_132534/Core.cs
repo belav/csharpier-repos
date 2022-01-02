@@ -59,6 +59,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_2");
         }
+
         public static void Pass6Args_Maxstack_3(
             int arg0,
             long arg1,
@@ -77,6 +78,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_3");
         }
+
         public static void Pass6Args_Maxstack_4(
             int arg0,
             long arg1,
@@ -95,6 +97,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_4");
         }
+
         public static void Pass6Args_Maxstack_5(
             int arg0,
             long arg1,
@@ -113,6 +116,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_5");
         }
+
         public static void Pass6Args_Maxstack_6(
             int arg0,
             long arg1,
@@ -131,6 +135,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_6");
         }
+
         public static void Pass6Args_Maxstack_7(
             int arg0,
             long arg1,
@@ -149,6 +154,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_7");
         }
+
         public static void Pass6Args_Maxstack_8(
             int arg0,
             long arg1,
@@ -167,6 +173,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_8");
         }
+
         public static void Pass6Args_Maxstack_9(
             int arg0,
             long arg1,
@@ -185,6 +192,7 @@ namespace Test
             Support.VerifyString(arg5, StringValues.ForArg5);
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_9");
         }
+
         public static void Pass6Args_Maxstack_10(
             int arg0,
             long arg1,
@@ -204,6 +212,7 @@ namespace Test
             CallerSide.RecordExecutedCaller("Pass6Args_Maxstack_10");
         }
     }
+
     public static partial class CallerSide
     {
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_2()
@@ -225,6 +234,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_2(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_2");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_3()
         {
             int arg0;
@@ -244,6 +254,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_3(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_3");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_4()
         {
             int arg0;
@@ -263,6 +274,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_4(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_4");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_5()
         {
             int arg0;
@@ -282,6 +294,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_5(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_5");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_6()
         {
             int arg0;
@@ -301,6 +314,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_6(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_6");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_7()
         {
             int arg0;
@@ -320,6 +334,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_7(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_7");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_8()
         {
             int arg0;
@@ -339,6 +354,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_8(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_8");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_9()
         {
             int arg0;
@@ -358,6 +374,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_9(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_9");
         }
+
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_10()
         {
             int arg0;
@@ -377,6 +394,7 @@ namespace Test
             ILJmpWrappers.Pass6Args_Maxstack_10(arg0, arg1, arg2, arg3, arg4, arg5);
             CallerSide.VerifyExecutedCaller("Pass6Args_Maxstack_10");
         }
+
         public static bool MakeAllWrapperCalls()
         {
             bool bret = true;

@@ -3261,7 +3261,6 @@ namespace System
             var compilation = CreateEmptyCompilation(new[] { Parse(corLibText) }, options: options);
             compilation.VerifyDiagnostics(expectedDiagnostics);
         }
-
         #endregion Attributes for unsafe code
 
         /// <summary>

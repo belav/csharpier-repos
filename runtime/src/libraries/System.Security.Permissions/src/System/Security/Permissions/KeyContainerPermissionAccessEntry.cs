@@ -18,10 +18,12 @@ namespace System.Security.Permissions
             string keyContainerName,
             KeyContainerPermissionFlags flags
         ) { }
+
         public KeyContainerPermissionAccessEntry(
             CspParameters parameters,
             KeyContainerPermissionFlags flags
         ) { }
+
         public KeyContainerPermissionAccessEntry(
             string keyStore,
             string providerName,
@@ -30,16 +32,19 @@ namespace System.Security.Permissions
             int keySpec,
             KeyContainerPermissionFlags flags
         ) { }
+
         public string KeyStore { get; set; }
         public string ProviderName { get; set; }
         public int ProviderType { get; set; }
         public string KeyContainerName { get; set; }
         public int KeySpec { get; set; }
         public KeyContainerPermissionFlags Flags { get; set; }
+
         public override bool Equals(object o)
         {
             return false;
         }
+
         public override int GetHashCode()
         {
             return 0;

@@ -1107,10 +1107,12 @@ public class TryUpdateModelIntegrationTest
     private class AddressWithNoParameterlessConstructor
     {
         private readonly int _id;
+
         public AddressWithNoParameterlessConstructor(int id)
         {
             _id = id;
         }
+
         public string Street { get; set; }
         public string City { get; set; }
     }

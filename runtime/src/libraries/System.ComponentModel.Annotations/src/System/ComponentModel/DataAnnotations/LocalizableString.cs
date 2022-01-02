@@ -17,9 +17,9 @@ namespace System.ComponentModel.DataAnnotations
         private readonly string _propertyName;
         private Func<string?>? _cachedResult;
         private string? _propertyValue;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
         private Type? _resourceType;
-
         #endregion
 
         #region All Constructors
@@ -37,7 +37,6 @@ namespace System.ComponentModel.DataAnnotations
         {
             _propertyName = propertyName;
         }
-
         #endregion
 
         #region Properties
@@ -76,7 +75,6 @@ namespace System.ComponentModel.DataAnnotations
                 }
             }
         }
-
         #endregion
 
         #region Methods

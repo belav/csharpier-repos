@@ -3,6 +3,7 @@
 using System;
 
 delegate int Int32_VoidDelegate();
+
 public class TestClass
 {
     public static int Main(string[] args)

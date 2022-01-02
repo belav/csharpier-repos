@@ -25,6 +25,7 @@ namespace Sample
         public override bool BrowserOnly => true;
 
         Measurement[] measurements;
+
         public WebSocketTask()
         {
             measurements = new Measurement[]
@@ -64,6 +65,7 @@ namespace Sample
         {
             protected const int MaxLength = 130_000;
             protected const int MaxMessages = 100;
+
             public override async Task BeforeBatch()
             {
                 await base.BeforeBatch();
@@ -98,6 +100,7 @@ namespace Sample
             {
                 return 250_000;
             }
+
             public override void RunStep()
             {
                 buffer[0] = (byte)(step & 0xff);
@@ -116,6 +119,7 @@ namespace Sample
             const int bufferSize = 64 * 1024;
             public override int InitialSamples => 1000;
             ArraySegment<byte> buffer = new ArraySegment<byte>(new byte[bufferSize]);
+
             public PartialSend_64KBMeasurement()
             {
                 for (int i = 0; i < bufferSize; i++)
@@ -123,6 +127,7 @@ namespace Sample
                     buffer[i] = (byte)(i & 0xff);
                 }
             }
+
             protected override int CalculateSteps(int milliseconds, TimeSpan initTs)
             {
                 return 3000;
@@ -146,6 +151,7 @@ namespace Sample
             const int bufferSize = 1 * 1024 * 1024;
             public override int InitialSamples => 10;
             ArraySegment<byte> buffer = new ArraySegment<byte>(new byte[bufferSize]);
+
             public PartialSend_1MBMeasurement()
             {
                 for (int i = 0; i < bufferSize; i++)
@@ -153,6 +159,7 @@ namespace Sample
                     buffer[i] = (byte)(i & 0xff);
                 }
             }
+
             protected override int CalculateSteps(int milliseconds, TimeSpan initTs)
             {
                 return 100;

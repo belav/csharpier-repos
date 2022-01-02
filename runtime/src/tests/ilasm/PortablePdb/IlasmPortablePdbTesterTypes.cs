@@ -11,6 +11,7 @@ namespace IlasmPortablePdbTests
         public Guid HashAlgorithm { get; set; }
         public byte[] Hash { get; set; }
         public Guid Language { get; set; }
+
         public DocumentStub(string name)
         {
             Name = name;
@@ -52,6 +53,7 @@ namespace IlasmPortablePdbTests
         public string Name { get; set; }
         public DocumentStub Document { get; set; }
         public List<SequencePointStub> SequencePoints { get; set; }
+
         public MethodDebugInformationStub(
             string name,
             DocumentStub document,
@@ -69,6 +71,7 @@ namespace IlasmPortablePdbTests
         public string Name { get; set; }
         public int Index { get; set; }
         public bool IsDebuggerHidden { get; set; }
+
         public VariableStub(string name, int index, bool isDebuggerHidden = false)
         {
             Name = name;
@@ -84,6 +87,7 @@ namespace IlasmPortablePdbTests
         public int EndOffset { get; set; }
         public int Length { get; set; }
         public List<VariableStub> Variables { get; set; }
+
         public LocalScopeStub(
             string methodName,
             int startOffset,

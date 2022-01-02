@@ -5,6 +5,7 @@
 namespace DefaultNamespace
 {
     using System;
+
     class JITcrash
     {
         public static int Main(String[] args)

@@ -245,7 +245,6 @@ namespace System.Data
                 base.SetIndex(newSort, newRowStates, newRowFilter);
             }
         }
-
         #endregion
 
         #region IBindingList

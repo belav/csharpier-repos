@@ -682,7 +682,6 @@ namespace System.IO.Packaging
         {
             get { return Reader.AttributeCount - _ignoredAttributeCount; }
         }
-
         #endregion Public Properties
 
         #region Private Methods

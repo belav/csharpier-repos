@@ -184,6 +184,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             return sb.ToString();
         }
+
         private static ClassifiedTextElement GetSignatureClassifiedText(SignatureHelpItem item)
         {
             var taggedTexts = new ArrayBuilder<TaggedText>();

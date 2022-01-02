@@ -10,6 +10,7 @@ using Xunit;
     MaxParallelThreads = 1
 )]
 
+
 namespace System.Diagnostics.Contracts.Tests
 {
     internal static class Utilities

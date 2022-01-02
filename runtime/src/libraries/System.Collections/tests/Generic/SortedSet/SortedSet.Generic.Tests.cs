@@ -18,7 +18,6 @@ namespace System.Collections.Tests
         {
             return new SortedSet<T>();
         }
-
         #endregion
 
         #region Constructors
@@ -117,7 +116,6 @@ namespace System.Collections.Tests
             SortedSet<T> set = new SortedSet<T>(enumerable, comparer: null);
             Assert.True(set.SetEquals(enumerable));
         }
-
 #endregion
 
 #region Max and Min
@@ -140,7 +138,6 @@ namespace System.Collections.Tests
                 Assert.Equal(default(T), set.Max);
             }
         }
-
 #endregion
 
 #region GetViewBetween
@@ -260,7 +257,6 @@ namespace System.Collections.Tests
             Assert.Equal(default(T), view.Min);
             Assert.Equal(default(T), view.Max);
         }
-
         #endregion
 
 #region RemoveWhere
@@ -300,7 +296,6 @@ namespace System.Collections.Tests
             SortedSet<T> set = (SortedSet<T>)GenericISetFactory();
             AssertExtensions.Throws<ArgumentNullException>("match", () => set.RemoveWhere(null));
         }
-
 #endregion
 
 #region Enumeration and Ordering
@@ -346,7 +341,6 @@ namespace System.Collections.Tests
             IEnumerable<int> en = mySubSet.Reverse();
             Assert.True(mySubSet.SetEquals(en)); //"Expected to be the same set."
         }
-
 #endregion
 
 #region CopyTo
@@ -386,7 +380,6 @@ namespace System.Collections.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => set.CopyTo(actual, 0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => set.CopyTo(actual, 0, int.MinValue));
         }
-
 #endregion
 
 #region CreateSetComparer

@@ -26,21 +26,26 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// could ever be assigned as a reordering ID.
         /// </summary>
         internal const long INVALID_REORDERING_ID = -1;
+
         /// <summary>A well-known message ID for code that will send exactly one message or
         /// where the exact message ID is not important.</summary>
         internal const int SINGLE_MESSAGE_ID = 1;
+
         /// <summary>A perf optimization for caching a well-known message header instead of
         /// constructing one every time it is needed.</summary>
         internal static readonly DataflowMessageHeader SingleMessageHeader =
             new DataflowMessageHeader(SINGLE_MESSAGE_ID);
+
         /// <summary>The cached completed Task{bool} with a result of true.</summary>
         internal static readonly Task<bool> CompletedTaskWithTrueResult = CreateCachedBooleanTask(
             true
         );
+
         /// <summary>The cached completed Task{bool} with a result of false.</summary>
         internal static readonly Task<bool> CompletedTaskWithFalseResult = CreateCachedBooleanTask(
             false
         );
+
         /// <summary>The cached completed TaskCompletionSource{VoidResult}.</summary>
         internal static readonly TaskCompletionSource<VoidResult> CompletedVoidResultTaskCompletionSource =
             CreateCachedTaskCompletionSource<VoidResult>();
@@ -60,6 +65,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Keeping alive processing tasks: maximum number of processed messages.</summary>
         internal const int KEEP_ALIVE_NUMBER_OF_MESSAGES_THRESHOLD = 1;
+
         /// <summary>Keeping alive processing tasks: do not attempt this many times.</summary>
         internal const int KEEP_ALIVE_BAN_COUNT = 1000;
 
@@ -750,6 +756,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             /// <summary>A function that returns the default value of T.</summary>
             internal static readonly Func<T> DefaultTResultFunc = () => default(T)!;
+
             /// <summary>
             /// A function to use as the body of ActionOnDispose in CreateUnlinkerShim.
             /// Passed a tuple of the sync obj, the target registry, and the target block as the state parameter.
@@ -772,6 +779,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>The maximum number of messages allowed to be buffered.</summary>
         internal readonly int BoundedCapacity;
+
         /// <summary>The number of messages currently stored.</summary>
         /// <remarks>
         /// This value may temporarily be higher than the actual number stored.
@@ -806,6 +814,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>Queue of postponed messages.</summary>
         internal readonly QueuedMap<ISourceBlock<TInput>, DataflowMessageHeader> PostponedMessages =
             new QueuedMap<ISourceBlock<TInput>, DataflowMessageHeader>();
+
         /// <summary>
         /// The number of transfers from the postponement queue to the input queue currently being processed.
         /// </summary>

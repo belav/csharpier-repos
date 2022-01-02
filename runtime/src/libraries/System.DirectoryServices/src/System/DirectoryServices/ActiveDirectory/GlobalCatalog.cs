@@ -317,7 +317,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
             return InternalGetDirectorySearcher();
         }
-
         #endregion public methods
 
         #region private methods

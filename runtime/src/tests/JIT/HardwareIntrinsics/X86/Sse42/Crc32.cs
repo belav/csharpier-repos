@@ -161,6 +161,7 @@ namespace IntelHardwareIntrinsicTest
             public T s1;
             public U s2;
             public T res;
+
             public Crc(T a, U b, T c)
             {
                 this.s1 = a;

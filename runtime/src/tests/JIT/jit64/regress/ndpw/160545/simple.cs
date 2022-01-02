@@ -2,17 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 public struct T : IComparable
 {
     public int x;
     public int y;
     public int z;
+
     public T(int ix, int iy, int iz)
     {
         x = ix;
         y = iy;
         z = iz;
     }
+
     public int CompareTo(object b)
     {
         if (b is T)

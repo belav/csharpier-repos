@@ -2359,7 +2359,6 @@ namespace System.Linq.Expressions.Tests
                 }"
             );
         }
-
 #endif
 
         private static void Test(Func<Expression, Expression> factory, Expression arg1)
@@ -2452,6 +2451,7 @@ namespace System.Linq.Expressions.Tests
             public override bool CanReduce => true;
             public override ExpressionType NodeType => ExpressionType.Extension;
             public override Type Type => _reduced.Type;
+
             public override Expression Reduce() => _reduced;
         }
 

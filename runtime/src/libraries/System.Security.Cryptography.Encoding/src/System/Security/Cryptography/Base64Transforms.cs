@@ -138,6 +138,7 @@ namespace System.Security.Cryptography
         private readonly FromBase64TransformMode _whitespaces;
 
         public FromBase64Transform() : this(FromBase64TransformMode.IgnoreWhiteSpaces) { }
+
         public FromBase64Transform(FromBase64TransformMode whitespaces)
         {
             _whitespaces = whitespaces;
@@ -449,21 +450,26 @@ namespace System.Security.Cryptography
         [DoesNotReturn]
         public static void ThrowArgumentNull(ExceptionArgument argument) =>
             throw new ArgumentNullException(argument.ToString());
+
         [DoesNotReturn]
         public static void ThrowArgumentOutOfRange(ExceptionArgument argument) =>
             throw new ArgumentOutOfRangeException(
                 argument.ToString(),
                 SR.ArgumentOutOfRange_NeedNonNegNum
             );
+
         [DoesNotReturn]
         public static void ThrowInvalidOffLen() =>
             throw new ArgumentException(SR.Argument_InvalidOffLen);
+
         [DoesNotReturn]
         public static void ThrowObjectDisposed() =>
             throw new ObjectDisposedException(null, SR.ObjectDisposed_Generic);
+
         [DoesNotReturn]
         public static void ThrowCryptographicException() =>
             throw new CryptographicException(SR.Cryptography_SSE_InvalidDataSize);
+
         [DoesNotReturn]
         public static void ThrowBase64FormatException() => throw new FormatException();
 

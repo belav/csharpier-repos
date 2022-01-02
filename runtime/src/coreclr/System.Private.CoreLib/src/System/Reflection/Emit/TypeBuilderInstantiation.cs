@@ -39,7 +39,6 @@ namespace System.Reflection.Emit
 
             return new TypeBuilderInstantiation(type, typeArguments);
         }
-
         #endregion
 
         #region Private Data Members
@@ -47,7 +46,6 @@ namespace System.Reflection.Emit
         private Type[] m_inst;
         private string? m_strFullQualName;
         internal Hashtable m_hashtable;
-
         #endregion
 
         #region Constructor
@@ -81,14 +79,17 @@ namespace System.Reflection.Emit
         {
             return SymbolType.FormCompoundType("*", this, 0)!;
         }
+
         public override Type MakeByRefType()
         {
             return SymbolType.FormCompoundType("&", this, 0)!;
         }
+
         public override Type MakeArrayType()
         {
             return SymbolType.FormCompoundType("[]", this, 0)!;
         }
+
         public override Type MakeArrayType(int rank)
         {
             if (rank <= 0)
@@ -98,6 +99,7 @@ namespace System.Reflection.Emit
 
             return SymbolType.FormCompoundType(s, this, 0)!;
         }
+
         public override Guid GUID => throw new NotSupportedException();
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
@@ -122,6 +124,7 @@ namespace System.Reflection.Emit
         public override string? Namespace => m_type.Namespace;
         public override string? AssemblyQualifiedName =>
             TypeNameBuilder.ToString(this, TypeNameBuilder.Format.AssemblyQualifiedName);
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2055:UnrecognizedReflectionPattern",
@@ -156,6 +159,7 @@ namespace System.Reflection.Emit
 
             return GetGenericTypeDefinition().MakeGenericType(instSubstituted);
         }
+
         public override Type? BaseType
         {
             // B<A,B,C>
@@ -179,6 +183,7 @@ namespace System.Reflection.Emit
                 return typeBldrBaseAs.Substitute(GetGenericArguments());
             }
         }
+
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicConstructors
                 | DynamicallyAccessedMemberTypes.NonPublicConstructors
@@ -370,44 +375,55 @@ namespace System.Reflection.Emit
         {
             return false;
         }
+
         protected override bool IsByRefImpl()
         {
             return false;
         }
+
         protected override bool IsPointerImpl()
         {
             return false;
         }
+
         protected override bool IsPrimitiveImpl()
         {
             return false;
         }
+
         protected override bool IsCOMObjectImpl()
         {
             return false;
         }
+
         public override Type GetElementType()
         {
             throw new NotSupportedException();
         }
+
         protected override bool HasElementTypeImpl()
         {
             return false;
         }
+
         public override Type UnderlyingSystemType => this;
+
         public override Type[] GetGenericArguments()
         {
             return m_inst;
         }
+
         public override bool IsGenericTypeDefinition => false;
         public override bool IsGenericType => true;
         public override bool IsConstructedGenericType => true;
         public override bool IsGenericParameter => false;
         public override int GenericParameterPosition => throw new InvalidOperationException();
+
         protected override bool IsValueTypeImpl()
         {
             return m_type.IsValueType;
         }
+
         public override bool ContainsGenericParameters
         {
             get
@@ -422,6 +438,7 @@ namespace System.Reflection.Emit
             }
         }
         public override MethodBase? DeclaringMethod => null;
+
         public override Type GetGenericTypeDefinition()
         {
             return m_type;
@@ -434,6 +451,7 @@ namespace System.Reflection.Emit
         {
             throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericTypeDefinition, this));
         }
+
         public override bool IsAssignableFrom([NotNullWhen(true)] Type? c)
         {
             throw new NotSupportedException();

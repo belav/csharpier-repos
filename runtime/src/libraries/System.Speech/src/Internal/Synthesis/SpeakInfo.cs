@@ -21,7 +21,6 @@ namespace System.Speech.Internal.Synthesis
             _voiceSynthesis = voiceSynthesis;
             _ttsVoice = ttsVoice;
         }
-
         #endregion
 
         #region Internal Properties
@@ -30,7 +29,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return _ttsVoice; }
         }
-
         #endregion
 
         #region Internal Methods
@@ -84,7 +82,6 @@ namespace System.Speech.Internal.Synthesis
             }
             return speechSeg;
         }
-
         #endregion
 
         #region Private Method
@@ -96,7 +93,6 @@ namespace System.Speech.Internal.Synthesis
             _listSeg.Add(pNew);
             _lastSeg = pNew;
         }
-
         #endregion
 
         #region private Fields

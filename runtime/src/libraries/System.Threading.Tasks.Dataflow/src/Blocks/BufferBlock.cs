@@ -29,12 +29,16 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>The core logic for the buffer block.</summary>
         private readonly SourceCore<T> _source;
+
         /// <summary>The bounding state for when in bounding mode; null if not bounding.</summary>
         private readonly BoundingStateWithPostponedAndTask<T>? _boundingState;
+
         /// <summary>Whether all future messages should be declined on the target.</summary>
         private bool _targetDecliningPermanently;
+
         /// <summary>A task has reserved the right to run the target's completion routine.</summary>
         private bool _targetCompletionReserved;
+
         /// <summary>Gets the lock object used to synchronize incoming requests.</summary>
         private object IncomingLock
         {
@@ -579,6 +583,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The buffer block.</summary>
             private readonly BufferBlock<T> _bufferBlock;
+
             /// <summary>The buffer's source half.</summary>
             private readonly SourceCore<T>.DebuggingInformation _sourceDebuggingInformation;
 
@@ -604,6 +609,7 @@ namespace System.Threading.Tasks.Dataflow
                       : null;
                 }
             }
+
             /// <summary>Gets the messages in the buffer.</summary>
             public IEnumerable<T> Queue
             {
@@ -620,6 +626,7 @@ namespace System.Threading.Tasks.Dataflow
                       : null;
                 }
             }
+
             /// <summary>Gets the task being used for output processing.</summary>
             public Task? TaskForOutputProcessing
             {
@@ -637,11 +644,13 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _bufferBlock._targetDecliningPermanently; }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             public bool IsCompleted
             {
                 get { return _sourceDebuggingInformation.IsCompleted; }
             }
+
             /// <summary>Gets the block's Id.</summary>
             public int Id
             {
@@ -653,6 +662,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.LinkedTargets; }
             }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
             public ITargetBlock<T>? NextMessageReservedFor
             {

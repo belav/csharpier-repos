@@ -43,7 +43,9 @@ namespace Exchange
         private double newValueA = 0.0D;
         private double newValueB = Double.MinValue;
         private bool success;
+
         public ThreadSafe() : this(10000) { }
+
         public ThreadSafe(int loops)
         {
             success = true;

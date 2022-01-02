@@ -1706,7 +1706,6 @@ ref struct S
                         .WithLocation(8, 42)
                 );
         }
-
         #endregion
         #region "Enum"
 

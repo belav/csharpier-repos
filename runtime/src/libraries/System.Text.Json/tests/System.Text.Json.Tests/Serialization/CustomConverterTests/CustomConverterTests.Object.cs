@@ -796,6 +796,7 @@ namespace System.Text.Json.Serialization.Tests
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => throw new NotImplementedException();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 object value,

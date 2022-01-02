@@ -640,7 +640,6 @@ class D : B
                 expectedUpdatedInvocationDocumentCode: updatedCode
             );
         }
-
         #endregion
 
         #region Indexers
@@ -866,7 +865,6 @@ class Program
                 expectedSelectedIndex: 0
             );
         }
-
         #endregion
 
         #region Delegates
@@ -945,7 +943,6 @@ class Test
                 expectedUpdatedInvocationDocumentCode: updatedCode
             );
         }
-
         #endregion
 
         #region CodeRefactoring

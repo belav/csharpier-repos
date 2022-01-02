@@ -125,14 +125,19 @@ namespace System.Threading.Tasks
         }
 
         private GetStateMachineData() { }
+
         public GetStateMachineData GetAwaiter() => this;
+
         public bool IsCompleted => false;
+
         public void OnCompleted(Action continuation) => UnsafeOnCompleted(continuation);
+
         public void UnsafeOnCompleted(Action continuation)
         {
             _box = continuation.Target;
             Task.Run(continuation);
         }
+
         public object GetResult() => _box;
     }
 }

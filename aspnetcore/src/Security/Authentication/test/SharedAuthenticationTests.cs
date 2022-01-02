@@ -235,6 +235,7 @@ public abstract class SharedAuthenticationTests<TOptions>
     private class RunOnce : IClaimsTransformation
     {
         public int Ran = 0;
+
         public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
             Ran++;

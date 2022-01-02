@@ -46,6 +46,7 @@ namespace System.Net.Quic.Tests
         {
             _output = output;
         }
+
         public bool RemoteCertificateValidationCallback(
             object sender,
             X509Certificate? certificate,
@@ -135,6 +136,7 @@ namespace System.Net.Quic.Tests
         internal Task<(QuicConnection, QuicConnection)> CreateConnectedQuicConnection(
             QuicListener listener
         ) => CreateConnectedQuicConnection(null, listener);
+
         internal async Task<(QuicConnection, QuicConnection)> CreateConnectedQuicConnection(
             QuicClientConnectionOptions? clientOptions,
             QuicListenerOptions listenerOptions

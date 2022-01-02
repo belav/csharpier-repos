@@ -259,6 +259,7 @@ public class DefaultViewComponentSelectorTest
         {
         }
     }
+
     // This will only consider types nested inside this class as ViewComponent classes
     private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
     {

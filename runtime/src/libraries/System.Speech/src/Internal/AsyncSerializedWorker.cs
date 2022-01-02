@@ -38,7 +38,6 @@ namespace System.Speech.Internal
             _isAsyncMode = true;
             _isEnabled = true;
         }
-
         #endregion
 
         #region Public Methods
@@ -67,7 +66,6 @@ namespace System.Speech.Internal
         {
             AddItem(new AsyncWorkItem(callback, parameters));
         }
-
         #endregion
 
         #region Internal Properties and Methods
@@ -172,7 +170,6 @@ namespace System.Speech.Internal
 
         // event handler of this event should execute quickly and must not acquire any lock
         internal event WaitCallback WorkItemPending;
-
         #endregion
         #region Private/Protected Methods
 
@@ -245,7 +242,6 @@ namespace System.Speech.Internal
                 }
             }
         }
-
         #endregion
 
         #region Private Fields

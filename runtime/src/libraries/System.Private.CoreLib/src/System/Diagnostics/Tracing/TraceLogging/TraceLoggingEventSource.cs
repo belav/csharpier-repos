@@ -23,9 +23,11 @@ using System.Text;
 
 #if ES_BUILD_STANDALONE
 using System.Runtime.CompilerServices;
+
 namespace Microsoft.Diagnostics.Tracing
 #else
 using Internal.Runtime.CompilerServices;
+
 namespace System.Diagnostics.Tracing
 #endif
 {

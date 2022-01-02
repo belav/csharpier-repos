@@ -25,6 +25,7 @@ namespace System.Reflection.TypeLoading
 
         public sealed override Type[] GetOptionalCustomModifiers() =>
             GetRoMethodBase().GetCustomModifiers(Position, isRequired: false).CloneArray();
+
         public sealed override Type[] GetRequiredCustomModifiers() =>
             GetRoMethodBase().GetCustomModifiers(Position, isRequired: true).CloneArray();
 
@@ -33,6 +34,7 @@ namespace System.Reflection.TypeLoading
             ?? GetRoMethodBase().GetMethodSigString(Position) + " " + Name;
 
         internal IRoMethodBase GetRoMethodBase() => (IRoMethodBase)Member;
+
         private MetadataLoadContext Loader => GetRoMethodBase().Loader;
     }
 }

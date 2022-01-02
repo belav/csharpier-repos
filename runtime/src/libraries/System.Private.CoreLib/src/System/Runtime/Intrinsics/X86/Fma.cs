@@ -39,6 +39,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplyAdd(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fmadd_pd (__m128d a, __m128d b, __m128d c)
         ///   VFMADDPD xmm, xmm, xmm/m128
@@ -48,6 +49,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> b,
             Vector128<double> c
         ) => MultiplyAdd(a, b, c);
+
         /// <summary>
         /// __m256 _mm256_fmadd_ps (__m256 a, __m256 b, __m256 c)
         ///   VFMADDPS ymm, ymm, ymm/m256
@@ -57,6 +59,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> b,
             Vector256<float> c
         ) => MultiplyAdd(a, b, c);
+
         /// <summary>
         /// __m256d _mm256_fmadd_pd (__m256d a, __m256d b, __m256d c)
         ///   VFMADDPS ymm, ymm, ymm/m256
@@ -76,6 +79,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplyAddScalar(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fmadd_sd (__m128d a, __m128d b, __m128d c)
         ///   VFMADDSS xmm, xmm, xmm/m64
@@ -95,6 +99,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplyAddSubtract(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fmaddsub_pd (__m128d a, __m128d b, __m128d c)
         ///   VFMADDSUBPD xmm, xmm, xmm/m128
@@ -104,6 +109,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> b,
             Vector128<double> c
         ) => MultiplyAddSubtract(a, b, c);
+
         /// <summary>
         /// __m256 _mm256_fmaddsub_ps (__m256 a, __m256 b, __m256 c)
         ///   VFMADDSUBPS ymm, ymm, ymm/m256
@@ -113,6 +119,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> b,
             Vector256<float> c
         ) => MultiplyAddSubtract(a, b, c);
+
         /// <summary>
         /// __m256d _mm256_fmaddsub_pd (__m256d a, __m256d b, __m256d c)
         ///   VFMADDSUBPD ymm, ymm, ymm/m256
@@ -132,6 +139,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplySubtract(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fmsub_pd (__m128d a, __m128d b, __m128d c)
         ///   VFMSUBPS xmm, xmm, xmm/m128
@@ -141,6 +149,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> b,
             Vector128<double> c
         ) => MultiplySubtract(a, b, c);
+
         /// <summary>
         /// __m256 _mm256_fmsub_ps (__m256 a, __m256 b, __m256 c)
         ///   VFMSUBPS ymm, ymm, ymm/m256
@@ -150,6 +159,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> b,
             Vector256<float> c
         ) => MultiplySubtract(a, b, c);
+
         /// <summary>
         /// __m256d _mm256_fmsub_pd (__m256d a, __m256d b, __m256d c)
         ///   VFMSUBPD ymm, ymm, ymm/m256
@@ -169,6 +179,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplySubtractScalar(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fmsub_sd (__m128d a, __m128d b, __m128d c)
         ///   VFMSUBSD xmm, xmm, xmm/m64
@@ -188,6 +199,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplySubtractAdd(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fmsubadd_pd (__m128d a, __m128d b, __m128d c)
         ///   VFMSUBADDPD xmm, xmm, xmm/m128
@@ -197,6 +209,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> b,
             Vector128<double> c
         ) => MultiplySubtractAdd(a, b, c);
+
         /// <summary>
         /// __m256 _mm256_fmsubadd_ps (__m256 a, __m256 b, __m256 c)
         ///   VFMSUBADDPS ymm, ymm, ymm/m256
@@ -206,6 +219,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> b,
             Vector256<float> c
         ) => MultiplySubtractAdd(a, b, c);
+
         /// <summary>
         /// __m256d _mm256_fmsubadd_pd (__m256d a, __m256d b, __m256d c)
         ///   VFMSUBADDPD ymm, ymm, ymm/m256
@@ -225,6 +239,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplyAddNegated(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fnmadd_pd (__m128d a, __m128d b, __m128d c)
         ///   VFNMADDPD xmm, xmm, xmm/m128
@@ -234,6 +249,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> b,
             Vector128<double> c
         ) => MultiplyAddNegated(a, b, c);
+
         /// <summary>
         /// __m256 _mm256_fnmadd_ps (__m256 a, __m256 b, __m256 c)
         ///   VFNMADDPS ymm, ymm, ymm/m256
@@ -243,6 +259,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> b,
             Vector256<float> c
         ) => MultiplyAddNegated(a, b, c);
+
         /// <summary>
         /// __m256d _mm256_fnmadd_pd (__m256d a, __m256d b, __m256d c)
         ///   VFNMADDPD ymm, ymm, ymm/m256
@@ -262,6 +279,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplyAddNegatedScalar(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fnmadd_sd (__m128d a, __m128d b, __m128d c)
         ///   VFNMADDSD xmm, xmm, xmm/m64
@@ -281,6 +299,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplySubtractNegated(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fnmsub_pd (__m128d a, __m128d b, __m128d c)
         ///   VFNMSUBPD xmm, xmm, xmm/m128
@@ -290,6 +309,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> b,
             Vector128<double> c
         ) => MultiplySubtractNegated(a, b, c);
+
         /// <summary>
         /// __m256 _mm256_fnmsub_ps (__m256 a, __m256 b, __m256 c)
         ///   VFNMSUBPS ymm, ymm, ymm/m256
@@ -299,6 +319,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> b,
             Vector256<float> c
         ) => MultiplySubtractNegated(a, b, c);
+
         /// <summary>
         /// __m256d _mm256_fnmsub_pd (__m256d a, __m256d b, __m256d c)
         ///   VFNMSUBPD ymm, ymm, ymm/m256
@@ -318,6 +339,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> b,
             Vector128<float> c
         ) => MultiplySubtractNegatedScalar(a, b, c);
+
         /// <summary>
         /// __m128d _mm_fnmsub_sd (__m128d a, __m128d b, __m128d c)
         ///   VFNMSUBSD xmm, xmm, xmm/m64

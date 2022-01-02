@@ -55,6 +55,7 @@ namespace BenchmarksGame
             vz,
             mass;
     }
+
     class Pair
     {
         public Body bi,

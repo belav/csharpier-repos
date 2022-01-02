@@ -17,6 +17,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsOneOf() { }
+
         public SrgsOneOf(params string[] items) : this()
         {
             Helpers.ThrowIfNull(items, nameof(items));
@@ -34,6 +35,7 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _items.Add(new SrgsItem(items[i]));
             }
         }
+
         public SrgsOneOf(params SrgsItem[] items) : this()
         {
             Helpers.ThrowIfNull(items, nameof(items));
@@ -52,7 +54,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _items.Add(item);
             }
         }
-
         #endregion
 
         #region public Method
@@ -62,7 +63,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             Items.Add(item);
         }
-
         #endregion
 
         #region public Properties
@@ -72,7 +72,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return _items; }
         }
-
         #endregion
 
         #region internal Methods
@@ -95,7 +94,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             sb.Append(_items.Count);
             return sb.ToString();
         }
-
         #endregion
 
         #region Protected Properties
@@ -117,13 +115,11 @@ namespace System.Speech.Recognition.SrgsGrammar
                 return elements;
             }
         }
-
         #endregion
 
         #region Private Fields
 
         private SrgsItemList _items = new();
-
         #endregion
 
         #region Private Types
@@ -135,6 +131,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 _items = oneOf._items;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsItem[] AKeys
             {

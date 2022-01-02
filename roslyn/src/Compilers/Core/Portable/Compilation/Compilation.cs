@@ -393,7 +393,6 @@ namespace Microsoft.CodeAnalysis
         }
 
         protected abstract Compilation CommonWithAssemblyName(string? outputName);
-
         #endregion
 
         #region Options
@@ -419,7 +418,6 @@ namespace Microsoft.CodeAnalysis
         }
 
         protected abstract Compilation CommonWithOptions(CompilationOptions options);
-
         #endregion
 
         #region Submissions
@@ -503,8 +501,8 @@ namespace Microsoft.CodeAnalysis
 
         public Compilation WithScriptCompilationInfo(ScriptCompilationInfo? info) =>
             CommonWithScriptCompilationInfo(info);
-        protected abstract Compilation CommonWithScriptCompilationInfo(ScriptCompilationInfo? info);
 
+        protected abstract Compilation CommonWithScriptCompilationInfo(ScriptCompilationInfo? info);
         #endregion
 
         #region Syntax Trees
@@ -612,7 +610,6 @@ namespace Microsoft.CodeAnalysis
         /// The event queue that this compilation was created with.
         /// </summary>
         internal AsyncQueue<CompilationEvent>? EventQueue { get; }
-
         #endregion
 
         #region References
@@ -891,7 +888,6 @@ namespace Microsoft.CodeAnalysis
         /// as well as those specified via directives in source code.
         /// </remarks>
         public abstract IEnumerable<AssemblyIdentity> ReferencedAssemblyNames { get; }
-
         #endregion
 
         #region Symbols
@@ -1726,7 +1722,6 @@ namespace Microsoft.CodeAnalysis
             ITypeSymbol destination,
             out ConstantValue? constantValue
         );
-
         #endregion
 
         #region Diagnostics
@@ -1867,7 +1862,6 @@ namespace Microsoft.CodeAnalysis
 
             return !hasError;
         }
-
         #endregion
 
         #region Resources
@@ -2234,7 +2228,6 @@ namespace Microsoft.CodeAnalysis
                 }
             }
         }
-
         #endregion
 
         #region Emit
@@ -3863,7 +3856,6 @@ namespace Microsoft.CodeAnalysis
             string? v;
             return _features.TryGetValue(p, out v) ? v : null;
         }
-
         #endregion
 
         private ConcurrentDictionary<
@@ -4017,7 +4009,6 @@ namespace Microsoft.CodeAnalysis
                 destination.Name
             );
         }
-
         #endregion
 
         #region Declaration Name Queries

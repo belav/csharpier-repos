@@ -14,7 +14,6 @@ namespace System.IO.Tests
         {
             return Directory.Exists(path);
         }
-
         #endregion
 
         #region UniversalTests
@@ -193,7 +192,6 @@ namespace System.IO.Tests
             Assert.True(Directory.Exists(path));
             Assert.True(Directory.Exists(linkPath));
         }
-
         #endregion
 
         #region PlatformSpecific

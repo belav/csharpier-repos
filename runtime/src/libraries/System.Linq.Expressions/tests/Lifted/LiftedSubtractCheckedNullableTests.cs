@@ -216,7 +216,6 @@ namespace System.Linq.Expressions.Tests
                 }
             }
         }
-
         #endregion
 
         #region Helpers
@@ -280,7 +279,6 @@ namespace System.Linq.Expressions.Tests
         {
             return checked((ushort)(a - b));
         }
-
         #endregion
 
         #region Test verifiers

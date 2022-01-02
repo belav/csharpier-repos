@@ -590,7 +590,6 @@ class Class2
 
                 await TestInRegularAndScriptAsync(input, expected);
             }
-
             #endregion
 
             #region "SuppressMessageAttribute tests"

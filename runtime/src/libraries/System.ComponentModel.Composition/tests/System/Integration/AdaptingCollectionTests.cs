@@ -151,6 +151,7 @@ namespace System.ComponentModel.Composition
     public class AdaptingCollectionTests
     {
         public interface IContract { }
+
         public interface INetworkAwareMetadata
         {
             [DefaultValue(false)]

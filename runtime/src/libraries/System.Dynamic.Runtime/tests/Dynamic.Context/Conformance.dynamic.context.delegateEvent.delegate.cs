@@ -16,6 +16,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     public delegate object D002(dynamic d, object o);
     public delegate dynamic D003(ref dynamic d1, object o, out dynamic d3);
     public delegate void D004(ref int n, dynamic[] d1, params dynamic[] d2);
+
     namespace DynNamespace01
     {
         public interface DynInterface01
@@ -33,6 +34,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
         public delegate dynamic D101(dynamic d, DynInterface01 i);
         public delegate void D102(ref DynClass01 c, dynamic d1, ref object d2);
+
         namespace DynNamespace02
         {
             public delegate void D201(
@@ -50,6 +52,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate001.dlgate001
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib01.dlgatedeclarelib01;
+
     // <Area> Dynamic type in delegates </Area>
     // <Title> Delegate instantiation</Title>
     // <Description> interchangeable dynamic and object parameters </Description>
@@ -136,11 +139,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public class start
         {
             private static int s_retval = (int)((1 + 0x0D) * 0x0D) / 2;
+
             // field
             private static D001 s_del001 = null;
             private static D003 s_del003 = null;
             private static dynamic s_sd = null;
             private static object s_so = new object();
+
             [Fact]
             public static void DynamicCSharpRunTest()
             {
@@ -313,6 +318,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public class DynClass
         {
             public delegate string D001(object v1, dynamic v2, DynEnum v3);
+
             public struct DynStruct
             {
                 public delegate string D101(DynEnum v1, ref object v2, params dynamic[] v3);
@@ -417,6 +423,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 ];
             private static dynamic s_sd = null;
             private static object s_so = new object();
+
             [Fact]
             public static void DynamicCSharpRunTest()
             {
@@ -621,6 +628,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public class DynClassDrived : DynClassBase
         {
             private new delegate void PublicDel(dynamic v, ref int n);
+
             // protected: can not access if in dll
             public delegate long InternalDel(
                 sbyte v1,
@@ -835,12 +843,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     // <Code>
 
     public delegate R D001<R>(dynamic d);
+
     namespace DynNamespace41
     {
         public delegate void D002<T1, T2>(T1 t1, T2 t2);
+
         public class DynClass
         {
             public delegate R D011<T, R>(T[] v1, dynamic v2);
+
             // internal: can not access if in dll
             public delegate dynamic D012<T>(ref T v1, ref dynamic[] v2);
         }
@@ -848,6 +859,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         public struct DynStruct
         {
             public delegate R D021<T, R>(out dynamic d, out T t);
+
             // internal: can not access if in dll
             public delegate dynamic D022<T1, T2, T3>(
                 T1 t1,
@@ -875,15 +887,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
         object v2 = null,
         dynamic v3 = null /*DynNamespace51.DynClass.strDyn*/
     );
+
     namespace DynNamespace51
     {
         public delegate void D011(dynamic d1 = null, params dynamic[] d2);
+
         public class DynClass
         {
             public const string strDyn = "dynamic";
+
             // internal: can not access if in dll
             public delegate int D021(params dynamic[] d);
             public delegate void D022(DynStruct01 v1, dynamic v2 = null, int v3 = -1);
+
             public struct DynStruct
             {
                 public delegate dynamic D031(
@@ -925,6 +941,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
             public static int val = -1;
             public static int? nval = -1;
             public static string str = string.Empty;
+
             // public delegate void D001(dynamic d = null);
             public void M01(dynamic d = null)
             {
@@ -1108,6 +1125,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     namespace nms
     {
         public delegate void DelOut(object v1, out object v2);
+
         public class Foo
         {
             public static void M01(object v1, out object v2)
@@ -1186,6 +1204,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     namespace nms
     {
         public delegate void Del(dynamic v1);
+
         public struct Foo
         {
             public void MinStruct(dynamic v1) { }
@@ -1255,6 +1274,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     {
         internal delegate void DOptObj(params object[] ary);
         internal delegate void DOptDyn(params dynamic[] ary);
+
         public class Foo
         {
             public void M01(params dynamic[] d) { }
@@ -1328,9 +1348,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 
     public delegate T GenDlg<T>(int t);
+
     public class SubGenericClass<T>
     {
         public GenDlg<T> myDel;
+
         public void Foo<U>(U x)
         {
             GenDlg<U> d = null;
@@ -1379,10 +1401,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 
     public delegate T GenDlg<out T>(int t);
+
     public class SubGenericClass<T>
     {
         public GenDlg<T> myDel;
         public event GenDlg<T> vEv;
+
         public void Foo<U>(U x)
         {
             GenDlg<U> d = null;
@@ -1430,6 +1454,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 
     public delegate T GenDlg<T>(int t);
+
     public class C<T>
     {
     }
@@ -1438,6 +1463,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     {
         public GenDlg<C<T>> myDel;
         public event GenDlg<C<T>> vEv;
+
         public void Foo<U>(U x)
         {
             GenDlg<U> d = null;
@@ -1485,10 +1511,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 
     public delegate T GenDlg<T>(int t);
+
     public class SubGenericClass<T>
     {
         public GenDlg<T> myDel;
         public event GenDlg<T> vEv;
+
         public void Foo<U>(U x)
         {
             GenDlg<U> d = null;
@@ -1544,10 +1572,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 
     public delegate T GenDlg<T>(int t);
+
     public class SubGenericClass<T>
     {
         public GenDlg<T> myDel;
         public event GenDlg<T> vEv;
+
         public void Foo<U>(U x)
         {
             GenDlg<U> d = null;
@@ -1600,10 +1630,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     }
 
     public delegate T GenDlg<T>(int t);
+
     public class SubGenericClass<T>
     {
         public static GenDlg<T> myDel;
         public static event GenDlg<T> vEv;
+
         public void Foo<U>(U x)
         {
             GenDlg<U> d = null;

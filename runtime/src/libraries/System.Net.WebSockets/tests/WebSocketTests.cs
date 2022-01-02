@@ -340,6 +340,7 @@ namespace System.Net.WebSockets.Tests
         {
             public static new bool IsStateTerminal(WebSocketState state) =>
                 WebSocket.IsStateTerminal(state);
+
             public static new void ThrowOnInvalidState(
                 WebSocketState state,
                 params WebSocketState[] validStates

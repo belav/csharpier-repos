@@ -608,18 +608,29 @@ namespace System.Linq.Expressions.Tests
     public class MS
     {
         public void I0() { }
+
         public void I1(int a) { }
+
         public void I2(int a, int b) { }
+
         public void I3(int a, int b, int c) { }
+
         public void I4(int a, int b, int c, int d) { }
+
         public void I5(int a, int b, int c, int d, int e) { }
 
         public static void S0() { }
+
         public static void S1(int a) { }
+
         public static void S2(int a, int b) { }
+
         public static void S3(int a, int b, int c) { }
+
         public static void S4(int a, int b, int c, int d) { }
+
         public static void S5(int a, int b, int c, int d, int e) { }
+
         public static void S6(int a, int b, int c, int d, int e, int f) { }
     }
 }

@@ -3,6 +3,7 @@ using System;
 struct BoolStruct
 {
     bool x;
+
     public BoolStruct(bool x)
     {
         this.x = x;
@@ -12,6 +13,7 @@ struct BoolStruct
 struct CharStruct
 {
     char x;
+
     public CharStruct(char x)
     {
         this.x = x;
@@ -21,6 +23,7 @@ struct CharStruct
 struct Int8Struct
 {
     sbyte x;
+
     public Int8Struct(sbyte x)
     {
         this.x = x;
@@ -30,6 +33,7 @@ struct Int8Struct
 struct UInt8Struct
 {
     byte x;
+
     public UInt8Struct(byte x)
     {
         this.x = x;
@@ -39,6 +43,7 @@ struct UInt8Struct
 struct Int16Struct
 {
     short x;
+
     public Int16Struct(short x)
     {
         this.x = x;
@@ -48,6 +53,7 @@ struct Int16Struct
 struct UInt16Struct
 {
     ushort x;
+
     public UInt16Struct(ushort x)
     {
         this.x = x;
@@ -57,6 +63,7 @@ struct UInt16Struct
 struct Int32Struct
 {
     int x;
+
     public Int32Struct(int x)
     {
         this.x = x;
@@ -66,6 +73,7 @@ struct Int32Struct
 struct UInt32Struct
 {
     uint x;
+
     public UInt32Struct(uint x)
     {
         this.x = x;
@@ -75,6 +83,7 @@ struct UInt32Struct
 struct Int64Struct
 {
     long x;
+
     public Int64Struct(long x)
     {
         this.x = x;
@@ -84,6 +93,7 @@ struct Int64Struct
 struct UInt64Struct
 {
     ulong x;
+
     public UInt64Struct(ulong x)
     {
         this.x = x;
@@ -93,6 +103,7 @@ struct UInt64Struct
 struct FloatStruct
 {
     float x;
+
     public FloatStruct(float x)
     {
         this.x = x;
@@ -102,6 +113,7 @@ struct FloatStruct
 struct DoubleStruct
 {
     double x;
+
     public DoubleStruct(double x)
     {
         this.x = x;
@@ -111,6 +123,7 @@ struct DoubleStruct
 unsafe struct PointerStruct
 {
     int* x;
+
     public PointerStruct(int* x)
     {
         this.x = x;

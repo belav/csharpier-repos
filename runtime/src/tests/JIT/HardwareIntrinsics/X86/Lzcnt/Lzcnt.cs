@@ -64,6 +64,7 @@ namespace IntelHardwareIntrinsicTest
         {
             public T s;
             public T res;
+
             public LZCNT(T a, T r)
             {
                 this.s = a;

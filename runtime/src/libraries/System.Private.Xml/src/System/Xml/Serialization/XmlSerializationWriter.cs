@@ -1545,6 +1545,7 @@ namespace System.Xml.Serialization
             }
             _w.WriteEndElement();
         }
+
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
         protected void WritePotentiallyReferencingElement(string? n, string? ns, object? o)
         {
@@ -1867,6 +1868,7 @@ namespace System.Xml.Serialization
     internal sealed class ReflectionAwareCodeGen
     {
         private const string arrayMemberKey = "0";
+
         // reflectionVariables holds mapping between a reflection entity
         // referenced in the generated code (such as TypeInfo,
         // FieldInfo) and the variable which represent the entity (and
@@ -1886,6 +1888,7 @@ namespace System.Xml.Serialization
         private Hashtable _reflectionVariables = null!;
         private int _nextReflectionVariableNumber;
         private readonly IndentedWriter _writer;
+
         internal ReflectionAwareCodeGen(IndentedWriter writer)
         {
             _writer = writer;
@@ -2065,6 +2068,7 @@ namespace System.Xml.Serialization
                 }
             }
         }
+
         private void WriteCollectionInfo(
             string typeVariable,
             TypeDesc typeDesc,
@@ -2248,6 +2252,7 @@ namespace System.Xml.Serialization
             ++_nextReflectionVariableNumber;
             return $"{prefix}{_nextReflectionVariableNumber}_{CodeIdentifier.MakeValidInternal(fullName.Replace('.', '_'))}";
         }
+
         internal string? GetReflectionVariable(string typeFullName, string? memberName)
         {
             string key;
@@ -2312,6 +2317,7 @@ namespace System.Xml.Serialization
             );
             return GetStringForEnumLongValue(memberAccess, useReflection);
         }
+
         internal string GetStringForEnumLongValue(string variable, bool useReflection)
         {
             if (useReflection)
@@ -2330,6 +2336,7 @@ namespace System.Xml.Serialization
                 return $"typeof({typeFullName})";
             }
         }
+
         internal string GetStringForMember(string obj, string memberName, TypeDesc typeDesc)
         {
             if (!typeDesc.UseReflection)
@@ -2352,6 +2359,7 @@ namespace System.Xml.Serialization
             // Eventually the compilation will fail.
             return $"[{obj}]";
         }
+
         /*
         Exception GetReflectionVariableException(string typeFullName, string memberName){
             string key;
@@ -2396,6 +2404,7 @@ namespace System.Xml.Serialization
             string? arrayInfo = GetReflectionVariable(typeFullName, arrayMemberKey);
             return $"{arrayInfo}[{arrayName}, {subscript}]";
         }
+
         internal string GetStringForMethod(
             string obj,
             string typeFullName,
@@ -2409,6 +2418,7 @@ namespace System.Xml.Serialization
             string? memberInfoName = GetReflectionVariable(typeFullName, memberName);
             return $"{memberInfoName}.Invoke({obj}, new object[]{{";
         }
+
         internal string GetStringForCreateInstance(
             string escapedTypeName,
             bool useReflection,
@@ -2534,6 +2544,7 @@ namespace System.Xml.Serialization
             );
             _writer.WriteLine(";");
         }
+
         internal void WriteInstanceOf(string source, string escapedTypeName, bool useReflection)
         {
             if (!useReflection)
@@ -2577,6 +2588,7 @@ namespace System.Xml.Serialization
             }
             _writer.WriteLine(";");
         }
+
         internal void WriteEnumCase(string fullTypeName, ConstantMapping c, bool useReflection)
         {
             _writer.Write("case ");
@@ -2593,12 +2605,14 @@ namespace System.Xml.Serialization
             }
             _writer.Write(": ");
         }
+
         internal void WriteTypeCompare(string variable, string escapedTypeName, bool useReflection)
         {
             _writer.Write(variable);
             _writer.Write(" == ");
             _writer.Write(GetStringForTypeof(escapedTypeName, useReflection));
         }
+
         internal void WriteArrayTypeCompare(
             string variable,
             string escapedTypeName,
@@ -3112,6 +3126,7 @@ namespace System.Xml.Serialization
         {
             Writer.WriteLine("WriteEndElement();");
         }
+
         private void WriteEndElement(string source)
         {
             Writer.Write("WriteEndElement(");
@@ -5462,14 +5477,17 @@ namespace System.Xml.Serialization
         {
             RaCodeGen.WriteArrayLocalDecl(typeName, variableName, initValue, arrayTypeDesc);
         }
+
         private void WriteTypeCompare(string variable, string escapedTypeName, bool useReflection)
         {
             RaCodeGen.WriteTypeCompare(variable, escapedTypeName, useReflection);
         }
+
         private void WriteInstanceOf(string source, string escapedTypeName, bool useReflection)
         {
             RaCodeGen.WriteInstanceOf(source, escapedTypeName, useReflection);
         }
+
         private void WriteArrayTypeCompare(
             string variable,
             string escapedTypeName,

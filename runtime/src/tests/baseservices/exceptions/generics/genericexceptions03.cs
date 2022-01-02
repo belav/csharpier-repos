@@ -13,6 +13,7 @@ public class Help
 
     public static Object s_object = new object();
 }
+
 public class A<T> where T : Exception
 {
     public static void StaticFunctionWithFewArgs()

@@ -82,7 +82,6 @@ namespace System.Web.Tests
             HttpUtility.HtmlAttributeEncode(input, sw);
             Assert.Equal(expected, sw.ToString());
         }
-
         #endregion HtmlAttributeEncode
 
         public static IEnumerable<object[]> HtmlEncodeDecodeData =>
@@ -364,7 +363,6 @@ namespace System.Web.Tests
             HttpUtility.HtmlDecode(encoded, sw);
             Assert.Equal(decoded, sw.ToString());
         }
-
         #endregion HtmlDecode
 
         #region HtmlEncode
@@ -445,7 +443,6 @@ namespace System.Web.Tests
                 }
             );
         }
-
         #endregion HtmlEncode
 
         #region JavaScriptStringEncode
@@ -533,7 +530,6 @@ namespace System.Web.Tests
         {
             Assert.Equal(encoded, HttpUtility.JavaScriptStringEncode(decoded, false));
         }
-
         #endregion JavaScriptStringEncode
 
         #region ParseQueryString
@@ -679,7 +675,6 @@ namespace System.Web.Tests
             Assert.Equal(expected, parsed.ToString());
             Assert.Equal(expected, HttpUtility.ParseQueryString(expected).ToString());
         }
-
         #endregion ParseQueryString
 
         #region UrlDecode(ToBytes)
@@ -905,7 +900,6 @@ namespace System.Web.Tests
                 HttpUtility.UrlDecode(Encoding.UTF8.GetBytes(encoded), Encoding.UTF8)
             );
         }
-
         #endregion UrlDecode(ToBytes)
 
         #region UrlEncode(ToBytes)
@@ -1097,7 +1091,6 @@ namespace System.Web.Tests
                 () => HttpUtility.UrlEncode(bytes, 1, -12)
             );
         }
-
         #endregion UrlEncode(ToBytes)
 
         #region UrlEncodeUnicode
@@ -1133,7 +1126,6 @@ namespace System.Web.Tests
             Assert.Equal(encoded, bytes == null ? null : Encoding.ASCII.GetString(bytes));
 #pragma warning restore 618
         }
-
         #endregion UrlEnocdeUnicode
 
         [Theory]

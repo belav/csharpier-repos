@@ -22,7 +22,6 @@ namespace System.Speech.Internal
         {
             _safeHMem.Dispose();
         }
-
         #endregion
 
         #region internal Methods
@@ -137,7 +136,6 @@ namespace System.Speech.Internal
             // Read the Header
             _stream.Write(ab, 0, sizeObject);
         }
-
         #endregion
 
         #region internal Fields
@@ -151,7 +149,6 @@ namespace System.Speech.Internal
         {
             set { _stream.Position = value; }
         }
-
         #endregion
 
         #region Private Fields

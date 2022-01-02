@@ -15,6 +15,7 @@ class TestAssemblyLoadContext : AssemblyLoadContext
         return null;
     }
 }
+
 public class Test22888
 {
     [MethodImpl(MethodImplOptions.NoInlining)]

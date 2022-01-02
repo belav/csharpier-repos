@@ -34,6 +34,7 @@ class Container
         public int a = 1;
         public int b = 2;
         public string s1 = "TEST1";
+
         [NonSerialized]
         public string s2 = "TEST2";
         public c2 e1;

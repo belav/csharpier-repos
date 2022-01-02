@@ -324,7 +324,6 @@ class Class2
                 }
             }
         }
-
         #endregion
 
         #region "SuppressMessageAttribute tests"

@@ -27,7 +27,6 @@ namespace System.Memory.Tests
                 buffer.ToString()
             );
         }
-
         #endregion
 
         #region GetPosition
@@ -72,7 +71,6 @@ namespace System.Memory.Tests
                 () => buffer.GetPosition(-1, buffer.End)
             );
         }
-
         #endregion
 
         #region Slice
@@ -151,7 +149,6 @@ namespace System.Memory.Tests
                 () => buffer.Slice(buffer.Start, -1L)
             );
         }
-
         #endregion
 
         #region Enumerator
@@ -179,7 +176,6 @@ namespace System.Memory.Tests
                 Assert.False(enumerator.MoveNext());
             }
         }
-
         #endregion
 
         #region TryGet

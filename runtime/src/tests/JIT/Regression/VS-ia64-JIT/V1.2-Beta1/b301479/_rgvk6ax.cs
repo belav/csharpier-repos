@@ -16,11 +16,13 @@ public enum TestEnum
 public struct AA
 {
     public String[][][] m_axField1;
+
     public static double[,][] Static1(TypedReference param1)
     {
         object[,,][,,,][][,,,] local2 = (new object[((uint)(30.0f)), 99u, 71u][,,,][][,,,]);
         return (new double[((uint)(90.0f)), ((uint)(((byte)((0.0f)))))][]);
     }
+
     public static void Static2(int param1, ref uint[,] param2, ref short param3)
     {
         uint local12 = 55u;
@@ -52,6 +54,7 @@ public class App
         catch (Exception) { }
         return 100;
     }
+
     public static short m_shFwd1;
     public static uint[,] m_auFwd8;
 }

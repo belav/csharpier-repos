@@ -11,6 +11,7 @@ using System;
 struct S0
 {
     public sbyte F0;
+
     public S0(sbyte p0) : this()
     {
         F0 = p0;
@@ -21,6 +22,7 @@ struct S1
 {
     public S0 F2;
     public ushort F1;
+
     public S1(S0 p2) : this()
     {
         F2 = p2;

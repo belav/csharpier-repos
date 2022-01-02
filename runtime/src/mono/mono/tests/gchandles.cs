@@ -7,6 +7,7 @@ internal struct ObjectWrapper
 {
     [FieldOffset(0)]
     object obj;
+
     [FieldOffset(0)]
     IntPtr handle;
 

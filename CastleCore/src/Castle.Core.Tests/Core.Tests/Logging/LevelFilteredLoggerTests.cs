@@ -560,7 +560,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 		#endregion
 
 		#region Info tests
@@ -786,7 +785,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 		#endregion
 
 		#region Warn tests
@@ -1012,7 +1010,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 		#endregion
 
 		#region Error tests
@@ -1238,7 +1235,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 		#endregion
 
 		#region FatalError tests
@@ -1464,7 +1460,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 		#endregion
 
         private void ValidateCall(

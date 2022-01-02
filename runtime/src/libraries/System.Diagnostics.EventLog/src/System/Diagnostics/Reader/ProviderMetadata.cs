@@ -341,6 +341,7 @@ namespace System.Diagnostics.Eventing.Reader
             }
             return null;
         }
+
         internal string FindStandardOpcodeDisplayName(string name, uint value)
         {
             if (_standardOpcodes == null)
@@ -356,6 +357,7 @@ namespace System.Diagnostics.Eventing.Reader
             }
             return null;
         }
+
         internal string FindStandardKeywordDisplayName(string name, long value)
         {
             if (_standardKeywords == null)
@@ -371,6 +373,7 @@ namespace System.Diagnostics.Eventing.Reader
             }
             return null;
         }
+
         internal string FindStandardTaskDisplayName(string name, uint value)
         {
             if (_standardTasks == null)

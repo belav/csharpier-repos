@@ -25,8 +25,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
 
         private readonly ImportTable _imports;
+
         // TODO: annoying - today there's no way to put signature RVA's into R/O data section
         private readonly ArrayOfEmbeddedPointersNode<Signature> _signatures;
+
         // TODO: annoying - cannot enumerate the ArrayOfEmbeddedPointersNode so we must keep a copy.
         private readonly List<Signature> _signatureList;
         private readonly GCRefMapNode _gcRefMap;

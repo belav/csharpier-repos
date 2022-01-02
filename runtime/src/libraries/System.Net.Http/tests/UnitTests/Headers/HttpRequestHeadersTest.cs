@@ -1282,7 +1282,6 @@ namespace System.Net.Http.Tests
             Assert.False(destination.TransferEncodingChunked.Value);
             Assert.False(destination.ConnectionClose.Value);
         }
-
         #endregion
 
         #region General headers
@@ -1890,7 +1889,6 @@ namespace System.Net.Http.Tests
             Assert.Equal(1, headers.GetValues("Pragma").Count());
             Assert.Equal("custom1, custom2=", headers.GetValues("Pragma").First());
         }
-
         #endregion
 
         [Fact]

@@ -59,6 +59,7 @@ namespace System.Drawing.Imaging
         {
             get { return s_page; }
         }
+
         /// <summary>
         /// Returns a value indicating whether the specified object is an <see cref='FrameDimension'/> equivalent to
         /// this <see cref='FrameDimension'/>.

@@ -46,7 +46,6 @@ namespace System.Threading.Tasks.Tests.Status
     }
 
     public class StatusTestException : Exception { }
-
     #endregion
 
     public sealed class TaskStatusTest
@@ -69,7 +68,6 @@ namespace System.Threading.Tasks.Tests.Status
         private volatile TestAction _testAction;
         private readonly ManualResetEventSlim _mre;
         private readonly CancellationTokenSource _taskCts;
-
         #endregion
 
         public TaskStatusTest(TestParameters parameters)
@@ -528,6 +526,7 @@ namespace System.Threading.Tasks.Tests.Status
         {
             return false;
         }
+
         protected override IEnumerable<Task> GetScheduledTasks()
         {
             return null;

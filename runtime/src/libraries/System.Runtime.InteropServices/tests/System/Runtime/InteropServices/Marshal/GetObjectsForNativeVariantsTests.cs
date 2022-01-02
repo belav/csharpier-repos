@@ -19,42 +19,61 @@ namespace System.Runtime.InteropServices.Tests
         {
             [FieldOffset(0)]
             internal SByte _i1;
+
             [FieldOffset(0)]
             internal Int16 _i2;
+
             [FieldOffset(0)]
             internal Int32 _i4;
+
             [FieldOffset(0)]
             internal Int64 _i8;
+
             [FieldOffset(0)]
             internal Byte _ui1;
+
             [FieldOffset(0)]
             internal UInt16 _ui2;
+
             [FieldOffset(0)]
             internal UInt32 _ui4;
+
             [FieldOffset(0)]
             internal UInt64 _ui8;
+
             [FieldOffset(0)]
             internal Int32 _int;
+
             [FieldOffset(0)]
             internal UInt32 _uint;
+
             [FieldOffset(0)]
             internal Single _r4;
+
             [FieldOffset(0)]
             internal Double _r8;
+
             [FieldOffset(0)]
             internal Int64 _cy;
+
             [FieldOffset(0)]
             internal double _date;
+
             [FieldOffset(0)]
             internal IntPtr _bstr;
+
             [FieldOffset(0)]
             internal IntPtr _unknown;
+
             [FieldOffset(0)]
             internal IntPtr _dispatch;
+
             [FieldOffset(0)]
             internal IntPtr _pvarVal;
+
             [FieldOffset(0)]
             internal IntPtr _byref;
+
             [FieldOffset(0)]
             internal Record _record;
         }
@@ -74,6 +93,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             [FieldOffset(0)]
             public TypeUnion m_Variant;
+
             [FieldOffset(0)]
             public decimal m_decimal;
         }

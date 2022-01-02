@@ -24,6 +24,7 @@ namespace MS.Internal.Xml.XPath
             PosFilter = 0x02, // Node has this flag set when it has position predicate applied to it
             Filter = 0x04, // Subtree we compiling will be filtered. i.e. Flag not set on rightmost filter.
         }
+
         // Output props. We return them Down->Up.
         // These are properties of Query tree we have built already.
         // These properties are closely related to QueryProps exposed by Query node itself.

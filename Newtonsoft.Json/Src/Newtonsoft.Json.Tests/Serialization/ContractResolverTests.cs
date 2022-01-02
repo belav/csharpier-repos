@@ -779,12 +779,16 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             [JsonProperty]
             public string Prop1 { get; set; }
+
             [JsonProperty]
             public string Prop2 { get; set; }
+
             [JsonProperty]
             public string Prop3 { get; set; }
+
             [JsonProperty]
             public string Prop4 { get; set; }
+
             [JsonProperty]
             public string Prop5 { get; set; }
 

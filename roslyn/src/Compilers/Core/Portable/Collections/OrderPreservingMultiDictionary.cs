@@ -72,7 +72,6 @@ namespace Microsoft.CodeAnalysis.Collections
             Debug.Assert(instance.IsEmpty);
             return instance;
         }
-
         #endregion Pooling
 
         // An empty dictionary we keep around to simplify certain operations (like "Keys")

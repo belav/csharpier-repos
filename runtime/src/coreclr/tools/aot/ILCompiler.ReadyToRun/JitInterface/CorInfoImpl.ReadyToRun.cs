@@ -3076,6 +3076,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("getMethodVTableOffset");
         }
+
         private void expandRawHandleIntrinsic(
             ref CORINFO_RESOLVED_TOKEN pResolvedToken,
             ref CORINFO_GENERICHANDLE_RESULT pResult

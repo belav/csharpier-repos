@@ -6,15 +6,18 @@ namespace Test
     public class MyAttribute : Attribute
     {
         public string val;
+
         public MyAttribute(string stuff)
         {
             System.Console.WriteLine(stuff);
             val = stuff;
         }
     }
+
     public class My2Attribute : MyAttribute
     {
         public int ival;
+
         public My2Attribute(string stuff, int blah) : base(stuff)
         {
             System.Console.WriteLine("ctor with int val" + stuff);

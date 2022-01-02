@@ -992,7 +992,6 @@ namespace System.Numerics.Tensors
         #region IReadOnlyCollection<T> members
 
         int IReadOnlyCollection<T>.Count => (int)Length;
-
         #endregion
 
         #region IList<T> members
@@ -1039,7 +1038,6 @@ namespace System.Numerics.Tensors
         #region IReadOnlyList<T> members
 
         T IReadOnlyList<T>.this[int index] => GetValue(index);
-
         #endregion
 
         #region IStructuralComparable members
@@ -1320,6 +1318,7 @@ namespace System.Numerics.Tensors
 
             return true;
         }
+
         int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
         {
             int hashCode = 0;
@@ -1380,7 +1379,6 @@ namespace System.Numerics.Tensors
             }
             return compressedSparseTensor;
         }
-
         #endregion
 
         public string GetArrayString(bool includeWhitespace = true)

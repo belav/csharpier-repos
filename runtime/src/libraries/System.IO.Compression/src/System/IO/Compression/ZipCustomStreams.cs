@@ -451,6 +451,7 @@ namespace System.IO.Compression
         private long _initialPosition;
         private readonly ZipArchiveEntry _zipArchiveEntry;
         private readonly EventHandler? _onClose;
+
         // Called when the stream is closed.
         // parameters are initialPosition, currentPosition, checkSum, baseBaseStream, zipArchiveEntry and onClose handler
         private readonly Action<

@@ -20,12 +20,17 @@ namespace System.Collections.Concurrent.Tests
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
         ) => new List<ModifyEnumerable>();
+
         protected override int CreateT(int seed) => new Random(seed).Next();
+
         protected override EnumerableOrder Order => EnumerableOrder.Unspecified;
+
         protected override IEnumerable<int> GenericIEnumerableFactory(int count) =>
             CreateProducerConsumerCollection(count);
+
         protected IProducerConsumerCollection<int> CreateProducerConsumerCollection() =>
             CreateProducerConsumerCollection<int>();
+
         protected IProducerConsumerCollection<int> CreateProducerConsumerCollection(int count) =>
             CreateProducerConsumerCollection(Enumerable.Range(0, count));
 
@@ -35,8 +40,10 @@ namespace System.Collections.Concurrent.Tests
         );
         protected abstract bool IsEmpty(IProducerConsumerCollection<int> pcc);
         protected abstract bool TryPeek<T>(IProducerConsumerCollection<T> pcc, out T result);
+
         protected virtual IProducerConsumerCollection<int> CreateOracle() =>
             CreateOracle(Enumerable.Empty<int>());
+
         protected abstract IProducerConsumerCollection<int> CreateOracle(
             IEnumerable<int> collection
         );

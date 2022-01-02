@@ -380,6 +380,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 MemberClass<object> mc = new MemberClass<object>();

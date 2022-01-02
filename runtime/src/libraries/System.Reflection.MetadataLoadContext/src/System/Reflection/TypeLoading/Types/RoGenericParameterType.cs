@@ -16,33 +16,47 @@ namespace System.Reflection.TypeLoading
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => false;
+
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
+
         public sealed override bool IsConstructedGenericType => false;
         public sealed override bool IsGenericParameter => true;
         public sealed override bool ContainsGenericParameters => true;
 
         protected sealed override string? ComputeNamespace() => DeclaringType!.Namespace;
+
         protected sealed override string? ComputeFullName() => null;
+
         public sealed override string ToString() => Loader.GetDisposedString() ?? Name;
 
         protected sealed override TypeAttributes ComputeAttributeFlags() => TypeAttributes.Public;
+
         protected sealed override TypeCode GetTypeCodeImpl() => TypeCode.Object;
 
         internal sealed override RoType? GetRoElementType() => null;
+
         public sealed override int GetArrayRank() =>
             throw new ArgumentException(SR.Argument_HasToBeArrayClass);
 
         public sealed override Type GetGenericTypeDefinition() =>
             throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
+
         internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
+
         protected internal sealed override RoType[] GetGenericArgumentsNoCopy() =>
             Array.Empty<RoType>();
+
         [RequiresUnreferencedCode(
             "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
         )]
@@ -56,13 +70,16 @@ namespace System.Reflection.TypeLoading
 
         public sealed override Type[] GetGenericParameterConstraints() =>
             GetGenericParameterConstraintsNoCopy().CloneArray<Type>();
+
         private RoType[] GetGenericParameterConstraintsNoCopy() =>
             _lazyConstraints ?? (_lazyConstraints = ComputeGenericParameterConstraints());
+
         protected abstract RoType[] ComputeGenericParameterConstraints();
         private volatile RoType[]? _lazyConstraints;
 
         public sealed override Guid GUID => Guid.Empty;
         public sealed override StructLayoutAttribute? StructLayoutAttribute => null;
+
         protected internal sealed override RoType ComputeEnumUnderlyingType() =>
             throw new ArgumentException(SR.Arg_MustBeEnum);
 
@@ -91,22 +108,27 @@ namespace System.Reflection.TypeLoading
         internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
             NameFilter? filter
         ) => Array.Empty<ConstructorInfo>();
+
         internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
             NameFilter? filter,
             Type reflectedType
         ) => Array.Empty<MethodInfo>();
+
         internal sealed override IEnumerable<EventInfo> GetEventsCore(
             NameFilter? filter,
             Type reflectedType
         ) => Array.Empty<EventInfo>();
+
         internal sealed override IEnumerable<FieldInfo> GetFieldsCore(
             NameFilter? filter,
             Type reflectedType
         ) => Array.Empty<FieldInfo>();
+
         internal sealed override IEnumerable<PropertyInfo> GetPropertiesCore(
             NameFilter? filter,
             Type reflectedType
         ) => Array.Empty<PropertyInfo>();
+
         internal sealed override IEnumerable<RoType> GetNestedTypesCore(NameFilter? filter) =>
             Array.Empty<RoType>();
     }

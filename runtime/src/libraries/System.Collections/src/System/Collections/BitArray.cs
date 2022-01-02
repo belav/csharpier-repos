@@ -130,6 +130,7 @@ namespace System.Collections
         private const uint Vector128IntCount = 4;
         private const uint Vector256ByteCount = 32;
         private const uint Vector256IntCount = 8;
+
         public unsafe BitArray(bool[] values)
         {
             if (values == null)

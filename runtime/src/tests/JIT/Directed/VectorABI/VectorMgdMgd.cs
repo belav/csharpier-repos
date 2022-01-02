@@ -90,6 +90,7 @@ public static class VectorMgdMgd
             throw new ArgumentException();
         }
     }
+
     public static bool CheckValue<T>(T value, T expectedValue)
     {
         bool returnVal;

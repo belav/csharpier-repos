@@ -12,6 +12,7 @@ namespace System.Threading.Tests
         public readonly List<string> CallStacks = new List<string>();
 
         public override void OperationStarted() => CallStacks.Add(Environment.StackTrace);
+
         public override void OperationCompleted() => CallStacks.Add(Environment.StackTrace);
 
         public override void Post(SendOrPostCallback d, object state)

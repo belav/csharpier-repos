@@ -51,7 +51,6 @@ namespace System.DirectoryServices.ActiveDirectory
         public override string ToString() => Name;
 
         public abstract DirectoryEntry GetDirectoryEntry();
-
         #endregion public methods
 
         #region public properties

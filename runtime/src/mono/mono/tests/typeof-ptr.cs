@@ -4,6 +4,7 @@ using System.Reflection;
 class T
 {
     public static unsafe void meth(int a, int* b) { }
+
     static int Main()
     {
         ParameterInfo[] args = typeof(T).GetMethod("meth").GetParameters();

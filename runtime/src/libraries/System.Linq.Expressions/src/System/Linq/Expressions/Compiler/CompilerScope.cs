@@ -209,7 +209,6 @@ namespace System.Linq.Expressions.Compiler
                 lc.IL.Emit(OpCodes.Call, RuntimeOps_CreateRuntimeVariables);
             }
         }
-
         #endregion
 
         #region Variable access
@@ -285,7 +284,6 @@ namespace System.Linq.Expressions.Compiler
             //
             throw Error.UndefinedVariable(variable.Name, variable.Type, CurrentLambdaName);
         }
-
         #endregion
 
         private void SetParent(LambdaCompiler lc, CompilerScope? parent)

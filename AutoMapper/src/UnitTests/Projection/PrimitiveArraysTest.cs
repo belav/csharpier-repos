@@ -53,6 +53,7 @@ namespace AutoMapper.UnitTests.Projection
                 result[0].Value2.ShouldBe(sources[0].Value2);
             }
         }
+
         public class Source
         {
             public byte[] Value1 { get; set; }

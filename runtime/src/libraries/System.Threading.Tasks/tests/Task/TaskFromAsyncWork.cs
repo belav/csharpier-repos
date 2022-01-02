@@ -87,7 +87,6 @@ namespace System.Threading.Tasks.Tests
 
         public object ObservedTaskScheduler { get; private set; }
     }
-
     #endregion
 
     #region AsyncAction
@@ -273,7 +272,6 @@ namespace System.Threading.Tasks.Tests
 
         #endregion
     }
-
     #endregion
 
     #region AsyncFunc

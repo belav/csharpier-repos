@@ -363,6 +363,7 @@ namespace System.Collections.ObjectModel.Tests
 
         // Number of collection changed events that were ACTUALLY fired.
         private int _numCollectionChangedFired;
+
         // Number of collection changed events that are EXPECTED to be fired.
         private int _expectedCollectionChangedFired;
 
@@ -373,7 +374,6 @@ namespace System.Collections.ObjectModel.Tests
         private int _expectedOldStartingIndex;
 
         private PropertyNameExpected[] _expectedPropertyChanged;
-
         #endregion
 
         /// <summary>

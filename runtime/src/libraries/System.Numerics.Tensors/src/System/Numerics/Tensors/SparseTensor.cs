@@ -12,6 +12,7 @@ namespace System.Numerics.Tensors
     public class SparseTensor<T> : Tensor<T>
     {
         private readonly Dictionary<int, T> values;
+
         /// <summary>
         /// Constructs a new SparseTensor of the specifed dimensions, initial capacity, and stride ordering.
         /// </summary>

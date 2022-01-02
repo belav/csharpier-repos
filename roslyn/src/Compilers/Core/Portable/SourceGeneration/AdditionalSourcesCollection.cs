@@ -10,6 +10,7 @@ using System.IO;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
+
 namespace Microsoft.CodeAnalysis
 {
     internal sealed class AdditionalSourcesCollection

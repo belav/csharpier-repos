@@ -17,8 +17,10 @@ namespace System.Threading
 
         private const int ProcessorIdCacheShift = 16;
         private const int ProcessorIdCacheCountDownMask = (1 << ProcessorIdCacheShift) - 1;
+
         // Refresh rate of the cache. Will be derived from a speed check of GetCurrentProcessorNumber API.
         private static int s_processorIdRefreshRate;
+
         // We will not adjust higher than this though.
         private const int MaxIdRefreshRate = 5000;
 

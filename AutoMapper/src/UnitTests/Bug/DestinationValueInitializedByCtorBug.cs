@@ -17,19 +17,23 @@ namespace AutoMapper.UnitTests.Bug
                 /* Remove the line below and the mapping works correctly*/
                 this.Tag = new TagDto() { Name = Guid.NewGuid().ToString() };
             }
+
             public string Name { get; set; }
             public TagDto Tag { get; set; }
         }
+
         public class TagDto
         {
             public string Name { get; set; }
             public bool IsTrue { get; set; }
         }
+
         public class ItemToMap
         {
             public string Name { get; set; }
             public Tag Tag { get; set; }
         }
+
         public class Tag
         {
             public string Name { get; set; }

@@ -42,7 +42,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         }
 
         void IElement.PostParse(IElement parent) { }
-
         #endregion
 
         #region Protected Properties
@@ -51,7 +50,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return Array.Empty<SrgsElement>(); }
         }
-
         #endregion
 
         #region Private Types
@@ -63,6 +61,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 _elements = element.Children;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsElement[] AKeys
             {

@@ -49,6 +49,7 @@ internal class PrerenderComponentApplicationStore : IPersistentComponentStateSto
 
 #nullable enable
     public string? PersistedState { get; private set; }
+
 #nullable disable
 
     public Dictionary<string, byte[]> ExistingState { get; protected set; }

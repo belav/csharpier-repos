@@ -606,10 +606,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         private sealed class InitOnlyProperty
         {
             public InitOnlyProperty() { }
+
             public InitOnlyProperty(int value)
             {
                 ((dynamic)this).P = value;
             }
+
             public int P { get; init; }
             public int Q
             {

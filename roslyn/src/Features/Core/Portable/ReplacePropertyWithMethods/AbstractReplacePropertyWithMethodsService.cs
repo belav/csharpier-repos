@@ -51,6 +51,7 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             SyntaxNode compoundAssignment,
             TExpressionSyntax readExpression
         );
+
         public async Task<SyntaxNode?> GetPropertyDeclarationAsync(
             CodeRefactoringContext context
         ) => await context.TryGetRelevantNodeAsync<TPropertySyntax>().ConfigureAwait(false);

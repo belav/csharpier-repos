@@ -563,7 +563,6 @@ namespace Moq
 
             return count;
         }
-
 		#endregion
 
 		#region Setup
@@ -798,7 +797,6 @@ namespace Moq
             // from how it worked previously, it's important to capture the default value provider at this precise
             // moment, since it might be changed later (before queries to properties).
         }
-
 		#endregion
 
 		#region Raise
@@ -893,7 +891,6 @@ namespace Moq
                 }
             }
         }
-
 		#endregion
 
 		#region As<TInterface>
@@ -921,7 +918,6 @@ namespace Moq
             return this.InheritedInterfaces.Contains(interfaceType)
                 || this.AdditionalInterfaces.Contains(interfaceType);
         }
-
 		#endregion
 
 		#region Default Values

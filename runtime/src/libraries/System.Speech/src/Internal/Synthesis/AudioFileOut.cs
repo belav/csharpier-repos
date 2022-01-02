@@ -55,7 +55,6 @@ namespace System.Speech.Internal.Synthesis
             _evt.Close();
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Internal Methods
@@ -196,7 +195,6 @@ namespace System.Speech.Internal.Synthesis
         {
             lock (_noWriteOutLock) { }
         }
-
         #endregion
 
         #endregion
@@ -226,7 +224,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return _wfxOut.ToBytes(); }
         }
-
         #endregion
 
         #region Private Fields
@@ -242,7 +239,6 @@ namespace System.Speech.Internal.Synthesis
         protected bool _paused;
         protected int _totalByteWrittens;
         protected int _bytesWritten;
-
         #endregion
 
         #region Private Fields

@@ -300,7 +300,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             primitiveVarEnum = VarEnum.VT_VOID; // error
             return false;
         }
-
         #endregion
 
         // Type.InvokeMember tries to marshal objects as VT_DISPATCH, and falls back to VT_UNKNOWN

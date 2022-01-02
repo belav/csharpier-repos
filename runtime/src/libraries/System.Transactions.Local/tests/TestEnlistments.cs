@@ -15,12 +15,14 @@ namespace System.Transactions.Tests
         ForceRollback,
         Done
     };
+
     public enum SinglePhaseVote
     {
         Committed,
         Aborted,
         InDoubt
     };
+
     public enum EnlistmentOutcome
     {
         Committed,

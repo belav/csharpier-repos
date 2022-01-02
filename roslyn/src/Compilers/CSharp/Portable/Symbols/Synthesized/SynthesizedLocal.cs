@@ -198,6 +198,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #if DEBUG
         private static int _nextSequence = 0;
+
         // Produce a token that helps distinguish one variable from another when debugging
         private readonly int _sequence = System.Threading.Interlocked.Increment(ref _nextSequence);
 

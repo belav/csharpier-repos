@@ -656,6 +656,7 @@ namespace System.Tests
         private class NonSeekableStream : MemoryStream
         {
             public NonSeekableStream(byte[] buffer) : base(buffer) { }
+
             public override bool CanSeek => false;
         }
     }

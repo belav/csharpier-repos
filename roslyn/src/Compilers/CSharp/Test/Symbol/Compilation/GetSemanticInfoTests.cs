@@ -1079,7 +1079,6 @@ class C {
             Assert.Equal(expkind, act1.Kind);
             ValidateConversion(act1, expkind);
         }
-
         #endregion
 
         [Fact]

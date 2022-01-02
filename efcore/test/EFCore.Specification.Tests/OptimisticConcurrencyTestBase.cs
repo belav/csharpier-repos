@@ -295,7 +295,6 @@ namespace Microsoft.EntityFrameworkCore
                     )
             );
         }
-
         #endregion
 
         #region Concurrency exceptions with shadow FK associations
@@ -377,7 +376,6 @@ namespace Microsoft.EntityFrameworkCore
                     .Sponsors.Add(c.Sponsors.Single(s => s.Name.Contains("Shell")));
             }
         }
-
         #endregion
 
         #region Concurrency exceptions with complex types
@@ -401,7 +399,6 @@ namespace Microsoft.EntityFrameworkCore
                     )
             );
         }
-
         #endregion
 
         #region Tests for update exceptions involving adding and deleting entities
@@ -531,7 +528,6 @@ namespace Microsoft.EntityFrameworkCore
                 c => Assert.Null(c.Drivers.SingleOrDefault(d => d.Name == "Fernando Alonso"))
             );
         }
-
         #endregion
 
         #region Tests for calling Reload on an entity in various states
@@ -786,7 +782,6 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 );
         }
-
         #endregion
 
         #region Helpers

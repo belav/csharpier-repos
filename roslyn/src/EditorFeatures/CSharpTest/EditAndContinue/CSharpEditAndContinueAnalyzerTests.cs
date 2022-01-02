@@ -132,7 +132,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 CancellationToken.None
             );
         }
-
         #endregion
 
         [Fact]

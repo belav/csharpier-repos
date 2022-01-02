@@ -153,7 +153,6 @@ namespace System.Diagnostics.Tracing
                 _max = double.NegativeInfinity;
             }
         }
-
         #endregion // Statistics Calculation
 
         // Values buffering
@@ -218,6 +217,7 @@ namespace System.Diagnostics.Tracing
         {
             Payload = payload;
         }
+
         public CounterPayload Payload { get; set; }
     }
 }

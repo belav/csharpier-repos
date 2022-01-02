@@ -679,7 +679,6 @@ namespace System.Security.AccessControl
             AuditRulesModified |= modified;
             return result;
         }
-
 #endregion
 
 #region public Methods

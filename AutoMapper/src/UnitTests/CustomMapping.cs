@@ -130,6 +130,7 @@ namespace AutoMapper.UnitTests
 
             int TotalItems { get; set; }
         }
+
         public class ModelPager<TItem>
         {
             public int CurrentPage { get; set; }
@@ -142,11 +143,13 @@ namespace AutoMapper.UnitTests
 
             public int TotalItems { get; set; }
         }
+
         public class Pager<TItem> : IPager<TItem>
         {
             private readonly IEnumerable<TItem> _items;
 
             public Pager(IEnumerable<TItem> items) : this(items, 0, 0, 0) { }
+
             public Pager(IEnumerable<TItem> items, int currentPage, int pageSize, int totalItems)
             {
                 _items = items ?? Enumerable.Empty<TItem>();
@@ -1313,6 +1316,7 @@ namespace AutoMapper.UnitTests
         public class CustomValueResolver : IMemberValueResolver<object, object, int, int>
         {
             private readonly int _toAdd;
+
             public CustomValueResolver()
             {
                 _toAdd = 11;
@@ -1895,6 +1899,7 @@ namespace AutoMapper.UnitTests
             {
                 Value = value;
             }
+
             public Dest() { }
 
             public int Value { get; set; }

@@ -210,6 +210,7 @@ namespace ILCompiler.DependencyAnalysisFramework
                 }
             }
         }
+
         void IDependencyAnalysisMarkStrategy<DependencyContextType>.AttachContext(
             DependencyContextType context
         )

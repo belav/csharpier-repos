@@ -512,6 +512,7 @@ namespace System.Threading.Tasks.Sources.Tests
 
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 false;
+
             protected override IEnumerable<Task> GetScheduledTasks() => null;
         }
 
@@ -587,8 +588,10 @@ namespace System.Threading.Tasks.Sources.Tests
 
             /// <summary>Current state of the state machine.</summary>
             private int _state = StateCtor;
+
             /// <summary>All of the logic for managing the IValueTaskSource implementation</summary>
             private ManualResetValueTaskSourceCore<bool> _vts; // mutable struct; do not make this readonly
+
             /// <summary>Builder used for efficiently waiting and appropriately managing ExecutionContext.</summary>
             private AsyncIteratorMethodBuilder _builder = AsyncIteratorMethodBuilder.Create(); // mutable struct; do not make this readonly
 
@@ -695,11 +698,14 @@ namespace System.Threading.Tasks.Sources.Tests
                     return;
                 }
             }
+
             void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine) { }
 
             bool IValueTaskSource<bool>.GetResult(short token) => _vts.GetResult(token);
+
             ValueTaskSourceStatus IValueTaskSource<bool>.GetStatus(short token) =>
                 _vts.GetStatus(token);
+
             void IValueTaskSource<bool>.OnCompleted(
                 Action<object> continuation,
                 object state,

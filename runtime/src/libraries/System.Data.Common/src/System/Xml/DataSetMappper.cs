@@ -184,6 +184,7 @@ namespace System.Xml
             }
             return null;
         }
+
         internal DataTable? GetTableSchemaForElement(XmlElement elem)
         {
             XmlBoundElement? be = elem as XmlBoundElement;
@@ -355,6 +356,7 @@ namespace System.Xml
             object idTable = GetIdentity(table.EncodedTableName, table.Namespace);
             _tableSchemaMap[idTable] = table;
         }
+
         private void AddColumnSchema(DataColumn col)
         {
             DataTable table = col.Table!;
@@ -369,6 +371,7 @@ namespace System.Xml
             }
             columns[idColumn] = col;
         }
+
         private static object GetIdentity(string localName, string namespaceURI)
         {
             // we need access to XmlName to make this faster

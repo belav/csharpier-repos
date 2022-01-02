@@ -91,6 +91,7 @@ namespace System.Text.Json.SourceGeneration
         /// </summary>
         public Dictionary<string, Type>? GetSerializableTypes() =>
             _rootTypes?.ToDictionary(p => p.Type.FullName, p => p.Type);
+
         private List<TypeGenerationSpec>? _rootTypes;
     }
 

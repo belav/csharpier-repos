@@ -73,6 +73,7 @@ namespace System.Reflection.Tests
         public static bool IsReflectionEmitSupported => PlatformDetection.IsReflectionEmitSupported;
 
         private static int TableIndex(int token) => token >> 24;
+
         private static int RowIndex(int token) => token & 0x00FFFFFF;
     }
 }

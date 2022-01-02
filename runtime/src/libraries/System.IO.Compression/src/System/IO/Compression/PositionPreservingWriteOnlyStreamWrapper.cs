@@ -29,6 +29,7 @@ namespace System.IO.Compression
             get { return _position; }
             set { throw new NotSupportedException(SR.NotSupported); }
         }
+
         public override void Write(byte[] buffer, int offset, int count)
         {
             _position += count;
@@ -94,6 +95,7 @@ namespace System.IO.Compression
         }
 
         public override void Flush() => _stream.Flush();
+
         public override Task FlushAsync(CancellationToken cancellationToken) =>
             _stream.FlushAsync(cancellationToken);
 

@@ -457,7 +457,6 @@ internal class ResponseBody : Stream
     {
         throw new InvalidOperationException(Resources.Exception_WriteOnlyStream);
     }
-
     #endregion
 
     internal void Abort(bool dispose = true)

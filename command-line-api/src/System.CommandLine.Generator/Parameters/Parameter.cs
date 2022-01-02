@@ -19,7 +19,9 @@ namespace System.CommandLine.Generator.Parameters
         public abstract string GetValueFromContext();
 
         public virtual string GetPropertyDeclaration() => "";
+
         public virtual string GetPropertyAssignment() => "";
+
         public virtual (string Type, string Name) GetMethodParameter() => ("", "");
 
         public override int GetHashCode()

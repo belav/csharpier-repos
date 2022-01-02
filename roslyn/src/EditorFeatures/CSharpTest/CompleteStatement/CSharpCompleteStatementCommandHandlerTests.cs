@@ -127,7 +127,6 @@ public class Class1
 
             VerifyNoSpecialSemicolonHandling(code);
         }
-
         #endregion
 
         #region ArgumentListOfMethodInvocation
@@ -292,7 +291,6 @@ var test = ClassC.MethodM(
 
             VerifyTypingSemicolon(code, expected);
         }
-
         #endregion
 
         #region ArgumentListOfNestedMethodInvocation
@@ -574,7 +572,6 @@ var test = ClassC.MethodM(
 
             VerifyNoSpecialSemicolonHandling(code);
         }
-
         #endregion
 
         #region ArgumentList_Array
@@ -712,7 +709,6 @@ var test = ClassC.MethodM(
 
             VerifyNoSpecialSemicolonHandling(code);
         }
-
         #endregion
 
         #region FieldInitializer
@@ -802,7 +798,6 @@ class C
 
             VerifyNoSpecialSemicolonHandling(code);
         }
-
         #endregion
 
         #region ForLoop
@@ -1412,6 +1407,7 @@ class C
 
             VerifyTypingSemicolon(code, expected);
         }
+
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ForLoopInitializers_MissingParen()
         {
@@ -1635,7 +1631,6 @@ public class Goo
 
             VerifyNoSpecialSemicolonHandling(code);
         }
-
         #endregion
 
         #region Indexer
@@ -1763,7 +1758,6 @@ class C
 
             VerifyTypingSemicolon(code, expected);
         }
-
         #endregion
 
         #region ObjectInitializer
@@ -1898,7 +1892,6 @@ public class Goo
 
             VerifyTypingSemicolon(code, expected);
         }
-
         #endregion
 
         #region Accessors
@@ -2071,7 +2064,6 @@ public class SaleItem
 
             VerifyNoSpecialSemicolonHandling(code);
         }
-
         #endregion
 
         #region ParenthesizeExpression
@@ -2487,7 +2479,6 @@ class Program
 
             VerifyTypingSemicolon(code, expected);
         }
-
         #endregion
 
         [WpfTheory, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
@@ -4361,6 +4352,7 @@ public class ClassC
                 }
             );
         }
+
         protected override TestWorkspace CreateTestWorkspace(string code) =>
             TestWorkspace.CreateCSharp(code);
     }

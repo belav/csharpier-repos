@@ -23,6 +23,7 @@ namespace One
     class C : B
     {
         public static int count = 0;
+
         ~C()
         {
             Console.WriteLine("In Finalize of C");
@@ -34,6 +35,7 @@ namespace One
 namespace Two
 {
     using One;
+
     class D : C
     {
     }

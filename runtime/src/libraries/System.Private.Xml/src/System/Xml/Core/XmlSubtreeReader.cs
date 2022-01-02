@@ -102,6 +102,7 @@ namespace System.Xml
         // cached nodes
         private bool _useCurNode;
         private NodeData _curNode = null!;
+
         // node used for a text node of ReadAttributeValue or as Initial or EOF node
         private readonly NodeData _tmpNode;
 

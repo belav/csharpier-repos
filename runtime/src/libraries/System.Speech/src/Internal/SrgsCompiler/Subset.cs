@@ -35,7 +35,6 @@ namespace System.Speech.Internal.SrgsCompiler
             // Add transition to the new state with normalized token.
             parent.AddArc(backend.SubsetTransition(text, mode));
         }
-
         #endregion
 
         #region Internal Method

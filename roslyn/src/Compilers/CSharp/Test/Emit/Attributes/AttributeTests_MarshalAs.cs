@@ -113,7 +113,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             Assert.True(count > 0, "Expected at least one parameter");
         }
-
         #endregion
 
         #region Fields
@@ -1354,7 +1353,6 @@ enum E
                 (name, _omitted1) => (name == "e" || name == "X") ? new byte[] { 0x02 } : null
             );
         }
-
         #endregion
 
         #region Parameters and Return Values

@@ -401,27 +401,37 @@ namespace System.Text.Json.Serialization.Samples
             internal override object Value => _value;
 
             public override T GetValue<T>() => throw new NotSupportedException();
+
             public override void SetValue(object value) => throw new NotSupportedException();
 
             // IDictionary members.
             public void Add(string key, object value) => _value.Add(key, value);
+
             void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> item) =>
                 _value.Add(item);
+
             public void Clear() => _value.Clear();
+
             bool ICollection<KeyValuePair<string, object>>.Contains(
                 KeyValuePair<string, object> item
             ) => _value.Contains(item);
+
             public bool ContainsKey(string key) => _value.ContainsKey(key);
+
             void ICollection<KeyValuePair<string, object>>.CopyTo(
                 KeyValuePair<string, object>[] array,
                 int arrayIndex
             ) => _value.CopyTo(array, arrayIndex);
+
             public IEnumerator<KeyValuePair<string, object>> GetEnumerator() =>
                 _value.GetEnumerator();
+
             public bool Remove(string key) => _value.Remove(key);
+
             bool ICollection<KeyValuePair<string, object>>.Remove(
                 KeyValuePair<string, object> item
             ) => _value.Remove(item);
+
             public object this[string key]
             {
                 get => _value[key];
@@ -431,7 +441,9 @@ namespace System.Text.Json.Serialization.Samples
             ICollection<object> IDictionary<string, object>.Values => _value.Values;
             public int Count => _value.Count;
             bool ICollection<KeyValuePair<string, object>>.IsReadOnly => _value.IsReadOnly;
+
             IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_value).GetEnumerator();
+
             public bool TryGetValue(string key, out object value) =>
                 _value.TryGetValue(key, out value);
         }
@@ -463,6 +475,7 @@ namespace System.Text.Json.Serialization.Samples
             internal override object Value => _value;
 
             public override T GetValue<T>() => throw new NotSupportedException();
+
             public override void SetValue(object value) => throw new NotSupportedException();
 
             // IList members.
@@ -473,16 +486,26 @@ namespace System.Text.Json.Serialization.Samples
             }
             public int Count => _value.Count;
             bool ICollection<object>.IsReadOnly => _value.IsReadOnly;
+
             public void Add(object item) => _value.Add(item);
+
             public void Clear() => _value.Clear();
+
             public bool Contains(object item) => _value.Contains(item);
+
             void ICollection<object>.CopyTo(object[] array, int arrayIndex) =>
                 _value.CopyTo(array, arrayIndex);
+
             public IEnumerator<object> GetEnumerator() => _value.GetEnumerator();
+
             public int IndexOf(object item) => _value.IndexOf(item);
+
             public void Insert(int index, object item) => _value.Insert(index, item);
+
             public bool Remove(object item) => _value.Remove(item);
+
             public void RemoveAt(int index) => _value.RemoveAt(index);
+
             IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_value).GetEnumerator();
         }
 

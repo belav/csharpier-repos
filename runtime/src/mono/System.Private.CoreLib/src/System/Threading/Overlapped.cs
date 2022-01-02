@@ -27,6 +27,7 @@ namespace System.Threading
 
         // Context callback: same sig for SendOrPostCallback and ContextCallback
         internal static ContextCallback s_ccb = new ContextCallback(IOCompletionCallback_Context);
+
         private static void IOCompletionCallback_Context(object? state)
         {
             _IOCompletionCallback helper = (_IOCompletionCallback)state!;
@@ -72,7 +73,6 @@ namespace System.Threading
             } while (pNativeOverlapped != null);
         }
     }
-
     #endregion class _IOCompletionCallback
 
     #region class OverlappedData
@@ -226,7 +226,6 @@ namespace System.Threading
             return (OverlappedData)handle.Target!;
         }
     }
-
     #endregion class OverlappedData
 
     #region class Overlapped

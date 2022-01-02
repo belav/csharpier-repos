@@ -100,6 +100,7 @@ namespace System.Xml.Serialization
                 return _schemaSet;
             }
         }
+
         internal int Add(XmlSchema schema, bool delay)
         {
             if (delay)
@@ -237,6 +238,7 @@ namespace System.Xml.Serialization
         {
             return Find(name, type, true);
         }
+
         internal object? Find(XmlQualifiedName name, Type type, bool checkCache)
         {
             if (!IsCompiled)

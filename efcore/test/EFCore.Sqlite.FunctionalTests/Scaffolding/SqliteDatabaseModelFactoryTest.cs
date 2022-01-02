@@ -126,7 +126,6 @@ DROP TABLE Everest;
 DROP TABLE Denali;"
             );
         }
-
         #endregion
 
         #region Table
@@ -396,7 +395,6 @@ DROP TABLE PrincipalTable;"
                 "
             );
         }
-
         #endregion
 
         #region ColumnFacets
@@ -573,7 +571,6 @@ CREATE TABLE ComputedColumnSql (
                 "DROP TABLE AutoIncTest"
             );
         }
-
         #endregion
 
         #region PrimaryKeyFacets
@@ -653,7 +650,6 @@ CREATE TABLE PrimaryKeyName (
                 "DROP TABLE PrimaryKeyName;"
             );
         }
-
         #endregion
 
         #region UniqueConstraintFacets
@@ -711,7 +707,6 @@ CREATE TABLE UniqueConstraintName (
                 "DROP TABLE UniqueConstraintName;"
             );
         }
-
         #endregion
 
         #region IndexFacets
@@ -774,7 +769,6 @@ CREATE UNIQUE INDEX IX_UNIQUE on UniqueIndex (Id2);",
                 "DROP TABLE UniqueIndex;"
             );
         }
-
         #endregion
 
         #region ForeignKeyFacets
@@ -1017,7 +1011,6 @@ DROP TABLE DependentTable;
 DROP TABLE PrincipalTable;"
             );
         }
-
         #endregion
 
         #region Warnings
@@ -1174,7 +1167,6 @@ DROP TABLE DependentTable;
 DROP TABLE PrincipalTable;"
             );
         }
-
         #endregion
 
         public class SqliteDatabaseModelFixture : SharedStoreFixtureBase<PoolableDbContext>

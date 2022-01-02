@@ -29,7 +29,6 @@ namespace System.Tests
             false;
         protected override bool IsReadOnly_ValidityValue => true;
         protected override bool AddRemoveClear_ThrowsNotSupported => true;
-
         #endregion
 
         #region List<T> Helper Methods
@@ -64,7 +63,6 @@ namespace System.Tests
                 );
             }
         }
-
         #endregion
 
         [Fact]

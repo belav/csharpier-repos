@@ -60,5 +60,6 @@ internal sealed class ConfigSectionClone
 
     public static bool operator ==(ConfigSectionClone lhs, ConfigSectionClone rhs) =>
         lhs is null ? rhs is null : lhs.Equals(rhs);
+
     public static bool operator !=(ConfigSectionClone lhs, ConfigSectionClone rhs) => !(lhs == rhs);
 }

@@ -118,7 +118,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Unqualified
 
         #region Qualified
@@ -238,7 +237,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Qualified
 
         #endregion Name Members
@@ -280,7 +278,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Unqualified
 
         #region Qualified
@@ -334,7 +331,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Qualified
 
         #endregion Indexer Members
@@ -378,7 +374,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Unqualified
 
         #region Qualified
@@ -434,7 +429,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Qualified
 
         #region Ambiguities
@@ -482,7 +476,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
         }
-
         #endregion Ambiguities
 
         #endregion Operator Members
@@ -534,7 +527,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Unqualified
 
         #region Qualified
@@ -598,7 +590,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Qualified
 
         #endregion Conversion Operator Members
@@ -1108,7 +1099,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
         }
-
         #endregion Parameters
 
         #region Conversion operator return types
@@ -1172,7 +1162,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
         }
-
         #endregion Conversion operator return types
 
         #region Qualified
@@ -1343,7 +1332,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Qualified
 
         #region Aliased or Predefined
@@ -1427,7 +1415,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Aliased or Predefined
 
         #region Identifiers
@@ -1487,7 +1474,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Identifiers
 
         #region Non-simple-type constructors

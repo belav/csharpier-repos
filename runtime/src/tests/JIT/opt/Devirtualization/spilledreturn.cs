@@ -14,6 +14,7 @@ public class Base
     {
         Console.WriteLine("Base:Foo");
     }
+
     public virtual void Bar()
     {
         Console.WriteLine("Base:Bar");
@@ -26,6 +27,7 @@ public class Derived : Base
     {
         Console.WriteLine("Derived:Foo");
     }
+
     public override void Bar()
     {
         Console.WriteLine("Derived:Bar");
@@ -38,6 +40,7 @@ public class Derived2 : Base
     {
         Console.WriteLine("Derived2:Foo");
     }
+
     public override void Bar()
     {
         Console.WriteLine("Derived2:Bar");

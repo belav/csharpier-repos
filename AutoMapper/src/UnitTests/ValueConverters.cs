@@ -12,6 +12,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -85,6 +86,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -171,6 +173,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -245,6 +248,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -323,6 +327,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -397,6 +402,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -487,6 +493,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -561,6 +568,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -651,6 +659,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>
@@ -725,6 +734,7 @@ namespace AutoMapper.UnitTests
                 public string Convert(int sourceMember, ResolutionContext context) =>
                     sourceMember.ToString("d8");
             }
+
             public class FourDigitIntToStringConverter : IValueConverter<int, string>
             {
                 public string Convert(int sourceMember, ResolutionContext context) =>

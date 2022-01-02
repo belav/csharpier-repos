@@ -100,6 +100,7 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                 yield return new ClassificationSpan(snapshotSpan, _registry.Keyword);
             }
         }
+
         /// <remarks>
         /// Internal for testing.
         /// </remarks>

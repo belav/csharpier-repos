@@ -25,7 +25,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         /// Set when the first compute task completes
         /// </summary>
         private TModel _initialUnfilteredModel = null;
-
         #endregion
 
         #region Fields that can only be accessed from the foreground thread
@@ -51,7 +50,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         // latest compute task to proceed.
         private Task<TModel> _lastTask;
         private Task _notifyControllerTask;
-
         #endregion
 
         public ModelComputation(

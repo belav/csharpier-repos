@@ -21,7 +21,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             Helpers.ThrowIfEmptyOrNull(text, nameof(text));
             Text = text;
         }
-
         #endregion
 
         #region public Properties
@@ -59,7 +58,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _display = value;
             }
         }
-
         #endregion
 
         #region Internal methods
@@ -159,7 +157,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
             return sb.ToString();
         }
-
         #endregion
 
         #region Private Fields

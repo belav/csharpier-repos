@@ -29,18 +29,25 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>A registry used to store all linked targets and information about them.</summary>
         private readonly TargetRegistry<T> _targetRegistry;
+
         /// <summary>The cloning function.</summary>
         private readonly Func<T, T>? _cloningFunction;
+
         /// <summary>The options used to configure this block's execution.</summary>
         private readonly DataflowBlockOptions _dataflowBlockOptions;
+
         /// <summary>Lazily initialized task completion source that produces the actual completion task when needed.</summary>
         private TaskCompletionSource<VoidResult>? _lazyCompletionTaskSource;
+
         /// <summary>Whether all future messages should be declined.</summary>
         private bool _decliningPermanently;
+
         /// <summary>Whether block completion is disallowed.</summary>
         private bool _completionReserved;
+
         /// <summary>The header of the singly-assigned value.</summary>
         private DataflowMessageHeader _header;
+
         /// <summary>The singly-assigned value.</summary>
         private T? _value;
 
@@ -602,6 +609,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { return _header.IsValid; }
         }
+
         /// <summary>Gets the value being stored by the block.</summary>
         private T? Value
         {
@@ -646,6 +654,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _writeOnceBlock.Completion.IsCompleted; }
             }
+
             /// <summary>Gets the block's Id.</summary>
             public int Id
             {
@@ -657,6 +666,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _writeOnceBlock.HasValue; }
             }
+
             /// <summary>Gets the WriteOnceBlock's value if it has one, or default(T) if it doesn't.</summary>
             public T? Value
             {
@@ -668,6 +678,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _writeOnceBlock._dataflowBlockOptions; }
             }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
             public TargetRegistry<T> LinkedTargets
             {

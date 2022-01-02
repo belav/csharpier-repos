@@ -2,30 +2,39 @@ using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
+
 namespace AutoMapper.Internal
 {
     using static Expression;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ReflectionHelper
     {
         public static Type GetElementType(Type type) =>
             type.IsArray ? type.GetElementType() : GetEnumerableElementType(type);
+
         public static Type GetEnumerableElementType(Type type) =>
             type.GetIEnumerableType()?.GenericTypeArguments[0] ?? typeof(object);
+
         public static TypeMap[] GetIncludedTypeMaps(
             this IGlobalConfiguration configuration,
             TypeMap typeMap
         ) => configuration.GetIncludedTypeMaps(typeMap.IncludedDerivedTypes);
+
         public static bool IsPublic(this PropertyInfo propertyInfo) =>
             (propertyInfo.GetGetMethod() ?? propertyInfo.GetSetMethod()) != null;
+
         public static bool Has<TAttribute>(this MemberInfo member) where TAttribute : Attribute =>
             member.IsDefined(typeof(TAttribute));
+
         public static bool CanBeSet(this MemberInfo member) =>
             member is PropertyInfo property ? property.CanWrite : !((FieldInfo)member).IsInitOnly;
+
         public static Expression GetDefaultValue(this ParameterInfo parameter) =>
             parameter is { DefaultValue: null, ParameterType: { IsValueType: true } type }
                 ? Default(type)
                 : Constant(parameter.DefaultValue);
+
         public static object MapMember(
             this ResolutionContext context,
             MemberInfo member,
@@ -37,6 +46,7 @@ namespace AutoMapper.Internal
             var destValue = destination == null ? null : GetMemberValue(member, destination);
             return context.Map(source, destValue, null, memberType, MemberMap.Instance);
         }
+
         public static void SetMemberValue(
             this MemberInfo propertyOrField,
             object target,
@@ -55,11 +65,13 @@ namespace AutoMapper.Internal
             }
             throw Expected(propertyOrField);
         }
+
         private static ArgumentOutOfRangeException Expected(MemberInfo propertyOrField) =>
             new ArgumentOutOfRangeException(
                 nameof(propertyOrField),
                 "Expected a property or field, not " + propertyOrField
             );
+
         public static object GetMemberValue(this MemberInfo propertyOrField, object target) =>
             propertyOrField switch
             {
@@ -67,6 +79,7 @@ namespace AutoMapper.Internal
                 FieldInfo field => field.GetValue(target),
                 _ => throw Expected(propertyOrField)
             };
+
         public static MemberInfo[] GetMemberPath(Type type, string fullMemberName)
         {
             var memberNames = fullMemberName.Split('.');
@@ -98,6 +111,7 @@ namespace AutoMapper.Internal
             static Type GetCurrentType(Type type) =>
                 type.IsGenericType && type.IsCollection() ? type.GenericTypeArguments[0] : type;
         }
+
         public static MemberInfo FindProperty(LambdaExpression lambdaExpression)
         {
             Expression expressionToCheck = lambdaExpression.Body;
@@ -122,6 +136,7 @@ namespace AutoMapper.Internal
                 }
             }
         }
+
         public static Type GetMemberType(this MemberInfo member) =>
             member switch
             {

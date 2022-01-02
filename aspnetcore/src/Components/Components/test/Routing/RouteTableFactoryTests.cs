@@ -1135,5 +1135,6 @@ public class RouteTableFactoryTests
     }
 
     class TestHandler1 { }
+
     class TestHandler2 { }
 }

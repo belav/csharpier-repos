@@ -93,7 +93,6 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 context.ReportDiagnostic(diagnostic);
             }
         }
-
         #endregion
 
         private bool SwitchIsIncomplete(

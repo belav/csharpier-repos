@@ -10,6 +10,7 @@ namespace System.Xml.Tests
     public class XsltcTestBasicFunctionality : XsltcTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public XsltcTestBasicFunctionality(ITestOutputHelper output) : base(output)
         {
             _output = output;

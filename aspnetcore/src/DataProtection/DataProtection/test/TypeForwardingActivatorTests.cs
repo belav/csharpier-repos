@@ -154,6 +154,7 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
     private class MockTypeForwardingActivator : TypeForwardingActivator
     {
         public MockTypeForwardingActivator() : base(null) { }
+
         public string Parse(string typeName) => RemoveVersionFromAssemblyName(typeName);
     }
 

@@ -11,6 +11,7 @@ using System;
 class ByRef_GCHole
 {
     static volatile int returnCode = 0;
+
     ~ByRef_GCHole()
     {
         if (returnCode == 0)

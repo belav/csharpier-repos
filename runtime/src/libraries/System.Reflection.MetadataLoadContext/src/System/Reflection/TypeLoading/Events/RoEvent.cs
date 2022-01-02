@@ -28,6 +28,7 @@ namespace System.Reflection.TypeLoading
         public abstract override string ToString();
 
         public sealed override Type DeclaringType => GetRoDeclaringType();
+
         internal RoInstantiationProviderType GetRoDeclaringType() => _declaringType;
 
         public sealed override Type ReflectedType => _reflectedType;
@@ -40,11 +41,13 @@ namespace System.Reflection.TypeLoading
         internal abstract RoModule GetRoModule();
 
         public abstract override int MetadataToken { get; }
+
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             this.HasSameMetadataDefinitionAsCore(other);
 
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public sealed override EventAttributes Attributes =>
@@ -64,10 +67,12 @@ namespace System.Reflection.TypeLoading
             (_lazyAdder == Sentinels.RoMethod)
                 ? (_lazyAdder = ComputeEventAddMethod()?.FilterInheritedAccessor())
                 : _lazyAdder;
+
         private MethodInfo? GetRoRemoveMethod() =>
             (_lazyRemover == Sentinels.RoMethod)
                 ? (_lazyRemover = ComputeEventRemoveMethod()?.FilterInheritedAccessor())
                 : _lazyRemover;
+
         private MethodInfo? GetRoRaiseMethod() =>
             (_lazyRaiser == Sentinels.RoMethod)
                 ? (_lazyRaiser = ComputeEventRaiseMethod()?.FilterInheritedAccessor())
@@ -75,8 +80,10 @@ namespace System.Reflection.TypeLoading
 
         public sealed override MethodInfo? GetAddMethod(bool nonPublic) =>
             GetRoAddMethod()?.FilterAccessor(nonPublic);
+
         public sealed override MethodInfo? GetRemoveMethod(bool nonPublic) =>
             GetRoRemoveMethod()?.FilterAccessor(nonPublic);
+
         public sealed override MethodInfo? GetRaiseMethod(bool nonPublic) =>
             GetRoRaiseMethod()?.FilterAccessor(nonPublic);
 
@@ -96,12 +103,16 @@ namespace System.Reflection.TypeLoading
         // Operations that are not allowed for Reflection-only.
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override void AddEventHandler(object? target, Delegate? handler) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override void RemoveEventHandler(object? target, Delegate? handler) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 

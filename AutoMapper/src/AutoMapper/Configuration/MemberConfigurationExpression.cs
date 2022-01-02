@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+
 namespace AutoMapper.Configuration
 {
     using static AutoMapper.Execution.ExpressionBuilder;
+
     public interface IPropertyMapConfiguration
     {
         void Configure(TypeMap typeMap);
@@ -15,6 +17,7 @@ namespace AutoMapper.Configuration
         LambdaExpression GetDestinationExpression();
         IPropertyMapConfiguration Reverse();
     }
+
     public class MemberConfigurationExpression<TSource, TDestination, TMember>
         : IMemberConfigurationExpression<TSource, TDestination, TMember>,
           IPropertyMapConfiguration
@@ -459,6 +462,7 @@ namespace AutoMapper.Configuration
         }
 
         public LambdaExpression SourceExpression { get; private set; }
+
         public LambdaExpression GetDestinationExpression() => DestinationMember.Lambda();
 
         public IPropertyMapConfiguration Reverse()

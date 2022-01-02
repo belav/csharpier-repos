@@ -167,6 +167,7 @@ namespace System.Xml.Serialization
         > s_xmlSerializerTable = new ContextAwareTables<
             Dictionary<XmlSerializerMappingKey, XmlSerializer>
         >();
+
         protected XmlSerializer() { }
 
         [RequiresUnreferencedCode(TrimSerializationWarning)]
@@ -1165,6 +1166,7 @@ namespace System.Xml.Serialization
         private sealed class XmlSerializerMappingKey
         {
             public XmlMapping Mapping;
+
             public XmlSerializerMappingKey(XmlMapping mapping)
             {
                 this.Mapping = mapping;

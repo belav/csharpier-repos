@@ -94,6 +94,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Null(MyStringToStringDict);
             Assert.Null(MyListOfNullInt);
         }
+
         public static readonly string s_json =
             @"{"
             + @"""MyInt16"" : null,"

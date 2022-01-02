@@ -15,11 +15,13 @@ class Test1
         "array element 1\uCB53",
         "array \u47BBelement 2"
     };
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static string teststr3()
     {
         return @"method return\\";
     }
+
     public const string teststr4 = "const string\""; // special case
     public static string teststr5 = String.Empty; // special case
 

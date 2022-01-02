@@ -92,11 +92,14 @@ public class Test_143837
 public class TestClass
 {
     public string strField;
+
     public TestClass() { }
+
     public TestClass(String strIn)
     {
         strField = strIn;
     }
+
     public virtual string strProperty
     {
         get { return strField; }
@@ -107,6 +110,7 @@ public class TestClass
 public class DerivedClass : TestClass
 {
     public DerivedClass() { }
+
     public override string strProperty
     {
         get { return strField; }

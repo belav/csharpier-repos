@@ -3181,6 +3181,7 @@ namespace System.Xml.Tests
                 ;
             return TEST_PASS;
         }
+
         public void WriteAttribute(XmlWriter w, bool param, string name, string value)
         {
             if (param)

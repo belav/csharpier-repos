@@ -67,6 +67,7 @@ namespace Microsoft.Interop.Diagnostics
         private class StartStopEvent : IDisposable
         {
             public StartStopEvent(int methodCount) => Logger.SourceGenerationStart(methodCount);
+
             public void Dispose() => Logger.SourceGenerationStop();
         }
     }

@@ -52,6 +52,7 @@ namespace System.Data.Odbc
         private IntPtr _boundBuffer;
         private IntPtr _boundIntbuffer;
         private TypeMap? _originalbindtype; // the original type in case we had to change the bindtype
+
         // (e.g. decimal to string)
         private byte _internalPrecision;
         private bool _internalShouldSerializeSize;
@@ -266,6 +267,7 @@ namespace System.Data.Odbc
                 }
             }
         }
+
         private bool ShouldSerializePrecision()
         {
             return (0 != _precision);
@@ -297,10 +299,12 @@ namespace System.Data.Odbc
                 }
             }
         }
+
         private bool ShouldSerializeScale()
         {
             return ShouldSerializeScale(_scale);
         }
+
         private bool ShouldSerializeScale(byte scale)
         {
             return _hasScale && ((0 != scale) || ShouldSerializePrecision());

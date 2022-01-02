@@ -42,6 +42,7 @@ namespace System
         Type Resolve(Type type);
         Text.StringBuilder Append(Text.StringBuilder sb);
     }
+
     internal sealed class IArraySpec : IModifierSpec
     {
         // dimensions == 1 and bound, or dimensions > 1 and !bound
@@ -69,6 +70,7 @@ namespace System
                 return sb.Append("[*]");
             return sb.Append('[').Append(',', dimensions - 1).Append(']');
         }
+
         public override string ToString()
         {
             return Append(new Text.StringBuilder()).ToString();

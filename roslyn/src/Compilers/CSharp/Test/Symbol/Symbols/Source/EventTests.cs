@@ -964,7 +964,6 @@ class C
             var eventSymbol = compilation.GetMember<EventSymbol>("C.E");
             Assert.True(eventSymbol.RequiresInstanceReceiver);
         }
-
         #endregion
 
         #region Error cases

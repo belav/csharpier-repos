@@ -174,6 +174,7 @@ namespace System.Xml.Xsl.XsltOld
             AssertInput();
             return _Navigator.MoveToNextAttribute();
         }
+
         internal bool MoveToFirstNamespace()
         {
             AssertInput();

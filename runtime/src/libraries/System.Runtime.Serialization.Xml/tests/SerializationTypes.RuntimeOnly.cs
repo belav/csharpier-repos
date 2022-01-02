@@ -536,10 +536,12 @@ namespace SerializationTypes
     {
         [DataMember]
         public CircularLink Link;
+
         [DataMember]
         public CircularLink RandomHangingLink;
 
         public CircularLink() { }
+
         public CircularLink(bool init)
         {
             Link = new CircularLink();
@@ -558,6 +560,7 @@ namespace SerializationTypes
     public class CircularLinkDerived : CircularLink
     {
         public CircularLinkDerived() { }
+
         public CircularLinkDerived(bool init) : base(init) { }
     }
 
@@ -581,6 +584,7 @@ namespace SerializationTypes
         public string BaseData = string.Empty;
 
         public SimpleBase() { }
+
         public SimpleBase(bool init) { }
     }
 
@@ -593,10 +597,12 @@ namespace SerializationTypes
     {
         [DataMember]
         public T genericData1;
+
         [DataMember]
         public K genericData2;
 
         public GenericBase2() { }
+
         public GenericBase2(bool init)
         {
             genericData1 = new T();
@@ -611,6 +617,7 @@ namespace SerializationTypes
         public string DerivedData = string.Empty;
 
         public SimpleBaseDerived() { }
+
         public SimpleBaseDerived(bool init) : base(init) { }
     }
 
@@ -621,6 +628,7 @@ namespace SerializationTypes
         public string DerivedData = string.Empty;
 
         public SimpleBaseDerived2() { }
+
         public SimpleBaseDerived2(bool init) : base(init) { }
     }
 
@@ -633,6 +641,7 @@ namespace SerializationTypes
         public object GenericData;
 
         public GenericContainer() { }
+
         public GenericContainer(bool init)
         {
             GenericData = new GenericBase<SimpleBaseContainer>(init);
@@ -646,6 +655,7 @@ namespace SerializationTypes
         public object genericData;
 
         public GenericBase() { }
+
         public GenericBase(bool init)
         {
             genericData = new T();
@@ -658,10 +668,12 @@ namespace SerializationTypes
     {
         [DataMember]
         public SimpleBase Base1;
+
         [DataMember]
         public object Base2;
 
         public SimpleBaseContainer() { }
+
         public SimpleBaseContainer(bool init)
         {
             Base1 = new SimpleBaseDerived();
@@ -679,6 +691,7 @@ namespace SerializationTypes
         public DuplicateTypeNamesTest.ns2.EnumA EnumA2;
 
         public WithDuplicateNames() { }
+
         public WithDuplicateNames(bool init)
         {
             ClassA1 = new DuplicateTypeNamesTest.ns1.ClassA()
@@ -934,6 +947,7 @@ namespace SerializationTypes
         public SimpleDC RefData;
 
         public SimpleDCWithRef() { }
+
         public SimpleDCWithRef(bool init)
         {
             Data = new SimpleDC(true);
@@ -948,6 +962,7 @@ namespace SerializationTypes
         public LinkedList<SimpleDCWithRef> Data;
 
         public ContainsLinkedList() { }
+
         public ContainsLinkedList(bool init)
         {
             this.Data = new LinkedList<SimpleDCWithRef>();
@@ -977,7 +992,9 @@ namespace SerializationTypes
     public class SimpleCDC : ICollection<string>
     {
         private List<string> _data = new List<string>();
+
         public SimpleCDC() { }
+
         public SimpleCDC(bool init)
         {
             _data.Add("One");
@@ -1021,7 +1038,6 @@ namespace SerializationTypes
         {
             return _data.Remove(item);
         }
-
         #endregion
 
         #region IEnumerable<string> Members
@@ -1030,7 +1046,6 @@ namespace SerializationTypes
         {
             return _data.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -1047,6 +1062,7 @@ namespace SerializationTypes
     {
         public string header;
         public string body;
+
         [XmlNamespaceDeclarations]
         public XmlSerializerNamespaces xmlns;
     }
@@ -1133,7 +1149,6 @@ namespace SerializationTypes
             }
         }
     }
-
     #endregion
 
     public class UnspecifiedRootSerializationType
@@ -1242,10 +1257,12 @@ namespace SerializationTypes
         {
             return _innerCollection.GetEnumerator();
         }
+
         public int Count
         {
             get { return _innerCollection.Count; }
         }
+
         public void Add(object item)
         {
             _innerCollection.Add((string)item);
@@ -1439,6 +1456,7 @@ namespace SerializationTypes
 
         private List<int> PrivateIntListField;
         public List<int> PublicIntListField;
+
         [XmlElement("FieldWithXmlElementAttr")]
         public List<int> PublicIntListFieldWithXmlElementAttribute;
     }
@@ -1468,6 +1486,7 @@ namespace SerializationTypes
         }
 
         public uint Level { get; private set; }
+
         public class LevelData
         {
             public string Name { get; set; }
@@ -1500,6 +1519,7 @@ namespace SerializationTypes
         }
 
         public uint Level { get; private set; }
+
         public class LevelData
         {
             public string Name { get; set; }
@@ -1560,6 +1580,7 @@ namespace SerializationTypes
     public class SpotlightDescription
     {
         public SpotlightDescription() { }
+
         public bool IsDynamic { get; set; }
         public string Value { get; set; }
     }
@@ -1576,6 +1597,7 @@ namespace SerializationTypes
     public class SerializableSlide
     {
         public SerializableSlide() { }
+
         public SpotlightDescription Description { get; set; }
         public string DisplayCondition { get; set; }
         public string EventData { get; set; }
@@ -1600,6 +1622,7 @@ namespace SerializationTypes
         {
             ID = id;
         }
+
         public string ID { get; set; }
     }
 
@@ -1735,6 +1758,7 @@ namespace SerializationTypes
     {
         public string P1 { get; set; }
         public int P2 { get; set; }
+
         public override bool Equals(object obj)
         {
             TypeWithPrimitiveProperties other = obj as TypeWithPrimitiveProperties;
@@ -1748,6 +1772,7 @@ namespace SerializationTypes
             }
             return this.P1 == other.P1 && this.P2 == other.P2;
         }
+
         public override int GetHashCode()
         {
             return P1.GetHashCode() ^ P2.GetHashCode();
@@ -1763,6 +1788,7 @@ namespace SerializationTypes
     public class TypeWithAllPrimitiveProperties
     {
         public bool BooleanMember { get; set; }
+
         //public byte[] ByteArrayMember { get; set; }
         public char CharMember { get; set; }
         public DateTime DateTimeMember { get; set; }
@@ -1770,6 +1796,7 @@ namespace SerializationTypes
         public double DoubleMember { get; set; }
         public float FloatMember { get; set; }
         public Guid GuidMember { get; set; }
+
         //public byte[] HexBinaryMember { get; set; }
         public string StringMember { get; set; }
         public int IntMember { get; set; }
@@ -2260,6 +2287,7 @@ public class NookAppLocalState
     public int IgnoreProperty;
 
     public bool IsFirstRunDuplicate { get; set; }
+
     // Nested Types
     public enum PaymentType
     {
@@ -2373,6 +2401,7 @@ public class NonSerializablePersonSurrogate
 {
     [DataMember(Name = "PersonName")]
     public string Name { get; set; }
+
     [DataMember(Name = "PersonAge")]
     public int Age { get; set; }
 }
@@ -2383,6 +2412,7 @@ public class NonSerializablePersonForStressSurrogate
 {
     [DataMember(Name = "PersonName")]
     public string Name { get; set; }
+
     [DataMember(Name = "PersonAge")]
     public int Age { get; set; }
 }
@@ -2450,7 +2480,6 @@ class MyFileStreamReference
         return new MyFileStream(fileStreamName);
     }
 }
-
 #endregion
 
 [DataContract(Name = "TypeWithIntAndStringProperty", Namespace = "")]
@@ -2523,19 +2552,13 @@ public class TypeWithEnumerableInterfaceGetOnlyCollection
 }
 
 [CollectionDataContract]
-public class RecursiveCollection : List<RecursiveCollection2>
-{
-}
+public class RecursiveCollection : List<RecursiveCollection2> { }
 
 [CollectionDataContract]
-public class RecursiveCollection2 : List<RecursiveCollection3>
-{
-}
+public class RecursiveCollection2 : List<RecursiveCollection3> { }
 
 [CollectionDataContract]
-public class RecursiveCollection3 : List<RecursiveCollection>
-{
-}
+public class RecursiveCollection3 : List<RecursiveCollection> { }
 
 [DataContract]
 public class TypeWithListOfReferenceChildren
@@ -2549,6 +2572,7 @@ public class TypeOfReferenceChild
 {
     [DataMember]
     public TypeWithListOfReferenceChildren Root { get; set; }
+
     [DataMember]
     public string Name { get; set; }
 }
@@ -2585,6 +2609,7 @@ public class TypeWithEmitDefaultValueFalse
 {
     [DataMember(EmitDefaultValue = false)]
     public string Name = null;
+
     [DataMember(EmitDefaultValue = false)]
     public int ID = 0;
 }
@@ -2597,9 +2622,7 @@ public class TypeWithNonDefaultNamcespace
 }
 
 [CollectionDataContract(Namespace = "CollectionNamespace")]
-public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace>
-{
-}
+public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace> { }
 
 #region Type for Xml_ConstructorWithXmlAttributeOverrides
 
@@ -2620,7 +2643,6 @@ namespace Music
         public bool IsValved;
     }
 }
-
 #endregion
 [DataContract]
 public class ObjectContainer
@@ -2744,6 +2766,7 @@ class Person : IExtensibleDataObject
         get { return extensionDataObject_value; }
         set { extensionDataObject_value = value; }
     }
+
     [DataMember]
     public string Name = string.Empty;
 }
@@ -2772,6 +2795,7 @@ public class Name
     [DataMember]
     public string firstName;
     public string middlename;
+
     [DataMember]
     public string lastName;
 }
@@ -2821,6 +2845,7 @@ public class Line
 public class MyReader : XmlSerializationReader
 {
     protected override void InitCallbacks() { }
+
     protected override void InitIDs() { }
 
     public static byte[] HexToBytes(string value)
@@ -2843,19 +2868,23 @@ class MyStreamProvider : IStreamProvider
 {
     Stream stream;
     bool streamReleased;
+
     public MyStreamProvider(Stream stream)
     {
         this.stream = stream;
         this.streamReleased = false;
     }
+
     public bool StreamReleased
     {
         get { return this.streamReleased; }
     }
+
     public Stream GetStream()
     {
         return this.stream;
     }
+
     public void ReleaseStream(Stream stream)
     {
         this.streamReleased = true;
@@ -3236,6 +3265,7 @@ public class TypeWithSerializableAttributeAndNonSerializedField
 public class TypeWithOptionalField
 {
     public int Member1;
+
     [OptionalField]
     public int Member2;
 }
@@ -3348,10 +3378,12 @@ public class AssemblyAttrTestClass
 public class MyXmlTextParser : IXmlTextParser
 {
     private XmlTextReader _myreader;
+
     public MyXmlTextParser(XmlTextReader reader)
     {
         _myreader = reader;
     }
+
     bool IXmlTextParser.Normalized
     {
         get { return _myreader.Normalization; }
@@ -3393,7 +3425,9 @@ public class SampleTextWriter : IXmlTextWriterInitializer
 {
     public Encoding Encoding;
     public Stream Stream;
+
     public SampleTextWriter() { }
+
     public void SetOutput(Stream stream, Encoding encoding, bool ownsStream)
     {
         Encoding = encoding;
@@ -3401,9 +3435,7 @@ public class SampleTextWriter : IXmlTextWriterInitializer
     }
 }
 
-public class MycodeGenerator : XmlSerializationGeneratedCode
-{
-}
+public class MycodeGenerator : XmlSerializationGeneratedCode { }
 
 public class SoapEncodedTestType1
 {
@@ -3437,6 +3469,7 @@ public class SoapEncodedTestType4
 {
     [SoapElement(IsNullable = true)]
     public int? IntValue;
+
     [SoapElement(IsNullable = true)]
     public double? DoubleValue;
 }
@@ -3457,6 +3490,7 @@ public class MyCircularLink
     public int IntValue;
 
     public MyCircularLink() { }
+
     public MyCircularLink(bool init)
     {
         Link = new MyCircularLink() { IntValue = 1 };
@@ -3464,6 +3498,7 @@ public class MyCircularLink
         Link.Link.Link = this;
     }
 }
+
 public class MyGroup
 {
     public string GroupName;
@@ -3716,10 +3751,13 @@ public class JsonTypes
     {
         [DataMember]
         public DateTime dt1 { get; set; }
+
         [DataMember]
         public DateTime dt2 { get; set; }
+
         [DataMember]
         public DateTime dt3 { get; set; }
+
         [DataMember]
         public DateTime dt4 { get; set; }
     }
@@ -3869,15 +3907,18 @@ public class ImplementDictionary : IDictionary
     {
         get { return false; }
     }
+
     public bool Contains(object key)
     {
         int index;
         return TryGetIndexOfKey(key, out index);
     }
+
     public bool IsFixedSize
     {
         get { return false; }
     }
+
     public void Remove(object key)
     {
         if (key == null)
@@ -3890,16 +3931,19 @@ public class ImplementDictionary : IDictionary
         }
         else { }
     }
+
     public void Clear()
     {
         _itemsInUse = 0;
     }
+
     public void Add(object key, object value)
     {
         if (_itemsInUse == _items.Length)
             throw new InvalidOperationException("The dictionary cannot hold any more items.");
         _items[_itemsInUse++] = new DictionaryEntry(key, value);
     }
+
     public ICollection Keys
     {
         get
@@ -3947,6 +3991,7 @@ public class ImplementDictionary : IDictionary
             }
         }
     }
+
     private bool TryGetIndexOfKey(object key, out int index)
     {
         for (index = 0; index < _itemsInUse; index++)
@@ -3956,6 +4001,7 @@ public class ImplementDictionary : IDictionary
         }
         return false;
     }
+
     private class ImplementDictionaryEnumerator : IDictionaryEnumerator
     {
         private DictionaryEntry[] _items;
@@ -4022,6 +4068,7 @@ public class ImplementDictionary : IDictionary
             _index = -1;
         }
     }
+
     public IDictionaryEnumerator GetEnumerator()
     {
         return new ImplementDictionaryEnumerator(this);
@@ -4041,6 +4088,7 @@ public class ImplementDictionary : IDictionary
     {
         get { return _itemsInUse; }
     }
+
     public void CopyTo(Array array, int index)
     {
         throw new NotImplementedException();
@@ -4062,6 +4110,7 @@ public class BaseType
     [DataMember]
     public string StrBase = "base";
 }
+
 [DataContract]
 public class DerivedType : BaseType
 {
@@ -4159,6 +4208,7 @@ public class SoapComplexTypeWithArray
     public List<int> IntList;
     public List<string> StringList;
 }
+
 [KnownType("KnownTypes")]
 [DataContract]
 public class EmployeeC
@@ -4241,7 +4291,9 @@ public class DC
 public class SampleICollectionTExplicitWithoutDC : ICollection<DC>
 {
     private List<DC> _internalList = new List<DC>();
+
     public SampleICollectionTExplicitWithoutDC() { }
+
     public SampleICollectionTExplicitWithoutDC(bool init)
     {
         DC dc1 = new DC();
@@ -4342,15 +4394,12 @@ public class NetNativeTestData
 
     public Func<object> Instantiate { get; set; }
 }
-public abstract class Invalid_Class_Base_Without_DataContract
-{
-}
+
+public abstract class Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because it is a derived [DataContract] class whose base class is not
 [DataContract]
-public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract
-{
-}
+public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because its [KnownType] is an invalid type
 [KnownType(typeof(Invalid_Class_No_Parameterless_Ctor))]
@@ -4471,9 +4520,7 @@ public class TypeWithCollectionAndDateTimeOffset
 [KnownType(typeof(ushort))]
 [KnownType(typeof(Uri))]
 [CollectionDataContract]
-public class TypeWithPrimitiveKnownTypes : List<object>
-{
-}
+public class TypeWithPrimitiveKnownTypes : List<object> { }
 
 public enum TestEnum
 {
@@ -4481,7 +4528,9 @@ public enum TestEnum
     On,
     Both
 }
+
 public class EnumTestBase { }
+
 public class EnumTestDerived : EnumTestBase
 {
     [XmlText]
@@ -4489,6 +4538,7 @@ public class EnumTestDerived : EnumTestBase
 }
 
 public class PrimiveAttributeTestBase { }
+
 public class PrimiveAttributeTestDerived : PrimiveAttributeTestBase
 {
     [XmlText]

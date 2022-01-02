@@ -85,7 +85,6 @@ namespace System.Collections.Immutable
             {
                 get { return false; }
             }
-
             #endregion
 
             /// <summary>
@@ -149,7 +148,6 @@ namespace System.Collections.Immutable
             {
                 return ref this.Root.ItemRef(index);
             }
-
             #endregion
 
             #region IList<T> Methods
@@ -249,7 +247,6 @@ namespace System.Collections.Immutable
             {
                 return this.GetEnumerator();
             }
-
             #endregion
 
             #region IImmutableListQueries<T> methods
@@ -705,7 +702,6 @@ namespace System.Collections.Immutable
             /// has no elements, the return value is true.
             /// </returns>
             public bool TrueForAll(Predicate<T> match) => _root.TrueForAll(match);
-
             #endregion
 
             #region Public methods
@@ -945,7 +941,6 @@ namespace System.Collections.Immutable
 
                 return _immutable;
             }
-
             #endregion
 
             #region IList members
@@ -1059,7 +1054,6 @@ namespace System.Collections.Immutable
                 get { return this[index]; }
                 set { this[index] = (T)value!; }
             }
-
             #endregion
 
             #region ICollection members

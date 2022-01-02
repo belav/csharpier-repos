@@ -22,6 +22,7 @@ namespace MS.Internal.Xml.XPath
             _funcType = funcType;
             _argList = argList;
         }
+
         private StringFunctions(StringFunctions other) : base(other)
         {
             _funcType = other._funcType;

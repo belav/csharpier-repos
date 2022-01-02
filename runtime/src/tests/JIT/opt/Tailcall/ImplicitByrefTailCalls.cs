@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 public class ImplicitByrefTailCalls
 {
     public static void Z() { }
+
     public static bool Z(bool b) => b;
 
     [MethodImpl(MethodImplOptions.NoOptimization)]

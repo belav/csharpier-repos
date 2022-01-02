@@ -1017,6 +1017,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             private IStateManager _stateManager;
             private bool _setterCalled;
+
             // ReSharper disable once ConvertToAutoProperty
 
             public HasStateManagerPc() { }

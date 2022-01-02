@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 public class DetourHelpers
 {
     private ReliabilityTestSet _testSet;
+
     public void Initialize(ReliabilityTestSet testSet)
     {
         _testSet = testSet;

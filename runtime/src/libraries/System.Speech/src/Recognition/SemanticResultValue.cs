@@ -17,6 +17,7 @@ namespace System.Speech.Recognition
 
             _tag = new TagElement(value);
         }
+
         public SemanticResultValue(string phrase, object value)
         {
             Helpers.ThrowIfEmptyOrNull(phrase, nameof(phrase));
@@ -24,6 +25,7 @@ namespace System.Speech.Recognition
 
             _tag = new TagElement(new GrammarBuilderPhrase(phrase), value);
         }
+
         public SemanticResultValue(GrammarBuilder builder, object value)
         {
             Helpers.ThrowIfNull(builder, nameof(builder));
@@ -31,7 +33,6 @@ namespace System.Speech.Recognition
 
             _tag = new TagElement(builder.Clone(), value);
         }
-
         #endregion
 
         #region Public Methods
@@ -39,7 +40,6 @@ namespace System.Speech.Recognition
         {
             return new GrammarBuilder(this);
         }
-
         #endregion
 
         #region Internal Properties
@@ -48,7 +48,6 @@ namespace System.Speech.Recognition
         {
             get { return _tag; }
         }
-
         #endregion
 
         #region Private Fields

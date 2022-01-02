@@ -33,7 +33,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
                 options: TestOptions.DebugDll
             );
         }
-
         #endregion
 
         [Fact]

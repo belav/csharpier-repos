@@ -14,7 +14,6 @@ namespace System.Speech.Internal
         {
             _phoneMap = phoneMap;
         }
-
         #endregion
 
         #region Internal methods
@@ -129,7 +128,6 @@ namespace System.Speech.Internal
                 }
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -193,7 +191,6 @@ namespace System.Speech.Internal
             }
             return phoneMaps;
         }
-
         // Do not delete generation of the phone conversion table from the registry entries
 
         #endregion
@@ -5153,7 +5150,6 @@ namespace System.Speech.Internal
         };
 
         private static readonly PhonemeConverter s_upsConverter = new(s_phoneMaps[0]);
-
         #endregion
 
         #region Private Types

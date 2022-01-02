@@ -39,12 +39,15 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>The source that owns this reordering buffer.</summary>
         private readonly object _owningSource;
+
         /// <summary>A reordering buffer used when parallelism is employed and items may be completed out-of-order.</summary>
         /// <remarks>Also serves as the sync object to protect the contents of this class.</remarks>
         private readonly Dictionary<long, KeyValuePair<bool, TOutput>> _reorderingBuffer =
             new Dictionary<long, KeyValuePair<bool, TOutput>>();
+
         /// <summary>Action used to output items in order.</summary>
         private readonly Action<object, TOutput> _outputAction;
+
         /// <summary>The ID of the next item that should be released from the reordering buffer.</summary>
         private long _nextReorderedIdToOutput;
 
@@ -208,6 +211,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get { return _buffer._reorderingBuffer; }
             }
+
             /// <summary>Gets the next ID required for outputting.</summary>
             public long NextIdRequired
             {

@@ -823,7 +823,6 @@ class Test
             Assert.Equal(symbol, typeInfo.Type.GetSymbol());
             Assert.Equal(symbol, typeInfo.ConvertedType.GetSymbol());
         }
-
         #endregion
 
         [WorkItem(543168, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543168")]

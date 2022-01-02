@@ -155,12 +155,16 @@ namespace System.ConfigurationTests
         {
             public ContextInformation TestEvaluationContext => EvaluationContext;
             public bool TestHasContext => HasContext;
+
             public string TestGetTransformedTypeString(string typeName) =>
                 GetTransformedTypeString(typeName);
+
             public string TestGetTransformedAssemblyString(string assemblyName) =>
                 GetTransformedAssemblyString(assemblyName);
+
             public bool TestOnDeserializeUnrecognizedAttribute(string name, string value) =>
                 OnDeserializeUnrecognizedAttribute(name, value);
+
             public bool TestOnDeserializeUnrecognizedElement(
                 string elementName,
                 XmlReader reader

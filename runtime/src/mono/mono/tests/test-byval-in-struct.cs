@@ -6,6 +6,7 @@ struct TestStructure
 {
     [FieldOffset(0)]
     internal int number;
+
     [FieldOffset(8)]
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
     internal byte[] stuff;
@@ -31,6 +32,7 @@ struct TestStructure2
 {
     [FieldOffset(0)]
     byte val;
+
     [FieldOffset(2)]
     int val2;
 }

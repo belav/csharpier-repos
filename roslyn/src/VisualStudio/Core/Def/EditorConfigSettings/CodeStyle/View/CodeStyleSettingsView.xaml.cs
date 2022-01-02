@@ -31,8 +31,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
 
         public UserControl SettingControl => this;
         public IWpfTableControl TableControl { get; }
+
         public Task<SourceText> UpdateEditorConfigAsync(SourceText sourceText) =>
             _viewModel.UpdateEditorConfigAsync(sourceText);
+
         public void OnClose() => _viewModel.ShutDown();
     }
 }

@@ -10,6 +10,7 @@ namespace Test
     {
         bool m_bFlag = false;
         static int[] m_anStatic2;
+
         static void GoToEnd()
         {
             throw new Exception();

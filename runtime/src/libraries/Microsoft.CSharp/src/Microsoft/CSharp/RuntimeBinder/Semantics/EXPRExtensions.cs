@@ -53,10 +53,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 expr?.Kind >= ExpressionKind.TypeLimit && 0 != (expr.Flags & EXPRFLAG.EXF_BINOP)
             );
         }
+
         public static bool isLvalue(this Expr expr)
         {
             return (expr == null) ? false : 0 != (expr.Flags & EXPRFLAG.EXF_LVALUE);
         }
+
         public static bool isChecked(this Expr expr)
         {
             return (expr == null) ? false : 0 != (expr.Flags & EXPRFLAG.EXF_CHECKOVERFLOW);

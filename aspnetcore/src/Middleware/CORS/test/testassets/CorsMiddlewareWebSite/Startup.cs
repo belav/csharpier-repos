@@ -21,6 +21,7 @@ public class Startup
         app.UseCors(policy => policy.WithOrigins("http://example.com"));
         app.UseMiddleware<EchoMiddleware>();
     }
+
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()

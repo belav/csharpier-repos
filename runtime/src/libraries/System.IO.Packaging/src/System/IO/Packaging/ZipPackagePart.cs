@@ -60,7 +60,6 @@ namespace System.IO.Packaging
             }
             return null;
         }
-
         #endregion Public Methods
 
         #region Internal Constructors
@@ -92,7 +91,6 @@ namespace System.IO.Packaging
             _zipStreamManager = zipStreamManager;
             _zipArchiveEntry = zipArchiveEntry;
         }
-
         #endregion Internal Constructors
 
         #region Internal Properties
@@ -104,7 +102,6 @@ namespace System.IO.Packaging
         {
             get { return _zipArchiveEntry; }
         }
-
         #endregion Internal Properties
 
         #region Private Variables

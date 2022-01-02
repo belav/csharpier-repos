@@ -1126,6 +1126,7 @@ public class EndpointMetadataApiDescriptionProviderTest
             HttpContext context,
             ParameterInfo parameter
         ) => throw new NotImplementedException();
+
         public static bool TryParse(string value, out BindAsyncRecord result) =>
             throw new NotImplementedException();
     }

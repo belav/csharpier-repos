@@ -361,6 +361,7 @@ namespace System.Composition.Hosting.Tests
         }
 
         public interface IContainer { }
+
         public class Container : IContainer { }
 
         public interface IRepository<T>
@@ -371,6 +372,7 @@ namespace System.Composition.Hosting.Tests
         public class EFRepository<T> : IRepository<T>
         {
             public EFRepository(IContainer test) { }
+
             public T Fetch() => default(T);
         }
 
@@ -573,6 +575,7 @@ namespace System.Composition.Hosting.Tests
         }
 
         public abstract class AbstractClass { }
+
         public struct StructType { }
 
         [Fact]
@@ -739,12 +742,15 @@ namespace System.Composition.Hosting.Tests
                 Assert.NotNull(service.Dependency);
             }
         }
+
         public interface IOpen<T>
         {
         }
+
         public class MoreOpenWithDependency<T> : IOpen<T>
         {
             public Dependency Dependency { get; set; }
+
             public MoreOpenWithDependency(Dependency dep)
             {
                 Dependency = dep;

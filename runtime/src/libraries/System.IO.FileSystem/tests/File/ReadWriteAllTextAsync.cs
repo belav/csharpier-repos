@@ -28,7 +28,6 @@ namespace System.IO.Tests
             File.WriteAllTextAsync(path, content, encoding);
 
         protected virtual Task<string> ReadAsync(string path) => File.ReadAllTextAsync(path);
-
         #endregion
 
         #region UniversalTests

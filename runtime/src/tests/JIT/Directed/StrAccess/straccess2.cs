@@ -47,10 +47,12 @@ internal unsafe class StrAccess2
         sb4,
         sb5,
         sb6;
+
     public static String f(ref String arg)
     {
         return arg;
     }
+
     public static int f1(ref int arg)
     {
         return arg;
@@ -66,6 +68,7 @@ internal unsafe class StrAccess2
     };
 
     public static Random rand = new Random(Seed);
+
     public static int Main()
     {
         bool passed = true;

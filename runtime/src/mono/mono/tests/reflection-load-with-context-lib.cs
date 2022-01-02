@@ -5,10 +5,12 @@ namespace B
     public class MyAttribute : Attribute
     {
         public Type Type { get; set; }
+
         public MyAttribute(Type t)
         {
             Type = t;
         }
+
         public override string ToString()
         {
             return "My " + Type;

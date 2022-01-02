@@ -159,7 +159,6 @@ namespace System.Collections.Tests
             return Math.Abs(x);
         }
     }
-
     #endregion
 
     #region TestClasses
@@ -172,10 +171,12 @@ namespace System.Collections.Tests
           IComparable<SimpleInt>
     {
         private int _val;
+
         public SimpleInt(int t)
         {
             _val = t;
         }
+
         public int Val
         {
             get { return _val; }

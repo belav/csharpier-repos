@@ -26,6 +26,7 @@ namespace SIMDDebugTest
                 DivTest.RunTests();
                 return 0;
             }
+
             public class AddTest
             {
                 public static int RunTests()
@@ -70,11 +71,13 @@ namespace SIMDDebugTest
                     Vector4 F = VectorSub(ref A, B);
                     return 0;
                 }
+
                 public static Vector4 VectorSub(Vector4 v1, Vector4 v2)
                 {
                     Vector4 v3 = v1 - v2;
                     return v3;
                 }
+
                 public static Vector4 VectorSub(ref Vector4 v1, ref Vector4 v2)
                 {
                     Vector4 v3 = v1 - v2;
@@ -191,6 +194,7 @@ namespace SIMDDebugTest
                 DivTest.RunTests();
                 return 0;
             }
+
             public class AddTest
             {
                 public static int RunTests()
@@ -235,11 +239,13 @@ namespace SIMDDebugTest
                     Vector3 F = VectorSub(ref A, B);
                     return 0;
                 }
+
                 public static Vector3 VectorSub(Vector3 v1, Vector3 v2)
                 {
                     Vector3 v3 = v1 - v2;
                     return v3;
                 }
+
                 public static Vector3 VectorSub(ref Vector3 v1, ref Vector3 v2)
                 {
                     Vector3 v3 = v1 - v2;
@@ -252,6 +258,7 @@ namespace SIMDDebugTest
                     return v3;
                 }
             }
+
             public class MulTest
             {
                 public static int RunTests()
@@ -355,6 +362,7 @@ namespace SIMDDebugTest
                 DivTest.RunTests();
                 return 0;
             }
+
             public class AddTest
             {
                 public static int RunTests()

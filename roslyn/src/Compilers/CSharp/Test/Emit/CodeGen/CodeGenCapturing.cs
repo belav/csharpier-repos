@@ -231,6 +231,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 }
             }
         }
+
         private struct LayoutEnumerator : IEnumerator<(int depth, int localFuncIndex)>
         {
             private readonly IList<int> _layout;

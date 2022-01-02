@@ -57,7 +57,6 @@ namespace System.Collections.Tests
         protected abstract bool Contains(IEnumerable<T> enumerable, T value);
         protected abstract void CopyTo(IEnumerable<T> enumerable, T[] array, int index);
         protected abstract bool Remove(IEnumerable<T> enumerable);
-
         #endregion
 
         #region IEnumerable<T> helper methods
@@ -121,7 +120,6 @@ namespace System.Collections.Tests
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             Assert.Equal(count, Count(collection));
         }
-
         #endregion
 
         #region Add
@@ -263,7 +261,6 @@ namespace System.Collections.Tests
                 Assert.Equal(1, Count(collection));
             }
         }
-
         #endregion
 
         #region Clear
@@ -332,7 +329,6 @@ namespace System.Collections.Tests
                 return new WeakReference<object>(value);
             }
         }
-
         #endregion
 
         #region Contains
@@ -448,7 +444,6 @@ namespace System.Collections.Tests
                     Assert.False(Contains(collection, default(T)));
             }
         }
-
         #endregion
 
         #region CopyTo

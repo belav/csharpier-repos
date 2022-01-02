@@ -26,6 +26,7 @@ using Xunit;
 
 [assembly: HostingStartup(typeof(WebHostBuilderTests.TestHostingStartup))]
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 public class WebHostBuilderTests
@@ -686,6 +687,7 @@ public class WebHostBuilderTests
 #pragma warning restore CS0618 // Type or member is obsolete
         }
     }
+
     [Theory]
     [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
     public void BuildAndDispose(IWebHostBuilder builder)
@@ -1921,6 +1923,7 @@ public class WebHostBuilderTests
         // These are explicitly implemented to verify they don't get called via reflection
         IServiceProvider IStartup.ConfigureServices(IServiceCollection services) =>
             _configureServices(services);
+
         void IStartup.Configure(IApplicationBuilder app) => _configure(app);
     }
 
@@ -1939,6 +1942,7 @@ public class WebHostBuilderTests
         }
 
         public void ConfigureServices(IServiceCollection services) => _configureServices(services);
+
         public void Configure(IApplicationBuilder app) => _configure(app);
     }
 

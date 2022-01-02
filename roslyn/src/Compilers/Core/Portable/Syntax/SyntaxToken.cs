@@ -410,7 +410,6 @@ namespace Microsoft.CodeAnalysis
 
             return token;
         }
-
         #endregion
 
         /// <summary>

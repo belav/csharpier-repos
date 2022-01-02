@@ -11,6 +11,7 @@ struct S0
     public byte F0;
     public sbyte F1;
     public sbyte F2;
+
     public S0(byte f0, sbyte f1, sbyte f2)
     {
         F0 = f0;
@@ -23,6 +24,7 @@ struct S1
 {
     public bool F0;
     public short F1;
+
     public S1(short f1) : this()
     {
         F1 = f1;

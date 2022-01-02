@@ -380,6 +380,7 @@ public class NegotiateHandlerTests
         );
         Assert.Equal("A test other error occurred", ex.Message);
     }
+
     private static async Task AuthenticateAndRetrieveRBACClaims(
         TestServer server,
         TestConnection testConnection

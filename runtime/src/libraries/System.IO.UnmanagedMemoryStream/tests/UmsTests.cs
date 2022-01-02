@@ -42,8 +42,10 @@ namespace System.IO.Tests
 
         protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.Read);
+
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.Write);
+
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.ReadWrite);
     }
@@ -83,8 +85,10 @@ namespace System.IO.Tests
 
         protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.Read);
+
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.Write);
+
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.ReadWrite);
     }

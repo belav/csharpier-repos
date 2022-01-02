@@ -1376,7 +1376,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 asserter,
                 async
             );
-
         #endregion
 
         #region Helpers

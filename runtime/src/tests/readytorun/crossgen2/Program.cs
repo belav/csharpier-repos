@@ -155,6 +155,7 @@ internal class Program
     {
         [FieldOffset(0)]
         public int Field00;
+
         [FieldOffset(0x0f)]
         public int Field15;
     }
@@ -733,9 +734,13 @@ internal class Program
     }
 
     private class RefX1<T> { }
+
     private class RefX2<T, U> { }
+
     private struct ValX1<T> { }
+
     private struct ValX2<T, U> { }
+
     private struct ValX3<T, U, V> { }
 
     private static bool GenericTryCatchTest()
@@ -1190,8 +1195,10 @@ internal class Program
     {
         public static string GcValue;
         public static int NonGcValue;
+
         [ThreadStatic]
         public static string TlsGcValue;
+
         [ThreadStatic]
         public static int TlsNonGcValue;
     }
@@ -1402,6 +1409,7 @@ internal class Program
     struct LocallyDefinedStructWithToString
     {
         public object StoredValue;
+
         public override string ToString()
         {
             StoredValue = new object();
@@ -1514,12 +1522,14 @@ internal class Program
         private long A;
         private long B;
         public int C;
+
         public void Set(long a, long b, int c)
         {
             A = a;
             B = b;
             C = c;
         }
+
         public override string ToString()
         {
             return $"{A} {B} {C}";
@@ -1532,12 +1542,14 @@ internal class Program
         private long A;
         private long B;
         public int C;
+
         public void Set(long a, long b, int c)
         {
             A = a;
             B = b;
             C = c;
         }
+
         public override string ToString()
         {
             return $"{A} {B} {C}";
@@ -1549,16 +1561,20 @@ internal class Program
     {
         [FieldOffset(0)]
         private long A;
+
         [FieldOffset(0x8)]
         private long B;
+
         [FieldOffset(0x11)]
         public int C;
+
         public void Set(long a, long b, int c)
         {
             A = a;
             B = b;
             C = c;
         }
+
         public override string ToString()
         {
             return $"{A} {B} {C}";
@@ -1570,16 +1586,20 @@ internal class Program
     {
         [FieldOffset(0)]
         private long A;
+
         [FieldOffset(0x8)]
         private long B;
+
         [FieldOffset(0x11)]
         public int C;
+
         public void Set(long a, long b, int c)
         {
             A = a;
             B = b;
             C = c;
         }
+
         public override string ToString()
         {
             return $"{A} {B} {C}";
@@ -1598,8 +1618,10 @@ internal class Program
     {
         [FieldOffset(0)]
         private long A;
+
         [FieldOffset(0x8)]
         private long B;
+
         [FieldOffset(0x11)]
         public int C;
 
@@ -1610,6 +1632,7 @@ internal class Program
             B = b;
             C = c;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public override string ToString()
         {
@@ -1635,6 +1658,7 @@ internal class Program
     {
         public byte E;
         public long F;
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public override string ToString()
         {
@@ -1648,12 +1672,14 @@ internal class Program
         private long A;
         private long B;
         public int C;
+
         public void Set(long a, long b, int c)
         {
             A = a;
             B = b;
             C = c;
         }
+
         public override string ToString()
         {
             return $"{A} {B} {C}";
@@ -1666,12 +1692,14 @@ internal class Program
         private long A;
         private long B;
         public int C;
+
         public void Set(long a, long b, int c)
         {
             A = a;
             B = b;
             C = c;
         }
+
         public override string ToString()
         {
             return $"{A} {B} {C}";
@@ -1874,6 +1902,7 @@ internal class Program
             z = 0;
             w = 0;
         }
+
         public int x;
         public int y;
         public int z;
@@ -1883,6 +1912,7 @@ internal class Program
         {
             return (x == other.x) && (y == other.y) && (z == other.z) && (w == other.w);
         }
+
         public override bool Equals(object other)
         {
             return Equals((SomeLargeStruct)other);
@@ -1903,6 +1933,7 @@ internal class Program
             z = 0;
             w = 0;
         }
+
         public int x;
         public int y;
         public int z;
@@ -1912,6 +1943,7 @@ internal class Program
         {
             return (x == other.x) && (y == other.y) && (z == other.z) && (w == other.w);
         }
+
         public override bool Equals(object other)
         {
             return Equals((SomeClass)other);
@@ -2033,20 +2065,26 @@ internal class Program
     {
         [FieldOffset(0)]
         public int x;
+
         [FieldOffset(4)]
         public int y;
+
         [FieldOffset(8)]
         public int z;
+
         [FieldOffset(12)]
         public int w;
+
         public override string ToString()
         {
             return $"{x}{y}{z}{w}";
         }
     }
+
     struct BlittableStruct<T>
     {
         public ExplicitLayoutStruct16 _explict;
+
         public override string ToString()
         {
             return $"{_explict}";
@@ -2057,6 +2095,7 @@ internal class Program
     {
         public BlittableStruct<short> _blittableGeneric;
         public int _int;
+
         public override string ToString()
         {
             return $"{_blittableGeneric}{_int}";
@@ -2100,56 +2139,70 @@ internal class Program
     {
         public sbyte _val;
     }
+
     struct SingleElementStruct_I2
     {
         public short _val;
     }
+
     struct SingleElementStruct_I4
     {
         public int _val;
     }
+
     struct SingleElementStruct_I8
     {
         public double _val;
     }
+
     struct SingleElementStruct_U1
     {
         public sbyte _val;
     }
+
     struct SingleElementStruct_U2
     {
         public short _val;
     }
+
     struct SingleElementStruct_U4
     {
         public int _val;
     }
+
     struct SingleElementStruct_U8
     {
         public double _val;
     }
+
     struct SingleElementStruct_R4
     {
         public float _val;
     }
+
     struct SingleElementStruct_R8
     {
         public double _val;
     }
+
     struct SingleElementStruct_Obj
     {
         public object _val;
     }
+
     struct SingleElementStruct_Ptr
     {
         public object _val;
     }
+
     unsafe struct SingleElementStruct_FuncPtr
     {
         public delegate* <string, int> _val;
     }
+
     [StructLayout(LayoutKind.Explicit, Size = 0x4)]
     public unsafe struct SingleElementStruct_Empty { }
+
     struct SingleElementStruct_IntEnum
     {
         public IntEnum _val;
@@ -2159,58 +2212,72 @@ internal class Program
     {
         public SingleElementStruct_I1 _val;
     }
+
     struct SingleElementStruct_NestedI2
     {
         public SingleElementStruct_I2 _val;
     }
+
     struct SingleElementStruct_NestedI4
     {
         public SingleElementStruct_I4 _val;
     }
+
     struct SingleElementStruct_NestedI8
     {
         public SingleElementStruct_I8 _val;
     }
+
     struct SingleElementStruct_NestedU1
     {
         public SingleElementStruct_U1 _val;
     }
+
     struct SingleElementStruct_NestedU2
     {
         public SingleElementStruct_U2 _val;
     }
+
     struct SingleElementStruct_NestedU4
     {
         public SingleElementStruct_U4 _val;
     }
+
     struct SingleElementStruct_NestedU8
     {
         public SingleElementStruct_U8 _val;
     }
+
     struct SingleElementStruct_NestedR4
     {
         public SingleElementStruct_R4 _val;
     }
+
     struct SingleElementStruct_NestedR8
     {
         public SingleElementStruct_R8 _val;
     }
+
     struct SingleElementStruct_NestedObj
     {
         public SingleElementStruct_Obj _val;
     }
+
     struct SingleElementStruct_NestedPtr
     {
         public SingleElementStruct_Ptr _val;
     }
+
     struct SingleElementStruct_NestedFuncPtr
     {
         public SingleElementStruct_FuncPtr _val;
     }
+
     struct SingleElementStruct_NestedEmpty
     {
         public SingleElementStruct_Empty _val;
     }
+
     struct SingleElementStruct_NestedIntEnum
     {
         public SingleElementStruct_IntEnum _val;
@@ -2221,71 +2288,85 @@ internal class Program
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_I2(SingleElementStruct_I2 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_I4(SingleElementStruct_I4 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_I8(SingleElementStruct_I8 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_U1(SingleElementStruct_U1 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_U2(SingleElementStruct_U2 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_U4(SingleElementStruct_U4 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_U8(SingleElementStruct_U8 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_R4(SingleElementStruct_R4 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_R8(SingleElementStruct_R8 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_Obj(SingleElementStruct_Obj _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_Ptr(SingleElementStruct_Ptr _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_FuncPtr(SingleElementStruct_FuncPtr _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_Empty(SingleElementStruct_Empty _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_IntEnum(SingleElementStruct_IntEnum _, object obj)
     {
@@ -2297,71 +2378,85 @@ internal class Program
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedI2(SingleElementStruct_NestedI2 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedI4(SingleElementStruct_NestedI4 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedI8(SingleElementStruct_NestedI8 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedU1(SingleElementStruct_NestedU1 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedU2(SingleElementStruct_NestedU2 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedU4(SingleElementStruct_NestedU4 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedU8(SingleElementStruct_NestedU8 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedR4(SingleElementStruct_NestedR4 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedR8(SingleElementStruct_NestedR8 _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedObj(SingleElementStruct_NestedObj _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedPtr(SingleElementStruct_NestedPtr _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedFuncPtr(SingleElementStruct_NestedFuncPtr _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedEmpty(SingleElementStruct_NestedEmpty _, object obj)
     {
         return obj == s_knownObject;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool TestSES_NestedIntEnum(SingleElementStruct_NestedIntEnum _, object obj)
     {
@@ -2439,6 +2534,7 @@ internal class Program
     public enum ShortEnum : short
     {
     }
+
     public enum LongEnum : long
     {
     }

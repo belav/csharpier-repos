@@ -84,6 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
     internal class LoadedSolutionFilterHandler : RoslynFilterHandler
     {
         private const int LoadedSolutionFilterHandlerFilterId = 20;
+
         public LoadedSolutionFilterHandler(string displayName)
             : base(LoadedSolutionFilterHandlerFilterId, displayName, ItemOrigin.ExactMetadata) { }
     }

@@ -20,36 +20,42 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             UriInit(uri, null, null, null);
         }
+
         public SrgsRuleRef(Uri uri, string rule)
         {
             Helpers.ThrowIfEmptyOrNull(rule, nameof(rule));
 
             UriInit(uri, rule, null, null);
         }
+
         public SrgsRuleRef(Uri uri, string rule, string semanticKey)
         {
             Helpers.ThrowIfEmptyOrNull(semanticKey, nameof(semanticKey));
 
             UriInit(uri, rule, semanticKey, null);
         }
+
         public SrgsRuleRef(Uri uri, string rule, string semanticKey, string parameters)
         {
             Helpers.ThrowIfEmptyOrNull(parameters, nameof(parameters));
 
             UriInit(uri, rule, semanticKey, parameters);
         }
+
         public SrgsRuleRef(SrgsRule rule)
         {
             Helpers.ThrowIfNull(rule, nameof(rule));
 
             _uri = new Uri("#" + rule.Id, UriKind.Relative);
         }
+
         public SrgsRuleRef(SrgsRule rule, string semanticKey) : this(rule)
         {
             Helpers.ThrowIfEmptyOrNull(semanticKey, nameof(semanticKey));
 
             _semanticKey = semanticKey;
         }
+
         public SrgsRuleRef(SrgsRule rule, string semanticKey, string parameters) : this(rule)
         {
             Helpers.ThrowIfEmptyOrNull(parameters, nameof(parameters));
@@ -72,7 +78,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             _semanticKey = semanticKey;
             _params = parameters;
         }
-
         #endregion
 
         #region public Properties
@@ -97,19 +102,21 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return _params; }
         }
+
         // The Null SpecialRuleRef defines a rule that is automatically matched:
         // that is, matched without the user speaking any word.
         public static readonly SrgsRuleRef Null = new(SpecialRuleRefType.Null);
+
         // The Void SpecialRuleRef defines a rule that can never be spoken. Inserting
         // VOID into a sequence automatically makes that sequence unspeakable.
         public static readonly SrgsRuleRef Void = new(SpecialRuleRefType.Void);
+
         // The Garbage SpecialRuleRef defines a rule that may match any speech up until
         // the next rule match, the next token or until the end of spoken input.
         public static readonly SrgsRuleRef Garbage = new(SpecialRuleRefType.Garbage);
         public static readonly SrgsRuleRef Dictation = new(new Uri("grammar:dictation"));
         public static readonly SrgsRuleRef MnemonicSpelling =
             new(new Uri("grammar:dictation#spelling"));
-
         #endregion
 
         #region Internal methods
@@ -231,7 +238,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
             return sb.ToString();
         }
-
         #endregion
 
         #region Private Method
@@ -254,7 +260,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             _semanticKey = semanticKey;
             _params = initParameters;
         }
-
         #endregion
 
         #region Private Fields
@@ -277,7 +282,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             // without failing due to irrelevant, or ignorable words.
             Garbage,
         }
-
         #endregion
 
         // if the uri is null then it is a special rule ref

@@ -18,6 +18,7 @@ namespace Microsoft.NET.Build.Tasks
 
         [Required]
         public ITaskItem CompilationEntry { get; set; }
+
         [Required]
         public ITaskItem[] ImplementationAssemblyReferences { get; set; }
         public ITaskItem[] ReadyToRunCompositeBuildReferences { get; set; }

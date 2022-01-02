@@ -23,6 +23,7 @@ public class NullableReferenceTypeIntegrationTest
     {
         public string FirstName { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -72,6 +73,7 @@ public class NullableReferenceTypeIntegrationTest
     {
         public string? FirstName { get; set; }
     }
+
 #nullable restore
 
     [Fact]
@@ -111,6 +113,7 @@ public class NullableReferenceTypeIntegrationTest
         [Required(ErrorMessage = "Test")]
         public string FirstName { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -157,6 +160,7 @@ public class NullableReferenceTypeIntegrationTest
 
 #nullable enable
     private void NonNullableParameter(string param1) { }
+
 #nullable restore
 
     [Fact]

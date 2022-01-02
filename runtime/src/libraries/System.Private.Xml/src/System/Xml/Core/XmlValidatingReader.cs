@@ -362,6 +362,7 @@ namespace System.Xml
         {
             get { return _impl.Encoding; }
         }
+
         //
         // Internal helper methods
         //

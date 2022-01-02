@@ -1304,14 +1304,19 @@ namespace System.Reflection.Tests
     public class MI_BaseClass : MI_Interface
     {
         public int IMethod() => 10;
+
         public int IMethodNew() => 20;
 
         public static bool StaticIntMethodReturningBool(int int4a) => int4a % 2 == 0;
+
         public virtual int VirtualReturnIntMethod() => 0;
 
         public virtual int VirtualMethod() => 0;
+
         private int PrivateInstanceMethod() => 21;
+
         public static string PublicStaticMethod(string x) => x;
+
         public string PublicStructMethod(DateTime dt) => dt.ToString();
     }
 
@@ -1321,10 +1326,15 @@ namespace System.Reflection.Tests
 
         public PublicEnum EnumMethodReturningEnum(PublicEnum myenum) =>
             myenum == PublicEnum.Case1 ? PublicEnum.Case2 : PublicEnum.Case1;
+
         public string ObjectMethodReturningString(object obj) => obj.ToString();
+
         public int VoidMethodReturningInt() => 3;
+
         public long VoidMethodReturningLong() => long.MaxValue;
+
         public long IntLongMethodReturningLong(int i, long l) => i + l;
+
         public static int StaticIntIntMethodReturningInt(int i1, int i2) => i1 + i2;
 
         public static void StaticGenericMethod<T>(T t) { }
@@ -1334,15 +1344,19 @@ namespace System.Reflection.Tests
         public override int VirtualMethod() => 1;
 
         public void ReturnVoidMethod(DateTime dt) { }
+
         public virtual string[] VirtualReturnStringArrayMethod() => new string[0];
+
         public virtual bool VirtualReturnBoolMethod() => true;
 
         public string Method2<T, S>(string t2, T t1, S t3) => "";
 
         public IntPtr ReturnIntPtrMethod() => new IntPtr(200);
+
         public int[] ReturnArrayMethod() => new int[] { 2, 3, 5, 7, 11 };
 
         public void GenericMethod1<T>(T t) { }
+
         public void GenericMethod2<T, U>(T t, U u) { }
 
         public void StringArrayMethod(string[] strArray) { }
@@ -1366,14 +1380,19 @@ namespace System.Reflection.Tests
     public class MI_Interlocked
     {
         public static int Increment(ref int location) => 0;
+
         public static int Decrement(ref int location) => 0;
+
         public static int Exchange(ref int location1, int value) => 0;
+
         public static int CompareExchange(ref int location1, int value, int comparand) => 0;
 
         public static float Exchange(ref float location1, float value) => 0;
+
         public static float CompareExchange(ref float location1, float value, float comparand) => 0;
 
         public static object Exchange(ref object location1, object value) => null;
+
         public static object CompareExchange(
             ref object location1,
             object value,
@@ -1384,7 +1403,9 @@ namespace System.Reflection.Tests
     public class MI_GenericClass<T>
     {
         public T GenericMethod1(T t) => t;
+
         public T GenericMethod2<S>(S s1, T t, string s2) => t;
+
         public static S GenericMethod3<S>(S s) => s;
     }
 
@@ -1397,9 +1418,11 @@ namespace System.Reflection.Tests
     public class MethodInfoBaseDefinitionBaseClass : MethodInfoBaseDefinitionInterface
     {
         public void InterfaceMethod1() { }
+
         void MethodInfoBaseDefinitionInterface.InterfaceMethod2() { }
 
         public virtual void BaseClassVirtualMethod() { }
+
         public virtual void BaseClassMethod() { }
 
         public override string ToString() => base.ToString();
@@ -1408,7 +1431,9 @@ namespace System.Reflection.Tests
     public class MethodInfoBaseDefinitionSubClass : MethodInfoBaseDefinitionBaseClass
     {
         public override void BaseClassVirtualMethod() => base.BaseClassVirtualMethod();
+
         public new void BaseClassMethod() { }
+
         public override string ToString() => base.ToString();
 
         public void DerivedClassMethod() { }
@@ -1417,12 +1442,14 @@ namespace System.Reflection.Tests
     public abstract class MI_AbstractBaseClass
     {
         public abstract void AbstractMethod();
+
         public virtual void VirtualMethod() { }
     }
 
     public class MI_AbstractSubClass : MI_AbstractBaseClass
     {
         public sealed override void VirtualMethod() { }
+
         public override void AbstractMethod() { }
     }
 
@@ -1464,6 +1491,7 @@ namespace System.Reflection.Tests
         public class CustomReferenceType
         {
             public override bool Equals(object obj) => ReferenceEquals(this, obj);
+
             public override int GetHashCode() => 0;
         }
 
@@ -1472,7 +1500,9 @@ namespace System.Reflection.Tests
         public struct CustomValueType
         {
             public int Id;
+
             public override bool Equals(object obj) => Id == ((CustomValueType)obj).Id;
+
             public override int GetHashCode() => Id.GetHashCode();
         }
 
@@ -1501,6 +1531,7 @@ namespace System.Reflection.Tests
         }
 
         public object OptionalObjectParameter([Optional] object parameter) => parameter;
+
         public string OptionalStringParameter([Optional] string parameter) => parameter;
     }
 
@@ -1522,6 +1553,7 @@ namespace System.Reflection.Tests
         {
             return "";
         }
+
         public string Method2<T, S>(string t2, T t1, S t3)
         {
             return "";
@@ -1534,6 +1566,7 @@ namespace System.Reflection.Tests
         {
             return t;
         }
+
         public T Method2<S>(S t1, T t2, string t3)
         {
             return t2;

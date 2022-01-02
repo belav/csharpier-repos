@@ -61,6 +61,7 @@ namespace System.Globalization
         internal NumberFormatInfo? _numInfo;
         internal DateTimeFormatInfo? _dateTimeInfo;
         private Calendar? _calendar;
+
         //
         // The CultureData instance that we are going to read data from.
         // For supported culture, this will be the CultureData instance that read data from mscorlib assembly.
@@ -118,6 +119,7 @@ namespace System.Globalization
 
         [ThreadStatic]
         private static CultureInfo? s_currentThreadCulture;
+
         [ThreadStatic]
         private static CultureInfo? s_currentThreadUICulture;
 

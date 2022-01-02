@@ -570,6 +570,7 @@ namespace DefaultNamespace
         internal TreeNode left;
         internal TreeNode right;
         internal byte[] mem;
+
         public TreeNode() { }
 
         // Build tree top down, assigning to older objects.

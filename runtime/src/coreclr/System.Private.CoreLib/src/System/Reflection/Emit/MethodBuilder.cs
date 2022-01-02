@@ -140,7 +140,6 @@ namespace System.Reflection.Emit
             // Default is managed IL. Manged IL has bit flag 0x0020 set off
             m_dwMethodImplFlags = MethodImplAttributes.IL;
         }
-
         #endregion
 
         #region Internal Members
@@ -442,7 +441,6 @@ namespace System.Reflection.Emit
             sb.AppendLine();
             return sb.ToString();
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -465,7 +463,6 @@ namespace System.Reflection.Emit
         public override ICustomAttributeProvider ReturnTypeCustomAttributes => new EmptyCAHolder();
 
         public override Type? ReflectedType => DeclaringType;
-
         #endregion
 
         #region MethodBase Overrides
@@ -552,7 +549,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
-
         #endregion
 
         #region Generic Members
@@ -984,7 +980,6 @@ namespace System.Reflection.Emit
                 m_ubSignature = ubTemp;
             }
         }
-
         #endregion
 
         #region Internal Members
@@ -1083,7 +1078,6 @@ namespace System.Reflection.Emit
                     return false;
             }
         }
-
         #endregion
 
         #region Equality

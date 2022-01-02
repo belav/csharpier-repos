@@ -331,7 +331,6 @@ namespace System.IO.Packaging
                 return new ValidatedPartUri(path, isRelationshipUri: false);
             }
         }
-
         #endregion Public Methods
 
         #region Internal Properties
@@ -340,7 +339,6 @@ namespace System.IO.Packaging
         {
             get { return s_packageRootUri; }
         }
-
         #endregion Internal Properties
 
         #region Internal Methods
@@ -418,7 +416,6 @@ namespace System.IO.Packaging
 
             return validatedUri.PartUriString;
         }
-
         #endregion Internal Methods
 
         #region Private Methods
@@ -649,7 +646,6 @@ namespace System.IO.Packaging
                 || ((partName.Length == 1) && (partName[0] == ForwardSlashChar))
             );
         }
-
         #endregion Private Methods
 
         #region Private Members
@@ -675,7 +671,6 @@ namespace System.IO.Packaging
         /// pack scheme name
         /// </summary>
         public static readonly string UriSchemePack = "pack";
-
         #endregion Private Members
 
         #region Private Class
@@ -721,7 +716,6 @@ namespace System.IO.Packaging
                     computeIsRelationship: false,
                     isRelationshipPartUri: isRelationshipUri
                 ) { }
-
             #endregion Internal Constructors
 
             //------------------------------------------------------
@@ -736,7 +730,6 @@ namespace System.IO.Packaging
             {
                 return Compare(otherPartUri);
             }
-
             #endregion IComparable Methods
 
             #region IEqualityComparer Methods
@@ -745,7 +738,6 @@ namespace System.IO.Packaging
             {
                 return Compare(otherPartUri) == 0;
             }
-
             #endregion IEqualityComparer Methods
 
             #region Internal Properties
@@ -816,7 +808,6 @@ namespace System.IO.Packaging
             {
                 get { return _isRelationshipPartUri; }
             }
-
             #endregion Internal Properties
 
             //------------------------------------------------------
@@ -847,7 +838,6 @@ namespace System.IO.Packaging
                 else
                     _isRelationshipPartUri = isRelationshipPartUri;
             }
-
             #endregion PrivateConstuctor
 
             //------------------------------------------------------

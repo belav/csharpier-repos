@@ -23,26 +23,32 @@ namespace Test
         {
             return "Base.VirtualFinal";
         }
+
         public virtual string VirtualNilFinal<T>()
         {
             return "Base.VirtualNilFinal";
         }
+
         public virtual string VirtualOverrideFinal<T>()
         {
             return "Base.VirtualOverrideFinal";
         }
+
         public virtual string VirtualNilOverride<T>()
         {
             return "Base.VirtualNilOverride";
         }
+
         public virtual string VirtualNilNil<T>()
         {
             return "Base.VirtualNilNil";
         }
+
         public virtual string VirtualOverrideOverride<T>()
         {
             return "Base.VirtualOverrideOverride";
         }
+
         public virtual string VirtualOverrideNil<T>()
         {
             return "Base.VirtualOverrideNil";
@@ -55,30 +61,37 @@ namespace Test
         {
             return "Child.AbstractFinal";
         }
+
         public override string AbstractOverrideFinal<T>()
         {
             return "Child.AbstractOverrideFinal";
         }
+
         public override string AbstractOverrideOverride<T>()
         {
             return "Child.AbstractOverrideOverride";
         }
+
         public override string AbstractOverrideNil<T>()
         {
             return "Child.AbstractOverrideNil";
         }
+
         public sealed override string VirtualFinal<T>()
         {
             return "Child.VirtualFinal";
         }
+
         public override string VirtualOverrideFinal<T>()
         {
             return "Child.VirtualOverrideFinal";
         }
+
         public override string VirtualOverrideOverride<T>()
         {
             return "Child.VirtualOverrideOverride";
         }
+
         public override string VirtualOverrideNil<T>()
         {
             return "Child.VirtualOverrideNil";
@@ -113,18 +126,22 @@ namespace Test
         {
             return "GrandChild.AbstractOverrideOverride";
         }
+
         public sealed override string VirtualNilFinal<T>()
         {
             return "GrandChild.VirtualNilFinal";
         }
+
         public sealed override string VirtualOverrideFinal<T>()
         {
             return "GrandChild.VirtualOverrideFinal";
         }
+
         public override string VirtualOverrideOverride<T>()
         {
             return "GrandChild.VirtualOverrideOverride";
         }
+
         public override string VirtualNilOverride<T>()
         {
             return "GrandChild.VirtualNilOverride";

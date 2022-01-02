@@ -160,6 +160,7 @@ public class ArgInput
 abstract class TestAssemblyLoadContextBase : AssemblyLoadContext
 {
     public TestAssemblyLoadContextBase() : base(true) { }
+
     public virtual void Cleanup() { }
 }
 

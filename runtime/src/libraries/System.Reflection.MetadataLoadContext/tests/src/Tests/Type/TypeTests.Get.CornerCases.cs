@@ -143,8 +143,11 @@ namespace System.Reflection.Tests
                 remove { }
             }
             public int MyField;
+
             public void MyMethod() { }
+
             public class MyNestedType { }
+
             public int MyProperty { get; }
         }
     }
@@ -282,6 +285,7 @@ namespace System.Reflection.Tests
             {
                 throw null!;
             }
+
             public static int MyStaticMethod()
             {
                 throw null!;
@@ -294,6 +298,7 @@ namespace System.Reflection.Tests
             {
                 throw null!;
             }
+
             public static new int MyStaticMethod()
             {
                 throw null!;
@@ -555,6 +560,7 @@ namespace System.Reflection.Tests
             public int myfield;
 
             public void mymethod1(int x) { }
+
             public static void mymethod2(int x, int y) { }
 
             public void mymethod4(int x) { }
@@ -565,7 +571,9 @@ namespace System.Reflection.Tests
             public event Action MyEvent;
 
             public class myinner { }
+
             public class MyInner { }
+
             public int MyProp { get; }
 
             public int MyField;
@@ -574,9 +582,11 @@ namespace System.Reflection.Tests
             public int myfield2;
 
             public void MyMethod1(int x) { }
+
             public void MyMethod2(int x, int y) { }
 
             public static void mymethod3(int x, int y, double z) { }
+
             public void MyMethod3(int x, int y, double z) { }
 
             public void mymethod4(string x) { }

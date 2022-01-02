@@ -8,13 +8,19 @@ using Xunit;
 namespace System.ComponentModel.Composition.Registration.Tests
 {
     public interface IController { }
+
     public interface IAuthentication { }
+
     public interface IFormsAuthenticationService { }
+
     public interface IMembershipService { }
 
     public class FormsAuthenticationServiceImpl : IFormsAuthenticationService { }
+
     public class MembershipServiceImpl : IMembershipService { }
+
     public class SpecificMembershipServiceImpl : IMembershipService { }
+
     public class HttpDigestAuthentication : IAuthentication { }
 
     public class AmbiguousConstructors
@@ -24,6 +30,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             StringArg = first;
             IntArg = second;
         }
+
         public AmbiguousConstructors(int first, string second)
         {
             IntArg = first;
@@ -42,6 +49,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             StringArg = first;
             IntArg = second;
         }
+
         public AmbiguousConstructorsWithAttribute(int first, string second)
         {
             IntArg = first;
@@ -60,6 +68,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             StringArg = first;
             IntArg = second;
         }
+
         public LongestConstructorWithAttribute(int first)
         {
             IntArg = first;
@@ -76,6 +85,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             StringArg = first;
             IntArg = second;
         }
+
         [ImportingConstructorAttribute]
         public LongestConstructorShortestWithAttribute(int first)
         {
@@ -124,6 +134,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public HttpRequestValidator Validator { get; set; }
 
         public ManyConstructorsController() { }
+
         public ManyConstructorsController(IFormsAuthenticationService formsService)
         {
             FormsService = formsService;

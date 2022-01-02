@@ -13,6 +13,7 @@ public class Help
 
     public static Object s_object = new object();
 }
+
 public struct Struct<T> where T : Exception
 {
     public void StructInstanceFunctionWithManyArgs(int i, int j, int k, object o)
@@ -37,6 +38,7 @@ public struct Struct<T> where T : Exception
         }
     }
 }
+
 public class GenericExceptions
 {
     public static void StructInstanceFunctionWithManyArgs()
@@ -49,6 +51,7 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         (new Struct<MyException>()).StructInstanceFunctionWithManyArgs(1, 2, 3, Help.s_object);
     }
+
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.NoInlining
     )]

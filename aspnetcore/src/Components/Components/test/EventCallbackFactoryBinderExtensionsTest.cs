@@ -743,6 +743,7 @@ public class EventCallbackFactoryBinderExtensionsTest
 
             return false;
         }
+
         public override object ConvertFrom(
             ITypeDescriptorContext context,
             CultureInfo culture,

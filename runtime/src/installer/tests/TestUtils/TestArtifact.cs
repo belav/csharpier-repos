@@ -37,6 +37,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         );
 
         public static bool PreserveTestRuns() => _preserveTestRuns.Value;
+
         public static string TestArtifactsPath => _testArtifactsPath.Value;
 
         public string Location { get; }

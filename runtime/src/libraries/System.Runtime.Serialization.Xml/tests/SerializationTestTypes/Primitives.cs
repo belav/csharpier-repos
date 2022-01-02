@@ -658,6 +658,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public List<string> listData = new List<string>();
+
         public ListContainer()
         {
             listData.Add("TestData");
@@ -670,6 +671,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public ArrayList listData = new ArrayList();
+
         public ArrayContainer(bool init)
         {
             listData.Add("TestData");
@@ -753,10 +755,12 @@ namespace SerializationTestTypes
     public class DerivedFromPriC : PrivateCstor
     {
         public DerivedFromPriC() : base(int.MaxValue) { }
+
         public DerivedFromPriC(int d) : base(d)
         {
             this.d = d;
         }
+
         [DataMember]
         public int d;
     }
@@ -926,8 +930,10 @@ namespace SerializationTestTypes
     {
         [IgnoreMember]
         public Seasons1 member1 = Seasons1.Autumn;
+
         [IgnoreMember]
         public Seasons2 member2 = Seasons2.Spring;
+
         [IgnoreMember]
         public Seasons3 member3 = Seasons3.Winter;
     }

@@ -60,7 +60,6 @@ namespace Microsoft.Win32
 
         // Keep these numbers in sync w/ the above array.
         private const int CV_OBJECT = 0x12;
-
         #endregion
 
 
@@ -95,7 +94,6 @@ namespace Microsoft.Win32
             );
             return result;
         }
-
         #endregion
 
 
@@ -126,7 +124,6 @@ namespace Microsoft.Win32
 
             return cvtype;
         }
-
         #endregion
 
 

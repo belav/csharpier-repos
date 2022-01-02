@@ -3740,7 +3740,6 @@ if (b) { }
             var fullTree = SyntaxFactory.ParseSyntaxTree(text.ToString());
             WalkTreeAndVerify(tree.GetCompilationUnitRoot(), fullTree.GetCompilationUnitRoot());
         }
-
         #endregion
 
         #region Helper functions

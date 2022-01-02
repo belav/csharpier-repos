@@ -52,7 +52,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 ref cImportedRules
             );
         }
-
         #endregion
 
         #region internal Methods
@@ -207,7 +206,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 new ScriptRef(rule, method, type)
             );
         }
-
         #endregion
 
         #region Internal Properties
@@ -237,7 +235,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get { return _constructors; }
         }
-
         #endregion
 
         #region Private Methods
@@ -295,7 +292,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
-
         #endregion
 
         #region Internal Fields
@@ -320,7 +316,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
         // this is used to refer to a static rule from a dynamic rule
         internal bool _fStaticRule;
-
         #endregion
 
         #region Private Fields

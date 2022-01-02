@@ -90,7 +90,6 @@ namespace System.Net.Mime
 
             _isInContent = false;
         }
-
         #endregion Cleanup
 
         /// <summary>

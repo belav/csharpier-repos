@@ -514,6 +514,7 @@ public class Huffman : HuffStruct
     protected const int WORDCATSIZE = 50;
     protected const int EXCLUDED = 32000; /* Big positive value */
     protected static string[] wordcatarray;
+
     protected static void InitWords()
     {
         wordcatarray = new string[]

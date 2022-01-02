@@ -1472,7 +1472,6 @@ namespace Microsoft.CodeAnalysis
 
             return solution;
         }
-
         #endregion
 
         #region Apply Changes
@@ -2486,7 +2485,6 @@ namespace Microsoft.CodeAnalysis
                 TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()))
             );
         }
-
         #endregion
 
         #region Checks and Asserts

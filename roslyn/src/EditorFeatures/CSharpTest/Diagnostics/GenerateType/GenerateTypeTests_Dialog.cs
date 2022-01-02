@@ -1112,7 +1112,6 @@ namespace outer
                 newFileName: "Test2.cs"
             );
         }
-
         #endregion
 
         #endregion
@@ -1269,7 +1268,6 @@ class Program
                 projectName: "Assembly2"
             );
         }
-
         #endregion
         #region SameLanguageDifferentProject_NewFile
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -2017,7 +2015,6 @@ End Namespace
                 )
             );
         }
-
         #endregion
         #region Bugfix
         [WorkItem(861462, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/861462")]

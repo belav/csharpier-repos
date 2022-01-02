@@ -242,6 +242,7 @@ namespace System.Web.Http.Tracing.Tracers
         private class RaiseWhenInitializedAttribute : Attribute, IControllerConfiguration
         {
             public static event EventHandler Initialized;
+
             public void Initialize(
                 HttpControllerSettings controllerSettings,
                 HttpControllerDescriptor controllerDescriptor

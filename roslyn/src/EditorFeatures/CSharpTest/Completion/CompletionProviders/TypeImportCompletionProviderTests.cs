@@ -99,7 +99,6 @@ class Bar
 
             await VerifyAnyItemExistsAsync(markup);
         }
-
         #endregion
 
         #region "CompletionItem tests"
@@ -1203,7 +1202,6 @@ namespace Foo1
                 displayTextSuffix: "<>"
             );
         }
-
         #endregion
 
         #region "Commit Change Tests"
@@ -1393,7 +1391,6 @@ class Bar
                 sourceCodeKind: kind
             );
         }
-
         #endregion
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -2058,6 +2055,7 @@ namespace Baz
             var markup = CreateMarkupForSingleProject(file2, file1, LanguageNames.CSharp);
             await VerifyTypeImportItemIsAbsentAsync(markup, "Bar", inlineDescription: "Foo");
         }
+
         private static void AssertRelativeOrder(
             List<string> expectedTypesInRelativeOrder,
             ImmutableArray<CompletionItem> allCompletionItems

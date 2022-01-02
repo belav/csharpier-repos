@@ -100,6 +100,7 @@ namespace System.Reflection.Emit
             RejectIfCreated();
             add_method = mdBuilder;
         }
+
         public void SetRaiseMethod(MethodBuilder mdBuilder)
         {
             if (mdBuilder == null)
@@ -107,6 +108,7 @@ namespace System.Reflection.Emit
             RejectIfCreated();
             raise_method = mdBuilder;
         }
+
         public void SetRemoveOnMethod(MethodBuilder mdBuilder)
         {
             if (mdBuilder == null)

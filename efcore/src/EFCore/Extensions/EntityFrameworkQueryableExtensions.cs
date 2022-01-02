@@ -162,7 +162,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Count/LongCount
@@ -315,7 +314,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region First/FirstOrDefault
@@ -482,7 +480,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Last/LastOrDefault
@@ -649,7 +646,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Single/SingleOrDefault
@@ -840,7 +836,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Min
@@ -922,7 +917,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Max
@@ -1004,7 +998,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Sum
@@ -1728,7 +1721,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Average
@@ -2472,7 +2464,6 @@ namespace Microsoft.EntityFrameworkCore
                 cancellationToken
             );
         }
-
         #endregion
 
         #region Contains
@@ -2512,7 +2503,6 @@ namespace Microsoft.EntityFrameworkCore
                 Expression.Constant(item, typeof(TSource)),
                 cancellationToken
             );
-
         #endregion
 
         #region ToList/Array
@@ -2582,7 +2572,6 @@ namespace Microsoft.EntityFrameworkCore
             this IQueryable<TSource> source,
             CancellationToken cancellationToken = default
         ) => (await source.ToListAsync(cancellationToken).ConfigureAwait(false)).ToArray();
-
         #endregion
 
         #region Include
@@ -2983,7 +2972,6 @@ namespace Microsoft.EntityFrameworkCore
                 )
               : source;
         }
-
         #endregion
 
         #region Auto included navigations
@@ -3014,7 +3002,6 @@ namespace Microsoft.EntityFrameworkCore
                       )
                   )
                 : source;
-
         #endregion
 
         #region Query Filters
@@ -3046,7 +3033,6 @@ namespace Microsoft.EntityFrameworkCore
                       )
                   )
                 : source;
-
         #endregion
 
         #region Tracking
@@ -3216,7 +3202,6 @@ namespace Microsoft.EntityFrameworkCore
                   => source.AsNoTrackingWithIdentityResolution(),
                 _ => throw new ArgumentOutOfRangeException(nameof(track))
             };
-
         #endregion
 
         #region Tagging
@@ -3319,7 +3304,6 @@ namespace Microsoft.EntityFrameworkCore
                       )
                   )
                 : source;
-
         #endregion
 
         #region Load
@@ -3372,7 +3356,6 @@ namespace Microsoft.EntityFrameworkCore
                 while (await enumerator.MoveNextAsync().ConfigureAwait(false)) { }
             }
         }
-
         #endregion
 
         #region ToDictionary
@@ -3551,7 +3534,6 @@ namespace Microsoft.EntityFrameworkCore
 
             return d;
         }
-
         #endregion
 
         #region ForEach
@@ -3593,7 +3575,6 @@ namespace Microsoft.EntityFrameworkCore
                 action(element);
             }
         }
-
         #endregion
 
         #region AsAsyncEnumerable
@@ -3627,7 +3608,6 @@ namespace Microsoft.EntityFrameworkCore
 
             throw new InvalidOperationException(CoreStrings.IQueryableNotAsync(typeof(TSource)));
         }
-
         #endregion
 
         #region Impl.

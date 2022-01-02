@@ -13,6 +13,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             handle,
             status
         ) => UvConnectionCb(handle, status);
+
         // Ref and out lamda params must be explicitly typed
         private readonly static LibuvFunctions.uv_alloc_cb _uv_alloc_cb = (
             IntPtr handle,

@@ -589,7 +589,6 @@ namespace System.Reflection
               ? Type.EmptyTypes
               : m_signature.GetCustomModifiers(PositionImpl + 1, false);
         }
-
         #endregion
 
         #region ICustomAttributeProvider

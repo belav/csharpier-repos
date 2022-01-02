@@ -357,9 +357,12 @@ namespace Microsoft.WebAssembly.Diagnostics
         public int Token { get; }
         internal bool IsEnCMethod;
         internal LocalScopeHandleCollection localScopes;
+
         public bool IsStatic() => (methodDef.Attributes & MethodAttributes.Static) != 0;
+
         public int IsAsync { get; set; }
         public bool IsHiddenFromDebugger { get; }
+
         public MethodInfo(
             AssemblyInfo assembly,
             MethodDefinitionHandle methodDefHandle,
@@ -833,6 +836,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 .GetMetadataReader();
         }
     }
+
     internal class SourceFile
     {
         private Dictionary<int, MethodInfo> methods;

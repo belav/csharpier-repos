@@ -234,7 +234,6 @@ namespace System.IO.Packaging
                 return compareResult;
             }
         }
-
         #endregion Public Methods
 
         #region Internal Methods
@@ -253,7 +252,6 @@ namespace System.IO.Packaging
             packageUri = GetPackageUriComponent(packUri);
             partUri = GetPartUriComponent(packUri);
         }
-
         #endregion Internal Methods
 
         #region Private Constructor
@@ -262,7 +260,6 @@ namespace System.IO.Packaging
         {
             EnsurePackSchemeRegistered();
         }
-
         #endregion Private Constructor
 
         #region Private Methods

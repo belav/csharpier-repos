@@ -542,8 +542,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         private sealed class StaticClass
         {
             public static int Value;
+
             public static int M() => Value = 1;
+
             public static object M(int x, int y) => Value = x;
+
             public static object M(object a, object b) => Value = (int)b;
         }
 
@@ -556,9 +559,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 set { Value = value; }
             }
             public int Q => Value;
+
             public int M() => Value = 1;
+
             public object M(int x, int y) => Value = x;
+
             public object M(object a, object b) => Value = (int)b;
+
             public int this[int i] => i * 2;
             public int this[object x, object y]
             {

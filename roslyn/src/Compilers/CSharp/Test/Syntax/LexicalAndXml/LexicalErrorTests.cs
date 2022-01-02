@@ -1833,7 +1833,6 @@ public class Test
                 );
             CreateCompilation(test, parseOptions: TestOptions.RegularNext).VerifyDiagnostics();
         }
-
         #endregion
 
         #region "Targeted Warning Tests - please arrange tests in the order of error code"

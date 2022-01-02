@@ -571,6 +571,7 @@ namespace System.Security.Cryptography.Tests
             ) => ImportPkcs8PrivateKeyImpl(source, out bytesRead);
 
             public override byte[] ExportSubjectPublicKeyInfo() => ExportSubjectPublicKeyInfoImpl();
+
             public override byte[] ExportPkcs8PrivateKey() => ExportPkcs8PrivateKeyPemImpl();
 
             public override byte[] ExportEncryptedPkcs8PrivateKey(

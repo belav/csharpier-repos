@@ -73,16 +73,22 @@ namespace System.Threading.Tasks
         {
             /// <summary>A parallel loop.</summary>
             public const EventTask Loop = (EventTask)1;
+
             /// <summary>A parallel invoke.</summary>
             public const EventTask Invoke = (EventTask)2;
+
             /// <summary>Executing a Task.</summary>
             public const EventTask TaskExecute = (EventTask)3;
+
             /// <summary>Waiting on a Task.</summary>
             public const EventTask TaskWait = (EventTask)4;
+
             /// <summary>A fork/join task within a loop or invoke.</summary>
             public const EventTask ForkJoin = (EventTask)5;
+
             /// <summary>A task is scheduled to execute.</summary>
             public const EventTask TaskScheduled = (EventTask)6;
+
             /// <summary>An await task continuation is scheduled to execute.</summary>
             public const EventTask AwaitTaskContinuationScheduled = (EventTask)7;
 
@@ -99,14 +105,17 @@ namespace System.Threading.Tasks
             /// But are otherwise silent
             /// </summary>
             public const EventKeywords TaskTransfer = (EventKeywords)1;
+
             /// <summary>
             /// TaskTranser events plus events when tasks start and stop
             /// </summary>
             public const EventKeywords Tasks = (EventKeywords)2;
+
             /// <summary>
             /// Events associted with the higher level parallel APIs
             /// </summary>
             public const EventKeywords Parallel = (EventKeywords)4;
+
             /// <summary>
             /// These are relatively verbose events that effectively just redirect
             /// the windows AsyncCausalityTracer to ETW
@@ -142,6 +151,7 @@ namespace System.Threading.Tasks
             /// Relatively Verbose logging meant for debugging the Task library itself. Will probably be removed in the future
             /// </summary>
             public const EventKeywords Debug = (EventKeywords)0x20000;
+
             /// <summary>
             /// Relatively Verbose logging meant for debugging the Task library itself.  Will probably be removed in the future
             /// </summary>
@@ -155,18 +165,25 @@ namespace System.Threading.Tasks
 
         /// <summary>A task is scheduled to a task scheduler.</summary>
         private const int TASKSCHEDULED_ID = 7;
+
         /// <summary>A task is about to execute.</summary>
         private const int TASKSTARTED_ID = 8;
+
         /// <summary>A task has finished executing.</summary>
         private const int TASKCOMPLETED_ID = 9;
+
         /// <summary>A wait on a task is beginning.</summary>
         private const int TASKWAITBEGIN_ID = 10;
+
         /// <summary>A wait on a task is ending.</summary>
         private const int TASKWAITEND_ID = 11;
+
         /// <summary>A continuation of a task is scheduled.</summary>
         private const int AWAITTASKCONTINUATIONSCHEDULED_ID = 12;
+
         /// <summary>A continuation of a taskWaitEnd is complete </summary>
         private const int TASKWAITCONTINUATIONCOMPLETE_ID = 13;
+
         /// <summary>A continuation of a taskWaitEnd is complete </summary>
         private const int TASKWAITCONTINUATIONSTARTED_ID = 19;
 
@@ -640,6 +657,7 @@ namespace System.Threading.Tasks
         {
             RunningContinuation(TaskID, (long)*((void**)Unsafe.AsPointer(ref Object)));
         }
+
         [Event(20, Keywords = Keywords.Debug)]
         private void RunningContinuation(int TaskID, long Object)
         {

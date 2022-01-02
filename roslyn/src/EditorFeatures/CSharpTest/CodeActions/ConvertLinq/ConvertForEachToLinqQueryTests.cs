@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
+
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
 {
     public class ConvertForEachToLinqQueryTests : AbstractCSharpCodeActionTest
@@ -1105,7 +1106,6 @@ class C
 
             await TestInRegularAndScriptAsync(source, linqInvocationOutput, index: 1);
         }
-
         #endregion
 
         #region Assignments, Declarations, Returns
@@ -1508,7 +1508,6 @@ class C
 
             await TestInRegularAndScriptAsync(source, linqInvocationOutput, index: 1);
         }
-
         #endregion
 
         #region In foreach
@@ -1910,7 +1909,6 @@ class C
 
             await TestInRegularAndScriptAsync(source, linqInvocationOutput, index: 1);
         }
-
         #endregion
 
         #region In ToList
@@ -2959,7 +2957,6 @@ public class Test
 }";
             await TestMissingAsync(source);
         }
-
         #endregion
 
         #region In Count
@@ -4179,7 +4176,6 @@ class C
 
             await TestInRegularAndScriptAsync(source, linqInvocationOutput, index: 1);
         }
-
         #endregion
 
         #region Comments
@@ -4582,7 +4578,6 @@ class C
 
             await TestInRegularAndScriptAsync(source, linqInvocationOutput, index: 1);
         }
-
         #endregion
 
         #region Preprocessor directives

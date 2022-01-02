@@ -493,7 +493,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region Constuctors
@@ -545,7 +544,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Properties
@@ -699,7 +697,6 @@ class C
                 Diagnostic(RudeEditKind.DeleteActiveStatement, "int P", FeaturesResources.code)
             );
         }
-
         #endregion
 
         #region Indexers
@@ -1212,7 +1209,6 @@ class SampleCollection<T>
                 Diagnostic(RudeEditKind.DeleteActiveStatement, "{", FeaturesResources.code)
             );
         }
-
         #endregion
 
         #region Operators

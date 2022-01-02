@@ -45,15 +45,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         : Object.ToString();
 
             public static implicit operator Arg(string? value) => new(value);
+
             public static implicit operator Arg(int value) => new(value);
+
             public static implicit operator Arg(bool value) => new(value ? "true" : "false");
+
             public static implicit operator Arg(ProjectId value) => new(value.DebugName);
+
             public static implicit operator Arg(DocumentId value) => new(value.DebugName);
+
             public static implicit operator Arg(Diagnostic value) => new(value);
+
             public static implicit operator Arg(ProjectAnalysisSummary value) =>
                 new((int)value, typeof(ProjectAnalysisSummary));
+
             public static implicit operator Arg(RudeEditKind value) =>
                 new((int)value, typeof(RudeEditKind));
+
             public static implicit operator Arg((int enumValue, Type enumType) value) =>
                 new(value.enumValue, value.enumType);
         }

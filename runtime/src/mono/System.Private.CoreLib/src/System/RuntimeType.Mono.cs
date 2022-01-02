@@ -130,7 +130,6 @@ namespace System
                 _count++;
             }
         }
-
         #endregion
 
         #region Static Members
@@ -615,7 +614,6 @@ namespace System
 
             return true;
         }
-
         #endregion
 
         #endregion
@@ -627,7 +625,6 @@ namespace System
 
         private static readonly RuntimeType ObjectType = (RuntimeType)typeof(object);
         private static readonly RuntimeType StringType = (RuntimeType)typeof(string);
-
         #endregion
 
         #region Constructor
@@ -880,7 +877,6 @@ namespace System
 
             return candidates;
         }
-
         #endregion
 
         #region Get All XXXInfos
@@ -996,7 +992,6 @@ namespace System
 
             return members;
         }
-
         #endregion
 
         [DynamicallyAccessedMembers(
@@ -1672,7 +1667,6 @@ namespace System
             // as they would lead to FCalls anyway.
             return RuntimeTypeHandle.IsEquivalentTo(this, otherRtType);
         }
-
         #endregion
 
         #region Attributes
@@ -1694,7 +1688,6 @@ namespace System
                 return GetGenericParameterAttributes();
             }
         }
-
         #endregion
 
         #region Generics
@@ -1779,7 +1772,6 @@ namespace System
                 return GetGenericParameterPosition();
             }
         }
-
         #endregion
 
         public static bool operator ==(RuntimeType? left, RuntimeType? right)
@@ -1982,7 +1974,6 @@ namespace System
         {
             return CreateInstanceMono(false, true);
         }
-
         #endregion
 
         private TypeCache? cache;
@@ -1996,6 +1987,7 @@ namespace System
         {
             public Enum.EnumInfo? EnumInfo;
             public TypeCode TypeCode;
+
             // this is the displayed form: special characters
             // ,+*&*[]\ in the identifier portions of the names
             // have been escaped with a leading backslash (\)
@@ -2079,6 +2071,7 @@ namespace System
         }
 
         private RuntimeConstructorInfo? m_serializationCtor;
+
         internal RuntimeConstructorInfo? GetSerializationCtor()
         {
             if (m_serializationCtor == null)

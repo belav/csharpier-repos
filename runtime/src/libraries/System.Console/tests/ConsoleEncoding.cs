@@ -121,6 +121,7 @@ public partial class ConsoleEncoding
         public override int CodePage => int.MinValue;
 
         public override int GetByteCount(char[] chars, int index, int count) => 0;
+
         public override int GetBytes(
             char[] chars,
             int charIndex,
@@ -130,6 +131,7 @@ public partial class ConsoleEncoding
         ) => 0;
 
         public override int GetCharCount(byte[] bytes, int index, int count) => 0;
+
         public override int GetChars(
             byte[] bytes,
             int byteIndex,
@@ -139,6 +141,7 @@ public partial class ConsoleEncoding
         ) => 0;
 
         public override int GetMaxByteCount(int charCount) => 0;
+
         public override int GetMaxCharCount(int byteCount) => 0;
     }
 

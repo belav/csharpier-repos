@@ -447,7 +447,9 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         public interface IContract1 { }
+
         public interface IContract2 { }
+
         public interface IGenericContract<T1, T2> { }
 
         [Export(typeof(IGenericContract<,>))]

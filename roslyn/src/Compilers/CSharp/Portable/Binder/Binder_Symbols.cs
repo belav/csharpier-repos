@@ -879,6 +879,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             return null;
         }
+
 #nullable disable
 
         private TypeWithAnnotations BindArrayType(
@@ -2402,6 +2403,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private class ConsistentSymbolOrder : IComparer<Symbol>
         {
             public static readonly ConsistentSymbolOrder Instance = new ConsistentSymbolOrder();
+
             public int Compare(Symbol fst, Symbol snd)
             {
                 if (snd == fst)

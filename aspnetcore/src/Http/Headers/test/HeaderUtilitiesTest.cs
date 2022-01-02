@@ -238,6 +238,7 @@ public class HeaderUtilitiesTest
 
         Assert.Equal(expected, actual);
     }
+
     [Theory]
     [InlineData("\"hello\"", true)]
     [InlineData("\"hello", false)]

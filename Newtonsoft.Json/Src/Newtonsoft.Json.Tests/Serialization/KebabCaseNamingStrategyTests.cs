@@ -291,6 +291,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             public string Prop1 { get; set; }
             public string Prop2 { get; set; }
+
             [JsonProperty(NamingStrategyType = typeof(DefaultNamingStrategy))]
             public string HasAttributeNamingStrategy { get; set; }
         }

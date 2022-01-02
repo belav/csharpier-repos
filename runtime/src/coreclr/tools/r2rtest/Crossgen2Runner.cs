@@ -11,6 +11,7 @@ namespace R2RTest
     class Crossgen2RunnerOptions
     {
         public bool Composite { get; set; }
+
         /// <summary>
         /// True for scenarios where the composite image has dependencies outside itself that should not be unrooted inputs
         /// </summary>

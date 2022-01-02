@@ -30,14 +30,17 @@ public static class Statics
             Successes++;
         }
     }
+
     public static void CheckForFailure(string scenario, string expectedResult)
     {
         CheckForFailure(scenario, expectedResult, String);
     }
+
     public static string MakeName(RuntimeTypeHandle t)
     {
         return MakeName(Type.GetTypeFromHandle(t));
     }
+
     public static int ReportResults()
     {
         Console.WriteLine($"{Successes} successes reported");

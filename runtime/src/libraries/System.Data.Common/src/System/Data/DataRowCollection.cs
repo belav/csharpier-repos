@@ -15,6 +15,7 @@ namespace System.Data
             {
                 throw ExceptionBuilder.InternalRBTreeError(RBTreeError.CompareNodeInDataRowTree);
             }
+
             protected override int CompareSateliteTreeNode(DataRow? record1, DataRow? record2)
             {
                 throw ExceptionBuilder.InternalRBTreeError(

@@ -64,8 +64,10 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 Database.SetInitializer(new DatabaseInitializer());
             }
+
             public DbSet<MyTable> MyTable { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.AddProfile<MyProfile>());
 

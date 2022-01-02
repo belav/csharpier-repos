@@ -202,7 +202,6 @@ class C
 
             await TestAsync(markup, expectedOrderedItems);
         }
-
         #endregion
 
         #region "Constraints on generic types"
@@ -526,7 +525,6 @@ class C
 
             await TestAsync(markup, expectedOrderedItems);
         }
-
         #endregion
 
         #region "Generic member invocation"
@@ -732,7 +730,6 @@ static class GooClass
                 sourceCodeKind: Microsoft.CodeAnalysis.SourceCodeKind.Regular
             );
         }
-
         #endregion
 
         #region "Constraints on generic methods"
@@ -852,7 +849,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region "Trigger tests"
@@ -938,7 +934,6 @@ class C
             );
             await VerifyItemWithReferenceWorkerAsync(markup, new[] { expectedDescription }, false);
         }
-
         #endregion
 
         #region "EditorBrowsable tests"

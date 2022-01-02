@@ -7,6 +7,7 @@ namespace System.Diagnostics.Tracing
     public abstract partial class DiagnosticCounter : System.IDisposable
     {
         internal DiagnosticCounter() { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -25,9 +26,12 @@ namespace System.Diagnostics.Tracing
         {
             get { throw null; }
         }
+
         public void AddMetadata(string key, string? value) { }
+
         public void Dispose() { }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     public partial class PollingCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
@@ -36,11 +40,13 @@ namespace System.Diagnostics.Tracing
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Func<double> metricProvider
         ) { }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     public partial class IncrementingEventCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
@@ -48,17 +54,21 @@ namespace System.Diagnostics.Tracing
             string name,
             System.Diagnostics.Tracing.EventSource eventSource
         ) { }
+
         public System.TimeSpan DisplayRateTimeScale
         {
             get { throw null; }
             set { }
         }
+
         public void Increment(double increment = 1) { }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     public partial class IncrementingPollingCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
@@ -67,25 +77,31 @@ namespace System.Diagnostics.Tracing
             System.Diagnostics.Tracing.EventSource eventSource,
             System.Func<double> totalValueProvider
         ) { }
+
         public System.TimeSpan DisplayRateTimeScale
         {
             get { throw null; }
             set { }
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     public partial class EventCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
         public EventCounter(string name, System.Diagnostics.Tracing.EventSource eventSource) { }
+
         public override string ToString()
         {
             throw null;
         }
+
         public void WriteMetric(double value) { }
+
         public void WriteMetric(float value) { }
     }
 }

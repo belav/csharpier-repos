@@ -264,7 +264,6 @@ class Program
             Assert.Equal(typeof(DebuggerBrowsableState), args[0].ArgumentType);
             Assert.Equal(DebuggerBrowsableState.Never, (DebuggerBrowsableState)args[0].Value);
         }
-
         #endregion
 
         [ClrOnlyFact]
@@ -1268,7 +1267,6 @@ class Query
                 }
             }
         }
-
         #endregion
 
         [ClrOnlyFact]

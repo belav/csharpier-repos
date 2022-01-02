@@ -161,6 +161,7 @@ namespace System.ComponentModel.Composition
             {
                 this.Version = new Version(1, 1);
             }
+
             public Version Version { get; set; }
         }
 

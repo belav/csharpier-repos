@@ -10,7 +10,9 @@ namespace AutoMapper.UnitTests.Bug
     public class ConventionMappedCollectionShouldMapBaseTypes
     {
         public class ItemBase { }
+
         public class GeneralItem : ItemBase { }
+
         public class SpecificItem : ItemBase { }
 
         public class Container
@@ -19,11 +21,14 @@ namespace AutoMapper.UnitTests.Bug
             {
                 Items = new List<ItemBase>();
             }
+
             public List<ItemBase> Items { get; private set; }
         }
 
         public class ItemDto { }
+
         public class GeneralItemDto : ItemDto { }
+
         public class SpecificItemDto : ItemDto { }
 
         public class ContainerDto
@@ -32,6 +37,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 Items = new List<ItemDto>();
             }
+
             public List<ItemDto> Items { get; private set; }
         }
 

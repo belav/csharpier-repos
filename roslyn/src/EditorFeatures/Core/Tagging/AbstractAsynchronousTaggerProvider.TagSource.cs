@@ -70,7 +70,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
             private readonly ReferenceCountedDisposable<TagSourceState> _tagSourceState =
                 new(new TagSourceState());
-
             #endregion
 
             #region Fields that can only be accessed from the foreground thread
@@ -103,7 +102,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// then we'll want to synchronously block then and only then for tags.
             /// </summary>
             private bool _firstTagsRequest = true;
-
             #endregion
 
             public TagSource(

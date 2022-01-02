@@ -9,6 +9,7 @@ namespace System.Net.Connections
     public abstract partial class Connection : System.Net.Connections.ConnectionBase
     {
         protected Connection() { }
+
         public System.IO.Pipelines.IDuplexPipe Pipe
         {
             get { throw null; }
@@ -17,14 +18,17 @@ namespace System.Net.Connections
         {
             get { throw null; }
         }
+
         protected virtual System.IO.Pipelines.IDuplexPipe CreatePipe()
         {
             throw null;
         }
+
         protected virtual System.IO.Stream CreateStream()
         {
             throw null;
         }
+
         public static System.Net.Connections.Connection FromPipe(
             System.IO.Pipelines.IDuplexPipe pipe,
             bool leaveOpen = false,
@@ -35,6 +39,7 @@ namespace System.Net.Connections
         {
             throw null;
         }
+
         public static System.Net.Connections.Connection FromStream(
             System.IO.Stream stream,
             bool leaveOpen = false,
@@ -46,12 +51,15 @@ namespace System.Net.Connections
             throw null;
         }
     }
+
     public abstract partial class ConnectionBase : System.IAsyncDisposable, System.IDisposable
     {
         protected ConnectionBase() { }
+
         public abstract System.Net.Connections.IConnectionProperties ConnectionProperties { get; }
         public abstract System.Net.EndPoint? LocalEndPoint { get; }
         public abstract System.Net.EndPoint? RemoteEndPoint { get; }
+
         public System.Threading.Tasks.ValueTask CloseAsync(
             System.Net.Connections.ConnectionCloseMethod method =
                 System.Net.Connections.ConnectionCloseMethod.GracefulShutdown,
@@ -61,22 +69,27 @@ namespace System.Net.Connections
         {
             throw null;
         }
+
         protected abstract System.Threading.Tasks.ValueTask CloseAsyncCore(
             System.Net.Connections.ConnectionCloseMethod method,
             System.Threading.CancellationToken cancellationToken
         );
+
         public void Dispose() { }
+
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
     }
+
     public enum ConnectionCloseMethod
     {
         GracefulShutdown = 0,
         Abort = 1,
         Immediate = 2,
     }
+
     public static partial class ConnectionExtensions
     {
         public static System.Net.Connections.ConnectionFactory Filter(
@@ -91,6 +104,7 @@ namespace System.Net.Connections
         {
             throw null;
         }
+
         public static bool TryGet<T>(
             this System.Net.Connections.IConnectionProperties properties,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T property
@@ -99,29 +113,37 @@ namespace System.Net.Connections
             throw null;
         }
     }
+
     public abstract partial class ConnectionFactory : System.IAsyncDisposable, System.IDisposable
     {
         protected ConnectionFactory() { }
+
         public abstract System.Threading.Tasks.ValueTask<System.Net.Connections.Connection> ConnectAsync(
             System.Net.EndPoint? endPoint,
             System.Net.Connections.IConnectionProperties? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
         );
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
+
         protected virtual System.Threading.Tasks.ValueTask DisposeAsyncCore()
         {
             throw null;
         }
     }
+
     public abstract partial class ConnectionListener : System.IAsyncDisposable, System.IDisposable
     {
         protected ConnectionListener() { }
+
         public abstract System.Net.Connections.IConnectionProperties ListenerProperties { get; }
         public abstract System.Net.EndPoint? LocalEndPoint { get; }
         public abstract System.Threading.Tasks.ValueTask<System.Net.Connections.Connection?> AcceptAsync(
@@ -129,39 +151,50 @@ namespace System.Net.Connections
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
         );
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
+
         protected virtual System.Threading.Tasks.ValueTask DisposeAsyncCore()
         {
             throw null;
         }
     }
+
     public abstract partial class ConnectionListenerFactory
         : System.IAsyncDisposable,
           System.IDisposable
     {
         protected ConnectionListenerFactory() { }
+
         public abstract System.Threading.Tasks.ValueTask<System.Net.Connections.ConnectionListener> ListenAsync(
             System.Net.EndPoint? endPoint,
             System.Net.Connections.IConnectionProperties? options = null,
             System.Threading.CancellationToken cancellationToken =
                 default(System.Threading.CancellationToken)
         );
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public System.Threading.Tasks.ValueTask DisposeAsync()
         {
             throw null;
         }
+
         protected virtual System.Threading.Tasks.ValueTask DisposeAsyncCore()
         {
             throw null;
         }
     }
+
     public partial interface IConnectionProperties
     {
         bool TryGet(
@@ -169,6 +202,7 @@ namespace System.Net.Connections
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out object? property
         );
     }
+
     public partial class SocketsConnectionFactory : System.Net.Connections.ConnectionFactory
     {
         public SocketsConnectionFactory(
@@ -176,10 +210,12 @@ namespace System.Net.Connections
             System.Net.Sockets.SocketType socketType,
             System.Net.Sockets.ProtocolType protocolType
         ) { }
+
         public SocketsConnectionFactory(
             System.Net.Sockets.SocketType socketType,
             System.Net.Sockets.ProtocolType protocolType
         ) { }
+
         public override System.Threading.Tasks.ValueTask<System.Net.Connections.Connection> ConnectAsync(
             System.Net.EndPoint? endPoint,
             System.Net.Connections.IConnectionProperties? options = null,
@@ -189,6 +225,7 @@ namespace System.Net.Connections
         {
             throw null;
         }
+
         protected virtual System.Net.Sockets.Socket CreateSocket(
             System.Net.Sockets.AddressFamily addressFamily,
             System.Net.Sockets.SocketType socketType,
@@ -201,6 +238,7 @@ namespace System.Net.Connections
         }
     }
 }
+
 namespace System.Net
 {
     public enum NetworkError : int
@@ -214,18 +252,22 @@ namespace System.Net
         ConnectionAborted,
         ConnectionReset,
     }
+
     public class NetworkException : System.IO.IOException
     {
         public NetworkException(NetworkError error, Exception? innerException = null) { }
+
         public NetworkException(
             string message,
             NetworkError error,
             Exception? innerException = null
         ) { }
+
         protected NetworkException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public NetworkError NetworkError
         {
             get { throw null; }

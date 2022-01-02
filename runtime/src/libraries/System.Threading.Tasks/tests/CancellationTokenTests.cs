@@ -1487,6 +1487,7 @@ namespace System.Threading.Tasks.Tests
             //Cleanup.
             SetSynchronizationContext(prevailingSyncCtx);
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void EnlistWithSyncContext_BeforeCancel_ThrowingExceptionInSyncContextDelegate_ThrowOnFirst()
         {

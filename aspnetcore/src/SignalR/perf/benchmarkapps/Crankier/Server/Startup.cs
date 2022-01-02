@@ -13,6 +13,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Server
     {
         private readonly IConfiguration _config;
         private readonly string _azureSignalrConnectionString;
+
         public Startup(IConfiguration configuration)
         {
             _config = configuration;

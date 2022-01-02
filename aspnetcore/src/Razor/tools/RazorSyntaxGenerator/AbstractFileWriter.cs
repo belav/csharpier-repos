@@ -112,7 +112,6 @@ internal abstract class AbstractFileWriter
         Unindent();
         WriteLine("}");
     }
-
     #endregion Output helpers
 
     #region Node helpers

@@ -8,6 +8,7 @@ namespace System.Reflection
     public abstract class Binder
     {
         protected Binder() { }
+
         public abstract FieldInfo BindToField(
             BindingFlags bindingAttr,
             FieldInfo[] match,

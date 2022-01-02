@@ -682,6 +682,7 @@ namespace WebData.BaseLib
         {
             return WebData.BaseLib.StringGen.GetIllegalXmlStringWithSeed(iMaxChar, bAbsolute, 0);
         }
+
         public static string GetIllegalXmlStringWithSeed(int iMaxChar, bool bAbsolute, int iSeed)
         {
             int i = 0;

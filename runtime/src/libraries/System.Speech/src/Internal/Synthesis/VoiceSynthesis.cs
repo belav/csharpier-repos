@@ -89,7 +89,6 @@ namespace System.Speech.Internal.Synthesis
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Internal Methods
@@ -138,6 +137,7 @@ namespace System.Speech.Internal.Synthesis
                 _stateChanged -= eventHandler;
             }
         }
+
         internal void SpeakAsync(Prompt prompt)
         {
             QueuePrompt(prompt);
@@ -352,7 +352,6 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
         }
-
         #endregion
 
         #endregion
@@ -610,7 +609,6 @@ namespace System.Speech.Internal.Synthesis
                 return new ReadOnlyCollection<InstalledVoice>(voices);
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -672,13 +670,13 @@ namespace System.Speech.Internal.Synthesis
                 return _currentVoice;
             }
         }
-
         #endregion
 
         #region Internal Fields
 
         // Internal event handlers
         internal EventHandler<StateChangedEventArgs> _stateChanged;
+
         // Internal event handlers
         internal EventHandler<SpeakStartedEventArgs> _speakStarted;
         internal EventHandler<SpeakCompletedEventArgs> _speakCompleted;
@@ -689,7 +687,6 @@ namespace System.Speech.Internal.Synthesis
         internal EventHandler<PhonemeReachedEventArgs> _phonemeReached;
 
         internal EventHandler<VisemeReachedEventArgs> _visemeReached;
-
         #endregion
 
         #region Private Members
@@ -1809,7 +1806,6 @@ namespace System.Speech.Internal.Synthesis
                     throw new InvalidOperationException(SR.Get(SRID.SynthesizerUnknownEvent));
             }
         }
-
         #endregion
 
         private void Dispose(bool disposing)
@@ -1859,6 +1855,7 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
         }
+
         private void QueuePrompt(Prompt prompt)
         {
             // Call Sapi Speak with the appropriate flags based on mediaType
@@ -1912,6 +1909,7 @@ namespace System.Speech.Internal.Synthesis
                 new Parameters(Action.SpeakText, new ParametersSpeak(null, prompt, false, audio))
             );
         }
+
         private void SetInterest(int ttsInterest)
         {
             _ttsInterest = ttsInterest;
@@ -1921,7 +1919,6 @@ namespace System.Speech.Internal.Synthesis
                 _site.SetEventsInterest(_ttsInterest);
             }
         }
-
         #endregion
 
         #region Private Properties

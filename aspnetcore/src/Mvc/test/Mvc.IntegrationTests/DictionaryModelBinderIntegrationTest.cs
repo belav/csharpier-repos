@@ -1397,6 +1397,7 @@ public class DictionaryModelBinderIntegrationTest
         // This should be implicitly required
         public string Name { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -1489,6 +1490,7 @@ public class DictionaryModelBinderIntegrationTest
         [Required]
         public string? Name { get; set; }
     }
+
 #nullable restore
 
     [Fact]

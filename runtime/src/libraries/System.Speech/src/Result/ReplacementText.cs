@@ -23,7 +23,6 @@ namespace System.Speech.Recognition
             _wordIndex = wordIndex;
             _countOfWords = countOfWords;
         }
-
         #endregion
 
         #region Public Properties
@@ -43,7 +42,6 @@ namespace System.Speech.Recognition
         {
             get { return _countOfWords; }
         }
-
         #endregion
 
         #region Private Fields

@@ -33,7 +33,6 @@ namespace System.Net.Http
         private Uri? _baseAddress;
         private TimeSpan _timeout;
         private int _maxResponseContentBufferSize;
-
         #endregion Fields
 
         #region Properties
@@ -139,7 +138,6 @@ namespace System.Net.Http
                 _maxResponseContentBufferSize = (int)value;
             }
         }
-
         #endregion Properties
 
         #region Constructors
@@ -155,7 +153,6 @@ namespace System.Net.Http
             _maxResponseContentBufferSize = HttpContent.MaxBufferSize;
             _pendingRequestsCts = new CancellationTokenSource();
         }
-
         #endregion Constructors
 
         #region Public Send
@@ -426,7 +423,6 @@ namespace System.Net.Http
                 );
             }
         }
-
         #endregion Simple Get Overloads
 
         #region REST Send Overloads
@@ -558,7 +554,6 @@ namespace System.Net.Http
             Uri? requestUri,
             CancellationToken cancellationToken
         ) => SendAsync(CreateRequestMessage(HttpMethod.Delete, requestUri), cancellationToken);
-
         #endregion REST Send Overloads
 
         #region Advanced Send Overloads
@@ -882,7 +877,6 @@ namespace System.Net.Http
             currentCts.Cancel();
             currentCts.Dispose();
         }
-
         #endregion Advanced Send Overloads
 
         #endregion Public Send
@@ -904,7 +898,6 @@ namespace System.Net.Http
 
             base.Dispose(disposing);
         }
-
         #endregion
 
         #region Private Helpers

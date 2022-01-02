@@ -19,15 +19,18 @@ internal class Program
         public void EventSourceTest_Method_0() => WriteEvent(1);
 
         public void EventSourceTest_Method_1(int value) => WriteEvent(2, value);
+
         void EventSourceTest_Method_2(string name) => WriteEvent(3, name);
 
         [NonEvent]
         public void EventSourceTest_Method_3(int num1, int num2) => WriteEvent(4, num1, num2);
+
         [NonEvent]
         void EventSourceTest_Method_4() { }
 
         [Event(500)]
         public void EventSourceTest_Method_5(byte[] bytes) => WriteEvent(500, bytes);
+
         [Event(1500)]
         protected virtual void EventSourceTest_Method_6(long value) => WriteEvent(1500, value);
 

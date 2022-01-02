@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class testout1
 {
     public struct VT

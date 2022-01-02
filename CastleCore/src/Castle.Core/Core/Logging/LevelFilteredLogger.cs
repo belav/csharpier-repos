@@ -181,7 +181,6 @@ namespace Castle.Core.Logging
                 Log(LoggerLevel.Trace, string.Format(formatProvider, format, args), exception);
             }
         }
-
 		#endregion
 
 		#region Debug
@@ -297,7 +296,6 @@ namespace Castle.Core.Logging
 
             Log(LoggerLevel.Debug, string.Format(formatProvider, format, args), exception);
         }
-
 		#endregion
 
 		#region Info
@@ -413,7 +411,6 @@ namespace Castle.Core.Logging
 
             Log(LoggerLevel.Info, string.Format(formatProvider, format, args), exception);
         }
-
 		#endregion
 
 		#region Warn
@@ -529,7 +526,6 @@ namespace Castle.Core.Logging
 
             Log(LoggerLevel.Warn, string.Format(formatProvider, format, args), exception);
         }
-
 		#endregion
 
 		#region Error
@@ -645,7 +641,6 @@ namespace Castle.Core.Logging
 
             Log(LoggerLevel.Error, string.Format(formatProvider, format, args), exception);
         }
-
 		#endregion
 
 		#region Fatal
@@ -761,7 +756,6 @@ namespace Castle.Core.Logging
 
             Log(LoggerLevel.Fatal, string.Format(formatProvider, format, args), exception);
         }
-
 		#endregion
 
         /// <summary>
@@ -817,7 +811,6 @@ namespace Castle.Core.Logging
         {
             get { return (Level >= LoggerLevel.Fatal); }
         }
-
 		#endregion
 
         /// <summary>

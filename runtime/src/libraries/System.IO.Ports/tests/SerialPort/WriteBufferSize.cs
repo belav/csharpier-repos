@@ -162,7 +162,6 @@ namespace System.IO.Ports.Tests
         {
             VerifyWriteBufferSize(LARGE_BUFFER_SIZE);
         }
-
         #endregion
 
         #region Verification for Test Cases

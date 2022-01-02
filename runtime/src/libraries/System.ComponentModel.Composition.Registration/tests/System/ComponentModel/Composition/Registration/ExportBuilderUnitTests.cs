@@ -13,6 +13,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public interface IFoo { }
 
         public class CFoo : IFoo { }
+
         public class FooImporter
         {
             [Import]
@@ -20,8 +21,11 @@ namespace System.ComponentModel.Composition.Registration.Tests
         }
 
         public class CFoo1 : IFoo { }
+
         public class CFoo2 : IFoo { }
+
         public class CFoo3 : IFoo { }
+
         public class CFoo4 : IFoo { }
 
         public class FooImporterBase
@@ -33,6 +37,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public class FooImporter1 : FooImporterBase
         {
             public FooImporter1() { }
+
             public FooImporter1(IFoo fooImporter)
             {
                 ImportedFoo = fooImporter;
@@ -42,6 +47,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public class FooImporter2 : FooImporterBase
         {
             public FooImporter2() { }
+
             public FooImporter2(IFoo fooImporter)
             {
                 ImportedFoo = fooImporter;
@@ -51,6 +57,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public class FooImporter3 : FooImporterBase
         {
             public FooImporter3() { }
+
             public FooImporter3(IFoo fooImporter)
             {
                 ImportedFoo = fooImporter;
@@ -60,6 +67,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public class FooImporter4 : FooImporterBase
         {
             public FooImporter4() { }
+
             public FooImporter4(IFoo fooImporter)
             {
                 ImportedFoo = fooImporter;

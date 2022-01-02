@@ -378,7 +378,6 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
-
         #endregion
 
         #region DebuggableAttribute

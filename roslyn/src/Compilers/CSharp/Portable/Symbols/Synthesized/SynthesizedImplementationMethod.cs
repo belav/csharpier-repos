@@ -84,7 +84,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return _interfaceMethod.RefCustomModifiers; }
         }
-
         #endregion
 
         internal sealed override bool GenerateDebugInfo

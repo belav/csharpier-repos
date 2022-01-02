@@ -38,6 +38,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 _typeDefTableFullyFilled = true;
             }
         }
+
         private bool _typeDefTableFullyFilled; // Only gets set true if EnsureTypeDefTableFullyFilled() fills the table. False negative just means some unnecessary work is done.
 
         internal MetadataTable<RoDefinitionType, EcmaModule> TypeRefTable

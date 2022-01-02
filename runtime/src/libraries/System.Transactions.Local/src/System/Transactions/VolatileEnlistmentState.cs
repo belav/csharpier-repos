@@ -131,7 +131,6 @@ namespace System.Transactions
             // Note another enlistment finished.
             enlistment.FinishEnlistment();
         }
-
         #endregion
 
         #region State Change Events
@@ -145,7 +144,6 @@ namespace System.Transactions
         {
             VolatileEnlistmentSPC.EnterState(enlistment);
         }
-
         #endregion
 
         #region Internal Events

@@ -740,6 +740,7 @@ public class CXmlCache
     internal static NodeFlags _eDefaultFlags = NodeFlags.None;
 
     private ITestOutputHelper _output;
+
     public CXmlCache(ITestOutputHelper output)
     {
         _output = output;

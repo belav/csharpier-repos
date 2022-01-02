@@ -35,6 +35,7 @@ namespace System.Xml.Schema
         private const byte wildCardMask = 0x01;
         private const byte isMixedMask = 0x02;
         private const byte isAbstractMask = 0x04;
+
         //const byte dupDeclMask = 0x08;
 
         private static XmlSchemaComplexType CreateUntypedAnyType()

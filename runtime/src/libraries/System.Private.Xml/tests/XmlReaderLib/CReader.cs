@@ -183,51 +183,61 @@ namespace System.Xml.Tests
                 return _wrappedreader.ValueType;
             }
         }
+
         public override object ReadContentAsObject()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsObject();
         }
+
         public override bool ReadContentAsBoolean()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsBoolean();
         }
+
         public override DateTimeOffset ReadContentAsDateTimeOffset()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsDateTimeOffset();
         }
+
         public override double ReadContentAsDouble()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsDouble();
         }
+
         public override float ReadContentAsFloat()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsFloat();
         }
+
         public override decimal ReadContentAsDecimal()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsDecimal();
         }
+
         public override long ReadContentAsLong()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsLong();
         }
+
         public override int ReadContentAsInt()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsInt();
         }
+
         public override string ReadContentAsString()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsString();
         }
+
         public override object ReadContentAs(
             System.Type returnType,
             IXmlNamespaceResolver namespaceResolver
@@ -248,76 +258,91 @@ namespace System.Xml.Tests
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsObject(localName, NamespaceURI);
         }
+
         public override bool ReadElementContentAsBoolean()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsBoolean();
         }
+
         public override bool ReadElementContentAsBoolean(string localName, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsBoolean(localName, namespaceURI);
         }
+
         public override decimal ReadElementContentAsDecimal()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsDecimal();
         }
+
         public override decimal ReadElementContentAsDecimal(string localname, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsDecimal(localname, namespaceURI);
         }
+
         public override float ReadElementContentAsFloat()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsFloat();
         }
+
         public override float ReadElementContentAsFloat(string localname, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsFloat(localname, namespaceURI);
         }
+
         public override double ReadElementContentAsDouble()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsDouble();
         }
+
         public override double ReadElementContentAsDouble(string localname, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsDouble(localname, namespaceURI);
         }
+
         public override long ReadElementContentAsLong()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsLong();
         }
+
         public override long ReadElementContentAsLong(string localname, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsLong(localname, namespaceURI);
         }
+
         public override int ReadElementContentAsInt()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsInt();
         }
+
         public override int ReadElementContentAsInt(string localname, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsInt(localname, namespaceURI);
         }
+
         public override string ReadElementContentAsString()
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsString();
         }
+
         public override string ReadElementContentAsString(string localname, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsString(localname, namespaceURI);
         }
+
         public override object ReadElementContentAs(
             System.Type returnType,
             IXmlNamespaceResolver namespaceResolver
@@ -326,6 +351,7 @@ namespace System.Xml.Tests
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAs(returnType, namespaceResolver);
         }
+
         public override object ReadElementContentAs(
             System.Type returnType,
             IXmlNamespaceResolver namespaceResolver,
@@ -350,6 +376,7 @@ namespace System.Xml.Tests
                 return _wrappedreader.CanReadValueChunk;
             }
         }
+
         public override int ReadValueChunk(char[] buffer, int startIndex, int count)
         {
             this.IsCalled = true;
@@ -364,21 +391,25 @@ namespace System.Xml.Tests
                 return _wrappedreader.CanReadBinaryContent;
             }
         }
+
         public override int ReadContentAsBase64(byte[] buffer, int startIndex, int count)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsBase64(buffer, startIndex, count);
         }
+
         public override int ReadContentAsBinHex(byte[] buffer, int startIndex, int count)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadContentAsBinHex(buffer, startIndex, count);
         }
+
         public override int ReadElementContentAsBase64(byte[] buffer, int startIndex, int count)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadElementContentAsBase64(buffer, startIndex, count);
         }
+
         public override int ReadElementContentAsBinHex(byte[] buffer, int startIndex, int count)
         {
             this.IsCalled = true;
@@ -402,46 +433,55 @@ namespace System.Xml.Tests
                 return _wrappedreader.HasAttributes;
             }
         }
+
         public override string GetAttribute(string name)
         {
             this.IsCalled = true;
             return _wrappedreader.GetAttribute(name);
         }
+
         public override string GetAttribute(string name, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.GetAttribute(name, namespaceURI);
         }
+
         public override string GetAttribute(int i)
         {
             this.IsCalled = true;
             return _wrappedreader.GetAttribute(i);
         }
+
         public override bool MoveToAttribute(string name)
         {
             this.IsCalled = true;
             return _wrappedreader.MoveToAttribute(name);
         }
+
         public override bool MoveToAttribute(string name, string ns)
         {
             this.IsCalled = true;
             return _wrappedreader.MoveToAttribute(name, ns);
         }
+
         public override void MoveToAttribute(int i)
         {
             this.IsCalled = true;
             _wrappedreader.MoveToAttribute(i);
         }
+
         public override bool MoveToFirstAttribute()
         {
             this.IsCalled = true;
             return _wrappedreader.MoveToFirstAttribute();
         }
+
         public override bool MoveToNextAttribute()
         {
             this.IsCalled = true;
             return _wrappedreader.MoveToNextAttribute();
         }
+
         public override bool MoveToElement()
         {
             this.IsCalled = true;
@@ -454,6 +494,7 @@ namespace System.Xml.Tests
             this.IsCalled = true;
             return _wrappedreader.Read();
         }
+
         public override bool EOF
         {
             get
@@ -470,6 +511,7 @@ namespace System.Xml.Tests
                 return _wrappedreader.ReadState;
             }
         }
+
         public override void Skip()
         {
             this.IsCalled = true;
@@ -481,6 +523,7 @@ namespace System.Xml.Tests
             this.IsCalled = true;
             return _wrappedreader.ReadInnerXml();
         }
+
         public override string ReadOuterXml()
         {
             this.IsCalled = true;
@@ -493,71 +536,85 @@ namespace System.Xml.Tests
             this.IsCalled = true;
             return _wrappedreader.ReadSubtree();
         }
+
         public override XmlNodeType MoveToContent()
         {
             this.IsCalled = true;
             return _wrappedreader.MoveToContent();
         }
+
         public override bool IsStartElement()
         {
             this.IsCalled = true;
             return _wrappedreader.IsStartElement();
         }
+
         public override bool IsStartElement(string localname)
         {
             this.IsCalled = true;
             return _wrappedreader.IsStartElement(localname);
         }
+
         public override bool IsStartElement(string name, string ns)
         {
             this.IsCalled = true;
             return _wrappedreader.IsStartElement(name, ns);
         }
+
         public override void ReadStartElement()
         {
             this.IsCalled = true;
             _wrappedreader.ReadStartElement();
         }
+
         public override void ReadStartElement(string name)
         {
             this.IsCalled = true;
             _wrappedreader.ReadStartElement(name);
         }
+
         public override void ReadStartElement(string localname, string ns)
         {
             this.IsCalled = true;
             _wrappedreader.ReadStartElement(localname, ns);
         }
+
         public override void ReadEndElement()
         {
             this.IsCalled = true;
             _wrappedreader.ReadEndElement();
         }
+
         public override bool ReadToFollowing(string name)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadToFollowing(name);
         }
+
         public override bool ReadToFollowing(string localName, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadToFollowing(localName, namespaceURI);
         }
+
         public override bool ReadToDescendant(string name)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadToDescendant(name);
         }
+
         public override bool ReadToDescendant(string localName, string namespaceURI)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadToDescendant(localName, namespaceURI);
         }
+
         public override bool ReadToNextSibling(string name)
         {
             this.IsCalled = true;
             return _wrappedreader.ReadToNextSibling(name);
         }
+
         public override bool ReadToNextSibling(string localName, string namespaceURI)
         {
             this.IsCalled = true;
@@ -573,6 +630,7 @@ namespace System.Xml.Tests
                 return _wrappedreader.NameTable;
             }
         }
+
         public override string LookupNamespace(string prefix)
         {
             this.IsCalled = true;
@@ -585,11 +643,13 @@ namespace System.Xml.Tests
             this.IsCalled = true;
             return _wrappedreader.ReadAttributeValue();
         }
+
         public override void ResolveEntity()
         {
             this.IsCalled = true;
             _wrappedreader.ResolveEntity();
         }
+
         public override bool CanResolveEntity
         {
             get

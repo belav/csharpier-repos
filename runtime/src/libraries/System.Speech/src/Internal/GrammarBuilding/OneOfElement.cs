@@ -13,7 +13,6 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Constructors
 
         internal OneOfElement() { }
-
         #endregion
 
         #region Internal Methods
@@ -48,7 +47,6 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return oneOf;
         }
-
         #endregion
 
         #region Internal Properties

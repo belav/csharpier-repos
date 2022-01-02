@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Utilities
 
             public T this[int index] => _list[index];
             public int Count => _list.Count;
+
             public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
         }
     }

@@ -9,9 +9,11 @@ namespace System.Globalization
         internal int era; // The value of the era.
         internal long ticks; // The time in ticks when the era starts
         internal int yearOffset; // The offset to Gregorian year when the era starts.
+
         // Gregorian Year = Era Year + yearOffset
         // Era Year = Gregorian Year - yearOffset
         internal int minEraYear; // Min year value in this era. Generally, this value is 1, but this may
+
         // be affected by the DateTime.MinValue;
         internal int maxEraYear; // Max year value in this era. (== the year length of the era + 1)
 

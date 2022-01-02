@@ -15,6 +15,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
     public class RegistrationBuilderAttributedOverrideUnitTests
     {
         public interface IContractA { }
+
         public interface IContractB { }
 
         public class AB : IContractA, IContractB { }

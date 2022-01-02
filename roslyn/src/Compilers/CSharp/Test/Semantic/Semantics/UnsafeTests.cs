@@ -1928,7 +1928,6 @@ class C : I
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "x")
             );
         }
-
         #endregion Unsafe regions
 
         #region Variables that need fixing
@@ -2690,7 +2689,6 @@ No, Parameter 'x' does not require fixing. It has an underlying symbol 'x'
                 return false;
             }
         }
-
         #endregion Variables that need fixing
 
         #region IsManagedType
@@ -3795,7 +3793,6 @@ public class C
                 return ((ILocalSymbol)model.GetDeclaredSymbol(decl)).Type;
             }
         }
-
         #endregion IsManagedType
 
         #region AddressOf operand kinds
@@ -4198,7 +4195,6 @@ enum Color
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "Color.Red").WithLocation(62, 19)
                 );
         }
-
         #endregion AddressOf operand kinds
 
         #region AddressOf diagnostics
@@ -4732,7 +4728,6 @@ public class Test
                 )
                 .VerifyDiagnostics();
         }
-
         #endregion AddressOf diagnostics
 
         #region AddressOf SemanticModel tests
@@ -4955,7 +4950,6 @@ unsafe class C
             Assert.Equal(type, typeInfo.ConvertedType);
             Assert.Equal(Conversion.Identity, conv);
         }
-
         #endregion AddressOf SemanticModel tests
 
         #region Dereference diagnostics
@@ -5061,7 +5055,6 @@ unsafe class C
                     Diagnostic(ErrorCode.ERR_UseDefViolation, "p").WithArguments("p")
                 );
         }
-
         #endregion Dereference diagnostics
 
         #region Dereference SemanticModel tests
@@ -5104,7 +5097,6 @@ unsafe class C
             Assert.Equal(Conversion.Identity, conv);
             Assert.Equal(SpecialType.System_Int32, type.SpecialType);
         }
-
         #endregion Dereference SemanticModel tests
 
         #region PointerMemberAccess diagnostics
@@ -5410,7 +5402,6 @@ unsafe struct S
                         .WithArguments("S.InstanceFieldLikeEvent")
                 );
         }
-
         #endregion PointerMemberAccess diagnostics
 
         #region PointerMemberAccess SemanticModel tests
@@ -5577,7 +5568,6 @@ struct S
             Assert.Equal(ConversionKind.Identity, callSummary.ImplicitConversion.Kind);
             Assert.Equal(0, callSummary.MethodGroup.Length);
         }
-
         #endregion PointerMemberAccess SemanticModel tests
 
         #region PointerElementAccess
@@ -5787,7 +5777,6 @@ unsafe class C
                 )
                 .VerifyDiagnostics();
         }
-
         #endregion PointerElementAccess diagnostics
 
         #region PointerElementAccess SemanticModel tests
@@ -5987,7 +5976,6 @@ unsafe class C
             Assert.Equal(ConversionKind.Identity, accessSummary.ImplicitConversion.Kind);
             Assert.Equal(0, accessSummary.MethodGroup.Length);
         }
-
         #endregion PointerElementAccess SemanticModel tests
 
         #region Pointer conversion tests
@@ -6563,7 +6551,6 @@ unsafe class C
             // NOTE: as in Dev10, there's a runtime error if you try to access an element.
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
         }
-
         #endregion Pointer conversion tests
 
         #region Pointer arithmetic tests
@@ -7058,7 +7045,6 @@ unsafe class C
                         .WithArguments("-", "int", "void**")
                 );
         }
-
         #endregion Pointer arithmetic tests
 
         #region Pointer comparison tests
@@ -7328,7 +7314,6 @@ unsafe class C
                         .WithArguments(">", "char*", "ulong")
                 );
         }
-
         #endregion Pointer comparison tests
 
         #region Fixed statement diagnostics
@@ -8077,7 +8062,6 @@ class Program
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "a").WithArguments("char[]")
                 );
         }
-
         #endregion Fixed statement diagnostics
 
         #region Fixed statement semantic model tests
@@ -8303,7 +8287,6 @@ unsafe class C
             Assert.Equal(voidPointerSymbol, summary2.ConvertedType.GetSymbol());
             Assert.Equal(Conversion.PointerToVoid, summary2.ImplicitConversion);
         }
-
         #endregion Fixed statement semantic model tests
 
         #region sizeof diagnostic tests
@@ -8564,7 +8547,6 @@ class Program
                     Diagnostic(ErrorCode.ERR_SizeofUnsafe, "sizeof(").WithArguments("?")
                 );
         }
-
         #endregion sizeof diagnostic tests
 
         #region sizeof semantic model tests
@@ -8783,7 +8765,6 @@ struct Outer
                 Assert.False(sizeOfSummary.ConstantValue.HasValue);
             }
         }
-
         #endregion sizeof semantic model tests
 
         #region stackalloc diagnostic tests
@@ -9400,7 +9381,6 @@ var p = stackalloc int[1];
                         .WithLocation(2, 1)
                 );
         }
-
         #endregion stackalloc diagnostic tests
 
         #region stackalloc semantic model tests
@@ -9476,7 +9456,6 @@ class C
             Assert.True(countSummary.ConstantValue.HasValue);
             Assert.Equal((short)20, countSummary.ConstantValue.Value);
         }
-
         #endregion stackalloc semantic model tests
 
         #region PointerTypes tests
@@ -9652,7 +9631,6 @@ public unsafe class B : A
             var comp = CreateCompilation(csharp, options: TestOptions.UnsafeDebugDll);
             comp.VerifyDiagnostics();
         }
-
         #endregion PointerTypes tests
 
         #region misc unsafe tests
@@ -10495,7 +10473,6 @@ public class Test
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&p").WithLocation(6, 24)
                 );
         }
-
         #endregion
 
         [Fact]

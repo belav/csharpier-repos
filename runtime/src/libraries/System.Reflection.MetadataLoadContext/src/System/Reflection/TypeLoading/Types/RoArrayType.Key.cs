@@ -35,6 +35,7 @@ namespace System.Reflection.TypeLoading
 
             public override bool Equals([NotNullWhen(true)] object? obj) =>
                 obj is Key other && Equals(other);
+
             public override int GetHashCode() => ElementType.GetHashCode() ^ Rank.GetHashCode();
         }
     }

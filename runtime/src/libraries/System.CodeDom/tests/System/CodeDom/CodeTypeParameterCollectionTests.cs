@@ -9,8 +9,10 @@ namespace System.CodeDom.Tests
         : CodeCollectionTestBase<CodeTypeParameterCollection, CodeTypeParameter>
     {
         protected override CodeTypeParameterCollection Ctor() => new CodeTypeParameterCollection();
+
         protected override CodeTypeParameterCollection CtorArray(CodeTypeParameter[] array) =>
             new CodeTypeParameterCollection(array);
+
         protected override CodeTypeParameterCollection CtorCollection(
             CodeTypeParameterCollection collection
         ) => new CodeTypeParameterCollection(collection);
@@ -21,6 +23,7 @@ namespace System.CodeDom.Tests
             CodeTypeParameterCollection collection,
             int index
         ) => collection[index];
+
         protected override void SetItem(
             CodeTypeParameterCollection collection,
             int index,
@@ -31,6 +34,7 @@ namespace System.CodeDom.Tests
             CodeTypeParameterCollection collection,
             CodeTypeParameter[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeTypeParameterCollection collection,
             CodeTypeParameterCollection value
@@ -56,6 +60,7 @@ namespace System.CodeDom.Tests
             CodeTypeParameterCollection collection,
             CodeTypeParameter value
         ) => collection.IndexOf(value);
+
         protected override bool Contains(
             CodeTypeParameterCollection collection,
             CodeTypeParameter value

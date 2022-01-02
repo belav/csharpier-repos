@@ -24,7 +24,6 @@ namespace System.Net.Http.Headers
         // Use UnvalidatedObjectCollection<T> since we may have multiple parameters with the same name.
         private UnvalidatedObjectCollection<NameValueHeaderValue>? _parameters;
         private string _dispositionType = null!;
-
         #endregion Fields
 
         #region Properties
@@ -127,7 +126,6 @@ namespace System.Net.Http.Headers
                 }
             }
         }
-
         #endregion Properties
 
         #region Constructors
@@ -150,7 +148,6 @@ namespace System.Net.Http.Headers
             CheckDispositionTypeFormat(dispositionType, nameof(dispositionType));
             _dispositionType = dispositionType;
         }
-
         #endregion Constructors
 
         #region Overloads
@@ -191,7 +188,6 @@ namespace System.Net.Http.Headers
         {
             return new ContentDispositionHeaderValue(this);
         }
-
         #endregion Overloads
 
         #region Parsing
@@ -339,7 +335,6 @@ namespace System.Net.Http.Headers
                 );
             }
         }
-
         #endregion Parsing
 
         #region Helpers

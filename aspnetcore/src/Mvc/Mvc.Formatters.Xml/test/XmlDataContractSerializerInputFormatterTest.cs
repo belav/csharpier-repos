@@ -41,6 +41,7 @@ public class XmlDataContractSerializerInputFormatterTest
     {
         [DataMember]
         public int SampleInt { get; set; }
+
         [DataMember]
         public string sampleString;
         public DateTime SampleDate { get; set; }
@@ -51,6 +52,7 @@ public class XmlDataContractSerializerInputFormatterTest
     {
         [DataMember]
         public string SampleString { get; set; }
+
         [DataMember]
         public TestLevelOne TestOne { get; set; }
     }
@@ -882,6 +884,7 @@ public class XmlDataContractSerializerInputFormatterTest
     private class VerifyDisposeFileBufferingReadStream : FileBufferingReadStream
     {
         public bool Disposed { get; private set; }
+
         public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
             : base(inner, memoryThreshold) { }
 

@@ -56,7 +56,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Single(modelBuilder.Model.GetEntityTypes());
         }
-
         #endregion
 
         #region OwnedAttribute
@@ -92,7 +91,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ).Message
             );
         }
-
         #endregion
 
         #region KeylessAttribute
@@ -142,7 +140,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.True(entityBuilder.Metadata.IsKeyless);
             Assert.Null(entityBuilder.Metadata.FindPrimaryKey());
         }
-
         #endregion
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)

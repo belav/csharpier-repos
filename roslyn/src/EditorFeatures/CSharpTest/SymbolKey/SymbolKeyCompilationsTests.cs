@@ -280,7 +280,6 @@ class C
 
             ResolveAndVerifySymbolList(members1, members2, comp1);
         }
-
         #endregion
 
         #region "Change to symbol"

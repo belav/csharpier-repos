@@ -49,6 +49,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
 
         protected virtual void EnsureRunning() { }
+
         protected void RequiresRunning()
         {
             EnsureRunning();

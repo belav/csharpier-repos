@@ -430,7 +430,6 @@ namespace System.Security.AccessControl
         {
             get { return this.needToRevert; }
         }
-
         #endregion
 
         private unsafe void ToggleState(bool enable)

@@ -28,7 +28,6 @@ namespace System.Speech.Internal.Synthesis
             _speakInfo = speakInfo;
             _resourceLoader = resourceLoader;
         }
-
         #endregion
 
         #region Internal Methods
@@ -349,7 +348,6 @@ namespace System.Speech.Internal.Synthesis
         public void EndElement() { }
 
         public void EndSpeakElement() { }
-
         #endregion
 
         #region Internal Properties
@@ -358,7 +356,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return _ssmlText; }
         }
-
         #endregion
 
         #region Private Methods
@@ -379,7 +376,6 @@ namespace System.Speech.Internal.Synthesis
             _speakInfo.AddText((TTSVoice)voice, new TextFragment(fragmentState, text));
             fragmentState.Action = action;
         }
-
         #endregion
 
         #region Private Fields

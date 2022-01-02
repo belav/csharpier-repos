@@ -720,6 +720,7 @@ namespace System.Xml
             Debug.Assert(readerAsNSResolver != null);
             this.readerAsNSResolver = readerAsNSResolver;
         }
+
         //
         // IXmlNamespaceResolver
         //

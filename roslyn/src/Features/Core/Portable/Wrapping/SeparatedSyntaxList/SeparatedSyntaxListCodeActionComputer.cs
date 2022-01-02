@@ -195,7 +195,6 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 result.Add(Edit.DeleteBetween(_listItems.Last(), _listSyntax.GetLastToken()));
                 return result.ToImmutable();
             }
-
             #endregion
 
             #region wrap long line
@@ -333,7 +332,6 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
 
                 return result.ToImmutable();
             }
-
             #endregion
 
             #region wrap every

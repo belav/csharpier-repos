@@ -3409,7 +3409,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration is TypeDeclarationSyntax typeDeclaration
                 ? typeDeclaration.WithBaseList(baseList)
                 : declaration;
-
         #endregion
 
         #region Remove, Replace, Insert
@@ -3871,7 +3870,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         internal override bool IsRegularOrDocComment(SyntaxTrivia trivia) =>
             trivia.IsRegularOrDocComment();
-
         #endregion
 
         #region Statements and Expressions

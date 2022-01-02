@@ -5266,6 +5266,7 @@ public partial class C
                 // Console.WriteLine();
             }
         }
+
         private static void GetExpressionSyntax(SyntaxNode node, List<ExpressionSyntax> exprSynList)
         {
             if (node is ExpressionSyntax)

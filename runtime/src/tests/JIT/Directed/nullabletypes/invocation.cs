@@ -12,6 +12,7 @@ interface BaseInter
 {
     int Foo();
 }
+
 interface GenInter<T>
 {
     int Foo();
@@ -55,6 +56,7 @@ struct CloseGenImplGenAndImplStruct<T> : BaseInter, GenInter<int>
     {
         return 0x1001;
     }
+
     int BaseInter.Foo()
     {
         return 0x0110;

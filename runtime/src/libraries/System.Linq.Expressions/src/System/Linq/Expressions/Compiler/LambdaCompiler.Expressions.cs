@@ -206,7 +206,6 @@ namespace System.Linq.Expressions.Compiler
                 PopLabelBlock(_labelBlock.Kind);
             }
         }
-
         #endregion
 
         #region InvocationExpression
@@ -268,7 +267,6 @@ namespace System.Linq.Expressions.Compiler
             // 4. Emit write-backs if needed
             EmitWriteBack(wb);
         }
-
         #endregion
 
         #region IndexExpression
@@ -394,7 +392,6 @@ namespace System.Linq.Expressions.Compiler
                 _ilg.Emit(OpCodes.Call, TypeUtils.GetArraySetMethod(arrayType));
             }
         }
-
         #endregion
 
         #region MethodCallExpression
@@ -625,7 +622,6 @@ namespace System.Linq.Expressions.Compiler
                 }
             }
         }
-
         #endregion
 
         private void EmitConstantExpression(Expression expr)
@@ -1200,7 +1196,6 @@ namespace System.Linq.Expressions.Compiler
             Debug.Assert(member is FieldInfo || member is PropertyInfo);
             return member is FieldInfo fi ? fi.FieldType : (member as PropertyInfo)!.PropertyType;
         }
-
         #endregion
 
         #region Expression helpers

@@ -1879,27 +1879,35 @@ namespace System.Numerics.Tests
             {
                 get { return L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector; }
             }
+
             public class Level0
             {
                 public readonly Level1 L1 = new Level1();
+
                 public class Level1
                 {
                     public readonly Level2 L2 = new Level2();
+
                     public class Level2
                     {
                         public readonly Level3 L3 = new Level3();
+
                         public class Level3
                         {
                             public readonly Level4 L4 = new Level4();
+
                             public class Level4
                             {
                                 public readonly Level5 L5 = new Level5();
+
                                 public class Level5
                                 {
                                     public readonly Level6 L6 = new Level6();
+
                                     public class Level6
                                     {
                                         public readonly Level7 L7 = new Level7();
+
                                         public class Level7
                                         {
                                             public Vector4 EmbeddedVector = new Vector4(
@@ -1944,26 +1952,31 @@ namespace System.Numerics.Tests
             {
                 get { return L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector; }
             }
+
             public struct Level0
             {
                 private float _buffer0,
                     _buffer1;
                 public Level1 L1;
                 private float _buffer2;
+
                 public struct Level1
                 {
                     private float _buffer0,
                         _buffer1;
                     public Level2 L2;
                     private byte _buffer2;
+
                     public struct Level2
                     {
                         public Level3 L3;
                         private float _buffer0;
                         private byte _buffer1;
+
                         public struct Level3
                         {
                             public Level4 L4;
+
                             public struct Level4
                             {
                                 private float _buffer0;
@@ -1971,16 +1984,19 @@ namespace System.Numerics.Tests
                                 private long _buffer1;
                                 private byte _buffer2;
                                 private double _buffer3;
+
                                 public struct Level5
                                 {
                                     private byte _buffer0;
                                     public Level6 L6;
+
                                     public struct Level6
                                     {
                                         private byte _buffer0;
                                         public Level7 L7;
                                         private byte _buffer1,
                                             _buffer2;
+
                                         public struct Level7
                                         {
                                             public Vector4 EmbeddedVector;

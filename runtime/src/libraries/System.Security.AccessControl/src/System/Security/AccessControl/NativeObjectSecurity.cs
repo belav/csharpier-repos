@@ -32,7 +32,6 @@ namespace System.Security.AccessControl
         private readonly uint ProtectedSystemAcl = 0x40000000;
         private readonly uint UnprotectedDiscretionaryAcl = 0x20000000;
         private readonly uint UnprotectedSystemAcl = 0x10000000;
-
         #endregion
 
         #region Delegates
@@ -43,7 +42,6 @@ namespace System.Security.AccessControl
             SafeHandle? handle,
             object? context
         );
-
         #endregion
 
         #region Constructors
@@ -139,7 +137,6 @@ namespace System.Security.AccessControl
             SafeHandle? handle,
             AccessControlSections includeSections
         ) : this(isContainer, resourceType, handle, includeSections, null, null) { }
-
         #endregion
 
         #region Private Methods
@@ -445,7 +442,6 @@ namespace System.Security.AccessControl
                 WriteUnlock();
             }
         }
-
         #endregion
 
         #region Protected Methods

@@ -40,7 +40,6 @@ namespace System.Threading.Tasks.Tests
         private OrderablePartitioner<int> _partitioner = null;
         private OrderablePartitioner<Tuple<int, int>> _rangePartitioner = null;
         private ParallelOptions _parallelOption;
-
         #endregion
 
         public ParallelForTest(TestParameters parameters)
@@ -325,7 +324,6 @@ namespace System.Threading.Tasks.Tests
                 }
             }
         }
-
         #endregion
 
         #region ParallelForeach Overloads - with partitioner and without
@@ -604,7 +602,6 @@ namespace System.Threading.Tasks.Tests
                 );
             }
         }
-
         #endregion
 
         #region Workloads
@@ -896,7 +893,6 @@ namespace System.Threading.Tasks.Tests
 
             return WorkWithIndexAndLocal(i, state, index, threadLocalValue);
         }
-
         #endregion
 
         #region Helper Methods
@@ -1120,6 +1116,7 @@ namespace System.Threading.Tasks.Tests
             }
             return null;
         }
+
         public static OrderablePartitioner<Tuple<int, int>> Create(
             PartitionerType partitionerName,
             int from,

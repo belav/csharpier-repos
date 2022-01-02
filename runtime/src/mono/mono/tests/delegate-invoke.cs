@@ -27,6 +27,7 @@ public struct Foo
     public int x,
         y,
         z;
+
     public Foo(int i)
     {
         x = y = z = i;
@@ -42,22 +43,27 @@ public class Driver
     {
         return new Foo(10);
     }
+
     public Foo M1()
     {
         return new Foo(this == null ? 10 : 20);
     }
+
     public static Foo M2(string x)
     {
         return new Foo(30);
     }
+
     public static Foo M2i(int x)
     {
         return new Foo(40);
     }
+
     public static Foo M3(object x)
     {
         return new Foo(50);
     }
+
     public virtual Foo M4()
     {
         return new Foo(this == null ? 60 : 70);

@@ -5,11 +5,13 @@ class T
 {
     int v;
     int a;
+
     public T()
     {
         v = 1;
         // note: a not modified
     }
+
     static int Main()
     {
         Type t = typeof(T);

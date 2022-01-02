@@ -22,6 +22,7 @@ namespace System.Runtime.InteropServices.ComTypes
                 string[] rgelt,
             IntPtr pceltFetched
         );
+
         [PreserveSig]
         int Skip(int celt);
         void Reset();

@@ -112,6 +112,7 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// Creates a new version of this script with the specified options.
         /// </summary>
         public Script WithOptions(ScriptOptions options) => WithOptionsInternal(options);
+
         internal abstract Script WithOptionsInternal(ScriptOptions options);
 
         /// <summary>

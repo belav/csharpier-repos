@@ -9,12 +9,15 @@ namespace System.IO
     public partial class ErrorEventArgs : System.EventArgs
     {
         public ErrorEventArgs(System.Exception exception) { }
+
         public virtual System.Exception GetException()
         {
             throw null;
         }
     }
+
     public delegate void ErrorEventHandler(object sender, System.IO.ErrorEventArgs e);
+
     public partial class FileSystemEventArgs : System.EventArgs
     {
         public FileSystemEventArgs(
@@ -22,6 +25,7 @@ namespace System.IO
             string directory,
             string? name
         ) { }
+
         public System.IO.WatcherChangeTypes ChangeType
         {
             get { throw null; }
@@ -35,14 +39,19 @@ namespace System.IO
             get { throw null; }
         }
     }
+
     public delegate void FileSystemEventHandler(object sender, System.IO.FileSystemEventArgs e);
+
     public partial class FileSystemWatcher
         : System.ComponentModel.Component,
           System.ComponentModel.ISupportInitialize
     {
         public FileSystemWatcher() { }
+
         public FileSystemWatcher(string path) { }
+
         public FileSystemWatcher(string path, string filter) { }
+
         public bool EnableRaisingEvents
         {
             get { throw null; }
@@ -72,6 +81,7 @@ namespace System.IO
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorAttribute(
             "System.Diagnostics.Design.FSWPathEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
             "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
@@ -116,20 +126,30 @@ namespace System.IO
             add { }
             remove { }
         }
+
         public void BeginInit() { }
+
         protected override void Dispose(bool disposing) { }
+
         public void EndInit() { }
+
         protected void OnChanged(System.IO.FileSystemEventArgs e) { }
+
         protected void OnCreated(System.IO.FileSystemEventArgs e) { }
+
         protected void OnDeleted(System.IO.FileSystemEventArgs e) { }
+
         protected void OnError(System.IO.ErrorEventArgs e) { }
+
         protected void OnRenamed(System.IO.RenamedEventArgs e) { }
+
         public System.IO.WaitForChangedResult WaitForChanged(
             System.IO.WatcherChangeTypes changeType
         )
         {
             throw null;
         }
+
         public System.IO.WaitForChangedResult WaitForChanged(
             System.IO.WatcherChangeTypes changeType,
             int timeout
@@ -138,16 +158,21 @@ namespace System.IO
             throw null;
         }
     }
+
     public partial class InternalBufferOverflowException : System.SystemException
     {
         public InternalBufferOverflowException() { }
+
         protected InternalBufferOverflowException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public InternalBufferOverflowException(string? message) { }
+
         public InternalBufferOverflowException(string? message, System.Exception? inner) { }
     }
+
     [System.FlagsAttribute]
     public enum NotifyFilters
     {
@@ -160,6 +185,7 @@ namespace System.IO
         CreationTime = 64,
         Security = 256,
     }
+
     public partial class RenamedEventArgs : System.IO.FileSystemEventArgs
     {
         public RenamedEventArgs(
@@ -168,6 +194,7 @@ namespace System.IO
             string? name,
             string? oldName
         ) : base(default(System.IO.WatcherChangeTypes), default(string), default(string)) { }
+
         public string OldFullPath
         {
             get { throw null; }
@@ -177,7 +204,9 @@ namespace System.IO
             get { throw null; }
         }
     }
+
     public delegate void RenamedEventHandler(object sender, System.IO.RenamedEventArgs e);
+
     public partial struct WaitForChangedResult
     {
         private object _dummy;
@@ -203,6 +232,7 @@ namespace System.IO
             set { }
         }
     }
+
     [System.FlagsAttribute]
     public enum WatcherChangeTypes
     {

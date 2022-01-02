@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         public readonly TypeSymbol? Type;
         public readonly NullableFlowState State;
+
         [MemberNotNullWhen(false, nameof(Type))]
         public bool HasNullType => Type is null;
         public bool MayBeNull => State == NullableFlowState.MaybeNull;

@@ -16,10 +16,12 @@ struct BigCopy
         l2,
         l3;
     public object gc;
+
     public override string ToString()
     {
         return string.Format("l1 = {0}, l2 = {1}, l3 = {2}", l1, l2, l3);
     }
+
     public static BigCopy operator +(BigCopy c, long l)
     {
         c.l1 += l;

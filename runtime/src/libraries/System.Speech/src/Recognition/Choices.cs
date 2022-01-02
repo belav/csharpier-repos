@@ -27,7 +27,6 @@ namespace System.Speech.Recognition
 
             Add(alternateChoices);
         }
-
         #endregion
 
         #region Public Methods
@@ -55,11 +54,11 @@ namespace System.Speech.Recognition
                 _oneOf.Items.Add(new ItemElement(alternateChoice));
             }
         }
+
         public GrammarBuilder ToGrammarBuilder()
         {
             return new GrammarBuilder(this);
         }
-
         #endregion
 
         #region Internal Properties
@@ -68,7 +67,6 @@ namespace System.Speech.Recognition
         {
             get { return _oneOf; }
         }
-
         #endregion
 
         #region Private Fields

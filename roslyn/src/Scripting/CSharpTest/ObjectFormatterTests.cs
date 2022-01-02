@@ -136,7 +136,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
             string str = s_formatter.FormatObject(DO_NOT_ADD_TO_WATCH_WINDOW, SingleLineOptions);
             Assert.Equal(@"RecursiveRootHidden { A=0, B=0 }", str);
         }
-
         #endregion
 
         [Fact]
@@ -548,6 +547,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
                 (_start, _end) = (start, start + count);
 
             public IEnumerator<int> GetEnumerator() => null;
+
             IEnumerator IEnumerable.GetEnumerator() => null;
         }
 

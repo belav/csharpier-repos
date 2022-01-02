@@ -29,6 +29,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XComment("Comment"), new XText("\t") },
             new object[] { new XText(" "), XElement.Parse(@"<a></a>") }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode toReplace, XNode newValue)
         {
@@ -68,6 +69,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XComment("Comment"), new XText("\t") },
             new object[] { new XText("\t"), XElement.Parse(@"<a></a>") }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode toReplace, XNode newValue)
         {
@@ -113,6 +115,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XProcessingInstruction("PI", "Data") },
             new object[] { new XComment("Comment") }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode toReplace)
         {
@@ -150,6 +153,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XComment("Comment") },
             new object[] { new XText("") }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode toReplace)
         {
@@ -280,6 +284,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray()
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXAttributeVariationParams))]
         public void ExecuteXAttributeVariation(XAttribute[] content)
         {
@@ -357,6 +362,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XObject[] toReplace)
         {

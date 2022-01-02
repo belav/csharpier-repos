@@ -1020,7 +1020,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return map;
         }
-
         #endregion
 
         #region Syntax Analysis
@@ -2484,7 +2483,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 && editMap.TryGetValue(node, out var parentEdit)
                 && parentEdit == editKind;
         }
-
         #endregion
 
         #region Rude Edits around Active Statement
@@ -2757,7 +2755,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return list;
         }
-
         #endregion
 
         #region Trivia Analysis
@@ -3122,7 +3119,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return result;
         }
-
         #endregion
 
         #region Semantic Analysis
@@ -6295,7 +6291,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return false;
         }
-
         #endregion
 
         private Func<SyntaxNode, SyntaxNode?> CreateSyntaxMapForEquivalentNodes(
@@ -6778,7 +6773,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     && newSymbol.DeclaringSyntaxReferences.Length > 1
                     && newSymbol.DeclaringSyntaxReferences.Any(IsNotInDocument, newSyntaxTree);
         }
-
         #endregion
 
         #region Lambdas and Closures
@@ -7939,7 +7933,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return reverseMap.TryGetValue(newScopeOpt, out var mappedScope)
                 && mappedScope == oldScopeOpt;
         }
-
         #endregion
 
         #region State Machines
@@ -7984,7 +7977,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 );
             }
         }
-
         #endregion
 
         #endregion
@@ -8081,7 +8073,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
         }
-
         #endregion
 
         #region Testing

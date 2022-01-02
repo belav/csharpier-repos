@@ -93,7 +93,6 @@ namespace System.Collections.Immutable
             {
                 get { return false; }
             }
-
             #endregion
 
             /// <summary>
@@ -227,7 +226,6 @@ namespace System.Collections.Immutable
                 actualValue = equalValue;
                 return false;
             }
-
             #endregion
 
             #region ISet<T> Methods
@@ -390,7 +388,6 @@ namespace System.Collections.Immutable
                 var result = ImmutableHashSet<T>.Union(other, this.Origin);
                 this.Apply(result);
             }
-
             #endregion
 
             #region ICollection<T> Members
@@ -419,7 +416,6 @@ namespace System.Collections.Immutable
                     array[arrayIndex++] = item;
                 }
             }
-
             #endregion
 
             #region IEnumerable<T> Members
@@ -445,7 +441,6 @@ namespace System.Collections.Immutable
             {
                 return this.GetEnumerator();
             }
-
             #endregion
 
             /// <summary>

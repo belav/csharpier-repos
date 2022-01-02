@@ -23,26 +23,31 @@ namespace AutoGen
     {
         public sbyte f0;
         public sbyte f1;
+
         public VType1(int v)
         {
             f0 = ((sbyte)(v));
             f1 = ((sbyte)(v));
         }
     }
+
     public struct VType2
     {
         public long f0;
         public long f1;
+
         public VType2(int v)
         {
             f0 = ((long)(v));
             f1 = ((long)(v));
         }
     }
+
     public class Program
     {
         private int[] _callDepthTable;
         private int[] _paramValueTable;
+
         public Program()
         {
             _callDepthTable = new int[6];
@@ -286,6 +291,7 @@ namespace AutoGen
             }
             return 100;
         }
+
         public static int Main()
         {
             Program prog = new Program();

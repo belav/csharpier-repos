@@ -289,6 +289,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         private WrapperForIListPrivateConstructor() { }
     }
+
     public class WrapperForIListInternalConstructor : WrapperForIList
     {
         internal WrapperForIListInternalConstructor() { }

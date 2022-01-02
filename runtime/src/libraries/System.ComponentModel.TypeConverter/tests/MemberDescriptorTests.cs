@@ -3472,40 +3472,48 @@ namespace System.ComponentModel.Tests
         {
             public static void PublicStaticMethodParameterlessReturnVoid() =>
                 throw new NotImplementedException();
+
             public static int PublicStaticMethodParameterlessReturnInt() =>
                 throw new NotImplementedException();
 
             public static void PublicStaticMethodParametersReturnVoid(int value) =>
                 throw new NotImplementedException();
+
             public static int PublicStaticMethodParametersReturnInt(int value) =>
                 throw new NotImplementedException();
 
             private static void PrivateStaticMethodParameterlessReturnVoid() =>
                 throw new NotImplementedException();
+
             private static int PrivateStaticMethodParameterlessReturnInt() =>
                 throw new NotImplementedException();
 
             private static void PrivateStaticMethodParametersReturnVoid(int value) =>
                 throw new NotImplementedException();
+
             private static int PrivateStaticMethodParametersReturnInt(int value) =>
                 throw new NotImplementedException();
 
             public void PublicMethodParameterlessReturnVoid() =>
                 throw new NotImplementedException();
+
             public int PublicMethodParameterlessReturnInt() => throw new NotImplementedException();
 
             public void PublicMethodParametersReturnVoid(int value) =>
                 throw new NotImplementedException();
+
             public int PublicMethodParametersReturnInt(int value) =>
                 throw new NotImplementedException();
 
             private void PrivateMethodParameterlessReturnVoid() =>
                 throw new NotImplementedException();
+
             private int PrivateMethodParameterlessReturnInt() =>
                 throw new NotImplementedException();
 
             private void PrivateMethodParametersReturnVoid(int value) =>
                 throw new NotImplementedException();
+
             private int PrivateMethodParametersReturnInt(int value) =>
                 throw new NotImplementedException();
         }

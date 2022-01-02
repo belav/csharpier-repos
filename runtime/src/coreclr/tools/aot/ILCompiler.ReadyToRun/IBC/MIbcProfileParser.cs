@@ -30,6 +30,7 @@ namespace ILCompiler.IBC
             {
                 _ilBody = ilBody;
             }
+
             TypeSystemEntityOrUnknown IPgoSchemaDataLoader<TypeSystemEntityOrUnknown>.TypeFromLong(
                 long token
             )

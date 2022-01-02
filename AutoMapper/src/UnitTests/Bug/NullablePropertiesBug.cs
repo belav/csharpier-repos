@@ -9,6 +9,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int? A { get; set; }
         }
+
         public class Target
         {
             public int? A { get; set; }

@@ -90,7 +90,6 @@ namespace System.Collections.Immutable
             {
                 get { return false; }
             }
-
             #endregion
 
             /// <summary>
@@ -406,7 +405,6 @@ namespace System.Collections.Immutable
             {
                 return this.GetEnumerator();
             }
-
             #endregion
 
             /// <summary>

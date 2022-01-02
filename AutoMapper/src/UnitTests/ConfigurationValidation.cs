@@ -14,20 +14,25 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
             {
                 MyComplexMember = myComplexMember;
             }
+
             public ComplexType MyComplexMember { get; }
         }
+
         public class Source
         {
             public string MyComplexMember { get; set; }
         }
+
         public class ComplexType
         {
             public int SomeMember { get; }
+
             private ComplexType(int someMember)
             {
                 SomeMember = someMember;
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -56,10 +61,12 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         {
             public string Foo { get; set; }
         }
+
         public class B
         {
             public C Foo { get; set; }
         }
+
         public class C { }
 
         protected override MapperConfiguration Configuration =>
@@ -74,10 +81,12 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         {
             public string Foo { get; set; }
         }
+
         public class B
         {
             public C Foo { get; set; }
         }
+
         public class C { }
 
         protected override MapperConfiguration Configuration =>
@@ -127,6 +136,7 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
             {
                 Value = blarg;
             }
+
             public int Value { get; set; }
         }
 
@@ -147,12 +157,14 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         public class Source
         {
         }
+
         public class Dest
         {
             public Dest(int value)
             {
                 Value = value;
             }
+
             public int Value { get; }
         }
 
@@ -336,16 +348,19 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         {
             public string Value { get; set; }
         }
+
         class Destination
         {
             public string OtherValue { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
                     c.CreateMap<Source, Destination>(MemberList.Source)
                         .ForMember(d => d.OtherValue, o => o.MapFrom(s => s.Value ?? ""))
             );
+
         [Fact]
         public void Should_be_ignored() =>
             new Action(
@@ -675,6 +690,7 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
             typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
                 () => AssertConfigurationIsValid("Good")
             );
+
         [Fact]
         public void Should_throw_when_profile_name_does_not_exist() =>
             typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(
@@ -721,6 +737,7 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
     public class When_testing_a_dto_with_value_specified_members : NonValidatingSpecBase
     {
         public class Source { }
+
         public class Destination
         {
             public int Value { get; set; }
@@ -852,6 +869,7 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
                         .ForMember(d => d.Details, o => o.MapFrom<DetailsValueResolver>());
                 }
             );
+
         public class DetailsValueResolver
             : IValueResolver<Query, Command, List<KeyValuePair<string, string>>>
         {
@@ -867,6 +885,7 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
                     .ToList();
             }
         }
+
         public class Query
         {
             public List<int> Details { get; set; }

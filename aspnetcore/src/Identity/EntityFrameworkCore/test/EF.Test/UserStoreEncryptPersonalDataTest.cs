@@ -113,9 +113,11 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
         [ProtectedPersonalData]
         public string PersonalData1 { get; set; }
         public string NonPersonalData1 { get; set; }
+
         [ProtectedPersonalData]
         public string PersonalData2 { get; set; }
         public string NonPersonalData2 { get; set; }
+
         [PersonalData]
         public string SafePersonalData { get; set; }
     }

@@ -13,34 +13,42 @@ namespace AutoMapper.UnitTests
         {
             public FlowNode[] Nodes;
         }
+
         class FlowNode
         {
         }
+
         class FlowStep : FlowNode
         {
             public FlowNode Next;
         }
+
         class FlowDecision : FlowNode
         {
             public FlowNode True;
             public FlowNode False;
         }
+
         class FlowSwitch<T> : FlowNode
         {
             public IDictionary<T, object> Connections;
         }
+
         class FlowChartModel
         {
             public FlowNodeModel[] Nodes;
         }
+
         class FlowNodeModel
         {
             public Connection[] Connections;
         }
+
         class Connection
         {
             public FlowNodeModel Node;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -65,6 +73,7 @@ namespace AutoMapper.UnitTests
                         .ForMember("Node", o => o.MapFrom("Key"));
                 }
             );
+
         [Fact]
         public void Should_map_ok()
         {
@@ -75,6 +84,7 @@ namespace AutoMapper.UnitTests
             var dest = Map<FlowChartModel>(source);
         }
     }
+
     public class When_the_source_has_cyclical_references_with_dynamic_map : AutoMapperSpecBase
     {
         public class CDataTypeModel<T>
@@ -82,33 +92,39 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
             public List<CFieldDefinitionModel<T>> FieldDefinitionList { get; set; }
         }
+
         public class CDataTypeDTO<T>
         {
             public string Name { get; set; }
             public List<CFieldDefinitionDTO<T>> FieldDefinitionList { get; set; }
         }
+
         public class CFieldDefinitionModel<T>
         {
             public string Name { get; set; }
             public CDataTypeModel<T> DataType { get; set; }
             public CComponentDefinitionModel<T> ComponentDefinition { get; set; }
         }
+
         public class CFieldDefinitionDTO<T>
         {
             public string Name { get; set; }
             public CDataTypeDTO<T> DataType { get; set; }
             public CComponentDefinitionDTO<T> ComponentDefinition { get; set; }
         }
+
         public class CComponentDefinitionModel<T>
         {
             public string Name { get; set; }
             public List<CFieldDefinitionModel<T>> FieldDefinitionList { get; set; }
         }
+
         public class CComponentDefinitionDTO<T>
         {
             public string Name { get; set; }
             public List<CFieldDefinitionDTO<T>> FieldDefinitionList { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>

@@ -133,6 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
     }
 

@@ -15,8 +15,10 @@ using Xunit;
 
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
+
 #endif
 
 public class ConnectionMiddlewareTests : LoggedTest

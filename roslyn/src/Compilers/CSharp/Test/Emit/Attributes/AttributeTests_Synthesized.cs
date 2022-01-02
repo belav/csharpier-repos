@@ -897,7 +897,6 @@ internal class C1<T1>
             var typeParam = c2.TypeParameters.Single();
             Assert.Equal(new[] { "Attr" }, GetAttributeNames(typeParam.GetAttributes()));
         }
-
         #endregion
 
         #region CompilationRelaxationsAttribute, RuntimeCompatibilityAttribute, DebuggableAttribute

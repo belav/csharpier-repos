@@ -130,7 +130,6 @@ namespace System.Collections.Immutable
         {
             get { return _root.Count; }
         }
-
         #endregion
 
         #region ISortKeyCollection<T> Properties
@@ -142,7 +141,6 @@ namespace System.Collections.Immutable
         {
             get { return _comparer; }
         }
-
         #endregion
 
         /// <summary>
@@ -174,7 +172,6 @@ namespace System.Collections.Immutable
         {
             return ref _root.ItemRef(index);
         }
-
         #endregion
 
         #region Public methods
@@ -603,7 +600,6 @@ namespace System.Collections.Immutable
         {
             return _root.IndexOf(item, _comparer);
         }
-
         #endregion
 
         #region IImmutableSet<T> Members
@@ -673,7 +669,6 @@ namespace System.Collections.Immutable
         {
             return this.Union(other);
         }
-
         #endregion
 
         #region ISet<T> Members
@@ -717,7 +712,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection<T> members
@@ -761,7 +755,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region IList<T> methods
@@ -790,7 +783,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region IList properties
@@ -813,7 +805,6 @@ namespace System.Collections.Immutable
         {
             get { return true; }
         }
-
         #endregion
 
         #region ICollection Properties
@@ -839,7 +830,6 @@ namespace System.Collections.Immutable
                 return true;
             }
         }
-
         #endregion
 
         #region IList methods
@@ -934,7 +924,6 @@ namespace System.Collections.Immutable
             get { return this[index]; }
             set { throw new NotSupportedException(); }
         }
-
         #endregion
 
         #region ICollection Methods
@@ -948,7 +937,6 @@ namespace System.Collections.Immutable
         {
             _root.CopyTo(array, index);
         }
-
         #endregion
 
         #region IEnumerable<T> Members
@@ -963,7 +951,6 @@ namespace System.Collections.Immutable
         {
             return this.IsEmpty ? Enumerable.Empty<T>().GetEnumerator() : this.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -978,7 +965,6 @@ namespace System.Collections.Immutable
         {
             return this.GetEnumerator();
         }
-
         #endregion
 
         /// <summary>

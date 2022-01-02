@@ -114,7 +114,6 @@ public class MvcFactsTest
         // Assert
         Assert.True(isController);
     }
-
     #endregion
 
     #region IsControllerAction

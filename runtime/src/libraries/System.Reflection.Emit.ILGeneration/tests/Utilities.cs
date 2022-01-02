@@ -43,10 +43,15 @@ namespace System.Reflection.Emit.Tests
         public static int StaticReadonlyField = 4;
 
         public TestAttribute() { }
+
         public TestAttribute(int i) { }
+
         public TestAttribute(object o) { }
+
         public TestAttribute(int i, bool b) { }
+
         private TestAttribute(int i, int j, int k) { }
+
         static TestAttribute() { }
 
         public TestAttribute(string getOnlyString, int getOnlyInt32)
@@ -119,6 +124,7 @@ namespace System.Reflection.Emit.Tests
             }
             return properties;
         }
+
         public static AssemblyBuilder DynamicAssembly(string name = "TestAssembly")
         {
             AssemblyName assemblyName = new AssemblyName(name);

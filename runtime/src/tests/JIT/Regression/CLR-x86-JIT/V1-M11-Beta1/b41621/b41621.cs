@@ -45,6 +45,7 @@ namespace Test
                 new AA().Method1(param1, new long[4], new ulong[4], new BB().m_uField2)
             );
         }
+
         static int Main()
         {
             try

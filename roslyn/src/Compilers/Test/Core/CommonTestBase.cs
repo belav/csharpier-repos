@@ -291,7 +291,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             );
             return ModuleMetadata.CreateFromImage(assemblyBytes).GetReference();
         }
-
         #endregion
 
         #region Compilation Creation Helpers
@@ -592,7 +591,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public static string WithWindowsLineBreaks(string source) =>
             source.Replace(Environment.NewLine, "\r\n");
-
         #endregion
 
         #region IL Verification
@@ -603,7 +601,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IReadOnlyDictionary<int, string> markers,
             bool areLocalsZeroed
         );
-
         #endregion
 
         #region Other Helpers
@@ -647,7 +644,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 peModule.LookupTopLevelMetadataType(ref name).DeclaredAccessibility
             );
         }
-
         #endregion
 
         #region Metadata Validation
@@ -683,7 +679,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 ExpectedSignature = expectedSignature
             };
         }
-
         #endregion
 
         #region Operation Test Helpers
@@ -836,7 +831,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 node = node.Parent;
             }
         }
-
         #endregion
 
         #region Theory Helpers

@@ -38,7 +38,6 @@ namespace System.Speech.Synthesis
             get { return _word; }
             internal set { _word = value; }
         }
-
         #endregion
 
         #region Private Fields

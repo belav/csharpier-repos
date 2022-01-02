@@ -241,7 +241,6 @@ namespace System.Net.Sockets.Tests
             Assert.Null(element.FilePath);
             Assert.Null(element.FileStream);
         }
-
         #endregion Buffer
 
         #region Memory
@@ -324,7 +323,6 @@ namespace System.Net.Sockets.Tests
             Assert.Null(element.FilePath);
             Assert.Null(element.FileStream);
         }
-
         #endregion Memory
 
         #region File
@@ -647,7 +645,6 @@ namespace System.Net.Sockets.Tests
             Assert.False(element.EndOfPacket);
             Assert.Equal("SomeFileName", element.FilePath);
         }
-
 #endregion File
 
 #region FileStream

@@ -71,6 +71,7 @@ class B : IFace<B.C.D>
             // In Dev10, there was an error - ErrorCode.ERR_CircularBase at (4,7)
             Assert.Equal(0, comp.GetDiagnostics().Count());
         }
+
         [
             WorkItem(540371, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540371"),
             WorkItem(530792, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530792")
@@ -290,6 +291,7 @@ class Program
                         .WithArguments("d")
                 );
         }
+
         [
             Fact,
             WorkItem(528676, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528676"),

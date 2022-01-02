@@ -56,7 +56,6 @@ namespace System.Reflection.PortableExecutable
         /// The address that is relative to the image base of the beginning-of-data section when it is loaded into memory.
         /// </summary>
         public int BaseOfData { get; }
-
         #endregion
 
         #region Windows Specific Fields
@@ -160,7 +159,6 @@ namespace System.Reflection.PortableExecutable
         /// The number of data-directory entries in the remainder of the <see cref="PEHeader"/>. Each describes a location and size.
         /// </summary>
         public int NumberOfRvaAndSizes { get; }
-
         #endregion
 
         #region Directory Entries
@@ -245,7 +243,6 @@ namespace System.Reflection.PortableExecutable
         /// Aka IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR.
         /// </remarks>
         public DirectoryEntry CorHeaderTableDirectory { get; }
-
         #endregion
 
         internal const int OffsetOfChecksum =

@@ -15,14 +15,12 @@ namespace System.Speech.Internal.SapiInterop
         {
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Internal Methods
 
         internal abstract object Invoke(ObjectDelegate pfn);
         internal abstract void Invoke2(VoidDelegate pfn);
-
         #endregion
 
         #region Internal Properties
@@ -55,7 +53,6 @@ namespace System.Speech.Internal.SapiInterop
                 return _speechRecognizer;
             }
         }
-
         #endregion
 
         #region Protected Fields
@@ -63,7 +60,6 @@ namespace System.Speech.Internal.SapiInterop
         protected ISpeechRecognizer _speechRecognizer;
         protected ISpRecognizer2 _recognizer2;
         protected ISpRecognizer _recognizer;
-
         #endregion
 
         #region Protected Fields
@@ -81,6 +77,7 @@ namespace System.Speech.Internal.SapiInterop
             {
                 Dispose(false);
             }
+
             public override void Dispose()
             {
                 try
@@ -92,7 +89,6 @@ namespace System.Speech.Internal.SapiInterop
                     base.Dispose();
                 }
             }
-
             #endregion
 
             #region Internal Methods
@@ -106,7 +102,6 @@ namespace System.Speech.Internal.SapiInterop
             {
                 pfn.Invoke();
             }
-
             #endregion
 
             #region Private Methods
@@ -173,7 +168,6 @@ namespace System.Speech.Internal.SapiInterop
                     base.Dispose();
                 }
             }
-
             #endregion
 
             #region Internal Methods
@@ -210,7 +204,6 @@ namespace System.Speech.Internal.SapiInterop
                     }
                 }
             }
-
             #endregion
 
             #region Private Methods
@@ -266,7 +259,6 @@ namespace System.Speech.Internal.SapiInterop
                     }
                 }
             }
-
             #endregion
 
             #region Private Fields

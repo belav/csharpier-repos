@@ -10,8 +10,10 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 #if BLAZOR_WEBVIEW
 namespace Microsoft.AspNetCore.Components.WebView;
+
 #else
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
+
 #endif
 
 /// <summary>

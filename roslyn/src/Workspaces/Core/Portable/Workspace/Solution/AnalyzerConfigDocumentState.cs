@@ -58,6 +58,7 @@ namespace Microsoft.CodeAnalysis
 
         public AnalyzerConfig GetAnalyzerConfig(CancellationToken cancellationToken) =>
             _analyzerConfigValueSource.GetValue(cancellationToken);
+
         public Task<AnalyzerConfig> GetAnalyzerConfigAsync(CancellationToken cancellationToken) =>
             _analyzerConfigValueSource.GetValueAsync(cancellationToken);
 

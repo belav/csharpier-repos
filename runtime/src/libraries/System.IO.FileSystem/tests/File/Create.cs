@@ -185,7 +185,6 @@ namespace System.IO.Tests
             Create(testFile).Dispose();
             Assert.True(File.Exists(testFile));
         }
-
         #endregion
 
         #region PlatformSpecific
@@ -386,6 +385,7 @@ namespace System.IO.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => Create(GetTestFilePath(), -100));
         }
     }
+
     [ActiveIssue(
         "https://github.com/dotnet/runtime/issues/34582",
         TestPlatforms.Windows,

@@ -551,6 +551,7 @@ public class MiddlewareFilterTest
     private class TestResourceFilter : IAsyncResourceFilter
     {
         private readonly TestResourceFilterAction _action;
+
         public TestResourceFilter(TestResourceFilterAction action)
         {
             _action = action;

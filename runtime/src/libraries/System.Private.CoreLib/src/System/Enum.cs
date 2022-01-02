@@ -1453,7 +1453,6 @@ namespace System
                     return 0;
             }
         }
-
         #endregion
 
         #region Object Overrides
@@ -1670,7 +1669,6 @@ namespace System
         {
             return ToString();
         }
-
         #endregion
 
         #region IConvertible
@@ -1802,7 +1800,6 @@ namespace System
 
         private static object ToObject(Type enumType, bool value) =>
             InternalBoxEnum(ValidateRuntimeType(enumType), value ? 1L : 0L);
-
         #endregion
 
         private static RuntimeType ValidateRuntimeType(Type enumType)

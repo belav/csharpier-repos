@@ -46,6 +46,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool InnerSequentialByRefCdeclcaller([In, Out] ref InnerSequential argStr);
+
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByRef_Cdecl(
         ref InnerSequential argstr
     )
@@ -69,6 +70,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool InnerSequentialByRefStdCallcaller([In, Out] ref InnerSequential argStr);
+
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByRef_StdCall(
         ref InnerSequential argstr
     )
@@ -95,12 +97,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerSequentialByRef_Cdecl(
         InnerSequentialByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructInnerSequentialByRef_StdCall(
         InnerSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -108,6 +110,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByVal
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool InnerSequentialByValCdeclcaller([In, Out] InnerSequential argStr);
+
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByVal_Cdecl(
         InnerSequential argstr
     )
@@ -131,6 +134,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool InnerSequentialByValStdCallcaller([In, Out] InnerSequential argStr);
+
     private static bool TestMethodForStructInnerSequential_ReversePInvokeByVal_StdCall(
         InnerSequential argstr
     )
@@ -157,12 +161,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerSequentialByVal_Cdecl(
         InnerSequentialByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructInnerSequentialByVal_StdCall(
         InnerSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -176,6 +180,7 @@ public class MarshalStructTest
     public delegate bool InnerArraySequentialByRefCdeclcaller(
         [In, Out] ref InnerArraySequential argStr
     );
+
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByRef_Cdecl(
         ref InnerArraySequential argstr
     )
@@ -208,6 +213,7 @@ public class MarshalStructTest
     public delegate bool InnerArraySequentialByRefStdCallcaller(
         [In, Out] ref InnerArraySequential argStr
     );
+
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByRef_StdCall(
         ref InnerArraySequential argstr
     )
@@ -242,12 +248,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerArraySequentialByRef_Cdecl(
         InnerArraySequentialByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructInnerArraySequentialByRef_StdCall(
         InnerArraySequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -257,6 +263,7 @@ public class MarshalStructTest
     public delegate bool InnerArraySequentialByValCdeclcaller(
         [In, Out] InnerArraySequential argStr
     );
+
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByVal_Cdecl(
         InnerArraySequential argstr
     )
@@ -289,6 +296,7 @@ public class MarshalStructTest
     public delegate bool InnerArraySequentialByValStdCallcaller(
         [In, Out] InnerArraySequential argStr
     );
+
     private static bool TestMethodForStructInnerArraySequential_ReversePInvokeByVal_StdCall(
         InnerArraySequential argstr
     )
@@ -322,12 +330,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerArraySequentialByVal_Cdecl(
         InnerArraySequentialByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructInnerArraySequentialByVal_StdCall(
         InnerArraySequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -341,6 +349,7 @@ public class MarshalStructTest
     public delegate bool CharSetAnsiSequentialByRefCdeclcaller(
         [In, Out] ref CharSetAnsiSequential argStr
     );
+
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_Cdecl(
         ref CharSetAnsiSequential argstr
     )
@@ -365,6 +374,7 @@ public class MarshalStructTest
     public delegate bool CharSetAnsiSequentialByRefStdCallcaller(
         [In, Out] ref CharSetAnsiSequential argStr
     );
+
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_StdCall(
         ref CharSetAnsiSequential argstr
     )
@@ -390,12 +400,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetAnsiSequentialByRef_Cdecl(
         CharSetAnsiSequentialByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructCharSetAnsiSequentialByRef_StdCall(
         CharSetAnsiSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -405,6 +415,7 @@ public class MarshalStructTest
     public delegate bool CharSetAnsiSequentialByValCdeclcaller(
         [In, Out] CharSetAnsiSequential argStr
     );
+
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_Cdecl(
         CharSetAnsiSequential argstr
     )
@@ -429,6 +440,7 @@ public class MarshalStructTest
     public delegate bool CharSetAnsiSequentialByValStdCallcaller(
         [In, Out] CharSetAnsiSequential argStr
     );
+
     private static bool TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_StdCall(
         CharSetAnsiSequential argstr
     )
@@ -454,12 +466,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetAnsiSequentialByVal_Cdecl(
         CharSetAnsiSequentialByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructCharSetAnsiSequentialByVal_StdCall(
         CharSetAnsiSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -473,6 +485,7 @@ public class MarshalStructTest
     public delegate bool CharSetUnicodeSequentialByRefCdeclcaller(
         [In, Out] ref CharSetUnicodeSequential argStr
     );
+
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_Cdecl(
         ref CharSetUnicodeSequential argstr
     )
@@ -500,6 +513,7 @@ public class MarshalStructTest
     public delegate bool CharSetUnicodeSequentialByRefStdCallcaller(
         [In, Out] ref CharSetUnicodeSequential argStr
     );
+
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_StdCall(
         ref CharSetUnicodeSequential argstr
     )
@@ -528,12 +542,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetUnicodeSequentialByRef_Cdecl(
         CharSetUnicodeSequentialByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructCharSetUnicodeSequentialByRef_StdCall(
         CharSetUnicodeSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -543,6 +557,7 @@ public class MarshalStructTest
     public delegate bool CharSetUnicodeSequentialByValCdeclcaller(
         [In, Out] CharSetUnicodeSequential argStr
     );
+
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_Cdecl(
         CharSetUnicodeSequential argstr
     )
@@ -570,6 +585,7 @@ public class MarshalStructTest
     public delegate bool CharSetUnicodeSequentialByValStdCallcaller(
         [In, Out] CharSetUnicodeSequential argStr
     );
+
     private static bool TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_StdCall(
         CharSetUnicodeSequential argstr
     )
@@ -598,12 +614,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetUnicodeSequentialByVal_Cdecl(
         CharSetUnicodeSequentialByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructCharSetUnicodeSequentialByVal_StdCall(
         CharSetUnicodeSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -615,6 +631,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool NumberSequentialByRefCdeclcaller([In, Out] ref NumberSequential argStr);
+
     private static bool TestMethodForStructNumberSequential_ReversePInvokeByRef_Cdecl(
         ref NumberSequential argstr
     )
@@ -660,6 +677,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool NumberSequentialByRefStdCallcaller([In, Out] ref NumberSequential argStr);
+
     private static bool TestMethodForStructNumberSequential_ReversePInvokeByRef_StdCall(
         ref NumberSequential argstr
     )
@@ -708,12 +726,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructNumberSequentialByRef_Cdecl(
         NumberSequentialByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructNumberSequentialByRef_StdCall(
         NumberSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -723,6 +741,7 @@ public class MarshalStructTest
     public delegate NumberSequential NumberSequentialByValCdeclcaller(
         [In, Out] NumberSequential argStr
     );
+
     private static NumberSequential TestMethodForStructNumberSequential_ReversePInvokeByVal_Cdecl(
         NumberSequential argstr
     )
@@ -770,6 +789,7 @@ public class MarshalStructTest
     public delegate NumberSequential NumberSequentialByValStdCallcaller(
         [In, Out] NumberSequential argStr
     );
+
     private static NumberSequential TestMethodForStructNumberSequential_ReversePInvokeByVal_StdCall(
         NumberSequential argstr
     )
@@ -818,12 +838,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructNumberSequentialByVal_Cdecl(
         NumberSequentialByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructNumberSequentialByVal_StdCall(
         NumberSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -835,6 +855,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S3ByRefCdeclcaller([In, Out] ref S3 argStr);
+
     private static bool TestMethodForStructS3_ReversePInvokeByRef_Cdecl(ref S3 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
@@ -855,6 +876,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S3ByRefStdCallcaller([In, Out] ref S3 argStr);
+
     private static bool TestMethodForStructS3_ReversePInvokeByRef_StdCall(ref S3 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
@@ -876,10 +898,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS3ByRef_Cdecl(S3ByRefCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS3ByRef_StdCall(S3ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -887,6 +909,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByVal
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S3ByValCdeclcaller([In, Out] S3 argStr);
+
     private static bool TestMethodForStructS3_ReversePInvokeByVal_Cdecl(S3 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
@@ -907,6 +930,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S3ByValStdCallcaller([In, Out] S3 argStr);
+
     private static bool TestMethodForStructS3_ReversePInvokeByVal_StdCall(S3 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
@@ -928,10 +952,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS3ByVal_Cdecl(S3ByValCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS3ByVal_StdCall(S3ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -943,6 +967,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S5ByRefCdeclcaller([In, Out] ref S5 argStr);
+
     private static bool TestMethodForStructS5_ReversePInvokeByRef_Cdecl(ref S5 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
@@ -964,6 +989,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S5ByRefStdCallcaller([In, Out] ref S5 argStr);
+
     private static bool TestMethodForStructS5_ReversePInvokeByRef_StdCall(ref S5 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
@@ -986,10 +1012,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS5ByRef_Cdecl(S5ByRefCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS5ByRef_StdCall(S5ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -997,6 +1023,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByVal
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S5ByValCdeclcaller([In, Out] S5 argStr);
+
     private static bool TestMethodForStructS5_ReversePInvokeByVal_Cdecl(S5 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
@@ -1018,6 +1045,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S5ByValStdCallcaller([In, Out] S5 argStr);
+
     private static bool TestMethodForStructS5_ReversePInvokeByVal_StdCall(S5 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
@@ -1040,10 +1068,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS5ByVal_Cdecl(S5ByValCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS5ByVal_StdCall(S5ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -1057,6 +1085,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialAnsiByRefCdeclcaller(
         [In, Out] ref StringStructSequentialAnsi argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_Cdecl(
         ref StringStructSequentialAnsi argstr
     )
@@ -1086,6 +1115,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialAnsiByRefStdCallcaller(
         [In, Out] ref StringStructSequentialAnsi argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_StdCall(
         ref StringStructSequentialAnsi argstr
     )
@@ -1116,12 +1146,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialAnsiByRef_Cdecl(
         StringStructSequentialAnsiByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructStringStructSequentialAnsiByRef_StdCall(
         StringStructSequentialAnsiByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1131,6 +1161,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialAnsiByValCdeclcaller(
         [In, Out] StringStructSequentialAnsi argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_Cdecl(
         StringStructSequentialAnsi argstr
     )
@@ -1160,6 +1191,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialAnsiByValStdCallcaller(
         [In, Out] StringStructSequentialAnsi argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_StdCall(
         StringStructSequentialAnsi argstr
     )
@@ -1190,12 +1222,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialAnsiByVal_Cdecl(
         StringStructSequentialAnsiByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructStringStructSequentialAnsiByVal_StdCall(
         StringStructSequentialAnsiByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1209,6 +1241,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialUnicodeByRefCdeclcaller(
         [In, Out] ref StringStructSequentialUnicode argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_Cdecl(
         ref StringStructSequentialUnicode argstr
     )
@@ -1238,6 +1271,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialUnicodeByRefStdCallcaller(
         [In, Out] ref StringStructSequentialUnicode argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_StdCall(
         ref StringStructSequentialUnicode argstr
     )
@@ -1268,12 +1302,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialUnicodeByRef_Cdecl(
         StringStructSequentialUnicodeByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructStringStructSequentialUnicodeByRef_StdCall(
         StringStructSequentialUnicodeByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1282,6 +1316,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialUnicodeByValCdeclcaller(
         [In, Out] StringStructSequentialUnicode argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_Cdecl(
         StringStructSequentialUnicode argstr
     )
@@ -1311,6 +1346,7 @@ public class MarshalStructTest
     public delegate bool StringStructSequentialUnicodeByValStdCallcaller(
         [In, Out] StringStructSequentialUnicode argStr
     );
+
     private static bool TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_StdCall(
         StringStructSequentialUnicode argstr
     )
@@ -1341,12 +1377,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialUnicodeByVal_Cdecl(
         StringStructSequentialUnicodeByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructStringStructSequentialUnicodeByVal_StdCall(
         StringStructSequentialUnicodeByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1358,6 +1394,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S8ByRefCdeclcaller([In, Out] ref S8 argStr);
+
     private static bool TestMethodForStructS8_ReversePInvokeByRef_Cdecl(ref S8 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
@@ -1378,6 +1415,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S8ByRefStdCallcaller([In, Out] ref S8 argStr);
+
     private static bool TestMethodForStructS8_ReversePInvokeByRef_StdCall(ref S8 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
@@ -1399,10 +1437,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS8ByRef_Cdecl(S8ByRefCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS8ByRef_StdCall(S8ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -1410,6 +1448,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByVal
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S8ByValCdeclcaller([In, Out] S8 argStr);
+
     private static bool TestMethodForStructS8_ReversePInvokeByVal_Cdecl(S8 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
@@ -1430,6 +1469,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S8ByValStdCallcaller([In, Out] S8 argStr);
+
     private static bool TestMethodForStructS8_ReversePInvokeByVal_StdCall(S8 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
@@ -1451,10 +1491,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS8ByVal_Cdecl(S8ByValCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS8ByVal_StdCall(S8ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -1466,6 +1506,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S9ByRefCdeclcaller([In, Out] ref S9 argStr);
+
     private static bool TestMethodForStructS9_ReversePInvokeByRef_Cdecl(ref S9 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
@@ -1482,6 +1523,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S9ByRefStdCallcaller([In, Out] ref S9 argStr);
+
     private static bool TestMethodForStructS9_ReversePInvokeByRef_StdCall(ref S9 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
@@ -1499,10 +1541,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS9ByRef_Cdecl(S9ByRefCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS9ByRef_StdCall(S9ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -1510,6 +1552,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByVal
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S9ByValCdeclcaller([In, Out] S9 argStr);
+
     private static bool TestMethodForStructS9_ReversePInvokeByVal_Cdecl(S9 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
@@ -1526,6 +1569,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S9ByValStdCallcaller([In, Out] S9 argStr);
+
     private static bool TestMethodForStructS9_ReversePInvokeByVal_StdCall(S9 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
@@ -1543,10 +1587,10 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS9ByVal_Cdecl(S9ByValCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS9ByVal_StdCall(S9ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -1560,6 +1604,7 @@ public class MarshalStructTest
     public delegate bool IncludeOuterIntergerStructSequentialByRefCdeclcaller(
         [In, Out] ref IncludeOuterIntergerStructSequential argStr
     );
+
     private static bool TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_Cdecl(
         ref IncludeOuterIntergerStructSequential argstr
     )
@@ -1585,6 +1630,7 @@ public class MarshalStructTest
     public delegate bool IncludeOuterIntergerStructSequentialByRefStdCallcaller(
         [In, Out] ref IncludeOuterIntergerStructSequential argStr
     );
+
     private static bool TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_StdCall(
         ref IncludeOuterIntergerStructSequential argstr
     )
@@ -1611,12 +1657,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByRef_Cdecl(
         IncludeOuterIntergerStructSequentialByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByRef_StdCall(
         IncludeOuterIntergerStructSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1626,6 +1672,7 @@ public class MarshalStructTest
     public delegate IncludeOuterIntergerStructSequential IncludeOuterIntergerStructSequentialByValCdeclcaller(
         [In, Out] IncludeOuterIntergerStructSequential argStr
     );
+
     private static IncludeOuterIntergerStructSequential TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_Cdecl(
         IncludeOuterIntergerStructSequential argstr
     )
@@ -1651,6 +1698,7 @@ public class MarshalStructTest
     public delegate IncludeOuterIntergerStructSequential IncludeOuterIntergerStructSequentialByValStdCallcaller(
         [In, Out] IncludeOuterIntergerStructSequential argStr
     );
+
     private static IncludeOuterIntergerStructSequential TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_StdCall(
         IncludeOuterIntergerStructSequential argstr
     )
@@ -1677,12 +1725,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByVal_Cdecl(
         IncludeOuterIntergerStructSequentialByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByVal_StdCall(
         IncludeOuterIntergerStructSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1694,6 +1742,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S11ByRefCdeclcaller([In, Out] ref S11 argStr);
+
     unsafe private static bool TestMethodForStructS11_ReversePInvokeByRef_Cdecl(ref S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
@@ -1714,6 +1763,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S11ByRefStdCallcaller([In, Out] ref S11 argStr);
+
     unsafe private static bool TestMethodForStructS11_ReversePInvokeByRef_StdCall(ref S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
@@ -1735,12 +1785,12 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS11ByRef_Cdecl(S11ByRefCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS11ByRef_StdCall(
         S11ByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1748,6 +1798,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByVal
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S11ByValCdeclcaller([In, Out] S11 argStr);
+
     unsafe private static bool TestMethodForStructS11_ReversePInvokeByVal_Cdecl(S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
@@ -1768,6 +1819,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S11ByValStdCallcaller([In, Out] S11 argStr);
+
     unsafe private static bool TestMethodForStructS11_ReversePInvokeByVal_StdCall(S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
@@ -1789,12 +1841,12 @@ public class MarshalStructTest
     //Reverse Pinvoke,cdecl
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool DoCallBack_MarshalStructS11ByVal_Cdecl(S11ByValCdeclcaller caller);
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS11ByVal_StdCall(
         S11ByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1806,6 +1858,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByRef
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool ComplexStructByRefCdeclcaller([In, Out] ref ComplexStruct argStr);
+
     private static bool TestMethodForStructComplexStruct_ReversePInvokeByRef_Cdecl(
         ref ComplexStruct cs
     )
@@ -1828,6 +1881,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool ComplexStructByRefStdCallcaller([In, Out] ref ComplexStruct argStr);
+
     private static bool TestMethodForStructComplexStruct_ReversePInvokeByRef_StdCall(
         ref ComplexStruct cs
     )
@@ -1853,12 +1907,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructComplexStructByRef_Cdecl(
         ComplexStructByRefCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructComplexStructByRef_StdCall(
         ComplexStructByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1866,6 +1920,7 @@ public class MarshalStructTest
     //For Reverse Pinvoke ByVal
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool ComplexStructByValCdeclcaller([In, Out] ComplexStruct argStr);
+
     private static bool TestMethodForStructComplexStruct_ReversePInvokeByVal_Cdecl(ComplexStruct cs)
     {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
@@ -1886,6 +1941,7 @@ public class MarshalStructTest
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool ComplexStructByValStdCallcaller([In, Out] ComplexStruct argStr);
+
     private static bool TestMethodForStructComplexStruct_ReversePInvokeByVal_StdCall(
         ComplexStruct cs
     )
@@ -1911,12 +1967,12 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructComplexStructByVal_Cdecl(
         ComplexStructByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructComplexStructByVal_StdCall(
         ComplexStructByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1991,6 +2047,7 @@ public class MarshalStructTest
     public delegate IntergerStructSequential IntergerStructSequentialByValCdeclcaller(
         [In, Out] IntergerStructSequential argStr
     );
+
     private static IntergerStructSequential TestMethodForStructIntergerStructSequential_ReversePInvokeByVal_Cdecl(
         IntergerStructSequential argstr
     )
@@ -2015,6 +2072,7 @@ public class MarshalStructTest
     public delegate IntergerStructSequential IntergerStructSequentialByValStdCallcaller(
         [In, Out] IntergerStructSequential argStr
     );
+
     private static IntergerStructSequential TestMethodForStructIntergerStructSequential_ReversePInvokeByVal_StdCall(
         IntergerStructSequential argstr
     )
@@ -2040,6 +2098,7 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructIntergerStructSequentialByVal_Cdecl(
         IntergerStructSequentialByValCdeclcaller caller
     );
+
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructIntergerStructSequentialByVal_StdCall(
@@ -2815,7 +2874,6 @@ public class MarshalStructTest
             TestMethod_DoCallBack_MarshalStructByVal_StdCall(StructID.ByteStruct3Byte);
         }
     }
-
     #endregion
 
     static int Main()

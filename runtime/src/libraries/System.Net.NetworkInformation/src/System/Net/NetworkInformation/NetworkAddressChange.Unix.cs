@@ -13,6 +13,7 @@ namespace System.Net.NetworkInformation
     public partial class NetworkChange
     {
         private static volatile int s_socket;
+
         // Lock controlling access to delegate subscriptions, socket initialization, availability-changed state and timer.
         private static readonly object s_gate = new object();
 

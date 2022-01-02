@@ -132,7 +132,6 @@ namespace System.Linq.Expressions.Tests
                 }
             }
         }
-
         #endregion
 
         #region Helpers
@@ -176,7 +175,6 @@ namespace System.Linq.Expressions.Tests
         {
             return (ushort)(a & b);
         }
-
         #endregion
 
         #region Test verifiers

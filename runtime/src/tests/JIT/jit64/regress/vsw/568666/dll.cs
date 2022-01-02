@@ -8,6 +8,7 @@ public static class Library
     = "Library";
 #else
     ;
+
     static Library()
     {
         s_name = "Library";

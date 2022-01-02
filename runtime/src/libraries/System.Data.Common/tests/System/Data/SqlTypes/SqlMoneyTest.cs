@@ -420,6 +420,7 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Throws<OverflowException>(() => (SqlMoney)SqlInt64.MaxValue);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

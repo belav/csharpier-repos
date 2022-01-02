@@ -46,6 +46,7 @@ class TestSemaphore
         Console.WriteLine(message);
         failures++;
     }
+
     private void Success()
     {
         successes++;
@@ -172,6 +173,7 @@ class TestSemaphore
 
 
     }
+
     public bool __flag;
 
     public void Create()

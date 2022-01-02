@@ -875,6 +875,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private sealed class MetadataReferenceResolverWithEquality : MetadataReferenceResolver
         {
             public override bool Equals(object other) => true;
+
             public override int GetHashCode() => 1;
 
             public override ImmutableArray<PortableExecutableReference> ResolveReference(

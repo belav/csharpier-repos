@@ -241,7 +241,6 @@ namespace System.Collections.Immutable
             /// </returns>
             [ExcludeFromCodeCoverage] // internal, never called, but here for interface implementation
             IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
-
             #endregion
 
             /// <summary>
@@ -1452,7 +1451,6 @@ namespace System.Collections.Immutable
 
                 return tree;
             }
-
             #endregion
 
             /// <summary>

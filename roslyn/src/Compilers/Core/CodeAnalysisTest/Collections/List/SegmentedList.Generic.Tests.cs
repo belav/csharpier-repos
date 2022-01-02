@@ -32,7 +32,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             return GenericListFactory(count);
         }
-
         #endregion
 
         #region List<T> Helper Methods
@@ -61,7 +60,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         [Theory]

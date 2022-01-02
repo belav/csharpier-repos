@@ -18,6 +18,7 @@ internal class StreamCloseAwaitable : ICriticalNotifyCompletion
     private Action? _callback = _callbackCompleted;
 
     public StreamCloseAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => ReferenceEquals(_callback, _callbackCompleted);
 
     public void GetResult()

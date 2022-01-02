@@ -356,7 +356,9 @@ namespace System.Net.Sockets.Tests
             public DerivedTcpListener(int port) : base(port) { }
 #pragma warning restore 0618
             public DerivedTcpListener(IPEndPoint endpoint) : base(endpoint) { }
+
             public DerivedTcpListener(IPAddress address, int port) : base(address, port) { }
+
             public new bool Active => base.Active;
         }
     }

@@ -12,6 +12,7 @@ namespace Test
         {
             throw new Exception();
         }
+
         public static int Main1()
         {
             while (TRUE()) { }
@@ -22,6 +23,7 @@ namespace Test
             catch (Exception) { }
             return 103;
         }
+
         static int Main()
         {
             try

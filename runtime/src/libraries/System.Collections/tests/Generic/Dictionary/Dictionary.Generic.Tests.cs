@@ -33,7 +33,6 @@ namespace System.Collections.Tests
 
         protected override Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         #region Constructors
@@ -86,7 +85,6 @@ namespace System.Collections.Tests
             Assert.Equal(0, dictionary.Count);
             Assert.Equal(comparer, dictionary.Comparer);
         }
-
         #endregion
 
         #region ContainsValue
@@ -140,7 +138,6 @@ namespace System.Collections.Tests
             dictionary.Add(notPresent, default(TValue));
             Assert.True(dictionary.ContainsValue(default(TValue)));
         }
-
         #endregion
 
         #region IReadOnlyDictionary<TKey, TValue>.Keys
@@ -164,7 +161,6 @@ namespace System.Collections.Tests
             IEnumerable<TValue> values = ((IReadOnlyDictionary<TKey, TValue>)dictionary).Values;
             Assert.True(expected.SequenceEqual(values));
         }
-
         #endregion
 
         #region Remove(TKey)
@@ -292,7 +288,6 @@ namespace System.Collections.Tests
                 Assert.False(enumerator.MoveNext());
             }
         }
-
         #endregion
 
         #region EnsureCapacity
@@ -434,7 +429,6 @@ namespace System.Collections.Tests
             dictionary = new Dictionary<TKey, TValue>();
             Assert.Equal(17, dictionary.EnsureCapacity(13));
         }
-
         #endregion
 
         #region TrimExcess
@@ -669,7 +663,6 @@ namespace System.Collections.Tests
 
             Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
         }
-
         #endregion
 
         #region Non-randomized comparers

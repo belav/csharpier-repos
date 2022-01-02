@@ -22,7 +22,6 @@ namespace System.Speech.Recognition
         // Load a specific topic. The topic is of the form "grammar:dictation#topic"
         public DictationGrammar(string topic)
             : base(new Uri(topic, UriKind.RelativeOrAbsolute), null, null) { }
-
         #endregion
 
         #region Public Methods
@@ -38,7 +37,6 @@ namespace System.Speech.Recognition
 
             Recognizer.SetDictationContext(this, precedingText, subsequentText);
         }
-
         #endregion
 
         #region Internal Methods

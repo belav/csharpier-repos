@@ -6,6 +6,7 @@ namespace System.Numerics.Tests
     public static class Util
     {
         private static Random s_random = new Random();
+
         public static void SetRandomSeed(int seed)
         {
             s_random = new Random(seed);

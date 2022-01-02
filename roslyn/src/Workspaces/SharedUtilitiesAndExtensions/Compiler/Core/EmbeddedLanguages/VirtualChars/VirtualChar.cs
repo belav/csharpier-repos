@@ -115,7 +115,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             hashCode = hashCode * -1521134295 + Span.GetHashCode();
             return hashCode;
         }
-
         #endregion
 
         #region string operations
@@ -138,7 +137,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             if (length == 2)
                 builder.Append(chars[1]);
         }
-
         #endregion
 
         #region comparable

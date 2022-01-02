@@ -867,6 +867,7 @@ public class RemoteAuthenticatorCoreTests
 
         internal void SetupFakeRender(TestRemoteAuthenticatorView manager) =>
             SetupFakeRenderAction(this, manager);
+
         internal void RetrieveOriginalRender(TestRemoteAuthenticatorView manager) =>
             RetrieveOriginalRenderAction(this, manager);
     }
@@ -930,6 +931,7 @@ public class RemoteAuthenticatorCoreTests
     private class TestJsRuntime : IJSRuntime
     {
         public (string identifier, object[] args) LastInvocation { get; set; }
+
         public ValueTask<TValue> InvokeAsync<TValue>(string identifier, object[] args)
         {
             LastInvocation = (identifier, args);

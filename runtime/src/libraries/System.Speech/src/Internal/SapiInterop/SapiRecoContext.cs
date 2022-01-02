@@ -31,7 +31,6 @@ namespace System.Speech.Internal.SapiInterop
             }
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Internal Methods
@@ -144,7 +143,6 @@ namespace System.Speech.Internal.SapiInterop
                 }
             );
         }
-
         #endregion
 
         #region Private Fields

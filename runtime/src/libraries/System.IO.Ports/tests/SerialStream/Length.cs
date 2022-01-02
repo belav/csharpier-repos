@@ -72,7 +72,6 @@ namespace System.IO.Ports.Tests
                 VerifyLengthException(com.BaseStream, typeof(NotSupportedException));
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

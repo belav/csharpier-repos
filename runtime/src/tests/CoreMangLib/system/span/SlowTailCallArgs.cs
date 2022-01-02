@@ -157,12 +157,16 @@ internal static class ByRefLikeTest
     {
         [FieldOffset(8 * 0)]
         private object obj;
+
         [FieldOffset(8 * 0)]
         private object obj2;
+
         [FieldOffset(8 * 1)]
         public Span<int> span;
+
         [FieldOffset(8 * 1)]
         public Span<int> span2;
+
         [FieldOffset(8 * 3)]
         private object obj3;
 

@@ -467,6 +467,7 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         {
             private readonly CancellationToken _cancellationToken;
             private readonly HashSet<ISymbol> _allSymbols;
+
             private LocalVariableDeclarationVisitor(CancellationToken cancellationToken)
             {
                 _cancellationToken = cancellationToken;

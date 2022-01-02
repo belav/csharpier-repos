@@ -43,6 +43,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         private class LazyIndentationData : IndentationData
         {
             private readonly Lazy<int> _indentationGetter;
+
             public LazyIndentationData(TextSpan textSpan, Lazy<int> indentationGetter)
                 : base(textSpan)
             {

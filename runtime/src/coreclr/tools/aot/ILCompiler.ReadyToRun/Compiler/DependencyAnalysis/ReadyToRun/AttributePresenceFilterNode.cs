@@ -236,7 +236,6 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private class DummyGenericContext
         {
         }
-
         #endregion
 
         private void ReadCustomAttributeTypeNameWithoutResolving(

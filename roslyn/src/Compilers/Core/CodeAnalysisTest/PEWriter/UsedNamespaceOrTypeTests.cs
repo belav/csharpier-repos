@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
             }
 
             public override int GetHashCode() => Name.GetHashCode();
+
             public override bool Equals(object obj) =>
                 (obj as EqualsProxy)?.Name.Equals(Name) == true;
         }

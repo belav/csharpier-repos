@@ -396,7 +396,6 @@ public class C : B, I
             // NOTE: unlike overload resolution, implicit interface implementation resolution does not respect hide-by-name.
             CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics();
         }
-
         #endregion Methods
 
         #region Indexers
@@ -791,7 +790,6 @@ public class C : B, I
             // NOTE: unlike overload resolution, implicit interface implementation resolution does not respect hide-by-name.
             CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics();
         }
-
         #endregion Indexers
 
         [Fact, WorkItem(897971, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/897971")]

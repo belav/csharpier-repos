@@ -30,8 +30,10 @@ namespace System.Reflection.Tests
 
         public static void TestNonGenericMethodInfoInvariants(this MethodInfo m) =>
             m.TestNonGenericMethodInfoCommonInvariants();
+
         public static void TestGenericMethodInfoInvariants(this MethodInfo m) =>
             m.TestGenericMethodInfoCommonInvariants();
+
         public static void TestConstructedGenericMethodInfoInvariants(this MethodInfo m) =>
             m.TestConstructedGenericMethodInfoCommonInvariants();
 

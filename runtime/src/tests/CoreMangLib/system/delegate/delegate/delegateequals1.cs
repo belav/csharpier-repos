@@ -3,10 +3,12 @@
 
 using System;
 using System.Globalization;
+
 //test case for delegate Equals method.
 namespace DelegateTest
 {
     delegate bool booldelegate();
+
     public class DelegateEquals
     {
         object starkWork;
@@ -30,6 +32,7 @@ namespace DelegateTest
                 return 0;
             }
         }
+
         public bool RunTests()
         {
             bool retVal = true;
@@ -83,6 +86,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest2()
@@ -124,6 +128,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest3()
@@ -163,6 +168,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest4()
@@ -195,6 +201,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest6()
@@ -228,6 +235,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest7()
@@ -261,6 +269,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         //compare delegate's Type,target, method, and invocation list
         //two delegates have common  Type,target, method, and invocation list
         //return true.otherwise return false
@@ -280,14 +289,17 @@ namespace DelegateTest
 
 
     }
+
     //create testclass for provding test method and test target.
     class TestClass
     {
         private int id;
+
         public TestClass(int id)
         {
             this.id = id;
         }
+
         public bool StartWork_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -295,6 +307,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public static bool Working_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -302,6 +315,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public static bool Completed_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -310,13 +324,16 @@ namespace DelegateTest
             return true;
         }
     }
+
     class TestClass1
     {
         private int id;
+
         public TestClass1(int id)
         {
             this.id = id;
         }
+
         public bool StartWork_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -324,6 +341,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public static bool Working_Bool()
         {
             TestLibrary.TestFramework.LogInformation(
@@ -331,6 +349,7 @@ namespace DelegateTest
             );
             return true;
         }
+
         public static bool Completed_Bool()
         {
             TestLibrary.TestFramework.LogInformation(

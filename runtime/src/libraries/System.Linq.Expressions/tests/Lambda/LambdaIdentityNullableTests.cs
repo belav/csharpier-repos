@@ -270,7 +270,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -284,7 +283,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyIdentityNullableGenericWithStructRestriction<Ts>(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

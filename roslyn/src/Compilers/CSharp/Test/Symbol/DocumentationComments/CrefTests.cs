@@ -7795,7 +7795,6 @@ class Cat { }
                 model.GetSymbolInfo(cref).Symbol
             );
         }
-
         #endregion Dev10 bugs from KevinH
 
         private static IEnumerable<CrefSyntax> GetCrefSyntaxes(Compilation compilation) =>

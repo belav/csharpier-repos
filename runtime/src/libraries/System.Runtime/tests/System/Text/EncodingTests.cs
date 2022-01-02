@@ -216,6 +216,7 @@ namespace System.Text.Tests
         private sealed class NullEncodingProvider : EncodingProvider
         {
             public override Encoding GetEncoding(int codepage) => null;
+
             public override Encoding GetEncoding(string name) => null;
         }
 

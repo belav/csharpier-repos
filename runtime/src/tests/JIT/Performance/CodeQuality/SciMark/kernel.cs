@@ -189,6 +189,7 @@ namespace SciMark2
                 throw new Exception("LU failed to validate");
             }
         }
+
         public static double measureLU(int N, double min_time, Random R)
         {
             // compute approx Mlfops, or O if LU yields large errors

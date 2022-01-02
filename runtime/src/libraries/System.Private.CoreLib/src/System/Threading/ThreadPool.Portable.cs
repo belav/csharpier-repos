@@ -39,9 +39,11 @@ namespace System.Threading
         internal static void InitializeForThreadPoolThread() { }
 
         internal static bool CanSetMinIOCompletionThreads(int ioCompletionThreads) => true;
+
         internal static void SetMinIOCompletionThreads(int ioCompletionThreads) { }
 
         internal static bool CanSetMaxIOCompletionThreads(int ioCompletionThreads) => true;
+
         internal static void SetMaxIOCompletionThreads(int ioCompletionThreads) { }
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
@@ -121,6 +123,7 @@ namespace System.Threading
 
         internal static bool NotifyThreadBlocked() =>
             PortableThreadPool.ThreadPoolInstance.NotifyThreadBlocked();
+
         internal static void NotifyThreadUnblocked() =>
             PortableThreadPool.ThreadPoolInstance.NotifyThreadUnblocked();
 

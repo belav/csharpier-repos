@@ -559,7 +559,6 @@ namespace Microsoft.CodeAnalysis.Shared
 
             return value.ToString();
         }
-
         #endregion // Overridden methods and operators
 
         #region Private Helpers

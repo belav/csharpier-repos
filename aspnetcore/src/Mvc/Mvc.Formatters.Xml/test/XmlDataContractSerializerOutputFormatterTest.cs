@@ -43,6 +43,7 @@ public class XmlDataContractSerializerOutputFormatterTest
     {
         [DataMember]
         public int SampleInt { get; set; }
+
         [DataMember]
         public string sampleString;
     }
@@ -52,6 +53,7 @@ public class XmlDataContractSerializerOutputFormatterTest
     {
         [DataMember]
         public string SampleString { get; set; }
+
         [DataMember]
         public TestLevelOne TestOne { get; set; }
     }
@@ -61,6 +63,7 @@ public class XmlDataContractSerializerOutputFormatterTest
     {
         [DataMember]
         public int Id { get; set; }
+
         [DataMember]
         public Parent Parent { get; set; }
     }
@@ -70,6 +73,7 @@ public class XmlDataContractSerializerOutputFormatterTest
     {
         [DataMember]
         public string Name { get; set; }
+
         [DataMember]
         public List<Child> Children { get; set; }
     }
@@ -918,6 +922,7 @@ public class XmlDataContractSerializerOutputFormatterTest
             return base.CreateXmlWriter(context, writer, xmlWriterSettings);
         }
     }
+
     public class Customer
     {
         public Customer(int id) { }

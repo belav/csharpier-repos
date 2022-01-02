@@ -109,7 +109,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         Assert.NotNull(listener.AfterAction?.ActionDescriptor);
         Assert.NotNull(listener.AfterAction?.HttpContext);
     }
-
     #endregion
 
     #region Controller Context
@@ -182,7 +181,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         Assert.Equal(1, controllerContext.ValueProviderFactories.Count);
         Assert.Same(valueProviderFactory2, controllerContext.ValueProviderFactories[0]);
     }
-
     #endregion
 
     #region Action Filters
@@ -1014,7 +1012,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Act & Assert
         await invoker.InvokeAsync();
     }
-
     #endregion
 
     #region Action Method Signatures
@@ -1815,7 +1812,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         );
         Assert.Equal(expectedMessage, exception.Message);
     }
-
     #endregion
 
     #region Logs
@@ -1894,7 +1890,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             m => Assert.StartsWith($"Executed action {actionName} in ", m)
         );
     }
-
     #endregion
 
     protected override IActionInvoker CreateInvoker(

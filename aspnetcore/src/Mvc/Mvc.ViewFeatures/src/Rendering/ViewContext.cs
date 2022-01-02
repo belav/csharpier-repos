@@ -34,6 +34,7 @@ public class ViewContext : ActionContext
     {
         ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), ModelState);
     }
+
 #nullable enable
 
     /// <summary>

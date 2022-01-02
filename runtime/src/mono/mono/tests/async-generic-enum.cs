@@ -6,9 +6,11 @@ public enum someEnum2
     aaa,
     bbb
 }
+
 class Tests
 {
     private static GenericEnumTest<someEnum2> test1 = new GenericEnumTest<someEnum2>();
+
     public static async Task<int> Main(string[] args)
     {
         int retVal = await test1.ThrowExceptionWithGeneric(someEnum2.aaa);

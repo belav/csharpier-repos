@@ -68,7 +68,6 @@ namespace System.Linq.Expressions.Tests
                 }
             }
         }
-
         #endregion
 
         #region Verifier methods
@@ -137,7 +136,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(new Scs(a, b), f());
         }
-
         #endregion
 
         [Fact]

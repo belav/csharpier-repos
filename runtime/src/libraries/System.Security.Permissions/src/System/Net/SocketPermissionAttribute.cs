@@ -25,6 +25,7 @@ namespace System.Net
     public sealed class SocketPermissionAttribute : CodeAccessSecurityAttribute
     {
         public SocketPermissionAttribute(SecurityAction action) : base(action) { }
+
         public string Access
         {
             get { return null; }
@@ -45,6 +46,7 @@ namespace System.Net
             get { return null; }
             set { }
         }
+
         public override IPermission CreatePermission()
         {
             return null;

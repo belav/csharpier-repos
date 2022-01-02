@@ -16,7 +16,6 @@ namespace System.Speech.Internal.SrgsParser
         {
             _grammar = grammar;
         }
-
         #endregion
 
         #region Internal Methods
@@ -35,7 +34,6 @@ namespace System.Speech.Internal.SrgsParser
                 throw;
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -44,7 +42,6 @@ namespace System.Speech.Internal.SrgsParser
         {
             set { _parser = value; }
         }
-
         #endregion
 
         #region Private Methods
@@ -454,7 +451,6 @@ namespace System.Speech.Internal.SrgsParser
                 return elements;
             }
         }
-
         #endregion
 
         #region Private Fields

@@ -251,6 +251,7 @@ namespace System.Xml
                 return _bufferReader.Buffer;
             }
         }
+
         public int CompareTo(PrefixHandle that)
         {
             return GetString().CompareTo(that.GetString());
@@ -290,6 +291,7 @@ namespace System.Xml
         {
             return Equals2(prefix2.Value);
         }
+
         public static bool operator ==(PrefixHandle prefix1, string prefix2)
         {
             return prefix1.Equals2(prefix2);
@@ -319,6 +321,7 @@ namespace System.Xml
         {
             return !prefix1.Equals(prefix2);
         }
+
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             return Equals(obj as PrefixHandle);

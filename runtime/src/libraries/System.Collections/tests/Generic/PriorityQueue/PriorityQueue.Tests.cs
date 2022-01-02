@@ -275,7 +275,6 @@ namespace System.Collections.Tests
             var nodes = ((TElement Element, TPriority Priority)[])nodesField.GetValue(queue);
             return nodes.Length;
         }
-
         #endregion
 
         #region Enumeration

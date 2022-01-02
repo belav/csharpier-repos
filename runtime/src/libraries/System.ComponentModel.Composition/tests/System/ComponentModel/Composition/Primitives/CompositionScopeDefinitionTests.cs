@@ -45,6 +45,7 @@ namespace System.ComponentModel.Composition.Hosting
             private Func<
                 IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>
             > _exportsFunc;
+
             public TestCatalog(
                 Func<IQueryable<ComposablePartDefinition>> partFunc,
                 Func<IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>> exportsFunc

@@ -320,7 +320,6 @@ class Test11<T>
 
                 await TestExtractMethodAsync(code, expected);
             }
-
             #endregion
 
             #region Operators
@@ -459,7 +458,6 @@ class Test11<T>
 }";
                 await TestExtractMethodAsync(code, expected);
             }
-
             #endregion
 
             #region ExpressionBodiedMembers
@@ -871,7 +869,6 @@ class TestClass
 }";
                 await TestExtractMethodAsync(code, expected);
             }
-
             #endregion
 
             #region Patterns
@@ -899,7 +896,6 @@ class Program
 
                 await ExpectExtractMethodToFailAsync(code);
             }
-
             #endregion
 
             [WorkItem(11155, "DevDiv_Projects/Roslyn")]

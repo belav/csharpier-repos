@@ -16,6 +16,7 @@ namespace System.Xml.Tests
     public class Errata4 : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public Errata4(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -33,7 +34,6 @@ namespace System.Xml.Tests
                 <node {0}=""attr"" />
                 <node {0}:a=""attr"" xmlns:{0}=""ns1""/>
             </root>";
-
         #endregion private const string xmlDocTemplate = ...
 
         #region private const string xslStylesheetTemplate = ...
@@ -73,7 +73,6 @@ namespace System.Xml.Tests
                 </xsl:template>
 
             </xsl:stylesheet>";
-
         #endregion private const string xslStylesheetTemplate = ...
 
         #region private const string createElementsXsltAndXpath = ...
@@ -102,7 +101,6 @@ namespace System.Xml.Tests
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>";
-
         #endregion private const string createElementsXsltAndXpath = ...
 
         #region private const string createElementsXsltInline = ...
@@ -118,7 +116,6 @@ namespace System.Xml.Tests
     </xsl:element>
   </xsl:template>
 </xsl:stylesheet>";
-
         #endregion private const string createElementsXsltInline = ...
 
         //[Variation(Priority = 1, Desc = "Crate elment/attribute :: Invalid start name char", Params = new object[] { false, CharType.NCNameStartChar })]

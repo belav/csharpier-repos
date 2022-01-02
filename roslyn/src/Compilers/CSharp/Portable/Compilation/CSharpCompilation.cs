@@ -72,6 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableArray<AssemblySymbol> _lazyClsComplianceDependencies;
 
         private Conversions? _conversions;
+
         /// <summary>
         /// A conversions object that ignores nullability.
         /// </summary>
@@ -824,7 +825,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 eventQueue
             );
         }
-
         #endregion
 
         #region Submission
@@ -889,7 +889,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return false;
         }
-
         #endregion
 
         #region Syntax Trees (maintain an ordered list)
@@ -1154,7 +1153,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(this.ContainsSyntaxTree(tree));
             return _syntaxAndDeclarations.GetLazyState().OrdinalMap[tree];
         }
-
         #endregion
 
         #region References
@@ -1387,7 +1385,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return GetBoundReferenceManager().GetMetadataReference(assemblySymbol);
         }
-
         #endregion
 
         #region Symbols
@@ -2617,7 +2614,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(!_declarationDiagnosticsFrozen);
             LazyInitializer.EnsureInitialized(ref _moduleInitializerMethods).Add(method);
         }
-
         #endregion
 
         #region Binding
@@ -3013,7 +3009,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return Hash.Combine(Tree, Span.Start);
             }
         }
-
         #endregion
 
         #region Diagnostics
@@ -3761,7 +3756,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             FilterAndAppendAndFreeDiagnostics(result, ref builder, cancellationToken);
             return result.ToReadOnlyAndFree<Diagnostic>();
         }
-
         #endregion
 
         #region Resources
@@ -3788,7 +3782,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 companyName: sourceAssembly.Company
             );
         }
-
         #endregion
 
         #region Emit
@@ -4334,7 +4327,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return false;
         }
-
         #endregion
 
         #region Common Members

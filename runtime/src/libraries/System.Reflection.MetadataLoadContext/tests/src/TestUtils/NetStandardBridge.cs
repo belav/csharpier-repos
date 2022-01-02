@@ -10,35 +10,47 @@ namespace System.Reflection.Tests
     {
 #if NETCOREAPP
         public static bool IsSZArray(this Type t) => t.IsSZArray;
+
         public static bool IsVariableBoundArray(this Type t) => t.IsVariableBoundArray;
+
         public static bool IsTypeDefinition(this Type t) => t.IsTypeDefinition;
+
         public static bool IsGenericTypeParameter(this Type t) => t.IsGenericTypeParameter;
+
         public static bool IsGenericMethodParameter(this Type t) => t.IsGenericMethodParameter;
+
         public static bool IsConstructedGenericMethod(this MethodBase m) =>
             m.IsConstructedGenericMethod;
+
         public static bool IsByRefLike(this Type t) => t.IsByRefLike;
+
         public static Type[] GetForwardedTypesThunk(this Assembly a) => a.GetForwardedTypes();
 #else
         public static bool IsSZArray(this Type t) =>
             t.IsImplementedByRuntime()
                 ? (t.IsArray && t.GetArrayRank() == 1 && t.Name.EndsWith("[]"))
                 : t.CallUsingReflection<bool>("get_IsSZArray");
+
         public static bool IsVariableBoundArray(this Type t) =>
             t.IsImplementedByRuntime()
                 ? (t.IsArray && !t.IsSZArray())
                 : t.CallUsingReflection<bool>("get_IsVariableBoundArray");
+
         public static bool IsTypeDefinition(this Type t) =>
             t.IsImplementedByRuntime()
                 ? (!(t.HasElementType || t.IsConstructedGenericType || t.IsGenericParameter))
                 : t.CallUsingReflection<bool>("get_IsTypeDefinition");
+
         public static bool IsGenericTypeParameter(this Type t) =>
             t.IsImplementedByRuntime()
                 ? (t.IsGenericParameter && t.DeclaringMethod == null)
                 : t.CallUsingReflection<bool>("get_IsGenericTypeParameter");
+
         public static bool IsGenericMethodParameter(this Type t) =>
             t.IsImplementedByRuntime()
                 ? (t.IsGenericParameter && t.DeclaringMethod != null)
                 : t.CallUsingReflection<bool>("get_IsGenericMethodParameter");
+
         public static bool IsConstructedGenericMethod(this MethodBase m) =>
             m.IsImplementedByRuntime()
                 ? (m.IsGenericMethod && !m.IsGenericMethodDefinition)

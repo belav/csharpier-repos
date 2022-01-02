@@ -195,7 +195,6 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.Decrement(operand)
             );
         }
-
         #endregion
 
         #region Test verifiers
@@ -239,6 +238,7 @@ namespace System.Linq.Expressions.Tests
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(unchecked(++value), f());
         }
+
         private static void VerifyIncrementUInt(uint value, bool useInterpreter)
         {
             Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(

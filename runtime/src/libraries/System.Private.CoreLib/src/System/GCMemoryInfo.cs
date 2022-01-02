@@ -17,10 +17,13 @@ namespace System
     {
         /// <summary>Size in bytes on entry to the reported collection.</summary>
         public long SizeBeforeBytes { get; }
+
         /// <summary>Fragmentation in bytes on entry to the reported collection.</summary>
         public long FragmentationBeforeBytes { get; }
+
         /// <summary>Size in bytes on exit from the reported collection.</summary>
         public long SizeAfterBytes { get; }
+
         /// <summary>Fragmentation in bytes on exit from the reported collection.</summary>
         public long FragmentationAfterBytes { get; }
     }

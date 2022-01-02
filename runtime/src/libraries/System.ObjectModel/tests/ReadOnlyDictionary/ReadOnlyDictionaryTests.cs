@@ -519,6 +519,7 @@ namespace System.Collections.ObjectModel.Tests
         {
             get { return true; }
         }
+
         protected override object GenerateItem()
         {
             return new KeyValuePair<string, int>(m_next_item.ToString(), m_next_item++);
@@ -567,6 +568,7 @@ namespace System.Collections.ObjectModel.Tests
         {
             get { return true; }
         }
+
         protected override object GenerateItem()
         {
             return new KeyValuePair<string, int>(m_next_item.ToString(), m_next_item++);
@@ -1094,7 +1096,6 @@ namespace System.Collections.ObjectModel.Tests
         {
             get { return false; }
         }
-
         #endregion
 
         #region Not Implemented Methods

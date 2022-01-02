@@ -38,6 +38,7 @@ static class GitHub_18884
             returnVal = -1;
         }
     }
+
     static void ReproUx(ulong arg0, long arg1, ushort arg2, byte arg3)
     {
         s_5 >>= 50 / arg2; // the value shifted by here
@@ -53,6 +54,7 @@ static class GitHub_18884
             returnVal = -1;
         }
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void CheckValue(int value, int expectedValue)
     {

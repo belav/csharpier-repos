@@ -76,7 +76,6 @@ namespace CoreXml.Test.XLinq
 															</e:child1>
 														</e:elem>
 													</root>";
-
                 #endregion
 
                 //[Variation("Simple positive test 1", Priority = 0, Params = new object[] { "NNS" })]

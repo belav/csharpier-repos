@@ -274,6 +274,7 @@ namespace System.Diagnostics.Tests
         private sealed class EmptyToString
         {
             public static EmptyToString Instance { get; } = new EmptyToString();
+
             public override string ToString() => "";
         }
     }

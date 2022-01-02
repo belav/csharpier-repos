@@ -53,10 +53,12 @@ namespace System.IO
         }
 
         public override void Flush() => _stream.Flush();
+
         public override Task FlushAsync(CancellationToken cancellationToken) =>
             _stream.FlushAsync(cancellationToken);
 
         public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
+
         public override void SetLength(long value) => _stream.SetLength(value);
 
         public override int ReadTimeout

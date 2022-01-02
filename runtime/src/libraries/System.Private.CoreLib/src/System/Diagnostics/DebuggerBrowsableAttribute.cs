@@ -34,6 +34,7 @@ namespace System.Diagnostics
 
             State = state;
         }
+
         public DebuggerBrowsableState State { get; }
     }
 }

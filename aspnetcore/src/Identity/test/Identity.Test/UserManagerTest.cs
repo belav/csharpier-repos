@@ -462,6 +462,7 @@ public class UserManagerTest
     private class CustomNormalizer : ILookupNormalizer
     {
         public string NormalizeName(string key) => "#" + key;
+
         public string NormalizeEmail(string key) => "@" + key;
     }
 

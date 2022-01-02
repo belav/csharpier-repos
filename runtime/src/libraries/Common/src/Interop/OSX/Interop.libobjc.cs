@@ -18,8 +18,10 @@ internal static partial class Interop
 
         [DllImport(Libraries.libobjc)]
         private static extern IntPtr objc_getClass(string className);
+
         [DllImport(Libraries.libobjc)]
         private static extern IntPtr sel_getUid(string selector);
+
         [DllImport(Libraries.libobjc, EntryPoint = "objc_msgSend")]
         private static extern IntPtr intptr_objc_msgSend(IntPtr basePtr, IntPtr selector);
 

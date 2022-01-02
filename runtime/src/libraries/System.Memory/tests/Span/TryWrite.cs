@@ -674,6 +674,7 @@ namespace System.SpanTests
                 Assert.Equal(0, charsWritten);
             }
         }
+
         [Fact]
         public void AppendFormatted_BufferTooSmall_CustomFormatter()
         {

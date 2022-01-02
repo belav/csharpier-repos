@@ -167,7 +167,6 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             return CreateDkmClrValue(value, type, evalFlags: DkmEvaluationResultFlags.RawString);
         }
-
         #endregion
 
         #region ResultProvider Tests
@@ -635,7 +634,6 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 Assert.Equal(expectedFailed.Flags, actualFailed.Flags);
             }
         }
-
         #endregion
 
         private sealed class CustomUIVisualizerInfoComparer

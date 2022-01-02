@@ -91,6 +91,7 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
     {
         return new TestNodeBuilderPolicy(order);
     }
+
     private static MatcherPolicy CreateEndpointComparerPolicy(int order)
     {
         return new TestEndpointComparerPolicy(order);

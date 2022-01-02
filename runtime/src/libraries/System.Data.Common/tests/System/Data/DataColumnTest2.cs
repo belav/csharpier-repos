@@ -839,6 +839,7 @@ namespace System.Data.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => table.Columns[0].SetOrdinal(4));
         }
+
         [Fact]
         public void Bug672113_MulpleColConstraint()
         {

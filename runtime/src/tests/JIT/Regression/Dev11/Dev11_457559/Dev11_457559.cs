@@ -21,6 +21,7 @@ public class Test_Dev11_457559
         Console.WriteLine("Fail");
         return 101;
     }
+
     public static bool RunTest(object o)
     {
         try
@@ -36,6 +37,7 @@ public class Test_Dev11_457559
         return true;
     }
 }
+
 public enum MyEnum
 {
     Value0 = 0

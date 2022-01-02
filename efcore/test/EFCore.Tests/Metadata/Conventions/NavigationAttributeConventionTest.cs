@@ -132,7 +132,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 nav => nav.Name == nameof(BlogDetails.Blog)
             );
         }
-
         #endregion
 
         #region RequiredAttribute
@@ -334,7 +333,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Empty(ListLoggerFactory.Log);
         }
-
         #endregion
 
         #region InversePropertyAttribute
@@ -638,7 +636,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ).Message
             );
         }
-
         #endregion
 
         #region ForeignKeyAttribute
@@ -1325,7 +1322,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 context
             );
         }
-
         #endregion
 
         #region BackingFieldAttribute
@@ -1381,7 +1377,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ((IConventionNavigation)navigationBuilder.Metadata).GetFieldName()
             );
         }
-
         #endregion
 
         [ConditionalFact]

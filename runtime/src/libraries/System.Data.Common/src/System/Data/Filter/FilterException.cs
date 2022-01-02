@@ -17,6 +17,7 @@ namespace System.Data
             : base(info, context) { }
 
         public InvalidExpressionException() : base() { }
+
         public InvalidExpressionException(string? s) : base(s) { }
 
         public InvalidExpressionException(string? message, Exception? innerException)
@@ -33,6 +34,7 @@ namespace System.Data
             : base(info, context) { }
 
         public EvaluateException() : base() { }
+
         public EvaluateException(string? s) : base(s) { }
 
         public EvaluateException(string? message, Exception? innerException)
@@ -49,6 +51,7 @@ namespace System.Data
             : base(info, context) { }
 
         public SyntaxErrorException() : base() { }
+
         public SyntaxErrorException(string? s) : base(s) { }
 
         public SyntaxErrorException(string? message, Exception? innerException)
@@ -67,24 +70,28 @@ namespace System.Data
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
+
         private static InvalidExpressionException _Expr(string error)
         {
             InvalidExpressionException e = new InvalidExpressionException(error);
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
+
         private static SyntaxErrorException _Syntax(string error)
         {
             SyntaxErrorException e = new SyntaxErrorException(error);
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
+
         private static EvaluateException _Eval(string error)
         {
             EvaluateException e = new EvaluateException(error);
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
+
         private static EvaluateException _Eval(string error, Exception? innerException)
         {
             EvaluateException e = new EvaluateException(

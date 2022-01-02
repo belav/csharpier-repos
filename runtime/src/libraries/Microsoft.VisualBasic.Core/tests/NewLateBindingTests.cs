@@ -16,22 +16,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 return $"{typeof(T)}, {ToString(p1)}";
             }
+
             public object F2<T>(T p1 = default, int? p2 = 2)
             {
                 return $"{typeof(T)}, {ToString(p1)}, {ToString(p2)}";
             }
+
             public object F3<T>(object p1, T p2 = default, int? p3 = 3)
             {
                 return $"{typeof(T)}, {ToString(p2)}, {ToString(p3)}";
             }
+
             public object F4<T>(object p1, object p2, T p3 = default, int? p4 = 4)
             {
                 return $"{typeof(T)}, {ToString(p3)}, {ToString(p4)}";
             }
+
             public object F5<T>(object p1, object p2, object p3, T p4 = default, int? p5 = 5)
             {
                 return $"{typeof(T)}, {ToString(p4)}, {ToString(p5)}";
             }
+
             public object F6<T>(
                 object p1,
                 object p2,
@@ -43,6 +48,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 return $"{typeof(T)}, {ToString(p5)}, {ToString(p6)}";
             }
+
             public object F7<T>(
                 object p1,
                 object p2,
@@ -55,6 +61,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 return $"{typeof(T)}, {ToString(p6)}, {ToString(p7)}";
             }
+
             public object F8<T>(
                 object p1,
                 object p2,
@@ -68,6 +75,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 return $"{typeof(T)}, {ToString(p7)}, {ToString(p8)}";
             }
+
             private static string ToString(object obj) => obj?.ToString() ?? "null";
         }
 
@@ -300,11 +308,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         private sealed class Properties_GetOnly
         {
             private object[] _values;
+
             public Properties_GetOnly(string p, int length)
             {
                 P = p;
                 _values = new object[length];
             }
+
             public string P { get; }
             public object this[int i]
             {
@@ -380,11 +390,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         private sealed class Properties_GetAndSet
         {
             private object[] _values;
+
             public Properties_GetAndSet(string p, int length)
             {
                 P = p;
                 _values = new object[length];
             }
+
             public string P { get; set; }
             public object this[int i]
             {
@@ -443,11 +455,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         private sealed class Properties_GetAndInit
         {
             private object[] _values;
+
             public Properties_GetAndInit(string p, int length)
             {
                 P = p;
                 _values = new object[length];
             }
+
             public string P { get; init; }
             public object this[int i]
             {

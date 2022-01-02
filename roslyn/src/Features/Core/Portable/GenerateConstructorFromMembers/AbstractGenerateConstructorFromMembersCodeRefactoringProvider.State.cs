@@ -20,6 +20,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             public TextSpan TextSpan { get; private set; }
             public IMethodSymbol? MatchingConstructor { get; private set; }
             public IMethodSymbol? DelegatedConstructor { get; private set; }
+
             [NotNull]
             public INamedTypeSymbol? ContainingType { get; private set; }
             public ImmutableArray<ISymbol> SelectedMembers { get; private set; }

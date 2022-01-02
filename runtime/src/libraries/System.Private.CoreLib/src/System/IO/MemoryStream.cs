@@ -25,6 +25,7 @@ namespace System.IO
         private int _position; // read/write head.
         private int _length; // Number of bytes within the memory stream
         private int _capacity; // length of usable portion of buffer for stream
+
         // Note that _capacity == _buffer.Length for non-user-provided byte[]'s
 
         private bool _expandable; // User-provided buffers aren't expandable.

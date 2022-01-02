@@ -34,6 +34,7 @@ namespace System.Xml.XPath
                 return count;
             }
         }
+
         public virtual IEnumerator GetEnumerator()
         {
             return new Enumerator(this);

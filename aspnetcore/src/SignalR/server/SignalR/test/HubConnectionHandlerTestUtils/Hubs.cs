@@ -828,8 +828,10 @@ public class StreamingHub : TestHub
         {
             /// <summary>The channel being enumerated.</summary>
             private readonly ChannelReader<T> _channel;
+
             /// <summary>Cancellation token used to cancel the enumeration.</summary>
             private readonly CancellationToken _cancellationToken;
+
             /// <summary>The current element of the enumeration.</summary>
             private T _current;
 

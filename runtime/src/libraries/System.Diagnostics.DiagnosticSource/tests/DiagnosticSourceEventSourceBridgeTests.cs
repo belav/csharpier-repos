@@ -2369,6 +2369,7 @@ namespace System.Diagnostics.Tests
     {
         protected override void OnEventSourceCreated(EventSource eventSource) =>
             EnableEvents(eventSource, EventLevel.LogAlways);
+
         protected override void OnEventWritten(EventWrittenEventArgs eventData) { }
     }
 }

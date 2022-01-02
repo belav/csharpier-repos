@@ -22,7 +22,6 @@ namespace XLinqTests
 
         private const string purchaseOrderXml =
             @"<PurchaseOrder><Item price='100'>Motor<![CDATA[cdata]]><elem>inner text</elem>text<?pi pi pi?></Item></PurchaseOrder>";
-
         #endregion
 
         #region Fields
@@ -41,7 +40,6 @@ namespace XLinqTests
                 )
             )
         );
-
         #endregion
 
         #region Public Methods and Operators
@@ -784,7 +782,6 @@ namespace XLinqTests
                 "First node in root should be element(no ws)"
             );
         }
-
         #endregion
 
         #region Methods

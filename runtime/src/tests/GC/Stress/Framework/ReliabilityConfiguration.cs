@@ -61,6 +61,7 @@ public enum LoggingLevels
 public class ReliabilityConfig : IEnumerable, IEnumerator
 {
     private ArrayList _testSet = new ArrayList(); // this is the set of <Test... > tags we find.  There may be multiple test runs in one
+
     // config file.
     private ReliabilityTestSet _curTestSet; // The test set we're currently filling in...
     private int _index = -1; // Current test set index
@@ -112,6 +113,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     private const string configAssemblyLoadContextLoaderMode = "assemblyLoadContextLoaderMode";
     private const string configRoundRobinAppDomainCount = "numAppDomains";
     private const string configRoundRobinAssemblyLoadContextCount = "numAssemblyLoadContexts";
+
     // Attributes for the <Assembly ...> tag
     private const string configAssemblyName = "id";
     private const string configAssemblyFilename = "filename";

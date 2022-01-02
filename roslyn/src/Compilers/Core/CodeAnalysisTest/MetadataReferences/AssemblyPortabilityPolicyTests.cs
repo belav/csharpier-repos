@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </runtime>
 </configuration>
 ";
+
         private static void AssertIsEnabled(
             string appConfigPath,
             bool platform,

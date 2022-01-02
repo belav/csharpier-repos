@@ -19,6 +19,7 @@ namespace System.Reflection.Emit
         Return = 7,
         Throw = 8,
     }
+
     public readonly partial struct OpCode : System.IEquatable<System.Reflection.Emit.OpCode>
     {
         private readonly int _dummyPrimitive;
@@ -54,20 +55,24 @@ namespace System.Reflection.Emit
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(System.Reflection.Emit.OpCode obj)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Reflection.Emit.OpCode a,
             System.Reflection.Emit.OpCode b
@@ -75,6 +80,7 @@ namespace System.Reflection.Emit
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Reflection.Emit.OpCode a,
             System.Reflection.Emit.OpCode b
@@ -82,14 +88,17 @@ namespace System.Reflection.Emit
         {
             throw null;
         }
+
         public override string? ToString()
         {
             throw null;
         }
     }
+
     public partial class OpCodes
     {
         internal OpCodes() { }
+
         public static readonly System.Reflection.Emit.OpCode Add;
         public static readonly System.Reflection.Emit.OpCode Add_Ovf;
         public static readonly System.Reflection.Emit.OpCode Add_Ovf_Un;
@@ -316,11 +325,13 @@ namespace System.Reflection.Emit
         public static readonly System.Reflection.Emit.OpCode Unbox_Any;
         public static readonly System.Reflection.Emit.OpCode Volatile;
         public static readonly System.Reflection.Emit.OpCode Xor;
+
         public static bool TakesSingleByteArgument(System.Reflection.Emit.OpCode inst)
         {
             throw null;
         }
     }
+
     public enum OpCodeType
     {
         [System.ObsoleteAttribute(
@@ -333,6 +344,7 @@ namespace System.Reflection.Emit
         Prefix = 4,
         Primitive = 5,
     }
+
     public enum OperandType
     {
         InlineBrTarget = 0,
@@ -357,6 +369,7 @@ namespace System.Reflection.Emit
         ShortInlineR = 17,
         ShortInlineVar = 18,
     }
+
     public enum PackingSize
     {
         Unspecified = 0,
@@ -369,6 +382,7 @@ namespace System.Reflection.Emit
         Size64 = 64,
         Size128 = 128,
     }
+
     public enum StackBehaviour
     {
         Pop0 = 0,

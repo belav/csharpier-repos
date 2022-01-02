@@ -427,14 +427,17 @@ namespace Moq.Tests
         {
             public IBar BarField;
             public IBar Bar { get; set; }
+
             public IBar GetBar()
             {
                 return null;
             }
+
             public IBar GetBar(params int[] indices)
             {
                 return null;
             }
+
             public IBar this[int index]
             {
                 get { return null; }

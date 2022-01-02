@@ -27,6 +27,7 @@ namespace System.Text.RegularExpressions.Generator
         /// <summary>Code for a [GeneratedCode] attribute to put on the top-level generated members.</summary>
         private static readonly string s_generatedCodeAttribute =
             $"[global::System.CodeDom.Compiler.GeneratedCodeAttribute(\"{typeof(RegexGenerator).Assembly.GetName().Name}\", \"{typeof(RegexGenerator).Assembly.GetName().Version}\")]";
+
         /// <summary>Header comments and usings to include at the top of every generated file.</summary>
         private static readonly string[] s_headers = new string[]
         {

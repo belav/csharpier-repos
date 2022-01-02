@@ -12,6 +12,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int? Number { get; set; }
         }
+
         class Destination
         {
             public decimal? Number { get; set; }
@@ -46,6 +47,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int? Number { get; set; }
         }
+
         class Destination
         {
             public decimal? Number { get; set; }

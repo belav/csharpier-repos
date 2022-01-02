@@ -6541,7 +6541,6 @@ class C : TestBase
                 expectedOutput: expectedOutput
             );
         }
-
         #endregion Regression Tests
 
         #region helpers

@@ -46,9 +46,11 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType GetRoDeclaringType() => _declaringType;
+
         internal sealed override RoModule GetRoModule() => _decoder.GetRoModule();
 
         protected sealed override string ComputeName() => _decoder.ComputeName();
+
         public sealed override int MetadataToken => _decoder.MetadataToken;
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
@@ -74,15 +76,21 @@ namespace System.Reflection.TypeLoading
 
         protected sealed override MethodAttributes ComputeAttributes() =>
             _decoder.ComputeAttributes();
+
         protected sealed override CallingConventions ComputeCallingConvention() =>
             _decoder.ComputeCallingConvention();
+
         protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
             _decoder.ComputeMethodImplementationFlags();
+
         protected sealed override MethodSig<RoParameter> ComputeMethodSig() =>
             _decoder.SpecializeMethodSig(this);
+
         public sealed override MethodBody? GetMethodBody() => _decoder.SpecializeMethodBody(this);
+
         protected sealed override MethodSig<string> ComputeMethodSigStrings() =>
             _decoder.SpecializeMethodSigStrings(TypeContext);
+
         protected sealed override MethodSig<RoType> ComputeCustomModifiers() =>
             _decoder.SpecializeCustomModifiers(TypeContext);
 
@@ -109,6 +117,7 @@ namespace System.Reflection.TypeLoading
         public sealed override bool IsConstructedGenericMethod => false;
         public sealed override bool IsGenericMethodDefinition =>
             GetGenericTypeParametersNoCopy().Length != 0;
+
         public sealed override MethodInfo GetGenericMethodDefinition() =>
             IsGenericMethodDefinition ? this : throw new InvalidOperationException(); // Very uninformative but compatible exception
 
@@ -148,6 +157,7 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() =>
             GetGenericArgumentsOrParametersNoCopy();
 
@@ -157,12 +167,15 @@ namespace System.Reflection.TypeLoading
         // Used by RoConstructedGenericMethod to construct instantiated versions of method properties.
         internal sealed override MethodSig<RoParameter> SpecializeMethodSig(IRoMethodBase member) =>
             _decoder.SpecializeMethodSig(member);
+
         internal sealed override MethodSig<RoType> SpecializeCustomModifiers(
             in TypeContext typeContext
         ) => _decoder.SpecializeCustomModifiers(typeContext);
+
         internal sealed override MethodSig<string> SpecializeMethodSigStrings(
             in TypeContext typeContext
         ) => _decoder.SpecializeMethodSigStrings(typeContext);
+
         internal sealed override MethodBody? SpecializeMethodBody(IRoMethodBase owner) =>
             _decoder.SpecializeMethodBody(owner);
 

@@ -60,6 +60,7 @@ namespace System.Data
         {
             return (_left.IsTableConstant() && _right.IsTableConstant());
         }
+
         internal override bool HasLocalAggregate()
         {
             return (_left.HasLocalAggregate() || _right.HasLocalAggregate());

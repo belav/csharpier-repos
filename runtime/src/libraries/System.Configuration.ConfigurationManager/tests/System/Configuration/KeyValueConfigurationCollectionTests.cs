@@ -143,6 +143,7 @@ namespace System.ConfigurationTests
         private class TestKeyValueCollection : KeyValueConfigurationCollection
         {
             public bool TestThrowOnDuplicate => ThrowOnDuplicate;
+
             public ConfigurationElement TestCreateNewElement() => CreateNewElement();
         }
     }

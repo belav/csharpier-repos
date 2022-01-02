@@ -19,6 +19,7 @@ namespace System.Security.Cryptography
         // The DER signature format thus maxes out at 2 + 3 + 33 + 3 + 33 => 74 bytes.
         // So 128 should always work.
         private const int SignatureStackSize = 128;
+
         // The biggest supported hash algorithm is SHA-2-512, which is only 64 bytes.
         // One power of two bigger should cover most unknown algorithms, too.
         private const int HashBufferStackSize = 128;

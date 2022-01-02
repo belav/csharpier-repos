@@ -3386,6 +3386,7 @@ public class Class
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Warning, Summary);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationStartAction(this.OnCompilationStart);

@@ -6,6 +6,7 @@ namespace AutoMapper.UnitTests
     public class EnumToNullableEnum : AutoMapperSpecBase
     {
         Destination _destination;
+
         public enum SomeEnum
         {
             Foo,

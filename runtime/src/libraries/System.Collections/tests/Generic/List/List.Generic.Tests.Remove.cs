@@ -70,7 +70,6 @@ namespace System.Collections.Tests
                 () => new List<T>().RemoveAll(null)
             );
         }
-
         #endregion
 
         #region RemoveRange

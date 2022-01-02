@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.Logging.Test
     internal class TestConfiguration : JsonConfigurationProvider
     {
         private Func<string> _json;
+
         public TestConfiguration(JsonConfigurationSource source, Func<string> json) : base(source)
         {
             _json = json;

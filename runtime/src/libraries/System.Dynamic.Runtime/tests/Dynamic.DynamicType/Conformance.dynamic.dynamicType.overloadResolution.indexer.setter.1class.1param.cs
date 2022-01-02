@@ -230,6 +230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         private static Assembly s_asm;
         private static ResourceManager s_rm1;
         private static ResourceManager s_rm2;
+
         public static string GetErrorElement(ErrorElementId id)
         {
             return string.Empty;
@@ -310,6 +311,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

@@ -146,7 +146,6 @@ namespace System.Collections.Immutable
         {
             return this.Clear();
         }
-
         #endregion
 
         #region IDictionary<TKey, TValue> Properties
@@ -166,7 +165,6 @@ namespace System.Collections.Immutable
         {
             get { return new ValuesCollectionAccessor<TKey, TValue>(this); }
         }
-
         #endregion
 
         #region ICollection<KeyValuePair<TKey, TValue>> Properties
@@ -175,7 +173,6 @@ namespace System.Collections.Immutable
         {
             get { return true; }
         }
-
         #endregion
 
         #region ISortKeyCollection<TKey> Properties
@@ -187,7 +184,6 @@ namespace System.Collections.Immutable
         {
             get { return _keyComparer; }
         }
-
         #endregion
 
         /// <summary>
@@ -231,7 +227,6 @@ namespace System.Collections.Immutable
 
             return ref _root.ValueRef(key, _keyComparer);
         }
-
         #endregion
 
         /// <summary>
@@ -427,7 +422,6 @@ namespace System.Collections.Immutable
         {
             return _root.ContainsValue(value, _valueComparer);
         }
-
         #endregion
 
         #region IImmutableDictionary<TKey, TValue> Methods
@@ -528,7 +522,6 @@ namespace System.Collections.Immutable
             Requires.NotNullAllowStructs(equalKey, nameof(equalKey));
             return _root.TryGetKey(equalKey, _keyComparer, out actualKey);
         }
-
         #endregion
 
         #region IDictionary<TKey, TValue> Methods
@@ -567,7 +560,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection<KeyValuePair<TKey, TValue>> Methods
@@ -601,7 +593,6 @@ namespace System.Collections.Immutable
                 array[arrayIndex++] = item;
             }
         }
-
         #endregion
 
         #region IDictionary Properties
@@ -646,7 +637,6 @@ namespace System.Collections.Immutable
         {
             get { return new ValuesCollectionAccessor<TKey, TValue>(this); }
         }
-
         #endregion
 
         #region IDictionary Methods
@@ -712,7 +702,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection Methods
@@ -726,7 +715,6 @@ namespace System.Collections.Immutable
         {
             _root.CopyTo(array, index, this.Count);
         }
-
         #endregion
 
         #region ICollection Properties
@@ -754,7 +742,6 @@ namespace System.Collections.Immutable
                 return true;
             }
         }
-
         #endregion
 
         #region IEnumerable<KeyValuePair<TKey, TValue>> Members
@@ -773,7 +760,6 @@ namespace System.Collections.Immutable
               ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
               : this.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -788,7 +774,6 @@ namespace System.Collections.Immutable
         {
             return this.GetEnumerator();
         }
-
         #endregion
 
         /// <summary>

@@ -341,7 +341,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         // no shortcut support
         string ISuggestedAction.InputGestureText => null;
-
         #endregion
 
         #region IEquatable<ISuggestedAction>

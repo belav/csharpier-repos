@@ -904,7 +904,6 @@ class C
 "
             );
         }
-
         #endregion
 
         #region Method Bodies
@@ -1570,7 +1569,6 @@ class C2
 </symbols>"
             );
         }
-
         #endregion
 
         #region ReturnStatement
@@ -1851,7 +1849,6 @@ class Program
 </symbols>"
             );
         }
-
         #endregion
 
         #region IfStatement
@@ -1962,7 +1959,6 @@ class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region WhileStatement
@@ -2073,7 +2069,6 @@ public class SeqPointForWhile
 </symbols>"
             );
         }
-
         #endregion
 
         #region ForStatement
@@ -2243,7 +2238,6 @@ class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region ForEachStatement
@@ -3569,7 +3563,6 @@ public class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region Switch
@@ -4868,7 +4861,6 @@ class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region DoStatement
@@ -4982,7 +4974,6 @@ public class SeqPointForWhile
 </symbols>"
             );
         }
-
         #endregion
 
         #region Constructor
@@ -5184,7 +5175,6 @@ class D
                 TestOptions.DebugDll
             );
         }
-
         #endregion
 
         #region Destructor
@@ -5256,7 +5246,6 @@ public class Derived : Base
 </symbols>"
             );
         }
-
         #endregion
 
         #region Field and Property Initializers
@@ -5530,7 +5519,6 @@ class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region Auto-Property
@@ -5637,7 +5625,6 @@ public class C
                 TestOptions.Regular
             );
         }
-
         #endregion
 
         #region ReturnStatement
@@ -5899,7 +5886,6 @@ public class SeqPointAfterReturn
 </symbols>"
             );
         }
-
         #endregion
 
         #region Exception Handling
@@ -6532,7 +6518,6 @@ class Program
 </symbols>"
             );
         }
-
         #endregion
 
         #region UsingStatement
@@ -7231,7 +7216,6 @@ class C
                 source: source
             );
         }
-
         #endregion
 
         #region Using Declaration
@@ -7591,7 +7575,6 @@ class C
  </symbols>"
             );
         }
-
         #endregion
 
         // LockStatement tested in CodeGenLock
@@ -7693,7 +7676,6 @@ class Program
 </symbols>"
             );
         }
-
         #endregion
 
         #region FixedStatement
@@ -8234,7 +8216,6 @@ unsafe class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region Line Directives
@@ -8649,7 +8630,6 @@ class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region Nested Types
@@ -8706,7 +8686,6 @@ namespace N
 </symbols>"
             );
         }
-
         #endregion
 
         #region Expression Bodied Members
@@ -9065,7 +9044,6 @@ class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region Synthesized Methods
@@ -9321,7 +9299,6 @@ class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region Patterns
@@ -12111,7 +12088,6 @@ public class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region Tuples
@@ -12343,7 +12319,6 @@ public class C
 </symbols>"
             );
         }
-
         #endregion
 
         #region OutVar
@@ -13350,7 +13325,6 @@ class C
 "
             );
         }
-
         #endregion
 
         [WorkItem(4370, "https://github.com/dotnet/roslyn/issues/4370")]

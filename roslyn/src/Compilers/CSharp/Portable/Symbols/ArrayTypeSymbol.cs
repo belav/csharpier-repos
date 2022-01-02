@@ -525,7 +525,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref checkedTypes
                 );
         }
-
         #endregion
 
         protected sealed override ISymbol CreateISymbol()

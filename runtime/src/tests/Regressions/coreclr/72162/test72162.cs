@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Globalization;
+
 public class Test72162
 {
     // Bug 72162 dealt with the number of significant digits being incorrectly done on the Mac

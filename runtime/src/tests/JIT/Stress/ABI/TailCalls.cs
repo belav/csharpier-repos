@@ -11,6 +11,7 @@ namespace ABIStress
     internal partial class Program
     {
         private static List<Callee> s_tailCallees;
+
         private static bool DoTailCall(int callerIndex)
         {
             // We pregenerate tail callee parameter lists because we want to be able to select

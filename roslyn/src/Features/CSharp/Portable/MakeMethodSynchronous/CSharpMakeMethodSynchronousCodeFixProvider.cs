@@ -65,6 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
                     return node;
             }
         }
+
         private static SyntaxNode FixMethod(
             IMethodSymbol methodSymbol,
             MethodDeclarationSyntax method,

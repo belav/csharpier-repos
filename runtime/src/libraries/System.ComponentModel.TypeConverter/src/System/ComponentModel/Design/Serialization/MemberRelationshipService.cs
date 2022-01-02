@@ -274,6 +274,7 @@ namespace System.ComponentModel.Design.Serialization
 
             return Owner.GetHashCode() ^ Member.GetHashCode();
         }
+
         /// <summary>
         /// Infrastructure support to make this a first class struct
         /// </summary>

@@ -108,7 +108,6 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         // Triggered whenever InteractiveHost process creation fails.
         internal event Action<Exception?, int?>? InteractiveHostProcessCreationFailed;
-
         #endregion
 
         ~InteractiveHost()

@@ -180,7 +180,6 @@ namespace Roslyn.Utilities
                 _asynchronousComputeFunction == null && _synchronousComputeFunction != null
             );
         }
-
         #endregion
 
         public override bool TryGetValue([MaybeNullWhen(false)] out T result)

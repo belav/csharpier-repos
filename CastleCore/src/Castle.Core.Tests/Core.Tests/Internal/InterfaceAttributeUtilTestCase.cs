@@ -126,30 +126,40 @@ namespace Castle.Core.Internal.Tests
 
         [SingletonPrivate(Id = "Original")]
         public interface IDeclareSingletonPrivate { }
+
         [SingletonInherited(Id = "Original")]
         public interface IDeclareSingletonInherited { }
+
         [AdditivePrivate(Id = "Original")]
         public interface IDeclareAdditivePrivate { }
+
         [AdditiveInherited(Id = "Original")]
         public interface IDeclareAdditiveInherited { }
 
         public interface IInheritSingletonPrivate : IDeclareSingletonPrivate { }
+
         public interface IInheritSingletonInherited : IDeclareSingletonInherited { }
+
         public interface IInheritAdditivePrivate : IDeclareAdditivePrivate { }
+
         public interface IInheritAdditiveInherited : IDeclareAdditiveInherited { }
 
         [SingletonInherited(Id = "Override1")]
         public interface IOverrideSingletonInherited1 : IInheritSingletonInherited { }
+
         [SingletonInherited(Id = "Override2")]
         public interface IOverrideSingletonInherited2 : IInheritSingletonInherited { }
+
         [AdditiveInherited(Id = "Override1")]
         public interface IOverrideAdditiveInherited1 : IInheritAdditiveInherited { }
+
         [AdditiveInherited(Id = "Override2")]
         public interface IOverrideAdditiveInherited2 : IInheritAdditiveInherited { }
 
         public interface ISymmetricSingletonInherited
             : IOverrideSingletonInherited1,
               IOverrideSingletonInherited2 { }
+
         public interface ISymmetricAdditiveInherited
             : IOverrideAdditiveInherited1,
               IOverrideAdditiveInherited2 { }
@@ -157,6 +167,7 @@ namespace Castle.Core.Internal.Tests
         public interface IAsymmetricSingletonInherited
             : IDeclareSingletonInherited,
               IOverrideSingletonInherited1 { }
+
         public interface IAsymmetricAdditiveInherited
             : IDeclareAdditiveInherited,
               IOverrideAdditiveInherited1 { }

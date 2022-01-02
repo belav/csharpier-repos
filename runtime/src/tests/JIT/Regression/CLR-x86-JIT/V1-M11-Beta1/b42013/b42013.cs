@@ -16,6 +16,7 @@ namespace Test
         {
             return null;
         }
+
         static bool[] Func3(ulong[] param4)
         {
             return null;

@@ -18,14 +18,17 @@ public class Base : IVehicle
     {
         return 1;
     }
+
     public int Stop()
     {
         return 2;
     }
+
     public virtual int Turn()
     {
         return 3;
     }
+
     public int Walk()
     {
         return 1;
@@ -48,16 +51,19 @@ public class Derived2 : Base, IVehicle
     {
         return 6;
     }
+
     // legal - we redeclared IVehicle support
     int IVehicle.Start()
     {
         return 5;
     }
+
     // replaces IVehicle.Turn
     int IVehicle.Turn()
     {
         return 7;
     }
+
     // replaces Base.Turn
     public override int Turn()
     {

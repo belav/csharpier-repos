@@ -4132,6 +4132,7 @@ class C
 
             Assert.True(emitResult.Success);
         }
+
         #region "PE and metadata bits"
 
         [Fact]
@@ -4598,7 +4599,6 @@ class C
             );
             Assert.Equal(1024, peHeaders.PEHeader.FileAlignment);
         }
-
         #endregion
 
         [Fact]

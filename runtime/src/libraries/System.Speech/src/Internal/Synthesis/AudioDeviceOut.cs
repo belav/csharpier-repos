@@ -29,6 +29,7 @@ namespace System.Speech.Internal.Synthesis
         {
             Dispose(false);
         }
+
         public void Dispose()
         {
             Dispose(true);
@@ -47,7 +48,6 @@ namespace System.Speech.Internal.Synthesis
                 ((IDisposable)_evt).Dispose();
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -295,7 +295,6 @@ namespace System.Speech.Internal.Synthesis
 
             _evt.WaitOne();
         }
-
         #endregion
 
         #region Audio device specific methods
@@ -353,7 +352,6 @@ namespace System.Speech.Internal.Synthesis
 
             return MMSYSERR.NOERROR;
         }
-
         #endregion
 
         #endregion
@@ -371,7 +369,6 @@ namespace System.Speech.Internal.Synthesis
                 return new TimeSpan((_bytesWritten * TimeSpan.TicksPerSecond) / _nAvgBytesPerSec);
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -477,7 +474,6 @@ namespace System.Speech.Internal.Synthesis
             }
             ClearBuffers();
         }
-
         #endregion
 
         #region Private Types
@@ -498,6 +494,7 @@ namespace System.Speech.Internal.Synthesis
             {
                 _userData = userData;
             }
+
             public void Dispose()
             {
                 if (_waveHeader != null)
@@ -519,7 +516,6 @@ namespace System.Speech.Internal.Synthesis
             internal WaveHeader _waveHeader;
             internal object _userData;
         }
-
         #endregion
 
         #region Private Fields

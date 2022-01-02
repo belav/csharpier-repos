@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
@@ -56,6 +57,7 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
@@ -95,6 +97,7 @@ namespace SimpleArray_01
                 foo(ref index);
             }
         }
+
         /********************************************************************************************
 		* RngChk shall not be eliminated if induction vairable is modified through function call in the inner loop
 		********************************************************************************************/

@@ -151,7 +151,6 @@ namespace System.Text.Json.Nodes
         ///   Returns <see langword="false"/>.
         /// </summary>
         bool ICollection<JsonNode?>.IsReadOnly => false;
-
         #endregion
 
         private void DetachParent(JsonNode? item)

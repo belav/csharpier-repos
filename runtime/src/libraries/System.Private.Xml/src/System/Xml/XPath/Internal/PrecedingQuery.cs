@@ -28,6 +28,7 @@ namespace MS.Internal.Xml.XPath
         {
             _ancestorStk = new StackNav();
         }
+
         private PrecedingQuery(PrecedingQuery other) : base(other)
         {
             _workIterator = Clone(other._workIterator);
@@ -108,6 +109,7 @@ namespace MS.Internal.Xml.XPath
         {
             return new PrecedingQuery(this);
         }
+
         public override QueryProps Properties
         {
             get { return base.Properties | QueryProps.Reverse; }

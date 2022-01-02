@@ -1763,7 +1763,6 @@ namespace System.Net.Http.Tests
             ContentDispositionHeaderValue header = TryParse(cd);
             ValidateHeaderValues(header, "attachment", @"""=?ISO-8859-1?Q?foo-=E4.html?=""");
         }
-
         #endregion
 
         private static void ValidateHeaderValues(
@@ -1864,7 +1863,6 @@ namespace System.Net.Http.Tests
 
             public bool Valid { get; private set; }
         }
-
         #endregion Tests from HenrikN
 
         #region Helper methods

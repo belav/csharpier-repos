@@ -207,7 +207,6 @@ namespace System.Collections.Immutable
                 }
             }
         }
-
         #endregion
 
         #region IImmutableDictionary<TKey,TValue> Properties
@@ -219,7 +218,6 @@ namespace System.Collections.Immutable
         {
             return this.Clear();
         }
-
         #endregion
 
         #region IDictionary<TKey, TValue> Properties
@@ -239,7 +237,6 @@ namespace System.Collections.Immutable
         {
             get { return new ValuesCollectionAccessor<TKey, TValue>(this); }
         }
-
         #endregion
 
         /// <summary>
@@ -286,7 +283,6 @@ namespace System.Collections.Immutable
         {
             get { return true; }
         }
-
         #endregion
 
         #region Public methods
@@ -528,7 +524,6 @@ namespace System.Collections.Immutable
         {
             return new Enumerator(_root);
         }
-
         #endregion
 
         #region IImmutableDictionary<TKey,TValue> Methods
@@ -594,7 +589,6 @@ namespace System.Collections.Immutable
         {
             return this.Remove(key);
         }
-
         #endregion
 
         #region IDictionary<TKey, TValue> Methods
@@ -633,7 +627,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection<KeyValuePair<TKey, TValue>> Methods
@@ -667,7 +660,6 @@ namespace System.Collections.Immutable
                 array[arrayIndex++] = item;
             }
         }
-
         #endregion
 
         #region IDictionary Properties
@@ -712,7 +704,6 @@ namespace System.Collections.Immutable
         {
             get { return new ValuesCollectionAccessor<TKey, TValue>(this); }
         }
-
         #endregion
 
         /// <summary>
@@ -786,7 +777,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection Methods
@@ -807,7 +797,6 @@ namespace System.Collections.Immutable
                 array.SetValue(new DictionaryEntry(item.Key, item.Value), arrayIndex++);
             }
         }
-
         #endregion
 
         #region ICollection Properties
@@ -835,7 +824,6 @@ namespace System.Collections.Immutable
                 return true;
             }
         }
-
         #endregion
 
         #region IEnumerable<KeyValuePair<TKey, TValue>> Members
@@ -854,7 +842,6 @@ namespace System.Collections.Immutable
               ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
               : this.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -869,7 +856,6 @@ namespace System.Collections.Immutable
         {
             return this.GetEnumerator();
         }
-
         #endregion
 
         /// <summary>
@@ -1102,7 +1088,6 @@ namespace System.Collections.Immutable
                 );
             }
         }
-
         #endregion
 
         /// <summary>

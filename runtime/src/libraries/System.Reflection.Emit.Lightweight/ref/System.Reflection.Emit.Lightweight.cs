@@ -9,22 +9,27 @@ namespace System.Reflection.Emit
     public sealed partial class DynamicILInfo
     {
         internal DynamicILInfo() { }
+
         public System.Reflection.Emit.DynamicMethod DynamicMethod
         {
             get { throw null; }
         }
+
         public int GetTokenFor(byte[] signature)
         {
             throw null;
         }
+
         public int GetTokenFor(System.Reflection.Emit.DynamicMethod method)
         {
             throw null;
         }
+
         public int GetTokenFor(System.RuntimeFieldHandle field)
         {
             throw null;
         }
+
         public int GetTokenFor(
             System.RuntimeFieldHandle field,
             System.RuntimeTypeHandle contextType
@@ -32,10 +37,12 @@ namespace System.Reflection.Emit
         {
             throw null;
         }
+
         public int GetTokenFor(System.RuntimeMethodHandle method)
         {
             throw null;
         }
+
         public int GetTokenFor(
             System.RuntimeMethodHandle method,
             System.RuntimeTypeHandle contextType
@@ -43,24 +50,33 @@ namespace System.Reflection.Emit
         {
             throw null;
         }
+
         public int GetTokenFor(System.RuntimeTypeHandle type)
         {
             throw null;
         }
+
         public int GetTokenFor(string literal)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe void SetCode(byte* code, int codeSize, int maxStackSize) { }
+
         public void SetCode(byte[]? code, int maxStackSize) { }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe void SetExceptions(byte* exceptions, int exceptionsSize) { }
+
         public void SetExceptions(byte[]? exceptions) { }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe void SetLocalSignature(byte* localSignature, int signatureSize) { }
+
         public void SetLocalSignature(byte[]? localSignature) { }
     }
+
     public sealed partial class DynamicMethod : System.Reflection.MethodInfo
     {
         public DynamicMethod(
@@ -72,6 +88,7 @@ namespace System.Reflection.Emit
             System.Reflection.Module m,
             bool skipVisibility
         ) { }
+
         public DynamicMethod(
             string name,
             System.Reflection.MethodAttributes attributes,
@@ -81,20 +98,24 @@ namespace System.Reflection.Emit
             System.Type owner,
             bool skipVisibility
         ) { }
+
         public DynamicMethod(string name, System.Type? returnType, System.Type[]? parameterTypes)
         { }
+
         public DynamicMethod(
             string name,
             System.Type? returnType,
             System.Type[]? parameterTypes,
             bool restrictedSkipVisibility
         ) { }
+
         public DynamicMethod(
             string name,
             System.Type? returnType,
             System.Type[]? parameterTypes,
             System.Reflection.Module m
         ) { }
+
         public DynamicMethod(
             string name,
             System.Type? returnType,
@@ -102,12 +123,14 @@ namespace System.Reflection.Emit
             System.Reflection.Module m,
             bool skipVisibility
         ) { }
+
         public DynamicMethod(
             string name,
             System.Type? returnType,
             System.Type[]? parameterTypes,
             System.Type owner
         ) { }
+
         public DynamicMethod(
             string name,
             System.Type? returnType,
@@ -115,6 +138,7 @@ namespace System.Reflection.Emit
             System.Type owner,
             bool skipVisibility
         ) { }
+
         public override System.Reflection.MethodAttributes Attributes
         {
             get { throw null; }
@@ -172,10 +196,12 @@ namespace System.Reflection.Emit
         {
             get { throw null; }
         }
+
         public sealed override System.Delegate CreateDelegate(System.Type delegateType)
         {
             throw null;
         }
+
         public sealed override System.Delegate CreateDelegate(
             System.Type delegateType,
             object? target
@@ -183,6 +209,7 @@ namespace System.Reflection.Emit
         {
             throw null;
         }
+
         public System.Reflection.Emit.ParameterBuilder? DefineParameter(
             int position,
             System.Reflection.ParameterAttributes attributes,
@@ -191,38 +218,47 @@ namespace System.Reflection.Emit
         {
             throw null;
         }
+
         public override System.Reflection.MethodInfo GetBaseDefinition()
         {
             throw null;
         }
+
         public override object[] GetCustomAttributes(bool inherit)
         {
             throw null;
         }
+
         public override object[] GetCustomAttributes(System.Type attributeType, bool inherit)
         {
             throw null;
         }
+
         public System.Reflection.Emit.DynamicILInfo GetDynamicILInfo()
         {
             throw null;
         }
+
         public System.Reflection.Emit.ILGenerator GetILGenerator()
         {
             throw null;
         }
+
         public System.Reflection.Emit.ILGenerator GetILGenerator(int streamSize)
         {
             throw null;
         }
+
         public override System.Reflection.MethodImplAttributes GetMethodImplementationFlags()
         {
             throw null;
         }
+
         public override System.Reflection.ParameterInfo[] GetParameters()
         {
             throw null;
         }
+
         public override object? Invoke(
             object? obj,
             System.Reflection.BindingFlags invokeAttr,
@@ -233,10 +269,12 @@ namespace System.Reflection.Emit
         {
             throw null;
         }
+
         public override bool IsDefined(System.Type attributeType, bool inherit)
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;

@@ -25,6 +25,7 @@ public struct Color
     {
         _simdVector = new Vector3((float)r, (float)g, (float)b);
     }
+
     public Color(string str)
     {
         string[] nums = str.Split(',');
@@ -39,6 +40,7 @@ public struct Color
         result._simdVector = (float)n * v._simdVector;
         return result;
     }
+
     public static Color Times(Color v1, Color v2)
     {
         Color result;
@@ -52,6 +54,7 @@ public struct Color
         result._simdVector = v1._simdVector + v2._simdVector;
         return result;
     }
+
     public static Color Minus(Color v1, Color v2)
     {
         Color result;

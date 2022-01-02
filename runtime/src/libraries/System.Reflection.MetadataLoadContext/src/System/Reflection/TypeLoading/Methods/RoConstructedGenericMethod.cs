@@ -29,23 +29,29 @@ namespace System.Reflection.TypeLoading
 
         internal sealed override RoType GetRoDeclaringType() =>
             _genericMethodDefinition.GetRoDeclaringType();
+
         internal sealed override RoModule GetRoModule() => _genericMethodDefinition.GetRoModule();
 
         protected sealed override string ComputeName() => _genericMethodDefinition.Name;
+
         public sealed override int MetadataToken => _genericMethodDefinition.MetadataToken;
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
             _genericMethodDefinition.CustomAttributes;
         public sealed override bool IsConstructedGenericMethod => true;
         public sealed override bool IsGenericMethodDefinition => false;
+
         protected sealed override MethodAttributes ComputeAttributes() =>
             _genericMethodDefinition.Attributes;
+
         protected sealed override CallingConventions ComputeCallingConvention() =>
             _genericMethodDefinition.CallingConvention;
+
         protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
             _genericMethodDefinition.MethodImplementationFlags;
 
         protected sealed override MethodSig<RoParameter> ComputeMethodSig() =>
             _genericMethodDefinition.SpecializeMethodSig(this);
+
         protected sealed override MethodSig<RoType> ComputeCustomModifiers() =>
             _genericMethodDefinition.SpecializeCustomModifiers(TypeContext);
 
@@ -57,6 +63,7 @@ namespace System.Reflection.TypeLoading
 
         internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() =>
             _genericMethodArguments;
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
 
         public sealed override MethodInfo GetGenericMethodDefinition() => _genericMethodDefinition;

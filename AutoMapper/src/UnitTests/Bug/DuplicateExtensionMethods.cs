@@ -27,6 +27,7 @@ namespace AutoMapper.UnitTests.Bug
             public decimal UnUsedAmount { get; set; }
             public List<Outlay> Outlay { get; set; }
         }
+
         class Destination
         {
             public int UserId { get; set; }

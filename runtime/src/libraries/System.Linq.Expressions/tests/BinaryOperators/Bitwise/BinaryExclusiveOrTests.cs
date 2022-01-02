@@ -112,7 +112,6 @@ namespace System.Linq.Expressions.Tests
                 }
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -228,7 +227,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(a ^ b, f());
         }
-
         #endregion
 
         [Fact]

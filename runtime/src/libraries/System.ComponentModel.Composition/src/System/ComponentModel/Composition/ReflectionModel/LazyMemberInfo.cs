@@ -148,6 +148,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             return !left.Equals(right);
         }
+
         private static void EnsureSupportedMemberType(MemberTypes memberType, string argument)
         {
             MemberTypes supportedTypes =

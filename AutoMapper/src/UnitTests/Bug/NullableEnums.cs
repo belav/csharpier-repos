@@ -9,6 +9,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public EnumType? A { get; set; }
         }
+
         public class Dst
         {
             public EnumType? A { get; set; }

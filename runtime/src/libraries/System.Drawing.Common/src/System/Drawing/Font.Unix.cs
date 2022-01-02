@@ -360,6 +360,7 @@ namespace System.Drawing
         {
             CreateFont(familyName, emSize, style, unit, gdiCharSet, gdiVerticalFont);
         }
+
         internal Font(string familyName, float emSize, string systemName)
             : this(familyName, emSize, FontStyle.Regular, GraphicsUnit.Point, DefaultCharSet, false)
         {

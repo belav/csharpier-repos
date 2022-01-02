@@ -530,7 +530,6 @@ namespace Microsoft.CodeAnalysis
                 failureReason = null;
                 return result;
             }
-
             #endregion
 
             #region Strings
@@ -547,7 +546,6 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected override string? CreateNullForString() => null;
-
             #endregion
 
             #region Locations

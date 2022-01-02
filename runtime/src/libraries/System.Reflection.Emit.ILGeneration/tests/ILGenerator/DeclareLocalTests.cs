@@ -171,12 +171,16 @@ namespace System.Reflection.Emit.Tests
         }
 
         public class TestClassLocal1 { }
+
         public struct TestStructLocal1 { }
+
         public delegate void TestDelegateLocal1(TestStructLocal1 ts);
+
         public enum TestEnumLocal1
         {
             DEFAULT
         }
+
         public class TestExceptionLocal1 : Exception { }
     }
 }

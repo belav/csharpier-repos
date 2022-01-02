@@ -27,10 +27,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal static readonly Boxed Sentinel = new Boxed(default);
 
             internal readonly TypeWithAnnotations Value;
+
             internal Boxed(TypeWithAnnotations value)
             {
                 Value = value;
             }
+
             internal string GetDebuggerDisplay() => Value.GetDebuggerDisplay();
         }
 
@@ -269,6 +271,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         .Construct(ImmutableArray.Create(typeSymbol))
                 );
         }
+
 #nullable disable
 
         /// <summary>
@@ -281,6 +284,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private TypeWithAnnotations AsNullableReferenceType() =>
             _extensions.AsNullableReferenceType(this);
+
         public TypeWithAnnotations AsNotNullableReferenceType() =>
             _extensions.AsNotNullableReferenceType(this);
 
@@ -328,8 +332,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public Cci.PrimitiveTypeCode PrimitiveTypeCode => Type.PrimitiveTypeCode;
 
         public bool IsVoidType() => _extensions.IsVoid(DefaultType);
+
         public bool IsSZArray() => _extensions.IsSZArray(DefaultType);
+
         public bool IsStatic => _extensions.IsStatic(DefaultType);
+
         public bool IsRestrictedType(bool ignoreSpanLikeTypes = false) =>
             _extensions.IsRestrictedType(DefaultType, ignoreSpanLikeTypes);
 
@@ -1087,17 +1094,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             internal override bool IsResolved => true;
+
             internal override TypeSymbol GetResolvedType(TypeSymbol defaultType) => defaultType;
+
             internal override ImmutableArray<CustomModifier> CustomModifiers => _customModifiers;
 
             internal override SpecialType GetSpecialType(TypeSymbol typeSymbol) =>
                 typeSymbol.SpecialType;
+
             internal override bool IsRestrictedType(
                 TypeSymbol typeSymbol,
                 bool ignoreSpanLikeTypes
             ) => typeSymbol.IsRestrictedType(ignoreSpanLikeTypes);
+
             internal override bool IsStatic(TypeSymbol typeSymbol) => typeSymbol.IsStatic;
+
             internal override bool IsVoid(TypeSymbol typeSymbol) => typeSymbol.IsVoidType();
+
             internal override bool IsSZArray(TypeSymbol typeSymbol) => typeSymbol.IsSZArray();
 
             internal override TypeSymbol GetNullableUnderlyingTypeOrSelf(TypeSymbol typeSymbol) =>
@@ -1202,7 +1215,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             internal override bool IsVoid(TypeSymbol typeSymbol) => false;
+
             internal override bool IsSZArray(TypeSymbol typeSymbol) => false;
+
             internal override bool IsStatic(TypeSymbol typeSymbol) => false;
 
             private TypeSymbol GetResolvedType()
@@ -1237,8 +1252,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             internal override bool IsResolved => (object)_resolved != null;
+
             internal override TypeSymbol GetResolvedType(TypeSymbol defaultType) =>
                 GetResolvedType();
+
             internal override ImmutableArray<CustomModifier> CustomModifiers =>
                 ImmutableArray<CustomModifier>.Empty;
 

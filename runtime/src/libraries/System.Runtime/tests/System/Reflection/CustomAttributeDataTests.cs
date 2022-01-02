@@ -151,8 +151,11 @@ namespace System.Reflection.Tests
         private class MyAttribute : Attribute
         {
             internal MyAttribute() { }
+
             internal MyAttribute(int i) { }
+
             internal MyAttribute(string s) { }
+
             internal MyAttribute(int i, int j) { }
 
             static MyAttribute() { }

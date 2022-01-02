@@ -40,6 +40,7 @@ namespace System.Xml.Xsl.XsltOld
             props._nameParent = nameParent;
             return props;
         }
+
         public bool Empty
         {
             get { return _empty; }
@@ -66,6 +67,7 @@ namespace System.Xml.Xsl.XsltOld
         }
 
         private static readonly Hashtable s_table = CreatePropsTable();
+
         //        private static HtmlElementProps  s_otherElements = Create(false, false, false, false, false, false, false);
 
         public static HtmlElementProps? GetProps(string name)
@@ -173,6 +175,7 @@ namespace System.Xml.Xsl.XsltOld
             props._name = name;
             return props;
         }
+
         public bool Abr
         {
             get { return _abr; }
@@ -187,6 +190,7 @@ namespace System.Xml.Xsl.XsltOld
         }
 
         private static readonly Hashtable s_table = CreatePropsTable();
+
         //      private static HtmlElementProps  s_otherAttributes = Create(false, false, false);
 
         public static HtmlAttributeProps? GetProps(string name)

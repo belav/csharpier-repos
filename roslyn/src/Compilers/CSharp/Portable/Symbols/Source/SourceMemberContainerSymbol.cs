@@ -547,7 +547,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics.Add(ErrorCode.WRN_RecordNamedDisallowed, location, name);
             }
         }
-
         #endregion
 
         #region Completion
@@ -780,7 +779,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
         }
-
         #endregion
 
         #region Containers
@@ -794,7 +792,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return _containingSymbol; }
         }
-
         #endregion
 
         #region Flags Encoded Properties
@@ -925,7 +922,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return result;
         }
-
         #endregion
 
         #region Syntax
@@ -1036,7 +1032,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return false;
         }
-
         #endregion
 
         #region Members
@@ -6142,7 +6137,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
         }
-
         #endregion
 
         #region Extension Methods
@@ -6181,7 +6175,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return this.ContainsExtensionMethods; }
         }
-
         #endregion
 
         public sealed override NamedTypeSymbol ConstructedFrom

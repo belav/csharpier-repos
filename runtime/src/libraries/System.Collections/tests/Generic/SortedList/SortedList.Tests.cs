@@ -28,7 +28,6 @@ namespace System.Collections.Tests
 
         protected override Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         #region IDictionary tests
@@ -130,7 +129,6 @@ namespace System.Collections.Tests
                 () => new SortedList<string, int>(source, StringComparer.OrdinalIgnoreCase)
             );
         }
-
         #endregion
 
         #region ICollection tests

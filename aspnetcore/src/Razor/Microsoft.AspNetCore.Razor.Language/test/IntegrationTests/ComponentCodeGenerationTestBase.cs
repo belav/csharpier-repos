@@ -71,6 +71,7 @@ public abstract class ComponentCodeGenerationTestBase : RazorBaselineIntegration
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
+
     [Fact]
     public void ChildComponent_InFunctionsDirective()
     {
@@ -2452,7 +2453,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Child Content
@@ -2875,7 +2875,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Directives
@@ -3250,7 +3249,6 @@ namespace AnotherTest
             }
         );
     }
-
     #endregion
 
     #region EventCallback
@@ -3730,7 +3728,6 @@ namespace Test
             }
         );
     }
-
     #endregion
 
     #region Event Handlers
@@ -4270,7 +4267,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Generics
@@ -5853,7 +5849,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Key
@@ -5989,7 +5984,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Splat
@@ -6218,7 +6212,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Ref
@@ -6357,7 +6350,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Templates
@@ -6654,7 +6646,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Whitespace
@@ -6898,7 +6889,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Legacy 3.1 Whitespace
@@ -7165,7 +7155,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region Imports
@@ -7409,7 +7398,6 @@ namespace New.Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region "CSS scoping"
@@ -8245,7 +8233,6 @@ namespace Test
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region LinePragmas

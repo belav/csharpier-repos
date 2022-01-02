@@ -351,12 +351,16 @@ namespace System.Text.Json.Serialization.Tests
 
             [JsonIgnore]
             public string AValue { get; }
+
             [JsonIgnore]
             public string EValue { get; }
+
             [JsonIgnore]
             public string IValue { get; }
+
             [JsonIgnore]
             public string MValue { get; }
+
             [JsonIgnore]
             public string QValue { get; }
 

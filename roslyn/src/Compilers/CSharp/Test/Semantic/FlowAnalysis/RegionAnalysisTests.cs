@@ -2978,7 +2978,6 @@ class C
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysis.CapturedInside));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysis.CapturedOutside));
         }
-
         #endregion
 
         #region "Statements"
@@ -4867,7 +4866,6 @@ class Program {
                 );
             }
         }
-
         #endregion
 
         #region "lambda"
@@ -6107,7 +6105,6 @@ class C
                 Assert.Equal("y", GetSymbolNamesJoined(flowAnalysis.VariablesDeclared));
             }
         }
-
         #endregion
 
         #region "query expressions"
@@ -6542,7 +6539,6 @@ public class Test
             Assert.Equal("b", GetSymbolNamesJoined(dataFlowAnalysisResults.CapturedInside));
             Assert.Equal("y, x", GetSymbolNamesJoined(dataFlowAnalysisResults.CapturedOutside));
         }
-
         #endregion query expressions
 
         #region "switch statement tests"
@@ -6790,7 +6786,6 @@ class Test
                 GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside)
             );
         }
-
         #endregion
 
         #region "Misc."
@@ -8944,7 +8939,6 @@ class Program
             Assert.Equal("x", GetSymbolNamesJoined(analysis.WrittenInside));
             Assert.Equal("px", GetSymbolNamesJoined(analysis.WrittenOutside));
         }
-
         #endregion
 
         #region "Used Local Functions"
@@ -9782,7 +9776,6 @@ class C
             Assert.Null(GetSymbolNamesJoined(results.WrittenOutside));
             Assert.Equal("Local, Sub", GetSymbolNamesJoined(results.UsedLocalFunctions));
         }
-
         #endregion
 
         #region "Top level statements"
@@ -9898,7 +9891,6 @@ Func<int> lambda = () => { /*<bind>*/return args.Length;/*</bind>*/ };
                 GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside)
             );
         }
-
         #endregion
 
         #region Interpolated String Handlers
@@ -9966,7 +9958,6 @@ public struct CustomHandler
             Assert.Equal("i1, i2, c", GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenInside));
             Assert.Equal("args", GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside));
         }
-
         #endregion
 
         [Fact]

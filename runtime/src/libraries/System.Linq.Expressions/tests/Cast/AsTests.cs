@@ -1230,7 +1230,6 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.TypeAs(unreadable, typeof(string))
             );
         }
-
         #endregion
 
         #region Generic helpers
@@ -1274,7 +1273,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyGenericWithStructRestrictionAsValueType<Ts>(array[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -2264,7 +2262,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(value as ValueType, f());
         }
-
         #endregion
 
         public static IEnumerable<object[]> ObjectsAndTypes()

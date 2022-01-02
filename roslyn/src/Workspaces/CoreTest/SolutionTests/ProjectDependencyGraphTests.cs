@@ -69,7 +69,6 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             );
             Assert.Contains<string>(actualResult, expectedResults);
         }
-
         #endregion
 
         #region Dependency Sets
@@ -116,7 +115,6 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             );
             Assert.Equal(expectedResult, actualResult);
         }
-
         #endregion
 
         #region GetProjectsThatThisProjectTransitivelyDependsOn
@@ -370,7 +368,6 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
             Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
         }
-
         #endregion
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -797,7 +794,6 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
 
             Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
         }
-
         #endregion
 
         #region Helpers

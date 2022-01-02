@@ -16,11 +16,13 @@ namespace AutoMapper.UnitTests.Projection
             public int Id { get; set; }
             public Source Parent { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
             public Destination Parent { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
@@ -29,6 +31,7 @@ namespace AutoMapper.UnitTests.Projection
                     c.Internal().RecursiveQueriesMaxDepth = 1;
                 }
             );
+
         [Fact]
         public void Should_work()
         {

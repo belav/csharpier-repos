@@ -852,6 +852,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             // false is default value of bool
             public bool Paid { get; set; }
+
             // null is default value of nullable
             public DateTime? PaidDate { get; set; }
 

@@ -10,6 +10,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int Number { get; set; }
         }
+
         class Destination
         {
             public int Type { get; set; }

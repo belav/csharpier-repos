@@ -870,7 +870,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public static Forest GetCurrentForest() =>
             GetForest(new DirectoryContext(DirectoryContextType.Forest));
-
         #endregion public methods
 
         #region public properties
@@ -1034,7 +1033,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 return _cachedNamingRoleOwner;
             }
         }
-
         #endregion public properties
 
         #region private methods

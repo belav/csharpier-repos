@@ -97,6 +97,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             public override string SourceTypeIdentifier =>
                 StandardTableDataSources.CommentTableDataSource;
             public override string Identifier => _identifier;
+
             public override object GetItemKey(TodoItemsUpdatedArgs data) => data.DocumentId;
 
             protected override object GetOrUpdateAggregationKey(TodoItemsUpdatedArgs data)

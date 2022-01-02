@@ -41,6 +41,7 @@ namespace Test
                 return 100;
             }
         }
+
         public static sbyte[] m_asuFwd6;
         public static bool[] m_abFwd12;
     }

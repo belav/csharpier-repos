@@ -594,7 +594,6 @@ namespace System.Reflection
         {
             return GetTypes(this);
         }
-
         #endregion
 
         #region Public Members

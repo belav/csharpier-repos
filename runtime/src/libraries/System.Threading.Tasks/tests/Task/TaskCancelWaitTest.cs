@@ -670,7 +670,6 @@ namespace System.Threading.Tasks.Tests.CancelWait
         /// so is the parent will get cancelled the children will get as well
         /// </summary>
         public bool IsRespectParentCancellation { get; private set; }
-
         #endregion
 
         #region Helper Methods

@@ -46,6 +46,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -110,6 +111,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -134,6 +136,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public static dynamic count1 = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -549,6 +552,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public delegate int MyDel(int i);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -566,6 +570,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -600,6 +605,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public delegate int MyDel(int i);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -617,6 +623,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -668,6 +675,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -859,6 +867,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public delegate dynamic MyDel(dynamic p1, dynamic p2 = default(object), long p3 = 100);
+
         public dynamic Method()
         {
             MyDel md = delegate(dynamic d, object o, long n)
@@ -970,6 +979,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public delegate dynamic MyDel(dynamic p1, dynamic p2 = default(object), long p3 = 100);
+
         public dynamic Method()
         {
             MyDel md = delegate(dynamic d, dynamic o, long n)
@@ -1019,6 +1029,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public delegate string MyDel(string s);
+
         public static MyDel M()
         {
             return new MyDel(

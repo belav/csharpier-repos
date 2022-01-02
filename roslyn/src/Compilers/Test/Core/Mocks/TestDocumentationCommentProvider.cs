@@ -19,7 +19,9 @@ namespace Roslyn.Test.Utilities
             CultureInfo preferredCulture,
             CancellationToken cancellationToken
         ) => "";
+
         public override bool Equals(object obj) => obj != null && this.GetType() == obj.GetType();
+
         public override int GetHashCode() => GetType().GetHashCode();
     }
 
@@ -31,7 +33,9 @@ namespace Roslyn.Test.Utilities
             CultureInfo preferredCulture,
             CancellationToken cancellationToken
         ) => "";
+
         public override bool Equals(object obj) => ReferenceEquals(this, obj);
+
         public override int GetHashCode() => RuntimeHelpers.GetHashCode(this);
     }
 }

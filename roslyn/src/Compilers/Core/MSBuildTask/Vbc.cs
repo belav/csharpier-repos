@@ -863,7 +863,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
             }
         }
-
         #endregion
 
         /// <summary>

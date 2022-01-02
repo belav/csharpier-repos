@@ -25,6 +25,7 @@ public class SetCookieHeaderValue
     private const string DomainToken = "domain";
     private const string PathToken = "path";
     private const string SecureToken = "secure";
+
     // RFC Draft: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00
     private const string SameSiteToken = "samesite";
     private static readonly string SameSiteNoneToken = SameSiteMode.None

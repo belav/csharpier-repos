@@ -324,6 +324,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         protected class SelfRef
         {
             public int Id { get; set; }
+
             // TODO: Make both non-nullable when #25830 is fixed
             public SelfRef? SelfRef1 { get; set; }
             public SelfRef? SelfRef2 { get; set; }
@@ -1203,6 +1204,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         protected class KeylessCollectionNavigation
         {
             public List<Store>? Stores { get; set; }
+
             [NotMapped]
             public KeylessReferenceNavigation? Reference { get; set; }
         }

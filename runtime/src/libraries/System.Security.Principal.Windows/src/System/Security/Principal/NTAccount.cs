@@ -26,7 +26,6 @@ namespace System.Security.Principal
         // Limit for dns domain names is 255
         //
         internal const int MaximumDomainNameLength = 255;
-
         #endregion
 
         #region Constructors
@@ -95,7 +94,6 @@ namespace System.Security.Principal
 
             _name = name;
         }
-
         #endregion
 
         #region Inherited properties and methods
@@ -219,7 +217,6 @@ namespace System.Security.Principal
                 nameof(targetType)
             );
         }
-
         #endregion
 
         #region Operators
@@ -249,7 +246,6 @@ namespace System.Security.Principal
         {
             return !(left == right); // invoke operator==
         }
-
         #endregion
 
         #region Private methods

@@ -206,7 +206,6 @@ namespace Microsoft.CodeAnalysis.Emit
                 }
             }
         }
-
         #endregion
 
         #region Lambdas

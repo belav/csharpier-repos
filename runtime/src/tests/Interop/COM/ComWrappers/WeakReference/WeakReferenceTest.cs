@@ -79,6 +79,7 @@ namespace ComWrappersTests
     class DerivedObject : ICustomQueryInterface
     {
         private WeakReferenceableWrapper inner;
+
         public DerivedObject(TestComWrappers comWrappersInstance)
         {
             IntPtr innerInstance = WeakReferenceNative.CreateAggregatedWeakReferenceObject(

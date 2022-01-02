@@ -234,10 +234,12 @@ namespace System.Reflection
         {
             return m_declaringType;
         }
+
         internal RuntimeModule GetRuntimeModule()
         {
             return RuntimeTypeHandle.GetModule(m_declaringType);
         }
+
         internal RuntimeAssembly GetRuntimeAssembly()
         {
             return GetRuntimeModule().GetRuntimeAssembly();

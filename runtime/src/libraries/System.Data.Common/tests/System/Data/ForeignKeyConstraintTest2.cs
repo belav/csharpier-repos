@@ -641,6 +641,7 @@ namespace System.Data.Tests
 
             return ds1;
         }
+
         [Fact]
         public void ForeignConstraint_DateTimeModeTest()
         {

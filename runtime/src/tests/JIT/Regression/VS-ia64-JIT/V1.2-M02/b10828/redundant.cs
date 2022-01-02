@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public class otherClass
 {
     public class C

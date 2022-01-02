@@ -168,7 +168,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                 nameof(TemporalPeriodPropertyBuilder.HasColumnName),
                 typeof(string)
             );
-
         #endregion MethodInfos
 
         /// <summary>

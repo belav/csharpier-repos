@@ -29,6 +29,7 @@ namespace MS.Internal.Xml.XPath
     internal abstract class Query : ResetableIterator
     {
         public Query() { }
+
         protected Query(Query other) : base(other) { }
 
         // -- XPathNodeIterator --
@@ -36,6 +37,7 @@ namespace MS.Internal.Xml.XPath
         {
             return Advance() != null;
         }
+
         public override int Count
         {
             get
@@ -189,6 +191,7 @@ namespace MS.Internal.Xml.XPath
         // This is source for multiple bugs or additional type casts.
         // To fix all of them in one change in v.2 we internally use one more value:
         public const XPathResultType XPathResultType_Navigator = (XPathResultType)4;
+
         // The biggest challenge in this change is preserve backward compatibility with v.1.1
         // To achieve this in all places where we accept from or report to user XPathResultType.
         // On my best knowledge this happens only in XsltContext.ResolveFunction() / IXsltContextFunction.ReturnType

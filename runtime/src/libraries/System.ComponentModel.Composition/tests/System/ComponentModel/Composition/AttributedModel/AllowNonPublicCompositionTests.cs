@@ -195,12 +195,15 @@ namespace System.ComponentModel.Composition
         {
             Out = new PrivateDataType() { X = x };
         }
+
         public int X
         {
             get { return In.X; }
         }
+
         [Export("a")]
         PrivateDataType Out { get; set; }
+
         [Import("a")]
         IData In { get; set; }
     }
@@ -211,12 +214,15 @@ namespace System.ComponentModel.Composition
         {
             Out = new PrivateDataType() { X = x };
         }
+
         public int X
         {
             get { return In.X; }
         }
+
         [Export]
         PrivateDataType Out { get; set; }
+
         [Import]
         PrivateDataType In { get; set; }
     }
@@ -245,13 +251,17 @@ namespace System.ComponentModel.Composition
 
         [Import("a")]
         int ImportA { get; set; }
+
         [Import("b")]
         int ImportB { get; set; }
+
         [Export("a")]
         int ExportA { get; set; }
+
         [Export("b")]
         int ExportB { get; set; }
     }
+
     public class AllPrivateNoAttributeImportOnly
     {
         public int PublicImportA
@@ -265,6 +275,7 @@ namespace System.ComponentModel.Composition
 
         [Import("a")]
         int ImportA { get; set; }
+
         [Import("b")]
         int ImportB { get; set; }
     }
@@ -288,10 +299,13 @@ namespace System.ComponentModel.Composition
 
         [Import("a")]
         int ImportA { get; set; }
+
         [Import("b")]
         int ImportB { get; set; }
+
         [Export("a")]
         int ExportA { get; set; }
+
         [Export("b")]
         int ExportB { get; set; }
     }
@@ -309,6 +323,7 @@ namespace System.ComponentModel.Composition
 
         [Import("a")]
         int ImportA { get; set; }
+
         [Import("b")]
         int ImportB { get; set; }
     }
@@ -323,6 +338,7 @@ namespace System.ComponentModel.Composition
 
         [Export("a")]
         int ExportA { get; set; }
+
         [Export("b")]
         int ExportB { get; set; }
     }
@@ -331,24 +347,31 @@ namespace System.ComponentModel.Composition
     {
         [Import("a")]
         public int ImportA { get; set; }
+
         [Import("b")]
         public int ImportB { get; set; }
+
         [Export("a")]
         public int ExportA { get; set; }
+
         [Export("b")]
         public int ExportB { get; set; }
     }
+
     public class AllPublicImportOnly
     {
         [Import("a")]
         public int ImportA { get; set; }
+
         [Import("b")]
         public int ImportB { get; set; }
     }
+
     public class AllPublicExportOnly
     {
         [Export("a")]
         public int ExportA { get; set; }
+
         [Export("b")]
         public int ExportB { get; set; }
     }

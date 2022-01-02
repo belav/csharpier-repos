@@ -61,7 +61,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             );
         }
-
         #endregion
 
         #region Sort(IComparer)
@@ -98,7 +97,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             );
         }
-
         #endregion
 
         #region Sort(Comparison)
@@ -147,7 +145,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             );
         }
-
         #endregion
 
         #region Sort(int, int, IComparer<T>)

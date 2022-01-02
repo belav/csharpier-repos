@@ -83,7 +83,6 @@ namespace System.Data.SqlTypes
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10,
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10
         };
-
         #region DecimalHelperTableGenerator
         /*
                 // the code below will generate the DecimalHelpers tables
@@ -1851,6 +1850,7 @@ namespace System.Data.SqlTypes
             for (int iulData = _bLen; iulData < s_cNumeMax; iulData++)
                 Debug.Assert(rglData[iulData] == 0, "rglData[iulData] == 0", "In AssertValid");
         }
+
         /*
                 // print the data members
                 [System.Diagnostics.Conditional("DEBUG")]
@@ -3010,6 +3010,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlDecimal Subtract(SqlDecimal x, SqlDecimal y)
         {

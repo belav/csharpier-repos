@@ -30,14 +30,19 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
         [DataMember(Order = 1)]
         public readonly string Text;
+
         [DataMember(Order = 2)]
         public readonly Glyph Glyph;
+
         [DataMember(Order = 3)]
         public readonly bool Bolded;
+
         [DataMember(Order = 4)]
         public readonly bool Grayed;
+
         [DataMember(Order = 5)]
         public readonly int Indent;
+
         [DataMember(Order = 6)]
         public readonly ImmutableArray<SerializableNavigationBarItem> ChildItems;
 
@@ -45,8 +50,10 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
         [DataMember(Order = 7)]
         public readonly string? Name;
+
         [DataMember(Order = 8)]
         public readonly bool IsObsolete;
+
         [DataMember(Order = 9)]
         public readonly SymbolItemLocation? Location;
 
@@ -59,6 +66,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
         [DataMember(Order = 11)]
         public readonly string? ContainerName;
+
         [DataMember(Order = 12)]
         public readonly SymbolKey? EventSymbolKey;
 

@@ -217,7 +217,6 @@ namespace Microsoft.CodeAnalysis
                 return _charSet;
             }
         }
-
         #endregion
 
         #region SecurityCriticalAttribute and SecuritySafeCriticalAttribute

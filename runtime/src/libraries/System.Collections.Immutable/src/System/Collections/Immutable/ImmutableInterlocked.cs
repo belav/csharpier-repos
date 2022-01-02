@@ -265,7 +265,6 @@ namespace System.Collections.Immutable
                 default(ImmutableArray<T>)
             ).IsDefault;
         }
-
         #endregion
 
         #region ImmutableDictionary<TKey, TValue> members
@@ -612,7 +611,6 @@ namespace System.Collections.Immutable
 
             return true;
         }
-
         #endregion
 
         #region ImmutableStack<T> members
@@ -678,7 +676,6 @@ namespace System.Collections.Immutable
                 priorCollection = interlockedResult; // we already have a volatile read that we can reuse for the next loop
             } while (!successful);
         }
-
         #endregion
 
         #region ImmutableQueue<T> members

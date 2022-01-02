@@ -202,7 +202,6 @@ namespace System.IO.Tests
 
             Assert.Equal(dir.FullName, Path.Combine(TestDirectory, dirName));
         }
-
         #endregion
 
         #region PlatformSpecific

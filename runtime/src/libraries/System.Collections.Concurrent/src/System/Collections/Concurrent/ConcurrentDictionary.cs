@@ -26,16 +26,20 @@ namespace System.Collections.Concurrent
     {
         /// <summary>Internal tables of the dictionary.</summary>
         private volatile Tables _tables;
+
         /// <summary>Key equality comparer.</summary>
         private readonly IEqualityComparer<TKey>? _comparer;
+
         /// <summary>Default comparer for TKey.</summary>
         /// <remarks>
         /// Used to avoid repeatedly accessing the shared default generic static, in particular for reference types where it's
         /// currently not devirtualized: https://github.com/dotnet/runtime/issues/10050.
         /// </remarks>
         private readonly EqualityComparer<TKey> _defaultComparer;
+
         /// <summary>Whether to dynamically increase the size of the striped lock.</summary>
         private readonly bool _growLockArray;
+
         /// <summary>The maximum number of elements per lock before a resize operation is triggered.</summary>
         private int _budget;
 
@@ -1791,7 +1795,6 @@ namespace System.Collections.Concurrent
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(
             KeyValuePair<TKey, TValue> keyValuePair
         ) => TryRemove(keyValuePair);
-
         #endregion
 
         #region IEnumerable Members
@@ -1807,7 +1810,6 @@ namespace System.Collections.Concurrent
         /// </remarks>
         IEnumerator IEnumerable.GetEnumerator() =>
             ((ConcurrentDictionary<TKey, TValue>)this).GetEnumerator();
-
         #endregion
 
         #region IDictionary Members
@@ -1995,7 +1997,6 @@ namespace System.Collections.Concurrent
                 ThrowHelper.ThrowValueNullException();
             }
         }
-
         #endregion
 
         #region ICollection Members
@@ -2103,7 +2104,6 @@ namespace System.Collections.Concurrent
         /// <exception cref="NotSupportedException">The SyncRoot property is not supported.</exception>
         object ICollection.SyncRoot =>
             throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported);
-
         #endregion
 
 
@@ -2431,10 +2431,13 @@ namespace System.Collections.Concurrent
         {
             /// <summary>A singly-linked list for each bucket.</summary>
             internal readonly Node?[] _buckets;
+
             /// <summary>A set of locks, each guarding a section of the table.</summary>
             internal readonly object[] _locks;
+
             /// <summary>The number of elements guarded by each lock.</summary>
             internal readonly int[] _countPerLock;
+
             /// <summary>Pre-computed multiplier for use on 64-bit performing faster modulo operations.</summary>
             internal readonly ulong _fastModBucketsMultiplier;
 

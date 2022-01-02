@@ -13,14 +13,19 @@ namespace System.Collections.Concurrent.Tests
     {
         protected override IProducerConsumerCollection<T> CreateProducerConsumerCollection<T>() =>
             new ConcurrentQueue<T>();
+
         protected override IProducerConsumerCollection<int> CreateProducerConsumerCollection(
             IEnumerable<int> collection
         ) => new ConcurrentQueue<int>(collection);
+
         protected override bool IsEmpty(IProducerConsumerCollection<int> pcc) =>
             ((ConcurrentQueue<int>)pcc).IsEmpty;
+
         protected override bool TryPeek<T>(IProducerConsumerCollection<T> pcc, out T result) =>
             ((ConcurrentQueue<T>)pcc).TryPeek(out result);
+
         protected override bool ResetImplemented => false;
+
         protected override IProducerConsumerCollection<int> CreateOracle(
             IEnumerable<int> collection
         ) => new QueueOracle(collection);
@@ -482,23 +487,31 @@ namespace System.Collections.Concurrent.Tests
         protected sealed class QueueOracle : IProducerConsumerCollection<int>
         {
             private readonly Queue<int> _queue;
+
             public QueueOracle(IEnumerable<int> collection)
             {
                 _queue = new Queue<int>(collection);
             }
+
             public int Count => _queue.Count;
             public bool IsSynchronized => false;
             public object SyncRoot => null;
+
             public void CopyTo(Array array, int index) =>
                 ((ICollection)_queue).CopyTo(array, index);
+
             public void CopyTo(int[] array, int index) => _queue.CopyTo(array, index);
+
             public IEnumerator<int> GetEnumerator() => _queue.GetEnumerator();
+
             public int[] ToArray() => _queue.ToArray();
+
             public bool TryAdd(int item)
             {
                 _queue.Enqueue(item);
                 return true;
             }
+
             public bool TryTake(out int item)
             {
                 if (_queue.Count > 0)
@@ -512,6 +525,7 @@ namespace System.Collections.Concurrent.Tests
                     return false;
                 }
             }
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }

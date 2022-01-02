@@ -10,6 +10,7 @@ namespace Inline_SideAffects
     internal class Inline_SideAffects
     {
         private static int s_i = 0;
+
         private static bool Foo_Inline()
         {
             s_i++;
@@ -22,6 +23,7 @@ namespace Inline_SideAffects
             s_i += 3;
             return false;
         }
+
         private static int Main(string[] args)
         {
             if ((Foo_Inline()) && (Bar_Inline()))

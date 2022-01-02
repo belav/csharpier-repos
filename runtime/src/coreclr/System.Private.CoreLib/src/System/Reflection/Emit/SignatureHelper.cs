@@ -239,6 +239,7 @@ namespace System.Reflection.Emit
                 optionalParameterTypeCustomModifiers
             );
         }
+
         public static SignatureHelper GetPropertySigHelper(
             Module? mod,
             CallingConventions callingConvention,
@@ -389,7 +390,6 @@ namespace System.Reflection.Emit
                 m_sizeLoc = m_currSig++;
             }
         }
-
         #endregion
 
         #region Private Members
@@ -477,6 +477,7 @@ namespace System.Reflection.Emit
         {
             AddOneArgTypeHelperWorker(clsArgument, false);
         }
+
         private void AddOneArgTypeHelperWorker(Type clsArgument, bool lastWasGenericInst)
         {
             if (clsArgument.IsGenericParameter)
@@ -822,7 +823,6 @@ namespace System.Reflection.Emit
             AddData(m_argCount);
             m_currSig = currSigHolder + (newSigSize - 1);
         }
-
         #endregion
 
         #region Internal Members
@@ -911,7 +911,6 @@ namespace System.Reflection.Emit
 
             return temp;
         }
-
         #endregion
 
         #region Public Methods

@@ -227,6 +227,7 @@ namespace Dynamic
 
         private delegate void OnEventDelegate(int id);
         private delegate void OnEventMessageDelegate(string message);
+
         private class EventTestHandler
         {
             private const int InvalidId = -1;

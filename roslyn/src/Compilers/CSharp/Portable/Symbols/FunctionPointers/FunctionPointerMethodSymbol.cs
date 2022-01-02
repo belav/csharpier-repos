@@ -1094,6 +1094,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         public override Symbol? ContainingSymbol => null;
+
         // Function pointers cannot have type parameters
         public override int Arity => 0;
         public override ImmutableArray<TypeParameterSymbol> TypeParameters =>
@@ -1125,20 +1126,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool RequiresSecurityObject => false;
         internal override bool IsDeclaredReadOnly => false;
         internal override bool IsInitOnly => false;
+
         internal override ImmutableArray<string> GetAppliedConditionalSymbols() =>
             ImmutableArray<string>.Empty;
+
         public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
             FlowAnalysisAnnotations.None;
         public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
             ImmutableHashSet<string>.Empty;
         public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
             FlowAnalysisAnnotations.None;
+
         internal override bool IsMetadataNewSlot(
             bool ignoreInterfaceImplementationChanges = false
         ) => false;
+
         internal override bool IsMetadataVirtual(
             bool ignoreInterfaceImplementationChanges = false
         ) => false;
+
         internal sealed override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
             bool forceComplete
         ) => null;
@@ -1148,11 +1154,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             throw ExceptionUtilities.Unreachable;
 
         public override bool AreLocalsZeroed => throw ExceptionUtilities.Unreachable;
+
         public override DllImportData GetDllImportData() => throw ExceptionUtilities.Unreachable;
+
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree) =>
             throw ExceptionUtilities.Unreachable;
+
         internal override IEnumerable<SecurityAttribute> GetSecurityInformation() =>
             throw ExceptionUtilities.Unreachable;
+
         internal sealed override bool IsNullableAnalysisEnabled() =>
             throw ExceptionUtilities.Unreachable;
     }

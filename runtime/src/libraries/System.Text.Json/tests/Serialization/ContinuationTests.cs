@@ -342,6 +342,7 @@ namespace System.Text.Json.Serialization.Tests
                     Next = null,
                 };
             }
+
             private Chunk() { }
         }
 

@@ -46,6 +46,7 @@ namespace System.Net.Http.QPack
         private const int RequiredInsertCountPrefix = 8;
         private const int BaseMask = 0x80;
         private const int BasePrefix = 7;
+
         //+-------------------------------+
 
         //https://tools.ietf.org/html/draft-ietf-quic-qpack-09#section-4.5.2

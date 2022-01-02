@@ -112,6 +112,7 @@ public class EMFloatClass : EmFloatStruct
             exp = (short)0;
             mantissa = new char[INTERNAL_FPF_PRECISION];
         }
+
         public IFPF type; /* Indicates, NORMAL, SUBNORMAL, etc. */
         public byte sign; /* Mantissa sign */
         public short exp; /* Signed exponent...no bias */

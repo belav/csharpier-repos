@@ -15,10 +15,12 @@ public class Outside
     public class Inside
     {
         public void GenericMethod<T>() { }
+
         public void TwoGenericMethod<T, U>() { }
     }
 
     public void GenericMethod<T>() { }
+
     public void TwoGenericMethod<T, U>() { }
 }
 
@@ -27,10 +29,12 @@ public class Outside<T>
     public class Inside<U>
     {
         public void GenericMethod<V>() { }
+
         public void TwoGenericMethod<V, W>() { }
     }
 
     public void GenericMethod<U>() { }
+
     public void TwoGenericMethod<U, V>() { }
 }
 
@@ -1024,6 +1028,7 @@ namespace System.Tests
             aName.Name == "TestLoadAssembly" ? Assembly.LoadFrom(@".\TestLoadAssembly.dll") : null;
         private static Func<Assembly, string, bool, Type> typeloader = (assem, name, ignore) =>
             assem == null ? Type.GetType(name, false, ignore) : assem.GetType(name, false, ignore);
+
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void GetTypeByName()
         {
@@ -1318,6 +1323,7 @@ namespace System.Tests
         class SimpleType : ISimpleInterface
         {
             public void Method() { }
+
             public void GenericMethod<T>() { }
         }
 
@@ -1396,7 +1402,9 @@ namespace System.Tests
     public class NonGenericSubClassOfGeneric : GenericClass<string> { }
 
     public class GenericClass<T, U> { }
+
     public abstract class AbstractClass { }
+
     public static class StaticClass { }
 
     public struct NonGenericStruct { }
@@ -1404,10 +1412,13 @@ namespace System.Tests
     public ref struct RefStruct { }
 
     public struct GenericStruct<T> { }
+
     public struct GenericStruct<T, U> { }
 
     public interface NonGenericInterface { }
+
     public interface GenericInterface<T> { }
+
     public interface GenericInterface<T, U> { }
 }
 

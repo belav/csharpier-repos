@@ -452,11 +452,15 @@ namespace System.Collections.Specialized
 
         public int Add(object? value) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
+
         public void Clear() => throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
+
         public void Insert(int index, object? value) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
+
         public void Remove(object? value) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
+
         public void RemoveAt(int index) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
     }

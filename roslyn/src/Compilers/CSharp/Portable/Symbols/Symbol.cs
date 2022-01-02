@@ -1435,7 +1435,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return false;
         }
-
         #endregion
 
         /// <summary>
@@ -1854,6 +1853,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return true;
         }
+
 #nullable disable
 
         bool ISymbolInternal.IsStatic

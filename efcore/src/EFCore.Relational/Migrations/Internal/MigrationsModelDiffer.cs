@@ -552,7 +552,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             DiffAnnotations(source, null)
                 .Concat(source.Tables.SelectMany(t => Remove(t, diffContext)))
                 .Concat(source.Sequences.SelectMany(t => Remove(t, diffContext)));
-
         #endregion
 
         #region Schema
@@ -605,7 +604,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             string source,
             DiffContext diffContext
         ) => Enumerable.Empty<MigrationOperation>();
-
         #endregion
 
         #region IEntityType
@@ -1002,7 +1000,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             public int GetHashCode([DisallowNull] PropertyInfo obj) =>
                 throw new NotSupportedException();
         }
-
         #endregion
 
         #region IProperty
@@ -1390,7 +1387,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             columnOperation.Collation = column.Collation;
             columnOperation.AddAnnotations(migrationsAnnotations);
         }
-
         #endregion
 
         #region IKey
@@ -1492,7 +1488,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             yield return operation;
         }
-
         #endregion
 
         #region IForeignKey
@@ -1602,7 +1597,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 yield return operation;
             }
         }
-
         #endregion
 
         #region IIndex
@@ -1712,7 +1706,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             yield return operation;
         }
-
         #endregion
 
         #region ICheckConstraint
@@ -1790,7 +1783,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             yield return operation;
         }
-
         #endregion
 
         #region ISequence
@@ -1940,7 +1932,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             return sequenceOperation;
         }
-
         #endregion
 
         #region Data
@@ -2785,7 +2776,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 : columnModification.OriginalValue;
             return converter != null ? converter.ConvertToProvider(value) : value;
         }
-
         #endregion
 
         /// <summary>

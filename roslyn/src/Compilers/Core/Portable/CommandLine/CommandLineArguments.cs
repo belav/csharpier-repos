@@ -498,7 +498,6 @@ namespace Microsoft.CodeAnalysis
 
             return references;
         }
-
         #endregion
 
         #region Analyzer References

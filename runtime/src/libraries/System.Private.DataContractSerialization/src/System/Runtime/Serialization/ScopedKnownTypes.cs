@@ -14,6 +14,7 @@ namespace System.Runtime.Serialization
     {
         internal DataContractDictionary[] dataContractDictionaries;
         private int _count;
+
         internal void Push(DataContractDictionary dataContractDictionary)
         {
             if (dataContractDictionaries == null)

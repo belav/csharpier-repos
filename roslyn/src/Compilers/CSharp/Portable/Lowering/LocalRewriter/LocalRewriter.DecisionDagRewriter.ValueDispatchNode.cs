@@ -37,6 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     public readonly ImmutableArray<(ConstantValue value, LabelSymbol label)> Cases;
                     public readonly LabelSymbol Otherwise;
+
                     public SwitchDispatch(
                         SyntaxNode syntax,
                         ImmutableArray<(ConstantValue value, LabelSymbol label)> dispatches,
@@ -46,6 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         this.Cases = dispatches;
                         this.Otherwise = otherwise;
                     }
+
                     public override string ToString() =>
                         "[" + string.Join(",", Cases.Select(c => c.value)) + "]";
                 }
@@ -56,8 +58,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 internal sealed class LeafDispatchNode : ValueDispatchNode
                 {
                     public readonly LabelSymbol Label;
+
                     public LeafDispatchNode(SyntaxNode syntax, LabelSymbol Label) : base(syntax) =>
                         this.Label = Label;
+
                     public override string ToString() => "Leaf";
                 }
 
@@ -85,10 +89,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
                     public readonly ConstantValue Value;
                     public readonly BinaryOperatorKind Operator;
+
                     /// <summary>The side of the test handling lower values. The true side for &lt; and &lt;=, the false side for > and >=.</summary>
                     private ValueDispatchNode Left { get; set; }
+
                     /// <summary>The side of the test handling higher values. The false side for &lt; and &lt;=, the true side for > and >=.</summary>
                     private ValueDispatchNode Right { get; set; }
+
                     private RelationalDispatch(
                         SyntaxNode syntax,
                         ConstantValue value,
@@ -102,8 +109,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         this.Operator = op;
                         WithLeftAndRight(left, right);
                     }
+
                     public ValueDispatchNode WhenTrue => IsReversed(Operator) ? Right : Left;
                     public ValueDispatchNode WhenFalse => IsReversed(Operator) ? Left : Right;
+
                     public override string ToString() =>
                         $"RelationalDispatch.{Height}({Left} {Operator.Operator()} {Value} {Right})";
 

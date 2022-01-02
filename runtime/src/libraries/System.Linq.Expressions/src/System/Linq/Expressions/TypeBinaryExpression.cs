@@ -158,7 +158,6 @@ namespace System.Linq.Expressions
                 return Utils.Constant(TypeOperand.GetNonNullableType() == ce.Value.GetType());
             }
         }
-
         #endregion
 
         /// <summary>

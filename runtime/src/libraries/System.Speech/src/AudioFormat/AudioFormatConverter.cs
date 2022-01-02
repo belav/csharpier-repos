@@ -55,7 +55,6 @@ namespace System.Speech.Internal
             }
             return null;
         }
-
         #endregion
 
         #region Private Methods
@@ -413,7 +412,6 @@ namespace System.Speech.Internal
             GSM610_44kHzMono,
             NUM_FORMATS
         }
-
         #endregion
 
         #region Private Type

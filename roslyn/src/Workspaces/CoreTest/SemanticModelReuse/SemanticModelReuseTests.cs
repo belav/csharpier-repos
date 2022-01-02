@@ -294,7 +294,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.SemanticModelReuse
             );
             Assert.True(model3.IsSpeculativeSemanticModel);
         }
-
         #endregion
 
         #region Visual Basic tests

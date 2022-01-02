@@ -3,7 +3,9 @@
 //
 
 using System;
+
 delegate void TestDelegate();
+
 class ArrayBounds
 {
     public static void f1a()
@@ -14,6 +16,7 @@ class ArrayBounds
             a[i] = 1;
         }
     }
+
     public static void f2a()
     {
         int[] a = new int[4];
@@ -22,6 +25,7 @@ class ArrayBounds
             int b = a[i];
         }
     }
+
     public static void f3a()
     {
         int[] a = new int[4];
@@ -30,6 +34,7 @@ class ArrayBounds
             Console.WriteLine(a[i]);
         }
     }
+
     public static void f4a()
     {
         int[] a = new int[4];
@@ -48,6 +53,7 @@ class ArrayBounds
             a[i] = 1;
         }
     }
+
     public static void f2b()
     {
         int[] a = new int[4];
@@ -56,6 +62,7 @@ class ArrayBounds
             int b = a[i];
         }
     }
+
     public static void f3b()
     {
         int[] a = new int[4];
@@ -64,6 +71,7 @@ class ArrayBounds
             Console.WriteLine(a[i]);
         }
     }
+
     public static void f4b()
     {
         int[] a = new int[4];
@@ -82,6 +90,7 @@ class ArrayBounds
             a[i] = true;
         }
     }
+
     public static void f2c()
     {
         bool[] a = new bool[0x7fff];
@@ -90,6 +99,7 @@ class ArrayBounds
             bool b = a[i];
         }
     }
+
     public static void f3c()
     {
         bool[] a = new bool[0x7fff];
@@ -98,6 +108,7 @@ class ArrayBounds
             Console.WriteLine(a[i]);
         }
     }
+
     public static void f4c()
     {
         bool[] a = new bool[0x7fff];

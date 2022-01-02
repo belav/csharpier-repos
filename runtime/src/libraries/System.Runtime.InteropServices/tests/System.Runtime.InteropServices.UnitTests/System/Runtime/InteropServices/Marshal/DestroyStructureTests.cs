@@ -175,6 +175,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
             internal byte[] Data4;
         }
+
         [StructLayout(LayoutKind.Sequential)]
         internal struct WINTRUST_BLOB_INFO
         {
@@ -182,6 +183,7 @@ namespace System.Runtime.InteropServices.Tests
 
             /// GUID->_GUID
             internal GUID gSubject;
+
             //[MarshalAs(UnmanagedType.Struct)]
             //internal Guid gSubject;
 

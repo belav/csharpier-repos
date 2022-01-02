@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 class Program
 {
     static int Main()

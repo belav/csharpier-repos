@@ -14,7 +14,6 @@ namespace System.Speech.Recognition
             _userToken = userToken;
             _audioPosition = audioPosition;
         }
-
         #endregion
 
         #region Public Properties
@@ -28,7 +27,6 @@ namespace System.Speech.Recognition
         {
             get { return _audioPosition; }
         }
-
         #endregion
 
         #region Private Fields

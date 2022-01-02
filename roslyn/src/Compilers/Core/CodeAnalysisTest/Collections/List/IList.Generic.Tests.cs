@@ -100,7 +100,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 };
             }
         }
-
         #endregion
 
         #region ICollection<T> Helper Methods
@@ -114,7 +113,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected virtual Type IList_Generic_Item_InvalidIndex_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         #region Item Getter
@@ -145,7 +143,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             T result;
             Assert.All(Enumerable.Range(0, count), index => result = list[index]);
         }
-
         #endregion
 
         #region Item Setter
@@ -299,7 +296,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region IndexOf
@@ -421,7 +417,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region Insert
@@ -565,7 +560,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region RemoveAt
@@ -650,7 +644,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region Enumerator.Current

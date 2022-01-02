@@ -20,21 +20,26 @@ public class Test_sbyte
 {
     [DllImport("libtest", EntryPoint = "mono_return_sbyte1")]
     public static extern sbyte1 mono_return_sbyte1(sbyte1 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte1
     {
         public sbyte f1;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte2")]
     public static extern sbyte2 mono_return_sbyte2(sbyte2 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte2
     {
         public sbyte f1,
             f2;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte3")]
     public static extern sbyte3 mono_return_sbyte3(sbyte3 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte3
     {
@@ -42,8 +47,10 @@ public class Test_sbyte
             f2,
             f3;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte4")]
     public static extern sbyte4 mono_return_sbyte4(sbyte4 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte4
     {
@@ -52,8 +59,10 @@ public class Test_sbyte
             f3,
             f4;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte5")]
     public static extern sbyte5 mono_return_sbyte5(sbyte5 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte5
     {
@@ -63,8 +72,10 @@ public class Test_sbyte
             f4,
             f5;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte6")]
     public static extern sbyte6 mono_return_sbyte6(sbyte6 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte6
     {
@@ -75,8 +86,10 @@ public class Test_sbyte
             f5,
             f6;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte7")]
     public static extern sbyte7 mono_return_sbyte7(sbyte7 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte7
     {
@@ -88,8 +101,10 @@ public class Test_sbyte
             f6,
             f7;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte8")]
     public static extern sbyte8 mono_return_sbyte8(sbyte8 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte8
     {
@@ -102,8 +117,10 @@ public class Test_sbyte
             f7,
             f8;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte9")]
     public static extern sbyte9 mono_return_sbyte9(sbyte9 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte9
     {
@@ -117,8 +134,10 @@ public class Test_sbyte
             f8,
             f9;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte10")]
     public static extern sbyte10 mono_return_sbyte10(sbyte10 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte10
     {
@@ -133,8 +152,10 @@ public class Test_sbyte
             f9,
             f10;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte11")]
     public static extern sbyte11 mono_return_sbyte11(sbyte11 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte11
     {
@@ -150,8 +171,10 @@ public class Test_sbyte
             f10,
             f11;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte12")]
     public static extern sbyte12 mono_return_sbyte12(sbyte12 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte12
     {
@@ -168,8 +191,10 @@ public class Test_sbyte
             f11,
             f12;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte13")]
     public static extern sbyte13 mono_return_sbyte13(sbyte13 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte13
     {
@@ -187,8 +212,10 @@ public class Test_sbyte
             f12,
             f13;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte14")]
     public static extern sbyte14 mono_return_sbyte14(sbyte14 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte14
     {
@@ -207,8 +234,10 @@ public class Test_sbyte
             f13,
             f14;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte15")]
     public static extern sbyte15 mono_return_sbyte15(sbyte15 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte15
     {
@@ -228,8 +257,10 @@ public class Test_sbyte
             f14,
             f15;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte16")]
     public static extern sbyte16 mono_return_sbyte16(sbyte16 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte16
     {
@@ -250,10 +281,12 @@ public class Test_sbyte
             f15,
             f16;
     }
+
     // This structure is 1 element too large to use the special return
     //  rules.
     [DllImport("libtest", EntryPoint = "mono_return_sbyte17")]
     public static extern sbyte17 mono_return_sbyte17(sbyte17 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte17
     {
@@ -282,12 +315,15 @@ public class Test_sbyte
     {
         public sbyte f1;
     };
+
     public struct sbyte16_nested2
     {
         public sbyte f16;
     };
+
     [DllImport("libtest", EntryPoint = "mono_return_sbyte16_nested")]
     public static extern sbyte16_nested mono_return_sbyte16_nested(sbyte16_nested s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct sbyte16_nested
     {

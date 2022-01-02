@@ -13,6 +13,7 @@ public class Test_Finalize
     public class Dummy
     {
         public static bool visited = false;
+
         ~Dummy()
         {
             Console.WriteLine("In Finalize() of Dummy");

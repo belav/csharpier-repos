@@ -26,7 +26,6 @@ namespace System.Linq.Expressions.Tests
             UnaryExpression e = Expression.IsFalse(Expression.Parameter(typeof(bool), "x"));
             Assert.Equal("IsFalse(x)", e.ToString());
         }
-
         #endregion
 
         #region Test verifiers
@@ -40,7 +39,6 @@ namespace System.Linq.Expressions.Tests
             Func<bool> f = e.Compile(useInterpreter);
             Assert.Equal((bool)(value == false), f());
         }
-
         #endregion
 
         public static IEnumerable<object[]> Truthinesses()

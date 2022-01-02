@@ -2854,6 +2854,7 @@ namespace System.Numerics
         {
             return left.CompareTo(right) > 0;
         }
+
         public static bool operator >=(BigInteger left, BigInteger right)
         {
             return left.CompareTo(right) >= 0;

@@ -128,7 +128,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                 string,
                 ImmutableArray<ActiveStatementTrackingSpan>
             > _trackingSpans = new();
-
             #endregion
 
             public TrackingSession(Workspace workspace, IActiveStatementSpanProvider spanProvider)

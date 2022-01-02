@@ -674,6 +674,7 @@ namespace System.Collections.ObjectModel.Tests
 
         // Number of collection changed events that were ACTUALLY fired.
         public int NumCollectionChangedFired { get; private set; }
+
         // Number of collection changed events that are EXPECTED to be fired.
         public int ExpectedCollectionChangedFired { get; private set; }
 
@@ -684,7 +685,6 @@ namespace System.Collections.ObjectModel.Tests
         public int ExpectedOldStartingIndex { get; private set; }
 
         private PropertyNameExpected[] _expectedPropertyChanged;
-
         #endregion
 
         #region Helper Methods

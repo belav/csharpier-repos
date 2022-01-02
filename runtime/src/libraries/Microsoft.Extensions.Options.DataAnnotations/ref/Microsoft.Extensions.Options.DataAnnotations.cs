@@ -24,6 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 }
+
 namespace Microsoft.Extensions.Options
 {
     public partial class DataAnnotationValidateOptions<
@@ -38,10 +39,12 @@ namespace Microsoft.Extensions.Options
             "The implementation of Validate method on this type will walk through all properties of the passed in options object, and its type cannot be statically analyzed so its members may be trimmed."
         )]
         public DataAnnotationValidateOptions(string name) { }
+
         public string Name
         {
             get { throw null; }
         }
+
         public Microsoft.Extensions.Options.ValidateOptionsResult Validate(
             string name,
             TOptions options

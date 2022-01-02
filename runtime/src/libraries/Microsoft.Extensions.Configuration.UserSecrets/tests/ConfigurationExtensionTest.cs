@@ -14,6 +14,7 @@ using Xunit;
 
 [assembly: UserSecretsId(ConfigurationExtensionTest.TestSecretsId)]
 
+
 namespace Microsoft.Extensions.Configuration.UserSecrets.Test
 {
     public class ConfigurationExtensionTest : IDisposable

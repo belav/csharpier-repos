@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_LocallocCnstB5_PSP
 {
     const int Pass = 100;

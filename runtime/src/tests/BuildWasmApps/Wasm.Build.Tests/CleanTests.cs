@@ -120,6 +120,7 @@ public class CleanTests : NativeRebuildTestsBase
 
         AssertEmptyOrNonExistantDirectory(relinkDir);
     }
+
     private void AssertEmptyOrNonExistantDirectory(string dirPath)
     {
         Console.WriteLine($"dirPath: {dirPath}");

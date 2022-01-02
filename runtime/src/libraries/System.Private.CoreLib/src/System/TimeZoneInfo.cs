@@ -51,6 +51,7 @@ namespace System
         private readonly TimeSpan _baseUtcOffset;
         private readonly bool _supportsDaylightSavingTime;
         private readonly AdjustmentRule[]? _adjustmentRules;
+
         // As we support IANA and Windows IDs, it is possible we create equivalent zone objects which differ only in the IDs.
         private List<TimeZoneInfo>? _equivalentZones;
 

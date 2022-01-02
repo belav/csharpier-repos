@@ -38,6 +38,7 @@ namespace System.Runtime.CompilerServices.Tests
         {
             public int i1;
             public int i2;
+
             public override bool Equals(object obj)
             {
                 if (!(obj is TestStruct))

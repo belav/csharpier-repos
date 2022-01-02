@@ -185,6 +185,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             return castExpression;
         }
+
         /// <summary>
         /// DeterminesCheck if we're in an interesting situation like this:
         /// <code>

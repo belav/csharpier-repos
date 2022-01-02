@@ -1065,7 +1065,6 @@ namespace System.Runtime.Loader.Tests
                 _fixture.isolatedAlcAssembly
             );
         }
-
 #endregion
 
 #region Assembly.GetType

@@ -24,6 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved."
         )]
@@ -39,6 +40,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved."
         )]
@@ -56,6 +58,7 @@ namespace Microsoft.Extensions.DependencyInjection
             throw null;
         }
     }
+
     public static partial class OptionsConfigurationServiceCollectionExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
@@ -73,6 +76,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved."
         )]
@@ -89,6 +93,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved."
         )]
@@ -105,6 +110,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved."
         )]
@@ -124,6 +130,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 }
+
 namespace Microsoft.Extensions.Options
 {
     public partial class ConfigurationChangeTokenSource<TOptions>
@@ -132,19 +139,23 @@ namespace Microsoft.Extensions.Options
         public ConfigurationChangeTokenSource(
             Microsoft.Extensions.Configuration.IConfiguration config
         ) { }
+
         public ConfigurationChangeTokenSource(
             string name,
             Microsoft.Extensions.Configuration.IConfiguration config
         ) { }
+
         public string Name
         {
             get { throw null; }
         }
+
         public Microsoft.Extensions.Primitives.IChangeToken GetChangeToken()
         {
             throw null;
         }
     }
+
     public partial class ConfigureFromConfigurationOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -159,6 +170,7 @@ namespace Microsoft.Extensions.Options
             Microsoft.Extensions.Configuration.IConfiguration config
         ) : base(default(System.Action<TOptions>)) { }
     }
+
     public partial class NamedConfigureFromConfigurationOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -173,6 +185,7 @@ namespace Microsoft.Extensions.Options
             string name,
             Microsoft.Extensions.Configuration.IConfiguration config
         ) : base(default(string), default(System.Action<TOptions>)) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved."
         )]

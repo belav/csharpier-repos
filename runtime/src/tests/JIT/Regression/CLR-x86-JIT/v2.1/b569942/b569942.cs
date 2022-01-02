@@ -8,6 +8,7 @@ internal class TEST
         Test();
         return 100;
     }
+
     public static void Test()
     {
         int SSS;

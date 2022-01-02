@@ -284,7 +284,6 @@ namespace Microsoft.CodeAnalysis.MSBuild
             RoslynDebug.AssertNotNull(projectResult);
             return projectResult;
         }
-
         #endregion
 
         #region Apply Changes

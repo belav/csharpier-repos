@@ -87,7 +87,6 @@ namespace System.Security.AccessControl
             PropagationFlags propagationFlags,
             AccessControlType type
         ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
-
         #endregion
 
         #region Public properties
@@ -148,7 +147,6 @@ namespace System.Security.AccessControl
             PropagationFlags propagationFlags,
             AuditFlags flags
         ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
-
         #endregion
 
         #region Public properties
@@ -214,7 +212,6 @@ namespace System.Security.AccessControl
                 exceptionFromErrorCode,
                 exceptionContext
             ) { }
-
         #endregion
         #region Factories
 
@@ -255,7 +252,6 @@ namespace System.Security.AccessControl
                 flags
             );
         }
-
         #endregion
         #region Private Methods
 
@@ -280,7 +276,6 @@ namespace System.Security.AccessControl
             }
             return persistRules;
         }
-
         #endregion
         #region Protected Methods
 
@@ -319,7 +314,6 @@ namespace System.Security.AccessControl
                 WriteUnlock();
             }
         }
-
         #endregion
         #region Public Methods
 
@@ -379,7 +373,6 @@ namespace System.Security.AccessControl
         {
             base.RemoveAuditRuleSpecific(rule);
         }
-
         #endregion
         #region some overrides
 

@@ -124,6 +124,7 @@ namespace System.Threading.Tasks
         private int m_taskId; // this task's unique ID. initialized only if it is ever requested
 
         internal Delegate? m_action; // The body of the task.  Might be Action<object>, Action<TState> or Action.  Or possibly a Func.
+
         // If m_action is set to null it will indicate that we operate in the
         // "externally triggered completion" mode, which is exclusively meant
         // for the signalling Task<TResult> (aka. promise). In this mode,
@@ -255,9 +256,11 @@ namespace System.Threading.Tasks
             // The extra count helps prevent the race condition for executing the final state transition
             // (i.e. whether the last child or this task itself should call FinishStageTwo())
             internal volatile int m_completionCountdown = 1;
+
             // A list of child tasks that threw an exception (TCEs don't count),
             // but haven't yet been waited on by the parent, lazily initialized.
             internal volatile List<Task>? m_exceptionalChildren;
+
             // A task's parent, or null if parent-less. Only set during Task construction.
             internal Task? m_parent;
 
@@ -3206,8 +3209,10 @@ namespace System.Threading.Tasks
         {
             /// <summary>The source task.  It's stored so that we can remove the continuation from it upon timeout or cancellation.</summary>
             private readonly Task _task;
+
             /// <summary>Cancellation registration used to unregister from the token source upon timeout or the task completing.</summary>
             private readonly CancellationTokenRegistration _registration;
+
             /// <summary>The timer used to implement the timeout.  It's stored so that it's rooted and so that we can dispose it upon cancellation or the task completing.</summary>
             private readonly TimerQueueTimer? _timer;
 
@@ -3411,10 +3416,12 @@ namespace System.Threading.Tasks
         private sealed class SetOnInvokeMres : ManualResetEventSlim, ITaskCompletionAction
         {
             internal SetOnInvokeMres() : base(false, 0) { }
+
             public void Invoke(Task completingTask)
             {
                 Set();
             }
+
             public bool InvokeMayRunArbitraryCode => false;
         }
 
@@ -4548,7 +4555,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         #region Func<Task, TResult> continuation
@@ -6207,7 +6213,6 @@ namespace System.Threading.Tasks
             Debug.Assert(succeeded, "This should always succeed on a new task.");
             return task;
         }
-
         #endregion
 
         #region Run methods
@@ -6413,7 +6418,6 @@ namespace System.Threading.Tasks
 
             return promise;
         }
-
         #endregion
 
         #region Delay methods
@@ -6774,6 +6778,7 @@ namespace System.Threading.Tasks
             /// array as they complete, but only if they don't have their wait notification bit set.
             /// </summary>
             private readonly Task?[] m_tasks;
+
             /// <summary>The number of tasks remaining to complete.</summary>
             private int m_count;
 
@@ -7039,6 +7044,7 @@ namespace System.Threading.Tasks
             /// array as they complete, but only if they don't have their wait notification bit set.
             /// </summary>
             private readonly Task<T>?[] m_tasks;
+
             /// <summary>The number of tasks remaining to complete.</summary>
             private int m_count;
 

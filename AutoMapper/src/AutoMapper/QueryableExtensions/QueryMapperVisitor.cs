@@ -192,6 +192,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             return lambdaType;
         }
     }
+
     public class MemberAccessQueryMapperVisitor : ExpressionVisitor
     {
         private readonly ExpressionVisitor _rootVisitor;
@@ -223,6 +224,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             return node;
         }
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class QueryMapperHelper
     {

@@ -372,13 +372,11 @@ namespace System.Net.Http.Headers
                 }
             }
         }
-
         #endregion
 
         #region IEnumerable Members
 
         Collections.IEnumerator Collections.IEnumerable.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         internal void AddParsedValue(HeaderDescriptor descriptor, object value)

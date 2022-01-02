@@ -413,6 +413,7 @@ public class ObjectMethodExecutorTest
     public class TestObject
     {
         public string value;
+
         public int ValueMethod(int i, int j)
         {
             return i + j;
@@ -446,6 +447,7 @@ public class ObjectMethodExecutorTest
         {
             await ValueMethodAsync(3, 4);
         }
+
         public Task<TestObject> ValueMethodWithReturnTypeAsync(int i)
         {
             return Task.FromResult<TestObject>(new TestObject() { value = "Hello" });

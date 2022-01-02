@@ -211,7 +211,6 @@ namespace System.Dynamic
         /// </summary>
         /// <returns>The list of dynamic member names.</returns>
         public virtual IEnumerable<string> GetDynamicMemberNames() => Array.Empty<string>();
-
         #endregion
 
         #region MetaDynamic
@@ -990,7 +989,6 @@ namespace System.Dynamic
                 }
             }
         }
-
         #endregion
 
         #region IDynamicMetaObjectProvider Members

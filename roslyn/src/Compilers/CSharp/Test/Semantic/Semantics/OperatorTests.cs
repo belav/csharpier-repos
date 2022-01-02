@@ -5115,7 +5115,6 @@ OPERATOR ndec   //-LiftedDecimalKIND"
     }
 }"
             + Postfix;
-
         #endregion
 
         [Fact, WorkItem(527598, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527598")]
@@ -12244,6 +12243,7 @@ namespace RoslynNullableIntRepro
                 expectedOutput: "3" + Environment.NewLine + "3" + Environment.NewLine
             );
         }
+
         [Fact, WorkItem(4027, "https://github.com/dotnet/roslyn/issues/4027")]
         public void NotSignExtendedOperand()
         {

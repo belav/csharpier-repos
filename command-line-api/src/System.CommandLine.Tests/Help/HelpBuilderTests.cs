@@ -105,7 +105,6 @@ namespace System.CommandLine.Tests.Help
 
             _console.ToString().Should().Contain(expected);
         }
-
         #endregion Synopsis
 
         #region Usage
@@ -339,7 +338,6 @@ namespace System.CommandLine.Tests.Help
             help.Should().Contain(expected);
             help.Should().NotContain("hidden");
         }
-
         #endregion Usage
 
         #region Arguments
@@ -819,7 +817,6 @@ namespace System.CommandLine.Tests.Help
 
             _console.ToString().Should().Contain(expected);
         }
-
         #endregion Arguments
 
         #region Options
@@ -1153,7 +1150,6 @@ namespace System.CommandLine.Tests.Help
 
             _console.ToString().Should().Contain(expected);
         }
-
         #endregion Options
 
         #region Subcommands
@@ -1299,7 +1295,6 @@ namespace System.CommandLine.Tests.Help
             help.Should().NotContain("the-hidden");
             help.Should().Contain("the-visible");
         }
-
         #endregion Subcommands
 
 

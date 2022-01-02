@@ -9,10 +9,12 @@ namespace System.Data
 {
     [System.ComponentModel.TypeConverter(typeof(ConstraintConverter))]
     public abstract partial class Constraint { }
+
     internal sealed class ConstraintConverter { }
 
     [System.ComponentModel.TypeConverter(typeof(RelationshipConverter))]
     public partial class DataRelation { }
+
     internal sealed class RelationshipConverter { }
 
     public partial class DataColumn
@@ -37,7 +39,9 @@ namespace System.Data
             set { }
         }
     }
+
     internal sealed class ColumnTypeConverter { }
+
     internal sealed class DefaultValueTypeConverter { }
 
     public partial class DataTable
@@ -54,6 +58,7 @@ namespace System.Data
             set { }
         }
     }
+
     internal sealed class PrimaryKeyTypeConverter { }
 
     public partial class DataView
@@ -69,8 +74,10 @@ namespace System.Data
             set { }
         }
     }
+
     internal sealed class DataTableTypeConverter { }
 }
+
 namespace System.Data.Common
 {
     [System.ComponentModel.TypeConverterAttribute(
@@ -80,6 +87,7 @@ namespace System.Data.Common
     {
         internal sealed class DataColumnMappingConverter { }
     }
+
     [System.ComponentModel.TypeConverterAttribute(
         typeof(DataTableMapping.DataTableMappingConverter)
     )]

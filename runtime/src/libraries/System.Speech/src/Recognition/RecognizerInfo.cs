@@ -104,7 +104,6 @@ namespace System.Speech.Recognition
             _objectToken.Dispose();
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region public Properties
@@ -132,7 +131,6 @@ namespace System.Speech.Recognition
         {
             get { return _attributes; }
         }
-
         #endregion
 
         #region Internal Properties

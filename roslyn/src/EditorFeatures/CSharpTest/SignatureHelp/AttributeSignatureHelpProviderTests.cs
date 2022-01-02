@@ -331,7 +331,6 @@ $$|]]
 }"
             );
         }
-
         #endregion
 
         #region "Current Parameter Name"
@@ -355,7 +354,6 @@ class C
 
             await VerifyCurrentParameterNameAsync(markup, "someParameter");
         }
-
         #endregion
 
         #region "Setting fields in attributes"
@@ -473,7 +471,6 @@ class D
 
             await TestAsync(markup, expectedOrderedItems);
         }
-
         #endregion
 
         #region "Setting properties in attributes"
@@ -686,7 +683,6 @@ class C
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: false);
         }
-
         #endregion
 
         #region "Setting fields and arguments"
@@ -861,7 +857,6 @@ class D
             // TODO: Bug 12319: Enable tests for script when this is fixed.
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: false);
         }
-
         #endregion
 
         #region "Trigger tests"
@@ -955,7 +950,6 @@ class C
 
             VerifyTriggerCharacters(expectedCharacters, unexpectedCharacters);
         }
-
         #endregion
 
         #region "EditorBrowsable tests"
@@ -1160,7 +1154,6 @@ public class MyAttribute
                 referencedLanguage: LanguageNames.CSharp
             );
         }
-
         #endregion
 
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]

@@ -241,7 +241,6 @@ namespace System.PrivateUri.Tests
                 Assert.NotEqual(UriHostNameType.IPv4, testUri.HostNameType);
             }
         }
-
         #endregion Helpers
 
         #endregion IPv4

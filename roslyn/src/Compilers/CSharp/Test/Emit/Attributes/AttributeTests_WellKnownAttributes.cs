@@ -940,7 +940,6 @@ public class CCC
 (Byte)0, (Byte)0, (UInt32)0, (UInt32)0, (UInt32)0, True"
             );
         }
-
         #endregion
 
         #region DefaultParameterValueAttribute, OptionalAttribute
@@ -2090,7 +2089,6 @@ class Program
                     .WithLocation(13, 9)
             );
         }
-
         #endregion
 
         #region DecimalConstantAttribute
@@ -2281,7 +2279,6 @@ public delegate void D([Optional, DecimalConstantAttribute(hi: 3, sign: 2, mid: 
                 }
             );
         }
-
         #endregion
 
         #region InAttribute, OutAttribute
@@ -2668,7 +2665,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region DllImportAttribute, MethodImplAttribute, DefaultCharSetAttribute
@@ -4221,7 +4217,6 @@ public class C2 { }
                         .WithLocation(34, 2)
                 );
         }
-
         #endregion
 
         #region ComImportAttribute, CoClassAttribute
@@ -5307,7 +5302,6 @@ class A
                         .WithLocation(14, 17)
                 );
         }
-
         #endregion
 
         #region GuidAttribute
@@ -5449,7 +5443,6 @@ using System.Runtime.InteropServices;
                         .WithLocation(5, 17)
                 );
         }
-
         #endregion
 
         #region SpecialNameAttribute
@@ -5599,7 +5592,6 @@ struct S { }
                 }
             );
         }
-
         #endregion
 
         #region SerializableAttribute
@@ -5951,7 +5943,6 @@ namespace AttributeTest
                 }
             );
         }
-
         #endregion
 
         #region AttributeUsageAttribute
@@ -6134,7 +6125,6 @@ public class MyAttribute : Attribute
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "badAttributeTargets")
                 );
         }
-
         #endregion
 
         #region InternalsVisibleToAttribute
@@ -6206,7 +6196,6 @@ public class Child2: Child
             );
             comp3.VerifyDiagnostics();
         }
-
         #endregion
 
         #region CustomConstantAttribute
@@ -6266,7 +6255,6 @@ public class Test
 }"
                 );
         }
-
         #endregion
 
         #region AssemblyKeyFileAttribute
@@ -6357,7 +6345,6 @@ public interface InvalidTarget {}
                         .WithArguments("ClassInterface", "assembly, class")
                 );
         }
-
         #endregion
 
         #region InterfaceTypeAttribute
@@ -6449,7 +6436,6 @@ public class InvalidTarget {}
                         .WithArguments("InterfaceType", "interface")
                 );
         }
-
         #endregion
 
         #region TypeLibVersionAttribute
@@ -6521,7 +6507,6 @@ using System.Runtime.InteropServices;
                         .WithArguments("1", "string", "int")
                 );
         }
-
         #endregion
 
         #region ComCompatibleVersionAttribute
@@ -6592,7 +6577,6 @@ using System.Runtime.InteropServices;
                         .WithLocation(4, 12)
                 );
         }
-
         #endregion
 
         #region WindowsRuntimeImportAttribute
@@ -6663,7 +6647,6 @@ class A
                 targetFramework: TargetFramework.Mscorlib40
             );
         }
-
         #endregion
 
         #region DynamicSecurityMethodAttribute
@@ -6801,7 +6784,6 @@ class A
                 .GetSymbol<LocalFunctionSymbol>();
             Assert.True(localFunctionSymbol.RequiresSecurityObject);
         }
-
         #endregion
 
         #region ObsoleteAttribute
@@ -12236,7 +12218,6 @@ public class C
 
             cscomp.VerifyDiagnostics(expected);
         }
-
         #endregion
 
         #region SkipLocalsInitAttribute
@@ -15290,7 +15271,6 @@ namespace System.Runtime.CompilerServices
             var verifier = CompileAndVerify(comp, verify: Verification.Fails);
             Assert.False(verifier.HasLocalsInit("C.M"));
         }
-
         #endregion
 
         [Fact, WorkItem(807, "https://github.com/dotnet/roslyn/issues/807")]

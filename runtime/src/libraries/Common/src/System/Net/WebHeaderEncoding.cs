@@ -86,6 +86,7 @@ namespace System.Net
                 }
             }
         }
+
         internal static byte[] GetBytes(string myString)
         {
             byte[] bytes = new byte[myString.Length];

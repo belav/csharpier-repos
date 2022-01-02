@@ -198,6 +198,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             public string? Nullable { get; set; }
         }
+
 #nullable disable
 
         private static ModelBuilder CreateModelBuilder() =>

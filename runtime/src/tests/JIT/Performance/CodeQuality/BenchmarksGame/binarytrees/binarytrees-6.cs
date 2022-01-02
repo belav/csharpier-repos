@@ -15,6 +15,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
 //using BenchmarkDotNet.Attributes;
 //using MicroBenchmarks;
 
@@ -125,6 +126,7 @@ namespace BenchmarksGame
                 public TreeNode left,
                     right;
             }
+
             readonly Next next;
 
             TreeNode(TreeNode left, TreeNode right) =>

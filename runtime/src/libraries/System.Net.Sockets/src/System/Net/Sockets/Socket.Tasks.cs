@@ -17,11 +17,13 @@ namespace System.Net.Sockets
     {
         /// <summary>Cached instance for receive operations that return <see cref="ValueTask{Int32}"/>. Also used for ConnectAsync operations.</summary>
         private AwaitableSocketAsyncEventArgs? _singleBufferReceiveEventArgs;
+
         /// <summary>Cached instance for send operations that return <see cref="ValueTask{Int32}"/>. Also used for AcceptAsync operations.</summary>
         private AwaitableSocketAsyncEventArgs? _singleBufferSendEventArgs;
 
         /// <summary>Cached instance for receive operations that return <see cref="Task{Int32}"/>.</summary>
         private TaskSocketAsyncEventArgs<int>? _multiBufferReceiveEventArgs;
+
         /// <summary>Cached instance for send operations that return <see cref="Task{Int32}"/>.</summary>
         private TaskSocketAsyncEventArgs<int>? _multiBufferSendEventArgs;
 
@@ -1082,6 +1084,7 @@ namespace System.Net.Sockets
             : TaskCompletionSource<TResult>
         {
             internal TField1 _field1 = default!; // always set on construction
+
             public StateTaskCompletionSource(object baseState) : base(baseState) { }
         }
 
@@ -1091,6 +1094,7 @@ namespace System.Net.Sockets
         {
             internal TField1 _field1 = default!; // always set on construction
             internal TField2 _field2 = default!; // always set on construction
+
             public StateTaskCompletionSource(object baseState) : base(baseState) { }
         }
 
@@ -1102,6 +1106,7 @@ namespace System.Net.Sockets
             /// This is a mutable struct.
             /// </summary>
             internal AsyncTaskMethodBuilder<TResult> _builder;
+
             /// <summary>
             /// Whether the instance was already accessed as part of the operation.  We expect
             /// at most two accesses: one from the synchronous caller to initiate the operation,
@@ -1111,6 +1116,7 @@ namespace System.Net.Sockets
             /// accesses this second, so we track whether it's already been accessed.
             /// </summary>
             internal bool _accessed;
+
             /// <summary>Whether exceptions that emerge should be wrapped in IOExceptions.</summary>
             internal bool _wrapExceptionsInIOExceptions;
 
@@ -1147,10 +1153,13 @@ namespace System.Net.Sockets
                         SR.Format(SR.net_sockets_valuetaskmisuse, nameof(s_completedSentinel))
                     )
             );
+
             /// <summary>The owning socket.</summary>
             private readonly Socket _owner;
+
             /// <summary>Whether this should be cached as a read or a write on the <see cref="_owner"/></summary>
             private bool _isReadForCaching;
+
             /// <summary>
             /// <see cref="s_completedSentinel"/> if it has completed. Another delegate if OnCompleted was called before the operation could complete,
             /// in which case it's the delegate to invoke when the operation does complete.
@@ -1158,6 +1167,7 @@ namespace System.Net.Sockets
             private Action<object?>? _continuation;
             private ExecutionContext? _executionContext;
             private object? _scheduler;
+
             /// <summary>Current token value given to a ValueTask and then verified against the value it passes back to us.</summary>
             /// <remarks>
             /// This is not meant to be a completely reliable mechanism, doesn't require additional synchronization, etc.
@@ -1165,6 +1175,7 @@ namespace System.Net.Sockets
             /// it's already being reused by someone else.
             /// </remarks>
             private short _token;
+
             /// <summary>The cancellation token used for the current operation.</summary>
             private CancellationToken _cancellationToken;
 

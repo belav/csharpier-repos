@@ -36,6 +36,7 @@ namespace System.Reflection.TypeLoading.Ecma
         }
 
         internal sealed override RoModule GetRoManifestModule() => _manifestModule;
+
         internal EcmaModule GetEcmaManifestModule() => _manifestModule;
 
         public sealed override MethodInfo? EntryPoint =>
@@ -121,6 +122,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughAssemblyDefinitionProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly AssemblyDefinition _neverAccessThisExceptThroughAssemblyDefinitionProperty;
     }

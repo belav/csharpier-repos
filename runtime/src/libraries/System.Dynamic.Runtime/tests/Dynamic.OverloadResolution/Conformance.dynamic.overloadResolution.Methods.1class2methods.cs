@@ -15,6 +15,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -59,6 +60,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -103,6 +105,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(ref int x)
         {
             Target.Status = 1;
@@ -147,6 +150,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, float f, string s, decimal d)
         {
             Target.Status = 1;
@@ -191,6 +195,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status = -1;
+
         public void Method(
             int x,
             float f,
@@ -243,6 +248,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, float f)
         {
             Target.Status = 1;
@@ -301,6 +307,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, dynamic f)
         {
             Target.Status = 1;
@@ -358,6 +365,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -407,6 +415,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public int Method(int x)
         {
             Target.Status = 1;
@@ -462,6 +471,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public myClass Method(int x)
         {
             Target.Status = 1;
@@ -514,6 +524,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public dynamic Method(int x)
         {
             Target.Status = 1;
@@ -568,6 +579,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -628,6 +640,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -672,6 +685,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -717,6 +731,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -762,6 +777,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -806,6 +822,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -850,6 +867,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -894,6 +912,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(ref int x)
         {
             x = x + 1;
@@ -939,6 +958,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(ref short x)
         {
             Target.Status = 1;
@@ -983,6 +1003,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(ref int x)
         {
             x = x + 1;
@@ -1027,6 +1048,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(ref int x)
         {
             x = x + 1;
@@ -1072,6 +1094,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(out int x)
         {
             x = 3;
@@ -1116,6 +1139,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(out int x)
         {
             x = 3;
@@ -1161,6 +1185,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(dynamic x)
         {
             Target.Status = 1;
@@ -1205,6 +1230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status = -1;
+
         public void Method(dynamic x)
         {
             Target.Status = 2;
@@ -1249,6 +1275,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(dynamic x)
         {
             Target.Status = 1;
@@ -1293,6 +1320,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(dynamic x)
         {
             Target.Status = 1;
@@ -1357,6 +1385,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1388,6 +1417,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -1432,6 +1462,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -1476,6 +1507,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(float x)
         {
             Target.Status = 1;
@@ -1520,6 +1552,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(float x)
         {
             Target.Status = 1;
@@ -1563,6 +1596,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(long x)
         {
             Target.Status = 1;
@@ -1614,6 +1648,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -1665,6 +1700,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -1716,6 +1752,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -1766,6 +1803,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(ValueType x)
         {
             Target.Status = 1;
@@ -1817,6 +1855,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(ValueType x)
         {
             Target.Status = 1;
@@ -1866,6 +1905,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(myStruct x)
         {
             Target.Status = 1;
@@ -1915,6 +1955,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(myStruct x)
         {
             Target.Status = 1;
@@ -1966,6 +2007,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(Base x)
         {
             Target.Status = 1;
@@ -2018,6 +2060,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(Base x)
         {
             Target.Status = 1;
@@ -2070,6 +2113,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status = -1;
+
         public void Method(Base x)
         {
             Target.Status = 1;
@@ -2123,6 +2167,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(I x)
         {
             Target.Status = 1;
@@ -2175,6 +2220,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status = 1;
+
         public void Method(I x)
         {
             Target.Status = 1;
@@ -2228,6 +2274,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status = -1;
+
         public void Method(I x)
         {
             Target.Status = 1;
@@ -2272,6 +2319,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(bool x)
         {
             Target.Status = 1;
@@ -2315,6 +2363,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(bool x)
         {
             Target.Status = 1;
@@ -2366,6 +2415,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(decimal x)
         {
             Target.Status = 1;
@@ -2423,6 +2473,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x)
         {
             Target.Status = 1;
@@ -2479,6 +2530,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status = -1;
+
         public void Method(decimal x)
         {
             Target.Status = 1;
@@ -2532,6 +2584,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(Base b)
         {
             Test.Status = 1;
@@ -2581,6 +2634,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(Base b)
         {
             Test.Status = 1;
@@ -2626,6 +2680,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(string b)
         {
             Test.Status = 1;
@@ -2671,6 +2726,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(string b)
         {
             Test.Status = 1;
@@ -2720,6 +2776,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(Derived b)
         {
             Test.Status = 1;
@@ -2769,6 +2826,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(Derived b)
         {
             Test.Status = 1;
@@ -2803,6 +2861,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(string s)
         {
             Test.Status = 1;
@@ -2832,6 +2891,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short? s)
         {
             Test.Status = 1;
@@ -2861,6 +2921,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short? s)
         {
             Test.Status = 1;
@@ -2902,6 +2963,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(S? s)
         {
             Test.Status = 1;
@@ -2943,6 +3005,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(S? s)
         {
             Test.Status = 1;
@@ -2972,6 +3035,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x)
         {
             Test.Status = 1;
@@ -3048,6 +3112,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, string s)
         {
             Test.Status = 1;
@@ -3094,6 +3159,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, string s)
         {
             Test.Status = 1;
@@ -3144,6 +3210,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, Derived s)
         {
             Test.Status = 1;
@@ -3194,6 +3261,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, Derived s)
         {
             Test.Status = 1;
@@ -3240,6 +3308,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, short? s)
         {
             Test.Status = 1;
@@ -3286,6 +3355,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, short? s)
         {
             Test.Status = 1;
@@ -3321,6 +3391,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, int s)
         {
             Test.Status = 1;
@@ -3356,6 +3427,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int x, int s)
         {
             Test.Status = 1;
@@ -3391,6 +3463,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public static void Method(int x, int s)
         {
             Test.Status = 1;
@@ -3425,6 +3498,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public static void Method(int x, int s)
         {
             Test.Status = 1;
@@ -3470,6 +3544,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public static void Method(int x, string s)
         {
             Test.Status = 1;
@@ -3515,6 +3590,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public static void Method(int x, string s)
         {
             Test.Status = 1;
@@ -3560,6 +3636,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public static void Method(int x, short? s)
         {
             Test.Status = 1;
@@ -3605,6 +3682,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public static void Method(int x, short? s)
         {
             Test.Status = 1;
@@ -3646,6 +3724,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, dynamic f)
         {
             Target.Status = 1;
@@ -3703,6 +3782,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, dynamic f)
         {
             Target.Status = 1;
@@ -3761,6 +3841,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, dynamic f)
         {
             Target.Status = 1;
@@ -3819,6 +3900,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, dynamic f)
         {
             Target.Status = 1;
@@ -3865,6 +3947,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, dynamic f)
         {
             Target.Status = 1;
@@ -3910,6 +3993,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Target
     {
         public static int Status;
+
         public void Method(int x, dynamic f)
         {
             Target.Status = 1;
@@ -4024,6 +4108,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class A
     {
         private const byte b = 100;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

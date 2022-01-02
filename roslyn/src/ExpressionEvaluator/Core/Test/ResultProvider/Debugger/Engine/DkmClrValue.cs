@@ -762,6 +762,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
         private static readonly ReadOnlyCollection<DkmClrType> s_noArguments =
             ArrayBuilder<DkmClrType>.GetInstance(0).ToImmutableAndFree();
+
         public DkmClrValue InstantiateDynamicViewProxy(DkmInspectionContext inspectionContext)
         {
             if (inspectionContext == null)

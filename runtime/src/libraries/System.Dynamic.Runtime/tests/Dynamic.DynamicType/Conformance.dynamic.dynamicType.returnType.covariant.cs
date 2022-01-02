@@ -266,6 +266,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -436,6 +437,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -497,6 +499,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         //methods
         dynamic RetObj();
         List<dynamic> RetListObj();
+
         //properties
         dynamic Prop1 { get; set; }
 
@@ -623,6 +626,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -833,6 +837,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         //methods
         dynamic RetObj();
         List<dynamic> RetListObj();
+
         //properties
         dynamic Prop1 { get; set; }
 
@@ -902,6 +907,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1119,6 +1125,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         }
 
         protected abstract object RetObject2();
+
         internal virtual List<object> RetListObject()
         {
             Test.Called = "base";
@@ -1126,6 +1133,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         }
 
         public abstract Dictionary<object, Dictionary<string, List<object>>> RetComplex();
+
         public virtual object[] RetArray()
         {
             return new object[] { 1 };
@@ -1314,6 +1322,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1459,6 +1468,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1592,6 +1602,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1953,6 +1964,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2123,6 +2135,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2272,6 +2285,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2388,6 +2402,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2466,6 +2481,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2547,6 +2563,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2613,6 +2630,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2830,6 +2848,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Base
     {
         protected int storage = 4;
+
         public virtual object M()
         {
             return 1;
@@ -2926,6 +2945,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Base
     {
         protected int storage = 4;
+
         public virtual object M()
         {
             return 1;

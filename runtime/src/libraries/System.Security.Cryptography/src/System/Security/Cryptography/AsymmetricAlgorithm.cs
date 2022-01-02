@@ -9,6 +9,7 @@ namespace System.Security.Cryptography
     public abstract class AsymmetricAlgorithm : IDisposable
     {
         protected int KeySizeValue;
+
         [MaybeNull]
         protected KeySizes[] LegalKeySizesValue = null!;
 

@@ -272,7 +272,6 @@ namespace Roslyn.Collections.Immutable
         /// </returns>
         [Pure]
         public bool ContainsValue(TValue value) => this.Values.Contains(value, _valueComparer);
-
         #endregion
 
         #region IImmutableDictionary<TKey, TValue> Members
@@ -437,7 +436,6 @@ namespace Roslyn.Collections.Immutable
             actualKey = equalKey;
             return false;
         }
-
         #endregion
 
         #region IEnumerable<KeyValuePair<TKey, TValue>> Members
@@ -452,13 +450,11 @@ namespace Roslyn.Collections.Immutable
             this.GetValueBuckets()
                 .Select(vb => new KeyValuePair<TKey, TValue>(vb.Key, vb.Value))
                 .GetEnumerator();
-
         #endregion
 
         #region IEnumerable Members
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
-
         #endregion
 
         /// <summary>
@@ -1112,7 +1108,6 @@ namespace Roslyn.Collections.Immutable
 
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.Remove(TKey key) =>
             this.Remove(key);
-
         #endregion
 
         /// <summary>

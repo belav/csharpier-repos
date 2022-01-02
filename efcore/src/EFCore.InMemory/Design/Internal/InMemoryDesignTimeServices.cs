@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
     "Microsoft.EntityFrameworkCore.InMemory.Design.Internal.InMemoryDesignTimeServices"
 )]
 
+
 namespace Microsoft.EntityFrameworkCore.InMemory.Design.Internal
 {
     /// <summary>

@@ -129,6 +129,7 @@ namespace Moq.Tests
         private void Do<T>(T value) { }
 
         private static void DoStatic(int value) { }
+
         private static void DoStaticGeneric<T>(T value) { }
 
         public interface IFoo

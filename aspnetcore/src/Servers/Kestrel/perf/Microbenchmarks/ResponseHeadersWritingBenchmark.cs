@@ -207,8 +207,11 @@ public class ResponseHeadersWritingBenchmark
         public override Span<byte> GetSpan(int sizeHint = 0) => _memory.Span;
 
         public override void Advance(int bytes) { }
+
         public override void CancelPendingFlush() { }
+
         public override void Complete(Exception exception = null) { }
+
         public override ValueTask<FlushResult> FlushAsync(
             CancellationToken cancellationToken = default
         ) => default;

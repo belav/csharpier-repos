@@ -226,6 +226,7 @@ public class EventLogHelpers
             return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' hit unexpected managed background thread exit, exit code = '{code}'.";
         }
     }
+
     public static string InProcessThreadExitStdOut(
         IISDeploymentResult deploymentResult,
         string code,

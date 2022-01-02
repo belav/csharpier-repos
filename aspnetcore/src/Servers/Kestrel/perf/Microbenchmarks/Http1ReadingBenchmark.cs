@@ -22,6 +22,7 @@ public class Http1ReadingBenchmark
 {
     // Standard completed task
     private static readonly Func<object, Task> _syncTaskFunc = (obj) => Task.CompletedTask;
+
     // Non-standard completed task
     private static readonly Task _pseudoAsyncTask = Task.FromResult(27);
     private static readonly Func<object, Task> _pseudoAsyncTaskFunc = (obj) => _pseudoAsyncTask;

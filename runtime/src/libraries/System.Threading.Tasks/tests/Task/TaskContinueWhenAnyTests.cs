@@ -1003,7 +1003,6 @@ namespace System.Threading.Tasks.Tests
                 }
             }
         }
-
         #endregion
 
         #region Helper Methods

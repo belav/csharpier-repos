@@ -832,7 +832,6 @@ namespace System.Net.Http
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Helpers
@@ -1014,7 +1013,6 @@ namespace System.Net.Http
 
             return true;
         }
-
         #endregion Helpers
 
         private static async Task<TResult> WaitAndReturnAsync<TState, TResult>(
@@ -1286,6 +1284,7 @@ namespace System.Net.Http
             }
 
             public override void Flush() { }
+
             public override Task FlushAsync(CancellationToken cancellationToken) =>
                 Task.CompletedTask;
 
@@ -1299,14 +1298,17 @@ namespace System.Net.Http
                 get { throw new NotSupportedException(); }
                 set { throw new NotSupportedException(); }
             }
+
             public override int Read(byte[] buffer, int offset, int count)
             {
                 throw new NotSupportedException();
             }
+
             public override long Seek(long offset, SeekOrigin origin)
             {
                 throw new NotSupportedException();
             }
+
             public override void SetLength(long value)
             {
                 throw new NotSupportedException();

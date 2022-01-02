@@ -24,6 +24,7 @@ public class Program
     {
         static long s_1;
         static int s_3;
+
         public static int Run()
         {
             int vr16 = s_3;
@@ -36,6 +37,7 @@ public class Program
     {
         static int s_32;
         static int s_46 = 1;
+
         public static int Run()
         {
             s_32 = 0;
@@ -53,6 +55,7 @@ public class Program
     {
         static int s_3;
         static int s_11;
+
         public static int Run()
         {
             return M9(s_3, Interlocked.Exchange(ref s_3, 1), s_11++);

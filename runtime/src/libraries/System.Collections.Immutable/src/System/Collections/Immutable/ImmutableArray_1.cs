@@ -806,6 +806,7 @@ namespace System.Collections.Immutable
 
             return self;
         }
+
         /// <summary>
         /// Filters the elements of this array to those assignable to the specified type.
         /// </summary>
@@ -1247,7 +1248,6 @@ namespace System.Collections.Immutable
 
             throw new ArgumentException(SR.ArrayLengthsNotEqual, nameof(other));
         }
-
         #endregion
 
 

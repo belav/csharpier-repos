@@ -83,6 +83,7 @@ namespace System.Net
         }
 
         private static WaitCallback s_invokeCB = new WaitCallback(InvokeCallback!);
+
         private static void InvokeCallback(object o)
         {
             ListenerAsyncResult ares = (ListenerAsyncResult)o!;

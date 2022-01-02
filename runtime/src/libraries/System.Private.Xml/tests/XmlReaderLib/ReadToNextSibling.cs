@@ -75,7 +75,6 @@ namespace System.Xml.Tests
                                                             </e:child1>
                                                         </e:elem>
                                                     </root>";
-
         #endregion
 
         //[Variation("Simple positive test 1", Pri = 0, Params = new object[] { "NNS" })]

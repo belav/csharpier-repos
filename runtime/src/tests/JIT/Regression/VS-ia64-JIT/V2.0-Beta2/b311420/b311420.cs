@@ -38,21 +38,25 @@ public class NullableTest
         ++counter;
         return true;
     }
+
     static bool? qMFALSE()
     {
         ++counter;
         return false;
     }
+
     static bool? qMNULL()
     {
         ++counter;
         return null;
     }
+
     static bool? MTRUE()
     {
         ++counter;
         return true;
     }
+
     static bool? MFALSE()
     {
         ++counter;

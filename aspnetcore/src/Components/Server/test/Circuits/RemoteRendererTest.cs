@@ -681,6 +681,7 @@ public class RemoteRendererTest
     private class Trigger
     {
         public AutoParameterTestComponent Component { get; set; }
+
         public void TriggerRender()
         {
             Component.TriggerRender();

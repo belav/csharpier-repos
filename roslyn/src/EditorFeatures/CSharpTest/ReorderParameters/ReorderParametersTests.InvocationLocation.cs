@@ -627,7 +627,6 @@ class D : B
                 expectedUpdatedInvocationDocumentCode: updatedCode
             );
         }
-
         #endregion
 
         #region Indexers

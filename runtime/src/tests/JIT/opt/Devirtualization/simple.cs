@@ -27,14 +27,17 @@ public class B : Iy, Ix, Iz
     {
         return 3;
     }
+
     virtual public int G()
     {
         return 5;
     }
+
     int Iz.H()
     {
         return 7;
     }
+
     int Iz.I()
     {
         return 11;
@@ -47,10 +50,12 @@ public class Z : B, Iz
     {
         return 13;
     }
+
     override public int G()
     {
         return 17;
     }
+
     int Iz.H()
     {
         return 19;
@@ -60,14 +65,17 @@ public class Z : B, Iz
     {
         return x.F();
     }
+
     static int Gy(Iy y)
     {
         return y.G();
     }
+
     static int Hz(Iz z)
     {
         return z.H();
     }
+
     static int Hi(Iz z)
     {
         return z.I();

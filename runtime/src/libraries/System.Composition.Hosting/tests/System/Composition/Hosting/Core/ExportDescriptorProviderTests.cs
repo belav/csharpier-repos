@@ -33,7 +33,9 @@ namespace System.Composition.Hosting.Core.Tests
         {
             public IEnumerable<ExportDescriptorPromise> GetNoExportDescriptors() =>
                 NoExportDescriptors;
+
             public IDictionary<string, object> GetNoMetadata() => NoMetadata;
+
             public Func<IEnumerable<CompositionDependency>> GetNoDependencies() => NoDependencies;
 
             public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(

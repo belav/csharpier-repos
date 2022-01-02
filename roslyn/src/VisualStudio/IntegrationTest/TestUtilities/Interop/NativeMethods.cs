@@ -30,7 +30,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
 
         [DllImport(Kernel32, SetLastError = false)]
         public static extern IntPtr GetConsoleWindow();
-
         #endregion
 
         #region ole32.dll
@@ -46,7 +45,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
             int reserved,
             [MarshalAs(UnmanagedType.Interface)] out IRunningObjectTable runningObjectTable
         );
-
         #endregion
 
         #region user32.dll

@@ -44,39 +44,51 @@ namespace ABIStress
     public struct S1P
     {
         public byte F0;
+
         public S1P(byte f0) => F0 = f0;
     }
+
     public struct S2P
     {
         public short F0;
+
         public S2P(short f0) => F0 = f0;
     }
+
     public struct S2U
     {
         public byte F0,
             F1;
+
         public S2U(byte f0, byte f1) => (F0, F1) = (f0, f1);
     }
+
     public struct S3U
     {
         public byte F0,
             F1,
             F2;
+
         public S3U(byte f0, byte f1, byte f2) => (F0, F1, F2) = (f0, f1, f2);
     }
+
     public struct S4P
     {
         public int F0;
+
         public S4P(int f0) => F0 = f0;
     }
+
     public struct S4U
     {
         public byte F0,
             F1,
             F2,
             F3;
+
         public S4U(byte f0, byte f1, byte f2, byte f3) => (F0, F1, F2, F3) = (f0, f1, f2, f3);
     }
+
     public struct S5U
     {
         public byte F0,
@@ -84,9 +96,11 @@ namespace ABIStress
             F2,
             F3,
             F4;
+
         public S5U(byte f0, byte f1, byte f2, byte f3, byte f4) =>
             (F0, F1, F2, F3, F4) = (f0, f1, f2, f3, f4);
     }
+
     public struct S6U
     {
         public byte F0,
@@ -95,9 +109,11 @@ namespace ABIStress
             F3,
             F4,
             F5;
+
         public S6U(byte f0, byte f1, byte f2, byte f3, byte f4, byte f5) =>
             (F0, F1, F2, F3, F4, F5) = (f0, f1, f2, f3, f4, f5);
     }
+
     public struct S7U
     {
         public byte F0,
@@ -107,14 +123,18 @@ namespace ABIStress
             F4,
             F5,
             F6;
+
         public S7U(byte f0, byte f1, byte f2, byte f3, byte f4, byte f5, byte f6) =>
             (F0, F1, F2, F3, F4, F5, F6) = (f0, f1, f2, f3, f4, f5, f6);
     }
+
     public struct S8P
     {
         public long F0;
+
         public S8P(long f0) => F0 = f0;
     }
+
     public struct S8U
     {
         public byte F0,
@@ -125,9 +145,11 @@ namespace ABIStress
             F5,
             F6,
             F7;
+
         public S8U(byte f0, byte f1, byte f2, byte f3, byte f4, byte f5, byte f6, byte f7) =>
             (F0, F1, F2, F3, F4, F5, F6, F7) = (f0, f1, f2, f3, f4, f5, f6, f7);
     }
+
     public struct S9U
     {
         public byte F0,
@@ -139,6 +161,7 @@ namespace ABIStress
             F6,
             F7,
             F8;
+
         public S9U(
             byte f0,
             byte f1,
@@ -151,6 +174,7 @@ namespace ABIStress
             byte f8
         ) => (F0, F1, F2, F3, F4, F5, F6, F7, F8) = (f0, f1, f2, f3, f4, f5, f6, f7, f8);
     }
+
     public struct S10U
     {
         public byte F0,
@@ -163,6 +187,7 @@ namespace ABIStress
             F7,
             F8,
             F9;
+
         public S10U(
             byte f0,
             byte f1,
@@ -176,6 +201,7 @@ namespace ABIStress
             byte f9
         ) => (F0, F1, F2, F3, F4, F5, F6, F7, F8, F9) = (f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
     }
+
     public struct S11U
     {
         public byte F0,
@@ -189,6 +215,7 @@ namespace ABIStress
             F8,
             F9,
             F10;
+
         public S11U(
             byte f0,
             byte f1,
@@ -216,6 +243,7 @@ namespace ABIStress
                 f10
             );
     }
+
     public struct S12U
     {
         public byte F0,
@@ -230,6 +258,7 @@ namespace ABIStress
             F9,
             F10,
             F11;
+
         public S12U(
             byte f0,
             byte f1,
@@ -259,6 +288,7 @@ namespace ABIStress
                 f11
             );
     }
+
     public struct S13U
     {
         public byte F0,
@@ -274,6 +304,7 @@ namespace ABIStress
             F10,
             F11,
             F12;
+
         public S13U(
             byte f0,
             byte f1,
@@ -305,6 +336,7 @@ namespace ABIStress
                 f12
             );
     }
+
     public struct S14U
     {
         public byte F0,
@@ -321,6 +353,7 @@ namespace ABIStress
             F11,
             F12,
             F13;
+
         public S14U(
             byte f0,
             byte f1,
@@ -354,6 +387,7 @@ namespace ABIStress
                 f13
             );
     }
+
     public struct S15U
     {
         public byte F0,
@@ -371,6 +405,7 @@ namespace ABIStress
             F12,
             F13,
             F14;
+
         public S15U(
             byte f0,
             byte f1,
@@ -406,6 +441,7 @@ namespace ABIStress
                 f14
             );
     }
+
     public struct S16U
     {
         public byte F0,
@@ -424,6 +460,7 @@ namespace ABIStress
             F13,
             F14,
             F15;
+
         public S16U(
             byte f0,
             byte f1,
@@ -461,6 +498,7 @@ namespace ABIStress
                 f15
             );
     }
+
     public struct S17U
     {
         public byte F0,
@@ -480,6 +518,7 @@ namespace ABIStress
             F14,
             F15,
             F16;
+
         public S17U(
             byte f0,
             byte f1,
@@ -519,6 +558,7 @@ namespace ABIStress
                 f16
             );
     }
+
     public struct S31U
     {
         public byte F0,
@@ -552,6 +592,7 @@ namespace ABIStress
             F28,
             F29,
             F30;
+
         public S31U(
             byte f0,
             byte f1,
@@ -651,6 +692,7 @@ namespace ABIStress
                 f30
             );
     }
+
     public struct S32U
     {
         public byte F0,
@@ -685,6 +727,7 @@ namespace ABIStress
             F29,
             F30,
             F31;
+
         public S32U(
             byte f0,
             byte f1,
@@ -787,18 +830,22 @@ namespace ABIStress
                 f31
             );
     }
+
     public struct Hfa1
     {
         public float F0,
             F1;
+
         public Hfa1(float f0, float f1) => (F0, F1) = (f0, f1);
     }
+
     public struct Hfa2
     {
         public double F0,
             F1,
             F2,
             F3;
+
         public Hfa2(double f0, double f1, double f2, double f3) =>
             (F0, F1, F2, F3) = (f0, f1, f2, f3);
     }

@@ -73,6 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal readonly struct MethodTypeInferenceResult
     {
         public readonly ImmutableArray<TypeWithAnnotations> InferredTypeArguments;
+
         /// <summary>
         /// At least one type argument was inferred from a function type.
         /// </summary>
@@ -456,7 +457,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return sb.ToString();
         }
-
 #endif
 
         private RefKind GetRefKind(int index)
@@ -1786,6 +1786,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref useSiteInfo
             );
         }
+
 #nullable disable
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -2772,6 +2773,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return true;
         }
+
 #nullable disable
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -3558,6 +3560,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref useSiteInfo
             ).Exists;
         }
+
 #nullable disable
 
         ////////////////////////////////////////////////////////////////////////////////

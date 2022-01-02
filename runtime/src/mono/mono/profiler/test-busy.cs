@@ -4,6 +4,7 @@ using System.Threading;
 class T
 {
     static int count = 10;
+
     static void test2()
     {
         //Thread.Sleep (500);
@@ -25,6 +26,7 @@ class T
         }
         return v > 0 ? 0 : 1;
     }
+
     static int test()
     {
         int v = 33;
@@ -35,6 +37,7 @@ class T
         }
         return v > 0 ? 0 : 1;
     }
+
     static int Main(string[] args)
     {
         if (args.Length > 0)

@@ -18,6 +18,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.Action<Microsoft.Extensions.Configuration.Json.JsonConfigurationSource> configureSource
@@ -25,6 +26,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path
@@ -32,6 +34,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path,
@@ -40,6 +43,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path,
@@ -49,6 +53,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonStream(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.IO.Stream stream
@@ -58,6 +63,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 }
+
 namespace Microsoft.Extensions.Configuration.Json
 {
     public partial class JsonConfigurationProvider
@@ -66,12 +72,15 @@ namespace Microsoft.Extensions.Configuration.Json
         public JsonConfigurationProvider(
             Microsoft.Extensions.Configuration.Json.JsonConfigurationSource source
         ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
+
         public override void Load(System.IO.Stream stream) { }
     }
+
     public partial class JsonConfigurationSource
         : Microsoft.Extensions.Configuration.FileConfigurationSource
     {
         public JsonConfigurationSource() { }
+
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
         )
@@ -79,18 +88,22 @@ namespace Microsoft.Extensions.Configuration.Json
             throw null;
         }
     }
+
     public partial class JsonStreamConfigurationProvider
         : Microsoft.Extensions.Configuration.StreamConfigurationProvider
     {
         public JsonStreamConfigurationProvider(
             Microsoft.Extensions.Configuration.Json.JsonStreamConfigurationSource source
         ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
+
         public override void Load(System.IO.Stream stream) { }
     }
+
     public partial class JsonStreamConfigurationSource
         : Microsoft.Extensions.Configuration.StreamConfigurationSource
     {
         public JsonStreamConfigurationSource() { }
+
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
         )

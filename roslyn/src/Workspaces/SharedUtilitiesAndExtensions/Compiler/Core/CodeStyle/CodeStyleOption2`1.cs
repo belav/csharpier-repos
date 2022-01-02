@@ -61,8 +61,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         public T Value { get; }
 
         object? ICodeStyleOption.Value => this.Value;
+
         ICodeStyleOption ICodeStyleOption.WithValue(object value) =>
             new CodeStyleOption2<T>((T)value, Notification);
+
         ICodeStyleOption ICodeStyleOption.WithNotification(NotificationOption2 notification) =>
             new CodeStyleOption2<T>(Value, notification);
 
@@ -71,6 +73,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 #else
         ICodeStyleOption ICodeStyleOption.AsCodeStyleOption<TCodeStyleOption>() =>
             this is TCodeStyleOption ? this : new CodeStyleOption<T>(this);
+
         ICodeStyleOption ICodeStyleOption.AsPublicCodeStyleOption() => new CodeStyleOption<T>(this);
 #endif
 

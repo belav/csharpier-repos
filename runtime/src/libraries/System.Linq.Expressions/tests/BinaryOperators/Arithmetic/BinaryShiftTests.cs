@@ -168,7 +168,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyNullableLongShift(array[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -996,7 +995,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Null(f());
         }
-
         #endregion
 
         [Fact]

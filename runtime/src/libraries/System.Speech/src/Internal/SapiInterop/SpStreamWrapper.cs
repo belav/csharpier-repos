@@ -23,7 +23,6 @@ namespace System.Speech.Internal.SapiInterop
             _stream.Dispose();
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region public Methods
@@ -67,30 +66,37 @@ namespace System.Speech.Internal.SapiInterop
                 Marshal.WriteIntPtr(plibNewPosition, new IntPtr(_stream.Position));
             }
         }
+
         public void SetSize(long libNewSize)
         {
             throw new NotSupportedException();
         }
+
         public void CopyTo(IStream pstm, long cb, IntPtr pcbRead, IntPtr pcbWritten)
         {
             throw new NotSupportedException();
         }
+
         public void Commit(int grfCommitFlags)
         {
             _stream.Flush();
         }
+
         public void Revert()
         {
             throw new NotSupportedException();
         }
+
         public void LockRegion(long libOffset, long cb, int dwLockType)
         {
             throw new NotSupportedException();
         }
+
         public void UnlockRegion(long libOffset, long cb, int dwLockType)
         {
             throw new NotSupportedException();
         }
+
         public void Stat(out STATSTG pstatstg, int grfStatFlag)
         {
             pstatstg = new STATSTG { cbSize = _stream.Length };
@@ -100,7 +106,6 @@ namespace System.Speech.Internal.SapiInterop
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #endregion

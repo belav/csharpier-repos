@@ -14,6 +14,7 @@ namespace Microsoft.Win32
         {
             throw null;
         }
+
         public static System.Security.AccessControl.RegistrySecurity GetAccessControl(
             this Microsoft.Win32.RegistryKey key,
             System.Security.AccessControl.AccessControlSections includeSections
@@ -21,6 +22,7 @@ namespace Microsoft.Win32
         {
             throw null;
         }
+
         public static void SetAccessControl(
             this Microsoft.Win32.RegistryKey key,
             System.Security.AccessControl.RegistrySecurity registrySecurity

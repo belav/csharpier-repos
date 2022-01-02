@@ -22,7 +22,6 @@ namespace System.Collections.Tests
         {
             return GenericListFactory(count);
         }
-
         #endregion
 
         #region List<T> Helper Methods
@@ -51,7 +50,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         [Theory]

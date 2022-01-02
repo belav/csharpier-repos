@@ -323,9 +323,13 @@ namespace System.Linq.Expressions.Tests
 
         // NB: We can't stuff these in a System.Type, so won't forward them
         protected override void NotifyNumSizes(int count) { }
+
         protected override void NotifySize(int count) { }
+
         protected override void NotifyNumLoBounds(int count) { }
+
         protected override void NotifyLoBound(int count) { }
+
         protected override void NotifyEndArrayShape() { }
 
         protected override void NotifyTypedByref()
@@ -338,46 +342,57 @@ namespace System.Linq.Expressions.Tests
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyEndProperty()
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyBeginMethod(byte elem_type)
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyEndMethod()
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyBeginField(byte elem_type)
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyEndField()
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyBeginRetType()
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyEndRetType()
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyBeginParam()
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyParamCount(int count)
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyEndParam()
         {
             throw new NotImplementedException();
         }
+
         protected override void NotifyGenericParamCount(int count)
         {
             throw new NotImplementedException();

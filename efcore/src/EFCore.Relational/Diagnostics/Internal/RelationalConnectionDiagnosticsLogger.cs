@@ -210,7 +210,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 return d.GenerateMessage(p.Connection.Database, p.Connection.DataSource);
             }
         }
-
         #endregion ConnectionOpening
 
         #region ConnectionOpened
@@ -357,7 +356,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 return d.GenerateMessage(p.Connection.Database, p.Connection.DataSource);
             }
         }
-
         #endregion ConnectionOpened
 
         #region ConnectionClosing
@@ -510,7 +508,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 return d.GenerateMessage(p.Connection.Database, p.Connection.DataSource);
             }
         }
-
         #endregion ConnectionClosing
 
         #region ConnectionClosed
@@ -652,7 +649,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 return d.GenerateMessage(p.Connection.Database, p.Connection.DataSource);
             }
         }
-
         #endregion ConnectionClosed
 
         #region ConnectionError
@@ -804,7 +800,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 );
             }
         }
-
         #endregion ConnectionError
 
         #region ShouldLog checks

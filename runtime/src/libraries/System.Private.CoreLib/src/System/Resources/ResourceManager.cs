@@ -122,6 +122,7 @@ namespace System.Resources
         // Whether to fall back to the main assembly or a particular
         // satellite for the neutral resources.
         private UltimateResourceFallbackLocation _fallbackLoc;
+
         // Version number of satellite assemblies to look for.  May be null.
         private Version? _satelliteContractVersion;
         private bool _lookedForSatelliteContractVersion;
@@ -147,6 +148,7 @@ namespace System.Resources
 
         // This is our min required ResourceSet type.
         private static readonly Type s_minResourceSet = typeof(ResourceSet);
+
         // These Strings are used to avoid using Reflection in CreateResourceSet.
         internal const string ResReaderTypeName = "System.Resources.ResourceReader";
         internal const string ResSetTypeName = "System.Resources.RuntimeResourceSet";

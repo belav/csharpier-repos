@@ -108,6 +108,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
             bool forceComplete
         );
+
 #nullable disable
 
         /// <summary>
@@ -135,6 +136,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Platform invoke information, or null if the method isn't a P/Invoke.
         /// </summary>
         public abstract DllImportData? GetDllImportData();
+
 #nullable disable
 
         /// <summary>
@@ -910,6 +912,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazyParameterSignature.parameterTypesWithAnnotations;
             }
         }
+
         internal TypeSymbol GetParameterType(int index) =>
             ParameterTypesWithAnnotations[index].Type;
 
@@ -1122,6 +1125,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
         }
+
 #nullable disable
 
         /// <summary>
@@ -1140,7 +1144,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return (object)info != null && info.Code == (int)ErrorCode.ERR_BindToBogus;
             }
         }
-
         #endregion
 
         internal virtual bool IsIterator
@@ -1297,7 +1300,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return Construct((TypeSymbol[])typeArguments);
         }
-
         #endregion
 
         protected sealed override ISymbol CreateISymbol()

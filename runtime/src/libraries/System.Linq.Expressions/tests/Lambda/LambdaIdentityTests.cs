@@ -444,7 +444,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckLambdaIdentityGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -506,7 +505,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyIdentityGenericWithStructRestriction<Ts>(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

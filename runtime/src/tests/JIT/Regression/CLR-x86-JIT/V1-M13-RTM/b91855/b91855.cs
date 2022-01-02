@@ -3,6 +3,7 @@
 //
 
 using System;
+
 struct AA
 {
     static int Main()
@@ -17,6 +18,7 @@ struct AA
             return 100;
         }
     }
+
     static void Main1()
     {
         try
@@ -29,5 +31,7 @@ struct AA
         finally { }
     }
 }
+
 struct BB { }
+
 class CC { }

@@ -72,10 +72,12 @@ namespace System.Linq.Parallel
         {
             get { return null; }
         }
+
         public bool MoveNext()
         {
             return false;
         }
+
         void Collections.IEnumerator.Reset() { }
     }
 }

@@ -44,6 +44,7 @@ namespace System.Xml.Schema
         SkipToEndElement,
         Finish,
     }
+
     internal sealed class IdRefNode
     {
         internal string Id;

@@ -349,7 +349,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 prop1 => Assert.Equal("Y", prop1.Name)
             );
         }
-
         #endregion
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)

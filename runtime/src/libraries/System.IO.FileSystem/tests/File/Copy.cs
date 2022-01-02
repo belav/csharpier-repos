@@ -180,7 +180,6 @@ namespace System.IO.Tests
                 File.SetAttributes(testFileDest, FileAttributes.Normal);
             }
         }
-
         #endregion
 
         #region PlatformSpecific

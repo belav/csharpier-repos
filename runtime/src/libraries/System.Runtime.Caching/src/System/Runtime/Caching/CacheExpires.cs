@@ -51,6 +51,7 @@ namespace System.Runtime.Caching
         {
             return r1._ref != r2._ref;
         }
+
         public static bool operator ==(ExpiresEntryRef r1, ExpiresEntryRef r2)
         {
             return r1._ref == r2._ref;
@@ -168,6 +169,7 @@ namespace System.Runtime.Caching
             _freeEntryList._head = -1;
             _freeEntryList._tail = -1;
         }
+
         private void ResetCounts(DateTime utcNow)
         {
             _utcLastCountReset = utcNow;

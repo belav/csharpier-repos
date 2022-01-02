@@ -166,7 +166,6 @@ namespace Microsoft.EntityFrameworkCore.Design
                 typeof(IndexBuilder),
                 typeof(string)
             );
-
         #endregion MethodInfos
 
         /// <summary>

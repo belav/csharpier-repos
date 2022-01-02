@@ -79,6 +79,7 @@ public class RouteOptionsTests
         }
 
         public string Pattern { get; private set; }
+
         public bool Match(
             HttpContext httpContext,
             IRouter route,

@@ -202,11 +202,13 @@ Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}"
                 /// </summary>
                 private readonly ArrayBuilder<SharedWalkerState> _walkerStates =
                     ArrayBuilder<SharedWalkerState>.GetInstance();
+
                 /// <summary>
                 /// Snapshots are kept in a dictionary of position -> snapshot at that position. These are stored in descending order.
                 /// </summary>
                 private readonly SortedDictionary<int, Snapshot> _incrementalSnapshots =
                     new SortedDictionary<int, Snapshot>();
+
                 /// <summary>
                 /// Every walker is walking a specific symbol, and can potentially walk each symbol multiple times
                 /// to get to a stable state. Each of these symbols gets a single shared state slot, which this

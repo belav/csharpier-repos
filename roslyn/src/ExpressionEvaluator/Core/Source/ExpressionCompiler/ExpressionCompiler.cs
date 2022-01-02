@@ -369,7 +369,6 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 argumentFlags
             );
         }
-
         #endregion
 
         private void RemoveDataItemIfNecessary(DkmModuleInstance moduleInstance)

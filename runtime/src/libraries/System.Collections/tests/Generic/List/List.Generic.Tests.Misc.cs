@@ -128,7 +128,6 @@ namespace System.Collections.Tests
                     () => _ilist.Insert(0, new LinkedListNode<string>("blargh"))
                 ); //"ArgumentException expected."
             }
-
             #endregion
 
             #region InsertRange
@@ -234,7 +233,6 @@ namespace System.Collections.Tests
             {
                 return items.ToList();
             }
-
             #endregion
 
             #region GetRange
@@ -368,7 +366,6 @@ namespace System.Collections.Tests
                     ); //"ArgumentOutOfRangeException expected."
                 }
             }
-
             #endregion
 
             #region Exists(Pred<T>)
@@ -502,7 +499,6 @@ namespace System.Collections.Tests
                     );
                 }
             }
-
             #endregion
 
             #region Contains
@@ -565,6 +561,7 @@ namespace System.Collections.Tests
                 }
                 Assert.False(list.Contains(items[items.Length / 2])); //"Should not contain item"
             }
+
             public void ContainsNullWhenReference(T[] items, T value)
             {
                 if ((object)value != null)
@@ -664,7 +661,6 @@ namespace System.Collections.Tests
                     "Err_68850ahiuedpz Expected Contains to return false with invalid type"
                 );
             }
-
             #endregion
 
             #region Clear
@@ -676,6 +672,7 @@ namespace System.Collections.Tests
                 list.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void ClearMultipleTimesEmptyList(int times)
             {
                 List<T> list = new List<T>();
@@ -686,6 +683,7 @@ namespace System.Collections.Tests
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void ClearNonEmptyList(T[] items)
             {
                 List<T> list = new List<T>(items);
@@ -711,6 +709,7 @@ namespace System.Collections.Tests
                 _ilist.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void NonGenericIListClearMultipleTimesEmptyList(int times)
             {
                 List<T> list = new List<T>();
@@ -722,6 +721,7 @@ namespace System.Collections.Tests
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void NonGenericIListClearNonEmptyList(T[] items)
             {
                 List<T> list = new List<T>(items);
@@ -740,7 +740,6 @@ namespace System.Collections.Tests
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
-
             #endregion
 
             #region TrueForAll
@@ -797,7 +796,6 @@ namespace System.Collections.Tests
                 Assert.True(list.TrueForAll(item => true));
                 Assert.Throws<ArgumentNullException>(() => list.TrueForAll(null)); //"Err_858ahia Expected null match to throw ArgumentNullException"
             }
-
             #endregion
 
             #region ToArray

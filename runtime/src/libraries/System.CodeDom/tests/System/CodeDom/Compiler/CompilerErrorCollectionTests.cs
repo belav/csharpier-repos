@@ -10,8 +10,10 @@ namespace System.CodeDom.Compiler.Tests
         : CodeCollectionTestBase<CompilerErrorCollection, CompilerError>
     {
         protected override CompilerErrorCollection Ctor() => new CompilerErrorCollection();
+
         protected override CompilerErrorCollection CtorArray(CompilerError[] array) =>
             new CompilerErrorCollection(array);
+
         protected override CompilerErrorCollection CtorCollection(
             CompilerErrorCollection collection
         ) => new CompilerErrorCollection(collection);
@@ -20,6 +22,7 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override CompilerError GetItem(CompilerErrorCollection collection, int index) =>
             collection[index];
+
         protected override void SetItem(
             CompilerErrorCollection collection,
             int index,
@@ -30,6 +33,7 @@ namespace System.CodeDom.Compiler.Tests
             CompilerErrorCollection collection,
             CompilerError[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CompilerErrorCollection collection,
             CompilerErrorCollection value
@@ -49,6 +53,7 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override int IndexOf(CompilerErrorCollection collection, CompilerError value) =>
             collection.IndexOf(value);
+
         protected override bool Contains(CompilerErrorCollection collection, CompilerError value) =>
             collection.Contains(value);
 

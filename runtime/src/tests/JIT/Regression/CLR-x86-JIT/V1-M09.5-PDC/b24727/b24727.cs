@@ -32,10 +32,12 @@ struct Struct1 : Inter1, Inter2, Inter3
     {
         return (42);
     }
+
     int Inter2.Return42()
     {
         return (42);
     }
+
     int Inter3.Return0()
     {
         return (0);

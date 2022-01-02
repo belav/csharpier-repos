@@ -688,7 +688,6 @@ namespace System.Linq
 
             return (T[])immutableArray.array.Clone();
         }
-
         #endregion
 
         #region ImmutableArray<T>.Builder extensions

@@ -57,7 +57,6 @@ namespace Castle.Components.DictionaryAdapter
         {
             return Prefix ?? key + "_";
         }
-
 		#endregion
 
 		#region IDictionaryPropertyGetter
@@ -91,7 +90,6 @@ namespace Castle.Components.DictionaryAdapter
 
             return storedValue;
         }
-
 		#endregion
 
 		#region IDictionaryPropertySetter Members

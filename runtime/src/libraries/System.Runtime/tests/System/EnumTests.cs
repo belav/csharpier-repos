@@ -3296,6 +3296,7 @@ namespace System.Tests
         }
 
         private static Type s_boolEnumType = GetBoolEnumType();
+
         private static Type GetBoolEnumType()
         {
             EnumBuilder enumBuilder = GetNonRuntimeEnumTypeBuilder(typeof(bool));
@@ -3309,6 +3310,7 @@ namespace System.Tests
         }
 
         private static Type s_charEnumType = GetCharEnumType();
+
         private static Type GetCharEnumType()
         {
             EnumBuilder enumBuilder = GetNonRuntimeEnumTypeBuilder(typeof(char));
@@ -3330,6 +3332,7 @@ namespace System.Tests
         }
 
         private static Type s_floatEnumType = GetFloatEnumType();
+
         private static Type GetFloatEnumType()
         {
             EnumBuilder enumBuilder = GetNonRuntimeEnumTypeBuilder(typeof(float));
@@ -3351,6 +3354,7 @@ namespace System.Tests
         }
 
         private static Type s_doubleEnumType = GetDoubleEnumType();
+
         private static Type GetDoubleEnumType()
         {
             EnumBuilder enumBuilder = GetNonRuntimeEnumTypeBuilder(typeof(double));
@@ -3372,6 +3376,7 @@ namespace System.Tests
         }
 
         private static Type s_intPtrEnumType = GetIntPtrEnumType();
+
         private static Type GetIntPtrEnumType()
         {
             EnumBuilder enumBuilder = GetNonRuntimeEnumTypeBuilder(typeof(IntPtr));
@@ -3382,6 +3387,7 @@ namespace System.Tests
         }
 
         private static Type s_uintPtrEnumType = GetUIntPtrEnumType();
+
         private static Type GetUIntPtrEnumType()
         {
             EnumBuilder enumBuilder = GetNonRuntimeEnumTypeBuilder(typeof(UIntPtr));

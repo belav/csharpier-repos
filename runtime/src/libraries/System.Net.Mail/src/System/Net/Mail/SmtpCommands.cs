@@ -188,6 +188,7 @@ namespace System.Net.Mail
                 }
             }
         }
+
         internal static LineInfo[] Send(SmtpConnection conn)
         {
             conn.Flush();
@@ -237,6 +238,7 @@ namespace System.Net.Mail
         {
             return CheckResponse(ReadLinesCommand.EndSend(result));
         }
+
         private static void PrepareCommand(SmtpConnection conn, string type, string message)
         {
             conn.BufferBuilder.Append(SmtpCommands.Auth);
@@ -366,6 +368,7 @@ namespace System.Net.Mail
 
             conn.BufferBuilder.Append(SmtpCommands.DataStop);
         }
+
         internal static void Send(SmtpConnection conn)
         {
             PrepareCommand(conn);
@@ -418,6 +421,7 @@ namespace System.Net.Mail
         {
             return CheckResponse(ReadLinesCommand.EndSend(result));
         }
+
         private static void PrepareCommand(SmtpConnection conn, string domain)
         {
             if (conn.IsStreamOpen)
@@ -768,6 +772,7 @@ namespace System.Net.Mail
             _statusCode = statusCode;
             _line = line;
         }
+
         internal string Line
         {
             get { return _line; }

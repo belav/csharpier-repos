@@ -11,6 +11,7 @@ namespace System.Security.Cryptography
         CurrentUser = 0,
         LocalMachine = 1,
     }
+
     public static partial class ProtectedData
     {
         public static byte[] Protect(
@@ -21,6 +22,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static byte[] Unprotect(
             byte[] encryptedData,
             byte[]? optionalEntropy,

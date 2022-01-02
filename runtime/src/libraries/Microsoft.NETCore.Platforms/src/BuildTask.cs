@@ -28,6 +28,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
     internal class Log : ILog
     {
         private readonly TaskLoggingHelper _logger;
+
         public Log(TaskLoggingHelper logger)
         {
             _logger = logger;

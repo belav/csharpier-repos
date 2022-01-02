@@ -38,7 +38,6 @@ namespace System.Diagnostics.Tracing
             IntPtr.Size == 8 ? TraceLoggingDataType.UInt64 : TraceLoggingDataType.UInt32;
         public static readonly TraceLoggingDataType HexIntPtrType =
             IntPtr.Size == 8 ? TraceLoggingDataType.HexInt64 : TraceLoggingDataType.HexInt32;
-
         #endregion
 
         #region Metadata helpers
@@ -335,7 +334,6 @@ namespace System.Diagnostics.Tracing
                   => Format64(format, nativeFormat),
                 _ => MakeDataType(nativeFormat, format),
             };
-
         #endregion
 
         #region Reflection helpers

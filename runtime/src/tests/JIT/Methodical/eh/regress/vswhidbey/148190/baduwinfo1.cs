@@ -57,6 +57,7 @@ class Test_baduwinfo1
         // Create and initialize test log object
         testLog = new TestUtil.TestLog(expectedOut);
     }
+
     public static int bar(
         String i1,
         String i2,
@@ -329,6 +330,7 @@ class Test_baduwinfo1
 
         throw new System.Exception("Expected Test Exception");
     }
+
     public static int foo()
     {
         int ret = 1;
@@ -384,6 +386,7 @@ class Test_baduwinfo1
         }
         return ret;
     }
+
     public static int Main()
     {
         String s = "Test1";

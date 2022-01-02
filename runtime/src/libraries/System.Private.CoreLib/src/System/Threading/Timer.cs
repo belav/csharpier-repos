@@ -104,7 +104,6 @@ namespace System.Threading
             public TimerQueueTimer[] Items =>
                 new List<TimerQueueTimer>(_queue.GetTimersForDebugger()).ToArray();
         }
-
         #endregion
 
         #region interface to native timer
@@ -144,7 +143,6 @@ namespace System.Threading
 
             return false;
         }
-
         #endregion
 
         #region Firing timers
@@ -337,7 +335,6 @@ namespace System.Threading
             // Fire the user timer outside of the lock!
             timerToFireOnThisThread?.Fire();
         }
-
         #endregion
 
         #region Queue implementation
@@ -793,6 +790,7 @@ namespace System.Threading
             private readonly TimerQueueTimer _timer;
 
             public TimerDebuggerTypeProxy(Timer timer) => _timer = timer._timer._timer;
+
             public TimerDebuggerTypeProxy(TimerQueueTimer timer) => _timer = timer;
 
             public DateTime? EstimatedNextTimeUtc

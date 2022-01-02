@@ -13,6 +13,7 @@ namespace System.Text
     {
         /// <summary>The array backing the builder, obtained from <see cref="ArrayPool{T}.Shared"/>.</summary>
         private ReadOnlyMemory<char>[] _array;
+
         /// <summary>The number of items in <see cref="_array"/>, and thus also the next position in the array to be filled.</summary>
         private int _count;
 

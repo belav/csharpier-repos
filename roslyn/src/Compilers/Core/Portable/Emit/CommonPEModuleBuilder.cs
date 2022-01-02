@@ -105,6 +105,7 @@ namespace Microsoft.CodeAnalysis.Emit
         /// EnC generation. 0 if the module is not an EnC delta, 1 if it is the first EnC delta, etc.
         /// </summary>
         public int CurrentGenerationOrdinal => (PreviousGeneration?.Ordinal + 1) ?? 0;
+
 #nullable disable
 
         /// <summary>
@@ -1240,7 +1241,6 @@ namespace Microsoft.CodeAnalysis.Emit
 
             return builder.ToImmutable();
         }
-
         #endregion
 
         #region Token Mapping
@@ -1280,7 +1280,6 @@ namespace Microsoft.CodeAnalysis.Emit
                 return result;
             }
         }
-
         #endregion
 
         #region Private Implementation Details Type
@@ -1330,7 +1329,6 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             get { return true; }
         }
-
         #endregion
 
         public sealed override Cci.ITypeReference GetPlatformType(

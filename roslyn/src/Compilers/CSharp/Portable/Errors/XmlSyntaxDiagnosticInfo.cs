@@ -47,7 +47,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             _xmlErrorCode = (XmlParseErrorCode)reader.ReadUInt32();
         }
-
         #endregion
 
         public override string GetMessage(IFormatProvider formatProvider = null)

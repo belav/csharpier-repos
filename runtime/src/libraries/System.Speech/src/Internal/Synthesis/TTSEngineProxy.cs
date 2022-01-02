@@ -38,7 +38,6 @@ namespace System.Speech.Internal.Synthesis
             _ssmlEngine = ssmlEngine;
             _site = site;
         }
-
         #endregion
 
         #region Internal Methods
@@ -93,7 +92,6 @@ namespace System.Speech.Internal.Synthesis
         /// Release the COM interface for COM object
         /// </summary>
         internal override void ReleaseInterface() { }
-
         #endregion
 
         #region private Fields
@@ -113,7 +111,6 @@ namespace System.Speech.Internal.Synthesis
             _iSite = iSite;
             _sapiEngine = sapiEngine;
         }
-
         #endregion
 
         #region Internal Methods
@@ -196,7 +193,6 @@ namespace System.Speech.Internal.Synthesis
         {
             Marshal.ReleaseComObject(_sapiEngine);
         }
-
         #endregion
 
         #region private Fields

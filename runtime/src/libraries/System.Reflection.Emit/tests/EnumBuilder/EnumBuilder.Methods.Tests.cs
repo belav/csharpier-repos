@@ -314,6 +314,7 @@ namespace System.Reflection.Emit.Tests
         public class BoolAttribute : Attribute
         {
             private bool _b;
+
             public BoolAttribute(bool myBool)
             {
                 _b = myBool;

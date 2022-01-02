@@ -180,6 +180,7 @@ public sealed class WebApplication
     public ValueTask DisposeAsync() => ((IAsyncDisposable)_host).DisposeAsync();
 
     internal RequestDelegate BuildRequestDelegate() => ApplicationBuilder.Build();
+
     RequestDelegate IApplicationBuilder.Build() => BuildRequestDelegate();
 
     // REVIEW: Should this be wrapping another type?

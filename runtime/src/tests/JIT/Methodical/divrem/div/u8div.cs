@@ -7,6 +7,7 @@ op1 and op2 can be static, local, class/struct member, function retval, 1D/2D/3D
 *****************************************************************************/
 
 using System;
+
 internal class u8div
 {
     private static ulong s_ul_s_op1 = 12;
@@ -25,6 +26,7 @@ internal class u8div
         else
             return 2;
     }
+
     public static uint ui_f(String s)
     {
         if (s == "op1")
@@ -32,6 +34,7 @@ internal class u8div
         else
             return 2;
     }
+
     public static long l_f(String s)
     {
         if (s == "op1")
@@ -39,6 +42,7 @@ internal class u8div
         else
             return 2;
     }
+
     public static ulong ul_f(String s)
     {
         if (s == "op1")
@@ -46,6 +50,7 @@ internal class u8div
         else
             return 2;
     }
+
     public static float f_f(String s)
     {
         if (s == "op1")
@@ -53,6 +58,7 @@ internal class u8div
         else
             return 2;
     }
+
     public static double d_f(String s)
     {
         if (s == "op1")
@@ -60,6 +66,7 @@ internal class u8div
         else
             return 2;
     }
+
     public static decimal m_f(String s)
     {
         if (s == "op1")
@@ -67,6 +74,7 @@ internal class u8div
         else
             return 2;
     }
+
     private class CL
     {
         public ulong ul_cl_op1 = 12;

@@ -44,7 +44,9 @@ public class ThreadSafe
     private KrisClass newValueA = new KrisClass(12345);
     private KrisClass newValueB = new KrisClass(67890);
     private bool success;
+
     public ThreadSafe() : this(10000) { }
+
     public ThreadSafe(int loops)
     {
         success = true;
@@ -134,6 +136,7 @@ public class ThreadSafe
 public class KrisClass
 {
     int retVal = 0;
+
     public KrisClass(int setVal)
     {
         retVal = setVal;

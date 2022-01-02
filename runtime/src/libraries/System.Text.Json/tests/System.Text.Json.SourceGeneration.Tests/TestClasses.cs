@@ -129,6 +129,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string MyProperty { get; set; }
 
         public void OnSerializing() => MyProperty = "Before";
+
         void IJsonOnSerialized.OnSerialized() => MyProperty = "After";
     }
 

@@ -1782,7 +1782,6 @@ namespace NS2
     }}
 }}
 ";
-
         #endregion
 
         #region arithmetic binary parentheses
@@ -1820,7 +1819,6 @@ class C
     }}
 }}
 ";
-
         #endregion
 
         #region relational binary parentheses
@@ -1858,7 +1856,6 @@ class C
     }}
 }}
 ";
-
         #endregion
 
         #region other binary parentheses
@@ -1896,7 +1893,6 @@ class C
     }}
 }}
 ";
-
         #endregion
 
         #region other parentheses
@@ -1931,7 +1927,6 @@ class C
     }}
 }}
 ";
-
         #endregion
 
         #region unused parameters

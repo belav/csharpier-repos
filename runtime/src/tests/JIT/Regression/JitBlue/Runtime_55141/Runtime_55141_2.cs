@@ -16,6 +16,7 @@ struct S2
     public uint F2;
     public short F3;
     public bool F4;
+
     public S2(uint f0, uint f2) : this()
     {
         F0 = f0;
@@ -26,6 +27,7 @@ struct S2
 public class Runtime_55141_2
 {
     static int s_1;
+
     public static int Main()
     {
         int vr23 = s_1;

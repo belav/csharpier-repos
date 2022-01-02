@@ -799,7 +799,6 @@ namespace System.Linq.Expressions.Compiler
             }
             return new Result(action, expr);
         }
-
         #endregion
 
         #region Statements
@@ -1083,7 +1082,6 @@ namespace System.Linq.Expressions.Compiler
             // it's at least Copy because we reduced the node
             return new Result(result.Action | RewriteAction.Copy, result.Node);
         }
-
         #endregion
 
         #region Cloning
@@ -1105,7 +1103,6 @@ namespace System.Linq.Expressions.Compiler
             }
             return clone;
         }
-
         #endregion
 
         /// <summary>

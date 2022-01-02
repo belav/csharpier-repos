@@ -4138,6 +4138,7 @@ namespace NativeVarargTest
 
             return returnValue == arg;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TestEchoShortNoVararg(short arg)
         {
@@ -4496,6 +4497,7 @@ namespace NativeVarargTest
 
             return returnValue == arg;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TestEchoShortManagedNoVararg(short arg)
         {
@@ -4851,6 +4853,7 @@ namespace NativeVarargTest
 
             return returnValue == arg;
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TestEchoShortManaged(short arg)
         {

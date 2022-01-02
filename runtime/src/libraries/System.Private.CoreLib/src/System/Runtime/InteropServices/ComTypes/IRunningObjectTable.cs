@@ -14,14 +14,17 @@ namespace System.Runtime.InteropServices.ComTypes
             IMoniker pmkObjectName
         );
         void Revoke(int dwRegister);
+
         [PreserveSig]
         int IsRunning(IMoniker pmkObjectName);
+
         [PreserveSig]
         int GetObject(
             IMoniker pmkObjectName,
             [MarshalAs(UnmanagedType.Interface)] out object ppunkObject
         );
         void NoteChangeTime(int dwRegister, ref FILETIME pfiletime);
+
         [PreserveSig]
         int GetTimeOfLastChange(IMoniker pmkObjectName, out FILETIME pfiletime);
         void EnumRunning(out IEnumMoniker ppenumMoniker);

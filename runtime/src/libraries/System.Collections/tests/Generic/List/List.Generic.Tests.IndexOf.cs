@@ -15,6 +15,7 @@ namespace System.Collections.Tests
         #region Helpers
 
         public delegate int IndexOfDelegate(List<T> list, T value);
+
         public enum IndexOfMethod
         {
             IndexOf_T,
@@ -99,7 +100,6 @@ namespace System.Collections.Tests
                 }
             }
         }
-
         #endregion
 
         #region IndexOf

@@ -514,6 +514,7 @@ namespace System.Xml.Serialization
         {
             // nop
         }
+
         private string GenerateUniqueTypeName(string desiredName, string? ns)
         {
             int i = 1;

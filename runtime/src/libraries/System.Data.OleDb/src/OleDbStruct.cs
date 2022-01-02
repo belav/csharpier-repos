@@ -529,6 +529,7 @@ namespace System.Data.OleDb
         object? ItagDBPROPINFO.vValue => this.vValue;
 
         string? ItagDBPROPINFO.pwszDescription => this.pwszDescription;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string? pwszDescription;
 

@@ -339,6 +339,7 @@ namespace ILCompiler.Diagnostics
         }
 
         private const int CV_SIGNATURE_C13 = 4;
+
         private enum DEBUG_S_SUBSECTION_TYPE
         {
             DEBUG_S_IGNORE = unchecked((int)0x80000000), // if this bit is set in a subsection type then ignore the subsection contents

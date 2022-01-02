@@ -222,7 +222,6 @@ PID    COMMAND      %CPU TIME     #TH   #WQ  #PORT MEM    PURG   CMPRS  PGRP  PP
 47422  mdworker     3.5  00:17.72 4     1    75    29M+   0B     30M-   47422 1     sleeping *0[1]           4.52446 0.00000    501  225598+   300
 113    hidd         2.9  53:33.12 6     2    241   2220K  0B     3628K  113   1     sleeping *0[1]           0.09521 0.00000    261  1950651+  216
 140    coreaudiod   1.6  58:14.26 7     2    307   2188K  0B     3796K  140   1     sleeping *0[1]           0.00000 0.00000    202  541103    258";
-
         #endregion
 
         public Example_TOP(ITestOutputHelper output)

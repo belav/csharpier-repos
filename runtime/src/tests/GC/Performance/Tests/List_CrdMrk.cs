@@ -22,6 +22,7 @@ namespace List_CrdMrk
         public static int STEP = 10;
         public static int SEED = 1234;
         public static Node root = null;
+
         static void Main(string[] args)
         {
             ParseArgs(args);
@@ -98,6 +99,7 @@ namespace List_CrdMrk
                 cur = cur.next;
             }
         }
+
         static void ParseArgs(string[] args)
         {
             if (args.Length > 0)

@@ -5,7 +5,9 @@ using System.Reflection;
 namespace GenericSharingTest
 {
     public class ClassA { }
+
     public class ClassB { }
+
     public class ClassC { }
 
     public class GenA<T>

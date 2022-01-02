@@ -266,7 +266,6 @@ namespace System.Linq.Expressions.Compiler
             il.Emit(OpCodes.Ldtoken, type);
             il.Emit(OpCodes.Call, Type_GetTypeFromHandle);
         }
-
         #endregion
 
         #region Fields, properties and methods
@@ -299,7 +298,6 @@ namespace System.Linq.Expressions.Compiler
 
             il.Emit(OpCodes.Newobj, ci);
         }
-
         #endregion
 
         #region Constants
@@ -558,7 +556,6 @@ namespace System.Linq.Expressions.Compiler
                     return false;
             }
         }
-
         #endregion
 
         #region Linq Conversions
@@ -1069,7 +1066,6 @@ namespace System.Linq.Expressions.Compiler
                 il.EmitNew(ci);
             }
         }
-
         #endregion
 
         #region Support for emitting constants

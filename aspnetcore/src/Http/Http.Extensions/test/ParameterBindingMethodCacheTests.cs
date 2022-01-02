@@ -520,34 +520,49 @@ public class ParameterBindingMethodCacheTests
     }
 
     private static void TryParseStringRecordMethod(TryParseStringRecord arg) { }
+
     private static void TryParseStringStructMethod(TryParseStringStruct arg) { }
+
     private static void TryParseStringNullableStructMethod(TryParseStringStruct? arg) { }
 
     private static void BindAsyncRecordMethod(BindAsyncRecord arg) { }
+
     private static void BindAsyncStructMethod(BindAsyncStruct arg) { }
+
     private static void BindAsyncNullableStructMethod(BindAsyncStruct? arg) { }
+
     private static void NullableReturningBindAsyncStructMethod(
         NullableReturningBindAsyncStruct arg
     ) { }
 
     private static void BindAsyncSingleArgRecordMethod(BindAsyncSingleArgRecord arg) { }
+
     private static void BindAsyncSingleArgStructMethod(BindAsyncSingleArgStruct arg) { }
+
     private static void InheritBindAsyncMethod(InheritBindAsync arg) { }
+
     private static void InheritBindAsyncWithParameterInfoMethod(
         InheritBindAsyncWithParameterInfo args
     ) { }
+
     private static void BindAsyncFromInterfaceMethod(BindAsyncFromInterface arg) { }
+
     private static void BindAsyncFromGrandparentInterfaceMethod(
         BindAsyncFromGrandparentInterface arg
     ) { }
+
     private static void BindAsyncDirectlyAndFromInterfaceMethod(
         BindAsyncDirectlyAndFromInterface arg
     ) { }
+
     private static void BindAsyncFromClassAndInterfaceMethod(BindAsyncFromClassAndInterface arg) { }
+
     private static void BindAsyncFromInterfaceWithParameterInfoMethod(
         BindAsyncFromInterfaceWithParameterInfo args
     ) { }
+
     private static void BindAsyncFallbackMethod(BindAsyncFallsBack? arg) { }
+
     private static void BindAsyncBadMethodMethod(BindAsyncBadMethod? arg) { }
 
     private static ParameterInfo GetFirstParameter<T>(Expression<Action<T>> expr)

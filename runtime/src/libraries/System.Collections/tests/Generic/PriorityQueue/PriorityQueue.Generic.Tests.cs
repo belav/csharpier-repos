@@ -42,7 +42,6 @@ namespace System.Collections.Tests
             queue.EnqueueRange(generatedItems);
             return queue;
         }
-
         #endregion
 
         #region Constructors
@@ -108,7 +107,6 @@ namespace System.Collections.Tests
                 EqualityComparer<(TElement, TPriority)>.Default
             );
         }
-
         #endregion
 
         #region Enqueue, Dequeue, Peek, EnqueueDequeue
@@ -243,7 +241,6 @@ namespace System.Collections.Tests
                 EqualityComparer<(TElement, TPriority)>.Default
             );
         }
-
         #endregion
 
         #region Clear
@@ -264,7 +261,6 @@ namespace System.Collections.Tests
             Assert.Equal(expected: 0, queue.Count);
             Assert.False(queue.TryPeek(out _, out _));
         }
-
         #endregion
 
         #region Enumeration
@@ -285,7 +281,6 @@ namespace System.Collections.Tests
             Assert.Equal(firstEnumeration.Length, count);
             Assert.True(firstEnumeration.SequenceEqual(secondEnumeration));
         }
-
         #endregion
 
         #region IGenericSharedAPI<T> Helper Methods
@@ -302,25 +297,31 @@ namespace System.Collections.Tests
 
             IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(TElement Element, TPriority Priority)>.GetEnumerator() =>
                 UnorderedItems.GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => UnorderedItems.GetEnumerator();
         }
 
         protected override IEnumerable<(TElement Element, TPriority Priority)> GenericIEnumerableFactory() =>
             new EnumerablePriorityQueue(GetPriorityComparer());
+
         protected override int Count(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable
         ) => ((EnumerablePriorityQueue)enumerable).Count;
+
         protected override void Add(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable,
             (TElement Element, TPriority Priority) value
         ) => ((EnumerablePriorityQueue)enumerable).Enqueue(value.Element, value.Priority);
+
         protected override void Clear(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable
         ) => ((EnumerablePriorityQueue)enumerable).Clear();
+
         protected override bool Contains(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable,
             (TElement Element, TPriority Priority) value
         ) => ((EnumerablePriorityQueue)enumerable).Any(elem => elem.Equals(value));
+
         protected override void CopyTo(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable,
             (TElement Element, TPriority Priority)[] array,
@@ -330,9 +331,11 @@ namespace System.Collections.Tests
                 array,
                 index
             );
+
         protected override bool Remove(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable
         ) => ((EnumerablePriorityQueue)enumerable).TryDequeue(out _, out _);
+
         protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
 

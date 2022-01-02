@@ -80,24 +80,34 @@ namespace System.Net
 
         protected virtual void OnDownloadStringCompleted(DownloadStringCompletedEventArgs e) =>
             DownloadStringCompleted?.Invoke(this, e);
+
         protected virtual void OnDownloadDataCompleted(DownloadDataCompletedEventArgs e) =>
             DownloadDataCompleted?.Invoke(this, e);
+
         protected virtual void OnDownloadFileCompleted(AsyncCompletedEventArgs e) =>
             DownloadFileCompleted?.Invoke(this, e);
+
         protected virtual void OnDownloadProgressChanged(DownloadProgressChangedEventArgs e) =>
             DownloadProgressChanged?.Invoke(this, e);
+
         protected virtual void OnUploadStringCompleted(UploadStringCompletedEventArgs e) =>
             UploadStringCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadDataCompleted(UploadDataCompletedEventArgs e) =>
             UploadDataCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadFileCompleted(UploadFileCompletedEventArgs e) =>
             UploadFileCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadValuesCompleted(UploadValuesCompletedEventArgs e) =>
             UploadValuesCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadProgressChanged(UploadProgressChangedEventArgs e) =>
             UploadProgressChanged?.Invoke(this, e);
+
         protected virtual void OnOpenReadCompleted(OpenReadCompletedEventArgs e) =>
             OpenReadCompleted?.Invoke(this, e);
+
         protected virtual void OnOpenWriteCompleted(OpenWriteCompletedEventArgs e) =>
             OpenWriteCompleted?.Invoke(this, e);
 
@@ -2516,6 +2526,7 @@ namespace System.Net
         object sender,
         UploadProgressChangedEventArgs e
     );
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public delegate void WriteStreamClosedEventHandler(object sender, WriteStreamClosedEventArgs e);
 

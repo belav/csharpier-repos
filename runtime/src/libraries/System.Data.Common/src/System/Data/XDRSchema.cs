@@ -246,11 +246,13 @@ namespace System.Data
         private sealed class NameType : IComparable
         {
             public string name;
+
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.PublicFields
             )]
             public Type type;
+
             public NameType(
                 string n,
                 [DynamicallyAccessedMembers(
@@ -263,6 +265,7 @@ namespace System.Data
                 name = n;
                 type = t;
             }
+
             public int CompareTo(object? obj)
             {
                 return string.Compare(name, (string?)obj, StringComparison.Ordinal);

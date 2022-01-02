@@ -1163,6 +1163,7 @@ namespace System.ComponentModel.Composition.Hosting
         {
             private readonly ComposablePartDefinition _part;
             private readonly int _hashCode;
+
             public PartEqualsQueryStateNode(
                 ComposablePartDefinition part,
                 PartQueryStateNode? previousNode,
@@ -1189,6 +1190,7 @@ namespace System.ComponentModel.Composition.Hosting
         private sealed class PartInHashSetQueryStateNode : PartQueryStateNode
         {
             private readonly HashSet<ComposablePartDefinition> _parts;
+
             public PartInHashSetQueryStateNode(
                 HashSet<ComposablePartDefinition> parts,
                 PartQueryStateNode? previousNode,
@@ -1210,10 +1212,12 @@ namespace System.ComponentModel.Composition.Hosting
         private sealed class CatalogPart
         {
             private volatile bool _importsSatisfied;
+
             public CatalogPart(ComposablePart part)
             {
                 Part = part;
             }
+
             public ComposablePart Part { get; private set; }
 
             public bool ImportsSatisfied

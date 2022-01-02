@@ -55,6 +55,7 @@ public abstract class ExternalContainerServices<TContainer, TItem> : GenericNode
 {
     protected ExternalContainerServices(IFactory<TItem> itemFactory) : base() { }
 }
+
 public abstract class InternalContainerServices<TContainer, TItem>
     : ExternalContainerServices<TContainer, TItem>
     where TContainer : GenericNode

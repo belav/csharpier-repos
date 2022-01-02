@@ -1082,12 +1082,13 @@ namespace System.Data
             }
             return findIndex;
         }
-
         #endregion
 
         #region IBindingList implementation
         bool IBindingList.AllowNew => AllowNew;
+
         object IBindingList.AddNew() => AddNew();
+
         bool IBindingList.AllowEdit => AllowEdit;
         bool IBindingList.AllowRemove => AllowDelete;
 
@@ -1136,7 +1137,6 @@ namespace System.Data
         }
 
         public event EventHandler? Initialized;
-
         #endregion
 
         #region IBindingList implementation
@@ -1205,7 +1205,6 @@ namespace System.Data
             DataCommonEventSource.Log.Trace("<ds.DataView.RemoveSort|API> {0}", ObjectID);
             Sort = string.Empty;
         }
-
         #endregion
 
         #region Additional method and properties for new interface IBindingListView
@@ -1321,7 +1320,6 @@ namespace System.Data
         bool IBindingListView.SupportsAdvancedSorting => true;
 
         bool IBindingListView.SupportsFiltering => true;
-
         #endregion
 
         #region ITypedList
@@ -1377,7 +1375,6 @@ namespace System.Data
             }
             return new PropertyDescriptorCollection(null);
         }
-
         #endregion
 
         /// <summary>

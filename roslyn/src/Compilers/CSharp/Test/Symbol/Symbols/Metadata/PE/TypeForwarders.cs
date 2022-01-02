@@ -2278,7 +2278,6 @@ public class CF1
                 Assert.Equal(HandleKind.AssemblyReference, exportedTypeRow.Implementation.Kind);
             }
         }
-
         #endregion
 
         [Fact]

@@ -24,10 +24,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         public override byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) =>
             _impl.Decrypt(data, padding);
+
         public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) =>
             _impl.Encrypt(data, padding);
+
         public override RSAParameters ExportParameters(bool includePrivateParameters) =>
             _impl.ExportParameters(includePrivateParameters);
+
         public override void ImportParameters(RSAParameters parameters) =>
             _impl.ImportParameters(parameters);
 

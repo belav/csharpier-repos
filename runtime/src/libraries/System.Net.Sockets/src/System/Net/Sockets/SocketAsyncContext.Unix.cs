@@ -918,6 +918,7 @@ namespace System.Net.Sockets
             private QueueState _state; // See above
             private bool _isNextOperationSynchronous;
             private int _sequenceNumber; // This sequence number is updated when we receive an epoll notification.
+
             // It allows us to detect when a new epoll notification has arrived
             // since the last time we checked the state of the queue.
             // If this happens, we MUST retry the operation, otherwise we risk

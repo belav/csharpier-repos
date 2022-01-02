@@ -40,10 +40,12 @@ namespace System.Xml.Xsl.XPath
         {
             return GetCurrentNode();
         }
+
         QilNode IFocus.GetPosition()
         {
             return GetCurrentPosition();
         }
+
         QilNode IFocus.GetLast()
         {
             return GetLastPosition();
@@ -58,6 +60,7 @@ namespace System.Xml.Xsl.XPath
         {
             return Variable(prefix, name);
         }
+
         QilNode IXPathEnvironment.ResolveFunction(
             string prefix,
             string name,
@@ -68,10 +71,12 @@ namespace System.Xml.Xsl.XPath
             Debug.Fail("Must not be called");
             return null;
         }
+
         string IXPathEnvironment.ResolvePrefix(string prefix)
         {
             return _environment.ResolvePrefix(prefix);
         }
+
         //  ----------------------------------------------------------------------------
 
         public XPathBuilder(IXPathEnvironment environment)
@@ -126,11 +131,13 @@ namespace System.Xml.Xsl.XPath
             numFixupCurrent++;
             return fixupCurrent;
         }
+
         private QilNode GetCurrentPosition()
         {
             numFixupPosition++;
             return fixupPosition;
         }
+
         private QilNode GetLastPosition()
         {
             numFixupLast++;
@@ -1124,6 +1131,7 @@ namespace System.Xml.Xsl.XPath
         };
 
         public static Dictionary<string, FunctionInfo> FunctionTable = CreateFunctionTable();
+
         private static Dictionary<string, FunctionInfo> CreateFunctionTable()
         {
             Dictionary<string, FunctionInfo> table = new Dictionary<string, FunctionInfo>(36);
@@ -1337,6 +1345,7 @@ namespace System.Xml.Xsl.XPath
                     // we shouldn't alter annotation of "reference" nodes (Iterators, Functions, ...)
                 }
             }
+
             bool GetStopVisitMark(QilNode n)
             {
                 return XsltAnnotation.Write(n)[0] != null;

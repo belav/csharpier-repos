@@ -372,7 +372,6 @@ namespace System.Net
 
             return -1;
         }
-
         #endregion
 
         #region UrlEncode implementation
@@ -416,7 +415,6 @@ namespace System.Net
                 }
             }
         }
-
         #endregion
 
         #region UrlEncode public methods
@@ -508,7 +506,6 @@ namespace System.Net
             GetEncodedBytes(value!, offset, count, expandedBytes);
             return expandedBytes;
         }
-
         #endregion
 
         #region UrlDecode implementation
@@ -618,7 +615,6 @@ namespace System.Net
 
             return decodedBytes;
         }
-
         #endregion
 
         #region UrlDecode public methods
@@ -635,7 +631,6 @@ namespace System.Net
         {
             return UrlDecodeInternal(encodedValue, offset, count);
         }
-
         #endregion
 
         #region Helper methods
@@ -776,7 +771,6 @@ namespace System.Net
 
             return -1;
         }
-
         #endregion
 
         // Internal struct to facilitate URL decoding -- keeps char buffer and byte buffer, allows appending of either chars or bytes

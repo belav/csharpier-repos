@@ -223,6 +223,7 @@ namespace System.Security.AccessControl.Tests
 
             return verifierBinaryLength;
         }
+
         //verify the dacl is crafted with one Allow Everyone Everything ACE
 
         public static bool VerifyDaclWithCraftedAce(
@@ -411,6 +412,7 @@ namespace System.Security.AccessControl.Tests
         {
             internal const int ERROR_NOT_ENOUGH_MEMORY = 0x8;
             internal const int VER_PLATFORM_WIN32_NT = 2;
+
             [DllImport(
                 "Advapi32.dll",
                 EntryPoint = "InitializeAcl",
@@ -422,6 +424,7 @@ namespace System.Security.AccessControl.Tests
                 uint aclLength,
                 uint aclRevision
             );
+
             [DllImport(
                 "Advapi32.dll",
                 EntryPoint = "AddAccessAllowedAceEx",
@@ -435,6 +438,7 @@ namespace System.Security.AccessControl.Tests
                 uint accessMask,
                 byte[] sid
             );
+
             [DllImport(
                 "Advapi32.dll",
                 EntryPoint = "AddAccessDeniedAceEx",
@@ -448,6 +452,7 @@ namespace System.Security.AccessControl.Tests
                 uint accessMask,
                 byte[] sid
             );
+
             [DllImport(
                 "Advapi32.dll",
                 EntryPoint = "AddAuditAccessAceEx",

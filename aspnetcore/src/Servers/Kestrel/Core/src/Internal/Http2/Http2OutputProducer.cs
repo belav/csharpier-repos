@@ -61,14 +61,17 @@ internal class Http2OutputProducer
     // associated with the implementation is just delegated to the ManualResetValueTaskSourceCore.
     private ValueTask<FlushResult> GetWaiterTask() =>
         new ValueTask<FlushResult>(this, _responseCompleteTaskSource.Version);
+
     ValueTaskSourceStatus IValueTaskSource<FlushResult>.GetStatus(short token) =>
         _responseCompleteTaskSource.GetStatus(token);
+
     void IValueTaskSource<FlushResult>.OnCompleted(
         Action<object?> continuation,
         object? state,
         short token,
         ValueTaskSourceOnCompletedFlags flags
     ) => _responseCompleteTaskSource.OnCompleted(continuation, state, token, flags);
+
     FlushResult IValueTaskSource<FlushResult>.GetResult(short token) =>
         _responseCompleteTaskSource.GetResult(token);
 

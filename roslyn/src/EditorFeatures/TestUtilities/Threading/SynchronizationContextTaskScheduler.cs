@@ -33,6 +33,7 @@ namespace Roslyn.Test.Utilities
             _synchronizationContext.Post(_postCallback, task);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
         }
+
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
             if (SynchronizationContext.Current == _synchronizationContext)

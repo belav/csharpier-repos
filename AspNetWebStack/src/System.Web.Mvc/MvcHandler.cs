@@ -263,7 +263,6 @@ namespace System.Web.Mvc
         {
             ProcessRequest(httpContext);
         }
-
         #endregion
 
         #region IHttpAsyncHandler Members
@@ -281,7 +280,6 @@ namespace System.Web.Mvc
         {
             EndProcessRequest(result);
         }
-
         #endregion
 
         // Keep as value type to avoid allocating

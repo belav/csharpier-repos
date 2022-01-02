@@ -34,7 +34,6 @@ namespace System.Xml.Tests
             0xA6,
             0x9F
         };
-
         #endregion
 
         #region Public Methods and Operators

@@ -36,6 +36,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractClass
             MemberAnalysisResults = memberAnalysisResults;
         }
     }
+
     internal sealed class OmniSharpExtractClassMemberAnalysisResult
     {
         /// <summary>

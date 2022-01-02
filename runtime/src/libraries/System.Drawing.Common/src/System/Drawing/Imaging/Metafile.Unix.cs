@@ -83,6 +83,7 @@ namespace System.Drawing.Imaging
             {
                 get => _disposed;
             }
+
             internal MetafileHolder()
             {
                 _disposed = false;

@@ -235,6 +235,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonConverter(typeof(BaseConverter))]
             public Derived DerivedProperty { get; set; }
+
             [JsonConverter(typeof(BaseConverter))]
 #pragma warning disable 0649
             public Derived DerivedField;
@@ -259,6 +260,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonConverter(typeof(DerivedConverter))]
             public Base BaseProperty { get; set; }
+
             [JsonConverter(typeof(DerivedConverter))]
 #pragma warning disable 0649
             public Base BaseField;

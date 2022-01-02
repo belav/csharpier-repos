@@ -18,7 +18,6 @@ namespace System.IO.Tests
         {
             Directory.Delete(path);
         }
-
         #endregion
 
         #region UniversalTests
@@ -142,7 +141,6 @@ namespace System.IO.Tests
             Delete(testDir.FullName);
             Assert.False(testDir.Exists);
         }
-
         #endregion
 
         #region PlatformSpecific
@@ -251,7 +249,6 @@ namespace System.IO.Tests
         {
             Directory.Delete(path, recursive);
         }
-
         #endregion
 
         [Fact]

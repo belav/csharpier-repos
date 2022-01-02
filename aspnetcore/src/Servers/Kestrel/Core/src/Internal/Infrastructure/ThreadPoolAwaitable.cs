@@ -14,6 +14,7 @@ internal class ThreadPoolAwaitable : ICriticalNotifyCompletion
     private ThreadPoolAwaitable() { }
 
     public ThreadPoolAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => false;
 
     public void GetResult() { }

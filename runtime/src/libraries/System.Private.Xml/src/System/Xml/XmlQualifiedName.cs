@@ -40,10 +40,12 @@ namespace System.Xml
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public string Namespace { get; private set; }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public string Name { get; private set; }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -60,6 +62,7 @@ namespace System.Xml
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public bool IsEmpty => Name.Length == 0 && Namespace.Length == 0;
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

@@ -687,7 +687,6 @@ namespace Newtonsoft.Json.Linq
 
         ICollection<JToken?> IDictionary<string, JToken?>.Values =>
             throw new NotImplementedException();
-
         #endregion
 
         #region ICollection<KeyValuePair<string,JToken>> Members

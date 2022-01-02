@@ -60,16 +60,19 @@ namespace System.Reflection
             IsGenericMethod && !IsGenericMethodDefinition;
         public virtual bool IsGenericMethod => false;
         public virtual bool IsGenericMethodDefinition => false;
+
         public virtual Type[] GetGenericArguments()
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
+
         public virtual bool ContainsGenericParameters => false;
 
         [DebuggerHidden]
         [DebuggerStepThrough]
         public object? Invoke(object? obj, object?[]? parameters) =>
             Invoke(obj, BindingFlags.Default, binder: null, parameters: parameters, culture: null);
+
         public abstract object? Invoke(
             object? obj,
             BindingFlags invokeAttr,
@@ -85,6 +88,7 @@ namespace System.Reflection
         public virtual bool IsSecurityTransparent => throw NotImplemented.ByDesign;
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

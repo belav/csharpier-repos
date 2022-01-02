@@ -146,6 +146,7 @@ namespace V8.Crypto
                 Console.WriteLine("encrypt '{0}' is '{1}'", s_TEXT, res);
             s_TEXT = res;
         }
+
         public static void runDecrypt(bool verbose)
         {
             var res = s_RSA.decrypt(s_TEXT);
@@ -158,6 +159,7 @@ namespace V8.Crypto
     internal class ListX<T> : List<T>
     {
         public ListX() : base() { }
+
         public ListX(int cap) : base(cap) { }
 
         public new T this[int index]
@@ -221,11 +223,13 @@ namespace V8.Crypto
             _array = new ListX<int>();
             this.fromString(a, 256);
         }
+
         public BigInteger(byte[] ba)
         {
             _array = new ListX<int>();
             this.fromByteArray(ba);
         }
+
         public BigInteger(String a, int b)
         {
             _array = new ListX<int>();
@@ -368,6 +372,7 @@ namespace V8.Crypto
         {
             return BI_RM[(int)n];
         }
+
         private static int intAt(String s, int i)
         {
             // int c = (int)BI_RC[s[(int)i]];
@@ -991,11 +996,13 @@ namespace V8.Crypto
             {
                 return x;
             }
+
             public override void mulTo(BigInteger x, BigInteger y, BigInteger r)
             {
                 x.multiplyTo(y, r);
                 this.reduce(r);
             }
+
             public override void sqrTo(BigInteger x, BigInteger r)
             {
                 x.squareTo(r);
@@ -1036,6 +1043,7 @@ namespace V8.Crypto
         {
             abstract public BigInteger convert(BigInteger x);
             abstract public BigInteger revert(BigInteger x);
+
             // DELETEME
             // abstract public void reduce(BigInteger x);
             abstract public void sqrTo(BigInteger x, BigInteger r);
@@ -1425,10 +1433,12 @@ namespace V8.Crypto
         {
             return (this.compareTo(a) == 0);
         }
+
         public BigInteger min(BigInteger a)
         {
             return (this.compareTo(a) < 0) ? this : a;
         }
+
         public BigInteger max(BigInteger a)
         {
             return (this.compareTo(a) > 0) ? this : a;
@@ -1469,6 +1479,7 @@ namespace V8.Crypto
         {
             return x & y;
         }
+
         public BigInteger and(BigInteger a)
         {
             var r = nbi();
@@ -1481,6 +1492,7 @@ namespace V8.Crypto
         {
             return x | y;
         }
+
         public BigInteger or(BigInteger a)
         {
             var r = nbi();
@@ -1493,6 +1505,7 @@ namespace V8.Crypto
         {
             return x ^ y;
         }
+
         public BigInteger xor(BigInteger a)
         {
             var r = nbi();
@@ -1505,6 +1518,7 @@ namespace V8.Crypto
         {
             return x & ~y;
         }
+
         public BigInteger andNot(BigInteger a)
         {
             var r = nbi();
@@ -1739,12 +1753,14 @@ namespace V8.Crypto
         {
             public BigInteger p1;
             public BigInteger p2;
+
             public BigIntPair(BigInteger p1, BigInteger p2)
             {
                 this.p1 = p1;
                 this.p2 = p2;
             }
         }
+
         // (public) [this/a,this%a]
         public BigIntPair divideAndRemainder(BigInteger a)
         {
@@ -1787,14 +1803,17 @@ namespace V8.Crypto
             {
                 return x;
             }
+
             public override BigInteger revert(BigInteger x)
             {
                 return x;
             }
+
             public override void mulTo(BigInteger x, BigInteger y, BigInteger r)
             {
                 x.multiplyTo(y, r);
             }
+
             public override void sqrTo(BigInteger x, BigInteger r)
             {
                 x.squareTo(r);

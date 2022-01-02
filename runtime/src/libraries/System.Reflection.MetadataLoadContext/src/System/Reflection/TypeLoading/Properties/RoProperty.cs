@@ -29,6 +29,7 @@ namespace System.Reflection.TypeLoading
         public abstract override string ToString();
 
         public sealed override Type DeclaringType => GetRoDeclaringType();
+
         internal RoInstantiationProviderType GetRoDeclaringType() => _declaringType;
 
         public sealed override Type ReflectedType => _reflectedType;
@@ -41,11 +42,13 @@ namespace System.Reflection.TypeLoading
         internal abstract RoModule GetRoModule();
 
         public abstract override int MetadataToken { get; }
+
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             this.HasSameMetadataDefinitionAsCore(other);
 
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public sealed override PropertyAttributes Attributes =>
@@ -63,6 +66,7 @@ namespace System.Reflection.TypeLoading
 
         public sealed override MethodInfo? GetGetMethod(bool nonPublic) =>
             GetRoGetMethod()?.FilterAccessor(nonPublic);
+
         public sealed override MethodInfo? GetSetMethod(bool nonPublic) =>
             GetRoSetMethod()?.FilterAccessor(nonPublic);
 
@@ -70,6 +74,7 @@ namespace System.Reflection.TypeLoading
             object.ReferenceEquals(_lazyGetter, Sentinels.RoMethod)
                 ? (_lazyGetter = ComputeGetterMethod()?.FilterInheritedAccessor())
                 : _lazyGetter;
+
         private RoMethod? GetRoSetMethod() =>
             object.ReferenceEquals(_lazySetter, Sentinels.RoMethod)
                 ? (_lazySetter = ComputeSetterMethod()?.FilterInheritedAccessor())
@@ -109,6 +114,7 @@ namespace System.Reflection.TypeLoading
             (
                 _lazyIndexedParameters ?? (_lazyIndexedParameters = ComputeIndexParameters())
             ).CloneArray<ParameterInfo>();
+
         private RoPropertyIndexParameter[] ComputeIndexParameters()
         {
             bool useGetter = CanRead;
@@ -129,6 +135,7 @@ namespace System.Reflection.TypeLoading
             }
             return indexParameters;
         }
+
         private volatile RoPropertyIndexParameter[]? _lazyIndexedParameters;
 
         public sealed override object? GetRawConstantValue()
@@ -147,12 +154,16 @@ namespace System.Reflection.TypeLoading
         // Operations that are not allowed for Reflection-only.
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object GetConstantValue() =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object GetValue(
             object? obj,
             BindingFlags invokeAttr,
@@ -160,6 +171,7 @@ namespace System.Reflection.TypeLoading
             object?[]? index,
             CultureInfo? culture
         ) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override void SetValue(
             object? obj,
             object? value,

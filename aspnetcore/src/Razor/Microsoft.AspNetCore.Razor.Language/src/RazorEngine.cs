@@ -187,6 +187,7 @@ public abstract class RazorEngine
 
         return default;
     }
+
 #nullable disable
 
     #region Obsolete

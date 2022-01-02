@@ -71,7 +71,6 @@ namespace Roslyn.Utilities
         /// kick off a new one if we receive more work before it runs.
         /// </summary>
         private bool _taskInFlight = false;
-
         #endregion
 
         public AsyncBatchingWorkQueue(

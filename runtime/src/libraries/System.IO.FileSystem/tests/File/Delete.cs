@@ -119,7 +119,6 @@ namespace System.IO.Tests
                 () => Delete(Path.Combine(TestDirectory, GetTestFileName(), "C"))
             );
         }
-
         #endregion
 
         #region PlatformSpecific

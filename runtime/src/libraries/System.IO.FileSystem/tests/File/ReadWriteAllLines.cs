@@ -23,7 +23,6 @@ namespace System.IO.Tests
         {
             return File.ReadAllLines(path);
         }
-
         #endregion
 
         #region UniversalTests
@@ -231,7 +230,6 @@ namespace System.IO.Tests
         {
             return File.ReadAllLines(path);
         }
-
         #endregion
 
         #region UniversalTests

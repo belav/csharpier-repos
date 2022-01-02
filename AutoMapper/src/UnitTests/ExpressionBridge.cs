@@ -19,6 +19,7 @@ namespace AutoMapper.UnitTests
             public string ProductSubcategoryName { set; get; }
             public string CategoryName { set; get; }
         }
+
         public class ExtendedProductDto
         {
             public string Name { set; get; }
@@ -26,20 +27,24 @@ namespace AutoMapper.UnitTests
             public string CategoryName { set; get; }
             public List<BillOfMaterialsDto> BOM { set; get; }
         }
+
         public class ComplexProductDto
         {
             public string Name { get; set; }
             public ProductSubcategoryDto ProductSubcategory { get; set; }
         }
+
         public class ProductSubcategoryDto
         {
             public string Name { get; set; }
             public ProductCategoryDto ProductCategory { get; set; }
         }
+
         public class ProductCategoryDto
         {
             public string Name { get; set; }
         }
+
         public class AbstractProductDto
         {
             public string Name { set; get; }
@@ -47,8 +52,11 @@ namespace AutoMapper.UnitTests
             public string CategoryName { set; get; }
             public List<ProductTypeDto> Types { get; set; }
         }
+
         public abstract class ProductTypeDto { }
+
         public class ProdTypeA : ProductTypeDto { }
+
         public class ProdTypeB : ProductTypeDto { }
 
         public class ProductTypeConverter : ITypeConverter<ProductType, ProductTypeDto>
@@ -100,6 +108,7 @@ namespace AutoMapper.UnitTests
         {
             public int BillOfMaterialsID { set; get; }
         }
+
         public class When_mapping_using_expressions : SpecBase
         {
             private List<Product> _products;
@@ -240,6 +249,7 @@ namespace AutoMapper.UnitTests
                 {
                     BP2 = new HashSet<A>();
                 }
+
                 public int BP1 { get; set; }
                 public virtual ICollection<A> BP2 { get; set; }
             }
@@ -250,12 +260,14 @@ namespace AutoMapper.UnitTests
                 public string AP2 { get; set; }
                 public virtual BEntity B { get; set; }
             }
+
             public class BEntity
             {
                 public BEntity()
                 {
                     BP2 = new HashSet<AEntity>();
                 }
+
                 public int BP1 { get; set; }
                 public virtual ICollection<AEntity> BP2 { get; set; }
             }

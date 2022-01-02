@@ -23,6 +23,7 @@ public class Runtime_55129_1
     static I s_i = new C();
     static short s_7;
     static sbyte[][] s_10 = new sbyte[][] { new sbyte[] { -1 } };
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Run()
     {
@@ -51,6 +52,7 @@ class C : I
 struct S0
 {
     public long F5;
+
     public S0(int f0, byte f1, ulong f2, byte f3, uint f4, long f5, int f6, int f7) : this() { }
 }
 
@@ -71,6 +73,7 @@ public class Runtime_55129_2
     static S0 s_5;
     static C1[][] s_47 = new C1[][] { new C1[] { new C1() } };
     static bool s_result;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Run()
     {

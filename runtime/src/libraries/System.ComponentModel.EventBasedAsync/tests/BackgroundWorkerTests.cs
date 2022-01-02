@@ -152,7 +152,6 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             // signal no matter what, even if it's not cancelled by now
             manualResetEvent3.Set();
         }
-
         #endregion
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

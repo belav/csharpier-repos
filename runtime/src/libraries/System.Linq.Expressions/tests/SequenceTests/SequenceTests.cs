@@ -53,6 +53,7 @@ namespace System.Linq.Expressions.Tests
             {
                 return true;
             }
+
             public Atom this[Atom b0]
             {
                 get { return null; }
@@ -255,6 +256,7 @@ namespace System.Linq.Expressions.Tests
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
+
         internal static Type GetNonNullableType(Type type)
         {
             if (IsNullableType(type))
@@ -1095,6 +1097,7 @@ namespace System.Linq.Expressions.Tests
             public string CompanyName;
             public List<Order> Orders = new List<Order>();
         }
+
         public class Order
         {
             public string CustomerID;
@@ -1106,26 +1109,32 @@ namespace System.Linq.Expressions.Tests
         public class AndAlso
         {
             public bool value;
+
             public AndAlso(bool value)
             {
                 this.value = value;
             }
+
             public static AndAlso operator &(AndAlso a1, AndAlso a2)
             {
                 return new AndAlso(a1.value && a2.value);
             }
+
             public static bool operator true(AndAlso a)
             {
                 return a.value;
             }
+
             public static bool operator false(AndAlso a)
             {
                 return !a.value;
             }
+
             public static AndAlso operator !(AndAlso a)
             {
                 return new AndAlso(false);
             }
+
             public override string ToString()
             {
                 return value.ToString();
@@ -1156,22 +1165,27 @@ namespace System.Linq.Expressions.Tests
                 Name = name;
                 this.data = data;
             }
+
             public static TC1 operator &(TC1 t1, TC1 t2)
             {
                 return new TC1("And", 01);
             }
+
             public static TC1 operator |(TC1 t1, TC1 t2)
             {
                 return new TC1("Or", 02);
             }
+
             public static TC1 Meth1(TC1 t1, TC1 t2)
             {
                 return new TC1();
             }
+
             public static bool operator true(TC1 a)
             {
                 return true;
             }
+
             public static bool operator false(TC1 a)
             {
                 return false;
@@ -1264,6 +1278,7 @@ namespace System.Linq.Expressions.Tests
                 temp.y = c.y + 1;
                 return temp;
             }
+
             public Complex(int x, int y)
             {
                 this.x = x;
@@ -1275,20 +1290,24 @@ namespace System.Linq.Expressions.Tests
         {
             private Customer _cust;
             public string m_x = "ha ha ha";
+
             public string Func0(ref string x)
             {
                 x = "Changed";
                 return x;
             }
+
             public string X
             {
                 get { return m_x; }
                 set { m_x = value; }
             }
+
             public static int Funct1(ref int i)
             {
                 return i = 5;
             }
+
             public static int Prop
             {
                 get { return 7; }
@@ -1318,6 +1337,7 @@ namespace System.Linq.Expressions.Tests
         {
             public int zip;
             public string name;
+
             public Customer(int zip, string name)
             {
                 this.zip = zip;
@@ -1497,6 +1517,7 @@ namespace System.Linq.Expressions.Tests
         private class TestClass : IEquatable<TestClass>
         {
             private int _val;
+
             public TestClass(string S, int Val)
             {
                 this.S = S;
@@ -1514,10 +1535,12 @@ namespace System.Linq.Expressions.Tests
             {
                 return (o is TestClass) && Equals((TestClass)o);
             }
+
             public bool Equals(TestClass other)
             {
                 return other.S == S;
             }
+
             public override int GetHashCode()
             {
                 return S.GetHashCode();
@@ -1527,6 +1550,7 @@ namespace System.Linq.Expressions.Tests
         private class AnonHelperClass1
         {
             public Expression<Func<decimal>> mem1;
+
             public AnonHelperClass1(Expression<Func<decimal>> mem1)
             {
                 this.mem1 = mem1;
@@ -3207,6 +3231,7 @@ namespace System.Linq.Expressions.Tests
             {
                 return default(T);
             }
+
             public static void UseSystem_Linq_Expressions_Expression_TDelegate__1(bool call) // call this passing false
             {
                 if (call)
@@ -4055,10 +4080,12 @@ namespace System.Linq.Expressions.Tests
         public class Foo
         {
             public Foo() { }
+
             public int Zip(int y)
             {
                 return y * y;
             }
+
             public virtual string Virt()
             {
                 return "Foo";
@@ -4068,6 +4095,7 @@ namespace System.Linq.Expressions.Tests
         public class Bar : Foo
         {
             public Bar() { }
+
             public override string Virt()
             {
                 return "Bar";
@@ -4134,6 +4162,7 @@ namespace System.Linq.Expressions.Tests
         public struct StructZ
         {
             public int A;
+
             public StructZ(int a)
             {
                 this.A = a;
@@ -4436,66 +4465,82 @@ namespace System.Linq.Expressions.Tests
         {
             throw new NotImplementedException();
         }
+
         public static U operator -(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator *(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator /(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator <(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator <=(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator >(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator >=(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator ==(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator !=(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator &(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator |(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator ^(U x, U y)
         {
             throw new NotImplementedException();
         }
+
         public static U operator -(U x)
         {
             throw new NotImplementedException();
         }
+
         public static U operator ~(U x)
         {
             throw new NotImplementedException();
         }
+
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -4508,50 +4553,62 @@ namespace System.Linq.Expressions.Tests
         {
             throw new NotImplementedException();
         }
+
         public static B operator <=(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator >(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator >=(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator ==(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator !=(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator &(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator |(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator ^(B x, B y)
         {
             throw new NotImplementedException();
         }
+
         public static B operator !(B x)
         {
             throw new NotImplementedException();
         }
+
         public static B operator -(B x)
         {
             throw new NotImplementedException();
         }
+
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -4564,22 +4621,27 @@ namespace System.Linq.Expressions.Tests
         {
             throw new NotImplementedException();
         }
+
         public static M operator -(M m, N n)
         {
             throw new NotImplementedException();
         }
+
         public static M operator -(M m)
         {
             throw new NotImplementedException();
         }
+
         public static M operator ~(M m)
         {
             throw new NotImplementedException();
         }
+
         public static explicit operator M(N n)
         {
             throw new NotImplementedException();
         }
+
         public static N Foo(M m)
         {
             throw new NotImplementedException();
@@ -4592,18 +4654,22 @@ namespace System.Linq.Expressions.Tests
         {
             throw new NotImplementedException();
         }
+
         public static M operator /(M m, N n)
         {
             throw new NotImplementedException();
         }
+
         public static N operator -(N n)
         {
             throw new NotImplementedException();
         }
+
         public static implicit operator N(M m)
         {
             throw new NotImplementedException();
         }
+
         public static M Bar(N n)
         {
             throw new NotImplementedException();

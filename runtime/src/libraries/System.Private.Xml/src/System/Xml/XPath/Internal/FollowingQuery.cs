@@ -13,6 +13,7 @@ namespace MS.Internal.Xml.XPath
 
         public FollowingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
             : base(qyInput, name, prefix, typeTest) { }
+
         private FollowingQuery(FollowingQuery other) : base(other)
         {
             _input = Clone(other._input);

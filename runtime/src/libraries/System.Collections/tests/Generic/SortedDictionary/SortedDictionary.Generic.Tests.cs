@@ -24,7 +24,6 @@ namespace System.Collections.Tests
         {
             return new SortedDictionary<TKey, TValue>();
         }
-
         #endregion
 
         #region Constructors
@@ -90,7 +89,6 @@ namespace System.Collections.Tests
             Assert.Equal(sourceSorted, copiedReverse);
             Assert.Equal(reverseComparer, copiedReverse.Comparer);
         }
-
         #endregion
 
         #region ContainsValue
@@ -144,7 +142,6 @@ namespace System.Collections.Tests
             dictionary.Add(notPresent, default(TValue));
             Assert.True(dictionary.ContainsValue(default(TValue)));
         }
-
         #endregion
 
         #region Ordering
@@ -163,7 +160,6 @@ namespace System.Collections.Tests
             foreach (KeyValuePair<TKey, TValue> value in set)
                 Assert.Equal(expected[expectedIndex++], value);
         }
-
         #endregion
 
         #region IReadOnlyDictionary<TKey, TValue>.Keys

@@ -77,7 +77,6 @@ namespace System.Linq.Expressions.Compiler
             }
             return NotEmpty(node) && !(node is DebugInfoExpression);
         }
-
         #endregion
 
         #region Coalesce
@@ -226,7 +225,6 @@ namespace System.Linq.Expressions.Compiler
             }
             _ilg.MarkLabel(labEnd);
         }
-
         #endregion
 
         #region AndAlso
@@ -329,7 +327,6 @@ namespace System.Linq.Expressions.Compiler
                 EmitUnliftedAndAlso(b);
             }
         }
-
         #endregion
 
         #region OrElse
@@ -423,7 +420,6 @@ namespace System.Linq.Expressions.Compiler
                 EmitUnliftedOrElse(b);
             }
         }
-
         #endregion
 
         #region Optimized branching

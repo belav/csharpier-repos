@@ -159,7 +159,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 Assert.False(ret, message);
             }
         }
-
         #endregion
 
         #region "Utilities"
@@ -265,7 +264,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
 
             return list;
         }
-
         #endregion
 
         #region "Private Helpers"
@@ -337,12 +335,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 }
             }
         }
-
         #endregion
 
         private class LocalSymbolDumper
         {
             private readonly CSharpCompilation _compilation;
+
             public LocalSymbolDumper(CSharpCompilation compilation) => _compilation = compilation;
 
             public void GetLocalSymbols(FieldSymbol symbol, List<ISymbol> list)

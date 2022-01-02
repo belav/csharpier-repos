@@ -48,12 +48,14 @@ namespace parse_hb_log
         EnterDueToProc = 0xf0,
         SetIdeal = 0xf00,
     };
+
     struct SampleInfo
     {
         // -1 means uninit.
         public int tid;
         public int allocHeap;
         public int countSamples;
+
         // This is to present m/p/i - each takes 4 bits, mask for them
         // is defined in HeapBalanceFlagMask. Most of the time the flags are
         // 0s.
@@ -76,6 +78,7 @@ namespace parse_hb_log
         AllocHeap = 1,
         MaxType = 2
     };
+
     class Program
     {
         static bool fLogging = false;
@@ -126,16 +129,20 @@ namespace parse_hb_log
         static int totalProcs = 0;
         static int totalNodes = 0;
         static int procsPerNode = 0;
+
         // this is qpf / 1000 so we calculate ms instead of s.
         static UInt64 qpfAdjusted = 0;
+
         // we log the current qpc so substract by this.
         static UInt64 qpcStart = 0;
         static Int32 totalAllocThreads = 0;
         static Dictionary<string, int> threadMapping = new Dictionary<string, int>(112);
+
         // We do compress the samples, this stores the aggregated sample counts for all procs.
         static int[] aggregatedSampleCount = null;
 
         static int timeUnitMS = 1;
+
         // We wanna compress the log by compressing the samples in the same unit of time.
         // We get samples by procs, so on the same proc if we observe the same thread
         // allocating on the same alloc heap in the same time unit we simply count the total
@@ -582,6 +589,7 @@ namespace parse_hb_log
         // Pass one. TODO: should separate this from pass zero.
         //=========================================================================
         static StreamWriter[] swPassOneFiles = null;
+
         // It's difficult to print all of the procs on one line so we only print per node.
         static int nodeIndexToPrint = -1;
         static bool fIncludeAllTime = false;
@@ -590,6 +598,7 @@ namespace parse_hb_log
         // This represents the samples for all the procs inbetween GCs so it doesn't grow very large.
         // Cleared every GC.
         static SampleInfo[][] samples;
+
         // This is the min/max time for inbetween each GC.
         static int startTimeMS = 0;
         static int endTimeMS = 0;
@@ -615,6 +624,7 @@ namespace parse_hb_log
         // This represents allocated MB on each heap; parse from the lines following [GC_alloc_mb]
         static int[] AllocMB;
         static int budgetMB = 0;
+
         // These are subscript chars for 0-9.
         static char[] unicodeChars =
         {
@@ -680,6 +690,7 @@ namespace parse_hb_log
             strAlloc += string.Format("|");
             PrintToAllPassOneFiles(strAlloc);
         }
+
         static void CloseAllPassOneFiles()
         {
             Console.WriteLine(

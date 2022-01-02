@@ -14,6 +14,7 @@ namespace N
 
         public static WrappedInt Twenty = new WrappedInt() { Value = 20 };
     }
+
     public static class C
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

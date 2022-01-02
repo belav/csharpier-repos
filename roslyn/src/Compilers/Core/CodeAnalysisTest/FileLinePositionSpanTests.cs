@@ -166,7 +166,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotEqual(hash4, hash5);
             Assert.NotEqual(hash5, hash6);
         }
-
 #endif
 
         [Fact]

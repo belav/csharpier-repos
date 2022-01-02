@@ -54,7 +54,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DisposeAll();
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         private void DisposeAll()

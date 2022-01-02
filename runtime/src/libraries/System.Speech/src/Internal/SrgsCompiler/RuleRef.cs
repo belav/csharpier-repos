@@ -94,7 +94,6 @@ namespace System.Speech.Internal.SrgsCompiler
 #pragma warning restore 0618
             parent.AddArc(rulerefArc);
         }
-
         #endregion
 
         #region Internal Method
@@ -142,7 +141,6 @@ namespace System.Speech.Internal.SrgsCompiler
                     break;
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -167,7 +165,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             return rule;
         }
-
         #endregion
 
         #region internal Properties
@@ -185,7 +182,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get { return new RuleRef(SpecialRuleRefType.Garbage, null); }
         }
-
         #endregion
 
         #region Private Fields
@@ -208,7 +204,6 @@ namespace System.Speech.Internal.SrgsCompiler
             // without failing due to irrelevant, or ignorable words.
             Garbage,
         }
-
         #endregion
 
         private SpecialRuleRefType _type;

@@ -12,6 +12,7 @@ namespace Internal.TypeSystem
     public partial class TypeSystemContext
     {
         private CanonType _canonType;
+
         /// <summary>
         /// Instance of System.__Canon for this context
         /// </summary>
@@ -28,6 +29,7 @@ namespace Internal.TypeSystem
         }
 
         private UniversalCanonType _universalCanonType;
+
         /// <summary>
         /// Instance of System.__UniversalCanon for this context
         /// </summary>

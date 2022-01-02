@@ -381,6 +381,7 @@ namespace System.Net.Tests
         {
             [FieldOffset(0)]
             public ArraySegment<byte> Actual;
+
             [FieldOffset(0)]
             public FakeArraySegment Fake;
         }

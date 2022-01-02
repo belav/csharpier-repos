@@ -681,7 +681,6 @@ namespace System.Data.OleDb
         public uint cElems;
         public IntPtr pElems;
     }
-
     #endregion Structs used by PropVariantUnion
 
     #endregion PROPVARIANT

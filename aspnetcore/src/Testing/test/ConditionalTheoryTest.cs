@@ -145,6 +145,7 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     public class Skippable : IXunitSerializable
     {
         public Skippable() { }
+
         public int Data { get; set; }
         public string Skip { get; set; }
 

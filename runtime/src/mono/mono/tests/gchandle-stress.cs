@@ -22,6 +22,7 @@ class T
             handle_array[i] = GCHandle.Alloc(i, t);
         }
     }
+
     static void get_stats()
     {
         int i;

@@ -1433,7 +1433,6 @@ namespace Microsoft.CodeAnalysis.Editing
         );
 
         internal abstract SyntaxNode AsInterfaceMember(SyntaxNode member);
-
         #endregion
 
         #region Remove, Replace, Insert
@@ -1677,7 +1676,6 @@ namespace Microsoft.CodeAnalysis.Editing
 
             return list;
         }
-
         #endregion
 
         #region Statements
@@ -1753,6 +1751,7 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode variableDeclarator,
             SyntaxNode initializer
         ) => SyntaxGeneratorInternal.WithInitializer(variableDeclarator, initializer);
+
         internal SyntaxNode EqualsValueClause(SyntaxToken operatorToken, SyntaxNode value) =>
             SyntaxGeneratorInternal.EqualsValueClause(operatorToken, value);
 
@@ -1942,7 +1941,6 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Creates a block of statements. Not supported in VB.
         /// </summary>
         internal abstract SyntaxNode ScopeBlock(IEnumerable<SyntaxNode> statements);
-
         #endregion
 
         #region Expressions
@@ -1951,17 +1949,22 @@ namespace Microsoft.CodeAnalysis.Editing
 
         internal SyntaxToken InterpolatedStringTextToken(string content, string value) =>
             SyntaxGeneratorInternal.InterpolatedStringTextToken(content, value);
+
         internal SyntaxNode InterpolatedStringText(SyntaxToken textToken) =>
             SyntaxGeneratorInternal.InterpolatedStringText(textToken);
+
         internal SyntaxNode Interpolation(SyntaxNode syntaxNode) =>
             SyntaxGeneratorInternal.Interpolation(syntaxNode);
+
         internal SyntaxNode InterpolatedStringExpression(
             SyntaxToken startToken,
             IEnumerable<SyntaxNode> content,
             SyntaxToken endToken
         ) => SyntaxGeneratorInternal.InterpolatedStringExpression(startToken, content, endToken);
+
         internal SyntaxNode InterpolationAlignmentClause(SyntaxNode alignment) =>
             SyntaxGeneratorInternal.InterpolationAlignmentClause(alignment);
+
         internal SyntaxNode InterpolationFormatClause(string format) =>
             SyntaxGeneratorInternal.InterpolationFormatClause(format);
 
@@ -2015,8 +2018,10 @@ namespace Microsoft.CodeAnalysis.Editing
         public abstract SyntaxNode IdentifierName(string identifier);
 
         internal abstract SyntaxNode IdentifierName(SyntaxToken identifier);
+
         internal SyntaxToken Identifier(string identifier) =>
             SyntaxGeneratorInternal.Identifier(identifier);
+
         internal abstract SyntaxNode NamedAnonymousObjectMemberDeclarator(
             SyntaxNode identifier,
             SyntaxNode expression

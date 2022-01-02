@@ -37,7 +37,6 @@ namespace System.IO.Packaging
             _partCollection = null;
             _disposed = false;
         }
-
         #endregion Protected Constructor
 
         #region Public Properties
@@ -74,7 +73,6 @@ namespace System.IO.Packaging
                 return _packageProperties;
             }
         }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -128,7 +126,6 @@ namespace System.IO.Packaging
         {
             return Open(path, packageMode, packageAccess, s_defaultFileShare);
         }
-
         #endregion OpenOnFileMethods
 
         #region OpenOnStreamMethods
@@ -167,7 +164,6 @@ namespace System.IO.Packaging
             //its most likely that the user intends to write to the stream.
             return Open(stream, packageMode, s_defaultFileAccess);
         }
-
         #endregion OpenOnStreamMethods
 
         #region PackagePart Methods
@@ -452,7 +448,6 @@ namespace System.IO.Packaging
             }
             return _partCollection;
         }
-
         #endregion PackagePart Methods
 
         #region IDisposable Methods
@@ -499,7 +494,6 @@ namespace System.IO.Packaging
                 GC.SuppressFinalize(this);
             }
         }
-
         #endregion IDisposable Methods
 
         #region Other Methods
@@ -545,7 +539,6 @@ namespace System.IO.Packaging
 
             FlushCore();
         }
-
         #endregion Other Methods
 
         #region PackageRelationship Methods
@@ -709,7 +702,6 @@ namespace System.IO.Packaging
 
             return (GetRelationshipHelper(id) != null);
         }
-
         #endregion PackageRelationship Methods
 
         #endregion Public Methods
@@ -794,7 +786,6 @@ namespace System.IO.Packaging
         /// This method flushes the contents of the package to the disc.
         /// </summary>
         protected abstract void FlushCore();
-
         #endregion Protected Abstract Methods
 
         #region Internal Properties
@@ -970,7 +961,6 @@ namespace System.IO.Packaging
 
             return package;
         }
-
         //------------------------------------------------------
         //
         //  Internal Events
@@ -1251,7 +1241,6 @@ namespace System.IO.Packaging
             //and all the relationships should be returned.
             return new PackageRelationshipCollection(_relationships, filterString);
         }
-
         #endregion Private Methods
 
         #region Private Members

@@ -113,7 +113,6 @@ public abstract partial class DiagnosticVerifier
     {
         return diagnostics.OrderBy(d => d.Location.SourceSpan.Start).ToArray();
     }
-
     #endregion
 
     #region Set up compilation and documents

@@ -107,7 +107,6 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             private TableEntriesSnapshot? _lastSnapshot;
             public int CurrentVersionNumber { get; protected set; }
-
             #endregion
 
             protected AbstractTableDataSourceFindUsagesContext(
@@ -308,7 +307,6 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                 return this;
             }
-
             #endregion
 
             #region FindUsagesContext overrides.
@@ -536,7 +534,6 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                 return ValueTaskFactory.CompletedTask;
             }
-
             #endregion
 
             #region ITableEntriesSnapshotFactory

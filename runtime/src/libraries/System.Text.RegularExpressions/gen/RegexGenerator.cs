@@ -17,6 +17,7 @@ using Microsoft.CodeAnalysis.Text;
 
 [assembly: System.Resources.NeutralResourcesLanguage("en-us")]
 
+
 namespace System.Text.RegularExpressions.Generator
 {
     /// <summary>Generates C# source code to implement regular expressions.</summary>

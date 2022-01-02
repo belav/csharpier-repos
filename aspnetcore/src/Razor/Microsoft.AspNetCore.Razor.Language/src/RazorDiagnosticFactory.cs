@@ -21,6 +21,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.BlockDirectiveCannotBeImported,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateDirective_BlockDirectiveCannotBeImported(string directive)
     {
         return RazorDiagnostic.Create(
@@ -29,7 +30,6 @@ internal static class RazorDiagnosticFactory
             directive
         );
     }
-
     #endregion
 
     #region Language Errors
@@ -42,6 +42,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Unterminated_String_Literal,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnterminatedStringLiteral(SourceSpan location)
     {
         return RazorDiagnostic.Create(Parsing_UnterminatedStringLiteral, location);
@@ -53,6 +54,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_BlockComment_Not_Terminated,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_BlockCommentNotTerminated(SourceSpan location)
     {
         return RazorDiagnostic.Create(Parsing_BlockCommentNotTerminated, location);
@@ -64,6 +66,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_HelperDirectiveNotAvailable,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_HelperDirectiveNotAvailable(SourceSpan location)
     {
         return RazorDiagnostic.Create(
@@ -79,6 +82,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Unexpected_WhiteSpace_At_Start_Of_CodeBlock,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedWhiteSpaceAtStartOfCodeBlock(
         SourceSpan location
     )
@@ -92,6 +96,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Unexpected_EndOfFile_At_Start_Of_CodeBlock,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedEndOfFileAtStartOfCodeBlock(
         SourceSpan location
     )
@@ -105,6 +110,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedCharacterAtStartOfCodeBlock(
         SourceSpan location,
         string content
@@ -123,6 +129,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Expected_EndOfBlock_Before_EOF,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_ExpectedEndOfBlockBeforeEOF(
         SourceSpan location,
         string blockName,
@@ -145,6 +152,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_ReservedWord,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_ReservedWord(SourceSpan location, string content)
     {
         return RazorDiagnostic.Create(Parsing_ReservedWord, location, content);
@@ -156,6 +164,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_SingleLine_ControlFlowStatements_CannotContainMarkup,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_SingleLineControlFlowStatementsCannotContainMarkup(
         SourceSpan location
     )
@@ -169,6 +178,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_AtInCode_Must_Be_Followed_By_Colon_Paren_Or_Identifier_Start,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_AtInCodeMustBeFollowedByColonParenOrIdentifierStart(
         SourceSpan location
     )
@@ -185,6 +195,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Unexpected_Nested_CodeBlock,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedNestedCodeBlock(SourceSpan location)
     {
         return RazorDiagnostic.Create(Parsing_UnexpectedNestedCodeBlock, location);
@@ -196,6 +207,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveTokensMustBeSeparatedByWhitespace,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveTokensMustBeSeparatedByWhitespace(
         SourceSpan location,
         string directiveName
@@ -214,6 +226,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.UnexpectedEOFAfterDirective,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedEOFAfterDirective(
         SourceSpan location,
         string directiveName,
@@ -234,6 +247,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveExpectsTypeName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveExpectsTypeName(
         SourceSpan location,
         string directiveName
@@ -248,6 +262,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveExpectsNamespace,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveExpectsNamespace(
         SourceSpan location,
         string directiveName
@@ -262,6 +277,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveExpectsIdentifier,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveExpectsIdentifier(
         SourceSpan location,
         string directiveName
@@ -276,6 +292,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveExpectsQuotedStringLiteral,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveExpectsQuotedStringLiteral(
         SourceSpan location,
         string directiveName
@@ -294,6 +311,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.UnexpectedDirectiveLiteral,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedDirectiveLiteral(
         SourceSpan location,
         string directiveName,
@@ -314,6 +332,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_DirectiveMustHaveValue,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveMustHaveValue(
         SourceSpan location,
         string directiveName
@@ -328,6 +347,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_IncompleteQuotesAroundDirective,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_IncompleteQuotesAroundDirective(
         SourceSpan location,
         string directiveName
@@ -346,6 +366,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.InvalidTagHelperPrefixValue,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_InvalidTagHelperPrefixValue(
         SourceSpan location,
         string directiveName,
@@ -368,6 +389,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_MarkupBlock_Must_Start_With_Tag,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_MarkupBlockMustStartWithTag(SourceSpan location)
     {
         return RazorDiagnostic.Create(Parsing_MarkupBlockMustStartWithTag, location);
@@ -379,6 +401,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_OuterTagMissingName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_OuterTagMissingName(SourceSpan location)
     {
         return RazorDiagnostic.Create(Parsing_OuterTagMissingName, location);
@@ -390,6 +413,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_TextTagCannotContainAttributes,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TextTagCannotContainAttributes(SourceSpan location)
     {
         return RazorDiagnostic.Create(Parsing_TextTagCannotContainAttributes, location);
@@ -401,6 +425,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_UnfinishedTag,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnfinishedTag(SourceSpan location, string tagName)
     {
         return RazorDiagnostic.Create(Parsing_UnfinishedTag, location, tagName);
@@ -412,6 +437,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_MissingEndTag,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_MissingEndTag(SourceSpan location, string tagName)
     {
         return RazorDiagnostic.Create(Parsing_MissingEndTag, location, tagName);
@@ -423,6 +449,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_UnexpectedEndTag,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedEndTag(
         SourceSpan location,
         string tagName
@@ -437,6 +464,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Expected_CloseBracket_Before_EOF,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_ExpectedCloseBracketBeforeEOF(
         SourceSpan location,
         string openBrace,
@@ -457,6 +485,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_RazorComment_Not_Terminated,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_RazorCommentNotTerminated(SourceSpan location)
     {
         return RazorDiagnostic.Create(Parsing_RazorCommentNotTerminated, location);
@@ -468,6 +497,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelperBlockRewriter_IndexerAttributeNameMustIncludeKey,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TagHelperIndexerAttributeNameMustIncludeKey(
         SourceSpan location,
         string attributeName,
@@ -488,6 +518,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelperBlockRewriter_TagHelperAttributeListMustBeWellFormed,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TagHelperAttributeListMustBeWellFormed(
         SourceSpan location
     )
@@ -501,6 +532,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelpers_CannotHaveCSharpInTagDeclaration,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TagHelpersCannotHaveCSharpInTagDeclaration(
         SourceSpan location,
         string tagName
@@ -519,6 +551,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelpers_AttributesMustHaveAName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TagHelperAttributesMustHaveAName(
         SourceSpan location,
         string tagName
@@ -533,6 +566,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelperParseTreeRewriter_EndTagTagHelperMustNotHaveAnEndTag,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TagHelperMustNotHaveAnEndTag(
         SourceSpan location,
         string tagName,
@@ -557,6 +591,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelpersParseTreeRewriter_FoundMalformedTagHelper,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TagHelperFoundMalformedTagHelper(
         SourceSpan location,
         string tagName
@@ -577,6 +612,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelpersParseTreeRewriter_MissingCloseAngle,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_TagHelperMissingCloseAngle(
         SourceSpan location,
         string tagName
@@ -597,6 +633,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.InvalidTagHelperLookupText,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_InvalidTagHelperLookupText(
         SourceSpan location,
         string lookupText
@@ -611,6 +648,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveExpectsCSharpAttribute,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveExpectsCSharpAttribute(
         SourceSpan location,
         string directiveName
@@ -629,6 +667,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveExpectsBooleanLiteral,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveExpectsBooleanLiteral(
         SourceSpan location,
         string directiveName
@@ -647,6 +686,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveGenericTypeParameterIdentifierMismatch,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_GenericTypeParameterIdentifierMismatch(
         SourceSpan location,
         string directiveName,
@@ -669,6 +709,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Unexpected_Identifier_At_Position,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_UnexpectedIdentifier(
         SourceSpan location,
         string content,
@@ -694,6 +735,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.Diagnostic_CodeTarget_UnsupportedExtension,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateCodeTarget_UnsupportedExtension(
         string documentKind,
         Type extensionType
@@ -713,6 +755,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DuplicateDirective,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DuplicateDirective(
         SourceSpan location,
         string directive
@@ -727,6 +770,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_Sections_Cannot_Be_Nested,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_SectionsCannotBeNested(SourceSpan location)
     {
         return RazorDiagnostic.Create(
@@ -742,6 +786,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_InlineMarkup_Blocks_Cannot_Be_Nested,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_InlineMarkupBlocksCannotBeNested(
         SourceSpan location
     )
@@ -755,6 +800,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.ParseError_NamespaceImportAndTypeAlias_Cannot_Exist_Within_CodeBlock,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_NamespaceImportAndTypeAliasCannotExistWithinCodeBlock(
         SourceSpan location
     )
@@ -771,6 +817,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.DirectiveMustAppearAtStartOfLine,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateParsing_DirectiveMustAppearAtStartOfLine(
         SourceSpan location,
         string directiveName
@@ -789,6 +836,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelpers_CodeBlocks_NotSupported_InAttributes,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_CodeBlocksNotSupportedInAttributes(
         SourceSpan location
     )
@@ -806,6 +854,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelpers_InlineMarkupBlocks_NotSupported_InAttributes,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InlineMarkupBlocksNotSupportedInAttributes(
         SourceSpan location,
         string expectedTypeName
@@ -826,6 +875,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.RewriterError_EmptyTagHelperBoundAttribute,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_EmptyBoundAttribute(
         SourceSpan location,
         string attributeName,
@@ -848,6 +898,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelperParseTreeRewriter_CannotHaveNonTagContent,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_CannotHaveNonTagContent(
         SourceSpan location,
         string tagName,
@@ -868,6 +919,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelperParseTreeRewriter_InvalidNestedTag,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidNestedTag(
         SourceSpan location,
         string tagName,
@@ -890,6 +942,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelperParseTreeRewriter_InconsistentTagStructure,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InconsistentTagStructure(
         SourceSpan location,
         string firstDescriptor,
@@ -927,7 +980,6 @@ internal static class RazorDiagnosticFactory
             parameterName
         );
     }
-
     #endregion
 
     #region TagHelper Errors
@@ -960,6 +1012,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidRestrictedChild,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidRestrictedChild(
         string tagHelperDisplayName,
         string restrictedChild,
@@ -983,6 +1036,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundAttributeNullOrWhitespace,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
         string tagHelperDisplayName,
         string propertyDisplayName
@@ -1004,6 +1058,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundAttributeName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributeName(
         string tagHelperDisplayName,
         string propertyDisplayName,
@@ -1029,6 +1084,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundAttributeNameStartsWith,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributeNameStartsWith(
         string tagHelperDisplayName,
         string propertyDisplayName,
@@ -1053,6 +1109,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundAttributePrefix,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributePrefix(
         string tagHelperDisplayName,
         string propertyDisplayName,
@@ -1078,6 +1135,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundAttributePrefixStartsWith,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributePrefixStartsWith(
         string tagHelperDisplayName,
         string propertyDisplayName,
@@ -1102,6 +1160,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidTargetedTagNameNullOrWhitespace,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidTargetedTagNameNullOrWhitespace()
     {
         var diagnostic = RazorDiagnostic.Create(
@@ -1118,6 +1177,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidTargetedTagName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidTargetedTagName(
         string invalidTagName,
         char invalidCharacter
@@ -1139,6 +1199,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidTargetedParentTagNameNullOrWhitespace,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidTargetedParentTagNameNullOrWhitespace()
     {
         var diagnostic = RazorDiagnostic.Create(
@@ -1155,6 +1216,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidTargetedParentTagName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidTargetedParentTagName(
         string invalidTagName,
         char invalidCharacter
@@ -1176,6 +1238,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidTargetedAttributeNameNullOrWhitespace,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()
     {
         var diagnostic = RazorDiagnostic.Create(
@@ -1192,6 +1255,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidTargetedAttributeName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidTargetedAttributeName(
         string invalidAttributeName,
         char invalidCharacter
@@ -1213,6 +1277,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundAttributeParameterNullOrWhitespace,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(
         string attributeName
     )
@@ -1232,6 +1297,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundAttributeParameterName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundAttributeParameterName(
         string attributeName,
         string invalidName,
@@ -1255,6 +1321,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundDirectiveAttributeName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundDirectiveAttributeName(
         string tagHelperDisplayName,
         string propertyDisplayName,
@@ -1278,6 +1345,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidBoundDirectiveAttributePrefix,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidBoundDirectiveAttributePrefix(
         string tagHelperDisplayName,
         string propertyDisplayName,
@@ -1301,6 +1369,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.TagHelper_InvalidRequiredDirectiveAttributeName,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateTagHelper_InvalidRequiredDirectiveAttributeName(
         string propertyDisplayName,
         string invalidName
@@ -1315,7 +1384,6 @@ internal static class RazorDiagnosticFactory
 
         return diagnostic;
     }
-
     #endregion
 
     #region Rewriter Errors
@@ -1328,11 +1396,11 @@ internal static class RazorDiagnosticFactory
             () => Resources.Rewriter_InsufficientStack,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateRewriter_InsufficientStack(SourceSpan location)
     {
         return RazorDiagnostic.Create(Rewriter_InsufficientStack, location);
     }
-
     #endregion
 
     #region "CSS Rewriter Errors"
@@ -1345,6 +1413,7 @@ internal static class RazorDiagnosticFactory
             () => Resources.CssRewriter_ImportNotAllowed,
             RazorDiagnosticSeverity.Error
         );
+
     public static RazorDiagnostic CreateCssRewriting_ImportNotAllowed(SourceSpan location)
     {
         return RazorDiagnostic.Create(CssRewriting_ImportNotAllowed, location);

@@ -67,7 +67,6 @@ internal class ResponseBodyReaderStream : Stream
         int count,
         CancellationToken cancellationToken
     ) => throw new NotSupportedException();
-
     #endregion NotSupported
 
     public override int Read(byte[] buffer, int offset, int count)

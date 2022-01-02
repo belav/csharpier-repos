@@ -108,7 +108,6 @@ namespace Roslyn.Utilities
 
             _pool?.Free(this);
         }
-
         #endregion // Poolable
 
         internal string Add(char[] chars, int start, int len)

@@ -301,6 +301,7 @@ namespace System.Net.Sockets
         // do not provide these config options, so SupportsIPvX === OSSupportsIPvX.
         [Obsolete("SupportsIPv4 has been deprecated. Use OSSupportsIPv4 instead.")]
         public static bool SupportsIPv4 => OSSupportsIPv4;
+
         [Obsolete("SupportsIPv6 has been deprecated. Use OSSupportsIPv6 instead.")]
         public static bool SupportsIPv6 => OSSupportsIPv6;
 

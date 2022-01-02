@@ -210,6 +210,7 @@ namespace Moq.Tests
         }
 
         public interface A { }
+
         public interface B : A { }
 
         public class Service : IService

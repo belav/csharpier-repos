@@ -133,7 +133,6 @@ namespace System.PrivateUri.Tests
             Assert.Equal(expectedEscaped, output);
             Assert.Equal(input, Uri.UnescapeDataString(output));
         }
-
         #endregion EscapeDataString
 
         #region UnescapeDataString
@@ -219,7 +218,6 @@ namespace System.PrivateUri.Tests
                 Assert.Equal(output, Uri.UnescapeDataString(escapedInput)); // Same normalized result expected in different locales.
             }
         }
-
         #endregion UnescapeDataString
 
         #region EscapeUriString
@@ -333,7 +331,6 @@ namespace System.PrivateUri.Tests
         {
             Assert.Equal(expectedEscaped, Uri.EscapeUriString(input));
         }
-
         #endregion EscapeUriString
 
         #region AbsoluteUri escaping
@@ -534,7 +531,6 @@ namespace System.PrivateUri.Tests
 
             Assert.Equal(uriCtor1.AbsoluteUri, uriCtor3.AbsoluteUri); // Uri(string) is not producing the same result as Uri(Uri, Uri).
         }
-
         #endregion AbsoluteUri escaping
 
         #region FileUri escaping
@@ -636,7 +632,6 @@ namespace System.PrivateUri.Tests
             Assert.Equal(string.Empty, testUri.Query);
             Assert.Equal(string.Empty, testUri.Fragment);
         }
-
         #endregion FileUri escaping
 
         #region Invalid escape sequences
@@ -789,7 +784,6 @@ namespace System.PrivateUri.Tests
                 Assert.Equal(output, Uri.UnescapeDataString(input));
             }
         }
-
         #endregion Invalid escape sequences
 
         #region Helpers
