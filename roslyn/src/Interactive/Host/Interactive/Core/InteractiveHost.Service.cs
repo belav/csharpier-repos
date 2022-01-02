@@ -308,7 +308,6 @@ namespace Microsoft.CodeAnalysis.Interactive
                 // the client can instantiate interactive host now:
                 s_clientExited.Wait();
             }
-
             #endregion
 
             #region Remote Async Entry Points
@@ -631,7 +630,6 @@ namespace Microsoft.CodeAnalysis.Interactive
                 Debug.Fail("Unexpected error");
                 Debug.WriteLine(e);
             }
-
             #endregion
 
             #region Operations
@@ -1079,7 +1077,6 @@ namespace Microsoft.CodeAnalysis.Interactive
                     );
                 }
             }
-
             #endregion
 
             #region Testing

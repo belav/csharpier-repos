@@ -274,7 +274,6 @@ public class MulticastDelegateEquals
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -492,7 +491,6 @@ public class MulticastDelegateEquals
 
         return retVal;
     }
-
     #endregion
     #endregion
 

@@ -103,7 +103,6 @@ namespace System.Speech.Internal
                 offset += read;
             }
         }
-
         #endregion
 
         #region Internal fields

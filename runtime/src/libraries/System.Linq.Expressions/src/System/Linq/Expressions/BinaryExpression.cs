@@ -645,7 +645,6 @@ namespace System.Linq.Expressions
             }
             return new AssignBinaryExpression(left, right);
         }
-
         #endregion
 
         private static BinaryExpression? GetUserDefinedBinaryOperator(
@@ -1406,7 +1405,6 @@ namespace System.Linq.Expressions
             }
             throw Error.BinaryOperatorNotDefined(binaryType, left.Type, right.Type);
         }
-
         #endregion
 
         #region Comparison Expressions
@@ -1633,7 +1631,6 @@ namespace System.Linq.Expressions
             }
             return GetUserDefinedBinaryOperatorOrThrow(binaryType, opName, left, right, liftToNull);
         }
-
         #endregion
 
         #region Boolean Expressions
@@ -1835,7 +1832,6 @@ namespace System.Linq.Expressions
                 method
             );
         }
-
         #endregion
 
         #region Coalescing Expressions
@@ -1947,7 +1943,6 @@ namespace System.Linq.Expressions
                 throw Error.ArgumentTypesMustMatch();
             }
         }
-
         #endregion
 
         #region Arithmetic Expressions
@@ -3994,7 +3989,6 @@ namespace System.Linq.Expressions
                 liftToNull: true
             );
         }
-
         #endregion
 
         #region ArrayIndex Expression

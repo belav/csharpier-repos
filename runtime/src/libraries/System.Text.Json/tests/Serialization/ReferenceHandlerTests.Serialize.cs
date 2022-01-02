@@ -111,7 +111,6 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Equal(expected, actual);
         }
-
         #endregion struct tests
 
         #region Encode JSON property with leading '$'
@@ -165,7 +164,6 @@ namespace System.Text.Json.Serialization.Tests
             //Extend the scenarios to also cover CLR and F# properties with a leading $.
             //Also add scenarios where a NamingPolicy (DictionaryKey or Property) appends the leading $.
         }
-
         #endregion
 
         private class ClassWithListAndImmutableArray

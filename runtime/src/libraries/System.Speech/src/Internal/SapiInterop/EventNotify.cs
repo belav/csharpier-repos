@@ -48,7 +48,6 @@ namespace System.Speech.Internal.SapiInterop
             _notifySink = new SpNotifySink(this);
             sapiEventSource.SetNotifySink(_notifySink);
         }
-
         #endregion Constructors
 
         #region Internal Methods
@@ -106,7 +105,6 @@ namespace System.Speech.Internal.SapiInterop
                 }
             }
         }
-
         #endregion Methods
 
         #region Internal Properties
@@ -115,7 +113,6 @@ namespace System.Speech.Internal.SapiInterop
         {
             set { _audioFormat = value; }
         }
-
         #endregion Methods
 
         #region Private Methods

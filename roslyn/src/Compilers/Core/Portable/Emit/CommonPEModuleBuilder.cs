@@ -1258,7 +1258,6 @@ namespace Microsoft.CodeAnalysis.Emit
 
             return builder.ToImmutable();
         }
-
         #endregion
 
         #region Token Mapping
@@ -1298,7 +1297,6 @@ namespace Microsoft.CodeAnalysis.Emit
                 return result;
             }
         }
-
         #endregion
 
         #region Private Implementation Details Type
@@ -1348,7 +1346,6 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             get { return true; }
         }
-
         #endregion
 
         public sealed override Cci.ITypeReference GetPlatformType(

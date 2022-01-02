@@ -65,7 +65,6 @@ namespace System.IO.Packaging
             _selectionCriteria = selectionCriteria;
             _selectorType = selectorType;
         }
-
         #endregion Public Constructor
 
         #region Public Properties
@@ -96,7 +95,6 @@ namespace System.IO.Packaging
         {
             get { return _selectionCriteria; }
         }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -169,7 +167,6 @@ namespace System.IO.Packaging
 
             return relationships;
         }
-
         #endregion Public Methods
 
         #region Private Members

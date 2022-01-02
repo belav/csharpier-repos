@@ -32,7 +32,6 @@ namespace System.Speech.Recognition
         {
             Dispose(false);
         }
-
         #endregion
 
         #region Internal Methods
@@ -198,7 +197,6 @@ namespace System.Speech.Recognition
             // At the moment there's no way to delete all RecoGrammars in SAPI without individually releasing each one.
             // If there was such a mechanism it might be faster than looping through every Grammar.
         }
-
         #endregion
 
         #region IRecognizerInternal implementation
@@ -341,7 +339,6 @@ namespace System.Speech.Recognition
             SapiGrammar sapiGrammar = grammar.InternalData._sapiGrammar;
             sapiGrammar.SetWordSequenceData(textString, selectionInfo);
         }
-
         #endregion
         internal RecognitionResult EmulateRecognize(string inputText)
         {
@@ -1039,7 +1036,6 @@ namespace System.Speech.Recognition
                     return exReturn;
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -1370,7 +1366,6 @@ namespace System.Speech.Recognition
                 }
             }
         }
-
         #endregion
 
         #region Internal Events
@@ -1469,7 +1464,6 @@ namespace System.Speech.Recognition
 
 #pragma warning restore 6504
         internal event EventHandler<RecognizerUpdateReachedEventArgs> RecognizerUpdateReached;
-
         #endregion
 
         #region Protected Methods
@@ -1527,7 +1521,6 @@ namespace System.Speech.Recognition
                 }
             }
         }
-
         #endregion
 
         #region Private Properties
@@ -1562,7 +1555,6 @@ namespace System.Speech.Recognition
             }
 #pragma warning restore 6503
         }
-
         #endregion
 
         #region Private Methods
@@ -1770,7 +1762,6 @@ namespace System.Speech.Recognition
         /// Unused
         /// </summary>
         void ISpGrammarResourceLoader.ReleaseLocalCopy(string path) { }
-
         #endregion
 
         // Actually load the stream into the sapiGrammar. This does not touch the Grammar object or InternalGrammarData.
@@ -3426,7 +3417,6 @@ namespace System.Speech.Recognition
                 throw new NotSupportedException(SR.Get(messageId));
             }
         }
-
         #endregion
 
         #region Private Fields
@@ -3517,7 +3507,6 @@ namespace System.Speech.Recognition
         private TimeSpan _defaultTimeout = TimeSpan.FromSeconds(30);
 
         private RecognizerBaseThunk _recoThunk;
-
         #endregion
 
         private sealed class RecognizerBaseThunk : ISpGrammarResourceLoader
@@ -3608,7 +3597,6 @@ namespace System.Speech.Recognition
             _grammarWeight = weight;
             _grammarPriority = priority;
         }
-
         #endregion
 
         #region Internal Fields

@@ -34,7 +34,6 @@ namespace System.ComponentModel.DataAnnotations
         private Type? _errorMessageResourceType;
         private volatile bool _hasBaseIsValid;
         private string? _defaultErrorMessage;
-
         #endregion
 
         #region All Constructors
@@ -66,7 +65,6 @@ namespace System.ComponentModel.DataAnnotations
             // If null, will later be exposed as lack of error message to be able to construct accessor
             _errorMessageResourceAccessor = errorMessageAccessor;
         }
-
         #endregion
 
         #region Internal Properties
@@ -86,7 +84,6 @@ namespace System.ComponentModel.DataAnnotations
                 CustomErrorMessageSet = true;
             }
         }
-
         #endregion
 
         #region Protected Properties
@@ -116,7 +113,6 @@ namespace System.ComponentModel.DataAnnotations
         ///     Base class returns false. Override in child classes as appropriate.
         /// </summary>
         public virtual bool RequiresValidationContext => false;
-
         #endregion
 
         #region Public Properties
@@ -190,7 +186,6 @@ namespace System.ComponentModel.DataAnnotations
                 CustomErrorMessageSet = true;
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -297,7 +292,6 @@ namespace System.ComponentModel.DataAnnotations
 
             _errorMessageResourceAccessor = () => (string)property.GetValue(null, null)!;
         }
-
         #endregion
 
         #region Protected & Public Methods

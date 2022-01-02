@@ -75,7 +75,6 @@ namespace System.Drawing.Printing
         }
 
         internal static string DefaultPrinter => EnsurePrintersInitialized().Item1;
-
         #endregion
 
 
@@ -862,7 +861,6 @@ namespace System.Drawing.Printing
 
             return PaperKind.Custom;
         }
-
         #endregion
 
         #region Print job methods

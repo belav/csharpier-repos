@@ -1192,7 +1192,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 builder.Append(" COLLATE ").Append(operation.Collation);
             }
         }
-
         #endregion
 
         #region Ignored schema operations
@@ -1220,7 +1219,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder
         ) { }
-
         #endregion
 
         #region Sequences not supported
@@ -1284,7 +1282,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             MigrationCommandListBuilder builder
         ) => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
-
         #endregion
 
         private sealed class RebuildContext

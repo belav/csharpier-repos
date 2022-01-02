@@ -100,7 +100,6 @@ public class TypeGetHashCode
         }
         return retVal;
     }
-
     #endregion
     #region ForTestClass
     public class testClass : Object

@@ -2228,7 +2228,6 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
         }
-
         #endregion
 
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>

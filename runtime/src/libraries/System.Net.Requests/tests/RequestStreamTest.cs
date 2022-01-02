@@ -87,7 +87,6 @@ namespace System.Net.Tests
                 }
             );
         }
-
 #endregion
 
         #region WriteAsync
@@ -204,7 +203,6 @@ namespace System.Net.Tests
                 }
             );
         }
-
         #endregion
 
         #region BeginWrite
@@ -294,7 +292,6 @@ namespace System.Net.Tests
                 }
             );
         }
-
         #endregion
 
         [Fact]

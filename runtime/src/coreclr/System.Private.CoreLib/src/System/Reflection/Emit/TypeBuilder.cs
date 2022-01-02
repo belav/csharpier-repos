@@ -64,7 +64,6 @@ namespace System.Reflection.Emit
                 }
             }
         }
-
         #endregion
 
         #region Public Static Methods
@@ -175,12 +174,10 @@ namespace System.Reflection.Emit
 
             return FieldOnTypeBuilderInstantiation.GetField(field, typeBuilderInstantiation);
         }
-
         #endregion
 
         #region Public Const
         public const int UnspecifiedTypeSize = 0;
-
         #endregion
 
         #region Private Static FCalls
@@ -193,7 +190,6 @@ namespace System.Reflection.Emit
             int tdTypeDef,
             int tkInterface
         );
-
         #endregion
 
         #region Internal Static FCalls
@@ -387,7 +383,6 @@ namespace System.Reflection.Emit
             int token,
             int linkFlags
         );
-
         #endregion
         #region Internal\Private Static Members
 
@@ -585,7 +580,6 @@ namespace System.Reflection.Emit
                 );
             }
         }
-
         #endregion
 
         #region Private Data Members
@@ -622,7 +616,6 @@ namespace System.Reflection.Emit
         private readonly bool m_bIsGenParam;
         private readonly MethodBuilder? m_declMeth;
         private readonly TypeBuilder? m_genTypeDef;
-
         #endregion
 
         #region Constructor
@@ -776,7 +769,6 @@ namespace System.Reflection.Emit
 
             m_module.AddType(FullName!, this);
         }
-
         #endregion
         #region Private Members
         private FieldBuilder DefineDataHelper(
@@ -887,7 +879,6 @@ namespace System.Reflection.Emit
         {
             return m_hasBeenCreated;
         }
-
         #endregion
 
         #region FCalls
@@ -925,7 +916,6 @@ namespace System.Reflection.Emit
             int tk,
             ObjectHandleOnStack type
         );
-
         #endregion
 
         #region Internal Methods
@@ -974,7 +964,6 @@ namespace System.Reflection.Emit
             m_ca ??= new List<TypeBuilder.CustAttr>();
             m_ca.Add(ca);
         }
-
         #endregion
 
         #region Object Overrides
@@ -982,7 +971,6 @@ namespace System.Reflection.Emit
         {
             return TypeNameBuilder.ToString(this, TypeNameBuilder.Format.ToString)!;
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -999,7 +987,6 @@ namespace System.Reflection.Emit
         public override bool IsByRefLike => false;
 
         public override int MetadataToken => m_tdType;
-
         #endregion
 
         #region Type Overrides
@@ -1477,7 +1464,6 @@ namespace System.Reflection.Emit
             string s = GetRankString(rank);
             return SymbolType.FormCompoundType(s, this, 0)!;
         }
-
         #endregion
 
         #region ICustomAttributeProvider Implementation
@@ -1524,7 +1510,6 @@ namespace System.Reflection.Emit
 
             return CustomAttribute.IsDefined(m_bakedRuntimeType, attributeRuntimeType, inherit);
         }
-
         #endregion
 
         #region Public Member
@@ -1596,7 +1581,6 @@ namespace System.Reflection.Emit
                 throw new InvalidOperationException();
             return m_genTypeDef;
         }
-
         #endregion
 
         #region Define Method
@@ -2035,7 +2019,6 @@ namespace System.Reflection.Emit
                 return method;
             }
         }
-
         #endregion
 
         #region Define Constructor
@@ -2255,7 +2238,6 @@ namespace System.Reflection.Emit
 
             return constBuilder;
         }
-
         #endregion
 
         #region Define Nested Type
@@ -2406,7 +2388,6 @@ namespace System.Reflection.Emit
                 this
             );
         }
-
         #endregion
 
         #region Define Field
@@ -2517,7 +2498,6 @@ namespace System.Reflection.Emit
             // will be the signature for the Field.
             return DefineDataHelper(name, null, size, attributes);
         }
-
         #endregion
 
         #region Define Properties and Events
@@ -2726,7 +2706,6 @@ namespace System.Reflection.Emit
                 evToken
             );
         }
-
         #endregion
 
         #region Create Type
@@ -2985,7 +2964,6 @@ namespace System.Reflection.Emit
                 return null;
             }
         }
-
         #endregion
 
         #region Misc

@@ -39,7 +39,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             _text = text.Trim(Helpers._achTrimChars);
             Helpers.ThrowIfEmptyOrNull(_text, nameof(text));
         }
-
         #endregion
 
         #region public Properties
@@ -73,7 +72,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _text = value;
             }
         }
-
         #endregion
 
         #region Internal methods
@@ -127,7 +125,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             return _text + " [" + _matchMode.ToString() + "]";
         }
-
         #endregion
 
         #region Private Fields

@@ -50,7 +50,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Offices = new List<string> { "Auckland", "Wellington", "Christchurch" };
             }
         }
-
         #endregion
 
         [Test]

@@ -32,7 +32,6 @@ namespace System.IO.Tests
             Assert.False(File.Exists(srcPath));
             Assert.Equal(srcContents, File.ReadAllBytes(destPath));
         }
-
         #endregion
 
         #region UniversalTests
@@ -280,7 +279,6 @@ namespace System.IO.Tests
                 }
             );
         }
-
         #endregion
 
         #region PlatformSpecific
@@ -395,7 +393,6 @@ namespace System.IO.Tests
             string testFile2 = Path.Combine(testDirectory.FullName, GetTestFileName());
             Assert.Throws<IOException>(() => Move(testFileAlternateStream, testFile2));
         }
-
         #endregion
 
         [Fact]

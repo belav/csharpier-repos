@@ -2607,7 +2607,6 @@ namespace TestNs1
                 )
                 .ConfigureAwait(false);
         }
-
         #endregion
 
         #region Selections and caret position
@@ -3068,7 +3067,6 @@ namespace TestNs1
 }";
             await TestNoRefactoringAsync(initialMarkup).ConfigureAwait(false);
         }
-
         #endregion
 
         private class Test : VerifyCS.Test

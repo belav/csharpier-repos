@@ -229,7 +229,6 @@ namespace System.IO.Ports.Tests
 
             VerifyException(int.MinValue, ThrowAt.Set, typeof(ArgumentOutOfRangeException));
         }
-
         #endregion
 
         #region Verification for Test Cases

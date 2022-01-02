@@ -23,7 +23,6 @@ namespace System.Speech.Internal.Synthesis
         {
             _resourceLoader = resourceLoader;
         }
-
         #endregion
 
         #region Internal Methods
@@ -194,7 +193,6 @@ namespace System.Speech.Internal.Synthesis
             }
             return null;
         }
-
         #endregion
 
         public void AddEvent(TTSEvent evt)
@@ -212,7 +210,6 @@ namespace System.Speech.Internal.Synthesis
                 _eventMapper.FlushEvent();
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -264,7 +261,6 @@ namespace System.Speech.Internal.Synthesis
             _defaultRate = defaultRate;
             _actions = SPVESACTIONS.SPVES_RATE | SPVESACTIONS.SPVES_VOLUME;
         }
-
         #endregion
 
         #region Private Members
@@ -315,7 +311,6 @@ namespace System.Speech.Internal.Synthesis
             }
             return ttsEvent;
         }
-
         #endregion
 
         #region private Fields

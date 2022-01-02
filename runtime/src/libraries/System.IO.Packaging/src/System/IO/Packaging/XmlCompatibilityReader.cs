@@ -684,7 +684,6 @@ namespace System.IO.Packaging
         {
             get { return Reader.AttributeCount - _ignoredAttributeCount; }
         }
-
         #endregion Public Properties
 
         #region Private Methods
@@ -1450,7 +1449,6 @@ namespace System.IO.Packaging
                 info == null ? 1 : info.LinePosition
             );
         }
-
         #endregion Private Methods
 
         #region Private Properties
@@ -1578,7 +1576,6 @@ namespace System.IO.Packaging
                 return _compatibilityUri;
             }
         }
-
         #endregion Private Properties
         #region Nested Classes
         private struct NamespaceElementPair
@@ -1977,7 +1974,6 @@ namespace System.IO.Packaging
                 }
             }
         }
-
         #endregion Nested Classes
 
         #region Private Fields

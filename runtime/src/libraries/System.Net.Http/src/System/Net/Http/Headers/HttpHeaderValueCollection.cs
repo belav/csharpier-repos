@@ -191,7 +191,6 @@ namespace System.Net.Http.Headers
                 }
             }
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -200,7 +199,6 @@ namespace System.Net.Http.Headers
         {
             return GetEnumerator();
         }
-
         #endregion
 
         public override string ToString()

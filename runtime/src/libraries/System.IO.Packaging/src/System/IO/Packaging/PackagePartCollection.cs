@@ -43,7 +43,6 @@ namespace System.IO.Packaging
             //The Dictionary.Values property always returns a collection, even if empty. It never returns a null.
             return _partList.Values.GetEnumerator();
         }
-
         #endregion Public Methods
 
         #region Internal Constructor
@@ -55,7 +54,6 @@ namespace System.IO.Packaging
             Debug.Assert(partList != null, "partDictionary parameter cannot be null");
             _partList = partList;
         }
-
         #endregion Internal Constructor
 
         #region Private Members

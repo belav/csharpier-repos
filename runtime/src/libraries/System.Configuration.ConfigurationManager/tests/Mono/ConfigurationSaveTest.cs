@@ -279,7 +279,6 @@ namespace MonoTests.System.Configuration
                 }
             );
         }
-
         #endregion
 
         #region Assertion Helpers
@@ -326,7 +325,6 @@ namespace MonoTests.System.Configuration
             label.LeaveScope();
             label.LeaveScope();
         }
-
         #endregion
 
         #region Tests
@@ -821,7 +819,6 @@ namespace MonoTests.System.Configuration
                 }
             );
         }
-
         #endregion
 
         #region Configuration Classes
@@ -861,7 +858,6 @@ namespace MonoTests.System.Configuration
             {
                 return ((T)element).GetHashCode();
             }
-
             #endregion
 
             public override ConfigurationElementCollectionType CollectionType

@@ -63,7 +63,6 @@ namespace System.Dynamic.Utils
             [ExcludeFromCodeCoverage(Justification = "Unreachable")]
             set { throw ContractUtils.Unreachable; }
         }
-
         #endregion
 
         #region ICollection<T> Members
@@ -114,7 +113,6 @@ namespace System.Dynamic.Utils
         {
             throw ContractUtils.Unreachable;
         }
-
         #endregion
 
         #region IEnumerable<T> Members
@@ -128,7 +126,6 @@ namespace System.Dynamic.Utils
                 yield return GetElement(i);
             }
         }
-
         #endregion
 
         #region IEnumerable Members

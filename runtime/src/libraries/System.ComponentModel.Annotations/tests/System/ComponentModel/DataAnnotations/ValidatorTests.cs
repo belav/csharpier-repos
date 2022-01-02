@@ -565,7 +565,6 @@ namespace System.ComponentModel.DataAnnotations.Tests
             [Required]
             public string Required { get; set; }
         }
-
         #endregion TryValidateObject
 
         #region ValidateObject
@@ -939,7 +938,6 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 exception.Message
             );
         }
-
         #endregion ValidateObject
 
         #region TryValidateProperty
@@ -1295,7 +1293,6 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     == "The SecondPropertyToBeTested field is not a valid phone number."
             );
         }
-
         #endregion TryValidateProperty
 
         #region ValidateProperty
@@ -1604,7 +1601,6 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
             Assert.Equal("Invalid Value", exception.Value);
         }
-
         #endregion ValidateProperty
 
         #region TryValidateValue
@@ -1843,7 +1839,6 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
             Assert.Equal(0, validationResults.Count);
         }
-
         #endregion TryValidateValue
 
         #region ValidateValue
@@ -1989,7 +1984,6 @@ namespace System.ComponentModel.DataAnnotations.Tests
             };
             Validator.ValidateValue("Valid Value", validationContext, attributesToValidate);
         }
-
         #endregion ValidateValue
 
         [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]

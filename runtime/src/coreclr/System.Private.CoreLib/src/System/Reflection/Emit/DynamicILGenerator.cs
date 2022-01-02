@@ -628,7 +628,6 @@ namespace System.Reflection.Emit
         private byte[] m_localSignature;
         private int m_stackSize;
         private DynamicScope m_scope;
-
         #endregion
 
         #region Internal Methods
@@ -931,7 +930,6 @@ namespace System.Reflection.Emit
         private byte[] m_localSignature;
         private int m_maxStackSize;
         private int m_methodSignature;
-
         #endregion
 
         #region Constructor
@@ -944,7 +942,6 @@ namespace System.Reflection.Emit
             m_code = Array.Empty<byte>();
             m_localSignature = Array.Empty<byte>();
         }
-
         #endregion
 
         #region Internal Methods
@@ -964,7 +961,6 @@ namespace System.Reflection.Emit
         internal byte[] Exceptions => m_exceptions;
         internal byte[] Code => m_code;
         internal int MaxStackSize => m_maxStackSize;
-
         #endregion
 
         #region Public ILGenerator Methods
@@ -1032,7 +1028,6 @@ namespace System.Reflection.Emit
 
             m_localSignature = new Span<byte>(localSignature, signatureSize).ToArray();
         }
-
         #endregion
 
         #region Public Scope Methods
@@ -1082,7 +1077,6 @@ namespace System.Reflection.Emit
     {
         #region Private Data Members
         internal readonly List<object?> m_tokens = new List<object?> { null };
-
         #endregion
 
         #region Internal Methods
@@ -1120,7 +1114,6 @@ namespace System.Reflection.Emit
 
             return vaMethod.m_signature.GetSignature(true);
         }
-
         #endregion
 
         #region Public Methods

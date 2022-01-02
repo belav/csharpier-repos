@@ -231,7 +231,6 @@ namespace System.Linq.Expressions
             }
             return Expression.Field(expression, fi);
         }
-
         #endregion
 
         #region Property
@@ -437,7 +436,6 @@ namespace System.Linq.Expressions
             }
             return false;
         }
-
         #endregion
 
         /// <summary>

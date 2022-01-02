@@ -654,7 +654,6 @@ namespace System.Threading.Tasks
         {
             return new ConfiguredTaskAwaitable<TResult>(this, continueOnCapturedContext);
         }
-
         #endregion
 
         #region WaitAsync methods
@@ -705,7 +704,6 @@ namespace System.Threading.Tasks
 
             return new CancellationPromise<TResult>(this, millisecondsTimeout, cancellationToken);
         }
-
         #endregion
 
         #region Continuation methods
@@ -929,7 +927,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         #region Action<Task<TResult>, Object> continuations
@@ -1169,7 +1166,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         #region Func<Task<TResult>,TNewResult> continuations
@@ -1427,7 +1423,6 @@ namespace System.Threading.Tasks
 
             return continuationFuture;
         }
-
         #endregion
 
         #region Func<Task<TResult>, Object,TNewResult> continuations

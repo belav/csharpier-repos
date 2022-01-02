@@ -94,7 +94,6 @@ Console.WriteLine(2);
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Statements
@@ -268,7 +267,6 @@ return (2, () => {
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Local Variables
@@ -679,7 +677,6 @@ ref int32 a = ref G1(new int[] { 1, 2 });
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Lambdas
@@ -1082,7 +1079,6 @@ F(a =>
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Local Functions
@@ -1439,7 +1435,6 @@ void G6(int a)
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region LINQ
@@ -1703,7 +1698,6 @@ var q = from a in await seq1
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Iterators
@@ -1746,7 +1740,6 @@ foreach (var x in y) { yield return /*3*/ 2; }
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Constructors
@@ -1803,7 +1796,6 @@ foreach (var x in y) { yield return /*3*/ 2; }
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Exception Handlers
@@ -1861,7 +1853,6 @@ catch (Exception e) when (filter(e)) { Console.WriteLine(30); }
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Foreach
@@ -2016,7 +2007,6 @@ foreach ((var b7, var b9) in e) { A2(); }
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Patterns
@@ -2457,7 +2447,6 @@ switch(shape)
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Switch Expression
@@ -2540,7 +2529,6 @@ switch(shape)
 
             expected.AssertEqual(actual);
         }
-
         #endregion
 
         #region Top Level Statements

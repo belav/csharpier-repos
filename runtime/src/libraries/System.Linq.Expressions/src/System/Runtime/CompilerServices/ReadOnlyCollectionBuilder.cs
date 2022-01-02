@@ -184,7 +184,6 @@ namespace System.Runtime.CompilerServices
                 _version++;
             }
         }
-
         #endregion
 
         #region ICollection<T> Members
@@ -279,7 +278,6 @@ namespace System.Runtime.CompilerServices
 
             return false;
         }
-
         #endregion
 
         #region IEnumerable<T> Members
@@ -289,13 +287,11 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         /// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.</returns>
         public IEnumerator<T> GetEnumerator() => new Enumerator(this);
-
         #endregion
 
         #region IEnumerable Members
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         #region IList Members
@@ -375,7 +371,6 @@ namespace System.Runtime.CompilerServices
                 }
             }
         }
-
         #endregion
 
         #region ICollection Members
@@ -393,7 +388,6 @@ namespace System.Runtime.CompilerServices
         bool ICollection.IsSynchronized => false;
 
         object ICollection.SyncRoot => this;
-
         #endregion
 
         /// <summary>
@@ -505,13 +499,11 @@ namespace System.Runtime.CompilerServices
             #region IEnumerator<T> Members
 
             public T Current => _current;
-
             #endregion
 
             #region IDisposable Members
 
             public void Dispose() { }
-
             #endregion
 
             #region IEnumerator Members
@@ -549,7 +541,6 @@ namespace System.Runtime.CompilerServices
                     throw Error.CollectionModifiedWhileEnumerating();
                 }
             }
-
             #endregion
 
             #region IEnumerator Members

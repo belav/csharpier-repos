@@ -329,7 +329,6 @@ namespace System.IO.Ports.Tests
                 Assert.Equal(msg, bytes);
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

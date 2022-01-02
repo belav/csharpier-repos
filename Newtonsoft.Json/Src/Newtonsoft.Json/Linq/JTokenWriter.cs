@@ -484,7 +484,6 @@ namespace Newtonsoft.Json.Linq
             base.WriteValue(value);
             AddValue(value, JsonToken.String);
         }
-
         #endregion
 
         internal override void WriteToken(

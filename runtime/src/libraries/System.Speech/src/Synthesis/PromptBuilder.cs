@@ -31,7 +31,6 @@ namespace System.Speech.Synthesis
             // Reset all value to default
             ClearContent();
         }
-
         #endregion
 
         #region Public Methods
@@ -891,7 +890,6 @@ namespace System.Speech.Synthesis
                 }
             }
         }
-
         #endregion
 
         #region public Properties
@@ -912,7 +910,6 @@ namespace System.Speech.Synthesis
                 _culture = value;
             }
         }
-
         #endregion
 
         #region Internal Enums
@@ -927,7 +924,6 @@ namespace System.Speech.Synthesis
             Voice = 32,
             Ended = 64
         }
-
         #endregion
 
         #region Protected Methods
@@ -1066,7 +1062,6 @@ namespace System.Speech.Synthesis
                 _elements.Add(new Element(ElementType.SsmlMarkup, sw.ToString()));
             }
         }
-
         #endregion
 
         #region Private Fields
@@ -1084,7 +1079,6 @@ namespace System.Speech.Synthesis
         private static ResourceLoader s_resourceLoader = new();
 
         private const string _xmlnsDefault = @"http://www.w3.org/2001/10/synthesis";
-
         #endregion
 
         #region Private Type

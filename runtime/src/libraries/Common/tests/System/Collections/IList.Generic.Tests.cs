@@ -92,7 +92,6 @@ namespace System.Collections.Tests
                 };
             }
         }
-
         #endregion
 
         #region ICollection<T> Helper Methods
@@ -106,7 +105,6 @@ namespace System.Collections.Tests
 
         protected virtual Type IList_Generic_Item_InvalidIndex_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         #region Item Getter
@@ -137,7 +135,6 @@ namespace System.Collections.Tests
             T result;
             Assert.All(Enumerable.Range(0, count), index => result = list[index]);
         }
-
         #endregion
 
         #region Item Setter
@@ -291,7 +288,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region IndexOf
@@ -413,7 +409,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region Insert
@@ -557,7 +552,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region RemoveAt
@@ -642,7 +636,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region Enumerator.Current

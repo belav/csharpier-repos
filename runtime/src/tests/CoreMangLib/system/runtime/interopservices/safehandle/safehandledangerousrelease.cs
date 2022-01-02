@@ -324,7 +324,6 @@ public class SafeHandleDangerousRelease
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -405,7 +404,6 @@ public class SafeHandleDangerousRelease
 
         return retVal;
     }
-
     #endregion
     #endregion
 

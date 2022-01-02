@@ -282,7 +282,6 @@ namespace System.Xml.Schema
             get { return _positions.Count; }
         }
     }
-
     #endregion
 
     #region SystaxTree
@@ -1019,7 +1018,6 @@ namespace System.Xml.Schema
             }
         }
     }
-
     #endregion
 
     #region ContentValidator

@@ -165,7 +165,6 @@ namespace System.Reflection
 
             return sbName.ToString();
         }
-
         #endregion
 
         private void CachePropertyInfo(PInfo flags)

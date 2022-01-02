@@ -519,7 +519,6 @@ namespace Newtonsoft.Json.Bson
             base.WriteValue(value);
             AddToken(new BsonString(value.ToString(), true));
         }
-
         #endregion
 
         /// <summary>

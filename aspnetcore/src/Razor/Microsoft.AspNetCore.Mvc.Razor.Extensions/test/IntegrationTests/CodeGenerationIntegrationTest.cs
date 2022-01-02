@@ -750,7 +750,6 @@ public class FormTagHelper : {typeof(TagHelper).FullName}
         AssertCSharpDocumentMatchesBaseline(csharp);
         CompileToAssembly(generated);
     }
-
     #endregion
 
     #region DesignTime

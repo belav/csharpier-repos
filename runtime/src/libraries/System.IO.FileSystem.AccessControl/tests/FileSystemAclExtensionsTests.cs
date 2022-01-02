@@ -127,7 +127,6 @@ namespace System.IO
             Assert.NotNull(fileSecurity);
             Assert.Equal(typeof(FileSystemRights), fileSecurity.AccessRightType);
         }
-
         #endregion
 
         #region SetAccessControl
@@ -214,7 +213,6 @@ namespace System.IO
             var fileSecurity = new FileSecurity();
             FileSystemAclExtensions.SetAccessControl(fileStream, fileSecurity);
         }
-
         #endregion
 
         #region DirectoryInfo Create
@@ -349,7 +347,6 @@ namespace System.IO
             );
             VerifyAccessSecurity(expectedSecurity, actualSecurity);
         }
-
         #endregion
 
         #region FileInfo Create
@@ -623,7 +620,6 @@ namespace System.IO
             FileSecurity actualSecurity = actualInfo.GetAccessControl(AccessControlSections.Access);
             VerifyAccessSecurity(expectedSecurity, actualSecurity);
         }
-
         #endregion
 
         #region DirectorySecurity CreateDirectory
@@ -674,7 +670,6 @@ namespace System.IO
             );
             VerifyAccessSecurity(expectedSecurity, actualSecurity);
         }
-
         #endregion
 
         #endregion

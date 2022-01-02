@@ -13,7 +13,6 @@ namespace System.IO.Tests
         {
             Directory.Move(sourceDir, destDir);
         }
-
         #endregion
 
         #region UniversalTests
@@ -312,7 +311,6 @@ namespace System.IO.Tests
             var firstFile = Directory.GetDirectories(fooDirectoryPathUpperCase);
             Assert.Equal("bar", Path.GetFileName(firstFile[0]));
         }
-
         #endregion
 
         #region PlatformSpecific

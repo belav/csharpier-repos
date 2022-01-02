@@ -10,7 +10,6 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Constructors
 
         internal GrammarBuilderWildcard() { }
-
         #endregion
 
         #region Public Methods
@@ -24,7 +23,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             return base.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -48,7 +46,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
             return ruleRef;
         }
-
         #endregion
 
         #region Internal Properties

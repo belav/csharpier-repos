@@ -2216,7 +2216,6 @@ namespace Newtonsoft.Json.Linq
         {
             return new JValue(value);
         }
-
         #endregion
 
         IEnumerator IEnumerable.GetEnumerator()

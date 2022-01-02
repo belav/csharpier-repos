@@ -21,7 +21,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             Text = text;
         }
-
         #endregion
 
         #region public Properties
@@ -37,7 +36,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _text = value;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -55,7 +53,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             return "'" + _text + "'";
         }
-
         #endregion
 
         #region Private Fields

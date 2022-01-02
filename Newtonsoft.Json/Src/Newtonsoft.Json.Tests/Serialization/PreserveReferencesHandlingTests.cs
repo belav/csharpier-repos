@@ -1166,7 +1166,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             [JsonProperty]
             public User Friend { get; set; }
-
             #endregion
 
             #region constructors
@@ -1177,7 +1176,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Login = login;
                 SecretType = secretType;
             }
-
             #endregion
 
             #region methods

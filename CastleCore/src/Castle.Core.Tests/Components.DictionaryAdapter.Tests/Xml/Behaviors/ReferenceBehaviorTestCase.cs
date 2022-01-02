@@ -459,7 +459,6 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                     xml
                 );
             }
-
 			#endregion
 
             [Test]

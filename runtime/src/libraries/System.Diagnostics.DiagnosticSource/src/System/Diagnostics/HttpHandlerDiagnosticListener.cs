@@ -562,7 +562,6 @@ namespace System.Diagnostics
                 base.RemoveAt(index);
             }
         }
-
         #endregion
 
         #region private methods
@@ -858,7 +857,6 @@ namespace System.Diagnostics
 
             return null;
         }
-
         #endregion
 
         internal static HttpHandlerDiagnosticListener s_instance =

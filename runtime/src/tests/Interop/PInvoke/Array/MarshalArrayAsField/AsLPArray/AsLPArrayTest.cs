@@ -218,7 +218,6 @@ class Test
 
         return array;
     }
-
     #endregion
 
     static void RunTest1(string report)

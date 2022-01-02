@@ -18,9 +18,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+
 #if (IndividualLocalAuth)
 using ComponentsWebAssembly_CSharp.Server.Data;
 using ComponentsWebAssembly_CSharp.Server.Models;
+
 #endif
 #if (GenerateGraph)
 using Microsoft.Graph;

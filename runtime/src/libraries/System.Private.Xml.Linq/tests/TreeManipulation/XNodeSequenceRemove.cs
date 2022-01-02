@@ -21,7 +21,6 @@ namespace XLinqTests
 
         private EventsHelper _eHelper;
         private bool _runWithEvents;
-
         #endregion
 
         #region Public Methods and Operators
@@ -1081,7 +1080,6 @@ namespace XLinqTests
                 _eHelper.Verify(XObjectChange.Remove, count);
             }
         }
-
         #endregion
 
         //[Variation(Priority = 2, Desc = "XElement.AncestorsAndSelf(XName) I.", Param = true)]

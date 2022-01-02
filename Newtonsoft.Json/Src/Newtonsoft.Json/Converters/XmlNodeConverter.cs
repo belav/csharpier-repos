@@ -1538,7 +1538,6 @@ namespace Newtonsoft.Json.Converters
             }
             return true;
         }
-
 #endregion
 
         #region Reading
@@ -2483,7 +2482,6 @@ namespace Newtonsoft.Json.Converters
 
             return false;
         }
-
 #endregion
 
         /// <summary>

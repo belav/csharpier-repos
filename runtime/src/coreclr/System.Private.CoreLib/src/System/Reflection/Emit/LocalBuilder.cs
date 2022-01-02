@@ -10,7 +10,6 @@ namespace System.Reflection.Emit
         private Type m_localType;
         private MethodInfo m_methodBuilder;
         private bool m_isPinned;
-
         #endregion
 
         #region Constructor
@@ -29,7 +28,6 @@ namespace System.Reflection.Emit
             m_localType = localType;
             m_methodBuilder = methodBuilder;
         }
-
         #endregion
 
         #region Internal Members
@@ -42,7 +40,6 @@ namespace System.Reflection.Emit
         {
             return m_methodBuilder;
         }
-
         #endregion
 
         #region LocalVariableInfo Override

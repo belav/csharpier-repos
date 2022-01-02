@@ -642,7 +642,6 @@ internal static partial class Interop
         {
             return Ssl.SslGetPeerCertChain(context);
         }
-
         #endregion
 
         #region private methods
@@ -855,7 +854,6 @@ internal static partial class Interop
             );
             return new SslException(msg, (int)errorVal);
         }
-
         #endregion
 
         #region Internal class

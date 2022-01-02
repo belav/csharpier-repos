@@ -520,7 +520,6 @@ namespace System.Diagnostics
                 _false = false;
             }
         }
-
         #endregion
 
 
@@ -1930,7 +1929,6 @@ namespace System.Diagnostics
             public IDisposable Subscription;
             public Subscriptions? Next;
         }
-
         #endregion
 
         private FilterAndTransform? _specs; // Transformation specifications that indicate which sources/events are forwarded.

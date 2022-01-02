@@ -850,7 +850,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _workspace.QueueCheckForFilesBeingOpen(documentFileNamesAdded.ToImmutable());
             }
         }
-
         #endregion
 
         #region Source File Addition/Removal
@@ -895,7 +894,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         public void RemoveSourceTextContainer(SourceTextContainer textContainer) =>
             _sourceFiles.RemoveTextContainer(textContainer);
-
         #endregion
 
         #region Additional File Addition/Removal
@@ -910,7 +908,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             _additionalFiles.ContainsFile(fullPath);
 
         public void RemoveAdditionalFile(string fullPath) => _additionalFiles.RemoveFile(fullPath);
-
         #endregion
 
         #region Analyzer Config File Addition/Removal
@@ -926,7 +923,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         public void RemoveAnalyzerConfigFile(string fullPath) =>
             _analyzerConfigFiles.RemoveFile(fullPath);
-
         #endregion
 
         #region Non Source File Addition/Removal
@@ -1085,7 +1081,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _sourceFiles.ProcessFileChange(dynamicFilePath, fileInfoPath);
             }
         }
-
         #endregion
 
         #region Analyzer Addition/Removal
@@ -1157,7 +1152,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             }
         }
-
         #endregion
 
         private void DocumentFileChangeContext_FileChanged(object sender, string fullFilePath)
@@ -1335,7 +1329,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             }
         }
-
         #endregion
 
         #region Project Reference Addition/Removal
@@ -1457,7 +1450,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             }
         }
-
         #endregion
 
         public void RemoveFromWorkspace()

@@ -43,7 +43,6 @@ namespace XLinqTests
             SingleAndArray,
             IEnumerable
         };
-
         #endregion
 
         #region Public Methods and Operators
@@ -425,7 +424,6 @@ namespace XLinqTests
                 e.Verify();
             }
         }
-
         #endregion
 
         #region Methods

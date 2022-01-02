@@ -492,7 +492,6 @@ namespace System.Diagnostics
             private AllListenerSubscription? _subscriptions;
             #endregion
         }
-
         #endregion
 
         private IDisposable SubscribeInternal(

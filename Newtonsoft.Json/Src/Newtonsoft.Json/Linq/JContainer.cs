@@ -1069,7 +1069,6 @@ namespace Newtonsoft.Json.Linq
             get => GetItem(index);
             set => SetItem(index, value);
         }
-
         #endregion
 
         #region ICollection<JToken> Members
@@ -1099,7 +1098,6 @@ namespace Newtonsoft.Json.Linq
         {
             return RemoveItem(item);
         }
-
         #endregion
 
         private JToken? EnsureValue(object value)
@@ -1163,7 +1161,6 @@ namespace Newtonsoft.Json.Linq
             get => GetItem(index);
             set => SetItem(index, EnsureValue(value));
         }
-
         #endregion
 
         #region ICollection Members

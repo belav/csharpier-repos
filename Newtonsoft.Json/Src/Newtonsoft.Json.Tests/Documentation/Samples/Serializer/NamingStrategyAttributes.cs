@@ -51,7 +51,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
             public int SnakeRating { get; set; }
         }
-
         #endregion
 
         [Test]

@@ -129,7 +129,6 @@ namespace System.Speech.Synthesis
             _age = age;
             _variant = voiceAlternate + 1;
         }
-
         #endregion
 
         #region public Methods
@@ -160,7 +159,6 @@ namespace System.Speech.Synthesis
         {
             return _name.GetHashCode();
         }
-
         #endregion
 
         #region public Properties
@@ -213,7 +211,6 @@ namespace System.Speech.Synthesis
                 return _attributes;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -234,7 +231,6 @@ namespace System.Speech.Synthesis
                 || age == VoiceAge.Senior
                 || age == VoiceAge.Teen;
         }
-
         #endregion
 
         #region Internal Property
@@ -254,7 +250,6 @@ namespace System.Speech.Synthesis
         {
             get { return _registryKeyPath; }
         }
-
         #endregion
 
         #region Private Fields

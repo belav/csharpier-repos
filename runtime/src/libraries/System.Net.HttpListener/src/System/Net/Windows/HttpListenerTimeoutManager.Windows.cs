@@ -65,7 +65,6 @@ namespace System.Net
             _listener.SetServerTimeout(currentTimeouts, _minSendBytesPerSecond);
             _timeouts[(int)type] = (int)timeoutValue;
         }
-
         #endregion Helpers
 
         #region Properties

@@ -28,7 +28,6 @@ namespace System.Speech.Recognition
 
 #pragma warning restore 6504, 56507
         public SemanticValue(object value) : this(string.Empty, value, -1f) { }
-
         #endregion
 
         #region Public Methods
@@ -59,7 +58,6 @@ namespace System.Speech.Recognition
         {
             return Count;
         }
-
         #endregion
 
         #region Public Properties
@@ -77,7 +75,6 @@ namespace System.Speech.Recognition
         {
             get { return _confidence; }
         }
-
         #endregion
 
         #region IDictionary implementation
@@ -174,7 +171,6 @@ namespace System.Speech.Recognition
         {
             return _dictionary.TryGetValue(key, out value);
         }
-
         #endregion
 
         #region Internal Properties
@@ -183,14 +179,12 @@ namespace System.Speech.Recognition
         {
             get { return _keyName; }
         }
-
         #endregion
 
         #region Internal Fields
 
         internal Dictionary<string, SemanticValue> _dictionary;
         internal bool _valueFieldSet;
-
         #endregion
 
         #region Private Fields
@@ -199,7 +193,6 @@ namespace System.Speech.Recognition
         private string _keyName;
         private float _confidence;
         private object _value;
-
         #endregion
 
         #region Private Types

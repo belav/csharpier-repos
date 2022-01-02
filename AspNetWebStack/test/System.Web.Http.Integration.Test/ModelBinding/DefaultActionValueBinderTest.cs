@@ -525,7 +525,6 @@ namespace System.Web.Http.ModelBinding
             // Assert
             Assert.False(actionContext.ModelState.IsValid);
         }
-
         #endregion Query Strings
 
         #region RouteData
@@ -697,7 +696,6 @@ namespace System.Web.Http.ModelBinding
             Assert.Equal("routeFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("routeLastName", deserializedActionValueItem.LastName);
         }
-
         #endregion RouteData
 
         #region ControllerContext
@@ -727,7 +725,6 @@ namespace System.Web.Http.ModelBinding
             );
             Assert.Equal(cancellationToken, keyValuePair.Value);
         }
-
         #endregion ControllerContext
 
         #region Body
@@ -1200,7 +1197,6 @@ namespace System.Web.Http.ModelBinding
             string deserializedJsonAsString = deserializedJsonValue.ToString(Formatting.None);
             Assert.Equal(json, deserializedJsonAsString);
         }
-
         #endregion Body
 
         [Fact]

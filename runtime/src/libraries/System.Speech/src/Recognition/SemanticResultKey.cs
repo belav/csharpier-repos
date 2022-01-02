@@ -44,7 +44,6 @@ namespace System.Speech.Recognition
                 _semanticKey.Add(builder.Clone());
             }
         }
-
         #endregion
 
         #region Public Methods
@@ -52,7 +51,6 @@ namespace System.Speech.Recognition
         {
             return new GrammarBuilder(this);
         }
-
         #endregion
 
         #region Internal Properties
@@ -61,7 +59,6 @@ namespace System.Speech.Recognition
         {
             get { return _semanticKey; }
         }
-
         #endregion
 
         #region Private Fields

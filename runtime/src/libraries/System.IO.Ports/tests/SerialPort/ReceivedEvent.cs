@@ -320,7 +320,6 @@ namespace System.IO.Ports.Tests
                 }
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

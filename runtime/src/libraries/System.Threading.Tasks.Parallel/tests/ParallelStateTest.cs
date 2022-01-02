@@ -152,7 +152,6 @@ namespace System.Threading.Tasks.Test
                 _verifications.Enqueue(act);
             }
         }
-
         #endregion
 
         internal void RealRun()
@@ -855,7 +854,6 @@ namespace System.Threading.Tasks.Test
                 );
             }
         }
-
         #endregion
 
         #region Helper Methods

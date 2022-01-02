@@ -685,7 +685,6 @@ namespace System.Collections.ObjectModel.Tests
         public int ExpectedOldStartingIndex { get; private set; }
 
         private PropertyNameExpected[] _expectedPropertyChanged;
-
         #endregion
 
         #region Helper Methods

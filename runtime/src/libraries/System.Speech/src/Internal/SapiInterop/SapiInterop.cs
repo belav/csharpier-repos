@@ -41,7 +41,6 @@ namespace System.Speech.Internal.SapiInterop
         SPERR_LEX_INVALID_DATA = -2147200891, // 0x80045085
         SPERR_CFG_INVALID_DATA = -2147200890 // 0x80045086
     }
-
     #endregion Enum
 
     #region SAPI constants
@@ -86,7 +85,6 @@ namespace System.Speech.Internal.SapiInterop
             }
         }
     }
-
     #endregion
 
     #region Interface
@@ -426,7 +424,6 @@ namespace System.Speech.Internal.SapiInterop
 
     [ComImport, Guid("D9F6EE60-58C9-458B-88E1-2F908FD7F87C")]
     internal class SpDataKey { }
-
     #endregion
 
     #region Utility Class

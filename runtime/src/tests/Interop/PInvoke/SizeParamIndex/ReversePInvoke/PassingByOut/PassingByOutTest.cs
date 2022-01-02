@@ -62,7 +62,6 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
     private static extern bool DoCallBack_MarshalStringArray_AsParam_AsByOut(
         [MarshalAs(UnmanagedType.FunctionPtr)] DelStringArrByOutAsCdeclCaller caller
     );
-
     #endregion
 
     #region Delegate Method
@@ -121,7 +120,6 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
             out string[] arrArg,
         out Int32 arraySize
     );
-
     #endregion
 
     #region Test Method
@@ -236,7 +234,6 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         arraySize = 20;
         return true;
     }
-
     #endregion
 
     public static void RunTestByOut()

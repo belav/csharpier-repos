@@ -23,7 +23,6 @@ namespace System.Security.AccessControl
         private readonly bool _isInherited;
         private readonly InheritanceFlags _inheritanceFlags;
         private readonly PropagationFlags _propagationFlags;
-
         #endregion
 
         #region Constructors
@@ -89,7 +88,6 @@ namespace System.Security.AccessControl
                 _propagationFlags = 0;
             }
         }
-
         #endregion
 
         #region Properties
@@ -127,7 +125,6 @@ namespace System.Security.AccessControl
         #region Private Methods
 
         private readonly AccessControlType _type;
-
         #endregion
 
         #region Constructors
@@ -172,7 +169,6 @@ namespace System.Security.AccessControl
 
             _type = type;
         }
-
         #endregion
 
         #region Properties
@@ -192,7 +188,6 @@ namespace System.Security.AccessControl
         private readonly Guid _objectType;
         private readonly Guid _inheritedObjectType;
         private readonly ObjectAceFlags _objectFlags = ObjectAceFlags.None;
-
         #endregion
 
         #region Constructors
@@ -234,7 +229,6 @@ namespace System.Security.AccessControl
                 _inheritedObjectType = Guid.Empty;
             }
         }
-
         #endregion
 
         #region Properties
@@ -262,7 +256,6 @@ namespace System.Security.AccessControl
         #region Private Members
 
         private readonly AuditFlags _flags;
-
         #endregion
 
         #region Constructors
@@ -290,7 +283,6 @@ namespace System.Security.AccessControl
 
             _flags = auditFlags;
         }
-
         #endregion
 
         #region Public Properties
@@ -310,7 +302,6 @@ namespace System.Security.AccessControl
         private readonly Guid _objectType;
         private readonly Guid _inheritedObjectType;
         private readonly ObjectAceFlags _objectFlags = ObjectAceFlags.None;
-
         #endregion
 
         #region Constructors
@@ -352,7 +343,6 @@ namespace System.Security.AccessControl
                 _inheritedObjectType = Guid.Empty;
             }
         }
-
         #endregion
 
         #region Public Properties
@@ -381,7 +371,6 @@ namespace System.Security.AccessControl
         #region Constructors
 
         public AuthorizationRuleCollection() : base() { }
-
         #endregion
 
         #region Public methods
@@ -390,7 +379,6 @@ namespace System.Security.AccessControl
         {
             InnerList.Add(rule);
         }
-
         #endregion
 
         #region ICollection Members
@@ -399,7 +387,6 @@ namespace System.Security.AccessControl
         {
             ((ICollection)this).CopyTo(rules, index);
         }
-
         #endregion
 
         #region Public properties

@@ -339,7 +339,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.InheritanceMargin
                 }
             }
         }
-
         #endregion
 
         #region TestsForCSharp
@@ -1506,7 +1505,6 @@ public class {|target1:Class1|} : I1<Class1>
                 itemForIntOperatorInClass1
             );
         }
-
         #endregion
 
         #region TestsForVisualBasic
@@ -2308,7 +2306,6 @@ public class {|target1:Class1|} : I1<Class1>
                 itemForIBar_FooInBar
             );
         }
-
         #endregion
 
         [Fact]

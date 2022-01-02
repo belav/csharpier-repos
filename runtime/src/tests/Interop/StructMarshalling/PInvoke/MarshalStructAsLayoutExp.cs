@@ -71,7 +71,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsExpByRefINNER2")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutINNER2([In, Out] ref INNER2 str1);
-
     #endregion
     #region Struct with Layout Explicit scenario2
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
@@ -107,7 +106,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsExpByRefInOutInnerExplicit(
         [In, Out] ref InnerExplicit str1
     );
-
     #endregion
     #region Struct with Layout Explicit scenario3
     [DllImport("MarshalStructAsParam")]
@@ -159,7 +157,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit(
         [In, Out] ref InnerArrayExplicit str1
     );
-
     #endregion
     #region Struct with Layout Explicit scenario4
     [DllImport("MarshalStructAsParam")]
@@ -185,7 +182,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsExpByRefOUTER3")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutOUTER3([In, Out] ref OUTER3 str1);
-
     #endregion
     #region Struct(U) with Layout Explicit scenario5
     [DllImport("MarshalStructAsParam")]
@@ -211,7 +207,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsExpByRefU")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutU([In, Out] ref U str1);
-
     #endregion
 
     #region Struct(ByteStructPack2Explicit) with Layout Explicit scenario6
@@ -266,7 +261,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit(
         [In, Out] ref ByteStructPack2Explicit str1
     );
-
     #endregion
     #region Struct(ShortStructPack4Explicit) with Layout Explicit scenario7
     [DllImport("MarshalStructAsParam")]
@@ -320,7 +314,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit(
         [In, Out] ref ShortStructPack4Explicit str1
     );
-
     #endregion
     #region Struct(IntStructPack8Explicit) with Layout Explicit scenario8
     [DllImport("MarshalStructAsParam")]
@@ -374,7 +367,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsExpByRefInOutIntStructPack8Explicit(
         [In, Out] ref IntStructPack8Explicit str1
     );
-
     #endregion
     #region Struct(LongStructPack16Explicit) with Layout Explicit scenario9
     [DllImport("MarshalStructAsParam")]
@@ -428,7 +420,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit(
         [In, Out] ref LongStructPack16Explicit str1
     );
-
     #endregion
     [DllImport("MarshalStructAsParam")]
     static extern LongStructPack16Explicit GetLongStruct(long l1, long l2);
@@ -2872,7 +2863,6 @@ public class Managed
             failures++;
         }
     }
-
     #endregion
 
     [SecuritySafeCritical]

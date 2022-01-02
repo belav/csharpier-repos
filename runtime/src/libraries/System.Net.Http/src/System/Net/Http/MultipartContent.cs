@@ -25,7 +25,6 @@ namespace System.Net.Http
 
         private readonly List<HttpContent> _nestedContent;
         private readonly string _boundary;
-
         #endregion Fields
 
         #region Construction
@@ -139,7 +138,6 @@ namespace System.Net.Http
 
             _nestedContent.Add(content);
         }
-
         #endregion Construction
 
         #region Dispose
@@ -156,7 +154,6 @@ namespace System.Net.Http
             }
             base.Dispose(disposing);
         }
-
         #endregion Dispose
 
         #region IEnumerable<HttpContent> Members
@@ -165,7 +162,6 @@ namespace System.Net.Http
         {
             return _nestedContent.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -174,7 +170,6 @@ namespace System.Net.Http
         {
             return _nestedContent.GetEnumerator();
         }
-
         #endregion
 
         #region Serialization

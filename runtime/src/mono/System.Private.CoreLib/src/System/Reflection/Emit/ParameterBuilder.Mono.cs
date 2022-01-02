@@ -52,7 +52,6 @@ namespace System.Reflection.Emit
         private int position;
         private int table_idx;
         private object? def_value;
-
 #endregion
 
         [DynamicDependency(nameof(def_value))] // Automatically keeps all previous fields too due to StructLayout

@@ -77,7 +77,6 @@ public class ClientMarshalArrayAsSizeParamIndexByRefTest
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0, ArraySubType = UnmanagedType.LPStr)]
             ref string[] arrStr2
     );
-
     #endregion
 
     static void SizeParamTypeIsByte()

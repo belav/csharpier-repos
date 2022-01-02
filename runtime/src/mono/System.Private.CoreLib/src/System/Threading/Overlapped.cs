@@ -73,7 +73,6 @@ namespace System.Threading
             } while (pNativeOverlapped != null);
         }
     }
-
     #endregion class _IOCompletionCallback
 
     #region class OverlappedData
@@ -227,7 +226,6 @@ namespace System.Threading
             return (OverlappedData)handle.Target!;
         }
     }
-
     #endregion class OverlappedData
 
     #region class Overlapped

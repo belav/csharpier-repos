@@ -108,7 +108,6 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(type >= 0 && (int)type <= MaxMarshalInteger);
             _marshalType = type;
         }
-
         #endregion
 
         public UnmanagedType UnmanagedType

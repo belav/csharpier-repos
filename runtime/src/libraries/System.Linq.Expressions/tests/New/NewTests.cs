@@ -266,7 +266,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckNewNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -295,7 +294,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(new Ts?(), f());
         }
-
         #endregion
 
         [Theory]

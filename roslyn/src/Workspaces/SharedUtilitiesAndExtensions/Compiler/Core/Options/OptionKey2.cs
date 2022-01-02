@@ -4,6 +4,7 @@
 
 using System;
 using Roslyn.Utilities;
+
 #if CODE_STYLE
 using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
 #endif

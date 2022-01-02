@@ -47,7 +47,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public Person Partner { get; set; }
             public decimal? Salary { get; set; }
         }
-
         #endregion
 
         [Test]

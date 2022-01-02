@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
+
 #if !CODE_STYLE
 using Microsoft.CodeAnalysis.CodeGeneration;
 using Roslyn.Utilities;

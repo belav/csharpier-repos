@@ -1779,7 +1779,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
         }
-
         #endregion
 
         #region Completion
@@ -1930,7 +1929,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics.Add(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, TypeLocation, type);
             }
         }
-
         #endregion
 
 #nullable enable

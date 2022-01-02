@@ -32,7 +32,6 @@ namespace System
     {
         #region Private Constants
         private const char EnumSeparatorChar = ',';
-
         #endregion
 
         #region Private Static Methods
@@ -284,7 +283,6 @@ namespace System
                 TypeCode.Int64 => (ulong)Unsafe.As<TEnum, long>(ref value),
                 _ => throw new InvalidOperationException(SR.InvalidOperation_UnknownEnumType),
             };
-
         #endregion
 
         #region Public Static Methods
@@ -1386,7 +1384,6 @@ namespace System
 
             throw new FormatException(SR.Format_InvalidEnumFormatSpecification);
         }
-
         #endregion
 
         #region Private Methods
@@ -1456,7 +1453,6 @@ namespace System
                     return 0;
             }
         }
-
         #endregion
 
         #region Object Overrides
@@ -1624,7 +1620,6 @@ namespace System
                     return 0;
             }
         }
-
         #endregion
 
         #region IFormattable
@@ -1633,7 +1628,6 @@ namespace System
         {
             return ToString(format);
         }
-
         #endregion
 
         #region Public Methods
@@ -1675,7 +1669,6 @@ namespace System
         {
             return ToString();
         }
-
         #endregion
 
         #region IConvertible
@@ -1771,7 +1764,6 @@ namespace System
         {
             return Convert.DefaultToType(this, type, provider);
         }
-
         #endregion
 
         #region ToObject
@@ -1808,7 +1800,6 @@ namespace System
 
         private static object ToObject(Type enumType, bool value) =>
             InternalBoxEnum(ValidateRuntimeType(enumType), value ? 1L : 0L);
-
         #endregion
 
         private static RuntimeType ValidateRuntimeType(Type enumType)

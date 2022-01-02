@@ -1386,7 +1386,6 @@ namespace System.Web.Mvc
         {
             OnActionExecuted(filterContext);
         }
-
         #endregion
 
         #region IAuthenticationFilter Members
@@ -1402,7 +1401,6 @@ namespace System.Web.Mvc
         {
             OnAuthenticationChallenge(filterContext);
         }
-
         #endregion
 
         #region IAuthorizationFilter Members
@@ -1411,7 +1409,6 @@ namespace System.Web.Mvc
         {
             OnAuthorization(filterContext);
         }
-
         #endregion
 
         #region IExceptionFilter Members
@@ -1420,7 +1417,6 @@ namespace System.Web.Mvc
         {
             OnException(filterContext);
         }
-
         #endregion
 
         #region IResultFilter Members
@@ -1434,7 +1430,6 @@ namespace System.Web.Mvc
         {
             OnResultExecuted(filterContext);
         }
-
         #endregion
 
         // Keep as value type to avoid allocating

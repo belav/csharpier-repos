@@ -80,7 +80,6 @@ public class SafeHandleIsClosed
 
         return retVal;
     }
-
     #endregion
     #endregion
 

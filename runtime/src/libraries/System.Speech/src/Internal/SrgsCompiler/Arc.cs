@@ -125,7 +125,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             _specialTransitionIndex = ulSpecialTransitionIndex;
         }
-
         #endregion
 
         #region internal Methods
@@ -222,7 +221,6 @@ namespace System.Speech.Internal.SrgsCompiler
             }
             return diff;
         }
-
         #endregion
 
         internal float Serialize(StreamMarshaler streamBuffer, bool isLast, uint arcIndex)
@@ -891,7 +889,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             return ret; // It's an epsilon -- We're first
         }
-
         #endregion
 
         #region Private Fields

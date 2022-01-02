@@ -693,7 +693,6 @@ namespace Microsoft.CodeAnalysis
 
             return this;
         }
-
         #endregion
 
         /// <summary>
@@ -936,7 +935,6 @@ namespace Microsoft.CodeAnalysis
                 }
             }
         }
-
         #endregion
 
         internal int Width => _token?.Width ?? _nodeOrParent?.Width ?? 0;

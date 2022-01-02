@@ -728,7 +728,6 @@ namespace System.IO
                 TaskScheduler.Default
             );
         }
-
         #endregion
 
         private sealed class NullTextWriter : TextWriter

@@ -612,7 +612,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
         );
-
         #endregion
 
         /// <summary>
@@ -3093,7 +3092,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return obj.OriginalDefinition.GetHashCode();
             }
         }
-
         #endregion Interface member checks
 
         #region Abstract base type checks
@@ -3173,7 +3171,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return abstractMembers;
         }
-
         #endregion Abstract base type checks
 
         [Obsolete("Use TypeWithAnnotations.Is method.", true)]

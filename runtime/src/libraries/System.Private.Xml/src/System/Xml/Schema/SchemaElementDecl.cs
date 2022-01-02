@@ -102,7 +102,6 @@ namespace System.Xml.Schema
             }
             return null;
         }
-
         #endregion
 
         //

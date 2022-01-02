@@ -1731,7 +1731,6 @@ namespace System.Collections.Concurrent
         /// <value>An <see cref="IEnumerable{TValue}"/> containing the
         /// values in the <see cref="IReadOnlyDictionary{TKey,TValue}"/>.</value>
         IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values => GetValues();
-
         #endregion
 
         #region ICollection<KeyValuePair<TKey,TValue>> Members
@@ -1796,7 +1795,6 @@ namespace System.Collections.Concurrent
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(
             KeyValuePair<TKey, TValue> keyValuePair
         ) => TryRemove(keyValuePair);
-
         #endregion
 
         #region IEnumerable Members
@@ -1812,7 +1810,6 @@ namespace System.Collections.Concurrent
         /// </remarks>
         IEnumerator IEnumerable.GetEnumerator() =>
             ((ConcurrentDictionary<TKey, TValue>)this).GetEnumerator();
-
         #endregion
 
         #region IDictionary Members
@@ -2000,7 +1997,6 @@ namespace System.Collections.Concurrent
                 ThrowHelper.ThrowValueNullException();
             }
         }
-
         #endregion
 
         #region ICollection Members
@@ -2108,7 +2104,6 @@ namespace System.Collections.Concurrent
         /// <exception cref="NotSupportedException">The SyncRoot property is not supported.</exception>
         object ICollection.SyncRoot =>
             throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported);
-
         #endregion
 
 

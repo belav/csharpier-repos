@@ -53,7 +53,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for INNER2 struct
@@ -93,7 +92,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for InnerExplicit struct
@@ -137,7 +135,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for InnerArraySequential struct
@@ -230,7 +227,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for InnerArrayExplicit struct
@@ -310,7 +306,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for OUTER3 struct
@@ -414,7 +409,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for CharSetAnsiSequential struct
@@ -457,7 +451,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for CharSetUnicodeSequential struct
@@ -500,7 +493,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for NumberSequential struct
@@ -586,7 +578,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for S3 struct
@@ -658,7 +649,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for S5 struct
@@ -708,7 +698,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for StringStructSequentialAnsi struct
@@ -752,7 +741,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for StringStructSequentialUnicode struct
@@ -799,7 +787,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for S8 struct
@@ -854,7 +841,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for S9 struct
@@ -883,7 +869,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for IncludeOuterIntergerStructSequential struct
@@ -929,7 +914,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for S11 struct
@@ -962,7 +946,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for U struct
@@ -1042,7 +1025,6 @@ public class Helper
         Console.WriteLine("\tPASSED!");
         return true;
     }
-
     #endregion
 
     #region methods for ByteStructPack2Explicit struct
@@ -1083,7 +1065,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for ShortStructPack4Explicit struct
@@ -1124,7 +1105,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for IntStructPack8Explicit struct
@@ -1165,7 +1145,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for LongStructPack16Explicit struct
@@ -1206,7 +1185,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for ByteStruct3Byte struct
@@ -1248,7 +1226,6 @@ public class Helper
             return true;
         }
     }
-
     #endregion
 
     #region methods for IntergerStructSequential struct

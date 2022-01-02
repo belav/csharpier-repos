@@ -153,7 +153,6 @@ namespace System.Diagnostics.Tracing
                 _max = double.NegativeInfinity;
             }
         }
-
         #endregion // Statistics Calculation
 
         // Values buffering

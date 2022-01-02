@@ -32,7 +32,6 @@ namespace System.Security.AccessControl
         //
 
         private readonly GenericAcl _acl;
-
         #endregion
 
         #region Constructors
@@ -47,7 +46,6 @@ namespace System.Security.AccessControl
             _acl = collection;
             Reset();
         }
-
         #endregion
 
         #region IEnumerator Interface
@@ -90,7 +88,6 @@ namespace System.Security.AccessControl
         #region Constructors
 
         protected GenericAcl() { }
-
         #endregion
 
         #region Public Constants
@@ -107,7 +104,6 @@ namespace System.Security.AccessControl
         //
 
         public static readonly int MaxBinaryLength = ushort.MaxValue;
-
         #endregion
 
         #region Protected Members
@@ -127,7 +123,6 @@ namespace System.Security.AccessControl
         //
 
         internal const int HeaderLength = 8;
-
         #endregion
 
         #region Public Properties
@@ -149,7 +144,6 @@ namespace System.Security.AccessControl
         //
 
         public abstract GenericAce this[int index] { get; set; }
-
         #endregion
 
         #region Public Methods
@@ -159,7 +153,6 @@ namespace System.Security.AccessControl
         //
 
         public abstract void GetBinaryForm(byte[] binaryForm, int offset);
-
         #endregion
 
         #region ICollection Implementation
@@ -213,7 +206,6 @@ namespace System.Security.AccessControl
         {
             get { return this; }
         }
-
         #endregion
 
         #region IEnumerable Implementation
@@ -237,7 +229,6 @@ namespace System.Security.AccessControl
 
         private byte _revision;
         private List<GenericAce> _aces;
-
         #endregion
 
         #region Private Methods
@@ -429,7 +420,6 @@ namespace System.Security.AccessControl
                 nameof(binaryForm)
             );
         }
-
         #endregion
 
         #region Constructors
@@ -452,7 +442,6 @@ namespace System.Security.AccessControl
         {
             SetBinaryForm(binaryForm, offset);
         }
-
         #endregion
 
         #region Public Properties
@@ -494,7 +483,6 @@ namespace System.Security.AccessControl
                 return binaryLength;
             }
         }
-
         #endregion
 
         #region Public Methods
@@ -866,7 +854,6 @@ namespace System.Security.AccessControl
                 return true;
             }
         }
-
         #endregion
 
         #region Private Members
@@ -881,7 +868,6 @@ namespace System.Security.AccessControl
         //
 
         private readonly bool _isDS;
-
         #endregion
 
         #region Private Methods
@@ -1950,7 +1936,6 @@ namespace System.Security.AccessControl
                 );
             }
         }
-
         #endregion
 
         #region Constructors
@@ -2042,7 +2027,6 @@ namespace System.Security.AccessControl
                 _isCanonical = false;
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -2051,7 +2035,6 @@ namespace System.Security.AccessControl
         {
             get { return _acl; }
         }
-
         #endregion
 
         #region Protected Methods
@@ -3016,7 +2999,6 @@ namespace System.Security.AccessControl
         }
 
         internal virtual void OnAclModificationTried() { }
-
         #endregion
 
         #region Public Properties
@@ -3074,7 +3056,6 @@ namespace System.Security.AccessControl
         {
             get { return _isDS; }
         }
-
         #endregion
 
         #region Public Methods
@@ -3201,7 +3182,6 @@ namespace System.Security.AccessControl
 
         internal SystemAcl(bool isContainer, bool isDS, RawAcl rawAcl, bool trusted)
             : base(isContainer, isDS, rawAcl, trusted, false) { }
-
         #endregion
 
         #region Public Methods
@@ -3483,7 +3463,6 @@ namespace System.Security.AccessControl
             null
         );
         private bool everyOneFullAccessForNullDacl;
-
         #endregion
 
         #region Constructors
@@ -3519,7 +3498,6 @@ namespace System.Security.AccessControl
                 trusted,
                 true
             ) { }
-
         #endregion
 
         #region Public Methods
@@ -3829,7 +3807,6 @@ namespace System.Security.AccessControl
                 inheritedObjectType
             );
         }
-
         #endregion
 
         #region internals and privates

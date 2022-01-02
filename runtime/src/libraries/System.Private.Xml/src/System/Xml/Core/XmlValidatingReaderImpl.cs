@@ -75,7 +75,6 @@ namespace System.Xml
                     throw exception;
                 }
             }
-
             #endregion
 
             // XmlValidatingReaderImpl helper methods

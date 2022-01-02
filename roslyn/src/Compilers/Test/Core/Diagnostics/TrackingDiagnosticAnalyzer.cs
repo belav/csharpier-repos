@@ -78,7 +78,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             get { return _callLog; }
         }
-
         #endregion
 
         #region Analysis

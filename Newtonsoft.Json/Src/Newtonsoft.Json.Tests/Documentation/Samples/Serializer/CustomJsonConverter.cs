@@ -107,7 +107,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string LastName { get; set; }
             public IList<string> Roles { get; set; }
         }
-
         #endregion
 
         [Test]

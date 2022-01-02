@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using Microsoft.DotNet.Cli.CommandLine;
 using Microsoft.EntityFrameworkCore.Tools.Properties;
+
 #if NET461
 using System;
 using System.Configuration;

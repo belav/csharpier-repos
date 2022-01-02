@@ -128,7 +128,6 @@ namespace Roslyn.Test.Utilities
                 throw new NotImplementedException();
             }
         }
-
         #endregion
 
         public static void AreEqual<T>(

@@ -343,7 +343,6 @@ public class ViewDataDictionary : IDictionary<string, object?>
     {
         get { return _data.Values; }
     }
-
     #endregion
 
     // for unit testing

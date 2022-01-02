@@ -831,7 +831,6 @@ namespace Newtonsoft.Json
                 WriteEscapedString(value.OriginalString, true);
             }
         }
-
         #endregion
 
         /// <summary>

@@ -25,7 +25,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckBoolArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Byte tests
@@ -45,7 +44,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckByteArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Custom tests
@@ -65,7 +63,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckCustomArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Char tests
@@ -85,7 +82,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckCharArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Custom2 tests
@@ -105,7 +101,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckCustom2ArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Decimal tests
@@ -125,7 +120,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckDecimalArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Delegate tests
@@ -145,7 +139,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckDelegateArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region double tests
@@ -165,7 +158,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckDoubleArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Enum tests
@@ -185,7 +177,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckEnumArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region EnumLong tests
@@ -205,7 +196,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckEnumLongArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Float tests
@@ -225,7 +215,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckFloatArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Func tests
@@ -245,7 +234,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckFuncArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Interface tests
@@ -265,7 +253,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckInterfaceArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region IEquatable tests
@@ -285,7 +272,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckIEquatableArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region IEquatable2 tests
@@ -305,7 +291,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckIEquatable2ArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Int tests
@@ -325,7 +310,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckIntArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Long tests
@@ -345,7 +329,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckLongArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Object tests
@@ -365,7 +348,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckObjectArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Struct tests
@@ -385,7 +367,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckStructArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region SByte tests
@@ -405,7 +386,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckSByteArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region StructWithString tests
@@ -434,7 +414,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckStructWithStringArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region StructWithStringAndStruct tests
@@ -465,7 +444,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckStructWithStringAndStructArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Short tests
@@ -485,7 +463,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckShortArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region StructWithTwoFields tests
@@ -514,7 +491,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckStructWithTwoFieldsArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region StructWithValue tests
@@ -543,7 +519,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckStructWithValueArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region String tests
@@ -563,7 +538,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckStringArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region UInt tests
@@ -583,7 +557,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckUIntArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region ULong tests
@@ -603,7 +576,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckULongArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region UShort tests
@@ -623,7 +595,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckUShortArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Generic tests
@@ -835,7 +806,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -1002,7 +972,6 @@ namespace System.Linq.Expressions.Tests
                     CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Generate array
@@ -1484,7 +1453,6 @@ namespace System.Linq.Expressions.Tests
 
             return result;
         }
-
         #endregion
 
         #region Check length expression
@@ -1877,7 +1845,6 @@ namespace System.Linq.Expressions.Tests
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
-
         #endregion
 
         #region ToString
@@ -1888,7 +1855,6 @@ namespace System.Linq.Expressions.Tests
             UnaryExpression e = Expression.ArrayLength(Expression.Parameter(typeof(int[]), "xs"));
             Assert.Equal("ArrayLength(xs)", e.ToString());
         }
-
         #endregion
 
         [Fact]

@@ -17,7 +17,6 @@ namespace System.Speech.Synthesis
             _iWordPos = iWordPos;
             _cWordLen = cWordLen;
         }
-
         #endregion
 
         #region public Properties
@@ -39,7 +38,6 @@ namespace System.Speech.Synthesis
             get { return _word; }
             internal set { _word = value; }
         }
-
         #endregion
 
         #region Private Fields

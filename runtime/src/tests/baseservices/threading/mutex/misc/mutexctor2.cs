@@ -16,12 +16,10 @@ public class MutexCtor2
     public const int c_DEFAULT_INT_VALUE = 0;
 
     public static int m_SharedResource = c_DEFAULT_INT_VALUE;
-
     #endregion
 
     #region Private Fields
     private Mutex m_Mutex = null;
-
     #endregion
 
     #region Public Methods
@@ -82,7 +80,6 @@ public class MutexCtor2
 
         return retVal;
     }
-
     #endregion
     #endregion
 

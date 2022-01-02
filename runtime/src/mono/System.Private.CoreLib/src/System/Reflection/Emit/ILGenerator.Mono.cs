@@ -65,7 +65,6 @@ namespace System.Reflection.Emit
         internal int start;
         internal int len;
         internal Label end;
-
 #endregion
 
         internal int NumHandlers()
@@ -211,7 +210,6 @@ namespace System.Reflection.Emit
         private ILExceptionInfo[]? ex_handlers;
         private int num_token_fixups;
         private object? token_fixups;
-
 #endregion
 
         private LabelData[]? labels;

@@ -81,7 +81,6 @@ namespace System.Reflection.Emit
         // only the "external" ModuleBuilder has this set
         private readonly AssemblyBuilder _assemblyBuilder;
         internal AssemblyBuilder ContainingAssemblyBuilder => _assemblyBuilder;
-
         #endregion
 
         #region Constructor
@@ -94,7 +93,6 @@ namespace System.Reflection.Emit
             _internalModuleBuilder = internalModuleBuilder;
             _assemblyBuilder = assemblyBuilder;
         }
-
         #endregion
 
         #region Private Members
@@ -288,7 +286,6 @@ namespace System.Reflection.Emit
             byte[]? data,
             int length
         );
-
         #endregion
 
         #region Internal Members
@@ -437,7 +434,6 @@ namespace System.Reflection.Emit
         }
 
         internal object SyncRoot => ContainingAssemblyBuilder.SyncRoot;
-
         #endregion
 
         #region Module Overrides
@@ -668,7 +664,6 @@ namespace System.Reflection.Emit
             );
             return sigHelp;
         }
-
         #endregion
 
         public override bool Equals(object? obj) => InternalModule.Equals(obj);
@@ -697,7 +692,6 @@ namespace System.Reflection.Emit
         {
             return InternalModule.GetCustomAttributesData();
         }
-
         #endregion
 
         #region Module Overrides
@@ -995,7 +989,6 @@ namespace System.Reflection.Emit
         public override string Name => InternalModule.Name;
 
         public override Assembly Assembly => _assemblyBuilder;
-
         #endregion
 
         #region Public Members
@@ -1159,7 +1152,6 @@ namespace System.Reflection.Emit
                 null
             );
         }
-
         #endregion
 
         #region Define Enum
@@ -1189,7 +1181,6 @@ namespace System.Reflection.Emit
         {
             return new EnumBuilder(name, underlyingType, visibility, this);
         }
-
         #endregion
 
         #region Define Global Method
@@ -1395,7 +1386,6 @@ namespace System.Reflection.Emit
             _moduleData._globalTypeBuilder.CreateType();
             _moduleData._hasGlobalBeenCreated = true;
         }
-
         #endregion
 
         #region Define Data
@@ -1462,7 +1452,6 @@ namespace System.Reflection.Emit
 
             return _moduleData._globalTypeBuilder.DefineUninitializedData(name, size, attributes);
         }
-
         #endregion
 
         #region GetToken
@@ -2077,7 +2066,6 @@ namespace System.Reflection.Emit
                 sigLength
             );
         }
-
         #endregion
 
         #region Other

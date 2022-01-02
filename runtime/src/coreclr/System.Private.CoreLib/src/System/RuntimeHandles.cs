@@ -1559,12 +1559,10 @@ namespace System
     {
         #region Public Static Members
         public static readonly ModuleHandle EmptyHandle;
-
         #endregion
 
         #region Private Data Members
         private readonly RuntimeModule m_ptr;
-
         #endregion
 
         #region Constructor
@@ -1572,7 +1570,6 @@ namespace System
         {
             m_ptr = module;
         }
-
         #endregion
 
         #region Internal FCalls
@@ -1978,7 +1975,6 @@ namespace System
             GenericInst = 0x0A,
             Max = 0x0B,
         }
-
         #endregion
 
         #region FCalls
@@ -1992,7 +1988,6 @@ namespace System
             IRuntimeMethodInfo? methodHandle,
             RuntimeType? declaringType
         );
-
         #endregion
 
         #region Private Data Members
@@ -2008,7 +2003,6 @@ namespace System
         internal int m_nSizeOfArgStack;
         internal int m_csig;
         internal RuntimeMethodHandleInternal m_pMethod;
-
         #endregion
 
         #region Constructors
@@ -2042,7 +2036,6 @@ namespace System
         {
             GetSignature(pCorSig, cCorSig, default, null, declaringType);
         }
-
         #endregion
 
         #region Internal Members

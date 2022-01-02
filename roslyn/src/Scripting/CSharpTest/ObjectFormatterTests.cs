@@ -136,7 +136,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
             string str = s_formatter.FormatObject(DO_NOT_ADD_TO_WATCH_WINDOW, SingleLineOptions);
             Assert.Equal(@"RecursiveRootHidden { A=0, B=0 }", str);
         }
-
         #endregion
 
         [Fact]

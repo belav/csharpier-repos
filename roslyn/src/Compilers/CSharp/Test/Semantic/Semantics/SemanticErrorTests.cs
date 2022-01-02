@@ -23062,7 +23062,6 @@ class Program
                         .WithArguments("t", "T")
                 );
         }
-
         #endregion
 
         #region "Targeted Warning Tests - please arrange tests in the order of error code"
@@ -27817,7 +27816,6 @@ namespace Namespace1.Namespace2
                         )
                 );
         }
-
         #endregion
 
         #region shotgun tests
@@ -28695,7 +28693,6 @@ class C
                         .WithArguments(longE + 1)
                 );
         }
-
         #endregion
 
         #region regression tests
@@ -29093,7 +29090,6 @@ class Program
                     Diagnostic(ErrorCode.ERR_YieldInAnonMeth, "yield")
                 );
         }
-
         #endregion
 
         [Fact]

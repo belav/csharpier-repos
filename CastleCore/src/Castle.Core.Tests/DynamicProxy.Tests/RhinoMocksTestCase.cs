@@ -52,7 +52,6 @@ namespace Castle.DynamicProxy.Tests
 			#region IWithEvents Members
 
             public virtual event EventHandler Foo;
-
 			#endregion
 
             public void MethodToGetAroundFooNotUsedError()
@@ -514,7 +513,6 @@ namespace Castle.DynamicProxy.Tests
             i = (IntPtr)Test();
             return 5;
         }
-
 		#endregion
 
         private object Test()

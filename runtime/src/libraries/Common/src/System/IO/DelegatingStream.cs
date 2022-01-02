@@ -57,7 +57,6 @@ namespace System.IO
             get { return _innerStream.WriteTimeout; }
             set { _innerStream.WriteTimeout = value; }
         }
-
         #endregion Properties
 
         protected DelegatingStream(Stream innerStream)
@@ -135,7 +134,6 @@ namespace System.IO
         {
             return _innerStream.EndRead(asyncResult);
         }
-
         #endregion Read
 
         #region Write

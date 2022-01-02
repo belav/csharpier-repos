@@ -57,7 +57,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
         internal Domain(DirectoryContext context, string domainName)
             : this(context, domainName, new DirectoryEntryManager(context)) { }
-
         #endregion constructors
 
         #region public methods
@@ -1104,7 +1103,6 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             return Domain.GetDomain(new DirectoryContext(DirectoryContextType.Domain));
         }
-
         #endregion public methods
 
         #region public properties
@@ -1243,7 +1241,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 return _cachedInfrastructureRoleOwner;
             }
         }
-
         #endregion public properties
 
         #region private methods

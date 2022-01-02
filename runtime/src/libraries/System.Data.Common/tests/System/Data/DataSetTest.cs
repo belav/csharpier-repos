@@ -1585,7 +1585,6 @@ namespace System.Data.Tests
             Assert.Equal(1, changes.Tables["parent"].Rows.Count);
             Assert.Equal(1, (int)changes.Tables["parent"].Rows[0][0]);
         }
-
         #endregion // DataSet.GetChanges Tests
 
         [Fact]

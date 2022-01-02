@@ -119,7 +119,6 @@ public class C
                 Diagnostic("Declaration", "Goo1")
             );
         }
-
         #endregion
 
         #region Global Suppression
@@ -474,7 +473,6 @@ public class E
                 new[] { new WarningOnNamePrefixDeclarationAnalyzer("E") }
             );
         }
-
         #endregion
 
         #region Syntax Semantics
@@ -1495,7 +1493,6 @@ End|] Class
                 Diagnostic("Token", "End").WithLocation(8, 1)
             );
         }
-
         #endregion
 
         #region Special Cases
@@ -1585,7 +1582,6 @@ End Class
                 new[] { new WarningOnCodeBodyAnalyzer(LanguageNames.VisualBasic) }
             );
         }
-
         #endregion
 
         #region Attribute Decoding
@@ -1702,7 +1698,6 @@ End Class
                 Diagnostic("TypeDeclaration", "C").WithLocation(9, 7)
             );
         }
-
         #endregion
 
         protected async Task VerifyCSharpAsync(

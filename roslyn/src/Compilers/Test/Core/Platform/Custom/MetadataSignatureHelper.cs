@@ -779,7 +779,6 @@ namespace Roslyn.Test.Utilities
             sb.Append(" ");
             sb.Append(@event.Name);
         }
-
         #endregion
 
         public static IEnumerable<string> GetMemberSignatures(

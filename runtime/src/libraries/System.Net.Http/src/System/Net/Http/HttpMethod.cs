@@ -136,7 +136,6 @@ namespace System.Net.Http
 
             return string.Equals(_method, other._method, StringComparison.OrdinalIgnoreCase);
         }
-
         #endregion
 
         public override bool Equals([NotNullWhen(true)] object? obj)

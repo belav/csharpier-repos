@@ -168,7 +168,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
             get { return (string?)_store[nameof(Nullable)]; }
         }
-
         #endregion
 
         #region Tool Members
@@ -304,7 +303,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
             }
         }
-
         #endregion
 
         internal override RequestLanguage Language => RequestLanguage.CSharpCompile;

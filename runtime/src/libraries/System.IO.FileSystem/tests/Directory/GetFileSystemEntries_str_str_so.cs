@@ -32,7 +32,6 @@ namespace System.IO.Tests
         {
             return Directory.GetFileSystemEntries(dirName, searchPattern, option);
         }
-
         #endregion
 
         [Fact]
@@ -140,7 +139,6 @@ namespace System.IO.Tests
         {
             return Directory.GetFileSystemEntries(dirName, searchPattern, option);
         }
-
         #endregion
 
         [Fact]

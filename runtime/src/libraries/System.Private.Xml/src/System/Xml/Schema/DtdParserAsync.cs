@@ -51,7 +51,6 @@ namespace System.Xml
             await ParseAsync(false).ConfigureAwait(false);
             return _schemaInfo;
         }
-
         #endregion
 
         //

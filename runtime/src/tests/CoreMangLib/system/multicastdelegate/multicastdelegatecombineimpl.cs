@@ -378,7 +378,6 @@ public class MulticastDelegateCombineImpl
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -482,7 +481,6 @@ public class MulticastDelegateCombineImpl
 
         return retVal;
     }
-
     #endregion
     #endregion
 
@@ -496,7 +494,6 @@ public class MulticastDelegateCombineImpl
                 DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
             );
     }
-
     #endregion
 
     #region Private Static Methods
@@ -509,7 +506,6 @@ public class MulticastDelegateCombineImpl
                 DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
             );
     }
-
     #endregion
 
     public static int Main()

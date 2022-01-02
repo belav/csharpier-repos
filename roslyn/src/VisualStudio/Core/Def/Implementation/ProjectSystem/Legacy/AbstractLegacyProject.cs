@@ -57,7 +57,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         #region Mutable fields that should only be used from the UI thread
 
         private readonly SolutionEventsBatchScopeCreator _batchScopeCreator;
-
         #endregion
 
         public AbstractLegacyProject(

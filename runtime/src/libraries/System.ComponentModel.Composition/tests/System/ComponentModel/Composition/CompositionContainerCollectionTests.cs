@@ -735,7 +735,6 @@ namespace System.ComponentModel.Composition
             {
                 throw new NotImplementedException();
             }
-
             #endregion
 
             #region IEnumerable Members
@@ -744,7 +743,6 @@ namespace System.ComponentModel.Composition
             {
                 throw new NotImplementedException();
             }
-
             #endregion
 
             #region ICollection<string> Members

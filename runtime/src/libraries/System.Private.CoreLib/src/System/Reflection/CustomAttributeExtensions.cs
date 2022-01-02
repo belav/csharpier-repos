@@ -77,7 +77,6 @@ namespace System.Reflection
         {
             return (T?)GetCustomAttribute(element, typeof(T), inherit);
         }
-
         #endregion
 
         #region APIs that return all attributes
@@ -116,7 +115,6 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttributes(element, inherit);
         }
-
         #endregion
 
         #region APIs that return all attributes of a particular type
@@ -206,7 +204,6 @@ namespace System.Reflection
         {
             return (IEnumerable<T>)GetCustomAttributes(element, typeof(T), inherit);
         }
-
         #endregion
 
         #region IsDefined

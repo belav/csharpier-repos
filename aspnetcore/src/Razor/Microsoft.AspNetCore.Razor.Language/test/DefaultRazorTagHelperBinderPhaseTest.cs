@@ -1199,7 +1199,6 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
             ruleBuilders
         );
     }
-
     #endregion
 
     #region Components
@@ -1633,7 +1632,6 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
             childContent
         );
     }
-
     #endregion
 
     private static TagHelperDescriptor CreateDescriptor(

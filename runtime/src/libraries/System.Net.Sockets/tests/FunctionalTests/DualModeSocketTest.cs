@@ -1999,7 +1999,6 @@ namespace System.Net.Sockets.Tests
         {
             ReceiveFrom_Helper(IPAddress.IPv6Any, IPAddress.Loopback);
         }
-
         #endregion ReceiveFrom Sync
 
         [Fact]
@@ -2422,7 +2421,6 @@ namespace System.Net.Sockets.Tests
                 Assert.Equal(connectTo.MapToIPv6(), remoteEndPoint.Address);
             }
         }
-
         #endregion ReceiveFrom Async/Event
 
         [Fact]

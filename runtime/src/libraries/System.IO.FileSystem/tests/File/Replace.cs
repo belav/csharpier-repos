@@ -23,7 +23,6 @@ namespace System.IO.Tests
         {
             File.Replace(source, dest, destBackup, ignoreMetadataErrors);
         }
-
         #endregion
 
         #region UniversalTests

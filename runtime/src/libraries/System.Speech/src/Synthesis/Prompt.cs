@@ -88,7 +88,6 @@ namespace System.Speech.Synthesis
                     );
             }
         }
-
         #endregion
 
         #region public Properties
@@ -115,7 +114,6 @@ namespace System.Speech.Synthesis
         /// What errors occurred during this operation?
         /// </summary>
         internal Exception Exception { get; set; }
-
         #endregion
 
         #region Internal Fields
@@ -139,7 +137,6 @@ namespace System.Speech.Synthesis
         /// Is this prompt played asynchronously
         /// </summary>
         internal bool _syncSpeak;
-
         #endregion
 
         #region Private Fields

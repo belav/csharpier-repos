@@ -20,7 +20,6 @@ namespace System.Speech.Synthesis
             _voice = voice;
             _enabled = true;
         }
-
         #endregion
 
         #region public Properties
@@ -33,7 +32,6 @@ namespace System.Speech.Synthesis
             get { return _enabled; }
             set { SetEnabledFlag(value, true); }
         }
-
         #endregion Events
 
         #region public Methods
@@ -55,7 +53,6 @@ namespace System.Speech.Synthesis
         {
             return VoiceInfo.Name.GetHashCode();
         }
-
         #endregion Events
 
         #region Internal Methods
@@ -121,7 +118,6 @@ namespace System.Speech.Synthesis
                 _voiceSynthesizer.Voice = null;
             }
         }
-
         #endregion
 
         #region Private Fields

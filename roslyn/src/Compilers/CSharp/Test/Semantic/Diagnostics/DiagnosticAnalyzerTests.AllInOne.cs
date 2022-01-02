@@ -98,7 +98,6 @@ public class C
                 )
                 .VerifyAnalyzerDiagnostics(new[] { new CSharpTrackingDiagnosticAnalyzer() });
         }
-
         #endregion
 
         [Fact]

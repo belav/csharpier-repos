@@ -240,7 +240,6 @@ namespace System.Linq.Expressions.Tests
                 .Compile(useInterpreter);
             Assert.Equal(expected, func());
         }
-
         #endregion
 
         #region Test verifiers

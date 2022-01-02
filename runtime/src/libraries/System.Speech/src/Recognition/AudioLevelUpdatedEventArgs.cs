@@ -13,7 +13,6 @@ namespace System.Speech.Recognition
         {
             _audioLevel = audioLevel;
         }
-
         #endregion
 
         #region public Properties
@@ -21,7 +20,6 @@ namespace System.Speech.Recognition
         {
             get { return _audioLevel; }
         }
-
         #endregion
 
         #region Private Fields

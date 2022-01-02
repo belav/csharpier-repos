@@ -659,7 +659,6 @@ namespace System.Runtime.Loader.Tests
                 () => AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
             );
         }
-
 #endregion
 
 #region Assembly.Load
@@ -804,7 +803,6 @@ namespace System.Runtime.Loader.Tests
                 sharedAssembly
             );
         }
-
 #endregion
 
 #region Type.GetType
@@ -1068,7 +1066,6 @@ namespace System.Runtime.Loader.Tests
                 _fixture.isolatedAlcAssembly
             );
         }
-
 #endregion
 
 #region Assembly.GetType
@@ -1261,7 +1258,6 @@ namespace System.Runtime.Loader.Tests
                 _fixture.isolatedAlcAssembly
             );
         }
-
 #endregion
 
 #region Activator.CreateInstance

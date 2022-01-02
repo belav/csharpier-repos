@@ -194,7 +194,6 @@ class Color
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "Color").WithArguments("Color")
             );
         }
-
         #endregion LHS kinds
 
         #region RHS kinds
@@ -550,7 +549,6 @@ class F
                     .WithArguments("F.E", "null")
             );
         }
-
         #endregion RHS kinds
 
         #region Aliases
@@ -695,7 +693,6 @@ class F
                 parentInfo.Symbol.ToTestDisplayString()
             );
         }
-
         #endregion Aliases
 
         [WorkItem(864605, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/864605")]
@@ -1689,7 +1686,6 @@ class F
 }";
             CreateCompilation(text).VerifyDiagnostics();
         }
-
         #endregion Error cases
 
         #region Regression cases
@@ -2119,7 +2115,6 @@ public class Example
             Assert.Equal("Lifetime", actualSymbol.Symbol.ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, actualSymbol.Symbol.Kind);
         }
-
         #endregion Regression cases
 
 

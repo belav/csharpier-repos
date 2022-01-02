@@ -705,7 +705,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 ImmutableArray<DiagnosticData>.Empty
             );
         }
-
         #endregion
 
         internal enum BuildProgress
@@ -786,7 +785,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             /// Counter to help order the diagnostics in error list based on the order in which they were reported during build.
             /// </summary>
             private int _incrementDoNotAccessDirectly;
-
             #endregion
 
             public InProgressState(

@@ -1679,7 +1679,6 @@ class B : A
             Assert.NotNull(f2);
             Assert.Equal("A", f2.ContainingSymbol.Name);
         }
-
         #endregion
 
         [WorkItem(537401, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537401")]

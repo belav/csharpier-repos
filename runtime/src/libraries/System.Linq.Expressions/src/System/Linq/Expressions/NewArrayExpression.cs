@@ -177,7 +177,6 @@ namespace System.Linq.Expressions
                 initializerList
             );
         }
-
         #endregion
 
         #region NewArrayBounds

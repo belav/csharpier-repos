@@ -2780,7 +2780,6 @@ namespace System.Net.Http.Functional.Tests
                     )
             );
         }
-
         #endregion
 
         #region Version tests
@@ -2918,7 +2917,6 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
-
         #endregion
 
         #region Uri wire transmission encoding tests
@@ -2953,7 +2951,6 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
-
 #endregion
 
         [ConditionalFact(

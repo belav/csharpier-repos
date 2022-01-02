@@ -130,7 +130,6 @@ public class ArrayMarshal
         int cActual,
         [In, MarshalAs(UnmanagedType.LPArray, SizeConst = ARRAY_SIZE)] S2[] pExpect
     );
-
     #endregion
 
     #region ByVal PInvoke method with InAttribute applied
@@ -230,7 +229,6 @@ public class ArrayMarshal
         int cActual,
         [In, MarshalAs(UnmanagedType.LPArray, SizeConst = ARRAY_SIZE)] S2[] pExpect
     );
-
     #endregion
 
     #region ByVal PInvoke method with InAttribute and OutAttribute applied
@@ -334,7 +332,6 @@ public class ArrayMarshal
         int cActual,
         [In, MarshalAs(UnmanagedType.LPArray, SizeConst = ARRAY_SIZE)] S2[] pExpect
     );
-
     #endregion
 
     #region ByVal PInvoke method with OutAttribute applied
@@ -437,7 +434,6 @@ public class ArrayMarshal
         [Out, MarshalAs(UnmanagedType.LPArray, SizeConst = ARRAY_SIZE)] S2[] arrS2,
         int cActual
     );
-
     #endregion
 
     #region Marshal ByVal
@@ -554,7 +550,6 @@ public class ArrayMarshal
             Assert.True(CStyle_Array_Object_In(oArr, ARRAY_SIZE));
         }
     }
-
     #endregion
 
     #region Marshal InOut ByVal
@@ -690,7 +685,6 @@ public class ArrayMarshal
         }
         return array;
     }
-
     #endregion
 
     #region Marshal InOut ByVal
@@ -774,7 +768,6 @@ public class ArrayMarshal
             Assert.True(Equals<object>(oArr, expectedOArr));
         }
     }
-
     #endregion
 
     #region methods for S2 struct array
@@ -860,7 +853,6 @@ public class ArrayMarshal
         }
         return true;
     }
-
     #endregion
 
     public static int Main()

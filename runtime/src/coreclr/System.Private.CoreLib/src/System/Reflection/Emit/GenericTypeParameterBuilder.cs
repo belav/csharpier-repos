@@ -17,7 +17,6 @@ namespace System.Reflection.Emit
 
         #region Private Data Members
         internal TypeBuilder m_type;
-
         #endregion
 
         #region Constructor
@@ -25,7 +24,6 @@ namespace System.Reflection.Emit
         {
             m_type = type;
         }
-
         #endregion
 
         #region Object Overrides
@@ -48,7 +46,6 @@ namespace System.Reflection.Emit
         {
             return m_type.GetHashCode();
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -63,7 +60,6 @@ namespace System.Reflection.Emit
         public override bool IsByRefLike => false;
 
         public override int MetadataToken => m_type.MetadataToken;
-
         #endregion
 
         #region Type Overrides
@@ -393,7 +389,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICustomAttributeProvider Implementation
@@ -411,7 +406,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region Public Members

@@ -16,7 +16,6 @@ namespace System.Threading.Tasks.Tests
             TaskContinuationOptions.NotOnRanToCompletion | TaskContinuationOptions.NotOnFaulted;
         private static TaskContinuationOptions s_onlyOnFaulted =
             TaskContinuationOptions.NotOnRanToCompletion | TaskContinuationOptions.NotOnCanceled;
-
         #endregion
 
         #region Test Methods
@@ -740,7 +739,6 @@ namespace System.Threading.Tasks.Tests
             t1.Start();
             t1.Wait();
         }
-
         #endregion
 
         #region Helper Methods

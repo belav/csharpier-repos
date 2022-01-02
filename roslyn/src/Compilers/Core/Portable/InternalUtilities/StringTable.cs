@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+
 #if DEBUG
 using System.Diagnostics;
 #endif
@@ -107,7 +108,6 @@ namespace Roslyn.Utilities
 
             _pool?.Free(this);
         }
-
         #endregion // Poolable
 
         internal string Add(char[] chars, int start, int len)

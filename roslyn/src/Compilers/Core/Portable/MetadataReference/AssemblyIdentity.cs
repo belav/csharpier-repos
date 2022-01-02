@@ -585,7 +585,6 @@ namespace Microsoft.CodeAnalysis
                 return xToken.SequenceEqual(y.PublicKeyToken);
             }
         }
-
         #endregion
 
         #region AssemblyName conversions

@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Options;
+
 #if CODE_STYLE
 using CSharpWorkspaceResources = Microsoft.CodeAnalysis.CSharp.CSharpCodeStyleResources;
 using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
@@ -118,7 +119,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     KeyValuePairUtil.Create("local_functions", NewLineOption.LocalFunction),
                 }
             );
-
         #endregion
 
         internal static ImmutableArray<IOption2> AllOptions { get; }

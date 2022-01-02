@@ -195,7 +195,6 @@ namespace Microsoft.CodeAnalysis.Text
                     return new LinePosition(textLine.LineNumber, position - textLine.Start);
                 }
             }
-
             #endregion
 
             public override string ToString() => this.TextImage.GetText();

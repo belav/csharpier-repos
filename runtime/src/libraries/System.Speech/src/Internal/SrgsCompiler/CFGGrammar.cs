@@ -12,7 +12,6 @@ namespace System.Speech.Internal.SrgsCompiler
         #region Constructors
 
         internal CfgGrammar() { }
-
         #endregion
 
         #region Internal Types
@@ -229,7 +228,6 @@ namespace System.Speech.Internal.SrgsCompiler
 #pragma warning restore 0618
             internal object _comValue;
         }
-
         #endregion
 
         #region Internal Methods
@@ -440,7 +438,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             return true;
         }
-
         #endregion
 
         #region Private Methods
@@ -617,7 +614,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             return t;
         }
-
         #endregion
 
         #region Internal Properties
@@ -626,7 +622,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get { return ++s_lastHandle; }
         }
-
         #endregion
 
         #region Internal Fields
@@ -662,7 +657,6 @@ namespace System.Speech.Internal.SrgsCompiler
         internal const int SP_NORMAL_CONFIDENCE = 0;
 
         internal const int SP_HIGH_CONFIDENCE = +1;
-
         #endregion
 
         #region Private Fields

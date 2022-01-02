@@ -71,7 +71,6 @@ public class BufferStream : Stream
     {
         throw new NotSupportedException();
     }
-
     #endregion NotSupported
 
     /// <summary>

@@ -79,7 +79,6 @@ namespace System.Speech.Internal.SrgsCompiler
             PropVariantType = property._comType;
             ArcIndex = 0;
         }
-
         #endregion
 
         #region Internal Properties
@@ -148,7 +147,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 _flag3 |= value << 8;
             }
         }
-
         #endregion
 
         #region Internal Fields

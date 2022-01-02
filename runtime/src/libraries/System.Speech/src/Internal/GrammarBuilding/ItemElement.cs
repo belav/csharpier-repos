@@ -45,7 +45,6 @@ namespace System.Speech.Internal.GrammarBuilding
                 Items.Add(builder);
             }
         }
-
         #endregion
 
         #region Public Methods
@@ -67,7 +66,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             return base.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -95,7 +93,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
             return item;
         }
-
         #endregion
 
         #region Private Fields

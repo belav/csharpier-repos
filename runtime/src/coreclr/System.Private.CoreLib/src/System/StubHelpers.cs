@@ -1202,7 +1202,6 @@ namespace System.StubHelpers
 
             return pNativeHome;
         }
-
         #endregion
 
         internal IntPtr ConvertToNative(object pManagedHome, int dwFlags)

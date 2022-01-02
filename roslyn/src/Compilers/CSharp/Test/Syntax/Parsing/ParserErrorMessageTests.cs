@@ -6868,7 +6868,6 @@ public static class Program
 
             CompileAndVerify(code, expectedOutput: "5");
         }
-
         #endregion
 
         #region "Targeted Warning Tests - please arrange tests in the order of error code"

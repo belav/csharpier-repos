@@ -46,7 +46,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public JRaw OnLoadFunction { get; set; }
             public JRaw OnUnloadFunction { get; set; }
         }
-
         #endregion
 
         [Test]

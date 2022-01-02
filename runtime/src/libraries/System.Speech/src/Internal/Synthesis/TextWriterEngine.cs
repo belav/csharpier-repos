@@ -20,7 +20,6 @@ namespace System.Speech.Internal.Synthesis
             _writer = writer;
             _culture = culture;
         }
-
         #endregion
 
         #region Internal Methods
@@ -469,7 +468,6 @@ namespace System.Speech.Internal.Synthesis
         public void EndPromptEngineRule(object voice, string name) { }
 
         public void EndPromptEngineOutput(object voice) { }
-
         #endregion
 
         #endregion
@@ -480,7 +478,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return null; }
         }
-
         #endregion
 
         #region Private Fields

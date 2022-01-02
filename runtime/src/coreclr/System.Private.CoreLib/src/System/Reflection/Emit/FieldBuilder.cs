@@ -14,7 +14,6 @@ namespace System.Reflection.Emit
         private string m_fieldName;
         private FieldAttributes m_Attributes;
         private Type m_fieldType;
-
         #endregion
 
         #region Constructor
@@ -62,7 +61,6 @@ namespace System.Reflection.Emit
                 m_Attributes
             );
         }
-
         #endregion
 
         #region Internal Members
@@ -71,7 +69,6 @@ namespace System.Reflection.Emit
             ModuleBuilder module = m_typeBuilder.GetModuleBuilder();
             ModuleBuilder.SetFieldRVAContent(new QCallModule(ref module), m_fieldTok, data, size);
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -102,7 +99,6 @@ namespace System.Reflection.Emit
                 return m_typeBuilder;
             }
         }
-
         #endregion
 
         #region FieldInfo Overrides
@@ -136,7 +132,6 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
         public override FieldAttributes Attributes => m_Attributes;
-
         #endregion
 
         #region ICustomAttributeProvider Implementation
@@ -154,7 +149,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
-
         #endregion
 
         #region Public Members

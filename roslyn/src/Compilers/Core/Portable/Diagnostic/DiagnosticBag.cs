@@ -336,7 +336,6 @@ namespace Microsoft.CodeAnalysis
         {
             return new ObjectPool<DiagnosticBag>(() => new DiagnosticBag(), size);
         }
-
         #endregion
 
         #region Debugger View

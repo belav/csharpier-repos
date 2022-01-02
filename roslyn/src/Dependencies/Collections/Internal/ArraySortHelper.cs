@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 using System.Numerics;
 #else
 using System.Runtime.InteropServices;
+
 #endif
 
 #if !NET5_0_OR_GREATER
@@ -739,7 +740,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             return left.CompareTo(right) > 0 ? true : false;
         }
     }
-
     #endregion
 
     #region ArraySortHelper for paired key and value arrays
@@ -1410,7 +1410,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             return left.CompareTo(right) > 0 ? true : false;
         }
     }
-
     #endregion
 
     /// <summary>Helper methods for use in array/span sorting routines.</summary>

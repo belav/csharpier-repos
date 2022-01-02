@@ -407,7 +407,6 @@ namespace System.IO.Ports.Tests
                 catch (TimeoutException) { }
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

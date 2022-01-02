@@ -646,7 +646,6 @@ namespace System.Diagnostics.Tracing
                 else
                     *ptr = (byte)(value << 4);
             }
-
             #endregion // CreateGuidForActivityPath
 
             internal readonly string m_name; // The name used in the 'start' and 'stop' APIs to help match up

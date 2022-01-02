@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using System.IO;
 
 using static Interop.Advapi32;
+
 #if !NETCOREAPP
 using MemoryMarshal = System.Diagnostics.PerformanceCounterLib;
 #endif

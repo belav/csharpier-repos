@@ -170,7 +170,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             dec = 3m;
             return 3.4f;
         }
-
         #endregion
         #region Nested class
         public class NestedMemberClass<U>
@@ -501,7 +500,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             {
                 return new InnerTestEnumerator();
             }
-
             #endregion
             #region IEnumerable Members
             IEnumerator IEnumerable.GetEnumerator()
@@ -525,14 +523,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             {
                 get { return _list[_index]; }
             }
-
             #endregion
             #region IDisposable Members
             public void Dispose()
             {
                 // Empty.
             }
-
             #endregion
             #region IEnumerator Members
             object IEnumerator.Current

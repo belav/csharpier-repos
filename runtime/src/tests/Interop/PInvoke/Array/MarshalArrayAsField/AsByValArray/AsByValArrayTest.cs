@@ -151,7 +151,6 @@ public struct EnregisterableUserType
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
     public SimpleStruct[] arr;
 }
-
 #endregion
 
 #region sequential class definition
@@ -264,7 +263,6 @@ public class C_BOOLArray_Seq
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Test.ARRAY_SIZE)]
     public bool[] arr;
 }
-
 #endregion
 #endregion
 
@@ -399,7 +397,6 @@ public struct S_BOOLArray_Exp
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Test.ARRAY_SIZE)]
     public bool[] arr;
 }
-
 #endregion
 
 #region explicit class definition
@@ -527,7 +524,6 @@ public class C_BOOLArray_Exp
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Test.ARRAY_SIZE)]
     public bool[] arr;
 }
-
 #endregion
 
 #endregion
@@ -896,7 +892,6 @@ class Test
 
         return result;
     }
-
     #endregion
 
     static void RunTest1(string report)

@@ -27,7 +27,6 @@ namespace System.IO.Tests
         {
             return File.ReadAllText(path);
         }
-
         #endregion
 
         #region UniversalTests

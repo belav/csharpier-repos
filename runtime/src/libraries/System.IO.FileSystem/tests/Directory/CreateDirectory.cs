@@ -22,7 +22,6 @@ namespace System.IO.Tests
         }
 
         public virtual bool IsDirectoryCreate => true;
-
         #endregion
 
         #region UniversalTests
@@ -224,7 +223,6 @@ namespace System.IO.Tests
             Assert.Equal(path, result.FullName);
             Assert.True(Directory.Exists(result.FullName));
         }
-
         #endregion
 
         #region PlatformSpecific

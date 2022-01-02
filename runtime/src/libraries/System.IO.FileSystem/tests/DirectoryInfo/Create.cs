@@ -17,7 +17,6 @@ namespace System.IO.Tests
         }
 
         public override bool IsDirectoryCreate => false;
-
         #endregion
 
         [Fact]

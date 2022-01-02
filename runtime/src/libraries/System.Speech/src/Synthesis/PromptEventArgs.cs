@@ -13,7 +13,6 @@ namespace System.Speech.Synthesis
         {
             _prompt = prompt;
         }
-
         #endregion
 
         #region public Properties
@@ -23,7 +22,6 @@ namespace System.Speech.Synthesis
         {
             get { return _prompt; }
         }
-
         #endregion
 
         #region Private Fields

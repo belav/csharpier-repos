@@ -78,7 +78,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
 
             Assert.Equal(document, cleanDocument);
         }
-
         #endregion
 
         #region Visual Basic Code CodeCleaner Tests
@@ -187,7 +186,6 @@ End Class",
 
             Assert.Equal(document, cleanDocument);
         }
-
         #endregion
 
         [Fact]

@@ -1306,7 +1306,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckValueTypeIsGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -1397,7 +1396,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyValueTypeIsGenericWithStructRestriction<Ts>(array[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

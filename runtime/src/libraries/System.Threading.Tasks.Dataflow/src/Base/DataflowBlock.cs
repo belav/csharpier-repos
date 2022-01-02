@@ -286,7 +286,6 @@ namespace System.Threading.Tasks.Dataflow
                 }
             }
         }
-
         #endregion
 
         #region Post and SendAsync
@@ -1013,7 +1012,6 @@ namespace System.Threading.Tasks.Dataflow
                 }
             }
         }
-
         #endregion
 
         #region TryReceive, ReceiveAsync, and Receive
@@ -1038,7 +1036,6 @@ namespace System.Threading.Tasks.Dataflow
 
             return source.TryReceive(null, out item);
         }
-
         #endregion
 
         #region ReceiveAsync
@@ -1132,7 +1129,6 @@ namespace System.Threading.Tasks.Dataflow
             // Return the task representing the core receive operation
             return ReceiveCore(source, true, timeout, cancellationToken);
         }
-
         #endregion
 
         #region Receive
@@ -1249,7 +1245,6 @@ namespace System.Threading.Tasks.Dataflow
                 throw;
             }
         }
-
         #endregion
 
         #region Shared by Receive and ReceiveAsync
@@ -1777,7 +1772,6 @@ namespace System.Threading.Tasks.Dataflow
                 get { return DebuggerDisplayContent; }
             }
         }
-
         #endregion
         #endregion
 
@@ -2013,7 +2007,6 @@ namespace System.Threading.Tasks.Dataflow
                 get { return DebuggerDisplayContent; }
             }
         }
-
         #endregion
 
         #region Encapsulate
@@ -2211,7 +2204,6 @@ namespace System.Threading.Tasks.Dataflow
                 }
             }
         }
-
         #endregion
 
         #region Choose
@@ -2313,7 +2305,6 @@ namespace System.Threading.Tasks.Dataflow
                 dataflowBlockOptions
             );
         }
-
         #endregion
 
         #region Choose<T1,T2,T3>
@@ -2438,7 +2429,6 @@ namespace System.Threading.Tasks.Dataflow
                 dataflowBlockOptions
             );
         }
-
         #endregion
 
         #region Choose Shared
@@ -2916,7 +2906,6 @@ namespace System.Threading.Tasks.Dataflow
                 get { return DebuggerDisplayContent; }
             }
         }
-
         #endregion
         #endregion
 
@@ -3369,7 +3358,6 @@ namespace System.Threading.Tasks.Dataflow
                 }
             }
         }
-
         #endregion
 
         #region AsObserver
@@ -3447,7 +3435,6 @@ namespace System.Threading.Tasks.Dataflow
                 get { return DebuggerDisplayContent; }
             }
         }
-
         #endregion
 
         #region NullTarget

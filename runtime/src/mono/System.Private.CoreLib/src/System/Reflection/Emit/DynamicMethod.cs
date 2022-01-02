@@ -63,7 +63,6 @@ namespace System.Reflection.Emit
         private object?[]? refs;
         private IntPtr referenced_by;
         private Type? owner;
-
 #endregion
 
         private Delegate? deleg;

@@ -115,7 +115,6 @@ public class MvcFactsTest
         // Assert
         Assert.True(isController);
     }
-
     #endregion
 
     #region IsControllerAction
@@ -302,7 +301,6 @@ public class MvcFactsTest
         var type = compilation.GetSpecialType(SpecialType.System_IDisposable);
         return (IMethodSymbol)type.GetMembers(nameof(IDisposable.Dispose)).First();
     }
-
     #endregion
 
 

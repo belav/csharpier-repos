@@ -27,7 +27,6 @@ namespace System.Speech.Synthesis
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region public Methods
@@ -476,7 +475,6 @@ namespace System.Speech.Synthesis
                 );
             }
         }
-
         #endregion
         public event EventHandler<StateChangedEventArgs> StateChanged
         {
@@ -493,7 +491,6 @@ namespace System.Speech.Synthesis
                 VoiceSynthesizer._stateChanged -= value;
             }
         }
-
         #endregion
 
         #endregion Events
@@ -541,7 +538,6 @@ namespace System.Speech.Synthesis
                 return VoiceSynthesizer.CurrentVoice(true).VoiceInfo;
             }
         }
-
         #region Internal Properties
 
         #endregion
@@ -598,7 +594,6 @@ namespace System.Speech.Synthesis
 
             _isDisposed = true;
         }
-
         #endregion
 
         #region Private Properties
@@ -618,7 +613,6 @@ namespace System.Speech.Synthesis
                 return _voiceSynthesis;
             }
         }
-
         #endregion
 
         #region Private Fields

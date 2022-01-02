@@ -5016,7 +5016,6 @@ False"
 }"
             );
         }
-
         #endregion Miscellaneous
 
         #region Target Typed Switch
@@ -5859,7 +5858,6 @@ class B
             compilation.VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "AB");
         }
-
         #endregion Target Typed Switch
 
         #region Pattern Combinators

@@ -53,7 +53,6 @@ namespace System.Reflection.Emit
             ModuleBuilder mod,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TypeBuilder type
         ) : this(name, attributes, callingConvention, parameterTypes, null, null, mod, type) { }
-
         #endregion
 
         #region Internal
@@ -72,7 +71,6 @@ namespace System.Reflection.Emit
         {
             return m_methodBuilder.GetMethodSignature();
         }
-
         #endregion
 
         #region Object Overrides
@@ -80,7 +78,6 @@ namespace System.Reflection.Emit
         {
             return m_methodBuilder.ToString();
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -93,7 +90,6 @@ namespace System.Reflection.Emit
         public override Type? DeclaringType => m_methodBuilder.DeclaringType;
 
         public override string Name => m_methodBuilder.Name;
-
         #endregion
 
         #region MethodBase Overrides
@@ -123,7 +119,6 @@ namespace System.Reflection.Emit
         }
 
         public override RuntimeMethodHandle MethodHandle => m_methodBuilder.MethodHandle;
-
         #endregion
 
         #region ConstructorInfo Overrides
@@ -136,7 +131,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
-
         #endregion
 
         #region ICustomAttributeProvider Implementation
@@ -154,7 +148,6 @@ namespace System.Reflection.Emit
         {
             return m_methodBuilder.IsDefined(attributeType, inherit);
         }
-
         #endregion
 
         #region Public Members

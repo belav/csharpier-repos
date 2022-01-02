@@ -197,7 +197,6 @@ public class EnumIConvertibleToSingle
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases

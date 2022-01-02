@@ -286,7 +286,6 @@ namespace System.Net.Http.Headers
                 this,
                 HeaderUtilities.ExpectContinue
             );
-
         #endregion
 
         #region General Headers
@@ -349,7 +348,6 @@ namespace System.Net.Http.Headers
         {
             get { return GeneralHeaders.Warning; }
         }
-
         #endregion
 
         internal HttpRequestHeaders()

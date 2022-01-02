@@ -93,7 +93,6 @@ namespace Microsoft.CodeAnalysis
             out IAssemblyCache ppAsmCache,
             uint dwReserved
         );
-
         #endregion
 
         /// <summary>

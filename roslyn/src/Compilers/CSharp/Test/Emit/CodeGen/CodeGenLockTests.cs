@@ -1426,7 +1426,6 @@ class Test
 }"
                 );
         }
-
         #endregion 4.0 codegen
 
         #region Pre-4.0 codegen
@@ -1862,7 +1861,6 @@ public class Test
                 new[] { TestMetadata.Net20.mscorlib }
             );
         }
-
         #endregion Pre-4.0 codegen
 
         #region Execution
@@ -2002,7 +2000,6 @@ class D
 ";
             CompileAndVerify(text, expectedOutput: @"1000000");
         }
-
         #endregion Execution
 
         [

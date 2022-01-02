@@ -821,7 +821,6 @@ namespace System.Linq.Expressions.Compiler
         {
             return Expression.Call(dictInit, "TryGetValue", null, switchValue, switchIndex);
         }
-
         #endregion
 
         private void CheckRethrow()

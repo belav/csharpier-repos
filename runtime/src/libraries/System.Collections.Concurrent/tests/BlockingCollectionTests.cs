@@ -1630,7 +1630,6 @@ namespace System.Collections.Concurrent.Tests
             {
                 return concurrentStack.TryPop(out item);
             }
-
             #endregion
 
             #region IEnumerable<T> Members
@@ -1639,7 +1638,6 @@ namespace System.Collections.Concurrent.Tests
             {
                 return concurrentStack.GetEnumerator();
             }
-
             #endregion
 
             #region IEnumerable Members
@@ -1648,7 +1646,6 @@ namespace System.Collections.Concurrent.Tests
             {
                 return concurrentStack.GetEnumerator();
             }
-
             #endregion
 
             #region ICollection Members

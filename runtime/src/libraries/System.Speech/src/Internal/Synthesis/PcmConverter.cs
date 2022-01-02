@@ -132,7 +132,6 @@ namespace System.Speech.Internal.Synthesis
             //---Convert samples to output format
             return AudioFormatConverter.Convert(pnBuff, AudioCodec.PCM16, _iOutFormatType);
         }
-
         #endregion
 
         #region private Fields
@@ -466,7 +465,6 @@ namespace System.Speech.Internal.Synthesis
 
             return pdWindow;
         }
-
         #endregion
 
         #region private Fields

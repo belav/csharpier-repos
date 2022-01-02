@@ -162,7 +162,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ref lazyDocComment
             );
         }
-
         #endregion
 
         #region Type Parameters
@@ -1037,7 +1036,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazyTypeParameters;
             }
         }
-
         #endregion
 
         #region Attributes
@@ -2191,7 +2189,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
         }
-
         #endregion
 
         internal override NamedTypeSymbol AsNativeInteger()

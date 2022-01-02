@@ -53,7 +53,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty]
             public int Size { get; set; }
         }
-
         #endregion
 
         [Test]

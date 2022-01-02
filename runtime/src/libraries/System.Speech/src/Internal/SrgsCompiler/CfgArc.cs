@@ -14,7 +14,6 @@ namespace System.Speech.Internal.SrgsCompiler
             _flag1 = arc._flag1;
             _flag2 = arc._flag2;
         }
-
         #endregion
 
         #region Internal Properties
@@ -138,7 +137,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 _flag2 |= value << 8;
             }
         }
-
         #endregion
 
         #region private Fields

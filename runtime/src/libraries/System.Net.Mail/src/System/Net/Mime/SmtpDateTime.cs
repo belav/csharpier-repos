@@ -50,7 +50,6 @@ namespace System.Net.Mime
         internal const string DateFormatWithoutDayOfWeek = "dd MMM yyyy HH:mm:ss";
         internal const string DateFormatWithDayOfWeekAndNoSeconds = "ddd, dd MMM yyyy HH:mm";
         internal const string DateFormatWithoutDayOfWeekAndNoSeconds = "dd MMM yyyy HH:mm";
-
         #endregion
 
         #region static fields
@@ -77,7 +76,6 @@ namespace System.Net.Mime
 
         // allowed max values for each digit.  min value is always 0
         internal const int OffsetMaxValue = 9959;
-
         #endregion
 
         #region static initializers
@@ -99,7 +97,6 @@ namespace System.Net.Mime
             tempTimeZoneOffsetLookup.Add("PST", new TimeSpan(-8, 0, 0)); // -0800
             return tempTimeZoneOffsetLookup;
         }
-
         #endregion
 
         #region private fields
@@ -110,7 +107,6 @@ namespace System.Net.Mime
         // true if the time zone is unspecified i.e. -0000
         // the time zone will usually be specified
         private readonly bool _unknownTimeZone;
-
         #endregion
 
         #region constructors
@@ -148,7 +144,6 @@ namespace System.Net.Mime
                 _unknownTimeZone = true;
             }
         }
-
         #endregion
 
         #region internal properties

@@ -91,7 +91,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 isEnabledByDefault: true
             );
         }
-
         #endregion
 
         #region fixing
@@ -136,7 +135,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     ),
                 cancellationToken
             );
-
         #endregion
 
         #region refactoring

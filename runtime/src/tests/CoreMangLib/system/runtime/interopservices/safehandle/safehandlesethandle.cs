@@ -51,7 +51,6 @@ public class SafeHandleSetHandle
 
         return retVal;
     }
-
     #endregion
     #endregion
 

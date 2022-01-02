@@ -145,7 +145,6 @@ public class InterlockedCompareExchange5
 
         return retVal;
     }
-
     #endregion
     #region Negative Test Cases
     #endregion

@@ -1304,7 +1304,6 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     {
         int Level { get; set; }
     }
-
 	#endregion
 
 	#region Xml Serialization Model

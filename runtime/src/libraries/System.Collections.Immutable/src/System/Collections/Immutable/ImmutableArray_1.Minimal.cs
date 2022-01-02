@@ -114,7 +114,6 @@ namespace System.Collections.Immutable
         {
             return !left.GetValueOrDefault().Equals(right.GetValueOrDefault());
         }
-
         #endregion
 
         /// <summary>

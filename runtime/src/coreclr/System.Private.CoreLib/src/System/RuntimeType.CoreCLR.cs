@@ -218,7 +218,6 @@ namespace System
 
                 // This is the strong reference back to the cache
                 private readonly RuntimeTypeCache m_runtimeTypeCache;
-
                 #endregion
 
                 #region Constructor
@@ -643,7 +642,6 @@ namespace System
 
                     m_allMembers = cachedMembers;
                 }
-
                 #endregion
 
                 #region Population Logic
@@ -1711,7 +1709,6 @@ namespace System
                         list.Add(propertyInfo);
                     }
                 }
-
                 #endregion
 
                 #region NonPrivate Members
@@ -1743,7 +1740,6 @@ namespace System
 
                 #endregion
             }
-
             #endregion
 
             #region Private Data Members
@@ -1780,7 +1776,6 @@ namespace System
                 m_runtimeType = runtimeType;
                 m_isGlobal = RuntimeTypeHandle.GetModule(runtimeType).RuntimeType == runtimeType;
             }
-
             #endregion
 
             #region Private Members
@@ -1814,7 +1809,6 @@ namespace System
 
                 return existingCache;
             }
-
             #endregion
 
             #region Internal Members
@@ -1951,7 +1945,6 @@ namespace System
 
             internal object[] GetEmptyArray() =>
                 _emptyArray ??= (object[])Array.CreateInstance(m_runtimeType, 0);
-
             #endregion
 
             #region Caches Accessors
@@ -2121,7 +2114,6 @@ namespace System
 
             #endregion
         }
-
         #endregion
 
         #region Static Members
@@ -2481,7 +2473,6 @@ namespace System
                 name = fullname;
             }
         }
-
         #endregion
 
         #region Filters
@@ -2920,7 +2911,6 @@ namespace System
 
         private static readonly RuntimeType ObjectType = (RuntimeType)typeof(object);
         private static readonly RuntimeType StringType = (RuntimeType)typeof(string);
-
         #endregion
 
         #region Constructor
@@ -2929,7 +2919,6 @@ namespace System
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region Private\Internal Members
@@ -3023,7 +3012,6 @@ namespace System
         {
             return Cache.GetDefaultMemberName();
         }
-
         #endregion
 
         #region Type Overrides
@@ -3251,7 +3239,6 @@ namespace System
 
             return candidates;
         }
-
         #endregion
 
         #region Get All XXXInfos
@@ -3459,7 +3446,6 @@ namespace System
 
             return im;
         }
-
         #endregion
 
         #region Find XXXInfo
@@ -4103,7 +4089,6 @@ namespace System
 
             return null;
         }
-
         #endregion
 
         #region Identity
@@ -4136,7 +4121,6 @@ namespace System
                 );
             }
         }
-
         #endregion
 
         #region Hierarchy
@@ -4218,7 +4202,6 @@ namespace System
                 return ns;
             }
         }
-
         #endregion
 
         #region Attributes
@@ -4252,7 +4235,6 @@ namespace System
                 return attributes;
             }
         }
-
         #endregion
 
         #region Arrays
@@ -4260,7 +4242,6 @@ namespace System
         public sealed override bool IsSZArray => RuntimeTypeHandle.IsSZArray(this);
 
         internal object[] GetEmptyArray() => Cache.GetEmptyArray();
-
         #endregion
 
         #region Generics
@@ -4379,7 +4360,6 @@ namespace System
             Type[] constraints = new RuntimeTypeHandle(this).GetConstraints();
             return constraints ?? Type.EmptyTypes;
         }
-
         #endregion
 
         #region Misc
@@ -4402,7 +4382,6 @@ namespace System
 
         public override StructLayoutAttribute? StructLayoutAttribute =>
             PseudoCustomAttribute.GetStructLayoutCustomAttribute(this);
-
         #endregion
 
         #region Invoke Member
@@ -4538,7 +4517,6 @@ namespace System
 
             throw new ArgumentException(SR.Format(SR.Arg_ObjObjEx, value.GetType(), this));
         }
-
         #endregion
 
         #endregion
@@ -4556,7 +4534,6 @@ namespace System
         private string? GetCachedName(TypeNameKind kind) => Cache.GetName(kind);
 
         public override Type? DeclaringType => Cache.GetEnclosingType();
-
         #endregion
 
         #region Legacy Internal
@@ -4782,7 +4759,6 @@ namespace System
         internal void InvalidateCachedNestedType() => Cache.InvalidateCachedNestedType();
 
         internal bool IsGenericCOMObjectImpl() => RuntimeTypeHandle.IsComObject(this, true);
-
         #endregion
 
         #region Legacy internal static

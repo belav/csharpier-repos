@@ -360,7 +360,6 @@ namespace System.Transactions
             }
             return ((object?)y) != null;
         }
-
         #endregion
 
         public TransactionInformation TransactionInformation

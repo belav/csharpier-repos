@@ -342,7 +342,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
         }
-
         #endregion
 
         /// <summary>

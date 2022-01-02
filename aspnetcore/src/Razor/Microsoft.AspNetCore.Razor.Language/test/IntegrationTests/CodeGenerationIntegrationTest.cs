@@ -491,7 +491,6 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
         RunTimeTest();
     }
-
     #endregion
 
     #region DesignTime
@@ -980,7 +979,6 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
         DesignTimeTest();
     }
-
     #endregion
 
     private void DesignTimeTest()

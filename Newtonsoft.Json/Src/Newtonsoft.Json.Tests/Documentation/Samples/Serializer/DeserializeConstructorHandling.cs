@@ -57,7 +57,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Url = website.Url;
             }
         }
-
         #endregion
 
         [Test]

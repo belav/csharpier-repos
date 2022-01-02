@@ -39,7 +39,6 @@ namespace System.Reflection.Emit
 
             return new TypeBuilderInstantiation(type, typeArguments);
         }
-
         #endregion
 
         #region Private Data Members
@@ -47,7 +46,6 @@ namespace System.Reflection.Emit
         private Type[] m_inst;
         private string? m_strFullQualName;
         internal Hashtable m_hashtable;
-
         #endregion
 
         #region Constructor
@@ -57,7 +55,6 @@ namespace System.Reflection.Emit
             m_inst = inst;
             m_hashtable = new Hashtable();
         }
-
         #endregion
 
         #region Object Overrides
@@ -65,7 +62,6 @@ namespace System.Reflection.Emit
         {
             return TypeNameBuilder.ToString(this, TypeNameBuilder.Format.ToString)!;
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -76,7 +72,6 @@ namespace System.Reflection.Emit
         public override string Name => m_type.Name;
 
         public override Module Module => m_type.Module;
-
         #endregion
 
         #region Type Overrides
@@ -466,7 +461,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICustomAttributeProvider Implementation

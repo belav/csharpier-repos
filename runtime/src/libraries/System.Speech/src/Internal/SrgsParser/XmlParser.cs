@@ -49,7 +49,6 @@ namespace System.Speech.Internal.SrgsParser
                 _shortFilename = iPosSlash >= 0 ? _filename.Substring(iPosSlash + 1) : _filename;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -245,7 +244,6 @@ namespace System.Speech.Internal.SrgsParser
             }
             throw new FormatException(sError, innerException);
         }
-
         #endregion
 
         #region Internal Methods
@@ -255,7 +253,6 @@ namespace System.Speech.Internal.SrgsParser
         {
             set { _parser = value; }
         }
-
         #endregion
 
         #region Internal fields
@@ -268,7 +265,6 @@ namespace System.Speech.Internal.SrgsParser
 
         internal const string sapiNamespace =
             "http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions";
-
         #endregion
 
         #region Private Type
@@ -286,7 +282,6 @@ namespace System.Speech.Internal.SrgsParser
             internal string _name;
             internal string _value;
         }
-
         #endregion
 
         #region Private Methods
@@ -2008,7 +2003,6 @@ namespace System.Speech.Internal.SrgsParser
                 ruleNames.Add(rule);
             }
         }
-
         #endregion
 
         #region Private Fields

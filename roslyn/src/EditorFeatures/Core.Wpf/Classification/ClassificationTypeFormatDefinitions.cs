@@ -35,7 +35,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Colors.Black;
             }
         }
-
         #endregion
         #region Punctuation
         [Export(typeof(EditorFormatDefinition))]
@@ -54,7 +53,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Colors.Black;
             }
         }
-
         #endregion
         #region String - Verbatim
 
@@ -96,7 +94,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x9e, 0x5b, 0x71);
             }
         }
-
         #endregion
         #region Keyword - Control
         // Keyword - Control is ordered after Keyword to ensure this more specific
@@ -114,7 +111,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public ControlKeywordFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.Keyword_Control;
         }
-
         #endregion
         #region Operator - Overloaded
         // Operator - Overloaded is ordered after Operator to ensure this more specific
@@ -132,7 +128,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public OperatorOverloadedFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.Operator_Overloaded;
         }
-
         #endregion
 
         #region Reassigned Variable
@@ -152,7 +147,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.TextDecorations = System.Windows.TextDecorations.Underline;
             }
         }
-
         #endregion
 
         #region Symbol - Static
@@ -184,7 +178,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundCustomizable = false;
             }
         }
-
         #endregion
 
         // User Types - * and User Members - * are ordered after Keyword
@@ -213,7 +206,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x2B, 0x91, 0xAF);
             }
         }
-
         #endregion
         #region User Types - Records
         [Export(typeof(EditorFormatDefinition))]
@@ -233,7 +225,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.DisplayName = EditorFeaturesResources.User_Types_Records;
             }
         }
-
         #endregion
         #region User Types - Record structs
         [Export(typeof(EditorFormatDefinition))]
@@ -253,7 +244,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.DisplayName = EditorFeaturesResources.User_Types_Record_Structs;
             }
         }
-
         #endregion
         #region User Types - Delegates
         [Export(typeof(EditorFormatDefinition))]
@@ -274,7 +264,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x2B, 0x91, 0xAF);
             }
         }
-
         #endregion
         #region User Types - Enums
         [Export(typeof(EditorFormatDefinition))]
@@ -295,7 +284,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x2B, 0x91, 0xAF);
             }
         }
-
         #endregion
         #region User Types - Interfaces
         [Export(typeof(EditorFormatDefinition))]
@@ -316,7 +304,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x2B, 0x91, 0xAF);
             }
         }
-
         #endregion
         #region User Types - Modules
         [Export(typeof(EditorFormatDefinition))]
@@ -336,7 +323,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x2B, 0x91, 0xAF);
             }
         }
-
         #endregion
         #region User Types - Structures
         [Export(typeof(EditorFormatDefinition))]
@@ -357,7 +343,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x2B, 0x91, 0xAF);
             }
         }
-
         #endregion
         #region User Types - Type Parameters
         [Export(typeof(EditorFormatDefinition))]
@@ -378,7 +363,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x2B, 0x91, 0xAF);
             }
         }
-
         #endregion
 
         #region User Members - Fields
@@ -397,7 +381,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersFieldNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Fields;
         }
-
         #endregion
         #region User Members - Enum Members
         [Export(typeof(EditorFormatDefinition))]
@@ -415,7 +398,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersEnumMemberNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Enum_Members;
         }
-
         #endregion
         #region User Members - Constants
         [Export(typeof(EditorFormatDefinition))]
@@ -433,7 +415,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersConstantNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Constants;
         }
-
         #endregion
         #region User Members - Locals
         [Export(typeof(EditorFormatDefinition))]
@@ -451,7 +432,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersLocalNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Locals;
         }
-
         #endregion
         #region User Members - Parameters
         [Export(typeof(EditorFormatDefinition))]
@@ -469,7 +449,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersParameterNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Parameters;
         }
-
         #endregion
         #region User Members - Methods
         [Export(typeof(EditorFormatDefinition))]
@@ -487,7 +466,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersMethodNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Methods;
         }
-
         #endregion
         #region User Members - Extension Methods
         [Export(typeof(EditorFormatDefinition))]
@@ -506,7 +484,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersExtensionMethodNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Extension_Methods;
         }
-
         #endregion
         #region User Members - Properties
         [Export(typeof(EditorFormatDefinition))]
@@ -524,7 +501,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersPropertyNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Properties;
         }
-
         #endregion
         #region User Members - Events
         [Export(typeof(EditorFormatDefinition))]
@@ -541,7 +517,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersEventNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Events;
         }
-
         #endregion
         #region User Members - Namespaces
         [Export(typeof(EditorFormatDefinition))]
@@ -558,7 +533,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersNamespaceNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Namespaces;
         }
-
         #endregion
         #region User Members - Labels
         [Export(typeof(EditorFormatDefinition))]
@@ -576,7 +550,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public UserMembersLabelNameFormatDefinition() =>
                 this.DisplayName = EditorFeaturesResources.User_Members_Labels;
         }
-
         #endregion
 
         #region XML Doc Comments - Attribute Name
@@ -598,7 +571,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - Attribute Quotes
         [Export(typeof(EditorFormatDefinition))]
@@ -619,7 +591,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - Attribute Value
         // definition of how format is represented in tools options.
@@ -642,7 +613,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - CData Section
         [Export(typeof(EditorFormatDefinition))]
@@ -663,7 +633,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - Comment
         [Export(typeof(EditorFormatDefinition))]
@@ -682,7 +651,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - Delimiter
         [Export(typeof(EditorFormatDefinition))]
@@ -703,7 +671,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - Entity Reference
         [Export(typeof(EditorFormatDefinition))]
@@ -724,7 +691,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Colors.Green;
             }
         }
-
         #endregion
         #region XML Doc Comments - Name
         [Export(typeof(EditorFormatDefinition))]
@@ -743,7 +709,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - Processing Instruction
         [Export(typeof(EditorFormatDefinition))]
@@ -765,7 +730,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region XML Doc Comments - Text
         [Export(typeof(EditorFormatDefinition))]
@@ -784,7 +748,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Colors.Green;
             }
         }
-
         #endregion
 
         #region Regex
@@ -956,7 +919,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x9e, 0x5b, 0x71);
             }
         }
-
         #endregion
 
         #region VB XML Literals - Attribute Name
@@ -977,7 +939,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0xB9, 0x64, 0x64); // HC_LIGHTRED
             }
         }
-
         #endregion
         #region VB XML Literals - Attribute Quotes
         [Export(typeof(EditorFormatDefinition))]
@@ -997,7 +958,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x55, 0x55, 0x55); // HC_LIGHTBLACK
             }
         }
-
         #endregion
         #region VB XML Literals - Attribute Value
         [Export(typeof(EditorFormatDefinition))]
@@ -1017,7 +977,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x64, 0x64, 0xB9); // HC_LIGHTBLUE
             }
         }
-
         #endregion
         #region VB XML Literals - CData Section
         [Export(typeof(EditorFormatDefinition))]
@@ -1037,7 +996,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
-
         #endregion
         #region VB XML Literals - Comment
         [Export(typeof(EditorFormatDefinition))]
@@ -1055,7 +1013,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x62, 0x97, 0x55); // HC_LIGHTGREEN
             }
         }
-
         #endregion
         #region VB XML Literals - Delimiter
         [Export(typeof(EditorFormatDefinition))]
@@ -1073,7 +1030,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x64, 0x64, 0xB9); // HC_LIGHTBLUE
             }
         }
-
         #endregion
         #region VB XML Literals - Embedded Expression
         [Export(typeof(EditorFormatDefinition))]
@@ -1094,7 +1050,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.BackgroundColor = Color.FromRgb(0xFF, 0xFE, 0xBF); // HC_LIGHTYELLOW
             }
         }
-
         #endregion
         #region VB XML Literals - Entity Reference
         [Export(typeof(EditorFormatDefinition))]
@@ -1114,7 +1069,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0xB9, 0x64, 0x64); // HC_LIGHTRED
             }
         }
-
         #endregion
         #region VB XML Literals - Name
         [Export(typeof(EditorFormatDefinition))]
@@ -1132,7 +1086,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x84, 0x46, 0x46); // HC_LIGHTMAROON
             }
         }
-
         #endregion
         #region VB XML Literals - Processing Instruction
         [Export(typeof(EditorFormatDefinition))]
@@ -1153,7 +1106,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0xC0, 0xC0, 0xC0); // HC_LIGHTGRAY
             }
         }
-
         #endregion
         #region VB XML Literals - Text
         [Export(typeof(EditorFormatDefinition))]

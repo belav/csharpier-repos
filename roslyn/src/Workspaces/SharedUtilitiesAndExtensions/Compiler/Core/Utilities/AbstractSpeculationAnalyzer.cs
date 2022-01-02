@@ -585,7 +585,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             INamedTypeSymbol type1,
             INamedTypeSymbol type2
         ) => type1.IsEnumType() && type1.EnumUnderlyingType?.SpecialType == type2.SpecialType;
-
         #endregion
 
         /// <summary>

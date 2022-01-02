@@ -580,7 +580,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         {
             return (IEnumerator)this;
         }
-
         #endregion
         #region IEnumerator Members
         public object Current
@@ -649,7 +648,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         {
             return (IEnumerator)this;
         }
-
         #endregion
         #region IEnumerator Members
         public object Current

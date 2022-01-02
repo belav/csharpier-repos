@@ -30,7 +30,6 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
-
         #endregion
 
         #region ExcludeFromCodeCoverageAttribute

@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Syntax.InternalSyntax;
 using System;
 using System.Diagnostics;
 using Roslyn.Utilities;
+
 #if STATS
 using System.Threading;
 #endif

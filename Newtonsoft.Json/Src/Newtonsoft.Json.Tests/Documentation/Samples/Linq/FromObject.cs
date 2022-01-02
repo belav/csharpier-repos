@@ -47,7 +47,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             public int Memory { get; set; }
             public IList<string> Drives { get; set; }
         }
-
         #endregion
 
         [Test]

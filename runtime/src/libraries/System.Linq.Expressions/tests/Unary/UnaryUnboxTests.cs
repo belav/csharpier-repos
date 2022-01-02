@@ -27,7 +27,6 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.Equal("Unbox(x)", e.ToString());
         }
-
         #endregion
 
         #region Test verifiers

@@ -268,7 +268,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckNullableGenericWithStructRestrictionConstantHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -282,7 +281,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyNullableGenericWithStructRestriction<Ts>(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

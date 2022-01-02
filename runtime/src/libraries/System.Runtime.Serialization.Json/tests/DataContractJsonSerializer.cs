@@ -1822,7 +1822,6 @@ public static partial class DataContractJsonSerializerTests
             return PrivateProperty;
         }
     }
-
 #endregion
 
     [Fact]
@@ -2768,7 +2767,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(value.Length, deserialized.Length);
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
     }
-
 #endregion
 
 #region Collection
@@ -2881,7 +2879,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
     }
-
 #endregion
 
 #region Generic Dictionary
@@ -2927,7 +2924,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value.ToArray(), deserialized.ToArray()));
     }
-
 #endregion
 
 #region Non-Generic Dictionary
@@ -3018,7 +3014,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.Equal(value.Name, actual.Name);
         Assert.Equal(value.ID, actual.ID);
     }
-
 #endregion
 
     [Fact]

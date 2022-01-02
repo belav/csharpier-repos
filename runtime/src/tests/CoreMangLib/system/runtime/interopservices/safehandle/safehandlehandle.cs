@@ -130,7 +130,6 @@ public class SafeHandleHandle
 
         return retVal;
     }
-
     #endregion
 
     #endregion

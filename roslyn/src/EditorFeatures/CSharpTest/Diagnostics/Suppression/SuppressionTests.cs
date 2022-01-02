@@ -1119,7 +1119,6 @@ class Class
                 );
             }
         }
-
         #endregion
 
         #region "SuppressMessageAttribute tests"
@@ -2669,7 +2668,6 @@ namespace N
                 }
             }
         }
-
         #endregion
 
         #region NoLocation Diagnostics tests

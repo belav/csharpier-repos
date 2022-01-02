@@ -81,7 +81,6 @@ public class SafeHandleIsInvalid
 
         return retVal;
     }
-
     #endregion
 
     #endregion

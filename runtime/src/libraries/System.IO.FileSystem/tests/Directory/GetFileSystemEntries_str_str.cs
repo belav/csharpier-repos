@@ -20,7 +20,6 @@ namespace System.IO.Tests
         {
             return Directory.GetFileSystemEntries(dirName, searchPattern);
         }
-
         #endregion
 
         #region UniversalTests
@@ -833,7 +832,6 @@ namespace System.IO.Tests
         {
             Assert.Equal(expected.OrderBy(s => s), result.Select(Path.GetFileName).OrderBy(s => s));
         }
-
         #endregion
 
         #region PlatformSpecific

@@ -5115,7 +5115,6 @@ OPERATOR ndec   //-LiftedDecimalKIND"
     }
 }"
             + Postfix;
-
         #endregion
 
         [Fact, WorkItem(527598, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527598")]

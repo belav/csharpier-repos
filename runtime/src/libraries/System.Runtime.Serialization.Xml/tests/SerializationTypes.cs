@@ -717,7 +717,6 @@ namespace SerializationTypes
         [XmlAttribute(Form = XmlSchemaForm.Qualified, Namespace = "http://test.com")]
         public string TestProperty;
     }
-
     #endregion
 
     public class TypeWithNonPublicDefaultConstructor

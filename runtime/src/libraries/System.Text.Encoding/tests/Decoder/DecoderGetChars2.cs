@@ -11,7 +11,6 @@ namespace System.Text.Tests
         #region Private Fields
         private const int c_SIZE_OF_ARRAY = 127;
         private readonly RandomDataGenerator _generator = new RandomDataGenerator();
-
         #endregion
 
         #region Positive Test Cases
@@ -252,7 +251,6 @@ namespace System.Text.Tests
             decoder = Encoding.Unicode.GetDecoder();
             VerificationHelper(decoder, bytes, 0, 0, chars, 0, false, 0, "008.2");
         }
-
         #endregion
 
         private void VerificationHelper(

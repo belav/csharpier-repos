@@ -922,7 +922,6 @@ public class Program
 
             CompileAndVerify(source, expectedOutput: "TrueTrueTrueTrueTrueTrueTrueTrueTrue");
         }
-
         #endregion
 
         #region "Error tests"

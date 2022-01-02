@@ -66,7 +66,6 @@ public class InterlockedCompareExchange1
 
         return retVal;
     }
-
     #endregion
 
     #region Negetive Test Cases
@@ -86,7 +85,6 @@ public class InterlockedCompareExchange1
 
         return retVal;
     }
-
     #endregion
     #endregion
 

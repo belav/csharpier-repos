@@ -33,7 +33,6 @@ namespace System.Speech.Recognition
 
             _tag = new TagElement(builder.Clone(), value);
         }
-
         #endregion
 
         #region Public Methods
@@ -41,7 +40,6 @@ namespace System.Speech.Recognition
         {
             return new GrammarBuilder(this);
         }
-
         #endregion
 
         #region Internal Properties
@@ -50,7 +48,6 @@ namespace System.Speech.Recognition
         {
             get { return _tag; }
         }
-
         #endregion
 
         #region Private Fields

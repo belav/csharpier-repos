@@ -48,7 +48,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonIgnore]
             public string PasswordHash { get; set; }
         }
-
         #endregion
 
         [Test]

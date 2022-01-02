@@ -1352,7 +1352,6 @@ namespace System.Tests
                 () => Delegate.CreateDelegate(typeof(NullableIntToString), num, mi)
             );
         }
-
         #endregion Tests
 
         #region Test Setup

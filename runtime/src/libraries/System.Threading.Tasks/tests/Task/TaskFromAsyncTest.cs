@@ -43,7 +43,6 @@ namespace System.Threading.Tasks.Tests.FromAsync
 
         // used for cover various overload.
         internal readonly TaskCreationOptions TestOption = TaskCreationOptions.None;
-
         #endregion
 
         #region Constructor
@@ -56,7 +55,6 @@ namespace System.Threading.Tasks.Tests.FromAsync
             _errorCase = parameters.ErrorCase;
             _overloadChoice = parameters.OverloadChoice;
         }
-
         #endregion
 
         /// <summary>
@@ -1222,7 +1220,6 @@ namespace System.Threading.Tasks.Tests.FromAsync
             OverloadChoice = overloadChoice;
         }
     }
-
     #endregion
 
     public partial class TaskFromAsyncTests

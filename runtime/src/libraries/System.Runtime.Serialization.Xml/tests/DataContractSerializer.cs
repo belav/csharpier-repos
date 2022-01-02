@@ -2208,7 +2208,6 @@ public static partial class DataContractSerializerTests
             return PrivateProperty;
         }
     }
-
 #endregion
 
     [Fact]
@@ -3844,7 +3843,6 @@ public static partial class DataContractSerializerTests
         Assert.Equal(value.Name, actual.Name);
         Assert.Equal(value.ID, actual.ID);
     }
-
 #endregion
 
 #region Collection
@@ -3983,7 +3981,6 @@ public static partial class DataContractSerializerTests
         Assert.NotNull(actual[0]);
         Assert.Equal(value[0].Name, actual[0].Name);
     }
-
 #endregion
 
 #region Generic Dictionary
@@ -4029,7 +4026,6 @@ public static partial class DataContractSerializerTests
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value.ToArray(), deserialized.ToArray()));
     }
-
 #endregion
 
 #region Non-Generic Dictionary
@@ -4108,7 +4104,6 @@ public static partial class DataContractSerializerTests
             )
         );
     }
-
 #endregion
 
     [Fact]
@@ -6505,7 +6500,6 @@ public static partial class DataContractSerializerTests
             "<ObjectContainer xmlns=\"http://schemas.datacontract.org/2004/07/SerializationTestTypes\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><_data i:type=\"a:SerializationTestTypes.AllTypes2***\" xmlns:a=\"http://schemas.datacontract.org/2004/07/SerializationTestTypes.AllTypes2***\"><a>false</a><array1><anyType xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/><anyType xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/><anyType xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/></array1><b>255</b><c>0</c><d>65535</d><e>79228162514264337593543950335</e><enumArrayData><MyEnum1>red</MyEnum1></enumArrayData><enumBase1 i:type=\"b:SerializationTestTypes.MyEnum1***\" xmlns:b=\"http://schemas.datacontract.org/2004/07/SerializationTestTypes.MyEnum1***\">red</enumBase1><f>-1</f><f5>0001-01-01T00:00:00</f5><g>-79228162514264337593543950335</g><guidData>cac76333-577f-7e1f-0389-789b0d97f395</guidData><h>1</h><i>0</i><j>0</j><k>0</k><l>5E-324</l><m>1.7976931348623157E+308</m><n>-1.7976931348623157E+308</n><nDTO xmlns:b=\"http://schemas.datacontract.org/2004/07/System\"><b:DateTime>9999-12-31T23:59:59.9999999Z</b:DateTime><b:OffsetMinutes>0</b:OffsetMinutes></nDTO><o>NaN</o><obj/><p>-INF</p><q>INF</q><r>0</r><s>1E-45</s><strData i:nil=\"true\"/><t>-3.4028235E+38</t><timeSpan>P10675199DT2H48M5.4775807S</timeSpan><u>3.4028235E+38</u><uri>http://www.microsoft.com/</uri><v>NaN</v><valType i:type=\"PublicDCStruct\"><Data>Data</Data></valType><w>-INF</w><x>INF</x><q:xmlQualifiedName xmlns:q=\"http://schemas.datacontract.org/2004/07/SerializationTestTypes\" xmlns:b=\"http://www.microsoft.com\">b:WCF</q:xmlQualifiedName><y>0</y><z>2147483647</z><z1>-2147483648</z1><z2>0</z2><z3>9223372036854775807</z3><z4>-9223372036854775808</z4><z5/><z6>0</z6><z7>127</z7><z8>-128</z8><z9>0</z9><z91>32767</z91><z92>-32768</z92><z93>abc</z93><z94>0</z94><z95>65535</z95><z96>0</z96><z97>0</z97><z98>4294967295</z98><z99>0</z99><z990>0</z990><z991>18446744073709551615</z991><z992>0</z992></_data><_data2 i:type=\"a:SerializationTestTypes.AllTypes2***\" xmlns:a=\"http://schemas.datacontract.org/2004/07/SerializationTestTypes.AllTypes2***\"><a>false</a><array1><anyType xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/><anyType xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/><anyType xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/></array1><b>255</b><c>0</c><d>65535</d><e>79228162514264337593543950335</e><enumArrayData><MyEnum1>red</MyEnum1></enumArrayData><enumBase1 i:type=\"b:SerializationTestTypes.MyEnum1***\" xmlns:b=\"http://schemas.datacontract.org/2004/07/SerializationTestTypes.MyEnum1***\">red</enumBase1><f>-1</f><f5>0001-01-01T00:00:00</f5><g>-79228162514264337593543950335</g><guidData>cac76333-577f-7e1f-0389-789b0d97f395</guidData><h>1</h><i>0</i><j>0</j><k>0</k><l>5E-324</l><m>1.7976931348623157E+308</m><n>-1.7976931348623157E+308</n><nDTO xmlns:b=\"http://schemas.datacontract.org/2004/07/System\"><b:DateTime>9999-12-31T23:59:59.9999999Z</b:DateTime><b:OffsetMinutes>0</b:OffsetMinutes></nDTO><o>NaN</o><obj/><p>-INF</p><q>INF</q><r>0</r><s>1E-45</s><strData i:nil=\"true\"/><t>-3.4028235E+38</t><timeSpan>P10675199DT2H48M5.4775807S</timeSpan><u>3.4028235E+38</u><uri>http://www.microsoft.com/</uri><v>NaN</v><valType i:type=\"PublicDCStruct\"><Data>Data</Data></valType><w>-INF</w><x>INF</x><q:xmlQualifiedName xmlns:q=\"http://schemas.datacontract.org/2004/07/SerializationTestTypes\" xmlns:b=\"http://www.microsoft.com\">b:WCF</q:xmlQualifiedName><y>0</y><z>2147483647</z><z1>-2147483648</z1><z2>0</z2><z3>9223372036854775807</z3><z4>-9223372036854775808</z4><z5/><z6>0</z6><z7>127</z7><z8>-128</z8><z9>0</z9><z91>32767</z91><z92>-32768</z92><z93>abc</z93><z94>0</z94><z95>65535</z95><z96>0</z96><z97>0</z97><z98>4294967295</z98><z99>0</z99><z990>0</z990><z991>18446744073709551615</z991><z992>0</z992></_data2></ObjectContainer>"
         );
     }
-
 #endregion
 
     [Fact]

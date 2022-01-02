@@ -42,7 +42,6 @@ namespace System.Collections.Tests
             queue.EnqueueRange(generatedItems);
             return queue;
         }
-
         #endregion
 
         #region Constructors
@@ -108,7 +107,6 @@ namespace System.Collections.Tests
                 EqualityComparer<(TElement, TPriority)>.Default
             );
         }
-
         #endregion
 
         #region Enqueue, Dequeue, Peek, EnqueueDequeue
@@ -243,7 +241,6 @@ namespace System.Collections.Tests
                 EqualityComparer<(TElement, TPriority)>.Default
             );
         }
-
         #endregion
 
         #region Clear
@@ -264,7 +261,6 @@ namespace System.Collections.Tests
             Assert.Equal(expected: 0, queue.Count);
             Assert.False(queue.TryPeek(out _, out _));
         }
-
         #endregion
 
         #region Enumeration
@@ -285,7 +281,6 @@ namespace System.Collections.Tests
             Assert.Equal(firstEnumeration.Length, count);
             Assert.True(firstEnumeration.SequenceEqual(secondEnumeration));
         }
-
         #endregion
 
         #region IGenericSharedAPI<T> Helper Methods

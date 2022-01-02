@@ -259,7 +259,6 @@ namespace System.Data.Tests
                     reader.Close();
             }
         }
-
         #endregion // Positive Tests
 
 
@@ -612,7 +611,6 @@ namespace System.Data.Tests
                     reader.Close();
             }
         }
-
         #endregion // Negative Tests
 
         [Fact]

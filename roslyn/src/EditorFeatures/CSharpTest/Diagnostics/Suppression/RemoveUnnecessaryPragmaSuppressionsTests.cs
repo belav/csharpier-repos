@@ -161,7 +161,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
                     context => context.RegisterCompilationEndAction(_ => { })
                 );
         }
-
         #endregion
 
         #region Single analyzer tests (Compiler OR Analyzer)
@@ -1107,7 +1106,6 @@ class Class
                 );
             }
         }
-
         #endregion
 
         #region Multiple analyzer tests (Compiler AND Analyzer)

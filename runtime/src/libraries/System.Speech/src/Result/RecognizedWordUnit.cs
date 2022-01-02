@@ -74,7 +74,6 @@ namespace System.Speech.Recognition
         {
             get { return _displayAttributes; }
         }
-
         #endregion
 
         #region Internal Methods
@@ -88,14 +87,12 @@ namespace System.Speech.Recognition
         {
             return (DisplayAttributes)(sapiAttributes << 1);
         }
-
         #endregion
 
         #region Internal Fields
 
         internal TimeSpan _audioPosition;
         internal TimeSpan _audioDuration;
-
         #endregion
 
         #region Private Fields

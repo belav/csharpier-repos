@@ -4599,7 +4599,6 @@ class C
             );
             Assert.Equal(1024, peHeaders.PEHeader.FileAlignment);
         }
-
         #endregion
 
         [Fact]

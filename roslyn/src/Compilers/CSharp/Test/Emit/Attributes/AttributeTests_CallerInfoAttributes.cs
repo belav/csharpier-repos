@@ -1815,7 +1815,6 @@ namespace System.Runtime.CompilerServices
             );
             CompileAndVerify(compilation, expectedOutput: "1 + /**/ 1").VerifyDiagnostics();
         }
-
         #endregion
 
         #region CallerArgumentExpression - Attribute constructor
@@ -2879,7 +2878,6 @@ class Program
             Assert.Equal(3, arguments[0].Value);
             Assert.Equal(0, arguments[1].Value);
         }
-
         #endregion
 
         #region CallerArgumentExpression - Test various symbols
@@ -3141,7 +3139,6 @@ class Program
 "
                 );
         }
-
         #endregion
 
         [Fact]

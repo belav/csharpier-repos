@@ -272,7 +272,6 @@ new object[] { new[] { a, c }, new[] { b, d } }
             Assert.Equal(2, ((Array)result.GetValue(0)).Length);
             Assert.Equal(2, ((Array)result.GetValue(1)).Length);
         }
-
         #endregion
 
         #region Dynamic
@@ -307,7 +306,6 @@ expando.goo
 
             Assert.Equal(1, script.EvaluateAsync().Result);
         }
-
         #endregion
 
         [Fact]
@@ -329,7 +327,6 @@ E
             Assert.True(e.GetType().GetTypeInfo().IsEnum, "Expected enum");
             Assert.Equal(typeof(int), Enum.GetUnderlyingType(e.GetType()));
         }
-
         #endregion
 
         #region Attributes
@@ -377,7 +374,6 @@ typeof(C)
             Assert.Equal("bar", dllImport.EntryPoint);
             Assert.Equal("goo", dllImport.Value);
         }
-
         #endregion
 
         // extension methods - must be private, can be top level
@@ -503,7 +499,6 @@ pi = i + j + k + l;
             );
             Assert.Null(script.EvaluateAsync().Result);
         }
-
         #endregion
 
         #region Chaining
@@ -857,7 +852,6 @@ public override string ToString() { return null; }
                     .WithArguments("ToString()")
             );
         }
-
         #endregion
 
         #region Generics
@@ -996,7 +990,6 @@ new System.Func<int>(new C<byte>().gh<bool>)()
             );
             Assert.Equal(222, state.Result.ReturnValue);
         }
-
         #endregion
 
         #region Statements and Expressions
@@ -1403,7 +1396,6 @@ static T G<T>(T t, Func<T, Task<T>> f)
             state = await state.ContinueWithAsync("x is not > 100", options: options);
             Assert.Equal(true, state.ReturnValue);
         }
-
         #endregion
 
         #region References
@@ -1611,7 +1603,6 @@ public class E { }
 
             script.Compile().Verify();
         }
-
         #endregion
 
         #region UsingDeclarations
@@ -1701,7 +1692,6 @@ d
                     .WithArguments("Usings", "a\0bc")
             );
         }
-
         #endregion
 
         #region Host Object Binding and Conversions
@@ -2293,7 +2283,6 @@ return M();
             );
             Assert.True(result);
         }
-
         #endregion
 
         #region Exceptions
@@ -2574,7 +2563,6 @@ int F() => i + j + k + l;
                     )
             );
         }
-
         #endregion
 
         #region Local Functions

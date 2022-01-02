@@ -44,7 +44,6 @@ namespace System.Reflection
 
             return target.GetCustomAttributesData();
         }
-
         #endregion
 
         #region Internal Static Members
@@ -188,7 +187,6 @@ namespace System.Reflection
 
             return Array.AsReadOnly(pca);
         }
-
         #endregion
 
         #region Private Static Methods
@@ -312,7 +310,6 @@ namespace System.Reflection
 
             return Array.AsReadOnly(customAttributes);
         }
-
         #endregion
 
         #region Internal Static Members
@@ -362,7 +359,6 @@ namespace System.Reflection
 
             return default;
         }
-
         #endregion
 
         private ConstructorInfo m_ctor = null!;
@@ -430,7 +426,6 @@ namespace System.Reflection
                 m_scope
             );
         }
-
         #endregion
 
         #region Pseudo Custom Attribute Constructor
@@ -622,7 +617,6 @@ namespace System.Reflection
             m_typedCtorArgs = Array.AsReadOnly(Array.Empty<CustomAttributeTypedArgument>());
             m_namedArgs = Array.AsReadOnly(Array.Empty<CustomAttributeNamedArgument>());
         }
-
         #endregion
 
         #region Object Override
@@ -662,7 +656,6 @@ namespace System.Reflection
         public override int GetHashCode() => base.GetHashCode();
 
         public override bool Equals(object? obj) => obj == (object)this;
-
         #endregion
 
         #region Public Members
@@ -839,7 +832,6 @@ namespace System.Reflection
 
             return type;
         }
-
         #endregion
 
         private static object CanonicalizeValue(object value)
@@ -1967,7 +1959,6 @@ namespace System.Reflection
             GC.KeepAlive(ctorWithParameters);
             return result;
         }
-
         #endregion
 
         #region Private Static Methods
@@ -2050,7 +2041,6 @@ namespace System.Reflection
 
             return attributeUsageAttribute ?? AttributeUsageAttribute.Default;
         }
-
         #endregion
 
         #region Private Static FCalls
@@ -2167,7 +2157,6 @@ namespace System.Reflection
         // See code:Dictionary#DictionaryVersusHashtableThreadSafety
         private static readonly Dictionary<RuntimeType, RuntimeType> s_pca =
             CreatePseudoCustomAttributeDictionary();
-
         #endregion
 
         #region Static Constructor
@@ -2211,7 +2200,6 @@ namespace System.Reflection
             // AllowMultiple is true for TypeForwardedToAttribute
             // Debug.Assert(usage.AllowMultiple == false, "Pseudo CA Error");
         }
-
         #endregion
 
         #region Internal Static
@@ -2435,7 +2423,6 @@ namespace System.Reflection
 
             return false;
         }
-
         #endregion
 
         private static DllImportAttribute? GetDllImportCustomAttribute(RuntimeMethodInfo method)

@@ -53,7 +53,6 @@ namespace System.Collections.Generic
                 return 0;
             }
         }
-
         #endregion
 
         internal static void Sort(Span<T> keys, Comparison<T> comparer)
@@ -376,7 +375,6 @@ namespace System.Collections.Generic
                 return 0;
             }
         }
-
         #endregion
 
         // This function is called when the user doesn't specify any comparer.
@@ -690,7 +688,6 @@ namespace System.Collections.Generic
             return left.CompareTo(right) > 0 ? true : false;
         }
     }
-
     #endregion
 
     #region ArraySortHelper for paired key and value arrays
@@ -1285,7 +1282,6 @@ namespace System.Collections.Generic
             return left.CompareTo(right) > 0 ? true : false;
         }
     }
-
     #endregion
 
     /// <summary>Helper methods for use in array/span sorting routines.</summary>

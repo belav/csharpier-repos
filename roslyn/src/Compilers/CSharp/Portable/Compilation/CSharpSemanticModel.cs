@@ -236,7 +236,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode node,
             CancellationToken cancellationToken = default(CancellationToken)
         );
-
         #endregion Abstract worker methods
 
         #region Helpers for speculative binding
@@ -578,7 +577,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return position;
         }
-
         #endregion Helpers for speculative binding
 
         protected override IOperation GetOperationCore(
@@ -1188,7 +1186,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             position = CheckAndAdjustPosition(position);
             return this.GetCrefSymbolInfo(position, cref, options, HasParameterList(cref));
         }
-
         #endregion GetSymbolInfo
 
         #region GetTypeInfo
@@ -1401,7 +1398,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             var info = this.GetSpeculativeTypeInfoWorker(position, expression, bindingOption);
             return info.ImplicitConversion;
         }
-
         #endregion GetTypeInfo
 
         #region GetMemberGroup
@@ -1471,7 +1467,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 .GetPublicSymbols()
               : ImmutableArray<ISymbol>.Empty;
         }
-
         #endregion GetMemberGroup
 
         #region GetIndexerGroup
@@ -1501,7 +1496,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
               : ImmutableArray<IPropertySymbol>.Empty;
         }
-
         #endregion GetIndexerGroup
 
         #region GetConstantValue
@@ -1517,7 +1511,6 @@ namespace Microsoft.CodeAnalysis.CSharp
               ? this.GetConstantValueWorker(expression, cancellationToken)
               : default(Optional<object>);
         }
-
         #endregion GetConstantValue
 
         /// <summary>
@@ -3881,7 +3874,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             EventDeclarationSyntax declarationSyntax,
             CancellationToken cancellationToken = default(CancellationToken)
         );
-
         #endregion
 
         #endregion

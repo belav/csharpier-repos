@@ -70,7 +70,6 @@ namespace System.ComponentModel.DataAnnotations
         private MethodInfo? _methodInfo;
         private Type? _firstParameterType;
         private Tuple<string, Type>? _typeId;
-
         #endregion
 
         #region All Constructors
@@ -99,7 +98,6 @@ namespace System.ComponentModel.DataAnnotations
             Method = method;
             _malformedErrorMessage = new Lazy<string?>(CheckAttributeWellFormed);
         }
-
         #endregion
 
         #region Properties
@@ -141,7 +139,6 @@ namespace System.ComponentModel.DataAnnotations
                 return !_isSingleArgumentMethod;
             }
         }
-
         #endregion
 
         /// <summary>

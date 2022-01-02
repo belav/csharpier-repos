@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 #endif
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
+
 #endif
 #if (IndividualLocalAuth)
 using Microsoft.AspNetCore.Identity;
@@ -18,15 +19,19 @@ using Microsoft.EntityFrameworkCore;
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+
 #endif
 #if (MultiOrgAuth)
 using Microsoft.IdentityModel.Tokens;
+
 #endif
 #if (GenerateGraph)
 using Graph = Microsoft.Graph;
+
 #endif
 #if (IndividualLocalAuth)
 using Company.WebApplication1.Data;
+
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth || IndividualLocalAuth || MultiOrgAuth || GenerateGraph || WindowsAuth)
 

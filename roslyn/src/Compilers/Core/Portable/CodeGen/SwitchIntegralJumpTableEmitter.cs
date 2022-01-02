@@ -166,7 +166,6 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 secondConstant
             );
         }
-
         #endregion
 
         #region "Switch bucketing methods"
@@ -292,7 +291,6 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Debug.Assert(startLabelIndex >= 0 && startLabelIndex <= endLabelIndex);
             return new SwitchBucket(_sortedCaseLabels, startLabelIndex);
         }
-
         #endregion
 
         #region "Switch bucket emit methods"
@@ -465,7 +463,6 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Debug.Assert(nextCaseIndex >= switchBucket.LabelsCount);
             return labels;
         }
-
         #endregion
 
         #region "Helper emit methods"

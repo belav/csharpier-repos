@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.TestCommon;
+
 #if NETFX_CORE
 using NameValueCollection = System.Net.Http.Formatting.HttpValueCollection;
 #endif

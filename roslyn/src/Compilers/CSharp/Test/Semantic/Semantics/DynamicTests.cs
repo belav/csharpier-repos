@@ -148,7 +148,6 @@ class C
 ";
             TestTypes(source);
         }
-
         #endregion
 
         #region Parameters
@@ -238,7 +237,6 @@ class C
 }";
             CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics();
         }
-
         #endregion
 
         #region Overrides, Hides and Implements
@@ -482,7 +480,6 @@ class D<U, S> : C<S>
 }";
             CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics();
         }
-
         #endregion
 
         #region Operators
@@ -1175,7 +1172,6 @@ remove_Event
 "
             );
         }
-
         #endregion
 
         #region Conditional, Coalescing Expression
@@ -1398,7 +1394,6 @@ public unsafe class C
             );
             comp.VerifyDiagnostics(expectedDiagnostics);
         }
-
         #endregion
 
         #region Member Access, Invocation
@@ -1718,7 +1713,6 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'M(d)')
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region Type Inference
@@ -1767,7 +1761,6 @@ class C
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
         }
-
         #endregion
 
         #region Partial Applicability and Final Validation
@@ -2158,7 +2151,6 @@ class C
                         .WithArguments("C.StructConstraint<T>()", "T", "dynamic")
                 );
         }
-
         #endregion
 
         #region Effective Base Type
@@ -2405,7 +2397,6 @@ public class D<T>
                         .WithArguments("1", "int", "System.Action<D<object>.E*[]>")
                 );
         }
-
         #endregion
 
         #region Compound Assignment
@@ -2810,7 +2801,6 @@ class C
 ";
             TestTypes(source);
         }
-
         #endregion
 
         #region Collection and Object initializers
@@ -3275,7 +3265,6 @@ class Program
 ";
             CompileAndVerify(source, targetFramework: TargetFramework.StandardAndCSharp);
         }
-
         #endregion
 
         #region Async
@@ -3369,7 +3358,6 @@ public class Class1
                         .WithLocation(10, 28)
                 );
         }
-
         #endregion
 
         #region Query
@@ -3537,7 +3525,6 @@ class C
                     Diagnostic(ErrorCode.ERR_BadDynamicQuery, "select a + 1")
                 );
         }
-
         #endregion
 
         #region Misc Expressions
@@ -3969,7 +3956,6 @@ class C
 }";
             TestTypes(source);
         }
-
         #endregion
 
         #region Misc Statements
@@ -3994,7 +3980,6 @@ class C
 }";
             TestTypes(source);
         }
-
         #endregion
 
         [

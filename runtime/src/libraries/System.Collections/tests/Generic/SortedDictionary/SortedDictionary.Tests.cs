@@ -36,7 +36,6 @@ namespace System.Collections.Tests
         {
             return CreateTKey(seed);
         }
-
         #endregion
 
         #region IDictionary tests
@@ -138,7 +137,6 @@ namespace System.Collections.Tests
                 () => new SortedDictionary<string, int>(source, StringComparer.OrdinalIgnoreCase)
             );
         }
-
         #endregion
 
         #region ICollection tests

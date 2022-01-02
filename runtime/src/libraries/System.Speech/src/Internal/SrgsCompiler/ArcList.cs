@@ -31,7 +31,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             return Arc.CompareContentForKey((Arc)arc1, (Arc)arc2);
         }
-
         #endregion
 
         #region Internal Properties

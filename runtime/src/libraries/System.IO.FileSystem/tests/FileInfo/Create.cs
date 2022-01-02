@@ -13,7 +13,6 @@ namespace System.IO.Tests
         {
             return new FileInfo(path).Create();
         }
-
         #endregion
 
         #region UniversalTests

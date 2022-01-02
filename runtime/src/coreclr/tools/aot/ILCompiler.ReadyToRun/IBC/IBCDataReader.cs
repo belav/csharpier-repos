@@ -26,7 +26,6 @@ namespace ILCompiler.IBC
         {
             reader.BaseStream.Seek(position, SeekOrigin.Begin);
         }
-
         #endregion
 
         #region Minify Utilities
@@ -116,7 +115,6 @@ namespace ILCompiler.IBC
         {
             return minified ? reader.Read7BitEncodedUInt() : reader.ReadUInt32();
         }
-
         #endregion
 
         #region File-level Structures
@@ -259,7 +257,6 @@ namespace ILCompiler.IBC
 
             return result;
         }
-
         #endregion
 
         #region Scenario Section
@@ -320,7 +317,6 @@ namespace ILCompiler.IBC
 
             return result;
         }
-
         #endregion
 
         #region Basic Block Section
@@ -427,7 +423,6 @@ namespace ILCompiler.IBC
 
             return result;
         }
-
         #endregion
 
         #region Token Sections
@@ -463,7 +458,6 @@ namespace ILCompiler.IBC
 
             return result;
         }
-
         #endregion
 
         #region Blob Stream Section
@@ -671,7 +665,6 @@ namespace ILCompiler.IBC
 
             return blobs;
         }
-
         #endregion
 
         #region Top Level

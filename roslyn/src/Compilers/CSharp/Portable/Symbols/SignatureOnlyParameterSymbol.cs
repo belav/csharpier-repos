@@ -174,7 +174,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool HasInterpolatedStringHandlerArgumentError =>
             throw ExceptionUtilities.Unreachable;
-
         #endregion Not used by MethodSignatureComparer
 
         public override bool Equals(Symbol obj, TypeCompareKind compareKind)

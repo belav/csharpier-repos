@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis
             CompilerPathUtilities.RequireAbsolutePath(fullPath, nameof(fullPath));
             return LoadFromPathUnchecked(fullPath);
         }
-
         #endregion
 
         private Assembly LoadFromPathUnchecked(string fullPath)

@@ -214,7 +214,6 @@ namespace System.Reflection
         {
             return import.m_metadataImport2 == m_metadataImport2;
         }
-
         #endregion
 
         #region Static Members
@@ -263,7 +262,6 @@ namespace System.Reflection
             safeArraySubType = (VarEnum)_safeArraySubType;
             arraySubType = (UnmanagedType)_arraySubType;
         }
-
         #endregion
 
         #region Internal Static Members
@@ -271,7 +269,6 @@ namespace System.Reflection
         {
             throw new MetadataException(hResult);
         }
-
         #endregion
 
         #region Constructor
@@ -280,7 +277,6 @@ namespace System.Reflection
             m_metadataImport2 = metadataImport2;
             m_keepalive = keepalive;
         }
-
         #endregion
 
         #region FCalls

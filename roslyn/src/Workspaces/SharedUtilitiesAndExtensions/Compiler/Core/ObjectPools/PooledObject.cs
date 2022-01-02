@@ -96,7 +96,6 @@ namespace Microsoft.CodeAnalysis
                 (p, sb) => Releaser(p, sb)
             );
         }
-
         #endregion
 
         #region allocators and releasers

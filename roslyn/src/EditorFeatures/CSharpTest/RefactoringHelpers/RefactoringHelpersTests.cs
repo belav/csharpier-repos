@@ -357,7 +357,6 @@ class C
 }";
             await TestAsync<ArgumentSyntax>(testText);
         }
-
         #endregion
 
         #region Selections
@@ -598,7 +597,6 @@ class C
 }";
             await TestMissingAsync<LocalFunctionStatementSyntax>(testText);
         }
-
         #endregion
 
         #region IsUnderselected
@@ -678,7 +676,6 @@ class C {
     }";
             await TestUnderselectedAsync<BinaryExpressionSyntax>(testText);
         }
-
         #endregion
 
         #region Attributes
@@ -980,7 +977,6 @@ class C
 }";
             await TestAsync<MethodDeclarationSyntax>(testText);
         }
-
         #endregion
 
         #region Extractions general
@@ -1044,7 +1040,6 @@ class C
 }";
             }
         }
-
         #endregion
 
         #region Extractions
@@ -1163,7 +1158,6 @@ class C
 }";
             await TestMissingAsync<PropertyDeclarationSyntax>(testText);
         }
-
         #endregion
 
         #region Headers & holes
@@ -1220,7 +1214,6 @@ class C
 }";
             await TestAsync<LocalDeclarationStatementSyntax>(testText);
         }
-
         #endregion
 
         #region TestHidden
@@ -1294,7 +1287,6 @@ class C
 }";
             await TestMissingAsync<LocalFunctionStatementSyntax>(testText);
         }
-
         #endregion
 
         #region Test predicate
@@ -1356,7 +1348,6 @@ class C
 }";
             await TestAsync<ArgumentSyntax>(testText, n => n.Parent is TupleExpressionSyntax);
         }
-
         #endregion
 
         #region Test arguments
@@ -1554,7 +1545,6 @@ class CC
 }";
             await TestAsync<ParameterSyntax>(testText);
         }
-
         #endregion
 
         #region Test methods
@@ -1617,7 +1607,6 @@ class CC
 }";
             await TestAsync<MethodDeclarationSyntax>(testText);
         }
-
         #endregion
 
         #region TestLocalDeclaration
@@ -1682,7 +1671,6 @@ class C
 }";
             await TestMissingAsync<LocalDeclarationStatementSyntax>(testText);
         }
-
         #endregion
 
         #region Test Ifs
@@ -1763,7 +1751,6 @@ class C
 }"
             );
         }
-
         #endregion
 
         #region Test Deep in expression

@@ -55,7 +55,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             private bool _justEnumerateTheEntireRunningDocumentTable = true;
 
             private bool _taskPending;
-
             #endregion
 
             #region Fields read/and written to only on the UI thread to track active context for files
@@ -73,7 +72,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 string,
                 IReferenceCountedDisposable<ICacheEntry<IVsHierarchy, HierarchyEventSink>>
             > _watchedHierarchiesForDocumentMoniker = new();
-
             #endregion
 
             /// <summary>

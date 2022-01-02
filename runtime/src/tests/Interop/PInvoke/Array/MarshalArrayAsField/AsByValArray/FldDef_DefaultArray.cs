@@ -103,7 +103,6 @@ public struct Struct_ExpWithArrOfStr
     [FieldOffset(0)]
     public S2[] arrS2;
 }
-
 #endregion
 
 #region Class Definition

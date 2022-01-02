@@ -1435,7 +1435,6 @@ namespace Microsoft.CodeAnalysis.Editing
         );
 
         internal abstract SyntaxNode AsInterfaceMember(SyntaxNode member);
-
         #endregion
 
         #region Remove, Replace, Insert
@@ -1511,7 +1510,6 @@ namespace Microsoft.CodeAnalysis.Editing
 
             return newRoot;
         }
-
         #endregion
 
         #region Utility
@@ -1680,7 +1678,6 @@ namespace Microsoft.CodeAnalysis.Editing
 
             return list;
         }
-
         #endregion
 
         #region Statements
@@ -1946,7 +1943,6 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Creates a block of statements. Not supported in VB.
         /// </summary>
         internal abstract SyntaxNode ScopeBlock(IEnumerable<SyntaxNode> statements);
-
         #endregion
 
         #region Expressions

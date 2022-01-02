@@ -13072,7 +13072,6 @@ class B<T> : A<T>
 }";
             CompileAndVerify(source);
         }
-
         #endregion
 
         [Fact]

@@ -138,7 +138,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region specials
@@ -161,7 +160,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region variables
@@ -199,7 +197,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region literals
@@ -252,7 +249,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region boolean operators
@@ -270,7 +266,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region choice
@@ -283,7 +278,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region collection operators
@@ -331,7 +325,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region arithmetic operators
@@ -364,7 +357,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region string operators
@@ -382,7 +374,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region value comparison operators
@@ -415,7 +406,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region node comparison operators
@@ -433,7 +423,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region loops
@@ -446,7 +435,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region sorting
@@ -464,7 +452,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region function definition and invocation
@@ -482,7 +469,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region XML navigation
@@ -555,7 +541,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region XML construction
@@ -603,7 +588,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region Node properties
@@ -626,7 +610,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region Type operators
@@ -644,7 +627,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region XPath operators
@@ -667,7 +649,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #region XSLT
@@ -700,7 +681,6 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
-
         #endregion
 
         #endregion

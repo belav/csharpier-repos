@@ -27,7 +27,6 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
-
         #endregion
 
         #region CallerInfoAttributes

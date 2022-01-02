@@ -221,7 +221,6 @@ namespace System.Diagnostics.Contracts
 
         public string? Value => _value;
     }
-
     #endregion Attributes
 
     /// <summary>
@@ -276,7 +275,6 @@ namespace System.Diagnostics.Contracts
                 ReportFailure(ContractFailureKind.Assume, userMessage, null, null);
             }
         }
-
         #endregion Assume
 
         #region Assert
@@ -307,7 +305,6 @@ namespace System.Diagnostics.Contracts
             if (!condition)
                 ReportFailure(ContractFailureKind.Assert, userMessage, null, null);
         }
-
         #endregion Assert
 
         #region Requires
@@ -376,7 +373,6 @@ namespace System.Diagnostics.Contracts
         {
             AssertMustUseRewriter(ContractFailureKind.Precondition, "Requires<TException>");
         }
-
         #endregion Requires
 
         #region Ensures
@@ -496,7 +492,6 @@ namespace System.Diagnostics.Contracts
         {
             return default!;
         }
-
         #endregion Old, Result, and Out Parameters
 
         #endregion Ensures
@@ -535,7 +530,6 @@ namespace System.Diagnostics.Contracts
         {
             AssertMustUseRewriter(ContractFailureKind.Invariant, "Invariant");
         }
-
         #endregion Invariant
 
         #region Quantifiers
@@ -588,7 +582,6 @@ namespace System.Diagnostics.Contracts
                     return false;
             return true;
         }
-
         #endregion ForAll
 
         #region Exists
@@ -639,7 +632,6 @@ namespace System.Diagnostics.Contracts
                     return true;
             return false;
         }
-
         #endregion Exists
 
         #endregion Quantifiers
@@ -651,7 +643,6 @@ namespace System.Diagnostics.Contracts
         /// </summary>
         [Conditional("CONTRACTS_FULL")]
         public static void EndContractBlock() { }
-
         #endregion
 
         #endregion User Methods
@@ -695,7 +686,6 @@ namespace System.Diagnostics.Contracts
                 null
             );
         }
-
         #endregion Private Methods
 
         #region Failure Behavior

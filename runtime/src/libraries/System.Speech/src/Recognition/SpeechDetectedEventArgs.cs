@@ -13,7 +13,6 @@ namespace System.Speech.Recognition
         {
             _audioPosition = audioPosition;
         }
-
         #endregion
 
         #region public Properties
@@ -21,7 +20,6 @@ namespace System.Speech.Recognition
         {
             get { return _audioPosition; }
         }
-
         #endregion
 
         #region Private Fields

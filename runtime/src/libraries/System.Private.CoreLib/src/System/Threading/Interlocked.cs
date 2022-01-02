@@ -25,7 +25,6 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static ulong Increment(ref ulong location) => Add(ref location, 1);
-
         #endregion
 
         #region Decrement
@@ -46,7 +45,6 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static ulong Decrement(ref ulong location) =>
             (ulong)Add(ref Unsafe.As<ulong, long>(ref location), -1);
-
         #endregion
 
         #region Exchange
@@ -90,7 +88,6 @@ namespace System.Threading
             );
 #endif
         }
-
         #endregion
 
         #region CompareExchange
@@ -147,7 +144,6 @@ namespace System.Threading
             );
 #endif
         }
-
         #endregion
 
         #region Add
@@ -170,7 +166,6 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static ulong Add(ref ulong location1, ulong value) =>
             (ulong)Add(ref Unsafe.As<ulong, long>(ref location1), (long)value);
-
         #endregion
 
         #region Read
@@ -180,7 +175,6 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static ulong Read(ref ulong location) => CompareExchange(ref location, 0, 0);
-
         #endregion
 
         #region And
@@ -247,7 +241,6 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static ulong And(ref ulong location1, ulong value) =>
             (ulong)And(ref Unsafe.As<ulong, long>(ref location1), (long)value);
-
         #endregion
 
         #region Or

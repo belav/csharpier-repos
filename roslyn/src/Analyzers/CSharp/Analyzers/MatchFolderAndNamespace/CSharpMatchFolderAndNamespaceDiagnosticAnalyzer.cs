@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.LanguageServices;
 using System;
 using System.Collections.Immutable;
+
 #if !CODE_STYLE
 using System.Composition;
 using Microsoft.CodeAnalysis.Host.Mef;

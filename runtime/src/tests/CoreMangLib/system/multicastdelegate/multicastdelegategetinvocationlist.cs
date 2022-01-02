@@ -117,7 +117,6 @@ public class MulticastDelegateGetInvocationList
 
         return retVal;
     }
-
     #endregion
 
     #region Negative Test Cases
@@ -165,7 +164,6 @@ public class MulticastDelegateGetInvocationList
 
         return retVal;
     }
-
     #endregion
     #endregion
 

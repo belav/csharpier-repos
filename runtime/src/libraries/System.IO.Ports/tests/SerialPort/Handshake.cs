@@ -148,7 +148,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying Int32.MaxValue Handshake");
             VerifyException(int.MaxValue, ThrowAt.Set, typeof(ArgumentOutOfRangeException));
         }
-
         #endregion
 
         #region Verification for Test Cases

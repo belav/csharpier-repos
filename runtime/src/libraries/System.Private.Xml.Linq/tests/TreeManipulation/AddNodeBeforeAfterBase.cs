@@ -17,7 +17,6 @@ namespace XLinqTests
         protected EventsHelper eHelper;
 
         protected bool runWithEvents;
-
         #endregion
 
         #region Delegates
@@ -29,7 +28,6 @@ namespace XLinqTests
         );
 
         public delegate void TestedFunction(XNode n, params object[] content);
-
         #endregion
 
         #region Public Methods and Operators

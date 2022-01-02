@@ -21,7 +21,6 @@ namespace System.Speech.Internal.GrammarBuilding
             _rule = rule;
             _semanticKey = semanticKey;
         }
-
         #endregion
 
         #region Public Methods
@@ -39,7 +38,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             return base.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -74,7 +72,6 @@ namespace System.Speech.Internal.GrammarBuilding
                 null
             );
         }
-
         #endregion
 
         #region Internal Properties
@@ -88,7 +85,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             get { return "#" + Rule.Name + (_semanticKey != null ? ":" + _semanticKey : ""); }
         }
-
         #endregion
 
         #region Private Fields

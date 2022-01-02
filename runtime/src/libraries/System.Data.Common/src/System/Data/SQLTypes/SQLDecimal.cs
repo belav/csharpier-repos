@@ -83,7 +83,6 @@ namespace System.Data.SqlTypes
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10,
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10
         };
-
         #region DecimalHelperTableGenerator
         /*
                 // the code below will generate the DecimalHelpers tables
@@ -298,7 +297,6 @@ namespace System.Data.SqlTypes
             0x0785ee10, // precision:38, value:10000000000000000000000000000000000000
             0x4b3b4ca8, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
-
         #endregion
 
         // note that the algorithm covers a range from -5 to +4 from the initial index

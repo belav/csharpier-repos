@@ -314,7 +314,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.True(keyProperties[0].RequiresValueGenerator());
             Assert.Equal(ValueGenerated.OnAdd, keyProperties[0].ValueGenerated);
         }
-
         #endregion
 
         #region Identity
@@ -600,7 +599,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(ValueGenerated.OnAdd, property.ValueGenerated);
         }
-
         #endregion
 
         private static void RunConvention(InternalEntityTypeBuilder entityBuilder) =>

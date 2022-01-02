@@ -50,7 +50,6 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         /// Maps a document URI to its n most recently cached token sets.
         /// </summary>
         private readonly Dictionary<Uri, List<LSP.SemanticTokens>> _tokens = new();
-
         #endregion
 
         static SemanticTokensCache()

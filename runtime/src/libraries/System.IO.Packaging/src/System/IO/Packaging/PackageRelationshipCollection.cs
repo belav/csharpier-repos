@@ -41,7 +41,6 @@ namespace System.IO.Packaging
             else
                 return new FilteredEnumerator(relationshipsEnumerator, _filter);
         }
-
         #endregion
 
         #region Internal Members
@@ -59,14 +58,12 @@ namespace System.IO.Packaging
             _relationships = relationships;
             _filter = filter;
         }
-
         #endregion
 
         #region Private Members
 
         private readonly InternalRelationshipCollection _relationships;
         private readonly string? _filter;
-
         #endregion
 
         #region Private Class
@@ -99,7 +96,6 @@ namespace System.IO.Packaging
                 _enumerator = enumerator;
                 _filter = filter;
             }
-
             #endregion Constructor
 
             #region IEnumerator Methods
@@ -136,7 +132,6 @@ namespace System.IO.Packaging
             {
                 _enumerator.Reset();
             }
-
             #endregion IEnumerator Methods
 
             #region IEnumerator<PackageRelationship> Members
@@ -150,7 +145,6 @@ namespace System.IO.Packaging
             {
                 get { return _enumerator.Current; }
             }
-
             #endregion IEnumerator<PackageRelationship> Members
 
             #region IDisposable Members
@@ -160,7 +154,6 @@ namespace System.IO.Packaging
                 //Most enumerators have dispose as a no-op, we follow the same pattern.
                 _enumerator.Dispose();
             }
-
             #endregion IDisposable Members
 
             #region Private Methods
@@ -175,7 +168,6 @@ namespace System.IO.Packaging
                 else
                     return false;
             }
-
             #endregion Private Methods
 
             #region Private Members

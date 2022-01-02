@@ -20,7 +20,6 @@ namespace System.Speech.Recognition
         {
             _grammar = grammar;
         }
-
         #endregion
 
         #region Public Properties

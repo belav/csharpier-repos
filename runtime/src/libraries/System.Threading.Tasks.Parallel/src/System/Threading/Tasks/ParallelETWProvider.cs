@@ -299,7 +299,6 @@ namespace System.Threading.Tasks
                 }
             }
         }
-
         #endregion ParallelInvokeBegin
 
         #region ParallelInvokeEnd
@@ -329,7 +328,6 @@ namespace System.Threading.Tasks
                     ForkJoinContextID
                 );
         }
-
         #endregion ParallelInvokeEnd
 
         #region ParallelFork
@@ -361,7 +359,6 @@ namespace System.Threading.Tasks
                     ForkJoinContextID
                 );
         }
-
         #endregion ParallelFork
 
         #region ParallelJoin

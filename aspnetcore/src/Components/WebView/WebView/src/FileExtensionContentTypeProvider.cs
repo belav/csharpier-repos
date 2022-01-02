@@ -428,7 +428,6 @@ internal class FileExtensionContentTypeProvider : IContentTypeProvider
                 { ".zip", "application/x-zip-compressed" },
             }
         ) { }
-
     #endregion
 
     /// <summary>

@@ -58,7 +58,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty(Order = -2)]
             public string FullName { get; set; }
         }
-
         #endregion
 
         [Test]

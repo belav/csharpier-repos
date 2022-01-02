@@ -47,7 +47,6 @@ namespace System.DirectoryServices.ActiveDirectory
             this.directoryEntryMgr = directoryEntryMgr;
             _schemaEntry = DirectoryEntryManager.GetDirectoryEntry(context, distinguishedName);
         }
-
         #endregion constructors
 
         #region IDisposable
@@ -85,7 +84,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
             }
         }
-
         #endregion IDisposable
 
         #region public methods
@@ -512,7 +510,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 new DirectoryContext(DirectoryContextType.Forest)
             );
         }
-
         #endregion public methods
 
         #region public properties
@@ -529,7 +526,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 return _cachedSchemaRoleOwner;
             }
         }
-
         #endregion public properties
 
         #region private methods

@@ -504,7 +504,6 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
         var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
         Assert.Equal("RZ3906", Assert.Single(diagnotics).Id);
     }
-
     #endregion
 
     #region DesignTime

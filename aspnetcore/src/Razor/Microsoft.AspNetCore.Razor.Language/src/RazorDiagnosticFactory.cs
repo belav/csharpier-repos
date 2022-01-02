@@ -31,7 +31,6 @@ internal static class RazorDiagnosticFactory
             directive
         );
     }
-
     #endregion
 
     #region Language Errors
@@ -725,7 +724,6 @@ internal static class RazorDiagnosticFactory
             string.Join(", ", options)
         );
     }
-
     #endregion
 
     #region Semantic Errors
@@ -983,7 +981,6 @@ internal static class RazorDiagnosticFactory
             parameterName
         );
     }
-
     #endregion
 
     #region TagHelper Errors
@@ -1388,7 +1385,6 @@ internal static class RazorDiagnosticFactory
 
         return diagnostic;
     }
-
     #endregion
 
     #region Rewriter Errors
@@ -1406,7 +1402,6 @@ internal static class RazorDiagnosticFactory
     {
         return RazorDiagnostic.Create(Rewriter_InsufficientStack, location);
     }
-
     #endregion
 
     #region "CSS Rewriter Errors"

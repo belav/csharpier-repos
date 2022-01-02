@@ -34,7 +34,6 @@ namespace System.Memory.Tests
             var buffer = new ReadOnlySequence<byte>(memory.Slice(2, 3));
             Assert.Equal(new byte[] { 3, 4, 5 }, buffer.ToArray());
         }
-
         #endregion
 
         [Fact]

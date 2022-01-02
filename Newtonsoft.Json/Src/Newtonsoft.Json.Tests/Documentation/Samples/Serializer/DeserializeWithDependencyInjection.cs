@@ -117,7 +117,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 get { return _logger; }
             }
         }
-
         #endregion
 
         [Test]

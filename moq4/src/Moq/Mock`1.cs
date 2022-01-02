@@ -223,7 +223,6 @@ namespace Moq
                 }
             }
         }
-
 #endregion
 
 #region Properties
@@ -343,7 +342,6 @@ namespace Moq
             get => this.switches;
             set => this.switches = value;
         }
-
 #endregion
 
         /// <summary>
@@ -702,7 +700,6 @@ namespace Moq
             var setup = Mock.SetupSequence(this, expression);
             return new SetupSequencePhrase(setup);
         }
-
 #endregion
 
 #region When
@@ -721,7 +718,6 @@ namespace Moq
         {
             return new WhenPhrase<T>(this, new Condition(condition));
         }
-
 #endregion
 
 #region Verify
@@ -1431,7 +1427,6 @@ namespace Moq
         {
             Mock.VerifyNoOtherCalls(this);
         }
-
 #endregion
 
 #region Raise

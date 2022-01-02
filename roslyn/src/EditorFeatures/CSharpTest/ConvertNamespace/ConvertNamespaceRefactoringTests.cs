@@ -540,7 +540,6 @@ class C
                 }
             }.RunAsync();
         }
-
         #endregion
 
         #region Convert To Block Scoped

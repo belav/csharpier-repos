@@ -130,7 +130,6 @@ namespace System
                 _count++;
             }
         }
-
         #endregion
 
         #region Static Members
@@ -182,7 +181,6 @@ namespace System
                 name = fullname;
             }
         }
-
         #endregion
 
         #region Filters
@@ -616,7 +614,6 @@ namespace System
 
             return true;
         }
-
         #endregion
 
         #endregion
@@ -628,7 +625,6 @@ namespace System
 
         private static readonly RuntimeType ObjectType = (RuntimeType)typeof(object);
         private static readonly RuntimeType StringType = (RuntimeType)typeof(string);
-
         #endregion
 
         #region Constructor
@@ -636,7 +632,6 @@ namespace System
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region Type Overrides
@@ -882,7 +877,6 @@ namespace System
 
             return candidates;
         }
-
         #endregion
 
         #region Get All XXXInfos
@@ -998,7 +992,6 @@ namespace System
 
             return members;
         }
-
         #endregion
 
         [DynamicallyAccessedMembers(
@@ -1656,7 +1649,6 @@ namespace System
 
             return null;
         }
-
         #endregion
 
         #region Hierarchy
@@ -1675,7 +1667,6 @@ namespace System
             // as they would lead to FCalls anyway.
             return RuntimeTypeHandle.IsEquivalentTo(this, otherRtType);
         }
-
         #endregion
 
         #region Attributes
@@ -1697,7 +1688,6 @@ namespace System
                 return GetGenericParameterAttributes();
             }
         }
-
         #endregion
 
         #region Generics
@@ -1782,7 +1772,6 @@ namespace System
                 return GetGenericParameterPosition();
             }
         }
-
         #endregion
 
         public static bool operator ==(RuntimeType? left, RuntimeType? right)
@@ -1985,7 +1974,6 @@ namespace System
         {
             return CreateInstanceMono(false, true);
         }
-
         #endregion
 
         private TypeCache? cache;

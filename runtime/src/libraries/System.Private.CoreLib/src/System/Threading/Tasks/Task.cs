@@ -2996,7 +2996,6 @@ namespace System.Threading.Tasks
         {
             return default;
         }
-
         #endregion
 
         /// <summary>
@@ -4315,7 +4314,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         #region Action<Task, Object> continuation
@@ -4557,7 +4555,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         #region Func<Task, TResult> continuation
@@ -4805,7 +4802,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         #region Func<Task, Object, TResult> continuation
@@ -5071,7 +5067,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         /// <summary>
@@ -5247,7 +5242,6 @@ namespace System.Threading.Tasks
                     continuation.Run(this, canInlineContinuationTask: true);
             }
         }
-
         #endregion
 
         // Adds a lightweight completion action to a task.  This is similar to a continuation
@@ -6219,7 +6213,6 @@ namespace System.Threading.Tasks
             Debug.Assert(succeeded, "This should always succeed on a new task.");
             return task;
         }
-
         #endregion
 
         #region Run methods
@@ -6425,7 +6418,6 @@ namespace System.Threading.Tasks
 
             return promise;
         }
-
         #endregion
 
         #region Delay methods
@@ -6630,7 +6622,6 @@ namespace System.Threading.Tasks
                 base.Cleanup();
             }
         }
-
         #endregion
 
         #region WhenAll
@@ -7173,7 +7164,6 @@ namespace System.Threading.Tasks
                 base.ShouldNotifyDebuggerOfWaitCompletion
                 && AnyTaskRequiresNotifyDebuggerOfWaitCompletion(m_tasks);
         }
-
         #endregion
 
         #region WhenAny
@@ -7514,7 +7504,6 @@ namespace System.Threading.Tasks
                 TaskScheduler.Default
             );
         }
-
         #endregion
 
         internal static Task<TResult> CreateUnwrapPromise<TResult>(Task outerTask, bool lookForOce)

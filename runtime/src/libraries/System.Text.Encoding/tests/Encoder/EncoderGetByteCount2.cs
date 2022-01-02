@@ -14,7 +14,6 @@ namespace System.Text.Tests
         private const int c_SIZE_OF_ARRAY = 256;
         private const char HIGH_SURROGATE_START = '\ud800';
         private const char HIGH_SURROGATE_END = '\udbff';
-
         #endregion
 
         #region Positive Test Cases
@@ -151,7 +150,6 @@ namespace System.Text.Tests
             );
             VerificationHelper(encoder, chars, chars.Length - 1, 1, false, 2, "005.4");
         }
-
         #endregion
 
         private void VerificationHelper(

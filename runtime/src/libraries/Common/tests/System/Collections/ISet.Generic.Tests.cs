@@ -60,7 +60,6 @@ namespace System.Collections.Tests
         }
 
         protected virtual int ISet_Large_Capacity => 1000;
-
         #endregion
 
         #region ICollection<T> Helper Methods
@@ -72,7 +71,6 @@ namespace System.Collections.Tests
 
         protected override bool DuplicateValuesAllowed => false;
         protected override bool DefaultValueWhenNotAllowed_Throws => false;
-
         #endregion
 
         #region ICollection_Generic
@@ -115,7 +113,6 @@ namespace System.Collections.Tests
                 }
             }
         }
-
         #endregion
 
         #region Set Function Validation
@@ -302,7 +299,6 @@ namespace System.Collections.Tests
             Assert.Equal(expected.Count, set.Count);
             Assert.True(expected.SetEquals(set));
         }
-
         #endregion
 
         #region Set Function tests
@@ -533,7 +529,6 @@ namespace System.Collections.Tests
             );
             Validate_UnionWith(set, enumerable);
         }
-
         #endregion
 
         #region Set Function tests on itself
@@ -621,7 +616,6 @@ namespace System.Collections.Tests
             ISet<T> set = GenericISetFactory(setLength);
             Validate_UnionWith(set, set);
         }
-
         #endregion
 
         #region Set Function tests on a large Set
@@ -715,7 +709,6 @@ namespace System.Collections.Tests
             IEnumerable<T> enumerable = CreateEnumerable(EnumerableType.List, set, 150, 0, 0);
             Validate_UnionWith(set, enumerable);
         }
-
         #endregion
 
         #region Other misc ISet test Scenarios

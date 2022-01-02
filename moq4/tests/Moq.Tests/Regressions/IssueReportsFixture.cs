@@ -38,7 +38,6 @@ public class _181
         mock.Verify(d => d.Dispose());
     }
 }
-
 #endregion
 
 namespace Moq.Tests.Regressions
@@ -80,7 +79,6 @@ namespace Moq.Tests.Regressions
                 mock.VerifyAll();
             }
         }
-
 		#endregion
 
 		#region 47 & 62
@@ -121,7 +119,6 @@ namespace Moq.Tests.Regressions
             testMock.Verify(x => x.M1());
             testMock.Verify(x => x.M2());
         }
-
 #endregion
 
 		#region #78
@@ -175,7 +172,6 @@ namespace Moq.Tests.Regressions
                 mock.VerifyAll();
             }
         }
-
 		#endregion
 
 		#region 82
@@ -213,7 +209,6 @@ namespace Moq.Tests.Regressions
                 mock.Object.Remove_info(string.Empty);
             }
         }
-
 		#endregion
 
 		#region 110
@@ -262,7 +257,6 @@ namespace Moq.Tests.Regressions
                 string Value { get; }
             }
         }
-
 		#endregion
 
 		#region 131
@@ -299,7 +293,6 @@ namespace Moq.Tests.Regressions
                 new string Method();
             }
         }
-
 		#endregion
 
 		#region 141
@@ -328,7 +321,6 @@ namespace Moq.Tests.Regressions
                 public void Method() { }
             }
         }
-
 		#endregion
 
 		#region 142
@@ -357,7 +349,6 @@ namespace Moq.Tests.Regressions
                 INameHolder Foo(int index);
             }
         }
-
 		#endregion
 
 		#region 156
@@ -389,7 +380,6 @@ namespace Moq.Tests.Regressions
                 int Foo();
             }
         }
-
 		#endregion
 
 		#region 157
@@ -417,7 +407,6 @@ namespace Moq.Tests.Regressions
                 public virtual void Close() { }
             }
         }
-
 		#endregion
 
 		#region 162
@@ -691,7 +680,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region 166
@@ -769,7 +757,6 @@ namespace Moq.Tests.Regressions
                 event EventHandler Event;
             }
         }
-
 		#endregion
 
 		#region 169
@@ -817,7 +804,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region 175
@@ -925,7 +911,6 @@ namespace Moq.Tests.Regressions
                 public int ExtendedValue { get; set; }
             }
         }
-
 		#endregion
 
 		#region #176
@@ -987,7 +972,6 @@ namespace Moq.Tests.Regressions
                 Assert.True(false, "No exception was thrown when one should have been");
             }
         }
-
 		#endregion // #176
 
 		#region #184
@@ -1008,7 +992,6 @@ namespace Moq.Tests.Regressions
                 mock.Verify();
             }
         }
-
 		#endregion // #184
 
 		#region 193
@@ -1035,7 +1018,6 @@ namespace Moq.Tests.Regressions
                 public void Method<U>() { }
             }
         }
-
 		#endregion
 
 		#region 224
@@ -1059,7 +1041,6 @@ namespace Moq.Tests.Regressions
                 Assert.False(timedOut);
             }
         }
-
 		#endregion
 
 		#region 239
@@ -1107,7 +1088,6 @@ namespace Moq.Tests.Regressions
                 new bool ABoolean { get; set; }
             }
         }
-
 		#endregion
 
 		#region #252
@@ -1136,7 +1116,6 @@ namespace Moq.Tests.Regressions
 
             public class MyClass { }
         }
-
 		#endregion // #252
 
 		#region #273
@@ -1161,7 +1140,6 @@ namespace Moq.Tests.Regressions
                 bool Test();
             }
         }
-
 		#endregion // #252
 
 		#region 275
@@ -1242,7 +1220,6 @@ namespace Moq.Tests.Regressions
                 public int Value { get; set; }
             }
         }
-
 		#endregion
 
 		#region 292
@@ -1292,7 +1269,6 @@ namespace Moq.Tests.Regressions
                 IDataReader ExecuteReader();
             }
         }
-
 		#endregion
 
 		#region 296
@@ -1319,7 +1295,6 @@ namespace Moq.Tests.Regressions
                 public abstract event EventHandler SomethingChanged;
             }
         }
-
 		#endregion
 
 		#region 311
@@ -1374,7 +1349,6 @@ namespace Moq.Tests.Regressions
                 int[,,] ThreeDimensionalArray { get; }
             }
         }
-
 		#endregion 311
 
 		#region #135
@@ -1409,7 +1383,6 @@ namespace Moq.Tests.Regressions
                 aMock.Verify(m => m.Foo(i2, i1), Times.Once());
             }
         }
-
 		#endregion // #135
 
 		#region 314
@@ -1448,7 +1421,6 @@ namespace Moq.Tests.Regressions
                 string Value { get; }
             }
         }
-
 		#endregion
 
 		#region 328
@@ -1538,7 +1510,6 @@ namespace Moq.Tests.Regressions
                 mock.VerifyAll();
             }
         }
-
 		#endregion // #328
 
 		#region 331
@@ -1564,7 +1535,6 @@ namespace Moq.Tests.Regressions
                 public bool Property { get; set; }
             }
         }
-
 		#endregion
 
 		#region 337
@@ -1593,7 +1563,6 @@ namespace Moq.Tests.Regressions
                 User GetUserByEmail(string email);
             }
         }
-
 		#endregion
 
 		#region 340
@@ -1637,7 +1606,6 @@ namespace Moq.Tests.Regressions
                 protected Foo(SerializationInfo info, StreamingContext context) { }
             }
         }
-
 		#endregion
 
 		#region 343
@@ -1671,7 +1639,6 @@ namespace Moq.Tests.Regressions
                 Assert.IsType<Orange>(fruitPicker.Object.Pick<Orange>());
             }
         }
-
 		#endregion
 
 		#region 383
@@ -1709,7 +1676,6 @@ namespace Moq.Tests.Regressions
                 public int Foo() => 13;
             }
         }
-
 		#endregion
 
 		#region 421
@@ -1729,7 +1695,6 @@ namespace Moq.Tests.Regressions
                 void Bar(IEnumerable values);
             }
         }
-
 		#endregion
 
 		#region 430
@@ -1812,7 +1777,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region 432
@@ -1903,7 +1867,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region 438
@@ -1972,7 +1935,6 @@ namespace Moq.Tests.Regressions
                 IPing Ping { get; }
             }
         }
-
 		#endregion
 
 		#region 448
@@ -2012,7 +1974,6 @@ namespace Moq.Tests.Regressions
                 public virtual bool BooleanProperty => true;
             }
         }
-
 		#endregion
 
 		#region 458
@@ -2100,7 +2061,6 @@ namespace Moq.Tests.Regressions
             {
             }
         }
-
 		#endregion
 
 		#region 467
@@ -2217,7 +2177,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region 582
@@ -2242,7 +2201,6 @@ namespace Moq.Tests.Regressions
                 foo.Method();
             }
         }
-
 		#endregion
 
 		#region 592
@@ -2289,7 +2247,6 @@ namespace Moq.Tests.Regressions
                 Task<int> Boo();
             }
         }
-
 		#endregion
 
 		#region 593
@@ -2317,7 +2274,6 @@ namespace Moq.Tests.Regressions
                 Task<bool> Boo();
             }
         }
-
 		#endregion
 
 		#region 605
@@ -2387,7 +2343,6 @@ namespace Moq.Tests.Regressions
                 // is signature matching for delegates; see also the comment in `CastleProxyFactory`.
             }
         }
-
 		#endregion
 
 		#region 652
@@ -2420,7 +2375,6 @@ namespace Moq.Tests.Regressions
                 int MyFunc(int x);
             }
         }
-
 		#endregion
 
 		#region 657
@@ -2460,7 +2414,6 @@ namespace Moq.Tests.Regressions
                 int DoWork();
             }
         }
-
 		#endregion
 
 		#region 696
@@ -2496,7 +2449,6 @@ namespace Moq.Tests.Regressions
                 int this[int index] { get; set; }
             }
         }
-
 		#endregion
 
 		#region 702
@@ -2536,7 +2488,6 @@ namespace Moq.Tests.Regressions
                 await mock.Object.DoMoreStuffAsync();
             }
         }
-
 		#endregion
 
 		#region 706
@@ -2581,7 +2532,6 @@ namespace Moq.Tests.Regressions
                 Assert.False(mock.CallBase);
             }
         }
-
 		#endregion
 
 		#region 711
@@ -2613,7 +2563,6 @@ namespace Moq.Tests.Regressions
                 mock.VerifyAll();
             }
         }
-
 		#endregion
 
 		#region 714
@@ -2638,7 +2587,6 @@ namespace Moq.Tests.Regressions
                 void Method(object arg);
             }
         }
-
 		#endregion
 
 		#region 725
@@ -2672,7 +2620,6 @@ namespace Moq.Tests.Regressions
                 new Mock<IUseGuid>().Setup(x => x.UseNullable(data.Id));
             }
         }
-
 		#endregion
 
 		#region 735
@@ -2717,7 +2664,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region 809
@@ -2751,7 +2697,6 @@ namespace Moq.Tests.Regressions
                 void Test(ClassWithoutDefaultConstructor value);
             }
         }
-
 		#endregion
 
 		#region #810
@@ -2794,7 +2739,6 @@ namespace Moq.Tests.Regressions
                 Assert.Equal("x => x.DoThings<object>(null)", setupGenericSequence.ToString());
             }
         }
-
 		#endregion
 
 		#region 823
@@ -2820,7 +2764,6 @@ namespace Moq.Tests.Regressions
                 //   "Expression must be writeable", referring to a parameter "left".
             }
         }
-
 		#endregion
 
 		#region 845
@@ -2860,7 +2803,6 @@ namespace Moq.Tests.Regressions
                 _ = mock.Object.Bar;
             }
         }
-
 		#endregion
 
 		#region 870
@@ -2912,7 +2854,6 @@ namespace Moq.Tests.Regressions
                 string Item { get; set; }
             }
         }
-
 		#endregion
 
 		#region 874
@@ -2942,7 +2883,6 @@ namespace Moq.Tests.Regressions
                 Assert.Null(mockedIndexResult());
             }
         }
-
 		#endregion
 
 		#region 883
@@ -2996,7 +2936,6 @@ namespace Moq.Tests.Regressions
                 Task DoAsync();
             }
         }
-
 		#endregion
 
 		#region 893
@@ -3110,7 +3049,6 @@ namespace Moq.Tests.Regressions
                 public void RaiseBE() => this.be?.Invoke();
             }
         }
-
 		#endregion
 
 		#region 897
@@ -3152,7 +3090,6 @@ namespace Moq.Tests.Regressions
                 List<int> GetDataList(DateTimeOffset date);
             }
         }
-
 		#endregion
 
 		#region 903
@@ -3240,7 +3177,6 @@ namespace Moq.Tests.Regressions
                 this.mock.Setup(m => m.Method<object>((int)It.IsAny<object>())).Callback(callback);
             }
         }
-
 		#endregion
 
 		#region 918
@@ -3305,7 +3241,6 @@ namespace Moq.Tests.Regressions
                 loggerMock.Verify();
             }
         }
-
 		#endregion
 
 		#region 932
@@ -3335,7 +3270,6 @@ namespace Moq.Tests.Regressions
 
             public class C : I { }
         }
-
 		#endregion
 
 		#region 942
@@ -3390,7 +3324,6 @@ namespace Moq.Tests.Regressions
                 Assert.Equal(toStringReturnValue, containerMock.Object.Content.ToString());
             }
         }
-
 		#endregion
 
 		#region 955
@@ -3446,7 +3379,6 @@ namespace Moq.Tests.Regressions
                 IList<T> List();
             }
         }
-
 		#endregion
 
 		#region 1012
@@ -3480,7 +3412,6 @@ namespace Moq.Tests.Regressions
                 IX X { get; }
             }
         }
-
 		#endregion
 
 		#region 1024
@@ -3523,7 +3454,6 @@ namespace Moq.Tests.Regressions
                 IList<string> DoTata();
             }
         }
-
 		#endregion
 
 		#region 1031
@@ -3576,7 +3506,6 @@ namespace Moq.Tests.Regressions
                 bool IsStored(string arg);
             }
         }
-
 		#endregion
 
 		#region 1036
@@ -3596,7 +3525,6 @@ namespace Moq.Tests.Regressions
                 string this[string key] { set; }
             }
         }
-
 		#endregion
 
 		#region 1039
@@ -3619,7 +3547,6 @@ namespace Moq.Tests.Regressions
                 public string ConnectionString { get; set; }
             }
         }
-
 		#endregion
 
 		#region 1054
@@ -3665,7 +3592,6 @@ namespace Moq.Tests.Regressions
                 public string Method(Expression<Func<MyObject, bool>> expression);
             }
         }
-
 		#endregion
 
 		#region 1071
@@ -3702,7 +3628,6 @@ namespace Moq.Tests.Regressions
                 Assert.Equal(321, bar.Foo.Property);
             }
         }
-
 		#endregion
 
 		#region 1073
@@ -3727,7 +3652,6 @@ namespace Moq.Tests.Regressions
                 public void Method();
             }
         }
-
 		#endregion
 
 		#region 1114
@@ -3772,7 +3696,6 @@ namespace Moq.Tests.Regressions
                 public virtual void SecondCall() { }
             }
         }
-
 		#endregion
 
         // Old @ Google Code
@@ -3796,7 +3719,6 @@ namespace Moq.Tests.Regressions
         {
             IEnumerable<string> GetValuesSince(DateTime since);
         }
-
 		#endregion
 
 		#region #48
@@ -3820,7 +3742,6 @@ namespace Moq.Tests.Regressions
                 string this[int index] { get; set; }
             }
         }
-
 		#endregion
 
 		#region #52
@@ -3848,7 +3769,6 @@ namespace Moq.Tests.Regressions
         {
             void DoSomething(int id);
         }
-
 		#endregion
 
 		#region #62
@@ -3863,7 +3783,6 @@ namespace Moq.Tests.Regressions
         {
             var mock = new Mock<ISomething<object>>();
         }
-
 		#endregion
 
 		#region #60
@@ -3890,7 +3809,6 @@ namespace Moq.Tests.Regressions
 
             mocked.VerifyAll();
         }
-
 		#endregion
 
 		#region #21
@@ -3916,7 +3834,6 @@ namespace Moq.Tests.Regressions
         {
             int Method(int value);
         }
-
 		#endregion
 
 		#region #49
@@ -3965,7 +3882,6 @@ namespace Moq.Tests.Regressions
                 return left.Equals(right);
             }
         }
-
 		#endregion
 
 		#region #68
@@ -3978,7 +3894,6 @@ namespace Moq.Tests.Regressions
 
             Assert.Throws<ArgumentException>(() => Mock.Get(m));
         }
-
 		#endregion
 
 		#region #69
@@ -4000,7 +3915,6 @@ namespace Moq.Tests.Regressions
 
             Assert.Equal(ret, mock.Object.Get("a"));
         }
-
 		#endregion
 
 		#region #85
@@ -4047,7 +3961,6 @@ namespace Moq.Tests.Regressions
             {
             }
         }
-
 		#endregion
 
 		#region #89
@@ -4069,7 +3982,6 @@ namespace Moq.Tests.Regressions
                 string Get(int i);
             }
         }
-
 		#endregion
 
 		#region #128
@@ -4103,7 +4015,6 @@ namespace Moq.Tests.Regressions
                 IList<int> GetData();
             }
         }
-
 		#endregion
 
 		#region #134
@@ -4132,7 +4043,6 @@ namespace Moq.Tests.Regressions
                 void Submit(string mailServer, string from, params int[] toRecipient);
             }
         }
-
 		#endregion
 
 		#region #136
@@ -4141,7 +4051,6 @@ namespace Moq.Tests.Regressions
         {
             // Fixed on PropertiesFixture.cs
         }
-
 		#endregion
 
 		#region #138
@@ -4170,7 +4079,6 @@ namespace Moq.Tests.Regressions
                 Assert.Equal("Bar", superFoo.Bar);
             }
         }
-
 		#endregion
 
 		#region #145
@@ -4204,7 +4112,6 @@ namespace Moq.Tests.Regressions
                 Assert.Equal("Success A", mock.Object.Resolve<DataWriter<DataA>>());
             }
         }
-
 		#endregion
 
 		#region #111 & #155
@@ -4311,7 +4218,6 @@ namespace Moq.Tests.Regressions
                 string GetValue(string name, params object[] args);
             }
         }
-
 		#endregion
 
 		#region #159
@@ -4369,7 +4275,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #152
@@ -4409,7 +4314,6 @@ namespace Moq.Tests.Regressions
                 );
             }
         }
-
 		#endregion
 
 		#region #153
@@ -4495,7 +4399,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #146
@@ -4522,7 +4425,6 @@ namespace Moq.Tests.Regressions
                 mock.VerifySet(v => v.Property = false);
             }
         }
-
 		#endregion
 
 		#region #158
@@ -4613,7 +4515,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #174
@@ -4640,7 +4541,6 @@ namespace Moq.Tests.Regressions
             {
             }
         }
-
 		#endregion
 
 		#region #177
@@ -4659,7 +4559,6 @@ namespace Moq.Tests.Regressions
                 void DoStuff<TFrom, TTo>() where TTo : TFrom;
             }
         }
-
 		#endregion
 
 		#region #184
@@ -4695,7 +4594,6 @@ namespace Moq.Tests.Regressions
                 event EventHandler BarEvent;
             }
         }
-
 		#endregion
 
 		#region #185
@@ -4711,7 +4609,6 @@ namespace Moq.Tests.Regressions
                 );
             }
         }
-
 		#endregion
 
 		#region #187
@@ -4749,7 +4646,6 @@ namespace Moq.Tests.Regressions
                 object Get<T>() where T : new();
             }
         }
-
 		#endregion
 
 		#region #186
@@ -4784,7 +4680,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #190
@@ -4831,7 +4726,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #204
@@ -4869,7 +4763,6 @@ namespace Moq.Tests.Regressions
                 public int Id { get; set; }
             }
         }
-
 		#endregion
 
 		#region #205
@@ -4888,7 +4781,6 @@ namespace Moq.Tests.Regressions
                 string this[int index] { get; set; }
             }
         }
-
 		#endregion
 
 		#region #223
@@ -4927,7 +4819,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #228
@@ -4980,7 +4871,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #229
@@ -5012,7 +4902,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #230
@@ -5035,7 +4924,6 @@ namespace Moq.Tests.Regressions
                 stream.Object.Read(contents, 0, (int)stream.Object.Length);
             }
         }
-
 		#endregion
 
 		#region #232
@@ -5088,7 +4976,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #242
@@ -5115,7 +5002,6 @@ namespace Moq.Tests.Regressions
             {
             }
         }
-
 		#endregion
 
 		#region #245
@@ -5136,7 +5022,6 @@ namespace Moq.Tests.Regressions
                 void Do<T1, T2>() where T2 : T1;
             }
         }
-
 		#endregion
 
 		#region #251
@@ -5164,7 +5049,6 @@ namespace Moq.Tests.Regressions
                 void Save(T value);
             }
         }
-
 		#endregion
 
 		#region #256
@@ -5190,7 +5074,6 @@ namespace Moq.Tests.Regressions
                 ~ClassWithFinalizer() { }
             }
         }
-
 		#endregion
 
 		#region #261
@@ -5218,7 +5101,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #267
@@ -5296,7 +5178,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #325
@@ -5417,7 +5298,6 @@ namespace Moq.Tests.Regressions
                 }
             }
         }
-
 		#endregion
 
 		#region #250
@@ -5432,7 +5312,6 @@ namespace Moq.Tests.Regressions
                 Assert.NotNull(target.Object);
             }
         }
-
 		#endregion
 
 		#region Matcher should work with Convert

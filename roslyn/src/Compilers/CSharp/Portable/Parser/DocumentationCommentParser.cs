@@ -1818,7 +1818,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
         }
-
         #endregion Cref
 
         #region Name attribute values

@@ -72,7 +72,6 @@ namespace System.IO.Tests
             );
         }
     }
-
     #endregion
 
     #region EnumerateFileSystemInfos
@@ -147,7 +146,6 @@ namespace System.IO.Tests
             );
         }
     }
-
     #endregion
 
     #region EnumerateDirectories

@@ -48,7 +48,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty(Required = Required.AllowNull)]
             public DateTime? ReleaseDate { get; set; }
         }
-
         #endregion
 
         [Test]

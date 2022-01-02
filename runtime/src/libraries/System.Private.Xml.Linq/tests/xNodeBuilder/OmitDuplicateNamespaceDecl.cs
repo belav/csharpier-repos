@@ -40,7 +40,6 @@ namespace CoreXml.Test.XLinq
                     sw.Dispose();
                     return sw.ToString();
                 }
-
                 #endregion
                 //[Variation(Desc = "1 level down", Priority = 0, Params = new object[] { "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></p:A>" })]
                 //[Variation(Desc = "1 level down II.", Priority = 0, Params = new object[] { "<A><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></A>" })]  // start at not root node

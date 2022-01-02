@@ -964,7 +964,6 @@ class Derived<X> : CGoo
 }";
             await VerifyItemExistsAsync(markup, "Something<X>(X arg)");
         }
-
         #endregion
 
         #region "Commit tests"
@@ -2826,7 +2825,6 @@ End Class
                 Assert.Equal(expectedCaretPosition, caretPosition);
             }
         }
-
         #endregion
 
         #region "Commit: With Trivia"
@@ -3237,7 +3235,6 @@ int bar;
                 Assert.Equal(expectedCaretPosition, caretPosition);
             }
         }
-
         #endregion
 
         #region "EditorBrowsable should be ignored"
@@ -3270,7 +3267,6 @@ public class B
                 referencedLanguage: LanguageNames.CSharp
             );
         }
-
         #endregion
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]

@@ -61,7 +61,6 @@ namespace System.Reflection
             // must be last to avoid threading problems
             return m_invocationFlags = invocationFlags | InvocationFlags.Initialized;
         }
-
         #endregion
 
         #region Constructor
@@ -75,13 +74,11 @@ namespace System.Reflection
             m_fieldHandle = handle.Value;
             m_fieldAttributes = RuntimeFieldHandle.GetAttributes(handle);
         }
-
         #endregion
 
         #region Private Members
         RuntimeFieldHandleInternal IRuntimeFieldInfo.Value =>
             new RuntimeFieldHandleInternal(m_fieldHandle);
-
         #endregion
 
         #region Internal Members
@@ -116,7 +113,6 @@ namespace System.Reflection
         {
             return o is RtFieldInfo m && m.m_fieldHandle == m_fieldHandle;
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -130,7 +126,6 @@ namespace System.Reflection
         {
             return RuntimeTypeHandle.GetModule(RuntimeFieldHandle.GetApproxDeclaringType(this));
         }
-
         #endregion
 
         #region FieldInfo Overrides

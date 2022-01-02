@@ -74,7 +74,6 @@ namespace System.DirectoryServices
         {
             _securityMaskUsedInRetrieval = securityMask;
         }
-
         #endregion
 
         #region Public methods
@@ -263,7 +262,6 @@ namespace System.DirectoryServices
 
             base.PurgeAuditRules(identity);
         }
-
         #endregion
 
         #region Factories
@@ -381,7 +379,6 @@ namespace System.DirectoryServices
         {
             return ((_securityMaskUsedInRetrieval & SecurityMasks.Sacl) != 0);
         }
-
         #endregion
 
         #region some overrides
@@ -711,7 +708,6 @@ namespace System.DirectoryServices
                 inheritedObjectType,
                 type
             ) { }
-
         #endregion constructors
 
         #region Public properties
@@ -1447,7 +1443,6 @@ namespace System.DirectoryServices
                 inheritedObjectType,
                 auditFlags
             ) { }
-
         #endregion constructors
 
         #region Public properties

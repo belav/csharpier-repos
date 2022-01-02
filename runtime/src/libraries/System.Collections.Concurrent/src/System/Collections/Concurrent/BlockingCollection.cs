@@ -134,7 +134,6 @@ namespace System.Collections.Concurrent
         {
             get { throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported); }
         }
-
         #endregion
 
 

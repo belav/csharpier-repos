@@ -30,7 +30,6 @@ namespace Marshalling
     {
         public long x;
     }
-
     #endregion
 
     #region LayoutKind.Explicit classes
@@ -119,7 +118,6 @@ namespace Marshalling
     public class SequentialEmptyBase
     {
     }
-
     #endregion
 
     #region LayoutKind.Sequential classes

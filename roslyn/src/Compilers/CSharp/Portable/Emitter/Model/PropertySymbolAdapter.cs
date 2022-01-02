@@ -136,7 +136,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return GetSynthesizedSealedAccessor(MethodKind.PropertySet);
             }
         }
-
         #endregion
 
         #region ISignature Members
@@ -221,7 +220,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics: context.Diagnostics
             );
         }
-
         #endregion
 
         #region ITypeDefinitionMember Members
@@ -243,7 +241,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return PEModuleBuilder.MemberVisibility(AdaptedPropertySymbol);
             }
         }
-
         #endregion
 
         #region ITypeMemberReference Members
@@ -253,7 +250,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CheckDefinitionInvariant();
             return AdaptedPropertySymbol.ContainingType.GetCciAdapter();
         }
-
         #endregion
 
         #region IReference Members
@@ -269,7 +265,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CheckDefinitionInvariant();
             return this;
         }
-
         #endregion
 
         #region INamedEntity Members
@@ -282,7 +277,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return AdaptedPropertySymbol.MetadataName;
             }
         }
-
         #endregion
 
         private IMethodReference GetSynthesizedSealedAccessor(MethodKind targetMethodKind)

@@ -55,7 +55,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             return parsedTree;
         }
-
         #endregion
 
         [Fact]
@@ -211,7 +210,6 @@ bar();
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Field Declarations
@@ -298,7 +296,6 @@ bar();
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Constructor and Finalizer
@@ -356,7 +353,6 @@ static Script() { }
                 }
             );
         }
-
         #endregion
 
         #region New
@@ -1167,7 +1163,6 @@ new static partial public class C { }
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Using
@@ -1265,7 +1260,6 @@ using (var x = bar) { }
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Unsafe
@@ -1403,7 +1397,6 @@ unsafe Idf * Idf;
 ";
             ParseAndValidate(test);
         }
-
         #endregion
 
         #region Fixed
@@ -1487,7 +1480,6 @@ fixed int x[5];
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Delegate
@@ -1604,7 +1596,6 @@ delegate void Goo();
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Indexer
@@ -1868,7 +1859,6 @@ new public bool this[int index] { get; }
                     Diagnostic(ErrorCode.ERR_IndexerNeedsParam).WithLocation(1, 1)
                 );
         }
-
         #endregion
 
         #region Extern
@@ -1950,7 +1940,6 @@ extern alias Goo<T> { get; }
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Ordering
@@ -2117,7 +2106,6 @@ using Goo;
                 }
             );
         }
-
         #endregion
 
         #region Partial
@@ -2493,7 +2481,6 @@ partial partial<int> Goo() { }
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Attributes
@@ -2700,7 +2687,6 @@ delegate D();
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Fields
@@ -2814,7 +2800,6 @@ fixed int x[10];
                 N(SyntaxKind.EndOfFileToken);
             }
         }
-
         #endregion
 
         #region Multiplication
@@ -2981,7 +2966,6 @@ fixed int x[10];
             }
             EOF();
         }
-
         #endregion
 
         #region Ternary Operator
@@ -7869,7 +7853,6 @@ T ? f(from x
             }
             EOF();
         }
-
         #endregion
 
         #region Queries
@@ -8542,7 +8525,6 @@ T ? f(from x
             }
             EOF();
         }
-
         #endregion
 
         #region Global statement separators
@@ -8873,7 +8855,6 @@ Console.Goo()
                 }
             );
         }
-
         #endregion
 
         #region Invalid Keywords
@@ -8994,7 +8975,6 @@ Console.Goo()
                 }
             );
         }
-
         #endregion
 
         [Fact]

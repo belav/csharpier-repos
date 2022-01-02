@@ -534,7 +534,6 @@ interface C
                 }
             );
         }
-
         #endregion
 
         #region Execution
@@ -733,7 +732,6 @@ D Raise
 "
             );
         }
-
         #endregion Execution
 
         [Fact]

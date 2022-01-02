@@ -85,7 +85,6 @@ namespace System.Collections.Tests
             Unspecified,
             Sequential
         }
-
         #endregion
 
         #region GetEnumerator()
@@ -111,7 +110,6 @@ namespace System.Collections.Tests
                         iterations++;
             Assert.Equal(count * count * count, iterations);
         }
-
         #endregion
 
         #region Enumerator.MoveNext
@@ -195,7 +193,6 @@ namespace System.Collections.Tests
                 }
             );
         }
-
         #endregion
 
         #region Enumerator.Current
@@ -297,7 +294,6 @@ namespace System.Collections.Tests
                 }
             );
         }
-
         #endregion
 
         #region Enumerator.Reset

@@ -777,7 +777,6 @@ namespace Newtonsoft.Json.Utilities
 
             return true;
         }
-
         #endregion
 
         #region Write

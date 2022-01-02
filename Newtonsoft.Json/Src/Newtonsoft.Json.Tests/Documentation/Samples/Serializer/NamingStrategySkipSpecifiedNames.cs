@@ -50,7 +50,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty(PropertyName = "UPN")]
             public string Upn { get; set; }
         }
-
         #endregion
 
         [Test]

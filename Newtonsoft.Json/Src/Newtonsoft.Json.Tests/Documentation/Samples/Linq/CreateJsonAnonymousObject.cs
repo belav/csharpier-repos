@@ -53,7 +53,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             public string Link { get; set; }
             public IList<string> Categories { get; set; }
         }
-
         #endregion
 
         [Test]

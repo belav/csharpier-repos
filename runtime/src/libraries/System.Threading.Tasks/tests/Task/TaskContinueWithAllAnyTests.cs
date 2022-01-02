@@ -52,7 +52,6 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             _taskInfos = parameters.AllTaskInfos;
             _tasks = new Task[parameters.AllTaskInfos.Length];
         }
-
         #endregion
 
         /// <summary>
@@ -968,7 +967,6 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         /// this is the result
         /// </summary>
         public double Result { get; private set; }
-
         #endregion
 
         #region Helper Methods
@@ -1069,7 +1067,6 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         TaskTContinueWithTaskT, // test Task<T>.Factory.Factory.ContinueWhenAll/Any<T>(..., Func<>,...)
         TaskTContinueWithTaskT_NEW, // test new overload of Task.Factory.Factory.ContinueWhenAll/Any<T1, T2>(..., Func<>,...)
     }
-
     #endregion
 
     public sealed class TaskContinueWithAllAnyTests

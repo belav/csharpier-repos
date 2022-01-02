@@ -87,7 +87,6 @@ namespace System.Speech.Internal.ObjectTokens
                 base.Dispose(disposing);
             }
         }
-
         #endregion
 
         #region public Methods
@@ -108,7 +107,6 @@ namespace System.Speech.Internal.ObjectTokens
         {
             return Id.GetHashCode();
         }
-
         #endregion
 
         #region Internal Properties
@@ -214,7 +212,6 @@ namespace System.Speech.Internal.ObjectTokens
                 return description;
             }
         }
-
         #endregion
 
         #region internal Methods
@@ -277,7 +274,6 @@ namespace System.Speech.Internal.ObjectTokens
         {
             throw new NotImplementedException();
         }
-
         #endregion
 
         /// <summary>
@@ -360,7 +356,6 @@ namespace System.Speech.Internal.ObjectTokens
             }
             return instanceValue;
         }
-
         #endregion
 
         #region private Methods
@@ -383,7 +378,6 @@ namespace System.Speech.Internal.ObjectTokens
             [PreserveSig]
             int GetObjectToken(IntPtr ppToken);
         }
-
         #endregion
         #region private Fields
 

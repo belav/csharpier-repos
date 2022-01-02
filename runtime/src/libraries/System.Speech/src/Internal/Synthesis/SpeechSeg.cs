@@ -15,7 +15,6 @@ namespace System.Speech.Internal.Synthesis
             _voice = voice;
             _audio = audio;
         }
-
         #endregion
 
         #region Internal Properties
@@ -39,7 +38,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return _audio == null; }
         }
-
         #endregion
 
         #region Internal Methods
@@ -53,7 +51,6 @@ namespace System.Speech.Internal.Synthesis
 
             _textFragments.Add(textFragment);
         }
-
         #endregion
 
         #region private Fields

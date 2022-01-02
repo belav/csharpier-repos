@@ -48,7 +48,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         /// Protected from concurrent access by the <see cref="_lock"/>
         /// </summary>
         private Task _updateUITask = Task.CompletedTask;
-
         #endregion
 
         #region Fields protected by _updateUITask running serially
@@ -74,7 +73,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         /// Protected from concurrent access due to serialization from <see cref="_updateUITask"/>
         /// </summary>
         private int _lastPendingItemCount;
-
         #endregion
 
         [ImportingConstructor]

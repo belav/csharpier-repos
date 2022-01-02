@@ -569,7 +569,6 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task IncompleteMember() =>
             await AssertTagsOnBracesOrSemicolonsAsync(@"class C { private !C(");
-
         #endregion
 
         private static async Task AssertTagsOnBracesOrSemicolonsAsync(

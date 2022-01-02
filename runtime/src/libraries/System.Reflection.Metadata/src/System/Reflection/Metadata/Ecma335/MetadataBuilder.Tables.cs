@@ -1909,7 +1909,6 @@ namespace System.Reflection.Metadata.Ecma335
 
             return CustomDebugInformationHandle.FromRowId(_customDebugInformationTable.Count);
         }
-
         #endregion
 
         #region Validation
@@ -2135,7 +2134,6 @@ namespace System.Reflection.Metadata.Ecma335
                 }
             }
         }
-
         #endregion
 
         #region Serialization

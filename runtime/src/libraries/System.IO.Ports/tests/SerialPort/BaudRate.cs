@@ -116,7 +116,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying Int32.MaxValue BaudRate");
             VerifyException(int.MaxValue, ThrowAt.Open, typeof(ArgumentOutOfRangeException));
         }
-
         #endregion
 
         #region Verification for Test Cases

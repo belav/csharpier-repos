@@ -128,7 +128,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying BytesToRead with ReadExisting()");
             VerifyBytesToRead(ReadExisting, DEFAULT_NUM_RND_BYTES, false);
         }
-
         #endregion
 
         #region Verification for Test Cases

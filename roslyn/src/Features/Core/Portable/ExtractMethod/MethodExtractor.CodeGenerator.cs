@@ -114,7 +114,6 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             protected abstract TStatement CreateReturnStatement(string identifierName = null);
 
             protected abstract ImmutableArray<TStatement> GetInitialStatementsForMethodDefinitions();
-
             #endregion
 
             public async Task<GeneratedCode> GenerateAsync(CancellationToken cancellationToken)

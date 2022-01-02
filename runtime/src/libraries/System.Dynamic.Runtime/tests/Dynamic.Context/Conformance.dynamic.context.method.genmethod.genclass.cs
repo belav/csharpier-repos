@@ -156,7 +156,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             dec = 3m;
             return 3.4f;
         }
-
         #endregion
         #region Nested class
         public class NestedMemberClass<U>

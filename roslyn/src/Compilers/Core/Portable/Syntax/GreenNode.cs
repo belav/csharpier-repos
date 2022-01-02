@@ -155,7 +155,6 @@ namespace Microsoft.CodeAnalysis
         public virtual bool IsTrivia => false;
         public virtual bool IsSkippedTokensTrivia => false;
         public virtual bool IsDocumentationCommentTrivia => false;
-
         #endregion
 
         #region Slots
@@ -273,7 +272,6 @@ namespace Microsoft.CodeAnalysis
 
             return i;
         }
-
         #endregion
 
         #region Flags
@@ -362,7 +360,6 @@ namespace Microsoft.CodeAnalysis
         {
             get { return (this.flags & NodeFlags.ContainsAnnotations) != 0; }
         }
-
         #endregion
 
         #region Spans
@@ -399,7 +396,6 @@ namespace Microsoft.CodeAnalysis
         {
             get { return this.GetTrailingTriviaWidth() != 0; }
         }
-
         #endregion
 
         #region Serialization
@@ -456,7 +452,6 @@ namespace Microsoft.CodeAnalysis
                 writer.WriteUInt16(kindBits);
             }
         }
-
         #endregion
 
         #region Annotations
@@ -598,7 +593,6 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal abstract GreenNode SetAnnotations(SyntaxAnnotation[]? annotations);
-
         #endregion
 
         #region Diagnostics
@@ -617,7 +611,6 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal abstract GreenNode SetDiagnostics(DiagnosticInfo[]? diagnostics);
-
         #endregion
 
         #region Text
@@ -743,7 +736,6 @@ namespace Microsoft.CodeAnalysis
         {
             throw new NotImplementedException();
         }
-
         #endregion
 
         #region Tokens
@@ -848,7 +840,6 @@ namespace Microsoft.CodeAnalysis
 
             return node;
         }
-
         #endregion
 
         #region Equivalence
@@ -917,7 +908,6 @@ namespace Microsoft.CodeAnalysis
 
             return true;
         }
-
         #endregion
 
         public abstract SyntaxNode GetStructure(SyntaxTrivia parentTrivia);
@@ -1001,7 +991,6 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal abstract SyntaxNode CreateRed(SyntaxNode? parent, int position);
-
         #endregion
 
         #region Caching
@@ -1073,7 +1062,6 @@ namespace Microsoft.CodeAnalysis
                 && this.GetSlot(1) == child2
                 && this.GetSlot(2) == child3;
         }
-
         #endregion //Caching
 
         /// <summary>

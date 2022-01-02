@@ -1564,7 +1564,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(1, attr.CommonConstructorArguments.Length);
             Assert.Equal(1, attr.CommonConstructorArguments[0].Value);
         }
-
         #endregion
 
         [Fact]

@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.LanguageServices;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.UseConditionalExpression;
+
 #if CODE_STYLE
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 #endif

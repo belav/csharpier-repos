@@ -24,7 +24,6 @@ namespace System.Reflection
         private BindingFlags m_bindingFlags;
         private Signature? m_signature;
         private ParameterInfo[]? m_parameters;
-
         #endregion
 
         #region Constructor
@@ -62,7 +61,6 @@ namespace System.Reflection
                 out m_bindingFlags
             );
         }
-
         #endregion
 
         #region Internal Members
@@ -133,7 +131,6 @@ namespace System.Reflection
         }
 
         internal BindingFlags BindingFlags => m_bindingFlags;
-
         #endregion
 
         #region Object Overrides
@@ -155,7 +152,6 @@ namespace System.Reflection
 
             return sbName.ToString();
         }
-
         #endregion
 
         #region ICustomAttributeProvider
@@ -190,7 +186,6 @@ namespace System.Reflection
         {
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -215,7 +210,6 @@ namespace System.Reflection
         }
 
         public override bool IsCollectible => m_declaringType.IsCollectible;
-
         #endregion
 
         #region PropertyInfo Overrides
@@ -366,7 +360,6 @@ namespace System.Reflection
         public override bool CanRead => m_getterMethod != null;
 
         public override bool CanWrite => m_setterMethod != null;
-
         #endregion
 
         #region Dynamic

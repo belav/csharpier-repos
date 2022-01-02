@@ -12,7 +12,6 @@ namespace System.Reflection
         internal Type? type;
         internal bool is_pinned;
         internal ushort position;
-
         #endregion
 
         public override bool IsPinned => is_pinned;

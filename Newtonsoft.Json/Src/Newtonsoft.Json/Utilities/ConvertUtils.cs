@@ -38,8 +38,10 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #endif
 #if HAVE_ADO_NET
 using System.Data.SqlTypes;
@@ -636,7 +638,6 @@ namespace Newtonsoft.Json.Utilities
             value = null;
             return ConvertResult.NoValidConversion;
         }
-
 #endregion
 
 #region ConvertOrCast
@@ -678,7 +679,6 @@ namespace Newtonsoft.Json.Utilities
                 targetType
             );
         }
-
 #endregion
 
         private static object? EnsureTypeAssignable(

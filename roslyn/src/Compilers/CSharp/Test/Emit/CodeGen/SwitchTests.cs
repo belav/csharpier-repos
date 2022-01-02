@@ -3834,7 +3834,6 @@ class Goo
                 );
             }
         }
-
         #endregion
 
         #region "Implicit user defined conversion tests"
@@ -4219,7 +4218,6 @@ struct A
 ";
             CompileAndVerify(text, expectedOutput: "1");
         }
-
         #endregion
 
         [WorkItem(634404, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/634404")]
@@ -6577,7 +6575,6 @@ public class Test
 }"
             );
         }
-
         #endregion
 
         # region "Data flow analysis tests"
@@ -6843,7 +6840,6 @@ class SwitchTest
                 }"
             );
         }
-
         #endregion
 
         #region "Control flow analysis and warning tests"
@@ -7893,7 +7889,6 @@ namespace ConsoleApplication1
 }"
             );
         }
-
         #endregion
 
         #region regression tests
@@ -10215,7 +10210,6 @@ class Program
 "
             );
         }
-
         #endregion "regression tests"
 
         #region Code Quality tests

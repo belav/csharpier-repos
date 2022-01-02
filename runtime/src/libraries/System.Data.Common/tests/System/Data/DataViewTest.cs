@@ -372,7 +372,6 @@ namespace System.Data.Tests
             Assert.Equal(3, dataView[2][0]);
             Assert.Equal(2, dataView[3][0]);
         }
-
         #endregion // Sort Tests
 
         [Fact]

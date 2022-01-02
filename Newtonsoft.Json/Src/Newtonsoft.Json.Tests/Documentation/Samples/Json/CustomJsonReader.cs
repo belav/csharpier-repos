@@ -34,8 +34,10 @@ using Newtonsoft.Json.Linq;
 using Xunit;
 using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+
 #else
 using NUnit.Framework;
+
 #endif
 
 #if !(DNXCORE50 || NET20) || NETSTANDARD1_3 || NETSTANDARD2_0
@@ -281,7 +283,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             return (Value != null) ? (DateTimeOffset?)Convert.ToDateTime(Value) : null;
         }
     }
-
     #endregion
 
     [TestFixture]

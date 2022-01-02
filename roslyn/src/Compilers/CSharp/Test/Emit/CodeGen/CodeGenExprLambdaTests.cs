@@ -392,7 +392,6 @@ class ExpressionPrinter : System.Linq.Expressions.ExpressionVisitor
     }
 }
 ";
-
         #endregion A string containing expression-tree dumping utilities
 
         [Fact]
@@ -6542,7 +6541,6 @@ class C : TestBase
                 expectedOutput: expectedOutput
             );
         }
-
         #endregion Regression Tests
 
         #region helpers

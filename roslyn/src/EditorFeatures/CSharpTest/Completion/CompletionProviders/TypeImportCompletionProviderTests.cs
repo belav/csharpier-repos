@@ -99,7 +99,6 @@ class Bar
 
             await VerifyAnyItemExistsAsync(markup);
         }
-
         #endregion
 
         #region "CompletionItem tests"
@@ -1203,7 +1202,6 @@ namespace Foo1
                 displayTextSuffix: "<>"
             );
         }
-
         #endregion
 
         #region "Commit Change Tests"
@@ -1393,7 +1391,6 @@ class Bar
                 sourceCodeKind: kind
             );
         }
-
         #endregion
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]

@@ -164,7 +164,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ReportErrorOnSymbol(symbol.ContainingType, diagnostics, ref hasError);
             }
         }
-
         #endregion
 
         #region Symbols

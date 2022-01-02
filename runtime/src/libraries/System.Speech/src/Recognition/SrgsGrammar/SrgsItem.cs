@@ -66,7 +66,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             SetRepeat(min, max);
         }
-
         #endregion
 
         #region Public Method
@@ -113,7 +112,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             Elements.Add(element);
         }
-
         #endregion
 
         #region Public Properties
@@ -167,7 +165,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _weight = value;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -298,7 +295,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
             return sb.ToString();
         }
-
         #endregion
 
         #region Protected Properties
@@ -320,7 +316,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 return elements;
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -340,7 +335,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         private SrgsElementList _elements;
 
         private const int NotSet = -1;
-
         #endregion
 
         #region Private Types

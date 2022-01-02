@@ -78,7 +78,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             _semanticKey = semanticKey;
             _params = parameters;
         }
-
         #endregion
 
         #region public Properties
@@ -118,7 +117,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         public static readonly SrgsRuleRef Dictation = new(new Uri("grammar:dictation"));
         public static readonly SrgsRuleRef MnemonicSpelling =
             new(new Uri("grammar:dictation#spelling"));
-
         #endregion
 
         #region Internal methods
@@ -240,7 +238,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
             return sb.ToString();
         }
-
         #endregion
 
         #region Private Method
@@ -263,7 +260,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             _semanticKey = semanticKey;
             _params = initParameters;
         }
-
         #endregion
 
         #region Private Fields
@@ -286,7 +282,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             // without failing due to irrelevant, or ignorable words.
             Garbage,
         }
-
         #endregion
 
         // if the uri is null then it is a special rule ref

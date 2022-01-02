@@ -102,7 +102,6 @@ public class MulticastDelegateGetHashCode
 
         return retVal;
     }
-
     #endregion
     #endregion
 

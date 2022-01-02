@@ -451,7 +451,6 @@ namespace TestStructFields
             }
             return 100;
         }
-
         #endregion  // S4 tests
 
         #region S8 tests
@@ -984,7 +983,6 @@ namespace TestStructFields
             }
             return 100;
         }
-
         #endregion // S8 tests
 
 
@@ -1691,7 +1689,6 @@ namespace TestStructFields
             }
             return 100;
         }
-
         #endregion // S16 tests
 
         [MethodImpl(MethodImplOptions.NoInlining)]

@@ -103,7 +103,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerSequentialByRef_StdCall(
         InnerSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -168,7 +167,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerSequentialByVal_StdCall(
         InnerSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -256,7 +254,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerArraySequentialByRef_StdCall(
         InnerArraySequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -339,7 +336,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructInnerArraySequentialByVal_StdCall(
         InnerArraySequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -410,7 +406,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetAnsiSequentialByRef_StdCall(
         CharSetAnsiSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -477,7 +472,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetAnsiSequentialByVal_StdCall(
         CharSetAnsiSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -554,7 +548,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetUnicodeSequentialByRef_StdCall(
         CharSetUnicodeSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -627,7 +620,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructCharSetUnicodeSequentialByVal_StdCall(
         CharSetUnicodeSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -740,7 +732,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructNumberSequentialByRef_StdCall(
         NumberSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -853,7 +844,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructNumberSequentialByVal_StdCall(
         NumberSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -912,7 +902,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS3ByRef_StdCall(S3ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -967,7 +956,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS3ByVal_StdCall(S3ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -1028,7 +1016,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS5ByRef_StdCall(S5ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -1085,7 +1072,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS5ByVal_StdCall(S5ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -1166,7 +1152,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialAnsiByRef_StdCall(
         StringStructSequentialAnsiByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1243,7 +1228,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialAnsiByVal_StdCall(
         StringStructSequentialAnsiByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1324,7 +1308,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialUnicodeByRef_StdCall(
         StringStructSequentialUnicodeByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1400,7 +1383,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructStringStructSequentialUnicodeByVal_StdCall(
         StringStructSequentialUnicodeByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1459,7 +1441,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS8ByRef_StdCall(S8ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -1514,7 +1495,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS8ByVal_StdCall(S8ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -1565,7 +1545,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS9ByRef_StdCall(S9ByRefStdCallcaller caller);
-
     #endregion
 
     #region PassByValue
@@ -1612,7 +1591,6 @@ public class MarshalStructTest
     //Reverse Pinvoke,stdcall
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     public static extern bool DoCallBack_MarshalStructS9ByVal_StdCall(S9ByValStdCallcaller caller);
-
     #endregion
 
     #endregion
@@ -1685,7 +1663,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByRef_StdCall(
         IncludeOuterIntergerStructSequentialByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1754,7 +1731,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByVal_StdCall(
         IncludeOuterIntergerStructSequentialByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1815,7 +1791,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructS11ByRef_StdCall(
         S11ByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -1872,7 +1847,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructS11ByVal_StdCall(
         S11ByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -1939,7 +1913,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructComplexStructByRef_StdCall(
         ComplexStructByRefStdCallcaller caller
     );
-
     #endregion
 
     #region PassByValue
@@ -2000,7 +1973,6 @@ public class MarshalStructTest
     public static extern bool DoCallBack_MarshalStructComplexStructByVal_StdCall(
         ComplexStructByValStdCallcaller caller
     );
-
     #endregion
 
     #endregion
@@ -2902,7 +2874,6 @@ public class MarshalStructTest
             TestMethod_DoCallBack_MarshalStructByVal_StdCall(StructID.ByteStruct3Byte);
         }
     }
-
     #endregion
 
     static int Main()

@@ -260,7 +260,6 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_CREATED_EVENTID, transactionIdentifier, type);
         }
-
         #endregion
 
         #region Transaction Clone Create
@@ -300,7 +299,6 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_CLONECREATE_EVENTID, transactionIdentifier, type);
         }
-
         #endregion
 
         #region Transaction Serialized
@@ -340,7 +338,6 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_SERIALIZED_EVENTID, transactionIdentifier, type);
         }
-
         #endregion
 
         #region Transaction Exception
@@ -420,7 +417,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTION_EXCEPTION_LTM_EVENTID, type, message, innerExceptionStr);
         }
-
         #endregion
 
         #region Transaction Invalid Operation
@@ -458,7 +454,6 @@ namespace System.Transactions
                 operation
             );
         }
-
         #endregion
 
         #region Transaction Rollback
@@ -495,7 +490,6 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_ROLLBACK_EVENTID, transactionIdentifier, type);
         }
-
         #endregion
 
         #region Transaction Dependent Clone Complete
@@ -535,7 +529,6 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_DEPENDENT_CLONE_COMPLETE_EVENTID, transactionIdentifier, type);
         }
-
         #endregion
 
         #region Transaction Commit
@@ -572,7 +565,6 @@ namespace System.Transactions
             SetActivityId(transactionIdentifier);
             WriteEvent(TRANSACTION_COMMIT_EVENTID, transactionIdentifier, type);
         }
-
         #endregion
 
         #region Enlistment
@@ -611,7 +603,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_EVENTID, enlistmentIdentifier, notificationCall);
         }
-
         #endregion
 
         #region Enlistment Done
@@ -644,7 +635,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_DONE_EVENTID, enlistmentIdentifier);
         }
-
         #endregion
 
         #region Enlistment Prepared
@@ -677,7 +667,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_PREPARED_EVENTID, enlistmentIdentifier);
         }
-
         #endregion
 
         #region Enlistment ForceRollback
@@ -710,7 +699,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_FORCEROLLBACK_EVENTID, enlistmentIdentifier);
         }
-
         #endregion
 
         #region Enlistment Aborted
@@ -743,7 +731,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_ABORTED_EVENTID, enlistmentIdentifier);
         }
-
         #endregion
 
         #region Enlistment Committed
@@ -776,7 +763,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_COMMITTED_EVENTID, enlistmentIdentifier);
         }
-
         #endregion
 
         #region Enlistment InDoubt
@@ -809,7 +795,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(ENLISTMENT_INDOUBT_EVENTID, enlistmentIdentifier);
         }
-
         #endregion
 
         #region Method Enter
@@ -908,7 +893,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(METHOD_ENTER_DISTRIBUTED_EVENTID, thisOrContextObject, methodname);
         }
-
         #endregion
 
         #region Method Exit
@@ -1007,7 +991,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(METHOD_EXIT_DISTRIBUTED_EVENTID, thisOrContextObject, methodname);
         }
-
         #endregion
 
         #region Exception Consumed
@@ -1066,7 +1049,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(EXCEPTION_CONSUMED_LTM_EVENTID, exceptionStr);
         }
-
         #endregion
 
         #region TransactionManager Reenlist
@@ -1094,7 +1076,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONMANAGER_REENLIST_EVENTID, rmID);
         }
-
         #endregion
 
         #region TransactionManager Recovery Complete
@@ -1122,7 +1103,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONMANAGER_RECOVERY_COMPLETE_EVENTID, rmID);
         }
-
         #endregion
 
         #region Configured Default Timeout Adjusted
@@ -1149,7 +1129,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(CONFIGURED_DEFAULT_TIMEOUT_ADJUSTED_EVENTID);
         }
-
         #endregion
 
         #region Transactionscope Created
@@ -1193,7 +1172,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_CREATED_EVENTID, transactionID, transactionScopeResult);
         }
-
         #endregion
 
         #region Transactionscope Current Changed
@@ -1242,7 +1220,6 @@ namespace System.Transactions
                 newtransactionID
             );
         }
-
         #endregion
 
         #region Transactionscope Nested Incorrectly
@@ -1272,7 +1249,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_NESTED_INCORRECTLY_EVENTID, transactionID);
         }
-
         #endregion
 
         #region Transactionscope Disposed
@@ -1300,7 +1276,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_DISPOSED_EVENTID, transactionID);
         }
-
         #endregion
 
         #region Transactionscope Incomplete
@@ -1328,7 +1303,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_INCOMPLETE_EVENTID, transactionID);
         }
-
         #endregion
 
         #region Transactionscope Internal Error
@@ -1356,7 +1330,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONSCOPE_INTERNAL_ERROR_EVENTID, error);
         }
-
         #endregion
 
         #region Transactionscope Timeout
@@ -1384,7 +1357,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTIONSCOPE_TIMEOUT_EVENTID, transactionID);
         }
-
         #endregion
 
         #region Transaction Timeout
@@ -1412,7 +1384,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_TIMEOUT_EVENTID, transactionID);
         }
-
         #endregion
 
         #region Transactionstate Enlist
@@ -1457,7 +1428,6 @@ namespace System.Transactions
             SetActivityId(string.Empty);
             WriteEvent(TRANSACTIONSTATE_ENLIST_EVENTID, enlistmentID, type, option);
         }
-
         #endregion
 
         #region Transactionstate committed
@@ -1485,7 +1455,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_COMMITTED_EVENTID, transactionID);
         }
-
         #endregion
 
         #region Transactionstate indoubt
@@ -1513,7 +1482,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_INDOUBT_EVENTID, transactionID);
         }
-
         #endregion
 
         #region Transactionstate promoted
@@ -1548,7 +1516,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_PROMOTED_EVENTID, transactionID, distributedTxID);
         }
-
         #endregion
 
         #region Transactionstate aborted
@@ -1576,7 +1543,6 @@ namespace System.Transactions
             SetActivityId(transactionID);
             WriteEvent(TRANSACTION_ABORTED_EVENTID, transactionID);
         }
-
         #endregion
         public static class Opcodes
         {

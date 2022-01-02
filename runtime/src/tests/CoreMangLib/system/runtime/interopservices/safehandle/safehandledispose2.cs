@@ -220,7 +220,6 @@ public class SafeHandleDispose2
 
         return retVal;
     }
-
     #endregion
 
     #region Negative Test Cases
@@ -337,7 +336,6 @@ public class SafeHandleDispose2
 
         return retVal;
     }
-
     #endregion
     #endregion
 

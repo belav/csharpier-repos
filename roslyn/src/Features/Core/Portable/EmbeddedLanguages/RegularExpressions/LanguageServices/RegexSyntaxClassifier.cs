@@ -206,7 +206,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
             public void Visit(RegexCategoryEscapeNode node) =>
                 ClassifyWholeNode(node, ClassificationTypeNames.RegexCharacterClass);
-
             #endregion
 
             #region Quantifiers
@@ -246,7 +245,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                 AddClassification(node.SecondNumberToken, ClassificationTypeNames.RegexQuantifier);
                 AddClassification(node.CloseBraceToken, ClassificationTypeNames.RegexQuantifier);
             }
-
             #endregion
 
             #region Groupings
@@ -298,7 +296,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                     }
                 }
             }
-
             #endregion
 
             #region Other Escapes
@@ -313,7 +310,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
             public void ClassifyOtherEscape(RegexNode node) =>
                 ClassifyWholeNode(node, ClassificationTypeNames.RegexOtherEscape);
-
             #endregion
 
             #region Anchors
@@ -323,7 +319,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
             public void Visit(RegexAnchorEscapeNode node) =>
                 ClassifyWholeNode(node, ClassificationTypeNames.RegexAnchor);
-
             #endregion
 
             public void Visit(RegexTextNode node) =>

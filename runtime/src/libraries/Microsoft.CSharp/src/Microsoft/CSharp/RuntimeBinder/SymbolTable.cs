@@ -276,7 +276,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             }
             return list;
         }
-
         #endregion
 
         #region GetName
@@ -300,7 +299,6 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return NameManager.Add(name);
         }
-
         #endregion
 
         #region TypeParameters
@@ -615,7 +613,6 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return typeParamType;
         }
-
         #endregion
 
         #region LoadTypeChain
@@ -869,7 +866,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                     as NamespaceSymbol
                 ?? SymFactory.CreateNamespace(name, parent as NamespaceSymbol);
         }
-
         #endregion
 
         #region CTypeFromType
@@ -906,7 +902,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                       false
                   )
                 : LoadSymbolsFromType(type);
-
         #endregion
 
         #region Aggregates
@@ -1098,7 +1093,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             aggregate.SetIfaces(TypeArray.Allocate(GetCTypeArrayFromTypes(interfaces)));
             aggregate.SetIfacesAll(aggregate.GetIfaces());
         }
-
         #endregion
 
         #region Field
@@ -1158,7 +1152,6 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return field;
         }
-
         #endregion
 
         #region Events
@@ -1232,7 +1225,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                 }
             }
         }
-
         #endregion
 
         #region Properties
@@ -1416,7 +1408,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             // The access of the property is the least restrictive access of its getter/setter.
             prop.SetAccess(access);
         }
-
         #endregion
 
         #region Methods
@@ -1911,7 +1902,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             string szName,
             symbmask_t mask
         ) => SymbolLoader.LookupAggMember(GetName(szName), agg, mask) != null;
-
         #endregion
 
         #region Conversions
@@ -1999,7 +1989,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                 }
             }
         }
-
         #endregion
 
         #region Operators

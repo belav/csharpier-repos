@@ -566,7 +566,6 @@ namespace System.Collections.Concurrent
                 }
             }
         }
-
         #endregion
 
         #region Dynamic Partitioner for source data of IEnuemrable<> type
@@ -1179,7 +1178,6 @@ namespace System.Collections.Concurrent
             }
             #endregion
         }
-
         #endregion
 
         #region Dynamic Partitioner for source data of IndexRange types (IList<> and Array<>)
@@ -1554,7 +1552,6 @@ namespace System.Collections.Concurrent
                 }
             }
         }
-
         #endregion
 
 
@@ -1726,7 +1723,6 @@ namespace System.Collections.Concurrent
                 get { return ((StaticIndexRangePartition<TSource>)this).Current; }
             }
         }
-
         #endregion
 
         #region Static partitioning for IList
@@ -1798,7 +1794,6 @@ namespace System.Collections.Concurrent
                 }
             }
         }
-
         #endregion
 
         #region static partitioning for Arrays
@@ -1868,7 +1863,6 @@ namespace System.Collections.Concurrent
                 }
             }
         }
-
         #endregion
 
 

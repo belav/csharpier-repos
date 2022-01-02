@@ -5,14 +5,17 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
 using Microsoft.AspNetCore.ResponseCompression;
+
 #if (IndividualLocalAuth)
 using Microsoft.EntityFrameworkCore;
 #endif
 #if (GenerateGraph)
 using Graph = Microsoft.Graph;
+
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.Identity.Web;
+
 #endif
 #if (IndividualLocalAuth)
 using ComponentsWebAssembly_CSharp.Server.Data;

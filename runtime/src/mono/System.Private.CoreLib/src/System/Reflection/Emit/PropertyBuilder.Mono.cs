@@ -59,7 +59,6 @@ namespace System.Reflection.Emit
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
         private CallingConventions callingConvention;
-
 #endregion
 
         internal PropertyBuilder(

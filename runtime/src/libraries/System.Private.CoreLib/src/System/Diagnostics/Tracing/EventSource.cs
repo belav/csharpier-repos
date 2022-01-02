@@ -176,8 +176,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 #if ES_BUILD_STANDALONE
 using System.Security.Permissions;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -748,7 +750,6 @@ namespace System.Diagnostics.Tracing
             if (TplEventSource.Log != null)
                 TplEventSource.Log.SetActivityId(activityId);
         }
-
 #endregion
 
 #region protected
@@ -1641,7 +1642,6 @@ namespace System.Diagnostics.Tracing
         {
             WriteEventVarargs(eventId, &relatedActivityId, args);
         }
-
 #endregion
 
 #region IDisposable Members
@@ -1714,7 +1714,6 @@ namespace System.Diagnostics.Tracing
         {
             this.Dispose(false);
         }
-
 #endregion
 
 #region private

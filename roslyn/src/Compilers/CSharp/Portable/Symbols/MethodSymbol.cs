@@ -1144,7 +1144,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return (object)info != null && info.Code == (int)ErrorCode.ERR_BindToBogus;
             }
         }
-
         #endregion
 
         internal virtual bool IsIterator
@@ -1301,7 +1300,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return Construct((TypeSymbol[])typeArguments);
         }
-
         #endregion
 
         protected sealed override ISymbol CreateISymbol()

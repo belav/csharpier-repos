@@ -159,7 +159,6 @@ namespace System.Collections.Tests
             return Math.Abs(x);
         }
     }
-
     #endregion
 
     #region TestClasses

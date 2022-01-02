@@ -167,7 +167,6 @@ namespace System.Threading.Tasks.Tests
             TaskSchedulerType = taskScheduler;
         }
     }
-
     #endregion
 
     public sealed class TaskRunSyncTest

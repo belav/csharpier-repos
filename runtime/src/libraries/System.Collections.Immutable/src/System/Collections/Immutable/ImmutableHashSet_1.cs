@@ -132,7 +132,6 @@ namespace System.Collections.Immutable
         {
             get { return _equalityComparer; }
         }
-
         #endregion
 
         #region IImmutableSet<T> Properties
@@ -144,7 +143,6 @@ namespace System.Collections.Immutable
         {
             return this.Clear();
         }
-
         #endregion
 
         #region ICollection Properties
@@ -170,7 +168,6 @@ namespace System.Collections.Immutable
                 return true;
             }
         }
-
         #endregion
 
         /// <summary>
@@ -372,7 +369,6 @@ namespace System.Collections.Immutable
 
             return Overlaps(other, this.Origin);
         }
-
         #endregion
 
         #region IImmutableSet<T> Methods
@@ -457,7 +453,6 @@ namespace System.Collections.Immutable
                 return result;
             }
         }
-
         #endregion
 
         #region ISet<T> Members
@@ -501,7 +496,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection<T> members
@@ -552,7 +546,6 @@ namespace System.Collections.Immutable
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection Methods
@@ -573,7 +566,6 @@ namespace System.Collections.Immutable
                 array.SetValue(item, arrayIndex++);
             }
         }
-
         #endregion
 
         #region IEnumerable<T> Members
@@ -596,7 +588,6 @@ namespace System.Collections.Immutable
         {
             return this.IsEmpty ? Enumerable.Empty<T>().GetEnumerator() : this.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -611,7 +602,6 @@ namespace System.Collections.Immutable
         {
             return this.GetEnumerator();
         }
-
         #endregion
 
         #region Static query and manipulator methods
@@ -1032,7 +1022,6 @@ namespace System.Collections.Immutable
 
             return matches == origin.Count;
         }
-
         #endregion
 
         /// <summary>

@@ -169,7 +169,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 keyFile
             );
         }
-
         #endregion
 
         #region Internal Methods

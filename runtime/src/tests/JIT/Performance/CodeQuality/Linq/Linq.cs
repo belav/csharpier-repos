@@ -748,7 +748,6 @@ public class LinqBenchmarks
 
         return (count == 5 * IterationsWhere00);
     }
-
     #endregion
 
     #region Where01
@@ -841,7 +840,6 @@ public class LinqBenchmarks
 
         return (count == 4 * IterationsWhere01);
     }
-
     #endregion
 
     #region Count00
@@ -882,7 +880,6 @@ public class LinqBenchmarks
 
         return (count == 5 * IterationsCount00);
     }
-
     #endregion
 
     #region Order00
@@ -949,7 +946,6 @@ public class LinqBenchmarks
 
         return (medianPricedProduct.ProductID == 57);
     }
-
     #endregion
 
     public static int Main()

@@ -96,7 +96,6 @@ namespace System.IO.Ports.Tests
                 VerifyPositionException(com.BaseStream, BAD_VALUE, typeof(NotSupportedException));
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

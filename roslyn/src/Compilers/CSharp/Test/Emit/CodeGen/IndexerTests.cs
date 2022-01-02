@@ -478,7 +478,6 @@ class C : B
                 setMethod.CheckAccessorShape(indexer);
             }
         }
-
         #endregion Declarations
 
         #region Lowering

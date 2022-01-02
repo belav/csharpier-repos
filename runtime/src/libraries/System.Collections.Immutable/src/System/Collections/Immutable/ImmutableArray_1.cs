@@ -1248,7 +1248,6 @@ namespace System.Collections.Immutable
 
             throw new ArgumentException(SR.ArrayLengthsNotEqual, nameof(other));
         }
-
         #endregion
 
 

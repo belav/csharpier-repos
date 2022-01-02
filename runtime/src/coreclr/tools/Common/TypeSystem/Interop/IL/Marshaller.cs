@@ -162,7 +162,6 @@ namespace Internal.TypeSystem.Interop
         protected PInvokeILCodeStreams _ilCodeStreams;
         protected Home _managedHome;
         protected Home _nativeHome;
-
         #endregion
 
         enum HomeType
@@ -397,7 +396,6 @@ namespace Internal.TypeSystem.Interop
 
             return marshaller;
         }
-
         #endregion
 
 
@@ -420,7 +418,6 @@ namespace Internal.TypeSystem.Interop
         {
             return Out || IsManagedByRef || IsMarshallingRequired(MarshallerKind);
         }
-
         #endregion
 
         public virtual void EmitMarshallingIL(PInvokeILCodeStreams pInvokeILCodeStreams)

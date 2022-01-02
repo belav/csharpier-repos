@@ -124,7 +124,6 @@ namespace System.Speech.AudioFormat
             _blockAlign = (short)(_channelCount * (_bitsPerSample / 8));
             _averageBytesPerSecond = _samplesPerSecond * _blockAlign;
         }
-
         #endregion
 
         #region Public Properties
@@ -157,7 +156,6 @@ namespace System.Speech.AudioFormat
         {
             get { return _samplesPerSecond; }
         }
-
         #endregion
 
         #region Public Methods
@@ -205,7 +203,6 @@ namespace System.Speech.AudioFormat
         {
             return _averageBytesPerSecond.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -233,7 +230,6 @@ namespace System.Speech.AudioFormat
                 return abWfx;
             }
         }
-
         #endregion
 
         #region Private Fields

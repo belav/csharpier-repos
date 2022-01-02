@@ -8,13 +8,16 @@ using System.Globalization;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Threading;
+
 #if ES_BUILD_STANDALONE
 using Microsoft.Win32;
 using System.Security.Permissions;
+
 #endif
 
 #if !ES_BUILD_STANDALONE && TARGET_WINDOWS
 using Internal.Win32;
+
 #endif
 
 #if ES_BUILD_STANDALONE

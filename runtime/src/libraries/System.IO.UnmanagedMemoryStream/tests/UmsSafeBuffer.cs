@@ -76,7 +76,6 @@ namespace System.IO.Tests
         {
             Assert.True(_isDisposed); // please dispose the object
         }
-
         #endregion
 
         protected override bool ReleaseHandle()

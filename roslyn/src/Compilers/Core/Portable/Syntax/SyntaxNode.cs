@@ -968,7 +968,6 @@ namespace Microsoft.CodeAnalysis
 
             return node;
         }
-
         #endregion
 
         #region Token Lookup
@@ -1065,7 +1064,6 @@ namespace Microsoft.CodeAnalysis
                 .Where(sn => sn.IsToken)
                 .Select(sn => sn.AsToken());
         }
-
         #endregion
 
         #region Trivia Lookup
@@ -1221,7 +1219,6 @@ namespace Microsoft.CodeAnalysis
         {
             return DescendantTriviaImpl(span, descendIntoChildren, descendIntoTrivia);
         }
-
         #endregion
 
         #region Annotations
@@ -1426,7 +1423,6 @@ namespace Microsoft.CodeAnalysis
             }
             return node;
         }
-
         #endregion
 
         /// <summary>
@@ -1700,7 +1696,6 @@ namespace Microsoft.CodeAnalysis
         /// nodes and tokens must be equivalent. 
         /// </param>
         protected abstract bool IsEquivalentToCore(SyntaxNode node, bool topLevel = false);
-
         #endregion
 
         /// <summary>

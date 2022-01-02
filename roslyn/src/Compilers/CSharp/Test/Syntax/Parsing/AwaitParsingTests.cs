@@ -1770,7 +1770,6 @@ async () => {
                 }
             }
         }
-
         #endregion AwaitExpressionInSyncContext
 
         #region AwaitExpressionStatementInSyncContext

@@ -71,7 +71,6 @@ namespace System.Collections.Generic
         private const string VersionName = "Version"; // Do not rename (binary serialization)
 
         internal const int StackAllocThreshold = 100;
-
         #endregion
 
         #region Constructors
@@ -136,7 +135,6 @@ namespace System.Collections.Generic
         }
 
         protected SortedSet(SerializationInfo info, StreamingContext context) => siInfo = info;
-
         #endregion
 
         #region Bulk operation helpers
@@ -268,7 +266,6 @@ namespace System.Collections.Generic
 
             return true;
         }
-
         #endregion
 
         #region Properties
@@ -289,7 +286,6 @@ namespace System.Collections.Generic
         bool ICollection.IsSynchronized => false;
 
         object ICollection.SyncRoot => this;
-
         #endregion
 
         #region Subclass helpers
@@ -305,7 +301,6 @@ namespace System.Collections.Generic
 
         // Virtual function for TreeSubSet, which may need to do range checks.
         internal virtual bool IsWithinRange(T item) => true;
-
         #endregion
 
         #region ICollection<T> members
@@ -632,7 +627,6 @@ namespace System.Collections.Generic
                 }
             }
         }
-
         #endregion
 
         #region IEnumerable<T> members
@@ -642,7 +636,6 @@ namespace System.Collections.Generic
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         #region Tree-specific operations
@@ -910,7 +903,6 @@ namespace System.Collections.Generic
             // Commonly, both comparers will be the default comparer (and reference-equal). Avoid a virtual method call to Equals() in that case.
             return Comparer == other.Comparer || Comparer.Equals(other.Comparer);
         }
-
         #endregion
 
         #region ISet members
@@ -1588,7 +1580,6 @@ namespace System.Collections.Generic
 
             return actuallyRemoved;
         }
-
         #endregion
 
         #region ISorted members
@@ -1730,7 +1721,6 @@ namespace System.Collections.Generic
 
             siInfo = null;
         }
-
         #endregion
 
         #region Helper classes
@@ -2129,7 +2119,6 @@ namespace System.Collections.Generic
             internal int UniqueCount;
             internal int UnfoundCount;
         }
-
         #endregion
 
         #region Miscellaneous

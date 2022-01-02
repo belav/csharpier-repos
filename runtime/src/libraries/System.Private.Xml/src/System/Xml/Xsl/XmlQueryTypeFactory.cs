@@ -326,7 +326,6 @@ namespace System.Xml.Xsl
             NodeNotRtf,
             XmlQueryCardinality.ZeroOrMore
         );
-
         #endregion
 
         //-----------------------------------------------
@@ -404,7 +403,6 @@ namespace System.Xml.Xsl
             /* XPathNodeType.Comment */XmlTypeCode.Comment,
             /* XPathNodeType.All */XmlTypeCode.Node,
         };
-
         #endregion
 
         //-----------------------------------------------

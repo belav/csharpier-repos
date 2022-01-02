@@ -35,7 +35,6 @@ namespace System.ComponentModel.DataAnnotations
         private readonly Dictionary<object, object?> _items;
         private string? _displayName;
         private Func<Type, object?>? _serviceProvider;
-
         #endregion
 
         #region Constructors
@@ -105,7 +104,6 @@ namespace System.ComponentModel.DataAnnotations
                     : new Dictionary<object, object?>();
             ObjectInstance = instance;
         }
-
         #endregion
 
         #region Properties
@@ -177,7 +175,6 @@ namespace System.ComponentModel.DataAnnotations
         ///     to items in this dictionary will never affect the original dictionary specified in the constructor.
         /// </value>
         public IDictionary<object, object?> Items => _items;
-
         #endregion
 
         #region Methods
@@ -227,7 +224,6 @@ namespace System.ComponentModel.DataAnnotations
         {
             _serviceProvider = serviceProvider;
         }
-
         #endregion
 
         #region IServiceProvider Members

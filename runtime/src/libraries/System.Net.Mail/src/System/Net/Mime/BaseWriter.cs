@@ -110,7 +110,6 @@ namespace System.Net.Mime
                 _bufferBuilder.Append(value, startOfLine, value.Length - startOfLine, allowUnicode);
             }
         }
-
         #endregion Headers
 
         #region Content
@@ -164,7 +163,6 @@ namespace System.Net.Mime
             }
             return (Stream)o;
         }
-
         #endregion Content
 
         #region Cleanup
@@ -218,7 +216,6 @@ namespace System.Net.Mime
         internal abstract void Close();
 
         protected abstract void OnClose(object? sender, EventArgs args);
-
         #endregion Cleanup
 
         protected virtual void CheckBoundary() { }

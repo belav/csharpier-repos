@@ -14,7 +14,6 @@ namespace System.Speech.Internal.GrammarBuilding
             _identifiers = new List<string>();
             CreateNewIdentifier("_");
         }
-
         #endregion
 
         #region Internal Methods
@@ -39,7 +38,6 @@ namespace System.Speech.Internal.GrammarBuilding
                 return newId;
             }
         }
-
         #endregion
 
         #region Protected Fields

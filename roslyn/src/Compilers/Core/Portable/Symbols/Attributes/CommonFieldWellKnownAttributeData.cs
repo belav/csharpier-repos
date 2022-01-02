@@ -41,7 +41,6 @@ namespace Microsoft.CodeAnalysis
                 return _offset != Uninitialized ? _offset : (int?)null;
             }
         }
-
         #endregion
 
         #region DefaultParameterValue, DecimalConstant, DateTimeConstant
@@ -58,7 +57,6 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
-
         #endregion
 
         #region SpecialNameAttribute
@@ -77,7 +75,6 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
-
         #endregion
 
         #region NonSerializedAttribute
@@ -96,7 +93,6 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
-
         #endregion
 
         #region MarshalAsAttribute

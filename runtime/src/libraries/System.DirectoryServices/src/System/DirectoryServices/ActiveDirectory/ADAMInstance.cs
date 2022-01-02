@@ -80,7 +80,6 @@ namespace System.DirectoryServices.ActiveDirectory
             // initialize the callback function
             _syncAllFunctionPointer = new SyncReplicaFromAllServersCallback(SyncAllCallbackRoutine);
         }
-
         #endregion constructors
 
         #region IDisposable
@@ -111,7 +110,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
             }
         }
-
         #endregion IDisposable
 
         #region public methods
@@ -605,7 +603,6 @@ namespace System.DirectoryServices.ActiveDirectory
             _defaultPartitionInitialized = false;
             _defaultPartitionModified = false;
         }
-
         #endregion public methods
 
         #region public properties
@@ -1019,7 +1016,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public override ReplicationConnectionCollection OutboundConnections =>
             GetOutboundConnectionsHelper();
-
         #endregion public properties
 
         #region private methods

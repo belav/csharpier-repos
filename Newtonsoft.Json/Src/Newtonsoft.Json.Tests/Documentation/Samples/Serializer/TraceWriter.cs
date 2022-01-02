@@ -51,7 +51,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string FullName { get; set; }
             public bool Deleted { get; set; }
         }
-
         #endregion
 
         [Test]

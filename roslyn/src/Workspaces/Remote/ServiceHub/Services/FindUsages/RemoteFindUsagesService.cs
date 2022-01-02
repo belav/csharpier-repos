@@ -125,7 +125,6 @@ namespace Microsoft.CodeAnalysis.Remote
                         callback.ItemsCompletedAsync(_callbackId, count, cancellationToken),
                     cancellationToken
                 );
-
             #endregion
 
             #region IFindUsagesContext

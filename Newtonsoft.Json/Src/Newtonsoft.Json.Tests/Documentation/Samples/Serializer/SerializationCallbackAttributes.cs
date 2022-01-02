@@ -91,7 +91,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Member4 = "This value was set after deserialization.";
             }
         }
-
         #endregion
 
         [Test]

@@ -26,7 +26,6 @@ namespace System.Speech.Recognition
         #region Constructors
 
         internal RecognizedPhrase() { }
-
         #endregion
 
         #region Public Methods
@@ -75,7 +74,6 @@ namespace System.Speech.Recognition
             _smlContent = document.OuterXml;
             return document;
         }
-
         #endregion
 
         #region Public Properties
@@ -375,7 +373,6 @@ namespace System.Speech.Recognition
         {
             get { return _homophoneGroupId; }
         }
-
         #endregion
 
         #region Internal Methods
@@ -443,7 +440,6 @@ namespace System.Speech.Recognition
             // This triggers the semantic processing if any
             CalcSemantics(recoResult.Grammar);
         }
-
         #endregion
 
         #region Internal Properties
@@ -465,7 +461,6 @@ namespace System.Speech.Recognition
                 return _smlContent;
             }
         }
-
         #endregion
 
         #region Internal fields
@@ -474,7 +469,6 @@ namespace System.Speech.Recognition
         internal byte[] _phraseBuffer;
         internal bool _isSapi53Header;
         internal bool _hasIPAPronunciation;
-
         #endregion
 
         #region Private Methods
@@ -1479,7 +1473,6 @@ namespace System.Speech.Recognition
                 }
             }
         }
-
         #endregion
 
         #region Private Types
@@ -1577,7 +1570,6 @@ namespace System.Speech.Recognition
                 _ruleNode = ruleNode;
             }
         }
-
         #endregion
 
         #region Private Fields

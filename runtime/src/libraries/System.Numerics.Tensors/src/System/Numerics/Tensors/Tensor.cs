@@ -806,12 +806,10 @@ namespace System.Numerics.Tensors
         {
             return StructuralComparisons.StructuralEqualityComparer.Equals(left, right);
         }
-
         #endregion
 
         #region IEnumerable members
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         #region ICollection members
@@ -851,7 +849,6 @@ namespace System.Numerics.Tensors
                 }
             }
         }
-
         #endregion
 
         #region IList members
@@ -917,12 +914,10 @@ namespace System.Numerics.Tensors
         {
             throw new InvalidOperationException();
         }
-
         #endregion
 
         #region IEnumerable<T> members
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         #region ICollection<T> members
@@ -992,13 +987,11 @@ namespace System.Numerics.Tensors
         {
             throw new InvalidOperationException();
         }
-
         #endregion
 
         #region IReadOnlyCollection<T> members
 
         int IReadOnlyCollection<T>.Count => (int)Length;
-
         #endregion
 
         #region IList<T> members
@@ -1040,13 +1033,11 @@ namespace System.Numerics.Tensors
         {
             throw new InvalidOperationException();
         }
-
         #endregion
 
         #region IReadOnlyList<T> members
 
         T IReadOnlyList<T>.this[int index] => GetValue(index);
-
         #endregion
 
         #region IStructuralComparable members
@@ -1190,7 +1181,6 @@ namespace System.Numerics.Tensors
 
             return result;
         }
-
         #endregion
 
         #region IStructuralEquatable members
@@ -1341,7 +1331,6 @@ namespace System.Numerics.Tensors
 
             return hashCode;
         }
-
         #endregion
 
         #region Translations
@@ -1390,7 +1379,6 @@ namespace System.Numerics.Tensors
             }
             return compressedSparseTensor;
         }
-
         #endregion
 
         public string GetArrayString(bool includeWhitespace = true)

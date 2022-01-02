@@ -62,7 +62,6 @@ namespace System.Linq.Expressions
         {
             _out.Append(c);
         }
-
         #endregion
 
         #region Output an expression tree to a string

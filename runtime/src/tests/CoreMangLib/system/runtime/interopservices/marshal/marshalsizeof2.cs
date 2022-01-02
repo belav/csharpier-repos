@@ -496,7 +496,6 @@ public class MarshalSizeOf2
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -618,7 +617,6 @@ public class MarshalSizeOf2
 
         return retVal;
     }
-
     #endregion
     #endregion
 

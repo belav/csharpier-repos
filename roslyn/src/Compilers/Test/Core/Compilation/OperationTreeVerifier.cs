@@ -328,7 +328,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private static string FormatBoolProperty(string propertyName, bool value) =>
             $"{propertyName}: {(value ? "True" : "False")}";
-
         #endregion
 
         #region Visit methods

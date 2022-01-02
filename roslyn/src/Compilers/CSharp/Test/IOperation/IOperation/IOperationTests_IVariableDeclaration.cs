@@ -1713,7 +1713,6 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region Fixed Statements
@@ -2230,7 +2229,6 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region Using Statements
@@ -3011,7 +3009,6 @@ class C
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region For Loops
@@ -3514,7 +3511,6 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region Const Local Declarations
@@ -4062,7 +4058,6 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region Control Flow Graph

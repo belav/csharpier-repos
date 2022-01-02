@@ -13,7 +13,6 @@ namespace System.Reflection.Emit
     {
         #region Consts Fields
         private const int NO_SIZE_IN_SIG = -1;
-
         #endregion
 
         #region Static Members
@@ -290,7 +289,6 @@ namespace System.Reflection.Emit
 
             return new SignatureHelper(module, type);
         }
-
         #endregion
 
         #region Private Data Members
@@ -392,7 +390,6 @@ namespace System.Reflection.Emit
                 m_sizeLoc = m_currSig++;
             }
         }
-
         #endregion
 
         #region Private Members
@@ -826,7 +823,6 @@ namespace System.Reflection.Emit
             AddData(m_argCount);
             m_currSig = currSigHolder + (newSigSize - 1);
         }
-
         #endregion
 
         #region Internal Members
@@ -915,7 +911,6 @@ namespace System.Reflection.Emit
 
             return temp;
         }
-
         #endregion
 
         #region Public Methods

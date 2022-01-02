@@ -22,7 +22,6 @@ namespace System.Net
         // and it may never be populated with values if the user does not set them
         private readonly Dictionary<string, ValidateAndParseValue> _validators;
         private Dictionary<string, object>? _internalObjects;
-
         #endregion
 
         #region Constructors
@@ -35,7 +34,6 @@ namespace System.Net
             IsChanged = false;
             _validators = validators;
         }
-
         #endregion
 
         #region Private Methods
@@ -97,7 +95,6 @@ namespace System.Net
                 IsChanged = true;
             }
         }
-
         #endregion
 
         #region Internal Fields
@@ -110,7 +107,6 @@ namespace System.Net
         // may be passed a string OR another type of object and so should react
         // appropriately
         internal delegate object ValidateAndParseValue(object valueToValidate);
-
         #endregion
 
         #region Internal Methods
@@ -148,7 +144,6 @@ namespace System.Net
             base[key] = value.ToString();
             IsChanged = true;
         }
-
         #endregion
 
         #region Public Fields
@@ -163,7 +158,6 @@ namespace System.Net
             }
             set { PersistValue(key, value, false); }
         }
-
         #endregion
 
         #region Public Methods

@@ -13,7 +13,6 @@ namespace System.IO.Tests
         {
             return File.Exists(path);
         }
-
         #endregion
 
         #region UniversalTests
@@ -167,7 +166,6 @@ namespace System.IO.Tests
             File.Delete(linkPath);
             Assert.False(File.Exists(linkPath), "linkPath should no longer exist");
         }
-
         #endregion
 
         #region PlatformSpecific

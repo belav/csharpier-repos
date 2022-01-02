@@ -634,7 +634,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         bool IsLiteralExpression([NotNullWhen(true)] SyntaxNode? node);
         bool IsMemberAccessExpression([NotNullWhen(true)] SyntaxNode? node);
         bool IsSimpleName([NotNullWhen(true)] SyntaxNode? node);
-
         #endregion
 
         #region GetPartsOfXXX members
@@ -720,7 +719,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             out SyntaxToken alias,
             out SyntaxNode name
         );
-
         #endregion
 
         #region GetXXXOfYYYMembers

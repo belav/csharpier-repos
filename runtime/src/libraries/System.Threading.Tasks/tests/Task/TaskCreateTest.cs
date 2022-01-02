@@ -844,7 +844,6 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.StartTask();
         }
-
         #endregion
 
         internal class TestParameters
@@ -910,7 +909,6 @@ namespace System.Threading.Tasks.Tests
             /// Need a cancellationTokenSource to test the APIs that accept a cancellationTokens
             /// </summary>
             private CancellationTokenSource _cts;
-
             #endregion
 
             #region Constructor
@@ -924,7 +922,6 @@ namespace System.Threading.Tasks.Tests
                 _hasCancellationToken = parameters.HasCancellationToken;
                 _exceptionTestsAction = parameters.ExceptionTestsAction;
             }
-
             #endregion
 
             #region Test Methods (These are the ones that are actually invoked)
@@ -1469,7 +1466,6 @@ namespace System.Threading.Tasks.Tests
                         break;
                 }
             }
-
             #endregion
 
             #region Helper Methods

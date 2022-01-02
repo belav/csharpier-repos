@@ -115,7 +115,6 @@ namespace System.IO.Packaging
             //value of the content type object in the debugger.
             _isInitialized = true;
         }
-
         #endregion Internal Constructors
 
         #region Internal Properties
@@ -154,7 +153,6 @@ namespace System.IO.Packaging
                 return _parameterDictionary.GetEnumerator();
             }
         }
-
         #endregion Internal Properties
 
         #region Internal Methods
@@ -268,7 +266,6 @@ namespace System.IO.Packaging
 
             return _contentType;
         }
-
         #endregion Internal Methods
 
         #region Private Methods
@@ -575,7 +572,6 @@ namespace System.IO.Packaging
                 _parameterDictionary = new Dictionary<string, string>(); //initial size 0
             }
         }
-
         #endregion Private Methods
 
         #region Private Members

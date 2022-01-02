@@ -101,7 +101,6 @@ namespace System.Speech.Recognition
                 _disposed = true; // Don't set RecognizerBase to null as every method will then need to throw ObjectDisposedException.
             }
         }
-
         #endregion
 
         #region Static Methods
@@ -138,7 +137,6 @@ namespace System.Speech.Recognition
             }
             return new ReadOnlyCollection<RecognizerInfo>(recognizers);
         }
-
         #endregion
 
         #region public Properties
@@ -254,7 +252,6 @@ namespace System.Speech.Recognition
             get { return RecoBase.MaxAlternates; }
             set { RecoBase.MaxAlternates = value; }
         }
-
         #endregion
 
         #region public Methods
@@ -458,7 +455,6 @@ namespace System.Speech.Recognition
         {
             RecoBase.RequestRecognizerUpdate(userToken, audioPositionAheadToRaiseUpdate);
         }
-
         #endregion
 
         #region public Events
@@ -573,7 +569,6 @@ namespace System.Speech.Recognition
                 }
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -734,7 +729,6 @@ namespace System.Speech.Recognition
                 audioStateChangedHandler(this, e);
             }
         }
-
         #endregion
 
         #region Private Properties
@@ -763,7 +757,6 @@ namespace System.Speech.Recognition
                 return _recognizerBase;
             }
         }
-
         #endregion
 
         #region Private Fields

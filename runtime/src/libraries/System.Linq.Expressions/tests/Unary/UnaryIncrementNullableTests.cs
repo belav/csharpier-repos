@@ -161,7 +161,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyIncrementNullableDouble(values[i], useInterpreter);
             }
         }
-
         #endregion
 
         [Theory, MemberData(nameof(NonArithmeticObjects), false)]

@@ -296,7 +296,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 exportProvider
             );
         }
-
         #endregion
 
         #region VB

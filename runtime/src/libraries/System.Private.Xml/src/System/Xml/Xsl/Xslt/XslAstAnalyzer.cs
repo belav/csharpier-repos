@@ -1296,7 +1296,6 @@ namespace System.Xml.Xsl.Xslt
                 /*Ceiling           */XslFlags.Number,
                 /*Round             */XslFlags.Number,
             };
-
             #endregion
 
             #region Xslt Function Flags

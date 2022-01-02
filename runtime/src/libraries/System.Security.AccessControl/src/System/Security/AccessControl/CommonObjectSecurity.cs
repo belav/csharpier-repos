@@ -26,7 +26,6 @@ namespace System.Security.AccessControl
 
         internal CommonObjectSecurity(CommonSecurityDescriptor securityDescriptor)
             : base(securityDescriptor) { }
-
         #endregion
 
         #region Private Methods
@@ -598,7 +597,6 @@ namespace System.Security.AccessControl
                 WriteUnlock();
             }
         }
-
         #endregion
 
         #region Protected Methods

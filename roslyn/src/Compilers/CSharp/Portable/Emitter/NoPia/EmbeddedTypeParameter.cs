@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Emit;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Cci = Microsoft.Cci;
+
 #if !DEBUG
 using TypeParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.TypeParameterSymbol;
 #endif

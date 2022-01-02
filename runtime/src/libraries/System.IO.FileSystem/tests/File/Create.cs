@@ -185,7 +185,6 @@ namespace System.IO.Tests
             Create(testFile).Dispose();
             Assert.True(File.Exists(testFile));
         }
-
         #endregion
 
         #region PlatformSpecific

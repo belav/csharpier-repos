@@ -93,7 +93,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             );
             return formattedNewRoot;
         }
-
         #endregion
 
         #region EmbeddedStatementModificationHelpers
@@ -403,7 +402,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     .Single().Span.End;
             return (formattedNewRoot, nextCaretPosition);
         }
-
         #endregion
 
         #region ObjectCreationExpressionModificationHelpers
@@ -494,7 +492,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
             return objectCreationExpressionNode;
         }
-
         #endregion
 
         #region ShouldAddBraceCheck
@@ -905,7 +902,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
         private static bool WithinEmbeddedStatement(SyntaxNode node, int caretPosition) =>
             node.GetEmbeddedStatement()?.Span.Contains(caretPosition) ?? false;
-
         #endregion
 
         #region ShouldRemoveBraceCheck
@@ -993,7 +989,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 && accessorList.Span.Contains(caretPosition)
                 && accessorList.Accessors.IsEmpty();
         }
-
         #endregion
 
         #region AddBrace
@@ -1208,7 +1203,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 _ => throw ExceptionUtilities.UnexpectedValue(embeddedStatementOwner)
             };
         }
-
         #endregion
 
         #region RemoveBrace

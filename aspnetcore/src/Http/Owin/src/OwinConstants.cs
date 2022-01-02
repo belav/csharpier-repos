@@ -17,7 +17,6 @@ internal static class OwinConstants
     public const string RequestProtocol = "owin.RequestProtocol";
     public const string RequestHeaders = "owin.RequestHeaders";
     public const string RequestBody = "owin.RequestBody";
-
     #endregion
 
     #region OWIN v1.0.1 - 3.2.1 Request Data
@@ -26,7 +25,6 @@ internal static class OwinConstants
 
     public const string RequestId = "owin.RequestId";
     public const string RequestUser = "owin.RequestUser";
-
     #endregion
 
     #region OWIN v1.0.0 - 3.2.2. Response Data
@@ -38,7 +36,6 @@ internal static class OwinConstants
     public const string ResponseProtocol = "owin.ResponseProtocol";
     public const string ResponseHeaders = "owin.ResponseHeaders";
     public const string ResponseBody = "owin.ResponseBody";
-
     #endregion
 
     #region OWIN v1.0.0 - 3.2.3. Other Data
@@ -48,7 +45,6 @@ internal static class OwinConstants
     public const string CallCancelled = "owin.CallCancelled";
 
     public const string OwinVersion = "owin.Version";
-
     #endregion
 
     #region OWIN Keys for IAppBuilder.Properties
@@ -58,7 +54,6 @@ internal static class OwinConstants
         public const string AddSignatureConversion = "builder.AddSignatureConversion";
         public const string DefaultApp = "builder.DefaultApp";
     }
-
     #endregion
 
     #region OWIN Key Guidelines and Common Keys - 6. Common keys
@@ -85,7 +80,6 @@ internal static class OwinConstants
         public const string Port = "port";
         public const string Path = "path";
     }
-
     #endregion
 
     #region SendFiles v0.3.0
@@ -104,7 +98,6 @@ internal static class OwinConstants
 
         public const string SendAsync = "sendfile.SendAsync";
     }
-
     #endregion
 
     #region Opaque v0.3.0
@@ -128,7 +121,6 @@ internal static class OwinConstants
         // public const string Version = "opaque.Version"; // redundant, declared above
         public const string CallCancelled = "opaque.CallCancelled";
     }
-
     #endregion
 
     #region WebSocket v0.4.0
@@ -162,7 +154,6 @@ internal static class OwinConstants
         public const string ClientCloseStatus = "websocket.ClientCloseStatus";
         public const string ClientCloseDescription = "websocket.ClientCloseDescription";
     }
-
     #endregion
 
     #region Security v0.1.0

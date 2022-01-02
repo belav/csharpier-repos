@@ -172,7 +172,6 @@ namespace System.Net
         [Event(EnterEventId, Level = EventLevel.Informational, Keywords = Keywords.EnterExit)]
         private void Enter(string thisOrContextObject, string? memberName, string parameters) =>
             WriteEvent(EnterEventId, thisOrContextObject, memberName ?? MissingMember, parameters);
-
         #endregion
 
         #region Exit
@@ -237,7 +236,6 @@ namespace System.Net
         [Event(ExitEventId, Level = EventLevel.Informational, Keywords = Keywords.EnterExit)]
         private void Exit(string thisOrContextObject, string? memberName, string? result) =>
             WriteEvent(ExitEventId, thisOrContextObject, memberName ?? MissingMember, result);
-
         #endregion
 
         #region Info
@@ -282,7 +280,6 @@ namespace System.Net
         [Event(InfoEventId, Level = EventLevel.Informational, Keywords = Keywords.Default)]
         private void Info(string thisOrContextObject, string? memberName, string? message) =>
             WriteEvent(InfoEventId, thisOrContextObject, memberName ?? MissingMember, message);
-
         #endregion
 
         #region Error
@@ -326,7 +323,6 @@ namespace System.Net
             string? memberName,
             string? message
         ) => WriteEvent(ErrorEventId, thisOrContextObject, memberName ?? MissingMember, message);
-
         #endregion
 
         #region DumpBuffer
@@ -404,7 +400,6 @@ namespace System.Net
         [Event(DumpArrayEventId, Level = EventLevel.Verbose, Keywords = Keywords.Debug)]
         private void DumpBuffer(string thisOrContextObject, string? memberName, byte[] buffer) =>
             WriteEvent(DumpArrayEventId, thisOrContextObject, memberName ?? MissingMember, buffer);
-
         #endregion
 
         #region Associate
@@ -464,7 +459,6 @@ namespace System.Net
                 first,
                 second
             );
-
         #endregion
         #endregion
 
@@ -594,7 +588,6 @@ namespace System.Net
         }
 
         static partial void AdditionalCustomizedToString<T>(T value, ref string? result);
-
         #endregion
 
         #region Custom WriteEvent overloads

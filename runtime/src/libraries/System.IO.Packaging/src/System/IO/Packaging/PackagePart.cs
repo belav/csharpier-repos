@@ -115,7 +115,6 @@ namespace System.IO.Packaging
             _compressionOption = compressionOption;
             _isRelationshipPart = PackUriHelper.IsRelationshipPartUri(partUri);
         }
-
         #endregion Protected Constructor
 
         #region Public Properties
@@ -214,7 +213,6 @@ namespace System.IO.Packaging
                 return _compressionOption;
             }
         }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -240,7 +238,6 @@ namespace System.IO.Packaging
         {
             throw new NotSupportedException(SR.GetContentTypeCoreNotImplemented);
         }
-
         #endregion Content Type Method
 
         #region Stream Methods
@@ -347,7 +344,6 @@ namespace System.IO.Packaging
         /// <param name="access"></param>
         /// <returns></returns>
         protected abstract Stream? GetStreamCore(FileMode mode, FileAccess access);
-
         #endregion Stream Methods
 
         #region PackageRelationship Methods
@@ -520,7 +516,6 @@ namespace System.IO.Packaging
 
             return (GetRelationshipHelper(id) != null);
         }
-
         #endregion PackageRelationship Methods
 
         #endregion Public Methods
@@ -553,7 +548,6 @@ namespace System.IO.Packaging
         {
             get { return _contentType!; }
         }
-
         #endregion Internal Properties
 
         #region Internal Methods
@@ -660,7 +654,6 @@ namespace System.IO.Packaging
                 FlushRelationships();
             }
         }
-
         #endregion Internal Methods
 
         #region Private Methods
@@ -789,7 +782,6 @@ namespace System.IO.Packaging
         {
             return !s.CanRead && !s.CanSeek && !s.CanWrite;
         }
-
         #endregion Private Methods
 
         #region Private Members

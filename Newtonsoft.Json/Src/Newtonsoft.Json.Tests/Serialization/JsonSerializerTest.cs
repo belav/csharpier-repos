@@ -85,8 +85,10 @@ using System.Dynamic;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 using Action = Newtonsoft.Json.Serialization.Action;
+
 #else
 using System.Linq;
+
 #endif
 #if !(DNXCORE50)
 using System.Drawing;

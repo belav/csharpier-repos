@@ -84,7 +84,6 @@ namespace System.Collections.Tests
         /// </summary>
         protected virtual bool IList_CurrentAfterAdd_Throws =>
             Enumerator_Current_UndefinedOperation_Throws;
-
         #endregion
 
         #region ICollection Helper Methods
@@ -180,7 +179,6 @@ namespace System.Collections.Tests
 
         protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) =>
             AddToCollection((IList)collection, numberOfItemsToAdd);
-
         #endregion
 
         #region IsFixedSize
@@ -192,7 +190,6 @@ namespace System.Collections.Tests
             IList collection = NonGenericIListFactory(count);
             Assert.Equal(ExpectedFixedSize, collection.IsFixedSize);
         }
-
         #endregion
 
         #region IsReadOnly
@@ -204,7 +201,6 @@ namespace System.Collections.Tests
             IList collection = NonGenericIListFactory(count);
             Assert.Equal(IsReadOnly, collection.IsReadOnly);
         }
-
         #endregion
 
         #region Item Getter
@@ -235,7 +231,6 @@ namespace System.Collections.Tests
             object result;
             Assert.All(Enumerable.Range(0, count), index => result = list[index]);
         }
-
         #endregion
 
         #region Item Setter
@@ -377,7 +372,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region Add
@@ -550,7 +544,6 @@ namespace System.Collections.Tests
                 collection.Add(toAdd);
             }
         }
-
         #endregion
 
         #region Clear
@@ -571,7 +564,6 @@ namespace System.Collections.Tests
                 Assert.Equal(0, collection.Count);
             }
         }
-
         #endregion
 
         #region Contains
@@ -647,7 +639,6 @@ namespace System.Collections.Tests
                     Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
             );
         }
-
         #endregion
 
         #region IndexOf
@@ -757,7 +748,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region Insert
@@ -898,7 +888,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region Remove
@@ -1062,7 +1051,6 @@ namespace System.Collections.Tests
                 Assert.Equal(count, collection.Count);
             }
         }
-
         #endregion
 
         #region RemoveAt
@@ -1155,7 +1143,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region Enumerator.Current

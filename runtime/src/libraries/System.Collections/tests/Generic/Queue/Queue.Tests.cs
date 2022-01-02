@@ -83,7 +83,6 @@ namespace System.Collections.Tests
             rand.NextBytes(bytes);
             return Convert.ToBase64String(bytes);
         }
-
         #endregion
 
         #region Queue Helper Methods
@@ -145,7 +144,6 @@ namespace System.Collections.Tests
 
             return q;
         }
-
         #endregion
 
         [Theory]

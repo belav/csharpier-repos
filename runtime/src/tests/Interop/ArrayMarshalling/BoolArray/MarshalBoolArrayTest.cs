@@ -20,7 +20,6 @@ public class MarshalBoolArray
 {
     #region"variable"
     const int SIZE = 5;
-
     #endregion
 
     #region "Reverse PInvoke"
@@ -135,7 +134,6 @@ public class MarshalBoolArray
         }
         return retVal;
     }
-
     #endregion
 
     #region"Bool Array Reference"
@@ -251,7 +249,6 @@ public class MarshalBoolArray
         }
         return retVal;
     }
-
     #endregion
 
     #endregion

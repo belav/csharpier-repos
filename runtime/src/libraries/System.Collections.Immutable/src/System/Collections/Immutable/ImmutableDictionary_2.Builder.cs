@@ -194,7 +194,6 @@ namespace System.Collections.Immutable
             {
                 get { return this.Values.ToArray(this.Count); }
             }
-
             #endregion
 
             #region IDictionary Properties
@@ -239,7 +238,6 @@ namespace System.Collections.Immutable
             {
                 get { return this.Values.ToArray(this.Count); }
             }
-
             #endregion
 
             #region ICollection Properties
@@ -275,7 +273,6 @@ namespace System.Collections.Immutable
             {
                 get { return false; }
             }
-
             #endregion
 
             #region IDictionary Methods
@@ -332,7 +329,6 @@ namespace System.Collections.Immutable
                 get { return this[(TKey)key]; }
                 set { this[(TKey)key] = (TValue)value!; }
             }
-
             #endregion
 
             #region ICollection methods
@@ -353,7 +349,6 @@ namespace System.Collections.Immutable
                     array.SetValue(new DictionaryEntry(item.Key, item.Value), arrayIndex++);
                 }
             }
-
             #endregion
 
             /// <summary>
@@ -516,7 +511,6 @@ namespace System.Collections.Immutable
 
                 return _immutable;
             }
-
             #endregion
 
             #region IDictionary<TKey, TValue> Members
@@ -666,7 +660,6 @@ namespace System.Collections.Immutable
                     array[arrayIndex++] = item;
                 }
             }
-
             #endregion
 
             #region ICollection<KeyValuePair<TKey, TValue>> Members
@@ -689,7 +682,6 @@ namespace System.Collections.Immutable
 
                 return false;
             }
-
             #endregion
 
             #region IEnumerator<T> methods
@@ -717,7 +709,6 @@ namespace System.Collections.Immutable
             {
                 return this.GetEnumerator();
             }
-
             #endregion
 
             /// <summary>

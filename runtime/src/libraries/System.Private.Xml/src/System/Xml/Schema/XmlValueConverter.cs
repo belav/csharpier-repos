@@ -670,7 +670,6 @@ namespace System.Xml.Schema
         {
             return this.ChangeType(value, destinationType, null);
         }
-
         #endregion
 
         /// <summary>
@@ -3352,7 +3351,6 @@ namespace System.Xml.Schema
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-
         #endregion
 
 
@@ -3967,7 +3965,6 @@ namespace System.Xml.Schema
 
             return ChangeListType(value, destinationType, nsResolver);
         }
-
         #endregion
 
         /// <summary>

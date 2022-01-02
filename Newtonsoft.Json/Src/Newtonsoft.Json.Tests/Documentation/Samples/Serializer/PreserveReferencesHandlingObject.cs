@@ -52,7 +52,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string Name { get; set; }
             public Directory Parent { get; set; }
         }
-
         #endregion
 
         [Test]

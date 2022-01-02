@@ -13,7 +13,6 @@ namespace System
     {
         #region keep in sync with object-internals.h
         internal RuntimeTypeHandle _impl;
-
         #endregion
 
         internal IntPtr GetUnderlyingNativeHandle()

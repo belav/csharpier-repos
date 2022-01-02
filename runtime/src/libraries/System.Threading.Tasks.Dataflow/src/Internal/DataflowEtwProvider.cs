@@ -90,7 +90,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(DATAFLOWBLOCKCREATED_EVENTID, blockName, blockId);
         }
-
 #endregion
 
 #region Task Launching
@@ -150,7 +149,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
             /// <summary>A task is being launched to offer outgoing messages to linked targets.</summary>
             OfferingOutputMessages = 2,
         }
-
 #endregion
 
 #region Block Completion
@@ -216,7 +214,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(BLOCKCOMPLETED_EVENTID, blockId, reason, exceptionData);
         }
-
 #endregion
 
 #region Linking
@@ -239,7 +236,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(BLOCKLINKED_EVENTID, sourceId, targetId);
         }
-
 #endregion
 
 #region Unlinking

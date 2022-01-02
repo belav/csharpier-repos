@@ -144,7 +144,6 @@ namespace System.Collections.Immutable
         /// See the <see cref="IImmutableList{T}"/> interface.
         /// </summary>
         public int Count => _root.Count;
-
         #endregion
 
         #region ICollection Properties
@@ -163,7 +162,6 @@ namespace System.Collections.Immutable
         /// </devremarks>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         bool ICollection.IsSynchronized => true;
-
         #endregion
 
         #region IImmutableList<T> Indexers
@@ -183,7 +181,6 @@ namespace System.Collections.Immutable
         /// <returns>A read-only reference to the element at the given position.</returns>
         /// <exception cref="IndexOutOfRangeException">Thrown when <paramref name="index"/> is negative or not less than <see cref="Count"/>.</exception>
         public ref readonly T ItemRef(int index) => ref _root.ItemRef(index);
-
         #endregion
 
         #region IOrderedCollection<T> Indexers
@@ -192,7 +189,6 @@ namespace System.Collections.Immutable
         /// Gets the element in the collection at a given index.
         /// </summary>
         T IOrderedCollection<T>.this[int index] => this[index];
-
         #endregion
 
         #region Public methods
@@ -475,7 +471,6 @@ namespace System.Collections.Immutable
 
             return this.Wrap(_root.Sort(index, count, comparer));
         }
-
         #endregion
 
         #region IImmutableListQueries<T> Methods
@@ -802,7 +797,6 @@ namespace System.Collections.Immutable
         /// has no elements, the return value is true.
         /// </returns>
         public bool TrueForAll(Predicate<T> match) => _root.TrueForAll(match);
-
         #endregion
 
         #region IImmutableList<T> Methods
@@ -905,7 +899,6 @@ namespace System.Collections.Immutable
             T newValue,
             IEqualityComparer<T>? equalityComparer
         ) => this.Replace(oldValue, newValue, equalityComparer);
-
         #endregion
 
         #region IEnumerable<T> Members
@@ -920,7 +913,6 @@ namespace System.Collections.Immutable
         {
             return this.IsEmpty ? Enumerable.Empty<T>().GetEnumerator() : this.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -933,7 +925,6 @@ namespace System.Collections.Immutable
         /// </returns>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() =>
             this.GetEnumerator();
-
         #endregion
 
         #region IList<T> Members
@@ -963,7 +954,6 @@ namespace System.Collections.Immutable
             get => this[index];
             set => throw new NotSupportedException();
         }
-
         #endregion
 
         #region ICollection<T> Members
@@ -995,7 +985,6 @@ namespace System.Collections.Immutable
         /// <returns>Nothing. An exception is always thrown.</returns>
         /// <exception cref="NotSupportedException">Always thrown.</exception>
         bool ICollection<T>.Remove(T item) => throw new NotSupportedException();
-
         #endregion
 
         #region ICollection Methods
@@ -1005,7 +994,6 @@ namespace System.Collections.Immutable
         /// </summary>
         void System.Collections.ICollection.CopyTo(Array array, int arrayIndex) =>
             _root.CopyTo(array, arrayIndex);
-
         #endregion
 
         #region IList members
@@ -1095,7 +1083,6 @@ namespace System.Collections.Immutable
             get => this[index];
             set => throw new NotSupportedException();
         }
-
         #endregion
 
         /// <summary>

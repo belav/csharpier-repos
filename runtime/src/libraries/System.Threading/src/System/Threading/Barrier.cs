@@ -172,7 +172,6 @@ namespace System.Threading
             get { return Volatile.Read(ref _currentPhase); }
             internal set { Volatile.Write(ref _currentPhase, value); }
         }
-
         #endregion
 
         /// <summary>

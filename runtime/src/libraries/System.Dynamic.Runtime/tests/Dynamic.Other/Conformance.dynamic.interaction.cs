@@ -126,7 +126,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnDynamicStruct
@@ -201,7 +200,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnDynamicInterface
@@ -1260,7 +1258,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnDynamicStruct<T>
@@ -1335,7 +1332,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnDynamicInterface<T>
@@ -3335,7 +3331,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnStruct
@@ -3410,7 +3405,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnInterface
@@ -4470,7 +4464,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnStruct<T>
@@ -4545,7 +4538,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnInterface<T>
@@ -6551,7 +6543,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -6609,7 +6600,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -6657,7 +6647,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -6756,7 +6745,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -6814,7 +6802,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -6862,7 +6849,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -6961,7 +6947,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7019,7 +7004,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7063,7 +7047,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7162,7 +7145,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7220,7 +7202,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7264,7 +7245,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7369,7 +7349,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7433,7 +7412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7483,7 +7461,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7588,7 +7565,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7652,7 +7628,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7702,7 +7677,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7801,7 +7775,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7859,7 +7832,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7903,7 +7875,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -8002,7 +7973,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -8060,7 +8030,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -8104,7 +8073,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()

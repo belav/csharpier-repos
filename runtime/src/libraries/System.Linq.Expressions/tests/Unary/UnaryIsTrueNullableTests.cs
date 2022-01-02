@@ -18,7 +18,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyIsTrueNullableBool(values[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

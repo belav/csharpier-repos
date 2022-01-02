@@ -37,7 +37,6 @@ public static class H2SpecCommands
     private static extern int chmod(string pathname, int mode);
 
     private static int chmod755(string pathname) => chmod(pathname, _0755);
-
     #endregion
 
     private const int TimeoutSeconds = 15;

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
+
 #if DEBUG || BOOTSTRAP
 using System;
 using System.Collections.Concurrent;

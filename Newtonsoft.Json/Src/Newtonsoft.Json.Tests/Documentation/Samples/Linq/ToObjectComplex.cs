@@ -45,7 +45,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         {
             public string Name { get; set; }
         }
-
         #endregion
 
         [Test]

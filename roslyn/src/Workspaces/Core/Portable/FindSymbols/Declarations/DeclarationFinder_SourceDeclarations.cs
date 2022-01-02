@@ -274,7 +274,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 )
                 .ConfigureAwait(false);
         }
-
         #endregion
 
         #region Local processing

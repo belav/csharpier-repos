@@ -116,7 +116,6 @@ namespace System.Linq.Expressions.Interpreter
             Data[i] = Data[i - 1];
             StackIndex = i + 1;
         }
-
         #endregion
 
         #region Stack Trace
@@ -185,7 +184,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             s_currentFrame = prevFrame;
         }
-
         #endregion
 
         #region Continuations

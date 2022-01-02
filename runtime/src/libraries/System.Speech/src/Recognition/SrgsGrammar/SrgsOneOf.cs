@@ -54,7 +54,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _items.Add(item);
             }
         }
-
         #endregion
 
         #region public Method
@@ -64,7 +63,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             Items.Add(item);
         }
-
         #endregion
 
         #region public Properties
@@ -74,7 +72,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return _items; }
         }
-
         #endregion
 
         #region internal Methods
@@ -97,7 +94,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             sb.Append(_items.Count);
             return sb.ToString();
         }
-
         #endregion
 
         #region Protected Properties
@@ -119,13 +115,11 @@ namespace System.Speech.Recognition.SrgsGrammar
                 return elements;
             }
         }
-
         #endregion
 
         #region Private Fields
 
         private SrgsItemList _items = new();
-
         #endregion
 
         #region Private Types

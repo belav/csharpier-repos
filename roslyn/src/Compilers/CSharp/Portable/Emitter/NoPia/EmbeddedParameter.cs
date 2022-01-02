@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Cci = Microsoft.Cci;
 using Microsoft.CodeAnalysis.CodeGen;
+
 #if !DEBUG
 using ParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.ParameterSymbol;
 #endif

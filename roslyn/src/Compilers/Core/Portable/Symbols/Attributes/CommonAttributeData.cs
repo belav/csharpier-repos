@@ -295,7 +295,6 @@ namespace Microsoft.CodeAnalysis
 
             return ConstantValue.Create(new DateTime(value));
         }
-
         #endregion
 
         internal ObsoleteAttributeData DecodeObsoleteAttribute(ObsoleteAttributeKind kind)

@@ -103,7 +103,6 @@ namespace Moq.Tests
         {
             Assert.Equal(expected, actual: type.SubstituteTypeMatchers(other));
         }
-
 		#endregion
 
 		#region Test cases

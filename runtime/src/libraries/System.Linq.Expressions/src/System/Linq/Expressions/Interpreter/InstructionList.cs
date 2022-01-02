@@ -207,7 +207,6 @@ namespace System.Linq.Expressions.Interpreter
                 }
             }
         }
-
         #endregion
 
         #region Core Emit Ops
@@ -354,7 +353,6 @@ namespace System.Linq.Expressions.Interpreter
 #endif
             );
         }
-
         #endregion
 
         #region Stack Operations
@@ -453,7 +451,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(PopInstruction.Instance);
         }
-
         #endregion
 
         #region Locals
@@ -730,7 +727,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(new RuntimeVariablesInstruction(count));
         }
-
         #endregion
 
         #region Array Operations
@@ -759,7 +755,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(new NewArrayInitInstruction(elementType, elementCount));
         }
-
         #endregion
 
         #region Arithmetic Operations
@@ -788,7 +783,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(ModuloInstruction.Create(type));
         }
-
         #endregion
 
         #region Comparisons
@@ -847,7 +841,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(GreaterThanOrEqualInstruction.Create(type, liftedToNull));
         }
-
         #endregion
 
         #region Conversions
@@ -882,7 +875,6 @@ namespace System.Linq.Expressions.Interpreter
             Debug.Assert(_instructions[_instructions.Count - 1] == NullCheckInstruction.Instance);
             Emit(new CastReferenceToEnumInstruction(toType));
         }
-
         #endregion
 
         #region Boolean Operators
@@ -891,7 +883,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(NotInstruction.Create(type));
         }
-
         #endregion
 
         #region Types
@@ -959,7 +950,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(new TypeAsInstruction(type));
         }
-
         #endregion
 
         #region Fields and Methods
@@ -1035,7 +1025,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             Emit(NullableMethodCallInstruction.Create(method.Name, parameters.Length, method));
         }
-
         #endregion
 
         #region Control Flow

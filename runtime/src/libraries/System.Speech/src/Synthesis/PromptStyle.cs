@@ -23,7 +23,6 @@ namespace System.Speech.Synthesis
         {
             Emphasis = emphasis;
         }
-
         #endregion
 
         #region public Properties
@@ -44,7 +43,6 @@ namespace System.Speech.Synthesis
             get { return _emphasis; }
             set { _emphasis = value; }
         }
-
         #endregion
 
         #region Private Fields

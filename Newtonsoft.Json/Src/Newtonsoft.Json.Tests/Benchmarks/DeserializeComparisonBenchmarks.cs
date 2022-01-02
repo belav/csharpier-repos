@@ -216,7 +216,6 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             }
             return a;
         }
-
 #endregion
 
         [Benchmark]

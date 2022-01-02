@@ -577,7 +577,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckNullableGenericWithStructRestrictionArrayList<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -612,7 +611,6 @@ namespace System.Linq.Expressions.Tests
                 );
             }
         }
-
         #endregion
 
         #region  verifiers

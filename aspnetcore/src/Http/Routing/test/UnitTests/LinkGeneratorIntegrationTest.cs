@@ -512,7 +512,6 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Assert
         Assert.Equal("/Home/Fake/17", path);
     }
-
     #endregion
 
     #region With ambient values
@@ -880,7 +879,6 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Assert
         Assert.Equal("/Admin/Pages", path);
     }
-
     #endregion
 
     private static RouteValuesAddress CreateAddress(

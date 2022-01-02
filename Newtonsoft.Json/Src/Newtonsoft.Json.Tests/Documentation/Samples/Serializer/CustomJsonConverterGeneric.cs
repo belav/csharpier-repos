@@ -71,7 +71,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string PackageId { get; set; }
             public Version Version { get; set; }
         }
-
         #endregion
 
         [Test]

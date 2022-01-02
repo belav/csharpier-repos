@@ -536,7 +536,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             return comp;
         }
-
         #endregion
 
         #region Binding
@@ -583,7 +582,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 }
             }
         }
-
         #endregion
 
         internal void AssertEquivalentTo(SymbolTreeInfo other)

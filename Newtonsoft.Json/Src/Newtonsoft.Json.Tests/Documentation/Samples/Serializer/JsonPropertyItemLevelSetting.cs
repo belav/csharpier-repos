@@ -55,7 +55,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonProperty(IsReference = true)]
             public Employee Manager { get; set; }
         }
-
         #endregion
 
         [Test]

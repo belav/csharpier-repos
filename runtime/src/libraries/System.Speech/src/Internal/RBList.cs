@@ -16,7 +16,6 @@ namespace System.Speech.Internal
         #region Constructors
 
         internal RBList() { }
-
         #endregion
 
         #region Internal Methods
@@ -78,7 +77,6 @@ namespace System.Speech.Internal
         {
             return new MyEnumerator(_root);
         }
-
         #endregion
 
         #region Internal Properties
@@ -112,13 +110,11 @@ namespace System.Speech.Internal
                 return FindMinSubTree(_root).Key;
             }
         }
-
         #endregion
 
         #region Protected Methods
 
         protected abstract int CompareTo(object object1, object object2);
-
         #endregion
 
         #region Private Methods
@@ -258,7 +254,6 @@ namespace System.Speech.Internal
                 return successor;
             }
         }
-
         #endregion Implement utility operations on Tree
 
         // Return the root of the new subtree
@@ -563,13 +558,11 @@ namespace System.Speech.Internal
                 RotateRight(sibling.Parent);
             }
         }
-
         #endregion
 
         #region Private Fields
 
         private TreeNode _root;
-
         #endregion
 
         #region Private Types

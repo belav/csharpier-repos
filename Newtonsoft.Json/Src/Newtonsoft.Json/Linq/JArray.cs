@@ -349,7 +349,6 @@ namespace Newtonsoft.Json.Linq
         {
             return Children().GetEnumerator();
         }
-
         #endregion
 
         #region ICollection<JToken> Members
@@ -409,7 +408,6 @@ namespace Newtonsoft.Json.Linq
         {
             return RemoveItem(item);
         }
-
         #endregion
 
         internal override int GetDeepHashCode()

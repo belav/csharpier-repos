@@ -58,7 +58,6 @@ namespace System.Speech.Recognition
         {
             Append(value);
         }
-
         #endregion Constructors
 
         #region Public Methods
@@ -240,7 +239,6 @@ namespace System.Speech.Recognition
         {
             get { return DebugSummary; }
         }
-
         #endregion Constructors
 
         #region Public Properties
@@ -257,7 +255,6 @@ namespace System.Speech.Recognition
                 _culture = value;
             }
         }
-
         #endregion
 
         #region Operator Overloads
@@ -354,7 +351,6 @@ namespace System.Speech.Recognition
         {
             return new GrammarBuilder(semanticValue);
         }
-
         #endregion
 
         #region Internal Methods
@@ -431,7 +427,6 @@ namespace System.Speech.Recognition
 
             return builder;
         }
-
         #endregion
 
         #region Internal Properties
@@ -458,7 +453,6 @@ namespace System.Speech.Recognition
         {
             get { return _grammarBuilder; }
         }
-
         #endregion
 
         #region Private Methods
@@ -467,7 +461,6 @@ namespace System.Speech.Recognition
         {
             InternalBuilder.Items.Add(item.Clone());
         }
-
         #endregion
 
         #region Private Fields
@@ -475,7 +468,6 @@ namespace System.Speech.Recognition
         private InternalGrammarBuilder _grammarBuilder;
 
         private CultureInfo _culture = CultureInfo.CurrentUICulture;
-
         #endregion
 
         #region Private Type

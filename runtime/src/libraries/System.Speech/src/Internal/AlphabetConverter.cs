@@ -30,7 +30,6 @@ namespace System.Speech.Internal
             _currentLangId = -1;
             SetLanguageId(langId);
         }
-
         #endregion
 
         #region internal Methods
@@ -119,7 +118,6 @@ namespace System.Speech.Internal
             }
             return oldLangId;
         }
-
         #endregion
 
         #region Private Methods
@@ -211,7 +209,6 @@ namespace System.Speech.Internal
             }
             return new PhoneMapData(new BufferedStream(stream));
         }
-
         #endregion
 
         #region Private Fields
@@ -241,7 +238,6 @@ namespace System.Speech.Internal
         };
         private static PhoneMapData[] s_phoneMaps = new PhoneMapData[7];
         private static object s_staticLock = new();
-
         #endregion
 
         #region Private Type

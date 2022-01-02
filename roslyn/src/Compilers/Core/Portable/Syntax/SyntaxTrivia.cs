@@ -411,7 +411,6 @@ namespace Microsoft.CodeAnalysis
                 index: 0
             );
         }
-
         #endregion
 
         /// <summary>

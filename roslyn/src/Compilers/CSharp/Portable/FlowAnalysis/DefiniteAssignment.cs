@@ -1153,7 +1153,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && MayRequireTrackingReceiverType(receiverOpt.Type)
                 && !receiverOpt.Type.IsPrimitiveRecursiveStruct();
         }
-
         #endregion Tracking reads/writes of variables for warnings
 
         /// <summary>
@@ -2644,7 +2643,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             // reported an error for use before assignment.
             Assign(node.LeftOperand, node.LeftOperand);
         }
-
         #endregion Visitors
 
         protected override string Dump(LocalState state)

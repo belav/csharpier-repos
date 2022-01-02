@@ -45,7 +45,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string Name { get; set; }
             public Employee Manager { get; set; }
         }
-
         #endregion
 
         [Test]

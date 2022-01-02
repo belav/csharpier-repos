@@ -9,7 +9,6 @@ namespace Microsoft.CodeAnalysis.Razor;
 internal static class RazorDiagnosticFactory
 {
     private const string DiagnosticPrefix = "RZ";
-
     // Razor.Language starts at 0, 1000, 2000, 3000. Therefore, we should offset by 500 to ensure we can easily
     // maintain this list of diagnostic descriptors in conjunction with the one in Razor.Language.
 

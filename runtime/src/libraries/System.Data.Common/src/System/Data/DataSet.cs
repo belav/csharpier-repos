@@ -2253,7 +2253,6 @@ namespace System.Data
                 DataCommonEventSource.Log.ExitScope(logScopeId);
             }
         }
-
         #endregion
 
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]

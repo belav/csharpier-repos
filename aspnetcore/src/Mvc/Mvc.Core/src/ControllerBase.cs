@@ -1168,7 +1168,6 @@ public abstract class ControllerBase
             fragment: fragment
         );
     }
-
     #endregion
 
     #region FileResult variants
@@ -1973,7 +1972,6 @@ public abstract class ControllerBase
             EnableRangeProcessing = enableRangeProcessing,
         };
     }
-
     #endregion
 
     /// <summary>

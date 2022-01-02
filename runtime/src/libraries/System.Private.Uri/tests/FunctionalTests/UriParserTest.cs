@@ -85,7 +85,6 @@ namespace System.PrivateUri.Tests
             InitializeAndValidate(uri, out parsingError);
         }
     }
-
     #endregion Test class
 
     public static class UriParserTest
@@ -741,7 +740,6 @@ namespace System.PrivateUri.Tests
                 () => UriParser.Register(parser, scheme, 2006)
             );
         }
-
         #endregion UriParser tests
 
         #region GenericUriParser tests
@@ -763,7 +761,6 @@ namespace System.PrivateUri.Tests
             new GenericUriParser(GenericUriParserOptions.NoQuery);
             new GenericUriParser(GenericUriParserOptions.NoUserInfo);
         }
-
         #endregion GenericUriParser tests
 
         #region UriParser template tests

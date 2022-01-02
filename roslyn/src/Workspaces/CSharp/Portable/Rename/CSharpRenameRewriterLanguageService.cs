@@ -1002,7 +1002,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 return newToken;
             }
         }
-
         #endregion
 
         #region "Declaration Conflicts"
@@ -1523,7 +1522,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
             return ImmutableArray<Location>.Empty;
         }
-
         #endregion
 
         public override void TryAddPossibleNameConflicts(

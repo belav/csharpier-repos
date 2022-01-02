@@ -23,7 +23,6 @@ namespace System.Speech.Internal.SapiInterop
             _stream.Dispose();
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region public Methods
@@ -107,7 +106,6 @@ namespace System.Speech.Internal.SapiInterop
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #endregion

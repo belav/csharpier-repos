@@ -104,7 +104,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut([In, Out] ref InnerSequential str1);
-
     #endregion
     #region Struct with Layout Sequential scenario2
     [DllImport("MarshalStructAsParam")]
@@ -132,7 +131,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsSeqByRefInOut2(
         [In, Out] ref InnerArraySequential str1
     );
-
     #endregion
     #region Struct with Layout Sequential scenario3
     [DllImport("MarshalStructAsParam")]
@@ -160,7 +158,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsSeqByRefInOut3(
         [In, Out] ref CharSetAnsiSequential str1
     );
-
     #endregion
     #region Struct with Layout Sequential scenario4
     [DllImport("MarshalStructAsParam")]
@@ -190,7 +187,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsSeqByRefInOut4(
         [In, Out] ref CharSetUnicodeSequential str1
     );
-
     #endregion
     #region Struct with Layout Sequential scenario5
     [DllImport("MarshalStructAsParam")]
@@ -216,7 +212,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef6")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut6([In, Out] ref NumberSequential str1);
-
     #endregion
     #region Struct with Layout Sequential scenario6
     [DllImport("MarshalStructAsParam")]
@@ -242,7 +237,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal7")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut7([In, Out] S3 str1);
-
     #endregion
     #region Struct with Layout Sequential scenario7
     [DllImport("MarshalStructAsParam")]
@@ -268,7 +262,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef8")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut8([In, Out] ref S5 str1);
-
     #endregion
     #region Struct with Layout Sequential scenario8
     [DllImport("MarshalStructAsParam")]
@@ -298,7 +291,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsSeqByRefInOut9(
         [In, Out] ref StringStructSequentialAnsi str1
     );
-
     #endregion
     #region Struct with Layout Sequential scenario9
     [DllImport("MarshalStructAsParam")]
@@ -332,7 +324,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsSeqByRefInOut10(
         [In, Out] ref StringStructSequentialUnicode str1
     );
-
     #endregion
     #region Struct with Layout Sequential scenario10
     [DllImport("MarshalStructAsParam")]
@@ -358,7 +349,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef11")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut11([In, Out] ref S8 str1);
-
     #endregion
     #region Struct with Layout Sequential scenario11
     [DllImport("MarshalStructAsParam")]
@@ -384,7 +374,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef12")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut12([In, Out] ref S9 str1);
-
     #endregion
     #region Struct with Layout Sequential scenario12
     [DllImport("MarshalStructAsParam")]
@@ -424,7 +413,6 @@ public class Managed
     static extern bool MarshalStructAsParam_AsSeqByRefInOut13(
         [In, Out] ref IncludeOuterIntegerStructSequential str1
     );
-
     #endregion
     #region Struct with Layout Sequential scenario13
     [DllImport("MarshalStructAsParam")]
@@ -450,7 +438,6 @@ public class Managed
 
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef14")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut14([In, Out] ref S11 str1);
-
     #endregion
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValIntWithInnerSequential(
@@ -3802,7 +3789,6 @@ public class Managed
             failures++;
         }
     }
-
     #endregion
 
     [SecuritySafeCritical]

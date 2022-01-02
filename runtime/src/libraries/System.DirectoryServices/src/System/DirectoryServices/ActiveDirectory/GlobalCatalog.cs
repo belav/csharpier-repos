@@ -22,7 +22,6 @@ namespace System.DirectoryServices.ActiveDirectory
             string globalCatalogName,
             DirectoryEntryManager directoryEntryMgr
         ) : base(context, globalCatalogName, directoryEntryMgr) { }
-
         #endregion constructors
 
         #region public methods
@@ -318,7 +317,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
             return InternalGetDirectorySearcher();
         }
-
         #endregion public methods
 
         #region private methods

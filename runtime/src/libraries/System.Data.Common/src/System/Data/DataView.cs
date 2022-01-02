@@ -451,7 +451,6 @@ namespace System.Data
                 return _predicateFilter(row);
             }
         }
-
         #endregion
 
         /// <summary>
@@ -1083,7 +1082,6 @@ namespace System.Data
             }
             return findIndex;
         }
-
         #endregion
 
         #region IBindingList implementation
@@ -1114,7 +1112,6 @@ namespace System.Data
             (_index!._indexFields.Length == 1 && _index._indexFields[0].IsDescending)
                 ? ListSortDirection.Descending
                 : ListSortDirection.Ascending;
-
         #endregion
 
         #region ListChanged & Initialized events
@@ -1140,7 +1137,6 @@ namespace System.Data
         }
 
         public event EventHandler? Initialized;
-
         #endregion
 
         #region IBindingList implementation
@@ -1209,7 +1205,6 @@ namespace System.Data
             DataCommonEventSource.Log.Trace("<ds.DataView.RemoveSort|API> {0}", ObjectID);
             Sort = string.Empty;
         }
-
         #endregion
 
         #region Additional method and properties for new interface IBindingListView
@@ -1325,7 +1320,6 @@ namespace System.Data
         bool IBindingListView.SupportsAdvancedSorting => true;
 
         bool IBindingListView.SupportsFiltering => true;
-
         #endregion
 
         #region ITypedList
@@ -1381,7 +1375,6 @@ namespace System.Data
             }
             return new PropertyDescriptorCollection(null);
         }
-
         #endregion
 
         /// <summary>

@@ -18,6 +18,7 @@ using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Shared.Collections;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
+
 #if DEBUG
 using Microsoft.CodeAnalysis.Shared.Extensions;
 #endif

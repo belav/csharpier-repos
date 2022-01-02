@@ -19,7 +19,6 @@ namespace System
         #region QCalls
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "TypeName_ReleaseTypeNameParser")]
         private static extern void Release(IntPtr pTypeNameParser);
-
         #endregion
 
         public SafeTypeNameParserHandle() : base(true) { }
@@ -69,7 +68,6 @@ namespace System
             SafeTypeNameParserHandle pTypeNameParser,
             StringHandleOnStack retString
         );
-
         #endregion
 
         #region Static Members
@@ -110,7 +108,6 @@ namespace System
 
             return ret;
         }
-
         #endregion
 
         #region Private Data Members
@@ -128,7 +125,6 @@ namespace System
         {
             m_NativeParser.Dispose();
         }
-
         #endregion
 
         #region private Members

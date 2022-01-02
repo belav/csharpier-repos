@@ -86,7 +86,6 @@ internal abstract class GreenNode
     internal virtual bool IsToken => false;
 
     internal virtual bool IsTrivia => false;
-
     #endregion
 
     #region Slots
@@ -148,7 +147,6 @@ internal abstract class GreenNode
 
         return i;
     }
-
     #endregion
 
     #region Flags
@@ -175,7 +173,6 @@ internal abstract class GreenNode
     {
         get { return (Flags & NodeFlags.ContainsAnnotations) != 0; }
     }
-
     #endregion
 
     #region Spans
@@ -205,7 +202,6 @@ internal abstract class GreenNode
     {
         get { return GetTrailingTriviaWidth() != 0; }
     }
-
     #endregion
 
     #region Diagnostics
@@ -223,7 +219,6 @@ internal abstract class GreenNode
 
         return EmptyDiagnostics;
     }
-
     #endregion
 
     #region Annotations
@@ -242,7 +237,6 @@ internal abstract class GreenNode
 
         return EmptyAnnotations;
     }
-
     #endregion
 
     #region Text
@@ -287,7 +281,6 @@ internal abstract class GreenNode
     {
         throw new NotImplementedException();
     }
-
     #endregion
 
     #region Tokens
@@ -375,7 +368,6 @@ internal abstract class GreenNode
 
         return node;
     }
-
     #endregion
 
     #region Equivalence
@@ -440,7 +432,6 @@ internal abstract class GreenNode
 
         return true;
     }
-
     #endregion
 
     #region Factories
@@ -484,7 +475,6 @@ internal abstract class GreenNode
     }
 
     internal abstract SyntaxNode CreateRed(SyntaxNode parent, int position);
-
     #endregion
 
     public abstract TResult Accept<TResult>(InternalSyntax.SyntaxVisitor<TResult> visitor);

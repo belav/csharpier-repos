@@ -48,7 +48,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string Game { get; set; }
             public Dictionary<string, int> UserPoints { get; set; }
         }
-
         #endregion
 
         [Test]

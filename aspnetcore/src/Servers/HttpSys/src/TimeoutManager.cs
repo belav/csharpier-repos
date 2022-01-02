@@ -135,7 +135,6 @@ public sealed class TimeoutManager
             _minSendBytesPerSecond = (uint)value;
         }
     }
-
     #endregion Properties
 
     #region Helpers

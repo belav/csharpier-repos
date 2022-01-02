@@ -4410,7 +4410,6 @@ public class Bar : BaseClass
 }";
             return TestInRegularAndScriptAsync(text, expected);
         }
-
         #endregion Quick Action
 
         #region Dialog
@@ -5426,7 +5425,6 @@ namespace PushUpTest
                 index: 1
             );
         }
-
         #endregion Dialog
 
         #region Selections and caret position

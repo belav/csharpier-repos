@@ -47,7 +47,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public DateTime CreatedDate { get; set; }
             public IList<string> Roles { get; set; }
         }
-
         #endregion
 
         [Test]

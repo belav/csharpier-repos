@@ -18,7 +18,6 @@ namespace System.Security.Principal
         //
 
         private readonly List<IdentityReference> _identities;
-
         #endregion
 
         #region Constructors
@@ -37,7 +36,6 @@ namespace System.Security.Principal
         {
             _identities = new List<IdentityReference>(capacity);
         }
-
         #endregion
 
         #region ICollection<IdentityReference> implementation
@@ -96,7 +94,6 @@ namespace System.Security.Principal
 
             return _identities.Contains(identity);
         }
-
         #endregion
 
         #region IEnumerable<IdentityReference> implementation
@@ -110,7 +107,6 @@ namespace System.Security.Principal
         {
             return new IdentityReferenceEnumerator(this);
         }
-
         #endregion
 
         #region Public methods
@@ -390,7 +386,6 @@ namespace System.Security.Principal
         //
 
         private readonly IdentityReferenceCollection _collection;
-
         #endregion
 
         #region Constructors
@@ -404,7 +399,6 @@ namespace System.Security.Principal
             _collection = collection;
             _current = -1;
         }
-
         #endregion
 
         #region IEnumerator implementation

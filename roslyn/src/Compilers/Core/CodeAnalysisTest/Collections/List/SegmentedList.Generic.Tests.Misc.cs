@@ -138,7 +138,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     () => _ilist.Insert(0, new LinkedListNode<string>("blargh"))
                 ); //"ArgumentException expected."
             }
-
             #endregion
 
             #region InsertRange
@@ -244,7 +243,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 return items.ToList();
             }
-
             #endregion
 
             #region GetRange
@@ -375,7 +373,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     ); //"ArgumentOutOfRangeException expected."
                 }
             }
-
             #endregion
 
             #region Exists(Pred<T>)
@@ -509,7 +506,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     );
                 }
             }
-
             #endregion
 
             #region Contains
@@ -672,7 +668,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     "Err_68850ahiuedpz Expected Contains to return false with invalid type"
                 );
             }
-
             #endregion
 
             #region Clear
@@ -752,7 +747,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
-
             #endregion
 
             #region TrueForAll
@@ -809,7 +803,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.True(list.TrueForAll(item => true));
                 Assert.Throws<ArgumentNullException>(() => list.TrueForAll(null!)); //"Err_858ahia Expected null match to throw ArgumentNullException"
             }
-
             #endregion
 
             #region ToArray

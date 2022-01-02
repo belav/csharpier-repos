@@ -98,7 +98,6 @@ namespace CoreXml.Test.XLinq
                     }
                     return o;
                 }
-
                 #endregion
 
                 //[Variation(Desc = "1 level down", Priority = 0, Params = new object[] { "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></p:A>" })]

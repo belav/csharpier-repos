@@ -2467,7 +2467,6 @@ namespace System
 
                 return Fail();
             }
-
             #endregion
 
             #region AppendFormatted ReadOnlySpan<char>
@@ -2534,7 +2533,6 @@ namespace System
 
                 return Fail();
             }
-
             #endregion
 
             #region AppendFormatted string
@@ -2570,7 +2568,6 @@ namespace System
                 // simply to disambiguate between ROS<char> and object, just in case someone does specify a format, as
                 // string is implicitly convertible to both. Just delegate to the T-based implementation.
                 AppendFormatted<string?>(value, alignment, format);
-
             #endregion
 
             #region AppendFormatted object
@@ -2583,7 +2580,6 @@ namespace System
                 // formatted with both an alignment and a format, or b) the compiler is unable to target type to T. It
                 // exists purely to help make cases from (b) compile. Just delegate to the T-based implementation.
                 AppendFormatted<object?>(value, alignment, format);
-
             #endregion
             #endregion
 

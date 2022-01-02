@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         /// Does not include the current buffer unless it has been submitted.
         /// </remarks>
         private readonly List<ITextBuffer> _submittedBuffers = new();
-
         #endregion
 
         public IContentType ContentType { get; }

@@ -117,7 +117,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
         }
-
         #endregion
 
         #region Bind Single Attribute
@@ -1370,7 +1369,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             result = default;
             return false;
         }
-
         #endregion
 
         #region AttributeExpressionVisitor
@@ -1827,7 +1825,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
         }
-
         #endregion
 
         #region AnalyzedAttributeArguments

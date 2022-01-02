@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.Emit;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CodeGen;
+
 #if !DEBUG
 using FieldSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.FieldSymbol;
 #endif

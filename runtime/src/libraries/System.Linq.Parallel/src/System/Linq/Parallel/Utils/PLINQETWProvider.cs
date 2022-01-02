@@ -117,7 +117,6 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYBEGIN_EVENTID, taskSchedulerId, taskId, queryId);
         }
-
         #endregion
 
         #region ParallelQueryEnd
@@ -151,7 +150,6 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYEND_EVENTID, taskSchedulerId, taskId, queryId);
         }
-
         #endregion
 
         #region ParallelQueryFork
@@ -189,7 +187,6 @@ namespace System.Linq.Parallel
         {
             WriteEvent(PARALLELQUERYFORK_EVENTID, taskSchedulerId, taskId, queryId);
         }
-
         #endregion
 
         #region ParallelQueryJoin

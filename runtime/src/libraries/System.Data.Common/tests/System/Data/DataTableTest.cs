@@ -1958,7 +1958,6 @@ Assert.False(true);
             Assert.Equal(3, dtr[0]);
             Assert.Equal("mono 3", dtr[1]);
         }
-
         #endregion // DataTable.CreateDataReader Tests
 
         #region DataTable.Load Tests
@@ -2805,7 +2804,6 @@ Assert.False(true);
             dtParent.AcceptChanges();
             return dtParent;
         }
-
         #endregion // DataTable.Load Tests
 
         #region Read/Write XML Tests

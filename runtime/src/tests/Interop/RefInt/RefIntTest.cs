@@ -50,7 +50,6 @@ public class Test
         }
         return breturn;
     }
-
     #endregion
 
     #region "TestMethod2 Pinvoke,stdcall"
@@ -91,7 +90,6 @@ public class Test
         }
         return breturn;
     }
-
     #endregion
 
     #region "TestMethod3,Reverse PInvoke,Cdecl"
@@ -128,7 +126,6 @@ public class Test
         }
         return breturn;
     }
-
     #endregion
 
     #region "TestMethod4,Reverse PInvoke,StdCall"
@@ -163,7 +160,6 @@ public class Test
         }
         return breturn;
     }
-
     #endregion
 
     #region "TestMethod5,cdecl,delegate pinvoke"
@@ -207,7 +203,6 @@ public class Test
         }
         return breturn;
     }
-
     #endregion
 
     #region "TestMethod6: StdCall,delegate pinvoke"
@@ -251,7 +246,6 @@ public class Test
         }
         return breturn;
     }
-
     #endregion
     #endregion
 

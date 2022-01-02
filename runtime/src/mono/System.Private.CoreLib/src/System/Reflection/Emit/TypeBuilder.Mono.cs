@@ -76,7 +76,6 @@ namespace System.Reflection.Emit
         private TypeInfo? created;
 
         private int state;
-
 #endregion
 
         private ITypeName fullname;

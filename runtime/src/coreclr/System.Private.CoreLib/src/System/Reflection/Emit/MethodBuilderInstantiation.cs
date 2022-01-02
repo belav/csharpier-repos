@@ -16,13 +16,11 @@ namespace System.Reflection.Emit
 
             return new MethodBuilderInstantiation(method, inst);
         }
-
         #endregion
 
         #region Private Data Members
         internal MethodInfo m_method;
         private Type[] m_inst;
-
         #endregion
 
         #region Constructor
@@ -31,7 +29,6 @@ namespace System.Reflection.Emit
             m_method = method;
             m_inst = inst;
         }
-
         #endregion
 
         internal override Type[] GetParameterTypes()
@@ -61,7 +58,6 @@ namespace System.Reflection.Emit
         }
 
         public override Module Module => m_method.Module;
-
         #endregion
 
         #region MethodBase Members
@@ -129,7 +125,6 @@ namespace System.Reflection.Emit
         }
 
         public override bool IsGenericMethod => true;
-
         #endregion
 
         #region Public Abstract\Virtual Members

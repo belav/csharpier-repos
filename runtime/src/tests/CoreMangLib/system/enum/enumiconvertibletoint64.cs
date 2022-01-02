@@ -171,7 +171,6 @@ public class EnumIConvertibleToInt64
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases

@@ -565,7 +565,6 @@ namespace System.Reflection.Metadata
             InitializeProjectedTypes();
             return s_projectedTypeNames!;
         }
-
         #endregion
 
         private static uint TreatmentAndRowId(byte treatment, int rowId)
@@ -691,7 +690,6 @@ namespace System.Reflection.Metadata
 
             return StringHeap.StartsWithRaw(TypeDefTable.GetName(typeDef), ClrPrefix);
         }
-
         #endregion
 
         #region TypeRef
@@ -769,7 +767,6 @@ namespace System.Reflection.Metadata
             }
             return true;
         }
-
         #endregion
 
         #region MethodDef
@@ -933,7 +930,6 @@ namespace System.Reflection.Metadata
 
             return treatment;
         }
-
         #endregion
 
         #region FieldDef
@@ -972,7 +968,6 @@ namespace System.Reflection.Metadata
 
             return TreatmentAndRowId((byte)treatment, handle.RowId);
         }
-
         #endregion
 
         #region MemberRef
@@ -1055,7 +1050,6 @@ namespace System.Reflection.Metadata
 
             return GetProjectionIndexForTypeReference(typeRef, out isIDisposable) >= 0;
         }
-
         #endregion
 
         #region AssemblyRef
@@ -1072,7 +1066,6 @@ namespace System.Reflection.Metadata
 
             throw new BadImageFormatException(SR.WinMDMissingMscorlibRef);
         }
-
         #endregion
 
         #region CustomAttribute

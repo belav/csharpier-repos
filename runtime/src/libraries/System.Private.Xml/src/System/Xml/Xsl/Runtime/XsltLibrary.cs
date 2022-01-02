@@ -721,7 +721,6 @@ namespace System.Xml.Xsl.Runtime
                 return CompareValues(op, leftItem, rightItem, TypeCode.Double);
             }
         }
-
         #endregion
 
         // nav1 and nav2 are assumed to belong to the same document

@@ -150,7 +150,6 @@ namespace System.Speech.Internal.ObjectTokens
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region internal Methods
@@ -293,7 +292,6 @@ namespace System.Speech.Internal.ObjectTokens
         {
             return _sapiRegKey.EnumValues(index, out valueName);
         }
-
         #endregion
 
         /// <summary>
@@ -434,7 +432,6 @@ namespace System.Speech.Internal.ObjectTokens
         {
             return ((IEnumerable<RegistryDataKey>)this).GetEnumerator();
         }
-
         #endregion
 
         #endregion
@@ -448,7 +445,6 @@ namespace System.Speech.Internal.ObjectTokens
                 _sapiRegKey = null;
             }
         }
-
         #endregion
 
         #region Internal Fields
@@ -458,7 +454,6 @@ namespace System.Speech.Internal.ObjectTokens
         internal ISpDataKey _sapiRegKey;
 
         internal bool _disposeSapiKey;
-
         #endregion
 
         #region Private Methods
@@ -515,7 +510,6 @@ namespace System.Speech.Internal.ObjectTokens
 
             return null;
         }
-
         #endregion
 
         #region private Types

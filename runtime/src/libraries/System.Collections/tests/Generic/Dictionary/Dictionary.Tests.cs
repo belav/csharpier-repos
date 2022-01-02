@@ -152,7 +152,6 @@ namespace System.Collections.Tests
                 Assert.False(valuesEnum.MoveNext());
             }
         }
-
         #endregion
 
         #region ICollection tests

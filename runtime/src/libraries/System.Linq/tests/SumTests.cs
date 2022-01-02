@@ -122,7 +122,6 @@ namespace System.Linq.Tests
                 () => sourceNullableDecimal.Sum(x => x)
             );
         }
-
         #endregion
 
         #region SelectionIsNull - ArgumentNullExceptionThrown
@@ -236,7 +235,6 @@ namespace System.Linq.Tests
                 () => sourceNullableDecimal.Sum(selector)
             );
         }
-
         #endregion
 
         #region SourceIsEmptyCollection - ZeroReturned
@@ -320,7 +318,6 @@ namespace System.Linq.Tests
             Assert.Equal(0m, sourceNullableDecimal.Sum());
             Assert.Equal(0m, sourceNullableDecimal.Sum(x => x));
         }
-
         #endregion
 
         #region SourceIsNotEmpty - ProperSumReturned
@@ -428,7 +425,6 @@ namespace System.Linq.Tests
             Assert.Equal(1m, sourceNullableDecimal.Sum());
             Assert.Equal(1m, sourceNullableDecimal.Sum(x => x));
         }
-
         #endregion
 
         #region SourceSumsToOverflow - OverflowExceptionThrown or Infinity returned
@@ -527,7 +523,6 @@ namespace System.Linq.Tests
             Assert.Throws<OverflowException>(() => sourceNullableDecimal.Sum());
             Assert.Throws<OverflowException>(() => sourceNullableDecimal.Sum(x => x));
         }
-
         #endregion
         [Fact]
         public void SameResultsRepeatCallsIntQuery()

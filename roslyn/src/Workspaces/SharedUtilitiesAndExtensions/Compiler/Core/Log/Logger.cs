@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using System.Diagnostics.CodeAnalysis;
+
 #if !CODE_STYLE
 using System.Linq;
 using Microsoft.CodeAnalysis.Options;

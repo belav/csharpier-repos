@@ -17,7 +17,6 @@ namespace System.Reflection.Emit
         private const int DefaultFixupArraySize = 8;
         private const int DefaultLabelArraySize = 4;
         private const int DefaultExceptionArraySize = 2;
-
         #endregion
 
         #region Internal Statics
@@ -34,7 +33,6 @@ namespace System.Reflection.Emit
             Array.Copy(incoming, temp, incoming.Length);
             return temp;
         }
-
         #endregion
 
         #region Internal Data Members
@@ -70,7 +68,6 @@ namespace System.Reflection.Emit
         internal int CurrExcStackCount => m_currExcStackCount;
 
         internal __ExceptionInfo[]? CurrExcStack => m_currExcStack;
-
         #endregion
 
         #region Constructor
@@ -93,7 +90,6 @@ namespace System.Reflection.Emit
             MethodBuilder? mb = m_methodBuilder as MethodBuilder;
             m_localSignature = SignatureHelper.GetLocalVarSigHelper(mb?.GetTypeBuilder().Module);
         }
-
         #endregion
 
         #region Internal Members
@@ -403,7 +399,6 @@ namespace System.Reflection.Emit
             Array.Copy(m_RelocFixupList!, narrowTokens, m_RelocFixupCount);
             return narrowTokens;
         }
-
         #endregion
 
         #region Public Members
@@ -1014,7 +1009,6 @@ namespace System.Reflection.Emit
                 m_ILStream[m_length++] = (byte)tempVal;
             }
         }
-
         #endregion
 
         #region Exceptions
@@ -1185,7 +1179,6 @@ namespace System.Reflection.Emit
                 catchEndAddr = m_length;
             current.MarkFinallyAddr(m_length, catchEndAddr);
         }
-
         #endregion
 
         #region Labels
@@ -1226,7 +1219,6 @@ namespace System.Reflection.Emit
 
             m_labelList[labelIndex] = m_length;
         }
-
         #endregion
 
         #region IL Macros
@@ -1343,7 +1335,6 @@ namespace System.Reflection.Emit
 
             Emit(OpCodes.Callvirt, mi);
         }
-
         #endregion
 
         #region Debug API

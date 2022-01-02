@@ -592,7 +592,6 @@ namespace System.Net.Http.Tests
             Assert.Equal(1, headers.GetValues("Age").Count());
             Assert.Equal("1.1", headers.GetValues("Age").First());
         }
-
         #endregion
 
         // General headers are tested in more detail in HttpRequestHeadersTest. This file only makes sure
@@ -762,7 +761,6 @@ namespace System.Net.Http.Tests
             headers.TryAddWithoutValidation("Pragma", "custom2");
             Assert.Equal(2, headers.Pragma.Count);
         }
-
         #endregion
 
         [Fact]

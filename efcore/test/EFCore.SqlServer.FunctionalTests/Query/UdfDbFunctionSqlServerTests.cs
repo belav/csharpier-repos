@@ -320,7 +320,6 @@ WHERE CASE
 END IN (CAST(1 AS bit), CAST(0 AS bit))"
             );
         }
-
         #endregion
 
         #region Instance
@@ -550,7 +549,6 @@ FROM [Customers] AS [c]
 WHERE 3 = [dbo].[CustomerOrderCount](ABS([c].[Id]))"
             );
         }
-
         #endregion
 
         #endregion
@@ -877,7 +875,6 @@ END) AS [g]
 ORDER BY [a].[Id], [g].[Year]"
             );
         }
-
         #endregion
 
         protected override void ClearLog()

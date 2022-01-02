@@ -18,7 +18,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             _uri = sgrsUri;
         }
-
         #endregion
 
         #region Public Methods
@@ -36,7 +35,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             return _uri.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -56,7 +54,6 @@ namespace System.Speech.Internal.GrammarBuilding
             Uri ruleUri = new(_uri, UriKind.RelativeOrAbsolute);
             return elementFactory.CreateRuleRef(parent, ruleUri, null, null);
         }
-
         #endregion
 
         #region Internal Properties
@@ -65,7 +62,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             get { return "#" + _uri; }
         }
-
         #endregion
 
         #region Private Fields

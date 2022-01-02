@@ -41,7 +41,6 @@ namespace System.Diagnostics.Tracing
 
         [FieldOffset(8)]
         private readonly long m_keywords;
-
         #endregion
 
         public EventDescriptor(int traceloggingId, byte level, byte opcode, long keywords)

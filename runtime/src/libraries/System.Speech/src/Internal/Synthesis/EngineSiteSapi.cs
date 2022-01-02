@@ -20,7 +20,6 @@ namespace System.Speech.Internal.Synthesis
         {
             _site = site;
         }
-
         #endregion
 
         #region Internal Methods
@@ -152,7 +151,6 @@ namespace System.Speech.Internal.Synthesis
             }
 #pragma warning restore 56518
         }
-
         #endregion
 
         #region private Fields

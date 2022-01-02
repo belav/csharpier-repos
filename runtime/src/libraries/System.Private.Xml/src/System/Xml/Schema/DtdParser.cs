@@ -391,7 +391,6 @@ namespace System.Xml
             Parse(false);
             return _schemaInfo;
         }
-
         #endregion
 
         //

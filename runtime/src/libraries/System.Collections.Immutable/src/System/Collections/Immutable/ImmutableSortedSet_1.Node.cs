@@ -320,7 +320,6 @@ namespace System.Collections.Immutable
             {
                 return this.GetEnumerator();
             }
-
             #endregion
 
             /// <summary>
@@ -748,7 +747,6 @@ namespace System.Collections.Immutable
 
                 return tree;
             }
-
             #endregion
 
             /// <summary>

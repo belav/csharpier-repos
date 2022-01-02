@@ -6,8 +6,10 @@ using System.Diagnostics.Contracts;
 
 #if ASPNETWEBAPI
 using TRouteDictionary = System.Collections.Generic.IDictionary<string, object>;
+
 #else
 using TRouteDictionary = System.Web.Routing.RouteValueDictionary;
+
 #endif
 
 #if ASPNETWEBAPI

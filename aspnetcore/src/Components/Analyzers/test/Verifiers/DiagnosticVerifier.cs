@@ -36,7 +36,6 @@ public abstract partial class DiagnosticVerifier
     {
         return null;
     }
-
     #endregion
 
     #region Verifier wrappers
@@ -118,7 +117,6 @@ public abstract partial class DiagnosticVerifier
         var diagnostics = GetSortedDiagnostics(sources, language, analyzer);
         VerifyDiagnosticResults(diagnostics, analyzer, expected);
     }
-
     #endregion
 
     #region Actual comparisons and verifications
@@ -324,7 +322,6 @@ public abstract partial class DiagnosticVerifier
             }
         }
     }
-
     #endregion
 
     #region Formatting Diagnostics

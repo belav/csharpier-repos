@@ -69,7 +69,6 @@ namespace Microsoft.CodeAnalysis.Options
 
         private ImmutableDictionary<OptionKey, object?> _currentValues;
         private ImmutableHashSet<OptionKey> _changedOptionKeys;
-
         #endregion
 
         [ImportingConstructor]

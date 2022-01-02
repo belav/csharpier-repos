@@ -18,7 +18,6 @@ namespace System.Speech.Internal.SrgsCompiler
         #region Constructors
 
         internal CustomGrammar() { }
-
         #endregion
 
         #region Internal methods
@@ -93,7 +92,6 @@ namespace System.Speech.Internal.SrgsCompiler
             // Combine all the scripts
             _script.Append(innerCode);
         }
-
         #endregion
 
         #region Internal Properties
@@ -117,7 +115,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 return has_script;
             }
         }
-
         #endregion
 
         #region Internal Types
@@ -127,7 +124,6 @@ namespace System.Speech.Internal.SrgsCompiler
             internal string name;
             internal byte[] data;
         }
-
         #endregion
 
         #region Internal Fields

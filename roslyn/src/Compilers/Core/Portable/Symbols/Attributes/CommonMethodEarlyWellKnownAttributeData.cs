@@ -30,7 +30,6 @@ namespace Microsoft.CodeAnalysis
                 return _lazyConditionalSymbols;
             }
         }
-
         #endregion
 
         #region ObsoleteAttribute

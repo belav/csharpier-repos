@@ -99,7 +99,6 @@ namespace PInvokeTests
         OK = 1,
         Cancel = 2
     }
-
     #endregion
 
     class StructureTests
@@ -146,7 +145,6 @@ namespace PInvokeTests
 
         [DllImport("SimpleStructNative")]
         private static extern AutoStruct InvalidReturn();
-
         #endregion
 
         #endregion
@@ -171,7 +169,6 @@ namespace PInvokeTests
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate bool CdeclSimpleExplStructByRefDelegate(ref ExplStruct p);
-
         #endregion
 
         #region reverse pinvoke
@@ -210,7 +207,6 @@ namespace PInvokeTests
             ExplStruct simple = Marshal.PtrToStructure<ExplStruct>(st);
             return simple;
         }
-
         #endregion
 
         #region test methods
@@ -632,7 +628,6 @@ namespace PInvokeTests
             catch (Exception) { }
             return pass;
         }
-
         #endregion
 
         public static int Main(string[] argv)

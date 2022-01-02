@@ -87,7 +87,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying BytesToWrite with WriteLine()");
             VerifyBytesToWrite(WriteLine, s_DEFAULT_NUM_RND_BYTES, true);
         }
-
         #endregion
 
         #region Verification for Test Cases

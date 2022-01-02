@@ -1503,7 +1503,6 @@ namespace ns1
         {
             return GetEnumerator();
         }
-
         #endregion
 
         #region ICloneable Implementation
@@ -1512,7 +1511,6 @@ namespace ns1
         {
             return new c6<T, U>();
         }
-
         #endregion
 
         #region IDisposable Implementation
@@ -1523,7 +1521,6 @@ namespace ns1
         {
             proc.Dispose();
         }
-
         #endregion
 
         #region IEnumerator Implementation
@@ -1559,7 +1556,6 @@ namespace ns1
         {
             enumerator.Reset();
         }
-
         #endregion
 
         internal void Test()
@@ -1733,7 +1729,6 @@ namespace ns1
         {
             return GetEnumerator();
         }
-
         #endregion
 
         #region ICollection Implementation
@@ -1774,7 +1769,6 @@ namespace ns1
         {
             return collection.Remove(item);
         }
-
         #endregion
 
         internal new void Test()

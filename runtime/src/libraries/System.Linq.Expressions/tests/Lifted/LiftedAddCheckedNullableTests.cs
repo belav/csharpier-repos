@@ -230,7 +230,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(typeof(bool?), expr.Type);
         }
-
         #endregion
 
         #region Helpers
@@ -294,7 +293,6 @@ namespace System.Linq.Expressions.Tests
         {
             return checked((ushort)(a + b));
         }
-
         #endregion
 
         #region Test verifiers
@@ -582,7 +580,6 @@ namespace System.Linq.Expressions.Tests
             Number? expected = a + b;
             Assert.Equal(expected, f()); // NB: checked behavior doesn't apply to non-primitive types
         }
-
         #endregion
 
         #region Helper types

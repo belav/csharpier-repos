@@ -53,7 +53,6 @@ namespace System.Reflection.Emit
         internal MethodBuilder[]? other_methods;
         internal EventAttributes attrs;
         private int table_idx;
-
 #endregion
 
         [DynamicDependency(nameof(table_idx))] // Automatically keeps all previous fields too due to StructLayout

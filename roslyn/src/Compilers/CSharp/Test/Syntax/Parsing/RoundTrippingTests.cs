@@ -86,7 +86,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion
 
         [Fact]

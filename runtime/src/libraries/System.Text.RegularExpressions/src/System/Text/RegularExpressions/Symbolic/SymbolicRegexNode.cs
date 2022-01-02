@@ -604,7 +604,6 @@ namespace System.Text.RegularExpressions.Symbolic
                 null,
                 SymbolicRegexInfo.Loop(body._info, 1, false)
             );
-
         #endregion
 
         internal static SymbolicRegexNode<S> MkSingleton(SymbolicRegexBuilder<S> builder, S set) =>

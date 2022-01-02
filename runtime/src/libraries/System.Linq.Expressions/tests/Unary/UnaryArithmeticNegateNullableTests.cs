@@ -130,7 +130,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyArithmeticNegateNullableShort(values[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

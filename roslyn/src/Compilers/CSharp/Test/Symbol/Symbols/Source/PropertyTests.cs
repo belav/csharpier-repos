@@ -3120,7 +3120,6 @@ End Class";
 
         private static readonly MetadataReference s_propertiesDll =
             TestReferences.SymbolsTests.Properties;
-
         #endregion
 
         [ConditionalFact(typeof(DesktopOnly))]

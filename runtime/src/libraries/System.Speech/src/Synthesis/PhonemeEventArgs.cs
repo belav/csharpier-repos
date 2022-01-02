@@ -21,7 +21,6 @@ namespace System.Speech.Synthesis
             _emphasis = emphasis;
             _nextPhoneme = nextPhoneme;
         }
-
         #endregion
 
         #region Public Properties
@@ -45,7 +44,6 @@ namespace System.Speech.Synthesis
         {
             get { return _nextPhoneme; }
         }
-
         #endregion
 
         #region Private Fields

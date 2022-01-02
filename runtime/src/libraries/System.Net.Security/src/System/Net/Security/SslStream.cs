@@ -581,7 +581,6 @@ namespace System.Net.Security
             ValidateCreateContext(CreateAuthenticationOptions(sslServerAuthenticationOptions));
             ProcessAuthenticationAsync().GetAwaiter().GetResult();
         }
-
         #endregion
 
         #region Task-based async public methods
@@ -771,7 +770,6 @@ namespace System.Net.Security
             _shutdown = true;
             return InnerStream.WriteAsync(message.Payload, default).AsTask();
         }
-
         #endregion
 
         public override bool IsAuthenticated =>

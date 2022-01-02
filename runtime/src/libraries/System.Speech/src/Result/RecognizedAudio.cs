@@ -165,7 +165,6 @@ namespace System.Speech.Recognition
             sm.WriteArray(data, data.Length);
             sm.WriteStream(_rawAudioData.Length);
         }
-
         #endregion
 
         #region Private Fields

@@ -937,7 +937,6 @@ namespace System.Linq.Expressions
             );
         }
     }
-
     #endregion
 
     public partial class Expression
@@ -1781,7 +1780,6 @@ namespace System.Linq.Expressions
             }
             return null;
         }
-
         #endregion
 
         #region ArrayIndex

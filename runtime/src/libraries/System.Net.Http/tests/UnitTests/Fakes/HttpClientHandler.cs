@@ -101,7 +101,6 @@ namespace System.Net.Http
             get { throw NotImplemented.ByDesignWithMessage(Message); }
             set { throw NotImplemented.ByDesignWithMessage(Message); }
         }
-
         #endregion Properties
 
         #region Request Execution

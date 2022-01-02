@@ -434,7 +434,6 @@ namespace N
                 SemanticEdit(SemanticEditKind.Insert, c => c.GetMember("N.C.M2"))
             );
         }
-
         #endregion
 
         #region Extern Alias
@@ -491,7 +490,6 @@ namespace N
                 Diagnostic(RudeEditKind.Delete, null, CSharpFeaturesResources.extern_alias)
             );
         }
-
         #endregion
 
         #region Assembly/Module Attributes
@@ -570,7 +568,6 @@ namespace N
 
             edits.VerifyRudeDiagnostics();
         }
-
         #endregion
 
         #region Types
@@ -2968,7 +2965,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region Records
@@ -4792,7 +4788,6 @@ record C(int X)
                 )
             );
         }
-
         #endregion
 
         #region Enums
@@ -5359,7 +5354,6 @@ record C(int X)
 
             edits.VerifySemantics(ActiveStatementsDescription.Empty, NoSemanticEdits);
         }
-
         #endregion
 
         #region Delegates
@@ -5954,7 +5948,6 @@ record C(int X)
                 )
             );
         }
-
         #endregion
 
         #region Nested Types
@@ -7045,7 +7038,6 @@ class B : System.Attribute {}
                 }
             );
         }
-
         #endregion
 
         #region Namespaces
@@ -7173,7 +7165,6 @@ class B : System.Attribute {}
                 Diagnostic(RudeEditKind.Delete, null, FeaturesResources.namespace_)
             );
         }
-
         #endregion
 
         #region Members
@@ -7913,7 +7904,6 @@ partial class C
                 }
             );
         }
-
         #endregion
 
         #region Methods
@@ -10516,7 +10506,6 @@ public class SubClass : BaseClass, IConflict
                 }
             );
         }
-
         #endregion
 
         #region Operators
@@ -10926,7 +10915,6 @@ class C
                 Diagnostic(RudeEditKind.ModifiersUpdate, "in Test b", FeaturesResources.parameter)
             );
         }
-
         #endregion
 
         #region Constructor, Destructor
@@ -12997,7 +12985,6 @@ public class C
                 Diagnostic(RudeEditKind.ModifiersUpdate, "in int b", FeaturesResources.parameter)
             );
         }
-
         #endregion
 
         #region Fields and Properties with Initializers
@@ -15105,7 +15092,6 @@ partial class C
                 }
             );
         }
-
         #endregion
 
         #region Fields
@@ -16147,7 +16133,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region Properties
@@ -17594,7 +17579,6 @@ readonly struct S
                 }
             );
         }
-
         #endregion
 
         #region Indexers
@@ -18831,7 +18815,6 @@ readonly struct S
                 }
             );
         }
-
         #endregion
 
         #region Events
@@ -19393,7 +19376,6 @@ class C
                 capabilities: EditAndContinueTestHelpers.Net6RuntimeCapabilities
             );
         }
-
         #endregion
 
         #region Parameter
@@ -19849,7 +19831,6 @@ class C { static void M(string a) { } }
                 capabilities: EditAndContinueTestHelpers.Net6RuntimeCapabilities
             );
         }
-
         #endregion
 
         #region Method Type Parameter
@@ -20064,7 +20045,6 @@ class C { static void M(string a) { } }
                 Diagnostic(RudeEditKind.GenericMethodUpdate, "T")
             );
         }
-
         #endregion
 
         #region Type Type Parameter
@@ -20367,7 +20347,6 @@ class B : System.Attribute {}
                 capabilities: EditAndContinueTestHelpers.Net6RuntimeCapabilities
             );
         }
-
         #endregion
 
         #region Type Parameter Constraints
@@ -20562,7 +20541,6 @@ class B : System.Attribute {}
                 Diagnostic(RudeEditKind.GenericTypeUpdate, "where S : class, new()")
             );
         }
-
         #endregion
 
         #region Top Level Statements

@@ -112,7 +112,6 @@ struct T
   public static XXX operator G?(T? t) { return default(G?); }
 }
 ";
-
         #endregion
 
         [Fact]

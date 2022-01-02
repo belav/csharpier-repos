@@ -175,7 +175,6 @@ namespace System.Speech.Synthesis.TtsEngine
         private int _type;
         private int _count;
     }
-
     #endregion
 
     #region Public Types
@@ -610,7 +609,6 @@ namespace System.Speech.Synthesis.TtsEngine
         [MarshalAs(UnmanagedType.LPWStr)]
         private string _detail;
     }
-
     #endregion
 
     #region Public Enums

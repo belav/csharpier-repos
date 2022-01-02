@@ -375,7 +375,6 @@ namespace System.Collections.Specialized
                 OrderedDictionaryEnumerator.DictionaryEntry
             );
         }
-
 #endregion
 
 #region IEnumerable implementation
@@ -387,7 +386,6 @@ namespace System.Collections.Specialized
                 OrderedDictionaryEnumerator.DictionaryEntry
             );
         }
-
 #endregion
 
 #region ISerializable implementation
@@ -407,7 +405,6 @@ namespace System.Collections.Specialized
             objectsArray.CopyTo(serArray);
             info.AddValue(ArrayListName, serArray);
         }
-
 #endregion
 
 #region IDeserializationCallback implementation
@@ -454,7 +451,6 @@ namespace System.Collections.Specialized
                 }
             }
         }
-
 #endregion
 
         /// <devdoc>

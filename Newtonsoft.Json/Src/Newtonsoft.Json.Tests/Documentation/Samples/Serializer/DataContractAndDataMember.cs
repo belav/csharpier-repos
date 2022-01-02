@@ -56,7 +56,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [DataMember]
             public int Size { get; set; }
         }
-
         #endregion
 
         [Test]

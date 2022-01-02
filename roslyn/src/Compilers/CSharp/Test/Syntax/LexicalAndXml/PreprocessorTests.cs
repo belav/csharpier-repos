@@ -61,7 +61,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public NodeStatus Status2;
         public string Text;
     }
-
     #endregion
 
     public class PreprocessorTests : TestBase
@@ -514,7 +513,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 #endif
             }
         }
-
         #endregion
 
         #region General
@@ -753,7 +751,6 @@ class A
                 }
             );
         }
-
         #endregion
 
         #region Conditional
@@ -2825,7 +2822,6 @@ return (i);
                 }
             );
         }
-
         #endregion
 
         #region #region/#endregion
@@ -3336,7 +3332,6 @@ class Test
                 SyntaxKind.EndRegionDirectiveTrivia
             );
         }
-
         #endregion
 
         #region #define/#undefine
@@ -4499,7 +4494,6 @@ class A { }
                 }
             );
         }
-
         #endregion
 
         #region #error/#warning
@@ -5188,7 +5182,6 @@ class A { }
                         .WithLocation(1, 8)
                 );
         }
-
         #endregion
 
         #region #line
@@ -5670,7 +5663,6 @@ public class Test
                 SyntaxKind.LineDirectiveTrivia
             );
         }
-
         #endregion
 
         #region #pragma
@@ -6484,7 +6476,6 @@ class A
                 }
             );
         }
-
         #endregion
 
         #region #r
@@ -6636,7 +6627,6 @@ class A
                 SyntaxKind.ReferenceDirectiveTrivia
             );
         }
-
         #endregion
 
         #region #load
@@ -6710,7 +6700,6 @@ class A
                 }
             );
         }
-
         #endregion
 
         #region #nullable
@@ -7095,7 +7084,6 @@ class enable
                 }
             );
         }
-
         #endregion
 
         private static string GetExpectedVersion()

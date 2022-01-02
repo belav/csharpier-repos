@@ -28,7 +28,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             _name = GetTrimmedName(name, "name");
         }
-
         #endregion
 
         #region public Properties
@@ -152,7 +151,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             return sb.ToString();
         }
-
         #endregion
 
         #region Private Methods
@@ -173,7 +171,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             return name;
         }
-
         #endregion
 
         #region Private Fields

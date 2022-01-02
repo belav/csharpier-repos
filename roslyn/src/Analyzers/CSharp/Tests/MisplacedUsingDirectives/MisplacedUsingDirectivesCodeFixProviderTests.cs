@@ -241,7 +241,6 @@ namespace TestNamespace
 
             return TestDiagnosticMissingAsync(testCode, InsidePreferPreservationOption);
         }
-
         #endregion
 
         #region Test OutsideNamespace
@@ -802,7 +801,6 @@ namespace B
                 placeSystemNamespaceFirst: true
             );
         }
-
         #endregion
 
         #region Test InsideNamespace

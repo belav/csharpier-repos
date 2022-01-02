@@ -175,7 +175,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             }
 #endif
         }
-
         #endregion  // Uncommon properties
 
         internal static PENamedTypeSymbol Create(

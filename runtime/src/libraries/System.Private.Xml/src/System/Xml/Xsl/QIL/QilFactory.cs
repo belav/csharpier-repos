@@ -174,7 +174,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // meta
 
         #region specials
@@ -212,7 +211,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // specials
 
         #region variables
@@ -250,7 +248,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // variables
 
         #region literals
@@ -336,7 +333,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // literals
 
         #region boolean operators
@@ -366,7 +362,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // boolean operators
 
         #region choice
@@ -388,7 +383,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // choice
 
         #region collection operators
@@ -442,7 +436,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // collection operators
 
         #region arithmetic operators
@@ -496,7 +489,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // arithmetic operators
 
         #region string operators
@@ -526,7 +518,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // string operators
 
         #region value comparison operators
@@ -580,7 +571,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // value comparison operators
 
         #region node comparison operators
@@ -602,7 +592,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // node comparison operators
 
         #region loops
@@ -624,7 +613,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // loops
 
         #region sorting
@@ -654,7 +642,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // sorting
 
         #region function definition and invocation
@@ -687,7 +674,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // function definition and invocation
 
         #region XML navigation
@@ -805,7 +791,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // XML navigation
 
         #region XML construction
@@ -883,7 +868,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // XML construction
 
         #region Node properties
@@ -921,7 +905,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // Node properties
 
         #region Type operators
@@ -951,7 +934,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // Type operators
 
         #region XPath operators
@@ -989,7 +971,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // XPath operators
 
         #region XSLT
@@ -1058,7 +1039,6 @@ namespace System.Xml.Xsl.Qil
             TraceNode(n);
             return n;
         }
-
         #endregion // XSLT
         #endregion
         #region Diagnostic Support

@@ -57,7 +57,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             public string Body { get; set; }
             public DateTime PostedDate { get; set; }
         }
-
         #endregion
 
         [Test]

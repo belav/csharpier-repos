@@ -20,7 +20,6 @@ namespace System.ComponentModel.DataAnnotations
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
         private Type? _resourceType;
-
         #endregion
 
         #region All Constructors
@@ -38,7 +37,6 @@ namespace System.ComponentModel.DataAnnotations
         {
             _propertyName = propertyName;
         }
-
         #endregion
 
         #region Properties
@@ -77,7 +75,6 @@ namespace System.ComponentModel.DataAnnotations
                 }
             }
         }
-
         #endregion
 
         #region Methods

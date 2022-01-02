@@ -19,7 +19,6 @@ public class MutexWaitOne1
     private const int c_DEFAULT_SLEEP_TIME = 1000; // 1 second
 
     private Mutex m_Mutex = null;
-
     #endregion
 
     #region Public Methods
@@ -88,7 +87,6 @@ public class MutexWaitOne1
 
         return retVal;
     }
-
     #endregion
 
     #region Negative Test Cases
@@ -171,7 +169,6 @@ public class MutexWaitOne1
 
         return retVal;
     }
-
     #endregion
     #endregion
 

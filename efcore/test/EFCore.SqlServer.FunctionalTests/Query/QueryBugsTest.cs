@@ -255,7 +255,6 @@ WHERE ((((((((([d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:
 
         protected Task<ContextFactory<DateTimeContext>> InitializeDateTimeContextAsync() =>
             InitializeAsync<DateTimeContext>(seed: c => c.Seed());
-
         #endregion
 
         #region Issue6901
@@ -381,7 +380,6 @@ WHERE ((((((((([d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:
                 public string TownName { get; set; }
             }
         }
-
         #endregion
 
         #region Issue5481
@@ -477,7 +475,6 @@ WHERE ((((((((([d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:
                     .OnDelete(DeleteBehavior.Restrict);
             }
         }
-
         #endregion
 
         #region Issue2951
@@ -526,7 +523,6 @@ INSERT ZeroKey VALUES (NULL)"
                 public int Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue603
@@ -582,7 +578,6 @@ INSERT ZeroKey VALUES (NULL)"
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issues925_926
@@ -712,7 +707,6 @@ LEFT JOIN [Customer] AS [c] ON ([o].[CustomerFirstName] = [c].[FirstName]) AND (
                 public Customer Customer { get; set; }
             }
         }
-
         #endregion
 
         #region Issue963
@@ -870,7 +864,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 public string FullName { get; set; }
             }
         }
-
         #endregion
 
         #region Issue1742
@@ -899,7 +892,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             public string FirstName { get; set; }
             public string LastName { get; set; }
         }
-
         #endregion
 
         #region Issue3758
@@ -1071,7 +1063,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 }
             }
         }
-
         #endregion
 
         #region Issue3409
@@ -1226,7 +1217,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 public IChild3409 SelfReferenceBackNavigation { get; set; }
             }
         }
-
         #endregion
 
         #region Issue3101
@@ -1459,7 +1449,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue6986
@@ -1579,7 +1568,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 public List<ServiceOperatorContact6986> Contacts { get; set; }
             }
         }
-
         #endregion
 
         #region Issue5456
@@ -1751,7 +1739,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 public Post5456 Blog { get; set; }
             }
         }
-
         #endregion
 
         #region Issue7359
@@ -1810,7 +1797,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             {
             }
         }
-
         #endregion
 
         #region Issue7312
@@ -1875,7 +1861,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 public ICollection<ProposalLeave7312> ProposalLeaves { get; set; }
             }
         }
-
         #endregion
 
         #region Issue8282
@@ -1920,7 +1905,6 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 public int Id { get; }
             }
         }
-
         #endregion
 
         #region Issue8538
@@ -2061,7 +2045,6 @@ WHERE ([e].[PermissionByte] & [e].[PermissionByte]) = [e].[PermissionByte]"
                 READ_WRITE = 0x400000000 // 36 bits
             }
         }
-
         #endregion
 
         #region Issue8909
@@ -2291,7 +2274,6 @@ WHERE [e].[Name] IS NULL"
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue9202/9210
@@ -2409,7 +2391,6 @@ ORDER BY [m].[Id]"
                 public int Rating { get; set; }
             }
         }
-
         #endregion
 
         #region Issue9214
@@ -2522,7 +2503,6 @@ WHERE [w].[Val] = 1"
                 public int Val { get; set; }
             }
         }
-
         #endregion
 
         #region Issue9277
@@ -2597,7 +2577,6 @@ BEGIN
                 public int SomeValue { get; set; }
             }
         }
-
         #endregion
 
         #region Issue9038
@@ -2731,7 +2710,6 @@ BEGIN
                 public ICollection<Person9038> Members { get; set; }
             }
         }
-
         #endregion
 
         #region Issue9468
@@ -2803,7 +2781,6 @@ LEFT JOIN [Configuration9468] AS [c0] ON [c].[ConfigurationId] = [c0].[Id]"
                 public bool Processed { get; set; }
             }
         }
-
         #endregion
 
         #region Issue10635
@@ -2882,7 +2859,6 @@ ORDER BY [p].[Id]"
                 public int ParentId { get; set; }
             }
         }
-
         #endregion
 
         #region Issue10301
@@ -2959,7 +2935,6 @@ WHERE [b].[SomeValue] = @__ef_filter__Tenant_0"
         {
             public FilterContext10301(DbContextOptions options) : base(options) { }
         }
-
         #endregion
 
         #region Issue11104
@@ -3025,7 +3000,6 @@ FROM [Bases] AS [b]"
                 public int Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue11818_11831
@@ -3202,7 +3176,6 @@ GROUP BY [t1].[AnotherEntity11818_Name], [t3].[MaumarEntity11818_Name]"
                 public bool Exists { get; set; }
             }
         }
-
         #endregion
 
         #region Issue11803_11791
@@ -3320,7 +3293,6 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL"
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue11923
@@ -3485,7 +3457,6 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL"
             {
             }
         }
-
         #endregion
 
         #region Issue11885
@@ -3659,7 +3630,6 @@ FROM [Prices] AS [p]"
                 public decimal Price { get; set; }
             }
         }
-
         #endregion
 
         #region Issue12582
@@ -3746,7 +3716,6 @@ FROM [Prices] AS [p]"
                 public Employee12582 Employee { get; set; }
             }
         }
-
         #endregion
 
         #region Issue12748
@@ -3803,7 +3772,6 @@ FROM [Prices] AS [p]"
                 public Blog12748 Blog { get; set; }
             }
         }
-
         #endregion
 
         #region Issue13025
@@ -3871,7 +3839,6 @@ FROM [Prices] AS [p]"
                 public Employee13025 Employee { get; set; }
             }
         }
-
         #endregion
 
         #region Issue12170
@@ -3942,7 +3909,6 @@ FROM [Prices] AS [p]"
                 public int? LatestHistoryEntryID { get; set; }
             }
         }
-
         #endregion
 
         #region Issue11944
@@ -4034,7 +4000,6 @@ FROM [Prices] AS [p]"
             {
             }
         }
-
         #endregion
 
         #region Issue13118
@@ -4090,7 +4055,6 @@ WHERE [r].[MyTime] = '2018-10-07T00:00:00'"
             public Guid Id { get; set; }
             public DateTime MyTime { get; set; }
         }
-
         #endregion
 
         #region Issue12732
@@ -4152,7 +4116,6 @@ END IN ('0a47bcb7-a1cb-4345-8944-c58f82d6aac7', '5f221fb9-66f4-442a-92c9-d97ed59
                 foo0 = 0
             }
         }
-
         #endregion
 
         #region Issue13157
@@ -4257,7 +4220,6 @@ ORDER BY [p].[Id]"
                 public int AmountIn { get; set; }
             }
         }
-
         #endregion
 
         #region Issue13079
@@ -4320,7 +4282,6 @@ WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
                 public int Property { get; set; }
             }
         }
-
         #endregion
 
         #region Issue13587
@@ -4360,7 +4321,6 @@ FROM [InventoryPools] AS [i]"
                 public double Quantity { get; set; }
             }
         }
-
         #endregion
 
         #region Issue12518
@@ -4452,7 +4412,6 @@ ORDER BY [p].[Id]"
                 public Parent12518 Parent { get; set; }
             }
         }
-
         #endregion
 
         #region Issue12549
@@ -4506,7 +4465,6 @@ ORDER BY [p].[Id]"
                 public int Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue16233
@@ -4600,7 +4558,6 @@ ORDER BY [b].[Id]"
                 public DerivedType16233 DerivedType { get; set; }
             }
         }
-
         #endregion
 
         #region Issue15684
@@ -4713,7 +4670,6 @@ LEFT JOIN [Categories] AS [c] ON [p].[CategoryId] = [c].[Id]"
                 Removed = 1
             }
         }
-
         #endregion
 
         #region Issue15204
@@ -4895,7 +4851,6 @@ WHERE [c].[Name] = N'Leeds'"
                 public virtual ICollection<TBuilding15204> Buildings { get; set; }
             }
         }
-
         #endregion
 
         #region Issue15518
@@ -4951,7 +4906,6 @@ WHERE [c].[Name] = N'Leeds'"
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue8864
@@ -5000,7 +4954,6 @@ WHERE [c].[Name] = N'Leeds'"
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue7983
@@ -5078,7 +5031,6 @@ FROM [Posts] AS [p]"
                 }
             }
         }
-
         #endregion
 
         #region Issue17253
@@ -5215,7 +5167,6 @@ WHERE EXISTS (
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue17276_17099_16759
@@ -5362,7 +5313,6 @@ WHERE [p].[Id] = @__id_0"
                 }
             }
         }
-
         #endregion
 
         #region Issue6864
@@ -5494,7 +5444,6 @@ WHERE [f].[String] = N'1337'"
                 public Bar6864 Clone() => new(_value);
             }
         }
-
         #endregion
 
         #region Issue9582
@@ -5552,7 +5501,6 @@ WHERE [t].[Nombre] LIKE '%lla%'"
                 public string Nombre { get; set; }
             }
         }
-
         #endregion
 
         #region Issue7222
@@ -5596,7 +5544,6 @@ FROM [Blogs] AS [b]"
                 public int Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue17644
@@ -5742,7 +5689,6 @@ ORDER BY [p].[Id] DESC"
                 public int Age { set; get; }
             }
         }
-
         #endregion
 
         #region Issue11023
@@ -5849,7 +5795,6 @@ ORDER BY [e].[Id], [t0].[Id]"
                 public Thing11023 Thing { get; set; }
             }
         }
-
         #endregion
 
         #region Issue7973
@@ -5952,7 +5897,6 @@ CROSS JOIN (
                 public User7973 User { get; set; }
             }
         }
-
         #endregion
 
         #region Issue10447
@@ -6023,7 +5967,6 @@ CROSS JOIN (
                 public Blog10447 Blog { get; set; }
             }
         }
-
         #endregion
 
         #region Issue12456
@@ -6162,7 +6105,6 @@ INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]"
                 public ActivityType12456 ActivityType { get; set; }
             }
         }
-
         #endregion
 
         #region Issue15137
@@ -6295,7 +6237,6 @@ ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]"
                 public DbSeason Season { get; set; }
             }
         }
-
         #endregion
 
         #region Issue13517
@@ -6388,7 +6329,6 @@ WHERE [e].[Id] = 1"
                 public bool Public { get; set; }
             }
         }
-
         #endregion
 
         #region Issue17794
@@ -6483,7 +6423,6 @@ WHERE EXISTS (
                 public OfferActions17794 Action { get; set; }
             }
         }
-
         #endregion
 
         #region Issue18087
@@ -6587,7 +6526,6 @@ FROM [MockEntities] AS [m]"
                 public MockEntity NavigationEntity { get; set; }
             }
         }
-
         #endregion
 
         #region Issue18759
@@ -6630,7 +6568,6 @@ WHERE [u].[Id] IS NOT NULL"
                 public int Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue19138
@@ -6717,7 +6654,6 @@ LEFT JOIN (
                 public string OtherEntityData { get; set; }
             }
         }
-
         #endregion
 
         #region Issue19708
@@ -6896,7 +6832,6 @@ LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]"
                 public string CustomerMembershipName { get; set; }
             }
         }
-
         #endregion
 
         #region Issue20097
@@ -7036,7 +6971,6 @@ WHERE [e].[Id] = CAST(1 AS bigint)"
                 public long Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue20609
@@ -7100,7 +7034,6 @@ WHERE [e].[Id] = CAST(1 AS bigint)"
                 public int Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue21355
@@ -7432,7 +7365,6 @@ ORDER BY [p].[Id], [c].[Id]"
                 public Parent21355 Parent { get; set; }
             }
         }
-
         #endregion
 
         #region Issue21540
@@ -7575,7 +7507,6 @@ FROM [Parents] AS [p]"
                 public Parent21540 Parent { get; set; }
             }
         }
-
         #endregion
 
         #region Issue18346
@@ -7643,7 +7574,6 @@ FROM [Businesses] AS [b]"
                 Brand,
             }
         }
-
         #endregion
 
         #region Issue21666
@@ -7692,7 +7622,6 @@ FROM [Businesses] AS [b]"
                 public bool IsDeleted { get; set; }
             }
         }
-
         #endregion
 
         #region Issue21768
@@ -7846,7 +7775,6 @@ WHERE [b].[Id] = 1"
                 Printed
             }
         }
-
         #endregion
 
         #region Issue19206
@@ -7915,7 +7843,6 @@ CROSS JOIN (
                 Integration,
             }
         }
-
         #endregion
 
         #region Issue18510
@@ -8012,7 +7939,6 @@ WHERE (([e].[Name] <> N'Foo') OR [e].[Name] IS NULL) AND ([e].[TenantId] = @__ef
                 public int TenantId { get; set; }
             }
         }
-
         #endregion
 
         #region Issue21803
@@ -8108,7 +8034,6 @@ ORDER BY [e].[Id]"
                 public AppEntity21803 AppEntity { get; set; }
             }
         }
-
         #endregion
 
         #region Issue21807
@@ -8191,7 +8116,6 @@ FROM [Entity21807] AS [e]"
                 public int Zip { get; set; }
             }
         }
-
         #endregion
 
         #region Issue22054
@@ -8340,7 +8264,6 @@ ORDER BY [u].[Id] DESC"
                 public int Zip { get; set; }
             }
         }
-
         #endregion
 
         #region Issue14911
@@ -8556,7 +8479,6 @@ ORDER BY [t].[Id] DESC, [t2].[Id], [t2].[Id0], [t2].[Id1]"
                 public int AnyValue { get; set; }
             }
         }
-
         #endregion
 
         #region Issue15215
@@ -8642,7 +8564,6 @@ WHERE (([a].[Id] = @__entity_equality_a_0_Id) AND ([a0].[Id] = @__entity_equalit
                 public Auto15215 AnotherAuto { get; set; }
             }
         }
-
         #endregion
 
         #region Issue22340
@@ -8764,7 +8685,6 @@ ORDER BY [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[Cu
                 public decimal Code { get; set; }
             }
         }
-
         #endregion
 
         #region Issue22568
@@ -9012,7 +8932,6 @@ FROM [CycleC] AS [c]"
                 public List<CycleA> As { get; set; }
             }
         }
-
         #endregion
 
         #region Issue12274
@@ -9077,7 +8996,6 @@ FROM [CycleC] AS [c]"
                 public InnerDTO12274() { }
             }
         }
-
         #endregion
 
         #region Issue11835
@@ -9178,7 +9096,6 @@ FROM [Blogs] AS [b]"
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue23211
@@ -9333,7 +9250,6 @@ ORDER BY [t].[Id], [t].[SecondOwner23211Id]"
                 public int Id { get; set; }
             }
         }
-
         #endregion
 
         #region Issue10295
@@ -9383,7 +9299,6 @@ WHERE [e].[Id] NOT IN (1, 7)"
                 public string Name { get; set; }
             }
         }
-
         #endregion
 
         #region Issue23282
@@ -9459,7 +9374,6 @@ WHERE [l].[Name] = N'My Location'"
                 public Address23282 Address { get; set; }
             }
         }
-
         #endregion
 
         #region Issue19253
@@ -9784,7 +9698,6 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]"
                 public string forkey { get; set; }
             }
         }
-
         #endregion
 
         #region Issue23410
@@ -9952,7 +9865,6 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'"
                 }
             }
         }
-
         #endregion
 
         #region Issue22841
@@ -10053,7 +9965,6 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'"
                 }
             }
         }
-
         #endregion Issue22841
 
         #region Issue12482
@@ -10118,7 +10029,6 @@ ORDER BY [i].[_Position];"
                 public object Value { get; set; }
             }
         }
-
         #endregion
 
         #region Issue23674
@@ -10250,7 +10160,6 @@ ORDER BY [i].[_Position];"
                 modelBuilder.Entity<Principal23674>();
             }
         }
-
         #endregion
 
         #region Issue23676
@@ -10413,7 +10322,6 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) { }
         }
-
         #endregion
 
         #region Issue19947
@@ -10560,7 +10468,6 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) { }
         }
-
         #endregion
 
         #region Issue20813
@@ -10672,7 +10579,6 @@ ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]"
 
             public DbSet<Order> Orders { get; set; }
         }
-
         #endregion
 
         #region Issue18738
@@ -10762,7 +10668,6 @@ ORDER BY [t].[Id]"
             public DbSet<InDoorSports> InDoorSports { get; set; }
             public DbSet<OutDoorSports> OutDoorSports { get; set; }
         }
-
         #endregion
 
         #region Issue24216
@@ -10879,7 +10784,6 @@ ORDER BY [t].[Id]"
                 );
             }
         }
-
         #endregion
 
         #region Issue23198
@@ -10942,7 +10846,6 @@ ORDER BY [t].[Id]"
         {
             public string Name { get; set; }
         }
-
         #endregion
 
         #region Issue24569
@@ -11015,7 +10918,6 @@ CROSS APPLY OPENJSON([c].[Json], N'$.items') AS [o]"
                 public string Value { get; set; }
             }
         }
-
         #endregion
 
         #region Issue25400
@@ -11086,7 +10988,6 @@ ORDER BY [t].[Id]"
             public int Id { get; set; }
             public int Value { get; set; }
         }
-
         #endregion
 
         #region Issue25225
@@ -11249,7 +11150,6 @@ ORDER BY [t].[Id]"
             public Guid Id { get; set; }
             public Guid ParentId { get; set; }
         }
-
         #endregion
 
         protected override string StoreName => "QueryBugsTest";

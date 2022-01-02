@@ -724,7 +724,6 @@ namespace System.Data.Tests
             Assert.Equal("bookreview", ds.Tables[2].TableName);
             Assert.Equal(2, ds.Tables[2].Columns.Count);
         }
-
         #endregion
 
         #region inferringTables
@@ -861,7 +860,6 @@ namespace System.Data.Tests
             Assert.Equal(1, ds.Tables.Count);
             Assert.Equal("Element1_Text", ds.Tables[0].Columns["Element1_Text"].ColumnName);
         }
-
         #endregion
 
         #region inferringColumns
@@ -925,7 +923,6 @@ namespace System.Data.Tests
             Assert.Equal(typeof(string), ds.Tables[0].Columns["ChildElement1"].DataType);
             Assert.Equal(typeof(string), ds.Tables[0].Columns["ChildElement2"].DataType);
         }
-
         #endregion
 
         #region Inferring Relationships
@@ -1024,7 +1021,6 @@ namespace System.Data.Tests
             Assert.Equal("Element1", con.RelatedTable.TableName);
             Assert.Equal("ChildElement1", con.Table.TableName);
         }
-
         #endregion
 
         #region Inferring Element Text
@@ -1106,7 +1102,6 @@ namespace System.Data.Tests
             Assert.Equal(typeof(string), ds.Tables["Element1"].Columns["ChildElement1"].DataType);
             Assert.Equal(1, ds.Tables["Element1"].Columns.Count);
         }
-
         #endregion
 
         [Fact]

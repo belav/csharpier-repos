@@ -140,7 +140,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying Int32.MaxValue DataBits");
             VerifyException(int.MaxValue, ThrowAt.Set, typeof(ArgumentOutOfRangeException));
         }
-
         #endregion
 
         #region Verification for Test Cases

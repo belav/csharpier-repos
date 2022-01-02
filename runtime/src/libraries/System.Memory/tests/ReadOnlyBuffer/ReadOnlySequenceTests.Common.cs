@@ -108,7 +108,6 @@ namespace System.Memory.Tests
             seq = buffer.Slice(0, c1);
             Assert.Equal(200, seq.Length);
         }
-
         #endregion
 
         #region Offset
@@ -322,7 +321,6 @@ namespace System.Memory.Tests
                 Assert.Equal(i, sequence.GetOffset(new SequencePosition(bufferSegment4, i)));
             }
         }
-
         #endregion
 
         #region First
@@ -388,7 +386,6 @@ namespace System.Memory.Tests
             Assert.Equal(0, buffer.First.Length);
             Assert.Equal(0, buffer.FirstSpan.Length);
         }
-
         #endregion
 
         #region EmptySegments
@@ -493,7 +490,6 @@ namespace System.Memory.Tests
                 () => c1 = buffer.GetPosition(250, buffer.Start)
             );
         }
-
         #endregion
 
         #region TryGet
@@ -564,7 +560,6 @@ namespace System.Memory.Tests
             Assert.Equal(0, memory.Length);
             Assert.False(buffer.TryGet(ref start, out memory));
         }
-
         #endregion
 
         #region Enumerable
@@ -622,7 +617,6 @@ namespace System.Memory.Tests
             Assert.Equal(2, sizes.Count);
             Assert.Equal(new[] { 100, 0 }, sizes);
         }
-
         #endregion
 
         #region Constructor

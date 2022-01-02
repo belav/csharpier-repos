@@ -2198,7 +2198,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return ((EventSymbol)GetDeclaredMemberSymbol(declarationSyntax)).GetPublicSymbol();
         }
-
         #endregion
 
         #endregion

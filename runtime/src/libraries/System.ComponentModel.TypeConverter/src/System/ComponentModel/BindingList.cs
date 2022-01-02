@@ -97,7 +97,6 @@ namespace System.ComponentModel
                 return itemType.GetConstructor(BindingFlags, null, Type.EmptyTypes, null) != null;
             }
         }
-
         #endregion
 
         #region AddingNew event
@@ -139,7 +138,6 @@ namespace System.ComponentModel
             OnAddingNew(e);
             return e.NewObject;
         }
-
         #endregion
 
         #region ListChanged event
@@ -180,7 +178,6 @@ namespace System.ComponentModel
                 OnListChanged(new ListChangedEventArgs(type, index));
             }
         }
-
         #endregion
 
         #region Collection<T> overrides
@@ -262,7 +259,6 @@ namespace System.ComponentModel
 
             FireListChanged(ListChangedType.ItemChanged, index);
         }
-
         #endregion
 
         #region ICancelAddNew interface
@@ -289,7 +285,6 @@ namespace System.ComponentModel
                 addNewPos = -1;
             }
         }
-
         #endregion
 
         #region IBindingList interface
@@ -463,7 +458,6 @@ namespace System.ComponentModel
         {
             // Not supported
         }
-
         #endregion
 
         #region Property Change Support
@@ -568,7 +562,6 @@ namespace System.ComponentModel
                 }
             }
         }
-
         #endregion
 
         #region IRaiseItemChangedEvents interface

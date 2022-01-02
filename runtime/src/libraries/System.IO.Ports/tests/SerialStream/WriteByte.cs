@@ -66,7 +66,6 @@ namespace System.IO.Ports.Tests
                 Assert.Throws<InvalidOperationException>(() => com1.BaseStream.WriteByte(1));
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

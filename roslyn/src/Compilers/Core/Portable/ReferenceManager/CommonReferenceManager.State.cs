@@ -365,7 +365,6 @@ namespace Microsoft.CodeAnalysis
                 return _lazyUnifiedAssemblies;
             }
         }
-
         #endregion
 
         /// <summary>

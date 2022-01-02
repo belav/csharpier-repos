@@ -47,7 +47,6 @@ namespace System.Reflection
         {
             return GetTypes(this);
         }
-
         #endregion
 
         #region Module overrides
@@ -507,14 +506,12 @@ namespace System.Reflection
                 );
             }
         }
-
         #endregion
 
         #region Internal Members
         internal RuntimeType RuntimeType => m_runtimeType ??= ModuleHandle.GetModuleType(this);
 
         internal MetadataImport MetadataImport => ModuleHandle.GetMetadataImport(this);
-
         #endregion
 
         #region ICustomAttributeProvider Members
@@ -549,7 +546,6 @@ namespace System.Reflection
         {
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
-
         #endregion
 
         #region Public Virtuals
@@ -600,7 +596,6 @@ namespace System.Reflection
         {
             return GetTypes(this);
         }
-
         #endregion
 
         #region Public Members

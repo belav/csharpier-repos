@@ -104,7 +104,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 this.serverName = context.serverName;
             }
         }
-
         #endregion constructors
 
         #region public constructors
@@ -205,7 +204,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
             InitializeDirectoryContext(contextType, name, username, password);
         }
-
         #endregion public methods
 
         #region public properties
@@ -222,7 +220,6 @@ namespace System.DirectoryServices.ActiveDirectory
         public DirectoryContextType ContextType => _contextType;
 
         internal NetworkCredential Credential => _credential;
-
         #endregion public properties
 
         #region private methods

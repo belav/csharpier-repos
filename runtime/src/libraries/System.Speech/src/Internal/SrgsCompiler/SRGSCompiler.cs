@@ -141,7 +141,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 throw new PlatformNotSupportedException();
             }
         }
-
         #endregion
 
         private static object CompileStream(

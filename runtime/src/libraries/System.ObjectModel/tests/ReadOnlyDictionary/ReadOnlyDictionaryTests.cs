@@ -1096,7 +1096,6 @@ namespace System.Collections.ObjectModel.Tests
         {
             get { return false; }
         }
-
         #endregion
 
         #region Not Implemented Methods

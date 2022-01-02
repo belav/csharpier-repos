@@ -8,6 +8,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Web.Http;
+
 #else
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -17,6 +18,7 @@ using System.Net.Http.Internal;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Web.Http;
+
 #endif
 
 #if NETFX_CORE

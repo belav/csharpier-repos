@@ -289,7 +289,6 @@ namespace Moq.Protected
             var setup = Mock.SetupSequence(mock, GetMethodCall<TResult>(method, args));
             return new SetupSequencePhrase<TResult>(setup);
         }
-
 		#endregion
 
 		#region Verify
@@ -440,7 +439,6 @@ namespace Moq.Protected
             // TODO should receive the parameter here
             Mock.VerifySet(mock, expression, times, null);
         }
-
 		#endregion
 
         private static Expression<Func<T, TResult>> GetMemberAccess<TResult>(PropertyInfo property)

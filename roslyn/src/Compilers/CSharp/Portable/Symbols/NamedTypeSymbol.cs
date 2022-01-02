@@ -1494,7 +1494,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref checkedTypes
                 );
         }
-
         #endregion
 
         /// <summary>

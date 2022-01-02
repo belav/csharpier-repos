@@ -208,7 +208,6 @@ namespace System.Threading
             _linkedSlot = null;
             s_idManager.ReturnId(id, _trackAllValues);
         }
-
         #endregion
 
         /// <summary>Creates and returns a string representation of this instance for the current thread.</summary>

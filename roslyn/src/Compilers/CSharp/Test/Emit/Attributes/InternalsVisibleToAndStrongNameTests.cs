@@ -61,7 +61,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ImmutableArray.Create(keyFilePath),
                 strongNameFileSystem: new VirtualizedStrongNameFileSystem()
             );
-
         #endregion
 
         #region Naming Tests
@@ -1010,7 +1009,6 @@ public class C {}",
                     .WithLocation(1, 1)
             );
         }
-
         #endregion
 
         #region IVT Access Checking
@@ -1796,7 +1794,6 @@ namespace ClassLibrary2
             Assert.True(giver.Assembly.GivesAccessTo(requestor.Assembly));
             Assert.Empty(requestor.GetDiagnostics());
         }
-
         #endregion
 
         #region IVT instantiations
@@ -1852,7 +1849,6 @@ public class C
                     .WithArguments("WantsIVTAccess")
             );
         }
-
         #endregion
 
         #region Signing
@@ -3729,7 +3725,6 @@ public class C
 
             Assert.True(IsFileFullSigned(tempFile));
         }
-
         #endregion
 
         [Theory]

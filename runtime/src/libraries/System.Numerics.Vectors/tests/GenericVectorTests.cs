@@ -657,7 +657,6 @@ namespace System.Numerics.Tests
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count - 1).ToArray();
             var vector = new Vector<T>(new Span<T>(values));
         }
-
         #endregion Tests for Span based constructor
 
         #region Tests for Array based constructor
@@ -842,7 +841,6 @@ namespace System.Numerics.Tests
                 () => new Vector<T>(values, Vector<T>.Count + 1)
             );
         }
-
         #endregion Tests for Array based constructor
 
         #region Tests for constructors using unsupported types
@@ -869,7 +867,6 @@ namespace System.Numerics.Tests
             );
             Assert.Throws<NotSupportedException>(() => new Vector<T>(new Span<T>(new T[4])));
         }
-
         #endregion Tests for constructors using unsupported types
 
         #endregion Constructor Tests
@@ -946,7 +943,6 @@ namespace System.Numerics.Tests
                 }
             );
         }
-
         #endregion
 
         #region Static Member Tests
@@ -1095,7 +1091,6 @@ namespace System.Numerics.Tests
                 }
             );
         }
-
         #endregion
 
         #region CopyTo (array) Tests
@@ -1251,7 +1246,6 @@ namespace System.Numerics.Tests
                 Assert.Equal(vector[g], array[g + offset]);
             }
         }
-
         #endregion CopyTo (array) Tests
 
         #region CopyTo (span) Tests
@@ -1347,7 +1341,6 @@ namespace System.Numerics.Tests
                 Assert.Equal(vector[g], destination[g]);
             }
         }
-
         #endregion CopyTo (span) Tests
 
         #region TryCopyTo (span) Tests
@@ -1447,7 +1440,6 @@ namespace System.Numerics.Tests
                 Assert.Equal(vector[g], destination[g]);
             }
         }
-
         #endregion TryCopyTo (span) Tests
 
         #region EqualsTests
@@ -1617,7 +1609,6 @@ namespace System.Numerics.Tests
             Assert.False(Vector<T>.Zero.Equals(Vector<T>.One));
             Assert.False(Vector<T>.Zero.Equals(new Vector<T>(Util.One<T>())));
         }
-
         #endregion
 
         #region System.Object Overloads
@@ -1886,7 +1877,6 @@ namespace System.Numerics.Tests
             expected += ">";
             Assert.Equal(expected, result);
         }
-
         #endregion System.Object Overloads
 
         #region Arithmetic Operator Tests
@@ -2618,7 +2608,6 @@ namespace System.Numerics.Tests
                 }
             );
         }
-
         #endregion
 
         #region Bitwise Operator Tests
@@ -2958,7 +2947,6 @@ namespace System.Numerics.Tests
                 }
             );
         }
-
         #endregion
 
         #region Comparison Tests
@@ -4313,7 +4301,6 @@ namespace System.Numerics.Tests
             result = Vector.EqualsAny(vec1, vec1);
             Assert.True(result);
         }
-
         #endregion
 
         #region Selection Tests
@@ -4422,7 +4409,6 @@ namespace System.Numerics.Tests
                 }
             );
         }
-
         #endregion
 
         #region Vector Tests
@@ -4949,7 +4935,6 @@ namespace System.Numerics.Tests
                 }
             );
         }
-
         #endregion
 
         #region Reflection Tests
@@ -5662,7 +5647,6 @@ namespace System.Numerics.Tests
             int valueFromNormalCall = Vector<T>.Count;
             Assert.Equal(valueFromNormalCall, valueFromReflection);
         }
-
         #endregion Reflection Tests
 
         #region Same-Size Conversions
@@ -5761,7 +5745,6 @@ namespace System.Numerics.Tests
                 Assert.Equal(unchecked((ulong)source[i]), targetVec[i]);
             }
         }
-
         #endregion Same-Size Conversions
 
         #region Narrow / Widen
@@ -6072,7 +6055,6 @@ namespace System.Numerics.Tests
                 Assert.Equal(unchecked((float)source2[i]), dest[i + Vector<double>.Count]);
             }
         }
-
         #endregion Narrow / Widen
 
         #region Explicit Cast/As
@@ -6165,7 +6147,6 @@ namespace System.Numerics.Tests
 
             Assert.Equal(vector1Bytes, vector2Bytes);
         }
-
         #endregion
 
         #region Sum
@@ -6208,7 +6189,6 @@ namespace System.Numerics.Tests
 
             AssertEqual(expected(values), sum, "Sum");
         }
-
         #endregion
 
         #region Helper Methods

@@ -397,7 +397,6 @@ RoOt = TruE"
                 config.GlobalSection.Properties
             );
         }
-
         #endregion
 
         #region Section Matching Tests
@@ -974,7 +973,6 @@ RoOt = TruE"
 
             Assert.Equal(@"^.*/ab\[cd$", matcher.Regex.ToString());
         }
-
         #endregion
 
         #region Processing of dotnet_diagnostic rules
@@ -1284,7 +1282,6 @@ dotnet_diagnostic.cs000.severity = none",
                 options.Select(o => o.TreeOptions).ToArray()
             );
         }
-
         #endregion
 
         #region Processing of Analyzer Options
@@ -1776,7 +1773,6 @@ dotnet_diagnostic.cs000.severity = warning",
             Assert.Same(options[1].TreeOptions, options[2].TreeOptions);
             Assert.Same(options[1].AnalyzerOptions, options[2].AnalyzerOptions);
         }
-
         #endregion
 
         #region Processing of Global configs

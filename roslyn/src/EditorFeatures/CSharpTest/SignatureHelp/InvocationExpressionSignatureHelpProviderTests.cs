@@ -1109,7 +1109,6 @@ public class Derived : Base
 
             await TestAsync(markup, null);
         }
-
         #endregion
 
         #region "Current Parameter Name"
@@ -1129,7 +1128,6 @@ class C
 
             await VerifyCurrentParameterNameAsync(markup, "someParameter");
         }
-
         #endregion
 
         #region "Trigger tests"
@@ -1300,7 +1298,6 @@ class C
 
             VerifyTriggerCharacters(expectedCharacters, unexpectedCharacters);
         }
-
         #endregion
 
         #region "EditorBrowsable tests"
@@ -2145,7 +2142,6 @@ public class C<T, U>
                 referencedLanguage: LanguageNames.CSharp
             );
         }
-
         #endregion
 
         #region "Awaitable tests"
@@ -2200,7 +2196,6 @@ class C
 
             await TestSignatureHelpWithMscorlib45Async(markup, expectedOrderedItems, "C#");
         }
-
         #endregion
 
         [WorkItem(13849, "DevDiv_Projects/Roslyn")]

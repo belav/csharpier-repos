@@ -53,7 +53,6 @@ namespace System.Net.Sockets.Tests
                 _log.WriteLine("Payload file exists: {0}", TestFileName);
             }
         }
-
         #endregion Additional test attributes
 
         #region Basic Arguments
@@ -168,7 +167,6 @@ namespace System.Net.Sockets.Tests
             SocketAsyncEventArgs args = new SocketAsyncEventArgs();
             Assert.Equal(0, args.SendPacketsSendSize);
         }
-
         #endregion Basic Arguments
 
         #region Buffers
@@ -298,7 +296,6 @@ namespace System.Net.Sockets.Tests
                 }
             }
         }
-
         #endregion Buffers
 
         #region TransmitFileOptions
@@ -322,7 +319,6 @@ namespace System.Net.Sockets.Tests
                 4
             );
         }
-
         #endregion
 
         #region Files
@@ -580,7 +576,6 @@ namespace System.Net.Sockets.Tests
                 0
             );
         }
-
         #endregion Files
 
         #region FileStreams
@@ -781,7 +776,6 @@ namespace System.Net.Sockets.Tests
                 SendPackets(element, s_testFileSize, GetExpectedContent(element));
             }
         }
-
         #endregion FileStreams
 
         #region Mixed Buffer, FilePath, FileStream tests
@@ -886,7 +880,6 @@ namespace System.Net.Sockets.Tests
                 SendPackets(elements, SocketError.Success, expected.Length, expected);
             }
         }
-
         #endregion
 
         #region Helpers

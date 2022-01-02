@@ -378,7 +378,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
         private static SyntaxNode? OwningNode(SyntaxNode n) =>
             n is ArrowExpressionClauseSyntax ? n.Parent : n;
-
         #endregion
 
         #region BraceModification

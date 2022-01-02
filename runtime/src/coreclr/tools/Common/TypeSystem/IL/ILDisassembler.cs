@@ -183,7 +183,6 @@ namespace Internal.IL
                 AppendStringLiteral(sb, (string)obj);
             }
         }
-
         #endregion
 
         #region Instruction decoding
@@ -428,7 +427,6 @@ namespace Internal.IL
                     return decodedInstruction.ToString();
             }
         }
-
         #endregion
 
         #region Helpers

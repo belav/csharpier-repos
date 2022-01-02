@@ -472,7 +472,6 @@ namespace System.Net.Http
                 return _properties;
             }
         }
-
         #endregion
 
         protected override void Dispose(bool disposing)

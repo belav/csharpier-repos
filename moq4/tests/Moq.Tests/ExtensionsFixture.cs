@@ -72,7 +72,6 @@ namespace Moq.Tests
             myMock.Reset();
             myMock.VerifyAll();
         }
-
 		#endregion
 
         [Fact]

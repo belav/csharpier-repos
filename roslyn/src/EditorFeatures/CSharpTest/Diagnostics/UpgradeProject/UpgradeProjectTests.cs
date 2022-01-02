@@ -347,7 +347,6 @@ class Program
                 new CSharpParseOptions(LanguageVersion.CSharp7_2)
             );
         }
-
         #endregion C# 7.3
 
         #region C# 8.0
@@ -395,7 +394,6 @@ class Program
                 new CSharpParseOptions(LanguageVersion.CSharp7_3)
             );
         }
-
         #endregion
 
         [Fact]

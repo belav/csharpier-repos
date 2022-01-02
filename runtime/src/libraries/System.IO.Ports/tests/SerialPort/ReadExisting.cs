@@ -153,7 +153,6 @@ namespace System.IO.Ports.Tests
         {
             VerifyRead(largeNumRndBytesToRead);
         }
-
         #endregion
 
         #region Verification for Test Cases

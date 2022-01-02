@@ -49,7 +49,6 @@ namespace System.IO.Tests
             return Directory.EnumerateFiles(path, searchPattern, option).ToArray();
         }
     }
-
     #endregion
 
     #region EnumerateFileSystemEntries
@@ -177,7 +176,6 @@ namespace System.IO.Tests
             return Directory.EnumerateFileSystemEntries(dirName, searchPattern, option).ToArray();
         }
     }
-
     #endregion
 
     #region EnumerateDirectories

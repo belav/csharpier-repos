@@ -74,7 +74,6 @@ namespace System.Threading
             internal TaskNode()
                 : base((object?)null, TaskCreationOptions.RunContinuationsAsynchronously) { }
         }
-
         #endregion
 
         #region Public properties
@@ -121,7 +120,6 @@ namespace System.Threading
                 return m_waitHandle;
             }
         }
-
         #endregion
 
         #region Constructors
@@ -172,7 +170,6 @@ namespace System.Threading
             m_currentCount = initialCount;
             m_lockObjAndDisposed = new StrongBox<bool>();
         }
-
         #endregion
 
         #region  Methods

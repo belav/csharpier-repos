@@ -238,7 +238,6 @@ namespace System.Text.Json.Node
         ///   An enumerator that iterates through the <see cref="JsonObject"/>.
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Dictionary).GetEnumerator();
-
         #endregion
 
         private void DetachParent(JsonNode? item)

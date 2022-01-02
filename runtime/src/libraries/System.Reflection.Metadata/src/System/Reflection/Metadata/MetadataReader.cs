@@ -185,7 +185,6 @@ namespace System.Reflection.Metadata
                 WinMDMscorlibRef = FindMscorlibAssemblyRefNoProjection();
             }
         }
-
         #endregion
 
         #region Metadata Headers
@@ -437,7 +436,6 @@ namespace System.Reflection.Metadata
                 throw new BadImageFormatException(SR.InvalidMetadataStreamFormat);
             }
         }
-
         #endregion
 
         #region Tables and Heaps
@@ -1345,7 +1343,6 @@ namespace System.Reflection.Metadata
         {
             return (_sortedTables & index) != 0;
         }
-
         #endregion
 
         #region Helpers
@@ -1540,7 +1537,6 @@ namespace System.Reflection.Metadata
                 lastConstantRowId = this.LocalScopeTable.GetConstantStart(scopeRowId + 1) - 1;
             }
         }
-
         #endregion
 
         #region Public APIs
@@ -2000,7 +1996,6 @@ namespace System.Reflection.Metadata
         {
             return new LocalScopeHandleCollection(this, handle.RowId);
         }
-
         #endregion
 
         #region Nested Types

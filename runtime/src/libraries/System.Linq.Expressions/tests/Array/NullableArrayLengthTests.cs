@@ -24,7 +24,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableBoolArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableByte tests
@@ -44,7 +43,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableByteArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableChar tests
@@ -64,7 +62,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableCharArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableDecimal tests
@@ -93,7 +90,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableDecimalArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableDouble tests
@@ -122,7 +118,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableDoubleArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableEnum tests
@@ -142,7 +137,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableEnumArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableEnumLong tests
@@ -171,7 +165,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableEnumLongArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableFloat tests
@@ -191,7 +184,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableFloatArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableInt tests
@@ -211,7 +203,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableIntArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableLong tests
@@ -231,7 +222,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableLongArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableSByte tests
@@ -251,7 +241,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableSByteArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableStruct tests
@@ -280,7 +269,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableStructArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableStructWithString tests
@@ -311,7 +299,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableStructWithStringArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableStructWithStringAndValue tests
@@ -343,7 +330,6 @@ namespace System.Linq.Expressions.Tests
                     CheckNullableStructWithStringAndValueArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableStructWithTwoParameters tests
@@ -375,7 +361,6 @@ namespace System.Linq.Expressions.Tests
                     CheckNullableStructWithTwoParametersArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableStructWithValue tests
@@ -404,7 +389,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableStructWithValueArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableShort tests
@@ -424,7 +408,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableShortArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableUInt tests
@@ -444,7 +427,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableUIntArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableULong tests
@@ -464,7 +446,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableULongArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region NullableUShort tests
@@ -493,7 +474,6 @@ namespace System.Linq.Expressions.Tests
                 () => CheckNullableUShortArrayLengthExpression(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Generic tests
@@ -548,7 +528,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -580,7 +559,6 @@ namespace System.Linq.Expressions.Tests
                     CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter)
             );
         }
-
         #endregion
 
         #region Generate array
@@ -866,7 +844,6 @@ namespace System.Linq.Expressions.Tests
 
             return result;
         }
-
         #endregion
 
         #region Check length expression

@@ -32,7 +32,6 @@ namespace System.Collections.Tests
 
         protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         protected override IEnumerable<T> GenericIEnumerableFactory()
@@ -65,7 +64,6 @@ namespace System.Collections.Tests
         }
 
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
-
         #endregion
 
         #region Constructor
@@ -78,7 +76,6 @@ namespace System.Collections.Tests
             Assert.Equal(0, stack.ToArray().Length);
             Assert.NotNull(((ICollection)stack).SyncRoot);
         }
-
         #endregion
 
         #region Constructor_IEnumerable
@@ -111,7 +108,6 @@ namespace System.Collections.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>("collection", () => new Stack<T>(null));
         }
-
         #endregion
 
         #region Constructor_Capacity
@@ -136,7 +132,6 @@ namespace System.Collections.Tests
                 () => new Stack<T>(int.MinValue)
             );
         }
-
         #endregion
 
         #region Pop
@@ -156,7 +151,6 @@ namespace System.Collections.Tests
         {
             Assert.Throws<InvalidOperationException>(() => new Stack<T>().Pop());
         }
-
         #endregion
 
         #region ToArray
@@ -168,7 +162,6 @@ namespace System.Collections.Tests
             Stack<T> stack = GenericStackFactory(count);
             Assert.Equal(Enumerable.ToArray(stack), stack.ToArray());
         }
-
         #endregion
 
         #region Peek
@@ -191,7 +184,6 @@ namespace System.Collections.Tests
         {
             Assert.Throws<InvalidOperationException>(() => new Stack<T>().Peek());
         }
-
         #endregion
 
         #region TrimExcess
@@ -270,7 +262,6 @@ namespace System.Collections.Tests
                 Assert.Equal(count, stack.Count);
             }
         }
-
         #endregion
 
         [Theory]

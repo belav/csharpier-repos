@@ -624,7 +624,6 @@ namespace System.Xml.Tests
 
             Assert.True(true);
         }
-
         #endregion
 
         [Fact]
@@ -784,7 +783,6 @@ namespace System.Xml.Tests
 
             Assert.Contains("Invalid particle derivation by restriction", ex.Message);
         }
-
         #endregion
 
         #region FacetBaseFixed tests
@@ -1078,7 +1076,6 @@ namespace System.Xml.Tests
             Exception ex = Assert.Throws<XmlSchemaException>(() => ss.Compile());
             Assert.Contains("fixed='true'", ex.Message);
         }
-
         #endregion
 
         [Fact]
@@ -1265,7 +1262,6 @@ namespace System.Xml.Tests
             Assert.Contains("minOccurs", ex.Message);
             Assert.Contains("maxOccurs", ex.Message);
         }
-
         #endregion
 
         [Fact]
@@ -1365,7 +1361,6 @@ namespace System.Xml.Tests
             Assert.Contains("preserve", ex.Message);
             Assert.Contains("replace", ex.Message);
         }
-
         #endregion
 
         #region tests causing XmlSchemaException with Sch_WhiteSpaceRestriction2
@@ -1415,7 +1410,6 @@ namespace System.Xml.Tests
             Assert.Contains("preserve", ex.Message);
             Assert.Contains("replace", ex.Message);
         }
-
         #endregion
 
         #region Attribute Restriction Invalid From WildCard tests

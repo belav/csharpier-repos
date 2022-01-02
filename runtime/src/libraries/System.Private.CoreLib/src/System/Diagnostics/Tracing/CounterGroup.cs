@@ -75,7 +75,6 @@ namespace System.Diagnostics.Tracing
                 }
             }
         }
-
 #endregion // EventSource Command Processing
 
 #region Global CounterGroup Array management
@@ -127,7 +126,6 @@ namespace System.Diagnostics.Tracing
                 return ret;
             }
         }
-
 #endregion // Global CounterGroup Array management
 
 #region Timer Processing

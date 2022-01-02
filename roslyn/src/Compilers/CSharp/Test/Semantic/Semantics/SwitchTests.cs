@@ -1327,7 +1327,6 @@ class Program
             var symbolInfo = semanticModel.GetSymbolInfo(node);
             Assert.NotEqual(default, symbolInfo);
         }
-
         #endregion
 
         #region "Switch Governing Type with Implicit User Defined Conversion Tests"
@@ -2419,7 +2418,6 @@ struct A
                 );
             CreateCompilation(text).VerifyDiagnostics();
         }
-
         #endregion
 
         #region "Control Flow analysis: CS8070 Switch fall out error tests"
@@ -2653,7 +2651,6 @@ switch (1)
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "Console").WithLocation(7, 9)
             );
         }
-
         #endregion
 
         # region "Control Flow analysis: CS0163 Switch fall through error tests"
@@ -2787,7 +2784,6 @@ namespace Test
                         .WithLocation(32, 17)
                 );
         }
-
         #endregion
 
         #region "Data flow analysis: CS0165 Uninitialized variable error tests"
@@ -3040,7 +3036,6 @@ class SwitchTest
             CreateCompilation(text, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics();
             CreateCompilation(text, parseOptions: TestOptions.Regular8).VerifyDiagnostics();
         }
-
         #endregion
 
         #region regressions

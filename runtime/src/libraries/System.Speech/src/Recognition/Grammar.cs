@@ -213,7 +213,6 @@ namespace System.Speech.Recognition
             }
             return null;
         }
-
         #endregion
 
         #region public Properties
@@ -314,14 +313,12 @@ namespace System.Speech.Recognition
         {
             get { return _uri; }
         }
-
         #endregion
 
         #region public Events
 
         // The event fired upon a recognition.
         public event EventHandler<SpeechRecognizedEventArgs> SpeechRecognized;
-
         #endregion
 
         #region Internal Properties
@@ -451,7 +448,6 @@ namespace System.Speech.Recognition
             get { return _internalData; }
             set { _internalData = value; }
         }
-
         #endregion
 
         #region Internal Methods
@@ -651,7 +647,6 @@ namespace System.Speech.Recognition
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                 );
         }
-
         #endregion
 
         #region Internal Fields
@@ -661,7 +656,6 @@ namespace System.Speech.Recognition
         internal System.Speech.Internal.SrgsCompiler.AppDomainGrammarProxy _proxy;
 
         internal ScriptRef[] _scripts;
-
         #endregion
 
         #region Protected Methods
@@ -674,7 +668,6 @@ namespace System.Speech.Recognition
                 _resources = value;
             }
         }
-
         #endregion
 
         #region Private Methods

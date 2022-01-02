@@ -108,7 +108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableBoolTypeWithIdentityConversionInAssignment()
@@ -170,7 +169,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -298,7 +296,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableShortTypeWithNumbericConversionFromByteInAssignment()
@@ -390,7 +387,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -510,7 +506,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableFloatTypeWithNumbericConversionFromLongInAssignment()
@@ -587,7 +582,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -728,7 +722,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableUserdefinedStructWithIdentityConversionInAssignment()
@@ -790,7 +783,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()

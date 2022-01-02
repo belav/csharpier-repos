@@ -2449,7 +2449,6 @@ namespace System.Net
                 }
             }
         }
-
         #endregion
 
         #region Obsolete designer support

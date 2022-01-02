@@ -25,14 +25,12 @@ namespace EnumRoundtrip
         [DllImport("MarshalEnumNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclEnumDelegate GetFptrCdeclEnum();
-
         #endregion
 
         #region delegate pinvoke
         //cdecl
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int CdeclEnumDelegate(DialogResult r, ref bool result);
-
         #endregion
         [System.Security.SecuritySafeCritical]
         static int Main(string[] args)

@@ -7,8 +7,10 @@ using System.Linq;
 
 #if ASPNETWEBAPI
 using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
+
 #else
 using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
+
 #endif
 
 #if ASPNETWEBAPI

@@ -283,7 +283,6 @@ class TestStructReturns
         TestNativeIntMixedFieldsCall2();
     }
 }
-
 #endregion
 
 #region Test struct unsafe casts
@@ -755,7 +754,6 @@ class TestUnsafeCasts
     {
         return Unsafe.As<double, eightByteStructOverDouble>(ref a);
     }
-
     #endregion
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -811,7 +809,6 @@ class TestUnsafeCasts
         TestWhatShouldBeOptimized();
     }
 }
-
 #endregion
 
 #region Test merge return blocks
@@ -920,7 +917,6 @@ class TestMergeReturnBlocks
         TestNoFieldSeqPropogation();
     }
 }
-
 #endregion
 
 class TestHFAandHVA

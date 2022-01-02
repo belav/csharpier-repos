@@ -40,7 +40,6 @@ public static class DefaultApiConventions
         [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object id
     ) { }
-
     #endregion
 
     /// <summary>
@@ -71,7 +70,6 @@ public static class DefaultApiConventions
         [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object model
     ) { }
-
     #endregion
 
     #region PUT
@@ -131,7 +129,6 @@ public static class DefaultApiConventions
         [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
             object model
     ) { }
-
     #endregion
 
     #region DELETE

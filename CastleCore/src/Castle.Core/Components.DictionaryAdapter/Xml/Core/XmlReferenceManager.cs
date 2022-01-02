@@ -90,7 +90,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     entry.AddReference(reference.Node);
             }
         }
-
 		#endregion
 
         public bool TryGet(object keyObject, out object inGraphObject)

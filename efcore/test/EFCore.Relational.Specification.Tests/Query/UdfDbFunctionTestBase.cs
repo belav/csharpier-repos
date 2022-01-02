@@ -113,7 +113,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public DbSet<Order> Orders { get; set; }
             public DbSet<Product> Products { get; set; }
             public DbSet<Address> Addresses { get; set; }
-
             #endregion
 
             #region Function Stubs
@@ -260,7 +259,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 return FromExpression(() => GetCustomerData(customerId));
             }
-
             #endregion
 
             #endregion
@@ -668,7 +666,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
             }
         }
-
         #endregion
 
         #region Scalar Tests
@@ -1308,7 +1305,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(4, query.Count);
         }
-
         #endregion
 
         #region Instance
@@ -1865,7 +1861,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(1, results);
         }
-
         #endregion
 
         #endregion
@@ -2726,7 +2721,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
             }
         }
-
         #endregion
 
         protected virtual void ClearLog() { }

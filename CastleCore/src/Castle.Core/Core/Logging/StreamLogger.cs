@@ -98,7 +98,6 @@ namespace Castle.Core.Logging
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
 		#endregion
 
         protected virtual void Dispose(bool disposing)

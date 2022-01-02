@@ -24,7 +24,6 @@ namespace System.Speech.Internal.SapiInterop
                 _disposed = true;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -124,7 +123,6 @@ namespace System.Speech.Internal.SapiInterop
         {
             SpRecoGrammar2.SetDictationWeight(weight);
         }
-
         #endregion
 
         #region Internal Properties
@@ -140,7 +138,6 @@ namespace System.Speech.Internal.SapiInterop
                 return _sapiGrammar2;
             }
         }
-
         #endregion
 
         #region Private Methods

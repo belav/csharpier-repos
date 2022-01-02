@@ -418,7 +418,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             pinningHandle.Target = keywordArgDispIds;
             return Marshal.UnsafeAddrOfPinnedArrayElement(keywordArgDispIds, 0);
         }
-
         #endregion
 
         #region non-public members

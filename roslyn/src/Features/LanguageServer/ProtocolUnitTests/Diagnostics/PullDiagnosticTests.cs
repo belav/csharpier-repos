@@ -620,7 +620,6 @@ class B {";
             Assert.Null(results.Single().Diagnostics);
             Assert.Equal(originalResultId, results.Single().ResultId);
         }
-
         #endregion
 
         #region Workspace Diagnostics
@@ -1443,7 +1442,6 @@ class A {";
             Assert.All(results, result => Assert.Null(result.Diagnostics));
             Assert.All(results, result => Assert.True(previousResultIds.Contains(result.ResultId)));
         }
-
         #endregion
 
         /// <summary>

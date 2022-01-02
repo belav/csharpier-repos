@@ -330,7 +330,6 @@ class C : System.IDisposable
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Delete in Method Body
@@ -831,7 +830,6 @@ namespace N
                 )
             );
         }
-
         #endregion
 
         #region Constructors
@@ -1553,7 +1551,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region Field and Property Initializers
@@ -2706,7 +2703,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region Lock Statement
@@ -3194,7 +3190,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region Fixed Statement
@@ -3679,7 +3674,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region ForEach Statement
@@ -4814,7 +4808,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region For Statement
@@ -5294,7 +5287,6 @@ class Test
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Using Statement and Local Declaration
@@ -5844,7 +5836,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region Conditional Block Statements (If, Switch, While, Do)
@@ -6303,7 +6294,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Switch Statement When Clauses, Patterns
@@ -6891,7 +6881,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Switch Expression
@@ -7201,7 +7190,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Try
@@ -7783,7 +7771,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Catch
@@ -8302,7 +8289,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region Finally
@@ -8510,7 +8496,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region Try-Catch-Finally
@@ -9055,7 +9040,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Checked/Unchecked
@@ -9351,7 +9335,6 @@ class Test
                 )
             );
         }
-
         #endregion
 
         #region Lambdas
@@ -10505,7 +10488,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region State Machines
@@ -11370,7 +11352,6 @@ class C
                 )
             );
         }
-
         #endregion
 
         #region Misplaced AS
@@ -11453,7 +11434,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region C# 7.0
@@ -11870,7 +11850,6 @@ class C
             edits.VerifyRudeDiagnostics(active);
             edits.VerifySemanticDiagnostics();
         }
-
         #endregion
 
         #region Nullable
@@ -11932,7 +11911,6 @@ class C
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Partial Types
@@ -12011,7 +11989,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region Records
@@ -12098,7 +12075,6 @@ record C(int X)
 
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Line Mapping
@@ -12342,7 +12318,6 @@ class C
             // TODO: rude edit?
             edits.VerifyRudeDiagnostics(active);
         }
-
         #endregion
 
         #region Misc
@@ -12614,7 +12589,6 @@ class C
                 new[] { DocumentResults(diagnostics: new[] { expectedDiagnostic }) }
             );
         }
-
         #endregion
 
         #region Top Level Statements

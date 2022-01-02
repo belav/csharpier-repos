@@ -185,7 +185,6 @@ namespace System.Collections.Generic
 
             Debug.Assert(Count == source.Count);
         }
-
         #endregion
 
         #region ICollection<T> methods
@@ -392,7 +391,6 @@ namespace System.Collections.Generic
         public int Count => _count - _freeCount;
 
         bool ICollection<T>.IsReadOnly => false;
-
         #endregion
 
         #region IEnumerable methods
@@ -402,7 +400,6 @@ namespace System.Collections.Generic
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         #region ISerializable methods
@@ -425,7 +422,6 @@ namespace System.Collections.Generic
                 info.AddValue(ElementsName, array, typeof(T[]));
             }
         }
-
         #endregion
 
         #region IDeserializationCallback methods
@@ -477,7 +473,6 @@ namespace System.Collections.Generic
             _version = siInfo.GetInt32(VersionName);
             HashHelpers.SerializationInfoTable.Remove(this);
         }
-
         #endregion
 
         #region HashSet methods
@@ -1111,7 +1106,6 @@ namespace System.Collections.Generic
             _count = capacity;
             _freeCount = 0;
         }
-
         #endregion
 
         #region Helper methods
@@ -1578,7 +1572,6 @@ namespace System.Collections.Generic
         /// </summary>
         internal static bool EqualityComparersAreEqual(HashSet<T> set1, HashSet<T> set2) =>
             set1.Comparer.Equals(set2.Comparer);
-
 #endregion
 
         private struct Entry

@@ -47,7 +47,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string UserName { get; set; }
             public bool Enabled { get; set; }
         }
-
         #endregion
 
         [Test]

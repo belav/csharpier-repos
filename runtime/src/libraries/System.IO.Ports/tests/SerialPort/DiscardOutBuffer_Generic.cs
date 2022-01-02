@@ -81,7 +81,6 @@ namespace System.IO.Ports.Tests
                 Assert.Equal(0, com.BytesToRead);
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

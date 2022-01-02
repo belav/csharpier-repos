@@ -68,7 +68,6 @@ namespace System.Speech.Internal.Synthesis
                 throw new FormatException(SR.Get(SRID.InvalidXml), eXml);
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -2014,7 +2013,6 @@ namespace System.Speech.Internal.Synthesis
             engine.EndElement();
             engine.EndPromptEngineRule(ssmAttributesParent._voice, name);
         }
-
         #endregion
 
         private static void CheckForDuplicates(ref string dest, XmlReader reader)
@@ -2456,7 +2454,6 @@ namespace System.Speech.Internal.Synthesis
             XmlTextReader textReader = reader as XmlTextReader;
             return textReader != null ? textReader.LinePosition - 1 : 0;
         }
-
         #endregion
 
         #region Private Types
@@ -2539,7 +2536,6 @@ namespace System.Speech.Internal.Synthesis
             SsmlAttributes ssmlAttributes,
             bool fIgnore
         );
-
         #endregion
 
         #region Private Fields

@@ -109,7 +109,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             }
         }
-
         #endregion
 
         #region IndexOf

@@ -442,7 +442,6 @@ namespace System.ComponentModel.Composition
 
             Assert.Contains(CompositionConstants.PartCreationPolicyMetadataName, ex.Message);
         }
-
         #endregion
 
         #region Tests for weakly supported metadata as part of contract
@@ -516,7 +515,6 @@ namespace System.ComponentModel.Composition
                 CreationPolicy.Any
             );
         }
-
         #endregion
 
         #region Tests for strongly typed metadata as part of contract
@@ -633,7 +631,6 @@ namespace System.ComponentModel.Composition
             var export = exports.Single();
             Assert.Null(export.Metadata.OptionalFoo);
         }
-
         #endregion
 
         [ExportMetadata("Name", "FromBaseType")]

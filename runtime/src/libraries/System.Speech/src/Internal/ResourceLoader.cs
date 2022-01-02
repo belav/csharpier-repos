@@ -78,7 +78,6 @@ namespace System.Speech.Internal
             string mediaTypeUnused;
             return LoadFile(uri, out mediaTypeUnused, out redirectedUri, out localPath);
         }
-
         #endregion
 
         #region Private Methods

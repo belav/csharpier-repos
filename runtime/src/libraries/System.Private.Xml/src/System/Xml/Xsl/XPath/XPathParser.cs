@@ -340,7 +340,6 @@ namespace System.Xml.Xsl.XPath
             _scanner.PassToken(LexKind.RBracket);
             return opnd;
         }
-
         #endregion
 
         #region Expressions
@@ -626,7 +625,6 @@ namespace System.Xml.Xsl.XPath
             PopPosInfo();
             return result;
         }
-
         #endregion
 
         /**************************************************************************************************/

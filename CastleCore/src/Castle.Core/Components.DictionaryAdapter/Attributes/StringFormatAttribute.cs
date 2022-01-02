@@ -61,7 +61,6 @@ namespace Castle.Components.DictionaryAdapter
                 )
                 .Trim();
         }
-
 		#endregion
 
         private object[] GetFormatArguments(

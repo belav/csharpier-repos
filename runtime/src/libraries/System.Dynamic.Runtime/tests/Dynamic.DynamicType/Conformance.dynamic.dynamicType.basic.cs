@@ -8076,7 +8076,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             return base.GetHashCode();
         }
     }
-
     #endregion
     public class Test
     {
@@ -8162,7 +8161,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 return true;
             return false;
         }
-
         #endregion
         public bool M5(dynamic p1)
         {
@@ -8210,7 +8208,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 return true;
             return false;
         }
-
         #endregion
         #region "struct type without user defined equality operators. "
 
@@ -8313,7 +8310,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             return false;
         }
-
         #endregion
         #region "Type parameter"
         private static bool Test31<T>() where T : struct
@@ -8347,7 +8343,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 return true;
             return false;
         }
-
         #endregion
         #region "Struct type with user defined equality operators"
 
@@ -8382,7 +8377,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 return true;
             return false;
         }
-
         #endregion
         #region "Nullable struct without user-defined equality operators"
         private static bool Test51()
@@ -8497,7 +8491,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 return true;
             return false;
         }
-
         #endregion
         #region "Nullable type with user defined equality operators"
 
@@ -10037,7 +10030,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             return true;
         }
-
         #endregion
         #region conditional logical or operator
         private static bool TestOrOpWithSameTypeAndReturnType()

@@ -197,7 +197,6 @@ namespace System.Linq.Expressions.Tests
                 }
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -418,7 +417,6 @@ namespace System.Linq.Expressions.Tests
             else
                 Assert.Null(f());
         }
-
         #endregion
 
         #region Helper methods

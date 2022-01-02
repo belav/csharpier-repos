@@ -117,7 +117,6 @@ namespace System.Speech.Internal.SapiInterop
             }
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Internal Methods
@@ -154,7 +153,6 @@ namespace System.Speech.Internal.SapiInterop
 
             return speechEvent;
         }
-
         #endregion
 
         #region Internal Properties
@@ -184,7 +182,6 @@ namespace System.Speech.Internal.SapiInterop
         {
             get { return _audioPosition; }
         }
-
         #endregion
 
         #region Private Fields

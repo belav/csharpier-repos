@@ -559,7 +559,6 @@ namespace Microsoft.Cci
                 value: _debugMetadataOpt.GetOrAddBlobUTF8(module.DefaultNamespace)
             );
         }
-
         #endregion
 
         #region Locals
@@ -659,7 +658,6 @@ namespace Microsoft.Cci
             builder.WriteUTF8(str);
             builder.WriteByte(0);
         }
-
         #endregion
 
         #region State Machines
@@ -720,7 +718,6 @@ namespace Microsoft.Cci
                 value: _debugMetadataOpt.GetOrAddBlob(writer)
             );
         }
-
         #endregion
 
         #region Sequence Points
@@ -849,7 +846,6 @@ namespace Microsoft.Cci
                 writer.WriteCompressedSignedInteger(deltaColumns);
             }
         }
-
         #endregion
 
         #region Documents
@@ -930,7 +926,6 @@ namespace Microsoft.Cci
                 AddDocument(kvp.Value, _documentIndex);
             }
         }
-
         #endregion
 
         #region Edit and Continue
@@ -972,7 +967,6 @@ namespace Microsoft.Cci
                 );
             }
         }
-
         #endregion
 
         private void EmbedSourceLink(Stream stream)

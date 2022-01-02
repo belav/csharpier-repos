@@ -84,7 +84,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyUnaryNotNullableUShort(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

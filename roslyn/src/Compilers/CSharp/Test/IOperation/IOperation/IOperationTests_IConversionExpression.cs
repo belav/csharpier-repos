@@ -4078,7 +4078,6 @@ Block[B2] - Exit
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region Explicit Conversion
@@ -6318,7 +6317,6 @@ class Class
                 iopTree.Value.Type.NullableAnnotation
             );
         }
-
         #endregion
 
         internal class ExpectedSymbolVerifier

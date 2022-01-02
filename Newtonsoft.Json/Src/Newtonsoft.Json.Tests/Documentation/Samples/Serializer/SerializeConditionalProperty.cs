@@ -51,7 +51,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 return (Manager != this);
             }
         }
-
         #endregion
 
         [Test]

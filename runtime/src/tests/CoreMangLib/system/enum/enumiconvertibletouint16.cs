@@ -144,7 +144,6 @@ public class EnumIConvertibleToUint16
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -206,7 +205,6 @@ public class EnumIConvertibleToUint16
 
         return retVal;
     }
-
     #endregion
     #endregion
 

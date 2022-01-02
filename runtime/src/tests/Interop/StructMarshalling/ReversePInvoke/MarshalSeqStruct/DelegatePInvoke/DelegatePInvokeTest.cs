@@ -70,7 +70,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern InnerSequentialByRefDelegateStdCall Get_MarshalStructInnerSequentialByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -103,7 +102,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern InnerSequentialByValDelegateStdCall Get_MarshalStructInnerSequentialByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -144,7 +142,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern InnerArraySequentialByRefDelegateStdCall Get_MarshalStructInnerArraySequentialByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -181,7 +178,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern InnerArraySequentialByValDelegateStdCall Get_MarshalStructInnerArraySequentialByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -222,7 +218,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern CharSetAnsiSequentialByRefDelegateStdCall Get_MarshalStructCharSetAnsiSequentialByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -259,7 +254,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern CharSetAnsiSequentialByValDelegateStdCall Get_MarshalStructCharSetAnsiSequentialByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -300,7 +294,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern CharSetUnicodeSequentialByRefDelegateStdCall Get_MarshalStructCharSetUnicodeSequentialByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -337,7 +330,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern CharSetUnicodeSequentialByValDelegateStdCall Get_MarshalStructCharSetUnicodeSequentialByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -376,7 +368,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern NumberSequentialByRefDelegateStdCall Get_MarshalStructNumberSequentialByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -409,7 +400,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern NumberSequentialByValDelegateStdCall Get_MarshalStructNumberSequentialByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -442,7 +432,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S3ByRefDelegateStdCall Get_MarshalStructS3ByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -471,7 +460,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S3ByValDelegateStdCall Get_MarshalStructS3ByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -504,7 +492,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S5ByRefDelegateStdCall Get_MarshalStructS5ByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -533,7 +520,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S5ByValDelegateStdCall Get_MarshalStructS5ByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -574,7 +560,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern StringStructSequentialAnsiByRefDelegateStdCall Get_MarshalStructStringStructSequentialAnsiByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -611,7 +596,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern StringStructSequentialAnsiByValDelegateStdCall Get_MarshalStructStringStructSequentialAnsiByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -652,7 +636,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern StringStructSequentialUnicodeByRefDelegateStdCall Get_MarshalStructStringStructSequentialUnicodeByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -689,7 +672,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern StringStructSequentialUnicodeByValDelegateStdCall Get_MarshalStructStringStructSequentialUnicodeByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -722,7 +704,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S8ByRefDelegateStdCall Get_MarshalStructS8ByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -751,7 +732,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S8ByValDelegateStdCall Get_MarshalStructS8ByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -784,7 +764,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S9ByRefDelegateStdCall Get_MarshalStructS9ByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -813,7 +792,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S9ByValDelegateStdCall Get_MarshalStructS9ByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -854,7 +832,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern IncludeOuterIntergerStructSequentialByRefDelegateStdCall Get_MarshalStructIncludeOuterIntergerStructSequentialByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -891,7 +868,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern IncludeOuterIntergerStructSequentialByValDelegateStdCall Get_MarshalStructIncludeOuterIntergerStructSequentialByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -924,7 +900,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S11ByRefDelegateStdCall Get_MarshalStructS11ByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -953,7 +928,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern S11ByValDelegateStdCall Get_MarshalStructS11ByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -987,7 +961,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern ComplexStructByRefDelegateStdCall Get_MarshalStructComplexStructByRef_StdCall_FuncPtr();
-
     #endregion
 
     #region PassByValue
@@ -1015,7 +988,6 @@ public class MarshalStructTest
     [DllImport("SeqPInvokeNative", CallingConvention = CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern ComplexStructByValDelegateStdCall Get_MarshalStructComplexStructByVal_StdCall_FuncPtr();
-
     #endregion
 
     #endregion
@@ -2246,7 +2218,6 @@ public class MarshalStructTest
                 break;
         }
     }
-
     #endregion
 
     #region By Ref
@@ -2290,7 +2261,6 @@ public class MarshalStructTest
         );
         TestMethod_DelegatePInvoke_MarshalByRef_StdCall(StructID.S11Id);
     }
-
     #endregion
 
     #region By Value
@@ -2334,7 +2304,6 @@ public class MarshalStructTest
         );
         TestMethod_DelegatePInvoke_MarshalByVal_StdCall(StructID.S11Id);
     }
-
     #endregion
 
     static int Main()

@@ -11,7 +11,6 @@ namespace System.Speech.Recognition
         {
             _result = result;
         }
-
         #endregion
 
         #region Public Properties
@@ -20,7 +19,6 @@ namespace System.Speech.Recognition
         {
             get { return _result; }
         }
-
         #endregion
 
         #region Private Fields

@@ -87,7 +87,6 @@ namespace System.Text.Json.Tests
             Assert.Equal("Teemo", champions[1]);
             Assert.Equal("Katarina", champions[2]);
         }
-
         #endregion
 
         #region Array
@@ -135,7 +134,6 @@ namespace System.Text.Json.Tests
                 () => JsonSerializer.Serialize(default(ImmutableArray<int>), s_indentedOption)
             );
         }
-
         #endregion
 
         #region Queue
@@ -191,7 +189,6 @@ namespace System.Text.Json.Tests
             data = data.Dequeue();
             Assert.Equal("3", data.Peek());
         }
-
         #endregion
 
         #region Stack
@@ -247,7 +244,6 @@ namespace System.Text.Json.Tests
             data = data.Pop();
             Assert.Equal("One", data.Peek());
         }
-
         #endregion
 
         #region HashSet
@@ -304,7 +300,6 @@ namespace System.Text.Json.Tests
             Assert.True(data.Contains("II"));
             Assert.True(data.Contains("One"));
         }
-
         #endregion
 
         #region SortedSet
@@ -338,7 +333,6 @@ namespace System.Text.Json.Tests
             Assert.Contains("II", data);
             Assert.Contains("One", data);
         }
-
         #endregion
 
         #region Dictionary
@@ -401,7 +395,6 @@ namespace System.Text.Json.Tests
             Assert.Equal("II", data[2]);
             Assert.Equal("3", data[3]);
         }
-
         #endregion
 
         #region SortedDictionary

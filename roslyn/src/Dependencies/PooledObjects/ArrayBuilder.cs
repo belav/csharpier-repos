@@ -39,7 +39,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
                 }
             }
         }
-
         #endregion
 
         private readonly ImmutableArray<T>.Builder _builder;
@@ -407,7 +406,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             pool = new ObjectPool<ArrayBuilder<T>>(() => new ArrayBuilder<T>(pool!), size);
             return pool;
         }
-
         #endregion
 
         public Enumerator GetEnumerator()

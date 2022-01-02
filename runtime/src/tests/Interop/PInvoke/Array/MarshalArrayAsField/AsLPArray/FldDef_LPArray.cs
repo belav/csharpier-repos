@@ -124,7 +124,6 @@ public struct S_BOOLArray_Seq
     [MarshalAs(UnmanagedType.LPArray, SizeConst = Test.ARRAY_SIZE)]
     public bool[] arr;
 }
-
 #endregion
 
 #region sequential class definition
@@ -237,7 +236,6 @@ public class C_BOOLArray_Seq
     [MarshalAs(UnmanagedType.LPArray, SizeConst = Test.ARRAY_SIZE)]
     public bool[] arr;
 }
-
 #endregion
 #endregion
 
@@ -368,7 +366,6 @@ public struct S_BOOLArray_Exp
     [MarshalAs(UnmanagedType.LPArray, SizeConst = Test.ARRAY_SIZE)]
     public bool[] arr;
 }
-
 #endregion
 
 #region explicit class definition

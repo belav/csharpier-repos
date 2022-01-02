@@ -107,7 +107,6 @@ namespace System.Transactions.Tests
                 }
             );
         }
-
         #endregion
 
         #region Vol2_Dur0
@@ -131,7 +130,6 @@ namespace System.Transactions.Tests
             irm.Check2PC("irm");
             irm2.Check2PC("irm2");
         }
-
         #endregion
 
         #region Vol0_Dur1
@@ -199,7 +197,6 @@ namespace System.Transactions.Tests
             );
             irm.Check(1, 0, 0, 0, 0, 0, 0, "irm");
         }
-
         #endregion
 
         #region Vol2_Dur1
@@ -395,7 +392,6 @@ namespace System.Transactions.Tests
 
             Transaction.Current = null;
         }
-
         #endregion
 
         #region Promotable Single Phase Enlistment
@@ -467,7 +463,6 @@ namespace System.Transactions.Tests
             // successful EnlistPromotableSinglePhase for a given transaction will return "false", which should
             // probably be considered an enlistment failure. An exception is not thrown, but the second PSPE still "failed".
         }
-
         #endregion
 
         #region Others
@@ -552,7 +547,6 @@ namespace System.Transactions.Tests
             irm.Check(1, 1, 0, 0, "Dispose transaction");
             Assert.Equal(5, irm.Value);
         }
-
         #endregion
 
         #region TransactionCompleted
@@ -583,7 +577,6 @@ namespace System.Transactions.Tests
 
             Assert.True(called, "TransactionCompleted event handler not called!");
         }
-
         #endregion
 
         #region Success/Failure behavior tests
@@ -829,7 +822,6 @@ namespace System.Transactions.Tests
             Assert.IsType<NotSupportedException>(ex.InnerException);
             Assert.Equal(TransactionStatus.Aborted, status);
         }
-
         #endregion
 
         #region Success/Failure behavior Vol2_Dur0 Cases

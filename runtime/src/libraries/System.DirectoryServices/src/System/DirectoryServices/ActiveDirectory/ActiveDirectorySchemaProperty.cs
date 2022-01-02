@@ -289,7 +289,6 @@ namespace System.DirectoryServices.ActiveDirectory
             // set the bind flag
             this.isBound = true;
         }
-
         #endregion constructors
 
         #region IDisposable
@@ -336,7 +335,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 _disposed = true;
             }
         }
-
         #endregion IDisposable
 
         #region public methods
@@ -580,7 +578,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
             return DirectoryEntryManager.GetDirectoryEntryInternal(_context, _propertyEntry.Path);
         }
-
         #endregion public methods
 
         #region public properties
@@ -1252,7 +1249,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 _schemaGuidBinaryForm = (value.Equals(Guid.Empty)) ? null : value.ToByteArray();
             }
         }
-
         #endregion public properties
 
         #region private methods

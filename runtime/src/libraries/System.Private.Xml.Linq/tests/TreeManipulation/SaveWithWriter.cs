@@ -30,13 +30,11 @@ namespace XLinqTests
 
         private const string xmlForXElementWriteContent =
             "<Item price=\"100\">Motor<![CDATA[cdata]]><elem>innertext</elem>text<?pi pi pi?></Item>";
-
         #endregion
 
         #region Fields
 
         private readonly XmlDiff _diff;
-
         #endregion
 
         #region Constructors and Destructors
@@ -45,7 +43,6 @@ namespace XLinqTests
         {
             _diff = new XmlDiff();
         }
-
         #endregion
 
         #region Public Methods and Operators
@@ -380,7 +377,6 @@ namespace XLinqTests
                 TestLog.Compare(expectedXml, actualXml, "XDocumentType writeTo method failed");
             }
         }
-
         #endregion
 
         //

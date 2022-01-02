@@ -188,7 +188,6 @@ namespace System.Drawing
 
         [DllImport("libobjc.dylib")]
         public static extern IntPtr sel_registerName(string selectorName);
-
         #endregion
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]

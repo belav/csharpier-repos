@@ -136,7 +136,6 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
         private static ImmutableArray<Assembly> LoadDefaultAssemblies() =>
             MefHostServicesHelpers.LoadNearbyAssemblies(s_defaultAssemblyNames);
-
         #endregion
 
         internal readonly struct TestAccessor

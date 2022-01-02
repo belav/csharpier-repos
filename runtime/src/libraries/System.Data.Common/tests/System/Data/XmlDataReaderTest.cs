@@ -343,7 +343,6 @@ namespace System.Data.Tests
             {
                 Node = xNode;
             }
-
             #endregion
 
             public XmlNode Node { get; set; }
@@ -398,7 +397,6 @@ namespace System.Data.Tests
 
                 doc.WriteTo(writer);
             }
-
             #endregion
             #region ReadXml
             void IXmlSerializable.ReadXml(XmlReader reader)
@@ -415,14 +413,12 @@ namespace System.Data.Tests
                 }
                 Node = doc.DocumentElement;
             }
-
             #endregion
             #region GetSchema
             XmlSchema IXmlSerializable.GetSchema()
             {
                 return (null);
             }
-
             #endregion
 
             /* Private utils */

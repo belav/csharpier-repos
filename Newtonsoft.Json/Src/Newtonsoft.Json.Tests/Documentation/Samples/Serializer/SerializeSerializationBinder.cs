@@ -72,7 +72,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string Maker { get; set; }
             public string Model { get; set; }
         }
-
         #endregion
 
         [Test]

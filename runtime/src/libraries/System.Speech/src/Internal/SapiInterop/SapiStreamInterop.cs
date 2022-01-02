@@ -14,7 +14,6 @@ namespace System.Speech.Internal.SapiInterop
         SPFM_OPEN_READONLY = 0,
         SPFM_CREATE_ALWAYS = 3
     }
-
     #endregion Enum
 
     #region Interface

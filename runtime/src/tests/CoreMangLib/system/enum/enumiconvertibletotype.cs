@@ -208,7 +208,6 @@ public class EnumIConvertibleToType
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -238,7 +237,6 @@ public class EnumIConvertibleToType
 
         return retVal;
     }
-
     #endregion
     #endregion
 

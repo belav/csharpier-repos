@@ -182,7 +182,6 @@ namespace System.Speech.Internal.SapiInterop
         SPRA_APP_UPS = 0x0001,
         SPRA_ENGINE_UPS = 0x0002
     }
-
     #endregion
 
     #region Structure
@@ -718,7 +717,6 @@ namespace System.Speech.Internal.SapiInterop
         public ushort wBitsPerSample;
         public ushort cbSize;
     }
-
     #endregion
 
     #region Interface
@@ -1310,7 +1308,6 @@ namespace System.Speech.Internal.SapiInterop
         void Slot9(); // AddProperties(const SPPHRASEPROPERTYHANDLE hParent, const SPPHRASEPROPERTY * pProperty, SPPHRASEPROPERTYHANDLE * phNewProperty);
         void Slot10(); // AddReplacements(ULONG cReplacements, const SPPHRASEREPLACEMENT * pReplacements);
     };
-
     #endregion
 
     #region Class

@@ -279,7 +279,6 @@ namespace System.Threading.Tasks
                 }
             }
         }
-
         #endregion
 
         #region TaskStarted
@@ -430,7 +429,6 @@ namespace System.Threading.Tasks
                 }
             }
         }
-
         #endregion
 
         /// <summary>

@@ -672,7 +672,6 @@ namespace System.Management
             return new IWbemClassObjectFreeThreaded(pObj);
         }
     }
-
     #endregion
 
     #region Interfaces
@@ -1731,7 +1730,6 @@ namespace System.Management
         [PreserveSig]
         int IsSameClassName_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszClass);
     }
-
     #endregion
 
     #region Enums
@@ -2099,7 +2097,6 @@ namespace System.Management
         WBEMPATH_GET_NAMESPACE_ONLY = unchecked((int)0x00000010),
         WBEMPATH_GET_ORIGINAL = unchecked((int)0x00000020),
     }
-
     #endregion
 
     #region Structs
@@ -2442,7 +2439,6 @@ namespace System.Management
             get { return this.apartmentType; }
             set { this.apartmentType = value; }
         }
-
         #endregion
 
         #region Public Delegates
@@ -2465,7 +2461,6 @@ namespace System.Management
         /// Delegate declaration representing signature of worker method with parameter.
         /// </summary>
         public delegate void ThreadWorkerMethodWithParam(object param);
-
         #endregion
 
         #region Public methods
@@ -2534,7 +2529,6 @@ namespace System.Management
                 throw this.Exception;
             }
         }
-
         #endregion
 
         #region Private methods

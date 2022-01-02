@@ -49,7 +49,6 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             ownerType: typeof(BlazorWebView),
             typeMetadata: new PropertyMetadata(OnServicesPropertyChanged)
         );
-
         #endregion
 
         private const string webViewTemplateChildName = "WebView";

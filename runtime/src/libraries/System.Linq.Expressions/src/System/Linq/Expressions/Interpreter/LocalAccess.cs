@@ -102,7 +102,6 @@ namespace System.Linq.Expressions.Interpreter
             return 1;
         }
     }
-
     #endregion
 
     #region Store, Assign
@@ -209,7 +208,6 @@ namespace System.Linq.Expressions.Interpreter
             return 1;
         }
     }
-
     #endregion
 
     #region Initialize
@@ -410,7 +408,6 @@ namespace System.Linq.Expressions.Interpreter
             public override string InstructionName => "InitMutableBox";
         }
     }
-
     #endregion
 
     #region RuntimeVariables

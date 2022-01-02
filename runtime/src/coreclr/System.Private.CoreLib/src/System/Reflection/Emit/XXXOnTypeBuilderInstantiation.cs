@@ -14,13 +14,11 @@ namespace System.Reflection.Emit
         {
             return new MethodOnTypeBuilderInstantiation(method, type);
         }
-
         #endregion
 
         #region Private Data Members
         internal MethodInfo m_method;
         private TypeBuilderInstantiation m_type;
-
         #endregion
 
         #region Constructor
@@ -31,7 +29,6 @@ namespace System.Reflection.Emit
             m_method = method;
             m_type = type;
         }
-
         #endregion
 
         internal override Type[] GetParameterTypes()
@@ -61,7 +58,6 @@ namespace System.Reflection.Emit
         }
 
         public override Module Module => m_method.Module;
-
         #endregion
 
         #region MethodBase Members
@@ -118,7 +114,6 @@ namespace System.Reflection.Emit
         }
 
         public override bool IsGenericMethod => m_method.IsGenericMethod;
-
         #endregion
 
         #region Public Abstract\Virtual Members
@@ -144,13 +139,11 @@ namespace System.Reflection.Emit
         {
             return new ConstructorOnTypeBuilderInstantiation(Constructor, type);
         }
-
         #endregion
 
         #region Private Data Members
         internal ConstructorInfo m_ctor;
         private TypeBuilderInstantiation m_type;
-
         #endregion
 
         #region Constructor
@@ -166,7 +159,6 @@ namespace System.Reflection.Emit
             m_ctor = constructor;
             m_type = type;
         }
-
         #endregion
 
         internal override Type[] GetParameterTypes()
@@ -216,7 +208,6 @@ namespace System.Reflection.Emit
             }
         }
         public override Module Module => m_ctor.Module;
-
         #endregion
 
         #region MethodBase Members
@@ -255,7 +246,6 @@ namespace System.Reflection.Emit
         public override bool ContainsGenericParameters => false;
 
         public override bool IsGenericMethod => false;
-
         #endregion
 
         #region ConstructorInfo Members
@@ -302,13 +292,11 @@ namespace System.Reflection.Emit
 
             return m;
         }
-
         #endregion
 
         #region Private Data Members
         private FieldInfo m_field;
         private TypeBuilderInstantiation m_type;
-
         #endregion
 
         #region Constructor
@@ -319,7 +307,6 @@ namespace System.Reflection.Emit
             m_field = field;
             m_type = type;
         }
-
         #endregion
 
         internal FieldInfo FieldInfo => m_field;
@@ -361,7 +348,6 @@ namespace System.Reflection.Emit
             }
         }
         public override Module Module => m_field.Module;
-
         #endregion
 
         #region Public Abstract\Virtual Members

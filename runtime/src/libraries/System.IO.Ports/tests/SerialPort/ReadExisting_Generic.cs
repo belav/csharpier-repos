@@ -233,7 +233,6 @@ namespace System.IO.Ports.Tests
                 VerifyRead(com1, com2, bytesToWrite, expectedChars);
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

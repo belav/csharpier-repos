@@ -212,7 +212,6 @@ namespace System
         void IList<T>.Insert(int index, T item) => ThrowHelper.ThrowNotSupportedException();
 
         void IList<T>.RemoveAt(int index) => ThrowHelper.ThrowNotSupportedException();
-
         #endregion
 
         #region IReadOnlyList<T>
@@ -227,7 +226,6 @@ namespace System
                 return _array![_offset + index];
             }
         }
-
         #endregion IReadOnlyList<T>
 
         #region ICollection<T>
@@ -256,19 +254,16 @@ namespace System
             ThrowHelper.ThrowNotSupportedException();
             return default;
         }
-
         #endregion
 
         #region IEnumerable<T>
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         #region IEnumerable
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         #endregion
 
         private void ThrowInvalidOperationIfDefault()

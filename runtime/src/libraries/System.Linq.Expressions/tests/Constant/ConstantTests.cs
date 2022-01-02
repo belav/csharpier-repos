@@ -620,7 +620,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(i, Expression.Lambda<Func<int>>(e).Compile(useInterpreter)());
             }
         }
-
         #endregion
 
         #region Generic helpers
@@ -678,7 +677,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyGenericWithSubClassAndNewRestriction<TCn>(value, useInterpreter);
             }
         }
-
 #endregion
 
 #region Test verifiers
@@ -1079,7 +1077,6 @@ namespace System.Linq.Expressions.Tests
             Func<TCn> f = e.Compile(useInterpreter);
             Assert.Equal(value, f());
         }
-
 #endregion
 
         [Fact]

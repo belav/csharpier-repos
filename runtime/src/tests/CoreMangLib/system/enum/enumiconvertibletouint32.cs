@@ -144,7 +144,6 @@ public class EnumIConvertibleToUint32
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -205,7 +204,6 @@ public class EnumIConvertibleToUint32
 
         return retVal;
     }
-
     #endregion
     #endregion
 

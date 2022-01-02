@@ -66,7 +66,6 @@ internal class OpaqueStream : Stream
         get { return _responseStream.WriteTimeout; }
         set { _responseStream.WriteTimeout = value; }
     }
-
     #endregion Properties
 
     public override long Seek(long offset, SeekOrigin origin)
@@ -125,7 +124,6 @@ internal class OpaqueStream : Stream
     {
         return _requestStream.CopyToAsync(destination, bufferSize, cancellationToken);
     }
-
     #endregion Read
 
     #region Write
@@ -175,7 +173,6 @@ internal class OpaqueStream : Stream
     {
         return _responseStream.FlushAsync(cancellationToken);
     }
-
     #endregion Write
 
     protected override void Dispose(bool disposing)

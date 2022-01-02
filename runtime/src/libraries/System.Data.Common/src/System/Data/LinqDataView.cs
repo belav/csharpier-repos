@@ -218,7 +218,6 @@ namespace System.Data
                 return base.GetDataRowViewFromRange(range);
             }
         }
-
         #endregion
 
 
@@ -246,7 +245,6 @@ namespace System.Data
                 base.SetIndex(newSort, newRowStates, newRowFilter);
             }
         }
-
         #endregion
 
         #region IBindingList

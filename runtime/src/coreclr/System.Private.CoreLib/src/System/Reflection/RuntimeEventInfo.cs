@@ -21,7 +21,6 @@ namespace System.Reflection
         private MethodInfo[]? m_otherMethod;
         private RuntimeType m_declaringType;
         private BindingFlags m_bindingFlags;
-
         #endregion
 
         #region Constructor
@@ -61,7 +60,6 @@ namespace System.Reflection
                 out m_bindingFlags
             );
         }
-
         #endregion
 
         #region Internal Members
@@ -75,7 +73,6 @@ namespace System.Reflection
         }
 
         internal BindingFlags BindingFlags => m_bindingFlags;
-
         #endregion
 
         #region Object Overrides
@@ -86,7 +83,6 @@ namespace System.Reflection
 
             return m_addMethod.GetParametersNoCopy()[0].ParameterType.FormatTypeName() + " " + Name;
         }
-
         #endregion
 
         #region ICustomAttributeProvider
@@ -121,7 +117,6 @@ namespace System.Reflection
         {
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -143,7 +138,6 @@ namespace System.Reflection
         {
             return m_declaringType.GetRuntimeModule();
         }
-
         #endregion
 
         #region EventInfo Overrides

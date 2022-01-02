@@ -832,7 +832,6 @@ namespace System.Net.Http
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Helpers
@@ -1014,7 +1013,6 @@ namespace System.Net.Http
 
             return true;
         }
-
         #endregion Helpers
 
         private static async Task<TResult> WaitAndReturnAsync<TState, TResult>(

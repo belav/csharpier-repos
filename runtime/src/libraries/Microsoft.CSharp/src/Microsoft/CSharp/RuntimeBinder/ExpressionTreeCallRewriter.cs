@@ -711,7 +711,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                     throw Error.InternalCompilerError();
             }
         }
-
         #endregion
 
         #region Helpers

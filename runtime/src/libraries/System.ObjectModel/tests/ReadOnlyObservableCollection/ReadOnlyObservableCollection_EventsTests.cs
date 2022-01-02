@@ -374,7 +374,6 @@ namespace System.Collections.ObjectModel.Tests
         private int _expectedOldStartingIndex;
 
         private PropertyNameExpected[] _expectedPropertyChanged;
-
         #endregion
 
         /// <summary>

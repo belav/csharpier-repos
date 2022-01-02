@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
+
 #if DEBUG
 using System.Diagnostics;
 #endif

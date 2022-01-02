@@ -527,7 +527,6 @@ namespace A
                 isNewFile: false
             );
         }
-
         #endregion
 
         // Working is very similar to the adding to the same file
@@ -749,7 +748,6 @@ namespace A.B
                 existingFilename: "Test2.cs"
             );
         }
-
         #endregion
 
         #region SameProject_NewFile
@@ -1114,7 +1112,6 @@ namespace outer
                 newFileName: "Test2.cs"
             );
         }
-
         #endregion
 
         #endregion
@@ -1271,7 +1268,6 @@ class Program
                 projectName: "Assembly2"
             );
         }
-
         #endregion
         #region SameLanguageDifferentProject_NewFile
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -1490,7 +1486,6 @@ namespace A.B
                 projectName: "Assembly2"
             );
         }
-
         #endregion
         #endregion
         #region DifferentLanguage
@@ -2020,7 +2015,6 @@ End Namespace
                 )
             );
         }
-
         #endregion
         #region Bugfix
         [WorkItem(861462, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/861462")]
@@ -2410,7 +2404,6 @@ public struct Bar
                 )
             );
         }
-
         #endregion
         #region Delegates
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -3206,7 +3199,6 @@ public delegate void MyD<T>();
                 isNewFile: false
             );
         }
-
         #endregion
         #region Dev12Filtering
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]

@@ -80,7 +80,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyUnaryNotUShort(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

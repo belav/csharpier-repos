@@ -779,7 +779,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             );
             return field;
         }
-
         /////////////////////////////////////////////////////////////////////////////////
 
         #endregion
@@ -1077,7 +1076,6 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return StripNamedArgument(pArg);
         }
-
         #endregion
 
         #region Operators
@@ -1127,7 +1125,6 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return _binder.BindStandardUnaryOperator(op, arg1);
         }
-
         #endregion
 
         #region BinaryOperators
@@ -1162,7 +1159,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             }
             return _binder.BindStandardBinop(ek, arg1, arg2);
         }
-
         #endregion
 
         /////////////////////////////////////////////////////////////////////////////////
@@ -1257,7 +1253,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                     return OperatorKind.OP_PREDEC;
             }
         }
-
         /////////////////////////////////////////////////////////////////////////////////
 
         #endregion
@@ -1360,7 +1355,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                     throw Error.InternalCompilerError();
             }
         }
-
         #endregion
 
         #region Casts
@@ -1424,7 +1418,6 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return _binder.mustCast(argument, destinationType);
         }
-
         #endregion
 
         #region Assignments
@@ -1472,7 +1465,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             Expr rhs = CreateArgumentEXPR(arguments[indexOfLast], locals[indexOfLast]);
             return _binder.BindAssignment(lhs, rhs, bIsCompound);
         }
-
         #endregion
 
         #region Events

@@ -28,7 +28,6 @@ namespace System.Speech.Internal.SrgsCompiler
         }
 
         internal State(Rule rule, uint hState) : this(rule, hState, (int)hState) { }
-
         #endregion
 
         #region internal Methods
@@ -39,7 +38,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             return Compare(this, state2);
         }
-
         #endregion
 
         internal void SerializeStateEntries(
@@ -323,7 +321,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -391,7 +388,6 @@ namespace System.Speech.Internal.SrgsCompiler
             get { return _iSerialize; }
             set { _iSerialize = value; }
         }
-
         #endregion
 
         #region private Methods

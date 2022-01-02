@@ -16,7 +16,6 @@ namespace System.Buffers.Text
         private const byte CloseParen = (byte)')';
 
         private const byte Dash = (byte)'-';
-
         #endregion Constants
 
         /// <summary>

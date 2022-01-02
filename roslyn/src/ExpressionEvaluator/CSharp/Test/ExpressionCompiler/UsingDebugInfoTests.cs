@@ -429,7 +429,6 @@ namespace D
                 }
             );
         }
-
         #endregion
 
         #region Invalid PDBs
@@ -801,7 +800,6 @@ namespace N
             Assert.Equal(0, imports.UsingAliases.Count);
             Assert.Equal(0, imports.ExternAliases.Length);
         }
-
         #endregion Invalid PDBs
 
         #region Binder chain
@@ -1361,7 +1359,6 @@ class C
             var compContext = evalContext.CreateCompilationContext();
             return compContext.NamespaceBinder.ImportChain;
         }
-
         #endregion Binder chain
 
         [Fact]

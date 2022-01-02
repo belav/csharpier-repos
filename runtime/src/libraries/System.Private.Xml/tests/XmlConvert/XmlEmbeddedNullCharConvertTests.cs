@@ -76,7 +76,6 @@ namespace System.Xml.Tests
             0x19,
             0x00
         };
-
         #endregion
 
         #region Public Methods and Operators

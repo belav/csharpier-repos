@@ -202,7 +202,6 @@ namespace System.Reflection.Emit
 
             return null;
         }
-
         #endregion
 
         #region Data Members
@@ -216,7 +215,6 @@ namespace System.Reflection.Emit
         internal int[] m_iaUpperBound; // count of dimension
         private string? m_format; // format string to form the full name.
         private bool m_isSzArray = true;
-
         #endregion
 
         #region Constructor
@@ -226,7 +224,6 @@ namespace System.Reflection.Emit
             m_iaLowerBound = new int[4];
             m_iaUpperBound = new int[4];
         }
-
         #endregion
 
         #region Internal Members
@@ -266,7 +263,6 @@ namespace System.Reflection.Emit
 
             m_format = format.Substring(curIndex, length);
         }
-
         #endregion
 
         #region Type Overrides

@@ -161,7 +161,6 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
             var globalOptions = componentModel.GetService<IGlobalOptionService>();
             PerformanceLoggersPage.SetLoggers(globalOptions, _threadingContext, workspace.Services);
         }
-
         #endregion
 
         public override IVsAsyncToolWindowFactory GetAsyncToolWindowFactory(Guid toolWindowType)

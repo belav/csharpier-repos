@@ -237,7 +237,6 @@ namespace System.Xml.Xsl.Qil
         {
             return node.XmlType!;
         }
-
         #endregion // meta
 
         #region specials
@@ -267,7 +266,6 @@ namespace System.Xml.Xsl.Qil
             CheckXmlType(node.Child, XmlQueryTypeFactory.StringX);
             return XmlQueryTypeFactory.Empty;
         }
-
         #endregion // specials
 
         #region variables
@@ -298,7 +296,6 @@ namespace System.Xml.Xsl.Qil
         {
             return XmlQueryTypeFactory.IntX;
         }
-
         #endregion // variables
 
         #region literals
@@ -364,7 +361,6 @@ namespace System.Xml.Xsl.Qil
             Check(node.Value != null, node, "Literal value is null");
             return XmlQueryTypeFactory.ItemS;
         }
-
         #endregion // literals
 
         #region boolean operators
@@ -388,7 +384,6 @@ namespace System.Xml.Xsl.Qil
             CheckXmlType(node.Child, XmlQueryTypeFactory.BooleanX);
             return XmlQueryTypeFactory.BooleanX;
         }
-
         #endregion // boolean operators
 
         #region choice
@@ -408,7 +403,6 @@ namespace System.Xml.Xsl.Qil
             Check(node.Branches.Count > 0, node, "Choice must have at least one branch");
             return node.Branches.XmlType;
         }
-
         #endregion // choice
 
         #region collection operators
@@ -470,7 +464,6 @@ namespace System.Xml.Xsl.Qil
         {
             return CheckAverage(node);
         }
-
         #endregion // collection operators
 
         #region arithmetic operators
@@ -512,7 +505,6 @@ namespace System.Xml.Xsl.Qil
         {
             return CheckAdd(node);
         }
-
         #endregion // arithmetic operators
 
         #region string operators
@@ -543,7 +535,6 @@ namespace System.Xml.Xsl.Qil
             );
             return XmlQueryTypeFactory.QNameX;
         }
-
         #endregion // string operators
 
         #region value comparison operators
@@ -582,7 +573,6 @@ namespace System.Xml.Xsl.Qil
         {
             return CheckNe(node);
         }
-
         #endregion // value comparison operators
 
         #region node comparison operators
@@ -605,7 +595,6 @@ namespace System.Xml.Xsl.Qil
         {
             return CheckIs(node);
         }
-
         #endregion // node comparison operators
 
         #region loops
@@ -653,7 +642,6 @@ namespace System.Xml.Xsl.Qil
                 node.Variable.Binding.XmlType!.Cardinality
             );
         }
-
         #endregion // loops
 
         #region sorting
@@ -683,7 +671,6 @@ namespace System.Xml.Xsl.Qil
             CheckXmlType(node.Child, XmlQueryTypeFactory.NodeNotRtfS);
             return DistinctType(node.Child.XmlType!);
         }
-
         #endregion // sorting
 
         #region function definition and invocation
@@ -729,7 +716,6 @@ namespace System.Xml.Xsl.Qil
 
             return node.Function.XmlType!;
         }
-
         #endregion // function definition and invocation
 
         #region XML navigation
@@ -828,7 +814,6 @@ namespace System.Xml.Xsl.Qil
             CheckXmlType(node.Right, XmlQueryTypeFactory.StringX);
             return XmlQueryTypeFactory.ElementS;
         }
-
         #endregion // XML navigation
 
         #region XML construction
@@ -893,7 +878,6 @@ namespace System.Xml.Xsl.Qil
             CheckClassAndNodeType(node.Right, typeof(QilLiteral), QilNodeType.LiteralString);
             return XmlQueryTypeFactory.Node;
         }
-
         #endregion // XML construction
 
         #region Node properties
@@ -923,7 +907,6 @@ namespace System.Xml.Xsl.Qil
             CheckXmlType(node.Child, XmlQueryTypeFactory.Node);
             return XmlQueryTypeFactory.StringX;
         }
-
         #endregion // Node properties
         #region Copy operators
 
@@ -949,7 +932,6 @@ namespace System.Xml.Xsl.Qil
         {
             return XmlQueryTypeFactory.BooleanX;
         }
-
         #endregion // Type operators
 
         #region XPath operators
@@ -979,7 +961,6 @@ namespace System.Xml.Xsl.Qil
             CheckXmlType(node.Child, XmlQueryTypeFactory.NodeNotRtf);
             return XmlQueryTypeFactory.NamespaceS;
         }
-
         #endregion // XPath operators
 
         #region XSLT
@@ -1053,7 +1034,6 @@ namespace System.Xml.Xsl.Qil
             CheckClassAndNodeType(node[1], typeof(QilLiteral), QilNodeType.LiteralType);
             return node.TargetType;
         }
-
         #endregion // Xslt operators
 
 

@@ -76,7 +76,6 @@ public class MarshalSizeOf1
     #region Private Fields
     private const int c_STRING_MIN_LENGTH = 1;
     private const int c_STRING_MAX_LENGTH = 1024;
-
     #endregion
 
 
@@ -556,7 +555,6 @@ public class MarshalSizeOf1
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -648,7 +646,6 @@ public class MarshalSizeOf1
 
         return retVal;
     }
-
     #endregion
     #endregion
 

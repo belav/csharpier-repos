@@ -56,7 +56,6 @@ namespace System.Reflection.Emit
         internal string scopename;
         internal bool is_resource;
         internal int token;
-
 #endregion
 
         private UIntPtr dynamic_image; /* GC-tracked */
@@ -71,7 +70,6 @@ namespace System.Reflection.Emit
         private object? resources;
         private IntPtr unparented_classes;
         private int[]? table_indexes;
-
 #endregion
 
         private byte[] guid;

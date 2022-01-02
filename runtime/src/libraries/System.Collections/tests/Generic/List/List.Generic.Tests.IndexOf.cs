@@ -100,7 +100,6 @@ namespace System.Collections.Tests
                 }
             }
         }
-
         #endregion
 
         #region IndexOf

@@ -49,7 +49,6 @@ namespace System.Runtime.Loader
 
         // Contains the reference to VM's representation of the AssemblyLoadContext
         private readonly IntPtr _nativeAssemblyLoadContext;
-
 #endregion
 
         // synchronization primitive to protect against usage of this instance while unloading
@@ -243,7 +242,6 @@ namespace System.Runtime.Loader
         [method: DynamicDependency(nameof(OnAssemblyResolve))]
 #endif
         internal static event ResolveEventHandler? AssemblyResolve;
-
 #endregion
 
         public static AssemblyLoadContext Default => DefaultAssemblyLoadContext.s_loadContext;

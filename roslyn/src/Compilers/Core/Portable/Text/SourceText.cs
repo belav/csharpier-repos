@@ -921,7 +921,6 @@ namespace Microsoft.CodeAnalysis.Text
 
             return textChanges.ToImmutableArrayOrEmpty();
         }
-
         #endregion
 
         #region Lines
@@ -1128,7 +1127,6 @@ namespace Microsoft.CodeAnalysis.Text
 
             return lineStarts.ToArrayAndFree();
         }
-
         #endregion
 
         /// <summary>

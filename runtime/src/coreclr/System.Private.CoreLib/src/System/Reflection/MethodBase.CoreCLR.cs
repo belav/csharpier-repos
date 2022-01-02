@@ -54,7 +54,6 @@ namespace System.Reflection
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
             return RuntimeMethodInfo.InternalGetCurrentMethod(ref stackMark);
         }
-
         #endregion
 
         #region Internal Members
@@ -68,7 +67,6 @@ namespace System.Reflection
         {
             return GetParameters();
         }
-
         #endregion
 
         #region Internal Methods

@@ -32,7 +32,6 @@ namespace System
         {
             return DecCalc.DecDivMod1E9(ref AsMutable(ref value));
         }
-
         #endregion
 
         /// <summary>
@@ -1329,7 +1328,6 @@ namespace System
                 d1.Low64 = low64;
                 return;
             }
-
 #endregion
 
             /// <summary>

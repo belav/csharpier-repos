@@ -382,7 +382,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Visit(node.Statement);
         }
-
         #endregion
 
         // Top-level block has an enclosing that is not a BinderContext. All others must (so that variables can be declared).

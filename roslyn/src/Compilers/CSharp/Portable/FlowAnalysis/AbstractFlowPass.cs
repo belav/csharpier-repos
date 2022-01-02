@@ -181,7 +181,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// during normal flow analysis, but is needed for DataFlowsOut region analysis.
         /// </summary>
         private readonly Dictionary<BoundLoopStatement, TLocalState> _loopHeadState;
-
         #endregion Region
 
         protected AbstractFlowPass(

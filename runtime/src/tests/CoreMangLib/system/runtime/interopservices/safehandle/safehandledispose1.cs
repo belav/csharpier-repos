@@ -181,7 +181,6 @@ public class SafeHandleDispose1
 
         return retVal;
     }
-
     #endregion
 
     #region Nagetive Test Cases
@@ -213,7 +212,6 @@ public class SafeHandleDispose1
 
         return retVal;
     }
-
     #endregion
     #endregion
 

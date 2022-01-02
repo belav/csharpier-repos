@@ -47,7 +47,6 @@ namespace System
         internal MonoStackFrame[]? foreignExceptionsFrames;
         private IntPtr[]? native_trace_ips;
         private int caught_in_unmanaged;
-
         #endregion
 
         private bool HasBeenThrown => _traceIPs != null;

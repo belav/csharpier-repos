@@ -81,7 +81,6 @@ namespace Newtonsoft.Json.Converters
                 Constructor = constructor;
             }
         }
-
         #endregion
 
         private const string CasePropertyName = "Case";

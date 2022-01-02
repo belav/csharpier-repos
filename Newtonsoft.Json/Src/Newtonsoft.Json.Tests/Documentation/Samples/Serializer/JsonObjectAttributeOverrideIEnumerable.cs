@@ -62,7 +62,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 return GetEnumerator();
             }
         }
-
         #endregion
 
         [Test]

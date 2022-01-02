@@ -1038,7 +1038,6 @@ namespace SerializationTypes
         {
             return _data.Remove(item);
         }
-
         #endregion
 
         #region IEnumerable<string> Members
@@ -1047,7 +1046,6 @@ namespace SerializationTypes
         {
             return _data.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -1151,7 +1149,6 @@ namespace SerializationTypes
             }
         }
     }
-
     #endregion
 
     public class UnspecifiedRootSerializationType
@@ -2483,7 +2480,6 @@ class MyFileStreamReference
         return new MyFileStream(fileStreamName);
     }
 }
-
 #endregion
 
 [DataContract(Name = "TypeWithIntAndStringProperty", Namespace = "")]
@@ -2647,7 +2643,6 @@ namespace Music
         public bool IsValved;
     }
 }
-
 #endregion
 [DataContract]
 public class ObjectContainer
@@ -4078,7 +4073,6 @@ public class ImplementDictionary : IDictionary
     {
         return new ImplementDictionaryEnumerator(this);
     }
-
     #endregion
 
     #region ICollection Members
@@ -4099,7 +4093,6 @@ public class ImplementDictionary : IDictionary
     {
         throw new NotImplementedException();
     }
-
     #endregion
 
     #region IEnumerable Members

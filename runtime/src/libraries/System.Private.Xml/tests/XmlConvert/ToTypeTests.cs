@@ -2610,7 +2610,6 @@ namespace System.Xml.Tests
             };
             return TestValid(array0, array1, "decimal");
         }
-
         #endregion
 
         #region Methods

@@ -31,7 +31,6 @@ namespace System.Speech.Internal.SrgsCompiler
             _be = be;
             _cfgTag = new CfgSemanticTag(be.Symbols, property);
         }
-
         #endregion
 
         #region Internal Methods
@@ -42,14 +41,12 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             return (int)_cfgTag.ArcIndex - (int)tag._cfgTag.ArcIndex;
         }
-
         #endregion
 
         internal void Serialize(StreamMarshaler streamBuffer)
         {
             streamBuffer.WriteStream(_cfgTag);
         }
-
         #endregion
 
         #region Internal Fields

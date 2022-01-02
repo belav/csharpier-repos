@@ -24,7 +24,6 @@ namespace System.Speech.Internal.GrammarBuilding
             Parent = parent;
             return Count;
         }
-
         #endregion
 
         #region Internal Properties
@@ -58,7 +57,6 @@ namespace System.Speech.Internal.GrammarBuilding
         }
 
         internal abstract string DebugSummary { get; }
-
         #endregion
 
         #region Private Fields

@@ -90,7 +90,6 @@ namespace SerializationTestTypes
         {
             return _data.Remove(item);
         }
-
         #endregion
 
         #region IEnumerable<string> Members
@@ -99,7 +98,6 @@ namespace SerializationTestTypes
         {
             return _data.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -162,7 +160,6 @@ namespace SerializationTestTypes
         {
             return _data.Remove(item);
         }
-
         #endregion
 
         #region IEnumerable<string> Members
@@ -171,7 +168,6 @@ namespace SerializationTestTypes
         {
             return _data.GetEnumerator();
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -201,7 +197,6 @@ namespace SerializationTestTypes
             data2 = new SimpleCDC2(true);
         }
     }
-
     #endregion
 
     #region DMs in Collections
@@ -320,7 +315,6 @@ namespace SerializationTestTypes
             }
         }
     }
-
     #endregion
 
     #region DMs in Collection where DMs are of DCs with Ref

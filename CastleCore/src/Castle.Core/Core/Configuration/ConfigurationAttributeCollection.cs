@@ -17,6 +17,7 @@ namespace Castle.Core.Configuration
 #if FEATURE_SERIALIZATION
     using System;
     using System.Runtime.Serialization;
+
 #endif
 
 #if FEATURE_SERIALIZATION

@@ -15,7 +15,6 @@ namespace System.Reflection.Emit
         private Type m_returnType;
         private int m_token;
         private Type[] m_parameterTypes;
-
         #endregion
 
         #region Constructor
@@ -67,7 +66,6 @@ namespace System.Reflection.Emit
                 null
             );
         }
-
         #endregion
 
         #region Internal Members
@@ -86,7 +84,6 @@ namespace System.Reflection.Emit
                 m_parameterTypes
             );
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -99,7 +96,6 @@ namespace System.Reflection.Emit
         public override string Name => m_name;
 
         public override Type? DeclaringType => m_containingType;
-
         #endregion
 
         #region MethodBase Overrides
@@ -120,7 +116,6 @@ namespace System.Reflection.Emit
 
         public override RuntimeMethodHandle MethodHandle =>
             throw new NotSupportedException(SR.NotSupported_SymbolMethod);
-
         #endregion
 
         #region MethodInfo Overrides
@@ -143,7 +138,6 @@ namespace System.Reflection.Emit
         {
             return this;
         }
-
         #endregion
 
         #region ICustomAttributeProvider Implementation
@@ -161,7 +155,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException(SR.NotSupported_SymbolMethod);
         }
-
         #endregion
 
         #region Public Members

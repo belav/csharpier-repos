@@ -42,7 +42,6 @@ namespace System.Reflection
                 return flags;
             }
         }
-
         #endregion
 
         #region Constructor
@@ -65,7 +64,6 @@ namespace System.Reflection
             m_reflectedTypeCache = reflectedTypeCache;
             m_methodAttributes = methodAttributes;
         }
-
         #endregion
 
         #region Private Methods
@@ -79,7 +77,6 @@ namespace System.Reflection
 
         private ParameterInfo FetchReturnParameter() =>
             m_returnParameter ??= RuntimeParameterInfo.GetReturnParameter(this, this, Signature);
-
         #endregion
 
         #region Internal Members
@@ -134,7 +131,6 @@ namespace System.Reflection
 
         internal sealed override int GenericParameterCount =>
             RuntimeMethodHandle.GetGenericParameterCount(this);
-
         #endregion
 
         #region Object Overrides
@@ -216,7 +212,6 @@ namespace System.Reflection
 
             return true;
         }
-
         #endregion
 
         #region ICustomAttributeProvider
@@ -255,7 +250,6 @@ namespace System.Reflection
         {
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -308,7 +302,6 @@ namespace System.Reflection
         public override bool IsSecurityCritical => true;
         public override bool IsSecuritySafeCritical => false;
         public override bool IsSecurityTransparent => false;
-
         #endregion
 
         #region MethodBase Overrides
@@ -351,7 +344,6 @@ namespace System.Reflection
                 mb._methodBase = this;
             return mb;
         }
-
         #endregion
 
         #region Invocation Logic(On MemberBase)
@@ -419,7 +411,6 @@ namespace System.Reflection
                 wrapExceptions
             );
         }
-
         #endregion
 
         #region MethodInfo Overrides
@@ -521,7 +512,6 @@ namespace System.Reflection
 
             return d;
         }
-
         #endregion
 
         #region Generics
@@ -635,7 +625,6 @@ namespace System.Reflection
                 return false;
             }
         }
-
         #endregion
 
         #region Legacy Internal

@@ -1079,7 +1079,6 @@ class Test
 }";
             CompileAndVerify(text, expectedOutput: "12");
         }
-
         #endregion
 
         // The object could be created inside the "using" statement

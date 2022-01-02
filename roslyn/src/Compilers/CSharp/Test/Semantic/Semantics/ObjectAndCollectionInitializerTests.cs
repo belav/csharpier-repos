@@ -337,7 +337,6 @@ class MyList : List<int>
 ";
             CompileAndVerify(source, expectedOutput: "");
         }
-
         #endregion
 
         #region "Collection Initializer"
@@ -968,7 +967,6 @@ IObjectCreationOperation (Constructor: MyList<System.String>..ctor()) (Operation
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #endregion
@@ -3972,7 +3970,6 @@ IObjectCreationOperation (Constructor: B..ctor()) (OperationKind.ObjectCreation,
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         [WorkItem(529787, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]

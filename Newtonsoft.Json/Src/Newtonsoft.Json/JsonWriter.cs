@@ -1594,7 +1594,6 @@ namespace Newtonsoft.Json
                 WriteValue(this, ConvertUtils.GetTypeCode(value.GetType()), value);
             }
         }
-
         #endregion
 
         /// <summary>

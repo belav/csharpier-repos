@@ -399,7 +399,6 @@ namespace System.PrivateUri.Tests
                 _fullBaseUri.GetLeftPart(UriPartial.Authority) + nonCompressable;
             Assert.Equal(expectedResult, resolved.ToString());
         }
-
         #endregion PathCompression
 
         #region MakeRelativeToUri
@@ -493,7 +492,6 @@ namespace System.PrivateUri.Tests
             Assert.Equal(expectedResult, relative.ToString());
             Assert.Equal(compareUri, reassembled);
         }
-
         #endregion MakeRelativeToUri
 
         [Fact]

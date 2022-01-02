@@ -103,7 +103,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Unspecified,
             Sequential
         }
-
         #endregion
 
         #region Validation
@@ -284,7 +283,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             }
         }
-
         #endregion
 
         #region GetEnumerator()
@@ -310,7 +308,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                         iterations++;
             Assert.Equal(count * count * count, iterations);
         }
-
         #endregion
 
         #region Enumerator.MoveNext
@@ -563,7 +560,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             );
         }
-
         #endregion
 
         #region Enumerator.Current
@@ -709,7 +705,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             );
         }
-
         #endregion
 
         #region Enumerator.Reset

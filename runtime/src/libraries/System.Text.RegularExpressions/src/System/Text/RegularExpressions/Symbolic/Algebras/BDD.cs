@@ -522,7 +522,6 @@ namespace System.Text.RegularExpressions.Symbolic
             one_node_shift = ordinal_bits;
             ordinal_shift = 0;
         }
-
         #endregion
 
         /// <summary>

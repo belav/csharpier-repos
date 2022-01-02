@@ -29,7 +29,6 @@ namespace System.Diagnostics
 
         // Unused
         internal string? internalMethodName;
-
         #endregion
 
         internal bool isLastFrameFromForeignException;

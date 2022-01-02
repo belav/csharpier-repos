@@ -360,7 +360,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying 0 ReceivedBytesThreshold");
             VerifyException(0, typeof(ArgumentOutOfRangeException));
         }
-
         #endregion
 
         #region Verification for Test Cases

@@ -125,7 +125,6 @@ namespace System.Reflection.Metadata.Tests
             }
             return -1;
         }
-
         #endregion
 
         [Fact]

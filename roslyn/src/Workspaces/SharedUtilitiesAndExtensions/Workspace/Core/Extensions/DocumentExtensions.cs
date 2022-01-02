@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.SemanticModelReuse;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
+
 #if DEBUG
 using System.Collections.Immutable;
 using System.Diagnostics;

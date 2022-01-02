@@ -372,7 +372,6 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(_hashesOpt != null);
             return _hashesOpt.GetHash(algorithmId);
         }
-
         #endregion
 
         #region ModuleDef helpers
@@ -395,7 +394,6 @@ namespace Microsoft.CodeAnalysis
         {
             return MetadataReader.GetModuleVersionIdOrThrow();
         }
-
         #endregion
 
         #region ModuleRef, File helpers
@@ -495,7 +493,6 @@ namespace Microsoft.CodeAnalysis
         {
             return MetadataReader.GetString(MetadataReader.GetModuleReference(moduleRef).Name);
         }
-
         #endregion
 
         #region AssemblyRef helpers
@@ -513,7 +510,6 @@ namespace Microsoft.CodeAnalysis
                 return _lazyAssemblyReferences;
             }
         }
-
         #endregion
 
         #region PE Header helpers
@@ -522,7 +518,6 @@ namespace Microsoft.CodeAnalysis
         {
             get { return MetadataReader.MetadataVersion; }
         }
-
         #endregion
 
         #region Heaps
@@ -544,7 +539,6 @@ namespace Microsoft.CodeAnalysis
                 attributeTypeName
             );
         }
-
         #endregion
 
         #region AssemblyDef helpers
@@ -554,7 +548,6 @@ namespace Microsoft.CodeAnalysis
         {
             return MetadataReader.ReadAssemblyIdentityOrThrow();
         }
-
         #endregion
 
         #region TypeDef helpers
@@ -3447,7 +3440,6 @@ namespace Microsoft.CodeAnalysis
 
             return TryExtractByteArrayValueFromAttribute(info.Handle, out nullableTransforms);
         }
-
         #endregion
 
         #region TypeSpec helpers
@@ -3463,7 +3455,6 @@ namespace Microsoft.CodeAnalysis
             // TODO: error checking offset in range
             return MetadataReader.GetBlobReader(signature);
         }
-
         #endregion
 
         #region MethodSpec helpers
@@ -3479,7 +3470,6 @@ namespace Microsoft.CodeAnalysis
             method = methodSpec.Method;
             instantiation = methodSpec.Signature;
         }
-
         #endregion
 
         #region GenericParam helpers
@@ -3495,7 +3485,6 @@ namespace Microsoft.CodeAnalysis
             name = MetadataReader.GetString(row.Name);
             flags = row.Attributes;
         }
-
         #endregion
 
         #region MethodDef helpers
@@ -3643,7 +3632,6 @@ namespace Microsoft.CodeAnalysis
                 return null;
             }
         }
-
         #endregion
 
         #region MemberRef helpers
@@ -3691,7 +3679,6 @@ namespace Microsoft.CodeAnalysis
             name = MetadataReader.GetString(row.Name);
             signature = MetadataReader.GetBlobBytes(row.Signature);
         }
-
         #endregion MemberRef helpers
 
         #region ParamDef helpers
@@ -3720,7 +3707,6 @@ namespace Microsoft.CodeAnalysis
         {
             return MetadataReader.GetParameter(param).SequenceNumber;
         }
-
         #endregion
 
         #region PropertyDef helpers
@@ -3748,7 +3734,6 @@ namespace Microsoft.CodeAnalysis
             name = MetadataReader.GetString(property.Name);
             flags = property.Attributes;
         }
-
         #endregion
 
         #region EventDef helpers
@@ -3772,7 +3757,6 @@ namespace Microsoft.CodeAnalysis
             flags = eventRow.Attributes;
             type = eventRow.Type;
         }
-
         #endregion
 
         #region FieldDef helpers
@@ -3845,7 +3829,6 @@ namespace Microsoft.CodeAnalysis
                 return ConstantValue.Bad;
             }
         }
-
         #endregion
 
         #region Attribute Helpers
@@ -3861,7 +3844,6 @@ namespace Microsoft.CodeAnalysis
         {
             return MetadataReader.GetCustomAttribute(handle).Value;
         }
-
         #endregion
 
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>

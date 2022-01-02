@@ -55,7 +55,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             [JsonConverter(typeof(StringEnumConverter))]
             public UserStatus Status { get; set; }
         }
-
         #endregion
 
         [Test]

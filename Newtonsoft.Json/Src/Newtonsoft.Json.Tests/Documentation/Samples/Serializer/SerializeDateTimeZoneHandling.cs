@@ -48,7 +48,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public DateTime DepartureDateLocal { get; set; }
             public TimeSpan Duration { get; set; }
         }
-
         #endregion
 
         [Test]

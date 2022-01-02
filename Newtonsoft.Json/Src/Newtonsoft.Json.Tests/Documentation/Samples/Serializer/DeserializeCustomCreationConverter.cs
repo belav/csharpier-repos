@@ -61,7 +61,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 return new Employee();
             }
         }
-
         #endregion
 
         [Test]

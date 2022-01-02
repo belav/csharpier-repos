@@ -18,7 +18,6 @@ namespace System.IO.Tests
         {
             sourceDir.MoveTo(destDir);
         }
-
         #endregion
 
         #region UniversalTests

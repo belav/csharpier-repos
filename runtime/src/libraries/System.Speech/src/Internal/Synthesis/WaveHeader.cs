@@ -47,7 +47,6 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -59,7 +58,6 @@ namespace System.Speech.Internal.Synthesis
                 _gcHandle.Free();
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -86,7 +84,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return Marshal.SizeOf(_waveHdr); }
         }
-
         #endregion
 
         #region Internal Fields
@@ -129,7 +126,6 @@ namespace System.Speech.Internal.Synthesis
         /// Set in WaveFormat.wFormatTag to specify PCM data.
         /// </summary>
         internal const int WAVE_FORMAT_PCM = 1;
-
         #endregion
 
         #region private Fields

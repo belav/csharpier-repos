@@ -90,7 +90,6 @@ namespace IOperationGenerator
         {
             --_indent;
         }
-
         #endregion
 
         private void WriteFiles()

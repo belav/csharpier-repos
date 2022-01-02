@@ -71,7 +71,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 errorContext.Handled = true;
             }
         }
-
         #endregion
 
         [Test]

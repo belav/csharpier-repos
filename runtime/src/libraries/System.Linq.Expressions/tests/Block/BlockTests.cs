@@ -143,7 +143,6 @@ namespace System.Linq.Expressions.Tests
                 );
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -161,7 +160,6 @@ namespace System.Linq.Expressions.Tests
             Func<object> c = f.Compile(useInterpreter);
             Assert.Equal(o, c());
         }
-
         #endregion
 
         private class ParameterChangingVisitor : ExpressionVisitor

@@ -1162,7 +1162,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 : null;
             return false;
         }
-
         #endregion
 
         internal virtual bool SupportsExtensionMethods

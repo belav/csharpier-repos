@@ -32,7 +32,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestGreen(input, output, rewriter, isExpr: true);
         }
-
         #endregion Green Tree / SeparatedSyntaxList
 
         #region Green Tree / SyntaxList
@@ -48,7 +47,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestGreen(input, output, rewriter, isExpr: false);
         }
-
         #endregion Green Tree / SyntaxList
 
         #region Red Tree / SeparatedSyntaxList
@@ -116,7 +114,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.NotNull(caught);
             Assert.True(caught is InvalidOperationException);
         }
-
         #endregion Red Tree / SeparatedSyntaxList
 
         #region Red Tree / SyntaxTokenList
@@ -172,7 +169,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestRed(input, output, rewriter, isExpr: false);
         }
-
         #endregion Red Tree / SyntaxTokenList
 
         #region Red Tree / SyntaxNodeOrTokenList
@@ -224,7 +220,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestRed(input, output, rewriter, isExpr: false);
         }
-
         #endregion Red Tree / SyntaxTriviaList
 
         #region Red Tree / SyntaxList
@@ -273,7 +268,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestRed(input, output, rewriter, isExpr: false);
         }
-
         #endregion Red Tree / SyntaxList
 
         #region Misc
@@ -798,7 +792,6 @@ class C { }
                 return null;
             }
         }
-
         #endregion Misc
 
         #region Helper Methods
@@ -836,7 +829,6 @@ class C { }
             Assert.Equal(input == output, ReferenceEquals(red, result));
             Assert.Equal(output, result.ToFullString());
         }
-
         #endregion Helper Methods
 
         #region Helper Types
