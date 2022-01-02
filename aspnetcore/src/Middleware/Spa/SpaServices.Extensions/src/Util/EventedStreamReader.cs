@@ -31,7 +31,12 @@ internal class EventedStreamReader
     {
         _streamReader = streamReader ?? throw new ArgumentNullException(nameof(streamReader));
         _linesBuffer = new StringBuilder();
-        Task.Factory.StartNew(Run, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+        Task.Factory.StartNew(
+            Run,
+            CancellationToken.None,
+            TaskCreationOptions.DenyChildAttach,
+            TaskScheduler.Default
+        );
     }
 
     public Task<Match> WaitForMatch(Regex regex)
@@ -99,7 +104,10 @@ internal class EventedStreamReader
             int startPos = 0;
 
             // get all the newlines
-            while ((lineBreakPos = Array.IndexOf(buf, '\n', startPos, chunkLength - startPos)) >= 0 && startPos < chunkLength)
+            while (
+                (lineBreakPos = Array.IndexOf(buf, '\n', startPos, chunkLength - startPos)) >= 0
+                && startPos < chunkLength
+            )
             {
                 var length = (lineBreakPos + 1) - startPos;
                 _linesBuffer.Append(buf, startPos, length);

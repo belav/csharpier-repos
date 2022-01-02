@@ -22,15 +22,23 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
     /// for a type based on the fields/properties of that type. Both of those are handled by other 
     /// services.
     /// </summary>
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.GenerateDefaultConstructors), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.GenerateDefaultConstructors
+        ),
+        Shared
+    ]
     internal class GenerateDefaultConstructorsCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateDefaultConstructorsCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateDefaultConstructorsCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -44,9 +52,16 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             if (document.Project.Solution.Workspace.Kind == WorkspaceKind.MiscellaneousFiles)
                 return;
 
-            var service = document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
-            var actions = await service.GenerateDefaultConstructorsAsync(
-                document, textSpan, forRefactoring: true, cancellationToken).ConfigureAwait(false);
+            var service =
+                document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
+            var actions = await service
+                .GenerateDefaultConstructorsAsync(
+                    document,
+                    textSpan,
+                    forRefactoring: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }
     }

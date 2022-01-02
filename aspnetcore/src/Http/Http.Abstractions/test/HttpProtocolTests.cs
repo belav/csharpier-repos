@@ -104,13 +104,13 @@ public class HttpProtocolTests
     }
 
     public static TheoryData<Version, string> s_ValidData = new TheoryData<Version, string>
-        {
-            { new Version(3, 0), "HTTP/3" },
-            { new Version(2, 0), "HTTP/2" },
-            { new Version(1, 1), "HTTP/1.1" },
-            { new Version(1, 0), "HTTP/1.0" },
-            { new Version(0, 9), "HTTP/0.9" }
-        };
+    {
+        { new Version(3, 0), "HTTP/3" },
+        { new Version(2, 0), "HTTP/2" },
+        { new Version(1, 1), "HTTP/1.1" },
+        { new Version(1, 0), "HTTP/1.0" },
+        { new Version(0, 9), "HTTP/0.9" }
+    };
 
     [Theory]
     [MemberData(nameof(s_ValidData))]
@@ -122,10 +122,10 @@ public class HttpProtocolTests
     }
 
     public static TheoryData<Version> s_InvalidData = new TheoryData<Version>
-        {
-            { new Version(0, 3) },
-            { new Version(2, 1) }
-        };
+    {
+        { new Version(0, 3) },
+        { new Version(2, 1) }
+    };
 
     [Theory]
     [MemberData(nameof(s_InvalidData))]

@@ -15,27 +15,27 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class InvalidProgramException : SystemException
     {
-        public InvalidProgramException()
-            : base(SR.InvalidProgram_Default)
+        public InvalidProgramException() : base(SR.InvalidProgram_Default)
         {
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }
 
-        public InvalidProgramException(string? message)
-            : base(message)
+        public InvalidProgramException(string? message) : base(message)
         {
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }
 
-        public InvalidProgramException(string? message, Exception? inner)
-            : base(message, inner)
+        public InvalidProgramException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }
 
-        private InvalidProgramException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        private InvalidProgramException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

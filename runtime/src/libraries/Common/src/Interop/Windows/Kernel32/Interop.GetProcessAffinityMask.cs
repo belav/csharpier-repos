@@ -10,6 +10,10 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [GeneratedDllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial bool GetProcessAffinityMask(SafeProcessHandle handle, out IntPtr processMask, out IntPtr systemMask);
+        internal static partial bool GetProcessAffinityMask(
+            SafeProcessHandle handle,
+            out IntPtr processMask,
+            out IntPtr systemMask
+        );
     }
 }

@@ -17,10 +17,8 @@ public class HeadModificationTest : ServerTestBase<ToggleExecutionModeServerFixt
     public HeadModificationTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -94,7 +92,10 @@ public class HeadModificationTest : ServerTestBase<ToggleExecutionModeServerFixt
 
         void AssertDescriptionEquals(string description)
         {
-            Browser.Equal(description, () => Browser.FindElement(By.Id("meta-description")).GetAttribute("content"));
+            Browser.Equal(
+                description,
+                () => Browser.FindElement(By.Id("meta-description")).GetAttribute("content")
+            );
         }
     }
 

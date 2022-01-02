@@ -6,6 +6,7 @@ using System;
 public sealed class TestException : Exception
 {
     private int counter;
+
     public TestException(int counter, string format, params object[] args)
         : base(String.Format(format, args))
     {
@@ -40,10 +41,18 @@ public static class Test_nullabletypes
         if (!expr)
             throw new TestException(counter, "Expected true, got false");
     }
+
     public static void Eval(object obj1, object obj2)
     {
         counter++;
-        if (!((obj1 != null) && (obj2 != null) && (obj1.GetType().Equals(obj2.GetType())) && obj1.Equals(obj2)))
+        if (
+            !(
+                (obj1 != null)
+                && (obj2 != null)
+                && (obj1.GetType().Equals(obj2.GetType()))
+                && obj1.Equals(obj2)
+            )
+        )
             throw new TestException(counter, "Failure while Comparing {1} to {2}", obj1, obj2);
     }
 

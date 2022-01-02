@@ -16,20 +16,24 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Persistence
 {
-    [ExportWorkspaceService(typeof(ITemporaryStorageService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(ITemporaryStorageService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class TestTemporaryStorageService : ITemporaryStorageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestTemporaryStorageService()
-        {
-        }
+        public TestTemporaryStorageService() { }
 
-        public ITemporaryStreamStorage CreateTemporaryStreamStorage(CancellationToken cancellationToken = default)
-            => new StreamStorage();
+        public ITemporaryStreamStorage CreateTemporaryStreamStorage(
+            CancellationToken cancellationToken = default
+        ) => new StreamStorage();
 
-        public ITemporaryTextStorage CreateTemporaryTextStorage(CancellationToken cancellationToken = default)
-            => new TextStorage();
+        public ITemporaryTextStorage CreateTemporaryTextStorage(
+            CancellationToken cancellationToken = default
+        ) => new TextStorage();
 
         internal class StreamStorage : ITemporaryStreamStorage
         {
@@ -73,7 +77,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
                 _stream = newStream;
             }
 
-            public async Task WriteStreamAsync(Stream stream, CancellationToken cancellationToken = default)
+            public async Task WriteStreamAsync(
+                Stream stream,
+                CancellationToken cancellationToken = default
+            )
             {
                 var newStream = new MemoryStream();
                 await stream.CopyToAsync(newStream).ConfigureAwait(false);
@@ -95,11 +102,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
                 s_DisposalCount++;
             }
 
-            public SourceText ReadText(CancellationToken cancellationToken = default)
-                => SourceText.From(_text, _encoding);
+            public SourceText ReadText(CancellationToken cancellationToken = default) =>
+                SourceText.From(_text, _encoding);
 
-            public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken = default)
-                => Task.FromResult(ReadText(cancellationToken));
+            public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken = default) =>
+                Task.FromResult(ReadText(cancellationToken));
 
             public void WriteText(SourceText text, CancellationToken cancellationToken = default)
             {
@@ -107,7 +114,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Persistence
                 _encoding = text.Encoding;
             }
 
-            public Task WriteTextAsync(SourceText text, CancellationToken cancellationToken = default)
+            public Task WriteTextAsync(
+                SourceText text,
+                CancellationToken cancellationToken = default
+            )
             {
                 WriteText(text, cancellationToken);
                 return Task.CompletedTask;

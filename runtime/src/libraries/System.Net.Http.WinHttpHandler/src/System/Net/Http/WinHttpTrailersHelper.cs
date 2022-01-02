@@ -15,6 +15,7 @@ namespace System.Net.Http
         // Trailer property name was chosen to be descriptive and be unlikely to collide with a user set property.
         // Apps and libraries will use this key so it shouldn't change.
         private const string RequestMessagePropertyName = "__ResponseTrailers";
+
         private sealed class HttpResponseTrailers : HttpHeaders
         {
         }
@@ -39,18 +40,29 @@ namespace System.Net.Http
         private static bool GetTrailersSupported()
         {
             using SafeWinHttpHandle sessionHandle = Interop.WinHttp.WinHttpOpen(
-                    IntPtr.Zero,
-                    Interop.WinHttp.WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
-                    Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
-                    Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
-                    (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC);
+                IntPtr.Zero,
+                Interop.WinHttp.WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
+                Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
+                Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
+                (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
+            );
 
-            if (sessionHandle.IsInvalid) return false;
+            if (sessionHandle.IsInvalid)
+                return false;
             uint buffer = 0;
             uint bufferSize = sizeof(uint);
-            if (Interop.WinHttp.WinHttpQueryOption(sessionHandle, Interop.WinHttp.WINHTTP_OPTION_STREAM_ERROR_CODE, ref buffer, ref bufferSize))
+            if (
+                Interop.WinHttp.WinHttpQueryOption(
+                    sessionHandle,
+                    Interop.WinHttp.WINHTTP_OPTION_STREAM_ERROR_CODE,
+                    ref buffer,
+                    ref bufferSize
+                )
+            )
             {
-                Debug.Fail("Querying WINHTTP_OPTION_STREAM_ERROR_CODE on a session handle should never succeed.");
+                Debug.Fail(
+                    "Querying WINHTTP_OPTION_STREAM_ERROR_CODE on a session handle should never succeed."
+                );
                 return false;
             }
 

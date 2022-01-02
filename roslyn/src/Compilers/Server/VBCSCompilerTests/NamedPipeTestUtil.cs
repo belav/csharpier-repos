@@ -10,6 +10,7 @@ using System.IO.Pipes;
 using System.Reflection;
 using System.Net.Sockets;
 using Roslyn.Test.Utilities;
+
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
     /// <summary>
@@ -25,8 +26,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         private static IDictionary GetSharedServersDictionary()
         {
             var sharedServerFullName = typeof(NamedPipeServerStream).FullName + "+SharedServer";
-            var sharedServerType = typeof(NamedPipeServerStream).Assembly.GetType(sharedServerFullName);
-            var serversField = sharedServerType?.GetField("s_servers", BindingFlags.NonPublic | BindingFlags.Static);
+            var sharedServerType = typeof(NamedPipeServerStream).Assembly.GetType(
+                sharedServerFullName
+            );
+            var serversField = sharedServerType?.GetField(
+                "s_servers",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             var servers = (IDictionary?)serversField?.GetValue(null);
             if (servers is null)
             {
@@ -38,7 +44,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
         private static Socket GetSocket(object sharedServer)
         {
-            var listeningSocketProperty = sharedServer!.GetType()?.GetProperty("ListeningSocket", BindingFlags.NonPublic | BindingFlags.Instance);
+            var listeningSocketProperty = sharedServer!.GetType()?.GetProperty(
+                "ListeningSocket",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             var socket = (Socket?)listeningSocketProperty?.GetValue(sharedServer, null);
             if (socket is null)
             {
@@ -70,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             }
         }
 
-        internal static bool IsPipeFullyClosed(string pipeName) => GetSocketForPipeName(pipeName) is null;
+        internal static bool IsPipeFullyClosed(string pipeName) =>
+            GetSocketForPipeName(pipeName) is null;
 
         internal static void DisposeAll()
         {

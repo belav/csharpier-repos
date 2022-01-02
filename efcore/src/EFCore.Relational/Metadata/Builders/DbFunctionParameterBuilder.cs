@@ -29,7 +29,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Builder = ((DbFunctionParameter)parameter).Builder!;
         }
 
-        private InternalDbFunctionParameterBuilder Builder { [DebuggerStepThrough] get; }
+        private InternalDbFunctionParameterBuilder Builder
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <inheritdoc />
         IConventionDbFunctionParameterBuilder IInfrastructure<IConventionDbFunctionParameterBuilder>.Instance
@@ -41,8 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     The function parameter metadata that is being built.
         /// </summary>
-        public virtual IMutableDbFunctionParameter Metadata
-            => Builder.Metadata;
+        public virtual IMutableDbFunctionParameter Metadata => Builder.Metadata;
 
         /// <summary>
         ///     Sets the store type of the function parameter in the database.
@@ -67,7 +70,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </remarks>
         /// <param name="propagatesNullability">Value which indicates whether parameter propagates nullability.</param>
         /// <returns>The same builder instance so that further configuration calls can be chained.</returns>
-        public virtual DbFunctionParameterBuilder PropagatesNullability(bool propagatesNullability = true)
+        public virtual DbFunctionParameterBuilder PropagatesNullability(
+            bool propagatesNullability = true
+        )
         {
             Builder.PropagatesNullability(propagatesNullability, ConfigurationSource.Explicit);
 
@@ -81,8 +86,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -91,8 +95,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -100,8 +103,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         #endregion
     }

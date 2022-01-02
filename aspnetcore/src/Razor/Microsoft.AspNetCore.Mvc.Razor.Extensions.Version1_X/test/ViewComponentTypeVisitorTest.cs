@@ -11,14 +11,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 public class ViewComponentTypeVisitorTest
 {
-    private static readonly Assembly _assembly = typeof(ViewComponentTypeVisitorTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _assembly =
+        typeof(ViewComponentTypeVisitorTest).GetTypeInfo().Assembly;
 
     private static Compilation Compilation { get; } = TestCompilation.Create(_assembly);
 
     // In practice MVC will provide a marker attribute for ViewComponents. To prevent a circular reference between MVC and Razor
     // we can use a test class as a marker.
-    private static INamedTypeSymbol TestViewComponentAttributeSymbol { get; } = Compilation.GetTypeByMetadataName(typeof(TestViewComponentAttribute).FullName);
-    private static INamedTypeSymbol TestNonViewComponentAttributeSymbol { get; } = Compilation.GetTypeByMetadataName(typeof(TestNonViewComponentAttribute).FullName);
+    private static INamedTypeSymbol TestViewComponentAttributeSymbol { get; } =
+        Compilation.GetTypeByMetadataName(typeof(TestViewComponentAttribute).FullName);
+    private static INamedTypeSymbol TestNonViewComponentAttributeSymbol { get; } =
+        Compilation.GetTypeByMetadataName(typeof(TestNonViewComponentAttribute).FullName);
 
     [Fact]
     public void IsViewComponent_PlainViewComponent_ReturnsTrue()
@@ -27,8 +30,11 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
-        var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Valid_PlainViewComponent).FullName);
+            new List<INamedTypeSymbol>()
+        );
+        var tagHelperSymbol = Compilation.GetTypeByMetadataName(
+            typeof(Valid_PlainViewComponent).FullName
+        );
 
         // Act
         var isViewComponent = testVisitor.IsViewComponent(tagHelperSymbol);
@@ -44,7 +50,8 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
+            new List<INamedTypeSymbol>()
+        );
         var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Valid_DecoratedVC).FullName);
 
         // Act
@@ -61,7 +68,8 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
+            new List<INamedTypeSymbol>()
+        );
         var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Valid_InheritedVC).FullName);
 
         // Act
@@ -78,8 +86,11 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
-        var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Invalid_AbstractViewComponent).FullName);
+            new List<INamedTypeSymbol>()
+        );
+        var tagHelperSymbol = Compilation.GetTypeByMetadataName(
+            typeof(Invalid_AbstractViewComponent).FullName
+        );
 
         // Act
         var isViewComponent = testVisitor.IsViewComponent(tagHelperSymbol);
@@ -95,8 +106,11 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
-        var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Invalid_GenericViewComponent<>).FullName);
+            new List<INamedTypeSymbol>()
+        );
+        var tagHelperSymbol = Compilation.GetTypeByMetadataName(
+            typeof(Invalid_GenericViewComponent<>).FullName
+        );
 
         // Act
         var isViewComponent = testVisitor.IsViewComponent(tagHelperSymbol);
@@ -112,8 +126,11 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
-        var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Invalid_InternalViewComponent).FullName);
+            new List<INamedTypeSymbol>()
+        );
+        var tagHelperSymbol = Compilation.GetTypeByMetadataName(
+            typeof(Invalid_InternalViewComponent).FullName
+        );
 
         // Act
         var isViewComponent = testVisitor.IsViewComponent(tagHelperSymbol);
@@ -129,8 +146,11 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
-        var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Invalid_DecoratedViewComponent).FullName);
+            new List<INamedTypeSymbol>()
+        );
+        var tagHelperSymbol = Compilation.GetTypeByMetadataName(
+            typeof(Invalid_DecoratedViewComponent).FullName
+        );
 
         // Act
         var isViewComponent = testVisitor.IsViewComponent(tagHelperSymbol);
@@ -146,8 +166,11 @@ public class ViewComponentTypeVisitorTest
         var testVisitor = new ViewComponentTypeVisitor(
             TestViewComponentAttributeSymbol,
             TestNonViewComponentAttributeSymbol,
-            new List<INamedTypeSymbol>());
-        var tagHelperSymbol = Compilation.GetTypeByMetadataName(typeof(Invalid_InheritedViewComponent).FullName);
+            new List<INamedTypeSymbol>()
+        );
+        var tagHelperSymbol = Compilation.GetTypeByMetadataName(
+            typeof(Invalid_InheritedViewComponent).FullName
+        );
 
         // Act
         var isViewComponent = testVisitor.IsViewComponent(tagHelperSymbol);

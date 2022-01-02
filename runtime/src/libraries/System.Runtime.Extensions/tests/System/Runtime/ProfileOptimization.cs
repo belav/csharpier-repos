@@ -18,19 +18,24 @@ namespace System.Runtime.Tests
         {
             string profileFile = GetTestFileName();
 
-            RemoteExecutor.Invoke((_profileFile, _stopProfile) =>
-            {
-                // Perform the test work
-                ProfileOptimization.SetProfileRoot(Path.GetDirectoryName(_profileFile));
-                ProfileOptimization.StartProfile(Path.GetFileName(_profileFile));
+            RemoteExecutor
+                .Invoke(
+                    (_profileFile, _stopProfile) =>
+                    {
+                        // Perform the test work
+                        ProfileOptimization.SetProfileRoot(Path.GetDirectoryName(_profileFile));
+                        ProfileOptimization.StartProfile(Path.GetFileName(_profileFile));
 
-                if (bool.Parse(_stopProfile))
-                {
-                    ProfileOptimization.StartProfile(null);
-                    CheckProfileFileExists(_profileFile);
-                }
-
-            }, profileFile, stopProfile.ToString()).Dispose();
+                        if (bool.Parse(_stopProfile))
+                        {
+                            ProfileOptimization.StartProfile(null);
+                            CheckProfileFileExists(_profileFile);
+                        }
+                    },
+                    profileFile,
+                    stopProfile.ToString()
+                )
+                .Dispose();
 
             CheckProfileFileExists(profileFile);
         }
@@ -47,7 +52,10 @@ namespace System.Runtime.Tests
             Assert.True(File.Exists(profileFile), $"'{profileFile}' does not exist");
             Assert.True(new FileInfo(profileFile).Length > 0, $"'{profileFile}' is empty");
 
-            Assert.True(existed, $"'{profileFile}' did not immediately exist, but did exist 5 seconds later");
+            Assert.True(
+                existed,
+                $"'{profileFile}' did not immediately exist, but did exist 5 seconds later"
+            );
         }
     }
 }

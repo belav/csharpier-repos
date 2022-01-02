@@ -22,7 +22,11 @@ public class ShortCircuitAtPageFilterPageModel : PageModel
     private static bool ShouldShortCircuit(HttpContext httpContext, string currentTargetName)
     {
         return httpContext.Request.Query.TryGetValue("target", out var expectedTargetName)
-            && string.Equals(expectedTargetName, currentTargetName, StringComparison.OrdinalIgnoreCase);
+            && string.Equals(
+                expectedTargetName,
+                currentTargetName,
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     private class AsyncTestPageFilterAttribute : Attribute, IAsyncPageFilter
@@ -34,7 +38,8 @@ public class ShortCircuitAtPageFilterPageModel : PageModel
 
         public Task OnPageHandlerExecutionAsync(
             PageHandlerExecutingContext context,
-            PageHandlerExecutionDelegate next)
+            PageHandlerExecutionDelegate next
+        )
         {
             if (ShouldShortCircuit(context.HttpContext, nameof(OnPageHandlerExecutionAsync)))
             {
@@ -47,9 +52,7 @@ public class ShortCircuitAtPageFilterPageModel : PageModel
 
     private class SyncTestPageFilterAttribute : Attribute, IPageFilter
     {
-        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
-        {
-        }
+        public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
 
         public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
@@ -59,8 +62,6 @@ public class ShortCircuitAtPageFilterPageModel : PageModel
             }
         }
 
-        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-        {
-        }
+        public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
     }
 }

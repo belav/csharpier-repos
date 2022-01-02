@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             private Workspace? _workspace;
 
-            // The latest data about the document being classified that we've cached.  objects can 
-            // be accessed from both threads, and must be obtained when this lock is held. 
+            // The latest data about the document being classified that we've cached.  objects can
+            // be accessed from both threads, and must be obtained when this lock is held.
             //
             // _lastProcessedData.lastRoot is optional and is held onto for languages that support syntax.
             // it allows computing the root, and changed-spans, in the background so that we can
@@ -81,8 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 ITextBuffer2 subjectBuffer,
                 IAsynchronousOperationListener asyncListener,
                 IClassificationTypeMap typeMap,
-                TimeSpan diffTimeout)
-                : base(taggerProvider.ThreadingContext, assertIsForeground: false)
+                TimeSpan diffTimeout
+            ) : base(taggerProvider.ThreadingContext, assertIsForeground: false)
             {
                 _taggerProvider = taggerProvider;
                 _subjectBuffer = subjectBuffer;
@@ -94,11 +94,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     ProcessChangesAsync,
                     equalityComparer: null,
                     asyncListener,
-                    _disposalCancellationSource.Token);
+                    _disposalCancellationSource.Token
+                );
 
                 _lastLineCache = new LastLineCache(taggerProvider.ThreadingContext);
 
-                _workspaceRegistration = Workspace.GetWorkspaceRegistration(subjectBuffer.AsTextContainer());
+                _workspaceRegistration = Workspace.GetWorkspaceRegistration(
+                    subjectBuffer.AsTextContainer()
+                );
                 _workspaceRegistration.WorkspaceChanged += OnWorkspaceRegistrationChanged;
 
                 if (_workspaceRegistration.Workspace != null)
@@ -109,8 +112,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             public event EventHandler<SnapshotSpanEventArgs>? TagsChanged;
 
-            private IClassificationService? TryGetClassificationService(ITextSnapshot snapshot)
-                => _workspace?.Services.GetLanguageServices(snapshot.ContentType)?.GetService<IClassificationService>();
+            private IClassificationService? TryGetClassificationService(ITextSnapshot snapshot) =>
+                _workspace?.Services.GetLanguageServices(
+                    snapshot.ContentType
+                )?.GetService<IClassificationService>();
 
             #region Workspace Hookup
 
@@ -125,7 +130,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             {
                 try
                 {
-                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(_disposalCancellationSource.Token);
+                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        _disposalCancellationSource.Token
+                    );
 
                     // We both try to connect synchronously, and register for workspace registration events.
                     // It's possible (particularly in tests), to connect in the startup path, but then get a
@@ -219,13 +226,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 _workQueue.AddWork(args.After);
             }
 
-            private void OnDocumentActiveContextChanged(object? sender, DocumentActiveContextChangedEventArgs args)
+            private void OnDocumentActiveContextChanged(
+                object? sender,
+                DocumentActiveContextChangedEventArgs args
+            )
             {
                 if (_workspace == null)
                     return;
 
                 var documentId = args.NewActiveContextDocumentId;
-                var bufferDocumentId = _workspace.GetDocumentIdInCurrentContext(_subjectBuffer.AsTextContainer());
+                var bufferDocumentId = _workspace.GetDocumentIdInCurrentContext(
+                    _subjectBuffer.AsTextContainer()
+                );
                 if (bufferDocumentId != documentId)
                     return;
 
@@ -243,7 +255,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 if (args.Kind != WorkspaceChangeKind.ProjectChanged)
                     return;
 
-                var documentId = _workspace.GetDocumentIdInCurrentContext(_subjectBuffer.AsTextContainer());
+                var documentId = _workspace.GetDocumentIdInCurrentContext(
+                    _subjectBuffer.AsTextContainer()
+                );
                 if (args.ProjectId != documentId?.ProjectId)
                     return;
 
@@ -265,7 +279,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             /// the editor.  Calls to <see cref="ProcessChangesAsync"/> are serialized by <see cref="AsyncBatchingWorkQueue{TItem}"/>
             /// so we don't need to worry about multiple calls to this happening concurrently.
             /// </summary>
-            private async ValueTask ProcessChangesAsync(ImmutableArray<ITextSnapshot> snapshots, CancellationToken cancellationToken)
+            private async ValueTask ProcessChangesAsync(
+                ImmutableArray<ITextSnapshot> snapshots,
+                CancellationToken cancellationToken
+            )
             {
                 // We have potentially heard about several changes to the subject buffer.  However
                 // we only need to process the latest once.
@@ -286,7 +303,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 // once GetTags is called.  Also, attempt to determine a smallwe change range span
                 // for this document so that we can avoid reporting the entire document as changed.
 
-                var currentRoot = await currentDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var currentRoot = await currentDocument
+                    .GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var changedSpan = await ComputeChangedSpanAsync().ConfigureAwait(false);
 
                 lock (_gate)
@@ -317,19 +336,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 {
                     var changeRange = await ComputeChangedRangeAsync().ConfigureAwait(false);
                     return changeRange != null
-                        ? currentSnapshot.GetSpan(changeRange.Value.Span.Start, changeRange.Value.NewLength)
-                        : currentSnapshot.GetFullSpan();
+                      ? currentSnapshot.GetSpan(
+                            changeRange.Value.Span.Start,
+                            changeRange.Value.NewLength
+                        )
+                      : currentSnapshot.GetFullSpan();
                 }
 
                 ValueTask<TextChangeRange?> ComputeChangedRangeAsync()
                 {
                     // If we have syntax available fast path the change computation without async or blocking.
                     if (previousRoot != null && currentRoot != null)
-                        return new(classificationService.ComputeSyntacticChangeRange(currentDocument.Project.Solution.Workspace, previousRoot, currentRoot, _diffTimeout, cancellationToken));
+                        return new(
+                            classificationService.ComputeSyntacticChangeRange(
+                                currentDocument.Project.Solution.Workspace,
+                                previousRoot,
+                                currentRoot,
+                                _diffTimeout,
+                                cancellationToken
+                            )
+                        );
 
                     // Otherwise, fall back to the language to compute the difference based on the document contents.
                     if (previousDocument != null)
-                        return classificationService.ComputeSyntacticChangeRangeAsync(previousDocument, currentDocument, _diffTimeout, cancellationToken);
+                        return classificationService.ComputeSyntacticChangeRangeAsync(
+                            previousDocument,
+                            currentDocument,
+                            _diffTimeout,
+                            cancellationToken
+                        );
 
                     return new ValueTask<TextChangeRange?>();
                 }
@@ -341,17 +376,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     return _lastProcessedData;
             }
 
-            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(NormalizedSnapshotSpanCollection spans)
+            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            )
             {
                 this.AssertIsForeground();
 
-                using (Logger.LogBlock(FunctionId.Tagger_SyntacticClassification_TagComputer_GetTags, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Tagger_SyntacticClassification_TagComputer_GetTags,
+                        CancellationToken.None
+                    )
+                )
                 {
-                    return GetTagsWorker(spans) ?? SpecializedCollections.EmptyEnumerable<ITagSpan<IClassificationTag>>();
+                    return GetTagsWorker(spans)
+                        ?? SpecializedCollections.EmptyEnumerable<ITagSpan<IClassificationTag>>();
                 }
             }
 
-            private IEnumerable<ITagSpan<IClassificationTag>>? GetTagsWorker(NormalizedSnapshotSpanCollection spans)
+            private IEnumerable<ITagSpan<IClassificationTag>>? GetTagsWorker(
+                NormalizedSnapshotSpanCollection spans
+            )
             {
                 this.AssertIsForeground();
                 if (spans.Count == 0 || _workspace == null)
@@ -375,7 +420,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     this.AssertIsForeground();
 
                     // First, get the tree and snapshot that we'll be operating over.
-                    var (lastProcessedSnapshot, lastProcessedDocument, lastProcessedRoot) = GetLastProcessedData();
+                    var (lastProcessedSnapshot, lastProcessedDocument, lastProcessedRoot) =
+                        GetLastProcessedData();
 
                     if (lastProcessedDocument == null)
                     {
@@ -391,29 +437,57 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     // If it is for an older version, then classify that older version and translate
                     // the classifications forward.  Otherwise, just classify normally.
 
-                    if (lastProcessedSnapshot.Version.ReiteratedVersionNumber != span.Snapshot.Version.ReiteratedVersionNumber)
+                    if (
+                        lastProcessedSnapshot.Version.ReiteratedVersionNumber
+                        != span.Snapshot.Version.ReiteratedVersionNumber
+                    )
                     {
                         // Slightly more complicated.  We have a parse tree, it's just not for the snapshot we're being asked for.
-                        AddClassifiedSpansForPreviousDocument(classificationService, span, lastProcessedSnapshot, lastProcessedDocument, lastProcessedRoot, classifiedSpans);
+                        AddClassifiedSpansForPreviousDocument(
+                            classificationService,
+                            span,
+                            lastProcessedSnapshot,
+                            lastProcessedDocument,
+                            lastProcessedRoot,
+                            classifiedSpans
+                        );
                         return;
                     }
 
                     // Mainline case.  We have the corresponding document for the snapshot we're classifying.
-                    AddSyntacticClassificationsForDocument(classificationService, span, lastProcessedDocument, lastProcessedRoot, classifiedSpans);
+                    AddSyntacticClassificationsForDocument(
+                        classificationService,
+                        span,
+                        lastProcessedDocument,
+                        lastProcessedRoot,
+                        classifiedSpans
+                    );
                 }
             }
 
-            private void AddLexicalClassifications(IClassificationService classificationService, SnapshotSpan span, ArrayBuilder<ClassifiedSpan> classifiedSpans)
+            private void AddLexicalClassifications(
+                IClassificationService classificationService,
+                SnapshotSpan span,
+                ArrayBuilder<ClassifiedSpan> classifiedSpans
+            )
             {
                 this.AssertIsForeground();
 
                 classificationService.AddLexicalClassifications(
-                    span.Snapshot.AsText(), span.Span.ToTextSpan(), classifiedSpans, CancellationToken.None);
+                    span.Snapshot.AsText(),
+                    span.Span.ToTextSpan(),
+                    classifiedSpans,
+                    CancellationToken.None
+                );
             }
 
             private void AddSyntacticClassificationsForDocument(
-                IClassificationService classificationService, SnapshotSpan span,
-                Document document, SyntaxNode? root, ArrayBuilder<ClassifiedSpan> classifiedSpans)
+                IClassificationService classificationService,
+                SnapshotSpan span,
+                Document document,
+                SyntaxNode? root,
+                ArrayBuilder<ClassifiedSpan> classifiedSpans
+            )
             {
                 this.AssertIsForeground();
                 var cancellationToken = CancellationToken.None;
@@ -425,18 +499,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
                 // If we have a syntax root ready, use the direct, non-async/non-blocking approach to getting classifications.
                 if (root == null)
-                    classificationService.AddSyntacticClassificationsAsync(document, span.Span.ToTextSpan(), tempList, cancellationToken).Wait(cancellationToken);
+                    classificationService
+                        .AddSyntacticClassificationsAsync(
+                            document,
+                            span.Span.ToTextSpan(),
+                            tempList,
+                            cancellationToken
+                        )
+                        .Wait(cancellationToken);
                 else
-                    classificationService.AddSyntacticClassifications(document.Project.Solution.Workspace, root, span.Span.ToTextSpan(), tempList, cancellationToken);
+                    classificationService.AddSyntacticClassifications(
+                        document.Project.Solution.Workspace,
+                        root,
+                        span.Span.ToTextSpan(),
+                        tempList,
+                        cancellationToken
+                    );
 
                 _lastLineCache.Update(span, tempList);
                 classifiedSpans.AddRange(tempList);
             }
 
             private void AddClassifiedSpansForPreviousDocument(
-                IClassificationService classificationService, SnapshotSpan span,
-                ITextSnapshot lastProcessedSnapshot, Document lastProcessedDocument, SyntaxNode? lastProcessedRoot,
-                ArrayBuilder<ClassifiedSpan> classifiedSpans)
+                IClassificationService classificationService,
+                SnapshotSpan span,
+                ITextSnapshot lastProcessedSnapshot,
+                Document lastProcessedDocument,
+                SyntaxNode? lastProcessedRoot,
+                ArrayBuilder<ClassifiedSpan> classifiedSpans
+            )
             {
                 this.AssertIsForeground();
 
@@ -450,7 +541,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
                 // 1) translate the requested span onto the right span for the snapshot that corresponds
                 //    to the syntax tree.
-                var translatedSpan = span.TranslateTo(lastProcessedSnapshot, SpanTrackingMode.EdgeExclusive);
+                var translatedSpan = span.TranslateTo(
+                    lastProcessedSnapshot,
+                    SpanTrackingMode.EdgeExclusive
+                );
                 if (translatedSpan.IsEmpty)
                 {
                     // well, there is no information we can get from previous tree, use lexer to
@@ -460,7 +554,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 else
                 {
                     using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var tempList);
-                    AddSyntacticClassificationsForDocument(classificationService, translatedSpan, lastProcessedDocument, lastProcessedRoot, tempList);
+                    AddSyntacticClassificationsForDocument(
+                        classificationService,
+                        translatedSpan,
+                        lastProcessedDocument,
+                        lastProcessedRoot,
+                        tempList
+                    );
 
                     var currentSnapshot = span.Snapshot;
                     var currentText = currentSnapshot.AsText();
@@ -468,15 +568,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     {
                         // 2) Translate those classifications forward so that they correspond to the true
                         //    requested snapshot.
-                        var lastSnapshotSpan = lastClassifiedSpan.TextSpan.ToSnapshotSpan(lastProcessedSnapshot);
-                        var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(currentSnapshot, SpanTrackingMode.EdgeInclusive);
+                        var lastSnapshotSpan = lastClassifiedSpan.TextSpan.ToSnapshotSpan(
+                            lastProcessedSnapshot
+                        );
+                        var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(
+                            currentSnapshot,
+                            SpanTrackingMode.EdgeInclusive
+                        );
 
-                        var currentClassifiedSpan = new ClassifiedSpan(lastClassifiedSpan.ClassificationType, currentSnapshotSpan.Span.ToTextSpan());
+                        var currentClassifiedSpan = new ClassifiedSpan(
+                            lastClassifiedSpan.ClassificationType,
+                            currentSnapshotSpan.Span.ToTextSpan()
+                        );
 
                         // 3) The classifications may be incorrect due to changes in the text.  For example,
                         //    if "clss" becomes "class", then we want to changes the classification from
                         //    'identifier' to 'keyword'.
-                        currentClassifiedSpan = classificationService.AdjustStaleClassification(currentText, currentClassifiedSpan);
+                        currentClassifiedSpan = classificationService.AdjustStaleClassification(
+                            currentText,
+                            currentClassifiedSpan
+                        );
 
                         classifiedSpans.Add(currentClassifiedSpan);
                     }

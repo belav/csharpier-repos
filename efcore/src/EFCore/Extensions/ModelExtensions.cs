@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use IReadOnlyEntityType.FindEntityType")]
-        public static IReadOnlyEntityType? FindEntityType(this IModel model, Type type)
-            => model.FindEntityType(Check.NotNull(type, nameof(type)));
+        public static IReadOnlyEntityType? FindEntityType(this IModel model, Type type) =>
+            model.FindEntityType(Check.NotNull(type, nameof(type)));
 
         /// <summary>
         ///     Gets the entity types matching the given type.
@@ -38,8 +38,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The entity types found.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use IReadOnlyEntityType.FindEntityTypes")]
-        public static IEnumerable<IReadOnlyEntityType> GetEntityTypes(this IModel model, Type type)
-            => model.FindEntityTypes(type);
+        public static IEnumerable<IReadOnlyEntityType> GetEntityTypes(
+            this IModel model,
+            Type type
+        ) => model.FindEntityTypes(type);
 
         /// <summary>
         ///     Gets the entity types matching the given name.
@@ -49,8 +51,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The entity types found.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use FindEntityTypes(Type) or FindEntityType(string)")]
-        public static IReadOnlyCollection<IReadOnlyEntityType> GetEntityTypes(this IModel model, string name)
-            => ((Model)model).GetEntityTypes(name);
+        public static IReadOnlyCollection<IReadOnlyEntityType> GetEntityTypes(
+            this IModel model,
+            string name
+        ) => ((Model)model).GetEntityTypes(name);
 
         /// <summary>
         ///     Gets a value indicating whether the model contains a corresponding entity type with a defining navigation.
@@ -60,8 +64,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns><see langword="true" /> if the model contains a corresponding entity type with a defining navigation.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use IsShared(Type)")]
-        public static bool HasEntityTypeWithDefiningNavigation(this IModel model, Type type)
-            => model.IsShared(type);
+        public static bool HasEntityTypeWithDefiningNavigation(this IModel model, Type type) =>
+            model.IsShared(type);
 
         /// <summary>
         ///     Gets a value indicating whether the model contains a corresponding entity type with a defining navigation.
@@ -71,7 +75,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns><see langword="true" /> if the model contains a corresponding entity type with a defining navigation.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use FindEntityType(string)?.HasSharedClrType")]
-        public static bool HasEntityTypeWithDefiningNavigation(this IModel model, string name)
-            => model.FindEntityType(name)?.HasSharedClrType ?? false;
+        public static bool HasEntityTypeWithDefiningNavigation(this IModel model, string name) =>
+            model.FindEntityType(name)?.HasSharedClrType ?? false;
     }
 }

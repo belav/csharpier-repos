@@ -32,6 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger);
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        );
     }
 }

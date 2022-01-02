@@ -13,18 +13,25 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     [ExportNewDocumentFormattingProvider(LanguageNames.CSharp), Shared]
-    internal class CSharpOrganizeUsingsNewDocumentFormattingProvider : INewDocumentFormattingProvider
+    internal class CSharpOrganizeUsingsNewDocumentFormattingProvider
+        : INewDocumentFormattingProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpOrganizeUsingsNewDocumentFormattingProvider()
-        {
-        }
+        public CSharpOrganizeUsingsNewDocumentFormattingProvider() { }
 
-        public async Task<Document> FormatNewDocumentAsync(Document document, Document? hintDocument, CancellationToken cancellationToken)
+        public async Task<Document> FormatNewDocumentAsync(
+            Document document,
+            Document? hintDocument,
+            CancellationToken cancellationToken
+        )
         {
-            var organizedDocument = await Formatter.OrganizeImportsAsync(document, cancellationToken).ConfigureAwait(false);
-            return await MisplacedUsingDirectivesCodeFixProvider.TransformDocumentIfRequiredAsync(organizedDocument, cancellationToken).ConfigureAwait(false);
+            var organizedDocument = await Formatter
+                .OrganizeImportsAsync(document, cancellationToken)
+                .ConfigureAwait(false);
+            return await MisplacedUsingDirectivesCodeFixProvider
+                .TransformDocumentIfRequiredAsync(organizedDocument, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

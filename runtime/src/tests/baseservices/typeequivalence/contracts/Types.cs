@@ -4,8 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-[assembly:ImportedFromTypeLib("TypeEquivalenceTest")] // Required to support embeddable types
-[assembly:Guid("3B491C47-B176-4CF3-8748-F19E303F1714")]
+[assembly: ImportedFromTypeLib("TypeEquivalenceTest")] // Required to support embeddable types
+[assembly: Guid("3B491C47-B176-4CF3-8748-F19E303F1714")]
+
 
 namespace TypeEquivalenceTypes
 {

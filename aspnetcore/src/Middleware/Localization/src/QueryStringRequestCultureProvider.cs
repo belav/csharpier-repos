@@ -27,7 +27,9 @@ public class QueryStringRequestCultureProvider : RequestCultureProvider
     public string UIQueryStringKey { get; set; } = "ui-culture";
 
     /// <inheritdoc />
-    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
+    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+        HttpContext httpContext
+    )
     {
         if (httpContext == null)
         {

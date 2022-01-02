@@ -26,7 +26,6 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// The call is permitted to bind against special names
         /// </summary>
         EventHookup = 2,
-
         ResultDiscarded = 4,
     }
 }

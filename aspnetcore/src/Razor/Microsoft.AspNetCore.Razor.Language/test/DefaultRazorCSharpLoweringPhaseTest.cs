@@ -26,8 +26,9 @@ public class DefaultRazorCSharpLoweringPhaseTest
         // Act & Assert
         ExceptionAssert.Throws<InvalidOperationException>(
             () => phase.Execute(codeDocument),
-            $"The '{nameof(DefaultRazorCSharpLoweringPhase)}' phase requires a '{nameof(DocumentIntermediateNode)}' " +
-            $"provided by the '{nameof(RazorCodeDocument)}'.");
+            $"The '{nameof(DefaultRazorCSharpLoweringPhase)}' phase requires a '{nameof(DocumentIntermediateNode)}' "
+                + $"provided by the '{nameof(RazorCodeDocument)}'."
+        );
     }
 
     [Fact]
@@ -42,17 +43,15 @@ public class DefaultRazorCSharpLoweringPhaseTest
 
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source));
 
-        var irDocument = new DocumentIntermediateNode()
-        {
-            DocumentKind = "test",
-        };
+        var irDocument = new DocumentIntermediateNode() { DocumentKind = "test", };
         codeDocument.SetDocumentIntermediateNode(irDocument);
 
         // Act & Assert
         ExceptionAssert.Throws<InvalidOperationException>(
             () => phase.Execute(codeDocument),
-            $"The document of kind 'test' does not have a '{nameof(CodeTarget)}'. " +
-            $"The document classifier must set a value for '{nameof(DocumentIntermediateNode.Target)}'.");
+            $"The document of kind 'test' does not have a '{nameof(CodeTarget)}'. "
+                + $"The document classifier must set a value for '{nameof(DocumentIntermediateNode.Target)}'."
+        );
     }
 
     [Fact]
@@ -70,8 +69,13 @@ public class DefaultRazorCSharpLoweringPhaseTest
             Options = options,
         };
         var expectedDiagnostic = RazorDiagnostic.Create(
-                new RazorDiagnosticDescriptor("1234", () => "I am an error.", RazorDiagnosticSeverity.Error),
-                new SourceSpan("SomeFile.cshtml", 11, 0, 11, 1));
+            new RazorDiagnosticDescriptor(
+                "1234",
+                () => "I am an error.",
+                RazorDiagnosticSeverity.Error
+            ),
+            new SourceSpan("SomeFile.cshtml", 11, 0, 11, 1)
+        );
         irDocument.Diagnostics.Add(expectedDiagnostic);
         codeDocument.SetDocumentIntermediateNode(irDocument);
 

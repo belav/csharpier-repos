@@ -100,7 +100,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             project.SetOption(CompilerOptions.OPTID_WARNASERRORLIST, "1111");
             var options = environment.GetUpdatedCompilationOptionOfSingleProject();
-            Assert.Equal(expected: ReportDiagnostic.Error, actual: options.SpecificDiagnosticOptions["CS1111"]);
+            Assert.Equal(
+                expected: ReportDiagnostic.Error,
+                actual: options.SpecificDiagnosticOptions["CS1111"]
+            );
 
             project.SetOption(CompilerOptions.OPTID_WARNASERRORLIST, null);
             options = environment.GetUpdatedCompilationOptionOfSingleProject();
@@ -117,8 +120,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             project.SetOutputFileName(initialPath);
             Assert.Equal(initialPath, project.GetOutputFileName());
 
-            string getCurrentCompilationOutputAssemblyPath()
-                => environment.Workspace.CurrentSolution.GetRequiredProject(project.Test_VisualStudioProject.Id).CompilationOutputInfo.AssemblyPath;
+            string getCurrentCompilationOutputAssemblyPath() =>
+                environment.Workspace.CurrentSolution.GetRequiredProject(
+                    project.Test_VisualStudioProject.Id
+                ).CompilationOutputInfo.AssemblyPath;
 
             Assert.Equal(initialPath, getCurrentCompilationOutputAssemblyPath());
 
@@ -150,17 +155,31 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
 
-            string getCurrentCompilationOutputAssemblyPath()
-                => environment.Workspace.CurrentSolution.GetRequiredProject(project.Test_VisualStudioProject.Id).CompilationOutputInfo.AssemblyPath;
+            string getCurrentCompilationOutputAssemblyPath() =>
+                environment.Workspace.CurrentSolution.GetRequiredProject(
+                    project.Test_VisualStudioProject.Id
+                ).CompilationOutputInfo.AssemblyPath;
 
             Assert.Null(getCurrentCompilationOutputAssemblyPath());
 
-            Assert.Equal(0, ((ICompilerOptionsHostObject)project).SetCompilerOptions(@"/pdb:C:\a\1.pdb /debug+", out _));
+            Assert.Equal(
+                0,
+                ((ICompilerOptionsHostObject)project).SetCompilerOptions(
+                    @"/pdb:C:\a\1.pdb /debug+",
+                    out _
+                )
+            );
 
             // Compilation doesn't have output file, so we don't expect any build outputs either.
             Assert.Null(getCurrentCompilationOutputAssemblyPath());
 
-            Assert.Equal(0, ((ICompilerOptionsHostObject)project).SetCompilerOptions(@"/out:C:\a\2.dll /debug+", out _));
+            Assert.Equal(
+                0,
+                ((ICompilerOptionsHostObject)project).SetCompilerOptions(
+                    @"/out:C:\a\2.dll /debug+",
+                    out _
+                )
+            );
 
             Assert.Equal(@"C:\a\2.dll", getCurrentCompilationOutputAssemblyPath());
 
@@ -168,7 +187,13 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             Assert.Equal(@"C:\a\3.dll", getCurrentCompilationOutputAssemblyPath());
 
-            Assert.Equal(0, ((ICompilerOptionsHostObject)project).SetCompilerOptions(@"/pdb:C:\a\4.pdb /debug+", out _));
+            Assert.Equal(
+                0,
+                ((ICompilerOptionsHostObject)project).SetCompilerOptions(
+                    @"/pdb:C:\a\4.pdb /debug+",
+                    out _
+                )
+            );
 
             Assert.Equal(@"C:\a\3.dll", getCurrentCompilationOutputAssemblyPath());
         }
@@ -185,12 +210,24 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         {
             using var environment = new TestEnvironment(typeof(CSharpParseOptionsChangingService));
 
-            var hierarchy = environment.CreateHierarchy("CSharpProject", "Bin", projectRefPath: null, projectCapabilities: "CSharp");
+            var hierarchy = environment.CreateHierarchy(
+                "CSharpProject",
+                "Bin",
+                projectRefPath: null,
+                projectCapabilities: "CSharp"
+            );
             var storage = Assert.IsAssignableFrom<IVsBuildPropertyStorage>(hierarchy);
 
-            Assert.True(ErrorHandler.Succeeded(
-                storage.SetPropertyValue(
-                    "MaxSupportedLangVersion", null, (uint)_PersistStorageType.PST_PROJECT_FILE, maxSupportedLangVersion?.ToDisplayString())));
+            Assert.True(
+                ErrorHandler.Succeeded(
+                    storage.SetPropertyValue(
+                        "MaxSupportedLangVersion",
+                        null,
+                        (uint)_PersistStorageType.PST_PROJECT_FILE,
+                        maxSupportedLangVersion?.ToDisplayString()
+                    )
+                )
+            );
 
             _ = CSharpHelpers.CreateCSharpProject(environment, "Test", hierarchy);
 
@@ -203,7 +240,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             var canApply = environment.Workspace.CanApplyParseOptionChange(
                 oldParseOptions,
                 oldParseOptions.WithLanguageVersion(attemptedVersion),
-                project);
+                project
+            );
 
             if (maxSupportedLangVersion.HasValue)
             {
@@ -220,7 +258,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         {
             using var environment = new TestEnvironment(typeof(CSharpParseOptionsChangingService));
 
-            var hierarchy = environment.CreateHierarchy("CSharpProject", "Bin", projectRefPath: null, projectCapabilities: "CSharp");
+            var hierarchy = environment.CreateHierarchy(
+                "CSharpProject",
+                "Bin",
+                projectRefPath: null,
+                projectCapabilities: "CSharp"
+            );
             var storage = Assert.IsAssignableFrom<IVsBuildPropertyStorage>(hierarchy);
 
             _ = CSharpHelpers.CreateCSharpProject(environment, "Test", hierarchy);
@@ -234,7 +277,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             var canApply = environment.Workspace.CanApplyParseOptionChange(
                 oldParseOptions,
                 oldParseOptions.WithLanguageVersion(attemptedVersion),
-                project);
+                project
+            );
 
             Assert.True(canApply);
         }

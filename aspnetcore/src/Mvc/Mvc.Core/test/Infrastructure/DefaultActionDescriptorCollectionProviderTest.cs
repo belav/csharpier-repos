@@ -25,7 +25,8 @@ public class DefaultActionDescriptorCollectionProviderTest
 
         var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
             new[] { actionDescriptorProvider1, actionDescriptorProvider2 },
-            Enumerable.Empty<IActionDescriptorChangeProvider>());
+            Enumerable.Empty<IActionDescriptorChangeProvider>()
+        );
 
         // Act
         var collection = actionDescriptorCollectionProvider.ActionDescriptors;
@@ -36,7 +37,8 @@ public class DefaultActionDescriptorCollectionProviderTest
             collection.Items,
             descriptor => Assert.Same(expected1, descriptor),
             descriptor => Assert.Same(expected2, descriptor),
-            descriptor => Assert.Same(expected3, descriptor));
+            descriptor => Assert.Same(expected3, descriptor)
+        );
     }
 
     [Fact]
@@ -47,7 +49,8 @@ public class DefaultActionDescriptorCollectionProviderTest
 
         var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
             new[] { actionDescriptorProvider },
-            Enumerable.Empty<IActionDescriptorChangeProvider>());
+            Enumerable.Empty<IActionDescriptorChangeProvider>()
+        );
 
         // Act - 1
         var collection1 = actionDescriptorCollectionProvider.ActionDescriptors;
@@ -61,7 +64,10 @@ public class DefaultActionDescriptorCollectionProviderTest
         // Assert - 2
         Assert.Same(collection1, collection2);
         Mock.Get(actionDescriptorProvider)
-            .Verify(v => v.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>()), Times.Once());
+            .Verify(
+                v => v.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>()),
+                Times.Once()
+            );
     }
 
     [Fact]
@@ -76,53 +82,61 @@ public class DefaultActionDescriptorCollectionProviderTest
         var invocations = 0;
         actionDescriptorProvider
             .Setup(p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>()))
-            .Callback((ActionDescriptorProviderContext context) =>
-            {
-                if (invocations == 0)
+            .Callback(
+                (ActionDescriptorProviderContext context) =>
                 {
-                    context.Results.Add(expected1);
-                }
-                else if (invocations == 1)
-                {
-                    context.Results.Add(expected2);
-                }
-                else
-                {
-                    context.Results.Add(expected3);
-                }
+                    if (invocations == 0)
+                    {
+                        context.Results.Add(expected1);
+                    }
+                    else if (invocations == 1)
+                    {
+                        context.Results.Add(expected2);
+                    }
+                    else
+                    {
+                        context.Results.Add(expected3);
+                    }
 
-                invocations++;
-            });
+                    invocations++;
+                }
+            );
         var changeProvider = new TestChangeProvider();
         var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
             new[] { actionDescriptorProvider.Object },
-            new[] { changeProvider });
+            new[] { changeProvider }
+        );
 
         // Act - 1
         var changeToken1 = actionDescriptorCollectionProvider.GetChangeToken();
         var collection1 = actionDescriptorCollectionProvider.ActionDescriptors;
 
         ActionDescriptorCollection captured = null;
-        changeToken1.RegisterChangeCallback((_) =>
-        {
-            captured = actionDescriptorCollectionProvider.ActionDescriptors;
-        }, null);
+        changeToken1.RegisterChangeCallback(
+            (_) =>
+            {
+                captured = actionDescriptorCollectionProvider.ActionDescriptors;
+            },
+            null
+        );
 
         // Assert - 1
         Assert.False(changeToken1.HasChanged);
         Assert.Equal(0, collection1.Version);
-        Assert.Collection(collection1.Items,
-            item => Assert.Same(expected1, item));
+        Assert.Collection(collection1.Items, item => Assert.Same(expected1, item));
 
         // Act - 2
         changeProvider.TokenSource.Cancel();
         var changeToken2 = actionDescriptorCollectionProvider.GetChangeToken();
         var collection2 = actionDescriptorCollectionProvider.ActionDescriptors;
 
-        changeToken2.RegisterChangeCallback((_) =>
-        {
-            captured = actionDescriptorCollectionProvider.ActionDescriptors;
-        }, null);
+        changeToken2.RegisterChangeCallback(
+            (_) =>
+            {
+                captured = actionDescriptorCollectionProvider.ActionDescriptors;
+            },
+            null
+        );
 
         // Assert - 2
         Assert.NotSame(changeToken1, changeToken2);
@@ -133,8 +147,7 @@ public class DefaultActionDescriptorCollectionProviderTest
         Assert.NotNull(captured);
         Assert.Same(captured, collection2);
         Assert.Equal(1, collection2.Version);
-        Assert.Collection(collection2.Items,
-            item => Assert.Same(expected2, item));
+        Assert.Collection(collection2.Items, item => Assert.Same(expected2, item));
 
         // Act - 3
         changeProvider.TokenSource.Cancel();
@@ -150,22 +163,25 @@ public class DefaultActionDescriptorCollectionProviderTest
         Assert.NotNull(captured);
         Assert.Same(captured, collection3);
         Assert.Equal(2, collection3.Version);
-        Assert.Collection(collection3.Items,
-            item => Assert.Same(expected3, item));
+        Assert.Collection(collection3.Items, item => Assert.Same(expected3, item));
     }
 
-    private static IActionDescriptorProvider GetActionDescriptorProvider(params ActionDescriptor[] values)
+    private static IActionDescriptorProvider GetActionDescriptorProvider(
+        params ActionDescriptor[] values
+    )
     {
         var actionDescriptorProvider = new Mock<IActionDescriptorProvider>();
         actionDescriptorProvider
             .Setup(p => p.OnProvidersExecuting(It.IsAny<ActionDescriptorProviderContext>()))
-            .Callback((ActionDescriptorProviderContext context) =>
-            {
-                foreach (var value in values)
+            .Callback(
+                (ActionDescriptorProviderContext context) =>
                 {
-                    context.Results.Add(value);
+                    foreach (var value in values)
+                    {
+                        context.Results.Add(value);
+                    }
                 }
-            });
+            );
 
         return actionDescriptorProvider.Object;
     }

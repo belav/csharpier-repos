@@ -12,7 +12,8 @@ internal static class ChunkWriter
     public static int BeginChunkBytes(int dataCount, Span<byte> span)
     {
         // Determine the most-significant non-zero nibble
-        int total, shift;
+        int total,
+            shift;
         var count = dataCount;
         total = (count > 0xffff) ? 0x10 : 0x00;
         count >>= total;
@@ -26,7 +27,25 @@ internal static class ChunkWriter
         // This must be explicity typed as ReadOnlySpan<byte>
         // It then becomes a non-allocating mapping to the data section of the assembly.
         // For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
-        ReadOnlySpan<byte> hex = new byte[16] { (byte)'0', (byte)'1', (byte)'2', (byte)'3', (byte)'4', (byte)'5', (byte)'6', (byte)'7', (byte)'8', (byte)'9', (byte)'a', (byte)'b', (byte)'c', (byte)'d', (byte)'e', (byte)'f' };
+        ReadOnlySpan<byte> hex = new byte[16]
+        {
+            (byte)'0',
+            (byte)'1',
+            (byte)'2',
+            (byte)'3',
+            (byte)'4',
+            (byte)'5',
+            (byte)'6',
+            (byte)'7',
+            (byte)'8',
+            (byte)'9',
+            (byte)'a',
+            (byte)'b',
+            (byte)'c',
+            (byte)'d',
+            (byte)'e',
+            (byte)'f'
+        };
 
         var offset = 0;
         for (shift = total; shift >= 0; shift -= 4)

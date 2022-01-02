@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             ReportProgress();
         }
 
-        private void ReportProgress()
-            => _uiThreadOperationScope.Progress.Report(new ProgressInfo(_completedItems, _totalItems));
+        private void ReportProgress() =>
+            _uiThreadOperationScope.Progress.Report(new ProgressInfo(_completedItems, _totalItems));
     }
 }

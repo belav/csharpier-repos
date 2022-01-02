@@ -37,9 +37,14 @@ namespace System
                     throw new ArgumentException(SR.Argument_MustBeRuntimeFieldInfo);
 
                 if (field.IsStatic)
-                    throw new ArgumentException(SR.Format(SR.Argument_TypedReferenceInvalidField, field.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_TypedReferenceInvalidField, field.Name)
+                    );
 
-                if (targetType != field.GetDeclaringTypeInternal() && !targetType.IsSubclassOf(field.GetDeclaringTypeInternal()))
+                if (
+                    targetType != field.GetDeclaringTypeInternal()
+                    && !targetType.IsSubclassOf(field.GetDeclaringTypeInternal())
+                )
                     throw new MissingMemberException(SR.MissingMemberTypeRef);
 
                 RuntimeType fieldType = (RuntimeType)field.FieldType;
@@ -54,7 +59,6 @@ namespace System
             }
 
             TypedReference result = default;
-
             // reference to TypedReference is banned, so have to pass result as pointer
             unsafe
             {
@@ -65,7 +69,12 @@ namespace System
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         // reference to TypedReference is banned, so have to pass result as pointer
-        private static extern unsafe void InternalMakeTypedReference(void* result, object target, IntPtr[] flds, RuntimeType lastFieldType);
+        private static extern unsafe void InternalMakeTypedReference(
+            void* result,
+            object target,
+            IntPtr[] flds,
+            RuntimeType lastFieldType
+        );
 
         public override int GetHashCode()
         {

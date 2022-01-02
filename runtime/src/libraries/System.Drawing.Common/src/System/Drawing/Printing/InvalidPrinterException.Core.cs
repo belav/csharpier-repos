@@ -10,10 +10,13 @@ using System.Runtime.Serialization;
 
 namespace System.Drawing.Printing
 {
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public partial class InvalidPrinterException
     {
-        protected InvalidPrinterException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected InvalidPrinterException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             // Ignoring not deserializable input
         }

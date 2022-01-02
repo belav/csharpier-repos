@@ -8,16 +8,15 @@ using Moq.Language.Flow;
 
 namespace Moq.Language
 {
-	/// <summary>
+    /// <summary>
 	/// Defines the <c>Returns</c> verb.
 	/// </summary>
 	/// <typeparam name="TMock">Mocked type.</typeparam>
 	/// <typeparam name="TResult">Type of the return value from the expression.</typeparam>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public partial interface IReturns<TMock, TResult> : IFluentInterface
-		where TMock : class
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public partial interface IReturns<TMock, TResult> : IFluentInterface where TMock : class
+    {
+        /// <summary>
 		/// Specifies the value to return.
 		/// </summary>
 		/// <param name="value">The value to return, or <see langword="null"/>.</param>
@@ -28,9 +27,9 @@ namespace Moq.Language
 		///     .Returns(true);
 		/// </code>
 		/// </example>
-		IReturnsResult<TMock> Returns(TResult value);
+        IReturnsResult<TMock> Returns(TResult value);
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a function that will calculate the value to return from the method.
 		///   <para>
 		///     This overload is intended to be used in scenarios involving generic type argument matchers,
@@ -54,9 +53,9 @@ namespace Moq.Language
 		///     var something = factory.Object.Create&lt;Something&gt;();
 		///   </code>
 		/// </example>
-		IReturnsResult<TMock> Returns(InvocationFunc valueFunction);
+        IReturnsResult<TMock> Returns(InvocationFunc valueFunction);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a function that will calculate the value to return from the method.
 		/// This overload specifically allows you to specify a function with by-ref parameters.
 		/// Those by-ref parameters can be assigned to (though you should probably do that from
@@ -73,9 +72,9 @@ namespace Moq.Language
 		///     .Returns(new ExecuteFunc((ref Command command) => command.IsExecutable));
 		/// </code>
 		/// </example>
-		IReturnsResult<TMock> Returns(Delegate valueFunction);
+        IReturnsResult<TMock> Returns(Delegate valueFunction);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a function that will calculate the value to return from the method.
 		/// </summary>
 		/// <param name="valueFunction">The function that will calculate the return value.</param>
@@ -90,9 +89,9 @@ namespace Moq.Language
 		/// is executed and the value the <c>returnValues</c> array has at 
 		/// that moment.
 		/// </example>
-		IReturnsResult<TMock> Returns(Func<TResult> valueFunction);
+        IReturnsResult<TMock> Returns(Func<TResult> valueFunction);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a function that will calculate the value to return from the method, 
 		/// retrieving the arguments for the invocation.
 		/// </summary>
@@ -111,12 +110,12 @@ namespace Moq.Language
 		///     .Returns((string command) => returnValues[command]);
 		/// </code>
 		/// </example>
-		IReturnsResult<TMock> Returns<T>(Func<T, TResult> valueFunction);
+        IReturnsResult<TMock> Returns<T>(Func<T, TResult> valueFunction);
 
-		/// <summary>
+        /// <summary>
 		/// Calls the real method of the object and returns its return value.
 		/// </summary>
 		/// <returns>The value calculated by the real method of the object.</returns>
-		IReturnsResult<TMock> CallBase();
-	}
+        IReturnsResult<TMock> CallBase();
+    }
 }

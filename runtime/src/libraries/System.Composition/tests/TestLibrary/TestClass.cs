@@ -9,6 +9,7 @@ namespace TestLibrary
     public class ClassWithDependecy
     {
         public TestDependency _dep;
+
         [ImportingConstructor]
         public ClassWithDependecy(TestDependency dep)
         {
@@ -20,6 +21,7 @@ namespace TestLibrary
     public class ClassWithDependecyAndSameBaseType
     {
         public IDependency _dep;
+
         [ImportingConstructor]
         public ClassWithDependecyAndSameBaseType(IDependency dep)
         {
@@ -27,23 +29,17 @@ namespace TestLibrary
         }
     }
 
-
     [Export]
     [Export(typeof(IDependency))]
     public class TestDependency : IDependency
     {
-        public TestDependency()
-        {
-        }
+        public TestDependency() { }
     }
 
     public class NotRealDependency : IDependency
     {
-        public NotRealDependency()
-        {
-        }
+        public NotRealDependency() { }
     }
-
 
     public interface IDependency
     {

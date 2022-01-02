@@ -4,8 +4,8 @@
 using System;
 using System.Threading;
 
-// Tests that Exchange(object, object) works on variety 
-// of casted types:  It just casts a bunch of different types to 
+// Tests that Exchange(object, object) works on variety
+// of casted types:  It just casts a bunch of different types to
 // object, then makes sure Exchange works on those objects.
 public class InterlockedExchange2
 {
@@ -45,70 +45,78 @@ public class InterlockedExchange2
 
     public bool PosTest1()
     {
-        bool   retVal = true;
+        bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest1: object Interlocked.Exchange(objct&,object)");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: object Interlocked.Exchange(objct&,object)"
+        );
 
         try
         {
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == Byte");
-            retVal = ExchangeObjects(
-                               (object)TestLibrary.Generator.GetByte(),
-                               (object)TestLibrary.Generator.GetByte()
-                               ) && retVal;
+            retVal =
+                ExchangeObjects(
+                    (object)TestLibrary.Generator.GetByte(),
+                    (object)TestLibrary.Generator.GetByte()
+                ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == Byte[]");
             byte[] bArr1 = new Byte[5 + (TestLibrary.Generator.GetInt32() % 1024)];
             byte[] bArr2 = new Byte[5 + (TestLibrary.Generator.GetInt32() % 1024)];
             TestLibrary.Generator.GetBytes(bArr1);
             TestLibrary.Generator.GetBytes(bArr2);
-            retVal = ExchangeObjects(
-                               (object)bArr1,
-                               (object)bArr2
-                               ) && retVal;
+            retVal = ExchangeObjects((object)bArr1, (object)bArr2) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == Int16");
-            retVal = ExchangeObjects(
-                               (object)TestLibrary.Generator.GetInt16(),
-                               (object)TestLibrary.Generator.GetInt16()
-                               ) && retVal;
+            retVal =
+                ExchangeObjects(
+                    (object)TestLibrary.Generator.GetInt16(),
+                    (object)TestLibrary.Generator.GetInt16()
+                ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == Int32");
-            retVal = ExchangeObjects(
-                               (object)TestLibrary.Generator.GetInt32(),
-                               (object)TestLibrary.Generator.GetInt32()
-                               ) && retVal;
+            retVal =
+                ExchangeObjects(
+                    (object)TestLibrary.Generator.GetInt32(),
+                    (object)TestLibrary.Generator.GetInt32()
+                ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == Int64");
-            retVal = ExchangeObjects(
-                               (object)(object)TestLibrary.Generator.GetInt64(),
-                               (object)TestLibrary.Generator.GetInt64()
-                               ) && retVal;
+            retVal =
+                ExchangeObjects(
+                    (object)(object)TestLibrary.Generator.GetInt64(),
+                    (object)TestLibrary.Generator.GetInt64()
+                ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == Single");
-            retVal = ExchangeObjects(
-                               (object)(object)TestLibrary.Generator.GetSingle(),
-                               (object)TestLibrary.Generator.GetSingle()
-                               ) && retVal;
+            retVal =
+                ExchangeObjects(
+                    (object)(object)TestLibrary.Generator.GetSingle(),
+                    (object)TestLibrary.Generator.GetSingle()
+                ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == Double");
-            retVal = ExchangeObjects(
-                               (object)TestLibrary.Generator.GetDouble(),
-                               (object)TestLibrary.Generator.GetDouble()
-                               ) && retVal;
+            retVal =
+                ExchangeObjects(
+                    (object)TestLibrary.Generator.GetDouble(),
+                    (object)TestLibrary.Generator.GetDouble()
+                ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == string");
-            retVal = ExchangeObjects(
-                               TestLibrary.Generator.GetString(false, c_MIN_STRING_LEN, c_MAX_STRING_LEN),
-                               (object)TestLibrary.Generator.GetString(false, c_MIN_STRING_LEN, c_MAX_STRING_LEN)
-                               ) && retVal;
+            retVal =
+                ExchangeObjects(
+                    TestLibrary.Generator.GetString(false, c_MIN_STRING_LEN, c_MAX_STRING_LEN),
+                    (object)TestLibrary.Generator.GetString(
+                        false,
+                        c_MIN_STRING_LEN,
+                        c_MAX_STRING_LEN
+                    )
+                ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == char");
-            retVal = ExchangeObjects(
-                               TestLibrary.Generator.GetChar(),
-                               TestLibrary.Generator.GetChar()
-                               ) && retVal;
-
+            retVal =
+                ExchangeObjects(TestLibrary.Generator.GetChar(), TestLibrary.Generator.GetChar())
+                && retVal;
         }
         catch (Exception e)
         {
@@ -121,7 +129,7 @@ public class InterlockedExchange2
 
     public bool ExchangeObjects(object location, object value)
     {
-        bool   retVal = true;
+        bool retVal = true;
         object oldLocation;
         object prevLocation;
 
@@ -133,17 +141,30 @@ public class InterlockedExchange2
 
         if (!location.Equals(value))
         {
-            TestLibrary.TestFramework.LogError("003", "Interlocked.Exchange() did not do the exchange correctly: Expected(" + value + ") Actual(" + location + ")");
+            TestLibrary.TestFramework.LogError(
+                "003",
+                "Interlocked.Exchange() did not do the exchange correctly: Expected("
+                    + value
+                    + ") Actual("
+                    + location
+                    + ")"
+            );
             retVal = false;
         }
- 
+
         if (!oldLocation.Equals(prevLocation))
         {
-            TestLibrary.TestFramework.LogError("004", "Interlocked.Exchange() did not return the expected value: Expected(" + prevLocation + ") Actual(" + oldLocation + ")");
+            TestLibrary.TestFramework.LogError(
+                "004",
+                "Interlocked.Exchange() did not return the expected value: Expected("
+                    + prevLocation
+                    + ") Actual("
+                    + oldLocation
+                    + ")"
+            );
             retVal = false;
         }
 
         return retVal;
     }
-
 }

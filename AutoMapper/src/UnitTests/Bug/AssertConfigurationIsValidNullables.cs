@@ -10,14 +10,18 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int? Number { get; set; }
         }
+
         class Destination
         {
             public decimal? Number { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
     }
 }

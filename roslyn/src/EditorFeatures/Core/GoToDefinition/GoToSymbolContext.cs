@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 
         private readonly MultiDictionary<string, DefinitionItem> _items = new();
 
-        public GoToSymbolContext(Document document, int position, CancellationToken cancellationToken)
+        public GoToSymbolContext(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             Document = document;
             Position = position;

@@ -76,6 +76,7 @@ namespace PInvokeTests
             c = num;
             i = num;
         }
+
         public ExpClass(DialogResult t, double dnum)
         {
             type = t;
@@ -83,6 +84,7 @@ namespace PInvokeTests
             i = 0;
             c = dnum;
         }
+
         public ExpClass(DialogResult t, bool bnum)
         {
             type = t;
@@ -139,7 +141,9 @@ namespace PInvokeTests
 
     class StructureTests
     {
-        private const string SimpleBlittableSeqLayoutClass_UpdateField = nameof(SimpleBlittableSeqLayoutClass_UpdateField);
+        private const string SimpleBlittableSeqLayoutClass_UpdateField = nameof(
+            SimpleBlittableSeqLayoutClass_UpdateField
+        );
 
         [DllImport("LayoutClassNative")]
         private static extern bool SimpleSeqLayoutClassByRef(SeqClass p);
@@ -306,10 +310,7 @@ namespace PInvokeTests
 
             string s = "before";
             var p = new SeqClass(0, false, s);
-            var target = new NestedLayout
-            {
-                value = p
-            };
+            var target = new NestedLayout { value = p };
             Assert.True(SimpleNestedLayoutClassByValue(target));
         }
 
@@ -317,7 +318,9 @@ namespace PInvokeTests
         {
             Console.WriteLine($"Running {nameof(RecursiveNativeLayout)}...");
 
-            Assert.Throws<TypeLoadException>(() => RecursiveNativeLayoutInvalid(new RecursiveTestStruct()));
+            Assert.Throws<TypeLoadException>(
+                () => RecursiveNativeLayoutInvalid(new RecursiveTestStruct())
+            );
         }
 
         public static int Main(string[] argv)

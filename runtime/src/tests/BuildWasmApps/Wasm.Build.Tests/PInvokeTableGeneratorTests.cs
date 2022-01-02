@@ -12,16 +12,17 @@ namespace Wasm.Build.Tests
 {
     public class PInvokeTableGeneratorTests : BuildTestBase
     {
-        public PInvokeTableGeneratorTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public PInvokeTableGeneratorTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        ) : base(output, buildContext) { }
 
         [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
         [BuildAndRun(host: RunHost.V8)]
         public void NativeLibraryWithVariadicFunctions(BuildArgs buildArgs, RunHost host, string id)
         {
-            string code = @"
+            string code =
+                @"
                 using System;
                 using System.Runtime.InteropServices;
                 public class Test
@@ -44,21 +45,37 @@ namespace Wasm.Build.Tests
                     [DllImport(""variadic"", EntryPoint=""sum"")] public static extern int sum_three(int a, int b, int c);
                 }";
 
-            (buildArgs, string output) = BuildForVariadicFunctionTests(code,
-                                                          buildArgs with { ProjectName = $"variadic_{buildArgs.Config}_{id}" },
-                                                          id);
+            (buildArgs, string output) = BuildForVariadicFunctionTests(
+                code,
+                buildArgs with
+                {
+                    ProjectName = $"variadic_{buildArgs.Config}_{id}"
+                },
+                id
+            );
             Assert.Matches("warning.*native function.*sum.*varargs", output);
             Assert.Matches("warning.*sum_(one|two|three)", output);
 
-            output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42, host: host, id: id);
+            output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 42,
+                host: host,
+                id: id
+            );
             Assert.Contains("Main running", output);
         }
 
         [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
         [BuildAndRun(host: RunHost.V8)]
-        public void DllImportWithFunctionPointersCompilesWithWarning(BuildArgs buildArgs, RunHost host, string id)
+        public void DllImportWithFunctionPointersCompilesWithWarning(
+            BuildArgs buildArgs,
+            RunHost host,
+            string id
+        )
         {
-            string code = @"
+            string code =
+                @"
                 using System;
                 using System.Runtime.InteropServices;
                 public class Test
@@ -76,21 +93,37 @@ namespace Wasm.Build.Tests
                     public static extern int sum_one(int a, int b);
                 }";
 
-            (buildArgs, string output) = BuildForVariadicFunctionTests(code,
-                                                          buildArgs with { ProjectName = $"fnptr_{buildArgs.Config}_{id}" },
-                                                          id);
+            (buildArgs, string output) = BuildForVariadicFunctionTests(
+                code,
+                buildArgs with
+                {
+                    ProjectName = $"fnptr_{buildArgs.Config}_{id}"
+                },
+                id
+            );
             Assert.Matches("warning.*Skipping.*because.*function pointer", output);
             Assert.Matches("warning.*using_sum_one", output);
 
-            output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42, host: host, id: id);
+            output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 42,
+                host: host,
+                id: id
+            );
             Assert.Contains("Main running", output);
         }
 
         [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
         [BuildAndRun(host: RunHost.V8)]
-        public void DllImportWithFunctionPointers_ForVariadicFunction_CompilesWithWarning(BuildArgs buildArgs, RunHost host, string id)
+        public void DllImportWithFunctionPointers_ForVariadicFunction_CompilesWithWarning(
+            BuildArgs buildArgs,
+            RunHost host,
+            string id
+        )
         {
-            string code = @"
+            string code =
+                @"
                 using System;
                 using System.Runtime.InteropServices;
                 public class Test
@@ -105,33 +138,54 @@ namespace Wasm.Build.Tests
                     public unsafe static extern int using_sum_one(delegate* unmanaged<char*, IntPtr, void> callback);
                 }";
 
-            (buildArgs, string output) = BuildForVariadicFunctionTests(code,
-                                                          buildArgs with { ProjectName = $"fnptr_variadic_{buildArgs.Config}_{id}" },
-                                                          id);
+            (buildArgs, string output) = BuildForVariadicFunctionTests(
+                code,
+                buildArgs with
+                {
+                    ProjectName = $"fnptr_variadic_{buildArgs.Config}_{id}"
+                },
+                id
+            );
             Assert.Matches("warning.*Skipping.*because.*function pointer", output);
             Assert.Matches("warning.*using_sum_one", output);
 
-            output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42, host: host, id: id);
+            output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 42,
+                host: host,
+                id: id
+            );
             Assert.Contains("Main running", output);
         }
 
-        private (BuildArgs, string) BuildForVariadicFunctionTests(string programText, BuildArgs buildArgs, string id)
+        private (BuildArgs, string) BuildForVariadicFunctionTests(
+            string programText,
+            BuildArgs buildArgs,
+            string id
+        )
         {
             string filename = "variadic.o";
-            buildArgs = ExpandBuildArgs(buildArgs,
-                                        extraItems: $"<NativeFileReference Include=\"{filename}\" />",
-                                        extraProperties: "<AllowUnsafeBlocks>true</AllowUnsafeBlocks><_WasmDevel>true</_WasmDevel>");
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraItems: $"<NativeFileReference Include=\"{filename}\" />",
+                extraProperties: "<AllowUnsafeBlocks>true</AllowUnsafeBlocks><_WasmDevel>true</_WasmDevel>"
+            );
 
-            (_, string output) = BuildProject(buildArgs,
-                                        initProject: () =>
-                                        {
-                                            File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText);
-                                            File.Copy(Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", filename),
-                                                        Path.Combine(_projectDir!, filename));
-                                        },
-                                        publish: buildArgs.AOT,
-                                        id: id,
-                                        dotnetWasmFromRuntimePack: false);
+            (_, string output) = BuildProject(
+                buildArgs,
+                initProject: () =>
+                {
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText);
+                    File.Copy(
+                        Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", filename),
+                        Path.Combine(_projectDir!, filename)
+                    );
+                },
+                publish: buildArgs.AOT,
+                id: id,
+                dotnetWasmFromRuntimePack: false
+            );
 
             return (buildArgs, output);
         }

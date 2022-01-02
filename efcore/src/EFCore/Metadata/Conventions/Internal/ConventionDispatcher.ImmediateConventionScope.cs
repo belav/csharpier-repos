@@ -31,39 +31,67 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             private readonly ConventionContext<IConventionProperty> _propertyConventionContext;
             private readonly ConventionContext<IConventionModelBuilder> _modelBuilderConventionContext;
             private readonly ConventionContext<IConventionAnnotation> _annotationConventionContext;
-            private readonly ConventionContext<IReadOnlyList<IConventionProperty>> _propertyListConventionContext;
+            private readonly ConventionContext<
+                IReadOnlyList<IConventionProperty>
+            > _propertyListConventionContext;
             private readonly ConventionContext<string> _stringConventionContext;
             private readonly ConventionContext<FieldInfo> _fieldInfoConventionContext;
             private readonly ConventionContext<bool?> _boolConventionContext;
 
-            public ImmediateConventionScope(ConventionSet conventionSet, ConventionDispatcher dispatcher)
+            public ImmediateConventionScope(
+                ConventionSet conventionSet,
+                ConventionDispatcher dispatcher
+            )
             {
                 _conventionSet = conventionSet;
                 _dispatcher = dispatcher;
-                _entityTypeBuilderConventionContext = new ConventionContext<IConventionEntityTypeBuilder>(dispatcher);
-                _entityTypeConventionContext = new ConventionContext<IConventionEntityType>(dispatcher);
-                _relationshipBuilderConventionContext = new ConventionContext<IConventionForeignKeyBuilder>(dispatcher);
-                _foreignKeyConventionContext = new ConventionContext<IConventionForeignKey>(dispatcher);
-                _skipNavigationBuilderConventionContext = new ConventionContext<IConventionSkipNavigationBuilder>(dispatcher);
-                _skipNavigationConventionContext = new ConventionContext<IConventionSkipNavigation>(dispatcher);
-                _navigationConventionBuilderContext = new ConventionContext<IConventionNavigationBuilder>(dispatcher);
-                _navigationConventionContext = new ConventionContext<IConventionNavigation>(dispatcher);
-                _indexBuilderConventionContext = new ConventionContext<IConventionIndexBuilder>(dispatcher);
+                _entityTypeBuilderConventionContext =
+                    new ConventionContext<IConventionEntityTypeBuilder>(dispatcher);
+                _entityTypeConventionContext = new ConventionContext<IConventionEntityType>(
+                    dispatcher
+                );
+                _relationshipBuilderConventionContext =
+                    new ConventionContext<IConventionForeignKeyBuilder>(dispatcher);
+                _foreignKeyConventionContext = new ConventionContext<IConventionForeignKey>(
+                    dispatcher
+                );
+                _skipNavigationBuilderConventionContext =
+                    new ConventionContext<IConventionSkipNavigationBuilder>(dispatcher);
+                _skipNavigationConventionContext = new ConventionContext<IConventionSkipNavigation>(
+                    dispatcher
+                );
+                _navigationConventionBuilderContext =
+                    new ConventionContext<IConventionNavigationBuilder>(dispatcher);
+                _navigationConventionContext = new ConventionContext<IConventionNavigation>(
+                    dispatcher
+                );
+                _indexBuilderConventionContext = new ConventionContext<IConventionIndexBuilder>(
+                    dispatcher
+                );
                 _indexConventionContext = new ConventionContext<IConventionIndex>(dispatcher);
-                _keyBuilderConventionContext = new ConventionContext<IConventionKeyBuilder>(dispatcher);
+                _keyBuilderConventionContext = new ConventionContext<IConventionKeyBuilder>(
+                    dispatcher
+                );
                 _keyConventionContext = new ConventionContext<IConventionKey>(dispatcher);
-                _propertyBuilderConventionContext = new ConventionContext<IConventionPropertyBuilder>(dispatcher);
+                _propertyBuilderConventionContext =
+                    new ConventionContext<IConventionPropertyBuilder>(dispatcher);
                 _propertyConventionContext = new ConventionContext<IConventionProperty>(dispatcher);
-                _modelBuilderConventionContext = new ConventionContext<IConventionModelBuilder>(dispatcher);
-                _annotationConventionContext = new ConventionContext<IConventionAnnotation>(dispatcher);
-                _propertyListConventionContext = new ConventionContext<IReadOnlyList<IConventionProperty>>(dispatcher);
+                _modelBuilderConventionContext = new ConventionContext<IConventionModelBuilder>(
+                    dispatcher
+                );
+                _annotationConventionContext = new ConventionContext<IConventionAnnotation>(
+                    dispatcher
+                );
+                _propertyListConventionContext = new ConventionContext<
+                    IReadOnlyList<IConventionProperty>
+                >(dispatcher);
                 _stringConventionContext = new ConventionContext<string>(dispatcher);
                 _fieldInfoConventionContext = new ConventionContext<FieldInfo>(dispatcher);
                 _boolConventionContext = new ConventionContext<bool?>(dispatcher);
             }
 
-            public override void Run(ConventionDispatcher dispatcher)
-                => Check.DebugAssert(false, "Immediate convention scope cannot be run again.");
+            public override void Run(ConventionDispatcher dispatcher) =>
+                Check.DebugAssert(false, "Immediate convention scope cannot be run again.");
 
             public IConventionModelBuilder OnModelFinalizing(IConventionModelBuilder modelBuilder)
             {
@@ -73,7 +101,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     // Execute each convention in a separate batch so each will get an up-to-date model as they are meant to be only run once
                     using (_dispatcher.DelayConventions())
                     {
-                        modelConvention.ProcessModelFinalizing(modelBuilder, _modelBuilderConventionContext);
+                        modelConvention.ProcessModelFinalizing(
+                            modelBuilder,
+                            _modelBuilderConventionContext
+                        );
                         if (_modelBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _modelBuilderConventionContext.Result!;
@@ -91,7 +122,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     _modelBuilderConventionContext.ResetState(modelBuilder);
                     foreach (var modelConvention in _conventionSet.ModelInitializedConventions)
                     {
-                        modelConvention.ProcessModelInitialized(modelBuilder, _modelBuilderConventionContext);
+                        modelConvention.ProcessModelInitialized(
+                            modelBuilder,
+                            _modelBuilderConventionContext
+                        );
                         if (_modelBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _modelBuilderConventionContext.Result!;
@@ -106,15 +140,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionModelBuilder modelBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _annotationConventionContext.ResetState(annotation);
-                    foreach (var modelConvention in _conventionSet.ModelAnnotationChangedConventions)
+                    foreach (
+                        var modelConvention in _conventionSet.ModelAnnotationChangedConventions
+                    )
                     {
                         modelConvention.ProcessModelAnnotationChanged(
-                            modelBuilder, name, annotation, oldAnnotation, _annotationConventionContext);
+                            modelBuilder,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
 
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
@@ -126,7 +168,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return annotation;
             }
 
-            public override IConventionEntityTypeBuilder? OnEntityTypeAdded(IConventionEntityTypeBuilder entityTypeBuilder)
+            public override IConventionEntityTypeBuilder? OnEntityTypeAdded(
+                IConventionEntityTypeBuilder entityTypeBuilder
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
@@ -138,7 +182,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                             return null;
                         }
 
-                        entityTypeConvention.ProcessEntityTypeAdded(entityTypeBuilder, _entityTypeBuilderConventionContext);
+                        entityTypeConvention.ProcessEntityTypeAdded(
+                            entityTypeBuilder,
+                            _entityTypeBuilderConventionContext
+                        );
                         if (_entityTypeBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _entityTypeBuilderConventionContext.Result;
@@ -154,19 +201,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return entityTypeBuilder;
             }
 
-            public override string? OnEntityTypeIgnored(IConventionModelBuilder modelBuilder, string name, Type? type)
+            public override string? OnEntityTypeIgnored(
+                IConventionModelBuilder modelBuilder,
+                string name,
+                Type? type
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _stringConventionContext.ResetState(name);
-                    foreach (var entityTypeConvention in _conventionSet.EntityTypeIgnoredConventions)
+                    foreach (
+                        var entityTypeConvention in _conventionSet.EntityTypeIgnoredConventions
+                    )
                     {
                         if (!modelBuilder.Metadata.IsIgnored(name))
                         {
                             return null;
                         }
 
-                        entityTypeConvention.ProcessEntityTypeIgnored(modelBuilder, name, type, _stringConventionContext);
+                        entityTypeConvention.ProcessEntityTypeIgnored(
+                            modelBuilder,
+                            name,
+                            type,
+                            _stringConventionContext
+                        );
                         if (_stringConventionContext.ShouldStopProcessing())
                         {
                             return _stringConventionContext.Result;
@@ -184,14 +242,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
 
             public override IConventionEntityType? OnEntityTypeRemoved(
                 IConventionModelBuilder modelBuilder,
-                IConventionEntityType entityType)
+                IConventionEntityType entityType
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _entityTypeConventionContext.ResetState(entityType);
-                    foreach (var entityTypeConvention in _conventionSet.EntityTypeRemovedConventions)
+                    foreach (
+                        var entityTypeConvention in _conventionSet.EntityTypeRemovedConventions
+                    )
                     {
-                        entityTypeConvention.ProcessEntityTypeRemoved(modelBuilder, entityType, _entityTypeConventionContext);
+                        entityTypeConvention.ProcessEntityTypeRemoved(
+                            modelBuilder,
+                            entityType,
+                            _entityTypeConventionContext
+                        );
                         if (_entityTypeConventionContext.ShouldStopProcessing())
                         {
                             return _entityTypeConventionContext.Result;
@@ -202,7 +267,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return entityType;
             }
 
-            public override string? OnEntityTypeMemberIgnored(IConventionEntityTypeBuilder entityTypeBuilder, string name)
+            public override string? OnEntityTypeMemberIgnored(
+                IConventionEntityTypeBuilder entityTypeBuilder,
+                string name
+            )
             {
                 if (!entityTypeBuilder.Metadata.IsInModel)
                 {
@@ -212,9 +280,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _stringConventionContext.ResetState(name);
-                    foreach (var entityType in entityTypeBuilder.Metadata.GetDerivedTypesInclusive())
+                    foreach (
+                        var entityType in entityTypeBuilder.Metadata.GetDerivedTypesInclusive()
+                    )
                     {
-                        foreach (var entityTypeConvention in _conventionSet.EntityTypeMemberIgnoredConventions)
+                        foreach (
+                            var entityTypeConvention in _conventionSet.EntityTypeMemberIgnoredConventions
+                        )
                         {
                             if (!entityTypeBuilder.Metadata.IsIgnored(name))
                             {
@@ -222,7 +294,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                             }
 
                             entityTypeConvention.ProcessEntityTypeMemberIgnored(
-                                entityType.Builder, name, _stringConventionContext);
+                                entityType.Builder,
+                                name,
+                                _stringConventionContext
+                            );
                             if (_stringConventionContext.ShouldStopProcessing())
                             {
                                 return _stringConventionContext.Result;
@@ -242,12 +317,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public override IConventionEntityType? OnEntityTypeBaseTypeChanged(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionEntityType? newBaseType,
-                IConventionEntityType? previousBaseType)
+                IConventionEntityType? previousBaseType
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _entityTypeConventionContext.ResetState(newBaseType);
-                    foreach (var entityTypeConvention in _conventionSet.EntityTypeBaseTypeChangedConventions)
+                    foreach (
+                        var entityTypeConvention in _conventionSet.EntityTypeBaseTypeChangedConventions
+                    )
                     {
                         if (!entityTypeBuilder.Metadata.IsInModel)
                         {
@@ -255,7 +333,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                         }
 
                         entityTypeConvention.ProcessEntityTypeBaseTypeChanged(
-                            entityTypeBuilder, newBaseType, previousBaseType, _entityTypeConventionContext);
+                            entityTypeBuilder,
+                            newBaseType,
+                            previousBaseType,
+                            _entityTypeConventionContext
+                        );
                         if (_entityTypeConventionContext.ShouldStopProcessing())
                         {
                             return _entityTypeConventionContext.Result;
@@ -274,7 +356,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public override IConventionKey? OnEntityTypePrimaryKeyChanged(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionKey? newPrimaryKey,
-                IConventionKey? previousPrimaryKey)
+                IConventionKey? previousPrimaryKey
+            )
             {
                 if (!entityTypeBuilder.Metadata.IsInModel)
                 {
@@ -284,7 +367,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _keyConventionContext.ResetState(newPrimaryKey);
-                    foreach (var keyConvention in _conventionSet.EntityTypePrimaryKeyChangedConventions)
+                    foreach (
+                        var keyConvention in _conventionSet.EntityTypePrimaryKeyChangedConventions
+                    )
                     {
                         // Some conventions rely on this running even if the new key has been removed
                         // This will be fixed by reference counting, see #15898
@@ -294,7 +379,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                         //}
 
                         keyConvention.ProcessEntityTypePrimaryKeyChanged(
-                            entityTypeBuilder, newPrimaryKey, previousPrimaryKey, _keyConventionContext);
+                            entityTypeBuilder,
+                            newPrimaryKey,
+                            previousPrimaryKey,
+                            _keyConventionContext
+                        );
                         if (_keyConventionContext.ShouldStopProcessing())
                         {
                             return _keyConventionContext.Result;
@@ -314,12 +403,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _annotationConventionContext.ResetState(annotation);
-                    foreach (var entityTypeConvention in _conventionSet.EntityTypeAnnotationChangedConventions)
+                    foreach (
+                        var entityTypeConvention in _conventionSet.EntityTypeAnnotationChangedConventions
+                    )
                     {
                         if (!entityTypeBuilder.Metadata.IsInModel)
                         {
@@ -327,7 +419,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                         }
 
                         entityTypeConvention.ProcessEntityTypeAnnotationChanged(
-                            entityTypeBuilder, name, annotation, oldAnnotation, _annotationConventionContext);
+                            entityTypeBuilder,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
                             return _annotationConventionContext.Result;
@@ -343,10 +440,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return annotation;
             }
 
-            public override IConventionForeignKeyBuilder? OnForeignKeyAdded(IConventionForeignKeyBuilder relationshipBuilder)
+            public override IConventionForeignKeyBuilder? OnForeignKeyAdded(
+                IConventionForeignKeyBuilder relationshipBuilder
+            )
             {
-                if (!relationshipBuilder.Metadata.DeclaringEntityType.IsInModel
-                    || !relationshipBuilder.Metadata.PrincipalEntityType.IsInModel)
+                if (
+                    !relationshipBuilder.Metadata.DeclaringEntityType.IsInModel
+                    || !relationshipBuilder.Metadata.PrincipalEntityType.IsInModel
+                )
                 {
                     return null;
                 }
@@ -361,7 +462,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                             return null;
                         }
 
-                        foreignKeyConvention.ProcessForeignKeyAdded(relationshipBuilder, _relationshipBuilderConventionContext);
+                        foreignKeyConvention.ProcessForeignKeyAdded(
+                            relationshipBuilder,
+                            _relationshipBuilderConventionContext
+                        );
                         if (_relationshipBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _relationshipBuilderConventionContext.Result;
@@ -379,7 +483,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
 
             public override IConventionForeignKey? OnForeignKeyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionForeignKey foreignKey)
+                IConventionForeignKey foreignKey
+            )
             {
                 if (!entityTypeBuilder.Metadata.IsInModel)
                 {
@@ -389,9 +494,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _foreignKeyConventionContext.ResetState(foreignKey);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyRemovedConventions)
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyRemovedConventions
+                    )
                     {
-                        foreignKeyConvention.ProcessForeignKeyRemoved(entityTypeBuilder, foreignKey, _foreignKeyConventionContext);
+                        foreignKeyConvention.ProcessForeignKeyRemoved(
+                            entityTypeBuilder,
+                            foreignKey,
+                            _foreignKeyConventionContext
+                        );
                         if (_foreignKeyConventionContext.ShouldStopProcessing())
                         {
                             return _foreignKeyConventionContext.Result;
@@ -405,12 +516,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public override IReadOnlyList<IConventionProperty>? OnForeignKeyPropertiesChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IReadOnlyList<IConventionProperty> oldDependentProperties,
-                IConventionKey oldPrincipalKey)
+                IConventionKey oldPrincipalKey
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
-                    _propertyListConventionContext.ResetState(relationshipBuilder.Metadata.Properties);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyPropertiesChangedConventions)
+                    _propertyListConventionContext.ResetState(
+                        relationshipBuilder.Metadata.Properties
+                    );
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyPropertiesChangedConventions
+                    )
                     {
                         // Some conventions rely on this running even if the relationship has been removed
                         // This will be fixed by reference counting, see #15898
@@ -420,14 +536,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                         //}
 
                         foreignKeyConvention.ProcessForeignKeyPropertiesChanged(
-                            relationshipBuilder, oldDependentProperties, oldPrincipalKey, _propertyListConventionContext);
+                            relationshipBuilder,
+                            oldDependentProperties,
+                            oldPrincipalKey,
+                            _propertyListConventionContext
+                        );
 
                         if (_propertyListConventionContext.ShouldStopProcessing())
                         {
                             if (_propertyListConventionContext.Result != null)
                             {
                                 // Preserve the old configuration to let the conventions finish processing them
-                                _dispatcher.OnForeignKeyPropertiesChanged(relationshipBuilder, oldDependentProperties, oldPrincipalKey);
+                                _dispatcher.OnForeignKeyPropertiesChanged(
+                                    relationshipBuilder,
+                                    oldDependentProperties,
+                                    oldPrincipalKey
+                                );
                             }
 
                             return _propertyListConventionContext.Result;
@@ -443,19 +567,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return relationshipBuilder.Metadata.Properties;
             }
 
-            public override bool? OnForeignKeyUniquenessChanged(IConventionForeignKeyBuilder relationshipBuilder)
+            public override bool? OnForeignKeyUniquenessChanged(
+                IConventionForeignKeyBuilder relationshipBuilder
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _boolConventionContext.ResetState(relationshipBuilder.Metadata.IsUnique);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyUniquenessChangedConventions)
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyUniquenessChangedConventions
+                    )
                     {
                         if (!relationshipBuilder.Metadata.IsInModel)
                         {
                             return null;
                         }
 
-                        foreignKeyConvention.ProcessForeignKeyUniquenessChanged(relationshipBuilder, _boolConventionContext);
+                        foreignKeyConvention.ProcessForeignKeyUniquenessChanged(
+                            relationshipBuilder,
+                            _boolConventionContext
+                        );
 
                         if (_boolConventionContext.ShouldStopProcessing())
                         {
@@ -473,19 +604,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             }
 
             public override bool? OnForeignKeyRequirednessChanged(
-                IConventionForeignKeyBuilder relationshipBuilder)
+                IConventionForeignKeyBuilder relationshipBuilder
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _boolConventionContext.ResetState(relationshipBuilder.Metadata.IsRequired);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyRequirednessChangedConventions)
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyRequirednessChangedConventions
+                    )
                     {
                         if (!relationshipBuilder.Metadata.IsInModel)
                         {
                             return null;
                         }
 
-                        foreignKeyConvention.ProcessForeignKeyRequirednessChanged(relationshipBuilder, _boolConventionContext);
+                        foreignKeyConvention.ProcessForeignKeyRequirednessChanged(
+                            relationshipBuilder,
+                            _boolConventionContext
+                        );
 
                         if (_boolConventionContext.ShouldStopProcessing())
                         {
@@ -503,19 +640,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             }
 
             public override bool? OnForeignKeyDependentRequirednessChanged(
-                IConventionForeignKeyBuilder relationshipBuilder)
+                IConventionForeignKeyBuilder relationshipBuilder
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
-                    _boolConventionContext.ResetState(relationshipBuilder.Metadata.IsRequiredDependent);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyDependentRequirednessChangedConventions)
+                    _boolConventionContext.ResetState(
+                        relationshipBuilder.Metadata.IsRequiredDependent
+                    );
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyDependentRequirednessChangedConventions
+                    )
                     {
                         if (!relationshipBuilder.Metadata.IsInModel)
                         {
                             return null;
                         }
 
-                        foreignKeyConvention.ProcessForeignKeyDependentRequirednessChanged(relationshipBuilder, _boolConventionContext);
+                        foreignKeyConvention.ProcessForeignKeyDependentRequirednessChanged(
+                            relationshipBuilder,
+                            _boolConventionContext
+                        );
 
                         if (_boolConventionContext.ShouldStopProcessing())
                         {
@@ -533,19 +678,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             }
 
             public override bool? OnForeignKeyOwnershipChanged(
-                IConventionForeignKeyBuilder relationshipBuilder)
+                IConventionForeignKeyBuilder relationshipBuilder
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _boolConventionContext.ResetState(relationshipBuilder.Metadata.IsOwnership);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyOwnershipChangedConventions)
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyOwnershipChangedConventions
+                    )
                     {
                         if (!relationshipBuilder.Metadata.IsInModel)
                         {
                             return null;
                         }
 
-                        foreignKeyConvention.ProcessForeignKeyOwnershipChanged(relationshipBuilder, _boolConventionContext);
+                        foreignKeyConvention.ProcessForeignKeyOwnershipChanged(
+                            relationshipBuilder,
+                            _boolConventionContext
+                        );
                         if (_boolConventionContext.ShouldStopProcessing())
                         {
                             return _boolConventionContext.Result;
@@ -562,12 +713,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             }
 
             public override IConventionForeignKeyBuilder? OnForeignKeyPrincipalEndChanged(
-                IConventionForeignKeyBuilder relationshipBuilder)
+                IConventionForeignKeyBuilder relationshipBuilder
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _relationshipBuilderConventionContext.ResetState(relationshipBuilder);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyPrincipalEndChangedConventions)
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyPrincipalEndChangedConventions
+                    )
                     {
                         if (!relationshipBuilder.Metadata.IsInModel)
                         {
@@ -575,7 +729,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                         }
 
                         foreignKeyConvention.ProcessForeignKeyPrincipalEndChanged(
-                            relationshipBuilder, _relationshipBuilderConventionContext);
+                            relationshipBuilder,
+                            _relationshipBuilderConventionContext
+                        );
                         if (_relationshipBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _relationshipBuilderConventionContext.Result;
@@ -595,7 +751,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionForeignKeyBuilder relationshipBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
                 if (!relationshipBuilder.Metadata.IsInModel)
                 {
@@ -605,10 +762,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _annotationConventionContext.ResetState(annotation);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyAnnotationChangedConventions)
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyAnnotationChangedConventions
+                    )
                     {
                         foreignKeyConvention.ProcessForeignKeyAnnotationChanged(
-                            relationshipBuilder, name, annotation, oldAnnotation, _annotationConventionContext);
+                            relationshipBuilder,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
                             return _annotationConventionContext.Result;
@@ -621,12 +785,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
 
             public override IConventionNavigation? OnForeignKeyNullNavigationSet(
                 IConventionForeignKeyBuilder relationshipBuilder,
-                bool pointsToPrincipal)
+                bool pointsToPrincipal
+            )
             {
                 using (_dispatcher.DelayConventions())
                 {
                     _navigationConventionContext.ResetState(null);
-                    foreach (var foreignKeyConvention in _conventionSet.ForeignKeyNullNavigationSetConventions)
+                    foreach (
+                        var foreignKeyConvention in _conventionSet.ForeignKeyNullNavigationSetConventions
+                    )
                     {
                         if (!relationshipBuilder.Metadata.IsInModel)
                         {
@@ -634,7 +801,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                         }
 
                         foreignKeyConvention.ProcessForeignKeyNullNavigationSet(
-                            relationshipBuilder, pointsToPrincipal, _navigationConventionContext);
+                            relationshipBuilder,
+                            pointsToPrincipal,
+                            _navigationConventionContext
+                        );
                         if (_navigationConventionContext.ShouldStopProcessing())
                         {
                             return _navigationConventionContext.Result;
@@ -645,7 +815,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return null;
             }
 
-            public override IConventionNavigationBuilder? OnNavigationAdded(IConventionNavigationBuilder navigationBuilder)
+            public override IConventionNavigationBuilder? OnNavigationAdded(
+                IConventionNavigationBuilder navigationBuilder
+            )
             {
                 if (!navigationBuilder.Metadata.IsInModel)
                 {
@@ -657,7 +829,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     _navigationConventionBuilderContext.ResetState(navigationBuilder);
                     foreach (var navigationConvention in _conventionSet.NavigationAddedConventions)
                     {
-                        navigationConvention.ProcessNavigationAdded(navigationBuilder, _navigationConventionBuilderContext);
+                        navigationConvention.ProcessNavigationAdded(
+                            navigationBuilder,
+                            _navigationConventionBuilderContext
+                        );
                         if (_navigationConventionBuilderContext.ShouldStopProcessing())
                         {
                             return _navigationConventionBuilderContext.Result;
@@ -678,10 +853,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionNavigation navigation,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
-                if (!relationshipBuilder.Metadata.IsInModel
-                    || relationshipBuilder.Metadata.GetNavigation(navigation.IsOnDependent) != navigation)
+                if (
+                    !relationshipBuilder.Metadata.IsInModel
+                    || relationshipBuilder.Metadata.GetNavigation(navigation.IsOnDependent)
+                        != navigation
+                )
                 {
                     return null;
                 }
@@ -689,10 +868,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _annotationConventionContext.ResetState(annotation);
-                    foreach (var navigationConvention in _conventionSet.NavigationAnnotationChangedConventions)
+                    foreach (
+                        var navigationConvention in _conventionSet.NavigationAnnotationChangedConventions
+                    )
                     {
                         navigationConvention.ProcessNavigationAnnotationChanged(
-                            relationshipBuilder, navigation, name, annotation, oldAnnotation, _annotationConventionContext);
+                            relationshipBuilder,
+                            navigation,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
                             return _annotationConventionContext.Result;
@@ -707,7 +894,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionEntityTypeBuilder sourceEntityTypeBuilder,
                 IConventionEntityTypeBuilder targetEntityTypeBuilder,
                 string navigationName,
-                MemberInfo? memberInfo)
+                MemberInfo? memberInfo
+            )
             {
                 if (!sourceEntityTypeBuilder.Metadata.IsInModel)
                 {
@@ -717,7 +905,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _stringConventionContext.ResetState(navigationName);
-                    foreach (var navigationConvention in _conventionSet.NavigationRemovedConventions)
+                    foreach (
+                        var navigationConvention in _conventionSet.NavigationRemovedConventions
+                    )
                     {
                         if (sourceEntityTypeBuilder.Metadata.FindNavigation(navigationName) != null)
                         {
@@ -725,7 +915,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                         }
 
                         navigationConvention.ProcessNavigationRemoved(
-                            sourceEntityTypeBuilder, targetEntityTypeBuilder, navigationName, memberInfo, _stringConventionContext);
+                            sourceEntityTypeBuilder,
+                            targetEntityTypeBuilder,
+                            navigationName,
+                            memberInfo,
+                            _stringConventionContext
+                        );
 
                         if (_stringConventionContext.ShouldStopProcessing())
                         {
@@ -743,7 +938,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             }
 
             public override IConventionSkipNavigationBuilder? OnSkipNavigationAdded(
-                IConventionSkipNavigationBuilder navigationBuilder)
+                IConventionSkipNavigationBuilder navigationBuilder
+            )
             {
                 if (!navigationBuilder.Metadata.DeclaringEntityType.IsInModel)
                 {
@@ -753,14 +949,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _skipNavigationBuilderConventionContext.ResetState(navigationBuilder);
-                    foreach (var skipNavigationConvention in _conventionSet.SkipNavigationAddedConventions)
+                    foreach (
+                        var skipNavigationConvention in _conventionSet.SkipNavigationAddedConventions
+                    )
                     {
                         if (!navigationBuilder.Metadata.IsInModel)
                         {
                             return null;
                         }
 
-                        skipNavigationConvention.ProcessSkipNavigationAdded(navigationBuilder, _skipNavigationBuilderConventionContext);
+                        skipNavigationConvention.ProcessSkipNavigationAdded(
+                            navigationBuilder,
+                            _skipNavigationBuilderConventionContext
+                        );
                         if (_skipNavigationBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _skipNavigationBuilderConventionContext.Result;
@@ -780,7 +981,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionSkipNavigationBuilder navigationBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
                 if (!navigationBuilder.Metadata.IsInModel)
                 {
@@ -790,17 +992,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _annotationConventionContext.ResetState(annotation);
-                    foreach (var skipNavigationConvention in _conventionSet.SkipNavigationAnnotationChangedConventions)
+                    foreach (
+                        var skipNavigationConvention in _conventionSet.SkipNavigationAnnotationChangedConventions
+                    )
                     {
-                        if (navigationBuilder.Metadata.IsInModel
-                            && navigationBuilder.Metadata.FindAnnotation(name) != annotation)
+                        if (
+                            navigationBuilder.Metadata.IsInModel
+                            && navigationBuilder.Metadata.FindAnnotation(name) != annotation
+                        )
                         {
                             Check.DebugAssert(false, "annotation removed");
                             return null;
                         }
 
                         skipNavigationConvention.ProcessSkipNavigationAnnotationChanged(
-                            navigationBuilder, name, annotation, oldAnnotation, _annotationConventionContext);
+                            navigationBuilder,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
                             return _annotationConventionContext.Result;
@@ -814,7 +1025,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public override IConventionForeignKey? OnSkipNavigationForeignKeyChanged(
                 IConventionSkipNavigationBuilder navigationBuilder,
                 IConventionForeignKey? foreignKey,
-                IConventionForeignKey? oldForeignKey)
+                IConventionForeignKey? oldForeignKey
+            )
             {
                 if (!navigationBuilder.Metadata.DeclaringEntityType.IsInModel)
                 {
@@ -824,16 +1036,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _foreignKeyConventionContext.ResetState(foreignKey);
-                    foreach (var skipNavigationConvention in _conventionSet.SkipNavigationForeignKeyChangedConventions)
+                    foreach (
+                        var skipNavigationConvention in _conventionSet.SkipNavigationForeignKeyChangedConventions
+                    )
                     {
                         skipNavigationConvention.ProcessSkipNavigationForeignKeyChanged(
-                            navigationBuilder, foreignKey, oldForeignKey, _foreignKeyConventionContext);
+                            navigationBuilder,
+                            foreignKey,
+                            oldForeignKey,
+                            _foreignKeyConventionContext
+                        );
                         if (_foreignKeyConventionContext.ShouldStopProcessing())
                         {
                             if (_foreignKeyConventionContext.Result != null)
                             {
                                 // Preserve the old configuration to let the conventions finish processing them
-                                _dispatcher.OnSkipNavigationForeignKeyChanged(navigationBuilder, foreignKey, oldForeignKey);
+                                _dispatcher.OnSkipNavigationForeignKeyChanged(
+                                    navigationBuilder,
+                                    foreignKey,
+                                    oldForeignKey
+                                );
                             }
 
                             return _foreignKeyConventionContext.Result;
@@ -852,7 +1074,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public override IConventionSkipNavigation? OnSkipNavigationInverseChanged(
                 IConventionSkipNavigationBuilder navigationBuilder,
                 IConventionSkipNavigation? inverse,
-                IConventionSkipNavigation? oldInverse)
+                IConventionSkipNavigation? oldInverse
+            )
             {
                 if (!navigationBuilder.Metadata.DeclaringEntityType.IsInModel)
                 {
@@ -862,10 +1085,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _skipNavigationConventionContext.ResetState(inverse);
-                    foreach (var skipNavigationConvention in _conventionSet.SkipNavigationInverseChangedConventions)
+                    foreach (
+                        var skipNavigationConvention in _conventionSet.SkipNavigationInverseChangedConventions
+                    )
                     {
                         skipNavigationConvention.ProcessSkipNavigationInverseChanged(
-                            navigationBuilder, inverse, oldInverse, _skipNavigationConventionContext);
+                            navigationBuilder,
+                            inverse,
+                            oldInverse,
+                            _skipNavigationConventionContext
+                        );
                         if (_skipNavigationConventionContext.ShouldStopProcessing())
                         {
                             return _skipNavigationConventionContext.Result;
@@ -883,7 +1112,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
 
             public override IConventionSkipNavigation? OnSkipNavigationRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionSkipNavigation navigation)
+                IConventionSkipNavigation navigation
+            )
             {
                 if (!entityTypeBuilder.Metadata.IsInModel)
                 {
@@ -893,10 +1123,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _skipNavigationConventionContext.ResetState(navigation);
-                    foreach (var skipNavigationConvention in _conventionSet.SkipNavigationRemovedConventions)
+                    foreach (
+                        var skipNavigationConvention in _conventionSet.SkipNavigationRemovedConventions
+                    )
                     {
                         skipNavigationConvention.ProcessSkipNavigationRemoved(
-                            entityTypeBuilder, navigation, _skipNavigationConventionContext);
+                            entityTypeBuilder,
+                            navigation,
+                            _skipNavigationConventionContext
+                        );
                         if (_skipNavigationConventionContext.ShouldStopProcessing())
                         {
                             return _skipNavigationConventionContext.Result;
@@ -940,7 +1175,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return keyBuilder;
             }
 
-            public override IConventionKey? OnKeyRemoved(IConventionEntityTypeBuilder entityTypeBuilder, IConventionKey key)
+            public override IConventionKey? OnKeyRemoved(
+                IConventionEntityTypeBuilder entityTypeBuilder,
+                IConventionKey key
+            )
             {
                 if (!entityTypeBuilder.Metadata.IsInModel)
                 {
@@ -952,7 +1190,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     _keyConventionContext.ResetState(key);
                     foreach (var keyConvention in _conventionSet.KeyRemovedConventions)
                     {
-                        keyConvention.ProcessKeyRemoved(entityTypeBuilder, key, _keyConventionContext);
+                        keyConvention.ProcessKeyRemoved(
+                            entityTypeBuilder,
+                            key,
+                            _keyConventionContext
+                        );
                         if (_keyConventionContext.ShouldStopProcessing())
                         {
                             return _keyConventionContext.Result;
@@ -967,7 +1209,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionKeyBuilder keyBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
                 if (!keyBuilder.Metadata.IsInModel)
                 {
@@ -980,7 +1223,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     foreach (var keyConvention in _conventionSet.KeyAnnotationChangedConventions)
                     {
                         keyConvention.ProcessKeyAnnotationChanged(
-                            keyBuilder, name, annotation, oldAnnotation, _annotationConventionContext);
+                            keyBuilder,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
                             return _annotationConventionContext.Result;
@@ -991,7 +1239,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return annotation;
             }
 
-            public override IConventionIndexBuilder? OnIndexAdded(IConventionIndexBuilder indexBuilder)
+            public override IConventionIndexBuilder? OnIndexAdded(
+                IConventionIndexBuilder indexBuilder
+            )
             {
                 if (!indexBuilder.Metadata.DeclaringEntityType.IsInModel)
                 {
@@ -1008,7 +1258,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                             return null;
                         }
 
-                        indexConvention.ProcessIndexAdded(indexBuilder, _indexBuilderConventionContext);
+                        indexConvention.ProcessIndexAdded(
+                            indexBuilder,
+                            _indexBuilderConventionContext
+                        );
                         if (_indexBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _indexBuilderConventionContext.Result;
@@ -1024,7 +1277,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return indexBuilder;
             }
 
-            public override IConventionIndex? OnIndexRemoved(IConventionEntityTypeBuilder entityTypeBuilder, IConventionIndex index)
+            public override IConventionIndex? OnIndexRemoved(
+                IConventionEntityTypeBuilder entityTypeBuilder,
+                IConventionIndex index
+            )
             {
                 if (!entityTypeBuilder.Metadata.IsInModel)
                 {
@@ -1036,7 +1292,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     _indexConventionContext.ResetState(index);
                     foreach (var indexConvention in _conventionSet.IndexRemovedConventions)
                     {
-                        indexConvention.ProcessIndexRemoved(entityTypeBuilder, index, _indexConventionContext);
+                        indexConvention.ProcessIndexRemoved(
+                            entityTypeBuilder,
+                            index,
+                            _indexConventionContext
+                        );
                         if (_indexConventionContext.ShouldStopProcessing())
                         {
                             return _indexConventionContext.Result;
@@ -1052,14 +1312,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _boolConventionContext.ResetState(indexBuilder.Metadata.IsUnique);
-                    foreach (var indexConvention in _conventionSet.IndexUniquenessChangedConventions)
+                    foreach (
+                        var indexConvention in _conventionSet.IndexUniquenessChangedConventions
+                    )
                     {
                         if (!indexBuilder.Metadata.IsInModel)
                         {
                             return null;
                         }
 
-                        indexConvention.ProcessIndexUniquenessChanged(indexBuilder, _boolConventionContext);
+                        indexConvention.ProcessIndexUniquenessChanged(
+                            indexBuilder,
+                            _boolConventionContext
+                        );
                         if (_boolConventionContext.ShouldStopProcessing())
                         {
                             return _boolConventionContext.Result;
@@ -1079,7 +1344,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionIndexBuilder indexBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
                 if (!indexBuilder.Metadata.IsInModel)
                 {
@@ -1089,10 +1355,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _annotationConventionContext.ResetState(annotation);
-                    foreach (var indexConvention in _conventionSet.IndexAnnotationChangedConventions)
+                    foreach (
+                        var indexConvention in _conventionSet.IndexAnnotationChangedConventions
+                    )
                     {
                         indexConvention.ProcessIndexAnnotationChanged(
-                            indexBuilder, name, annotation, oldAnnotation, _annotationConventionContext);
+                            indexBuilder,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
                             return _annotationConventionContext.Result;
@@ -1103,7 +1376,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return annotation;
             }
 
-            public override IConventionPropertyBuilder? OnPropertyAdded(IConventionPropertyBuilder propertyBuilder)
+            public override IConventionPropertyBuilder? OnPropertyAdded(
+                IConventionPropertyBuilder propertyBuilder
+            )
             {
                 if (!propertyBuilder.Metadata.DeclaringEntityType.IsInModel)
                 {
@@ -1120,7 +1395,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                             return null;
                         }
 
-                        propertyConvention.ProcessPropertyAdded(propertyBuilder, _propertyBuilderConventionContext);
+                        propertyConvention.ProcessPropertyAdded(
+                            propertyBuilder,
+                            _propertyBuilderConventionContext
+                        );
                         if (_propertyBuilderConventionContext.ShouldStopProcessing())
                         {
                             return _propertyBuilderConventionContext.Result;
@@ -1136,7 +1414,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return propertyBuilder;
             }
 
-            public override bool? OnPropertyNullabilityChanged(IConventionPropertyBuilder propertyBuilder)
+            public override bool? OnPropertyNullabilityChanged(
+                IConventionPropertyBuilder propertyBuilder
+            )
             {
                 if (!propertyBuilder.Metadata.DeclaringEntityType.IsInModel)
                 {
@@ -1146,14 +1426,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _boolConventionContext.ResetState(propertyBuilder.Metadata.IsNullable);
-                    foreach (var propertyConvention in _conventionSet.PropertyNullabilityChangedConventions)
+                    foreach (
+                        var propertyConvention in _conventionSet.PropertyNullabilityChangedConventions
+                    )
                     {
                         if (!propertyBuilder.Metadata.IsInModel)
                         {
                             return null;
                         }
 
-                        propertyConvention.ProcessPropertyNullabilityChanged(propertyBuilder, _boolConventionContext);
+                        propertyConvention.ProcessPropertyNullabilityChanged(
+                            propertyBuilder,
+                            _boolConventionContext
+                        );
                         if (_boolConventionContext.ShouldStopProcessing())
                         {
                             return _boolConventionContext.Result;
@@ -1172,10 +1457,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public override FieldInfo? OnPropertyFieldChanged(
                 IConventionPropertyBuilder propertyBuilder,
                 FieldInfo? newFieldInfo,
-                FieldInfo? oldFieldInfo)
+                FieldInfo? oldFieldInfo
+            )
             {
-                if (!propertyBuilder.Metadata.IsInModel
-                    || !propertyBuilder.Metadata.DeclaringEntityType.IsInModel)
+                if (
+                    !propertyBuilder.Metadata.IsInModel
+                    || !propertyBuilder.Metadata.DeclaringEntityType.IsInModel
+                )
                 {
                     return null;
                 }
@@ -1184,7 +1472,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 foreach (var propertyConvention in _conventionSet.PropertyFieldChangedConventions)
                 {
                     propertyConvention.ProcessPropertyFieldChanged(
-                        propertyBuilder, newFieldInfo, oldFieldInfo, _fieldInfoConventionContext);
+                        propertyBuilder,
+                        newFieldInfo,
+                        oldFieldInfo,
+                        _fieldInfoConventionContext
+                    );
                     if (_fieldInfoConventionContext.ShouldStopProcessing())
                     {
                         return _fieldInfoConventionContext.Result;
@@ -1198,10 +1490,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionPropertyBuilder propertyBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation)
+                IConventionAnnotation? oldAnnotation
+            )
             {
-                if (!propertyBuilder.Metadata.IsInModel
-                    || !propertyBuilder.Metadata.DeclaringEntityType.IsInModel)
+                if (
+                    !propertyBuilder.Metadata.IsInModel
+                    || !propertyBuilder.Metadata.DeclaringEntityType.IsInModel
+                )
                 {
                     return null;
                 }
@@ -1209,10 +1504,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using (_dispatcher.DelayConventions())
                 {
                     _annotationConventionContext.ResetState(annotation);
-                    foreach (var propertyConvention in _conventionSet.PropertyAnnotationChangedConventions)
+                    foreach (
+                        var propertyConvention in _conventionSet.PropertyAnnotationChangedConventions
+                    )
                     {
                         propertyConvention.ProcessPropertyAnnotationChanged(
-                            propertyBuilder, name, annotation, oldAnnotation, _annotationConventionContext);
+                            propertyBuilder,
+                            name,
+                            annotation,
+                            oldAnnotation,
+                            _annotationConventionContext
+                        );
 
                         if (_annotationConventionContext.ShouldStopProcessing())
                         {
@@ -1226,7 +1528,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
 
             public override IConventionProperty? OnPropertyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionProperty property)
+                IConventionProperty property
+            )
             {
                 if (!entityTypeBuilder.Metadata.IsInModel)
                 {
@@ -1238,7 +1541,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     _propertyConventionContext.ResetState(property);
                     foreach (var propertyConvention in _conventionSet.PropertyRemovedConventions)
                     {
-                        propertyConvention.ProcessPropertyRemoved(entityTypeBuilder, property, _propertyConventionContext);
+                        propertyConvention.ProcessPropertyRemoved(
+                            entityTypeBuilder,
+                            property,
+                            _propertyConventionContext
+                        );
                         if (_propertyConventionContext.ShouldStopProcessing())
                         {
                             return _propertyConventionContext.Result;

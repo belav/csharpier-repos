@@ -22,11 +22,46 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
     public class ActiveStatementsMapTests
     {
         [Theory]
-        [InlineData(/*span*/ 3, 0, 5, 2,     /*expected*/ 0, 4)]
-        [InlineData(/*span*/ 2, 0, 3, 1,     /*expected*/ 0, 1)]
-        [InlineData(/*span*/ 19, 1, 19, 100, /*expected*/ 0, 0)]
-        [InlineData(/*span*/ 20, 1, 20, 2,   /*expected*/ 0, 0)]
-        [InlineData(/*span*/ 0, 0, 100, 0,   /*expected*/ 0, 6)]
+        [InlineData( /*span*/
+            3,
+            0,
+            5,
+            2, /*expected*/
+            0,
+            4
+        )]
+        [InlineData( /*span*/
+            2,
+            0,
+            3,
+            1, /*expected*/
+            0,
+            1
+        )]
+        [InlineData( /*span*/
+            19,
+            1,
+            19,
+            100, /*expected*/
+            0,
+            0
+        )]
+        [InlineData( /*span*/
+            20,
+            1,
+            20,
+            2, /*expected*/
+            0,
+            0
+        )]
+        [InlineData( /*span*/
+            0,
+            0,
+            100,
+            0, /*expected*/
+            0,
+            6
+        )]
         public void GetSpansStartingInSpan1(int sl, int sc, int el, int ec, int s, int e)
         {
             var span = new LinePositionSpan(new(sl, sc), new(el, ec));
@@ -36,9 +71,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 new LinePositionSpan(new(4, 4), new(4, 18)),
                 new LinePositionSpan(new(5, 1), new(5, 2)),
                 new LinePositionSpan(new(5, 2), new(5, 8)),
-                new LinePositionSpan(new(19, 0), new(19, 42)));
+                new LinePositionSpan(new(19, 0), new(19, 42))
+            );
 
-            Assert.Equal(new Range(s, e), ActiveStatementsMap.GetSpansStartingInSpan(span.Start, span.End, array, startPositionComparer: (x, y) => x.Start.CompareTo(y)));
+            Assert.Equal(
+                new Range(s, e),
+                ActiveStatementsMap.GetSpansStartingInSpan(
+                    span.Start,
+                    span.End,
+                    array,
+                    startPositionComparer: (x, y) => x.Start.CompareTo(y)
+                )
+            );
         }
 
         [Fact]
@@ -53,10 +97,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 TextSpan.FromBounds(6, 7), // does not overlap
                 TextSpan.FromBounds(7, 9), // overlaps
                 TextSpan.FromBounds(10, 12), // overlaps
-                TextSpan.FromBounds(13, 15)); // does not overlap
+                TextSpan.FromBounds(13, 15)
+            ); // does not overlap
 
             // only one span has start position within the span:
-            Assert.Equal(new Range(5, 6), ActiveStatementsMap.GetSpansStartingInSpan(span.Start, span.End, array, startPositionComparer: (x, y) => x.Start.CompareTo(y)));
+            Assert.Equal(
+                new Range(5, 6),
+                ActiveStatementsMap.GetSpansStartingInSpan(
+                    span.Start,
+                    span.End,
+                    array,
+                    startPositionComparer: (x, y) => x.Start.CompareTo(y)
+                )
+            );
         }
 
         [Fact]
@@ -64,7 +117,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         {
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
 
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F()
@@ -85,9 +139,14 @@ S5();
     }
 }";
 
-            var solution = workspace.CurrentSolution
-                .AddProject("proj", "proj", LanguageNames.CSharp)
-                .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs").Project.Solution;
+            var solution =
+                workspace.CurrentSolution
+                    .AddProject("proj", "proj", LanguageNames.CSharp)
+                    .AddDocument(
+                        "doc",
+                        SourceText.From(source, Encoding.UTF8),
+                        filePath: "a.cs"
+                    ).Project.Solution;
 
             var project = solution.Projects.Single();
             var document = project.Documents.Single();
@@ -97,8 +156,19 @@ S5();
 
             var moduleId = Guid.NewGuid();
             var token = 0x06000001;
-            ManagedActiveStatementDebugInfo CreateInfo(int startLine, int startColumn, int endLine, int endColumn, string fileName)
-                => new(new(new(moduleId, token++, version: 1), ilOffset: 0), fileName, new SourceSpan(startLine, startColumn, endLine, endColumn), ActiveStatementFlags.MethodUpToDate);
+            ManagedActiveStatementDebugInfo CreateInfo(
+                int startLine,
+                int startColumn,
+                int endLine,
+                int endColumn,
+                string fileName
+            ) =>
+                new(
+                    new(new(moduleId, token++, version: 1), ilOffset: 0),
+                    fileName,
+                    new SourceSpan(startLine, startColumn, endLine, endColumn),
+                    ActiveStatementFlags.MethodUpToDate
+                );
 
             var debugInfos = ImmutableArray.Create(
                 CreateInfo(3, 0, 3, 4, "x"),
@@ -110,20 +180,35 @@ S5();
                 CreateInfo(1, 0, 1, 4, "x")
             );
 
-            var map = ActiveStatementsMap.Create(debugInfos, remapping: ImmutableDictionary<ManagedMethodId, ImmutableArray<NonRemappableRegion>>.Empty);
+            var map = ActiveStatementsMap.Create(
+                debugInfos,
+                remapping: ImmutableDictionary<
+                    ManagedMethodId,
+                    ImmutableArray<NonRemappableRegion>
+                >.Empty
+            );
 
-            var oldSpans = await map.GetOldActiveStatementsAsync(analyzer, document, CancellationToken.None);
+            var oldSpans = await map.GetOldActiveStatementsAsync(
+                analyzer,
+                document,
+                CancellationToken.None
+            );
 
-            AssertEx.Equal(new[]
-            {
-                "[48..52) -> (1,0)-(1,4) #6",
-                "[55..59) -> (2,0)-(2,4) #3",
-                "[62..66) -> (3,0)-(3,4) #0",
-                "[86..90) -> (0,0)-(0,4) #5",
-                "[120..124) -> (4,0)-(4,4) #2",
-                "[127..131) -> (5,0)-(5,4) #4",
-                "[134..138) -> (6,0)-(6,4) #1"
-            }, oldSpans.Select(s => $"{s.UnmappedSpan} -> {s.Statement.Span} #{s.Statement.Ordinal}"));
+            AssertEx.Equal(
+                new[]
+                {
+                    "[48..52) -> (1,0)-(1,4) #6",
+                    "[55..59) -> (2,0)-(2,4) #3",
+                    "[62..66) -> (3,0)-(3,4) #0",
+                    "[86..90) -> (0,0)-(0,4) #5",
+                    "[120..124) -> (4,0)-(4,4) #2",
+                    "[127..131) -> (5,0)-(5,4) #4",
+                    "[134..138) -> (6,0)-(6,4) #1"
+                },
+                oldSpans.Select(
+                    s => $"{s.UnmappedSpan} -> {s.Statement.Span} #{s.Statement.Ordinal}"
+                )
+            );
         }
     }
 }

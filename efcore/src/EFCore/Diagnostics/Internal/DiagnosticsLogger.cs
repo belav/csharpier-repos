@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DiagnosticSource diagnosticSource,
             LoggingDefinitions loggingDefinitions,
             IDbContextLogger contextLogger,
-            IInterceptors? interceptors = null)
+            IInterceptors? interceptors = null
+        )
         {
             DiagnosticSource = diagnosticSource;
             Definitions = loggingDefinitions;
@@ -96,8 +97,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         {
             var options = Options;
 
-            if (options.IsSensitiveDataLoggingEnabled
-                && !options.IsSensitiveDataLoggingWarned)
+            if (options.IsSensitiveDataLoggingEnabled && !options.IsSensitiveDataLoggingWarned)
             {
                 this.SensitiveDataLoggingEnabledWarning();
 
@@ -120,8 +120,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             EventDefinitionBase definition,
             EventData eventData,
             bool diagnosticSourceEnabled,
-            bool simpleLogEnabled)
-            => ((IDiagnosticsLogger)this).DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            bool simpleLogEnabled
+        ) =>
+            ((IDiagnosticsLogger)this).DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
         /// <summary>
         ///     Checks whether or not the message should be sent to the <see cref="ILogger" />.
@@ -132,8 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     <see langword="false" /> otherwise.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // Because hot path for logging
-        protected bool ShouldLog(EventDefinitionBase definition)
-            => ((IDiagnosticsLogger)this).ShouldLog(definition);
+        protected bool ShouldLog(EventDefinitionBase definition) =>
+            ((IDiagnosticsLogger)this).ShouldLog(definition);
 
         /// <summary>
         ///     Determines whether or not an <see cref="EventData" /> instance is needed based on whether or
@@ -159,8 +165,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             EventDefinitionBase definition,
             out TInterceptor? interceptor,
             out bool diagnosticSourceEnabled,
-            out bool simpleLogEnabled)
-            where TInterceptor : class, IInterceptor
-            => ((IDiagnosticsLogger)this).NeedsEventData(definition, out interceptor, out diagnosticSourceEnabled, out simpleLogEnabled);
+            out bool simpleLogEnabled
+        ) where TInterceptor : class, IInterceptor =>
+            ((IDiagnosticsLogger)this).NeedsEventData(
+                definition,
+                out interceptor,
+                out diagnosticSourceEnabled,
+                out simpleLogEnabled
+            );
     }
 }

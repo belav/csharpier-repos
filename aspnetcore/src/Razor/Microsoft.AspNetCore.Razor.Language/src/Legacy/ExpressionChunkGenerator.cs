@@ -16,8 +16,7 @@ internal class ExpressionChunkGenerator : ISpanChunkGenerator
 
     public override bool Equals(object obj)
     {
-        return obj != null &&
-            GetType() == obj.GetType();
+        return obj != null && GetType() == obj.GetType();
     }
 
     public override int GetHashCode()

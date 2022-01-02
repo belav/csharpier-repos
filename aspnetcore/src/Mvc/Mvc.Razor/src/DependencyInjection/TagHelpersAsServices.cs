@@ -12,7 +12,10 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class TagHelpersAsServices
 {
-    public static void AddTagHelpersAsServices(ApplicationPartManager manager, IServiceCollection services)
+    public static void AddTagHelpersAsServices(
+        ApplicationPartManager manager,
+        IServiceCollection services
+    )
     {
         if (manager == null)
         {
@@ -32,6 +35,8 @@ internal static class TagHelpersAsServices
             services.TryAddTransient(type, type);
         }
 
-        services.Replace(ServiceDescriptor.Transient<ITagHelperActivator, ServiceBasedTagHelperActivator>());
+        services.Replace(
+            ServiceDescriptor.Transient<ITagHelperActivator, ServiceBasedTagHelperActivator>()
+        );
     }
 }

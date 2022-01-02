@@ -17,21 +17,20 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
     /// </summary>
     public class SqlServerCodeGenerator : ProviderCodeGenerator
     {
-        private static readonly MethodInfo _useSqlServerMethodInfo
-            = typeof(SqlServerDbContextOptionsExtensions).GetRequiredRuntimeMethod(
+        private static readonly MethodInfo _useSqlServerMethodInfo =
+            typeof(SqlServerDbContextOptionsExtensions).GetRequiredRuntimeMethod(
                 nameof(SqlServerDbContextOptionsExtensions.UseSqlServer),
                 typeof(DbContextOptionsBuilder),
                 typeof(string),
-                typeof(Action<SqlServerDbContextOptionsBuilder>));
+                typeof(Action<SqlServerDbContextOptionsBuilder>)
+            );
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqlServerCodeGenerator" /> class.
         /// </summary>
         /// <param name="dependencies">The dependencies.</param>
         public SqlServerCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,11 +40,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         /// </summary>
         public override MethodCallCodeFragment GenerateUseProvider(
             string connectionString,
-            MethodCallCodeFragment? providerOptions)
-            => new(
+            MethodCallCodeFragment? providerOptions
+        ) =>
+            new(
                 _useSqlServerMethodInfo,
                 providerOptions == null
-                    ? new object[] { connectionString }
-                    : new object[] { connectionString, new NestedClosureCodeFragment("x", providerOptions) });
+                  ? new object[] { connectionString }
+                  : new object[]
+                    {
+                        connectionString,
+                        new NestedClosureCodeFragment("x", providerOptions)
+                    }
+            );
     }
 }

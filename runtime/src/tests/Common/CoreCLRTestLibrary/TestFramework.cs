@@ -14,10 +14,13 @@ namespace TestLibrary
         {
             Logging.WriteLine(str);
         }
+
         public static void LogVerbose(string str)
         {
-            if (Utilities.Verbose) Logging.WriteLine(str);
+            if (Utilities.Verbose)
+                Logging.WriteLine(str);
         }
+
         public static void LogError(string id, string msg)
         {
             Logging.WriteLine("ERROR!!!-" + id + ": " + msg);
@@ -47,7 +50,11 @@ namespace TestLibrary
             Generator.m_rand = new Random(seed);
 
             Logging.WriteLine("Beginning test case " + title + " at " + DateTime.Now);
-            Logging.WriteLine("Random seed: " + seed + "; set environment variable CORECLR_SEED to this value to repro");
+            Logging.WriteLine(
+                "Random seed: "
+                    + seed
+                    + "; set environment variable CORECLR_SEED to this value to repro"
+            );
             Logging.WriteLine();
         }
 

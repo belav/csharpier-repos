@@ -18,7 +18,10 @@ namespace System.Web.Http.WebHost
         {
             _httpContextBase = httpContext;
             _items = new Hashtable();
-            _httpRequestWrapper = new HttpRequestMessageWrapper(httpContext.Request.ApplicationPath, httpRequest);
+            _httpRequestWrapper = new HttpRequestMessageWrapper(
+                httpContext.Request.ApplicationPath,
+                httpRequest
+            );
         }
 
         public override HttpRequestBase Request
@@ -38,14 +41,8 @@ namespace System.Web.Http.WebHost
 
         public override IPrincipal User
         {
-            get
-            {
-                return _httpContextBase.User;
-            }
-            set
-            {
-                _httpContextBase.User = value;
-            }
+            get { return _httpContextBase.User; }
+            set { _httpContextBase.User = value; }
         }
     }
 }

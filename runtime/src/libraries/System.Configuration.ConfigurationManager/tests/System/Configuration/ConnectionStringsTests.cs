@@ -9,7 +9,7 @@ namespace System.ConfigurationTests
     public class ConnectionStringsTests
     {
         public static string SimpleConnectionStringConfiguration =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <connectionStrings>
         <add name='fooName' connectionString='fooConnectionString' providerName='fooProviderName' />
@@ -24,7 +24,9 @@ namespace System.ConfigurationTests
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
                 Assert.NotNull(config.ConnectionStrings);
                 Assert.NotNull(config.ConnectionStrings.ConnectionStrings);
-                ConnectionStringSettings connection = config.ConnectionStrings.ConnectionStrings["fooName"];
+                ConnectionStringSettings connection = config.ConnectionStrings.ConnectionStrings[
+                    "fooName"
+                ];
                 Assert.Equal("fooName", connection.Name);
                 Assert.Equal("fooConnectionString", connection.ConnectionString);
                 Assert.Equal("fooProviderName", connection.ProviderName);

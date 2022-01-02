@@ -4,7 +4,6 @@ using System.Security;
 using System;
 using System.Runtime.InteropServices; // For SafeHandle
 
-
 /// <summary>
 ///IsInvalid
 /// </summary>
@@ -36,13 +35,12 @@ public class SafeHandleIsInvalid
             MySafeHandle msh = new MySafeHandle();
             IntPtr myIptr = new IntPtr(1000);
             msh.MySetHandle(myIptr);
-           
+
             if (!msh.IsInvalid)
             {
                 TestLibrary.TestFramework.LogError("001.1", "IsInvalid should return true");
                 retVal = false;
             }
-
         }
         catch (Exception e)
         {
@@ -54,13 +52,14 @@ public class SafeHandleIsInvalid
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest2()
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: Check IsInvalid return false when  the handle value is Released. ");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Check IsInvalid return false when  the handle value is Released. "
+        );
         try
         {
             MySafeHandle msh = new MySafeHandle();
@@ -72,7 +71,6 @@ public class SafeHandleIsInvalid
                 TestLibrary.TestFramework.LogError("002.1", "IsInvalid should return false ");
                 retVal = false;
             }
-
         }
         catch (Exception e)
         {
@@ -113,32 +111,35 @@ public class SafeHandleIsInvalid
 
 [SecurityCritical]
 public class MySafeHandle : SafeHandle
-{   
+{
     [SecurityCritical]
-    public MySafeHandle()
-        : base(IntPtr.Zero, true)
+    public MySafeHandle() : base(IntPtr.Zero, true)
     {
         this.handle = new IntPtr(100);
     }
+
     bool InvalidValue = true;
     public override bool IsInvalid
     {
         [SecurityCritical]
         get { return InvalidValue; }
-
     }
+
     public bool MyReleaseInvoke()
     {
         return ReleaseHandle();
     }
+
     public void MySetHandle(IntPtr iptr)
     {
         this.SetHandle(iptr);
     }
+
     public IntPtr GetHandle()
     {
         return this.handle;
     }
+
     [DllImport("kernel32")]
     private static extern bool CloseHandle(IntPtr handle);
 
@@ -154,6 +155,7 @@ public class MySafeHandle : SafeHandle
         InvalidValue = false;
         return true;
     }
+
     public bool CheckHandleIsRelease()
     {
         if (handle != IntPtr.Zero)
@@ -165,5 +167,4 @@ public class MySafeHandle : SafeHandle
             return false;
         }
     }
-   
 }

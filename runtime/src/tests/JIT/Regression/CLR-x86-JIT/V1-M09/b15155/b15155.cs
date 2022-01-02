@@ -39,12 +39,10 @@ namespace DefaultNamespace
         //	public override int GetHashCode() { return 0; }
     }
 
-
     public class bug
     {
         public static int Main(String[] args)
         {
-
             int size = 32;
             V3[] tmpV3Array = new V3[size];
             Object[] VarArray = new Object[size];
@@ -53,10 +51,16 @@ namespace DefaultNamespace
             Array.Copy(VarArray, tmpV3Array, size);
             for (int i = 0; i < size; i++)
                 if (!tmpV3Array[i].Validate())
-                    throw new Exception("tmpV3Array[" + i + "] didn't validate correctly!  got: " + tmpV3Array[i] + "  expected: " + VarArray[i]);
+                    throw new Exception(
+                        "tmpV3Array["
+                            + i
+                            + "] didn't validate correctly!  got: "
+                            + tmpV3Array[i]
+                            + "  expected: "
+                            + VarArray[i]
+                    );
 
             return 100;
-
         }
     }
 }

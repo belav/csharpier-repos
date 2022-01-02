@@ -66,9 +66,7 @@ namespace Microsoft.CodeAnalysis
         public override string ToString()
         {
             // Note: For nullable types, it's possible to have _hasValue true and _value null.
-            return _hasValue
-                ? _value?.ToString() ?? "null"
-                : "unspecified";
+            return _hasValue ? _value?.ToString() ?? "null" : "unspecified";
         }
     }
 }

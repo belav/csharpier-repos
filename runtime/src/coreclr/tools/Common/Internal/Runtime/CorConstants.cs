@@ -25,9 +25,9 @@ namespace Internal.CorConstants
     public enum CorCompileImportFlags
     {
         CORCOMPILE_IMPORT_FLAGS_UNKNOWN = 0x0000,
-        CORCOMPILE_IMPORT_FLAGS_EAGER = 0x0001,     // Section at module load time.
-        CORCOMPILE_IMPORT_FLAGS_CODE = 0x0002,      // Section contains code.
-        CORCOMPILE_IMPORT_FLAGS_PCODE = 0x0004,     // Section contains pointers to code.
+        CORCOMPILE_IMPORT_FLAGS_EAGER = 0x0001, // Section at module load time.
+        CORCOMPILE_IMPORT_FLAGS_CODE = 0x0002, // Section contains code.
+        CORCOMPILE_IMPORT_FLAGS_PCODE = 0x0004, // Section contains pointers to code.
     };
 
     public enum CorElementType : byte
@@ -80,10 +80,8 @@ namespace Internal.CorConstants
         // See code:ZapSig.GetSignatureForTypeHandle and code:SigPointer.GetTypeHandleThrowing
         // where the encoding/decoding takes place.
         ELEMENT_TYPE_NATIVE_VALUETYPE_ZAPSIG = 0x3d,
-
-        ELEMENT_TYPE_CANON_ZAPSIG = 0x3e,       // zapsig encoding for System.__Canon
-        ELEMENT_TYPE_MODULE_ZAPSIG = 0x3f,      // zapsig encoding for external module id#
-
+        ELEMENT_TYPE_CANON_ZAPSIG = 0x3e, // zapsig encoding for System.__Canon
+        ELEMENT_TYPE_MODULE_ZAPSIG = 0x3f, // zapsig encoding for external module id#
         ELEMENT_TYPE_HANDLE = 64,
         ELEMENT_TYPE_SENTINEL = 65,
         ELEMENT_TYPE_PINNED = 69,
@@ -115,7 +113,6 @@ namespace Internal.CorConstants
         mdtGenericParam = 0x2a000000,
         mdtMethodSpec = 0x2b000000,
         mdtGenericParamConstraint = 0x2c000000,
-
         mdtString = 0x70000000,
         mdtName = 0x71000000,
         mdtBaseType = 0x72000000,

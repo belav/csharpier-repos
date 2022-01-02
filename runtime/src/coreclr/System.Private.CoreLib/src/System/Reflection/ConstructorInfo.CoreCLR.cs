@@ -5,6 +5,9 @@ namespace System.Reflection
 {
     public abstract partial class ConstructorInfo : MethodBase
     {
-        internal virtual Type GetReturnType() { throw new NotImplementedException(); }
+        internal virtual Type GetReturnType()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -98,7 +98,9 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_CustomAttribute_Constructor_PseudoCa()
         {
-            FieldInfo f = typeof(MyExplicitClass).GetTypeInfo().GetDeclaredField(nameof(MyExplicitClass.X));
+            FieldInfo f = typeof(MyExplicitClass)
+                .GetTypeInfo()
+                .GetDeclaredField(nameof(MyExplicitClass.X));
             foreach (CustomAttributeData cad in f.CustomAttributes)
             {
                 if (cad.AttributeType == typeof(FieldOffsetAttribute))
@@ -149,8 +151,11 @@ namespace System.Reflection.Tests
         private class MyAttribute : Attribute
         {
             internal MyAttribute() { }
+
             internal MyAttribute(int i) { }
+
             internal MyAttribute(string s) { }
+
             internal MyAttribute(int i, int j) { }
 
             static MyAttribute() { }

@@ -17,20 +17,24 @@ namespace Internal.Cryptography.Pal
     {
         public static IX509Pal Instance = new AppleX509Pal();
 
-        private X509Pal()
-        {
-        }
+        private X509Pal() { }
 
         private sealed partial class AppleX509Pal : ManagedX509ExtensionProcessor, IX509Pal
         {
-            public AsymmetricAlgorithm DecodePublicKey(Oid oid, byte[] encodedKeyValue, byte[] encodedParameters,
-                ICertificatePal? certificatePal)
+            public AsymmetricAlgorithm DecodePublicKey(
+                Oid oid,
+                byte[] encodedKeyValue,
+                byte[] encodedParameters,
+                ICertificatePal? certificatePal
+            )
             {
                 AppleCertificatePal? applePal = certificatePal as AppleCertificatePal;
 
                 if (applePal != null)
                 {
-                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(applePal.CertificateHandle);
+                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
+                        applePal.CertificateHandle
+                    );
 
                     switch (oid.Value)
                     {
@@ -77,11 +81,18 @@ namespace Internal.Cryptography.Pal
                 }
             }
 
-            private static AsymmetricAlgorithm DecodeDsaPublicKey(byte[] encodedKeyValue, byte[] encodedParameters)
+            private static AsymmetricAlgorithm DecodeDsaPublicKey(
+                byte[] encodedKeyValue,
+                byte[] encodedParameters
+            )
             {
                 SubjectPublicKeyInfoAsn spki = new SubjectPublicKeyInfoAsn
                 {
-                    Algorithm = new AlgorithmIdentifierAsn { Algorithm = Oids.Dsa, Parameters = encodedParameters },
+                    Algorithm = new AlgorithmIdentifierAsn
+                    {
+                        Algorithm = Oids.Dsa,
+                        Parameters = encodedParameters
+                    },
                     SubjectPublicKey = encodedKeyValue,
                 };
 
@@ -101,9 +112,9 @@ namespace Internal.Cryptography.Pal
 
                 try
                 {
-                   dsa.ImportSubjectPublicKeyInfo(rented.AsSpan(0, written), out _);
-                   toDispose = null;
-                   return dsa;
+                    dsa.ImportSubjectPublicKeyInfo(rented.AsSpan(0, written), out _);
+                    toDispose = null;
+                    return dsa;
                 }
                 finally
                 {
@@ -132,7 +143,12 @@ namespace Internal.Cryptography.Pal
                         {
                             fixed (byte* pin = rawData)
                             {
-                                using (var manager = new PointerMemoryManager<byte>(pin, rawData.Length))
+                                using (
+                                    var manager = new PointerMemoryManager<byte>(
+                                        pin,
+                                        rawData.Length
+                                    )
+                                )
                                 {
                                     PfxAsn.Decode(manager.Memory, AsnEncodingRules.BER);
                                 }
@@ -141,9 +157,7 @@ namespace Internal.Cryptography.Pal
                             }
                         }
                     }
-                    catch (CryptographicException)
-                    {
-                    }
+                    catch (CryptographicException) { }
                 }
 
                 if (contentType == X509ContentType.Unknown)

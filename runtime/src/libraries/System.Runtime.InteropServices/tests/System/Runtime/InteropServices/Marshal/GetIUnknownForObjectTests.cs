@@ -20,7 +20,10 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetIUnknownForObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.GetIUnknownForObject(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => Marshal.GetIUnknownForObject(null)
+            );
         }
     }
 }

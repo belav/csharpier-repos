@@ -148,7 +148,10 @@ internal static partial class Interop
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetFileSystemType")]
         private static extern long GetFileSystemType(SafeFileHandle fd);
 
-        internal static bool TryGetFileSystemType(SafeFileHandle fd, out UnixFileSystemTypes fileSystemType)
+        internal static bool TryGetFileSystemType(
+            SafeFileHandle fd,
+            out UnixFileSystemTypes fileSystemType
+        )
         {
             long fstatfsResult = GetFileSystemType(fd);
             fileSystemType = (UnixFileSystemTypes)fstatfsResult;

@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_NestedCall
 {
     const int Pass = 100;
@@ -26,7 +27,9 @@ public class BringUpTest_NestedCall
     public static int Main()
     {
         int y = NestedCall(2, 3);
-        if (y == 97) return Pass;
-        else return Fail;
+        if (y == 97)
+            return Pass;
+        else
+            return Fail;
     }
 }

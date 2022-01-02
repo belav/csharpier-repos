@@ -34,7 +34,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             sb.Append("__ManagedResources");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public int Size => _module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.Size;
 
@@ -46,15 +47,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     data: Array.Empty<byte>(),
                     relocs: Array.Empty<Relocation>(),
                     alignment: 1,
-                    definedSymbols: new ISymbolDefinitionNode[] { this });
+                    definedSymbols: new ISymbolDefinitionNode[] { this }
+                );
             }
 
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.RequireInitialAlignment(4);
             builder.AddSymbol(this);
 
-            DirectoryEntry resourcesDirectory = _module.PEReader.PEHeaders.CorHeader.ResourcesDirectory;
-            PEMemoryBlock block = _module.PEReader.GetSectionData(resourcesDirectory.RelativeVirtualAddress);
+            DirectoryEntry resourcesDirectory =
+                _module.PEReader.PEHeaders.CorHeader.ResourcesDirectory;
+            PEMemoryBlock block = _module.PEReader.GetSectionData(
+                resourcesDirectory.RelativeVirtualAddress
+            );
             builder.EmitBytes(block.GetReader().ReadBytes(resourcesDirectory.Size));
 
             return builder.ToObjectData();

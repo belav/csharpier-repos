@@ -15,26 +15,32 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
     {
         internal sealed class SolutionAnalyzerSetter : ISolutionAnalyzerSetterWorkspaceService
         {
-            [ExportWorkspaceServiceFactory(typeof(ISolutionAnalyzerSetterWorkspaceService), WorkspaceKind.Interactive), Shared]
+            [
+                ExportWorkspaceServiceFactory(
+                    typeof(ISolutionAnalyzerSetterWorkspaceService),
+                    WorkspaceKind.Interactive
+                ),
+                Shared
+            ]
             internal sealed class Factory : IWorkspaceServiceFactory
             {
                 [ImportingConstructor]
                 [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-                public Factory()
-                {
-                }
+                public Factory() { }
 
-                public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-                    => new SolutionAnalyzerSetter((InteractiveWorkspace)workspaceServices.Workspace);
+                public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+                    new SolutionAnalyzerSetter((InteractiveWorkspace)workspaceServices.Workspace);
             }
 
             private readonly InteractiveWorkspace _workspace;
 
-            public SolutionAnalyzerSetter(InteractiveWorkspace workspace)
-                => _workspace = workspace;
+            public SolutionAnalyzerSetter(InteractiveWorkspace workspace) => _workspace = workspace;
 
-            public void SetAnalyzerReferences(ImmutableArray<AnalyzerReference> references)
-                => _workspace.SetCurrentSolution(s => s.WithAnalyzerReferences(references), WorkspaceChangeKind.SolutionChanged);
+            public void SetAnalyzerReferences(ImmutableArray<AnalyzerReference> references) =>
+                _workspace.SetCurrentSolution(
+                    s => s.WithAnalyzerReferences(references),
+                    WorkspaceChangeKind.SolutionChanged
+                );
         }
     }
 }

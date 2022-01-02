@@ -20,26 +20,38 @@ internal static partial class Interop
         {
             None = 0x00000000,
             CRYPT_NOHASHOID = 0x00000001,
-            CRYPT_TYPE2_FORMAT = 0x00000002,  // Not supported
-            CRYPT_X931_FORMAT = 0x00000004,  // Not supported
+            CRYPT_TYPE2_FORMAT = 0x00000002, // Not supported
+            CRYPT_X931_FORMAT = 0x00000004, // Not supported
         }
 
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "CryptSignHashW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "CryptSignHashW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         public static partial bool CryptSignHash(
             SafeHashHandle hHash,
             KeySpec dwKeySpec,
             string? szDescription,
             CryptSignAndVerifyHashFlags dwFlags,
             byte[]? pbSignature,
-            ref int pdwSigLen);
+            ref int pdwSigLen
+        );
 
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "CryptVerifySignatureW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "CryptVerifySignatureW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         public static partial bool CryptVerifySignature(
             SafeHashHandle hHash,
             byte[] pbSignature,
             int dwSigLen,
             SafeKeyHandle hPubKey,
             string? szDescription,
-            CryptSignAndVerifyHashFlags dwFlags);
+            CryptSignAndVerifyHashFlags dwFlags
+        );
     }
 }

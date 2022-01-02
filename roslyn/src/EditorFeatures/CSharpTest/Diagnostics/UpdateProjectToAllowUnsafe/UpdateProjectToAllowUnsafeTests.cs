@@ -18,15 +18,14 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UpdateProjectToAllowUnsafe
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUpdateProjectToAllowUnsafe)]
-    public class UpdateProjectToAllowUnsafeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class UpdateProjectToAllowUnsafeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UpdateProjectToAllowUnsafeTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public UpdateProjectToAllowUnsafeTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpUpdateProjectToAllowUnsafeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpUpdateProjectToAllowUnsafeCodeFixProvider());
 
         private async Task TestAllowUnsafeEnabledIfDisabledAsync(string initialMarkup)
         {
@@ -34,45 +33,65 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UpdateProje
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters))
             {
                 var (_, action) = await GetCodeActionsAsync(workspace, parameters);
-                var operations = await VerifyActionAndGetOperationsAsync(workspace, action, default);
+                var operations = await VerifyActionAndGetOperationsAsync(
+                    workspace,
+                    action,
+                    default
+                );
 
-                var (oldSolution, newSolution) = await ApplyOperationsAndGetSolutionAsync(workspace, operations);
-                Assert.True(((CSharpCompilationOptions)newSolution.Projects.Single().CompilationOptions).AllowUnsafe);
+                var (oldSolution, newSolution) = await ApplyOperationsAndGetSolutionAsync(
+                    workspace,
+                    operations
+                );
+                Assert.True(
+                    (
+                        (CSharpCompilationOptions)newSolution.Projects.Single().CompilationOptions
+                    ).AllowUnsafe
+                );
             }
 
             // no action offered if unsafe was already enabled
-            await TestMissingAsync(initialMarkup, new TestParameters(compilationOptions:
-                new CSharpCompilationOptions(outputKind: default, allowUnsafe: true)));
+            await TestMissingAsync(
+                initialMarkup,
+                new TestParameters(
+                    compilationOptions: new CSharpCompilationOptions(
+                        outputKind: default,
+                        allowUnsafe: true
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task OnUnsafeClass()
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
-@"
+                @"
 unsafe class [|C|] // The compiler reports this on the name, not the 'unsafe' keyword.
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task OnUnsafeMethod()
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
-@"
+                @"
 class C
 {
     unsafe void [|M|]()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task OnUnsafeLocalFunction()
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -81,14 +100,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task OnUnsafeBlock()
         {
             await TestAllowUnsafeEnabledIfDisabledAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -97,14 +117,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotInsideUnsafeBlock()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -114,7 +135,8 @@ class C
             [|int * p;|]
         }
     }
-}");
+}"
+            );
         }
     }
 }

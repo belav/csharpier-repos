@@ -16,7 +16,11 @@ internal sealed class ProblemDetailsJsonConverter : JsonConverter<ProblemDetails
     private static readonly JsonEncodedText Detail = JsonEncodedText.Encode("detail");
     private static readonly JsonEncodedText Instance = JsonEncodedText.Encode("instance");
 
-    public override ProblemDetails Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ProblemDetails Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var problemDetails = new ProblemDetails();
 
@@ -38,14 +42,22 @@ internal sealed class ProblemDetailsJsonConverter : JsonConverter<ProblemDetails
         return problemDetails;
     }
 
-    public override void Write(Utf8JsonWriter writer, ProblemDetails value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProblemDetails value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
         WriteProblemDetails(writer, value, options);
         writer.WriteEndObject();
     }
 
-    internal static void ReadValue(ref Utf8JsonReader reader, ProblemDetails value, JsonSerializerOptions options)
+    internal static void ReadValue(
+        ref Utf8JsonReader reader,
+        ProblemDetails value,
+        JsonSerializerOptions options
+    )
     {
         if (TryReadStringProperty(ref reader, Type, out var propertyValue))
         {
@@ -83,7 +95,11 @@ internal sealed class ProblemDetailsJsonConverter : JsonConverter<ProblemDetails
         }
     }
 
-    internal static bool TryReadStringProperty(ref Utf8JsonReader reader, JsonEncodedText propertyName, [NotNullWhen(true)] out string? value)
+    internal static bool TryReadStringProperty(
+        ref Utf8JsonReader reader,
+        JsonEncodedText propertyName,
+        [NotNullWhen(true)] out string? value
+    )
     {
         if (!reader.ValueTextEquals(propertyName.EncodedUtf8Bytes))
         {
@@ -96,7 +112,11 @@ internal sealed class ProblemDetailsJsonConverter : JsonConverter<ProblemDetails
         return true;
     }
 
-    internal static void WriteProblemDetails(Utf8JsonWriter writer, ProblemDetails value, JsonSerializerOptions options)
+    internal static void WriteProblemDetails(
+        Utf8JsonWriter writer,
+        ProblemDetails value,
+        JsonSerializerOptions options
+    )
     {
         if (value.Type != null)
         {
@@ -126,7 +146,12 @@ internal sealed class ProblemDetailsJsonConverter : JsonConverter<ProblemDetails
         foreach (var kvp in value.Extensions)
         {
             writer.WritePropertyName(kvp.Key);
-            JsonSerializer.Serialize(writer, kvp.Value, kvp.Value?.GetType() ?? typeof(object), options);
+            JsonSerializer.Serialize(
+                writer,
+                kvp.Value,
+                kvp.Value?.GetType() ?? typeof(object),
+                options
+            );
         }
     }
 }

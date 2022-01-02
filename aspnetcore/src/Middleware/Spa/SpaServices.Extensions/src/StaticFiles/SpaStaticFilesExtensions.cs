@@ -24,25 +24,32 @@ public static class SpaStaticFilesExtensions
     /// <param name="configuration">If specified, this callback will be invoked to set additional configuration options.</param>
     public static void AddSpaStaticFiles(
         this IServiceCollection services,
-        Action<SpaStaticFilesOptions>? configuration = null)
+        Action<SpaStaticFilesOptions>? configuration = null
+    )
     {
-        services.AddSingleton<ISpaStaticFileProvider>(serviceProvider =>
-        {
+        services.AddSingleton<ISpaStaticFileProvider>(
+            serviceProvider =>
+            {
                 // Use the options configured in DI (or blank if none was configured)
-                var optionsProvider = serviceProvider.GetService<IOptions<SpaStaticFilesOptions>>()!;
-            var options = optionsProvider.Value;
+                var optionsProvider = serviceProvider.GetService<
+                    IOptions<SpaStaticFilesOptions>
+                >()!;
+                var options = optionsProvider.Value;
 
                 // Allow the developer to perform further configuration
                 configuration?.Invoke(options);
 
-            if (string.IsNullOrEmpty(options.RootPath))
-            {
-                throw new InvalidOperationException($"No {nameof(SpaStaticFilesOptions.RootPath)} " +
-                    $"was set on the {nameof(SpaStaticFilesOptions)}.");
-            }
+                if (string.IsNullOrEmpty(options.RootPath))
+                {
+                    throw new InvalidOperationException(
+                        $"No {nameof(SpaStaticFilesOptions.RootPath)} "
+                            + $"was set on the {nameof(SpaStaticFilesOptions)}."
+                    );
+                }
 
-            return new DefaultSpaStaticFileProvider(serviceProvider, options);
-        });
+                return new DefaultSpaStaticFileProvider(serviceProvider, options);
+            }
+        );
     }
 
     /// <summary>
@@ -61,7 +68,10 @@ public static class SpaStaticFilesExtensions
     /// </summary>
     /// <param name="applicationBuilder">The <see cref="IApplicationBuilder"/>.</param>
     /// <param name="options">Specifies options for serving the static files.</param>
-    public static void UseSpaStaticFiles(this IApplicationBuilder applicationBuilder, StaticFileOptions options)
+    public static void UseSpaStaticFiles(
+        this IApplicationBuilder applicationBuilder,
+        StaticFileOptions options
+    )
     {
         if (applicationBuilder == null)
         {
@@ -73,15 +83,18 @@ public static class SpaStaticFilesExtensions
             throw new ArgumentNullException(nameof(options));
         }
 
-        UseSpaStaticFilesInternal(applicationBuilder,
+        UseSpaStaticFilesInternal(
+            applicationBuilder,
             staticFileOptions: options,
-            allowFallbackOnServingWebRootFiles: false);
+            allowFallbackOnServingWebRootFiles: false
+        );
     }
 
     internal static void UseSpaStaticFilesInternal(
         this IApplicationBuilder app,
         StaticFileOptions staticFileOptions,
-        bool allowFallbackOnServingWebRootFiles)
+        bool allowFallbackOnServingWebRootFiles
+    )
     {
         if (staticFileOptions == null)
         {
@@ -98,7 +111,8 @@ public static class SpaStaticFilesExtensions
             var shouldServeStaticFiles = ShouldServeStaticFiles(
                 app,
                 allowFallbackOnServingWebRootFiles,
-                out var fileProviderOrDefault);
+                out var fileProviderOrDefault
+            );
             if (shouldServeStaticFiles)
             {
                 staticFileOptions.FileProvider = fileProviderOrDefault;
@@ -117,7 +131,8 @@ public static class SpaStaticFilesExtensions
     private static bool ShouldServeStaticFiles(
         IApplicationBuilder app,
         bool allowFallbackOnServingWebRootFiles,
-        out IFileProvider? fileProviderOrDefault)
+        out IFileProvider? fileProviderOrDefault
+    )
     {
         var spaStaticFilesService = app.ApplicationServices.GetService<ISpaStaticFileProvider>();
         if (spaStaticFilesService != null)
@@ -132,9 +147,11 @@ public static class SpaStaticFilesExtensions
         }
         else if (!allowFallbackOnServingWebRootFiles)
         {
-            throw new InvalidOperationException($"To use {nameof(UseSpaStaticFiles)}, you must " +
-                $"first register an {nameof(ISpaStaticFileProvider)} in the service provider, typically " +
-                $"by calling services.{nameof(AddSpaStaticFiles)}.");
+            throw new InvalidOperationException(
+                $"To use {nameof(UseSpaStaticFiles)}, you must "
+                    + $"first register an {nameof(ISpaStaticFileProvider)} in the service provider, typically "
+                    + $"by calling services.{nameof(AddSpaStaticFiles)}."
+            );
         }
         else
         {

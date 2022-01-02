@@ -39,7 +39,8 @@ namespace Company.WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
 #if (OrganizationalAuth)
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
                     .EnableTokenAcquisitionToCallDownstreamApi()
@@ -54,7 +55,8 @@ namespace Company.WebApplication1
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 #endif
 #elif (IndividualB2CAuth)
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"))
                     .EnableTokenAcquisitionToCallDownstreamApi()
@@ -67,10 +69,15 @@ namespace Company.WebApplication1
 
             services.AddControllers();
 #if (EnableOpenAPI)
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" });
-            });
+            services.AddSwaggerGen(
+                c =>
+                {
+                    c.SwaggerDoc(
+                        "v1",
+                        new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" }
+                    );
+                }
+            );
 #endif
         }
 
@@ -80,10 +87,12 @@ namespace Company.WebApplication1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                #if (EnableOpenAPI)
+#if (EnableOpenAPI)
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company.WebApplication1 v1"));
-                #endif
+                app.UseSwaggerUI(
+                    c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company.WebApplication1 v1")
+                );
+#endif
             }
 #if (RequiresHttps)
 
@@ -97,10 +106,12 @@ namespace Company.WebApplication1
 #endif
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                }
+            );
         }
     }
 }

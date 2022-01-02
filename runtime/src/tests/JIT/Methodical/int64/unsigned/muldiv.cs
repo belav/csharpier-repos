@@ -7,7 +7,8 @@ namespace JitTest
 {
     internal class Test
     {
-        private static ulong s_A,s_B;
+        private static ulong s_A,
+            s_B;
 
         private static void testNumbers(ulong a, ulong b)
         {

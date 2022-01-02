@@ -34,7 +34,8 @@ namespace System.ServiceProcess
 
         public bool Equals(SessionChangeDescription changeDescription)
         {
-            return (Reason == changeDescription.Reason) && (SessionId == changeDescription.SessionId);
+            return (Reason == changeDescription.Reason)
+                && (SessionId == changeDescription.SessionId);
         }
 
         public static bool operator ==(SessionChangeDescription a, SessionChangeDescription b)

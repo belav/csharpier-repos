@@ -64,7 +64,12 @@ namespace System.Net.NetworkInformation
         {
             get
             {
-                LazyInitializer.EnsureInitialized(ref s_fixedInfo, ref s_fixedInfoInitialized, ref s_syncObject, () => GetFixedInfo());
+                LazyInitializer.EnsureInitialized(
+                    ref s_fixedInfo,
+                    ref s_fixedInfoInitialized,
+                    ref s_syncObject,
+                    () => GetFixedInfo()
+                );
                 return ref s_fixedInfo;
             }
         }

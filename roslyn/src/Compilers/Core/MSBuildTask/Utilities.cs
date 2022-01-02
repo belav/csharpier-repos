@@ -23,8 +23,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Copied from msbuild. ItemSpecs are normalized using this method.
         /// </summary>
-        public static string FixFilePath(string path)
-            => string.IsNullOrEmpty(path) || Path.DirectorySeparatorChar == '\\' ? path : path.Replace('\\', '/');
+        public static string FixFilePath(string path) =>
+            string.IsNullOrEmpty(path) || Path.DirectorySeparatorChar == '\\'
+                ? path
+                : path.Replace('\\', '/');
 
         /// <summary>
         /// Convert a task item metadata to bool. Throw an exception if the string is badly formed and can't
@@ -52,7 +54,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 throw Utilities.GetLocalizedArgumentException(
                     e,
                     ErrorString.General_InvalidAttributeMetadata,
-                    item.ItemSpec, itemMetadataName, metadataValue, "bool");
+                    item.ItemSpec,
+                    itemMetadataName,
+                    metadataValue,
+                    "bool"
+                );
             }
         }
 
@@ -77,9 +83,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // Unsupported boolean representation.
                 throw Utilities.GetLocalizedArgumentException(
                     ErrorString.General_CannotConvertStringToBool,
-                    parameterValue);
+                    parameterValue
+                );
             }
         }
+
         /// <summary>
         /// Returns true if the string can be successfully converted to a bool,
         /// such as "on" or "yes"
@@ -92,24 +100,24 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// such as "on", "!false", "yes"
         /// </summary>
         private static bool ValidBooleanTrue(string parameterValue) =>
-            String.Compare(parameterValue, "true", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "on", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "yes", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "!false", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "!off", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "!no", StringComparison.OrdinalIgnoreCase) == 0;
+            String.Compare(parameterValue, "true", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "on", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "yes", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "!false", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "!off", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "!no", StringComparison.OrdinalIgnoreCase) == 0;
 
         /// <summary>
         /// Returns true if the string represents a valid MSBuild boolean false value,
         /// such as "!on" "off" "no" "!true"
         /// </summary>
         private static bool ValidBooleanFalse(string parameterValue) =>
-            String.Compare(parameterValue, "false", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "off", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "no", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "!true", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "!on", StringComparison.OrdinalIgnoreCase) == 0 ||
-            String.Compare(parameterValue, "!yes", StringComparison.OrdinalIgnoreCase) == 0;
+            String.Compare(parameterValue, "false", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "off", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "no", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "!true", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "!on", StringComparison.OrdinalIgnoreCase) == 0
+            || String.Compare(parameterValue, "!yes", StringComparison.OrdinalIgnoreCase) == 0;
 
         internal static string GetFullPathNoThrow(string path)
         {
@@ -131,23 +139,32 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         internal static bool IsIoRelatedException(Exception e) =>
-            e is UnauthorizedAccessException ||
-            e is NotSupportedException ||
-            (e is ArgumentException && !(e is ArgumentNullException)) ||
-            e is SecurityException ||
-            e is IOException;
+            e is UnauthorizedAccessException
+            || e is NotSupportedException
+            || (e is ArgumentException && !(e is ArgumentNullException))
+            || e is SecurityException
+            || e is IOException;
 
-        internal static Exception GetLocalizedArgumentException(Exception e,
-                                                                string errorString,
-                                                                params object[] args)
+        internal static Exception GetLocalizedArgumentException(
+            Exception e,
+            string errorString,
+            params object[] args
+        )
         {
-            return new ArgumentException(string.Format(CultureInfo.CurrentCulture, errorString, args), e);
+            return new ArgumentException(
+                string.Format(CultureInfo.CurrentCulture, errorString, args),
+                e
+            );
         }
 
-        internal static Exception GetLocalizedArgumentException(string errorString,
-                                                                params object[] args)
+        internal static Exception GetLocalizedArgumentException(
+            string errorString,
+            params object[] args
+        )
         {
-            return new ArgumentException(string.Format(CultureInfo.CurrentCulture, errorString, args));
+            return new ArgumentException(
+                string.Format(CultureInfo.CurrentCulture, errorString, args)
+            );
         }
 
         internal static string? TryGetAssemblyPath(Assembly assembly)
@@ -180,8 +197,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             var assemblyDirectory = Path.GetDirectoryName(assemblyPath);
 
             return RuntimeHostInfo.IsDesktopRuntime
-                ? Path.Combine(assemblyDirectory!, toolName)
-                : Path.Combine(assemblyDirectory!, "bincore", toolName);
+              ? Path.Combine(assemblyDirectory!, toolName)
+              : Path.Combine(assemblyDirectory!, "bincore", toolName);
         }
     }
 }

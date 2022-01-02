@@ -25,7 +25,10 @@ public class ProcessLock
     public async Task WaitAsync(TimeSpan? timeout = null)
     {
         timeout ??= TimeSpan.FromMinutes(20);
-        Assert.True(await Semaphore.WaitAsync(timeout.Value), $"Unable to acquire process lock for process {Name}");
+        Assert.True(
+            await Semaphore.WaitAsync(timeout.Value),
+            $"Unable to acquire process lock for process {Name}"
+        );
     }
 
     public void Release()

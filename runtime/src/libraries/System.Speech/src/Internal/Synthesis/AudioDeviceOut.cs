@@ -29,6 +29,7 @@ namespace System.Speech.Internal.Synthesis
         {
             Dispose(false);
         }
+
         public void Dispose()
         {
             Dispose(true);
@@ -71,7 +72,14 @@ namespace System.Speech.Internal.Synthesis
             MMSYSERR result;
             lock (_noWriteOutLock)
             {
-                result = SafeNativeMethods.waveOutOpen(ref _hwo, _curDevice, wfx, _delegate, IntPtr.Zero, SafeNativeMethods.CALLBACK_FUNCTION);
+                result = SafeNativeMethods.waveOutOpen(
+                    ref _hwo,
+                    _curDevice,
+                    wfx,
+                    _delegate,
+                    IntPtr.Zero,
+                    SafeNativeMethods.CALLBACK_FUNCTION
+                );
 
                 if (_fPaused && result == MMSYSERR.NOERROR)
                 {
@@ -146,7 +154,11 @@ namespace System.Speech.Internal.Synthesis
 
                 WaveHeader waveHeader = new(buffer);
                 GCHandle waveHdr = waveHeader.WAVEHDR;
-                MMSYSERR result = SafeNativeMethods.waveOutPrepareHeader(_hwo, waveHdr.AddrOfPinnedObject(), waveHeader.SizeHDR);
+                MMSYSERR result = SafeNativeMethods.waveOutPrepareHeader(
+                    _hwo,
+                    waveHdr.AddrOfPinnedObject(),
+                    waveHeader.SizeHDR
+                );
 
                 if (result != MMSYSERR.NOERROR)
                 {
@@ -168,7 +180,11 @@ namespace System.Speech.Internal.Synthesis
                         }
 
                         // Start playback of the first buffer
-                        result = SafeNativeMethods.waveOutWrite(_hwo, waveHdr.AddrOfPinnedObject(), waveHeader.SizeHDR);
+                        result = SafeNativeMethods.waveOutWrite(
+                            _hwo,
+                            waveHdr.AddrOfPinnedObject(),
+                            waveHeader.SizeHDR
+                        );
                         if (result != MMSYSERR.NOERROR)
                         {
                             lock (_queueIn)
@@ -196,7 +212,12 @@ namespace System.Speech.Internal.Synthesis
                         MMSYSERR result = SafeNativeMethods.waveOutPause(_hwo);
                         if (result != MMSYSERR.NOERROR)
                         {
-                            System.Diagnostics.Debug.Assert(false, ((int)result).ToString(System.Globalization.CultureInfo.InvariantCulture));
+                            System.Diagnostics.Debug.Assert(
+                                false,
+                                ((int)result).ToString(
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                )
+                            );
                         }
                     }
                     _fPaused = true;
@@ -294,7 +315,10 @@ namespace System.Speech.Internal.Synthesis
             for (int iDevice = 0; iDevice < NumDevices(); iDevice++)
             {
                 string device;
-                if (GetDeviceName(iDevice, out device) == MMSYSERR.NOERROR && string.Equals(device, name, StringComparison.OrdinalIgnoreCase))
+                if (
+                    GetDeviceName(iDevice, out device) == MMSYSERR.NOERROR
+                    && string.Equals(device, name, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return iDevice;
                 }
@@ -308,12 +332,19 @@ namespace System.Speech.Internal.Synthesis
         /// <param name="deviceId">ID of the device</param>
         /// <param name="prodName">Destination string assigned the name</param>
         /// <returns>MMSYSERR.NOERROR if successful</returns>
-        internal static MMSYSERR GetDeviceName(int deviceId, [MarshalAs(UnmanagedType.LPWStr)] out string prodName)
+        internal static MMSYSERR GetDeviceName(
+            int deviceId,
+            [MarshalAs(UnmanagedType.LPWStr)] out string prodName
+        )
         {
             prodName = string.Empty;
             SafeNativeMethods.WAVEOUTCAPS caps = new();
 
-            MMSYSERR result = SafeNativeMethods.waveOutGetDevCaps((IntPtr)deviceId, ref caps, Marshal.SizeOf(caps));
+            MMSYSERR result = SafeNativeMethods.waveOutGetDevCaps(
+                (IntPtr)deviceId,
+                ref caps,
+                Marshal.SizeOf(caps)
+            );
             if (result != MMSYSERR.NOERROR)
             {
                 return result;
@@ -346,7 +377,13 @@ namespace System.Speech.Internal.Synthesis
 
         #region Private Methods
 
-        private void CallBackProc(IntPtr hwo, MM_MSG uMsg, IntPtr dwInstance, IntPtr dwParam1, IntPtr dwParam2)
+        private void CallBackProc(
+            IntPtr hwo,
+            MM_MSG uMsg,
+            IntPtr dwInstance,
+            IntPtr dwParam1,
+            IntPtr dwParam2
+        )
         {
             if (uMsg == MM_MSG.MM_WOM_DONE)
             {
@@ -394,7 +431,10 @@ namespace System.Speech.Internal.Synthesis
                 MMSYSERR result;
 
                 result = SafeNativeMethods.waveOutUnprepareHeader(
-                            _hwo, waveHeader.WAVEHDR.AddrOfPinnedObject(), waveHeader.SizeHDR);
+                    _hwo,
+                    waveHeader.WAVEHDR.AddrOfPinnedObject(),
+                    waveHeader.SizeHDR
+                );
                 if (result != MMSYSERR.NOERROR)
                 {
                     //System.Diagnostics.Debug.Assert (false);
@@ -419,7 +459,10 @@ namespace System.Speech.Internal.Synthesis
                         {
                             WaveHeader waveHeader = inItem._waveHeader;
                             SafeNativeMethods.waveOutUnprepareHeader(
-                                _hwo, waveHeader.WAVEHDR.AddrOfPinnedObject(), waveHeader.SizeHDR);
+                                _hwo,
+                                waveHeader.WAVEHDR.AddrOfPinnedObject(),
+                                waveHeader.SizeHDR
+                            );
                             waveHeader.Dispose();
                         }
                         else
@@ -456,6 +499,7 @@ namespace System.Speech.Internal.Synthesis
             {
                 _userData = userData;
             }
+
             public void Dispose()
             {
                 if (_waveHeader != null)

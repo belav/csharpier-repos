@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public RuntimeModelDependencies(
             ITypeMappingSource typeMappingSource,
             IConstructorBindingFactory constructorBindingFactory,
-            IParameterBindingFactories parameterBindingFactories)
+            IParameterBindingFactories parameterBindingFactories
+        )
         {
             TypeMappingSource = typeMappingSource;
             ConstructorBindingFactory = constructorBindingFactory;

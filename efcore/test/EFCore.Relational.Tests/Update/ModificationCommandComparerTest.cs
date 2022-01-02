@@ -38,19 +38,43 @@ namespace Microsoft.EntityFrameworkCore.Update
             var entry1 = stateManager.GetOrCreateEntry(new object());
             entry1[(IProperty)key] = 1;
             entry1.SetEntityState(EntityState.Added);
-            var modificationCommandAdded = modificationCommandSource.CreateModificationCommand(new ModificationCommandParameters("A", null, false, null, new ParameterNameGenerator().GenerateNext));
+            var modificationCommandAdded = modificationCommandSource.CreateModificationCommand(
+                new ModificationCommandParameters(
+                    "A",
+                    null,
+                    false,
+                    null,
+                    new ParameterNameGenerator().GenerateNext
+                )
+            );
             modificationCommandAdded.AddEntry(entry1, true);
 
             var entry2 = stateManager.GetOrCreateEntry(new object());
             entry2[(IProperty)key] = 2;
             entry2.SetEntityState(EntityState.Modified);
-            var modificationCommandModified = modificationCommandSource.CreateModificationCommand(new ModificationCommandParameters("A", null, false, null, new ParameterNameGenerator().GenerateNext));
+            var modificationCommandModified = modificationCommandSource.CreateModificationCommand(
+                new ModificationCommandParameters(
+                    "A",
+                    null,
+                    false,
+                    null,
+                    new ParameterNameGenerator().GenerateNext
+                )
+            );
             modificationCommandModified.AddEntry(entry2, true);
 
             var entry3 = stateManager.GetOrCreateEntry(new object());
             entry3[(IProperty)key] = 3;
             entry3.SetEntityState(EntityState.Deleted);
-            var modificationCommandDeleted = modificationCommandSource.CreateModificationCommand(new ModificationCommandParameters("A", null, false, null, new ParameterNameGenerator().GenerateNext));
+            var modificationCommandDeleted = modificationCommandSource.CreateModificationCommand(
+                new ModificationCommandParameters(
+                    "A",
+                    null,
+                    false,
+                    null,
+                    new ParameterNameGenerator().GenerateNext
+                )
+            );
             modificationCommandDeleted.AddEntry(entry3, true);
 
             var mCC = new ModificationCommandComparer();
@@ -61,45 +85,59 @@ namespace Microsoft.EntityFrameworkCore.Update
             Assert.True(0 == mCC.Compare(null, null));
             Assert.True(
                 0
-                == mCC.Compare(
-                    CreateModificationCommand("A", "dbo", false),
-                    CreateModificationCommand("A", "dbo", false)));
+                    == mCC.Compare(
+                        CreateModificationCommand("A", "dbo", false),
+                        CreateModificationCommand("A", "dbo", false)
+                    )
+            );
 
             Assert.True(0 > mCC.Compare(null, CreateModificationCommand("A", null, false)));
             Assert.True(0 < mCC.Compare(CreateModificationCommand("A", null, false), null));
 
             Assert.True(
                 0
-                > mCC.Compare(
-                    CreateModificationCommand("A", null, false),
-                    CreateModificationCommand("A", "dbo", false)));
+                    > mCC.Compare(
+                        CreateModificationCommand("A", null, false),
+                        CreateModificationCommand("A", "dbo", false)
+                    )
+            );
             Assert.True(
                 0
-                < mCC.Compare(
-                    CreateModificationCommand("A", "dbo", false),
-                    CreateModificationCommand("A", null, false)));
+                    < mCC.Compare(
+                        CreateModificationCommand("A", "dbo", false),
+                        CreateModificationCommand("A", null, false)
+                    )
+            );
 
             Assert.True(
                 0
-                > mCC.Compare(
-                    CreateModificationCommand("A", "dbo", false),
-                    CreateModificationCommand("A", "foo", false)));
+                    > mCC.Compare(
+                        CreateModificationCommand("A", "dbo", false),
+                        CreateModificationCommand("A", "foo", false)
+                    )
+            );
             Assert.True(
                 0
-                < mCC.Compare(
-                    CreateModificationCommand("A", "foo", false),
-                    CreateModificationCommand("A", "dbo", false)));
+                    < mCC.Compare(
+                        CreateModificationCommand("A", "foo", false),
+                        CreateModificationCommand("A", "dbo", false)
+                    )
+            );
 
             Assert.True(
                 0
-                > mCC.Compare(
-                    CreateModificationCommand("A", null, false),
-                    CreateModificationCommand("B", null, false)));
+                    > mCC.Compare(
+                        CreateModificationCommand("A", null, false),
+                        CreateModificationCommand("B", null, false)
+                    )
+            );
             Assert.True(
                 0
-                < mCC.Compare(
-                    CreateModificationCommand("B", null, false),
-                    CreateModificationCommand("A", null, false)));
+                    < mCC.Compare(
+                        CreateModificationCommand("B", null, false),
+                        CreateModificationCommand("A", null, false)
+                    )
+            );
 
             Assert.True(0 > mCC.Compare(modificationCommandModified, modificationCommandAdded));
             Assert.True(0 < mCC.Compare(modificationCommandAdded, modificationCommandModified));
@@ -127,13 +165,26 @@ namespace Microsoft.EntityFrameworkCore.Update
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<sbyte>(1, 2);
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic(false, true);
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic('1', '2');
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(new DateTime(1, 1, 1), new DateTime(1, 1, 2));
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(
+                new DateTime(1, 1, 1),
+                new DateTime(1, 1, 2)
+            );
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic(
                 new DateTimeOffset(new DateTime(10, 1, 1), TimeSpan.FromMinutes(2)),
-                new DateTimeOffset(new DateTime(10, 1, 1), TimeSpan.FromMinutes(1)));
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(2));
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(new Guid(), Guid.NewGuid());
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(FlagsEnum.First, FlagsEnum.First | FlagsEnum.Second);
+                new DateTimeOffset(new DateTime(10, 1, 1), TimeSpan.FromMinutes(1))
+            );
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(
+                TimeSpan.FromMinutes(1),
+                TimeSpan.FromMinutes(2)
+            );
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(
+                new Guid(),
+                Guid.NewGuid()
+            );
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(
+                FlagsEnum.First,
+                FlagsEnum.First | FlagsEnum.Second
+            );
 
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<short?>(-1, 1);
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<int?>(1, 2);
@@ -146,24 +197,44 @@ namespace Microsoft.EntityFrameworkCore.Update
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<uint?>(1, 2);
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<ulong?>(1, 2);
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<sbyte?>(1, 2);
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic<bool?>(false, true);
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic<bool?>(
+                false,
+                true
+            );
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<char?>('1', '2');
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic<DateTime?>(new DateTime(1, 1, 1), new DateTime(1, 1, 2));
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic<DateTime?>(
+                new DateTime(1, 1, 1),
+                new DateTime(1, 1, 2)
+            );
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<DateTimeOffset?>(
                 new DateTimeOffset(new DateTime(10, 1, 1), TimeSpan.FromMinutes(2)),
-                new DateTimeOffset(new DateTime(10, 1, 1), TimeSpan.FromMinutes(1)));
+                new DateTimeOffset(new DateTime(10, 1, 1), TimeSpan.FromMinutes(1))
+            );
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<TimeSpan?>(
-                TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(2));
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic<Guid?>(new Guid(), Guid.NewGuid());
+                TimeSpan.FromMinutes(1),
+                TimeSpan.FromMinutes(2)
+            );
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic<Guid?>(
+                new Guid(),
+                Guid.NewGuid()
+            );
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic<FlagsEnum?>(
-                FlagsEnum.Default, FlagsEnum.First | FlagsEnum.Second);
+                FlagsEnum.Default,
+                FlagsEnum.First | FlagsEnum.Second
+            );
 
-            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(new Guid().ToByteArray(), Guid.NewGuid().ToByteArray());
+            Compare_returns_0_only_for_entries_that_have_same_key_values_generic(
+                new Guid().ToByteArray(),
+                Guid.NewGuid().ToByteArray()
+            );
 
             Compare_returns_0_only_for_entries_that_have_same_key_values_generic("1", "2");
         }
 
-        private void Compare_returns_0_only_for_entries_that_have_same_key_values_generic<T>(T value1, T value2)
+        private void Compare_returns_0_only_for_entries_that_have_same_key_values_generic<T>(
+            T value1,
+            T value2
+        )
         {
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
             var model = modelBuilder.Model;
@@ -185,16 +256,43 @@ namespace Microsoft.EntityFrameworkCore.Update
             var entry1 = stateManager.GetOrCreateEntry(new object());
             entry1[(IProperty)keyProperty] = value1;
             entry1.SetEntityState(EntityState.Modified);
-            var modificationCommand1 = modificationCommandSource.CreateModificationCommand(new ModificationCommandParameters("A", null, false, null, new ParameterNameGenerator().GenerateNext, null));
+            var modificationCommand1 = modificationCommandSource.CreateModificationCommand(
+                new ModificationCommandParameters(
+                    "A",
+                    null,
+                    false,
+                    null,
+                    new ParameterNameGenerator().GenerateNext,
+                    null
+                )
+            );
             modificationCommand1.AddEntry(entry1, true);
 
             var entry2 = stateManager.GetOrCreateEntry(new object());
             entry2[(IProperty)keyProperty] = value2;
             entry2.SetEntityState(EntityState.Modified);
-            var modificationCommand2 = modificationCommandSource.CreateModificationCommand(new ModificationCommandParameters("A", null, false, null, new ParameterNameGenerator().GenerateNext, null));
+            var modificationCommand2 = modificationCommandSource.CreateModificationCommand(
+                new ModificationCommandParameters(
+                    "A",
+                    null,
+                    false,
+                    null,
+                    new ParameterNameGenerator().GenerateNext,
+                    null
+                )
+            );
             modificationCommand2.AddEntry(entry2, true);
 
-            var modificationCommand3 = modificationCommandSource.CreateModificationCommand(new ModificationCommandParameters("A", null, false, null, new ParameterNameGenerator().GenerateNext,  null));
+            var modificationCommand3 = modificationCommandSource.CreateModificationCommand(
+                new ModificationCommandParameters(
+                    "A",
+                    null,
+                    false,
+                    null,
+                    new ParameterNameGenerator().GenerateNext,
+                    null
+                )
+            );
             modificationCommand3.AddEntry(entry1, true);
 
             var mCC = new ModificationCommandComparer();
@@ -215,11 +313,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         private static IModificationCommand CreateModificationCommand(
             string name,
             string schema,
-            bool sensitiveLoggingEnabled)
-            => CreateModificationCommandSource().CreateModificationCommand(
-                new ModificationCommandParameters(name, schema, sensitiveLoggingEnabled));
+            bool sensitiveLoggingEnabled
+        ) =>
+            CreateModificationCommandSource()
+                .CreateModificationCommand(
+                    new ModificationCommandParameters(name, schema, sensitiveLoggingEnabled)
+                );
 
-        private static ModificationCommandFactory CreateModificationCommandSource()
-            => new ModificationCommandFactory();
+        private static ModificationCommandFactory CreateModificationCommandSource() =>
+            new ModificationCommandFactory();
     }
 }

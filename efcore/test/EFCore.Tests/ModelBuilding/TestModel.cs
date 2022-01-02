@@ -29,7 +29,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class Ingredient
         {
-            public static readonly PropertyInfo BurgerIdProperty = typeof(Ingredient).GetProperty("BurgerId")!;
+            public static readonly PropertyInfo BurgerIdProperty = typeof(Ingredient).GetProperty(
+                "BurgerId"
+            )!;
 
             public int Id { get; set; }
             public int? BurgerId { get; set; }
@@ -91,8 +93,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         protected class Customer
         {
             public static readonly PropertyInfo IdProperty = typeof(Customer).GetProperty("Id")!;
-            public static readonly PropertyInfo NameProperty = typeof(Customer).GetProperty("Name")!;
-            public static readonly PropertyInfo AlternateKeyProperty = typeof(Customer).GetProperty("AlternateKey")!;
+            public static readonly PropertyInfo NameProperty = typeof(Customer).GetProperty(
+                "Name"
+            )!;
+            public static readonly PropertyInfo AlternateKeyProperty = typeof(Customer).GetProperty(
+                "AlternateKey"
+            )!;
 
             public int Id { get; set; }
             public Guid AlternateKey { get; set; }
@@ -140,7 +146,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class Order : INotifyPropertyChanged
         {
-            public static readonly PropertyInfo DetailsProperty = typeof(Order).GetProperty(nameof(Details))!;
+            public static readonly PropertyInfo DetailsProperty = typeof(Order).GetProperty(
+                nameof(Details)
+            )!;
 
             public int OrderId { get; set; }
 
@@ -163,8 +171,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         private class OrderProduct
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(nameof(OrderId))!;
-            public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(nameof(ProductId))!;
+            public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
+                nameof(OrderId)
+            )!;
+            public static readonly PropertyInfo ProductIdProperty =
+                typeof(OrderProduct).GetProperty(nameof(ProductId))!;
 
             public int OrderId { get; set; }
             public int ProductId { get; set; }
@@ -243,7 +254,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class OrderDetails : DetailsBase
         {
-            public static readonly PropertyInfo OrderIdProperty = typeof(OrderDetails).GetProperty("OrderId")!;
+            public static readonly PropertyInfo OrderIdProperty = typeof(OrderDetails).GetProperty(
+                "OrderId"
+            )!;
 
             public int OrderId { get; set; }
             public Order Order { get; set; } = null!;
@@ -311,6 +324,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         protected class SelfRef
         {
             public int Id { get; set; }
+
             // TODO: Make both non-nullable when #25830 is fixed
             public SelfRef? SelfRef1 { get; set; }
             public SelfRef? SelfRef2 { get; set; }
@@ -359,7 +373,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class Book
         {
-            public static readonly PropertyInfo BookDetailsNavigation = typeof(Book).GetProperty("Details")!;
+            public static readonly PropertyInfo BookDetailsNavigation = typeof(Book).GetProperty(
+                "Details"
+            )!;
 
             public int Id { get; set; }
 
@@ -611,7 +627,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             [NotMapped]
             [ForeignKey("FkProperty")]
-            public OneToOneDependentEntityWithAnnotation NavOneToOneDependentEntityWithAnnotation { get; set; } = null!;
+            public OneToOneDependentEntityWithAnnotation NavOneToOneDependentEntityWithAnnotation { get; set; } =
+                null!;
         }
 
         protected class OneToOneDependentEntityWithAnnotation
@@ -622,7 +639,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public int OneToOnePrincipalEntityWithAnnotationId { get; set; }
 
             [NotMapped]
-            public OneToOnePrincipalEntityWithAnnotation NavOneToOnePrincipalEntityWithAnnotation { get; set; } = null!;
+            public OneToOnePrincipalEntityWithAnnotation NavOneToOnePrincipalEntityWithAnnotation { get; set; } =
+                null!;
         }
 
         protected class BaseTypeWithKeyAnnotation
@@ -851,9 +869,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         return _optional;
                     }
 
-                    throw new InvalidOperationException($"Indexer property with key {name} is not defined on {nameof(IndexedClass)}.");
+                    throw new InvalidOperationException(
+                        $"Indexer property with key {name} is not defined on {nameof(IndexedClass)}."
+                    );
                 }
-
                 set
                 {
                     if (string.Equals(name, "Required", StringComparison.Ordinal))
@@ -866,7 +885,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     }
                     else
                     {
-                        throw new InvalidOperationException($"Indexer property with key {name} is not defined on {nameof(IndexedClass)}.");
+                        throw new InvalidOperationException(
+                            $"Indexer property with key {name} is not defined on {nameof(IndexedClass)}."
+                        );
                     }
                 }
             }
@@ -1183,6 +1204,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         protected class KeylessCollectionNavigation
         {
             public List<Store>? Stores { get; set; }
+
             [NotMapped]
             public KeylessReferenceNavigation? Reference { get; set; }
         }

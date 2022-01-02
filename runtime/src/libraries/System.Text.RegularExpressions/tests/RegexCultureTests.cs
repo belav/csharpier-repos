@@ -34,34 +34,58 @@ namespace System.Text.RegularExpressions.Tests
             {
                 yield return new object[] { "^aa$", "aA", "da-DK", options, false };
                 yield return new object[] { "^aA$", "aA", "da-DK", options, true };
-                yield return new object[] { "^aa$", "aA", "da-DK", options | RegexOptions.IgnoreCase, true };
-                yield return new object[] { "^aA$", "aA", "da-DK", options | RegexOptions.IgnoreCase, true };
+                yield return new object[]
+                {
+                    "^aa$",
+                    "aA",
+                    "da-DK",
+                    options | RegexOptions.IgnoreCase,
+                    true
+                };
+                yield return new object[]
+                {
+                    "^aA$",
+                    "aA",
+                    "da-DK",
+                    options | RegexOptions.IgnoreCase,
+                    true
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(CharactersComparedOneByOne_AnchoredPattern_TestData))]
-        public void CharactersComparedOneByOne_AnchoredPattern(string pattern, string input, string culture, RegexOptions options, bool expected)
+        public void CharactersComparedOneByOne_AnchoredPattern(
+            string pattern,
+            string input,
+            string culture,
+            RegexOptions options,
+            bool expected
+        )
         {
             // Regex compares characters one by one.  If that changes, it could impact the behavior of
             // a case like this, where these characters are not the same, but the strings compare
             // as equal with the invariant culture (and some other cultures as well).
             using (new ThreadCultureChange(culture))
             {
-                foreach (RegexOptions compiled in new[] { RegexOptions.None, RegexOptions.Compiled })
+                foreach (
+                    RegexOptions compiled in new[] { RegexOptions.None, RegexOptions.Compiled }
+                )
                 {
                     Assert.Equal(expected, new Regex(pattern, options | compiled).IsMatch(input));
                 }
             }
         }
 
-
         public static IEnumerable<object[]> CharactersComparedOneByOne_Invariant_TestData()
         {
             foreach (RegexOptions options in RegexOptionsExtended())
             {
                 yield return new object[] { options };
-                yield return new object[] { options | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant };
+                yield return new object[]
+                {
+                    options | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+                };
             }
         }
 
@@ -121,10 +145,34 @@ namespace System.Text.RegularExpressions.Tests
         {
             using (new ThreadCultureChange("en-US"))
             {
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uD801\uDC00", RegexOptions.IgnoreCase)).IsMatch("\uD801\uDC00"));
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uD801\uDC00", RegexOptions.IgnoreCase)).IsMatch("abcdefg\uD801\uDC00"));
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uD801", RegexOptions.IgnoreCase)).IsMatch("\uD801\uDC00"));
-                Assert.True((await RegexHelpers.GetRegexAsync(engine, "\uDC00", RegexOptions.IgnoreCase)).IsMatch("\uD801\uDC00"));
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(
+                            engine,
+                            "\uD801\uDC00",
+                            RegexOptions.IgnoreCase
+                        )
+                    ).IsMatch("\uD801\uDC00")
+                );
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(
+                            engine,
+                            "\uD801\uDC00",
+                            RegexOptions.IgnoreCase
+                        )
+                    ).IsMatch("abcdefg\uD801\uDC00")
+                );
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(engine, "\uD801", RegexOptions.IgnoreCase)
+                    ).IsMatch("\uD801\uDC00")
+                );
+                Assert.True(
+                    (
+                        await RegexHelpers.GetRegexAsync(engine, "\uDC00", RegexOptions.IgnoreCase)
+                    ).IsMatch("\uD801\uDC00")
+                );
             }
         }
 
@@ -141,12 +189,19 @@ namespace System.Text.RegularExpressions.Tests
         [Theory]
         [MemberData(nameof(TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture_TestData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/56407", TestPlatforms.Android)]
-        public void TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture(int length, RegexOptions options)
+        public void TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture(
+            int length,
+            RegexOptions options
+        )
         {
             var turkish = new CultureInfo("tr-TR");
             string input = string.Concat(Enumerable.Repeat("I\u0131\u0130i", length / 2));
 
-            Regex[] cultInvariantRegex = Create(input, CultureInfo.InvariantCulture, options | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            Regex[] cultInvariantRegex = Create(
+                input,
+                CultureInfo.InvariantCulture,
+                options | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+            );
             Regex[] turkishRegex = Create(input, turkish, options | RegexOptions.IgnoreCase);
 
             // same input and regex does match so far so good
@@ -160,8 +215,14 @@ namespace System.Text.RegularExpressions.Tests
 
             // Now comes the tricky part depending on the use locale in ToUpper the results differ
             // Hence the regular expression will not match if different locales were used
-            Assert.All(cultInvariantRegex, rex => Assert.True(rex.IsMatch(input.ToLowerInvariant())));
-            Assert.All(cultInvariantRegex, rex => Assert.False(rex.IsMatch(input.ToLower(turkish))));
+            Assert.All(
+                cultInvariantRegex,
+                rex => Assert.True(rex.IsMatch(input.ToLowerInvariant()))
+            );
+            Assert.All(
+                cultInvariantRegex,
+                rex => Assert.False(rex.IsMatch(input.ToLower(turkish)))
+            );
 
             Assert.All(turkishRegex, rex => Assert.False(rex.IsMatch(input.ToLowerInvariant())));
             Assert.All(turkishRegex, rex => Assert.True(rex.IsMatch(input.ToLower(turkish))));
@@ -188,7 +249,10 @@ namespace System.Text.RegularExpressions.Tests
             }
         }
 
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Doesn't support NonBacktracking")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Doesn't support NonBacktracking"
+        )]
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/60568", TestPlatforms.Android)]
         public void TurkishI_Is_Differently_LowerUpperCased_In_Turkish_Culture_NonBacktracking()
@@ -197,12 +261,22 @@ namespace System.Text.RegularExpressions.Tests
             string input = "I\u0131\u0130i";
 
             // Use the input as the regex also
-            // Ignore the Compiled option here because it is a noop in combination with NonBacktracking 
-            Regex cultInvariantRegex = RegexHelpers.CreateRegexInCulture(input, RegexHelpers.RegexOptionNonBacktracking | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant, CultureInfo.InvariantCulture);
-            Regex turkishRegex = RegexHelpers.CreateRegexInCulture(input, RegexHelpers.RegexOptionNonBacktracking | RegexOptions.IgnoreCase, turkish);
+            // Ignore the Compiled option here because it is a noop in combination with NonBacktracking
+            Regex cultInvariantRegex = RegexHelpers.CreateRegexInCulture(
+                input,
+                RegexHelpers.RegexOptionNonBacktracking
+                    | RegexOptions.IgnoreCase
+                    | RegexOptions.CultureInvariant,
+                CultureInfo.InvariantCulture
+            );
+            Regex turkishRegex = RegexHelpers.CreateRegexInCulture(
+                input,
+                RegexHelpers.RegexOptionNonBacktracking | RegexOptions.IgnoreCase,
+                turkish
+            );
 
             Assert.True(cultInvariantRegex.IsMatch(input));
-            Assert.True(turkishRegex.IsMatch(input));    // <---------- This result differs from the result in the previous test!!!
+            Assert.True(turkishRegex.IsMatch(input)); // <---------- This result differs from the result in the previous test!!!
 
             // As above and no surprises here
             // The regexes recognize different lowercase variants of different versions of i differently
@@ -220,7 +294,9 @@ namespace System.Text.RegularExpressions.Tests
             Assert.True(turkishRegex.IsMatch(input.ToUpper(turkish)));
         }
 
-        [ActiveIssue("Incorrect handling of IgnoreCase over intervals in Turkish Culture, https://github.com/dotnet/runtime/issues/58958")]
+        [ActiveIssue(
+            "Incorrect handling of IgnoreCase over intervals in Turkish Culture, https://github.com/dotnet/runtime/issues/58958"
+        )]
         [Fact]
         public void TurkishCulture_Handling_Of_IgnoreCase()
         {
@@ -228,14 +304,21 @@ namespace System.Text.RegularExpressions.Tests
             string input = "I\u0131\u0130i";
             string pattern = "[H-J][\u0131-\u0140][\u0120-\u0130][h-j]";
 
-            Regex regex = RegexHelpers.CreateRegexInCulture(pattern, RegexOptions.IgnoreCase, turkish);
+            Regex regex = RegexHelpers.CreateRegexInCulture(
+                pattern,
+                RegexOptions.IgnoreCase,
+                turkish
+            );
 
             // The pattern must trivially match the input because all of the letters fall in the given intervals
             // Ignoring case can only add more letters here -- not REMOVE letters
             Assert.True(regex.IsMatch(input));
         }
 
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Doesn't support NonBacktracking")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Doesn't support NonBacktracking"
+        )]
         [Fact]
         public void TurkishCulture_Handling_Of_IgnoreCase_NonBacktracking()
         {
@@ -243,7 +326,11 @@ namespace System.Text.RegularExpressions.Tests
             string input = "I\u0131\u0130i";
             string pattern = "[H-J][\u0131-\u0140][\u0120-\u0130][h-j]";
 
-            Regex regex = RegexHelpers.CreateRegexInCulture(pattern, RegexOptions.IgnoreCase | RegexHelpers.RegexOptionNonBacktracking, turkish);
+            Regex regex = RegexHelpers.CreateRegexInCulture(
+                pattern,
+                RegexOptions.IgnoreCase | RegexHelpers.RegexOptionNonBacktracking,
+                turkish
+            );
 
             // The pattern must trivially match the input because all of the letters fall in the given intervals
             // Ignoring case can only add more letters here -- not REMOVE letters
@@ -263,17 +350,66 @@ namespace System.Text.RegularExpressions.Tests
                 // Expected answers in the default en-US culture
                 yield return new object[] { "(?i:I)", options, current, "xy\u0131ab", "" };
                 yield return new object[] { "(?i:iI+)", options, current, "abcIIIxyz", "III" };
-                yield return new object[] { "(?i:iI+)", options, current, "abcIi\u0130xyz", "Ii\u0130" };
-                yield return new object[] { "(?i:iI+)", options, current, "abcI\u0130ixyz", "I\u0130i" };
-                yield return new object[] { "(?i:iI+)", options, current, "abc\u0130IIxyz", "\u0130II" };
-                yield return new object[] { "(?i:iI+)", options, current, "abc\u0130\u0131Ixyz", "" };
-                yield return new object[] { "(?i:iI+)", options, current, "abc\u0130Iixyz", "\u0130Ii" };
-                yield return new object[] { "(?i:[^IJKLM]I)", options, current, "ii\u0130i\u0131ab", "" };
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    current,
+                    "abcIi\u0130xyz",
+                    "Ii\u0130"
+                };
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    current,
+                    "abcI\u0130ixyz",
+                    "I\u0130i"
+                };
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    current,
+                    "abc\u0130IIxyz",
+                    "\u0130II"
+                };
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    current,
+                    "abc\u0130\u0131Ixyz",
+                    ""
+                };
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    current,
+                    "abc\u0130Iixyz",
+                    "\u0130Ii"
+                };
+                yield return new object[]
+                {
+                    "(?i:[^IJKLM]I)",
+                    options,
+                    current,
+                    "ii\u0130i\u0131ab",
+                    ""
+                };
 
                 // Expected answers in the invariant culture
                 yield return new object[] { "(?i:I)", options, invariant, "xy\u0131ab", "" };
                 yield return new object[] { "(?i:iI+)", options, invariant, "abcIIIxyz", "III" };
-                yield return new object[] { "(?i:iI+)", options, invariant, "abc\u0130\u0131Ixyz", "" };
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    invariant,
+                    "abc\u0130\u0131Ixyz",
+                    ""
+                };
 
                 // Expected answers in the Turkish culture
                 //
@@ -281,17 +417,49 @@ namespace System.Text.RegularExpressions.Tests
                 // https://github.com/dotnet/runtime/issues/60568
                 if (!PlatformDetection.IsAndroid)
                 {
-                    yield return new object[] { "(?i:I)", options, turkish, "xy\u0131ab", "\u0131" };
+                    yield return new object[]
+                    {
+                        "(?i:I)",
+                        options,
+                        turkish,
+                        "xy\u0131ab",
+                        "\u0131"
+                    };
                     yield return new object[] { "(?i:iI+)", options, turkish, "abcIIIxyz", "" };
-                    yield return new object[] { "(?i:iI+)", options, turkish, "abcIi\u0130xyz", "" };
-                    yield return new object[] { "(?i:iI+)", options, turkish, "abcI\u0130ixyz", "" };
-                    yield return new object[] { "(?i:[^IJKLM]I)", options, turkish, "ii\u0130i\u0131ab", "i\u0131" };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        options,
+                        turkish,
+                        "abcIi\u0130xyz",
+                        ""
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:iI+)",
+                        options,
+                        turkish,
+                        "abcI\u0130ixyz",
+                        ""
+                    };
+                    yield return new object[]
+                    {
+                        "(?i:[^IJKLM]I)",
+                        options,
+                        turkish,
+                        "ii\u0130i\u0131ab",
+                        "i\u0131"
+                    };
                 }
 
                 // None and Compiled are separated into the Match_In_Different_Cultures_CriticalCases test
                 if (options == RegexHelpers.RegexOptionNonBacktracking)
                 {
-                    foreach (object[] data in Match_In_Different_Cultures_CriticalCases_TestData_For(options))
+                    foreach (
+                        object[] data in Match_In_Different_Cultures_CriticalCases_TestData_For(
+                            options
+                        )
+                    )
                     {
                         yield return data;
                     }
@@ -299,54 +467,106 @@ namespace System.Text.RegularExpressions.Tests
             }
         }
 
-        public static IEnumerable<object[]> Match_In_Different_Cultures_CriticalCases_TestData_For(RegexOptions options)
+        public static IEnumerable<object[]> Match_In_Different_Cultures_CriticalCases_TestData_For(
+            RegexOptions options
+        )
         {
             CultureInfo invariant = CultureInfo.InvariantCulture;
             CultureInfo turkish = new CultureInfo("tr-TR");
 
             // Expected answers in the invariant culture
-            yield return new object[] { "(?i:iI+)", options, invariant, "abcIi\u0130xyz", "Ii" };               // <-- failing for None, Compiled
-            yield return new object[] { "(?i:iI+)", options, invariant, "abcI\u0130ixyz", "" };                 // <-- failing for Compiled
-            yield return new object[] { "(?i:iI+)", options, invariant, "abc\u0130IIxyz", "II" };               // <-- failing for Compiled
-            yield return new object[] { "(?i:iI+)", options, invariant, "abc\u0130Iixyz", "Ii" };               // <-- failing for Compiled
-            yield return new object[] { "(?i:[^IJKLM]I)", options, invariant, "ii\u0130i\u0131ab", "\u0130i" }; // <-- failing for None, Compiled
+            yield return new object[] { "(?i:iI+)", options, invariant, "abcIi\u0130xyz", "Ii" }; // <-- failing for None, Compiled
+            yield return new object[] { "(?i:iI+)", options, invariant, "abcI\u0130ixyz", "" }; // <-- failing for Compiled
+            yield return new object[] { "(?i:iI+)", options, invariant, "abc\u0130IIxyz", "II" }; // <-- failing for Compiled
+            yield return new object[] { "(?i:iI+)", options, invariant, "abc\u0130Iixyz", "Ii" }; // <-- failing for Compiled
+            yield return new object[]
+            {
+                "(?i:[^IJKLM]I)",
+                options,
+                invariant,
+                "ii\u0130i\u0131ab",
+                "\u0130i"
+            }; // <-- failing for None, Compiled
 
             // Expected answers in the Turkish culture
             // Android produces unexpected results for tr-TR
             // https://github.com/dotnet/runtime/issues/60568
             if (!PlatformDetection.IsAndroid)
             {
-                yield return new object[] { "(?i:iI+)", options, turkish, "abc\u0130IIxyz", "\u0130II" };           // <-- failing for None, Compiled
-                yield return new object[] { "(?i:iI+)", options, turkish, "abc\u0130\u0131Ixyz", "\u0130\u0131I" }; // <-- failing for None, Compiled
-                yield return new object[] { "(?i:iI+)", options, turkish, "abc\u0130Iixyz", "\u0130I" };            // <-- failing for None, Compiled
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    turkish,
+                    "abc\u0130IIxyz",
+                    "\u0130II"
+                }; // <-- failing for None, Compiled
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    turkish,
+                    "abc\u0130\u0131Ixyz",
+                    "\u0130\u0131I"
+                }; // <-- failing for None, Compiled
+                yield return new object[]
+                {
+                    "(?i:iI+)",
+                    options,
+                    turkish,
+                    "abc\u0130Iixyz",
+                    "\u0130I"
+                }; // <-- failing for None, Compiled
             }
         }
 
         public static IEnumerable<object[]> Match_In_Different_Cultures_CriticalCases_TestData() =>
-            Match_In_Different_Cultures_CriticalCases_TestData_For(RegexOptions.None).Union(Match_In_Different_Cultures_CriticalCases_TestData_For(RegexOptions.Compiled));
+            Match_In_Different_Cultures_CriticalCases_TestData_For(RegexOptions.None)
+                .Union(
+                    Match_In_Different_Cultures_CriticalCases_TestData_For(RegexOptions.Compiled)
+                );
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/60899", TestPlatforms.Browser)]
         [Theory]
         [MemberData(nameof(Match_In_Different_Cultures_TestData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60697", TestPlatforms.iOS | TestPlatforms.tvOS)]
-        public void Match_In_Different_Cultures(string pattern, RegexOptions options, CultureInfo culture, string input, string match_expected)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60697",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
+        public void Match_In_Different_Cultures(
+            string pattern,
+            RegexOptions options,
+            CultureInfo culture,
+            string input,
+            string match_expected
+        )
         {
             Regex r = RegexHelpers.CreateRegexInCulture(pattern, options, culture);
             Match match = r.Match(input);
             Assert.Equal(match_expected, match.Value);
         }
 
-        [ActiveIssue("Incorrect treatment of IgnoreCase in Turkish and Invariant cultures, https://github.com/dotnet/runtime/issues/58956, https://github.com/dotnet/runtime/issues/58958 ")]
+        [ActiveIssue(
+            "Incorrect treatment of IgnoreCase in Turkish and Invariant cultures, https://github.com/dotnet/runtime/issues/58956, https://github.com/dotnet/runtime/issues/58958 "
+        )]
         [Theory]
         [MemberData(nameof(Match_In_Different_Cultures_CriticalCases_TestData))]
-        public void Match_In_Different_Cultures_CriticalCases(string pattern, RegexOptions options, CultureInfo culture, string input, string match_expected)
+        public void Match_In_Different_Cultures_CriticalCases(
+            string pattern,
+            RegexOptions options,
+            CultureInfo culture,
+            string input,
+            string match_expected
+        )
         {
             Regex r = RegexHelpers.CreateRegexInCulture(pattern, options, culture);
             Match match = r.Match(input);
             Assert.Equal(match_expected, match.Value);
         }
 
-        [ActiveIssue("Incorrect result of match in complied mode in Invariant culture, https://github.com/dotnet/runtime/issues/58956")]
+        [ActiveIssue(
+            "Incorrect result of match in complied mode in Invariant culture, https://github.com/dotnet/runtime/issues/58956"
+        )]
         [Fact]
         public void Match_InvariantCulture_None_vs_Compiled()
         {
@@ -374,26 +594,46 @@ namespace System.Text.RegularExpressions.Tests
             // these 22 characters are considered case-insensitive by regex, while they are case-sensitive outside regex
             // but they are only case-sensitive in an asymmmetrical way: tolower(c)=c, tolower(toupper(c)) != c
             HashSet<char> treatedAsCaseInsensitive =
-                 new("\u00B5\u017F\u0345\u03C2\u03D0\u03D1\u03D5\u03D6\u03F0\u03F1\u03F5\u1C80\u1C81\u1C82\u1C83\u1C84\u1C85\u1C86\u1C87\u1C88\u1E9B\u1FBE");
+                new(
+                    "\u00B5\u017F\u0345\u03C2\u03D0\u03D1\u03D5\u03D6\u03F0\u03F1\u03F5\u1C80\u1C81\u1C82\u1C83\u1C84\u1C85\u1C86\u1C87\u1C88\u1E9B\u1FBE"
+                );
 
             foreach (char c in treatedAsCaseInsensitive)
             {
                 char cU = char.ToUpper(c);
                 Assert.NotEqual(c, cU);
-                Assert.False(Regex.IsMatch(c.ToString(), cU.ToString(), options | RegexOptions.IgnoreCase));
+                Assert.False(
+                    Regex.IsMatch(c.ToString(), cU.ToString(), options | RegexOptions.IgnoreCase)
+                );
             }
 
-            Assert.False(Regex.IsMatch(Turkish_i_withoutDot.ToString(), "i", options | RegexOptions.IgnoreCase));
+            Assert.False(
+                Regex.IsMatch(
+                    Turkish_i_withoutDot.ToString(),
+                    "i",
+                    options | RegexOptions.IgnoreCase
+                )
+            );
 
             // as baseline it is assumed the the invariant culture does not change
-            HashSet<char>[] inv_table = ComputeIgnoreCaseTable(CultureInfo.InvariantCulture, treatedAsCaseInsensitive);
+            HashSet<char>[] inv_table = ComputeIgnoreCaseTable(
+                CultureInfo.InvariantCulture,
+                treatedAsCaseInsensitive
+            );
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 
             // expected difference between invariant and tr or az culture
-            string tr_diff = string.Format("I:Ii/I{0},i:Ii/i{1},{1}:{1}/i{1},{0}:{0}/I{0}", Turkish_i_withoutDot, Turkish_I_withDot);
+            string tr_diff = string.Format(
+                "I:Ii/I{0},i:Ii/i{1},{1}:{1}/i{1},{0}:{0}/I{0}",
+                Turkish_i_withoutDot,
+                Turkish_I_withDot
+            );
 
             // expected differnce between invariant and other cultures including the default en-US
-            string default_diff = string.Format("I:Ii/Ii{0},i:Ii/Ii{0},{0}:{0}/Ii{0}", Turkish_I_withDot);
+            string default_diff = string.Format(
+                "I:Ii/Ii{0},i:Ii/Ii{0},{0}:{0}/Ii{0}",
+                Turkish_I_withDot
+            );
 
             // the expected difference between invariant culture and all other cultures is only for i,I,Turkish_I_withDot,Turkish_i_withoutDot
             // differentiate based on the TwoLetterISOLanguageName only (232 cases instead of 812)
@@ -401,7 +641,10 @@ namespace System.Text.RegularExpressions.Tests
             HashSet<string> done = new();
             for (int i = 0; i < cultures.Length; i++)
             {
-                if (cultures[i] != CultureInfo.InvariantCulture && done.Add(cultures[i].TwoLetterISOLanguageName))
+                if (
+                    cultures[i] != CultureInfo.InvariantCulture
+                    && done.Add(cultures[i].TwoLetterISOLanguageName)
+                )
                 {
                     testcultures.Add(cultures[i]);
                 }
@@ -411,7 +654,10 @@ namespace System.Text.RegularExpressions.Tests
             {
                 HashSet<char>[] table = ComputeIgnoreCaseTable(culture, treatedAsCaseInsensitive);
                 string diff = GetDiff(inv_table, table);
-                if (culture.TwoLetterISOLanguageName == "tr" || culture.TwoLetterISOLanguageName == "az")
+                if (
+                    culture.TwoLetterISOLanguageName == "tr"
+                    || culture.TwoLetterISOLanguageName == "az"
+                )
                 {
                     // tr or az alphabet
                     Assert.Equal(tr_diff, diff);
@@ -428,7 +674,10 @@ namespace System.Text.RegularExpressions.Tests
         /// This test currently only works correctly in NonBacktracking mode.
         /// </summary>
         [OuterLoop("May take tens of seconds")]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Doesn't support NonBacktracking")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Doesn't support NonBacktracking"
+        )]
         [Theory]
         [InlineData(RegexHelpers.RegexOptionNonBacktracking)]
         public void TestIgnoreCaseRelationBorderCasesInNonBacktracking(RegexOptions options)
@@ -436,19 +685,39 @@ namespace System.Text.RegularExpressions.Tests
             // these 22 characters are considered case-insensitive by regex, while they are case-sensitive outside regex
             // but they are only case-sensitive in an asymmmetrical way: tolower(c)=c, tolower(toupper(c)) != c
             HashSet<char> treatedAsCaseInsensitive =
-                 new("\u00B5\u017F\u0345\u03C2\u03D0\u03D1\u03D5\u03D6\u03F0\u03F1\u03F5\u1C80\u1C81\u1C82\u1C83\u1C84\u1C85\u1C86\u1C87\u1C88\u1E9B\u1FBE");
+                new(
+                    "\u00B5\u017F\u0345\u03C2\u03D0\u03D1\u03D5\u03D6\u03F0\u03F1\u03F5\u1C80\u1C81\u1C82\u1C83\u1C84\u1C85\u1C86\u1C87\u1C88\u1E9B\u1FBE"
+                );
 
             foreach (char c in treatedAsCaseInsensitive)
             {
                 char cU = char.ToUpper(c);
                 Assert.NotEqual(c, cU);
-                Assert.False(Regex.IsMatch(c.ToString(), cU.ToString(), RegexOptions.IgnoreCase | options));
+                Assert.False(
+                    Regex.IsMatch(c.ToString(), cU.ToString(), RegexOptions.IgnoreCase | options)
+                );
             }
 
-            Assert.False(Regex.IsMatch(Turkish_i_withoutDot.ToString(), "i", RegexOptions.IgnoreCase | options));
-            Assert.True(Regex.IsMatch(Turkish_I_withDot.ToString(), "i", RegexOptions.IgnoreCase | options));
-            Assert.True(Regex.IsMatch(Turkish_I_withDot.ToString(), "i", RegexOptions.IgnoreCase | options));
-            Assert.False(Regex.IsMatch(Turkish_I_withDot.ToString(), "i", RegexOptions.IgnoreCase | options | RegexOptions.CultureInvariant));
+            Assert.False(
+                Regex.IsMatch(
+                    Turkish_i_withoutDot.ToString(),
+                    "i",
+                    RegexOptions.IgnoreCase | options
+                )
+            );
+            Assert.True(
+                Regex.IsMatch(Turkish_I_withDot.ToString(), "i", RegexOptions.IgnoreCase | options)
+            );
+            Assert.True(
+                Regex.IsMatch(Turkish_I_withDot.ToString(), "i", RegexOptions.IgnoreCase | options)
+            );
+            Assert.False(
+                Regex.IsMatch(
+                    Turkish_I_withDot.ToString(),
+                    "i",
+                    RegexOptions.IgnoreCase | options | RegexOptions.CultureInvariant
+                )
+            );
 
             // Turkish i without dot is not considered case-sensitive in the default en-US culture
             treatedAsCaseInsensitive.Add(Turkish_i_withoutDot);
@@ -465,8 +734,13 @@ namespace System.Text.RegularExpressions.Tests
             // test all case-sensitive characters exhaustively in NonBacktracking mode
             foreach (char c in caseSensitiveChars)
             {
-                Assert.True(Regex.IsMatch(char.ToUpper(c).ToString() + char.ToLower(c).ToString(),
-                    c.ToString() + c.ToString(), RegexOptions.IgnoreCase | options));
+                Assert.True(
+                    Regex.IsMatch(
+                        char.ToUpper(c).ToString() + char.ToLower(c).ToString(),
+                        c.ToString() + c.ToString(),
+                        RegexOptions.IgnoreCase | options
+                    )
+                );
             }
         }
 
@@ -475,7 +749,10 @@ namespace System.Text.RegularExpressions.Tests
         /// </summary>
         /// <param name="culture">ignoring case wrt this culture</param>
         /// <param name="treatedAsCaseInsensitive">characters that are otherwise case-sensitive but not in a regex</param>
-        private static HashSet<char>[] ComputeIgnoreCaseTable(CultureInfo culture, HashSet<char> treatedAsCaseInsensitive)
+        private static HashSet<char>[] ComputeIgnoreCaseTable(
+            CultureInfo culture,
+            HashSet<char> treatedAsCaseInsensitive
+        )
         {
             CultureInfo ci = CultureInfo.CurrentCulture;
             CultureInfo.CurrentCulture = culture;
@@ -487,16 +764,33 @@ namespace System.Text.RegularExpressions.Tests
                 char cU = char.ToUpper(c);
                 char cL = char.ToLower(c);
                 // Turkish i without dot is only considered case-sensitive in tr and az languages
-                if (treatedAsCaseInsensitive.Contains(c) ||
-                    (c == Turkish_i_withoutDot && culture.TwoLetterISOLanguageName != "tr" && culture.TwoLetterISOLanguageName != "az"))
+                if (
+                    treatedAsCaseInsensitive.Contains(c)
+                    || (
+                        c == Turkish_i_withoutDot
+                        && culture.TwoLetterISOLanguageName != "tr"
+                        && culture.TwoLetterISOLanguageName != "az"
+                    )
+                )
                 {
                     continue;
                 }
 
                 if (cU != cL)
                 {
-                    HashSet<char> set = (ignoreCase[c] == null ? (ignoreCase[cU] == null ? (ignoreCase[cL] == null ? new HashSet<char>()
-                                                     : ignoreCase[cL]) : ignoreCase[cU]) : ignoreCase[c]);
+                    HashSet<char> set = (
+                        ignoreCase[c] == null
+                            ? (
+                                  ignoreCase[cU] == null
+                                      ? (
+                                            ignoreCase[cL] == null
+                                                ? new HashSet<char>()
+                                                : ignoreCase[cL]
+                                        )
+                                      : ignoreCase[cU]
+                              )
+                            : ignoreCase[c]
+                    );
                     set.Add(c);
                     set.Add(cU);
                     set.Add(cL);

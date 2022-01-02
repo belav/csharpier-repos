@@ -18,7 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
     {
         [ContractAnnotation("value:null => halt")]
         [return: NotNull]
-        public static T NotNull<T>([NoEnumeration] [AllowNull] [NotNull] T value, [InvokerParameterName] string parameterName)
+        public static T NotNull<T>(
+            [NoEnumeration] [AllowNull] [NotNull] T value,
+            [InvokerParameterName] string parameterName
+        )
         {
             if (value is null)
             {
@@ -33,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         [ContractAnnotation("value:null => halt")]
         public static IReadOnlyList<T> NotEmpty<T>(
             [NotNull] IReadOnlyList<T>? value,
-            [InvokerParameterName] string parameterName)
+            [InvokerParameterName] string parameterName
+        )
         {
             NotNull(value, parameterName);
 
@@ -41,14 +45,19 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             {
                 NotEmpty(parameterName, nameof(parameterName));
 
-                throw new ArgumentException(AbstractionsStrings.CollectionArgumentIsEmpty(parameterName));
+                throw new ArgumentException(
+                    AbstractionsStrings.CollectionArgumentIsEmpty(parameterName)
+                );
             }
 
             return value;
         }
 
         [ContractAnnotation("value:null => halt")]
-        public static string NotEmpty([NotNull] string? value, [InvokerParameterName] string parameterName)
+        public static string NotEmpty(
+            [NotNull] string? value,
+            [InvokerParameterName] string parameterName
+        )
         {
             if (value is null)
             {
@@ -67,7 +76,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             return value;
         }
 
-        public static string? NullButNotEmpty(string? value, [InvokerParameterName] string parameterName)
+        public static string? NullButNotEmpty(
+            string? value,
+            [InvokerParameterName] string parameterName
+        )
         {
             if (value is not null && value.Length == 0)
             {
@@ -81,8 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         public static IReadOnlyList<T> HasNoNulls<T>(
             [NotNull] IReadOnlyList<T>? value,
-            [InvokerParameterName] string parameterName)
-            where T : class
+            [InvokerParameterName] string parameterName
+        ) where T : class
         {
             NotNull(value, parameterName);
 
@@ -98,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         public static IReadOnlyList<string> HasNoEmptyElements(
             [NotNull] IReadOnlyList<string>? value,
-            [InvokerParameterName] string parameterName)
+            [InvokerParameterName] string parameterName
+        )
         {
             NotNull(value, parameterName);
 
@@ -106,7 +119,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             {
                 NotEmpty(parameterName, nameof(parameterName));
 
-                throw new ArgumentException(AbstractionsStrings.CollectionArgumentHasEmptyElements(parameterName));
+                throw new ArgumentException(
+                    AbstractionsStrings.CollectionArgumentHasEmptyElements(parameterName)
+                );
             }
 
             return value;

@@ -14,7 +14,8 @@ public class ComponentParameterCaptureUnmatchedValuesMustBeUniqueTest : Diagnost
     [Fact]
     public void IgnoresPropertiesWithCaptureUnmatchedValuesFalse()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using System.Collections.Generic;
@@ -32,7 +33,8 @@ public class ComponentParameterCaptureUnmatchedValuesMustBeUniqueTest : Diagnost
     [Fact]
     public void AddsDiagnosticForMultipleCaptureUnmatchedValuesProperties()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using System.Collections.Generic;
@@ -44,21 +46,23 @@ public class ComponentParameterCaptureUnmatchedValuesMustBeUniqueTest : Diagnost
         }}
     }}" + ComponentsTestDeclarations.Source;
 
-        var message = @"Component type 'ConsoleApplication1.TypeName' defines properties multiple parameters with CaptureUnmatchedValues. Properties: " + Environment.NewLine +
-"ConsoleApplication1.TypeName.MyOtherProperty" + Environment.NewLine +
-"ConsoleApplication1.TypeName.MyProperty";
+        var message =
+            @"Component type 'ConsoleApplication1.TypeName' defines properties multiple parameters with CaptureUnmatchedValues. Properties: "
+            + Environment.NewLine
+            + "ConsoleApplication1.TypeName.MyOtherProperty"
+            + Environment.NewLine
+            + "ConsoleApplication1.TypeName.MyProperty";
 
-        VerifyCSharpDiagnostic(test,
-                new DiagnosticResult
-                {
-                    Id = DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesMustBeUnique.Id,
-                    Message = message,
-                    Severity = DiagnosticSeverity.Warning,
-                    Locations = new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 6, 15)
-                    }
-                });
+        VerifyCSharpDiagnostic(
+            test,
+            new DiagnosticResult
+            {
+                Id = DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesMustBeUnique.Id,
+                Message = message,
+                Severity = DiagnosticSeverity.Warning,
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 6, 15) }
+            }
+        );
     }
 
     protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()

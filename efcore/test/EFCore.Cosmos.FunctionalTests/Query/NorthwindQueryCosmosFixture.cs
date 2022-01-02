@@ -9,20 +9,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindQueryCosmosFixture<TModelCustomizer> : NorthwindQueryFixtureBase<TModelCustomizer>
+    public class NorthwindQueryCosmosFixture<TModelCustomizer>
+        : NorthwindQueryFixtureBase<TModelCustomizer>
         where TModelCustomizer : IModelCustomizer, new()
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosNorthwindTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory =>
+            CosmosNorthwindTestStoreFactory.Instance;
 
-        protected override bool UsePooling
-            => false;
+        protected override bool UsePooling => false;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+        public TestSqlLoggerFactory TestSqlLoggerFactory =>
+            (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
 
-        protected override bool ShouldLogCategory(string logCategory)
-            => logCategory == DbLoggerCategory.Query.Name;
+        protected override bool ShouldLogCategory(string logCategory) =>
+            logCategory == DbLoggerCategory.Query.Name;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
@@ -30,19 +30,23 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             modelBuilder
                 .Entity<CustomerQuery>()
-                .HasDiscriminator<string>("Discriminator").HasValue("Customer");
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue("Customer");
 
             modelBuilder
                 .Entity<OrderQuery>()
-                .HasDiscriminator<string>("Discriminator").HasValue("Order");
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue("Order");
 
             modelBuilder
                 .Entity<ProductQuery>()
-                .HasDiscriminator<string>("Discriminator").HasValue("Product");
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue("Product");
 
             modelBuilder
                 .Entity<CustomerQueryWithQueryFilter>()
-                .HasDiscriminator<string>("Discriminator").HasValue("Customer");
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue("Customer");
         }
     }
 }

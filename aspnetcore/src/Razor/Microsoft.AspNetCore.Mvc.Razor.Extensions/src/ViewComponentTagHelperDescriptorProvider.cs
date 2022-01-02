@@ -9,7 +9,9 @@ using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-public sealed class ViewComponentTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
+public sealed class ViewComponentTagHelperDescriptorProvider
+    : RazorEngineFeatureBase,
+      ITagHelperDescriptorProvider
 {
     public int Order { get; set; }
 
@@ -27,8 +29,12 @@ public sealed class ViewComponentTagHelperDescriptorProvider : RazorEngineFeatur
             return;
         }
 
-        var vcAttribute = compilation.GetTypeByMetadataName(ViewComponentTypes.ViewComponentAttribute);
-        var nonVCAttribute = compilation.GetTypeByMetadataName(ViewComponentTypes.NonViewComponentAttribute);
+        var vcAttribute = compilation.GetTypeByMetadataName(
+            ViewComponentTypes.ViewComponentAttribute
+        );
+        var nonVCAttribute = compilation.GetTypeByMetadataName(
+            ViewComponentTypes.NonViewComponentAttribute
+        );
         if (vcAttribute == null || vcAttribute.TypeKind == TypeKind.Error)
         {
             // Could not find attributes we care about in the compilation. Nothing to do.
@@ -72,6 +78,7 @@ public sealed class ViewComponentTagHelperDescriptorProvider : RazorEngineFeatur
 
     private bool IsTagHelperAssembly(IAssemblySymbol assembly)
     {
-        return assembly.Name != null && !assembly.Name.StartsWith("System.", StringComparison.Ordinal);
+        return assembly.Name != null
+            && !assembly.Name.StartsWith("System.", StringComparison.Ordinal);
     }
 }

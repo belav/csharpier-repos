@@ -20,7 +20,12 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Every_eventId_has_a_logger_method_and_logs_when_level_enabled()
         {
-            var entityType = new EntityType(typeof(object), new Model(new ConventionSet()), owned: false, ConfigurationSource.Convention);
+            var entityType = new EntityType(
+                typeof(object),
+                new Model(new ConventionSet()),
+                owned: false,
+                ConfigurationSource.Convention
+            );
             entityType.Model.FinalizeModel();
 
             var fakeFactories = new Dictionary<Type, Func<object>>
@@ -35,40 +40,31 @@ namespace Microsoft.EntityFrameworkCore
                 typeof(SqliteEventId),
                 typeof(SqliteLoggerExtensions),
                 new SqliteLoggingDefinitions(),
-                fakeFactories);
+                fakeFactories
+            );
         }
 
         private class FakeSequence : Annotatable, IReadOnlySequence
         {
-            public string Name
-                => "SequenceName";
+            public string Name => "SequenceName";
 
-            public string Schema
-                => throw new NotImplementedException();
+            public string Schema => throw new NotImplementedException();
 
-            public long StartValue
-                => throw new NotImplementedException();
+            public long StartValue => throw new NotImplementedException();
 
-            public int IncrementBy
-                => throw new NotImplementedException();
+            public int IncrementBy => throw new NotImplementedException();
 
-            public long? MinValue
-                => throw new NotImplementedException();
+            public long? MinValue => throw new NotImplementedException();
 
-            public long? MaxValue
-                => throw new NotImplementedException();
+            public long? MaxValue => throw new NotImplementedException();
 
-            public Type ClrType
-                => throw new NotImplementedException();
+            public Type ClrType => throw new NotImplementedException();
 
-            public Type Type
-                => throw new NotImplementedException();
+            public Type Type => throw new NotImplementedException();
 
-            public IReadOnlyModel Model
-                => throw new NotImplementedException();
+            public IReadOnlyModel Model => throw new NotImplementedException();
 
-            public bool IsCyclic
-                => throw new NotImplementedException();
+            public bool IsCyclic => throw new NotImplementedException();
         }
     }
 }

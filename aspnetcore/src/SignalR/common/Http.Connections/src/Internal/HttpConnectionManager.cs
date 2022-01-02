@@ -19,19 +19,31 @@ internal partial class HttpConnectionManager
     // TODO: Consider making this configurable? At least for testing?
     private static readonly TimeSpan _heartbeatTickRate = TimeSpan.FromSeconds(1);
 
-    private readonly ConcurrentDictionary<string, (HttpConnectionContext Connection, ValueStopwatch Timer)> _connections =
-        new ConcurrentDictionary<string, (HttpConnectionContext Connection, ValueStopwatch Timer)>(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<
+        string,
+        (HttpConnectionContext Connection, ValueStopwatch Timer)
+    > _connections = new ConcurrentDictionary<
+        string,
+        (HttpConnectionContext Connection, ValueStopwatch Timer)
+    >(StringComparer.Ordinal);
     private readonly PeriodicTimer _nextHeartbeat;
     private readonly ILogger<HttpConnectionManager> _logger;
     private readonly ILogger<HttpConnectionContext> _connectionLogger;
     private readonly long _disconnectTimeoutTicks;
 
-    public HttpConnectionManager(ILoggerFactory loggerFactory, IHostApplicationLifetime appLifetime, IOptions<ConnectionOptions> connectionOptions)
+    public HttpConnectionManager(
+        ILoggerFactory loggerFactory,
+        IHostApplicationLifetime appLifetime,
+        IOptions<ConnectionOptions> connectionOptions
+    )
     {
         _logger = loggerFactory.CreateLogger<HttpConnectionManager>();
         _connectionLogger = loggerFactory.CreateLogger<HttpConnectionContext>();
         _nextHeartbeat = new PeriodicTimer(_heartbeatTickRate);
-        _disconnectTimeoutTicks = (long)(connectionOptions.Value.DisconnectTimeout ?? ConnectionOptionsSetup.DefaultDisconectTimeout).TotalMilliseconds;
+        _disconnectTimeoutTicks = (long)(
+            connectionOptions.Value.DisconnectTimeout
+            ?? ConnectionOptionsSetup.DefaultDisconectTimeout
+        ).TotalMilliseconds;
 
         // Register these last as the callbacks could run immediately
         appLifetime.ApplicationStarted.Register(() => Start());
@@ -44,7 +56,10 @@ internal partial class HttpConnectionManager
         _ = ExecuteTimerLoop();
     }
 
-    internal bool TryGetConnection(string id, [NotNullWhen(true)] out HttpConnectionContext? connection)
+    internal bool TryGetConnection(
+        string id,
+        [NotNullWhen(true)] out HttpConnectionContext? connection
+    )
     {
         connection = null;
 
@@ -65,7 +80,10 @@ internal partial class HttpConnectionManager
     /// Creates a connection without Pipes setup to allow saving allocations until Pipes are needed.
     /// </summary>
     /// <returns></returns>
-    internal HttpConnectionContext CreateConnection(HttpConnectionDispatcherOptions options, int negotiateVersion = 0)
+    internal HttpConnectionContext CreateConnection(
+        HttpConnectionDispatcherOptions options,
+        int negotiateVersion = 0
+    )
     {
         string connectionToken;
         var id = MakeNewConnectionId();
@@ -80,8 +98,18 @@ internal partial class HttpConnectionManager
 
         Log.CreatedNewConnection(_logger, id);
         var connectionTimer = HttpConnectionsEventSource.Log.ConnectionStart(id);
-        var pair = DuplexPipe.CreateConnectionPair(options.TransportPipeOptions, options.AppPipeOptions);
-        var connection = new HttpConnectionContext(id, connectionToken, _connectionLogger, pair.Application, pair.Transport, options);
+        var pair = DuplexPipe.CreateConnectionPair(
+            options.TransportPipeOptions,
+            options.AppPipeOptions
+        );
+        var connection = new HttpConnectionContext(
+            id,
+            connectionToken,
+            _connectionLogger,
+            pair.Application,
+            pair.Transport,
+            options
+        );
 
         _connections.TryAdd(connectionToken, (connection, connectionTimer));
 
@@ -145,7 +173,11 @@ internal partial class HttpConnectionManager
 
             // Once the decision has been made to dispose we don't check the status again
             // But don't clean up connections while the debugger is attached.
-            if (!Debugger.IsAttached && lastSeenTick.HasValue && (ticks - lastSeenTick.Value) > _disconnectTimeoutTicks)
+            if (
+                !Debugger.IsAttached
+                && lastSeenTick.HasValue
+                && (ticks - lastSeenTick.Value) > _disconnectTimeoutTicks
+            )
             {
                 Log.ConnectionTimedOut(_logger, connection.ConnectionId);
                 HttpConnectionsEventSource.Log.ConnectionTimedOut(connection.ConnectionId);
@@ -165,8 +197,11 @@ internal partial class HttpConnectionManager
                 // Tick the heartbeat, if the connection is still active
                 connection.TickHeartbeat();
 
-                if (connection.IsAuthenticationExpirationEnabled && connection.AuthenticationExpiration < now &&
-                    !connection.ConnectionClosedRequested.IsCancellationRequested)
+                if (
+                    connection.IsAuthenticationExpirationEnabled
+                    && connection.AuthenticationExpiration < now
+                    && !connection.ConnectionClosedRequested.IsCancellationRequested
+                )
                 {
                     Log.AuthenticationExpired(_logger, connection.ConnectionId);
                     connection.RequestClose();
@@ -193,7 +228,10 @@ internal partial class HttpConnectionManager
         Task.WaitAll(tasks.ToArray(), TimeSpan.FromSeconds(5));
     }
 
-    internal async Task DisposeAndRemoveAsync(HttpConnectionContext connection, bool closeGracefully)
+    internal async Task DisposeAndRemoveAsync(
+        HttpConnectionContext connection,
+        bool closeGracefully
+    )
     {
         try
         {

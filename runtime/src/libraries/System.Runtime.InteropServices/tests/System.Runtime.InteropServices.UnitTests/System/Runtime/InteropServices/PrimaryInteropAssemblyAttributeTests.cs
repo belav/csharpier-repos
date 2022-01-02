@@ -7,6 +7,7 @@ using Xunit;
 
 [assembly: PrimaryInteropAssembly(1, 2)]
 
+
 namespace System.Runtime.InteropServices.Tests
 {
     public class PrimaryInteropAssemblyAttributeTests
@@ -16,7 +17,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Type type = typeof(PrimaryInteropAssemblyAttributeTests);
             Assembly assembly = type.GetTypeInfo().Assembly;
-            PrimaryInteropAssemblyAttribute attribute = Assert.Single(assembly.GetCustomAttributes<PrimaryInteropAssemblyAttribute>());
+            PrimaryInteropAssemblyAttribute attribute = Assert.Single(
+                assembly.GetCustomAttributes<PrimaryInteropAssemblyAttribute>()
+            );
             Assert.Equal(1, attribute.MajorVersion);
             Assert.Equal(2, attribute.MinorVersion);
         }

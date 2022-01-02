@@ -24,9 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal const string ValueParameterName = "value";
 
-        internal ParameterSymbol()
-        {
-        }
+        internal ParameterSymbol() { }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
@@ -35,18 +33,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public new virtual ParameterSymbol OriginalDefinition
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         protected sealed override Symbol OriginalSymbolDefinition
         {
-            get
-            {
-                return this.OriginalDefinition;
-            }
+            get { return this.OriginalDefinition; }
         }
 
         /// <summary>
@@ -149,16 +141,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // To maintain compatibility with Dev10, we allow such code to compile but explicitly
                 // classify a ParameterArray param as a required parameter.
                 //
-                // Also when we call f() where signature of f is void([Optional]params int[] args) 
+                // Also when we call f() where signature of f is void([Optional]params int[] args)
                 // an empty array is created and passed to f.
                 //
-                // We also do not consider ref/out parameters as optional, unless in COM interop scenarios 
+                // We also do not consider ref/out parameters as optional, unless in COM interop scenarios
                 // and only for ref.
                 RefKind refKind;
-                return !IsParams && IsMetadataOptional &&
-                       ((refKind = RefKind) == RefKind.None ||
-                        (refKind == RefKind.In) ||
-                        (refKind == RefKind.Ref && ContainingSymbol.ContainingType.IsComImport));
+                return !IsParams
+                    && IsMetadataOptional
+                    && (
+                        (refKind = RefKind) == RefKind.None
+                        || (refKind == RefKind.In)
+                        || (refKind == RefKind.Ref && ContainingSymbol.ContainingType.IsComImport)
+                    );
             }
         }
 
@@ -245,6 +240,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// (i.e. even non-optional parameters can have default values).
         /// </remarks>
         internal abstract ConstantValue? ExplicitDefaultConstantValue { get; }
+
 #nullable disable
 
         /// <summary>
@@ -252,16 +248,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Parameter;
-            }
+            get { return SymbolKind.Parameter; }
         }
 
         /// <summary>
         /// Implements visitor pattern. 
         /// </summary>
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitParameter(this, argument);
         }
@@ -282,10 +278,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -295,10 +288,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -309,10 +299,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -322,10 +309,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -335,10 +319,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -347,10 +328,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -359,10 +337,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -370,10 +345,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public virtual bool IsThis
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -419,10 +391,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override int HighestPriorityUseSiteError
         {
-            get
-            {
-                return (int)ErrorCode.ERR_BogusType;
-            }
+            get { return (int)ErrorCode.ERR_BogusType; }
         }
 
         public sealed override bool HasUnsupportedMetadata

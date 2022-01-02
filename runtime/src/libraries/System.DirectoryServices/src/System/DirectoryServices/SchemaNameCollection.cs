@@ -221,6 +221,7 @@ namespace System.DirectoryServices
         internal sealed class FilterDelegateWrapper
         {
             private readonly UnsafeNativeMethods.IAdsContainer _obj;
+
             internal FilterDelegateWrapper(UnsafeNativeMethods.IAdsContainer wrapped)
             {
                 _obj = wrapped;

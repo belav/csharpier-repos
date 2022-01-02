@@ -15,7 +15,8 @@ namespace System.Web.Http.Tracing
                 r => r.Kind,
                 expectedDefaultValue: TraceKind.Trace,
                 illegalValue: (TraceKind)999,
-                roundTripTestValue: TraceKind.End);
+                roundTripTestValue: TraceKind.End
+            );
         }
 
         [Fact]
@@ -26,7 +27,8 @@ namespace System.Web.Http.Tracing
                 r => r.Level,
                 expectedDefaultValue: TraceLevel.Info,
                 illegalValue: (TraceLevel)999,
-                roundTripTestValue: TraceLevel.Fatal);
+                roundTripTestValue: TraceLevel.Fatal
+            );
         }
     }
 }

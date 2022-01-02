@@ -37,7 +37,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
 
         var content = "{name: 'Person Name', Age: '30'}";
         var contentBytes = Encoding.UTF8.GetBytes(content);
@@ -63,17 +64,15 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
     public async Task Constructor_SuppressInputFormatterBuffering_UsingMvcOptions_DoesNotBufferRequestBody()
     {
         // Arrange
-        var mvcOptions = new MvcOptions()
-        {
-            SuppressInputFormatterBuffering = true,
-        };
+        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = true, };
         var formatter = new NewtonsoftJsonInputFormatter(
             GetLogger(),
             _serializerSettings,
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             mvcOptions,
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
 
         var content = "{name: 'Person Name', Age: '30'}";
         var contentBytes = Encoding.UTF8.GetBytes(content);
@@ -99,17 +98,15 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
     public async Task Version_2_1_Constructor_SuppressInputFormatterBufferingSetToTrue_UsingMutatedOptions()
     {
         // Arrange
-        var mvcOptions = new MvcOptions()
-        {
-            SuppressInputFormatterBuffering = false,
-        };
+        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = false, };
         var formatter = new NewtonsoftJsonInputFormatter(
             GetLogger(),
             _serializerSettings,
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             mvcOptions,
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
 
         var content = "{name: 'Person Name', Age: '30'}";
         var contentBytes = Encoding.UTF8.GetBytes(content);
@@ -158,8 +155,14 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
     {
         // Arrange
         // by default we ignore missing members, so here explicitly changing it
-        var serializerSettings = new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Error };
-        var formatter = CreateFormatter(serializerSettings, allowInputFormatterExceptionMessages: true);
+        var serializerSettings = new JsonSerializerSettings
+        {
+            MissingMemberHandling = MissingMemberHandling.Error
+        };
+        var formatter = CreateFormatter(
+            serializerSettings,
+            allowInputFormatterExceptionMessages: true
+        );
 
         // missing password property here
         var contentBytes = Encoding.UTF8.GetBytes("{ \"UserName\" : \"John\"}");
@@ -214,21 +217,46 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
     [Theory]
     [InlineData(" ", true, true)]
     [InlineData(" ", false, false)]
-    public Task ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput_WhenValueIsWhitespaceString(string content, bool treatEmptyInputAsDefaultValue, bool expectedIsModelSet)
+    public Task ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput_WhenValueIsWhitespaceString(
+        string content,
+        bool treatEmptyInputAsDefaultValue,
+        bool expectedIsModelSet
+    )
     {
-        return base.ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput(content, treatEmptyInputAsDefaultValue, expectedIsModelSet);
+        return base.ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput(
+            content,
+            treatEmptyInputAsDefaultValue,
+            expectedIsModelSet
+        );
     }
 
     [Theory]
     [InlineData("{", "", "Unexpected end when reading JSON. Path '', line 1, position 1.")]
-    [InlineData("{\"a\":{\"b\"}}", "a", "Invalid character after parsing property name. Expected ':' but got: }. Path 'a', line 1, position 9.")]
-    [InlineData("{\"age\":\"x\"}", "age", "Could not convert string to decimal: x. Path 'age', line 1, position 10.")]
-    [InlineData("{\"login\":1}", "login", "Error converting value 1 to type 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatterTest+UserLogin'. Path 'login', line 1, position 10.")]
-    [InlineData("{\"login\":{\"username\":\"somevalue\"}}", "login.Password", "Required property 'Password' not found in JSON. Path 'login', line 1, position 33.")]
+    [InlineData(
+        "{\"a\":{\"b\"}}",
+        "a",
+        "Invalid character after parsing property name. Expected ':' but got: }. Path 'a', line 1, position 9."
+    )]
+    [InlineData(
+        "{\"age\":\"x\"}",
+        "age",
+        "Could not convert string to decimal: x. Path 'age', line 1, position 10."
+    )]
+    [InlineData(
+        "{\"login\":1}",
+        "login",
+        "Error converting value 1 to type 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatterTest+UserLogin'. Path 'login', line 1, position 10."
+    )]
+    [InlineData(
+        "{\"login\":{\"username\":\"somevalue\"}}",
+        "login.Password",
+        "Required property 'Password' not found in JSON. Path 'login', line 1, position 33."
+    )]
     public async Task ReadAsync_WithAllowInputFormatterExceptionMessages_RegistersJsonInputExceptionsAsInputFormatterException(
         string content,
         string modelStateKey,
-        string expectedMessage)
+        string expectedMessage
+    )
     {
         // Arrange
         var formatter = CreateFormatter(allowInputFormatterExceptionMessages: true);
@@ -280,7 +308,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
                 Assert.Equal("[3]", kvp.Key);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.StartsWith("Could not convert string to integer:", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -316,10 +345,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions()
-            {
-                AllowInputFormatterExceptionMessages = true,
-            });
+            new MvcNewtonsoftJsonOptions() { AllowInputFormatterExceptionMessages = true, }
+        );
 
         var contentBytes = Encoding.UTF8.GetBytes("{");
         var httpContext = GetHttpContext(contentBytes);
@@ -351,7 +378,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
 
         var contentBytes = Encoding.UTF8.GetBytes("{\"dateValue\":\"not-a-date\"}");
         var httpContext = GetHttpContext(contentBytes);
@@ -382,7 +410,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
 
         var contentBytes = Encoding.UTF8.GetBytes("{\"shortValue\":\"32768\"}");
         var httpContext = GetHttpContext(contentBytes);
@@ -411,14 +440,18 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
         var httpContext = new Mock<HttpContext>();
         IDisposable registerForDispose = null;
 
         var content = Encoding.UTF8.GetBytes("\"Hello world\"");
-        httpContext.Setup(h => h.Request.Body).Returns(new NonSeekableReadStream(content, allowSyncReads: false));
+        httpContext
+            .Setup(h => h.Request.Body)
+            .Returns(new NonSeekableReadStream(content, allowSyncReads: false));
         httpContext.Setup(h => h.Request.ContentType).Returns("application/json");
-        httpContext.Setup(h => h.Response.RegisterForDispose(It.IsAny<IDisposable>()))
+        httpContext
+            .Setup(h => h.Response.RegisterForDispose(It.IsAny<IDisposable>()))
             .Callback((IDisposable disposable) => registerForDispose = disposable)
             .Verifiable();
 
@@ -447,7 +480,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
     [InlineData("2019/5/15", "zh-CN")]
     public async Task ReadAsync_WithReadJsonWithRequestCulture_DeserializesUsingRequestCulture(
         string dateString,
-        string culture)
+        string culture
+    )
     {
         // Arrange
         var formatter = new NewtonsoftJsonInputFormatter(
@@ -456,7 +490,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions() { ReadJsonWithRequestCulture = true });
+            new MvcNewtonsoftJsonOptions() { ReadJsonWithRequestCulture = true }
+        );
 
         var originalCulture = CultureInfo.CurrentCulture;
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo(culture);
@@ -467,10 +502,16 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             var contentBytes = Encoding.UTF8.GetBytes(content);
             var httpContext = new DefaultHttpContext();
             httpContext.Features.Set<IHttpResponseFeature>(new TestResponseFeature());
-            httpContext.Request.Body = new NonSeekableReadStream(contentBytes, allowSyncReads: false);
+            httpContext.Request.Body = new NonSeekableReadStream(
+                contentBytes,
+                allowSyncReads: false
+            );
             httpContext.Request.ContentType = "application/json";
 
-            var formatterContext = CreateInputFormatterContext(typeof(TypeWithPrimitives), httpContext);
+            var formatterContext = CreateInputFormatterContext(
+                typeof(TypeWithPrimitives),
+                httpContext
+            );
 
             // Act
             var result = await formatter.ReadAsync(formatterContext);
@@ -479,7 +520,10 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             Assert.False(result.HasError);
 
             var userModel = Assert.IsType<TypeWithPrimitives>(result.Model);
-            Assert.Equal(new DateTime(2019, 05, 15, 00, 00, 00, DateTimeKind.Unspecified), userModel.DateValue);
+            Assert.Equal(
+                new DateTime(2019, 05, 15, 00, 00, 00, DateTimeKind.Unspecified),
+                userModel.DateValue
+            );
         }
         finally
         {
@@ -489,14 +533,23 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
 
     private class TestableJsonInputFormatter : NewtonsoftJsonInputFormatter
     {
-        public TestableJsonInputFormatter(JsonSerializerSettings settings, ObjectPoolProvider objectPoolProvider)
-            : base(GetLogger(), settings, ArrayPool<char>.Shared, objectPoolProvider, new MvcOptions(), new MvcNewtonsoftJsonOptions())
-        {
-        }
+        public TestableJsonInputFormatter(
+            JsonSerializerSettings settings,
+            ObjectPoolProvider objectPoolProvider
+        )
+            : base(
+                GetLogger(),
+                settings,
+                ArrayPool<char>.Shared,
+                objectPoolProvider,
+                new MvcOptions(),
+                new MvcNewtonsoftJsonOptions()
+            ) { }
 
         public new JsonSerializerSettings SerializerSettings => base.SerializerSettings;
 
-        public new JsonSerializer CreateJsonSerializer(InputFormatterContext _) => base.CreateJsonSerializer(null);
+        public new JsonSerializer CreateJsonSerializer(InputFormatterContext _) =>
+            base.CreateJsonSerializer(null);
     }
 
     private static ILogger GetLogger()
@@ -504,10 +557,15 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
         return NullLogger.Instance;
     }
 
-    protected override TextInputFormatter GetInputFormatter(bool allowInputFormatterExceptionMessages = true)
-        => CreateFormatter(allowInputFormatterExceptionMessages: allowInputFormatterExceptionMessages);
+    protected override TextInputFormatter GetInputFormatter(
+        bool allowInputFormatterExceptionMessages = true
+    ) =>
+        CreateFormatter(allowInputFormatterExceptionMessages: allowInputFormatterExceptionMessages);
 
-    private NewtonsoftJsonInputFormatter CreateFormatter(JsonSerializerSettings serializerSettings = null, bool allowInputFormatterExceptionMessages = false)
+    private NewtonsoftJsonInputFormatter CreateFormatter(
+        JsonSerializerSettings serializerSettings = null,
+        bool allowInputFormatterExceptionMessages = false
+    )
     {
         return new NewtonsoftJsonInputFormatter(
             GetLogger(),
@@ -518,7 +576,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             new MvcNewtonsoftJsonOptions()
             {
                 AllowInputFormatterExceptionMessages = allowInputFormatterExceptionMessages,
-            });
+            }
+        );
     }
 
     internal override string JsonFormatter_EscapedKeys_Expected => "[0]['It\"s a key']";
@@ -531,9 +590,11 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
 
     internal override string ReadAsync_ComplexPoco_Expected => "Person.Numbers[2]";
 
-    internal override string ReadAsync_InvalidComplexArray_AddsOverflowErrorsToModelState_Expected => "names[1].Small";
+    internal override string ReadAsync_InvalidComplexArray_AddsOverflowErrorsToModelState_Expected =>
+        "names[1].Small";
 
-    internal override string ReadAsync_InvalidArray_AddsOverflowErrorsToModelState_Expected => "[2]";
+    internal override string ReadAsync_InvalidArray_AddsOverflowErrorsToModelState_Expected =>
+        "[2]";
 
     private class Location
     {
@@ -580,7 +641,13 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
 
     private class IncorrectShortConverter : JsonConverter<short>
     {
-        public override short ReadJson(JsonReader reader, Type objectType, short existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override short ReadJson(
+            JsonReader reader,
+            Type objectType,
+            short existingValue,
+            bool hasExistingValue,
+            JsonSerializer serializer
+        )
         {
             return short.Parse(reader.Value.ToString(), CultureInfo.InvariantCulture);
         }

@@ -3,13 +3,14 @@
 using System;
 using System.Reflection;
 
-[assembly:	   AssemblyVersionAttribute("1.0.0.0")]
+[assembly: AssemblyVersionAttribute("1.0.0.0")]
 
-public class server3 
+
+public class server3
 {
-  public int trivial()
-  {
-	Console.WriteLine ("server3.trivial");
-	return 3;
-  }
+    public int trivial()
+    {
+        Console.WriteLine("server3.trivial");
+        return 3;
+    }
 }

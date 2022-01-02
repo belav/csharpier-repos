@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceExtent extent,
             NamespaceSymbol containingNamespace,
             ImmutableArray<NamespaceSymbol> namespacesToMerge,
-            string nameOpt = null)
+            string nameOpt = null
+        )
         {
             // Currently, if we are just merging 1 namespace, we just return the namespace itself.
             // This is by far the most efficient, because it means that we don't create merged
@@ -83,17 +84,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(namespacesToMerge.Length != 0);
 
             return (namespacesToMerge.Length == 1 && nameOpt == null)
-                ? namespacesToMerge[0]
-                : new MergedNamespaceSymbol(extent, containingNamespace, namespacesToMerge, nameOpt);
+              ? namespacesToMerge[0]
+              : new MergedNamespaceSymbol(extent, containingNamespace, namespacesToMerge, nameOpt);
         }
 
         // Constructor. Use static Create method to create instances.
-        private MergedNamespaceSymbol(NamespaceExtent extent, NamespaceSymbol containingNamespace, ImmutableArray<NamespaceSymbol> namespacesToMerge, string nameOpt)
+        private MergedNamespaceSymbol(
+            NamespaceExtent extent,
+            NamespaceSymbol containingNamespace,
+            ImmutableArray<NamespaceSymbol> namespacesToMerge,
+            string nameOpt
+        )
         {
             _extent = extent;
             _namespacesToMerge = namespacesToMerge;
             _containingNamespace = containingNamespace;
-            _cachedLookup = new CachingDictionary<string, Symbol>(SlowGetChildrenOfName, SlowGetChildNames, EqualityComparer<string>.Default);
+            _cachedLookup = new CachingDictionary<string, Symbol>(
+                SlowGetChildrenOfName,
+                SlowGetChildNames,
+                EqualityComparer<string>.Default
+            );
             _nameOpt = nameOpt;
 
 #if DEBUG
@@ -119,7 +129,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return null;
         }
 
-        internal override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
+        internal override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var part in _namespacesToMerge)
             {
@@ -144,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (childSymbol.Kind == SymbolKind.Namespace)
                     {
-                        namespaceSymbols = namespaceSymbols ?? ArrayBuilder<NamespaceSymbol>.GetInstance();
+                        namespaceSymbols =
+                            namespaceSymbols ?? ArrayBuilder<NamespaceSymbol>.GetInstance();
                         namespaceSymbols.Add((NamespaceSymbol)childSymbol);
                     }
                     else
@@ -156,7 +170,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (namespaceSymbols != null)
             {
-                otherSymbols.Add(MergedNamespaceSymbol.Create(_extent, this, namespaceSymbols.ToImmutableAndFree()));
+                otherSymbols.Add(
+                    MergedNamespaceSymbol.Create(
+                        _extent,
+                        this,
+                        namespaceSymbols.ToImmutableAndFree()
+                    )
+                );
             }
 
             return otherSymbols.ToImmutableAndFree();
@@ -183,26 +203,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _nameOpt ?? _namespacesToMerge[0].Name;
-            }
+            get { return _nameOpt ?? _namespacesToMerge[0].Name; }
         }
 
         internal override NamespaceExtent Extent
         {
-            get
-            {
-                return _extent;
-            }
+            get { return _extent; }
         }
 
         public override ImmutableArray<NamespaceSymbol> ConstituentNamespaces
         {
-            get
-            {
-                return _namespacesToMerge;
-            }
+            get { return _namespacesToMerge; }
         }
 
         public override ImmutableArray<Symbol> GetMembers()
@@ -225,26 +236,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembersUnordered()
         {
-            return ImmutableArray.CreateRange<NamedTypeSymbol>(GetMembersUnordered().OfType<NamedTypeSymbol>());
+            return ImmutableArray.CreateRange<NamedTypeSymbol>(
+                GetMembersUnordered().OfType<NamedTypeSymbol>()
+            );
         }
 
         public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
         {
-            return ImmutableArray.CreateRange<NamedTypeSymbol>(GetMembers().OfType<NamedTypeSymbol>());
+            return ImmutableArray.CreateRange<NamedTypeSymbol>(
+                GetMembers().OfType<NamedTypeSymbol>()
+            );
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name)
         {
             // TODO - This is really inefficient. Creating a new array on each lookup needs to fixed!
-            return ImmutableArray.CreateRange<NamedTypeSymbol>(_cachedLookup[name].OfType<NamedTypeSymbol>());
+            return ImmutableArray.CreateRange<NamedTypeSymbol>(
+                _cachedLookup[name].OfType<NamedTypeSymbol>()
+            );
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingNamespace;
-            }
+            get { return _containingNamespace; }
         }
 
         public override AssemblySymbol ContainingAssembly
@@ -272,7 +286,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 //TODO: cache
-                return _namespacesToMerge.SelectMany(namespaceSymbol => namespaceSymbol.Locations).AsImmutable();
+                return _namespacesToMerge
+                    .SelectMany(namespaceSymbol => namespaceSymbol.Locations)
+                    .AsImmutable();
             }
         }
 
@@ -280,11 +296,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return _namespacesToMerge.SelectMany(namespaceSymbol => namespaceSymbol.DeclaringSyntaxReferences).AsImmutable();
+                return _namespacesToMerge
+                    .SelectMany(namespaceSymbol => namespaceSymbol.DeclaringSyntaxReferences)
+                    .AsImmutable();
             }
         }
 
-        internal override void GetExtensionMethods(ArrayBuilder<MethodSymbol> methods, string name, int arity, LookupOptions options)
+        internal override void GetExtensionMethods(
+            ArrayBuilder<MethodSymbol> methods,
+            string name,
+            int arity,
+            LookupOptions options
+        )
         {
             foreach (NamespaceSymbol namespaceSymbol in _namespacesToMerge)
             {

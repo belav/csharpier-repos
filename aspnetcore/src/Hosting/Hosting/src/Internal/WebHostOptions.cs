@@ -20,21 +20,45 @@ internal class WebHostOptions
 
         ApplicationName = configuration[WebHostDefaults.ApplicationKey] ?? applicationNameFallback;
         StartupAssembly = configuration[WebHostDefaults.StartupAssemblyKey];
-        DetailedErrors = WebHostUtilities.ParseBool(configuration, WebHostDefaults.DetailedErrorsKey);
-        CaptureStartupErrors = WebHostUtilities.ParseBool(configuration, WebHostDefaults.CaptureStartupErrorsKey);
+        DetailedErrors = WebHostUtilities.ParseBool(
+            configuration,
+            WebHostDefaults.DetailedErrorsKey
+        );
+        CaptureStartupErrors = WebHostUtilities.ParseBool(
+            configuration,
+            WebHostDefaults.CaptureStartupErrorsKey
+        );
         Environment = configuration[WebHostDefaults.EnvironmentKey];
         WebRoot = configuration[WebHostDefaults.WebRootKey];
         ContentRootPath = configuration[WebHostDefaults.ContentRootKey];
-        PreventHostingStartup = WebHostUtilities.ParseBool(configuration, WebHostDefaults.PreventHostingStartupKey);
-        SuppressStatusMessages = WebHostUtilities.ParseBool(configuration, WebHostDefaults.SuppressStatusMessagesKey);
+        PreventHostingStartup = WebHostUtilities.ParseBool(
+            configuration,
+            WebHostDefaults.PreventHostingStartupKey
+        );
+        SuppressStatusMessages = WebHostUtilities.ParseBool(
+            configuration,
+            WebHostDefaults.SuppressStatusMessagesKey
+        );
 
         // Search the primary assembly and configured assemblies.
-        HostingStartupAssemblies = Split(ApplicationName, configuration[WebHostDefaults.HostingStartupAssembliesKey]);
-        HostingStartupExcludeAssemblies = Split(configuration[WebHostDefaults.HostingStartupExcludeAssembliesKey]);
+        HostingStartupAssemblies = Split(
+            ApplicationName,
+            configuration[WebHostDefaults.HostingStartupAssembliesKey]
+        );
+        HostingStartupExcludeAssemblies = Split(
+            configuration[WebHostDefaults.HostingStartupExcludeAssembliesKey]
+        );
 
         var timeout = configuration[WebHostDefaults.ShutdownTimeoutKey];
-        if (!string.IsNullOrEmpty(timeout)
-            && int.TryParse(timeout, NumberStyles.None, CultureInfo.InvariantCulture, out var seconds))
+        if (
+            !string.IsNullOrEmpty(timeout)
+            && int.TryParse(
+                timeout,
+                NumberStyles.None,
+                CultureInfo.InvariantCulture,
+                out var seconds
+            )
+        )
         {
             ShutdownTimeout = TimeSpan.FromSeconds(seconds);
         }
@@ -66,13 +90,18 @@ internal class WebHostOptions
 
     public IEnumerable<string> GetFinalHostingStartupAssemblies()
     {
-        return HostingStartupAssemblies.Except(HostingStartupExcludeAssemblies, StringComparer.OrdinalIgnoreCase);
+        return HostingStartupAssemblies.Except(
+            HostingStartupExcludeAssemblies,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     private static IReadOnlyList<string> Split(string? value)
     {
-        return value?.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
-            ?? Array.Empty<string>();
+        return value?.Split(
+                ';',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+            ) ?? Array.Empty<string>();
     }
 
     private static IReadOnlyList<string> Split(string applicationName, string? environment)

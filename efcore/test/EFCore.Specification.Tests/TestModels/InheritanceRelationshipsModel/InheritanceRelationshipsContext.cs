@@ -9,10 +9,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
     {
         public static readonly string StoreName = "InheritanceRelationships";
 
-        public InheritanceRelationshipsContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public InheritanceRelationshipsContext(DbContextOptions options) : base(options) { }
 
         public DbSet<BaseCollectionOnBase> BaseCollectionsOnBase { get; set; }
         public DbSet<BaseCollectionOnDerived> BaseCollectionsOnDerived { get; set; }
@@ -31,10 +28,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
         public static void Seed(InheritanceRelationshipsContext context)
         {
             var baseCollectionsOnBase = InheritanceRelationshipsData.CreateBaseCollectionsOnBase();
-            var baseCollectionsOnDerived = InheritanceRelationshipsData.CreateBaseCollectionsOnDerived();
+            var baseCollectionsOnDerived =
+                InheritanceRelationshipsData.CreateBaseCollectionsOnDerived();
             var baseEntities = InheritanceRelationshipsData.CreateBaseEntities();
             var baseReferencesOnBase = InheritanceRelationshipsData.CreateBaseReferencesOnBase();
-            var baseReferencesOnDerived = InheritanceRelationshipsData.CreateBaseReferencesOnDerived();
+            var baseReferencesOnDerived =
+                InheritanceRelationshipsData.CreateBaseReferencesOnDerived();
             var collectionsOnBase = InheritanceRelationshipsData.CreateCollectionsOnBase();
             var collectionsOnDerived = InheritanceRelationshipsData.CreateCollectionsOnDerived();
             var nestedCollections = InheritanceRelationshipsData.CreateNestedCollections();
@@ -55,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
                 baseCollectionsOnDerived,
                 collectionsOnBase,
                 collectionsOnDerived,
-                nestedCollections);
+                nestedCollections
+            );
 
             context.BaseCollectionsOnBase.AddRange(baseCollectionsOnBase);
             context.BaseCollectionsOnDerived.AddRange(baseCollectionsOnDerived);

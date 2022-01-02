@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Host
         private readonly ReaderWriterLockSlim _stateLock = new(LockRecursionPolicy.NoRecursion);
 
         private readonly object _parseGate = new();
-        private ImmutableDictionary<DocumentId, CancellationTokenSource> _workMap = ImmutableDictionary.Create<DocumentId, CancellationTokenSource>();
+        private ImmutableDictionary<DocumentId, CancellationTokenSource> _workMap =
+            ImmutableDictionary.Create<DocumentId, CancellationTokenSource>();
 
         public bool IsStarted { get; private set; }
 
@@ -39,10 +40,12 @@ namespace Microsoft.CodeAnalysis.Host
         {
             _workspace = workspace;
 
-            var listenerProvider = workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             _taskQueue = new TaskQueue(listenerProvider.GetListener(), TaskScheduler.Default);
 
-            _documentTrackingService = workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            _documentTrackingService =
+                workspace.Services.GetRequiredService<IDocumentTrackingService>();
             _documentTrackingService.ActiveDocumentChanged += OnActiveDocumentChanged;
 
             _workspace.WorkspaceChanged += OnWorkspaceChanged;
@@ -51,14 +54,14 @@ namespace Microsoft.CodeAnalysis.Host
             workspace.DocumentClosed += OnDocumentClosed;
         }
 
-        private void OnActiveDocumentChanged(object sender, DocumentId activeDocumentId)
-            => Parse(_workspace.CurrentSolution.GetDocument(activeDocumentId));
+        private void OnActiveDocumentChanged(object sender, DocumentId activeDocumentId) =>
+            Parse(_workspace.CurrentSolution.GetDocument(activeDocumentId));
 
-        private void OnDocumentOpened(object sender, DocumentEventArgs args)
-            => Parse(args.Document);
+        private void OnDocumentOpened(object sender, DocumentEventArgs args) =>
+            Parse(args.Document);
 
-        private void OnDocumentClosed(object sender, DocumentEventArgs args)
-            => CancelParse(args.Document.Id);
+        private void OnDocumentClosed(object sender, DocumentEventArgs args) =>
+            CancelParse(args.Document.Id);
 
         private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs args)
         {
@@ -88,8 +91,10 @@ namespace Microsoft.CodeAnalysis.Host
                     // this consumed around 2%-3% of the trace after some other optimizations I did. Most of that
                     // was actually walking the documents list since this was causing all the Documents to be realized.
                     // Since this is on the UI thread, it's best just to not do the work if we don't need it.
-                    if (oldProject.SupportsCompilation &&
-                        !object.Equals(oldProject.ParseOptions, newProject.ParseOptions))
+                    if (
+                        oldProject.SupportsCompilation
+                        && !object.Equals(oldProject.ParseOptions, newProject.ParseOptions)
+                    )
                     {
                         foreach (var doc in newProject.Documents)
                         {
@@ -194,11 +199,11 @@ namespace Microsoft.CodeAnalysis.Host
 
             var cancellationToken = cancellationTokenSource.Token;
 
-            // We end up creating a chain of parsing tasks that each attempt to produce 
-            // the appropriate syntax tree for any given document. Once we start work to create 
-            // the syntax tree for a given document, we don't want to stop. 
-            // Otherwise we can end up in the unfortunate scenario where we keep cancelling work, 
-            // and then having the next task re-do the work we were just in the middle of. 
+            // We end up creating a chain of parsing tasks that each attempt to produce
+            // the appropriate syntax tree for any given document. Once we start work to create
+            // the syntax tree for a given document, we don't want to stop.
+            // Otherwise we can end up in the unfortunate scenario where we keep cancelling work,
+            // and then having the next task re-do the work we were just in the middle of.
             // By not cancelling, we can reuse the useful results of previous tasks when performing later steps in the chain.
             //
             // we still cancel whole task if the task didn't start yet. we just don't cancel if task is started but not finished yet.
@@ -208,15 +213,20 @@ namespace Microsoft.CodeAnalysis.Host
                 {
                     try
                     {
-                        if (SolutionCrawlerOptions.GetBackgroundAnalysisScope(document.Project) == BackgroundAnalysisScope.ActiveFile
-                            && _documentTrackingService?.TryGetActiveDocument() != document.Id)
+                        if (
+                            SolutionCrawlerOptions.GetBackgroundAnalysisScope(document.Project)
+                                == BackgroundAnalysisScope.ActiveFile
+                            && _documentTrackingService?.TryGetActiveDocument() != document.Id
+                        )
                         {
                             // Active file analysis is enabled, but the document for parsing is not the current
                             // document. Return immediately without parsing.
                             return;
                         }
 
-                        await document.GetSyntaxTreeAsync(CancellationToken.None).ConfigureAwait(false);
+                        await document
+                            .GetSyntaxTreeAsync(CancellationToken.None)
+                            .ConfigureAwait(false);
                     }
                     finally
                     {
@@ -226,14 +236,18 @@ namespace Microsoft.CodeAnalysis.Host
                             // Check that we are still the active parse in the workmap before we remove it.
                             // Concievably if this continuation got delayed and another parse was put in, we might
                             // end up removing the tracking for another in-flight task.
-                            if (_workMap.TryGetValue(document.Id, out var sourceInMap) && sourceInMap == cancellationTokenSource)
+                            if (
+                                _workMap.TryGetValue(document.Id, out var sourceInMap)
+                                && sourceInMap == cancellationTokenSource
+                            )
                             {
                                 _workMap = _workMap.Remove(document.Id);
                             }
                         }
                     }
                 },
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

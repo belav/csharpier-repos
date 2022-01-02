@@ -10,8 +10,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     {
         public readonly MetadataAsSourceFileService FileService;
 
-        public MetadataAsSourceWorkspace(MetadataAsSourceFileService fileService, HostServices hostServices)
-            : base(hostServices, WorkspaceKind.MetadataAsSource)
+        public MetadataAsSourceWorkspace(
+            MetadataAsSourceFileService fileService,
+            HostServices hostServices
+        ) : base(hostServices, WorkspaceKind.MetadataAsSource)
         {
             this.FileService = fileService;
         }

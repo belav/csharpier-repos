@@ -12,7 +12,10 @@ internal class ComponentCssScopePass : ComponentIntermediateNodePassBase, IRazor
     // in the DOM than developer-written ones
     public override int Order => 110;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         if (!IsComponentDocument(documentNode))
         {
@@ -35,11 +38,13 @@ internal class ComponentCssScopePass : ComponentIntermediateNodePassBase, IRazor
     private void ProcessElement(MarkupElementIntermediateNode node, string cssScope)
     {
         // Add a minimized attribute whose name is simply the CSS scope
-        node.Children.Add(new HtmlAttributeIntermediateNode
-        {
-            AttributeName = cssScope,
-            Prefix = cssScope,
-            Suffix = string.Empty,
-        });
+        node.Children.Add(
+            new HtmlAttributeIntermediateNode
+            {
+                AttributeName = cssScope,
+                Prefix = cssScope,
+                Suffix = string.Empty,
+            }
+        );
     }
 }

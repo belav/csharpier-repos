@@ -21,11 +21,24 @@ public class AuthenticationOnExistingQueueTests
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)]
     [InlineData(AuthenticationSchemes.Basic)]
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationSchemes.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationSchemes.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_AllowAnonymous_NoChallenge(AuthenticationSchemes authType)
     {
-        using var baseServer = Utilities.CreateHttpAuthServer(authType, AllowAnoymous, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(authType, AllowAnoymous, baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateHttpAuthServer(
+            authType,
+            AllowAnoymous,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            authType,
+            AllowAnoymous,
+            baseServer.Options.RequestQueueName
+        );
 
         Task<HttpResponseMessage> responseTask = SendRequestAsync(address);
 
@@ -47,15 +60,27 @@ public class AuthenticationOnExistingQueueTests
     [InlineData(AuthenticationSchemes.Basic)]
     public async Task AuthType_RequireAuth_ChallengesAdded(AuthenticationSchemes authType)
     {
-        using var baseServer = Utilities.CreateHttpAuthServer(authType, DenyAnoymous, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(authType, DenyAnoymous, baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateHttpAuthServer(
+            authType,
+            DenyAnoymous,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            authType,
+            DenyAnoymous,
+            baseServer.Options.RequestQueueName
+        );
 
         Task<HttpResponseMessage> responseTask = SendRequestAsync(address);
 
         var contextTask = server.AcceptAsync(Utilities.DefaultTimeout); // Fails when the server shuts down, the challenge happens internally.
         var response = await responseTask;
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        Assert.Equal(authType.ToString(), response.Headers.WwwAuthenticate.ToString(), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(
+            authType.ToString(),
+            response.Headers.WwwAuthenticate.ToString(),
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     [ConditionalTheory]
@@ -63,10 +88,20 @@ public class AuthenticationOnExistingQueueTests
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // TODO: Not implemented
     [InlineData(AuthenticationSchemes.Basic)]
-    public async Task AuthType_AllowAnonymousButSpecify401_ChallengesAdded(AuthenticationSchemes authType)
+    public async Task AuthType_AllowAnonymousButSpecify401_ChallengesAdded(
+        AuthenticationSchemes authType
+    )
     {
-        using var baseServer = Utilities.CreateHttpAuthServer(authType, AllowAnoymous, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(authType, AllowAnoymous, baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateHttpAuthServer(
+            authType,
+            AllowAnoymous,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            authType,
+            AllowAnoymous,
+            baseServer.Options.RequestQueueName
+        );
 
         Task<HttpResponseMessage> responseTask = SendRequestAsync(address);
 
@@ -79,7 +114,11 @@ public class AuthenticationOnExistingQueueTests
 
         var response = await responseTask;
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        Assert.Equal(authType.ToString(), response.Headers.WwwAuthenticate.ToString(), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(
+            authType.ToString(),
+            response.Headers.WwwAuthenticate.ToString(),
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     [ConditionalFact]
@@ -90,8 +129,16 @@ public class AuthenticationOnExistingQueueTests
             | AuthenticationSchemes.NTLM
             /* | AuthenticationSchemes.Digest TODO: Not implemented */
             | AuthenticationSchemes.Basic;
-        using var baseServer = Utilities.CreateHttpAuthServer(authType, AllowAnoymous, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(authType, AllowAnoymous, baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateHttpAuthServer(
+            authType,
+            AllowAnoymous,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            authType,
+            AllowAnoymous,
+            baseServer.Options.RequestQueueName
+        );
 
         Task<HttpResponseMessage> responseTask = SendRequestAsync(address);
 
@@ -104,7 +151,11 @@ public class AuthenticationOnExistingQueueTests
 
         var response = await responseTask;
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        Assert.Equal("Negotiate, NTLM, basic", response.Headers.WwwAuthenticate.ToString(), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(
+            "Negotiate, NTLM, basic",
+            response.Headers.WwwAuthenticate.ToString(),
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     [ConditionalTheory]
@@ -112,13 +163,29 @@ public class AuthenticationOnExistingQueueTests
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // TODO: Not implemented
     // [InlineData(AuthenticationSchemes.Basic)] // Doesn't work with default creds
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationType.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationType.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_AllowAnonymousButSpecify401_Success(AuthenticationSchemes authType)
     {
-        using var baseServer = Utilities.CreateHttpAuthServer(authType, AllowAnoymous, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(authType, AllowAnoymous, baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateHttpAuthServer(
+            authType,
+            AllowAnoymous,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            authType,
+            AllowAnoymous,
+            baseServer.Options.RequestQueueName
+        );
 
-        Task<HttpResponseMessage> responseTask = SendRequestAsync(address, useDefaultCredentials: true);
+        Task<HttpResponseMessage> responseTask = SendRequestAsync(
+            address,
+            useDefaultCredentials: true
+        );
 
         var context = await server.AcceptAsync(Utilities.DefaultTimeout);
         Assert.NotNull(context.User);
@@ -142,13 +209,29 @@ public class AuthenticationOnExistingQueueTests
     [InlineData(AuthenticationSchemes.NTLM)]
     // [InlineData(AuthenticationSchemes.Digest)] // TODO: Not implemented
     // [InlineData(AuthenticationSchemes.Basic)] // Doesn't work with default creds
-    [InlineData(AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM | /*AuthenticationType.Digest |*/ AuthenticationSchemes.Basic)]
+    [InlineData(
+        AuthenticationSchemes.Negotiate
+            | AuthenticationSchemes.NTLM
+            | /*AuthenticationType.Digest |*/
+            AuthenticationSchemes.Basic
+    )]
     public async Task AuthTypes_RequireAuth_Success(AuthenticationSchemes authType)
     {
-        using var baseServer = Utilities.CreateHttpAuthServer(authType, DenyAnoymous, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(authType, DenyAnoymous, baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateHttpAuthServer(
+            authType,
+            DenyAnoymous,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            authType,
+            DenyAnoymous,
+            baseServer.Options.RequestQueueName
+        );
 
-        Task<HttpResponseMessage> responseTask = SendRequestAsync(address, useDefaultCredentials: true);
+        Task<HttpResponseMessage> responseTask = SendRequestAsync(
+            address,
+            useDefaultCredentials: true
+        );
 
         var context = await server.AcceptAsync(Utilities.DefaultTimeout);
         Assert.NotNull(context.User);
@@ -160,7 +243,10 @@ public class AuthenticationOnExistingQueueTests
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
-    private async Task<HttpResponseMessage> SendRequestAsync(string uri, bool useDefaultCredentials = false)
+    private async Task<HttpResponseMessage> SendRequestAsync(
+        string uri,
+        bool useDefaultCredentials = false
+    )
     {
         HttpClientHandler handler = new HttpClientHandler();
         handler.UseDefaultCredentials = useDefaultCredentials;

@@ -24,9 +24,11 @@ namespace System.CommandLine.Generator
             HelpBuilder = GetType("System.CommandLine.Help.IHelpBuilder");
             BindingContext = GetType("System.CommandLine.Binding.BindingContext");
 
-            INamedTypeSymbol GetType(string typeName)
-                => compilation.GetTypeByMetadataName(typeName)
-                   ?? throw new InvalidOperationException($"Could not find well known type '{typeName}'");
+            INamedTypeSymbol GetType(string typeName) =>
+                compilation.GetTypeByMetadataName(typeName)
+                ?? throw new InvalidOperationException(
+                    $"Could not find well known type '{typeName}'"
+                );
 
             Comparer = comparer;
         }

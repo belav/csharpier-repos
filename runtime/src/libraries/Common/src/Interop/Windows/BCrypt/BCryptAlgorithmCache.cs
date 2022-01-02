@@ -17,7 +17,11 @@ internal static partial class Interop
             /// <summary>
             ///     Return a SafeBCryptAlgorithmHandle of the desired algorithm and flags. This is a shared handle so do not dispose it!
             /// </summary>
-            public static SafeBCryptAlgorithmHandle GetCachedBCryptAlgorithmHandle(string hashAlgorithmId, BCryptOpenAlgorithmProviderFlags flags, out int hashSizeInBytes)
+            public static SafeBCryptAlgorithmHandle GetCachedBCryptAlgorithmHandle(
+                string hashAlgorithmId,
+                BCryptOpenAlgorithmProviderFlags flags,
+                out int hashSizeInBytes
+            )
             {
                 // There aren't that many hash algorithms around so rather than use a LowLevelDictionary and guard it with a lock,
                 // we'll use a simple list. To avoid locking, we'll recreate the entire list each time an entry is added and replace it atomically.
@@ -36,7 +40,12 @@ internal static partial class Interop
                 }
 
                 SafeBCryptAlgorithmHandle safeBCryptAlgorithmHandle;
-                NTSTATUS ntStatus = Interop.BCrypt.BCryptOpenAlgorithmProvider(out safeBCryptAlgorithmHandle, hashAlgorithmId, null, flags);
+                NTSTATUS ntStatus = Interop.BCrypt.BCryptOpenAlgorithmProvider(
+                    out safeBCryptAlgorithmHandle,
+                    hashAlgorithmId,
+                    null,
+                    flags
+                );
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     throw Interop.BCrypt.CreateCryptographicException(ntStatus);
 
@@ -56,8 +65,11 @@ internal static partial class Interop
 
             private struct Entry
             {
-                public unsafe Entry(string hashAlgorithmId, BCryptOpenAlgorithmProviderFlags flags, SafeBCryptAlgorithmHandle handle)
-                    : this()
+                public unsafe Entry(
+                    string hashAlgorithmId,
+                    BCryptOpenAlgorithmProviderFlags flags,
+                    SafeBCryptAlgorithmHandle handle
+                ) : this()
                 {
                     HashAlgorithmId = hashAlgorithmId;
                     Flags = flags;
@@ -70,7 +82,8 @@ internal static partial class Interop
                         &hashSize,
                         sizeof(int),
                         out int cbHashSize,
-                        0);
+                        0
+                    );
 
                     if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     {

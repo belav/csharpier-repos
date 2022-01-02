@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class RelationalTableAttributeConvention : EntityTypeAttributeConventionBase<TableAttribute>
+    public class RelationalTableAttributeConvention
+        : EntityTypeAttributeConventionBase<TableAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalTableAttributeConvention" />.
@@ -22,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public RelationalTableAttributeConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }
@@ -42,11 +43,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             TableAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             if (!string.IsNullOrWhiteSpace(attribute.Schema))
             {
-                entityTypeBuilder.ToTable(attribute.Name, attribute.Schema, fromDataAnnotation: true);
+                entityTypeBuilder.ToTable(
+                    attribute.Name,
+                    attribute.Schema,
+                    fromDataAnnotation: true
+                );
             }
             else if (!string.IsNullOrWhiteSpace(attribute.Name))
             {

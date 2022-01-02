@@ -37,17 +37,15 @@ namespace System.Text.Json.Node
             return true;
         }
 
-        private static MethodInfo GetMethod(string name) => typeof(JsonObject).GetMethod(
-            name, BindingFlags.Instance | BindingFlags.NonPublic)!;
+        private static MethodInfo GetMethod(string name) =>
+            typeof(JsonObject).GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic)!;
 
         private static MethodInfo? s_TryGetMember;
         internal override MethodInfo? TryGetMemberMethodInfo =>
-            s_TryGetMember ??
-            (s_TryGetMember = GetMethod(nameof(TryGetMemberCallback)));
+            s_TryGetMember ?? (s_TryGetMember = GetMethod(nameof(TryGetMemberCallback)));
 
         private static MethodInfo? s_TrySetMember;
         internal override MethodInfo? TrySetMemberMethodInfo =>
-            s_TrySetMember ??
-            (s_TrySetMember = GetMethod(nameof(TrySetMemberCallback)));
+            s_TrySetMember ?? (s_TrySetMember = GetMethod(nameof(TrySetMemberCallback)));
     }
 }

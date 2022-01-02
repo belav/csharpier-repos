@@ -25,7 +25,8 @@ internal class TestWebSocket : WebSocket
         var buffers = new[] { new ReceiverSenderBuffer(), new ReceiverSenderBuffer() };
         return Tuple.Create(
             new TestWebSocket(subProtocol, buffers[0], buffers[1]),
-            new TestWebSocket(subProtocol, buffers[1], buffers[0]));
+            new TestWebSocket(subProtocol, buffers[1], buffers[0])
+        );
     }
 
     public override WebSocketCloseStatus? CloseStatus
@@ -48,7 +49,11 @@ internal class TestWebSocket : WebSocket
         get { return _subProtocol; }
     }
 
-    public override async Task CloseAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+    public override async Task CloseAsync(
+        WebSocketCloseStatus closeStatus,
+        string? statusDescription,
+        CancellationToken cancellationToken
+    )
     {
         ThrowIfDisposed();
 
@@ -66,12 +71,15 @@ internal class TestWebSocket : WebSocket
             do
             {
                 result = await ReceiveAsync(new ArraySegment<byte>(data), cancellationToken);
-            }
-            while (result.MessageType != WebSocketMessageType.Close);
+            } while (result.MessageType != WebSocketMessageType.Close);
         }
     }
 
-    public override async Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+    public override async Task CloseOutputAsync(
+        WebSocketCloseStatus closeStatus,
+        string? statusDescription,
+        CancellationToken cancellationToken
+    )
     {
         ThrowIfDisposed();
         ThrowIfOutputClosed();
@@ -112,7 +120,10 @@ internal class TestWebSocket : WebSocket
         Close();
     }
 
-    public override async Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+    public override async Task<WebSocketReceiveResult> ReceiveAsync(
+        ArraySegment<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         ThrowIfDisposed();
         ThrowIfInputClosed();
@@ -129,7 +140,13 @@ internal class TestWebSocket : WebSocket
         {
             _closeStatus = receiveMessage.CloseStatus;
             _closeStatusDescription = receiveMessage.CloseStatusDescription ?? string.Empty;
-            var result = new WebSocketReceiveResult(0, WebSocketMessageType.Close, true, _closeStatus, _closeStatusDescription);
+            var result = new WebSocketReceiveResult(
+                0,
+                WebSocketMessageType.Close,
+                true,
+                _closeStatus,
+                _closeStatusDescription
+            );
             if (_state == WebSocketState.Open)
             {
                 _state = WebSocketState.CloseReceived;
@@ -145,10 +162,20 @@ internal class TestWebSocket : WebSocket
         {
             int count = Math.Min(buffer.Count, receiveMessage.Buffer.Count);
             bool endOfMessage = count == receiveMessage.Buffer.Count;
-            Array.Copy(receiveMessage.Buffer.Array!, receiveMessage.Buffer.Offset, buffer.Array!, buffer.Offset, count);
+            Array.Copy(
+                receiveMessage.Buffer.Array!,
+                receiveMessage.Buffer.Offset,
+                buffer.Array!,
+                buffer.Offset,
+                count
+            );
             if (!endOfMessage)
             {
-                receiveMessage.Buffer = new ArraySegment<byte>(receiveMessage.Buffer.Array!, receiveMessage.Buffer.Offset + count, receiveMessage.Buffer.Count - count);
+                receiveMessage.Buffer = new ArraySegment<byte>(
+                    receiveMessage.Buffer.Array!,
+                    receiveMessage.Buffer.Offset + count,
+                    receiveMessage.Buffer.Count - count
+                );
                 _receiveMessage = receiveMessage;
             }
             endOfMessage = endOfMessage && receiveMessage.EndOfMessage;
@@ -156,7 +183,12 @@ internal class TestWebSocket : WebSocket
         }
     }
 
-    public override Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+    public override Task SendAsync(
+        ArraySegment<byte> buffer,
+        WebSocketMessageType messageType,
+        bool endOfMessage,
+        CancellationToken cancellationToken
+    )
     {
         ValidateSegment(buffer);
         if (messageType != WebSocketMessageType.Binary && messageType != WebSocketMessageType.Text)
@@ -215,7 +247,11 @@ internal class TestWebSocket : WebSocket
         }
     }
 
-    private TestWebSocket(string? subProtocol, ReceiverSenderBuffer readBuffer, ReceiverSenderBuffer writeBuffer)
+    private TestWebSocket(
+        string? subProtocol,
+        ReceiverSenderBuffer readBuffer,
+        ReceiverSenderBuffer writeBuffer
+    )
     {
         _state = WebSocketState.Open;
         _subProtocol = subProtocol;
@@ -225,7 +261,11 @@ internal class TestWebSocket : WebSocket
 
     private class Message
     {
-        public Message(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage)
+        public Message(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage
+        )
         {
             Buffer = buffer;
             CloseStatus = null;
@@ -293,12 +333,21 @@ internal class TestWebSocket : WebSocket
                 }
                 if (_receiverClosed)
                 {
-                    throw new IOException("The remote end closed the connection.", new ObjectDisposedException(typeof(TestWebSocket).FullName));
+                    throw new IOException(
+                        "The remote end closed the connection.",
+                        new ObjectDisposedException(typeof(TestWebSocket).FullName)
+                    );
                 }
 
                 // we return immediately so we need to copy the buffer since the sender can re-use it
                 var array = new byte[message.Buffer.Count];
-                Array.Copy(message.Buffer.Array!, message.Buffer.Offset, array, 0, message.Buffer.Count);
+                Array.Copy(
+                    message.Buffer.Array!,
+                    message.Buffer.Offset,
+                    array,
+                    0,
+                    message.Buffer.Count
+                );
                 message.Buffer = new ArraySegment<byte>(array);
 
                 _messageQueue.Enqueue(message);
@@ -346,7 +395,10 @@ internal class TestWebSocket : WebSocket
             }
             else // _senderClosed
             {
-                throw new IOException("The remote end closed the connection.", new ObjectDisposedException(typeof(TestWebSocket).FullName));
+                throw new IOException(
+                    "The remote end closed the connection.",
+                    new ObjectDisposedException(typeof(TestWebSocket).FullName)
+                );
             }
         }
     }

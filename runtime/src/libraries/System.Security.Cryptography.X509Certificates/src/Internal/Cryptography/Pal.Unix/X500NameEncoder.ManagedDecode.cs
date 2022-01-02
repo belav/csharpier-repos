@@ -18,7 +18,8 @@ namespace Internal.Cryptography.Pal
             bool quoteIfNeeded,
             string dnSeparator,
             string multiValueSeparator,
-            bool addTrailingDelimiter)
+            bool addTrailingDelimiter
+        )
         {
             try
             {

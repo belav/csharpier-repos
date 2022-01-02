@@ -48,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool collection,
             bool onDependent,
             PropertyAccessMode propertyAccessMode,
-            bool eagerLoaded)
-            : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+            bool eagerLoaded
+        ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             ClrType = clrType;
             DeclaringEntityType = declaringEntityType;
@@ -57,7 +57,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             _foreignKey = foreignKey;
             if (foreignKey.ReferencingSkipNavigations == null)
             {
-                foreignKey.ReferencingSkipNavigations = new SortedSet<RuntimeSkipNavigation>(SkipNavigationComparer.Instance) { this };
+                foreignKey.ReferencingSkipNavigations = new SortedSet<RuntimeSkipNavigation>(
+                    SkipNavigationComparer.Instance
+                )
+                {
+                    this
+                };
             }
             else
             {
@@ -97,8 +102,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-            => ((IReadOnlySkipNavigation)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IReadOnlySkipNavigation)this).ToDebugString(
+                MetadataDebugStringOptions.SingleLineDefault
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -106,10 +113,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DebugView DebugView
-            => new(
+        public virtual DebugView DebugView =>
+            new(
                 () => ((IReadOnlySkipNavigation)this).ToDebugString(),
-                () => ((IReadOnlySkipNavigation)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+                () =>
+                    ((IReadOnlySkipNavigation)this).ToDebugString(
+                        MetadataDebugStringOptions.LongDefault
+                    )
+            );
 
         /// <inheritdoc />
         IReadOnlyEntityType IReadOnlyNavigationBase.DeclaringEntityType
@@ -154,24 +165,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         }
 
         /// <inheritdoc />
-        IClrCollectionAccessor? INavigationBase.GetCollectionAccessor()
-            => NonCapturingLazyInitializer.EnsureInitialized(
+        IClrCollectionAccessor? INavigationBase.GetCollectionAccessor() =>
+            NonCapturingLazyInitializer.EnsureInitialized(
                 ref _collectionAccessor,
                 ref _collectionAccessorInitialized,
                 this,
                 static navigation =>
-                    {
-                        navigation.EnsureReadOnly();
-                        return new ClrCollectionAccessorFactory().Create(navigation);
-                    });
+                {
+                    navigation.EnsureReadOnly();
+                    return new ClrCollectionAccessorFactory().Create(navigation);
+                }
+            );
 
         /// <inheritdoc />
-        ICollectionLoader IRuntimeSkipNavigation.GetManyToManyLoader()
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _manyToManyLoader, this, static navigation =>
-                    {
-                        navigation.EnsureReadOnly();
-                        return new ManyToManyLoaderFactory().Create(navigation);
-                    });
+        ICollectionLoader IRuntimeSkipNavigation.GetManyToManyLoader() =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _manyToManyLoader,
+                this,
+                static navigation =>
+                {
+                    navigation.EnsureReadOnly();
+                    return new ManyToManyLoaderFactory().Create(navigation);
+                }
+            );
     }
 }

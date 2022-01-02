@@ -5,7 +5,10 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: DesignTimeProviderServices("Microsoft.EntityFrameworkCore.InMemory.Design.Internal.InMemoryDesignTimeServices")]
+[assembly: DesignTimeProviderServices(
+    "Microsoft.EntityFrameworkCore.InMemory.Design.Internal.InMemoryDesignTimeServices"
+)]
+
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Design.Internal
 {
@@ -29,7 +32,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Design.Internal
 
 #pragma warning disable EF1001 // Internal EF Core API usage.
             new EntityFrameworkDesignServicesBuilder(serviceCollection)
-                .TryAdd<ICSharpRuntimeAnnotationCodeGenerator, InMemoryCSharpRuntimeAnnotationCodeGenerator>()
+                .TryAdd<
+                    ICSharpRuntimeAnnotationCodeGenerator,
+                    InMemoryCSharpRuntimeAnnotationCodeGenerator
+                >()
 #pragma warning restore EF1001 // Internal EF Core API usage.
                 .TryAddCoreServices();
         }

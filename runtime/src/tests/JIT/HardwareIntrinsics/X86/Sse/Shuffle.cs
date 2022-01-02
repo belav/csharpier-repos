@@ -21,9 +21,14 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }, new float[4] { 22, -1, -50, 0 }, new float[4]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4] { 22, -1, -50, 0 },
+                        new float[4]
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<float>>(floatTable.inArray2Ptr);
 
@@ -31,8 +36,12 @@ namespace IntelHardwareIntrinsicTest
                     var vf3 = Sse.Shuffle(vf1, vf2, 27);
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
-                    if (!floatTable.CheckResult((x, y, z) => (z[0] == x[3]) && (z[1] == x[2]) &&
-                                                             (z[2] == y[1]) && (z[3] == y[0])))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y, z) =>
+                                (z[0] == x[3]) && (z[1] == x[2]) && (z[2] == y[1]) && (z[3] == y[0])
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Shuffle failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -47,8 +56,12 @@ namespace IntelHardwareIntrinsicTest
                     vf3 = Sse.Shuffle(vf1, vf2, 5);
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
-                    if (!floatTable.CheckResult((x, y, z) => (z[0] == x[1]) && (z[1] == x[1]) &&
-                                                             (z[2] == y[0]) && (z[3] == y[0])))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y, z) =>
+                                (z[0] == x[1]) && (z[1] == x[1]) && (z[2] == y[0]) && (z[3] == y[0])
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Shuffle failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -63,8 +76,12 @@ namespace IntelHardwareIntrinsicTest
                     vf3 = Sse.Shuffle(vf1, vf2, 250);
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
-                    if (!floatTable.CheckResult((x, y, z) => (z[0] == x[2]) && (z[1] == x[2]) &&
-                                                             (z[2] == y[3]) && (z[3] == y[3])))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y, z) =>
+                                (z[0] == x[2]) && (z[1] == x[2]) && (z[2] == y[3]) && (z[3] == y[3])
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Shuffle failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -79,8 +96,12 @@ namespace IntelHardwareIntrinsicTest
                     vf3 = Sse.Shuffle(vf1, vf2, 228);
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
-                    if (!floatTable.CheckResult((x, y, z) => (z[0] == x[0]) && (z[1] == x[1]) &&
-                                                             (z[2] == y[2]) && (z[3] == y[3])))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y, z) =>
+                                (z[0] == x[0]) && (z[1] == x[1]) && (z[2] == y[2]) && (z[3] == y[3])
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Shuffle failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -90,13 +111,23 @@ namespace IntelHardwareIntrinsicTest
                         Console.WriteLine();
                         testResult = Fail;
                     }
-                    
+
                     // XYZW
-                    vf3 = (Vector128<float>)typeof(Sse).GetMethod(nameof(Sse.Shuffle), new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }).Invoke(null, new object[] { vf1, vf2, (byte)(27) });
+                    vf3 =
+                        (Vector128<float>)typeof(Sse)
+                            .GetMethod(
+                                nameof(Sse.Shuffle),
+                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                            )
+                            .Invoke(null, new object[] { vf1, vf2, (byte)(27) });
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
-                    if (!floatTable.CheckResult((x, y, z) => (z[0] == x[3]) && (z[1] == x[2]) &&
-                                                             (z[2] == y[1]) && (z[3] == y[0])))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y, z) =>
+                                (z[0] == x[3]) && (z[1] == x[2]) && (z[2] == y[1]) && (z[3] == y[0])
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Shuffle failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -108,7 +139,6 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
             }
-
 
             return testResult;
         }
@@ -126,6 +156,7 @@ namespace IntelHardwareIntrinsicTest
             GCHandle inHandle1;
             GCHandle inHandle2;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b, T[] c)
             {
                 this.inArray1 = a;
@@ -136,6 +167,7 @@ namespace IntelHardwareIntrinsicTest
                 inHandle2 = GCHandle.Alloc(inArray2, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], T[], bool> check)
             {
                 return check(inArray1, inArray2, outArray);
@@ -148,6 +180,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

@@ -15,6 +15,7 @@ class Program
             throw new Exception("FAILED");
         }
     }
+
     static int Main()
     {
         int d = 0;
@@ -25,7 +26,8 @@ class Program
             {
                 int c = 3 - d++;
                 f(c, d, e); //  c == 3-d+1 !
-                if (--i < 1) break;
+                if (--i < 1)
+                    break;
             }
         }
         Console.WriteLine("PASSED");

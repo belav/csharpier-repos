@@ -14,6 +14,7 @@ using System.Globalization;
 using Microsoft.CodeAnalysis.CommandLine;
 using Microsoft.CodeAnalysis.Symbols;
 using Microsoft.CodeAnalysis.CSharp;
+
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
     /// <summary>
@@ -59,11 +60,17 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         private Task? _timeoutTask;
         private Task? _gcTask;
         private Task<IClientConnection>? _listenTask;
-        private readonly List<Task<CompletionData>> _connectionList = new List<Task<CompletionData>>();
+        private readonly List<Task<CompletionData>> _connectionList = new List<
+            Task<CompletionData>
+        >();
         private TimeSpan? _keepAlive;
         private bool _keepAliveIsDefault;
 
-        internal ServerDispatcher(ICompilerServerHost compilerServerHost, IClientConnectionHost clientConnectionHost, IDiagnosticListener? diagnosticListener = null)
+        internal ServerDispatcher(
+            ICompilerServerHost compilerServerHost,
+            IClientConnectionHost clientConnectionHost,
+            IDiagnosticListener? diagnosticListener = null
+        )
         {
             _compilerServerHost = compilerServerHost;
             _logger = compilerServerHost.Logger;
@@ -78,7 +85,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// accepting new connections and wait for existing connections to complete before
         /// returning.
         /// </summary>
-        public void ListenAndDispatchConnections(TimeSpan? keepAlive, CancellationToken cancellationToken = default)
+        public void ListenAndDispatchConnections(
+            TimeSpan? keepAlive,
+            CancellationToken cancellationToken = default
+        )
         {
             _state = State.Running;
             _keepAlive = keepAlive;
@@ -108,7 +118,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     if (!_listenTask.IsCompleted)
                     {
                         // Wait for the task to complete
-                        _listenTask.ContinueWith(_ => { }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
+                        _listenTask
+                            .ContinueWith(
+                                _ => { },
+                                CancellationToken.None,
+                                TaskContinuationOptions.ExecuteSynchronously,
+                                TaskScheduler.Default
+                            )
                             .Wait(CancellationToken.None);
                     }
 
@@ -156,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     _compilerServerHost,
                     _listenTask,
                     allowCompilationRequests: _state == State.Running,
-                    cancellationToken);
+                    cancellationToken
+                );
                 _connectionList.Add(connectionTask);
 
                 // Timeout and GC are only done when there are no active connections.  Now that we have a new
@@ -244,7 +261,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         private void MaybeCreateTimeoutTask()
         {
             // If there are no active clients running then the server needs to be in a timeout mode.
-            if (_state == State.Running && _connectionList.Count == 0 && _timeoutTask is null && _keepAlive.HasValue)
+            if (
+                _state == State.Running
+                && _connectionList.Count == 0
+                && _timeoutTask is null
+                && _keepAlive.HasValue
+            )
             {
                 Debug.Assert(_listenTask != null);
                 _timeoutTask = Task.Delay(_keepAlive.Value);
@@ -333,10 +355,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             ICompilerServerHost compilerServerHost,
             Task<IClientConnection> clientStreamTask,
             bool allowCompilationRequests,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var clientHandler = new ClientConnectionHandler(compilerServerHost);
-            return await clientHandler.ProcessAsync(clientStreamTask, allowCompilationRequests, cancellationToken).ConfigureAwait(false);
+            return await clientHandler
+                .ProcessAsync(clientStreamTask, allowCompilationRequests, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

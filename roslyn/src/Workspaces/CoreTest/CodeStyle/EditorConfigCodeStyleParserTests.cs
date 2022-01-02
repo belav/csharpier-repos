@@ -31,41 +31,99 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         [InlineData("false", false, ReportDiagnostic.Hidden)]
         [InlineData("*", false, ReportDiagnostic.Hidden)]
         [InlineData("false:false", false, ReportDiagnostic.Hidden)]
-
         [WorkItem(27685, "https://github.com/dotnet/roslyn/issues/27685")]
         [InlineData("true : warning", true, ReportDiagnostic.Warn)]
         [InlineData("false : warning", false, ReportDiagnostic.Warn)]
         [InlineData("true : error", true, ReportDiagnostic.Error)]
         [InlineData("false : error", false, ReportDiagnostic.Error)]
-        public void TestParseEditorConfigCodeStyleOption(string args, bool isEnabled, ReportDiagnostic severity)
+        public void TestParseEditorConfigCodeStyleOption(
+            string args,
+            bool isEnabled,
+            ReportDiagnostic severity
+        )
         {
-            CodeStyleHelpers.TryParseBoolEditorConfigCodeStyleOption(args, defaultValue: CodeStyleOption2<bool>.Default, out var result);
-            Assert.True(result.Value == isEnabled,
-                        $"Expected {nameof(isEnabled)} to be {isEnabled}, was {result.Value}");
-            Assert.True(result.Notification.Severity == severity,
-                        $"Expected {nameof(severity)} to be {severity}, was {result.Notification.Severity}");
+            CodeStyleHelpers.TryParseBoolEditorConfigCodeStyleOption(
+                args,
+                defaultValue: CodeStyleOption2<bool>.Default,
+                out var result
+            );
+            Assert.True(
+                result.Value == isEnabled,
+                $"Expected {nameof(isEnabled)} to be {isEnabled}, was {result.Value}"
+            );
+            Assert.True(
+                result.Notification.Severity == severity,
+                $"Expected {nameof(severity)} to be {severity}, was {result.Notification.Severity}"
+            );
         }
 
         [Theory]
-        [InlineData("never:none", (int)AccessibilityModifiersRequired.Never, ReportDiagnostic.Suppress)]
-        [InlineData("always:suggestion", (int)AccessibilityModifiersRequired.Always, ReportDiagnostic.Info)]
-        [InlineData("for_non_interface_members:warning", (int)AccessibilityModifiersRequired.ForNonInterfaceMembers, ReportDiagnostic.Warn)]
-        [InlineData("omit_if_default:error", (int)AccessibilityModifiersRequired.OmitIfDefault, ReportDiagnostic.Error)]
-
+        [InlineData(
+            "never:none",
+            (int)AccessibilityModifiersRequired.Never,
+            ReportDiagnostic.Suppress
+        )]
+        [InlineData(
+            "always:suggestion",
+            (int)AccessibilityModifiersRequired.Always,
+            ReportDiagnostic.Info
+        )]
+        [InlineData(
+            "for_non_interface_members:warning",
+            (int)AccessibilityModifiersRequired.ForNonInterfaceMembers,
+            ReportDiagnostic.Warn
+        )]
+        [InlineData(
+            "omit_if_default:error",
+            (int)AccessibilityModifiersRequired.OmitIfDefault,
+            ReportDiagnostic.Error
+        )]
         [WorkItem(27685, "https://github.com/dotnet/roslyn/issues/27685")]
-        [InlineData("never : none", (int)AccessibilityModifiersRequired.Never, ReportDiagnostic.Suppress)]
-        [InlineData("always : suggestion", (int)AccessibilityModifiersRequired.Always, ReportDiagnostic.Info)]
-        [InlineData("for_non_interface_members : warning", (int)AccessibilityModifiersRequired.ForNonInterfaceMembers, ReportDiagnostic.Warn)]
-        [InlineData("omit_if_default : error", (int)AccessibilityModifiersRequired.OmitIfDefault, ReportDiagnostic.Error)]
-        public void TestParseEditorConfigAccessibilityModifiers(string args, int value, ReportDiagnostic severity)
+        [InlineData(
+            "never : none",
+            (int)AccessibilityModifiersRequired.Never,
+            ReportDiagnostic.Suppress
+        )]
+        [InlineData(
+            "always : suggestion",
+            (int)AccessibilityModifiersRequired.Always,
+            ReportDiagnostic.Info
+        )]
+        [InlineData(
+            "for_non_interface_members : warning",
+            (int)AccessibilityModifiersRequired.ForNonInterfaceMembers,
+            ReportDiagnostic.Warn
+        )]
+        [InlineData(
+            "omit_if_default : error",
+            (int)AccessibilityModifiersRequired.OmitIfDefault,
+            ReportDiagnostic.Error
+        )]
+        public void TestParseEditorConfigAccessibilityModifiers(
+            string args,
+            int value,
+            ReportDiagnostic severity
+        )
         {
             var storageLocation = CodeStyleOptions2.RequireAccessibilityModifiers.StorageLocations
-                .OfType<EditorConfigStorageLocation<CodeStyleOption2<AccessibilityModifiersRequired>>>()
+                .OfType<
+                    EditorConfigStorageLocation<CodeStyleOption2<AccessibilityModifiersRequired>>
+                >()
                 .Single();
-            var allRawConventions = new Dictionary<string, string?> { { storageLocation.KeyName, args } };
+            var allRawConventions = new Dictionary<string, string?>
+            {
+                { storageLocation.KeyName, args }
+            };
 
-            Assert.True(storageLocation.TryGetOption(allRawConventions, typeof(CodeStyleOption2<AccessibilityModifiersRequired>), out var parsedCodeStyleOption));
-            var codeStyleOption = (CodeStyleOption2<AccessibilityModifiersRequired>)parsedCodeStyleOption!;
+            Assert.True(
+                storageLocation.TryGetOption(
+                    allRawConventions,
+                    typeof(CodeStyleOption2<AccessibilityModifiersRequired>),
+                    out var parsedCodeStyleOption
+                )
+            );
+            var codeStyleOption =
+                (CodeStyleOption2<AccessibilityModifiersRequired>)parsedCodeStyleOption!;
             Assert.Equal((AccessibilityModifiersRequired)value, codeStyleOption.Value);
             Assert.Equal(severity, codeStyleOption.Notification.Severity);
         }
@@ -74,7 +132,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         [InlineData("lf", "\n")]
         [InlineData("cr", "\r")]
         [InlineData("crlf", "\r\n")]
-
         [WorkItem(27685, "https://github.com/dotnet/roslyn/issues/27685")]
         [InlineData(" lf ", "\n")]
         [InlineData(" cr ", "\r")]
@@ -84,9 +141,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
             var storageLocation = FormattingOptions.NewLine.StorageLocations
                 .OfType<EditorConfigStorageLocation<string>>()
                 .Single();
-            var allRawConventions = new Dictionary<string, string?> { { storageLocation.KeyName, configurationString } };
+            var allRawConventions = new Dictionary<string, string?>
+            {
+                { storageLocation.KeyName, configurationString }
+            };
 
-            Assert.True(storageLocation.TryGetOption(allRawConventions, typeof(string), out var parsedNewLine));
+            Assert.True(
+                storageLocation.TryGetOption(
+                    allRawConventions,
+                    typeof(string),
+                    out var parsedNewLine
+                )
+            );
             Assert.Equal(newLine, (string?)parsedNewLine);
         }
     }

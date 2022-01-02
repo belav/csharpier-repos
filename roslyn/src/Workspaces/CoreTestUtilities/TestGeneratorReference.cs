@@ -34,9 +34,7 @@ namespace Roslyn.Test.Utilities
         }
 
         public TestGeneratorReference(IIncrementalGenerator generator)
-            : this(generator.AsSourceGenerator())
-        {
-        }
+            : this(generator.AsSourceGenerator()) { }
 
         public override string? FullPath => null;
         public override object Id => this;
@@ -44,8 +42,13 @@ namespace Roslyn.Test.Utilities
 
         Checksum IChecksummedObject.Checksum => _checksum;
 
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) => ImmutableArray<DiagnosticAnalyzer>.Empty;
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() => ImmutableArray<DiagnosticAnalyzer>.Empty;
-        public override ImmutableArray<ISourceGenerator> GetGenerators(string language) => ImmutableArray.Create(_generator);
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) =>
+            ImmutableArray<DiagnosticAnalyzer>.Empty;
+
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
+            ImmutableArray<DiagnosticAnalyzer>.Empty;
+
+        public override ImmutableArray<ISourceGenerator> GetGenerators(string language) =>
+            ImmutableArray.Create(_generator);
     }
 }

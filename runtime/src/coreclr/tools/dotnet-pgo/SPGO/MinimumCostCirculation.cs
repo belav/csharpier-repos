@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Diagnostics.Tools.Pgo
 {
-
     /********
      * This class find the minimum-cost circulation on a circulation graph.
      * 
@@ -40,9 +39,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
     public class MinimumCostCirculation
     {
-
         // Changes graph state into a minimum-cost circulation, if it exists.
-        public static void FindMinCostCirculation(CirculationGraph graph, int smoothingIterations = -1)
+        public static void FindMinCostCirculation(
+            CirculationGraph graph,
+            int smoothingIterations = -1
+        )
         {
             int numIterations = 0;
 
@@ -50,7 +51,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             Tuple<List<Edge>, long> cycle = FindNegativeCycle(graph);
             while (cycle.Item1 != null && numIterations != smoothingIterations)
             {
-
                 // Force flow equal to the minimum free capacity through all the edges on the negative cycle.
                 foreach (Edge e in cycle.Item1)
                 {

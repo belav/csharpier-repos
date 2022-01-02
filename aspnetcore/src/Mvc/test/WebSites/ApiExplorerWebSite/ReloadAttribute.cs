@@ -5,6 +5,4 @@ using System;
 
 namespace ApiExplorerWebSite;
 
-public class ReloadAttribute : Attribute
-{
-}
+public class ReloadAttribute : Attribute { }

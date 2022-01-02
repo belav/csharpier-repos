@@ -39,7 +39,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _helperID.CompareTo(((ReadyToRunHelperSignature) other)._helperID);
+            return _helperID.CompareTo(((ReadyToRunHelperSignature)other)._helperID);
         }
     }
 }

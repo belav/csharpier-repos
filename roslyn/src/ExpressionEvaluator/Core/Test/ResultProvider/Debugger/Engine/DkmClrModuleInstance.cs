@@ -26,8 +26,11 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         private readonly DkmClrRuntimeInstance _runtimeInstance;
         private int _resolveTypeNameFailures;
 
-        public DkmClrModuleInstance(DkmClrRuntimeInstance runtimeInstance, Assembly assembly, DkmModule module) :
-            base(module)
+        public DkmClrModuleInstance(
+            DkmClrRuntimeInstance runtimeInstance,
+            Assembly assembly,
+            DkmModule module
+        ) : base(module)
         {
             _runtimeInstance = runtimeInstance;
             this.Assembly = assembly;
@@ -45,7 +48,10 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         public DkmProcess Process => _runtimeInstance.Process;
 
-        public DkmClrType ResolveTypeName(string typeName, ReadOnlyCollection<DkmClrType> typeArguments)
+        public DkmClrType ResolveTypeName(
+            string typeName,
+            ReadOnlyCollection<DkmClrType> typeArguments
+        )
         {
             var type = this.Assembly.GetType(typeName);
             if (type == null)

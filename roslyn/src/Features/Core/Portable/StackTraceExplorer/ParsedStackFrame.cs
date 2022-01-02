@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             TextSpan typeSpan,
             TextSpan methodSpan,
             TextSpan argsSpan,
-            TextSpan fileSpan = default)
-            : base(originalText)
+            TextSpan fileSpan = default
+        ) : base(originalText)
         {
             Contract.ThrowIfTrue(typeSpan.IsEmpty);
             Contract.ThrowIfTrue(methodSpan.IsEmpty);
@@ -64,7 +64,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// </summary>
         public TextSpan FileSpan { get; }
 
-        public async Task<ISymbol?> ResolveSymbolAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task<ISymbol?> ResolveSymbolAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             // The original span for type includes the trailing '.', which we don't want when
             // looking for the class by metadata name
@@ -82,7 +85,9 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 var metadataName = service.GetTypeMetadataName(fullyQualifiedTypeName);
                 var memberName = service.GetMethodSymbolName(methodName);
 
-                var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+                var compilation = await project
+                    .GetRequiredCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var type = compilation.GetTypeByMetadataName(metadataName);
                 if (type is null)
                 {
@@ -113,9 +118,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             {
                 var displayName = member.ToDisplayString();
                 var dotIndex = displayName.LastIndexOf(".");
-                var memberName = dotIndex >= 0
-                    ? displayName[(dotIndex + 1)..]
-                    : displayName;
+                var memberName = dotIndex >= 0 ? displayName[(dotIndex + 1)..] : displayName;
 
                 return string.Equals(memberName, memberToSearchFor);
             }
@@ -152,9 +155,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// </summary>
         public string GetTrailingText()
         {
-            var lastSpan = FileSpan == default
-                ? ArgsSpan
-                : FileSpan;
+            var lastSpan = FileSpan == default ? ArgsSpan : FileSpan;
 
             if (lastSpan.End + 1 == OriginalText.Length)
             {
@@ -234,7 +235,6 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                     {
                         return ImmutableArray.Create(document);
                     }
-
                     else if (document.Name == documentName)
                     {
                         potentialMatches.Add(document);

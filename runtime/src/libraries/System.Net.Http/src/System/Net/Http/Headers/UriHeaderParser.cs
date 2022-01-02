@@ -13,16 +13,21 @@ namespace System.Net.Http.Headers
     {
         private readonly UriKind _uriKind;
 
-        internal static readonly UriHeaderParser RelativeOrAbsoluteUriParser =
-            new UriHeaderParser(UriKind.RelativeOrAbsolute);
+        internal static readonly UriHeaderParser RelativeOrAbsoluteUriParser = new UriHeaderParser(
+            UriKind.RelativeOrAbsolute
+        );
 
-        private UriHeaderParser(UriKind uriKind)
-            : base(false)
+        private UriHeaderParser(UriKind uriKind) : base(false)
         {
             _uriKind = uriKind;
         }
 
-        public override bool TryParseValue([NotNullWhen(true)] string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue)
+        public override bool TryParseValue(
+            [NotNullWhen(true)] string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        )
         {
             parsedValue = null;
 
@@ -91,8 +96,11 @@ namespace System.Net.Http.Headers
                 try
                 {
                     // We don't want '?' replacement characters, just fail.
-                    System.Text.Encoding decoder = System.Text.Encoding.GetEncoding("utf-8", System.Text.EncoderFallback.ExceptionFallback,
-                        System.Text.DecoderFallback.ExceptionFallback);
+                    System.Text.Encoding decoder = System.Text.Encoding.GetEncoding(
+                        "utf-8",
+                        System.Text.EncoderFallback.ExceptionFallback,
+                        System.Text.DecoderFallback.ExceptionFallback
+                    );
                     return decoder.GetString(rawBytes, 0, rawBytes.Length);
                 }
                 catch (ArgumentException) { } // Not actually Utf-8
@@ -111,7 +119,10 @@ namespace System.Net.Http.Headers
             }
             else
             {
-                return uri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                return uri.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
         }
     }

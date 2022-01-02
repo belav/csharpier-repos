@@ -25,7 +25,8 @@ internal sealed class PageActionInvokerCacheEntry
         PageHandlerExecutorDelegate[] handlerExecutors,
         PageHandlerBinderDelegate[] handlerBinders,
         IReadOnlyList<Func<IRazorPage>> viewStartFactories,
-        FilterItem[] cacheableFilters)
+        FilterItem[] cacheableFilters
+    )
     {
         ActionDescriptor = actionDescriptor;
         ViewDataFactory = viewDataFactory;
@@ -66,7 +67,11 @@ internal sealed class PageActionInvokerCacheEntry
 
     public PageHandlerBinderDelegate[] HandlerBinders { get; }
 
-    public Func<IModelMetadataProvider, ModelStateDictionary, ViewDataDictionary> ViewDataFactory { get; }
+    public Func<
+        IModelMetadataProvider,
+        ModelStateDictionary,
+        ViewDataDictionary
+    > ViewDataFactory { get; }
 
     /// <summary>
     /// Gets the applicable ViewStart pages.
@@ -74,5 +79,4 @@ internal sealed class PageActionInvokerCacheEntry
     public IReadOnlyList<Func<IRazorPage>> ViewStartFactories { get; }
 
     public FilterItem[] CacheableFilters { get; }
-
 }

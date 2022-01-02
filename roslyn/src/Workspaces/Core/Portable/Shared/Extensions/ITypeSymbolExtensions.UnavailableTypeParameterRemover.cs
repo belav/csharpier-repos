@@ -17,17 +17,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             private readonly Compilation _compilation;
             private readonly ISet<string> _availableTypeParameterNames;
 
-            public UnavailableTypeParameterRemover(Compilation compilation, ISet<string> availableTypeParameterNames)
+            public UnavailableTypeParameterRemover(
+                Compilation compilation,
+                ISet<string> availableTypeParameterNames
+            )
             {
                 _compilation = compilation;
                 _availableTypeParameterNames = availableTypeParameterNames;
             }
 
-            public override ITypeSymbol DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override ITypeSymbol DefaultVisit(ISymbol node) =>
+                throw new NotImplementedException();
 
-            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol)
-                => symbol;
+            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol) => symbol;
 
             public override ITypeSymbol VisitArrayType(IArrayTypeSymbol symbol)
             {

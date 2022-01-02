@@ -21,21 +21,19 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
         public FakeDbConnection(
             string connectionString,
             FakeCommandExecutor commandExecutor = null,
-            ConnectionState state = ConnectionState.Closed)
+            ConnectionState state = ConnectionState.Closed
+        )
         {
             ConnectionString = connectionString;
             _commandExecutor = commandExecutor ?? new FakeCommandExecutor();
             _state = state;
         }
 
-        public void SetState(ConnectionState state)
-            => _state = state;
+        public void SetState(ConnectionState state) => _state = state;
 
-        public override ConnectionState State
-            => _state;
+        public override ConnectionState State => _state;
 
-        public IReadOnlyList<FakeDbCommand> DbCommands
-            => _dbCommands;
+        public IReadOnlyList<FakeDbCommand> DbCommands => _dbCommands;
 
         public override string ConnectionString { get; set; }
 
@@ -43,8 +41,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 
         public override string DataSource { get; } = "Fake DataSource";
 
-        public override string ServerVersion
-            => throw new NotImplementedException();
+        public override string ServerVersion => throw new NotImplementedException();
 
         public override void ChangeDatabase(string databaseName)
         {
@@ -84,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             return command;
         }
 
-        public IReadOnlyList<FakeDbTransaction> DbTransactions
-            => _dbTransactions;
+        public IReadOnlyList<FakeDbTransaction> DbTransactions => _dbTransactions;
 
         public FakeDbTransaction ActiveTransaction { get; set; }
 

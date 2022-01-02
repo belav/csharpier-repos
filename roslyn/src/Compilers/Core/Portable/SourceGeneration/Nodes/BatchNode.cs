@@ -14,15 +14,24 @@ namespace Microsoft.CodeAnalysis
         private readonly IIncrementalGeneratorNode<TInput> _sourceNode;
         private readonly IEqualityComparer<ImmutableArray<TInput>> _comparer;
 
-        public BatchNode(IIncrementalGeneratorNode<TInput> sourceNode, IEqualityComparer<ImmutableArray<TInput>>? comparer = null)
+        public BatchNode(
+            IIncrementalGeneratorNode<TInput> sourceNode,
+            IEqualityComparer<ImmutableArray<TInput>>? comparer = null
+        )
         {
             _sourceNode = sourceNode;
             _comparer = comparer ?? EqualityComparer<ImmutableArray<TInput>>.Default;
         }
 
-        public IIncrementalGeneratorNode<ImmutableArray<TInput>> WithComparer(IEqualityComparer<ImmutableArray<TInput>> comparer) => new BatchNode<TInput>(_sourceNode, comparer);
+        public IIncrementalGeneratorNode<ImmutableArray<TInput>> WithComparer(
+            IEqualityComparer<ImmutableArray<TInput>> comparer
+        ) => new BatchNode<TInput>(_sourceNode, comparer);
 
-        public NodeStateTable<ImmutableArray<TInput>> UpdateStateTable(DriverStateTable.Builder builder, NodeStateTable<ImmutableArray<TInput>> previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<ImmutableArray<TInput>> UpdateStateTable(
+            DriverStateTable.Builder builder,
+            NodeStateTable<ImmutableArray<TInput>> previousTable,
+            CancellationToken cancellationToken
+        )
         {
             // grab the source inputs
             var sourceTable = builder.GetLatestStateTableForNode(_sourceNode);
@@ -36,7 +45,7 @@ namespace Microsoft.CodeAnalysis
 
             var source = sourceTable.Batch();
 
-            // update the table 
+            // update the table
             var newTable = previousTable.ToBuilder();
             if (!sourceTable.IsCached || !newTable.TryUseCachedEntries())
             {
@@ -49,6 +58,7 @@ namespace Microsoft.CodeAnalysis
             return newTable.ToImmutableAndFree();
         }
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _sourceNode.RegisterOutput(output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _sourceNode.RegisterOutput(output);
     }
 }

@@ -13,28 +13,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Completion
 {
     internal sealed class InteractiveCommandCompletionService : CompletionServiceWithProviders
     {
-        [ExportLanguageServiceFactory(typeof(CompletionService), InteractiveLanguageNames.InteractiveCommand), Shared]
+        [
+            ExportLanguageServiceFactory(
+                typeof(CompletionService),
+                InteractiveLanguageNames.InteractiveCommand
+            ),
+            Shared
+        ]
         internal sealed class Factory : ILanguageServiceFactory
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory()
-            {
-            }
+            public Factory() { }
 
-            public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-                => new InteractiveCommandCompletionService(languageServices.WorkspaceServices.Workspace);
+            public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+                new InteractiveCommandCompletionService(
+                    languageServices.WorkspaceServices.Workspace
+                );
         }
 
-        private InteractiveCommandCompletionService(Workspace workspace)
-            : base(workspace)
-        {
-        }
+        private InteractiveCommandCompletionService(Workspace workspace) : base(workspace) { }
 
-        public override string Language
-            => InteractiveLanguageNames.InteractiveCommand;
+        public override string Language => InteractiveLanguageNames.InteractiveCommand;
 
-        internal override CompletionRules GetRules(CompletionOptions options)
-            => CompletionRules.Default;
+        internal override CompletionRules GetRules(CompletionOptions options) =>
+            CompletionRules.Default;
     }
 }

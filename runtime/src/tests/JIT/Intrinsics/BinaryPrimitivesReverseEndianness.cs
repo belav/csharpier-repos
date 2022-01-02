@@ -35,21 +35,36 @@ namespace BinaryPrimitivesReverseEndianness
             ushort swappedUInt16 = BinaryPrimitives.ReverseEndianness(ConstantUInt16Input);
             if (swappedUInt16 != ConstantUInt16Expected)
             {
-                ReportError("const UInt16", ConstantUInt16Input, swappedUInt16, ConstantUInt16Expected);
+                ReportError(
+                    "const UInt16",
+                    ConstantUInt16Input,
+                    swappedUInt16,
+                    ConstantUInt16Expected
+                );
                 return Fail;
             }
 
             uint swappedUInt32 = BinaryPrimitives.ReverseEndianness(ConstantUInt32Input);
             if (swappedUInt32 != ConstantUInt32Expected)
             {
-                ReportError("const UInt32", ConstantUInt32Input, swappedUInt32, ConstantUInt32Expected);
+                ReportError(
+                    "const UInt32",
+                    ConstantUInt32Input,
+                    swappedUInt32,
+                    ConstantUInt32Expected
+                );
                 return Fail;
             }
 
             ulong swappedUInt64 = BinaryPrimitives.ReverseEndianness(ConstantUInt64Input);
             if (swappedUInt64 != ConstantUInt64Expected)
             {
-                ReportError("const UInt64", ConstantUInt64Input, swappedUInt64, ConstantUInt64Expected);
+                ReportError(
+                    "const UInt64",
+                    ConstantUInt64Input,
+                    swappedUInt64,
+                    ConstantUInt64Expected
+                );
                 return Fail;
             }
 
@@ -58,18 +73,32 @@ namespace BinaryPrimitivesReverseEndianness
              */
 
             Span<byte> spanInt16 = BitConverter.IsLittleEndian ? s_bufferLE.AsSpan(2) : s_bufferBE;
-            short swappedInt16 = BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<short>(spanInt16));
+            short swappedInt16 = BinaryPrimitives.ReverseEndianness(
+                MemoryMarshal.Read<short>(spanInt16)
+            );
             if (swappedInt16 != ConstantUInt16Expected)
             {
-                ReportError("sign-extended Int16", ConstantUInt16Input, (int)swappedInt16, ConstantUInt16Expected);
+                ReportError(
+                    "sign-extended Int16",
+                    ConstantUInt16Input,
+                    (int)swappedInt16,
+                    ConstantUInt16Expected
+                );
                 return Fail;
             }
 
             Span<byte> spanInt32 = BitConverter.IsLittleEndian ? s_bufferLE : s_bufferBE;
-            int swappedInt32 = BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<int>(spanInt32));
+            int swappedInt32 = BinaryPrimitives.ReverseEndianness(
+                MemoryMarshal.Read<int>(spanInt32)
+            );
             if (swappedInt32 != ConstantUInt32Expected)
             {
-                ReportError("sign-extended Int32", ConstantUInt32Input, (long)swappedInt32, ConstantUInt32Expected);
+                ReportError(
+                    "sign-extended Int32",
+                    ConstantUInt32Input,
+                    (long)swappedInt32,
+                    ConstantUInt32Expected
+                );
                 return Fail;
             }
 
@@ -82,7 +111,12 @@ namespace BinaryPrimitivesReverseEndianness
             ushort nonConstUInt16Expected = ByteSwapUInt16_Control(nonConstUInt16Input);
             if (nonConstUInt16Output != nonConstUInt16Expected)
             {
-                ReportError("non-const UInt16", nonConstUInt16Input, nonConstUInt16Output, nonConstUInt16Expected);
+                ReportError(
+                    "non-const UInt16",
+                    nonConstUInt16Input,
+                    nonConstUInt16Output,
+                    nonConstUInt16Expected
+                );
                 return Fail;
             }
 
@@ -91,7 +125,12 @@ namespace BinaryPrimitivesReverseEndianness
             uint nonConstUInt32Expected = ByteSwapUInt32_Control(nonConstUInt32Input);
             if (nonConstUInt32Output != nonConstUInt32Expected)
             {
-                ReportError("non-const UInt32", nonConstUInt32Input, nonConstUInt32Output, nonConstUInt32Expected);
+                ReportError(
+                    "non-const UInt32",
+                    nonConstUInt32Input,
+                    nonConstUInt32Output,
+                    nonConstUInt32Expected
+                );
                 return Fail;
             }
 
@@ -100,7 +139,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong nonConstUInt64Expected = ByteSwapUInt64_Control(nonConstUInt64Input);
             if (nonConstUInt64Output != nonConstUInt64Expected)
             {
-                ReportError("non-const UInt64", nonConstUInt64Input, nonConstUInt64Output, nonConstUInt64Expected);
+                ReportError(
+                    "non-const UInt64",
+                    nonConstUInt64Input,
+                    nonConstUInt64Output,
+                    nonConstUInt64Expected
+                );
                 return Fail;
             }
 
@@ -168,6 +212,5 @@ namespace BinaryPrimitivesReverseEndianness
             Console.WriteLine($"Output:   0x{GetHexString(output)}");
             Console.WriteLine($"Expected: 0x{GetHexString(expected)}");
         }
-
     }
 }

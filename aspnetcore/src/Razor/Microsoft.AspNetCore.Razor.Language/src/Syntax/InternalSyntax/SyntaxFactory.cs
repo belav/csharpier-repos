@@ -5,7 +5,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal static partial class SyntaxFactory
 {
-    internal static SyntaxToken Token(SyntaxKind kind, string content, params RazorDiagnostic[] diagnostics)
+    internal static SyntaxToken Token(
+        SyntaxKind kind,
+        string content,
+        params RazorDiagnostic[] diagnostics
+    )
     {
         if (SyntaxTokenCache.Instance.CanBeCached(kind, diagnostics))
         {

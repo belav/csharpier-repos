@@ -53,10 +53,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (_methods.Count == 0 || relocsOnly)
             {
                 return new ObjectData(
-                    data: Array.Empty<byte>(), 
-                    relocs: Array.Empty<Relocation>(), 
-                    alignment: 1, 
-                    definedSymbols: new ISymbolDefinitionNode[] { this });
+                    data: Array.Empty<byte>(),
+                    relocs: Array.Empty<Relocation>(),
+                    alignment: 1,
+                    definedSymbols: new ISymbolDefinitionNode[] { this }
+                );
             }
 
             _methods.MergeSort(new CompilerComparer());
@@ -68,7 +69,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             int offsetCount = _methods.Count / GCREFMAP_LOOKUP_STRIDE;
             builder.Builder.EmitInt((offsetCount + 1) * sizeof(int));
 
-            ObjectDataBuilder.Reservation[] offsets = new ObjectDataBuilder.Reservation[offsetCount];
+            ObjectDataBuilder.Reservation[] offsets = new ObjectDataBuilder.Reservation[
+                offsetCount
+            ];
             for (int offsetIndex = 0; offsetIndex < offsetCount; offsetIndex++)
             {
                 offsets[offsetIndex] = builder.Builder.ReserveInt();
@@ -91,7 +94,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     bool isUnboxingStub = false;
                     if (methodNode is DelayLoadHelperImport methodImport)
                     {
-                        isUnboxingStub = ((MethodFixupSignature)methodImport.ImportSignature.Target).IsUnboxingStub;
+                        isUnboxingStub =
+                            (
+                                (MethodFixupSignature)methodImport.ImportSignature.Target
+                            ).IsUnboxingStub;
                     }
                     builder.GetCallRefMap(methodNode.Method, isUnboxingStub);
                 }

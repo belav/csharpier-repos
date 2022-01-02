@@ -16,7 +16,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     private static void DetectMismatchedParameterOptionality(
         in OperationAnalysisContext context,
         IInvocationOperation invocation,
-        IMethodSymbol methodSymbol)
+        IMethodSymbol methodSymbol
+    )
     {
         if (invocation.Arguments.Length < 2)
         {
@@ -24,8 +25,10 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         }
 
         var value = invocation.Arguments[1].Value;
-        if (value.ConstantValue is not { HasValue: true } constant ||
-            constant.Value is not string routeTemplate)
+        if (
+            value.ConstantValue is not { HasValue: true } constant
+            || constant.Value is not string routeTemplate
+        )
         {
             return;
         }
@@ -43,20 +46,32 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                     var paramName = parameter.Name;
                     //  If this is not the methpd parameter associated with the route
                     // parameter then continue looking for it in the list
-                    if (!enumerator.CurrentName.Equals(paramName.AsSpan(), StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !enumerator.CurrentName.Equals(
+                            paramName.AsSpan(),
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         continue;
                     }
-                    var argumentIsOptional = parameter.IsOptional || parameter.NullableAnnotation != NullableAnnotation.NotAnnotated;
-                    var location = parameter.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation();
+                    var argumentIsOptional =
+                        parameter.IsOptional
+                        || parameter.NullableAnnotation != NullableAnnotation.NotAnnotated;
+                    var location = parameter.DeclaringSyntaxReferences.FirstOrDefault()?
+                        .GetSyntax()
+                        .GetLocation();
                     var routeParamIsOptional = enumerator.CurrentQualifiers.IndexOf('?') > -1;
 
                     if (!argumentIsOptional && routeParamIsOptional)
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(
-                            DiagnosticDescriptors.DetectMismatchedParameterOptionality,
-                            location,
-                            paramName));
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                DiagnosticDescriptors.DetectMismatchedParameterOptionality,
+                                location,
+                                paramName
+                            )
+                        );
                     }
                 }
             }

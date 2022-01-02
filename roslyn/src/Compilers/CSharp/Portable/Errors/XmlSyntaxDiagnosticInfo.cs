@@ -14,18 +14,23 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         static XmlSyntaxDiagnosticInfo()
         {
-            ObjectBinder.RegisterTypeReader(typeof(XmlSyntaxDiagnosticInfo), r => new XmlSyntaxDiagnosticInfo(r));
+            ObjectBinder.RegisterTypeReader(
+                typeof(XmlSyntaxDiagnosticInfo),
+                r => new XmlSyntaxDiagnosticInfo(r)
+            );
         }
 
         private readonly XmlParseErrorCode _xmlErrorCode;
 
         internal XmlSyntaxDiagnosticInfo(XmlParseErrorCode code, params object[] args)
-            : this(0, 0, code, args)
-        {
-        }
+            : this(0, 0, code, args) { }
 
-        internal XmlSyntaxDiagnosticInfo(int offset, int width, XmlParseErrorCode code, params object[] args)
-            : base(offset, width, ErrorCode.WRN_XMLParseError, args)
+        internal XmlSyntaxDiagnosticInfo(
+            int offset,
+            int width,
+            XmlParseErrorCode code,
+            params object[] args
+        ) : base(offset, width, ErrorCode.WRN_XMLParseError, args)
         {
             _xmlErrorCode = code;
         }
@@ -38,8 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             writer.WriteUInt32((uint)_xmlErrorCode);
         }
 
-        private XmlSyntaxDiagnosticInfo(ObjectReader reader)
-            : base(reader)
+        private XmlSyntaxDiagnosticInfo(ObjectReader reader) : base(reader)
         {
             _xmlErrorCode = (XmlParseErrorCode)reader.ReadUInt32();
         }
@@ -60,7 +64,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return String.Format(formatProvider, messagePrefix, message);
             }
 
-            return String.Format(formatProvider, String.Format(formatProvider, messagePrefix, message), GetArgumentsToUse(formatProvider));
+            return String.Format(
+                formatProvider,
+                String.Format(formatProvider, messagePrefix, message),
+                GetArgumentsToUse(formatProvider)
+            );
         }
     }
 }

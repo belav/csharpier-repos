@@ -12,10 +12,7 @@ public class ClipboardEventArgsReaderTest
     public void Read_Works()
     {
         // Arrange
-        var args = new ClipboardEventArgs
-        {
-            Type = "Some type"
-        };
+        var args = new ClipboardEventArgs { Type = "Some type" };
         var jsonElement = GetJsonElement(args);
 
         // Act

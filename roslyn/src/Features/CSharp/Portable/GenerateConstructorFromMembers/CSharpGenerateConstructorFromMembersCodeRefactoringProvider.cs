@@ -18,34 +18,46 @@ using Microsoft.CodeAnalysis.PickMembers;
 
 namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructorFromMembers
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.GenerateConstructorFromMembers), Shared]
-    [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.GenerateEqualsAndGetHashCodeFromMembers)]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.GenerateConstructorFromMembers
+        ),
+        Shared
+    ]
+    [ExtensionOrder(
+        Before = PredefinedCodeRefactoringProviderNames.GenerateEqualsAndGetHashCodeFromMembers
+    )]
     [IntentProvider(WellKnownIntents.GenerateConstructor, LanguageNames.CSharp)]
     internal sealed class CSharpGenerateConstructorFromMembersCodeRefactoringProvider
         : AbstractGenerateConstructorFromMembersCodeRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateConstructorFromMembersCodeRefactoringProvider()
-        {
-        }
+        public CSharpGenerateConstructorFromMembersCodeRefactoringProvider() { }
 
         /// <summary>
         /// For testing purposes only.
         /// </summary>
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
-        internal CSharpGenerateConstructorFromMembersCodeRefactoringProvider(IPickMembersService pickMembersService_forTesting)
-            : base(pickMembersService_forTesting)
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
+        internal CSharpGenerateConstructorFromMembersCodeRefactoringProvider(
+            IPickMembersService pickMembersService_forTesting
+        ) : base(pickMembersService_forTesting) { }
 
-        protected override bool ContainingTypesOrSelfHasUnsafeKeyword(INamedTypeSymbol containingType)
-            => containingType.ContainingTypesOrSelfHasUnsafeKeyword();
+        protected override bool ContainingTypesOrSelfHasUnsafeKeyword(
+            INamedTypeSymbol containingType
+        ) => containingType.ContainingTypesOrSelfHasUnsafeKeyword();
 
-        protected override string ToDisplayString(IParameterSymbol parameter, SymbolDisplayFormat format)
-            => SymbolDisplay.ToDisplayString(parameter, format);
+        protected override string ToDisplayString(
+            IParameterSymbol parameter,
+            SymbolDisplayFormat format
+        ) => SymbolDisplay.ToDisplayString(parameter, format);
 
-        protected override bool PrefersThrowExpression(DocumentOptionSet options)
-            => options.GetOption(CSharpCodeStyleOptions.PreferThrowExpression).Value;
+        protected override bool PrefersThrowExpression(DocumentOptionSet options) =>
+            options.GetOption(CSharpCodeStyleOptions.PreferThrowExpression).Value;
     }
 }

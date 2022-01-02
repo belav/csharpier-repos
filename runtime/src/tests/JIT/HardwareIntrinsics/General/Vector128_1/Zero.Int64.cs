@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -56,9 +57,9 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             object result = typeof(Vector128<Int64>)
-                                .GetProperty(nameof(Vector128<Int64>.Zero), new Type[] { })
-                                .GetGetMethod()
-                                .Invoke(null, new object[] { });
+                .GetProperty(nameof(Vector128<Int64>.Zero), new Type[] { })
+                .GetGetMethod()
+                .Invoke(null, new object[] { });
 
             ValidateResult((Vector128<Int64>)(result));
         }
@@ -73,7 +74,7 @@ namespace JIT.HardwareIntrinsics.General
         private void ValidateResult(Int64[] resultElements, [CallerMemberName] string method = "")
         {
             bool succeeded = true;
-        
+
             for (var i = 0; i < ElementCount; i++)
             {
                 if (resultElements[i] != 0)
@@ -85,8 +86,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Zero(Int64): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Zero(Int64): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

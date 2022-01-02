@@ -22,8 +22,8 @@ interface IBar : IFoo
     // IFoo.Foo1/2/3/4/5
 
     int Bar1(int b); // { return a + 11; }
-    int Bar2(int b); // { return a + 22; } 
-    int Bar3(int b); // { return a + 33; } 
+    int Bar2(int b); // { return a + 22; }
+    int Bar3(int b); // { return a + 33; }
     int Bar4(int b);
     int Bar5(int b);
     int Bar6(int b);
@@ -55,36 +55,43 @@ class IBarImpl : IBar
         Console.WriteLine("At IIFoo.Foo1");
         return a + 20;
     }
+
     int IFoo.Foo3(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 30;
     }
+
     int IFoo.Foo4(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 40;
     }
+
     int IFoo.Foo5(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 50;
     }
+
     int IFoo.Foo6(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 60;
     }
+
     int IFoo.Foo7(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 70;
     }
+
     int IFoo.Foo8(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 80;
     }
+
     int IFoo.Foo9(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
@@ -102,41 +109,48 @@ class IBarImpl : IBar
         Console.WriteLine("At IBar.Bar1");
         return a + 220;
     }
+
     int IBar.Bar3(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 330;
     }
+
     int IBar.Bar4(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 440;
     }
+
     int IBar.Bar5(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 550;
     }
+
     int IBar.Bar6(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 660;
     }
+
     int IBar.Bar7(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 770;
     }
+
     int IBar.Bar8(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 880;
     }
+
     int IBar.Bar9(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 990;
-    }      
+    }
 }
 
 class IBlahImpl : IBarImpl, IBlah
@@ -146,19 +160,19 @@ class IBlahImpl : IBarImpl, IBlah
     int IBlah.Blah1(int c)
     {
         Console.WriteLine("At IBlah.Blah1");
-        return c+111;
+        return c + 111;
     }
 
     int IBlah.Blah2(int c)
     {
         Console.WriteLine("At IBlah.Blah2");
-        return c+222;
+        return c + 222;
     }
 
     int IBlah.Blah3(int c)
     {
         Console.WriteLine("At IBlah.Blah3");
-        return c+333;
+        return c + 333;
     }
 }
 
@@ -169,11 +183,10 @@ interface IFooBarBlah : IFoo, IBar, IBlah
     // FooBarBLah345 .override IFoo.Foo345/IBar.Bar345/IBlah.Blah3 return i+33333
 }
 
-class FooBarBlahImpl : 
-    IBlahImpl,   // @REMOVE
-    IFooBarBlah
+class FooBarBlahImpl
+    : IBlahImpl, // @REMOVE
+      IFooBarBlah
 {
-
 }
 
 class Program
@@ -182,14 +195,14 @@ class Program
     {
         SingleOverride();
         MultiOverride();
-                              
+
         return Test.Ret();
     }
 
     private static void SingleOverride()
     {
         IBarImpl barImpl = new IBarImpl();
-        IFoo foo = (IFoo) barImpl;
+        IFoo foo = (IFoo)barImpl;
 
         Console.WriteLine("Calling IFoo.Foo methods on IBarImpl...");
 
@@ -203,7 +216,7 @@ class Program
         Test.Assert(foo.Foo8(0) == 8, "Calling IFoo.Foo8 on IBarImpl");
         Test.Assert(foo.Foo9(0) == 9, "Calling IFoo.Foo9 on IBarImpl");
 
-        IBar bar = (IBar) barImpl;
+        IBar bar = (IBar)barImpl;
 
         Console.WriteLine("Calling IBar.Bar methods on IBarImpl...");
 
@@ -218,7 +231,7 @@ class Program
         Test.Assert(bar.Bar9(0) == 99, "Calling IBar.Bar9 on IBarImpl");
 
         IBlahImpl blahImpl = new IBlahImpl();
-        foo = (IFoo) blahImpl;
+        foo = (IFoo)blahImpl;
 
         Test.Assert(foo.Foo1(1) == 11, "Calling IFoo.Foo1 on IBlahImpl");
         Test.Assert(foo.Foo2(2) == 22, "Calling IFoo.Foo2 on IBlahImpl");
@@ -230,7 +243,7 @@ class Program
         Test.Assert(foo.Foo8(8) == 88, "Calling IFoo.Foo8 on IBlahImpl");
         Test.Assert(foo.Foo9(9) == 99, "Calling IFoo.Foo9 on IBlahImpl");
 
-        bar = (IBar) blahImpl;
+        bar = (IBar)blahImpl;
 
         Console.WriteLine("Calling IBar.Bar methods on IBlahImpl...");
 
@@ -242,23 +255,23 @@ class Program
         Test.Assert(bar.Bar6(0) == 66, "Calling IBar.Bar6 on IBlahImpl");
         Test.Assert(bar.Bar7(0) == 77, "Calling IBar.Bar7 on IBlahImpl");
         Test.Assert(bar.Bar8(0) == 88, "Calling IBar.Bar8 on IBlahImpl");
-        Test.Assert(bar.Bar9(0) == 99, "Calling IBar.Bar9 on IBlahImpl");  
+        Test.Assert(bar.Bar9(0) == 99, "Calling IBar.Bar9 on IBlahImpl");
 
-        IBlah blah = (IBlah) blahImpl;
+        IBlah blah = (IBlah)blahImpl;
 
-        Console.WriteLine("Calling IBlah.Blah methods on IBlahImpl...");   
+        Console.WriteLine("Calling IBlah.Blah methods on IBlahImpl...");
 
         Test.Assert(blah.Blah1(0) == 111, "Calling IBlah.Blah1 on IBlahImpl");
         Test.Assert(blah.Blah2(2) == 2222, "Calling IBlah.Blah1 on IBlahImpl");
-        Test.Assert(blah.Blah3(3) == 3333, "Calling IBlah.Blah1 on IBlahImpl"); 
+        Test.Assert(blah.Blah3(3) == 3333, "Calling IBlah.Blah1 on IBlahImpl");
     }
 
     private static void MultiOverride()
-    {        
+    {
         FooBarBlahImpl fooBarBlah = new FooBarBlahImpl();
-        IFoo foo = (IFoo) fooBarBlah;
+        IFoo foo = (IFoo)fooBarBlah;
 
-        Console.WriteLine("Calling IFoo.Foo methods on FooBarBlahImpl...");   
+        Console.WriteLine("Calling IFoo.Foo methods on FooBarBlahImpl...");
         Test.Assert(foo.Foo1(0) == 11111, "Calling IFoo.Foo1 on FooBarBlahImpl");
         Test.Assert(foo.Foo2(0) == 22222, "Calling IFoo.Foo2 on FooBarBlahImpl");
         Test.Assert(foo.Foo3(0) == 33333, "Calling IFoo.Foo3 on FooBarBlahImpl");
@@ -267,9 +280,9 @@ class Program
         Test.Assert(foo.Foo6(6) == 66, "Calling IFoo.Foo6 on FooBarBlahImpl");
         Test.Assert(foo.Foo7(7) == 77, "Calling IFoo.Foo7 on FooBarBlahImpl");
         Test.Assert(foo.Foo8(8) == 88, "Calling IFoo.Foo8 on FooBarBlahImpl");
-        Test.Assert(foo.Foo9(9) == 99, "Calling IFoo.Foo9 on FooBarBlahImpl"); 
+        Test.Assert(foo.Foo9(9) == 99, "Calling IFoo.Foo9 on FooBarBlahImpl");
 
-        IBar bar = (IBar) fooBarBlah;
+        IBar bar = (IBar)fooBarBlah;
 
         Console.WriteLine("Calling IBar.Bar methods on FooBarBlahImpl...");
 
@@ -281,15 +294,15 @@ class Program
         Test.Assert(bar.Bar6(0) == 66, "Calling IBar.Bar6 on FooBarBlahImpl");
         Test.Assert(bar.Bar7(0) == 77, "Calling IBar.Bar7 on FooBarBlahImpl");
         Test.Assert(bar.Bar8(0) == 88, "Calling IBar.Bar8 on FooBarBlahImpl");
-        Test.Assert(bar.Bar9(0) == 99, "Calling IBar.Bar9 on FooBarBlahImpl");            
+        Test.Assert(bar.Bar9(0) == 99, "Calling IBar.Bar9 on FooBarBlahImpl");
 
-        IBlah blah = (IBlah) fooBarBlah;
-       
-        Console.WriteLine("Calling IBlah.Blah methods on FooBarBlahImpl...");   
+        IBlah blah = (IBlah)fooBarBlah;
+
+        Console.WriteLine("Calling IBlah.Blah methods on FooBarBlahImpl...");
 
         Test.Assert(blah.Blah1(0) == 11111, "Calling IBlah.Blah1 on FooBarBlahImpl");
         Test.Assert(blah.Blah2(0) == 22222, "Calling IBlah.Blah1 on FooBarBlahImpl");
-        Test.Assert(blah.Blah3(0) == 33333, "Calling IBlah.Blah1 on FooBarBlahImpl"); 
+        Test.Assert(blah.Blah3(0) == 33333, "Calling IBlah.Blah1 on FooBarBlahImpl");
     }
 }
 
@@ -299,7 +312,7 @@ class Test
 
     public static int Ret()
     {
-        return Pass? 100 : 101;
+        return Pass ? 100 : 101;
     }
 
     public static void Assert(bool cond, string msg)
@@ -314,6 +327,4 @@ class Test
             Pass = false;
         }
     }
-}                    
-
-
+}

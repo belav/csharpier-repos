@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             bool sensitiveLoggingEnabled,
             IComparer<IUpdateEntry>? comparer = null,
             Func<string>? generateParameterName = null,
-            IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null)
+            IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null
+        )
         {
             TableName = tableName;
             Schema = schemaName;

@@ -53,7 +53,8 @@ namespace System.Linq.Parallel
             : base(
                 partitionCount,
                 Util.GetDefaultComparer<int>(),
-                source is IList<T> ? OrdinalIndexState.Indexable : OrdinalIndexState.Correct)
+                source is IList<T> ? OrdinalIndexState.Indexable : OrdinalIndexState.Correct
+            )
         {
             InitializePartitions(source, partitionCount, useStriping);
         }
@@ -69,7 +70,11 @@ namespace System.Linq.Parallel
         //     block when enumerating it.
         //
 
-        private void InitializePartitions(IEnumerable<T> source, int partitionCount, bool useStriping)
+        private void InitializePartitions(
+            IEnumerable<T> source,
+            int partitionCount,
+            bool useStriping
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(partitionCount > 0);
@@ -84,7 +89,9 @@ namespace System.Linq.Parallel
             // Check whether we have an indexable data source.
             if (source is IList<T> sourceAsList)
             {
-                QueryOperatorEnumerator<T, int>[] partitions = new QueryOperatorEnumerator<T, int>[partitionCount];
+                QueryOperatorEnumerator<T, int>[] partitions = new QueryOperatorEnumerator<T, int>[
+                    partitionCount
+                ];
 
                 // We use this below to specialize enumerators when possible.
                 T[]? sourceAsArray = source as T[];
@@ -112,26 +119,52 @@ namespace System.Linq.Parallel
                         // 'ldelem' instructions rather than making interface method calls.
                         if (useStriping)
                         {
-                            partitions[i] = new ArrayIndexRangeEnumerator(sourceAsArray, partitionCount, i, maxChunkSize);
+                            partitions[i] = new ArrayIndexRangeEnumerator(
+                                sourceAsArray,
+                                partitionCount,
+                                i,
+                                maxChunkSize
+                            );
                         }
                         else
                         {
-                            partitions[i] = new ArrayContiguousIndexRangeEnumerator(sourceAsArray, partitionCount, i);
+                            partitions[i] = new ArrayContiguousIndexRangeEnumerator(
+                                sourceAsArray,
+                                partitionCount,
+                                i
+                            );
                         }
-                        TraceHelpers.TraceInfo("ContiguousRangePartitionExchangeStream::MakePartitions - (array) #{0} {1}", i, maxChunkSize);
+                        TraceHelpers.TraceInfo(
+                            "ContiguousRangePartitionExchangeStream::MakePartitions - (array) #{0} {1}",
+                            i,
+                            maxChunkSize
+                        );
                     }
                     else
                     {
                         // Create a general purpose list enumerator object.
                         if (useStriping)
                         {
-                            partitions[i] = new ListIndexRangeEnumerator(sourceAsList, partitionCount, i, maxChunkSize);
+                            partitions[i] = new ListIndexRangeEnumerator(
+                                sourceAsList,
+                                partitionCount,
+                                i,
+                                maxChunkSize
+                            );
                         }
                         else
                         {
-                            partitions[i] = new ListContiguousIndexRangeEnumerator(sourceAsList, partitionCount, i);
+                            partitions[i] = new ListContiguousIndexRangeEnumerator(
+                                sourceAsList,
+                                partitionCount,
+                                i
+                            );
                         }
-                        TraceHelpers.TraceInfo("ContiguousRangePartitionExchangeStream::MakePartitions - (list) #{0} {1})", i, maxChunkSize);
+                        TraceHelpers.TraceInfo(
+                            "ContiguousRangePartitionExchangeStream::MakePartitions - (list) #{0} {1})",
+                            i,
+                            maxChunkSize
+                        );
                     }
                 }
 
@@ -156,14 +189,19 @@ namespace System.Linq.Parallel
         // instead of just one-at-a-time.
         //
 
-        private static QueryOperatorEnumerator<T, int>[] MakePartitions(IEnumerator<T> source, int partitionCount)
+        private static QueryOperatorEnumerator<T, int>[] MakePartitions(
+            IEnumerator<T> source,
+            int partitionCount
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(partitionCount > 0);
 
             // At this point we were unable to efficiently partition the data source. Instead, we
             // will return enumerators that lazily partition the data source.
-            QueryOperatorEnumerator<T, int>[] partitions = new QueryOperatorEnumerator<T, int>[partitionCount];
+            QueryOperatorEnumerator<T, int>[] partitions = new QueryOperatorEnumerator<T, int>[
+                partitionCount
+            ];
 
             // The following is used for synchronization between threads.
             object sharedSyncLock = new object();
@@ -175,7 +213,12 @@ namespace System.Linq.Parallel
             for (int i = 0; i < partitionCount; i++)
             {
                 partitions[i] = new ContiguousChunkLazyEnumerator(
-                    source, sharedExceptionTracker, sharedSyncLock, sharedCurrentIndex, sharedPartitionCount);
+                    source,
+                    sharedExceptionTracker,
+                    sharedSyncLock,
+                    sharedCurrentIndex,
+                    sharedPartitionCount
+                );
             }
 
             return partitions;
@@ -233,12 +276,20 @@ namespace System.Linq.Parallel
                 internal int _currentChunkOffset; // The offset of the current chunk from the beginning of the range.
             }
 
-            internal ArrayIndexRangeEnumerator(T[] data, int partitionCount, int partitionIndex, int maxChunkSize)
+            internal ArrayIndexRangeEnumerator(
+                T[] data,
+                int partitionCount,
+                int partitionIndex,
+                int maxChunkSize
+            )
             {
                 Debug.Assert(data != null, "data mustn't be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
-                Debug.Assert(partitionIndex < partitionCount, "partitionIndex must be less than partitionCount");
+                Debug.Assert(
+                    partitionIndex < partitionCount,
+                    "partitionIndex must be less than partitionCount"
+                );
                 Debug.Assert(maxChunkSize > 0, "maxChunkSize must be positive or -1");
 
                 _data = data;
@@ -251,11 +302,14 @@ namespace System.Linq.Parallel
                 Debug.Assert(sectionSize > 0);
 
                 // Section count is ceiling(elementCount / sectionSize)
-                _sectionCount = _elementCount / sectionSize +
-                    ((_elementCount % sectionSize) == 0 ? 0 : 1);
+                _sectionCount =
+                    _elementCount / sectionSize + ((_elementCount % sectionSize) == 0 ? 0 : 1);
             }
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref T currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref T currentElement,
+                ref int currentKey
+            )
             {
                 // Lazily allocate the mutable holder.
                 Mutables? mutables = _mutables;
@@ -265,7 +319,10 @@ namespace System.Linq.Parallel
                 }
 
                 // If we are aren't within the chunk, we need to find another.
-                if (++mutables._currentPositionInChunk < mutables._currentChunkSize || MoveNextSlowPath())
+                if (
+                    ++mutables._currentPositionInChunk < mutables._currentChunkSize
+                    || MoveNextSlowPath()
+                )
                 {
                     currentKey = mutables._currentChunkOffset + mutables._currentPositionInChunk;
                     currentElement = _data[currentKey];
@@ -300,7 +357,8 @@ namespace System.Linq.Parallel
                 {
                     // We are not on the last section. The size of this chunk is simply _maxChunkSize.
                     mutables._currentChunkSize = _maxChunkSize;
-                    mutables._currentChunkOffset = currentSectionOffset + _partitionIndex * _maxChunkSize;
+                    mutables._currentChunkOffset =
+                        currentSectionOffset + _partitionIndex * _maxChunkSize;
                 }
                 else
                 {
@@ -321,8 +379,8 @@ namespace System.Linq.Parallel
                     }
 
                     mutables._currentChunkOffset =
-                        currentSectionOffset                            // The beginning of this section
-                        + _partitionIndex * smallerChunkSize           // + the start of this chunk if all chunks were "smaller"
+                        currentSectionOffset // The beginning of this section
+                        + _partitionIndex * smallerChunkSize // + the start of this chunk if all chunks were "smaller"
                         + (_partitionIndex < biggerChunkCount ? _partitionIndex : biggerChunkCount); // + the number of "bigger" chunks before this chunk
                 }
 
@@ -339,12 +397,19 @@ namespace System.Linq.Parallel
             private readonly int _maximumIndex; // The maximum index to iterate over.
             private Shared<int>? _currentIndex; // The current index (lazily allocated).
 
-            internal ArrayContiguousIndexRangeEnumerator(T[] data, int partitionCount, int partitionIndex)
+            internal ArrayContiguousIndexRangeEnumerator(
+                T[] data,
+                int partitionCount,
+                int partitionIndex
+            )
             {
                 Debug.Assert(data != null, "data must not be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
-                Debug.Assert(partitionIndex < partitionCount, "partitionIndex must be less than partitionCount");
+                Debug.Assert(
+                    partitionIndex < partitionCount,
+                    "partitionIndex must be less than partitionCount"
+                );
 
                 _data = data;
 
@@ -354,17 +419,27 @@ namespace System.Linq.Parallel
 
                 // Our start index is our index times the small chunk size, plus the number
                 // of "bigger" chunks before this one.
-                int startIndex = partitionIndex * smallerChunkSize +
-                    (partitionIndex < biggerChunkCount ? partitionIndex : biggerChunkCount);
+                int startIndex =
+                    partitionIndex * smallerChunkSize
+                    + (partitionIndex < biggerChunkCount ? partitionIndex : biggerChunkCount);
 
                 _startIndex = startIndex - 1; // Subtract one for the first call.
-                _maximumIndex = startIndex + smallerChunkSize + // And add one if we're responsible for part of the
+                _maximumIndex =
+                    startIndex
+                    + smallerChunkSize
+                    + // And add one if we're responsible for part of the
                     (partitionIndex < biggerChunkCount ? 1 : 0); // leftover chunks.
 
-                Debug.Assert(_currentIndex == null, "Expected deferred allocation to ensure it happens on correct thread");
+                Debug.Assert(
+                    _currentIndex == null,
+                    "Expected deferred allocation to ensure it happens on correct thread"
+                );
             }
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref T currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref T currentElement,
+                ref int currentKey
+            )
             {
                 // Lazily allocate the current index if needed.
                 if (_currentIndex == null)
@@ -411,12 +486,20 @@ namespace System.Linq.Parallel
                 internal int _currentChunkOffset; // The offset of the current chunk from the beginning of the range.
             }
 
-            internal ListIndexRangeEnumerator(IList<T> data, int partitionCount, int partitionIndex, int maxChunkSize)
+            internal ListIndexRangeEnumerator(
+                IList<T> data,
+                int partitionCount,
+                int partitionIndex,
+                int maxChunkSize
+            )
             {
                 Debug.Assert(data != null, "data must not be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
-                Debug.Assert(partitionIndex < partitionCount, "partitionIndex must be less than partitionCount");
+                Debug.Assert(
+                    partitionIndex < partitionCount,
+                    "partitionIndex must be less than partitionCount"
+                );
                 Debug.Assert(maxChunkSize > 0, "maxChunkSize must be positive or -1");
 
                 _data = data;
@@ -429,11 +512,14 @@ namespace System.Linq.Parallel
                 Debug.Assert(sectionSize > 0);
 
                 // Section count is ceiling(elementCount / sectionSize)
-                _sectionCount = _elementCount / sectionSize +
-                    ((_elementCount % sectionSize) == 0 ? 0 : 1);
+                _sectionCount =
+                    _elementCount / sectionSize + ((_elementCount % sectionSize) == 0 ? 0 : 1);
             }
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref T currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref T currentElement,
+                ref int currentKey
+            )
             {
                 // Lazily allocate the mutable holder.
                 Mutables? mutables = _mutables;
@@ -443,7 +529,10 @@ namespace System.Linq.Parallel
                 }
 
                 // If we are aren't within the chunk, we need to find another.
-                if (++mutables._currentPositionInChunk < mutables._currentChunkSize || MoveNextSlowPath())
+                if (
+                    ++mutables._currentPositionInChunk < mutables._currentChunkSize
+                    || MoveNextSlowPath()
+                )
                 {
                     currentKey = mutables._currentChunkOffset + mutables._currentPositionInChunk;
                     currentElement = _data[currentKey];
@@ -478,7 +567,8 @@ namespace System.Linq.Parallel
                 {
                     // We are not on the last section. The size of this chunk is simply _maxChunkSize.
                     mutables._currentChunkSize = _maxChunkSize;
-                    mutables._currentChunkOffset = currentSectionOffset + _partitionIndex * _maxChunkSize;
+                    mutables._currentChunkOffset =
+                        currentSectionOffset + _partitionIndex * _maxChunkSize;
                 }
                 else
                 {
@@ -499,8 +589,8 @@ namespace System.Linq.Parallel
                     }
 
                     mutables._currentChunkOffset =
-                        currentSectionOffset                            // The beginning of this section
-                        + _partitionIndex * smallerChunkSize           // + the start of this chunk if all chunks were "smaller"
+                        currentSectionOffset // The beginning of this section
+                        + _partitionIndex * smallerChunkSize // + the start of this chunk if all chunks were "smaller"
                         + (_partitionIndex < biggerChunkCount ? _partitionIndex : biggerChunkCount); // + the number of "bigger" chunks before this chunk
                 }
 
@@ -517,12 +607,19 @@ namespace System.Linq.Parallel
             private readonly int _maximumIndex; // The maximum index to iterate over.
             private Shared<int>? _currentIndex; // The current index (lazily allocated).
 
-            internal ListContiguousIndexRangeEnumerator(IList<T> data, int partitionCount, int partitionIndex)
+            internal ListContiguousIndexRangeEnumerator(
+                IList<T> data,
+                int partitionCount,
+                int partitionIndex
+            )
             {
                 Debug.Assert(data != null, "data must not be null");
                 Debug.Assert(partitionCount > 0, "partitionCount must be positive");
                 Debug.Assert(partitionIndex >= 0, "partitionIndex can't be negative");
-                Debug.Assert(partitionIndex < partitionCount, "partitionIndex must be less than partitionCount");
+                Debug.Assert(
+                    partitionIndex < partitionCount,
+                    "partitionIndex must be less than partitionCount"
+                );
 
                 _data = data;
 
@@ -532,17 +629,27 @@ namespace System.Linq.Parallel
 
                 // Our start index is our index times the small chunk size, plus the number
                 // of "bigger" chunks before this one.
-                int startIndex = partitionIndex * smallerChunkSize +
-                    (partitionIndex < biggerChunkCount ? partitionIndex : biggerChunkCount);
+                int startIndex =
+                    partitionIndex * smallerChunkSize
+                    + (partitionIndex < biggerChunkCount ? partitionIndex : biggerChunkCount);
 
                 _startIndex = startIndex - 1; // Subtract one for the first call.
-                _maximumIndex = startIndex + smallerChunkSize + // And add one if we're responsible for part of the
+                _maximumIndex =
+                    startIndex
+                    + smallerChunkSize
+                    + // And add one if we're responsible for part of the
                     (partitionIndex < biggerChunkCount ? 1 : 0); // leftover chunks.
 
-                Debug.Assert(_currentIndex == null, "Expected deferred allocation to ensure it happens on correct thread");
+                Debug.Assert(
+                    _currentIndex == null,
+                    "Expected deferred allocation to ensure it happens on correct thread"
+                );
             }
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref T currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref T currentElement,
+                ref int currentKey
+            )
             {
                 // Lazily allocate the current index if needed.
                 if (_currentIndex == null)
@@ -591,11 +698,11 @@ namespace System.Linq.Parallel
                     _chunkCounter = 0;
                 }
 
-                internal readonly T[] _chunkBuffer;      // Buffer array for the current chunk being enumerated.
-                internal int _nextChunkMaxSize;  // The max. chunk size to use for the next chunk.
-                internal int _currentChunkSize;  // The element count for our current chunk.
+                internal readonly T[] _chunkBuffer; // Buffer array for the current chunk being enumerated.
+                internal int _nextChunkMaxSize; // The max. chunk size to use for the next chunk.
+                internal int _currentChunkSize; // The element count for our current chunk.
                 internal int _currentChunkIndex; // Our current index within the temporary chunk.
-                internal int _chunkBaseIndex;    // The start index from which the current chunk was taken.
+                internal int _chunkBaseIndex; // The start index from which the current chunk was taken.
                 internal int _chunkCounter;
             }
 
@@ -604,7 +711,12 @@ namespace System.Linq.Parallel
             //
 
             internal ContiguousChunkLazyEnumerator(
-                IEnumerator<T> source, Shared<bool> exceptionTracker, object sourceSyncLock, Shared<int> currentIndex, Shared<int> degreeOfParallelism)
+                IEnumerator<T> source,
+                Shared<bool> exceptionTracker,
+                object sourceSyncLock,
+                Shared<int> currentIndex,
+                Shared<int> degreeOfParallelism
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(sourceSyncLock != null);
@@ -621,7 +733,10 @@ namespace System.Linq.Parallel
             // Just retrieves the current element from our current chunk.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref T currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref T currentElement,
+                ref int currentKey
+            )
             {
                 Mutables? mutables = _mutables;
                 if (mutables == null)
@@ -642,7 +757,9 @@ namespace System.Linq.Parallel
                         Debug.Assert(_source != null);
                         Debug.Assert(chunkBuffer != null);
                         Debug.Assert(mutables._currentChunkSize > 0);
-                        Debug.Assert(0 <= currentChunkIndex && currentChunkIndex < chunkBuffer.Length);
+                        Debug.Assert(
+                            0 <= currentChunkIndex && currentChunkIndex < chunkBuffer.Length
+                        );
                         currentElement = chunkBuffer[currentChunkIndex];
                         currentKey = mutables._chunkBaseIndex + currentChunkIndex;
 
@@ -656,7 +773,10 @@ namespace System.Linq.Parallel
 
                     lock (_sourceSyncLock)
                     {
-                        Debug.Assert(0 <= mutables._nextChunkMaxSize && mutables._nextChunkMaxSize <= chunkBuffer.Length);
+                        Debug.Assert(
+                            0 <= mutables._nextChunkMaxSize
+                                && mutables._nextChunkMaxSize <= chunkBuffer.Length
+                        );
 
                         // Accumulate a chunk of elements from the input.
                         int i = 0;

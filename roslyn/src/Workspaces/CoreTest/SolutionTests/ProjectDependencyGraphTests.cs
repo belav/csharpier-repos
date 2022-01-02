@@ -27,7 +27,11 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyTopologicalSort(CreateSolutionFromReferenceMap("A"), "A");
             VerifyTopologicalSort(CreateSolutionFromReferenceMap("A B"), "AB", "BA");
             VerifyTopologicalSort(CreateSolutionFromReferenceMap("C:A,B B:A A"), "ABC");
-            VerifyTopologicalSort(CreateSolutionFromReferenceMap("B:A A C:A D:C,B"), "ABCD", "ACBD");
+            VerifyTopologicalSort(
+                CreateSolutionFromReferenceMap("B:A A C:A D:C,B"),
+                "ABCD",
+                "ACBD"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -50,12 +54,19 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         /// <param name="expectedResults">A list of possible results. Because topological sorting is ambiguous
         /// in that a graph could have multiple topological sorts, this helper lets you give all the possible
         /// results and it asserts that one of them does match.</param>
-        private static void VerifyTopologicalSort(Solution solution, params string[] expectedResults)
+        private static void VerifyTopologicalSort(
+            Solution solution,
+            params string[] expectedResults
+        )
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
-            var projectIds = projectDependencyGraph.GetTopologicallySortedProjects(CancellationToken.None);
+            var projectIds = projectDependencyGraph.GetTopologicallySortedProjects(
+                CancellationToken.None
+            );
 
-            var actualResult = string.Concat(projectIds.Select(id => solution.GetRequiredProject(id).AssemblyName));
+            var actualResult = string.Concat(
+                projectIds.Select(id => solution.GetRequiredProject(id).AssemblyName)
+            );
             Assert.Contains<string>(actualResult, expectedResults);
         }
 
@@ -90,10 +101,19 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectIds = projectDependencyGraph.GetDependencySets(CancellationToken.None);
-            var actualResult = string.Join(" ",
-                projectIds.Select(
-                    group => string.Concat(
-                        group.Select(p => solution.GetRequiredProject(p).AssemblyName).OrderBy(n => n))).OrderBy(n => n));
+            var actualResult = string.Join(
+                " ",
+                projectIds
+                    .Select(
+                        group =>
+                            string.Concat(
+                                group
+                                    .Select(p => solution.GetRequiredProject(p).AssemblyName)
+                                    .OrderBy(n => n)
+                            )
+                    )
+                    .OrderBy(n => n)
+            );
             Assert.Equal(expectedResult, actualResult);
         }
 
@@ -105,9 +125,21 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         public void TestGetProjectsThatThisProjectTransitivelyDependsOn()
         {
             VerifyTransitiveReferences(CreateSolutionFromReferenceMap("A"), "A", new string[] { });
-            VerifyTransitiveReferences(CreateSolutionFromReferenceMap("B:A A"), "B", new string[] { "A" });
-            VerifyTransitiveReferences(CreateSolutionFromReferenceMap("C:B B:A A"), "C", new string[] { "B", "A" });
-            VerifyTransitiveReferences(CreateSolutionFromReferenceMap("C:B B:A A"), "A", new string[] { });
+            VerifyTransitiveReferences(
+                CreateSolutionFromReferenceMap("B:A A"),
+                "B",
+                new string[] { "A" }
+            );
+            VerifyTransitiveReferences(
+                CreateSolutionFromReferenceMap("C:B B:A A"),
+                "C",
+                new string[] { "B", "A" }
+            );
+            VerifyTransitiveReferences(
+                CreateSolutionFromReferenceMap("C:B B:A A"),
+                "A",
+                new string[] { }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -115,8 +147,13 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var solution = CreateSolutionFromReferenceMap("");
 
-            Assert.Throws<ArgumentNullException>("projectId",
-                () => solution.GetProjectDependencyGraph().GetProjectsThatThisProjectDirectlyDependsOn(null!));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () =>
+                    solution
+                        .GetProjectDependencyGraph()
+                        .GetProjectsThatThisProjectDirectlyDependsOn(null!)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -214,8 +251,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // so we shouldn't have any information for A, B, or C and have to deal with that.
 
             var solution = CreateSolutionFromReferenceMap("A B C:D D");
-            solution = solution.WithProjectReferences(solution.GetProjectsByName("C").Single().Id,
-                SpecializedCollections.EmptyEnumerable<ProjectReference>());
+            solution = solution.WithProjectReferences(
+                solution.GetProjectsByName("C").Single().Id,
+                SpecializedCollections.EmptyEnumerable<ProjectReference>()
+            );
 
             VerifyTransitiveReferences(solution, "A", new string[] { });
 
@@ -227,9 +266,17 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var dependencyGraph = solution.GetProjectDependencyGraph();
             var projectAId = solution.GetProjectsByName("A").Single().Id;
             var projectBId = solution.GetProjectsByName("B").Single().Id;
-            dependencyGraph = dependencyGraph.WithAdditionalProjectReferences(projectAId, new[] { new ProjectReference(projectBId) });
+            dependencyGraph = dependencyGraph.WithAdditionalProjectReferences(
+                projectAId,
+                new[] { new ProjectReference(projectBId) }
+            );
 
-            VerifyTransitiveReferences(solution, dependencyGraph, project: "A", expectedResults: new string[] { "B" });
+            VerifyTransitiveReferences(
+                solution,
+                dependencyGraph,
+                project: "A",
+                expectedResults: new string[] { "B" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -245,8 +292,14 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var projectAId = ProjectId.CreateNewId("A");
             var projectBId = ProjectId.CreateNewId("B");
 
-            var projectAInfo = ProjectInfo.Create(projectAId, VersionStamp.Create(), "A", "A", LanguageNames.CSharp,
-                                    projectReferences: new[] { new ProjectReference(projectBId) });
+            var projectAInfo = ProjectInfo.Create(
+                projectAId,
+                VersionStamp.Create(),
+                "A",
+                "A",
+                LanguageNames.CSharp,
+                projectReferences: new[] { new ProjectReference(projectBId) }
+            );
 
             solution = solution.AddProject(projectAInfo);
 
@@ -276,33 +329,46 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyTransitiveReferences(solution, "A", new string[] { "B", "C", "D", "E" });
         }
 
-        private static void VerifyDirectReferences(Solution solution, string project, string[] expectedResults)
+        private static void VerifyDirectReferences(
+            Solution solution,
+            string project,
+            string[] expectedResults
+        )
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatThisProjectDirectlyDependsOn(projectId);
+            var projectIds = projectDependencyGraph.GetProjectsThatThisProjectDirectlyDependsOn(
+                projectId
+            );
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
-            Assert.Equal<string>(
-                expectedResults.OrderBy(n => n),
-                actualResults.OrderBy(n => n));
+            Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
         }
 
-        private static void VerifyTransitiveReferences(Solution solution, string project, string[] expectedResults)
+        private static void VerifyTransitiveReferences(
+            Solution solution,
+            string project,
+            string[] expectedResults
+        )
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             VerifyTransitiveReferences(solution, projectDependencyGraph, project, expectedResults);
         }
 
-        private static void VerifyTransitiveReferences(Solution solution, ProjectDependencyGraph projectDependencyGraph, string project, string[] expectedResults)
+        private static void VerifyTransitiveReferences(
+            Solution solution,
+            ProjectDependencyGraph projectDependencyGraph,
+            string project,
+            string[] expectedResults
+        )
         {
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(projectId);
+            var projectIds = projectDependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(
+                projectId
+            );
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
-            Assert.Equal<string>(
-                expectedResults.OrderBy(n => n),
-                actualResults.OrderBy(n => n));
+            Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
         }
 
         #endregion
@@ -314,8 +380,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
 
             VerifyDirectReverseReferences(solution, "B", new string[] { "A" });
 
-            solution = solution.WithProjectReferences(solution.GetProjectsByName("A").Single().Id,
-                Enumerable.Empty<ProjectReference>());
+            solution = solution.WithProjectReferences(
+                solution.GetProjectsByName("A").Single().Id,
+                Enumerable.Empty<ProjectReference>()
+            );
 
             VerifyDirectReferences(solution, "A", new string[] { });
             VerifyDirectReverseReferences(solution, "B", new string[] { });
@@ -326,11 +394,31 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
         public void TestGetProjectsThatTransitivelyDependOnThisProject()
         {
-            VerifyReverseTransitiveReferences(CreateSolutionFromReferenceMap("A"), "A", new string[] { });
-            VerifyReverseTransitiveReferences(CreateSolutionFromReferenceMap("B:A A"), "A", new string[] { "B" });
-            VerifyReverseTransitiveReferences(CreateSolutionFromReferenceMap("C:B B:A A"), "A", new string[] { "B", "C" });
-            VerifyReverseTransitiveReferences(CreateSolutionFromReferenceMap("C:B B:A A"), "C", new string[] { });
-            VerifyReverseTransitiveReferences(CreateSolutionFromReferenceMap("D:C,B B:A C A"), "A", new string[] { "D", "B" });
+            VerifyReverseTransitiveReferences(
+                CreateSolutionFromReferenceMap("A"),
+                "A",
+                new string[] { }
+            );
+            VerifyReverseTransitiveReferences(
+                CreateSolutionFromReferenceMap("B:A A"),
+                "A",
+                new string[] { "B" }
+            );
+            VerifyReverseTransitiveReferences(
+                CreateSolutionFromReferenceMap("C:B B:A A"),
+                "A",
+                new string[] { "B", "C" }
+            );
+            VerifyReverseTransitiveReferences(
+                CreateSolutionFromReferenceMap("C:B B:A A"),
+                "C",
+                new string[] { }
+            );
+            VerifyReverseTransitiveReferences(
+                CreateSolutionFromReferenceMap("D:C,B B:A C A"),
+                "A",
+                new string[] { "D", "B" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -338,8 +426,13 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var solution = CreateSolutionFromReferenceMap("");
 
-            Assert.Throws<ArgumentNullException>("projectId",
-                () => solution.GetProjectDependencyGraph().GetProjectsThatTransitivelyDependOnThisProject(null!));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () =>
+                    solution
+                        .GetProjectDependencyGraph()
+                        .GetProjectsThatTransitivelyDependOnThisProject(null!)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -394,8 +487,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyReverseTransitiveReferences(solution, "C", new string[] { });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "C" });
 
-            solution = solution.WithProjectReferences(solution.GetProjectsByName("C").Single().Id,
-                SpecializedCollections.EmptyEnumerable<ProjectReference>());
+            solution = solution.WithProjectReferences(
+                solution.GetProjectsByName("C").Single().Id,
+                SpecializedCollections.EmptyEnumerable<ProjectReference>()
+            );
 
             VerifyReverseTransitiveReferences(solution, "B", new string[] { "A" });
         }
@@ -506,7 +601,9 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var a = solution.GetProjectsByName("A").Single();
             var b = solution.GetProjectsByName("B").Single();
             var d = solution.GetProjectsByName("D").Single();
-            var expected = solution.State.GetProjectDependencyGraph().GetProjectsThatTransitivelyDependOnThisProject(d.Id);
+            var expected = solution.State
+                .GetProjectDependencyGraph()
+                .GetProjectsThatTransitivelyDependOnThisProject(d.Id);
 
             var aToB = a.ProjectReferences.Single(reference => reference.ProjectId == b.Id);
             solution = solution.RemoveProjectReference(a.Id, aToB);
@@ -514,7 +611,13 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject returns a
             // non-null set. Specifically, it returns the _same_ set that was computed prior to the project reference
             // removal.
-            Assert.Same(expected, solution.State.GetProjectDependencyGraph().GetTestAccessor().TryGetProjectsThatTransitivelyDependOnThisProject(d.Id));
+            Assert.Same(
+                expected,
+                solution.State
+                    .GetProjectDependencyGraph()
+                    .GetTestAccessor()
+                    .TryGetProjectsThatTransitivelyDependOnThisProject(d.Id)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -534,7 +637,9 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var a = solution.GetProjectsByName("A").Single();
             var b = solution.GetProjectsByName("B").Single();
             var e = solution.GetProjectsByName("E").Single();
-            var expected = solution.State.GetProjectDependencyGraph().GetProjectsThatTransitivelyDependOnThisProject(e.Id);
+            var expected = solution.State
+                .GetProjectDependencyGraph()
+                .GetProjectsThatTransitivelyDependOnThisProject(e.Id);
 
             var aToB = a.ProjectReferences.Single(reference => reference.ProjectId == b.Id);
             solution = solution.RemoveProjectReference(a.Id, aToB);
@@ -542,7 +647,13 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject returns a
             // non-null set. Specifically, it returns the _same_ set that was computed prior to the project reference
             // removal.
-            Assert.Same(expected, solution.State.GetProjectDependencyGraph().GetTestAccessor().TryGetProjectsThatTransitivelyDependOnThisProject(e.Id));
+            Assert.Same(
+                expected,
+                solution.State
+                    .GetProjectDependencyGraph()
+                    .GetTestAccessor()
+                    .TryGetProjectsThatTransitivelyDependOnThisProject(e.Id)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -563,7 +674,9 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var a = solution.GetProjectsByName("A").Single();
             var b = solution.GetProjectsByName("B").Single();
             var c = solution.GetProjectsByName("C").Single();
-            var notExpected = solution.State.GetProjectDependencyGraph().GetProjectsThatTransitivelyDependOnThisProject(c.Id);
+            var notExpected = solution.State
+                .GetProjectDependencyGraph()
+                .GetProjectsThatTransitivelyDependOnThisProject(c.Id);
             Assert.NotNull(notExpected);
 
             var aToB = a.ProjectReferences.Single(reference => reference.ProjectId == b.Id);
@@ -571,7 +684,12 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
 
             // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject returns a
             // null set.
-            Assert.Null(solution.State.GetProjectDependencyGraph().GetTestAccessor().TryGetProjectsThatTransitivelyDependOnThisProject(c.Id));
+            Assert.Null(
+                solution.State
+                    .GetProjectDependencyGraph()
+                    .GetTestAccessor()
+                    .TryGetProjectsThatTransitivelyDependOnThisProject(c.Id)
+            );
             VerifyReverseTransitiveReferences(solution, "C", new string[] { "B" });
         }
 
@@ -620,7 +738,9 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Assert.Same(dependencyGraph, solution.State.GetProjectDependencyGraph());
 
             b = solution.GetProjectsByName("B").Single();
-            var remainingBToC = b.ProjectReferences.Single(reference => reference.ProjectId == c.Id);
+            var remainingBToC = b.ProjectReferences.Single(
+                reference => reference.ProjectId == c.Id
+            );
             solution = solution.RemoveProjectReference(b.Id, remainingBToC);
             Assert.NotSame(dependencyGraph, solution.State.GetProjectDependencyGraph());
 
@@ -645,29 +765,37 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "C" });
         }
 
-        private static void VerifyDirectReverseReferences(Solution solution, string project, string[] expectedResults)
+        private static void VerifyDirectReverseReferences(
+            Solution solution,
+            string project,
+            string[] expectedResults
+        )
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatDirectlyDependOnThisProject(projectId);
+            var projectIds = projectDependencyGraph.GetProjectsThatDirectlyDependOnThisProject(
+                projectId
+            );
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
-            Assert.Equal<string>(
-                expectedResults.OrderBy(n => n),
-                actualResults.OrderBy(n => n));
+            Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
         }
 
-        private static void VerifyReverseTransitiveReferences(Solution solution, string project, string[] expectedResults)
+        private static void VerifyReverseTransitiveReferences(
+            Solution solution,
+            string project,
+            string[] expectedResults
+        )
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(projectId);
+            var projectIds = projectDependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(
+                projectId
+            );
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
 
-            Assert.Equal<string>(
-                expectedResults.OrderBy(n => n),
-                actualResults.OrderBy(n => n));
+            Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
         }
 
         #endregion
@@ -713,32 +841,55 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         private static Solution AddProject(Solution solution, string projectName)
         {
             var projectId = ProjectId.CreateNewId(debugName: projectName);
-            return solution.AddProject(ProjectInfo.Create(projectId, VersionStamp.Create(), projectName, projectName, LanguageNames.CSharp, projectName));
+            return solution.AddProject(
+                ProjectInfo.Create(
+                    projectId,
+                    VersionStamp.Create(),
+                    projectName,
+                    projectName,
+                    LanguageNames.CSharp,
+                    projectName
+                )
+            );
         }
 
-        private static Solution AddProjectReferences(Solution solution, string projectName, IEnumerable<string> projectReferences)
+        private static Solution AddProjectReferences(
+            Solution solution,
+            string projectName,
+            IEnumerable<string> projectReferences
+        )
         {
             var referencesByTargetProject = new Dictionary<string, List<ProjectReference>>();
             foreach (var targetProject in projectReferences)
             {
-                var references = referencesByTargetProject.GetOrAdd(targetProject, _ => new List<ProjectReference>());
+                var references = referencesByTargetProject.GetOrAdd(
+                    targetProject,
+                    _ => new List<ProjectReference>()
+                );
                 if (references.Count == 0)
                 {
-                    references.Add(new ProjectReference(solution.GetProjectsByName(targetProject).Single().Id));
+                    references.Add(
+                        new ProjectReference(solution.GetProjectsByName(targetProject).Single().Id)
+                    );
                 }
                 else
                 {
-                    references.Add(new ProjectReference(solution.GetProjectsByName(targetProject).Single().Id, ImmutableArray.Create($"alias{references.Count}")));
+                    references.Add(
+                        new ProjectReference(
+                            solution.GetProjectsByName(targetProject).Single().Id,
+                            ImmutableArray.Create($"alias{references.Count}")
+                        )
+                    );
                 }
             }
 
             return solution.AddProjectReferences(
                 solution.GetProjectsByName(projectName).Single().Id,
-                referencesByTargetProject.SelectMany(pair => pair.Value));
+                referencesByTargetProject.SelectMany(pair => pair.Value)
+            );
         }
 
-        private static Solution CreateSolution()
-            => new AdhocWorkspace().CurrentSolution;
+        private static Solution CreateSolution() => new AdhocWorkspace().CurrentSolution;
 
         #endregion
     }

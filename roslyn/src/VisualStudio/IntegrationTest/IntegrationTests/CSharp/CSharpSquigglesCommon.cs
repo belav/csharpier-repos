@@ -15,14 +15,19 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     {
         protected sealed class DesktopServiceHubHostOnly : ExecutionCondition
         {
-            public override bool ShouldSkip => string.Equals(Environment.GetEnvironmentVariable("ROSLYN_OOPCORECLR"), "true", StringComparison.OrdinalIgnoreCase);
+            public override bool ShouldSkip =>
+                string.Equals(
+                    Environment.GetEnvironmentVariable("ROSLYN_OOPCORECLR"),
+                    "true",
+                    StringComparison.OrdinalIgnoreCase
+                );
             public override string SkipReason => "https://github.com/dotnet/roslyn/issues/57395";
         }
 
-        protected CSharpSquigglesCommon(VisualStudioInstanceFactory instanceFactory, string projectTemplate)
-            : base(instanceFactory, nameof(CSharpSquigglesCommon), projectTemplate)
-        {
-        }
+        protected CSharpSquigglesCommon(
+            VisualStudioInstanceFactory instanceFactory,
+            string projectTemplate
+        ) : base(instanceFactory, nameof(CSharpSquigglesCommon), projectTemplate) { }
 
         protected abstract bool SupportsGlobalUsings { get; }
 
@@ -30,7 +35,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
         public virtual void VerifySyntaxErrorSquiggles()
         {
-            VisualStudio.Editor.SetText(@"using System;
+            VisualStudio.Editor.SetText(
+                @"using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -48,27 +54,33 @@ namespace ConsoleApplication1
         private static void Sub()
         {
     }
-}");
+}"
+            );
 
-            var usingsErrorTags = SupportsGlobalUsings ? "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;\\r\\nusing System.Collections.Generic;\\r\\nusing System.Text;'[0-68]"
+            var usingsErrorTags = SupportsGlobalUsings
+                ? "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;\\r\\nusing System.Collections.Generic;\\r\\nusing System.Text;'[0-68]"
                 : "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System.Collections.Generic;\\r\\nusing System.Text;'[15-68]";
 
             VisualStudio.Editor.Verify.ErrorTags(
-              usingsErrorTags,
-              "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
-              "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]");
+                usingsErrorTags,
+                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
+                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]"
+            );
         }
 
         public virtual void VerifySemanticErrorSquiggles()
         {
-            VisualStudio.Editor.SetText(@"using System;
+            VisualStudio.Editor.SetText(
+                @"using System;
 
 class C  : Bar
 {
-}");
+}"
+            );
             VisualStudio.Editor.Verify.ErrorTags(
                 "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;'[0-13]",
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[28-31]");
+                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[28-31]"
+            );
         }
     }
 }

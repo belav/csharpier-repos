@@ -13,22 +13,31 @@ namespace AutoMapper.IntegrationTests.Net4
     {
         TrainingCourseDto _course;
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Category, CategoryDto>();
-            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().ForMember(c => c.Content, o => o.ExplicitExpansion());
-            cfg.CreateProjection<TrainingContent, TrainingContentDto>().ForMember(c => c.Category, o => o.ExplicitExpansion());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Category, CategoryDto>();
+                    cfg.CreateProjection<TrainingCourse, TrainingCourseDto>()
+                        .ForMember(c => c.Content, o => o.ExplicitExpansion());
+                    cfg.CreateProjection<TrainingContent, TrainingContentDto>()
+                        .ForMember(c => c.Category, o => o.ExplicitExpansion());
+                }
+            );
 
         protected override void Because_of()
         {
             using (var context = new ClientContext())
             {
                 context.Database.Log = s => Trace.WriteLine(s);
-                _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
+                _course = ProjectTo<TrainingCourseDto>(
+                        context.TrainingCourses,
+                        null,
+                        c => c.Content.Select(co => co.Category)
+                    )
+                    .FirstOrDefault(n => n.CourseName == "Course 1");
             }
         }
-
 
         [Fact]
         public void Should_expand_collections_items()
@@ -43,7 +52,11 @@ namespace AutoMapper.IntegrationTests.Net4
                 var category = new Category { CategoryName = "Category 1" };
                 var course = new TrainingCourse { CourseName = "Course 1" };
                 context.TrainingCourses.Add(course);
-                var content = new TrainingContent { ContentName = "Content 1", Category = category };
+                var content = new TrainingContent
+                {
+                    ContentName = "Content 1",
+                    Category = category
+                };
                 context.TrainingContents.Add(content);
                 course.Content.Add(content);
             }
@@ -55,6 +68,7 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 Database.SetInitializer(new Initializer());
             }
+
             public DbSet<Category> Categories { get; set; }
             public DbSet<TrainingCourse> TrainingCourses { get; set; }
             public DbSet<TrainingContent> TrainingContents { get; set; }
@@ -67,7 +81,8 @@ namespace AutoMapper.IntegrationTests.Net4
 
             public string CourseName { get; set; }
 
-            public virtual IList<TrainingContent> Content { get; set; } = new List<TrainingContent>();
+            public virtual IList<TrainingContent> Content { get; set; } =
+                new List<TrainingContent>();
         }
 
         public class TrainingContent
@@ -85,7 +100,6 @@ namespace AutoMapper.IntegrationTests.Net4
             public int CategoryId { get; set; }
             public string CategoryName { get; set; }
         }
-
 
         public class TrainingCourseDto
         {

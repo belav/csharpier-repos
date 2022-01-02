@@ -50,9 +50,13 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         private const string FloatText = "123.123";
         private static readonly char[] FloatChars = FloatText.ToCharArray();
 
-        private static readonly Dictionary<string, object> NormalDictionary = new Dictionary<string, object>();
+        private static readonly Dictionary<string, object> NormalDictionary = new Dictionary<
+            string,
+            object
+        >();
 
-        private static readonly ConcurrentDictionary<string, object> ConcurrentDictionary = new ConcurrentDictionary<string, object>();
+        private static readonly ConcurrentDictionary<string, object> ConcurrentDictionary =
+            new ConcurrentDictionary<string, object>();
 
         static LowLevelBenchmarks()
         {
@@ -93,20 +97,35 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         public void DecimalTryParseString()
         {
             decimal value;
-            decimal.TryParse(FloatText, NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture, out value);
+            decimal.TryParse(
+                FloatText,
+                NumberStyles.Number | NumberStyles.AllowExponent,
+                CultureInfo.InvariantCulture,
+                out value
+            );
         }
 
         [Benchmark]
         public void GetMemberWithMemberTypeAndBindingFlags()
         {
-            typeof(LowLevelBenchmarks).GetMember("AName", MemberTypes.Field | MemberTypes.Property, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            typeof(LowLevelBenchmarks).GetMember(
+                "AName",
+                MemberTypes.Field | MemberTypes.Property,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
         }
 
         [Benchmark]
         public void GetPropertyGetField()
         {
-            typeof(LowLevelBenchmarks).GetProperty("AName", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            typeof(LowLevelBenchmarks).GetField("AName", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            typeof(LowLevelBenchmarks).GetProperty(
+                "AName",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
+            typeof(LowLevelBenchmarks).GetField(
+                "AName",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
         }
 
         [Benchmark]
@@ -119,7 +138,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         [Benchmark]
         public void WriteEscapedJavaScriptString()
         {
-            string text = @"The general form of an HTML element is therefore: <tag attribute1=""value1"" attribute2=""value2"">content</tag>.
+            string text =
+                @"The general form of an HTML element is therefore: <tag attribute1=""value1"" attribute2=""value2"">content</tag>.
 Some HTML elements are defined as empty elements and take the form <tag attribute1=""value1"" attribute2=""value2"" >.
 Empty elements may enclose no content, for instance, the BR tag or the inline IMG tag.
 The name of an HTML element is the name used in the tags.
@@ -144,7 +164,16 @@ If attributes are not mentioned, default values are used in each case.
             using (StringWriter w = StringUtils.CreateStringWriter(text.Length))
             {
                 char[] buffer = null;
-                JavaScriptUtils.WriteEscapedJavaScriptString(w, text, '"', true, JavaScriptUtils.DoubleQuoteCharEscapeFlags, StringEscapeHandling.Default, null, ref buffer);
+                JavaScriptUtils.WriteEscapedJavaScriptString(
+                    w,
+                    text,
+                    '"',
+                    true,
+                    JavaScriptUtils.DoubleQuoteCharEscapeFlags,
+                    StringEscapeHandling.Default,
+                    null,
+                    ref buffer
+                );
             }
         }
     }

@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 internal class IntermediateNodeFormatterBase : IntermediateNodeFormatter
 {
     private string _content;
-    private readonly Dictionary<string, string> _properties = new Dictionary<string, string>(StringComparer.Ordinal);
+    private readonly Dictionary<string, string> _properties = new Dictionary<string, string>(
+        StringComparer.Ordinal
+    );
 
     protected FormatterContentMode ContentMode { get; set; }
 
@@ -100,7 +102,10 @@ internal class IntermediateNodeFormatterBase : IntermediateNodeFormatter
 
     private void EndNode(IntermediateNode node)
     {
-        if (_content != null && (_properties.Count == 0 || ContentMode == FormatterContentMode.PreferContent))
+        if (
+            _content != null
+            && (_properties.Count == 0 || ContentMode == FormatterContentMode.PreferContent)
+        )
         {
             Writer.Write(" ");
             Writer.Write("\"");
@@ -108,11 +113,16 @@ internal class IntermediateNodeFormatterBase : IntermediateNodeFormatter
             Writer.Write("\"");
         }
 
-        if (_properties.Count > 0 && (_content == null || ContentMode == FormatterContentMode.PreferProperties))
+        if (
+            _properties.Count > 0
+            && (_content == null || ContentMode == FormatterContentMode.PreferProperties)
+        )
         {
             Writer.Write(" ");
             Writer.Write("{ ");
-            Writer.Write(string.Join(", ", _properties.Select(kvp => $"{kvp.Key}: \"{kvp.Value}\"")));
+            Writer.Write(
+                string.Join(", ", _properties.Select(kvp => $"{kvp.Key}: \"{kvp.Value}\""))
+            );
             Writer.Write(" }");
         }
 
@@ -123,10 +133,9 @@ internal class IntermediateNodeFormatterBase : IntermediateNodeFormatter
     private StringSegment GetShortName(IntermediateNode node)
     {
         var typeName = node.GetType().Name;
-        return
-            typeName.EndsWith(nameof(IntermediateNode), StringComparison.Ordinal) ?
-            new StringSegment(typeName, 0, typeName.Length - nameof(IntermediateNode).Length) :
-            typeName;
+        return typeName.EndsWith(nameof(IntermediateNode), StringComparison.Ordinal)
+          ? new StringSegment(typeName, 0, typeName.Length - nameof(IntermediateNode).Length)
+          : typeName;
     }
 
     private string EscapeNewlines(string content)

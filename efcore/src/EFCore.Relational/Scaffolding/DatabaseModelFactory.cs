@@ -31,7 +31,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <param name="connectionString">The connection string for the database to reverse engineer.</param>
         /// <param name="options">The options specifying which metadata to read.</param>
         /// <returns>The database model.</returns>
-        public abstract DatabaseModel Create(string connectionString, DatabaseModelFactoryOptions options);
+        public abstract DatabaseModel Create(
+            string connectionString,
+            DatabaseModelFactoryOptions options
+        );
 
         /// <summary>
         ///     Connects to the database using the given connection and creates a <see cref="DatabaseModel" />
@@ -40,6 +43,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <param name="connection">The connection to the database to reverse engineer.</param>
         /// <param name="options">The options specifying which metadata to read.</param>
         /// <returns>The database model.</returns>
-        public abstract DatabaseModel Create(DbConnection connection, DatabaseModelFactoryOptions options);
+        public abstract DatabaseModel Create(
+            DbConnection connection,
+            DatabaseModelFactoryOptions options
+        );
     }
 }

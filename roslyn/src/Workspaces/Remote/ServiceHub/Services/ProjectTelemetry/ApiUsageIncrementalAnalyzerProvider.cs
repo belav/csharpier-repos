@@ -24,14 +24,18 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
     /// Creates an <see cref="IIncrementalAnalyzer"/> that collects Api usage information from metadata references
     /// in current solution.
     /// </summary>
-    [ExportIncrementalAnalyzerProvider(nameof(ApiUsageIncrementalAnalyzerProvider), new[] { WorkspaceKind.RemoteWorkspace }), Shared]
+    [
+        ExportIncrementalAnalyzerProvider(
+            nameof(ApiUsageIncrementalAnalyzerProvider),
+            new[] { WorkspaceKind.RemoteWorkspace }
+        ),
+        Shared
+    ]
     internal sealed class ApiUsageIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ApiUsageIncrementalAnalyzerProvider()
-        {
-        }
+        public ApiUsageIncrementalAnalyzerProvider() { }
 
         public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
         {
@@ -66,7 +70,12 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                 return Task.CompletedTask;
             }
 
-            public async Task AnalyzeProjectAsync(Project project, bool semanticsChanged, InvocationReasons reasons, CancellationToken cancellationToken)
+            public async Task AnalyzeProjectAsync(
+                Project project,
+                bool semanticsChanged,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            )
             {
                 var telemetryService = _services.GetRequiredService<IWorkspaceTelemetryService>();
                 if (!telemetryService.HasActiveSession)
@@ -82,8 +91,10 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                     // this telemetry will only let us know which API ever used, this doesn't care how often/many times an API
                     // used. and this data is approximation not precise information. and we don't care much on how many times
                     // APIs used in the same solution. we are rather more interested in number of solutions or users APIs are used.
-                    if (reasons.Contains(PredefinedInvocationReasons.DocumentAdded) ||
-                        !_reported.Add(project.Id))
+                    if (
+                        reasons.Contains(PredefinedInvocationReasons.DocumentAdded)
+                        || !_reported.Add(project.Id)
+                    )
                     {
                         return;
                     }
@@ -91,16 +102,23 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
 
                 // if this project has cross language p2p references, then pass in solution, otherwise, don't give in
                 // solution since checking whether symbol is cross language symbol or not is expansive and
-                // we know that population of solution with both C# and VB are very tiny. 
+                // we know that population of solution with both C# and VB are very tiny.
                 // so no reason to pay the cost for common cases.
-                var crossLanguageSolutionOpt =
-                    project.ProjectReferences.Any(p => project.Solution.GetProject(p.ProjectId)?.Language != project.Language) ? project.Solution : null;
+                var crossLanguageSolutionOpt = project.ProjectReferences.Any(
+                    p => project.Solution.GetProject(p.ProjectId)?.Language != project.Language
+                )
+                    ? project.Solution
+                    : null;
 
                 var metadataSymbolUsed = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
                 foreach (var document in project.Documents)
                 {
-                    var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-                    var model = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                    var root = await document
+                        .GetSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var model = await document
+                        .GetSemanticModelAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                     foreach (var operation in GetOperations(model, cancellationToken))
                     {
@@ -113,9 +131,14 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                         }
 
                         // this only gather reference and method call symbols but not type being used.
-                        // if we want all types from metadata used, we need to add more cases 
+                        // if we want all types from metadata used, we need to add more cases
                         // which will make things more expansive.
-                        CollectApisUsed(operation, crossLanguageSolutionOpt, metadataSymbolUsed, cancellationToken);
+                        CollectApisUsed(
+                            operation,
+                            crossLanguageSolutionOpt,
+                            metadataSymbolUsed,
+                            cancellationToken
+                        );
                     }
                 }
 
@@ -128,24 +151,47 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
 
                 // local functions
                 static void CollectApisUsed(
-                    IOperation operation, Solution solutionOpt, HashSet<ISymbol> metadataSymbolUsed, CancellationToken cancellationToken)
+                    IOperation operation,
+                    Solution solutionOpt,
+                    HashSet<ISymbol> metadataSymbolUsed,
+                    CancellationToken cancellationToken
+                )
                 {
                     switch (operation)
                     {
                         case IMemberReferenceOperation memberOperation:
-                            AddIfMetadataSymbol(solutionOpt, memberOperation.Member, metadataSymbolUsed, cancellationToken);
+                            AddIfMetadataSymbol(
+                                solutionOpt,
+                                memberOperation.Member,
+                                metadataSymbolUsed,
+                                cancellationToken
+                            );
                             break;
                         case IInvocationOperation invocationOperation:
-                            AddIfMetadataSymbol(solutionOpt, invocationOperation.TargetMethod, metadataSymbolUsed, cancellationToken);
+                            AddIfMetadataSymbol(
+                                solutionOpt,
+                                invocationOperation.TargetMethod,
+                                metadataSymbolUsed,
+                                cancellationToken
+                            );
                             break;
                         case IObjectCreationOperation objectCreation:
-                            AddIfMetadataSymbol(solutionOpt, objectCreation.Constructor, metadataSymbolUsed, cancellationToken);
+                            AddIfMetadataSymbol(
+                                solutionOpt,
+                                objectCreation.Constructor,
+                                metadataSymbolUsed,
+                                cancellationToken
+                            );
                             break;
                     }
                 }
 
                 static void AddIfMetadataSymbol(
-                    Solution solutionOpt, ISymbol symbol, HashSet<ISymbol> metadataSymbolUsed, CancellationToken cancellationToken)
+                    Solution solutionOpt,
+                    ISymbol symbol,
+                    HashSet<ISymbol> metadataSymbolUsed,
+                    CancellationToken cancellationToken
+                )
                 {
                     // get symbol as it is defined in metadata
                     symbol = symbol.OriginalDefinition;
@@ -155,22 +201,32 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                         return;
                     }
 
-                    if (symbol.Locations.All(l => l.Kind == LocationKind.MetadataFile) &&
-                        solutionOpt?.GetProject(symbol.ContainingAssembly, cancellationToken) == null)
+                    if (
+                        symbol.Locations.All(l => l.Kind == LocationKind.MetadataFile)
+                        && solutionOpt?.GetProject(symbol.ContainingAssembly, cancellationToken)
+                            == null
+                    )
                     {
                         metadataSymbolUsed.Add(symbol);
                     }
                 }
 
-                static IEnumerable<IOperation> GetOperations(SemanticModel model, CancellationToken cancellationToken)
+                static IEnumerable<IOperation> GetOperations(
+                    SemanticModel model,
+                    CancellationToken cancellationToken
+                )
                 {
                     // root is already there
                     var root = model.SyntaxTree.GetRoot(cancellationToken);
 
                     // go through all nodes until we find first node that has IOperation
-                    foreach (var rootOperation in root.DescendantNodes(n => model.GetOperation(n, cancellationToken) == null)
-                                                     .Select(n => model.GetOperation(n, cancellationToken))
-                                                     .Where(o => o != null))
+                    foreach (
+                        var rootOperation in root.DescendantNodes(
+                                n => model.GetOperation(n, cancellationToken) == null
+                            )
+                            .Select(n => model.GetOperation(n, cancellationToken))
+                            .Where(o => o != null)
+                    )
                     {
                         foreach (var operation in rootOperation.DescendantsAndSelf())
                         {
@@ -180,29 +236,44 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                 }
             }
 
-            public Task AnalyzeSyntaxAsync(Document document, InvocationReasons reasons, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task AnalyzeSyntaxAsync(
+                Document document,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            ) => Task.CompletedTask;
 
-            public Task DocumentOpenAsync(Document document, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task DocumentOpenAsync(Document document, CancellationToken cancellationToken) =>
+                Task.CompletedTask;
 
-            public Task DocumentCloseAsync(Document document, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task DocumentCloseAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => Task.CompletedTask;
 
-            public Task DocumentResetAsync(Document document, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task DocumentResetAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => Task.CompletedTask;
 
-            public Task AnalyzeDocumentAsync(Document document, SyntaxNode bodyOpt, InvocationReasons reasons, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task AnalyzeDocumentAsync(
+                Document document,
+                SyntaxNode bodyOpt,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            ) => Task.CompletedTask;
 
-            public bool NeedsReanalysisOnOptionChanged(object sender, OptionChangedEventArgs e)
-                => false;
+            public bool NeedsReanalysisOnOptionChanged(object sender, OptionChangedEventArgs e) =>
+                false;
 
-            public Task NewSolutionSnapshotAsync(Solution solution, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task NewSolutionSnapshotAsync(
+                Solution solution,
+                CancellationToken cancellationToken
+            ) => Task.CompletedTask;
 
-            public Task RemoveDocumentAsync(DocumentId documentId, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task RemoveDocumentAsync(
+                DocumentId documentId,
+                CancellationToken cancellationToken
+            ) => Task.CompletedTask;
         }
     }
 }

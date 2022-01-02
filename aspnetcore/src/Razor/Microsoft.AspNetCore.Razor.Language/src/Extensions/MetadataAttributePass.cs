@@ -20,7 +20,10 @@ internal class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizat
         _identifierFeature = Engine.GetFeature<IMetadataIdentifierFeature>();
     }
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         if (documentNode.Options == null || documentNode.Options.SuppressMetadataAttributes)
         {
@@ -28,7 +31,13 @@ internal class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizat
             return;
         }
 
-        if (string.Equals(documentNode.DocumentKind, ComponentDocumentClassifierPass.ComponentDocumentKind, StringComparison.Ordinal))
+        if (
+            string.Equals(
+                documentNode.DocumentKind,
+                ComponentDocumentClassifierPass.ComponentDocumentKind,
+                StringComparison.Ordinal
+            )
+        )
         {
             // Metadata attributes are not used for components.
             return;
@@ -66,12 +75,15 @@ internal class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizat
         }
 
         // [RazorCompiledItem] is an [assembly: ... ] attribute, so it needs to be applied at the global scope.
-        documentNode.Children.Insert(0, new RazorCompiledItemAttributeIntermediateNode()
-        {
-            TypeName = @namespace.Content + "." + @class.ClassName,
-            Kind = documentNode.DocumentKind,
-            Identifier = identifier,
-        });
+        documentNode.Children.Insert(
+            0,
+            new RazorCompiledItemAttributeIntermediateNode()
+            {
+                TypeName = @namespace.Content + "." + @class.ClassName,
+                Kind = documentNode.DocumentKind,
+                Identifier = identifier,
+            }
+        );
 
         // Now we need to add a [RazorSourceChecksum] for the source and for each import
         // these are class attributes, so we need to find the insertion point to put them
@@ -107,12 +119,15 @@ internal class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizat
             return;
         }
 
-        @namespace.Children.Insert((int)insert++, new RazorSourceChecksumAttributeIntermediateNode()
-        {
-            Checksum = checksum,
-            ChecksumAlgorithm = checksumAlgorithm,
-            Identifier = identifier,
-        });
+        @namespace.Children.Insert(
+            (int)insert++,
+            new RazorSourceChecksumAttributeIntermediateNode()
+            {
+                Checksum = checksum,
+                ChecksumAlgorithm = checksumAlgorithm,
+                Identifier = identifier,
+            }
+        );
 
         // Now process the checksums of the imports
         Debug.Assert(_identifierFeature != null);
@@ -124,18 +139,26 @@ internal class MetadataAttributePass : IntermediateNodePassBase, IRazorOptimizat
             checksumAlgorithm = import.GetChecksumAlgorithm();
             identifier = _identifierFeature.GetIdentifier(codeDocument, import);
 
-            if (checksum == null || checksum.Length == 0 || checksumAlgorithm == null || identifier == null)
+            if (
+                checksum == null
+                || checksum.Length == 0
+                || checksumAlgorithm == null
+                || identifier == null
+            )
             {
                 // It's ok to skip an import if we don't have all of the required information.
                 continue;
             }
 
-            @namespace.Children.Insert((int)insert++, new RazorSourceChecksumAttributeIntermediateNode()
-            {
-                Checksum = checksum,
-                ChecksumAlgorithm = checksumAlgorithm,
-                Identifier = identifier,
-            });
+            @namespace.Children.Insert(
+                (int)insert++,
+                new RazorSourceChecksumAttributeIntermediateNode()
+                {
+                    Checksum = checksum,
+                    ChecksumAlgorithm = checksumAlgorithm,
+                    Identifier = identifier,
+                }
+            );
         }
     }
 }

@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConstructorIni
 {
     using Verify = CSharpCodeFixVerifier<
         ConstructorInitializerPlacementDiagnosticAnalyzer,
-        ConstructorInitializerPlacementCodeFixProvider>;
+        ConstructorInitializerPlacementCodeFixProvider
+    >;
 
     public class ConstructorInitializerPlacementTests
     {
@@ -21,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConstructorIni
         public async Task TestNotWithOptionOff()
         {
             var code =
-@"
+                @"
 class C
 {
     public C() :
@@ -34,7 +35,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -42,7 +49,7 @@ class C
         public async Task TestSimpleCase()
         {
             var code =
-@"
+                @"
 class C
 {
     public C() [|:|]
@@ -52,7 +59,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public C()
@@ -65,7 +72,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -73,7 +86,7 @@ class C
         public async Task TestNotOnSameLine1()
         {
             var code =
-@"
+                @"
 class C
 {
     public C() : base()
@@ -85,7 +98,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -93,7 +112,7 @@ class C
         public async Task TestNotOnSameLine2()
         {
             var code =
-@"
+                @"
 class C
 {
     public C()
@@ -106,7 +125,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -114,7 +139,7 @@ class C
         public async Task TestNotWithColonTrailingComment()
         {
             var code =
-@"
+                @"
 class C
 {
     public C() : //comment
@@ -127,7 +152,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -135,7 +166,7 @@ class C
         public async Task TestWithCloseParenTrailingComment1()
         {
             var code =
-@"
+                @"
 class C
 {
     public C() /*comment*/ [|:|]
@@ -144,7 +175,7 @@ class C
     }
 }";
             var fixedCode =
-@"
+                @"
 class C
 {
     public C() /*comment*/ 
@@ -157,7 +188,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -165,7 +202,7 @@ class C
         public async Task TestWithColonLeadingComment1()
         {
             var code =
-@"
+                @"
 class C
 {
     public C()
@@ -176,7 +213,7 @@ class C
     }
 }";
             var fixedCode =
-@"
+                @"
 class C
 {
     public C()
@@ -191,7 +228,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -199,7 +242,7 @@ class C
         public async Task TestWithLeadingComment()
         {
             var code =
-@"
+                @"
 class C
 {
     public C() [|:|]
@@ -209,7 +252,7 @@ class C
     }
 }";
             var fixedCode =
-@"
+                @"
 class C
 {
     public C()
@@ -223,7 +266,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -231,7 +280,7 @@ class C
         public async Task TestWithLeadingDirective()
         {
             var code =
-@"
+                @"
 class C
 {
     public C() :
@@ -246,7 +295,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
     }

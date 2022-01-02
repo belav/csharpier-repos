@@ -15,8 +15,8 @@ namespace System.Xml.Xsl.Qil
     /// </remarks>
     internal class QilBinary : QilNode
     {
-        private QilNode _left, _right;
-
+        private QilNode _left,
+            _right;
 
         //-----------------------------------------------
         // Constructor
@@ -30,7 +30,6 @@ namespace System.Xml.Xsl.Qil
             _left = left;
             _right = right;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
@@ -56,13 +55,17 @@ namespace System.Xml.Xsl.Qil
             {
                 switch (index)
                 {
-                    case 0: _left = value; break;
-                    case 1: _right = value; break;
-                    default: throw new IndexOutOfRangeException();
+                    case 0:
+                        _left = value;
+                        break;
+                    case 1:
+                        _right = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
                 }
             }
         }
-
 
         //-----------------------------------------------
         // QilBinary methods

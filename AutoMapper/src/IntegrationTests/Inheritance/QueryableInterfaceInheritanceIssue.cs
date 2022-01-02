@@ -35,7 +35,13 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.Entities.AddRange(new[] { new QueryableInterfaceImpl { Id = "One" }, new QueryableInterfaceImpl { Id = "Two" }});
+                context.Entities.AddRange(
+                    new[]
+                    {
+                        new QueryableInterfaceImpl { Id = "One" },
+                        new QueryableInterfaceImpl { Id = "Two" }
+                    }
+                );
             }
         }
 
@@ -45,12 +51,13 @@ namespace AutoMapper.IntegrationTests
             {
                 Database.SetInitializer(new Initializer());
             }
+
             public DbSet<QueryableInterfaceImpl> Entities { get; set; }
         }
 
         protected override void Because_of()
         {
-            using(var context = new ClientContext())
+            using (var context = new ClientContext())
             {
                 _result = ProjectTo<QueryableDto>(context.Entities).ToArray();
             }
@@ -63,6 +70,9 @@ namespace AutoMapper.IntegrationTests
             _result.FirstOrDefault(dto => dto.Id == "Two").ShouldNotBeNull();
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<IQueryableInterface, QueryableDto>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg => cfg.CreateProjection<IQueryableInterface, QueryableDto>()
+            );
     }
 }

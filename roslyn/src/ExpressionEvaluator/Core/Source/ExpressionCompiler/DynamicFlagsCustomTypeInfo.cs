@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     internal static class DynamicFlagsCustomTypeInfo
     {
-        internal static ReadOnlyCollection<byte>? ToBytes(ArrayBuilder<bool> dynamicFlags, int startIndex = 0)
+        internal static ReadOnlyCollection<byte>? ToBytes(
+            ArrayBuilder<bool> dynamicFlags,
+            int startIndex = 0
+        )
         {
             RoslynDebug.AssertNotNull(dynamicFlags);
             Debug.Assert(startIndex >= 0);
@@ -44,7 +47,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 }
             }
 
-ALL_FLAGS_READ:
+            ALL_FLAGS_READ:
 
             return seenTrue ? new ReadOnlyCollection<byte>(bytes) : null;
         }
@@ -57,8 +60,7 @@ ALL_FLAGS_READ:
                 return false;
             }
             var b = index / 8;
-            return b < bytes.Count &&
-                (bytes[b] & (1 << (index % 8))) != 0;
+            return b < bytes.Count && (bytes[b] & (1 << (index % 8))) != 0;
         }
 
         /// <remarks>

@@ -30,7 +30,8 @@ namespace Binding
                 {
                     Console.WriteLine($"{aString}");
                     Console.WriteLine($"{anInt}");
-                });
+                }
+            );
 
             await command.InvokeAsync("--an-int 123 --a-string \"Hello world!\" ");
 
@@ -43,13 +44,9 @@ namespace Binding
         {
             #region Bool
 
-            var command = new RootCommand
-            {
-                new Option<bool>("--a-bool")
-            };
+            var command = new RootCommand { new Option<bool>("--a-bool") };
 
-            command.Handler = CommandHandler.Create(
-                (bool aBool) => Console.WriteLine(aBool));
+            command.Handler = CommandHandler.Create((bool aBool) => Console.WriteLine(aBool));
 
             await command.InvokeAsync("");
             await command.InvokeAsync("--a-bool");
@@ -76,10 +73,13 @@ namespace Binding
                 (ParseResult parseResult, IConsole console) =>
                 {
                     console.Out.WriteLine($"{parseResult}");
-                });
+                }
+            );
 
-            await command.InvokeAsync("--an-int 123 --a-string \"Hello world!\" --an-enum compressed");
-            
+            await command.InvokeAsync(
+                "--an-int 123 --a-string \"Hello world!\" --an-enum compressed"
+            );
+
             #endregion
 
             return 0;
@@ -89,13 +89,11 @@ namespace Binding
         {
             #region Enum
 
-            var command = new RootCommand
-            {
-                new Option<System.IO.FileAccess>("--an-enum")
-            };
+            var command = new RootCommand { new Option<System.IO.FileAccess>("--an-enum") };
 
             command.Handler = CommandHandler.Create(
-                (FileAccess anEnum) => Console.WriteLine(anEnum));
+                (FileAccess anEnum) => Console.WriteLine(anEnum)
+            );
 
             await command.InvokeAsync("--an-enum Read");
             await command.InvokeAsync("--an-enum READ");
@@ -109,21 +107,19 @@ namespace Binding
         {
             #region Enumerables
 
-            var command = new RootCommand
-            {
-                new Option<string[]>("--items")
-            };
+            var command = new RootCommand { new Option<string[]>("--items") };
 
             command.Handler = CommandHandler.Create(
-                (IEnumerable<string> items) => 
+                (IEnumerable<string> items) =>
                 {
                     Console.WriteLine(items.GetType());
 
-                    foreach (var item in items) 
+                    foreach (var item in items)
                     {
                         Console.WriteLine(item);
                     }
-                });
+                }
+            );
 
             await command.InvokeAsync("--items one two three");
 
@@ -136,16 +132,14 @@ namespace Binding
         {
             #region FileSystemTypes
 
-            var command = new RootCommand
-            {
-                new Option<FileInfo>("-f").ExistingOnly()
-            };
+            var command = new RootCommand { new Option<FileInfo>("-f").ExistingOnly() };
 
             command.Handler = CommandHandler.Create(
                 (FileSystemInfo f) =>
                 {
                     Console.WriteLine($"{f.GetType()}: {f}");
-                });
+                }
+            );
 
             await command.InvokeAsync("-f /path/to/something");
 
@@ -155,21 +149,22 @@ namespace Binding
         }
 
         #region ComplexTypes
-        
+
         public static async Task<int> ComplexTypes()
         {
             var command = new Command("the-command")
             {
                 new Option<int>("--an-int"),
-                new Option<string>("--a-string") 
+                new Option<string>("--a-string")
             };
 
             command.Handler = CommandHandler.Create(
                 (ComplexType complexType) =>
                 {
                     Console.WriteLine(Format(complexType));
-                });
-            
+                }
+            );
+
             await command.InvokeAsync("--an-int 123 --a-string 456");
 
             return 0;

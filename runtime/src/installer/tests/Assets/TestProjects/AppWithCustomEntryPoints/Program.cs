@@ -8,9 +8,7 @@ namespace AppWithCustomEntryPoints
 {
     public static class Program
     {
-        public static void Main(string[] args)
-        {
-        }
+        public static void Main(string[] args) { }
 
         private static int functionPointerCallCount = 0;
         private static int entryPoint1CallCount = 0;
@@ -19,7 +17,9 @@ namespace AppWithCustomEntryPoints
 
         private static void PrintFunctionPointerCallLog(string name, IntPtr arg, int size)
         {
-            Console.WriteLine($"Called {name}(0x{arg.ToString("x")}, {size}) - function pointer call count: {functionPointerCallCount}");
+            Console.WriteLine(
+                $"Called {name}(0x{arg.ToString("x")}, {size}) - function pointer call count: {functionPointerCallCount}"
+            );
         }
 
         public static int FunctionPointerEntryPoint1(IntPtr arg, int size)

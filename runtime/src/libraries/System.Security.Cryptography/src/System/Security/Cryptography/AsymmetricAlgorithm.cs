@@ -9,11 +9,17 @@ namespace System.Security.Cryptography
     public abstract class AsymmetricAlgorithm : IDisposable
     {
         protected int KeySizeValue;
-        [MaybeNull] protected KeySizes[] LegalKeySizesValue = null!;
+
+        [MaybeNull]
+        protected KeySizes[] LegalKeySizesValue = null!;
 
         protected AsymmetricAlgorithm() { }
 
-        [Obsolete(Obsoletions.DefaultCryptoAlgorithmsMessage, DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.DefaultCryptoAlgorithmsMessage,
+            DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static AsymmetricAlgorithm Create() =>
             throw new PlatformNotSupportedException(SR.Cryptography_DefaultAlgorithm_NotSupported);
 
@@ -23,11 +29,7 @@ namespace System.Security.Cryptography
 
         public virtual int KeySize
         {
-            get
-            {
-                return KeySizeValue;
-            }
-
+            get { return KeySizeValue; }
             set
             {
                 if (!value.IsLegalSize(this.LegalKeySizes))
@@ -48,18 +50,12 @@ namespace System.Security.Cryptography
 
         public virtual string? SignatureAlgorithm
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public virtual string? KeyExchangeAlgorithm
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public virtual void FromXmlString(string xmlString)
@@ -91,7 +87,8 @@ namespace System.Security.Cryptography
         public virtual void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
@@ -99,7 +96,8 @@ namespace System.Security.Cryptography
         public virtual void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
@@ -107,44 +105,62 @@ namespace System.Security.Cryptography
         public virtual void ImportPkcs8PrivateKey(ReadOnlySpan<byte> source, out int bytesRead) =>
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
 
-        public virtual void ImportSubjectPublicKeyInfo(ReadOnlySpan<byte> source, out int bytesRead) =>
-            throw new NotImplementedException(SR.NotSupported_SubclassOverride);
+        public virtual void ImportSubjectPublicKeyInfo(
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        ) => throw new NotImplementedException(SR.NotSupported_SubclassOverride);
 
         public virtual byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             return ExportArray(
                 passwordBytes,
                 pbeParameters,
-                (ReadOnlySpan<byte> span, PbeParameters parameters, Span<byte> destination, out int i) =>
-                    TryExportEncryptedPkcs8PrivateKey(span, parameters, destination, out i));
+                (
+                    ReadOnlySpan<byte> span,
+                    PbeParameters parameters,
+                    Span<byte> destination,
+                    out int i
+                ) => TryExportEncryptedPkcs8PrivateKey(span, parameters, destination, out i)
+            );
         }
 
         public virtual byte[] ExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             return ExportArray(
                 password,
                 pbeParameters,
-                (ReadOnlySpan<char> span, PbeParameters parameters, Span<byte> destination, out int i) =>
-                    TryExportEncryptedPkcs8PrivateKey(span, parameters, destination, out i));
+                (
+                    ReadOnlySpan<char> span,
+                    PbeParameters parameters,
+                    Span<byte> destination,
+                    out int i
+                ) => TryExportEncryptedPkcs8PrivateKey(span, parameters, destination, out i)
+            );
         }
 
         public virtual byte[] ExportPkcs8PrivateKey() =>
             ExportArray(
-                (Span<byte> destination, out int i) => TryExportPkcs8PrivateKey(destination, out i));
+                (Span<byte> destination, out int i) => TryExportPkcs8PrivateKey(destination, out i)
+            );
 
         public virtual byte[] ExportSubjectPublicKeyInfo() =>
             ExportArray(
-                (Span<byte> destination, out int i) => TryExportSubjectPublicKeyInfo(destination, out i));
+                (Span<byte> destination, out int i) =>
+                    TryExportSubjectPublicKeyInfo(destination, out i)
+            );
 
         public virtual bool TryExportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
@@ -153,16 +169,21 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);
         }
 
-        public virtual bool TryExportPkcs8PrivateKey(Span<byte> destination, out int bytesWritten) =>
-            throw new NotImplementedException(SR.NotSupported_SubclassOverride);
+        public virtual bool TryExportPkcs8PrivateKey(
+            Span<byte> destination,
+            out int bytesWritten
+        ) => throw new NotImplementedException(SR.NotSupported_SubclassOverride);
 
-        public virtual bool TryExportSubjectPublicKeyInfo(Span<byte> destination, out int bytesWritten) =>
-            throw new NotImplementedException(SR.NotSupported_SubclassOverride);
+        public virtual bool TryExportSubjectPublicKeyInfo(
+            Span<byte> destination,
+            out int bytesWritten
+        ) => throw new NotImplementedException(SR.NotSupported_SubclassOverride);
 
         /// <summary>
         /// Imports an encrypted RFC 7468 PEM-encoded key, replacing the keys for this object.
@@ -235,7 +256,10 @@ namespace System.Security.Cryptography
         ///   Types that override this method may support additional PEM labels.
         ///   </para>
         /// </remarks>
-        public virtual void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<char> password)
+        public virtual void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<char> password
+        )
         {
             PemKeyHelpers.ImportEncryptedPem<char>(input, password, ImportEncryptedPkcs8PrivateKey);
         }
@@ -312,9 +336,16 @@ namespace System.Security.Cryptography
         ///   Types that override this method may support additional PEM labels.
         ///   </para>
         /// </remarks>
-        public virtual void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<byte> passwordBytes)
+        public virtual void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<byte> passwordBytes
+        )
         {
-            PemKeyHelpers.ImportEncryptedPem<byte>(input, passwordBytes, ImportEncryptedPkcs8PrivateKey);
+            PemKeyHelpers.ImportEncryptedPem<byte>(
+                input,
+                passwordBytes,
+                ImportEncryptedPkcs8PrivateKey
+            );
         }
 
         /// <summary>
@@ -361,21 +392,24 @@ namespace System.Security.Cryptography
         /// </remarks>
         public virtual void ImportFromPem(ReadOnlySpan<char> input)
         {
-            PemKeyHelpers.ImportPem(input, label =>
-            {
-                if (label.SequenceEqual(PemLabels.Pkcs8PrivateKey))
+            PemKeyHelpers.ImportPem(
+                input,
+                label =>
                 {
-                    return ImportPkcs8PrivateKey;
+                    if (label.SequenceEqual(PemLabels.Pkcs8PrivateKey))
+                    {
+                        return ImportPkcs8PrivateKey;
+                    }
+                    else if (label.SequenceEqual(PemLabels.SpkiPublicKey))
+                    {
+                        return ImportSubjectPublicKeyInfo;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else if (label.SequenceEqual(PemLabels.SpkiPublicKey))
-                {
-                    return ImportSubjectPublicKeyInfo;
-                }
-                else
-                {
-                    return null;
-                }
-            });
+            );
         }
 
         /// <summary>
@@ -453,7 +487,10 @@ namespace System.Security.Cryptography
         ///   encoding rules.
         /// </p>
         /// </remarks>
-        public unsafe string ExportEncryptedPkcs8PrivateKeyPem(ReadOnlySpan<char> password, PbeParameters pbeParameters)
+        public unsafe string ExportEncryptedPkcs8PrivateKeyPem(
+            ReadOnlySpan<char> password,
+            PbeParameters pbeParameters
+        )
         {
             byte[] exported = ExportEncryptedPkcs8PrivateKey(password, pbeParameters);
 
@@ -462,7 +499,10 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    return PemKeyHelpers.CreatePemFromData(PemLabels.EncryptedPkcs8PrivateKey, exported);
+                    return PemKeyHelpers.CreatePemFromData(
+                        PemLabels.EncryptedPkcs8PrivateKey,
+                        exported
+                    );
                 }
                 finally
                 {
@@ -538,7 +578,11 @@ namespace System.Security.Cryptography
         /// </remarks>
         public bool TryExportSubjectPublicKeyInfoPem(Span<char> destination, out int charsWritten)
         {
-            static bool Export(AsymmetricAlgorithm alg, Span<byte> destination, out int bytesWritten)
+            static bool Export(
+                AsymmetricAlgorithm alg,
+                Span<byte> destination,
+                out int bytesWritten
+            )
             {
                 return alg.TryExportSubjectPublicKeyInfo(destination, out bytesWritten);
             }
@@ -548,7 +592,8 @@ namespace System.Security.Cryptography
                 PemLabels.SpkiPublicKey,
                 Export,
                 destination,
-                out charsWritten);
+                out charsWritten
+            );
         }
 
         /// <summary>
@@ -587,7 +632,11 @@ namespace System.Security.Cryptography
         /// </remarks>
         public bool TryExportPkcs8PrivateKeyPem(Span<char> destination, out int charsWritten)
         {
-            static bool Export(AsymmetricAlgorithm alg, Span<byte> destination, out int bytesWritten)
+            static bool Export(
+                AsymmetricAlgorithm alg,
+                Span<byte> destination,
+                out int bytesWritten
+            )
             {
                 return alg.TryExportPkcs8PrivateKey(destination, out bytesWritten);
             }
@@ -597,7 +646,8 @@ namespace System.Security.Cryptography
                 PemLabels.Pkcs8PrivateKey,
                 Export,
                 destination,
-                out charsWritten);
+                out charsWritten
+            );
         }
 
         /// <summary>
@@ -646,16 +696,27 @@ namespace System.Security.Cryptography
         ///   encoding rules.
         /// </p>
         /// </remarks>
-        public bool TryExportEncryptedPkcs8PrivateKeyPem(ReadOnlySpan<char> password, PbeParameters pbeParameters, Span<char> destination, out int charsWritten)
+        public bool TryExportEncryptedPkcs8PrivateKeyPem(
+            ReadOnlySpan<char> password,
+            PbeParameters pbeParameters,
+            Span<char> destination,
+            out int charsWritten
+        )
         {
             static bool Export(
                 AsymmetricAlgorithm alg,
                 ReadOnlySpan<char> password,
                 PbeParameters pbeParameters,
                 Span<byte> destination,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
-                return alg.TryExportEncryptedPkcs8PrivateKey(password, pbeParameters, destination, out bytesWritten);
+                return alg.TryExportEncryptedPkcs8PrivateKey(
+                    password,
+                    pbeParameters,
+                    destination,
+                    out bytesWritten
+                );
             }
 
             return PemKeyHelpers.TryExportToEncryptedPem(
@@ -664,21 +725,24 @@ namespace System.Security.Cryptography
                 pbeParameters,
                 Export,
                 destination,
-                out charsWritten);
+                out charsWritten
+            );
         }
 
         private delegate bool TryExportPbe<T>(
             ReadOnlySpan<T> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten);
+            out int bytesWritten
+        );
 
         private delegate bool TryExport(Span<byte> destination, out int bytesWritten);
 
         private static unsafe byte[] ExportArray<T>(
             ReadOnlySpan<T> password,
             PbeParameters pbeParameters,
-            TryExportPbe<T> exporter)
+            TryExportPbe<T> exporter
+        )
         {
             int bufSize = 4096;
 

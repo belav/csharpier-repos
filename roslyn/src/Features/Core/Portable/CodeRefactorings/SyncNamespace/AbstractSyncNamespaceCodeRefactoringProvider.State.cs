@@ -20,8 +20,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 {
-    internal abstract partial class AbstractSyncNamespaceCodeRefactoringProvider<TNamespaceDeclarationSyntax, TCompilationUnitSyntax, TMemberDeclarationSyntax>
-        : CodeRefactoringProvider
+    internal abstract partial class AbstractSyncNamespaceCodeRefactoringProvider<
+        TNamespaceDeclarationSyntax,
+        TCompilationUnitSyntax,
+        TMemberDeclarationSyntax
+    > : CodeRefactoringProvider
         where TNamespaceDeclarationSyntax : SyntaxNode
         where TCompilationUnitSyntax : SyntaxNode
         where TMemberDeclarationSyntax : SyntaxNode
@@ -57,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 Document document,
                 SyntaxNode container,
                 string targetNamespace,
-                string relativeDeclaredNamespace)
+                string relativeDeclaredNamespace
+            )
             {
                 Document = document;
                 Container = container;
@@ -66,15 +70,20 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
             }
 
             public static async Task<State> CreateAsync(
-                AbstractSyncNamespaceCodeRefactoringProvider<TNamespaceDeclarationSyntax, TCompilationUnitSyntax, TMemberDeclarationSyntax> provider,
+                AbstractSyncNamespaceCodeRefactoringProvider<
+                    TNamespaceDeclarationSyntax,
+                    TCompilationUnitSyntax,
+                    TMemberDeclarationSyntax
+                > provider,
                 Document document,
                 TextSpan textSpan,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                // User must put cursor on one of the nodes described below to trigger the refactoring. 
-                // For each scenario, all requirements must be met. Some of them are checked by `TryGetApplicableInvocationNodeAsync`, 
+                // User must put cursor on one of the nodes described below to trigger the refactoring.
+                // For each scenario, all requirements must be met. Some of them are checked by `TryGetApplicableInvocationNodeAsync`,
                 // rest by `IChangeNamespaceService.CanChangeNamespaceAsync`.
-                // 
+                //
                 // - A namespace declaration node that is the only namespace declaration in the document and all types are declared in it:
                 //    1. No nested namespace declarations (even it's empty).
                 //    2. The cursor is on the name of the namespace declaration.
@@ -87,14 +96,18 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 //    2. No partial type declared in the document. Otherwise its multiple declaration will
                 //       end up in different namespace.
 
-                var applicableNode = await provider.TryGetApplicableInvocationNodeAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+                var applicableNode = await provider
+                    .TryGetApplicableInvocationNodeAsync(document, textSpan, cancellationToken)
+                    .ConfigureAwait(false);
                 if (applicableNode == null)
                 {
                     return null;
                 }
 
                 var changeNamespaceService = document.GetLanguageService<IChangeNamespaceService>();
-                var canChange = await changeNamespaceService.CanChangeNamespaceAsync(document, applicableNode, cancellationToken).ConfigureAwait(false);
+                var canChange = await changeNamespaceService
+                    .CanChangeNamespaceAsync(document, applicableNode, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (!canChange || !IsDocumentPathRootedInProjectFolder(document))
                 {
@@ -127,7 +140,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 
                 // Namespace can't be changed if we can't construct a valid qualified identifier from folder names.
                 // In this case, we might still be able to provide refactoring to move file to new location.
-                var targetNamespace = PathMetadataUtilities.TryBuildNamespaceFromFolders(document.Folders, syntaxFacts, defaultNamespace);
+                var targetNamespace = PathMetadataUtilities.TryBuildNamespaceFromFolders(
+                    document.Folders,
+                    syntaxFacts,
+                    defaultNamespace
+                );
 
                 // No action required if namespace already matches folders.
                 if (syntaxFacts.StringComparer.Equals(targetNamespace, declaredNamespace))
@@ -137,9 +154,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 
                 // Only provide "move file" action if default namespace contains declared namespace.
                 // For example, if the default namespace is `Microsoft.CodeAnalysis`, and declared
-                // namespace is `System.Diagnostics`, it's very likely this document is an outlier  
+                // namespace is `System.Diagnostics`, it's very likely this document is an outlier
                 // in the project and user probably has some special rule for it.
-                var relativeNamespace = GetRelativeNamespace(defaultNamespace, declaredNamespace, syntaxFacts);
+                var relativeNamespace = GetRelativeNamespace(
+                    defaultNamespace,
+                    declaredNamespace,
+                    syntaxFacts
+                );
 
                 return new State(document, applicableNode, targetNamespace, relativeNamespace);
             }
@@ -156,27 +177,38 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 var folderPath = Path.Combine(document.Folders.ToArray());
 
                 var absoluteDircetoryPath = PathUtilities.GetDirectoryName(document.FilePath);
-                var logicalDirectoryPath = PathUtilities.CombineAbsoluteAndRelativePaths(projectRoot, folderPath);
+                var logicalDirectoryPath = PathUtilities.CombineAbsoluteAndRelativePaths(
+                    projectRoot,
+                    folderPath
+                );
 
                 return PathUtilities.PathsEqual(absoluteDircetoryPath, logicalDirectoryPath);
             }
 
-            private static string GetDefaultNamespace(Document document, ISyntaxFactsService syntaxFacts)
+            private static string GetDefaultNamespace(
+                Document document,
+                ISyntaxFactsService syntaxFacts
+            )
             {
                 var solution = document.Project.Solution;
                 var linkedIds = document.GetLinkedDocumentIds();
-                var documents = linkedIds.SelectAsArray(id => solution.GetDocument(id)).Add(document);
+                var documents = linkedIds
+                    .SelectAsArray(id => solution.GetDocument(id))
+                    .Add(document);
 
-                // For all projects containing all the linked documents, bail if 
+                // For all projects containing all the linked documents, bail if
                 // 1. Any of them doesn't have default namespace, or
                 // 2. Multiple default namespace are found. (this might be possible by tweaking project file).
                 // The refactoring depends on a single default namespace to operate.
                 var defaultNamespaceFromProjects = new HashSet<string>(
-                        documents.Select(d => d.Project.DefaultNamespace),
-                        syntaxFacts.StringComparer);
+                    documents.Select(d => d.Project.DefaultNamespace),
+                    syntaxFacts.StringComparer
+                );
 
-                if (defaultNamespaceFromProjects.Count != 1
-                    || defaultNamespaceFromProjects.First() == null)
+                if (
+                    defaultNamespaceFromProjects.Count != 1
+                    || defaultNamespaceFromProjects.First() == null
+                )
                 {
                     return null;
                 }
@@ -195,7 +227,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
             /// the relative namespace is "".
             /// - If <paramref name="relativeTo"/> is "" then the relative namespace us <paramref name="namespace"/>.
             /// </summary>
-            private static string GetRelativeNamespace(string relativeTo, string @namespace, ISyntaxFactsService syntaxFacts)
+            private static string GetRelativeNamespace(
+                string relativeTo,
+                string @namespace,
+                ISyntaxFactsService syntaxFacts
+            )
             {
                 Debug.Assert(relativeTo != null && @namespace != null);
 
@@ -216,8 +252,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 var namespacePrefix = @namespace.Substring(0, containingText.Length);
 
                 return syntaxFacts.StringComparer.Equals(containingText, namespacePrefix)
-                    ? @namespace[(relativeTo.Length + 1)..]
-                    : null;
+                  ? @namespace[(relativeTo.Length + 1)..]
+                  : null;
             }
         }
     }

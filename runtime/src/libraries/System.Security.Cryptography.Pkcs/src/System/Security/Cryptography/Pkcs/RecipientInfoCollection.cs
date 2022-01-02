@@ -31,17 +31,17 @@ namespace System.Security.Cryptography.Pkcs
             get
             {
                 if (index < 0 || index >= _recipientInfos.Length)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_Index);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_Index
+                    );
                 return _recipientInfos[index];
             }
         }
 
         public int Count
         {
-            get
-            {
-                return _recipientInfos.Length;
-            }
+            get { return _recipientInfos.Length; }
         }
 
         public RecipientInfoEnumerator GetEnumerator()
@@ -82,18 +82,12 @@ namespace System.Security.Cryptography.Pkcs
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         private readonly RecipientInfo[] _recipientInfos;

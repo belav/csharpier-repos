@@ -34,19 +34,23 @@ namespace Microsoft.CodeAnalysis.CSharp
         public CSharpCompilationReference(
             CSharpCompilation compilation,
             ImmutableArray<string> aliases = default(ImmutableArray<string>),
-            bool embedInteropTypes = false)
-            : base(GetProperties(compilation, aliases, embedInteropTypes))
+            bool embedInteropTypes = false
+        ) : base(GetProperties(compilation, aliases, embedInteropTypes))
         {
             this.Compilation = compilation;
         }
 
-        private CSharpCompilationReference(CSharpCompilation compilation, MetadataReferenceProperties properties)
-            : base(properties)
+        private CSharpCompilationReference(
+            CSharpCompilation compilation,
+            MetadataReferenceProperties properties
+        ) : base(properties)
         {
             this.Compilation = compilation;
         }
 
-        internal override CompilationReference WithPropertiesImpl(MetadataReferenceProperties properties)
+        internal override CompilationReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        )
         {
             return new CSharpCompilationReference(Compilation, properties);
         }

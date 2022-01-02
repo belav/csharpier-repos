@@ -51,8 +51,10 @@ public class LengthRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatc
 
         if (minLength > maxLength)
         {
-            var errorMessage =
-                Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax("minLength", "maxLength");
+            var errorMessage = Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax(
+                "minLength",
+                "maxLength"
+            );
             throw new ArgumentOutOfRangeException(nameof(minLength), minLength, errorMessage);
         }
 
@@ -76,7 +78,8 @@ public class LengthRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatc
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {

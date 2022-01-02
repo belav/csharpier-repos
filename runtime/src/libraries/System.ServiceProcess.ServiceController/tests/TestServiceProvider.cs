@@ -18,7 +18,11 @@ namespace System.ServiceProcess.Tests
         private const int readTimeout = 60000;
 
         private static readonly Lazy<bool> s_runningWithElevatedPrivileges = new Lazy<bool>(
-            () => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator));
+            () =>
+                new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(
+                    WindowsBuiltInRole.Administrator
+                )
+        );
 
         private NamedPipeClientStream _client;
 
@@ -47,7 +51,6 @@ namespace System.ServiceProcess.Tests
                     _client = null;
                 }
             }
-
         }
 
         public readonly string TestServiceAssembly = typeof(TestService).Assembly.Location;
@@ -107,8 +110,13 @@ namespace System.ServiceProcess.Tests
 
             if (_prerequisiteServices != null)
             {
-                DebugTrace($"TestServiceProvider: .. with prequisite services {_prerequisiteServices.TestServiceName}");
-                testServiceInstaller.ServicesDependedOn = new string[] { _prerequisiteServices.TestServiceName };
+                DebugTrace(
+                    $"TestServiceProvider: .. with prequisite services {_prerequisiteServices.TestServiceName}"
+                );
+                testServiceInstaller.ServicesDependedOn = new string[]
+                {
+                    _prerequisiteServices.TestServiceName
+                };
             }
 
             string processName = Process.GetCurrentProcess().MainModule.FileName;

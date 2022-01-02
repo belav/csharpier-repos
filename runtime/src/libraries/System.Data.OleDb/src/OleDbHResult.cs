@@ -8,10 +8,8 @@ namespace System.Data.OleDb
         CO_E_CLASSSTRING = unchecked((int)0x800401f3),
         REGDB_E_CLASSNOTREG = unchecked((int)0x80040154),
         CO_E_NOTINITIALIZED = unchecked((int)0x800401F0),
-
         S_OK = 0x00000000,
         S_FALSE = 0x00000001,
-
         E_UNEXPECTED = unchecked((int)0x8000FFFF),
         E_NOTIMPL = unchecked((int)0x80004001),
         E_OUTOFMEMORY = unchecked((int)0x8007000E),
@@ -864,7 +862,6 @@ namespace System.Data.OleDb
         // MessageText:
         //  Row has no row-specific columns.
         DB_S_NOROWSPECIFICCOLUMNS = 0x00040EDD,
-
         XACT_E_FIRST = unchecked((int)0x8004d000),
         XACT_E_LAST = unchecked((int)0x8004d022),
         XACT_S_FIRST = 0x4d000,
@@ -920,7 +917,6 @@ namespace System.Data.OleDb
         XACT_S_ALLNORETAIN = 0x4d007,
         XACT_S_ABORTING = 0x4d008,
         XACT_S_SINGLEPHASE = 0x4d009,
-
         STG_E_INVALIDFUNCTION = unchecked((int)0x80030001),
         STG_E_FILENOTFOUND = unchecked((int)0x80030002),
         STG_E_PATHNOTFOUND = unchecked((int)0x80030003),

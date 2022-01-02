@@ -17,11 +17,16 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract class ValueType
     {
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Trimmed fields don't make a difference for equality")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Trimmed fields don't make a difference for equality"
+        )]
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (null == obj)
@@ -37,14 +42,17 @@ namespace System
             }
 
             object thisObj = (object)this;
-            object? thisResult, thatResult;
+            object? thisResult,
+                thatResult;
 
             // if there are no GC references in this object we can avoid reflection
             // and do a fast memcmp
             if (CanCompareBits(this))
                 return FastEqualsCheck(thisObj, obj);
 
-            FieldInfo[] thisFields = thisType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            FieldInfo[] thisFields = thisType.GetFields(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
 
             for (int i = 0; i < thisFields.Length; i++)
             {
@@ -56,8 +64,7 @@ namespace System
                     if (thatResult != null)
                         return false;
                 }
-                else
-                if (!thisResult.Equals(thatResult))
+                else if (!thisResult.Equals(thatResult))
                 {
                     return false;
                 }

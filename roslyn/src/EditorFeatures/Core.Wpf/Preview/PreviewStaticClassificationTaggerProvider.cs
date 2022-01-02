@@ -37,11 +37,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewStaticClassificationTaggerProvider(ClassificationTypeMap typeMap)
-            => _typeMap = typeMap;
+        public PreviewStaticClassificationTaggerProvider(ClassificationTypeMap typeMap) =>
+            _typeMap = typeMap;
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
-            where T : ITag
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
             return new Tagger(_typeMap, buffer) as ITagger<T>;
         }
@@ -60,11 +59,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             /// <summary>
             /// The tags never change for this tagger.
             /// </summary>
-            event EventHandler<SnapshotSpanEventArgs> ITagger<IClassificationTag>.TagsChanged { add { } remove { } }
-
-            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(NormalizedSnapshotSpanCollection spans)
+            event EventHandler<SnapshotSpanEventArgs> ITagger<IClassificationTag>.TagsChanged
             {
-                if (!_buffer.Properties.TryGetProperty(PredefinedPreviewTaggerKeys.StaticClassificationSpansKey, out ImmutableArray<ClassifiedSpan> classifiedSpans))
+                add { }
+                remove { }
+            }
+
+            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            )
+            {
+                if (
+                    !_buffer.Properties.TryGetProperty(
+                        PredefinedPreviewTaggerKeys.StaticClassificationSpansKey,
+                        out ImmutableArray<ClassifiedSpan> classifiedSpans
+                    )
+                )
                 {
                     yield break;
                 }
@@ -78,7 +88,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         if (classifiedSpan.TextSpan.IntersectsWith(requestSpan))
                         {
-                            yield return ClassificationUtilities.Convert(_typeMap, span.Snapshot, classifiedSpan);
+                            yield return ClassificationUtilities.Convert(
+                                _typeMap,
+                                span.Snapshot,
+                                classifiedSpan
+                            );
                         }
                     }
                 }

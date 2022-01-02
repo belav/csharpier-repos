@@ -14,15 +14,18 @@ namespace Microsoft.CodeAnalysis
     {
         internal const int MaxCacheSize = 10;
 
-        private readonly (string cacheKey, GeneratorDriver driver)[] _cachedDrivers = new (string, GeneratorDriver)[MaxCacheSize];
+        private readonly (string cacheKey, GeneratorDriver driver)[] _cachedDrivers =
+            new (string, GeneratorDriver)[MaxCacheSize];
 
         private readonly object _cacheLock = new object();
 
         private int _cacheSize = 0;
 
-        public GeneratorDriver? TryGetDriver(string cacheKey) => AddOrUpdateMostRecentlyUsed(cacheKey, driver: null);
+        public GeneratorDriver? TryGetDriver(string cacheKey) =>
+            AddOrUpdateMostRecentlyUsed(cacheKey, driver: null);
 
-        public void CacheGenerator(string cacheKey, GeneratorDriver driver) => AddOrUpdateMostRecentlyUsed(cacheKey, driver);
+        public void CacheGenerator(string cacheKey, GeneratorDriver driver) =>
+            AddOrUpdateMostRecentlyUsed(cacheKey, driver);
 
         public int CacheSize => _cacheSize;
 
@@ -34,7 +37,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="cacheKey">The key to lookup the driver by in the cache</param>
         /// <param name="driver">An optional driver that should be cached, if not already found in the cache</param>
         /// <returns></returns>
-        private GeneratorDriver? AddOrUpdateMostRecentlyUsed(string cacheKey, GeneratorDriver? driver)
+        private GeneratorDriver? AddOrUpdateMostRecentlyUsed(
+            string cacheKey,
+            GeneratorDriver? driver
+        )
         {
             lock (_cacheLock)
             {

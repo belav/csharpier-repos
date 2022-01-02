@@ -54,6 +54,7 @@ namespace Test
         {
             AreEqual(left, right());
         }
+
         public static void AreEqual(string left, string right)
         {
             if (String.IsNullOrEmpty(left))

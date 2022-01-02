@@ -8,13 +8,13 @@ using Moq.Language.Flow;
 
 namespace Moq.Language
 {
-	/// <summary>
+    /// <summary>
 	/// Defines the <c>Throws</c> verb.
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public partial interface IThrows : IFluentInterface
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public partial interface IThrows : IFluentInterface
+    {
+        /// <summary>
 		/// Specifies the exception to throw when the method is invoked.
 		/// </summary>
 		/// <param name="exception">Exception instance to throw.</param>
@@ -26,9 +26,9 @@ namespace Moq.Language
 		///     .Throws(new ArgumentException());
 		/// </code>
 		/// </example>
-		IThrowsResult Throws(Exception exception);
+        IThrowsResult Throws(Exception exception);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies the type of exception to throw when the method is invoked.
 		/// </summary>
 		/// <typeparam name="TException">Type of exception to instantiate and throw when the setup is matched.</typeparam>
@@ -40,9 +40,9 @@ namespace Moq.Language
 		///     .Throws&lt;ArgumentException&gt;();
 		/// </code>
 		/// </example>
-		IThrowsResult Throws<TException>() where TException : Exception, new();
+        IThrowsResult Throws<TException>() where TException : Exception, new();
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a function that will calculate the exception to throw when the method is invoked.
 		/// </summary>
 		/// <param name="exceptionFunction">The function that will calculate the exception to be thrown.</param>
@@ -56,9 +56,9 @@ namespace Moq.Language
 		///     .Throws(new ExecuteFunc((string s) => new Exception(s)));
 		/// </code>
 		/// </example>
-		IThrowsResult Throws(Delegate exceptionFunction);
+        IThrowsResult Throws(Delegate exceptionFunction);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a function that will calculate the exception to throw when the method is invoked.
 		/// </summary>
 		/// <typeparam name="TException">Type of exception that will be calculated and thrown when the setup is matched.</typeparam>
@@ -74,9 +74,10 @@ namespace Moq.Language
 		/// is executed and the value the <c>returnValues</c> array has at 
 		/// that moment.
 		/// </example>
-		IThrowsResult Throws<TException>(Func<TException> exceptionFunction) where TException : Exception;
+        IThrowsResult Throws<TException>(Func<TException> exceptionFunction)
+            where TException : Exception;
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a function that will calculate the exception to throw when the method is invoked, 
 		/// retrieving the arguments for the invocation.
 		/// </summary>
@@ -96,6 +97,7 @@ namespace Moq.Language
 		///     .Throws((string command) => new Exception(command));
 		/// </code>
 		/// </example>
-		IThrowsResult Throws<T, TException>(Func<T, TException> exceptionFunction) where TException : Exception;
-	}
+        IThrowsResult Throws<T, TException>(Func<T, TException> exceptionFunction)
+            where TException : Exception;
+    }
 }

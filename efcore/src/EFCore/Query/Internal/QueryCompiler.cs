@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger,
             ICurrentDbContext currentContext,
             IEvaluatableExpressionFilter evaluatableExpressionFilter,
-            IModel model)
+            IModel model
+        )
         {
             _queryContextFactory = queryContextFactory;
             _compiledQueryCache = compiledQueryCache;
@@ -67,11 +68,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             query = ExtractParameters(query, queryContext, _logger);
 
-            var compiledQuery
-                = _compiledQueryCache
-                    .GetOrAddQuery(
-                        _compiledQueryCacheKeyGenerator.GenerateCacheKey(query, async: false),
-                        () => CompileQueryCore<TResult>(_database, query, _model, false));
+            var compiledQuery = _compiledQueryCache.GetOrAddQuery(
+                _compiledQueryCacheKeyGenerator.GenerateCacheKey(query, async: false),
+                () => CompileQueryCore<TResult>(_database, query, _model, false)
+            );
 
             return compiledQuery(queryContext);
         }
@@ -86,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IDatabase database,
             Expression query,
             IModel model,
-            bool async)
-            => database.CompileQuery<TResult>(query, async);
+            bool async
+        ) => database.CompileQuery<TResult>(query, async);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,7 +97,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual Func<QueryContext, TResult> CreateCompiledQuery<TResult>(Expression query)
         {
-            query = ExtractParameters(query, _queryContextFactory.Create(), _logger, parameterize: false);
+            query = ExtractParameters(
+                query,
+                _queryContextFactory.Create(),
+                _logger,
+                parameterize: false
+            );
 
             return CompileQueryCore<TResult>(_database, query, _model, false);
         }
@@ -108,7 +113,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual TResult ExecuteAsync<TResult>(Expression query, CancellationToken cancellationToken = default)
+        public virtual TResult ExecuteAsync<TResult>(
+            Expression query,
+            CancellationToken cancellationToken = default
+        )
         {
             var queryContext = _queryContextFactory.Create();
 
@@ -116,11 +124,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             query = ExtractParameters(query, queryContext, _logger);
 
-            var compiledQuery
-                = _compiledQueryCache
-                    .GetOrAddQuery(
-                        _compiledQueryCacheKeyGenerator.GenerateCacheKey(query, async: true),
-                        () => CompileQueryCore<TResult>(_database, query, _model, true));
+            var compiledQuery = _compiledQueryCache.GetOrAddQuery(
+                _compiledQueryCacheKeyGenerator.GenerateCacheKey(query, async: true),
+                () => CompileQueryCore<TResult>(_database, query, _model, true)
+            );
 
             return compiledQuery(queryContext);
         }
@@ -131,9 +138,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Func<QueryContext, TResult> CreateCompiledAsyncQuery<TResult>(Expression query)
+        public virtual Func<QueryContext, TResult> CreateCompiledAsyncQuery<TResult>(
+            Expression query
+        )
         {
-            query = ExtractParameters(query, _queryContextFactory.Create(), _logger, parameterize: false);
+            query = ExtractParameters(
+                query,
+                _queryContextFactory.Create(),
+                _logger,
+                parameterize: false
+            );
 
             return CompileQueryCore<TResult>(_database, query, _model, true);
         }
@@ -149,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IParameterValues parameterValues,
             IDiagnosticsLogger<DbLoggerCategory.Query> logger,
             bool parameterize = true,
-            bool generateContextAccessors = false)
+            bool generateContextAccessors = false
+        )
         {
             var visitor = new ParameterExtractingExpressionVisitor(
                 _evaluatableExpressionFilter,
@@ -158,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 _model,
                 logger,
                 parameterize,
-                generateContextAccessors);
+                generateContextAccessors
+            );
 
             return visitor.ExtractParameters(query);
         }

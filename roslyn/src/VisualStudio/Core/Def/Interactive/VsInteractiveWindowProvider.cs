@@ -42,20 +42,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         private IVsInteractiveWindow _vsInteractiveWindow;
 
         public VsInteractiveWindowProvider(
-           SVsServiceProvider serviceProvider,
-           IVsInteractiveWindowFactory interactiveWindowFactory,
-           IViewClassifierAggregatorService classifierAggregator,
-           IContentTypeRegistryService contentTypeRegistry,
-           IInteractiveWindowCommandsFactory commandsFactory,
-           IInteractiveWindowCommand[] commands,
-           VisualStudioWorkspace workspace)
+            SVsServiceProvider serviceProvider,
+            IVsInteractiveWindowFactory interactiveWindowFactory,
+            IViewClassifierAggregatorService classifierAggregator,
+            IContentTypeRegistryService contentTypeRegistry,
+            IInteractiveWindowCommandsFactory commandsFactory,
+            IInteractiveWindowCommand[] commands,
+            VisualStudioWorkspace workspace
+        )
         {
             _vsServiceProvider = serviceProvider;
             _classifierAggregator = classifierAggregator;
             _contentTypeRegistry = contentTypeRegistry;
             _vsWorkspace = workspace;
-            _commands = GetApplicableCommands(commands, coreContentType: PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName,
-                specializedContentType: InteractiveWindowContentTypes.CommandContentTypeName);
+            _commands = GetApplicableCommands(
+                commands,
+                coreContentType: PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName,
+                specializedContentType: InteractiveWindowContentTypes.CommandContentTypeName
+            );
             _vsInteractiveWindowFactory = interactiveWindowFactory;
             _commandsFactory = commandsFactory;
         }
@@ -64,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             SVsServiceProvider serviceProvider,
             IViewClassifierAggregatorService classifierAggregator,
             IContentTypeRegistryService contentTypeRegistry,
-            VisualStudioWorkspace workspace);
+            VisualStudioWorkspace workspace
+        );
 
         protected abstract Guid LanguageServiceGuid { get; }
         protected abstract Guid Id { get; }
@@ -73,43 +78,56 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
 
         protected IInteractiveWindowCommandsFactory CommandsFactory
         {
-            get
-            {
-                return _commandsFactory;
-            }
+            get { return _commandsFactory; }
         }
 
         protected ImmutableArray<IInteractiveWindowCommand> Commands
         {
-            get
-            {
-                return _commands;
-            }
+            get { return _commands; }
         }
 
         public void Create(int instanceId)
         {
-            var evaluator = CreateInteractiveEvaluator(_vsServiceProvider, _classifierAggregator, _contentTypeRegistry, _vsWorkspace);
+            var evaluator = CreateInteractiveEvaluator(
+                _vsServiceProvider,
+                _classifierAggregator,
+                _contentTypeRegistry,
+                _vsWorkspace
+            );
 
             Debug.Assert(_vsInteractiveWindow == null);
 
             // ForceCreate means that the window should be created if the persisted layout indicates that it is visible.
-            _vsInteractiveWindow = _vsInteractiveWindowFactory.Create(Id, instanceId, Title, evaluator, __VSCREATETOOLWIN.CTW_fForceCreate);
+            _vsInteractiveWindow = _vsInteractiveWindowFactory.Create(
+                Id,
+                instanceId,
+                Title,
+                evaluator,
+                __VSCREATETOOLWIN.CTW_fForceCreate
+            );
             _vsInteractiveWindow.SetLanguage(LanguageServiceGuid, evaluator.ContentType);
 
             if (_vsInteractiveWindow is ToolWindowPane interactiveWindowPane)
             {
-                evaluator.OnBeforeReset += platform => interactiveWindowPane.Caption = Title + platform switch
-                {
-                    InteractiveHostPlatform.Desktop64 => " (.NET Framework " + ServicesVSResources.Bitness64 + ")",
-                    InteractiveHostPlatform.Desktop32 => " (.NET Framework " + ServicesVSResources.Bitness32 + ")",
-                    InteractiveHostPlatform.Core => " (.NET Core)",
-                    _ => throw ExceptionUtilities.Unreachable
-                };
+                evaluator.OnBeforeReset += platform =>
+                    interactiveWindowPane.Caption =
+                        Title
+                        + platform switch
+                        {
+                            InteractiveHostPlatform.Desktop64
+                              => " (.NET Framework " + ServicesVSResources.Bitness64 + ")",
+                            InteractiveHostPlatform.Desktop32
+                              => " (.NET Framework " + ServicesVSResources.Bitness32 + ")",
+                            InteractiveHostPlatform.Core => " (.NET Core)",
+                            _ => throw ExceptionUtilities.Unreachable
+                        };
             }
 
             var window = _vsInteractiveWindow.InteractiveWindow;
-            window.TextView.Options.SetOptionValue(DefaultTextViewHostOptions.SuggestionMarginId, true);
+            window.TextView.Options.SetOptionValue(
+                DefaultTextViewHostOptions.SuggestionMarginId,
+                true
+            );
 
             void closeEventDelegate(object sender, EventArgs e)
             {
@@ -143,30 +161,54 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             return _vsInteractiveWindow;
         }
 
-        protected void LogSession(string key, string value)
-            => Logger.Log(InteractiveWindowFunctionId, KeyValueLogMessage.Create(m => m.Add(key, value)));
+        protected void LogSession(string key, string value) =>
+            Logger.Log(
+                InteractiveWindowFunctionId,
+                KeyValueLogMessage.Create(m => m.Add(key, value))
+            );
 
         private void LogCloseSession(int languageBufferCount)
         {
-            Logger.Log(InteractiveWindowFunctionId,
-                KeyValueLogMessage.Create(m =>
-                {
-                    m.Add(LogMessage.Window, LogMessage.Close);
-                    m.Add(LogMessage.LanguageBufferCount, languageBufferCount);
-                }));
+            Logger.Log(
+                InteractiveWindowFunctionId,
+                KeyValueLogMessage.Create(
+                    m =>
+                    {
+                        m.Add(LogMessage.Window, LogMessage.Close);
+                        m.Add(LogMessage.LanguageBufferCount, languageBufferCount);
+                    }
+                )
+            );
         }
 
-        private static ImmutableArray<IInteractiveWindowCommand> GetApplicableCommands(IInteractiveWindowCommand[] commands, string coreContentType, string specializedContentType)
+        private static ImmutableArray<IInteractiveWindowCommand> GetApplicableCommands(
+            IInteractiveWindowCommand[] commands,
+            string coreContentType,
+            string specializedContentType
+        )
         {
             // get all commands of coreContentType - generic interactive window commands
-            var interactiveCommands = commands.Where(
-                c => c.GetType().GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true).Any(
-                    a => ((ContentTypeAttribute)a).ContentTypes == coreContentType)).ToArray();
+            var interactiveCommands = commands
+                .Where(
+                    c =>
+                        c.GetType()
+                            .GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true)
+                            .Any(a => ((ContentTypeAttribute)a).ContentTypes == coreContentType)
+                )
+                .ToArray();
 
             // get all commands of specializedContentType - smart C#/VB command implementations
-            var specializedInteractiveCommands = commands.Where(
-                c => c.GetType().GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true).Any(
-                    a => ((ContentTypeAttribute)a).ContentTypes == specializedContentType)).ToArray();
+            var specializedInteractiveCommands = commands
+                .Where(
+                    c =>
+                        c.GetType()
+                            .GetCustomAttributes(typeof(ContentTypeAttribute), inherit: true)
+                            .Any(
+                                a =>
+                                    ((ContentTypeAttribute)a).ContentTypes == specializedContentType
+                            )
+                )
+                .ToArray();
 
             // We should choose specialized C#/VB commands over generic core interactive window commands
             // Build a map of names and associated core command first

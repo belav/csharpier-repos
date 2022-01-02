@@ -27,7 +27,8 @@ class Class1
         try
         {
             Console.WriteLine("  in middle1 try");
-            if (i == 0) goto L1;
+            if (i == 0)
+                goto L1;
         }
         catch
         {
@@ -36,7 +37,8 @@ class Class1
         finally
         {
             Console.WriteLine("  in middle1 finally");
-            if (i == 0) throw new Exception();
+            if (i == 0)
+                throw new Exception();
         }
         Console.WriteLine("after finally");
         L1:

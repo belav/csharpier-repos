@@ -1,5 +1,4 @@
-﻿
-namespace AutoMapper.UnitTests.Bug
+﻿namespace AutoMapper.UnitTests.Bug
 {
     using Shouldly;
     using Xunit;
@@ -9,25 +8,33 @@ namespace AutoMapper.UnitTests.Bug
         private Entity testEntity;
         private EditModel testModel;
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Entity, ViewModel>();
-            cfg.CreateMap<Entity, BaseModel>()
-                .ForMember(model => model.Value1, mce => mce.MapFrom(entity => entity.Value2))
-                .ForMember(model => model.Value2, mce => mce.MapFrom(entity => entity.Value1))
-                .Include<Entity, EditModel>()
-                .Include<Entity, ViewModel>();
-            cfg.CreateMap<Entity, EditModel>()
-                .ForMember(model => model.Value3, mce => mce.MapFrom(entity => entity.Value1 + entity.Value2));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Entity, ViewModel>();
+                    cfg.CreateMap<Entity, BaseModel>()
+                        .ForMember(
+                            model => model.Value1,
+                            mce => mce.MapFrom(entity => entity.Value2)
+                        )
+                        .ForMember(
+                            model => model.Value2,
+                            mce => mce.MapFrom(entity => entity.Value1)
+                        )
+                        .Include<Entity, EditModel>()
+                        .Include<Entity, ViewModel>();
+                    cfg.CreateMap<Entity, EditModel>()
+                        .ForMember(
+                            model => model.Value3,
+                            mce => mce.MapFrom(entity => entity.Value1 + entity.Value2)
+                        );
+                }
+            );
 
         protected override void Because_of()
         {
-            testEntity = new Entity
-            {
-                Value1 = 1,
-                Value2 = 2,
-            };
+            testEntity = new Entity { Value1 = 1, Value2 = 2, };
             testModel = Mapper.Map<Entity, EditModel>(testEntity);
         }
 
@@ -64,14 +71,16 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void TestMethod1()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Order, OrderDto>()
-                    .Include<OnlineOrder, OnlineOrderDto>()
-                    .Include<MailOrder, MailOrderDto>();
-                cfg.CreateMap<OnlineOrder, OnlineOrderDto>();
-                cfg.CreateMap<MailOrder, MailOrderDto>();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Order, OrderDto>()
+                        .Include<OnlineOrder, OnlineOrderDto>()
+                        .Include<MailOrder, MailOrderDto>();
+                    cfg.CreateMap<OnlineOrder, OnlineOrderDto>();
+                    cfg.CreateMap<MailOrder, MailOrderDto>();
+                }
+            );
 
             var mapper = config.CreateMapper();
 
@@ -86,14 +95,18 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         public class Order : Base<Order> { }
+
         public class OnlineOrder : Order { }
+
         public class MailOrder : Order
         {
             public int NewId { get; set; }
         }
 
         public class OrderDto { }
+
         public class OnlineOrderDto : OrderDto { }
+
         public class MailOrderDto : OrderDto
         {
             public int NewId { get; set; }

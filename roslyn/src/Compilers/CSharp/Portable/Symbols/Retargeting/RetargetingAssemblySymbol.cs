@@ -78,7 +78,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// A map from a local NoPia type to corresponding canonical type.
         /// </summary>
         internal ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol> NoPiaUnificationMap =>
-            LazyInitializer.EnsureInitialized(ref _noPiaUnificationMap, () => new ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol>(concurrencyLevel: 2, capacity: 0));
+            LazyInitializer.EnsureInitialized(
+                ref _noPiaUnificationMap,
+                () =>
+                    new ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol>(
+                        concurrencyLevel: 2,
+                        capacity: 0
+                    )
+            );
 
         /// <summary>
         /// Assembly is /l-ed by compilation that is using it as a reference.
@@ -107,7 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             ModuleSymbol[] modules = new ModuleSymbol[underlyingAssembly.Modules.Length];
 
-            modules[0] = new RetargetingModuleSymbol(this, (SourceModuleSymbol)underlyingAssembly.Modules[0]);
+            modules[0] = new RetargetingModuleSymbol(
+                this,
+                (SourceModuleSymbol)underlyingAssembly.Modules[0]
+            );
 
             for (int i = 1; i < underlyingAssembly.Modules.Length; i++)
             {
@@ -121,10 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         private RetargetingModuleSymbol.RetargetingSymbolTranslator RetargetingTranslator
         {
-            get
-            {
-                return ((RetargetingModuleSymbol)_modules[0]).RetargetingTranslator;
-            }
+            get { return ((RetargetingModuleSymbol)_modules[0]).RetargetingTranslator; }
         }
 
         /// <summary>
@@ -132,10 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// </summary>
         public SourceAssemblySymbol UnderlyingAssembly
         {
-            get
-            {
-                return _underlyingAssembly;
-            }
+            get { return _underlyingAssembly; }
         }
 
         public override bool IsImplicitlyDeclared
@@ -145,50 +149,52 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override AssemblyIdentity Identity
         {
-            get
-            {
-                return _underlyingAssembly.Identity;
-            }
+            get { return _underlyingAssembly.Identity; }
         }
 
-        public override Version AssemblyVersionPattern => _underlyingAssembly.AssemblyVersionPattern;
+        public override Version AssemblyVersionPattern =>
+            _underlyingAssembly.AssemblyVersionPattern;
 
         internal override ImmutableArray<byte> PublicKey
         {
             get { return _underlyingAssembly.PublicKey; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return _underlyingAssembly.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            return _underlyingAssembly.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         public override ImmutableArray<ModuleSymbol> Modules
         {
-            get
-            {
-                return _modules;
-            }
+            get { return _modules; }
         }
 
         internal override bool KeepLookingForDeclaredSpecialTypes
         {
             get
             {
-                // RetargetingAssemblySymbol never represents Core library. 
+                // RetargetingAssemblySymbol never represents Core library.
                 return false;
             }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return _underlyingAssembly.Locations;
-            }
+            get { return _underlyingAssembly.Locations; }
         }
 
-        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
+        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
+            string simpleName
+        )
         {
             return _underlyingAssembly.GetInternalsVisibleToPublicKeys(simpleName);
         }
@@ -200,7 +206,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return RetargetingTranslator.GetRetargetedAttributes(_underlyingAssembly.GetAttributes(), ref _lazyCustomAttributes);
+            return RetargetingTranslator.GetRetargetedAttributes(
+                _underlyingAssembly.GetAttributes(),
+                ref _lazyCustomAttributes
+            );
         }
 
         /// <summary>
@@ -221,12 +230,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             return _noPiaResolutionAssemblies;
         }
 
-        internal override void SetNoPiaResolutionAssemblies(ImmutableArray<AssemblySymbol> assemblies)
+        internal override void SetNoPiaResolutionAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        )
         {
             _noPiaResolutionAssemblies = assemblies;
         }
 
-        internal override void SetLinkedReferencedAssemblies(ImmutableArray<AssemblySymbol> assemblies)
+        internal override void SetLinkedReferencedAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        )
         {
             _linkedReferencedAssemblies = assemblies;
         }
@@ -238,34 +251,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override bool IsLinked
         {
-            get
-            {
-                return _isLinked;
-            }
+            get { return _isLinked; }
         }
 
         public override ICollection<string> TypeNames
         {
-            get
-            {
-                return _underlyingAssembly.TypeNames;
-            }
+            get { return _underlyingAssembly.TypeNames; }
         }
 
         public override ICollection<string> NamespaceNames
         {
-            get
-            {
-                return _underlyingAssembly.NamespaceNames;
-            }
+            get { return _underlyingAssembly.NamespaceNames; }
         }
 
         public override bool MightContainExtensionMethods
         {
-            get
-            {
-                return _underlyingAssembly.MightContainExtensionMethods;
-            }
+            get { return _underlyingAssembly.MightContainExtensionMethods; }
         }
 
         internal sealed override CSharpCompilation DeclaringCompilation // perf, not correctness
@@ -278,23 +279,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             return _underlyingAssembly.GetGuidString(out guidString);
         }
 
-        internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(ref MetadataTypeName emittedName, ConsList<AssemblySymbol> visitedAssemblies)
+        internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
+            ref MetadataTypeName emittedName,
+            ConsList<AssemblySymbol> visitedAssemblies
+        )
         {
-            NamedTypeSymbol underlying = _underlyingAssembly.TryLookupForwardedMetadataType(ref emittedName);
+            NamedTypeSymbol underlying = _underlyingAssembly.TryLookupForwardedMetadataType(
+                ref emittedName
+            );
 
             if ((object)underlying == null)
             {
                 return null;
             }
 
-            return this.RetargetingTranslator.Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByName);
+            return this.RetargetingTranslator.Retarget(
+                underlying,
+                RetargetOptions.RetargetPrimitiveTypesByName
+            );
         }
 
         internal override IEnumerable<NamedTypeSymbol> GetAllTopLevelForwardedTypes()
         {
-            foreach (NamedTypeSymbol underlying in _underlyingAssembly.GetAllTopLevelForwardedTypes())
+            foreach (
+                NamedTypeSymbol underlying in _underlyingAssembly.GetAllTopLevelForwardedTypes()
+            )
             {
-                yield return this.RetargetingTranslator.Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByName);
+                yield return this.RetargetingTranslator.Retarget(
+                    underlying,
+                    RetargetOptions.RetargetPrimitiveTypesByName
+                );
             }
         }
 

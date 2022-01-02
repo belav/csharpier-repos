@@ -29,6 +29,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         /// </summary>
         SqlServerSequenceValueGeneratorState GetOrAddSequenceState(
             IProperty property,
-            IRelationalConnection connection);
+            IRelationalConnection connection
+        );
     }
 }

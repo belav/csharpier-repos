@@ -33,7 +33,8 @@ internal class ConfigureStaticFilesOptions : IPostConfigureOptions<StaticFileOpt
         }
 
         // Basic initialization in case the options weren't initialized by any other component
-        options.ContentTypeProvider = options.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
+        options.ContentTypeProvider =
+            options.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
         if (options.FileProvider == null && Environment.WebRootFileProvider == null)
         {
             throw new InvalidOperationException("Missing FileProvider.");
@@ -58,7 +59,9 @@ internal class ConfigureStaticFilesOptions : IPostConfigureOptions<StaticFileOpt
         }
 
         // Add our provider
-        var provider = new ManifestEmbeddedFileProvider(typeof(ConfigureStaticFilesOptions).Assembly);
+        var provider = new ManifestEmbeddedFileProvider(
+            typeof(ConfigureStaticFilesOptions).Assembly
+        );
 
         options.FileProvider = new CompositeFileProvider(provider, options.FileProvider);
     }

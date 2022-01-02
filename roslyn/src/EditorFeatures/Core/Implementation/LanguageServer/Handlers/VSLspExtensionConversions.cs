@@ -12,11 +12,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public static LSP.VSImageId GetImageIdFromGlyph(Glyph glyph)
         {
             var imageId = glyph.GetImageId();
-            return new LSP.VSImageId
-            {
-                Guid = imageId.Guid,
-                Id = imageId.Id
-            };
+            return new LSP.VSImageId { Guid = imageId.Guid, Id = imageId.Id };
         }
     }
 }

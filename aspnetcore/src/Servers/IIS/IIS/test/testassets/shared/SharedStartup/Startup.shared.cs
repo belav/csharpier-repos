@@ -22,5 +22,4 @@ namespace TestSite;
 
 public partial class Startup
 {
-
 }

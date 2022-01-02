@@ -38,25 +38,20 @@ namespace Microsoft.CodeAnalysis.Storage
             Name = name;
         }
 
-        public static DocumentKey ToDocumentKey(Document document)
-            => ToDocumentKey(ProjectKey.ToProjectKey(document.Project), document.State);
+        public static DocumentKey ToDocumentKey(Document document) =>
+            ToDocumentKey(ProjectKey.ToProjectKey(document.Project), document.State);
 
-        public static DocumentKey ToDocumentKey(ProjectKey projectKey, TextDocumentState state)
-            => new(projectKey, state.Id, state.FilePath, state.Name);
+        public static DocumentKey ToDocumentKey(ProjectKey projectKey, TextDocumentState state) =>
+            new(projectKey, state.Id, state.FilePath, state.Name);
 
-        public override bool Equals(object? obj)
-            => obj is DocumentKey other && Equals(other);
+        public override bool Equals(object? obj) => obj is DocumentKey other && Equals(other);
 
-        public bool Equals(DocumentKey other)
-            => this.Id == other.Id;
+        public bool Equals(DocumentKey other) => this.Id == other.Id;
 
-        public override int GetHashCode()
-            => this.Id.GetHashCode();
+        public override int GetHashCode() => this.Id.GetHashCode();
 
-        public bool Equals(DocumentKey x, DocumentKey y)
-            => x.Equals(y);
+        public bool Equals(DocumentKey x, DocumentKey y) => x.Equals(y);
 
-        public int GetHashCode(DocumentKey obj)
-            => obj.GetHashCode();
+        public int GetHashCode(DocumentKey obj) => obj.GetHashCode();
     }
 }

@@ -20,13 +20,17 @@ public sealed class JSComponentConfigurationStore
     // without needing any changes on the downstream code that implements IJSComponentConfiguration,
     // and without exposing any of the configuration storage across layers.
 
-    internal Dictionary<string, Type> JSComponentTypesByIdentifier { get; } = new(StringComparer.Ordinal);
-    internal Dictionary<string, JSComponentParameter[]> JSComponentParametersByIdentifier { get; } = new(StringComparer.Ordinal);
-    internal Dictionary<string, List<string>> JSComponentIdentifiersByInitializer { get; } = new(StringComparer.Ordinal);
+    internal Dictionary<string, Type> JSComponentTypesByIdentifier { get; } =
+        new(StringComparer.Ordinal);
+    internal Dictionary<string, JSComponentParameter[]> JSComponentParametersByIdentifier { get; } =
+        new(StringComparer.Ordinal);
+    internal Dictionary<string, List<string>> JSComponentIdentifiersByInitializer { get; } =
+        new(StringComparer.Ordinal);
 
     internal void Add(Type componentType, string identifier)
     {
-        var parameterTypes = JSComponentInterop.GetComponentParameters(componentType).ParameterInfoByName;
+        var parameterTypes =
+            JSComponentInterop.GetComponentParameters(componentType).ParameterInfoByName;
         var parameters = new JSComponentParameter[parameterTypes.Count];
         var index = 0;
         foreach (var (name, type) in parameterTypes)
@@ -38,24 +42,47 @@ public sealed class JSComponentConfigurationStore
         JSComponentParametersByIdentifier.Add(identifier, parameters);
     }
 
-    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(JSComponentParameter))]
-    [DynamicDependency(nameof(WebRenderer.WebRendererInteropMethods.AddRootComponent), typeof(WebRenderer.WebRendererInteropMethods))]
-    [DynamicDependency(nameof(WebRenderer.WebRendererInteropMethods.SetRootComponentParameters), typeof(WebRenderer.WebRendererInteropMethods))]
-    [DynamicDependency(nameof(WebRenderer.WebRendererInteropMethods.RemoveRootComponent), typeof(WebRenderer.WebRendererInteropMethods))]
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.PublicProperties,
+        typeof(JSComponentParameter)
+    )]
+    [DynamicDependency(
+        nameof(WebRenderer.WebRendererInteropMethods.AddRootComponent),
+        typeof(WebRenderer.WebRendererInteropMethods)
+    )]
+    [DynamicDependency(
+        nameof(WebRenderer.WebRendererInteropMethods.SetRootComponentParameters),
+        typeof(WebRenderer.WebRendererInteropMethods)
+    )]
+    [DynamicDependency(
+        nameof(WebRenderer.WebRendererInteropMethods.RemoveRootComponent),
+        typeof(WebRenderer.WebRendererInteropMethods)
+    )]
     internal void Add(Type componentType, string identifier, string javaScriptInitializer)
     {
         Add(componentType, identifier);
 
         if (string.IsNullOrEmpty(javaScriptInitializer))
         {
-            throw new ArgumentException($"'{nameof(javaScriptInitializer)}' cannot be null or empty.", nameof(javaScriptInitializer));
+            throw new ArgumentException(
+                $"'{nameof(javaScriptInitializer)}' cannot be null or empty.",
+                nameof(javaScriptInitializer)
+            );
         }
 
         // Since it has a JS initializer, prepare the metadata we'll supply to JS code
-        if (!JSComponentIdentifiersByInitializer.TryGetValue(javaScriptInitializer, out var identifiersForInitializer))
+        if (
+            !JSComponentIdentifiersByInitializer.TryGetValue(
+                javaScriptInitializer,
+                out var identifiersForInitializer
+            )
+        )
         {
             identifiersForInitializer = new();
-            JSComponentIdentifiersByInitializer.Add(javaScriptInitializer, identifiersForInitializer);
+            JSComponentIdentifiersByInitializer.Add(
+                javaScriptInitializer,
+                identifiersForInitializer
+            );
         }
 
         identifiersForInitializer.Add(identifier);
@@ -72,23 +99,24 @@ public sealed class JSComponentConfigurationStore
             Type = GetJSType(dotNetType);
         }
 
-        private static string GetJSType(Type dotNetType) => dotNetType switch
-        {
-            var x when x == typeof(string) => "string",
-            var x when x == typeof(bool) => "boolean",
-            var x when x == typeof(bool?) => "boolean?",
-            var x when x == typeof(decimal) => "number",
-            var x when x == typeof(decimal?) => "number?",
-            var x when x == typeof(double) => "number",
-            var x when x == typeof(double?) => "number?",
-            var x when x == typeof(float) => "number",
-            var x when x == typeof(float?) => "number?",
-            var x when x == typeof(int) => "number",
-            var x when x == typeof(int?) => "number?",
-            var x when x == typeof(long) => "number",
-            var x when x == typeof(long?) => "number?",
-            var x when JSComponentInterop.IsEventCallbackType(x) => "eventcallback",
-            _ => "object"
-        };
+        private static string GetJSType(Type dotNetType) =>
+            dotNetType switch
+            {
+                var x when x == typeof(string) => "string",
+                var x when x == typeof(bool) => "boolean",
+                var x when x == typeof(bool?) => "boolean?",
+                var x when x == typeof(decimal) => "number",
+                var x when x == typeof(decimal?) => "number?",
+                var x when x == typeof(double) => "number",
+                var x when x == typeof(double?) => "number?",
+                var x when x == typeof(float) => "number",
+                var x when x == typeof(float?) => "number?",
+                var x when x == typeof(int) => "number",
+                var x when x == typeof(int?) => "number?",
+                var x when x == typeof(long) => "number",
+                var x when x == typeof(long?) => "number?",
+                var x when JSComponentInterop.IsEventCallbackType(x) => "eventcallback",
+                _ => "object"
+            };
     }
 }

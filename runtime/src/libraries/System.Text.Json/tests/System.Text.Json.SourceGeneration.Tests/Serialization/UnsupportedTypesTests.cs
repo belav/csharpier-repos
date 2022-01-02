@@ -10,13 +10,14 @@ namespace System.Text.Json.SourceGeneration.Tests
 {
     public sealed partial class UnsupportedTypesTests_Metadata : UnsupportedTypesTests
     {
-        public UnsupportedTypesTests_Metadata() : base(
-            new StringSerializerWrapper(
-                UnsupportedTypesTestsContext_Metadata.Default,
-                (options) => new UnsupportedTypesTestsContext_Metadata(options)),
-            supportsJsonPathOnSerialize: true)
-        {
-        }
+        public UnsupportedTypesTests_Metadata()
+            : base(
+                new StringSerializerWrapper(
+                    UnsupportedTypesTestsContext_Metadata.Default,
+                    (options) => new UnsupportedTypesTestsContext_Metadata(options)
+                ),
+                supportsJsonPathOnSerialize: true
+            ) { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         // Supported types:
@@ -39,7 +40,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassThatImplementsIAsyncEnumerable))]
         [JsonSerializable(typeof(ClassWithType<ClassThatImplementsIAsyncEnumerable>))]
         [JsonSerializable(typeof(ClassWithAsyncEnumerableConverter))]
-
 #if NETCOREAPP
         [JsonSerializable(typeof(DateOnly))]
         [JsonSerializable(typeof(ClassWithType<DateOnly>))]
@@ -53,13 +53,14 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public sealed partial class UnsupportedTypesTests_Default : UnsupportedTypesTests
     {
-        public UnsupportedTypesTests_Default() : base(
-            new StringSerializerWrapper(
-                UnsupportedTypesTestsContext_Default.Default,
-                (options) => new UnsupportedTypesTestsContext_Default(options)),
-            supportsJsonPathOnSerialize: false)
-        {
-        }
+        public UnsupportedTypesTests_Default()
+            : base(
+                new StringSerializerWrapper(
+                    UnsupportedTypesTestsContext_Default.Default,
+                    (options) => new UnsupportedTypesTestsContext_Default(options)
+                ),
+                supportsJsonPathOnSerialize: false
+            ) { }
 
         // Supported types:
         [JsonSerializable(typeof(int))]

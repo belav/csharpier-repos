@@ -23,7 +23,8 @@ public class KeyValuePairModelBinderTest
         var binder = new KeyValuePairModelBinder<int, string>(
             CreateIntBinder(false),
             CreateStringBinder(),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -48,7 +49,8 @@ public class KeyValuePairModelBinderTest
         var binder = new KeyValuePairModelBinder<int, string>(
             CreateIntBinder(),
             CreateStringBinder(false),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -74,7 +76,8 @@ public class KeyValuePairModelBinderTest
         var binder = new KeyValuePairModelBinder<int, string>(
             CreateIntBinder(false),
             CreateStringBinder(false),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -95,7 +98,8 @@ public class KeyValuePairModelBinderTest
         var binder = new KeyValuePairModelBinder<int, string>(
             CreateIntBinder(),
             CreateStringBinder(),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -111,7 +115,8 @@ public class KeyValuePairModelBinderTest
     [InlineData(42, true)]
     public async Task TryBindStrongModel_InnerBinderReturnsAResult_ReturnsInnerBinderResult(
         object model,
-        bool isSuccess)
+        bool isSuccess
+    )
     {
         // Arrange
         ModelBindingResult innerResult;
@@ -124,19 +129,30 @@ public class KeyValuePairModelBinderTest
             innerResult = ModelBindingResult.Failed();
         }
 
-        var innerBinder = new StubModelBinder(context =>
-        {
-            Assert.Equal("someName.Key", context.ModelName);
-            return innerResult;
-        });
+        var innerBinder = new StubModelBinder(
+            context =>
+            {
+                Assert.Equal("someName.Key", context.ModelName);
+                return innerResult;
+            }
+        );
 
         var valueProvider = new SimpleValueProvider();
 
         var bindingContext = GetBindingContext(valueProvider, typeof(KeyValuePair<int, string>));
-        var binder = new KeyValuePairModelBinder<int, string>(innerBinder, innerBinder, NullLoggerFactory.Instance);
+        var binder = new KeyValuePairModelBinder<int, string>(
+            innerBinder,
+            innerBinder,
+            NullLoggerFactory.Instance
+        );
 
         // Act
-        var result = await binder.TryBindStrongModel<int>(bindingContext, innerBinder, "Key", "someName.Key");
+        var result = await binder.TryBindStrongModel<int>(
+            bindingContext,
+            innerBinder,
+            "Key",
+            "someName.Key"
+        );
 
         // Assert
         Assert.Equal(innerResult, result);
@@ -150,7 +166,8 @@ public class KeyValuePairModelBinderTest
         var binder = new KeyValuePairModelBinder<string, string>(
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var bindingContext = CreateContext();
         bindingContext.IsTopLevelObject = true;
@@ -159,7 +176,9 @@ public class KeyValuePairModelBinderTest
         bindingContext.ModelName = "modelName";
 
         var metadataProvider = new TestModelMetadataProvider();
-        bindingContext.ModelMetadata = metadataProvider.GetMetadataForType(typeof(KeyValuePair<string, string>));
+        bindingContext.ModelMetadata = metadataProvider.GetMetadataForType(
+            typeof(KeyValuePair<string, string>)
+        );
 
         bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
 
@@ -175,21 +194,28 @@ public class KeyValuePairModelBinderTest
     [Theory]
     [InlineData("")]
     [InlineData("param")]
-    public async Task KeyValuePairModelBinder_DoesNotCreateCollection_IfNotIsTopLevelObject(string prefix)
+    public async Task KeyValuePairModelBinder_DoesNotCreateCollection_IfNotIsTopLevelObject(
+        string prefix
+    )
     {
         // Arrange
         var binder = new KeyValuePairModelBinder<string, string>(
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var bindingContext = CreateContext();
-        bindingContext.ModelName = ModelNames.CreatePropertyModelName(prefix, "KeyValuePairProperty");
+        bindingContext.ModelName = ModelNames.CreatePropertyModelName(
+            prefix,
+            "KeyValuePairProperty"
+        );
 
         var metadataProvider = new TestModelMetadataProvider();
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithKeyValuePairProperty),
-            nameof(ModelWithKeyValuePairProperty.KeyValuePairProperty));
+            nameof(ModelWithKeyValuePairProperty.KeyValuePairProperty)
+        );
 
         bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
 
@@ -204,10 +230,7 @@ public class KeyValuePairModelBinderTest
     {
         var modelBindingContext = new DefaultModelBindingContext()
         {
-            ActionContext = new ActionContext()
-            {
-                HttpContext = new DefaultHttpContext(),
-            },
+            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), },
             ModelState = new ModelStateDictionary(),
         };
 
@@ -216,7 +239,8 @@ public class KeyValuePairModelBinderTest
 
     private static DefaultModelBindingContext GetBindingContext(
         IValueProvider valueProvider,
-        Type keyValuePairType)
+        Type keyValuePairType
+    )
     {
         var metadataProvider = new TestModelMetadataProvider();
         var bindingContext = new DefaultModelBindingContext
@@ -231,29 +255,33 @@ public class KeyValuePairModelBinderTest
 
     private static IModelBinder CreateIntBinder(bool success = true)
     {
-        var mockIntBinder = new StubModelBinder(mbc =>
-        {
-            if (mbc.ModelType == typeof(int) && success)
+        var mockIntBinder = new StubModelBinder(
+            mbc =>
             {
-                var model = 42;
-                return ModelBindingResult.Success(model);
+                if (mbc.ModelType == typeof(int) && success)
+                {
+                    var model = 42;
+                    return ModelBindingResult.Success(model);
+                }
+                return ModelBindingResult.Failed();
             }
-            return ModelBindingResult.Failed();
-        });
+        );
         return mockIntBinder;
     }
 
     private static IModelBinder CreateStringBinder(bool success = true)
     {
-        return new StubModelBinder(mbc =>
-        {
-            if (mbc.ModelType == typeof(string) && success)
+        return new StubModelBinder(
+            mbc =>
             {
-                var model = "some-value";
-                return ModelBindingResult.Success(model);
+                if (mbc.ModelType == typeof(string) && success)
+                {
+                    var model = "some-value";
+                    return ModelBindingResult.Success(model);
+                }
+                return ModelBindingResult.Failed();
             }
-            return ModelBindingResult.Failed();
-        });
+        );
     }
 
     private class ModelWithKeyValuePairProperty

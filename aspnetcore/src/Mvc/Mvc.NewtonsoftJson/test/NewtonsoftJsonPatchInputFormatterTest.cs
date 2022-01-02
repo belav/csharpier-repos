@@ -21,8 +21,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 
 public class NewtonsoftJsonPatchInputFormatterTest
 {
-    private static readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider();
-    private static readonly JsonSerializerSettings _serializerSettings = new JsonSerializerSettings();
+    private static readonly ObjectPoolProvider _objectPoolProvider =
+        new DefaultObjectPoolProvider();
+    private static readonly JsonSerializerSettings _serializerSettings =
+        new JsonSerializerSettings();
 
     [Fact]
     public async Task Constructor_BuffersRequestBody_ByDefault()
@@ -34,7 +36,8 @@ public class NewtonsoftJsonPatchInputFormatterTest
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
 
         var content = "[{\"op\":\"add\",\"path\":\"Customer/Name\",\"value\":\"John\"}]";
         var contentBytes = Encoding.UTF8.GetBytes(content);
@@ -44,7 +47,10 @@ public class NewtonsoftJsonPatchInputFormatterTest
         httpContext.Request.Body = new NonSeekableReadStream(contentBytes, allowSyncReads: false);
         httpContext.Request.ContentType = "application/json";
 
-        var formatterContext = CreateInputFormatterContext(typeof(JsonPatchDocument<Customer>), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(JsonPatchDocument<Customer>),
+            httpContext
+        );
 
         // Act
         var result = await formatter.ReadAsync(formatterContext);
@@ -61,17 +67,15 @@ public class NewtonsoftJsonPatchInputFormatterTest
     public async Task Constructor_SuppressInputFormatterBuffering_DoesNotBufferRequestBody()
     {
         // Arrange
-        var mvcOptions = new MvcOptions()
-        {
-            SuppressInputFormatterBuffering = false,
-        };
+        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = false, };
         var formatter = new NewtonsoftJsonPatchInputFormatter(
             GetLogger(),
             _serializerSettings,
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             mvcOptions,
-            new MvcNewtonsoftJsonOptions());
+            new MvcNewtonsoftJsonOptions()
+        );
 
         var content = "[{\"op\":\"add\",\"path\":\"Customer/Name\",\"value\":\"John\"}]";
         var contentBytes = Encoding.UTF8.GetBytes(content);
@@ -81,7 +85,10 @@ public class NewtonsoftJsonPatchInputFormatterTest
         httpContext.Request.Body = new NonSeekableReadStream(contentBytes);
         httpContext.Request.ContentType = "application/json";
 
-        var formatterContext = CreateInputFormatterContext(typeof(JsonPatchDocument<Customer>), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(JsonPatchDocument<Customer>),
+            httpContext
+        );
 
         // Act
         // Mutate options after passing into the constructor to make sure that the value type is not store in the constructor
@@ -114,7 +121,10 @@ public class NewtonsoftJsonPatchInputFormatterTest
         var contentBytes = Encoding.UTF8.GetBytes(content);
         var httpContext = CreateHttpContext(contentBytes);
 
-        var formatterContext = CreateInputFormatterContext(typeof(JsonPatchDocument<Customer>), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(JsonPatchDocument<Customer>),
+            httpContext
+        );
 
         // Act
         var result = await formatter.ReadAsync(formatterContext);
@@ -133,12 +143,16 @@ public class NewtonsoftJsonPatchInputFormatterTest
         // Arrange
         var formatter = CreateFormatter();
 
-        var content = "[{\"op\": \"add\", \"path\" : \"Customer/Name\", \"value\":\"John\"}," +
-            "{\"op\": \"remove\", \"path\" : \"Customer/Name\"}]";
+        var content =
+            "[{\"op\": \"add\", \"path\" : \"Customer/Name\", \"value\":\"John\"},"
+            + "{\"op\": \"remove\", \"path\" : \"Customer/Name\"}]";
         var contentBytes = Encoding.UTF8.GetBytes(content);
         var httpContext = CreateHttpContext(contentBytes);
 
-        var formatterContext = CreateInputFormatterContext(typeof(JsonPatchDocument<Customer>), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(JsonPatchDocument<Customer>),
+            httpContext
+        );
 
         // Act
         var result = await formatter.ReadAsync(formatterContext);
@@ -158,7 +172,10 @@ public class NewtonsoftJsonPatchInputFormatterTest
     [InlineData("application/json", false)]
     [InlineData("application/*", false)]
     [InlineData("*/*", false)]
-    public void CanRead_ReturnsTrueOnlyForJsonPatchContentType(string requestContentType, bool expectedCanRead)
+    public void CanRead_ReturnsTrueOnlyForJsonPatchContentType(
+        string requestContentType,
+        bool expectedCanRead
+    )
     {
         // Arrange
         var formatter = CreateFormatter();
@@ -167,7 +184,10 @@ public class NewtonsoftJsonPatchInputFormatterTest
         var contentBytes = Encoding.UTF8.GetBytes(content);
         var httpContext = CreateHttpContext(contentBytes, contentType: requestContentType);
 
-        var formatterContext = CreateInputFormatterContext(typeof(JsonPatchDocument<Customer>), httpContext);
+        var formatterContext = CreateInputFormatterContext(
+            typeof(JsonPatchDocument<Customer>),
+            httpContext
+        );
 
         // Act
         var result = formatter.CanRead(formatterContext);
@@ -186,7 +206,10 @@ public class NewtonsoftJsonPatchInputFormatterTest
 
         var content = "[{\"op\": \"add\", \"path\" : \"Customer/Name\", \"value\":\"John\"}]";
         var contentBytes = Encoding.UTF8.GetBytes(content);
-        var httpContext = CreateHttpContext(contentBytes, contentType: "application/json-patch+json");
+        var httpContext = CreateHttpContext(
+            contentBytes,
+            contentType: "application/json-patch+json"
+        );
 
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForType(modelType);
@@ -203,15 +226,19 @@ public class NewtonsoftJsonPatchInputFormatterTest
     public async Task JsonPatchInputFormatter_ReturnsModelStateErrors_InvalidModelType()
     {
         // Arrange
-        var exceptionMessage = "Cannot deserialize the current JSON array (e.g. [1,2,3]) into type " +
-            $"'{typeof(Customer).FullName}' because the type requires a JSON object ";
+        var exceptionMessage =
+            "Cannot deserialize the current JSON array (e.g. [1,2,3]) into type "
+            + $"'{typeof(Customer).FullName}' because the type requires a JSON object ";
 
         // This test relies on 2.1 error message behavior
         var formatter = CreateFormatter(allowInputFormatterExceptionMessages: true);
 
         var content = "[{\"op\": \"add\", \"path\" : \"Customer/Name\", \"value\":\"John\"}]";
         var contentBytes = Encoding.UTF8.GetBytes(content);
-        var httpContext = CreateHttpContext(contentBytes, contentType: "application/json-patch+json");
+        var httpContext = CreateHttpContext(
+            contentBytes,
+            contentType: "application/json-patch+json"
+        );
 
         var formatterContext = CreateInputFormatterContext(typeof(Customer), httpContext);
 
@@ -228,7 +255,9 @@ public class NewtonsoftJsonPatchInputFormatterTest
         return NullLogger.Instance;
     }
 
-    private NewtonsoftJsonPatchInputFormatter CreateFormatter(bool allowInputFormatterExceptionMessages = false)
+    private NewtonsoftJsonPatchInputFormatter CreateFormatter(
+        bool allowInputFormatterExceptionMessages = false
+    )
     {
         return new NewtonsoftJsonPatchInputFormatter(
             NullLogger.Instance,
@@ -239,10 +268,14 @@ public class NewtonsoftJsonPatchInputFormatterTest
             new MvcNewtonsoftJsonOptions()
             {
                 AllowInputFormatterExceptionMessages = allowInputFormatterExceptionMessages,
-            });
+            }
+        );
     }
 
-    private InputFormatterContext CreateInputFormatterContext(Type modelType, HttpContext httpContext)
+    private InputFormatterContext CreateInputFormatterContext(
+        Type modelType,
+        HttpContext httpContext
+    )
     {
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForType(modelType);
@@ -252,12 +285,14 @@ public class NewtonsoftJsonPatchInputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
     }
 
     private static HttpContext CreateHttpContext(
         byte[] contentBytes,
-        string contentType = "application/json-patch+json")
+        string contentType = "application/json-patch+json"
+    )
     {
         var request = new Mock<HttpRequest>();
         var headers = new Mock<IHeaderDictionary>();

@@ -16,9 +16,7 @@ namespace System.Net.Security
 #endif
         private int _disposed;
 
-        public SecurityContextTokenHandle() : base()
-        {
-        }
+        public SecurityContextTokenHandle() : base() { }
 
         internal IntPtr DangerousGetHandle()
         {

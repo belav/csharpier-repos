@@ -9,13 +9,9 @@ namespace System.IO.IsolatedStorage
     {
         private class TestStorage : IsolatedStorage
         {
-            public TestStorage()
-                : base()
-            {
-            }
+            public TestStorage() : base() { }
 
-            public TestStorage(IsolatedStorageScope scope)
-                : this()
+            public TestStorage(IsolatedStorageScope scope) : this()
             {
                 InitStore(scope, null);
             }
@@ -35,12 +31,17 @@ namespace System.IO.IsolatedStorage
             Assert.Throws<InvalidOperationException>(() => storage.DomainIdentity);
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(IsolatedStorageScope.Application | IsolatedStorageScope.User),
-            InlineData(IsolatedStorageScope.Application | IsolatedStorageScope.User | IsolatedStorageScope.Roaming)
-            // https://github.com/dotnet/runtime/issues/2092
-            // InlineData(IsolatedStorageScope.Application | IsolatedStorageScope.Machine)
-            ]
+            InlineData(
+                IsolatedStorageScope.Application
+                    | IsolatedStorageScope.User
+                    | IsolatedStorageScope.Roaming
+            )
+        // https://github.com/dotnet/runtime/issues/2092
+        // InlineData(IsolatedStorageScope.Application | IsolatedStorageScope.Machine)
+        ]
         public void ApplicationIdentityIsSet(IsolatedStorageScope scope)
         {
             TestStorage storage = new TestStorage(scope);
@@ -49,12 +50,17 @@ namespace System.IO.IsolatedStorage
             Assert.Throws<InvalidOperationException>(() => storage.DomainIdentity);
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.User),
-            InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.User | IsolatedStorageScope.Roaming)
-            // https://github.com/dotnet/runtime/issues/2092
-            // InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.Machine)
-            ]
+            InlineData(
+                IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.User
+                    | IsolatedStorageScope.Roaming
+            )
+        // https://github.com/dotnet/runtime/issues/2092
+        // InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.Machine)
+        ]
         public void AssemblyIdentityIsSet(IsolatedStorageScope scope)
         {
             TestStorage storage = new TestStorage(scope);
@@ -63,12 +69,22 @@ namespace System.IO.IsolatedStorage
             Assert.Throws<InvalidOperationException>(() => storage.DomainIdentity);
         }
 
-        [Theory,
-            InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.User | IsolatedStorageScope.Domain),
-            InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.User | IsolatedStorageScope.Roaming | IsolatedStorageScope.Domain)
-            // https://github.com/dotnet/runtime/issues/2092
-            // InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.Machine | IsolatedStorageScope.Domain)
-            ]
+        [
+            Theory,
+            InlineData(
+                IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.User
+                    | IsolatedStorageScope.Domain
+            ),
+            InlineData(
+                IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.User
+                    | IsolatedStorageScope.Roaming
+                    | IsolatedStorageScope.Domain
+            )
+        // https://github.com/dotnet/runtime/issues/2092
+        // InlineData(IsolatedStorageScope.Assembly | IsolatedStorageScope.Machine | IsolatedStorageScope.Domain)
+        ]
         public void DomainIdentityIsSet(IsolatedStorageScope scope)
         {
             TestStorage storage = new TestStorage(scope);

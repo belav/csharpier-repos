@@ -28,20 +28,24 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
         var mockScopeLoggerProvider = new MockScopeLoggerProvider(expectedLogMessage);
         LoggerFactory.AddProvider(mockScopeLoggerProvider);
 
-        await using var server = new TestServer(async context =>
-        {
-            connectionIdFromFeature = context.Features.Get<IConnectionIdFeature>().ConnectionId;
+        await using var server = new TestServer(
+            async context =>
+            {
+                connectionIdFromFeature = context.Features.Get<IConnectionIdFeature>().ConnectionId;
 
-            var logger = context.RequestServices.GetRequiredService<ILogger<Http2EndToEndTests>>();
-            logger.LogInformation(expectedLogMessage);
+                var logger = context.RequestServices.GetRequiredService<
+                    ILogger<Http2EndToEndTests>
+                >();
+                logger.LogInformation(expectedLogMessage);
 
-            await context.Response.WriteAsync("hello, world");
-        },
-        new TestServiceContext(LoggerFactory),
-        listenOptions =>
-        {
-            listenOptions.Protocols = HttpProtocols.Http2;
-        });
+                await context.Response.WriteAsync("hello, world");
+            },
+            new TestServiceContext(LoggerFactory),
+            listenOptions =>
+            {
+                listenOptions.Protocols = HttpProtocols.Http2;
+            }
+        );
 
         var connectionCount = 0;
         using var connection = server.CreateConnection();
@@ -100,9 +104,7 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
             _scopeProvider = scopeProvider;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         private class MockScopeLogger : ILogger
         {
@@ -123,7 +125,13 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
                 return true;
             }
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            )
             {
                 if (formatter(state, exception) != _loggerProvider._expectedLogMessage)
                 {
@@ -135,7 +143,8 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
                     {
                         loggerPovider.ConnectionLogScope ??= scopeObject as ConnectionLogScope;
                     },
-                    _loggerProvider);
+                    _loggerProvider
+                );
             }
         }
     }

@@ -19,10 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
     {
         protected class FakeValueConverter : ValueConverter<object, object>
         {
-            public FakeValueConverter()
-                : base(_ => _, _ => _)
-            {
-            }
+            public FakeValueConverter() : base(_ => _, _ => _) { }
 
             public override Type ModelClrType { get; } = typeof(object);
             public override Type ProviderClrType { get; } = typeof(object);
@@ -30,10 +27,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         protected class FakeValueComparer : ValueComparer<object>
         {
-            public FakeValueComparer()
-                : base(false)
-            {
-            }
+            public FakeValueComparer() : base(false) { }
 
             public override Type Type { get; } = typeof(object);
         }
@@ -64,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 null,
                 new[] { FakeTypeMapping.CreateParameters(type) },
                 null,
-                null);
+                null
+            );
 
             var clone = mapping.Clone("<clone>", null);
 
@@ -104,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected virtual void ConversionCloneTest(
             Type mappingType,
             Type type,
-            params object[] additionalArgs)
+            params object[] additionalArgs
+        )
         {
             var mapping = (RelationalTypeMapping)Activator.CreateInstance(
                 mappingType,
@@ -116,10 +112,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         type,
                         size: 33,
                         fixedLength: true,
-                        storeTypePostfix: StoreTypePostfix.Size)
-                }.Concat(additionalArgs).ToArray(),
+                        storeTypePostfix: StoreTypePostfix.Size
+                    )
+                }
+                    .Concat(additionalArgs)
+                    .ToArray(),
                 null,
-                null);
+                null
+            );
 
             var clone = mapping.Clone("<clone>", 66);
 
@@ -167,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected virtual void UnicodeConversionCloneTest(
             Type mappingType,
             Type type,
-            params object[] additionalArgs)
+            params object[] additionalArgs
+        )
         {
             var mapping = (RelationalTypeMapping)Activator.CreateInstance(
                 mappingType,
@@ -180,10 +181,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         size: 33,
                         unicode: false,
                         fixedLength: true,
-                        storeTypePostfix: StoreTypePostfix.Size)
-                }.Concat(additionalArgs).ToArray(),
+                        storeTypePostfix: StoreTypePostfix.Size
+                    )
+                }
+                    .Concat(additionalArgs)
+                    .ToArray(),
                 null,
-                null);
+                null
+            );
 
             var clone = mapping.Clone("<clone>", 66);
 
@@ -228,47 +233,50 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private class FakeTypeMapping : RelationalTypeMapping
         {
-            private FakeTypeMapping(RelationalTypeMappingParameters parameters)
-                : base(parameters)
-            {
-            }
+            private FakeTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+            { }
 
-            public FakeTypeMapping()
-                : base("storeType", typeof(object))
-            {
-            }
+            public FakeTypeMapping() : base("storeType", typeof(object)) { }
 
             public static object CreateParameters(
                 Type type,
                 int? size = null,
                 bool unicode = false,
                 bool fixedLength = false,
-                StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale)
+                StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale
+            )
             {
                 return new RelationalTypeMappingParameters(
                     new CoreTypeMappingParameters(
                         type,
                         new FakeValueConverter(),
                         new FakeValueComparer(),
-                        new FakeValueComparer()),
+                        new FakeValueComparer()
+                    ),
                     "<original>",
                     storeTypePostfix,
                     System.Data.DbType.VarNumeric,
                     size: size,
                     unicode: unicode,
-                    fixedLength: fixedLength);
+                    fixedLength: fixedLength
+                );
             }
 
-            protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-                => new FakeTypeMapping(parameters);
+            protected override RelationalTypeMapping Clone(
+                RelationalTypeMappingParameters parameters
+            ) => new FakeTypeMapping(parameters);
         }
 
         [ConditionalFact]
         public void Can_create_simple_parameter()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int")
-                .CreateParameter(command, "Name", 17, nullable: false);
+            var parameter = new IntTypeMapping("int").CreateParameter(
+                command,
+                "Name",
+                17,
+                nullable: false
+            );
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -281,8 +289,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_simple_nullable_parameter()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int")
-                .CreateParameter(command, "Name", 17, nullable: true);
+            var parameter = new IntTypeMapping("int").CreateParameter(
+                command,
+                "Name",
+                17,
+                nullable: true
+            );
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -295,8 +307,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_simple_parameter_with_DbType()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int", DbType.Int32)
-                .CreateParameter(command, "Name", 17, nullable: false);
+            var parameter = new IntTypeMapping("int", DbType.Int32).CreateParameter(
+                command,
+                "Name",
+                17,
+                nullable: false
+            );
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -309,8 +325,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_simple_nullable_parameter_with_DbType()
         {
             using var command = CreateTestCommand();
-            var parameter = new IntTypeMapping("int", DbType.Int32)
-                .CreateParameter(command, "Name", 17, nullable: true);
+            var parameter = new IntTypeMapping("int", DbType.Int32).CreateParameter(
+                command,
+                "Name",
+                17,
+                nullable: true
+            );
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -323,8 +343,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_required_string_parameter()
         {
             using var command = CreateTestCommand();
-            var parameter = new StringTypeMapping("nvarchar(23)", DbType.String, unicode: true, size: 23)
-                .CreateParameter(command, "Name", "Value", nullable: false);
+            var parameter = new StringTypeMapping(
+                "nvarchar(23)",
+                DbType.String,
+                unicode: true,
+                size: 23
+            ).CreateParameter(command, "Name", "Value", nullable: false);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -338,8 +362,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public void Can_create_string_parameter()
         {
             using var command = CreateTestCommand();
-            var parameter = new StringTypeMapping("nvarchar(23)", DbType.String, unicode: true, size: 23)
-                .CreateParameter(command, "Name", "Value", nullable: true);
+            var parameter = new StringTypeMapping(
+                "nvarchar(23)",
+                DbType.String,
+                unicode: true,
+                size: 23
+            ).CreateParameter(command, "Name", "Value", nullable: true);
 
             Assert.Equal(ParameterDirection.Input, parameter.Direction);
             Assert.Equal("Name", parameter.ParameterName);
@@ -352,7 +380,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected virtual void Test_GenerateSqlLiteral_helper(
             RelationalTypeMapping typeMapping,
             object value,
-            string literalValue)
+            string literalValue
+        )
         {
             Assert.Equal(literalValue, typeMapping.GenerateSqlLiteral(value));
         }
@@ -369,7 +398,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public virtual void ByteArray_literal_generated_correctly()
         {
-            Test_GenerateSqlLiteral_helper(new ByteArrayTypeMapping("byte[]"), new byte[] { 0xDA, 0x7A }, "X'DA7A'");
+            Test_GenerateSqlLiteral_helper(
+                new ByteArrayTypeMapping("byte[]"),
+                new byte[] { 0xDA, 0x7A },
+                "X'DA7A'"
+            );
         }
 
         [ConditionalFact]
@@ -394,7 +427,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 new DateTimeOffsetTypeMapping("DateTimeOffset"),
                 new DateTimeOffset(2015, 3, 12, 13, 36, 37, 371, new TimeSpan(-7, 0, 0)),
-                "TIMESTAMP '2015-03-12 13:36:37.3710000-07:00'");
+                "TIMESTAMP '2015-03-12 13:36:37.3710000-07:00'"
+            );
         }
 
         [ConditionalFact]
@@ -403,7 +437,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 new DateTimeTypeMapping("DateTime"),
                 new DateTime(2015, 3, 12, 13, 36, 37, 371, DateTimeKind.Utc),
-                "TIMESTAMP '2015-03-12 13:36:37.3710000'");
+                "TIMESTAMP '2015-03-12 13:36:37.3710000'"
+            );
         }
 
         [ConditionalFact]
@@ -412,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 new DateOnlyTypeMapping("DateOnly"),
                 new DateOnly(2015, 3, 12),
-                "DATE '2015-03-12'");
+                "DATE '2015-03-12'"
+            );
         }
 
         [ConditionalFact]
@@ -421,7 +457,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 new TimeOnlyTypeMapping("TimeOnly"),
                 new TimeOnly(13, 10, 15),
-                "TIME '13:10:15'");
+                "TIME '13:10:15'"
+            );
         }
 
         [ConditionalFact]
@@ -430,7 +467,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 new TimeOnlyTypeMapping("TimeOnly"),
                 new TimeOnly(13, 10, 15, 500),
-                "TIME '13:10:15.5'");
+                "TIME '13:10:15.5'"
+            );
         }
 
         [ConditionalFact]
@@ -438,8 +476,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var typeMapping = new DecimalTypeMapping("decimal", DbType.Decimal);
 
-            Test_GenerateSqlLiteral_helper(typeMapping, decimal.MinValue, "-79228162514264337593543950335.0");
-            Test_GenerateSqlLiteral_helper(typeMapping, decimal.MaxValue, "79228162514264337593543950335.0");
+            Test_GenerateSqlLiteral_helper(
+                typeMapping,
+                decimal.MinValue,
+                "-79228162514264337593543950335.0"
+            );
+            Test_GenerateSqlLiteral_helper(
+                typeMapping,
+                decimal.MaxValue,
+                "79228162514264337593543950335.0"
+            );
         }
 
         [ConditionalFact]
@@ -450,7 +496,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(typeMapping, double.NaN, "NaN");
             Test_GenerateSqlLiteral_helper(typeMapping, double.PositiveInfinity, "Infinity");
             Test_GenerateSqlLiteral_helper(typeMapping, double.NegativeInfinity, "-Infinity");
-            Test_GenerateSqlLiteral_helper(typeMapping, double.MinValue, "-1.7976931348623157E+308");
+            Test_GenerateSqlLiteral_helper(
+                typeMapping,
+                double.MinValue,
+                "-1.7976931348623157E+308"
+            );
             Test_GenerateSqlLiteral_helper(typeMapping, double.MaxValue, "1.7976931348623157E+308");
         }
 
@@ -472,7 +522,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 new GuidTypeMapping("guid"),
                 new Guid("c6f43a9e-91e1-45ef-a320-832ea23b7292"),
-                "'c6f43a9e-91e1-45ef-a320-832ea23b7292'");
+                "'c6f43a9e-91e1-45ef-a320-832ea23b7292'"
+            );
         }
 
         [ConditionalFact]
@@ -523,13 +574,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public virtual void String_literal_generated_correctly()
         {
-            Test_GenerateSqlLiteral_helper(new StringTypeMapping("string", DbType.String), "Text", "'Text'");
+            Test_GenerateSqlLiteral_helper(
+                new StringTypeMapping("string", DbType.String),
+                "Text",
+                "'Text'"
+            );
         }
 
         [ConditionalFact]
         public virtual void Timespan_literal_generated_correctly()
         {
-            Test_GenerateSqlLiteral_helper(new TimeSpanTypeMapping("time"), new TimeSpan(7, 14, 30), "'07:14:30'");
+            Test_GenerateSqlLiteral_helper(
+                new TimeSpanTypeMapping("time"),
+                new TimeSpan(7, 14, 30),
+                "'07:14:30'"
+            );
         }
 
         [ConditionalFact]
@@ -582,7 +641,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public virtual void DateTimeOffset_value_comparer_behaves_correctly()
         {
-            var typeMapping = new DateTimeOffsetTypeMapping("datetimeoffset", DbType.DateTimeOffset);
+            var typeMapping = new DateTimeOffsetTypeMapping(
+                "datetimeoffset",
+                DbType.DateTimeOffset
+            );
 
             var same1 = new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0));
             var same2 = new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0));
@@ -592,9 +654,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.False(typeMapping.Comparer.Equals(same1, different));
             Assert.True(typeMapping.Comparer.Equals(same1, same2));
 
-            var parameters = new[] { Expression.Parameter(typeof(DateTimeOffset)), Expression.Parameter(typeof(DateTimeOffset)) };
+            var parameters = new[]
+            {
+                Expression.Parameter(typeof(DateTimeOffset)),
+                Expression.Parameter(typeof(DateTimeOffset))
+            };
             var equalsBody = typeMapping.Comparer.ExtractEqualsBody(parameters[0], parameters[1]);
-            var equalsComparer = Expression.Lambda<Func<DateTimeOffset, DateTimeOffset, bool>>(equalsBody, parameters).Compile();
+            var equalsComparer = Expression
+                .Lambda<Func<DateTimeOffset, DateTimeOffset, bool>>(equalsBody, parameters)
+                .Compile();
 
             Assert.False(equalsComparer(same1, different));
             Assert.True(equalsComparer(same1, same2));
@@ -606,15 +674,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
             using var context = new FruityContext(ContextOptions);
             Assert.Same(
                 context.Model.FindEntityType(typeof(Banana)).FindProperty("Id").GetTypeMapping(),
-                context.Model.FindEntityType(typeof(Kiwi)).FindProperty("BananaId").GetTypeMapping());
+                context.Model.FindEntityType(typeof(Kiwi)).FindProperty("BananaId").GetTypeMapping()
+            );
         }
 
         private class FruityContext : DbContext
         {
-            public FruityContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public FruityContext(DbContextOptions options) : base(options) { }
 
             public DbSet<Banana> Bananas { get; set; }
             public DbSet<Kiwi> Kiwi { get; set; }
@@ -626,16 +692,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
             using var context = new MismatchedFruityContext(ContextOptions);
             Assert.Equal(
                 typeof(short),
-                context.Model.FindEntityType(typeof(Banana)).FindProperty("Id").GetTypeMapping().Converter.ProviderClrType);
-            Assert.Null(context.Model.FindEntityType(typeof(Kiwi)).FindProperty("Id").GetTypeMapping().Converter);
+                context.Model
+                    .FindEntityType(typeof(Banana))
+                    .FindProperty("Id")
+                    .GetTypeMapping().Converter.ProviderClrType
+            );
+            Assert.Null(
+                context.Model
+                    .FindEntityType(typeof(Kiwi))
+                    .FindProperty("Id")
+                    .GetTypeMapping().Converter
+            );
         }
 
         private class MismatchedFruityContext : FruityContext
         {
-            public MismatchedFruityContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public MismatchedFruityContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -643,7 +715,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                 modelBuilder.Entity<Banana>().Property(e => e.Id).HasConversion<short>();
                 modelBuilder.Entity<Kiwi>().Property(e => e.Id).HasConversion<int>();
-                modelBuilder.Entity<Kiwi>().HasOne(e => e.Banana).WithMany(e => e.Kiwis).HasForeignKey(e => e.Id);
+                modelBuilder
+                    .Entity<Kiwi>()
+                    .HasOne(e => e.Banana)
+                    .WithMany(e => e.Kiwis)
+                    .HasForeignKey(e => e.Id);
             }
         }
 

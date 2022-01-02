@@ -12,13 +12,21 @@ internal class DefaultHubMessageSerializer
 {
     private readonly List<IHubProtocol> _hubProtocols;
 
-    public DefaultHubMessageSerializer(IHubProtocolResolver hubProtocolResolver, IList<string>? globalSupportedProtocols, IList<string>? hubSupportedProtocols)
+    public DefaultHubMessageSerializer(
+        IHubProtocolResolver hubProtocolResolver,
+        IList<string>? globalSupportedProtocols,
+        IList<string>? hubSupportedProtocols
+    )
     {
-        var supportedProtocols = hubSupportedProtocols ?? globalSupportedProtocols ?? Array.Empty<string>();
+        var supportedProtocols =
+            hubSupportedProtocols ?? globalSupportedProtocols ?? Array.Empty<string>();
         _hubProtocols = new List<IHubProtocol>(supportedProtocols.Count);
         foreach (var protocolName in supportedProtocols)
         {
-            var protocol = hubProtocolResolver.GetProtocol(protocolName, (supportedProtocols as IReadOnlyList<string>) ?? supportedProtocols.ToList());
+            var protocol = hubProtocolResolver.GetProtocol(
+                protocolName,
+                (supportedProtocols as IReadOnlyList<string>) ?? supportedProtocols.ToList()
+            );
             if (protocol != null)
             {
                 _hubProtocols.Add(protocol);

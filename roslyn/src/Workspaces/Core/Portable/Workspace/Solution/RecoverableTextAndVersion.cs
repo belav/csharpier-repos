@@ -29,13 +29,15 @@ namespace Microsoft.CodeAnalysis
 
         public RecoverableTextAndVersion(
             ValueSource<TextAndVersion> initialTextAndVersion,
-            ITemporaryStorageService storageService)
+            ITemporaryStorageService storageService
+        )
         {
             _initialSource = initialTextAndVersion;
             _storageService = storageService;
         }
 
-        private SemaphoreSlim Gate => LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
+        private SemaphoreSlim Gate =>
+            LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
 
         public ITemporaryTextStorage? Storage => _text?.Storage;
 
@@ -87,10 +89,17 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return TextAndVersion.Create(_text.GetValue(cancellationToken), _version, _filePath, _loadDiagnostic);
+            return TextAndVersion.Create(
+                _text.GetValue(cancellationToken),
+                _version,
+                _filePath,
+                _loadDiagnostic
+            );
         }
 
-        public override async Task<TextAndVersion> GetValueAsync(CancellationToken cancellationToken = default)
+        public override async Task<TextAndVersion> GetValueAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             if (_text == null)
             {
@@ -98,7 +107,11 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (_text == null)
                     {
-                        return InitRecoverable(await _initialSource!.GetValueAsync(cancellationToken).ConfigureAwait(false));
+                        return InitRecoverable(
+                            await _initialSource!
+                                .GetValueAsync(cancellationToken)
+                                .ConfigureAwait(false)
+                        );
                     }
                 }
             }
@@ -131,11 +144,19 @@ namespace Microsoft.CodeAnalysis
 
             public ITemporaryTextStorage? Storage => _storage;
 
-            protected override async Task<SourceText> RecoverAsync(CancellationToken cancellationToken)
+            protected override async Task<SourceText> RecoverAsync(
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfNull(_storage);
 
-                using (Logger.LogBlock(FunctionId.Workspace_Recoverable_RecoverTextAsync, _parent._filePath, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Workspace_Recoverable_RecoverTextAsync,
+                        _parent._filePath,
+                        cancellationToken
+                    )
+                )
                 {
                     return await _storage.ReadTextAsync(cancellationToken).ConfigureAwait(false);
                 }
@@ -145,13 +166,22 @@ namespace Microsoft.CodeAnalysis
             {
                 Contract.ThrowIfNull(_storage);
 
-                using (Logger.LogBlock(FunctionId.Workspace_Recoverable_RecoverText, _parent._filePath, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Workspace_Recoverable_RecoverText,
+                        _parent._filePath,
+                        cancellationToken
+                    )
+                )
                 {
                     return _storage.ReadText(cancellationToken);
                 }
             }
 
-            protected override async Task SaveAsync(SourceText text, CancellationToken cancellationToken)
+            protected override async Task SaveAsync(
+                SourceText text,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(_storage == null); // Cannot save more than once
 

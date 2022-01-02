@@ -13,17 +13,21 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 /// <summary>
 /// Defines a collection of <see cref="RootComponentMapping"/> items.
 /// </summary>
-public class RootComponentMappingCollection : Collection<RootComponentMapping>, IJSComponentConfiguration
+public class RootComponentMappingCollection
+    : Collection<RootComponentMapping>,
+      IJSComponentConfiguration
 {
     /// <inheritdoc />
-    public JSComponentConfigurationStore JSComponents { get; } = new JSComponentConfigurationStore();
+    public JSComponentConfigurationStore JSComponents { get; } =
+        new JSComponentConfigurationStore();
 
     /// <summary>
     /// Adds a component mapping to the collection.
     /// </summary>
     /// <typeparam name="TComponent">The component type.</typeparam>
     /// <param name="selector">The DOM element selector.</param>
-    public void Add<[DynamicallyAccessedMembers(Component)] TComponent>(string selector) where TComponent : IComponent
+    public void Add<[DynamicallyAccessedMembers(Component)] TComponent>(string selector)
+        where TComponent : IComponent
     {
         if (selector is null)
         {
@@ -49,7 +53,11 @@ public class RootComponentMappingCollection : Collection<RootComponentMapping>, 
     /// <param name="componentType">The component type. Must implement <see cref="IComponent"/>.</param>
     /// <param name="selector">The DOM element selector.</param>
     /// <param name="parameters">The parameters to the root component.</param>
-    public void Add([DynamicallyAccessedMembers(Component)] Type componentType, string selector, ParameterView parameters)
+    public void Add(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        string selector,
+        ParameterView parameters
+    )
     {
         if (componentType is null)
         {

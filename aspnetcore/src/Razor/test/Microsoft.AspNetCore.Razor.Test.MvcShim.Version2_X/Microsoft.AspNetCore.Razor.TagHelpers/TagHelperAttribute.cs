@@ -10,17 +10,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
 public class TagHelperAttribute : IHtmlContentContainer
 {
-    public TagHelperAttribute(string name)
-    {
-    }
+    public TagHelperAttribute(string name) { }
 
-    public TagHelperAttribute(string name, object value)
-    {
-    }
+    public TagHelperAttribute(string name, object value) { }
 
-    public TagHelperAttribute(string name, object value, HtmlAttributeValueStyle valueStyle)
-    {
-    }
+    public TagHelperAttribute(string name, object value, HtmlAttributeValueStyle valueStyle) { }
 
     public string Name { get; }
 
@@ -28,15 +22,9 @@ public class TagHelperAttribute : IHtmlContentContainer
 
     public HtmlAttributeValueStyle ValueStyle { get; }
 
-    public void WriteTo(TextWriter writer, HtmlEncoder encoder)
-    {
-    }
+    public void WriteTo(TextWriter writer, HtmlEncoder encoder) { }
 
-    public void CopyTo(IHtmlContentBuilder destination)
-    {
-    }
+    public void CopyTo(IHtmlContentBuilder destination) { }
 
-    public void MoveTo(IHtmlContentBuilder destination)
-    {
-    }
+    public void MoveTo(IHtmlContentBuilder destination) { }
 }

@@ -20,7 +20,12 @@ internal static class RouteParameterParser
 
         if (parameter.Length == 0)
         {
-            return new RoutePatternParameterPart(string.Empty, null, RoutePatternParameterKind.Standard, Array.Empty<RoutePatternParameterPolicyReference>());
+            return new RoutePatternParameterPart(
+                string.Empty,
+                null,
+                RoutePatternParameterKind.Standard,
+                Array.Empty<RoutePatternParameterPolicyReference>()
+            );
         }
 
         var startIndex = 0;
@@ -79,8 +84,7 @@ internal static class RouteParameterParser
         currentIndex = parseResults.CurrentIndex;
 
         string? defaultValue = null;
-        if (currentIndex <= endIndex &&
-            parameter[currentIndex] == '=')
+        if (currentIndex <= endIndex && parameter[currentIndex] == '=')
         {
             defaultValue = parameter.Substring(currentIndex + 1, endIndex - currentIndex);
         }
@@ -90,13 +94,15 @@ internal static class RouteParameterParser
             defaultValue,
             parameterKind,
             parseResults.ParameterPolicies,
-            encodeSlashes);
+            encodeSlashes
+        );
     }
 
     private static ParameterPolicyParseResults ParseConstraints(
         string text,
         int currentIndex,
-        int endIndex)
+        int endIndex
+    )
     {
         var constraints = new ArrayBuilder<RoutePatternParameterPolicyReference>(0);
         var state = ParseState.Start;
@@ -130,7 +136,10 @@ internal static class RouteParameterParser
                     {
                         case null:
                             state = ParseState.End;
-                            var constraintText = text.Substring(startIndex, currentIndex - startIndex);
+                            var constraintText = text.Substring(
+                                startIndex,
+                                currentIndex - startIndex
+                            );
                             constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
                             break;
                         case ')':
@@ -139,24 +148,40 @@ internal static class RouteParameterParser
                             // (b) the next character is the start of the new constraint ':'
                             // (c) the next character is the start of the default value.
 
-                            var nextChar = currentIndex + 1 > endIndex ? null : (char?)text[currentIndex + 1];
+                            var nextChar =
+                                currentIndex + 1 > endIndex ? null : (char?)text[currentIndex + 1];
                             switch (nextChar)
                             {
                                 case null:
                                     state = ParseState.End;
-                                    constraintText = text.Substring(startIndex, currentIndex - startIndex + 1);
-                                    constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
+                                    constraintText = text.Substring(
+                                        startIndex,
+                                        currentIndex - startIndex + 1
+                                    );
+                                    constraints.Add(
+                                        RoutePatternFactory.ParameterPolicy(constraintText)
+                                    );
                                     break;
                                 case ':':
                                     state = ParseState.Start;
-                                    constraintText = text.Substring(startIndex, currentIndex - startIndex + 1);
-                                    constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
+                                    constraintText = text.Substring(
+                                        startIndex,
+                                        currentIndex - startIndex + 1
+                                    );
+                                    constraints.Add(
+                                        RoutePatternFactory.ParameterPolicy(constraintText)
+                                    );
                                     startIndex = currentIndex + 1;
                                     break;
                                 case '=':
                                     state = ParseState.End;
-                                    constraintText = text.Substring(startIndex, currentIndex - startIndex + 1);
-                                    constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
+                                    constraintText = text.Substring(
+                                        startIndex,
+                                        currentIndex - startIndex + 1
+                                    );
+                                    constraints.Add(
+                                        RoutePatternFactory.ParameterPolicy(constraintText)
+                                    );
                                     break;
                             }
                             break;
@@ -170,8 +195,13 @@ internal static class RouteParameterParser
                             var indexOfClosingParantheses = text.IndexOf(')', currentIndex + 1);
                             if (indexOfClosingParantheses == -1)
                             {
-                                constraintText = text.Substring(startIndex, currentIndex - startIndex);
-                                constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
+                                constraintText = text.Substring(
+                                    startIndex,
+                                    currentIndex - startIndex
+                                );
+                                constraints.Add(
+                                    RoutePatternFactory.ParameterPolicy(constraintText)
+                                );
 
                                 if (currentChar == ':')
                                 {
@@ -197,17 +227,24 @@ internal static class RouteParameterParser
                     {
                         case null:
                             state = ParseState.End;
-                            var constraintText = text.Substring(startIndex, currentIndex - startIndex);
+                            var constraintText = text.Substring(
+                                startIndex,
+                                currentIndex - startIndex
+                            );
                             if (constraintText.Length > 0)
                             {
-                                constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
+                                constraints.Add(
+                                    RoutePatternFactory.ParameterPolicy(constraintText)
+                                );
                             }
                             break;
                         case ':':
                             constraintText = text.Substring(startIndex, currentIndex - startIndex);
                             if (constraintText.Length > 0)
                             {
-                                constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
+                                constraints.Add(
+                                    RoutePatternFactory.ParameterPolicy(constraintText)
+                                );
                             }
                             startIndex = currentIndex + 1;
                             break;
@@ -219,7 +256,9 @@ internal static class RouteParameterParser
                             constraintText = text.Substring(startIndex, currentIndex - startIndex);
                             if (constraintText.Length > 0)
                             {
-                                constraints.Add(RoutePatternFactory.ParameterPolicy(constraintText));
+                                constraints.Add(
+                                    RoutePatternFactory.ParameterPolicy(constraintText)
+                                );
                             }
                             currentIndex--;
                             break;
@@ -228,7 +267,6 @@ internal static class RouteParameterParser
             }
 
             currentIndex++;
-
         } while (state != ParseState.End);
 
         return new ParameterPolicyParseResults(currentIndex, constraints.ToArray());
@@ -248,7 +286,10 @@ internal static class RouteParameterParser
 
         public readonly RoutePatternParameterPolicyReference[] ParameterPolicies;
 
-        public ParameterPolicyParseResults(int currentIndex, RoutePatternParameterPolicyReference[] parameterPolicies)
+        public ParameterPolicyParseResults(
+            int currentIndex,
+            RoutePatternParameterPolicyReference[] parameterPolicies
+        )
         {
             CurrentIndex = currentIndex;
             ParameterPolicies = parameterPolicies;

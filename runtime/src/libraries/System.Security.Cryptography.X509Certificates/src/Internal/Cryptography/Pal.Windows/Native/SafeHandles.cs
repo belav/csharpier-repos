@@ -30,22 +30,20 @@ namespace Internal.Cryptography.Pal.Native
 
     internal sealed class SafeChainEngineHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeChainEngineHandle()
-            : base(true)
-        {
-        }
+        public SafeChainEngineHandle() : base(true) { }
 
-        private SafeChainEngineHandle(IntPtr handle)
-            : base(true)
+        private SafeChainEngineHandle(IntPtr handle) : base(true)
         {
             SetHandle(handle);
         }
 
-        public static readonly SafeChainEngineHandle MachineChainEngine =
-            new SafeChainEngineHandle((IntPtr)ChainEngine.HCCE_LOCAL_MACHINE);
+        public static readonly SafeChainEngineHandle MachineChainEngine = new SafeChainEngineHandle(
+            (IntPtr)ChainEngine.HCCE_LOCAL_MACHINE
+        );
 
-        public static readonly SafeChainEngineHandle UserChainEngine =
-            new SafeChainEngineHandle((IntPtr)ChainEngine.HCCE_CURRENT_USER);
+        public static readonly SafeChainEngineHandle UserChainEngine = new SafeChainEngineHandle(
+            (IntPtr)ChainEngine.HCCE_CURRENT_USER
+        );
 
         protected sealed override bool ReleaseHandle()
         {

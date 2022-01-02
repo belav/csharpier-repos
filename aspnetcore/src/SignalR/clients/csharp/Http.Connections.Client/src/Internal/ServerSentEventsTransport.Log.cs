@@ -12,31 +12,64 @@ internal partial class ServerSentEventsTransport
     private static class Log
     {
         private static readonly Action<ILogger, TransferFormat, Exception?> _startTransport =
-            LoggerMessage.Define<TransferFormat>(LogLevel.Information, new EventId(1, "StartTransport"), "Starting transport. Transfer mode: {TransferFormat}.");
+            LoggerMessage.Define<TransferFormat>(
+                LogLevel.Information,
+                new EventId(1, "StartTransport"),
+                "Starting transport. Transfer mode: {TransferFormat}."
+            );
 
         private static readonly Action<ILogger, Exception?> _transportStopped =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(2, "TransportStopped"), "Transport stopped.");
+            LoggerMessage.Define(
+                LogLevel.Debug,
+                new EventId(2, "TransportStopped"),
+                "Transport stopped."
+            );
 
-        private static readonly Action<ILogger, Exception?> _startReceive =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(3, "StartReceive"), "Starting receive loop.");
+        private static readonly Action<ILogger, Exception?> _startReceive = LoggerMessage.Define(
+            LogLevel.Debug,
+            new EventId(3, "StartReceive"),
+            "Starting receive loop."
+        );
 
-        private static readonly Action<ILogger, Exception?> _receiveStopped =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(4, "ReceiveStopped"), "Receive loop stopped.");
+        private static readonly Action<ILogger, Exception?> _receiveStopped = LoggerMessage.Define(
+            LogLevel.Debug,
+            new EventId(4, "ReceiveStopped"),
+            "Receive loop stopped."
+        );
 
-        private static readonly Action<ILogger, Exception?> _receiveCanceled =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(5, "ReceiveCanceled"), "Receive loop canceled.");
+        private static readonly Action<ILogger, Exception?> _receiveCanceled = LoggerMessage.Define(
+            LogLevel.Debug,
+            new EventId(5, "ReceiveCanceled"),
+            "Receive loop canceled."
+        );
 
         private static readonly Action<ILogger, Exception?> _transportStopping =
-            LoggerMessage.Define(LogLevel.Information, new EventId(6, "TransportStopping"), "Transport is stopping.");
+            LoggerMessage.Define(
+                LogLevel.Information,
+                new EventId(6, "TransportStopping"),
+                "Transport is stopping."
+            );
 
         private static readonly Action<ILogger, int, Exception?> _messageToApplication =
-            LoggerMessage.Define<int>(LogLevel.Debug, new EventId(7, "MessageToApplication"), "Passing message to application. Payload size: {Count}.");
+            LoggerMessage.Define<int>(
+                LogLevel.Debug,
+                new EventId(7, "MessageToApplication"),
+                "Passing message to application. Payload size: {Count}."
+            );
 
         private static readonly Action<ILogger, Exception?> _eventStreamEnded =
-            LoggerMessage.Define(LogLevel.Debug, new EventId(8, "EventStreamEnded"), "Server-Sent Event Stream ended.");
+            LoggerMessage.Define(
+                LogLevel.Debug,
+                new EventId(8, "EventStreamEnded"),
+                "Server-Sent Event Stream ended."
+            );
 
         private static readonly Action<ILogger, long, Exception?> _parsingSSE =
-            LoggerMessage.Define<long>(LogLevel.Debug, new EventId(9, "ParsingSSE"), "Received {Count} bytes. Parsing SSE frame.");
+            LoggerMessage.Define<long>(
+                LogLevel.Debug,
+                new EventId(9, "ParsingSSE"),
+                "Received {Count} bytes. Parsing SSE frame."
+            );
 
         // EventIds 100 - 106 used in SendUtils
 

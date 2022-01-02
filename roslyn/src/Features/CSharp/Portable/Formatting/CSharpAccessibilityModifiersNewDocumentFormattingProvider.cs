@@ -18,34 +18,54 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.Formatting
 {
     [ExportNewDocumentFormattingProvider(LanguageNames.CSharp), Shared]
-    internal class CSharpAccessibilityModifiersNewDocumentFormattingProvider : INewDocumentFormattingProvider
+    internal class CSharpAccessibilityModifiersNewDocumentFormattingProvider
+        : INewDocumentFormattingProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAccessibilityModifiersNewDocumentFormattingProvider()
-        {
-        }
+        public CSharpAccessibilityModifiersNewDocumentFormattingProvider() { }
 
-        public async Task<Document> FormatNewDocumentAsync(Document document, Document? hintDocument, CancellationToken cancellationToken)
+        public async Task<Document> FormatNewDocumentAsync(
+            Document document,
+            Document? hintDocument,
+            CancellationToken cancellationToken
+        )
         {
-            var documentOptions = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var accessibilityPreferences = documentOptions.GetOption(CodeStyleOptions2.RequireAccessibilityModifiers, document.Project.Language);
+            var documentOptions = await document
+                .GetOptionsAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var accessibilityPreferences = documentOptions.GetOption(
+                CodeStyleOptions2.RequireAccessibilityModifiers,
+                document.Project.Language
+            );
             if (accessibilityPreferences.Value == AccessibilityModifiersRequired.Never)
             {
                 return document;
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var typeDeclarations = root.DescendantNodes().Where(node => syntaxFacts.IsTypeDeclaration(node));
+            var typeDeclarations = root.DescendantNodes()
+                .Where(node => syntaxFacts.IsTypeDeclaration(node));
             var editor = new SyntaxEditor(root, document.Project.Solution.Workspace);
 
             var service = document.GetRequiredLanguageService<IAddAccessibilityModifiersService>();
 
             foreach (var declaration in typeDeclarations)
             {
-                if (!service.ShouldUpdateAccessibilityModifier(CSharpAccessibilityFacts.Instance, declaration, accessibilityPreferences.Value, out _))
+                if (
+                    !service.ShouldUpdateAccessibilityModifier(
+                        CSharpAccessibilityFacts.Instance,
+                        declaration,
+                        accessibilityPreferences.Value,
+                        out _
+                    )
+                )
                     continue;
 
                 // Since we format each document as they are added to a project we can't assume we know about all
@@ -61,7 +81,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // When we see File1, we don't know about File2, so would add an internal modifier, which would result in a compile
                 // error.
                 var modifiers = syntaxFacts.GetModifiers(declaration);
-                CSharpAccessibilityFacts.GetAccessibilityAndModifiers(modifiers, out _, out var declarationModifiers, out _);
+                CSharpAccessibilityFacts.GetAccessibilityAndModifiers(
+                    modifiers,
+                    out _,
+                    out var declarationModifiers,
+                    out _
+                );
                 if (declarationModifiers.IsPartial)
                     continue;
 

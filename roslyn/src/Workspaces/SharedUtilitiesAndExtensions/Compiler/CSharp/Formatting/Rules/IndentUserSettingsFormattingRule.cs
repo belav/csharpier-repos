@@ -14,10 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         private readonly CachedOptions _options;
 
-        public IndentUserSettingsFormattingRule()
-            : this(new CachedOptions(null))
-        {
-        }
+        public IndentUserSettingsFormattingRule() : this(new CachedOptions(null)) { }
 
         private IndentUserSettingsFormattingRule(CachedOptions options)
         {
@@ -36,7 +33,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return new IndentUserSettingsFormattingRule(cachedOptions);
         }
 
-        public override void AddIndentBlockOperations(List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
+        public override void AddIndentBlockOperations(
+            List<IndentBlockOperation> list,
+            SyntaxNode node,
+            in NextIndentBlockOperationAction nextOperation
+        )
         {
             nextOperation.Invoke();
 
@@ -50,8 +51,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             if (_options.IndentBraces)
             {
-                AddIndentBlockOperation(list, bracePair.Item1, bracePair.Item1, bracePair.Item1.Span);
-                AddIndentBlockOperation(list, bracePair.Item2, bracePair.Item2, bracePair.Item2.Span);
+                AddIndentBlockOperation(
+                    list,
+                    bracePair.Item1,
+                    bracePair.Item1,
+                    bracePair.Item1.Span
+                );
+                AddIndentBlockOperation(
+                    list,
+                    bracePair.Item2,
+                    bracePair.Item2,
+                    bracePair.Item2.Span
+                );
             }
         }
 
@@ -64,13 +75,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 IndentBraces = GetOptionOrDefault(options, CSharpFormattingOptions2.IndentBraces);
             }
 
-            public static bool operator ==(CachedOptions left, CachedOptions right)
-                => left.Equals(right);
+            public static bool operator ==(CachedOptions left, CachedOptions right) =>
+                left.Equals(right);
 
-            public static bool operator !=(CachedOptions left, CachedOptions right)
-                => !(left == right);
+            public static bool operator !=(CachedOptions left, CachedOptions right) =>
+                !(left == right);
 
-            private static T GetOptionOrDefault<T>(AnalyzerConfigOptions? options, Option2<T> option)
+            private static T GetOptionOrDefault<T>(
+                AnalyzerConfigOptions? options,
+                Option2<T> option
+            )
             {
                 if (options is null)
                     return option.DefaultValue;
@@ -78,8 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 return options.GetOption(option);
             }
 
-            public override bool Equals(object? obj)
-                => obj is CachedOptions options && Equals(options);
+            public override bool Equals(object? obj) =>
+                obj is CachedOptions options && Equals(options);
 
             public bool Equals(CachedOptions other)
             {

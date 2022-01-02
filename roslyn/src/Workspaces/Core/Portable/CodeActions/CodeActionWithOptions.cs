@@ -29,28 +29,37 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// </summary>
         /// <param name="options">An object instance returned from a prior call to <see cref="GetOptions(CancellationToken)"/>.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        public async Task<IEnumerable<CodeActionOperation>?> GetOperationsAsync(object? options, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CodeActionOperation>?> GetOperationsAsync(
+            object? options,
+            CancellationToken cancellationToken
+        )
         {
             if (options == null)
             {
                 return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
             }
 
-            var operations = await this.ComputeOperationsAsync(options, cancellationToken).ConfigureAwait(false);
+            var operations = await this.ComputeOperationsAsync(options, cancellationToken)
+                .ConfigureAwait(false);
 
             if (operations != null)
             {
-                operations = await this.PostProcessAsync(operations, cancellationToken).ConfigureAwait(false);
+                operations = await this.PostProcessAsync(operations, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return operations;
         }
 
         internal override async Task<ImmutableArray<CodeActionOperation>> GetOperationsCoreAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             var options = this.GetOptions(cancellationToken);
-            return (await this.GetOperationsAsync(options, cancellationToken).ConfigureAwait(false)).ToImmutableArrayOrEmpty();
+            return (
+                await this.GetOperationsAsync(options, cancellationToken).ConfigureAwait(false)
+            ).ToImmutableArrayOrEmpty();
         }
 
         /// <summary>
@@ -58,9 +67,13 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// </summary>
         /// <param name="options">An object instance returned from a call to <see cref="GetOptions(CancellationToken)"/>.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        protected abstract Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(object options, CancellationToken cancellationToken);
+        protected abstract Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            object options,
+            CancellationToken cancellationToken
+        );
 
-        protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
-            => SpecializedTasks.EmptyEnumerable<CodeActionOperation>();
+        protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.EmptyEnumerable<CodeActionOperation>();
     }
 }

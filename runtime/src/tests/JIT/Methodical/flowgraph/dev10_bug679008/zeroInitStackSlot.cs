@@ -17,17 +17,16 @@ internal struct SqlBinary
 internal class WarehouseResultDatabase : IDisposable
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public WarehouseResultDatabase()
-    {
-    }
+    public WarehouseResultDatabase() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    void IDisposable.Dispose()
-    {
-    }
+    void IDisposable.Dispose() { }
 }
 
-internal delegate bool WarehouseRowVersionQueryDelegate(WarehouseResultDatabase database, SqlBinary waterMark);
+internal delegate bool WarehouseRowVersionQueryDelegate(
+    WarehouseResultDatabase database,
+    SqlBinary waterMark
+);
 
 internal class Repro
 {

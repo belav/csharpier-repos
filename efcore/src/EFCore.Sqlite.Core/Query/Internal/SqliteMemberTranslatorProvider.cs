@@ -19,8 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqliteMemberTranslatorProvider(RelationalMemberTranslatorProviderDependencies dependencies)
-            : base(dependencies)
+        public SqliteMemberTranslatorProvider(
+            RelationalMemberTranslatorProviderDependencies dependencies
+        ) : base(dependencies)
         {
             var sqlExpressionFactory = dependencies.SqlExpressionFactory;
 
@@ -30,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     new SqliteDateTimeMemberTranslator(sqlExpressionFactory),
                     new SqliteStringLengthTranslator(sqlExpressionFactory),
                     new SqliteDateOnlyMemberTranslator(sqlExpressionFactory)
-                });
+                }
+            );
         }
     }
 }

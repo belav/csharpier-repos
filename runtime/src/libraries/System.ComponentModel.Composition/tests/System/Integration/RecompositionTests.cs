@@ -70,10 +70,12 @@ namespace Tests.Integration
             batch.AddExportedValue("Value", 42);
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(() =>
-            {
-                container.Compose(batch);
-            });
+            Assert.Throws<ChangeRejectedException>(
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
 
             Assert.Equal(-21, importer.Value);
         }
@@ -107,10 +109,12 @@ namespace Tests.Integration
             batch.AddExportedValue("Value", 42);
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(() =>
-            {
-                container.Compose(batch);
-            });
+            Assert.Throws<ChangeRejectedException>(
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
 
             Assert.Equal(-21, importer.Value);
         }
@@ -149,10 +153,12 @@ namespace Tests.Integration
             batch.AddExportedValue("Value", 42);
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(() =>
-            {
-                container.Compose(batch);
-            });
+            Assert.Throws<ChangeRejectedException>(
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
 
             Assert.Equal(-21, importer.NonRecomposableValue);
             // The batch rejection means that the recomposable value shouldn't change either
@@ -302,8 +308,9 @@ namespace Tests.Integration
             Assert.Equal(0, me.Children.Length);
 
             // Can only have one name
-            Assert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new MyName("Blayke")));
+            Assert.Throws<ChangeRejectedException>(
+                () => container.ComposeParts(new MyName("Blayke"))
+            );
 
             batch = new CompositionBatch();
             batch.AddPart(new MyName("Blayke"));
@@ -319,7 +326,10 @@ namespace Tests.Integration
             batch = new CompositionBatch();
             batch.AddPart(new Job("Chimney Sweep"));
             container.Compose(batch);
-            Assert.True(me.Job == null, "More than one of an optional import should result in the default value");
+            Assert.True(
+                me.Job == null,
+                "More than one of an optional import should result in the default value"
+            );
 
             batch = new CompositionBatch();
             batch.RemovePart(jobPart);
@@ -329,8 +339,9 @@ namespace Tests.Integration
             batch = new CompositionBatch();
 
             // Can only have one spouse because they aren't recomposable
-            Assert.Throws<ChangeRejectedException>(() =>
-                container.ComposeParts(new Spouse("Cameron")));
+            Assert.Throws<ChangeRejectedException>(
+                () => container.ComposeParts(new Spouse("Cameron"))
+            );
 
             Assert.Equal(1, me.Relatives.Length);
 
@@ -348,17 +359,17 @@ namespace Tests.Integration
             [Import(AllowDefault = true, AllowRecomposition = true)]
             public FooWithSimpleImport OptionalImport
             {
-                get
-                {
-                    return this._optionalImport;
-                }
+                get { return this._optionalImport; }
                 set
                 {
                     if (value != null)
                     {
                         this._optionalImport = value;
 
-                        Assert.True(!string.IsNullOrEmpty(this._optionalImport.SimpleValue), "Value should have it's imports satisfied");
+                        Assert.True(
+                            !string.IsNullOrEmpty(this._optionalImport.SimpleValue),
+                            "Value should have it's imports satisfied"
+                        );
                     }
                 }
             }
@@ -409,7 +420,10 @@ namespace Tests.Integration
         [Export]
         public class SimpleImport
         {
-            public int Property { get { return 42; } }
+            public int Property
+            {
+                get { return 42; }
+            }
         }
 
         [Fact]
@@ -445,7 +459,6 @@ namespace Tests.Integration
 
         public interface IExportedInterface
         {
-
         }
 
         [Export(typeof(IExportedInterface))]
@@ -477,11 +490,11 @@ namespace Tests.Integration
         public class DisposablePart : Part, IDisposable
         {
             public bool Disposed { get; private set; }
+
             public void Dispose()
             {
                 Disposed = true;
             }
         }
-
     }
 }

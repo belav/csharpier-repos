@@ -26,9 +26,7 @@ public class FileContentResult : FileResult
     /// <param name="fileContents">The bytes that represent the file contents.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     public FileContentResult(byte[] fileContents, string contentType)
-        : this(fileContents, MediaTypeHeaderValue.Parse(contentType))
-    {
-    }
+        : this(fileContents, MediaTypeHeaderValue.Parse(contentType)) { }
 
     /// <summary>
     /// Creates a new <see cref="FileContentResult"/> instance with
@@ -74,7 +72,9 @@ public class FileContentResult : FileResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<FileContentResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<FileContentResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

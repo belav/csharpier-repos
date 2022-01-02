@@ -25,7 +25,7 @@ namespace AutoMapper.UnitTests.Bug
         {
         }
 
-        public interface IItem : ISome     // everything works well if IItem doesn't inherit ISome.
+        public interface IItem : ISome // everything works well if IItem doesn't inherit ISome.
         {
         }
 
@@ -33,11 +33,14 @@ namespace AutoMapper.UnitTests.Bug
         {
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Thing, ThingDto>();
-            cfg.CreateMap<IItem, ItemDto>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Thing, ThingDto>();
+                    cfg.CreateMap<IItem, ItemDto>();
+                }
+            );
 
         protected override void Because_of()
         {

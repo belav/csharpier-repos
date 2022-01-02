@@ -15,7 +15,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class InMemoryIntegerValueGenerator<TValue> : ValueGenerator<TValue>, IInMemoryIntegerValueGenerator
+    public class InMemoryIntegerValueGenerator<TValue>
+        : ValueGenerator<TValue>,
+          IInMemoryIntegerValueGenerator
     {
         private readonly int _propertyIndex;
         private long _current;
@@ -53,8 +55,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override TValue Next(EntityEntry entry)
-            => (TValue)Convert.ChangeType(Interlocked.Increment(ref _current), typeof(TValue), CultureInfo.InvariantCulture);
+        public override TValue Next(EntityEntry entry) =>
+            (TValue)Convert.ChangeType(
+                Interlocked.Increment(ref _current),
+                typeof(TValue),
+                CultureInfo.InvariantCulture
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,7 +68,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
     }
 }

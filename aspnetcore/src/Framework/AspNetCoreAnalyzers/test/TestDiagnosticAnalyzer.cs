@@ -30,7 +30,10 @@ public class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         return GetDiagnosticsAsync(project);
     }
 
-    public static Project CreateProjectWithReferencesInBinDir(Assembly testAssembly, params string[] source)
+    public static Project CreateProjectWithReferencesInBinDir(
+        Assembly testAssembly,
+        params string[] source
+    )
     {
         // The deps file in the project is incorrect and does not contain "compile" nodes for some references.
         // However these binaries are always present in the bin output. As a "temporary" workaround, we'll add
@@ -39,7 +42,16 @@ public class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         var project = DiagnosticProject.Create(testAssembly, source);
         foreach (var assembly in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll"))
         {
-            if (!project.MetadataReferences.Any(c => string.Equals(Path.GetFileNameWithoutExtension(c.Display), Path.GetFileNameWithoutExtension(assembly), StringComparison.OrdinalIgnoreCase)))
+            if (
+                !project.MetadataReferences.Any(
+                    c =>
+                        string.Equals(
+                            Path.GetFileNameWithoutExtension(c.Display),
+                            Path.GetFileNameWithoutExtension(assembly),
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
+            )
             {
                 project = project.AddMetadataReference(MetadataReference.CreateFromFile(assembly));
             }

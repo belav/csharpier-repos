@@ -14,9 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startup>
 {
     public RoutingEndpointRoutingTest(MvcTestFixture<RoutingWebSite.Startup> fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [Fact]
     public async Task AttributeRoutedAction_ContainsPage_RouteMatched()
@@ -34,9 +32,7 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
         Assert.Equal("PageRoute", result.Controller);
         Assert.Equal("AttributeRoute", result.Action);
 
-        Assert.Contains(
-            new KeyValuePair<string, object>("page", "pagevalue"),
-            result.RouteValues);
+        Assert.Contains(new KeyValuePair<string, object>("page", "pagevalue"), result.RouteValues);
     }
 
     [Fact]
@@ -101,7 +97,9 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task AttributeRoutedAction_ParameterTransformer_Found()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/endpoint-routing/ParameterTransformer");
+        var response = await Client.GetAsync(
+            "http://localhost/endpoint-routing/ParameterTransformer"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -117,7 +115,9 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task AttributeRoutedAction_ParameterTransformer_NotFound()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/EndpointRouting/ParameterTransformer");
+        var response = await Client.GetAsync(
+            "http://localhost/EndpointRouting/ParameterTransformer"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -147,7 +147,8 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task AttributeRoutedAction_ParameterTransformer_LinkWithAmbientController()
     {
         // Arrange
-        var url = LinkFrom("http://localhost/endpoint-routing/ParameterTransformer").To(new { action = "Get", id = 5 });
+        var url = LinkFrom("http://localhost/endpoint-routing/ParameterTransformer")
+            .To(new { action = "Get", id = 5 });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -167,7 +168,8 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task AttributeRoutedAction_ParameterTransformer_LinkToAttributeRoutedController()
     {
         // Arrange
-        var url = LinkFrom("http://localhost/endpoint-routing/ParameterTransformer").To(new { action = "ShowPosts", controller = "Blog" });
+        var url = LinkFrom("http://localhost/endpoint-routing/ParameterTransformer")
+            .To(new { action = "ShowPosts", controller = "Blog" });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -187,7 +189,8 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task AttributeRoutedAction_ParameterTransformer_LinkToConventionalController()
     {
         // Arrange
-        var url = LinkFrom("http://localhost/endpoint-routing/ParameterTransformer").To(new { action = "Index", controller = "Home" });
+        var url = LinkFrom("http://localhost/endpoint-routing/ParameterTransformer")
+            .To(new { action = "Index", controller = "Home" });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -230,9 +233,7 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<ResultData>(body);
 
-        Assert.Equal(
-            Array.Empty<string>(),
-            result.Routers);
+        Assert.Equal(Array.Empty<string>(), result.Routers);
     }
 
     [Fact]
@@ -247,9 +248,7 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<ResultData>(body);
 
-        Assert.Equal(
-            Array.Empty<string>(),
-            result.Routers);
+        Assert.Equal(Array.Empty<string>(), result.Routers);
     }
 
     // Endpoint routing exposes HTTP 405s for HTTP method mismatches
@@ -267,7 +266,9 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task ConventionalRoutedAction_ParameterTransformer()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ConventionalTransformerRoute/conventional-transformer/Index");
+        var response = await Client.GetAsync(
+            "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -282,7 +283,9 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task ConventionalRoutedAction_ParameterTransformer_NotFound()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ConventionalTransformerRoute/ConventionalTransformer/Index");
+        var response = await Client.GetAsync(
+            "http://localhost/ConventionalTransformerRoute/ConventionalTransformer/Index"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -292,7 +295,9 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task ConventionalRoutedAction_ParameterTransformer_DefaultValue()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ConventionalTransformerRoute/conventional-transformer");
+        var response = await Client.GetAsync(
+            "http://localhost/ConventionalTransformerRoute/conventional-transformer"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -307,7 +312,9 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task ConventionalRoutedAction_ParameterTransformer_WithParam()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ConventionalTransformerRoute/conventional-transformer/Param/my-value");
+        var response = await Client.GetAsync(
+            "http://localhost/ConventionalTransformerRoute/conventional-transformer/Param/my-value"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -317,14 +324,20 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
         Assert.Equal("ConventionalTransformer", result.Controller);
         Assert.Equal("Param", result.Action);
 
-        Assert.Equal("/ConventionalTransformerRoute/conventional-transformer/Param/my-value", Assert.Single(result.ExpectedUrls));
+        Assert.Equal(
+            "/ConventionalTransformerRoute/conventional-transformer/Param/my-value",
+            Assert.Single(result.ExpectedUrls)
+        );
     }
 
     [Fact]
     public async Task ConventionalRoutedAction_ParameterTransformer_LinkToConventionalController()
     {
         // Arrange
-        var url = LinkFrom("http://localhost/ConventionalTransformerRoute/conventional-transformer/Index").To(new { action = "Index", controller = "Home" });
+        var url = LinkFrom(
+                "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
+            )
+            .To(new { action = "Index", controller = "Home" });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -343,7 +356,12 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
     public async Task ConventionalRoutedAction_ParameterTransformer_LinkToConventionalControllerWithParam()
     {
         // Arrange
-        var url = LinkFrom("http://localhost/ConventionalTransformerRoute/conventional-transformer/Index").To(new { action = "Param", controller = "ConventionalTransformer", param = "MyValue" });
+        var url = LinkFrom(
+                "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
+            )
+            .To(
+                new { action = "Param", controller = "ConventionalTransformer", param = "MyValue" }
+            );
 
         // Act
         var response = await Client.GetAsync(url);
@@ -355,14 +373,20 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
 
         Assert.Equal("ConventionalTransformer", result.Controller);
         Assert.Equal("Index", result.Action);
-        Assert.Equal("/ConventionalTransformerRoute/conventional-transformer/Param/my-value", result.Link);
+        Assert.Equal(
+            "/ConventionalTransformerRoute/conventional-transformer/Param/my-value",
+            result.Link
+        );
     }
 
     [Fact]
     public async Task ConventionalRoutedAction_ParameterTransformer_LinkToSelf()
     {
         // Arrange
-        var url = LinkFrom("http://localhost/ConventionalTransformerRoute/conventional-transformer/Index").To(new { });
+        var url = LinkFrom(
+                "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
+            )
+            .To(new { });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -406,7 +430,6 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
 
         Assert.Equal("/EndpointName/LinkToConventionalRouted", body);
     }
-
 
     [Fact]
     public async Task LinkGenerator_EndpointName_LinkToAttributeRoutedAction()

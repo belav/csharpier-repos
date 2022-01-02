@@ -22,28 +22,25 @@ namespace DefaultNamespace
             {
                 throw new ArgumentException();
             }
-            catch (ArgumentException /*e1*/)
+            catch (ArgumentException /*e1*/
+            )
             {
                 caught++;
                 try
                 {
                     throw new SecurityException();
                 }
-                catch (SecurityException /*e2*/)
-                {
-                }
+                catch (SecurityException /*e2*/
+                ) { }
                 finally
                 {
                     try
                     {
                         throw new NullReferenceException();
                     }
-                    catch (Exception /*e3*/)
-                    {
-                    }
-
+                    catch (Exception /*e3*/
+                    ) { }
                 }
-
             }
 
 
@@ -55,7 +52,5 @@ namespace DefaultNamespace
             Console.WriteLine("Passed.");
             return 100;
         }
-
     };
 };
-

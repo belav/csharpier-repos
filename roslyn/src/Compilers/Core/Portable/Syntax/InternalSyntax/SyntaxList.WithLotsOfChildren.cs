@@ -14,25 +14,30 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
         {
             static WithLotsOfChildren()
             {
-                ObjectBinder.RegisterTypeReader(typeof(WithLotsOfChildren), r => new WithLotsOfChildren(r));
+                ObjectBinder.RegisterTypeReader(
+                    typeof(WithLotsOfChildren),
+                    r => new WithLotsOfChildren(r)
+                );
             }
 
             private readonly int[] _childOffsets;
 
-            internal WithLotsOfChildren(ArrayElement<GreenNode>[] children)
-                : base(children)
+            internal WithLotsOfChildren(ArrayElement<GreenNode>[] children) : base(children)
             {
                 _childOffsets = CalculateOffsets(children);
             }
 
-            internal WithLotsOfChildren(DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations, ArrayElement<GreenNode>[] children, int[] childOffsets)
-                : base(diagnostics, annotations, children)
+            internal WithLotsOfChildren(
+                DiagnosticInfo[]? diagnostics,
+                SyntaxAnnotation[]? annotations,
+                ArrayElement<GreenNode>[] children,
+                int[] childOffsets
+            ) : base(diagnostics, annotations, children)
             {
                 _childOffsets = childOffsets;
             }
 
-            internal WithLotsOfChildren(ObjectReader reader)
-                : base(reader)
+            internal WithLotsOfChildren(ObjectReader reader) : base(reader)
             {
                 _childOffsets = CalculateOffsets(this.children);
             }
@@ -78,12 +83,22 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[]? errors)
             {
-                return new WithLotsOfChildren(errors, this.GetAnnotations(), children, _childOffsets);
+                return new WithLotsOfChildren(
+                    errors,
+                    this.GetAnnotations(),
+                    children,
+                    _childOffsets
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[]? annotations)
             {
-                return new WithLotsOfChildren(GetDiagnostics(), annotations, children, _childOffsets);
+                return new WithLotsOfChildren(
+                    GetDiagnostics(),
+                    annotations,
+                    children,
+                    _childOffsets
+                );
             }
         }
     }
