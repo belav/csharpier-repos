@@ -5,13 +5,9 @@ namespace Canonicalization
 {
     class ReferenceType
     {
-        void Method()
-        {
-        }
+        void Method() { }
 
-        void GenericMethod<U>()
-        {
-        }
+        void GenericMethod<U>() { }
     }
 
     class OtherReferenceType
@@ -20,13 +16,9 @@ namespace Canonicalization
 
     struct StructType
     {
-        void Method()
-        {
-        }
+        void Method() { }
 
-        void GenericMethod<U>()
-        {
-        }
+        void GenericMethod<U>() { }
     }
 
     struct OtherStructType
@@ -35,24 +27,16 @@ namespace Canonicalization
 
     class GenericReferenceType<T>
     {
-        void Method()
-        {
-        }
+        void Method() { }
 
-        void GenericMethod<U>()
-        {
-        }
+        void GenericMethod<U>() { }
     }
 
     struct GenericStructType<T>
     {
-        void Method()
-        {
-        }
+        void Method() { }
 
-        void GenericMethod<U>()
-        {
-        }
+        void GenericMethod<U>() { }
     }
 
     class GenericReferenceTypeWithThreeParams<T, U, V>

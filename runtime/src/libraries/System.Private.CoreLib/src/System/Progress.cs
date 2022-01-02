@@ -31,7 +31,8 @@ namespace System
         {
             // Capture the current synchronization context.
             // If there is no current context, we use a default instance targeting the ThreadPool.
-            _synchronizationContext = SynchronizationContext.Current ?? ProgressStatics.DefaultContext;
+            _synchronizationContext =
+                SynchronizationContext.Current ?? ProgressStatics.DefaultContext;
             Debug.Assert(_synchronizationContext != null);
             _invokeHandlers = new SendOrPostCallback(InvokeHandlers);
         }
@@ -76,7 +77,10 @@ namespace System
 
         /// <summary>Reports a progress change.</summary>
         /// <param name="value">The value of the updated progress.</param>
-        void IProgress<T>.Report(T value) { OnReport(value); }
+        void IProgress<T>.Report(T value)
+        {
+            OnReport(value);
+        }
 
         /// <summary>Invokes the action and event callbacks.</summary>
         /// <param name="state">The progress value.</param>
@@ -97,6 +101,7 @@ namespace System
     internal static class ProgressStatics
     {
         /// <summary>A default synchronization context that targets the ThreadPool.</summary>
-        internal static readonly SynchronizationContext DefaultContext = new SynchronizationContext();
+        internal static readonly SynchronizationContext DefaultContext =
+            new SynchronizationContext();
     }
 }

@@ -46,14 +46,27 @@ public abstract class WebViewManager : IAsyncDisposable
     /// <param name="fileProvider">Provides static content to the webview.</param>
     /// <param name="jsComponents">Describes configuration for adding, removing, and updating root components from JavaScript code.</param>
     /// <param name="hostPageRelativePath">Path to the host page within the <paramref name="fileProvider"/>.</param>
-    public WebViewManager(IServiceProvider provider, Dispatcher dispatcher, Uri appBaseUri, IFileProvider fileProvider, JSComponentConfigurationStore jsComponents, string hostPageRelativePath)
+    public WebViewManager(
+        IServiceProvider provider,
+        Dispatcher dispatcher,
+        Uri appBaseUri,
+        IFileProvider fileProvider,
+        JSComponentConfigurationStore jsComponents,
+        string hostPageRelativePath
+    )
     {
         _provider = provider ?? throw new ArgumentNullException(nameof(provider));
         _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
-        _appBaseUri = EnsureTrailingSlash(appBaseUri ?? throw new ArgumentNullException(nameof(appBaseUri)));
+        _appBaseUri = EnsureTrailingSlash(
+            appBaseUri ?? throw new ArgumentNullException(nameof(appBaseUri))
+        );
         fileProvider = StaticWebAssetsLoader.UseStaticWebAssets(fileProvider);
         _jsComponents = jsComponents;
-        _staticContentProvider = new StaticContentProvider(fileProvider, appBaseUri, hostPageRelativePath);
+        _staticContentProvider = new StaticContentProvider(
+            fileProvider,
+            appBaseUri,
+            hostPageRelativePath
+        );
         _ipcSender = new IpcSender(_dispatcher, SendMessage);
         _ipcReceiver = new IpcReceiver(AttachToPageAsync);
     }
@@ -68,8 +81,7 @@ public abstract class WebViewManager : IAsyncDisposable
     /// client-side routing.
     /// </summary>
     /// <param name="url">The URL, which may be absolute or relative to the application root.</param>
-    public void Navigate(string url)
-        => NavigateCore(new Uri(_appBaseUri, url));
+    public void Navigate(string url) => NavigateCore(new Uri(_appBaseUri, url));
 
     /// <summary>
     /// Instructs the web view to navigate to the specified location, bypassing any
@@ -93,23 +105,35 @@ public abstract class WebViewManager : IAsyncDisposable
     /// <param name="parameters">Parameters for the component.</param>
     public Task AddRootComponentAsync(Type componentType, string selector, ParameterView parameters)
     {
-        var rootComponent = new RootComponent { ComponentType = componentType, Parameters = parameters };
+        var rootComponent = new RootComponent
+        {
+            ComponentType = componentType,
+            Parameters = parameters
+        };
         if (!_rootComponentsBySelector.TryAdd(selector, rootComponent))
         {
-            throw new InvalidOperationException($"There is already a root component with selector '{selector}'.");
+            throw new InvalidOperationException(
+                $"There is already a root component with selector '{selector}'."
+            );
         }
 
         // If the page is already attached, add the root component to it now. Otherwise we'll
         // add it when the page attaches later.
         if (_currentPageContext != null)
         {
-            return Dispatcher.InvokeAsync(() =>
-            {
-                rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
-                    componentType, selector);
-                return _currentPageContext.Renderer.RenderRootComponentAsync(
-                    rootComponent.ComponentId.Value, rootComponent.Parameters);
-            });
+            return Dispatcher.InvokeAsync(
+                () =>
+                {
+                    rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
+                        componentType,
+                        selector
+                    );
+                    return _currentPageContext.Renderer.RenderRootComponentAsync(
+                        rootComponent.ComponentId.Value,
+                        rootComponent.Parameters
+                    );
+                }
+            );
         }
         else
         {
@@ -125,14 +149,21 @@ public abstract class WebViewManager : IAsyncDisposable
     {
         if (!_rootComponentsBySelector.Remove(selector, out var rootComponent))
         {
-            throw new InvalidOperationException($"There is no root component with selector '{selector}'.");
+            throw new InvalidOperationException(
+                $"There is no root component with selector '{selector}'."
+            );
         }
 
         // If the page is already attached, remove the root component from it now. Otherwise it's
         // enough to have updated the dictionary.
         if (_currentPageContext != null && rootComponent.ComponentId.HasValue)
         {
-            return Dispatcher.InvokeAsync(() => _currentPageContext.Renderer.RemoveRootComponent(rootComponent.ComponentId.Value));
+            return Dispatcher.InvokeAsync(
+                () =>
+                    _currentPageContext.Renderer.RemoveRootComponent(
+                        rootComponent.ComponentId.Value
+                    )
+            );
         }
         else
         {
@@ -154,21 +185,23 @@ public abstract class WebViewManager : IAsyncDisposable
             return;
         }
 
-        _ = _dispatcher.InvokeAsync(async () =>
-        {
+        _ = _dispatcher.InvokeAsync(
+            async () =>
+            {
                 // TODO: Verify this produces the correct exception-surfacing behaviors.
                 // For example, JS interop exceptions should flow back into JS, whereas
                 // renderer exceptions should be fatal.
                 try
-            {
-                await _ipcReceiver.OnMessageReceivedAsync(_currentPageContext, message);
+                {
+                    await _ipcReceiver.OnMessageReceivedAsync(_currentPageContext, message);
+                }
+                catch (Exception ex)
+                {
+                    _ipcSender.NotifyUnhandledException(ex);
+                    throw;
+                }
             }
-            catch (Exception ex)
-            {
-                _ipcSender.NotifyUnhandledException(ex);
-                throw;
-            }
-        });
+        );
     }
 
     /// <summary>
@@ -181,8 +214,22 @@ public abstract class WebViewManager : IAsyncDisposable
     /// <param name="content">The response content</param>
     /// <param name="headers">The response headers</param>
     /// <returns><c>true</c> if the response can be provided; <c>false</c> otherwise.</returns>
-    protected bool TryGetResponseContent(string uri, bool allowFallbackOnHostPage, out int statusCode, out string statusMessage, out Stream content, out IDictionary<string, string> headers)
-        => _staticContentProvider.TryGetResponseContent(uri, allowFallbackOnHostPage, out statusCode, out statusMessage, out content, out headers);
+    protected bool TryGetResponseContent(
+        string uri,
+        bool allowFallbackOnHostPage,
+        out int statusCode,
+        out string statusMessage,
+        out Stream content,
+        out IDictionary<string, string> headers
+    ) =>
+        _staticContentProvider.TryGetResponseContent(
+            uri,
+            allowFallbackOnHostPage,
+            out statusCode,
+            out statusMessage,
+            out content,
+            out headers
+        );
 
     internal async Task AttachToPageAsync(string baseUrl, string startUrl)
     {
@@ -196,7 +243,14 @@ public abstract class WebViewManager : IAsyncDisposable
 
         var serviceScope = _provider.CreateAsyncScope();
 
-        _currentPageContext = new PageContext(_dispatcher, serviceScope, _ipcSender, _jsComponents, baseUrl, startUrl);
+        _currentPageContext = new PageContext(
+            _dispatcher,
+            serviceScope,
+            _ipcSender,
+            _jsComponents,
+            baseUrl,
+            startUrl
+        );
 
         // Add any root components that were registered before the page attached. We don't await any of the
         // returned render tasks so that the components can be processed in parallel.
@@ -204,17 +258,23 @@ public abstract class WebViewManager : IAsyncDisposable
         foreach (var (selector, rootComponent) in _rootComponentsBySelector)
         {
             rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
-                rootComponent.ComponentType, selector);
-            pendingRenders.Add(_currentPageContext.Renderer.RenderRootComponentAsync(
-                rootComponent.ComponentId.Value, rootComponent.Parameters));
+                rootComponent.ComponentType,
+                selector
+            );
+            pendingRenders.Add(
+                _currentPageContext.Renderer.RenderRootComponentAsync(
+                    rootComponent.ComponentId.Value,
+                    rootComponent.Parameters
+                )
+            );
         }
 
         // Now we wait for all components to finish rendering.
         await Task.WhenAll(pendingRenders);
     }
 
-    private static Uri EnsureTrailingSlash(Uri uri)
-        => uri.AbsoluteUri.EndsWith('/') ? uri : new Uri(uri.AbsoluteUri + '/');
+    private static Uri EnsureTrailingSlash(Uri uri) =>
+        uri.AbsoluteUri.EndsWith('/') ? uri : new Uri(uri.AbsoluteUri + '/');
 
     private class RootComponent
     {
@@ -255,10 +315,15 @@ public abstract class WebViewManager : IAsyncDisposable
             if (File.Exists(manifestPath))
             {
                 using var manifestStream = File.OpenRead(manifestPath);
-                var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(manifestStream);
+                var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
+                    manifestStream
+                );
                 if (manifest.ContentRoots.Length > 0)
                 {
-                    var manifestProvider = new ManifestStaticWebAssetFileProvider(manifest, (path) => new PhysicalFileProvider(path));
+                    var manifestProvider = new ManifestStaticWebAssetFileProvider(
+                        manifest,
+                        (path) => new PhysicalFileProvider(path)
+                    );
                     return new CompositeFileProvider(manifestProvider, fileProvider);
                 }
             }
@@ -276,7 +341,10 @@ public abstract class WebViewManager : IAsyncDisposable
 
             var name = Path.GetFileNameWithoutExtension(assembly.Location);
 
-            return Path.Combine(Path.GetDirectoryName(assembly.Location)!, $"{name}.staticwebassets.runtime.json");
+            return Path.Combine(
+                Path.GetDirectoryName(assembly.Location)!,
+                $"{name}.staticwebassets.runtime.json"
+            );
         }
     }
 }

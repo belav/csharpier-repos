@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class TypeDeclarationSyntaxExtensions
     {
-        public static IList<bool> GetInsertionIndices(this TypeDeclarationSyntax destination, CancellationToken cancellationToken)
+        public static IList<bool> GetInsertionIndices(
+            this TypeDeclarationSyntax destination,
+            CancellationToken cancellationToken
+        )
         {
             var members = destination.Members;
 
@@ -26,25 +29,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 var start = destination.OpenBraceToken.Span.End;
                 var end = GetEndToken(destination).SpanStart;
 
-                indices.Add(!destination.OverlapsHiddenPosition(TextSpan.FromBounds(start, end), cancellationToken));
+                indices.Add(
+                    !destination.OverlapsHiddenPosition(
+                        TextSpan.FromBounds(start, end),
+                        cancellationToken
+                    )
+                );
             }
             else
             {
                 var start = destination.OpenBraceToken.Span.End;
                 var end = destination.Members.First().SpanStart;
-                indices.Add(!destination.OverlapsHiddenPosition(TextSpan.FromBounds(start, end), cancellationToken));
+                indices.Add(
+                    !destination.OverlapsHiddenPosition(
+                        TextSpan.FromBounds(start, end),
+                        cancellationToken
+                    )
+                );
 
                 for (var i = 0; i < members.Count - 1; i++)
                 {
                     var member1 = members[i];
                     var member2 = members[i + 1];
 
-                    indices.Add(!destination.OverlapsHiddenPosition(member1, member2, cancellationToken));
+                    indices.Add(
+                        !destination.OverlapsHiddenPosition(member1, member2, cancellationToken)
+                    );
                 }
 
                 start = members.Last().Span.End;
                 end = GetEndToken(destination).SpanStart;
-                indices.Add(!destination.OverlapsHiddenPosition(TextSpan.FromBounds(start, end), cancellationToken));
+                indices.Add(
+                    !destination.OverlapsHiddenPosition(
+                        TextSpan.FromBounds(start, end),
+                        cancellationToken
+                    )
+                );
             }
 
             return indices;
@@ -56,7 +76,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             if (lastToken.IsMissing)
             {
-                var nextToken = lastToken.GetNextToken(includeZeroWidth: true, includeSkipped: true);
+                var nextToken = lastToken.GetNextToken(
+                    includeZeroWidth: true,
+                    includeSkipped: true
+                );
                 if (nextToken.RawKind != 0)
                 {
                     return nextToken;
@@ -66,7 +89,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return lastToken;
         }
 
-        public static IEnumerable<BaseTypeSyntax> GetAllBaseListTypes(this TypeDeclarationSyntax typeNode, SemanticModel model, CancellationToken cancellationToken)
+        public static IEnumerable<BaseTypeSyntax> GetAllBaseListTypes(
+            this TypeDeclarationSyntax typeNode,
+            SemanticModel model,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(typeNode);
 
@@ -80,7 +107,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 {
                     foreach (var syntaxRef in typeSymbol.DeclaringSyntaxReferences)
                     {
-                        if (syntaxRef.GetSyntax(cancellationToken) is TypeDeclarationSyntax typeDecl && typeDecl.BaseList != null)
+                        if (
+                            syntaxRef.GetSyntax(cancellationToken) is TypeDeclarationSyntax typeDecl
+                            && typeDecl.BaseList != null
+                        )
                         {
                             baseListTypes = baseListTypes.Concat(typeDecl.BaseList.Types);
                         }
@@ -95,26 +125,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return baseListTypes;
         }
 
-        private static SyntaxToken EnsureToken(SyntaxToken token, SyntaxKind kind, bool prependNewLineIfMissing = false, bool appendNewLineIfMissing = false)
+        private static SyntaxToken EnsureToken(
+            SyntaxToken token,
+            SyntaxKind kind,
+            bool prependNewLineIfMissing = false,
+            bool appendNewLineIfMissing = false
+        )
         {
             if (token.IsMissing || token.IsKind(SyntaxKind.None))
             {
-                var leadingTrivia = prependNewLineIfMissing ? token.LeadingTrivia.Insert(0, SyntaxFactory.ElasticCarriageReturnLineFeed) : token.LeadingTrivia;
-                var trailingTrivia = appendNewLineIfMissing ? token.TrailingTrivia.Insert(0, SyntaxFactory.ElasticCarriageReturnLineFeed) : token.TrailingTrivia;
-                return SyntaxFactory.Token(leadingTrivia, kind, trailingTrivia).WithAdditionalAnnotations(Formatter.Annotation);
+                var leadingTrivia = prependNewLineIfMissing
+                    ? token.LeadingTrivia.Insert(0, SyntaxFactory.ElasticCarriageReturnLineFeed)
+                    : token.LeadingTrivia;
+                var trailingTrivia = appendNewLineIfMissing
+                    ? token.TrailingTrivia.Insert(0, SyntaxFactory.ElasticCarriageReturnLineFeed)
+                    : token.TrailingTrivia;
+                return SyntaxFactory
+                    .Token(leadingTrivia, kind, trailingTrivia)
+                    .WithAdditionalAnnotations(Formatter.Annotation);
             }
 
             return token;
         }
 
-        private static BaseTypeDeclarationSyntax EnsureHasBraces(BaseTypeDeclarationSyntax typeDeclaration, bool hasMembers)
+        private static BaseTypeDeclarationSyntax EnsureHasBraces(
+            BaseTypeDeclarationSyntax typeDeclaration,
+            bool hasMembers
+        )
         {
             var openBrace = EnsureToken(typeDeclaration.OpenBraceToken, SyntaxKind.OpenBraceToken);
-            var closeBrace = EnsureToken(typeDeclaration.CloseBraceToken, SyntaxKind.CloseBraceToken, appendNewLineIfMissing: true);
+            var closeBrace = EnsureToken(
+                typeDeclaration.CloseBraceToken,
+                SyntaxKind.CloseBraceToken,
+                appendNewLineIfMissing: true
+            );
 
             if (typeDeclaration.SemicolonToken.IsKind(SyntaxKind.SemicolonToken))
             {
-                typeDeclaration = typeDeclaration.WithSemicolonToken(default).WithTrailingTrivia(typeDeclaration.SemicolonToken.TrailingTrivia);
+                typeDeclaration = typeDeclaration
+                    .WithSemicolonToken(default)
+                    .WithTrailingTrivia(typeDeclaration.SemicolonToken.TrailingTrivia);
             }
 
             if (!hasMembers)
@@ -135,23 +185,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (index != -1)
                 {
                     openBrace = openBrace.WithTrailingTrivia(
-                        openBrace.TrailingTrivia.Concat(closeBrace.LeadingTrivia.Take(index + 1)));
+                        openBrace.TrailingTrivia.Concat(closeBrace.LeadingTrivia.Take(index + 1))
+                    );
                     closeBrace = closeBrace.WithLeadingTrivia(
-                        closeBrace.LeadingTrivia.Skip(index + 1));
+                        closeBrace.LeadingTrivia.Skip(index + 1)
+                    );
                 }
             }
 
             return typeDeclaration.WithOpenBraceToken(openBrace).WithCloseBraceToken(closeBrace);
         }
 
-        public static TypeDeclarationSyntax EnsureOpenAndCloseBraceTokens(this TypeDeclarationSyntax typeDeclaration)
+        public static TypeDeclarationSyntax EnsureOpenAndCloseBraceTokens(
+            this TypeDeclarationSyntax typeDeclaration
+        )
         {
-            return (TypeDeclarationSyntax)EnsureHasBraces(typeDeclaration, typeDeclaration.Members.Count > 0);
+            return (TypeDeclarationSyntax)EnsureHasBraces(
+                typeDeclaration,
+                typeDeclaration.Members.Count > 0
+            );
         }
 
-        public static EnumDeclarationSyntax EnsureOpenAndCloseBraceTokens(this EnumDeclarationSyntax typeDeclaration)
+        public static EnumDeclarationSyntax EnsureOpenAndCloseBraceTokens(
+            this EnumDeclarationSyntax typeDeclaration
+        )
         {
-            return (EnumDeclarationSyntax)EnsureHasBraces(typeDeclaration, typeDeclaration.Members.Count > 0);
+            return (EnumDeclarationSyntax)EnsureHasBraces(
+                typeDeclaration,
+                typeDeclaration.Members.Count > 0
+            );
         }
     }
 }

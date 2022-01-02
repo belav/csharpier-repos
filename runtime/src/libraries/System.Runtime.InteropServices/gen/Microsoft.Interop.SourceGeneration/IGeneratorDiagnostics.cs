@@ -17,7 +17,8 @@ namespace Microsoft.Interop
         public static Diagnostic CreateDiagnostic(
             this ISymbol symbol,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return symbol.Locations.CreateDiagnostic(descriptor, args);
         }
@@ -25,7 +26,8 @@ namespace Microsoft.Interop
         public static Diagnostic CreateDiagnostic(
             this AttributeData attributeData,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             SyntaxReference? syntaxReference = attributeData.ApplicationSyntaxReference;
             Location location = syntaxReference is not null
@@ -38,7 +40,8 @@ namespace Microsoft.Interop
         public static Diagnostic CreateDiagnostic(
             this ImmutableArray<Location> locations,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             IEnumerable<Location> locationsInSource = locations.Where(l => l.IsInSource);
             if (!locationsInSource.Any())
@@ -48,21 +51,23 @@ namespace Microsoft.Interop
                 descriptor,
                 location: locationsInSource.First(),
                 additionalLocations: locationsInSource.Skip(1),
-                messageArgs: args);
+                messageArgs: args
+            );
         }
 
         public static Diagnostic CreateDiagnostic(
             this Location location,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return Diagnostic.Create(
                 descriptor,
                 location: location.IsInSource ? location : Location.None,
-                messageArgs: args);
+                messageArgs: args
+            );
         }
     }
-
 
     public interface IGeneratorDiagnostics
     {
@@ -75,7 +80,8 @@ namespace Microsoft.Interop
         void ReportMarshallingNotSupported(
             MethodDeclarationSyntax method,
             TypePositionInfo info,
-            string? notSupportedDetails);
+            string? notSupportedDetails
+        );
 
         /// <summary>
         /// Report diagnostic for configuration that is not supported by the DLL import source generator
@@ -86,17 +92,22 @@ namespace Microsoft.Interop
         void ReportConfigurationNotSupported(
             AttributeData attributeData,
             string configurationName,
-            string? unsupportedValue);
+            string? unsupportedValue
+        );
 
         void ReportInvalidMarshallingAttributeInfo(
             AttributeData attributeData,
             string reasonResourceName,
-            params string[] reasonArgs);
+            params string[] reasonArgs
+        );
     }
 
     public static class IGeneratorDiagnosticsExtensions
     {
-        public static void ReportConfigurationNotSupported(this IGeneratorDiagnostics diagnostics, AttributeData attributeData, string configurationName)
-            => diagnostics.ReportConfigurationNotSupported(attributeData, configurationName, null);
+        public static void ReportConfigurationNotSupported(
+            this IGeneratorDiagnostics diagnostics,
+            AttributeData attributeData,
+            string configurationName
+        ) => diagnostics.ReportConfigurationNotSupported(attributeData, configurationName, null);
     }
 }

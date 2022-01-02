@@ -41,17 +41,11 @@ namespace System.Drawing
     [AttributeUsage(AttributeTargets.All)]
     internal sealed class SRDescriptionAttribute : DescriptionAttribute
     {
-        public SRDescriptionAttribute(string description)
-            : base(description)
-        {
-        }
+        public SRDescriptionAttribute(string description) : base(description) { }
 
         public override string Description
         {
-            get
-            {
-                return DescriptionValue;
-            }
+            get { return DescriptionValue; }
         }
     }
 }

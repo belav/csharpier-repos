@@ -40,7 +40,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
         private readonly VisualStudioWorkspaceImpl _workspace;
         private readonly EventListenerTracker<ITodoListProvider> _eventListenerTracker;
         private readonly IAsynchronousOperationListener _asyncListener;
-        private readonly ConcurrentDictionary<DocumentId, ImmutableArray<TodoCommentData>> _documentToInfos = new();
+        private readonly ConcurrentDictionary<
+            DocumentId,
+            ImmutableArray<TodoCommentData>
+        > _documentToInfos = new();
 
         /// <summary>
         /// Remote service connection. Created on demand when we startup and then
@@ -51,8 +54,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
         /// <summary>
         /// Queue where we enqueue the information we get from OOP to process in batch in the future.
         /// </summary>
-        private readonly TaskCompletionSource<AsyncBatchingWorkQueue<DocumentAndComments>> _workQueueSource
-            = new();
+        private readonly TaskCompletionSource<
+            AsyncBatchingWorkQueue<DocumentAndComments>
+        > _workQueueSource = new();
 
         public event EventHandler<TodoItemsUpdatedArgs>? TodoListUpdated;
 
@@ -62,12 +66,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             VisualStudioWorkspaceImpl workspace,
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners)
-            : base(threadingContext)
+            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
+        ) : base(threadingContext)
         {
             _workspace = workspace;
-            _eventListenerTracker = new EventListenerTracker<ITodoListProvider>(eventListeners, WellKnownEventListeners.TodoListProvider);
-            _asyncListener = asynchronousOperationListenerProvider.GetListener(FeatureAttribute.TodoCommentList);
+            _eventListenerTracker = new EventListenerTracker<ITodoListProvider>(
+                eventListeners,
+                WellKnownEventListeners.TodoListProvider
+            );
+            _asyncListener = asynchronousOperationListenerProvider.GetListener(
+                FeatureAttribute.TodoCommentList
+            );
         }
 
         public void Dispose()
@@ -109,9 +118,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
                     TimeSpan.FromSeconds(1),
                     ProcessTodoCommentInfosAsync,
                     _asyncListener,
-                    cancellationToken));
+                    cancellationToken
+                )
+            );
 
-            var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(_workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 ComputeTodoCommentsInCurrentProcess(cancellationToken);
@@ -120,21 +133,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
 
             // Pass ourselves in as the callback target for the OOP service.  As it discovers
             // todo comments it will call back into us to notify VS about it.
-            _lazyConnection = client.CreateConnection<IRemoteTodoCommentsDiscoveryService>(callbackTarget: this);
+            _lazyConnection = client.CreateConnection<IRemoteTodoCommentsDiscoveryService>(
+                callbackTarget: this
+            );
 
             // Now that we've started, let the VS todo list know to start listening to us
             _eventListenerTracker.EnsureEventListener(_workspace, this);
 
             // Now kick off scanning in the OOP process.
             // If the call fails an error has already been reported and there is nothing more to do.
-            _ = await _lazyConnection.TryInvokeAsync(
-                (service, callbackId, cancellationToken) => service.ComputeTodoCommentsAsync(callbackId, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            _ = await _lazyConnection
+                .TryInvokeAsync(
+                    (service, callbackId, cancellationToken) =>
+                        service.ComputeTodoCommentsAsync(callbackId, cancellationToken),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private void ComputeTodoCommentsInCurrentProcess(CancellationToken cancellationToken)
         {
-            var registrationService = _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService =
+                _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new InProcTodoCommentsIncrementalAnalyzerProvider(this);
 
             registrationService.AddAnalyzerProvider(
@@ -142,11 +162,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
                 new IncrementalAnalyzerProviderMetadata(
                     nameof(InProcTodoCommentsIncrementalAnalyzerProvider),
                     highPriorityForActiveFile: false,
-                    workspaceKinds: WorkspaceKind.Host));
+                    workspaceKinds: WorkspaceKind.Host
+                )
+            );
         }
 
         private ValueTask ProcessTodoCommentInfosAsync(
-            ImmutableArray<DocumentAndComments> docAndCommentsArray, CancellationToken cancellationToken)
+            ImmutableArray<DocumentAndComments> docAndCommentsArray,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -178,9 +202,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
                 if (this.TodoListUpdated != null && !oldComments.SequenceEqual(newComments))
                 {
                     this.TodoListUpdated?.Invoke(
-                        this, new TodoItemsUpdatedArgs(
-                            documentId, _workspace, _workspace.CurrentSolution,
-                            documentId.ProjectId, documentId, newComments));
+                        this,
+                        new TodoItemsUpdatedArgs(
+                            documentId,
+                            _workspace,
+                            _workspace.CurrentSolution,
+                            documentId.ProjectId,
+                            documentId,
+                            newComments
+                        )
+                    );
                 }
             }
 
@@ -189,7 +220,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
 
         private void AddFilteredInfos(
             ImmutableArray<DocumentAndComments> array,
-            ArrayBuilder<DocumentAndComments> filteredArray)
+            ArrayBuilder<DocumentAndComments> filteredArray
+        )
         {
             using var _ = PooledHashSet<DocumentId>.GetInstance(out var seenDocumentIds);
 
@@ -204,24 +236,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             }
         }
 
-        public ImmutableArray<TodoCommentData> GetTodoItems(Workspace workspace, DocumentId documentId, CancellationToken cancellationToken)
+        public ImmutableArray<TodoCommentData> GetTodoItems(
+            Workspace workspace,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        )
         {
             return _documentToInfos.TryGetValue(documentId, out var values)
-                ? values
-                : ImmutableArray<TodoCommentData>.Empty;
+              ? values
+              : ImmutableArray<TodoCommentData>.Empty;
         }
 
         /// <summary>
         /// Callback from the OOP service back into us.
         /// </summary>
-        public async ValueTask ReportTodoCommentDataAsync(DocumentId documentId, ImmutableArray<TodoCommentData> infos, CancellationToken cancellationToken)
+        public async ValueTask ReportTodoCommentDataAsync(
+            DocumentId documentId,
+            ImmutableArray<TodoCommentData> infos,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 var workQueue = await _workQueueSource.Task.ConfigureAwait(false);
                 workQueue.AddWork(new DocumentAndComments(documentId, infos));
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 // report NFW before returning back to the remote process
                 throw ExceptionUtilities.Unreachable;
@@ -230,16 +271,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
 
         /// <inheritdoc cref="IVsTypeScriptTodoCommentService.ReportTodoCommentsAsync(Document, ImmutableArray{TodoComment}, CancellationToken)"/>
         async Task IVsTypeScriptTodoCommentService.ReportTodoCommentsAsync(
-            Document document, ImmutableArray<TodoComment> todoComments, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<TodoComment> todoComments,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<TodoCommentData>.GetInstance(out var converted);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
-            await TodoComment.ConvertAsync(document, todoComments, converted, cancellationToken).ConfigureAwait(false);
+            await TodoComment
+                .ConvertAsync(document, todoComments, converted, cancellationToken)
+                .ConfigureAwait(false);
 
             await ReportTodoCommentDataAsync(
-                document.Id, converted.ToImmutable(), cancellationToken).ConfigureAwait(false);
+                    document.Id,
+                    converted.ToImmutable(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

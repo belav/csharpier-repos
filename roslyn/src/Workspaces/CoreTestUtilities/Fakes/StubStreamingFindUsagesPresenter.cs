@@ -19,18 +19,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Fakes
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public StubStreamingFindUsagesPresenter()
-        {
-        }
+        public StubStreamingFindUsagesPresenter() { }
 
-        public virtual void ClearAll()
-        {
-        }
+        public virtual void ClearAll() { }
 
-        public virtual (FindUsagesContext, CancellationToken) StartSearch(string title, bool supportsReferences)
-            => (new SimpleFindUsagesContext(), CancellationToken.None);
+        public virtual (FindUsagesContext, CancellationToken) StartSearch(
+            string title,
+            bool supportsReferences
+        ) => (new SimpleFindUsagesContext(), CancellationToken.None);
 
-        public virtual (FindUsagesContext, CancellationToken) StartSearchWithCustomColumns(string title, bool supportsReferences, bool includeContainingTypeAndMemberColumns, bool includeKindColumn)
-            => (new SimpleFindUsagesContext(), CancellationToken.None);
+        public virtual (FindUsagesContext, CancellationToken) StartSearchWithCustomColumns(
+            string title,
+            bool supportsReferences,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn
+        ) => (new SimpleFindUsagesContext(), CancellationToken.None);
     }
 }

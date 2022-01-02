@@ -7,20 +7,13 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public class X509Extension : AsnEncodedData
     {
-        protected X509Extension()
-            : base()
-        {
-        }
+        protected X509Extension() : base() { }
 
         public X509Extension(AsnEncodedData encodedExtension, bool critical)
-            : this(encodedExtension.Oid!, encodedExtension.RawData, critical)
-        {
-        }
+            : this(encodedExtension.Oid!, encodedExtension.RawData, critical) { }
 
         public X509Extension(Oid oid, byte[] rawData, bool critical)
-            : this(oid, rawData.AsSpanParameter(nameof(rawData)), critical)
-        {
-        }
+            : this(oid, rawData.AsSpanParameter(nameof(rawData)), critical) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Extension"/> class.
@@ -41,14 +34,15 @@ namespace System.Security.Cryptography.X509Certificates
             if (base.Oid == null || base.Oid.Value == null)
                 throw new ArgumentNullException(nameof(oid));
             if (base.Oid.Value.Length == 0)
-                throw new ArgumentException(SR.Format(SR.Arg_EmptyOrNullString_Named, "oid.Value"), nameof(oid));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EmptyOrNullString_Named, "oid.Value"),
+                    nameof(oid)
+                );
             Critical = critical;
         }
 
         public X509Extension(string oid, byte[] rawData, bool critical)
-            : this(new Oid(oid), rawData, critical)
-        {
-        }
+            : this(new Oid(oid), rawData, critical) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Extension"/> class.
@@ -64,9 +58,7 @@ namespace System.Security.Cryptography.X509Certificates
         ///   otherwise, <see langword="false" />.
         /// </param>
         public X509Extension(string oid, ReadOnlySpan<byte> rawData, bool critical)
-            : this(new Oid(oid), rawData, critical)
-        {
-        }
+            : this(new Oid(oid), rawData, critical) { }
 
         public bool Critical { get; set; }
 

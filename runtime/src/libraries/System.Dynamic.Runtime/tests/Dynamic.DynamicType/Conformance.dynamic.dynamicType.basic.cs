@@ -32,19 +32,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate ()
+            Foo del = delegate()
             {
                 return (int)d.Foo();
-            }
-
-            ;
+            };
             return del();
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod002.anonmethod002
 {
@@ -75,19 +71,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate (int x)
+            Foo del = delegate(int x)
             {
                 return (int)d.Foo(x);
-            }
-
-            ;
+            };
             return del(0);
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod003.anonmethod003
 {
@@ -118,19 +110,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate (dynamic x)
+            Foo del = delegate(dynamic x)
             {
                 return (int)d.Foo(x);
-            }
-
-            ;
+            };
             return del(0);
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod004.anonmethod004
 {
@@ -162,12 +150,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate (object x)
+            Foo del = delegate(object x)
             {
                 return (int)d.Foo(x);
-            }
-
-            ;
+            };
             int rez;
             try
             {
@@ -183,8 +169,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod004b.anonmethod004b
 {
@@ -215,19 +199,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate (dynamic x)
+            Foo del = delegate(dynamic x)
             {
                 return (int)d.Foo(x);
-            }
-
-            ;
+            };
             return del(0);
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod005.anonmethod005
 {
@@ -242,10 +222,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     {
         public int Foo
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
     }
 
@@ -261,19 +238,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate ()
+            Foo del = delegate()
             {
                 return (int)d.Foo;
-            }
-
-            ;
+            };
             return del();
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod006.anonmethod006
 {
@@ -307,25 +280,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate (dynamic x)
+            Foo del = delegate(dynamic x)
             {
                 return (int)d.Foo(x);
-            }
-
-            ;
+            };
             int ret = del(0);
-            Foo2 del22 = delegate (dynamic x)
+            Foo2 del22 = delegate(dynamic x)
             {
-                Bar2 del2 = delegate (object o)
+                Bar2 del2 = delegate(object o)
                 {
                     return (int)d.Foo(o);
-                }
-
-                ;
+                };
                 return del2(x);
-            }
-
-            ;
+            };
             try
             {
                 ret += del22(0);
@@ -340,8 +307,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod006b.anonmethod006b
 {
@@ -374,33 +339,25 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
         public static int MainMethod(string[] args)
         {
             dynamic d = new Bar();
-            Foo del = delegate (dynamic x)
+            Foo del = delegate(dynamic x)
             {
                 return (int)d.Foo(x);
-            }
-
-            ;
+            };
             int ret = del(0);
-            Foo2 del22 = delegate (dynamic x)
+            Foo2 del22 = delegate(dynamic x)
             {
-                Bar2 del2 = delegate (dynamic o)
+                Bar2 del2 = delegate(dynamic o)
                 {
                     return (int)d.Foo(o);
-                }
-
-                ;
+                };
                 return del2(x);
-            }
-
-            ;
+            };
             ret += del22(0);
             return 0 == ret ? 0 : 1;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonmethod008.anonmethod008
 {
@@ -434,18 +391,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
             dynamic d = new Bar();
             try
             {
-                Foo del = delegate (dynamic x)
+                Foo del = delegate(dynamic x)
                 {
-                    Bar2 del2 = delegate (object o)
+                    Bar2 del2 = delegate(object o)
                     {
                         return (int)d.Foo();
-                    }
-
-                    ;
+                    };
                     return del2(x);
-                }
-
-                ;
+                };
                 return del(0);
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
@@ -459,8 +412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.argument001.argument001
 {
@@ -503,8 +454,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.argum
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.argument002.argument002
 {
     // <Title>Argument to method invocation</Title>
@@ -546,8 +495,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.argum
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array001.array001
 {
     // <Title>Special Array methods</Title>
@@ -567,12 +514,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int MainMethod(string[] args)
         {
-            dynamic d = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            dynamic d = new[] { 1, 2, 3 };
             int result = 3;
             try
             {
@@ -580,7 +522,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "System.Array", "Address"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoSuchMember,
+                        e.Message,
+                        "System.Array",
+                        "Address"
+                    )
+                )
                     result--;
             }
 
@@ -590,7 +539,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "System.Array", "Get"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoSuchMember,
+                        e.Message,
+                        "System.Array",
+                        "Get"
+                    )
+                )
                     result--;
             }
 
@@ -600,7 +556,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "System.Array", "Set"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoSuchMember,
+                        e.Message,
+                        "System.Array",
+                        "Set"
+                    )
+                )
                     result--;
             }
 
@@ -609,8 +572,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array002.array002
 {
@@ -638,7 +599,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.AssgReadonlyProp, e.Message, "string.this[int]"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.AssgReadonlyProp,
+                        e.Message,
+                        "string.this[int]"
+                    )
+                )
                     return 0;
             }
 
@@ -647,8 +614,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array003.array003
 {
@@ -668,7 +633,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int MainMethod()
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             dynamic idx;
             var arr = new int[5];
             test++;
@@ -692,8 +658,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array004.array004
 {
     // <Title>Indexing in arrays using uints/ulongs</Title>
@@ -712,7 +676,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int MainMethod()
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             dynamic idx;
             dynamic rez;
             test++;
@@ -736,8 +701,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array005.array005
 {
@@ -780,13 +743,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int Test(dynamic d1)
         {
-            int tests = 0, success = 0;
-            dynamic arr = new int[]
-            {
-            100, 200, 300, 400, 500, 600
-            }
-
-            ;
+            int tests = 0,
+                success = 0;
+            dynamic arr = new int[] { 100, 200, 300, 400, 500, 600 };
             tests++;
             if (arr[d1] == 100)
                 success++;
@@ -803,27 +762,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
                 success++;
             tests++;
             arr = new int[3][];
-            arr[0] = new int[]
-            {
-            1, 2, 3, 4, 5
-            }
-
-            ;
+            arr[0] = new int[] { 1, 2, 3, 4, 5 };
             if (arr[d1][d1 + (short)2] == 3)
                 success++;
             tests++;
-            arr = new int[2, 2]
-            {
-            {
-            1, 2
-            }
-
-            , {
-            3, 4
-            }
-            }
-
-            ;
+            arr = new int[2, 2] { { 1, 2 }, { 3, 4 } };
             if (arr[d1 + 0L, d1] == 1)
                 success++;
             return tests - success; //should be 0 in case of success
@@ -831,8 +774,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array006.array006
 {
@@ -863,13 +804,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int Test(dynamic d1)
         {
-            int tests = 0, success = 0;
-            dynamic arr = new int[]
-            {
-            100, 200, 300, 400, 500, 600
-            }
-
-            ;
+            int tests = 0,
+                success = 0;
+            dynamic arr = new int[] { 100, 200, 300, 400, 500, 600 };
             tests++;
             if (arr[d1] == 100)
                 success++;
@@ -886,27 +823,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
                 success++;
             tests++;
             arr = new int[3][];
-            arr[0] = new int[]
-            {
-            1, 2, 3, 4, 5
-            }
-
-            ;
+            arr[0] = new int[] { 1, 2, 3, 4, 5 };
             if (arr[d1][d1 + (byte)2] == 3)
                 success++;
             tests++;
-            arr = new int[2, 2]
-            {
-            {
-            1, 2
-            }
-
-            , {
-            3, 4
-            }
-            }
-
-            ;
+            arr = new int[2, 2] { { 1, 2 }, { 3, 4 } };
             if (arr[d1 + 0, d1] == 1)
                 success++;
             return tests - success; //should be 0 in case of success
@@ -914,8 +835,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array007.array007
 {
@@ -941,12 +860,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             dynamic d1;
             int rez = 0;
             d1 = long.MaxValue;
-            dynamic arr = new int[]
-            {
-            100, 200, 300, 400, 500, 600
-            }
-
-            ;
+            dynamic arr = new int[] { 100, 200, 300, 400, 500, 600 };
             try
             {
                 if (arr[d1] == 100)
@@ -962,8 +876,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array008.array008
 {
@@ -1021,20 +933,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     {
         public int this[int x]
         {
-            get
-            {
-                return 1;
-            }
-
-            set
-            {
-            }
+            get { return 1; }
+            set { }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array010.array010
 {
@@ -1059,12 +963,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
         public static int MainMethod()
         {
             bool ret = true;
-            var ary = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var ary = new[] { 1, 2, 3 };
             for (int i = 0; i < ary.Length; i++)
             {
                 ret &= (i == ary[(dynamic)i] - 1);
@@ -1082,12 +981,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
                 ret &= (ary[id++] == ary[dx - it]);
             }
 
-            var slist = new[]
-            {
-            "AAA", "BB", "C"
-            }
-
-            ;
+            var slist = new[] { "AAA", "BB", "C" };
             dynamic idx = -1;
             id = 0;
             while (++idx < slist.Length)
@@ -1096,12 +990,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             }
 
             // works before fix
-            var vlist = new[]
-            {
-            3, 2, 1
-            }
-
-            ;
+            var vlist = new[] { 3, 2, 1 };
             var list2 = new Dictionary<int, string>();
             list2.Add(2, "AAA");
             list2.Add(3, "BB");
@@ -1123,7 +1012,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             yield break;
         }
 
-        public static implicit operator ushort (Test t)
+        public static implicit operator ushort(Test t)
         {
             return byte.MaxValue;
         }
@@ -1157,8 +1046,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.arrayinit001.arrayinit001
 {
     public class Test
@@ -1171,12 +1058,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int MainMethod(string[] args)
         {
-            dynamic[] d = new dynamic[]
-            {
-            1, null, "Foo"
-            }
-
-            ;
+            dynamic[] d = new dynamic[] { 1, null, "Foo" };
             if ((int)d[0] != 1)
                 return 1;
             if (d[1] != null)
@@ -1188,8 +1070,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.arrayinit002.arrayinit002
 {
@@ -1203,12 +1083,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int MainMethod(string[] args)
         {
-            object[] o = new object[]
-            {
-            1, null, "Foo"
-            }
-
-            ;
+            object[] o = new object[] { 1, null, "Foo" };
             dynamic[] d = o;
             if ((int)d[0] != 1)
                 return 1;
@@ -1221,8 +1096,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.arrayinit003.arrayinit003
 {
@@ -1237,12 +1110,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
         public static int MainMethod(string[] args)
         {
             object o = 3;
-            dynamic[] d = new dynamic[]
-            {
-            o
-            }
-
-            ;
+            dynamic[] d = new dynamic[] { o };
             if ((int)d[0] != 3)
                 return 1;
             return 0;
@@ -1250,8 +1118,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.arrayinit004.arrayinit004
 {
@@ -1266,12 +1132,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
         public static int MainMethod(string[] args)
         {
             object o = 3;
-            dynamic[] d = new object[]
-            {
-            o
-            }
-
-            ;
+            dynamic[] d = new object[] { o };
             if ((int)d[0] != 3)
                 return 1;
             return 0;
@@ -1279,8 +1140,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.arrayinit005.arrayinit005
 {
@@ -1295,12 +1154,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
         public static int MainMethod(string[] args)
         {
             object o = 3;
-            object[] d = new dynamic[]
-            {
-            o
-            }
-
-            ;
+            object[] d = new dynamic[] { o };
             if ((int)d[0] != 3)
                 return 1;
             return 0;
@@ -1308,8 +1162,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.arrayinit006.arrayinit006
 {
@@ -1325,12 +1177,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
         {
             object o = 3;
             dynamic d = 4;
-            object[] od = new dynamic[]
-            {
-            o, d
-            }
-
-            ;
+            object[] od = new dynamic[] { o, d };
             if ((int)od[0] != 3)
                 return 1;
             if ((int)od[1] != 4)
@@ -1340,8 +1187,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.arrayinit007.arrayinit007
 {
@@ -1362,12 +1207,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
 
         public static int MainMethod()
         {
-            dynamic attrs = new object[]
-            {
-            1, 2
-            }
-
-            ;
+            dynamic attrs = new object[] { 1, 2 };
             dynamic dd = 1;
             var a = attrs[dd];
             if (a == 2)
@@ -1377,8 +1217,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxing001.boxing001
 {
@@ -1482,12 +1320,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
             if (e != myEnum.One)
                 return 1;
             //UD struct
-            o = new myStruct()
-            {
-                field = 1
-            }
-
-            ;
+            o = new myStruct() { field = 1 };
             d = o;
             myStruct st = (myStruct)d;
             if (st.field != 1)
@@ -1507,8 +1340,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxing002.boxing002
 {
@@ -1614,12 +1445,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
             if (e != myEnum.One)
                 return 1;
             //UD struct
-            d = new myStruct()
-            {
-                field = 1
-            }
-
-            ;
+            d = new myStruct() { field = 1 };
             o = d;
             myStruct st = (myStruct)o;
             if (st.field != 1)
@@ -1639,8 +1465,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxing003.boxing003
 {
@@ -1725,12 +1549,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
             if (!(d is myEnum))
                 return 1;
             //UD struct
-            o = new myStruct()
-            {
-                field = 1
-            }
-
-            ;
+            o = new myStruct() { field = 1 };
             d = o;
             if (!(d is myStruct))
                 return 1;
@@ -1749,8 +1568,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxing004.boxing004
 {
@@ -1840,12 +1657,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
             if (e != myEnum.One)
                 return 1;
             //UD struct
-            d = new myStruct()
-            {
-                field = 1
-            }
-
-            ;
+            d = new myStruct() { field = 1 };
             myStruct st = (myStruct)d;
             if (st.field != 1)
                 return 1;
@@ -1864,8 +1676,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxing005.boxing005
 {
@@ -1905,8 +1715,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxing006.boxing006
 {
     // <Title>Boxing and unboxing</Title>
@@ -1927,7 +1735,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
 
     public class Program
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1945,8 +1752,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.cast002.cast002
 {
@@ -1968,8 +1773,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.cast0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit001.collectioninit001
 {
     // <Title>Collection initializers</Title>
@@ -1990,12 +1793,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod(string[] args)
         {
-            List<dynamic> myList = new List<dynamic>()
-            {
-            1, 2, "Fooo", long.MaxValue
-            }
-
-            ;
+            List<dynamic> myList = new List<dynamic>() { 1, 2, "Fooo", long.MaxValue };
             if (myList.Count != 4)
                 return 1;
             if ((int)myList[0] != 1)
@@ -2011,8 +1809,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit002.collectioninit002
 {
@@ -2036,19 +1832,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
         {
             object o = 2;
             dynamic d = o;
-            List<dynamic> myList = new List<dynamic>()
-            {
-            o, d
-            }
-
-            ;
+            List<dynamic> myList = new List<dynamic>() { o, d };
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit003.collectioninit003
 {
@@ -2062,7 +1851,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -2070,15 +1858,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod(string[] args)
         {
-            List<dynamic> myList = new List<dynamic>()
-            {
-            new
-            {
-            Name = "Foo", Value = 3
-            }
-            }
-
-            ;
+            List<dynamic> myList = new List<dynamic>() { new { Name = "Foo", Value = 3 } };
             if ((int)myList[0].Value != 3)
                 return 1;
             return 0;
@@ -2086,8 +1866,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit004.collectioninit004
 {
@@ -2109,19 +1887,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod(string[] args)
         {
-            List<dynamic> myList = new List<object>()
-            {
-            3
-            }
-
-            ;
+            List<dynamic> myList = new List<object>() { 3 };
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit005.collectioninit005
 {
@@ -2143,19 +1914,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod(string[] args)
         {
-            List<object> myList = new List<dynamic>()
-            {
-            3
-            }
-
-            ;
+            List<object> myList = new List<dynamic>() { 3 };
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit006.collectioninit006
 {
@@ -2178,12 +1942,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
         public static int MainMethod(string[] args)
         {
             dynamic d = 3;
-            List<object> myList = new List<object>()
-            {
-            d
-            }
-
-            ;
+            List<object> myList = new List<object>() { d };
             if ((int)myList[0] != 3)
                 return 1;
             return 0;
@@ -2191,8 +1950,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit007.collectioninit007
 {
@@ -2215,12 +1972,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
         public static int MainMethod(string[] args)
         {
             object o = 3;
-            List<dynamic> myList = new List<dynamic>()
-            {
-            o
-            }
-
-            ;
+            List<dynamic> myList = new List<dynamic>() { o };
             if ((int)myList[0] != 3)
                 return 1;
             return 0;
@@ -2228,8 +1980,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit008.collectioninit008
 {
@@ -2252,21 +2002,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod()
         {
-            dynamic a = new A
-            {
-                S =
-            {
-            Length = 10
-            }
-
-            ,
-                X =
-            {
-            1, 2, 3
-            }
-            }
-
-            ;
+            dynamic a = new A { S = { Length = 10 }, X = { 1, 2, 3 } };
             return 0;
         }
 
@@ -2275,8 +2011,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.collectioninit009.collectioninit009
 {
@@ -2302,12 +2036,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
             //array initializer
             dynamic d = 3;
             int rez = 0;
-            Collect c = new Collect()
-            {
-            1, 3L, "goo", d
-            }
-
-            ;
+            Collect c = new Collect() { 1, 3L, "goo", d };
             if (Collect.Status != 8)
                 return 1;
             return 0;
@@ -2345,8 +2074,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgate001.dlgate001
 {
     public class Test
@@ -2360,19 +2087,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
 
         public static int MainMethod(string[] args)
         {
-            Foo f = delegate (dynamic d)
-            {
-            }
-
-            ;
+            Foo f = delegate(dynamic d) { };
             f(3);
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgate002.dlgate002
 {
@@ -2387,19 +2108,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
 
         public static int MainMethod(string[] args)
         {
-            Foo f = delegate (object d)
-            {
-            }
-
-            ;
+            Foo f = delegate(object d) { };
             f(2);
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgate003.dlgate003
 {
@@ -2428,19 +2143,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
 
         public static int MainMethod(string[] args)
         {
-            Foo f = delegate ()
+            Foo f = delegate()
             {
                 return new Bar();
-            }
-
-            ;
+            };
             return f().Foo();
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgate004.dlgate004
 {
@@ -2469,19 +2180,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
 
         public static int MainMethod(string[] args)
         {
-            Foo f = delegate ()
+            Foo f = delegate()
             {
                 return new Bar();
-            }
-
-            ;
+            };
             return (int)f().Foo();
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgate005.dlgate005
 {
@@ -2528,8 +2235,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgate007.dlgate007
 {
     // <Title>Delegates</Title>
@@ -2575,16 +2280,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgate008lib.dlgate008lib
 {
     public class Test
     {
-        public void M1(ref int p1)
-        {
-        }
-
+        public void M1(ref int p1) { }
 
         public static void DynamicCSharpRunTest()
         {
@@ -2603,8 +2303,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt001.evnt001
 {
@@ -2716,8 +2414,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt002.evnt002
 {
@@ -2860,8 +2556,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt003.evnt003
 {
     // <Title>Delegates</Title>
@@ -2875,10 +2569,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public class A
     {
         public event EventHandler E;
-        public static void EventH(object sender, EventArgs e)
-        {
-        }
-
+        public static void EventH(object sender, EventArgs e) { }
 
         public static void DynamicCSharpRunTest()
         {
@@ -2904,8 +2595,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt004.evnt004
 {
     // <Title>Delegates</Title>
@@ -2919,7 +2608,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public class A
     {
         public event EventHandler E;
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -2947,8 +2635,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt006.evnt006
 {
@@ -3013,7 +2699,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
             return false;
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -3068,7 +2753,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
                 // new errMsg - Delegate 'EventHandler' does not take '0' arguments
-                if (ErrorVerifier.Verify(ErrorMessageId.BadDelArgCount, e.Message, "EventHandler", "0") || ErrorVerifier.Verify(ErrorMessageId.ObjectProhibited, e.Message, "A2.E3") || ErrorVerifier.Verify(RuntimeErrorId.NullReferenceOnMemberException, e.Message))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadDelArgCount,
+                        e.Message,
+                        "EventHandler",
+                        "0"
+                    )
+                    || ErrorVerifier.Verify(ErrorMessageId.ObjectProhibited, e.Message, "A2.E3")
+                    || ErrorVerifier.Verify(
+                        RuntimeErrorId.NullReferenceOnMemberException,
+                        e.Message
+                    )
+                )
                     return true;
             }
 
@@ -3097,7 +2794,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
             }
 
             ret = false;
-        L1:
+            L1:
             try
             {
                 E1(null, null);
@@ -3108,7 +2805,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
             }
 
             ret = false;
-        L2:
+            L2:
             try
             {
                 E4.ToString();
@@ -3119,7 +2816,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
             }
 
             ret = false;
-        L3:
+            L3:
             try
             {
                 E4(null, null);
@@ -3134,8 +2831,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt008.evnt008
 {
@@ -3166,8 +2861,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.explicit001.explicit001
 {
     public class Test
@@ -3189,12 +2882,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.expli
             d = (object)x;
             if ((int)d != int.MaxValue)
                 return 1;
-            myClass c = new myClass()
-            {
-                Field = 2
-            }
-
-            ;
+            myClass c = new myClass() { Field = 2 };
             o = (dynamic)c;
             if (((myClass)o).Field != 2)
                 return 1;
@@ -3211,8 +2899,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.expli
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.explicit002.explicit002
 {
@@ -3238,8 +2924,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.expli
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.explicit003.explicit003
 {
     // <Title>Boxing and unboxing</Title>
@@ -3254,15 +2938,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.expli
         public int Field;
         public static explicit operator MyClass(int x)
         {
-            return new MyClass()
-            {
-                Field = x
-            }
-
-            ;
+            return new MyClass() { Field = x };
         }
 
-        public static explicit operator int (MyClass x)
+        public static explicit operator int(MyClass x)
         {
             return x.Field;
         }
@@ -3290,8 +2969,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.expli
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.explicit004.explicit004
 {
     public class Test
@@ -3312,8 +2989,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.expli
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.implicit001.implicit001
 {
@@ -3343,8 +3018,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.implicitarayinit001.implicitarayinit001
 {
     public class Test
@@ -3358,11 +3031,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
         public static int MainMethod(string[] args)
         {
             dynamic dd = 23;
-            var d = new[]
-            {
-            dd, dd, new object ()}
-
-            ;
+            var d = new[] { dd, dd, new object() };
             if (d.Length == 3 && d[0] == 23 && d[1] == 23)
                 return 0;
             return 1;
@@ -3370,8 +3039,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.implicitarayinit002.implicitarayinit002
 {
@@ -3386,12 +3053,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
         public static int MainMethod(string[] args)
         {
             dynamic dd = 23;
-            var d = new[]
-            {
-            dd, dd
-            }
-
-            ;
+            var d = new[] { dd, dd };
             if (d.GetType() != typeof(object[]))
                 return 1;
             return 0;
@@ -3399,8 +3061,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.implicitarayinit003.implicitarayinit003
 {
@@ -3414,12 +3074,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
 
         public static int MainMethod(string[] args)
         {
-            var d = new[]
-            {
-            (dynamic)2, (dynamic)"Foo"
-            }
-
-            ;
+            var d = new[] { (dynamic)2, (dynamic)"Foo" };
             if (d.GetType() != typeof(object[]))
                 return 1;
             return 0;
@@ -3427,8 +3082,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.implicitarayinit004.implicitarayinit004
 {
@@ -3442,20 +3095,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
 
         public static int MainMethod(string[] args)
         {
-            var d = new[]
-            {
-            (dynamic)new
-            {
-            Name = "Foo"
-            }
-
-            , (dynamic)new
-            {
-            Address = "Bar"
-            }
-            }
-
-            ;
+            var d = new[] { (dynamic)new { Name = "Foo" }, (dynamic)new { Address = "Bar" } };
             if (d.GetType() != typeof(object[]))
                 return 1;
             return 0;
@@ -3463,8 +3103,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.impli
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initialize002.initialize002
 {
@@ -3486,30 +3124,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
             o = d;
             if ((int)o != 3)
                 return 1;
-            d = new MyClass()
-            {
-                Field = 3
-            }
-
-            ;
+            d = new MyClass() { Field = 3 };
             o = d.Field;
             if ((int)o != 3)
                 return 1;
-            d = new MyClass()
-            {
-                Field = 3
-            }
-
-            ;
+            d = new MyClass() { Field = 3 };
             o = d.GetNumber();
             if ((int)o != 3)
                 return 1;
-            d = new MyClass()
-            {
-                Field = 3
-            }
-
-            ;
+            d = new MyClass() { Field = 3 };
             o = ((MyClass)d)[3];
             if ((int)o != 3)
                 return 1;
@@ -3526,28 +3149,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
 
             public int this[int index]
             {
-                get
-                {
-                    return Field;
-                }
+                get { return Field; }
             }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initialize003.initialize003
 {
     public class Test
     {
-        private static object s_foo = ((dynamic)new MyClass()
-        {
-            Field = 3
-        }
-
-        ).GetNumber();
+        private static object s_foo = ((dynamic)new MyClass() { Field = 3 }).GetNumber();
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -3572,28 +3185,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
 
             public int this[int index]
             {
-                get
-                {
-                    return Field;
-                }
+                get { return Field; }
             }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initialize004.initialize004
 {
     public class Test
     {
-        private static object s_foo = ((dynamic)new MyClass()
-        {
-            Field = 3
-        }
-
-        ).Field;
+        private static object s_foo = ((dynamic)new MyClass() { Field = 3 }).Field;
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3617,28 +3220,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
 
             public int this[int index]
             {
-                get
-                {
-                    return Field;
-                }
+                get { return Field; }
             }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initialize005.initialize005
 {
     public class Test
     {
-        private static object s_foo = ((MyClass)((dynamic)new MyClass()
-        {
-            Field = 3
-        }
-
-        ))[3];
+        private static object s_foo = ((MyClass)((dynamic)new MyClass() { Field = 3 }))[3];
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3662,28 +3255,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
 
             public int this[int index]
             {
-                get
-                {
-                    return Field;
-                }
+                get { return Field; }
             }
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initialize006.initialize006
 {
     public class Test
     {
-        private static dynamic s_foo = (new MyClass()
-        {
-            Field = 3
-        }
-
-        );
+        private static dynamic s_foo = (new MyClass() { Field = 3 });
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3707,17 +3290,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
 
             public int this[int index]
             {
-                get
-                {
-                    return Field;
-                }
+                get { return Field; }
             }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initialize007.initialize007
 {
@@ -3737,8 +3315,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda002.lambda002
 {
@@ -3764,9 +3340,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
             Action<dynamic, dynamic> lambda1 = (dynamic x, dynamic y) =>
             {
                 state = x % y;
-            }
-
-            ;
+            };
             lambda1(7, 2);
             bool ret = 1 == state;
             dynamic d = "A";
@@ -3777,8 +3351,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda003.lambda003
 {
@@ -3826,9 +3398,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
                     return (char)dVal;
                 else
                     return y;
-            }
-
-            ;
+            };
         }
 
         public delegate string D0();
@@ -3837,8 +3407,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda004b.lambda004b
 {
@@ -3896,11 +3464,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
         private bool RunTest(dynamic d1, dynamic d2)
         {
             bool ret = 11 == M((p1, p2) => p1 * 100);
-            ret &= 22 == M((p1, p2, p3) =>
-            {
-            }
-
-            );
+            ret &= 22 == M((p1, p2, p3) => { });
             ret &= 33 == M((string p1, dynamic p2) => p1 + p2.ToString());
             ret &= 44 == M1((long p1, dynamic p2) => p1 * 100);
             ret &= 66 == M1((string p1, dynamic p2) => p1);
@@ -3909,8 +3473,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda005.lambda005
 {
@@ -3939,8 +3501,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda006.lambda006
 {
     // <Title>Lambda expressions</Title>
@@ -3954,7 +3514,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -4009,8 +3568,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda007.lambda007
 {
     // <Title>Lambda expressions</Title>
@@ -4033,16 +3590,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
         {
             D lambda = (x, y) =>
             {
-                D d = delegate (dynamic i, char j)
+                D d = delegate(dynamic i, char j)
                 {
                     return j;
-                }
-
-                ;
+                };
                 return d;
-            }
-
-            ;
+            };
             bool ret = 'q' == lambda(null, 'p')(null, 'q');
             //
             lambda = (x, y) =>
@@ -4050,21 +3603,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
                 D d = delegate
                 {
                     return y;
-                }
-
-                ;
+                };
                 return d;
-            }
-
-            ;
+            };
             ret &= 'p' == lambda(null, 'p')(null, 'q');
             return ret ? 0 : 1;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda008.lambda008
 {
@@ -4080,13 +3627,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
 
     public class LMD : IDisposable
     {
-        public LMD(Func<object, dynamic> p)
-        {
-        }
+        public LMD(Func<object, dynamic> p) { }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class Test
@@ -4107,11 +3650,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
                 using (var obj = new LMD(y => y))
                 {
                     var v = checked(d);
-                    var arr = new[]
-                    {
-                    new LMD(x => x), new LMD(y => y), new LMD(z => z)}
-
-                    ;
+                    var arr = new[] { new LMD(x => x), new LMD(y => y), new LMD(z => z) };
                     foreach (dynamic i in arr)
                     {
                         s_status++;
@@ -4130,8 +3669,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda009.lambda009
 {
@@ -4162,8 +3699,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda010.lambda010
 {
@@ -4205,8 +3740,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda011.lambda011
 {
     // <Title>Lambda expressions</Title>
@@ -4247,8 +3780,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda012.lambda012
 {
     // <Title>Lambda expressions</Title>
@@ -4263,10 +3794,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     {
         public int Foo
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
     }
 
@@ -4287,8 +3815,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda013.lambda013
 {
@@ -4325,8 +3851,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda014.lambda014
 {
@@ -4366,8 +3890,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda015.lambda015
 {
     // <Title>Lambda expressions</Title>
@@ -4399,8 +3921,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda016.lambda016
 {
     // <Title>Lambda expressions</Title>
@@ -4431,8 +3951,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda017.lambda017
 {
     // <Title>Lambda expressions</Title>
@@ -4462,12 +3980,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
 
         public static int MainMethod(string[] args)
         {
-            Func<int, dynamic> del = x => new Derived()
-            {
-                Field = x
-            }
-
-            ;
+            Func<int, dynamic> del = x => new Derived() { Field = x };
             dynamic d = 3;
             Base result = del(d);
             if (result.Field == 3)
@@ -4477,8 +3990,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda018.lambda018
 {
@@ -4509,12 +4020,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
 
         public static int MainMethod(string[] args)
         {
-            Func<int, dynamic> del = x => new Base()
-            {
-                Field = x
-            }
-
-            ;
+            Func<int, dynamic> del = x => new Base() { Field = x };
             dynamic d = 3;
             try
             {
@@ -4522,7 +4028,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Test.Base", "Test.Derived"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Test.Base",
+                        "Test.Derived"
+                    )
+                )
                     return 0;
             }
 
@@ -4531,8 +4044,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda019.lambda019
 {
@@ -4556,12 +4067,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
             public int Field;
             public static implicit operator Class2(Class1 p1)
             {
-                return new Class2()
-                {
-                    Field = p1.Field + 1
-                }
-
-                ;
+                return new Class2() { Field = p1.Field + 1 };
             }
         }
 
@@ -4573,12 +4079,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
 
         public static int MainMethod(string[] args)
         {
-            Func<int, dynamic> del = x => new Class1()
-            {
-                Field = x
-            }
-
-            ;
+            Func<int, dynamic> del = x => new Class1() { Field = x };
             dynamic d = 3;
             Class2 result = del(d);
             if (result.Field == 4)
@@ -4588,8 +4089,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambda020.lambda020
 {
@@ -4613,12 +4112,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
             public int Field;
             public static explicit operator Class2(Class1 p1)
             {
-                return new Class2()
-                {
-                    Field = p1.Field + 1
-                }
-
-                ;
+                return new Class2() { Field = p1.Field + 1 };
             }
         }
 
@@ -4630,12 +4124,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
 
         public static int MainMethod(string[] args)
         {
-            Func<int, dynamic> del = x => new Class1()
-            {
-                Field = x
-            }
-
-            ;
+            Func<int, dynamic> del = x => new Class1() { Field = x };
             dynamic d = 3;
             Class2 result = (Class2)del(d); // call explicit conversion.
             if (result.Field == 4)
@@ -4645,8 +4134,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.memberinitofanontype001.memberinitofanontype001
 {
@@ -4662,18 +4149,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         {
             dynamic myInt = 3;
             dynamic myString = "foo";
-            dynamic myNullArr = new int?[]
-            {
-            1, null
-            }
-
-            ;
-            dynamic myArr = new decimal[]
-            {
-            decimal.MaxValue, decimal.One
-            }
-
-            ;
+            dynamic myNullArr = new int?[] { 1, null };
+            dynamic myArr = new decimal[] { decimal.MaxValue, decimal.One };
             dynamic myDec = decimal.MaxValue;
             var mc = new
             {
@@ -4682,9 +4159,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
                 NullArray = myNullArr,
                 Array = myArr,
                 Obj = myInt
-            }
-
-            ;
+            };
             if ((int)mc.Field != 3)
                 return 1;
             if ((string)mc.Prop != "foo")
@@ -4701,8 +4176,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.memberinitofanontype002.memberinitofanontype002
 {
     public class Test
@@ -4717,18 +4190,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         {
             dynamic myInt = 3;
             dynamic myString = "foo";
-            dynamic myNullArr = new int?[]
-            {
-            1, null
-            }
-
-            ;
-            dynamic myArr = new decimal[]
-            {
-            decimal.MaxValue, decimal.One
-            }
-
-            ;
+            dynamic myNullArr = new int?[] { 1, null };
+            dynamic myArr = new decimal[] { decimal.MaxValue, decimal.One };
             dynamic myDec = decimal.MaxValue;
             var mc = new
             {
@@ -4737,9 +4200,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
                 NullArray = (int?[])myNullArr,
                 Array = (decimal[])myArr,
                 Obj = myInt
-            }
-
-            ;
+            };
             if (mc.Field != 3)
                 return 1;
             if (mc.Prop != "foo")
@@ -4755,8 +4216,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.memberinitofobjinit001.memberinitofobjinit001
 {
@@ -4773,29 +4232,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         public int Field;
         public string Prop
         {
-            get
-            {
-                return _p;
-            }
-
-            set
-            {
-                _p = value;
-            }
+            get { return _p; }
+            set { _p = value; }
         }
 
         public int?[] NullArray;
         public decimal[] Array
         {
-            get
-            {
-                return _arr;
-            }
-
-            set
-            {
-                _arr = value;
-            }
+            get { return _arr; }
+            set { _arr = value; }
         }
 
         public object Obj;
@@ -4813,18 +4258,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         {
             dynamic myInt = 3;
             dynamic myString = "foo";
-            dynamic myNullArr = new int?[]
-            {
-            1, null
-            }
-
-            ;
-            dynamic myArr = new decimal[]
-            {
-            decimal.MaxValue, decimal.One
-            }
-
-            ;
+            dynamic myNullArr = new int?[] { 1, null };
+            dynamic myArr = new decimal[] { decimal.MaxValue, decimal.One };
             dynamic myDec = decimal.MaxValue;
             MyClass mc = new MyClass()
             {
@@ -4833,9 +4268,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
                 NullArray = myNullArr,
                 Array = myArr,
                 Obj = myInt
-            }
-
-            ;
+            };
             if (mc.Field != 3)
                 return 1;
             if (mc.Prop != "foo")
@@ -4852,8 +4285,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.memberinitofobjinit002.memberinitofobjinit002
 {
     // <Title>Member initializer of object initializer</Title>
@@ -4869,29 +4300,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         public object Field;
         public object Prop
         {
-            get
-            {
-                return _p;
-            }
-
-            set
-            {
-                _p = value;
-            }
+            get { return _p; }
+            set { _p = value; }
         }
 
         public object NullArray;
         public object Array
         {
-            get
-            {
-                return _arr;
-            }
-
-            set
-            {
-                _arr = value;
-            }
+            get { return _arr; }
+            set { _arr = value; }
         }
 
         public object Obj;
@@ -4909,18 +4326,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         {
             dynamic myInt = 3;
             dynamic myString = "foo";
-            dynamic myNullArr = new int?[]
-            {
-            1, null
-            }
-
-            ;
-            dynamic myArr = new decimal[]
-            {
-            decimal.MaxValue, decimal.One
-            }
-
-            ;
+            dynamic myNullArr = new int?[] { 1, null };
+            dynamic myArr = new decimal[] { decimal.MaxValue, decimal.One };
             dynamic myDec = decimal.MaxValue;
             MyClass mc = new MyClass()
             {
@@ -4929,9 +4336,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
                 NullArray = myNullArr,
                 Array = myArr,
                 Obj = myInt
-            }
-
-            ;
+            };
             if ((int)mc.Field != 3)
                 return 1;
             if ((string)mc.Prop != "foo")
@@ -4948,8 +4353,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.memberinitofobjinit003.memberinitofobjinit003
 {
     // <Title>Member initializer of object initializer</Title>
@@ -4965,29 +4368,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         public dynamic Field;
         public dynamic Prop
         {
-            get
-            {
-                return _p;
-            }
-
-            set
-            {
-                _p = value;
-            }
+            get { return _p; }
+            set { _p = value; }
         }
 
         public dynamic NullArray;
         public dynamic Array
         {
-            get
-            {
-                return _arr;
-            }
-
-            set
-            {
-                _arr = value;
-            }
+            get { return _arr; }
+            set { _arr = value; }
         }
 
         public dynamic Obj;
@@ -5005,18 +4394,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         {
             object myInt = 3;
             object myString = "foo";
-            object myNullArr = new int?[]
-            {
-            1, null
-            }
-
-            ;
-            object myArr = new decimal[]
-            {
-            decimal.MaxValue, decimal.One
-            }
-
-            ;
+            object myNullArr = new int?[] { 1, null };
+            object myArr = new decimal[] { decimal.MaxValue, decimal.One };
             object myDec = decimal.MaxValue;
             MyClass mc = new MyClass()
             {
@@ -5025,9 +4404,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
                 NullArray = myNullArr,
                 Array = myArr,
                 Obj = myInt
-            }
-
-            ;
+            };
             if ((int)mc.Field != 3)
                 return 1;
             if ((string)mc.Prop != "foo")
@@ -5044,8 +4421,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.memberinitofobjinit004.memberinitofobjinit004
 {
     // <Title>Member initializer of object initializer</Title>
@@ -5061,29 +4436,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         public dynamic Field;
         public dynamic Prop
         {
-            get
-            {
-                return _p;
-            }
-
-            set
-            {
-                _p = value;
-            }
+            get { return _p; }
+            set { _p = value; }
         }
 
         public dynamic NullArray;
         public dynamic Array
         {
-            get
-            {
-                return _arr;
-            }
-
-            set
-            {
-                _arr = value;
-            }
+            get { return _arr; }
+            set { _arr = value; }
         }
 
         public dynamic Obj;
@@ -5101,18 +4462,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
         {
             int myInt = 3;
             string myString = "foo";
-            int?[] myNullArr = new int?[]
-            {
-            1, null
-            }
-
-            ;
-            decimal[] myArr = new decimal[]
-            {
-            decimal.MaxValue, decimal.One
-            }
-
-            ;
+            int?[] myNullArr = new int?[] { 1, null };
+            decimal[] myArr = new decimal[] { decimal.MaxValue, decimal.One };
             MyClass mc = new MyClass()
             {
                 Field = myInt,
@@ -5120,9 +4471,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
                 NullArray = myNullArr,
                 Array = myArr,
                 Obj = myInt
-            }
-
-            ;
+            };
             if ((int)mc.Field != 3)
                 return 1;
             if ((string)mc.Prop != "foo")
@@ -5138,8 +4487,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.membe
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.negboxing002.negboxing002
 {
@@ -5228,12 +4575,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.negbo
             if (d != myEnum.One)
                 return 1;
             //UD struct
-            o = new myStruct()
-            {
-                field = 1
-            }
-
-            ;
+            o = new myStruct() { field = 1 };
             d = (myStruct)o;
             if (d.field != 1)
                 return 1;
@@ -5252,8 +4594,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.negbo
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nullcoalesce001.nullcoalesce001
 {
@@ -5288,8 +4628,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nullc
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.unsfe001.unsfe001
 {
@@ -5352,8 +4690,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.unsfe
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query003.query003
 {
     // <Title>Query expression</Title>
@@ -5376,16 +4712,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
         public static int MainMethod(string[] args)
         {
             dynamic d = 3;
-            var list = new List<int>
-            {
-            1, 2, 3
-            }
-
-            ;
-            var x =
-                from c in list
-                where c == (int)d
-                select c;
+            var list = new List<int> { 1, 2, 3 };
+            var x = from c in list where c == (int)d select c;
             if (x.Count() != 1)
                 return 1;
             return 0;
@@ -5393,8 +4721,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query004.query004
 {
@@ -5426,16 +4752,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
         public static int MainMethod(string[] args)
         {
             dynamic d = new myClass();
-            var list = new List<int>
-            {
-            1, 2, 3
-            }
-
-            ;
-            var x = (
-                from c in list
-                where c == 2
-                select d.Transform(c)).SingleOrDefault();
+            var list = new List<int> { 1, 2, 3 };
+            var x = (from c in list where c == 2 select d.Transform(c)).SingleOrDefault();
             if ((int)x != 3)
                 return 1;
             return 0;
@@ -5443,8 +4761,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query005.query005
 {
@@ -5476,17 +4792,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
         public static int MainMethod(string[] args)
         {
             dynamic d = new myClass();
-            var list = new List<int>
-            {
-            1, 2, 3
-            }
-
-            ;
+            var list = new List<int> { 1, 2, 3 };
             var x = (
                 from c in list
                 where c == 2
                 orderby d.Transform(c)
-                select d.Transform(c)).SingleOrDefault();
+                select d.Transform(c)
+            ).SingleOrDefault();
             if ((int)x != 3)
                 return 1;
             return 0;
@@ -5494,8 +4806,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.throw003.throw003
 {
@@ -5531,7 +4841,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.throw
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.GenericConstraintNotSatisfiedValType, e.Message, "D.Foo<T>(T)", "System.Exception", "T", "int"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.GenericConstraintNotSatisfiedValType,
+                        e.Message,
+                        "D.Foo<T>(T)",
+                        "System.Exception",
+                        "T",
+                        "int"
+                    )
+                )
                     return 0;
             }
 
@@ -5540,8 +4859,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.throw
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common
 {
@@ -5575,8 +4892,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.commo
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate001.operate001
 {
@@ -5676,7 +4991,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "long", "int"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "long",
+                        "int"
+                    )
+                )
                     return true;
             }
 
@@ -5701,8 +5023,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate002.operate002
 {
@@ -5828,8 +5148,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate003.operate003
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
@@ -5937,8 +5255,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate004.operate004
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
@@ -5968,12 +5284,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a in boolValues)
             {
                 dynamic d = a;
@@ -5989,10 +5300,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false
-            };
+            bool?[] boolValues = new bool?[] { true, false };
 
             foreach (bool? a in boolValues)
             {
@@ -6025,8 +5333,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate005.operate005
 {
@@ -6235,8 +5541,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate005a.operate005a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
@@ -6443,8 +5747,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate006.operate006
 {
@@ -6655,8 +5957,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate006a.operate006a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
@@ -6865,8 +6165,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate007.operate007
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
@@ -6899,12 +6197,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -6924,12 +6217,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 foreach (bool? a2 in boolValues)
@@ -6951,12 +6239,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -6976,12 +6259,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 foreach (bool? a2 in boolValues)
@@ -7003,12 +6281,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7028,12 +6301,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 foreach (bool? a2 in boolValues)
@@ -7055,8 +6323,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate007a.operate007a
 {
@@ -7090,12 +6356,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7121,12 +6382,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             int x = 0;
             int y = 0;
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 x++;
@@ -7166,12 +6422,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7195,12 +6446,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 foreach (bool? a2 in boolValues)
@@ -7253,12 +6499,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7282,12 +6523,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 foreach (bool? a2 in boolValues)
@@ -7313,8 +6549,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate007b.operate007b
 {
@@ -7352,12 +6586,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 var b1 = a1;
@@ -7374,12 +6603,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 var b1 = a1;
@@ -7396,12 +6620,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false };
             foreach (bool? a1 in boolValues)
             {
                 var b1 = a1;
@@ -7418,12 +6637,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 var b1 = a1;
@@ -7440,12 +6654,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false };
             foreach (bool? a1 in boolValues)
             {
                 var b1 = a1;
@@ -7462,12 +6671,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 var b1 = a1;
@@ -7484,12 +6688,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false, null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false, null };
             foreach (bool? a1 in boolValues)
             {
                 var b1 = a1;
@@ -7506,8 +6705,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate008.operate008
 {
@@ -7539,12 +6736,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7564,12 +6756,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7589,12 +6776,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7614,12 +6796,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 foreach (bool a2 in boolValues)
@@ -7639,8 +6816,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate008a.operate008a
 {
@@ -7680,12 +6855,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 dynamic d1 = a1;
@@ -7701,12 +6871,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 dynamic d1 = a1;
@@ -7722,12 +6887,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false };
             foreach (bool? a1 in boolValues)
             {
                 dynamic d1 = a1; // should work as bool, dynamic as boxed bool
@@ -7743,18 +6903,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3a()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { null };
             foreach (bool? a1 in boolValues)
             {
                 dynamic d1 = a1;
                 dynamic d = false || d1; // B#567888
-                                         // System.Console.WriteLine("Failed -- bool? || bool? Neg");
-                                         // return false;
+                // System.Console.WriteLine("Failed -- bool? || bool? Neg");
+                // return false;
             }
 
             return true;
@@ -7762,17 +6917,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            false
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { false };
             foreach (bool? a1 in boolValues)
             {
                 dynamic d1 = a1;
                 dynamic d = d1 || null; // B#567888
-                                        // System.Console.WriteLine("Failed -- bool? || null Neg");
+                // System.Console.WriteLine("Failed -- bool? || null Neg");
             }
 
             return true;
@@ -7780,12 +6930,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4a()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true };
             foreach (bool? a1 in boolValues)
             {
                 dynamic d1 = a1;
@@ -7801,12 +6946,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 dynamic d1 = a1;
@@ -7822,12 +6962,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
             foreach (bool a1 in boolValues)
             {
                 dynamic d1 = a1;
@@ -7843,12 +6978,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true, false
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true, false };
             foreach (bool? a1 in boolValues)
             {
                 dynamic d1 = a1; // should work as bool, dynamic as boxed bool
@@ -7864,12 +6994,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7a()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            null
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { null };
             foreach (bool? a1 in boolValues)
             {
                 dynamic d1 = a1;
@@ -7890,17 +7015,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test8()
         {
-            bool?[] boolValues = new bool?[]
-            {
-            true
-            }
-
-            ;
+            bool?[] boolValues = new bool?[] { true };
             foreach (bool? a1 in boolValues)
             {
                 dynamic d1 = a1;
                 dynamic d = d1 && null; // B#567888
-                                        // System.Console.WriteLine("Failed -- bool? && null Neg");
+                // System.Console.WriteLine("Failed -- bool? && null Neg");
             }
 
             return true;
@@ -7908,8 +7028,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate009.operate009
 {
@@ -7947,12 +7065,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a1 in stringValues)
             {
                 foreach (string a2 in stringValues)
@@ -7972,18 +7085,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            int?[] intNValues = new int?[]
-            {
-            int.MaxValue, int.MinValue, 0, null
-            }
-
-            ;
-            int[] intValues = new int[]
-            {
-            int.MaxValue, int.MinValue, 0
-            }
-
-            ;
+            int?[] intNValues = new int?[] { int.MaxValue, int.MinValue, 0, null };
+            int[] intValues = new int[] { int.MaxValue, int.MinValue, 0 };
             foreach (int? a1 in intNValues)
             {
                 foreach (int a2 in intValues)
@@ -8005,16 +7108,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             MyEnum?[] enumNValues = new MyEnum?[]
             {
-            MyEnum.First, MyEnum.Second, MyEnum.Third, null
-            }
-
-            ;
-            MyEnum[] enumValues = new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Second, MyEnum.Third
-            }
-
-            ;
+                MyEnum.First,
+                MyEnum.Second,
+                MyEnum.Third,
+                null
+            };
+            MyEnum[] enumValues = new MyEnum[] { MyEnum.First, MyEnum.Second, MyEnum.Third };
             foreach (MyEnum? a1 in enumNValues)
             {
                 foreach (MyEnum a2 in enumValues)
@@ -8034,8 +7133,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate009a.operate009a
 {
@@ -8077,12 +7174,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a1 in stringValues)
             {
                 dynamic d1 = a1;
@@ -8098,12 +7190,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1a()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a1 in stringValues)
             {
                 dynamic d1 = a1;
@@ -8119,12 +7206,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a1 in stringValues)
             {
                 dynamic d1 = a1;
@@ -8140,12 +7222,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a1 in stringValues)
             {
                 dynamic d1 = 10;
@@ -8161,12 +7238,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            int?[] intNValues = new int?[]
-            {
-            int.MaxValue, int.MinValue, 0, null
-            }
-
-            ;
+            int?[] intNValues = new int?[] { int.MaxValue, int.MinValue, 0, null };
             foreach (int? a1 in intNValues)
             {
                 dynamic d1 = a1;
@@ -8184,16 +7256,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             MyEnum?[] enumNValues = new MyEnum?[]
             {
-            MyEnum.First, MyEnum.Second, MyEnum.Third, null
-            }
-
-            ;
-            MyEnum[] enumValues = new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Second, MyEnum.Third
-            }
-
-            ;
+                MyEnum.First,
+                MyEnum.Second,
+                MyEnum.Third,
+                null
+            };
+            MyEnum[] enumValues = new MyEnum[] { MyEnum.First, MyEnum.Second, MyEnum.Third };
             foreach (MyEnum? a1 in enumNValues)
             {
                 dynamic d1 = a1;
@@ -8209,8 +7277,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate010.operate010
 {
@@ -8247,18 +7313,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (bool a1 in boolValues)
             {
                 foreach (string a2 in stringValues)
@@ -8282,18 +7338,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (bool a1 in boolValues)
             {
                 foreach (string a2 in stringValues)
@@ -8317,18 +7363,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (bool a1 in boolValues)
             {
                 foreach (string a2 in stringValues)
@@ -8352,18 +7388,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (bool a1 in boolValues)
             {
                 foreach (string a2 in stringValues)
@@ -8387,18 +7413,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            decimal[] longValues = new decimal[]
-            {
-            decimal.MaxValue, decimal.MinValue, 0M
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            decimal[] longValues = new decimal[] { decimal.MaxValue, decimal.MinValue, 0M };
             foreach (bool a1 in boolValues)
             {
                 foreach (decimal a2 in longValues)
@@ -8422,18 +7438,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            long?[] longNValues = new long?[]
-            {
-            long.MaxValue, long.MinValue, null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            long?[] longNValues = new long?[] { long.MaxValue, long.MinValue, null };
             foreach (bool a1 in boolValues)
             {
                 foreach (long? a2 in longNValues)
@@ -8445,7 +7451,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                         long? d3 = a3;
                         if ((d1 ? d2 : d3) != (a1 ? a2 : a3))
                         {
-                            System.Console.WriteLine("Failed -- bool ? Nullable<long> : Nullable<long>");
+                            System.Console.WriteLine(
+                                "Failed -- bool ? Nullable<long> : Nullable<long>"
+                            );
                             return false;
                         }
                     }
@@ -8457,17 +7465,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            Guid[] guidValues = new Guid[]
-            {
-            Guid.NewGuid(), Guid.NewGuid(), default (Guid)}
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            Guid[] guidValues = new Guid[] { Guid.NewGuid(), Guid.NewGuid(), default(Guid) };
             foreach (bool a1 in boolValues)
             {
                 foreach (Guid a2 in guidValues)
@@ -8491,18 +7490,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test8()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            Guid?[] guidNValues = new Guid?[]
-            {
-            Guid.NewGuid(), default (Guid), null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            Guid?[] guidNValues = new Guid?[] { Guid.NewGuid(), default(Guid), null };
             foreach (bool a1 in boolValues)
             {
                 foreach (Guid? a2 in guidNValues)
@@ -8514,7 +7503,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                         dynamic d3 = a3;
                         if ((d1 ? d2 : d3) != (a1 ? a2 : a3))
                         {
-                            System.Console.WriteLine("Failed -- bool ? Nullable<Guid> : Nullable<Guid>");
+                            System.Console.WriteLine(
+                                "Failed -- bool ? Nullable<Guid> : Nullable<Guid>"
+                            );
                             return false;
                         }
                     }
@@ -8526,8 +7517,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate010a.operate010a
 {
@@ -8566,18 +7555,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (bool a1 in boolValues)
             {
                 foreach (string a3 in stringValues)
@@ -8597,18 +7576,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (bool a1 in boolValues)
             {
                 foreach (string a2 in stringValues)
@@ -8628,18 +7597,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a2 in stringValues)
             {
                 foreach (string a3 in stringValues)
@@ -8659,18 +7618,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3a()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a2 in stringValues)
             {
                 foreach (string a3 in stringValues)
@@ -8691,18 +7640,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (bool a1 in boolValues)
             {
                 foreach (string a3 in stringValues)
@@ -8722,18 +7661,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            decimal[] longValues = new decimal[]
-            {
-            decimal.MaxValue, decimal.MinValue, 0M
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            decimal[] longValues = new decimal[] { decimal.MaxValue, decimal.MinValue, 0M };
             foreach (bool a1 in boolValues)
             {
                 foreach (decimal a2 in longValues)
@@ -8753,18 +7682,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            long?[] longNValues = new long?[]
-            {
-            long.MaxValue, long.MinValue, null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            long?[] longNValues = new long?[] { long.MaxValue, long.MinValue, null };
             foreach (bool a1 in boolValues)
             {
                 foreach (long? a2 in longNValues)
@@ -8773,7 +7692,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                     dynamic d2 = a2;
                     if ((d1 ? d2 : 10L) != (a1 ? a2 : 10L))
                     {
-                        System.Console.WriteLine("Failed -- bool ? Nullable<long> : Nullable<long>");
+                        System.Console.WriteLine(
+                            "Failed -- bool ? Nullable<long> : Nullable<long>"
+                        );
                         return false;
                     }
                 }
@@ -8784,17 +7705,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            Guid[] guidValues = new Guid[]
-            {
-            Guid.NewGuid(), Guid.NewGuid(), default (Guid)}
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            Guid[] guidValues = new Guid[] { Guid.NewGuid(), Guid.NewGuid(), default(Guid) };
             foreach (bool a1 in boolValues)
             {
                 foreach (Guid a3 in guidValues)
@@ -8814,18 +7726,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test8()
         {
-            bool[] boolValues = new bool[]
-            {
-            true, false
-            }
-
-            ;
-            Guid?[] guidNValues = new Guid?[]
-            {
-            Guid.NewGuid(), default (Guid), null
-            }
-
-            ;
+            bool[] boolValues = new bool[] { true, false };
+            Guid?[] guidNValues = new Guid?[] { Guid.NewGuid(), default(Guid), null };
             foreach (bool a1 in boolValues)
             {
                 foreach (Guid? a2 in guidNValues)
@@ -8834,7 +7736,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                     dynamic d2 = a2;
                     if ((d1 ? d2 : null) != (a1 ? a2 : null))
                     {
-                        System.Console.WriteLine("Failed -- bool ? Nullable<Guid> : Nullable<Guid>");
+                        System.Console.WriteLine(
+                            "Failed -- bool ? Nullable<Guid> : Nullable<Guid>"
+                        );
                         return false;
                     }
                 }
@@ -8845,8 +7749,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate011.operate011
 {
@@ -8890,12 +7792,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
             foreach (string a1 in stringValues)
             {
                 dynamic d1 = a1;
@@ -8911,12 +7808,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            int?[] intNValues = new int?[]
-            {
-            int.MaxValue, int.MinValue, 0, null
-            }
-
-            ;
+            int?[] intNValues = new int?[] { int.MaxValue, int.MinValue, 0, null };
             foreach (int? a1 in intNValues)
             {
                 dynamic d1 = a1;
@@ -8933,11 +7825,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            Guid[] guidValues = new Guid[]
-            {
-            Guid.NewGuid(), Guid.NewGuid(), default (Guid)}
-
-            ;
+            Guid[] guidValues = new Guid[] { Guid.NewGuid(), Guid.NewGuid(), default(Guid) };
             for (int i = 0; i < guidValues.Length; i++)
             {
                 for (int j = 0; j < guidValues.Length; j++)
@@ -8959,12 +7847,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            decimal[] decimalValues = new decimal[]
-            {
-            decimal.MaxValue, decimal.MinusOne, 0M
-            }
-
-            ;
+            decimal[] decimalValues = new decimal[] { decimal.MaxValue, decimal.MinusOne, 0M };
             for (int i = 0; i < decimalValues.Length; i++)
             {
                 for (int j = 0; j < decimalValues.Length; j++)
@@ -8988,10 +7871,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             DateTime[] datetimeValues = new DateTime[]
             {
-            DateTime.Now.AddHours(10.00), DateTime.Now.AddHours(5.00), DateTime.Now
-            }
-
-            ;
+                DateTime.Now.AddHours(10.00),
+                DateTime.Now.AddHours(5.00),
+                DateTime.Now
+            };
             foreach (DateTime a1 in datetimeValues)
             {
                 dynamic d1 = a1;
@@ -9007,12 +7890,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            long[] longValues = new long[]
-            {
-            long.MaxValue, long.MinValue, 0
-            }
-
-            ;
+            long[] longValues = new long[] { long.MaxValue, long.MinValue, 0 };
             foreach (long a1 in longValues)
             {
                 dynamic d1 = a1;
@@ -9029,12 +7907,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7()
         {
-            MyEnum[] enumValues = new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Second, MyEnum.Third
-            }
-
-            ;
+            MyEnum[] enumValues = new MyEnum[] { MyEnum.First, MyEnum.Second, MyEnum.Third };
             for (int i = 0; i < enumValues.Length; i++)
             {
                 for (int j = 0; j < enumValues.Length; j++)
@@ -9058,10 +7931,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             MyEnum?[] enumValues = new MyEnum?[]
             {
-            MyEnum.First, MyEnum.Second, MyEnum.Third, null
-            }
-
-            ;
+                MyEnum.First,
+                MyEnum.Second,
+                MyEnum.Third,
+                null
+            };
             for (int i = 0; i < enumValues.Length; i++)
             {
                 for (int j = 0; j < enumValues.Length; j++)
@@ -9083,8 +7957,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate011b.operate011b
 {
@@ -9282,7 +8154,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "==", "MyStruct", ErrorVerifier.GetErrorElement(ErrorElementId.NULL)))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "==",
+                        "MyStruct",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL)
+                    )
+                )
                     return true;
             }
 
@@ -9299,7 +8179,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "!=", "MyStruct", ErrorVerifier.GetErrorElement(ErrorElementId.NULL)))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "!=",
+                        "MyStruct",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL)
+                    )
+                )
                     return true;
             }
 
@@ -9316,7 +8204,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "==", ErrorVerifier.GetErrorElement(ErrorElementId.NULL), "MyStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "==",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL),
+                        "MyStruct"
+                    )
+                )
                     return true;
             }
 
@@ -9333,7 +8229,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "!=", ErrorVerifier.GetErrorElement(ErrorElementId.NULL), "MyStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "!=",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL),
+                        "MyStruct"
+                    )
+                )
                     return true;
             }
 
@@ -9422,7 +8326,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "==", "MyStruct", ErrorVerifier.GetErrorElement(ErrorElementId.NULL)))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "==",
+                        "MyStruct",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL)
+                    )
+                )
                     return true;
             }
 
@@ -9440,7 +8352,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "!=", "MyStruct", ErrorVerifier.GetErrorElement(ErrorElementId.NULL)))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "!=",
+                        "MyStruct",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL)
+                    )
+                )
                     return true;
             }
 
@@ -9458,7 +8378,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "==", ErrorVerifier.GetErrorElement(ErrorElementId.NULL), "MyStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "==",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL),
+                        "MyStruct"
+                    )
+                )
                     return true;
             }
 
@@ -9476,7 +8404,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "!=", ErrorVerifier.GetErrorElement(ErrorElementId.NULL), "MyStruct"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "!=",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL),
+                        "MyStruct"
+                    )
+                )
                     return true;
             }
 
@@ -9535,8 +8471,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate012.operate012
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
@@ -9574,12 +8508,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            long[] longValues = new long[]
-            {
-            long.MinValue, long.MinValue, 0
-            }
-
-            ;
+            long[] longValues = new long[] { long.MinValue, long.MinValue, 0 };
             foreach (long a1 in longValues)
             {
                 foreach (long a2 in longValues)
@@ -9600,10 +8529,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             decimal?[] decimalNValues = new decimal?[]
             {
-            decimal.MaxValue, int.MinValue, default (decimal), null
-            }
-
-            ;
+                decimal.MaxValue,
+                int.MinValue,
+                default(decimal),
+                null
+            };
             foreach (decimal? a1 in decimalNValues)
             {
                 foreach (decimal? a2 in decimalNValues)
@@ -9622,12 +8552,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            char?[] charNValues = new char?[]
-            {
-            'a', 'b', default (char), null
-            }
-
-            ;
+            char?[] charNValues = new char?[] { 'a', 'b', default(char), null };
             foreach (char? a1 in charNValues)
             {
                 foreach (char? a2 in charNValues)
@@ -9647,12 +8572,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            MyEnum[] enumValues = new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Second, MyEnum.Third
-            }
-
-            ;
+            MyEnum[] enumValues = new MyEnum[] { MyEnum.First, MyEnum.Second, MyEnum.Third };
             foreach (MyEnum a1 in enumValues)
             {
                 foreach (MyEnum a2 in enumValues)
@@ -9671,8 +8591,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate012a.operate012a
 {
@@ -9713,12 +8631,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            long[] longValues = new long[]
-            {
-            long.MinValue, long.MinValue, 0
-            }
-
-            ;
+            long[] longValues = new long[] { long.MinValue, long.MinValue, 0 };
             foreach (long a1 in longValues)
             {
                 dynamic d1 = a1;
@@ -9736,10 +8649,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             decimal?[] decimalNValues = new decimal?[]
             {
-            decimal.MaxValue, int.MinValue, default (decimal), null
-            }
-
-            ;
+                decimal.MaxValue,
+                int.MinValue,
+                default(decimal),
+                null
+            };
             foreach (decimal? a2 in decimalNValues)
             {
                 dynamic d2 = a2;
@@ -9757,10 +8671,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             decimal?[] decimalNValues = new decimal?[]
             {
-            decimal.MaxValue, int.MinValue, default (decimal), null
-            }
-
-            ;
+                decimal.MaxValue,
+                int.MinValue,
+                default(decimal),
+                null
+            };
             foreach (decimal? a2 in decimalNValues)
             {
                 dynamic d2 = a2;
@@ -9776,12 +8691,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            char?[] charNValues = new char?[]
-            {
-            'a', 'b', default (char), null
-            }
-
-            ;
+            char?[] charNValues = new char?[] { 'a', 'b', default(char), null };
             foreach (char? a2 in charNValues)
             {
                 dynamic d2 = a2;
@@ -9797,12 +8707,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            MyEnum[] enumValues = new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Second, MyEnum.Third
-            }
-
-            ;
+            MyEnum[] enumValues = new MyEnum[] { MyEnum.First, MyEnum.Second, MyEnum.Third };
             foreach (MyEnum a1 in enumValues)
             {
                 dynamic d1 = a1;
@@ -9818,8 +8723,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate012b.operate012b
 {
@@ -9866,18 +8769,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         public dynamic dField = default(dynamic);
         public dynamic DPro
         {
-            get
-            {
-                return dField;
-            }
+            get { return dField; }
         }
 
         public char this[char? c]
         {
-            get
-            {
-                return c ?? 'a';
-            }
+            get { return c ?? 'a'; }
         }
 
         public dynamic Method(object d)
@@ -9887,12 +8784,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            long[] longValues = new long[]
-            {
-            long.MinValue, long.MinValue, 0
-            }
-
-            ;
+            long[] longValues = new long[] { long.MinValue, long.MinValue, 0 };
             foreach (long a1 in longValues)
             {
                 dynamic d1 = a1;
@@ -9910,10 +8802,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             decimal?[] decimalNValues = new decimal?[]
             {
-            decimal.MaxValue, int.MinValue, default (decimal), null
-            }
-
-            ;
+                decimal.MaxValue,
+                int.MinValue,
+                default(decimal),
+                null
+            };
             foreach (decimal? a2 in decimalNValues)
             {
                 dynamic d2 = a2;
@@ -9933,10 +8826,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             decimal?[] decimalNValues = new decimal?[]
             {
-            decimal.MaxValue, int.MinValue, default (decimal), null
-            }
-
-            ;
+                decimal.MaxValue,
+                int.MinValue,
+                default(decimal),
+                null
+            };
             foreach (decimal? a2 in decimalNValues)
             {
                 dynamic d2 = a2;
@@ -9953,12 +8847,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            char?[] charNValues = new char?[]
-            {
-            'a', 'b', default (char), null
-            }
-
-            ;
+            char?[] charNValues = new char?[] { 'a', 'b', default(char), null };
             foreach (char? a2 in charNValues)
             {
                 dynamic d2 = a2;
@@ -9975,12 +8864,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            MyEnum[] enumValues = new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Second, MyEnum.Third
-            }
-
-            ;
+            MyEnum[] enumValues = new MyEnum[] { MyEnum.First, MyEnum.Second, MyEnum.Third };
             foreach (MyEnum a1 in enumValues)
             {
                 dynamic d1 = a1;
@@ -9998,8 +8882,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate013.operate013
 {
@@ -10042,18 +8924,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
-            object[] objectValues = new object[]
-            {
-            null, 10, 10L, "10", MyEnum.First
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
+            object[] objectValues = new object[] { null, 10, 10L, "10", MyEnum.First };
             foreach (string a1 in stringValues)
             {
                 foreach (object a2 in objectValues)
@@ -10072,12 +8944,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            long?[] longNValues = new long?[]
-            {
-            10L, 30L, 0, null
-            }
-
-            ;
+            long?[] longNValues = new long?[] { 10L, 30L, 0, null };
             foreach (long? a1 in longNValues)
             {
                 foreach (long? a2 in longNValues)
@@ -10096,12 +8963,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            decimal[] decimalValues = new decimal[]
-            {
-            1M, 10.10M, 100.01M, 0M
-            }
-
-            ;
+            decimal[] decimalValues = new decimal[] { 1M, 10.10M, 100.01M, 0M };
             foreach (decimal a1 in decimalValues)
             {
                 foreach (decimal a2 in decimalValues)
@@ -10121,12 +8983,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            int[] intValues = new int[]
-            {
-            1, 2, 4, 99
-            }
-
-            ;
+            int[] intValues = new int[] { 1, 2, 4, 99 };
             foreach (int a1 in intValues)
             {
                 foreach (int a2 in intValues)
@@ -10146,12 +9003,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            decimal?[] decimalNValues = new decimal?[]
-            {
-            1M, 10.10M, 100.01M, null
-            }
-
-            ;
+            decimal?[] decimalNValues = new decimal?[] { 1M, 10.10M, 100.01M, null };
             foreach (decimal? a1 in decimalNValues)
             {
                 foreach (decimal? a2 in decimalNValues)
@@ -10170,12 +9022,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            byte[] byteValues = new byte[]
-            {
-            2, 30, 16, 9
-            }
-
-            ;
+            byte[] byteValues = new byte[] { 2, 30, 16, 9 };
             foreach (byte a1 in byteValues)
             {
                 foreach (byte a2 in byteValues)
@@ -10194,12 +9041,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7()
         {
-            int?[] intNValues = new int?[]
-            {
-            null, 2, 4, 3
-            }
-
-            ;
+            int?[] intNValues = new int?[] { null, 2, 4, 3 };
             foreach (int? a1 in intNValues)
             {
                 foreach (int? a2 in intNValues)
@@ -10218,8 +9060,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate013a.operate013a
 {
@@ -10261,18 +9101,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            string[] stringValues = new string[]
-            {
-            string.Empty, "ABC", null
-            }
-
-            ;
-            object[] objectValues = new object[]
-            {
-            null, 10, 10L, "10", MyEnum.First
-            }
-
-            ;
+            string[] stringValues = new string[] { string.Empty, "ABC", null };
+            object[] objectValues = new object[] { null, 10, 10L, "10", MyEnum.First };
             foreach (string a1 in stringValues)
             {
                 foreach (object a2 in objectValues)
@@ -10295,12 +9125,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            long?[] longNValues = new long?[]
-            {
-            10L, 30L, 0, null
-            }
-
-            ;
+            long?[] longNValues = new long?[] { 10L, 30L, 0, null };
             foreach (long? a1 in longNValues)
             {
                 foreach (long? a2 in longNValues)
@@ -10326,12 +9151,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            decimal[] decimalValues = new decimal[]
-            {
-            1M, 10.10M, 100.01M, 0M
-            }
-
-            ;
+            decimal[] decimalValues = new decimal[] { 1M, 10.10M, 100.01M, 0M };
             foreach (decimal a1 in decimalValues)
             {
                 foreach (decimal a2 in decimalValues)
@@ -10355,12 +9175,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            int[] intValues = new int[]
-            {
-            1, 2, 4, 99
-            }
-
-            ;
+            int[] intValues = new int[] { 1, 2, 4, 99 };
             foreach (int a1 in intValues)
             {
                 foreach (int a2 in intValues)
@@ -10384,12 +9199,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            decimal?[] decimalNValues = new decimal?[]
-            {
-            1M, 10.10M, 100.01M
-            }
-
-            ;
+            decimal?[] decimalNValues = new decimal?[] { 1M, 10.10M, 100.01M };
             foreach (decimal? a1 in decimalNValues)
             {
                 foreach (decimal? a2 in decimalNValues)
@@ -10412,12 +9222,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            byte[] byteValues = new byte[]
-            {
-            2, 30, 16, 9
-            }
-
-            ;
+            byte[] byteValues = new byte[] { 2, 30, 16, 9 };
             foreach (byte a1 in byteValues)
             {
                 foreach (byte a2 in byteValues)
@@ -10442,10 +9247,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         {
             int?[] intNValues = new int?[]
             { /*null,*/
-            2, 4, 3
-            }
-
-            ;
+                2,
+                4,
+                3
+            };
             foreach (int? a1 in intNValues)
             {
                 foreach (int? a2 in intNValues)
@@ -10468,8 +9273,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate013b.operate013b
 {
@@ -10508,12 +9311,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1()
         {
-            object[] objectValues = new object[]
-            {
-            10, 10L, "10"
-            }
-
-            ;
+            object[] objectValues = new object[] { 10, 10L, "10" };
             foreach (object a2 in objectValues)
             {
                 dynamic d2 = a2;
@@ -10529,12 +9327,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test1a()
         {
-            object[] objectValues = new object[]
-            {
-            string.Empty, new Test(), null
-            }
-
-            ;
+            object[] objectValues = new object[] { string.Empty, new Test(), null };
             foreach (object a2 in objectValues)
             {
                 dynamic d2 = a2;
@@ -10550,12 +9343,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test2()
         {
-            long?[] longNValues = new long?[]
-            {
-            10L, 30L, 0, null
-            }
-
-            ;
+            long?[] longNValues = new long?[] { 10L, 30L, 0, null };
             foreach (long? a1 in longNValues)
             {
                 dynamic d1 = a1;
@@ -10571,12 +9359,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test3()
         {
-            decimal[] decimalValues = new decimal[]
-            {
-            1M, 10.10M, 100.01M, 0M
-            }
-
-            ;
+            decimal[] decimalValues = new decimal[] { 1M, 10.10M, 100.01M, 0M };
             foreach (decimal a2 in decimalValues)
             {
                 dynamic d2 = a2;
@@ -10592,12 +9375,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test4()
         {
-            int[] intValues = new int[]
-            {
-            1, 2, 4, 99
-            }
-
-            ;
+            int[] intValues = new int[] { 1, 2, 4, 99 };
             foreach (int a1 in intValues)
             {
                 dynamic d1 = a1;
@@ -10613,12 +9391,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test5()
         {
-            decimal?[] decimalNValues = new decimal?[]
-            {
-            1M, 10.10M, 100.01M, null
-            }
-
-            ;
+            decimal?[] decimalNValues = new decimal?[] { 1M, 10.10M, 100.01M, null };
             foreach (decimal? a1 in decimalNValues)
             {
                 dynamic d1 = a1;
@@ -10634,12 +9407,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test6()
         {
-            byte[] byteValues = new byte[]
-            {
-            2, 30, 16, 9
-            }
-
-            ;
+            byte[] byteValues = new byte[] { 2, 30, 16, 9 };
             foreach (byte a2 in byteValues)
             {
                 dynamic d2 = a2;
@@ -10655,12 +9423,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         private static bool Test7()
         {
-            int?[] intNValues = new int?[]
-            {
-            null, 2, 4, 3
-            }
-
-            ;
+            int?[] intNValues = new int?[] { null, 2, 4, 3 };
             foreach (int? a1 in intNValues)
             {
                 dynamic d1 = a1;
@@ -10676,8 +9439,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate014.operate014
 {
@@ -10790,10 +9551,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 isHit = true;
                 return true;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         public static string StringValue
@@ -10803,10 +9561,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 isHit = true;
                 return string.Empty;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         public static int IntValue
@@ -10816,16 +9571,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 isHit = true;
                 return 10;
             }
-
-            set
-            {
-            }
+            set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate014b.operate014b
 {
@@ -10843,7 +9593,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
     public class MyOpClass
     {
-        public static explicit operator bool (MyOpClass p)
+        public static explicit operator bool(MyOpClass p)
         {
             Test.isCallConvert = true;
             return true;
@@ -10876,7 +9626,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
     public class MyOpClassWithDiffType
     {
-        public static explicit operator bool (MyOpClassWithDiffType p)
+        public static explicit operator bool(MyOpClassWithDiffType p)
         {
             Test.isCallConvert = true;
             return true;
@@ -10909,7 +9659,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
     public class MyOpClassWithDiffType2
     {
-        public static explicit operator bool (MyOpClassWithDiffType2 p)
+        public static explicit operator bool(MyOpClassWithDiffType2 p)
         {
             Test.isCallConvert = true;
             return true;
@@ -10942,7 +9692,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
     public class MyOpClassWithErrorReturnType
     {
-        public static explicit operator bool (MyOpClassWithErrorReturnType p)
+        public static explicit operator bool(MyOpClassWithErrorReturnType p)
         {
             Test.isCallConvert = true;
             return true;
@@ -10960,13 +9710,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             return false;
         }
 
-        public static int operator &(MyOpClassWithErrorReturnType p1, MyOpClassWithErrorReturnType p2)
+        public static int operator &(
+            MyOpClassWithErrorReturnType p1,
+            MyOpClassWithErrorReturnType p2
+        )
         {
             Test.isCallOpAnd = true;
             return 1;
         }
 
-        public static int operator |(MyOpClassWithErrorReturnType p1, MyOpClassWithErrorReturnType p2)
+        public static int operator |(
+            MyOpClassWithErrorReturnType p1,
+            MyOpClassWithErrorReturnType p2
+        )
         {
             Test.isCallOpOr = true;
             return 2;
@@ -10975,7 +9731,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
     public class MyOpClassWithErrorReturnType2
     {
-        public static explicit operator bool (MyOpClassWithErrorReturnType2 p)
+        public static explicit operator bool(MyOpClassWithErrorReturnType2 p)
         {
             Test.isCallConvert = true;
             return true;
@@ -10993,13 +9749,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             return true;
         }
 
-        public static int operator &(MyOpClassWithErrorReturnType2 p1, MyOpClassWithErrorReturnType2 p2)
+        public static int operator &(
+            MyOpClassWithErrorReturnType2 p1,
+            MyOpClassWithErrorReturnType2 p2
+        )
         {
             Test.isCallOpAnd = true;
             return 1;
         }
 
-        public static int operator |(MyOpClassWithErrorReturnType2 p1, MyOpClassWithErrorReturnType2 p2)
+        public static int operator |(
+            MyOpClassWithErrorReturnType2 p1,
+            MyOpClassWithErrorReturnType2 p2
+        )
         {
             Test.isCallOpOr = true;
             return 2;
@@ -11065,7 +9827,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallFalse && isCallOpAnd && !isCallTrue && !isCallConvert && !isCallOpOr))
             {
-                System.Console.WriteLine("Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ", isCallConvert, isCallTrue, isCallFalse, isCallOpAnd, isCallOpOr);
+                System.Console.WriteLine(
+                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                    isCallConvert,
+                    isCallTrue,
+                    isCallFalse,
+                    isCallOpAnd,
+                    isCallOpOr
+                );
                 return false;
             }
 
@@ -11084,7 +9853,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBoolOp, e.Message, "MyOpClassWithDiffType.operator &(MyOpClassWithDiffType, int)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBoolOp,
+                        e.Message,
+                        "MyOpClassWithDiffType.operator &(MyOpClassWithDiffType, int)"
+                    )
+                )
                     return true;
             }
 
@@ -11111,7 +9886,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallFalse && !isCallOpAnd && !isCallTrue && !isCallConvert && !isCallOpOr))
             {
-                System.Console.WriteLine("Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ", isCallConvert, isCallTrue, isCallFalse, isCallOpAnd, isCallOpOr);
+                System.Console.WriteLine(
+                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                    isCallConvert,
+                    isCallTrue,
+                    isCallFalse,
+                    isCallOpAnd,
+                    isCallOpOr
+                );
                 return false;
             }
 
@@ -11130,7 +9912,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBoolOp, e.Message, "MyOpClassWithErrorReturnType.operator &(MyOpClassWithErrorReturnType, MyOpClassWithErrorReturnType)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBoolOp,
+                        e.Message,
+                        "MyOpClassWithErrorReturnType.operator &(MyOpClassWithErrorReturnType, MyOpClassWithErrorReturnType)"
+                    )
+                )
                     return true;
             }
 
@@ -11157,7 +9945,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallFalse && !isCallOpAnd && !isCallTrue && !isCallConvert && !isCallOpOr))
             {
-                System.Console.WriteLine("Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ", isCallConvert, isCallTrue, isCallFalse, isCallOpAnd, isCallOpOr);
+                System.Console.WriteLine(
+                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                    isCallConvert,
+                    isCallTrue,
+                    isCallFalse,
+                    isCallOpAnd,
+                    isCallOpOr
+                );
                 return false;
             }
 
@@ -11186,7 +9981,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallTrue && isCallOpOr && !isCallFalse && !isCallConvert && !isCallOpAnd))
             {
-                System.Console.WriteLine("Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ", isCallConvert, isCallTrue, isCallFalse, isCallOpAnd, isCallOpOr);
+                System.Console.WriteLine(
+                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                    isCallConvert,
+                    isCallTrue,
+                    isCallFalse,
+                    isCallOpAnd,
+                    isCallOpOr
+                );
                 return false;
             }
 
@@ -11251,7 +10053,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallTrue && !isCallOpOr && !isCallFalse && !isCallConvert && !isCallOpAnd))
             {
-                System.Console.WriteLine("Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ", isCallConvert, isCallTrue, isCallFalse, isCallOpAnd, isCallOpOr);
+                System.Console.WriteLine(
+                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                    isCallConvert,
+                    isCallTrue,
+                    isCallFalse,
+                    isCallOpAnd,
+                    isCallOpOr
+                );
                 return false;
             }
 
@@ -11270,7 +10079,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBoolOp, e.Message, "MyOpClassWithErrorReturnType2.operator |(MyOpClassWithErrorReturnType2, MyOpClassWithErrorReturnType2)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBoolOp,
+                        e.Message,
+                        "MyOpClassWithErrorReturnType2.operator |(MyOpClassWithErrorReturnType2, MyOpClassWithErrorReturnType2)"
+                    )
+                )
                     return true;
             }
 
@@ -11280,8 +10095,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate015.operate015
 {
@@ -11302,12 +10115,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         public static int MainMethod()
         {
-            object[] x = new[]
-            {
-            ""
-            }
-
-            ;
+            object[] x = new[] { "" };
             dynamic[] y = x as dynamic[];
             bool ret = (x == y);
             ret &= (y is IList<string>); // used to be false
@@ -11317,8 +10125,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate016.operate016
 {
@@ -11347,8 +10153,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate017.operate017
 {
@@ -11399,7 +10203,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadUnaryOp, e.Message, op, ErrorVerifier.GetErrorElement(ErrorElementId.NULL)))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadUnaryOp,
+                        e.Message,
+                        op,
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL)
+                    )
+                )
                     return true;
             }
 
@@ -11450,8 +10261,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate018.operate018
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
@@ -11483,69 +10292,97 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             //int? ni = null;
             //dynamic d3 = ni + null;  // will get null
             result += Verify.Eval(() => TestBinaryOp(d => null + d, "+"), "binary +");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni1 = null;
-                int? ni = ni1 + null;
-                return d + ni;
-            }
-
-            ), "binary /");
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni1 = null;
+                            int? ni = ni1 + null;
+                            return d + ni;
+                        }
+                    ),
+                "binary /"
+            );
             result += Verify.Eval(() => TestResultIsNull(d => d - (null - null)), "binary -");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                dynamic d2 = null * null;
-                return d * d2;
-            }
-
-            ), "binary *");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni = null / null;
-                return ni / d;
-            }
-
-            ), "binary /");
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            dynamic d2 = null * null;
+                            return d * d2;
+                        }
+                    ),
+                "binary *"
+            );
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni = null / null;
+                            return ni / d;
+                        }
+                    ),
+                "binary /"
+            );
             result += Verify.Eval(() => TestResultIsNull(d => null % d), "binary %");
             result += Verify.Eval(() => TestResultIsNull(d => d << (null << null)), "binary <<");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni = null >> null;
-                return d >> ni;
-            }
-
-            ), "binary >>");
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni = null >> null;
+                            return d >> ni;
+                        }
+                    ),
+                "binary >>"
+            );
             result += Verify.Eval(() => TestBinaryOpRelation(d => d == null), "binary ==");
             result += Verify.Eval(() => TestBinaryOpRelation(d => !(null != d)), "binary !=");
             result += Verify.Eval(() => TestBinaryOpRelation(d => !(null > null)), "binary >");
             result += Verify.Eval(() => TestBinaryOpRelation(d => !(d > null)), "binary >");
-            result += Verify.Eval(() => TestBinaryOpRelation(d =>
-            {
-                dynamic d2 = null;
-                return !(d >= d2);
-            }
-
-            ), "binary >=");
-            result += Verify.Eval(() => TestBinaryOpRelation(d =>
-            {
-                int? ni = null;
-                return !(ni < d);
-            }
-
-            ), "binary <");
+            result += Verify.Eval(
+                () =>
+                    TestBinaryOpRelation(
+                        d =>
+                        {
+                            dynamic d2 = null;
+                            return !(d >= d2);
+                        }
+                    ),
+                "binary >="
+            );
+            result += Verify.Eval(
+                () =>
+                    TestBinaryOpRelation(
+                        d =>
+                        {
+                            int? ni = null;
+                            return !(ni < d);
+                        }
+                    ),
+                "binary <"
+            );
             result += Verify.Eval(() => TestBinaryOpRelation(d => !(null <= d)), "binary <=");
             result += Verify.Eval(() => TestBinaryOp(d => d & null, "&"), "binary &");
             result += Verify.Eval(() => TestBinaryOp(d => null | d, "|"), "binary |");
             // "null & null" will get error CS0034: Operator '&' is ambiguous on operands of type '<null>' and '<null>'
             // but "ni & null" will get null
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni1 = null;
-                int? ni = ni1 ^ null;
-                return ni ^ d;
-            }
-
-            ), "binary ^");
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni1 = null;
+                            int? ni = ni1 ^ null;
+                            return ni ^ d;
+                        }
+                    ),
+                "binary ^"
+            );
             return result;
         }
 
@@ -11559,7 +10396,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.AmbigBinaryOps, e.Message, op, ErrorVerifier.GetErrorElement(ErrorElementId.NULL), ErrorVerifier.GetErrorElement(ErrorElementId.NULL)))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.AmbigBinaryOps,
+                        e.Message,
+                        op,
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL),
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL)
+                    )
+                )
                     return true;
             }
 
@@ -11582,8 +10427,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate019.operate019
 {
@@ -11613,65 +10456,115 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             int result = 0;
             result += Verify.Eval(() => TestBinaryOp(d => d += null, "+="), "compound +=");
             result += Verify.Eval(() => TestResultIsNull(d => d -= (null - null)), "compound -=");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                dynamic d2 = null * null;
-                return d *= d2;
-            }
-
-            ), "compound *=");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni = null / null;
-                return d /= ni;
-            }
-
-            ), "compound /=");
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            dynamic d2 = null * null;
+                            return d *= d2;
+                        }
+                    ),
+                "compound *="
+            );
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni = null / null;
+                            return d /= ni;
+                        }
+                    ),
+                "compound /="
+            );
             result += Verify.Eval(() => TestResultIsNull(d => d %= null), "compound %=");
-            result += Verify.Eval(() => TestResultIsNull(d => d <<= (null << null)), "compound <<=");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni = null >> null;
-                return d >>= ni;
-            }
-
-            ), "compound >>=");
+            result += Verify.Eval(
+                () => TestResultIsNull(d => d <<= (null << null)),
+                "compound <<="
+            );
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni = null >> null;
+                            return d >>= ni;
+                        }
+                    ),
+                "compound >>="
+            );
             result += Verify.Eval(() => TestBinaryOp(d => d &= null, "&="), "compound &=");
-            result += Verify.Eval(() => TestBinaryOp(d =>
-            {
-                dynamic d2 = null;
-                return d |= d2;
-            }
-
-            , "|="), "compound |=");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni1 = null;
-                int? ni = ni1 ^ null;
-                return d ^= ni;
-            }
-
-            ), "compound ^=");
-            result += Verify.Eval(() => TestConditionalLogicalOpWithFirstIsNull(d => d && null), "binary && with first is null");
-            result += Verify.Eval(() => TestConditionalLogicalOpWithFirstIsNull(d => d || null), "binary || with first is null");
-            result += Verify.Eval(() => TestConditionalLogicalOpWithFirstIsNull(d => d ? d : null), "conditional ?: with first is null");
-            result += Verify.Eval(() => TestResultIsNull(d => true && d), "binary && with second is null");
-            result += Verify.Eval(() => TestResultIsNull(d => false || d), "binary || with second is null");
-            result += Verify.Eval(() => TestResultIsNull(d => true ? d : null), "conditional ?: with second and third are null");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                int? ni = null;
-                return true ? ni : d;
-            }
-
-            ), "conditional ?: with second and third are null");
-            result += Verify.Eval(() => TestResultIsNull(d =>
-            {
-                dynamic d2 = null;
-                return false ? d2 : d;
-            }
-
-            ), "conditional ?: with second and third are null");
+            result += Verify.Eval(
+                () =>
+                    TestBinaryOp(
+                        d =>
+                        {
+                            dynamic d2 = null;
+                            return d |= d2;
+                        },
+                        "|="
+                    ),
+                "compound |="
+            );
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni1 = null;
+                            int? ni = ni1 ^ null;
+                            return d ^= ni;
+                        }
+                    ),
+                "compound ^="
+            );
+            result += Verify.Eval(
+                () => TestConditionalLogicalOpWithFirstIsNull(d => d && null),
+                "binary && with first is null"
+            );
+            result += Verify.Eval(
+                () => TestConditionalLogicalOpWithFirstIsNull(d => d || null),
+                "binary || with first is null"
+            );
+            result += Verify.Eval(
+                () => TestConditionalLogicalOpWithFirstIsNull(d => d ? d : null),
+                "conditional ?: with first is null"
+            );
+            result += Verify.Eval(
+                () => TestResultIsNull(d => true && d),
+                "binary && with second is null"
+            );
+            result += Verify.Eval(
+                () => TestResultIsNull(d => false || d),
+                "binary || with second is null"
+            );
+            result += Verify.Eval(
+                () => TestResultIsNull(d => true ? d : null),
+                "conditional ?: with second and third are null"
+            );
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            int? ni = null;
+                            return true ? ni : d;
+                        }
+                    ),
+                "conditional ?: with second and third are null"
+            );
+            result += Verify.Eval(
+                () =>
+                    TestResultIsNull(
+                        d =>
+                        {
+                            dynamic d2 = null;
+                            return false ? d2 : d;
+                        }
+                    ),
+                "conditional ?: with second and third are null"
+            );
             return result;
         }
 
@@ -11685,7 +10578,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             }
             catch (RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.AmbigBinaryOps, e.Message, op, ErrorVerifier.GetErrorElement(ErrorElementId.NULL), ErrorVerifier.GetErrorElement(ErrorElementId.NULL)))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.AmbigBinaryOps,
+                        e.Message,
+                        op,
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL),
+                        ErrorVerifier.GetErrorElement(ErrorElementId.NULL)
+                    )
+                )
                     return true;
             }
 
@@ -11719,8 +10620,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate020.operate020
 {
@@ -11762,17 +10661,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                 C.Hit = C.Hit * 2;
                 return 1;
             }
-
-            set
-            {
-                C.Hit = C.Hit / 3;
-            }
+            set { C.Hit = C.Hit / 3; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate021.operate021
 {
@@ -11783,7 +10676,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     // <Code>
     public class A
     {
-        public static implicit operator int (A x)
+        public static implicit operator int(A x)
         {
             return 1;
         }
@@ -11819,8 +10712,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate022.operate022
 {
@@ -11875,8 +10766,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.literal001.literal001
 {
     // <Title>Dynamic method call with literal parameter</Title>
@@ -11920,8 +10809,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.liter
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nullable001.nullable001
 {
     // <Title>Nullable and dynamic</Title>
@@ -11958,8 +10845,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nulla
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nullable002.nullable002
 {
@@ -11998,8 +10883,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nulla
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nullable003.nullable003
 {
     // <Title>Nullable and dynamic</Title>
@@ -12037,8 +10920,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nulla
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.field001.field001
 {
     // <Title>Dynamic static fields</Title>
@@ -12075,8 +10956,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.field
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.field002.field002
 {
@@ -12122,8 +11001,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.field
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.date001.date001
 {
     // <Title>dynamic expression on DateTime.Add...</Title>
@@ -12154,8 +11031,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.date0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.gettype01.gettype01
 {
@@ -12188,8 +11063,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.getty
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.gettype02.gettype02
 {

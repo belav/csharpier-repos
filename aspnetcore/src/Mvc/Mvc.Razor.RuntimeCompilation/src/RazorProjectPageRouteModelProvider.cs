@@ -22,7 +22,8 @@ internal class RazorProjectPageRouteModelProvider : IPageRouteModelProvider
     public RazorProjectPageRouteModelProvider(
         RazorProjectFileSystem razorFileSystem,
         IOptions<RazorPagesOptions> pagesOptionsAccessor,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _razorFileSystem = razorFileSystem;
         _pagesOptions = pagesOptionsAccessor.Value;
@@ -35,9 +36,7 @@ internal class RazorProjectPageRouteModelProvider : IPageRouteModelProvider
     /// </remarks>
     public int Order => -1000 + 10;
 
-    public void OnProvidersExecuted(PageRouteModelProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(PageRouteModelProviderContext context) { }
 
     public void OnProvidersExecuting(PageRouteModelProviderContext context)
     {
@@ -54,7 +53,16 @@ internal class RazorProjectPageRouteModelProvider : IPageRouteModelProvider
         foreach (var item in _razorFileSystem.EnumerateItems(_pagesOptions.RootDirectory))
         {
             var relativePath = item.CombinedPath;
-            if (context.RouteModels.Any(m => string.Equals(relativePath, m.RelativePath, StringComparison.OrdinalIgnoreCase)))
+            if (
+                context.RouteModels.Any(
+                    m =>
+                        string.Equals(
+                            relativePath,
+                            m.RelativePath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
+            )
             {
                 // A route for this file was already registered either by the CompiledPageRouteModel or as an area route.
                 // by this provider. Skip registering an additional entry.
@@ -83,7 +91,16 @@ internal class RazorProjectPageRouteModelProvider : IPageRouteModelProvider
         foreach (var item in _razorFileSystem.EnumerateItems(AreaRootDirectory))
         {
             var relativePath = item.CombinedPath;
-            if (context.RouteModels.Any(m => string.Equals(relativePath, m.RelativePath, StringComparison.OrdinalIgnoreCase)))
+            if (
+                context.RouteModels.Any(
+                    m =>
+                        string.Equals(
+                            relativePath,
+                            m.RelativePath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
+            )
             {
                 // A route for this file was already registered either by the CompiledPageRouteModel.
                 // Skip registering an additional entry.

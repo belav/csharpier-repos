@@ -17,10 +17,11 @@ internal static partial class Interop
             [In, Out] ref Guid guid,
             [In] int guidSize,
             [Out] out IntPtr funcPtr,
-            [In]  int funcPtrSize,
+            [In] int funcPtrSize,
             [Out] out int bytesTransferred,
             [In] IntPtr shouldBeNull,
-            [In] IntPtr shouldBeNull2);
+            [In] IntPtr shouldBeNull2
+        );
 
         [GeneratedDllImport(Interop.Libraries.Ws2_32, EntryPoint = "WSAIoctl", SetLastError = true)]
         internal static partial SocketError WSAIoctl_Blocking(
@@ -32,6 +33,7 @@ internal static partial class Interop
             int outBufferSize,
             out int bytesTransferred,
             IntPtr overlapped,
-            IntPtr completionRoutine);
+            IntPtr completionRoutine
+        );
     }
 }

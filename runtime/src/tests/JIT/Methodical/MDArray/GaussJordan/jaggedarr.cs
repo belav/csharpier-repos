@@ -26,8 +26,16 @@ internal class jaggedarr
 
     public static void gaussj(double[][,] a, int n, double[][,] b, int m)
     {
-        int i, icol = 0, irow = 0, j, k, l, ll;
-        double big = 0.0, dum = 0.0, pivinv = 0.0;
+        int i,
+            icol = 0,
+            irow = 0,
+            j,
+            k,
+            l,
+            ll;
+        double big = 0.0,
+            dum = 0.0,
+            pivinv = 0.0;
 
         int[] indxc = new int[3];
         int[] indxr = new int[3];
@@ -58,8 +66,10 @@ internal class jaggedarr
             ++(ipiv[icol]);
             if (irow != icol)
             {
-                for (l = 0; l < n; l++) swap(jaggeda[2][irow, l], jaggeda[2][icol, l]);
-                for (l = 0; l < m; l++) swap(jaggedb[1][irow, l], jaggedb[1][icol, l]);
+                for (l = 0; l < n; l++)
+                    swap(jaggeda[2][irow, l], jaggeda[2][icol, l]);
+                for (l = 0; l < m; l++)
+                    swap(jaggedb[1][irow, l], jaggedb[1][icol, l]);
             }
 
             indxr[i] = irow;
@@ -68,15 +78,19 @@ internal class jaggedarr
                 Console.WriteLine("GAUSSJ: Singular Matrix-2. icol is {0}\n", icol);
             pivinv = 1.0 / jaggeda[2][icol, icol];
             jaggeda[2][icol, icol] = 1.0;
-            for (l = 0; l < n; l++) jaggeda[2][icol, l] *= pivinv;
-            for (l = 0; l < m; l++) jaggedb[1][icol, l] *= pivinv;
+            for (l = 0; l < n; l++)
+                jaggeda[2][icol, l] *= pivinv;
+            for (l = 0; l < m; l++)
+                jaggedb[1][icol, l] *= pivinv;
             for (ll = 0; ll < n; ll++)
                 if (ll != icol)
                 {
                     dum = jaggeda[2][ll, icol];
                     jaggeda[2][ll, icol] = 0.0;
-                    for (l = 0; l < n; l++) jaggeda[2][ll, l] -= jaggeda[2][icol, l] * dum;
-                    for (l = 0; l < m; l++) jaggedb[1][ll, l] -= jaggedb[1][icol, l] * dum;
+                    for (l = 0; l < n; l++)
+                        jaggeda[2][ll, l] -= jaggeda[2][icol, l] * dum;
+                    for (l = 0; l < m; l++)
+                        jaggedb[1][ll, l] -= jaggedb[1][icol, l] * dum;
                 }
         }
         for (l = n - 1; l >= 0; l--)
@@ -159,11 +173,11 @@ internal class jaggedarr
 		*/
 
         if (
-               AreEqual(jaggeda[2][0, 0], 3)
+            AreEqual(jaggeda[2][0, 0], 3)
             && AreEqual(jaggeda[2][1, 1], 4)
             && AreEqual(jaggedb[1][0, 0], -9)
             && AreEqual(jaggedb[1][1, 0], 10)
-            )
+        )
             pass = true;
 
         if (!pass)

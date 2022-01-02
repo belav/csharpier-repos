@@ -5,7 +5,9 @@ namespace System.Data
 {
     internal sealed class Keywords
     {
-        private Keywords() { /* prevent utility class from being insantiated*/ }
+        private Keywords()
+        { /* prevent utility class from being insantiated*/
+        }
 
         // Keywords for DataSet Namespace
         internal const string DFF = "diffgr";
@@ -69,8 +71,6 @@ namespace System.Data
         internal const string MSD_FRAGMENTCOUNT = "schemafragmentcount";
 
         internal const string MSD_SCHEMASERIALIZATIONMODE = "SchemaSerializationMode";
-
-
 
         // Keywords for datatype namespace
         internal const string DTNS = "urn:schemas-microsoft-com:datatypes";
@@ -182,7 +182,6 @@ namespace System.Data
         internal const string NEGATIVEINFINITY = "-INF";
         internal const string QUALIFIED = "qualified";
         internal const string UNQUALIFIED = "unqualified";
-
 
         // Keywords that are not atomized, just strings
         // they are mostly legal values for an attribute

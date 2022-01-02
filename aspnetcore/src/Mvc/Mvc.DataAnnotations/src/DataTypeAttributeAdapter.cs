@@ -14,8 +14,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// </summary>
 internal class DataTypeAttributeAdapter : AttributeAdapterBase<DataTypeAttribute>
 {
-    public DataTypeAttributeAdapter(DataTypeAttribute attribute, string ruleName, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer)
+    public DataTypeAttributeAdapter(
+        DataTypeAttribute attribute,
+        string ruleName,
+        IStringLocalizer? stringLocalizer
+    ) : base(attribute, stringLocalizer)
     {
         if (string.IsNullOrEmpty(ruleName))
         {
@@ -49,6 +52,7 @@ internal class DataTypeAttributeAdapter : AttributeAdapterBase<DataTypeAttribute
         return GetErrorMessage(
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
-            Attribute.GetDataTypeName());
+            Attribute.GetDataTypeName()
+        );
     }
 }

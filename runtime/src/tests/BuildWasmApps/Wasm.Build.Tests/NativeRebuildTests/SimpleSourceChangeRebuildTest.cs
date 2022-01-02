@@ -13,17 +13,29 @@ namespace Wasm.Build.NativeRebuild.Tests
 {
     public class SimpleSourceChangeRebuildTest : NativeRebuildTestsBase
     {
-        public SimpleSourceChangeRebuildTest(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public SimpleSourceChangeRebuildTest(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        ) : base(output, buildContext) { }
 
         [Theory]
         [MemberData(nameof(NativeBuildData))]
-        public void SimpleStringChangeInSource(BuildArgs buildArgs, bool nativeRelink, bool invariant, RunHost host, string id)
+        public void SimpleStringChangeInSource(
+            BuildArgs buildArgs,
+            bool nativeRelink,
+            bool invariant,
+            RunHost host,
+            string id
+        )
         {
             buildArgs = buildArgs with { ProjectName = $"rebuild_simple_{buildArgs.Config}" };
-            (buildArgs, BuildPaths paths) = FirstNativeBuild(s_mainReturns42, nativeRelink, invariant: invariant, buildArgs, id);
+            (buildArgs, BuildPaths paths) = FirstNativeBuild(
+                s_mainReturns42,
+                nativeRelink,
+                invariant: invariant,
+                buildArgs,
+                id
+            );
 
             string mainAssembly = $"{buildArgs.ProjectName}.dll";
             var pathsDict = GetFilesTable(buildArgs, paths, unchanged: true);
@@ -36,7 +48,8 @@ namespace Wasm.Build.NativeRebuild.Tests
             var originalStat = StatFiles(pathsDict.Select(kvp => kvp.Value.fullPath));
 
             // Changes
-            string mainResults55 = @"
+            string mainResults55 =
+                @"
                 public class TestClass {
                     public static int Main()
                     {
@@ -50,7 +63,13 @@ namespace Wasm.Build.NativeRebuild.Tests
             var newStat = StatFiles(pathsDict.Select(kvp => kvp.Value.fullPath));
 
             CompareStat(originalStat, newStat, pathsDict.Values);
-            RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 55, host: host, id: id);
+            RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 55,
+                host: host,
+                id: id
+            );
         }
     }
 }

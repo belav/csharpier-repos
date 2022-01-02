@@ -61,25 +61,47 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(TestContext context)
             {
-                context.Arts.AddRange(new[] {
-                    new Art { AName = "art1", Sem = new Sem { Name = "sem1" } },
-                    new Art { AName = "art2", Sem = new Sem { Name = "sem2" } },
-                    new Art { AName = "art3", Sem = new Sem { Name = "sem3" } },
-                });
+                context.Arts.AddRange(
+                    new[]
+                    {
+                        new Art
+                        {
+                            AName = "art1",
+                            Sem = new Sem { Name = "sem1" }
+                        },
+                        new Art
+                        {
+                            AName = "art2",
+                            Sem = new Sem { Name = "sem2" }
+                        },
+                        new Art
+                        {
+                            AName = "art3",
+                            Sem = new Sem { Name = "sem3" }
+                        },
+                    }
+                );
 
                 base.Seed(context);
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Sem, SemDto>().MaxDepth(1).ConstructUsing(s => new SemDto());
-            cfg.CreateProjection<Art, ArtDto>().MaxDepth(1).ConstructUsing(s => new ArtDto());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Sem, SemDto>()
+                        .MaxDepth(1)
+                        .ConstructUsing(s => new SemDto());
+                    cfg.CreateProjection<Art, ArtDto>()
+                        .MaxDepth(1)
+                        .ConstructUsing(s => new ArtDto());
+                }
+            );
 
         protected override void Because_of()
         {
-            using(var context = new TestContext())
+            using (var context = new TestContext())
             {
                 _destination = ProjectTo<ArtDto>(context.Arts).FirstOrDefault();
             }

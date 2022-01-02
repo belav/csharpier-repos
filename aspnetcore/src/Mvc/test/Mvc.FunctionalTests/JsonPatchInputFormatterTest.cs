@@ -25,7 +25,10 @@ public class JsonPatchSampleTest : IClassFixture<MvcTestFixture<Startup>>
     public async Task AddOperation_Works()
     {
         // Arrange
-        var input = "[{ 'op': 'add', 'path': 'Reviews/-', 'value': { 'Rating': 3.5 }}]".Replace("'", "\"");
+        var input = "[{ 'op': 'add', 'path': 'Reviews/-', 'value': { 'Rating': 3.5 }}]".Replace(
+            "'",
+            "\""
+        );
         var request = GetPatchRequest(input);
 
         // Act
@@ -45,7 +48,10 @@ public class JsonPatchSampleTest : IClassFixture<MvcTestFixture<Startup>>
     public async Task ReplaceOperation_Works()
     {
         // Arrange
-        var input = "[{ 'op': 'replace', 'path': 'Reviews/0/Rating', 'value': 5 }]".Replace("'", "\"");
+        var input = "[{ 'op': 'replace', 'path': 'Reviews/0/Rating', 'value': 5 }]".Replace(
+            "'",
+            "\""
+        );
         var request = GetPatchRequest(input);
 
         // Act
@@ -65,7 +71,11 @@ public class JsonPatchSampleTest : IClassFixture<MvcTestFixture<Startup>>
     public async Task CopyOperation_Works()
     {
         // Arrange
-        var input = "[{ 'op': 'copy', 'path': 'Reviews/1/Rating', 'from': 'Reviews/0/Rating'}]".Replace("'", "\"");
+        var input =
+            "[{ 'op': 'copy', 'path': 'Reviews/1/Rating', 'from': 'Reviews/0/Rating'}]".Replace(
+                "'",
+                "\""
+            );
         var request = GetPatchRequest(input);
 
         // Act
@@ -86,7 +96,11 @@ public class JsonPatchSampleTest : IClassFixture<MvcTestFixture<Startup>>
     public async Task MoveOperation_Works()
     {
         // Arrange
-        var input = "[{ 'op': 'move', 'path': 'Reviews/1/Rating', 'from': 'Reviews/0/Rating'}]".Replace("'", "\"");
+        var input =
+            "[{ 'op': 'move', 'path': 'Reviews/1/Rating', 'from': 'Reviews/0/Rating'}]".Replace(
+                "'",
+                "\""
+            );
         var request = GetPatchRequest(input);
 
         // Act
@@ -127,7 +141,11 @@ public class JsonPatchSampleTest : IClassFixture<MvcTestFixture<Startup>>
     public async Task AddOperation_InvalidValueForProperty_AddsErrorToModelState()
     {
         // Arrange
-        var input = "[{ 'op': 'add', 'path': 'Reviews/-', 'value': { 'Rating': 'not-a-double' }}]".Replace("'", "\"");
+        var input =
+            "[{ 'op': 'add', 'path': 'Reviews/-', 'value': { 'Rating': 'not-a-double' }}]".Replace(
+                "'",
+                "\""
+            );
         var request = GetPatchRequest(input);
 
         // Act
@@ -141,7 +159,11 @@ public class JsonPatchSampleTest : IClassFixture<MvcTestFixture<Startup>>
     public async Task InvalidOperation_AddsErrorToModelState()
     {
         // Arrange
-        var input = "[{ 'op': 'invalid', 'path': 'Reviews/1/Rating', 'from': 'Reviews/0/Rating'}]".Replace("'", "\"");
+        var input =
+            "[{ 'op': 'invalid', 'path': 'Reviews/1/Rating', 'from': 'Reviews/0/Rating'}]".Replace(
+                "'",
+                "\""
+            );
         var request = GetPatchRequest(input);
 
         // Act

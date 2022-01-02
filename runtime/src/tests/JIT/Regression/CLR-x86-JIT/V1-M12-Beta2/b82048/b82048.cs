@@ -25,9 +25,7 @@ public struct AA
                 throw new Exception();
             return 100;
         }
-        try
-        {
-        }
+        try { }
         finally
         {
             if (local9)
@@ -36,4 +34,3 @@ public struct AA
         return 102;
     }
 }
-

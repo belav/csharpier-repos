@@ -22,7 +22,7 @@ namespace JitTest
             Test T = new Test();
             T._m_v = 1;
             object R = T;
-            R = new Test();     //change to unbox<R> = new Test() in IL
+            R = new Test(); //change to unbox<R> = new Test() in IL
             return ((Test)R)._m_v;
         }
 
@@ -32,7 +32,7 @@ namespace JitTest
             T._m_v = 1;
             Test T1 = new Test();
             object R = T;
-            R = T1;     //change to unbox<R> = T1 in IL
+            R = T1; //change to unbox<R> = T1 in IL
             return ((Test)R)._m_v;
         }
 
@@ -42,7 +42,7 @@ namespace JitTest
             T._m_v = 1;
             Test T1 = new Test();
             object R = T;
-            R = T1;     //change to unbox<R> = T1 in IL 
+            R = T1; //change to unbox<R> = T1 in IL
             return ((Test)R)._m_v;
         }
 

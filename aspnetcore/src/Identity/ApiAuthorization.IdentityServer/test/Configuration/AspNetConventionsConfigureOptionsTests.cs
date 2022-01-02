@@ -20,7 +20,10 @@ public class AspNetConventionsConfigureOptionsTests
         configure.Configure(options);
 
         // Assert
-        Assert.Equal(IdentityConstants.ApplicationScheme, options.Authentication.CookieAuthenticationScheme);
+        Assert.Equal(
+            IdentityConstants.ApplicationScheme,
+            options.Authentication.CookieAuthenticationScheme
+        );
     }
 
     [Fact]

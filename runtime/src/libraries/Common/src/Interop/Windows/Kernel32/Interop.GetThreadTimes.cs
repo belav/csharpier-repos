@@ -9,6 +9,12 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [GeneratedDllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial bool GetThreadTimes(SafeThreadHandle handle, out long creation, out long exit, out long kernel, out long user);
+        internal static partial bool GetThreadTimes(
+            SafeThreadHandle handle,
+            out long creation,
+            out long exit,
+            out long kernel,
+            out long user
+        );
     }
 }

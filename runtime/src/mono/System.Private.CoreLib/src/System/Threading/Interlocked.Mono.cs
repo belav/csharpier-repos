@@ -15,11 +15,20 @@ namespace System.Threading
 
         [Intrinsic]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void CompareExchange(ref object? location1, ref object? value, ref object? comparand, [NotNullIfNotNull("location1")] ref object? result);
+        private static extern void CompareExchange(
+            ref object? location1,
+            ref object? value,
+            ref object? comparand,
+            [NotNullIfNotNull("location1")] ref object? result
+        );
 
         [Intrinsic]
         [return: NotNullIfNotNull("location1")]
-        public static object? CompareExchange(ref object? location1, object? value, object? comparand)
+        public static object? CompareExchange(
+            ref object? location1,
+            object? value,
+            object? comparand
+        )
         {
             // This avoids coop handles, esp. on the output which would be particularly inefficient.
             // Passing everything by ref is equivalent to coop handles -- ref to locals at least.
@@ -39,7 +48,11 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern float CompareExchange(ref float location1, float value, float comparand);
+        public static extern float CompareExchange(
+            ref float location1,
+            float value,
+            float comparand
+        );
 
         [Intrinsic]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -62,10 +75,17 @@ namespace System.Threading
         public static extern int Exchange(ref int location1, int value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void Exchange([NotNullIfNotNull("value")] ref object? location1, ref object? value, [NotNullIfNotNull("location1")] ref object? result);
+        private static extern void Exchange(
+            [NotNullIfNotNull("value")] ref object? location1,
+            ref object? value,
+            [NotNullIfNotNull("location1")] ref object? result
+        );
 
         [return: NotNullIfNotNull("location1")]
-        public static object? Exchange([NotNullIfNotNull("value")] ref object? location1, object? value)
+        public static object? Exchange(
+            [NotNullIfNotNull("value")] ref object? location1,
+            object? value
+        )
         {
             // See CompareExchange(object) for comments.
             object? result = null;
@@ -81,7 +101,11 @@ namespace System.Threading
         public static extern long CompareExchange(ref long location1, long value, long comparand);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern double CompareExchange(ref double location1, double value, double comparand);
+        public static extern double CompareExchange(
+            ref double location1,
+            double value,
+            double comparand
+        );
 
         [return: NotNullIfNotNull("location1")]
         [Intrinsic]
@@ -103,7 +127,12 @@ namespace System.Threading
             //
             T? result = null;
             // T : class so call the object overload.
-            CompareExchange(ref Unsafe.As<T, object?>(ref location1), ref Unsafe.As<T, object?>(ref value), ref Unsafe.As<T, object?>(ref comparand), ref Unsafe.As<T, object?>(ref result!));
+            CompareExchange(
+                ref Unsafe.As<T, object?>(ref location1),
+                ref Unsafe.As<T, object?>(ref value),
+                ref Unsafe.As<T, object?>(ref comparand),
+                ref Unsafe.As<T, object?>(ref result!)
+            );
             return result;
         }
 
@@ -117,7 +146,8 @@ namespace System.Threading
 
         [return: NotNullIfNotNull("location1")]
         [Intrinsic]
-        public static T Exchange<T>([NotNullIfNotNull("value")] ref T location1, T value) where T : class?
+        public static T Exchange<T>([NotNullIfNotNull("value")] ref T location1, T value)
+            where T : class?
         {
             unsafe
             {
@@ -130,7 +160,11 @@ namespace System.Threading
             //
             T? result = null;
             // T : class so call the object overload.
-            Exchange(ref Unsafe.As<T, object?>(ref location1), ref Unsafe.As<T, object?>(ref value), ref Unsafe.As<T, object?>(ref result!));
+            Exchange(
+                ref Unsafe.As<T, object?>(ref location1),
+                ref Unsafe.As<T, object?>(ref value),
+                ref Unsafe.As<T, object?>(ref result!)
+            );
             return result;
         }
 
@@ -147,9 +181,7 @@ namespace System.Threading
         public static extern long Add(ref long location1, long value);
 
         [Intrinsic]
-        public static void MemoryBarrier()
-        {
-        }
+        public static void MemoryBarrier() { }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void MemoryBarrierProcessWide();

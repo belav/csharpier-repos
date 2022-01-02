@@ -17,8 +17,7 @@ using Xunit.Sdk;
 
 public class SingleFileTestRunner : XunitTestFramework
 {
-    private SingleFileTestRunner(IMessageSink messageSink)
-    : base(messageSink) { }
+    private SingleFileTestRunner(IMessageSink messageSink) : base(messageSink) { }
 
     public static int Main(string[] args)
     {
@@ -28,18 +27,33 @@ public class SingleFileTestRunner : XunitTestFramework
         var diagnosticSink = new ConsoleDiagnosticMessageSink();
         var testsFinished = new TaskCompletionSource();
         var testSink = new TestMessageSink();
-        var summarySink = new DelegatingExecutionSummarySink(testSink,
+        var summarySink = new DelegatingExecutionSummarySink(
+            testSink,
             () => false,
-            (completed, summary) => Console.WriteLine($"Tests run: {summary.Total}, Errors: {summary.Errors}, Failures: {summary.Failed}, Skipped: {summary.Skipped}. Time: {TimeSpan.FromSeconds((double)summary.Time).TotalSeconds}s"));
+            (completed, summary) =>
+                Console.WriteLine(
+                    $"Tests run: {summary.Total}, Errors: {summary.Errors}, Failures: {summary.Failed}, Skipped: {summary.Skipped}. Time: {TimeSpan.FromSeconds((double)summary.Time).TotalSeconds}s"
+                )
+        );
         var resultsXmlAssembly = new XElement("assembly");
         var resultsSink = new DelegatingXmlCreationSink(summarySink, resultsXmlAssembly);
 
-        testSink.Execution.TestSkippedEvent += args => { Console.WriteLine($"[SKIP] {args.Message.Test.DisplayName}"); };
-        testSink.Execution.TestFailedEvent += args => { Console.WriteLine($"[FAIL] {args.Message.Test.DisplayName}{Environment.NewLine}{Xunit.ExceptionUtility.CombineMessages(args.Message)}{Environment.NewLine}{Xunit.ExceptionUtility.CombineStackTraces(args.Message)}"); };
+        testSink.Execution.TestSkippedEvent += args =>
+        {
+            Console.WriteLine($"[SKIP] {args.Message.Test.DisplayName}");
+        };
+        testSink.Execution.TestFailedEvent += args =>
+        {
+            Console.WriteLine(
+                $"[FAIL] {args.Message.Test.DisplayName}{Environment.NewLine}{Xunit.ExceptionUtility.CombineMessages(args.Message)}{Environment.NewLine}{Xunit.ExceptionUtility.CombineStackTraces(args.Message)}"
+            );
+        };
 
         testSink.Execution.TestAssemblyFinishedEvent += args =>
         {
-            Console.WriteLine($"Finished {args.Message.TestAssembly.Assembly}{Environment.NewLine}");
+            Console.WriteLine(
+                $"Finished {args.Message.TestAssembly.Assembly}{Environment.NewLine}"
+            );
             testsFinished.SetResult();
         };
 
@@ -59,7 +73,8 @@ public class SingleFileTestRunner : XunitTestFramework
 
         resultsSink.Finished.WaitOne();
 
-        var failed = resultsSink.ExecutionSummary.Failed > 0 || resultsSink.ExecutionSummary.Errors > 0;
+        var failed =
+            resultsSink.ExecutionSummary.Failed > 0 || resultsSink.ExecutionSummary.Errors > 0;
         return failed ? 1 : 0;
     }
 }

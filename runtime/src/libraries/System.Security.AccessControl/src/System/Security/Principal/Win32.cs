@@ -15,20 +15,38 @@ namespace System.Security.Principal
 {
     internal static class Win32
     {
-        internal static int OpenThreadToken(TokenAccessLevels dwDesiredAccess, WinSecurityContext dwOpenAs, out SafeTokenHandle? phThreadToken)
+        internal static int OpenThreadToken(
+            TokenAccessLevels dwDesiredAccess,
+            WinSecurityContext dwOpenAs,
+            out SafeTokenHandle? phThreadToken
+        )
         {
             int hr = 0;
             bool openAsSelf = true;
             if (dwOpenAs == WinSecurityContext.Thread)
                 openAsSelf = false;
 
-            if (!Interop.Advapi32.OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken))
+            if (
+                !Interop.Advapi32.OpenThreadToken(
+                    (IntPtr)(-2),
+                    dwDesiredAccess,
+                    openAsSelf,
+                    out phThreadToken
+                )
+            )
             {
                 if (dwOpenAs == WinSecurityContext.Both)
                 {
                     openAsSelf = false;
                     hr = 0;
-                    if (!Interop.Advapi32.OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken))
+                    if (
+                        !Interop.Advapi32.OpenThreadToken(
+                            (IntPtr)(-2),
+                            dwDesiredAccess,
+                            openAsSelf,
+                            out phThreadToken
+                        )
+                    )
                         hr = Marshal.GetHRForLastWin32Error();
                 }
                 else
@@ -36,7 +54,8 @@ namespace System.Security.Principal
                     hr = Marshal.GetHRForLastWin32Error();
                 }
             }
-            if (hr != 0) phThreadToken = null;
+            if (hr != 0)
+                phThreadToken = null;
             return hr;
         }
 

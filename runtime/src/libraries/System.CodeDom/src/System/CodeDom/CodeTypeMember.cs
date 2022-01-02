@@ -16,20 +16,25 @@ namespace System.CodeDom
             set => _name = value;
         }
 
-        public MemberAttributes Attributes { get; set; } = MemberAttributes.Private | MemberAttributes.Final;
+        public MemberAttributes Attributes { get; set; } =
+            MemberAttributes.Private | MemberAttributes.Final;
 
         public CodeAttributeDeclarationCollection CustomAttributes
         {
-            get => _customAttributes ?? (_customAttributes = new CodeAttributeDeclarationCollection());
+            get =>
+                _customAttributes ?? (_customAttributes = new CodeAttributeDeclarationCollection());
             set => _customAttributes = value;
         }
 
         public CodeLinePragma LinePragma { get; set; }
 
-        public CodeCommentStatementCollection Comments { get; } = new CodeCommentStatementCollection();
+        public CodeCommentStatementCollection Comments { get; } =
+            new CodeCommentStatementCollection();
 
-        public CodeDirectiveCollection StartDirectives => _startDirectives ?? (_startDirectives = new CodeDirectiveCollection());
+        public CodeDirectiveCollection StartDirectives =>
+            _startDirectives ?? (_startDirectives = new CodeDirectiveCollection());
 
-        public CodeDirectiveCollection EndDirectives => _endDirectives ?? (_endDirectives = new CodeDirectiveCollection());
+        public CodeDirectiveCollection EndDirectives =>
+            _endDirectives ?? (_endDirectives = new CodeDirectiveCollection());
     }
 }

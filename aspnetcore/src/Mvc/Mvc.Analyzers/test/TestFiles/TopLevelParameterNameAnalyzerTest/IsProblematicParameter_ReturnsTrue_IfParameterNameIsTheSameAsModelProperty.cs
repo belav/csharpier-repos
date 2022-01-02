@@ -4,6 +4,8 @@
     {
         public string Model { get; set; }
 
-        public void ActionMethod(IsProblematicParameter_ReturnsTrue_IfParameterNameIsTheSameAsModelProperty model) { }
+        public void ActionMethod(
+            IsProblematicParameter_ReturnsTrue_IfParameterNameIsTheSameAsModelProperty model
+        ) { }
     }
 }

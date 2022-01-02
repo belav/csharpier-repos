@@ -38,13 +38,16 @@ namespace System.Security.Cryptography.Encryption.TripleDES.Tests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.CBC;
 
-                byte[] plainText = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] plainText =
+                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
-                byte[] expectedCipher = "dea36279600f19c602b6ed9bf3ffdac5ebf25c1c470eb61c".HexToByteArray();
+                byte[] expectedCipher =
+                    "dea36279600f19c602b6ed9bf3ffdac5ebf25c1c470eb61c".HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -56,12 +59,38 @@ namespace System.Security.Cryptography.Encryption.TripleDES.Tests
             {
                 var knownKey = new byte[]
                 {
-                    /* k1 */ 0, 1, 2, 3, 4, 5, 6, 7,
-                    /* k2 */ 0, 0, 0, 2, 4, 6, 0, 1,
-                    /* k3 */ 0, 1, 2, 3, 4, 5, 6, 7,
+                    /* k1 */0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    /* k2 */0,
+                    0,
+                    0,
+                    2,
+                    4,
+                    6,
+                    0,
+                    1,
+                    /* k3 */0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
                 };
 
-                ShimHelpers.TestSymmetricAlgorithmProperties(alg, blockSize:64, keySize:64 * 3, key:knownKey);
+                ShimHelpers.TestSymmetricAlgorithmProperties(
+                    alg,
+                    blockSize: 64,
+                    keySize: 64 * 3,
+                    key: knownKey
+                );
             }
         }
 

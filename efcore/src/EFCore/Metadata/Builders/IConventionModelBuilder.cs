@@ -39,7 +39,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     An object that can be used to configure the entity type if the entity type was added or already part of the model,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionEntityTypeBuilder? Entity(string name, bool? shouldBeOwned = false, bool fromDataAnnotation = false);
+        IConventionEntityTypeBuilder? Entity(
+            string name,
+            bool? shouldBeOwned = false,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns an object that can be used to configure a given shared type entity type in the model.
@@ -69,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string name,
             Type type,
             bool? shouldBeOwned = false,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns an object that can be used to configure a given entity type in the model.
@@ -86,7 +91,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     An object that can be used to configure the entity type if the entity type was added or already part of the model,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionEntityTypeBuilder? Entity(Type type, bool? shouldBeOwned = false, bool fromDataAnnotation = false);
+        IConventionEntityTypeBuilder? Entity(
+            Type type,
+            bool? shouldBeOwned = false,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns an object that can be used to configure a given entity type with defining navigation.
@@ -105,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string name,
             string definingNavigationName,
             IConventionEntityType definingEntityType,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns an object that can be used to configure a given entity type with defining navigation.
@@ -124,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type type,
             string definingNavigationName,
             IConventionEntityType definingEntityType,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Marks an entity type as owned. All references to this type will be configured as
@@ -183,7 +194,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     The same builder instance if the given entity type was removed, <see langword="null" /> otherwise.
         /// </returns>
-        IConventionModelBuilder? HasNoEntityType(IConventionEntityType entityType, bool fromDataAnnotation = false);
+        IConventionModelBuilder? HasNoEntityType(
+            IConventionEntityType entityType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given entity type can be ignored from the current configuration source
@@ -210,7 +224,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     The same builder instance if the configuration was successful, <see langword="null" /> otherwise.
         /// </returns>
-        IConventionModelBuilder? HasChangeTrackingStrategy(ChangeTrackingStrategy? changeTrackingStrategy, bool fromDataAnnotation = false);
+        IConventionModelBuilder? HasChangeTrackingStrategy(
+            ChangeTrackingStrategy? changeTrackingStrategy,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given change tracking strategy can be set from the current configuration source
@@ -218,7 +235,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="changeTrackingStrategy">The change tracking strategy to be used.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns><see langword="true" /> if the given change tracking strategy can be set.</returns>
-        bool CanSetChangeTrackingStrategy(ChangeTrackingStrategy? changeTrackingStrategy, bool fromDataAnnotation = false);
+        bool CanSetChangeTrackingStrategy(
+            ChangeTrackingStrategy? changeTrackingStrategy,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the <see cref="PropertyAccessMode" /> to use for all properties of this entity type.
@@ -234,7 +254,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     The same builder instance if the configuration was successful, <see langword="null" /> otherwise.
         /// </returns>
-        IConventionModelBuilder? UsePropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+        IConventionModelBuilder? UsePropertyAccessMode(
+            PropertyAccessMode? propertyAccessMode,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given property access mode can be set from the current configuration source
@@ -242,6 +265,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for properties of this model.</param>
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns><see langword="true" /> if the given property access mode can be set.</returns>
-        bool CanSetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+        bool CanSetPropertyAccessMode(
+            PropertyAccessMode? propertyAccessMode,
+            bool fromDataAnnotation = false
+        );
     }
 }

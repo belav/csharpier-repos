@@ -15,21 +15,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
     ///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information.
     /// </remarks>
-    public class CosmosDiscriminatorConvention :
-        DiscriminatorConvention,
-        IForeignKeyOwnershipChangedConvention,
-        IForeignKeyRemovedConvention,
-        IEntityTypeAddedConvention,
-        IEntityTypeAnnotationChangedConvention
+    public class CosmosDiscriminatorConvention
+        : DiscriminatorConvention,
+          IForeignKeyOwnershipChangedConvention,
+          IForeignKeyRemovedConvention,
+          IEntityTypeAddedConvention,
+          IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CosmosDiscriminatorConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public CosmosDiscriminatorConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model.
@@ -38,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             ProcessEntityType(entityTypeBuilder);
         }
@@ -50,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             var entityType = relationshipBuilder.Metadata.DeclaringEntityType;
 
@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
-            IConventionContext<IConventionForeignKey> context)
+            IConventionContext<IConventionForeignKey> context
+        )
         {
             if (foreignKey.IsOwnership)
             {
@@ -87,10 +88,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
-            if (name != CosmosAnnotationNames.ContainerName
-                || (annotation == null) == (oldAnnotation == null))
+            if (
+                name != CosmosAnnotationNames.ContainerName
+                || (annotation == null) == (oldAnnotation == null)
+            )
             {
                 return;
             }
@@ -108,8 +112,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (entityType.IsDocumentRoot())
             {
-                entityTypeBuilder.HasDiscriminator(typeof(string))
-                    ?.HasValue(entityType, entityType.ShortName());
+                entityTypeBuilder.HasDiscriminator(typeof(string))?.HasValue(
+                    entityType,
+                    entityType.ShortName()
+                );
             }
             else
             {
@@ -128,7 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
+            IConventionContext<IConventionEntityType> context
+        )
         {
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
@@ -159,7 +166,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (discriminator != null)
             {
-                discriminator.HasValue(entityTypeBuilder.Metadata, entityTypeBuilder.Metadata.ShortName());
+                discriminator.HasValue(
+                    entityTypeBuilder.Metadata,
+                    entityTypeBuilder.Metadata.ShortName()
+                );
                 SetDefaultDiscriminatorValues(entityType.GetDerivedTypes(), discriminator);
             }
         }
@@ -173,8 +183,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public override void ProcessEntityTypeRemoved(
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
-            IConventionContext<IConventionEntityType> context)
-        {
-        }
+            IConventionContext<IConventionEntityType> context
+        ) { }
     }
 }

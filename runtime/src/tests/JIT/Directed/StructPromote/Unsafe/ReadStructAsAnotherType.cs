@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // The test came from https://github.com/dotnet/runtime/issues/21860.
-// It tests that we do access overlapping fields with the correct types. 
+// It tests that we do access overlapping fields with the correct types.
 // Espessialy if the stuct was casted by 'Unsafe.As` from a promoted type
 // and the promoted type had another field on the same offset but with a different type/size.
 
@@ -13,7 +13,6 @@ using System;
 
 class TestAssignFieldsBetweenPromotedNotPromotedStructs
 {
-
     struct PrimitiveStruct // a struct of single field of scalar types aligned at their natural boundary.
     {
         public long pointerSizedField;
@@ -36,8 +35,8 @@ class TestAssignFieldsBetweenPromotedNotPromotedStructs
         [FieldOffset(8)]
         public long anotherField;
 
-
-        public static ref PromotedStruct AsPromotedStructSize20(ref NotPromotedStruct d) => ref Unsafe.As<NotPromotedStruct, PromotedStruct>(ref d);
+        public static ref PromotedStruct AsPromotedStructSize20(ref NotPromotedStruct d) =>
+            ref Unsafe.As<NotPromotedStruct, PromotedStruct>(ref d);
     }
 
     [StructLayout(LayoutKind.Explicit)]
@@ -48,11 +47,11 @@ class TestAssignFieldsBetweenPromotedNotPromotedStructs
         [FieldOffset(8)]
         public long anotherField;
 
-
-        public static ref NotPromotedStruct AsNotPromotedStruct(ref PromotedStruct d) => ref Unsafe.As<PromotedStruct, NotPromotedStruct>(ref d);
+        public static ref NotPromotedStruct AsNotPromotedStruct(ref PromotedStruct d) =>
+            ref Unsafe.As<PromotedStruct, NotPromotedStruct>(ref d);
     }
 
-    // Some simple tests that check that lcl variables 
+    // Some simple tests that check that lcl variables
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void TestStructCasts()
     {
@@ -79,6 +78,4 @@ class TestAssignFieldsBetweenPromotedNotPromotedStructs
         TestStructCasts();
         return 100;
     }
-
 }
-

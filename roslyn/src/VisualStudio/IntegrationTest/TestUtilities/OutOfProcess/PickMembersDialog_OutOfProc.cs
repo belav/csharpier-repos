@@ -20,8 +20,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<PickMembersDialog_InProc>(visualStudioInstance);
         }
 
-        public bool CloseWindow()
-            => _inProc.CloseWindow();
+        public bool CloseWindow() => _inProc.CloseWindow();
 
         /// <summary>
         /// Clicks the "Cancel" button and waits for the Pick Members operation to complete.
@@ -29,7 +28,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void ClickCancel()
         {
             _inProc.ClickCancel();
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.LightBulb
+            );
         }
     }
 }

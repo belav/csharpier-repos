@@ -23,17 +23,16 @@ namespace Microsoft.CodeAnalysis.Precedence
         int GetOperatorPrecedence(SyntaxNode expression);
     }
 
-    internal abstract class AbstractPrecedenceService<
-        TExpressionSyntax,
-        TOperatorPrecedence> : IPrecedenceService
+    internal abstract class AbstractPrecedenceService<TExpressionSyntax, TOperatorPrecedence>
+        : IPrecedenceService
         where TExpressionSyntax : SyntaxNode
         where TOperatorPrecedence : struct
     {
-        int IPrecedenceService.GetOperatorPrecedence(SyntaxNode expression)
-            => (int)(object)this.GetOperatorPrecedence((TExpressionSyntax)expression);
+        int IPrecedenceService.GetOperatorPrecedence(SyntaxNode expression) =>
+            (int)(object)this.GetOperatorPrecedence((TExpressionSyntax)expression);
 
-        PrecedenceKind IPrecedenceService.GetPrecedenceKind(int operatorPrecedence)
-             => this.GetPrecedenceKind((TOperatorPrecedence)(object)operatorPrecedence);
+        PrecedenceKind IPrecedenceService.GetPrecedenceKind(int operatorPrecedence) =>
+            this.GetPrecedenceKind((TOperatorPrecedence)(object)operatorPrecedence);
 
         public abstract TOperatorPrecedence GetOperatorPrecedence(TExpressionSyntax expression);
         public abstract PrecedenceKind GetPrecedenceKind(TOperatorPrecedence operatorPrecedence);
@@ -41,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Precedence
 
     internal static class PrecedenceServiceExtensions
     {
-        public static PrecedenceKind GetPrecedenceKind(this IPrecedenceService service, SyntaxNode expression)
-            => service.GetPrecedenceKind(service.GetOperatorPrecedence(expression));
+        public static PrecedenceKind GetPrecedenceKind(
+            this IPrecedenceService service,
+            SyntaxNode expression
+        ) => service.GetPrecedenceKind(service.GetOperatorPrecedence(expression));
     }
 }

@@ -17,17 +17,13 @@ public class HttpPatchAttribute : HttpMethodAttribute
     /// <summary>
     /// Creates a new <see cref="HttpPatchAttribute"/>.
     /// </summary>
-    public HttpPatchAttribute()
-        : base(_supportedMethods)
-    {
-    }
+    public HttpPatchAttribute() : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpPatchAttribute"/> with the given route template.
     /// </summary>
     /// <param name="template">The route template. May not be null.</param>
-    public HttpPatchAttribute(string template)
-        : base(_supportedMethods, template)
+    public HttpPatchAttribute(string template) : base(_supportedMethods, template)
     {
         if (template == null)
         {

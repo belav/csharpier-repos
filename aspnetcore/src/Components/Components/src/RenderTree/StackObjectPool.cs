@@ -20,7 +20,8 @@ internal class StackObjectPool<T> where T : class
     public StackObjectPool(int maxPreservedItems, Func<T> instanceFactory)
     {
         _maxPreservedItems = maxPreservedItems;
-        _instanceFactory = instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
+        _instanceFactory =
+            instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
         _contents = new T[_maxPreservedItems];
     }
 
@@ -63,7 +64,9 @@ internal class StackObjectPool<T> where T : class
             var expectedInstance = _contents[_numSuppliedItems - 1];
             if (!ReferenceEquals(instance, expectedInstance))
             {
-                throw new ArgumentException($"Attempting to return wrong pooled instance. {nameof(Get)}/{nameof(Return)} calls must form a stack.");
+                throw new ArgumentException(
+                    $"Attempting to return wrong pooled instance. {nameof(Get)}/{nameof(Return)} calls must form a stack."
+                );
             }
         }
 

@@ -16,11 +16,11 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ValidateFormatStringOptionProvider()
-        {
-        }
+        public ValidateFormatStringOptionProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            ValidateFormatStringOption.ReportInvalidPlaceholdersInStringDotFormatCalls);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                ValidateFormatStringOption.ReportInvalidPlaceholdersInStringDotFormatCalls
+            );
     }
 }

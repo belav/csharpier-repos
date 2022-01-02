@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     internal static class ParenthesizedExpressionSyntaxExtensions
     {
         public static bool CanRemoveParentheses(
-            this ParenthesizedExpressionSyntax node, SemanticModel semanticModel, CancellationToken cancellationToken)
+            this ParenthesizedExpressionSyntax node,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             if (node.OpenParenToken.IsMissing || node.CloseParenToken.IsMissing)
             {
@@ -45,36 +48,54 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var previousChar = tokenBeforeParen.Text.LastOrDefault();
             var nextChar = tokenAfterParen.Text.FirstOrDefault();
 
-            if ((previousChar == '+' && nextChar == '+') ||
-                (previousChar == '-' && nextChar == '-'))
+            if (
+                (previousChar == '+' && nextChar == '+') || (previousChar == '-' && nextChar == '-')
+            )
             {
                 return false;
             }
 
             // Simplest cases:
             //   ((x)) -> (x)
-            if (expression.IsKind(SyntaxKind.ParenthesizedExpression) ||
-                parentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
+            if (
+                expression.IsKind(SyntaxKind.ParenthesizedExpression)
+                || parentExpression.IsKind(SyntaxKind.ParenthesizedExpression)
+            )
             {
                 return true;
             }
 
-            if (expression is StackAllocArrayCreationExpressionSyntax or ImplicitStackAllocArrayCreationExpressionSyntax)
+            if (
+                expression
+                is StackAllocArrayCreationExpressionSyntax
+                    or ImplicitStackAllocArrayCreationExpressionSyntax
+            )
             {
                 // var span = (stackalloc byte[8]);
                 // https://github.com/dotnet/roslyn/issues/44629
                 // The code semantics changes if the parenthesis removed.
                 // With parenthesis:    variable span is of type `Span<byte>`.
                 // Without parenthesis: variable span is of type `byte*` which can only be used in unsafe context.
-                if (node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax varDecl } })
+                if (
+                    node.Parent is EqualsValueClauseSyntax
+                    {
+                        Parent: VariableDeclaratorSyntax
+                        {
+                            Parent: VariableDeclarationSyntax varDecl
+                        }
+                    }
+                )
                 {
                     // we have either `var x = (stackalloc byte[8])` or `Span<byte> x = (stackalloc byte[8])`.  The former
                     // is not safe to remove. the latter is.
-                    if (semanticModel.GetTypeInfo(varDecl.Type, cancellationToken).Type is
+                    if (
+                        semanticModel.GetTypeInfo(varDecl.Type, cancellationToken).Type is
                         {
                             Name: nameof(Span<int>) or nameof(ReadOnlySpan<int>),
-                            ContainingNamespace: { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true }
-                        })
+                            ContainingNamespace:
+                            { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true }
+                        }
+                    )
                     {
                         return !varDecl.Type.IsVar;
                     }
@@ -100,8 +121,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             // checked((x)) -> checked(x)
-            if (node.IsParentKind(SyntaxKind.CheckedExpression) ||
-                node.IsParentKind(SyntaxKind.UncheckedExpression))
+            if (
+                node.IsParentKind(SyntaxKind.CheckedExpression)
+                || node.IsParentKind(SyntaxKind.UncheckedExpression)
+            )
             {
                 return true;
             }
@@ -112,7 +135,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             // int Prop => (x); -> int Prop => x;
-            if (node.Parent is ArrowExpressionClauseSyntax arrowExpressionClause && arrowExpressionClause.Expression == node)
+            if (
+                node.Parent is ArrowExpressionClauseSyntax arrowExpressionClause
+                && arrowExpressionClause.Expression == node
+            )
             {
                 return true;
             }
@@ -132,42 +158,126 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             //   lock ((x))             -> lock (x)
             //   using ((x))            -> using (x)
             //   catch when ((x))       -> catch when (x)
-            if ((node.IsParentKind(SyntaxKind.EqualsValueClause, out EqualsValueClauseSyntax equalsValue) && equalsValue.Value == node) ||
-                (node.IsParentKind(SyntaxKind.IfStatement, out IfStatementSyntax ifStatement) && ifStatement.Condition == node) ||
-                (node.IsParentKind(SyntaxKind.ReturnStatement, out ReturnStatementSyntax returnStatement) && returnStatement.Expression == node) ||
-                (node.IsParentKind(SyntaxKind.YieldReturnStatement, out YieldStatementSyntax yieldStatement) && yieldStatement.Expression == node) ||
-                (node.IsParentKind(SyntaxKind.ThrowStatement, out ThrowStatementSyntax throwStatement) && throwStatement.Expression == node) ||
-                (node.IsParentKind(SyntaxKind.SwitchStatement, out SwitchStatementSyntax switchStatement) && switchStatement.Expression == node) ||
-                (node.IsParentKind(SyntaxKind.WhileStatement, out WhileStatementSyntax whileStatement) && whileStatement.Condition == node) ||
-                (node.IsParentKind(SyntaxKind.DoStatement, out DoStatementSyntax doStatement) && doStatement.Condition == node) ||
-                (node.IsParentKind(SyntaxKind.ForStatement, out ForStatementSyntax forStatement) && forStatement.Condition == node) ||
-                (node.IsParentKind(SyntaxKind.ForEachStatement, SyntaxKind.ForEachVariableStatement) && ((CommonForEachStatementSyntax)node.Parent).Expression == node) ||
-                (node.IsParentKind(SyntaxKind.LockStatement, out LockStatementSyntax lockStatement) && lockStatement.Expression == node) ||
-                (node.IsParentKind(SyntaxKind.UsingStatement, out UsingStatementSyntax usingStatement) && usingStatement.Expression == node) ||
-                (node.IsParentKind(SyntaxKind.CatchFilterClause, out CatchFilterClauseSyntax catchFilter) && catchFilter.FilterExpression == node))
+            if (
+                (
+                    node.IsParentKind(
+                        SyntaxKind.EqualsValueClause,
+                        out EqualsValueClauseSyntax equalsValue
+                    )
+                    && equalsValue.Value == node
+                )
+                || (
+                    node.IsParentKind(SyntaxKind.IfStatement, out IfStatementSyntax ifStatement)
+                    && ifStatement.Condition == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.ReturnStatement,
+                        out ReturnStatementSyntax returnStatement
+                    )
+                    && returnStatement.Expression == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.YieldReturnStatement,
+                        out YieldStatementSyntax yieldStatement
+                    )
+                    && yieldStatement.Expression == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.ThrowStatement,
+                        out ThrowStatementSyntax throwStatement
+                    )
+                    && throwStatement.Expression == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.SwitchStatement,
+                        out SwitchStatementSyntax switchStatement
+                    )
+                    && switchStatement.Expression == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.WhileStatement,
+                        out WhileStatementSyntax whileStatement
+                    )
+                    && whileStatement.Condition == node
+                )
+                || (
+                    node.IsParentKind(SyntaxKind.DoStatement, out DoStatementSyntax doStatement)
+                    && doStatement.Condition == node
+                )
+                || (
+                    node.IsParentKind(SyntaxKind.ForStatement, out ForStatementSyntax forStatement)
+                    && forStatement.Condition == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.ForEachStatement,
+                        SyntaxKind.ForEachVariableStatement
+                    )
+                    && ((CommonForEachStatementSyntax)node.Parent).Expression == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.LockStatement,
+                        out LockStatementSyntax lockStatement
+                    )
+                    && lockStatement.Expression == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.UsingStatement,
+                        out UsingStatementSyntax usingStatement
+                    )
+                    && usingStatement.Expression == node
+                )
+                || (
+                    node.IsParentKind(
+                        SyntaxKind.CatchFilterClause,
+                        out CatchFilterClauseSyntax catchFilter
+                    )
+                    && catchFilter.FilterExpression == node
+                )
+            )
             {
                 return true;
             }
 
             // Handle expression-level ambiguities
-            if (RemovalMayIntroduceCastAmbiguity(node) ||
-                RemovalMayIntroduceCommaListAmbiguity(node) ||
-                RemovalMayIntroduceInterpolationAmbiguity(node) ||
-                RemovalWouldChangeConstantReferenceToTypeReference(node, expression, semanticModel, cancellationToken))
+            if (
+                RemovalMayIntroduceCastAmbiguity(node)
+                || RemovalMayIntroduceCommaListAmbiguity(node)
+                || RemovalMayIntroduceInterpolationAmbiguity(node)
+                || RemovalWouldChangeConstantReferenceToTypeReference(
+                    node,
+                    expression,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
             {
                 return false;
             }
 
             // Cases:
             //   (C)(this) -> (C)this
-            if (node.IsParentKind(SyntaxKind.CastExpression) && expression.IsKind(SyntaxKind.ThisExpression))
+            if (
+                node.IsParentKind(SyntaxKind.CastExpression)
+                && expression.IsKind(SyntaxKind.ThisExpression)
+            )
             {
                 return true;
             }
 
             // Cases:
             //   y((x)) -> y(x)
-            if (node.IsParentKind(SyntaxKind.Argument, out ArgumentSyntax argument) && argument.Expression == node)
+            if (
+                node.IsParentKind(SyntaxKind.Argument, out ArgumentSyntax argument)
+                && argument.Expression == node
+            )
             {
                 return true;
             }
@@ -249,9 +359,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             // x ?? (throw ...) -> x ?? throw ...
-            if (expression.IsKind(SyntaxKind.ThrowExpression) &&
-                node.IsParentKind(SyntaxKind.CoalesceExpression, out BinaryExpressionSyntax binary) &&
-                binary.Right == node)
+            if (
+                expression.IsKind(SyntaxKind.ThrowExpression)
+                && node.IsParentKind(
+                    SyntaxKind.CoalesceExpression,
+                    out BinaryExpressionSyntax binary
+                )
+                && binary.Right == node
+            )
             {
                 return true;
             }
@@ -263,8 +378,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             // case (x) when y: -> case x when y:
-            if (node.IsParentKind(SyntaxKind.ConstantPattern) &&
-                node.Parent.IsParentKind(SyntaxKind.CasePatternSwitchLabel))
+            if (
+                node.IsParentKind(SyntaxKind.ConstantPattern)
+                && node.Parent.IsParentKind(SyntaxKind.CasePatternSwitchLabel)
+            )
             {
                 return true;
             }
@@ -292,8 +409,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // make the ++/-- now associate with the previous part of the cast expression.
             if (parentExpression.IsKind(SyntaxKind.CastExpression))
             {
-                if (expression.IsKind(SyntaxKind.PreIncrementExpression) ||
-                    expression.IsKind(SyntaxKind.PreDecrementExpression))
+                if (
+                    expression.IsKind(SyntaxKind.PreIncrementExpression)
+                    || expression.IsKind(SyntaxKind.PreDecrementExpression)
+                )
                 {
                     return false;
                 }
@@ -301,8 +420,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             // (condition ? ref a : ref b ) = SomeValue, parenthesis can't be removed for when conditional expression appears at left
             // This syntax is only allowed since C# 7.2
-            if (expression.IsKind(SyntaxKind.ConditionalExpression) &&
-                node.IsLeftSideOfAnyAssignExpression())
+            if (
+                expression.IsKind(SyntaxKind.ConditionalExpression)
+                && node.IsLeftSideOfAnyAssignExpression()
+            )
             {
                 return false;
             }
@@ -320,12 +441,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // Operator precedence cases:
             // - If the parent is not an expression, do not remove parentheses
             // - Otherwise, parentheses may be removed if doing so does not change operator associations.
-            return parentExpression != null && !RemovalChangesAssociation(node, parentExpression, semanticModel);
+            return parentExpression != null
+                && !RemovalChangesAssociation(node, parentExpression, semanticModel);
         }
 
         private static bool RemovalWouldChangeConstantReferenceToTypeReference(
-            ParenthesizedExpressionSyntax node, ExpressionSyntax expression,
-            SemanticModel semanticModel, CancellationToken cancellationToken)
+            ParenthesizedExpressionSyntax node,
+            ExpressionSyntax expression,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             // With cases like: `if (x is (Y))` then we cannot remove the parens if it would make Y now bind to a type
             // instead of a constant.
@@ -337,13 +462,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return false;
 
             // See if interpreting the same expression as a type in this location binds.
-            var potentialType = semanticModel.GetSpeculativeTypeInfo(expression.SpanStart, expression, SpeculativeBindingOption.BindAsTypeOrNamespace).Type;
+            var potentialType =
+                semanticModel.GetSpeculativeTypeInfo(
+                    expression.SpanStart,
+                    expression,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                ).Type;
             return potentialType is not (null or IErrorTypeSymbol);
         }
 
-        private static readonly ObjectPool<Stack<SyntaxNode>> s_nodeStackPool = SharedPools.Default<Stack<SyntaxNode>>();
+        private static readonly ObjectPool<Stack<SyntaxNode>> s_nodeStackPool = SharedPools.Default<
+            Stack<SyntaxNode>
+        >();
 
-        private static bool RemovalMayIntroduceInterpolationAmbiguity(ParenthesizedExpressionSyntax node)
+        private static bool RemovalMayIntroduceInterpolationAmbiguity(
+            ParenthesizedExpressionSyntax node
+        )
         {
             // First, find the parenting interpolation. If we find a parenthesize expression first,
             // we can bail out early.
@@ -383,13 +517,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     foreach (var nodeOrToken in expression.ChildNodesAndTokens())
                     {
                         // Note: There's no need drill into other parenthesized expressions, since any colons in them would be unambiguous.
-                        if (nodeOrToken.IsNode && !nodeOrToken.IsKind(SyntaxKind.ParenthesizedExpression))
+                        if (
+                            nodeOrToken.IsNode
+                            && !nodeOrToken.IsKind(SyntaxKind.ParenthesizedExpression)
+                        )
                         {
                             stack.Push(nodeOrToken.AsNode());
                         }
                         else if (nodeOrToken.IsToken)
                         {
-                            if (nodeOrToken.IsKind(SyntaxKind.ColonToken) || nodeOrToken.IsKind(SyntaxKind.ColonColonToken))
+                            if (
+                                nodeOrToken.IsKind(SyntaxKind.ColonToken)
+                                || nodeOrToken.IsKind(SyntaxKind.ColonColonToken)
+                            )
                             {
                                 return true;
                             }
@@ -406,12 +546,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         private static bool RemovalChangesAssociation(
-            ParenthesizedExpressionSyntax node, ExpressionSyntax parentExpression, SemanticModel semanticModel)
+            ParenthesizedExpressionSyntax node,
+            ExpressionSyntax parentExpression,
+            SemanticModel semanticModel
+        )
         {
             var expression = node.Expression;
             var precedence = expression.GetOperatorPrecedence();
             var parentPrecedence = parentExpression.GetOperatorPrecedence();
-            if (precedence == OperatorPrecedence.None || parentPrecedence == OperatorPrecedence.None)
+            if (
+                precedence == OperatorPrecedence.None || parentPrecedence == OperatorPrecedence.None
+            )
             {
                 // Be conservative if the expression or its parent has no precedence.
                 return true;
@@ -441,26 +586,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (parentExpression is BinaryExpressionSyntax parentBinaryExpression)
                 {
                     // If both the expression and its parent are binary expressions and their kinds
-                    // are the same, and the parenthesized expression is on hte right and the 
+                    // are the same, and the parenthesized expression is on hte right and the
                     // operation is associative, it can sometimes be safe to remove these parens.
                     //
-                    // i.e. if you have "a && (b && c)" it can be converted to "a && b && c" 
-                    // as that new interpretation "(a && b) && c" operates the exact same way at 
+                    // i.e. if you have "a && (b && c)" it can be converted to "a && b && c"
+                    // as that new interpretation "(a && b) && c" operates the exact same way at
                     // runtime.
                     //
-                    // Specifically: 
+                    // Specifically:
                     //  1) the operands are still executed in the same order: a, b, then c.
                     //     So even if they have side effects, it will not matter.
                     //  2) the same shortcircuiting happens.
-                    //  3) for logical operators the result will always be the same (there are 
+                    //  3) for logical operators the result will always be the same (there are
                     //     additional conditions that are checked for non-logical operators).
-                    if (IsAssociative(parentBinaryExpression.Kind()) &&
-                        node.Expression.Kind() == parentBinaryExpression.Kind() &&
-                        parentBinaryExpression.Right == node)
+                    if (
+                        IsAssociative(parentBinaryExpression.Kind())
+                        && node.Expression.Kind() == parentBinaryExpression.Kind()
+                        && parentBinaryExpression.Right == node
+                    )
                     {
                         return !node.IsSafeToChangeAssociativity(
-                            node.Expression, parentBinaryExpression.Left,
-                            parentBinaryExpression.Right, semanticModel);
+                            node.Expression,
+                            parentBinaryExpression.Left,
+                            parentBinaryExpression.Right,
+                            semanticModel
+                        );
                     }
 
                     // Null-coalescing is right associative; removing parens from the LHS changes the association.
@@ -524,13 +674,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             //      (X?)(...)
             //      (global::X)(...)
 
-            if (node.IsParentKind(SyntaxKind.CastExpression, out CastExpressionSyntax castExpression))
+            if (
+                node.IsParentKind(
+                    SyntaxKind.CastExpression,
+                    out CastExpressionSyntax castExpression
+                )
+            )
             {
-                if (castExpression.Type.IsKind(
+                if (
+                    castExpression.Type.IsKind(
                         SyntaxKind.PredefinedType,
                         SyntaxKind.ArrayType,
                         SyntaxKind.PointerType,
-                        SyntaxKind.NullableType))
+                        SyntaxKind.NullableType
+                    )
+                )
                 {
                     return false;
                 }
@@ -542,11 +700,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                 var expression = node.Expression;
 
-                if (expression.IsKind(
+                if (
+                    expression.IsKind(
                         SyntaxKind.UnaryMinusExpression,
                         SyntaxKind.UnaryPlusExpression,
                         SyntaxKind.PointerIndirectionExpression,
-                        SyntaxKind.AddressOfExpression))
+                        SyntaxKind.AddressOfExpression
+                    )
+                )
                 {
                     return true;
                 }
@@ -570,7 +731,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return false;
         }
 
-        private static bool RemovalMayIntroduceCommaListAmbiguity(ParenthesizedExpressionSyntax node)
+        private static bool RemovalMayIntroduceCommaListAmbiguity(
+            ParenthesizedExpressionSyntax node
+        )
         {
             if (IsSimpleOrDottedName(node.Expression))
             {
@@ -582,14 +745,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 //   {x < (x), x > (1 + 2)}
                 //   {x < x, (x) > (1 + 2)}
 
-                if (node.Parent is BinaryExpressionSyntax binaryExpression &&
-                    binaryExpression.IsKind(SyntaxKind.LessThanExpression, SyntaxKind.GreaterThanExpression) &&
-                    (binaryExpression.IsParentKind(SyntaxKind.Argument) || binaryExpression.Parent is InitializerExpressionSyntax))
+                if (
+                    node.Parent is BinaryExpressionSyntax binaryExpression
+                    && binaryExpression.IsKind(
+                        SyntaxKind.LessThanExpression,
+                        SyntaxKind.GreaterThanExpression
+                    )
+                    && (
+                        binaryExpression.IsParentKind(SyntaxKind.Argument)
+                        || binaryExpression.Parent is InitializerExpressionSyntax
+                    )
+                )
                 {
                     if (binaryExpression.IsKind(SyntaxKind.LessThanExpression))
                     {
-                        if ((binaryExpression.Left == node && IsSimpleOrDottedName(binaryExpression.Right)) ||
-                            (binaryExpression.Right == node && IsSimpleOrDottedName(binaryExpression.Left)))
+                        if (
+                            (
+                                binaryExpression.Left == node
+                                && IsSimpleOrDottedName(binaryExpression.Right)
+                            )
+                            || (
+                                binaryExpression.Right == node
+                                && IsSimpleOrDottedName(binaryExpression.Left)
+                            )
+                        )
                         {
                             if (IsNextExpressionPotentiallyAmbiguous(binaryExpression))
                             {
@@ -601,8 +780,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     }
                     else if (binaryExpression.IsKind(SyntaxKind.GreaterThanExpression))
                     {
-                        if (binaryExpression.Left == node &&
-                            binaryExpression.Right.IsKind(SyntaxKind.ParenthesizedExpression, SyntaxKind.CastExpression))
+                        if (
+                            binaryExpression.Left == node
+                            && binaryExpression.Right.IsKind(
+                                SyntaxKind.ParenthesizedExpression,
+                                SyntaxKind.CastExpression
+                            )
+                        )
                         {
                             if (IsPreviousExpressionPotentiallyAmbiguous(binaryExpression))
                             {
@@ -656,15 +840,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
             }
 
-            if (previousExpression == null ||
-                !previousExpression.IsKind(SyntaxKind.LessThanExpression, out BinaryExpressionSyntax lessThanExpression))
+            if (
+                previousExpression == null
+                || !previousExpression.IsKind(
+                    SyntaxKind.LessThanExpression,
+                    out BinaryExpressionSyntax lessThanExpression
+                )
+            )
             {
                 return false;
             }
 
-            return (IsSimpleOrDottedName(lessThanExpression.Left)
-                    || lessThanExpression.Left.IsKind(SyntaxKind.CastExpression))
-                && IsSimpleOrDottedName(lessThanExpression.Right);
+            return (
+                    IsSimpleOrDottedName(lessThanExpression.Left)
+                    || lessThanExpression.Left.IsKind(SyntaxKind.CastExpression)
+                ) && IsSimpleOrDottedName(lessThanExpression.Right);
         }
 
         private static bool IsNextExpressionPotentiallyAmbiguous(ExpressionSyntax node)
@@ -691,19 +881,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
             }
 
-            if (nextExpression == null ||
-                !nextExpression.IsKind(SyntaxKind.GreaterThanExpression, out BinaryExpressionSyntax greaterThanExpression))
+            if (
+                nextExpression == null
+                || !nextExpression.IsKind(
+                    SyntaxKind.GreaterThanExpression,
+                    out BinaryExpressionSyntax greaterThanExpression
+                )
+            )
             {
                 return false;
             }
 
             return IsSimpleOrDottedName(greaterThanExpression.Left)
-                && (greaterThanExpression.Right.IsKind(SyntaxKind.ParenthesizedExpression)
-                    || greaterThanExpression.Right.IsKind(SyntaxKind.CastExpression));
+                && (
+                    greaterThanExpression.Right.IsKind(SyntaxKind.ParenthesizedExpression)
+                    || greaterThanExpression.Right.IsKind(SyntaxKind.CastExpression)
+                );
         }
 
-        private static bool IsSimpleOrDottedName(ExpressionSyntax expression)
-            => expression.Kind() is SyntaxKind.IdentifierName or SyntaxKind.QualifiedName or SyntaxKind.SimpleMemberAccessExpression;
+        private static bool IsSimpleOrDottedName(ExpressionSyntax expression) =>
+            expression.Kind()
+                is SyntaxKind.IdentifierName
+                    or SyntaxKind.QualifiedName
+                    or SyntaxKind.SimpleMemberAccessExpression;
 
         public static bool CanRemoveParentheses(this ParenthesizedPatternSyntax node)
         {
@@ -758,17 +958,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // Operator precedence cases:
             // - If the parent is not an expression, do not remove parentheses
             // - Otherwise, parentheses may be removed if doing so does not change operator associations.
-            return node.Parent is PatternSyntax patternParent &&
-                   !RemovalChangesAssociation(node, patternParent);
+            return node.Parent is PatternSyntax patternParent
+                && !RemovalChangesAssociation(node, patternParent);
         }
 
         private static bool RemovalChangesAssociation(
-            ParenthesizedPatternSyntax node, PatternSyntax parentPattern)
+            ParenthesizedPatternSyntax node,
+            PatternSyntax parentPattern
+        )
         {
             var pattern = node.Pattern;
             var precedence = pattern.GetOperatorPrecedence();
             var parentPrecedence = parentPattern.GetOperatorPrecedence();
-            if (precedence == OperatorPrecedence.None || parentPrecedence == OperatorPrecedence.None)
+            if (
+                precedence == OperatorPrecedence.None || parentPrecedence == OperatorPrecedence.None
+            )
             {
                 // Be conservative if the expression or its parent has no precedence.
                 return true;

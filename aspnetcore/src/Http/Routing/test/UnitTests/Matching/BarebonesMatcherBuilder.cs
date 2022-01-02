@@ -25,7 +25,12 @@ internal class BarebonesMatcherBuilder : MatcherBuilder
         {
             var endpoint = _endpoints[i];
             var pathSegments = endpoint.RoutePattern.PathSegments
-                .Select(s => s.IsSimple && s.Parts[0] is RoutePatternLiteralPart literalPart ? literalPart.Content : null)
+                .Select(
+                    s =>
+                        s.IsSimple && s.Parts[0] is RoutePatternLiteralPart literalPart
+                            ? literalPart.Content
+                            : null
+                )
                 .ToArray();
             matchers[i] = new InnerMatcher(pathSegments, _endpoints[i]);
         }

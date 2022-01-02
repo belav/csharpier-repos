@@ -21,11 +21,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InheritanceMargin
     {
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         [ImportingConstructor]
-        public CSharpInheritanceMarginService()
-        {
-        }
+        public CSharpInheritanceMarginService() { }
 
-        protected override ImmutableArray<SyntaxNode> GetMembers(IEnumerable<SyntaxNode> nodesToSearch)
+        protected override ImmutableArray<SyntaxNode> GetMembers(
+            IEnumerable<SyntaxNode> nodesToSearch
+        )
         {
             var typeDeclarationNodes = nodesToSearch.OfType<TypeDeclarationSyntax>();
 
@@ -39,13 +39,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InheritanceMargin
                 // 2. Add type members inside this type declaration.
                 foreach (var member in typeDeclarationNode.Members)
                 {
-                    if (member.IsKind(
-                        SyntaxKind.MethodDeclaration,
-                        SyntaxKind.PropertyDeclaration,
-                        SyntaxKind.EventDeclaration,
-                        SyntaxKind.IndexerDeclaration,
-                        SyntaxKind.OperatorDeclaration,
-                        SyntaxKind.ConversionOperatorDeclaration))
+                    if (
+                        member.IsKind(
+                            SyntaxKind.MethodDeclaration,
+                            SyntaxKind.PropertyDeclaration,
+                            SyntaxKind.EventDeclaration,
+                            SyntaxKind.IndexerDeclaration,
+                            SyntaxKind.OperatorDeclaration,
+                            SyntaxKind.ConversionOperatorDeclaration
+                        )
+                    )
                     {
                         builder.Add(member);
                     }
@@ -62,17 +65,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InheritanceMargin
             return builder.ToImmutableArray();
         }
 
-        protected override SyntaxToken GetDeclarationToken(SyntaxNode declarationNode)
-            => declarationNode switch
+        protected override SyntaxToken GetDeclarationToken(SyntaxNode declarationNode) =>
+            declarationNode switch
             {
                 MethodDeclarationSyntax methodDeclarationNode => methodDeclarationNode.Identifier,
-                PropertyDeclarationSyntax propertyDeclarationNode => propertyDeclarationNode.Identifier,
+                PropertyDeclarationSyntax propertyDeclarationNode
+                  => propertyDeclarationNode.Identifier,
                 EventDeclarationSyntax eventDeclarationNode => eventDeclarationNode.Identifier,
-                VariableDeclaratorSyntax variableDeclaratorNode => variableDeclaratorNode.Identifier,
+                VariableDeclaratorSyntax variableDeclaratorNode
+                  => variableDeclaratorNode.Identifier,
                 TypeDeclarationSyntax baseTypeDeclarationNode => baseTypeDeclarationNode.Identifier,
-                IndexerDeclarationSyntax indexerDeclarationNode => indexerDeclarationNode.ThisKeyword,
-                OperatorDeclarationSyntax operatorDeclarationNode => operatorDeclarationNode.OperatorToken,
-                ConversionOperatorDeclarationSyntax conversionOperatorDeclarationNode => conversionOperatorDeclarationNode.Type.GetFirstToken(),
+                IndexerDeclarationSyntax indexerDeclarationNode
+                  => indexerDeclarationNode.ThisKeyword,
+                OperatorDeclarationSyntax operatorDeclarationNode
+                  => operatorDeclarationNode.OperatorToken,
+                ConversionOperatorDeclarationSyntax conversionOperatorDeclarationNode
+                  => conversionOperatorDeclarationNode.Type.GetFirstToken(),
                 // Shouldn't reach here since the input declaration nodes are coming from GetMembers() method above
                 _ => throw ExceptionUtilities.UnexpectedValue(declarationNode),
             };

@@ -10,14 +10,17 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Whitespace
 {
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<WhitespaceSetting>)), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<WhitespaceSetting>)),
+        Shared
+    ]
     internal class CommonWhitespaceSettingsWorkspaceServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CommonWhitespaceSettingsWorkspaceServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new CommonWhitespaceSettingsProviderFactory(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new CommonWhitespaceSettingsProviderFactory(workspaceServices.Workspace);
     }
 }

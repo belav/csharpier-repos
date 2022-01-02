@@ -16,18 +16,22 @@ public class TagBuilderTest
         get
         {
             return new TheoryData<TagRenderMode, string>
-                {
-                    { TagRenderMode.StartTag, "<p>" },
-                    { TagRenderMode.SelfClosing, "<p />" },
-                    { TagRenderMode.Normal, "<p></p>" }
-                };
+            {
+                { TagRenderMode.StartTag, "<p>" },
+                { TagRenderMode.SelfClosing, "<p />" },
+                { TagRenderMode.Normal, "<p></p>" }
+            };
         }
     }
 
     [Theory]
     [InlineData(false, "Hello", "World")]
     [InlineData(true, "hello", "something else")]
-    public void MergeAttribute_IgnoresCase(bool replaceExisting, string expectedKey, string expectedValue)
+    public void MergeAttribute_IgnoresCase(
+        bool replaceExisting,
+        string expectedKey,
+        string expectedValue
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder("p");
@@ -120,7 +124,8 @@ public class TagBuilderTest
     public void WriteTo_WriteEmptyAttribute_WhenValueIsNullOrEmpty(
         string attributeKey,
         string attributeValue,
-        string expectedOutput)
+        string expectedOutput
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder("p");
@@ -237,7 +242,6 @@ public class TagBuilderTest
 
         // Assert
         Assert.Equal("<p />", HtmlContentUtilities.HtmlContentToString(tag));
-
     }
 
     [Fact]
@@ -264,7 +268,6 @@ public class TagBuilderTest
         // Act
         var clonedTagBuilder = new TagBuilder(originalTagBuilder);
 
-
         // Assert
         Assert.Equal(originalTagBuilder.TagRenderMode, clonedTagBuilder.TagRenderMode);
     }
@@ -281,7 +284,10 @@ public class TagBuilderTest
 
         // Assert
         Assert.NotEqual(originalTagBuilder.InnerHtml, clonedTagBuilder.InnerHtml);
-        Assert.Equal(HtmlContentUtilities.HtmlContentToString(originalTagBuilder.RenderBody()), HtmlContentUtilities.HtmlContentToString(clonedTagBuilder.RenderBody()));
+        Assert.Equal(
+            HtmlContentUtilities.HtmlContentToString(originalTagBuilder.RenderBody()),
+            HtmlContentUtilities.HtmlContentToString(clonedTagBuilder.RenderBody())
+        );
     }
 
     [Fact]

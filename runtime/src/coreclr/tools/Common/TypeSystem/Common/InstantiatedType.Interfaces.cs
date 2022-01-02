@@ -15,7 +15,13 @@ namespace Internal.TypeSystem
         private DefType[] InitializeImplementedInterfaces()
         {
             // TODO Add duplicate detection
-            return (_implementedInterfaces = InstantiateTypeArray(_typeDef.ExplicitlyImplementedInterfaces, _instantiation, new Instantiation()));
+            return (
+                _implementedInterfaces = InstantiateTypeArray(
+                    _typeDef.ExplicitlyImplementedInterfaces,
+                    _instantiation,
+                    new Instantiation()
+                )
+            );
         }
 
         /// <summary>

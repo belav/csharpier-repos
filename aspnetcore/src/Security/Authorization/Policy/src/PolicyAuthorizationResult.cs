@@ -34,29 +34,31 @@ public class PolicyAuthorizationResult
     ///Indicates that an unauthenticated user requested access to an endpoint that requires authentication.
     /// </summary>
     /// <returns>The <see cref="PolicyAuthorizationResult"/>.</returns>
-    public static PolicyAuthorizationResult Challenge()
-        => new PolicyAuthorizationResult { Challenged = true };
+    public static PolicyAuthorizationResult Challenge() =>
+        new PolicyAuthorizationResult { Challenged = true };
 
     /// <summary>
     /// Indiciates that the access to a resource was forbidden.
     /// </summary>
     /// <returns>The <see cref="PolicyAuthorizationResult"/>.</returns>
-    public static PolicyAuthorizationResult Forbid()
-        => Forbid(null);
+    public static PolicyAuthorizationResult Forbid() => Forbid(null);
 
     /// <summary>
     /// Indiciates that the access to a resource was forbidden.
     /// </summary>
     /// <param name="authorizationFailure">Specifies the reason the authorization failed.s</param>
     /// <returns>The <see cref="PolicyAuthorizationResult"/>.</returns>
-    public static PolicyAuthorizationResult Forbid(AuthorizationFailure? authorizationFailure)
-        => new PolicyAuthorizationResult { Forbidden = true, AuthorizationFailure = authorizationFailure };
+    public static PolicyAuthorizationResult Forbid(AuthorizationFailure? authorizationFailure) =>
+        new PolicyAuthorizationResult
+        {
+            Forbidden = true,
+            AuthorizationFailure = authorizationFailure
+        };
 
     /// <summary>
     /// Indicates a successful authorization.
     /// </summary>
     /// <returns>The <see cref="PolicyAuthorizationResult"/>.</returns>
-    public static PolicyAuthorizationResult Success()
-        => new PolicyAuthorizationResult { Succeeded = true };
-
+    public static PolicyAuthorizationResult Success() =>
+        new PolicyAuthorizationResult { Succeeded = true };
 }

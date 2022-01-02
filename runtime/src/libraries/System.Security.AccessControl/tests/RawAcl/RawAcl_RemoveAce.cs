@@ -14,7 +14,10 @@ namespace System.Security.AccessControl.Tests
             yield return new object[] { "O:LAG:SYD:" };
             yield return new object[] { "O:LAG:SYD:AI(A;ID;FA;;;BA)" };
             yield return new object[] { "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BO)(A;ID;FA;;;SY)" };
-            yield return new object[] { "O:NUG:SYD:AI(D;CINP;FA;;;SO)(A;ID;FA;;;BA)(A;ID;FA;;;BO)(A;ID;FA;;;SY)(A;OICI;FA;;;BG)" };
+            yield return new object[]
+            {
+                "O:NUG:SYD:AI(D;CINP;FA;;;SO)(A;ID;FA;;;BA)(A;ID;FA;;;BO)(A;ID;FA;;;SY)(A;OICI;FA;;;BG)"
+            };
         }
 
         [Theory]
@@ -41,7 +44,8 @@ namespace System.Security.AccessControl.Tests
                 {
                     index = -1;
                     rawAcl.RemoveAce(index);
-                });
+                }
+            );
 
             //test remove at value too large
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -50,7 +54,8 @@ namespace System.Security.AccessControl.Tests
                 {
                     index = int.MaxValue;
                     rawAcl.RemoveAce(index);
-                });
+                }
+            );
 
             //test remove at 0, only need to catch ArgumentOutOfRangeException if Count = 0
             index = 0;
@@ -70,7 +75,16 @@ namespace System.Security.AccessControl.Tests
                 Assert.False(!Utils.IsAceEqual(ace, rawAclVerifier[index]));
 
                 //verify right side aces are equal
-                Assert.False(!Utils.AclPartialEqual(rawAcl, rawAclVerifier, index, rawAcl.Count - 1, index + 1, count - 1));
+                Assert.False(
+                    !Utils.AclPartialEqual(
+                        rawAcl,
+                        rawAclVerifier,
+                        index,
+                        rawAcl.Count - 1,
+                        index + 1,
+                        count - 1
+                    )
+                );
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -97,7 +111,17 @@ namespace System.Security.AccessControl.Tests
                 //verify the removed ace is equal to the originial ace
                 Assert.False(!Utils.IsAceEqual(ace, rawAclVerifier[index]));
                 //verify the left and right side aces are equal
-                Assert.False(!Utils.AclPartialEqual(rawAcl, rawAclVerifier, 0, index - 1, 0, index - 1) || !Utils.AclPartialEqual(rawAcl, rawAclVerifier, index, rawAcl.Count - 1, index + 1, count - 1));
+                Assert.False(
+                    !Utils.AclPartialEqual(rawAcl, rawAclVerifier, 0, index - 1, 0, index - 1)
+                        || !Utils.AclPartialEqual(
+                            rawAcl,
+                            rawAclVerifier,
+                            index,
+                            rawAcl.Count - 1,
+                            index + 1,
+                            count - 1
+                        )
+                );
 
                 //now insert that removed ace
                 rawAcl.InsertAce(index, ace);
@@ -119,7 +143,17 @@ namespace System.Security.AccessControl.Tests
                 //verify the removed ace is equal to the originial ace
                 Assert.False(!Utils.IsAceEqual(ace, rawAclVerifier[index]));
                 //verify the left and right side aces are equal
-                Assert.False(!Utils.AclPartialEqual(rawAcl, rawAclVerifier, 0, index - 1, 0, index - 1) || !Utils.AclPartialEqual(rawAcl, rawAclVerifier, index, rawAcl.Count - 1, index + 1, count - 1));
+                Assert.False(
+                    !Utils.AclPartialEqual(rawAcl, rawAclVerifier, 0, index - 1, 0, index - 1)
+                        || !Utils.AclPartialEqual(
+                            rawAcl,
+                            rawAclVerifier,
+                            index,
+                            rawAcl.Count - 1,
+                            index + 1,
+                            count - 1
+                        )
+                );
 
                 //now insert that inserted ace
 
@@ -131,11 +165,13 @@ namespace System.Security.AccessControl.Tests
             //when count  = 0, or count/2, it is reduandent
             if (0 != index && count / 2 != index)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                {
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                    {
                         ace = rawAcl[index];
                         rawAcl.RemoveAce(index);
-                });
+                    }
+                );
             }
         }
     }

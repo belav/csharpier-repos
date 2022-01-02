@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// <summary>
         /// Constructs a <see cref="VirtualCharSequence"/> and calls <see cref="TryParse(VirtualCharSequence)"/>
         /// </summary>
-        public static StackFrameTree? TryParse(string text)
-            => TryParse(VirtualCharSequence.Create(0, text));
+        public static StackFrameTree? TryParse(string text) =>
+            TryParse(VirtualCharSequence.Create(0, text));
 
         /// <summary>
         /// Attempts to parse the full tree. Returns null on malformed data
@@ -85,12 +85,17 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
             var remainingTrivia = _lexer.TryScanRemainingTrivia();
 
-            var eolToken = CurrentCharAsToken().With(leadingTrivia: remainingTrivia.ToImmutableArray());
+            var eolToken = CurrentCharAsToken()
+                .With(leadingTrivia: remainingTrivia.ToImmutableArray());
 
             Contract.ThrowIfFalse(_lexer.Position == _lexer.Text.Length);
             Contract.ThrowIfFalse(eolToken.Kind == StackFrameKind.EndOfFrame);
 
-            var root = new StackFrameCompilationUnit(methodDeclaration, fileInformationResult.Value, eolToken);
+            var root = new StackFrameCompilationUnit(
+                methodDeclaration,
+                fileInformationResult.Value,
+                eolToken
+            );
 
             return new(_lexer.Text, root);
         }
@@ -106,9 +111,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             var identifierNode = TryParseRequiredNameNode(scanAtTrivia: true);
 
             //
-            // TryParseRequiredNameNode does not necessarily return a qualified name even if 
+            // TryParseRequiredNameNode does not necessarily return a qualified name even if
             // it parses a name. For method declarations, a fully qualified name is required so
-            // we know both the class (and namespace) that the method is contained in.  
+            // we know both the class (and namespace) that the method is contained in.
             //
             if (identifierNode is not StackFrameQualifiedNameNode memberAccessExpression)
             {
@@ -127,7 +132,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 return null;
             }
 
-            return new StackFrameMethodDeclarationNode(memberAccessExpression, typeArguments, methodParameters);
+            return new StackFrameMethodDeclarationNode(
+                memberAccessExpression,
+                typeArguments,
+                methodParameters
+            );
         }
 
         /// <summary>
@@ -147,7 +156,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// </summary>
         private StackFrameNameNode? TryParseRequiredNameNode(bool scanAtTrivia)
         {
-            var currentIdentifer = _lexer.TryScanIdentifier(scanAtTrivia: scanAtTrivia, scanLeadingWhitespace: true, scanTrailingWhitespace: false);
+            var currentIdentifer = _lexer.TryScanIdentifier(
+                scanAtTrivia: scanAtTrivia,
+                scanLeadingWhitespace: true,
+                scanTrailingWhitespace: false
+            );
             if (!currentIdentifer.HasValue)
             {
                 return null;
@@ -172,7 +185,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
                 if (memberAccess is null)
                 {
-                    Debug.Assert(nameNode is StackFrameQualifiedNameNode or StackFrameSimpleNameNode);
+                    Debug.Assert(
+                        nameNode is StackFrameQualifiedNameNode or StackFrameSimpleNameNode
+                    );
                     return nameNode;
                 }
 
@@ -217,9 +232,16 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         ///                         ^------------- Arity token of "1" 
         /// </code>
         /// </summary>
-        private Result<StackFrameSimpleNameNode> TryScanGenericTypeIdentifier(StackFrameToken identifierToken)
+        private Result<StackFrameSimpleNameNode> TryScanGenericTypeIdentifier(
+            StackFrameToken identifierToken
+        )
         {
-            if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.GraveAccentToken, out var graveAccentToken))
+            if (
+                !_lexer.ScanCurrentCharAsTokenIfMatch(
+                    StackFrameKind.GraveAccentToken,
+                    out var graveAccentToken
+                )
+            )
             {
                 return new(new StackFrameIdentifierNameNode(identifierToken));
             }
@@ -244,22 +266,33 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// </summary>
         private Result<StackFrameTypeArgumentList> TryParseTypeArguments()
         {
-            if (!_lexer.ScanCurrentCharAsTokenIfMatch(
+            if (
+                !_lexer.ScanCurrentCharAsTokenIfMatch(
                     kind => kind is StackFrameKind.OpenBracketToken or StackFrameKind.LessThanToken,
-                    out var openToken))
+                    out var openToken
+                )
+            )
             {
                 return Result<StackFrameTypeArgumentList>.Empty;
             }
 
-            var closeBracketKind = openToken.Kind is StackFrameKind.OpenBracketToken
-                ? StackFrameKind.CloseBracketToken
-                : StackFrameKind.GreaterThanToken;
+            var closeBracketKind =
+                openToken.Kind is StackFrameKind.OpenBracketToken
+                    ? StackFrameKind.CloseBracketToken
+                    : StackFrameKind.GreaterThanToken;
 
             using var _ = ArrayBuilder<StackFrameNodeOrToken>.GetInstance(out var builder);
-            var currentIdentifier = _lexer.TryScanIdentifier(scanAtTrivia: false, scanLeadingWhitespace: true, scanTrailingWhitespace: true);
+            var currentIdentifier = _lexer.TryScanIdentifier(
+                scanAtTrivia: false,
+                scanLeadingWhitespace: true,
+                scanTrailingWhitespace: true
+            );
             StackFrameToken closeToken = default;
 
-            while (currentIdentifier.HasValue && currentIdentifier.Value.Kind == StackFrameKind.IdentifierToken)
+            while (
+                currentIdentifier.HasValue
+                && currentIdentifier.Value.Kind == StackFrameKind.IdentifierToken
+            )
             {
                 builder.Add(new StackFrameIdentifierNameNode(currentIdentifier.Value));
 
@@ -268,7 +301,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                     break;
                 }
 
-                if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.CommaToken, out var commaToken))
+                if (
+                    !_lexer.ScanCurrentCharAsTokenIfMatch(
+                        StackFrameKind.CommaToken,
+                        out var commaToken
+                    )
+                )
                 {
                     return Result<StackFrameTypeArgumentList>.Abort;
                 }
@@ -287,7 +325,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 return Result<StackFrameTypeArgumentList>.Abort;
             }
 
-            var separatedList = new EmbeddedSeparatedSyntaxNodeList<StackFrameKind, StackFrameNode, StackFrameIdentifierNameNode>(builder.ToImmutable());
+            var separatedList = new EmbeddedSeparatedSyntaxNodeList<
+                StackFrameKind,
+                StackFrameNode,
+                StackFrameIdentifierNameNode
+            >(builder.ToImmutable());
             return new StackFrameTypeArgumentList(openToken, separatedList, closeToken);
         }
 
@@ -301,14 +343,33 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// </remarks>
         private StackFrameParameterList? TryParseRequiredMethodParameters()
         {
-            if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.OpenParenToken, scanTrailingWhitespace: true, out var openParen))
+            if (
+                !_lexer.ScanCurrentCharAsTokenIfMatch(
+                    StackFrameKind.OpenParenToken,
+                    scanTrailingWhitespace: true,
+                    out var openParen
+                )
+            )
             {
                 return null;
             }
 
-            if (_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.CloseParenToken, out var closeParen))
+            if (
+                _lexer.ScanCurrentCharAsTokenIfMatch(
+                    StackFrameKind.CloseParenToken,
+                    out var closeParen
+                )
+            )
             {
-                return new(openParen, EmbeddedSeparatedSyntaxNodeList<StackFrameKind, StackFrameNode, StackFrameParameterDeclarationNode>.Empty, closeParen);
+                return new(
+                    openParen,
+                    EmbeddedSeparatedSyntaxNodeList<
+                        StackFrameKind,
+                        StackFrameNode,
+                        StackFrameParameterDeclarationNode
+                    >.Empty,
+                    closeParen
+                );
             }
 
             using var _ = ArrayBuilder<StackFrameNodeOrToken>.GetInstance(out var builder);
@@ -324,7 +385,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 RoslynDebug.AssertNotNull(parameterNode);
                 builder.Add(parameterNode);
 
-                if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.CommaToken, out var commaToken))
+                if (
+                    !_lexer.ScanCurrentCharAsTokenIfMatch(
+                        StackFrameKind.CommaToken,
+                        out var commaToken
+                    )
+                )
                 {
                     break;
                 }
@@ -332,12 +398,21 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 builder.Add(commaToken);
             }
 
-            if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.CloseParenToken, out closeParen))
+            if (
+                !_lexer.ScanCurrentCharAsTokenIfMatch(
+                    StackFrameKind.CloseParenToken,
+                    out closeParen
+                )
+            )
             {
                 return null;
             }
 
-            var parameters = new EmbeddedSeparatedSyntaxNodeList<StackFrameKind, StackFrameNode, StackFrameParameterDeclarationNode>(builder.ToImmutable());
+            var parameters = new EmbeddedSeparatedSyntaxNodeList<
+                StackFrameKind,
+                StackFrameNode,
+                StackFrameParameterDeclarationNode
+            >(builder.ToImmutable());
             return new(openParen, parameters, closeParen);
         }
 
@@ -367,7 +442,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 typeIdentifier = new StackFrameArrayTypeNode(nameNode, arrayIdentifiers);
             }
 
-            var identifier = _lexer.TryScanIdentifier(scanAtTrivia: false, scanLeadingWhitespace: true, scanTrailingWhitespace: true);
+            var identifier = _lexer.TryScanIdentifier(
+                scanAtTrivia: false,
+                scanLeadingWhitespace: true,
+                scanTrailingWhitespace: true
+            );
             if (!identifier.HasValue)
             {
                 return Result<StackFrameParameterDeclarationNode>.Abort;
@@ -390,22 +469,46 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
             while (true)
             {
-                if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.OpenBracketToken, scanTrailingWhitespace: true, out var openBracket))
+                if (
+                    !_lexer.ScanCurrentCharAsTokenIfMatch(
+                        StackFrameKind.OpenBracketToken,
+                        scanTrailingWhitespace: true,
+                        out var openBracket
+                    )
+                )
                 {
                     return new(builder.ToImmutable());
                 }
 
-                while (_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.CommaToken, scanTrailingWhitespace: true, out var commaToken))
+                while (
+                    _lexer.ScanCurrentCharAsTokenIfMatch(
+                        StackFrameKind.CommaToken,
+                        scanTrailingWhitespace: true,
+                        out var commaToken
+                    )
+                )
                 {
                     commaBuilder.Add(commaToken);
                 }
 
-                if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.CloseBracketToken, scanTrailingWhitespace: true, out var closeBracket))
+                if (
+                    !_lexer.ScanCurrentCharAsTokenIfMatch(
+                        StackFrameKind.CloseBracketToken,
+                        scanTrailingWhitespace: true,
+                        out var closeBracket
+                    )
+                )
                 {
                     return Result<ImmutableArray<StackFrameArrayRankSpecifier>>.Abort;
                 }
 
-                builder.Add(new StackFrameArrayRankSpecifier(openBracket, closeBracket, commaBuilder.ToImmutableAndClear()));
+                builder.Add(
+                    new StackFrameArrayRankSpecifier(
+                        openBracket,
+                        closeBracket,
+                        commaBuilder.ToImmutableAndClear()
+                    )
+                );
             }
         }
 
@@ -429,7 +532,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 return Result<StackFrameFileInformationNode>.Empty;
             }
 
-            if (!_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.ColonToken, out var colonToken))
+            if (
+                !_lexer.ScanCurrentCharAsTokenIfMatch(StackFrameKind.ColonToken, out var colonToken)
+            )
             {
                 return new StackFrameFileInformationNode(path, colon: null, line: null);
             }

@@ -26,11 +26,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalQueryTranslationPostprocessor(
             QueryTranslationPostprocessorDependencies dependencies,
             RelationalQueryTranslationPostprocessorDependencies relationalDependencies,
-            QueryCompilationContext queryCompilationContext)
-            : base(dependencies, queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        ) : base(dependencies, queryCompilationContext)
         {
             RelationalDependencies = relationalDependencies;
-            _useRelationalNulls = RelationalOptionsExtension.Extract(queryCompilationContext.ContextOptions).UseRelationalNulls;
+            _useRelationalNulls =
+                RelationalOptionsExtension.Extract(
+                    queryCompilationContext.ContextOptions
+                ).UseRelationalNulls;
         }
 
         /// <summary>
@@ -43,14 +46,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             query = base.Process(query);
             query = new SelectExpressionProjectionApplyingExpressionVisitor(
-                ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior).Visit(query);
+                ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior
+            ).Visit(query);
 #if DEBUG
             query = new TableAliasVerifyingExpressionVisitor().Visit(query);
 #endif
             query = new SelectExpressionPruningExpressionVisitor().Visit(query);
-            query = new SqlExpressionSimplifyingExpressionVisitor(RelationalDependencies.SqlExpressionFactory, _useRelationalNulls)
-                    .Visit(query);
-            query = new RelationalValueConverterCompensatingExpressionVisitor(RelationalDependencies.SqlExpressionFactory).Visit(query);
+            query = new SqlExpressionSimplifyingExpressionVisitor(
+                RelationalDependencies.SqlExpressionFactory,
+                _useRelationalNulls
+            ).Visit(query);
+            query = new RelationalValueConverterCompensatingExpressionVisitor(
+                RelationalDependencies.SqlExpressionFactory
+            ).Visit(query);
 
             return query;
         }
@@ -72,7 +80,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         return shapedQueryExpression;
 
                     case RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression:
-                        UniquifyAliasInSelectExpression(relationalSplitCollectionShaperExpression.SelectExpression);
+                        UniquifyAliasInSelectExpression(
+                            relationalSplitCollectionShaperExpression.SelectExpression
+                        );
                         Visit(relationalSplitCollectionShaperExpression.InnerShaper);
                         return relationalSplitCollectionShaperExpression;
 
@@ -81,13 +91,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
             }
 
-            private void UniquifyAliasInSelectExpression(Expression selectExpression)
-                => _scopedVisitor.EntryPoint(selectExpression);
+            private void UniquifyAliasInSelectExpression(Expression selectExpression) =>
+                _scopedVisitor.EntryPoint(selectExpression);
 
             private sealed class ScopedVisitor : ExpressionVisitor
             {
-                private readonly HashSet<string> _usedAliases = new(StringComparer.OrdinalIgnoreCase);
-                private readonly HashSet<TableExpressionBase> _visitedTableExpressionBases = new(ReferenceEqualityComparer.Instance);
+                private readonly HashSet<string> _usedAliases =
+                    new(StringComparer.OrdinalIgnoreCase);
+                private readonly HashSet<TableExpressionBase> _visitedTableExpressionBases =
+                    new(ReferenceEqualityComparer.Instance);
 
                 public Expression EntryPoint(Expression expression)
                 {
@@ -103,10 +115,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                             continue;
                         }
 
-                        var numbers = group.OrderBy(e => e).Skip(1).Select(e => int.Parse(e[1..])).OrderBy(e => e).ToList();
+                        var numbers = group
+                            .OrderBy(e => e)
+                            .Skip(1)
+                            .Select(e => int.Parse(e[1..]))
+                            .OrderBy(e => e)
+                            .ToList();
                         if (numbers.Count - 1 != numbers[^1])
                         {
-                            throw new InvalidOperationException($"Missing alias in the list: {string.Join(",", group.Select(e => e))}");
+                            throw new InvalidOperationException(
+                                $"Missing alias in the list: {string.Join(",", group.Select(e => e))}"
+                            );
                         }
                     }
 
@@ -117,13 +136,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                 public override Expression? Visit(Expression? expression)
                 {
                     var visitedExpression = base.Visit(expression);
-                    if (visitedExpression is TableExpressionBase tableExpressionBase
+                    if (
+                        visitedExpression is TableExpressionBase tableExpressionBase
                         && !_visitedTableExpressionBases.Contains(tableExpressionBase)
-                        && tableExpressionBase.Alias != null)
+                        && tableExpressionBase.Alias != null
+                    )
                     {
                         if (_usedAliases.Contains(tableExpressionBase.Alias))
                         {
-                            throw new InvalidOperationException($"Duplicate alias: {tableExpressionBase.Alias}");
+                            throw new InvalidOperationException(
+                                $"Duplicate alias: {tableExpressionBase.Alias}"
+                            );
                         }
 
                         _usedAliases.Add(tableExpressionBase.Alias);

@@ -73,7 +73,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return _underlyingParameter.GetAttributes();
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             _underlyingParameter.AddSynthesizedAttributes(moduleBuilder, ref attributes);
         }
@@ -149,9 +152,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _underlyingParameter.NotNullIfParameterNotNull; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default)
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default
+        )
         {
-            return _underlyingParameter.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            return _underlyingParameter.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         #endregion

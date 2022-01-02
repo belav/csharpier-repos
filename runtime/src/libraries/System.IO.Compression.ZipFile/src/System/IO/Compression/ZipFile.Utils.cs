@@ -13,7 +13,13 @@ namespace System.IO.Compression
         private const char PathSeparatorChar = '/';
         private const string PathSeparatorString = "/";
 
-        public static string EntryFromPath(string entry, int offset, int length, ref char[] buffer, bool appendPathSeparator = false)
+        public static string EntryFromPath(
+            string entry,
+            int offset,
+            int length,
+            ref char[] buffer,
+            bool appendPathSeparator = false
+        )
         {
             Debug.Assert(length <= entry.Length - offset);
             Debug.Assert(buffer != null);
@@ -21,8 +27,10 @@ namespace System.IO.Compression
             // Remove any leading slashes from the entry name:
             while (length > 0)
             {
-                if (entry[offset] != Path.DirectorySeparatorChar &&
-                    entry[offset] != Path.AltDirectorySeparatorChar)
+                if (
+                    entry[offset] != Path.DirectorySeparatorChar
+                    && entry[offset] != Path.AltDirectorySeparatorChar
+                )
                     break;
 
                 offset++;
@@ -71,7 +79,11 @@ namespace System.IO.Compression
 
         public static bool IsDirEmpty(DirectoryInfo possiblyEmptyDir)
         {
-            using (IEnumerator<string> enumerator = Directory.EnumerateFileSystemEntries(possiblyEmptyDir.FullName).GetEnumerator())
+            using (
+                IEnumerator<string> enumerator = Directory
+                    .EnumerateFileSystemEntries(possiblyEmptyDir.FullName)
+                    .GetEnumerator()
+            )
                 return !enumerator.MoveNext();
         }
     }

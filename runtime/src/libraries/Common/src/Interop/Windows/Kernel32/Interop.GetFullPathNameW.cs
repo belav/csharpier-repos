@@ -11,11 +11,17 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use GetFullPathName or PathHelper.
         /// </summary>
-        [GeneratedDllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true,
+            SetLastError = true
+        )]
         internal static partial uint GetFullPathNameW(
             ref char lpFileName,
             uint nBufferLength,
             ref char lpBuffer,
-            IntPtr lpFilePart);
+            IntPtr lpFilePart
+        );
     }
 }

@@ -21,15 +21,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CompleteStatement
     {
         private static string CreateTestWithMethodCall(string code)
         {
-            return
-@"class C
+            return @"class C
     {
         static void Main(string[] args)
         {
             int x = 1;
             int y = 2;
             int[] a = { 1,2 }
-            " + code + @"
+            "
+                + code
+                + @"
 
             int z = 4;
         }
@@ -50,23 +51,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CompleteStatement
         [InlineData("partial void M(object o$$)", "partial void M(object o)")]
         [InlineData("abstract void M(object o$$)", "abstract void M(object o)")]
         [InlineData("abstract void M($$object o)", "abstract void M(object o)")]
-        [InlineData("abstract void M(object o = default(object$$))", "abstract void M(object o = default(object))")]
-        [InlineData("abstract void M(object o = default($$object))", "abstract void M(object o = default(object))")]
-        [InlineData("abstract void M(object o = $$default(object))", "abstract void M(object o = default(object))")]
+        [InlineData(
+            "abstract void M(object o = default(object$$))",
+            "abstract void M(object o = default(object))"
+        )]
+        [InlineData(
+            "abstract void M(object o = default($$object))",
+            "abstract void M(object o = default(object))"
+        )]
+        [InlineData(
+            "abstract void M(object o = $$default(object))",
+            "abstract void M(object o = default(object))"
+        )]
         [InlineData("public record C(int X, $$int Y)", "public record C(int X, int Y)")]
         [InlineData("public record C(int X, int$$ Y)", "public record C(int X, int Y)")]
         [InlineData("public record C(int X, int Y$$)", "public record C(int X, int Y)")]
         [InlineData("public record class C(int X, int Y$$)", "public record class C(int X, int Y)")]
-        [InlineData("public record struct C(int X, int Y$$)", "public record struct C(int X, int Y)")]
+        [InlineData(
+            "public record struct C(int X, int Y$$)",
+            "public record struct C(int X, int Y)"
+        )]
         public void ParameterList_CouldBeHandled(string signature, string expectedSignature)
         {
-            var code = $@"
+            var code =
+                $@"
 public class Class1
 {{
     {signature}
 }}";
 
-            var expected = $@"
+            var expected =
+                $@"
 public class Class1
 {{
     {expectedSignature};$$
@@ -78,13 +93,15 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_InterfaceMethod()
         {
-            var code = @"
+            var code =
+                @"
 public interface I
 {
     public void M(object o$$)
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public interface I
 {
     public void M(object o);$$
@@ -101,7 +118,8 @@ public interface I
         [InlineData("partial void Method($$object o) { }")]
         public void ParameterList_NotHandled(string signature)
         {
-            var code = $@"
+            var code =
+                $@"
 public class Class1
 {{
     {signature}
@@ -194,7 +212,9 @@ public class Class1
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x$$, y) //Comments");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y);$$ //Comments");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y);$$ //Comments"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -234,15 +254,19 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentListOfMethodInvocation_MultiLine()
         {
-            var code = CreateTestWithMethodCall(@"
+            var code = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
     x$$, 
-    y)");
+    y)"
+            );
 
-            var expected = CreateTestWithMethodCall(@"
+            var expected = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
     x, 
-    y);$$");
+    y);$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -250,17 +274,21 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentListOfMethodInvocation_MultiLine3()
         {
-            var code = CreateTestWithMethodCall(@"
+            var code = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
     x$$, 
     y
-    )");
+    )"
+            );
 
-            var expected = CreateTestWithMethodCall(@"
+            var expected = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
     x, 
     y
-    );$$");
+    );$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -274,7 +302,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM($$x, y.ToString())");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -284,7 +314,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x$$, y.ToString())");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -294,7 +326,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, $$y.ToString())");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -304,7 +338,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToS$$tring())");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -314,7 +350,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString$$())");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -324,7 +362,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString($$))");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -334,7 +374,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString()$$)");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -342,7 +384,6 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentListOfNestedMethodInvocation8()
         {
-
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString())$$");
 
             VerifyNoSpecialSemicolonHandling(code);
@@ -351,10 +392,13 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentListOfNestedMethodInvocation9()
         {
+            var code = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, ClassC.MethodM(4,ClassC.MethodM(5,ClassC.MethodM(6,7$$))))"
+            );
 
-            var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, ClassC.MethodM(4,ClassC.MethodM(5,ClassC.MethodM(6,7$$))))");
-
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, ClassC.MethodM(4,ClassC.MethodM(5,ClassC.MethodM(6,7))));$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, ClassC.MethodM(4,ClassC.MethodM(5,ClassC.MethodM(6,7))));$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -364,7 +408,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString($$));");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x, y.ToString());$$;");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x, y.ToString());$$;"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -374,7 +420,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString($$), y)");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString(), y);$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x.ToString(), y);$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -384,7 +432,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM($$x.ToString(), y)");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString(), y);$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x.ToString(), y);$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -394,7 +444,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString($$), y)");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString(), y);$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x.ToString(), y);$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -404,7 +456,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString()$$, y)");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString(), y);$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x.ToString(), y);$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -414,7 +468,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString(), y$$)");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString(), y);$$");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x.ToString(), y);$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -424,7 +480,9 @@ var test = ClassC.MethodM(
         {
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString($$), y);");
 
-            var expected = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x.ToString(), y);$$;");
+            var expected = CreateTestWithMethodCall(
+                @"var test = ClassC.MethodM(x.ToString(), y);$$;"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -432,15 +490,19 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentListOfNestedMethodInvocation_MultiLine()
         {
-            var code = CreateTestWithMethodCall(@"
+            var code = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
                 x.ToString(), 
-                y$$)");
+                y$$)"
+            );
 
-            var expected = CreateTestWithMethodCall(@"
+            var expected = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
                 x.ToString(), 
-                y);$$");
+                y);$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -448,17 +510,21 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentListOfNestedMethodInvocation_MultiLine2()
         {
-            var code = CreateTestWithMethodCall(@"
+            var code = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
                 x.ToString(), 
                 y$$
-                )");
+                )"
+            );
 
-            var expected = CreateTestWithMethodCall(@"
+            var expected = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
                 x.ToString(), 
                 y
-                );$$");
+                );$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -466,17 +532,21 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentListOfNestedMethodInvocation_MultiLine3()
         {
-            var code = CreateTestWithMethodCall(@"
+            var code = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
                 x.ToString(), 
                 ""y""$$
-                )");
+                )"
+            );
 
-            var expected = CreateTestWithMethodCall(@"
+            var expected = CreateTestWithMethodCall(
+                @"
 var test = ClassC.MethodM(
                 x.ToString(), 
                 ""y""
-                );$$");
+                );$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -630,7 +700,6 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentList_Array_MissingOuter()
         {
-
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x[0], x[1]$$");
 
             VerifyNoSpecialSemicolonHandling(code);
@@ -639,7 +708,6 @@ var test = ClassC.MethodM(
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ArgumentList_Array_MissingInner()
         {
-
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(x[0], x[1)$$");
 
             VerifyNoSpecialSemicolonHandling(code);
@@ -653,7 +721,7 @@ var test = ClassC.MethodM(
         public void FieldInitializer_NoParens()
         {
             var code =
-@"
+                @"
 class C
 {
     int i = 4$$
@@ -667,7 +735,7 @@ class C
         public void FieldInitializer2()
         {
             var code =
-@"
+                @"
 class C
 {
     int i = Min(2$$,3)
@@ -675,7 +743,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     int i = Min(2,3);$$
@@ -689,7 +757,7 @@ class C
         public void FieldInitializer2b_MissingParen()
         {
             var code =
-@"
+                @"
 class C
 {
     int i = Min(2$$,3
@@ -703,7 +771,7 @@ class C
         public void FieldInitializer3()
         {
             var code =
-@"
+                @"
 class C
 {
     int i = Min(Max(4,5$$),3)
@@ -711,7 +779,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     int i = Min(Max(4,5),3);$$
@@ -725,7 +793,7 @@ class C
         public void FieldInitializer3b_MissingInner()
         {
             var code =
-@"
+                @"
 class C
 {
     int i = Min(Max(4,5$$,3)
@@ -743,7 +811,7 @@ class C
         public void ForLoopSingleInitializer1()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -759,7 +827,7 @@ class C
         public void ForLoopSingleInitializer2()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -775,7 +843,7 @@ class C
         public void ForLoopSingleInitializer3()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -796,7 +864,7 @@ class C
         public void ForLoopSingleInitializer_MissingParen()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -812,7 +880,7 @@ class C
         public void ForLoopNoStatements()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -828,7 +896,7 @@ class C
         public void ForLoopNoStatements2()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -844,7 +912,7 @@ class C
         public void ForLoopNoStatements3()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -860,7 +928,7 @@ class C
         public void ForLoopNoStatements4()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -876,7 +944,7 @@ class C
         public void ForLoopNoStatements5()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -892,7 +960,7 @@ class C
         public void ForLoopMultistatementInitializer1()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -908,7 +976,7 @@ class C
         public void ForLoopMultistatementInitializer2()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -924,7 +992,7 @@ class C
         public void ForLoopMultistatementInitializer3()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -940,7 +1008,7 @@ class C
         public void ForLoopMultistatementInitializer4()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -956,7 +1024,7 @@ class C
         public void ForLoopMultistatementInitializer5()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -972,7 +1040,7 @@ class C
         public void ForLoopMultistatementInitializer6()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -988,7 +1056,7 @@ class C
         public void ForLoopMultistatementInitializer7()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main()
@@ -1004,7 +1072,7 @@ class C
         public void ForLoopNewInInitializer1()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1023,7 +1091,7 @@ public class C1
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1048,7 +1116,7 @@ public class C1
         public void ForLoopNewInInitializer_MissingOneParen()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1074,7 +1142,7 @@ public class C1
         {
             // only adding one closing paren
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1099,7 +1167,7 @@ public class C1
         public void ForLoopDeclaration()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1109,7 +1177,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1125,7 +1193,7 @@ class C
         public void ForLoopDeclaration2()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1135,7 +1203,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1151,7 +1219,7 @@ class C
         public void ForLoopDeclaration3()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1161,7 +1229,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1177,7 +1245,7 @@ class C
         public void ForLoopDeclaration4()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1187,7 +1255,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1203,7 +1271,7 @@ class C
         public void ForLoopDeclaration_MissingParen()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1213,7 +1281,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1230,7 +1298,7 @@ class C
         {
             // Semicolon location is incorrect https://github.com/dotnet/roslyn/issues/32250
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1241,7 +1309,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1259,7 +1327,7 @@ class C
         {
             // Semicolon location is incorrect https://github.com/dotnet/roslyn/issues/32250
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1271,7 +1339,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1290,7 +1358,7 @@ class C
         {
             // Semicolon location is incorrect https://github.com/dotnet/roslyn/issues/32250
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1301,7 +1369,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1319,7 +1387,7 @@ class C
         {
             // Semicolon location is incorrect https://github.com/dotnet/roslyn/issues/32250
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1331,7 +1399,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1348,7 +1416,7 @@ class C
         public void ForLoopInitializers_MissingParen()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1359,7 +1427,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1376,7 +1444,7 @@ class C
         public void ForLoopCondition()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1386,7 +1454,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1402,7 +1470,7 @@ class C
         public void ForLoopConditionIsNull()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1420,7 +1488,7 @@ class C
         public void ForLoopConditionIsNull2()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1431,7 +1499,7 @@ class C
         }
 ";
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1448,7 +1516,7 @@ class C
         public void ForLoopIncrement()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1458,7 +1526,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1474,7 +1542,7 @@ class C
         public void ForLoopBody()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1487,7 +1555,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1506,7 +1574,7 @@ class C
         public void ForLoopObjectInitializer_MissingParen()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1528,7 +1596,7 @@ public class Goo
         public void ForLoopObjectInitializer()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1550,7 +1618,7 @@ public class Goo
         public void ForLoopObjectInitializer_MissingBrace()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1576,7 +1644,7 @@ public class Goo
         public void Indexer()
         {
             var code =
-@"
+                @"
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
@@ -1588,7 +1656,7 @@ class SampleCollection<T>
     }
 }";
             var expected =
-@"
+                @"
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
@@ -1607,7 +1675,7 @@ class SampleCollection<T>
         public void Indexer2()
         {
             var code =
-@"
+                @"
 class test
 {
     int[] array = { 1, 2, 3 };
@@ -1619,7 +1687,7 @@ class test
 }
 ";
             var expected =
-@"
+                @"
 class test
 {
     int[] array = { 1, 2, 3 };
@@ -1638,7 +1706,7 @@ class test
         public void Indexer3()
         {
             var code =
-@"
+                @"
 class C
 {
     int[] array = { 1, 2, 3 };
@@ -1650,7 +1718,7 @@ class C
 }
 ";
             var expected =
-@"
+                @"
 class C
 {
     int[] array = { 1, 2, 3 };
@@ -1669,7 +1737,7 @@ class C
         public void Indexer4()
         {
             var code =
-@"
+                @"
 class C
 {
     int[] array = { 1, 2, 3 };
@@ -1681,7 +1749,7 @@ class C
 }
 ";
             var expected =
-@"
+                @"
 class C
 {
     int[] array = { 1, 2, 3 };
@@ -1704,7 +1772,7 @@ class C
         public void ObjectInitializer()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1727,7 +1795,7 @@ public class Goo
         public void ObjectInitializer2()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1750,7 +1818,7 @@ public class Goo
         public void ObjectInitializer3()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1773,7 +1841,7 @@ public class Goo
         public void ObjectInitializer4()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1796,7 +1864,7 @@ public class Goo
         public void ObjectInitializer_MissingBrace()
         {
             var code =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1812,7 +1880,7 @@ public class Goo
 }
 ";
             var expected =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1838,7 +1906,8 @@ public class Goo
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void PropertyAccessors1()
         {
-            var code = @"
+            var code =
+                @"
 public class ClassC
 {
     private int xValue = 7;
@@ -1851,7 +1920,8 @@ public class ClassC
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class ClassC
 {
     private int xValue = 7;
@@ -1870,7 +1940,8 @@ public class ClassC
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void PropertyAccessors2()
         {
-            var code = @"
+            var code =
+                @"
 public class ClassC
 {
     private int xValue = 7;
@@ -1883,7 +1954,8 @@ public class ClassC
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class ClassC
 {
     private int xValue = 7;
@@ -1902,7 +1974,8 @@ public class ClassC
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void PropertyAccessors3()
         {
-            var code = @"
+            var code =
+                @"
 public class Person
 {
    private string firstName;
@@ -1923,7 +1996,8 @@ public class Person
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void PropertyAccessors4()
         {
-            var code = @"
+            var code =
+                @"
 public class SaleItem
 {
    string name;
@@ -1940,7 +2014,8 @@ public class SaleItem
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void PropertyAccessors5()
         {
-            var code = @"
+            var code =
+                @"
 public class SaleItem
 {
    string name;
@@ -1957,7 +2032,8 @@ public class SaleItem
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void PropertyAccessors6()
         {
-            var code = @"
+            var code =
+                @"
 public class SaleItem
 {
    string name;
@@ -1967,7 +2043,8 @@ public class SaleItem
       set => name = value;
    }
 }";
-            var expected = @"
+            var expected =
+                @"
 public class SaleItem
 {
    string name;
@@ -1984,7 +2061,8 @@ public class SaleItem
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void PropertyAccessors7()
         {
-            var code = @"
+            var code =
+                @"
 public class SaleItem
 {
    public string Name 
@@ -2001,7 +2079,8 @@ public class SaleItem
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParenthesizedExpression_Assignment1()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2010,7 +2089,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2025,7 +2105,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParenthesizedExpression_Assignment2()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2034,7 +2115,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2049,7 +2131,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParenthesizedExpression_Assignment3()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2059,7 +2142,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2075,7 +2159,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParenthesizedExpression_ForLoop()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2087,7 +2172,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2105,7 +2191,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParenthesizedExpression_ForLoop2()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2117,7 +2204,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2135,7 +2223,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParenthesizedExpression_ForLoop3()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2147,7 +2236,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2165,7 +2255,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParenthesizedExpression_ForEach()
         {
-            var code = @"
+            var code =
+                @"
     public class Class1
     {
         static void Main(string[] args)
@@ -2190,7 +2281,7 @@ public class Class1
         public void ParenthesizedExpression_GoTo2()
         {
             var code =
-@"
+                @"
 static void Main()
 {
     int n = 1;
@@ -2207,7 +2298,7 @@ static void Main()
 ";
 
             var expected =
-@"
+                @"
 static void Main()
 {
     int n = 1;
@@ -2229,7 +2320,7 @@ static void Main()
         public void ParenthesizedExpression_Switch()
         {
             var code =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2253,7 +2344,7 @@ class Program
         public void ParenthesizedExpression_Switch2()
         {
             var code =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2277,7 +2368,7 @@ class Program
         public void ParenthesizedExpression_Switch3()
         {
             var code =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2295,7 +2386,7 @@ class Program
 }
 ";
             var expected =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2320,7 +2411,7 @@ class Program
         public void ParenthesizedExpression_While()
         {
             var code =
-@"
+                @"
 using System;
 class Program
 {
@@ -2342,7 +2433,7 @@ class Program
         public void ParenthesizedExpression_While2()
         {
             var code =
-@"
+                @"
 using System;
 class Program
 {
@@ -2364,7 +2455,7 @@ class Program
         public void ParenthesizedExpression_While3()
         {
             var code =
-@"
+                @"
 using System;
 class Program
 {
@@ -2379,7 +2470,7 @@ class Program
 }
 ";
             var expected =
-@"
+                @"
 using System;
 class Program
 {
@@ -2404,7 +2495,8 @@ class Program
         [InlineData("default($$object)", "default(object)")]
         public void DefaultExpression_Handled(string expression, string expectedExpression)
         {
-            var code = $@"
+            var code =
+                $@"
 public class Class1
 {{
     void M()
@@ -2413,7 +2505,8 @@ public class Class1
     }}
 }}";
 
-            var expected = $@"
+            var expected =
+                $@"
 public class Class1
 {{
     void M()
@@ -2431,7 +2524,8 @@ public class Class1
         [InlineData("typeof($$object)", "typeof(object)")]
         public void TypeOfExpression_Handled(string expression, string expectedExpression)
         {
-            var code = $@"
+            var code =
+                $@"
 public class Class1
 {{
     void M()
@@ -2440,7 +2534,8 @@ public class Class1
     }}
 }}";
 
-            var expected = $@"
+            var expected =
+                $@"
 public class Class1
 {{
     void M()
@@ -2456,7 +2551,8 @@ public class Class1
         [WorkItem(52365, "https://github.com/dotnet/roslyn/issues/52365")]
         public void TupleExpression_Handled()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2465,7 +2561,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2484,7 +2581,8 @@ public class Class1
         [InlineData("default($$object")]
         public void DefaultExpression_NotHandled(string expression)
         {
-            var code = $@"
+            var code =
+                $@"
 public class Class1
 {{
     void M()
@@ -2503,7 +2601,8 @@ public class Class1
         [InlineData("unchecked($$3 + 3)", "unchecked(3 + 3)")]
         public void CheckedExpression_Handled(string expression, string expectedExpression)
         {
-            var code = $@"
+            var code =
+                $@"
 public class Class1
 {{
     void M()
@@ -2512,7 +2611,8 @@ public class Class1
     }}
 }}";
 
-            var expected = $@"
+            var expected =
+                $@"
 public class Class1
 {{
     void M()
@@ -2535,7 +2635,8 @@ public class Class1
         [InlineData("unchecked($$3 + 3")]
         public void CheckedExpression_NotHandled(string expression)
         {
-            var code = $@"
+            var code =
+                $@"
 public class Class1
 {{
     void M()
@@ -2550,7 +2651,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ThrowStatement_MissingBoth()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2567,7 +2669,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ThrowStatement()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -2578,7 +2681,8 @@ public class Class1
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 public class Class1
 {
     void M()
@@ -2596,7 +2700,7 @@ public class Class1
         public void DontComplete_SemicolonBeforeClassDeclaration()
         {
             var code =
-@"$$
+                @"$$
 class C
 {
 }";
@@ -2608,7 +2712,7 @@ class C
         public void DontCompleteStatment_DocComments()
         {
             var code =
-@"
+                @"
 /// Testing $$
 class C
 {
@@ -2621,7 +2725,7 @@ class C
         public void DontComplete_FormatString()
         {
             var code =
-@"
+                @"
 class C
 {
     void Main()
@@ -2637,7 +2741,7 @@ class C
         public void DontComplete_EmptyStatement()
         {
             var code =
-@"
+                @"
 class C
 {
     void Main()
@@ -2653,7 +2757,7 @@ class C
         public void DontComplete_EmptyStatement2()
         {
             var code =
-@"
+                @"
 class C
 {
     void Main()
@@ -2669,7 +2773,7 @@ class C
         public void DoWhile()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2683,7 +2787,7 @@ public class C
     }
 }";
             var expected =
- @"
+                @"
 public class C
 {
     void M()
@@ -2703,7 +2807,7 @@ public class C
         public void DoWhile2()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2724,7 +2828,7 @@ public class C
         public void DoWhile3()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2745,7 +2849,7 @@ public class C
         public void DoWhile4()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2760,7 +2864,7 @@ public class C
 }";
 
             var expected =
-@"
+                @"
 public class C
 {
     void M()
@@ -2782,7 +2886,7 @@ public class C
         public void DoWhile5()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2797,7 +2901,7 @@ public class C
 }";
 
             var expected =
-@"
+                @"
 public class C
 {
     void M()
@@ -2819,7 +2923,7 @@ public class C
         public void DoWhile6()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2834,7 +2938,7 @@ public class C
 }";
 
             var expected =
-@"
+                @"
 public class C
 {
     void M()
@@ -2855,7 +2959,7 @@ public class C
         public void DoWhile_MissingParen()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2870,7 +2974,7 @@ public class C
 }";
 
             var expected =
-@"
+                @"
 public class C
 {
     void M()
@@ -2891,7 +2995,7 @@ public class C
         public void DontComplete_Break()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2913,7 +3017,7 @@ public class C
         public void DontComplete_Break2()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2935,7 +3039,7 @@ public class C
         public void DontComplete_Break3()
         {
             var code =
-@"
+                @"
 public class C
 {
     void M()
@@ -2957,7 +3061,7 @@ public class C
         public void DontComplete_Checked()
         {
             var code =
-@"
+                @"
  class Program
     {
         static void Main(string[] args)
@@ -2988,7 +3092,7 @@ public class C
         public void DontComplete_Unchecked()
         {
             var code =
-@"
+                @"
  class Program
     {
         static void Main(string[] args)
@@ -3019,7 +3123,7 @@ public class C
         public void DontComplete_Fixed()
         {
             var code =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -3048,7 +3152,7 @@ class Program
         public void DontComplete_Continue()
         {
             var code =
-@"
+                @"
 class ContinueTest
 {
     static void Main()
@@ -3071,7 +3175,7 @@ class ContinueTest
         public void DontComplete_Continue2()
         {
             var code =
-@"
+                @"
 class ContinueTest
 {
     static void Main()
@@ -3094,7 +3198,7 @@ class ContinueTest
         public void DontComplete_Continue3()
         {
             var code =
-@"
+                @"
 class ContinueTest
 {
     static void Main()
@@ -3117,7 +3221,7 @@ class ContinueTest
         public void DontComplete_GoTo()
         {
             var code =
-@"
+                @"
 static void Main()
 {
     int n = 1;
@@ -3141,7 +3245,7 @@ static void Main()
         public void DontComplete_IfStatement()
         {
             var code =
-@"
+                @"
 class Program
 {
     void M()
@@ -3162,7 +3266,7 @@ class Program
         public void DontComplete_Labeled()
         {
             var code =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -3181,7 +3285,7 @@ class Program
         public void DontComplete_IfStatement2()
         {
             var code =
-@"
+                @"
 class Program
 {
     void M()
@@ -3298,7 +3402,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_VerbatimStringAsMethodArgument_EndOfLine_NotEndOfString()
         {
-            var code = @"
+            var code =
+                @"
             var code = Foo(@""$$
 "") ;
 ";
@@ -3309,8 +3414,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_VerbatimStringAsMethodArgument_EndOfString_NotEndOfLine()
         {
-
-            var code = @"
+            var code =
+                @"
             var code = Foo(@""  $$"" //comments
 );
 ";
@@ -3328,7 +3433,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Attribute()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class Program
@@ -3350,7 +3456,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Attribute2()
         {
-            var code = @"
+            var code =
+                @"
 [assembly: System.Reflection.AssemblyVersionAttribute(null$$)]
 class Program
 {
@@ -3361,7 +3468,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Attribute3()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -3385,7 +3493,8 @@ class A
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Attribute4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Reflection;
 
@@ -3413,7 +3522,8 @@ static class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Attribute5()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Reflection;
 
@@ -3441,7 +3551,8 @@ static class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Attribute6()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class Program
@@ -3463,7 +3574,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Using()
         {
-            var code = @"
+            var code =
+                @"
 using System.Linq$$
 ";
             VerifyNoSpecialSemicolonHandling(code);
@@ -3472,7 +3584,8 @@ using System.Linq$$
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Using2()
         {
-            var code = @"
+            var code =
+                @"
 using System.Linq$$;
 ";
             VerifyNoSpecialSemicolonHandling(code);
@@ -3481,7 +3594,8 @@ using System.Linq$$;
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void DontComplete_Using3()
         {
-            var code = @"
+            var code =
+                @"
 using System.$$Linq
 ";
             VerifyNoSpecialSemicolonHandling(code);
@@ -3491,7 +3605,8 @@ using System.$$Linq
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void AtEndOfLineOutsideParens()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -3510,7 +3625,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void OutsideParensBeforeSpaceDot()
         {
-            var code = @"
+            var code =
+                @"
 public class Class1
 {
     void M()
@@ -3528,7 +3644,8 @@ public class Class1
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void BeforeAttribute()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
 private const string s = 
@@ -3546,7 +3663,8 @@ private const string s =
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ElementBindingExpression()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -3555,7 +3673,8 @@ class C
         var value = data?[0$$]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -3571,7 +3690,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void BeforeElementBindingExpression()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -3587,7 +3707,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void AfterElementBindingExpression()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -3604,7 +3725,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ImplicitElementAccessSyntax()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -3615,7 +3737,8 @@ class C
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -3633,7 +3756,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void BeforeImplicitElementAccessSyntax()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -3651,7 +3775,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void AfterImplicitElementAccessSyntax()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -3669,7 +3794,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void AttributeParsedAsElementAccessExpression()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 internal class TestMethodAttribute : Attribute
 {
@@ -3677,7 +3803,8 @@ internal class TestMethodAttribute : Attribute
 
     [Test]
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 internal class TestMethodAttribute : Attribute
 {
@@ -3692,7 +3819,8 @@ internal class TestMethodAttribute : Attribute
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void MemberAccessOffOfMethod()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3701,7 +3829,8 @@ class Program
         var t = s.ToLower($$).Substring(1);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3717,7 +3846,8 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void LinqQuery()
         {
-            var code = @"
+            var code =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -3731,7 +3861,8 @@ class Query
             .Select(x2 => x1 + x2));
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -3752,7 +3883,8 @@ class Query
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void LinqQuery2()
         {
-            var code = @"
+            var code =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -3765,7 +3897,8 @@ class Query
             .Select(x => x + x);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -3785,7 +3918,8 @@ class Query
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void BinaryExpression()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
     void M()
@@ -3798,7 +3932,8 @@ class D
         return v;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class D
 {
     void M()
@@ -3818,7 +3953,8 @@ class D
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void BinaryExpression2()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
     void M()
@@ -3831,7 +3967,8 @@ class D
         return v;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class D
 {
     void M()
@@ -3851,7 +3988,8 @@ class D
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void AsOperator()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
     void M()
@@ -3864,7 +4002,8 @@ class D
         return v.ToString();
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class D
 {
     void M()
@@ -3884,7 +4023,8 @@ class D
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void TernaryOperator()
         {
-            var code = @"
+            var code =
+                @"
 class Query
 {
     void Main(string[] args)
@@ -3899,7 +4039,8 @@ class Query
         return j;
     }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Query
 {
     void Main(string[] args)
@@ -3921,7 +4062,8 @@ class Query
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void SemicolonInCharacterLiteral()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
     void Main(string[]args)
@@ -3934,7 +4076,8 @@ class D
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class D
 {
     void Main(string[]args)
@@ -3954,7 +4097,8 @@ class D
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void IncompleteLambda()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -3970,7 +4114,8 @@ class C
     private void M(Func<object, int> p) { }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class C
@@ -3989,8 +4134,11 @@ class C
             VerifyTypingSemicolon(code, expected);
         }
 
-        internal override ICommandHandler GetCommandHandler(TestWorkspace workspace)
-            => workspace.ExportProvider.GetExportedValues<ICommandHandler>().OfType<CompleteStatementCommandHandler>().Single();
+        internal override ICommandHandler GetCommandHandler(TestWorkspace workspace) =>
+            workspace.ExportProvider
+                .GetExportedValues<ICommandHandler>()
+                .OfType<CompleteStatementCommandHandler>()
+                .Single();
 
         [WorkItem(32337, "https://github.com/dotnet/roslyn/issues/32337")]
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
@@ -4005,12 +4153,14 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_DelegateDeclaration()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     delegate void Del(string str$$)
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     delegate void Del(string str);$$
@@ -4022,7 +4172,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_DelegateDeclaration2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public delegate TResult Blah<in T, out TResult$$>(T arg)
@@ -4034,12 +4185,14 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_DelegateDeclaration3()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public delegate TResult Blah<in T, out TResult>(T arg$$)
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     public delegate TResult Blah<in T, out TResult>(T arg);$$
@@ -4051,14 +4204,16 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_MultilineDelegateDeclaration()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     delegate void Del(string str$$,
         int i,
         string str2)
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     delegate void Del(string str,
@@ -4072,7 +4227,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_Constructor()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
     public D($$)
@@ -4086,7 +4242,8 @@ class D
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_Destructor()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
     public D()
@@ -4104,7 +4261,8 @@ class D
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void ParameterList_MethodDeclaration()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
    void M($$)
@@ -4114,7 +4272,10 @@ class D
             VerifyNoSpecialSemicolonHandling(code);
         }
 
-        [WorkItem(917499, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems/edit/917499")]
+        [WorkItem(
+            917499,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems/edit/917499"
+        )]
         [WpfTheory, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         [InlineData("/$$* comments */")]
         [InlineData("/*$$ comments */")]
@@ -4131,7 +4292,10 @@ class D
             VerifyNoSpecialSemicolonHandling(code);
         }
 
-        [WorkItem(917499, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems/edit/917499")]
+        [WorkItem(
+            917499,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems/edit/917499"
+        )]
         [WpfTheory, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         [InlineData("$$/* comments */")]
         [InlineData("/* comments */$$")]
@@ -4143,7 +4307,8 @@ class D
             var code = CreateTestWithMethodCall(@"var test = ClassC.MethodM(" + argument + ")");
 
             var expected = CreateTestWithMethodCall(
-                @"var test = ClassC.MethodM(" + argument.Remove(argument.IndexOf("$$"), 2) + ");$$");
+                @"var test = ClassC.MethodM(" + argument.Remove(argument.IndexOf("$$"), 2) + ");$$"
+            );
 
             VerifyTypingSemicolon(code, expected);
         }
@@ -4152,7 +4317,8 @@ class D
         [WpfFact, Trait(Traits.Feature, Traits.Features.CompleteStatement)]
         public void BrokenCode_ReturnIfCaretDoesNotMove()
         {
-            var code = @"
+            var code =
+                @"
 class D
 {
   public Delegate Task<int> Handles(int num)$$
@@ -4164,7 +4330,8 @@ class D
         [WorkItem(37874, "https://github.com/dotnet/roslyn/pull/37874")]
         public void TestWithSettingTurnedOff()
         {
-            var code = @"
+            var code =
+                @"
 public class ClassC
 {
     private int xValue = 7;
@@ -4178,14 +4345,23 @@ public class ClassC
 }";
             var expected = code.Replace("$$", ";$$");
 
-            Verify(code, expected, ExecuteTest,
+            Verify(
+                code,
+                expected,
+                ExecuteTest,
                 setOptionsOpt: workspace =>
                 {
                     var globalOptions = workspace.GetService<IGlobalOptionService>();
-                    globalOptions.SetGlobalOption(new OptionKey(FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon), false);
-                });
+                    globalOptions.SetGlobalOption(
+                        new OptionKey(
+                            FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon
+                        ),
+                        false
+                    );
+                }
+            );
         }
-        protected override TestWorkspace CreateTestWorkspace(string code)
-            => TestWorkspace.CreateCSharp(code);
+        protected override TestWorkspace CreateTestWorkspace(string code) =>
+            TestWorkspace.CreateCSharp(code);
     }
 }

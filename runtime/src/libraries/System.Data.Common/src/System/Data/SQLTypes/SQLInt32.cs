@@ -16,13 +16,15 @@ namespace System.Data.SqlTypes
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     [XmlSchemaProvider("GetXsdType")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public struct SqlInt32 : INullable, IComparable, IXmlSerializable
     {
         private bool m_fNotNull; // false if null, the default ctor (plain 0) will make it Null. Do not rename (binary serialization)
         private int m_value; // Do not rename (binary serialization)
 
-        private const long s_iIntMin = int.MinValue;   // minimum (signed) int value
+        private const long s_iIntMin = int.MinValue; // minimum (signed) int value
         private const long s_lBitNotIntMax = ~int.MaxValue;
 
         // constructor
@@ -81,7 +83,6 @@ namespace System.Data.SqlTypes
             else
                 return new SqlInt32(int.Parse(s, null));
         }
-
 
         // Unary operators
         public static SqlInt32 operator -(SqlInt32 x)
@@ -181,7 +182,6 @@ namespace System.Data.SqlTypes
         {
             return (x.IsNull || y.IsNull) ? Null : new SqlInt32(x.m_value ^ y.m_value);
         }
-
 
         // Implicit conversions
 
@@ -284,7 +284,9 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlInt32 x, SqlInt32 y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value == y.m_value);
+            return (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(x.m_value == y.m_value);
         }
 
         public static SqlBoolean operator !=(SqlInt32 x, SqlInt32 y)
@@ -304,12 +306,16 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <=(SqlInt32 x, SqlInt32 y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value <= y.m_value);
+            return (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         public static SqlBoolean operator >=(SqlInt32 x, SqlInt32 y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value >= y.m_value);
+            return (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------
@@ -484,8 +490,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -511,7 +519,10 @@ namespace System.Data.SqlTypes
             return IsNull ? 0 : Value.GetHashCode();
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

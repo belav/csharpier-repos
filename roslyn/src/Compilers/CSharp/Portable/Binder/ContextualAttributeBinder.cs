@@ -36,10 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </remarks>
         internal Symbol AttributedMember
         {
-            get
-            {
-                return _attributedMember;
-            }
+            get { return _attributedMember; }
         }
 
         /// <summary>
@@ -63,10 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal Symbol AttributeTarget
         {
-            get
-            {
-                return _attributeTarget;
-            }
+            get { return _attributeTarget; }
         }
     }
 }

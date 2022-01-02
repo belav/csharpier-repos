@@ -43,7 +43,8 @@ internal class TestServiceContext : ServiceContext
             new IHeartbeatHandler[] { DateHeaderValueManager, heartbeatManager },
             new SystemClock(),
             DebuggerWrapper.Singleton,
-            Log);
+            Log
+        );
 
         MockSystemClock = null;
         SystemClock = heartbeatManager;
@@ -59,10 +60,7 @@ internal class TestServiceContext : ServiceContext
         DateHeaderValueManager = new DateHeaderValueManager();
         ConnectionManager = new ConnectionManager(Log, ResourceCounter.Unlimited);
         HttpParser = new HttpParser<Http1ParsingHandler>(Log.IsEnabled(LogLevel.Information));
-        ServerOptions = new KestrelServerOptions
-        {
-            AddServerHeader = false
-        };
+        ServerOptions = new KestrelServerOptions { AddServerHeader = false };
 
         DateHeaderValueManager.OnHeartbeat(SystemClock.UtcNow);
     }
@@ -71,7 +69,8 @@ internal class TestServiceContext : ServiceContext
 
     public MockSystemClock MockSystemClock { get; set; }
 
-    public Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } = System.Buffers.PinnedBlockMemoryPoolFactory.Create;
+    public Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } =
+        System.Buffers.PinnedBlockMemoryPoolFactory.Create;
 
     public string DateHeaderValue => DateHeaderValueManager.GetDateHeaderValues().String;
 }

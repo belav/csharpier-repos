@@ -24,10 +24,8 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InitPageBasicTest()
         {
-            var init = Utils.CreateStartPage(p =>
-                                             p.Write("this is the init page "));
-            var page = Utils.CreatePage(p =>
-                                        p.Write("hello world"));
+            var init = Utils.CreateStartPage(p => p.Write("this is the init page "));
+            var page = Utils.CreatePage(p => p.Write("hello world"));
 
             init.ChildPage = page;
 
@@ -45,10 +43,8 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InitSubfolderTest()
         {
-            var init = Utils.CreateStartPage(p =>
-                                             p.Write("this is the init page "));
-            var page = Utils.CreatePage(p =>
-                                        p.Write("hello world"), "~/folder1/index.cshtml");
+            var init = Utils.CreateStartPage(p => p.Write("this is the init page "));
+            var page = Utils.CreatePage(p => p.Write("hello world"), "~/folder1/index.cshtml");
 
             init.ChildPage = page;
 
@@ -76,30 +72,40 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InitPageLayoutTest()
         {
-            var init = Utils.CreateStartPage(p =>
-            {
-                p.Layout = "Layout.cshtml";
-                p.Write(" this is the init page ");
-                Assert.Equal("~/Layout.cshtml", p.Layout);
-            });
-            var page = Utils.CreatePage(p =>
-            {
-                p.PageData["Title"] = "IndexCshtmlPage";
-                p.Write("hello world");
-            });
-            var layoutPage = Utils.CreatePage(p =>
-            {
-                p.Write("layout start ");
-                p.Write(p.PageData["Title"]);
-                p.WriteLiteral(p.RenderBody());
-                p.Write(" layout end");
-            }, "~/Layout.cshtml");
+            var init = Utils.CreateStartPage(
+                p =>
+                {
+                    p.Layout = "Layout.cshtml";
+                    p.Write(" this is the init page ");
+                    Assert.Equal("~/Layout.cshtml", p.Layout);
+                }
+            );
+            var page = Utils.CreatePage(
+                p =>
+                {
+                    p.PageData["Title"] = "IndexCshtmlPage";
+                    p.Write("hello world");
+                }
+            );
+            var layoutPage = Utils.CreatePage(
+                p =>
+                {
+                    p.Write("layout start ");
+                    p.Write(p.PageData["Title"]);
+                    p.WriteLiteral(p.RenderBody());
+                    p.Write(" layout end");
+                },
+                "~/Layout.cshtml"
+            );
 
             init.ChildPage = page;
             Utils.AssignObjectFactoriesAndDisplayModeProvider(init, page, layoutPage);
 
             var result = Utils.RenderWebPage(page, init);
-            Assert.Equal("layout start IndexCshtmlPage this is the init page hello world layout end", result);
+            Assert.Equal(
+                "layout start IndexCshtmlPage this is the init page hello world layout end",
+                result
+            );
         }
 
         // _pagestart.cshtml sets the LayoutPage to be null
@@ -113,7 +119,8 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("<init1>");
                     p.RunPage();
                     p.WriteLiteral("</init1>");
-                });
+                }
+            );
             var init2path = "~/folder1/_pagestart.cshtml";
             var init2 = Utils.CreateStartPage(
                 p =>
@@ -122,11 +129,11 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("<init2>");
                     p.RunPage();
                     p.WriteLiteral("</init2>");
-                }, init2path);
-            var page = Utils.CreatePage(p =>
-                                        p.Write("hello world"), "~/folder1/index.cshtml");
-            var layoutPage = Utils.CreatePage(p =>
-                                              p.Write("layout page"), "~/Layout.cshtml");
+                },
+                init2path
+            );
+            var page = Utils.CreatePage(p => p.Write("hello world"), "~/folder1/index.cshtml");
+            var layoutPage = Utils.CreatePage(p => p.Write("layout page"), "~/Layout.cshtml");
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layoutPage, init1, init2);
 
@@ -148,14 +155,16 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("<init1>");
                     p.RunPage();
                     p.WriteLiteral("</init1>");
-                });
-            var layoutPage = Utils.CreatePage(p =>
-                                              p.Write("layout page"), "~/Layout.cshtml");
-            var page = Utils.CreatePage(p =>
-            {
-                p.Layout = null;
-                p.Write("hello world");
-            });
+                }
+            );
+            var layoutPage = Utils.CreatePage(p => p.Write("layout page"), "~/Layout.cshtml");
+            var page = Utils.CreatePage(
+                p =>
+                {
+                    p.Layout = null;
+                    p.Write("hello world");
+                }
+            );
             Utils.AssignObjectFactoriesAndDisplayModeProvider(init1, layoutPage, page);
             init1.ChildPage = page;
             var result = Utils.RenderWebPage(page, init1);
@@ -172,14 +181,16 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("<init1>");
                     p.RunPage();
                     p.WriteLiteral("</init1>");
-                });
-            var layoutPage = Utils.CreatePage(p =>
-                                              p.Write("layout page"), "~/Layout.cshtml");
-            var page = Utils.CreatePage(p =>
-            {
-                p.Layout = "";
-                p.Write("hello world");
-            });
+                }
+            );
+            var layoutPage = Utils.CreatePage(p => p.Write("layout page"), "~/Layout.cshtml");
+            var page = Utils.CreatePage(
+                p =>
+                {
+                    p.Layout = "";
+                    p.Write("hello world");
+                }
+            );
             Utils.AssignObjectFactoriesAndDisplayModeProvider(init1, layoutPage, page);
             init1.ChildPage = page;
             var result = Utils.RenderWebPage(page, init1);
@@ -205,9 +216,9 @@ namespace System.Web.WebPages.Test
                     p.Write("init page start ");
                     p.RunPage();
                     p.Write(" init page end");
-                });
-            var page = Utils.CreatePage(p =>
-                                        p.Write("hello world"));
+                }
+            );
+            var page = Utils.CreatePage(p => p.Write("hello world"));
 
             init.ChildPage = page;
 
@@ -239,7 +250,8 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("<init1>");
                     p.RunPage();
                     p.WriteLiteral("</init1>");
-                });
+                }
+            );
             var init2path = "~/folder1/_pagestart.cshtml";
             var init2 = Utils.CreateStartPage(
                 p =>
@@ -247,9 +259,10 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("<init2>");
                     p.RunPage();
                     p.WriteLiteral("</init2>");
-                }, init2path);
-            var page = Utils.CreatePage(p =>
-                                        p.Write("hello world"), "~/folder1/index.cshtml");
+                },
+                init2path
+            );
+            var page = Utils.CreatePage(p => p.Write("hello world"), "~/folder1/index.cshtml");
 
             init1.ChildPage = init2;
             init2.ChildPage = page;
@@ -282,7 +295,8 @@ namespace System.Web.WebPages.Test
                     p.Write(" ");
                     p.Write(p.PageData["key2"]);
                 },
-                "~/folder1/index.cshtml");
+                "~/folder1/index.cshtml"
+            );
 
             init1.ChildPage = init2;
             init2.ChildPage = page;
@@ -312,16 +326,18 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write("init page ");
                     p.Write(p.RenderPage("subpage.cshtml", "init_data"));
-                });
+                }
+            );
             var subpagePath = "~/subpage.cshtml";
             var subpage = Utils.CreatePage(
                 p =>
                 {
                     p.Write("subpage ");
                     p.Write(p.PageData[0]);
-                }, subpagePath);
-            var page = Utils.CreatePage(p =>
-                                        p.Write(" hello world"));
+                },
+                subpagePath
+            );
+            var page = Utils.CreatePage(p => p.Write(" hello world"));
 
             init.ChildPage = page;
             Utils.AssignObjectFactoriesAndDisplayModeProvider(init, page, subpage);
@@ -363,13 +379,15 @@ namespace System.Web.WebPages.Test
                         p.Write("Exception: " + e.Message);
                     }
                     p.WriteLiteral("</init>");
-                });
+                }
+            );
             var page = Utils.CreatePage(
                 p =>
                 {
                     p.WriteLiteral("hello world ");
                     throw new InvalidOperationException("exception from index.cshtml");
-                });
+                }
+            );
 
             init.ChildPage = page;
 
@@ -381,7 +399,9 @@ namespace System.Web.WebPages.Test
         {
             internal object GetBuildManager()
             {
-                return typeof(BuildManager).GetField("_theBuildManager", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                return typeof(BuildManager)
+                    .GetField("_theBuildManager", BindingFlags.Static | BindingFlags.NonPublic)
+                    .GetValue(null);
             }
         }
 
@@ -389,25 +409,35 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void ExecuteWithinInitTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
-            {
-                Utils.CreateHttpRuntime("/subfolder1/website1");
-                new HostingEnvironment();
-                var stringSet = Activator.CreateInstance(typeof(BuildManager).Assembly.GetType("System.Web.Util.StringSet"), true);
-                typeof(BuildManager).GetField("_forbiddenTopLevelDirectories", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(new MockInitPage().GetBuildManager(), stringSet);
-                ;
-
-                var init = new MockInitPage()
+            AppDomainUtils.RunInSeparateAppDomain(
+                () =>
                 {
-                    VirtualPath = "~/_pagestart.cshtml",
-                    ExecuteAction = p => { },
-                };
-                var page = Utils.CreatePage(p => { });
+                    Utils.CreateHttpRuntime("/subfolder1/website1");
+                    new HostingEnvironment();
+                    var stringSet = Activator.CreateInstance(
+                        typeof(BuildManager).Assembly.GetType("System.Web.Util.StringSet"),
+                        true
+                    );
+                    typeof(BuildManager)
+                        .GetField(
+                            "_forbiddenTopLevelDirectories",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        )
+                        .SetValue(new MockInitPage().GetBuildManager(), stringSet);
+                    ;
 
-                Utils.AssignObjectFactoriesAndDisplayModeProvider(page, init);
+                    var init = new MockInitPage()
+                    {
+                        VirtualPath = "~/_pagestart.cshtml",
+                        ExecuteAction = p => { },
+                    };
+                    var page = Utils.CreatePage(p => { });
 
-                var result = Utils.RenderWebPage(page);
-            });
+                    Utils.AssignObjectFactoriesAndDisplayModeProvider(page, init);
+
+                    var result = Utils.RenderWebPage(page);
+                }
+            );
         }
 
         [Fact]
@@ -466,12 +496,21 @@ namespace System.Web.WebPages.Test
         public void GetStartPageReturnsStartPageFromCurrentDirectoryIfExists()
         {
             // Arrange
-            var initPage = Utils.CreateStartPage(p => p.Write("<init>"), "~/subdir/_pagestart.vbhtml");
+            var initPage = Utils.CreateStartPage(
+                p => p.Write("<init>"),
+                "~/subdir/_pagestart.vbhtml"
+            );
             var page = Utils.CreatePage(p => p.Write("test"), "~/subdir/_index.cshtml");
             var objectFactory = Utils.AssignObjectFactoriesAndDisplayModeProvider(page, initPage);
 
             // Act
-            var result = StartPage.GetStartPage(page, objectFactory, null, WebPageHttpHandler.StartPageFileName, new string[] { "cshtml", "vbhtml" });
+            var result = StartPage.GetStartPage(
+                page,
+                objectFactory,
+                null,
+                WebPageHttpHandler.StartPageFileName,
+                new string[] { "cshtml", "vbhtml" }
+            );
 
             // Assert
             Assert.Equal(initPage, result);
@@ -486,7 +525,13 @@ namespace System.Web.WebPages.Test
             var objectFactory = Utils.AssignObjectFactoriesAndDisplayModeProvider(page, initPage);
 
             // Act
-            var result = StartPage.GetStartPage(page, objectFactory, null, WebPageHttpHandler.StartPageFileName, new string[] { "cshtml", "vbhtml" });
+            var result = StartPage.GetStartPage(
+                page,
+                objectFactory,
+                null,
+                WebPageHttpHandler.StartPageFileName,
+                new string[] { "cshtml", "vbhtml" }
+            );
 
             // Assert
             Assert.Equal(initPage, result);
@@ -499,10 +544,20 @@ namespace System.Web.WebPages.Test
             var subInitPage = Utils.CreateStartPage(null, "~/subdir/_pagestart.vbhtml");
             var initPage = Utils.CreateStartPage(null, "~/_pagestart.vbhtml");
             var page = Utils.CreatePage(null, "~/subdir/subsubdir/subsubsubdir/test.cshtml");
-            var objectFactory = Utils.AssignObjectFactoriesAndDisplayModeProvider(page, initPage, subInitPage);
+            var objectFactory = Utils.AssignObjectFactoriesAndDisplayModeProvider(
+                page,
+                initPage,
+                subInitPage
+            );
 
             // Act
-            var result = StartPage.GetStartPage(page, objectFactory, null, WebPageHttpHandler.StartPageFileName, new string[] { "cshtml", "vbhtml" });
+            var result = StartPage.GetStartPage(
+                page,
+                objectFactory,
+                null,
+                WebPageHttpHandler.StartPageFileName,
+                new string[] { "cshtml", "vbhtml" }
+            );
 
             // Assert
             Assert.Equal(initPage, result);
@@ -514,11 +569,20 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             var initPage = Utils.CreateStartPage(null, "~/_pagestart.vbhtml");
-            var page = Utils.CreatePage(null, "~/subdir/subsubdir/subsubsubdir/subsubsubsubdir/why-does-this-remind-me-of-a-movie-title.cshtml");
+            var page = Utils.CreatePage(
+                null,
+                "~/subdir/subsubdir/subsubsubdir/subsubsubsubdir/why-does-this-remind-me-of-a-movie-title.cshtml"
+            );
             var objectFactory = Utils.AssignObjectFactoriesAndDisplayModeProvider(page, initPage);
 
             // Act
-            var result = StartPage.GetStartPage(page, objectFactory, null, WebPageHttpHandler.StartPageFileName, new string[] { "cshtml", "vbhtml" });
+            var result = StartPage.GetStartPage(
+                page,
+                objectFactory,
+                null,
+                WebPageHttpHandler.StartPageFileName,
+                new string[] { "cshtml", "vbhtml" }
+            );
 
             // Assert
             Assert.Equal(initPage, result);
@@ -531,10 +595,20 @@ namespace System.Web.WebPages.Test
             var subInitPage = Utils.CreateStartPage(null, "~/subdir/_pagestart.jshtml");
             var initPage = Utils.CreateStartPage(null, "~/_pagestart.vbhtml");
             var page = Utils.CreatePage(null, "~/subdir/test.cshtml");
-            var objectFactory = Utils.AssignObjectFactoriesAndDisplayModeProvider(page, initPage, subInitPage);
+            var objectFactory = Utils.AssignObjectFactoriesAndDisplayModeProvider(
+                page,
+                initPage,
+                subInitPage
+            );
 
             // Act
-            var result = StartPage.GetStartPage(page, objectFactory, null, WebPageHttpHandler.StartPageFileName, new string[] { "cshtml", "vbhtml" });
+            var result = StartPage.GetStartPage(
+                page,
+                objectFactory,
+                null,
+                WebPageHttpHandler.StartPageFileName,
+                new string[] { "cshtml", "vbhtml" }
+            );
 
             // Assert
             Assert.Equal(initPage, result);
@@ -543,28 +617,40 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void GetStartPage_ThrowsOnNullPage()
         {
-            Assert.ThrowsArgumentNull(() => StartPage.GetStartPage(null, "name", new[] { "cshtml" }), "page");
+            Assert.ThrowsArgumentNull(
+                () => StartPage.GetStartPage(null, "name", new[] { "cshtml" }),
+                "page"
+            );
         }
 
         [Fact]
         public void GetStartPage_ThrowsOnNullFileName()
         {
             var page = Utils.CreatePage(p => p.Write("test"));
-            Assert.ThrowsArgumentNullOrEmptyString(() => StartPage.GetStartPage(page, null, new[] { "cshtml" }), "fileName");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => StartPage.GetStartPage(page, null, new[] { "cshtml" }),
+                "fileName"
+            );
         }
 
         [Fact]
         public void GetStartPage_ThrowsOnEmptyFileName()
         {
             var page = Utils.CreatePage(p => p.Write("test"));
-            Assert.ThrowsArgumentNullOrEmptyString(() => StartPage.GetStartPage(page, String.Empty, new[] { "cshtml" }), "fileName");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => StartPage.GetStartPage(page, String.Empty, new[] { "cshtml" }),
+                "fileName"
+            );
         }
 
         [Fact]
         public void GetStartPage_ThrowsOnNullSupportedExtensions()
         {
             var page = Utils.CreatePage(p => p.Write("test"));
-            Assert.ThrowsArgumentNull(() => StartPage.GetStartPage(page, "name", null), "supportedExtensions");
+            Assert.ThrowsArgumentNull(
+                () => StartPage.GetStartPage(page, "name", null),
+                "supportedExtensions"
+            );
         }
     }
 }

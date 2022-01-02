@@ -20,7 +20,11 @@ public static class TagHelperDescriptorExtensions
             throw new ArgumentNullException(nameof(tagHelper));
         }
 
-        return string.Equals(ViewComponentTagHelperConventions.Kind, tagHelper.Kind, StringComparison.Ordinal);
+        return string.Equals(
+            ViewComponentTagHelperConventions.Kind,
+            tagHelper.Kind,
+            StringComparison.Ordinal
+        );
     }
 
     public static string GetViewComponentName(this TagHelperDescriptor tagHelper)

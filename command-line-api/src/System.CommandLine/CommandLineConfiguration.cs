@@ -36,9 +36,11 @@ namespace System.CommandLine
             bool enableDirectives = true,
             bool enableLegacyDoubleDashBehavior = false,
             LocalizationResources? resources = null,
-            ResponseFileHandling responseFileHandling = ResponseFileHandling.ParseArgsAsLineSeparated,
+            ResponseFileHandling responseFileHandling =
+                ResponseFileHandling.ParseArgsAsLineSeparated,
             IReadOnlyList<InvocationMiddleware>? middlewarePipeline = null,
-            Func<BindingContext, IHelpBuilder>? helpBuilderFactory = null)
+            Func<BindingContext, IHelpBuilder>? helpBuilderFactory = null
+        )
         {
             RootCommand = command ?? throw new ArgumentNullException(nameof(command));
 
@@ -64,7 +66,10 @@ namespace System.CommandLine
                 maxWidth = systemConsole.GetWindowWidth();
             }
 
-            return new HelpBuilder(context.ParseResult.CommandResult.LocalizationResources, maxWidth);
+            return new HelpBuilder(
+                context.ParseResult.CommandResult.LocalizationResources,
+                maxWidth
+            );
         }
 
         private void AddGlobalOptionsToChildren(Command parentCommand)
@@ -115,7 +120,8 @@ namespace System.CommandLine
         /// </summary>
         public LocalizationResources LocalizationResources { get; }
 
-        internal Func<BindingContext, IHelpBuilder> HelpBuilderFactory => _helpBuilderFactory ??= DefaultHelpBuilderFactory;
+        internal Func<BindingContext, IHelpBuilder> HelpBuilderFactory =>
+            _helpBuilderFactory ??= DefaultHelpBuilderFactory;
 
         internal IReadOnlyList<InvocationMiddleware> Middleware { get; }
 

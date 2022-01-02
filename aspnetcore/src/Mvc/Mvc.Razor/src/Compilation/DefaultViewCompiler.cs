@@ -23,7 +23,8 @@ internal class DefaultViewCompiler : IViewCompiler
 
     public DefaultViewCompiler(
         ApplicationPartManager applicationPartManager,
-        ILogger<DefaultViewCompiler> logger)
+        ILogger<DefaultViewCompiler> logger
+    )
     {
         _applicationPartManager = applicationPartManager;
         _logger = logger;
@@ -49,7 +50,8 @@ internal class DefaultViewCompiler : IViewCompiler
         // views that differ only by case.
         var compiledViews = new Dictionary<string, Task<CompiledViewDescriptor>>(
             viewsFeature.ViewDescriptors.Count,
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
 
         foreach (var compiledView in viewsFeature.ViewDescriptors)
         {
@@ -109,11 +111,13 @@ internal class DefaultViewCompiler : IViewCompiler
 
         // Entry does not exist. Attempt to create one.
         _logger.ViewCompilerCouldNotFindFileAtPath(relativePath);
-        return Task.FromResult(new CompiledViewDescriptor
-        {
-            RelativePath = normalizedPath,
-            ExpirationTokens = Array.Empty<IChangeToken>(),
-        });
+        return Task.FromResult(
+            new CompiledViewDescriptor
+            {
+                RelativePath = normalizedPath,
+                ExpirationTokens = Array.Empty<IChangeToken>(),
+            }
+        );
     }
 
     private string GetNormalizedPath(string relativePath)

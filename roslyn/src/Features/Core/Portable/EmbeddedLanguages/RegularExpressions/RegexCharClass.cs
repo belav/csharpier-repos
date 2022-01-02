@@ -4,7 +4,7 @@
 
 #nullable disable
 
-// LICENSING NOTE: The license for this file is from the originating 
+// LICENSING NOTE: The license for this file is from the originating
 // source and not the general https://github.com/dotnet/roslyn license.
 // See https://github.com/dotnet/corefx/blob/68b76c30eafb3647c11e3f766a2645b130ca1448/src/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCharClass.cs
 
@@ -34,9 +34,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         private const char ZeroWidthJoiner = '\u200D';
         private const char ZeroWidthNonJoiner = '\u200C';
 
-        private const string WordClass = "\u0000\u0000\u000A\u0000\u0002\u0004\u0005\u0003\u0001\u0006\u0009\u0013\u0000";
+        private const string WordClass =
+            "\u0000\u0000\u000A\u0000\u0002\u0004\u0005\u0003\u0001\u0006\u0009\u0013\u0000";
 
-        public static readonly Dictionary<string, (string shortDescription, string longDescription)> EscapeCategories =
+        public static readonly Dictionary<
+            string,
+            (string shortDescription, string longDescription)
+        > EscapeCategories =
             new()
             {
                 // Others
@@ -71,7 +75,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 { "Ps", (Regex_punctuation_open, "") },
                 { "Pf", (Regex_punctuation_final_quote, "") },
                 { "Pi", (Regex_punctuation_initial_quote, "") },
-                { "P", (Regex_all_punctuation_characters_short, Regex_all_punctuation_characters_long) },
+                {
+                    "P",
+                    (Regex_all_punctuation_characters_short, Regex_all_punctuation_characters_long)
+                },
                 // Symbols
                 { "Sc", (Regex_symbol_currency, "") },
                 { "Sk", (Regex_symbol_modifier, "") },
@@ -82,8 +89,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 { "Zl", (Regex_separator_line, "") },
                 { "Zp", (Regex_separator_paragraph, "") },
                 { "Zs", (Regex_separator_space, "") },
-                { "Z", (Regex_all_separator_characters_short, Regex_all_separator_characters_long) },
-
+                {
+                    "Z",
+                    (Regex_all_separator_characters_short, Regex_all_separator_characters_long)
+                },
                 { "IsAlphabeticPresentationForms", ("", "") },
                 { "IsArabic", ("", "") },
                 { "IsArabicPresentationForms-A", ("", "") },
@@ -198,12 +207,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 { "_xmlW", ("", "") },
             };
 
-        public static bool IsEscapeCategory(string value)
-            => EscapeCategories.ContainsKey(value);
+        public static bool IsEscapeCategory(string value) => EscapeCategories.ContainsKey(value);
 
         public static bool IsWordChar(VirtualChar r)
         {
-            // unicode characters that do not fit in 16bits are not supported by 
+            // unicode characters that do not fit in 16bits are not supported by
             // .net regex system.
             if (r.Value > char.MaxValue)
                 return false;
@@ -216,8 +224,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             return CharInClass(ch, WordClass) || ch == ZeroWidthJoiner || ch == ZeroWidthNonJoiner;
         }
 
-        internal static bool CharInClass(char ch, string set)
-            => CharInClassRecursive(ch, set, 0);
+        internal static bool CharInClass(char ch, string set) => CharInClassRecursive(ch, set, 0);
 
         internal static bool CharInClassRecursive(char ch, string set, int start)
         {
@@ -246,7 +253,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         /// Determines a character's membership in a character class (via the
         /// string representation of the class).
         /// </summary>
-        private static bool CharInClassInternal(char ch, string set, int start, int mySetLength, int myCategoryLength)
+        private static bool CharInClassInternal(
+            char ch,
+            string set,
+            int start,
+            int mySetLength,
+            int myCategoryLength
+        )
         {
             int min;
             int max;
@@ -269,7 +282,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             // subtractions in the mix, the starting position = start+SETSTART.  Since we know that
             // SETSTART is odd, we can simplify it out of the equation.  But if it changes we need to
             // reverse this check.
-            Debug.Assert((SETSTART & 0x1) == 1, "If SETSTART is not odd, the calculation below this will be reversed");
+            Debug.Assert(
+                (SETSTART & 0x1) == 1,
+                "If SETSTART is not odd, the calculation below this will be reversed"
+            );
             if ((min & 0x1) == (start & 0x1))
             {
                 return true;
@@ -283,7 +299,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             }
         }
 
-        private static bool CharInCategory(char ch, string set, int start, int mySetLength, int myCategoryLength)
+        private static bool CharInCategory(
+            char ch,
+            string set,
+            int start,
+            int mySetLength,
+            int myCategoryLength
+        )
         {
             var chcategory = CharUnicodeInfo.GetUnicodeCategory(ch);
 
@@ -355,7 +377,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         /// This is used for categories which are composed of other categories - L, N, Z, W...
         /// These groups need special treatment when they are negated
         /// </summary>
-        private static bool CharInCategoryGroup(UnicodeCategory chcategory, string category, ref int i)
+        private static bool CharInCategoryGroup(
+            UnicodeCategory chcategory,
+            string category,
+            ref int i
+        )
         {
             i++;
 

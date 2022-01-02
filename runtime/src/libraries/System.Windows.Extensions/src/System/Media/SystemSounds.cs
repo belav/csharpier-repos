@@ -23,7 +23,9 @@ namespace System.Media
 
         public static SystemSound Exclamation
         {
-            get => s_exclamation ?? (s_exclamation = new SystemSound(Interop.User32.MB_ICONEXCLAMATION));
+            get =>
+                s_exclamation
+                ?? (s_exclamation = new SystemSound(Interop.User32.MB_ICONEXCLAMATION));
         }
 
         public static SystemSound Hand

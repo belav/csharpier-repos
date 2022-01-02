@@ -18,7 +18,9 @@ public interface IRemoteAuthenticationService<TRemoteAuthenticationState>
     /// </summary>
     /// <param name="context">The <see cref="RemoteAuthenticationContext{TRemoteAuthenticationState}"/> for authenticating the user.</param>
     /// <returns>The result of the authentication operation.</returns>
-    Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> SignInAsync(RemoteAuthenticationContext<TRemoteAuthenticationState> context);
+    Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> SignInAsync(
+        RemoteAuthenticationContext<TRemoteAuthenticationState> context
+    );
 
     /// <summary>
     /// Completes the sign in operation for a user when it is performed outside of the application origin via a redirect operation followed
@@ -27,7 +29,8 @@ public interface IRemoteAuthenticationService<TRemoteAuthenticationState>
     /// <param name="context">The <see cref="RemoteAuthenticationContext{TRemoteAuthenticationState}"/> for authenticating the user.</param>
     /// <returns>The result of the authentication operation.</returns>
     Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> CompleteSignInAsync(
-        RemoteAuthenticationContext<TRemoteAuthenticationState> context);
+        RemoteAuthenticationContext<TRemoteAuthenticationState> context
+    );
 
     /// <summary>
     /// Signs out a user.
@@ -35,7 +38,8 @@ public interface IRemoteAuthenticationService<TRemoteAuthenticationState>
     /// <param name="context">The <see cref="RemoteAuthenticationContext{TRemoteAuthenticationState}"/> for authenticating the user.</param>
     /// <returns>The result of the authentication operation.</returns>
     Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> SignOutAsync(
-        RemoteAuthenticationContext<TRemoteAuthenticationState> context);
+        RemoteAuthenticationContext<TRemoteAuthenticationState> context
+    );
 
     /// <summary>
     /// Completes the sign out operation for a user when it is performed outside of the application origin via a redirect operation followed
@@ -44,5 +48,6 @@ public interface IRemoteAuthenticationService<TRemoteAuthenticationState>
     /// <param name="context">The <see cref="RemoteAuthenticationContext{TRemoteAuthenticationState}"/> for authenticating the user.</param>
     /// <returns>The result of the authentication operation.</returns>
     Task<RemoteAuthenticationResult<TRemoteAuthenticationState>> CompleteSignOutAsync(
-        RemoteAuthenticationContext<TRemoteAuthenticationState> context);
+        RemoteAuthenticationContext<TRemoteAuthenticationState> context
+    );
 }

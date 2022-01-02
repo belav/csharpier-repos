@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     {
         public readonly RQMethodPropertyOrEventName RqMemberName;
 
-        public RQMethodPropertyOrEvent(RQUnconstructedType containingType, RQMethodPropertyOrEventName memberName)
-            : base(containingType)
+        public RQMethodPropertyOrEvent(
+            RQUnconstructedType containingType,
+            RQMethodPropertyOrEventName memberName
+        ) : base(containingType)
         {
             RqMemberName = memberName;
         }

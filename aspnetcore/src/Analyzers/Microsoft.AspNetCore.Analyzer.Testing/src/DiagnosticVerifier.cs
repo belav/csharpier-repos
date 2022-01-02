@@ -27,9 +27,7 @@ public abstract class DiagnosticVerifier
     private readonly ITestOutputHelper _testOutputHelper;
 
     /// <inheritdoc />
-    protected DiagnosticVerifier() : this(null)
-    {
-    }
+    protected DiagnosticVerifier() : this(null) { }
 
     /// <inheritdoc />
     protected DiagnosticVerifier(ITestOutputHelper testOutputHelper)
@@ -55,7 +53,11 @@ public abstract class DiagnosticVerifier
     /// <param name="analyzer">The analyzer to be run on the sources</param>
     /// <param name="additionalEnabledDiagnostics">Additional diagnostics to enable at Info level</param>
     /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-    protected Task<Diagnostic[]> GetDiagnosticsAsync(string[] sources, DiagnosticAnalyzer analyzer, string[] additionalEnabledDiagnostics)
+    protected Task<Diagnostic[]> GetDiagnosticsAsync(
+        string[] sources,
+        DiagnosticAnalyzer analyzer,
+        string[] additionalEnabledDiagnostics
+    )
     {
         return GetDiagnosticsAsync(GetDocuments(sources), analyzer, additionalEnabledDiagnostics);
     }
@@ -68,7 +70,11 @@ public abstract class DiagnosticVerifier
     /// <param name="analyzer">The analyzer to run on the documents</param>
     /// <param name="additionalEnabledDiagnostics">Additional diagnostics to enable at Info level</param>
     /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-    protected async Task<Diagnostic[]> GetDiagnosticsAsync(Document[] documents, DiagnosticAnalyzer analyzer, string[] additionalEnabledDiagnostics)
+    protected async Task<Diagnostic[]> GetDiagnosticsAsync(
+        Document[] documents,
+        DiagnosticAnalyzer analyzer,
+        string[] additionalEnabledDiagnostics
+    )
     {
         var projects = new HashSet<Project>();
         foreach (var document in documents)
@@ -85,9 +91,9 @@ public abstract class DiagnosticVerifier
             var options = compilation.Options;
             if (additionalEnabledDiagnostics.Length > 0)
             {
-                options = compilation.Options
-                    .WithSpecificDiagnosticOptions(
-                        additionalEnabledDiagnostics.ToDictionary(s => s, s => ReportDiagnostic.Info));
+                options = compilation.Options.WithSpecificDiagnosticOptions(
+                    additionalEnabledDiagnostics.ToDictionary(s => s, s => ReportDiagnostic.Info)
+                );
             }
 
             var compilationWithAnalyzers = compilation
@@ -106,7 +112,13 @@ public abstract class DiagnosticVerifier
             // Filter out non-error diagnostics not produced by our analyzer
             // We want to KEEP errors because we might have written bad code. But sometimes we leave warnings in to make the
             // test code more convenient
-            diags = diags.Where(d => d.Severity == DiagnosticSeverity.Error || analyzer.SupportedDiagnostics.Any(s => s.Id.Equals(d.Id))).ToImmutableArray();
+            diags = diags
+                .Where(
+                    d =>
+                        d.Severity == DiagnosticSeverity.Error
+                        || analyzer.SupportedDiagnostics.Any(s => s.Id.Equals(d.Id))
+                )
+                .ToImmutableArray();
 
             foreach (var diag in diags)
             {
@@ -159,14 +171,27 @@ public abstract class DiagnosticVerifier
 
         Solution = Solution ?? new AdhocWorkspace().CurrentSolution;
 
-        Solution = Solution.AddProject(projectId, TestProjectName, TestProjectName, LanguageNames.CSharp)
-            .WithProjectCompilationOptions(projectId, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        Solution = Solution
+            .AddProject(projectId, TestProjectName, TestProjectName, LanguageNames.CSharp)
+            .WithProjectCompilationOptions(
+                projectId,
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
-        foreach (var defaultCompileLibrary in DependencyContext.Load(GetType().Assembly).CompileLibraries)
+        foreach (
+            var defaultCompileLibrary in DependencyContext.Load(GetType().Assembly).CompileLibraries
+        )
         {
-            foreach (var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(new AppLocalResolver()))
+            foreach (
+                var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(
+                    new AppLocalResolver()
+                )
+            )
             {
-                Solution = Solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(resolveReferencePath));
+                Solution = Solution.AddMetadataReference(
+                    projectId,
+                    MetadataReference.CreateFromFile(resolveReferencePath)
+                );
             }
         }
 
@@ -175,7 +200,9 @@ public abstract class DiagnosticVerifier
         {
             var newFileName = fileNamePrefix + count;
 
-            _testOutputHelper?.WriteLine("Adding file: " + newFileName + Environment.NewLine + source);
+            _testOutputHelper?.WriteLine(
+                "Adding file: " + newFileName + Environment.NewLine + source
+            );
 
             var documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
             Solution = Solution.AddDocument(documentId, newFileName, SourceText.From(source));
@@ -191,7 +218,11 @@ public abstract class DiagnosticVerifier
         {
             foreach (var assembly in library.Assemblies)
             {
-                var dll = Path.Combine(Directory.GetCurrentDirectory(), "refs", Path.GetFileName(assembly));
+                var dll = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "refs",
+                    Path.GetFileName(assembly)
+                );
                 if (File.Exists(dll))
                 {
                     assemblies.Add(dll);

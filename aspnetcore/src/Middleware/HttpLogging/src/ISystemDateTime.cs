@@ -7,6 +7,6 @@ internal interface ISystemDateTime
 {
     /// <summary> 
     /// Retrieves the date and time currently set for this machine.
-    /// </summary> 
+    /// </summary>
     DateTime Now { get; }
 }

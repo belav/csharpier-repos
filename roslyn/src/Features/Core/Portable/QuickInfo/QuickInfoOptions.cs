@@ -13,44 +13,63 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 {
     internal readonly record struct QuickInfoOptions(
         bool ShowRemarksInQuickInfo,
-        bool IncludeNavigationHintsInQuickInfo)
+        bool IncludeNavigationHintsInQuickInfo
+    )
     {
         [ExportSolutionOptionProvider, Shared]
         internal sealed class Metadata : IOptionProvider
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Metadata()
-            {
-            }
+            public Metadata() { }
 
-            public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-                ShowRemarksInQuickInfo,
-                IncludeNavigationHintsInQuickInfo);
+            public ImmutableArray<IOption> Options { get; } =
+                ImmutableArray.Create<IOption>(
+                    ShowRemarksInQuickInfo,
+                    IncludeNavigationHintsInQuickInfo
+                );
 
             private const string FeatureName = "QuickInfoOptions";
 
-            public static readonly PerLanguageOption2<bool> ShowRemarksInQuickInfo = new(
-                FeatureName, "ShowRemarksInQuickInfo", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowRemarks"));
+            public static readonly PerLanguageOption2<bool> ShowRemarksInQuickInfo =
+                new(
+                    FeatureName,
+                    "ShowRemarksInQuickInfo",
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.ShowRemarks"
+                    )
+                );
 
-            public static readonly Option2<bool> IncludeNavigationHintsInQuickInfo = new(
-                FeatureName, "IncludeNavigationHintsInQuickInfo", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.Specific.IncludeNavigationHintsInQuickInfo"));
+            public static readonly Option2<bool> IncludeNavigationHintsInQuickInfo =
+                new(
+                    FeatureName,
+                    "IncludeNavigationHintsInQuickInfo",
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.Specific.IncludeNavigationHintsInQuickInfo"
+                    )
+                );
         }
 
-        public static readonly QuickInfoOptions Default
-          = new(
-              ShowRemarksInQuickInfo: Metadata.ShowRemarksInQuickInfo.DefaultValue,
-              IncludeNavigationHintsInQuickInfo: Metadata.IncludeNavigationHintsInQuickInfo.DefaultValue);
+        public static readonly QuickInfoOptions Default =
+            new(
+                ShowRemarksInQuickInfo: Metadata.ShowRemarksInQuickInfo.DefaultValue,
+                IncludeNavigationHintsInQuickInfo: Metadata.IncludeNavigationHintsInQuickInfo.DefaultValue
+            );
 
-        public static QuickInfoOptions From(Project project)
-           => From(project.Solution.Options, project.Language);
+        public static QuickInfoOptions From(Project project) =>
+            From(project.Solution.Options, project.Language);
 
-        public static QuickInfoOptions From(OptionSet options, string? language)
-          => new(
-              ShowRemarksInQuickInfo: options.GetOption(Metadata.ShowRemarksInQuickInfo, language),
-              IncludeNavigationHintsInQuickInfo: options.GetOption(Metadata.IncludeNavigationHintsInQuickInfo));
-
+        public static QuickInfoOptions From(OptionSet options, string? language) =>
+            new(
+                ShowRemarksInQuickInfo: options.GetOption(
+                    Metadata.ShowRemarksInQuickInfo,
+                    language
+                ),
+                IncludeNavigationHintsInQuickInfo: options.GetOption(
+                    Metadata.IncludeNavigationHintsInQuickInfo
+                )
+            );
     }
 }

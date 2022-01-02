@@ -13,10 +13,7 @@ namespace ILCompiler
 
         public MethodDesc Method { get; }
 
-        public CodeGenerationFailedException(MethodDesc method)
-            : this(method, null)
-        {
-        }
+        public CodeGenerationFailedException(MethodDesc method) : this(method, null) { }
 
         public CodeGenerationFailedException(MethodDesc method, Exception inner)
             : base(String.Format(MessageText, method), inner)

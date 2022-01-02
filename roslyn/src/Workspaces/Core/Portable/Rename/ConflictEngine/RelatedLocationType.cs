@@ -36,7 +36,6 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         /// These are the conflicts that cannot be resolved. E.g.: Declaration Conflict
         /// </summary>
         UnresolvableConflict = 0x8,
-
         UnresolvedConflict = PossiblyResolvableConflict | UnresolvableConflict
     }
 }

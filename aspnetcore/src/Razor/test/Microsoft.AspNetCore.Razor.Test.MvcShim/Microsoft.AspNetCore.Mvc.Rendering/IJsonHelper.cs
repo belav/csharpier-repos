@@ -5,5 +5,4 @@ namespace Microsoft.AspNetCore.Mvc.Rendering;
 
 public interface IJsonHelper
 {
-
 }

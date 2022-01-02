@@ -59,7 +59,10 @@ namespace System.IO
             {
                 // don't include inheritable in our bounds check for share
                 FileShare tempshare = value & ~FileShare.Inheritable;
-                if (tempshare < FileShare.None || tempshare > (FileShare.ReadWrite | FileShare.Delete))
+                if (
+                    tempshare < FileShare.None
+                    || tempshare > (FileShare.ReadWrite | FileShare.Delete)
+                )
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }
@@ -78,7 +81,21 @@ namespace System.IO
             set
             {
                 // NOTE: any change to FileOptions enum needs to be matched here in the error validation
-                if (value != FileOptions.None && (value & ~(FileOptions.WriteThrough | FileOptions.Asynchronous | FileOptions.RandomAccess | FileOptions.DeleteOnClose | FileOptions.SequentialScan | FileOptions.Encrypted | (FileOptions)0x20000000 /* NoBuffering */)) != 0)
+                if (
+                    value != FileOptions.None
+                    && (
+                        value
+                        & ~(
+                            FileOptions.WriteThrough
+                            | FileOptions.Asynchronous
+                            | FileOptions.RandomAccess
+                            | FileOptions.DeleteOnClose
+                            | FileOptions.SequentialScan
+                            | FileOptions.Encrypted
+                            | (FileOptions)0x20000000 /* NoBuffering */
+                        )
+                    ) != 0
+                )
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }
@@ -96,7 +113,14 @@ namespace System.IO
         public long PreallocationSize
         {
             get => _preallocationSize;
-            set => _preallocationSize = value >= 0 ? value : throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_NeedNonNegNum);
+            set =>
+                _preallocationSize =
+                    value >= 0
+                        ? value
+                        : throw new ArgumentOutOfRangeException(
+                              nameof(value),
+                              SR.ArgumentOutOfRange_NeedNonNegNum
+                          );
         }
 
         /// <summary>
@@ -107,7 +131,14 @@ namespace System.IO
         public int BufferSize
         {
             get => _bufferSize;
-            set => _bufferSize = value >= 0 ? value : throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_NeedNonNegNum);
+            set =>
+                _bufferSize =
+                    value >= 0
+                        ? value
+                        : throw new ArgumentOutOfRangeException(
+                              nameof(value),
+                              SR.ArgumentOutOfRange_NeedNonNegNum
+                          );
         }
     }
 }

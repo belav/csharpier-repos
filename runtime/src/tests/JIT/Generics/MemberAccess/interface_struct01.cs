@@ -6,24 +6,15 @@ using System;
 
 interface IGen<T>
 {
-    T Property
-    {
-        get;
-        set;
-    }
+    T Property { get; set; }
 
-    T this[int i]
-    {
-        get;
-        set;
-    }
+    T this[int i] { get; set; }
 
     T Method(T t);
 }
 
 struct Gen<T> : IGen<T>
 {
-
     public T Field;
 
     public T[] TArray;
@@ -44,7 +35,6 @@ struct Gen<T> : IGen<T>
     {
         return t;
     }
-
 }
 
 public class Test_interface_struct01
@@ -110,6 +100,5 @@ public class Test_interface_struct01
         }
 
         return ret;
-
     }
 }

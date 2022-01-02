@@ -47,7 +47,12 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
         if (extraHeaders != null && extraHeaders.Count > 0)
         {
             var encodingSelector = EncodingSelector;
-            if (ReferenceEquals(encodingSelector, KestrelServerOptions.DefaultHeaderEncodingSelector))
+            if (
+                ReferenceEquals(
+                    encodingSelector,
+                    KestrelServerOptions.DefaultHeaderEncodingSelector
+                )
+            )
             {
                 CopyExtraHeaders(ref buffer, extraHeaders);
             }
@@ -57,7 +62,10 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
             }
         }
 
-        static void CopyExtraHeaders(ref BufferWriter<PipeWriter> buffer, Dictionary<string, StringValues> headers)
+        static void CopyExtraHeaders(
+            ref BufferWriter<PipeWriter> buffer,
+            Dictionary<string, StringValues> headers
+        )
         {
             foreach (var kv in headers)
             {
@@ -74,8 +82,11 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
             }
         }
 
-        static void CopyExtraHeadersCustomEncoding(ref BufferWriter<PipeWriter> buffer, Dictionary<string, StringValues> headers,
-            Func<string, Encoding?> encodingSelector)
+        static void CopyExtraHeadersCustomEncoding(
+            ref BufferWriter<PipeWriter> buffer,
+            Dictionary<string, StringValues> headers,
+            Func<string, Encoding?> encodingSelector
+        )
         {
             foreach (var kv in headers)
             {
@@ -115,7 +126,9 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
     [DoesNotReturn]
     private static void ThrowInvalidContentLengthException(string value)
     {
-        throw new InvalidOperationException(CoreStrings.FormatInvalidContentLength_InvalidNumber(value));
+        throw new InvalidOperationException(
+            CoreStrings.FormatInvalidContentLength_InvalidNumber(value)
+        );
     }
 
     [DoesNotReturn]
@@ -158,9 +171,7 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
             _current = default;
             _currentKnownType = default;
             _hasUnknown = collection.MaybeUnknown != null;
-            _unknownEnumerator = _hasUnknown
-                ? collection.MaybeUnknown!.GetEnumerator()
-                : default;
+            _unknownEnumerator = _hasUnknown ? collection.MaybeUnknown!.GetEnumerator() : default;
         }
 
         public KeyValuePair<string, StringValues> Current => _current;
@@ -169,9 +180,7 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
 
         object IEnumerator.Current => _current;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Reset()
         {
@@ -179,5 +188,4 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
             _next = _currentBits != 0 ? BitOperations.TrailingZeroCount(_currentBits) : -1;
         }
     }
-
 }

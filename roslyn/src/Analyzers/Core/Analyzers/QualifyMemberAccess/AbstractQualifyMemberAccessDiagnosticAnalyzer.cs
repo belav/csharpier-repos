@@ -18,32 +18,67 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
     internal abstract class AbstractQualifyMemberAccessDiagnosticAnalyzer<
         TLanguageKindEnum,
         TExpressionSyntax,
-        TSimpleNameSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TSimpleNameSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TLanguageKindEnum : struct
         where TExpressionSyntax : SyntaxNode
         where TSimpleNameSyntax : TExpressionSyntax
     {
         protected AbstractQualifyMemberAccessDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.AddQualificationDiagnosticId,
-                   EnforceOnBuildValues.AddQualification,
-                   options: ImmutableHashSet.Create<IPerLanguageOption>(CodeStyleOptions2.QualifyFieldAccess, CodeStyleOptions2.QualifyPropertyAccess, CodeStyleOptions2.QualifyMethodAccess, CodeStyleOptions2.QualifyEventAccess),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Member_access_should_be_qualified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Add_this_or_Me_qualification), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.AddQualificationDiagnosticId,
+                EnforceOnBuildValues.AddQualification,
+                options: ImmutableHashSet.Create<IPerLanguageOption>(
+                    CodeStyleOptions2.QualifyFieldAccess,
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    CodeStyleOptions2.QualifyMethodAccess,
+                    CodeStyleOptions2.QualifyEventAccess
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Member_access_should_be_qualified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Add_this_or_Me_qualification),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
         public override bool OpenFileOnly(OptionSet options)
         {
-            var qualifyFieldAccessOption = options.GetOption(CodeStyleOptions2.QualifyFieldAccess, GetLanguageName()).Notification;
-            var qualifyPropertyAccessOption = options.GetOption(CodeStyleOptions2.QualifyPropertyAccess, GetLanguageName()).Notification;
-            var qualifyMethodAccessOption = options.GetOption(CodeStyleOptions2.QualifyMethodAccess, GetLanguageName()).Notification;
-            var qualifyEventAccessOption = options.GetOption(CodeStyleOptions2.QualifyEventAccess, GetLanguageName()).Notification;
+            var qualifyFieldAccessOption =
+                options.GetOption(
+                    CodeStyleOptions2.QualifyFieldAccess,
+                    GetLanguageName()
+                ).Notification;
+            var qualifyPropertyAccessOption =
+                options.GetOption(
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    GetLanguageName()
+                ).Notification;
+            var qualifyMethodAccessOption =
+                options.GetOption(
+                    CodeStyleOptions2.QualifyMethodAccess,
+                    GetLanguageName()
+                ).Notification;
+            var qualifyEventAccessOption =
+                options.GetOption(
+                    CodeStyleOptions2.QualifyEventAccess,
+                    GetLanguageName()
+                ).Notification;
 
-            return !(qualifyFieldAccessOption == NotificationOption2.Warning || qualifyFieldAccessOption == NotificationOption2.Error ||
-                     qualifyPropertyAccessOption == NotificationOption2.Warning || qualifyPropertyAccessOption == NotificationOption2.Error ||
-                     qualifyMethodAccessOption == NotificationOption2.Warning || qualifyMethodAccessOption == NotificationOption2.Error ||
-                     qualifyEventAccessOption == NotificationOption2.Warning || qualifyEventAccessOption == NotificationOption2.Error);
+            return !(
+                qualifyFieldAccessOption == NotificationOption2.Warning
+                || qualifyFieldAccessOption == NotificationOption2.Error
+                || qualifyPropertyAccessOption == NotificationOption2.Warning
+                || qualifyPropertyAccessOption == NotificationOption2.Error
+                || qualifyMethodAccessOption == NotificationOption2.Warning
+                || qualifyMethodAccessOption == NotificationOption2.Error
+                || qualifyEventAccessOption == NotificationOption2.Warning
+                || qualifyEventAccessOption == NotificationOption2.Error
+            );
         }
 
         protected abstract string GetLanguageName();
@@ -54,16 +89,26 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
         /// <c>MyBase.</c>, or <c>MyClass.</c>.
         /// </summary>
         /// <returns>True if the member access can be qualified; otherwise, False.</returns>
-        protected abstract bool CanMemberAccessBeQualified(ISymbol containingSymbol, SyntaxNode node);
+        protected abstract bool CanMemberAccessBeQualified(
+            ISymbol containingSymbol,
+            SyntaxNode node
+        );
 
         protected abstract bool IsAlreadyQualifiedMemberAccess(TExpressionSyntax node);
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterOperationAction(AnalyzeOperation, OperationKind.FieldReference, OperationKind.PropertyReference, OperationKind.MethodReference, OperationKind.Invocation);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterOperationAction(
+                AnalyzeOperation,
+                OperationKind.FieldReference,
+                OperationKind.PropertyReference,
+                OperationKind.MethodReference,
+                OperationKind.Invocation
+            );
 
         protected abstract Location GetLocation(IOperation operation);
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         private void AnalyzeOperation(OperationAnalysisContext context)
         {
@@ -75,7 +120,11 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
             switch (context.Operation)
             {
                 case IMemberReferenceOperation memberReferenceOperation:
-                    AnalyzeOperation(context, memberReferenceOperation, memberReferenceOperation.Instance);
+                    AnalyzeOperation(
+                        context,
+                        memberReferenceOperation,
+                        memberReferenceOperation.Instance
+                    );
                     break;
                 case IInvocationOperation invocationOperation:
                     AnalyzeOperation(context, invocationOperation, invocationOperation.Instance);
@@ -85,7 +134,11 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
             }
         }
 
-        private void AnalyzeOperation(OperationAnalysisContext context, IOperation operation, IOperation? instanceOperation)
+        private void AnalyzeOperation(
+            OperationAnalysisContext context,
+            IOperation operation,
+            IOperation? instanceOperation
+        )
         {
             // this is a static reference so we don't care if it's qualified
             if (instanceOperation == null)
@@ -102,7 +155,10 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
             // Initializer lists are IInvocationOperation which if passed to GetApplicableOptionFromSymbolKind
             // will incorrectly fetch the options for method call.
             // We still want to handle InstanceReferenceKind.ContainingTypeInstance
-            if ((instanceOperation as IInstanceReferenceOperation)?.ReferenceKind == InstanceReferenceKind.ImplicitReceiver)
+            if (
+                (instanceOperation as IInstanceReferenceOperation)?.ReferenceKind
+                == InstanceReferenceKind.ImplicitReceiver
+            )
                 return;
 
             // If we can't be qualified (e.g., because we're already qualified with `base.`), we're done.
@@ -110,15 +166,20 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
                 return;
 
             // if we can't find a member then we can't do anything.  Also, we shouldn't qualify
-            // accesses to static members.  
+            // accesses to static members.
             if (IsStaticMemberOrIsLocalFunction(operation))
                 return;
 
             if (instanceOperation.Syntax is not TSimpleNameSyntax simpleName)
                 return;
 
-            var applicableOption = QualifyMembersHelpers.GetApplicableOptionFromSymbolKind(operation);
-            var optionValue = context.GetOption(applicableOption, context.Operation.Syntax.Language);
+            var applicableOption = QualifyMembersHelpers.GetApplicableOptionFromSymbolKind(
+                operation
+            );
+            var optionValue = context.GetOption(
+                applicableOption,
+                context.Operation.Syntax.Language
+            );
 
             var shouldOptionBePresent = optionValue.Value;
             var severity = optionValue.Notification.Severity;
@@ -129,12 +190,15 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
 
             if (!IsAlreadyQualifiedMemberAccess(simpleName))
             {
-                context.ReportDiagnostic(DiagnosticHelper.Create(
-                    Descriptor,
-                    GetLocation(operation),
-                    severity,
-                    additionalLocations: null,
-                    properties: null));
+                context.ReportDiagnostic(
+                    DiagnosticHelper.Create(
+                        Descriptor,
+                        GetLocation(operation),
+                        severity,
+                        additionalLocations: null,
+                        properties: null
+                    )
+                );
             }
         }
 
@@ -142,22 +206,28 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
         {
             return operation switch
             {
-                IMemberReferenceOperation memberReferenceOperation => IsStaticMemberOrIsLocalFunctionHelper(memberReferenceOperation.Member),
-                IInvocationOperation invocationOperation => IsStaticMemberOrIsLocalFunctionHelper(invocationOperation.TargetMethod),
+                IMemberReferenceOperation memberReferenceOperation
+                  => IsStaticMemberOrIsLocalFunctionHelper(memberReferenceOperation.Member),
+                IInvocationOperation invocationOperation
+                  => IsStaticMemberOrIsLocalFunctionHelper(invocationOperation.TargetMethod),
                 _ => throw ExceptionUtilities.UnexpectedValue(operation),
             };
 
             static bool IsStaticMemberOrIsLocalFunctionHelper(ISymbol symbol)
             {
-                return symbol == null || symbol.IsStatic || symbol is IMethodSymbol { MethodKind: MethodKind.LocalFunction };
+                return symbol == null
+                    || symbol.IsStatic
+                    || symbol is IMethodSymbol { MethodKind: MethodKind.LocalFunction };
             }
         }
     }
 
     internal static class QualifyMembersHelpers
     {
-        public static PerLanguageOption2<CodeStyleOption2<bool>> GetApplicableOptionFromSymbolKind(SymbolKind symbolKind)
-            => symbolKind switch
+        public static PerLanguageOption2<CodeStyleOption2<bool>> GetApplicableOptionFromSymbolKind(
+            SymbolKind symbolKind
+        ) =>
+            symbolKind switch
             {
                 SymbolKind.Field => CodeStyleOptions2.QualifyFieldAccess,
                 SymbolKind.Property => CodeStyleOptions2.QualifyPropertyAccess,
@@ -166,11 +236,15 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
                 _ => throw ExceptionUtilities.UnexpectedValue(symbolKind),
             };
 
-        internal static PerLanguageOption2<CodeStyleOption2<bool>> GetApplicableOptionFromSymbolKind(IOperation operation)
-            => operation switch
+        internal static PerLanguageOption2<
+            CodeStyleOption2<bool>
+        > GetApplicableOptionFromSymbolKind(IOperation operation) =>
+            operation switch
             {
-                IMemberReferenceOperation memberReferenceOperation => GetApplicableOptionFromSymbolKind(memberReferenceOperation.Member.Kind),
-                IInvocationOperation invocationOperation => GetApplicableOptionFromSymbolKind(invocationOperation.TargetMethod.Kind),
+                IMemberReferenceOperation memberReferenceOperation
+                  => GetApplicableOptionFromSymbolKind(memberReferenceOperation.Member.Kind),
+                IInvocationOperation invocationOperation
+                  => GetApplicableOptionFromSymbolKind(invocationOperation.TargetMethod.Kind),
                 _ => throw ExceptionUtilities.UnexpectedValue(operation),
             };
     }

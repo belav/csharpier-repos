@@ -19,11 +19,13 @@ namespace Microsoft.CodeAnalysis
 
         // lock _guard to read/write
         private readonly Dictionary<string, Assembly> _loadedAssembliesByPath = new();
-        private readonly Dictionary<string, AssemblyIdentity> _loadedAssemblyIdentitiesByPath = new();
+        private readonly Dictionary<string, AssemblyIdentity> _loadedAssemblyIdentitiesByPath =
+            new();
         private readonly Dictionary<AssemblyIdentity, Assembly> _loadedAssembliesByIdentity = new();
 
         // maps file name to a full path (lock _guard to read/write):
-        private readonly Dictionary<string, HashSet<string>> _knownAssemblyPathsBySimpleName = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, HashSet<string>> _knownAssemblyPathsBySimpleName =
+            new(StringComparer.OrdinalIgnoreCase);
 
         protected abstract Assembly LoadFromPathImpl(string fullPath);
 
@@ -59,7 +61,10 @@ namespace Microsoft.CodeAnalysis
             return LoadFromPathUncheckedCore(fullPath);
         }
 
-        private Assembly LoadFromPathUncheckedCore(string fullPath, AssemblyIdentity identity = null)
+        private Assembly LoadFromPathUncheckedCore(
+            string fullPath,
+            AssemblyIdentity identity = null
+        )
         {
             Debug.Assert(PathUtilities.IsAbsolute(fullPath));
 
@@ -74,7 +79,10 @@ namespace Microsoft.CodeAnalysis
                 else
                 {
                     identity ??= GetOrAddAssemblyIdentity(fullPath);
-                    if (identity != null && _loadedAssembliesByIdentity.TryGetValue(identity, out existingAssembly))
+                    if (
+                        identity != null
+                        && _loadedAssembliesByIdentity.TryGetValue(identity, out existingAssembly)
+                    )
                     {
                         loadedAssembly = existingAssembly;
                     }
@@ -96,7 +104,10 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(PathUtilities.IsAbsolute(fullPath));
             Debug.Assert(assembly != null);
 
-            identity = AddToCache(fullPath, identity ?? AssemblyIdentity.FromAssemblyDefinition(assembly));
+            identity = AddToCache(
+                fullPath,
+                identity ?? AssemblyIdentity.FromAssemblyDefinition(assembly)
+            );
             Debug.Assert(identity != null);
 
             lock (_guard)
@@ -140,7 +151,10 @@ namespace Microsoft.CodeAnalysis
         {
             lock (_guard)
             {
-                if (_loadedAssemblyIdentitiesByPath.TryGetValue(fullPath, out var existingIdentity) && existingIdentity != null)
+                if (
+                    _loadedAssemblyIdentitiesByPath.TryGetValue(fullPath, out var existingIdentity)
+                    && existingIdentity != null
+                )
                 {
                     identity = existingIdentity;
                 }
@@ -181,14 +195,23 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> candidatePaths;
             lock (_guard)
             {
-
                 // First, check if this loader already loaded the requested assembly:
-                if (_loadedAssembliesByIdentity.TryGetValue(requestedIdentity, out var existingAssembly))
+                if (
+                    _loadedAssembliesByIdentity.TryGetValue(
+                        requestedIdentity,
+                        out var existingAssembly
+                    )
+                )
                 {
                     return existingAssembly;
                 }
                 // Second, check if an assembly file of the same simple name was registered with the loader:
-                if (!_knownAssemblyPathsBySimpleName.TryGetValue(requestedIdentity.Name, out var pathList))
+                if (
+                    !_knownAssemblyPathsBySimpleName.TryGetValue(
+                        requestedIdentity.Name,
+                        out var pathList
+                    )
+                )
                 {
                     return null;
                 }

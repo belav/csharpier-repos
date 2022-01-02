@@ -174,7 +174,6 @@ namespace System.Xml.Schema
             XsdSchema = nameTable.Add("schema");
             XdrSchema = nameTable.Add("Schema");
 
-
             QnPCData = new XmlQualifiedName(nameTable.Add("#PCDATA"));
             QnXml = new XmlQualifiedName(nameTable.Add("xml"));
             QnXmlNs = new XmlQualifiedName(nameTable.Add("xmlns"), NsXmlNs);

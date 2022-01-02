@@ -17,15 +17,15 @@ public class RetryHandler : DelegatingHandler
 
     private readonly ILogger _logger;
 
-    public RetryHandler(HttpMessageHandler innerHandler, ILogger logger)
-        : base(innerHandler)
+    public RetryHandler(HttpMessageHandler innerHandler, ILogger logger) : base(innerHandler)
     {
         _logger = logger;
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         HttpResponseMessage response = null;
         for (int i = 0; i < MaxRetries; i++)
@@ -45,8 +45,10 @@ public class RetryHandler : DelegatingHandler
             }
 
             // Retry only on 503 that is expected during IIS startup
-            if (response != null &&
-               (response.IsSuccessStatusCode || response.StatusCode != (HttpStatusCode)503))
+            if (
+                response != null
+                && (response.IsSuccessStatusCode || response.StatusCode != (HttpStatusCode)503)
+            )
             {
                 break;
             }

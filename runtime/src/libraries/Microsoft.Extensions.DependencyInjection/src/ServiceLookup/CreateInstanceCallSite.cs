@@ -4,6 +4,4 @@
 using System;
 using System.Runtime.ExceptionServices;
 
-namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
-{
-}
+namespace Microsoft.Extensions.DependencyInjection.ServiceLookup { }

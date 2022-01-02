@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [CompilerTrait(CompilerFeature.Tuples)]
         public void TupleFieldNameAliasing()
         {
-            var comp = CreateCompilationWithMscorlib40(@"
+            var comp = CreateCompilationWithMscorlib40(
+                @"
 using System;
 
 class C
@@ -47,20 +48,28 @@ class C
         // and t.y is alias for the same field
         Console.Write(t.y);
     }
-}", references: new[] { SystemRuntimeFacadeRef, ValueTupleRef });
+}",
+                references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
+            );
             comp.VerifyDiagnostics(
                 // (16,23): error CS0170: Use of possibly unassigned field 'y'
                 //         Console.Write(t.y);
-                Diagnostic(ErrorCode.ERR_UseDefViolationField, "t.y").WithArguments("y").WithLocation(16, 23),
+                Diagnostic(ErrorCode.ERR_UseDefViolationField, "t.y")
+                    .WithArguments("y")
+                    .WithLocation(16, 23),
                 // (24,23): error CS0170: Use of possibly unassigned field 'Item2'
                 //         Console.Write(t.Item2);
-                Diagnostic(ErrorCode.ERR_UseDefViolationField, "t.Item2").WithArguments("Item2").WithLocation(24, 23));
+                Diagnostic(ErrorCode.ERR_UseDefViolationField, "t.Item2")
+                    .WithArguments("Item2")
+                    .WithLocation(24, 23)
+            );
         }
 
         [Fact]
         public void SelfDefaultConstructor()
         {
-            string program = @"
+            string program =
+                @"
 struct S
 {
     public int x, y;
@@ -75,7 +84,9 @@ struct S
             Assert.Equal(2, constructors.Length);
 
             var sourceConstructor = (MethodSymbol)constructors.First(c => !c.IsImplicitlyDeclared);
-            var synthesizedConstructor = (MethodSymbol)constructors.First(c => c.IsImplicitlyDeclared);
+            var synthesizedConstructor = (MethodSymbol)constructors.First(
+                c => c.IsImplicitlyDeclared
+            );
             Assert.NotEqual(sourceConstructor, synthesizedConstructor);
 
             Assert.Equal(2, sourceConstructor.Parameters.Length);
@@ -86,7 +97,7 @@ struct S
         public void FieldAssignedAndReferenced()
         {
             var text =
-@"using System;
+                @"using System;
  
 class Program
 {
@@ -109,7 +120,7 @@ struct P { public int X; }
         public void TestEmptyStructs()
         {
             var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowStatements(
-@"struct S { }
+                @"struct S { }
 
 class C
 {
@@ -125,7 +136,8 @@ class C
         S s6 = s1;
         S s5 = s4;
     }
-}");
+}"
+            );
             Assert.Equal("s2", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
             Assert.Equal("s4", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));
             Assert.Equal("s3, s4", GetSymbolNamesJoined(dataFlowAnalysisResults.AlwaysAssigned));
@@ -135,7 +147,8 @@ class C
         [WorkItem(545509, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545509")]
         public void StructIndexerReceiver()
         {
-            string program = @"
+            string program =
+                @"
 struct SafeBitVector
 {
     private int _data;
@@ -181,7 +194,8 @@ class SectionInformation2
         [WorkItem(545710, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545710")]
         public void StructFieldWithAssignedPropertyMembers()
         {
-            string program = @"
+            string program =
+                @"
 public struct PointF
 {
     private float x; private float y;
@@ -209,33 +223,38 @@ class GraphicsContext
         public void GenericStructWithPropertyUsingStruct()
         {
             var source =
-@"struct S<T>
+                @"struct S<T>
 {
     S<T[]>? P { get; set; }
 }";
-            CreateCompilation(source, targetFramework: TargetFramework.Mscorlib45).VerifyDiagnostics(
-                // (3,13): error CS0523: Struct member 'S<T>.P' of type 'S<T[]>?' causes a cycle in the struct layout
-                //     S<T[]>? P { get; set; }
-                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "P").WithArguments("S<T>.P", "S<T[]>?").WithLocation(3, 13));
+            CreateCompilation(source, targetFramework: TargetFramework.Mscorlib45)
+                .VerifyDiagnostics(
+                    // (3,13): error CS0523: Struct member 'S<T>.P' of type 'S<T[]>?' causes a cycle in the struct layout
+                    //     S<T[]>? P { get; set; }
+                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "P")
+                        .WithArguments("S<T>.P", "S<T[]>?")
+                        .WithLocation(3, 13)
+                );
         }
 
         [Fact, WorkItem(1017887, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1017887")]
         public void EmptyStructsFromMetadata()
         {
             var comp1 = CreateCompilation(
-@"public struct StructWithReference
+                @"public struct StructWithReference
 {
     string PrivateData;
 }
 public struct StructWithValue
 {
     int PrivateData;
-}");
+}"
+            );
             var sourceReference = new CSharpCompilationReference(comp1);
             var metadataReference = MetadataReference.CreateFromStream(comp1.EmitToStream());
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -246,39 +265,67 @@ public struct StructWithValue
         var v2 = v1;
     }
 }";
-            CreateCompilation(source2,
-                options: TestOptions.ReleaseDll.WithWarningLevel(5),
-                references: new MetadataReference[] { sourceReference }).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18),
-                // (9,18): error CS0165: Use of unassigned local variable 'v1'
-                //         var v2 = v1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "v1").WithArguments("v1").WithLocation(9, 18)
+            CreateCompilation(
+                    source2,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5),
+                    references: new MetadataReference[] { sourceReference }
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18),
+                    // (9,18): error CS0165: Use of unassigned local variable 'v1'
+                    //         var v2 = v1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "v1")
+                        .WithArguments("v1")
+                        .WithLocation(9, 18)
                 );
-            CreateCompilation(source2,
-                options: TestOptions.ReleaseDll.WithWarningLevel(5),
-                references: new MetadataReference[] { metadataReference }).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18),
-                // (9,18): error CS0165: Use of unassigned local variable 'v1'
-                //         var v2 = v1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "v1").WithArguments("v1").WithLocation(9, 18)
+            CreateCompilation(
+                    source2,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5),
+                    references: new MetadataReference[] { metadataReference }
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18),
+                    // (9,18): error CS0165: Use of unassigned local variable 'v1'
+                    //         var v2 = v1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "v1")
+                        .WithArguments("v1")
+                        .WithLocation(9, 18)
                 );
-            CreateCompilation(source2,
-                options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
-                references: new MetadataReference[] { sourceReference }).VerifyDiagnostics(
-                // (9,18): error CS0165: Use of unassigned local variable 'v1'
-                //         var v2 = v1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "v1").WithArguments("v1").WithLocation(9, 18)
+            CreateCompilation(
+                    source2,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    ),
+                    references: new MetadataReference[] { sourceReference }
+                )
+                .VerifyDiagnostics(
+                    // (9,18): error CS0165: Use of unassigned local variable 'v1'
+                    //         var v2 = v1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "v1")
+                        .WithArguments("v1")
+                        .WithLocation(9, 18)
                 );
-            CreateCompilation(source2,
-                options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
-                references: new MetadataReference[] { metadataReference }).VerifyDiagnostics(
-                // (9,18): error CS0165: Use of unassigned local variable 'v1'
-                //         var v2 = v1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "v1").WithArguments("v1").WithLocation(9, 18)
+            CreateCompilation(
+                    source2,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    ),
+                    references: new MetadataReference[] { metadataReference }
+                )
+                .VerifyDiagnostics(
+                    // (9,18): error CS0165: Use of unassigned local variable 'v1'
+                    //         var v2 = v1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "v1")
+                        .WithArguments("v1")
+                        .WithLocation(9, 18)
                 );
         }
 
@@ -286,16 +333,17 @@ public struct StructWithValue
         public void DoNotIgnorePrivateStructFieldsOfTypeParameterTypeFromMetadata()
         {
             var comp1 = CreateCompilation(
-@"public struct GenericStruct<T> where T : class
+                @"public struct GenericStruct<T> where T : class
 {
     T PrivateData;
 }
-");
+"
+            );
             var sourceReference = new CSharpCompilationReference(comp1);
             var metadataReference = MetadataReference.CreateFromStream(comp1.EmitToStream());
 
             var source2 =
-@"class Program<T> where T : class
+                @"class Program<T> where T : class
 {
     public static void Main()
     {
@@ -303,15 +351,21 @@ public struct StructWithValue
         var r2 = r1;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { sourceReference }).VerifyDiagnostics(
-                // (6,18): error CS0165: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(source2, references: new MetadataReference[] { sourceReference })
+                .VerifyDiagnostics(
+                    // (6,18): error CS0165: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
-            CreateCompilation(source2, references: new MetadataReference[] { metadataReference }).VerifyDiagnostics(
-                // (6,18): error CS0165: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(source2, references: new MetadataReference[] { metadataReference })
+                .VerifyDiagnostics(
+                    // (6,18): error CS0165: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
         }
 
@@ -319,16 +373,17 @@ public struct StructWithValue
         public void IgnoreInternalStructFieldsOfReferenceTypeFromMetadata()
         {
             var comp1 = CreateCompilation(
-@"public struct Struct
+                @"public struct Struct
 {
     internal string data;
 }
-");
+"
+            );
             var sourceReference = new CSharpCompilationReference(comp1);
             var metadataReference = MetadataReference.CreateFromStream(comp1.EmitToStream());
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -336,19 +391,45 @@ public struct StructWithValue
         var r2 = r1;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { sourceReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { sourceReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { metadataReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { sourceReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
-            CreateCompilation(source2, references: new MetadataReference[] { metadataReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { sourceReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { metadataReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { metadataReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
         }
 
@@ -356,7 +437,7 @@ public struct StructWithValue
         public void IgnoreEffectivelyInternalStructFieldsOfReferenceTypeFromMetadata()
         {
             var comp1 = CreateCompilation(
-@"
+                @"
 internal class C1
 {
     public struct S
@@ -368,12 +449,13 @@ public struct Struct
 {
     internal C1.S data;
 }
-");
+"
+            );
             var sourceReference = new CSharpCompilationReference(comp1);
             var metadataReference = MetadataReference.CreateFromStream(comp1.EmitToStream());
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -381,26 +463,53 @@ public struct Struct
         var r2 = r1;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { sourceReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { sourceReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { metadataReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { sourceReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
-            CreateCompilation(source2, references: new MetadataReference[] { metadataReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { sourceReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { metadataReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { metadataReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
         }
 
         [Fact, WorkItem(1072447, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1072447")]
         public void IgnoreEffectivelyInternalStructFieldsOfReferenceTypeFromAddedModule()
         {
-            var source = @"
+            var source =
+                @"
 internal class C1
 {
     public struct S
@@ -417,7 +526,7 @@ public struct Struct
             var moduleReference = comp1.EmitToImageReference();
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -425,15 +534,25 @@ public struct Struct
         var r2 = r1;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): error CS0165: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): error CS0165: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }).VerifyDiagnostics(
-                // (6,18): error CS0165: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(source2, references: new MetadataReference[] { moduleReference })
+                .VerifyDiagnostics(
+                    // (6,18): error CS0165: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
         }
 
@@ -441,7 +560,8 @@ public struct Struct
         [WorkItem(30756, "https://github.com/dotnet/roslyn/issues/30756")]
         public void IgnoreEffectivelyInternalStructFieldsOfReferenceTypeFromAddedModule_PlusNullable()
         {
-            var source = @"
+            var source =
+                @"
 internal class C1
 {
     public struct S
@@ -456,11 +576,14 @@ public struct Struct
     internal C1.S data;
 }
 ";
-            var comp1 = CreateCompilation(source, options: WithNullableEnable(TestOptions.DebugModule));
+            var comp1 = CreateCompilation(
+                source,
+                options: WithNullableEnable(TestOptions.DebugModule)
+            );
             var moduleReference = comp1.EmitToImageReference();
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -468,22 +591,37 @@ public struct Struct
         var r2 = r1;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: WithNullableEnable()).VerifyDiagnostics(
-                // (6,18): error CS0165: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: WithNullableEnable()
+                )
+                .VerifyDiagnostics(
+                    // (6,18): error CS0165: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: WithNullableEnable().WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): error CS0165: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: WithNullableEnable().WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): error CS0165: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
         }
 
         [Fact, WorkItem(1072447, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1072447")]
         public void IgnorePrivateStructFieldsOfReferenceTypeFromAddedModule02()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -493,7 +631,7 @@ public struct Struct
             var moduleReference = comp1.EmitToImageReference();
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -501,12 +639,25 @@ public struct Struct
         var r2 = r1;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
         }
     }

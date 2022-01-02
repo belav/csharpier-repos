@@ -9,7 +9,8 @@ namespace MS.Internal.Xml.XPath
     {
         private XPathNodeIterator _iterator = XPathEmptyIterator.Instance;
 
-        public ChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type) : base(qyInput, name, prefix, type) { }
+        public ChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type)
+            : base(qyInput, name, prefix, type) { }
         protected ChildrenQuery(ChildrenQuery other) : base(other)
         {
             _iterator = Clone(other._iterator);
@@ -69,6 +70,9 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new ChildrenQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new ChildrenQuery(this);
+        }
     }
 }

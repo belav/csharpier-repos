@@ -32,8 +32,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public RelationalModelCustomizer(ModelCustomizerDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
     }
 }

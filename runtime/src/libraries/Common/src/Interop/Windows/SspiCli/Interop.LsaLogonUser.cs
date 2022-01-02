@@ -12,20 +12,20 @@ internal static partial class Interop
     {
         [DllImport(Libraries.SspiCli)]
         internal static extern int LsaLogonUser(
-            [In]  SafeLsaHandle LsaHandle,
-            [In]  ref Advapi32.LSA_STRING OriginName,
-            [In]  SECURITY_LOGON_TYPE LogonType,
-            [In]  int AuthenticationPackage,
-            [In]  IntPtr AuthenticationInformation,
-            [In]  int AuthenticationInformationLength,
-            [In]  IntPtr LocalGroups,
-            [In]  ref TOKEN_SOURCE SourceContext,
+            [In] SafeLsaHandle LsaHandle,
+            [In] ref Advapi32.LSA_STRING OriginName,
+            [In] SECURITY_LOGON_TYPE LogonType,
+            [In] int AuthenticationPackage,
+            [In] IntPtr AuthenticationInformation,
+            [In] int AuthenticationInformationLength,
+            [In] IntPtr LocalGroups,
+            [In] ref TOKEN_SOURCE SourceContext,
             [Out] out SafeLsaReturnBufferHandle ProfileBuffer,
             [Out] out int ProfileBufferLength,
             [Out] out LUID LogonId,
             [Out] out SafeAccessTokenHandle Token,
             [Out] out QUOTA_LIMITS Quotas,
             [Out] out int SubStatus
-            );
+        );
     }
 }

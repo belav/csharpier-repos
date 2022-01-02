@@ -35,7 +35,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(null, null, false)]
         [InlineData("", "", false)]
         [InlineData("DisplayColumn", "SortColumn", true)]
-        public void Ctor_DisplayColumn_SortColumn_SortDescending(string displayColumn, string sortColumn, bool sortDescending)
+        public void Ctor_DisplayColumn_SortColumn_SortDescending(
+            string displayColumn,
+            string sortColumn,
+            bool sortDescending
+        )
         {
             var attribute = new DisplayColumnAttribute(displayColumn, sortColumn, sortDescending);
             Assert.Equal(displayColumn, attribute.DisplayColumn);

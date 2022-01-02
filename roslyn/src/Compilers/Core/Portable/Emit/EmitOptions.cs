@@ -127,22 +127,22 @@ namespace Microsoft.CodeAnalysis.Emit
             SubsystemVersion subsystemVersion,
             string runtimeMetadataVersion,
             bool tolerateErrors,
-            bool includePrivateMembers)
+            bool includePrivateMembers
+        )
             : this(
-                  metadataOnly,
-                  debugInformationFormat,
-                  pdbFilePath,
-                  outputNameOverride,
-                  fileAlignment,
-                  baseAddress,
-                  highEntropyVirtualAddressSpace,
-                  subsystemVersion,
-                  runtimeMetadataVersion,
-                  tolerateErrors,
-                  includePrivateMembers,
-                  instrumentationKinds: ImmutableArray<InstrumentationKind>.Empty)
-        {
-        }
+                metadataOnly,
+                debugInformationFormat,
+                pdbFilePath,
+                outputNameOverride,
+                fileAlignment,
+                baseAddress,
+                highEntropyVirtualAddressSpace,
+                subsystemVersion,
+                runtimeMetadataVersion,
+                tolerateErrors,
+                includePrivateMembers,
+                instrumentationKinds: ImmutableArray<InstrumentationKind>.Empty
+            ) { }
 
         // 2.7 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public EmitOptions(
@@ -157,57 +157,57 @@ namespace Microsoft.CodeAnalysis.Emit
             string runtimeMetadataVersion,
             bool tolerateErrors,
             bool includePrivateMembers,
-            ImmutableArray<InstrumentationKind> instrumentationKinds)
+            ImmutableArray<InstrumentationKind> instrumentationKinds
+        )
             : this(
-                  metadataOnly,
-                  debugInformationFormat,
-                  pdbFilePath,
-                  outputNameOverride,
-                  fileAlignment,
-                  baseAddress,
-                  highEntropyVirtualAddressSpace,
-                  subsystemVersion,
-                  runtimeMetadataVersion,
-                  tolerateErrors,
-                  includePrivateMembers,
-                  instrumentationKinds,
-                  pdbChecksumAlgorithm: null)
-        {
-        }
+                metadataOnly,
+                debugInformationFormat,
+                pdbFilePath,
+                outputNameOverride,
+                fileAlignment,
+                baseAddress,
+                highEntropyVirtualAddressSpace,
+                subsystemVersion,
+                runtimeMetadataVersion,
+                tolerateErrors,
+                includePrivateMembers,
+                instrumentationKinds,
+                pdbChecksumAlgorithm: null
+            ) { }
 
         // 3.7 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         public EmitOptions(
-           bool metadataOnly,
-           DebugInformationFormat debugInformationFormat,
-           string? pdbFilePath,
-           string? outputNameOverride,
-           int fileAlignment,
-           ulong baseAddress,
-           bool highEntropyVirtualAddressSpace,
-           SubsystemVersion subsystemVersion,
-           string? runtimeMetadataVersion,
-           bool tolerateErrors,
-           bool includePrivateMembers,
-           ImmutableArray<InstrumentationKind> instrumentationKinds,
-           HashAlgorithmName? pdbChecksumAlgorithm)
+            bool metadataOnly,
+            DebugInformationFormat debugInformationFormat,
+            string? pdbFilePath,
+            string? outputNameOverride,
+            int fileAlignment,
+            ulong baseAddress,
+            bool highEntropyVirtualAddressSpace,
+            SubsystemVersion subsystemVersion,
+            string? runtimeMetadataVersion,
+            bool tolerateErrors,
+            bool includePrivateMembers,
+            ImmutableArray<InstrumentationKind> instrumentationKinds,
+            HashAlgorithmName? pdbChecksumAlgorithm
+        )
             : this(
-                  metadataOnly,
-                  debugInformationFormat,
-                  pdbFilePath,
-                  outputNameOverride,
-                  fileAlignment,
-                  baseAddress,
-                  highEntropyVirtualAddressSpace,
-                  subsystemVersion,
-                  runtimeMetadataVersion,
-                  tolerateErrors,
-                  includePrivateMembers,
-                  instrumentationKinds,
-                  pdbChecksumAlgorithm,
-                  defaultSourceFileEncoding: null,
-                  fallbackSourceFileEncoding: null)
-        {
-        }
+                metadataOnly,
+                debugInformationFormat,
+                pdbFilePath,
+                outputNameOverride,
+                fileAlignment,
+                baseAddress,
+                highEntropyVirtualAddressSpace,
+                subsystemVersion,
+                runtimeMetadataVersion,
+                tolerateErrors,
+                includePrivateMembers,
+                instrumentationKinds,
+                pdbChecksumAlgorithm,
+                defaultSourceFileEncoding: null,
+                fallbackSourceFileEncoding: null
+            ) { }
 
         public EmitOptions(
             bool metadataOnly = false,
@@ -224,10 +224,12 @@ namespace Microsoft.CodeAnalysis.Emit
             ImmutableArray<InstrumentationKind> instrumentationKinds = default,
             HashAlgorithmName? pdbChecksumAlgorithm = null,
             Encoding? defaultSourceFileEncoding = null,
-            Encoding? fallbackSourceFileEncoding = null)
+            Encoding? fallbackSourceFileEncoding = null
+        )
         {
             EmitMetadataOnly = metadataOnly;
-            DebugInformationFormat = (debugInformationFormat == 0) ? DebugInformationFormat.Pdb : debugInformationFormat;
+            DebugInformationFormat =
+                (debugInformationFormat == 0) ? DebugInformationFormat.Pdb : debugInformationFormat;
             PdbFilePath = pdbFilePath;
             OutputNameOverride = outputNameOverride;
             FileAlignment = fileAlignment;
@@ -243,24 +245,24 @@ namespace Microsoft.CodeAnalysis.Emit
             FallbackSourceFileEncoding = fallbackSourceFileEncoding;
         }
 
-        private EmitOptions(EmitOptions other) : this(
-            other.EmitMetadataOnly,
-            other.DebugInformationFormat,
-            other.PdbFilePath,
-            other.OutputNameOverride,
-            other.FileAlignment,
-            other.BaseAddress,
-            other.HighEntropyVirtualAddressSpace,
-            other.SubsystemVersion,
-            other.RuntimeMetadataVersion,
-            other.TolerateErrors,
-            other.IncludePrivateMembers,
-            other.InstrumentationKinds,
-            other.PdbChecksumAlgorithm,
-            other.DefaultSourceFileEncoding,
-            other.FallbackSourceFileEncoding)
-        {
-        }
+        private EmitOptions(EmitOptions other)
+            : this(
+                other.EmitMetadataOnly,
+                other.DebugInformationFormat,
+                other.PdbFilePath,
+                other.OutputNameOverride,
+                other.FileAlignment,
+                other.BaseAddress,
+                other.HighEntropyVirtualAddressSpace,
+                other.SubsystemVersion,
+                other.RuntimeMetadataVersion,
+                other.TolerateErrors,
+                other.IncludePrivateMembers,
+                other.InstrumentationKinds,
+                other.PdbChecksumAlgorithm,
+                other.DefaultSourceFileEncoding,
+                other.FallbackSourceFileEncoding
+            ) { }
 
         public override bool Equals(object? obj)
         {
@@ -274,41 +276,75 @@ namespace Microsoft.CodeAnalysis.Emit
                 return false;
             }
 
-            return
-                EmitMetadataOnly == other.EmitMetadataOnly &&
-                BaseAddress == other.BaseAddress &&
-                FileAlignment == other.FileAlignment &&
-                HighEntropyVirtualAddressSpace == other.HighEntropyVirtualAddressSpace &&
-                SubsystemVersion.Equals(other.SubsystemVersion) &&
-                DebugInformationFormat == other.DebugInformationFormat &&
-                PdbFilePath == other.PdbFilePath &&
-                PdbChecksumAlgorithm == other.PdbChecksumAlgorithm &&
-                OutputNameOverride == other.OutputNameOverride &&
-                RuntimeMetadataVersion == other.RuntimeMetadataVersion &&
-                TolerateErrors == other.TolerateErrors &&
-                IncludePrivateMembers == other.IncludePrivateMembers &&
-                InstrumentationKinds.NullToEmpty().SequenceEqual(other.InstrumentationKinds.NullToEmpty(), (a, b) => a == b) &&
-                DefaultSourceFileEncoding == other.DefaultSourceFileEncoding &&
-                FallbackSourceFileEncoding == other.FallbackSourceFileEncoding;
+            return EmitMetadataOnly == other.EmitMetadataOnly
+                && BaseAddress == other.BaseAddress
+                && FileAlignment == other.FileAlignment
+                && HighEntropyVirtualAddressSpace == other.HighEntropyVirtualAddressSpace
+                && SubsystemVersion.Equals(other.SubsystemVersion)
+                && DebugInformationFormat == other.DebugInformationFormat
+                && PdbFilePath == other.PdbFilePath
+                && PdbChecksumAlgorithm == other.PdbChecksumAlgorithm
+                && OutputNameOverride == other.OutputNameOverride
+                && RuntimeMetadataVersion == other.RuntimeMetadataVersion
+                && TolerateErrors == other.TolerateErrors
+                && IncludePrivateMembers == other.IncludePrivateMembers
+                && InstrumentationKinds
+                    .NullToEmpty()
+                    .SequenceEqual(other.InstrumentationKinds.NullToEmpty(), (a, b) => a == b)
+                && DefaultSourceFileEncoding == other.DefaultSourceFileEncoding
+                && FallbackSourceFileEncoding == other.FallbackSourceFileEncoding;
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(EmitMetadataOnly,
-                   Hash.Combine(BaseAddress.GetHashCode(),
-                   Hash.Combine(FileAlignment,
-                   Hash.Combine(HighEntropyVirtualAddressSpace,
-                   Hash.Combine(SubsystemVersion.GetHashCode(),
-                   Hash.Combine((int)DebugInformationFormat,
-                   Hash.Combine(PdbFilePath,
-                   Hash.Combine(PdbChecksumAlgorithm.GetHashCode(),
-                   Hash.Combine(OutputNameOverride,
-                   Hash.Combine(RuntimeMetadataVersion,
-                   Hash.Combine(TolerateErrors,
-                   Hash.Combine(IncludePrivateMembers,
-                   Hash.Combine(Hash.CombineValues(InstrumentationKinds),
-                   Hash.Combine(DefaultSourceFileEncoding,
-                   Hash.Combine(FallbackSourceFileEncoding, 0)))))))))))))));
+            return Hash.Combine(
+                EmitMetadataOnly,
+                Hash.Combine(
+                    BaseAddress.GetHashCode(),
+                    Hash.Combine(
+                        FileAlignment,
+                        Hash.Combine(
+                            HighEntropyVirtualAddressSpace,
+                            Hash.Combine(
+                                SubsystemVersion.GetHashCode(),
+                                Hash.Combine(
+                                    (int)DebugInformationFormat,
+                                    Hash.Combine(
+                                        PdbFilePath,
+                                        Hash.Combine(
+                                            PdbChecksumAlgorithm.GetHashCode(),
+                                            Hash.Combine(
+                                                OutputNameOverride,
+                                                Hash.Combine(
+                                                    RuntimeMetadataVersion,
+                                                    Hash.Combine(
+                                                        TolerateErrors,
+                                                        Hash.Combine(
+                                                            IncludePrivateMembers,
+                                                            Hash.Combine(
+                                                                Hash.CombineValues(
+                                                                    InstrumentationKinds
+                                                                ),
+                                                                Hash.Combine(
+                                                                    DefaultSourceFileEncoding,
+                                                                    Hash.Combine(
+                                                                        FallbackSourceFileEncoding,
+                                                                        0
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
         }
 
         public static bool operator ==(EmitOptions? left, EmitOptions? right)
@@ -321,34 +357,67 @@ namespace Microsoft.CodeAnalysis.Emit
             return !object.Equals(left, right);
         }
 
-        internal void ValidateOptions(DiagnosticBag diagnostics, CommonMessageProvider messageProvider, bool isDeterministic)
+        internal void ValidateOptions(
+            DiagnosticBag diagnostics,
+            CommonMessageProvider messageProvider,
+            bool isDeterministic
+        )
         {
             if (!DebugInformationFormat.IsValid())
             {
-                diagnostics.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_InvalidDebugInformationFormat, Location.None, (int)DebugInformationFormat));
+                diagnostics.Add(
+                    messageProvider.CreateDiagnostic(
+                        messageProvider.ERR_InvalidDebugInformationFormat,
+                        Location.None,
+                        (int)DebugInformationFormat
+                    )
+                );
             }
 
             foreach (var instrumentationKind in InstrumentationKinds)
             {
                 if (!instrumentationKind.IsValid())
                 {
-                    diagnostics.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_InvalidInstrumentationKind, Location.None, (int)instrumentationKind));
+                    diagnostics.Add(
+                        messageProvider.CreateDiagnostic(
+                            messageProvider.ERR_InvalidInstrumentationKind,
+                            Location.None,
+                            (int)instrumentationKind
+                        )
+                    );
                 }
             }
 
             if (OutputNameOverride != null)
             {
-                MetadataHelpers.CheckAssemblyOrModuleName(OutputNameOverride, messageProvider, messageProvider.ERR_InvalidOutputName, diagnostics);
+                MetadataHelpers.CheckAssemblyOrModuleName(
+                    OutputNameOverride,
+                    messageProvider,
+                    messageProvider.ERR_InvalidOutputName,
+                    diagnostics
+                );
             }
 
             if (FileAlignment != 0 && !IsValidFileAlignment(FileAlignment))
             {
-                diagnostics.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_InvalidFileAlignment, Location.None, FileAlignment));
+                diagnostics.Add(
+                    messageProvider.CreateDiagnostic(
+                        messageProvider.ERR_InvalidFileAlignment,
+                        Location.None,
+                        FileAlignment
+                    )
+                );
             }
 
             if (!SubsystemVersion.Equals(SubsystemVersion.None) && !SubsystemVersion.IsValid)
             {
-                diagnostics.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_InvalidSubsystemVersion, Location.None, SubsystemVersion.ToString()));
+                diagnostics.Add(
+                    messageProvider.CreateDiagnostic(
+                        messageProvider.ERR_InvalidSubsystemVersion,
+                        Location.None,
+                        SubsystemVersion.ToString()
+                    )
+                );
             }
 
             if (PdbChecksumAlgorithm.Name != null)
@@ -359,16 +428,29 @@ namespace Microsoft.CodeAnalysis.Emit
                 }
                 catch
                 {
-                    diagnostics.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_InvalidHashAlgorithmName, Location.None, PdbChecksumAlgorithm.ToString()));
+                    diagnostics.Add(
+                        messageProvider.CreateDiagnostic(
+                            messageProvider.ERR_InvalidHashAlgorithmName,
+                            Location.None,
+                            PdbChecksumAlgorithm.ToString()
+                        )
+                    );
                 }
             }
             else if (isDeterministic)
             {
-                diagnostics.Add(messageProvider.CreateDiagnostic(messageProvider.ERR_InvalidHashAlgorithmName, Location.None, ""));
+                diagnostics.Add(
+                    messageProvider.CreateDiagnostic(
+                        messageProvider.ERR_InvalidHashAlgorithmName,
+                        Location.None,
+                        ""
+                    )
+                );
             }
         }
 
-        internal bool EmitTestCoverageData => InstrumentationKinds.Contains(InstrumentationKind.TestCoverage);
+        internal bool EmitTestCoverageData =>
+            InstrumentationKinds.Contains(InstrumentationKind.TestCoverage);
 
         internal static bool IsValidFileAlignment(int value)
         {
@@ -510,7 +592,9 @@ namespace Microsoft.CodeAnalysis.Emit
             return new EmitOptions(this) { IncludePrivateMembers = value };
         }
 
-        public EmitOptions WithInstrumentationKinds(ImmutableArray<InstrumentationKind> instrumentationKinds)
+        public EmitOptions WithInstrumentationKinds(
+            ImmutableArray<InstrumentationKind> instrumentationKinds
+        )
         {
             if (InstrumentationKinds == instrumentationKinds)
             {
@@ -537,7 +621,10 @@ namespace Microsoft.CodeAnalysis.Emit
                 return this;
             }
 
-            return new EmitOptions(this) { FallbackSourceFileEncoding = fallbackSourceFileEncoding };
+            return new EmitOptions(this)
+            {
+                FallbackSourceFileEncoding = fallbackSourceFileEncoding
+            };
         }
     }
 }

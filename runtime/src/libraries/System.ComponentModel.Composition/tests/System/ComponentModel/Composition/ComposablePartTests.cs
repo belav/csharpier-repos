@@ -21,10 +21,12 @@ namespace System.ComponentModel.Composition
         {
             var part = PartFactory.Create();
 
-            Assert.Throws<NotSupportedException>(() =>
-            {
-                part.Metadata["Value"] = "Value";
-            });
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    part.Metadata["Value"] = "Value";
+                }
+            );
         }
 
         [Fact]
@@ -33,6 +35,5 @@ namespace System.ComponentModel.Composition
             var part = PartFactory.Create();
             part.Activate();
         }
-
     }
 }

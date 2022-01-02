@@ -17,14 +17,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     internal abstract class CSharpSyntaxNode : GreenNode
     {
-        internal CSharpSyntaxNode(SyntaxKind kind)
-            : base((ushort)kind)
+        internal CSharpSyntaxNode(SyntaxKind kind) : base((ushort)kind)
         {
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(SyntaxKind kind, int fullWidth)
-            : base((ushort)kind, fullWidth)
+        internal CSharpSyntaxNode(SyntaxKind kind, int fullWidth) : base((ushort)kind, fullWidth)
         {
             GreenStats.NoteGreen(this);
         }
@@ -41,22 +39,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(SyntaxKind kind, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
-            : base((ushort)kind, diagnostics, annotations)
+        internal CSharpSyntaxNode(
+            SyntaxKind kind,
+            DiagnosticInfo[] diagnostics,
+            SyntaxAnnotation[] annotations
+        ) : base((ushort)kind, diagnostics, annotations)
         {
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(SyntaxKind kind, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations, int fullWidth)
-            : base((ushort)kind, diagnostics, annotations, fullWidth)
+        internal CSharpSyntaxNode(
+            SyntaxKind kind,
+            DiagnosticInfo[] diagnostics,
+            SyntaxAnnotation[] annotations,
+            int fullWidth
+        ) : base((ushort)kind, diagnostics, annotations, fullWidth)
         {
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(ObjectReader reader)
-            : base(reader)
-        {
-        }
+        internal CSharpSyntaxNode(ObjectReader reader) : base(reader) { }
 
         public override string Language
         {
@@ -72,30 +74,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         public override int RawContextualKind
         {
-            get
-            {
-                return this.RawKind;
-            }
+            get { return this.RawKind; }
         }
 
         public override bool IsStructuredTrivia
         {
-            get
-            {
-                return this is StructuredTriviaSyntax;
-            }
+            get { return this is StructuredTriviaSyntax; }
         }
 
         public override bool IsDirective
         {
-            get
-            {
-                return this is DirectiveTriviaSyntax;
-            }
+            get { return this is DirectiveTriviaSyntax; }
         }
 
         public override bool IsSkippedTokensTrivia => this.Kind == SyntaxKind.SkippedTokensTrivia;
-        public override bool IsDocumentationCommentTrivia => SyntaxFacts.IsDocumentationCommentTrivia(this.Kind);
+        public override bool IsDocumentationCommentTrivia =>
+            SyntaxFacts.IsDocumentationCommentTrivia(this.Kind);
 
         public override int GetSlotOffset(int index)
         {
@@ -177,7 +171,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return stack;
         }
 
-        internal static DirectiveStack ApplyDirectivesToListOrNode(GreenNode listOrNode, DirectiveStack stack)
+        internal static DirectiveStack ApplyDirectivesToListOrNode(
+            GreenNode listOrNode,
+            DirectiveStack stack
+        )
         {
             // If we have a list of trivia, then that node is not actually a CSharpSyntaxNode.
             // Just defer to our standard ApplyDirectives helper as it will do the appropriate
@@ -280,8 +277,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         // Use conditional weak table so we always return same identity for structured trivia
-        private static readonly ConditionalWeakTable<SyntaxNode, Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>> s_structuresTable
-            = new ConditionalWeakTable<SyntaxNode, Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>>();
+        private static readonly ConditionalWeakTable<
+            SyntaxNode,
+            Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>
+        > s_structuresTable = new ConditionalWeakTable<
+            SyntaxNode,
+            Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>
+        >();
 
         /// <summary>
         /// Gets the syntax node represented the structure of this trivia, if any. The HasStructure property can be used to 

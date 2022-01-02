@@ -24,6 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <returns>The generated model metadata files.</returns>
         IReadOnlyCollection<ScaffoldedFile> GenerateModel(
             IModel model,
-            CompiledModelCodeGenerationOptions options);
+            CompiledModelCodeGenerationOptions options
+        );
     }
 }

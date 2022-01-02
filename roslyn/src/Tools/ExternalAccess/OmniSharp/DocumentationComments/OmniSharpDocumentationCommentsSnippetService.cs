@@ -19,11 +19,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
             SourceText text,
             int position,
             DocumentOptionSet options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
             var docCommentOptions = DocumentationCommentOptions.From(options);
-            return Translate(service.GetDocumentationCommentSnippetOnCharacterTyped(syntaxTree, text, position, docCommentOptions, cancellationToken));
+            return Translate(
+                service.GetDocumentationCommentSnippetOnCharacterTyped(
+                    syntaxTree,
+                    text,
+                    position,
+                    docCommentOptions,
+                    cancellationToken
+                )
+            );
         }
 
         public static OmniSharpDocumentationCommentSnippet? GetDocumentationCommentSnippetOnCommandInvoke(
@@ -32,11 +42,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
             SourceText text,
             int position,
             DocumentOptionSet options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
             var docCommentOptions = DocumentationCommentOptions.From(options);
-            return Translate(service.GetDocumentationCommentSnippetOnCommandInvoke(syntaxTree, text, position, docCommentOptions, cancellationToken));
+            return Translate(
+                service.GetDocumentationCommentSnippetOnCommandInvoke(
+                    syntaxTree,
+                    text,
+                    position,
+                    docCommentOptions,
+                    cancellationToken
+                )
+            );
         }
 
         public static OmniSharpDocumentationCommentSnippet? GetDocumentationCommentSnippetOnEnterTyped(
@@ -45,26 +65,48 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
             SourceText text,
             int position,
             DocumentOptionSet options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
             var docCommentOptions = DocumentationCommentOptions.From(options);
-            return Translate(service.GetDocumentationCommentSnippetOnEnterTyped(syntaxTree, text, position, docCommentOptions, cancellationToken));
+            return Translate(
+                service.GetDocumentationCommentSnippetOnEnterTyped(
+                    syntaxTree,
+                    text,
+                    position,
+                    docCommentOptions,
+                    cancellationToken
+                )
+            );
         }
 
         public static OmniSharpDocumentationCommentSnippet? GetDocumentationCommentSnippetFromPreviousLine(
             Document document,
             DocumentOptionSet options,
             TextLine currentLine,
-            TextLine previousLine)
+            TextLine previousLine
+        )
         {
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
             var docCommentOptions = DocumentationCommentOptions.From(options);
-            return Translate(service.GetDocumentationCommentSnippetFromPreviousLine(docCommentOptions, currentLine, previousLine));
+            return Translate(
+                service.GetDocumentationCommentSnippetFromPreviousLine(
+                    docCommentOptions,
+                    currentLine,
+                    previousLine
+                )
+            );
         }
 
-        private static OmniSharpDocumentationCommentSnippet? Translate(DocumentationCommentSnippet? result)
-            => result == null ? null : new(result.SpanToReplace, result.SnippetText, result.CaretOffset);
+        private static OmniSharpDocumentationCommentSnippet? Translate(
+            DocumentationCommentSnippet? result
+        ) =>
+            result == null
+                ? null
+                : new(result.SpanToReplace, result.SnippetText, result.CaretOffset);
     }
 
     internal sealed class OmniSharpDocumentationCommentSnippet
@@ -84,7 +126,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
         /// </summary>
         public int CaretOffset { get; }
 
-        internal OmniSharpDocumentationCommentSnippet(TextSpan spanToReplace, string snippetText, int caretOffset)
+        internal OmniSharpDocumentationCommentSnippet(
+            TextSpan spanToReplace,
+            string snippetText,
+            int caretOffset
+        )
         {
             SpanToReplace = spanToReplace;
             SnippetText = snippetText;

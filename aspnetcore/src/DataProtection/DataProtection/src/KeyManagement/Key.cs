@@ -20,13 +20,14 @@ internal sealed class Key : KeyBase
         DateTimeOffset activationDate,
         DateTimeOffset expirationDate,
         IAuthenticatedEncryptorDescriptor descriptor,
-        IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories)
-        : base(keyId,
-              creationDate,
-              activationDate,
-              expirationDate,
-              new Lazy<IAuthenticatedEncryptorDescriptor>(() => descriptor),
-              encryptorFactories)
-    {
-    }
+        IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories
+    )
+        : base(
+            keyId,
+            creationDate,
+            activationDate,
+            expirationDate,
+            new Lazy<IAuthenticatedEncryptorDescriptor>(() => descriptor),
+            encryptorFactories
+        ) { }
 }

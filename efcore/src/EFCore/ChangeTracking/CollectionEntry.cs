@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 var targetType = Metadata.TargetEntityType;
                 var context = InternalEntry.StateManager.Context;
 
-                var changeDetector = context.ChangeTracker.AutoDetectChangesEnabled
+                var changeDetector =
+                    context.ChangeTracker.AutoDetectChangesEnabled
                     && !((IRuntimeModel)context.Model).SkipDetectChanges
                         ? context.GetDependencies().ChangeDetector
                         : null;
@@ -114,8 +115,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
                 if (Metadata is ISkipNavigation skipNavigation)
                 {
-                    if (InternalEntry.EntityState != EntityState.Unchanged
-                        && InternalEntry.EntityState != EntityState.Detached)
+                    if (
+                        InternalEntry.EntityState != EntityState.Unchanged
+                        && InternalEntry.EntityState != EntityState.Detached
+                    )
                     {
                         return true;
                     }
@@ -125,13 +128,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     var inverseForeignKey = skipNavigation.Inverse.ForeignKey;
                     foreach (var joinEntry in stateManager.Entries)
                     {
-                        if (joinEntry.EntityType == joinEntityType
+                        if (
+                            joinEntry.EntityType == joinEntityType
                             && stateManager.FindPrincipal(joinEntry, foreignKey) == InternalEntry
-                            && (joinEntry.EntityState == EntityState.Added
+                            && (
+                                joinEntry.EntityState == EntityState.Added
                                 || joinEntry.EntityState == EntityState.Deleted
                                 || foreignKey.Properties.Any(joinEntry.IsModified)
                                 || inverseForeignKey.Properties.Any(joinEntry.IsModified)
-                                || (stateManager.FindPrincipal(joinEntry, inverseForeignKey)?.EntityState == EntityState.Deleted)))
+                                || (
+                                    stateManager.FindPrincipal(
+                                        joinEntry,
+                                        inverseForeignKey
+                                    )?.EntityState == EntityState.Deleted
+                                )
+                            )
+                        )
                         {
                             return true;
                         }
@@ -147,12 +159,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
                         foreach (var relatedEntity in navigationValue)
                         {
-                            var relatedEntry = stateManager.TryGetEntry(relatedEntity, targetEntityType);
+                            var relatedEntry = stateManager.TryGetEntry(
+                                relatedEntity,
+                                targetEntityType
+                            );
 
-                            if (relatedEntry != null
-                                && (relatedEntry.EntityState == EntityState.Added
+                            if (
+                                relatedEntry != null
+                                && (
+                                    relatedEntry.EntityState == EntityState.Added
                                     || relatedEntry.EntityState == EntityState.Deleted
-                                    || foreignKey.Properties.Any(relatedEntry.IsModified)))
+                                    || foreignKey.Properties.Any(relatedEntry.IsModified)
+                                )
+                            )
                             {
                                 return true;
                             }
@@ -170,13 +189,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 {
                     var joinEntityType = skipNavigation.JoinEntityType;
                     var foreignKey = skipNavigation.ForeignKey;
-                    foreach (var joinEntry in stateManager
-                        .GetEntriesForState(added: !value, modified: !value, deleted: !value, unchanged: value).Where(
-                            e => e.EntityType == joinEntityType
-                                && stateManager.FindPrincipal(e, foreignKey) == InternalEntry)
-                        .ToList())
+                    foreach (
+                        var joinEntry in stateManager
+                            .GetEntriesForState(
+                                added: !value,
+                                modified: !value,
+                                deleted: !value,
+                                unchanged: value
+                            )
+                            .Where(
+                                e =>
+                                    e.EntityType == joinEntityType
+                                    && stateManager.FindPrincipal(e, foreignKey) == InternalEntry
+                            )
+                            .ToList()
+                    )
                     {
-                        joinEntry.SetEntityState(value ? EntityState.Modified : EntityState.Unchanged);
+                        joinEntry.SetEntityState(
+                            value ? EntityState.Modified : EntityState.Unchanged
+                        );
                     }
                 }
                 else
@@ -187,16 +218,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     {
                         foreach (var relatedEntity in navigationValue)
                         {
-                            var relatedEntry = InternalEntry.StateManager.TryGetEntry(relatedEntity, Metadata.TargetEntityType);
+                            var relatedEntry = InternalEntry.StateManager.TryGetEntry(
+                                relatedEntity,
+                                Metadata.TargetEntityType
+                            );
                             if (relatedEntry != null)
                             {
                                 var anyNonPk = foreignKey.Properties.Any(p => !p.IsPrimaryKey());
                                 foreach (var property in foreignKey.Properties)
                                 {
-                                    if (anyNonPk
-                                        && !property.IsPrimaryKey())
+                                    if (anyNonPk && !property.IsPrimaryKey())
                                     {
-                                        relatedEntry.SetPropertyModified(property, isModified: value, acceptChanges: false);
+                                        relatedEntry.SetPropertyModified(
+                                            property,
+                                            isModified: value,
+                                            acceptChanges: false
+                                        );
                                     }
                                 }
                             }
@@ -254,8 +291,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             EnsureInitialized();
 
             return IsLoaded
-                ? Task.CompletedTask
-                : TargetLoader.LoadAsync(InternalEntry, cancellationToken);
+              ? Task.CompletedTask
+              : TargetLoader.LoadAsync(InternalEntry, cancellationToken);
         }
 
         /// <summary>
@@ -279,8 +316,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             return TargetLoader.Query(InternalEntry);
         }
 
-        private void EnsureInitialized()
-            => Metadata.GetCollectionAccessor()!.GetOrCreate(InternalEntry.Entity, forMaterialization: true);
+        private void EnsureInitialized() =>
+            Metadata.GetCollectionAccessor()!.GetOrCreate(
+                InternalEntry.Entity,
+                forMaterialization: true
+            );
 
         /// <summary>
         ///     The <see cref="EntityEntry" /> of an entity this navigation targets.
@@ -293,9 +333,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public virtual EntityEntry? FindEntry(object entity)
         {
             var entry = GetInternalTargetEntry(entity);
-            return entry == null
-                ? null
-                : new EntityEntry(entry);
+            return entry == null ? null : new EntityEntry(entry);
         }
 
         /// <summary>
@@ -305,17 +343,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalEntityEntry? GetInternalTargetEntry(object entity)
-            => CurrentValue == null
-                || !Metadata.GetCollectionAccessor()!.Contains(InternalEntry.Entity, entity)
-                    ? null
-                    : InternalEntry.StateManager.GetOrCreateEntry(entity, Metadata.TargetEntityType);
+        protected virtual InternalEntityEntry? GetInternalTargetEntry(object entity) =>
+            CurrentValue == null
+            || !Metadata.GetCollectionAccessor()!.Contains(InternalEntry.Entity, entity)
+                ? null
+                : InternalEntry.StateManager.GetOrCreateEntry(entity, Metadata.TargetEntityType);
 
-        private ICollectionLoader TargetLoader
-            => _loader ??= Metadata is IRuntimeSkipNavigation skipNavigation
+        private ICollectionLoader TargetLoader =>
+            _loader ??= Metadata is IRuntimeSkipNavigation skipNavigation
                 ? skipNavigation.GetManyToManyLoader()
                 : new EntityFinderCollectionLoaderAdapter(
-                    InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType),
-                    (INavigation)Metadata);
+                      InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType),
+                      (INavigation)Metadata
+                  );
     }
 }

@@ -15,9 +15,12 @@ public class BringUpTest_JTrueEqDbl
     {
         int returnValue = 0;
 
-        if (x == -1d) returnValue = 1;
-        else if (x == 0d) returnValue = 2;
-        else if (x == 1d) returnValue = 3;
+        if (x == -1d)
+            returnValue = 1;
+        else if (x == 0d)
+            returnValue = 2;
+        else if (x == 1d)
+            returnValue = 3;
 
         return returnValue;
     }
@@ -26,9 +29,12 @@ public class BringUpTest_JTrueEqDbl
     {
         int returnValue = Pass;
 
-        if (JTrueEqDbl(-1d)             != 1) returnValue = Fail;
-        if (JTrueEqDbl(0d)              != 2) returnValue = Fail;
-        if (JTrueEqDbl(1d)              != 3) returnValue = Fail;
+        if (JTrueEqDbl(-1d) != 1)
+            returnValue = Fail;
+        if (JTrueEqDbl(0d) != 2)
+            returnValue = Fail;
+        if (JTrueEqDbl(1d) != 3)
+            returnValue = Fail;
 
         return returnValue;
     }

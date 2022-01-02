@@ -20,9 +20,7 @@ public class ParameterModel : ParameterModelBase, ICommonModel
     /// </summary>
     /// <param name="parameterInfo">The parameter info.</param>
     /// <param name="attributes">The attributes.</param>
-    public ParameterModel(
-        ParameterInfo parameterInfo,
-        IReadOnlyList<object> attributes)
+    public ParameterModel(ParameterInfo parameterInfo, IReadOnlyList<object> attributes)
         : base(parameterInfo.ParameterType, attributes)
     {
         ParameterInfo = parameterInfo ?? throw new ArgumentNullException(nameof(parameterInfo));
@@ -32,8 +30,7 @@ public class ParameterModel : ParameterModelBase, ICommonModel
     /// Initializes a new <see cref="ParameterModel"/>.
     /// </summary>
     /// <param name="other">The parameter model to copy.</param>
-    public ParameterModel(ParameterModel other)
-        : base(other)
+    public ParameterModel(ParameterModel other) : base(other)
     {
         if (other == null)
         {
@@ -82,7 +79,10 @@ public class ParameterModel : ParameterModelBase, ICommonModel
     {
         get
         {
-            var parameterTypeName = TypeNameHelper.GetTypeDisplayName(ParameterInfo.ParameterType, fullName: false);
+            var parameterTypeName = TypeNameHelper.GetTypeDisplayName(
+                ParameterInfo.ParameterType,
+                fullName: false
+            );
             return $"{parameterTypeName} {ParameterName}";
         }
     }

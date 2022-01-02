@@ -25,10 +25,7 @@ namespace System.Data
 
         internal override bool IsSqlColumn
         {
-            get
-            {
-                return _column!.IsSqlType;
-            }
+            get { return _column!.IsSqlType; }
         }
 
         internal override void Bind(DataTable table, List<DataColumn> list)

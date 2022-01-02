@@ -18,10 +18,7 @@ namespace BlazorTemplates.Tests;
 
 public class BlazorServerTemplateTest : BlazorTemplateTest
 {
-    public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory)
-        : base(projectFactory)
-    {
-    }
+    public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory) : base(projectFactory) { }
 
     public override string ProjectType { get; } = "blazorserver";
 
@@ -32,15 +29,20 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
     {
         var project = await CreateBuildPublishAsync("blazorservernoauth" + browserKind);
 
-        await using var browser = BrowserManager.IsAvailable(browserKind) ?
-            await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo) :
-            null;
+        await using var browser = BrowserManager.IsAvailable(browserKind)
+            ? await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo)
+            : null;
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
 
@@ -61,7 +63,12 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
             if (BrowserManager.IsAvailable(browserKind))
@@ -79,25 +86,35 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
     }
 
     public static IEnumerable<object[]> BlazorServerTemplateWorks_IndividualAuthData =>
-            BrowserManager.WithBrowsers(new[] { BrowserKind.Chromium }, true, false);
+        BrowserManager.WithBrowsers(new[] { BrowserKind.Chromium }, true, false);
 
     [Theory]
     [MemberData(nameof(BlazorServerTemplateWorks_IndividualAuthData))]
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/30882")]
     [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/30825", Queues = "All.OSX")]
-    public async Task BlazorServerTemplateWorks_IndividualAuth(BrowserKind browserKind, bool useLocalDB)
+    public async Task BlazorServerTemplateWorks_IndividualAuth(
+        BrowserKind browserKind,
+        bool useLocalDB
+    )
     {
-        var project = await CreateBuildPublishAsync("blazorserverindividual" + browserKind + (useLocalDB ? "uld" : ""));
+        var project = await CreateBuildPublishAsync(
+            "blazorserverindividual" + browserKind + (useLocalDB ? "uld" : "")
+        );
 
-        var browser = !BrowserManager.IsAvailable(browserKind) ?
-            null :
-            await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
+        var browser = !BrowserManager.IsAvailable(browserKind)
+            ? null
+            : await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
             if (BrowserManager.IsAvailable(browserKind))
@@ -117,7 +134,12 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
             if (BrowserManager.IsAvailable(browserKind))
@@ -136,8 +158,9 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
 
     private async Task TestBasicNavigation(Project project, IPage page)
     {
-        var socket = BrowserContextInfo.Pages[page].WebSockets.SingleOrDefault() ??
-            (await page.WaitForEventAsync(PageEvent.WebSocket)).WebSocket;
+        var socket =
+            BrowserContextInfo.Pages[page].WebSockets.SingleOrDefault()
+            ?? (await page.WaitForEventAsync(PageEvent.WebSocket)).WebSocket;
 
         // Receive render batch
         await socket.WaitForEventAsync(WebSocketEvent.FrameReceived);
@@ -173,12 +196,29 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
 
     [Theory]
     [InlineData("IndividualB2C", null)]
-    [InlineData("IndividualB2C", new string[] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
+    [InlineData(
+        "IndividualB2C",
+        new string[]
+        {
+            "--called-api-url \"https://graph.microsoft.com\"",
+            "--called-api-scopes user.readwrite"
+        }
+    )]
     [InlineData("SingleOrg", null)]
-    [InlineData("SingleOrg", new string[] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
+    [InlineData(
+        "SingleOrg",
+        new string[]
+        {
+            "--called-api-url \"https://graph.microsoft.com\"",
+            "--called-api-scopes user.readwrite"
+        }
+    )]
     [InlineData("SingleOrg", new string[] { "--calls-graph" })]
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/30882")]
-    public Task BlazorServerTemplate_IdentityWeb_BuildAndPublish(string auth, string[] args)
-        => CreateBuildPublishAsync("blazorserveridweb" + Guid.NewGuid().ToString().Substring(0, 10).ToLowerInvariant(), auth, args);
-
+    public Task BlazorServerTemplate_IdentityWeb_BuildAndPublish(string auth, string[] args) =>
+        CreateBuildPublishAsync(
+            "blazorserveridweb" + Guid.NewGuid().ToString().Substring(0, 10).ToLowerInvariant(),
+            auth,
+            args
+        );
 }

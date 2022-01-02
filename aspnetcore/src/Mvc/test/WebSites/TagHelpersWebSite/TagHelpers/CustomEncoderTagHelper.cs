@@ -30,15 +30,18 @@ public class CustomEncoderTagHelper : TagHelper
     // Simple encoder that just wraps "string" as "Custom[[string]]". Note: Lacks all parameter checks.
     private class CustomEncoder : HtmlEncoder
     {
-        public CustomEncoder()
-        {
-        }
+        public CustomEncoder() { }
 
         public override int MaxOutputCharactersPerInputCharacter => 1;
 
-        public override string Encode(string value) => $"Custom[[{ value }]]";
+        public override string Encode(string value) => $"Custom[[{value}]]";
 
-        public override void Encode(TextWriter output, char[] value, int startIndex, int characterCount)
+        public override void Encode(
+            TextWriter output,
+            char[] value,
+            int startIndex,
+            int characterCount
+        )
         {
             if (characterCount == 0)
             {
@@ -50,7 +53,12 @@ public class CustomEncoderTagHelper : TagHelper
             output.Write("]]");
         }
 
-        public override void Encode(TextWriter output, string value, int startIndex, int characterCount)
+        public override void Encode(
+            TextWriter output,
+            string value,
+            int startIndex,
+            int characterCount
+        )
         {
             if (characterCount == 0)
             {
@@ -68,7 +76,8 @@ public class CustomEncoderTagHelper : TagHelper
             int unicodeScalar,
             char* buffer,
             int bufferLength,
-            out int numberOfCharactersWritten)
+            out int numberOfCharactersWritten
+        )
         {
             numberOfCharactersWritten = 0;
 

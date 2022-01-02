@@ -101,7 +101,8 @@ public class UrlTestEncoder : UrlEncoder
         int unicodeScalar,
         char* buffer,
         int bufferLength,
-        out int numberOfCharactersWritten)
+        out int numberOfCharactersWritten
+    )
     {
         if (buffer == null)
         {

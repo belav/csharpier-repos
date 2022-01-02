@@ -10,13 +10,22 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class CodeAnalysisExtensions
     {
-        public static bool HasAttribute(this ITypeSymbol typeSymbol, ITypeSymbol attribute, bool inherit)
-            => GetAttributes(typeSymbol, attribute, inherit).Any();
+        public static bool HasAttribute(
+            this ITypeSymbol typeSymbol,
+            ITypeSymbol attribute,
+            bool inherit
+        ) => GetAttributes(typeSymbol, attribute, inherit).Any();
 
-        public static bool HasAttribute(this IMethodSymbol methodSymbol, ITypeSymbol attribute, bool inherit)
-            => GetAttributes(methodSymbol, attribute, inherit).Any();
+        public static bool HasAttribute(
+            this IMethodSymbol methodSymbol,
+            ITypeSymbol attribute,
+            bool inherit
+        ) => GetAttributes(methodSymbol, attribute, inherit).Any();
 
-        public static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ITypeSymbol attribute)
+        public static IEnumerable<AttributeData> GetAttributes(
+            this ISymbol symbol,
+            ITypeSymbol attribute
+        )
         {
             foreach (var declaredAttribute in symbol.GetAttributes())
             {
@@ -27,7 +36,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static IEnumerable<AttributeData> GetAttributes(this IMethodSymbol methodSymbol, ITypeSymbol attribute, bool inherit)
+        public static IEnumerable<AttributeData> GetAttributes(
+            this IMethodSymbol methodSymbol,
+            ITypeSymbol attribute,
+            bool inherit
+        )
         {
             Debug.Assert(methodSymbol != null);
             attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
@@ -49,7 +62,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static IEnumerable<AttributeData> GetAttributes(this ITypeSymbol typeSymbol, ITypeSymbol attribute, bool inherit)
+        public static IEnumerable<AttributeData> GetAttributes(
+            this ITypeSymbol typeSymbol,
+            ITypeSymbol attribute,
+            bool inherit
+        )
         {
             typeSymbol = typeSymbol ?? throw new ArgumentNullException(nameof(typeSymbol));
             attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
@@ -68,9 +85,14 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static bool HasAttribute(this IPropertySymbol propertySymbol, ITypeSymbol attribute, bool inherit)
+        public static bool HasAttribute(
+            this IPropertySymbol propertySymbol,
+            ITypeSymbol attribute,
+            bool inherit
+        )
         {
-            propertySymbol = propertySymbol ?? throw new ArgumentNullException(nameof(propertySymbol));
+            propertySymbol =
+                propertySymbol ?? throw new ArgumentNullException(nameof(propertySymbol));
             attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
 
             if (!inherit)

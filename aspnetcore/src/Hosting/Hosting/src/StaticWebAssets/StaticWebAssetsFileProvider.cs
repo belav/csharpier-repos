@@ -27,9 +27,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
     // <<mylibrarypath>>\wwwroot\** to _content/mylibrary/**
     internal class StaticWebAssetsFileProvider : IFileProvider
     {
-        private static readonly StringComparison FilePathComparison = OperatingSystem.IsWindows() ?
-            StringComparison.OrdinalIgnoreCase :
-            StringComparison.Ordinal;
+        private static readonly StringComparison FilePathComparison = OperatingSystem.IsWindows()
+            ? StringComparison.OrdinalIgnoreCase
+            : StringComparison.Ordinal;
 
         public StaticWebAssetsFileProvider(string pathPrefix, string contentRoot)
         {
@@ -59,7 +59,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             {
                 return new StaticWebAssetsDirectoryRoot(BasePath);
             }
-            else if (BasePath.StartsWithSegments(modifiedSub, FilePathComparison, out var remaining))
+            else if (
+                BasePath.StartsWithSegments(modifiedSub, FilePathComparison, out var remaining)
+            )
             {
                 return new StaticWebAssetsDirectoryRoot(remaining);
             }
@@ -101,7 +103,11 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
 
         private bool StartsWithBasePath(string subpath, out PathString rest)
         {
-            return new PathString(subpath).StartsWithSegments(BasePath, FilePathComparison, out rest);
+            return new PathString(subpath).StartsWithSegments(
+                BasePath,
+                FilePathComparison,
+                out rest
+            );
         }
 
         private class StaticWebAssetsDirectoryRoot : IDirectoryContents
@@ -111,7 +117,10 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             public StaticWebAssetsDirectoryRoot(PathString remainingPath)
             {
                 // We MUST use the Value property here because it is unescaped.
-                _nextSegment = remainingPath.Value?.Split("/", StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? string.Empty;
+                _nextSegment =
+                    remainingPath.Value?
+                        .Split("/", StringSplitOptions.RemoveEmptyEntries)
+                        .FirstOrDefault() ?? string.Empty;
             }
 
             public bool Exists => true;
@@ -129,7 +138,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             private IEnumerator<IFileInfo> GenerateEnum()
             {
                 return new[] { new StaticWebAssetsFileInfo(_nextSegment) }
-                    .Cast<IFileInfo>().GetEnumerator();
+                    .Cast<IFileInfo>()
+                    .GetEnumerator();
             }
 
             private class StaticWebAssetsFileInfo : IFileInfo

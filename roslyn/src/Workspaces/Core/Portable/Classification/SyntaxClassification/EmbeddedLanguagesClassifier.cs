@@ -19,14 +19,20 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         public EmbeddedLanguagesClassifier(IEmbeddedLanguagesProvider languagesProvider)
         {
             _languagesProvider = languagesProvider;
-            SyntaxTokenKinds =
-                languagesProvider.Languages.Where(p => p.Classifier != null)
-                                           .SelectMany(p => p.Classifier.SyntaxTokenKinds)
-                                           .Distinct()
-                                           .ToImmutableArray();
+            SyntaxTokenKinds = languagesProvider.Languages
+                .Where(p => p.Classifier != null)
+                .SelectMany(p => p.Classifier.SyntaxTokenKinds)
+                .Distinct()
+                .ToImmutableArray();
         }
 
-        public override void AddClassifications(SyntaxToken token, SemanticModel semanticModel, ClassificationOptions options, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public override void AddClassifications(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            ClassificationOptions options,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var language in _languagesProvider.Languages)
             {
@@ -34,7 +40,13 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
                 if (classifier != null)
                 {
                     var count = result.Count;
-                    classifier.AddClassifications(token, semanticModel, options, result, cancellationToken);
+                    classifier.AddClassifications(
+                        token,
+                        semanticModel,
+                        options,
+                        result,
+                        cancellationToken
+                    );
                     if (result.Count != count)
                     {
                         // This classifier added values.  No need to check the other ones.

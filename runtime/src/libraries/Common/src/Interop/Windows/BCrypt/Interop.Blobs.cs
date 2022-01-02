@@ -48,7 +48,6 @@ internal static partial class Interop
         {
             Debug.Assert(blob != null);
             Debug.Assert(offset >= 0);
-
             unchecked
             {
                 blob[offset++] = ((byte)(value >> 24));
@@ -78,7 +77,6 @@ internal static partial class Interop
             BCRYPT_DSA_PRIVATE_MAGIC = 0x56505344,
             BCRYPT_DSA_PUBLIC_MAGIC_V2 = 0x32425044,
             BCRYPT_DSA_PRIVATE_MAGIC_V2 = 0x32565044,
-
             BCRYPT_ECDH_PUBLIC_P256_MAGIC = 0x314B4345,
             BCRYPT_ECDH_PRIVATE_P256_MAGIC = 0x324B4345,
             BCRYPT_ECDH_PUBLIC_P384_MAGIC = 0x334B4345,
@@ -87,7 +85,6 @@ internal static partial class Interop
             BCRYPT_ECDH_PRIVATE_P521_MAGIC = 0x364B4345,
             BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC = 0x504B4345,
             BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC = 0x564B4345,
-
             BCRYPT_ECDSA_PUBLIC_P256_MAGIC = 0x31534345,
             BCRYPT_ECDSA_PRIVATE_P256_MAGIC = 0x32534345,
             BCRYPT_ECDSA_PUBLIC_P384_MAGIC = 0x33534345,
@@ -96,7 +93,6 @@ internal static partial class Interop
             BCRYPT_ECDSA_PRIVATE_P521_MAGIC = 0x36534345,
             BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC = 0x50444345,
             BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC = 0x56444345,
-
             BCRYPT_RSAPUBLIC_MAGIC = 0x31415352,
             BCRYPT_RSAPRIVATE_MAGIC = 0x32415352,
             BCRYPT_RSAFULLPRIVATE_MAGIC = 0x33415352,
@@ -216,13 +212,13 @@ internal static partial class Interop
         internal struct BCRYPT_ECCFULLKEY_BLOB
         {
             internal KeyBlobMagicNumber Magic;
-            internal int Version;              //Version of the structure
-            internal ECC_CURVE_TYPE_ENUM CurveType;            //Supported curve types.
+            internal int Version; //Version of the structure
+            internal ECC_CURVE_TYPE_ENUM CurveType; //Supported curve types.
             internal ECC_CURVE_ALG_ID_ENUM CurveGenerationAlgId; //For X.592 verification purposes, if we include Seed we will need to include the algorithm ID.
-            internal int cbFieldLength;          //Byte length of the fields P, A, B, X, Y.
-            internal int cbSubgroupOrder;        //Byte length of the subgroup.
-            internal int cbCofactor;             //Byte length of cofactor of G in E.
-            internal int cbSeed;                 //Byte length of the seed used to generate the curve.
+            internal int cbFieldLength; //Byte length of the fields P, A, B, X, Y.
+            internal int cbSubgroupOrder; //Byte length of the subgroup.
+            internal int cbCofactor; //Byte length of cofactor of G in E.
+            internal int cbSeed; //Byte length of the seed used to generate the curve.
             // The rest of the buffer contains the domain parameters
         }
 
@@ -257,9 +253,9 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal struct BCryptBuffer
         {
-            internal int cbBuffer;             // Length of buffer, in bytes
+            internal int cbBuffer; // Length of buffer, in bytes
             internal CngBufferDescriptors BufferType; // Buffer type
-            internal IntPtr pvBuffer;          // Pointer to buffer
+            internal IntPtr pvBuffer; // Pointer to buffer
         }
 
         /// <summary>
@@ -273,9 +269,9 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal struct BCryptBufferDesc
         {
-            internal int ulVersion;            // Version number
-            internal int cBuffers;             // Number of buffers
-            internal IntPtr pBuffers;          // Pointer to array of BCryptBuffers
+            internal int ulVersion; // Version number
+            internal int cBuffers; // Number of buffers
+            internal IntPtr pBuffers; // Pointer to array of BCryptBuffers
         }
 
         /// <summary>
@@ -289,13 +285,13 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal struct BCRYPT_ECC_PARAMETER_HEADER
         {
-            internal int Version;              //Version of the structure
-            internal ECC_CURVE_TYPE_ENUM CurveType;            //Supported curve types.
+            internal int Version; //Version of the structure
+            internal ECC_CURVE_TYPE_ENUM CurveType; //Supported curve types.
             internal ECC_CURVE_ALG_ID_ENUM CurveGenerationAlgId; //For X.592 verification purposes, if we include Seed we will need to include the algorithm ID.
-            internal int cbFieldLength;          //Byte length of the fields P, A, B, X, Y.
-            internal int cbSubgroupOrder;        //Byte length of the subgroup.
-            internal int cbCofactor;             //Byte length of cofactor of G in E.
-            internal int cbSeed;                 //Byte length of the seed used to generate the curve.
+            internal int cbFieldLength; //Byte length of the fields P, A, B, X, Y.
+            internal int cbSubgroupOrder; //Byte length of the subgroup.
+            internal int cbCofactor; //Byte length of cofactor of G in E.
+            internal int cbSeed; //Byte length of the seed used to generate the curve.
             // The rest of the buffer contains the domain parameters
         }
 

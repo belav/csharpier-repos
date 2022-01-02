@@ -6,7 +6,9 @@ namespace System.IO.Tests
     // Concrete class to run common file attributes tests on the FileInfo class
     public class FileInfo_GetSetAttributesCommon : FileGetSetAttributes
     {
-        protected override FileAttributes GetAttributes(string path) => new FileInfo(path).Attributes;
-        protected override void SetAttributes(string path, FileAttributes attributes) => new FileInfo(path).Attributes = attributes;
+        protected override FileAttributes GetAttributes(string path) =>
+            new FileInfo(path).Attributes;
+        protected override void SetAttributes(string path, FileAttributes attributes) =>
+            new FileInfo(path).Attributes = attributes;
     }
 }

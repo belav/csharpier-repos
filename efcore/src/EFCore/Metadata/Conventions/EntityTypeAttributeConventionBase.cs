@@ -24,7 +24,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="EntityTypeAttributeConventionBase{TAttribute}" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-        protected EntityTypeAttributeConventionBase(ProviderConventionSetBuilderDependencies dependencies)
+        protected EntityTypeAttributeConventionBase(
+            ProviderConventionSetBuilderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -41,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
@@ -72,6 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected abstract void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             TAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context);
+            IConventionContext<IConventionEntityTypeBuilder> context
+        );
     }
 }

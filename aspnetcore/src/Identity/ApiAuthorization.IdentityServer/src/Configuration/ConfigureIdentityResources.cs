@@ -14,7 +14,10 @@ internal class ConfigureIdentityResources : IConfigureOptions<ApiAuthorizationOp
     private readonly ILogger<ConfigureIdentityResources> _logger;
     private static readonly char[] ScopesSeparator = new char[] { ' ' };
 
-    public ConfigureIdentityResources(IConfiguration configuration, ILogger<ConfigureIdentityResources> logger)
+    public ConfigureIdentityResources(
+        IConfiguration configuration,
+        ILogger<ConfigureIdentityResources> logger
+    )
     {
         _configuration = configuration;
         _logger = logger;
@@ -35,37 +38,54 @@ internal class ConfigureIdentityResources : IConfigureOptions<ApiAuthorizationOp
                 switch (scope)
                 {
                     case Duende.IdentityServer.IdentityServerConstants.StandardScopes.OpenId:
-                        options.IdentityResources.Add(IdentityResourceBuilder.OpenId()
-                            .AllowAllClients()
-                            .FromConfiguration()
-                            .Build());
+                        options.IdentityResources.Add(
+                            IdentityResourceBuilder
+                                .OpenId()
+                                .AllowAllClients()
+                                .FromConfiguration()
+                                .Build()
+                        );
                         break;
                     case Duende.IdentityServer.IdentityServerConstants.StandardScopes.Profile:
-                        options.IdentityResources.Add(IdentityResourceBuilder.Profile()
-                            .AllowAllClients()
-                            .FromConfiguration()
-                            .Build());
+                        options.IdentityResources.Add(
+                            IdentityResourceBuilder
+                                .Profile()
+                                .AllowAllClients()
+                                .FromConfiguration()
+                                .Build()
+                        );
                         break;
                     case Duende.IdentityServer.IdentityServerConstants.StandardScopes.Address:
-                        options.IdentityResources.Add(IdentityResourceBuilder.Address()
-                            .AllowAllClients()
-                            .FromConfiguration()
-                            .Build());
+                        options.IdentityResources.Add(
+                            IdentityResourceBuilder
+                                .Address()
+                                .AllowAllClients()
+                                .FromConfiguration()
+                                .Build()
+                        );
                         break;
                     case Duende.IdentityServer.IdentityServerConstants.StandardScopes.Email:
-                        options.IdentityResources.Add(IdentityResourceBuilder.Email()
-                            .AllowAllClients()
-                            .FromConfiguration()
-                            .Build());
+                        options.IdentityResources.Add(
+                            IdentityResourceBuilder
+                                .Email()
+                                .AllowAllClients()
+                                .FromConfiguration()
+                                .Build()
+                        );
                         break;
                     case Duende.IdentityServer.IdentityServerConstants.StandardScopes.Phone:
-                        options.IdentityResources.Add(IdentityResourceBuilder.Phone()
-                            .AllowAllClients()
-                            .FromConfiguration()
-                            .Build());
+                        options.IdentityResources.Add(
+                            IdentityResourceBuilder
+                                .Phone()
+                                .AllowAllClients()
+                                .FromConfiguration()
+                                .Build()
+                        );
                         break;
                     default:
-                        throw new InvalidOperationException($"Invalid identity resource name '{scope}'");
+                        throw new InvalidOperationException(
+                            $"Invalid identity resource name '{scope}'"
+                        );
                 }
             }
         }
@@ -76,8 +96,17 @@ internal class ConfigureIdentityResources : IConfigureOptions<ApiAuthorizationOp
         var allDefault = true;
         foreach (var resource in options.IdentityResources)
         {
-            if (!resource.Properties.TryGetValue(ApplicationProfilesPropertyNames.Source, out var source) ||
-                !string.Equals(ApplicationProfilesPropertyValues.Default, source, StringComparison.OrdinalIgnoreCase))
+            if (
+                !resource.Properties.TryGetValue(
+                    ApplicationProfilesPropertyNames.Source,
+                    out var source
+                )
+                || !string.Equals(
+                    ApplicationProfilesPropertyValues.Default,
+                    source,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 allDefault = false;
                 break;

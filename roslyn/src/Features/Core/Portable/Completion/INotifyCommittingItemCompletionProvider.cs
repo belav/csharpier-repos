@@ -21,6 +21,11 @@ namespace Microsoft.CodeAnalysis.Completion
         /// Host provides no guarantee when will this be called (i.e. pre or post document change), nor the text 
         /// change will actually happen at all (e.g. the commit operation might be cancelled due to cancellation/exception/etc.)
         /// </remarks>
-        Task NotifyCommittingItemAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken);
+        Task NotifyCommittingItemAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey,
+            CancellationToken cancellationToken
+        );
     }
 }

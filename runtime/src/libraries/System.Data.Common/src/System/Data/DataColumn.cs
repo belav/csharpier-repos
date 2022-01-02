@@ -24,15 +24,20 @@ namespace System.Data
     [ToolboxItem(false)]
     [DesignTimeVisible(false)]
     [DefaultProperty(nameof(ColumnName))]
-    [Editor("Microsoft.VSDesigner.Data.Design.DataColumnEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.DataColumnEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] // needed by Clone() to preserve derived ctors
     public class DataColumn : MarshalByValueComponent
     {
         private bool _allowNull = true;
         private string? _caption;
         private string _columnName;
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
         private Type _dataType = null!; // Always set in UpdateColumnType
         private StorageType _storageType;
         internal object _defaultValue = DBNull.Value; // DefaultValue Converter
@@ -78,41 +83,60 @@ namespace System.Data
         /// Initializes a new instance of a <see cref='System.Data.DataColumn'/>
         /// class.
         /// </summary>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This is safe because type is string and expression is null.")]
-        public DataColumn() : this(null, typeof(string), null, MappingType.Element)
-        {
-        }
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This is safe because type is string and expression is null."
+        )]
+        public DataColumn() : this(null, typeof(string), null, MappingType.Element) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataColumn'/> class
         /// using the specified column name.
         /// </summary>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This is safe because type is string and expression is null.")]
-        public DataColumn(string? columnName) : this(columnName, typeof(string), null, MappingType.Element)
-        {
-        }
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This is safe because type is string and expression is null."
+        )]
+        public DataColumn(string? columnName)
+            : this(columnName, typeof(string), null, MappingType.Element) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataColumn'/> class
         /// using the specified column name and data type.
         /// </summary>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Expression is null and `dataType` is marked appropriately.")]
-        public DataColumn(string? columnName, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type dataType) : this(columnName, dataType, null, MappingType.Element)
-        {
-        }
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Expression is null and `dataType` is marked appropriately."
+        )]
+        public DataColumn(
+            string? columnName,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type dataType
+        ) : this(columnName, dataType, null, MappingType.Element) { }
 
         /// <summary>
         /// Initializes a new instance
         /// of the <see cref='System.Data.DataColumn'/> class
         /// using the specified name, data type, and expression.
         /// </summary>
-        [RequiresUnreferencedCode("Members from serialized types or types used in expressions may be trimmed if not referenced directly.")]
-        public DataColumn(string? columnName, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type dataType, string? expr) : this(columnName, dataType, expr, MappingType.Element)
-        {
-        }
+        [RequiresUnreferencedCode(
+            "Members from serialized types or types used in expressions may be trimmed if not referenced directly."
+        )]
+        public DataColumn(
+            string? columnName,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type dataType,
+            string? expr
+        ) : this(columnName, dataType, expr, MappingType.Element) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataColumn'/> class
@@ -120,11 +144,28 @@ namespace System.Data
         /// the specified name, data type, expression, and value that determines whether the
         /// column is an attribute.
         /// </summary>
-        [RequiresUnreferencedCode("Members from serialized types or types used in expressions may be trimmed if not referenced directly.")]
-        public DataColumn(string? columnName, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type dataType, string? expr, MappingType type)
+        [RequiresUnreferencedCode(
+            "Members from serialized types or types used in expressions may be trimmed if not referenced directly."
+        )]
+        public DataColumn(
+            string? columnName,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type dataType,
+            string? expr,
+            MappingType type
+        )
         {
             GC.SuppressFinalize(this);
-            DataCommonEventSource.Log.Trace("<ds.DataColumn.DataColumn|API> {0}, columnName='{1}', expr='{2}', type={3}", ObjectID, columnName, expr, type);
+            DataCommonEventSource.Log.Trace(
+                "<ds.DataColumn.DataColumn|API> {0}, columnName='{1}', expr='{2}', type={3}",
+                ObjectID,
+                columnName,
+                expr,
+                type
+            );
 
             if (dataType == null)
             {
@@ -153,7 +194,14 @@ namespace System.Data
             _columnMapping = type;
         }
 
-        private void UpdateColumnType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type type, StorageType typeCode)
+        private void UpdateColumnType(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type type,
+            StorageType typeCode
+        )
         {
             TypeLimiter.EnsureTypeIsAllowed(type);
             _dataType = type;
@@ -165,19 +213,20 @@ namespace System.Data
             }
 
             DataStorage.ImplementsInterfaces(
-                                typeCode, type,
-                                out _isSqlType,
-                                out _implementsINullable,
-                                out _implementsIXMLSerializable,
-                                out _implementsIChangeTracking,
-                                out _implementsIRevertibleChangeTracking);
+                typeCode,
+                type,
+                out _isSqlType,
+                out _implementsINullable,
+                out _implementsIXMLSerializable,
+                out _implementsIChangeTracking,
+                out _implementsIRevertibleChangeTracking
+            );
 
             if (!_isSqlType && _implementsINullable)
             {
                 SqlUdtStorage.GetStaticNullForUdtType(type);
             }
         }
-
 
         /// <summary>
         /// Gets or sets a value indicating whether null
@@ -190,7 +239,11 @@ namespace System.Data
             get { return _allowNull; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataColumn.set_AllowDBNull|API> {0}, {1}", ObjectID, value);
+                long logScopeId = DataCommonEventSource.Log.EnterScope(
+                    "<ds.DataColumn.set_AllowDBNull|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 try
                 {
                     if (_allowNull != value)
@@ -223,7 +276,11 @@ namespace System.Data
             get { return ((null != _autoInc) && (_autoInc.Auto)); }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_AutoIncrement|API> {0}, {1}", ObjectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_AutoIncrement|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 if (AutoIncrement != value)
                 {
                     if (value)
@@ -242,7 +299,9 @@ namespace System.Data
                         {
                             if (HasData)
                             {
-                                throw ExceptionBuilder.AutoIncrementCannotSetIfHasData(DataType.Name);
+                                throw ExceptionBuilder.AutoIncrementCannotSetIfHasData(
+                                    DataType.Name
+                                );
                             }
 
                             DataType = typeof(int);
@@ -259,7 +318,10 @@ namespace System.Data
             get { return ((null != _autoInc) ? _autoInc.Current : AutoIncrementSeed); }
             set
             {
-                if ((BigInteger)AutoIncrementSeed != BigIntegerStorage.ConvertToBigInteger(value, FormatProvider))
+                if (
+                    (BigInteger)AutoIncrementSeed
+                    != BigIntegerStorage.ConvertToBigInteger(value, FormatProvider)
+                )
                 {
                     AutoInc.SetCurrent(value, FormatProvider);
                 }
@@ -267,10 +329,16 @@ namespace System.Data
         }
 
         internal AutoIncrementValue AutoInc =>
-            (_autoInc ?? (_autoInc = ((DataType == typeof(BigInteger)) ?
-                (AutoIncrementValue)new AutoIncrementBigInteger() :
-                new AutoIncrementInt64())));
-
+            (
+                _autoInc
+                ?? (
+                    _autoInc = (
+                        (DataType == typeof(BigInteger))
+                            ? (AutoIncrementValue)new AutoIncrementBigInteger()
+                            : new AutoIncrementInt64()
+                    )
+                )
+            );
 
         /// <summary>
         /// Gets or sets the starting value for a column that has its
@@ -282,7 +350,11 @@ namespace System.Data
             get { return ((null != _autoInc) ? _autoInc.Seed : 0L); }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_AutoIncrementSeed|API> {0}, {1}", ObjectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_AutoIncrementSeed|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 if (AutoIncrementSeed != value)
                 {
                     AutoInc.Seed = value;
@@ -300,7 +372,11 @@ namespace System.Data
             get { return ((null != _autoInc) ? _autoInc.Step : 1L); }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_AutoIncrementStep|API> {0}, {1}", ObjectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_AutoIncrementStep|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 if (AutoIncrementStep != value)
                 {
                     AutoInc.Step = value;
@@ -358,7 +434,11 @@ namespace System.Data
             get { return _columnName; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataColumn.set_ColumnName|API> {0}, '{1}'", ObjectID, value);
+                long logScopeId = DataCommonEventSource.Log.EnterScope(
+                    "<ds.DataColumn.set_ColumnName|API> {0}, '{1}'",
+                    ObjectID,
+                    value
+                );
                 try
                 {
                     if (value == null)
@@ -387,7 +467,9 @@ namespace System.Data
                         _encodedColumnName = null;
                         if (_table != null)
                         {
-                            _table.Columns.OnColumnPropertyChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this));
+                            _table.Columns.OnColumnPropertyChanged(
+                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                            );
                         }
                     }
                     else if (_columnName != value)
@@ -397,7 +479,9 @@ namespace System.Data
                         _encodedColumnName = null;
                         if (_table != null)
                         {
-                            _table.Columns.OnColumnPropertyChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this));
+                            _table.Columns.OnColumnPropertyChanged(
+                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
+                            );
                         }
                     }
                 }
@@ -444,9 +528,16 @@ namespace System.Data
                     value = string.Empty;
                 }
 
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_Prefix|API> {0}, '{1}'", ObjectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_Prefix|API> {0}, '{1}'",
+                    ObjectID,
+                    value
+                );
 
-                if ((XmlConvert.DecodeName(value) == value) && (XmlConvert.EncodeName(value) != value))
+                if (
+                    (XmlConvert.DecodeName(value) == value)
+                    && (XmlConvert.EncodeName(value) != value)
+                )
                 {
                     throw ExceptionBuilder.InvalidPrefix(value);
                 }
@@ -490,7 +581,10 @@ namespace System.Data
         [DefaultValue(typeof(string))]
         [RefreshProperties(RefreshProperties.All)]
         [TypeConverter(typeof(ColumnTypeConverter))]
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
         [AllowNull]
         public Type DataType
         {
@@ -528,11 +622,18 @@ namespace System.Data
                         {
                             if (_defaultValue is BigInteger)
                             {
-                                _defaultValue = BigIntegerStorage.ConvertFromBigInteger((BigInteger)_defaultValue, value, FormatProvider);
+                                _defaultValue = BigIntegerStorage.ConvertFromBigInteger(
+                                    (BigInteger)_defaultValue,
+                                    value,
+                                    FormatProvider
+                                );
                             }
                             else if (typeof(BigInteger) == value)
                             {
-                                _defaultValue = BigIntegerStorage.ConvertToBigInteger(_defaultValue, FormatProvider);
+                                _defaultValue = BigIntegerStorage.ConvertToBigInteger(
+                                    _defaultValue,
+                                    FormatProvider
+                                );
                             }
                             else if (typeof(string) == value)
                             {
@@ -546,16 +647,30 @@ namespace System.Data
                             }
                             else if (typeof(object) != value)
                             {
-                                DefaultValue = SqlConvert.ChangeTypeForDefaultValue(DefaultValue, value, FormatProvider);
+                                DefaultValue = SqlConvert.ChangeTypeForDefaultValue(
+                                    DefaultValue,
+                                    value,
+                                    FormatProvider
+                                );
                             }
                         }
                         catch (InvalidCastException ex)
                         {
-                            throw ExceptionBuilder.DefaultValueDataType(ColumnName, DefaultValue.GetType(), value, ex);
+                            throw ExceptionBuilder.DefaultValueDataType(
+                                ColumnName,
+                                DefaultValue.GetType(),
+                                value,
+                                ex
+                            );
                         }
                         catch (FormatException ex)
                         {
-                            throw ExceptionBuilder.DefaultValueDataType(ColumnName, DefaultValue.GetType(), value, ex);
+                            throw ExceptionBuilder.DefaultValueDataType(
+                                ColumnName,
+                                DefaultValue.GetType(),
+                                value,
+                                ex
+                            );
                         }
                     }
 
@@ -635,7 +750,10 @@ namespace System.Data
                             break;
                         case DataSetDateTime.Unspecified:
                         case DataSetDateTime.UnspecifiedLocal:
-                            if (_dateTimeMode == DataSetDateTime.Unspecified || _dateTimeMode == DataSetDateTime.UnspecifiedLocal)
+                            if (
+                                _dateTimeMode == DataSetDateTime.Unspecified
+                                || _dateTimeMode == DataSetDateTime.UnspecifiedLocal
+                            )
                             {
                                 break;
                             }
@@ -671,11 +789,19 @@ namespace System.Data
                     }
                     else if (_isSqlType)
                     {
-                        _defaultValue = SqlConvert.ChangeTypeForDefaultValue(_defaultValue, _dataType, FormatProvider);
+                        _defaultValue = SqlConvert.ChangeTypeForDefaultValue(
+                            _defaultValue,
+                            _dataType,
+                            FormatProvider
+                        );
                     }
                     else if (_implementsINullable)
                     {
-                        PropertyInfo propInfo = _dataType.GetProperty("Null", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)!;
+                        PropertyInfo propInfo = _dataType.GetProperty(
+                            "Null",
+                            System.Reflection.BindingFlags.Public
+                                | System.Reflection.BindingFlags.Static
+                        )!;
                         if (propInfo != null)
                         {
                             _defaultValue = propInfo.GetValue(null, null)!;
@@ -687,7 +813,10 @@ namespace System.Data
             }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_DefaultValue|API> {0}", ObjectID);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_DefaultValue|API> {0}",
+                    ObjectID
+                );
                 if (_defaultValue == null || !DefaultValue.Equals(value))
                 {
                     if (AutoIncrement)
@@ -701,15 +830,30 @@ namespace System.Data
                         // If the DefualtValue is different from the Column DataType, we will coerce the value to the DataType
                         try
                         {
-                            newDefaultValue = SqlConvert.ChangeTypeForDefaultValue(newDefaultValue, DataType, FormatProvider);
+                            newDefaultValue = SqlConvert.ChangeTypeForDefaultValue(
+                                newDefaultValue,
+                                DataType,
+                                FormatProvider
+                            );
                         }
                         catch (InvalidCastException ex)
                         {
-                            throw ExceptionBuilder.DefaultValueColumnDataType(ColumnName, newDefaultValue.GetType(), DataType, ex);
+                            throw ExceptionBuilder.DefaultValueColumnDataType(
+                                ColumnName,
+                                newDefaultValue.GetType(),
+                                DataType,
+                                ex
+                            );
                         }
                     }
                     _defaultValue = newDefaultValue;
-                    _defaultValueIsNull = ((newDefaultValue == DBNull.Value) || (ImplementsINullable && DataStorage.IsObjectSqlNull(newDefaultValue))) ? true : false;
+                    _defaultValueIsNull =
+                        (
+                            (newDefaultValue == DBNull.Value)
+                            || (ImplementsINullable && DataStorage.IsObjectSqlNull(newDefaultValue))
+                        )
+                            ? true
+                            : false;
                 }
             }
         }
@@ -728,10 +872,16 @@ namespace System.Data
         public string Expression
         {
             get { return (_expression == null ? "" : _expression.Expression); }
-            [RequiresUnreferencedCode("Members from types used in the expressions may be trimmed if not referenced directly.")]
+            [RequiresUnreferencedCode(
+                "Members from types used in the expressions may be trimmed if not referenced directly."
+            )]
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataColumn.set_Expression|API> {0}, '{1}'", ObjectID, value);
+                long logScopeId = DataCommonEventSource.Log.EnterScope(
+                    "<ds.DataColumn.set_Expression|API> {0}, '{1}'",
+                    ObjectID,
+                    value
+                );
 
                 if (value == null)
                 {
@@ -743,7 +893,11 @@ namespace System.Data
                     DataExpression? newExpression = null;
                     if (value.Length > 0)
                     {
-                        DataExpression testExpression = new DataExpression(_table, value, _dataType);
+                        DataExpression testExpression = new DataExpression(
+                            _table,
+                            value,
+                            _dataType
+                        );
                         if (testExpression.HasValue)
                         {
                             newExpression = testExpression;
@@ -764,7 +918,10 @@ namespace System.Data
                             {
                                 if (_table.Constraints[i].ContainsColumn(this))
                                 {
-                                    throw ExceptionBuilder.ExpressionAndConstraint(this, _table.Constraints[i]);
+                                    throw ExceptionBuilder.ExpressionAndConstraint(
+                                        this,
+                                        _table.Constraints[i]
+                                    );
                                 }
                             }
                         }
@@ -859,7 +1016,8 @@ namespace System.Data
         /// Gets the collection of custom user information.
         /// </summary>
         [Browsable(false)]
-        public PropertyCollection ExtendedProperties => _extendedProperties ?? (_extendedProperties = new PropertyCollection());
+        public PropertyCollection ExtendedProperties =>
+            _extendedProperties ?? (_extendedProperties = new PropertyCollection());
 
         /// <summary>
         /// Indicates whether this column is now storing data.
@@ -937,7 +1095,11 @@ namespace System.Data
             get { return _maxLength; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataColumn.set_MaxLength|API> {0}, {1}", ObjectID, value);
+                long logScopeId = DataCommonEventSource.Log.EnterScope(
+                    "<ds.DataColumn.set_MaxLength|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 try
                 {
                     if (_maxLength != value)
@@ -953,7 +1115,11 @@ namespace System.Data
                         int oldValue = _maxLength;
                         _maxLength = Math.Max(value, -1);
 
-                        if (((oldValue < 0) || (value < oldValue)) && (null != _table) && _table.EnforceConstraints)
+                        if (
+                            ((oldValue < 0) || (value < oldValue))
+                            && (null != _table)
+                            && _table.EnforceConstraints
+                        )
                         {
                             if (!CheckMaxLength())
                             {
@@ -988,7 +1154,11 @@ namespace System.Data
             }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_Namespace|API> {0}, '{1}'", ObjectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_Namespace|API> {0}, '{1}'",
+                    ObjectID,
+                    value
+                );
 
                 if (_columnUri != value)
                 {
@@ -1074,7 +1244,11 @@ namespace System.Data
             get { return _readOnly; }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_ReadOnly|API> {0}, {1}", ObjectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_ReadOnly|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 if (_readOnly != value)
                 {
                     if (!value && _expression != null)
@@ -1118,7 +1292,19 @@ namespace System.Data
             {
                 if (Computed)
                 {
-                    if ((table == null) || (!table.fInitInProgress && ((table.DataSet == null) || (!table.DataSet._fIsSchemaLoading && !table.DataSet._fInitInProgress))))
+                    if (
+                        (table == null)
+                        || (
+                            !table.fInitInProgress
+                            && (
+                                (table.DataSet == null)
+                                || (
+                                    !table.DataSet._fIsSchemaLoading
+                                    && !table.DataSet._fInitInProgress
+                                )
+                            )
+                        )
+                    )
                     {
                         // We need to re-bind all expression columns.
                         DataExpression!.Bind(table);
@@ -1211,7 +1397,7 @@ namespace System.Data
 
             DataRow dr = GetDataRow(record);
             if (dr != null)
-            {  // at initialization time (datatable.NewRow(), we would fill the storage with default value, but at that time we won't have datarow)
+            { // at initialization time (datatable.NewRow(), we would fill the storage with default value, but at that time we won't have datarow)
                 dr.LastChangedColumn = this;
             }
         }
@@ -1232,7 +1418,11 @@ namespace System.Data
             get { return _unique; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope("<ds.DataColumn.set_Unique|API> {0}, {1}", ObjectID, value);
+                long logScopeId = DataCommonEventSource.Log.EnterScope(
+                    "<ds.DataColumn.set_Unique|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 try
                 {
                     if (_unique != value)
@@ -1251,13 +1441,24 @@ namespace System.Data
                             }
                             else
                             {
-                                for (IEnumerator e = _table.Constraints.GetEnumerator(); e.MoveNext();)
+                                for (
+                                    IEnumerator e = _table.Constraints.GetEnumerator();
+                                    e.MoveNext();
+
+                                )
                                 {
                                     UniqueConstraint? o = (e.Current as UniqueConstraint);
-                                    if ((null != o) && (o.ColumnsReference.Length == 1) && (o.ColumnsReference[0] == this))
+                                    if (
+                                        (null != o)
+                                        && (o.ColumnsReference.Length == 1)
+                                        && (o.ColumnsReference[0] == this)
+                                    )
                                         oldConstraint = o;
                                 }
-                                Debug.Assert(oldConstraint != null, "Should have found a column to remove from the collection.");
+                                Debug.Assert(
+                                    oldConstraint != null,
+                                    "Should have found a column to remove from the collection."
+                                );
                                 _table.Constraints.CanRemove(oldConstraint, true);
                             }
                         }
@@ -1272,7 +1473,10 @@ namespace System.Data
                                 // already been true if there was an existed UniqueConstraint for this column
 
                                 UniqueConstraint constraint = new UniqueConstraint(this);
-                                Debug.Assert(_table.Constraints.FindKeyConstraint(this) == null, "Should not be a duplication constraint in collection");
+                                Debug.Assert(
+                                    _table.Constraints.FindKeyConstraint(this) == null,
+                                    "Should not be a duplication constraint in collection"
+                                );
                                 _table.Constraints.Add(constraint);
                             }
                             else
@@ -1288,7 +1492,6 @@ namespace System.Data
                 }
             }
         }
-
 
         internal void InternalUnique(bool value) => _unique = value;
 
@@ -1321,7 +1524,11 @@ namespace System.Data
             get { return _columnMapping; }
             set
             {
-                DataCommonEventSource.Log.Trace("<ds.DataColumn.set_ColumnMapping|API> {0}, {1}", ObjectID, value);
+                DataCommonEventSource.Log.Trace(
+                    "<ds.DataColumn.set_ColumnMapping|API> {0}, {1}",
+                    ObjectID,
+                    value
+                );
                 if (value != _columnMapping)
                 {
                     if (value == MappingType.SimpleContent && _table != null)
@@ -1506,7 +1713,9 @@ namespace System.Data
                 // if strings, then do exact character by character check
                 if (leftType == typeof(string) && rightType == typeof(string))
                 {
-                    return string.CompareOrdinal((string)_storage.Get(record1), (string)value) == 0 ? true : false;
+                    return string.CompareOrdinal((string)_storage.Get(record1), (string)value) == 0
+                      ? true
+                      : false;
                 }
                 // make sure same type
                 else if (leftType == rightType)
@@ -1555,7 +1764,13 @@ namespace System.Data
             clone._columnPrefix = _columnPrefix;
             clone.DataType = DataType;
             clone._defaultValue = _defaultValue;
-            clone._defaultValueIsNull = ((_defaultValue == DBNull.Value) || (clone.ImplementsINullable && DataStorage.IsObjectSqlNull(_defaultValue))) ? true : false;
+            clone._defaultValueIsNull =
+                (
+                    (_defaultValue == DBNull.Value)
+                    || (clone.ImplementsINullable && DataStorage.IsObjectSqlNull(_defaultValue))
+                )
+                    ? true
+                    : false;
             clone._columnMapping = _columnMapping; // clone column Mapping since we dont let MaxLength to be set throu API
             clone._readOnly = _readOnly;
             clone.MaxLength = MaxLength;
@@ -1597,7 +1812,6 @@ namespace System.Data
             return null;
         }
 
-
         internal object GetAggregateValue(int[] records, AggregateType kind)
         {
             if (_storage == null)
@@ -1629,22 +1843,23 @@ namespace System.Data
         }
 
         internal static bool IsAutoIncrementType(Type dataType) =>
-            dataType == typeof(int) ||
-            dataType == typeof(long) ||
-            dataType == typeof(short) ||
-            dataType == typeof(decimal) ||
-            dataType == typeof(BigInteger) ||
-            dataType == typeof(SqlInt32) ||
-            dataType == typeof(SqlInt64) ||
-            dataType == typeof(SqlInt16) ||
-            dataType == typeof(SqlDecimal);
+            dataType == typeof(int)
+            || dataType == typeof(long)
+            || dataType == typeof(short)
+            || dataType == typeof(decimal)
+            || dataType == typeof(BigInteger)
+            || dataType == typeof(SqlInt32)
+            || dataType == typeof(SqlInt64)
+            || dataType == typeof(SqlInt16)
+            || dataType == typeof(SqlDecimal);
 
         private bool IsColumnMappingValid(StorageType typeCode, MappingType mapping) =>
             !((mapping != MappingType.Element) && DataStorage.IsTypeCustomType(typeCode));
 
-        internal bool IsCustomType => _storage != null ?
-            _storage._isCustomDefinedType :
-            DataStorage.IsTypeCustomType(DataType);
+        internal bool IsCustomType =>
+            _storage != null
+                ? _storage._isCustomDefinedType
+                : DataStorage.IsTypeCustomType(DataType);
 
         internal bool IsValueCustomTypeInstance(object value) =>
             // if instance is not a storage supported type (built in or SQL types)
@@ -1708,7 +1923,11 @@ namespace System.Data
                     value = dr[this];
                     if (!_isSqlType)
                     {
-                        if (value != null && value != DBNull.Value && ((string)value).Length > MaxLength)
+                        if (
+                            value != null
+                            && value != DBNull.Value
+                            && ((string)value).Length > MaxLength
+                        )
                         {
                             if (errorText == null)
                             {
@@ -1721,7 +1940,10 @@ namespace System.Data
                     }
                     else
                     {
-                        if (!DataStorage.IsObjectNull(value) && ((SqlString)value).Value.Length > MaxLength)
+                        if (
+                            !DataStorage.IsObjectNull(value)
+                            && ((SqlString)value).Value.Length > MaxLength
+                        )
                         {
                             if (errorText == null)
                             {
@@ -1786,9 +2008,8 @@ namespace System.Data
         internal void OnSetDataSet() { }
 
         // Returns the <see cref='System.Data.DataColumn.Expression'/> of the column, if one exists.
-        public override string ToString() => _expression == null ?
-            ColumnName :
-            ColumnName + " + " + Expression;
+        public override string ToString() =>
+            _expression == null ? ColumnName : ColumnName + " + " + Expression;
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal object ConvertXmlToObject(string s)
@@ -1806,14 +2027,24 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal string ConvertObjectToXml(object value)
         {
-            Debug.Assert(value != null && (value != DBNull.Value), "Caller is resposible for checking on DBNull");
+            Debug.Assert(
+                value != null && (value != DBNull.Value),
+                "Caller is resposible for checking on DBNull"
+            );
             return InsureStorage().ConvertObjectToXml(value);
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        internal void ConvertObjectToXml(object value, XmlWriter xmlWriter, XmlRootAttribute? xmlAttrib)
+        internal void ConvertObjectToXml(
+            object value,
+            XmlWriter xmlWriter,
+            XmlRootAttribute? xmlAttrib
+        )
         {
-            Debug.Assert(value != null && (value != DBNull.Value), "Caller is resposible for checking on DBNull");
+            Debug.Assert(
+                value != null && (value != DBNull.Value),
+                "Caller is resposible for checking on DBNull"
+            );
             InsureStorage().ConvertObjectToXml(value, xmlWriter, xmlAttrib);
         }
 
@@ -1822,7 +2053,12 @@ namespace System.Data
             return InsureStorage().GetEmptyStorageInternal(recordCount);
         }
 
-        internal void CopyValueIntoStore(int record, object store, BitArray nullbits, int storeIndex)
+        internal void CopyValueIntoStore(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             Debug.Assert(null != _storage, "no storage");
             _storage.CopyValueInternal(record, store, nullbits, storeIndex);
@@ -1841,7 +2077,10 @@ namespace System.Data
                 _dependentColumns = new List<DataColumn>();
             }
 
-            Debug.Assert(!_dependentColumns.Contains(expressionColumn), "duplicate column - expected to be unique");
+            Debug.Assert(
+                !_dependentColumns.Contains(expressionColumn),
+                "duplicate column - expected to be unique"
+            );
             _dependentColumns.Add(expressionColumn);
             _table!.AddDependentColumn(expressionColumn);
         }
@@ -1855,7 +2094,10 @@ namespace System.Data
             _table!.RemoveDependentColumn(expressionColumn);
         }
 
-        internal void HandleDependentColumnList(DataExpression? oldExpression, DataExpression? newExpression)
+        internal void HandleDependentColumnList(
+            DataExpression? oldExpression,
+            DataExpression? newExpression
+        )
         {
             Debug.Assert(_table != null);
             DataColumn[] dependency;
@@ -1893,13 +2135,15 @@ namespace System.Data
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "User has already got warning when creating original column.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "User has already got warning when creating original column."
+        )]
         internal void CopyExpressionFrom(DataColumn source)
         {
             Expression = source.Expression;
         }
-
     }
 
     internal abstract class AutoIncrementValue
@@ -1916,7 +2160,10 @@ namespace System.Data
 
         internal AutoIncrementValue Clone()
         {
-            AutoIncrementValue clone = (this is AutoIncrementInt64) ? new AutoIncrementInt64() : (AutoIncrementValue)new AutoIncrementBigInteger();
+            AutoIncrementValue clone =
+                (this is AutoIncrementInt64)
+                    ? new AutoIncrementInt64()
+                    : (AutoIncrementValue)new AutoIncrementBigInteger();
             clone.Auto = Auto;
             clone.Seed = Seed;
             clone.Step = Step;
@@ -1995,8 +2242,18 @@ namespace System.Data
 
         internal override void SetCurrentAndIncrement(object value)
         {
-            Debug.Assert(null != value && DataColumn.IsAutoIncrementType(value.GetType()) && !(value is BigInteger), "unexpected value for autoincrement");
-            long v = (long)SqlConvert.ChangeType2(value, StorageType.Int64, typeof(long), CultureInfo.InvariantCulture);
+            Debug.Assert(
+                null != value
+                    && DataColumn.IsAutoIncrementType(value.GetType())
+                    && !(value is BigInteger),
+                "unexpected value for autoincrement"
+            );
+            long v = (long)SqlConvert.ChangeType2(
+                value,
+                StorageType.Int64,
+                typeof(long),
+                CultureInfo.InvariantCulture
+            );
             if (BoundaryCheck(v))
             {
                 _current = unchecked(v + _step);
@@ -2084,6 +2341,6 @@ namespace System.Data
         }
 
         private bool BoundaryCheck(BigInteger value) =>
-           ((_step < 0) && (value <= _current)) || ((0 < _step) && (_current <= value));
+            ((_step < 0) && (value <= _current)) || ((0 < _step) && (_current <= value));
     }
 }

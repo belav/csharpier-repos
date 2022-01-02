@@ -30,10 +30,7 @@ namespace System.Collections.Immutable
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         public T[] A
         {
-            get
-            {
-                return _builder.ToArray();
-            }
+            get { return _builder.ToArray(); }
         }
     }
 }

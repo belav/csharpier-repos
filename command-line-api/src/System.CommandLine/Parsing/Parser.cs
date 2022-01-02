@@ -16,23 +16,19 @@ namespace System.CommandLine.Parsing
         {
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-            if (configuration.RootCommand is Command { ImplicitParser: null} cmd)
+            if (configuration.RootCommand is Command { ImplicitParser: null } cmd)
             {
                 cmd.ImplicitParser = this;
             }
         }
 
         /// <param name="command">The root command for the parser.</param>
-        public Parser(Command command) : this(new CommandLineConfiguration(command))
-        {
-        }
-        
+        public Parser(Command command) : this(new CommandLineConfiguration(command)) { }
+
         /// <summary>
         /// Initializes a new instance of the Parser class with using the default <seealso cref="RootCommand"/>.
         /// </summary>
-        public Parser() : this(new RootCommand())
-        {
-        }
+        public Parser() : this(new RootCommand()) { }
 
         /// <summary>
         /// The configuration on which the parser's grammar and behaviors are based.
@@ -45,15 +41,11 @@ namespace System.CommandLine.Parsing
         /// <param name="arguments">The string array typically passed to a program's <c>Main</c> method.</param>
         /// <param name="rawInput">Holds the value of a complete command line input prior to splitting and tokenization, when provided. This will typically not be available when the parser is called from <c>Program.Main</c>. It is primarily used when calculating suggestions via the <c>dotnet-suggest</c> tool.</param>
         /// <returns>A <see cref="ParseResult"/> providing details about the parse operation.</returns>
-        public ParseResult Parse(
-            IReadOnlyList<string> arguments,
-            string? rawInput = null)
+        public ParseResult Parse(IReadOnlyList<string> arguments, string? rawInput = null)
         {
             var tokenizeResult = arguments.Tokenize(Configuration);
 
-            var operation = new ParseOperation(
-                tokenizeResult,
-                Configuration);
+            var operation = new ParseOperation(tokenizeResult, Configuration);
 
             operation.Parse();
 
@@ -63,7 +55,8 @@ namespace System.CommandLine.Parsing
                 operation.UnparsedTokens,
                 operation.UnmatchedTokens,
                 operation.Errors,
-                rawInput);
+                rawInput
+            );
 
             visitor.Visit(operation.RootCommandNode!);
 

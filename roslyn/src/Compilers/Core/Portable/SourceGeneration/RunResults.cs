@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis
 
         private ImmutableArray<SyntaxTree> _lazyGeneratedTrees;
 
-        internal GeneratorDriverRunResult(ImmutableArray<GeneratorRunResult> results, TimeSpan elapsedTime)
+        internal GeneratorDriverRunResult(
+            ImmutableArray<GeneratorRunResult> results,
+            TimeSpan elapsedTime
+        )
         {
             this.Results = results;
             ElapsedTime = elapsedTime;
@@ -47,7 +50,10 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_lazyDiagnostics.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyDiagnostics, Results.SelectMany(r => r.Diagnostics).ToImmutableArray());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyDiagnostics,
+                        Results.SelectMany(r => r.Diagnostics).ToImmutableArray()
+                    );
                 }
                 return _lazyDiagnostics;
             }
@@ -65,7 +71,12 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_lazyGeneratedTrees.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyGeneratedTrees, Results.SelectMany(r => r.GeneratedSources.Select(g => g.SyntaxTree)).ToImmutableArray());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyGeneratedTrees,
+                        Results
+                            .SelectMany(r => r.GeneratedSources.Select(g => g.SyntaxTree))
+                            .ToImmutableArray()
+                    );
                 }
                 return _lazyGeneratedTrees;
             }
@@ -77,9 +88,17 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public readonly struct GeneratorRunResult
     {
-        internal GeneratorRunResult(ISourceGenerator generator, ImmutableArray<GeneratedSourceResult> generatedSources, ImmutableArray<Diagnostic> diagnostics, Exception? exception, TimeSpan elapsedTime)
+        internal GeneratorRunResult(
+            ISourceGenerator generator,
+            ImmutableArray<GeneratedSourceResult> generatedSources,
+            ImmutableArray<Diagnostic> diagnostics,
+            Exception? exception,
+            TimeSpan elapsedTime
+        )
         {
-            Debug.Assert(exception is null || (generatedSources.IsEmpty && diagnostics.Length == 1));
+            Debug.Assert(
+                exception is null || (generatedSources.IsEmpty && diagnostics.Length == 1)
+            );
 
             this.Generator = generator;
             this.GeneratedSources = generatedSources;

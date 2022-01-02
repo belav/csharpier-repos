@@ -30,8 +30,9 @@ internal
 #endif
 static class ActivatorUtilities
 {
-    private static readonly MethodInfo GetServiceInfo =
-        GetMethodInfo<Func<IServiceProvider, Type, Type, bool, object>>((sp, t, r, c) => GetService(sp, t, r, c));
+    private static readonly MethodInfo GetServiceInfo = GetMethodInfo<
+        Func<IServiceProvider, Type, Type, bool, object>
+    >((sp, t, r, c) => GetService(sp, t, r, c));
 
     /// <summary>
     /// Instantiate a type with constructor arguments provided directly and/or from an <see cref="IServiceProvider"/>.
@@ -40,7 +41,11 @@ static class ActivatorUtilities
     /// <param name="instanceType">The type to activate</param>
     /// <param name="parameters">Constructor arguments not provided by the <paramref name="provider"/>.</param>
     /// <returns>An activated object of type instanceType</returns>
-    public static object CreateInstance(IServiceProvider provider, Type instanceType, params object[] parameters)
+    public static object CreateInstance(
+        IServiceProvider provider,
+        Type instanceType,
+        params object[] parameters
+    )
     {
         int bestLength = -1;
         var seenPreferred = false;
@@ -52,7 +57,10 @@ static class ActivatorUtilities
             foreach (var constructor in instanceType.GetConstructors())
             {
                 var matcher = new ConstructorMatcher(constructor);
-                var isPreferred = constructor.IsDefined(typeof(ActivatorUtilitiesConstructorAttribute), false);
+                var isPreferred = constructor.IsDefined(
+                    typeof(ActivatorUtilitiesConstructorAttribute),
+                    false
+                );
                 var length = matcher.Match(parameters);
 
                 if (isPreferred)
@@ -80,7 +88,8 @@ static class ActivatorUtilities
 
         if (bestLength == -1)
         {
-            var message = $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.";
+            var message =
+                $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.";
             throw new InvalidOperationException(message);
         }
 
@@ -101,14 +110,27 @@ static class ActivatorUtilities
     /// </returns>
     public static ObjectFactory CreateFactory(Type instanceType, Type[] argumentTypes)
     {
-        FindApplicableConstructor(instanceType, argumentTypes, out ConstructorInfo constructor, out int?[] parameterMap);
+        FindApplicableConstructor(
+            instanceType,
+            argumentTypes,
+            out ConstructorInfo constructor,
+            out int?[] parameterMap
+        );
 
         var provider = Expression.Parameter(typeof(IServiceProvider), "provider");
         var argumentArray = Expression.Parameter(typeof(object[]), "argumentArray");
-        var factoryExpressionBody = BuildFactoryExpression(constructor, parameterMap, provider, argumentArray);
+        var factoryExpressionBody = BuildFactoryExpression(
+            constructor,
+            parameterMap,
+            provider,
+            argumentArray
+        );
 
         var factoryLamda = Expression.Lambda<Func<IServiceProvider, object[], object>>(
-            factoryExpressionBody, provider, argumentArray);
+            factoryExpressionBody,
+            provider,
+            argumentArray
+        );
 
         var result = factoryLamda.Compile();
         return result.Invoke;
@@ -125,7 +147,6 @@ static class ActivatorUtilities
     {
         return (T)CreateInstance(provider, typeof(T), parameters);
     }
-
 
     /// <summary>
     /// Retrieve an instance of the given type from the service provider. If one is not found then instantiate it directly.
@@ -155,12 +176,18 @@ static class ActivatorUtilities
         return mc.Method;
     }
 
-    private static object? GetService(IServiceProvider sp, Type type, Type requiredBy, bool isDefaultParameterRequired)
+    private static object? GetService(
+        IServiceProvider sp,
+        Type type,
+        Type requiredBy,
+        bool isDefaultParameterRequired
+    )
     {
         var service = sp.GetService(type);
         if (service == null && !isDefaultParameterRequired)
         {
-            var message = $"Unable to resolve service for type '{type}' while attempting to activate '{requiredBy}'.";
+            var message =
+                $"Unable to resolve service for type '{type}' while attempting to activate '{requiredBy}'.";
             throw new InvalidOperationException(message);
         }
         return service;
@@ -170,7 +197,8 @@ static class ActivatorUtilities
         ConstructorInfo constructor,
         int?[] parameterMap,
         Expression serviceProvider,
-        Expression factoryArgumentArray)
+        Expression factoryArgumentArray
+    )
     {
         var constructorParameters = constructor.GetParameters();
         var constructorArguments = new Expression[constructorParameters.Length];
@@ -179,18 +207,27 @@ static class ActivatorUtilities
         {
             var constructorParameter = constructorParameters[i];
             var parameterType = constructorParameter.ParameterType;
-            var hasDefaultValue = ParameterDefaultValue.TryGetDefaultValue(constructorParameter, out var defaultValue);
+            var hasDefaultValue = ParameterDefaultValue.TryGetDefaultValue(
+                constructorParameter,
+                out var defaultValue
+            );
 
             if (parameterMap[i] != null)
             {
-                constructorArguments[i] = Expression.ArrayAccess(factoryArgumentArray, Expression.Constant(parameterMap[i]));
+                constructorArguments[i] = Expression.ArrayAccess(
+                    factoryArgumentArray,
+                    Expression.Constant(parameterMap[i])
+                );
             }
             else
             {
-                var parameterTypeExpression = new Expression[] { serviceProvider,
+                var parameterTypeExpression = new Expression[]
+                {
+                    serviceProvider,
                     Expression.Constant(parameterType, typeof(Type)),
                     Expression.Constant(constructor.DeclaringType, typeof(Type)),
-                    Expression.Constant(hasDefaultValue) };
+                    Expression.Constant(hasDefaultValue)
+                };
                 constructorArguments[i] = Expression.Call(GetServiceInfo, parameterTypeExpression);
             }
 
@@ -199,7 +236,10 @@ static class ActivatorUtilities
             if (hasDefaultValue)
             {
                 var defaultValueExpression = Expression.Constant(defaultValue);
-                constructorArguments[i] = Expression.Coalesce(constructorArguments[i], defaultValueExpression);
+                constructorArguments[i] = Expression.Coalesce(
+                    constructorArguments[i],
+                    defaultValueExpression
+                );
             }
 
             constructorArguments[i] = Expression.Convert(constructorArguments[i], parameterType);
@@ -212,15 +252,29 @@ static class ActivatorUtilities
         Type instanceType,
         Type[] argumentTypes,
         out ConstructorInfo matchingConstructor,
-        out int?[] parameterMap)
+        out int?[] parameterMap
+    )
     {
         matchingConstructor = null!;
         parameterMap = null!;
 
-        if (!TryFindPreferredConstructor(instanceType, argumentTypes, ref matchingConstructor!, ref parameterMap!) &&
-            !TryFindMatchingConstructor(instanceType, argumentTypes, ref matchingConstructor!, ref parameterMap!))
+        if (
+            !TryFindPreferredConstructor(
+                instanceType,
+                argumentTypes,
+                ref matchingConstructor!,
+                ref parameterMap!
+            )
+            && !TryFindMatchingConstructor(
+                instanceType,
+                argumentTypes,
+                ref matchingConstructor!,
+                ref parameterMap!
+            )
+        )
         {
-            var message = $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.";
+            var message =
+                $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.";
             throw new InvalidOperationException(message);
         }
     }
@@ -230,15 +284,24 @@ static class ActivatorUtilities
         Type instanceType,
         Type[] argumentTypes,
         ref ConstructorInfo matchingConstructor,
-        ref int?[] parameterMap)
+        ref int?[] parameterMap
+    )
     {
         foreach (var constructor in instanceType.GetConstructors())
         {
-            if (TryCreateParameterMap(constructor.GetParameters(), argumentTypes, out int?[] tempParameterMap))
+            if (
+                TryCreateParameterMap(
+                    constructor.GetParameters(),
+                    argumentTypes,
+                    out int?[] tempParameterMap
+                )
+            )
             {
                 if (matchingConstructor != null)
                 {
-                    throw new InvalidOperationException($"Multiple constructors accepting all given argument types have been found in type '{instanceType}'. There should only be one applicable constructor.");
+                    throw new InvalidOperationException(
+                        $"Multiple constructors accepting all given argument types have been found in type '{instanceType}'. There should only be one applicable constructor."
+                    );
                 }
 
                 matchingConstructor = constructor;
@@ -254,7 +317,8 @@ static class ActivatorUtilities
         Type instanceType,
         Type[] argumentTypes,
         ref ConstructorInfo matchingConstructor,
-        ref int?[] parameterMap)
+        ref int?[] parameterMap
+    )
     {
         var seenPreferred = false;
         foreach (var constructor in instanceType.GetConstructors())
@@ -266,7 +330,13 @@ static class ActivatorUtilities
                     ThrowMultipleCtorsMarkedWithAttributeException();
                 }
 
-                if (!TryCreateParameterMap(constructor.GetParameters(), argumentTypes, out int?[] tempParameterMap))
+                if (
+                    !TryCreateParameterMap(
+                        constructor.GetParameters(),
+                        argumentTypes,
+                        out int?[] tempParameterMap
+                    )
+                )
                 {
                     ThrowMarkedCtorDoesNotTakeAllProvidedArguments();
                 }
@@ -282,7 +352,11 @@ static class ActivatorUtilities
 
     // Creates an injective parameterMap from givenParameterTypes to assignable constructorParameters.
     // Returns true if each given parameter type is assignable to a unique; otherwise, false.
-    private static bool TryCreateParameterMap(ParameterInfo[] constructorParameters, Type[] argumentTypes, out int?[] parameterMap)
+    private static bool TryCreateParameterMap(
+        ParameterInfo[] constructorParameters,
+        Type[] argumentTypes,
+        out int?[] parameterMap
+    )
     {
         parameterMap = new int?[constructorParameters.Length];
 
@@ -338,10 +412,16 @@ static class ActivatorUtilities
                 var givenType = givenParameters[givenIndex]?.GetType();
                 var givenMatched = false;
 
-                for (var applyIndex = applyIndexStart; givenMatched == false && applyIndex != _parameters.Length; ++applyIndex)
+                for (
+                    var applyIndex = applyIndexStart;
+                    givenMatched == false && applyIndex != _parameters.Length;
+                    ++applyIndex
+                )
                 {
-                    if (_parameterValues[applyIndex] == null &&
-                        _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType))
+                    if (
+                        _parameterValues[applyIndex] == null
+                        && _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType)
+                    )
                     {
                         givenMatched = true;
                         _parameterValues[applyIndex] = givenParameters[givenIndex];
@@ -373,9 +453,16 @@ static class ActivatorUtilities
                     var value = provider.GetService(_parameters[index].ParameterType);
                     if (value == null)
                     {
-                        if (!ParameterDefaultValue.TryGetDefaultValue(_parameters[index], out var defaultValue))
+                        if (
+                            !ParameterDefaultValue.TryGetDefaultValue(
+                                _parameters[index],
+                                out var defaultValue
+                            )
+                        )
                         {
-                            throw new InvalidOperationException($"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'.");
+                            throw new InvalidOperationException(
+                                $"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'."
+                            );
                         }
                         else
                         {
@@ -390,7 +477,12 @@ static class ActivatorUtilities
             }
 
 #if NETCOREAPP
-            return _constructor.Invoke(BindingFlags.DoNotWrapExceptions, binder: null, parameters: _parameterValues, culture: null);
+            return _constructor.Invoke(
+                BindingFlags.DoNotWrapExceptions,
+                binder: null,
+                parameters: _parameterValues,
+                culture: null
+            );
 #else
             try
             {
@@ -408,12 +500,15 @@ static class ActivatorUtilities
 
     private static void ThrowMultipleCtorsMarkedWithAttributeException()
     {
-        throw new InvalidOperationException($"Multiple constructors were marked with {nameof(ActivatorUtilitiesConstructorAttribute)}.");
+        throw new InvalidOperationException(
+            $"Multiple constructors were marked with {nameof(ActivatorUtilitiesConstructorAttribute)}."
+        );
     }
 
     private static void ThrowMarkedCtorDoesNotTakeAllProvidedArguments()
     {
-        throw new InvalidOperationException($"Constructor marked with {nameof(ActivatorUtilitiesConstructorAttribute)} does not accept all given argument types.");
+        throw new InvalidOperationException(
+            $"Constructor marked with {nameof(ActivatorUtilitiesConstructorAttribute)} does not accept all given argument types."
+        );
     }
 }
-

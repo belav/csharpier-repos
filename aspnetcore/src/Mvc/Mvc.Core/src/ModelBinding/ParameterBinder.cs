@@ -36,7 +36,8 @@ public class ParameterBinder
         IModelBinderFactory modelBinderFactory,
         IObjectModelValidator validator,
         IOptions<MvcOptions> mvcOptions,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         if (modelMetadataProvider == null)
         {
@@ -90,8 +91,18 @@ public class ParameterBinder
         IValueProvider valueProvider,
         ParameterDescriptor parameter,
         ModelMetadata metadata,
-        object? value)
-        => BindModelAsync(actionContext, modelBinder, valueProvider, parameter, metadata, value, container: null).AsTask();
+        object? value
+    ) =>
+        BindModelAsync(
+                actionContext,
+                modelBinder,
+                valueProvider,
+                parameter,
+                metadata,
+                value,
+                container: null
+            )
+            .AsTask();
 
     /// <summary>
     /// Binds a model specified by <paramref name="parameter"/> using <paramref name="value"/> as the initial value.
@@ -111,7 +122,8 @@ public class ParameterBinder
         ParameterDescriptor parameter,
         ModelMetadata metadata,
         object? value,
-        object? container)
+        object? container
+    )
     {
         if (actionContext == null)
         {
@@ -151,7 +163,8 @@ public class ParameterBinder
             valueProvider,
             metadata,
             parameter.BindingInfo,
-            parameter.Name);
+            parameter.Name
+        );
         modelBindingContext.Model = value;
 
         var parameterModelName = parameter.BindingInfo?.BinderModelName ?? metadata.BinderModelName;
@@ -188,7 +201,8 @@ public class ParameterBinder
                 metadata,
                 modelBindingContext,
                 modelBindingResult,
-                container);
+                container
+            );
 
             Logger.DoneAttemptingToValidateParameterOrProperty(parameter, metadata);
         }
@@ -203,7 +217,8 @@ public class ParameterBinder
                     actionContext,
                     modelBindingContext.ValidationState,
                     modelBindingContext.ModelName,
-                    modelBindingResult.Model);
+                    modelBindingResult.Model
+                );
             }
         }
 
@@ -217,7 +232,8 @@ public class ParameterBinder
         ModelMetadata metadata,
         ModelBindingContext modelBindingContext,
         ModelBindingResult modelBindingResult,
-        object? container)
+        object? container
+    )
     {
         RecalculateModelMetadata(parameter, modelBindingResult, ref metadata);
 
@@ -225,7 +241,9 @@ public class ParameterBinder
         {
             // Enforce BindingBehavior.Required (e.g., [BindRequired])
             var modelName = modelBindingContext.FieldName;
-            var message = metadata.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(modelName);
+            var message = metadata.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
+                modelName
+            );
             actionContext.ModelState.TryAddModelError(modelName, message);
         }
         else if (modelBindingResult.IsModelSet)
@@ -237,7 +255,8 @@ public class ParameterBinder
                 modelBindingContext.ModelName,
                 modelBindingResult.Model,
                 metadata,
-                container);
+                container
+            );
         }
         else if (metadata.IsRequired)
         {
@@ -252,8 +271,10 @@ public class ParameterBinder
             // original problem being worked around that regressed #7503.
             var modelName = modelBindingContext.ModelName;
 
-            if (string.IsNullOrEmpty(modelBindingContext.ModelName) &&
-                parameter.BindingInfo?.BinderModelName == null)
+            if (
+                string.IsNullOrEmpty(modelBindingContext.ModelName)
+                && parameter.BindingInfo?.BinderModelName == null
+            )
             {
                 // If we get here then this is a fallback case. The model name wasn't explicitly set
                 // and we ended up with an empty prefix.
@@ -267,22 +288,26 @@ public class ParameterBinder
                 modelName,
                 modelBindingResult.Model,
                 metadata,
-                container);
+                container
+            );
         }
     }
 
     private void RecalculateModelMetadata(
         ParameterDescriptor parameter,
         ModelBindingResult modelBindingResult,
-        ref ModelMetadata metadata)
+        ref ModelMetadata metadata
+    )
     {
         // Attempt to recalculate ModelMetadata for top level parameters and properties using the actual
         // model type. This ensures validation uses a combination of top-level validation metadata
         // as well as metadata on the actual, rather than declared, model type.
 
-        if (!modelBindingResult.IsModelSet ||
-            modelBindingResult.Model == null ||
-            _modelMetadataProvider is not ModelMetadataProvider modelMetadataProvider)
+        if (
+            !modelBindingResult.IsModelSet
+            || modelBindingResult.Model == null
+            || _modelMetadataProvider is not ModelMetadataProvider modelMetadataProvider
+        )
         {
             return;
         }

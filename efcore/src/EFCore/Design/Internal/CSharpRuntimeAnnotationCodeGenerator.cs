@@ -18,7 +18,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     Initializes a new instance of this class.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-        public CSharpRuntimeAnnotationCodeGenerator(CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies)
+        public CSharpRuntimeAnnotationCodeGenerator(
+            CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -29,16 +31,22 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         protected virtual CSharpRuntimeAnnotationCodeGeneratorDependencies Dependencies { get; }
 
         /// <inheritdoc />
-        public virtual void Generate(IModel model, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            IModel model,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             var annotations = parameters.Annotations;
             if (!parameters.IsRuntime)
             {
                 foreach (var annotation in annotations)
                 {
-                    if (CoreAnnotationNames.AllNames.Contains(annotation.Key)
+                    if (
+                        CoreAnnotationNames.AllNames.Contains(annotation.Key)
                         && annotation.Key != CoreAnnotationNames.ProductVersion
-                        && annotation.Key != CoreAnnotationNames.FullChangeTrackingNotificationsRequired)
+                        && annotation.Key
+                            != CoreAnnotationNames.FullChangeTrackingNotificationsRequired
+                    )
                     {
                         annotations.Remove(annotation.Key);
                     }
@@ -54,15 +62,20 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(IEntityType entityType, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            IEntityType entityType,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             var annotations = parameters.Annotations;
             if (!parameters.IsRuntime)
             {
                 foreach (var annotation in annotations)
                 {
-                    if (CoreAnnotationNames.AllNames.Contains(annotation.Key)
-                        && annotation.Key != CoreAnnotationNames.DiscriminatorMappingComplete)
+                    if (
+                        CoreAnnotationNames.AllNames.Contains(annotation.Key)
+                        && annotation.Key != CoreAnnotationNames.DiscriminatorMappingComplete
+                    )
                     {
                         annotations.Remove(annotation.Key);
                     }
@@ -73,7 +86,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(IProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            IProperty property,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -91,7 +107,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(IServiceProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            IServiceProperty property,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -109,7 +128,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(IKey key, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            IKey key,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -127,7 +149,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(IForeignKey foreignKey, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            IForeignKey foreignKey,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -145,7 +170,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(INavigation navigation, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            INavigation navigation,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -163,7 +191,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(ISkipNavigation navigation, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            ISkipNavigation navigation,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -181,7 +212,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(IIndex index, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            IIndex index,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -199,7 +233,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         }
 
         /// <inheritdoc />
-        public virtual void Generate(ITypeMappingConfiguration typeConfiguration, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        public virtual void Generate(
+            ITypeMappingConfiguration typeConfiguration,
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (!parameters.IsRuntime)
             {
@@ -220,7 +257,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     Generates code to create the given annotations using literals.
         /// </summary>
         /// <param name="parameters">Parameters used during code generation.</param>
-        protected virtual void GenerateSimpleAnnotations(CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        protected virtual void GenerateSimpleAnnotations(
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             foreach (var (name, value) in parameters.Annotations.OrderBy(a => a.Key))
             {
@@ -229,7 +268,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     AddNamespace(value as Type ?? value.GetType(), parameters.Namespaces);
                 }
 
-                GenerateSimpleAnnotation(name, Dependencies.CSharpHelper.UnknownLiteral(value), parameters);
+                GenerateSimpleAnnotation(
+                    name,
+                    Dependencies.CSharpHelper.UnknownLiteral(value),
+                    parameters
+                );
             }
         }
 
@@ -242,13 +285,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         protected virtual void GenerateSimpleAnnotation(
             string annotationName,
             string valueString,
-            CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+            CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+        )
         {
             if (parameters.TargetName != "this")
             {
-                parameters.MainBuilder
-                    .Append(parameters.TargetName)
-                    .Append('.');
+                parameters.MainBuilder.Append(parameters.TargetName).Append('.');
             }
 
             parameters.MainBuilder

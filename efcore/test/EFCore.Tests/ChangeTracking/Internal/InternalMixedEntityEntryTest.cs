@@ -3,20 +3,22 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 {
-    public class InternalMixedEntityEntryTest : InternalEntityEntryTestBase<
-        InternalMixedEntityEntryTest.SomeEntity,
-        InternalMixedEntityEntryTest.SomeSimpleEntityBase,
-        InternalMixedEntityEntryTest.SomeDependentEntity,
-        InternalMixedEntityEntryTest.SomeMoreDependentEntity,
-        InternalMixedEntityEntryTest.Root,
-        InternalMixedEntityEntryTest.FirstDependent,
-        InternalMixedEntityEntryTest.SecondDependent,
-        InternalMixedEntityEntryTest.CompositeRoot,
-        InternalMixedEntityEntryTest.CompositeFirstDependent,
-        InternalMixedEntityEntryTest.SomeCompositeEntityBase,
-        InternalMixedEntityEntryTest.CompositeSecondDependent,
-        InternalMixedEntityEntryTest.KMixedContext,
-        InternalMixedEntityEntryTest.KMixedSnapContext>
+    public class InternalMixedEntityEntryTest
+        : InternalEntityEntryTestBase<
+              InternalMixedEntityEntryTest.SomeEntity,
+              InternalMixedEntityEntryTest.SomeSimpleEntityBase,
+              InternalMixedEntityEntryTest.SomeDependentEntity,
+              InternalMixedEntityEntryTest.SomeMoreDependentEntity,
+              InternalMixedEntityEntryTest.Root,
+              InternalMixedEntityEntryTest.FirstDependent,
+              InternalMixedEntityEntryTest.SecondDependent,
+              InternalMixedEntityEntryTest.CompositeRoot,
+              InternalMixedEntityEntryTest.CompositeFirstDependent,
+              InternalMixedEntityEntryTest.SomeCompositeEntityBase,
+              InternalMixedEntityEntryTest.CompositeSecondDependent,
+              InternalMixedEntityEntryTest.KMixedContext,
+              InternalMixedEntityEntryTest.KMixedSnapContext
+          >
     {
         public class SomeCompositeEntityBase
         {

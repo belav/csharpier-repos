@@ -53,7 +53,16 @@ namespace System.Diagnostics.Tests
             ManualResetEventSlim mre = new ManualResetEventSlim();
             for (int i = 0; i < numOfThreads; i++)
             {
-                new Thread(() => { counter.Signal(); mre.Wait(); }) { IsBackground = true }.Start();
+                new Thread(
+                    () =>
+                    {
+                        counter.Signal();
+                        mre.Wait();
+                    }
+                )
+                {
+                    IsBackground = true
+                }.Start();
             }
 
             counter.Wait();
@@ -90,7 +99,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.OSX|TestPlatforms.FreeBSD)] // OSX and FreeBSD throw PNSE from StartTime
+        [PlatformSpecific(TestPlatforms.OSX | TestPlatforms.FreeBSD)] // OSX and FreeBSD throw PNSE from StartTime
         public void TestStartTimeProperty_OSX()
         {
             using (Process p = Process.GetCurrentProcess())
@@ -107,7 +116,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Linux|TestPlatforms.Windows)] // OSX and FreeBSD throw PNSE from StartTime
+        [PlatformSpecific(TestPlatforms.Linux | TestPlatforms.Windows)] // OSX and FreeBSD throw PNSE from StartTime
         public async Task TestStartTimeProperty()
         {
             TimeSpan allowedWindow = TimeSpan.FromSeconds(2);
@@ -132,7 +141,11 @@ namespace System.Diagnostics.Tests
                 {
                     try
                     {
-                        Assert.InRange(t.StartTime.ToUniversalTime(), startTime - allowedWindow, curTime + allowedWindow);
+                        Assert.InRange(
+                            t.StartTime.ToUniversalTime(),
+                            startTime - allowedWindow,
+                            curTime + allowedWindow
+                        );
                         passed++;
                     }
                     catch (InvalidOperationException)
@@ -144,19 +157,31 @@ namespace System.Diagnostics.Tests
 
                 // Now add a thread, and from that thread, while it's still alive, verify
                 // that there's at least one thread greater than the current time we previously grabbed.
-                await Task.Factory.StartNew(() =>
-                {
-                    p.Refresh();
-                    try
+                await Task.Factory.StartNew(
+                    () =>
                     {
-                        var newest = p.Threads.Cast<ProcessThread>().OrderBy(t => t.StartTime.ToUniversalTime()).Last();
-                        Assert.InRange(newest.StartTime.ToUniversalTime(), curTime - allowedWindow, DateTime.Now.ToUniversalTime() + allowedWindow);
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // A thread may have gone away between our getting its info and attempting to access its StartTime
-                    }
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                        p.Refresh();
+                        try
+                        {
+                            var newest = p.Threads
+                                .Cast<ProcessThread>()
+                                .OrderBy(t => t.StartTime.ToUniversalTime())
+                                .Last();
+                            Assert.InRange(
+                                newest.StartTime.ToUniversalTime(),
+                                curTime - allowedWindow,
+                                DateTime.Now.ToUniversalTime() + allowedWindow
+                            );
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            // A thread may have gone away between our getting its info and attempting to access its StartTime
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
             }
         }
 

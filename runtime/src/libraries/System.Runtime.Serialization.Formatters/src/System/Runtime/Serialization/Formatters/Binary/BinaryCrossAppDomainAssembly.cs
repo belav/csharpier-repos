@@ -8,9 +8,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int _assemId;
         internal int _assemblyIndex;
 
-        internal BinaryCrossAppDomainAssembly()
-        {
-        }
+        internal BinaryCrossAppDomainAssembly() { }
 
         public void Write(BinaryFormatterWriter output)
         {

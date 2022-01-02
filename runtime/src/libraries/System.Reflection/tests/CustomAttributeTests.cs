@@ -79,11 +79,11 @@ namespace System.Reflection.Tests
 
         public class StringValuedAttribute : Attribute
         {
-            public StringValuedAttribute (string s)
+            public StringValuedAttribute(string s)
             {
                 NamedField = s;
             }
-            public StringValuedAttribute () {}
+            public StringValuedAttribute() { }
             public string NamedProperty
             {
                 get => NamedField;
@@ -95,38 +95,41 @@ namespace System.Reflection.Tests
         internal class ClassWithAttrs
         {
             [StringValuedAttribute("")]
-            public void M1() {}
+            public void M1() { }
 
             [StringValuedAttribute(NamedProperty = "")]
-            public void M2() {}
+            public void M2() { }
 
             [StringValuedAttribute(NamedField = "")]
-            public void M3() {}
+            public void M3() { }
         }
 
         [Fact]
-        public void StringAttributeValueRefEqualsStringEmpty () {
+        public void StringAttributeValueRefEqualsStringEmpty()
+        {
             StringValuedAttribute attr;
-            attr = typeof (ClassWithAttrs).GetMethod("M1")
+            attr = typeof(ClassWithAttrs)
+                .GetMethod("M1")
                 .GetCustomAttributes(typeof(StringValuedAttribute), true)
                 .Cast<StringValuedAttribute>()
                 .Single();
 
             Assert.Same(string.Empty, attr.NamedField);
 
-            attr = typeof (ClassWithAttrs).GetMethod("M2")
+            attr = typeof(ClassWithAttrs)
+                .GetMethod("M2")
                 .GetCustomAttributes(typeof(StringValuedAttribute), true)
                 .Cast<StringValuedAttribute>()
                 .Single();
-            
+
             Assert.Same(string.Empty, attr.NamedField);
 
-
-            attr = typeof (ClassWithAttrs).GetMethod("M3")
+            attr = typeof(ClassWithAttrs)
+                .GetMethod("M3")
                 .GetCustomAttributes(typeof(StringValuedAttribute), true)
                 .Cast<StringValuedAttribute>()
                 .Single();
-            
+
             Assert.Same(string.Empty, attr.NamedField);
         }
     }

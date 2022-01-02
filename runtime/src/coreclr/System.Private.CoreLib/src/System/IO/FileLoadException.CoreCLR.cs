@@ -9,8 +9,7 @@ namespace System.IO
     public partial class FileLoadException
     {
         // Do not delete: this is invoked from native code.
-        private FileLoadException(string? fileName, int hResult)
-            : base(null)
+        private FileLoadException(string? fileName, int hResult) : base(null)
         {
             HResult = hResult;
             FileName = fileName;
@@ -32,7 +31,10 @@ namespace System.IO
         }
 
         [DllImport(RuntimeHelpers.QCall)]
-        private static extern void GetFileLoadExceptionMessage(int hResult, StringHandleOnStack retString);
+        private static extern void GetFileLoadExceptionMessage(
+            int hResult,
+            StringHandleOnStack retString
+        );
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "FileLoadException_GetMessageForHR")]
         private static extern void GetMessageForHR(int hresult, StringHandleOnStack retString);

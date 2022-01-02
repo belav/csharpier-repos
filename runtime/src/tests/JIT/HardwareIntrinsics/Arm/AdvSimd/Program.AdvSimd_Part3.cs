@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["CompareLessThan.Vector64.UInt16"] = CompareLessThan_Vector64_UInt16,
                 ["CompareLessThan.Vector64.UInt32"] = CompareLessThan_Vector64_UInt32,
                 ["CompareLessThan.Vector128.Byte"] = CompareLessThan_Vector128_Byte,
@@ -31,9 +32,12 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["CompareLessThanOrEqual.Vector128.Int16"] = CompareLessThanOrEqual_Vector128_Int16,
                 ["CompareLessThanOrEqual.Vector128.Int32"] = CompareLessThanOrEqual_Vector128_Int32,
                 ["CompareLessThanOrEqual.Vector128.SByte"] = CompareLessThanOrEqual_Vector128_SByte,
-                ["CompareLessThanOrEqual.Vector128.Single"] = CompareLessThanOrEqual_Vector128_Single,
-                ["CompareLessThanOrEqual.Vector128.UInt16"] = CompareLessThanOrEqual_Vector128_UInt16,
-                ["CompareLessThanOrEqual.Vector128.UInt32"] = CompareLessThanOrEqual_Vector128_UInt32,
+                ["CompareLessThanOrEqual.Vector128.Single"] =
+                    CompareLessThanOrEqual_Vector128_Single,
+                ["CompareLessThanOrEqual.Vector128.UInt16"] =
+                    CompareLessThanOrEqual_Vector128_UInt16,
+                ["CompareLessThanOrEqual.Vector128.UInt32"] =
+                    CompareLessThanOrEqual_Vector128_UInt32,
                 ["CompareTest.Vector64.Byte"] = CompareTest_Vector64_Byte,
                 ["CompareTest.Vector64.Int16"] = CompareTest_Vector64_Int16,
                 ["CompareTest.Vector64.Int32"] = CompareTest_Vector64_Int32,
@@ -48,69 +52,124 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["CompareTest.Vector128.Single"] = CompareTest_Vector128_Single,
                 ["CompareTest.Vector128.UInt16"] = CompareTest_Vector128_UInt16,
                 ["CompareTest.Vector128.UInt32"] = CompareTest_Vector128_UInt32,
-                ["ConvertToInt32RoundAwayFromZero.Vector64.Single"] = ConvertToInt32RoundAwayFromZero_Vector64_Single,
-                ["ConvertToInt32RoundAwayFromZero.Vector128.Single"] = ConvertToInt32RoundAwayFromZero_Vector128_Single,
-                ["ConvertToInt32RoundAwayFromZeroScalar.Vector64.Single"] = ConvertToInt32RoundAwayFromZeroScalar_Vector64_Single,
-                ["ConvertToInt32RoundToEven.Vector64.Single"] = ConvertToInt32RoundToEven_Vector64_Single,
-                ["ConvertToInt32RoundToEven.Vector128.Single"] = ConvertToInt32RoundToEven_Vector128_Single,
-                ["ConvertToInt32RoundToEvenScalar.Vector64.Single"] = ConvertToInt32RoundToEvenScalar_Vector64_Single,
-                ["ConvertToInt32RoundToNegativeInfinity.Vector64.Single"] = ConvertToInt32RoundToNegativeInfinity_Vector64_Single,
-                ["ConvertToInt32RoundToNegativeInfinity.Vector128.Single"] = ConvertToInt32RoundToNegativeInfinity_Vector128_Single,
-                ["ConvertToInt32RoundToNegativeInfinityScalar.Vector64.Single"] = ConvertToInt32RoundToNegativeInfinityScalar_Vector64_Single,
-                ["ConvertToInt32RoundToPositiveInfinity.Vector64.Single"] = ConvertToInt32RoundToPositiveInfinity_Vector64_Single,
-                ["ConvertToInt32RoundToPositiveInfinity.Vector128.Single"] = ConvertToInt32RoundToPositiveInfinity_Vector128_Single,
-                ["ConvertToInt32RoundToPositiveInfinityScalar.Vector64.Single"] = ConvertToInt32RoundToPositiveInfinityScalar_Vector64_Single,
-                ["ConvertToInt32RoundToZero.Vector64.Single"] = ConvertToInt32RoundToZero_Vector64_Single,
-                ["ConvertToInt32RoundToZero.Vector128.Single"] = ConvertToInt32RoundToZero_Vector128_Single,
-                ["ConvertToInt32RoundToZeroScalar.Vector64.Single"] = ConvertToInt32RoundToZeroScalar_Vector64_Single,
+                ["ConvertToInt32RoundAwayFromZero.Vector64.Single"] =
+                    ConvertToInt32RoundAwayFromZero_Vector64_Single,
+                ["ConvertToInt32RoundAwayFromZero.Vector128.Single"] =
+                    ConvertToInt32RoundAwayFromZero_Vector128_Single,
+                ["ConvertToInt32RoundAwayFromZeroScalar.Vector64.Single"] =
+                    ConvertToInt32RoundAwayFromZeroScalar_Vector64_Single,
+                ["ConvertToInt32RoundToEven.Vector64.Single"] =
+                    ConvertToInt32RoundToEven_Vector64_Single,
+                ["ConvertToInt32RoundToEven.Vector128.Single"] =
+                    ConvertToInt32RoundToEven_Vector128_Single,
+                ["ConvertToInt32RoundToEvenScalar.Vector64.Single"] =
+                    ConvertToInt32RoundToEvenScalar_Vector64_Single,
+                ["ConvertToInt32RoundToNegativeInfinity.Vector64.Single"] =
+                    ConvertToInt32RoundToNegativeInfinity_Vector64_Single,
+                ["ConvertToInt32RoundToNegativeInfinity.Vector128.Single"] =
+                    ConvertToInt32RoundToNegativeInfinity_Vector128_Single,
+                ["ConvertToInt32RoundToNegativeInfinityScalar.Vector64.Single"] =
+                    ConvertToInt32RoundToNegativeInfinityScalar_Vector64_Single,
+                ["ConvertToInt32RoundToPositiveInfinity.Vector64.Single"] =
+                    ConvertToInt32RoundToPositiveInfinity_Vector64_Single,
+                ["ConvertToInt32RoundToPositiveInfinity.Vector128.Single"] =
+                    ConvertToInt32RoundToPositiveInfinity_Vector128_Single,
+                ["ConvertToInt32RoundToPositiveInfinityScalar.Vector64.Single"] =
+                    ConvertToInt32RoundToPositiveInfinityScalar_Vector64_Single,
+                ["ConvertToInt32RoundToZero.Vector64.Single"] =
+                    ConvertToInt32RoundToZero_Vector64_Single,
+                ["ConvertToInt32RoundToZero.Vector128.Single"] =
+                    ConvertToInt32RoundToZero_Vector128_Single,
+                ["ConvertToInt32RoundToZeroScalar.Vector64.Single"] =
+                    ConvertToInt32RoundToZeroScalar_Vector64_Single,
                 ["ConvertToSingle.Vector64.Int32"] = ConvertToSingle_Vector64_Int32,
                 ["ConvertToSingle.Vector64.UInt32"] = ConvertToSingle_Vector64_UInt32,
                 ["ConvertToSingle.Vector128.Int32"] = ConvertToSingle_Vector128_Int32,
                 ["ConvertToSingle.Vector128.UInt32"] = ConvertToSingle_Vector128_UInt32,
                 ["ConvertToSingleScalar.Vector64.Int32"] = ConvertToSingleScalar_Vector64_Int32,
                 ["ConvertToSingleScalar.Vector64.UInt32"] = ConvertToSingleScalar_Vector64_UInt32,
-                ["ConvertToUInt32RoundAwayFromZero.Vector64.Single"] = ConvertToUInt32RoundAwayFromZero_Vector64_Single,
-                ["ConvertToUInt32RoundAwayFromZero.Vector128.Single"] = ConvertToUInt32RoundAwayFromZero_Vector128_Single,
-                ["ConvertToUInt32RoundAwayFromZeroScalar.Vector64.Single"] = ConvertToUInt32RoundAwayFromZeroScalar_Vector64_Single,
-                ["ConvertToUInt32RoundToEven.Vector64.Single"] = ConvertToUInt32RoundToEven_Vector64_Single,
-                ["ConvertToUInt32RoundToEven.Vector128.Single"] = ConvertToUInt32RoundToEven_Vector128_Single,
-                ["ConvertToUInt32RoundToEvenScalar.Vector64.Single"] = ConvertToUInt32RoundToEvenScalar_Vector64_Single,
-                ["ConvertToUInt32RoundToNegativeInfinity.Vector64.Single"] = ConvertToUInt32RoundToNegativeInfinity_Vector64_Single,
-                ["ConvertToUInt32RoundToNegativeInfinity.Vector128.Single"] = ConvertToUInt32RoundToNegativeInfinity_Vector128_Single,
-                ["ConvertToUInt32RoundToNegativeInfinityScalar.Vector64.Single"] = ConvertToUInt32RoundToNegativeInfinityScalar_Vector64_Single,
-                ["ConvertToUInt32RoundToPositiveInfinity.Vector64.Single"] = ConvertToUInt32RoundToPositiveInfinity_Vector64_Single,
-                ["ConvertToUInt32RoundToPositiveInfinity.Vector128.Single"] = ConvertToUInt32RoundToPositiveInfinity_Vector128_Single,
-                ["ConvertToUInt32RoundToPositiveInfinityScalar.Vector64.Single"] = ConvertToUInt32RoundToPositiveInfinityScalar_Vector64_Single,
-                ["ConvertToUInt32RoundToZero.Vector64.Single"] = ConvertToUInt32RoundToZero_Vector64_Single,
-                ["ConvertToUInt32RoundToZero.Vector128.Single"] = ConvertToUInt32RoundToZero_Vector128_Single,
-                ["ConvertToUInt32RoundToZeroScalar.Vector64.Single"] = ConvertToUInt32RoundToZeroScalar_Vector64_Single,
+                ["ConvertToUInt32RoundAwayFromZero.Vector64.Single"] =
+                    ConvertToUInt32RoundAwayFromZero_Vector64_Single,
+                ["ConvertToUInt32RoundAwayFromZero.Vector128.Single"] =
+                    ConvertToUInt32RoundAwayFromZero_Vector128_Single,
+                ["ConvertToUInt32RoundAwayFromZeroScalar.Vector64.Single"] =
+                    ConvertToUInt32RoundAwayFromZeroScalar_Vector64_Single,
+                ["ConvertToUInt32RoundToEven.Vector64.Single"] =
+                    ConvertToUInt32RoundToEven_Vector64_Single,
+                ["ConvertToUInt32RoundToEven.Vector128.Single"] =
+                    ConvertToUInt32RoundToEven_Vector128_Single,
+                ["ConvertToUInt32RoundToEvenScalar.Vector64.Single"] =
+                    ConvertToUInt32RoundToEvenScalar_Vector64_Single,
+                ["ConvertToUInt32RoundToNegativeInfinity.Vector64.Single"] =
+                    ConvertToUInt32RoundToNegativeInfinity_Vector64_Single,
+                ["ConvertToUInt32RoundToNegativeInfinity.Vector128.Single"] =
+                    ConvertToUInt32RoundToNegativeInfinity_Vector128_Single,
+                ["ConvertToUInt32RoundToNegativeInfinityScalar.Vector64.Single"] =
+                    ConvertToUInt32RoundToNegativeInfinityScalar_Vector64_Single,
+                ["ConvertToUInt32RoundToPositiveInfinity.Vector64.Single"] =
+                    ConvertToUInt32RoundToPositiveInfinity_Vector64_Single,
+                ["ConvertToUInt32RoundToPositiveInfinity.Vector128.Single"] =
+                    ConvertToUInt32RoundToPositiveInfinity_Vector128_Single,
+                ["ConvertToUInt32RoundToPositiveInfinityScalar.Vector64.Single"] =
+                    ConvertToUInt32RoundToPositiveInfinityScalar_Vector64_Single,
+                ["ConvertToUInt32RoundToZero.Vector64.Single"] =
+                    ConvertToUInt32RoundToZero_Vector64_Single,
+                ["ConvertToUInt32RoundToZero.Vector128.Single"] =
+                    ConvertToUInt32RoundToZero_Vector128_Single,
+                ["ConvertToUInt32RoundToZeroScalar.Vector64.Single"] =
+                    ConvertToUInt32RoundToZeroScalar_Vector64_Single,
                 ["DivideScalar.Vector64.Double"] = DivideScalar_Vector64_Double,
                 ["DivideScalar.Vector64.Single"] = DivideScalar_Vector64_Single,
-                ["DuplicateSelectedScalarToVector64.Vector64.Byte.1"] = DuplicateSelectedScalarToVector64_Vector64_Byte_1,
-                ["DuplicateSelectedScalarToVector64.Vector64.Int16.1"] = DuplicateSelectedScalarToVector64_Vector64_Int16_1,
-                ["DuplicateSelectedScalarToVector64.Vector64.Int32.1"] = DuplicateSelectedScalarToVector64_Vector64_Int32_1,
-                ["DuplicateSelectedScalarToVector64.Vector64.SByte.1"] = DuplicateSelectedScalarToVector64_Vector64_SByte_1,
-                ["DuplicateSelectedScalarToVector64.Vector64.Single.1"] = DuplicateSelectedScalarToVector64_Vector64_Single_1,
-                ["DuplicateSelectedScalarToVector64.Vector64.UInt16.1"] = DuplicateSelectedScalarToVector64_Vector64_UInt16_1,
-                ["DuplicateSelectedScalarToVector64.Vector64.UInt32.1"] = DuplicateSelectedScalarToVector64_Vector64_UInt32_1,
-                ["DuplicateSelectedScalarToVector64.Vector128.Byte.8"] = DuplicateSelectedScalarToVector64_Vector128_Byte_8,
-                ["DuplicateSelectedScalarToVector64.Vector128.Int16.4"] = DuplicateSelectedScalarToVector64_Vector128_Int16_4,
-                ["DuplicateSelectedScalarToVector64.Vector128.Int32.2"] = DuplicateSelectedScalarToVector64_Vector128_Int32_2,
-                ["DuplicateSelectedScalarToVector64.Vector128.SByte.8"] = DuplicateSelectedScalarToVector64_Vector128_SByte_8,
-                ["DuplicateSelectedScalarToVector64.Vector128.Single.2"] = DuplicateSelectedScalarToVector64_Vector128_Single_2,
-                ["DuplicateSelectedScalarToVector64.Vector128.UInt16.4"] = DuplicateSelectedScalarToVector64_Vector128_UInt16_4,
-                ["DuplicateSelectedScalarToVector64.Vector128.UInt32.2"] = DuplicateSelectedScalarToVector64_Vector128_UInt32_2,
-                ["DuplicateSelectedScalarToVector128.Vector64.Byte.1"] = DuplicateSelectedScalarToVector128_Vector64_Byte_1,
-                ["DuplicateSelectedScalarToVector128.Vector64.Int16.1"] = DuplicateSelectedScalarToVector128_Vector64_Int16_1,
-                ["DuplicateSelectedScalarToVector128.Vector64.Int32.1"] = DuplicateSelectedScalarToVector128_Vector64_Int32_1,
-                ["DuplicateSelectedScalarToVector128.Vector64.SByte.1"] = DuplicateSelectedScalarToVector128_Vector64_SByte_1,
-                ["DuplicateSelectedScalarToVector128.Vector64.Single.1"] = DuplicateSelectedScalarToVector128_Vector64_Single_1,
-                ["DuplicateSelectedScalarToVector128.Vector64.UInt16.1"] = DuplicateSelectedScalarToVector128_Vector64_UInt16_1,
-                ["DuplicateSelectedScalarToVector128.Vector64.UInt32.1"] = DuplicateSelectedScalarToVector128_Vector64_UInt32_1,
-                ["DuplicateSelectedScalarToVector128.Vector128.Byte.8"] = DuplicateSelectedScalarToVector128_Vector128_Byte_8,
-                ["DuplicateSelectedScalarToVector128.Vector128.Int16.4"] = DuplicateSelectedScalarToVector128_Vector128_Int16_4,
-                ["DuplicateSelectedScalarToVector128.Vector128.Int32.2"] = DuplicateSelectedScalarToVector128_Vector128_Int32_2,
-                ["DuplicateSelectedScalarToVector128.Vector128.SByte.8"] = DuplicateSelectedScalarToVector128_Vector128_SByte_8,
+                ["DuplicateSelectedScalarToVector64.Vector64.Byte.1"] =
+                    DuplicateSelectedScalarToVector64_Vector64_Byte_1,
+                ["DuplicateSelectedScalarToVector64.Vector64.Int16.1"] =
+                    DuplicateSelectedScalarToVector64_Vector64_Int16_1,
+                ["DuplicateSelectedScalarToVector64.Vector64.Int32.1"] =
+                    DuplicateSelectedScalarToVector64_Vector64_Int32_1,
+                ["DuplicateSelectedScalarToVector64.Vector64.SByte.1"] =
+                    DuplicateSelectedScalarToVector64_Vector64_SByte_1,
+                ["DuplicateSelectedScalarToVector64.Vector64.Single.1"] =
+                    DuplicateSelectedScalarToVector64_Vector64_Single_1,
+                ["DuplicateSelectedScalarToVector64.Vector64.UInt16.1"] =
+                    DuplicateSelectedScalarToVector64_Vector64_UInt16_1,
+                ["DuplicateSelectedScalarToVector64.Vector64.UInt32.1"] =
+                    DuplicateSelectedScalarToVector64_Vector64_UInt32_1,
+                ["DuplicateSelectedScalarToVector64.Vector128.Byte.8"] =
+                    DuplicateSelectedScalarToVector64_Vector128_Byte_8,
+                ["DuplicateSelectedScalarToVector64.Vector128.Int16.4"] =
+                    DuplicateSelectedScalarToVector64_Vector128_Int16_4,
+                ["DuplicateSelectedScalarToVector64.Vector128.Int32.2"] =
+                    DuplicateSelectedScalarToVector64_Vector128_Int32_2,
+                ["DuplicateSelectedScalarToVector64.Vector128.SByte.8"] =
+                    DuplicateSelectedScalarToVector64_Vector128_SByte_8,
+                ["DuplicateSelectedScalarToVector64.Vector128.Single.2"] =
+                    DuplicateSelectedScalarToVector64_Vector128_Single_2,
+                ["DuplicateSelectedScalarToVector64.Vector128.UInt16.4"] =
+                    DuplicateSelectedScalarToVector64_Vector128_UInt16_4,
+                ["DuplicateSelectedScalarToVector64.Vector128.UInt32.2"] =
+                    DuplicateSelectedScalarToVector64_Vector128_UInt32_2,
+                ["DuplicateSelectedScalarToVector128.Vector64.Byte.1"] =
+                    DuplicateSelectedScalarToVector128_Vector64_Byte_1,
+                ["DuplicateSelectedScalarToVector128.Vector64.Int16.1"] =
+                    DuplicateSelectedScalarToVector128_Vector64_Int16_1,
+                ["DuplicateSelectedScalarToVector128.Vector64.Int32.1"] =
+                    DuplicateSelectedScalarToVector128_Vector64_Int32_1,
+                ["DuplicateSelectedScalarToVector128.Vector64.SByte.1"] =
+                    DuplicateSelectedScalarToVector128_Vector64_SByte_1,
+                ["DuplicateSelectedScalarToVector128.Vector64.Single.1"] =
+                    DuplicateSelectedScalarToVector128_Vector64_Single_1,
+                ["DuplicateSelectedScalarToVector128.Vector64.UInt16.1"] =
+                    DuplicateSelectedScalarToVector128_Vector64_UInt16_1,
+                ["DuplicateSelectedScalarToVector128.Vector64.UInt32.1"] =
+                    DuplicateSelectedScalarToVector128_Vector64_UInt32_1,
+                ["DuplicateSelectedScalarToVector128.Vector128.Byte.8"] =
+                    DuplicateSelectedScalarToVector128_Vector128_Byte_8,
+                ["DuplicateSelectedScalarToVector128.Vector128.Int16.4"] =
+                    DuplicateSelectedScalarToVector128_Vector128_Int16_4,
+                ["DuplicateSelectedScalarToVector128.Vector128.Int32.2"] =
+                    DuplicateSelectedScalarToVector128_Vector128_Int32_2,
+                ["DuplicateSelectedScalarToVector128.Vector128.SByte.8"] =
+                    DuplicateSelectedScalarToVector128_Vector128_SByte_8,
             };
         }
     }

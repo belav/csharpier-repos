@@ -10,26 +10,37 @@ using Microsoft.CodeAnalysis.UseNullPropagation;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseNullPropagation), Shared]
-    internal class CSharpUseNullPropagationCodeFixProvider : AbstractUseNullPropagationCodeFixProvider<
-            SyntaxKind,
-            ExpressionSyntax,
-            ConditionalExpressionSyntax,
-            BinaryExpressionSyntax,
-            InvocationExpressionSyntax,
-            MemberAccessExpressionSyntax,
-            ConditionalAccessExpressionSyntax,
-            ElementAccessExpressionSyntax,
-            ElementBindingExpressionSyntax,
-            BracketedArgumentListSyntax>
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseNullPropagation
+        ),
+        Shared
+    ]
+    internal class CSharpUseNullPropagationCodeFixProvider
+        : AbstractUseNullPropagationCodeFixProvider<
+              SyntaxKind,
+              ExpressionSyntax,
+              ConditionalExpressionSyntax,
+              BinaryExpressionSyntax,
+              InvocationExpressionSyntax,
+              MemberAccessExpressionSyntax,
+              ConditionalAccessExpressionSyntax,
+              ElementAccessExpressionSyntax,
+              ElementBindingExpressionSyntax,
+              BracketedArgumentListSyntax
+          >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseNullPropagationCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseNullPropagationCodeFixProvider() { }
 
-        protected override ElementBindingExpressionSyntax ElementBindingExpression(BracketedArgumentListSyntax argumentList)
-            => SyntaxFactory.ElementBindingExpression(argumentList);
+        protected override ElementBindingExpressionSyntax ElementBindingExpression(
+            BracketedArgumentListSyntax argumentList
+        ) => SyntaxFactory.ElementBindingExpression(argumentList);
     }
 }

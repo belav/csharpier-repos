@@ -9,20 +9,26 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class StackOrQueueConverterWithReflection<TCollection>
-        : StackOrQueueConverter<TCollection>
-        where TCollection : IEnumerable
+        : StackOrQueueConverter<TCollection> where TCollection : IEnumerable
     {
         internal override bool RequiresDynamicMemberAccessors => true;
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         public StackOrQueueConverterWithReflection() { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2091:UnrecognizedReflectionPattern",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        internal override void Initialize(JsonSerializerOptions options, JsonTypeInfo? jsonTypeInfo = null)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2091:UnrecognizedReflectionPattern",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        internal override void Initialize(
+            JsonSerializerOptions options,
+            JsonTypeInfo? jsonTypeInfo = null
+        )
         {
             Debug.Assert(jsonTypeInfo != null);
-            jsonTypeInfo.AddMethodDelegate = options.MemberAccessorStrategy.CreateAddMethodDelegate<TCollection>();
+            jsonTypeInfo.AddMethodDelegate =
+                options.MemberAccessorStrategy.CreateAddMethodDelegate<TCollection>();
         }
     }
 }

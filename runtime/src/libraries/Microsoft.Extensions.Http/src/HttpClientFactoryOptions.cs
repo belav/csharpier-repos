@@ -24,12 +24,14 @@ namespace Microsoft.Extensions.Http
         /// <summary>
         /// Gets a list of operations used to configure an <see cref="HttpMessageHandlerBuilder"/>.
         /// </summary>
-        public IList<Action<HttpMessageHandlerBuilder>> HttpMessageHandlerBuilderActions { get; } = new List<Action<HttpMessageHandlerBuilder>>();
+        public IList<Action<HttpMessageHandlerBuilder>> HttpMessageHandlerBuilderActions { get; } =
+            new List<Action<HttpMessageHandlerBuilder>>();
 
         /// <summary>
         /// Gets a list of operations used to configure an <see cref="HttpClient"/>.
         /// </summary>
-        public IList<Action<HttpClient>> HttpClientActions { get; } = new List<Action<HttpClient>>();
+        public IList<Action<HttpClient>> HttpClientActions { get; } =
+            new List<Action<HttpClient>>();
 
         /// <summary>
         /// Gets or sets the length of time that a <see cref="HttpMessageHandler"/> instance can be reused. Each named

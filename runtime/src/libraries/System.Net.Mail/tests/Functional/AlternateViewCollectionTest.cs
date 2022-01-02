@@ -34,7 +34,10 @@ namespace System.Net.Mail.Tests
             // The individual items also disposed
             Assert.Throws<ObjectDisposedException>(() => av.LinkedResources);
 
-            AlternateView av1 = AlternateView.CreateAlternateViewFromString("test", new ContentType("text/plain"));
+            AlternateView av1 = AlternateView.CreateAlternateViewFromString(
+                "test",
+                new ContentType("text/plain")
+            );
             Assert.Throws<ObjectDisposedException>(() => avc.Add(av1));
             Assert.Throws<ObjectDisposedException>(() => avc.Clear());
 

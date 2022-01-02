@@ -27,12 +27,15 @@ public class OpenIdConnectAuthenticateTests
                 opt.CallbackPath = new PathString("/");
                 opt.SkipUnrecognizedRequests = true;
                 opt.ClientId = "Test Id";
-            });
+            }
+        );
 
-        var server = settings.CreateTestServer(handler: async context =>
-        {
-            await context.Response.WriteAsync("Hi from the callback path");
-        });
+        var server = settings.CreateTestServer(
+            handler: async context =>
+            {
+                await context.Response.WriteAsync("Hi from the callback path");
+            }
+        );
 
         // Act
         var transaction = await server.SendAsync("/");
@@ -52,12 +55,15 @@ public class OpenIdConnectAuthenticateTests
                 opt.CallbackPath = new PathString("/");
                 opt.SkipUnrecognizedRequests = true;
                 opt.ClientId = "Test Id";
-            });
+            }
+        );
 
-        var server = settings.CreateTestServer(handler: async context =>
-        {
-            await context.Response.WriteAsync("Hi from the callback path");
-        });
+        var server = settings.CreateTestServer(
+            handler: async context =>
+            {
+                await context.Response.WriteAsync("Hi from the callback path");
+            }
+        );
 
         // Act
         var request = new HttpRequestMessage(HttpMethod.Post, "/");
@@ -89,20 +95,28 @@ public class OpenIdConnectAuthenticateTests
                         Assert.Equal("itfailed", ex.Data["error"]);
                         Assert.Equal("whyitfailed", ex.Data["error_description"]);
                         Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                        ctx.Response.Redirect("/error?FailureMessage=" + UrlEncoder.Default.Encode(ctx.Failure.Message));
+                        ctx.Response.Redirect(
+                            "/error?FailureMessage="
+                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                        );
                         ctx.HandleResponse();
                         return Task.FromResult(0);
                     }
                 };
-            });
+            }
+        );
 
         var server = settings.CreateTestServer();
 
         var transaction = await server.SendAsync(
             "https://example.com/signin-oidc?error=itfailed&error_description=whyitfailed&error_uri=https://example.com/fail&state=protected_state",
-            ".AspNetCore.Correlation.correlationId=N");
+            ".AspNetCore.Correlation.correlationId=N"
+        );
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
-        Assert.StartsWith("/error?FailureMessage=", transaction.Response.Headers.GetValues("Location").First());
+        Assert.StartsWith(
+            "/error?FailureMessage=",
+            transaction.Response.Headers.GetValues("Location").First()
+        );
     }
 
     private class TestStateDataFormat : ISecureDataFormat<AuthenticationProperties>
@@ -122,11 +136,13 @@ public class OpenIdConnectAuthenticateTests
         public AuthenticationProperties Unprotect(string protectedText)
         {
             Assert.Equal("protected_state", protectedText);
-            var properties = new AuthenticationProperties(new Dictionary<string, string>()
+            var properties = new AuthenticationProperties(
+                new Dictionary<string, string>()
                 {
                     { ".xsrf", "correlationId" },
                     { "testkey", "testvalue" }
-                });
+                }
+            );
             properties.RedirectUri = "http://testhost/redirect";
             return properties;
         }

@@ -30,29 +30,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static SyntaxTrivia? GetFirstNewLine(this SyntaxTriviaList triviaList)
         {
-            return triviaList
-                .Where(t => t.Kind() == SyntaxKind.EndOfLineTrivia)
-                .FirstOrNull();
+            return triviaList.Where(t => t.Kind() == SyntaxKind.EndOfLineTrivia).FirstOrNull();
         }
 
         public static SyntaxTrivia? GetLastComment(this SyntaxTriviaList triviaList)
         {
-            return triviaList
-                .Where(t => t.IsRegularComment())
-                .LastOrNull();
+            return triviaList.Where(t => t.IsRegularComment()).LastOrNull();
         }
 
         public static SyntaxTrivia? GetLastCommentOrWhitespace(this SyntaxTriviaList triviaList)
         {
             return triviaList
-                .Where(t => t.MatchesKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia, SyntaxKind.WhitespaceTrivia))
+                .Where(
+                    t =>
+                        t.MatchesKind(
+                            SyntaxKind.SingleLineCommentTrivia,
+                            SyntaxKind.MultiLineCommentTrivia,
+                            SyntaxKind.WhitespaceTrivia
+                        )
+                )
                 .LastOrNull();
         }
 
-        public static IEnumerable<SyntaxTrivia> SkipInitialWhitespace(this SyntaxTriviaList triviaList)
-            => triviaList.SkipWhile(t => t.Kind() == SyntaxKind.WhitespaceTrivia);
+        public static IEnumerable<SyntaxTrivia> SkipInitialWhitespace(
+            this SyntaxTriviaList triviaList
+        ) => triviaList.SkipWhile(t => t.Kind() == SyntaxKind.WhitespaceTrivia);
 
-        private static ImmutableArray<ImmutableArray<SyntaxTrivia>> GetLeadingBlankLines(SyntaxTriviaList triviaList)
+        private static ImmutableArray<ImmutableArray<SyntaxTrivia>> GetLeadingBlankLines(
+            SyntaxTriviaList triviaList
+        )
         {
             using var result = TemporaryArray<ImmutableArray<SyntaxTrivia>>.Empty;
             using var currentLine = TemporaryArray<SyntaxTrivia>.Empty;
@@ -61,9 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 currentLine.Add(trivia);
                 if (trivia.Kind() == SyntaxKind.EndOfLineTrivia)
                 {
-                    var currentLineIsBlank = currentLine.All(static t =>
-                        t.Kind() is SyntaxKind.EndOfLineTrivia or
-                        SyntaxKind.WhitespaceTrivia);
+                    var currentLineIsBlank = currentLine.All(
+                        static t =>
+                            t.Kind() is SyntaxKind.EndOfLineTrivia or SyntaxKind.WhitespaceTrivia
+                    );
                     if (!currentLineIsBlank)
                     {
                         break;
@@ -85,7 +92,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// <summary>
         /// Takes an INCLUSIVE range of trivia from the trivia list. 
         /// </summary>
-        public static IEnumerable<SyntaxTrivia> TakeRange(this SyntaxTriviaList triviaList, int start, int end)
+        public static IEnumerable<SyntaxTrivia> TakeRange(
+            this SyntaxTriviaList triviaList,
+            int start,
+            int end
+        )
         {
             while (start <= end)
             {

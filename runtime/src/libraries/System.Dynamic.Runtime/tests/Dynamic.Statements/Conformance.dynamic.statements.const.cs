@@ -69,8 +69,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst01.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst04.cnst04
 {
     // <Title>Dynamic & const</Title>
@@ -106,8 +104,23 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst04.
 
         public static int MainMethod()
         {
-            dynamic b = Method(d0) //not check the type. dynamic null doesn't have type
- && Method(d1, typeof(string)) && Method(d2, typeof(sbyte)) && Method(d3, typeof(byte)) && Method(d4, typeof(short)) && Method(d5, typeof(ushort)) && Method(d6, typeof(int)) && Method(d7, typeof(uint)) && Method(d8, typeof(long)) && Method(d9, typeof(ulong)) && Method(d10, typeof(char)) && Method(d11, typeof(float)) && Method(d12, typeof(double)) && Method(d13, typeof(decimal)) && Method(d14, typeof(bool)) && Method(d15, typeof(MyEnum));
+            dynamic b =
+                Method(d0) //not check the type. dynamic null doesn't have type
+                && Method(d1, typeof(string))
+                && Method(d2, typeof(sbyte))
+                && Method(d3, typeof(byte))
+                && Method(d4, typeof(short))
+                && Method(d5, typeof(ushort))
+                && Method(d6, typeof(int))
+                && Method(d7, typeof(uint))
+                && Method(d8, typeof(long))
+                && Method(d9, typeof(ulong))
+                && Method(d10, typeof(char))
+                && Method(d11, typeof(float))
+                && Method(d12, typeof(double))
+                && Method(d13, typeof(decimal))
+                && Method(d14, typeof(bool))
+                && Method(d15, typeof(MyEnum));
             return b ? 0 : 1;
         }
 
@@ -138,8 +151,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst04.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst05.cnst05
 {
@@ -176,8 +187,23 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst05.
             const bool d14 = true;
             const MyEnum d15 = MyEnum.Second;
             dynamic d = new Test();
-            dynamic b = d.Method<int, string>(d0) //not check the type. dynamic null doesn't have type
- && d.Method<string>(d, d1) && d.Method<sbyte>(d, d2) && d.Method<byte>(d, d3) && d.Method<short>(d, d4) && d.Method<ushort>(d, d5) && d.Method<int>(d, d6) && d.Method<uint>(d, d7) && d.Method<long>(d, d8) && d.Method<ulong>(d, d9) && d.Method<char>(d, d10) && d.Method<float>(d, d11) && d.Method<double>(d, d12) && d.Method<decimal>(d, d13) && d.Method<bool>(d, d14) && d.Method<MyEnum>(d, d15);
+            dynamic b =
+                d.Method<int, string>(d0) //not check the type. dynamic null doesn't have type
+                && d.Method<string>(d, d1)
+                && d.Method<sbyte>(d, d2)
+                && d.Method<byte>(d, d3)
+                && d.Method<short>(d, d4)
+                && d.Method<ushort>(d, d5)
+                && d.Method<int>(d, d6)
+                && d.Method<uint>(d, d7)
+                && d.Method<long>(d, d8)
+                && d.Method<ulong>(d, d9)
+                && d.Method<char>(d, d10)
+                && d.Method<float>(d, d11)
+                && d.Method<double>(d, d12)
+                && d.Method<decimal>(d, d13)
+                && d.Method<bool>(d, d14)
+                && d.Method<MyEnum>(d, d15);
             return b ? 0 : 1;
         }
 
@@ -205,8 +231,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst05.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly01.readonly01
 {
     // <Title>Dynamic & static readonly</Title>
@@ -221,18 +245,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         private static readonly object s_d0 = default(dynamic);
         private static readonly dynamic s_d1 = default(dynamic);
         private static readonly dynamic s_d2 = default(object);
-        private static readonly dynamic s_d3 = new Test()
-        {
-            Field = 10
-        }
-
-        ;
-        private static readonly dynamic s_d4 = new MyStruct()
-        {
-            Field = 10
-        }
-
-        ;
+        private static readonly dynamic s_d3 = new Test() { Field = 10 };
+        private static readonly dynamic s_d4 = new MyStruct() { Field = 10 };
         private static readonly dynamic s_d5 = MyEnum.Second;
         private static readonly dynamic s_d6 = 10;
         private static readonly dynamic s_d7 = "A";
@@ -246,7 +260,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
         public static int MainMethod()
         {
-            dynamic b = (s_d0 == null) && (null == s_d1) && (null == s_d2) && (typeof(Test) == s_d3.GetType() && 10 == s_d3.Field) && (typeof(MyStruct) == s_d4.GetType() && 10 == s_d4.Field) && (typeof(MyEnum) == s_d5.GetType() && MyEnum.Second == s_d5) && 10 == s_d6 && "A" == s_d7 && null == s_d8 && 15 == s_d9;
+            dynamic b =
+                (s_d0 == null)
+                && (null == s_d1)
+                && (null == s_d2)
+                && (typeof(Test) == s_d3.GetType() && 10 == s_d3.Field)
+                && (typeof(MyStruct) == s_d4.GetType() && 10 == s_d4.Field)
+                && (typeof(MyEnum) == s_d5.GetType() && MyEnum.Second == s_d5)
+                && 10 == s_d6
+                && "A" == s_d7
+                && null == s_d8
+                && 15 == s_d9;
             return b ? 0 : 1;
         }
     }
@@ -264,8 +288,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly01a.readonly01a
 {
@@ -296,7 +318,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly dynamic d7;
         public readonly dynamic d8;
         public readonly dynamic d9;
-        public Test(object o0, dynamic o1, object o2, MyClass o3, MyStruct o4, MyEnum o5, int o6, string o7, dynamic o8, byte o9)
+        public Test(
+            object o0,
+            dynamic o1,
+            object o2,
+            MyClass o3,
+            MyStruct o4,
+            MyEnum o5,
+            int o6,
+            string o7,
+            dynamic o8,
+            byte o9
+        )
         {
             d0 = o0;
             d1 = o1;
@@ -317,18 +350,29 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
         public static int MainMethod()
         {
-            dynamic d = new Test(default(dynamic), default(dynamic), default(object), new MyClass()
-            {
-                Field = 10
-            }
-
-            , new MyStruct()
-            {
-                Field = 10
-            }
-
-            , MyEnum.Second, 10, "A", null, (byte)15);
-            dynamic b = (d.d0 == null) && (null == d.d1) && (null == d.d2) && (typeof(MyClass) == d.d3.GetType() && 10 == d.d3.Field) && (typeof(MyStruct) == d.d4.GetType() && 10 == d.d4.Field) && (typeof(MyEnum) == d.d5.GetType() && MyEnum.Second == d.d5) && 10 == d.d6 && "A" == d.d7 && null == d.d8 && 15 == d.d9;
+            dynamic d = new Test(
+                default(dynamic),
+                default(dynamic),
+                default(object),
+                new MyClass() { Field = 10 },
+                new MyStruct() { Field = 10 },
+                MyEnum.Second,
+                10,
+                "A",
+                null,
+                (byte)15
+            );
+            dynamic b =
+                (d.d0 == null)
+                && (null == d.d1)
+                && (null == d.d2)
+                && (typeof(MyClass) == d.d3.GetType() && 10 == d.d3.Field)
+                && (typeof(MyStruct) == d.d4.GetType() && 10 == d.d4.Field)
+                && (typeof(MyEnum) == d.d5.GetType() && MyEnum.Second == d.d5)
+                && 10 == d.d6
+                && "A" == d.d7
+                && null == d.d8
+                && 15 == d.d9;
             return b ? 0 : 1;
         }
     }
@@ -351,8 +395,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly02.readonly02
 {
@@ -370,18 +412,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         private static readonly object s_d0 = default(dynamic);
         private static readonly dynamic s_d1 = default(dynamic);
         private static readonly dynamic s_d2 = default(object);
-        private static readonly dynamic s_d3 = new Test()
-        {
-            Field = 10
-        }
-
-        ;
-        private static readonly dynamic s_d4 = new MyStruct()
-        {
-            Field = 10
-        }
-
-        ;
+        private static readonly dynamic s_d3 = new Test() { Field = 10 };
+        private static readonly dynamic s_d4 = new MyStruct() { Field = 10 };
         private static readonly dynamic s_d5 = MyEnum.Second;
         private static readonly dynamic s_d6 = 10;
         private static readonly dynamic s_d7 = "A";
@@ -395,7 +427,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
         public static int MainMethod()
         {
-            dynamic b = s_d[s_d0] && s_d[s_d1] && s_d[s_d2] && s_d[s_d3, typeof(Test)] && s_d[s_d4, typeof(MyStruct)] && s_d[s_d5, typeof(MyEnum)] && s_d[s_d6, typeof(int)] && s_d[s_d7, typeof(string)] && s_d[s_d8] && s_d[s_d9, typeof(sbyte)];
+            dynamic b =
+                s_d[s_d0]
+                && s_d[s_d1]
+                && s_d[s_d2]
+                && s_d[s_d3, typeof(Test)]
+                && s_d[s_d4, typeof(MyStruct)]
+                && s_d[s_d5, typeof(MyEnum)]
+                && s_d[s_d6, typeof(int)]
+                && s_d[s_d7, typeof(string)]
+                && s_d[s_d8]
+                && s_d[s_d9, typeof(sbyte)];
             return b ? 0 : 1;
         }
 
@@ -434,8 +476,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly03.readonly03
 {
     // <Title>Dynamic & readonly</Title>
@@ -452,18 +492,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly object d0 = default(dynamic);
         public readonly dynamic d1 = default(dynamic);
         public readonly dynamic d2 = default(object);
-        public readonly dynamic d3 = new MyClass()
-        {
-            Field = 10
-        }
-
-        ;
-        public readonly dynamic d4 = new MyStruct()
-        {
-            Field = 10
-        }
-
-        ;
+        public readonly dynamic d3 = new MyClass() { Field = 10 };
+        public readonly dynamic d4 = new MyStruct() { Field = 10 };
         public readonly dynamic d5 = MyEnum.Second;
         public readonly dynamic d6 = 10;
         public readonly dynamic d7 = "A";
@@ -477,7 +507,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
         public static int MainMethod()
         {
-            dynamic b = s_d[s_d.d0] && s_d[s_d.d1] && s_d[s_d.d2] && s_d[s_d.d3, typeof(MyClass)] && s_d[s_d.d4, typeof(MyStruct)] && s_d[s_d.d5, typeof(MyEnum)] && s_d[s_d.d6, typeof(int)] && s_d[s_d.d7, typeof(string)] && s_d[s_d.d8] && s_d[s_d.d9, typeof(sbyte)];
+            dynamic b =
+                s_d[s_d.d0]
+                && s_d[s_d.d1]
+                && s_d[s_d.d2]
+                && s_d[s_d.d3, typeof(MyClass)]
+                && s_d[s_d.d4, typeof(MyStruct)]
+                && s_d[s_d.d5, typeof(MyEnum)]
+                && s_d[s_d.d6, typeof(int)]
+                && s_d[s_d.d7, typeof(string)]
+                && s_d[s_d.d8]
+                && s_d[s_d.d9, typeof(sbyte)];
             return b ? 0 : 1;
         }
 
@@ -521,8 +561,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly04.readonly04
 {
     // <Title>Dynamic & readonly</Title>
@@ -537,18 +575,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly object d0 = default(dynamic);
         public readonly dynamic d1 = default(dynamic);
         public readonly dynamic d2 = default(object);
-        public readonly dynamic d3 = new MyClass()
-        {
-            Field = 10
-        }
-
-        ;
-        public readonly dynamic d4 = new MyStruct()
-        {
-            Field = 10
-        }
-
-        ;
+        public readonly dynamic d3 = new MyClass() { Field = 10 };
+        public readonly dynamic d4 = new MyStruct() { Field = 10 };
         public readonly dynamic d5 = MyEnum.Second;
         public readonly dynamic d6 = 10;
         public readonly dynamic d7 = "A";
@@ -753,8 +781,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly04a.readonly04a
 {
     // <Title>Dynamic & readonly</Title>
@@ -784,7 +810,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly dynamic d7;
         public readonly dynamic d8;
         public readonly dynamic d9;
-        public Test(object o0, dynamic o1, dynamic o2, MyClass o3, MyStruct o4, MyEnum o5, int o6, string o7, object o8, sbyte o9)
+        public Test(
+            object o0,
+            dynamic o1,
+            dynamic o2,
+            MyClass o3,
+            MyStruct o4,
+            MyEnum o5,
+            int o6,
+            string o7,
+            object o8,
+            sbyte o9
+        )
         {
             d0 = o0;
             d1 = o1;
@@ -805,17 +842,18 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
         public static int MainMethod()
         {
-            dynamic d = new Test(default(dynamic), default(dynamic), default(object), new MyClass()
-            {
-                Field = 10
-            }
-
-            , new MyStruct()
-            {
-                Field = 10
-            }
-
-            , MyEnum.Second, 10, "A", null, (sbyte)15);
+            dynamic d = new Test(
+                default(dynamic),
+                default(dynamic),
+                default(object),
+                new MyClass() { Field = 10 },
+                new MyStruct() { Field = 10 },
+                MyEnum.Second,
+                10,
+                "A",
+                null,
+                (sbyte)15
+            );
             bool isPass = true;
             bool ret = true;
             try
@@ -1015,8 +1053,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly06.readonly06
 {
     // <Title>Dynamic & readonly</Title>
@@ -1027,18 +1063,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
     public class Test
     {
-        public static readonly dynamic d0 = new MyClass()
-        {
-            Field = 9
-        }
-
-        ;
-        public static readonly dynamic d1 = new MyStruct()
-        {
-            Field = 9
-        }
-
-        ;
+        public static readonly dynamic d0 = new MyClass() { Field = 9 };
+        public static readonly dynamic d1 = new MyStruct() { Field = 9 };
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1078,7 +1104,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyClass.MyProperty2");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyClass.MyProperty2"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1098,7 +1128,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyStruct.MyProperty2");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyStruct.MyProperty2"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1119,7 +1153,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyClass.this[char]");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyClass.this[char]"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1139,7 +1177,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyStruct.this[char]");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyStruct.this[char]"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1161,44 +1203,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public int Field;
         public int MyProperty1
         {
-            set
-            {
-                Field = 12;
-            }
+            set { Field = 12; }
         }
 
         public int MyProperty2
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 13;
-            }
+            get { return Field; }
+            private set { Field = 13; }
         }
 
         public int this[int a]
         {
-            set
-            {
-                Field = 14;
-            }
+            set { Field = 14; }
         }
 
         public int this[char a]
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 15;
-            }
+            get { return Field; }
+            private set { Field = 15; }
         }
     }
 
@@ -1207,50 +1229,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public int Field;
         public int MyProperty1
         {
-            set
-            {
-                Field = 12;
-            }
+            set { Field = 12; }
         }
 
         public int MyProperty2
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 13;
-            }
+            get { return Field; }
+            private set { Field = 13; }
         }
 
         public int this[int a]
         {
-            set
-            {
-                Field = 14;
-            }
+            set { Field = 14; }
         }
 
         public int this[char a]
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 15;
-            }
+            get { return Field; }
+            private set { Field = 15; }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly07.readonly07
 {
@@ -1266,9 +1266,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         {
             Array = new int[2],
             MC = new MyClass()
-        }
-
-        ;
+        };
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1303,7 +1301,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyClass.MyProperty2");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyClass.MyProperty2"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1324,7 +1326,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyClass.this[char]");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyClass.this[char]"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1336,7 +1342,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
                 else
                     isPass &= true;
             }
-
 
             d1.MC = null;
             if (d1.MC != null)
@@ -1356,50 +1361,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public int Field;
         public int MyProperty1
         {
-            set
-            {
-                Field = 12;
-            }
+            set { Field = 12; }
         }
 
         public int MyProperty2
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 13;
-            }
+            get { return Field; }
+            private set { Field = 13; }
         }
 
         public int this[int a]
         {
-            set
-            {
-                Field = 14;
-            }
+            set { Field = 14; }
         }
 
         public int this[char a]
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 15;
-            }
+            get { return Field; }
+            private set { Field = 15; }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly08.readonly08
 {
@@ -1411,15 +1394,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
     public class Test
     {
-        public static readonly dynamic d1 = new MyStruct()
-        {
-            MS = new MyStruct2()
-            {
-                Field = 9
-            }
-        }
-
-        ;
+        public static readonly dynamic d1 = new MyStruct() { MS = new MyStruct2() { Field = 9 } };
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1450,7 +1425,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyStruct2.MyProperty2");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyStruct2.MyProperty2"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1471,7 +1450,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyStruct2.this[char]");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyStruct2.this[char]"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1501,50 +1484,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public int Field;
         public int MyProperty1
         {
-            set
-            {
-                Field = 12;
-            }
+            set { Field = 12; }
         }
 
         public int MyProperty2
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 13;
-            }
+            get { return Field; }
+            private set { Field = 13; }
         }
 
         public int this[int a]
         {
-            set
-            {
-                Field = 14;
-            }
+            set { Field = 14; }
         }
 
         public int this[char a]
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 15;
-            }
+            get { return Field; }
+            private set { Field = 15; }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly09.readonly09
 {
@@ -1559,13 +1520,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public static readonly dynamic d1 = new MyClass()
         {
             Array = new int[2],
-            MS = new MyStruct()
-            {
-                Field = 9
-            }
-        }
-
-        ;
+            MS = new MyStruct() { Field = 9 }
+        };
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1601,7 +1557,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyStruct.MyProperty2");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyStruct.MyProperty2"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1622,7 +1582,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                ret = ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, ex.Message, "MyStruct.this[char]");
+                ret = ErrorVerifier.Verify(
+                    ErrorMessageId.InaccessibleSetter,
+                    ex.Message,
+                    "MyStruct.this[char]"
+                );
                 if (!ret)
                 {
                     System.Console.WriteLine("error message is wrong");
@@ -1654,50 +1618,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public int Field;
         public int MyProperty1
         {
-            set
-            {
-                Field = 12;
-            }
+            set { Field = 12; }
         }
 
         public int MyProperty2
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 13;
-            }
+            get { return Field; }
+            private set { Field = 13; }
         }
 
         public int this[int a]
         {
-            set
-            {
-                Field = 14;
-            }
+            set { Field = 14; }
         }
 
         public int this[char a]
         {
-            get
-            {
-                return Field;
-            }
-
-            private set
-            {
-                Field = 15;
-            }
+            get { return Field; }
+            private set { Field = 15; }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonly10.readonly10
 {
@@ -1723,15 +1665,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
 
         public static int MainMethod()
         {
-            C c = new C
-            {
-                str =
-            {
-            i = 1
-            }
-            }
-
-            ;
+            C c = new C { str = { i = 1 } };
             return 0;
         }
     }

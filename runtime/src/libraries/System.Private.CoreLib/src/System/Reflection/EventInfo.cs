@@ -16,7 +16,10 @@ namespace System.Reflection
         public bool IsSpecialName => (Attributes & EventAttributes.SpecialName) != 0;
 
         public MethodInfo[] GetOtherMethods() => GetOtherMethods(nonPublic: false);
-        public virtual MethodInfo[] GetOtherMethods(bool nonPublic) { throw NotImplemented.ByDesign; }
+        public virtual MethodInfo[] GetOtherMethods(bool nonPublic)
+        {
+            throw NotImplemented.ByDesign;
+        }
 
         public virtual MethodInfo? AddMethod => GetAddMethod(nonPublic: true);
         public virtual MethodInfo? RemoveMethod => GetRemoveMethod(nonPublic: true);

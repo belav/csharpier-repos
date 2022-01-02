@@ -54,7 +54,7 @@ namespace Test
                         BB[] local13 = (new BB[22]);
                         sbyte local14 = App.m_sbFwd3;
                         ulong[] local15 = App.m_aulFwd7;
-                        for (long[] b244656 = new long[] { local4 }; App.m_bFwd2;)
+                        for (long[] b244656 = new long[] { local4 }; App.m_bFwd2; )
                         {
                             int[] local16 = (new int[30]);
                             TestEnum local17 = new TestEnum();
@@ -110,9 +110,7 @@ namespace Test
                     double local13 = (0.0);
                     throw new NullReferenceException();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
             return 72u;
         }

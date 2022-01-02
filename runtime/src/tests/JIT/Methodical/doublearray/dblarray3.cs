@@ -51,7 +51,6 @@ internal class DblArray3
         }
     }
 
-
     public static void f1c()
     {
         double[,] arr = new double[5, 5];
@@ -71,7 +70,6 @@ internal class DblArray3
             throw new Exception();
         }
     }
-
 
     public static void f2a()
     {

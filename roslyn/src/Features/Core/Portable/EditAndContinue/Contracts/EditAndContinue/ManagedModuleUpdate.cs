@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// <param name="updates">Collection of the module updates.</param>
         public ManagedModuleUpdates(
             ManagedModuleUpdateStatus status,
-            ImmutableArray<ManagedModuleUpdate> updates)
+            ImmutableArray<ManagedModuleUpdate> updates
+        )
         {
             Status = status;
             Updates = updates;
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             ImmutableArray<int> updatedMethods,
             ImmutableArray<int> updatedTypes,
             ImmutableArray<ManagedActiveStatementUpdate> activeStatements,
-            ImmutableArray<ManagedExceptionRegionUpdate> exceptionRegions)
+            ImmutableArray<ManagedExceptionRegionUpdate> exceptionRegions
+        )
         {
             Module = module;
 

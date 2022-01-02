@@ -37,12 +37,16 @@ namespace System.Reflection.TypeLoading
             public sealed override MethodInfo GetGenericMethodDefinition() => throw null!;
             public sealed override int GetHashCode() => throw null!;
             public sealed override MethodBody GetMethodBody() => throw null!;
-            [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
-            public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments) => throw null!;
+            [RequiresUnreferencedCode(
+                "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+            )]
+            public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments) =>
+                throw null!;
             protected sealed override MethodAttributes ComputeAttributes() => throw null!;
             protected sealed override CallingConventions ComputeCallingConvention() => throw null!;
             protected sealed override RoType[] ComputeGenericArgumentsOrParameters() => throw null!;
-            protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() => throw null!;
+            protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
+                throw null!;
             protected sealed override MethodSig<RoParameter> ComputeMethodSig() => throw null!;
             protected sealed override MethodSig<RoType> ComputeCustomModifiers() => throw null!;
             protected sealed override MethodSig<string> ComputeMethodSigStrings() => throw null!;

@@ -14,56 +14,139 @@ namespace DllImportGenerator.IntegrationTests
         {
             public partial class False
             {
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_return", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_return",
+                    PreserveSig = false
+                )]
                 public static partial void NoReturnValue(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_int", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_int",
+                    PreserveSig = false
+                )]
                 public static partial void Int_Out(int i, out int ret);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_int", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_int",
+                    PreserveSig = false
+                )]
                 public static partial int Int_AsReturn(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_int", PreserveSig = false)]
-                public static partial void Bool_Out(int i, [MarshalAs(UnmanagedType.U4)] out bool ret);
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_int",
+                    PreserveSig = false
+                )]
+                public static partial void Bool_Out(
+                    int i,
+                    [MarshalAs(UnmanagedType.U4)] out bool ret
+                );
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_int", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_int",
+                    PreserveSig = false
+                )]
                 [return: MarshalAs(UnmanagedType.U4)]
                 public static partial bool Bool_AsReturn(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_ushort", PreserveSig = false)]
-                public static partial void Char_Out(int i, [MarshalAs(UnmanagedType.U2)] out char ret);
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_ushort",
+                    PreserveSig = false
+                )]
+                public static partial void Char_Out(
+                    int i,
+                    [MarshalAs(UnmanagedType.U2)] out char ret
+                );
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_ushort", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_ushort",
+                    PreserveSig = false
+                )]
                 [return: MarshalAs(UnmanagedType.U2)]
                 public static partial char Char_AsReturn(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_ushort_string", PreserveSig = false)]
-                public static partial void String_Out(int i, [MarshalAs(UnmanagedType.LPWStr)] out string ret);
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_ushort_string",
+                    PreserveSig = false
+                )]
+                public static partial void String_Out(
+                    int i,
+                    [MarshalAs(UnmanagedType.LPWStr)] out string ret
+                );
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_ushort_string", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_ushort_string",
+                    PreserveSig = false
+                )]
                 [return: MarshalAs(UnmanagedType.LPWStr)]
                 public static partial string String_AsReturn(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_int_array", PreserveSig = false)]
-                public static partial void IntArray_Out(int i, [MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(int))] out int[] ret);
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_int_array",
+                    PreserveSig = false
+                )]
+                public static partial void IntArray_Out(
+                    int i,
+                    [MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(int))] out int[] ret
+                );
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_int_array", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_int_array",
+                    PreserveSig = false
+                )]
                 [return: MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(int))]
                 public static partial int[] IntArray_AsReturn(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_ushort_string_array", PreserveSig = false)]
-                public static partial void StringArray_Out(int i, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeConst = sizeof(int))] out string[] ret);
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_ushort_string_array",
+                    PreserveSig = false
+                )]
+                public static partial void StringArray_Out(
+                    int i,
+                    [MarshalAs(
+                        UnmanagedType.LPArray,
+                        ArraySubType = UnmanagedType.LPWStr,
+                        SizeConst = sizeof(int)
+                    )]
+                        out string[] ret
+                );
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_ushort_string_array", PreserveSig = false)]
-                [return: MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeConst = sizeof(int))]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_ushort_string_array",
+                    PreserveSig = false
+                )]
+                [return: MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeConst = sizeof(int)
+                )]
                 public static partial string[] StringArray_AsReturn(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_handle", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_handle",
+                    PreserveSig = false
+                )]
                 public static partial void SafeHandle_Out(int hr, out DummySafeHandle ret);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_handle", PreserveSig = false)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_handle",
+                    PreserveSig = false
+                )]
                 public static partial DummySafeHandle SafeHandle_AsReturn(int hr);
-
             }
 
             public class DummySafeHandle : Microsoft.Win32.SafeHandles.SafeHandleMinusOneIsInvalid
@@ -74,10 +157,18 @@ namespace DllImportGenerator.IntegrationTests
 
             public partial class True
             {
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_return", PreserveSig = true)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_return",
+                    PreserveSig = true
+                )]
                 public static partial int NoReturnValue(int i);
 
-                [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "hresult_out_int", PreserveSig = true)]
+                [GeneratedDllImport(
+                    NativeExportsNE_Binary,
+                    EntryPoint = "hresult_out_int",
+                    PreserveSig = true
+                )]
                 public static partial int Int_Out(int i, out int ret);
             }
         }
@@ -103,57 +194,106 @@ namespace DllImportGenerator.IntegrationTests
             var exceptionType = exception.GetType();
             Assert.Equal(expectedHR, exception.HResult);
             Exception ex;
-                
-            ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.NoReturnValue(input));
+
+            ex = Assert.Throws(
+                exceptionType,
+                () => NativeExportsNE.PreserveSig.False.NoReturnValue(input)
+            );
             Assert.Equal(expectedHR, ex.HResult);
 
             {
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.Int_Out(input, out int ret));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.Int_Out(input, out int ret)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
 
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.Int_AsReturn(input));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.Int_AsReturn(input)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
             }
             {
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.Bool_Out(input, out bool ret));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.Bool_Out(input, out bool ret)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
 
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.Bool_AsReturn(input));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.Bool_AsReturn(input)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
             }
             {
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.Char_Out(input, out char ret));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.Char_Out(input, out char ret)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
 
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.Char_AsReturn(input));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.Char_AsReturn(input)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
             }
             {
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.String_Out(input, out string ret));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.String_Out(input, out string ret)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
 
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.String_AsReturn(input));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.String_AsReturn(input)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
             }
             {
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.IntArray_Out(input, out int[] ret));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.IntArray_Out(input, out int[] ret)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
 
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.IntArray_AsReturn(input));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.IntArray_AsReturn(input)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
             }
             {
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.StringArray_Out(input, out string[] ret));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.StringArray_Out(input, out string[] ret)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
 
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.StringArray_AsReturn(input));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.StringArray_AsReturn(input)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
             }
             {
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.SafeHandle_Out(input, out NativeExportsNE.PreserveSig.DummySafeHandle ret));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () =>
+                        NativeExportsNE.PreserveSig.False.SafeHandle_Out(
+                            input,
+                            out NativeExportsNE.PreserveSig.DummySafeHandle ret
+                        )
+                );
                 Assert.Equal(expectedHR, ex.HResult);
 
-                ex = Assert.Throws(exceptionType, () => NativeExportsNE.PreserveSig.False.SafeHandle_AsReturn(input));
+                ex = Assert.Throws(
+                    exceptionType,
+                    () => NativeExportsNE.PreserveSig.False.SafeHandle_AsReturn(input)
+                );
                 Assert.Equal(expectedHR, ex.HResult);
             }
         }

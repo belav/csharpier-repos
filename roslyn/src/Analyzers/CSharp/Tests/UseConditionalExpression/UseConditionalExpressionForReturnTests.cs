@@ -17,25 +17,29 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpression
 {
-    public partial class UseConditionalExpressionForReturnTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseConditionalExpressionForReturnTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly ParseOptions CSharp8 = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
-        private static readonly ParseOptions CSharp9 = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp8 =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp9 =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
 
-        public UseConditionalExpressionForReturnTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public UseConditionalExpressionForReturnTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseConditionalExpressionForReturnDiagnosticAnalyzer(),
-                new CSharpUseConditionalExpressionForReturnCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseConditionalExpressionForReturnDiagnosticAnalyzer(),
+                new CSharpUseConditionalExpressionForReturnCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestOnSimpleReturn()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -50,14 +54,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
     {
         return true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -65,7 +70,7 @@ class C
         public async Task TestOnSimpleReturn_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -80,14 +85,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
     {
         return true ? throw new System.Exception() : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -95,7 +101,7 @@ class C
         public async Task TestOnSimpleReturn_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -110,14 +116,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
     {
         return true ? 0 : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -125,7 +132,7 @@ class C
         public async Task TestNotWithTwoThrows()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -139,7 +146,8 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -147,7 +155,7 @@ class C
         public async Task TestNotOnSimpleReturn_Throw1_CSharp6()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -161,7 +169,13 @@ class C
             return 1;
         }
     }
-}", parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+}",
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -169,7 +183,7 @@ class C
         public async Task TestNotWithSimpleThrow()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -183,14 +197,15 @@ class C
             return 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestOnSimpleReturnNoBlocks()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -201,21 +216,22 @@ class C
             return 1;
     }
 }",
-@"
+                @"
 class C
 {
     int M()
     {
         return true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestOnSimpleReturnNoBlocks_NotInBlock()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -227,7 +243,7 @@ class C
                 return 1;
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -235,14 +251,15 @@ class C
         if (true)
             return true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestMissingReturnValue1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -256,7 +273,8 @@ class C
             return;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -264,7 +282,7 @@ class C
         public async Task TestMissingReturnValue1_Throw()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -278,14 +296,15 @@ class C
             return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestMissingReturnValue2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -299,7 +318,8 @@ class C
             return 1;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -307,7 +327,7 @@ class C
         public async Task TestMissingReturnValue2_Throw()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -321,14 +341,15 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestMissingReturnValue3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -342,14 +363,15 @@ class C
             return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestWithNoElseBlockButFollowingReturn()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -362,14 +384,15 @@ class C
         return 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         return true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -377,7 +400,7 @@ class C
         public async Task TestWithNoElseBlockButFollowingReturn_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -390,14 +413,15 @@ class C
         return 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         return true ? throw new System.Exception() : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -405,7 +429,7 @@ class C
         public async Task TestWithNoElseBlockButFollowingReturn_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -418,21 +442,22 @@ class C
         throw new System.Exception();
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         return true ? 0 : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestMissingWithoutElse()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -442,7 +467,8 @@ class C
             return 0;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -450,7 +476,7 @@ class C
         public async Task TestMissingWithoutElse_Throw()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -460,14 +486,15 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestConversion1_CSharp8()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     object M()
@@ -482,21 +509,23 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     object M()
     {
         return true ? ""a"" : (object)""b"";
     }
-}", parseOptions: CSharp8);
+}",
+                parseOptions: CSharp8
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestConversion1_CSharp9()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     object M()
@@ -511,14 +540,16 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     object M()
     {
         return true ? ""a"" : (object)""b"";
     }
-}", parseOptions: CSharp9);
+}",
+                parseOptions: CSharp9
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -526,7 +557,7 @@ class C
         public async Task TestConversion1_Throw1_CSharp8()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     object M()
@@ -541,14 +572,16 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     object M()
     {
         return true ? throw new System.Exception() : (object)""b"";
     }
-}", parseOptions: CSharp8);
+}",
+                parseOptions: CSharp8
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -556,7 +589,7 @@ class C
         public async Task TestConversion1_Throw1_CSharp9()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     object M()
@@ -571,14 +604,16 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     object M()
     {
         return true ? throw new System.Exception() : (object)""b"";
     }
-}", parseOptions: CSharp9);
+}",
+                parseOptions: CSharp9
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -586,7 +621,7 @@ class C
         public async Task TestConversion1_Throw2_CSharp8()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     object M()
@@ -601,14 +636,16 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     object M()
     {
         return true ? (object)""a"" : throw new System.Exception();
     }
-}", parseOptions: CSharp8);
+}",
+                parseOptions: CSharp8
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -616,7 +653,7 @@ class C
         public async Task TestConversion1_Throw2_CSharp9()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     object M()
@@ -631,21 +668,23 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     object M()
     {
         return true ? (object)""a"" : throw new System.Exception();
     }
-}", parseOptions: CSharp9);
+}",
+                parseOptions: CSharp9
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestConversion2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     string M()
@@ -660,24 +699,28 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     string M()
     {
         return true ? ""a"" : null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         [InlineData(LanguageVersion.CSharp8, "(string)null")]
         [InlineData(LanguageVersion.CSharp9, "null")]
-        public async Task TestConversion2_Throw1(LanguageVersion languageVersion, string expectedFalseExpression)
+        public async Task TestConversion2_Throw1(
+            LanguageVersion languageVersion,
+            string expectedFalseExpression
+        )
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     string M()
@@ -692,14 +735,20 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     string M()
     {
-        return true ? throw new System.Exception() : " + expectedFalseExpression + @";
+        return true ? throw new System.Exception() : "
+                    + expectedFalseExpression
+                    + @";
     }
-}", parameters: new(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)));
+}",
+                parameters: new(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+                )
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -707,7 +756,7 @@ class C
         public async Task TestConversion2_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     string M()
@@ -722,23 +771,27 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     string M()
     {
         return true ? ""a"" : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         [InlineData(LanguageVersion.CSharp8, "(string)null")]
         [InlineData(LanguageVersion.CSharp9, "null")]
-        public async Task TestConversion3(LanguageVersion languageVersion, string expectedFalseExpression)
+        public async Task TestConversion3(
+            LanguageVersion languageVersion,
+            string expectedFalseExpression
+        )
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     string M()
@@ -753,24 +806,33 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     string M()
     {
-        return true ? null : " + expectedFalseExpression + @";
+        return true ? null : "
+                    + expectedFalseExpression
+                    + @";
     }
-}", parameters: new(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)));
+}",
+                parameters: new(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+                )
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         [InlineData(LanguageVersion.CSharp8, "(string)null")]
         [InlineData(LanguageVersion.CSharp9, "null")]
-        public async Task TestConversion3_Throw1(LanguageVersion languageVersion, string expectedFalseExpression)
+        public async Task TestConversion3_Throw1(
+            LanguageVersion languageVersion,
+            string expectedFalseExpression
+        )
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     string M()
@@ -785,24 +847,33 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     string M()
     {
-        return true ? throw new System.Exception() : " + expectedFalseExpression + @";
+        return true ? throw new System.Exception() : "
+                    + expectedFalseExpression
+                    + @";
     }
-}", parameters: new(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)));
+}",
+                parameters: new(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+                )
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         [InlineData(LanguageVersion.CSharp8, "(string)null")]
         [InlineData(LanguageVersion.CSharp9, "null")]
-        public async Task TestConversion3_Throw2(LanguageVersion languageVersion, string expectedTrue)
+        public async Task TestConversion3_Throw2(
+            LanguageVersion languageVersion,
+            string expectedTrue
+        )
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     string M()
@@ -817,21 +888,27 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     string M()
     {
-        return true ? " + expectedTrue + @" : throw new System.Exception();
+        return true ? "
+                    + expectedTrue
+                    + @" : throw new System.Exception();
     }
-}", parameters: new(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)));
+}",
+                parameters: new(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestKeepTriviaAroundIf()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -847,7 +924,7 @@ class C
         } // trailing
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -855,14 +932,15 @@ class C
         // leading
         return true ? 0 : 1; // trailing
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -884,7 +962,7 @@ class C
         return 3;
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -893,14 +971,15 @@ class C
 
         return true ? 2 : 3;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestMultiLine1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -916,7 +995,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -926,14 +1005,15 @@ class C
                 1, 2, 3)
             : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestMultiLine2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -949,7 +1029,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -959,14 +1039,15 @@ class C
             : Foo(
                 1, 2, 3);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestMultiLine3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -983,7 +1064,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -994,14 +1075,15 @@ class C
             : Foo(
                 4, 5, 6);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestElseIfWithBlock()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -1019,7 +1101,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -1032,7 +1114,8 @@ class C
             return false ? 1 : 0;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1040,7 +1123,7 @@ class C
         public async Task TestElseIfWithBlock_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -1058,7 +1141,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -1071,7 +1154,8 @@ class C
             return false ? throw new System.Exception() : 0;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1079,7 +1163,7 @@ class C
         public async Task TestElseIfWithBlock_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -1097,7 +1181,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -1110,14 +1194,15 @@ class C
             return false ? 1 : throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestElseIfWithoutBlock()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -1127,7 +1212,7 @@ class C
         else return 0;
     }
 }",
-@"
+                @"
 class C
 {
     int M()
@@ -1135,14 +1220,15 @@ class C
         if (true) return 2;
         else return false ? 1 : 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestRefReturns1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     ref int M(ref int i, ref int j)
@@ -1157,14 +1243,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     ref int M(ref int i, ref int j)
     {
         return ref true ? ref i : ref j;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1172,7 +1259,7 @@ class C
         public async Task TestRefReturns1_Throw1()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     ref int M(ref int i, ref int j)
@@ -1186,7 +1273,8 @@ class C
             return ref j;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1194,7 +1282,7 @@ class C
         public async Task TestRefReturns1_Throw2()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     ref int M(ref int i, ref int j)
@@ -1208,7 +1296,8 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27960, "https://github.com/dotnet/roslyn/issues/27960")]
@@ -1216,7 +1305,7 @@ class C
         public async Task TestOnYieldReturn()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -1231,14 +1320,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
     {
         yield return true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1247,7 +1337,7 @@ class C
         public async Task TestOnYieldReturn_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -1262,14 +1352,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
     {
         yield return true ? throw new System.Exception() : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1278,7 +1369,7 @@ class C
         public async Task TestOnYieldReturn_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int M()
@@ -1293,14 +1384,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int M()
     {
         yield return true ? 0 : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27960, "https://github.com/dotnet/roslyn/issues/27960")]
@@ -1308,7 +1400,7 @@ class C
         public async Task TestOnYieldReturn_IEnumerableReturnType()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1325,7 +1417,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1334,7 +1426,8 @@ class C
     {
         yield return true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27960, "https://github.com/dotnet/roslyn/issues/27960")]
@@ -1342,7 +1435,7 @@ class C
         public async Task TestNotOnMixedYields()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -1356,7 +1449,8 @@ class C
             yield return 1;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1365,7 +1459,7 @@ class C
         public async Task TestNotOnMixedYields_Throw1()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -1379,7 +1473,8 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27960, "https://github.com/dotnet/roslyn/issues/27960")]
@@ -1387,7 +1482,7 @@ class C
         public async Task TestNotOnMixedYields_IEnumerableReturnType()
         {
             await TestMissingAsync(
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1403,7 +1498,8 @@ class C
             yield return 1;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27960, "https://github.com/dotnet/roslyn/issues/27960")]
@@ -1411,7 +1507,7 @@ class C
         public async Task TestNotWithNoElseBlockButFollowingYieldReturn()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -1423,7 +1519,8 @@ class C
 
         yield return 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1432,7 +1529,7 @@ class C
         public async Task TestWithNoElseBlockButFollowingYieldReturn_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -1445,15 +1542,15 @@ class C
         yield return 1;
     }
 }",
-
-@"
+                @"
 class C
 {
     void M()
     {
         yield return true ? throw new System.Exception() : 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1462,7 +1559,7 @@ class C
         public async Task TestNotWithNoElseBlockButFollowingYieldReturn_Throw2()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -1474,7 +1571,8 @@ class C
 
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(27960, "https://github.com/dotnet/roslyn/issues/27960")]
@@ -1482,7 +1580,7 @@ class C
         public async Task TestNotWithNoElseBlockButFollowingYieldReturn_IEnumerableReturnType()
         {
             await TestMissingAsync(
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1496,14 +1594,15 @@ class C
 
         yield return 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestReturnTrueFalse1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1518,14 +1617,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a == 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1533,7 +1633,7 @@ class C
         public async Task TestReturnTrueFalse1_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1548,14 +1648,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a == 0 ? throw new System.Exception() : false;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1563,7 +1664,7 @@ class C
         public async Task TestReturnTrueFalse1_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1578,21 +1679,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a == 0 ? true : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestReturnTrueFalse2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1607,14 +1709,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a != 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1622,7 +1725,7 @@ class C
         public async Task TestReturnTrueFalse2_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1637,14 +1740,15 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a == 0 ? throw new System.Exception() : true;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1652,7 +1756,7 @@ class C
         public async Task TestReturnTrueFalse2_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1667,21 +1771,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a == 0 ? false : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestReturnTrueFalse3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1694,14 +1799,15 @@ class C
         return true;
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a != 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1709,7 +1815,7 @@ class C
         public async Task TestReturnTrueFalse3_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1722,14 +1828,15 @@ class C
         return true;
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a == 0 ? throw new System.Exception() : true;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1737,7 +1844,7 @@ class C
         public async Task TestReturnTrueFalse3_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     bool M(int a)
@@ -1750,21 +1857,22 @@ class C
         throw new System.Exception();
     }
 }",
-@"
+                @"
 class C
 {
     bool M(int a)
     {
         return a == 0 ? false : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
         public async Task TestReturnTrueFalse4()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1781,7 +1889,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1790,7 +1898,8 @@ class C
     {
         yield return a != 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1798,7 +1907,7 @@ class C
         public async Task TestReturnTrueFalse4_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1815,7 +1924,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1824,7 +1933,8 @@ class C
     {
         yield return a == 0 ? throw new System.Exception() : true;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
@@ -1832,7 +1942,7 @@ class C
         public async Task TestReturnTrueFalse4_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1849,7 +1959,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1858,7 +1968,8 @@ class C
     {
         yield return a == 0 ? false : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(36117, "https://github.com/dotnet/roslyn/issues/36117")]
@@ -1866,7 +1977,7 @@ class C
         public async Task TestMissingWhenCrossingPreprocessorDirective()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -1878,7 +1989,8 @@ class C
 #endif
         return 2;
     }
-}");
+}"
+            );
         }
     }
 }

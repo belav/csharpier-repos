@@ -12,37 +12,30 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
     public class ViewComponentConventionsTest
     {
         [Theory]
-
         // Only public top-level classes can be view components.
         [InlineData(typeof(PublicClass), true)]
         [InlineData(typeof(InternalClass), false)]
         [InlineData(typeof(PublicNestedClass), false)]
         [InlineData(typeof(PrivateNestedClass), false)]
-
         // Abstract classes, interfaces, and open generics don't work either.
         [InlineData(typeof(AbstractClass), false)]
         [InlineData(typeof(IAmAnInterfaceViewComponent), false)]
         [InlineData(typeof(GenericViewComponent<>), false)]
         [InlineData(typeof(GenericViewComponent<string>), true)]
-
         // You need the attribute, or a naming convention
         [InlineData(typeof(Nada), false)]
-
         // Naming convention doesn't apply to derived classes that don't follow it.
         [InlineData(typeof(NamingConventionViewComponent), true)]
         [InlineData(typeof(CaseInsensitiveNamingConventionVIEWCOMPONENT), true)]
         [InlineData(typeof(DerivedNamingConvention), false)]
-
         // The Attribute does apply to derived classes.
         [InlineData(typeof(WithAttribute), true)]
         [InlineData(typeof(DerivedWithAttribute), true)]
         [InlineData(typeof(WithAttributeAndName), true)]
         [InlineData(typeof(DerivedWithAttributeAndName), true)]
         [InlineData(typeof(DerivedWithOverriddenAttributeName), true)]
-
         // Value types cannot be view components
         [InlineData(typeof(int), false)]
-
         // If it has NonViewComponent it's not a view component
         [InlineData(typeof(NonViewComponentAttributeViewComponent), false)]
         [InlineData(typeof(ChildOfNonViewComponent), false)]
@@ -59,7 +52,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         [InlineData(typeof(PublicClass), "PublicClass")]
         [InlineData(typeof(GenericViewComponent<string>), "GenericViewComponent`1")]
         [InlineData(typeof(NamingConventionViewComponent), "NamingConvention")]
-        [InlineData(typeof(CaseInsensitiveNamingConventionVIEWCOMPONENT), "CaseInsensitiveNamingConvention")]
+        [InlineData(
+            typeof(CaseInsensitiveNamingConventionVIEWCOMPONENT),
+            "CaseInsensitiveNamingConvention"
+        )]
         [InlineData(typeof(WithAttribute), "WithAttribute")]
         [InlineData(typeof(DerivedWithAttribute), "DerivedWithAttribute")]
         [InlineData(typeof(WithAttributeAndName), "Name")]
@@ -75,12 +71,30 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         }
 
         [Theory]
-        [InlineData(typeof(PublicClass), "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.PublicClass")]
-        [InlineData(typeof(GenericViewComponent<string>), "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.GenericViewComponent`1")]
-        [InlineData(typeof(NamingConventionViewComponent), "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.NamingConvention")]
-        [InlineData(typeof(CaseInsensitiveNamingConventionVIEWCOMPONENT), "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.CaseInsensitiveNamingConvention")]
-        [InlineData(typeof(WithAttribute), "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.WithAttribute")]
-        [InlineData(typeof(DerivedWithAttribute), "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.DerivedWithAttribute")]
+        [InlineData(
+            typeof(PublicClass),
+            "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.PublicClass"
+        )]
+        [InlineData(
+            typeof(GenericViewComponent<string>),
+            "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.GenericViewComponent`1"
+        )]
+        [InlineData(
+            typeof(NamingConventionViewComponent),
+            "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.NamingConvention"
+        )]
+        [InlineData(
+            typeof(CaseInsensitiveNamingConventionVIEWCOMPONENT),
+            "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.CaseInsensitiveNamingConvention"
+        )]
+        [InlineData(
+            typeof(WithAttribute),
+            "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.WithAttribute"
+        )]
+        [InlineData(
+            typeof(DerivedWithAttribute),
+            "Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses.DerivedWithAttribute"
+        )]
         [InlineData(typeof(WithAttributeAndName), "Name")]
         [InlineData(typeof(DerivedWithAttributeAndName), "Name")]
         [InlineData(typeof(DerivedWithOverriddenAttributeName), "New.Name")]
@@ -131,11 +145,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses
     }
 
     [NonViewComponent]
-    public class NonViewComponentAttributeViewComponent
-    { }
+    public class NonViewComponentAttributeViewComponent { }
 
-    public class ChildOfNonViewComponent : NonViewComponentAttributeViewComponent
-    { }
+    public class ChildOfNonViewComponent : NonViewComponentAttributeViewComponent { }
 
     public class NamingConventionViewComponent
     {
@@ -148,7 +160,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses
     public class CaseInsensitiveNamingConventionVIEWCOMPONENT
     {
     }
-
 
     [ViewComponent]
     public class WithAttribute

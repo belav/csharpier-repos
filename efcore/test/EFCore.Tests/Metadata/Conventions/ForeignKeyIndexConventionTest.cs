@@ -20,7 +20,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var dependentTypeBuilder = modelBuilder.Entity<DependentEntity>();
 
             principalTypeBuilder.HasKey(t => t.InitialPrincipalId);
-            dependentTypeBuilder.HasOne(t => t.Principal).WithOne().HasForeignKey<DependentEntity>(t => t.PrincipalId);
+            dependentTypeBuilder
+                .HasOne(t => t.Principal)
+                .WithOne()
+                .HasForeignKey<DependentEntity>(t => t.PrincipalId);
             dependentTypeBuilder.HasIndex(t => t.PrincipalId).IsUnique(false);
             principalTypeBuilder.HasKey(t => t.ChangedPrincipalId);
 

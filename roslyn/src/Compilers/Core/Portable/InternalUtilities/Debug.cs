@@ -16,8 +16,8 @@ namespace Roslyn.Utilities
 
         /// <inheritdoc cref="Debug.Assert(bool, string)"/>
         [Conditional("DEBUG")]
-        public static void Assert([DoesNotReturnIf(false)] bool b, string message)
-            => Debug.Assert(b, message);
+        public static void Assert([DoesNotReturnIf(false)] bool b, string message) =>
+            Debug.Assert(b, message);
 
         [Conditional("DEBUG")]
         public static void AssertNotNull<T>([NotNull] T value)
@@ -36,7 +36,10 @@ namespace Roslyn.Utilities
         /// produce a heap dump for investigation.</para>
         /// </summary>
         [Conditional("DEBUG")]
-        internal static void AssertOrFailFast([DoesNotReturnIf(false)] bool condition, string? message = null)
+        internal static void AssertOrFailFast(
+            [DoesNotReturnIf(false)] bool condition,
+            string? message = null
+        )
         {
 #if NET20 || NETSTANDARD1_3
             Debug.Assert(condition);
@@ -50,8 +53,8 @@ namespace Roslyn.Utilities
                     Console.WriteLine(message);
                     Console.WriteLine(stackTrace);
 
-                    // Use FailFast so that the process fails rudely and goes through 
-                    // windows error reporting (on Windows at least). This will allow our 
+                    // Use FailFast so that the process fails rudely and goes through
+                    // windows error reporting (on Windows at least). This will allow our
                     // Helix environment to capture crash dumps for future investigation
                     Environment.FailFast(message);
                 }

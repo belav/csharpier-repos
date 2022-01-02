@@ -11,15 +11,18 @@ public static class Program
 {
     private static int Main()
     {
-        const int Pass = 100, Fail = 1;
+        const int Pass = 100,
+            Fail = 1;
 
-        PromoteToTier1AndRun(() =>
-        {
-            CollectibleTestIteration();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.WaitForPendingFinalizers();
-        });
+        PromoteToTier1AndRun(
+            () =>
+            {
+                CollectibleTestIteration();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.WaitForPendingFinalizers();
+            }
+        );
 
         return Pass;
     }
@@ -43,15 +46,22 @@ public static class Program
 
         AssemblyBuilder ab = AssemblyBuilder.DefineDynamicAssembly(
             new AssemblyName("CollectibleAssembly" + collectibleIndex),
-            AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilderAccess.RunAndCollect
+        );
 
         ModuleBuilder mb = ab.DefineDynamicModule("CollectibleModule" + collectibleIndex);
 
-        TypeBuilder tb = mb.DefineType("CollectibleHelloType" + collectibleIndex, TypeAttributes.Public);
+        TypeBuilder tb = mb.DefineType(
+            "CollectibleHelloType" + collectibleIndex,
+            TypeAttributes.Public
+        );
         tb.AddInterfaceImplementation(typeof(IHelloWorld));
         tb.DefineDefaultConstructor(MethodAttributes.Public);
 
-        MethodBuilder methb = tb.DefineMethod("Hello", MethodAttributes.Public | MethodAttributes.Virtual);
+        MethodBuilder methb = tb.DefineMethod(
+            "Hello",
+            MethodAttributes.Public | MethodAttributes.Virtual
+        );
         methb.GetILGenerator().Emit(OpCodes.Ret);
 
         Type helloType = tb.CreateTypeInfo().UnderlyingSystemType;

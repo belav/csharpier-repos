@@ -10,7 +10,6 @@ internal class Win32Interop
     public static extern bool CloseHandle(IntPtr hObject);
 }
 
-
 public struct Gen<T>
 {
     public int PInvokeTest()
@@ -59,5 +58,3 @@ public class Test_instance03
         }
     }
 }
-
-

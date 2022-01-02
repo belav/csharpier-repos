@@ -47,11 +47,7 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
             Options = RazorCodeGenerationOptions.CreateDefault(),
         };
 
-        var pass = new TestDocumentClassifierPass()
-        {
-            Engine = Engine,
-            ShouldMatch = false,
-        };
+        var pass = new TestDocumentClassifierPass() { Engine = Engine, ShouldMatch = false, };
 
         // Act
         pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -70,20 +66,19 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
             Options = RazorCodeGenerationOptions.CreateDefault(),
         };
 
-        var expected = new ICodeTargetExtension[]
-        {
-                new MyExtension1(),
-                new MyExtension2(),
-        };
+        var expected = new ICodeTargetExtension[] { new MyExtension1(), new MyExtension2(), };
 
         var pass = new TestDocumentClassifierPass();
-        pass.Engine = RazorProjectEngine.CreateEmpty(b =>
-        {
-            for (var i = 0; i < expected.Length; i++)
-            {
-                b.AddTargetExtension(expected[i]);
-            }
-        }).Engine;
+        pass.Engine =
+            RazorProjectEngine.CreateEmpty(
+                b =>
+                {
+                    for (var i = 0; i < expected.Length; i++)
+                    {
+                        b.AddTargetExtension(expected[i]);
+                    }
+                }
+            ).Engine;
 
         ICodeTargetExtension[] extensions = null;
 
@@ -144,7 +139,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
         Children(
             @namespace,
             n => Assert.IsType<UsingDirectiveIntermediateNode>(n),
-            n => Assert.IsType<ClassDeclarationIntermediateNode>(n));
+            n => Assert.IsType<ClassDeclarationIntermediateNode>(n)
+        );
     }
 
     [Fact]
@@ -173,7 +169,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
         Children(
             method,
             n => Assert.IsType<HtmlContentIntermediateNode>(n),
-            n => Assert.IsType<CSharpCodeIntermediateNode>(n));
+            n => Assert.IsType<CSharpCodeIntermediateNode>(n)
+        );
     }
 
     [Fact]
@@ -262,7 +259,10 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         protected override string DocumentKind => "test";
 
-        protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override bool IsMatch(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             return ShouldMatch;
         }
@@ -271,7 +271,8 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
             RazorCodeDocument codeDocument,
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
-            MethodDeclarationIntermediateNode method)
+            MethodDeclarationIntermediateNode method
+        )
         {
             @namespace.Content = Namespace;
             @class.ClassName = Class;

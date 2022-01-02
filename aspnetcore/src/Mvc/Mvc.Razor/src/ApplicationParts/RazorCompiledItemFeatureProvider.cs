@@ -25,19 +25,26 @@ internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProv
 
             if (duplicates != null)
             {
-                var viewsDifferingInCase = string.Join(Environment.NewLine, duplicates.Select(d => d.Identifier));
+                var viewsDifferingInCase = string.Join(
+                    Environment.NewLine,
+                    duplicates.Select(d => d.Identifier)
+                );
 
                 var message = string.Join(
                     Environment.NewLine,
                     Resources.RazorViewCompiler_ViewPathsDifferOnlyInCase,
-                    viewsDifferingInCase);
+                    viewsDifferingInCase
+                );
                 throw new InvalidOperationException(message);
             }
 
             foreach (var item in provider.CompiledItems)
             {
                 var compiledItem = item;
-                if (_hotReloadedViews is not null && _hotReloadedViews.TryGetValue(item.Identifier, out var hotReloadedType))
+                if (
+                    _hotReloadedViews is not null
+                    && _hotReloadedViews.TryGetValue(item.Identifier, out var hotReloadedType)
+                )
                 {
                     // Determine if a hot reload update is available for this view.
                     compiledItem = new HotReloadRazorCompiledItem(item, hotReloadedType);

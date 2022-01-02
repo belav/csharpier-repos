@@ -24,8 +24,12 @@ public class DiagnosticProject
     /// </summary>
     public static string TestProjectName = "TestProject";
 
-    private static readonly ICompilationAssemblyResolver _assemblyResolver = new AppBaseCompilationAssemblyResolver();
-    private static readonly Dictionary<Assembly, Solution> _solutionCache = new Dictionary<Assembly, Solution>();
+    private static readonly ICompilationAssemblyResolver _assemblyResolver =
+        new AppBaseCompilationAssemblyResolver();
+    private static readonly Dictionary<Assembly, Solution> _solutionCache = new Dictionary<
+        Assembly,
+        Solution
+    >();
 
     public static Project Create(Assembly testAssembly, string[] sources)
     {
@@ -35,15 +39,29 @@ public class DiagnosticProject
             if (!_solutionCache.TryGetValue(testAssembly, out solution))
             {
                 var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
-                solution = new AdhocWorkspace()
-                    .CurrentSolution
-                    .AddProject(projectId, TestProjectName, TestProjectName, LanguageNames.CSharp);
+                solution = new AdhocWorkspace().CurrentSolution.AddProject(
+                    projectId,
+                    TestProjectName,
+                    TestProjectName,
+                    LanguageNames.CSharp
+                );
 
-                foreach (var defaultCompileLibrary in DependencyContext.Load(testAssembly).CompileLibraries)
+                foreach (
+                    var defaultCompileLibrary in DependencyContext.Load(
+                        testAssembly
+                    ).CompileLibraries
+                )
                 {
-                    foreach (var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(_assemblyResolver))
+                    foreach (
+                        var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(
+                            _assemblyResolver
+                        )
+                    )
                     {
-                        solution = solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(resolveReferencePath));
+                        solution = solution.AddMetadataReference(
+                            projectId,
+                            MetadataReference.CreateFromFile(resolveReferencePath)
+                        );
                     }
                 }
 

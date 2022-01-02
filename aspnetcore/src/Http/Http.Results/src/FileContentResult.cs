@@ -16,8 +16,7 @@ internal sealed partial class FileContentResult : FileResult, IResult
     /// </summary>
     /// <param name="fileContents">The bytes that represent the file contents.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
-    public FileContentResult(byte[] fileContents, string? contentType)
-        : base(contentType)
+    public FileContentResult(byte[] fileContents, string? contentType) : base(contentType)
     {
         FileContents = fileContents;
     }
@@ -48,7 +47,8 @@ internal sealed partial class FileContentResult : FileResult, IResult
             EnableRangeProcessing,
             LastModified,
             EntityTag,
-            logger);
+            logger
+        );
 
         if (!serveBody)
         {

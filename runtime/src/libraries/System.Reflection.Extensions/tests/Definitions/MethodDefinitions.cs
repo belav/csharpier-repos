@@ -8,41 +8,47 @@ namespace System.Reflection.Tests
         public static int Members = 38;
         public static int MembersEverything = 44;
 
-        public static string[] DeclaredMethodNames = new string[] { "Void PrivMeth1()",
-                                                                    "Void PrivMeth3()",
-                                                                    "Void PubBaseMeth1()",
-                                                                    "Void PubBaseMeth1(System.String)",
-                                                                    "Void IntBaseMeth1()",
-                                                                    "Void IntBaseMeth1(System.String)",
-                                                                    "Void ProtectedBaseMeth1()",
-                                                                    "Void ProtectedBaseMeth1(System.String)",
-                                                                    "Void PriBaseMeth1()",
-                                                                    "Void PriBaseMeth1(System.String)",
-                                                                    "Void PubMeth1()",
-                                                                    "Void PubMeth2()",
-                                                                    "Void PubMeth3()",
-                                                                    "Void IntMeth1()",
-                                                                    "Void IntMeth2()",
-                                                                    "Void IntMeth3()",
-                                                                    "Void ProMeth1()",
-                                                                    "Void ProMeth2()",
-                                                                    "Void ProMeth3()",
-                                                                    "Void ProIntMeth1()",
-                                                                    "Void ProIntMeth2()",
-                                                                    "Void ProIntMeth3()",
-                                                                    "Void PubMeth2ToOverride()",
-                                                                    "Void IntMeth2ToOverride()",
-                                                                    "Void ProMeth2ToOverride()",
-                                                                    "Void ProIntMeth2ToOverride()"};
+        public static string[] DeclaredMethodNames = new string[]
+        {
+            "Void PrivMeth1()",
+            "Void PrivMeth3()",
+            "Void PubBaseMeth1()",
+            "Void PubBaseMeth1(System.String)",
+            "Void IntBaseMeth1()",
+            "Void IntBaseMeth1(System.String)",
+            "Void ProtectedBaseMeth1()",
+            "Void ProtectedBaseMeth1(System.String)",
+            "Void PriBaseMeth1()",
+            "Void PriBaseMeth1(System.String)",
+            "Void PubMeth1()",
+            "Void PubMeth2()",
+            "Void PubMeth3()",
+            "Void IntMeth1()",
+            "Void IntMeth2()",
+            "Void IntMeth3()",
+            "Void ProMeth1()",
+            "Void ProMeth2()",
+            "Void ProMeth3()",
+            "Void ProIntMeth1()",
+            "Void ProIntMeth2()",
+            "Void ProIntMeth3()",
+            "Void PubMeth2ToOverride()",
+            "Void IntMeth2ToOverride()",
+            "Void ProMeth2ToOverride()",
+            "Void ProIntMeth2ToOverride()"
+        };
 
         public static string[] InheritedMethodNames = new string[] { };
 
-        public static string[] PublicMethodNames = new string[] {   "Void PubBaseMeth1()",
-                                                                    "Void PubBaseMeth1(System.String)",
-                                                                    "Void PubMeth1()",
-                                                                    "Void PubMeth2()",
-                                                                    "Void PubMeth3()",
-                                                                    "Void PubMeth2ToOverride()"};
+        public static string[] PublicMethodNames = new string[]
+        {
+            "Void PubBaseMeth1()",
+            "Void PubBaseMeth1(System.String)",
+            "Void PubMeth1()",
+            "Void PubMeth2()",
+            "Void PubMeth3()",
+            "Void PubMeth2ToOverride()"
+        };
         public void PubBaseMeth1() { }
         public void PubBaseMeth1(string str) { }
 
@@ -84,46 +90,58 @@ namespace System.Reflection.Tests
         public static new int Members = 31;
         public static new int MembersEverything = 51;
 
-        public static new string[] DeclaredMethodNames = new string[]{  "Void PubMeth1()",
-                                                                    "Void PubMeth2()",
-                                                                    "Void PubMeth3()",
-                                                                    "Void IntMeth1()",
-                                                                    "Void IntMeth2()",
-                                                                    "Void IntMeth3()",
-                                                                    "Void ProMeth1()",
-                                                                    "Void ProMeth2()",
-                                                                    "Void ProMeth3()",
-                                                                    "Void ProIntMeth1()",
-                                                                    "Void ProIntMeth2()",
-                                                                    "Void ProIntMeth3()",
-                                                                    "Void PrivMeth1()",
-                                                                    "Void PrivMeth3()",
-                                                                    "Void PubMeth2ToOverride()",
-                                                                    "Void IntMeth2ToOverride()",
-                                                                    "Void ProMeth2ToOverride()",
-                                                                    "Void ProIntMeth2ToOverride()"};
+        public static new string[] DeclaredMethodNames = new string[]
+        {
+            "Void PubMeth1()",
+            "Void PubMeth2()",
+            "Void PubMeth3()",
+            "Void IntMeth1()",
+            "Void IntMeth2()",
+            "Void IntMeth3()",
+            "Void ProMeth1()",
+            "Void ProMeth2()",
+            "Void ProMeth3()",
+            "Void ProIntMeth1()",
+            "Void ProIntMeth2()",
+            "Void ProIntMeth3()",
+            "Void PrivMeth1()",
+            "Void PrivMeth3()",
+            "Void PubMeth2ToOverride()",
+            "Void IntMeth2ToOverride()",
+            "Void ProMeth2ToOverride()",
+            "Void ProIntMeth2ToOverride()"
+        };
 
-        public static new string[] InheritedMethodNames = new string[] {    "Void PubBaseMeth1()",
-                                                                        "Void PubBaseMeth1(System.String)",
-                                                                        "Void IntBaseMeth1()",
-                                                                        "Void IntBaseMeth1(System.String)",
-                                                                        "Void ProtectedBaseMeth1()",
-                                                                        "Void ProtectedBaseMeth1(System.String)"};
+        public static new string[] InheritedMethodNames = new string[]
+        {
+            "Void PubBaseMeth1()",
+            "Void PubBaseMeth1(System.String)",
+            "Void IntBaseMeth1()",
+            "Void IntBaseMeth1(System.String)",
+            "Void ProtectedBaseMeth1()",
+            "Void ProtectedBaseMeth1(System.String)"
+        };
 
-        public static new string[] PublicMethodNames = new string[]{ "Void PubMeth1()",
-                                                                 "Void PubMeth2()",
-                                                                 "Void PubMeth3()",
-                                                                 "Void PubMeth2ToOverride()"};
+        public static new string[] PublicMethodNames = new string[]
+        {
+            "Void PubMeth1()",
+            "Void PubMeth2()",
+            "Void PubMeth3()",
+            "Void PubMeth2ToOverride()"
+        };
 
         //They exist in base, new slot is allocated in sub class
-        public static string[] NewMethodNames = new string[] { "Void PubMeth1()",
-                                                               "Void PubMeth2()",
-                                                               "Void IntMeth1()",
-                                                               "Void IntMeth2()",
-                                                               "Void ProMeth1()",
-                                                               "Void ProMeth2()",
-                                                               "Void ProIntMeth1()",
-                                                               "Void ProIntMeth2()",};
+        public static string[] NewMethodNames = new string[]
+        {
+            "Void PubMeth1()",
+            "Void PubMeth2()",
+            "Void IntMeth1()",
+            "Void IntMeth2()",
+            "Void ProMeth1()",
+            "Void ProMeth2()",
+            "Void ProIntMeth1()",
+            "Void ProIntMeth2()",
+        };
         public new void PubMeth1() { }
         public new virtual void PubMeth2() { }
         public override void PubMeth2ToOverride() { }
@@ -153,7 +171,13 @@ namespace System.Reflection.Tests
         public static int Members = 11;
         public static int MembersEverything = 17;
 
-        public static string[] DeclaredMethodNames = new string[] { "Void meth1()", "Void meth2()", "Void meth3()", "Void meth4()" };
+        public static string[] DeclaredMethodNames = new string[]
+        {
+            "Void meth1()",
+            "Void meth2()",
+            "Void meth3()",
+            "Void meth4()"
+        };
         public static string[] InheritedMethodNames = new string[] { };
         public static string[] PublicMethodNames = new string[] { "Void meth1()" };
 
@@ -169,7 +193,13 @@ namespace System.Reflection.Tests
         public static new int MembersEverything = 17;
 
         public static new string[] DeclaredMethodNames = new string[] { };
-        public static new string[] InheritedMethodNames = new string[] { "Void meth1()", "Void meth2()", "Void meth3()", "Void meth4()" };
+        public static new string[] InheritedMethodNames = new string[]
+        {
+            "Void meth1()",
+            "Void meth2()",
+            "Void meth3()",
+            "Void meth4()"
+        };
         public static new string[] PublicMethodNames = new string[] { };
     }
 }

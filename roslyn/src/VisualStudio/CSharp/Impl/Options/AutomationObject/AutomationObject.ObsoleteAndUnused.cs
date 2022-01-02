@@ -47,24 +47,35 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         {
             get
             {
-                return GetOption(CompletionOptions.Metadata.SnippetsBehavior) == SnippetsRule.AlwaysInclude
-                    ? 1 : 0;
+                return
+                    GetOption(CompletionOptions.Metadata.SnippetsBehavior)
+                    == SnippetsRule.AlwaysInclude
+                  ? 1
+                  : 0;
             }
-
             set
             {
                 if (value == 0)
                 {
-                    SetOption(CompletionOptions.Metadata.SnippetsBehavior, SnippetsRule.NeverInclude);
+                    SetOption(
+                        CompletionOptions.Metadata.SnippetsBehavior,
+                        SnippetsRule.NeverInclude
+                    );
                 }
                 else
                 {
-                    SetOption(CompletionOptions.Metadata.SnippetsBehavior, SnippetsRule.AlwaysInclude);
+                    SetOption(
+                        CompletionOptions.Metadata.SnippetsBehavior,
+                        SnippetsRule.AlwaysInclude
+                    );
                 }
             }
         }
 
-        [Obsolete("Use Style_UseImplicitTypeWherePossible, Style_UseImplicitTypeWhereApparent or Style_UseImplicitTypeForIntrinsicTypes", error: true)]
+        [Obsolete(
+            "Use Style_UseImplicitTypeWherePossible, Style_UseImplicitTypeWhereApparent or Style_UseImplicitTypeForIntrinsicTypes",
+            error: true
+        )]
         public int Style_UseVarWhenDeclaringLocals
         {
             get { return 0; }

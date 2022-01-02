@@ -27,6 +27,8 @@ internal class VectorTest
 
     private struct S24
     {
-        public long A, B, C;
+        public long A,
+            B,
+            C;
     }
 }

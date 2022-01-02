@@ -26,7 +26,6 @@ public class CMain
 
 public class Gen<T>
 {
-
     public static T x;
     static Gen()
     {

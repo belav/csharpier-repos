@@ -9,7 +9,12 @@ namespace System.Diagnostics
     public partial class StackTrace
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void GetStackFramesInternal(StackFrameHelper sfh, int iSkip, bool fNeedFileInfo, Exception? e);
+        internal static extern void GetStackFramesInternal(
+            StackFrameHelper sfh,
+            int iSkip,
+            bool fNeedFileInfo,
+            Exception? e
+        );
 
         internal static int CalculateFramesToSkip(StackFrameHelper StackF, int iNumFrames)
         {
@@ -39,7 +44,11 @@ namespace System.Diagnostics
             return iRetVal;
         }
 
-        private void InitializeForException(Exception? exception, int skipFrames, bool fNeedFileInfo)
+        private void InitializeForException(
+            Exception? exception,
+            int skipFrames,
+            bool fNeedFileInfo
+        )
         {
             CaptureStackTrace(skipFrames, fNeedFileInfo, exception);
         }

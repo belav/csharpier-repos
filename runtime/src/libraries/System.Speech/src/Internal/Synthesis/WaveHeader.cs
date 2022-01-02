@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Speech.Internal.Synthesis
 {
-
     internal sealed class WaveHeader : IDisposable
     {
         #region Constructors
@@ -84,10 +83,7 @@ namespace System.Speech.Internal.Synthesis
 
         internal int SizeHDR
         {
-            get
-            {
-                return Marshal.SizeOf(_waveHdr);
-            }
+            get { return Marshal.SizeOf(_waveHdr); }
         }
 
         #endregion

@@ -53,9 +53,15 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_EmptyString()
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto };
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
 
-            string s1 = JsonConvert.SerializeObject(new TestObject() { Obj = new byte[] { } }, settings);
+            string s1 = JsonConvert.SerializeObject(
+                new TestObject() { Obj = new byte[] { } },
+                settings
+            );
 
             TestObject t1 = JsonConvert.DeserializeObject<TestObject>(s1, settings);
             Assert.IsNotNull(t1.Obj);

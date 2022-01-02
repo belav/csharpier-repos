@@ -26,7 +26,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// </summary>
 public class XmlSerializerOutputFormatter : TextOutputFormatter
 {
-    private readonly ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<Type, object>();
+    private readonly ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<
+        Type,
+        object
+    >();
     private readonly ILogger _logger;
     private MvcOptions? _mvcOptions;
     private AsyncEnumerableReader? _asyncEnumerableReaderFactory;
@@ -35,10 +38,8 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>
     /// with default <see cref="XmlWriterSettings"/>.
     /// </summary>
-    public XmlSerializerOutputFormatter()
-        : this(FormattingUtilities.GetDefaultXmlWriterSettings())
-    {
-    }
+    public XmlSerializerOutputFormatter() : this(FormattingUtilities.GetDefaultXmlWriterSettings())
+    { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>
@@ -46,25 +47,24 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
     /// </summary>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public XmlSerializerOutputFormatter(ILoggerFactory loggerFactory)
-        : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory)
-    {
-    }
+        : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>.
     /// </summary>
     /// <param name="writerSettings">The settings to be used by the <see cref="XmlSerializer"/>.</param>
     public XmlSerializerOutputFormatter(XmlWriterSettings writerSettings)
-        : this(writerSettings, loggerFactory: NullLoggerFactory.Instance)
-    {
-    }
+        : this(writerSettings, loggerFactory: NullLoggerFactory.Instance) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>
     /// </summary>
     /// <param name="writerSettings">The settings to be used by the <see cref="XmlSerializer"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-    public XmlSerializerOutputFormatter(XmlWriterSettings writerSettings, ILoggerFactory loggerFactory)
+    public XmlSerializerOutputFormatter(
+        XmlWriterSettings writerSettings,
+        ILoggerFactory loggerFactory
+    )
     {
         if (writerSettings == null)
         {
@@ -81,10 +81,12 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
         WriterSettings = writerSettings;
 
         WrapperProviderFactories = new List<IWrapperProviderFactory>
-            {
-                new SerializableErrorWrapperProviderFactory(),
-            };
-        WrapperProviderFactories.Add(new EnumerableWrapperProviderFactory(WrapperProviderFactories));
+        {
+            new SerializableErrorWrapperProviderFactory(),
+        };
+        WrapperProviderFactories.Add(
+            new EnumerableWrapperProviderFactory(WrapperProviderFactories)
+        );
 
         _logger = loggerFactory.CreateLogger(GetType());
     }
@@ -112,9 +114,9 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
             throw new ArgumentNullException(nameof(type));
         }
 
-        var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(new WrapperProviderContext(
-            type,
-            isSerialization: true));
+        var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(
+            new WrapperProviderContext(type, isSerialization: true)
+        );
 
         return wrapperProvider?.WrappingType ?? type;
     }
@@ -168,9 +170,7 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
     /// The <see cref="XmlWriterSettings"/>.
     /// </param>
     /// <returns>A new instance of <see cref="XmlWriter"/>.</returns>
-    public virtual XmlWriter CreateXmlWriter(
-        TextWriter writer,
-        XmlWriterSettings xmlWriterSettings)
+    public virtual XmlWriter CreateXmlWriter(TextWriter writer, XmlWriterSettings xmlWriterSettings)
     {
         if (writer == null)
         {
@@ -203,13 +203,17 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
     public virtual XmlWriter CreateXmlWriter(
         OutputFormatterWriteContext context,
         TextWriter writer,
-        XmlWriterSettings xmlWriterSettings)
+        XmlWriterSettings xmlWriterSettings
+    )
     {
         return CreateXmlWriter(writer, xmlWriterSettings);
     }
 
     /// <inheritdoc />
-    public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+    public override async Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding selectedEncoding
+    )
     {
         if (context == null)
         {
@@ -227,12 +231,16 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
         var httpContext = context.HttpContext;
         var response = httpContext.Response;
 
-        _mvcOptions ??= httpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>().Value;
+        _mvcOptions ??=
+            httpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>().Value;
         _asyncEnumerableReaderFactory ??= new AsyncEnumerableReader(_mvcOptions);
 
         var value = context.Object;
         var valueType = context.ObjectType!;
-        if (value is not null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+        if (
+            value is not null
+            && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
+        )
         {
             Log.BufferingAsyncEnumerable(_logger, value);
 
@@ -248,9 +256,9 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
         var wrappingType = GetSerializableType(valueType);
         if (wrappingType != null && wrappingType != valueType)
         {
-            var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(new WrapperProviderContext(
-                declaredType: valueType,
-                isSerialization: true));
+            var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(
+                new WrapperProviderContext(declaredType: valueType, isSerialization: true)
+            );
 
             Debug.Assert(wrapperProvider is not null);
 
@@ -297,7 +305,11 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
     /// <param name="xmlWriter">The writer used by the serializer <paramref name="xmlSerializer"/>
     /// to serialize the <paramref name="value"/>.</param>
     /// <param name="value">The value to be serialized.</param>
-    protected virtual void Serialize(XmlSerializer xmlSerializer, XmlWriter xmlWriter, object? value)
+    protected virtual void Serialize(
+        XmlSerializer xmlSerializer,
+        XmlWriter xmlWriter,
+        object? value
+    )
     {
         xmlSerializer.Serialize(xmlWriter, value);
     }
@@ -322,13 +334,16 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
 
     private static class Log
     {
-        private static readonly LogDefineOptions SkipEnabledCheckLogOptions = new() { SkipEnabledCheck = true };
+        private static readonly LogDefineOptions SkipEnabledCheckLogOptions =
+            new() { SkipEnabledCheck = true };
 
-        private static readonly Action<ILogger, string, Exception?> _bufferingAsyncEnumerable = LoggerMessage.Define<string>(
-            LogLevel.Debug,
-            new EventId(1, "BufferingAsyncEnumerable"),
-            "Buffering IAsyncEnumerable instance of type '{Type}'.",
-            SkipEnabledCheckLogOptions);
+        private static readonly Action<ILogger, string, Exception?> _bufferingAsyncEnumerable =
+            LoggerMessage.Define<string>(
+                LogLevel.Debug,
+                new EventId(1, "BufferingAsyncEnumerable"),
+                "Buffering IAsyncEnumerable instance of type '{Type}'.",
+                SkipEnabledCheckLogOptions
+            );
 
         public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)
         {

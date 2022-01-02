@@ -81,10 +81,15 @@ namespace System.ComponentModel.Composition
             batch.AddPart(new MultiExport());
             batch.AddPart(new SingleImport());
 
-            CompositionAssert.ThrowsChangeRejectedError(ErrorId.ImportEngine_PartCannotSetImport, ErrorId.ImportEngine_ImportCardinalityMismatch, RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsChangeRejectedError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ImportEngine_ImportCardinalityMismatch,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
     }
 
@@ -92,15 +97,24 @@ namespace System.ComponentModel.Composition
     {
         [Export("Multi")]
         [ExportMetadata("Value", "One")]
-        public int M1 { get { return 1; } }
+        public int M1
+        {
+            get { return 1; }
+        }
 
         [Export("Multi")]
         [ExportMetadata("Value", "Two")]
-        public int M2 { get { return 2; } }
+        public int M2
+        {
+            get { return 2; }
+        }
 
         [Export("Multi")]
         [ExportMetadata("Value", "Three")]
-        public int M3 { get { return 3; } }
+        public int M3
+        {
+            get { return 3; }
+        }
     }
 
     public interface ITest

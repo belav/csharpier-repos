@@ -22,12 +22,20 @@ namespace ILCompiler
         private readonly bool _compileGenericDependenciesFromVersionBubbleModuleSet;
         private readonly bool _isCompositeBuildMode;
         private readonly bool _isInputBubble;
-        private readonly ConcurrentDictionary<TypeDesc, CompilationUnitSet> _layoutCompilationUnits = new ConcurrentDictionary<TypeDesc, CompilationUnitSet>();
-        private readonly ConcurrentDictionary<TypeDesc, bool> _versionsWithTypeCache = new ConcurrentDictionary<TypeDesc, bool>();
-        private readonly ConcurrentDictionary<TypeDesc, bool> _versionsWithTypeReferenceCache = new ConcurrentDictionary<TypeDesc, bool>();
-        private readonly ConcurrentDictionary<MethodDesc, bool> _versionsWithMethodCache = new ConcurrentDictionary<MethodDesc, bool>();
-        private readonly Dictionary<ModuleDesc, CompilationUnitIndex> _moduleCompilationUnits = new Dictionary<ModuleDesc, CompilationUnitIndex>();
-        private CompilationUnitIndex _nextCompilationUnit = CompilationUnitIndex.FirstDynamicallyAssigned;
+        private readonly ConcurrentDictionary<
+            TypeDesc,
+            CompilationUnitSet
+        > _layoutCompilationUnits = new ConcurrentDictionary<TypeDesc, CompilationUnitSet>();
+        private readonly ConcurrentDictionary<TypeDesc, bool> _versionsWithTypeCache =
+            new ConcurrentDictionary<TypeDesc, bool>();
+        private readonly ConcurrentDictionary<TypeDesc, bool> _versionsWithTypeReferenceCache =
+            new ConcurrentDictionary<TypeDesc, bool>();
+        private readonly ConcurrentDictionary<MethodDesc, bool> _versionsWithMethodCache =
+            new ConcurrentDictionary<MethodDesc, bool>();
+        private readonly Dictionary<ModuleDesc, CompilationUnitIndex> _moduleCompilationUnits =
+            new Dictionary<ModuleDesc, CompilationUnitIndex>();
+        private CompilationUnitIndex _nextCompilationUnit =
+            CompilationUnitIndex.FirstDynamicallyAssigned;
         private ModuleTokenResolver _tokenResolver = null;
 
         public ReadyToRunCompilationModuleGroupBase(
@@ -36,7 +44,8 @@ namespace ILCompiler
             bool isInputBubble,
             IEnumerable<EcmaModule> compilationModuleSet,
             IEnumerable<ModuleDesc> versionBubbleModuleSet,
-            bool compileGenericDependenciesFromVersionBubbleModuleSet)
+            bool compileGenericDependenciesFromVersionBubbleModuleSet
+        )
         {
             _compilationModuleSet = new HashSet<EcmaModule>(compilationModuleSet);
             _isCompositeBuildMode = isCompositeBuildMode;
@@ -47,7 +56,8 @@ namespace ILCompiler
             _versionBubbleModuleSet = new HashSet<ModuleDesc>(versionBubbleModuleSet);
             _versionBubbleModuleSet.UnionWith(_compilationModuleSet);
 
-            _compileGenericDependenciesFromVersionBubbleModuleSet = compileGenericDependenciesFromVersionBubbleModuleSet;
+            _compileGenericDependenciesFromVersionBubbleModuleSet =
+                compileGenericDependenciesFromVersionBubbleModuleSet;
 
             _tokenResolver = new ModuleTokenResolver(this, context);
         }
@@ -62,7 +72,8 @@ namespace ILCompiler
 
         public sealed override bool ContainsType(TypeDesc type)
         {
-            return type.GetTypeDefinition() is EcmaType ecmaType && IsModuleInCompilationGroup(ecmaType.EcmaModule);
+            return type.GetTypeDefinition() is EcmaType ecmaType
+                && IsModuleInCompilationGroup(ecmaType.EcmaModule);
         }
 
         private bool IsModuleInCompilationGroup(EcmaModule module)
@@ -100,8 +111,8 @@ namespace ILCompiler
         }
 
         // Compilation Unit Index is the compilation unit of a given module. If the compilation unit
-        // is unknown the module will be given an independent index from other modules, but 
-        // IsCompilationUnitIndexExact will return false for that index. All compilation unit indices 
+        // is unknown the module will be given an independent index from other modules, but
+        // IsCompilationUnitIndexExact will return false for that index. All compilation unit indices
         // are >= 2, to allow for 0 and 1 to be sentinel values.
         private CompilationUnitIndex ModuleToCompilationUnitIndex(ModuleDesc nonEcmaModule)
         {
@@ -111,15 +122,20 @@ namespace ILCompiler
 
             if (!VersionsWithModule(module))
                 return CompilationUnitIndex.OutsideOfVersionBubble;
-            
-            // Assemblies within the version bubble, but not compiled as part of this compilation unit are given 
+
+            // Assemblies within the version bubble, but not compiled as part of this compilation unit are given
             // unique seperate compilation units. The practical effect of this is that the compiler can assume that
             // types which are entirely defined in one module can be laid out in an optimal fashion, but types
             // which are laid out relying on multiple modules cannot have their type layout precisely known as
-            // it is unknown if the modules are bounding into a single composite image or into individual assemblies. 
+            // it is unknown if the modules are bounding into a single composite image or into individual assemblies.
             lock (_moduleCompilationUnits)
             {
-                if (!_moduleCompilationUnits.TryGetValue(module, out CompilationUnitIndex compilationUnit))
+                if (
+                    !_moduleCompilationUnits.TryGetValue(
+                        module,
+                        out CompilationUnitIndex compilationUnit
+                    )
+                )
                 {
                     compilationUnit = _nextCompilationUnit;
                     _nextCompilationUnit = (CompilationUnitIndex)(((int)_nextCompilationUnit) + 1);
@@ -151,9 +167,13 @@ namespace ILCompiler
         {
             private BitArray _bits;
 
-            public CompilationUnitSet(ReadyToRunCompilationModuleGroupBase compilationGroup, ModuleDesc module)
+            public CompilationUnitSet(
+                ReadyToRunCompilationModuleGroupBase compilationGroup,
+                ModuleDesc module
+            )
             {
-                CompilationUnitIndex compilationIndex = compilationGroup.ModuleToCompilationUnitIndex(module);
+                CompilationUnitIndex compilationIndex =
+                    compilationGroup.ModuleToCompilationUnitIndex(module);
                 _bits = new BitArray(((int)compilationIndex) + 1);
                 _bits.Set((int)compilationIndex, true);
             }
@@ -165,7 +185,9 @@ namespace ILCompiler
                     if (_bits == null)
                         return false;
 
-                    return _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleInexactCompilationUnits];
+                    return _bits[
+                        (int)CompilationUnitIndex.RESERVEDForHasMultipleInexactCompilationUnits
+                    ];
                 }
             }
 
@@ -175,12 +197,15 @@ namespace ILCompiler
                 {
                     if (_bits == null)
                         return false;
-                        
+
                     return _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleCompilationUnits];
                 }
             }
 
-            public void UnionWith(ReadyToRunCompilationModuleGroupBase compilationGroup, CompilationUnitSet other)
+            public void UnionWith(
+                ReadyToRunCompilationModuleGroupBase compilationGroup,
+                CompilationUnitSet other
+            )
             {
                 if (other._bits == null)
                     return;
@@ -191,13 +216,14 @@ namespace ILCompiler
                 if (other.HasMultipleInexactCompilationUnits)
                 {
                     _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleCompilationUnits] = true;
-                    _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleInexactCompilationUnits] = true;
+                    _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleInexactCompilationUnits] =
+                        true;
                     return;
                 }
 
                 if (other._bits.Length > _bits.Length)
                     _bits.Length = other._bits.Length;
-                
+
                 if (other._bits.Length < _bits.Length)
                 {
                     for (int i = 0; i < other._bits.Length; i++)
@@ -225,12 +251,15 @@ namespace ILCompiler
                     if (compilationUnitCount == 2)
                     {
                         // Multiple compilation units found
-                        _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleCompilationUnits] = true;
+                        _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleCompilationUnits] =
+                            true;
                     }
                     if (inexactCompilationUnitCount == 2)
                     {
                         // Multiple inexact compilation units involved
-                        _bits[(int)CompilationUnitIndex.RESERVEDForHasMultipleInexactCompilationUnits] = true;
+                        _bits[
+                            (int)CompilationUnitIndex.RESERVEDForHasMultipleInexactCompilationUnits
+                        ] = true;
                         break;
                     }
                 }
@@ -239,12 +268,14 @@ namespace ILCompiler
 
         private CompilationUnitSet TypeLayoutCompilationUnitsUncached(TypeDesc type)
         {
-            if (type.IsObject ||
-                type.IsPrimitive ||
-                type.IsEnum ||
-                type.IsPointer ||
-                type.IsFunctionPointer ||
-                type.IsCanonicalDefinitionType(CanonicalFormKind.Any))
+            if (
+                type.IsObject
+                || type.IsPrimitive
+                || type.IsEnum
+                || type.IsPointer
+                || type.IsFunctionPointer
+                || type.IsCanonicalDefinitionType(CanonicalFormKind.Any)
+            )
             {
                 return default(CompilationUnitSet);
             }
@@ -265,10 +296,12 @@ namespace ILCompiler
 
                 TypeDesc fieldType = field.FieldType;
 
-                if (fieldType.IsValueType &&
-                    !fieldType.IsPrimitive)
+                if (fieldType.IsValueType && !fieldType.IsPrimitive)
                 {
-                    moduleDependencySet.UnionWith(this, TypeLayoutCompilationUnits((MetadataType)fieldType));
+                    moduleDependencySet.UnionWith(
+                        this,
+                        TypeLayoutCompilationUnits((MetadataType)fieldType)
+                    );
                 }
             }
 
@@ -280,13 +313,18 @@ namespace ILCompiler
             return ModuleToCompilationUnitIndex(module1) == ModuleToCompilationUnitIndex(module2);
         }
 
-        public override bool NeedsAlignmentBetweenBaseTypeAndDerived(MetadataType baseType, MetadataType derivedType)
+        public override bool NeedsAlignmentBetweenBaseTypeAndDerived(
+            MetadataType baseType,
+            MetadataType derivedType
+        )
         {
             if (baseType.IsObject)
                 return false;
 
-            if (!ModuleMatchesCompilationUnitIndex(derivedType.Module, baseType.Module) ||
-                TypeLayoutCompilationUnits(baseType).HasMultipleCompilationUnits)
+            if (
+                !ModuleMatchesCompilationUnitIndex(derivedType.Module, baseType.Module)
+                || TypeLayoutCompilationUnits(baseType).HasMultipleCompilationUnits
+            )
             {
                 return true;
             }
@@ -301,15 +339,17 @@ namespace ILCompiler
 
         public sealed override bool VersionsWithType(TypeDesc typeDesc)
         {
-            return typeDesc.GetTypeDefinition() is EcmaType ecmaType &&
-                _versionsWithTypeCache.GetOrAdd(typeDesc, ComputeTypeVersionsWithCode);
+            return typeDesc.GetTypeDefinition() is EcmaType ecmaType
+                && _versionsWithTypeCache.GetOrAdd(typeDesc, ComputeTypeVersionsWithCode);
         }
 
         public sealed override bool VersionsWithTypeReference(TypeDesc typeDesc)
         {
-            return _versionsWithTypeReferenceCache.GetOrAdd(typeDesc, ComputeTypeReferenceVersionsWithCode);
+            return _versionsWithTypeReferenceCache.GetOrAdd(
+                typeDesc,
+                ComputeTypeReferenceVersionsWithCode
+            );
         }
-
 
         public sealed override bool VersionsWithMethodBody(MethodDesc method)
         {
@@ -337,8 +377,9 @@ namespace ILCompiler
             // Allow inlining if the caller is within the current version bubble
             // (because otherwise we may not be able to encode its tokens)
             // and if the callee is either in the same version bubble or is marked as non-versionable.
-            bool canInline = VersionsWithMethodBody(callerMethod) &&
-                (VersionsWithMethodBody(calleeMethod) || calleeMethod.IsNonVersionable());
+            bool canInline =
+                VersionsWithMethodBody(callerMethod)
+                && (VersionsWithMethodBody(calleeMethod) || calleeMethod.IsNonVersionable());
 
             return canInline;
         }
@@ -365,17 +406,23 @@ namespace ILCompiler
             return !Marshaller.IsMarshallingRequired(method);
         }
 
-        public sealed override bool TryGetModuleTokenForExternalType(TypeDesc type, out ModuleToken token)
+        public sealed override bool TryGetModuleTokenForExternalType(
+            TypeDesc type,
+            out ModuleToken token
+        )
         {
             Debug.Assert(!VersionsWithType(type));
 
             if (_typeRefsInCompilationModuleSet == null)
             {
-                lock(_compilationModuleSet)
+                lock (_compilationModuleSet)
                 {
                     if (_typeRefsInCompilationModuleSet == null)
                     {
-                        var typeRefsInCompilationModuleSet = new Dictionary<TypeDesc, ModuleToken>();
+                        var typeRefsInCompilationModuleSet = new Dictionary<
+                            TypeDesc,
+                            ModuleToken
+                        >();
 
                         foreach (var module in _compilationModuleSet)
                         {
@@ -385,15 +432,23 @@ namespace ILCompiler
                                 try
                                 {
                                     TypeDesc typeFromTypeRef = ecmaModule.GetType(typeRefHandle);
-                                    if (!typeRefsInCompilationModuleSet.ContainsKey(typeFromTypeRef))
+                                    if (
+                                        !typeRefsInCompilationModuleSet.ContainsKey(typeFromTypeRef)
+                                    )
                                     {
-                                        typeRefsInCompilationModuleSet.Add(typeFromTypeRef, new ModuleToken(ecmaModule, typeRefHandle));
+                                        typeRefsInCompilationModuleSet.Add(
+                                            typeFromTypeRef,
+                                            new ModuleToken(ecmaModule, typeRefHandle)
+                                        );
                                     }
                                 }
                                 catch (TypeSystemException) { }
                             }
                         }
-                        Volatile.Write(ref _typeRefsInCompilationModuleSet, typeRefsInCompilationModuleSet);
+                        Volatile.Write(
+                            ref _typeRefsInCompilationModuleSet,
+                            typeRefsInCompilationModuleSet
+                        );
                     }
                 }
             }
@@ -405,7 +460,8 @@ namespace ILCompiler
 
         public sealed override bool IsInputBubble => _isInputBubble;
 
-        public sealed override IEnumerable<EcmaModule> CompilationModuleSet => _compilationModuleSet;
+        public sealed override IEnumerable<EcmaModule> CompilationModuleSet =>
+            _compilationModuleSet;
 
         private bool ComputeTypeVersionsWithCode(TypeDesc type)
         {
@@ -492,7 +548,10 @@ namespace ILCompiler
             return false;
         }
 
-        private bool ComputeInstantiationVersionsWithCode(Instantiation inst, TypeSystemEntity entityWithInstantiation)
+        private bool ComputeInstantiationVersionsWithCode(
+            Instantiation inst,
+            TypeSystemEntity entityWithInstantiation
+        )
         {
             for (int iInstantiation = 0; iInstantiation < inst.Length; iInstantiation++)
             {
@@ -512,10 +571,14 @@ namespace ILCompiler
                         }
                         else
                         {
-                            entityDefinitionInstantiation = ((MethodDesc)entityWithInstantiation).GetTypicalMethodDefinition().Instantiation;
+                            entityDefinitionInstantiation =
+                                (
+                                    (MethodDesc)entityWithInstantiation
+                                ).GetTypicalMethodDefinition().Instantiation;
                         }
 
-                        GenericParameterDesc genericParam = (GenericParameterDesc)entityDefinitionInstantiation[iInstantiation];
+                        GenericParameterDesc genericParam =
+                            (GenericParameterDesc)entityDefinitionInstantiation[iInstantiation];
                         if (instType.IsPrimitive)
                         {
                             if (genericParam.HasReferenceTypeConstraint)
@@ -544,7 +607,10 @@ namespace ILCompiler
             }
             return true;
 
-            static bool ComputeInstantiationTypeVersionsWithCode(ReadyToRunCompilationModuleGroupBase compilationGroup, TypeDesc type)
+            static bool ComputeInstantiationTypeVersionsWithCode(
+                ReadyToRunCompilationModuleGroupBase compilationGroup,
+                TypeDesc type
+            )
             {
                 if (type == type.Context.CanonType)
                     return true;
@@ -553,15 +619,23 @@ namespace ILCompiler
                     return true;
 
                 if (type.IsArray)
-                    return ComputeInstantiationTypeVersionsWithCode(compilationGroup, type.GetParameterType());
+                    return ComputeInstantiationTypeVersionsWithCode(
+                        compilationGroup,
+                        type.GetParameterType()
+                    );
 
                 if (type.IsPointer)
-                    return ComputeInstantiationTypeVersionsWithCode(compilationGroup, type.GetParameterType());
+                    return ComputeInstantiationTypeVersionsWithCode(
+                        compilationGroup,
+                        type.GetParameterType()
+                    );
 
                 return false;
             }
         }
 
-        public abstract void ApplyProfilerGuidedCompilationRestriction(ProfileDataManager profileGuidedCompileRestriction);
+        public abstract void ApplyProfilerGuidedCompilationRestriction(
+            ProfileDataManager profileGuidedCompileRestriction
+        );
     }
 }

@@ -30,15 +30,18 @@ namespace CSharpSyntaxGenerator
             messageFormat: "The Syntax.xml file was not included in the project, so we are not generating source.",
             category: "SyntaxGenerator",
             defaultSeverity: DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true
+        );
 
-        private static readonly DiagnosticDescriptor s_UnableToReadSyntaxXml = new DiagnosticDescriptor(
-            "CSSG1002",
-            title: "Syntax.xml could not be read",
-            messageFormat: "The Syntax.xml file could not even be read. Does it exist?",
-            category: "SyntaxGenerator",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true);
+        private static readonly DiagnosticDescriptor s_UnableToReadSyntaxXml =
+            new DiagnosticDescriptor(
+                "CSSG1002",
+                title: "Syntax.xml could not be read",
+                messageFormat: "The Syntax.xml file could not even be read. Does it exist?",
+                category: "SyntaxGenerator",
+                defaultSeverity: DiagnosticSeverity.Error,
+                isEnabledByDefault: true
+            );
 
         private static readonly DiagnosticDescriptor s_SyntaxXmlError = new DiagnosticDescriptor(
             "CSSG1003",
@@ -46,11 +49,18 @@ namespace CSharpSyntaxGenerator
             messageFormat: "{0}",
             category: "SyntaxGenerator",
             defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true
+        );
 
-        protected override bool TryGetRelevantInput(in GeneratorExecutionContext context, out AdditionalText? input, out SourceText? inputText)
+        protected override bool TryGetRelevantInput(
+            in GeneratorExecutionContext context,
+            out AdditionalText? input,
+            out SourceText? inputText
+        )
         {
-            input = context.AdditionalFiles.SingleOrDefault(a => Path.GetFileName(a.Path) == "Syntax.xml");
+            input = context.AdditionalFiles.SingleOrDefault(
+                a => Path.GetFileName(a.Path) == "Syntax.xml"
+            );
             if (input == null)
             {
                 context.ReportDiagnostic(Diagnostic.Create(s_MissingSyntaxXml, location: null));
@@ -61,7 +71,9 @@ namespace CSharpSyntaxGenerator
             inputText = input.GetText();
             if (inputText == null)
             {
-                context.ReportDiagnostic(Diagnostic.Create(s_UnableToReadSyntaxXml, location: null));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(s_UnableToReadSyntaxXml, location: null)
+                );
                 return false;
             }
 
@@ -73,10 +85,14 @@ namespace CSharpSyntaxGenerator
             SourceText inputText,
             out ImmutableArray<(string hintName, SourceText sourceText)> sources,
             out ImmutableArray<Diagnostic> diagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Tree tree;
-            var reader = XmlReader.Create(new SourceTextReader(inputText), new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit });
+            var reader = XmlReader.Create(
+                new SourceTextReader(inputText),
+                new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
+            );
 
             try
             {
@@ -98,17 +114,29 @@ namespace CSharpSyntaxGenerator
                     Diagnostic.Create(
                         s_SyntaxXmlError,
                         location: Location.Create(input.Path, span, lineSpan),
-                        xmlException.Message));
+                        xmlException.Message
+                    )
+                );
 
                 return false;
             }
 
             TreeFlattening.FlattenChildren(tree);
 
-            var sourcesBuilder = ImmutableArray.CreateBuilder<(string hintName, SourceText sourceText)>();
-            addResult(writer => SourceWriter.WriteMain(writer, tree, cancellationToken), "Syntax.xml.Main.Generated.cs");
-            addResult(writer => SourceWriter.WriteInternal(writer, tree, cancellationToken), "Syntax.xml.Internal.Generated.cs");
-            addResult(writer => SourceWriter.WriteSyntax(writer, tree, cancellationToken), "Syntax.xml.Syntax.Generated.cs");
+            var sourcesBuilder =
+                ImmutableArray.CreateBuilder<(string hintName, SourceText sourceText)>();
+            addResult(
+                writer => SourceWriter.WriteMain(writer, tree, cancellationToken),
+                "Syntax.xml.Main.Generated.cs"
+            );
+            addResult(
+                writer => SourceWriter.WriteInternal(writer, tree, cancellationToken),
+                "Syntax.xml.Internal.Generated.cs"
+            );
+            addResult(
+                writer => SourceWriter.WriteSyntax(writer, tree, cancellationToken),
+                "Syntax.xml.Syntax.Generated.cs"
+            );
 
             sources = sourcesBuilder.ToImmutable();
             diagnostics = ImmutableArray<Diagnostic>.Empty;
@@ -125,7 +153,11 @@ namespace CSharpSyntaxGenerator
                 }
 
                 // And create a SourceText from the StringBuilder, once again avoiding allocating a single massive string
-                var sourceText = SourceText.From(new StringBuilderReader(stringBuilder), stringBuilder.Length, encoding: Encoding.UTF8);
+                var sourceText = SourceText.From(
+                    new StringBuilderReader(stringBuilder),
+                    stringBuilder.Length,
+                    encoding: Encoding.UTF8
+                );
                 sourcesBuilder.Add((hintName, sourceText));
             }
         }

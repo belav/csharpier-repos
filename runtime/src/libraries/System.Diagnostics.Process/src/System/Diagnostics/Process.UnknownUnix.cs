@@ -46,8 +46,7 @@ namespace System.Diagnostics
         }
 
         /// <summary>Gets parent process ID</summary>
-        private int GetParentProcessId =>
-            throw new PlatformNotSupportedException();
+        private int GetParentProcessId => throw new PlatformNotSupportedException();
 
         /// <summary>
         /// Gets or sets which processors the threads in this process can be scheduled to run on.
@@ -71,7 +70,12 @@ namespace System.Diagnostics
         /// <param name="newMax">The new maximum working set limit, or null not to change it.</param>
         /// <param name="resultingMin">The resulting minimum working set limit after any changes applied.</param>
         /// <param name="resultingMax">The resulting maximum working set limit after any changes applied.</param>
-        private void SetWorkingSetLimitsCore(IntPtr? newMin, IntPtr? newMax, out IntPtr resultingMin, out IntPtr resultingMax)
+        private void SetWorkingSetLimitsCore(
+            IntPtr? newMin,
+            IntPtr? newMax,
+            out IntPtr resultingMin,
+            out IntPtr resultingMax
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -81,6 +85,5 @@ namespace System.Diagnostics
         {
             throw new PlatformNotSupportedException();
         }
-
     }
 }

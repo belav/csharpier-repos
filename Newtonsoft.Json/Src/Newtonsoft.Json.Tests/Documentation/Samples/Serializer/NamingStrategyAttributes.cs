@@ -73,11 +73,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""Tom"",
   ""lastName"": ""Riddle"",
   ""snake_rating"": 10
-}", json);
+}",
+                json
+            );
         }
     }
 }

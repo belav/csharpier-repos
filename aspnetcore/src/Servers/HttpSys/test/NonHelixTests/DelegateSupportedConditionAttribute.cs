@@ -13,5 +13,6 @@ public class DelegateSupportedConditionAttribute : Attribute, ITestCondition
 
     public bool IsMet => HttpApi.SupportsDelegation == _isSupported;
 
-    public string SkipReason => $"Http.Sys does {(_isSupported ? "not" : "")} support delegating requests";
+    public string SkipReason =>
+        $"Http.Sys does {(_isSupported ? "not" : "")} support delegating requests";
 }

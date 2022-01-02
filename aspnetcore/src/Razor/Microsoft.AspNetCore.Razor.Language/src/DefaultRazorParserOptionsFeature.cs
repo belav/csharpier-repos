@@ -13,7 +13,11 @@ internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazor
     private readonly string _fileKind;
     private IConfigureRazorParserOptionsFeature[] _configureOptions;
 
-    public DefaultRazorParserOptionsFeature(bool designTime, RazorLanguageVersion version, string fileKind)
+    public DefaultRazorParserOptionsFeature(
+        bool designTime,
+        RazorLanguageVersion version,
+        string fileKind
+    )
     {
         _designTime = designTime;
         _version = version;

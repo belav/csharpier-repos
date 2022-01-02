@@ -15,21 +15,23 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public Float64Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Float64Array(ArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length) { }
+        public Float64Array(ArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
         public Float64Array(SharedArrayBuffer buffer) : base(buffer) { }
 
         public Float64Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Float64Array(SharedArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length) { }
+        public Float64Array(SharedArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
-        internal Float64Array(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal Float64Array(IntPtr jsHandle) : base(jsHandle) { }
 
         /// <summary>
         /// Defines an implicit conversion of Float64Array class to a double
         /// </summary>
-        public static implicit operator Span<double>(Float64Array typedarray) => typedarray.ToArray();
+        public static implicit operator Span<double>(Float64Array typedarray) =>
+            typedarray.ToArray();
 
         /// <summary>
         /// Defines an implicit conversion of double to a Float64Array class.

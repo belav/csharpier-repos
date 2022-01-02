@@ -22,19 +22,29 @@ internal class W3CLogger : IAsyncDisposable
     private readonly IOptionsMonitor<W3CLoggerOptions> _options;
     private W3CLoggingFields _loggingFields;
 
-    public W3CLogger(IOptionsMonitor<W3CLoggerOptions> options, IHostEnvironment environment, ILoggerFactory factory)
+    public W3CLogger(
+        IOptionsMonitor<W3CLoggerOptions> options,
+        IHostEnvironment environment,
+        ILoggerFactory factory
+    )
     {
         _options = options;
         _loggingFields = _options.CurrentValue.LoggingFields;
-        _options.OnChange(options =>
-        {
-            _loggingFields = options.LoggingFields;
-        });
+        _options.OnChange(
+            options =>
+            {
+                _loggingFields = options.LoggingFields;
+            }
+        );
         _messageQueue = InitializeMessageQueue(_options, environment, factory);
     }
 
     // Virtual for testing
-    internal virtual W3CLoggerProcessor InitializeMessageQueue(IOptionsMonitor<W3CLoggerOptions> options, IHostEnvironment environment, ILoggerFactory factory)
+    internal virtual W3CLoggerProcessor InitializeMessageQueue(
+        IOptionsMonitor<W3CLoggerOptions> options,
+        IHostEnvironment environment,
+        ILoggerFactory factory
+    )
     {
         return new W3CLoggerProcessor(options, environment, factory);
     }

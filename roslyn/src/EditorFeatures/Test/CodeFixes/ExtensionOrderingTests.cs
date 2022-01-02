@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
     [UseExportProvider]
     public class ExtensionOrderingTests
     {
-        private static ExportProvider ExportProvider => EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+        private static ExportProvider ExportProvider =>
+            EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
 
         [Fact]
         public void TestNoCyclesInFixProviders()
@@ -29,7 +30,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             // This test will fail if a cycle is detected in the ordering of our code fix providers.
             // If this test fails, you can break the cycle by inspecting and fixing up the contents of
             // any [ExtensionOrder()] attributes present on our code fix providers.
-            var providers = ExportProvider.GetExports<CodeFixProvider, CodeChangeProviderMetadata>();
+            var providers = ExportProvider.GetExports<
+                CodeFixProvider,
+                CodeChangeProviderMetadata
+            >();
             var providersPerLanguage = providers.ToPerLanguageMapWithMultipleLanguages();
 
             var csharpProviders = providersPerLanguage[LanguageNames.CSharp];
@@ -41,15 +45,27 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             // break the cycle and the resulting order will end up being unpredictable.
             var actualOrder = ExtensionOrderer.Order(csharpProviders).ToArray();
             Assert.True(actualOrder.Length > 0);
-            Assert.True(actualOrder.IndexOf(p => p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport) <
-                actualOrder.IndexOf(p => p.Metadata.Name == PredefinedCodeFixProviderNames.FullyQualify));
+            Assert.True(
+                actualOrder.IndexOf(
+                    p => p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport
+                )
+                    < actualOrder.IndexOf(
+                        p => p.Metadata.Name == PredefinedCodeFixProviderNames.FullyQualify
+                    )
+            );
 
             var vbProviders = providersPerLanguage[LanguageNames.VisualBasic];
             ExtensionOrderer.TestAccessor.CheckForCycles(vbProviders);
             actualOrder = ExtensionOrderer.Order(vbProviders).ToArray();
             Assert.True(actualOrder.Length > 0);
-            Assert.True(actualOrder.IndexOf(p => p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport) <
-                actualOrder.IndexOf(p => p.Metadata.Name == PredefinedCodeFixProviderNames.FullyQualify));
+            Assert.True(
+                actualOrder.IndexOf(
+                    p => p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport
+                )
+                    < actualOrder.IndexOf(
+                        p => p.Metadata.Name == PredefinedCodeFixProviderNames.FullyQualify
+                    )
+            );
         }
 
         [Fact]
@@ -58,7 +74,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             // This test will fail if a cycle is detected in the ordering of our suppression fix providers.
             // If this test fails, you can break the cycle by inspecting and fixing up the contents of
             // any [ExtensionOrder()] attributes present on our suppression fix providers.
-            var providers = ExportProvider.GetExports<IConfigurationFixProvider, CodeChangeProviderMetadata>();
+            var providers = ExportProvider.GetExports<
+                IConfigurationFixProvider,
+                CodeChangeProviderMetadata
+            >();
             var providersPerLanguage = providers.ToPerLanguageMapWithMultipleLanguages();
 
             TestCore(LanguageNames.CSharp);
@@ -77,9 +96,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 // break the cycle and the resulting order will end up being unpredictable.
                 var actualOrder = ExtensionOrderer.Order(providers).ToArray();
                 Assert.Equal(3, actualOrder.Length);
-                Assert.Equal(PredefinedConfigurationFixProviderNames.Suppression, actualOrder[0].Metadata.Name);
-                Assert.Equal(PredefinedConfigurationFixProviderNames.ConfigureCodeStyleOption, actualOrder[1].Metadata.Name);
-                Assert.Equal(PredefinedConfigurationFixProviderNames.ConfigureSeverity, actualOrder[2].Metadata.Name);
+                Assert.Equal(
+                    PredefinedConfigurationFixProviderNames.Suppression,
+                    actualOrder[0].Metadata.Name
+                );
+                Assert.Equal(
+                    PredefinedConfigurationFixProviderNames.ConfigureCodeStyleOption,
+                    actualOrder[1].Metadata.Name
+                );
+                Assert.Equal(
+                    PredefinedConfigurationFixProviderNames.ConfigureSeverity,
+                    actualOrder[2].Metadata.Name
+                );
             }
         }
 
@@ -89,7 +117,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             // This test will fail if a cycle is detected in the ordering of our code refactoring providers.
             // If this test fails, you can break the cycle by inspecting and fixing up the contents of
             // any [ExtensionOrder()] attributes present on our code refactoring providers.
-            var providers = ExportProvider.GetExports<CodeRefactoringProvider, CodeChangeProviderMetadata>();
+            var providers = ExportProvider.GetExports<
+                CodeRefactoringProvider,
+                CodeChangeProviderMetadata
+            >();
             var providersPerLanguage = providers.ToPerLanguageMapWithMultipleLanguages();
 
             var csharpProviders = providersPerLanguage[LanguageNames.CSharp];

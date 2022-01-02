@@ -30,9 +30,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="modelBuilder">The model builder.</param>
         /// <param name="name">The default container name.</param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public static ModelBuilder HasDefaultContainer(
-            this ModelBuilder modelBuilder,
-            string? name)
+        public static ModelBuilder HasDefaultContainer(this ModelBuilder modelBuilder, string? name)
         {
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -59,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionModelBuilder? HasDefaultContainer(
             this IConventionModelBuilder modelBuilder,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (!modelBuilder.CanSetDefaultContainer(name, fromDataAnnotation))
             {
@@ -85,11 +84,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetDefaultContainer(
             this IConventionModelBuilder modelBuilder,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NullButNotEmpty(name, nameof(name));
 
-            return modelBuilder.CanSetAnnotation(CosmosAnnotationNames.ContainerName, name, fromDataAnnotation);
+            return modelBuilder.CanSetAnnotation(
+                CosmosAnnotationNames.ContainerName,
+                name,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -101,7 +105,10 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         /// <param name="modelBuilder">The model builder.</param>
         /// <param name="throughput">The throughput to set.</param>
-        public static ModelBuilder HasManualThroughput(this ModelBuilder modelBuilder, int? throughput)
+        public static ModelBuilder HasManualThroughput(
+            this ModelBuilder modelBuilder,
+            int? throughput
+        )
         {
             modelBuilder.Model.SetThroughput(throughput, autoscale: false);
 
@@ -117,7 +124,10 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         /// <param name="modelBuilder">The model builder.</param>
         /// <param name="throughput">The throughput to set.</param>
-        public static ModelBuilder HasAutoscaleThroughput(this ModelBuilder modelBuilder, int? throughput)
+        public static ModelBuilder HasAutoscaleThroughput(
+            this ModelBuilder modelBuilder,
+            int? throughput
+        )
         {
             modelBuilder.Model.SetThroughput(throughput, autoscale: true);
 
@@ -139,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? throughput,
             bool autoscale,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (!modelBuilder.CanSetThroughput(throughput, autoscale, fromDataAnnotation))
             {
@@ -167,15 +178,20 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModelBuilder modelBuilder,
             int? throughput,
             bool autoscale,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
-            var existingAnnotation = modelBuilder.Metadata.FindAnnotation(CosmosAnnotationNames.Throughput);
+            var existingAnnotation = modelBuilder.Metadata.FindAnnotation(
+                CosmosAnnotationNames.Throughput
+            );
             if (existingAnnotation == null)
             {
                 return true;
             }
 
-            var configurationSource = fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention;
+            var configurationSource = fromDataAnnotation
+                ? ConfigurationSource.DataAnnotation
+                : ConfigurationSource.Convention;
             if (configurationSource.Overrides(existingAnnotation.GetConfigurationSource()))
             {
                 return true;
@@ -183,8 +199,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var existingThroughput = (ThroughputProperties?)existingAnnotation.Value;
             return autoscale
-                ? existingThroughput?.Throughput == throughput
-                : existingThroughput?.AutoscaleMaxThroughput == throughput;
+              ? existingThroughput?.Throughput == throughput
+              : existingThroughput?.AutoscaleMaxThroughput == throughput;
         }
     }
 }

@@ -6,32 +6,34 @@ using System.Runtime.Serialization;
 namespace System.Net
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class CookieException : FormatException, ISerializable
     {
-        public CookieException() : base()
-        {
-        }
+        public CookieException() : base() { }
 
-        internal CookieException(string? message) : base(message)
-        {
-        }
+        internal CookieException(string? message) : base(message) { }
 
-        internal CookieException(string? message, Exception? inner) : base(message, inner)
-        {
-        }
+        internal CookieException(string? message, Exception? inner) : base(message, inner) { }
 
-        protected CookieException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext)
-        {
-        }
+        protected CookieException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext) { }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             base.GetObjectData(serializationInfo, streamingContext);
         }

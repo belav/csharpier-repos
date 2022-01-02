@@ -41,7 +41,9 @@ public class EndpointRoutingMiddlewareTest
     {
         // Arrange
         var httpContext = CreateHttpContext();
-        httpContext.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp"));
+        httpContext.SetEndpoint(
+            new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp")
+        );
 
         var middleware = CreateMiddleware();
 
@@ -63,17 +65,22 @@ public class EndpointRoutingMiddlewareTest
 
         var sink = new TestSink(
             TestSink.EnableWithTypeName<EndpointRoutingMiddleware>,
-            TestSink.EnableWithTypeName<EndpointRoutingMiddleware>);
+            TestSink.EnableWithTypeName<EndpointRoutingMiddleware>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
         var listener = new DiagnosticListener("TestListener");
 
-        using var subscription = listener.Subscribe(new DelegateObserver(pair =>
-        {
-            eventFired = true;
+        using var subscription = listener.Subscribe(
+            new DelegateObserver(
+                pair =>
+                {
+                    eventFired = true;
 
-            Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
-            Assert.IsAssignableFrom<HttpContext>(pair.Value);
-        }));
+                    Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
+                    Assert.IsAssignableFrom<HttpContext>(pair.Value);
+                }
+            )
+        );
 
         var httpContext = CreateHttpContext();
 
@@ -151,20 +158,23 @@ public class EndpointRoutingMiddlewareTest
         var middleware = CreateMiddleware(matcherFactory: matcherFactory.Object);
 
         // Act
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await middleware.Invoke(httpContext));
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await middleware.Invoke(httpContext));
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(
+            async () => await middleware.Invoke(httpContext)
+        );
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(
+            async () => await middleware.Invoke(httpContext)
+        );
 
         // Assert
-        matcherFactory
-            .Verify(f => f.CreateMatcher(It.IsAny<EndpointDataSource>()), Times.Exactly(2));
+        matcherFactory.Verify(
+            f => f.CreateMatcher(It.IsAny<EndpointDataSource>()),
+            Times.Exactly(2)
+        );
     }
 
     private HttpContext CreateHttpContext()
     {
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new TestServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new TestServiceProvider() };
 
         return httpContext;
     }
@@ -173,7 +183,8 @@ public class EndpointRoutingMiddlewareTest
         Logger<EndpointRoutingMiddleware> logger = null,
         MatcherFactory matcherFactory = null,
         DiagnosticListener listener = null,
-        RequestDelegate next = null)
+        RequestDelegate next = null
+    )
     {
         next ??= c => Task.CompletedTask;
         logger ??= new Logger<EndpointRoutingMiddleware>(NullLoggerFactory.Instance);
@@ -185,7 +196,8 @@ public class EndpointRoutingMiddlewareTest
             logger,
             new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>()),
             listener,
-            next);
+            next
+        );
 
         return middleware;
     }
@@ -198,15 +210,9 @@ public class EndpointRoutingMiddlewareTest
         {
             _onNext = onNext;
         }
-        public void OnCompleted()
-        {
+        public void OnCompleted() { }
 
-        }
-
-        public void OnError(Exception error)
-        {
-
-        }
+        public void OnError(Exception error) { }
 
         public void OnNext(KeyValuePair<string, object> value)
         {

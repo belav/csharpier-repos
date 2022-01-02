@@ -22,7 +22,10 @@ namespace Test
         public int m_iField5;
         public static TestEnum[] m_axStatic1;
 
-        public void Break() { throw new Exception(); }
+        public void Break()
+        {
+            throw new Exception();
+        }
         public ulong Method1()
         {
             String[] local1 = new String[] { };
@@ -65,8 +68,7 @@ namespace Test
                             TestEnum local14 = TestEnum.red;
                             return App.m_ulFwd5;
                         }
-                    }
-                    while (local3);
+                    } while (local3);
                 }
             else
                 goto label1;
@@ -91,8 +93,7 @@ namespace Test
                         TestEnum local18 = 0;
                         local10 = local10;
                     }
-                }
-                while (local3);
+                } while (local3);
             }
             if (local3)
                 try

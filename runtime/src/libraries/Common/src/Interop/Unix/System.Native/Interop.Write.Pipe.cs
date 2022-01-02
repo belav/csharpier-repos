@@ -17,7 +17,11 @@ internal static partial class Interop
         /// <returns>
         /// Returns the number of bytes written on success; otherwise, returns -1 and sets errno
         /// </returns>
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_Write", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Write",
+            SetLastError = true
+        )]
         internal static unsafe partial int Write(SafePipeHandle fd, byte* buffer, int bufferSize);
     }
 }

@@ -17,13 +17,16 @@ public class AsyncDisposalTest : IClassFixture<MvcTestFixture<BasicWebSite.Start
 {
     public AsyncDisposalTest(MvcTestFixture<BasicWebSite.Startup> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = Factory.CreateDefaultClient();
     }
 
     private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
-        builder.UseStartup<BasicWebSite.Startup>()
-        .ConfigureServices(s => s.AddSingleton<ControllerTestDisposeAsync>());
+        builder
+            .UseStartup<BasicWebSite.Startup>()
+            .ConfigureServices(s => s.AddSingleton<ControllerTestDisposeAsync>());
 
     public WebApplicationFactory<BasicWebSite.Startup> Factory { get; }
 
@@ -34,7 +37,9 @@ public class AsyncDisposalTest : IClassFixture<MvcTestFixture<BasicWebSite.Start
     {
         // Arrange & Act
         var sink = Factory.Services.GetRequiredService<ControllerTestDisposeAsync>();
-        var response = await Client.GetAsync("http://localhost/Disposal/DisposeMode/Async(false)/Throws(false)");
+        var response = await Client.GetAsync(
+            "http://localhost/Disposal/DisposeMode/Async(false)/Throws(false)"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -46,7 +51,9 @@ public class AsyncDisposalTest : IClassFixture<MvcTestFixture<BasicWebSite.Start
     {
         // Arrange & Act
         var sink = Factory.Services.GetRequiredService<ControllerTestDisposeAsync>();
-        var response = await Client.GetAsync("http://localhost/Disposal/DisposeMode/Async(true)/Throws(true)");
+        var response = await Client.GetAsync(
+            "http://localhost/Disposal/DisposeMode/Async(true)/Throws(true)"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
@@ -58,7 +65,9 @@ public class AsyncDisposalTest : IClassFixture<MvcTestFixture<BasicWebSite.Start
     {
         // Arrange & Act
         var sink = Factory.Services.GetRequiredService<ControllerTestDisposeAsync>();
-        var response = await Client.GetAsync("http://localhost/Disposal/DisposeMode/Async(false)/Throws(true)");
+        var response = await Client.GetAsync(
+            "http://localhost/Disposal/DisposeMode/Async(false)/Throws(true)"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);

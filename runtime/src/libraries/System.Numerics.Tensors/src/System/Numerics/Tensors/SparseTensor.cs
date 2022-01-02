@@ -18,17 +18,26 @@ namespace System.Numerics.Tensors
         /// <param name="dimensions">An span of integers that represent the size of each dimension of the SparseTensor to create.</param>
         /// <param name="reverseStride">False (default) to indicate that the first dimension is most major (farthest apart) and the last dimension is most minor (closest together): akin to row-major in a rank-2 tensor.  True to indicate that the last dimension is most major (farthest apart) and the first dimension is most minor (closest together): akin to column-major in a rank-2 tensor.</param>
         /// <param name="capacity">The number of non-zero values this tensor can store without resizing.</param>
-        public SparseTensor(ReadOnlySpan<int> dimensions, bool reverseStride = false, int capacity = 0) : base(dimensions, reverseStride)
+        public SparseTensor(
+            ReadOnlySpan<int> dimensions,
+            bool reverseStride = false,
+            int capacity = 0
+        ) : base(dimensions, reverseStride)
         {
             values = new Dictionary<int, T>(capacity);
         }
 
-        internal SparseTensor(Dictionary<int, T> values, ReadOnlySpan<int> dimensions, bool reverseStride = false) : base(dimensions, reverseStride)
+        internal SparseTensor(
+            Dictionary<int, T> values,
+            ReadOnlySpan<int> dimensions,
+            bool reverseStride = false
+        ) : base(dimensions, reverseStride)
         {
             this.values = values;
         }
 
-        internal SparseTensor(Array fromArray, bool reverseStride = false) : base(fromArray, reverseStride)
+        internal SparseTensor(Array fromArray, bool reverseStride = false)
+            : base(fromArray, reverseStride)
         {
             values = new Dictionary<int, T>(fromArray.Length);
 
@@ -42,7 +51,12 @@ namespace System.Numerics.Tensors
                 {
                     if (!item!.Equals(Zero))
                     {
-                        var destIndex = ArrayUtilities.TransformIndexByStrides(index, sourceStrides, false, strides);
+                        var destIndex = ArrayUtilities.TransformIndexByStrides(
+                            index,
+                            sourceStrides,
+                            false,
+                            strides
+                        );
                         values[destIndex] = item;
                     }
 
@@ -70,7 +84,6 @@ namespace System.Numerics.Tensors
         /// <returns>The value at the specified position in this Tensor.</returns>
         public override T GetValue(int index)
         {
-
             if (!values.TryGetValue(index, out T? value))
             {
                 value = Zero;
@@ -165,7 +178,11 @@ namespace System.Numerics.Tensors
         /// <returns>A copy of this tensor as a CompressedSparseTensor&lt;T&gt;.</returns>
         public override CompressedSparseTensor<T> ToCompressedSparseTensor()
         {
-            var compressedSparseTensor = new CompressedSparseTensor<T>(dimensions, capacity: NonZeroCount, reverseStride: IsReversedStride);
+            var compressedSparseTensor = new CompressedSparseTensor<T>(
+                dimensions,
+                capacity: NonZeroCount,
+                reverseStride: IsReversedStride
+            );
 
             foreach (var pair in values)
             {

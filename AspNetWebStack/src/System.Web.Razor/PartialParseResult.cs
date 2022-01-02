@@ -22,7 +22,11 @@ namespace System.Web.Razor
     /// Provisional may NOT be set with Rejected and SpanContextChanged may NOT be set with Accepted.
     /// </remarks>
     [Flags]
-    [SuppressMessage("Microsoft.Naming", "CA1714:FlagsEnumsShouldHavePluralNames", Justification = "The singular name is more appropriate here")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1714:FlagsEnumsShouldHavePluralNames",
+        Justification = "The singular name is more appropriate here"
+    )]
     public enum PartialParseResult
     {
         /// <summary>

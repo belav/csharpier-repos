@@ -42,7 +42,8 @@ namespace System.Text.Json
             Stream utf8Json,
             TValue value,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json == null)
             {
@@ -72,7 +73,8 @@ namespace System.Text.Json
         public static void Serialize<TValue>(
             Stream utf8Json,
             TValue value,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (utf8Json == null)
             {
@@ -109,7 +111,8 @@ namespace System.Text.Json
             object? value,
             Type inputType,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json == null)
             {
@@ -143,7 +146,8 @@ namespace System.Text.Json
             Stream utf8Json,
             object? value,
             Type inputType,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (utf8Json == null)
             {
@@ -175,7 +179,8 @@ namespace System.Text.Json
             Stream utf8Json,
             TValue value,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json == null)
             {
@@ -207,7 +212,8 @@ namespace System.Text.Json
         public static void Serialize<TValue>(
             Stream utf8Json,
             TValue value,
-            JsonTypeInfo<TValue> jsonTypeInfo)
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (utf8Json == null)
             {
@@ -246,7 +252,8 @@ namespace System.Text.Json
             object? value,
             Type inputType,
             JsonSerializerContext context,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json == null)
             {
@@ -263,7 +270,8 @@ namespace System.Text.Json
                 utf8Json,
                 value!,
                 GetTypeInfo(context, runtimeType),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -287,7 +295,8 @@ namespace System.Text.Json
             Stream utf8Json,
             object? value,
             Type inputType,
-            JsonSerializerContext context)
+            JsonSerializerContext context
+        )
         {
             if (utf8Json == null)
             {
@@ -307,7 +316,8 @@ namespace System.Text.Json
             Stream utf8Json,
             TValue value,
             JsonTypeInfo jsonTypeInfo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
             JsonWriterOptions writerOptions = options.GetWriterOptions();
@@ -338,7 +348,9 @@ namespace System.Text.Json
                             }
                             else
                             {
-                                await bufferWriter.WriteToStreamAsync(utf8Json, cancellationToken).ConfigureAwait(false);
+                                await bufferWriter
+                                    .WriteToStreamAsync(utf8Json, cancellationToken)
+                                    .ConfigureAwait(false);
                                 bufferWriter.Clear();
                             }
                         }
@@ -362,10 +374,11 @@ namespace System.Text.Json
                             // Dispose any pending async disposables (currently these can only be completed IAsyncEnumerators).
                             if (state.CompletedAsyncDisposables?.Count > 0)
                             {
-                                await state.DisposeCompletedAsyncDisposables().ConfigureAwait(false);
+                                await state
+                                    .DisposeCompletedAsyncDisposables()
+                                    .ConfigureAwait(false);
                             }
                         }
-
                     } while (!isFinalBlock);
                 }
                 catch
@@ -380,7 +393,8 @@ namespace System.Text.Json
         private static void WriteStream<TValue>(
             Stream utf8Json,
             in TValue value,
-            JsonTypeInfo jsonTypeInfo)
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
             JsonWriterOptions writerOptions = options.GetWriterOptions();

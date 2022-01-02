@@ -7,7 +7,7 @@ using Xunit;
 namespace AutoMapper.IntegrationTests
 {
     using UnitTests;
-        
+
     public class NullSubstitute : AutoMapperSpecBase
     {
         public class Customer
@@ -41,21 +41,27 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer
-                {
-                    Id = 1,
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                    }
+                );
 
                 base.Seed(context);
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.Value, o => o.NullSubstitute(5));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerViewModel>()
+                        .ForMember(d => d.Value, o => o.NullSubstitute(5));
+                }
+            );
 
         [Fact]
         public void Can_map_with_projection()
@@ -90,12 +96,23 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer { Id = 1, FirstName = "Bob", LastName = "Smith" });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith"
+                    }
+                );
                 base.Seed(context);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-            cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.Value, o => o.NullSubstitute("5")));
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                    cfg.CreateProjection<Customer, CustomerViewModel>()
+                        .ForMember(d => d.Value, o => o.NullSubstitute("5"))
+            );
         [Fact]
         public void Can_map_with_projection()
         {
@@ -137,15 +154,26 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer { Id = 1, FirstName = "Bob", LastName = "Smith" });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith"
+                    }
+                );
                 base.Seed(context);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.Value, o => o.NullSubstitute(new Value()));
-            cfg.CreateProjection<Value, ValueViewModel>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerViewModel>()
+                        .ForMember(d => d.Value, o => o.NullSubstitute(new Value()));
+                    cfg.CreateProjection<Value, ValueViewModel>();
+                }
+            );
         [Fact]
         public void Can_map_with_projection()
         {

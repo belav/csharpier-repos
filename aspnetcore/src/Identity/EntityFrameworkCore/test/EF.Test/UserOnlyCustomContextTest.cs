@@ -23,41 +23,60 @@ public class UserOnlyCustomContextTest : IClassFixture<ScratchDatabaseFixture>
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<IdentityUser>(b =>
-            {
-                b.HasKey(u => u.Id);
-                b.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
-                b.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
-                b.ToTable("AspNetUsers");
-                b.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
+            builder.Entity<IdentityUser>(
+                b =>
+                {
+                    b.HasKey(u => u.Id);
+                    b.HasIndex(u => u.NormalizedUserName)
+                        .HasDatabaseName("UserNameIndex")
+                        .IsUnique();
+                    b.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
+                    b.ToTable("AspNetUsers");
+                    b.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
-                b.Property(u => u.UserName).HasMaxLength(256);
-                b.Property(u => u.NormalizedUserName).HasMaxLength(256);
-                b.Property(u => u.Email).HasMaxLength(256);
-                b.Property(u => u.NormalizedEmail).HasMaxLength(256);
+                    b.Property(u => u.UserName).HasMaxLength(256);
+                    b.Property(u => u.NormalizedUserName).HasMaxLength(256);
+                    b.Property(u => u.Email).HasMaxLength(256);
+                    b.Property(u => u.NormalizedEmail).HasMaxLength(256);
 
-                b.HasMany<IdentityUserClaim<string>>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
-                b.HasMany<IdentityUserLogin<string>>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
-                b.HasMany<IdentityUserToken<string>>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
-            });
+                    b.HasMany<IdentityUserClaim<string>>()
+                        .WithOne()
+                        .HasForeignKey(uc => uc.UserId)
+                        .IsRequired();
+                    b.HasMany<IdentityUserLogin<string>>()
+                        .WithOne()
+                        .HasForeignKey(ul => ul.UserId)
+                        .IsRequired();
+                    b.HasMany<IdentityUserToken<string>>()
+                        .WithOne()
+                        .HasForeignKey(ut => ut.UserId)
+                        .IsRequired();
+                }
+            );
 
-            builder.Entity<IdentityUserClaim<string>>(b =>
-            {
-                b.HasKey(uc => uc.Id);
-                b.ToTable("AspNetUserClaims");
-            });
+            builder.Entity<IdentityUserClaim<string>>(
+                b =>
+                {
+                    b.HasKey(uc => uc.Id);
+                    b.ToTable("AspNetUserClaims");
+                }
+            );
 
-            builder.Entity<IdentityUserLogin<string>>(b =>
-            {
-                b.HasKey(l => new { l.LoginProvider, l.ProviderKey });
-                b.ToTable("AspNetUserLogins");
-            });
+            builder.Entity<IdentityUserLogin<string>>(
+                b =>
+                {
+                    b.HasKey(l => new { l.LoginProvider, l.ProviderKey });
+                    b.ToTable("AspNetUserLogins");
+                }
+            );
 
-            builder.Entity<IdentityUserToken<string>>(b =>
-            {
-                b.HasKey(l => new { l.UserId, l.LoginProvider, l.Name });
-                b.ToTable("AspNetUserTokens");
-            });
+            builder.Entity<IdentityUserToken<string>>(
+                b =>
+                {
+                    b.HasKey(l => new { l.UserId, l.LoginProvider, l.Name });
+                    b.ToTable("AspNetUserTokens");
+                }
+            );
         }
     }
 
@@ -67,9 +86,13 @@ public class UserOnlyCustomContextTest : IClassFixture<ScratchDatabaseFixture>
 
         services
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
-            .AddDbContext<CustomContext>(o =>
-                o.UseSqlite(fixture.Connection)
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)))
+            .AddDbContext<CustomContext>(
+                o =>
+                    o.UseSqlite(fixture.Connection)
+                        .ConfigureWarnings(
+                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+            )
             .AddIdentityCore<IdentityUser>(o => { })
             .AddEntityFrameworkStores<CustomContext>();
 
@@ -89,7 +112,9 @@ public class UserOnlyCustomContextTest : IClassFixture<ScratchDatabaseFixture>
     public async Task EnsureStartupUsageWorks()
     {
         var userStore = _builder.ApplicationServices.GetRequiredService<IUserStore<IdentityUser>>();
-        var userManager = _builder.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
+        var userManager = _builder.ApplicationServices.GetRequiredService<
+            UserManager<IdentityUser>
+        >();
 
         Assert.NotNull(userStore);
         Assert.NotNull(userManager);
@@ -100,5 +125,4 @@ public class UserOnlyCustomContextTest : IClassFixture<ScratchDatabaseFixture>
         IdentityResultAssert.IsSuccess(await userManager.CreateAsync(user, password));
         IdentityResultAssert.IsSuccess(await userManager.DeleteAsync(user));
     }
-
 }

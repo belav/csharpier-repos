@@ -18,23 +18,32 @@ namespace Microsoft.CodeAnalysis.Fading
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Provider()
-            {
-            }
+            public Provider() { }
 
-            ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-                FadeOutUnusedImports,
-                FadeOutUnreachableCode);
+            ImmutableArray<IOption> IOptionProvider.Options { get; } =
+                ImmutableArray.Create<IOption>(FadeOutUnusedImports, FadeOutUnreachableCode);
         }
 
         private const string FeatureName = "FadingOptions";
 
-        public static readonly PerLanguageOption2<bool> FadeOutUnusedImports = new(
-            FeatureName, "FadeOutUnusedImports", defaultValue: true,
-            storageLocation: new RoamingProfileStorageLocation($"TextEditor.%LANGUAGE%.Specific.FadeOutUnusedImports"));
+        public static readonly PerLanguageOption2<bool> FadeOutUnusedImports =
+            new(
+                FeatureName,
+                "FadeOutUnusedImports",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    $"TextEditor.%LANGUAGE%.Specific.FadeOutUnusedImports"
+                )
+            );
 
-        public static readonly PerLanguageOption2<bool> FadeOutUnreachableCode = new(
-            FeatureName, "FadeOutUnreachableCode", defaultValue: true,
-            storageLocation: new RoamingProfileStorageLocation($"TextEditor.%LANGUAGE%.Specific.FadeOutUnreachableCode"));
+        public static readonly PerLanguageOption2<bool> FadeOutUnreachableCode =
+            new(
+                FeatureName,
+                "FadeOutUnreachableCode",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    $"TextEditor.%LANGUAGE%.Specific.FadeOutUnreachableCode"
+                )
+            );
     }
 }

@@ -53,14 +53,14 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
         private (DocumentId documentId, string newName) _renamedDocument;
 
-        public MutableConflictResolution(string errorMessage)
-            => ErrorMessage = errorMessage;
+        public MutableConflictResolution(string errorMessage) => ErrorMessage = errorMessage;
 
         public MutableConflictResolution(
             Solution oldSolution,
             RenamedSpansTracker renamedSpansTracker,
             string replacementText,
-            bool replacementTextValid)
+            bool replacementTextValid
+        )
         {
             OldSolution = oldSolution;
             CurrentSolution = oldSolution;
@@ -76,33 +76,48 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             _renamedSpansTracker.ClearDocuments(conflictLocationDocumentIds);
         }
 
-        internal void UpdateCurrentSolution(Solution solution)
-            => CurrentSolution = solution;
+        internal void UpdateCurrentSolution(Solution solution) => CurrentSolution = solution;
 
         internal async Task<Solution> RemoveAllRenameAnnotationsAsync(
             Solution intermediateSolution,
             IEnumerable<DocumentId> documentWithRenameAnnotations,
             AnnotationTable<RenameAnnotation> annotationSet,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             foreach (var documentId in documentWithRenameAnnotations)
             {
                 if (_renamedSpansTracker.IsDocumentChanged(documentId))
                 {
                     var document = CurrentSolution.GetDocument(documentId);
-                    var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                    var root = await document
+                        .GetSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
-                    // For the computeReplacementToken and computeReplacementNode functions, use 
+                    // For the computeReplacementToken and computeReplacementNode functions, use
                     // the "updated" node to maintain any annotation removals from descendants.
                     var newRoot = root.ReplaceSyntax(
                         nodes: annotationSet.GetAnnotatedNodes(root),
-                        computeReplacementNode: (original, updated) => annotationSet.WithoutAnnotations(updated, annotationSet.GetAnnotations(updated).ToArray()),
+                        computeReplacementNode: (original, updated) =>
+                            annotationSet.WithoutAnnotations(
+                                updated,
+                                annotationSet.GetAnnotations(updated).ToArray()
+                            ),
                         tokens: annotationSet.GetAnnotatedTokens(root),
-                        computeReplacementToken: (original, updated) => annotationSet.WithoutAnnotations(updated, annotationSet.GetAnnotations(updated).ToArray()),
+                        computeReplacementToken: (original, updated) =>
+                            annotationSet.WithoutAnnotations(
+                                updated,
+                                annotationSet.GetAnnotations(updated).ToArray()
+                            ),
                         trivia: SpecializedCollections.EmptyEnumerable<SyntaxTrivia>(),
-                        computeReplacementTrivia: null);
+                        computeReplacementTrivia: null
+                    );
 
-                    intermediateSolution = intermediateSolution.WithDocumentSyntaxRoot(documentId, newRoot, PreservationMode.PreserveIdentity);
+                    intermediateSolution = intermediateSolution.WithDocumentSyntaxRoot(
+                        documentId,
+                        newRoot,
+                        PreservationMode.PreserveIdentity
+                    );
                 }
             }
 
@@ -114,45 +129,53 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             var extension = Path.GetExtension(document.Name);
             var newName = Path.ChangeExtension(ReplacementText, extension);
 
-            // If possible, check that the new file name is unique to on disk files as well 
+            // If possible, check that the new file name is unique to on disk files as well
             // as solution items.
-            IOUtilities.PerformIO(() =>
-            {
-                if (File.Exists(document.FilePath))
+            IOUtilities.PerformIO(
+                () =>
                 {
-                    var directory = Directory.GetParent(document.FilePath).FullName;
-                    var newDocumentFilePath = Path.Combine(directory, newName);
-
-                    var versionNumber = 1;
-                    while (File.Exists(newDocumentFilePath))
+                    if (File.Exists(document.FilePath))
                     {
-                        if (newName.Equals(document.Name, StringComparison.OrdinalIgnoreCase))
-                        {
-                            // If the document name is the same as the original, we know 
-                            // it can be renamed to that because the old file on disk will
-                            // be removed.
-                            return;
-                        }
+                        var directory = Directory.GetParent(document.FilePath).FullName;
+                        var newDocumentFilePath = Path.Combine(directory, newName);
 
-                        var nameWithoutExtension = ReplacementText + $"_{versionNumber++}";
-                        newName = Path.ChangeExtension(nameWithoutExtension, extension);
-                        newDocumentFilePath = Path.Combine(directory, newName);
+                        var versionNumber = 1;
+                        while (File.Exists(newDocumentFilePath))
+                        {
+                            if (newName.Equals(document.Name, StringComparison.OrdinalIgnoreCase))
+                            {
+                                // If the document name is the same as the original, we know
+                                // it can be renamed to that because the old file on disk will
+                                // be removed.
+                                return;
+                            }
+
+                            var nameWithoutExtension = ReplacementText + $"_{versionNumber++}";
+                            newName = Path.ChangeExtension(nameWithoutExtension, extension);
+                            newDocumentFilePath = Path.Combine(directory, newName);
+                        }
                     }
                 }
-            });
+            );
 
             _renamedDocument = (document.Id, newName);
         }
 
-        public int GetAdjustedTokenStartingPosition(int startingPosition, DocumentId documentId)
-            => _renamedSpansTracker.GetAdjustedPosition(startingPosition, documentId);
+        public int GetAdjustedTokenStartingPosition(int startingPosition, DocumentId documentId) =>
+            _renamedSpansTracker.GetAdjustedPosition(startingPosition, documentId);
 
-        internal void AddRelatedLocation(RelatedLocation location)
-            => RelatedLocations.Add(location);
+        internal void AddRelatedLocation(RelatedLocation location) =>
+            RelatedLocations.Add(location);
 
         internal void AddOrReplaceRelatedLocation(RelatedLocation location)
         {
-            var existingRelatedLocation = RelatedLocations.Where(rl => rl.ConflictCheckSpan == location.ConflictCheckSpan && rl.DocumentId == location.DocumentId).FirstOrNull();
+            var existingRelatedLocation = RelatedLocations
+                .Where(
+                    rl =>
+                        rl.ConflictCheckSpan == location.ConflictCheckSpan
+                        && rl.DocumentId == location.DocumentId
+                )
+                .FirstOrNull();
             if (existingRelatedLocation != null)
                 RelatedLocations.Remove(existingRelatedLocation.Value);
 
@@ -164,15 +187,19 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             if (ErrorMessage != null)
                 return new ConflictResolution(ErrorMessage);
 
-            var documentIds = _renamedSpansTracker.DocumentIds.Concat(
-                this.RelatedLocations.Select(l => l.DocumentId)).Distinct().ToImmutableArray();
+            var documentIds = _renamedSpansTracker.DocumentIds
+                .Concat(this.RelatedLocations.Select(l => l.DocumentId))
+                .Distinct()
+                .ToImmutableArray();
 
             var relatedLocations = this.RelatedLocations.ToImmutableArray();
 
             var documentToModifiedSpansMap = _renamedSpansTracker.GetDocumentToModifiedSpansMap();
-            var documentToComplexifiedSpansMap = _renamedSpansTracker.GetDocumentToComplexifiedSpansMap();
-            var documentToRelatedLocationsMap = this.RelatedLocations.GroupBy(loc => loc.DocumentId).ToImmutableDictionary(
-                g => g.Key, g => g.ToImmutableArray());
+            var documentToComplexifiedSpansMap =
+                _renamedSpansTracker.GetDocumentToComplexifiedSpansMap();
+            var documentToRelatedLocationsMap = this.RelatedLocations
+                .GroupBy(loc => loc.DocumentId)
+                .ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray());
 
             return new ConflictResolution(
                 OldSolution,
@@ -183,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 relatedLocations,
                 documentToModifiedSpansMap,
                 documentToComplexifiedSpansMap,
-                documentToRelatedLocationsMap);
+                documentToRelatedLocationsMap
+            );
         }
     }
 }

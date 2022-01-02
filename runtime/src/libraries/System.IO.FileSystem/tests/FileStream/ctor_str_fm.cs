@@ -38,7 +38,8 @@ namespace System.IO.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 GetExpectedParamName("mode"),
-                () => CreateFileStream(GetTestFilePath(), ~FileMode.Open));
+                () => CreateFileStream(GetTestFilePath(), ~FileMode.Open)
+            );
         }
 
         [Theory, MemberData(nameof(TrailingCharacters))]
@@ -64,9 +65,9 @@ namespace System.IO.Tests
 
                 if (PlatformDetection.IsWindows && PlatformDetection.IsNetCore)
                 {
-                    data.Add("::$DATA");        // Same as default stream (e.g. main file)
-                    data.Add(":bar");           // $DATA isn't necessary
-                    data.Add(":bar:$DATA");     // $DATA can be explicitly specified
+                    data.Add("::$DATA"); // Same as default stream (e.g. main file)
+                    data.Add(":bar"); // $DATA isn't necessary
+                    data.Add(":bar:$DATA"); // $DATA can be explicitly specified
                 }
 
                 return data;
@@ -130,7 +131,9 @@ namespace System.IO.Tests
         public void FileModeOpenThrows(string streamSpecifier)
         {
             string fileName = GetTestFilePath() + streamSpecifier;
-            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(() => CreateFileStream(fileName, FileMode.Open));
+            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(
+                () => CreateFileStream(fileName, FileMode.Open)
+            );
             Assert.Equal(fileName, fnfe.FileName);
         }
 
@@ -186,7 +189,9 @@ namespace System.IO.Tests
         public void FileModeTruncateThrows(string streamSpecifier)
         {
             string fileName = GetTestFilePath() + streamSpecifier;
-            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(() => CreateFileStream(fileName, FileMode.Truncate));
+            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(
+                () => CreateFileStream(fileName, FileMode.Truncate)
+            );
             Assert.Equal(fileName, fnfe.FileName);
         }
 

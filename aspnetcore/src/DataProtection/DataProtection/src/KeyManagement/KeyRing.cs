@@ -39,10 +39,7 @@ internal sealed class KeyRing : IKeyRing
 
     public IAuthenticatedEncryptor? DefaultAuthenticatedEncryptor
     {
-        get
-        {
-            return _defaultKeyHolder.GetEncryptorInstance(out _);
-        }
+        get { return _defaultKeyHolder.GetEncryptorInstance(out _); }
     }
 
     public Guid DefaultKeyId { get; }

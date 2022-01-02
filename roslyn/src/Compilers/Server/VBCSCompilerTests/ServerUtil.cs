@@ -26,33 +26,46 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         internal static readonly BuildRequest EmptyCSharpBuildRequest = new BuildRequest(
             RequestLanguage.CSharpCompile,
             BuildProtocolConstants.GetCommitHash(),
-            ImmutableArray<BuildRequest.Argument>.Empty);
+            ImmutableArray<BuildRequest.Argument>.Empty
+        );
 
         internal static readonly BuildRequest EmptyBasicBuildRequest = new BuildRequest(
             RequestLanguage.VisualBasicCompile,
             BuildProtocolConstants.GetCommitHash(),
-            ImmutableArray<BuildRequest.Argument>.Empty);
+            ImmutableArray<BuildRequest.Argument>.Empty
+        );
 
         internal static readonly BuildResponse EmptyBuildResponse = new CompletedBuildResponse(
             returnCode: 0,
             utf8output: false,
-            output: string.Empty);
+            output: string.Empty
+        );
 
-        internal static BuildRequest CreateEmptyCSharp(string workingDirectory, string tempDirectory = null) => BuildRequest.Create(
-            RequestLanguage.CSharpCompile,
-            Array.Empty<string>(),
-            workingDirectory,
-            tempDirectory ?? Path.GetTempPath(),
-            compilerHash: BuildProtocolConstants.GetCommitHash());
+        internal static BuildRequest CreateEmptyCSharp(
+            string workingDirectory,
+            string tempDirectory = null
+        ) =>
+            BuildRequest.Create(
+                RequestLanguage.CSharpCompile,
+                Array.Empty<string>(),
+                workingDirectory,
+                tempDirectory ?? Path.GetTempPath(),
+                compilerHash: BuildProtocolConstants.GetCommitHash()
+            );
 
-        internal static BuildRequest CreateEmptyCSharpWithKeepAlive(TimeSpan keepAlive, string workingDirectory, string tempDirectory = null) => BuildRequest.Create(
-            RequestLanguage.CSharpCompile,
-            Array.Empty<string>(),
-            workingDirectory,
-            tempDirectory ?? Path.GetTempPath(),
-            compilerHash: BuildProtocolConstants.GetCommitHash(),
-            keepAlive: keepAlive.TotalSeconds.ToString());
-
+        internal static BuildRequest CreateEmptyCSharpWithKeepAlive(
+            TimeSpan keepAlive,
+            string workingDirectory,
+            string tempDirectory = null
+        ) =>
+            BuildRequest.Create(
+                RequestLanguage.CSharpCompile,
+                Array.Empty<string>(),
+                workingDirectory,
+                tempDirectory ?? Path.GetTempPath(),
+                compilerHash: BuildProtocolConstants.GetCommitHash(),
+                keepAlive: keepAlive.TotalSeconds.ToString()
+            );
     }
 
     internal sealed class ServerData : IDisposable
@@ -62,7 +75,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         internal string PipeName { get; }
         internal ICompilerServerLogger Logger { get; }
 
-        private ServerData(CancellationTokenSource cancellationTokenSource, string pipeName, ICompilerServerLogger logger, Task<TestableDiagnosticListener> serverTask)
+        private ServerData(
+            CancellationTokenSource cancellationTokenSource,
+            string pipeName,
+            ICompilerServerLogger logger,
+            Task<TestableDiagnosticListener> serverTask
+        )
         {
             CancellationTokenSource = cancellationTokenSource;
             PipeName = pipeName;
@@ -79,29 +97,36 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             string pipeName = null,
             ICompilerServerHost compilerServerHost = null,
             IClientConnectionHost clientConnectionHost = null,
-            TimeSpan? keepAlive = null)
+            TimeSpan? keepAlive = null
+        )
         {
             // The total pipe path must be < 92 characters on Unix, so trim this down to 10 chars
             pipeName ??= ServerUtil.GetPipeName();
             compilerServerHost ??= BuildServerController.CreateCompilerServerHost(logger);
-            clientConnectionHost ??= BuildServerController.CreateClientConnectionHost(pipeName, logger);
+            clientConnectionHost ??= BuildServerController.CreateClientConnectionHost(
+                pipeName,
+                logger
+            );
             keepAlive ??= TimeSpan.FromMilliseconds(-1);
 
             var listener = new TestableDiagnosticListener();
             var serverListenSource = new TaskCompletionSource<bool>();
             var cts = new CancellationTokenSource();
             var mutexName = BuildServerConnection.GetServerMutexName(pipeName);
-            var task = Task.Run(() =>
-            {
-                BuildServerController.CreateAndRunServer(
-                    pipeName,
-                    compilerServerHost,
-                    clientConnectionHost,
-                    listener,
-                    keepAlive: keepAlive,
-                    cancellationToken: cts.Token);
-                return listener;
-            });
+            var task = Task.Run(
+                () =>
+                {
+                    BuildServerController.CreateAndRunServer(
+                        pipeName,
+                        compilerServerHost,
+                        clientConnectionHost,
+                        listener,
+                        keepAlive: keepAlive,
+                        cancellationToken: cts.Token
+                    );
+                    return listener;
+                }
+            );
 
             return new ServerData(cts, pipeName, logger, task);
         }
@@ -115,24 +140,32 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             // The contract of this function is that it will return once the server has started.  Spin here until
             // we can verify the server has started or simply failed to start.
             var mutexName = BuildServerConnection.GetServerMutexName(PipeName);
-            while (BuildServerConnection.WasServerMutexOpen(mutexName) != true && !ServerTask.IsCompleted)
+            while (
+                BuildServerConnection.WasServerMutexOpen(mutexName) != true
+                && !ServerTask.IsCompleted
+            )
             {
                 await Task.Yield();
             }
         }
 
-        internal Task<BuildResponse> SendAsync(BuildRequest request, CancellationToken cancellationToken = default) =>
+        internal Task<BuildResponse> SendAsync(
+            BuildRequest request,
+            CancellationToken cancellationToken = default
+        ) =>
             BuildServerConnection.RunServerBuildRequestAsync(
                 request,
                 PipeName,
                 timeoutOverride: Timeout.Infinite,
                 tryCreateServerFunc: (_, _) => false,
                 Logger,
-                cancellationToken);
+                cancellationToken
+            );
 
         internal async Task<int> SendShutdownAsync(CancellationToken cancellationToken = default)
         {
-            var response = await SendAsync(BuildRequest.CreateShutdown(), cancellationToken).ConfigureAwait(false);
+            var response = await SendAsync(BuildRequest.CreateShutdown(), cancellationToken)
+                .ConfigureAwait(false);
             return ((ShutdownBuildResponse)response).ServerProcessId;
         }
 
@@ -156,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
     internal static class ServerUtil
     {
-        internal static string DefaultClientDirectory { get; } = Path.GetDirectoryName(typeof(BuildClientTests).Assembly.Location);
+        internal static string DefaultClientDirectory { get; } =
+            Path.GetDirectoryName(typeof(BuildClientTests).Assembly.Location);
         internal static string DefaultSdkDirectory { get; } = BuildClient.GetSystemSdkDirectory();
 
         internal static BuildPaths CreateBuildPaths(string workingDir, string tempDir)
@@ -165,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 clientDir: DefaultClientDirectory,
                 workingDir: workingDir,
                 sdkDir: DefaultSdkDirectory,
-                tempDir: tempDir);
+                tempDir: tempDir
+            );
         }
 
         internal static string GetPipeName() => Guid.NewGuid().ToString().Substring(0, 10);
@@ -174,16 +209,24 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             string pipeName = null,
             ICompilerServerHost compilerServerHost = null,
             IClientConnectionHost clientConnectionHost = null,
-            TimeSpan? keepAlive = null)
+            TimeSpan? keepAlive = null
+        )
         {
-            var serverData = ServerData.Create(logger, pipeName, compilerServerHost, clientConnectionHost, keepAlive);
+            var serverData = ServerData.Create(
+                logger,
+                pipeName,
+                compilerServerHost,
+                clientConnectionHost,
+                keepAlive
+            );
             await serverData.WaitForServerAsync();
             return serverData;
         }
 
         internal static BuildClient CreateBuildClient(
             RequestLanguage language,
-            ICompilerServerLogger logger)
+            ICompilerServerLogger logger
+        )
         {
             // Create a client to run the build.  Infinite timeout is used to account for the
             // case where these tests are run under extreme load.  In high load scenarios the
@@ -196,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     timeoutOverride: Timeout.Infinite,
                     tryCreateServerFunc: (_, _) => false,
                     logger,
-                    cancellationToken);
+                    cancellationToken
+                );
 
             var compileFunc = GetCompileFunc(language);
             return new BuildClient(language, compileFunc, compileOnServerFunc);
@@ -204,7 +248,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
         internal static CompileFunc GetCompileFunc(RequestLanguage language)
         {
-            Func<string[], string, string, string, string, TextWriter, IAnalyzerAssemblyLoader, int> func;
+            Func<
+                string[],
+                string,
+                string,
+                string,
+                string,
+                TextWriter,
+                IAnalyzerAssemblyLoader,
+                int
+            > func;
             switch (language)
             {
                 case RequestLanguage.CSharpCompile:
@@ -217,7 +270,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     throw new InvalidOperationException();
             }
 
-            return (args, buildPaths, textWriter, loader) => func(args, buildPaths.ClientDirectory, buildPaths.WorkingDirectory, buildPaths.SdkDirectory, buildPaths.TempDirectory, textWriter, loader);
+            return (args, buildPaths, textWriter, loader) =>
+                func(
+                    args,
+                    buildPaths.ClientDirectory,
+                    buildPaths.WorkingDirectory,
+                    buildPaths.SdkDirectory,
+                    buildPaths.TempDirectory,
+                    textWriter,
+                    loader
+                );
         }
     }
 }

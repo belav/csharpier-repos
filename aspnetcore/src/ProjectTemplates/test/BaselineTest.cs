@@ -17,7 +17,8 @@ namespace Templates.Test;
 
 public class BaselineTest : LoggedTest
 {
-    private static readonly string BaselineDefinitionFileResourceName = "ProjectTemplates.Tests.template-baselines.json";
+    private static readonly string BaselineDefinitionFileResourceName =
+        "ProjectTemplates.Tests.template-baselines.json";
 
     public BaselineTest(ProjectFactoryFixture projectFactory)
     {
@@ -30,7 +31,11 @@ public class BaselineTest : LoggedTest
     {
         get
         {
-            using (var stream = typeof(BaselineTest).Assembly.GetManifestResourceStream(BaselineDefinitionFileResourceName))
+            using (
+                var stream = typeof(BaselineTest).Assembly.GetManifestResourceStream(
+                    BaselineDefinitionFileResourceName
+                )
+            )
             {
                 using (var jsonReader = new JsonTextReader(new StreamReader(stream)))
                 {
@@ -42,7 +47,10 @@ public class BaselineTest : LoggedTest
                         {
                             data.Add(
                                 (string)scenarioName.Value["Arguments"],
-                                ((JArray)scenarioName.Value["Files"]).Select(s => (string)s).ToArray());
+                                ((JArray)scenarioName.Value["Files"])
+                                    .Select(s => (string)s)
+                                    .ToArray()
+                            );
                         }
                     }
 
@@ -69,7 +77,10 @@ public class BaselineTest : LoggedTest
     // This test should generally not be quarantined as it only is checking that the expected files are on disk
     [Theory]
     [MemberData(nameof(TemplateBaselines))]
-    public async Task Template_Produces_The_Right_Set_Of_FilesAsync(string arguments, string[] expectedFiles)
+    public async Task Template_Produces_The_Right_Set_Of_FilesAsync(
+        string arguments,
+        string[] expectedFiles
+    )
     {
         Project = await ProjectFactory.GetOrCreateProject(CreateProjectKey(arguments), Output);
         var createResult = await Project.RunDotNetNewRawAsync(arguments);
@@ -80,22 +91,30 @@ public class BaselineTest : LoggedTest
             AssertFileExists(Project.TemplateOutputDir, file, shouldExist: true);
         }
 
-        var filesInFolder = Directory.EnumerateFiles(Project.TemplateOutputDir, "*", SearchOption.AllDirectories);
+        var filesInFolder = Directory.EnumerateFiles(
+            Project.TemplateOutputDir,
+            "*",
+            SearchOption.AllDirectories
+        );
         foreach (var file in filesInFolder)
         {
-            var relativePath = file.Replace(Project.TemplateOutputDir, "").Replace("\\", "/").Trim('/');
-            if (relativePath.EndsWith(".csproj", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".fsproj", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".props", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".targets", StringComparison.Ordinal) ||
-                relativePath.StartsWith("bin/", StringComparison.Ordinal) ||
-                relativePath.StartsWith("obj/", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".sln", StringComparison.Ordinal) ||
-                relativePath.EndsWith(".targets", StringComparison.Ordinal) ||
-                relativePath.StartsWith("bin/", StringComparison.Ordinal) ||
-                relativePath.StartsWith("obj/", StringComparison.Ordinal) ||
-                relativePath.Contains("/bin/", StringComparison.Ordinal) ||
-                relativePath.Contains("/obj/", StringComparison.Ordinal))
+            var relativePath = file.Replace(Project.TemplateOutputDir, "")
+                .Replace("\\", "/")
+                .Trim('/');
+            if (
+                relativePath.EndsWith(".csproj", StringComparison.Ordinal)
+                || relativePath.EndsWith(".fsproj", StringComparison.Ordinal)
+                || relativePath.EndsWith(".props", StringComparison.Ordinal)
+                || relativePath.EndsWith(".targets", StringComparison.Ordinal)
+                || relativePath.StartsWith("bin/", StringComparison.Ordinal)
+                || relativePath.StartsWith("obj/", StringComparison.Ordinal)
+                || relativePath.EndsWith(".sln", StringComparison.Ordinal)
+                || relativePath.EndsWith(".targets", StringComparison.Ordinal)
+                || relativePath.StartsWith("bin/", StringComparison.Ordinal)
+                || relativePath.StartsWith("obj/", StringComparison.Ordinal)
+                || relativePath.Contains("/bin/", StringComparison.Ordinal)
+                || relativePath.Contains("/obj/", StringComparison.Ordinal)
+            )
             {
                 continue;
             }
@@ -112,7 +131,10 @@ public class BaselineTest : LoggedTest
         // Turn string like "new templatename -minimal -au SingleOrg --another-option OptionValue"
         // into array like [ "new templatename", "minimal", "au SingleOrg", "another-option OptionValue" ]
         var argumentsArray = arguments
-            .Split(new[] { " --", " -" }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            .Split(
+                new[] { " --", " -" },
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+            )
             .ToArray();
 
         // Add template name, value has form of "new name"
@@ -123,7 +145,10 @@ public class BaselineTest : LoggedTest
 
         foreach (var argValue in argumentsArray)
         {
-            var argSegments = argValue.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            var argSegments = argValue.Split(
+                ' ',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+            );
 
             if (argSegments.Length == 0)
             {
@@ -145,7 +170,8 @@ public class BaselineTest : LoggedTest
                     "au" => argSegments[1],
                     "uld" => "uld",
                     "language" => argSegments[1].Replace("#", "Sharp"),
-                    "support-pages-and-views" when argSegments[1] == "true" => "supportpagesandviewstrue",
+                    "support-pages-and-views" when argSegments[1] == "true"
+                      => "supportpagesandviewstrue",
                     _ => ""
                 };
             }
@@ -154,9 +180,10 @@ public class BaselineTest : LoggedTest
         if (!_projectKeys.TryAdd(text, null))
         {
             throw new InvalidOperationException(
-                $"Project key for template with args '{arguments}' already exists. " +
-                $"Check that the metadata specified in {BaselineDefinitionFileResourceName} is correct and that " +
-                $"the {nameof(CreateProjectKey)} method is considering enough template arguments to ensure uniqueness.");
+                $"Project key for template with args '{arguments}' already exists. "
+                    + $"Check that the metadata specified in {BaselineDefinitionFileResourceName} is correct and that "
+                    + $"the {nameof(CreateProjectKey)} method is considering enough template arguments to ensure uniqueness."
+            );
         }
 
         return text;

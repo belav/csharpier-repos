@@ -27,7 +27,9 @@ internal sealed class ConcurrentPipeWriter : PipeWriter
     private readonly object _sync;
     private readonly PipeWriter _innerPipeWriter;
     private readonly MemoryPool<byte> _pool;
-    private readonly BufferSegmentStack _bufferSegmentPool = new BufferSegmentStack(InitialSegmentPoolSize);
+    private readonly BufferSegmentStack _bufferSegmentPool = new BufferSegmentStack(
+        InitialSegmentPoolSize
+    );
 
     private BufferSegment? _head;
     private BufferSegment? _tail;
@@ -134,7 +136,9 @@ internal sealed class ConcurrentPipeWriter : PipeWriter
         }
 
         // Use a TCS instead of something custom so it can be awaited by multiple awaiters.
-        _currentFlushTcs = new TaskCompletionSource<FlushResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _currentFlushTcs = new TaskCompletionSource<FlushResult>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var result = new ValueTask<FlushResult>(_currentFlushTcs.Task);
 
         // FlushAsyncAwaited clears the TCS prior to completing. Make sure to construct the ValueTask
@@ -143,7 +147,10 @@ internal sealed class ConcurrentPipeWriter : PipeWriter
         return result;
     }
 
-    private async Task FlushAsyncAwaited(ValueTask<FlushResult> flushTask, CancellationToken cancellationToken)
+    private async Task FlushAsyncAwaited(
+        ValueTask<FlushResult> flushTask,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -168,7 +175,9 @@ internal sealed class ConcurrentPipeWriter : PipeWriter
                         // Complete anyone currently awaiting a flush with the canceled FlushResult since CancelPendingFlush() was called.
                         _currentFlushTcs.SetResult(flushResult);
                         // Reset _currentFlushTcs, so we don't enter passthrough mode while we're still flushing.
-                        _currentFlushTcs = new TaskCompletionSource<FlushResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+                        _currentFlushTcs = new TaskCompletionSource<FlushResult>(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
                     }
 
                     CopyAndReturnSegmentsUnsynchronized();
@@ -394,7 +403,13 @@ internal sealed class ConcurrentPipeWriter : PipeWriter
     }
 
     // Copied from https://github.com/dotnet/corefx/blob/de3902bb56f1254ec1af4bf7d092fc2c048734cc/src/System.Memory/src/System/ThrowHelper.cs
-    private static void ThrowArgumentOutOfRangeException(string argumentName) { throw CreateArgumentOutOfRangeException(argumentName); }
+    private static void ThrowArgumentOutOfRangeException(string argumentName)
+    {
+        throw CreateArgumentOutOfRangeException(argumentName);
+    }
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static Exception CreateArgumentOutOfRangeException(string argumentName) { return new ArgumentOutOfRangeException(argumentName); }
+    private static Exception CreateArgumentOutOfRangeException(string argumentName)
+    {
+        return new ArgumentOutOfRangeException(argumentName);
+    }
 }

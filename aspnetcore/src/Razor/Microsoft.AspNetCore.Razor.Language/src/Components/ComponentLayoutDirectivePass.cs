@@ -7,9 +7,14 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentLayoutDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+internal class ComponentLayoutDirectivePass
+    : IntermediateNodePassBase,
+      IRazorDirectiveClassifierPass
 {
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         var @namespace = documentNode.FindPrimaryNamespace();
         var @class = documentNode.FindPrimaryClass();
@@ -31,11 +36,14 @@ internal class ComponentLayoutDirectivePass : IntermediateNodePassBase, IRazorDi
         }
 
         var attributeNode = new CSharpCodeIntermediateNode();
-        attributeNode.Children.Add(new IntermediateToken()
-        {
-            Kind = TokenKind.CSharp,
-            Content = $"[{ComponentsApi.LayoutAttribute.FullTypeName}(typeof({token.Content}))]",
-        });
+        attributeNode.Children.Add(
+            new IntermediateToken()
+            {
+                Kind = TokenKind.CSharp,
+                Content =
+                    $"[{ComponentsApi.LayoutAttribute.FullTypeName}(typeof({token.Content}))]",
+            }
+        );
 
         // Insert the new attribute on top of the class
         for (var i = 0; i < @namespace.Children.Count; i++)

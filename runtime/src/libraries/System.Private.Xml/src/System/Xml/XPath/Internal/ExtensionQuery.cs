@@ -79,11 +79,16 @@ namespace MS.Internal.Xml.XPath
 
         protected object? ProcessResult(object? value)
         {
-            if (value is string) return value;
-            if (value is double) return value;
-            if (value is bool) return value;
-            if (value is XPathNavigator) return value;
-            if (value is int) return (double)(int)value;
+            if (value is string)
+                return value;
+            if (value is double)
+                return value;
+            if (value is bool)
+                return value;
+            if (value is XPathNavigator)
+                return value;
+            if (value is int)
+                return (double)(int)value;
 
             if (value == null)
             {
@@ -112,19 +117,35 @@ namespace MS.Internal.Xml.XPath
                 return navigable.CreateNavigator();
             }
 
-            if (value is short) return (double)(short)value;
-            if (value is long) return (double)(long)value;
-            if (value is uint) return (double)(uint)value;
-            if (value is ushort) return (double)(ushort)value;
-            if (value is ulong) return (double)(ulong)value;
-            if (value is float) return (double)(float)value;
-            if (value is decimal) return (double)(decimal)value;
+            if (value is short)
+                return (double)(short)value;
+            if (value is long)
+                return (double)(long)value;
+            if (value is uint)
+                return (double)(uint)value;
+            if (value is ushort)
+                return (double)(ushort)value;
+            if (value is ulong)
+                return (double)(ulong)value;
+            if (value is float)
+                return (double)(float)value;
+            if (value is decimal)
+                return (double)(decimal)value;
             return value.ToString()!;
         }
 
-        protected string QName { get { return prefix.Length != 0 ? $"{prefix}:{name}" : name; } }
+        protected string QName
+        {
+            get { return prefix.Length != 0 ? $"{prefix}:{name}" : name; }
+        }
 
-        public override int Count { get { return _queryIterator == null ? 1 : _queryIterator.Count; } }
-        public override XPathResultType StaticType { get { return XPathResultType.Any; } }
+        public override int Count
+        {
+            get { return _queryIterator == null ? 1 : _queryIterator.Count; }
+        }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Any; }
+        }
     }
 }

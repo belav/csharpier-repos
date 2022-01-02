@@ -9,12 +9,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-internal class ValidateAntiforgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter, IAntiforgeryPolicy
+internal class ValidateAntiforgeryTokenAuthorizationFilter
+    : IAsyncAuthorizationFilter,
+      IAntiforgeryPolicy
 {
     private readonly IAntiforgery _antiforgery;
     private readonly ILogger _logger;
 
-    public ValidateAntiforgeryTokenAuthorizationFilter(IAntiforgery antiforgery, ILoggerFactory loggerFactory)
+    public ValidateAntiforgeryTokenAuthorizationFilter(
+        IAntiforgery antiforgery,
+        ILoggerFactory loggerFactory
+    )
     {
         if (antiforgery == null)
         {

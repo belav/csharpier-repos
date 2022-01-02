@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             CascadeTiming deleteOrphansTiming,
             EventHandler<SavingChangesEventArgs>? savingChanges,
             EventHandler<SavedChangesEventArgs>? savedChanges,
-            EventHandler<SaveChangesFailedEventArgs>? saveChangesFailed)
+            EventHandler<SaveChangesFailedEventArgs>? saveChangesFailed
+        )
         {
             AutoDetectChangesEnabled = autoDetectChangesEnabled;
             QueryTrackingBehavior = queryTrackingBehavior;

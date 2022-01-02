@@ -8,10 +8,13 @@ namespace System.Data.OleDb.Tests
 {
     public static class Helpers
     {
-        public const string IsDriverAvailable = nameof(Helpers) + "." + nameof(GetIsDriverAvailable);
-        public const string IsAceDriverAvailable = nameof(Helpers) + "." + nameof(GetIsAceDriverAvailable);
+        public const string IsDriverAvailable =
+            nameof(Helpers) + "." + nameof(GetIsDriverAvailable);
+        public const string IsAceDriverAvailable =
+            nameof(Helpers) + "." + nameof(GetIsAceDriverAvailable);
         public static bool GetIsDriverAvailable() => Nested.IsAvailable;
-        public static bool GetIsAceDriverAvailable() => GetIsDriverAvailable() && !PlatformDetection.Is32BitProcess;
+        public static bool GetIsAceDriverAvailable() =>
+            GetIsDriverAvailable() && !PlatformDetection.Is32BitProcess;
         public static string ProviderName => Nested.ProviderName;
         public static string GetTableName(string memberName) => memberName + ".csv";
 
@@ -34,8 +37,15 @@ namespace System.Data.OleDb.Tests
                     providerNames.Add((string)row[providersRegistered]);
                 }
                 // skip if x86 or if the expected driver not available
-                IsAvailable = !PlatformDetection.Is32BitProcess && providerNames.Contains(ExpectedProviderName);
-                if (!CultureInfo.CurrentCulture.Name.Equals("en-US", StringComparison.OrdinalIgnoreCase))
+                IsAvailable =
+                    !PlatformDetection.Is32BitProcess
+                    && providerNames.Contains(ExpectedProviderName);
+                if (
+                    !CultureInfo.CurrentCulture.Name.Equals(
+                        "en-US",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     IsAvailable = false; // ActiveIssue: https://github.com/dotnet/runtime/issues/29969
                 }

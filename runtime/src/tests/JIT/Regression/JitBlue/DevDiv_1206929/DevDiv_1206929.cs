@@ -9,10 +9,10 @@ namespace ReadMemBytes
         static int Fail = -1;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static unsafe int TestMemBytesNotReadPastTheLimit(byte *p, int byteLength)
+        static unsafe int TestMemBytesNotReadPastTheLimit(byte* p, int byteLength)
         {
             int count = 0;
-            for (int i= 0; i< byteLength; ++i)
+            for (int i = 0; i < byteLength; ++i)
             {
                 // RyuJIT lowering has an optimization to recognize the condition in
                 // "If" stmnt and generate "test byte ptr [p+i], 0" instruction. Due
@@ -44,7 +44,6 @@ namespace ReadMemBytes
             }
 
             return Pass;
-
         }
     }
 }

@@ -13,22 +13,28 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices
 {
-    [ExportLanguageService(typeof(IEmbeddedLanguagesProvider), LanguageNames.CSharp, ServiceLayer.Default), Shared]
+    [
+        ExportLanguageService(
+            typeof(IEmbeddedLanguagesProvider),
+            LanguageNames.CSharp,
+            ServiceLayer.Default
+        ),
+        Shared
+    ]
     internal class CSharpEmbeddedLanguagesProvider : AbstractEmbeddedLanguagesProvider
     {
-        public static EmbeddedLanguageInfo Info = new(
-            (int)SyntaxKind.CharacterLiteralToken,
-            (int)SyntaxKind.StringLiteralToken,
-            (int)SyntaxKind.InterpolatedStringTextToken,
-            CSharpSyntaxFacts.Instance,
-            CSharpSemanticFactsService.Instance,
-            CSharpVirtualCharService.Instance);
+        public static EmbeddedLanguageInfo Info =
+            new(
+                (int)SyntaxKind.CharacterLiteralToken,
+                (int)SyntaxKind.StringLiteralToken,
+                (int)SyntaxKind.InterpolatedStringTextToken,
+                CSharpSyntaxFacts.Instance,
+                CSharpSemanticFactsService.Instance,
+                CSharpVirtualCharService.Instance
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEmbeddedLanguagesProvider()
-            : base(Info)
-        {
-        }
+        public CSharpEmbeddedLanguagesProvider() : base(Info) { }
     }
 }

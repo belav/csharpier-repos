@@ -12,7 +12,10 @@ internal class DefaultDocumentClassifierPass : DocumentClassifierPassBase
 
     protected override string DocumentKind => "default";
 
-    protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override bool IsMatch(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         return true;
     }
@@ -21,7 +24,8 @@ internal class DefaultDocumentClassifierPass : DocumentClassifierPassBase
         RazorCodeDocument codeDocument,
         NamespaceDeclarationIntermediateNode @namespace,
         ClassDeclarationIntermediateNode @class,
-        MethodDeclarationIntermediateNode method)
+        MethodDeclarationIntermediateNode method
+    )
     {
         var configuration = Engine.GetFeature<DefaultDocumentClassifierPassFeature>();
         if (configuration != null)

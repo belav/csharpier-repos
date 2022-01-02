@@ -27,4 +27,3 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         Block
     }
 }
-

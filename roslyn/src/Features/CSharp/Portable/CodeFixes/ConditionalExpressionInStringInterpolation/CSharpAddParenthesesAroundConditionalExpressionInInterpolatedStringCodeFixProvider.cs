@@ -18,25 +18,38 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringInterpolation
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddParenthesesAroundConditionalExpressionInInterpolatedString), Shared]
-    internal class CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider : CodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AddParenthesesAroundConditionalExpressionInInterpolatedString
+        ),
+        Shared
+    ]
+    internal class CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider
+        : CodeFixProvider
     {
         private const string CS8361 = nameof(CS8361); //A conditional expression cannot be used directly in a string interpolation because the ':' ends the interpolation.Parenthesize the conditional expression.
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider()
-        {
-        }
+        { }
 
         // CS8361 is a syntax error and it is unlikely that there is more than one CS8361 at a time.
         public override FixAllProvider? GetFixAllProvider() => null;
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS8361);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS8361);
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context.Document
+                .GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var token = root.FindToken(diagnosticSpan.Start);
@@ -44,12 +57,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             if (conditionalExpression != null)
             {
                 var documentChangeAction = new MyCodeAction(
-                    c => GetChangedDocumentAsync(context.Document, conditionalExpression.SpanStart, c));
+                    c =>
+                        GetChangedDocumentAsync(
+                            context.Document,
+                            conditionalExpression.SpanStart,
+                            c
+                        )
+                );
                 context.RegisterCodeFix(documentChangeAction, diagnostic);
             }
         }
 
-        private static async Task<Document> GetChangedDocumentAsync(Document document, int conditionalExpressionSyntaxStartPosition, CancellationToken cancellationToken)
+        private static async Task<Document> GetChangedDocumentAsync(
+            Document document,
+            int conditionalExpressionSyntaxStartPosition,
+            CancellationToken cancellationToken
+        )
         {
             // The usual SyntaxTree transformations are complicated if string literals are present in the false part as in
             // $"{ condition ? "Success": "Failure" }"
@@ -65,27 +88,41 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
             var textWithOpenParenthesis = text.Replace(openParenthesisPosition, 0, "(");
             var documentWithOpenParenthesis = document.WithText(textWithOpenParenthesis);
 
-            var syntaxRoot = await documentWithOpenParenthesis.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var nodeAtInsertPosition = syntaxRoot.FindNode(new TextSpan(openParenthesisPosition, 0));
+            var syntaxRoot = await documentWithOpenParenthesis
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var nodeAtInsertPosition = syntaxRoot.FindNode(
+                new TextSpan(openParenthesisPosition, 0)
+            );
 
-            if (nodeAtInsertPosition is not ParenthesizedExpressionSyntax parenthesizedExpression ||
-                !parenthesizedExpression.CloseParenToken.IsMissing)
+            if (
+                nodeAtInsertPosition is not ParenthesizedExpressionSyntax parenthesizedExpression
+                || !parenthesizedExpression.CloseParenToken.IsMissing
+            )
             {
                 return documentWithOpenParenthesis;
             }
 
             return await InsertCloseParenthesisAsync(
-                documentWithOpenParenthesis, parenthesizedExpression, cancellationToken).ConfigureAwait(false);
+                    documentWithOpenParenthesis,
+                    parenthesizedExpression,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private static async Task<Document> InsertCloseParenthesisAsync(
             Document document,
             ParenthesizedExpressionSyntax parenthesizedExpression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            if (parenthesizedExpression.Expression is ConditionalExpressionSyntax conditional &&
-                parenthesizedExpression.GetAncestor<InterpolatedStringExpressionSyntax>()?.StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken)
+            if (
+                parenthesizedExpression.Expression is ConditionalExpressionSyntax conditional
+                && parenthesizedExpression.GetAncestor<InterpolatedStringExpressionSyntax>()?.StringStartToken.Kind()
+                    == SyntaxKind.InterpolatedStringStartToken
+            )
             {
                 // If they have something like:
                 //
@@ -107,7 +144,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
                 // var s3 = $""Text1 { (true ? ""Text2"":)
                 // NextLineOfCode();
 
-                var endToken = sourceText.AreOnSameLine(conditional.ColonToken, conditional.WhenFalse.GetFirstToken())
+                var endToken = sourceText.AreOnSameLine(
+                    conditional.ColonToken,
+                    conditional.WhenFalse.GetFirstToken()
+                )
                     ? conditional.WhenFalse.GetLastToken()
                     : conditional.ColonToken;
 
@@ -116,21 +156,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
                 return document.WithText(textWithCloseParenthesis);
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var newCloseParen = SyntaxFactory.Token(SyntaxKind.CloseParenToken).WithTriviaFrom(parenthesizedExpression.CloseParenToken);
-            var parenthesizedExpressionWithClosingParen = parenthesizedExpression.WithCloseParenToken(newCloseParen);
-            var newRoot = root.ReplaceNode(parenthesizedExpression, parenthesizedExpressionWithClosingParen);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var newCloseParen = SyntaxFactory
+                .Token(SyntaxKind.CloseParenToken)
+                .WithTriviaFrom(parenthesizedExpression.CloseParenToken);
+            var parenthesizedExpressionWithClosingParen =
+                parenthesizedExpression.WithCloseParenToken(newCloseParen);
+            var newRoot = root.ReplaceNode(
+                parenthesizedExpression,
+                parenthesizedExpressionWithClosingParen
+            );
             return document.WithSyntaxRoot(newRoot);
         }
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string,
-                       createChangedDocument,
-                       CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string)
-            {
-            }
+                : base(
+                    CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Add_parentheses_around_conditional_expression_in_interpolated_string
+                ) { }
         }
     }
 }

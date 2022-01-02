@@ -23,11 +23,11 @@ namespace AutoMapper.UnitTests.MappingInheritance
             public TestProfile()
             {
                 CreateMap<BaseSource, BaseDest>();
-                CreateMap<Source, Dest>()
-                    .IncludeBase<BaseSource, BaseDest>();
+                CreateMap<Source, Dest>().IncludeBase<BaseSource, BaseDest>();
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>());
     }
 }

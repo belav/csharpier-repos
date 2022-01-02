@@ -55,16 +55,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets all skip navigations using this foreign key.
         /// </summary>
         /// <returns>The skip navigations using this foreign key.</returns>
-        new IEnumerable<ISkipNavigation> GetReferencingSkipNavigations()
-            => ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<ISkipNavigation>();
+        new IEnumerable<ISkipNavigation> GetReferencingSkipNavigations() =>
+            ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<ISkipNavigation>();
 
         /// <summary>
         ///     Gets the entity type related to the given one.
         /// </summary>
         /// <param name="entityType">One of the entity types related by the foreign key.</param>
         /// <returns>The entity type related to the given one.</returns>
-        new IEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
-            => (IEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
+        new IEntityType GetRelatedEntityType(IReadOnlyEntityType entityType) =>
+            (IEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
 
         /// <summary>
         ///     Returns a navigation associated with this foreign key.
@@ -75,8 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     A navigation associated with this foreign key or <see langword="null" />.
         /// </returns>
-        new INavigation? GetNavigation(bool pointsToPrincipal)
-            => pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
+        new INavigation? GetNavigation(bool pointsToPrincipal) =>
+            pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
 
         /// <summary>
         ///     <para>

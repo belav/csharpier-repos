@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.Host
         /// 
         /// the result might not be an exact copy of the given source or contains more then given span
         /// </summary>
-        Task<ExcerptResult?> TryExcerptAsync(Document document, TextSpan span, ExcerptMode mode, CancellationToken cancellationToken);
+        Task<ExcerptResult?> TryExcerptAsync(
+            Document document,
+            TextSpan span,
+            ExcerptMode mode,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <summary>
@@ -68,7 +73,13 @@ namespace Microsoft.CodeAnalysis.Host
         /// </summary>
         public readonly TextSpan Span;
 
-        public ExcerptResult(SourceText content, TextSpan mappedSpan, ImmutableArray<ClassifiedSpan> classifiedSpans, Document document, TextSpan span)
+        public ExcerptResult(
+            SourceText content,
+            TextSpan mappedSpan,
+            ImmutableArray<ClassifiedSpan> classifiedSpans,
+            Document document,
+            TextSpan span
+        )
         {
             Content = content;
             MappedSpan = mappedSpan;

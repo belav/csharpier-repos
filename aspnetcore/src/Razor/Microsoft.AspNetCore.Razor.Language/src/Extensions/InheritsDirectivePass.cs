@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public sealed class InheritsDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         var @class = documentNode.FindPrimaryClass();
         if (@class == null)

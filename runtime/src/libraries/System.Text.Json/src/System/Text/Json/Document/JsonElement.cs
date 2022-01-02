@@ -30,10 +30,7 @@ namespace System.Text.Json
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private JsonTokenType TokenType
         {
-            get
-            {
-                return _parent?.GetJsonTokenType(_idx) ?? JsonTokenType.None;
-            }
+            get { return _parent?.GetJsonTokenType(_idx) ?? JsonTokenType.None; }
         }
         /// <summary>
         ///   The <see cref="JsonValueKind"/> that the value is.
@@ -330,10 +327,11 @@ namespace System.Text.Json
 
             JsonTokenType type = TokenType;
 
-            return
-                type == JsonTokenType.True ? true :
-                type == JsonTokenType.False ? false :
-                throw ThrowHelper.GetJsonElementWrongTypeException(nameof(Boolean), type);
+            return type == JsonTokenType.True
+              ? true
+              : type == JsonTokenType.False
+                  ? false
+                  : throw ThrowHelper.GetJsonElementWrongTypeException(nameof(Boolean), type);
         }
 
         /// <summary>
@@ -1267,7 +1265,11 @@ namespace System.Text.Json
             return TextEqualsHelper(text, isPropertyName: false);
         }
 
-        internal bool TextEqualsHelper(ReadOnlySpan<byte> utf8Text, bool isPropertyName, bool shouldUnescape)
+        internal bool TextEqualsHelper(
+            ReadOnlySpan<byte> utf8Text,
+            bool isPropertyName,
+            bool shouldUnescape
+        )
         {
             CheckValidInstance();
 
@@ -1326,7 +1328,10 @@ namespace System.Text.Json
 
             if (tokenType != JsonTokenType.StartArray)
             {
-                throw ThrowHelper.GetJsonElementWrongTypeException(JsonTokenType.StartArray, tokenType);
+                throw ThrowHelper.GetJsonElementWrongTypeException(
+                    JsonTokenType.StartArray,
+                    tokenType
+                );
             }
 
             return new ArrayEnumerator(this);
@@ -1352,7 +1357,10 @@ namespace System.Text.Json
 
             if (tokenType != JsonTokenType.StartObject)
             {
-                throw ThrowHelper.GetJsonElementWrongTypeException(JsonTokenType.StartObject, tokenType);
+                throw ThrowHelper.GetJsonElementWrongTypeException(
+                    JsonTokenType.StartObject,
+                    tokenType
+                );
             }
 
             return new ObjectEnumerator(this);
@@ -1406,11 +1414,11 @@ namespace System.Text.Json
                 case JsonTokenType.Number:
                 case JsonTokenType.StartArray:
                 case JsonTokenType.StartObject:
-                    {
-                        // null parent should have hit the None case
-                        Debug.Assert(_parent != null);
-                        return _parent.GetRawValueAsString(_idx);
-                    }
+                {
+                    // null parent should have hit the None case
+                    Debug.Assert(_parent != null);
+                    return _parent.GetRawValueAsString(_idx);
+                }
                 case JsonTokenType.String:
                     return GetString()!;
                 case JsonTokenType.Comment:

@@ -85,7 +85,10 @@ namespace System.Reflection.Emit
 
         #region Constructor
 
-        internal ModuleBuilder(AssemblyBuilder assemblyBuilder, InternalModuleBuilder internalModuleBuilder)
+        internal ModuleBuilder(
+            AssemblyBuilder assemblyBuilder,
+            InternalModuleBuilder internalModuleBuilder
+        )
         {
             _internalModuleBuilder = internalModuleBuilder;
             _assemblyBuilder = assemblyBuilder;
@@ -98,8 +101,10 @@ namespace System.Reflection.Emit
 
         internal void CheckTypeNameConflict(string strTypeName, Type? enclosingType)
         {
-            if (_typeBuilderDict.TryGetValue(strTypeName, out Type? foundType) &&
-                ReferenceEquals(foundType.DeclaringType, enclosingType))
+            if (
+                _typeBuilderDict.TryGetValue(strTypeName, out Type? foundType)
+                && ReferenceEquals(foundType.DeclaringType, enclosingType)
+            )
             {
                 // Cannot have two types with the same name
                 throw new ArgumentException(SR.Argument_DuplicateTypeName);
@@ -118,38 +123,87 @@ namespace System.Reflection.Emit
             return SymbolType.FormCompoundType(strFormat, baseType, 0);
         }
 
-        [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetTypeRef", CharSet = CharSet.Unicode)]
-        private static extern int GetTypeRef(QCallModule module, string strFullName, QCallModule refedModule, string? strRefedModuleFileName, int tkResolution);
+        [DllImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ModuleBuilder_GetTypeRef",
+            CharSet = CharSet.Unicode
+        )]
+        private static extern int GetTypeRef(
+            QCallModule module,
+            string strFullName,
+            QCallModule refedModule,
+            string? strRefedModuleFileName,
+            int tkResolution
+        );
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetMemberRef")]
-        private static extern int GetMemberRef(QCallModule module, QCallModule refedModule, int tr, int defToken);
+        private static extern int GetMemberRef(
+            QCallModule module,
+            QCallModule refedModule,
+            int tr,
+            int defToken
+        );
 
         private int GetMemberRef(Module? refedModule, int tr, int defToken)
         {
             ModuleBuilder thisModule = this;
             RuntimeModule refedRuntimeModule = GetRuntimeModuleFromModule(refedModule);
 
-            return GetMemberRef(new QCallModule(ref thisModule), new QCallModule(ref refedRuntimeModule), tr, defToken);
+            return GetMemberRef(
+                new QCallModule(ref thisModule),
+                new QCallModule(ref refedRuntimeModule),
+                tr,
+                defToken
+            );
         }
 
-        [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetMemberRefFromSignature", CharSet = CharSet.Unicode)]
-        private static extern int GetMemberRefFromSignature(QCallModule module, int tr, string methodName, byte[] signature, int length);
+        [DllImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ModuleBuilder_GetMemberRefFromSignature",
+            CharSet = CharSet.Unicode
+        )]
+        private static extern int GetMemberRefFromSignature(
+            QCallModule module,
+            int tr,
+            string methodName,
+            byte[] signature,
+            int length
+        );
 
-        private int GetMemberRefFromSignature(int tr, string methodName, byte[] signature, int length)
+        private int GetMemberRefFromSignature(
+            int tr,
+            string methodName,
+            byte[] signature,
+            int length
+        )
         {
             ModuleBuilder thisModule = this;
-            return GetMemberRefFromSignature(new QCallModule(ref thisModule), tr, methodName, signature, length);
+            return GetMemberRefFromSignature(
+                new QCallModule(ref thisModule),
+                tr,
+                methodName,
+                signature,
+                length
+            );
         }
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetMemberRefOfMethodInfo")]
-        private static extern int GetMemberRefOfMethodInfo(QCallModule module, int tr, RuntimeMethodHandleInternal method);
+        private static extern int GetMemberRefOfMethodInfo(
+            QCallModule module,
+            int tr,
+            RuntimeMethodHandleInternal method
+        );
 
         private int GetMemberRefOfMethodInfo(int tr, RuntimeMethodInfo method)
         {
             Debug.Assert(method != null);
 
             ModuleBuilder thisModule = this;
-            int result = GetMemberRefOfMethodInfo(new QCallModule(ref thisModule), tr, ((IRuntimeMethodInfo)method).Value);
+            int result = GetMemberRefOfMethodInfo(
+                new QCallModule(ref thisModule),
+                tr,
+                ((IRuntimeMethodInfo)method).Value
+            );
             GC.KeepAlive(method);
             return result;
         }
@@ -159,24 +213,46 @@ namespace System.Reflection.Emit
             Debug.Assert(method != null);
 
             ModuleBuilder thisModule = this;
-            int result = GetMemberRefOfMethodInfo(new QCallModule(ref thisModule), tr, ((IRuntimeMethodInfo)method).Value);
+            int result = GetMemberRefOfMethodInfo(
+                new QCallModule(ref thisModule),
+                tr,
+                ((IRuntimeMethodInfo)method).Value
+            );
             GC.KeepAlive(method);
             return result;
         }
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetMemberRefOfFieldInfo")]
-        private static extern int GetMemberRefOfFieldInfo(QCallModule module, int tkType, QCallTypeHandle declaringType, int tkField);
+        private static extern int GetMemberRefOfFieldInfo(
+            QCallModule module,
+            int tkType,
+            QCallTypeHandle declaringType,
+            int tkField
+        );
 
-        private int GetMemberRefOfFieldInfo(int tkType, RuntimeTypeHandle declaringType, RuntimeFieldInfo runtimeField)
+        private int GetMemberRefOfFieldInfo(
+            int tkType,
+            RuntimeTypeHandle declaringType,
+            RuntimeFieldInfo runtimeField
+        )
         {
             Debug.Assert(runtimeField != null);
 
             ModuleBuilder thisModule = this;
-            return GetMemberRefOfFieldInfo(new QCallModule(ref thisModule), tkType, new QCallTypeHandle(ref declaringType), runtimeField.MetadataToken);
+            return GetMemberRefOfFieldInfo(
+                new QCallModule(ref thisModule),
+                tkType,
+                new QCallTypeHandle(ref declaringType),
+                runtimeField.MetadataToken
+            );
         }
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetTokenFromTypeSpec")]
-        private static extern int GetTokenFromTypeSpec(QCallModule pModule, byte[] signature, int length);
+        private static extern int GetTokenFromTypeSpec(
+            QCallModule pModule,
+            byte[] signature,
+            int length
+        );
 
         private int GetTokenFromTypeSpec(byte[] signature, int length)
         {
@@ -184,14 +260,33 @@ namespace System.Reflection.Emit
             return GetTokenFromTypeSpec(new QCallModule(ref thisModule), signature, length);
         }
 
-        [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetArrayMethodToken", CharSet = CharSet.Unicode)]
-        private static extern int GetArrayMethodToken(QCallModule module, int tkTypeSpec, string methodName, byte[] signature, int sigLength);
+        [DllImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ModuleBuilder_GetArrayMethodToken",
+            CharSet = CharSet.Unicode
+        )]
+        private static extern int GetArrayMethodToken(
+            QCallModule module,
+            int tkTypeSpec,
+            string methodName,
+            byte[] signature,
+            int sigLength
+        );
 
-        [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetStringConstant", CharSet = CharSet.Unicode)]
+        [DllImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ModuleBuilder_GetStringConstant",
+            CharSet = CharSet.Unicode
+        )]
         private static extern int GetStringConstant(QCallModule module, string str, int length);
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_SetFieldRVAContent")]
-        internal static extern void SetFieldRVAContent(QCallModule module, int fdToken, byte[]? data, int length);
+        internal static extern void SetFieldRVAContent(
+            QCallModule module,
+            int fdToken,
+            byte[]? data,
+            int length
+        );
 
         #endregion
 
@@ -234,11 +329,20 @@ namespace System.Reflection.Emit
             }
 
             Debug.Assert(!type.IsByRef, "Must not be ByRef.");
-            Debug.Assert(!type.IsGenericType || type.IsGenericTypeDefinition, "Must not have generic arguments.");
+            Debug.Assert(
+                !type.IsGenericType || type.IsGenericTypeDefinition,
+                "Must not have generic arguments."
+            );
 
             ModuleBuilder thisModule = this;
             RuntimeModule refedRuntimeModule = GetRuntimeModuleFromModule(refedModule);
-            return GetTypeRef(new QCallModule(ref thisModule), typeName, new QCallModule(ref refedRuntimeModule), strRefedModuleFileName, tkResolution);
+            return GetTypeRef(
+                new QCallModule(ref thisModule),
+                typeName,
+                new QCallModule(ref refedRuntimeModule),
+                strRefedModuleFileName,
+                tkResolution
+            );
         }
 
         internal int InternalGetConstructorToken(ConstructorInfo con, bool usingRef)
@@ -263,10 +367,15 @@ namespace System.Reflection.Emit
             }
             else if (con is ConstructorOnTypeBuilderInstantiation conOnTypeBuilderInst)
             {
-                if (usingRef) throw new InvalidOperationException();
+                if (usingRef)
+                    throw new InvalidOperationException();
 
                 tr = GetTypeTokenInternal(con.DeclaringType!);
-                mr = GetMemberRef(con.DeclaringType!.Module, tr, conOnTypeBuilderInst.MetadataToken);
+                mr = GetMemberRef(
+                    con.DeclaringType!.Module,
+                    tr,
+                    conOnTypeBuilderInst.MetadataToken
+                );
             }
             else if (con is RuntimeConstructorInfo rtCon && !con.ReflectedType!.IsArray)
             {
@@ -303,7 +412,16 @@ namespace System.Reflection.Emit
 
                 tr = GetTypeTokenInternal(con.ReflectedType!);
 
-                SignatureHelper sigHelp = SignatureHelper.GetMethodSigHelper(this, con.CallingConvention, null, null, null, parameterTypes, requiredCustomModifiers, optionalCustomModifiers);
+                SignatureHelper sigHelp = SignatureHelper.GetMethodSigHelper(
+                    this,
+                    con.CallingConvention,
+                    null,
+                    null,
+                    null,
+                    parameterTypes,
+                    requiredCustomModifiers,
+                    optionalCustomModifiers
+                );
                 byte[] sigBytes = sigHelp.InternalGetSignature(out int length);
                 mr = GetMemberRefFromSignature(tr, con.Name, sigBytes, length);
             }
@@ -360,7 +478,9 @@ namespace System.Reflection.Emit
                 if ((method.CallingConvention & CallingConventions.VarArgs) == 0)
                 {
                     // Client should not supply optional parameter in default calling convention
-                    throw new InvalidOperationException(SR.InvalidOperation_NotAVarArgCallingConvention);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_NotAVarArgCallingConvention
+                    );
                 }
             }
 
@@ -387,7 +507,9 @@ namespace System.Reflection.Emit
 
             if (method.DeclaringType!.IsGenericType)
             {
-                byte[] sig = SignatureHelper.GetTypeSigToken(this, method.DeclaringType).InternalGetSignature(out int length);
+                byte[] sig = SignatureHelper
+                    .GetTypeSigToken(this, method.DeclaringType)
+                    .InternalGetSignature(out int length);
                 tkParent = GetTokenFromTypeSpec(sig, length);
             }
             else if (!method.Module.Equals(this))
@@ -407,11 +529,27 @@ namespace System.Reflection.Emit
             return GetMemberRefFromSignature(tkParent, method.Name, sigBytes, sigLength);
         }
 
-        internal SignatureHelper GetMemberRefSignature(CallingConventions call, Type? returnType,
-            Type[]? parameterTypes, Type[][]? requiredCustomModifiers, Type[][]? optionalCustomModifiers,
-            Type[]? optionalParameterTypes, int cGenericParameters)
+        internal SignatureHelper GetMemberRefSignature(
+            CallingConventions call,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type[][]? requiredCustomModifiers,
+            Type[][]? optionalCustomModifiers,
+            Type[]? optionalParameterTypes,
+            int cGenericParameters
+        )
         {
-            SignatureHelper sig = SignatureHelper.GetMethodSigHelper(this, call, cGenericParameters, returnType, null, null, parameterTypes, requiredCustomModifiers, optionalCustomModifiers);
+            SignatureHelper sig = SignatureHelper.GetMethodSigHelper(
+                this,
+                call,
+                cGenericParameters,
+                returnType,
+                null,
+                null,
+                parameterTypes,
+                requiredCustomModifiers,
+                optionalCustomModifiers
+            );
 
             if (optionalParameterTypes != null && optionalParameterTypes.Length != 0)
             {
@@ -422,11 +560,14 @@ namespace System.Reflection.Emit
             return sig;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Module.ResolveMethod is marked as RequiresUnreferencedCode because it relies on tokens " +
-                            "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break. " +
-                            "The usage here is not like that as all these tokens come from existing metadata loaded from some IL " +
-                            "and so trimming has no effect (the tokens are read AFTER trimming occured).")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Module.ResolveMethod is marked as RequiresUnreferencedCode because it relies on tokens "
+                + "which are not guaranteed to be stable across trimming. So if somebody hardcodes a token it could break. "
+                + "The usage here is not like that as all these tokens come from existing metadata loaded from some IL "
+                + "and so trimming has no effect (the tokens are read AFTER trimming occured)."
+        )]
         private static MethodBase GetGenericMethodBaseDefinition(MethodBase methodBase)
         {
             // methodInfo = G<Foo>.M<Bar> ==> methDef = G<T>.M<S>
@@ -448,7 +589,9 @@ namespace System.Reflection.Emit
             }
             else
             {
-                Debug.Assert(methodBase is RuntimeMethodInfo || methodBase is RuntimeConstructorInfo);
+                Debug.Assert(
+                    methodBase is RuntimeMethodInfo || methodBase is RuntimeConstructorInfo
+                );
 
                 if (methodBase.IsGenericMethod)
                 {
@@ -458,14 +601,16 @@ namespace System.Reflection.Emit
                     methDef = methDef.Module.ResolveMethod(
                         methodBase.MetadataToken,
                         methDef.DeclaringType?.GetGenericArguments(),
-                        methDef.GetGenericArguments())!;
+                        methDef.GetGenericArguments()
+                    )!;
                 }
                 else
                 {
                     methDef = methodBase.Module.ResolveMethod(
                         methodBase.MetadataToken,
                         methodBase.DeclaringType?.GetGenericArguments(),
-                        null)!;
+                        null
+                    )!;
                 }
             }
 
@@ -480,12 +625,14 @@ namespace System.Reflection.Emit
                     return methodBuilder.GetMethodSignature();
                 case ConstructorBuilder constructorBuilder:
                     return constructorBuilder.GetMethodSignature();
-                case MethodOnTypeBuilderInstantiation motbi when motbi.m_method is MethodBuilder methodBuilder:
+                case MethodOnTypeBuilderInstantiation motbi
+                      when motbi.m_method is MethodBuilder methodBuilder:
                     return methodBuilder.GetMethodSignature();
                 case MethodOnTypeBuilderInstantiation motbi:
                     method = motbi.m_method;
                     break;
-                case ConstructorOnTypeBuilderInstantiation cotbi when cotbi.m_ctor is ConstructorBuilder constructorBuilder:
+                case ConstructorOnTypeBuilderInstantiation cotbi
+                      when cotbi.m_ctor is ConstructorBuilder constructorBuilder:
                     return constructorBuilder.GetMethodSignature();
                 case ConstructorOnTypeBuilderInstantiation cotbi:
                     method = cotbi.m_ctor;
@@ -507,7 +654,17 @@ namespace System.Reflection.Emit
             }
 
             ParameterInfo? returnParameter = method is MethodInfo mi ? mi.ReturnParameter : null;
-            SignatureHelper sigHelp = SignatureHelper.GetMethodSigHelper(this, method.CallingConvention, cGenericParameters, returnParameter?.ParameterType, returnParameter?.GetRequiredCustomModifiers(), returnParameter?.GetOptionalCustomModifiers(), parameterTypes, requiredCustomModifiers, optionalCustomModifiers);
+            SignatureHelper sigHelp = SignatureHelper.GetMethodSigHelper(
+                this,
+                method.CallingConvention,
+                cGenericParameters,
+                returnParameter?.ParameterType,
+                returnParameter?.GetRequiredCustomModifiers(),
+                returnParameter?.GetOptionalCustomModifiers(),
+                parameterTypes,
+                requiredCustomModifiers,
+                optionalCustomModifiers
+            );
             return sigHelp;
         }
 
@@ -661,7 +818,11 @@ namespace System.Reflection.Emit
                 parameters = null;
             }
 
-            baseName = baseName.Replace(@"\\", @"\").Replace(@"\[", "[").Replace(@"\*", "*").Replace(@"\&", "&");
+            baseName = baseName
+                .Replace(@"\\", @"\")
+                .Replace(@"\[", "[")
+                .Replace(@"\*", "*")
+                .Replace(@"\&", "&");
 
             if (parameters != null)
             {
@@ -678,7 +839,8 @@ namespace System.Reflection.Emit
                 if (baseType == null && Assembly is AssemblyBuilder)
                 {
                     // now goto Assembly level to find the type.
-                    List<ModuleBuilder> modList = ContainingAssemblyBuilder._assemblyData._moduleBuilderList;
+                    List<ModuleBuilder> modList =
+                        ContainingAssemblyBuilder._assemblyData._moduleBuilderList;
                     int size = modList.Count;
                     for (int i = 0; i < size && baseType == null; i++)
                     {
@@ -710,27 +872,59 @@ namespace System.Reflection.Emit
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override MethodBase? ResolveMethod(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override MethodBase? ResolveMethod(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return InternalModule.ResolveMethod(metadataToken, genericTypeArguments, genericMethodArguments);
+            return InternalModule.ResolveMethod(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override FieldInfo? ResolveField(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override FieldInfo? ResolveField(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return InternalModule.ResolveField(metadataToken, genericTypeArguments, genericMethodArguments);
+            return InternalModule.ResolveField(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override Type ResolveType(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override Type ResolveType(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return InternalModule.ResolveType(metadataToken, genericTypeArguments, genericMethodArguments);
+            return InternalModule.ResolveType(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public override MemberInfo? ResolveMember(int metadataToken, Type[]? genericTypeArguments, Type[]? genericMethodArguments)
+        public override MemberInfo? ResolveMember(
+            int metadataToken,
+            Type[]? genericTypeArguments,
+            Type[]? genericMethodArguments
+        )
         {
-            return InternalModule.ResolveMember(metadataToken, genericTypeArguments, genericMethodArguments);
+            return InternalModule.ResolveMember(
+                metadataToken,
+                genericTypeArguments,
+                genericMethodArguments
+            );
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
@@ -739,7 +933,10 @@ namespace System.Reflection.Emit
             return InternalModule.ResolveString(metadataToken);
         }
 
-        public override void GetPEKind(out PortableExecutableKinds peKind, out ImageFileMachine machine)
+        public override void GetPEKind(
+            out PortableExecutableKinds peKind,
+            out ImageFileMachine machine
+        )
         {
             InternalModule.GetPEKind(out peKind, out machine);
         }
@@ -771,11 +968,24 @@ namespace System.Reflection.Emit
         }
 
         [RequiresUnreferencedCode("Methods might be removed")]
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder,
-            CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             // Cannot call InternalModule.GetMethods because it doesn't allow types to be null
-            return InternalModule.GetMethodInternal(name, bindingAttr, binder, callConvention, types, modifiers);
+            return InternalModule.GetMethodInternal(
+                name,
+                bindingAttr,
+                binder,
+                callConvention,
+                types,
+                modifiers
+            );
         }
 
         public override string ScopeName => InternalModule.ScopeName;
@@ -795,7 +1005,14 @@ namespace System.Reflection.Emit
         {
             lock (SyncRoot)
             {
-                return DefineTypeNoLock(name, TypeAttributes.NotPublic, null, null, PackingSize.Unspecified, TypeBuilder.UnspecifiedTypeSize);
+                return DefineTypeNoLock(
+                    name,
+                    TypeAttributes.NotPublic,
+                    null,
+                    null,
+                    PackingSize.Unspecified,
+                    TypeBuilder.UnspecifiedTypeSize
+                );
             }
         }
 
@@ -803,29 +1020,65 @@ namespace System.Reflection.Emit
         {
             lock (SyncRoot)
             {
-                return DefineTypeNoLock(name, attr, null, null, PackingSize.Unspecified, TypeBuilder.UnspecifiedTypeSize);
+                return DefineTypeNoLock(
+                    name,
+                    attr,
+                    null,
+                    null,
+                    PackingSize.Unspecified,
+                    TypeBuilder.UnspecifiedTypeSize
+                );
             }
         }
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent)
+        public TypeBuilder DefineType(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent
+        )
         {
             lock (SyncRoot)
             {
                 AssemblyBuilder.CheckContext(parent);
 
-                return DefineTypeNoLock(name, attr, parent, null, PackingSize.Unspecified, TypeBuilder.UnspecifiedTypeSize);
+                return DefineTypeNoLock(
+                    name,
+                    attr,
+                    parent,
+                    null,
+                    PackingSize.Unspecified,
+                    TypeBuilder.UnspecifiedTypeSize
+                );
             }
         }
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, int typesize)
+        public TypeBuilder DefineType(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            int typesize
+        )
         {
             lock (SyncRoot)
             {
-                return DefineTypeNoLock(name, attr, parent, null, PackingSize.Unspecified, typesize);
+                return DefineTypeNoLock(
+                    name,
+                    attr,
+                    parent,
+                    null,
+                    PackingSize.Unspecified,
+                    typesize
+                );
             }
         }
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, PackingSize packingSize, int typesize)
+        public TypeBuilder DefineType(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            PackingSize packingSize,
+            int typesize
+        )
         {
             lock (SyncRoot)
             {
@@ -833,20 +1086,53 @@ namespace System.Reflection.Emit
             }
         }
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, Type[]? interfaces)
+        public TypeBuilder DefineType(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            Type[]? interfaces
+        )
         {
             lock (SyncRoot)
             {
-                return DefineTypeNoLock(name, attr, parent, interfaces, PackingSize.Unspecified, TypeBuilder.UnspecifiedTypeSize);
+                return DefineTypeNoLock(
+                    name,
+                    attr,
+                    parent,
+                    interfaces,
+                    PackingSize.Unspecified,
+                    TypeBuilder.UnspecifiedTypeSize
+                );
             }
         }
 
-        private TypeBuilder DefineTypeNoLock(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, Type[]? interfaces, PackingSize packingSize, int typesize)
+        private TypeBuilder DefineTypeNoLock(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            Type[]? interfaces,
+            PackingSize packingSize,
+            int typesize
+        )
         {
-            return new TypeBuilder(name, attr, parent, interfaces, this, packingSize, typesize, null);
+            return new TypeBuilder(
+                name,
+                attr,
+                parent,
+                interfaces,
+                this,
+                packingSize,
+                typesize,
+                null
+            );
         }
 
-        public TypeBuilder DefineType(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, PackingSize packsize)
+        public TypeBuilder DefineType(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            PackingSize packsize
+        )
         {
             lock (SyncRoot)
             {
@@ -854,9 +1140,23 @@ namespace System.Reflection.Emit
             }
         }
 
-        private TypeBuilder DefineTypeNoLock(string name, TypeAttributes attr, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent, PackingSize packsize)
+        private TypeBuilder DefineTypeNoLock(
+            string name,
+            TypeAttributes attr,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? parent,
+            PackingSize packsize
+        )
         {
-            return new TypeBuilder(name, attr, parent, null, this, packsize, TypeBuilder.UnspecifiedTypeSize, null);
+            return new TypeBuilder(
+                name,
+                attr,
+                parent,
+                null,
+                this,
+                packsize,
+                TypeBuilder.UnspecifiedTypeSize,
+                null
+            );
         }
 
         #endregion
@@ -880,7 +1180,11 @@ namespace System.Reflection.Emit
             }
         }
 
-        private EnumBuilder DefineEnumNoLock(string name, TypeAttributes visibility, Type underlyingType)
+        private EnumBuilder DefineEnumNoLock(
+            string name,
+            TypeAttributes visibility,
+            Type underlyingType
+        )
         {
             return new EnumBuilder(name, underlyingType, visibility, this);
         }
@@ -889,18 +1193,47 @@ namespace System.Reflection.Emit
 
         #region Define Global Method
 
-        [RequiresUnreferencedCode("P/Invoke marshalling may dynamically access members that could be trimmed.")]
-        public MethodBuilder DefinePInvokeMethod(string name, string dllName, MethodAttributes attributes,
-            CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes,
-            CallingConvention nativeCallConv, CharSet nativeCharSet)
+        [RequiresUnreferencedCode(
+            "P/Invoke marshalling may dynamically access members that could be trimmed."
+        )]
+        public MethodBuilder DefinePInvokeMethod(
+            string name,
+            string dllName,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            CallingConvention nativeCallConv,
+            CharSet nativeCharSet
+        )
         {
-            return DefinePInvokeMethod(name, dllName, name, attributes, callingConvention, returnType, parameterTypes, nativeCallConv, nativeCharSet);
+            return DefinePInvokeMethod(
+                name,
+                dllName,
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                nativeCallConv,
+                nativeCharSet
+            );
         }
 
-        [RequiresUnreferencedCode("P/Invoke marshalling may dynamically access members that could be trimmed.")]
-        public MethodBuilder DefinePInvokeMethod(string name, string dllName, string entryName, MethodAttributes attributes,
-            CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes, CallingConvention nativeCallConv,
-            CharSet nativeCharSet)
+        [RequiresUnreferencedCode(
+            "P/Invoke marshalling may dynamically access members that could be trimmed."
+        )]
+        public MethodBuilder DefinePInvokeMethod(
+            string name,
+            string dllName,
+            string entryName,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            CallingConvention nativeCallConv,
+            CharSet nativeCharSet
+        )
         {
             lock (SyncRoot)
             {
@@ -913,36 +1246,96 @@ namespace System.Reflection.Emit
                 AssemblyBuilder.CheckContext(returnType);
                 AssemblyBuilder.CheckContext(parameterTypes);
 
-                return _moduleData._globalTypeBuilder.DefinePInvokeMethod(name, dllName, entryName, attributes, callingConvention, returnType, parameterTypes, nativeCallConv, nativeCharSet);
+                return _moduleData._globalTypeBuilder.DefinePInvokeMethod(
+                    name,
+                    dllName,
+                    entryName,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    parameterTypes,
+                    nativeCallConv,
+                    nativeCharSet
+                );
             }
         }
 
-        public MethodBuilder DefineGlobalMethod(string name, MethodAttributes attributes, Type? returnType, Type[]? parameterTypes)
+        public MethodBuilder DefineGlobalMethod(
+            string name,
+            MethodAttributes attributes,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
-            return DefineGlobalMethod(name, attributes, CallingConventions.Standard, returnType, parameterTypes);
+            return DefineGlobalMethod(
+                name,
+                attributes,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes
+            );
         }
 
-        public MethodBuilder DefineGlobalMethod(string name, MethodAttributes attributes, CallingConventions callingConvention,
-            Type? returnType, Type[]? parameterTypes)
+        public MethodBuilder DefineGlobalMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
-            return DefineGlobalMethod(name, attributes, callingConvention, returnType, null, null, parameterTypes, null, null);
+            return DefineGlobalMethod(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                null,
+                null,
+                parameterTypes,
+                null,
+                null
+            );
         }
 
-        public MethodBuilder DefineGlobalMethod(string name, MethodAttributes attributes, CallingConventions callingConvention,
-            Type? returnType, Type[]? requiredReturnTypeCustomModifiers, Type[]? optionalReturnTypeCustomModifiers,
-            Type[]? parameterTypes, Type[][]? requiredParameterTypeCustomModifiers, Type[][]? optionalParameterTypeCustomModifiers)
+        public MethodBuilder DefineGlobalMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? requiredReturnTypeCustomModifiers,
+            Type[]? optionalReturnTypeCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? requiredParameterTypeCustomModifiers,
+            Type[][]? optionalParameterTypeCustomModifiers
+        )
         {
             lock (SyncRoot)
             {
-                return DefineGlobalMethodNoLock(name, attributes, callingConvention, returnType,
-                                                requiredReturnTypeCustomModifiers, optionalReturnTypeCustomModifiers,
-                                                parameterTypes, requiredParameterTypeCustomModifiers, optionalParameterTypeCustomModifiers);
+                return DefineGlobalMethodNoLock(
+                    name,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    requiredReturnTypeCustomModifiers,
+                    optionalReturnTypeCustomModifiers,
+                    parameterTypes,
+                    requiredParameterTypeCustomModifiers,
+                    optionalParameterTypeCustomModifiers
+                );
             }
         }
 
-        private MethodBuilder DefineGlobalMethodNoLock(string name, MethodAttributes attributes, CallingConventions callingConvention,
-            Type? returnType, Type[]? requiredReturnTypeCustomModifiers, Type[]? optionalReturnTypeCustomModifiers,
-            Type[]? parameterTypes, Type[][]? requiredParameterTypeCustomModifiers, Type[][]? optionalParameterTypeCustomModifiers)
+        private MethodBuilder DefineGlobalMethodNoLock(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? requiredReturnTypeCustomModifiers,
+            Type[]? optionalReturnTypeCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? requiredParameterTypeCustomModifiers,
+            Type[][]? optionalParameterTypeCustomModifiers
+        )
         {
             if (_moduleData._hasGlobalBeenCreated)
             {
@@ -962,13 +1355,25 @@ namespace System.Reflection.Emit
             }
 
             AssemblyBuilder.CheckContext(returnType);
-            AssemblyBuilder.CheckContext(requiredReturnTypeCustomModifiers, optionalReturnTypeCustomModifiers, parameterTypes);
+            AssemblyBuilder.CheckContext(
+                requiredReturnTypeCustomModifiers,
+                optionalReturnTypeCustomModifiers,
+                parameterTypes
+            );
             AssemblyBuilder.CheckContext(requiredParameterTypeCustomModifiers);
             AssemblyBuilder.CheckContext(optionalParameterTypeCustomModifiers);
 
-            return _moduleData._globalTypeBuilder.DefineMethod(name, attributes, callingConvention,
-                returnType, requiredReturnTypeCustomModifiers, optionalReturnTypeCustomModifiers,
-                parameterTypes, requiredParameterTypeCustomModifiers, optionalParameterTypeCustomModifiers);
+            return _moduleData._globalTypeBuilder.DefineMethod(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                requiredReturnTypeCustomModifiers,
+                optionalReturnTypeCustomModifiers,
+                parameterTypes,
+                requiredParameterTypeCustomModifiers,
+                optionalParameterTypeCustomModifiers
+            );
         }
 
         public void CreateGlobalFunctions()
@@ -994,7 +1399,11 @@ namespace System.Reflection.Emit
 
         #region Define Data
 
-        public FieldBuilder DefineInitializedData(string name, byte[] data, FieldAttributes attributes)
+        public FieldBuilder DefineInitializedData(
+            string name,
+            byte[] data,
+            FieldAttributes attributes
+        )
         {
             // This method will define an initialized Data in .sdata.
             // We will create a fake TypeDef to represent the data with size. This TypeDef
@@ -1006,7 +1415,11 @@ namespace System.Reflection.Emit
             }
         }
 
-        private FieldBuilder DefineInitializedDataNoLock(string name, byte[] data, FieldAttributes attributes)
+        private FieldBuilder DefineInitializedDataNoLock(
+            string name,
+            byte[] data,
+            FieldAttributes attributes
+        )
         {
             // This method will define an initialized Data in .sdata.
             // We will create a fake TypeDef to represent the data with size. This TypeDef
@@ -1019,7 +1432,11 @@ namespace System.Reflection.Emit
             return _moduleData._globalTypeBuilder.DefineInitializedData(name, data, attributes);
         }
 
-        public FieldBuilder DefineUninitializedData(string name, int size, FieldAttributes attributes)
+        public FieldBuilder DefineUninitializedData(
+            string name,
+            int size,
+            FieldAttributes attributes
+        )
         {
             lock (SyncRoot)
             {
@@ -1027,7 +1444,11 @@ namespace System.Reflection.Emit
             }
         }
 
-        private FieldBuilder DefineUninitializedDataNoLock(string name, int size, FieldAttributes attributes)
+        private FieldBuilder DefineUninitializedDataNoLock(
+            string name,
+            int size,
+            FieldAttributes attributes
+        )
         {
             // This method will define an uninitialized Data in .sdata.
             // We will create a fake TypeDef to represent the data with size. This TypeDef
@@ -1090,12 +1511,16 @@ namespace System.Reflection.Emit
                 throw new ArgumentException(SR.Argument_CannotGetTypeTokenForByRef);
             }
 
-            if ((type.IsGenericType && (!type.IsGenericTypeDefinition || !getGenericDefinition)) ||
-                type.IsGenericParameter ||
-                type.IsArray ||
-                type.IsPointer)
+            if (
+                (type.IsGenericType && (!type.IsGenericTypeDefinition || !getGenericDefinition))
+                || type.IsGenericParameter
+                || type.IsArray
+                || type.IsPointer
+            )
             {
-                byte[] sig = SignatureHelper.GetTypeSigToken(this, type).InternalGetSignature(out int length);
+                byte[] sig = SignatureHelper
+                    .GetTypeSigToken(this, type)
+                    .InternalGetSignature(out int length);
                 return GetTokenFromTypeSpec(sig, length);
             }
 
@@ -1137,7 +1562,9 @@ namespace System.Reflection.Emit
                 // the file name of the referenced module.
                 if (refedModuleBuilder == null)
                 {
-                    refedModuleBuilder = ContainingAssemblyBuilder.GetModuleBuilder((InternalModuleBuilder)refedModule);
+                    refedModuleBuilder = ContainingAssemblyBuilder.GetModuleBuilder(
+                        (InternalModuleBuilder)refedModule
+                    );
                 }
                 referencedModuleFileName = refedModuleBuilder._moduleData._moduleName;
             }
@@ -1190,11 +1617,15 @@ namespace System.Reflection.Emit
 
                 if (method.DeclaringType == null)
                 {
-                    throw new InvalidOperationException(SR.InvalidOperation_CannotImportGlobalFromDifferentModule);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_CannotImportGlobalFromDifferentModule
+                    );
                 }
 
                 // method is defined in a different module
-                tr = getGenericTypeDefinition ? GetTypeToken(method.DeclaringType) : GetTypeTokenInternal(method.DeclaringType);
+                tr = getGenericTypeDefinition
+                    ? GetTypeToken(method.DeclaringType)
+                    : GetTypeTokenInternal(method.DeclaringType);
                 mr = GetMemberRef(method.DeclaringType.Module, tr, methodToken);
             }
             else if (method is MethodOnTypeBuilderInstantiation)
@@ -1216,7 +1647,9 @@ namespace System.Reflection.Emit
                 // We need to get the TypeRef tokens
                 if (declaringType == null)
                 {
-                    throw new InvalidOperationException(SR.InvalidOperation_CannotImportGlobalFromDifferentModule);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_CannotImportGlobalFromDifferentModule
+                    );
                 }
 
                 if (declaringType.IsArray)
@@ -1229,11 +1662,19 @@ namespace System.Reflection.Emit
                     for (int i = 0; i < paramInfo.Length; i++)
                         tt[i] = paramInfo[i].ParameterType;
 
-                    return GetArrayMethodToken(declaringType, method.Name, method.CallingConvention, method.ReturnType, tt);
+                    return GetArrayMethodToken(
+                        declaringType,
+                        method.Name,
+                        method.CallingConvention,
+                        method.ReturnType,
+                        tt
+                    );
                 }
                 else if (method is RuntimeMethodInfo rtMeth)
                 {
-                    tr = getGenericTypeDefinition ? GetTypeToken(declaringType) : GetTypeTokenInternal(declaringType);
+                    tr = getGenericTypeDefinition
+                        ? GetTypeToken(declaringType)
+                        : GetTypeTokenInternal(declaringType);
                     mr = GetMemberRefOfMethodInfo(tr, rtMeth);
                 }
                 else
@@ -1253,21 +1694,33 @@ namespace System.Reflection.Emit
                         optionalCustomModifiers[i] = parameters[i].GetOptionalCustomModifiers();
                     }
 
-                    tr = getGenericTypeDefinition ? GetTypeToken(declaringType) : GetTypeTokenInternal(declaringType);
+                    tr = getGenericTypeDefinition
+                        ? GetTypeToken(declaringType)
+                        : GetTypeTokenInternal(declaringType);
 
                     SignatureHelper sigHelp;
 
                     try
                     {
                         sigHelp = SignatureHelper.GetMethodSigHelper(
-                        this, method.CallingConvention, method.ReturnType,
-                        method.ReturnParameter.GetRequiredCustomModifiers(), method.ReturnParameter.GetOptionalCustomModifiers(),
-                        parameterTypes, requiredCustomModifiers, optionalCustomModifiers);
+                            this,
+                            method.CallingConvention,
+                            method.ReturnType,
+                            method.ReturnParameter.GetRequiredCustomModifiers(),
+                            method.ReturnParameter.GetOptionalCustomModifiers(),
+                            parameterTypes,
+                            requiredCustomModifiers,
+                            optionalCustomModifiers
+                        );
                     }
                     catch (NotImplementedException)
                     {
                         // Legacy code deriving from MethodInfo may not have implemented ReturnParameter.
-                        sigHelp = SignatureHelper.GetMethodSigHelper(this, method.ReturnType, parameterTypes);
+                        sigHelp = SignatureHelper.GetMethodSigHelper(
+                            this,
+                            method.ReturnType,
+                            parameterTypes
+                        );
                     }
 
                     byte[] sigBytes = sigHelp.InternalGetSignature(out int length);
@@ -1278,7 +1731,11 @@ namespace System.Reflection.Emit
             return mr;
         }
 
-        internal int GetMethodTokenInternal(MethodBase method, Type[]? optionalParameterTypes, bool useMethodDef)
+        internal int GetMethodTokenInternal(
+            MethodBase method,
+            Type[]? optionalParameterTypes,
+            bool useMethodDef
+        )
         {
             int tk;
             MethodInfo? methodInfo = method as MethodInfo;
@@ -1297,8 +1754,13 @@ namespace System.Reflection.Emit
                     methodInfoUnbound = methodInfo.GetGenericMethodDefinition()!;
                 }
 
-                if (!Equals(methodInfoUnbound.Module)
-                    || (methodInfoUnbound.DeclaringType != null && methodInfoUnbound.DeclaringType.IsGenericType))
+                if (
+                    !Equals(methodInfoUnbound.Module)
+                    || (
+                        methodInfoUnbound.DeclaringType != null
+                        && methodInfoUnbound.DeclaringType.IsGenericType
+                    )
+                )
                 {
                     tk = GetMemberRefToken(methodInfoUnbound, null);
                 }
@@ -1315,15 +1777,23 @@ namespace System.Reflection.Emit
 
                 // Create signature of method instantiation M<Bar>
                 // Create MethodSepc M<Bar> with parent G?.M<S>
-                byte[] sigBytes = SignatureHelper.GetMethodSpecSigHelper(
-                    this, methodInfo.GetGenericArguments()).InternalGetSignature(out int sigLength);
+                byte[] sigBytes = SignatureHelper
+                    .GetMethodSpecSigHelper(this, methodInfo.GetGenericArguments())
+                    .InternalGetSignature(out int sigLength);
                 ModuleBuilder thisModule = this;
-                tk = TypeBuilder.DefineMethodSpec(new QCallModule(ref thisModule), tk, sigBytes, sigLength);
+                tk = TypeBuilder.DefineMethodSpec(
+                    new QCallModule(ref thisModule),
+                    tk,
+                    sigBytes,
+                    sigLength
+                );
             }
             else
             {
-                if (((method.CallingConvention & CallingConventions.VarArgs) == 0) &&
-                    (method.DeclaringType == null || !method.DeclaringType.IsGenericType))
+                if (
+                    ((method.CallingConvention & CallingConventions.VarArgs) == 0)
+                    && (method.DeclaringType == null || !method.DeclaringType.IsGenericType)
+                )
                 {
                     if (methodInfo != null)
                     {
@@ -1343,17 +1813,33 @@ namespace System.Reflection.Emit
             return tk;
         }
 
-        internal int GetArrayMethodToken(Type arrayClass, string methodName, CallingConventions callingConvention,
-            Type? returnType, Type[]? parameterTypes)
+        internal int GetArrayMethodToken(
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             lock (SyncRoot)
             {
-                return GetArrayMethodTokenNoLock(arrayClass, methodName, callingConvention, returnType, parameterTypes);
+                return GetArrayMethodTokenNoLock(
+                    arrayClass,
+                    methodName,
+                    callingConvention,
+                    returnType,
+                    parameterTypes
+                );
             }
         }
 
-        private int GetArrayMethodTokenNoLock(Type arrayClass, string methodName, CallingConventions callingConvention,
-            Type? returnType, Type[]? parameterTypes)
+        private int GetArrayMethodTokenNoLock(
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             if (arrayClass == null)
             {
@@ -1378,17 +1864,35 @@ namespace System.Reflection.Emit
             // Return a token for the MethodInfo for a method on an Array.  This is primarily
             // used to get the LoadElementAddress method.
             SignatureHelper sigHelp = SignatureHelper.GetMethodSigHelper(
-                this, callingConvention, returnType, null, null, parameterTypes, null, null);
+                this,
+                callingConvention,
+                returnType,
+                null,
+                null,
+                parameterTypes,
+                null,
+                null
+            );
             byte[] sigBytes = sigHelp.InternalGetSignature(out int length);
             int typeSpec = GetTypeTokenInternal(arrayClass);
 
             ModuleBuilder thisModule = this;
-            return GetArrayMethodToken(new QCallModule(ref thisModule),
-                typeSpec, methodName, sigBytes, length);
+            return GetArrayMethodToken(
+                new QCallModule(ref thisModule),
+                typeSpec,
+                methodName,
+                sigBytes,
+                length
+            );
         }
 
-        public MethodInfo GetArrayMethod(Type arrayClass, string methodName, CallingConventions callingConvention,
-            Type? returnType, Type[]? parameterTypes)
+        public MethodInfo GetArrayMethod(
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             AssemblyBuilder.CheckContext(returnType, arrayClass);
             AssemblyBuilder.CheckContext(parameterTypes);
@@ -1398,9 +1902,23 @@ namespace System.Reflection.Emit
             // method that takes an array of the type as a parameter. In order to access the elements of the array,
             // you will need to call methods of the Array class.
 
-            int token = GetArrayMethodToken(arrayClass, methodName, callingConvention, returnType, parameterTypes);
+            int token = GetArrayMethodToken(
+                arrayClass,
+                methodName,
+                callingConvention,
+                returnType,
+                parameterTypes
+            );
 
-            return new SymbolMethod(this, token, arrayClass, methodName, callingConvention, returnType, parameterTypes);
+            return new SymbolMethod(
+                this,
+                token,
+                arrayClass,
+                methodName,
+                callingConvention,
+                returnType,
+                parameterTypes
+            );
         }
 
         internal int GetConstructorToken(ConstructorInfo con)
@@ -1431,7 +1949,9 @@ namespace System.Reflection.Emit
             {
                 if (field.DeclaringType != null && field.DeclaringType.IsGenericType)
                 {
-                    byte[] sig = SignatureHelper.GetTypeSigToken(this, field.DeclaringType).InternalGetSignature(out int length);
+                    byte[] sig = SignatureHelper
+                        .GetTypeSigToken(this, field.DeclaringType)
+                        .InternalGetSignature(out int length);
                     tr = GetTokenFromTypeSpec(sig, length);
                     mr = GetMemberRef(this, tr, fdBuilder.MetadataToken);
                 }
@@ -1445,7 +1965,9 @@ namespace System.Reflection.Emit
                     // field is defined in a different module
                     if (field.DeclaringType == null)
                     {
-                        throw new InvalidOperationException(SR.InvalidOperation_CannotImportGlobalFromDifferentModule);
+                        throw new InvalidOperationException(
+                            SR.InvalidOperation_CannotImportGlobalFromDifferentModule
+                        );
                     }
                     tr = GetTypeTokenInternal(field.DeclaringType);
                     mr = GetMemberRef(field.ReflectedType!.Module, tr, fdBuilder.MetadataToken);
@@ -1457,12 +1979,16 @@ namespace System.Reflection.Emit
                 // We need to get the TypeRef tokens
                 if (field.DeclaringType == null)
                 {
-                    throw new InvalidOperationException(SR.InvalidOperation_CannotImportGlobalFromDifferentModule);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_CannotImportGlobalFromDifferentModule
+                    );
                 }
 
                 if (field.DeclaringType != null && field.DeclaringType.IsGenericType)
                 {
-                    byte[] sig = SignatureHelper.GetTypeSigToken(this, field.DeclaringType).InternalGetSignature(out int length);
+                    byte[] sig = SignatureHelper
+                        .GetTypeSigToken(this, field.DeclaringType)
+                        .InternalGetSignature(out int length);
                     tr = GetTokenFromTypeSpec(sig, length);
                     mr = GetMemberRefOfFieldInfo(tr, field.DeclaringType.TypeHandle, rtField);
                 }
@@ -1475,7 +2001,9 @@ namespace System.Reflection.Emit
             else if (field is FieldOnTypeBuilderInstantiation fOnTB)
             {
                 FieldInfo fb = fOnTB.FieldInfo;
-                byte[] sig = SignatureHelper.GetTypeSigToken(this, field.DeclaringType!).InternalGetSignature(out int length);
+                byte[] sig = SignatureHelper
+                    .GetTypeSigToken(this, field.DeclaringType!)
+                    .InternalGetSignature(out int length);
                 tr = GetTokenFromTypeSpec(sig, length);
                 mr = GetMemberRef(fb.ReflectedType!.Module, tr, fOnTB.MetadataToken);
             }
@@ -1486,7 +2014,11 @@ namespace System.Reflection.Emit
 
                 SignatureHelper sigHelp = SignatureHelper.GetFieldSigHelper(this);
 
-                sigHelp.AddArgument(field.FieldType, field.GetRequiredCustomModifiers(), field.GetOptionalCustomModifiers());
+                sigHelp.AddArgument(
+                    field.FieldType,
+                    field.GetRequiredCustomModifiers(),
+                    field.GetOptionalCustomModifiers()
+                );
 
                 byte[] sigBytes = sigHelp.InternalGetSignature(out int length);
                 mr = GetMemberRefFromSignature(tr, field.Name, sigBytes, length);
@@ -1520,7 +2052,11 @@ namespace System.Reflection.Emit
             // get the signature in byte form
             byte[] sigBytes = sigHelper.InternalGetSignature(out int sigLength);
             ModuleBuilder thisModule = this;
-            return TypeBuilder.GetTokenFromSig(new QCallModule(ref thisModule), sigBytes, sigLength);
+            return TypeBuilder.GetTokenFromSig(
+                new QCallModule(ref thisModule),
+                sigBytes,
+                sigLength
+            );
         }
 
         internal int GetSignatureToken(byte[] sigBytes, int sigLength)
@@ -1534,7 +2070,11 @@ namespace System.Reflection.Emit
             Buffer.BlockCopy(sigBytes, 0, localSigBytes, 0, sigBytes.Length);
 
             ModuleBuilder thisModule = this;
-            return TypeBuilder.GetTokenFromSig(new QCallModule(ref thisModule), localSigBytes, sigLength);
+            return TypeBuilder.GetTokenFromSig(
+                new QCallModule(ref thisModule),
+                localSigBytes,
+                sigLength
+            );
         }
 
         #endregion
@@ -1554,9 +2094,10 @@ namespace System.Reflection.Emit
 
             TypeBuilder.DefineCustomAttribute(
                 this,
-                1,                                          // This is hard coding the module token to 1
+                1, // This is hard coding the module token to 1
                 GetConstructorToken(con),
-                binaryAttribute);
+                binaryAttribute
+            );
         }
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
@@ -1566,7 +2107,7 @@ namespace System.Reflection.Emit
                 throw new ArgumentNullException(nameof(customBuilder));
             }
 
-            customBuilder.CreateCustomAttribute(this, 1);   // This is hard coding the module token to 1
+            customBuilder.CreateCustomAttribute(this, 1); // This is hard coding the module token to 1
         }
 
         #endregion

@@ -10,7 +10,7 @@ class ThreadStartChar
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartChar <char>|int\n");
             return -1;
@@ -18,12 +18,12 @@ class ThreadStartChar
 
         char cToPass = 'c';
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             cToPass = Char.MaxValue;
-        else if(args[0].ToLower() == "min")
+        else if (args[0].ToLower() == "min")
             cToPass = Char.MinValue;
         // check if it is a char or an int
-        else if(args[0].Length > 1)
+        else if (args[0].Length > 1)
             cToPass = Convert.ToChar(Convert.ToInt32(args[0]));
         else
             cToPass = Convert.ToChar(args[0]);

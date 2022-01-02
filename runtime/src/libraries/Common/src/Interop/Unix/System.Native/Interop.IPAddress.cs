@@ -30,8 +30,8 @@ internal static partial class Interop
             }
 
             internal fixed byte Address[MAX_IP_ADDRESS_BYTES]; // Buffer to fit an IPv4 or IPv6 address
-            private  uint _isIPv6;                             // Non-zero if this is an IPv6 address; zero for IPv4.
-            internal uint ScopeId;                             // Scope ID (IPv6 only)
+            private uint _isIPv6; // Non-zero if this is an IPv6 address; zero for IPv4.
+            internal uint ScopeId; // Scope ID (IPv6 only)
 
             public bool Equals(IPAddress other)
             {

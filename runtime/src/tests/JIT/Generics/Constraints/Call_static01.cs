@@ -52,7 +52,6 @@ public class Test_Call_static01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -73,6 +72,4 @@ public class Test_Call_static01
             return 1;
         }
     }
-
 }
-

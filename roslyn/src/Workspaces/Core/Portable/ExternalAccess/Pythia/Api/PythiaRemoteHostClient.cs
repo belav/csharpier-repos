@@ -12,21 +12,51 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
 {
     internal static class PythiaRemoteHostClient
     {
-        public static Task<Optional<T>> TryRunRemoteAsync<T>(Workspace workspace, string serviceName, string targetName, Solution? solution, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
+        public static Task<Optional<T>> TryRunRemoteAsync<T>(
+            Workspace workspace,
+            string serviceName,
+            string targetName,
+            Solution? solution,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(serviceName == "pythia");
-            return TryRunRemoteAsync<T>(workspace, targetName, solution, arguments, cancellationToken);
+            return TryRunRemoteAsync<T>(
+                workspace,
+                targetName,
+                solution,
+                arguments,
+                cancellationToken
+            );
         }
 
-        public static async Task<Optional<T>> TryRunRemoteAsync<T>(Workspace workspace, string targetName, Solution? solution, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
+        public static async Task<Optional<T>> TryRunRemoteAsync<T>(
+            Workspace workspace,
+            string targetName,
+            Solution? solution,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 return default;
             }
 
-            return await client.RunRemoteAsync<T>(WellKnownServiceHubService.IntelliCode, targetName, solution, arguments, callbackTarget: null, cancellationToken).ConfigureAwait(false);
+            return await client
+                .RunRemoteAsync<T>(
+                    WellKnownServiceHubService.IntelliCode,
+                    targetName,
+                    solution,
+                    arguments,
+                    callbackTarget: null,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

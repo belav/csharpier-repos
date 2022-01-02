@@ -9,6 +9,11 @@ internal static partial class Interop
     internal static partial class Advapi32
     {
         [GeneratedDllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial bool CryptGenKey(SafeProvHandle hProv, int Algid, int dwFlags, out SafeKeyHandle phKey);
+        internal static partial bool CryptGenKey(
+            SafeProvHandle hProv,
+            int Algid,
+            int dwFlags,
+            out SafeKeyHandle phKey
+        );
     }
 }

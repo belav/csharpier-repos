@@ -83,10 +83,7 @@ internal readonly struct StringSegment : IEquatable<StringSegment>, IEquatable<s
     /// <returns>The <see cref="char"/> at a specified position.</returns>
     public char this[int index]
     {
-        get
-        {
-            return Buffer[Offset + index];
-        }
+        get { return Buffer[Offset + index]; }
     }
 
     /// <inheritdoc />
@@ -124,7 +121,14 @@ internal readonly struct StringSegment : IEquatable<StringSegment>, IEquatable<s
             return false;
         }
 
-        return string.Compare(Buffer, Offset, other.Buffer, other.Offset, textLength, comparisonType) == 0;
+        return string.Compare(
+                Buffer,
+                Offset,
+                other.Buffer,
+                other.Offset,
+                textLength,
+                comparisonType
+            ) == 0;
     }
 
     // This handles StringSegment.Equals(string, StringSegment, StringComparison) and StringSegment.Equals(StringSegment, string, StringComparison)
@@ -158,8 +162,8 @@ internal readonly struct StringSegment : IEquatable<StringSegment>, IEquatable<s
     /// <param name="text">The <see cref="string"/> to compare with the current <see cref="StringSegment"/>.</param>
     /// <param name="comparisonType">One of the enumeration values that specifies the rules to use in the comparison.</param>
     /// <returns><code>true</code> if the specified <see cref="string"/> is equal to the current <see cref="StringSegment"/>; otherwise, <code>false</code>.</returns>
-    public bool Equals(string text, StringComparison comparisonType)
-        => Equals(new StringSegment(text), comparisonType);
+    public bool Equals(string text, StringComparison comparisonType) =>
+        Equals(new StringSegment(text), comparisonType);
 
     /// <inheritdoc />
     public override int GetHashCode()
@@ -215,8 +219,8 @@ internal readonly struct StringSegment : IEquatable<StringSegment>, IEquatable<s
     /// <param name="text">The <see cref="string"/>to compare.</param>
     /// <param name="comparisonType">One of the enumeration values that specifies the rules to use in the comparison.</param>
     /// <returns><code>true</code> if <paramref name="text"/> matches the beginning of this <see cref="StringSegment"/>; otherwise, <code>false</code>.</returns>
-    public bool StartsWith(string text, StringComparison comparisonType)
-        => StartsWith(new StringSegment(text), comparisonType);
+    public bool StartsWith(string text, StringComparison comparisonType) =>
+        StartsWith(new StringSegment(text), comparisonType);
 
     public bool StartsWith(StringSegment text, StringComparison comparisonType)
     {
@@ -226,8 +230,8 @@ internal readonly struct StringSegment : IEquatable<StringSegment>, IEquatable<s
             return false;
         }
 
-        return string.Compare(Buffer, Offset, text.Buffer, text.Offset, textLength, comparisonType) == 0;
-
+        return string.Compare(Buffer, Offset, text.Buffer, text.Offset, textLength, comparisonType)
+            == 0;
     }
 
     /// <summary>

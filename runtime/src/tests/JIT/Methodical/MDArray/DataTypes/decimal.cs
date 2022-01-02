@@ -7,35 +7,33 @@ using System;
 public struct VT
 {
     public decimal[,] decimal2darr;
-    public decimal[, ,] decimal3darr;
+    public decimal[,,] decimal3darr;
     public decimal[,] decimal2darr_b;
-    public decimal[, ,] decimal3darr_b;
+    public decimal[,,] decimal3darr_b;
 }
 
 public class CL
 {
     public decimal[,] decimal2darr = { { 0, -1 }, { 0, 0 } };
-    public decimal[, ,] decimal3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    public decimal[,,] decimal3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     public decimal[,] decimal2darr_b = { { 0, 1 }, { 0, 0 } };
-    public decimal[, ,] decimal3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public decimal[,,] decimal3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
 }
 
 public class decimalMDArrTest
 {
-
     static decimal[,] decimal2darr = { { 0, -1 }, { 0, 0 } };
-    static decimal[, ,] decimal3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    static decimal[,,] decimal3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     static decimal[,] decimal2darr_b = { { 0, 1 }, { 0, 0 } };
-    static decimal[, ,] decimal3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static decimal[,,] decimal3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
 
     static decimal[][,] ja1 = new decimal[2][,];
-    static decimal[][, ,] ja2 = new decimal[2][, ,];
+    static decimal[][,,] ja2 = new decimal[2][,,];
     static decimal[][,] ja1_b = new decimal[2][,];
-    static decimal[][, ,] ja2_b = new decimal[2][, ,];
+    static decimal[][,,] ja2_b = new decimal[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -998,5 +996,4 @@ public class decimalMDArrTest
 
 
     }
-
 };

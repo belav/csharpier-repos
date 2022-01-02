@@ -13,27 +13,41 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.IntroduceLocalForExpression), Shared]
-    internal class CSharpIntroduceLocalForExpressionCodeRefactoringProvider :
-        AbstractIntroduceLocalForExpressionCodeRefactoringProvider<
-            ExpressionSyntax,
-            StatementSyntax,
-            ExpressionStatementSyntax,
-            LocalDeclarationStatementSyntax>
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.IntroduceLocalForExpression
+        ),
+        Shared
+    ]
+    internal class CSharpIntroduceLocalForExpressionCodeRefactoringProvider
+        : AbstractIntroduceLocalForExpressionCodeRefactoringProvider<
+              ExpressionSyntax,
+              StatementSyntax,
+              ExpressionStatementSyntax,
+              LocalDeclarationStatementSyntax
+          >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpIntroduceLocalForExpressionCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpIntroduceLocalForExpressionCodeRefactoringProvider() { }
 
-        protected override bool IsValid(ExpressionStatementSyntax expressionStatement, TextSpan span)
+        protected override bool IsValid(
+            ExpressionStatementSyntax expressionStatement,
+            TextSpan span
+        )
         {
             // Expression is likely too simple to want to offer to generate a local for.
             // This leads to too many false cases where this is offered.
-            if (span.IsEmpty &&
-                expressionStatement.SemicolonToken.IsMissing &&
-                expressionStatement.Expression.IsKind(SyntaxKind.IdentifierName))
+            if (
+                span.IsEmpty
+                && expressionStatement.SemicolonToken.IsMissing
+                && expressionStatement.Expression.IsKind(SyntaxKind.IdentifierName)
+            )
             {
                 return false;
             }
@@ -48,7 +62,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         }
 
         protected override LocalDeclarationStatementSyntax FixupLocalDeclaration(
-            ExpressionStatementSyntax expressionStatement, LocalDeclarationStatementSyntax localDeclaration)
+            ExpressionStatementSyntax expressionStatement,
+            LocalDeclarationStatementSyntax localDeclaration
+        )
         {
             // If there wasn't a semicolon before, ensure the trailing trivia of the expression
             // becomes the trailing trivia of a new semicolon that we add.
@@ -56,8 +72,13 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             if (expressionStatement.SemicolonToken.IsMissing)
             {
                 var expression = expressionStatement.Expression;
-                localDeclaration = localDeclaration.ReplaceNode(localDeclaration.Declaration.Variables[0].Initializer.Value, expression.WithoutLeadingTrivia());
-                semicolonToken = SyntaxFactory.Token(SyntaxKind.SemicolonToken).WithTrailingTrivia(expression.GetTrailingTrivia());
+                localDeclaration = localDeclaration.ReplaceNode(
+                    localDeclaration.Declaration.Variables[0].Initializer.Value,
+                    expression.WithoutLeadingTrivia()
+                );
+                semicolonToken = SyntaxFactory
+                    .Token(SyntaxKind.SemicolonToken)
+                    .WithTrailingTrivia(expression.GetTrailingTrivia());
             }
 
             return localDeclaration.WithSemicolonToken(semicolonToken);

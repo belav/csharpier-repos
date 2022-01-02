@@ -26,8 +26,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         /// </summary>
         ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken);
 
-        ValueTask OnDefinitionFoundAsync(VSTypeScriptDefinitionItem definition, CancellationToken cancellationToken);
-        ValueTask OnReferenceFoundAsync(VSTypeScriptSourceReferenceItem reference, CancellationToken cancellationToken);
+        ValueTask OnDefinitionFoundAsync(
+            VSTypeScriptDefinitionItem definition,
+            CancellationToken cancellationToken
+        );
+        ValueTask OnReferenceFoundAsync(
+            VSTypeScriptSourceReferenceItem reference,
+            CancellationToken cancellationToken
+        );
     }
 
     internal interface IVSTypeScriptStreamingProgressTracker
@@ -45,7 +51,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             ImmutableArray<TaggedText> nameDisplayParts = default,
             ImmutableDictionary<string, string>? properties = null,
             ImmutableDictionary<string, string>? displayableProperties = null,
-            bool displayIfNoReferences = true)
+            bool displayIfNoReferences = true
+        )
         {
             Tags = tags;
             DisplayParts = displayParts;
@@ -70,7 +77,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         public VSTypeScriptSourceReferenceItem(
             VSTypeScriptDefinitionItem definition,
             DocumentSpan sourceSpan,
-            SymbolUsageInfo symbolUsageInfo)
+            SymbolUsageInfo symbolUsageInfo
+        )
         {
             Definition = definition;
             SourceSpan = sourceSpan;

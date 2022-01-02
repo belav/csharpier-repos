@@ -4,7 +4,10 @@
 internal class MCell<T>
 {
     private T _t;
-    public MCell(T t) { _t = t; }
+    public MCell(T t)
+    {
+        _t = t;
+    }
     public MPair<T, R> GetMPair<R>(R r)
     {
         return new MPair<T, R>(_t, r);
@@ -26,7 +29,10 @@ internal class MCell<T>
 internal class MPair<R, S> : MCell<R>
 {
     private S _s;
-    public MPair(R r, S s) : base(r) { _s = s; }
+    public MPair(R r, S s) : base(r)
+    {
+        _s = s;
+    }
 }
 
 internal class M

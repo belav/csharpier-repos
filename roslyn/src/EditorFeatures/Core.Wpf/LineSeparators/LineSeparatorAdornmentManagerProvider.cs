@@ -24,15 +24,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
     [Export(typeof(IWpfTextViewCreationListener))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
-    internal class LineSeparatorAdornmentManagerProvider :
-        AbstractAdornmentManagerProvider<LineSeparatorTag>
+    internal class LineSeparatorAdornmentManagerProvider
+        : AbstractAdornmentManagerProvider<LineSeparatorTag>
     {
         private const string LayerName = "RoslynLineSeparator";
 
         [Export]
         [Name(LayerName)]
         [ContentType(ContentTypeNames.RoslynContentType)]
-        [Order(After = PredefinedAdornmentLayers.Selection, Before = PredefinedAdornmentLayers.Squiggle)]
+        [Order(
+            After = PredefinedAdornmentLayers.Selection,
+            Before = PredefinedAdornmentLayers.Squiggle
+        )]
 #pragma warning disable 0169
 #pragma warning disable IDE0051 // Remove unused private members
         private readonly AdornmentLayerDefinition _lineSeparatorLayer;
@@ -45,10 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             IThreadingContext threadingContext,
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider) { }
 
         protected override string FeatureAttributeName => FeatureAttribute.LineSeparators;
         protected override string AdornmentLayerName => LayerName;
@@ -56,7 +57,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
         protected override void CreateAdornmentManager(IWpfTextView textView)
         {
             // the manager keeps itself alive by listening to text view events.
-            _ = new LineSeparatorAdornmentManager(ThreadingContext, textView, TagAggregatorFactoryService, AsyncListener, AdornmentLayerName);
+            _ = new LineSeparatorAdornmentManager(
+                ThreadingContext,
+                textView,
+                TagAggregatorFactoryService,
+                AsyncListener,
+                AdornmentLayerName
+            );
         }
     }
 }

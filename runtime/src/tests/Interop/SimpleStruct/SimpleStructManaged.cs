@@ -82,7 +82,7 @@ namespace PInvokeTests
             c = 0;
             b = bnum;
         }
-     }
+    }
 
     [StructLayout(LayoutKind.Auto)]
     public struct AutoStruct
@@ -131,7 +131,9 @@ namespace PInvokeTests
         //Simple struct - explicit layout by ref
         [DllImport("SimpleStructNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
-        public static extern CdeclSimpleExplStructByRefDelegate GetFptrCdeclSimpleExplStructByRef(int i);
+        public static extern CdeclSimpleExplStructByRefDelegate GetFptrCdeclSimpleExplStructByRef(
+            int i
+        );
 
         [DllImport("SimpleStructNative", CallingConvention = CallingConvention.Cdecl)]
         private static extern bool CdeclSimpleExplStructByRef(ref ExplStruct p);
@@ -217,7 +219,9 @@ namespace PInvokeTests
             bool retval = true;
             Sstr p = new Sstr(0, false, s);
 
-            TestFramework.BeginScenario("Test #1 (Roundtrip of a simple structre by reference. Verify that values updated on unmanaged side reflect on managed side)");
+            TestFramework.BeginScenario(
+                "Test #1 (Roundtrip of a simple structre by reference. Verify that values updated on unmanaged side reflect on managed side)"
+            );
 
             //Direct pinvoke
 
@@ -229,9 +233,25 @@ namespace PInvokeTests
 
                 if ((p.a != 100) || (!p.b) || (!p.str.Equals(changedValue)))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->a=" + 100 + "\nSimpleStruct->b=TRUE\n" + "SimpleStruct->str=after\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->a=" + p.a + "\nSimpleStruct->b=" + p.b + "\nSimpleStruct->str=" + p.str + "\n");
-                    TestFramework.LogError("03", "PInvokeTests->PosTest1 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->a="
+                            + 100
+                            + "\nSimpleStruct->b=TRUE\n"
+                            + "SimpleStruct->str=after\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->a="
+                            + p.a
+                            + "\nSimpleStruct->b="
+                            + p.b
+                            + "\nSimpleStruct->str="
+                            + p.str
+                            + "\n"
+                    );
+                    TestFramework.LogError(
+                        "03",
+                        "PInvokeTests->PosTest1 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
@@ -246,16 +266,34 @@ namespace PInvokeTests
             //cdecl
             try
             {
-                TestFramework.LogInformation(" Case 4: Delegate p/invoke - cdecl calling convention");
+                TestFramework.LogInformation(
+                    " Case 4: Delegate p/invoke - cdecl calling convention"
+                );
                 CdeclSimpleStructByRefDelegate std = GetFptrCdeclSimpleStructByRef(14);
 
                 retval = std(ref p);
 
                 if ((p.a != 100) || (!p.b) || (!p.str.Equals(changedValue)))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->a=" + 100 + "\nSimpleStruct->b=TRUE\n" + "SimpleStruct->str=after\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->a=" + p.a + "\nSimpleStruct->b=" + p.b + "\nSimpleStruct->str=" + p.str + "\n");
-                    TestFramework.LogError("01", "PInvokeTests->PosTest1 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->a="
+                            + 100
+                            + "\nSimpleStruct->b=TRUE\n"
+                            + "SimpleStruct->str=after\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->a="
+                            + p.a
+                            + "\nSimpleStruct->b="
+                            + p.b
+                            + "\nSimpleStruct->str="
+                            + p.str
+                            + "\n"
+                    );
+                    TestFramework.LogError(
+                        "01",
+                        "PInvokeTests->PosTest1 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
@@ -264,7 +302,6 @@ namespace PInvokeTests
                 TestFramework.LogError("02", "Unexpected exception: " + e.ToString());
                 retval = false;
             }
-
 
             return retval;
         }
@@ -278,10 +315,12 @@ namespace PInvokeTests
             double d = 3.142;
             Sstr p = new Sstr(100, false, s);
 
-            TestFramework.BeginScenario("\n\nTest #2 (Roundtrip of a simple structre by value. Verify that values updated on unmanaged side reflect on managed side)");
+            TestFramework.BeginScenario(
+                "\n\nTest #2 (Roundtrip of a simple structre by value. Verify that values updated on unmanaged side reflect on managed side)"
+            );
             //direct pinvoke
 
-           // //cdecl calling convention
+            // //cdecl calling convention
             try
             {
                 TestFramework.LogInformation(" Case 2: Direct p/invoke cdecl calling convention");
@@ -290,27 +329,42 @@ namespace PInvokeTests
 
                 if (retval == false)
                 {
-                    TestFramework.LogError("01", "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side.");
+                    TestFramework.LogError(
+                        "01",
+                        "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side."
+                    );
                     return false;
                 }
                 if ((simple.a != 101) || (!simple.b) || (simple.c != 10.11))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->a=101\nSimpleStruct->b=TRUE\nSimpleStruct->c=10.11\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->a=" + simple.a + "\nSimpleStruct->b=" + simple.b + "\nSimpleStruct->c=" + simple.c + "\n");
-                    TestFramework.LogError("02", "PInvokeTests->PosTest2 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->a=101\nSimpleStruct->b=TRUE\nSimpleStruct->c=10.11\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->a="
+                            + simple.a
+                            + "\nSimpleStruct->b="
+                            + simple.b
+                            + "\nSimpleStruct->c="
+                            + simple.c
+                            + "\n"
+                    );
+                    TestFramework.LogError(
+                        "02",
+                        "PInvokeTests->PosTest2 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
             catch (Exception e)
             {
-
                 TestFramework.LogError("03", "Unexpected exception: " + e.ToString());
                 retval = false;
             }
 
-           // //delegate pinvoke
+            // //delegate pinvoke
 
-           // //cdecl calling convention
+            // //cdecl calling convention
             try
             {
                 TestFramework.LogInformation(" Case 4: Delegate p/invoke cdecl calling convention");
@@ -320,17 +374,32 @@ namespace PInvokeTests
                 IntPtr st = std(simple, ref retval);
                 simple = Marshal.PtrToStructure<Sstr_simple>(st);
 
-
                 if (retval == false)
                 {
-                    TestFramework.LogError("01", "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side.");
+                    TestFramework.LogError(
+                        "01",
+                        "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side."
+                    );
                     return false;
                 }
                 if ((simple.a != 101) || (!simple.b) || (simple.c != 10.11))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->a=101\nSimpleStruct->b=TRUE\nSimpleStruct->c=10.11\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->a=" + simple.a + "\nSimpleStruct->b=" + simple.b + "\nSimpleStruct->c=" + simple.c + "\n");
-                    TestFramework.LogError("02", "PInvokeTests->PosTest2 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->a=101\nSimpleStruct->b=TRUE\nSimpleStruct->c=10.11\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->a="
+                            + simple.a
+                            + "\nSimpleStruct->b="
+                            + simple.b
+                            + "\nSimpleStruct->c="
+                            + simple.c
+                            + "\n"
+                    );
+                    TestFramework.LogError(
+                        "02",
+                        "PInvokeTests->PosTest2 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
@@ -349,7 +418,9 @@ namespace PInvokeTests
             ExplStruct p;
             bool retval = false;
 
-            TestFramework.BeginScenario("\n\nTest #3 (Roundtrip of a simple structre (explicit layout) by reference. Verify that values updated on unmanaged side reflect on managed side)");
+            TestFramework.BeginScenario(
+                "\n\nTest #3 (Roundtrip of a simple structre (explicit layout) by reference. Verify that values updated on unmanaged side reflect on managed side)"
+            );
             //direct pinvoke
 
             //cdecl
@@ -361,14 +432,27 @@ namespace PInvokeTests
 
                 if (retval == false)
                 {
-                    TestFramework.LogError("01", "PInvokeTests->PosTest3 : Unexpected error occured on unmanaged side");
+                    TestFramework.LogError(
+                        "01",
+                        "PInvokeTests->PosTest3 : Unexpected error occured on unmanaged side"
+                    );
                     return false;
                 }
                 if ((p.type != DialogResult.OK) || (!p.b))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->type=1\nSimpleStruct->b=TRUE\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->type=" + p.type + "\nSimpleStruct->b="  + p.b);
-                    TestFramework.LogError("02", "PInvokeTests->PosTest3 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->type=1\nSimpleStruct->b=TRUE\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->type="
+                            + p.type
+                            + "\nSimpleStruct->b="
+                            + p.b
+                    );
+                    TestFramework.LogError(
+                        "02",
+                        "PInvokeTests->PosTest3 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
@@ -389,14 +473,27 @@ namespace PInvokeTests
 
                 if (retval == false)
                 {
-                    TestFramework.LogError("01", "PInvokeTests->PosTest3 : Unexpected error occured on unmanaged side");
+                    TestFramework.LogError(
+                        "01",
+                        "PInvokeTests->PosTest3 : Unexpected error occured on unmanaged side"
+                    );
                     return false;
                 }
                 if ((p.type != DialogResult.OK) || (!p.b))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->type=1\nSimpleStruct->b=TRUE\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->type=" + p.type + "\nSimpleStruct->b=" + p.b);
-                    TestFramework.LogError("02", "PInvokeTests->PosTest3 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->type=1\nSimpleStruct->b=TRUE\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->type="
+                            + p.type
+                            + "\nSimpleStruct->b="
+                            + p.b
+                    );
+                    TestFramework.LogError(
+                        "02",
+                        "PInvokeTests->PosTest3 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
@@ -405,7 +502,6 @@ namespace PInvokeTests
                 TestFramework.LogError("03", "Unexpected exception: " + e.ToString());
                 retval = false;
             }
-
 
             return retval;
         }
@@ -417,7 +513,9 @@ namespace PInvokeTests
             ExplStruct p;
             bool retval = false;
 
-            TestFramework.BeginScenario("\n\nTest #4 (Roundtrip of a simple structre (Explicit layout) by value. Verify that values updated on unmanaged side reflect on managed side)");
+            TestFramework.BeginScenario(
+                "\n\nTest #4 (Roundtrip of a simple structre (Explicit layout) by value. Verify that values updated on unmanaged side reflect on managed side)"
+            );
             //direct pinvoke
 
             //cdecl
@@ -428,14 +526,28 @@ namespace PInvokeTests
                 p = DoCdeclSimpleExplStruct(p, ref retval);
                 if (retval == false)
                 {
-                    TestFramework.LogError("01", "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side.");
+                    TestFramework.LogError(
+                        "01",
+                        "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side."
+                    );
                     return false;
                 }
                 if ((p.type != DialogResult.Cancel) || (p.c != 3.142))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->a=2\nSimpleStruct->c=3.142\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->a=" + p.type + "\nSimpleStruct->c=" + p.c + "\n");
-                    TestFramework.LogError("02", "PInvokeTests->PosTest4 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->a=2\nSimpleStruct->c=3.142\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->a="
+                            + p.type
+                            + "\nSimpleStruct->c="
+                            + p.c
+                            + "\n"
+                    );
+                    TestFramework.LogError(
+                        "02",
+                        "PInvokeTests->PosTest4 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
@@ -460,14 +572,28 @@ namespace PInvokeTests
 
                 if (retval == false)
                 {
-                    TestFramework.LogError("01", "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side.");
+                    TestFramework.LogError(
+                        "01",
+                        "PInvokeTests->PosTest2 : values of passed in structure not matched with expected once on unmanaged side."
+                    );
                     return false;
                 }
                 if ((p.type != DialogResult.Cancel) || (p.c != 3.142))
                 {
-                    Console.WriteLine("\nExpected values:\n SimpleStruct->a=2\nSimpleStruct->c=3.142\n");
-                    Console.WriteLine("\nActual values:\n SimpleStruct->a=" + p.type + "\nSimpleStruct->c=" + p.c + "\n");
-                    TestFramework.LogError("02", "PInvokeTests->PosTest4 : Returned values are different from expected values");
+                    Console.WriteLine(
+                        "\nExpected values:\n SimpleStruct->a=2\nSimpleStruct->c=3.142\n"
+                    );
+                    Console.WriteLine(
+                        "\nActual values:\n SimpleStruct->a="
+                            + p.type
+                            + "\nSimpleStruct->c="
+                            + p.c
+                            + "\n"
+                    );
+                    TestFramework.LogError(
+                        "02",
+                        "PInvokeTests->PosTest4 : Returned values are different from expected values"
+                    );
                     retval = false;
                 }
             }
@@ -490,9 +616,7 @@ namespace PInvokeTests
             {
                 pass = true;
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             try
             {
                 _ = InvalidReturn();
@@ -501,9 +625,7 @@ namespace PInvokeTests
             {
                 pass &= true;
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             return pass;
         }
 

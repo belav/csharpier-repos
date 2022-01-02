@@ -42,77 +42,130 @@ namespace Microsoft.EntityFrameworkCore.Design
 
         #region MethodInfos
 
-        private static readonly MethodInfo _modelHasDefaultSchemaMethodInfo
-            = typeof(RelationalModelBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalModelBuilderExtensions.HasDefaultSchema), typeof(ModelBuilder), typeof(string));
+        private static readonly MethodInfo _modelHasDefaultSchemaMethodInfo =
+            typeof(RelationalModelBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalModelBuilderExtensions.HasDefaultSchema),
+                typeof(ModelBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _modelUseCollationMethodInfo
-            = typeof(RelationalModelBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalModelBuilderExtensions.UseCollation), typeof(ModelBuilder), typeof(string));
+        private static readonly MethodInfo _modelUseCollationMethodInfo =
+            typeof(RelationalModelBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalModelBuilderExtensions.UseCollation),
+                typeof(ModelBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _entityTypeHasCommentMethodInfo
-            = typeof(RelationalEntityTypeBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalEntityTypeBuilderExtensions.HasComment), typeof(EntityTypeBuilder), typeof(string));
+        private static readonly MethodInfo _entityTypeHasCommentMethodInfo =
+            typeof(RelationalEntityTypeBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalEntityTypeBuilderExtensions.HasComment),
+                typeof(EntityTypeBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _propertyHasColumnNameMethodInfo
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasColumnName), typeof(PropertyBuilder), typeof(string));
+        private static readonly MethodInfo _propertyHasColumnNameMethodInfo =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasColumnName),
+                typeof(PropertyBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _propertyHasColumnOrderMethodInfo
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasColumnOrder), typeof(PropertyBuilder), typeof(int?));
+        private static readonly MethodInfo _propertyHasColumnOrderMethodInfo =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasColumnOrder),
+                typeof(PropertyBuilder),
+                typeof(int?)
+            );
 
-        private static readonly MethodInfo _propertyHasDefaultValueSqlMethodInfo1
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql), typeof(PropertyBuilder));
+        private static readonly MethodInfo _propertyHasDefaultValueSqlMethodInfo1 =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql),
+                typeof(PropertyBuilder)
+            );
 
-        private static readonly MethodInfo _propertyHasDefaultValueSqlMethodInfo2
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql), typeof(PropertyBuilder), typeof(string));
+        private static readonly MethodInfo _propertyHasDefaultValueSqlMethodInfo2 =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql),
+                typeof(PropertyBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _propertyHasComputedColumnSqlMethodInfo1
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql), typeof(PropertyBuilder));
+        private static readonly MethodInfo _propertyHasComputedColumnSqlMethodInfo1 =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                typeof(PropertyBuilder)
+            );
 
-        private static readonly MethodInfo _propertyHasComputedColumnSqlMethodInfo2
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql), typeof(PropertyBuilder), typeof(string));
+        private static readonly MethodInfo _propertyHasComputedColumnSqlMethodInfo2 =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                typeof(PropertyBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _hasComputedColumnSqlMethodInfo3
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql), typeof(PropertyBuilder), typeof(string), typeof(bool));
+        private static readonly MethodInfo _hasComputedColumnSqlMethodInfo3 =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                typeof(PropertyBuilder),
+                typeof(string),
+                typeof(bool)
+            );
 
-        private static readonly MethodInfo _propertyIsFixedLengthMethodInfo
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.IsFixedLength), typeof(PropertyBuilder), typeof(bool));
+        private static readonly MethodInfo _propertyIsFixedLengthMethodInfo =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.IsFixedLength),
+                typeof(PropertyBuilder),
+                typeof(bool)
+            );
 
-        private static readonly MethodInfo _propertyHasCommentMethodInfo
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.HasComment), typeof(PropertyBuilder), typeof(string));
+        private static readonly MethodInfo _propertyHasCommentMethodInfo =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.HasComment),
+                typeof(PropertyBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _propertyUseCollationMethodInfo
-            = typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalPropertyBuilderExtensions.UseCollation), typeof(PropertyBuilder), typeof(string));
+        private static readonly MethodInfo _propertyUseCollationMethodInfo =
+            typeof(RelationalPropertyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalPropertyBuilderExtensions.UseCollation),
+                typeof(PropertyBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _keyHasNameMethodInfo
-            = typeof(RelationalKeyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalKeyBuilderExtensions.HasName), typeof(KeyBuilder), typeof(string));
+        private static readonly MethodInfo _keyHasNameMethodInfo =
+            typeof(RelationalKeyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalKeyBuilderExtensions.HasName),
+                typeof(KeyBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _referenceReferenceHasConstraintNameMethodInfo
-            = typeof(RelationalForeignKeyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalForeignKeyBuilderExtensions.HasConstraintName), typeof(ReferenceReferenceBuilder), typeof(string));
+        private static readonly MethodInfo _referenceReferenceHasConstraintNameMethodInfo =
+            typeof(RelationalForeignKeyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalForeignKeyBuilderExtensions.HasConstraintName),
+                typeof(ReferenceReferenceBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _referenceCollectionHasConstraintNameMethodInfo
-            = typeof(RelationalForeignKeyBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalForeignKeyBuilderExtensions.HasConstraintName), typeof(ReferenceCollectionBuilder), typeof(string));
+        private static readonly MethodInfo _referenceCollectionHasConstraintNameMethodInfo =
+            typeof(RelationalForeignKeyBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalForeignKeyBuilderExtensions.HasConstraintName),
+                typeof(ReferenceCollectionBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _indexHasDatabaseNameMethodInfo
-            = typeof(RelationalIndexBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalIndexBuilderExtensions.HasDatabaseName), typeof(IndexBuilder), typeof(string));
+        private static readonly MethodInfo _indexHasDatabaseNameMethodInfo =
+            typeof(RelationalIndexBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalIndexBuilderExtensions.HasDatabaseName),
+                typeof(IndexBuilder),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _indexHasFilterNameMethodInfo
-            = typeof(RelationalIndexBuilderExtensions).GetRequiredRuntimeMethod(
-                nameof(RelationalIndexBuilderExtensions.HasFilter), typeof(IndexBuilder), typeof(string));
+        private static readonly MethodInfo _indexHasFilterNameMethodInfo =
+            typeof(RelationalIndexBuilderExtensions).GetRequiredRuntimeMethod(
+                nameof(RelationalIndexBuilderExtensions.HasFilter),
+                typeof(IndexBuilder),
+                typeof(string)
+            );
 
         #endregion MethodInfos
 
@@ -131,19 +184,28 @@ namespace Microsoft.EntityFrameworkCore.Design
         protected virtual AnnotationCodeGeneratorDependencies Dependencies { get; }
 
         /// <inheritdoc />
-        public virtual IEnumerable<IAnnotation> FilterIgnoredAnnotations(IEnumerable<IAnnotation> annotations)
-            => annotations.Where(
-                a => !(CoreAnnotationNames.AllNames.Contains(a.Name)
-                    || _ignoredRelationalAnnotations.Contains(a.Name)));
+        public virtual IEnumerable<IAnnotation> FilterIgnoredAnnotations(
+            IEnumerable<IAnnotation> annotations
+        ) =>
+            annotations.Where(
+                a =>
+                    !(
+                        CoreAnnotationNames.AllNames.Contains(a.Name)
+                        || _ignoredRelationalAnnotations.Contains(a.Name)
+                    )
+            );
 
         /// <inheritdoc />
-        public virtual void RemoveAnnotationsHandledByConventions(IModel model, IDictionary<string, IAnnotation> annotations)
-            => RemoveConventionalAnnotationsHelper(model, annotations, IsHandledByConvention);
+        public virtual void RemoveAnnotationsHandledByConventions(
+            IModel model,
+            IDictionary<string, IAnnotation> annotations
+        ) => RemoveConventionalAnnotationsHelper(model, annotations, IsHandledByConvention);
 
         /// <inheritdoc />
         public virtual void RemoveAnnotationsHandledByConventions(
             IEntityType entityType,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             annotations.Remove(RelationalAnnotationNames.IsTableExcludedFromMigrations);
 
@@ -153,7 +215,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual void RemoveAnnotationsHandledByConventions(
             IProperty property,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var columnName = property.GetColumnBaseName();
             if (columnName == property.Name)
@@ -165,52 +228,69 @@ namespace Microsoft.EntityFrameworkCore.Design
         }
 
         /// <inheritdoc />
-        public virtual void RemoveAnnotationsHandledByConventions(IKey key, IDictionary<string, IAnnotation> annotations)
-            => RemoveConventionalAnnotationsHelper(key, annotations, IsHandledByConvention);
+        public virtual void RemoveAnnotationsHandledByConventions(
+            IKey key,
+            IDictionary<string, IAnnotation> annotations
+        ) => RemoveConventionalAnnotationsHelper(key, annotations, IsHandledByConvention);
 
         /// <inheritdoc />
         public virtual void RemoveAnnotationsHandledByConventions(
             IForeignKey foreignKey,
-            IDictionary<string, IAnnotation> annotations)
-            => RemoveConventionalAnnotationsHelper(foreignKey, annotations, IsHandledByConvention);
+            IDictionary<string, IAnnotation> annotations
+        ) => RemoveConventionalAnnotationsHelper(foreignKey, annotations, IsHandledByConvention);
 
         /// <inheritdoc />
-        public virtual void RemoveAnnotationsHandledByConventions(IIndex index, IDictionary<string, IAnnotation> annotations)
-            => RemoveConventionalAnnotationsHelper(index, annotations, IsHandledByConvention);
+        public virtual void RemoveAnnotationsHandledByConventions(
+            IIndex index,
+            IDictionary<string, IAnnotation> annotations
+        ) => RemoveConventionalAnnotationsHelper(index, annotations, IsHandledByConvention);
 
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IModel model,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
                 annotations,
-                RelationalAnnotationNames.DefaultSchema, _modelHasDefaultSchemaMethodInfo,
-                methodCallCodeFragments);
+                RelationalAnnotationNames.DefaultSchema,
+                _modelHasDefaultSchemaMethodInfo,
+                methodCallCodeFragments
+            );
 
             GenerateSimpleFluentApiCall(
                 annotations,
-                RelationalAnnotationNames.Collation, _modelUseCollationMethodInfo,
-                methodCallCodeFragments);
+                RelationalAnnotationNames.Collation,
+                _modelUseCollationMethodInfo,
+                methodCallCodeFragments
+            );
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(model, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(model, annotations, GenerateFluentApi)
+            );
             return methodCallCodeFragments;
         }
 
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IEntityType entityType,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
                 annotations,
-                RelationalAnnotationNames.Comment, _entityTypeHasCommentMethodInfo, methodCallCodeFragments);
+                RelationalAnnotationNames.Comment,
+                _entityTypeHasCommentMethodInfo,
+                methodCallCodeFragments
+            );
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(entityType, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(entityType, annotations, GenerateFluentApi)
+            );
 
             return methodCallCodeFragments;
         }
@@ -218,53 +298,103 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IProperty property,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
                 annotations,
-                RelationalAnnotationNames.ColumnName, _propertyHasColumnNameMethodInfo, methodCallCodeFragments);
+                RelationalAnnotationNames.ColumnName,
+                _propertyHasColumnNameMethodInfo,
+                methodCallCodeFragments
+            );
 
             GenerateSimpleFluentApiCall(
                 annotations,
-                RelationalAnnotationNames.ColumnOrder, _propertyHasColumnOrderMethodInfo, methodCallCodeFragments);
+                RelationalAnnotationNames.ColumnOrder,
+                _propertyHasColumnOrderMethodInfo,
+                methodCallCodeFragments
+            );
 
-            if (TryGetAndRemove(annotations, RelationalAnnotationNames.DefaultValueSql, out string? defaultValueSql))
+            if (
+                TryGetAndRemove(
+                    annotations,
+                    RelationalAnnotationNames.DefaultValueSql,
+                    out string? defaultValueSql
+                )
+            )
             {
                 methodCallCodeFragments.Add(
                     defaultValueSql.Length == 0
-                        ? new MethodCallCodeFragment(_propertyHasDefaultValueSqlMethodInfo1)
-                        : new MethodCallCodeFragment(_propertyHasDefaultValueSqlMethodInfo2, defaultValueSql));
+                      ? new MethodCallCodeFragment(_propertyHasDefaultValueSqlMethodInfo1)
+                      : new MethodCallCodeFragment(
+                            _propertyHasDefaultValueSqlMethodInfo2,
+                            defaultValueSql
+                        )
+                );
             }
 
-            if (TryGetAndRemove(annotations, RelationalAnnotationNames.ComputedColumnSql, out string? computedColumnSql))
+            if (
+                TryGetAndRemove(
+                    annotations,
+                    RelationalAnnotationNames.ComputedColumnSql,
+                    out string? computedColumnSql
+                )
+            )
             {
                 methodCallCodeFragments.Add(
                     computedColumnSql.Length == 0
-                        ? new MethodCallCodeFragment(_propertyHasComputedColumnSqlMethodInfo1)
-                        : TryGetAndRemove(annotations, RelationalAnnotationNames.IsStored, out bool isStored)
-                            ? new MethodCallCodeFragment(_hasComputedColumnSqlMethodInfo3, computedColumnSql, isStored)
-                            : new MethodCallCodeFragment(_propertyHasComputedColumnSqlMethodInfo2, computedColumnSql));
+                      ? new MethodCallCodeFragment(_propertyHasComputedColumnSqlMethodInfo1)
+                      : TryGetAndRemove(
+                            annotations,
+                            RelationalAnnotationNames.IsStored,
+                            out bool isStored
+                        )
+                          ? new MethodCallCodeFragment(
+                                _hasComputedColumnSqlMethodInfo3,
+                                computedColumnSql,
+                                isStored
+                            )
+                          : new MethodCallCodeFragment(
+                                _propertyHasComputedColumnSqlMethodInfo2,
+                                computedColumnSql
+                            )
+                );
             }
 
-            if (TryGetAndRemove(annotations, RelationalAnnotationNames.IsFixedLength, out bool isFixedLength))
+            if (
+                TryGetAndRemove(
+                    annotations,
+                    RelationalAnnotationNames.IsFixedLength,
+                    out bool isFixedLength
+                )
+            )
             {
                 methodCallCodeFragments.Add(
                     isFixedLength
-                        ? new MethodCallCodeFragment(_propertyIsFixedLengthMethodInfo)
-                        : new MethodCallCodeFragment(_propertyIsFixedLengthMethodInfo, isFixedLength));
+                      ? new MethodCallCodeFragment(_propertyIsFixedLengthMethodInfo)
+                      : new MethodCallCodeFragment(_propertyIsFixedLengthMethodInfo, isFixedLength)
+                );
             }
 
             GenerateSimpleFluentApiCall(
                 annotations,
-                RelationalAnnotationNames.Comment, _propertyHasCommentMethodInfo, methodCallCodeFragments);
+                RelationalAnnotationNames.Comment,
+                _propertyHasCommentMethodInfo,
+                methodCallCodeFragments
+            );
 
             GenerateSimpleFluentApiCall(
                 annotations,
-                RelationalAnnotationNames.Collation, _propertyUseCollationMethodInfo, methodCallCodeFragments);
+                RelationalAnnotationNames.Collation,
+                _propertyUseCollationMethodInfo,
+                methodCallCodeFragments
+            );
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(property, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(property, annotations, GenerateFluentApi)
+            );
 
             return methodCallCodeFragments;
         }
@@ -272,13 +402,21 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IKey key,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
-            GenerateSimpleFluentApiCall(annotations, RelationalAnnotationNames.Name, _keyHasNameMethodInfo, methodCallCodeFragments);
+            GenerateSimpleFluentApiCall(
+                annotations,
+                RelationalAnnotationNames.Name,
+                _keyHasNameMethodInfo,
+                methodCallCodeFragments
+            );
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(key, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(key, annotations, GenerateFluentApi)
+            );
 
             return methodCallCodeFragments;
         }
@@ -286,17 +424,23 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IForeignKey foreignKey,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
                 annotations,
                 RelationalAnnotationNames.Name,
-                foreignKey.IsUnique ? _referenceReferenceHasConstraintNameMethodInfo : _referenceCollectionHasConstraintNameMethodInfo,
-                methodCallCodeFragments);
+                foreignKey.IsUnique
+                  ? _referenceReferenceHasConstraintNameMethodInfo
+                  : _referenceCollectionHasConstraintNameMethodInfo,
+                methodCallCodeFragments
+            );
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(foreignKey, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(foreignKey, annotations, GenerateFluentApi)
+            );
 
             return methodCallCodeFragments;
         }
@@ -304,11 +448,14 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             INavigation navigation,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(navigation, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(navigation, annotations, GenerateFluentApi)
+            );
 
             return methodCallCodeFragments;
         }
@@ -316,11 +463,14 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             ISkipNavigation navigation,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(navigation, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(navigation, annotations, GenerateFluentApi)
+            );
 
             return methodCallCodeFragments;
         }
@@ -328,16 +478,27 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<MethodCallCodeFragment> GenerateFluentApiCalls(
             IIndex index,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var methodCallCodeFragments = new List<MethodCallCodeFragment>();
 
             GenerateSimpleFluentApiCall(
-                annotations, RelationalAnnotationNames.Name, _indexHasDatabaseNameMethodInfo, methodCallCodeFragments);
+                annotations,
+                RelationalAnnotationNames.Name,
+                _indexHasDatabaseNameMethodInfo,
+                methodCallCodeFragments
+            );
             GenerateSimpleFluentApiCall(
-                annotations, RelationalAnnotationNames.Filter, _indexHasFilterNameMethodInfo, methodCallCodeFragments);
+                annotations,
+                RelationalAnnotationNames.Filter,
+                _indexHasFilterNameMethodInfo,
+                methodCallCodeFragments
+            );
 
-            methodCallCodeFragments.AddRange(GenerateFluentApiCallsHelper(index, annotations, GenerateFluentApi));
+            methodCallCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(index, annotations, GenerateFluentApi)
+            );
 
             return methodCallCodeFragments;
         }
@@ -345,11 +506,14 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<AttributeCodeFragment> GenerateDataAnnotationAttributes(
             IEntityType entityType,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var attributeCodeFragments = new List<AttributeCodeFragment>();
 
-            attributeCodeFragments.AddRange(GenerateFluentApiCallsHelper(entityType, annotations, GenerateDataAnnotation));
+            attributeCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(entityType, annotations, GenerateDataAnnotation)
+            );
 
             return attributeCodeFragments;
         }
@@ -357,7 +521,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <inheritdoc />
         public virtual IReadOnlyList<AttributeCodeFragment> GenerateDataAnnotationAttributes(
             IProperty property,
-            IDictionary<string, IAnnotation> annotations)
+            IDictionary<string, IAnnotation> annotations
+        )
         {
             var attributeCodeFragments = new List<AttributeCodeFragment>();
 
@@ -366,12 +531,16 @@ namespace Microsoft.EntityFrameworkCore.Design
                 attributeCodeFragments.Add(
                     new AttributeCodeFragment(
                         property.ClrType == typeof(string)
-                            ? typeof(StringLengthAttribute)
-                            : typeof(MaxLengthAttribute),
-                        maxLength));
+                          ? typeof(StringLengthAttribute)
+                          : typeof(MaxLengthAttribute),
+                        maxLength
+                    )
+                );
             }
 
-            attributeCodeFragments.AddRange(GenerateFluentApiCallsHelper(property, annotations, GenerateDataAnnotation));
+            attributeCodeFragments.AddRange(
+                GenerateFluentApiCallsHelper(property, annotations, GenerateDataAnnotation)
+            );
 
             return attributeCodeFragments;
         }
@@ -389,8 +558,7 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     <see langword="true" /> if the annotation is handled by convention;
         ///     <see langword="false" /> if code must be generated.
         /// </returns>
-        protected virtual bool IsHandledByConvention(IModel model, IAnnotation annotation)
-            => false;
+        protected virtual bool IsHandledByConvention(IModel model, IAnnotation annotation) => false;
 
         /// <summary>
         ///     Checks if the given <paramref name="annotation" /> is handled by convention when
@@ -402,8 +570,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="entityType">The <see cref="IEntityType" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="false" />.</returns>
-        protected virtual bool IsHandledByConvention(IEntityType entityType, IAnnotation annotation)
-            => false;
+        protected virtual bool IsHandledByConvention(
+            IEntityType entityType,
+            IAnnotation annotation
+        ) => false;
 
         /// <summary>
         ///     Checks if the given <paramref name="annotation" /> is handled by convention when
@@ -415,8 +585,7 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="key">The <see cref="IKey" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="false" />.</returns>
-        protected virtual bool IsHandledByConvention(IKey key, IAnnotation annotation)
-            => false;
+        protected virtual bool IsHandledByConvention(IKey key, IAnnotation annotation) => false;
 
         /// <summary>
         ///     Checks if the given <paramref name="annotation" /> is handled by convention when
@@ -428,8 +597,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="property">The <see cref="IProperty" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="false" />.</returns>
-        protected virtual bool IsHandledByConvention(IProperty property, IAnnotation annotation)
-            => false;
+        protected virtual bool IsHandledByConvention(IProperty property, IAnnotation annotation) =>
+            false;
 
         /// <summary>
         ///     Checks if the given <paramref name="annotation" /> is handled by convention when
@@ -441,8 +610,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="foreignKey">The <see cref="IForeignKey" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="false" />.</returns>
-        protected virtual bool IsHandledByConvention(IForeignKey foreignKey, IAnnotation annotation)
-            => false;
+        protected virtual bool IsHandledByConvention(
+            IForeignKey foreignKey,
+            IAnnotation annotation
+        ) => false;
 
         /// <summary>
         ///     Checks if the given <paramref name="annotation" /> is handled by convention when
@@ -454,8 +625,7 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="index">The <see cref="IIndex" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="false" />.</returns>
-        protected virtual bool IsHandledByConvention(IIndex index, IAnnotation annotation)
-            => false;
+        protected virtual bool IsHandledByConvention(IIndex index, IAnnotation annotation) => false;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -467,8 +637,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="model">The <see cref="IModel" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(IModel model, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            IModel model,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -480,8 +652,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="entityType">The <see cref="IEntityType" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(IEntityType entityType, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            IEntityType entityType,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -493,8 +667,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="key">The <see cref="IKey" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(IKey key, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            IKey key,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -506,8 +682,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="property">The <see cref="IProperty" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(IProperty property, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            IProperty property,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -519,8 +697,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="foreignKey">The <see cref="IForeignKey" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(IForeignKey foreignKey, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            IForeignKey foreignKey,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -532,8 +712,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="navigation">The <see cref="INavigation" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(INavigation navigation, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            INavigation navigation,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -545,8 +727,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="navigation">The <see cref="ISkipNavigation" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(ISkipNavigation navigation, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            ISkipNavigation navigation,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
@@ -558,8 +742,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="index">The <see cref="IIndex" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual MethodCallCodeFragment? GenerateFluentApi(IIndex index, IAnnotation annotation)
-            => null;
+        protected virtual MethodCallCodeFragment? GenerateFluentApi(
+            IIndex index,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a data annotation attribute code fragment for the given <paramref name="annotation" />,
@@ -571,8 +757,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="entityType">The <see cref="IEntityType" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual AttributeCodeFragment? GenerateDataAnnotation(IEntityType entityType, IAnnotation annotation)
-            => null;
+        protected virtual AttributeCodeFragment? GenerateDataAnnotation(
+            IEntityType entityType,
+            IAnnotation annotation
+        ) => null;
 
         /// <summary>
         ///     Returns a data annotation attribute code fragment for the given <paramref name="annotation" />,
@@ -584,14 +772,19 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="property">The <see cref="IProperty" />.</param>
         /// <param name="annotation">The <see cref="IAnnotation" />.</param>
         /// <returns><see langword="null" />.</returns>
-        protected virtual AttributeCodeFragment? GenerateDataAnnotation(IProperty property, IAnnotation annotation)
-            => null;
+        protected virtual AttributeCodeFragment? GenerateDataAnnotation(
+            IProperty property,
+            IAnnotation annotation
+        ) => null;
 
-        private IEnumerable<TCodeFragment> GenerateFluentApiCallsHelper<TAnnotatable, TCodeFragment>(
+        private IEnumerable<TCodeFragment> GenerateFluentApiCallsHelper<
+            TAnnotatable,
+            TCodeFragment
+        >(
             TAnnotatable annotatable,
             IDictionary<string, IAnnotation> annotations,
-            Func<TAnnotatable, IAnnotation, TCodeFragment?> generateCodeFragment)
-            where TCodeFragment : notnull
+            Func<TAnnotatable, IAnnotation, TCodeFragment?> generateCodeFragment
+        ) where TCodeFragment : notnull
         {
             foreach (var (name, annotation) in EnumerateForRemoval(annotations))
             {
@@ -607,7 +800,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         private void RemoveConventionalAnnotationsHelper<TAnnotatable>(
             TAnnotatable annotatable,
             IDictionary<string, IAnnotation> annotations,
-            Func<TAnnotatable, IAnnotation, bool> isHandledByConvention)
+            Func<TAnnotatable, IAnnotation, bool> isHandledByConvention
+        )
         {
             foreach (var (name, annotation) in EnumerateForRemoval(annotations))
             {
@@ -621,10 +815,13 @@ namespace Microsoft.EntityFrameworkCore.Design
         private static bool TryGetAndRemove<T>(
             IDictionary<string, IAnnotation> annotations,
             string annotationName,
-            [NotNullWhen(true)] out T? annotationValue)
+            [NotNullWhen(true)] out T? annotationValue
+        )
         {
-            if (annotations.TryGetValue(annotationName, out var annotation)
-                && annotation.Value != null)
+            if (
+                annotations.TryGetValue(annotationName, out var annotation)
+                && annotation.Value != null
+            )
             {
                 annotations.Remove(annotationName);
                 annotationValue = (T)annotation.Value;
@@ -639,7 +836,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             IDictionary<string, IAnnotation> annotations,
             string annotationName,
             MethodInfo methodInfo,
-            List<MethodCallCodeFragment> methodCallCodeFragments)
+            List<MethodCallCodeFragment> methodCallCodeFragments
+        )
         {
             if (annotations.TryGetValue(annotationName, out var annotation))
             {
@@ -647,13 +845,15 @@ namespace Microsoft.EntityFrameworkCore.Design
                 if (annotation.Value is object annotationValue)
                 {
                     methodCallCodeFragments.Add(
-                        new MethodCallCodeFragment(methodInfo, annotationValue));
+                        new MethodCallCodeFragment(methodInfo, annotationValue)
+                    );
                 }
             }
         }
 
         // Dictionary is safe for removal during enumeration
-        private static IEnumerable<KeyValuePair<string, IAnnotation>> EnumerateForRemoval(IDictionary<string, IAnnotation> annotations)
-            => annotations is Dictionary<string, IAnnotation> ? annotations : annotations.ToList();
+        private static IEnumerable<KeyValuePair<string, IAnnotation>> EnumerateForRemoval(
+            IDictionary<string, IAnnotation> annotations
+        ) => annotations is Dictionary<string, IAnnotation> ? annotations : annotations.ToList();
     }
 }

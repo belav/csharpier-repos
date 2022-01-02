@@ -37,7 +37,6 @@ namespace Microsoft.Extensions.Logging.EventLog
         internal IEventLog EventLog
         {
             get => _eventLog ??= CreateDefaultEventLog();
-
             // For unit testing purposes only.
             set => _eventLog = value;
         }
@@ -58,7 +57,10 @@ namespace Microsoft.Extensions.Logging.EventLog
 #if NETSTANDARD
             Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 #endif
-            return new WindowsEventLog(logName, machineName, sourceName) { DefaultEventId = defaultEventId };
+            return new WindowsEventLog(logName, machineName, sourceName)
+            {
+                DefaultEventId = defaultEventId
+            };
         }
     }
 }

@@ -11,7 +11,12 @@ namespace System.Buffers.Text
     public static partial class Utf8Formatter
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool TryFormatInt64D(long value, byte precision, Span<byte> destination, out int bytesWritten)
+        private static bool TryFormatInt64D(
+            long value,
+            byte precision,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             bool insertNegationSign = false;
             if (value < 0)
@@ -20,7 +25,13 @@ namespace System.Buffers.Text
                 value = -value;
             }
 
-            return TryFormatUInt64D((ulong)value, precision, destination, insertNegationSign, out bytesWritten);
+            return TryFormatUInt64D(
+                (ulong)value,
+                precision,
+                destination,
+                insertNegationSign,
+                out bytesWritten
+            );
         }
     }
 }
