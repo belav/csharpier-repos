@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal static class Constants

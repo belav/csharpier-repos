@@ -5,6 +5,7 @@ using HtmlGenerationWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
+
 namespace HtmlGenerationWebSite.Components;
 
 public class CheckViewData___LackModel : ViewComponent

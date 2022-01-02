@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.SignalR.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class TestBinder : IInvocationBinder
@@ -34,8 +35,11 @@ public class TestBinder : IInvocationBinder
     }
 
     public TestBinder() : this(null, null) { }
+
     public TestBinder(Type[] paramTypes) : this(paramTypes, null) { }
+
     public TestBinder(Type returnType) : this(null, returnType) { }
+
     public TestBinder(Type[] paramTypes, Type returnType)
     {
         _paramTypes = paramTypes;

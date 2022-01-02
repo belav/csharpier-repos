@@ -16,6 +16,7 @@ namespace StackCommitTest
         public static extern void GetSystemInfo(
             [MarshalAs(UnmanagedType.Struct)] ref SYSTEM_INFO lpSystemInfo
         );
+
 #pragma warning restore 618
 
         [StructLayout(LayoutKind.Sequential)]
@@ -38,8 +39,10 @@ namespace StackCommitTest
         {
             [FieldOffset(0)]
             internal uint dwOemId;
+
             [FieldOffset(0)]
             internal ushort wProcessorArchitecture;
+
             [FieldOffset(2)]
             internal ushort wReserved;
         }
@@ -286,10 +289,12 @@ namespace StackCommitTest
     public class Finalizer
     {
         Action m_action;
+
         private Finalizer(Action action)
         {
             m_action = action;
         }
+
         ~Finalizer()
         {
             m_action();

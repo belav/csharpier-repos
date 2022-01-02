@@ -59,6 +59,7 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 Database.SetInitializer(new Initializer());
             }
+
             public DbSet<TrainingCourse> TrainingCourses { get; set; }
             public DbSet<TrainingContent> TrainingContents { get; set; }
         }

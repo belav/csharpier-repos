@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
+
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 /// <summary>

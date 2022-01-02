@@ -968,7 +968,6 @@ namespace Microsoft.CodeAnalysis
 
             return node;
         }
-
         #endregion
 
         #region Token Lookup
@@ -1065,7 +1064,6 @@ namespace Microsoft.CodeAnalysis
                 .Where(sn => sn.IsToken)
                 .Select(sn => sn.AsToken());
         }
-
         #endregion
 
         #region Trivia Lookup
@@ -1221,7 +1219,6 @@ namespace Microsoft.CodeAnalysis
         {
             return DescendantTriviaImpl(span, descendIntoChildren, descendIntoTrivia);
         }
-
         #endregion
 
         #region Annotations
@@ -1426,7 +1423,6 @@ namespace Microsoft.CodeAnalysis
             }
             return node;
         }
-
         #endregion
 
         /// <summary>
@@ -1647,24 +1643,29 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> replacementNodes
         );
+
         protected internal abstract SyntaxNode InsertNodesInListCore(
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> nodesToInsert,
             bool insertBefore
         );
+
         protected internal abstract SyntaxNode ReplaceTokenInListCore(
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens
         );
+
         protected internal abstract SyntaxNode InsertTokensInListCore(
             SyntaxToken originalToken,
             IEnumerable<SyntaxToken> newTokens,
             bool insertBefore
         );
+
         protected internal abstract SyntaxNode ReplaceTriviaInListCore(
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia
         );
+
         protected internal abstract SyntaxNode InsertTriviaInListCore(
             SyntaxTrivia originalTrivia,
             IEnumerable<SyntaxTrivia> newTrivia,
@@ -1695,7 +1696,6 @@ namespace Microsoft.CodeAnalysis
         /// nodes and tokens must be equivalent. 
         /// </param>
         protected abstract bool IsEquivalentToCore(SyntaxNode node, bool topLevel = false);
-
         #endregion
 
         /// <summary>

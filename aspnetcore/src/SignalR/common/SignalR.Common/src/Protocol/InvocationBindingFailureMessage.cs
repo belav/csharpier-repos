@@ -3,6 +3,7 @@
 
 using System.Runtime.ExceptionServices;
 
+
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
 /// <summary>

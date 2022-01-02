@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
 internal class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, object?>>

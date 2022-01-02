@@ -13,7 +13,6 @@ namespace System.Speech.Recognition
         {
             _recognizerState = recognizerState;
         }
-
         #endregion
 
         #region public Properties
@@ -21,7 +20,6 @@ namespace System.Speech.Recognition
         {
             get { return _recognizerState; }
         }
-
         #endregion
 
         #region Private Fields

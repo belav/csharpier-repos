@@ -119,7 +119,6 @@ namespace System.Reflection.PortableExecutable.Tests
                 m => new object[] { (object)m }
             );
         }
-
         #endregion
 
         [Fact]

@@ -25,7 +25,9 @@ namespace System.IO.Packaging
         string xmlNamespace,
         out string newXmlNamespace
     );
+
     internal delegate void HandleElementCallback(int elementDepth, ref bool more);
+
     internal delegate void HandleAttributeCallback(int elementDepth);
 
     internal sealed class XmlCompatibilityReader : XmlWrappingReader
@@ -88,7 +90,6 @@ namespace System.IO.Packaging
                 _namespaceMap[xmlNamespace] = xmlNamespace;
             }
         }
-
 #if !PBTCOMPILER
         public XmlCompatibilityReader(XmlReader baseReader, IEnumerable<string> supportedNamespaces)
             : this(baseReader, null, supportedNamespaces) { }
@@ -648,6 +649,7 @@ namespace System.IO.Packaging
                 return Reader.Value;
             }
         }
+
 #pragma warning restore CS8764
 
         /// <summary>
@@ -682,7 +684,6 @@ namespace System.IO.Packaging
         {
             get { return Reader.AttributeCount - _ignoredAttributeCount; }
         }
-
         #endregion Public Properties
 
         #region Private Methods

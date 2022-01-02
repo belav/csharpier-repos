@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>
@@ -24,6 +25,7 @@ public static class EndpointRouteBuilderExtensions
     private static readonly string[] PutVerb = new[] { "PUT" };
     private static readonly string[] DeleteVerb = new[] { "DELETE" };
     private static readonly string[] PatchVerb = new[] { "PATCH" };
+
     /// <summary>
     /// Adds a <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that matches HTTP GET requests
     /// for the specified pattern.

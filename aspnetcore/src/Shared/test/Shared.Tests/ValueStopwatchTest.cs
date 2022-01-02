@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal.Test;
 
 public class ValueStopwatchTest

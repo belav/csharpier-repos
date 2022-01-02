@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         }
 
         protected abstract string OrganizeImportsDescription { get; }
+
         protected abstract ImmutableArray<DiagnosticSet> GetDiagnosticSets();
 
         public async Task<Document> CleanupAsync(

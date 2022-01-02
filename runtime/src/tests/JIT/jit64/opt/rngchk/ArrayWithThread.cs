@@ -8,11 +8,13 @@ using System.Runtime.CompilerServices;
 namespace ArrayWithThread
 {
     public delegate void RngTest(ref int a);
+
     internal class Class1
     {
         public static int val = 0;
         public static AutoResetEvent myResetEvent1 = new AutoResetEvent(false);
         public static ManualResetEvent myResetEvent2 = new ManualResetEvent(false);
+
         private static int Main()
         {
             int retVal = 100;
@@ -56,6 +58,7 @@ namespace ArrayWithThread
             }
             return bResult;
         }
+
         private static void ThreadFunc()
         {
             myResetEvent1.WaitOne();
@@ -64,6 +67,7 @@ namespace ArrayWithThread
             return;
         }
     }
+
     internal class Test
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]

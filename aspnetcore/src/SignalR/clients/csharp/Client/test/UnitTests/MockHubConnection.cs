@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public static class MockHubConnection

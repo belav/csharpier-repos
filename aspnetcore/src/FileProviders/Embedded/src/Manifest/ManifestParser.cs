@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Xml;
 using System.Xml.Linq;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal static class ManifestParser

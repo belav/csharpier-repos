@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace BenchmarkDotNet.Attributes;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly)]

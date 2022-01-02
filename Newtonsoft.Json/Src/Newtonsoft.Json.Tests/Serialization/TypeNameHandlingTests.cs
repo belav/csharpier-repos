@@ -669,7 +669,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             CustomAssert.IsInstanceOfType(typeof(EmployeeReference), employee);
             Assert.AreEqual("Name!", ((EmployeeReference)employee).Name);
         }
-
 #if !(PORTABLE || DNXCORE50)
         [Test]
         public void DeserializeTypeNameFromGacAssembly()

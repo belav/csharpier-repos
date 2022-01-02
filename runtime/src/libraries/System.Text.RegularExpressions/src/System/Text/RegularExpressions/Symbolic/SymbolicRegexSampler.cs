@@ -11,6 +11,7 @@ namespace System.Text.RegularExpressions.Symbolic
     {
         private Random _random;
         private SymbolicRegexNode<S> _root;
+
         /// <summary>The used random seed</summary>
         public int RandomSeed { get; private set; }
         private BDD _asciiWordCharacters;
@@ -197,14 +198,18 @@ namespace System.Text.RegularExpressions.Symbolic
 
         private BDD ToBDD(S pred) =>
             _solver.ConvertToCharSet(SymbolicRegexRunnerFactory.s_unicode._solver, pred);
+
         private T Choose<T>(IList<T> elems) => elems[_random.Next(elems.Count)];
+
         private T Choose<T>(IEnumerable<T> elems)
         {
             List<T> list = new List<T>(elems);
             return list[_random.Next(list.Count)];
         }
+
         private char ChooseChar((uint, uint) pair) =>
             (char)_random.Next((int)pair.Item1, (int)pair.Item2 + 1);
+
         private char ChooseChar(BDD bdd)
         {
             Debug.Assert(!bdd.IsEmpty);
@@ -218,7 +223,9 @@ namespace System.Text.RegularExpressions.Symbolic
                 )
             );
         }
+
         private bool ChooseRandomlyTrueOrFalse() => _random.Next(100) < 50;
+
         /// <summary>Returns true if some state is unconditionally final</summary>
         private bool IsFinal(IEnumerable<SymbolicRegexNode<S>> states)
         {
@@ -231,6 +238,7 @@ namespace System.Text.RegularExpressions.Symbolic
             }
             return false;
         }
+
         /// <summary>Returns true if some state can be final</summary>
         private bool CanBeFinal(IEnumerable<SymbolicRegexNode<S>> states)
         {
@@ -243,6 +251,7 @@ namespace System.Text.RegularExpressions.Symbolic
             }
             return false;
         }
+
         /// <summary>Returns true if some state is final in the given context</summary>
         private bool IsFinal(IEnumerable<SymbolicRegexNode<S>> states, uint context)
         {
@@ -255,8 +264,10 @@ namespace System.Text.RegularExpressions.Symbolic
             }
             return false;
         }
+
         private bool IsWordchar(S pred) =>
             _solver.IsSatisfiable(_solver.And(pred, _root._builder._wordLetterPredicateForAnchors));
+
         private bool IsNewline(S pred) =>
             _solver.IsSatisfiable(_solver.And(pred, _root._builder._newLinePredicate));
     }

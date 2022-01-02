@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StaticFilesAuth.Models;
 
+
 namespace StaticFilesAuth.Controllers;
 
 public class HomeController : Controller

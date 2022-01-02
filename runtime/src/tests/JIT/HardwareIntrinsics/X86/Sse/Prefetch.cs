@@ -75,6 +75,7 @@ namespace IntelHardwareIntrinsicTest
             public void* inArrayPtr => inHandle.AddrOfPinnedObject().ToPointer();
 
             GCHandle inHandle;
+
             public TestTable(T[] a)
             {
                 this.inArray = a;

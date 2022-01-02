@@ -7,6 +7,7 @@
 
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.AspNetCore;
 
 internal sealed class OperatingSystem

@@ -109,7 +109,6 @@ namespace System.Security.Cryptography.Pkcs.Tests
 #endif
             }
         }
-
 #if NETCOREAPP
         [Fact]
         public static void SignerInfo_GetSignature_UniquePerCall()
@@ -138,7 +137,6 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.NotSame(oid, oid2);
         }
-
 #if NETCOREAPP
         [Fact]
         public static void SignerInfo_SignatureAlgorithm_NotSame()

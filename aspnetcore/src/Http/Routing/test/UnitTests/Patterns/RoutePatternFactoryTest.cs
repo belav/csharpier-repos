@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Routing.Template;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
 public class RoutePatternFactoryTest

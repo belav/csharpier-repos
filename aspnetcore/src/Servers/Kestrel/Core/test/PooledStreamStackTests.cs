@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class PooledStreamStackTests

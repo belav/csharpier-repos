@@ -119,22 +119,27 @@ namespace Microsoft.CodeAnalysis.Emit
             Cci.ITypeDefinition def,
             out TypeDefinitionHandle handle
         );
+
         internal abstract bool TryGetEventHandle(
             Cci.IEventDefinition def,
             out EventDefinitionHandle handle
         );
+
         internal abstract bool TryGetFieldHandle(
             Cci.IFieldDefinition def,
             out FieldDefinitionHandle handle
         );
+
         internal abstract bool TryGetMethodHandle(
             Cci.IMethodDefinition def,
             out MethodDefinitionHandle handle
         );
+
         internal abstract bool TryGetPropertyHandle(
             Cci.IPropertyDefinition def,
             out PropertyDefinitionHandle handle
         );
+
         internal abstract CommonMessageProvider MessageProvider { get; }
 
         private bool TryGetMethodHandle(
@@ -187,6 +192,7 @@ namespace Microsoft.CodeAnalysis.Emit
             StandaloneSignatureHandle handle,
             EditAndContinueMethodDebugInformation debugInfo
         );
+
         protected abstract ITypeSymbolInternal? TryGetStateMachineType(EntityHandle methodHandle);
 
         internal VariableSlotAllocator? TryCreateVariableSlotAllocator(

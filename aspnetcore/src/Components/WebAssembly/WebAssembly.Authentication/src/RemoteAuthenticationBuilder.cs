@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 internal class RemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount>

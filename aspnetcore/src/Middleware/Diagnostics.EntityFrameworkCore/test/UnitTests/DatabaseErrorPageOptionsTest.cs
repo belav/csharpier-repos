@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Builder;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class DatabaseErrorPageOptionsTest

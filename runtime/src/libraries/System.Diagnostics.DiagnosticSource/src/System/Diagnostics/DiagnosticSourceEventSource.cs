@@ -187,6 +187,7 @@ namespace System.Diagnostics
             /// Indicates diagnostics messages from DiagnosticSourceEventSource should be included.
             /// </summary>
             public const EventKeywords Messages = (EventKeywords)0x1;
+
             /// <summary>
             /// Indicates that all events from all diagnostic sources should be forwarded to the EventSource using the 'Event' event.
             /// </summary>
@@ -235,7 +236,6 @@ namespace System.Diagnostics
         {
             WriteEvent(1, Message);
         }
-
         /// <summary>
         /// Events from DiagnosticSource can be forwarded to EventSource using this event.
         /// </summary>
@@ -265,7 +265,6 @@ namespace System.Diagnostics
         {
             WriteEvent(3, SourceName, EventName, ArgmentsJson);
         }
-
         /// <summary>
         /// Used to mark the beginning of an activity
         /// </summary>
@@ -285,7 +284,6 @@ namespace System.Diagnostics
         {
             WriteEvent(4, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the end of an activity
         /// </summary>
@@ -305,7 +303,6 @@ namespace System.Diagnostics
         {
             WriteEvent(5, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the beginning of an activity
         /// </summary>
@@ -325,7 +322,6 @@ namespace System.Diagnostics
         {
             WriteEvent(6, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the end of an activity that can be recursive.
         /// </summary>
@@ -345,7 +341,6 @@ namespace System.Diagnostics
         {
             WriteEvent(7, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the beginning of an activity
         /// </summary>
@@ -365,7 +360,6 @@ namespace System.Diagnostics
         {
             WriteEvent(8, SourceName, EventName, Arguments);
         }
-
         /// <summary>
         /// Used to mark the end of an activity that can be recursive.
         /// </summary>
@@ -395,7 +389,6 @@ namespace System.Diagnostics
         {
             WriteEvent(10, SourceName);
         }
-
         /// <summary>
         /// Fires when the Activity start.
         /// </summary>
@@ -415,7 +408,6 @@ namespace System.Diagnostics
             string ActivityName,
             IEnumerable<KeyValuePair<string, string?>> Arguments
         ) => WriteEvent(11, SourceName, ActivityName, Arguments);
-
         /// <summary>
         /// Fires when the Activity stop.
         /// </summary>
@@ -1819,11 +1811,13 @@ namespace System.Diagnostics
                                     typeof(Func<TObject, TProperty>)
                                 );
                         }
+
                         public override object? Fetch(object? obj)
                         {
                             Debug.Assert(obj is TObject);
                             return _propertyFetch((TObject)obj);
                         }
+
                         private readonly Func<TObject, TProperty> _propertyFetch;
                     }
 
@@ -1842,6 +1836,7 @@ namespace System.Diagnostics
                                     typeof(StructFunc<TStruct, TProperty>)
                                 );
                         }
+
                         public override object? Fetch(object? obj)
                         {
                             Debug.Assert(obj is TStruct);
@@ -1850,6 +1845,7 @@ namespace System.Diagnostics
                             TStruct structObj = (TStruct)obj;
                             return _propertyFetch(ref structObj);
                         }
+
                         private readonly StructFunc<TStruct, TProperty> _propertyFetch;
                     }
 
@@ -1859,6 +1855,7 @@ namespace System.Diagnostics
                     private sealed class CurrentActivityPropertyFetch : PropertyFetch
                     {
                         public CurrentActivityPropertyFetch() : base(null) { }
+
                         public override object? Fetch(object? obj)
                         {
                             return Activity.Current;
@@ -1871,6 +1868,7 @@ namespace System.Diagnostics
                     private sealed class EnumeratePropertyFetch<ElementType> : PropertyFetch
                     {
                         public EnumeratePropertyFetch(Type type) : base(type) { }
+
                         public override object? Fetch(object? obj)
                         {
                             Debug.Assert(obj is IEnumerable<ElementType>);
@@ -1905,7 +1903,9 @@ namespace System.Diagnostics
 
             #region private
             public void OnCompleted() { }
+
             public void OnError(Exception error) { }
+
             public void OnNext(T value)
             {
                 _callback(value);
@@ -1925,10 +1925,10 @@ namespace System.Diagnostics
                 Subscription = subscription;
                 Next = next;
             }
+
             public IDisposable Subscription;
             public Subscriptions? Next;
         }
-
         #endregion
 
         private FilterAndTransform? _specs; // Transformation specifications that indicate which sources/events are forwarded.

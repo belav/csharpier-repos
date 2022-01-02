@@ -1,8 +1,10 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper.Internal;
+
 namespace AutoMapper.QueryableExtensions.Impl
 {
     using static Expression;
+
     internal class NullableSourceProjectionMapper : IProjectionMapper
     {
         public Expression Project(
@@ -13,6 +15,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             Expression resolvedSource,
             LetPropertyMaps letPropertyMaps
         ) => Coalesce(resolvedSource, New(memberMap.DestinationType));
+
         public bool IsMatch(
             MemberMap memberMap,
             TypeMap memberTypeMap,

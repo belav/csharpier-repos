@@ -8,6 +8,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
 public class DefaultViewComponentSelectorTest
@@ -259,6 +260,7 @@ public class DefaultViewComponentSelectorTest
         {
         }
     }
+
     // This will only consider types nested inside this class as ViewComponent classes
     private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
     {

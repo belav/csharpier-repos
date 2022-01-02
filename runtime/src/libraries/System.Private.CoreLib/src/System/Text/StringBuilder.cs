@@ -1273,6 +1273,7 @@ namespace System.Text
 
 #pragma warning disable CA1830 // Prefer strongly-typed Append and Insert method overloads on StringBuilder. No need to fix for the builder itself
         public StringBuilder Append(bool value) => Append(value.ToString());
+
 #pragma warning restore CA1830
 
         public StringBuilder Append(char value)
@@ -1548,7 +1549,6 @@ namespace System.Text
             }
             return this;
         }
-
         #endregion
 
         public StringBuilder Insert(int index, string? value)
@@ -2963,8 +2963,10 @@ namespace System.Text
 
             /// <summary>The associated StringBuilder to which to append.</summary>
             internal readonly StringBuilder _stringBuilder;
+
             /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
             private readonly IFormatProvider? _provider;
+
             /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
             /// <remarks>
             /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive

@@ -51,6 +51,7 @@ namespace System.Reflection
         internal string name;
         internal int table_idx;
         internal CallingConventions call_conv;
+
 #pragma warning restore 649
 
         internal MonoArrayMethod(
@@ -73,6 +74,7 @@ namespace System.Reflection
         {
             return this; /* FIXME */
         }
+
         public override Type ReturnType
         {
             get { return ret; }
@@ -152,6 +154,7 @@ namespace System.Reflection
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);

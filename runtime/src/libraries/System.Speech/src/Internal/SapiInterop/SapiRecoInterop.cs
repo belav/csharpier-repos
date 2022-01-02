@@ -182,7 +182,6 @@ namespace System.Speech.Internal.SapiInterop
         SPRA_APP_UPS = 0x0001,
         SPRA_ENGINE_UPS = 0x0002
     }
-
     #endregion
 
     #region Structure
@@ -258,6 +257,7 @@ namespace System.Speech.Internal.SapiInterop
         internal uint ulNumActive;
         internal Guid clsidEngine;
         internal uint cLangIDs;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)] // SP_MAX_LANGIDS
         internal short[] aLangID;
         internal ulong ullRecognitionStreamTime;
@@ -267,6 +267,7 @@ namespace System.Speech.Internal.SapiInterop
     internal struct SPRECOCONTEXTSTATUS
     {
         internal SPINTERFERENCE eInterference;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 255)]
         internal short[] szRequestTypeOfUI; // Can't really be marshaled as a string directly
         internal uint dwReserved1;
@@ -382,6 +383,7 @@ namespace System.Speech.Internal.SapiInterop
                 throw new FormatException(SR.Get(SRID.ResultInvalidFormat));
             }
         }
+
         internal uint fAlphabet;
         // Not present in SAPI 5.1 results; on SAPI 5.without IPA this is set to zero, with IPA it will indicate
         // the alphabet of pronunciations the result
@@ -715,7 +717,6 @@ namespace System.Speech.Internal.SapiInterop
         public ushort wBitsPerSample;
         public ushort cbSize;
     }
-
     #endregion
 
     #region Interface
@@ -766,6 +767,7 @@ namespace System.Speech.Internal.SapiInterop
         void Slot13(); // void LoadCmdFromResource(IntPtr hModule, string pszResourceName, string pszResourceType, UInt16 wLanguage, SPLOADOPTIONS Options);
         void LoadCmdFromMemory(IntPtr pGrammar, SPLOADOPTIONS Options);
         void Slot15(); // void LoadCmdFromProprietaryGrammar(ref Guid rguidParam, string pszStringParam, IntPtr pvDataPrarm, UInt32 cbDataSize, SPLOADOPTIONS Options);
+
         [PreserveSig]
         int SetRuleState(
             [MarshalAs(UnmanagedType.LPWStr)] string pszName,
@@ -778,6 +780,7 @@ namespace System.Speech.Internal.SapiInterop
             SPLOADOPTIONS Options
         );
         void Slot19(); // void UnloadDictation();
+
         [PreserveSig]
         int SetDictationState(SPRULESTATE NewState);
         void SetWordSequenceData(
@@ -840,6 +843,7 @@ namespace System.Speech.Internal.SapiInterop
         new void Slot3(); // void SetNotifyCallbackFunction(ref IntPtr pfnCallback, IntPtr wParam, IntPtr lParam);
         new void Slot4(); // void SetNotifyCallbackInterface(ref IntPtr pSpCallback, IntPtr wParam, IntPtr lParam);
         new void Slot5(); // void SetNotifyWin32Event();
+
         [PreserveSig]
         new int WaitForNotifyEvent(uint dwMilliseconds);
         new void Slot7(); // IntPtr GetNotifyEventHandle();
@@ -899,13 +903,16 @@ namespace System.Speech.Internal.SapiInterop
         // ISpProperties Methods
         [PreserveSig]
         int SetPropertyNum([MarshalAs(UnmanagedType.LPWStr)] string pName, int lValue);
+
         [PreserveSig]
         int GetPropertyNum([MarshalAs(UnmanagedType.LPWStr)] string pName, out int plValue);
+
         [PreserveSig]
         int SetPropertyString(
             [MarshalAs(UnmanagedType.LPWStr)] string pName,
             [MarshalAs(UnmanagedType.LPWStr)] string pValue
         );
+
         [PreserveSig]
         int GetPropertyString(
             [MarshalAs(UnmanagedType.LPWStr)] string pName,
@@ -923,13 +930,16 @@ namespace System.Speech.Internal.SapiInterop
         // ISpProperties Methods
         [PreserveSig]
         new int SetPropertyNum([MarshalAs(UnmanagedType.LPWStr)] string pName, int lValue);
+
         [PreserveSig]
         new int GetPropertyNum([MarshalAs(UnmanagedType.LPWStr)] string pName, out int plValue);
+
         [PreserveSig]
         new int SetPropertyString(
             [MarshalAs(UnmanagedType.LPWStr)] string pName,
             [MarshalAs(UnmanagedType.LPWStr)] string pValue
         );
+
         [PreserveSig]
         new int GetPropertyString(
             [MarshalAs(UnmanagedType.LPWStr)] string pName,
@@ -963,6 +973,7 @@ namespace System.Speech.Internal.SapiInterop
             uint cbExtraData,
             [MarshalAs(UnmanagedType.Bool)] out bool pfSupported
         );
+
         [PreserveSig]
         int DisplayUI(
             IntPtr hWndParent,
@@ -971,6 +982,7 @@ namespace System.Speech.Internal.SapiInterop
             IntPtr pvExtraData,
             uint cbExtraData
         );
+
         [PreserveSig]
         int EmulateRecognition(ISpPhrase pPhrase);
     }
@@ -1001,6 +1013,7 @@ namespace System.Speech.Internal.SapiInterop
         object Slot6 { get; set; } // [DispId(8)] SpObjectToken Profile { set; get; }
         object Slot7 { get; set; } // [DispId(6)] SpeechRecognizerState State { set; get; }
         object Slot8 { get; } // [DispId(7)] ISpeechRecognizerStatus Status { get; }
+
         [DispId(9)]
         [PreserveSig]
         int EmulateRecognition(
@@ -1295,7 +1308,6 @@ namespace System.Speech.Internal.SapiInterop
         void Slot9(); // AddProperties(const SPPHRASEPROPERTYHANDLE hParent, const SPPHRASEPROPERTY * pProperty, SPPHRASEPROPERTYHANDLE * phNewProperty);
         void Slot10(); // AddReplacements(ULONG cReplacements, const SPPHRASEREPLACEMENT * pReplacements);
     };
-
     #endregion
 
     #region Class

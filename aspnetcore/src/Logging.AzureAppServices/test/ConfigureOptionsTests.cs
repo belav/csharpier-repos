@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
 public class ConfigureOptionsTests

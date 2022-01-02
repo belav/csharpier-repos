@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.Extensions.Logging.Testing;
 
 public class XunitLoggerProvider : ILoggerProvider

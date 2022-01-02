@@ -4,6 +4,7 @@
 using System.Net.Http;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
+
 namespace Wasm.Prerendered.Client;
 
 public class Program

@@ -243,6 +243,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 Debug.Fail("Unknown MemberInfo type.");
             }
         }
+
 #pragma warning restore CA1810
 
         //

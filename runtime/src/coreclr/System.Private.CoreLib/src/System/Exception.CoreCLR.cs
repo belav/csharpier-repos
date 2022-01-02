@@ -216,6 +216,7 @@ namespace System
         private byte[]? _watsonBuckets;
         private string? _stackTraceString; // Needed for serialization.
         private string? _remoteStackTraceString;
+
 #pragma warning disable CA1823, 414  // Fields are not used from managed.
         // _dynamicMethods is an array of System.Resolver objects, used to keep
         // DynamicMethodDescs alive for the lifetime of the exception. We do this because

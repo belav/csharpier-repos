@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication;
 
 internal class IdentityServerJwtPolicySchemeForwardSelector

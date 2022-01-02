@@ -33,7 +33,6 @@ namespace Microsoft.Cci
         {
             get { return _inheritingType; }
         }
-
         #endregion
 
         #region IGenericParameter Members
@@ -67,7 +66,6 @@ namespace Microsoft.Cci
                   : TypeParameterVariance.NonVariant;
             }
         }
-
         #endregion
 
         #region ITypeDefinition Members
@@ -161,7 +159,6 @@ namespace Microsoft.Cci
         {
             return this as IDefinition;
         }
-
         #endregion
 
         #region IReference Members
@@ -174,7 +171,6 @@ namespace Microsoft.Cci
         }
 
         public void Dispatch(MetadataVisitor visitor) { }
-
         #endregion
 
         #region ITypeReference Members
@@ -203,7 +199,6 @@ namespace Microsoft.Cci
         {
             get { return PrimitiveTypeCode.NotPrimitive; }
         }
-
         #endregion
 
         #region IParameterListEntry Members
@@ -212,7 +207,6 @@ namespace Microsoft.Cci
         {
             get { return _index; }
         }
-
         #endregion
 
         #region INamedEntity Members
@@ -221,7 +215,6 @@ namespace Microsoft.Cci
         {
             get { return _parentParameter.Name; }
         }
-
         #endregion
 
         #region IGenericTypeParameterReference Members
@@ -230,7 +223,6 @@ namespace Microsoft.Cci
         {
             get { return _inheritingType; }
         }
-
         #endregion
 
         #region INamedTypeReference Members
@@ -239,7 +231,6 @@ namespace Microsoft.Cci
         {
             get { return false; }
         }
-
         #endregion
 
         public bool IsNested

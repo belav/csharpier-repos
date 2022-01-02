@@ -2534,6 +2534,7 @@ namespace System.ComponentModel
             CharDescriptor chDex = _stringDescriptor[position];
             return TestEscapeChar(input, position, chDex);
         }
+
         private bool TestEscapeChar(char input, int position, CharDescriptor charDex)
         {
             // Test literals first. See VSW#454461.

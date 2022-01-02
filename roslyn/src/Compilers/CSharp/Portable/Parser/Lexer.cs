@@ -1064,6 +1064,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 AddError(info.Code, info.Arguments);
             }
         }
+
 #nullable disable
 
         private bool ScanInteger()

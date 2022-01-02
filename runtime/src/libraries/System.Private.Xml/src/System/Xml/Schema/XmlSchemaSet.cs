@@ -246,6 +246,7 @@ namespace System.Xml.Schema
                 return _typeExtensions;
             }
         }
+
         //Public Methods
 
         /// <summary>

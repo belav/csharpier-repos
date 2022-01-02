@@ -20,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Facebook;
 
 public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>

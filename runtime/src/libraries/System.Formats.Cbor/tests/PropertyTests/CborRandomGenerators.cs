@@ -50,12 +50,14 @@ namespace System.Formats.Cbor.Tests
 
         // Do not generate null strings and byte arrays
         public static Arbitrary<string> String() => Arb.Default.String().Filter(s => s is not null);
+
         public static Arbitrary<byte[]> ByteArray() =>
             Arb.Default.Array<byte>().Filter(s => s is not null);
 
         // forgo NaN value generation in order to simplify equality checks
         public static Arbitrary<float> Single() =>
             Arb.Default.Float32().Filter(s => !float.IsNaN(s));
+
         public static Arbitrary<double> Double() =>
             Arb.Default.Float().Filter(s => !double.IsNaN(s));
 

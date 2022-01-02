@@ -55,36 +55,43 @@ class IBarImpl : IBar
         Console.WriteLine("At IIFoo.Foo1");
         return a + 20;
     }
+
     int IFoo.Foo3(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 30;
     }
+
     int IFoo.Foo4(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 40;
     }
+
     int IFoo.Foo5(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 50;
     }
+
     int IFoo.Foo6(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 60;
     }
+
     int IFoo.Foo7(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 70;
     }
+
     int IFoo.Foo8(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
         return a + 80;
     }
+
     int IFoo.Foo9(int a)
     {
         Console.WriteLine("At IIFoo.Foo1");
@@ -102,36 +109,43 @@ class IBarImpl : IBar
         Console.WriteLine("At IBar.Bar1");
         return a + 220;
     }
+
     int IBar.Bar3(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 330;
     }
+
     int IBar.Bar4(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 440;
     }
+
     int IBar.Bar5(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 550;
     }
+
     int IBar.Bar6(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 660;
     }
+
     int IBar.Bar7(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 770;
     }
+
     int IBar.Bar8(int a)
     {
         Console.WriteLine("At IBar.Bar1");
         return a + 880;
     }
+
     int IBar.Bar9(int a)
     {
         Console.WriteLine("At IBar.Bar1");
@@ -171,9 +185,7 @@ interface IFooBarBlah : IFoo, IBar, IBlah
 
 class FooBarBlahImpl
     : IBlahImpl, // @REMOVE
-      IFooBarBlah
-{
-}
+      IFooBarBlah { }
 
 class Program
 {

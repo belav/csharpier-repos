@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis.AddImport
         /// </summary>
         [DataMember(Order = 5)]
         public readonly ProjectId ProjectReferenceToAdd;
-
         #endregion
 
         #region When adding a metadata reference
@@ -72,7 +71,6 @@ namespace Microsoft.CodeAnalysis.AddImport
         /// </summary>
         [DataMember(Order = 7)]
         public readonly string PortableExecutableReferenceFilePathToAdd;
-
         #endregion
 
         #region When adding an assembly reference
@@ -82,7 +80,6 @@ namespace Microsoft.CodeAnalysis.AddImport
 
         [DataMember(Order = 9)]
         public readonly string AssemblyReferenceFullyQualifiedTypeName;
-
         #endregion
 
         #region When adding a package reference
@@ -95,7 +92,6 @@ namespace Microsoft.CodeAnalysis.AddImport
 
         [DataMember(Order = 12)]
         public readonly string PackageVersionOpt;
-
         #endregion
 
         // Must be public since it's used for deserialization.

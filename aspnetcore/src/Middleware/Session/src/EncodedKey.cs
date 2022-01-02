@@ -3,6 +3,7 @@
 
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Session;
 
 // Keys are stored in their utf-8 encoded state.

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
+
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
 public class ValidationVisitorModelWithValidatedProperties : ValidationVisitorBenchmarkBase

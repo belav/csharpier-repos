@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.Extensions.Logging;
 
 public static class XunitLoggerFactoryExtensions

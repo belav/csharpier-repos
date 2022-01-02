@@ -52,7 +52,6 @@ namespace Newtonsoft.Json.Tests.Converters
             result = JsonConvert.SerializeObject(d, converter);
             Assert.AreEqual("new Date(976918263055)", result);
         }
-
 #if !NET20
         [Test]
         public void SerializeDateTimeOffset()

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace HealthChecksSample;
 
 // Pass in `--scenario liveness` at the command line to run this sample.

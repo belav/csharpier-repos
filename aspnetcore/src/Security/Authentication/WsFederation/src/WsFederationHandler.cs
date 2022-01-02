@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.WsFederation;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
 /// <summary>

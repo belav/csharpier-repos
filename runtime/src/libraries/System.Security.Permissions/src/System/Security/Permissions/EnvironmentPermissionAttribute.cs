@@ -15,9 +15,11 @@ namespace System.Security.Permissions
     {
         public EnvironmentPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
         { }
+
         public string All { get; set; }
         public string Read { get; set; }
         public string Write { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

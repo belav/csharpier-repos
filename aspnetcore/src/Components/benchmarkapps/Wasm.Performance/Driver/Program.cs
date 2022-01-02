@@ -19,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using OpenQA.Selenium;
 using DevHostServerProgram = Microsoft.AspNetCore.Components.WebAssembly.DevServer.Server.Program;
 
+
 namespace Wasm.Performance.Driver;
 
 public class Program

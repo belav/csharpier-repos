@@ -3,6 +3,7 @@
 
 using System.Dynamic;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class DynamicClientProxy : DynamicObject

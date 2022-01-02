@@ -28,6 +28,7 @@ namespace System.Runtime.CompilerServices
 
         /// <summary>The wrapped state machine or task.  If the operation completed synchronously and successfully, this will be a sentinel object compared by reference identity.</summary>
         private StateMachineBox? m_task; // Debugger depends on the exact name of this field.
+
         /// <summary>The result for this builder if it's completed synchronously, in which case <see cref="m_task"/> will be <see cref="s_syncSuccessSentinel"/>.</summary>
         private TResult _result;
 
@@ -257,8 +258,10 @@ namespace System.Runtime.CompilerServices
         {
             /// <summary>A delegate to the MoveNext method.</summary>
             protected Action? _moveNextAction;
+
             /// <summary>Captured ExecutionContext with which to invoke MoveNext.</summary>
             public ExecutionContext? Context;
+
             /// <summary>Implementation for IValueTaskSource interfaces.</summary>
             protected ManualResetValueTaskSourceCore<TResult> _valueTaskSource;
 
@@ -309,11 +312,13 @@ namespace System.Runtime.CompilerServices
         {
             /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box type.</summary>
             private static readonly ContextCallback s_callback = ExecutionContextCallback;
+
             /// <summary>Per-core cache of boxes, with one box per core.</summary>
             /// <remarks>Each element is padded to expected cache-line size so as to minimize false sharing.</remarks>
             private static readonly PaddedReference[] s_perCoreCache = new PaddedReference[
                 Environment.ProcessorCount
             ];
+
             /// <summary>Thread-local cache of boxes. This currently only ever stores one.</summary>
             [ThreadStatic]
             private static StateMachineBox<TStateMachine>? t_tlsCache;

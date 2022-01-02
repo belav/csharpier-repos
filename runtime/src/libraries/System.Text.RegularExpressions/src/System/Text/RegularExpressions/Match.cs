@@ -48,6 +48,7 @@ namespace System.Text.RegularExpressions
         internal int[][] _matches;
         internal int[] _matchcount;
         internal bool _balancing; // whether we've done any balancing with this match.  If we
+
         // have done balancing, we'll need to do extra work in Tidy().
 
         internal Match(Regex? regex, int capcount, string text, int begpos, int len, int startpos)

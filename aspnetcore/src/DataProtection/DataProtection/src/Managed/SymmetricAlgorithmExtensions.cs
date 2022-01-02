@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
 internal static class SymmetricAlgorithmExtensions

@@ -27,6 +27,7 @@ class Driver
         evt.Set();
         AppDomain.Unload(ad);
     }
+
     static int Main()
     {
         AppDomain.Unload(AppDomain.CreateDomain("Warmup unload code"));

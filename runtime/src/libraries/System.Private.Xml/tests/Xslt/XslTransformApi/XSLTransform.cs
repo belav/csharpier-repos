@@ -629,6 +629,7 @@ namespace System.Xml.Tests
                 xslt.Transform(szFullFilename, _strOutFile, resolver);
             }
         }
+
 #pragma warning restore 0618
 
         public int Transform(string szXmlFile, TransformType transformType, DocType docType)

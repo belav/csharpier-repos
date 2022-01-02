@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
 internal class PagedCharBuffer : IDisposable

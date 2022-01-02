@@ -51,6 +51,7 @@ namespace System.Reflection.Emit
         internal Type? marshaltyperef;
         private int param_num;
         private bool has_size;
+
 #pragma warning restore 169, 414
 
         private UnmanagedMarshal(UnmanagedType maint, int cnt)
@@ -59,6 +60,7 @@ namespace System.Reflection.Emit
             t = maint;
             tbase = maint;
         }
+
         private UnmanagedMarshal(UnmanagedType maint, UnmanagedType elemt)
         {
             count = 0;

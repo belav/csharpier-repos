@@ -36,7 +36,6 @@ namespace System.Collections.Tests
 
         protected override Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         #region Constructor_IComparer
@@ -51,7 +50,6 @@ namespace System.Collections.Tests
             Assert.Equal(source, copied);
             Assert.Equal(comparer, copied.Comparer);
         }
-
         #endregion
 
         #region Constructor_IDictionary
@@ -72,7 +70,6 @@ namespace System.Collections.Tests
                 () => new SortedList<TKey, TValue>((IDictionary<TKey, TValue>)null)
             );
         }
-
         #endregion
 
         #region Constructor_IDictionary_IComparer
@@ -87,7 +84,6 @@ namespace System.Collections.Tests
             Assert.Equal(source, copied);
             Assert.Equal(comparer, copied.Comparer);
         }
-
         #endregion
 
         #region Constructor_int
@@ -109,7 +105,6 @@ namespace System.Collections.Tests
                 () => new SortedList<TKey, TValue>(int.MinValue)
             );
         }
-
         #endregion
 
         #region Constructor_int_IComparer
@@ -124,7 +119,6 @@ namespace System.Collections.Tests
             Assert.Equal(comparer, dictionary.Comparer);
             Assert.Equal(count, dictionary.Capacity);
         }
-
         #endregion
 
         #region Capacity
@@ -228,7 +222,6 @@ namespace System.Collections.Tests
             dictionary.Clear();
             Assert.Equal(count, dictionary.Capacity);
         }
-
         #endregion
 
         #region ContainsValue
@@ -282,7 +275,6 @@ namespace System.Collections.Tests
             dictionary.Add(notPresent, default(TValue));
             Assert.True(dictionary.ContainsValue(default(TValue)));
         }
-
         #endregion
 
         #region GetKeyAtIndex
@@ -315,7 +307,6 @@ namespace System.Collections.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count));
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count + 1));
         }
-
         #endregion
 
         #region GetValueAtIndex
@@ -349,7 +340,6 @@ namespace System.Collections.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(count));
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetValueAtIndex(count + 1));
         }
-
         #endregion
 
         #region IndexOfKey
@@ -389,7 +379,6 @@ namespace System.Collections.Tests
                 }
             );
         }
-
         #endregion
 
         #region IndexOfValue
@@ -479,7 +468,6 @@ namespace System.Collections.Tests
                 }
             );
         }
-
         #endregion
 
         #region SetValueAtIndex
@@ -567,7 +555,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region RemoveAt
@@ -647,7 +634,6 @@ namespace System.Collections.Tests
                 Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.RemoveAt(count + 1));
             }
         }
-
         #endregion
 
         #region TrimExcess
@@ -737,7 +723,6 @@ namespace System.Collections.Tests
                 Assert.Equal(dictionaryLength, dictionary.Count);
             }
         }
-
         #endregion
 
         #region Ordering
@@ -754,7 +739,6 @@ namespace System.Collections.Tests
             foreach (KeyValuePair<TKey, TValue> value in set)
                 Assert.Equal(expected[expectedIndex++], value);
         }
-
         #endregion
 
         #region IReadOnlyDictionary<TKey, TValue>.Keys

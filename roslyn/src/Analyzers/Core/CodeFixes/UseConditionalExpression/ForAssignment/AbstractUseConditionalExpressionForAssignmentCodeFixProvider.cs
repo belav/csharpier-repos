@@ -46,9 +46,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             TVariableDeclaratorSyntax variable,
             TExpressionSyntax value
         );
+
         protected abstract TVariableDeclaratorSyntax GetDeclaratorSyntax(
             IVariableDeclaratorOperation declarator
         );
+
         protected abstract TLocalDeclarationStatementSyntax AddSimplificationToType(
             TLocalDeclarationStatementSyntax updatedLocalDeclaration
         );

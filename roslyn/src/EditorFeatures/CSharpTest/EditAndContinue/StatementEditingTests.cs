@@ -85,7 +85,6 @@ var x = $""Hello{123:N2}"";
 
             edits.VerifyEdits("Update [x = $\"Hello{123:N1}\"]@8 -> [x = $\"Hello{123:N2}\"]@8");
         }
-
         #endregion
 
         #region Variable Declaration
@@ -318,7 +317,6 @@ var (a1, a3) = (1, () => { return 8; });
                 "Reorder [c]@14 -> @39"
             );
         }
-
         #endregion
 
         #region Switch Statement
@@ -395,7 +393,6 @@ switch(shape)
                 "Delete [return 0;]@40"
             );
         }
-
         #endregion
 
         #region Switch Expression
@@ -471,7 +468,6 @@ class C
 
             edits.VerifyRudeDiagnostics();
         }
-
         #endregion
 
         #region Try Catch Finally
@@ -879,7 +875,6 @@ try { Console.WriteLine(); } catch (E e) { /*1*/ } finally { /*3*/ }";
                 "Delete [if (a == 1) { /*2*/ }]@12"
             );
         }
-
         #endregion
 
         #region Blocks
@@ -929,7 +924,6 @@ try { Console.WriteLine(); } catch (E e) { /*1*/ } finally { /*3*/ }";
 
             edits.VerifyEdits();
         }
-
         #endregion
 
         #region Checked/Unchecked
@@ -1007,7 +1001,6 @@ try { Console.WriteLine(); } catch (E e) { /*1*/ } finally { /*3*/ }";
 
             edits.VerifyEdits("Insert [unchecked { x++; }]@2", "Move [{ x++; }]@2 -> @12");
         }
-
         #endregion
 
         #region Unsafe
@@ -1063,7 +1056,6 @@ try { Console.WriteLine(); } catch (E e) { /*1*/ } finally { /*3*/ }";
 
             edits.VerifyEdits("Insert [unsafe { x++; }]@2", "Move [{ x++; }]@2 -> @9");
         }
-
         #endregion
 
         #region Using Statement
@@ -1104,7 +1096,6 @@ try { Console.WriteLine(); } catch (E e) { /*1*/ } finally { /*3*/ }";
 
             edits.VerifyEdits("Insert [using (a) { Goo(); }]@2", "Move [{ Goo(); }]@2 -> @12");
         }
-
         #endregion
 
         #region Lock Statement
@@ -1145,7 +1136,6 @@ try { Console.WriteLine(); } catch (E e) { /*1*/ } finally { /*3*/ }";
 
             edits.VerifyEdits("Insert [lock (a) { Goo(); }]@2", "Move [{ Goo(); }]@2 -> @11");
         }
-
         #endregion
 
         #region ForEach Statement
@@ -1387,7 +1377,6 @@ foreach (var (a, b) in e1) { }
 
             edits.VerifyEdits("Move [foreach ((var x, var y) in e2) { }]@39 -> @4");
         }
-
         #endregion
 
         #region For Statement
@@ -1650,7 +1639,6 @@ foreach (var (a, b) in e1) { }
 
             edits.VerifyEdits("Update [() => 1]@35 -> [() => 2]@35");
         }
-
         #endregion
 
         #region While Statement
@@ -1691,7 +1679,6 @@ foreach (var (a, b) in e1) { }
 
             edits.VerifyEdits("Insert [while (a) { Goo(); }]@2", "Move [{ Goo(); }]@2 -> @12");
         }
-
         #endregion
 
         #region Do Statement
@@ -1732,7 +1719,6 @@ foreach (var (a, b) in e1) { }
 
             edits.VerifyEdits("Insert [do { Goo(); } while (a);]@2", "Move [{ Goo(); }]@2 -> @5");
         }
-
         #endregion
 
         #region If Statement
@@ -1898,7 +1884,6 @@ foreach (var (a, b) in e1) { }
                 "Delete [else { /*3*/ }]@41"
             );
         }
-
         #endregion
 
         #region Switch Statement
@@ -1992,7 +1977,6 @@ foreach (var (a, b) in e1) { }
 
             edits.VerifyEdits("Delete [case 2: break;]@41", "Delete [break;]@49");
         }
-
         #endregion
 
         #region Lambdas
@@ -5606,7 +5590,6 @@ class Program
                     )
                 );
         }
-
         #endregion
 
         #region Local Functions
@@ -8732,7 +8715,6 @@ interface I
                     )
                 );
         }
-
         #endregion
 
         #region Queries
@@ -10281,7 +10263,6 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifySemanticDiagnostics();
         }
-
         #endregion
 
         #region Yield
@@ -10520,7 +10501,6 @@ class C
                 targetFrameworks: new[] { TargetFramework.Mscorlib40AndSystemCore }
             );
         }
-
         #endregion
 
         #region Await
@@ -11511,7 +11491,6 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifySemanticDiagnostics();
         }
-
         #endregion
 
         #region Out Var
@@ -11583,7 +11562,6 @@ M();
 
             edits.VerifyEdits("Update [M(out int y);]@4 -> [M();]@4", "Delete [y]@14");
         }
-
         #endregion
 
         #region Pattern
@@ -11973,7 +11951,6 @@ switch(shape)
                 "Move [c]@122 -> @89"
             );
         }
-
         #endregion
 
         #region Ref
@@ -12049,7 +12026,6 @@ int G1(int[] p) { return p[2]; }
                 "Update [a = ref G(new int[] { 1, 2 })]@12 -> [a = G1(new int[] { 1, 2 })]@10"
             );
         }
-
         #endregion
 
         #region Tuples
@@ -12135,7 +12111,6 @@ int G1(int[] p) { return p[2]; }
                 "Update [(int, int) x]@35 -> [(int, int) y]@35"
             );
         }
-
         #endregion
 
         #region With Expressions
@@ -12197,7 +12172,6 @@ int G1(int[] p) { return p[2]; }
                 @"Update [x = y with { X = 1, Y = 1 }]@6 -> [x = y with { Y = 1, X = 1 }]@6"
             );
         }
-
         #endregion
 
         #region Top Level Statements

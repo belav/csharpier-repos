@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.Test;
 
+
 namespace Microsoft.AspNetCore.Identity.InMemory;
 
 public class InMemoryStore<TUser, TRole>

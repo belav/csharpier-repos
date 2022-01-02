@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
 internal partial class HttpConnectionDispatcher
@@ -885,6 +886,7 @@ internal partial class HttpConnectionDispatcher
     private class EmptyServiceProvider : IServiceProvider
     {
         public static EmptyServiceProvider Instance { get; } = new EmptyServiceProvider();
+
         public object? GetService(Type serviceType) => null;
     }
 }

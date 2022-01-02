@@ -35,11 +35,13 @@ namespace System.Runtime.Intrinsics.X86
         ///   PABSB xmm, xmm/m128
         /// </summary>
         public static Vector128<byte> Abs(Vector128<sbyte> value) => Abs(value);
+
         /// <summary>
         /// __m128i _mm_abs_epi16 (__m128i a)
         ///   PABSW xmm, xmm/m128
         /// </summary>
         public static Vector128<ushort> Abs(Vector128<short> value) => Abs(value);
+
         /// <summary>
         /// __m128i _mm_abs_epi32 (__m128i a)
         ///   PABSD xmm, xmm/m128
@@ -141,6 +143,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<short> left,
             Vector128<short> right
         ) => HorizontalAdd(left, right);
+
         /// <summary>
         /// __m128i _mm_hadd_epi32 (__m128i a, __m128i b)
         ///   PHADDD xmm, xmm/m128
@@ -165,6 +168,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<short> left,
             Vector128<short> right
         ) => HorizontalSubtract(left, right);
+
         /// <summary>
         /// __m128i _mm_hsub_epi32 (__m128i a, __m128i b)
         ///   PHSUBD xmm, xmm/m128
@@ -221,12 +225,14 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector128<sbyte> Sign(Vector128<sbyte> left, Vector128<sbyte> right) =>
             Sign(left, right);
+
         /// <summary>
         /// __m128i _mm_sign_epi16 (__m128i a, __m128i b)
         ///   PSIGNW xmm, xmm/m128
         /// </summary>
         public static Vector128<short> Sign(Vector128<short> left, Vector128<short> right) =>
             Sign(left, right);
+
         /// <summary>
         /// __m128i _mm_sign_epi32 (__m128i a, __m128i b)
         ///   PSIGND xmm, xmm/m128

@@ -236,6 +236,7 @@ namespace System.ComponentModel.Design
             s_standardCommandSet,
             VSStandardCommands.cmdidHorizSpaceMakeEqual
         );
+
         /// <summary>
         /// Gets the GUID/integer value pair for the Paste command. Read only.
         /// </summary>
@@ -821,6 +822,7 @@ namespace System.ComponentModel.Design
             // ids on the docking context menu
             internal const int cmdidDockingView = 284;
             internal const int cmdidHideActivePane = 285;
+
             // ids for window selection via keyboard
             //internal const int cmdidPaneNextPane    = 316;(listed below in order)
             //internal const int cmdidPanePrevPane    = 317;(listed below in order)
@@ -850,6 +852,7 @@ namespace System.ComponentModel.Design
             internal const int cmdidToolboxTabMoveDown = 304;
             internal const int cmdidToolboxRenameItem = 305;
             internal const int cmdidToolboxListView = 306;
+
             //(below) cmdidSearchSetCombo    = 307;
 
             internal const int cmdidWindowUIGetList = 308;
@@ -935,6 +938,7 @@ namespace System.ComponentModel.Design
 
             //    = 367;is used above in cmdidProjectReferences
             internal const int cmdidStartNoDebug = 368;
+
             //    = 369;is used above in cmdidLockControls
 
             internal const int cmdidFindNext = 370;
@@ -1201,6 +1205,7 @@ namespace System.ComponentModel.Design
             internal const int cmdidDebugReserved1 = 747;
             internal const int cmdidDebugReserved2 = 748;
             internal const int cmdidDebugReserved3 = 749;
+
             //USED ABOVE    = 750;
             //USED ABOVE    = 751;
             //USED ABOVE    = 752;

@@ -121,7 +121,6 @@ namespace System.Collections.Tests
                 return _equalityComparer.GetHashCode(obj.Key);
             }
         }
-
         #endregion
 
         #region ICollection<KeyValuePair<TKey, TValue>> Helper Methods
@@ -266,7 +265,6 @@ namespace System.Collections.Tests
         /// </summary>
         protected virtual bool IDictionary_Generic_Keys_Values_Enumeration_ResetImplemented =>
             ResetImplemented;
-
         #endregion
 
         #region Item Getter
@@ -325,7 +323,6 @@ namespace System.Collections.Tests
                 Assert.Equal(pair.Value, dictionary[pair.Key]);
             }
         }
-
         #endregion
 
         #region Item Setter
@@ -387,7 +384,6 @@ namespace System.Collections.Tests
             Assert.Equal(count + 1, dictionary.Count);
             Assert.Equal(newValue, dictionary[existingKey]);
         }
-
         #endregion
 
         #region Keys
@@ -470,7 +466,6 @@ namespace System.Collections.Tests
             else
                 Assert.Throws<NotSupportedException>(() => enumerator.Reset());
         }
-
         #endregion
 
         #region Values
@@ -569,7 +564,6 @@ namespace System.Collections.Tests
             else
                 Assert.Throws<NotSupportedException>(() => enumerator.Reset());
         }
-
         #endregion
 
         #region Add(TKey, TValue)
@@ -705,7 +699,6 @@ namespace System.Collections.Tests
                 }
             }
         }
-
         #endregion
 
         #region ContainsKey
@@ -768,7 +761,6 @@ namespace System.Collections.Tests
                 Assert.True(dictionary.ContainsKey(missingKey));
             }
         }
-
         #endregion
 
         #region Remove(TKey)
@@ -924,7 +916,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region TryGetValue
@@ -992,7 +983,6 @@ namespace System.Collections.Tests
                 Assert.Equal(value, outValue);
             }
         }
-
         #endregion
 
         #region ICollection<KeyValuePair<TKey, TValue>>
@@ -1049,7 +1039,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region ICollection

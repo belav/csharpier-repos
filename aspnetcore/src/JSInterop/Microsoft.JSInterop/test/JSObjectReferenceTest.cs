@@ -8,6 +8,7 @@ using Microsoft.JSInterop.Implementation;
 using Microsoft.JSInterop.Infrastructure;
 using Xunit;
 
+
 namespace Microsoft.JSInterop.Tests;
 
 public class JSObjectReferenceTest

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 internal sealed unsafe class KeyRingBasedDataProtector : IDataProtector, IPersistedDataProtector

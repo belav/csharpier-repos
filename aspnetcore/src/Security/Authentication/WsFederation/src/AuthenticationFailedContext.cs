@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Protocols.WsFederation;
 
+
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
 /// <summary>

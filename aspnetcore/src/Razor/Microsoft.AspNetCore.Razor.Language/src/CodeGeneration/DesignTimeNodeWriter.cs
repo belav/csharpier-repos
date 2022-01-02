@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 public class DesignTimeNodeWriter : IntermediateNodeWriter

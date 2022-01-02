@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Test.Helpers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Test;
 
 public class ComponentBaseTest

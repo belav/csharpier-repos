@@ -5,6 +5,7 @@ using System.Linq;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class DefaultRazorEngineBuilderTest

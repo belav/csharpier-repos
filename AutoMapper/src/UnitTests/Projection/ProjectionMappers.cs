@@ -43,6 +43,7 @@ namespace AutoMapper.UnitTests.Projection
                 .First();
             destination.Color.ShouldBe(11);
         }
+
         private class EnumToUnderlyingTypeProjectionMapper : IProjectionMapper
         {
             public Expression Project(
@@ -53,6 +54,7 @@ namespace AutoMapper.UnitTests.Projection
                 Expression resolvedSource,
                 LetPropertyMaps letPropertyMaps
             ) => Convert(resolvedSource, memberMap.DestinationType);
+
             public bool IsMatch(
                 MemberMap memberMap,
                 TypeMap memberTypeMap,

@@ -214,8 +214,10 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>WaitCallback that invokes the Action supplied as object state.</summary>
             private static readonly WaitCallback s_waitCallbackRunAction = RunAction;
+
             /// <summary>SendOrPostCallback that invokes the Action supplied as object state.</summary>
             private static readonly SendOrPostCallback s_sendOrPostCallbackRunAction = RunAction;
+
             /// <summary>Runs an Action delegate provided as state.</summary>
             /// <param name="state">The Action delegate to invoke.</param>
             private static void RunAction(object? state)

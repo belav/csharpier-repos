@@ -39,8 +39,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             | EditAndContinueCapabilities.UpdateParameters;
 
         public abstract AbstractEditAndContinueAnalyzer Analyzer { get; }
+
         public abstract SyntaxNode FindNode(SyntaxNode root, TextSpan span);
+
         public abstract ImmutableArray<SyntaxNode> GetDeclarators(ISymbol method);
+
         public abstract string LanguageName { get; }
         public abstract TreeComparer<SyntaxNode> TopSyntaxComparer { get; }
 

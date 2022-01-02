@@ -164,6 +164,7 @@ namespace System.ComponentModel.Composition
             {
                 Value = 21;
             }
+
             public ExporterDefault21(int v)
             {
                 Value = v;
@@ -180,6 +181,7 @@ namespace System.ComponentModel.Composition
             {
                 Value = 42;
             }
+
             public ExporterDefault42(int v)
             {
                 Value = v;

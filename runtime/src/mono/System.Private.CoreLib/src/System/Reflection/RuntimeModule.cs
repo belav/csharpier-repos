@@ -44,6 +44,7 @@ namespace System.Reflection
         internal string scopename = null!;
         internal bool is_resource;
         internal int token;
+
         #endregion
         #endregion
 #pragma warning restore 649

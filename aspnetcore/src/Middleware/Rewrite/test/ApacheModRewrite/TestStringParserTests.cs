@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 using Microsoft.AspNetCore.Rewrite.PatternSegments;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite;
 
 public class TestStringParserTests
@@ -85,6 +86,7 @@ public class TestStringParserTests
         var expected = new Pattern(list);
         AssertPatternsEqual(expected, result);
     }
+
     [Fact]
     public void ConditionParser_ParseMultipleRuleVariables()
     {

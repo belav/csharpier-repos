@@ -16,16 +16,19 @@ internal class Test_lifetime1
             _iMember = 123;
             Test_lifetime1.aExists = true;
         }
+
         ~A()
         {
             Console.WriteLine("~A");
             Test_lifetime1.aExists = false;
         }
+
         public bool F()
         {
             Console.WriteLine("A.F(): iMember = {0}", _iMember);
             return true;
         }
+
         private volatile int _iMember;
     }
 

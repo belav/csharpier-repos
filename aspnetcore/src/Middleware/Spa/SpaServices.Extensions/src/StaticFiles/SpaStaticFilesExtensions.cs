@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.StaticFiles;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

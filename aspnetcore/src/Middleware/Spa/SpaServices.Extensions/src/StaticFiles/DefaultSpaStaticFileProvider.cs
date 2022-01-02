@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.SpaServices.StaticFiles;
 
 /// <summary>

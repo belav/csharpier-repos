@@ -569,7 +569,6 @@ namespace System.PrivateUri.Tests
             string expectedResult = FullBaseUriGetLeftPart_Authority + nonCompressable;
             Assert.Equal(expectedResult, resolved.ToString());
         }
-
         #endregion PathCompression
 
         #region MakeRelativeToUri
@@ -663,7 +662,6 @@ namespace System.PrivateUri.Tests
             Assert.Equal(expectedResult, relative.ToString());
             Assert.Equal(compareUri, reassembled);
         }
-
         #endregion MakeRelativeToUri
 
         [Fact]
@@ -799,6 +797,7 @@ namespace System.PrivateUri.Tests
 
                 return result.ToString();
             }
+
             public static bool IsIriAllowedSurrogate(string pair)
             {
                 bool inRange = _iriAllowedSurrogateRanges.Any(
@@ -814,6 +813,7 @@ namespace System.PrivateUri.Tests
             {
                 return _iriDisallowedBidi.Contains(c);
             }
+
             public static bool IsIriReserved(char c)
             {
                 /*

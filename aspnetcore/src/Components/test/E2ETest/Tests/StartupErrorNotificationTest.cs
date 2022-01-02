@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class StartupErrorNotificationTest : ServerTestBase<BlazorWasmTestAppFixture<Program>>

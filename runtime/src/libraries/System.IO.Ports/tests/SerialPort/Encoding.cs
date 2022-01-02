@@ -151,7 +151,6 @@ namespace System.IO.Ports.Tests
             Debug.WriteLine("Verifying Chinese Simplified (GB18030) Encoding before open");
             VerifyEncodingBeforeOpen(Encoding.GetEncoding(54936));
         }
-
         #endregion
 
         #region Verification for Test Cases

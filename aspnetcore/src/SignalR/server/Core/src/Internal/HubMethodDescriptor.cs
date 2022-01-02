@@ -11,6 +11,7 @@ using System.Threading.Channels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class HubMethodDescriptor

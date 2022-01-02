@@ -85,7 +85,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 "Expected date object value."
             );
         }
-
 #if !NET20
         [Test]
         public void SerializeDateTimeOffset()

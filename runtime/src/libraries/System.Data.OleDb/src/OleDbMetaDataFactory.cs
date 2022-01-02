@@ -19,6 +19,7 @@ namespace System.Data.OleDb
                 _schemaName = schemaName;
                 _schemaRowset = schemaRowset;
             }
+
             internal readonly string _schemaName;
             internal readonly Guid _schemaRowset;
         }

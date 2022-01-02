@@ -19,6 +19,7 @@ namespace System.Net.Security.Tests
               ? stream.AuthenticateAsClientAsync(clientOptions, cancellationToken)
               : Task.Run(() => stream.AuthenticateAsClient(clientOptions));
         }
+
         public static Task AuthenticateAsServerAsync(
             this SslStream stream,
             bool async,

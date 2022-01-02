@@ -23,7 +23,6 @@ namespace System.Speech.Internal.SrgsCompiler
             _maxRepeat = maxRepeat;
             _repeatProbability = repeatProbability;
         }
-
         #endregion
 
         #region Internal Method
@@ -159,7 +158,6 @@ namespace System.Speech.Internal.SrgsCompiler
             // Add this item to the parent list
             base.PostParse((ParseElementCollection)parentElement);
         }
-
         #endregion
 
         #region Private Methods
@@ -170,7 +168,6 @@ namespace System.Speech.Internal.SrgsCompiler
             epsilon.Start = start;
             epsilon.End = end;
         }
-
         #endregion
 
         #region Private Fields

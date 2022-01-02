@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public sealed class SourceMapping : IEquatable<SourceMapping>

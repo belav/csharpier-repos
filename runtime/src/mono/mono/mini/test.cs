@@ -5,10 +5,12 @@ namespace SSA
     class Test
     {
         static void empty() { }
+
         static int ret_int()
         {
             return 1;
         }
+
         static int simple_add(int a)
         {
             int b = 5;

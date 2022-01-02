@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace HtmlGenerationWebSite.Models;
 
 public class Product

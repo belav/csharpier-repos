@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTokenizer>

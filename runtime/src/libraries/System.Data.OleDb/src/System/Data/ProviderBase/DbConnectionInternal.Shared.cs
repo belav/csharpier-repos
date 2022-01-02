@@ -44,7 +44,6 @@ namespace System.Data.ProviderBase
         // This field should only be assigned a value at the same time _enlistedTransaction is updated.
         // Also, this reference should not be disposed, since we aren't taking ownership of it.
         private SysTx.Transaction? _enlistedTransactionOriginal;
-
 #if DEBUG
         private int _activateCount; // debug only counter to verify activate/deactivates are in sync.
 #endif //DEBUG

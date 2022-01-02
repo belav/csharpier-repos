@@ -43,7 +43,6 @@ namespace Microsoft.CodeAnalysis.Remote
 
         // it is saved here more on debugging purpose.
         private static Func<FunctionId, bool> s_logChecker = _ => false;
-
 #if DEBUG
 #pragma warning disable IDE0052 // Remove unread private members
         private PerformanceReporter? _performanceReporter;

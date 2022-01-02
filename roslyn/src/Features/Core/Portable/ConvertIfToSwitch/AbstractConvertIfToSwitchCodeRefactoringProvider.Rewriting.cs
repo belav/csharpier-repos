@@ -28,12 +28,15 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             ImmutableArray<AnalyzedSwitchSection> sections,
             Feature feature
         );
+
         public abstract SyntaxNode CreateSwitchStatement(
             TIfStatementSyntax ifStatement,
             SyntaxNode target,
             IEnumerable<SyntaxNode> sectionList
         );
+
         public abstract IEnumerable<SyntaxNode> AsSwitchSectionStatements(IOperation operation);
+
         public abstract SyntaxNode AsSwitchLabelSyntax(AnalyzedSwitchLabel label, Feature feature);
 
         private async Task<Document> UpdateDocumentAsync(

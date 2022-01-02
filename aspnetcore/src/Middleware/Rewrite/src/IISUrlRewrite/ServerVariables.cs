@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Rewrite.PatternSegments;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 internal static class ServerVariables

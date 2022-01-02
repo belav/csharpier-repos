@@ -123,14 +123,17 @@ namespace System.Reflection
         public override MemberTypes MemberType => MemberTypes.Event;
         public override string Name => m_name ??= new MdUtf8String(m_utf8name).ToString();
         public override Type? DeclaringType => m_declaringType;
+
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             HasSameMetadataDefinitionAsCore<RuntimeEventInfo>(other);
+
         public override Type? ReflectedType => ReflectedTypeInternal;
 
         private RuntimeType ReflectedTypeInternal => m_reflectedTypeCache.GetRuntimeType();
 
         public override int MetadataToken => m_token;
         public override Module Module => GetRuntimeModule();
+
         internal RuntimeModule GetRuntimeModule()
         {
             return m_declaringType.GetRuntimeModule();

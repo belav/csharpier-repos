@@ -423,7 +423,6 @@ Inner i;
                 .SingleOrDefault();
             Assert.Equal(expectedSymbol, actualSymbol);
         }
-
         #endregion
 
         #region FindSourceDeclarationsAsync_Project
@@ -741,7 +740,6 @@ Inner i;
                 }
             );
         }
-
         #endregion
 
         #region FindSourceDeclarationsAsync_Solution
@@ -1059,7 +1057,6 @@ Inner i;
                 }
             );
         }
-
         #endregion
 
         #region FindSourceDeclarationsAsync_Project_Func
@@ -1189,7 +1186,6 @@ Inner i;
                 }
             );
         }
-
         #endregion
 
         #region FindSourceDeclarationsAsync_Solution_Func
@@ -1340,7 +1336,6 @@ Inner i;
                 }
             );
         }
-
         #endregion
 
         #region FindSourceDeclarationsWithPatternAsync_Project
@@ -1476,7 +1471,6 @@ Inner i;
                 }
             );
         }
-
         #endregion
 
         #region FindSourceDeclarationsWithPatternAsync_Solution
@@ -1633,7 +1627,6 @@ Inner i;
                 }
             );
         }
-
         #endregion
 
         [Fact]

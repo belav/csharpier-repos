@@ -25,7 +25,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return _name; }
         }
-
 #if DEBUG
         internal string NameNoSequence { get; }
 

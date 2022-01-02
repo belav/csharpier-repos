@@ -109,10 +109,12 @@ namespace System.Net.Http
         //
 
         public abstract override int Read(Span<byte> buffer);
+
         public abstract override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
         );
+
         public abstract override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken

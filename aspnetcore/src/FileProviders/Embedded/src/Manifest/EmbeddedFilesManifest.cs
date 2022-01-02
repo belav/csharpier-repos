@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal class EmbeddedFilesManifest

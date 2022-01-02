@@ -164,7 +164,6 @@ namespace System.Text.Json.Serialization.Tests
                 await JsonSerializerWrapperForString.SerializeWrapper(obj)
             );
         }
-
 #if !BUILDING_SOURCE_GENERATOR_TESTS // These are compile-time warnings from the source generator.
         [Fact]
         public async Task MultipleAttributes_NotSupported()

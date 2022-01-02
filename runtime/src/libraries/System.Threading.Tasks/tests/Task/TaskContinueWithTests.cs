@@ -2308,7 +2308,6 @@ namespace System.Threading.Tasks.Tests
             barrier.SignalAndWait(); // alert task that we're done waiting
             task2.Wait();
         }
-
         #endregion
 
         #region Helper Methods

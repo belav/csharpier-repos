@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 internal class NullParser<TRequestHandler> : IHttpParser<TRequestHandler>

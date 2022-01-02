@@ -33,6 +33,7 @@ namespace Castle.Components.DictionaryAdapter
                 Property = property;
                 PropertyValue = propertyValue;
             }
+
             public readonly PropertyDescriptor Property;
             public object PropertyValue;
         }

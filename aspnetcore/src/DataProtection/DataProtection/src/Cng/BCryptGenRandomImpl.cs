@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Cryptography.Cng;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
 internal sealed unsafe class BCryptGenRandomImpl : IBCryptGenRandom

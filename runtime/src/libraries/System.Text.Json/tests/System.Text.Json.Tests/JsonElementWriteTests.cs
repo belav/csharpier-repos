@@ -181,7 +181,9 @@ namespace System.Text.Json.Tests
         };
 
         protected abstract JsonDocument PrepareDocument(string jsonIn);
+
         protected abstract void WriteSingleValue(JsonDocument document, Utf8JsonWriter writer);
+
         protected abstract void WriteDocument(JsonDocument document, Utf8JsonWriter writer);
 
         [Theory]

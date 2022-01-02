@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace CustomEncryptorSample;
 
 public class CustomXmlDecryptor : IXmlDecryptor

@@ -336,7 +336,6 @@ namespace System.IO
         {
             return Task.CompletedTask;
         }
-
         #endregion
 
         // Returns a string containing the characters written to this TextWriter so far.

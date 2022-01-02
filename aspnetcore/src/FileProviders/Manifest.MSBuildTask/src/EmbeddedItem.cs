@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
 public class EmbeddedItem : IEquatable<EmbeddedItem>
@@ -20,6 +21,7 @@ public class EmbeddedItem : IEquatable<EmbeddedItem>
         );
 
     public override bool Equals(object obj) => Equals(obj as EmbeddedItem);
+
     public override int GetHashCode() =>
         ManifestFilePath.GetHashCode() ^ AssemblyResourceName.GetHashCode();
 }

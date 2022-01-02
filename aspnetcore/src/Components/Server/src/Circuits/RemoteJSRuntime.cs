@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Microsoft.JSInterop.Infrastructure;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal partial class RemoteJSRuntime : JSRuntime

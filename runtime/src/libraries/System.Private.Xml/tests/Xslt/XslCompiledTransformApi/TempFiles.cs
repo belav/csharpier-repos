@@ -14,6 +14,7 @@ namespace System.Xml.Tests
         private XslCompiledTransform _xsl = null;
 
         private ITestOutputHelper _output;
+
         public TempFiles(ITestOutputHelper output) : base(output)
         {
             _output = output;

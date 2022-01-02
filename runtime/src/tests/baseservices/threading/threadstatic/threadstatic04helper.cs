@@ -12,6 +12,7 @@ public sealed class ILI
 #pragma warning disable 414
     [ThreadStaticAttribute()]
     static RCB rcbsave;
+
 #pragma warning restore 414
     public ILI(int zapgnum, LIA zalia)
     {

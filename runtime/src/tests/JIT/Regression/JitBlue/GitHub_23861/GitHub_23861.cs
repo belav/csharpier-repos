@@ -10,6 +10,7 @@ namespace GitHub_23861
     class Program
     {
         static int returnVal = 100;
+
         static int Main(string[] args)
         {
             LessThanAllDouble();

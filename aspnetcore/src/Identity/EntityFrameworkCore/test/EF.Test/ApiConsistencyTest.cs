@@ -4,6 +4,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.Test;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class ApiConsistencyTest : ApiConsistencyTestBase

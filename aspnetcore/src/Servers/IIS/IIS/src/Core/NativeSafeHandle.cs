@@ -5,6 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks.Sources;
 
+
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 internal class NativeSafeHandle : SafeHandle, IValueTaskSource<object?>

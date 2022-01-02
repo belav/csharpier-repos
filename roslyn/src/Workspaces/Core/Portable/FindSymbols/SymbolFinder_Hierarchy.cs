@@ -466,7 +466,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 .ConfigureAwait(false);
             return types.WhereAsArray(t => IsAccessible(t));
         }
-
         #endregion
 
         /// <summary>

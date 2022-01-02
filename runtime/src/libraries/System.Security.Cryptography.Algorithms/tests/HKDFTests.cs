@@ -18,12 +18,14 @@ namespace System.Security.Cryptography.Algorithms.Tests
             byte[] ikm,
             byte[] salt
         );
+
         protected abstract byte[] Expand(
             HashAlgorithmName hash,
             byte[] prk,
             int outputLength,
             byte[] info
         );
+
         protected abstract byte[] DeriveKey(
             HashAlgorithmName hash,
             byte[] ikm,

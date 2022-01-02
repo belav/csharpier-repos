@@ -5,6 +5,7 @@ using System;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Rewrite.UrlMatches;
 
+
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 internal class UriMatchCondition : Condition

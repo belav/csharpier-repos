@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
 /// <summary>

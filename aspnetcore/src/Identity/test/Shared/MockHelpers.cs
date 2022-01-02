@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public static class MockHelpers

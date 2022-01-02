@@ -9,6 +9,7 @@ public sealed class LargeException : Exception
     // disabling unused variable warning
 #pragma warning disable 0414
     LargeObject lo;
+
 #pragma warning restore 0414
 
     public LargeException(uint size)
@@ -20,6 +21,7 @@ public sealed class LargeException : Exception
 public sealed class LargeExceptionTest
 {
     private uint size = 0;
+
     public LargeExceptionTest(uint size)
     {
         this.size = size;

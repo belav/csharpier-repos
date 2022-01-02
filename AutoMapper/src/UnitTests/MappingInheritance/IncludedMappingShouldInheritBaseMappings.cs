@@ -18,26 +18,32 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.CodeList, o => o.DoNotUseDestinationValue());
                 }
             );
+
         public class SourceBase
         {
             public ICollection<string> CodeList { get; } = new List<string>();
         }
+
         public class Source : SourceBase
         {
         }
+
         public class DestinationBase
         {
             public ICollection<string> CodeList { get; set; } = new HashSet<string>();
         }
+
         public class Destination : DestinationBase
         {
         }
+
         [Fact]
         public void ShouldMapOk() =>
             Mapper
                 .Map<Destination>(new Source { CodeList = { "DMItemCode1" } })
                 .CodeList.ShouldNotBeOfType<HashSet<string>>();
     }
+
     public class ReadonlyCollectionProperties : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
@@ -61,27 +67,33 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<DomainModel, Model>();
                 }
             );
+
         public class DomainModelBase
         {
             public ICollection<string> CodeList { get; } = new List<string>();
         }
+
         public class DomainModel : DomainModelBase
         {
         }
+
         public class ModelBase
         {
             public ICollection<KeyValueModel> KeyValuesOtherName { get; } =
                 new List<KeyValueModel>();
             public ICollection<string> CodeList { get; } = new List<string>();
         }
+
         public class Model : ModelBase
         {
         }
+
         public class KeyValueModel
         {
             public string Key { get; set; }
             public string Value { get; set; }
         }
+
         [Fact]
         public void ShouldMapOk()
         {
@@ -93,6 +105,7 @@ namespace AutoMapper.UnitTests
             keyValue.Value.ShouldBe("value1");
         }
     }
+
     public class IncludedBaseMappingShouldInheritBaseMappings : SpecBase
     {
         public class ModelObject
@@ -135,6 +148,7 @@ namespace AutoMapper.UnitTests
 
             config.AssertConfigurationIsValid();
         }
+
         [Fact]
         public void included_mapping_should_not_care_about_order()
         {
@@ -242,6 +256,7 @@ namespace AutoMapper.UnitTests
             );
             config.AssertConfigurationIsValid();
         }
+
         [Fact]
         public void more_specific_map_should_override_base_mapping_with_one_parameter()
         {

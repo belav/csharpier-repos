@@ -43,6 +43,7 @@ namespace System.Linq.Expressions.Compiler
 
         // Currently active LabelTargets and their mapping to IL labels
         private LabelScopeInfo _labelBlock = new LabelScopeInfo(null, LabelScopeKind.Lambda);
+
         // Mapping of labels used for "long" jumps (jumping out and into blocks)
         private readonly Dictionary<LabelTarget, LabelInfo> _labelInfo = new Dictionary<
             LabelTarget,
@@ -180,7 +181,6 @@ namespace System.Linq.Expressions.Compiler
         internal ILGenerator IL => _ilg;
 
         internal IParameterProvider Parameters => _lambda;
-
 #if FEATURE_COMPILE_TO_METHODBUILDER
         internal bool CanEmitBoundConstants => _method is DynamicMethod;
 #endif

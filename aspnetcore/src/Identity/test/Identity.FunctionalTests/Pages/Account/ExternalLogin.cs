@@ -10,6 +10,7 @@ using AngleSharp.Dom.Html;
 using AngleSharp.Extensions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
 public class ExternalLogin : DefaultUIPage

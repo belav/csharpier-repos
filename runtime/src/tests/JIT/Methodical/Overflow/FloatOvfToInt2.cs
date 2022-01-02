@@ -14,15 +14,18 @@ internal class FloatOvfToInt
     {
         return (long)f;
     }
+
     public static long FloatToLongInline(float f)
     {
         return (long)f;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static ulong FloatToUlong(float f)
     {
         return (ulong)f;
     }
+
     public static ulong FloatToUlongInline(float f)
     {
         return (ulong)f;
@@ -33,15 +36,18 @@ internal class FloatOvfToInt
     {
         return (int)f;
     }
+
     public static int FloatToIntInline(float f)
     {
         return (int)f;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static uint FloatToUint(float f)
     {
         return (uint)f;
     }
+
     public static uint FloatToUintInline(float f)
     {
         return (uint)f;
@@ -52,15 +58,18 @@ internal class FloatOvfToInt
     {
         return (short)f;
     }
+
     public static short FloatToShortInline(float f)
     {
         return (short)f;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static ushort FloatToUshort(float f)
     {
         return (ushort)f;
     }
+
     public static ushort FloatToUshortInline(float f)
     {
         return (ushort)f;
@@ -71,15 +80,18 @@ internal class FloatOvfToInt
     {
         return (sbyte)f;
     }
+
     public static sbyte FloatToSbyteInline(float f)
     {
         return (sbyte)f;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static byte FloatToByte(float f)
     {
         return (byte)f;
     }
+
     public static byte FloatToByteInline(float f)
     {
         return (byte)f;
@@ -90,15 +102,18 @@ internal class FloatOvfToInt
     {
         return (long)d;
     }
+
     public static long DoubleToLongInline(double d)
     {
         return (long)d;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static ulong DoubleToUlong(double d)
     {
         return (ulong)d;
     }
+
     public static ulong DoubleToUlongInline(double d)
     {
         return (ulong)d;
@@ -109,15 +124,18 @@ internal class FloatOvfToInt
     {
         return (int)d;
     }
+
     public static int DoubleToIntInline(double d)
     {
         return (int)d;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static uint DoubleToUint(double d)
     {
         return (uint)d;
     }
+
     public static uint DoubleToUintInline(double d)
     {
         return (uint)d;
@@ -128,15 +146,18 @@ internal class FloatOvfToInt
     {
         return (short)d;
     }
+
     public static short DoubleToShortInline(double d)
     {
         return (short)d;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static ushort DoubleToUshort(double d)
     {
         return (ushort)d;
     }
+
     public static ushort DoubleToUshortInline(double d)
     {
         return (ushort)d;
@@ -147,15 +168,18 @@ internal class FloatOvfToInt
     {
         return (sbyte)d;
     }
+
     public static sbyte DoubleToSbyteInline(double d)
     {
         return (sbyte)d;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static byte DoubleToByte(double d)
     {
         return (byte)d;
     }
+
     public static byte DoubleToByteInline(double d)
     {
         return (byte)d;

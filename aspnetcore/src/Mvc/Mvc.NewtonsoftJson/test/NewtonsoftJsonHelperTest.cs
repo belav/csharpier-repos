@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 public class NewtonsoftJsonHelperTest : JsonHelperTestBase

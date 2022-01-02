@@ -88,6 +88,7 @@ namespace System.Reflection.Emit
         {
             return fb.FieldType.ToString() + " " + Name;
         }
+
         //
         // FieldInfo members
         //

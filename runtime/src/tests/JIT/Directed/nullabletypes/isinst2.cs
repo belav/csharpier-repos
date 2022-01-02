@@ -976,6 +976,7 @@ internal class Program
             Eval(18620, v is SealedClass[], false);
         }
     } // end of test case 0019
+
     private static void TestCase0020()
     {
         {
@@ -1934,6 +1935,7 @@ internal class Program
             Eval(19600, v is SealedClass[], false);
         }
     } // end of test case 0020
+
     private static void TestCase0021()
     {
         {
@@ -2892,6 +2894,7 @@ internal class Program
             Eval(20580, v is SealedClass[], false);
         }
     } // end of test case 0021
+
     private static void TestCase0022()
     {
         {
@@ -3850,6 +3853,7 @@ internal class Program
             Eval(21560, v is SealedClass[], false);
         }
     } // end of test case 0022
+
     private static void TestCase0023()
     {
         {
@@ -4808,6 +4812,7 @@ internal class Program
             Eval(22540, v is SealedClass[], false);
         }
     } // end of test case 0023
+
     private static void TestCase0024()
     {
         {
@@ -5766,6 +5771,7 @@ internal class Program
             Eval(23520, v is SealedClass[], false);
         }
     } // end of test case 0024
+
     private static void TestCase0025()
     {
         {
@@ -6724,6 +6730,7 @@ internal class Program
             Eval(24500, v is SealedClass[], false);
         }
     } // end of test case 0025
+
     private static void TestCase0026()
     {
         {
@@ -7682,6 +7689,7 @@ internal class Program
             Eval(25480, v is SealedClass[], false);
         }
     } // end of test case 0026
+
     private static void TestCase0027()
     {
         {
@@ -8640,6 +8648,7 @@ internal class Program
             Eval(26460, v is SealedClass[], false);
         }
     } // end of test case 0027
+
     private static void TestCase0028()
     {
         {
@@ -9598,6 +9607,7 @@ internal class Program
             Eval(27440, v is SealedClass[], false);
         }
     } // end of test case 0028
+
     private static void TestCase0029()
     {
         {
@@ -10556,6 +10566,7 @@ internal class Program
             Eval(28420, v is SealedClass[], false);
         }
     } // end of test case 0029
+
     private static void TestCase0030()
     {
         {
@@ -11514,6 +11525,7 @@ internal class Program
             Eval(29400, v is SealedClass[], false);
         }
     } // end of test case 0030
+
     private static void TestCase0031()
     {
         {
@@ -12472,6 +12484,7 @@ internal class Program
             Eval(30380, v is SealedClass[], false);
         }
     } // end of test case 0031
+
     private static void TestCase0032()
     {
         {
@@ -13430,6 +13443,7 @@ internal class Program
             Eval(31360, v is SealedClass[], false);
         }
     } // end of test case 0032
+
     private static void TestCase0033()
     {
         {
@@ -14388,6 +14402,7 @@ internal class Program
             Eval(32340, v is SealedClass[], false);
         }
     } // end of test case 0033
+
     private static void TestCase0034()
     {
         {
@@ -15346,6 +15361,7 @@ internal class Program
             Eval(33320, v is SealedClass[], false);
         }
     } // end of test case 0034
+
     private static void TestCase0035()
     {
         {
@@ -16304,6 +16320,7 @@ internal class Program
             Eval(34300, v is SealedClass[], false);
         }
     } // end of test case 0035
+
     private static void TestCase0036()
     {
         {

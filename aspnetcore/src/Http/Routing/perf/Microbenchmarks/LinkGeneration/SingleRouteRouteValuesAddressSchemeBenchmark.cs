@@ -6,6 +6,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Routing.LinkGeneration;
 
 public class SingleRouteRouteValuesAddressSchemeBenchmark : EndpointRoutingBenchmarkBase

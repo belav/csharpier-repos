@@ -25,7 +25,6 @@ namespace System.IO.Pipes
         private NativeOverlapped* _overlapped;
         private MemoryHandle _pinnedMemory;
         private int _state;
-
 #if DEBUG
         private bool _cancellationHasBeenRegistered;
 #endif

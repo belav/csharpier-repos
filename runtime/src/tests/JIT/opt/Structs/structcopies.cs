@@ -45,8 +45,10 @@ namespace TestStructFields
         {
             [FieldOffset(0)]
             public int i;
+
             [FieldOffset(0)]
             public bool b0;
+
             [FieldOffset(1)]
             public bool b1;
         }
@@ -56,6 +58,7 @@ namespace TestStructFields
         {
             [FieldOffset(0)]
             public int i;
+
             [FieldOffset(0)]
             public bool b0;
         }
@@ -65,6 +68,7 @@ namespace TestStructFields
         {
             [FieldOffset(0)]
             public byte b0;
+
             [FieldOffset(3)]
             public byte b1;
         }
@@ -447,7 +451,6 @@ namespace TestStructFields
             }
             return 100;
         }
-
         #endregion  // S4 tests
 
         #region S8 tests
@@ -478,10 +481,13 @@ namespace TestStructFields
         {
             [FieldOffset(0)]
             public int i1;
+
             [FieldOffset(4)]
             public int i2;
+
             [FieldOffset(7)]
             public bool b0;
+
             [FieldOffset(5)]
             public bool b1;
         }
@@ -491,6 +497,7 @@ namespace TestStructFields
         {
             [FieldOffset(0)]
             public int i1;
+
             [FieldOffset(7)]
             public byte b1;
         }
@@ -500,6 +507,7 @@ namespace TestStructFields
         {
             [FieldOffset(0)]
             public object o1;
+
             [FieldOffset(0)]
             public long i1;
         }
@@ -975,7 +983,6 @@ namespace TestStructFields
             }
             return 100;
         }
-
         #endregion // S8 tests
 
 
@@ -1682,7 +1689,6 @@ namespace TestStructFields
             }
             return 100;
         }
-
         #endregion // S16 tests
 
         [MethodImpl(MethodImplOptions.NoInlining)]

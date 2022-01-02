@@ -654,7 +654,6 @@ namespace System.Threading.Tasks
         {
             return new ConfiguredTaskAwaitable<TResult>(this, continueOnCapturedContext);
         }
-
         #endregion
 
         #region WaitAsync methods
@@ -1167,7 +1166,6 @@ namespace System.Threading.Tasks
 
             return continuationTask;
         }
-
         #endregion
 
         #region Func<Task<TResult>,TNewResult> continuations

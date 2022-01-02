@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
 public class DefaultViewComponentActivatorTests

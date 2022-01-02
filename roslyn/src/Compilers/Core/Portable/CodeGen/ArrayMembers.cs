@@ -305,6 +305,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         public abstract string Name { get; }
+
         public abstract Cci.ITypeReference GetType(EmitContext context);
 
         // Address overrides this to "true"

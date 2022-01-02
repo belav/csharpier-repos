@@ -19,6 +19,7 @@ namespace Internal.IL.Stubs
         {
             public readonly ILCodeLabel Label;
             public readonly int Offset;
+
             public LabelAndOffset(ILCodeLabel label, int offset)
             {
                 Label = label;
@@ -286,6 +287,7 @@ namespace Internal.IL.Stubs
                     break;
             }
         }
+
         public void EmitStInd(TypeDesc type)
         {
             switch (type.UnderlyingType.Category)
@@ -634,6 +636,7 @@ namespace Internal.IL.Stubs
         {
             return _exceptionRegions;
         }
+
         public override bool IsInitLocals
         {
             get { return true; }
@@ -643,6 +646,7 @@ namespace Internal.IL.Stubs
         {
             return _locals;
         }
+
         public override Object GetObject(int token, NotFoundBehavior notFoundBehavior)
         {
             return _tokens[(token & 0xFFFFFF) - 1];

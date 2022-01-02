@@ -211,7 +211,6 @@ namespace System.Dynamic
         /// </summary>
         /// <returns>The list of dynamic member names.</returns>
         public virtual IEnumerable<string> GetDynamicMemberNames() => Array.Empty<string>();
-
         #endregion
 
         #region MetaDynamic
@@ -485,6 +484,7 @@ namespace System.Dynamic
 
 #pragma warning disable CA1825 // used in reference comparison, requires unique object identity
             private static readonly Expression[] s_noArgs = new Expression[0];
+
 #pragma warning restore CA1825
 
             private static ReadOnlyCollection<Expression> GetConvertedArgs(params Expression[] args)
@@ -990,7 +990,6 @@ namespace System.Dynamic
                 }
             }
         }
-
         #endregion
 
         #region IDynamicMetaObjectProvider Members

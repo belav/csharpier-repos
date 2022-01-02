@@ -8,6 +8,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal static class MvcRazorLoggerExtensions

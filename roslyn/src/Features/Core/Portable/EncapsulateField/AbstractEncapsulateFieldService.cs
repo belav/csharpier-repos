@@ -36,6 +36,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             SyntaxAnnotation declarationAnnotation,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<ImmutableArray<IFieldSymbol>> GetFieldsAsync(
             Document document,
             TextSpan span,

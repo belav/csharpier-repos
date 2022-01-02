@@ -1099,7 +1099,6 @@ namespace System.Text
             }
 #endif
         }
-
 #if SYSTEM_PRIVATE_CORELIB
         bool ISpanFormattable.TryFormat(
             Span<char> destination,

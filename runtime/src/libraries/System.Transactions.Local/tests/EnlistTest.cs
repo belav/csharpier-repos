@@ -107,7 +107,6 @@ namespace System.Transactions.Tests
                 }
             );
         }
-
         #endregion
 
         #region Vol2_Dur0
@@ -131,7 +130,6 @@ namespace System.Transactions.Tests
             irm.Check2PC("irm");
             irm2.Check2PC("irm2");
         }
-
         #endregion
 
         #region Vol0_Dur1
@@ -394,7 +392,6 @@ namespace System.Transactions.Tests
 
             Transaction.Current = null;
         }
-
         #endregion
 
         #region Promotable Single Phase Enlistment

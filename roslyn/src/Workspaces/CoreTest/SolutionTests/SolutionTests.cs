@@ -2395,7 +2395,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
             }
         }
-
 #if false
         [Fact(Skip = "641963")]
         public void TestDeepProjectReferenceTree()
@@ -3342,7 +3341,6 @@ End Class";
                 .GetService<ITestLanguageService>();
             Assert.NotNull(service2 as TestLanguageServiceB);
         }
-
 #if false
         [Fact]
         public void TestSolutionInfo()

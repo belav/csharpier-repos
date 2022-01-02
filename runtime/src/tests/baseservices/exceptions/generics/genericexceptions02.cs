@@ -38,6 +38,7 @@ public class A<T> where T : Exception
         }
     }
 }
+
 public class GenericExceptions
 {
     public static void InstanceFunctionWithManyArgs()
@@ -50,6 +51,7 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         (new A<MyException>()).InstanceFunctionWithManyArgs(1, 2, 3, Help.s_object);
     }
+
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.NoInlining
     )]

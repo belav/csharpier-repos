@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authorization.Test;
 
 public class DefaultAuthorizationServiceTests
@@ -807,6 +808,7 @@ public class DefaultAuthorizationServiceTests
     }
 
     public class CustomRequirement : IAuthorizationRequirement { }
+
     public class CustomHandler : AuthorizationHandler<CustomRequirement>
     {
         public bool Invoked { get; set; }

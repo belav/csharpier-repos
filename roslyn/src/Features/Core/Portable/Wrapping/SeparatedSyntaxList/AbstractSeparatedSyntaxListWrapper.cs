@@ -37,9 +37,11 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             : base(indentationService) { }
 
         protected abstract TListSyntax? TryGetApplicableList(SyntaxNode node);
+
         protected abstract SeparatedSyntaxList<TListItemSyntax> GetListItems(
             TListSyntax listSyntax
         );
+
         protected abstract bool PositionIsApplicable(
             SyntaxNode root,
             int position,

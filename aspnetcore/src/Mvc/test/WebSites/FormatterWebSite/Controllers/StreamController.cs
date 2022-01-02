@@ -4,6 +4,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace FormatterWebSite;
 
 public class StreamController : Controller

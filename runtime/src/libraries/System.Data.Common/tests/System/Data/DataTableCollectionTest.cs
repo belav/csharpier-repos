@@ -53,12 +53,14 @@ namespace System.Data.Tests
             _tables[1].Columns.Add("id", typeof(int));
             _tables[1].Columns.Add("desc", typeof(string));
         }
+
         // clean up code here
         public void Dispose()
         {
             _dataset[0].Tables.Clear();
             _dataset[1].Tables.Clear();
         }
+
         [Fact]
         public void Add()
         {
@@ -216,6 +218,7 @@ namespace System.Data.Tests
             /* removing a table that is not there in collection */
             Assert.Throws<ArgumentException>(() => tbcol.Remove(new DataTable("newTable")));
         }
+
         [Fact]
         public void Clear()
         {
@@ -228,6 +231,7 @@ namespace System.Data.Tests
             tbcol.Clear();
             Assert.Equal(0, tbcol.Count);
         }
+
         [Fact]
         public void Contains()
         {
@@ -272,6 +276,7 @@ namespace System.Data.Tests
             Assert.Equal("Table3", array1[4].TableName);
             Assert.Equal("Table4", array1[5].TableName);
         }
+
         [Fact]
         public void EqualsTest()
         {
@@ -286,6 +291,7 @@ namespace System.Data.Tests
 
             Assert.NotSame(tbcol1, tbcol2);
         }
+
         [Fact]
         public void IndexOf()
         {
@@ -305,6 +311,7 @@ namespace System.Data.Tests
             DataTable tb = new DataTable("new_table");
             Assert.Equal(-1, tbcol.IndexOf(tb));
         }
+
         [Fact]
         public void RemoveAt()
         {

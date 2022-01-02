@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 public class ComponentFactoryTest
@@ -199,6 +200,7 @@ public class ComponentFactoryTest
     }
 
     public class TestService1 { }
+
     public class TestService2 { }
 
     private class CustomComponentActivator<TResult> : IComponentActivator

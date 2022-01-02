@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.Net.Http.Headers;
 
 /// <summary>
@@ -18,6 +19,7 @@ public class EntityTagHeaderValue
     // We can't guarantee that a single parsed value will be used directly in an ETag header.
     private static readonly HttpHeaderParser<EntityTagHeaderValue> SingleValueParser =
         new GenericHeaderParser<EntityTagHeaderValue>(false, GetEntityTagLength);
+
     // Note that if multiple ETag values are allowed (e.g. 'If-Match', 'If-None-Match'), according to the RFC
     // the value must either be '*' or a list of ETag values. It's not allowed to have both '*' and a list of
     // ETag values. We're not that strict: We allow both '*' and ETag values in a list. If the server sends such

@@ -11,6 +11,7 @@ namespace Program
         {
             return value ? "PASSED" : "FAILED";
         }
+
         public static string TestFailed(bool value)
         {
             return TestPassed(!value);

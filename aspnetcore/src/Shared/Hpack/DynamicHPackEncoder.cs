@@ -5,6 +5,7 @@
 using System.Diagnostics;
 using System.Text;
 
+
 namespace System.Net.Http.HPack;
 
 internal class DynamicHPackEncoder

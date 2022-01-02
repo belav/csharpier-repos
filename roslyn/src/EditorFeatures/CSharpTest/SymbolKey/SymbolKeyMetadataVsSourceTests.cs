@@ -232,7 +232,6 @@ public class App
                 SymbolKeyComparison.None
             );
         }
-
         #endregion
 
         #region "Metadata vs. Metadata"

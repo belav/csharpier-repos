@@ -156,7 +156,6 @@ namespace System.Linq.Expressions.Tests
             MemberInitExpression init = Expression.MemberInit(newExp, bind0, bind1);
             Assert.NotSame(init, init.Update(Expression.New(typeof(Y)), new[] { bind0, bind1 }));
         }
-
         #endregion
 
         #region Test verifiers
@@ -170,7 +169,6 @@ namespace System.Linq.Expressions.Tests
             Func<T> c = expr.Compile(useInterpreter);
             Assert.True(check(c()));
         }
-
         #endregion
 
         #region Helpers

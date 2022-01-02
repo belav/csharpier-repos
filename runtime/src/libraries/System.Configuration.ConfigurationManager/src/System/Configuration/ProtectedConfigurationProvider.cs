@@ -9,6 +9,7 @@ namespace System.Configuration
     public abstract class ProtectedConfigurationProvider : ProviderBase
     {
         public abstract XmlNode Encrypt(XmlNode node);
+
         public abstract XmlNode Decrypt(XmlNode encryptedNode);
     }
 }

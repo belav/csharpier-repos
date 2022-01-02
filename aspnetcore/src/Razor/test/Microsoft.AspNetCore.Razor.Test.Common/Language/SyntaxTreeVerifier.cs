@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 // Verifies recursively that a syntax tree has no gaps in terms of position/location.

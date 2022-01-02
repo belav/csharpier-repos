@@ -16,6 +16,7 @@ namespace System.Linq
         // We must ensure that if a LabelTarget is rewritten that it is always rewritten to the same new target
         // or otherwise expressions using it won't match correctly.
         private Dictionary<LabelTarget, LabelTarget>? _targetCache;
+
         // Finding equivalent types can be relatively expensive, and hitting with the same types repeatedly is quite likely.
         private Dictionary<Type, Type>? _equivalentTypeCache;
 
@@ -303,6 +304,7 @@ namespace System.Linq
         }
 
         private static ILookup<string, MethodInfo>? s_seqMethods;
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2060:MakeGenericMethod",

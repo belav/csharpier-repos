@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 
+
 namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn;
 
 public class AutobahnExpectations
@@ -27,8 +28,10 @@ public class AutobahnExpectations
 
     public AutobahnExpectations Fail(params string[] caseSpecs) =>
         Expect(Expectation.Fail, caseSpecs);
+
     public AutobahnExpectations NonStrict(params string[] caseSpecs) =>
         Expect(Expectation.NonStrict, caseSpecs);
+
     public AutobahnExpectations OkOrFail(params string[] caseSpecs) =>
         Expect(Expectation.OkOrFail, caseSpecs);
 

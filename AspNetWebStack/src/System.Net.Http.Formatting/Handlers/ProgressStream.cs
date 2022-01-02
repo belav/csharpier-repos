@@ -118,7 +118,6 @@ namespace System.Net.Http.Handlers
             await InnerStream.WriteAsync(buffer, offset, count, cancellationToken);
             ReportBytesSent(count, userState: null);
         }
-
 #if !NETFX_CORE // BeginX and EndX are not supported on streams in portable libraries
         public override IAsyncResult BeginWrite(
             byte[] buffer,

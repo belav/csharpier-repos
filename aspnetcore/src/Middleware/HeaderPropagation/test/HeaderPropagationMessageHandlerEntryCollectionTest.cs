@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HeaderPropagation.Tests;
 
 public class HeaderPropagationMessageHandlerEntryCollectionTest

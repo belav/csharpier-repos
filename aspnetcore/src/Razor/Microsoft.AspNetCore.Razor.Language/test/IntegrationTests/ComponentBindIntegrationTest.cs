@@ -6,6 +6,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class ComponentBindIntegrationTest : RazorIntegrationTestBase

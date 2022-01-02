@@ -3,6 +3,7 @@
 
 using System.Text.RegularExpressions;
 
+
 namespace Microsoft.AspNetCore.Routing.TestObjects;
 
 public class SlugifyParameterTransformer : IOutboundParameterTransformer

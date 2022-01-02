@@ -23,9 +23,11 @@ using System.Text;
 
 #if ES_BUILD_STANDALONE
 using System.Runtime.CompilerServices;
+
 namespace Microsoft.Diagnostics.Tracing
 #else
 using Internal.Runtime.CompilerServices;
+
 namespace System.Diagnostics.Tracing
 #endif
 {
@@ -102,7 +104,6 @@ namespace System.Diagnostics.Tracing
                 throw new ArgumentNullException(nameof(eventSourceName));
             }
         }
-
         /// <summary>
         /// Writes an event with no fields and default options.
         /// (Native API: EventWriteTransfer)
@@ -132,7 +133,6 @@ namespace System.Diagnostics.Tracing
                 SimpleEventTypes<EmptyStruct>.Instance
             );
         }
-
         /// <summary>
         /// Writes an event with no fields.
         /// (Native API: EventWriteTransfer)

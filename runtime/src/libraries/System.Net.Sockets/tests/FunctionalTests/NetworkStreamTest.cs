@@ -20,6 +20,7 @@ namespace System.Net.Sockets.Tests
         protected override bool FlushRequiredToWriteData => false;
         protected override Type UnsupportedConcurrentExceptionType => null;
         protected override bool ReadWriteValueTasksProtectSingleConsumption => true;
+
         protected override Task<StreamPair> CreateConnectedStreamsAsync()
         {
             using Socket listener = new Socket(

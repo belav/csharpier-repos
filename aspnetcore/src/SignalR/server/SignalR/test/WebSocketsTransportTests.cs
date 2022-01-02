@@ -18,6 +18,7 @@ using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 [Collection(EndToEndTestsCollection.Name)]

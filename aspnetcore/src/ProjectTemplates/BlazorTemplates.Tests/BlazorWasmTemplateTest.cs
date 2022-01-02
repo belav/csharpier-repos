@@ -21,6 +21,7 @@ using Templates.Test.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace BlazorTemplates.Tests;
 
 public class BlazorWasmTemplateTest : BlazorTemplateTest

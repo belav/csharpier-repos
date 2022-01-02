@@ -29,6 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         // some symbols may not have a syntax (e.g. lambdas, synthesized event accessors)
         protected readonly SyntaxReference syntaxReferenceOpt;
+
         protected SourceMethodSymbolWithAttributes(SyntaxReference syntaxReferenceOpt)
         {
             this.syntaxReferenceOpt = syntaxReferenceOpt;
@@ -422,6 +423,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return base.EarlyDecodeWellKnownAttribute(ref arguments);
         }
+
 #nullable disable
 
         public override bool AreLocalsZeroed
@@ -540,6 +542,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 #endif
         }
+
 #nullable disable
 
         internal sealed override ImmutableArray<string> GetAppliedConditionalSymbols()

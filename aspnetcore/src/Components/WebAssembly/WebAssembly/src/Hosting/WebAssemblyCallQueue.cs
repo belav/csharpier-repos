@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 // A mechanism for queuing JS-to-.NET calls so they aren't nested on the call stack and hence

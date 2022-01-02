@@ -7,6 +7,7 @@ public class Bar
         b,
         c;
 }
+
 class Driver
 {
     static void ProduceSimpleHeapWithLOS()

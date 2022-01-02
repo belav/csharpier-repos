@@ -11,6 +11,8 @@ using Xunit;
 
 [assembly: ProducesErrorResponseType(typeof(InvalidEnumArgumentException))]
 
+
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 public class ApiConventionApplicationModelConventionTest

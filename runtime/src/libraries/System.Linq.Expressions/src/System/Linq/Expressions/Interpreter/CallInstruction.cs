@@ -19,7 +19,6 @@ namespace System.Linq.Expressions.Interpreter
         #region Construction
 
         public override string InstructionName => "Call";
-
 #if FEATURE_DLG_INVOKE
         private static readonly CacheDict<MethodInfo, CallInstruction> s_cache = new CacheDict<
             MethodInfo,
@@ -274,7 +273,6 @@ namespace System.Linq.Expressions.Interpreter
         #region Instruction
 
         public override int ConsumedStack => ArgumentCount;
-
         #endregion
 
         /// <summary>

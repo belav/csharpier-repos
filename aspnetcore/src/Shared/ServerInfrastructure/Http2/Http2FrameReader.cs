@@ -7,6 +7,7 @@ using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal static class Http2FrameReader

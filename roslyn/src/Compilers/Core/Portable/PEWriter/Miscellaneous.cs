@@ -234,6 +234,7 @@ namespace Microsoft.Cci
         }
 
         internal readonly byte[] SectionBytes;
+
         //This is the offset into SectionBytes that should be modified.
         //It should have the section's RVA added to it.
         internal readonly uint[] Relocations;

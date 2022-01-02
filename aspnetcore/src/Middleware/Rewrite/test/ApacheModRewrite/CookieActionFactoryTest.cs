@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Test;
 
 public class CookieActionFactoryTest

@@ -802,7 +802,6 @@ namespace System.IO.Ports.Tests
                 Assert.Equal(charXmitBuffer, actualChars);
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

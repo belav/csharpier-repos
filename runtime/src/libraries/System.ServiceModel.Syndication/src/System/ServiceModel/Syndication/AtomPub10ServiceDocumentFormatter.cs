@@ -10,6 +10,7 @@ using System.Diagnostics;
 namespace System.ServiceModel.Syndication
 {
     internal delegate InlineCategoriesDocument CreateInlineCategoriesDelegate();
+
     internal delegate ReferencedCategoriesDocument CreateReferencedCategoriesDelegate();
 
     [XmlRoot(ElementName = App10Constants.Service, Namespace = App10Constants.Namespace)]

@@ -415,6 +415,7 @@ namespace System.Data.Common
     {
         public string name;
         public string typeName;
+
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.PublicFields

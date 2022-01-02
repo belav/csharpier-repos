@@ -6,7 +6,9 @@ using System;
 public struct Text
 {
     private readonly string _value;
+
     public Text(string value) => _value = value;
+
     public string Value => _value ?? string.Empty;
 }
 

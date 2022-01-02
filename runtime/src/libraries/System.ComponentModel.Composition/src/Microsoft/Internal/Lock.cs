@@ -12,6 +12,7 @@ namespace Microsoft.Internal
             LockRecursionPolicy.NoRecursion
         );
         private int _isDisposed;
+
         public void EnterReadLock()
         {
             _thisLock.EnterReadLock();

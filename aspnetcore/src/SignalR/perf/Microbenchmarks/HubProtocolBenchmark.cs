@@ -6,6 +6,7 @@ using System.Buffers;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class HubProtocolBenchmark

@@ -51,14 +51,17 @@ namespace AutoMapper.UnitTests.Bug
             _destination.SomeOtherProperty.ShouldNotBeNull();
         }
     }
+
     public class When_AllowNullDestinationValues_is_false : AutoMapperSpecBase
     {
         public class Source
         {
         }
+
         public class Destination
         {
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 config =>
@@ -67,6 +70,7 @@ namespace AutoMapper.UnitTests.Bug
                     config.CreateMap<Source, Destination>();
                 }
             );
+
         [Fact]
         public void Null_should_map_to_non_null() =>
             Mapper.Map<Destination>(null).ShouldNotBeNull();

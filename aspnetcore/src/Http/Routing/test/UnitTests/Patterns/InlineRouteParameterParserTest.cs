@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
 public class InlineRouteParameterParserTest

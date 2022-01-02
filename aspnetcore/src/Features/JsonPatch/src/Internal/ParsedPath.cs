@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 /// <summary>

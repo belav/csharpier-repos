@@ -30,6 +30,7 @@ namespace AutoMapper.Configuration.Conventions
             bool isReverseMap
         );
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IChildMemberConfiguration
     {
@@ -44,6 +45,7 @@ namespace AutoMapper.Configuration.Conventions
             bool isReverseMap
         );
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class DefaultMember : IChildMemberConfiguration
     {
@@ -74,6 +76,7 @@ namespace AutoMapper.Configuration.Conventions
             return nameToSearch.Length == 0;
         }
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class MemberConfiguration : IMemberConfiguration
     {
@@ -149,6 +152,7 @@ namespace AutoMapper.Configuration.Conventions
             return false;
         }
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class NameSplitMember : IChildMemberConfiguration
     {

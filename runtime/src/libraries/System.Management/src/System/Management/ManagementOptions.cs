@@ -223,8 +223,10 @@ namespace System.Management
         }
 
         internal ManagementOptions() : this(null, InfiniteTimeout) { }
+
         internal ManagementOptions(ManagementNamedValueCollection context, TimeSpan timeout)
             : this(context, timeout, 0) { }
+
         internal ManagementOptions(
             ManagementNamedValueCollection context,
             TimeSpan timeout,
@@ -1515,6 +1517,7 @@ namespace System.Management
                 }
             }
         }
+
         /// <summary>
         ///    <para>Sets the secure password for the specified user. The value can be set, but not retrieved.</para>
         /// </summary>
@@ -1750,6 +1753,7 @@ namespace System.Management
             if (authentication != 0)
                 this.authentication = authentication;
         }
+
         //parameterized
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ConnectionOptions'/> class to be used for a WMI
@@ -1844,6 +1848,7 @@ namespace System.Management
             else
                 return IntPtr.Zero;
         }
+
         internal SecureString GetSecurePassword()
         {
             if (securePassword != null)

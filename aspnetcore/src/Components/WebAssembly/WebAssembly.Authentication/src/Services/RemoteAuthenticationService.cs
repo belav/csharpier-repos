@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 public class OwningComponentBaseTest

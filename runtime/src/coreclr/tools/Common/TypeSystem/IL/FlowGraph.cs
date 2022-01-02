@@ -17,6 +17,7 @@ namespace Internal.IL
 
         // First IL offset
         public int Start { get; }
+
         // Number of IL bytes in this basic block
         public int Size { get; }
 
@@ -26,11 +27,14 @@ namespace Internal.IL
         public override string ToString() => $"Start={Start}, Size={Size}";
 
         public override bool Equals(object obj) => Equals(obj as BasicBlock);
+
         public bool Equals(BasicBlock other) => other != null && Start == other.Start;
+
         public override int GetHashCode() => HashCode.Combine(Start);
 
         public static bool operator ==(BasicBlock left, BasicBlock right) =>
             EqualityComparer<BasicBlock>.Default.Equals(left, right);
+
         public static bool operator !=(BasicBlock left, BasicBlock right) => !(left == right);
     }
 

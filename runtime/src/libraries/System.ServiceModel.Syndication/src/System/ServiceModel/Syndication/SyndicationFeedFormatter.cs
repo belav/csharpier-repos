@@ -12,6 +12,7 @@ namespace System.ServiceModel.Syndication
         XmlDateTimeData data,
         out DateTimeOffset dateTimeOffset
     );
+
     public delegate bool TryParseUriCallback(XmlUriData data, out Uri uri);
 
     [DataContract]

@@ -19,6 +19,7 @@ using Moq;
 using Xunit;
 using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Resources;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public class PageRemoteAttributeTest

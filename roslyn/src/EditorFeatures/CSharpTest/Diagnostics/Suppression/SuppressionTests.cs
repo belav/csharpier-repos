@@ -2668,7 +2668,6 @@ namespace N
                 }
             }
         }
-
         #endregion
 
         #region NoLocation Diagnostics tests

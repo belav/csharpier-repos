@@ -47,6 +47,7 @@ class Program1
 
             await TestInRegularAndScriptAsync(input, expected);
         }
+
         [Fact]
         [Trait(Traits.Feature, Traits.Features.CodeActionsAddBraces)]
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]

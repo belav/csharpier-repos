@@ -3,8 +3,10 @@
 
 #if ASPNETWEBAPI
 using TConstraint = System.Web.Http.Routing.IHttpRouteConstraint;
+
 #else
 using TConstraint = System.Web.Routing.IRouteConstraint;
+
 #endif
 
 #if ASPNETWEBAPI

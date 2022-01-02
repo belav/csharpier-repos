@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Internal;
 
 public class DfaGraphWriterTest

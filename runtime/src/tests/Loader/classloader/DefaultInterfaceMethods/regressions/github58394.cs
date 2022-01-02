@@ -42,6 +42,7 @@ namespace GenericDimValuetypeBug
     struct Foo : IFoo
     {
         public int x;
+
         public int Bla() => x;
     }
 }

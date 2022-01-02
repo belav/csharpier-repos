@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         public abstract bool TryGetEscapeCharacter(VirtualChar ch, out char escapedChar);
 
         protected abstract bool IsStringOrCharLiteralToken(SyntaxToken token);
+
         protected abstract VirtualCharSequence TryConvertToVirtualCharsWorker(SyntaxToken token);
 
         /// <summary>

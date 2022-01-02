@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 /// <summary>
@@ -44,6 +45,7 @@ internal class NonDisposableStream : Stream
 
     /// <inheritdoc />
     public override long Length => _innerStream.Length;
+
     /// <inheritdoc />
     public override long Position
     {

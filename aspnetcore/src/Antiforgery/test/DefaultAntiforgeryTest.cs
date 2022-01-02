@@ -15,6 +15,7 @@ using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
 public class DefaultAntiforgeryTest

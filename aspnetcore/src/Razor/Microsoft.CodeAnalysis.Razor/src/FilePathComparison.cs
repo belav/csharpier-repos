@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 internal static class FilePathComparison

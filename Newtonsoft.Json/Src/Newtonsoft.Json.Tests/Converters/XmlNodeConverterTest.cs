@@ -48,9 +48,9 @@ using System.Xml;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
+
 #if !NET20
 using System.Xml.Linq;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Converters
@@ -334,7 +334,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             StringAssert.AreEqual(@"null", sw.ToString());
         }
-
 #if !NET20
         [Test]
         public void XNode_Null()
@@ -1128,7 +1127,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             Assert.AreEqual(expected, jsonText);
         }
-
 #if !NETSTANDARD1_3
         [Test]
         public void XmlDocumentTypeSerialize()
@@ -1243,7 +1241,6 @@ namespace Newtonsoft.Json.Tests.Converters
 
             public Utf8StringWriter(StringBuilder sb) : base(sb) { }
         }
-
 #if !NET20
         public static string ToStringWithDeclaration(XDocument doc, bool indent = false)
         {
@@ -2761,7 +2758,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 xmlString
             );
         }
-
 #if !(NETSTANDARD1_0 || NETSTANDARD1_3)
         [Test]
         public void IgnoreCultureForTypedAttributes()
@@ -3463,7 +3459,6 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 #endif
         }
-
 #if !NET20
         public class NullableXml
         {

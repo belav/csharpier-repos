@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.Serialization;
 
+
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
 /// <summary>

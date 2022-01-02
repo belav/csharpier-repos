@@ -28,8 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal abstract TupleBinaryOperatorInfoKind InfoKind { get; }
         internal readonly TypeSymbol? LeftConvertedTypeOpt;
         internal readonly TypeSymbol? RightConvertedTypeOpt;
+
 #if DEBUG
         internal abstract TreeDumperNode DumpCore();
+
         internal string Dump() => TreeDumper.DumpCompact(DumpCore());
 #endif
 

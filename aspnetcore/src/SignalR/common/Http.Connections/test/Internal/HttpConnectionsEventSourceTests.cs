@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Internal;
 using Microsoft.Extensions.Internal;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
 public class HttpConnectionsEventSourceTests

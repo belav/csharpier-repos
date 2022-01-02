@@ -71,7 +71,9 @@ namespace Microsoft.CodeAnalysis.Debugging
             out IList<NameAndArity> nameParts,
             out int? parameterCount
         );
+
         protected abstract IEnumerable<ISymbol> GetMembers(INamedTypeSymbol type, string name);
+
         protected abstract bool HasMethodBody(
             IMethodSymbol method,
             CancellationToken cancellationToken

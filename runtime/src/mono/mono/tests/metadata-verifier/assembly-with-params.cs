@@ -9,6 +9,7 @@ public class SimpleArgs
     {
         return 0;
     }
+
     [DllImport("foo.so")]
     public static extern void MarshalParam([MarshalAs(UnmanagedType.LPWStr)] string a);
 }

@@ -25,6 +25,7 @@ class T
             ta[i].Join();
         }
     }
+
     static void Main(string[] args)
     {
         if (args.Length > 0)

@@ -34,11 +34,15 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             public override DiagnosticSeverity Severity =>
                 GetOption().Notification.Severity.ToDiagnosticSeverity()
                 ?? DiagnosticSeverity.Hidden;
+
             public override string GetCurrentValue() =>
                 GetOption().Value ? _trueValueDescription : _falseValueDescription;
+
             public override object? Value => GetOption().Value;
+
             public override string[] GetValues() =>
                 new[] { _trueValueDescription, _falseValueDescription };
+
             protected abstract CodeStyleOption2<bool> GetOption();
         }
     }

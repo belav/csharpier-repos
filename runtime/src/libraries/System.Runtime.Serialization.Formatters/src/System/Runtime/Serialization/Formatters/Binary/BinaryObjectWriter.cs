@@ -32,6 +32,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
 #pragma warning disable 0649 // Field is never assigned to, and will always have its default value null
         internal object[]? _crossAppDomainArray;
+
 #pragma warning restore 0649
 
         private object? _previousObj;
@@ -1181,6 +1182,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
 
         private Dictionary<string, long>? _assemblyToIdTable;
+
         private long GetAssemblyId(WriteObjectInfo objectInfo)
         {
             //use objectInfo to get assembly string with new criteria

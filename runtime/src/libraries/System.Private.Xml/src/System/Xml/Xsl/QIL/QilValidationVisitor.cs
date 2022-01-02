@@ -42,7 +42,6 @@ namespace System.Xml.Xsl.Qil
         }
 
         private QilValidationVisitor() { }
-
 #if DEBUG
         private Hashtable allNodes = new ObjectHashtable();
         private Hashtable parents = new ObjectHashtable();

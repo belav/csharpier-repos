@@ -28,16 +28,19 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
         protected abstract bool ContainingTypesOrSelfHasUnsafeKeyword(
             INamedTypeSymbol containingType
         );
+
         protected abstract bool IsSimpleNameGeneration(
             SemanticDocument document,
             SyntaxNode node,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsConstructorInitializerGeneration(
             SemanticDocument document,
             SyntaxNode node,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsImplicitObjectCreation(
             SemanticDocument document,
             SyntaxNode node,
@@ -52,6 +55,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             out ImmutableArray<Argument> arguments,
             out INamedTypeSymbol typeToGenerateIn
         );
+
         protected abstract bool TryInitializeSimpleNameGenerationState(
             SemanticDocument document,
             SyntaxNode simpleName,
@@ -60,6 +64,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             out ImmutableArray<Argument> arguments,
             out INamedTypeSymbol typeToGenerateIn
         );
+
         protected abstract bool TryInitializeConstructorInitializerGeneration(
             SemanticDocument document,
             SyntaxNode constructorInitializer,
@@ -68,6 +73,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             out ImmutableArray<Argument> arguments,
             out INamedTypeSymbol typeToGenerateIn
         );
+
         protected abstract bool TryInitializeSimpleAttributeNameGenerationState(
             SemanticDocument document,
             SyntaxNode simpleName,
@@ -82,6 +88,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             Argument argument,
             CancellationToken cancellationToken
         );
+
         protected abstract string GenerateNameForExpression(
             SemanticModel semanticModel,
             TExpressionSyntax expression,
@@ -99,6 +106,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             SyntaxToken token,
             CancellationToken cancellationToken
         );
+
         protected abstract IMethodSymbol GetDelegatedConstructor(
             SemanticModel semanticModel,
             IMethodSymbol constructor,

@@ -20,6 +20,7 @@ using Serilog.Extensions.Logging;
 using Xunit.Abstractions;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public class AssemblyTestLog : IDisposable

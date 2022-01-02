@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cryptography;
 
 public class WeakReferenceHelpersTests

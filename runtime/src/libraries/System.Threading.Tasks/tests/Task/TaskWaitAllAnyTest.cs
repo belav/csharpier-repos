@@ -121,7 +121,6 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         public double Result { get; private set; }
 
         public WorkloadType WorkType { get; private set; }
-
         #endregion
 
         #region Helper Methods
@@ -515,7 +514,6 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             return result > minLimit && result < maxLimit;
         }
     }
-
     #endregion
 
     public sealed class TaskWaitAllAny

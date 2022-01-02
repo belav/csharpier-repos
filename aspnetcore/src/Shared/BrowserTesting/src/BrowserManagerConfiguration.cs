@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using PlaywrightSharp;
 
+
 namespace Microsoft.AspNetCore.BrowserTesting;
 
 public class BrowserManagerConfiguration

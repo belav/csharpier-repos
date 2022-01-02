@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 internal static class LoggerEventIds

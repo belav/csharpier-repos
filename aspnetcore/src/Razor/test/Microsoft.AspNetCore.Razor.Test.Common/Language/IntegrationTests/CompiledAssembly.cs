@@ -4,6 +4,7 @@
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class CompiledAssembly

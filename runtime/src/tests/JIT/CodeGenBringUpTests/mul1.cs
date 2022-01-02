@@ -12,6 +12,7 @@ struct vc
     public int x;
     public int y;
     public int z;
+
     public vc(int xx, int yy, int zz)
     {
         x = xx;

@@ -1793,7 +1793,6 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             node is MemberAccessExpressionSyntax;
 
         public bool IsSimpleName([NotNullWhen(true)] SyntaxNode? node) => node is SimpleNameSyntax;
-
         #endregion
 
         #region GetPartsOfXXX members
@@ -1936,7 +1935,6 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             operatorToken = qualifiedName.DotToken;
             right = qualifiedName.Right;
         }
-
         #endregion
 
         #region GetXXXOfYYY members

@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Routing;
 
 public class RouteTableFactoryTests
@@ -1135,5 +1136,6 @@ public class RouteTableFactoryTests
     }
 
     class TestHandler1 { }
+
     class TestHandler2 { }
 }

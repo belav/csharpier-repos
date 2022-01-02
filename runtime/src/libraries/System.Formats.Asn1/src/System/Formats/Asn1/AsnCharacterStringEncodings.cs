@@ -90,6 +90,7 @@ namespace System.Formats.Asn1
             : base(0, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback) { }
 
         protected abstract int GetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, bool write);
+
         protected abstract int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars, bool write);
 
         public override int GetByteCount(char[] chars, int index, int count)

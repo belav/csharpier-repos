@@ -16,6 +16,7 @@ using Microsoft.JSInterop.Infrastructure;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 public class ProtectedBrowserStorageTest

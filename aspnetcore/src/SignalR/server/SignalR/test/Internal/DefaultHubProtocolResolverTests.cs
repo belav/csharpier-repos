@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Protocol.Tests;
 
 public class DefaultHubProtocolResolverTests

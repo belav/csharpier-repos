@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.JSInterop.Infrastructure;
 using Xunit;
 
+
 namespace Microsoft.JSInterop;
 
 public class JSInProcessRuntimeBaseTest

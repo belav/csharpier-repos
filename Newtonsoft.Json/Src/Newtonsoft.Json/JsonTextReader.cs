@@ -95,7 +95,6 @@ namespace Newtonsoft.Json
             _safeAsync = GetType() == typeof(JsonTextReader);
 #endif
         }
-
 #if DEBUG
         internal char[]? CharBuffer
         {
@@ -1134,7 +1133,6 @@ namespace Newtonsoft.Json
                     throw new ArgumentOutOfRangeException(nameof(readType));
             }
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Reads the next JSON token from the underlying <see cref="TextReader"/> as a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>.
@@ -2635,7 +2633,6 @@ namespace Newtonsoft.Json
             SetToken(JsonToken.Undefined, null, false);
             return JsonReaderException.Create(this, message, ex);
         }
-
 #if HAVE_BIG_INTEGER
         // By using the BigInteger type in a separate method,
         // the runtime can execute the ParseNumber even if
@@ -2944,6 +2941,7 @@ namespace Newtonsoft.Json
                 MatchValueWithTrailingSeparator(JsonConvert.PositiveInfinity)
             );
         }
+
         private object ParseNumberPositiveInfinity(ReadType readType, bool matched)
         {
             if (matched)

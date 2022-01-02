@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
 public class InMemoryEFUserStoreTestWithGenerics
@@ -119,6 +120,7 @@ public class InMemoryEFUserStoreTestWithGenerics
     protected override Expression<Func<MyIdentityRole, bool>> RoleNameStartsWithPredicate(
         string roleName
     ) => r => r.Name.StartsWith(roleName);
+
 #pragma warning restore CA1310 // Specify StringComparison for correctness
 
     [Fact]
@@ -325,6 +327,7 @@ public class RoleStoreWithGenerics
       >
 {
     private string _loginContext;
+
     public RoleStoreWithGenerics(InMemoryContextWithGenerics context, string loginContext)
         : base(context)
     {

@@ -19,6 +19,7 @@ namespace CoreXml.Test.XLinq
         private XmlDiff _diff = null;
         private XmlReaderSettings _rsx;
         private XmlReaderSettings _rsxNoWs;
+
         public BridgeHelpers()
         {
             _diff = new XmlDiff();
@@ -1330,6 +1331,7 @@ namespace CoreXml.Test.XLinq
             tw.Flush();
             tw.Dispose();
         }
+
         public static void CreateXSLTStyleSheetWCopyTestFile(string strFileName)
         {
             TextWriter tw = new StreamWriter(FilePathUtil.getStream(strFileName));

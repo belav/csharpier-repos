@@ -208,7 +208,6 @@ namespace System.Threading
             _linkedSlot = null;
             s_idManager.ReturnId(id, _trackAllValues);
         }
-
         #endregion
 
         /// <summary>Creates and returns a string representation of this instance for the current thread.</summary>
@@ -668,6 +667,7 @@ namespace System.Threading
         {
             // The next ID to try
             private int _nextIdToTry;
+
             // Keep track of the count of non-TrackAllValues ids in use. A count of 0 leads to more efficient thread cleanup
             private volatile int _idsThatDoNotTrackAllValues;
 

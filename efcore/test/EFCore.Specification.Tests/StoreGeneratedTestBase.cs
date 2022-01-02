@@ -1801,6 +1801,7 @@ namespace Microsoft.EntityFrameworkCore
                 get => _id;
                 set => _id = value;
             }
+
             // ReSharper restore ConvertToAutoProperty
 #pragma warning restore RCS1085 // Use auto-implemented property.
 

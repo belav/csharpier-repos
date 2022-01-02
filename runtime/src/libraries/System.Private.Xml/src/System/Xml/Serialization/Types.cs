@@ -90,6 +90,7 @@ namespace System.Xml.Serialization
         private TypeDesc? _nullableTypeDesc;
         private readonly TypeKind _kind;
         private readonly XmlSchemaType? _dataType;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         private Type? _type;
         private TypeDesc? _baseTypeDesc;
@@ -156,6 +157,7 @@ namespace System.Xml.Serialization
             _isXsdType = isXsdType;
             _type = type;
         }
+
         internal TypeDesc(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? type,
             string name,
@@ -431,6 +433,7 @@ namespace System.Xml.Serialization
 
             return _nullableTypeDesc;
         }
+
         internal void CheckSupported()
         {
             if (IsUnsupported)
@@ -2158,6 +2161,7 @@ namespace System.Xml.Serialization
             }
             return indexer;
         }
+
         private static Type GetCollectionElementType(
             [DynamicallyAccessedMembers(TrimmerConstants.PublicMembers)] Type type,
             string? memberInfo

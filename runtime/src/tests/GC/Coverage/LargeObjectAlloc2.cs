@@ -16,6 +16,7 @@ namespace LargeObjectTest
         // disabling unused variable warning
 #pragma warning disable 0414
         private int[] _otherarray;
+
 #pragma warning restore 0414
 
         public OtherLargeObject()
@@ -52,6 +53,7 @@ namespace LargeObjectTest
     public class Test
     {
         public static int ExitCode = 1;
+
         public static int Main()
         {
             int loop = 0;

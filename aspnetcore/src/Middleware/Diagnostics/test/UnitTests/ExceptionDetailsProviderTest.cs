@@ -13,6 +13,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.StackTrace.Sources;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class ExceptionDetailsProviderTest

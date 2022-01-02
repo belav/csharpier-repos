@@ -207,12 +207,19 @@ namespace System.Web.Http.ApiExplorer
         public class ApiExplorerActionsWithParametersController : ApiController
         {
             public void Get(int id) { }
+
             public void GetFromUri([FromUri] string value) { }
+
             public void GetPoint([FromUri] Point complexParameterObject) { }
+
             public void GetDistance([FromUri] Point origin, [FromUri] Point end) { }
+
             public void GetLocation(Location location) { }
+
             public void GetConvertible([FromUri] ConvertibleFromString value) { }
+
             public void GetNoDescribable([FromUri] NonDescribable nonDescribable) { }
+
             public void GetParticle([FromUri] Particle particle) { }
         }
 
@@ -240,6 +247,7 @@ namespace System.Web.Http.ApiExplorer
                     return sourceType == typeof(string);
                 }
             }
+
             public int Id { get; set; }
             public string Value { get; set; }
         }

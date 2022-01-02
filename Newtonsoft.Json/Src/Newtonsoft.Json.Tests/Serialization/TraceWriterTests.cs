@@ -24,6 +24,7 @@ using Newtonsoft.Json.Tests.TestObjects.Organization;
 using Newtonsoft.Json.Utilities;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #else
 using System.Linq;
 
@@ -89,7 +90,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 traceWriter.TraceRecords[5].Message
             );
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40 || PORTABLE) || DNXCORE50
         [Test]
         public async Task DeserializedJsonWithAlreadyReadReader_Async()
@@ -460,7 +460,6 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(traceMessages.First().EndsWith(" 6"));
             Assert.IsTrue(traceMessages.Last().EndsWith(" 1005"));
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40 || PORTABLE) || DNXCORE50
         [Test]
         public async Task MemoryTraceWriterThreadSafety_Trace()
@@ -1226,7 +1225,6 @@ Newtonsoft.Json Error: 0 : Error!
                 )
             );
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0
         [Test]
         public void DeserializeISerializable()

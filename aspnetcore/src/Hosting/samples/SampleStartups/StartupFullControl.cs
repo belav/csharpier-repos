@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+
 // Note that this sample will not run. It is only here to illustrate usage patterns.
 
 namespace SampleStartups;

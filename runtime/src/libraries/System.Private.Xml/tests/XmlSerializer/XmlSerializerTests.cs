@@ -326,7 +326,6 @@ public static partial class XmlSerializerTests
         Assert.StrictEqual(x.F1, y.F1);
         Assert.StrictEqual(x.P1, y.P1);
     }
-
 #if !XMLSERIALIZERGENERATORTESTS
     [Fact]
     public static void Xml_EnumAsObject()
@@ -1812,6 +1811,7 @@ public static partial class XmlSerializerTests
             && grouplists.Contains("GroupBase");
         Assert.True(b);
     }
+
     private static Stream GetStreamFromString(string s)
     {
         MemoryStream stream = new MemoryStream();
@@ -2506,6 +2506,7 @@ public static partial class XmlSerializerTests
     }
 
     private static readonly string s_defaultNs = "http://tempuri.org/";
+
     private static T RoundTripWithXmlMembersMapping<T>(
         object requestBodyValue,
         string memberName,

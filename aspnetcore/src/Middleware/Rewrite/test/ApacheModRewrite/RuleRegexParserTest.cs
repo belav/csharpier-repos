@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite;
 
 public class RuleRegexParserTest

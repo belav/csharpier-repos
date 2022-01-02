@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class BasicIntegrationTest : IntegrationTestBase

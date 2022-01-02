@@ -35,7 +35,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
@@ -49,6 +48,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
             public string Name { get; set; }
             public DateTime StartDate { get; set; }
         }
+
         #endregion
 
 #pragma warning disable 618

@@ -18,6 +18,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 using HttpMethods = Microsoft.AspNetCore.Http.HttpMethods;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal abstract partial class Http2Stream

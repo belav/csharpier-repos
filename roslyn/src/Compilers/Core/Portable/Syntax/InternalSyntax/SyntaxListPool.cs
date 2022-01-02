@@ -15,7 +15,6 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             10
         ];
         private int _freeIndex;
-
 #if DEBUG
         private readonly List<SyntaxListBuilder> _allocated = new List<SyntaxListBuilder>();
 #endif

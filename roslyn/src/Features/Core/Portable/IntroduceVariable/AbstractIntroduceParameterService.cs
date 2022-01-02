@@ -35,11 +35,14 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         protected abstract SyntaxNode GenerateExpressionFromOptionalParameter(
             IParameterSymbol parameterSymbol
         );
+
         protected abstract SyntaxNode UpdateArgumentListSyntax(
             SyntaxNode argumentList,
             SeparatedSyntaxList<SyntaxNode> arguments
         );
+
         protected abstract SyntaxNode? GetLocalDeclarationFromDeclarator(SyntaxNode variableDecl);
+
         protected abstract bool IsDestructor(IMethodSymbol methodSymbol);
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)

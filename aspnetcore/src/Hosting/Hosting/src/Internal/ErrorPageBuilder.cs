@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.StackTrace.Sources;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal static class ErrorPageBuilder

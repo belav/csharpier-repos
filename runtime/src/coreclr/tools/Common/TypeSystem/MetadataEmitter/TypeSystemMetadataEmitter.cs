@@ -545,6 +545,7 @@ namespace Internal.TypeSystem
 
                 return new int[rank].ToImmutableArray();
             }
+
             private static ImmutableArray<int>[] CreateStaticArrayOfImmutableArraysFilledWithZeroes(
                 int count
             )

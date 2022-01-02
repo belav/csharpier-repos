@@ -110,6 +110,7 @@ namespace Newtonsoft.Json.Converters
 
             writer.WriteRegex(regex.ToString(), options);
         }
+
 #pragma warning restore 618
 
         private void WriteJson(JsonWriter writer, Regex regex, JsonSerializer serializer)

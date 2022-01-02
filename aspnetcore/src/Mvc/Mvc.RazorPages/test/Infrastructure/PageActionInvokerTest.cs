@@ -27,6 +27,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 public class PageActionInvokerTest : CommonResourceInvokerTest
@@ -92,7 +93,6 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         Assert.NotNull(listener.AfterAction?.ActionDescriptor);
         Assert.NotNull(listener.AfterAction?.HttpContext);
     }
-
     #endregion
 
     #region Page Context
@@ -166,7 +166,6 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         Assert.Equal(1, pageContext.ValueProviderFactories.Count);
         Assert.Same(valueProviderFactory2, pageContext.ValueProviderFactories[0]);
     }
-
     #endregion
 
     #region Page vs PageModel
@@ -564,7 +563,6 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             Times.Once()
         );
     }
-
     #endregion
 
     #region Page Filters
@@ -1822,7 +1820,6 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             Times.Once()
         );
     }
-
     #endregion
 
     #region Logs
@@ -1897,7 +1894,6 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             m => Assert.StartsWith($"Executed page {pagePath} in ", m)
         );
     }
-
     #endregion
 
     protected override IActionInvoker CreateInvoker(

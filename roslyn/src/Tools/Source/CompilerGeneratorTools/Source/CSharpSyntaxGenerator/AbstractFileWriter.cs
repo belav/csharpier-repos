@@ -150,7 +150,6 @@ namespace CSharpSyntaxGenerator
             Unindent();
             WriteLine("}" + extra);
         }
-
         #endregion Output helpers
 
         #region Node helpers

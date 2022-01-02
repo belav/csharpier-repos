@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+
 public class TypeOne
 {
     int instance_field;
@@ -27,6 +28,7 @@ public class OtherType
 public class TypeWithFunkyStuff
 {
     const string contant_field = "333";
+
     [MarshalAs(UnmanagedType.Struct)]
     int bla;
 
@@ -64,11 +66,13 @@ public class SequentialLayout2
     int a;
     int b;
 }
+
 [StructLayout(LayoutKind.Explicit)]
 public class ExplicitLayout2
 {
     [FieldOffset(33)]
     int a;
+
     [FieldOffset(0)]
     int b;
 }
@@ -78,9 +82,7 @@ public class ZZ : Iface
     void Iface.Foo() { }
 }
 
-public class Generic<T>
-{
-}
+public class Generic<T> { }
 
 public class NonGeneric
 {

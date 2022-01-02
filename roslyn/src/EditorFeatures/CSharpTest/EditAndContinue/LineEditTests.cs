@@ -62,7 +62,6 @@ void F()
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(new[] { new SourceLineUpdate(3, 4) });
         }
-
         #endregion
 
         #region Methods
@@ -643,7 +642,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region Constructors
@@ -994,7 +992,6 @@ class C<T>
                 diagnostics: new[] { Diagnostic(RudeEditKind.GenericTypeUpdate, "public C(int a)") }
             );
         }
-
         #endregion
 
         #region Destructors
@@ -1065,7 +1062,6 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(new[] { new SourceLineUpdate(3, 4) });
         }
-
         #endregion
 
         #region Field Initializers
@@ -1483,7 +1479,6 @@ class C<T>
                 }
             );
         }
-
         #endregion
 
         #region Properties
@@ -1694,7 +1689,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region Properties
@@ -1833,7 +1827,6 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(new[] { new SourceLineUpdate(3, 4) });
         }
-
         #endregion
 
         #region Events
@@ -2023,7 +2016,6 @@ class C
             var edits = GetTopEdits(src1, src2);
             edits.VerifyLineEdits(new[] { new SourceLineUpdate(4, 3), new SourceLineUpdate(5, 3) });
         }
-
         #endregion
 
         #region Types
@@ -2069,7 +2061,6 @@ class C
                 }
             );
         }
-
         #endregion
 
         #region Line Mappings

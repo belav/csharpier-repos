@@ -10,7 +10,6 @@ namespace System.Speech.Synthesis
         {
             _voice = voice;
         }
-
         #endregion
 
         #region public Properties
@@ -18,7 +17,6 @@ namespace System.Speech.Synthesis
         {
             get { return _voice; }
         }
-
         #endregion
 
         #region Private Fields

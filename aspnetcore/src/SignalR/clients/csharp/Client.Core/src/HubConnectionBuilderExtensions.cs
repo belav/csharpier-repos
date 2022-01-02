@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR.Client.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client;
 
 /// <summary>

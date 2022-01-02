@@ -771,7 +771,6 @@ class Test
 
             await TestMissingAsync(source);
         }
-
         #endregion
 
         #region Assignments, Declarations, Returns
@@ -2021,7 +2020,6 @@ public class Test
 ";
             await TestInRegularAndScriptAsync(source, output);
         }
-
         #endregion
 
         #region In foreach
@@ -2703,7 +2701,6 @@ class C
 
             await TestInRegularAndScriptAsync(source, output);
         }
-
         #endregion
 
         #region In ToList
@@ -3386,7 +3383,6 @@ namespace Test
 ";
             await TestInRegularAndScriptAsync(source, output);
         }
-
         #endregion
 
         #region In Count
@@ -3996,7 +3992,6 @@ namespace Test
 ";
             await TestInRegularAndScriptAsync(source, output);
         }
-
         #endregion
 
         #region Expression Bodied
@@ -4364,7 +4359,6 @@ class C
             // In when is not supported
             await TestMissingAsync(source);
         }
-
         #endregion
 
         #region Comments and Preprocessor directives
@@ -4431,7 +4425,6 @@ class C
             // Cannot convert expressions with preprocessor directives
             await TestMissingAsync(source);
         }
-
         #endregion
 
         #region Name Generation
@@ -4619,7 +4612,6 @@ class Query
                 parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp8)
             );
         }
-
         #endregion
 
         #region CaretSelection

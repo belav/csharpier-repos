@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Internal;
 
 internal class DefaultRetryPolicy : IRetryPolicy

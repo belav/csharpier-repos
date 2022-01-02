@@ -6,6 +6,7 @@
 using System.Linq;
 using System.Security.Claims;
 
+
 namespace Microsoft.Extensions.Internal;
 
 /// <summary>

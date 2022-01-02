@@ -6,6 +6,7 @@ using System.Reflection;
 using ApiExplorerWebSite.Controllers;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+
 namespace ApiExplorerWebSite;
 
 // Disables ApiExplorer for a specific controller type.

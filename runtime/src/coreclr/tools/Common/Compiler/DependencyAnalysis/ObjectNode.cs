@@ -91,6 +91,7 @@ namespace ILCompiler.DependencyAnalysis
         public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
             NodeFactory factory
         ) => null;
+
         public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
             List<DependencyNodeCore<NodeFactory>> markedNodes,
             int firstNode,

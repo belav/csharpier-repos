@@ -17,7 +17,9 @@ namespace System.Xml.XPath
         }
 
         public abstract XPathNodeIterator Clone();
+
         public abstract bool MoveNext();
+
         public abstract XPathNavigator? Current { get; }
         public abstract int CurrentPosition { get; }
         public virtual int Count
@@ -34,6 +36,7 @@ namespace System.Xml.XPath
                 return count;
             }
         }
+
         public virtual IEnumerator GetEnumerator()
         {
             return new Enumerator(this);

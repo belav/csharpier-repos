@@ -49,22 +49,30 @@ namespace System.Net.Sockets.Tests
             {
                 return -1;
             }
+
             public void Clear() { }
+
             public bool Contains(object value)
             {
                 return false;
             }
+
             public void CopyTo(Array array, int index) { }
+
             public IEnumerator GetEnumerator()
             {
                 return null;
             }
+
             public int IndexOf(object value)
             {
                 return -1;
             }
+
             public void Insert(int index, object value) { }
+
             public void Remove(object value) { }
+
             public void RemoveAt(int index) { }
         }
 

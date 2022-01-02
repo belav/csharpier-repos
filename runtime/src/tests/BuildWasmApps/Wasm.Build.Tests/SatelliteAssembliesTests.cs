@@ -235,6 +235,7 @@ namespace Wasm.Build.Tests
 
             Assert.Empty(bitCodeFileNames.Where(file => file.EndsWith(".resources.dll.bc")));
         }
+
 #pragma warning restore xUnit1026
 
         private void CreateProgramForCultureTest(

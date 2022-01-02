@@ -50,7 +50,6 @@ namespace System.Speech.Internal.GrammarBuilding
             _subsetMatching = subsetMatching;
             _matchMode = matchMode;
         }
-
         #endregion
 
         #region Public Methods
@@ -65,11 +64,11 @@ namespace System.Speech.Internal.GrammarBuilding
                 && _matchMode == refObj._matchMode
                 && _subsetMatching == refObj._subsetMatching;
         }
+
         public override int GetHashCode()
         {
             return _phrase.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -88,7 +87,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             return CreatePhraseElement(elementFactory, parent);
         }
-
         #endregion
 
         #region Internal Properties
@@ -97,7 +95,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             get { return "'" + _phrase + "'"; }
         }
-
         #endregion
 
         #region Private Methods
@@ -130,7 +127,6 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return null;
         }
-
         #endregion
 
         #region Private Fields

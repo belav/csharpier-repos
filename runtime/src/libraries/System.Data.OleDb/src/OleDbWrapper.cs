@@ -268,6 +268,7 @@ namespace System.Data.OleDb
         {
             return new IDBInfoWrapper(ComWrapper());
         }
+
         internal IDBPropertiesWrapper IDBProperties(OleDbConnectionInternal connection)
         {
             return new IDBPropertiesWrapper(ComWrapper());

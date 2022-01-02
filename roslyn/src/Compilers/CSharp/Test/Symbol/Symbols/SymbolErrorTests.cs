@@ -21350,7 +21350,6 @@ class A : C {
                 "CandidateSymbols must by N1.B and N2.B in some order"
             );
         }
-
         #endregion
 
         #region "Symbol Warning Tests"
@@ -24379,7 +24378,6 @@ public class Goo
                 }
             );
         }
-
         #endregion
 
         #region "Regressions or Mixed errors"
@@ -25610,7 +25608,6 @@ class G<T> where T : C
 ";
             CreateCompilation(text).VerifyDiagnostics();
         }
-
         #endregion
 
         [WorkItem(7920, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/7920")]

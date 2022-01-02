@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal class LoggingConnectionMiddleware

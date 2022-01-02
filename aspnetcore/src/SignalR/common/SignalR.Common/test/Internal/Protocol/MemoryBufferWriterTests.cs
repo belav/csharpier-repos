@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Internal;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
 public class MemoryBufferWriterTests

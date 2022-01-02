@@ -54,7 +54,6 @@ namespace Microsoft.CodeAnalysis.CommandLine
         internal const uint CREATE_NO_WINDOW = 0x08000000;
         internal const Int32 STARTF_USESTDHANDLES = 0x00000100;
         internal const int ERROR_SUCCESS = 0;
-
         #endregion
 
         //------------------------------------------------------------------------------

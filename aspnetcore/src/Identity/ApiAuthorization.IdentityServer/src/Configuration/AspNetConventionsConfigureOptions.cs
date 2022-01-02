@@ -5,6 +5,7 @@ using Duende.IdentityServer.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 internal class AspNetConventionsConfigureOptions : IConfigureOptions<IdentityServerOptions>

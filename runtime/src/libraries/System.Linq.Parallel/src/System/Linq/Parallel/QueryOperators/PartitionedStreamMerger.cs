@@ -25,7 +25,6 @@ namespace System.Linq.Parallel
         private readonly int _queryId; // ID of the current query execution
 
         private readonly CancellationState _cancellationState;
-
 #if DEBUG
         private bool _received;
 #endif

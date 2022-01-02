@@ -11,6 +11,7 @@ using Moq;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Test.Adapters;
 
 public class AdapterFactoryTests

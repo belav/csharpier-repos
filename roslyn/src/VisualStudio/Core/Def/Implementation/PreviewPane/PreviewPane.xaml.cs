@@ -336,6 +336,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
         }
 
         private readonly Guid _optionPageGuid;
+
         void IDisposable.Dispose()
         {
             // VS editor will call Dispose at which point we should Close() the embedded IWpfDifferenceViewer.

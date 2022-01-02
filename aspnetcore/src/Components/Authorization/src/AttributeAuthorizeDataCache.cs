@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace Microsoft.AspNetCore.Components.Authorization;
 
 internal static class AttributeAuthorizeDataCache

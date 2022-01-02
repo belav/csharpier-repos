@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.OAuth;
 
+
 namespace Microsoft.AspNetCore.Authentication.Google;
 
 /// <summary>

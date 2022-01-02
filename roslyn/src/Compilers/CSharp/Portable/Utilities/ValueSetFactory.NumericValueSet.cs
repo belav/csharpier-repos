@@ -267,6 +267,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     builder.Add((first, last));
                 }
             }
+
             private static T Min(T a, T b)
             {
                 TTC tc = default;

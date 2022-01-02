@@ -343,6 +343,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 null,
                 constructor.ContainingType
             ) { }
+
         public BoundObjectCreationExpression(
             SyntaxNode syntax,
             MethodSymbol constructor,
@@ -390,6 +391,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors: true
             );
         }
+
         public BoundIndexerAccess(
             SyntaxNode syntax,
             BoundExpression? receiverOpt,
@@ -612,6 +614,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 type,
                 hasErrors
             ) { }
+
         public BoundBinaryOperator(
             SyntaxNode syntax,
             BinaryOperatorKind operatorKind,

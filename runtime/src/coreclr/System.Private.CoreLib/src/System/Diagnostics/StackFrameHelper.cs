@@ -30,6 +30,7 @@ namespace System.Diagnostics
         private bool[]? rgiIsFileLayout;
         private IntPtr[]? rgInMemoryPdbAddress;
         private int[]? rgiInMemoryPdbSize;
+
         // if rgiMethodToken[i] == 0, then don't attempt to get the portable PDB source/info
         private int[]? rgiMethodToken;
         private string?[]? rgFilename;
@@ -37,6 +38,7 @@ namespace System.Diagnostics
         private int[]? rgiColumnNumber;
         private bool[]? rgiLastFrameFromForeignExceptionStackTrace;
         private int iFrameCount;
+
 #pragma warning restore 414
 
         private delegate void GetSourceLineInfoDelegate(
@@ -214,18 +216,22 @@ namespace System.Diagnostics
         {
             return rgiOffset![i];
         }
+
         public int GetILOffset(int i)
         {
             return rgiILOffset![i];
         }
+
         public string? GetFilename(int i)
         {
             return rgFilename?[i];
         }
+
         public int GetLineNumber(int i)
         {
             return rgiLineNumber == null ? 0 : rgiLineNumber[i];
         }
+
         public int GetColumnNumber(int i)
         {
             return rgiColumnNumber == null ? 0 : rgiColumnNumber[i];

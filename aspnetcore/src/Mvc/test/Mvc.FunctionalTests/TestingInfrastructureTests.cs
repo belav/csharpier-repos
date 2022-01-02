@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RazorPagesClassLibrary;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class TestingInfrastructureTests

@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             WellKnownFixAllProviders.BatchFixer;
 
         protected abstract TPropertyDeclaration GetPropertyDeclaration(SyntaxNode node);
+
         protected abstract SyntaxNode GetNodeToRemove(TVariableDeclarator declarator);
 
         protected abstract IEnumerable<AbstractFormattingRule> GetFormattingRules(

@@ -18,7 +18,6 @@ namespace System.Xml.Tests
                 );
             }
         }
-
         #endregion
 
         #region Public Methods and Operators

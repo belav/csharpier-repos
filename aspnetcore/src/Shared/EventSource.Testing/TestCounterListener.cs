@@ -6,6 +6,7 @@ using System.Diagnostics.Tracing;
 using System.Threading;
 using System.Threading.Channels;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal class TestCounterListener : EventListener

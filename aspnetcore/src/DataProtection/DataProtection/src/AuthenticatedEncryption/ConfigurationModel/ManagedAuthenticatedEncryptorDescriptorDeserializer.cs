@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
 /// <summary>

@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public sealed class HtmlAttributeIntermediateNode : IntermediateNode

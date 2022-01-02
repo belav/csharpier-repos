@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Rewrite.PatternSegments;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments;
 
 public class ToLowerSegmentTests

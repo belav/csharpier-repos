@@ -21,6 +21,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         private readonly struct IntervalIntrospector : IIntervalIntrospector<TextChange>
         {
             int IIntervalIntrospector<TextChange>.GetStart(TextChange value) => value.Span.Start;
+
             int IIntervalIntrospector<TextChange>.GetLength(TextChange value) => value.Span.Length;
         }
 

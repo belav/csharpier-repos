@@ -12,10 +12,12 @@ using System.Threading;
 #if ES_BUILD_STANDALONE
 using Microsoft.Win32;
 using System.Security.Permissions;
+
 #endif
 
 #if !ES_BUILD_STANDALONE && TARGET_WINDOWS
 using Internal.Win32;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -1316,7 +1318,6 @@ namespace System.Diagnostics.Tracing
 
             return true;
         }
-
 #if !ES_BUILD_STANDALONE
         /// <summary>Workaround for inability to stackalloc object[EtwAPIMaxRefObjCount == 8].</summary>
         private struct EightObjects
@@ -1562,7 +1563,6 @@ namespace System.Diagnostics.Tracing
             throw new System.NotSupportedException();
         }
     }
-
 #endif
     internal sealed class NoOpEventProvider : IEventProvider
     {

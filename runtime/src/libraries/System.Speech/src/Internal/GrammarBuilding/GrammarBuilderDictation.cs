@@ -15,7 +15,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             _category = category;
         }
-
         #endregion
 
         #region Public Methods
@@ -28,11 +27,11 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return _category == refObj._category;
         }
+
         public override int GetHashCode()
         {
             return _category == null ? 0 : _category.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -52,7 +51,6 @@ namespace System.Speech.Internal.GrammarBuilding
             // Return the IRuleRef to the dictation grammar
             return CreateRuleRefToDictation(elementFactory, parent);
         }
-
         #endregion
 
         #region Internal Properties
@@ -65,7 +63,6 @@ namespace System.Speech.Internal.GrammarBuilding
                 return "dictation" + category;
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -84,7 +81,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
             return elementFactory.CreateRuleRef(parent, ruleUri, null, null);
         }
-
         #endregion
 
         #region Private Fields

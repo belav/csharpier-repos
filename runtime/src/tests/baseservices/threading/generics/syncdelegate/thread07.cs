@@ -9,6 +9,7 @@ struct Gen<T>
     {
         Interlocked.Increment(ref Test_thread07.Xcounter);
     }
+
     public static void DelegateTest()
     {
         ThreadStart d = new ThreadStart(new Gen<T>().Target);
@@ -25,6 +26,7 @@ public class Test_thread07
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

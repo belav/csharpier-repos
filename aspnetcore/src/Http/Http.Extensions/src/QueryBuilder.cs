@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Http.Extensions;
 
 // The IEnumerable interface is required for the collection initialization syntax: new QueryBuilder() { { "key", "value" } };

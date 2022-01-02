@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom.Html;
 using Xunit;
 
+
 namespace AuthSamples.FunctionalTests;
 
 public static class HttpClientExtensions

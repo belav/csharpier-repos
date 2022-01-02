@@ -20,6 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
 #pragma warning disable IDE0052 // Remove unread private members - Used to store the AdviseSolutionEvents cookie.
         private readonly uint _eventCookie;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         [ImportingConstructor]

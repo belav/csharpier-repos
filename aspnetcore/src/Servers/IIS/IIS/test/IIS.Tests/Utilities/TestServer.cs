@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 public class TestServer : IDisposable
@@ -53,6 +54,7 @@ public class TestServer : IDisposable
 
     private Uri BaseUri => new Uri("http://localhost:" + _currentPort);
     public HttpClient HttpClient { get; private set; }
+
     public TestConnection CreateConnection() => new TestConnection(_currentPort);
 
     private static IISServerOptions _options;

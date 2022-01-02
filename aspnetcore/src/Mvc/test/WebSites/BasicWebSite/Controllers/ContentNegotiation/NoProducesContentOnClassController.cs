@@ -5,6 +5,7 @@ using BasicWebSite.Formatters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class NoProducesContentOnClassController : ProducesContentBaseController

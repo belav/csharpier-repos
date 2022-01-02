@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.WebView.Photino;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace PhotinoTestApp;
 
 class Program

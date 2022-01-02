@@ -1,5 +1,7 @@
 public abstract class BaseClass<T> { }
+
 public class ClassA : BaseClass<ClassB> { }
+
 public class ClassB : ClassA { }
 
 public class TestClass

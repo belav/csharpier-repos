@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
 internal class DataProtectionOptionsSetup : IConfigureOptions<DataProtectionOptions>

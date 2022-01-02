@@ -27,11 +27,13 @@ public class MarshalBoolArray
     #region "Bool Array"
     [DllImport("MarshalBoolArrayNative")]
     private static extern bool DoCallBackIn(CallBackIn callback);
+
     private delegate bool CallBackIn(
         [In] int size,
         [In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I1, SizeConst = SIZE)]
             bool[] array
     );
+
     private static bool TestMethod_CallBackIn(int size, bool[] array)
     {
         bool retVal = true;
@@ -60,11 +62,13 @@ public class MarshalBoolArray
 
     [DllImport("MarshalBoolArrayNative")]
     private static extern bool DoCallBackOut(CallBackOut callback);
+
     private delegate bool CallBackOut(
         [In] int size,
         [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1, SizeConst = SIZE)]
             bool[] array
     );
+
     private static bool TestMethod_CallBackOut(int size, bool[] array)
     {
         bool retVal = true;
@@ -84,6 +88,7 @@ public class MarshalBoolArray
 
     [DllImport("MarshalBoolArrayNative")]
     private static extern bool DoCallBackInOut(CallBackInOut callback);
+
     private delegate bool CallBackInOut(
         [In] int size,
         [
@@ -134,6 +139,7 @@ public class MarshalBoolArray
     #region"Bool Array Reference"
     [DllImport("MarshalBoolArrayNative")]
     private static extern bool DoCallBackRefIn(CallBackRefIn callback);
+
     private delegate bool CallBackRefIn(
         [In] int size,
         [In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1)] ref bool[] array
@@ -172,6 +178,7 @@ public class MarshalBoolArray
 
     [DllImport("MarshalBoolArrayNative")]
     private static extern bool DoCallBackRefOut(CallBackRefOut callback);
+
     private delegate bool CallBackRefOut(
         [In] int size,
         [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I1)] out bool[] array
@@ -198,6 +205,7 @@ public class MarshalBoolArray
 
     [DllImport("MarshalBoolArrayNative")]
     private static extern bool DoCallBackRefInOut(CallBackRefInOut callback);
+
     private delegate bool CallBackRefInOut(
         [In] int size,
         [In, Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1)]

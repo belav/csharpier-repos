@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected abstract IImmutableList<SyntaxNode> GetAssemblyScopedAttributeSyntaxNodesOfDocument(
             SyntaxNode documentRoot
         );
+
         protected abstract SyntaxNode? GetConstructorArgumentOfInternalsVisibleToAttribute(
             SyntaxNode internalsVisibleToAttribute
         );

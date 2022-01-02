@@ -4,6 +4,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Analyzer.Testing;
 
+
 namespace Microsoft.AspNetCore.Analyzers.RenderTreeBuilder;
 
 public class DisallowNonLiteralSequenceNumbersTest

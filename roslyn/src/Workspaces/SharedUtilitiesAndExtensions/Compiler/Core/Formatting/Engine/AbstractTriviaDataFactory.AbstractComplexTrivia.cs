@@ -47,8 +47,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             protected abstract void ExtractLineAndSpace(string text, out int lines, out int spaces);
+
             protected abstract TriviaData CreateComplexTrivia(int line, int space);
+
             protected abstract TriviaData CreateComplexTrivia(int line, int space, int indentation);
+
             protected abstract TriviaDataWithList Format(
                 FormattingContext context,
                 ChainedFormattingRules formattingRules,
@@ -56,6 +59,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int spaces,
                 CancellationToken cancellationToken
             );
+
             protected abstract bool ContainsSkippedTokensOrText(TriviaList list);
 
             public SyntaxToken Token1 => _token1;

@@ -14,7 +14,6 @@ namespace Internal.Cryptography
     internal sealed class OpenSslCipherLite : ILiteSymmetricCipher
     {
         private readonly SafeEvpCipherCtxHandle _ctx;
-
 #if DEBUG
         private bool _isFinalized;
 #endif

@@ -346,7 +346,6 @@ class D
 
             await TestAsync(markup, expectedOrderedItems);
         }
-
         #endregion
 
         #region "Current Parameter Name"
@@ -364,7 +363,6 @@ class Goo
 
             await VerifyCurrentParameterNameAsync(markup, "a");
         }
-
         #endregion
 
         #region "Trigger tests"
@@ -482,7 +480,6 @@ class Goo
 
             VerifyTriggerCharacters(expectedCharacters, unexpectedCharacters);
         }
-
         #endregion
 
         #region "EditorBrowsable tests"
@@ -674,7 +671,6 @@ public class BaseClass
                 referencedLanguage: LanguageNames.CSharp
             );
         }
-
         #endregion
 
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]

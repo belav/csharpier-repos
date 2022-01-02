@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
 public class VersionStartup

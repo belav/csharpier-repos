@@ -91,6 +91,7 @@ namespace System.Reflection.TypeLoading
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name
         );
+
         protected abstract void IterateTypeForwards(TypeForwardHandler handler);
     }
 }

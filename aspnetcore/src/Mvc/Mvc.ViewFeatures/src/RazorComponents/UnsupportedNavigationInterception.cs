@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Routing;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal sealed class UnsupportedNavigationInterception : INavigationInterception

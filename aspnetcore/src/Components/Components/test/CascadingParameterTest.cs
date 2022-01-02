@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Test.Helpers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Test;
 
 public class CascadingParameterTest
@@ -545,6 +546,7 @@ public class CascadingParameterTest
 
         [CascadingParameter]
         T CascadingParameter { get; set; }
+
         [Parameter]
         public string RegularParameter { get; set; }
 

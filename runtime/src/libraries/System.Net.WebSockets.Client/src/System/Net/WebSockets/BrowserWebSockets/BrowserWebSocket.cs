@@ -50,7 +50,6 @@ namespace System.Net.WebSockets
             _innerWebSocket != null && !_innerWebSocket.IsDisposed
                 ? _innerWebSocket!.GetObjectProperty("protocol")?.ToString()
                 : null;
-
         #endregion Properties
 
         internal Task ConnectAsync(

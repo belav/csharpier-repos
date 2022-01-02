@@ -30,6 +30,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace TestSite;
 
 public partial class Startup
@@ -52,6 +53,7 @@ public partial class Startup
         serviceCollection.AddResponseCompression();
         serviceCollection.AddHttpContextAccessor();
     }
+
 #if FORWARDCOMPAT
     private async Task ContentRootPath(HttpContext ctx) =>
         await ctx.Response.WriteAsync(
@@ -419,7 +421,6 @@ public partial class Startup
             await ctx.Response.WriteAsync(new string('a', length));
         }
     }
-
 #if !FORWARDCOMPAT
     private Task UnflushedResponsePipe(HttpContext ctx)
     {
@@ -522,6 +523,7 @@ public partial class Startup
     }
 
     private int _requestsInFlight = 0;
+
     private async Task ReadAndCountRequestBody(HttpContext ctx)
     {
         Interlocked.Increment(ref _requestsInFlight);
@@ -578,6 +580,7 @@ public partial class Startup
             result = await ctx.Request.Body.ReadAsync(readBuffer, 0, readBuffer.Length);
         }
     }
+
     private async Task ReadAndFlushEcho(HttpContext ctx)
     {
 #if !FORWARDCOMPAT
@@ -1280,6 +1283,7 @@ public partial class Startup
 
     private TaskCompletionSource<object> _resetBeforeResponseResetsCts =
         new TaskCompletionSource<object>();
+
     public Task Reset_BeforeResponse_Resets(HttpContext httpContext)
     {
         try
@@ -1304,6 +1308,7 @@ public partial class Startup
 
     private TaskCompletionSource<object> _resetBeforeResponseZeroResetsCts =
         new TaskCompletionSource<object>();
+
     public Task Reset_BeforeResponse_Zero_Resets(HttpContext httpContext)
     {
         try
@@ -1345,6 +1350,7 @@ public partial class Startup
             _resetAfterResponseHeadersResetsCts.SetException(ex);
         }
     }
+
     public async Task Reset_AfterResponseHeaders_Resets_Complete(HttpContext httpContext)
     {
         await _resetAfterResponseHeadersResetsCts.Task;
@@ -1468,6 +1474,7 @@ public partial class Startup
 
     private TaskCompletionSource<object> _onCompletedHttpContext =
         new TaskCompletionSource<object>();
+
     public async Task OnCompletedHttpContext(HttpContext context)
     {
         // This shouldn't block the response or the server from shutting down.
@@ -1517,6 +1524,7 @@ public partial class Startup
 
     private TaskCompletionSource<object> _responseTrailers_CompleteAsyncNoBody_TrailersSent =
         new TaskCompletionSource<object>();
+
     public async Task ResponseTrailers_CompleteAsyncNoBody_TrailersSent(HttpContext httpContext)
     {
         httpContext.Response.AppendTrailer("trailername", "TrailerValue");
@@ -1532,6 +1540,7 @@ public partial class Startup
 
     private TaskCompletionSource<object> _responseTrailers_CompleteAsyncWithBody_TrailersSent =
         new TaskCompletionSource<object>();
+
     public async Task ResponseTrailers_CompleteAsyncWithBody_TrailersSent(HttpContext httpContext)
     {
         await httpContext.Response.WriteAsync("Hello World");

@@ -11,6 +11,7 @@ using System.Runtime.Loader;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
 internal class GetDocumentCommand : ProjectCommandBase

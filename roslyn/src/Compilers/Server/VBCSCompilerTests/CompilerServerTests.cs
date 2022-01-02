@@ -350,7 +350,6 @@ End Module"
                 RunCompilerOutput(resultFile, expectedOutput);
             }
         }
-
         #endregion
 
         [ConditionalFact(typeof(UnixLikeOnly))]

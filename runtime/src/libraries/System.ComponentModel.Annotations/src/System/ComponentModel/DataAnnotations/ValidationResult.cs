@@ -24,7 +24,6 @@ namespace System.ComponentModel.DataAnnotations
         ///     should compare the values to <see cref="ValidationResult.Success" /> rather than checking for null.
         /// </remarks>
         public static readonly ValidationResult? Success;
-
         #endregion
 
         #region All Constructors
@@ -72,7 +71,6 @@ namespace System.ComponentModel.DataAnnotations
             ErrorMessage = validationResult.ErrorMessage;
             MemberNames = validationResult.MemberNames;
         }
-
         #endregion
 
         #region Properties
@@ -86,7 +84,6 @@ namespace System.ComponentModel.DataAnnotations
         ///     Gets the error message for this result.  It may be null.
         /// </summary>
         public string? ErrorMessage { get; set; }
-
         #endregion
 
         #region Methods

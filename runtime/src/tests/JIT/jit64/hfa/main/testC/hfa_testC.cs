@@ -14,6 +14,7 @@ namespace HFATest
         const long CONST_INT64 = (long)77;
         const float CONST_FLOAT32 = (float)77.0;
         const double CONST_FLOAT64 = (double)77.0;
+
 #pragma warning restore 0414
 
         static int Main()

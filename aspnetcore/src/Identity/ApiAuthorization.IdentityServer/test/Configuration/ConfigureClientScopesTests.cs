@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
 public class ConfigureClientScopesTests

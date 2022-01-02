@@ -19,7 +19,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly Symbol _container;
         private readonly TypeMap _map;
         private readonly int _ordinal;
-
 #if DEBUG_ALPHA
         private static int _nextSequence = 1;
         private readonly int _mySequence;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
 internal static class AssertFrame

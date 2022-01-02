@@ -4,6 +4,7 @@
 using System.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class IdentityResultTest

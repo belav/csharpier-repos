@@ -22,15 +22,19 @@ namespace Microsoft.NET.Build.Tasks
         [Required]
         public ITaskItem[] RuntimePacks { get; set; }
         public ITaskItem[] Crossgen2Packs { get; set; }
+
         [Required]
         public ITaskItem[] TargetingPacks { get; set; }
+
         [Required]
         public string RuntimeGraphPath { get; set; }
+
         [Required]
         public string NETCoreSdkRuntimeIdentifier { get; set; }
 
         [Output]
         public ITaskItem CrossgenTool { get; set; }
+
         [Output]
         public ITaskItem Crossgen2Tool { get; set; }
 

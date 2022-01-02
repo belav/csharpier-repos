@@ -54,7 +54,6 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 using Action = Newtonsoft.Json.Serialization.Action;
 #else
 using System.Linq;
-
 #endif
 
 namespace Newtonsoft.Json.Tests
@@ -97,7 +96,6 @@ namespace Newtonsoft.Json.Tests
 #endif
         }
     }
-
 #if DNXCORE50
     public class TestFixtureAttribute : Attribute
     {

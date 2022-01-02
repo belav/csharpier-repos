@@ -35,6 +35,7 @@ class A
     //////////////////////////////
     // Instance Fields
     public int FldPubInst;
+
     //private int FldPrivInst;
     protected int FldFamInst; //Translates to "family"
     internal int FldAsmInst; //Translates to "assembly"
@@ -43,6 +44,7 @@ class A
     //////////////////////////////
     // Static Fields
     public static int FldPubStat;
+
     //private static int FldPrivStat;
     protected static int FldFamStat; //family
     internal static int FldAsmStat; //assembly

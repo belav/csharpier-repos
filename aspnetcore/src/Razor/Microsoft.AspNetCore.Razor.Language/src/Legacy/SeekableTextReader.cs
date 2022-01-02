@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal sealed class SeekableTextReader : TextReader, ITextDocument

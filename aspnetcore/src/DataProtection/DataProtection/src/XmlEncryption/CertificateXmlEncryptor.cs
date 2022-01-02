@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Cryptography;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 /// <summary>

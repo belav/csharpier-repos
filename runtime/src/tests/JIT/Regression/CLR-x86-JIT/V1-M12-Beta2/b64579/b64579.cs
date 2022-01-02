@@ -2,13 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 public class Padre
 {
     private double _x = 10;
+
     public virtual void Incrementa(double a)
     {
         _x = _x + a;
     }
+
     public void print()
     {
         Console.WriteLine(_x);
@@ -25,6 +28,7 @@ public class Hijo : Padre
         base.Incrementa(b);
     }
 }
+
 internal class Test_b64579
 {
     public static int Main()

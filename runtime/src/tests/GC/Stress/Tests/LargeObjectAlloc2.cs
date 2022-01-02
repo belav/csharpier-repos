@@ -17,6 +17,7 @@ namespace LargeObjectTest
         // disabling unused variable warning
 #pragma warning disable 0414
         private int[] _otherarray;
+
 #pragma warning restore 0414
 
         public OtherLargeObject()

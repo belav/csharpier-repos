@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 
 internal class AccessTokenProviderAccessor : IAccessTokenProviderAccessor

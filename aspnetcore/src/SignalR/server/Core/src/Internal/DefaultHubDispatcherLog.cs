@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal static class DefaultHubDispatcherLog

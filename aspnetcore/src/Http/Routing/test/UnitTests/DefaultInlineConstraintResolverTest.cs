@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Tests;
 
 public class DefaultInlineConstraintResolverTest
@@ -421,6 +422,7 @@ public class DefaultInlineConstraintResolverTest
         }
 
         public string Pattern { get; private set; }
+
         public bool Match(
             HttpContext httpContext,
             IRouter route,

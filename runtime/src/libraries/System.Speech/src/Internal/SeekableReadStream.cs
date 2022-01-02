@@ -24,7 +24,6 @@ namespace System.Speech.Internal
             _canSeek = baseStream.CanSeek; // If the stream is already seekable then don't need to do anything special
             _baseStream = baseStream;
         }
-
         #endregion
 
         #region Internal Properties
@@ -131,7 +130,6 @@ namespace System.Speech.Internal
                 }
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -232,7 +230,6 @@ namespace System.Speech.Internal
         {
             _baseStream.Flush();
         }
-
         #endregion
 
         #region Private Fields

@@ -38,7 +38,6 @@ namespace System.Diagnostics.Tracing
             IntPtr.Size == 8 ? TraceLoggingDataType.UInt64 : TraceLoggingDataType.UInt32;
         public static readonly TraceLoggingDataType HexIntPtrType =
             IntPtr.Size == 8 ? TraceLoggingDataType.HexInt64 : TraceLoggingDataType.HexInt32;
-
         #endregion
 
         #region Metadata helpers
@@ -335,7 +334,6 @@ namespace System.Diagnostics.Tracing
                   => Format64(format, nativeFormat),
                 _ => MakeDataType(nativeFormat, format),
             };
-
         #endregion
 
         #region Reflection helpers
@@ -408,7 +406,6 @@ namespace System.Diagnostics.Tracing
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == (Type?)openType;
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"

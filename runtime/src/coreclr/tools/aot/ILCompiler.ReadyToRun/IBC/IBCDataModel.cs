@@ -370,18 +370,22 @@ namespace ILCompiler.IBC
             {
                 return (((uint)rid) | ((uint)tktype));
             }
+
             public static uint TokenFromRid(uint rid, CorTokenType tktype)
             {
                 return (((uint)rid) | ((uint)tktype));
             }
+
             public static uint RidFromToken(uint tk)
             {
                 return (uint)(((uint)tk) & 0x00ffffff);
             }
+
             public static CorTokenType TypeFromToken(uint tk)
             {
                 return ((CorTokenType)(((uint)tk) & 0xff000000));
             }
+
             public static bool IsNilToken(uint tk)
             {
                 return ((RidFromToken(tk)) == 0);
@@ -398,15 +402,18 @@ namespace ILCompiler.IBC
                     flags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation
                 ) != 0;
         }
+
         public static bool IsSlotUsedInsteadOfToken(uint flags)
         {
             return (flags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_SlotInsteadOfToken)
                 != 0;
         }
+
         public static bool IsUnboxingStub(uint flags)
         {
             return (flags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_UnboxingStub) != 0;
         }
+
         public static bool IsInstantiatingStub(uint flags)
         {
             return (flags & (uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_InstantiatingStub)

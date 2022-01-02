@@ -3,6 +3,7 @@
 
 using System.IO;
 
+
 namespace Microsoft.AspNetCore.ResponseCompression;
 
 /// <summary>

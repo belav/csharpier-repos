@@ -47,6 +47,7 @@ namespace RuntimeEventCounterTests
                 { "time-in-jit", false }
             };
         }
+
         private Dictionary<string, bool> observedRuntimeCounters;
 
         protected override void OnEventSourceCreated(EventSource source)

@@ -15,14 +15,17 @@ struct MyStruct : I<string>, I<object>
     {
         return "string";
     }
+
     public string Method(object param)
     {
         return "object";
     }
+
     public string Method<M>(string param)
     {
         return "GEN-string";
     }
+
     public string Method<M>(object param)
     {
         return "GEN-object";

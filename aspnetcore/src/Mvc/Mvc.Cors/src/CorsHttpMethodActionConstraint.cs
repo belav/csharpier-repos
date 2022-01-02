@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
 internal class CorsHttpMethodActionConstraint : HttpMethodActionConstraint

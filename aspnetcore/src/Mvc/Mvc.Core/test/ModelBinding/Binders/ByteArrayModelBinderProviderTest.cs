@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 public class ByteArrayModelBinderProviderTest

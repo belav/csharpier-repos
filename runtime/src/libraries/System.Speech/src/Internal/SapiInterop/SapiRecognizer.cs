@@ -58,7 +58,6 @@ namespace System.Speech.Internal.SapiInterop
             }
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         #region Internal Methods
@@ -83,6 +82,7 @@ namespace System.Speech.Internal.SapiInterop
                 }
             );
         }
+
         internal void SetPropertyString(string name, string value)
         {
             _proxy.Invoke2(
@@ -251,7 +251,6 @@ namespace System.Speech.Internal.SapiInterop
                 }
             );
         }
-
         #endregion
 
         #region Internal Properties
@@ -260,7 +259,6 @@ namespace System.Speech.Internal.SapiInterop
         {
             get { return _isSap53; }
         }
-
         #endregion
 
         #region Internal Types
@@ -270,7 +268,6 @@ namespace System.Speech.Internal.SapiInterop
             InProc,
             Shared
         }
-
         #endregion
 
         #region Private Methods
@@ -330,7 +327,6 @@ namespace System.Speech.Internal.SapiInterop
             }
             return result;
         }
-
         #endregion
 
         #region Private Fields

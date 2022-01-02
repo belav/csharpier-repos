@@ -1602,7 +1602,6 @@ public class TryCatchFinally
             Assert.True(controlFlowAnalysisResults.EndPointIsReachable);
             Assert.Equal("x", GetSymbolNamesJoined(dataFlowAnalysisResults.AlwaysAssigned));
         }
-
         #endregion
 
         [Fact]

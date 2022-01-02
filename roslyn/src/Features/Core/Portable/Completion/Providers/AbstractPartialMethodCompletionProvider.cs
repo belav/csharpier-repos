@@ -34,6 +34,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             IMethodSymbol method,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsPartialMethodCompletionContext(
             SyntaxTree tree,
             int position,
@@ -41,11 +42,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             out DeclarationModifiers modifiers,
             out SyntaxToken token
         );
+
         protected abstract string GetDisplayText(
             IMethodSymbol method,
             SemanticModel semanticModel,
             int position
         );
+
         protected abstract bool IsPartial(IMethodSymbol method);
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)

@@ -25,10 +25,15 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract bool SupportsDocumentationComments(TMemberNode member);
+
         protected abstract bool HasDocumentationComment(TMemberNode member);
+
         protected abstract int GetPrecedingDocumentationCommentCount(TMemberNode member);
+
         protected abstract bool IsMemberDeclaration(TMemberNode member);
+
         protected abstract List<string> GetDocumentationCommentStubLines(TMemberNode member);
 
         protected abstract SyntaxToken GetTokenToRight(
@@ -36,22 +41,28 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract SyntaxToken GetTokenToLeft(
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsDocCommentNewLine(SyntaxToken token);
+
         protected abstract bool IsEndOfLineTrivia(SyntaxTrivia trivia);
 
         protected abstract bool IsSingleExteriorTrivia(
             TDocumentationComment documentationComment,
             bool allowWhitespace = false
         );
+
         protected abstract bool EndsWithSingleExteriorTrivia(
             TDocumentationComment? documentationComment
         );
+
         protected abstract bool IsMultilineDocComment(TDocumentationComment? documentationComment);
+
         protected abstract bool HasSkippedTrailingTrivia(SyntaxToken token);
 
         public abstract string DocumentationCommentCharacter { get; }

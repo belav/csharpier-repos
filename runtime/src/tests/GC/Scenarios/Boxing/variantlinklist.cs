@@ -18,6 +18,7 @@ namespace DefaultNamespace
         // disabling unused variable warning
 #pragma warning disable 0414
         internal Object m_Var;
+
 #pragma warning restore 0414
 
         internal Object[] m_aVar;

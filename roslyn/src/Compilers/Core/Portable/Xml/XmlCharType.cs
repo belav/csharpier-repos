@@ -7535,7 +7535,6 @@ namespace Microsoft.CodeAnalysis
             byte table = s_charPropertiesIndex[i >> innerSizeBits];
             return s_charProperties[unchecked((table << innerSizeBits) + (i & innerSizeMask))];
         }
-
 #else
         private static byte[][] s_charProperties = InitInstance();
 
@@ -7977,7 +7976,6 @@ namespace Microsoft.CodeAnalysis
         {
             return (charProperties(ch) & fNCNameSC) != 0;
         }
-
 #if XML10_FIFTH_EDITION
         public static bool IsNCNameSurrogateChar(string str, int index)
         {
@@ -8012,7 +8010,6 @@ namespace Microsoft.CodeAnalysis
         {
             return (charProperties(ch) & fNCStartNameSC) != 0;
         }
-
 #if XML10_FIFTH_EDITION
         // !!! NOTE: These is no IsStartNCNameSurrogateChar, use IsNCNameSurrogateChar instead.
         // Surrogate ranges for start name characters are the same as for name characters.
@@ -8022,7 +8019,6 @@ namespace Microsoft.CodeAnalysis
         {
             return IsNCNameSingleChar(ch) || ch == ':';
         }
-
 #if XML10_FIFTH_EDITION
         static bool IsNameSurrogateChar(char lowChar, char highChar)
         {

@@ -35,7 +35,6 @@ using System.Globalization;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 
 namespace Newtonsoft.Json
@@ -1232,7 +1231,6 @@ namespace Newtonsoft.Json
         {
             InternalWriteValue(JsonToken.Date);
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Writes a <see cref="DateTimeOffset"/> value.
@@ -1489,7 +1487,6 @@ namespace Newtonsoft.Json
                 WriteValue(value.GetValueOrDefault());
             }
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Writes a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/> value.

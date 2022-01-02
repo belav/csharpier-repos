@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 
+
 namespace HealthChecksSample;
 
 // This is an example of a custom health check that implements IHealthCheck.

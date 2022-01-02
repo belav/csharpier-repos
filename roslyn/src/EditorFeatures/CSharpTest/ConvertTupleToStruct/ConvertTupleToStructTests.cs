@@ -3210,7 +3210,6 @@ internal struct NewStruct
                 }
             );
         }
-
         #endregion
 
         #region update containing type tests
@@ -3802,7 +3801,6 @@ partial class Other
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
         }
-
         #endregion update containing project tests
 
         #region update containing project tests
@@ -3953,7 +3951,6 @@ partial class Other
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
         }
-
         #endregion
 
         #region update dependent projects

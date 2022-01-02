@@ -164,7 +164,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 return d.GenerateMessage(p.ExecuteMethod.ToString());
             }
         }
-
         #endregion CommandCreating
 
         #region CommandCreated
@@ -278,7 +277,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 );
             }
         }
-
         #endregion CommandCreated
 
         #region CommandExecuting
@@ -762,7 +760,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 );
             }
         }
-
         #endregion CommandExecuting
 
         #region CommandExecuted
@@ -1298,7 +1295,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 );
             }
         }
-
         #endregion CommandExecuted
 
         #region CommandError
@@ -1496,7 +1492,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 );
             }
         }
-
         #endregion CommandError
 
         #region DataReaderDisposing
@@ -1564,7 +1559,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             return default;
         }
-
         #endregion DataReaderDisposing
 
         #region ShouldLog checks

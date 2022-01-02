@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
 public class RedisServerFixture<TStartup> : IAsyncLifetime where TStartup : class

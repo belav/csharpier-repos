@@ -741,6 +741,7 @@ d.cs
                 Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
             );
         }
+
 #nullable disable
 
         [Fact, WorkItem(29252, "https://github.com/dotnet/roslyn/issues/29252")]
@@ -11069,6 +11070,7 @@ class C
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr LoadLibraryEx(string lpFileName, IntPtr hFile, uint dwFlags);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool FreeLibrary([In] IntPtr hFile);
 
@@ -21596,6 +21598,7 @@ public class Generator : ISourceGenerator
     internal abstract class CompilationStartedAnalyzer : DiagnosticAnalyzer
     {
         public abstract override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
         public abstract void CreateAnalyzerWithinCompilation(
             CompilationStartAnalysisContext context
         );

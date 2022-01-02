@@ -57,6 +57,7 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
         }
 
         protected abstract string GetLanguageName();
+
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
         protected abstract bool CanSimplifyTypeNameExpression(

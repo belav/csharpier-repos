@@ -1102,7 +1102,9 @@ namespace Moq.Tests
         }
 
         public sealed class FooSealed { }
+
         class FooService : IFooService { }
+
         interface IFooService { }
 
         public class FooWithPrivateSetter
@@ -1179,6 +1181,7 @@ namespace Moq.Tests
         public abstract class FooBase
         {
             public int ValueField;
+
             public abstract void Do(int value);
 
             public virtual bool Check(string value)
@@ -1272,6 +1275,7 @@ namespace Moq.Tests
             public class ClassWithAccessibleAndInaccessibleMethod
             {
                 public virtual void Public() => throw new InvalidOperationException("Public");
+
                 internal virtual void Internal() => throw new InvalidOperationException("Internal");
             }
         }

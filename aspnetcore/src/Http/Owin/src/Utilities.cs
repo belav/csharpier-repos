@@ -8,6 +8,7 @@ using System.Security.Principal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Owin;
 
 internal static class Utilities

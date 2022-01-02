@@ -5,6 +5,7 @@ using System.Globalization;
 using BasicWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Ares.Area2.Controllers;
 
 [Area("Area2")]

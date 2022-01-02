@@ -5,6 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.AspNetCore.Routing.Matching;
 
 internal static class Ascii

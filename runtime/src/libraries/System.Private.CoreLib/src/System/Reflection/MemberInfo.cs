@@ -35,19 +35,24 @@ namespace System.Reflection
         }
 
         public abstract bool IsDefined(Type attributeType, bool inherit);
+
         public abstract object[] GetCustomAttributes(bool inherit);
+
         public abstract object[] GetCustomAttributes(Type attributeType, bool inherit);
 
         public virtual IEnumerable<CustomAttributeData> CustomAttributes =>
             GetCustomAttributesData();
+
         public virtual IList<CustomAttributeData> GetCustomAttributesData()
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual bool IsCollectible => true;
         public virtual int MetadataToken => throw new InvalidOperationException();
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

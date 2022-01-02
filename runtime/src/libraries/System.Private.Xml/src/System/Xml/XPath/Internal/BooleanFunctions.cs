@@ -20,6 +20,7 @@ namespace MS.Internal.Xml.XPath
             _arg = arg;
             _funcType = funcType;
         }
+
         private BooleanFunctions(BooleanFunctions other) : base(other)
         {
             _arg = Clone(other._arg);
@@ -49,6 +50,7 @@ namespace MS.Internal.Xml.XPath
         {
             return number != 0 && !double.IsNaN(number);
         }
+
         internal static bool toBoolean(string str)
         {
             return str.Length > 0;

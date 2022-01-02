@@ -955,6 +955,7 @@ namespace ILCompiler.Reflection.ReadyToRun
                 }
             }
         }
+
         /// <summary>
         /// Parse a single method def entrypoint section. For composite R2R images, this method is called multiple times
         /// are method entrypoints are stored separately for each component assembly of the composite R2R executable.

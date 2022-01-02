@@ -297,7 +297,6 @@ namespace System.Linq.Expressions
         {
             return visitor.VisitLambda(this);
         }
-
 #if FEATURE_COMPILE
         internal override LambdaExpression Accept(Compiler.StackSpiller spiller)
         {

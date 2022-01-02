@@ -10,12 +10,14 @@ namespace Test
     {
         public static sbyte m_sb = 0;
     }
+
     struct CC
     {
         float Method1()
         {
             return 0;
         }
+
         static int Main()
         {
             CC[] cc = new CC[10];

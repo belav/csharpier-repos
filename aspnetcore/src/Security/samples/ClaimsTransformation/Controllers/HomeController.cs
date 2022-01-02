@@ -6,6 +6,7 @@ using AuthSamples.ClaimsTransformer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace AuthSamples.ClaimsTransformer.Controllers;
 
 public class HomeController : Controller

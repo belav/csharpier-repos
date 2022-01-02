@@ -11,12 +11,15 @@ namespace System.Reflection.TypeLoading
         // On NetStandard, have to do with slower emulations.
 
         public static bool IsSignatureType(this Type type) => false;
+
         public static bool IsSZArray(this Type type) =>
             type.IsArray
             && type.GetArrayRank() == 1
             && type.Name.EndsWith("[]", StringComparison.Ordinal);
+
         public static bool IsVariableBoundArray(this Type type) =>
             type.IsArray && !type.IsSZArray();
+
         public static bool IsGenericMethodParameter(this Type type) =>
             type.IsGenericParameter && type.DeclaringMethod != null;
 
@@ -59,6 +62,7 @@ namespace System.Reflection.TypeLoading
         public abstract bool IsTypeDefinition { get; }
         public abstract bool IsByRefLike { get; }
         public virtual bool IsSignatureType => false;
+
         protected abstract MethodInfo GetMethodImpl(
             string name,
             int genericParameterCount,
@@ -68,6 +72,7 @@ namespace System.Reflection.TypeLoading
             Type[] types,
             ParameterModifier[] modifiers
         );
+
         public abstract bool HasSameMetadataDefinitionAs(MemberInfo other);
     }
 
@@ -79,12 +84,14 @@ namespace System.Reflection.TypeLoading
     internal abstract class LeveledConstructorInfo : ConstructorInfo
     {
         public abstract bool IsConstructedGenericMethod { get; }
+
         public abstract bool HasSameMetadataDefinitionAs(MemberInfo other);
     }
 
     internal abstract class LeveledMethodInfo : MethodInfo
     {
         public abstract bool IsConstructedGenericMethod { get; }
+
         public abstract bool HasSameMetadataDefinitionAs(MemberInfo other);
     }
 

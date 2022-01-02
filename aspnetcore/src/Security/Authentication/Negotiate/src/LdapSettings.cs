@@ -5,6 +5,7 @@ using System;
 using System.DirectoryServices.Protocols;
 using Microsoft.Extensions.Caching.Memory;
 
+
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
 /// <summary>

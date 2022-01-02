@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Cryptography;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.Internal;
 
+
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 internal static unsafe class XmlEncryptionExtensions

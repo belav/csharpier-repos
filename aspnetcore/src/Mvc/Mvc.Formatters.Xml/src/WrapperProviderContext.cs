@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 /// <summary>

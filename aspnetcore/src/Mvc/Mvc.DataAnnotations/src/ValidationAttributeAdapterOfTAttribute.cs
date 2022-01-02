@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Localization;
 
+
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 /// <summary>
@@ -18,6 +19,7 @@ public abstract class ValidationAttributeAdapter<TAttribute> : IClientModelValid
     where TAttribute : ValidationAttribute
 {
     private readonly IStringLocalizer? _stringLocalizer;
+
     /// <summary>
     /// Create a new instance of <see cref="ValidationAttributeAdapter{TAttribute}"/>.
     /// </summary>

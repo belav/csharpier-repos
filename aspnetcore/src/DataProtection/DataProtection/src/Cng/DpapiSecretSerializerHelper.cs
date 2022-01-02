@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.AspNetCore.Cryptography;
 using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
 internal static unsafe class DpapiSecretSerializerHelper

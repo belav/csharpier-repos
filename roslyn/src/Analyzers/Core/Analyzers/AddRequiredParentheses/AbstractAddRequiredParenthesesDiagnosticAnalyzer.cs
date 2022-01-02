@@ -73,10 +73,13 @@ namespace Microsoft.CodeAnalysis.AddRequiredParentheses
         ) => s_cachedProperties[(includeInFixAll, equivalenceKey)];
 
         protected abstract int GetPrecedence(TBinaryLikeExpressionSyntax binaryLike);
+
         protected abstract TExpressionSyntax? TryGetAppropriateParent(
             TBinaryLikeExpressionSyntax binaryLike
         );
+
         protected abstract bool IsBinaryLike(TExpressionSyntax node);
+
         protected abstract (TExpressionSyntax, SyntaxToken, TExpressionSyntax) GetPartsOfBinaryLike(
             TBinaryLikeExpressionSyntax binaryLike
         );

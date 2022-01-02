@@ -63,7 +63,6 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         /// Buffers that need to be associated with a submission project once the process initialization completes.
         /// </summary>
         private readonly List<(ITextBuffer buffer, string name)> _pendingBuffers = new();
-
         #endregion
 
         public InteractiveSession(

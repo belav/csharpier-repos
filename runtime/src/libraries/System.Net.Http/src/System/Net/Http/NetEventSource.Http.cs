@@ -86,7 +86,6 @@ namespace System.Net
         [Event(AuthenticationErrorId, Keywords = Keywords.Debug, Level = EventLevel.Error)]
         public void AuthenticationError(string? uri, string message) =>
             WriteEvent(AuthenticationErrorId, uri, message);
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

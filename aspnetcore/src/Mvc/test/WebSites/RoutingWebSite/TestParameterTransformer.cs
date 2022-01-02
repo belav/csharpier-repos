@@ -5,6 +5,7 @@ using System;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Routing;
 
+
 namespace RoutingWebSite;
 
 public class SlugifyParameterTransformer : IOutboundParameterTransformer

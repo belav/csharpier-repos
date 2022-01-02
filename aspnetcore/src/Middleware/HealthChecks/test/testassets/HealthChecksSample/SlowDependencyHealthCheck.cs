@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
+
 namespace HealthChecksSample;
 
 // Simulates a health check for an application dependency that takes a while to initialize.

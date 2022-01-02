@@ -68,6 +68,7 @@ namespace PInvokeTests
             c = num;
             i = num;
         }
+
         public ExplStruct(DialogResult t, double dnum)
         {
             type = t;
@@ -75,6 +76,7 @@ namespace PInvokeTests
             i = 0;
             c = dnum;
         }
+
         public ExplStruct(DialogResult t, bool bnum)
         {
             type = t;
@@ -140,9 +142,9 @@ namespace PInvokeTests
 
         [DllImport("SimpleStructNative")]
         private static extern void Invalid(AutoStruct s);
+
         [DllImport("SimpleStructNative")]
         private static extern AutoStruct InvalidReturn();
-
         #endregion
 
         #endregion
@@ -167,7 +169,6 @@ namespace PInvokeTests
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate bool CdeclSimpleExplStructByRefDelegate(ref ExplStruct p);
-
         #endregion
 
         #region reverse pinvoke
@@ -206,7 +207,6 @@ namespace PInvokeTests
             ExplStruct simple = Marshal.PtrToStructure<ExplStruct>(st);
             return simple;
         }
-
         #endregion
 
         #region test methods
@@ -628,7 +628,6 @@ namespace PInvokeTests
             catch (Exception) { }
             return pass;
         }
-
         #endregion
 
         public static int Main(string[] argv)

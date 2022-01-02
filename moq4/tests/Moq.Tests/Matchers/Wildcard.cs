@@ -61,9 +61,13 @@ namespace Moq.Tests.Matchers.Wildcard
         }
 
         public static implicit operator int(AnyValue _) => default;
+
         public static implicit operator byte(AnyValue _) => default;
+
         public static implicit operator GearId(AnyValue _) => default;
+
         public static implicit operator Animal(AnyValue _) => default;
+
         public static implicit operator Dolphin(AnyValue _) => default;
     }
 

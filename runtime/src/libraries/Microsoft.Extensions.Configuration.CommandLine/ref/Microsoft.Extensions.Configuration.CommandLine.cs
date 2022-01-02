@@ -15,6 +15,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddCommandLine(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder,
             string[] args
@@ -22,6 +23,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddCommandLine(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder,
             string[] args,
@@ -32,6 +34,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 }
+
 namespace Microsoft.Extensions.Configuration.CommandLine
 {
     public partial class CommandLineConfigurationProvider
@@ -41,16 +44,20 @@ namespace Microsoft.Extensions.Configuration.CommandLine
             System.Collections.Generic.IEnumerable<string> args,
             System.Collections.Generic.IDictionary<string, string> switchMappings = null
         ) { }
+
         protected System.Collections.Generic.IEnumerable<string> Args
         {
             get { throw null; }
         }
+
         public override void Load() { }
     }
+
     public partial class CommandLineConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
         public CommandLineConfigurationSource() { }
+
         public System.Collections.Generic.IEnumerable<string> Args
         {
             get { throw null; }
@@ -61,6 +68,7 @@ namespace Microsoft.Extensions.Configuration.CommandLine
             get { throw null; }
             set { }
         }
+
         public Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
         )

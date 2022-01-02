@@ -181,18 +181,22 @@ namespace System.Xml.Xsl.Runtime
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         internal override void WriteEndElement(string prefix, string localName, string ns)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         public override void WriteComment(string text)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         public override void WriteProcessingInstruction(string name, string text)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         public override void WriteEntityRef(string name)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");

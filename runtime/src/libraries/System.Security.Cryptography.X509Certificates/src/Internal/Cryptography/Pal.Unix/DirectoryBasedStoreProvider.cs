@@ -20,8 +20,10 @@ namespace Internal.Cryptography.Pal
         // {thumbprint}.1.pfx to {thumbprint}.9.pfx
         private const int MaxSaveAttempts = 9;
         private const string PfxExtension = ".pfx";
+
         // *.pfx ({thumbprint}.pfx or {thumbprint}.{ordinal}.pfx)
         private const string PfxWildcard = "*" + PfxExtension;
+
         // .*.pfx ({thumbprint}.{ordinal}.pfx)
         private const string PfxOrdinalWildcard = "." + PfxWildcard;
 

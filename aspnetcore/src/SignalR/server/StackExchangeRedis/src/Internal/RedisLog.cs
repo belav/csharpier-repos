@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 
+
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
 // We don't want to use our nested static class here because RedisHubLifetimeManager is generic.

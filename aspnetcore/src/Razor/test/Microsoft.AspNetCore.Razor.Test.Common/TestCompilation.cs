@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.DependencyModel;
 using Xunit;
 
+
 namespace Microsoft.CodeAnalysis;
 
 public static class TestCompilation

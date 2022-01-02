@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 internal static class ErrorReporter

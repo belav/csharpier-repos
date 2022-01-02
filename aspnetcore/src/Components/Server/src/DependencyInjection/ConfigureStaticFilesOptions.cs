@@ -11,6 +11,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Components.Server;
 
 internal class ConfigureStaticFilesOptions : IPostConfigureOptions<StaticFileOptions>

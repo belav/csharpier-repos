@@ -39,6 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
 #pragma warning disable 0169
 #pragma warning disable IDE0051 // Remove unused private members
         private readonly AdornmentLayerDefinition _lineSeparatorLayer;
+
 #pragma warning restore IDE0051 // Remove unused private members
 #pragma warning restore 0169
 

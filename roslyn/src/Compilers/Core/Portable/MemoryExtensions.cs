@@ -26,7 +26,6 @@ namespace Microsoft.CodeAnalysis
 
             return -1;
         }
-
 #if !NETCOREAPP
         internal static ReadOnlyMemory<char> TrimStart(this ReadOnlyMemory<char> memory)
         {

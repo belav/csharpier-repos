@@ -12,6 +12,7 @@ public unsafe class T
 
         return 1;
     }
+
     public static string Bug()
     {
         int maxSize,
@@ -29,6 +30,7 @@ public unsafe class T
         *pch++ = '0';
         return new string(pBuf, 0, (int)(pch - pBuf));
     }
+
     private static int return_int(bool verbose, int input)
     {
         int ans;

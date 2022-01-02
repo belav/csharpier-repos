@@ -52,6 +52,7 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
             ) { }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
+
         protected abstract ImmutableArray<TSyntaxKind> GetSyntaxKindsToAnalyze();
 
         protected sealed override void InitializeWorker(AnalysisContext context) =>

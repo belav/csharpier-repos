@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Routing.Patterns;
 
+
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
 internal static class RoutePatternWriter

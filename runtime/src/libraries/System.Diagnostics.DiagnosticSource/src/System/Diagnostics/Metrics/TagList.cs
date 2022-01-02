@@ -792,6 +792,7 @@ namespace System.Diagnostics
         {
             private TagList _tagList;
             private int _index;
+
             internal Enumerator(in TagList tagList)
             {
                 _index = -1;

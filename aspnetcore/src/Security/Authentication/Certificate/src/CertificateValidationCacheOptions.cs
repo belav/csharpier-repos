@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
 /// <summary>

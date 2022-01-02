@@ -407,6 +407,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             Assert.Equal(".TestFunc(true, 42)", result);
         }
+
 #pragma warning restore 618
 
         [ConditionalFact]

@@ -138,7 +138,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = o.ToString();
         }
-
 #if !(PORTABLE || PORTABLE40) || NETSTANDARD2_0
 #pragma warning disable 618
         [Test]
@@ -268,7 +267,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
         }
-
 #if !(NET35 || NET20 || PORTABLE40)
         [Test]
         public void DynamicCamelCasePropertyNames()

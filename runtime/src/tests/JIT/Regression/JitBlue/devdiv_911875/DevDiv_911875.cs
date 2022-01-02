@@ -81,6 +81,7 @@ public struct FloatConverter
 {
     [FieldOffset(0)]
     private float _f;
+
     [FieldOffset(0)]
     private int _i;
 

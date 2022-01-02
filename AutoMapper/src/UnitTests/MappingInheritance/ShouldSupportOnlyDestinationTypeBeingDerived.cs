@@ -10,16 +10,20 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             string Value { get; set; }
         }
+
         class TConcrete : TInterface
         {
             public string Value { get; set; }
         }
+
         class TModel
         {
             public string Value { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateMap<TModel, TInterface>().As<TConcrete>());
+
         [Fact]
         public void Should_report_missing_map() =>
             new Action(() => Configuration.CompileMappings())
@@ -28,6 +32,7 @@ namespace AutoMapper.UnitTests.MappingInheritance
                     "Missing map from AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TModel to AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TConcrete. Create using CreateMap<TModel, TConcrete>."
                 );
     }
+
     public class AsShouldWorkOnlyWithDerivedTypesWithGenerics : AutoMapperSpecBase
     {
         class Source<T>
@@ -132,6 +137,7 @@ namespace AutoMapper.UnitTests.MappingInheritance
             1.ShouldBe(customerDto.Id);
         }
     }
+
     public class DestinationTypePolymorphismTestNonGeneric
     {
         public class Customer

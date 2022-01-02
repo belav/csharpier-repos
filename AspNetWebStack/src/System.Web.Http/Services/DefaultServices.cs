@@ -102,6 +102,7 @@ namespace System.Web.Http.Services
         {
             _defaultServicesSingle[typeof(T)] = instance;
         }
+
         private void SetMultiple<T>(params T[] instances) where T : class
         {
             var x = (IEnumerable<object>)instances;

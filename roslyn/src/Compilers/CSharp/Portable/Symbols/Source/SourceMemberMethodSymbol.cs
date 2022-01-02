@@ -597,7 +597,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return cc;
             }
         }
-
         #endregion
 
         #region Syntax
@@ -702,7 +701,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ref lazyDocComment
             );
         }
-
         #endregion
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers

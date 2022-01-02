@@ -497,6 +497,7 @@ namespace System.Reflection.Tests
             public abstract void SetLength(long value);
 
             public abstract void Write(byte[] buffer, int offset, int count);
+
             public virtual Task WriteAsync(byte[] buffer, int offset, int count)
             {
                 throw null;
@@ -518,10 +519,12 @@ namespace System.Reflection.Tests
 
 #pragma warning disable 0067 // event never used
             public event Action<int> StuffHappened;
+
 #pragma warning restore 0067
 
 #pragma warning disable 0169 // field never used
             private int _pizzaSize;
+
 #pragma warning restore 0169
 
             public override bool CanRead => false;

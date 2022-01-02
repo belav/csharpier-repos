@@ -65,7 +65,6 @@ namespace System.Net.WebSockets
             get => throw new PlatformNotSupportedException();
             set => throw new PlatformNotSupportedException();
         }
-
         #endregion HTTP Settings
 
         #region WebSocket Settings
@@ -121,7 +120,6 @@ namespace System.Net.WebSockets
         {
             throw new PlatformNotSupportedException();
         }
-
         #endregion WebSocket settings
 
         #region Helpers

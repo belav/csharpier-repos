@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
 public class PagesPropertyInjectionPass : IntermediateNodePassBase, IRazorOptimizationPass

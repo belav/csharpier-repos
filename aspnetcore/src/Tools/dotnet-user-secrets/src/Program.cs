@@ -7,6 +7,7 @@ using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.SecretManager.Tools.Internal;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools;
 
 public class Program

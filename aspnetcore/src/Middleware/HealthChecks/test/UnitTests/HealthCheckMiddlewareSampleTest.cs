@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 public class HealthCheckMiddlewareSampleTest

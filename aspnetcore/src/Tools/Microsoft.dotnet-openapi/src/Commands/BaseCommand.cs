@@ -13,6 +13,7 @@ using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.DotNet.Openapi.Tools.Internal;
 using Microsoft.Extensions.CommandLineUtils;
 
+
 namespace Microsoft.DotNet.OpenApi.Commands;
 
 internal abstract class BaseCommand : CommandLineApplication

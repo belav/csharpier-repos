@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Hosting.Tests.Internal;
 
 public class MyBadContainerFactory : IServiceProviderFactory<MyContainer>

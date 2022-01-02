@@ -8,6 +8,7 @@ using BenchmarkDotNet.Configs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Http.Abstractions.Microbenchmarks;
 
 public class GetHeaderSplitBenchmark

@@ -38,6 +38,7 @@ namespace System.Runtime.CompilerServices.Tests
         {
             public int i1;
             public int i2;
+
             public override bool Equals(object obj)
             {
                 if (!(obj is TestStruct))
@@ -321,6 +322,7 @@ namespace System.Runtime.CompilerServices.Tests
         {
 #pragma warning disable CS0414 // unused private field
             private static readonly int _theInt;
+
 #pragma warning restore CS0414
 
             static ClassWithNormalCctor()

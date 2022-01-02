@@ -301,15 +301,19 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         protected abstract bool MatchTypeToTypeId(TypeSymbol type, int typeId);
 
         protected abstract TypeSymbol GetReturnType(MethodSymbol method);
+
         protected abstract ImmutableArray<ParameterSymbol> GetParameters(MethodSymbol method);
 
         protected abstract TypeSymbol GetPropertyType(PropertySymbol property);
+
         protected abstract ImmutableArray<ParameterSymbol> GetParameters(PropertySymbol property);
 
         protected abstract TypeSymbol GetParamType(ParameterSymbol parameter);
 
         protected abstract bool IsByRefParam(ParameterSymbol parameter);
+
         protected abstract bool IsByRefMethod(MethodSymbol method);
+
         protected abstract bool IsByRefProperty(PropertySymbol property);
 
         protected abstract TypeSymbol GetFieldType(FieldSymbol field);

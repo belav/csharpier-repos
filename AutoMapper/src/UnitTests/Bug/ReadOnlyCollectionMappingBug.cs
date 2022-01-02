@@ -13,6 +13,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int X { get; set; }
         }
+
         class Target
         {
             public int X { get; set; }

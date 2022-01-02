@@ -3120,7 +3120,6 @@ End Class";
 
         private static readonly MetadataReference s_propertiesDll =
             TestReferences.SymbolsTests.Properties;
-
         #endregion
 
         [ConditionalFact(typeof(DesktopOnly))]
@@ -3455,6 +3454,7 @@ unsafe class Test
                         .WithLocation(4, 30)
                 );
         }
+
         [Fact]
         public void RefPropertyWithoutGetter()
         {

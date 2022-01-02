@@ -13,8 +13,10 @@ namespace System.IO.MemoryMappedFiles.Tests
 
         protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.Read);
+
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.ReadWrite);
+
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
             CreateStream(initialData, FileAccess.Write);
 

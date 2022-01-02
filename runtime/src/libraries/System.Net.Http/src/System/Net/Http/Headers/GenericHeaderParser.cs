@@ -86,7 +86,6 @@ namespace System.Net.Http.Headers
             new GenericHeaderParser(false, WarningHeaderValue.GetWarningLength);
         internal static readonly GenericHeaderParser MultipleValueWarningParser =
             new GenericHeaderParser(true, WarningHeaderValue.GetWarningLength);
-
         #endregion
 
         private readonly GetParsedValueLengthDelegate _getParsedValueLength;

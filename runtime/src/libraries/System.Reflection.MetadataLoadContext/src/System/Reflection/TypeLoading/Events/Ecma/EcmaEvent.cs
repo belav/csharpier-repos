@@ -64,7 +64,9 @@ namespace System.Reflection.TypeLoading.Ecma
             _handle.GetHashCode() ^ DeclaringType.GetHashCode();
 
         protected sealed override string ComputeName() => EventDefinition.Name.GetString(Reader);
+
         protected sealed override EventAttributes ComputeAttributes() => EventDefinition.Attributes;
+
         protected sealed override Type ComputeEventHandlerType() =>
             EventDefinition.Type.ResolveTypeDefRefOrSpec(_module, TypeContext);
 
@@ -106,10 +108,12 @@ namespace System.Reflection.TypeLoading.Ecma
             EventDefinition
                 .GetAccessors()
                 .Adder.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+
         protected sealed override RoMethod? ComputeEventRemoveMethod() =>
             EventDefinition
                 .GetAccessors()
                 .Remover.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+
         protected sealed override RoMethod? ComputeEventRaiseMethod() =>
             EventDefinition
                 .GetAccessors()
@@ -126,6 +130,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughEventDefinitionProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly EventDefinition _neverAccessThisExceptThroughEventDefinitionProperty;
     }

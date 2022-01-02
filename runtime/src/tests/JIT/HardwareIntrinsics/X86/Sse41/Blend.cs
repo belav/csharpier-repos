@@ -555,6 +555,7 @@ namespace IntelHardwareIntrinsicTest
             GCHandle inHandle1;
             GCHandle inHandle2;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b, T[] c)
             {
                 this.inArray1 = a;
@@ -565,6 +566,7 @@ namespace IntelHardwareIntrinsicTest
                 inHandle2 = GCHandle.Alloc(inArray2, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], T[], bool> check)
             {
                 return check(inArray1, inArray2, outArray);

@@ -547,7 +547,6 @@ namespace System.Net.Http.Formatting
             // DBNull.Value can be read back as null object.
             Assert.Null(readObj);
         }
-
 #if !NETCOREAPP2_0 // DBNull not serializable on .NET Core 2.0 except at top level (using BsonMediaTypeformatter special case).
         [Theory]
         [TestDataSet(

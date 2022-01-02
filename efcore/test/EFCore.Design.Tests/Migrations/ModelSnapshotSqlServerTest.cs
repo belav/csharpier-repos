@@ -1043,7 +1043,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 }
             );
         }
-
         #endregion
 
         #region EntityType
@@ -2500,7 +2499,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 }
             );
         }
-
         #endregion
 
         #region Owned types
@@ -3425,7 +3423,6 @@ namespace RootNamespace
         {
             public string City { get; set; }
         }
-
         #endregion
 
         #region Property
@@ -4870,7 +4867,6 @@ namespace RootNamespace
                     )
             );
         }
-
         #endregion
 
         #region HasKey
@@ -5050,7 +5046,6 @@ namespace RootNamespace
                 }
             );
         }
-
         #endregion
 
         #region Index
@@ -5540,7 +5535,6 @@ namespace RootNamespace
                 }
             );
         }
-
         #endregion
 
         #region ForeignKey
@@ -6427,7 +6421,6 @@ namespace RootNamespace
                 }
             );
         }
-
         #endregion
 
         #region Navigation
@@ -6588,7 +6581,6 @@ namespace RootNamespace
                     )
             );
         }
-
         #endregion
 
         #region SeedData
@@ -7194,7 +7186,6 @@ namespace RootNamespace
                 }
             );
         }
-
         #endregion
 
         protected virtual string GetHeading(bool empty = false) =>

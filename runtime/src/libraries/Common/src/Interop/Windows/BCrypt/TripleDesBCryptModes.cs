@@ -17,6 +17,7 @@ namespace Internal.Cryptography
         private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCbc = Open3DesAlgorithm(
             Cng.BCRYPT_CHAIN_MODE_CBC
         );
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Security",
             "CA5350",
@@ -25,6 +26,7 @@ namespace Internal.Cryptography
         private static readonly Lazy<SafeAlgorithmHandle> s_hAlgEcb = Open3DesAlgorithm(
             Cng.BCRYPT_CHAIN_MODE_ECB
         );
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Security",
             "CA5350",
@@ -34,6 +36,7 @@ namespace Internal.Cryptography
             Cng.BCRYPT_CHAIN_MODE_CFB,
             1
         );
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Security",
             "CA5350",

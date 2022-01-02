@@ -50,6 +50,7 @@ struct S
     public Pad pad4;
     public Pad pad5;
     public String str2;
+
 #pragma warning restore 0414
 
     Pad initPad()

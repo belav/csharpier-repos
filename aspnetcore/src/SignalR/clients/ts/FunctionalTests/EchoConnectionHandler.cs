@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections;
 
+
 namespace FunctionalTests;
 
 public class EchoConnectionHandler : ConnectionHandler

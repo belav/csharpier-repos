@@ -19,6 +19,7 @@ class WrappedString
 class WrappedStringCustomMarshaler : ICustomMarshaler
 {
     public void CleanUpManagedData(object ManagedObj) { }
+
     public void CleanUpNativeData(IntPtr pNativeData)
     {
         Marshal.ZeroFreeCoTaskMemAnsi(pNativeData);
@@ -28,6 +29,7 @@ class WrappedStringCustomMarshaler : ICustomMarshaler
 
     public IntPtr MarshalManagedToNative(object ManagedObj) =>
         Marshal.StringToCoTaskMemAnsi(((WrappedString)ManagedObj)._str);
+
     public object MarshalNativeToManaged(IntPtr pNativeData) =>
         new WrappedString(Marshal.PtrToStringAnsi(pNativeData));
 

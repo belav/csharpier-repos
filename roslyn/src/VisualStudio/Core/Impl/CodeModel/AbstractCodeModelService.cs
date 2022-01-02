@@ -183,11 +183,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public abstract bool MatchesScope(SyntaxNode node, EnvDTE.vsCMElement scope);
 
         public abstract IEnumerable<SyntaxNode> GetOptionNodes(SyntaxNode parent);
+
         public abstract IEnumerable<SyntaxNode> GetImportNodes(SyntaxNode parent);
+
         public abstract IEnumerable<SyntaxNode> GetAttributeNodes(SyntaxNode parent);
+
         public abstract IEnumerable<SyntaxNode> GetAttributeArgumentNodes(SyntaxNode parent);
+
         public abstract IEnumerable<SyntaxNode> GetInheritsNodes(SyntaxNode parent);
+
         public abstract IEnumerable<SyntaxNode> GetImplementsNodes(SyntaxNode parent);
+
         public abstract IEnumerable<SyntaxNode> GetParameterNodes(SyntaxNode parent);
 
         protected IEnumerable<SyntaxNode> GetFlattenedMemberNodes(SyntaxTree syntaxTree) =>
@@ -427,13 +433,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         );
 
         public abstract EnvDTE.vsCMTypeRef GetTypeKindForCodeTypeRef(ITypeSymbol typeSymbol);
+
         public abstract string GetAsFullNameForCodeTypeRef(ITypeSymbol typeSymbol);
+
         public abstract string GetAsStringForCodeTypeRef(ITypeSymbol typeSymbol);
 
         public abstract bool IsParameterNode(SyntaxNode node);
+
         public abstract bool IsAttributeNode(SyntaxNode node);
+
         public abstract bool IsAttributeArgumentNode(SyntaxNode node);
+
         public abstract bool IsOptionNode(SyntaxNode node);
+
         public abstract bool IsImportNode(SyntaxNode node);
 
         public ISymbol? ResolveSymbol(
@@ -649,6 +661,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             FileCodeModel fileCodeModel,
             SyntaxNode node
         );
+
         public abstract EnvDTE.CodeElement CreateUnknownRootNamespaceCodeElement(
             CodeModelState state,
             FileCodeModel fileCodeModel
@@ -658,7 +671,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public abstract string? GetUnescapedName(string? name);
 
         public abstract string GetName(SyntaxNode node);
+
         public abstract SyntaxNode GetNodeWithName(SyntaxNode node);
+
         public abstract SyntaxNode SetName(SyntaxNode node, string name);
 
         public abstract string GetFullName(SyntaxNode node, SemanticModel semanticModel);
@@ -720,7 +735,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         public abstract bool IsValidExternalSymbol(ISymbol symbol);
+
         public abstract string GetExternalSymbolName(ISymbol symbol);
+
         public abstract string GetExternalSymbolFullName(ISymbol symbol);
 
         public VirtualTreePoint? GetStartPoint(
@@ -736,12 +753,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         ) => _nodeLocator.GetEndPoint(node, options, part);
 
         public abstract EnvDTE.vsCMAccess GetAccess(ISymbol symbol);
+
         public abstract EnvDTE.vsCMAccess GetAccess(SyntaxNode node);
+
 #nullable disable
         public abstract SyntaxNode GetNodeWithModifiers(SyntaxNode node);
+
         public abstract SyntaxNode GetNodeWithType(SyntaxNode node);
+
 #nullable restore
         public abstract SyntaxNode GetNodeWithInitializer(SyntaxNode node);
+
         public abstract SyntaxNode SetAccess(SyntaxNode node, EnvDTE.vsCMAccess access);
 
         public abstract EnvDTE.vsCMElement GetElementKind(SyntaxNode node);
@@ -845,7 +867,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         public abstract bool IsExpressionBodiedProperty(SyntaxNode node);
+
         public abstract bool IsAccessorNode(SyntaxNode node);
+
         public abstract MethodKind GetAccessorKind(SyntaxNode node);
 
         public abstract bool TryGetAccessorNode(
@@ -853,44 +877,52 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             MethodKind kind,
             [NotNullWhen(true)] out SyntaxNode? accessorNode
         );
+
         public abstract bool TryGetAutoPropertyExpressionBody(
             SyntaxNode parentNode,
             [NotNullWhen(true)] out SyntaxNode? accessorNode
         );
+
         public abstract bool TryGetParameterNode(
             SyntaxNode parentNode,
             string name,
             [NotNullWhen(true)] out SyntaxNode? parameterNode
         );
+
         public abstract bool TryGetImportNode(
             SyntaxNode parentNode,
             string dottedName,
             [NotNullWhen(true)] out SyntaxNode? importNode
         );
+
         public abstract bool TryGetOptionNode(
             SyntaxNode parentNode,
             string name,
             int ordinal,
             [NotNullWhen(true)] out SyntaxNode? optionNode
         );
+
         public abstract bool TryGetInheritsNode(
             SyntaxNode parentNode,
             string name,
             int ordinal,
             [NotNullWhen(true)] out SyntaxNode? inheritsNode
         );
+
         public abstract bool TryGetImplementsNode(
             SyntaxNode parentNode,
             string name,
             int ordinal,
             [NotNullWhen(true)] out SyntaxNode? implementsNode
         );
+
         public abstract bool TryGetAttributeNode(
             SyntaxNode parentNode,
             string name,
             int ordinal,
             [NotNullWhen(true)] out SyntaxNode? attributeNode
         );
+
         public abstract bool TryGetAttributeArgumentNode(
             SyntaxNode attributeNode,
             int index,
@@ -903,12 +935,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             out string name,
             out int ordinal
         );
+
         public abstract void GetInheritsNamespaceAndOrdinal(
             SyntaxNode inheritsNode,
             SyntaxNode optionNode,
             out string namespaceName,
             out int ordinal
         );
+
         public abstract void GetImplementsNamespaceAndOrdinal(
             SyntaxNode implementsNode,
             SyntaxNode optionNode,
@@ -922,13 +956,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             out string name,
             out int ordinal
         );
+
         public abstract SyntaxNode GetAttributeTargetNode(SyntaxNode attributeNode);
+
         public abstract string GetAttributeTarget(SyntaxNode attributeNode);
+
         public abstract string GetAttributeValue(SyntaxNode attributeNode);
+
         public abstract SyntaxNode SetAttributeTarget(SyntaxNode attributeNode, string value);
+
         public abstract SyntaxNode SetAttributeValue(SyntaxNode attributeNode, string value);
+
         public abstract SyntaxNode GetNodeWithAttributes(SyntaxNode node);
+
         public abstract SyntaxNode GetEffectiveParentForAttribute(SyntaxNode node);
+
         public abstract SyntaxNode CreateAttributeNode(
             string name,
             string value,
@@ -940,17 +982,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             out SyntaxNode attributeNode,
             out int index
         );
+
         public abstract SyntaxNode CreateAttributeArgumentNode(string name, string value);
 
         public abstract string GetAttributeArgumentValue(SyntaxNode attributeArgumentNode);
 
         public abstract string GetImportAlias(SyntaxNode node);
+
         public abstract string GetImportNamespaceOrType(SyntaxNode node);
+
         public abstract void GetImportParentAndName(
             SyntaxNode importNode,
             out SyntaxNode? namespaceNode,
             out string name
         );
+
         public abstract SyntaxNode CreateImportNode(string name, string? alias = null);
 
         public abstract string GetParameterName(SyntaxNode node);
@@ -958,10 +1004,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public virtual string GetParameterFullName(SyntaxNode node) => GetParameterName(node);
 
         public abstract EnvDTE80.vsCMParameterKind GetParameterKind(SyntaxNode node);
+
         public abstract SyntaxNode SetParameterKind(
             SyntaxNode node,
             EnvDTE80.vsCMParameterKind kind
         );
+
         public abstract EnvDTE80.vsCMParameterKind UpdateParameterKind(
             EnvDTE80.vsCMParameterKind parameterKind,
             PARAMETER_PASSING_MODE passingMode
@@ -978,18 +1026,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public abstract bool SupportsEventThrower { get; }
 
         public abstract bool GetCanOverride(SyntaxNode memberNode);
+
         public abstract SyntaxNode SetCanOverride(SyntaxNode memberNode, bool value);
 
         public abstract EnvDTE80.vsCMClassKind GetClassKind(
             SyntaxNode typeNode,
             INamedTypeSymbol typeSymbol
         );
+
         public abstract SyntaxNode SetClassKind(SyntaxNode typeNode, EnvDTE80.vsCMClassKind kind);
 
         public abstract string GetComment(SyntaxNode node);
+
         public abstract SyntaxNode SetComment(SyntaxNode node, string value);
 
         public abstract EnvDTE80.vsCMConstKind GetConstKind(SyntaxNode variableNode);
+
         public abstract SyntaxNode SetConstKind(
             SyntaxNode variableNode,
             EnvDTE80.vsCMConstKind kind
@@ -999,12 +1051,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode typeNode,
             INamedTypeSymbol symbol
         );
+
         public abstract SyntaxNode SetDataTypeKind(
             SyntaxNode typeNode,
             EnvDTE80.vsCMDataTypeKind kind
         );
 
         public abstract string GetDocComment(SyntaxNode node);
+
         public abstract SyntaxNode SetDocComment(SyntaxNode node, string value);
 
         public abstract EnvDTE.vsCMFunction GetFunctionKind(IMethodSymbol symbol);
@@ -1013,18 +1067,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode typeNode,
             INamedTypeSymbol typeSymbol
         );
+
         public abstract SyntaxNode SetInheritanceKind(
             SyntaxNode typeNode,
             EnvDTE80.vsCMInheritanceKind kind
         );
 
         public abstract bool GetIsAbstract(SyntaxNode memberNode, ISymbol symbol);
+
         public abstract SyntaxNode SetIsAbstract(SyntaxNode memberNode, bool value);
 
         public abstract bool GetIsConstant(SyntaxNode variableNode);
+
         public abstract SyntaxNode SetIsConstant(SyntaxNode variableNode, bool value);
 
         public abstract bool GetIsDefault(SyntaxNode propertyNode);
+
         public abstract SyntaxNode SetIsDefault(SyntaxNode propertyNode, bool value);
 
         public abstract bool GetIsGeneric(SyntaxNode memberNode);
@@ -1032,12 +1090,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public abstract bool GetIsPropertyStyleEvent(SyntaxNode eventNode);
 
         public abstract bool GetIsShared(SyntaxNode memberNode, ISymbol symbol);
+
         public abstract SyntaxNode SetIsShared(SyntaxNode memberNode, bool value);
 
         public abstract bool GetMustImplement(SyntaxNode memberNode);
+
         public abstract SyntaxNode SetMustImplement(SyntaxNode memberNode, bool value);
 
         public abstract EnvDTE80.vsCMOverrideKind GetOverrideKind(SyntaxNode memberNode);
+
         public abstract SyntaxNode SetOverrideKind(
             SyntaxNode memberNode,
             EnvDTE80.vsCMOverrideKind kind
@@ -1052,6 +1113,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         public abstract string GetMethodXml(SyntaxNode node, SemanticModel semanticModel);
 
         public abstract string? GetInitExpression(SyntaxNode node);
+
         public abstract SyntaxNode AddInitExpression(SyntaxNode node, string value);
 
         public abstract CodeGenerationDestination GetDestination(SyntaxNode containerNode);
@@ -1134,6 +1196,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SemanticModel semanticModel,
             int position
         );
+
         public abstract ITypeSymbol? GetTypeSymbolFromFullName(
             string fullName,
             Compilation compilation
@@ -1359,7 +1422,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         protected abstract SyntaxNode GetFieldFromVariableNode(SyntaxNode variableNode);
+
         protected abstract SyntaxNode GetVariableFromFieldNode(SyntaxNode fieldNode);
+
         protected abstract SyntaxNode GetAttributeFromAttributeDeclarationNode(
             SyntaxNode attributeDeclarationNode
         );
@@ -1408,21 +1473,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SyntaxNode member,
             SyntaxNode container
         );
+
         protected abstract SyntaxNode InsertAttributeArgumentIntoContainer(
             int index,
             SyntaxNode attributeArgument,
             SyntaxNode container
         );
+
         protected abstract SyntaxNode InsertAttributeListIntoContainer(
             int index,
             SyntaxNode attribute,
             SyntaxNode container
         );
+
         protected abstract SyntaxNode InsertImportIntoContainer(
             int index,
             SyntaxNode import,
             SyntaxNode container
         );
+
         protected abstract SyntaxNode InsertParameterIntoContainer(
             int index,
             SyntaxNode parameter,
@@ -1686,6 +1755,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         ) => _eventCollector.Collect(oldTree, newTree);
 
         public abstract bool IsNamespace(SyntaxNode node);
+
         public abstract bool IsType(SyntaxNode node);
 
         public virtual IList<string> GetHandledEventNames(
@@ -1734,21 +1804,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         public abstract string[] GetFunctionExtenderNames();
+
         public abstract object GetFunctionExtender(string name, SyntaxNode node, ISymbol symbol);
+
         public abstract string[] GetPropertyExtenderNames();
+
         public abstract object GetPropertyExtender(string name, SyntaxNode node, ISymbol symbol);
+
         public abstract string[] GetExternalTypeExtenderNames();
+
         public abstract object GetExternalTypeExtender(string name, string externalLocation);
+
         public abstract string[] GetTypeExtenderNames();
+
         public abstract object GetTypeExtender(string name, AbstractCodeType codeType);
 
         public abstract bool IsValidBaseType(SyntaxNode node, ITypeSymbol typeSymbol);
+
         public abstract SyntaxNode AddBase(
             SyntaxNode node,
             ITypeSymbol typeSymbol,
             SemanticModel semanticModel,
             int? position
         );
+
         public abstract SyntaxNode RemoveBase(
             SyntaxNode node,
             ITypeSymbol typeSymbol,
@@ -1756,12 +1835,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         );
 
         public abstract bool IsValidInterfaceType(SyntaxNode node, ITypeSymbol typeSymbol);
+
         public abstract SyntaxNode AddImplementedInterface(
             SyntaxNode node,
             ITypeSymbol typeSymbol,
             SemanticModel semanticModel,
             int? position
         );
+
         public abstract SyntaxNode RemoveImplementedInterface(
             SyntaxNode node,
             ITypeSymbol typeSymbol,

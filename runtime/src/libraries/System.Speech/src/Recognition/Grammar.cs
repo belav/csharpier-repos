@@ -35,8 +35,11 @@ namespace System.Speech.Recognition
             _uri = uri;
             InitialGrammarLoad(ruleName, parameters, false);
         }
+
         public Grammar(string path) : this(path, (string)null, null) { }
+
         public Grammar(string path, string ruleName) : this(path, ruleName, null) { }
+
         public Grammar(string path, string ruleName, object[] parameters)
         {
             try
@@ -54,14 +57,19 @@ namespace System.Speech.Recognition
 
             InitialGrammarLoad(ruleName, parameters, false);
         }
+
         public Grammar(SrgsDocument srgsDocument) : this(srgsDocument, null, null, null) { }
+
         public Grammar(SrgsDocument srgsDocument, string ruleName)
             : this(srgsDocument, ruleName, null, null) { }
+
         public Grammar(SrgsDocument srgsDocument, string ruleName, object[] parameters)
             : this(srgsDocument, ruleName, null, parameters) { }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public Grammar(SrgsDocument srgsDocument, string ruleName, Uri baseUri)
             : this(srgsDocument, ruleName, baseUri, null) { }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public Grammar(SrgsDocument srgsDocument, string ruleName, Uri baseUri, object[] parameters)
         {
@@ -72,13 +80,18 @@ namespace System.Speech.Recognition
             _baseUri = baseUri;
             InitialGrammarLoad(ruleName, parameters, false);
         }
+
         public Grammar(Stream stream) : this(stream, null, null, null) { }
+
         public Grammar(Stream stream, string ruleName) : this(stream, ruleName, null, null) { }
+
         public Grammar(Stream stream, string ruleName, object[] parameters)
             : this(stream, ruleName, null, parameters) { }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public Grammar(Stream stream, string ruleName, Uri baseUri)
             : this(stream, ruleName, baseUri, null) { }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public Grammar(Stream stream, string ruleName, Uri baseUri, object[] parameters)
         {
@@ -107,7 +120,9 @@ namespace System.Speech.Recognition
             _onInitParameters = onInitParameters;
             InitialGrammarLoad(ruleName, null, true);
         }
+
         protected Grammar() { }
+
         protected void StgInit(object[] parameters)
         {
             _parameters = parameters;
@@ -198,7 +213,6 @@ namespace System.Speech.Recognition
             }
             return null;
         }
-
         #endregion
 
         #region public Properties
@@ -299,14 +313,12 @@ namespace System.Speech.Recognition
         {
             get { return _uri; }
         }
-
         #endregion
 
         #region public Events
 
         // The event fired upon a recognition.
         public event EventHandler<SpeechRecognizedEventArgs> SpeechRecognized;
-
         #endregion
 
         #region Internal Properties
@@ -436,7 +448,6 @@ namespace System.Speech.Recognition
             get { return _internalData; }
             set { _internalData = value; }
         }
-
         #endregion
 
         #region Internal Methods
@@ -636,7 +647,6 @@ namespace System.Speech.Recognition
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                 );
         }
-
         #endregion
 
         #region Internal Fields
@@ -646,7 +656,6 @@ namespace System.Speech.Recognition
         internal System.Speech.Internal.SrgsCompiler.AppDomainGrammarProxy _proxy;
 
         internal ScriptRef[] _scripts;
-
         #endregion
 
         #region Protected Methods
@@ -659,7 +668,6 @@ namespace System.Speech.Recognition
                 _resources = value;
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -1322,7 +1330,6 @@ namespace System.Speech.Recognition
         private string _grammarName = string.Empty;
         private Collection<Grammar> _ruleRefs;
         private static ResourceLoader s_resourceLoader = new();
-
 #if DEBUG
         private bool _loaded;
 #endif

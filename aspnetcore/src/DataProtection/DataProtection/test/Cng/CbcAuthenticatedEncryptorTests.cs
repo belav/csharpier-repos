@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.DataProtection.Test.Shared;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
 public class CbcAuthenticatedEncryptorTests

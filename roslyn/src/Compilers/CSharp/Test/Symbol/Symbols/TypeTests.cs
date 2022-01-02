@@ -2037,7 +2037,6 @@ namespace NS
             );
             Assert.Equal("decimal?", tinfo.ConvertedType.ToDisplayString());
         }
-
         #endregion
 
         [Fact]

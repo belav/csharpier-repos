@@ -270,7 +270,6 @@ namespace System.Runtime.CompilerServices
 
             return box;
         }
-
 #if !CORERT
         // Avoid forcing the JIT to build DebugFinalizableAsyncStateMachineBox<TStateMachine> unless it's actually needed.
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -321,8 +320,10 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>A delegate to the <see cref="MoveNext()"/> method.</summary>
             private Action? _moveNextAction;
+
             /// <summary>The state machine itself.</summary>
             public TStateMachine? StateMachine; // mutable struct; do not make this readonly. SOS DumpAsync command depends on this name.
+
             /// <summary>Captured ExecutionContext with which to invoke <see cref="MoveNextAction"/>; may be null.</summary>
             public ExecutionContext? Context;
 

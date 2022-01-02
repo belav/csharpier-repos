@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInterop;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 /// <summary>

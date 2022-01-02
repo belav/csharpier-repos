@@ -8,11 +8,13 @@ using System.Text;
 using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public abstract class TokenizerTestBase
 {
     internal abstract object IgnoreRemaining { get; }
+
     internal abstract object CreateTokenizer(ITextDocument source);
 
     internal void TestTokenizer(string input, params SyntaxToken[] expectedSymbols)

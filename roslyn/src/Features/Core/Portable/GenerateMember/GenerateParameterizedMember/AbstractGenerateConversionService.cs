@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
         where TInvocationExpressionSyntax : TExpressionSyntax
     {
         protected abstract bool IsImplicitConversionGeneration(SyntaxNode node);
+
         protected abstract bool IsExplicitConversionGeneration(SyntaxNode node);
+
         protected abstract bool TryInitializeImplicitConversionState(
             SemanticDocument document,
             SyntaxNode expression,
@@ -47,6 +49,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
         );
+
         protected abstract bool TryInitializeExplicitConversionState(
             SemanticDocument document,
             SyntaxNode expression,

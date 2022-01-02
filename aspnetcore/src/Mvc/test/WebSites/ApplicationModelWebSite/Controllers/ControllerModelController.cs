@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
+
 namespace ApplicationModelWebSite;
 
 // This controller uses an reflected model attribute to change the controller name, and thus

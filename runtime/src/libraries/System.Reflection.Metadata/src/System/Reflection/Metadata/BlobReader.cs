@@ -150,7 +150,6 @@ namespace System.Reflection.Metadata
             CheckBounds(offset, length);
             return new MemoryBlock(_currentPointer + offset, length);
         }
-
         #endregion
 
         #region Bounds Checking
@@ -203,7 +202,6 @@ namespace System.Reflection.Metadata
             _currentPointer = p + 1;
             return p;
         }
-
         #endregion
 
         #region Read Methods

@@ -75,7 +75,6 @@ namespace System.Diagnostics.Tracing
                 }
             }
         }
-
 #endregion // EventSource Command Processing
 
 #region Global CounterGroup Array management
@@ -127,7 +126,6 @@ namespace System.Diagnostics.Tracing
                 return ret;
             }
         }
-
 #endregion // Global CounterGroup Array management
 
 #region Timer Processing
@@ -290,6 +288,7 @@ namespace System.Diagnostics.Tracing
         }
 
         private static Thread? s_pollingThread;
+
         // Used for sleeping for a certain amount of time while allowing the thread to be woken up
         private static AutoResetEvent? s_pollingThreadSleepEvent;
 

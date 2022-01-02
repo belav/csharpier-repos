@@ -659,7 +659,6 @@ class C
             //var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.False(controlFlowAnalysisResults.EndPointIsReachable);
         }
-
         #endregion
 
         #region "For, Foreach, Break, Continue"
@@ -988,7 +987,6 @@ public class Program
             Assert.True(flow.VariablesDeclared.Any((s) => s.Name == "b"));
             Assert.True(flow.VariablesDeclared.Any((s) => s.Name == "s"));
         }
-
         #endregion
 
         #region "Return"
@@ -1199,7 +1197,6 @@ class C {
                 GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside)
             );
         }
-
         #endregion
 
         #region "Yield Return, Break"

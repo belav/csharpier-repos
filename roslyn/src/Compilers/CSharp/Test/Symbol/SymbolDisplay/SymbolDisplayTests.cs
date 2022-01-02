@@ -2780,6 +2780,7 @@ namespace N1 {
             {
                 Event.Invoke();
             }
+
             public delegate void MyDelegate(int x);
             public int Field;
             public int Property => 1;
@@ -2791,6 +2792,7 @@ namespace N1 {
                 {
                     Event.Invoke();
                 }
+
                 public delegate void MyDelegate(int x);
                 public int Field;
                 public int Property => 1;

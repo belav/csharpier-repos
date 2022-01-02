@@ -14,6 +14,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
+
 namespace ProjectTemplates.Tests.Infrastructure;
 
 public class PlaywrightFixture<TTestAssemblyType> : IAsyncLifetime

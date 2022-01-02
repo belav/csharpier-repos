@@ -9,6 +9,7 @@ namespace Test
     class App
     {
         public static bool[] m_abStatic1 = new bool[7];
+
         public uint Method1()
         {
             try
@@ -24,6 +25,7 @@ namespace Test
             catch (DivideByZeroException) { }
             return 0;
         }
+
         static int Main()
         {
             try

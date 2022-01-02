@@ -91,10 +91,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
         private class TestAnalyzerConfigOptions : AnalyzerConfigOptions
         {
             private readonly IDictionary<string, string> _dictionary;
+
             public TestAnalyzerConfigOptions((string, string)[]? options = null) =>
                 _dictionary =
                     options?.ToDictionary(x => x.Item1, x => x.Item2)
                     ?? new Dictionary<string, string>();
+
             public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
                 _dictionary.TryGetValue(key, out value);
         }
@@ -102,13 +104,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
         private class TestOptionSet<T> : OptionSet
         {
             private readonly object? _value;
+
             public TestOptionSet(CodeStyleOption2<T> value) => _value = value;
+
             public override OptionSet WithChangedOption(
                 OptionKey optionAndLanguage,
                 object? value
             ) => this;
+
             internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet optionSet) =>
                 Array.Empty<OptionKey>();
+
             private protected override object? GetOptionCore(OptionKey optionKey) => _value;
         }
     }

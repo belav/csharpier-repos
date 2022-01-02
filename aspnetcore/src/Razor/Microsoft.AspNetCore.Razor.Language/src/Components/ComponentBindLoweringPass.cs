@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass

@@ -10,6 +10,7 @@ namespace System.Web.WebPages
     public abstract class BrowserOverrideStore
     {
         public abstract string GetOverriddenUserAgent(HttpContextBase httpContext);
+
         public abstract void SetOverriddenUserAgent(HttpContextBase httpContext, string userAgent);
     }
 }

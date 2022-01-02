@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
 public class SigningKeysLoaderTests

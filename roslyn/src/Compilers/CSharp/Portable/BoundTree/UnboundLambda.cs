@@ -611,10 +611,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get { return Data.HasSignature; }
         }
+
         public bool HasExplicitReturnType(
             out RefKind refKind,
             out TypeWithAnnotations returnType
         ) => Data.HasExplicitReturnType(out refKind, out returnType);
+
         public bool HasExplicitlyTypedParameterList
         {
             get { return Data.HasExplicitlyTypedParameterList; }
@@ -623,6 +625,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get { return Data.ParameterCount; }
         }
+
         public TypeWithAnnotations InferReturnType(
             ConversionsBase conversions,
             NamedTypeSymbol delegateType,
@@ -635,6 +638,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return Data.RefKind(index);
         }
+
         public void GenerateAnonymousFunctionConversionError(
             BindingDiagnosticBag diagnostics,
             TypeSymbol targetType
@@ -642,35 +646,43 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Data.GenerateAnonymousFunctionConversionError(diagnostics, targetType);
         }
+
         public bool GenerateSummaryErrors(BindingDiagnosticBag diagnostics)
         {
             return Data.GenerateSummaryErrors(diagnostics);
         }
+
         public bool IsAsync
         {
             get { return Data.IsAsync; }
         }
         public bool IsStatic => Data.IsStatic;
+
         public SyntaxList<AttributeListSyntax> ParameterAttributes(int index)
         {
             return Data.ParameterAttributes(index);
         }
+
         public TypeWithAnnotations ParameterTypeWithAnnotations(int index)
         {
             return Data.ParameterTypeWithAnnotations(index);
         }
+
         public TypeSymbol ParameterType(int index)
         {
             return ParameterTypeWithAnnotations(index).Type;
         }
+
         public Location ParameterLocation(int index)
         {
             return Data.ParameterLocation(index);
         }
+
         public string ParameterName(int index)
         {
             return Data.ParameterName(index);
         }
+
         public bool ParameterIsDiscard(int index)
         {
             return Data.ParameterIsDiscard(index);
@@ -745,22 +757,32 @@ namespace Microsoft.CodeAnalysis.CSharp
         public UnboundLambda UnboundLambda => _unboundLambda;
 
         public abstract MessageID MessageID { get; }
+
         public abstract string ParameterName(int index);
+
         public abstract bool ParameterIsDiscard(int index);
+
         public abstract SyntaxList<AttributeListSyntax> ParameterAttributes(int index);
+
         public abstract bool HasSignature { get; }
+
         public abstract bool HasExplicitReturnType(
             out RefKind refKind,
             out TypeWithAnnotations returnType
         );
+
         public abstract bool HasExplicitlyTypedParameterList { get; }
         public abstract int ParameterCount { get; }
         public abstract bool IsAsync { get; }
         public abstract bool HasNames { get; }
         public abstract bool IsStatic { get; }
+
         public abstract Location ParameterLocation(int index);
+
         public abstract TypeWithAnnotations ParameterTypeWithAnnotations(int index);
+
         public abstract RefKind RefKind(int index);
+
         protected abstract BoundBlock BindLambdaBody(
             LambdaSymbol lambdaSymbol,
             Binder lambdaBodyBinder,

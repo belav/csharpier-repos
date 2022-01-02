@@ -221,7 +221,6 @@ namespace System.IO.Ports.Tests
                 VerifyParityReplaceByte(com1, com2, Read_byte_int_int, false);
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

@@ -50,6 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return ToDisplayParts(symbol, nullableAnnotation, format).ToDisplayString();
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         /// <summary>
@@ -105,6 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 .ToDisplayString();
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         /// <summary>
@@ -169,6 +171,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 minimal: false
             );
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         /// <summary>
@@ -232,6 +235,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 minimal: true
             );
         }
+
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
 
         private static ImmutableArray<SymbolDisplayPart> ToDisplayParts(

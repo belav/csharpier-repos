@@ -179,14 +179,17 @@ namespace System.Reflection.Emit
         {
             throw new PlatformNotSupportedException();
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             throw new PlatformNotSupportedException();
         }
+
         public override MethodImplAttributes GetMethodImplementationFlags()
         {
             throw new PlatformNotSupportedException();
         }
+
         public override MethodInfo GetBaseDefinition()
         {
             throw new PlatformNotSupportedException();
@@ -213,6 +216,7 @@ namespace System.Reflection.Emit
             ParameterAttributes attributes,
             string? parameterName
         ) => throw new PlatformNotSupportedException();
+
         public DynamicILInfo GetDynamicILInfo() => throw new PlatformNotSupportedException();
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 public class KeyEscrowServiceProviderExtensionsTests

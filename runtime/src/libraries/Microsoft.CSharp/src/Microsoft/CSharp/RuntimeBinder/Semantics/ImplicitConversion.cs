@@ -32,6 +32,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 _flags = flags;
                 _exprDest = null;
             }
+
             public Expr ExprDest
             {
                 get { return _exprDest; }

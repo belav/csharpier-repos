@@ -303,7 +303,6 @@ public class Test_ReversePInvokeTest
         lspe.l2 = 32;
         return true;
     }
-
     #endregion
 
     #region ReversePinvoke, ByRef, Stdcall
@@ -582,7 +581,6 @@ public class Test_ReversePInvokeTest
         lspe.l2 = 32;
         return true;
     }
-
     #endregion
 
     #region ReversePinvoke, ByVal, Cdel
@@ -863,7 +861,6 @@ public class Test_ReversePInvokeTest
         lspe.l2 = 64;
         return true;
     }
-
     #endregion
 
     #region ReversePinvoke, ByVal, Stdcall
@@ -1144,7 +1141,6 @@ public class Test_ReversePInvokeTest
         lspe.l2 = 64;
         return true;
     }
-
     #endregion
 
     #endregion

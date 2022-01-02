@@ -20,6 +20,7 @@ namespace Test
                 } while (F);
             }
         }
+
         static int Main()
         {
             try

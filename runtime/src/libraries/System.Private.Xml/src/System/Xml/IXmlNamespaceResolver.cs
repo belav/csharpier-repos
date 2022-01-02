@@ -15,6 +15,7 @@ namespace System.Xml
 #pragma warning disable 3002
         // Returns a collection of defined prefix-namespace mappings.
         IDictionary<string, string> GetNamespacesInScope(XmlNamespaceScope scope);
+
 #pragma warning restore 3002
 
         // Return the namespace to which the specified prefix is mapped.  Returns null if the prefix isn't mapped to

@@ -2767,7 +2767,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(value.Length, deserialized.Length);
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
     }
-
 #endregion
 
 #region Collection
@@ -2880,7 +2879,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
     }
-
 #endregion
 
 #region Generic Dictionary
@@ -2926,7 +2924,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value.ToArray(), deserialized.ToArray()));
     }
-
 #endregion
 
 #region Non-Generic Dictionary
@@ -3017,7 +3014,6 @@ public static partial class DataContractJsonSerializerTests
         Assert.Equal(value.Name, actual.Name);
         Assert.Equal(value.ID, actual.ID);
     }
-
 #endregion
 
     [Fact]
@@ -4114,6 +4110,7 @@ public static partial class DataContractJsonSerializerTests
 
     private static string s_errorMsg =
         "The field/property {0} value of deserialized object is wrong";
+
     private static string getCheckFailureMsg(string propertyName)
     {
         return string.Format(s_errorMsg, propertyName);

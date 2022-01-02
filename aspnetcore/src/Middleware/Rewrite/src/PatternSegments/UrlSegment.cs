@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class UrlSegment : PatternSegment

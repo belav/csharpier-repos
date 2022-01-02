@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
 public class HostingEnvironmentExtensionsTests

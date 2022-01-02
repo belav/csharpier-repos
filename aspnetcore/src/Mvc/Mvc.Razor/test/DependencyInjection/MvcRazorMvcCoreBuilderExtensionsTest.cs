@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection;
 
 public class MvcRazorMvcCoreBuilderExtensionsTest

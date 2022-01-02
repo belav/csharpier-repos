@@ -4,6 +4,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
+
 namespace SocialWeather;
 
 public interface IStreamFormatter<T>

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
 namespace HealthChecksSample;
 
 // Pass in `--scenario writer` at the command line to run this sample.

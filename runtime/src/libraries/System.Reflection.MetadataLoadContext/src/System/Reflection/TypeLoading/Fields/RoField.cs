@@ -26,27 +26,35 @@ namespace System.Reflection.TypeLoading
         }
 
         public abstract override bool Equals(object? obj);
+
         public abstract override int GetHashCode();
+
         public abstract override string ToString();
 
         public sealed override Type DeclaringType => GetRoDeclaringType();
+
         internal RoInstantiationProviderType GetRoDeclaringType() => _declaringType;
 
         public sealed override Type ReflectedType => _reflectedType;
 
         public sealed override string Name => _lazyName ?? (_lazyName = ComputeName());
+
         protected abstract string ComputeName();
+
         private volatile string? _lazyName;
 
         public sealed override Module Module => GetRoModule();
+
         internal abstract RoModule GetRoModule();
 
         public abstract override int MetadataToken { get; }
+
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             this.HasSameMetadataDefinitionAsCore(other);
 
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
+
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
             get
@@ -83,27 +91,35 @@ namespace System.Reflection.TypeLoading
         }
 
         protected abstract IEnumerable<CustomAttributeData> GetTrueCustomAttributes();
+
         protected abstract int GetExplicitFieldOffset();
+
         protected abstract MarshalAsAttribute ComputeMarshalAsAttribute();
 
         public sealed override FieldAttributes Attributes =>
             (_lazyFieldAttributes == FieldAttributesSentinel)
                 ? (_lazyFieldAttributes = ComputeAttributes())
                 : _lazyFieldAttributes;
+
         protected abstract FieldAttributes ComputeAttributes();
+
         private const FieldAttributes FieldAttributesSentinel = (FieldAttributes)(-1);
         private volatile FieldAttributes _lazyFieldAttributes = FieldAttributesSentinel;
 
         public sealed override Type FieldType =>
             _lazyFieldType ?? (_lazyFieldType = ComputeFieldType());
+
         protected abstract Type ComputeFieldType();
+
         private volatile Type? _lazyFieldType;
 
         public sealed override object? GetRawConstantValue() =>
             IsLiteral ? ComputeRawConstantValue() : throw new InvalidOperationException();
+
         protected abstract object? ComputeRawConstantValue();
 
         public abstract override Type[] GetOptionalCustomModifiers();
+
         public abstract override Type[] GetRequiredCustomModifiers();
 
         // No trust environment to apply these to.
@@ -117,16 +133,22 @@ namespace System.Reflection.TypeLoading
         // Operations that are not allowed for Reflection-only.
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override RuntimeFieldHandle FieldHandle =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object GetValue(object? obj) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object GetValueDirect(TypedReference obj) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override void SetValue(
             object? obj,
             object? value,
@@ -134,6 +156,7 @@ namespace System.Reflection.TypeLoading
             Binder? binder,
             CultureInfo? culture
         ) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override void SetValueDirect(TypedReference obj, object value) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 

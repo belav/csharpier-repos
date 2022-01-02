@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Microsoft.Win32;
 
+
 namespace Microsoft.Extensions.Logging;
 
 /// <summary>

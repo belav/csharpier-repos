@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Authorization.Policy;
 
 /// <summary>

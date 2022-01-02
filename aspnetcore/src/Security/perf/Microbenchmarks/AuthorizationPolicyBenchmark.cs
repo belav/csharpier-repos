@@ -7,6 +7,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Security;
 
 public class AuthorizationPolicyBenchmark

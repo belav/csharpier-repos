@@ -312,7 +312,6 @@ namespace System.Dynamic
                 PromoteClassCore((ExpandoClass)oldClass, (ExpandoClass)newClass);
             }
         }
-
         #endregion
 
         #region IDynamicMetaObjectProvider Members
@@ -321,7 +320,6 @@ namespace System.Dynamic
         {
             return new MetaExpando(parameter, this);
         }
-
         #endregion
 
         #region Helper methods
@@ -460,7 +458,6 @@ namespace System.Dynamic
             {
                 throw System.Linq.Expressions.Error.CollectionReadOnly();
             }
-
             #endregion
 
             #region IEnumerable<string> Members
@@ -476,7 +473,6 @@ namespace System.Dynamic
                     }
                 }
             }
-
             #endregion
 
             #region IEnumerable Members
@@ -616,7 +612,6 @@ namespace System.Dynamic
             {
                 throw System.Linq.Expressions.Error.CollectionReadOnly();
             }
-
             #endregion
 
             #region IEnumerable<string> Members
@@ -636,7 +631,6 @@ namespace System.Dynamic
                     }
                 }
             }
-
             #endregion
 
             #region IEnumerable Members
@@ -648,7 +642,6 @@ namespace System.Dynamic
 
             #endregion
         }
-
         #endregion
 
         #region IDictionary<string, object> Members
@@ -700,7 +693,6 @@ namespace System.Dynamic
         {
             return TryGetValueForKey(key, out value);
         }
-
         #endregion
 
         #region ICollection<KeyValuePair<string, object>> Members
@@ -777,7 +769,6 @@ namespace System.Dynamic
         {
             return TryDeleteValue(null, -1, item.Key, ignoreCase: false, deleteValue: item.Value);
         }
-
         #endregion
 
         #region IEnumerable<KeyValuePair<string, object>> Member
@@ -821,7 +812,6 @@ namespace System.Dynamic
                 }
             }
         }
-
         #endregion
 
         #region MetaExpando
@@ -1097,7 +1087,6 @@ namespace System.Dynamic
 
             public new ExpandoObject Value => (ExpandoObject)base.Value!;
         }
-
         #endregion
 
         #region ExpandoData
@@ -1199,7 +1188,6 @@ namespace System.Dynamic
                 return (len + (DataArrayAlignment - 1)) & (~(DataArrayAlignment - 1));
             }
         }
-
         #endregion
 
         #region INotifyPropertyChanged

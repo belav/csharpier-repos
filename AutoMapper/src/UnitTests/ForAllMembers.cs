@@ -5,6 +5,7 @@ using Xunit;
 namespace AutoMapper.UnitTests.ForAllMembers
 {
     using Internal;
+
     public class When_conditionally_applying_a_resolver_globally : AutoMapperSpecBase
     {
         public class Source
@@ -62,6 +63,7 @@ namespace AutoMapper.UnitTests.ForAllMembers
             dest.OtherDate.ShouldBe(source.OtherDate.AddDays(1));
         }
     }
+
     public class When_conditionally_applying_a_resolver_per_profile : AutoMapperSpecBase
     {
         public class Source
@@ -69,11 +71,13 @@ namespace AutoMapper.UnitTests.ForAllMembers
             public DateTime SomeDate { get; set; }
             public DateTime OtherDate { get; set; }
         }
+
         public class Dest
         {
             public DateTime SomeDate { get; set; }
             public DateTime OtherDate { get; set; }
         }
+
         class MyProfile : Profile
         {
             public MyProfile()
@@ -87,8 +91,10 @@ namespace AutoMapper.UnitTests.ForAllMembers
                     );
             }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(cfg => cfg.AddProfile<MyProfile>());
+
         public class ConditionalValueResolver
             : IMemberValueResolver<object, object, DateTime, DateTime>
         {
@@ -100,6 +106,7 @@ namespace AutoMapper.UnitTests.ForAllMembers
                 ResolutionContext context
             ) => source.AddDays(1);
         }
+
         [Fact]
         public void Should_use_resolver()
         {

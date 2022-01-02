@@ -13,6 +13,7 @@ namespace System.Net.Http
         private readonly string _name;
         private int _current;
         private bool _disposed;
+
         /// <summary>Circular singly-linked list of active waiters.</summary>
         /// <remarks>If null, the list is empty.  If non-null, this is the tail.  If the list has one item, its Next is itself.</remarks>
         private CreditWaiter? _waitersTail;

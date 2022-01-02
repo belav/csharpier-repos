@@ -152,6 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _notNullIfParameterNotNull;
             }
         }
+
         public void AddNotNullIfParameterNotNull(string parameterName)
         {
             VerifySealed(expected: false);

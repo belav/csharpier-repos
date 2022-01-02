@@ -108,7 +108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableBoolTypeWithIdentityConversionInAssignment()
@@ -170,7 +169,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -298,7 +296,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableShortTypeWithNumbericConversionFromByteInAssignment()
@@ -390,7 +387,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -510,7 +506,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableFloatTypeWithNumbericConversionFromLongInAssignment()
@@ -587,7 +582,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -634,6 +628,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public struct S
     {
         public int f;
+
         public S(int v)
         {
             f = v;
@@ -643,6 +638,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public struct S2
     {
         public int f;
+
         public S2(int v)
         {
             f = v;
@@ -657,6 +653,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public struct GS<T>
     {
         public T f;
+
         public GS(T v)
         {
             f = v;
@@ -725,7 +722,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         #region nullable
         private static bool NullableUserdefinedStructWithIdentityConversionInAssignment()
@@ -787,7 +783,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -837,6 +832,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
 
     public delegate int D();
+
     public struct S
     {
         public static int M()
@@ -845,6 +841,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
 
         public int f;
+
         public S(int v)
         {
             f = v;
@@ -854,6 +851,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class MyException : Exception
     {
         public int code;
+
         public MyException(int c)
         {
             code = c;
@@ -1083,8 +1081,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // <Code>
 
     public delegate int D();
+
     public delegate T GD<T>();
+
     public delegate T1 VGD<out T1, in T2>(T2 i);
+
     public class C
     {
         public static int M1()
@@ -1182,6 +1183,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         public C() { }
 
         public int f1 = 10;
+
         public C(int v)
         {
             f1 = v;
@@ -1196,6 +1198,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class C2
     {
         public int f1 = 10;
+
         public C2(int v)
         {
             f1 = v;
@@ -1410,6 +1413,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     internal struct Strc
     {
         public Guid Val;
+
         public static void Log(string s)
         {
             System.Console.WriteLine("{0}", s);
@@ -1482,6 +1486,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class C
     {
         public int f1 = 10;
+
         public C(int v)
         {
             f1 = v;
@@ -1496,6 +1501,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class C2
     {
         public int f1 = 10;
+
         public C2(int v)
         {
             f1 = v;
@@ -1722,12 +1728,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // <Code>
 
     public delegate int D(int i);
+
     public class C
     {
         public int F1;
         public static uint F2;
         public D F3;
         public static D F4;
+
         public static int M(int i)
         {
             return i;
@@ -2065,6 +2073,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
 
             public int Field;
+
             public static explicit operator bool(C p1)
             {
                 if (p1.Field == 0)
@@ -2321,6 +2330,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
 
             public int Field;
+
             public static implicit operator bool(C p1)
             {
                 if (p1.Field == 0)
@@ -2911,6 +2921,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
 
         private byte _origin;
+
         IEnumerator<long> IEnumerable<long>.GetEnumerator()
         {
             dynamic d = _origin;
@@ -2931,6 +2942,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
 
         private byte _origin;
+
         public IEnumerator GetEnumerator()
         {
             dynamic d = _origin;
@@ -3369,6 +3381,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class C : IDisposable
     {
         public static bool CalledDisposeFlag = false;
+
         public void Dispose()
         {
             CalledDisposeFlag = true;
@@ -3522,6 +3535,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class C : IDisposable
     {
         public static bool CalledDisposeFlag = false;
+
         void IDisposable.Dispose()
         {
             CalledDisposeFlag = true;
@@ -3753,6 +3767,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static IEnumerable<object> s_v4 = null;
         private ICollection<object> _v6;
         private IList<object> _v8 = null;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3806,6 +3821,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     {
         internal delegate List<object> MyDel01();
         private delegate List<dynamic> MyDel02();
+
         private static List<object> M4Del01()
         {
             return new List<object>();
@@ -3975,6 +3991,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         private delegate MyStack<object> DelObj(int x, string s = null);
         private delegate MyStack<dynamic> DelDyn(int x = 0, int y = 0);
+
         public MyStack<object> M4DelObj(int x, string s = "Hi")
         {
             return new MyStack<object>();
@@ -3991,6 +4008,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private int _count = 0;
         private const int maxcount = 128;
         private T[] _ary = null;
+
         public int IndexOf(T t)
         {
             return 1;
@@ -4138,6 +4156,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
 
         private static int s_status = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -4171,6 +4190,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         public delegate decimal D2();
         public delegate string D3();
         public delegate void D4();
+
         public static object Foo()
         {
             return new object();
@@ -4262,6 +4282,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     {
         public delegate int D(string x);
         public delegate int D2(dynamic d);
+
         public static int Foo(dynamic x)
         {
             return 1;
@@ -5069,6 +5090,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class Test
     {
         public const int CMemint = 10;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -5207,6 +5229,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class Test
     {
         public const int CMemint = 65538;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -5500,6 +5523,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class Test
     {
         public const long CMemlong = 10;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -5631,6 +5655,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     public class Test
     {
         public const long CMemlong = -10;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

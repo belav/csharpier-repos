@@ -754,7 +754,6 @@ class TestUnsafeCasts
     {
         return Unsafe.As<double, eightByteStructOverDouble>(ref a);
     }
-
     #endregion
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -810,7 +809,6 @@ class TestUnsafeCasts
         TestWhatShouldBeOptimized();
     }
 }
-
 #endregion
 
 #region Test merge return blocks
@@ -866,6 +864,7 @@ class TestMergeReturnBlocks
     {
         [FieldOffset(0)]
         public int val;
+
         [FieldOffset(0)]
         public ReturnStruct s;
 
@@ -1014,6 +1013,7 @@ class TestHFAandHVA
     {
         return new Doubles2Wrapper();
     }
+
     struct Floats3Wrapper
     {
         public float f1;

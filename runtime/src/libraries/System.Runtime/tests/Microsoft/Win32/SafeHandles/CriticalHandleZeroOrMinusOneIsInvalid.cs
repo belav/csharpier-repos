@@ -40,6 +40,7 @@ public static class CriticalHandleZeroOrMinusOneIsInvalidTests
         public TestCriticalHandleMinusOneIsInvalid() { }
 
         protected override bool ReleaseHandle() => true;
+
         public new void SetHandle(IntPtr handle) => base.SetHandle(handle);
     }
 
@@ -48,6 +49,7 @@ public static class CriticalHandleZeroOrMinusOneIsInvalidTests
         public TestCriticalHandleZeroOrMinusOneIsInvalid() { }
 
         protected override bool ReleaseHandle() => true;
+
         public new void SetHandle(IntPtr handle) => base.SetHandle(handle);
     }
 }

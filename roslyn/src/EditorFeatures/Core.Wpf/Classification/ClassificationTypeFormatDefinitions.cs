@@ -94,7 +94,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 this.ForegroundColor = Color.FromRgb(0x9e, 0x5b, 0x71);
             }
         }
-
         #endregion
         #region Keyword - Control
         // Keyword - Control is ordered after Keyword to ensure this more specific

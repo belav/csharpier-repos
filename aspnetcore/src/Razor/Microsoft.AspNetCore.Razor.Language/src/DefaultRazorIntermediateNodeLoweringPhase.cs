@@ -12,7 +12,9 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
+
 #pragma warning disable CS0618 // Type or member is obsolete
 internal class DefaultRazorIntermediateNodeLoweringPhase
     : RazorEnginePhaseBase,
@@ -235,6 +237,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             Namespace = @namespace;
             Source = source;
         }
+
         public string Namespace { get; }
 
         public SourceSpan? Source { get; }
@@ -248,6 +251,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             return false;
         }
+
         public bool Equals(UsingReference other)
         {
             return string.Equals(Namespace, other.Namespace, StringComparison.Ordinal);

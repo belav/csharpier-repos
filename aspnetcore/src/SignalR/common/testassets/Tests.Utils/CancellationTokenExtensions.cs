@@ -4,6 +4,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public static class CancellationTokenExtensions

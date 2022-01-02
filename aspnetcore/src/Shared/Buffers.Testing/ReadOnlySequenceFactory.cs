@@ -6,6 +6,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace System.Buffers;
 
 internal abstract class ReadOnlySequenceFactory
@@ -20,6 +21,7 @@ internal abstract class ReadOnlySequenceFactory
         new BytePerSegmentTestSequenceFactory();
 
     public abstract ReadOnlySequence<byte> CreateOfSize(int size);
+
     public abstract ReadOnlySequence<byte> CreateWithContent(byte[] data);
 
     public ReadOnlySequence<byte> CreateWithContent(string data)

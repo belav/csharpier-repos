@@ -27,6 +27,7 @@ namespace BenchmarksGame
     {
         public int v = 1;
     }
+
     public class KNucleotide_9
     {
         const int BLOCK_SIZE = 1024 * 1024 * 8;

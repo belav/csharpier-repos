@@ -199,7 +199,6 @@ namespace System.Linq.Expressions.Tests
                 }
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -375,7 +374,6 @@ namespace System.Linq.Expressions.Tests
             Expression bExp = Expression.Constant(b, typeof(char));
             Assert.Throws<InvalidOperationException>(() => Expression.Modulo(aExp, bExp));
         }
-
         #endregion
 
         [Fact]

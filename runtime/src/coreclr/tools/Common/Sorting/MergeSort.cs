@@ -115,10 +115,12 @@ namespace ILCompiler
         private struct ComparisonWrapper<T> : IComparer<T>
         {
             Comparison<T> _comparison;
+
             public ComparisonWrapper(Comparison<T> comparison)
             {
                 _comparison = comparison;
             }
+
             int IComparer<T>.Compare(T x, T y)
             {
                 return _comparison(x, y);

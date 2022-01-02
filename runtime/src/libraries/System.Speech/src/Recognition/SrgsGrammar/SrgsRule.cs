@@ -19,11 +19,13 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             _elements = new SrgsElementList();
         }
+
         public SrgsRule(string id) : this()
         {
             XmlParser.ValidateRuleId(id);
             Id = id;
         }
+
         public SrgsRule(string id, params SrgsElement[] elements) : this()
         {
             Helpers.ThrowIfNull(elements, nameof(elements));
@@ -43,7 +45,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _elements.Add(elements[iElement]);
             }
         }
-
         #endregion
 
         #region public Method
@@ -53,7 +54,6 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             Elements.Add(element);
         }
-
         #endregion
 
         #region public Properties
@@ -159,7 +159,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _onRecognition = value;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -333,7 +332,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                     break;
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -347,7 +345,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return _script.Length > 0; }
         }
-
         #endregion
 
         #region Private Methods
@@ -374,7 +371,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 XmlParser.ThrowSrgsException(SRID.InvalidMethodName);
             }
         }
-
         #endregion
 
         #region Private Fields
@@ -428,7 +424,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             '\r',
             '\n'
         };
-
         #endregion
 
         #region Private Types
@@ -485,6 +480,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 get { return _rule._elements.Count; }
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsElement[] AKeys
             {

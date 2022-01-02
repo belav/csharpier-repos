@@ -95,7 +95,6 @@ namespace System.Xml.Schema
         {
             get { return this.Pos; }
         }
-
         #endregion
 
         //

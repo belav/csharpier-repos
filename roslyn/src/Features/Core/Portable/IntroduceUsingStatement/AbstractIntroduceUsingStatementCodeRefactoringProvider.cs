@@ -31,9 +31,11 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
         protected abstract string CodeActionTitle { get; }
 
         protected abstract bool CanRefactorToContainBlockStatements(SyntaxNode parent);
+
         protected abstract SyntaxList<TStatementSyntax> GetStatements(
             SyntaxNode parentOfStatementsToSurround
         );
+
         protected abstract SyntaxNode WithStatements(
             SyntaxNode parentOfStatementsToSurround,
             SyntaxList<TStatementSyntax> statements

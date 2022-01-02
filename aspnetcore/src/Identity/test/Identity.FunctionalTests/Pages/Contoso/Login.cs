@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom.Html;
 using Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Contoso;
 
 public class Login : DefaultUIPage

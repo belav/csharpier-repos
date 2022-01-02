@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Rewrite.UrlMatches;
 
 internal class StringMatch : UrlMatch

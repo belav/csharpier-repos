@@ -27,6 +27,7 @@ internal class Program
         {
             return d;
         }
+
         public TestDoubleAttribute(uint f)
         {
             // Need to clear any garbage in the top half of f's

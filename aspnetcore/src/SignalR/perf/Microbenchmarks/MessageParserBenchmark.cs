@@ -7,6 +7,7 @@ using System.IO;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class MessageParserBenchmark

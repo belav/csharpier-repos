@@ -106,6 +106,7 @@ namespace System.Threading.Tasks
             }
 
             protected abstract void CreateNewReplica();
+
             protected abstract void ExecuteAction(out bool yieldedBeforeCompletion);
         }
 

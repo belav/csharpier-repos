@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal static class CompilationFailedExceptionFactory
@@ -17,6 +18,7 @@ internal static class CompilationFailedExceptionFactory
     // error CS0234: The type or namespace name 'C' does not exist in the namespace 'N' (are you missing
     // an assembly reference?)
     private const string CS0234 = nameof(CS0234);
+
     // error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive
     // or an assembly reference?)
     private const string CS0246 = nameof(CS0246);

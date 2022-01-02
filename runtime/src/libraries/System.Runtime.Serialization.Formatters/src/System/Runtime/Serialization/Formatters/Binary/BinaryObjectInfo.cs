@@ -16,6 +16,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
     {
         internal int _objectInfoId;
         internal object? _obj;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         internal Type? _objectType;
 

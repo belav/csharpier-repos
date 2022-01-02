@@ -107,7 +107,6 @@ namespace System.Net.Http.Functional.Tests
             {
                 _expectedVersion = expectedVersion;
             }
-
 #if NETCOREAPP
             protected override HttpResponseMessage Send(
                 HttpRequestMessage request,

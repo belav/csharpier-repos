@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.StaticWebAssets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
 /// <summary>

@@ -366,7 +366,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(expectedItem, foundItem); //"Err_4489ajodoi Verify with match that matches more then one item FAILED\n"
             }
         }
-
         #endregion
 
         #region FindLast
@@ -460,7 +459,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(beforeList[1], foundItem); //"Err_4489ajodoi Verify with match that matches more then one item FAILED\n"
             }
         }
-
         #endregion
 
         #region FindIndex
@@ -532,7 +530,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(1, index); //"Err_29892adewiu Verify second item is duplicated"
             }
         }
-
         #endregion
 
         #region FindIndex(int, pred<T>)
@@ -654,7 +651,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(count + 1, index); //"Err_1580ahisdf Verify second item is duplicated and index=2 "
             }
         }
-
         #endregion
 
         #region FindIndex(int, int, pred<T>)
@@ -811,7 +807,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(count + 1, index); //"Err_1580ahisdf Verify second item is duplicated and index=2"
             }
         }
-
         #endregion
 
         #region FindLastIndex
@@ -880,7 +875,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(count + 1, index); //"Err_29892adewiu Verify second item is duplicated."
             }
         }
-
         #endregion
 
         #region FindLastIndex(int, pred<T>)
@@ -983,7 +977,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(1, index); //"Err_1580ahisdf Verify second item is duplicated and index is on less then the index of the last duplicate"
             }
         }
-
         #endregion
 
         #region FindLastIndex(int, int, pred<T>)
@@ -1105,7 +1098,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(list.Count - 1, index); //"Err_29892adewiu Verify second item is duplicated"
             }
         }
-
         #endregion
 
         #region FindAll

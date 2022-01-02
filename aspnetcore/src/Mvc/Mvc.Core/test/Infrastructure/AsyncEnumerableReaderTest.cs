@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class AsyncEnumerableReaderTest

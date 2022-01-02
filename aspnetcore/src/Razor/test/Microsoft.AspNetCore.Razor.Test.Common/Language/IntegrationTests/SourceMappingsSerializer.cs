@@ -3,6 +3,7 @@
 
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public static class SourceMappingsSerializer

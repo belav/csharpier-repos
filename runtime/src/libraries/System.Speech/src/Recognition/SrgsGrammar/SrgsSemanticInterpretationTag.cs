@@ -15,13 +15,13 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsSemanticInterpretationTag() { }
+
         public SrgsSemanticInterpretationTag(string script)
         {
             Helpers.ThrowIfNull(script, nameof(script));
 
             _script = script;
         }
-
         #endregion
 
         #region public Properties
@@ -35,7 +35,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _script = value;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -85,7 +84,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             Script = value;
         }
-
         #endregion
 
         #region Private Fields

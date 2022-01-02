@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.AspNetCore.SignalR.Tests;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Specification.Tests;
 
 /// <summary>

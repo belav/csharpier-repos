@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Rewrite.UrlActions;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlActions;
 
 public class ChangeCookieActionTests

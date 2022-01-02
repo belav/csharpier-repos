@@ -33,14 +33,17 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             bool localFunction,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<InsertionPoint> GetInsertionPointAsync(
             SemanticDocument document,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<TriviaResult> PreserveTriviaAsync(
             SelectionResult selectionResult,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<SemanticDocument> ExpandAsync(
             SelectionResult selection,
             CancellationToken cancellationToken
@@ -57,6 +60,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         protected abstract SyntaxToken GetMethodNameAtInvocation(
             IEnumerable<SyntaxNodeOrToken> methodNames
         );
+
         protected abstract IEnumerable<AbstractFormattingRule> GetFormattingRules(
             Document document
         );

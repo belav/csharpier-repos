@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
 public class DeveloperExceptionPageSampleTest

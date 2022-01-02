@@ -195,7 +195,6 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.Decrement(operand)
             );
         }
-
         #endregion
 
         #region Test verifiers

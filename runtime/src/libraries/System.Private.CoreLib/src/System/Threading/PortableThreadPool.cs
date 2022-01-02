@@ -16,7 +16,6 @@ namespace System.Threading
         private const int SmallStackSizeBytes = 256 * 1024;
 
         private const short MaxPossibleThreadCount = short.MaxValue;
-
 #if TARGET_64BIT
         private const short DefaultMaxWorkerThreadCount = MaxPossibleThreadCount;
 #elif TARGET_32BIT
@@ -48,6 +47,7 @@ namespace System.Threading
         // The singleton must be initialized after the static variables above, as the constructor may be dependent on them.
         // SOS's ThreadPool command depends on this name.
         public static readonly PortableThreadPool ThreadPoolInstance = new PortableThreadPool();
+
 #pragma warning restore IDE1006 // Naming Styles
 
         private int _cpuUtilization; // SOS's ThreadPool command depends on this name
@@ -65,13 +65,16 @@ namespace System.Threading
 
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3)]
             public int priorCompletionCount;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3 + sizeof(int))]
             public int priorCompletedWorkRequestsTime;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3 + sizeof(int) * 2)]
             public int nextCompletedWorkRequestsTime;
 
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 4)]
             public volatile int numRequestedWorkers;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 4 + sizeof(int))]
             public int gateThreadRunningState;
         }

@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 public class AzureADB2COpenIDConnectEventHandlersTests

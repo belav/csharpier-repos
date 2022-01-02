@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 public class DefaultParameterPolicyFactoryTest
@@ -613,9 +614,7 @@ public class CustomParameterPolicyWithOnlyServiceArguments : IParameterPolicy
 
 public interface ITestService { }
 
-public class TestService : ITestService
-{
-}
+public class TestService : ITestService { }
 
 public class RegexInlineRouteConstraintWithService : RegexRouteConstraint
 {

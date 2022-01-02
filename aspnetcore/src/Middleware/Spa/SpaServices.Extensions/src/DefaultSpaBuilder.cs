@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 
+
 namespace Microsoft.AspNetCore.SpaServices;
 
 internal class DefaultSpaBuilder : ISpaBuilder

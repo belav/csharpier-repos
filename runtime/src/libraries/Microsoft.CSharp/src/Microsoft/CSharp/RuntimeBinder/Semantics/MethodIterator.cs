@@ -21,6 +21,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             private readonly symbmask_t _mask;
             private readonly EXPRFLAG _flags;
             private readonly ArgInfos _nonTrailingNamedArguments;
+
             // Internal state.
             private int _currentTypeIndex;
 

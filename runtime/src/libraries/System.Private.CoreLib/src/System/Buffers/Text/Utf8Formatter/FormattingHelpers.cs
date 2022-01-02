@@ -154,7 +154,6 @@ namespace System.Buffers.Text
 
             buffer[startingIndex] = (byte)('0' + value);
         }
-
         #endregion UTF-8 Helper methods
 
         //

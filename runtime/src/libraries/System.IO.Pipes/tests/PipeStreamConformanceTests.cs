@@ -69,6 +69,7 @@ namespace System.IO.Pipes.Tests
             string pipeName,
             int maxInstances = 1
         );
+
         protected abstract NamedPipeClientStream CreateClientStream(string pipeName);
 
         protected (NamedPipeServerStream Server, NamedPipeClientStream Client) CreateServerAndClientStreams()

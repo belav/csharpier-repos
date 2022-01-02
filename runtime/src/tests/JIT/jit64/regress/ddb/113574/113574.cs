@@ -8,6 +8,7 @@
 // This can cause the loop to either become an infinite loop or to stop prematurely.
 
 using System;
+
 internal class LoopTests
 {
     private static bool Test1()

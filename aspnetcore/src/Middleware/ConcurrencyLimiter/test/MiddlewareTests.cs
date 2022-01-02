@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests;
 
 public class MiddlewareTests
@@ -222,6 +223,7 @@ public class MiddlewareTests
     private class TestQueueForResettableBoolean : IQueuePolicy
     {
         public ResettableBooleanCompletionSource Source;
+
         public TestQueueForResettableBoolean()
         {
             Source = new ResettableBooleanCompletionSource(TestUtils.CreateStackPolicy(1));

@@ -42,6 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 RemappedSymbols = remappedSymbols;
             }
         }
+
 #nullable disable
 
         private MethodBodySemanticModel(

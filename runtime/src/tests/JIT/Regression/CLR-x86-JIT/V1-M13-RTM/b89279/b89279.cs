@@ -17,6 +17,7 @@ public class AA
         param1 = param1;
 #pragma warning restore 1717
     }
+
     static int Main()
     {
         Static5(0);

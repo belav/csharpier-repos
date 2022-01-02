@@ -4,6 +4,7 @@
 using System.Buffers;
 using System.IO;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal static class TextMessageFormatter

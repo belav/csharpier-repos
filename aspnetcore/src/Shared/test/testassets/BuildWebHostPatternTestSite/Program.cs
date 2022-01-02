@@ -3,6 +3,7 @@
 
 using MockHostTypes;
 
+
 namespace BuildWebHostPatternTestSite;
 
 public class Program

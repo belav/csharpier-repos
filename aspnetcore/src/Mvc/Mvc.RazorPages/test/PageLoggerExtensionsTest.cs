@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public class PageLoggerExtensionsTest

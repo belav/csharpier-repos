@@ -34,7 +34,6 @@ namespace System.Xml.Xsl
         {
             return 0 == (~DblHi(dbl) & 0x7FF00000);
         }
-
 #if DEBUG
         // Returns the next representable neighbor of x in the direction toward y
         public static double NextAfter(double x, double y)
@@ -2503,7 +2502,6 @@ namespace System.Xml.Xsl
                 }
 #endif
             }
-
 #if DEBUG
             private bool Equals(FloatingDecimal other)
             {

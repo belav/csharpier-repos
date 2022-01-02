@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
         }
 
         protected abstract bool IsBlockLikeStatement(SyntaxNode node);
+
         protected abstract Location GetDiagnosticLocation(SyntaxNode block);
 
         public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>

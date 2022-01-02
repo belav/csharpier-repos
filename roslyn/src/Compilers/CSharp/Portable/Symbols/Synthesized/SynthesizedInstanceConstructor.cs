@@ -297,7 +297,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             (
                 ContainingType as SourceMemberContainerTypeSymbol
             )?.IsNullableEnabledForConstructorsAndInitializers(useStatic: false) ?? false;
-
         #endregion
 
         protected void GenerateMethodBodyCore(

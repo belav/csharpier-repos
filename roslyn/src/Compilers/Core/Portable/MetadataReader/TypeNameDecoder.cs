@@ -45,6 +45,7 @@ namespace Microsoft.CodeAnalysis
             int referencedAssemblyIndex,
             ref MetadataTypeName emittedName
         );
+
         protected abstract TypeSymbol LookupNestedTypeDefSymbol(
             TypeSymbol container,
             ref MetadataTypeName emittedName

@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using Microsoft.Data.SqlClient;
 
+
 namespace Microsoft.Extensions.Caching.SqlServer;
 
 // Since Mono currently does not have support for DateTimeOffset, we convert the time to UtcDateTime.

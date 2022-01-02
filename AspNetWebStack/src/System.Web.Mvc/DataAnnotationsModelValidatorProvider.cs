@@ -268,7 +268,6 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("factory");
             }
         }
-
         #endregion
 
         #region IValidatableObject adapter registration
@@ -425,7 +424,6 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("factory");
             }
         }
-
         #endregion
 
         private static Dictionary<

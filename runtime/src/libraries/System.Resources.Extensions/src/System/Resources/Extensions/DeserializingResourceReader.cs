@@ -57,6 +57,7 @@ namespace System.Resources.Extensions
 
             return _formatter.Deserialize(_store.BaseStream);
         }
+
 #pragma warning restore SYSLIB0011
 
         internal sealed class UndoTruncatedTypeNameSerializationBinder : SerializationBinder

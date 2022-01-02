@@ -4,6 +4,7 @@
 using HtmlGenerationWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace HtmlGenerationWebSite.Controllers;
 
 public class CheckViewData : Controller

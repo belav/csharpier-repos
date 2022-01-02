@@ -15,6 +15,7 @@ namespace System.Reflection.Emit
         #region Constructor
         internal LocalBuilder(int localIndex, Type localType, MethodInfo methodBuilder)
             : this(localIndex, localType, methodBuilder, false) { }
+
         internal LocalBuilder(
             int localIndex,
             Type localType,
@@ -34,6 +35,7 @@ namespace System.Reflection.Emit
         {
             return m_localIndex;
         }
+
         internal MethodInfo GetMethodBuilder()
         {
             return m_methodBuilder;

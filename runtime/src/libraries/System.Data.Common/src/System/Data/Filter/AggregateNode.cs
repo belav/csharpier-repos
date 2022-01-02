@@ -71,6 +71,7 @@ namespace System.Data
             _relationName = relationName;
             _columnName = columnName;
         }
+
         internal override void Bind(DataTable table, List<DataColumn> list)
         {
             BindTable(table);

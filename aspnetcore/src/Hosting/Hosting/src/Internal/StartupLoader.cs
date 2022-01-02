@@ -10,6 +10,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal class StartupLoader

@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Compiler
             }
 
             internal abstract void EmitLoad();
+
             internal abstract void EmitAddress();
+
             internal abstract void EmitStore();
 
             internal virtual void EmitStore(Storage value)

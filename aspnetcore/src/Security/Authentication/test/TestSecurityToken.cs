@@ -4,6 +4,7 @@
 using System;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 internal class TestSecurityToken : SecurityToken

@@ -3,6 +3,7 @@
 
 using MockHostTypes;
 
+
 namespace CreateHostBuilderInvalidSignature;
 
 public class Program

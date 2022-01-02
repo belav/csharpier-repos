@@ -16,6 +16,7 @@ using AngleSharp.Network;
 using AngleSharp.Parser.Html;
 using Xunit;
 
+
 namespace AuthSamples.FunctionalTests;
 
 // Merged HtmlAssert + ResponseAssert from Identity functional tests

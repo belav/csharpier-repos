@@ -16,9 +16,11 @@ namespace System.Xml.Xsl.Xslt
             public string? prefix;
             public string? nsUri;
         }
+
         private ScopeReord[] _records = new ScopeReord[32];
         private int _lastRecord;
         private int _lastScopes; // Cache of records[lastRecord].scopeCount field;
+
         // most often we will have PushScope()/PopScope over the same record.
         // It makes sense to avoid accessing this field through the array.
 

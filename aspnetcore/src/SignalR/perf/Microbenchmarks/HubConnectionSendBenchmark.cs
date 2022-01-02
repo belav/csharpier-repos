@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class HubConnectionSendBenchmark

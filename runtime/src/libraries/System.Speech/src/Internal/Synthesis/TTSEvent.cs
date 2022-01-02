@@ -58,7 +58,6 @@ namespace System.Speech.Internal.Synthesis
 
             return ttsEvent;
         }
-
         #endregion
 
         #region Internal Properties
@@ -123,7 +122,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return _phonemeDuration; }
         }
-
         #endregion
 
         #region private Fields

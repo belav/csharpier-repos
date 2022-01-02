@@ -57,6 +57,7 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         where TNamedTypeDeclarationSyntax : SyntaxNode
     {
         protected abstract string GetNamespaceName(SyntaxNode namespaceSyntax);
+
         protected abstract bool IsContainedInNamespaceDeclaration(
             TNamespaceDeclarationSyntax namespaceSyntax,
             int position

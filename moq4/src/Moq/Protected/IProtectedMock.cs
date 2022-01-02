@@ -199,7 +199,6 @@ namespace Moq.Protected
             bool exactParameterMatch,
             params object[] args
         );
-
 		#endregion
 
 		#region Verify

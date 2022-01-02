@@ -23,6 +23,7 @@ public struct MyUnion
 {
     [FieldOffset(0)]
     public int i;
+
     [FieldOffset(0)]
     public Wrapper o;
 }
@@ -52,6 +53,7 @@ public class Test
             return 101;
         }
     }
+
     public static void Go()
     {
         MyUnion u;

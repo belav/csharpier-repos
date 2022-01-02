@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom.Html;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public static class HttpClientExtensions

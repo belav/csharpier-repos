@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 internal static class HealthCheckResponseWriters

@@ -79,6 +79,7 @@ namespace System.Net.WebSockets.Client.Tests
             bool endOfMessage,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<WebSocketReceiveResult> ReceiveAsync(
             WebSocket ws,
             ArraySegment<byte> arraySegment,

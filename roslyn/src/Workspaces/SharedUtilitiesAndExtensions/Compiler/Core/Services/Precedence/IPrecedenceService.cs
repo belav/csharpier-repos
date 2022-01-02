@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.Precedence
             this.GetPrecedenceKind((TOperatorPrecedence)(object)operatorPrecedence);
 
         public abstract TOperatorPrecedence GetOperatorPrecedence(TExpressionSyntax expression);
+
         public abstract PrecedenceKind GetPrecedenceKind(TOperatorPrecedence operatorPrecedence);
     }
 

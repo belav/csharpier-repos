@@ -61,7 +61,6 @@ namespace Newtonsoft.Json.Serialization
 
         private static readonly ThreadSafeStore<Type, Func<object[]?, object>> CreatorCache =
             new ThreadSafeStore<Type, Func<object[]?, object>>(GetCreator);
-
 #if !(NET20 || DOTNET)
         private static readonly ThreadSafeStore<Type, Type?> AssociatedMetadataTypesCache =
             new ThreadSafeStore<Type, Type?>(GetAssociateMetadataTypeFromAttribute);
@@ -72,7 +71,6 @@ namespace Newtonsoft.Json.Serialization
         {
             return CachedAttributeGetter<T>.GetAttribute(attributeProvider);
         }
-
 #if HAVE_TYPE_DESCRIPTOR
         public static bool CanTypeDescriptorConvertString(
             Type type,
@@ -343,7 +341,6 @@ namespace Newtonsoft.Json.Serialization
                 }
             };
         }
-
 #if !(NET20 || DOTNET)
         private static Type? GetAssociatedMetadataType(Type type)
         {
@@ -475,7 +472,6 @@ namespace Newtonsoft.Json.Serialization
 
             return null;
         }
-
 #if HAVE_NON_SERIALIZED_ATTRIBUTE
         public static bool IsNonSerializable(object provider)
         {
@@ -532,7 +528,6 @@ namespace Newtonsoft.Json.Serialization
 
             return ReflectionUtils.GetAttribute<T>(provider, true);
         }
-
 #if DEBUG
         internal static void SetFullyTrusted(bool? fullyTrusted)
         {

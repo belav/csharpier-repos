@@ -8,6 +8,7 @@ using Microsoft.JSInterop;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 public class PullFromJSDataStreamTest

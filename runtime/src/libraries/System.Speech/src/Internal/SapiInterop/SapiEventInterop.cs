@@ -93,6 +93,7 @@ namespace System.Speech.Internal.SapiInterop
         void Slot3(); // void SetNotifyCallbackFunction(ref IntPtr pfnCallback, IntPtr wParam, IntPtr lParam);
         void Slot4(); // void SetNotifyCallbackInterface(ref IntPtr pSpCallback, IntPtr wParam, IntPtr lParam);
         void Slot5(); // void SetNotifyWin32Event();
+
         [PreserveSig]
         int WaitForNotifyEvent(uint dwMilliseconds);
         void Slot7(); // IntPtr GetNotifyEventHandle();
@@ -111,6 +112,7 @@ namespace System.Speech.Internal.SapiInterop
         new void Slot3(); // void SetNotifyCallbackFunction(ref IntPtr pfnCallback, IntPtr wParam, IntPtr lParam);
         new void Slot4(); // void SetNotifyCallbackInterface(ref IntPtr pSpCallback, IntPtr wParam, IntPtr lParam);
         new void Slot5(); // void SetNotifyWin32Event();
+
         [PreserveSig]
         new int WaitForNotifyEvent(uint dwMilliseconds);
         new void Slot7(); // IntPtr GetNotifyEventHandle();
@@ -134,6 +136,7 @@ namespace System.Speech.Internal.SapiInterop
         new void Slot3(); // void SetNotifyCallbackFunction(ref IntPtr pfnCallback, IntPtr wParam, IntPtr lParam);
         new void Slot4(); // void SetNotifyCallbackInterface(ref IntPtr pSpCallback, IntPtr wParam, IntPtr lParam);
         new void Slot5(); // void SetNotifyWin32Event();
+
         [PreserveSig]
         new int WaitForNotifyEvent(uint dwMilliseconds);
         new void Slot7(); // IntPtr GetNotifyEventHandle();

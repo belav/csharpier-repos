@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 
+
 namespace HostedInAspNet.Server;
 
 public class BootResourceRequestLog

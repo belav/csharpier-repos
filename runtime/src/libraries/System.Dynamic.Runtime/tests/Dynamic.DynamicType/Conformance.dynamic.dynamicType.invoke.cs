@@ -16,6 +16,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static bool Called = false;
+
         public static void CallMe(int x)
         {
             if (x == 1)
@@ -28,6 +29,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
         public dynamic Foo { get; set; }
 
         public dynamic Bar;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -85,6 +87,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static bool Called = false;
+
         public static void CallMe(int x)
         {
             if (x == 1)
@@ -95,6 +98,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class B
     {
         public dynamic Foo = (Action<int>)Test.CallMe;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -139,6 +143,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static bool Called = false;
+
         public static void CallMe(int x)
         {
             if (x == 1)
@@ -197,6 +202,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static int State = 0;
+
         public static void CallMe(int x)
         {
             Test.State = 1;
@@ -220,6 +226,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     {
         public object Foo = (Action<int>)Test.CallMe; //this is not considered invocable
         public dynamic Bar = (Action<int>)Test.CallMe; //this is considered invocable
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -273,6 +280,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static int State = 0;
+
         public static void CallMe(int x)
         {
             Test.State = 1;
@@ -296,6 +304,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     {
         public object Foo = (Action<int>)Test.CallMe; //this is not considered invocable
         public dynamic Bar = (Action<int>)Test.CallMe; //this is considered invocable
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -348,6 +357,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
     public class Test
     {
         public static int State = 0;
+
         public static void CallMe(int x)
         {
             Test.State = 1;

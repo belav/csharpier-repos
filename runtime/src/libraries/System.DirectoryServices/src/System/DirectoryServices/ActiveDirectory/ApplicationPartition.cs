@@ -900,7 +900,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
             return DirectoryEntryManager.GetDirectoryEntry(context, Name);
         }
-
         #endregion public methods
 
         #region public properties

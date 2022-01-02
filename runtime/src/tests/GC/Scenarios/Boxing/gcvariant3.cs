@@ -23,6 +23,7 @@ namespace DefaultNamespace
         internal Object[] G_Vart4;
         internal Object[] G_Vart5;
         internal Object[] G_Vart6;
+
 #pragma warning restore 0414
 
         public static int Main(String[] Args)

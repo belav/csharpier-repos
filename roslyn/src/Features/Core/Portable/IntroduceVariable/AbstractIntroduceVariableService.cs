@@ -48,22 +48,30 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         where TNameSyntax : TTypeSyntax
     {
         protected abstract bool IsInNonFirstQueryClause(TExpressionSyntax expression);
+
         protected abstract bool IsInFieldInitializer(TExpressionSyntax expression);
+
         protected abstract bool IsInParameterInitializer(TExpressionSyntax expression);
+
         protected abstract bool IsInConstructorInitializer(TExpressionSyntax expression);
+
         protected abstract bool IsInAttributeArgumentInitializer(TExpressionSyntax expression);
+
         protected abstract bool IsInAutoPropertyInitializer(TExpressionSyntax expression);
+
         protected abstract bool IsInExpressionBodiedMember(TExpressionSyntax expression);
 
         protected abstract IEnumerable<SyntaxNode> GetContainingExecutableBlocks(
             TExpressionSyntax expression
         );
+
         protected abstract IList<bool> GetInsertionIndices(
             TTypeDeclarationSyntax destination,
             CancellationToken cancellationToken
         );
 
         protected abstract bool CanIntroduceVariableFor(TExpressionSyntax expression);
+
         protected abstract bool CanReplace(TExpressionSyntax expression);
 
         protected abstract bool IsExpressionInStaticLocalFunction(TExpressionSyntax expression);
@@ -74,6 +82,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             bool allOccurrences,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<Document> IntroduceLocalAsync(
             SemanticDocument document,
             TExpressionSyntax expression,
@@ -81,6 +90,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             bool isConstant,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<Document> IntroduceFieldAsync(
             SemanticDocument document,
             TExpressionSyntax expression,
@@ -93,6 +103,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TTypeDeclarationSyntax oldDeclaration,
             TTypeDeclarationSyntax newDeclaration
         );
+
         protected abstract int DetermineConstantInsertPosition(
             TTypeDeclarationSyntax oldDeclaration,
             TTypeDeclarationSyntax newDeclaration

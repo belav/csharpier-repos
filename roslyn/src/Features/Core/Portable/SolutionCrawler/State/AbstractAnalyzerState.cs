@@ -20,8 +20,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler.State
             new(concurrencyLevel: 2, capacity: 10);
 
         protected abstract TKey GetCacheKey(TValue value);
+
         protected abstract Solution GetSolution(TValue value);
+
         protected abstract bool ShouldCache(TValue value);
+
         protected abstract int GetCount(TData data);
 
         protected abstract Task<Stream> ReadStreamAsync(
@@ -29,6 +32,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler.State
             TValue value,
             CancellationToken cancellationToken
         );
+
         protected abstract TData TryGetExistingData(
             Stream stream,
             TValue value,
@@ -40,6 +44,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler.State
             TData data,
             CancellationToken cancellationToken
         );
+
         protected abstract Task<bool> WriteStreamAsync(
             IPersistentStorage storage,
             TValue value,

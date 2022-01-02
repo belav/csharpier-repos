@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 public abstract class StartupAnalyzerTest

@@ -12,6 +12,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
+
 namespace ServerComparison.FunctionalTests;
 
 public class NtlmAuthenticationTests : LoggedTest

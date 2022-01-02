@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         bool topLevel,
         TArg arg
     );
+
     internal delegate void ReportMismatchInParameterType<TArg>(
         BindingDiagnosticBag bag,
         MethodSymbol overriddenMethod,

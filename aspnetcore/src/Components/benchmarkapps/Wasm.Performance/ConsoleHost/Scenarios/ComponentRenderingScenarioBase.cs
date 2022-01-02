@@ -8,6 +8,7 @@ using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace Wasm.Performance.ConsoleHost.Scenarios;
 
 internal abstract class ComponentRenderingScenarioBase : CommandLineApplication

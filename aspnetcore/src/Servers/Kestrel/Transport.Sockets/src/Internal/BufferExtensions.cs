@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
 internal static class BufferExtensions

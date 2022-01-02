@@ -57,7 +57,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
         }
 
         protected abstract IReadOnlyDictionary<string, T> GetValuesAndDescriptions();
+
         protected abstract void ChangePropertyTo(T newValue);
+
         protected abstract T GetCurrentValue();
     }
 }

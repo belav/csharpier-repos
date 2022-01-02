@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Routing;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
@@ -47,6 +48,7 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
         // Assert
         Assert.Empty(endpoints);
     }
+
     [Fact]
     public void Endpoints_AppliesConventions()
     {

@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Template;
 
 public class RoutePatternPrecedenceTests : RoutePrecedenceTestsBase

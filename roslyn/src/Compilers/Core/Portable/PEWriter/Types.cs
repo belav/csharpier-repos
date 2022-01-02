@@ -190,6 +190,7 @@ namespace Microsoft.Cci
         /// The type arguments that were used to instantiate this.GenericType in order to create this type.
         /// </summary>
         ImmutableArray<ITypeReference> GetGenericArguments(EmitContext context);
+
         // ^ ensures result.GetEnumerator().MoveNext(); // The collection is always non empty.
 
         /// <summary>
@@ -439,6 +440,7 @@ namespace Microsoft.Cci
         /// Returns null for interfaces and System.Object.
         /// </summary>
         ITypeReference? GetBaseClass(EmitContext context);
+
         // ^ ensures result == null || result.ResolvedType.IsClass;
 
         /// <summary>

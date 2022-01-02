@@ -38,6 +38,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public List<NotificationOptionViewModel> NotificationPreferences { get; set; }
 
         public abstract CodeStylePreference SelectedPreference { get; set; }
+
         public abstract string GetPreview();
 
         public virtual NotificationOptionViewModel SelectedNotificationPreference

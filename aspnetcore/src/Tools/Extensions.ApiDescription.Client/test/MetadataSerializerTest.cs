@@ -8,6 +8,7 @@ using Microsoft.Build.Utilities;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.ApiDescription.Client;
 
 // ItemSpec values always have '\\' converted to '/' on input when running on non-Windows. It is not possible to

@@ -418,6 +418,7 @@ namespace System.Drawing
                     SaveIconImage(writer, (IconImage)imageData[i]);
             }
         }
+
         // TODO: check image not png (presently this method doesnt seem to be called unless width/height
         // refer to image)
         private void SaveBestSingleIcon(BinaryWriter writer, int width, int height)

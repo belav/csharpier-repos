@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 // For more information of flags, and what flags we currently support:

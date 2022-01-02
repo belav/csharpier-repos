@@ -35,7 +35,6 @@ namespace System.IO.Tests
             else
                 Directory.CreateDirectory(path);
         }
-
         #endregion
 
         #region UniversalTests
@@ -213,7 +212,6 @@ namespace System.IO.Tests
                 Assert.Empty(GetEntries(testDirectory.FullName));
             }
         }
-
         #endregion
 
         #region PlatformSpecific

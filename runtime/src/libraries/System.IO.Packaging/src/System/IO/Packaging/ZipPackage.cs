@@ -220,7 +220,6 @@ namespace System.IO.Packaging
 
             return parts.ToArray();
         }
-
         #endregion PackagePart Methods
 
         #region Other Methods
@@ -274,7 +273,6 @@ namespace System.IO.Packaging
                 base.Dispose(disposing);
             }
         }
-
         #endregion Other Methods
 
         #endregion Public Methods
@@ -432,7 +430,6 @@ namespace System.IO.Packaging
             _zipArchive = zipArchive;
             _contentTypeHelper = contentTypeHelper;
         }
-
         #endregion Internal Constructors
 
         #region Internal Methods
@@ -497,7 +494,6 @@ namespace System.IO.Packaging
                 }
             }
         }
-
         #endregion Internal Methods
 
         internal FileMode PackageFileMode
@@ -554,7 +550,6 @@ namespace System.IO.Packaging
             CompressionOption result = CompressionOption.Normal;
             return result;
         }
-
         #endregion Private Methods
 
         #region Private Members
@@ -574,7 +569,6 @@ namespace System.IO.Packaging
         //IEqualityComparer for extensions
         private static readonly ExtensionEqualityComparer s_extensionEqualityComparer =
             new ExtensionEqualityComparer();
-
         #endregion Private Members
 
         /// <summary>

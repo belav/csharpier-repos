@@ -1412,6 +1412,7 @@ namespace System.IO.Ports
                 }
             }
         }
+
 #pragma warning restore CA2002
 
         private void CompactBuffer()

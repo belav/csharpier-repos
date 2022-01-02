@@ -3,12 +3,14 @@
 //
 
 using System;
+
 class r8NaNdiv
 {
     //user-defined class that overloads operator /
     public class numHolder
     {
         double d_num;
+
         public numHolder(double d_num)
         {
             this.d_num = Convert.ToDouble(d_num);

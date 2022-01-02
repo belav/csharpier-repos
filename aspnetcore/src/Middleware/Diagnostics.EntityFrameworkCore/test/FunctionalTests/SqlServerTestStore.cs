@@ -4,6 +4,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class SqlTestStore : IDisposable

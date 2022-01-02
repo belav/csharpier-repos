@@ -80,7 +80,6 @@ namespace System.IO.Packaging
         {
             get { return _package; }
         }
-
         #endregion Public Properties
 
         #region Internal Constructor
@@ -155,7 +154,6 @@ namespace System.IO.Packaging
             _targetMode = targetMode;
             _id = id;
         }
-
         #endregion Internal Constructor
 
         #region Internal Properties
@@ -164,7 +162,6 @@ namespace System.IO.Packaging
         {
             get { return s_containerRelationshipPartName; }
         }
-
         #endregion Internal Properties
 
         #region Private Members

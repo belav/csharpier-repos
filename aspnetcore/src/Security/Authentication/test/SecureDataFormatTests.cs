@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.DataHandler;
 
 public class SecureDataFormatTests

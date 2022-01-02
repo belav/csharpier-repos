@@ -13,22 +13,27 @@ namespace System.Security.Permissions
     public sealed class IsolatedStorageFilePermission : IsolatedStoragePermission
     {
         public IsolatedStorageFilePermission(PermissionState state) : base(state) { }
+
         public override IPermission Union(IPermission target)
         {
             return null;
         }
+
         public override bool IsSubsetOf(IPermission target)
         {
             return false;
         }
+
         public override IPermission Intersect(IPermission target)
         {
             return null;
         }
+
         public override IPermission Copy()
         {
             return null;
         }
+
         public override SecurityElement ToXml()
         {
             return null;

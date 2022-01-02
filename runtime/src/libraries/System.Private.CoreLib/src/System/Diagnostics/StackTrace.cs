@@ -209,7 +209,6 @@ namespace System.Diagnostics
             ToString(traceFormat, sb);
             return sb.ToString();
         }
-
 #if !CORERT
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+
 namespace System.Text;
 
 // Copied from https://github.com/dotnet/runtime/blob/a9c5eadd951dcba73167f72cc624eb790573663a/src/libraries/Common/src/System/Text/ValueStringBuilder.cs
@@ -111,7 +112,9 @@ internal ref partial struct ValueStringBuilder
     }
 
     public ReadOnlySpan<char> AsSpan() => _chars.Slice(0, _pos);
+
     public ReadOnlySpan<char> AsSpan(int start) => _chars.Slice(start, _pos - start);
+
     public ReadOnlySpan<char> AsSpan(int start, int length) => _chars.Slice(start, length);
 
     public bool TryCopyTo(Span<char> destination, out int charsWritten)

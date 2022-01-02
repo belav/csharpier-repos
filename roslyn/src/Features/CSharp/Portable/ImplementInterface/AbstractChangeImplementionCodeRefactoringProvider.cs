@@ -44,12 +44,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
         protected abstract bool CheckExplicitNameAllowsConversion(
             ExplicitInterfaceSpecifierSyntax? explicitName
         );
+
         protected abstract bool CheckMemberCanBeConverted(ISymbol member);
+
         protected abstract SyntaxNode ChangeImplementation(
             SyntaxGenerator generator,
             SyntaxNode currentDecl,
             ISymbol interfaceMember
         );
+
         protected abstract Task UpdateReferencesAsync(
             Project project,
             SolutionEditor solutionEditor,

@@ -152,7 +152,6 @@ namespace System.Threading.Tasks.Test
                 _verifications.Enqueue(act);
             }
         }
-
         #endregion
 
         internal void RealRun()
@@ -2130,6 +2129,7 @@ namespace System.Threading.Tasks.Test
             ParallelStateTest test = new ParallelStateTest(parameters);
             test.RealRun();
         }
+
         [Fact]
         [OuterLoop]
         public static void ParallelState45()
@@ -2149,6 +2149,7 @@ namespace System.Threading.Tasks.Test
             ParallelStateTest test = new ParallelStateTest(parameters);
             test.RealRun();
         }
+
         [Fact]
         [OuterLoop]
         public static void ParallelState46()
@@ -2208,6 +2209,7 @@ namespace System.Threading.Tasks.Test
             ParallelStateTest test = new ParallelStateTest(parameters);
             test.RealRun();
         }
+
         [Fact]
         [OuterLoop]
         public static void ParallelState49()
@@ -2227,6 +2229,7 @@ namespace System.Threading.Tasks.Test
             ParallelStateTest test = new ParallelStateTest(parameters);
             test.RealRun();
         }
+
         [Fact]
         [OuterLoop]
         public static void ParallelState50()
@@ -2638,6 +2641,7 @@ namespace System.Threading.Tasks.Test
             ParallelStateTest test = new ParallelStateTest(parameters);
             test.RealRun();
         }
+
         [Fact]
         [OuterLoop]
         public static void ParallelState67()
@@ -2657,6 +2661,7 @@ namespace System.Threading.Tasks.Test
             ParallelStateTest test = new ParallelStateTest(parameters);
             test.RealRun();
         }
+
         [Fact]
         [OuterLoop]
         public static void ParallelState68()

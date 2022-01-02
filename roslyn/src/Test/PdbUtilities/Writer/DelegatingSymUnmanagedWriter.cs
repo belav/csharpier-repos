@@ -27,9 +27,13 @@ namespace Roslyn.Test.PdbUtilities
         }
 
         public override void Dispose() => _target.Dispose();
+
         public override void CloseMethod() => _target.CloseMethod();
+
         public override void CloseScope(int endOffset) => _target.CloseScope(endOffset);
+
         public override void CloseTokensToSourceSpansMap() => _target.CloseTokensToSourceSpansMap();
+
         public override void DefineCustomMetadata(byte[] metadata) =>
             _target.DefineCustomMetadata(metadata);
 

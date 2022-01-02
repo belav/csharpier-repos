@@ -59,6 +59,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         public abstract bool ContainingScopeHasAsyncKeyword();
 
         public abstract SyntaxNode GetContainingScope();
+
         public abstract ITypeSymbol GetContainingScopeType();
 
         public OperationStatus Status { get; }

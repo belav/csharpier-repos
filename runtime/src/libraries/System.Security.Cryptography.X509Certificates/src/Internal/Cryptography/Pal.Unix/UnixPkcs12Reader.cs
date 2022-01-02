@@ -29,6 +29,7 @@ namespace Internal.Cryptography.Pal
         private bool _allowDoubleBind;
 
         protected abstract ICertificatePalCore ReadX509Der(ReadOnlyMemory<byte> data);
+
         protected abstract AsymmetricAlgorithm LoadKey(ReadOnlyMemory<byte> safeBagBagValue);
 
         protected void ParsePkcs12(ReadOnlySpan<byte> data)

@@ -20,7 +20,6 @@ namespace System.Speech.Internal.Synthesis
         {
             _site = site;
         }
-
         #endregion
 
         #region Internal Methods
@@ -152,7 +151,6 @@ namespace System.Speech.Internal.Synthesis
             }
 #pragma warning restore 56518
         }
-
         #endregion
 
         #region private Fields
@@ -182,6 +180,7 @@ namespace System.Speech.Internal.Synthesis
             int count
         );
         void GetEventInterest(out long eventInterest);
+
         [PreserveSig]
         int GetActions();
         void Write(IntPtr data, int count, IntPtr bytesWritten);
@@ -195,6 +194,7 @@ namespace System.Speech.Internal.Synthesis
             out IStream stream
         );
     }
+
     [StructLayout(LayoutKind.Sequential)]
     internal struct SpeechEventSapi
     {
@@ -204,6 +204,7 @@ namespace System.Speech.Internal.Synthesis
         public long AudioStreamOffset;
         public IntPtr Param1; // Always just a numeric type - contains no unmanaged resources so does not need special clean-up.
         public IntPtr Param2; // Can be a numeric type, or pointer to string or object. Use SafeSapiLParamHandle to cleanup.
+
         public static bool operator ==(SpeechEventSapi event1, SpeechEventSapi event2)
         {
             return event1.EventId == event2.EventId
@@ -213,10 +214,12 @@ namespace System.Speech.Internal.Synthesis
                 && event1.Param1 == event2.Param1
                 && event1.Param2 == event2.Param2;
         }
+
         public static bool operator !=(SpeechEventSapi event1, SpeechEventSapi event2)
         {
             return !(event1 == event2);
         }
+
         public override bool Equals(object obj)
         {
             if (!(obj is SpeechEventSapi))
@@ -226,6 +229,7 @@ namespace System.Speech.Internal.Synthesis
 
             return this == (SpeechEventSapi)obj;
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

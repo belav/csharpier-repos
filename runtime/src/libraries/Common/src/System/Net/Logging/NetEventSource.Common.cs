@@ -542,7 +542,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -591,7 +590,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -625,7 +623,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -665,7 +662,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -705,7 +701,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -759,7 +754,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -807,7 +801,6 @@ namespace System.Net
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

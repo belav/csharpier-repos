@@ -80,6 +80,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             new(_leafCharacters, new TextSpan(_span.Start + span.Start, span.Length));
 
         public VirtualChar First() => this[0];
+
         public VirtualChar Last() => this[this.Length - 1];
 
         public Enumerator GetEnumerator() => new(this);

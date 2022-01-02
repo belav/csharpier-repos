@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.AspNetCore.Mvc.Localization;
 
+
 namespace BasicWebSite;
 
 public class LocalizationPipeline

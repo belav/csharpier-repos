@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text;
+
+
 #nullable enable
 
 namespace Microsoft.Extensions.StackTrace.Sources;

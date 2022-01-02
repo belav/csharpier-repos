@@ -183,6 +183,7 @@ namespace System.Reflection.Emit
         private struct LabelFixup
         {
             public int offset; // The number of bytes between pos and the
+
             // offset of the jump
             public int pos; // Where offset of the label is placed
             public int label_idx; // The label to jump to

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
+
 namespace BasicWebSite.Formatters;
 
 public class PlainTextFormatter : TextOutputFormatter

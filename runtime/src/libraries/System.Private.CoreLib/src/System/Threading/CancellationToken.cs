@@ -33,6 +33,7 @@ namespace System.Threading
         // if null, it implicitly represents the same thing as new CancellationToken(false).
         // When required, it will be instantiated to reflect this.
         private readonly CancellationTokenSource? _source;
+
         // !! warning. If more fields are added, the assumptions in CreateLinkedToken may no longer be valid
 
         /// <summary>

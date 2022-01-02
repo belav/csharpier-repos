@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 
+
 namespace Microsoft.Extensions.HotReload;
 
 internal sealed class HotReloadAgent : IDisposable

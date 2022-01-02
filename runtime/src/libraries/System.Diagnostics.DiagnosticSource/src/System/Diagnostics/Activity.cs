@@ -53,6 +53,7 @@ namespace System.Diagnostics
         // Int gives enough randomization and keeps hex-encoded s_currentRootId 8 chars long for most applications
         private static long s_currentRootId = (uint)GetRandomNumber();
         private static ActivityIdFormat s_defaultIdFormat;
+
         /// <summary>
         /// Normally if the ParentID is defined, the format of that is used to determine the
         /// format used by the Activity. However if ForceDefaultFormat is set to true, the
@@ -68,6 +69,7 @@ namespace System.Diagnostics
         // State associated with ID.
         private string? _id;
         private string? _rootId;
+
         // State associated with ParentId.
         private string? _parentId;
 
@@ -970,7 +972,6 @@ namespace System.Diagnostics
                 && ('0' <= id[1] && id[1] <= '9' || 'a' <= id[1] && id[1] <= 'f')
                 && (id[0] != 'f' || id[1] != 'f');
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -1331,7 +1332,6 @@ namespace System.Diagnostics
 
             return canSet;
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -1356,7 +1356,6 @@ namespace System.Diagnostics
 
             return _traceId != null;
         }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -1510,9 +1509,11 @@ namespace System.Diagnostics
             // Note: Some consumers use this GetEnumerator dynamically to avoid allocations.
             public Enumerator<KeyValuePair<string, string?>> GetEnumerator() =>
                 new Enumerator<KeyValuePair<string, string?>>(_first);
+
             IEnumerator<KeyValuePair<string, string?>> IEnumerable<
                 KeyValuePair<string, string?>
             >.GetEnumerator() => GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
@@ -1684,9 +1685,11 @@ namespace System.Diagnostics
             // Note: Some consumers use this GetEnumerator dynamically to avoid allocations.
             public Enumerator<KeyValuePair<string, object?>> GetEnumerator() =>
                 new Enumerator<KeyValuePair<string, object?>>(_first);
+
             IEnumerator<KeyValuePair<string, object?>> IEnumerable<
                 KeyValuePair<string, object?>
             >.GetEnumerator() => GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             public IEnumerable<KeyValuePair<string, string?>> EnumerateStringValues()
@@ -1771,7 +1774,6 @@ namespace System.Diagnostics
         Hierarchical = 1, //|XXXX.XX.X_X ... see https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/ActivityUserGuide.md#id-format
         W3C = 2, // 00-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX-XX see https://w3c.github.io/trace-context/
     };
-
     /// <summary>
     /// A TraceId is the format the W3C standard requires for its ID for the entire trace.
     /// It represents 16 binary bytes of information, typically displayed as 32 characters
@@ -1799,6 +1801,7 @@ namespace System.Diagnostics
             SetToRandomBytes(span);
             return CreateFromBytes(span);
         }
+
         public static ActivityTraceId CreateFromBytes(ReadOnlySpan<byte> idData)
         {
             if (idData.Length != 16)
@@ -1806,6 +1809,7 @@ namespace System.Diagnostics
 
             return new ActivityTraceId(HexConverter.ToString(idData, HexConverter.Casing.Lower));
         }
+
         public static ActivityTraceId CreateFromUtf8String(ReadOnlySpan<byte> idData) =>
             new ActivityTraceId(idData);
 
@@ -1834,20 +1838,24 @@ namespace System.Diagnostics
         {
             return traceId1._hexString == traceId2._hexString;
         }
+
         public static bool operator !=(ActivityTraceId traceId1, ActivityTraceId traceId2)
         {
             return traceId1._hexString != traceId2._hexString;
         }
+
         public bool Equals(ActivityTraceId traceId)
         {
             return _hexString == traceId._hexString;
         }
+
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (obj is ActivityTraceId traceId)
                 return _hexString == traceId._hexString;
             return false;
         }
+
         public override int GetHashCode()
         {
             return ToHexString().GetHashCode();
@@ -1925,6 +1933,7 @@ namespace System.Diagnostics
             for (int i = 0; i < outBytes.Length; i++)
                 outBytes[i] = HexByteFromChars(charData[i * 2], charData[i * 2 + 1]);
         }
+
         internal static byte HexByteFromChars(char char1, char char2)
         {
             int hi = HexConverter.FromLowerChar(char1);
@@ -1959,7 +1968,6 @@ namespace System.Diagnostics
             return isNonZero;
         }
     }
-
     /// <summary>
     /// A SpanId is the format the W3C standard requires for its ID for a single span in a trace.
     /// It represents 8 binary bytes of information, typically displayed as 16 characters
@@ -1992,6 +2000,7 @@ namespace System.Diagnostics
                 )
             );
         }
+
         public static ActivitySpanId CreateFromBytes(ReadOnlySpan<byte> idData)
         {
             if (idData.Length != 8)
@@ -1999,6 +2008,7 @@ namespace System.Diagnostics
 
             return new ActivitySpanId(HexConverter.ToString(idData, HexConverter.Casing.Lower));
         }
+
         public static ActivitySpanId CreateFromUtf8String(ReadOnlySpan<byte> idData) =>
             new ActivitySpanId(idData);
 
@@ -2028,20 +2038,24 @@ namespace System.Diagnostics
         {
             return spanId1._hexString == spandId2._hexString;
         }
+
         public static bool operator !=(ActivitySpanId spanId1, ActivitySpanId spandId2)
         {
             return spanId1._hexString != spandId2._hexString;
         }
+
         public bool Equals(ActivitySpanId spanId)
         {
             return _hexString == spanId._hexString;
         }
+
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (obj is ActivitySpanId spanId)
                 return _hexString == spanId._hexString;
             return false;
         }
+
         public override int GetHashCode()
         {
             return ToHexString().GetHashCode();

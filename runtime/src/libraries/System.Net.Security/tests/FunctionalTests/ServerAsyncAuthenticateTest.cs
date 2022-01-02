@@ -502,6 +502,7 @@ namespace System.Net.Security.Tests
                 yield return new object[] { SslProtocols.Tls12 };
             }
         }
+
         #region Helpers
 
         private async Task ServerAsyncSslHelper(

@@ -93,7 +93,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// </summary>
         protected virtual bool IList_CurrentAfterAdd_Throws =>
             Enumerator_Current_UndefinedOperation_Throws;
-
         #endregion
 
         #region ICollection Helper Methods
@@ -189,7 +188,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) =>
             AddToCollection((IList)collection, numberOfItemsToAdd);
-
         #endregion
 
         #region IsFixedSize
@@ -201,7 +199,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IList collection = NonGenericIListFactory(count);
             Assert.Equal(ExpectedFixedSize, collection.IsFixedSize);
         }
-
         #endregion
 
         #region IsReadOnly
@@ -213,7 +210,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IList collection = NonGenericIListFactory(count);
             Assert.Equal(IsReadOnly, collection.IsReadOnly);
         }
-
         #endregion
 
         #region Item Getter
@@ -244,7 +240,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             object? result;
             Assert.All(Enumerable.Range(0, count), index => result = list[index]);
         }
-
         #endregion
 
         #region Item Setter
@@ -386,7 +381,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region Add
@@ -559,7 +553,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 collection.Add(toAdd);
             }
         }
-
         #endregion
 
         #region Clear
@@ -580,7 +573,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(0, collection.Count);
             }
         }
-
         #endregion
 
         #region Contains
@@ -656,7 +648,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
             );
         }
-
         #endregion
 
         #region IndexOf
@@ -766,7 +757,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region Insert
@@ -907,7 +897,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region Remove
@@ -1071,7 +1060,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(count, collection.Count);
             }
         }
-
         #endregion
 
         #region RemoveAt
@@ -1164,7 +1152,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 );
             }
         }
-
         #endregion
 
         #region Enumerator.Current

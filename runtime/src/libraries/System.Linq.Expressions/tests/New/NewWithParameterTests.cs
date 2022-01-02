@@ -96,7 +96,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckNewWithParameterGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -110,7 +109,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyWithParameterGenericWithStructRestriction<Ts>(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

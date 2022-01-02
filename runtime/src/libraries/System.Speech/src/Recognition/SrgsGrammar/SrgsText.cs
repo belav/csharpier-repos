@@ -14,13 +14,13 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsText() { }
+
         public SrgsText(string text)
         {
             Helpers.ThrowIfNull(text, nameof(text));
 
             Text = text;
         }
-
         #endregion
 
         #region public Properties
@@ -36,7 +36,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _text = value;
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -54,7 +53,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             return "'" + _text + "'";
         }
-
         #endregion
 
         #region Private Fields

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
 /// <summary>

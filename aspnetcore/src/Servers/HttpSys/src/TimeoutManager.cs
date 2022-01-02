@@ -5,6 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.HttpSys.Internal;
 
+
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
 // See the native HTTP_TIMEOUT_LIMIT_INFO structure documentation for additional information.
@@ -134,7 +135,6 @@ public sealed class TimeoutManager
             _minSendBytesPerSecond = (uint)value;
         }
     }
-
     #endregion Properties
 
     #region Helpers

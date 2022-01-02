@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.WebEncoders.Testing;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public static class HtmlGeneratorUtilities

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
+
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
 public class ResetAuthenticatorModel : PageModel
@@ -26,6 +27,7 @@ public class ResetAuthenticatorModel : PageModel
         _userManager = userManager;
         _logger = logger;
     }
+
     public async Task<IActionResult> OnGet()
     {
         var user = await _userManager.GetUserAsync(User);

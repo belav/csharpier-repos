@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Components.Routing;
 
 /// <summary>

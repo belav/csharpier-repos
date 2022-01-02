@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
 internal sealed class DbContextHealthCheck<TContext> : IHealthCheck where TContext : DbContext

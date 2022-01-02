@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public class DesignTimeDirectiveTargetExtensionTest

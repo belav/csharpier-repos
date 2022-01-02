@@ -48,6 +48,7 @@ namespace Microsoft.CodeAnalysis
         internal abstract MetadataReference? GetMetadataReference(
             IAssemblySymbolInternal? assemblySymbol
         );
+
         internal abstract ImmutableArray<MetadataReference> ExplicitReferences { get; }
         internal abstract ImmutableDictionary<
             AssemblyIdentity,
@@ -364,7 +365,6 @@ namespace Microsoft.CodeAnalysis
                 return _lazyUnifiedAssemblies;
             }
         }
-
         #endregion
 
         /// <summary>

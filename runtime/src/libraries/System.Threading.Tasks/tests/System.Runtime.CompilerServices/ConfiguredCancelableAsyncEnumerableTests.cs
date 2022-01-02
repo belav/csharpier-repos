@@ -238,7 +238,9 @@ namespace System.Runtime.CompilerServices.Tests
                 public Enumerator(TrackFlagsAsyncEnumerable enumerable) => _enumerable = enumerable;
 
                 public ValueTask<bool> MoveNextAsync() => new ValueTask<bool>(this, 0);
+
                 public int Current => throw new NotImplementedException();
+
                 public ValueTask DisposeAsync() => new ValueTask(this, 0);
 
                 public void OnCompleted(
@@ -247,9 +249,12 @@ namespace System.Runtime.CompilerServices.Tests
                     short token,
                     ValueTaskSourceOnCompletedFlags flags
                 ) => _enumerable.Flags = flags;
+
                 public ValueTaskSourceStatus GetStatus(short token) =>
                     ValueTaskSourceStatus.Pending;
+
                 public bool GetResult(short token) => throw new NotImplementedException();
+
                 void IValueTaskSource.GetResult(short token) => throw new NotImplementedException();
             }
         }

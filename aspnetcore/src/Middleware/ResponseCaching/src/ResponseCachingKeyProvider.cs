@@ -9,12 +9,14 @@ using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.ResponseCaching;
 
 internal class ResponseCachingKeyProvider : IResponseCachingKeyProvider
 {
     // Use the record separator for delimiting components of the cache key to avoid possible collisions
     private const char KeyDelimiter = '\x1e';
+
     // Use the unit separator for delimiting subcomponents of the cache key to avoid possible collisions
     private const char KeySubDelimiter = '\x1f';
 

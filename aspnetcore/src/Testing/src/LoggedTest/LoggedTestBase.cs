@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Serilog;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public class LoggedTestBase : ILoggedTest, ITestMethodLifecycle

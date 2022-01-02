@@ -26,6 +26,7 @@ namespace JitTest
         {
             return 1;
         }
+
         public int Method2a()
         {
             return 10;

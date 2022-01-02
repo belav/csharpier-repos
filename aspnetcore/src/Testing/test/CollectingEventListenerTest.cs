@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Testing.Tracing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Testing.Tests;
 
 // We are verifying here that when event listener tests are spread among multiple classes, they still
@@ -55,22 +56,34 @@ public class CollectingEventListenerTests
     public class CollectingTests
     {
         public class A : CollectingTestBase { }
+
         public class B : CollectingTestBase { }
+
         public class C : CollectingTestBase { }
+
         public class D : CollectingTestBase { }
+
         public class E : CollectingTestBase { }
+
         public class F : CollectingTestBase { }
+
         public class G : CollectingTestBase { }
     }
 
     public class NonCollectingTests
     {
         public class A : NonCollectingTestBase { }
+
         public class B : NonCollectingTestBase { }
+
         public class C : NonCollectingTestBase { }
+
         public class D : NonCollectingTestBase { }
+
         public class E : NonCollectingTestBase { }
+
         public class F : NonCollectingTestBase { }
+
         public class G : NonCollectingTestBase { }
     }
 }

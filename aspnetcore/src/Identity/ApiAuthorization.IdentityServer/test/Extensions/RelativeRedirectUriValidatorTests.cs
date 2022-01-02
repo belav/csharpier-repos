@@ -7,6 +7,7 @@ using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 public class RelativeRedirectUriValidatorTests

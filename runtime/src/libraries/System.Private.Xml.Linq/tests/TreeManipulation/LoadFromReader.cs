@@ -24,7 +24,6 @@ namespace XLinqTests
 
         private const string xml =
             "<PurchaseOrder><Item price=\"100\">Motor<![CDATA[cdata]]><elem>inner text</elem>text<?pi pi pi?></Item></PurchaseOrder>";
-
         #endregion
 
         #region Fields
@@ -37,7 +36,6 @@ namespace XLinqTests
             MethodsEnum.ReadFrom,
             MethodsEnum.Parse
         };
-
         #endregion
 
         #region Constructors and Destructors
@@ -46,7 +44,6 @@ namespace XLinqTests
         {
             _diff = new XmlDiff();
         }
-
         #endregion
 
         #region Enums
@@ -57,7 +54,6 @@ namespace XLinqTests
             ReadFrom,
             Parse
         }
-
         #endregion
 
         #region Public Methods and Operators
@@ -1252,7 +1248,6 @@ namespace XLinqTests
             }
             catch (ArgumentNullException) { }
         }
-
         #endregion
 
         #region Methods

@@ -203,6 +203,7 @@ public class EnumIConvertibleToUint64
         white = UInt64.MaxValue,
         red = -0,
     }
+
     enum e_test : long
     {
         itemA = -123,

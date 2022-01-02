@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 internal static class ConditionEvaluator

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 public class AuthorizationPageApplicationModelProviderTest

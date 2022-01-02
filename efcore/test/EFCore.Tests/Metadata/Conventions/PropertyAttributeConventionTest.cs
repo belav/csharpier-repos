@@ -80,7 +80,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Property<Guid>(nameof(F.RowVersion)).Metadata.IsConcurrencyToken
             );
         }
-
         #endregion
 
         #region DatabaseGeneratedAttribute
@@ -144,7 +143,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Property<int>(nameof(F.Id)).Metadata.ValueGenerated
             );
         }
-
         #endregion
 
         #region KeyAttribute
@@ -326,7 +324,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Metadata.FindPrimaryKey().Properties.Single().Name
             );
         }
-
         #endregion
 
         #region MaxLengthAttribute
@@ -392,7 +389,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     .Metadata.GetMaxLength()
             );
         }
-
         #endregion
 
         #region NotMappedAttribute
@@ -476,7 +472,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 p => p.Name == "IgnoredProperty"
             );
         }
-
         #endregion
 
         #region RequiredAttribute
@@ -534,7 +529,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.False(entityTypeBuilder.Property<string>(nameof(F.Name)).Metadata.IsNullable);
         }
-
         #endregion
 
         #region StringLengthAttribute
@@ -600,7 +594,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     .Metadata.GetMaxLength()
             );
         }
-
         #endregion
 
         #region TimestampAttribute
@@ -672,7 +665,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityTypeBuilder.Property<byte[]>(nameof(F.Timestamp)).Metadata.IsConcurrencyToken
             );
         }
-
         #endregion
 
         #region BackingFieldAttribute
@@ -715,7 +707,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ((IConventionProperty)propertyBuilder.Metadata).GetFieldName()
             );
         }
-
         #endregion
 
         #region UnicodeAttribute

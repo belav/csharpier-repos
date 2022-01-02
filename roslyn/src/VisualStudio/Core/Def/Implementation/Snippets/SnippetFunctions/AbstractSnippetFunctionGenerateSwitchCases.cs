@@ -46,6 +46,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             CancellationToken cancellationToken,
             out ITypeSymbol typeSymbol
         );
+
         protected abstract bool TryGetSimplifiedTypeNameInCaseContext(
             Document document,
             string fullyQualifiedTypeName,

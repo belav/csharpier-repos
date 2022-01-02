@@ -150,7 +150,6 @@ namespace System.Net.Http.Internal
             Assert.IsType<HttpValueCollection>(nvc);
             Assert.Empty(nvc);
         }
-
 #if !NETCOREAPP2_0 // DBNull not serializable on .NET Core 2.0.
         // This set of tests requires running on a separate appdomain so we don't
         // touch the static property MediaTypeFormatter.MaxHttpCollectionKeys.

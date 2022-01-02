@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Antiforgery;
 
 internal class AntiforgeryOptionsSetup : IConfigureOptions<AntiforgeryOptions>

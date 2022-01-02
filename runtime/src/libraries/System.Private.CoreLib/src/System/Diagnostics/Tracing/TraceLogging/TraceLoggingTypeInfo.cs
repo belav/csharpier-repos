@@ -154,7 +154,6 @@ namespace System.Diagnostics.Tracing
 
         [ThreadStatic] // per-thread cache to avoid synchronization
         private static Dictionary<Type, TraceLoggingTypeInfo>? threadCache;
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
+
 namespace Wasm.Performance.TestApp;
 
 public static class WasmMemory

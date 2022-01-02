@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public abstract class ApiConsistencyTestBase

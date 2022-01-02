@@ -38,6 +38,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientMiniStress_Http3_MsQuic(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -48,6 +49,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientMiniStress_Http3_Mock(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;
@@ -57,6 +59,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientMiniStress_Http2(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 

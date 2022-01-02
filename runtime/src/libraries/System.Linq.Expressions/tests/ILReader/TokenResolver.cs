@@ -35,12 +35,17 @@ namespace System.Linq.Expressions.Tests
 
         public MethodBase AsMethod(int token) =>
             _module.ResolveMethod(token, _typeContext, _methodContext);
+
         public FieldInfo AsField(int token) =>
             _module.ResolveField(token, _typeContext, _methodContext);
+
         public Type AsType(int token) => _module.ResolveType(token, _typeContext, _methodContext);
+
         public MemberInfo AsMember(int token) =>
             _module.ResolveMember(token, _typeContext, _methodContext);
+
         public string AsString(int token) => _module.ResolveString(token);
+
         public byte[] AsSignature(int token) => _module.ResolveSignature(token);
     }
 
@@ -68,6 +73,7 @@ namespace System.Linq.Expressions.Tests
                 genericTypeArguments,
                 genericMethodArguments
             );
+
         public static FieldInfo ResolveField(
             this Module module,
             int metadataToken,
@@ -81,6 +87,7 @@ namespace System.Linq.Expressions.Tests
                 genericTypeArguments,
                 genericMethodArguments
             );
+
         public static Type ResolveType(
             this Module module,
             int metadataToken,
@@ -94,6 +101,7 @@ namespace System.Linq.Expressions.Tests
                 genericTypeArguments,
                 genericMethodArguments
             );
+
         public static MemberInfo ResolveMember(
             this Module module,
             int metadataToken,
@@ -107,8 +115,10 @@ namespace System.Linq.Expressions.Tests
                 genericTypeArguments,
                 genericMethodArguments
             );
+
         public static byte[] ResolveSignature(this Module module, int metadataToken) =>
             Invoke<byte[]>(s_resolveSignature, module, metadataToken);
+
         public static string ResolveString(this Module module, int metadataToken) =>
             Invoke<string>(s_resolveString, module, metadataToken);
 

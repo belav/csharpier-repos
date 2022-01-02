@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class ComponentDiscoveryIntegrationTest : RazorIntegrationTestBase

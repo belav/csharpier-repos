@@ -45,6 +45,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             bool activate,
             CancellationToken cancellationToken
         );
+
         public abstract bool TryGetValue(int index, string columnName, out object content);
 
         public int VersionNumber

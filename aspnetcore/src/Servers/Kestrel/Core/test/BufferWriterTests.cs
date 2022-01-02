@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
+
 namespace System.IO.Pipelines.Tests;
 
 public class BufferWriterTests : IDisposable
 {
     protected Pipe Pipe;
+
     public BufferWriterTests()
     {
         Pipe = new Pipe(

@@ -472,6 +472,7 @@ namespace System.Net.Http.Formatting
             string encoding,
             bool isDefaultEncoding
         );
+
 #pragma warning restore xUnit1013 // Public method should be marked as test
 
         protected virtual TFormatter CreateFormatter()

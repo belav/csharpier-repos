@@ -245,13 +245,17 @@ namespace Moq.Tests
         public abstract class Foo : IFoo
         {
             public abstract IBar Bar { get; set; }
+
             public abstract IBar GetBar();
 
             public abstract void Do();
+
             public abstract object GetObject();
+
             public abstract string DoReturnString();
 
             public void DoNonVirtual() { }
+
             public virtual void DoVirtual() { }
 
             public int NonVirtualGet()

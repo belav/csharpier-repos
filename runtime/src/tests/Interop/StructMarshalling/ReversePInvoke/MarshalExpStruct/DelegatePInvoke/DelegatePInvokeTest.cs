@@ -319,7 +319,6 @@ public class Test_DelegatePInvokeTest
                 break;
         }
     }
-
     #endregion
 
     #region Delegate,PInvoke,PassByRef,Stdcall
@@ -617,7 +616,6 @@ public class Test_DelegatePInvokeTest
                 break;
         }
     }
-
     #endregion
 
     #region Delegate,PInvoke,PassByVal,Cdecl
@@ -906,7 +904,6 @@ public class Test_DelegatePInvokeTest
                 break;
         }
     }
-
     #endregion
 
     #region Delegate,PInvoke,PassByVal,Stdcall
@@ -1197,7 +1194,6 @@ public class Test_DelegatePInvokeTest
                 break;
         }
     }
-
     #endregion
 
     #endregion

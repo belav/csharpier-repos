@@ -24,8 +24,11 @@ namespace BuildBoss
         internal static Encoding Encoding { get; } = Encoding.UTF8;
 
         internal static bool IsSolutionFile(string path) => Path.GetExtension(path) == ".sln";
+
         internal static bool IsPropsFile(string path) => Path.GetExtension(path) == ".props";
+
         internal static bool IsTargetsFile(string path) => Path.GetExtension(path) == ".targets";
+
         internal static bool IsXslt(string path) => Path.GetExtension(path) == ".xslt";
     }
 }

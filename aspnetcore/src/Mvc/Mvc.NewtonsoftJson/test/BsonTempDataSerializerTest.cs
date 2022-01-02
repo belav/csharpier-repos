@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 public class BsonTempDataSerializerTest : TempDataSerializerTestBase

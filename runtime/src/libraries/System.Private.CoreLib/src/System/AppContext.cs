@@ -69,6 +69,7 @@ namespace System
         public static event UnhandledExceptionEventHandler? UnhandledException;
 
         public static event EventHandler<FirstChanceExceptionEventArgs>? FirstChanceException;
+
 #pragma warning restore CS0067
 
         public static event EventHandler? ProcessExit;

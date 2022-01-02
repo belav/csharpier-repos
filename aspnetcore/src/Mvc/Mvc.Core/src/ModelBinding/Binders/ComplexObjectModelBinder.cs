@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Core;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 /// <summary>
@@ -26,9 +27,11 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
     // Model contains only properties that are expected to bind from value providers and no value provider has
     // matching data.
     internal const int NoDataAvailable = 0;
+
     // If model contains properties that are expected to bind from value providers, no value provider has matching
     // data. Remaining (greedy) properties might bind successfully.
     internal const int GreedyPropertiesMayHaveData = 1;
+
     // Model contains at least one property that is expected to bind from value providers and a value provider has
     // matching data.
     internal const int ValueProviderDataAvailable = 2;

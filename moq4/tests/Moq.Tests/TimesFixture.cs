@@ -279,6 +279,7 @@ namespace Moq.Tests
             {
                 Assert.Equal(Times.AtLeastOnce(), default(Times));
             }
+
 #pragma warning restore xUnit2000
 
             [Fact]

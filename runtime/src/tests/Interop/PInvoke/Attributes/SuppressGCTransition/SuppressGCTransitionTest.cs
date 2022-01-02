@@ -186,6 +186,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Inline_GCTransition(int expected)
     {
@@ -195,6 +196,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int NoInline_NoGCTransition(int expected)
     {
@@ -204,6 +206,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int NoInline_GCTransition(int expected)
     {
@@ -213,6 +216,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Mixed(int expected)
     {
@@ -228,6 +232,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected++, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Mixed_TightLoop(int expected)
     {
@@ -245,6 +250,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected + count, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Inline_NoGCTransition_FunctionPointer(int expected)
     {
@@ -254,6 +260,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Inline_GCTransition_FunctionPointer(int expected)
     {
@@ -263,6 +270,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int NoInline_NoGCTransition_FunctionPointer(int expected)
     {
@@ -272,6 +280,7 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int NoInline_GCTransition_FunctionPointer(int expected)
     {
@@ -298,11 +307,13 @@ unsafe class SuppressGCTransitionTest
         Assert.AreEqual(expected, n);
         return n + 1;
     }
+
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
     private static int ReturnInt(int value)
     {
         return value;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int ILStubCache_NoGCTransition_GCTransition(int expected)
     {
@@ -335,6 +346,7 @@ unsafe class SuppressGCTransitionTest
 
         return n + 1;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int ILStubCache_GCTransition_NoGCTransition(int expected)
     {
@@ -370,6 +382,7 @@ unsafe class SuppressGCTransitionTest
 
         return n + 1;
     }
+
     public static int Main(string[] args)
     {
         try

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal abstract class ComponentNodeWriter : IntermediateNodeWriter, ITemplateTargetExtension

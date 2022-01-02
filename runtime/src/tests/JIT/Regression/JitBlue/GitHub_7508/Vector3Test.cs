@@ -102,6 +102,7 @@ namespace Test01
         };
 
         static Random random = new Random(Seed);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static SimpleVector3 RandomSimpleVector3() =>
             new SimpleVector3(
@@ -109,6 +110,7 @@ namespace Test01
                 (float)random.NextDouble(),
                 (float)random.NextDouble()
             );
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static WrappedVector3 RandomWrappedVector3() =>
             new WrappedVector3(
@@ -116,6 +118,7 @@ namespace Test01
                 (float)random.NextDouble(),
                 (float)random.NextDouble()
             );
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Vector3 RandomVector3() =>
             new Vector3(
@@ -132,6 +135,7 @@ namespace Test01
             Console.WriteLine("Simple Vector3: {0},{1},{2}", simpleC.X, simpleC.Y, simpleC.Z);
             return simpleC.X + simpleC.Y + simpleC.Z;
         }
+
         public static float TestWrapped()
         {
             var wrappedA = RandomWrappedVector3();
@@ -140,6 +144,7 @@ namespace Test01
             Console.WriteLine("Wrapped Vector3: {0},{1},{2}", wrappedC.X, wrappedC.Y, wrappedC.Z);
             return wrappedC.X + wrappedC.Y + wrappedC.Z;
         }
+
         public static float TestSIMD()
         {
             var a = RandomVector3();
@@ -148,6 +153,7 @@ namespace Test01
             Console.WriteLine("SIMD Vector3: {0},{1},{2}", c.X, c.Y, c.Z);
             return c.X + c.Y + c.Z;
         }
+
         public static int Main(string[] args)
         {
             int returnVal = 100;

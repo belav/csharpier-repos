@@ -25,6 +25,7 @@ namespace MS.Internal.Xml.XPath
             _qyInput = qyInput;
             count = 0;
         }
+
         private SortQuery(SortQuery other) : base(other)
         {
             _results = new List<SortKey>(other._results);
@@ -184,6 +185,7 @@ namespace MS.Internal.Xml.XPath
             _expressions = new Query[size];
             _comparers = new IComparer[size];
         }
+
         public XPathSortComparer() : this(minSize) { }
 
         public void AddSort(Query evalQuery, IComparer comparer)

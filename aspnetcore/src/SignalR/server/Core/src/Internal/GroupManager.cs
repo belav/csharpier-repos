@@ -4,6 +4,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class GroupManager<THub> : IGroupManager where THub : Hub

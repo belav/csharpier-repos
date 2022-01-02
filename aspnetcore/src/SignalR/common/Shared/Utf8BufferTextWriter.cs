@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal sealed class Utf8BufferTextWriter : TextWriter
@@ -25,7 +26,6 @@ internal sealed class Utf8BufferTextWriter : TextWriter
     private IBufferWriter<byte>? _bufferWriter;
     private Memory<byte> _memory;
     private int _memoryUsed;
-
 #if DEBUG
     private bool _inUse;
 #endif

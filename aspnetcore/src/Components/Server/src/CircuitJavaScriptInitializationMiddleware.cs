@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Builder;
 
 internal class CircuitJavaScriptInitializationMiddleware

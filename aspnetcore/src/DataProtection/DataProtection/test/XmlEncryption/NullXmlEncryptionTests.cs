@@ -5,6 +5,7 @@ using System;
 using System.Xml.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 public class NullXmlEncryptionTests

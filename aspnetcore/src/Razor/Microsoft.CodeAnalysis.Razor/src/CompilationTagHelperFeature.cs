@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.CSharp;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 public sealed class CompilationTagHelperFeature : RazorEngineFeatureBase, ITagHelperFeature

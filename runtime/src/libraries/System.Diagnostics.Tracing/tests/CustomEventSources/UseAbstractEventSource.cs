@@ -17,6 +17,7 @@ namespace SdtEventSources
     public abstract class UtilBaseEventSource : EventSource
     {
         protected UtilBaseEventSource() : base() { }
+
         protected UtilBaseEventSource(bool throwOnEventWriteErrors) : base(throwOnEventWriteErrors)
         { }
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class ValidationProblemDetailsJsonConverterTest

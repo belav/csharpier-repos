@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 /// <summary>

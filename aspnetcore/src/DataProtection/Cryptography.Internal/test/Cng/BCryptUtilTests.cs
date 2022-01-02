@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.DataProtection.Test.Shared;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
 public unsafe class BCryptUtilTests

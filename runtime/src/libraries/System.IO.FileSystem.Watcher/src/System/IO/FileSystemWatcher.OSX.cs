@@ -827,6 +827,7 @@ namespace System.IO
 
                 return null;
             }
+
             private static bool DoesItemExist(ReadOnlySpan<char> path, bool isFile)
             {
                 if (path.IsEmpty || path.Length == 0)

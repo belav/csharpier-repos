@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 public class SyntaxTokenCacheTest

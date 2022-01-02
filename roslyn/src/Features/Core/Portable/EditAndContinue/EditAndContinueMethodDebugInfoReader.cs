@@ -25,9 +25,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     internal abstract class EditAndContinueMethodDebugInfoReader
     {
         public abstract bool IsPortable { get; }
+
         public abstract EditAndContinueMethodDebugInformation GetDebugInfo(
             MethodDefinitionHandle methodHandle
         );
+
         public abstract StandaloneSignatureHandle GetLocalSignature(
             MethodDefinitionHandle methodHandle
         );

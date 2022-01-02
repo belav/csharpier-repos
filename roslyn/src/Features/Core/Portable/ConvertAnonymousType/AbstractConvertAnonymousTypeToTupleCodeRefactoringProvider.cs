@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
         protected abstract int GetInitializerCount(
             TAnonymousObjectCreationExpressionSyntax anonymousType
         );
+
         protected abstract TTupleExpressionSyntax ConvertToTuple(
             TAnonymousObjectCreationExpressionSyntax anonCreation
         );

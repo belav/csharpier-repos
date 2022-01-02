@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 /// <summary>

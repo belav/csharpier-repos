@@ -1353,7 +1353,6 @@ namespace Newtonsoft.Json.Serialization
 
             return writeMetadataObject;
         }
-
 #if HAVE_BINARY_SERIALIZATION
 #if HAVE_SECURITY_SAFE_CRITICAL_ATTRIBUTE
         [SecuritySafeCritical]

@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class testout1
 {
     public struct VT
@@ -10,13 +11,16 @@ class testout1
         public long a2;
         public double a5;
     }
+
     public class CL
     {
         public double a1 = 4;
     }
+
     static int[,,] arr3d = new int[5, 11, 4];
     public static VT vtstatic = new VT();
     public static CL clstatic = new CL();
+
     public static long Func()
     {
         vtstatic.a2 = -4L;
@@ -41,6 +45,7 @@ class testout1
         );
         return retval;
     }
+
     public static int Main()
     {
         Func();

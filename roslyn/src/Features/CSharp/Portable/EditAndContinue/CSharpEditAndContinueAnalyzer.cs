@@ -964,7 +964,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return false;
             }
         }
-
         #endregion
 
         #region Syntax and Semantic Utils
@@ -2016,7 +2015,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
             return true;
         }
-
         #endregion
 
         #region Diagnostic Info
@@ -2826,7 +2824,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return base.GetSuspensionPointDisplayName(node, editKind);
             }
         }
-
         #endregion
 
         #region Top-Level Syntactic Rude Edits
@@ -3127,7 +3124,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             );
             classifier.ClassifyDeclarationBodyRudeUpdates(newMember);
         }
-
         #endregion
 
         #region Semantic Rude Edits
@@ -3201,7 +3197,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 );
             }
         }
-
         #endregion
 
         #region Exception Handling Rude Edits
@@ -3368,7 +3363,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     throw ExceptionUtilities.UnexpectedValue(node.Kind());
             }
         }
-
         #endregion
 
         #region State Machines
@@ -3664,7 +3658,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
             return false;
         }
-
         #endregion
 
         #region Rude Edits around Active Statement

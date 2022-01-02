@@ -264,7 +264,6 @@ DROP SEQUENCE [dbo].[Sequence];
 DROP SEQUENCE [db2].[Sequence];"
             );
         }
-
         #endregion
 
         #region Model
@@ -331,7 +330,6 @@ DROP TABLE [dbo].[Denali];"
                 @""
             );
         }
-
         #endregion
 
         #region FilteringSchemaTable
@@ -690,7 +688,6 @@ DROP TABLE [db2].[DependentTable];
 DROP TABLE [db2].[PrincipalTable];"
             );
         }
-
         #endregion
 
         #region Table
@@ -1042,7 +1039,6 @@ DROP TABLE FirstDependent;
 DROP TABLE PrincipalTable;"
             );
         }
-
         #endregion
 
         #region ColumnFacets
@@ -2085,7 +2081,6 @@ DROP TABLE dbo.HiddenColumnsTable;
 "
             );
         }
-
         #endregion
 
         #region PrimaryKeyFacets
@@ -2236,7 +2231,6 @@ CREATE TABLE PrimaryKeyName (
                 "DROP TABLE PrimaryKeyName;"
             );
         }
-
         #endregion
 
         #region UniqueConstraintFacets
@@ -2327,7 +2321,6 @@ CREATE TABLE UniqueConstraintName (
                 "DROP TABLE UniqueConstraintName;"
             );
         }
-
         #endregion
 
         #region IndexFacets
@@ -2552,7 +2545,6 @@ WITH (FILLFACTOR = 80) ON [PRIMARY]",
                 "DROP TABLE IndexFillFactor;"
             );
         }
-
         #endregion
 
         #region ForeignKeyFacets
@@ -2807,7 +2799,6 @@ DROP TABLE DependentTable;
 DROP TABLE PrincipalTable;"
             );
         }
-
         #endregion
 
         #region Warnings
@@ -2989,7 +2980,6 @@ DROP TABLE PrincipalTable;
 DROP TABLE OtherPrincipalTable;"
             );
         }
-
         #endregion
 
         private void Test(

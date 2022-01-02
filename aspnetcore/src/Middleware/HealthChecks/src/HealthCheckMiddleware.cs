@@ -10,6 +10,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 /// <summary>

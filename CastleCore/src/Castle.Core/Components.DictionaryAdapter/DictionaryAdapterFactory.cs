@@ -116,7 +116,6 @@ namespace Castle.Components.DictionaryAdapter
         {
             return InternalGetAdapterMeta(type, null, other);
         }
-
 		#endregion
 
         private DictionaryAdapterMeta InternalGetAdapterMeta(
@@ -258,7 +257,6 @@ namespace Castle.Components.DictionaryAdapter
 
         private static readonly PropertyInfo AdapterGetMeta =
             typeof(IDictionaryAdapter).GetProperty("Meta");
-
 		#endregion
 
 		#region Constructors
@@ -305,7 +303,6 @@ namespace Castle.Components.DictionaryAdapter
         {
             typeof(DictionaryAdapterInstance)
         };
-
 		#endregion
 
 		#region Properties
@@ -387,7 +384,6 @@ namespace Castle.Components.DictionaryAdapter
             propILGenerator.Emit(OpCodes.Ldstr, descriptor.PropertyName);
             propILGenerator.Emit(OpCodes.Stloc_0);
         }
-
 		#endregion
 
 		#region Getters
@@ -447,7 +443,6 @@ namespace Castle.Components.DictionaryAdapter
 
         private static readonly MethodInfo AdapterGetProperty =
             typeof(IDictionaryAdapter).GetMethod("GetProperty");
-
 		#endregion
 
 		#region Setters
@@ -488,7 +483,6 @@ namespace Castle.Components.DictionaryAdapter
 
         private static readonly MethodInfo AdapterSetProperty =
             typeof(IDictionaryAdapter).GetMethod("SetProperty");
-
 		#endregion
 
 		#region Descriptors

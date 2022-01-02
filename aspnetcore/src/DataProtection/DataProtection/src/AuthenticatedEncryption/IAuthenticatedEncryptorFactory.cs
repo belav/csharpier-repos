@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 /// <summary>

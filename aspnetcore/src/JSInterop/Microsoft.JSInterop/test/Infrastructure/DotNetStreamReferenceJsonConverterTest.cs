@@ -7,6 +7,7 @@ using System.Text.Json;
 using Microsoft.JSInterop.Implementation;
 using Xunit;
 
+
 namespace Microsoft.JSInterop.Infrastructure;
 
 public class DotNetStreamReferenceJsonConverterTest

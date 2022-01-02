@@ -4,6 +4,7 @@
 #if ES_BUILD_STANDALONE
 using System;
 using System.Diagnostics;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -52,7 +53,6 @@ namespace System.Diagnostics.Tracing
         /// event source was disabled when the activity was initialized.
         /// </summary>
         public Guid Id => this.activityId;
-
 #if false // don't expose RelatedActivityId unless there is a need.
         /// <summary>
         /// Gets the unique identifier of this activity's related (parent)
@@ -86,6 +86,7 @@ namespace System.Diagnostics.Tracing
         {
             return this.Start(eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is empty (no keywords
         /// and level==Info) Data payload is empty.
@@ -96,6 +97,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             return this.Start(eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Shortcut version see Start(string eventName, EventSourceOptions options, T data).  Data payload is empty.
         /// </summary>
@@ -104,6 +106,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             return this.Start(eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is empty (no keywords
         /// and level==Info)
@@ -126,6 +129,7 @@ namespace System.Diagnostics.Tracing
         {
             this.Stop(null, ref data);
         }
+
         /// <summary>
         /// Used if you wish to use the non-default stop name (which is the start name with Start replace with 'Stop')
         /// This can be useful to indicate unusual ways of stopping (but it is still STRONGLY recommended that
@@ -136,6 +140,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             this.Stop(eventName, ref data);
         }
+
         /// <summary>
         /// Used if you wish to use the non-default stop name (which is the start name with Start replace with 'Stop')
         /// This can be useful to indicate unusual ways of stopping (but it is still STRONGLY recommended that
@@ -162,6 +167,7 @@ namespace System.Diagnostics.Tracing
         {
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes an event associated with this activity.
         /// May only be called when the activity is in the Started state.
@@ -176,6 +182,7 @@ namespace System.Diagnostics.Tracing
             EventSourceOptions options = default;
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes a trivial event associated with this activity.
         /// May only be called when the activity is in the Started state.
@@ -191,6 +198,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes a trivial event associated with this activity.
         /// May only be called when the activity is in the Started state.
@@ -204,6 +212,7 @@ namespace System.Diagnostics.Tracing
             EmptyStruct data = default;
             this.Write(this.eventSource, eventName, ref options, ref data);
         }
+
         /// <summary>
         /// Writes an event to a arbitrary eventSource stamped with the activity ID of this activity.
         /// </summary>
@@ -328,6 +337,7 @@ namespace System.Diagnostics.Tracing
         private readonly EventSource eventSource;
         private EventSourceOptions startStopOptions;
         internal Guid activityId;
+
         // internal Guid relatedActivityId;
         private State state;
         private string? eventName;

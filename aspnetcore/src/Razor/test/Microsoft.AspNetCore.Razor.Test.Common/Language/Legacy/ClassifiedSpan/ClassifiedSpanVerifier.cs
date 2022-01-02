@@ -7,6 +7,7 @@ using System.Text;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class ClassifiedSpanVerifier

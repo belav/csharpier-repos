@@ -54,7 +54,6 @@ namespace System.IO.Packaging
             Debug.Assert(partList != null, "partDictionary parameter cannot be null");
             _partList = partList;
         }
-
         #endregion Internal Constructor
 
         #region Private Members

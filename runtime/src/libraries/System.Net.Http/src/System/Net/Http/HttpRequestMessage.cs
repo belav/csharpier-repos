@@ -195,7 +195,6 @@ namespace System.Net.Http
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         #endregion
 
         private void CheckDisposed()

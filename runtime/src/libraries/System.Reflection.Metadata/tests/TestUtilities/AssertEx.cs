@@ -125,7 +125,6 @@ namespace System.Reflection.Metadata.Tests
                 throw new NotImplementedException();
             }
         }
-
         #endregion
 
         public static void AreEqual<T>(

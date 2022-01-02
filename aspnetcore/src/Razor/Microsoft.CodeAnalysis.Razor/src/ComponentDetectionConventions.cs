@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 internal static class ComponentDetectionConventions

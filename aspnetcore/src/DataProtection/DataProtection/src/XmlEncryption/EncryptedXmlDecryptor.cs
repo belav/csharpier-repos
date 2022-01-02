@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 /// <summary>

@@ -24,7 +24,9 @@ namespace System.ServiceModel.Syndication
         public abstract string Version { get; }
 
         public abstract bool CanRead(XmlReader reader);
+
         public abstract void ReadFrom(XmlReader reader);
+
         public abstract void WriteTo(XmlWriter writer);
 
         internal static void LoadElementExtensions(

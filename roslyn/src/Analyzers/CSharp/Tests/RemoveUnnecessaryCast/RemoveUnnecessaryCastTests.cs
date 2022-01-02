@@ -3781,7 +3781,6 @@ class Program
 "
             );
         }
-
         #endregion
 
         #region ParamArray Parameter Casts
@@ -4033,7 +4032,6 @@ class C
 "
             );
         }
-
         #endregion
 
         #region ForEach Statements
@@ -4235,7 +4233,6 @@ class Program
 
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
-
         #endregion
 
         [WorkItem(545925, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545925")]

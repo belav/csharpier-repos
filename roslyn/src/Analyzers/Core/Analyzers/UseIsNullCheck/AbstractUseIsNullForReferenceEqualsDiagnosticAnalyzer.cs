@@ -70,7 +70,9 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             );
 
         protected abstract bool IsLanguageVersionSupported(Compilation compilation);
+
         protected abstract bool IsUnconstrainedGenericSupported(Compilation compilation);
+
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
         private void AnalyzeSyntax(

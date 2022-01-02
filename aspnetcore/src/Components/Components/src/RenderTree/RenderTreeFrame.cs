@@ -11,10 +11,13 @@ using Microsoft.AspNetCore.Components.Rendering;
 #endif
 using Microsoft.AspNetCore.Internal;
 
+
 #if IGNITOR
 namespace Ignitor;
+
 #else
 namespace Microsoft.AspNetCore.Components.RenderTree;
+
 #endif
 
 /// <summary>
@@ -52,6 +55,7 @@ public struct RenderTreeFrame
 
     [FieldOffset(0)]
     internal int SequenceField;
+
     [FieldOffset(4)]
     internal RenderTreeFrameType FrameTypeField;
 
@@ -73,8 +77,10 @@ public struct RenderTreeFrame
 
     [FieldOffset(8)]
     internal int ElementSubtreeLengthField;
+
     [FieldOffset(16)]
     internal string ElementNameField;
+
     [FieldOffset(24)]
     internal object ElementKeyField;
 
@@ -116,10 +122,13 @@ public struct RenderTreeFrame
 
     [FieldOffset(8)]
     internal ulong AttributeEventHandlerIdField;
+
     [FieldOffset(16)]
     internal string AttributeNameField;
+
     [FieldOffset(24)]
     internal object AttributeValueField;
+
     [FieldOffset(32)]
     internal string AttributeEventUpdatesAttributeNameField;
 
@@ -155,15 +164,19 @@ public struct RenderTreeFrame
 
     [FieldOffset(8)]
     internal int ComponentSubtreeLengthField;
+
     [FieldOffset(12)]
     internal int ComponentIdField;
+
     [FieldOffset(16)]
 #if !IGNITOR
     [DynamicallyAccessedMembers(Internal.LinkerFlags.Component)]
 #endif
     internal Type ComponentTypeField;
+
     [FieldOffset(24)]
     internal ComponentState ComponentStateField;
+
     [FieldOffset(32)]
     internal object ComponentKeyField;
 
@@ -224,6 +237,7 @@ public struct RenderTreeFrame
 
     [FieldOffset(16)]
     internal string ElementReferenceCaptureIdField;
+
     [FieldOffset(24)]
     internal Action<ElementReference> ElementReferenceCaptureActionField;
 
@@ -246,6 +260,7 @@ public struct RenderTreeFrame
 
     [FieldOffset(8)]
     internal int ComponentReferenceCaptureParentFrameIndexField;
+
     [FieldOffset(16)]
     internal Action<object> ComponentReferenceCaptureActionField;
 

@@ -146,7 +146,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             AddResponseFileCommands(commandLineBuilder);
             return commandLineBuilder.ToString();
         }
-
         #endregion
 
         /// <summary>

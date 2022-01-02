@@ -10,7 +10,6 @@ namespace System.Speech.Internal.SrgsCompiler
         #region Constructors
 
         internal SemanticTag(ParseElement parent, Backend backend) : base(parent._rule) { }
-
         #endregion
 
         #region Internal Methods
@@ -35,7 +34,6 @@ namespace System.Speech.Internal.SrgsCompiler
             // Attach the semantic properties on the parent element.
             parent.AddSemanticInterpretationTag(_propInfo);
         }
-
         #endregion
 
         #region Private Fields

@@ -730,6 +730,7 @@ namespace System.Data.ProviderBase
         );
 
         internal abstract DbConnectionPoolGroup? GetConnectionPoolGroup(DbConnection connection);
+
         internal abstract void PermissionDemand(DbConnection outerConnection);
 
         internal abstract void SetConnectionPoolGroup(

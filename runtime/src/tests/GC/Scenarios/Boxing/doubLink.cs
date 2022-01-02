@@ -57,6 +57,7 @@ namespace GCVariant
 #pragma warning disable 0414
         internal DLinkNode Last;
         internal DLinkNode Next;
+
 #pragma warning restore 0414
 
         internal int[] Size;

@@ -12,6 +12,7 @@ public class Test_finalizearraysleep
     public class Dummy
     {
         public static int count = 0;
+
         ~Dummy()
         {
             count++;

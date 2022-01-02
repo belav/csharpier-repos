@@ -1362,7 +1362,9 @@ namespace System.Threading.Tasks.Tests
             public IAsyncEnumerator<int> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
             ) => throw new DivideByZeroException();
+
             public IEnumerator<int> GetEnumerator() => throw new FormatException();
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
@@ -1371,7 +1373,9 @@ namespace System.Threading.Tasks.Tests
             public IAsyncEnumerator<int> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
             ) => null;
+
             public IEnumerator<int> GetEnumerator() => null;
+
             IEnumerator IEnumerable.GetEnumerator() => null;
         }
 
@@ -1385,15 +1389,19 @@ namespace System.Threading.Tasks.Tests
             object IEnumerator.Current => throw new NotImplementedException();
 
             public void Dispose() => throw new FormatException();
+
             public ValueTask DisposeAsync() => throw new DivideByZeroException();
 
             public IAsyncEnumerator<int> GetAsyncEnumerator(
                 CancellationToken cancellationToken = default
             ) => this;
+
             public IEnumerator<int> GetEnumerator() => this;
+
             IEnumerator IEnumerable.GetEnumerator() => this;
 
             public bool MoveNext() => false;
+
             public ValueTask<bool> MoveNextAsync() => new ValueTask<bool>(false);
 
             public void Reset() => throw new NotImplementedException();
@@ -1406,8 +1414,11 @@ namespace System.Threading.Tasks.Tests
             public SwitchTo(TaskScheduler scheduler) => _scheduler = scheduler;
 
             public SwitchTo GetAwaiter() => this;
+
             public bool IsCompleted => false;
+
             public void GetResult() { }
+
             public void OnCompleted(Action continuation) =>
                 Task.Factory.StartNew(
                     continuation,
@@ -1423,8 +1434,10 @@ namespace System.Threading.Tasks.Tests
                 MaximumConcurrencyLevel = maximumConcurrencyLevel;
 
             protected override IEnumerable<Task> GetScheduledTasks() => Array.Empty<Task>();
+
             protected override void QueueTask(Task task) =>
                 ThreadPool.QueueUserWorkItem(_ => TryExecuteTask(task));
+
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 TryExecuteTask(task);
 

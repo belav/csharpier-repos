@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Controllers.LinkGeneration;
 
 public class ProductsController : Controller

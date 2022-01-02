@@ -1144,10 +1144,13 @@ namespace System.Diagnostics.Tests
 
         [DllImport("libc")]
         private static extern uint geteuid();
+
         [DllImport("libc")]
         private static extern uint getuid();
+
         [DllImport("libc")]
         private static extern uint getegid();
+
         [DllImport("libc")]
         private static extern uint getgid();
 

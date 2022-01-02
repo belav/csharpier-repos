@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
+
 namespace NonDISample;
 
 public class Program

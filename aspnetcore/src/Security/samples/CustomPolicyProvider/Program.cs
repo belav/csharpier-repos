@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
+
 namespace CustomPolicyProvider;
 
 public class Program

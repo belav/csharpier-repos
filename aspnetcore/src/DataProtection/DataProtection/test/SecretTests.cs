@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 public unsafe class SecretTests

@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Util;
 
 internal static class TaskTimeoutExtensions

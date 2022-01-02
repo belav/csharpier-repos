@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.DataProtection.Managed;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 /// <summary>

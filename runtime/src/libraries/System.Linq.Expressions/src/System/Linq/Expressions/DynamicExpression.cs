@@ -270,7 +270,6 @@ namespace System.Linq.Expressions
         {
             get { throw ContractUtils.Unreachable; }
         }
-
         #endregion
 
         #region Members that forward to Expression
@@ -580,7 +579,6 @@ namespace System.Linq.Expressions
         {
             return ExpressionExtension.MakeDynamic(delegateType, binder, arg0, arg1, arg2, arg3);
         }
-
         #endregion
 
         Expression IDynamicExpression.Rewrite(Expression[] args) => Rewrite(args);
@@ -970,7 +968,6 @@ namespace System.Linq.Expressions
 
         public sealed override Type Type { get; }
     }
-
     #endregion
 
     internal static class ExpressionExtension

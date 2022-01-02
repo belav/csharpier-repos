@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
 internal class RedisSubscriptionManager

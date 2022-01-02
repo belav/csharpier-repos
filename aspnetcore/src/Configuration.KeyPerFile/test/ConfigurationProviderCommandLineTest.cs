@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Extensions.Configuration.Test;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.Extensions.Configuration.KeyPerFile.Test;
 
 public class ConfigurationProviderCommandLineTest : ConfigurationProviderTestBase

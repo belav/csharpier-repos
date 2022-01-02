@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.JSInterop;
 using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInterop;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 /// <summary>

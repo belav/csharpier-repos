@@ -49,6 +49,7 @@ namespace System.Reflection
 #pragma warning disable 169
         private IntPtr klass;
         private IntPtr handle;
+
 #pragma warning restore 169
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

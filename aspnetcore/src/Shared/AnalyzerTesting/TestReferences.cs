@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Testing;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.DependencyModel.Resolution;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 public static class TestReferences

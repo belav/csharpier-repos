@@ -719,6 +719,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override CompilationOptions CommonWithConcurrentBuild(bool concurrent) =>
             WithConcurrentBuild(concurrent);
+
         protected override CompilationOptions CommonWithDeterministic(bool deterministic) =>
             WithDeterministic(deterministic);
 

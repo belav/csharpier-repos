@@ -83,6 +83,7 @@ namespace ServerSimulator
         // disabling unused variable warning
 #pragma warning disable 0414
         private byte[] finalizedData = null;
+
 #pragma warning restore 0414
 
         public FinalizableRequest() : base() { }

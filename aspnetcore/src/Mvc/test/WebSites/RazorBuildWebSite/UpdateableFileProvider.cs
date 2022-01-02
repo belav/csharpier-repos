@@ -10,6 +10,7 @@ using System.Threading;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
+
 namespace RazorBuildWebSite;
 
 public class UpdateableFileProvider : IFileProvider

@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
 public unsafe class BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO_Tests

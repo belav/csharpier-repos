@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
+
 namespace System.Threading.Tasks;
 
 internal static class ForceAsyncTaskExtensions

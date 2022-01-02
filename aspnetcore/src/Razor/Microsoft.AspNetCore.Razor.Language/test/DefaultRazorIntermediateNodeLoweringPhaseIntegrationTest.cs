@@ -10,6 +10,7 @@ using Moq;
 using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest

@@ -16,10 +16,13 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
+
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests.Http2;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2;
+
 #endif
 
 public class HandshakeTests : LoggedTest

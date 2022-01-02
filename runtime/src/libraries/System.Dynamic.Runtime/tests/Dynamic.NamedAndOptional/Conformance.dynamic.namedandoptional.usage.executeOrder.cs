@@ -24,6 +24,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -77,6 +78,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;
@@ -130,6 +132,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;
@@ -183,6 +186,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(int k)
         {
             order1 = order1 + 1;
@@ -236,6 +240,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(int k)
         {
             order1 = order1 + 1;
@@ -289,6 +294,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(dynamic k)
         {
             order1 = order1 + 1;
@@ -342,6 +348,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(int k)
         {
             order1 = order1 + 1;
@@ -395,6 +402,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(dynamic k)
         {
             order1 = order1 + 1;
@@ -448,6 +456,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(dynamic k)
         {
             order1 = order1 + 1;
@@ -501,6 +510,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(int k)
         {
             order1 = order1 + 1;
@@ -555,6 +565,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(int k)
         {
             order1 = order1 + 1;
@@ -608,6 +619,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(dynamic k)
         {
             order1 = order1 + 1;
@@ -661,6 +673,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1(dynamic k)
         {
             order1 = order1 + 1;
@@ -714,6 +727,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1(dynamic k)
         {
             order1 = order1 + 1;
@@ -768,6 +782,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -821,6 +836,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;
@@ -874,6 +890,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;
@@ -927,6 +944,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -980,6 +998,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -1033,6 +1052,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -1086,6 +1106,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -1139,6 +1160,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -1192,6 +1214,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -1245,6 +1268,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -1298,6 +1322,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;
@@ -1351,6 +1376,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;
@@ -1404,6 +1430,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static int Bar1()
         {
             order1 = order1 + 1;
@@ -1457,6 +1484,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;
@@ -1510,6 +1538,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public static int order1 = 1;
+
         public static dynamic Bar1()
         {
             order1 = order1 + 1;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public abstract class RazorConfiguration : IEquatable<RazorConfiguration>

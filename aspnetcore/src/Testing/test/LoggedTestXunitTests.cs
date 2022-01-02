@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
 [LogLevel(LogLevel.Debug)]

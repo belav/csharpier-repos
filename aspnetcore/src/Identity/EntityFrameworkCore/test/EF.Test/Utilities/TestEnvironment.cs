@@ -4,6 +4,7 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
+
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test.Utilities;
 
 public static class TestEnvironment

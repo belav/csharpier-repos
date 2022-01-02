@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeWriterHelpers;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
@@ -49,6 +50,7 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             (byte)'\r',
             (byte)'\n'
         };
+
     // "HTTP/1.1 "
     private static ReadOnlySpan<byte> HttpVersion11Bytes =>
         new byte[]
@@ -63,9 +65,11 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             (byte)'1',
             (byte)' '
         };
+
     // "\r\n\r\n"
     private static ReadOnlySpan<byte> EndHeadersBytes =>
         new byte[] { (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };
+
     // "0\r\n\r\n"
     private static ReadOnlySpan<byte> EndChunkedResponseBytes =>
         new byte[] { (byte)'0', (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };

@@ -40,6 +40,7 @@ namespace System.Reflection.TypeLoading
             Justification = "https://github.com/dotnet/runtime/issues/56519"
         )]
         public sealed override string ScopeName => Name;
+
         public sealed override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
@@ -53,10 +54,13 @@ namespace System.Reflection.TypeLoading
             Array.Empty<CustomAttributeData>();
 
         public sealed override FieldInfo? GetField(string name, BindingFlags bindingAttr) => null;
+
         public sealed override FieldInfo[] GetFields(BindingFlags bindingFlags) =>
             Array.Empty<FieldInfo>();
+
         public sealed override MethodInfo[] GetMethods(BindingFlags bindingFlags) =>
             Array.Empty<MethodInfo>();
+
         protected sealed override MethodInfo? GetMethodImpl(
             string name,
             BindingFlags bindingAttr,
@@ -69,6 +73,7 @@ namespace System.Reflection.TypeLoading
         public sealed override bool IsResource() => true;
 
         public sealed override Type[] GetTypes() => Type.EmptyTypes;
+
         protected sealed override RoDefinitionType? GetTypeCoreNoCache(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,

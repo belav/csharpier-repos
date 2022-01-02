@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using AngleSharp.Parser.Html;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public static class AntiforgeryTestHelper

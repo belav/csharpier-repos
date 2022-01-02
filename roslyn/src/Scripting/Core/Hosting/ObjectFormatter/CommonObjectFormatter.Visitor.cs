@@ -676,7 +676,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 );
                 result.Append('>');
             }
-
             #endregion
 
             #region Collections
@@ -912,7 +911,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     flatIndex++;
                 }
             }
-
             #endregion
 
             #region Scalars
@@ -965,7 +963,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     FormatException(result, e);
                 }
             }
-
             #endregion
 
             #region DebuggerDisplay Embedded Expressions

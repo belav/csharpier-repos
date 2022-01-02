@@ -39,7 +39,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Converters
@@ -56,7 +55,6 @@ namespace Newtonsoft.Json.Tests.Converters
             public byte[] ByteArray { get; set; }
             public byte[] NullByteArray { get; set; }
         }
-
 #if !(NET20 || PORTABLE || PORTABLE40 || DNXCORE50)
         [Test]
         public void DeserializeBinaryClass()

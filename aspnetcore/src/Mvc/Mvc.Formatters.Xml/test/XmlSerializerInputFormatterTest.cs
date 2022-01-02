@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 public class XmlSerializerInputFormatterTest
@@ -862,6 +863,7 @@ public class XmlSerializerInputFormatterTest
     private class VerifyDisposeFileBufferingReadStream : FileBufferingReadStream
     {
         public bool Disposed { get; private set; }
+
         public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
             : base(inner, memoryThreshold) { }
 

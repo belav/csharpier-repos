@@ -21,6 +21,7 @@ namespace DefaultNamespace
         }
 
         internal abstract int getId();
+
         internal abstract float getArea();
 
         public virtual int readId()

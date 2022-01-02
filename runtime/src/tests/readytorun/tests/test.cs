@@ -183,7 +183,6 @@ public class MyClass : IMyInterface
 public class MyChildClass : MyClass
 {
     public MyChildClass() { }
-
 #if !V2
     public string MovedToBaseClass()
     {
@@ -280,7 +279,6 @@ public class MyGeneric<T, U>
 public class MyChildGeneric<T> : MyGeneric<T, T>
 {
     public MyChildGeneric() { }
-
 #if !V2
     public string MovedToBaseClass<W>()
     {
@@ -393,6 +391,7 @@ public class ByteBaseClass : List<byte>
 {
     public byte BaseByte;
 }
+
 public class ByteChildClass : ByteBaseClass
 {
     public byte ChildByte;

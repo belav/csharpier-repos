@@ -104,7 +104,6 @@ namespace System.Linq.Expressions.Tests
             UnaryExpression e = Expression.OnesComplement(Expression.Parameter(typeof(int), "x"));
             Assert.Equal("~(x)", e.ToString());
         }
-
         #endregion
 
         #region Test verifiers
@@ -188,7 +187,6 @@ namespace System.Linq.Expressions.Tests
             Func<sbyte> f = e.Compile(useInterpreter);
             Assert.Equal((sbyte)(~value), f());
         }
-
         #endregion
 
         public static IEnumerable<object[]> Int32OnesComplements()

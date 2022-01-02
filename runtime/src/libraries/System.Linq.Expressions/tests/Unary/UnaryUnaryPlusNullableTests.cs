@@ -130,7 +130,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyArithmeticUnaryPlusNullableDecimal(values[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

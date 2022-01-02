@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpRenameConflictLanguageService() { }
+
         #region "Annotation"
 
         public override SyntaxNode AnnotateAndRename(RenameRewriterParameters parameters)
@@ -1001,7 +1002,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 return newToken;
             }
         }
-
         #endregion
 
         #region "Declaration Conflicts"
@@ -1522,7 +1522,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
             return ImmutableArray<Location>.Empty;
         }
-
         #endregion
 
         public override void TryAddPossibleNameConflicts(

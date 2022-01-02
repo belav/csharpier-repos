@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.Testing.Tracing;
 
 public class CollectingEventListener : EventListener

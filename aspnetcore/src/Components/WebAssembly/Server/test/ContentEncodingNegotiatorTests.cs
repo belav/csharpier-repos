@@ -9,6 +9,7 @@ using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Server.Tests;
 
 public class ContentEncodingNegotiatorTests

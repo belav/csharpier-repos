@@ -20,18 +20,22 @@ namespace Castle.DynamicProxy.Tests.Classes
         {
             ConstructorCalled = Constructor.ArrayOfStrings;
         }
+
         public ClassWithVariousConstructors(object[] arrayOfObjects)
         {
             ConstructorCalled = Constructor.ArrayOfObjects;
         }
+
         public ClassWithVariousConstructors(object @object)
         {
             ConstructorCalled = Constructor.Object;
         }
+
         public ClassWithVariousConstructors()
         {
             ConstructorCalled = Constructor.Default;
         }
+
         public ClassWithVariousConstructors(string[] arrayOfStrings, string singleString)
         {
             ConstructorCalled = Constructor.ArrayAndSingleString;
@@ -41,6 +45,7 @@ namespace Castle.DynamicProxy.Tests.Classes
         {
             ConstructorCalled = Constructor.TwoStrings;
         }
+
         public ClassWithVariousConstructors(object[] arrayOfObjects, string singleString)
         {
             ConstructorCalled = Constructor.ArrayOfObjectsAndSingleString;

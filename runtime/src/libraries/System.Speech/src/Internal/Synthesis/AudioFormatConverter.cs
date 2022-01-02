@@ -140,7 +140,6 @@ namespace System.Speech.Internal.Synthesis
 
             return codec;
         }
-
         #endregion
 
         #region Private Methods
@@ -258,7 +257,6 @@ namespace System.Speech.Internal.Synthesis
 
             return table;
         }
-
         #endregion
 
         #region Converters between Linear and ALaw
@@ -370,7 +368,6 @@ namespace System.Speech.Internal.Synthesis
 
             return table;
         }
-
         #endregion
 
         #region PCM to PCM
@@ -446,7 +443,6 @@ namespace System.Speech.Internal.Synthesis
             }
             return ab; // the same format: do nothing
         }
-
         #endregion
 
         #endregion
@@ -458,7 +454,6 @@ namespace System.Speech.Internal.Synthesis
         // Cached table for aLaw and uLaw conversion (16K * 2 bytes each)
         private static byte[] s_uLawCompTableCached;
         private static byte[] s_aLawCompTableCached;
-
         #endregion
 
         #region Conversion tables for algorithmic conversions
@@ -854,7 +849,6 @@ namespace System.Speech.Internal.Synthesis
             7,
             7
         };
-
         #endregion
 
         #region Conversion tables for 'byte' to 'short' conversion
@@ -1384,7 +1378,6 @@ namespace System.Speech.Internal.Synthesis
             880,
             848
         };
-
         #endregion
 
         internal enum WaveFormatTag
@@ -1393,6 +1386,7 @@ namespace System.Speech.Internal.Synthesis
             WAVE_FORMAT_ALAW = 0x0006,
             WAVE_FORMAT_MULAW = 0x0007
         }
+
         // delegates
         private delegate short[] ConvertByteShort(byte[] data, int size);
         private delegate byte[] ConvertShortByte(short[] data, int size);

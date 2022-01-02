@@ -26,6 +26,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class ControllerActionInvokerTest : CommonResourceInvokerTest
@@ -109,7 +110,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         Assert.NotNull(listener.AfterAction?.ActionDescriptor);
         Assert.NotNull(listener.AfterAction?.HttpContext);
     }
-
     #endregion
 
     #region Controller Context
@@ -182,7 +182,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         Assert.Equal(1, controllerContext.ValueProviderFactories.Count);
         Assert.Same(valueProviderFactory2, controllerContext.ValueProviderFactories[0]);
     }
-
     #endregion
 
     #region Action Filters
@@ -1014,7 +1013,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         // Act & Assert
         await invoker.InvokeAsync();
     }
-
     #endregion
 
     #region Action Method Signatures
@@ -1815,7 +1813,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         );
         Assert.Equal(expectedMessage, exception.Message);
     }
-
     #endregion
 
     #region Logs
@@ -1894,7 +1891,6 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             m => Assert.StartsWith($"Executed action {actionName} in ", m)
         );
     }
-
     #endregion
 
     protected override IActionInvoker CreateInvoker(
@@ -2155,11 +2151,13 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             return await Task.FromResult<TestActionResult>(null);
         }
+
 #pragma warning disable 1998
         public async Task TaskAction(int i, string s)
         {
             return;
         }
+
 #pragma warning restore 1998
 
 #pragma warning disable 1998
@@ -2167,6 +2165,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             return i;
         }
+
 #pragma warning restore 1998
 
 #pragma warning disable 1998
@@ -2174,6 +2173,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             return TaskValueTypeAction(i, s);
         }
+
 #pragma warning restore 1998
 
         public Task<int> TaskValueTypeActionWithoutAsync(int i, string s)
@@ -2186,6 +2186,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         {
             throw new NotImplementedException("Not Implemented Exception");
         }
+
 #pragma warning restore 1998
 
         public Task<int> TaskActionWithExceptionWithoutAsync(int i, string s)

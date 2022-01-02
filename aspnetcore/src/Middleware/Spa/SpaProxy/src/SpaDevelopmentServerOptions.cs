@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.SpaProxy;
 
 internal class SpaDevelopmentServerOptions

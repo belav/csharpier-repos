@@ -68,7 +68,6 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 new LoopbackServer.Options { UseSsl = true }
             );
         }
-
         // Disabling it for full .Net Framework due to a missing ALPN API which leads to a protocol downgrade
 #if !NETFRAMEWORK
         [ConditionalFact(

@@ -60,6 +60,7 @@ class C
     }
 
     static int limit = 10;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Print1(int i)
     {
@@ -111,6 +112,7 @@ class C
     {
         return Test3(0, 50);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test3(int x, int y) // must pass 50 for y
     {
@@ -138,6 +140,7 @@ class C
     {
         return Test3b(new int[5], 50);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test3b(int[] x, int y)
     {

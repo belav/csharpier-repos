@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 
+
 namespace TestHelper;
 
 /// <summary>
@@ -113,7 +114,6 @@ public abstract partial class DiagnosticVerifier
     {
         return diagnostics.OrderBy(d => d.Location.SourceSpan.Start).ToArray();
     }
-
     #endregion
 
     #region Set up compilation and documents

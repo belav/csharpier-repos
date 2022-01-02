@@ -8,19 +8,21 @@ namespace System.Speech.Synthesis
     {
         #region Constructors
         public PromptStyle() { }
+
         public PromptStyle(PromptRate rate)
         {
             Rate = rate;
         }
+
         public PromptStyle(PromptVolume volume)
         {
             Volume = volume;
         }
+
         public PromptStyle(PromptEmphasis emphasis)
         {
             Emphasis = emphasis;
         }
-
         #endregion
 
         #region public Properties
@@ -41,7 +43,6 @@ namespace System.Speech.Synthesis
             get { return _emphasis; }
             set { _emphasis = value; }
         }
-
         #endregion
 
         #region Private Fields
@@ -76,6 +77,7 @@ namespace System.Speech.Synthesis
         Telephone,
         Text
     }
+
     public enum VoiceGender
     {
         NotSet,
@@ -83,6 +85,7 @@ namespace System.Speech.Synthesis
         Female,
         Neutral
     }
+
     public enum VoiceAge
     {
         NotSet,
@@ -91,6 +94,7 @@ namespace System.Speech.Synthesis
         Adult = 30,
         Senior = 65
     }
+
     public enum PromptRate
     {
         NotSet,
@@ -100,6 +104,7 @@ namespace System.Speech.Synthesis
         Slow,
         ExtraSlow
     }
+
     public enum PromptVolume
     {
         NotSet,
@@ -111,6 +116,7 @@ namespace System.Speech.Synthesis
         ExtraLoud,
         Default
     }
+
     public enum PromptEmphasis
     {
         NotSet,
@@ -119,6 +125,7 @@ namespace System.Speech.Synthesis
         None,
         Reduced
     }
+
     public enum PromptBreak
     {
         None,

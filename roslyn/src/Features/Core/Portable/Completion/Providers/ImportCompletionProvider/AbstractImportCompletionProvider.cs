@@ -27,15 +27,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract ImmutableArray<string> GetImportedNamespaces(
             SyntaxNode location,
             SemanticModel semanticModel,
             CancellationToken cancellationToken
         );
+
         protected abstract bool ShouldProvideCompletion(
             CompletionContext completionContext,
             SyntaxContext syntaxContext
         );
+
         protected abstract Task AddCompletionItemsAsync(
             CompletionContext completionContext,
             SyntaxContext syntaxContext,
@@ -43,10 +46,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool isExpandedCompletion,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsFinalSemicolonOfUsingOrExtern(
             SyntaxNode directive,
             SyntaxToken token
         );
+
         protected abstract Task<bool> ShouldProvideParenthesisCompletionAsync(
             Document document,
             CompletionItem item,

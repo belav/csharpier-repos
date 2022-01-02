@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.StackTrace.Sources;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.RazorViews;
 
 /// <summary>

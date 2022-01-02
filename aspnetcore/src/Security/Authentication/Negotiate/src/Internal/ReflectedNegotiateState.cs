@@ -9,6 +9,7 @@ using System.Runtime.ExceptionServices;
 using System.Security.Authentication;
 using System.Security.Principal;
 
+
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
 internal class ReflectedNegotiateState : INegotiateState

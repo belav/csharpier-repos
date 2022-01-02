@@ -4,6 +4,7 @@
 using System;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 internal class TestJSUnmarshalledRuntime : IJSUnmarshalledRuntime

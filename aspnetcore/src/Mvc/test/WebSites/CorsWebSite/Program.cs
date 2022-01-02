@@ -4,6 +4,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
+
 namespace CorsWebSite;
 
 public class Program

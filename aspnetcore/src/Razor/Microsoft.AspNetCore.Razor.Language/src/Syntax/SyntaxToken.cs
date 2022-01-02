@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal class SyntaxToken : RazorSyntaxNode

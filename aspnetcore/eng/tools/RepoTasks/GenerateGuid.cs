@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
+
 namespace RepoTasks;
 
 public class GenerateGuid : Microsoft.Build.Utilities.Task

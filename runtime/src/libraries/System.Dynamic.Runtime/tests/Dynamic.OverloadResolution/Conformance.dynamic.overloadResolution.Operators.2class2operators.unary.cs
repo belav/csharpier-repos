@@ -104,6 +104,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
+
         public static Base operator ++(Base x)
         {
             x.Field = 3;
@@ -153,6 +154,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
+
         public static Base operator --(Base x)
         {
             x.Field = 3;
@@ -202,6 +204,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public static int Status;
+
         public static bool operator true(Base x)
         {
             Base.Status = 1;

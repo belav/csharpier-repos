@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch.Patching
         {
             public byte* pBuf;
             public IntPtr cbBuf; // SIZE_T, so different size on x86/x64
+
             [MarshalAs(UnmanagedType.Bool)]
             public bool editable;
 

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Interna
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
 [Obsolete(

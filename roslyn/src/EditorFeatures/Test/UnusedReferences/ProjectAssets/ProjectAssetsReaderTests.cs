@@ -83,6 +83,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
             string projectPath,
             params ReferenceInfo[] dependencies
         ) => ProjectReference(projectPath, false, dependencies);
+
         private static ReferenceInfo ProjectReference(
             string projectPath,
             bool treatAsUsed,
@@ -100,6 +101,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
             string assemblyPath,
             params ReferenceInfo[] dependencies
         ) => PackageReference(assemblyPath, false, dependencies);
+
         private static ReferenceInfo PackageReference(
             string assemblyPath,
             bool treatAsUsed,

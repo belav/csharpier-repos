@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.TestHost;
 
+
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
 internal static class TestServerExtensions

@@ -15,11 +15,17 @@ namespace System.Speech.Internal.Synthesis
         }
 
         internal abstract IntPtr GetOutputFormat(IntPtr targetFormat);
+
         internal abstract void AddLexicon(Uri lexicon, string mediaType);
+
         internal abstract void RemoveLexicon(Uri lexicon);
+
         internal abstract void Speak(List<TextFragment> frags, byte[] wfx);
+
         internal abstract void ReleaseInterface();
+
         internal abstract char[] ConvertPhonemes(char[] phones, AlphabetType alphabet);
+
         internal abstract AlphabetType EngineAlphabet { get; }
         internal AlphabetConverter AlphabetConverter
         {
@@ -38,7 +44,6 @@ namespace System.Speech.Internal.Synthesis
             _ssmlEngine = ssmlEngine;
             _site = site;
         }
-
         #endregion
 
         #region Internal Methods
@@ -93,7 +98,6 @@ namespace System.Speech.Internal.Synthesis
         /// Release the COM interface for COM object
         /// </summary>
         internal override void ReleaseInterface() { }
-
         #endregion
 
         #region private Fields
@@ -113,7 +117,6 @@ namespace System.Speech.Internal.Synthesis
             _iSite = iSite;
             _sapiEngine = sapiEngine;
         }
-
         #endregion
 
         #region Internal Methods
@@ -196,7 +199,6 @@ namespace System.Speech.Internal.Synthesis
         {
             Marshal.ReleaseComObject(_sapiEngine);
         }
-
         #endregion
 
         #region private Fields

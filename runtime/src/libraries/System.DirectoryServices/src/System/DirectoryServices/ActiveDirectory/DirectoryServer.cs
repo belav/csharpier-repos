@@ -166,7 +166,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     : ((AdamInstance)this).ServerObjectName;
             return DirectoryEntryManager.GetDirectoryEntry(context, serverName);
         }
-
         #endregion public methods
 
         #region public abstract methods
@@ -195,7 +194,6 @@ namespace System.DirectoryServices.ActiveDirectory
             string partition,
             SyncFromAllServersOptions options
         );
-
         #endregion public abstract methods
 
         #region public properties
@@ -221,7 +219,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 return cachedPartitions;
             }
         }
-
         #endregion public properties
 
         #region public abstract properties
@@ -235,7 +232,6 @@ namespace System.DirectoryServices.ActiveDirectory
         public abstract ReplicationConnectionCollection InboundConnections { get; }
 
         public abstract ReplicationConnectionCollection OutboundConnections { get; }
-
         #endregion public abstract properties
 
         #region private methods

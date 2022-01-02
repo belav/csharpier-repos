@@ -9,6 +9,7 @@ namespace System.Net.WebSockets
     public readonly partial struct ValueWebSocketReceiveResult
     {
         private readonly int _dummyPrimitive;
+
         public ValueWebSocketReceiveResult(
             int count,
             System.Net.WebSockets.WebSocketMessageType messageType,
@@ -17,6 +18,7 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         public int Count
         {
             get { throw null; }
@@ -30,9 +32,11 @@ namespace System.Net.WebSockets
             get { throw null; }
         }
     }
+
     public abstract partial class WebSocket : System.IDisposable
     {
         protected WebSocket() { }
+
         public abstract System.Net.WebSockets.WebSocketCloseStatus? CloseStatus { get; }
         public abstract string? CloseStatusDescription { get; }
         public static System.TimeSpan DefaultKeepAliveInterval
@@ -41,17 +45,21 @@ namespace System.Net.WebSockets
         }
         public abstract System.Net.WebSockets.WebSocketState State { get; }
         public abstract string? SubProtocol { get; }
+
         public abstract void Abort();
+
         public abstract System.Threading.Tasks.Task CloseAsync(
             System.Net.WebSockets.WebSocketCloseStatus closeStatus,
             string? statusDescription,
             System.Threading.CancellationToken cancellationToken
         );
+
         public abstract System.Threading.Tasks.Task CloseOutputAsync(
             System.Net.WebSockets.WebSocketCloseStatus closeStatus,
             string? statusDescription,
             System.Threading.CancellationToken cancellationToken
         );
+
         public static System.ArraySegment<byte> CreateClientBuffer(
             int receiveBufferSize,
             int sendBufferSize
@@ -59,6 +67,7 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -74,6 +83,7 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         public static System.Net.WebSockets.WebSocket CreateFromStream(
             System.IO.Stream stream,
             bool isServer,
@@ -83,6 +93,7 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         public static System.Net.WebSockets.WebSocket CreateFromStream(
             System.IO.Stream stream,
             System.Net.WebSockets.WebSocketCreationOptions options
@@ -90,11 +101,14 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         public static System.ArraySegment<byte> CreateServerBuffer(int receiveBufferSize)
         {
             throw null;
         }
+
         public abstract void Dispose();
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -105,14 +119,17 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         protected static bool IsStateTerminal(System.Net.WebSockets.WebSocketState state)
         {
             throw null;
         }
+
         public abstract System.Threading.Tasks.Task<System.Net.WebSockets.WebSocketReceiveResult> ReceiveAsync(
             System.ArraySegment<byte> buffer,
             System.Threading.CancellationToken cancellationToken
         );
+
         public virtual System.Threading.Tasks.ValueTask<System.Net.WebSockets.ValueWebSocketReceiveResult> ReceiveAsync(
             System.Memory<byte> buffer,
             System.Threading.CancellationToken cancellationToken
@@ -120,6 +137,7 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -127,12 +145,14 @@ namespace System.Net.WebSockets
             "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code."
         )]
         public static void RegisterPrefixes() { }
+
         public abstract System.Threading.Tasks.Task SendAsync(
             System.ArraySegment<byte> buffer,
             System.Net.WebSockets.WebSocketMessageType messageType,
             bool endOfMessage,
             System.Threading.CancellationToken cancellationToken
         );
+
         public virtual System.Threading.Tasks.ValueTask SendAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Net.WebSockets.WebSocketMessageType messageType,
@@ -142,6 +162,7 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         public virtual System.Threading.Tasks.ValueTask SendAsync(
             System.ReadOnlyMemory<byte> buffer,
             System.Net.WebSockets.WebSocketMessageType messageType,
@@ -151,11 +172,13 @@ namespace System.Net.WebSockets
         {
             throw null;
         }
+
         protected static void ThrowOnInvalidState(
             System.Net.WebSockets.WebSocketState state,
             params System.Net.WebSockets.WebSocketState[] validStates
         ) { }
     }
+
     public enum WebSocketCloseStatus
     {
         NormalClosure = 1000,
@@ -169,9 +192,11 @@ namespace System.Net.WebSockets
         MandatoryExtension = 1010,
         InternalServerError = 1011,
     }
+
     public abstract partial class WebSocketContext
     {
         protected WebSocketContext() { }
+
         public abstract System.Net.CookieCollection CookieCollection { get; }
         public abstract System.Collections.Specialized.NameValueCollection Headers { get; }
         public abstract bool IsAuthenticated { get; }
@@ -185,6 +210,7 @@ namespace System.Net.WebSockets
         public abstract System.Security.Principal.IPrincipal? User { get; }
         public abstract System.Net.WebSockets.WebSocket WebSocket { get; }
     }
+
     public enum WebSocketError
     {
         Success = 0,
@@ -198,42 +224,57 @@ namespace System.Net.WebSockets
         ConnectionClosedPrematurely = 8,
         InvalidState = 9,
     }
+
     public sealed partial class WebSocketException : System.ComponentModel.Win32Exception
     {
         public WebSocketException() { }
+
         public WebSocketException(int nativeError) { }
+
         public WebSocketException(int nativeError, System.Exception? innerException) { }
+
         public WebSocketException(int nativeError, string? message) { }
+
         public WebSocketException(System.Net.WebSockets.WebSocketError error) { }
+
         public WebSocketException(
             System.Net.WebSockets.WebSocketError error,
             System.Exception? innerException
         ) { }
+
         public WebSocketException(System.Net.WebSockets.WebSocketError error, int nativeError) { }
+
         public WebSocketException(
             System.Net.WebSockets.WebSocketError error,
             int nativeError,
             System.Exception? innerException
         ) { }
+
         public WebSocketException(
             System.Net.WebSockets.WebSocketError error,
             int nativeError,
             string? message
         ) { }
+
         public WebSocketException(
             System.Net.WebSockets.WebSocketError error,
             int nativeError,
             string? message,
             System.Exception? innerException
         ) { }
+
         public WebSocketException(System.Net.WebSockets.WebSocketError error, string? message) { }
+
         public WebSocketException(
             System.Net.WebSockets.WebSocketError error,
             string? message,
             System.Exception? innerException
         ) { }
+
         public WebSocketException(string? message) { }
+
         public WebSocketException(string? message, System.Exception? innerException) { }
+
         public override int ErrorCode
         {
             get { throw null; }
@@ -242,17 +283,20 @@ namespace System.Net.WebSockets
         {
             get { throw null; }
         }
+
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
     }
+
     public enum WebSocketMessageType
     {
         Text = 0,
         Binary = 1,
         Close = 2,
     }
+
     public partial class WebSocketReceiveResult
     {
         public WebSocketReceiveResult(
@@ -260,6 +304,7 @@ namespace System.Net.WebSockets
             System.Net.WebSockets.WebSocketMessageType messageType,
             bool endOfMessage
         ) { }
+
         public WebSocketReceiveResult(
             int count,
             System.Net.WebSockets.WebSocketMessageType messageType,
@@ -267,6 +312,7 @@ namespace System.Net.WebSockets
             System.Net.WebSockets.WebSocketCloseStatus? closeStatus,
             string? closeStatusDescription
         ) { }
+
         public System.Net.WebSockets.WebSocketCloseStatus? CloseStatus
         {
             get { throw null; }
@@ -288,6 +334,7 @@ namespace System.Net.WebSockets
             get { throw null; }
         }
     }
+
     public enum WebSocketState
     {
         None = 0,
@@ -298,6 +345,7 @@ namespace System.Net.WebSockets
         Closed = 5,
         Aborted = 6,
     }
+
     public sealed partial class WebSocketCreationOptions
     {
         public bool IsServer
@@ -321,6 +369,7 @@ namespace System.Net.WebSockets
             set { }
         }
     }
+
     public sealed partial class WebSocketDeflateOptions
     {
         public int ClientMaxWindowBits
@@ -344,6 +393,7 @@ namespace System.Net.WebSockets
             set { }
         }
     }
+
     [Flags]
     public enum WebSocketMessageFlags
     {

@@ -4,6 +4,7 @@
 using System.IO.Pipelines;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal class LoggingDuplexPipe : DuplexPipeStreamAdapter<LoggingStream>

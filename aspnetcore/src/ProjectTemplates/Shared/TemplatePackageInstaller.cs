@@ -12,6 +12,7 @@ using Microsoft.Extensions.CommandLineUtils;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Templates.Test.Helpers;
 
 internal static class TemplatePackageInstaller

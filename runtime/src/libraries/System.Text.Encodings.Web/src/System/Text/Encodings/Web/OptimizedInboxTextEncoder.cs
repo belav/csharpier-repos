@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 #if NETCOREAPP
 using System.Runtime.Intrinsics.X86;
+
 #endif
 
 #if NET5_0_OR_GREATER

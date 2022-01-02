@@ -24,6 +24,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XNode[] { new XComment("Comment") }, 0 },
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") }, 1 }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] content, int index)
         {
@@ -78,6 +79,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") }, 2 },
             new object[] { InputSpace.GetElement(100, 10).DescendantNodes().ToArray(), 50 }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode[] content, int index)
         {
@@ -134,6 +136,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 10
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXAttributeVariationParams))]
         public void ExecuteXAttributeVariation(XAttribute[] content, int index)
         {
@@ -425,6 +428,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XNode[] { new XComment("Comment") } },
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") } }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] content)
         {
@@ -456,6 +460,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") } },
             new object[] { InputSpace.GetElement(100, 10).DescendantNodes().ToArray() }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode[] content)
         {
@@ -628,6 +633,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XObject[] content)
         {

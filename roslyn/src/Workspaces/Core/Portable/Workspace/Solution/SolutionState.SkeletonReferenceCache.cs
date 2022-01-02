@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Internal.Log;
 using Roslyn.Utilities;
 
+
 namespace Microsoft.CodeAnalysis;
 
 internal partial class SolutionState

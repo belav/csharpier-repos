@@ -38,18 +38,21 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         public abstract ParseOptions GetDefaultParseOptions();
+
         public abstract SyntaxTree CreateSyntaxTree(
             string filePath,
             ParseOptions options,
             Encoding encoding,
             SyntaxNode root
         );
+
         public abstract SyntaxTree ParseSyntaxTree(
             string filePath,
             ParseOptions options,
             SourceText text,
             CancellationToken cancellationToken
         );
+
         public abstract SyntaxTree CreateRecoverableTree(
             ProjectId cacheKey,
             string filePath,
@@ -58,11 +61,14 @@ namespace Microsoft.CodeAnalysis.Host
             Encoding encoding,
             SyntaxNode root
         );
+
         public abstract SyntaxNode DeserializeNodeFrom(
             Stream stream,
             CancellationToken cancellationToken
         );
+
         public abstract ParseOptions GetDefaultParseOptionsWithLatestLanguageVersion();
+
         public abstract ParseOptions TryParsePdbParseOptions(
             IReadOnlyDictionary<string, string> metadata
         );

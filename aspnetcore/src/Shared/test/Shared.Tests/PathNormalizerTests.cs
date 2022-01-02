@@ -5,6 +5,7 @@ using System;
 using System.Text;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
 public class PathNormalizerTests

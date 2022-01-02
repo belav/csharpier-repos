@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Rendering;
 
 public class HtmlRendererTest
@@ -989,6 +990,7 @@ public class HtmlRendererTest
     {
         [Parameter]
         public bool Nested { get; set; }
+
         [Parameter]
         public int Value { get; set; }
 

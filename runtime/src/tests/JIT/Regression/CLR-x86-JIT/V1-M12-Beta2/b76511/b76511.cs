@@ -2,17 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class bug1
 {
     public struct VT
     {
         public int a3;
     }
+
     public class CL
     {
         public float a2 = 4.0F;
         public long a5 = 2L;
     }
+
     public static VT vtstatic = new VT();
 
     public static int Main()

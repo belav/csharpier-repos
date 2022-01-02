@@ -10,6 +10,7 @@ public class Test
     public class Dummy
     {
         public static bool visited;
+
         ~Dummy()
         {
             //Console.WriteLine("In Finalize() of Dummy");

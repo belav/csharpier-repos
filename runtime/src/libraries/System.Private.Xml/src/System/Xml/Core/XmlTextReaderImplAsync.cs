@@ -1101,6 +1101,7 @@ namespace System.Xml
             _ps.appendMode = true;
             await ReadDataAsync().ConfigureAwait(false);
         }
+
         private Task InitTextReaderInputAsync(string baseUriStr, TextReader input)
         {
             return InitTextReaderInputAsync(baseUriStr, null, input);

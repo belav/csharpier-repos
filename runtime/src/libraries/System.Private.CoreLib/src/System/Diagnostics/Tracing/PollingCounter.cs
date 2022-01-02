@@ -3,6 +3,7 @@
 
 #if ES_BUILD_STANDALONE
 using System;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -106,6 +107,7 @@ namespace System.Diagnostics.Tracing
         {
             Payload = payload;
         }
+
         public CounterPayload Payload { get; set; }
     }
 }

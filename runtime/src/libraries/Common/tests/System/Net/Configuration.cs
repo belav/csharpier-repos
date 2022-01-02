@@ -7,6 +7,7 @@ namespace System.Net.Test.Common
     {
 #pragma warning disable 414
         private static readonly string DefaultAzureServer = "corefx-net-http11.azurewebsites.net";
+
 #pragma warning restore 414
 
         private static string GetValue(string envName, string defaultValue = null)

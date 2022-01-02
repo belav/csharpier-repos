@@ -392,6 +392,7 @@ namespace System.Runtime.CompilerServices
             }
         }
     }
+
     // Helper class to assist with unsafe pinning of arbitrary objects.
     // It's used by VM code.
     internal sealed class RawData
@@ -422,16 +423,22 @@ namespace System.Runtime.CompilerServices
     {
         [FieldOffset(0)]
         public ushort ComponentSize;
+
         [FieldOffset(0)]
         private uint Flags;
+
         [FieldOffset(4)]
         public uint BaseSize;
+
         [FieldOffset(0x0e)]
         public ushort InterfaceCount;
+
         [FieldOffset(ParentMethodTableOffset)]
         public MethodTable* ParentMethodTable;
+
         [FieldOffset(ElementTypeOffset)]
         public void* ElementType;
+
         [FieldOffset(InterfaceMapOffset)]
         public MethodTable** InterfaceMap;
 
@@ -439,6 +446,7 @@ namespace System.Runtime.CompilerServices
         private const uint enum_flag_ContainsPointers = 0x01000000;
         private const uint enum_flag_HasComponentSize = 0x80000000;
         private const uint enum_flag_HasTypeEquivalence = 0x02000000;
+
         // Types that require non-trivial interface cast have this bit set in the category
         private const uint enum_flag_NonTrivialInterfaceCast =
             0x00080000 // enum_flag_Category_Array

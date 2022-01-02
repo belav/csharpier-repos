@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 
+
 namespace RazorSyntaxGenerator;
 
 internal class SourceWriter : AbstractFileWriter

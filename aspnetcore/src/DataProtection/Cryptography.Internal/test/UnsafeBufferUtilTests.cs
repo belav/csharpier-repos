@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Cryptography.SafeHandles;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cryptography;
 
 public unsafe class UnsafeBufferUtilTests

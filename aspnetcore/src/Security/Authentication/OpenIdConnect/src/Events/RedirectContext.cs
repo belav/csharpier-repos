@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
+
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 /// <summary>

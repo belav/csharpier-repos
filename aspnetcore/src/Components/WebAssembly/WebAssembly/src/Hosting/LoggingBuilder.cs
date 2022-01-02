@@ -4,6 +4,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 internal class LoggingBuilder : ILoggingBuilder

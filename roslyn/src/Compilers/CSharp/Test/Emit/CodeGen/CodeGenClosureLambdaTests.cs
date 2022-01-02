@@ -5501,7 +5501,6 @@ namespace ConsoleApplication16
 ";
             CompileAndVerify(source);
         }
-
         #endregion
 
         [Fact]

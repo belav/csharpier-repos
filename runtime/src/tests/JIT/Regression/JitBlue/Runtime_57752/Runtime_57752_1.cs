@@ -21,6 +21,7 @@ public class Runtime_57752_1
     internal static bool s_33;
     internal static bool s_53;
     internal static int[][] s_56;
+
     public static int Main()
     {
         s_rt = new C();

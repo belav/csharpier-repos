@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
 public partial class IndexModel : PageModel
@@ -112,6 +113,7 @@ public partial class IndexModel : PageModel
         StatusMessage = "Your profile has been updated";
         return RedirectToPage();
     }
+
     public async Task<IActionResult> OnPostSendVerificationEmailAsync()
     {
         if (!ModelState.IsValid)

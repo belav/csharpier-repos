@@ -18,6 +18,7 @@ using Moq;
 using Newtonsoft.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
 public abstract class JsonInputFormatterTestBase : LoggedTest
@@ -683,6 +684,7 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
     private class VerifyDisposeFileBufferingReadStream : FileBufferingReadStream
     {
         public bool Disposed { get; private set; }
+
         public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
             : base(inner, memoryThreshold) { }
 

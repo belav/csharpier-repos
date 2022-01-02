@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Exceptions;
 
 public class JsonPatchException : Exception

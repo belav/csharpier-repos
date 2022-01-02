@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Server.IIS.Microbenchmarks;
 
 [AspNetCoreBenchmark(typeof(FirstRequestConfig))]

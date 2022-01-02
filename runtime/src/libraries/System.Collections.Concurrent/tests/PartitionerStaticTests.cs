@@ -99,7 +99,6 @@ namespace System.Collections.Concurrent.Tests
             using (var e = d.GetEnumerator()) { }
             ;
         }
-
         #endregion
 
         [Fact]

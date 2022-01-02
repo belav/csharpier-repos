@@ -8,9 +8,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class Test
     {
         public delegate int Del(object x);
+
         private class Foo
         {
             public event Del Delete;
+
             public int Raise()
             {
                 int x = Delete(3);
@@ -45,9 +47,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class Test
     {
         public delegate int Del(dynamic x);
+
         private class Foo
         {
             public event Del Delete;
+
             public int Raise()
             {
                 int x = Delete(3);
@@ -116,6 +120,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     {
         private int _index;
         private int _max;
+
         public void Initialize(int max)
         {
             _index = 0;
@@ -175,6 +180,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     {
         private int _index;
         private int _max;
+
         public void Initialize(int max)
         {
             _index = 0;
@@ -234,6 +240,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     {
         private int _index;
         private int _max;
+
         public void Initialize(int max)
         {
             _index = 0;
@@ -298,6 +305,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     {
         private int _index;
         private int _max;
+
         public myFor(int max)
         {
             _index = 0;
@@ -357,6 +365,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     {
         private int _index;
         private int _max;
+
         public myFor(int max)
         {
             _index = 0;
@@ -563,6 +572,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class Foo : IEnumerable, IEnumerator
     {
         private int _x = 2;
+
         public void Bar() { }
 
         #region IEnumerable Members
@@ -570,7 +580,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         {
             return (IEnumerator)this;
         }
-
         #endregion
         #region IEnumerator Members
         public object Current
@@ -631,6 +640,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class Foo
     {
         private int _x = 2;
+
         public void Bar() { }
 
         #region IEnumerable Members
@@ -638,7 +648,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         {
             return (IEnumerator)this;
         }
-
         #endregion
         #region IEnumerator Members
         public object Current
@@ -722,6 +731,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -774,6 +784,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -826,6 +837,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class Test
     {
         public static int Status;
+
         public static void Method(Foo x)
         {
             Test.Status = 1;
@@ -1125,6 +1137,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class MyClass : IDisposable
     {
         public static int Status;
+
         public void Foo()
         {
             MyClass.Status = 2;
@@ -1173,6 +1186,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class MyClass : IDisposable
     {
         public static int Status;
+
         public void Foo()
         {
             MyClass.Status = 2;
@@ -1221,6 +1235,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class MyClass
     {
         public static int Status;
+
         public void Foo()
         {
             MyClass.Status = 2;
@@ -1278,6 +1293,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
     public class MyClass : IDisposable
     {
         public static int Status;
+
         public void Foo()
         {
             MyClass.Status = 2;

@@ -81,7 +81,6 @@ namespace System.Xml.Schema
         {
             get { return this.Reserved != SchemaAttDef.Reserve.None; }
         }
-
         #endregion
 
         //

@@ -19,7 +19,6 @@ namespace System.Runtime.Serialization
         private Dictionary<DataContract, object>? _processedContracts;
         private readonly ICollection<Type> _referencedTypes;
         private readonly ICollection<Type> _referencedCollectionTypes;
-
 #if SUPPORT_SURROGATE
         private IDataContractSurrogate _dataContractSurrogate;
         private Hashtable _surrogateDataTable;

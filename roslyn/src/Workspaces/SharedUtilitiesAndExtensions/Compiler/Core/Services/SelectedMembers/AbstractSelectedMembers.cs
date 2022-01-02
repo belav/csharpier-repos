@@ -31,11 +31,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         protected abstract SyntaxList<TMemberDeclarationSyntax> GetMembers(
             TTypeDeclarationSyntax containingType
         );
+
         protected abstract IEnumerable<TVariableSyntax> GetAllDeclarators(
             TFieldDeclarationSyntax field
         );
 
         protected abstract SyntaxToken GetVariableIdentifier(TVariableSyntax declarator);
+
         protected abstract SyntaxToken GetPropertyIdentifier(TPropertyDeclarationSyntax declarator);
 
         public async Task<ImmutableArray<SyntaxNode>> GetSelectedFieldsAndPropertiesAsync(

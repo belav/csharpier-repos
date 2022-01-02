@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             MoveTypeOperationKind operationKind,
             CancellationToken cancellationToken
         );
+
         public abstract Task<ImmutableArray<CodeAction>> GetRefactoringAsync(
             Document document,
             TextSpan textSpan,

@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     internal abstract class AbstractTableEntriesSource<TItem> where TItem : TableItem
     {
         public abstract object Key { get; }
+
         public abstract ImmutableArray<TItem> GetItems();
+
         public abstract ImmutableArray<ITrackingPoint> GetTrackingPoints(
             ImmutableArray<TItem> items
         );

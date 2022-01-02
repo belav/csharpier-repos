@@ -64,7 +64,6 @@ namespace System.Speech.Recognition
                 }
             }
         }
-
         #endregion
 
         #region Public Methods
@@ -137,6 +136,7 @@ namespace System.Speech.Recognition
                 }
             }
         }
+
         internal bool SetTextFeedback(string text, bool isSuccessfulAction)
         {
             if (_sapiRecoResult == null)
@@ -253,7 +253,6 @@ namespace System.Speech.Recognition
         {
             get { return new ReadOnlyCollection<RecognizedPhrase>(GetAlternates()); }
         }
-
         #endregion
 
         #region Internal Methods
@@ -285,7 +284,6 @@ namespace System.Speech.Recognition
             }
             return pronunciation;
         }
-
         #endregion
 
         #region Internal Properties
@@ -328,7 +326,6 @@ namespace System.Speech.Recognition
                 return (TimeSpan)_audioDuration;
             }
         }
-
         #endregion
 
         #region Private Methods
@@ -657,7 +654,6 @@ namespace System.Speech.Recognition
 
             return sb.ToString();
         }
-
         #endregion
 
         #region Private Fields
@@ -684,6 +680,7 @@ namespace System.Speech.Recognition
 
         [field: NonSerialized]
         private ISpRecoResult2 _sapiRecoResult;
+
         // Keep as members because MSS uses these fields:
         private TimeSpan? _audioPosition;
         private TimeSpan? _audioDuration;

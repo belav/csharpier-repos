@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 
         protected abstract bool CanImplementImplicitly { get; }
         protected abstract bool HasHiddenExplicitImplementation { get; }
+
         protected abstract bool TryInitializeState(
             Document document,
             SemanticModel model,
@@ -45,6 +46,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             SyntaxNode ifDisposingStatement,
             SyntaxTriviaList trivia
         );
+
         protected abstract SyntaxNode CreateFinalizer(
             SyntaxGenerator generator,
             INamedTypeSymbol classType,

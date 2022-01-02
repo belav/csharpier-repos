@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal class LoggingHttpMessageHandler : DelegatingHandler
@@ -76,6 +77,7 @@ internal class LoggingHttpMessageHandler : DelegatingHandler
         {
             _sendingHttpRequest(logger, requestMethod, requestUrl, null);
         }
+
         public static void UnsuccessfulHttpResponse(
             ILogger logger,
             HttpStatusCode statusCode,

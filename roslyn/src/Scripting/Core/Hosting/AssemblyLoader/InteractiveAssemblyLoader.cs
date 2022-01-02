@@ -102,6 +102,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             }
 
             public bool IsDefault => Assembly == null;
+
             private string GetDebuggerDisplay() =>
                 IsDefault
                     ? "uninitialized"

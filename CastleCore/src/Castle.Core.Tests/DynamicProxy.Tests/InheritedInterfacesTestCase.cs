@@ -147,7 +147,6 @@ namespace Castle.DynamicProxy.Tests
 
         public event EventHandler MyEvent;
         public event EventHandler Bar;
-
 		#endregion
 
         public void RaiseMyEvent()

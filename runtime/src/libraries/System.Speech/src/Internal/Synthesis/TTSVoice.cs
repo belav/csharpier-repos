@@ -16,7 +16,6 @@ namespace System.Speech.Internal.Synthesis
             _engine = engine;
             _voiceId = voiceId;
         }
-
         #endregion
 
         #region public Methods
@@ -37,7 +36,6 @@ namespace System.Speech.Internal.Synthesis
         {
             return _voiceId.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -125,7 +123,6 @@ namespace System.Speech.Internal.Synthesis
             }
             return _waveFormat;
         }
-
         #endregion
 
         #region Internal Properties
@@ -139,7 +136,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return _voiceId; }
         }
-
         #endregion
 
         #region private Fields

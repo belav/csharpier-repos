@@ -25,10 +25,13 @@ namespace System.Security.Cryptography.Pkcs
         }
 
         static partial void PrepareRegistrationRsa(Dictionary<string, CmsSignature> lookup);
+
         static partial void PrepareRegistrationDsa(Dictionary<string, CmsSignature> lookup);
+
         static partial void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup);
 
         internal abstract RSASignaturePadding? SignaturePadding { get; }
+
         protected abstract bool VerifyKeyType(AsymmetricAlgorithm key);
 
         internal abstract bool VerifySignature(

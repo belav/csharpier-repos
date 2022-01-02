@@ -23,6 +23,7 @@ using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.TestHost;
 
 public class TestServerTests
@@ -279,6 +280,7 @@ public class TestServerTests
     public class CustomContainerStartup
     {
         public IServiceProvider Services;
+
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             Services = services.BuildServiceProvider();

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests.Internal;
 
 public class DefaultHubMessageSerializerTests

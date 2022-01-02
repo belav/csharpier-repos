@@ -406,6 +406,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public abstract class TestScenario
         {
             protected abstract string GetXmlText();
+
             protected string OriginalXml { get; private set; }
             protected XmlDocument Document { get; private set; }
             protected IXmlNamespaceSource Namespaces { get; private set; }
@@ -503,6 +504,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         }
 
         public sealed class TX { }
+
         public sealed class TY { }
     }
 }

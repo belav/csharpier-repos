@@ -7,6 +7,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class KnownStringsBenchmark
@@ -47,6 +48,7 @@ public class KnownStringsBenchmark
 
         return GetKnownMethod(data);
     }
+
     [Benchmark(OperationsPerInvoke = loops * 10)]
     public int GetKnownMethod_HEAD()
     {
@@ -62,6 +64,7 @@ public class KnownStringsBenchmark
 
         return GetKnownMethod(data);
     }
+
     [Benchmark(OperationsPerInvoke = loops * 10)]
     public int GetKnownMethod_POST()
     {
@@ -69,6 +72,7 @@ public class KnownStringsBenchmark
 
         return GetKnownMethod(data);
     }
+
     [Benchmark(OperationsPerInvoke = loops * 10)]
     public int GetKnownMethod_PUT()
     {

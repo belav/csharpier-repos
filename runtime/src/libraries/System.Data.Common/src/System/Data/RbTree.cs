@@ -108,6 +108,7 @@ namespace System.Data
         private readonly TreeAccessMethod _accessMethod;
 
         protected abstract int CompareNode(K? record1, K? record2);
+
         protected abstract int CompareSateliteTreeNode(K? record1, K? record2);
 
         protected RBTree(TreeAccessMethod accessMethod)
@@ -581,7 +582,6 @@ namespace System.Data
             }
             return root_id;
         }
-
 #if VerifySort
         // This helps validate the sorting of the tree to help catch instances of corruption much sooner.
         // corruption happens when the data changes without telling the tree or when multi-threads do simultanous write operations
@@ -1640,7 +1640,6 @@ namespace System.Data
             }
             return x_id;
         }
-
 #if DEBUG
         // return true if all nodes are unique; i.e. no satelite trees.
         public bool CheckUnique(int curNodeId)

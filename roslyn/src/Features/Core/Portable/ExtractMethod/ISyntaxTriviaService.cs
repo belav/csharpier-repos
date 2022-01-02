@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         TriviaLocation location,
         SyntaxAnnotation annotation
     );
+
     internal delegate IEnumerable<SyntaxTrivia> TriviaResolver(
         TriviaLocation location,
         PreviousNextTokenPair tokenPair,

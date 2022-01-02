@@ -29,6 +29,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             protected abstract ImmutableArray<ITypeParameterSymbol> GetCapturedTypeParameters(
                 CancellationToken cancellationToken
             );
+
             protected abstract ImmutableArray<ITypeParameterSymbol> GenerateTypeParameters(
                 CancellationToken cancellationToken
             );

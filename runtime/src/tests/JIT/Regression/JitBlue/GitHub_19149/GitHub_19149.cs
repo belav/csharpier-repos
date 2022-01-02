@@ -62,6 +62,7 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             return Encoding.ASCII.GetString(bPtr + 1, bPtr[0]);
         }
     }
+
     public int Length
     {
         get
@@ -106,6 +107,7 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             }
         }
     }
+
     public override bool Equals(object obj) => obj is CommandBytes cb && Equals(cb);
 
     public string ToInnerString()
@@ -123,6 +125,7 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             return sb.ToString();
         }
     }
+
     public bool Equals(CommandBytes value)
     {
         fixed (long* lPtr = _chunks)
@@ -137,6 +140,7 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             return true;
         }
     }
+
     private static void Clear(long* ptr)
     {
         for (int i = 0; i < ChunkLength; i++)

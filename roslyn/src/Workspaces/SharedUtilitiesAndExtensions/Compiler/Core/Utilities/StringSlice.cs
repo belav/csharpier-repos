@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.Utilities
         }
 
         public abstract int Compare(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y);
+
         public abstract bool Equals(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y);
+
         public abstract int GetHashCode(ReadOnlyMemory<char> obj);
     }
 }

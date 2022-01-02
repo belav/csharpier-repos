@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 internal static class KeyExtensions

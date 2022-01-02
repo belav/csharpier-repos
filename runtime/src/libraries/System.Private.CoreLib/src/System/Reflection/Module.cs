@@ -16,8 +16,10 @@ namespace System.Reflection
 
         internal const string UnknownStringMessageInRAF =
             "Returns <Unknown> for modules with no file path";
+
         [RequiresAssemblyFiles(UnknownStringMessageInRAF)]
         public virtual string FullyQualifiedName => throw NotImplemented.ByDesign;
+
         [RequiresAssemblyFiles(UnknownStringMessageInRAF)]
         public virtual string Name => throw NotImplemented.ByDesign;
 
@@ -25,7 +27,9 @@ namespace System.Reflection
         public virtual Guid ModuleVersionId => throw NotImplemented.ByDesign;
         public virtual string ScopeName => throw NotImplemented.ByDesign;
         public ModuleHandle ModuleHandle => GetModuleHandleImpl();
+
         protected virtual ModuleHandle GetModuleHandleImpl() => ModuleHandle.EmptyHandle; // Not an api but declared protected because of Reflection.Core/Corelib divide (when built by CoreRt)
+
         public virtual void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
@@ -33,6 +37,7 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual bool IsResource()
         {
             throw NotImplemented.ByDesign;
@@ -42,16 +47,20 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual IEnumerable<CustomAttributeData> CustomAttributes =>
             GetCustomAttributesData();
+
         public virtual IList<CustomAttributeData> GetCustomAttributesData()
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual object[] GetCustomAttributes(bool inherit)
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             throw NotImplemented.ByDesign;
@@ -76,6 +85,7 @@ namespace System.Reflection
         [RequiresUnreferencedCode("Methods might be removed")]
         public MethodInfo? GetMethod(string name, Type[] types) =>
             GetMethod(name, Module.DefaultLookup, null, CallingConventions.Any, types, null);
+
         [RequiresUnreferencedCode("Methods might be removed")]
         public MethodInfo? GetMethod(
             string name,
@@ -113,6 +123,7 @@ namespace System.Reflection
 
         [RequiresUnreferencedCode("Methods might be removed")]
         public MethodInfo[] GetMethods() => GetMethods(Module.DefaultLookup);
+
         [RequiresUnreferencedCode("Methods might be removed")]
         public virtual MethodInfo[] GetMethods(BindingFlags bindingFlags)
         {
@@ -121,6 +132,7 @@ namespace System.Reflection
 
         [RequiresUnreferencedCode("Fields might be removed")]
         public FieldInfo? GetField(string name) => GetField(name, Module.DefaultLookup);
+
         [RequiresUnreferencedCode("Fields might be removed")]
         public virtual FieldInfo? GetField(string name, BindingFlags bindingAttr)
         {
@@ -129,6 +141,7 @@ namespace System.Reflection
 
         [RequiresUnreferencedCode("Fields might be removed")]
         public FieldInfo[] GetFields() => GetFields(Module.DefaultLookup);
+
         [RequiresUnreferencedCode("Fields might be removed")]
         public virtual FieldInfo[] GetFields(BindingFlags bindingFlags)
         {
@@ -144,9 +157,11 @@ namespace System.Reflection
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type? GetType(string className) =>
             GetType(className, throwOnError: false, ignoreCase: false);
+
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type? GetType(string className, bool ignoreCase) =>
             GetType(className, throwOnError: false, ignoreCase: ignoreCase);
+
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type? GetType(string className, bool throwOnError, bool ignoreCase)
         {
@@ -183,6 +198,7 @@ namespace System.Reflection
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public FieldInfo? ResolveField(int metadataToken) =>
             ResolveField(metadataToken, null, null);
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public virtual FieldInfo? ResolveField(
             int metadataToken,
@@ -196,6 +212,7 @@ namespace System.Reflection
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public MemberInfo? ResolveMember(int metadataToken) =>
             ResolveMember(metadataToken, null, null);
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public virtual MemberInfo? ResolveMember(
             int metadataToken,
@@ -209,6 +226,7 @@ namespace System.Reflection
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public MethodBase? ResolveMethod(int metadataToken) =>
             ResolveMethod(metadataToken, null, null);
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public virtual MethodBase? ResolveMethod(
             int metadataToken,
@@ -224,6 +242,7 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public virtual string ResolveString(int metadataToken)
         {
@@ -232,6 +251,7 @@ namespace System.Reflection
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public Type ResolveType(int metadataToken) => ResolveType(metadataToken, null, null);
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public virtual Type ResolveType(
             int metadataToken,
@@ -248,6 +268,7 @@ namespace System.Reflection
         }
 
         public override bool Equals(object? o) => base.Equals(o);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

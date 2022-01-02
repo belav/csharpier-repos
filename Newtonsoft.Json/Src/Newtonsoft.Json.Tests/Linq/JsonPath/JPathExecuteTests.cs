@@ -72,7 +72,6 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
             var dd = jObj.SelectToken("$..[?(@.usingmem>21438)]"); //null,21,438
             Assert.AreEqual(jObj, dd);
         }
-
 #if HAVE_REGEX_TIMEOUTS
         [Test]
         public void BacktrackingRegex_SingleMatch_TimeoutRespected()

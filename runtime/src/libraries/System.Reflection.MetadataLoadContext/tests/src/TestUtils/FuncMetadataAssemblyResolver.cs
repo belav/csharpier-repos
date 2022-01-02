@@ -12,6 +12,7 @@ namespace System.Reflection.Tests
             System.Reflection.AssemblyName,
             System.Reflection.Assembly
         > func;
+
         public FuncMetadataAssemblyResolver(
             System.Func<
                 System.Reflection.MetadataLoadContext,

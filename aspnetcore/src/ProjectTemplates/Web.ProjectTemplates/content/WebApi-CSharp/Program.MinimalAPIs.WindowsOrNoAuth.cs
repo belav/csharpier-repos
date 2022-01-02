@@ -1,9 +1,7 @@
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
-
 #endif
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 #if (EnableOpenAPI)
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,7 +23,6 @@ builder.Services.AddAuthorization(
 #endif
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 #if (EnableOpenAPI)
 if (app.Environment.IsDevelopment())

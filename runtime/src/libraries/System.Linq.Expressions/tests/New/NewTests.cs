@@ -266,7 +266,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckNewNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -295,7 +294,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(new Ts?(), f());
         }
-
         #endregion
 
         [Theory]
@@ -918,6 +916,7 @@ namespace System.Linq.Expressions.Tests
         class ClassWithCtors
         {
             public ClassWithCtors() { }
+
             public ClassWithCtors(string obj) { }
 
             public string StringProperty { get; set; }
@@ -930,9 +929,11 @@ namespace System.Linq.Expressions.Tests
 #pragma warning disable 0649
             public int _field;
             public static int s_field;
+
 #pragma warning restore 0649
 
             public static string StaticProperty { get; set; }
+
             public static void StaticMethod() { }
 
             public void InstanceMethod() { }

@@ -3408,7 +3408,6 @@ class Program
                 return MessageProvider.Instance.GetErrorDisplayString(symbol);
             }
         }
-
         #endregion
 
         #region CoreCLR Signing Tests
@@ -3436,7 +3435,6 @@ class Program
                     .WithLocation(1, 1)
             );
         }
-
         // There are three places where we catch a ClrStrongNameMissingException,
         // but the third cannot happen - only if a key is successfully retrieved
         // from a keycontainer, and then we fail to get IClrStrongName afterwards

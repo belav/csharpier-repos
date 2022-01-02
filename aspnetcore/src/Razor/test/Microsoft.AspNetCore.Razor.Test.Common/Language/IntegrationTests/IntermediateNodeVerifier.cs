@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public static class IntermediateNodeVerifier

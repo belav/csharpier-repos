@@ -7,6 +7,7 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Validators;
 
+
 namespace BenchmarkDotNet.Attributes;
 
 internal class DefaultCoreDebugConfig : ManualConfig

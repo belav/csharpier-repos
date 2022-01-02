@@ -170,12 +170,17 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         }
 
         protected abstract SyntaxToken GetIdentifier(TXmlNameAttributeSyntax xmlName);
+
         protected abstract TCrefSyntax GetCref(TXmlCrefAttributeSyntax xmlCref);
+
         protected abstract SyntaxList<TXmlAttributeSyntax> GetAttributes(
             TXmlEmptyElementSyntax xmlEmpty
         );
+
         protected abstract SyntaxTokenList GetTextTokens(TXmlTextSyntax xmlText);
+
         protected abstract SyntaxTokenList GetTextTokens(TXmlTextAttributeSyntax xmlTextAttribute);
+
         protected abstract SyntaxNode GetName(TXmlElementSyntax xmlElement);
 
         private static void AppendTextTokens(StringBuilder sb, SyntaxTokenList textTokens)

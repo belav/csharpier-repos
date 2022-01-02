@@ -5,6 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class ServerLogScope : IDisposable

@@ -61,6 +61,7 @@ namespace Roslyn.Test.Utilities.TestGenerators
                 context.AddSource("source", SourceText.From(_source, Encoding.UTF8));
             }
         }
+
         public void Initialize(GeneratorInitializationContext context) => _onInit(context);
     }
 

@@ -82,7 +82,6 @@ namespace Newtonsoft.Json.Tests.Converters
             Two = 2,
             Four = 4
         }
-
 #if !NET20
         public enum NamedEnum
         {
@@ -348,7 +347,6 @@ Parameter name: namingStrategyType",
             );
             Assert.AreEqual(9, (int)e);
         }
-
 #if !NET20
         [Test]
         public void NamedEnumDuplicateTest()
@@ -849,7 +847,6 @@ Parameter name: namingStrategyType",
 
             Assert.Fail();
         }
-
 #if !NET20
         [Test]
         public void EnumMemberPlusFlags()

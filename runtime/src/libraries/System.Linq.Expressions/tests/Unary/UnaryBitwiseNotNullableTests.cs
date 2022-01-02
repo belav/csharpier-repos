@@ -98,7 +98,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyBitwiseNotNullableUShort(values[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

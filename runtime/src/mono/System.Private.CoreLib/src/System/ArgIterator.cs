@@ -14,6 +14,7 @@ namespace System
         private IntPtr args;
         private int next_arg;
         private int num_args;
+
 #pragma warning restore 169, 414
 
         [MethodImpl(MethodImplOptions.InternalCall)]

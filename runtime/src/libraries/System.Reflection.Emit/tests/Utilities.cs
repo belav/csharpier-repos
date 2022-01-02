@@ -7,17 +7,23 @@ using Xunit;
 namespace System.Reflection.Emit.Tests
 {
     public class EmptyNonGenericClass { }
+
     public class EmptyGenericClass<T> { }
+
     public sealed class SealedClass { }
+
     public static class StaticClass { }
 
     public struct EmptyNonGenericStruct { }
+
     public struct EmptyGenericStruct<T> { }
 
     public enum EmptyEnum { }
+
     public delegate EventHandler BasicDelegate();
 
     public interface EmptyNonGenericInterface1 { }
+
     public interface EmptyNonGenericInterface2 { }
 
     public interface EmptyGenericInterface<T> { }
@@ -28,6 +34,7 @@ namespace System.Reflection.Emit.Tests
     public class IntAllAttribute : Attribute
     {
         public int _i;
+
         public IntAllAttribute(int i)
         {
             _i = i;

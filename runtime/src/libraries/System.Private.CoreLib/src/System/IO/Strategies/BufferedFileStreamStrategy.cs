@@ -20,6 +20,7 @@ namespace System.IO.Strategies
         private int _writePos;
         private int _readPos;
         private int _readLen;
+
         // The last successful Task returned from ReadAsync (perf optimization for successive reads of the same size)
         private Task<int>? _lastSyncCompletedReadTask;
 

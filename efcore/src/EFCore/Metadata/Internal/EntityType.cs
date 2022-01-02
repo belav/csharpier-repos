@@ -1035,7 +1035,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual IEnumerable<Key> GetKeys() =>
             _baseType?.GetKeys().Concat(_keys.Values) ?? _keys.Values;
-
         #endregion
 
         #region Foreign Keys
@@ -1576,7 +1575,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             DeclaredReferencingForeignKeys ?? Enumerable.Empty<ForeignKey>();
 
         private SortedSet<ForeignKey>? DeclaredReferencingForeignKeys { get; set; }
-
         #endregion
 
         #region Navigations
@@ -2181,7 +2179,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredReferencingSkipNavigations());
 
         private SortedSet<SkipNavigation>? DeclaredReferencingSkipNavigations { get; set; }
-
         #endregion
 
         #region Indexes
@@ -2553,7 +2550,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? _baseType.GetIndexes()
                     : _baseType.GetIndexes().Concat(GetDeclaredIndexes())
                 : GetDeclaredIndexes();
-
         #endregion
 
         #region Properties
@@ -3135,7 +3131,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         .ToArray();
                 }
             );
-
         #endregion
 
         #region Service properties
@@ -3337,7 +3332,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<ServiceProperty>()
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredServiceProperties());
-
         #endregion
 
         #region Ignore
@@ -3365,7 +3359,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public override string? OnTypeMemberIgnored(string name) =>
             Model.ConventionDispatcher.OnEntityTypeMemberIgnored(Builder, name);
-
         #endregion
 
         #region Data
@@ -3527,7 +3520,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _data.Add(entity);
             }
         }
-
         #endregion
 
         #region Other
@@ -3999,7 +3991,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _serviceOnlyConstructorBindingConfigurationSource = configurationSource.Max(
                 _serviceOnlyConstructorBindingConfigurationSource
             );
-
         #endregion
 
         #region Explicit interface implementations
@@ -5814,7 +5805,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         [DebuggerStepThrough]
         IConventionServiceProperty? IConventionEntityType.RemoveServiceProperty(string name) =>
             RemoveServiceProperty(name);
-
         #endregion
 
         private static IEnumerable<T> ToEnumerable<T>(T? element) where T : class =>

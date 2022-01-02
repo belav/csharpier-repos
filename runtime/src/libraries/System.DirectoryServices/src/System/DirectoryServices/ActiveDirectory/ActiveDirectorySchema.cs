@@ -510,7 +510,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 new DirectoryContext(DirectoryContextType.Forest)
             );
         }
-
         #endregion public methods
 
         #region public properties
@@ -527,7 +526,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 return _cachedSchemaRoleOwner;
             }
         }
-
         #endregion public properties
 
         #region private methods

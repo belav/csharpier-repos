@@ -310,7 +310,6 @@ namespace System.Net.Security
             count = Interlocked.Decrement(ref _sessionsOpen);
             Debug.Assert(count >= 0);
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -345,7 +344,6 @@ namespace System.Net.Security
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -367,7 +365,6 @@ namespace System.Net.Security
                 WriteEventCore(eventId, eventDataCount: 1, &data);
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

@@ -7,6 +7,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Adapters;
 
 /// <summary>

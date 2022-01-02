@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Tests;
 
 public class RouteOptionsTests
@@ -79,6 +80,7 @@ public class RouteOptionsTests
         }
 
         public string Pattern { get; private set; }
+
         public bool Match(
             HttpContext httpContext,
             IRouter route,

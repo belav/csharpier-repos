@@ -2856,6 +2856,7 @@ namespace System.Data.Tests
             table.RejectChanges();
             Assert.Equal(DataRowState.Unchanged, row.RowState);
         }
+
         [Fact]
         public void DataRowExpressionDefaultValueTest()
         {

@@ -6,6 +6,7 @@ using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Connections;
 
+
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
 /// <summary>

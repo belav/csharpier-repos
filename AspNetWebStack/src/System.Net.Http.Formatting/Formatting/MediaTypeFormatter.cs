@@ -137,7 +137,6 @@ namespace System.Net.Http.Formatting
         {
             get { return _supportedEncodings; }
         }
-
 #if !NETFX_CORE // No MediaTypeMappings in portable library
         /// <summary>
         /// Gets the mutable collection of <see cref="MediaTypeMapping"/> elements used

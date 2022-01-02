@@ -11,23 +11,29 @@ namespace System.CodeDom.Tests
         where TItem : class, new()
     {
         protected abstract TCollection Ctor();
+
         protected abstract TCollection CtorArray(TItem[] array);
+
         protected abstract TCollection CtorCollection(TCollection collection);
 
         protected abstract int Count(TCollection collection);
 
         protected abstract TItem GetItem(TCollection collection, int index);
+
         protected abstract void SetItem(TCollection collection, int index, TItem value);
 
         protected abstract void AddRange(TCollection collection, TItem[] array);
+
         protected abstract void AddRange(TCollection collection, TCollection value);
 
         protected abstract object Add(TCollection collection, TItem seed);
 
         protected abstract void Insert(TCollection collection, int index, TItem value);
+
         protected abstract void Remove(TCollection collection, TItem value);
 
         protected abstract int IndexOf(TCollection collection, TItem value);
+
         protected abstract bool Contains(TCollection collection, TItem value);
 
         protected abstract void CopyTo(TCollection collection, TItem[] array, int index);

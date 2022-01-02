@@ -667,12 +667,17 @@ namespace System.Reflection.Tests
         public MethodPublicClass() { }
 
         public void PublicMethod() { }
+
         public void overRiddenMethod() { }
+
         public void overRiddenMethod(int i) { }
+
         public void overRiddenMethod(string s) { }
+
         public void overRiddenMethod(object o) { }
 
         public static void PublicStaticMethod() { }
+
         public class PublicNestedType { }
 
         public int PublicProperty
@@ -685,10 +690,15 @@ namespace System.Reflection.Tests
     }
 
     public interface MethodITest { }
+
     public class TypeInfoMethodBase { }
+
     public class TypeInfoMethodDerived : TypeInfoMethodBase { }
+
     public class TypeInfoMethodImplClass : MethodITest { }
+
     public class TypeInfoMethodGenericClass<T> { }
+
     public class TypeInfoMethodClassWithConstraints<T, U>
         where T : TypeInfoMethodBase, MethodITest
         where U : class, new() { }

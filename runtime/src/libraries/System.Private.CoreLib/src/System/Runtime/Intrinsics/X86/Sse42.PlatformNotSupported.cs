@@ -62,6 +62,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// unsigned int _mm_crc32_u16 (unsigned int crc, unsigned short v)
         ///   CRC32 reg, reg/m16
@@ -70,6 +71,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// unsigned int _mm_crc32_u32 (unsigned int crc, unsigned int v)
         ///   CRC32 reg, reg/m32

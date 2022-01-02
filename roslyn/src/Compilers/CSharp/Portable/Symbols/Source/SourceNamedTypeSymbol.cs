@@ -162,7 +162,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ref lazyDocComment
             );
         }
-
         #endregion
 
         #region Type Parameters
@@ -1037,7 +1036,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazyTypeParameters;
             }
         }
-
         #endregion
 
         #region Attributes
@@ -1371,6 +1369,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return base.EarlyDecodeWellKnownAttribute(ref arguments);
         }
+
 #nullable disable
 
         internal override AttributeUsageInfo GetAttributeUsageInfo()
@@ -1816,6 +1815,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #nullable enable
         internal sealed override bool IsInterpolatedStringHandlerType =>
             GetEarlyDecodedWellKnownAttributeData()?.HasInterpolatedStringHandlerAttribute == true;
+
 #nullable disable
 
         internal sealed override bool ShouldAddWinRTMembers
@@ -2189,7 +2189,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
         }
-
         #endregion
 
         internal override NamedTypeSymbol AsNativeInteger()

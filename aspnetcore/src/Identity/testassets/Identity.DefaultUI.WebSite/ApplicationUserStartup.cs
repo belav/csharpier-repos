@@ -4,6 +4,7 @@
 using Identity.DefaultUI.WebSite.Data;
 using Microsoft.Extensions.Configuration;
 
+
 namespace Identity.DefaultUI.WebSite;
 
 public class ApplicationUserStartup : StartupBase<ApplicationUser, ApplicationDbContext>

@@ -47,16 +47,19 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         public abstract Task<SelectionResult> GetValidSelectionAsync(
             CancellationToken cancellationToken
         );
+
         public abstract IEnumerable<SyntaxNode> GetOuterReturnStatements(
             SyntaxNode commonRoot,
             IEnumerable<SyntaxNode> jumpsOutOfRegion
         );
+
         public abstract bool IsFinalSpanSemanticallyValidSpan(
             SyntaxNode node,
             TextSpan textSpan,
             IEnumerable<SyntaxNode> returnStatements,
             CancellationToken cancellationToken
         );
+
         public abstract bool ContainsNonReturnExitPointsStatements(
             IEnumerable<SyntaxNode> jumpsOutOfRegion
         );

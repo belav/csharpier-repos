@@ -11,7 +11,9 @@ namespace System.Text
         private static volatile EncodingProvider[]? s_providers;
 
         public EncodingProvider() { }
+
         public abstract Encoding? GetEncoding(string name);
+
         public abstract Encoding? GetEncoding(int codepage);
 
         // GetEncoding should return either valid encoding or null. shouldn't throw any exception except on null name

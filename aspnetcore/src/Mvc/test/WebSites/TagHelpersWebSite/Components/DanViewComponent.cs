@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace TagHelpersWebSite;
 
 public class DanViewComponent : ViewComponent

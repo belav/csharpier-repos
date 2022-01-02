@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
+
 #nullable enable
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 

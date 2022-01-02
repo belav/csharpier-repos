@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
 /// <summary>
@@ -16,6 +17,7 @@ internal class SaveTempDataFilter : IResourceFilter, IResultFilter
 {
     private static readonly Func<object, Task> OnStartingCallback = (state) =>
         OnStarting((HttpContext)state);
+
     // Internal for unit testing
     internal static readonly object SaveTempDataFilterContextKey = new object();
 

@@ -4,6 +4,7 @@
 using Microsoft.Extensions.ApiDescription.Tool.Commands;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
 internal class Program : ProgramBase

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 using Microsoft.CodeAnalysis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProviderTest

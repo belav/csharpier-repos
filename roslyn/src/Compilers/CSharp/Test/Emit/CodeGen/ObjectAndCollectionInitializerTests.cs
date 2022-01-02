@@ -2353,7 +2353,6 @@ class C
 }"
                 );
         }
-
         #endregion
 
         #region "Collection Initializer Tests"

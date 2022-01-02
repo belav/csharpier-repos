@@ -13,6 +13,7 @@ namespace System.Drawing.Imaging
         [MarshalAs(UnmanagedType.Struct)]
 #pragma warning restore CS0618
         public Guid Clsid;
+
 #pragma warning disable CS0618 // Legacy code: We don't care about using obsolete API's.
         [MarshalAs(UnmanagedType.Struct)]
 #pragma warning restore CS0618

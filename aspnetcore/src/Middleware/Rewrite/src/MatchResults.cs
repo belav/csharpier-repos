@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
+
 namespace Microsoft.AspNetCore.Rewrite;
 
 internal class MatchResults

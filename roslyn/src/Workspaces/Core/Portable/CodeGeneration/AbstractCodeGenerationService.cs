@@ -162,24 +162,28 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CodeGenerationOptions? options,
             IList<bool>? availableIndices
         ) where TDeclarationNode : SyntaxNode;
+
         protected abstract TDeclarationNode AddField<TDeclarationNode>(
             TDeclarationNode destination,
             IFieldSymbol field,
             CodeGenerationOptions? options,
             IList<bool>? availableIndices
         ) where TDeclarationNode : SyntaxNode;
+
         protected abstract TDeclarationNode AddMethod<TDeclarationNode>(
             TDeclarationNode destination,
             IMethodSymbol method,
             CodeGenerationOptions? options,
             IList<bool>? availableIndices
         ) where TDeclarationNode : SyntaxNode;
+
         protected abstract TDeclarationNode AddProperty<TDeclarationNode>(
             TDeclarationNode destination,
             IPropertySymbol property,
             CodeGenerationOptions? options,
             IList<bool>? availableIndices
         ) where TDeclarationNode : SyntaxNode;
+
         protected abstract TDeclarationNode AddNamedType<TDeclarationNode>(
             TDeclarationNode destination,
             INamedTypeSymbol namedType,
@@ -187,6 +191,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IList<bool>? availableIndices,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         protected abstract TDeclarationNode AddNamespace<TDeclarationNode>(
             TDeclarationNode destination,
             INamespaceSymbol @namespace,
@@ -194,6 +199,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IList<bool>? availableIndices,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         protected abstract TDeclarationNode AddMembers<TDeclarationNode>(
             TDeclarationNode destination,
             IEnumerable<SyntaxNode> members
@@ -205,6 +211,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         public abstract TDeclarationNode AddAttributes<TDeclarationNode>(
             TDeclarationNode destination,
             IEnumerable<AttributeData> attributes,
@@ -212,18 +219,21 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         public abstract TDeclarationNode RemoveAttribute<TDeclarationNode>(
             TDeclarationNode destination,
             SyntaxNode attributeToRemove,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         public abstract TDeclarationNode RemoveAttribute<TDeclarationNode>(
             TDeclarationNode destination,
             AttributeData attributeToRemove,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         public abstract TDeclarationNode AddStatements<TDeclarationNode>(
             TDeclarationNode destinationMember,
             IEnumerable<SyntaxNode> statements,
@@ -237,18 +247,21 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         public abstract TDeclarationNode UpdateDeclarationAccessibility<TDeclarationNode>(
             TDeclarationNode declaration,
             Accessibility newAccessibility,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         public abstract TDeclarationNode UpdateDeclarationType<TDeclarationNode>(
             TDeclarationNode declaration,
             ITypeSymbol newType,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         ) where TDeclarationNode : SyntaxNode;
+
         public abstract TDeclarationNode UpdateDeclarationMembers<TDeclarationNode>(
             TDeclarationNode declaration,
             IList<ISymbol> newMembers,
@@ -257,32 +270,38 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         ) where TDeclarationNode : SyntaxNode;
 
         public abstract CodeGenerationDestination GetDestination(SyntaxNode node);
+
         public abstract SyntaxNode CreateEventDeclaration(
             IEventSymbol @event,
             CodeGenerationDestination destination,
             CodeGenerationOptions? options
         );
+
         public abstract SyntaxNode CreateFieldDeclaration(
             IFieldSymbol field,
             CodeGenerationDestination destination,
             CodeGenerationOptions? options
         );
+
         public abstract SyntaxNode CreateMethodDeclaration(
             IMethodSymbol method,
             CodeGenerationDestination destination,
             CodeGenerationOptions? options
         );
+
         public abstract SyntaxNode CreatePropertyDeclaration(
             IPropertySymbol property,
             CodeGenerationDestination destination,
             CodeGenerationOptions? options
         );
+
         public abstract SyntaxNode CreateNamedTypeDeclaration(
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
             CodeGenerationOptions? options,
             CancellationToken cancellationToken
         );
+
         public abstract SyntaxNode CreateNamespaceDeclaration(
             INamespaceSymbol @namespace,
             CodeGenerationDestination destination,

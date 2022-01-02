@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Remote
         {
 #pragma warning disable ISB002 // Avoid storing rentals in fields
             private readonly ServiceBrokerClient.Rental<TService> _proxyRental;
+
 #pragma warning restore
 
             public readonly TService Service;

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace CustomAuthorizationFailureResponse.Authentication;
 
 public class SampleAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>

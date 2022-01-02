@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Microsoft.JSInterop.Infrastructure;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal partial class CircuitHost : IAsyncDisposable

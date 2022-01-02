@@ -662,6 +662,7 @@ namespace System.Collections.Concurrent
 
                 private volatile KeyValuePair<long, TSource>[]? _fillBuffer; // intermediate buffer to reduce locking
                 private volatile int _fillBufferSize; // actual number of elements in _FillBuffer. Will start
+
                 // at _FillBuffer.Length, and might be reduced during the last refill
                 private volatile int _fillBufferCurrentPosition; //shared value to be accessed by Interlock.Increment only
                 private volatile int _activeCopiers; //number of active copiers
@@ -1435,6 +1436,7 @@ namespace System.Collections.Concurrent
                 {
                     get { return _sharedReader.Count; }
                 }
+
                 /// <summary>
                 /// return a KeyValuePair of the current element and its key
                 /// </summary>
@@ -1733,15 +1735,18 @@ namespace System.Collections.Concurrent
             : StaticIndexRangePartitioner<TSource, IList<TSource>>
         {
             private readonly IList<TSource> _list;
+
             internal StaticIndexRangePartitionerForIList(IList<TSource> list) : base()
             {
                 Debug.Assert(list != null);
                 _list = list;
             }
+
             protected override int SourceCount
             {
                 get { return _list.Count; }
             }
+
             protected override IEnumerator<KeyValuePair<long, TSource>> CreatePartition(
                 int startIndex,
                 int endIndex
@@ -1800,15 +1805,18 @@ namespace System.Collections.Concurrent
             : StaticIndexRangePartitioner<TSource, TSource[]>
         {
             private readonly TSource[] _array;
+
             internal StaticIndexRangePartitionerForArray(TSource[] array) : base()
             {
                 Debug.Assert(array != null);
                 _array = array;
             }
+
             protected override int SourceCount
             {
                 get { return _array.Length; }
             }
+
             protected override IEnumerator<KeyValuePair<long, TSource>> CreatePartition(
                 int startIndex,
                 int endIndex
@@ -1891,6 +1899,7 @@ namespace System.Collections.Concurrent
         private sealed class SharedLong
         {
             internal long Value;
+
             internal SharedLong(long value)
             {
                 Value = value;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FormatterWebSite.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 namespace FormatterWebSite.Controllers;
 
 public class PolymorphicBinder : IModelBinder

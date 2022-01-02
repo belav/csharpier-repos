@@ -54,16 +54,21 @@ namespace System.Security.Cryptography
         }
 
         public abstract RSAParameters ExportParameters(bool includePrivateParameters);
+
         public abstract void ImportParameters(RSAParameters parameters);
+
         public virtual byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) =>
             throw DerivedClassMustOverride();
+
         public virtual byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) =>
             throw DerivedClassMustOverride();
+
         public virtual byte[] SignHash(
             byte[] hash,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
         ) => throw DerivedClassMustOverride();
+
         public virtual bool VerifyHash(
             byte[] hash,
             byte[] signature,
@@ -77,6 +82,7 @@ namespace System.Security.Cryptography
             int count,
             HashAlgorithmName hashAlgorithm
         ) => throw DerivedClassMustOverride();
+
         protected virtual byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
             throw DerivedClassMustOverride();
 

@@ -100,7 +100,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 _sharedState.Apply();
                 await base.RunImplAsync(cancellationToken);
             }
-
 #if !CODE_STYLE
             protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
                 new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);

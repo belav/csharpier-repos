@@ -7,6 +7,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
 /// <summary>

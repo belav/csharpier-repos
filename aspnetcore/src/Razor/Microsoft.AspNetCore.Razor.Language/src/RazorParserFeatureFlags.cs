@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal abstract class RazorParserFeatureFlags

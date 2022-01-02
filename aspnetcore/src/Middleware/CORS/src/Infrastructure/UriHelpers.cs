@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 internal static class UriHelpers

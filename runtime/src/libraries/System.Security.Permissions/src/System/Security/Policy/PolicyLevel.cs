@@ -8,6 +8,7 @@ namespace System.Security.Policy
     public sealed partial class PolicyLevel
     {
         internal PolicyLevel() { }
+
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
@@ -32,14 +33,17 @@ namespace System.Security.Policy
         {
             get { return default(PolicyLevelType); }
         }
+
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
         public void AddFullTrustAssembly(StrongName sn) { }
+
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
         public void AddFullTrustAssembly(StrongNameMembershipCondition snMC) { }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -48,6 +52,7 @@ namespace System.Security.Policy
         )]
 #endif
         public void AddNamedPermissionSet(NamedPermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -59,12 +64,15 @@ namespace System.Security.Policy
         {
             return default(NamedPermissionSet);
         }
+
         [Obsolete("Code Access Security is not supported or honored by the runtime.")]
         public static PolicyLevel CreateAppDomainLevel()
         {
             return default(PolicyLevel);
         }
+
         public void FromXml(SecurityElement e) { }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -76,15 +84,19 @@ namespace System.Security.Policy
         {
             return default(NamedPermissionSet);
         }
+
         public void Recover() { }
+
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
         public void RemoveFullTrustAssembly(StrongName sn) { }
+
         [Obsolete(
             "Because all GAC assemblies always get full trust, the full trust list is no longer meaningful. You should install any assemblies that are used in security policy in the GAC to ensure they are trusted."
         )]
         public void RemoveFullTrustAssembly(StrongNameMembershipCondition snMC) { }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -96,6 +108,7 @@ namespace System.Security.Policy
         {
             return default(NamedPermissionSet);
         }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -107,15 +120,19 @@ namespace System.Security.Policy
         {
             return default(NamedPermissionSet);
         }
+
         public void Reset() { }
+
         public PolicyStatement Resolve(Evidence evidence)
         {
             return default(PolicyStatement);
         }
+
         public CodeGroup ResolveMatchingCodeGroups(Evidence evidence)
         {
             return default(CodeGroup);
         }
+
         public SecurityElement ToXml()
         {
             return default(SecurityElement);

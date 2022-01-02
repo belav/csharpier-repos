@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace StaticFilesAuth.Models;
 
 public class ErrorViewModel

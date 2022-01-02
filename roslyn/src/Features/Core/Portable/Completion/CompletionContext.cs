@@ -53,6 +53,7 @@ namespace Microsoft.CodeAnalysis.Completion
         ///        item is committed.
         /// </summary>
         public TextSpan CompletionListSpan { get; set; }
+
 #pragma warning restore RS0030 // Do not used banned APIs
 
         /// <summary>

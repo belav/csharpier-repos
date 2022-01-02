@@ -70,36 +70,47 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             protected abstract SyntaxNode GetOutermostCallSiteContainerToProcess(
                 CancellationToken cancellationToken
             );
+
             protected abstract Task<SyntaxNode> GenerateBodyForCallSiteContainerAsync(
                 CancellationToken cancellationToken
             );
+
             protected abstract SyntaxNode GetPreviousMember(SemanticDocument document);
+
             protected abstract OperationStatus<IMethodSymbol> GenerateMethodDefinition(
                 bool localFunction,
                 CancellationToken cancellationToken
             );
+
             protected abstract bool ShouldLocalFunctionCaptureParameter(SyntaxNode node);
 
             protected abstract SyntaxToken CreateIdentifier(string name);
+
             protected abstract SyntaxToken CreateMethodName();
+
             protected abstract bool LastStatementOrHasReturnStatementInReturnableConstruct();
 
             protected abstract TNodeUnderContainer GetFirstStatementOrInitializerSelectedAtCallSite();
+
             protected abstract TNodeUnderContainer GetLastStatementOrInitializerSelectedAtCallSite();
+
             protected abstract Task<TNodeUnderContainer> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
                 CancellationToken cancellationToken
             );
 
             protected abstract TExpression CreateCallSignature();
+
             protected abstract TStatement CreateDeclarationStatement(
                 VariableInfo variable,
                 TExpression initialValue,
                 CancellationToken cancellationToken
             );
+
             protected abstract TStatement CreateAssignmentExpressionStatement(
                 SyntaxToken identifier,
                 TExpression rvalue
             );
+
             protected abstract TStatement CreateReturnStatement(string identifierName = null);
 
             protected abstract ImmutableArray<TStatement> GetInitialStatementsForMethodDefinitions();

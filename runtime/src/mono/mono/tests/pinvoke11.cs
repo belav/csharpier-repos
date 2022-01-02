@@ -12,6 +12,7 @@ public struct su
 {
     [FieldOffset(0)]
     public int i1;
+
     [FieldOffset(0)]
     public int i2;
 }

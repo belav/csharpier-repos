@@ -1289,7 +1289,6 @@ public class ClassA
                 "<>f__AnonymousType1"
             );
         }
-
         #endregion
 
         [Fact()]

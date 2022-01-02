@@ -30,18 +30,25 @@ namespace System.IO.Compression
             yield return new object[] { Path.Combine("UncompressedTestFiles", "sum") };
             yield return new object[] { Path.Combine("UncompressedTestFiles", "xargs.1") };
         }
+
         protected virtual string UncompressedTestFile() =>
             Path.Combine("UncompressedTestFiles", "TestDocument.pdf");
+
         protected abstract string CompressedTestFile(string uncompressedPath);
     }
 
     public abstract class CompressionStreamTestBase : CompressionTestBase
     {
         public abstract Stream CreateStream(Stream stream, CompressionMode mode);
+
         public abstract Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen);
+
         public abstract Stream CreateStream(Stream stream, CompressionLevel level);
+
         public abstract Stream CreateStream(Stream stream, CompressionLevel level, bool leaveOpen);
+
         public abstract Stream BaseStream(Stream stream);
+
         public virtual int BufferSize
         {
             get => 8192;

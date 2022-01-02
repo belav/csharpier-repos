@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using Microsoft.Extensions.Primitives;
 
+
 namespace HtmlGenerationWebSite;
 
 public class SignalTokenProviderService<TKey> : ISignalTokenProviderService<TKey>

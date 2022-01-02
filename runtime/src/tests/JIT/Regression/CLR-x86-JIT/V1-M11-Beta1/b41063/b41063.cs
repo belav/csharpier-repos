@@ -14,14 +14,17 @@ namespace Test
         {
             return null;
         }
+
         public bool[] Method2()
         {
             return null;
         }
+
         public static bool[] Static3()
         {
             return null;
         }
+
         public static int[] Static1(bool param1, bool[] param3, int param5)
         {
             return null;

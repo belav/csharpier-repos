@@ -43,6 +43,7 @@ namespace DefaultNamespace
             ,
             "Method_Covered:  Convert.ToByte( String, Int32 )" //System/String, int
         };
+
         public static void printoutCoveredMethods()
         {
             Console.Error.WriteLine("");
@@ -58,6 +59,7 @@ namespace DefaultNamespace
 
             Console.Error.WriteLine("");
         }
+
         public virtual Boolean runTest()
         {
             Console.Error.WriteLine(

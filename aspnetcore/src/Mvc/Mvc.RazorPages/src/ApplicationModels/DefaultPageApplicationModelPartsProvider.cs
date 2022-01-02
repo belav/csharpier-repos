@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 internal class DefaultPageApplicationModelPartsProvider : IPageApplicationModelPartsProvider

@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal class HttpNavigationManager : NavigationManager, IHostEnvironmentNavigationManager

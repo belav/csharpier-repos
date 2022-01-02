@@ -923,7 +923,6 @@ namespace System.Data.Tests
             Assert.Equal(typeof(string), ds.Tables[0].Columns["ChildElement1"].DataType);
             Assert.Equal(typeof(string), ds.Tables[0].Columns["ChildElement2"].DataType);
         }
-
         #endregion
 
         #region Inferring Relationships
@@ -1022,7 +1021,6 @@ namespace System.Data.Tests
             Assert.Equal("Element1", con.RelatedTable.TableName);
             Assert.Equal("ChildElement1", con.Table.TableName);
         }
-
         #endregion
 
         #region Inferring Element Text
@@ -1104,7 +1102,6 @@ namespace System.Data.Tests
             Assert.Equal(typeof(string), ds.Tables["Element1"].Columns["ChildElement1"].DataType);
             Assert.Equal(1, ds.Tables["Element1"].Columns.Count);
         }
-
         #endregion
 
         [Fact]
@@ -1170,6 +1167,7 @@ namespace System.Data.Tests
             // MergeFailed event
             Assert.True(_eventRaised);
         }
+
         private void Merge_Failed(object sender, MergeFailedEventArgs e)
         {
             _eventRaised = true;
@@ -2557,6 +2555,7 @@ namespace System.Data.Tests
             // Tables[2] ParentRelations[0] name
             Assert.Equal("Stock_Price", ds.Tables[2].ParentRelations[0].RelationName);
         }
+
         [ConditionalFact(
             typeof(PlatformDetection),
             nameof(PlatformDetection.IsNotInvariantGlobalization)
@@ -3362,6 +3361,7 @@ namespace System.Data.Tests
                 return ShouldSerializeRelations();
             }
         }
+
         [Fact]
         public void ShouldSerializeTables()
         {
@@ -3378,6 +3378,7 @@ namespace System.Data.Tests
                 return ShouldSerializeTables();
             }
         }
+
         [Fact]
         public void Tables()
         {
@@ -4064,6 +4065,7 @@ namespace System.Data.Tests
                 i++;
             }
         }
+
         [Fact]
         public void LoadTest2()
         {
@@ -4115,6 +4117,7 @@ namespace System.Data.Tests
                 i++;
             }
         }
+
         private void AssertDataTableValues(DataTable dt)
         {
             Assert.Equal("data1", dt.Rows[0]["_ID"]);

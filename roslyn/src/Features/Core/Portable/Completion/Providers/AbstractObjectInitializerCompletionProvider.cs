@@ -23,11 +23,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract HashSet<string> GetInitializedMembers(
             SyntaxTree tree,
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract string EscapeIdentifier(ISymbol symbol);
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)

@@ -4,10 +4,12 @@
 //Testing common sub-expression elimination in random code
 
 using System;
+
 internal unsafe class testout1
 {
     public static int sa = 2;
     public static int sb = 1;
+
     public struct VT_0_1_2_5_2
     {
         public double a4_0_1_2_5_2;

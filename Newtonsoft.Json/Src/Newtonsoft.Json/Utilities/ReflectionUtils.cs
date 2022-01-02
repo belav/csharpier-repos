@@ -1082,7 +1082,6 @@ namespace Newtonsoft.Json.Utilities
 
             return fieldInfos.Cast<FieldInfo>();
         }
-
 #if !PORTABLE
         private static void GetChildPrivateFields(
             IList<MemberInfo> initialFields,

@@ -55,6 +55,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public delegate int MyDel(int i);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -87,6 +88,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public int field = 0;
+
         public static int Method(int i)
         {
             return i;

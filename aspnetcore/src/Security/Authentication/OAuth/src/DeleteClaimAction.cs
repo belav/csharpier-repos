@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 
+
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
 /// <summary>

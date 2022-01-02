@@ -45,7 +45,6 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 using Newtonsoft.Json.Utilities;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Linq
@@ -490,6 +489,7 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 #endif
         }
+
 #nullable disable
 
         [Test]
@@ -1033,6 +1033,7 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), (JValue)(Uri?)null));
             Assert.IsTrue(JToken.DeepEquals(JValue.CreateNull(), (JValue)(Guid?)null));
         }
+
 #nullable disable
 
         [Test]

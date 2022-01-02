@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 [Obsolete(

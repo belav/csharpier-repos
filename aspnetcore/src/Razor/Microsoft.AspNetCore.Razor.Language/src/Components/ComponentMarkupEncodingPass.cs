@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentMarkupEncodingPass

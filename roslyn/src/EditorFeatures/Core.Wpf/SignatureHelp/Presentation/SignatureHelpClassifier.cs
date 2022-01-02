@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
 #pragma warning disable 67
         public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged;
+
 #pragma warning restore 67
 
         public SignatureHelpClassifier(ITextBuffer subjectBuffer, ClassificationTypeMap typeMap)

@@ -61,7 +61,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(@"['We\'re offline!']", v.Path);
         }
-
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         public class DemoClass
         {
@@ -1116,7 +1115,6 @@ keyword such as type of business.""
                 @"Accessed JConstructor values with invalid key value: ""purple"". Argument position index expected."
             );
         }
-
 #if !NET20
         [Test]
         public void ToStringJsonConverter()
@@ -1340,7 +1338,6 @@ keyword such as type of business.""
 
             Assert.AreEqual(new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc), d);
         }
-
 #if !(NET20 || NET35 || PORTABLE40)
         [Test]
         public void CovariantIJEnumerable()
@@ -1513,7 +1510,6 @@ keyword such as type of business.""
             JArray a = JArray.Parse(json);
             Assert.AreEqual("hi!", (string)a[0]);
         }
-
 #if !(NET35 || NET20)
         [Test]
         public void ExceptionFromOverloadWithJValue()

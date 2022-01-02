@@ -101,6 +101,7 @@ namespace System.Data
         {
             return false;
         }
+
         internal override bool HasRemoteAggregate()
         {
             return false;

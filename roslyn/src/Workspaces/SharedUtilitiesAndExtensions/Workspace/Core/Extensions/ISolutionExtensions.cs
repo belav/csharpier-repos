@@ -59,7 +59,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static Document GetRequiredDocument(this Solution solution, DocumentId documentId) =>
             solution.GetDocument(documentId) ?? throw CreateDocumentNotFoundException();
-
 #if !CODE_STYLE
         public static async Task<Document> GetRequiredDocumentAsync(
             this Solution solution,

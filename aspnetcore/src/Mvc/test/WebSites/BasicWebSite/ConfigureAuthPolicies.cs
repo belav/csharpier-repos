@@ -4,6 +4,7 @@
 using System.Security.Claims;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace BasicWebSite;
 
 internal static class ConfigureAuthPoliciesExtensions

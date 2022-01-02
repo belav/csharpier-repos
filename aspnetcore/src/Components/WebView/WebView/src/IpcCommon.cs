@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Text.Json;
 
+
 namespace Microsoft.AspNetCore.Components.WebView;
 
 internal class IpcCommon

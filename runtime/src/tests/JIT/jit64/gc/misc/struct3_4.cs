@@ -44,6 +44,7 @@ struct S
     public Pad pad;
 #pragma warning disable 0414
     public String str2;
+
 #pragma warning restore 0414
 
     public S(String s)

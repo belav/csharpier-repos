@@ -1393,6 +1393,7 @@ public class Test
 "
             );
         }
+
         /// <summary>
         /// From whidbey bug #108643.  Extraneous class casts in Test1.m2 (vs Test1.m1).
         /// </summary>

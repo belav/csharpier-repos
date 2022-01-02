@@ -372,7 +372,6 @@ namespace System.Data.Tests
             Assert.Equal(3, dataView[2][0]);
             Assert.Equal(2, dataView[3][0]);
         }
-
         #endregion // Sort Tests
 
         [Fact]
@@ -434,10 +433,12 @@ namespace System.Data.Tests
         }
 
         private bool _dvInitialized;
+
         private void OnDataViewInitialized(object src, EventArgs args)
         {
             _dvInitialized = true;
         }
+
         [Fact]
         public void BeginInit2()
         {

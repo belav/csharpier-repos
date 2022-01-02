@@ -33,6 +33,7 @@ namespace Internal.Runtime
 
         // Array of sections follows.
     };
+
 #pragma warning restore 0169
 
     //

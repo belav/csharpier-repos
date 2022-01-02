@@ -323,6 +323,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 string A { get; set; }
             }
+
             public interface IBar : IDictionaryAdapter
             {
                 string B { get; set; }

@@ -23,6 +23,7 @@ using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     internal delegate void CompletionRoutine();
+
     internal delegate void CompletionRoutine<TResult>(TResult result);
 
     /// <summary>

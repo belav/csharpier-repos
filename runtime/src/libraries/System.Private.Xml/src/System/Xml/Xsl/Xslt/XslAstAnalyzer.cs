@@ -22,6 +22,7 @@ namespace System.Xml.Xsl.Xslt
     {
         private CompilerScopeManager<VarPar>? _scope;
         private Compiler? _compiler;
+
 #if DEBUG
         // List of all variables and parameters
         private readonly List<VarPar> _allVarPars = new List<VarPar>();
@@ -885,6 +886,7 @@ namespace System.Xml.Xsl.Xslt
         internal readonly struct NullErrorHelper : IErrorHelper
         {
             public void ReportError(string res, params string?[]? args) { }
+
             public void ReportWarning(string res, params string?[]? args) { }
         }
 

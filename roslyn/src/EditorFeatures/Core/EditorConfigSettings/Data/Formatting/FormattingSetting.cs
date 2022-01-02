@@ -29,8 +29,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         public abstract string Category { get; }
         public abstract Type Type { get; }
         public abstract OptionKey2 Key { get; }
+
         public abstract void SetValue(object value);
+
         public abstract object? GetValue();
+
         public abstract bool IsDefinedInEditorConfig { get; }
 
         public static PerLanguageFormattingSetting<TOption> Create<TOption>(

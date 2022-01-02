@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 
+
 namespace ServerComparison.TestSites;
 
 public class OneTransformPerRequest : IClaimsTransformation

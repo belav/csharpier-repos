@@ -19,6 +19,7 @@ namespace SingLink
         // disabling unused variable warning
 #pragma warning disable 0414
         internal SingLink Mv_Sing;
+
 #pragma warning restore 0414
 
         public static int Main(System.String[] Args)
@@ -111,6 +112,7 @@ namespace SingLink
 #pragma warning disable 0414
         internal LinkNode Last;
         internal int[] Size;
+
 #pragma warning restore 0414
 
         public static int FinalCount = 0;

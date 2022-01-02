@@ -8,6 +8,7 @@ using System.Security.Authentication;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.Extensions.Configuration;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal class ConfigurationReader
@@ -359,6 +360,7 @@ internal class EndpointConfig
 
     public static bool operator ==(EndpointConfig? lhs, EndpointConfig? rhs) =>
         lhs is null ? rhs is null : lhs.Equals(rhs);
+
     public static bool operator !=(EndpointConfig? lhs, EndpointConfig? rhs) => !(lhs == rhs);
 
     private static bool CompareSniDictionaries(
@@ -410,6 +412,7 @@ internal class SniConfig
 
     public static bool operator ==(SniConfig lhs, SniConfig rhs) =>
         lhs is null ? rhs is null : lhs.Equals(rhs);
+
     public static bool operator !=(SniConfig lhs, SniConfig rhs) => !(lhs == rhs);
 }
 
@@ -478,5 +481,6 @@ internal class CertificateConfig
 
     public static bool operator ==(CertificateConfig? lhs, CertificateConfig? rhs) =>
         lhs is null ? rhs is null : lhs.Equals(rhs);
+
     public static bool operator !=(CertificateConfig? lhs, CertificateConfig? rhs) => !(lhs == rhs);
 }

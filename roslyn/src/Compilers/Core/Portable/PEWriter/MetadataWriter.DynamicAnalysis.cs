@@ -124,7 +124,6 @@ namespace Microsoft.Cci
             _guidWriter.WriteBytes(guid.ToByteArray());
             return result;
         }
-
         #endregion
 
         #region Spans
@@ -201,7 +200,6 @@ namespace Microsoft.Cci
                 writer.WriteCompressedSignedInteger(deltaColumns);
             }
         }
-
         #endregion
 
         #region Documents
@@ -284,7 +282,6 @@ namespace Microsoft.Cci
 
             return count;
         }
-
         #endregion
 
         #region Table Serialization

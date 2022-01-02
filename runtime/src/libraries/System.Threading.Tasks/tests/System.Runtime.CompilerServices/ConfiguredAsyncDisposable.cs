@@ -81,8 +81,11 @@ namespace System.Runtime.CompilerServices.Tests
                 short token,
                 ValueTaskSourceOnCompletedFlags flags
             ) => Flags = flags;
+
             public ValueTaskSourceStatus GetStatus(short token) => ValueTaskSourceStatus.Pending;
+
             public bool GetResult(short token) => throw new NotImplementedException();
+
             void IValueTaskSource.GetResult(short token) => throw new NotImplementedException();
         }
     }

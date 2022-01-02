@@ -8,6 +8,7 @@ using System.Text.Json;
 using Microsoft.JSInterop.Infrastructure;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.JSInterop;
 
 /// <summary>

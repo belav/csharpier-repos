@@ -9,6 +9,7 @@ using Duende.IdentityServer.Models;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
 public class ConfigureClientsTests

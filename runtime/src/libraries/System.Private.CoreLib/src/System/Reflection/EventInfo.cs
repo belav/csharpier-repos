@@ -16,6 +16,7 @@ namespace System.Reflection
         public bool IsSpecialName => (Attributes & EventAttributes.SpecialName) != 0;
 
         public MethodInfo[] GetOtherMethods() => GetOtherMethods(nonPublic: false);
+
         public virtual MethodInfo[] GetOtherMethods(bool nonPublic)
         {
             throw NotImplemented.ByDesign;
@@ -26,11 +27,15 @@ namespace System.Reflection
         public virtual MethodInfo? RaiseMethod => GetRaiseMethod(nonPublic: true);
 
         public MethodInfo? GetAddMethod() => GetAddMethod(nonPublic: false);
+
         public MethodInfo? GetRemoveMethod() => GetRemoveMethod(nonPublic: false);
+
         public MethodInfo? GetRaiseMethod() => GetRaiseMethod(nonPublic: false);
 
         public abstract MethodInfo? GetAddMethod(bool nonPublic);
+
         public abstract MethodInfo? GetRemoveMethod(bool nonPublic);
+
         public abstract MethodInfo? GetRaiseMethod(bool nonPublic);
 
         public virtual bool IsMulticast
@@ -85,6 +90,7 @@ namespace System.Reflection
         }
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

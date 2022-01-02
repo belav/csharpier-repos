@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 public class ParsedPathTests

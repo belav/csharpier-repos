@@ -66,46 +66,67 @@ namespace System.Runtime.InteropServices
         {
             [FieldOffset(0)]
             public sbyte _i1;
+
             [FieldOffset(0)]
             public short _i2;
+
             [FieldOffset(0)]
             public int _i4;
+
             [FieldOffset(0)]
             public long _i8;
+
             [FieldOffset(0)]
             public byte _ui1;
+
             [FieldOffset(0)]
             public ushort _ui2;
+
             [FieldOffset(0)]
             public uint _ui4;
+
             [FieldOffset(0)]
             public ulong _ui8;
+
             [FieldOffset(0)]
             public int _int;
+
             [FieldOffset(0)]
             public uint _uint;
+
             [FieldOffset(0)]
             public short _bool;
+
             [FieldOffset(0)]
             public int _error;
+
             [FieldOffset(0)]
             public float _r4;
+
             [FieldOffset(0)]
             public double _r8;
+
             [FieldOffset(0)]
             public long _cy;
+
             [FieldOffset(0)]
             public double _date;
+
             [FieldOffset(0)]
             public IntPtr _bstr;
+
             [FieldOffset(0)]
             public IntPtr _unknown;
+
             [FieldOffset(0)]
             public IntPtr _dispatch;
+
             [FieldOffset(0)]
             public IntPtr _pvarVal;
+
             [FieldOffset(0)]
             public IntPtr _byref;
+
             [FieldOffset(0)]
             public Record _record;
         }

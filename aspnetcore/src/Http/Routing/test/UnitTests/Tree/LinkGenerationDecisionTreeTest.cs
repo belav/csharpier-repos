@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.AspNetCore.Routing.Template;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing.Tree;
 
 public class LinkGenerationDecisionTreeTest

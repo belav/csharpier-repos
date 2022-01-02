@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.CommandLineUtils;
 using Wasm.Performance.TestApp.Pages;
 
+
 namespace Wasm.Performance.ConsoleHost.Scenarios;
 
 internal class GridScenario : ComponentRenderingScenarioBase

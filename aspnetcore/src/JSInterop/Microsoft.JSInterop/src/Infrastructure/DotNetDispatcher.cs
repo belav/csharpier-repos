@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 
 [assembly: MetadataUpdateHandler(typeof(Microsoft.JSInterop.Infrastructure.DotNetDispatcher))]
 
+
+
 namespace Microsoft.JSInterop.Infrastructure;
 
 /// <summary>

@@ -282,6 +282,7 @@ namespace System.DirectoryServices.AccountManagement
         // Private implementation
         //
         private readonly AuthenticablePrincipal _owningPrincipal;
+
         /*
                 // These methods implement the logic shared by all the get/set accessors for the internal properties
                 T HandleGet<T>(ref T currentValue, string name)

@@ -74,6 +74,7 @@ namespace System
 #pragma warning disable CA1825
         internal static readonly SZGenericArrayEnumerator<T> Empty =
             new SZGenericArrayEnumerator<T>(new T[0]);
+
 #pragma warning restore CA1825
 
         internal SZGenericArrayEnumerator(T[] array)

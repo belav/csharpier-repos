@@ -53,7 +53,6 @@ namespace System.Memory.Tests
             var buffer = new ReadOnlySequence<char>(memory.Slice(2, 3));
             Assert.Equal("12345".Substring(2, 3).ToArray(), buffer.ToArray());
         }
-
         #endregion
 
         [Fact]

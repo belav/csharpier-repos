@@ -99,7 +99,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics: context.Diagnostics
             );
         }
-
         #endregion
 
         #region ITypeDefinitionMember Members
@@ -121,7 +120,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return PEModuleBuilder.MemberVisibility(AdaptedEventSymbol);
             }
         }
-
         #endregion
 
         #region ITypeMemberReference Members
@@ -131,7 +129,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CheckDefinitionInvariant();
             return AdaptedEventSymbol.ContainingType.GetCciAdapter();
         }
-
         #endregion
 
         #region IReference Members
@@ -147,7 +144,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CheckDefinitionInvariant();
             return this;
         }
-
         #endregion
 
         #region INamedEntity Members

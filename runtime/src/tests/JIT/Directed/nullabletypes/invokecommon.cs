@@ -6,6 +6,7 @@ using System;
 public sealed class TestException : Exception
 {
     private int counter;
+
     public TestException(int counter, string format, params object[] args)
         : base(String.Format(format, args))
     {
@@ -40,6 +41,7 @@ public static class Test_nullabletypes
         if (!expr)
             throw new TestException(counter, "Expected true, got false");
     }
+
     public static void Eval(object obj1, object obj2)
     {
         counter++;

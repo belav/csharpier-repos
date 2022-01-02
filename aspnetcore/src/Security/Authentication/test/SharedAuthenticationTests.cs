@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 public abstract class SharedAuthenticationTests<TOptions>
@@ -235,6 +236,7 @@ public abstract class SharedAuthenticationTests<TOptions>
     private class RunOnce : IClaimsTransformation
     {
         public int Ran = 0;
+
         public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
             Ran++;

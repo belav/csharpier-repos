@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 internal class SetCommand

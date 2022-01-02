@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.CommandLineUtils;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 internal class RemoveCommand : ICommand

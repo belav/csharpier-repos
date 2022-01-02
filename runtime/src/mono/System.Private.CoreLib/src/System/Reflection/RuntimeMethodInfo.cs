@@ -73,6 +73,7 @@ namespace System.Reflection
         internal MethodAttributes attrs;
         internal MethodImplAttributes iattrs;
         private CallingConventions callconv;
+
 #pragma warning restore 649
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -503,6 +504,7 @@ namespace System.Reflection
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
@@ -831,6 +833,7 @@ namespace System.Reflection
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
     }
+
 #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class RuntimeConstructorInfo : ConstructorInfo

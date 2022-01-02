@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Templates.Test.Helpers;
 
 public class ProcessLock

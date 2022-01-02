@@ -352,18 +352,22 @@ namespace System.Runtime.Serialization
             ClassDataContract classContract,
             ref object obj
         );
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         protected abstract object? ReflectionReadDictionaryItem(
             XmlReaderDelegator xmlReader,
             XmlObjectSerializerReadContext context,
             CollectionDataContract collectionContract
         );
+
         protected abstract string GetCollectionContractItemName(
             CollectionDataContract collectionContract
         );
+
         protected abstract string GetCollectionContractNamespace(
             CollectionDataContract collectionContract
         );
+
         protected abstract string GetClassContractNamespace(ClassDataContract classContract);
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

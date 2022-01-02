@@ -3,6 +3,7 @@
 
 using System.Text.Encodings.Web;
 
+
 namespace Microsoft.Extensions.WebEncoders;
 
 /// <summary>

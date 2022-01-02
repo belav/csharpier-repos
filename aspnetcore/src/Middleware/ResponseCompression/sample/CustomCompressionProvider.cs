@@ -4,6 +4,7 @@
 using System.IO;
 using Microsoft.AspNetCore.ResponseCompression;
 
+
 namespace ResponseCompressionSample;
 
 public class CustomCompressionProvider : ICompressionProvider

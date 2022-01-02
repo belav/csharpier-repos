@@ -11,7 +11,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC Data;
+
         public BaseWithIsRefTrue() { }
+
         public BaseWithIsRefTrue(bool init)
         {
             Data = new SimpleDC(true);
@@ -23,7 +25,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData;
+
         public DerivedNoIsRef() { }
+
         public DerivedNoIsRef(bool init) : base(init)
         {
             RefData = Data;
@@ -35,7 +39,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData2;
+
         public DerivedNoIsRef2() { }
+
         public DerivedNoIsRef2(bool init) : base(init)
         {
             RefData2 = RefData;
@@ -47,7 +53,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData3;
+
         public DerivedNoIsRef3() { }
+
         public DerivedNoIsRef3(bool init) : base(init)
         {
             RefData3 = RefData2;
@@ -59,7 +67,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData4;
+
         public DerivedNoIsRef4() { }
+
         public DerivedNoIsRef4(bool init) : base(init)
         {
             RefData4 = RefData3;
@@ -71,7 +81,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData5;
+
         public DerivedNoIsRef5() { }
+
         public DerivedNoIsRef5(bool init) : base(init)
         {
             RefData5 = RefData4;
@@ -83,7 +95,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData6;
+
         public DerivedNoIsRefWithIsRefTrue6() { }
+
         public DerivedNoIsRefWithIsRefTrue6(bool init) : base(init)
         {
             RefData6 = RefData5;
@@ -95,7 +109,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData;
+
         public DerivedWithIsRefFalse() { }
+
         public DerivedWithIsRefFalse(bool init) : base(init)
         {
             RefData = Data;
@@ -107,7 +123,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData2;
+
         public DerivedWithIsRefFalse2() { }
+
         public DerivedWithIsRefFalse2(bool init) : base(init)
         {
             RefData2 = RefData;
@@ -119,7 +137,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData3;
+
         public DerivedWithIsRefFalse3() { }
+
         public DerivedWithIsRefFalse3(bool init) : base(init)
         {
             RefData3 = RefData2;
@@ -131,7 +151,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData4;
+
         public DerivedWithIsRefFalse4() { }
+
         public DerivedWithIsRefFalse4(bool init) : base(init)
         {
             RefData4 = RefData3;
@@ -143,7 +165,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData5;
+
         public DerivedWithIsRefFalse5() { }
+
         public DerivedWithIsRefFalse5(bool init) : base(init)
         {
             RefData5 = RefData4;
@@ -155,7 +179,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData6;
+
         public DerivedWithIsRefTrue6() { }
+
         public DerivedWithIsRefTrue6(bool init) : base(init)
         {
             RefData6 = RefData5;
@@ -167,7 +193,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData;
+
         public DerivedWithIsRefTrueExplicit() { }
+
         public DerivedWithIsRefTrueExplicit(bool init) : base(init)
         {
             RefData = Data;
@@ -179,7 +207,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData2;
+
         public DerivedWithIsRefTrueExplicit2() { }
+
         public DerivedWithIsRefTrueExplicit2(bool init) : base(init)
         {
             RefData2 = Data;
@@ -191,7 +221,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC Data;
+
         public BaseNoIsRef() { }
+
         public BaseNoIsRef(bool init)
         {
             Data = new SimpleDC(true);
@@ -203,7 +235,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData;
+
         public DerivedWithIsRefTrue() { }
+
         public DerivedWithIsRefTrue(bool init) : base(true)
         {
             RefData = Data;
@@ -215,7 +249,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public SimpleDC RefData;
+
         public DerivedWithIsRefFalseExplicit() { }
+
         public DerivedWithIsRefFalseExplicit(bool init) : base(true)
         {
             RefData = Data;
@@ -228,6 +264,7 @@ namespace SerializationTestTypes
     {
         private BaseDC _b;
         private DerivedDC _d;
+
         [DataMember]
         public BaseDC baseDC
         {
@@ -258,10 +295,13 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public BaseSerializable baseDC;
+
         [DataMember]
         public DerivedSerializable derivedDC;
+
         [DataMember]
         public BaseDC base1;
+
         [DataMember]
         public Derived2Serializable derived2;
 
@@ -284,12 +324,16 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public BaseSerializable baseDC;
+
         [DataMember]
         public DerivedSerializable derivedDC;
+
         [DataMember]
         public BaseDC base1;
+
         [DataMember]
         public Derived2Serializable derived2;
+
         [DataMember]
         public Derived3Derived2Serializable derived3;
 
@@ -370,6 +414,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public BaseSerializable baseDC;
+
         [DataMember]
         public DerivedSerializable derivedDC;
 
@@ -424,6 +469,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public BaseSerializable baseDC;
+
         [DataMember]
         public DerivedSerializable derivedDC;
 
@@ -477,6 +523,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public BaseSerializable baseDC;
+
         [DataMember]
         public DerivedSerializable derivedDC;
 
@@ -563,6 +610,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public BaseSerializable baseDC;
+
         [DataMember]
         public Derived2Serializable derived2DC;
 

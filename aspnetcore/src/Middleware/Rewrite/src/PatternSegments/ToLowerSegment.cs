@@ -3,6 +3,7 @@
 
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class ToLowerSegment : PatternSegment

@@ -4,6 +4,7 @@
 using Microsoft.Extensions.CommandLineUtils;
 using Wasm.Performance.ConsoleHost.Scenarios;
 
+
 namespace Wasm.Performance.ConsoleHost;
 
 internal class Program : CommandLineApplication

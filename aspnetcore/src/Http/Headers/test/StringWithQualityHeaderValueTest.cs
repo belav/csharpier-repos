@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
+
 namespace Microsoft.Net.Http.Headers;
 
 public class StringWithQualityHeaderValueTest

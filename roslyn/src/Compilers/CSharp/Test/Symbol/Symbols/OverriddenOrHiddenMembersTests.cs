@@ -4804,7 +4804,6 @@ public class Required : ValidatorBase<object>
 void ValidatorBase<T>.DoValidate(T objectToValidate)"
             );
         }
-
         #endregion
 
         [Fact]

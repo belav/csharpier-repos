@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Http2Cat;
 
 internal class Http2CatOptions

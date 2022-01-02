@@ -613,7 +613,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             return hash;
         }
-
         #endregion
 
         private static bool HaveSameReturnTypes(

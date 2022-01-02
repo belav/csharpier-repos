@@ -26,6 +26,7 @@ namespace BigFrames
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(4092)]
         public int i2;
     }
@@ -35,6 +36,7 @@ namespace BigFrames
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(5372)]
         public int i2;
     }
@@ -44,6 +46,7 @@ namespace BigFrames
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(8188)]
         public int i2;
     }
@@ -53,6 +56,7 @@ namespace BigFrames
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(12284)]
         public int i2;
     }
@@ -62,6 +66,7 @@ namespace BigFrames
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(16380)]
         public int i2;
     }

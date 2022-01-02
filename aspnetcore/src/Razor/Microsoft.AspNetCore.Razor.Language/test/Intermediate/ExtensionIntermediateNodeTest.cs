@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 // These tests cover the methods on ExtensionIntermediateNode that are used to implement visitors

@@ -443,6 +443,7 @@ namespace System.Reflection
         }
 
         public override int MDStreamVersion => ModuleHandle.GetMDStreamVersion(this);
+
         #endregion
 
         #region Data Members
@@ -454,6 +455,7 @@ namespace System.Reflection
         private IntPtr m_pData;
         private IntPtr m_pGlobals;
         private IntPtr m_pFields;
+
 #pragma warning restore CA1823, 169
         #endregion
 
@@ -594,7 +596,6 @@ namespace System.Reflection
         {
             return GetTypes(this);
         }
-
         #endregion
 
         #region Public Members

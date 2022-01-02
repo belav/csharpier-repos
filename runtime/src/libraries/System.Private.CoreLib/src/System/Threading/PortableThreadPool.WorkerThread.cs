@@ -13,6 +13,7 @@ namespace System.Threading
         private static class WorkerThread
         {
             private const int SemaphoreSpinCountDefaultBaseline = 70;
+
 #if !TARGET_ARM64 && !TARGET_ARM
             private const int SemaphoreSpinCountDefault = SemaphoreSpinCountDefaultBaseline;
 #else

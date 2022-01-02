@@ -27,16 +27,20 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         protected abstract HMAC Create();
 
         protected abstract HashAlgorithm CreateHashAlgorithm();
+
         protected abstract byte[] HashDataOneShot(byte[] key, byte[] source);
+
         protected abstract byte[] HashDataOneShot(
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> source
         );
+
         protected abstract int HashDataOneShot(
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> source,
             Span<byte> destination
         );
+
         protected abstract bool TryHashDataOneShot(
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> source,

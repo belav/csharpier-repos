@@ -1287,7 +1287,6 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                     Fax = "(26) 642-7012"
                 }
             };
-
         #endregion
 
         #region Employees
@@ -1517,7 +1516,6 @@ Winchester Way",
                     PhotoPath = "http://accweb/emmployees/davolio.bmp"
                 }
             };
-
         #endregion
 
         #region Products
@@ -2527,7 +2525,6 @@ Winchester Way",
                     Discontinued = false
                 }
             };
-
         #endregion
 
         #region Orders
@@ -17476,7 +17473,6 @@ Winchester Way",
                     ShipCountry = "USA"
                 }
             };
-
         #endregion
 
         #region OrderDetails

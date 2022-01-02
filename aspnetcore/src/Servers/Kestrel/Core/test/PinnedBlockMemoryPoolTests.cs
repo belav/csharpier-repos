@@ -4,6 +4,7 @@
 using System.Buffers;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal.Test;
 
 public class PinnedBlockMemoryPoolTests : MemoryPoolTests

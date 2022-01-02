@@ -14,6 +14,7 @@ namespace System.IO.Pipelines
         private AwaitableState _awaitableState;
         private Action<object?>? _completion;
         private object? _completionState;
+
         // It's rare to have to capture custom context here
         private SchedulingContext? _schedulingContext;
         private CancellationTokenRegistration _cancellationTokenRegistration;

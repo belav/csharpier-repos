@@ -78,7 +78,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 () => new SegmentedList<T>().RemoveAll(null!)
             );
         }
-
         #endregion
 
         #region RemoveRange

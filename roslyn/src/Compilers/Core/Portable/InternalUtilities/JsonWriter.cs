@@ -34,6 +34,7 @@ namespace Roslyn.Utilities
             NewLineAndIndent,
             CommaNewLineAndIndent
         };
+
         private const string Indentation = "  ";
 
         public JsonWriter(TextWriter output)

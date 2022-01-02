@@ -24,6 +24,7 @@ namespace System.Net.Sockets.Tests
         private readonly ArraySegment<byte> _receiveBuffer = new ArraySegment<byte>(new byte[32]);
         private const string TestMessage = "test123!";
         private static ArraySegment<byte> TestBytes => Encoding.ASCII.GetBytes(TestMessage);
+
         private static string GetMessageString(ArraySegment<byte> data, int count) =>
             Encoding.ASCII.GetString(data.AsSpan(0, count));
 

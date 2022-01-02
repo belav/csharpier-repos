@@ -22,6 +22,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
 // In theory this would work on Linux and Mac, but the client would require explicit credentials.

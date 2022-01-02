@@ -18,7 +18,6 @@ namespace System.Speech.Internal.GrammarBuilding
             Items.Add(rule);
             Items.Add(_ruleRef);
         }
-
         #endregion
 
         #region Public Methods
@@ -41,7 +40,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             return base.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -81,7 +79,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
             return ruleRef;
         }
-
         #endregion
 
         #region Internal Properties
@@ -90,7 +87,6 @@ namespace System.Speech.Internal.GrammarBuilding
         {
             get { return _ruleRef.Rule.DebugSummary; }
         }
-
         #endregion
 
         #region Private Fields

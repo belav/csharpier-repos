@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace SecurityWebSite.Controllers;
 
 public class HomeController : Controller

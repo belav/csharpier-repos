@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.IO;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public static class BaselineWriter

@@ -12,6 +12,7 @@ internal static partial class Interop
         internal unsafe struct CMSG_CMS_RECIPIENT_INFO
         {
             internal CMsgCmsRecipientChoice dwRecipientChoice;
+
             // union {
             //  PCMSG_KEY_TRANS_RECIPIENT_INFO pKeyTrans;   // CMSG_KEY_TRANS_RECIPIENT
             //  PCMSG_KEY_AGREE_RECIPIENT_INFO pKeyAgree;   // CMSG_KEY_AGREE_RECIPIENT

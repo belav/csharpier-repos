@@ -59,6 +59,7 @@ namespace MS.Internal.Xml.XPath
         {
             get { return _position; }
         }
+
         public override XPathNodeIterator Clone()
         {
             return new XPathSelectionIterator(this);

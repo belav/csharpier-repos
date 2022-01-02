@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 
 internal static class RendererRegistry

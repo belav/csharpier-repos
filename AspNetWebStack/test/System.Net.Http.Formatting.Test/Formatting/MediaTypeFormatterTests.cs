@@ -182,7 +182,6 @@ namespace System.Net.Http.Formatting
                 )
             );
         }
-
 #if !NETFX_CORE // No MediaTypeMapping support in portable libraries
         [Fact]
         public void MediaTypeMappings_IsMutable()
@@ -428,6 +427,7 @@ namespace System.Net.Http.Formatting
         public struct TestStruct
         {
             private int I;
+
             public TestStruct(int i)
             {
                 I = i + 1;

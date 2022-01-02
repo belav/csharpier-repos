@@ -34,6 +34,7 @@ namespace System.Data
         private bool _allowNull = true;
         private string? _caption;
         private string _columnName;
+
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.PublicFields
@@ -2155,7 +2156,9 @@ namespace System.Data
         internal abstract Type DataType { get; }
 
         internal abstract void SetCurrent(object value, IFormatProvider formatProvider);
+
         internal abstract void SetCurrentAndIncrement(object value);
+
         internal abstract void MoveAfter();
 
         internal AutoIncrementValue Clone()

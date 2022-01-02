@@ -131,7 +131,6 @@ namespace System.Collections.Immutable
             {
                 get { return false; }
             }
-
             #endregion
 
             /// <summary>
@@ -215,7 +214,6 @@ namespace System.Collections.Immutable
 
                 return ref _root.ValueRef(key, _keyComparer);
             }
-
             #endregion
 
             #region IDictionary Properties
@@ -260,7 +258,6 @@ namespace System.Collections.Immutable
             {
                 get { return this.Values.ToArray(this.Count); }
             }
-
             #endregion
 
             #region ICollection Properties
@@ -358,7 +355,6 @@ namespace System.Collections.Immutable
                     }
                 }
             }
-
             #endregion
 
             #region IDictionary Methods
@@ -415,7 +411,6 @@ namespace System.Collections.Immutable
                 get { return this[(TKey)key]; }
                 set { this[(TKey)key] = (TValue)value!; }
             }
-
             #endregion
 
             #region ICollection methods
@@ -429,7 +424,6 @@ namespace System.Collections.Immutable
             {
                 this.Root.CopyTo(array, index, this.Count);
             }
-
             #endregion
 
             #region IDictionary<TKey, TValue> Methods
@@ -561,7 +555,6 @@ namespace System.Collections.Immutable
             {
                 return this.GetEnumerator();
             }
-
             #endregion
 
             #region Public methods
@@ -665,6 +658,7 @@ namespace System.Collections.Immutable
             #endregion
         }
     }
+
     /// <summary>
     /// A simple view of the immutable collection that the debugger can show to the developer.
     /// </summary>

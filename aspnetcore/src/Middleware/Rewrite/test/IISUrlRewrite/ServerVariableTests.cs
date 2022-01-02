@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 using Microsoft.Net.Http.Headers;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.IISUrlRewrite;
 
 public class ServerVariableTests

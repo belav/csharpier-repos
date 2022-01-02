@@ -13,6 +13,7 @@ namespace System.IO.Ports
         RequestToSend = 2,
         RequestToSendXOnXOff = 3,
     }
+
     public enum Parity
     {
         None = 0,
@@ -21,23 +22,28 @@ namespace System.IO.Ports
         Mark = 3,
         Space = 4,
     }
+
     public enum SerialData
     {
         Chars = 1,
         Eof = 2,
     }
+
     public partial class SerialDataReceivedEventArgs : System.EventArgs
     {
         internal SerialDataReceivedEventArgs() { }
+
         public System.IO.Ports.SerialData EventType
         {
             get { throw null; }
         }
     }
+
     public delegate void SerialDataReceivedEventHandler(
         object sender,
         System.IO.Ports.SerialDataReceivedEventArgs e
     );
+
     public enum SerialError
     {
         RXOver = 1,
@@ -46,18 +52,22 @@ namespace System.IO.Ports
         Frame = 8,
         TXFull = 256,
     }
+
     public partial class SerialErrorReceivedEventArgs : System.EventArgs
     {
         internal SerialErrorReceivedEventArgs() { }
+
         public System.IO.Ports.SerialError EventType
         {
             get { throw null; }
         }
     }
+
     public delegate void SerialErrorReceivedEventHandler(
         object sender,
         System.IO.Ports.SerialErrorReceivedEventArgs e
     );
+
     public enum SerialPinChange
     {
         CtsChanged = 8,
@@ -66,32 +76,43 @@ namespace System.IO.Ports
         Break = 64,
         Ring = 256,
     }
+
     public partial class SerialPinChangedEventArgs : System.EventArgs
     {
         internal SerialPinChangedEventArgs() { }
+
         public System.IO.Ports.SerialPinChange EventType
         {
             get { throw null; }
         }
     }
+
     public delegate void SerialPinChangedEventHandler(
         object sender,
         System.IO.Ports.SerialPinChangedEventArgs e
     );
+
     public partial class SerialPort : System.ComponentModel.Component
     {
         public const int InfiniteTimeout = -1;
+
         public SerialPort() { }
+
         public SerialPort(System.ComponentModel.IContainer container) { }
+
         public SerialPort(string portName) { }
+
         public SerialPort(string portName, int baudRate) { }
+
         public SerialPort(string portName, int baudRate, System.IO.Ports.Parity parity) { }
+
         public SerialPort(
             string portName,
             int baudRate,
             System.IO.Ports.Parity parity,
             int dataBits
         ) { }
+
         public SerialPort(
             string portName,
             int baudRate,
@@ -99,6 +120,7 @@ namespace System.IO.Ports
             int dataBits,
             System.IO.Ports.StopBits stopBits
         ) { }
+
         public System.IO.Stream BaseStream
         {
             get { throw null; }
@@ -232,48 +254,66 @@ namespace System.IO.Ports
             add { }
             remove { }
         }
+
         public void Close() { }
+
         public void DiscardInBuffer() { }
+
         public void DiscardOutBuffer() { }
+
         protected override void Dispose(bool disposing) { }
+
         public static string[] GetPortNames()
         {
             throw null;
         }
+
         public void Open() { }
+
         public int Read(byte[] buffer, int offset, int count)
         {
             throw null;
         }
+
         public int Read(char[] buffer, int offset, int count)
         {
             throw null;
         }
+
         public int ReadByte()
         {
             throw null;
         }
+
         public int ReadChar()
         {
             throw null;
         }
+
         public string ReadExisting()
         {
             throw null;
         }
+
         public string ReadLine()
         {
             throw null;
         }
+
         public string ReadTo(string value)
         {
             throw null;
         }
+
         public void Write(byte[] buffer, int offset, int count) { }
+
         public void Write(char[] buffer, int offset, int count) { }
+
         public void Write(string text) { }
+
         public void WriteLine(string text) { }
     }
+
     public enum StopBits
     {
         None = 0,

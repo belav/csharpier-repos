@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection.Internal;
 using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 using Moq;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 internal static class MockExtensions

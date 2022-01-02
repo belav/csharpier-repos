@@ -3,12 +3,14 @@
 //
 
 using System;
+
 class r8NaNadd
 {
     //user-defined class that overloads operator +
     public class numHolder
     {
         double d_num;
+
         public numHolder(double d_num)
         {
             this.d_num = Convert.ToSingle(d_num);
@@ -75,6 +77,7 @@ class r8NaNadd
         public double d_vt_test3_op1;
         public double d_vt_test3_op2;
     }
+
     public static int Main()
     {
         bool passed = true;

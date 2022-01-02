@@ -92,6 +92,7 @@ namespace System.Net.Sockets.Tests
                 )
                 .Dispose();
         }
+
 #pragma warning restore CS0618
 
         [Fact]

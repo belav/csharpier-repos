@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Rewrite.Logging;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Rewrite;
 
 internal class RedirectRule : IRule
@@ -16,6 +17,7 @@ internal class RedirectRule : IRule
     public Regex InitialMatch { get; }
     public string Replacement { get; }
     public int StatusCode { get; }
+
     public RedirectRule(string regex, string replacement, int statusCode)
     {
         if (string.IsNullOrEmpty(regex))

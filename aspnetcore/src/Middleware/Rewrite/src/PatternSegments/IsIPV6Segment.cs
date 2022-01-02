@@ -3,6 +3,7 @@
 
 using System.Net.Sockets;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class IsIPV6Segment : PatternSegment

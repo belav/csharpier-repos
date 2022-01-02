@@ -14,6 +14,7 @@ class request
     Object[] survivors;
     GCHandle pin;
     static Random r = new Random(1234);
+
     public request(int alloc_volume, float surv_fraction)
     {
         survivors = new Object[1 + (int)(alloc_volume * surv_fraction) / 1000];
@@ -58,6 +59,7 @@ class request
             volume += alloc_surv + alloc;
         }
     }
+
     public void retire()
     {
         pin.Free();

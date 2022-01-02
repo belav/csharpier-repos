@@ -15,12 +15,14 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Testing;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 public class Http1WritingBenchmark
 {
     // Standard completed task
     private static readonly Func<object, Task> _syncTaskFunc = (obj) => Task.CompletedTask;
+
     // Non-standard completed task
     private static readonly Task _pseudoAsyncTask = Task.FromResult(27);
     private static readonly Func<object, Task> _pseudoAsyncTaskFunc = (obj) => _pseudoAsyncTask;

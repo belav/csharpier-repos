@@ -38,12 +38,13 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
+
 #endif
 #if HAVE_ADO_NET
 using System.Data.SqlTypes;
-
 #endif
 
 namespace Newtonsoft.Json.Utilities
@@ -174,7 +175,6 @@ namespace Newtonsoft.Json.Utilities
             { typeof(DBNull), PrimitiveTypeCode.DBNull }
 #endif
         };
-
 #if HAVE_ICONVERTIBLE
         private static readonly TypeInformation[] PrimitiveTypeCodes =
         {
@@ -237,7 +237,6 @@ namespace Newtonsoft.Json.Utilities
             isEnum = false;
             return PrimitiveTypeCode.Object;
         }
-
 #if HAVE_ICONVERTIBLE
         public static TypeInformation GetTypeInformation(IConvertible convertable)
         {
@@ -308,7 +307,6 @@ namespace Newtonsoft.Json.Utilities
 
             return o => call(null, o);
         }
-
 #if HAVE_BIG_INTEGER
         internal static BigInteger ToBigInteger(object value)
         {

@@ -43,7 +43,6 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Linq
@@ -207,7 +206,6 @@ namespace Newtonsoft.Json.Tests.Linq
                 writer.Token.ToString()
             );
         }
-
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void WriteBigInteger()

@@ -174,6 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 cancellationToken: cancellationToken
             );
         }
+
 #nullable disable
 
         /// <summary>
@@ -2197,7 +2198,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return ((EventSymbol)GetDeclaredMemberSymbol(declarationSyntax)).GetPublicSymbol();
         }
-
         #endregion
 
         #endregion

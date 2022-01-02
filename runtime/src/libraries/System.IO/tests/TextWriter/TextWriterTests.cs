@@ -269,7 +269,6 @@ namespace System.IO.Tests
                 );
             }
         }
-
         #endregion
 
         #region WriteLine Overloads
@@ -542,7 +541,6 @@ namespace System.IO.Tests
                 );
             }
         }
-
         #endregion
 
         #region Write Async Overloads
@@ -577,7 +575,6 @@ namespace System.IO.Tests
                 Assert.Equal(new string(TestDataProvider.CharData, 3, 5), tw.Text);
             }
         }
-
         #endregion
 
         #region WriteLineAsync Overloads
@@ -622,7 +619,6 @@ namespace System.IO.Tests
                 Assert.Equal(new string(TestDataProvider.CharData, 3, 5) + tw.NewLine, tw.Text);
             }
         }
-
         #endregion
 
         [Fact]
@@ -767,6 +763,7 @@ namespace System.IO.Tests
         {
             public Action DisposeAction;
             public override Encoding Encoding => Encoding.UTF8;
+
             protected override void Dispose(bool disposing) => DisposeAction?.Invoke();
         }
 

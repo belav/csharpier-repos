@@ -95,7 +95,6 @@ namespace System.Collections.Tests
         /// </summary>
         protected virtual bool IDictionary_NonGeneric_Keys_Values_ParentDictionaryModifiedInvalidates =>
             true;
-
         #endregion
 
         #region ICollection Helper Methods
@@ -204,7 +203,6 @@ namespace System.Collections.Tests
         /// </summary>
         protected virtual bool IDictionary_NonGeneric_Keys_Values_Enumeration_ResetImplemented =>
             ResetImplemented;
-
         #endregion
 
         #region IsFixedSize
@@ -216,7 +214,6 @@ namespace System.Collections.Tests
             IDictionary collection = NonGenericIDictionaryFactory(count);
             Assert.False(collection.IsFixedSize);
         }
-
         #endregion
 
         #region IsReadOnly
@@ -228,7 +225,6 @@ namespace System.Collections.Tests
             IDictionary collection = NonGenericIDictionaryFactory(count);
             Assert.Equal(IsReadOnly, collection.IsReadOnly);
         }
-
         #endregion
 
         #region Item Getter
@@ -287,7 +283,6 @@ namespace System.Collections.Tests
                 Assert.Equal(pair.Value, dictionary[pair.Key]);
             }
         }
-
         #endregion
 
         #region Item Setter
@@ -347,7 +342,6 @@ namespace System.Collections.Tests
             Assert.Equal(count + 1, dictionary.Count);
             Assert.Equal(newValue, dictionary[existingKey]);
         }
-
         #endregion
 
         #region Keys
@@ -420,7 +414,6 @@ namespace System.Collections.Tests
             else
                 Assert.Throws<NotSupportedException>(() => enumerator.Reset());
         }
-
         #endregion
 
         #region Values
@@ -511,7 +504,6 @@ namespace System.Collections.Tests
             else
                 Assert.Throws<NotSupportedException>(() => enumerator.Reset());
         }
-
         #endregion
 
         #region Add
@@ -613,7 +605,6 @@ namespace System.Collections.Tests
                 );
             }
         }
-
         #endregion
 
         #region Remove
@@ -635,7 +626,6 @@ namespace System.Collections.Tests
                 Assert.Null(dictionary[null]);
             }
         }
-
         #endregion
 
         #region Clear
@@ -666,7 +656,6 @@ namespace System.Collections.Tests
                 Assert.Equal(0, collection.Values.Count);
             }
         }
-
         #endregion
 
         #region Contains
@@ -729,7 +718,6 @@ namespace System.Collections.Tests
                 Assert.True(dictionary.Contains(missingKey));
             }
         }
-
         #endregion
 
         #region IDictionaryEnumerator

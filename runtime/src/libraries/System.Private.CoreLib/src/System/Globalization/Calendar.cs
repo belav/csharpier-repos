@@ -42,10 +42,13 @@ namespace System.Globalization
 
         // Number of days in a non-leap year
         internal const int DaysPerYear = 365;
+
         // Number of days in 4 years
         internal const int DaysPer4Years = DaysPerYear * 4 + 1;
+
         // Number of days in 100 years
         internal const int DaysPer100Years = DaysPer4Years * 25 - 1;
+
         // Number of days in 400 years
         internal const int DaysPer400Years = DaysPer100Years * 4 + 1;
 

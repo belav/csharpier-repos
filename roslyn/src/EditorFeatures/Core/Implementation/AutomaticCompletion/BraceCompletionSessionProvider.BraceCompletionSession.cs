@@ -45,7 +45,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             private readonly ITextUndoHistory _undoHistory;
             private readonly IEditorOperations _editorOperations;
             private readonly IBraceCompletionService _service;
-
             #endregion
 
             #region Constructors
@@ -74,7 +73,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 _editorOperations = editorOperationsFactoryService.GetEditorOperations(textView);
                 _service = service;
             }
-
             #endregion
 
             #region IBraceCompletionSession Methods
@@ -356,7 +354,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             }
 
             public void Finish() { }
-
             #endregion
 
             #region Unused IBraceCompletionSession Methods
@@ -366,7 +363,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             public void PreDelete(out bool handledCommand) => handledCommand = false;
 
             public void PostDelete() { }
-
             #endregion
 
             #region Private Helpers

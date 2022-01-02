@@ -9,6 +9,7 @@ namespace System.Net.Http.QPack
     internal sealed class QPackEncodingException : Exception
     {
         public QPackEncodingException(string message) : base(message) { }
+
         public QPackEncodingException(string message, Exception innerException)
             : base(message, innerException) { }
 

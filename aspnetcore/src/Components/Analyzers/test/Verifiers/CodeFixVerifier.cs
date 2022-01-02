@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;
 using Xunit;
 
+
 namespace TestHelper;
 
 /// <summary>

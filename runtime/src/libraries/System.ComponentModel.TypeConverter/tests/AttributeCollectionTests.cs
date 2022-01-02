@@ -584,11 +584,17 @@ namespace System.ComponentModel.Tests
         }
 
         public class TestAttribute1 : Attribute { }
+
         public class TestAttribute2 : Attribute { }
+
         public class TestAttribute3 : Attribute { }
+
         public class TestAttribute4 : Attribute { }
+
         public class TestAttribute5a : Attribute { }
+
         public class TestAttribute5b : TestAttribute5a { }
+
         public class TestAttribute6 : Attribute { }
 
         private class AttributeWithDefaultField : Attribute

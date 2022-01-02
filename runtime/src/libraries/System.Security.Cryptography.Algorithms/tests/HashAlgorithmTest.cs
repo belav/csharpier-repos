@@ -11,13 +11,17 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
     public abstract class HashAlgorithmTest
     {
         protected abstract HashAlgorithm Create();
+
         protected abstract bool TryHashData(
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             out int bytesWritten
         );
+
         protected abstract byte[] HashData(byte[] source);
+
         protected abstract byte[] HashData(ReadOnlySpan<byte> source);
+
         protected abstract int HashData(ReadOnlySpan<byte> source, Span<byte> destination);
 
         protected void Verify(string input, string output)

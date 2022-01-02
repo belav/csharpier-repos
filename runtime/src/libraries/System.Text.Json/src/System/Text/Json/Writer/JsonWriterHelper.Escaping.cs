@@ -282,7 +282,6 @@ namespace System.Text.Json
                 0,
                 0, // U+00F0..U+00FF
             };
-
 #if BUILDING_INBOX_LIBRARY
         private const string HexFormatString = "X4";
 #endif

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 // This is a set of integration tests that are similar to a typical MVC configuration.
@@ -511,7 +512,6 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Assert
         Assert.Equal("/Home/Fake/17", path);
     }
-
     #endregion
 
     #region With ambient values
@@ -879,7 +879,6 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Assert
         Assert.Equal("/Admin/Pages", path);
     }
-
     #endregion
 
     private static RouteValuesAddress CreateAddress(

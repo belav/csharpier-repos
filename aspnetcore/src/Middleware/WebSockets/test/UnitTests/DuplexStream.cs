@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
 // A duplex wrapper around a read and write stream.
@@ -71,7 +72,6 @@ public class DuplexStream : Stream
         get { return WriteStream.WriteTimeout; }
         set { WriteStream.WriteTimeout = value; }
     }
-
     #endregion Properties
 
     public override long Seek(long offset, SeekOrigin origin)
@@ -130,7 +130,6 @@ public class DuplexStream : Stream
     {
         return ReadStream.Read(buffer, offset, count);
     }
-
     #endregion Read
 
     #region Write
@@ -139,6 +138,7 @@ public class DuplexStream : Stream
     {
         WriteStream.Write(buffer, offset, count);
     }
+
     public override void WriteByte(byte value)
     {
         WriteStream.WriteByte(value);
@@ -179,7 +179,6 @@ public class DuplexStream : Stream
     {
         WriteStream.Flush();
     }
-
     #endregion Write
 
     protected override void Dispose(bool disposing)

@@ -462,7 +462,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             set { _store[nameof(LangVersion)] = value; }
             get { return (string?)_store[nameof(LangVersion)]; }
         }
-
         #endregion
 
         // ToolExe delegates back to ToolName if the override is not

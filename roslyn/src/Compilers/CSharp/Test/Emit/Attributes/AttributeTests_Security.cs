@@ -890,7 +890,6 @@ namespace System
                 expectedWarnings: new DiagnosticDescription[0]
             );
         }
-
         #endregion
 
         #region Metadata validation tests
@@ -2445,7 +2444,6 @@ public class MyClass
                 Assert.True(emitResult.Success);
             }
         }
-
         #endregion
 
         [Fact]

@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal class HtmlAttributePropertyHelper : PropertyHelper

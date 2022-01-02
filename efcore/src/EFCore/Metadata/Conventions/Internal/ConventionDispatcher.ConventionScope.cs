@@ -153,6 +153,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             );
 
             public abstract bool? OnIndexUniquenessChanged(IConventionIndexBuilder indexBuilder);
+
             public abstract IConventionKeyBuilder? OnKeyAdded(IConventionKeyBuilder keyBuilder);
 
             public abstract IConventionAnnotation? OnKeyAnnotationChanged(

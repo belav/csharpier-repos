@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 #if DEBUG
 using Roslyn.Utilities;
-
 #endif
 namespace Microsoft.CodeAnalysis.CSharp
 {

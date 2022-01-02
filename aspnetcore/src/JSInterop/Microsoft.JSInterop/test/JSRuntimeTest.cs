@@ -14,6 +14,7 @@ using Microsoft.JSInterop.Implementation;
 using Microsoft.JSInterop.Infrastructure;
 using Xunit;
 
+
 namespace Microsoft.JSInterop;
 
 public class JSRuntimeTest

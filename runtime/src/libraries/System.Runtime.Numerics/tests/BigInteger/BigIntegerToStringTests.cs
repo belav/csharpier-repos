@@ -3394,6 +3394,7 @@ namespace System.Numerics.Tests
 
             return result;
         }
+
         private static string GetHexDigitSequence(int min, int max, Random random)
         {
             string result = string.Empty;
@@ -3425,6 +3426,7 @@ namespace System.Numerics.Tests
 
             return result;
         }
+
         private static string GetRandomInvalidFormatChar(Random random)
         {
             char[] digits = new char[]

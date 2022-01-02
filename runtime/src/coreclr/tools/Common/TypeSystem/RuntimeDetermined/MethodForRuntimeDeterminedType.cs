@@ -43,7 +43,9 @@ namespace Internal.TypeSystem
         public override bool IsFinal => _typicalMethodDef.IsFinal;
         public override bool IsDefaultConstructor => _typicalMethodDef.IsDefaultConstructor;
         public override string Name => _typicalMethodDef.Name;
+
         public override MethodDesc GetTypicalMethodDefinition() => _typicalMethodDef;
+
         public override Instantiation Instantiation => _typicalMethodDef.Instantiation;
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)

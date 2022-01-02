@@ -532,6 +532,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             private Guid? _goo;
             private SomeEnum _enum;
             private SomeEnum? _maybeEnum;
+
 #pragma warning restore 649, IDE0044 // Add readonly modifier
 
             public int Id => _id;

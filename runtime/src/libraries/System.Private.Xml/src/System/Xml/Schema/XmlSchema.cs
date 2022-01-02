@@ -249,6 +249,7 @@ namespace System.Xml.Schema
                 return _isCompiled;
             }
         }
+
 #pragma warning restore 618
 
         internal void CompileSchemaInSet(

@@ -43,12 +43,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return _parameters[index].Name;
             }
+
             public override bool ParameterIsDiscard(int index)
             {
                 return false;
             }
+
             public override SyntaxList<AttributeListSyntax> ParameterAttributes(int index) =>
                 default;
+
             public override bool HasNames
             {
                 get { return true; }
@@ -81,18 +84,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 get { return false; }
             }
             public override bool IsStatic => false;
+
             public override RefKind RefKind(int index)
             {
                 return Microsoft.CodeAnalysis.RefKind.None;
             }
+
             public override MessageID MessageID
             {
                 get { return MessageID.IDS_FeatureQueryExpression; }
             } // TODO: what is the correct ID here?
+
             public override Location ParameterLocation(int index)
             {
                 return _parameters[index].Locations[0];
             }
+
             public override TypeWithAnnotations ParameterTypeWithAnnotations(int index)
             {
                 throw new ArgumentException();

@@ -531,7 +531,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 elementSorter: e => e.max
             );
         }
-
         #endregion
 
         #region GroupByAnonymousAggregate
@@ -1371,7 +1370,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public string Name { get; set; }
             public object Value { get; set; }
         }
-
         #endregion
 
         #region GroupByWithElementSelectorAggregate
@@ -1646,7 +1644,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
             );
         }
-
         #endregion
 
         #region GroupByAfterComposition
@@ -2081,7 +2078,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
             );
         }
-
         #endregion
 
         #region GroupByAggregateComposition
@@ -3054,7 +3050,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 entryCount: 89
             );
         }
-
         #endregion
 
         #region GroupByAggregateChainComposition
@@ -3309,7 +3304,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 elementSorter: e => e.Key
             );
         }
-
         #endregion
 
         #region GroupByWithoutAggregate
@@ -3440,7 +3434,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     )
             );
         }
-
         #endregion
 
         #region GroupBySelectFirst
@@ -3582,7 +3575,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 entryCount: 91
             );
         }
-
         #endregion
 
         #region GroupByEntityType
@@ -3677,7 +3669,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
             );
         }
-
         #endregion
 
         #region ResultOperatorsAfterGroupBy
@@ -3866,7 +3857,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                         )
             );
         }
-
         #endregion
 
         # region GroupByInSubquery
@@ -4124,7 +4114,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 entryCount: 15
             );
         }
-
         #endregion
 
         #region GroupByAndDistinctWithCorrelatedCollection

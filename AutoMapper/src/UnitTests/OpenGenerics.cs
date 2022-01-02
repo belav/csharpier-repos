@@ -12,13 +12,16 @@ namespace AutoMapper.UnitTests
         {
             public T Value1 { get; set; }
         }
+
         public class BarBase<T>
         {
             public T Value2 { get; set; }
         }
+
         public class Bar<T> : BarBase<T>
         {
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new(
                 mapper =>
@@ -26,23 +29,28 @@ namespace AutoMapper.UnitTests
                         .CreateMap(typeof(Foo<>), typeof(Bar<>))
                         .ForMember("Value2", to => to.MapFrom("Value1"))
             );
+
         [Fact]
         public void Can_map_base_members() =>
             Map<Bar<int>>(new Foo<int> { Value1 = 5 }).Value2.ShouldBe(5);
     }
+
     public class GenericMapsAsNonGeneric : AutoMapperSpecBase
     {
         class Source
         {
             public int Value;
         }
+
         class Destination<T>
         {
             public T Value;
         }
+
         class NonGenericDestination : Destination<string>
         {
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -52,20 +60,24 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap(typeof(Source), typeof(NonGenericDestination));
                 }
             );
+
         [Fact]
         public void Should_work() =>
             Mapper.Map<Destination<string>>(new Source { Value = 42 }).Value.ShouldBe("42");
     }
+
     public class GenericMapsPriority : AutoMapperSpecBase
     {
         class Source<T>
         {
             public T Value;
         }
+
         class Destination<T>
         {
             public T Value;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -78,6 +90,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap(typeof(Source<int>), typeof(Destination<>));
                 }
             );
+
         [Fact]
         public void Should_work()
         {
@@ -87,18 +100,22 @@ namespace AutoMapper.UnitTests
                 .Value.ShouldBe("42");
         }
     }
+
     public class GenericMapWithUntypedMap : AutoMapperSpecBase
     {
         class Source<T>
         {
             public T Value;
         }
+
         class Destination<T>
         {
             public T Value;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateMap(typeof(Source<>), typeof(Destination<>)));
+
         [Fact]
         public void Should_work() =>
             new Action(() => Mapper.Map(new Source<int>(), null, typeof(Destination<>)))
@@ -107,22 +124,26 @@ namespace AutoMapper.UnitTests
                     $"Type {typeof(Destination<>).FullName}[T] is a generic type definition"
                 );
     }
+
     public class GenericValueResolverTypeMismatch : AutoMapperSpecBase
     {
         class Source<T>
         {
             public T Value;
         }
+
         class Destination
         {
             public string Value;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
                     cfg.CreateMap(typeof(Source<>), typeof(Destination))
                         .ForMember("Value", o => o.MapFrom(typeof(ValueResolver<>)))
             );
+
         class ValueResolver<T> : IValueResolver<Source<T>, Destination, object>
         {
             public object Resolve(
@@ -132,10 +153,12 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => int.MaxValue;
         }
+
         [Fact]
         public void Should_map_ok() =>
             Map<Destination>(new Source<object>()).Value.ShouldBe(int.MaxValue.ToString());
     }
+
     public class GenericValueResolver : AutoMapperSpecBase
     {
         class Destination
@@ -143,11 +166,13 @@ namespace AutoMapper.UnitTests
             public string MyKey;
             public string MyValue;
         }
+
         class Destination<TKey, TValue>
         {
             public TKey MyKey;
             public TValue MyValue;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -160,6 +185,7 @@ namespace AutoMapper.UnitTests
                         .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,,,>)));
                 }
             );
+
         private class KeyResolver<TKey>
             : IValueResolver<KeyValuePair<TKey, int>, Destination, string>
         {
@@ -170,6 +196,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => source.Key.ToString();
         }
+
         private class ValueResolver<TKey, TValue>
             : IValueResolver<KeyValuePair<TKey, TValue>, Destination, string>
         {
@@ -180,6 +207,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => source.Value.ToString();
         }
+
         private class KeyResolver<TKeySource, TValueSource, TKeyDestination>
             : IValueResolver<
                   KeyValuePair<TKeySource, TValueSource>,
@@ -194,6 +222,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => source.Key.ToString();
         }
+
         private class ValueResolver<TKeySource, TValueSource, TKeyDestination, TValueDestination>
             : IValueResolver<
                   KeyValuePair<TKeySource, TValueSource>,
@@ -208,6 +237,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => source.Value.ToString();
         }
+
         [Fact]
         public void Should_map_non_generic_destination()
         {
@@ -215,6 +245,7 @@ namespace AutoMapper.UnitTests
             destination.MyKey.ShouldBe("1");
             destination.MyValue.ShouldBe("2");
         }
+
         [Fact]
         public void Should_map_generic_destination()
         {
@@ -231,11 +262,13 @@ namespace AutoMapper.UnitTests
             public string MyKey;
             public string MyValue;
         }
+
         class Destination<TKey, TValue>
         {
             public TKey MyKey;
             public TValue MyValue;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -248,6 +281,7 @@ namespace AutoMapper.UnitTests
                         .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,,,>), "Value"));
                 }
             );
+
         private class Resolver<TKey>
             : IMemberValueResolver<KeyValuePair<TKey, int>, Destination, int, string>
         {
@@ -259,6 +293,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => sourceMember.ToString();
         }
+
         private class Resolver<TKey, TValue>
             : IMemberValueResolver<KeyValuePair<TKey, TValue>, Destination, int, string>
         {
@@ -270,6 +305,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => sourceMember.ToString();
         }
+
         private class Resolver<TKey, TValue, TDestinatonKey>
             : IMemberValueResolver<
                   KeyValuePair<TKey, TValue>,
@@ -286,6 +322,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => sourceMember.ToString();
         }
+
         private class Resolver<TKey, TValue, TDestinatonKey, TDestinatonValue>
             : IMemberValueResolver<
                   KeyValuePair<TKey, TValue>,
@@ -302,6 +339,7 @@ namespace AutoMapper.UnitTests
                 ResolutionContext context
             ) => sourceMember.ToString();
         }
+
         [Fact]
         public void Should_map_non_generic_destination()
         {
@@ -309,6 +347,7 @@ namespace AutoMapper.UnitTests
             destination.MyKey.ShouldBe("1");
             destination.MyValue.ShouldBe("2");
         }
+
         [Fact]
         public void Should_map_generic_destination()
         {

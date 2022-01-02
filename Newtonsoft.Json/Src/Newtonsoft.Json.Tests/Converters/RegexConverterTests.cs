@@ -317,6 +317,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 c.Regex.Options
             );
         }
+
 #pragma warning restore 618
 
         [Test]

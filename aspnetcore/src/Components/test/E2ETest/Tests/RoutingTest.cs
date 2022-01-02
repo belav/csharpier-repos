@@ -13,6 +13,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>

@@ -47,6 +47,7 @@ namespace ILCompiler.DependencyAnalysis
         public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
             NodeFactory context
         ) => null;
+
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context)
         {
             foreach (var dependencyNode in _dependencies)
@@ -57,11 +58,13 @@ namespace ILCompiler.DependencyAnalysis
                 );
             }
         }
+
         public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
             List<DependencyNodeCore<NodeFactory>> markedNodes,
             int firstNode,
             NodeFactory context
         ) => throw new NotImplementedException();
+
         protected override string GetName(NodeFactory context) => $"DeferredTillPhaseNode {_phase}";
 
         public override int DependencyPhaseForDeferredStaticComputation => _phase;

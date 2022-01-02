@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 
+
 namespace Microsoft.Extensions.Tools.Internal;
 
 public class TemporaryCSharpProject

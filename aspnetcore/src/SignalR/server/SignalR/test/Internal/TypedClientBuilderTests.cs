@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SignalR.Internal;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests.Internal;
 
 public class TypedClientBuilderTests

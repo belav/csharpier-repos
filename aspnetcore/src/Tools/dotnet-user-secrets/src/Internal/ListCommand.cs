@@ -5,6 +5,7 @@ using Microsoft.Extensions.CommandLineUtils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 internal class ListCommand : ICommand

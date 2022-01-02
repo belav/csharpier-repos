@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting.Azure.AppServices.Tests;
 
 public class AppServicesWebHostBuilderExtensionsTest

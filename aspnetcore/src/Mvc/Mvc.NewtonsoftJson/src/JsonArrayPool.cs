@@ -5,6 +5,7 @@ using System;
 using System.Buffers;
 using Newtonsoft.Json;
 
+
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 internal class JsonArrayPool<T> : IArrayPool<T>

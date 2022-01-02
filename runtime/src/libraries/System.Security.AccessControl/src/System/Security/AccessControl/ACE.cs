@@ -86,7 +86,6 @@ namespace System.Security.AccessControl
         //
 
         internal const int HeaderLength = 4;
-
         #endregion
 
         #region Internal Methods
@@ -150,7 +149,6 @@ namespace System.Security.AccessControl
             binaryForm[offset + 2] = unchecked((byte)(Length >> 0));
             binaryForm[offset + 3] = (byte)(Length >> 8);
         }
-
         #endregion
 
         #region Constructors
@@ -165,7 +163,6 @@ namespace System.Security.AccessControl
             _type = type;
             _flags = flags;
         }
-
         #endregion
 
         #region Static Methods
@@ -463,7 +460,6 @@ namespace System.Security.AccessControl
                 nameof(binaryForm)
             );
         }
-
         #endregion
 
         #region Public Properties
@@ -561,7 +557,6 @@ namespace System.Security.AccessControl
         //
 
         public abstract int BinaryLength { get; }
-
         #endregion
 
         #region Public Methods
@@ -706,13 +701,11 @@ namespace System.Security.AccessControl
 
         private int _accessMask;
         private SecurityIdentifier _sid;
-
         #endregion
 
         #region Internal Constants
 
         internal const int AccessMaskLength = 4;
-
         #endregion
 
         #region Constructors
@@ -736,7 +729,6 @@ namespace System.Security.AccessControl
             AccessMask = accessMask;
             SecurityIdentifier = securityIdentifier;
         }
-
         #endregion
 
         #region Public Properties
@@ -792,7 +784,6 @@ namespace System.Security.AccessControl
         //
 
         private byte[]? _opaque;
-
         #endregion
 
         #region Public Constants
@@ -802,7 +793,6 @@ namespace System.Security.AccessControl
         //
 
         public static readonly int MaxOpaqueLength = ushort.MaxValue - HeaderLength;
-
         #endregion
 
         #region Constructors
@@ -819,7 +809,6 @@ namespace System.Security.AccessControl
 
             SetOpaque(opaque);
         }
-
         #endregion
 
         #region Public Properties
@@ -853,7 +842,6 @@ namespace System.Security.AccessControl
         {
             get { return HeaderLength + OpaqueLength; }
         }
-
         #endregion
 
         #region Public Methods
@@ -956,7 +944,6 @@ namespace System.Security.AccessControl
         #region Private Members
 
         private CompoundAceType _compoundAceType;
-
         #endregion
 
         #region Private Constants
@@ -979,7 +966,6 @@ namespace System.Security.AccessControl
 
             _compoundAceType = compoundAceType;
         }
-
         #endregion
 
         #region Static Parser
@@ -1054,7 +1040,6 @@ namespace System.Security.AccessControl
 
             return false;
         }
-
         #endregion
 
         #region Public Properties
@@ -1077,7 +1062,6 @@ namespace System.Security.AccessControl
                 );
             }
         }
-
         #endregion
 
         #region Public Methods
@@ -1155,7 +1139,6 @@ namespace System.Security.AccessControl
         private readonly bool _isCallback;
         private readonly AceQualifier _qualifier;
         private byte[]? _opaque;
-
         #endregion
 
         #region Private Methods
@@ -1245,7 +1228,6 @@ namespace System.Security.AccessControl
                     throw new InvalidOperationException();
             }
         }
-
         #endregion
 
         #region Constructors
@@ -1261,7 +1243,6 @@ namespace System.Security.AccessControl
             _qualifier = QualifierFromType(type, out _isCallback);
             SetOpaque(opaque);
         }
-
         #endregion
 
         #region Public Properties
@@ -1315,7 +1296,6 @@ namespace System.Security.AccessControl
                 }
             }
         }
-
         #endregion
 
         #region Public Methods
@@ -1431,7 +1411,6 @@ namespace System.Security.AccessControl
             bool isCallback,
             byte[]? opaque
         ) : base(TypeFromQualifier(isCallback, qualifier), flags, accessMask, sid, opaque) { }
-
         #endregion
 
         #region Private Static Methods
@@ -1461,7 +1440,6 @@ namespace System.Security.AccessControl
                       SR.ArgumentOutOfRange_Enum
                   ),
             };
-
         #endregion
 
         #region Static Parser
@@ -1612,7 +1590,6 @@ namespace System.Security.AccessControl
 
             return false;
         }
-
         #endregion
 
         #region Public Properties
@@ -1640,7 +1617,6 @@ namespace System.Security.AccessControl
         {
             get { return MaxOpaqueLength(IsCallback); }
         }
-
         #endregion
 
         #region Public Methods
@@ -1803,7 +1779,6 @@ namespace System.Security.AccessControl
 
         private const int ObjectFlagsLength = 4;
         private const int GuidLength = 16;
-
         #endregion
 
         #region Constructors
@@ -1824,7 +1799,6 @@ namespace System.Security.AccessControl
             _objectAceType = type;
             _inheritedObjectAceType = inheritedType;
         }
-
         #endregion
 
         #region Private Methods
@@ -1912,7 +1886,6 @@ namespace System.Security.AccessControl
 
             return true;
         }
-
         #endregion
 
         #region Static Parser
@@ -2129,7 +2102,6 @@ namespace System.Security.AccessControl
 
             return false;
         }
-
         #endregion
 
         #region Public Properties
@@ -2207,7 +2179,6 @@ namespace System.Security.AccessControl
         {
             get { return MaxOpaqueLength(IsCallback); }
         }
-
         #endregion
 
         #region Public Methods

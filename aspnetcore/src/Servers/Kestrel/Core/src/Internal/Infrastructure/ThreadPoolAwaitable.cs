@@ -5,6 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal class ThreadPoolAwaitable : ICriticalNotifyCompletion
@@ -14,6 +15,7 @@ internal class ThreadPoolAwaitable : ICriticalNotifyCompletion
     private ThreadPoolAwaitable() { }
 
     public ThreadPoolAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => false;
 
     public void GetResult() { }

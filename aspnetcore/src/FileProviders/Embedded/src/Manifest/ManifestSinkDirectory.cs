@@ -4,6 +4,7 @@
 using System;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal class ManifestSinkDirectory : ManifestDirectory

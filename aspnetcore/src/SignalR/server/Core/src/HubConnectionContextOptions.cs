@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR;
 
 /// <summary>

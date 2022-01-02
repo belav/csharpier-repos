@@ -8,6 +8,7 @@ using System.Xml;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 public class SerializableErrorWrapperTests

@@ -16,7 +16,6 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Constructors
 
         internal BuilderElements() { }
-
         #endregion
 
         #region Public Methods
@@ -44,11 +43,11 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return true;
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
-
         #endregion
 
         #region Internal Methods
@@ -117,7 +116,6 @@ namespace System.Speech.Internal.GrammarBuilding
                 }
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -195,7 +193,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
             return c;
         }
-
         #endregion
 
         #region Internal Properties
@@ -222,7 +219,6 @@ namespace System.Speech.Internal.GrammarBuilding
                 return sb.ToString();
             }
         }
-
         #endregion
 
         #region Private Method
@@ -267,7 +263,6 @@ namespace System.Speech.Internal.GrammarBuilding
                 }
             }
         }
-
         #endregion
 
         #region Private Fields

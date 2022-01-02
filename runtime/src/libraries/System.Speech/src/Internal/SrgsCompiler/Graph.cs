@@ -260,7 +260,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 return c;
             }
         }
-
 #endif
         #endregion
 
@@ -994,6 +993,7 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 _states = states;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public State[] AKeys
             {

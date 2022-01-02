@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Test;
 
 public class DirectiveTokenEditHandlerTest

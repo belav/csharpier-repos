@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Internal;
 
 // Tests to verify that script, link and image tag helper use the size limited instance of MemoryCache.

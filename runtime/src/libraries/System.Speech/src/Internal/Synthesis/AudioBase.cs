@@ -18,7 +18,6 @@ namespace System.Speech.Internal.Synthesis
         /// Create an instance of AudioBase.
         /// </summary>
         internal AudioBase() { }
-
         #endregion
 
         #region Internal Methods
@@ -79,7 +78,6 @@ namespace System.Speech.Internal.Synthesis
         /// Wait for all the queued buffers to be played
         /// </summary>
         internal abstract void Abort();
-
         #endregion
 
         #region helpers
@@ -286,7 +284,6 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
         }
-
         #endregion
 
         #endregion
@@ -310,13 +307,11 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return null; }
         }
-
         #endregion
 
         #region Protected Property
 
         protected bool _aborted;
-
         #endregion
 
         #region Private Types

@@ -21,6 +21,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
 public class HubProtocolVersionTestsCollection

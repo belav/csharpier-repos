@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Ignitor;
 using Microsoft.AspNetCore.SignalR.Client;
 
+
 namespace IgnitorSample;
 
 /// <summary>

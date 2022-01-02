@@ -2231,7 +2231,6 @@ class Test
                         .WithArguments("int?.implicit operator int?(int)")
                 );
         }
-
         #endregion
 
         [Fact]

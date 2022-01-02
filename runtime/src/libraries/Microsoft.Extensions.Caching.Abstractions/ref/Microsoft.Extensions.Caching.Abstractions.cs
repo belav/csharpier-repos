@@ -15,6 +15,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions SetAbsoluteExpiration(
             this Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions options,
             System.TimeSpan relative
@@ -22,6 +23,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions SetSlidingExpiration(
             this Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions options,
             System.TimeSpan offset
@@ -30,9 +32,11 @@ namespace Microsoft.Extensions.Caching.Distributed
             throw null;
         }
     }
+
     public partial class DistributedCacheEntryOptions
     {
         public DistributedCacheEntryOptions() { }
+
         public System.DateTimeOffset? AbsoluteExpiration
         {
             get { throw null; }
@@ -49,6 +53,7 @@ namespace Microsoft.Extensions.Caching.Distributed
             set { }
         }
     }
+
     public static partial class DistributedCacheExtensions
     {
         public static string GetString(
@@ -58,6 +63,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<string> GetStringAsync(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
@@ -66,11 +72,13 @@ namespace Microsoft.Extensions.Caching.Distributed
         {
             throw null;
         }
+
         public static void Set(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
             byte[] value
         ) { }
+
         public static System.Threading.Tasks.Task SetAsync(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
@@ -80,17 +88,20 @@ namespace Microsoft.Extensions.Caching.Distributed
         {
             throw null;
         }
+
         public static void SetString(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
             string value
         ) { }
+
         public static void SetString(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
             string value,
             Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions options
         ) { }
+
         public static System.Threading.Tasks.Task SetStringAsync(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
@@ -101,6 +112,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task SetStringAsync(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
             string key,
@@ -111,6 +123,7 @@ namespace Microsoft.Extensions.Caching.Distributed
             throw null;
         }
     }
+
     public partial interface IDistributedCache
     {
         byte[] Get(string key);
@@ -141,6 +154,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         );
     }
 }
+
 namespace Microsoft.Extensions.Caching.Memory
 {
     public static partial class CacheEntryExtensions
@@ -152,6 +166,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry RegisterPostEvictionCallback(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             Microsoft.Extensions.Caching.Memory.PostEvictionDelegate callback
@@ -159,6 +174,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry RegisterPostEvictionCallback(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             Microsoft.Extensions.Caching.Memory.PostEvictionDelegate callback,
@@ -167,6 +183,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry SetAbsoluteExpiration(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             System.DateTimeOffset absolute
@@ -174,6 +191,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry SetAbsoluteExpiration(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             System.TimeSpan relative
@@ -181,6 +199,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry SetOptions(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options
@@ -188,6 +207,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry SetPriority(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             Microsoft.Extensions.Caching.Memory.CacheItemPriority priority
@@ -195,6 +215,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry SetSize(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             long size
@@ -202,6 +223,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry SetSlidingExpiration(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             System.TimeSpan offset
@@ -209,6 +231,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry SetValue(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
             object value
@@ -217,6 +240,7 @@ namespace Microsoft.Extensions.Caching.Memory
             throw null;
         }
     }
+
     public static partial class CacheExtensions
     {
         public static object Get(
@@ -226,6 +250,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<TItem> GetOrCreateAsync<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -237,6 +262,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static TItem GetOrCreate<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -245,6 +271,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static TItem Get<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key
@@ -252,6 +279,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static TItem Set<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -260,6 +288,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static TItem Set<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -269,6 +298,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static TItem Set<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -278,6 +308,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static TItem Set<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -287,6 +318,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static TItem Set<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -296,6 +328,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static bool TryGetValue<TItem>(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
             object key,
@@ -305,6 +338,7 @@ namespace Microsoft.Extensions.Caching.Memory
             throw null;
         }
     }
+
     public enum CacheItemPriority
     {
         Low = 0,
@@ -312,6 +346,7 @@ namespace Microsoft.Extensions.Caching.Memory
         High = 2,
         NeverRemove = 3,
     }
+
     public enum EvictionReason
     {
         None = 0,
@@ -321,6 +356,7 @@ namespace Microsoft.Extensions.Caching.Memory
         TokenExpired = 4,
         Capacity = 5,
     }
+
     public partial interface ICacheEntry : System.IDisposable
     {
         System.DateTimeOffset? AbsoluteExpiration { get; set; }
@@ -333,12 +369,14 @@ namespace Microsoft.Extensions.Caching.Memory
         System.TimeSpan? SlidingExpiration { get; set; }
         object Value { get; set; }
     }
+
     public partial interface IMemoryCache : System.IDisposable
     {
         Microsoft.Extensions.Caching.Memory.ICacheEntry CreateEntry(object key);
         void Remove(object key);
         bool TryGetValue(object key, out object value);
     }
+
     public static partial class MemoryCacheEntryExtensions
     {
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions AddExpirationToken(
@@ -348,6 +386,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions RegisterPostEvictionCallback(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
             Microsoft.Extensions.Caching.Memory.PostEvictionDelegate callback
@@ -355,6 +394,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions RegisterPostEvictionCallback(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
             Microsoft.Extensions.Caching.Memory.PostEvictionDelegate callback,
@@ -363,6 +403,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions SetAbsoluteExpiration(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
             System.DateTimeOffset absolute
@@ -370,6 +411,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions SetAbsoluteExpiration(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
             System.TimeSpan relative
@@ -377,6 +419,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions SetPriority(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
             Microsoft.Extensions.Caching.Memory.CacheItemPriority priority
@@ -384,6 +427,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions SetSize(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
             long size
@@ -391,6 +435,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions SetSlidingExpiration(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
             System.TimeSpan offset
@@ -399,9 +444,11 @@ namespace Microsoft.Extensions.Caching.Memory
             throw null;
         }
     }
+
     public partial class MemoryCacheEntryOptions
     {
         public MemoryCacheEntryOptions() { }
+
         public System.DateTimeOffset? AbsoluteExpiration
         {
             get { throw null; }
@@ -436,9 +483,11 @@ namespace Microsoft.Extensions.Caching.Memory
             set { }
         }
     }
+
     public partial class PostEvictionCallbackRegistration
     {
         public PostEvictionCallbackRegistration() { }
+
         public Microsoft.Extensions.Caching.Memory.PostEvictionDelegate EvictionCallback
         {
             get { throw null; }
@@ -450,6 +499,7 @@ namespace Microsoft.Extensions.Caching.Memory
             set { }
         }
     }
+
     public delegate void PostEvictionDelegate(
         object key,
         object value,
@@ -457,15 +507,18 @@ namespace Microsoft.Extensions.Caching.Memory
         object state
     );
 }
+
 namespace Microsoft.Extensions.Internal
 {
     public partial interface ISystemClock
     {
         System.DateTimeOffset UtcNow { get; }
     }
+
     public partial class SystemClock : Microsoft.Extensions.Internal.ISystemClock
     {
         public SystemClock() { }
+
         public System.DateTimeOffset UtcNow
         {
             get { throw null; }

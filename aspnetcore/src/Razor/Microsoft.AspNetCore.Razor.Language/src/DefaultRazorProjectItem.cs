@@ -3,6 +3,7 @@
 
 using System.IO;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorProjectItem : RazorProjectItem

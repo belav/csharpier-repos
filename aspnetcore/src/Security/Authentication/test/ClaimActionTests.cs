@@ -7,6 +7,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 public class ClaimActionTests

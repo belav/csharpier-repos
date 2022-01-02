@@ -35,6 +35,7 @@ namespace System.Net.Security
 
 #pragma warning disable CA1825 // used in reference comparison, requires unique object identity
         private static readonly byte[] s_emptyMessage = new byte[0];
+
 #pragma warning restore CA1825
 
         private readonly byte[] _readHeader;

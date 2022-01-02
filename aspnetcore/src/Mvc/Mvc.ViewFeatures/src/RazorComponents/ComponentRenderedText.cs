@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Components.Rendering;
 
 internal readonly struct ComponentRenderedText

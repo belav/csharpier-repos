@@ -12,9 +12,13 @@ namespace System.Composition.Convention.Tests
     public class PartBuilderInterfaceTests
     {
         public interface IFirst { }
+
         public interface ISecond { }
+
         public interface IThird { }
+
         public interface IFourth { }
+
         public interface IFifth : IFourth { }
 
         public class Standard : IFirst, ISecond, IThird, IFifth
@@ -36,25 +40,34 @@ namespace System.Composition.Convention.Tests
         {
             [ImportMany]
             public IEnumerable<IFirst> First { get; set; }
+
             [ImportMany]
             public IEnumerable<ISecond> Second { get; set; }
+
             [ImportMany]
             public IEnumerable<IThird> Third { get; set; }
+
             [ImportMany]
             public IEnumerable<IFourth> Fourth { get; set; }
+
             [ImportMany]
             public IEnumerable<IFifth> Fifth { get; set; }
 
             [Import(AllowDefault = true)]
             public Base Base { get; set; }
+
             [Import(AllowDefault = true)]
             public Derived Derived { get; set; }
+
             [Import(AllowDefault = true)]
             public Dippy Dippy { get; set; }
+
             [Import(AllowDefault = true)]
             public Standard Standard { get; set; }
+
             [Import(AllowDefault = true)]
             public IDisposable Disposable { get; set; }
+
             [Import(AllowDefault = true)]
             public BareClass BareClass { get; set; }
         }

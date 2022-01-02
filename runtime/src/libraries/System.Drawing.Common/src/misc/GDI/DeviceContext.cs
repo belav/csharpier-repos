@@ -74,7 +74,6 @@ namespace System.Drawing.Internal
         private IntPtr _hCurrentFont;
 
         private Stack? _contextStack;
-
 #if GDI_FINALIZATION_WATCH
         private string AllocationSite = DbgUtil.StackTrace;
         private string DeAllocationSite = "";

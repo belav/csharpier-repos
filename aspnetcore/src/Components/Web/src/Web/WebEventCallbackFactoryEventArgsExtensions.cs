@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Components.Web;
 
 /// <summary>
@@ -310,6 +311,7 @@ public static class WebEventCallbackFactoryEventArgsExtensions
 
         return factory.Create<MouseEventArgs>(receiver, callback);
     }
+
     /// <summary>
     /// Creates an <see cref="EventCallback"/> for the provided <paramref name="receiver"/> and
     /// <paramref name="callback"/>.

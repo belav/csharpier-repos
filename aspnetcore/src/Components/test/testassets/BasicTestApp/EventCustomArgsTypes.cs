@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
+
 namespace BasicTestApp.CustomEventTypesNamespace;
 
 [EventHandler("ontestevent", typeof(TestEventArgs), true, true)]

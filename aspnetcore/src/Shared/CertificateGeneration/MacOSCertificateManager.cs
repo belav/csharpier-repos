@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
+
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
 internal class MacOSCertificateManager : CertificateManager

@@ -260,26 +260,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             INamespaceSymbol namespaceSymbol,
             _VSOBJDESCOPTIONS options
         );
+
         protected abstract void BuildDelegateDeclaration(
             INamedTypeSymbol typeSymbol,
             _VSOBJDESCOPTIONS options
         );
+
         protected abstract void BuildTypeDeclaration(
             INamedTypeSymbol typeSymbol,
             _VSOBJDESCOPTIONS options
         );
+
         protected abstract void BuildMethodDeclaration(
             IMethodSymbol methodSymbol,
             _VSOBJDESCOPTIONS options
         );
+
         protected abstract void BuildFieldDeclaration(
             IFieldSymbol fieldSymbol,
             _VSOBJDESCOPTIONS options
         );
+
         protected abstract void BuildPropertyDeclaration(
             IPropertySymbol propertySymbol,
             _VSOBJDESCOPTIONS options
         );
+
         protected abstract void BuildEventDeclaration(
             IEventSymbol eventSymbol,
             _VSOBJDESCOPTIONS options

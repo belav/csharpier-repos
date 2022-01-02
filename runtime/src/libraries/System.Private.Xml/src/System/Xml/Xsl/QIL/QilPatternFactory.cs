@@ -144,7 +144,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.OptimizeBarrier(child);
         }
-
         #endregion // meta
 
         #region specials
@@ -170,7 +169,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.Warning(text);
         }
-
         #endregion // specials
 
         #region variables
@@ -201,7 +199,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.PositionOf(expr);
         }
-
         #endregion // variables
 
         #region literals
@@ -222,7 +219,6 @@ namespace System.Xml.Xsl.Qil
         {
             return b ? this.True() : this.False();
         }
-
         #endregion // literals
 
         #region boolean operators
@@ -298,7 +294,6 @@ namespace System.Xml.Xsl.Qil
             }
             return _f.Not(child);
         }
-
         #endregion // boolean operators
 
         #region choice
@@ -346,7 +341,6 @@ namespace System.Xml.Xsl.Qil
             }
             return _f.Choice(expr, branches);
         }
-
         #endregion // choice
 
         #region collection operators
@@ -444,7 +438,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.Modulo(left, right);
         }
-
         #endregion // arithmetic operators
 
         #region string operators
@@ -525,7 +518,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.Le(left, right);
         }
-
         #endregion // value comparison operators
 
         #region node comparison operators
@@ -541,7 +533,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.Before(left, right);
         }
-
         #endregion // node comparison operators
 
         #region loops
@@ -575,7 +566,6 @@ namespace System.Xml.Xsl.Qil
             }
             return _f.Filter(variable, expr);
         }
-
         #endregion // loops
 
         #region sorting
@@ -600,7 +590,6 @@ namespace System.Xml.Xsl.Qil
             }
             return _f.DocOrderDistinct(collection);
         }
-
         #endregion // sorting
 
         #region function definition and invocation
@@ -612,6 +601,7 @@ namespace System.Xml.Xsl.Qil
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);
             return _f.Function(args, sideEffects, resultType);
         }
+
         public QilFunction Function(QilList args, QilNode defn, QilNode sideEffects)
         {
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);
@@ -744,7 +734,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.RtfCtor(content, baseUri);
         }
-
         #endregion // XML construction
 
         #region Node properties
@@ -770,7 +759,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.PrefixOf(expr);
         }
-
         #endregion // Node properties
 
         #region Type operators
@@ -792,7 +780,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.IsEmpty(set);
         }
-
         #endregion // Type operators
 
         #region XPath operators
@@ -818,7 +805,6 @@ namespace System.Xml.Xsl.Qil
         {
             return _f.XPathPreceding(expr);
         }
-
         #endregion // XPath operators
 
         #region XSLT

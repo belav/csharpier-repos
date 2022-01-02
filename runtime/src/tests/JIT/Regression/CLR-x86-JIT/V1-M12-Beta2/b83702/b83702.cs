@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal struct BB
 {
     public static object m_xStatic1;
@@ -27,6 +28,7 @@ internal struct BB
                 ;
         } while (param2 != param3);
     }
+
     private static int Main()
     {
         try

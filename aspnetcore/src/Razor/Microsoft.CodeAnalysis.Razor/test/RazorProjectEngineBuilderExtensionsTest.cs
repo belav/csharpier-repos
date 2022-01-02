@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Xunit;
 using static Microsoft.CodeAnalysis.Razor.RazorProjectEngineBuilderExtensions;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 public class RazorProjectEngineBuilderExtensionsTest

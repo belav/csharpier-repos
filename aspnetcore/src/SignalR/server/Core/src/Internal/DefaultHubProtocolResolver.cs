@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class DefaultHubProtocolResolver : IHubProtocolResolver

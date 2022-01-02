@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal abstract class GreenNode

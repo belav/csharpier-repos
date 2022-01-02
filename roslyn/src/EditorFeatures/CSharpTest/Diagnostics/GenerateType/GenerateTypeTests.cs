@@ -416,7 +416,6 @@ internal class Command
                 index: 1
             );
         }
-
         #endregion
 
         #region Lambdas
@@ -464,7 +463,6 @@ internal class Command
                 index: 2
             );
         }
-
         #endregion
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -3266,7 +3264,6 @@ internal class T
                 )
             );
         }
-
         #endregion
 
         #region Generate Interface
@@ -3392,7 +3389,6 @@ internal interface B
                 index: 1
             );
         }
-
         #endregion
 
         [WorkItem(539339, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539339")]

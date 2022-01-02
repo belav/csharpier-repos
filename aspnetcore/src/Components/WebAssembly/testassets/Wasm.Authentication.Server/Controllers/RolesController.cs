@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Wasm.Authentication.Server.Models;
 
+
 namespace Wasm.Authentication.Server.Controllers;
 
 [Authorize]

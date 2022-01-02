@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
 namespace IdentitySample.Data.Migrations;
 
 [DbContext(typeof(ApplicationDbContext))]

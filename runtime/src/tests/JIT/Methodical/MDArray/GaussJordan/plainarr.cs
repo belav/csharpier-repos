@@ -8,6 +8,7 @@ using System;
 internal class plainarr
 {
     private static double s_tolerance = 0.0000000000001;
+
     public static bool AreEqual(double left, double right)
     {
         return Math.Abs(left - right) < s_tolerance;

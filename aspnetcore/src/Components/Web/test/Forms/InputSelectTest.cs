@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Forms;
 
 public class InputSelectTest
@@ -244,6 +245,7 @@ public class InputSelectTest
             get => base.CurrentValueAsString;
             set => base.CurrentValueAsString = value;
         }
+
         public async Task SetCurrentValueAsStringAsync(string value)
         {
             // This is equivalent to the subclass writing to CurrentValueAsString

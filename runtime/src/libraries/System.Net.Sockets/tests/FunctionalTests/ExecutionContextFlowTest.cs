@@ -788,6 +788,7 @@ namespace System.Net.Sockets.Tests
         private sealed class SetOnFinalized
         {
             internal ManualResetEventSlim _setWhenFinalized;
+
             ~SetOnFinalized() => _setWhenFinalized.Set();
         }
 
@@ -886,8 +887,11 @@ namespace System.Net.Sockets.Tests
             public AwaitWithOnCompletedInvocation<T> GetAwaiter() => this;
 
             public bool IsCompleted => false;
+
             public T GetResult() => _valueTask.GetAwaiter().GetResult();
+
             public void OnCompleted(Action continuation) => throw new NotSupportedException();
+
             public void UnsafeOnCompleted(Action continuation)
             {
                 _valueTask.GetAwaiter().UnsafeOnCompleted(continuation);

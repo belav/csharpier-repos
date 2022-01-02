@@ -7,6 +7,7 @@ using System.Composition;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 
+
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
 [Export(typeof(LspWorkspaceRegistrationService)), Shared]

@@ -143,7 +143,6 @@ namespace Newtonsoft.Json.Linq
         {
             return new List<JToken>();
         }
-
 #if HAVE_COMPONENT_MODEL
         /// <summary>
         /// Raises the <see cref="AddingNew"/> event.
@@ -1034,7 +1033,6 @@ namespace Newtonsoft.Json.Linq
             }
             return hashCode;
         }
-
 #if HAVE_COMPONENT_MODEL
         string ITypedList.GetListName(PropertyDescriptor[] listAccessors)
         {

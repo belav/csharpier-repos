@@ -16,7 +16,6 @@ namespace System.Threading.Tasks.Tests
             TaskContinuationOptions.NotOnRanToCompletion | TaskContinuationOptions.NotOnFaulted;
         private static TaskContinuationOptions s_onlyOnFaulted =
             TaskContinuationOptions.NotOnRanToCompletion | TaskContinuationOptions.NotOnCanceled;
-
         #endregion
 
         #region Test Methods
@@ -191,6 +190,7 @@ namespace System.Threading.Tasks.Tests
                 true
             );
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunContinueWithTaskFuture_FaultedCanceled_OnException()
         {
@@ -238,7 +238,6 @@ namespace System.Threading.Tasks.Tests
                 true
             );
         }
-
         #endregion
 
         #region Helper Methods

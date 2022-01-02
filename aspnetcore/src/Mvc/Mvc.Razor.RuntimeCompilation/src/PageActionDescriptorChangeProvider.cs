@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal class PageActionDescriptorChangeProvider : IActionDescriptorChangeProvider

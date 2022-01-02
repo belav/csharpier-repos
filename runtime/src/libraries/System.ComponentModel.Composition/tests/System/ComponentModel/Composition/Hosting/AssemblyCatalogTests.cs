@@ -41,6 +41,7 @@ namespace System.ComponentModel.Composition
         {
             return Assembly.GetExecutingAssembly().CodeBase;
         }
+
 #pragma warning restore SYSLIB0012
 
         protected Assembly GetAttributedAssembly()
@@ -790,6 +791,7 @@ namespace System.ComponentModel.Composition
                 }
             );
         }
+
         //=========================================================================================================================================
         //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitonOrigin) constructor
         //=========================================================================================================================================
@@ -916,6 +918,7 @@ namespace System.ComponentModel.Composition
                 }
             );
         }
+
 #pragma warning restore SYSLIB0012
 
         //=========================================================================================================================================

@@ -46,6 +46,7 @@ namespace System.Net.WebSockets
             ReceiveFromNetwork = 3,
             IndicateReceiveComplete = 4,
         }
+
         internal enum BufferType : uint
         {
             None = 0x00000000,
@@ -127,6 +128,7 @@ namespace System.Net.WebSockets
                 }
             };
         }
+
 #pragma warning restore CA1810
 
         internal static string SupportedVersion

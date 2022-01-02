@@ -16,6 +16,7 @@ using Microsoft.JSInterop;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 public class CircuitHostTest
@@ -406,6 +407,7 @@ public class CircuitHostTest
     private class ThrowOnDisposeComponent : IComponent, IDisposable
     {
         public bool DidCallDispose { get; private set; }
+
         public void Attach(RenderHandle renderHandle) { }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;

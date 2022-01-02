@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Wasm.Performance.Driver;
 
 internal class BenchmarkMeasurement

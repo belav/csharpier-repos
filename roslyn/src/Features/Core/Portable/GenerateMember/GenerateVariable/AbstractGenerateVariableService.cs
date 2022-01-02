@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
         protected AbstractGenerateVariableService() { }
 
         protected abstract bool IsExplicitInterfaceGeneration(SyntaxNode node);
+
         protected abstract bool IsIdentifierNameGeneration(SyntaxNode node);
 
         protected abstract bool TryInitializeExplicitInterfaceState(
@@ -45,6 +46,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             out IPropertySymbol propertySymbol,
             out INamedTypeSymbol typeToGenerateIn
         );
+
         protected abstract bool TryInitializeIdentifierNameState(
             SemanticDocument document,
             TSimpleNameSyntax identifierName,

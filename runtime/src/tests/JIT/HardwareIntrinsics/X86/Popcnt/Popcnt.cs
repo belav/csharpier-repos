@@ -66,6 +66,7 @@ namespace IntelHardwareIntrinsicTest
         {
             public T s;
             public U res;
+
             public POPCNT(T a, U r)
             {
                 this.s = a;

@@ -4,6 +4,7 @@
 using System;
 using System.Buffers;
 
+
 namespace Nerdbank.Streams;
 
 internal static class Requires

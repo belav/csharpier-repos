@@ -601,6 +601,7 @@ namespace Internal.IL
 
                 AppendNameForNamespaceTypeWithoutAliases(sb, type);
             }
+
             public void AppendNameForNamespaceTypeWithoutAliases(StringBuilder sb, DefType type)
             {
                 ModuleDesc owningModule = (type as MetadataType)?.Module;

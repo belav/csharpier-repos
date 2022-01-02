@@ -365,7 +365,6 @@ class C
                 new TestParameters(options: ExplicitTypeEverywhere())
             );
         }
-
         #endregion
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitType)]

@@ -11,7 +11,9 @@ using System;
 public class Base { }
 
 public class C : IMinusT<int> { }
+
 public class D : IMinusT<string[]> { }
+
 public class E : IMinusT<object> { }
 
 public class F : IMinusT<Base> { }

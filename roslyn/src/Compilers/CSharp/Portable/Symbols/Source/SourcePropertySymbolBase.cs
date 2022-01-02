@@ -483,6 +483,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazySourceName;
             }
         }
+
 #nullable disable
 
         public override string MetadataName
@@ -1516,6 +1517,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return base.EarlyDecodeWellKnownAttribute(ref arguments);
         }
+
 #nullable disable
 
         /// <summary>
@@ -1777,7 +1779,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
         }
-
         #endregion
 
         #region Completion
@@ -1928,7 +1929,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics.Add(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, TypeLocation, type);
             }
         }
-
         #endregion
 
 #nullable enable

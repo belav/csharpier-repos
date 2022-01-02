@@ -3,6 +3,7 @@
 
 using Microsoft.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage(

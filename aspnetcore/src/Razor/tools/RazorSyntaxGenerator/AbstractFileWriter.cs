@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+
 namespace RazorSyntaxGenerator;
 
 internal abstract class AbstractFileWriter
@@ -112,7 +113,6 @@ internal abstract class AbstractFileWriter
         Unindent();
         WriteLine("}");
     }
-
     #endregion Output helpers
 
     #region Node helpers

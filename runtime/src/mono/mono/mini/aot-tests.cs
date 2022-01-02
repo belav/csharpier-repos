@@ -63,6 +63,7 @@ class Tests
         {
             return t;
         }
+
         public static T Get_T2(
             double d,
             int i1,
@@ -78,10 +79,12 @@ class Tests
         {
             return t;
         }
+
         public static T Get_T3(double d, int i, T t)
         {
             return t;
         }
+
         public static T Get_T4(int i, double d, T t)
         {
             return t;
@@ -323,6 +326,7 @@ class Tests
         {
             return Foo2<T>.Get_T(d, t);
         }
+
         public T Get_T2(double d, T t)
         {
             return Foo2<T>.Get_T2(d, 1, 2, 3, 4, 5, 6, 7, 8, t);
@@ -1022,7 +1026,6 @@ class Tests
         dict[1] = new Struct1();
         return 0;
     }
-
     // Requires c# 7.2
 #if !__MonoCS__
     public interface GameComponent

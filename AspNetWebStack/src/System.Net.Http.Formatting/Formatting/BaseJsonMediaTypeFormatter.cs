@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Newtonsoft.Json;
+
 #if !NETFX_CORE
 using Newtonsoft.Json.Serialization;
 #endif
@@ -23,7 +24,6 @@ namespace System.Net.Http.Formatting
     {
         // Though MaxDepth is not supported in portable library, we still override JsonReader's MaxDepth
         private int _maxDepth = FormattingUtilities.DefaultMaxDepth;
-
 #if !NETFX_CORE // DataContractResolver is not supported in portable library
         private readonly IContractResolver _defaultContractResolver;
 #endif
@@ -53,7 +53,6 @@ namespace System.Net.Http.Formatting
                 )
             );
         }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseJsonMediaTypeFormatter"/> class.
         /// </summary>
@@ -91,7 +90,6 @@ namespace System.Net.Http.Formatting
                 _jsonSerializerSettings = value;
             }
         }
-
 #if !NETFX_CORE // MaxDepth is not supported in portable library
         /// <summary>
         /// Gets or sets the maximum depth allowed by this formatter.

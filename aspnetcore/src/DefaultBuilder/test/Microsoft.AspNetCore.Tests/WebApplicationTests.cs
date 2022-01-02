@@ -27,6 +27,8 @@ using Microsoft.Extensions.Options;
 
 [assembly: HostingStartup(typeof(WebApplicationTests.TestHostingStartup))]
 
+
+
 namespace Microsoft.AspNetCore.Tests;
 
 public class WebApplicationTests
@@ -2271,6 +2273,7 @@ public class WebApplicationTests
     }
 
     private class Service : IService { }
+
     private interface IService { }
 
     private class Service2

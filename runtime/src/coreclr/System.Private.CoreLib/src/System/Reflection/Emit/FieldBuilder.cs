@@ -61,7 +61,6 @@ namespace System.Reflection.Emit
                 m_Attributes
             );
         }
-
         #endregion
 
         #region Internal Members
@@ -100,7 +99,6 @@ namespace System.Reflection.Emit
                 return m_typeBuilder;
             }
         }
-
         #endregion
 
         #region FieldInfo Overrides
@@ -134,7 +132,6 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
         public override FieldAttributes Attributes => m_Attributes;
-
         #endregion
 
         #region ICustomAttributeProvider Implementation
@@ -152,7 +149,6 @@ namespace System.Reflection.Emit
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
-
         #endregion
 
         #region Public Members

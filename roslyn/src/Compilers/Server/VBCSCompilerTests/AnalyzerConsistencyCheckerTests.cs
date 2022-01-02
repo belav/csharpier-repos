@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     public class AssemblyLoadTestFixtureCollection : ICollectionFixture<AssemblyLoadTestFixture>
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
+
         private AssemblyLoadTestFixtureCollection() { }
     }
 

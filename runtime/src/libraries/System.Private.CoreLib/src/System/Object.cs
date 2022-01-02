@@ -30,6 +30,7 @@ namespace System
         [NonVersionable]
 #pragma warning disable CA1821 // Remove empty Finalizers
         ~Object() { }
+
 #pragma warning restore CA1821
 
         // Returns a String which represents the object instance.  The default

@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class DatabaseErrorPageMiddlewareTest
@@ -715,12 +716,14 @@ public class DatabaseErrorPageMiddlewareTest
     }
 
     private static readonly UrlEncoder _urlEncoder = UrlEncoder.Default;
+
     private static string UrlEncode(string content)
     {
         return _urlEncoder.Encode(content);
     }
 
     private static readonly JavaScriptEncoder _javaScriptEncoder = JavaScriptEncoder.Default;
+
     private static string JavaScriptEncode(string content)
     {
         return _javaScriptEncoder.Encode(content);

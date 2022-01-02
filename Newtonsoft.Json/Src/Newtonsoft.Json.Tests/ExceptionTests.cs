@@ -35,7 +35,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests
@@ -115,6 +114,7 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual("Message!", exception.Message);
             Assert.AreEqual("Inner!", exception.InnerException.Message);
         }
+
 #pragma warning restore 618
 
 #if !(PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0

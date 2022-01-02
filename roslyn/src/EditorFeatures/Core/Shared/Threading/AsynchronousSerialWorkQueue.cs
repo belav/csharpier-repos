@@ -40,7 +40,6 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
 
         // The cancellation source for the current chain of work.
         private CancellationTokenSource _cancellationTokenSource = new();
-
         #endregion
 
         public AsynchronousSerialWorkQueue(

@@ -227,24 +227,38 @@ namespace R2RDump
         /// Run right after printing output
         /// </summary>
         abstract internal void End();
+
         abstract internal void WriteDivider(string title);
+
         abstract internal void WriteSubDivider();
+
         abstract internal void SkipLine();
+
         abstract internal void DumpHeader(bool dumpSections);
+
         abstract internal void DumpSection(ReadyToRunSection section);
+
         abstract internal void DumpEntryPoints();
+
         abstract internal void DumpAllMethods();
+
         abstract internal void DumpMethod(ReadyToRunMethod method);
+
         abstract internal void DumpRuntimeFunction(RuntimeFunction rtf);
+
         abstract internal void DumpDisasm(RuntimeFunction rtf, int imageOffset);
+
         abstract internal void DumpBytes(
             int rva,
             uint size,
             string name = "Raw",
             bool convertToOffset = true
         );
+
         abstract internal void DumpSectionContents(ReadyToRunSection section);
+
         abstract internal void DumpQueryCount(string q, string title, int count);
+
         abstract internal void DumpFixupStats();
 
         public TextWriter Writer => _writer;

@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class VerifyNoErrorsScope : IDisposable

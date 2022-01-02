@@ -26,7 +26,6 @@ namespace System.Speech.Internal
             ReleaseHandle();
             base.Dispose(disposing);
         }
-
         #endregion
 
         #region internal Methods
@@ -58,7 +57,6 @@ namespace System.Speech.Internal
         {
             get { return handle == IntPtr.Zero; }
         }
-
         #endregion
 
         #region Protected Methods
@@ -84,7 +82,6 @@ namespace System.Speech.Internal
 
             return false;
         }
-
         #endregion
 
         #region Private Fields

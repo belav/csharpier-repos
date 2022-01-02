@@ -272,14 +272,17 @@ namespace Microsoft.Extensions.Options.Tests
         }
 
         private class OidcProviderOptions { }
+
         private class RemoteAuthenticationOptions<TRemoteAuthenticationProviderOptions>
             where TRemoteAuthenticationProviderOptions : new() { }
+
         private class NavigationManager { }
 
         private class DefaultOidcOptionsConfiguration
             : IPostConfigureOptions<RemoteAuthenticationOptions<OidcProviderOptions>>
         {
             public DefaultOidcOptionsConfiguration(NavigationManager navigationManager) { }
+
             public void PostConfigure(
                 string name,
                 RemoteAuthenticationOptions<OidcProviderOptions> options

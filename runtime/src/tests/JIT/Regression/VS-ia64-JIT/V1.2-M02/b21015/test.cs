@@ -9,6 +9,7 @@ struct T
     public string S;
 #pragma warning disable 0414
     public string SomeOtherString;
+
 #pragma warning restore 0414
 
     public T(string _S)

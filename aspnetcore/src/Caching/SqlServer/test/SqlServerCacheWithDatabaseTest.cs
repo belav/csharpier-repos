@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Internal;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Caching.SqlServer;
 
 public class SqlServerCacheWithDatabaseTest

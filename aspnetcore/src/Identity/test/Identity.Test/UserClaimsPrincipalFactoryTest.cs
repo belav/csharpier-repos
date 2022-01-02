@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class UserClaimsPrincipalFactoryTest

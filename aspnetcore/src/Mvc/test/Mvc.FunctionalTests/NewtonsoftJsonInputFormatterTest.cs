@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase<FormatterWebSite.Startup>

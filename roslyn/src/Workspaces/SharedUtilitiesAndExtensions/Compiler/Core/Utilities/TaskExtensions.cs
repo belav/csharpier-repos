@@ -63,7 +63,6 @@ namespace Roslyn.Utilities
 
             return task.Result;
         }
-
         // NOTE(cyrusn): Once we switch over to .NET Framework 4.5 we can make our SafeContinueWith overloads
         // simply call into task.ContinueWith(..., TaskContinuationOptions.LazyCancellation, ...) as
         // that will have the semantics that we want.  From the TPL guys:

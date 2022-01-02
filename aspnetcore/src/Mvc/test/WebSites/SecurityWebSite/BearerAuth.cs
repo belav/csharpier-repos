@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace SecurityWebSite;
 
 public static class BearerAuth

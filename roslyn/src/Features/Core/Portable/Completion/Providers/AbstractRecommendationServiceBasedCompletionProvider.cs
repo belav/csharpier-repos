@@ -27,12 +27,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionOptions options,
             CancellationToken cancellationToken
         );
+
         protected abstract CompletionItemRules GetCompletionItemRules(
             ImmutableArray<(ISymbol symbol, bool preselect)> symbols,
             TSyntaxContext context
         );
+
         protected abstract CompletionItemSelectionBehavior PreselectedItemSelectionBehavior { get; }
+
         protected abstract bool IsInstrinsic(ISymbol symbol);
+
         protected abstract bool IsTriggerOnDot(SyntaxToken token, int characterPosition);
 
         protected sealed override bool ShouldCollectTelemetryForTargetTypeCompletion => true;

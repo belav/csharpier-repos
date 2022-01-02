@@ -42,6 +42,7 @@ namespace System.DirectoryServices.Protocols.Tests
             LdapConnection primaryConnection,
             LdapConnection connectionToDereference
         ) { }
+
         internal static bool NotifyNewConnection(
             LdapConnection primaryConnection,
             LdapConnection referralFromConnection,
@@ -52,6 +53,7 @@ namespace System.DirectoryServices.Protocols.Tests
             long currentUserToken,
             int errorCodeFromBind
         ) => true;
+
         internal static LdapConnection QueryForConnection(
             LdapConnection primaryConnection,
             LdapConnection referralFromConnection,

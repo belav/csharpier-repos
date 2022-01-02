@@ -12,7 +12,6 @@ namespace System.Net
         private NativeOverlapped* _nativeOverlapped;
         private ThreadPoolBoundHandle? _boundHandle;
         private readonly ListenerAsyncResult _result;
-
 #if DEBUG
         private volatile int _nativeOverlappedCounter;
         private volatile int _nativeOverlappedUsed;

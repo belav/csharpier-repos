@@ -112,7 +112,6 @@ namespace System.Collections.Concurrent.Tests
             true;
 
         protected override EnumerableOrder Order => EnumerableOrder.Unspecified;
-
         #endregion
 
         #region Constructors
@@ -151,7 +150,6 @@ namespace System.Collections.Concurrent.Tests
             );
             Assert.Equal(source, copied);
         }
-
         #endregion
 
         #region IReadOnlyDictionary<TKey, TValue>.Keys

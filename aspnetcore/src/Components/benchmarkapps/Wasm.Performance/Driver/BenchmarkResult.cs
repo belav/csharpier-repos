@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Wasm.Performance.Driver;
 
 class BenchmarkResult

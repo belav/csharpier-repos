@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.DataProtection.Cng;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 /// <summary>

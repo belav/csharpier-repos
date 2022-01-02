@@ -4,6 +4,7 @@
 using System.Text;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class RazorSourceDocumentTest

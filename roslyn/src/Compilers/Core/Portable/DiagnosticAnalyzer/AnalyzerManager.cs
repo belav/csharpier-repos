@@ -303,6 +303,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                   : symbolStartActions;
             }
         }
+
         /// <summary>
         /// Returns true if the given analyzer has enabled concurrent execution by invoking <see cref="AnalysisContext.EnableConcurrentExecution"/>.
         /// </summary>

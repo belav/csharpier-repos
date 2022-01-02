@@ -21,12 +21,14 @@ namespace System.Data.Odbc
         private FieldNameLookup? _fieldNameLookup;
 
         private DbCache? _dataCache;
+
         private enum HasRowsStatus
         {
             DontKnow = 0,
             HasRows = 1,
             HasNoRows = 2,
         }
+
         private HasRowsStatus _hasRows = HasRowsStatus.DontKnow;
         private bool _isClosed;
         private bool _isRead;
@@ -727,6 +729,7 @@ namespace System.Data.Odbc
         {
             return (char)internalGetChar(i);
         }
+
         private object internalGetChar(int i)
         {
             if (_isRead)
@@ -747,6 +750,7 @@ namespace System.Data.Odbc
         {
             return (short)internalGetInt16(i);
         }
+
         private object internalGetInt16(int i)
         {
             if (_isRead)
@@ -767,6 +771,7 @@ namespace System.Data.Odbc
         {
             return (int)internalGetInt32(i);
         }
+
         private object internalGetInt32(int i)
         {
             if (_isRead)
@@ -787,6 +792,7 @@ namespace System.Data.Odbc
         {
             return (long)internalGetInt64(i);
         }
+
         // ---------------------------------------------------------------------------------------------- //
         // internal internalGetInt64
         // -------------------------
@@ -819,6 +825,7 @@ namespace System.Data.Odbc
         {
             return (bool)internalGetBoolean(i);
         }
+
         private object internalGetBoolean(int i)
         {
             if (_isRead)
@@ -839,6 +846,7 @@ namespace System.Data.Odbc
         {
             return (float)internalGetFloat(i);
         }
+
         private object internalGetFloat(int i)
         {
             if (_isRead)
@@ -946,6 +954,7 @@ namespace System.Data.Odbc
         {
             return (double)internalGetDouble(i);
         }
+
         private object internalGetDouble(int i)
         {
             if (_isRead)
@@ -1163,6 +1172,7 @@ namespace System.Data.Odbc
                 length
             );
         }
+
         public override long GetChars(
             int i,
             long dataIndex,
@@ -3226,14 +3236,17 @@ namespace System.Data.Odbc
             {
                 get { return _quotedTableName; }
             }
+
             internal string? GetTable(bool flag)
             {
                 return (flag ? QuotedTable : Table);
             }
+
             internal QualifiedTableName(string quoteChar)
             {
                 _quoteChar = quoteChar;
             }
+
             internal QualifiedTableName(string quoteChar, string? qualifiedname)
             {
                 _quoteChar = quoteChar;

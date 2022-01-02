@@ -90,7 +90,6 @@ namespace System.IO.Ports.Tests
                 );
             }
         }
-
         #endregion
 
         static string PortInformationString

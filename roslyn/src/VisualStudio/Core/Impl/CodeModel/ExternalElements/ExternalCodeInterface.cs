@@ -62,7 +62,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             EnvDTE.vsCMAccess access,
             object location
         ) => throw Exceptions.ThrowEFail();
-
         #endregion
 
         #region EnvDTE.CodeInterface2 members

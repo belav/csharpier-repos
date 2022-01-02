@@ -34,8 +34,10 @@ namespace System.Collections.Concurrent
     {
         /// <summary>The per-bag, per-thread work-stealing queues.</summary>
         private readonly ThreadLocal<WorkStealingQueue> _locals;
+
         /// <summary>The head work stealing queue in a linked list of queues.</summary>
         private volatile WorkStealingQueue? _workStealingQueues;
+
         /// <summary>Number of times any list transitions from empty to non-empty.</summary>
         private long _emptyToNonEmptyListTransitionCount;
 
@@ -741,6 +743,7 @@ namespace System.Collections.Concurrent
         {
             /// <summary>Initial size of the queue's array.</summary>
             private const int InitialSize = 32;
+
             /// <summary>Starting index for the head and tail indices.</summary>
             private const int StartIndex =
 #if DEBUG
@@ -750,22 +753,31 @@ namespace System.Collections.Concurrent
 #endif
             /// <summary>Head index from which to steal.  This and'd with the <see cref="_mask"/> is the index into <see cref="_array"/>.</summary>
             private volatile int _headIndex = StartIndex;
+
             /// <summary>Tail index at which local pushes/pops happen. This and'd with the <see cref="_mask"/> is the index into <see cref="_array"/>.</summary>
             private volatile int _tailIndex = StartIndex;
+
             /// <summary>The array storing the queue's data.</summary>
             private volatile T[] _array = new T[InitialSize];
+
             /// <summary>Mask and'd with <see cref="_headIndex"/> and <see cref="_tailIndex"/> to get an index into <see cref="_array"/>.</summary>
             private volatile int _mask = InitialSize - 1;
+
             /// <summary>Numbers of elements in the queue from the local perspective; needs to be combined with <see cref="_stealCount"/> to get an actual Count.</summary>
             private int _addTakeCount;
+
             /// <summary>Number of steals; needs to be combined with <see cref="_addTakeCount"/> to get an actual Count.</summary>
             private int _stealCount;
+
             /// <summary>The current queue operation. Used to quiesce before performing operations from one thread onto another.</summary>
             internal volatile int _currentOp;
+
             /// <summary>true if this queue's lock is held as part of a global freeze.</summary>
             internal bool _frozen;
+
             /// <summary>Next queue in the <see cref="ConcurrentBag{T}"/>'s set of thread-local queues.</summary>
             internal readonly WorkStealingQueue? _nextQueue;
+
             /// <summary>Thread ID that owns this queue.</summary>
             internal readonly int _ownerThreadId;
 

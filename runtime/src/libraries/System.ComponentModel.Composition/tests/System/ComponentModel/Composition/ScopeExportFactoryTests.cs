@@ -752,8 +752,10 @@ namespace System.ComponentModel.Composition
         {
             [ImportAttribute]
             public ClassB classB;
+
             [ImportAttribute]
             public ClassC classC;
+
             [ImportAttribute]
             public ClassD classD;
 

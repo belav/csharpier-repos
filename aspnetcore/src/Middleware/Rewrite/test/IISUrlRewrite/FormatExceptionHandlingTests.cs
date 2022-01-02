@@ -6,6 +6,7 @@ using System.IO;
 using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
 public class FormatExceptionHandlingTests

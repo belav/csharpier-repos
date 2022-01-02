@@ -638,6 +638,7 @@ namespace CoreXml.Test.XLinq
                 return false;
             return true;
         }
+
         public override bool CompareAttributes(XElement n1, XElement n2)
         {
             XAttribute xa1,
@@ -675,8 +676,11 @@ namespace CoreXml.Test.XLinq
         where T : XObject
     {
         public abstract bool CompareContent(XContainer n1, XContainer n2);
+
         public abstract bool CompareAttributes(XElement n1, XElement n2);
+
         public abstract int ComputeHash4Content(XContainer n, int startHash);
+
         public abstract int ComputeHash4Attributes(XElement n, int startHash);
 
         public bool Equals(T n1, T n2)

@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 public class EmbeddedFilesManifestTests

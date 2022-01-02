@@ -30,6 +30,7 @@ namespace Test
             Method1();
             Method2();
         }
+
         static int Main()
         {
             try

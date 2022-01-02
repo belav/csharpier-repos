@@ -156,7 +156,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             dec = 3m;
             return 3.4f;
         }
-
         #endregion
         #region Nested class
         public class NestedMemberClass<U>
@@ -377,6 +376,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static dynamic s_mc = new MemberClass<string>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -437,6 +437,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();
@@ -761,6 +762,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -814,6 +816,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         internal int Field;
+
         public Test()
         {
             Field = 10;
@@ -946,6 +949,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         internal int Field;
+
         public class InnerTest : Test
         {
         }
@@ -989,6 +993,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         internal int Field;
+
         public class InnerTest : Test
         {
         }
@@ -1078,6 +1083,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test : I
     {
         internal int Field;
+
         public class InnerTest : Test
         {
         }
@@ -1220,6 +1226,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         private dynamic _mc = new MemberClass<string>.NestedMemberClass<string>();
         private dynamic _dy = "Me";
         private volatile dynamic _field;
+
         public Test()
         {
             _field = _mc.Method_ReturnsDynamic(null, "Test", _dy);
@@ -1319,6 +1326,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static int s_field = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1360,6 +1368,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static int s_field = 0;
+
         public class InnerTest : Test
         {
         }
@@ -1439,6 +1448,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -1609,6 +1619,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static explicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();
@@ -1656,6 +1667,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static dynamic s_mc = new MemberClass<string>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1701,6 +1713,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();
@@ -1919,6 +1932,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -2100,6 +2114,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -2187,6 +2202,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static explicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();

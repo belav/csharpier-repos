@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.Scripting
     internal abstract class ScriptCompiler
     {
         public abstract Compilation CreateSubmission(Script script);
+
         public abstract DiagnosticFormatter DiagnosticFormatter { get; }
         public abstract StringComparer IdentifierComparer { get; }
 
@@ -22,6 +23,7 @@ namespace Microsoft.CodeAnalysis.Scripting
             ParseOptions parseOptions,
             CancellationToken cancellationToken
         );
+
         public abstract bool IsCompleteSubmission(SyntaxTree tree);
     }
 }

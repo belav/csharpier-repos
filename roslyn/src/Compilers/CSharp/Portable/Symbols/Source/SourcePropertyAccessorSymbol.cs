@@ -137,6 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics
             );
         }
+
 #nullable disable
 
         internal sealed override bool IsExpressionBodied => _isExpressionBodied;
@@ -305,6 +306,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
         }
+
 #nullable disable
 
         private static DeclarationModifiers GetAccessorModifiers(
@@ -798,6 +800,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazyExplicitInterfaceImplementations;
             }
         }
+
 #nullable disable
 
         internal sealed override OneOrMany<
@@ -882,6 +885,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazyName;
             }
         }
+
 #nullable disable
 
         public sealed override bool IsImplicitlyDeclared

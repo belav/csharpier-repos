@@ -19,23 +19,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -46,6 +50,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -61,6 +66,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBe("title");
         }
     }
+
     public class IncludeMembersWrapperFirstOrDefault : AutoMapperSpecBase
     {
         class Source
@@ -72,10 +78,12 @@ namespace AutoMapper.UnitTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSourceWrapper
         {
             public InnerSource InnerSource { get; set; }
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -83,6 +91,7 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -91,6 +100,7 @@ namespace AutoMapper.UnitTests
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -100,6 +110,7 @@ namespace AutoMapper.UnitTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -114,6 +125,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public static void Should_null_check()
         {
@@ -121,6 +133,7 @@ namespace AutoMapper.UnitTests
                 s.InnerSources.FirstOrDefault().InnerSource;
             var result = expression.Body.NullCheck();
         }
+
         [Fact]
         public void Should_flatten()
         {
@@ -153,6 +166,7 @@ namespace AutoMapper.UnitTests
             destination.Publisher.ShouldBe("publisher");
         }
     }
+
     public class IncludeMembersFirstOrDefault : AutoMapperSpecBase
     {
         class Source
@@ -163,6 +177,7 @@ namespace AutoMapper.UnitTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -170,6 +185,7 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -178,6 +194,7 @@ namespace AutoMapper.UnitTests
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -187,6 +204,7 @@ namespace AutoMapper.UnitTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -201,6 +219,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -226,6 +245,7 @@ namespace AutoMapper.UnitTests
             destination.Publisher.ShouldBe("publisher");
         }
     }
+
     public class IncludeMembersFirstOrDefaultReverseMap : AutoMapperSpecBase
     {
         class Source
@@ -236,6 +256,7 @@ namespace AutoMapper.UnitTests
             public List<OtherInnerSource> OtherInnerSources { get; set; } =
                 new List<OtherInnerSource>();
         }
+
         class InnerSource
         {
             public int Id { get; set; }
@@ -243,6 +264,7 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Publisher { get; set; }
         }
+
         class OtherInnerSource
         {
             public int Id { get; set; }
@@ -251,6 +273,7 @@ namespace AutoMapper.UnitTests
             public string Title { get; set; }
             public string Author { get; set; }
         }
+
         class Destination
         {
             public int Id { get; set; }
@@ -260,6 +283,7 @@ namespace AutoMapper.UnitTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -274,6 +298,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
                 }
             );
+
         [Fact]
         public void Should_unflatten()
         {
@@ -288,6 +313,7 @@ namespace AutoMapper.UnitTests
             source.Name.ShouldBe("name");
         }
     }
+
     public class IncludeMembersNested : AutoMapperSpecBase
     {
         class Source
@@ -296,31 +322,37 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public NestedInnerSource NestedInnerSource { get; set; }
         }
+
         class OtherInnerSource
         {
             public NestedOtherInnerSource NestedOtherInnerSource { get; set; }
         }
+
         class NestedInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class NestedOtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -334,6 +366,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<NestedOtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -364,23 +397,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description1 { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title1 { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -393,6 +430,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Title, o => o.MapFrom(s => s.Title1));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -417,23 +455,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -446,6 +488,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Title, o => o.NullSubstitute("title"));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -465,23 +508,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description1 { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title1 { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -494,6 +541,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Title, o => o.MapFrom((s, d) => s.Title1));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -518,23 +566,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description1 { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title1 { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -547,6 +599,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Title, o => o.MapFrom<TitleResolver>());
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -591,23 +644,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description1 { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title1 { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -623,6 +680,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Title, o => o.MapFrom<TitleResolver, string>("Title1"));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -662,6 +720,7 @@ namespace AutoMapper.UnitTests
             ) => sourceMember;
         }
     }
+
     public class IncludeMembersWithValueConverter : AutoMapperSpecBase
     {
         class Source
@@ -670,23 +729,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description1 { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title1 { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -705,6 +768,7 @@ namespace AutoMapper.UnitTests
                         );
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -734,23 +798,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -766,6 +834,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Description, o => o.Condition((s, d, sm, dm, c) => true));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -781,6 +850,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBe("title");
         }
     }
+
     public class IncludeMembersWithPreConditions : AutoMapperSpecBase
     {
         class Source
@@ -789,23 +859,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -818,6 +892,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Description, o => o.PreCondition((s, d, c) => true));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -833,6 +908,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBe("title");
         }
     }
+
     public class IncludeMembersCycle : AutoMapperSpecBase
     {
         class Source
@@ -841,12 +917,14 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public Source Parent { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
@@ -854,6 +932,7 @@ namespace AutoMapper.UnitTests
             public string Title { get; set; }
             public Source Parent { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
@@ -861,6 +940,7 @@ namespace AutoMapper.UnitTests
             public string Title { get; set; }
             public Destination Parent { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -873,6 +953,7 @@ namespace AutoMapper.UnitTests
                         .IncludeMembers(s => s.Parent);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -891,6 +972,7 @@ namespace AutoMapper.UnitTests
             destination.Parent.ShouldBe(destination);
         }
     }
+
     public class IncludeMembersReverseMap : AutoMapperSpecBase
     {
         class Source
@@ -899,23 +981,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -927,6 +1013,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
                 }
             );
+
         [Fact]
         public void Should_unflatten()
         {
@@ -946,6 +1033,7 @@ namespace AutoMapper.UnitTests
             source.OtherInnerSource.Title.ShouldBe("title");
         }
     }
+
     public class IncludeMembersReverseMapOverride : AutoMapperSpecBase
     {
         class Source
@@ -954,23 +1042,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -984,6 +1076,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_unflatten()
         {
@@ -1009,23 +1102,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1038,6 +1135,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1053,6 +1151,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBe("title");
         }
     }
+
     public class ReverseMapToIncludeMembersOverride : AutoMapperSpecBase
     {
         class Source
@@ -1061,23 +1160,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1091,6 +1194,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1106,6 +1210,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBeNull();
         }
     }
+
     public class IncludeMembersWithAfterMap : AutoMapperSpecBase
     {
         class Source
@@ -1114,23 +1219,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         bool afterMap,
             beforeMap;
         protected override MapperConfiguration Configuration =>
@@ -1145,6 +1254,7 @@ namespace AutoMapper.UnitTests
                         .BeforeMap((s, d, c) => beforeMap = true);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1171,27 +1281,32 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public InnerDestination InnerDestination { get; set; }
         }
+
         class InnerDestination
         {
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1218,6 +1333,7 @@ namespace AutoMapper.UnitTests
                         );
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1233,6 +1349,7 @@ namespace AutoMapper.UnitTests
             destination.InnerDestination.Title.ShouldBe("title");
         }
     }
+
     public class IncludeMembersTransformers : AutoMapperSpecBase
     {
         class Source
@@ -1241,23 +1358,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1273,6 +1394,7 @@ namespace AutoMapper.UnitTests
                         .AddTransform<string>(s => s + "Ex");
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1288,6 +1410,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBe("titleExtraExMain");
         }
     }
+
     public class IncludeMembersTransformersPerMember : AutoMapperSpecBase
     {
         class Source
@@ -1296,23 +1419,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1325,6 +1452,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(d => d.Title, o => o.AddTransform(s => s + "Ex"));
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1340,6 +1468,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBe("titleEx");
         }
     }
+
     public class IncludeMembersWithGenerics : AutoMapperSpecBase
     {
         class Source<TInnerSource, TOtherInnerSource>
@@ -1348,23 +1477,27 @@ namespace AutoMapper.UnitTests
             public TInnerSource InnerSource { get; set; }
             public TOtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1375,6 +1508,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1399,12 +1533,14 @@ namespace AutoMapper.UnitTests
             public TInnerSource InnerSource { get; set; }
             public TOtherInnerSource OtherInnerSource { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         [Fact]
         public void Should_throw()
         {
@@ -1429,23 +1565,27 @@ namespace AutoMapper.UnitTests
             public TInnerSource InnerSource { get; set; }
             public TOtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1457,6 +1597,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
                 }
             );
+
         [Fact]
         public void Should_unflatten()
         {
@@ -1476,6 +1617,7 @@ namespace AutoMapper.UnitTests
             source.OtherInnerSource.Title.ShouldBe("title");
         }
     }
+
     public class IncludeMembersReverseMapGenericsOverride : AutoMapperSpecBase
     {
         class Source<TInnerSource, TOtherInnerSource>
@@ -1484,23 +1626,27 @@ namespace AutoMapper.UnitTests
             public TInnerSource InnerSource { get; set; }
             public TOtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1514,6 +1660,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_unflatten()
         {
@@ -1530,6 +1677,7 @@ namespace AutoMapper.UnitTests
             source.OtherInnerSource.ShouldBeNull();
         }
     }
+
     public class ReverseMapToIncludeMembersGenerics : AutoMapperSpecBase
     {
         class Source<TInnerSource, TOtherInnerSource>
@@ -1538,23 +1686,27 @@ namespace AutoMapper.UnitTests
             public TInnerSource InnerSource { get; set; }
             public TOtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1567,6 +1719,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1582,6 +1735,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBe("title");
         }
     }
+
     public class ReverseMapToIncludeMembersGenericsOverride : AutoMapperSpecBase
     {
         class Source<TInnerSource, TOtherInnerSource>
@@ -1590,23 +1744,27 @@ namespace AutoMapper.UnitTests
             public TInnerSource InnerSource { get; set; }
             public TOtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1620,6 +1778,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_flatten()
         {
@@ -1635,6 +1794,7 @@ namespace AutoMapper.UnitTests
             destination.Title.ShouldBeNull();
         }
     }
+
     public class IncludeMembersSourceValidation : AutoMapperSpecBase
     {
         class Source
@@ -1643,23 +1803,27 @@ namespace AutoMapper.UnitTests
             public InnerSource InnerSource { get; set; }
             public OtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1671,6 +1835,7 @@ namespace AutoMapper.UnitTests
                 }
             );
     }
+
     public class IncludeMembersWithGenericsSourceValidation : AutoMapperSpecBase
     {
         class Source<TInnerSource, TOtherInnerSource>
@@ -1679,23 +1844,27 @@ namespace AutoMapper.UnitTests
             public TInnerSource InnerSource { get; set; }
             public TOtherInnerSource OtherInnerSource { get; set; }
         }
+
         class InnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
         }
+
         class OtherInnerSource
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public string Title { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1707,24 +1876,29 @@ namespace AutoMapper.UnitTests
                 }
             );
     }
+
     public class IncludeMembersWithInclude : AutoMapperSpecBase
     {
         public class ParentOfSource
         {
             public Source InnerSource { get; set; }
         }
+
         public class Source : SourceBase
         {
         }
+
         public class SourceBase
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
         }
+
         public class Destination
         {
             public string FullName { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1740,6 +1914,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<Source, Destination>();
                 }
             );
+
         [Fact]
         public void Should_inherit_configuration() =>
             Mapper
@@ -1751,24 +1926,29 @@ namespace AutoMapper.UnitTests
                 )
                 .FullName.ShouldBe("first last");
     }
+
     public class IncludeMembersWithIncludeDifferentOrder : AutoMapperSpecBase
     {
         public class ParentOfSource
         {
             public Source InnerSource { get; set; }
         }
+
         public class Source : SourceBase
         {
         }
+
         public class SourceBase
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
         }
+
         public class Destination
         {
             public string FullName { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1784,6 +1964,7 @@ namespace AutoMapper.UnitTests
                         .IncludeMembers(src => src.InnerSource);
                 }
             );
+
         [Fact]
         public void Should_inherit_configuration() =>
             Mapper
@@ -1795,6 +1976,7 @@ namespace AutoMapper.UnitTests
                 )
                 .FullName.ShouldBe("first last");
     }
+
     public class IncludeMembersWithIncludeBase : AutoMapperSpecBase
     {
         public class Customer
@@ -1803,11 +1985,13 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
             public Address Address { get; set; }
         }
+
         public class Address
         {
             public string Line1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CustomerDtoBase
         {
             public int Id { get; set; }
@@ -1815,10 +1999,12 @@ namespace AutoMapper.UnitTests
             public string AddressLine1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CreateCustomerDto : CustomerDtoBase
         {
             public string CreatedBy { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1833,6 +2019,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(m => m.CreatedBy, o => o.Ignore());
                 }
             );
+
         [Fact]
         public void Should_inherit_IncludeMembers() =>
             Mapper
@@ -1841,6 +2028,7 @@ namespace AutoMapper.UnitTests
                 )
                 .Postcode.ShouldBe("Postcode");
     }
+
     public class IncludeMembersWithIncludeBaseOverride : AutoMapperSpecBase
     {
         public class Customer
@@ -1850,11 +2038,13 @@ namespace AutoMapper.UnitTests
             public Address Address { get; set; }
             public Address NewAddress { get; set; }
         }
+
         public class Address
         {
             public string Line1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CustomerDtoBase
         {
             public int Id { get; set; }
@@ -1862,10 +2052,12 @@ namespace AutoMapper.UnitTests
             public string AddressLine1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CreateCustomerDto : CustomerDtoBase
         {
             public string CreatedBy { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1883,6 +2075,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(m => m.CreatedBy, o => o.Ignore());
                 }
             );
+
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper
@@ -1891,6 +2084,7 @@ namespace AutoMapper.UnitTests
                 )
                 .Postcode.ShouldBe("Postcode");
     }
+
     public class IncludeMembersWithIncludeBaseOverrideMapFrom : AutoMapperSpecBase
     {
         public class Customer
@@ -1899,11 +2093,13 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
             public Address Address { get; set; }
         }
+
         public class Address
         {
             public string Line1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CustomerDtoBase
         {
             public int Id { get; set; }
@@ -1911,10 +2107,12 @@ namespace AutoMapper.UnitTests
             public string AddressLine1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CreateCustomerDto : CustomerDtoBase
         {
             public string CreatedBy { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1930,12 +2128,14 @@ namespace AutoMapper.UnitTests
                         .ForMember(m => m.CreatedBy, o => o.Ignore());
                 }
             );
+
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper
                 .Map<CreateCustomerDto>(new Customer { Name = "Postcode", Address = new Address() })
                 .Postcode.ShouldBe("Postcode");
     }
+
     public class IncludeMembersWithIncludeBaseOverrideConvention : AutoMapperSpecBase
     {
         public class Customer
@@ -1944,15 +2144,18 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
             public Address Address { get; set; }
         }
+
         public class NewCustomer : Customer
         {
             public string Postcode { get; set; }
         }
+
         public class Address
         {
             public string Line1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CustomerDtoBase
         {
             public int Id { get; set; }
@@ -1960,10 +2163,12 @@ namespace AutoMapper.UnitTests
             public string AddressLine1 { get; set; }
             public string Postcode { get; set; }
         }
+
         public class CreateCustomerDto : CustomerDtoBase
         {
             public string CreatedBy { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -1978,6 +2183,7 @@ namespace AutoMapper.UnitTests
                         .ForMember(m => m.CreatedBy, o => o.Ignore());
                 }
             );
+
         [Fact]
         public void Should_override_IncludeMembers() =>
             Mapper
@@ -1986,20 +2192,24 @@ namespace AutoMapper.UnitTests
                 )
                 .Postcode.ShouldBe("Postcode");
     }
+
     public class IncludeMembersWithValueTypeValidation : AutoMapperSpecBase
     {
         class Source
         {
             public InnerSource InnerSource { get; set; }
         }
+
         struct InnerSource
         {
             public string Name { get; set; }
         }
+
         class Destination
         {
             public string Name { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -2009,6 +2219,7 @@ namespace AutoMapper.UnitTests
                 }
             );
     }
+
     public class CascadedIncludeMembers : AutoMapperSpecBase
     {
         public class Source
@@ -2016,21 +2227,25 @@ namespace AutoMapper.UnitTests
             public int Id;
             public Level1 FieldLevel1;
         }
+
         public class Level1
         {
             public Level2 FieldLevel2;
             public long Level1Field;
         }
+
         public class Level2
         {
             public long TheField;
         }
+
         public class Destination
         {
             public int Id;
             public long TheField;
             public long Level1Field;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -2041,6 +2256,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<Level2, Destination>(MemberList.None);
                 }
             );
+
         [Fact]
         public void Should_work()
         {
@@ -2060,6 +2276,7 @@ namespace AutoMapper.UnitTests
             dest.Level1Field.ShouldBe(3);
         }
     }
+
     public class CascadedIncludeMembersForPath : AutoMapperSpecBase
     {
         public class Source
@@ -2067,21 +2284,25 @@ namespace AutoMapper.UnitTests
             public int Id;
             public Level1 FieldLevel1;
         }
+
         public class Level1
         {
             public Level2 FieldLevel2;
             public long Level1Field;
         }
+
         public class Level2
         {
             public long TheField;
         }
+
         public class Destination
         {
             public int Id;
             public long TheField;
             public long Level1Field;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -2093,6 +2314,7 @@ namespace AutoMapper.UnitTests
                         .ForPath(d => d.TheField, o => o.MapFrom(s => s.TheField));
                 }
             );
+
         [Fact]
         public void Should_work()
         {
@@ -2112,6 +2334,7 @@ namespace AutoMapper.UnitTests
             dest.Level1Field.ShouldBe(3);
         }
     }
+
     public class IncludeMembersWithCascadedIncludeBase : AutoMapperSpecBase
     {
         class Item
@@ -2120,24 +2343,29 @@ namespace AutoMapper.UnitTests
             public MetaData MetaData { get; set; }
             public string Signature { get; set; }
         }
+
         class MetaData
         {
             public string Hash { get; set; }
         }
+
         class ExpiredItem : Item
         {
             public DateTime Expired { get; set; }
         }
+
         class Response
         {
             public int Id { get; set; }
             public string Hash { get; set; }
         }
+
         class SignedResponse : Response
         {
             public string Signature { get; set; }
             public DateTime Expired { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -2151,6 +2379,7 @@ namespace AutoMapper.UnitTests
                         .IncludeBase<Item, SignedResponse>();
                 }
             );
+
         [Fact]
         public void Should_inherit_IncludeMembers() =>
             Mapper

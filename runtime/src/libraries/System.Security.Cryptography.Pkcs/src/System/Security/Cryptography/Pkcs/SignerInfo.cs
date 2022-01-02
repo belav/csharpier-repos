@@ -320,7 +320,6 @@ namespace System.Security.Cryptography.Pkcs
 
             return new SignerInfoCollection(signerInfos.ToArray());
         }
-
 #if NET6_0_OR_GREATER
         [Obsolete(
             Obsoletions.SignerInfoCounterSigMessage,

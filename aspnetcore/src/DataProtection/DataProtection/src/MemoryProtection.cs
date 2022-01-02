@@ -5,6 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Cryptography;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 /// <summary>

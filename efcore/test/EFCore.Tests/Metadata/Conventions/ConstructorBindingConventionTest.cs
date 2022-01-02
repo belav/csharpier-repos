@@ -788,6 +788,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public string _content;
 
             public int m_follows;
+
 #pragma warning restore 649, IDE1006 // Naming Styles
 
             public int Id { get; set; }

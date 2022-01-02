@@ -47,6 +47,7 @@ namespace System.Reflection
             m_name ??= GetRuntimeModule().MetadataImport.GetName(m_tkField).ToString();
 
         public override int MetadataToken => m_tkField;
+
         internal override RuntimeModule GetRuntimeModule()
         {
             return m_declaringType.GetRuntimeModule();

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Testing;
 using XmlFormattersWebSite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class XmlDataContractSerializerFormattersWrappingTest

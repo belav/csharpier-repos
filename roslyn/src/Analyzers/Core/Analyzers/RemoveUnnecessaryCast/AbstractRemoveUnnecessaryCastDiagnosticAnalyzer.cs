@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryCast
             ) { }
 
         protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
         protected abstract TextSpan GetFadeSpan(TCastExpression node);
+
         protected abstract bool IsUnnecessaryCast(
             SemanticModel model,
             TCastExpression node,

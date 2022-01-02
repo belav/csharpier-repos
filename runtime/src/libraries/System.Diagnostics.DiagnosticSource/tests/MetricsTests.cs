@@ -2518,6 +2518,7 @@ namespace System.Diagnostics.Metrics.Tests
             return default;
         }
     }
+
     public static class DiagnosticsCollectionExtensions
     {
         public static void Add<T1, T2>(

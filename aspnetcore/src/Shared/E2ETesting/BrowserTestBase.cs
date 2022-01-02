@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.E2ETesting;
 
 [CaptureSeleniumLogs]

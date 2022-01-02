@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+
 // This code is a stop-gap and exists to address the issues with extracting
 // original method names from generated local functions. See https://github.com/dotnet/roslyn/issues/55651
 // for more info.

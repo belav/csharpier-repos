@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 
+
 namespace BasicWebSite;
 
 public class ActionDescriptorCreationCounter : IActionDescriptorProvider

@@ -17,18 +17,27 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         where TRequest : class
     {
         internal abstract bool ShouldEnableFunctionResolver(TProcess process);
+
         internal abstract IEnumerable<TModule> GetAllModules(TProcess process);
+
         internal abstract string GetModuleName(TModule module);
+
         internal abstract unsafe bool TryGetMetadata(
             TModule module,
             out byte* pointer,
             out int length
         );
+
         internal abstract TRequest[] GetRequests(TProcess process);
+
         internal abstract string GetRequestModuleName(TRequest request);
+
         internal abstract RequestSignature GetParsedSignature(TRequest request);
+
         internal abstract bool IgnoreCase { get; }
+
         internal abstract Guid GetLanguageId(TRequest request);
+
         internal abstract Guid LanguageId { get; }
 
         internal void EnableResolution(

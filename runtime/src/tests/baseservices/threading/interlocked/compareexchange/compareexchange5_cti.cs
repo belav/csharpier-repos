@@ -169,6 +169,7 @@ public class InterlockedCompareExchange5
             return 0;
         }
     }
+
     public void TestComChange()
     {
         // set a value
@@ -201,6 +202,7 @@ public class InterlockedCompareExchange5
             i++;
         }
     }
+
     public void changeGlobal()
     {
         // set when B runs
@@ -239,14 +241,17 @@ public class InterlockedCompareExchange5
             i++;
         }
     }
+
     public void changeGlobal2()
     {
         globalValue = obMyClass;
     }
 }
+
 public class myClass
 {
     public int a;
+
     public myClass(int value)
     {
         a = value;

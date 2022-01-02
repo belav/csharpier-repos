@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public class InjectTargetExtension : IInjectTargetExtension

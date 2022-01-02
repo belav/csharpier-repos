@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace BasicWebSite;
 
 public class ManagerHandler : AuthorizationHandler<OperationAuthorizationRequirement>

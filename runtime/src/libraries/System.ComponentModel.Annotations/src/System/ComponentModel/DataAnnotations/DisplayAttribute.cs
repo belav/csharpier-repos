@@ -36,7 +36,6 @@ namespace System.ComponentModel.DataAnnotations
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
         private Type? _resourceType;
-
         #endregion
 
         #region All Constructors
@@ -292,7 +291,6 @@ namespace System.ComponentModel.DataAnnotations
             }
             set => _order = value;
         }
-
         #endregion
 
         #region Methods

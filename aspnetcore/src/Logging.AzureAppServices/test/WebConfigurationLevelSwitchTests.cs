@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
 public class WebConfigurationLevelSwitchTests

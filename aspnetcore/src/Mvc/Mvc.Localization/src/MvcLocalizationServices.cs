@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Localization;
 
+
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
 internal static class MvcLocalizationServices

@@ -6,6 +6,7 @@ using System.Globalization;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
+
 namespace Microsoft.Net.Http.Headers;
 
 public class HeaderUtilitiesTest
@@ -238,6 +239,7 @@ public class HeaderUtilitiesTest
 
         Assert.Equal(expected, actual);
     }
+
     [Theory]
     [InlineData("\"hello\"", true)]
     [InlineData("\"hello", false)]

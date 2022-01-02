@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.WebUtilities;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 public class circuitIdFactoryTest

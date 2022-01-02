@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public static class IntermediateNodeAssert

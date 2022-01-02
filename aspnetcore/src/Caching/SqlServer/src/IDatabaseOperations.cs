@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 
+
 namespace Microsoft.Extensions.Caching.SqlServer;
 
 internal interface IDatabaseOperations

@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Rewrite.Logging;
 
+
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 internal class ApacheModRewriteRule : IRule

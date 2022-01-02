@@ -582,6 +582,7 @@ namespace System.DirectoryServices.AccountManagement
 
             return sb.ToString();
         }
+
         /*** If standard bool conversion is needed uncomment this function
                 protected static string BoolConverter(FilterBase filter, string suggestedAdProperty)
                 {
@@ -856,6 +857,7 @@ namespace System.DirectoryServices.AccountManagement
 
             return sb.ToString();
         }
+
         protected static string UserAccountControlConverter(
             FilterBase filter,
             string suggestedAdProperty

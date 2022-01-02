@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFloatingPoint : struct

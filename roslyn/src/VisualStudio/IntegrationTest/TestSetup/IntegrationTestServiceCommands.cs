@@ -47,6 +47,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
 
 #pragma warning disable IDE0052 // Remove unread private members - used to hold the marshalled integration test service
         private ObjRef? _marshalledService;
+
 #pragma warning restore IDE0052 // Remove unread private members
 
         private IntegrationTestServiceCommands(Package package)

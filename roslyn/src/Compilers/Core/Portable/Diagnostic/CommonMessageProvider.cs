@@ -229,6 +229,7 @@ namespace Microsoft.CodeAnalysis
             MetadataReference equivalentReference,
             AssemblyIdentity equivalentIdentity
         );
+
         public abstract void ReportDuplicateMetadataReferenceWeak(
             DiagnosticBag diagnostics,
             Location location,

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
 public class TestMatrix : IEnumerable<object[]>
@@ -45,6 +46,7 @@ public class TestMatrix : IEnumerable<object[]>
         ApplicationTypes.Add(ApplicationType.Standalone);
         return this;
     }
+
     public TestMatrix WithArchitectures(params RuntimeArchitecture[] archs)
     {
         Architectures = archs;

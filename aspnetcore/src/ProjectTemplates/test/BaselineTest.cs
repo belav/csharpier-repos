@@ -13,6 +13,7 @@ using Templates.Test.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Templates.Test;
 
 public class BaselineTest : LoggedTest

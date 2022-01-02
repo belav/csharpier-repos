@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>

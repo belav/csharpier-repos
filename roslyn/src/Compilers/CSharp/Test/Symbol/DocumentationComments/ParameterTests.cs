@@ -119,7 +119,6 @@ class C
             Assert.Equal(parameter, model.GetSymbolInfo(nameSyntaxes.ElementAt(0)).Symbol);
             Assert.Equal(parameter, model.GetSymbolInfo(nameSyntaxes.ElementAt(1)).Symbol);
         }
-
         #endregion Basic cases
 
         #region Accessor value parameter
@@ -263,7 +262,6 @@ class C
             Assert.Equal(SymbolInfo.None, model.GetSymbolInfo(nameSyntaxes.ElementAt(0)));
             Assert.Equal(SymbolInfo.None, model.GetSymbolInfo(nameSyntaxes.ElementAt(1)));
         }
-
         #endregion Accessor value parameter
 
         #region Complex parameter names
@@ -329,7 +327,6 @@ class C
                 model.GetSymbolInfo(nameSyntaxes.ElementAt(2)).Symbol
             );
         }
-
         #endregion Complex parameter names
 
         #region Ambiguities
@@ -408,7 +405,6 @@ class C
             Assert.Equal(typeParameter, model.GetSymbolInfo(nameSyntaxes.ElementAt(0)).Symbol);
             Assert.Equal(parameter, model.GetSymbolInfo(nameSyntaxes.ElementAt(1)).Symbol);
         }
-
         #endregion Ambiguities
 
         #region Lookup
@@ -721,7 +717,6 @@ class C<T>
                 compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C").TypeParameters.Single()
             );
         }
-
         #endregion Lookup
 
         [Fact]

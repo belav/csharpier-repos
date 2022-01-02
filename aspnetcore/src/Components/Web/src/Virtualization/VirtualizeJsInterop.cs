@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
+
 namespace Microsoft.AspNetCore.Components.Web.Virtualization;
 
 internal class VirtualizeJsInterop : IAsyncDisposable

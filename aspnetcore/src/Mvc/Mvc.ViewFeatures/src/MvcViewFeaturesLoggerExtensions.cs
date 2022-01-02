@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal static class MvcViewFeaturesLoggerExtensions
@@ -159,6 +160,7 @@ internal static class MvcViewFeaturesLoggerExtensions
     {
         return logger.BeginScope(new ViewComponentLogScope(context.ViewComponentDescriptor));
     }
+
 #nullable restore
 
     public static void ViewComponentExecuting(

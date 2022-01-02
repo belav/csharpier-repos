@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 public class EndpointRoutingMiddlewareTest
@@ -210,6 +211,7 @@ public class EndpointRoutingMiddlewareTest
         {
             _onNext = onNext;
         }
+
         public void OnCompleted() { }
 
         public void OnError(Exception error) { }

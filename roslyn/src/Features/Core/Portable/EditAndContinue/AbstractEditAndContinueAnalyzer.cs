@@ -233,15 +233,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SyntaxNode oldCompilationUnit,
             SyntaxNode newCompilationUnit
         );
+
         protected abstract Match<SyntaxNode> ComputeBodyMatch(
             SyntaxNode oldBody,
             SyntaxNode newBody,
             IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>>? knownMatches
         );
+
         protected abstract Match<SyntaxNode> ComputeTopLevelDeclarationMatch(
             SyntaxNode oldDeclaration,
             SyntaxNode newDeclaration
         );
+
         protected abstract IEnumerable<SequenceEdit> GetSyntaxSequenceEdits(
             ImmutableArray<SyntaxNode> oldNodes,
             ImmutableArray<SyntaxNode> newNodes
@@ -320,7 +323,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         );
 
         protected abstract bool IsCompilationUnitWithGlobalStatements(SyntaxNode node);
+
         protected abstract bool IsGlobalStatement(SyntaxNode node);
+
         protected abstract TextSpan GetGlobalStatementDiagnosticSpan(SyntaxNode node);
 
         /// <summary>
@@ -484,15 +489,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         protected abstract string LineDirectiveKeyword { get; }
         protected abstract ushort LineDirectiveSyntaxKind { get; }
         protected abstract SymbolDisplayFormat ErrorDisplayFormat { get; }
+
         protected abstract List<SyntaxNode> GetExceptionHandlingAncestors(
             SyntaxNode node,
             bool isNonLeaf
         );
+
         protected abstract void GetStateMachineInfo(
             SyntaxNode body,
             out ImmutableArray<SyntaxNode> suspensionPoints,
             out StateMachineKinds kinds
         );
+
         protected abstract TextSpan GetExceptionHandlingRegion(
             SyntaxNode node,
             out bool coversAllChildren
@@ -504,12 +512,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Edit<SyntaxNode> edit,
             Dictionary<SyntaxNode, EditKind> editMap
         );
+
         internal abstract void ReportEnclosingExceptionHandlingRudeEdits(
             ArrayBuilder<RudeEditDiagnostic> diagnostics,
             IEnumerable<Edit<SyntaxNode>> exceptionHandlingEdits,
             SyntaxNode oldStatement,
             TextSpan newStatementSpan
         );
+
         internal abstract void ReportOtherRudeEditsAroundActiveStatement(
             ArrayBuilder<RudeEditDiagnostic> diagnostics,
             Match<SyntaxNode> match,
@@ -517,17 +527,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SyntaxNode newStatement,
             bool isNonLeaf
         );
+
         internal abstract void ReportMemberBodyUpdateRudeEdits(
             ArrayBuilder<RudeEditDiagnostic> diagnostics,
             SyntaxNode newMember,
             TextSpan? span
         );
+
         internal abstract void ReportInsertedMemberSymbolRudeEdits(
             ArrayBuilder<RudeEditDiagnostic> diagnostics,
             ISymbol newSymbol,
             SyntaxNode newNode,
             bool insertingIntoExistingContainingType
         );
+
         internal abstract void ReportStateMachineSuspensionPointRudeEdits(
             ArrayBuilder<RudeEditDiagnostic> diagnostics,
             SyntaxNode oldNode,
@@ -535,7 +548,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         );
 
         internal abstract bool IsLambda(SyntaxNode node);
+
         internal abstract bool IsInterfaceDeclaration(SyntaxNode node);
+
         internal abstract bool IsRecordDeclaration(SyntaxNode node);
 
         /// <summary>
@@ -544,15 +559,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal abstract bool IsNestedFunction(SyntaxNode node);
 
         internal abstract bool IsLocalFunction(SyntaxNode node);
+
         internal abstract bool IsClosureScope(SyntaxNode node);
+
         internal abstract bool ContainsLambda(SyntaxNode declaration);
+
         internal abstract SyntaxNode GetLambda(SyntaxNode lambdaBody);
+
         internal abstract IMethodSymbol GetLambdaExpressionSymbol(
             SemanticModel model,
             SyntaxNode lambdaExpression,
             CancellationToken cancellationToken
         );
+
         internal abstract SyntaxNode? GetContainingQueryExpression(SyntaxNode node);
+
         internal abstract bool QueryClauseLambdasTypeEquivalent(
             SemanticModel oldModel,
             SyntaxNode oldNode,
@@ -1020,7 +1041,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return map;
         }
-
         #endregion
 
         #region Syntax Analysis
@@ -2484,7 +2504,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 && editMap.TryGetValue(node, out var parentEdit)
                 && parentEdit == editKind;
         }
-
         #endregion
 
         #region Rude Edits around Active Statement
@@ -2757,7 +2776,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return list;
         }
-
         #endregion
 
         #region Trivia Analysis
@@ -3122,7 +3140,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return result;
         }
-
         #endregion
 
         #region Semantic Analysis
@@ -6295,7 +6312,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             return false;
         }
-
         #endregion
 
         private Func<SyntaxNode, SyntaxNode?> CreateSyntaxMapForEquivalentNodes(
@@ -6778,7 +6794,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     && newSymbol.DeclaringSyntaxReferences.Length > 1
                     && newSymbol.DeclaringSyntaxReferences.Any(IsNotInDocument, newSyntaxTree);
         }
-
         #endregion
 
         #region Lambdas and Closures
@@ -7939,7 +7954,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return reverseMap.TryGetValue(newScopeOpt, out var mappedScope)
                 && mappedScope == oldScopeOpt;
         }
-
         #endregion
 
         #region State Machines
@@ -7984,7 +7998,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 );
             }
         }
-
         #endregion
 
         #endregion
@@ -8081,7 +8094,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
         }
-
         #endregion
 
         #region Testing

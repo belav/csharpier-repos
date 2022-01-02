@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
 public class TryUpdateModelIntegrationTest
@@ -1107,10 +1108,12 @@ public class TryUpdateModelIntegrationTest
     private class AddressWithNoParameterlessConstructor
     {
         private readonly int _id;
+
         public AddressWithNoParameterlessConstructor(int id)
         {
             _id = id;
         }
+
         public string Street { get; set; }
         public string City { get; set; }
     }

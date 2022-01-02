@@ -34,6 +34,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class HubConnectionHandlerTests : VerifiableLoggedTest
@@ -4696,6 +4697,7 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
           IAuthorizationRequirement
     {
         private readonly TcsService _tcsService;
+
         public DelayRequirement(TcsService tcsService)
         {
             _tcsService = tcsService;
@@ -6058,6 +6060,7 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             Bar = bar;
             Foo = foo;
         }
+
         public int Bar { get; }
         public string Foo { get; }
     }

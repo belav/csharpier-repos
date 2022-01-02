@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class HubClients<THub, T> : IHubClients<T> where THub : Hub

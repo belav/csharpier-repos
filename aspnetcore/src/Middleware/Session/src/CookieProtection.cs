@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Session;
 
 internal static class CookieProtection

@@ -268,7 +268,6 @@ unsafe class C
 "
             );
         }
-
         #endregion AddressOf tests
 
         #region Dereference tests
@@ -656,7 +655,6 @@ unsafe struct S
 "
             );
         }
-
         #endregion Dereference tests
 
         #region Pointer member access tests
@@ -1117,7 +1115,6 @@ unsafe struct S
 "
             );
         }
-
         #endregion Pointer member access tests
 
         #region Pointer element access tests
@@ -1421,7 +1418,6 @@ unsafe class C
 "
                 );
         }
-
         #endregion Pointer element access tests
 
         #region Fixed statement tests
@@ -4601,7 +4597,6 @@ unsafe class C
 "
                 );
         }
-
         #endregion Fixed statement tests
 
         #region Custom fixed statement tests
@@ -6328,7 +6323,6 @@ public struct Fixable
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable()").WithLocation(6, 25)
             );
         }
-
         #endregion Custom fixed statement tests
 
         #region Pointer conversion tests
@@ -7635,7 +7629,6 @@ unsafe class C
                 verify: Verification.Fails
             );
         }
-
         #endregion Pointer conversion tests
 
         #region sizeof tests
@@ -7854,7 +7847,6 @@ enum E3 : long { A }
 "
                 );
         }
-
         #endregion sizeof tests
 
         #region Pointer arithmetic tests
@@ -9263,7 +9255,6 @@ class PointerArithmetic
                 verify: Verification.Fails
             );
         }
-
         #endregion Pointer arithmetic tests
 
         #region Checked pointer arithmetic overflow tests
@@ -10289,7 +10280,6 @@ Exception for add-then-dereference
 "
             );
         }
-
         #endregion Checked pointer arithmetic overflow tests
 
         #region Unchecked pointer arithmetic overflow tests
@@ -10874,7 +10864,6 @@ SubLong: No exception at 0 - -int.MinValue (value = 18446744065119617024)";
                 verify: Verification.Fails
             );
         }
-
         #endregion Unchecked pointer arithmetic overflow tests
 
         #region Pointer comparison tests
@@ -11135,7 +11124,6 @@ unsafe struct S<T> where T : unmanaged
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "c.Field").WithLocation(3, 5)
             );
         }
-
         #endregion Pointer comparison tests
 
         #region stackalloc tests
@@ -11590,7 +11578,6 @@ public class C
 "
             );
         }
-
         #endregion stackalloc tests
 
         #region Functional tests
@@ -11913,7 +11900,6 @@ class A : Attribute
                 verify: Verification.Passes
             );
         }
-
         #endregion Functional tests
 
         #region Regression tests

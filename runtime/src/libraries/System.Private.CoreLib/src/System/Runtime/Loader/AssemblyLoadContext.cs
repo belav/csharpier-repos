@@ -220,26 +220,22 @@ namespace System.Runtime.Loader
             add { _unloading += value; }
             remove { _unloading -= value; }
         }
-
 #region AppDomainEvents
         // Occurs when an Assembly is loaded
 #if MONO
         [method: DynamicDependency(nameof(OnAssemblyLoad))]
 #endif
         internal static event AssemblyLoadEventHandler? AssemblyLoad;
-
         // Occurs when resolution of type fails
 #if MONO
         [method: DynamicDependency(nameof(OnTypeResolve))]
 #endif
         internal static event ResolveEventHandler? TypeResolve;
-
         // Occurs when resolution of resource fails
 #if MONO
         [method: DynamicDependency(nameof(OnResourceResolve))]
 #endif
         internal static event ResolveEventHandler? ResourceResolve;
-
         // Occurs when resolution of assembly fails
         // This event is fired after resolve events of AssemblyLoadContext fails
 #if MONO

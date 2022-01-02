@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class AA
 {
     static Array Static1(ref Array[,,] param1, ref int param2)
@@ -13,6 +14,7 @@ class AA
             ((byte)(33 / param2)) | ((byte)((float)((byte)(33 / param2))))
         ];
     }
+
     static int Main()
     {
         try

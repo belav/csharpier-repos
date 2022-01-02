@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
 internal class CommandException : Exception

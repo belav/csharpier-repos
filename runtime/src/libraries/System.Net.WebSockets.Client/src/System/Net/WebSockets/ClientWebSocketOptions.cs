@@ -110,7 +110,6 @@ namespace System.Net.WebSockets
                 _cookies = value;
             }
         }
-
         #endregion HTTP Settings
 
         #region WebSocket Settings
@@ -229,7 +228,6 @@ namespace System.Net.WebSockets
             _receiveBufferSize = receiveBufferSize;
             _buffer = buffer;
         }
-
         #endregion WebSocket settings
 
         #region Helpers

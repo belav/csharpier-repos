@@ -57,40 +57,53 @@ namespace System.Security.Permissions
     public sealed class MediaPermission : CodeAccessPermission, IUnrestrictedPermission
     {
         public MediaPermission() { }
+
         public MediaPermission(PermissionState state) { }
+
         public MediaPermission(MediaPermissionAudio permissionAudio) { }
+
         public MediaPermission(MediaPermissionVideo permissionVideo) { }
+
         public MediaPermission(MediaPermissionImage permissionImage) { }
+
         public MediaPermission(
             MediaPermissionAudio permissionAudio,
             MediaPermissionVideo permissionVideo,
             MediaPermissionImage permissionImage
         ) { }
+
         public bool IsUnrestricted()
         {
             return true;
         }
+
         public override bool IsSubsetOf(IPermission target)
         {
             return true;
         }
+
         public override IPermission Intersect(IPermission target)
         {
             return new MediaPermission();
         }
+
         public override IPermission Union(IPermission target)
         {
             return new MediaPermission();
         }
+
         public override IPermission Copy()
         {
             return new MediaPermission();
         }
+
         public override SecurityElement ToXml()
         {
             return default(SecurityElement);
         }
+
         public override void FromXml(SecurityElement securityElement) { }
+
         public MediaPermissionAudio Audio
         {
             get { return MediaPermissionAudio.AllAudio; }
@@ -124,10 +137,12 @@ namespace System.Security.Permissions
     public sealed class MediaPermissionAttribute : CodeAccessSecurityAttribute
     {
         public MediaPermissionAttribute(SecurityAction action) : base(action) { }
+
         public override IPermission CreatePermission()
         {
             return new MediaPermission();
         }
+
         public MediaPermissionAudio Audio
         {
             get { return MediaPermissionAudio.AllAudio; }

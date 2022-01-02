@@ -681,6 +681,7 @@ namespace Microsoft.Extensions.Logging.Test
             public IExternalScopeProvider ScopeProvider { get; set; }
             public int BeginScopeCalledTimes { get; set; }
             public List<string> LogText { get; set; } = new List<string>();
+
             public void Dispose() { }
 
             public ILogger CreateLogger(string categoryName)

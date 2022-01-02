@@ -41,6 +41,7 @@ namespace System.Net.Test.Common
         >();
 
         private Http3LoopbackStream _currentStream;
+
         // We can't retrieve the stream ID after the stream is disposed, so store it separately
         // Initialize it to -4 so that the firstInvalidStreamId calculation will work even if we never process a request
         private long _currentStreamId = -4;

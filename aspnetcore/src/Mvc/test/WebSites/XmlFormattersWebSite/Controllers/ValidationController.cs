@@ -6,6 +6,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+
 namespace XmlFormattersWebSite;
 
 public class ValidationController : Controller

@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_Call1
 {
     const int Pass = 100;
@@ -15,11 +16,13 @@ public class BringUpTest_Call1
     {
         Console.WriteLine("Hello");
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void Call1()
     {
         M();
     }
+
     public static int Main()
     {
         Call1();

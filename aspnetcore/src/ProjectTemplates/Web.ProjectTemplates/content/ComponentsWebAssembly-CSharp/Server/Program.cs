@@ -5,14 +5,17 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
 using Microsoft.AspNetCore.ResponseCompression;
+
 #if (IndividualLocalAuth)
 using Microsoft.EntityFrameworkCore;
 #endif
 #if (GenerateGraph)
 using Graph = Microsoft.Graph;
+
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.Identity.Web;
+
 #endif
 #if (IndividualLocalAuth)
 using ComponentsWebAssembly_CSharp.Server.Data;
@@ -20,7 +23,6 @@ using ComponentsWebAssembly_CSharp.Server.Models;
 #endif
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 #if (IndividualLocalAuth)
 var connectionString =
@@ -94,16 +96,13 @@ else
     app.UseHsts();
 #endif
 }
-
 #if (RequiresHttps)
 app.UseHttpsRedirection();
-
 #endif
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 #if (IndividualLocalAuth)
 app.UseIdentityServer();
 #endif
@@ -112,7 +111,6 @@ app.UseAuthentication();
 #endif
 #if (!NoAuth)
 app.UseAuthorization();
-
 #endif
 
 app.MapRazorPages();

@@ -7,6 +7,7 @@ using System.Globalization;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 public class ListAdapterTest

@@ -628,6 +628,7 @@ namespace System.Xml.Tests
     public class CArgAddParam : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CArgAddParam(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2456,6 +2457,7 @@ namespace System.Xml.Tests
     public class CArgAddParamMisc : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CArgAddParamMisc(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -7167,6 +7169,7 @@ namespace System.Xml.Tests
     public class CArgAddExtObj : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CArgAddExtObj(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -9721,6 +9724,7 @@ namespace System.Xml.Tests
     public class CArgRemoveParam : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CArgRemoveParam(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -10707,6 +10711,7 @@ namespace System.Xml.Tests
     public class CArgRemoveExtObj : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CArgRemoveExtObj(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -11223,6 +11228,7 @@ namespace System.Xml.Tests
     public class CArgClear : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CArgClear(ITestOutputHelper output) : base(output)
         {
             _output = output;

@@ -26,7 +26,6 @@ namespace System.Speech.Recognition
         #region Constructors
 
         internal RecognizedPhrase() { }
-
         #endregion
 
         #region Public Methods
@@ -75,7 +74,6 @@ namespace System.Speech.Recognition
             _smlContent = document.OuterXml;
             return document;
         }
-
         #endregion
 
         #region Public Properties
@@ -442,7 +440,6 @@ namespace System.Speech.Recognition
             // This triggers the semantic processing if any
             CalcSemantics(recoResult.Grammar);
         }
-
         #endregion
 
         #region Internal Properties
@@ -464,7 +461,6 @@ namespace System.Speech.Recognition
                 return _smlContent;
             }
         }
-
         #endregion
 
         #region Internal fields
@@ -473,7 +469,6 @@ namespace System.Speech.Recognition
         internal byte[] _phraseBuffer;
         internal bool _isSapi53Header;
         internal bool _hasIPAPronunciation;
-
         #endregion
 
         #region Private Methods
@@ -1478,7 +1473,6 @@ namespace System.Speech.Recognition
                 }
             }
         }
-
         #endregion
 
         #region Private Types
@@ -1547,6 +1541,7 @@ namespace System.Speech.Recognition
             {
                 return $"'rule={_rule}";
             }
+
             internal Grammar _grammar;
             internal string _rule;
             internal string _name;
@@ -1558,6 +1553,7 @@ namespace System.Speech.Recognition
             internal RuleNode _next;
             internal RuleNode _child;
         }
+
         [DebuggerDisplay(
             "Name={_name} node={_ruleNode._rule} value={_value != null && _value.Value != null ? _value.Value.ToString() : \"\"}"
         )]
@@ -1574,7 +1570,6 @@ namespace System.Speech.Recognition
                 _ruleNode = ruleNode;
             }
         }
-
         #endregion
 
         #region Private Fields
@@ -1590,6 +1585,7 @@ namespace System.Speech.Recognition
 
         [NonSerializedAttribute]
         private ulong _grammarId = unchecked((ulong)(-1));
+
 #pragma warning disable 6524
         [NonSerializedAttribute]
         private Grammar _grammar;

@@ -9,6 +9,7 @@ namespace MS
     {
         private int _m_n;
         private VT[] _m_dummyGCRef;
+
         private VT(int n)
         {
             _m_n = n;
@@ -20,6 +21,7 @@ namespace MS
             me._m_n += what._m_n;
             return me;
         }
+
         private static VT sub(VT me, VT what)
         {
             me._m_n -= what._m_n;

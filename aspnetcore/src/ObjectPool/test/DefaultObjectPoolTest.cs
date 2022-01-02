@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Xunit;
 
+
 namespace Microsoft.Extensions.ObjectPool;
 
 public class DefaultObjectPoolTest

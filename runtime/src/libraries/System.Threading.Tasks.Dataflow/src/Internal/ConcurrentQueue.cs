@@ -36,6 +36,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         private volatile Segment _head;
         private volatile Segment _tail;
         private const int SEGMENT_SIZE = 32;
+
         //number of snapshot takers, GetEnumerator(), ToList() and ToArray() operations take snapshot.
         internal volatile int _numSnapshotTakers;
 
@@ -912,6 +913,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         {
             _value = value;
         }
+
         public volatile bool _value;
     }
 }

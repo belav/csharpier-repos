@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         }
 
         internal abstract void OnModelUpdated(TModel result, bool updateController);
+
         internal abstract void OnTextViewBufferPostChanged(object sender, EventArgs e);
+
         internal abstract void OnCaretPositionChanged(object sender, EventArgs e);
 
         private void OnTextViewClosed(object sender, EventArgs e)

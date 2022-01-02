@@ -21,6 +21,7 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         }
 
         protected abstract Task<SyntaxNode?> GetSelectedNodeAsync(CodeRefactoringContext context);
+
         protected abstract Task<SyntaxNode?> GetSelectedClassDeclarationAsync(
             CodeRefactoringContext context
         );

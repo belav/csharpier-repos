@@ -4,6 +4,7 @@
 using System;
 using Newtonsoft.Json;
 
+
 namespace FormatterWebSite;
 
 public class InfinitelyRecursiveModel

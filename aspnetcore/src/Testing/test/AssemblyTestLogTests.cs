@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
 public class AssemblyTestLogTests : LoggedTest

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal static class TypeBaseEnumerationExtensions

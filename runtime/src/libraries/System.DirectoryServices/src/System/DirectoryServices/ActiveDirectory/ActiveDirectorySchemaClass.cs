@@ -213,7 +213,6 @@ namespace System.DirectoryServices.ActiveDirectory
             // set the bind flag
             this.isBound = true;
         }
-
         #endregion constructors
 
         #region IDisposable
@@ -1281,7 +1280,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         : value.GetSecurityDescriptorSddlForm(AccessControlSections.All);
             }
         }
-
         #endregion public properties
 
         #region private methods

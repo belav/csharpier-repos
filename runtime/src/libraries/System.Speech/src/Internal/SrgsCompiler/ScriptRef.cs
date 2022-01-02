@@ -18,7 +18,6 @@ namespace System.Speech.Internal.SrgsCompiler
             _sMethod = sMethod;
             _method = method;
         }
-
         #endregion
 
         #region internal Methods
@@ -53,7 +52,6 @@ namespace System.Speech.Internal.SrgsCompiler
             }
             return null;
         }
-
         #endregion
 
         #region Internal Fields

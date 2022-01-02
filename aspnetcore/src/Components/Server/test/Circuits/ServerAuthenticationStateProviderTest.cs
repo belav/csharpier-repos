@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Tests.Circuits;
 
 public class ServerAuthenticationStateProviderTest

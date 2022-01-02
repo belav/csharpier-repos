@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal static class SyntaxNodeExtensions

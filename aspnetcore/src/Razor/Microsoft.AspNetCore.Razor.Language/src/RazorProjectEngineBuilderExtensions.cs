@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class RazorProjectEngineBuilderExtensions

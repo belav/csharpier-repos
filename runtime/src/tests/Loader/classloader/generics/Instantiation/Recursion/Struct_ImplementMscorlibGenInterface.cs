@@ -172,7 +172,6 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
     {
         return default(IEnumerator<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>);
     }
-
 	#endregion
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()

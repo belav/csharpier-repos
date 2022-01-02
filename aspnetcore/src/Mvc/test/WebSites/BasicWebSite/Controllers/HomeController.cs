@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Newtonsoft.Json.Serialization;
 
+
 namespace BasicWebSite.Controllers;
 
 public class HomeController : Controller

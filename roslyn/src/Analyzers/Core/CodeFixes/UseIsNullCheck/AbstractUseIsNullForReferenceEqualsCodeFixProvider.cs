@@ -26,11 +26,14 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         protected abstract string GetIsNullTitle();
+
         protected abstract string GetIsNotNullTitle();
+
         protected abstract SyntaxNode CreateNullCheck(
             TExpressionSyntax argument,
             bool isUnconstrainedGeneric
         );
+
         protected abstract SyntaxNode CreateNotNullCheck(TExpressionSyntax argument);
 
         private static bool IsSupportedDiagnostic(Diagnostic diagnostic) =>

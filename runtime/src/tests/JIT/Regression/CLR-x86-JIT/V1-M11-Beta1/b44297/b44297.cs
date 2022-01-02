@@ -25,6 +25,7 @@ namespace Test
             }
             return 0;
         }
+
         static int Main()
         {
             new BB().Method1();

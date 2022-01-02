@@ -17,9 +17,12 @@ namespace System.Data.OleDb
     public sealed class OleDbPermission : DBDataPermission
     {
         public OleDbPermission() : base(default(PermissionState)) { }
+
         public OleDbPermission(PermissionState state) : base(default(PermissionState)) { }
+
         public OleDbPermission(PermissionState state, bool allowBlankPassword)
             : base(default(PermissionState)) { }
+
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Never)]
         public string Provider
@@ -27,6 +30,7 @@ namespace System.Data.OleDb
             get { return null; }
             set { }
         }
+
         public override IPermission Copy()
         {
             return null;

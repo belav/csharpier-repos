@@ -98,6 +98,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 AddDiagnosticAction = AddDiagnostic;
             }
+
 #pragma warning restore 8618
 
             private void AddDiagnostic(Diagnostic diagnostic)

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
 namespace Identity.ExternalClaims.Data.Migrations;
 
 [DbContext(typeof(ApplicationDbContext))]

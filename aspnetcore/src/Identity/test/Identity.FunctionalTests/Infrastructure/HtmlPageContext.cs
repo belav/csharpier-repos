@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public class HtmlPageContext

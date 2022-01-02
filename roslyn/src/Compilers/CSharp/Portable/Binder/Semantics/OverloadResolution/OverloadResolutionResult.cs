@@ -13,7 +13,6 @@ using Roslyn.Utilities;
 
 #if DEBUG
 using System.Text;
-
 #endif
 namespace Microsoft.CodeAnalysis.CSharp
 {

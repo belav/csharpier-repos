@@ -2209,7 +2209,6 @@ public class OperationExecutor
 ";
             CreateCompilationWithMscorlib45(program).VerifyEmitDiagnostics();
         }
-
         #endregion
 
         [Fact, WorkItem(545347, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545347")]

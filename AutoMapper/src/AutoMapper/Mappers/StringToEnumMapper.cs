@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
+
 namespace AutoMapper.Internal.Mappers
 {
     using static Execution.ExpressionBuilder;
     using static Expression;
+
     public class StringToEnumMapper : IObjectMapper
     {
         private static readonly MethodInfo EqualsMethod = typeof(StringToEnumMapper).GetMethod(
@@ -19,8 +21,10 @@ namespace AutoMapper.Internal.Mappers
         private static readonly MethodInfo IsNullOrEmptyMethod = typeof(string).GetMethod(
             "IsNullOrEmpty"
         );
+
         public bool IsMatch(in TypePair context) =>
             context.SourceType == typeof(string) && context.DestinationType.IsEnum;
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,
@@ -61,6 +65,7 @@ namespace AutoMapper.Internal.Mappers
                 parse
             );
         }
+
         public static bool StringCompareOrdinalIgnoreCase(string x, string y) =>
             StringComparer.OrdinalIgnoreCase.Equals(x, y);
     }

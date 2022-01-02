@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Analyzer.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzerIntegrationTest

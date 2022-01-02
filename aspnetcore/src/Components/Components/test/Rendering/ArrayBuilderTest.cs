@@ -6,6 +6,7 @@ using System.Buffers;
 using System.Linq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
 public class ArrayBuilderTest

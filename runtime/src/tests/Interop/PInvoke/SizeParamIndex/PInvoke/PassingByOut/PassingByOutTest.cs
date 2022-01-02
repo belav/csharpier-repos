@@ -73,7 +73,6 @@ public class ClientMarshalArrayAsSizeParamIndexByOutTest
             out string[] arrInt32,
         out int arrSize
     );
-
     #endregion
 
     static void SizeParamTypeIsByte()

@@ -7,6 +7,7 @@ using System.Reflection;
 using OpenQA.Selenium;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.E2ETesting;
 
 // This has to use BeforeAfterTestAttribute because running the log capture

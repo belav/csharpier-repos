@@ -1102,7 +1102,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var items = projectItems.OfType<ProjectItem>();
             return items.Concat(items.SelectMany(i => GetAllItems(i.ProjectItems)));
         }
-
 #if false
         protected override void AddExistingDocument(DocumentId documentId, string filePath, IEnumerable<string> folders)
         {

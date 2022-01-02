@@ -124,6 +124,7 @@ internal partial class VectorTest
             }
             return result;
         }
+
         public void Print()
         {
             Console.WriteLine("[");

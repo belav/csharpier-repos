@@ -107,6 +107,7 @@ internal static partial class Interop
                     kCFProxyUsernameKey = LoadSymbol(lib, "kCFProxyUsernameKey");
                 }
             }
+
 #pragma warning restore CA1810
 
             public CFProxy(SafeCFDictionaryHandle dictionary)

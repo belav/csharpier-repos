@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 // space is very large, we'll need another register to use instead of a constant in the addressing mode.
 
 class GenericClass<T> { }
+
 class GenericException<T> : Exception { }
 
 public class Test_GitHub_21990

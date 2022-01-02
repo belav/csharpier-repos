@@ -333,6 +333,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 
 #pragma warning disable 67
         public event EventHandler MaxTextRightCoordinateChanged;
+
 #pragma warning restore 67
 
         public event EventHandler Closed

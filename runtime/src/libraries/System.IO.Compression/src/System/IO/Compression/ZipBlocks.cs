@@ -18,6 +18,7 @@ namespace System.IO.Compression
         private byte[] _data;
 
         public ushort Tag => _tag;
+
         // returns size of data, not of the entire block
         public ushort Size => _size;
         public byte[] Data => _data;

@@ -53,10 +53,15 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         protected abstract string NodeName { get; }
 
         protected abstract List<TXmlNameAttributeSyntax> GetNameAttributes(TXmlElementSyntax node);
+
         protected abstract string GetValueFromNameAttribute(TXmlNameAttributeSyntax attribute);
+
         protected abstract SyntaxNode TryGetDocCommentNode(SyntaxTriviaList parameter);
+
         protected abstract string GetXmlElementLocalName(TXmlElementSyntax element);
+
         protected abstract List<string> GetParameterNames(TMemberDeclarationSyntax method);
+
         protected abstract TXmlElementSyntax GetNewNode(
             string parameterName,
             bool isFirstNodeInComment

@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.WebUtilities;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 // This is a singleton instance

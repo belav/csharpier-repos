@@ -47,6 +47,7 @@ internal static partial class Interop
             internal const int REG_NONE = 0; // No value type
             internal const int REG_SZ = 1; // Unicode nul terminated string
             internal const int REG_EXPAND_SZ = 2; // Unicode nul terminated string
+
             // (with environment variable references)
             internal const int REG_BINARY = 3; // Free form binary
             internal const int REG_DWORD = 4; // 32-bit number

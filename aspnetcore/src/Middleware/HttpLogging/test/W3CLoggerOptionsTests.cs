@@ -4,6 +4,7 @@
 using System;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 public class W3CLoggerOptionsTests

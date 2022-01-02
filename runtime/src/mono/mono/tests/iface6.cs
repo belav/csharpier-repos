@@ -33,15 +33,19 @@ class D : IC, IB
 class E : IE, IC
 {
     public E() { }
+
     public void doom()
     {
         return;
     }
+
     public Object Clone()
     {
         return null;
     }
+
     public void Dispose() { }
+
     int IA.Add(int i)
     {
         return 7;

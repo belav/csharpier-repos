@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 // Purpose of this interface, instead of just using ErrorBoundaryBase directly:

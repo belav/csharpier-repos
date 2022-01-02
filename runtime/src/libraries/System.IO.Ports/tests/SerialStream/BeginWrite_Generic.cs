@@ -192,7 +192,6 @@ namespace System.IO.Ports.Tests
         {
             Verify_Handshake(Handshake.RequestToSendXOnXOff);
         }
-
         #endregion
 
         #region Verification for Test Cases

@@ -26,6 +26,7 @@ namespace System.Reflection.TypeLoading.Ecma
         }
 
         internal sealed override RoModule GetRoModule() => _module;
+
         internal EcmaModule GetEcmaModule() => _module;
 
         protected sealed override RoType? ComputeDeclaringType()
@@ -85,6 +86,7 @@ namespace System.Reflection.TypeLoading.Ecma
             TypeDefinition
                 .GetCustomAttributes()
                 .IsCustomAttributeDefined(ns, name, GetEcmaModule());
+
         internal sealed override CustomAttributeData? TryFindCustomAttribute(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name
@@ -96,8 +98,10 @@ namespace System.Reflection.TypeLoading.Ecma
 
         internal sealed override int GetGenericParameterCount() =>
             GetGenericTypeParametersNoCopy().Length;
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() =>
             _lazyGenericParameters ?? (_lazyGenericParameters = ComputeGenericTypeParameters());
+
         private RoType[] ComputeGenericTypeParameters()
         {
             EcmaModule module = GetEcmaModule();
@@ -113,6 +117,7 @@ namespace System.Reflection.TypeLoading.Ecma
             }
             return genericParameters;
         }
+
         private volatile RoType[]? _lazyGenericParameters;
 
         protected internal sealed override RoType ComputeEnumUnderlyingType()
@@ -170,6 +175,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughTypeDefinitionProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly TypeDefinition _neverAccessThisExceptThroughTypeDefinitionProperty;
     }

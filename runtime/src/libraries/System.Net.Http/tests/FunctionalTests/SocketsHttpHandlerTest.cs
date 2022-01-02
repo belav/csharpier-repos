@@ -124,6 +124,7 @@ namespace System.Net.Http.Functional.Tests
         private sealed class SetOnFinalized
         {
             internal TaskCompletionSource _completedWhenFinalized;
+
             ~SetOnFinalized() => _completedWhenFinalized.SetResult();
         }
     }
@@ -186,6 +187,7 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_DiagnosticsTest_Http2 : DiagnosticsTest
     {
         public SocketsHttpHandler_DiagnosticsTest_Http2(ITestOutputHelper output) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -195,7 +197,6 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClient_SelectedSites_Test(ITestOutputHelper output)
             : base(output) { }
     }
-
 #if !TARGETS_BROWSER
     public sealed class SocketsHttpHandler_HttpClientEKUTest : HttpClientEKUTest
     {
@@ -252,6 +253,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClientHandler_Finalization_Http2_Test(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -1064,6 +1066,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_Http2_TrailingHeaders_Test(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.SupportsAlpn))]
@@ -1306,6 +1309,7 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandler_IdnaProtocolTests : IdnaProtocolTests
     {
         public SocketsHttpHandler_IdnaProtocolTests(ITestOutputHelper output) : base(output) { }
+
         protected override bool SupportsIdna => true;
     }
 
@@ -2160,10 +2164,13 @@ namespace System.Net.Http.Functional.Tests
             private readonly Action _callback;
 
             public PassthroughProxyWithFinalizerCallback(Action callback) => _callback = callback;
+
             ~PassthroughProxyWithFinalizerCallback() => _callback();
 
             public ICredentials Credentials { get; set; }
+
             public Uri GetProxy(Uri destination) => destination;
+
             public bool IsBypassed(Uri host) => true;
         }
 
@@ -3901,6 +3908,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_ConnectCallback_Http2(ITestOutputHelper output) : base(output)
         { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -4371,6 +4379,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_PlaintextStreamFilter_Http2(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -4378,6 +4387,7 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandlerTest_Cookies_Http2 : HttpClientHandlerTest_Cookies
     {
         public SocketsHttpHandlerTest_Cookies_Http2(ITestOutputHelper output) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -4386,6 +4396,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_HttpClientHandlerTest_Http2(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -4402,6 +4413,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http2(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -4412,6 +4424,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClientHandler_Cancellation_Test_Http2(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
@@ -4420,6 +4433,7 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandlerTest_Http3_MsQuic : HttpClientHandlerTest_Http3
     {
         public SocketsHttpHandlerTest_Http3_MsQuic(ITestOutputHelper output) : base(output) { }
+
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
     }
@@ -4429,6 +4443,7 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandlerTest_Http3_Mock : HttpClientHandlerTest_Http3
     {
         public SocketsHttpHandlerTest_Http3_Mock(ITestOutputHelper output) : base(output) { }
+
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;
     }
@@ -4440,6 +4455,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_MsQuic(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -4452,6 +4468,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_HttpClientHandlerTest_Http3_Mock(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;
@@ -4463,6 +4480,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_Cookies_Http3_MsQuic(ITestOutputHelper output) : base(output)
         { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -4474,6 +4492,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandlerTest_Cookies_Http3_Mock(ITestOutputHelper output) : base(output)
         { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;
@@ -4487,6 +4506,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http3_MsQuic(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -4500,6 +4520,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandlerTest_HttpClientHandlerTest_Headers_Http3_Mock(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;
@@ -4513,6 +4534,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClientHandler_Cancellation_Test_Http3_MsQuic(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -4526,6 +4548,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClientHandler_Cancellation_Test_Http3_Mock(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;
@@ -4539,6 +4562,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClientHandler_AltSvc_Test_Http3_MsQuic(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -4551,6 +4575,7 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_AltSvc_Test_Http3_Mock(ITestOutputHelper output)
             : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;
@@ -4564,6 +4589,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClientHandler_Finalization_Http3_MsQuic(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.MsQuic;
@@ -4577,6 +4603,7 @@ namespace System.Net.Http.Functional.Tests
         public SocketsHttpHandler_HttpClientHandler_Finalization_Http3_Mock(
             ITestOutputHelper output
         ) : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
         protected override QuicImplementationProvider UseQuicImplementationProvider =>
             QuicImplementationProviders.Mock;

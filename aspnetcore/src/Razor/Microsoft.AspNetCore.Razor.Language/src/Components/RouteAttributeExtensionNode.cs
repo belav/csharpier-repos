@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal sealed class RouteAttributeExtensionNode : ExtensionIntermediateNode

@@ -9,6 +9,7 @@ namespace AutoMapper.UnitTests
     public class ConfigurationRules : SpecBase
     {
         public class Source { }
+
         public class Dest { }
 
         public class Profile1 : Profile

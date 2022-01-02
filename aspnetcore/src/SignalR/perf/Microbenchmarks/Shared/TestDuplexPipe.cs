@@ -4,6 +4,7 @@
 using System.IO.Pipelines;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared;
 
 public class TestDuplexPipe : IDuplexPipe

@@ -9,6 +9,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 internal class ComponentTagHelperDescriptorProvider

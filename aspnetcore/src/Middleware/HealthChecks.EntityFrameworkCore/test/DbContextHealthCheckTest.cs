@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
 public class DbContextHealthCheckTest

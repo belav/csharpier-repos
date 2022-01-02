@@ -45,7 +45,6 @@ namespace System.Buffers
         // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating the default constructor
         // as you can't make a constructor partial.
         private ArrayPoolEventSource(int _) { }
-
         /// <summary>
         /// Event for when a buffer is rented.  This is invoked once for every successful call to Rent,
         /// regardless of whether a buffer is allocated or a buffer is taken from the pool.  In a
@@ -79,7 +78,6 @@ namespace System.Buffers
             payload[3].Reserved = 0;
             WriteEventCore(1, 4, payload);
         }
-
         /// <summary>
         /// Event for when a buffer is allocated by the pool.  In an ideal situation, the number
         /// of BufferAllocated events is significantly smaller than the number of BufferRented and
@@ -144,7 +142,6 @@ namespace System.Buffers
         [Event(5, Level = EventLevel.Informational)]
         internal void BufferTrimPoll(int milliseconds, int pressure) =>
             WriteEvent(5, milliseconds, pressure);
-
         /// <summary>
         /// Event raised when a buffer returned to the pool is dropped.
         /// </summary>

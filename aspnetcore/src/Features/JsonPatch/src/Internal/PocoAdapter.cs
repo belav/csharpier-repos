@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 /// <summary>

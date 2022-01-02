@@ -32,7 +32,6 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Serialization
@@ -55,7 +54,6 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Name"": ""Bad Boys III"",
   ""Description"": ""It's no Bad Boys""
 }";
-
 #if !NET20
         [Test]
         public void DeserializeNullIntoDateTime()

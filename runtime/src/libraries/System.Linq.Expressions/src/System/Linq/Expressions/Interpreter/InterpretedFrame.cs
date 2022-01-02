@@ -27,7 +27,6 @@ namespace System.Linq.Expressions.Interpreter
 
         public int StackIndex;
         public int InstructionIndex;
-
 #if FEATURE_THREAD_ABORT
         // When a ThreadAbortException is raised from interpreted code this is the first frame that caught it.
         // No handlers within this handler re-abort the current thread when left.
@@ -117,7 +116,6 @@ namespace System.Linq.Expressions.Interpreter
             Data[i] = Data[i - 1];
             StackIndex = i + 1;
         }
-
         #endregion
 
         #region Stack Trace
@@ -186,7 +184,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             s_currentFrame = prevFrame;
         }
-
         #endregion
 
         #region Continuations

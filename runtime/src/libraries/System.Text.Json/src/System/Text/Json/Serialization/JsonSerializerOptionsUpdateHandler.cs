@@ -7,6 +7,7 @@ using System.Text.Json;
 
 [assembly: MetadataUpdateHandler(typeof(JsonSerializerOptionsUpdateHandler))]
 
+
 namespace System.Text.Json
 {
     /// <summary>Handler used to clear JsonSerializerOptions reflection cache upon a metadata update.</summary>

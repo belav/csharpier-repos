@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports;
 
 internal class ServerSentEventsServerTransport : IHttpTransport

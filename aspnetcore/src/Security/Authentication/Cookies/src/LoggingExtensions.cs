@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.Logging;
 
 internal static partial class LoggingExtensions

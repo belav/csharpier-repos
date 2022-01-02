@@ -3,6 +3,7 @@
 
 using System.Runtime.CompilerServices;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
 internal class ViewBufferPage

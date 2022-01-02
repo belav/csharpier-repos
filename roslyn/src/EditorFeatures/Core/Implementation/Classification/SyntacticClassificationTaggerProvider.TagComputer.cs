@@ -214,7 +214,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     _workQueue.AddWork(_subjectBuffer.CurrentSnapshot);
                 }
             }
-
             #endregion
 
             #region Event Handling
@@ -271,7 +270,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
                 _workQueue.AddWork(_subjectBuffer.CurrentSnapshot);
             }
-
             #endregion
 
             /// <summary>

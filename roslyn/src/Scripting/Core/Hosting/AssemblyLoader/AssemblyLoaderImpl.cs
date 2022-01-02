@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         }
 
         public abstract Assembly LoadFromStream(Stream peStream, Stream pdbStream);
+
         public abstract AssemblyAndLocation LoadFromPath(string path);
+
         public abstract void Dispose();
     }
 }

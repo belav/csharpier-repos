@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 // TestSink does not have an event

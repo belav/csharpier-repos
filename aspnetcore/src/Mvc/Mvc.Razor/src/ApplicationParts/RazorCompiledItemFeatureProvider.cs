@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Razor.Hosting;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProvider<ViewsFeature>
@@ -80,6 +81,7 @@ internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProv
     private sealed class HotReloadRazorCompiledItem : RazorCompiledItem
     {
         private readonly RazorCompiledItem _previous;
+
         public HotReloadRazorCompiledItem(RazorCompiledItem previous, Type type)
         {
             _previous = previous;

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public class LoggedTest : LoggedTestBase

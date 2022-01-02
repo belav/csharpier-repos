@@ -35,7 +35,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionBoolArrayIndex(GenerateBoolArray(5), -1, useInterpreter);
             CheckExceptionBoolArrayIndex(GenerateBoolArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Byte tests
@@ -66,7 +65,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionByteArrayIndex(GenerateByteArray(5), -1, useInterpreter);
             CheckExceptionByteArrayIndex(GenerateByteArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Custom type tests
@@ -97,7 +95,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionCustomArrayIndex(GenerateCustomArray(5), -1, useInterpreter);
             CheckExceptionCustomArrayIndex(GenerateCustomArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Char tests
@@ -128,7 +125,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionCharArrayIndex(GenerateCharArray(5), -1, useInterpreter);
             CheckExceptionCharArrayIndex(GenerateCharArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Custom 2 type tests
@@ -159,7 +155,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionCustom2ArrayIndex(GenerateCustom2Array(5), -1, useInterpreter);
             CheckExceptionCustom2ArrayIndex(GenerateCustom2Array(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Decimal tests
@@ -190,7 +185,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionDecimalArrayIndex(GenerateDecimalArray(5), -1, useInterpreter);
             CheckExceptionDecimalArrayIndex(GenerateDecimalArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Delegate tests
@@ -221,7 +215,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionDelegateArrayIndex(GenerateDelegateArray(5), -1, useInterpreter);
             CheckExceptionDelegateArrayIndex(GenerateDelegateArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Double tests
@@ -252,7 +245,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionDoubleArrayIndex(GenerateDoubleArray(9), -1, useInterpreter);
             CheckExceptionDoubleArrayIndex(GenerateDoubleArray(9), 9, useInterpreter);
         }
-
         #endregion
 
         #region Enum tests
@@ -283,7 +275,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionEnumArrayIndex(GenerateEnumArray(5), -1, useInterpreter);
             CheckExceptionEnumArrayIndex(GenerateEnumArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Enum long tests
@@ -314,7 +305,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionEnumLongArrayIndex(GenerateEnumLongArray(5), -1, useInterpreter);
             CheckExceptionEnumLongArrayIndex(GenerateEnumLongArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Float tests
@@ -345,7 +335,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionFloatArrayIndex(GenerateFloatArray(9), -1, useInterpreter);
             CheckExceptionFloatArrayIndex(GenerateFloatArray(9), 9, useInterpreter);
         }
-
         #endregion
 
         #region Func tests
@@ -376,7 +365,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionFuncArrayIndex(GenerateFuncArray(5), -1, useInterpreter);
             CheckExceptionFuncArrayIndex(GenerateFuncArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Interface tests
@@ -407,7 +395,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionInterfaceArrayIndex(GenerateInterfaceArray(5), -1, useInterpreter);
             CheckExceptionInterfaceArrayIndex(GenerateInterfaceArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region IEquatable custom tests
@@ -462,7 +449,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region IEquatable custom 2 tests
@@ -517,7 +503,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region Int tests
@@ -548,7 +533,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionIntArrayIndex(GenerateIntArray(5), -1, useInterpreter);
             CheckExceptionIntArrayIndex(GenerateIntArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Long tests
@@ -579,7 +563,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionLongArrayIndex(GenerateLongArray(5), -1, useInterpreter);
             CheckExceptionLongArrayIndex(GenerateLongArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Object tests
@@ -610,7 +593,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionObjectArrayIndex(GenerateObjectArray(5), -1, useInterpreter);
             CheckExceptionObjectArrayIndex(GenerateObjectArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Struct tests
@@ -641,7 +623,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionStructArrayIndex(GenerateStructArray(5), -1, useInterpreter);
             CheckExceptionStructArrayIndex(GenerateStructArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region SByte tests
@@ -672,7 +653,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionSByteArrayIndex(GenerateSByteArray(5), -1, useInterpreter);
             CheckExceptionSByteArrayIndex(GenerateSByteArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region StructWithString tests
@@ -727,7 +707,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region StructWithValueAndString tests
@@ -791,7 +770,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region Short tests
@@ -822,7 +800,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionShortArrayIndex(GenerateShortArray(5), -1, useInterpreter);
             CheckExceptionShortArrayIndex(GenerateShortArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region StructWithParameters tests
@@ -886,7 +863,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region StructWithStruct tests
@@ -941,7 +917,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region String tests
@@ -972,7 +947,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionStringArrayIndex(GenerateStringArray(5), -1, useInterpreter);
             CheckExceptionStringArrayIndex(GenerateStringArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region UInt tests
@@ -1003,7 +977,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionUIntArrayIndex(GenerateUIntArray(5), -1, useInterpreter);
             CheckExceptionUIntArrayIndex(GenerateUIntArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region ULong tests
@@ -1034,7 +1007,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionULongArrayIndex(GenerateULongArray(5), -1, useInterpreter);
             CheckExceptionULongArrayIndex(GenerateULongArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region UShort tests
@@ -1065,7 +1037,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionUShortArrayIndex(GenerateUShortArray(5), -1, useInterpreter);
             CheckExceptionUShortArrayIndex(GenerateUShortArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region Generic tests
@@ -1261,7 +1232,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionGenericWithStructRestrictionArrayIndexTestHelper<S>(useInterpreter);
             CheckExceptionGenericWithStructRestrictionArrayIndexTestHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic test helpers
@@ -1592,7 +1562,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region Generate array
@@ -2073,7 +2042,6 @@ namespace System.Linq.Expressions.Tests
 
             return result;
         }
-
         #endregion
 
         #region Check array index
@@ -2510,7 +2478,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.True(success);
         }
-
         #endregion
 
         #region Check index expression
@@ -3105,7 +3072,6 @@ namespace System.Linq.Expressions.Tests
             Func<Ts> f = e.Compile(useInterpreter);
             return object.Equals(f(), array[index]);
         }
-
         #endregion
 
         #region Check exception array index
@@ -3723,7 +3689,6 @@ namespace System.Linq.Expressions.Tests
                         )
                 );
         }
-
         #endregion
 
         #region ToString
@@ -3737,7 +3702,6 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.Equal("xs[i]", e.ToString());
         }
-
         #endregion
 
         [Fact]

@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
 
+
 namespace Microsoft.AspNetCore.Authentication;
 
 public static class TestExtensions

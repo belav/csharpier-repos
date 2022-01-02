@@ -276,7 +276,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var cv92 = ConstantValue.Create(1.1m);
             Assert.Equal(cv91.GetHashCode(), cv92.GetHashCode());
         }
-
         // In general, different values are not required to have different hash codes.
         // But for perf reasons we want hash functions with a good distribution,
         // so we expect hash codes to differ if a single component is incremented.
@@ -292,7 +291,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.NotEqual(cv1.GetHashCode(), cv2.GetHashCode());
         }
-
 #endif
 
         [Fact]

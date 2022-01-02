@@ -18,6 +18,7 @@ namespace System.Diagnostics
             {
                 TraceInternal.Fail(message, detailMessage);
             }
+
 #pragma warning restore CS8770
             public override void OnIndentLevelChanged(int indentLevel)
             {
@@ -40,10 +41,12 @@ namespace System.Diagnostics
                     }
                 }
             }
+
             public override void Write(string? message)
             {
                 TraceInternal.Write(message);
             }
+
             public override void WriteLine(string? message)
             {
                 TraceInternal.WriteLine(message);

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public sealed class MethodDeclarationIntermediateNode : MemberDeclarationIntermediateNode

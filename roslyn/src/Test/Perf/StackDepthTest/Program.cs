@@ -73,6 +73,7 @@ namespace OverflowSensitivity
             );
             return builder.ToString();
         }
+
         private static void CompileCode(string stringText)
         {
             var parseOptions = new CSharpParseOptions(

@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.GenerateMember
             SyntaxNode node,
             CancellationToken cancellationToken
         );
+
         protected abstract bool IsCandidate(
             SyntaxNode node,
             SyntaxToken token,

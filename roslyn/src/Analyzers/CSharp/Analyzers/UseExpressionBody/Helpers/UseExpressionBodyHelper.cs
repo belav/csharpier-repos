@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         public abstract ImmutableArray<SyntaxKind> SyntaxKinds { get; }
 
         public abstract BlockSyntax GetBody(SyntaxNode declaration);
+
         public abstract ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode declaration);
 
         public abstract bool CanOfferUseExpressionBody(
@@ -32,11 +33,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             SyntaxNode declaration,
             bool forAnalyzer
         );
+
         public abstract (bool canOffer, bool fixesError) CanOfferUseBlockBody(
             OptionSet optionSet,
             SyntaxNode declaration,
             bool forAnalyzer
         );
+
         public abstract SyntaxNode Update(
             SemanticModel semanticModel,
             SyntaxNode declaration,

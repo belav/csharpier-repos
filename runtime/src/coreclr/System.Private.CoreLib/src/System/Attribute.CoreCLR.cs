@@ -133,7 +133,6 @@ namespace System
 
             return null;
         }
-
         #endregion
 
         #region EventInfo
@@ -231,7 +230,6 @@ namespace System
 
             return false;
         }
-
         #endregion
 
         #region ParameterInfo
@@ -394,7 +392,6 @@ namespace System
 
             return false;
         }
-
         #endregion
 
         #region Utility
@@ -586,7 +583,6 @@ namespace System
 
             throw new AmbiguousMatchException(SR.RFLCT_AmbigCust);
         }
-
         #endregion
 
         #region ParameterInfo
@@ -706,7 +702,6 @@ namespace System
 
             throw new AmbiguousMatchException(SR.RFLCT_AmbigCust);
         }
-
         #endregion
 
         #region Module
@@ -793,7 +788,6 @@ namespace System
 
             throw new AmbiguousMatchException(SR.RFLCT_AmbigCust);
         }
-
         #endregion
 
         #region Assembly

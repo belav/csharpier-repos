@@ -729,7 +729,6 @@ namespace System.Runtime.InteropServices
 
             return GetExceptionForHRInternal(errorCode, errorInfo);
         }
-
 #if !CORECLR
         private static Exception? GetExceptionForHRInternal(int errorCode, IntPtr errorInfo)
         {

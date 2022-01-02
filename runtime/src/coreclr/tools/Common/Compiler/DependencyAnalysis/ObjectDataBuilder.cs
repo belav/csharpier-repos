@@ -35,7 +35,6 @@ namespace ILCompiler.DependencyAnalysis
         private ArrayBuilder<byte> _data;
         public int Alignment { get; private set; }
         private ArrayBuilder<ISymbolDefinitionNode> _definedSymbols;
-
 #if DEBUG
         private int _numReservations;
         private bool _checkAllSymbolDependenciesMustBeMarked;

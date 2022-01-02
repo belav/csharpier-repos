@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 public class CacheableKeyRingTests

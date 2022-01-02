@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
 
+
 namespace Microsoft.AspNetCore.Http.Abstractions.Microbenchmarks;
 
 public class PathStringBenchmark

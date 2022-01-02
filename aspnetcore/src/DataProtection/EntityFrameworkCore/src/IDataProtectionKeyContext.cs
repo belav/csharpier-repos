@@ -3,6 +3,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 
 /// <summary>

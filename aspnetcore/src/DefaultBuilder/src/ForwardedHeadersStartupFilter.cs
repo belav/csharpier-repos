@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
+
 namespace Microsoft.AspNetCore;
 
 internal sealed class ForwardedHeadersStartupFilter : IStartupFilter

@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.Extensions.StackTrace.Sources;
 
 internal static partial class LoggerExtensions

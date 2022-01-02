@@ -286,7 +286,6 @@ namespace System.Text.RegularExpressions
         private StringBuilder? _categories;
         private RegexCharClass? _subtractor;
         private bool _negate;
-
 #if DEBUG
         static RegexCharClass()
         {
@@ -965,10 +964,13 @@ namespace System.Text.RegularExpressions
         {
             /// <summary>true if we know for sure that the set contains only ASCII values; otherwise, false.</summary>
             public bool ContainsOnlyAscii;
+
             /// <summary>true if we know for sure that the set doesn't contain any ASCII values; otherwise, false.</summary>
             public bool ContainsNoAscii;
+
             /// <summary>true if we know for sure that all ASCII values are in the set; otherwise, false.</summary>
             public bool AllAsciiContained;
+
             /// <summary>true if we know for sure that all non-ASCII values are in the set; otherwise, false.</summary>
             public bool AllNonAsciiContained;
         }

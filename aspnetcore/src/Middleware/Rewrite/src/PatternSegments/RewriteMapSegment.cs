@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class RewriteMapSegment : PatternSegment

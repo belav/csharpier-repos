@@ -28,13 +28,16 @@ namespace System.Threading.Tasks
     {
         /// <summary>The task with which this holder is associated.</summary>
         private readonly Task m_task;
+
         /// <summary>
         /// The lazily-initialized list of faulting exceptions.  Volatile
         /// so that it may be read to determine whether any exceptions were stored.
         /// </summary>
         private volatile List<ExceptionDispatchInfo>? m_faultExceptions;
+
         /// <summary>An exception that triggered the task to cancel.</summary>
         private ExceptionDispatchInfo? m_cancellationException;
+
         /// <summary>Whether the holder was "observed" and thus doesn't cause finalization behavior.</summary>
         private volatile bool m_isHandled;
 

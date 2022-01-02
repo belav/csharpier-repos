@@ -10,6 +10,7 @@ namespace AutoMapper.UnitTests.Bug
             using System;
             using System.Collections.Generic;
             using AutoMapper;
+
             public class TestProblem
             {
                 [Fact]

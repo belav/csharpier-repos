@@ -1055,10 +1055,13 @@ namespace Amd64InstructionTableGenerator
 
         public static SuffixFlags Amd64L(SuffixFlags t, SuffixFlags f, EncodingFlags g) =>
             Test(EncodingFlags.L, t, f, g);
+
         public static SuffixFlags Amd64W(SuffixFlags t, SuffixFlags f, EncodingFlags g) =>
             Test(EncodingFlags.W, t, f, g);
+
         public static SuffixFlags Amd64P(SuffixFlags t, SuffixFlags f, EncodingFlags g) =>
             Test(EncodingFlags.P, f, t, g);
+
         public static SuffixFlags Amd64WP(
             SuffixFlags tx,
             SuffixFlags ft,

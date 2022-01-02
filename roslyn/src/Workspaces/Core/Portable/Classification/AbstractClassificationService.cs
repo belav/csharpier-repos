@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.Classification
             ArrayBuilder<ClassifiedSpan> result,
             CancellationToken cancellationToken
         );
+
         public abstract ClassifiedSpan AdjustStaleClassification(
             SourceText text,
             ClassifiedSpan classifiedSpan

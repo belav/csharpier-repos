@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true
         );
+
 #pragma warning restore RS1029 // Do not use reserved diagnostic IDs.
 
         private static ImmutableArray<T> GetAllEnumValues<T>()
@@ -57,6 +58,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ISymbol symbol = null,
             [CallerMemberName] string callerName = null
         );
+
         protected virtual void OnOptions(
             AnalyzerOptions options,
             [CallerMemberName] string callerName = null

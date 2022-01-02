@@ -797,6 +797,7 @@ namespace System.Tests
             Assert.Throws<DivideByZeroException>(() => d1 / d2);
             Assert.Throws<DivideByZeroException>(() => decimal.Divide(d1, d2));
         }
+
         public static IEnumerable<object[]> Divide_Overflows_TestData()
         {
             yield return new object[]
@@ -2466,6 +2467,7 @@ namespace System.Tests
             string dString = d.ToString(CultureInfo.InvariantCulture);
             Assert.Equal(input, dString);
         }
+
         public static IEnumerable<object[]> Truncate_TestData()
         {
             yield return new object[] { 123m, 123m };
@@ -3294,6 +3296,7 @@ namespace System.Tests
             }
 
             public BigDecimal Floor() => FloorCeiling(Integer.Sign < 0);
+
             public BigDecimal Ceiling() => FloorCeiling(Integer.Sign > 0);
 
             BigDecimal FloorCeiling(bool up)

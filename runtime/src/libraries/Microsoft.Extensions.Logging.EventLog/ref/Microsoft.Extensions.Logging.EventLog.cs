@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddEventLog(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             Microsoft.Extensions.Logging.EventLog.EventLogSettings settings
@@ -21,6 +22,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddEventLog(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Action<Microsoft.Extensions.Logging.EventLog.EventLogSettings> configure
@@ -30,6 +32,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 }
+
 namespace Microsoft.Extensions.Logging.EventLog
 {
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("EventLog")]
@@ -39,24 +42,31 @@ namespace Microsoft.Extensions.Logging.EventLog
           System.IDisposable
     {
         public EventLogLoggerProvider() { }
+
         public EventLogLoggerProvider(
             Microsoft.Extensions.Logging.EventLog.EventLogSettings settings
         ) { }
+
         public EventLogLoggerProvider(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Logging.EventLog.EventLogSettings> options
         ) { }
+
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string name)
         {
             throw null;
         }
+
         public void Dispose() { }
+
         public void SetScopeProvider(
             Microsoft.Extensions.Logging.IExternalScopeProvider scopeProvider
         ) { }
     }
+
     public partial class EventLogSettings
     {
         public EventLogSettings() { }
+
         public System.Func<string, Microsoft.Extensions.Logging.LogLevel, bool> Filter
         {
             get { throw null; }

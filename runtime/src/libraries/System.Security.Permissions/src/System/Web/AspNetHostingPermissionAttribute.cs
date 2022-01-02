@@ -17,7 +17,9 @@ namespace System.Web
     public sealed class AspNetHostingPermissionAttribute : CodeAccessSecurityAttribute
     {
         public AspNetHostingPermissionAttribute(SecurityAction action) : base(action) { }
+
         public AspNetHostingPermissionLevel Level { get; set; }
+
         public override IPermission CreatePermission()
         {
             return null;

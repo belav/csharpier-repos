@@ -210,6 +210,7 @@ namespace System
                 // MemberInfo caches
                 private CerHashtable<string, T[]?> m_csMemberInfos;
                 private CerHashtable<string, T[]?> m_cisMemberInfos;
+
                 // List of MemberInfos given out. When m_cacheComplete is false, it may have null entries at the end to avoid
                 // reallocating the list every time a new entry is added.
                 private T[]? m_allMembers;
@@ -2918,7 +2919,6 @@ namespace System
         {
             throw new NotSupportedException();
         }
-
         #endregion
 
         #region Private\Internal Members
@@ -3012,7 +3012,6 @@ namespace System
         {
             return Cache.GetDefaultMemberName();
         }
-
         #endregion
 
         #region Type Overrides
@@ -4152,7 +4151,6 @@ namespace System
 
             return false;
         }
-
 #if FEATURE_TYPEEQUIVALENCE
         // Reflexive, symmetric, transitive.
         public override bool IsEquivalentTo([NotNullWhen(true)] Type? other)
@@ -4204,7 +4202,6 @@ namespace System
                 return ns;
             }
         }
-
         #endregion
 
         #region Attributes
@@ -4238,7 +4235,6 @@ namespace System
                 return attributes;
             }
         }
-
         #endregion
 
         #region Arrays
@@ -4246,7 +4242,6 @@ namespace System
         public sealed override bool IsSZArray => RuntimeTypeHandle.IsSZArray(this);
 
         internal object[] GetEmptyArray() => Cache.GetEmptyArray();
-
         #endregion
 
         #region Generics
@@ -4387,7 +4382,6 @@ namespace System
 
         public override StructLayoutAttribute? StructLayoutAttribute =>
             PseudoCustomAttribute.GetStructLayoutCustomAttribute(this);
-
         #endregion
 
         #region Invoke Member
@@ -4523,7 +4517,6 @@ namespace System
 
             throw new ArgumentException(SR.Format(SR.Arg_ObjObjEx, value.GetType(), this));
         }
-
         #endregion
 
         #endregion
@@ -4541,7 +4534,6 @@ namespace System
         private string? GetCachedName(TypeNameKind kind) => Cache.GetName(kind);
 
         public override Type? DeclaringType => Cache.GetEnclosingType();
-
         #endregion
 
         #region Legacy Internal
@@ -4767,7 +4759,6 @@ namespace System
         internal void InvalidateCachedNestedType() => Cache.InvalidateCachedNestedType();
 
         internal bool IsGenericCOMObjectImpl() => RuntimeTypeHandle.IsComObject(this, true);
-
         #endregion
 
         #region Legacy internal static

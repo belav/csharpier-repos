@@ -83,12 +83,15 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
         );
 
         protected abstract void AddLiteralValue(SpecialType type, object value);
+
         protected abstract void AddExplicitlyCastedLiteralValue(
             INamedTypeSymbol namedType,
             SpecialType type,
             object value
         );
+
         protected abstract void AddSpace();
+
         protected abstract void AddBitwiseOr();
 
         /// <summary>

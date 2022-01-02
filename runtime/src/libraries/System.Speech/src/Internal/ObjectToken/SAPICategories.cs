@@ -73,7 +73,6 @@ namespace System.Speech.Internal.ObjectTokens
 
             return device;
         }
-
         #endregion
 
         private const string SpeechRegistryKey = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\";
@@ -87,7 +86,6 @@ namespace System.Speech.Internal.ObjectTokens
         internal const string Voices = SpeechRegistryKey + "Voices";
 
         internal const string AudioIn = SpeechRegistryKey + "AudioInput";
-
         #endregion
 
         #region Private Methods
@@ -379,7 +377,6 @@ namespace System.Speech.Internal.ObjectTokens
             }
             return token;
         }
-
         #endregion
 
         #region private Fields

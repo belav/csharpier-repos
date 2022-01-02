@@ -5,6 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Reflection;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 // A cache for root component types

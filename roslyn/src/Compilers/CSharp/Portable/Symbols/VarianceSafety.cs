@@ -319,7 +319,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
         }
-
         #endregion Interface variance safety
 
         #region Input- and output- unsafeness
@@ -517,7 +516,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return false;
         }
-
         #endregion Input- and output- unsafeness
 
         #region Adding diagnostics

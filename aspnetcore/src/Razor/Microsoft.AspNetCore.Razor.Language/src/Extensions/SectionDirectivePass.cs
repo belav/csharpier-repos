@@ -5,6 +5,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public sealed class SectionDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass

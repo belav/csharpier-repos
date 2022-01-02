@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.HttpSys.Internal;
 using Microsoft.AspNetCore.Server.IIS.Core;
 
+
 namespace Microsoft.AspNetCore.Server.IIS;
 
 internal static class NativeMethods
@@ -197,6 +198,7 @@ internal static class NativeMethods
         NativeSafeHandle pInProcessHandler,
         out bool isResponse4
     );
+
     [DllImport(AspNetCoreModuleDll)]
     private static extern unsafe int http_response_set_trailer(
         NativeSafeHandle pInProcessHandler,

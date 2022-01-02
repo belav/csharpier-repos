@@ -333,9 +333,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public class AddObject
         {
             public static string operator +(AddObject left, int right) => "custom";
+
             public static string operator +(int left, AddObject right) => "motsuc";
 
             public static string operator +(AddObject left, OperatorsTests right) => "customobject";
+
             public static string operator +(OperatorsTests left, AddObject right) => "tcejbomotsuc";
         }
 
@@ -911,9 +913,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public class AndObject
         {
             public static string operator &(AndObject left, int right) => "custom";
+
             public static string operator &(int left, AndObject right) => "motsuc";
 
             public static string operator &(AndObject left, OperatorsTests right) => "customobject";
+
             public static string operator &(OperatorsTests left, AndObject right) => "tcejbomotsuc";
         }
 
@@ -1601,10 +1605,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public class DivideObject
         {
             public static string operator /(DivideObject left, int right) => "custom";
+
             public static string operator /(int left, DivideObject right) => "motsuc";
 
             public static string operator /(DivideObject left, OperatorsTests right) =>
                 "customobject";
+
             public static string operator /(OperatorsTests left, DivideObject right) =>
                 "tcejbomotsuc";
         }
@@ -2958,10 +2964,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public class MultiplyObject
         {
             public static string operator *(MultiplyObject left, int right) => "custom";
+
             public static string operator *(int left, MultiplyObject right) => "motsuc";
 
             public static string operator *(MultiplyObject left, OperatorsTests right) =>
                 "customobject";
+
             public static string operator *(OperatorsTests left, MultiplyObject right) =>
                 "tcejbomotsuc";
         }
@@ -4467,9 +4475,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public class OrObject
         {
             public static string operator |(OrObject left, int right) => "custom";
+
             public static string operator |(int left, OrObject right) => "motsuc";
 
             public static string operator |(OrObject left, OperatorsTests right) => "customobject";
+
             public static string operator |(OperatorsTests left, OrObject right) => "tcejbomotsuc";
         }
 
@@ -5232,10 +5242,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public class SubtractObject
         {
             public static string operator -(SubtractObject left, int right) => "custom";
+
             public static string operator -(int left, SubtractObject right) => "motsuc";
 
             public static string operator -(SubtractObject left, OperatorsTests right) =>
                 "customobject";
+
             public static string operator -(OperatorsTests left, SubtractObject right) =>
                 "tcejbomotsuc";
         }
@@ -5812,9 +5824,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public class XorObject
         {
             public static string operator ^(XorObject left, int right) => "custom";
+
             public static string operator ^(int left, XorObject right) => "motsuc";
 
             public static string operator ^(XorObject left, OperatorsTests right) => "customobject";
+
             public static string operator ^(OperatorsTests left, XorObject right) => "tcejbomotsuc";
         }
 
@@ -5822,6 +5836,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum ByteEnum2 : byte
         {
             Value = 1
@@ -5831,6 +5846,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum SByteEnum2 : sbyte
         {
             Value = 1
@@ -5840,6 +5856,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum UShortEnum2 : ushort
         {
             Value = 1
@@ -5849,6 +5866,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum ShortEnum2 : short
         {
             Value = 1
@@ -5858,6 +5876,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum UIntEnum2 : uint
         {
             Value = 1
@@ -5867,6 +5886,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum IntEnum2 : int
         {
             Value = 1
@@ -5876,6 +5896,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum ULongEnum2 : ulong
         {
             Value = 1
@@ -5885,6 +5906,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             Value = 1
         }
+
         public enum LongEnum2 : long
         {
             Value = 1

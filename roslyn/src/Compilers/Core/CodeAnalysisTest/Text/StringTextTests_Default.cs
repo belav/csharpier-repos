@@ -121,7 +121,6 @@ bar baz"
             var data = Create("goo");
             Assert.Equal("goo", data.Lines[0].ToString());
         }
-
 #if false
         [Fact]
         public void TextLine1()

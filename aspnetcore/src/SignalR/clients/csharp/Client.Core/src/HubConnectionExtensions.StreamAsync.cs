@@ -6,6 +6,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client;
 
 /// <summary>

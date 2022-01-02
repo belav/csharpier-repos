@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CustomAuthorizationFailureResponse.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace CustomAuthorizationFailureResponse.Authorization.Handlers;
 
 public class SampleWithFailureReasonRequirementHandler

@@ -83,36 +83,50 @@ public class Managed
     #region Struct with Layout Sequential scenario1
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal(InnerSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef(ref InnerSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal")]
     static extern bool MarshalStructAsParam_AsSeqByValIn([In] InnerSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn([In] ref InnerSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut([Out] InnerSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut(out InnerSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut([In, Out] InnerSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut([In, Out] ref InnerSequential str1);
     #endregion
     #region Struct with Layout Sequential scenario2
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal2(InnerArraySequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef2(ref InnerArraySequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal2")]
     static extern bool MarshalStructAsParam_AsSeqByValIn2([In] InnerArraySequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn2([In] ref InnerArraySequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut2([Out] InnerArraySequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut2(out InnerArraySequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal2")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut2([In, Out] InnerArraySequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef2")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut2(
         [In, Out] ref InnerArraySequential str1
@@ -121,18 +135,25 @@ public class Managed
     #region Struct with Layout Sequential scenario3
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal3(CharSetAnsiSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef3(ref CharSetAnsiSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal3")]
     static extern bool MarshalStructAsParam_AsSeqByValIn3([In] CharSetAnsiSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn3([In] ref CharSetAnsiSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut3([Out] CharSetAnsiSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut3(out CharSetAnsiSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal3")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut3([In, Out] CharSetAnsiSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef3")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut3(
         [In, Out] ref CharSetAnsiSequential str1
@@ -141,20 +162,27 @@ public class Managed
     #region Struct with Layout Sequential scenario4
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal4(CharSetUnicodeSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef4(ref CharSetUnicodeSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal4")]
     static extern bool MarshalStructAsParam_AsSeqByValIn4([In] CharSetUnicodeSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn4([In] ref CharSetUnicodeSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut4([Out] CharSetUnicodeSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut4(out CharSetUnicodeSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal4")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut4(
         [In, Out] CharSetUnicodeSequential str1
     );
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef4")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut4(
         [In, Out] ref CharSetUnicodeSequential str1
@@ -163,74 +191,102 @@ public class Managed
     #region Struct with Layout Sequential scenario5
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal6(NumberSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef6(ref NumberSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal6")]
     static extern bool MarshalStructAsParam_AsSeqByValIn6([In] NumberSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn6([In] ref NumberSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut6([Out] NumberSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut6(out NumberSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal6")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut6([In, Out] NumberSequential str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef6")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut6([In, Out] ref NumberSequential str1);
     #endregion
     #region Struct with Layout Sequential scenario6
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal7(S3 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef7(ref S3 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal7")]
     static extern bool MarshalStructAsParam_AsSeqByValIn7([In] S3 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn7([In] ref S3 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut7(out S3 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef7")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut7([In, Out] ref S3 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut7([Out] S3 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal7")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut7([In, Out] S3 str1);
     #endregion
     #region Struct with Layout Sequential scenario7
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal8(S5 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef8(ref S5 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal8")]
     static extern bool MarshalStructAsParam_AsSeqByValIn8([In] S5 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn8([In] ref S5 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal8")]
     static extern bool MarshalStructAsParam_AsSeqByValOut8([Out] S5 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut8(out S5 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal8")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut8([In, Out] S5 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef8")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut8([In, Out] ref S5 str1);
     #endregion
     #region Struct with Layout Sequential scenario8
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal9(StringStructSequentialAnsi str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef9(ref StringStructSequentialAnsi str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal9")]
     static extern bool MarshalStructAsParam_AsSeqByValIn9([In] StringStructSequentialAnsi str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn9([In] ref StringStructSequentialAnsi str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut9([Out] StringStructSequentialAnsi str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut9(out StringStructSequentialAnsi str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal9")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut9(
         [In, Out] StringStructSequentialAnsi str1
     );
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef9")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut9(
         [In, Out] ref StringStructSequentialAnsi str1
@@ -239,24 +295,31 @@ public class Managed
     #region Struct with Layout Sequential scenario9
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal10(StringStructSequentialUnicode str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef10(ref StringStructSequentialUnicode str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal10")]
     static extern bool MarshalStructAsParam_AsSeqByValIn10([In] StringStructSequentialUnicode str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn10(
         [In] ref StringStructSequentialUnicode str1
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut10(
         [Out] StringStructSequentialUnicode str1
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut10(out StringStructSequentialUnicode str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal10")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut10(
         [In, Out] StringStructSequentialUnicode str1
     );
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef10")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut10(
         [In, Out] ref StringStructSequentialUnicode str1
@@ -265,66 +328,87 @@ public class Managed
     #region Struct with Layout Sequential scenario10
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal11(S8 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef11(ref S8 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal11")]
     static extern bool MarshalStructAsParam_AsSeqByValIn11([In] S8 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn11([In] ref S8 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut11([Out] S8 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut11(out S8 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal11")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut11([In, Out] S8 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef11")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut11([In, Out] ref S8 str1);
     #endregion
     #region Struct with Layout Sequential scenario11
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal12(S9 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef12(ref S9 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal12")]
     static extern bool MarshalStructAsParam_AsSeqByValIn12(S9 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef12")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn12([In] ref S9 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut12([Out] S9 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut12(out S9 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal12")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut12([In, Out] S9 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef12")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut12([In, Out] ref S9 str1);
     #endregion
     #region Struct with Layout Sequential scenario12
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal13(IncludeOuterIntegerStructSequential str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef13(
         ref IncludeOuterIntegerStructSequential str1
     );
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal13")]
     static extern bool MarshalStructAsParam_AsSeqByValIn13(
         [In] IncludeOuterIntegerStructSequential str1
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn13(
         [In] ref IncludeOuterIntegerStructSequential str1
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValOut13(
         [Out] IncludeOuterIntegerStructSequential str1
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut13(
         out IncludeOuterIntegerStructSequential str1
     );
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal13")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut13(
         [In, Out] IncludeOuterIntegerStructSequential str1
     );
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef13")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut13(
         [In, Out] ref IncludeOuterIntegerStructSequential str1
@@ -333,18 +417,25 @@ public class Managed
     #region Struct with Layout Sequential scenario13
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByVal14(S11 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRef14(ref S11 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal14")]
     static extern bool MarshalStructAsParam_AsSeqByValIn14([In] S11 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefIn14([In] ref S11 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByValOut14")]
     static extern bool MarshalStructAsParam_AsSeqByValOut14([Out] S11 str1);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByRefOut14(out S11 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByVal14")]
     static extern bool MarshalStructAsParam_AsSeqByValInOut14([In, Out] S11 str1);
+
     [DllImport("MarshalStructAsParam", EntryPoint = "MarshalStructAsParam_AsSeqByRef14")]
     static extern bool MarshalStructAsParam_AsSeqByRefInOut14([In, Out] ref S11 str1);
     #endregion
@@ -353,12 +444,15 @@ public class Managed
         IntWithInnerSequential str,
         int i
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValSequentialWrapper(SequentialWrapper wrapper);
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValSequentialDoubleWrapper(
         SequentialDoubleWrapper wrapper
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValSequentialAggregateSequentialWrapper(
         AggregateSequentialWrapper wrapper
@@ -369,21 +463,25 @@ public class Managed
         FixedBufferClassificationTest str,
         float f
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValFixedBufferClassificationTest(
         FixedBufferClassificationTestBlittable str,
         float f
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValFixedBufferClassificationTest(
         FixedArrayClassificationTest str,
         float f
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern bool MarshalStructAsParam_AsSeqByValUnicodeCharArrayClassification(
         UnicodeCharArrayClassification str,
         float f
     );
+
     [DllImport("MarshalStructAsParam")]
     static extern int GetStringLength(AutoString str);
 

@@ -2294,14 +2294,17 @@ namespace System.Threading.Tasks.Tests
         private class SimpleParallelForeachAddTest_Enumerable<T> : IEnumerable<T>
         {
             private IEnumerable<T> _source;
+
             internal SimpleParallelForeachAddTest_Enumerable(IEnumerable<T> source)
             {
                 _source = source;
             }
+
             public IEnumerator<T> GetEnumerator()
             {
                 return _source.GetEnumerator();
             }
+
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 return ((IEnumerable<T>)this).GetEnumerator();

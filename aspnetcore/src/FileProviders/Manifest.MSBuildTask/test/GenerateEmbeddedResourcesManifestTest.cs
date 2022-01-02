@@ -12,6 +12,7 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Xunit;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
 public class GenerateEmbeddedResourcesManifestTest

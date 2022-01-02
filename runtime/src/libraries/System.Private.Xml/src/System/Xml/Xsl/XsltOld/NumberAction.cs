@@ -46,12 +46,14 @@ namespace System.Xml.Xsl.XsltOld
             {
                 _seq = seq;
             }
+
             //void setLangID(LID langid) {_langid = langid;}
             //internal void setTraditional(bool fTraditional) {_grfnfc = fTraditional ? msofnfcTraditional : 0;}
             internal void setMinLen(int cMinLen)
             {
                 _cMinLen = cMinLen;
             }
+
             internal void setGroupingSeparator(string? separator)
             {
                 _separator = separator;
@@ -168,6 +170,7 @@ namespace System.Xml.Xsl.XsltOld
         private Avt? _letterAvt;
         private Avt? _groupingSepAvt;
         private Avt? _groupingSizeAvt;
+
         // Compile time precalculated AVTs
         private List<FormatInfo?>? _formatTokens;
         private string? _lang;

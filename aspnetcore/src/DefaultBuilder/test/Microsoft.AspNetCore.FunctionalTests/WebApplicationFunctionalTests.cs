@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.EventLog;
 
+
 namespace Microsoft.AspNetCore.Tests;
 
 public class WebApplicationFunctionalTests : LoggedTest

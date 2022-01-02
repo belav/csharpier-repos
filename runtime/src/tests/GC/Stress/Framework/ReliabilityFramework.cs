@@ -104,6 +104,7 @@ public class ReliabilityFramework
     private static Random s_randNum = new Random(s_seed);
     private static string timeValue = null;
     private static bool s_fNoExit = false;
+
     // constants
     private const string waitingText = "Waiting for all tests to finish loading, Remaining Tests: ";
 
@@ -650,6 +651,7 @@ public class ReliabilityFramework
             }
         }
     }
+
     internal static void MyDebugBreak(string extraData)
     {
         if (IsDebuggerPresent())
@@ -1645,6 +1647,7 @@ public class ReliabilityFramework
             }
         }
     }
+
     /// <summary>
     /// Loads the specified test into a new app domain.  Returns true on success and false on failure.
     /// </summary>
@@ -2006,6 +2009,7 @@ public class ReliabilityFramework
             test.EntryPointMethod = methodInfo;
         }
     }
+
     /// <summary>
     /// This method will send a failure message to the test owner that their test has failed.
     /// </summary>

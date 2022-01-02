@@ -213,6 +213,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
 #pragma warning disable IDE0052 // Remove unread private members (unused when CODE_STYLE is set)
         private readonly ITestOutputHelper _logger;
+
 #pragma warning restore
 
         protected AbstractCodeActionOrUserDiagnosticTest(ITestOutputHelper logger = null)
@@ -224,8 +225,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             @"# auto-generated .editorconfig for code style options";
 
         protected internal abstract string GetLanguage();
+
         protected ParenthesesOptionsProvider ParenthesesOptionsProvider =>
             new ParenthesesOptionsProvider(this.GetLanguage());
+
         protected abstract ParseOptions GetScriptOptions();
 
         private protected virtual IDocumentServiceProvider GetDocumentServiceProvider() => null;

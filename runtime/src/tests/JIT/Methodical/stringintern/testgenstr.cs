@@ -13,11 +13,13 @@ public class GenC<T>
         "GenC array element 1\uCB53",
         "GenC array \u47BBelement 2"
     };
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static string teststr3<T1>()
     {
         return @"GenC method return\\";
     }
+
     public const string teststr4 = "GenC const string\"";
     public static string teststr5 = String.Empty;
 }

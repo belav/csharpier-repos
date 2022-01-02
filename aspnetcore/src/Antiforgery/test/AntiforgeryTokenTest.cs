@@ -3,6 +3,7 @@
 
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
 public class AntiforgeryTokenTest

@@ -4,6 +4,7 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
 internal class SiteConfigurationProvider

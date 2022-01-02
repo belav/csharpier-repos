@@ -723,6 +723,7 @@ public class CXmlCache
     //XmlReader Properties
 #pragma warning disable 0618
     private ValidationType _eValidationMode = ValidationType.Auto;
+
 #pragma warning restore 0618
 
     private WhitespaceHandling _eWhitespaceMode = WhitespaceHandling.None;
@@ -740,6 +741,7 @@ public class CXmlCache
     internal static NodeFlags _eDefaultFlags = NodeFlags.None;
 
     private ITestOutputHelper _output;
+
     public CXmlCache(ITestOutputHelper output)
     {
         _output = output;

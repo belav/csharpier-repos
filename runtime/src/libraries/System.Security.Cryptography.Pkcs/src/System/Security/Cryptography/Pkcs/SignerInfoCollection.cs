@@ -52,6 +52,7 @@ namespace System.Security.Cryptography.Pkcs
         public int Count => _signerInfos.Length;
 
         public SignerInfoEnumerator GetEnumerator() => new SignerInfoEnumerator(this);
+
         IEnumerator IEnumerable.GetEnumerator() => new SignerInfoEnumerator(this);
 
         public void CopyTo(Array array, int index)

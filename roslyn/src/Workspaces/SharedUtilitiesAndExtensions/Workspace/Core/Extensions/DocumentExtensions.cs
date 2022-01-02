@@ -70,7 +70,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
-
 #if !CODE_STYLE
         public static SyntaxTree GetRequiredSyntaxTreeSynchronously(
             this Document document,
@@ -105,7 +104,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 );
         }
-
 #if !CODE_STYLE
         public static SyntaxNode GetRequiredSyntaxRootSynchronously(
             this Document document,
@@ -219,7 +217,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 cancellationToken
             );
         }
-
 #if DEBUG
         public static async Task<bool> HasAnyErrorsAsync(
             this Document document,

@@ -105,6 +105,7 @@ namespace Microsoft.CodeAnalysis.Emit
         /// EnC generation. 0 if the module is not an EnC delta, 1 if it is the first EnC delta, etc.
         /// </summary>
         public int CurrentGenerationOrdinal => (PreviousGeneration?.Ordinal + 1) ?? 0;
+
 #nullable disable
 
         /// <summary>
@@ -121,36 +122,47 @@ namespace Microsoft.CodeAnalysis.Emit
             IAssemblySymbolInternal symbol,
             DiagnosticBag diagnostics
         );
+
         internal abstract Cci.ITypeReference Translate(
             ITypeSymbolInternal symbol,
             SyntaxNode syntaxOpt,
             DiagnosticBag diagnostics
         );
+
         internal abstract Cci.IMethodReference Translate(
             IMethodSymbolInternal symbol,
             DiagnosticBag diagnostics,
             bool needDeclaration
         );
+
         internal abstract bool SupportsPrivateImplClass { get; }
         internal abstract Compilation CommonCompilation { get; }
         internal abstract IModuleSymbolInternal CommonSourceModule { get; }
         internal abstract IAssemblySymbolInternal CommonCorLibrary { get; }
         internal abstract CommonModuleCompilationState CommonModuleCompilationState { get; }
+
         internal abstract void CompilationFinished();
+
         internal abstract ImmutableDictionary<
             ISymbolInternal,
             ImmutableArray<ISymbolInternal>
         > GetAllSynthesizedMembers();
+
         internal abstract CommonEmbeddedTypesManager CommonEmbeddedTypesManagerOpt { get; }
+
         internal abstract Cci.ITypeReference EncTranslateType(
             ITypeSymbolInternal type,
             DiagnosticBag diagnostics
         );
+
         public abstract IEnumerable<Cci.ICustomAttribute> GetSourceAssemblyAttributes(
             bool isRefAssembly
         );
+
         public abstract IEnumerable<Cci.SecurityAttribute> GetSourceAssemblySecurityAttributes();
+
         public abstract IEnumerable<Cci.ICustomAttribute> GetSourceModuleAttributes();
+
         internal abstract Cci.ICustomAttribute SynthesizeAttribute(
             WellKnownMember attributeConstructor
         );
@@ -193,17 +205,21 @@ namespace Microsoft.CodeAnalysis.Emit
         public abstract string DefaultNamespace { get; }
 
         protected abstract Cci.IAssemblyReference GetCorLibraryReferenceToEmit(EmitContext context);
+
         protected abstract IEnumerable<Cci.IAssemblyReference> GetAssemblyReferencesFromAddedModules(
             DiagnosticBag diagnostics
         );
+
         protected abstract void AddEmbeddedResourcesFromAddedModules(
             ArrayBuilder<Cci.ManagedResource> builder,
             DiagnosticBag diagnostics
         );
+
         public abstract Cci.ITypeReference GetPlatformType(
             Cci.PlatformType platformType,
             EmitContext context
         );
+
         public abstract bool IsPlatformType(
             Cci.ITypeReference typeRef,
             Cci.PlatformType platformType
@@ -855,11 +871,13 @@ namespace Microsoft.CodeAnalysis.Emit
             TAssemblySymbol symbol,
             DiagnosticBag diagnostics
         );
+
         internal abstract Cci.ITypeReference Translate(
             TTypeSymbol symbol,
             TSyntaxNode syntaxNodeOpt,
             DiagnosticBag diagnostics
         );
+
         internal abstract Cci.IMethodReference Translate(
             TMethodSymbol symbol,
             DiagnosticBag diagnostics,
@@ -1240,7 +1258,6 @@ namespace Microsoft.CodeAnalysis.Emit
 
             return builder.ToImmutable();
         }
-
         #endregion
 
         #region Token Mapping
@@ -1280,7 +1297,6 @@ namespace Microsoft.CodeAnalysis.Emit
                 return result;
             }
         }
-
         #endregion
 
         #region Private Implementation Details Type
@@ -1330,7 +1346,6 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             get { return true; }
         }
-
         #endregion
 
         public sealed override Cci.ITypeReference GetPlatformType(

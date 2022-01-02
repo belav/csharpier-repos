@@ -17,7 +17,6 @@ namespace System.Speech.Internal.SrgsCompiler
             _cg = cg;
             _backend = backend;
         }
-
         #endregion
 
         #region Internal Method
@@ -120,7 +119,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -264,7 +262,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get { return _cg; }
         }
-
         #endregion
 
         #region Private Methods
@@ -311,7 +308,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             return rule;
         }
-
         #endregion
 
         #region Private Fields

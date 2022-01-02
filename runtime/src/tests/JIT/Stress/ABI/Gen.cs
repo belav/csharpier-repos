@@ -79,6 +79,7 @@ namespace ABIStress
         public TypeEx Type { get; }
 
         public abstract object Get(object[] args);
+
         public abstract void Emit(ILGenerator il);
     }
 
@@ -92,6 +93,7 @@ namespace ABIStress
         public int Index { get; }
 
         public override object Get(object[] args) => args[Index];
+
         public override void Emit(ILGenerator il)
         {
             il.Emit(OpCodes.Ldarg, checked((short)Index));
@@ -134,6 +136,7 @@ namespace ABIStress
         public object Value { get; }
 
         public override object Get(object[] args) => Value;
+
         public override void Emit(ILGenerator il)
         {
             if (Type.Fields == null)

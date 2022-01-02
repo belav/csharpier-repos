@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 
+
 namespace AuthSamples.Cookies;
 
 internal class ConfigureMyCookie : IConfigureNamedOptions<CookieAuthenticationOptions>

@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Diagnostics;
 
 internal static partial class DiagnosticsLoggerExtensions

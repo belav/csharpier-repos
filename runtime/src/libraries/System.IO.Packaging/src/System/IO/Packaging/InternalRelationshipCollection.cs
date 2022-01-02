@@ -52,7 +52,6 @@ namespace System.IO.Packaging
         {
             return _relationships.GetEnumerator();
         }
-
         #endregion
 
         #region Internal Methods
@@ -163,7 +162,6 @@ namespace System.IO.Packaging
                 throw new XmlException(SR.Format(SR.NotAValidXmlIdString, id), exception);
             }
         }
-
         #endregion Internal Methods
 
         #region Private Methods
@@ -759,7 +757,6 @@ namespace System.IO.Packaging
             if (_relationships.Contains(id))
                 throw new XmlException(SR.Format(SR.NotAUniqueRelationshipId, id));
         }
-
         #endregion
 
         #region Private Properties

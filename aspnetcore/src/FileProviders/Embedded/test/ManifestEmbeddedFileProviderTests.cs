@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Extensions.FileProviders.Embedded.Manifest;
 using Xunit;
 
+
 namespace Microsoft.Extensions.FileProviders;
 
 public class ManifestEmbeddedFileProviderTests

@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     internal abstract partial class CompilerDiagnosticAnalyzer : DiagnosticAnalyzer
     {
         internal abstract CommonMessageProvider MessageProvider { get; }
+
         internal abstract ImmutableArray<int> GetSupportedErrorCodes();
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics

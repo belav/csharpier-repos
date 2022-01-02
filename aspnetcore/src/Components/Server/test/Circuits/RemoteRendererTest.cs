@@ -18,6 +18,7 @@ using Microsoft.JSInterop;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Web.Rendering;
 
 public class RemoteRendererTest
@@ -681,6 +682,7 @@ public class RemoteRendererTest
     private class Trigger
     {
         public AutoParameterTestComponent Component { get; set; }
+
         public void TriggerRender()
         {
             Component.TriggerRender();

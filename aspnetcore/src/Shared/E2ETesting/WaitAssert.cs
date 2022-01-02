@@ -13,6 +13,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.E2ETesting;
 
 // XUnit assertions, but hooked into Selenium's polling mechanism

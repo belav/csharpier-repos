@@ -22,12 +22,14 @@ namespace System.Runtime.Serialization
         XmlObjectSerializerWriteContext context,
         ClassDataContract dataContract
     );
+
     internal delegate void XmlFormatCollectionWriterDelegate(
         XmlWriterDelegator xmlWriter,
         object obj,
         XmlObjectSerializerWriteContext context,
         CollectionDataContract dataContract
     );
+
     internal sealed class XmlFormatWriterGenerator
     {
         private readonly CriticalHelper _helper;

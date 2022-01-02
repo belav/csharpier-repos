@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace FunctionalTests;
 
 public class ComplexObject

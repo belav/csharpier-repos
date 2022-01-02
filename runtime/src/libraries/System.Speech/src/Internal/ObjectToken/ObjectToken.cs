@@ -87,7 +87,6 @@ namespace System.Speech.Internal.ObjectTokens
                 base.Dispose(disposing);
             }
         }
-
         #endregion
 
         #region public Methods
@@ -108,7 +107,6 @@ namespace System.Speech.Internal.ObjectTokens
         {
             return Id.GetHashCode();
         }
-
         #endregion
 
         #region Internal Properties
@@ -214,7 +212,6 @@ namespace System.Speech.Internal.ObjectTokens
                 return description;
             }
         }
-
         #endregion
 
         #region internal Methods
@@ -239,30 +236,37 @@ namespace System.Speech.Internal.ObjectTokens
         {
             throw new NotImplementedException();
         } // void GetCategory(out ISpObjectTokenCategory ppTokenCategory);
+
         public void Slot16()
         {
             throw new NotImplementedException();
         } // void CreateInstance(object pUnkOuter, UInt32 dwClsContext, ref Guid riid, ref IntPtr ppvObject);
+
         public void Slot17()
         {
             throw new NotImplementedException();
         } // void GetStorageFileName(ref Guid clsidCaller, [MarshalAs(UnmanagedType.LPWStr)] string pszValueName, [MarshalAs(UnmanagedType.LPWStr)] string pszFileNameSpecifier, UInt32 nFolder, [MarshalAs(UnmanagedType.LPWStr)] out string ppszFilePath);
+
         public void Slot18()
         {
             throw new NotImplementedException();
         } // void RemoveStorageFileName(ref Guid clsidCaller, [MarshalAs(UnmanagedType.LPWStr)] string pszKeyName, int fDeleteFile);
+
         public void Slot19()
         {
             throw new NotImplementedException();
         } // void Remove(ref Guid pclsidCaller);
+
         public void Slot20()
         {
             throw new NotImplementedException();
         } // void IsUISupported([MarshalAs(UnmanagedType.LPWStr)] string pszTypeOfUI, IntPtr pvExtraData, UInt32 cbExtraData, object punkObject, ref Int32 pfSupported);
+
         public void Slot21()
         {
             throw new NotImplementedException();
         } // void DisplayUI(UInt32 hWndParent, [MarshalAs(UnmanagedType.LPWStr)] string pszTitle, [MarshalAs(UnmanagedType.LPWStr)] string pszTypeOfUI, IntPtr pvExtraData, UInt32 cbExtraData, object punkObject);
+
         public void MatchesAttributes(
             [MarshalAs(UnmanagedType.LPWStr)] string pszAttributes,
             [MarshalAs(UnmanagedType.Bool)] out bool pfMatches
@@ -270,7 +274,6 @@ namespace System.Speech.Internal.ObjectTokens
         {
             throw new NotImplementedException();
         }
-
         #endregion
 
         /// <summary>
@@ -353,7 +356,6 @@ namespace System.Speech.Internal.ObjectTokens
             }
             return instanceValue;
         }
-
         #endregion
 
         #region private Methods
@@ -372,10 +374,10 @@ namespace System.Speech.Internal.ObjectTokens
         {
             [PreserveSig]
             int SetObjectToken(ISpObjectToken pToken);
+
             [PreserveSig]
             int GetObjectToken(IntPtr ppToken);
         }
-
         #endregion
         #region private Fields
 

@@ -20,6 +20,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
 public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase

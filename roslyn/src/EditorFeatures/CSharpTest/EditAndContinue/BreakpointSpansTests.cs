@@ -126,7 +126,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
                 }
             }
         }
-
         #endregion
 
         [Fact]
@@ -546,7 +545,6 @@ $$            _ => [|5|],
 }"
             );
         }
-
         #endregion
 
         #region For and ForEach
@@ -716,7 +714,6 @@ $$    (
 }"
             );
         }
-
         #endregion
 
         #region Lambdas
@@ -776,7 +773,6 @@ $$    (
 }"
             );
         }
-
         #endregion
 
         #region Queries
@@ -1357,7 +1353,6 @@ $$    (
 "
             );
         }
-
         #endregion
 
         #region Field and Veriable Declarators
@@ -1418,6 +1413,7 @@ $$    (
 }"
             );
         }
+
         [Fact]
         public void FieldDeclarator_SingleVariable_Initializer_All3()
         {
@@ -1959,7 +1955,6 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
 }"
             );
         }
-
         #endregion
 
         [Fact]
@@ -4884,7 +4879,6 @@ $$    using ([|var vv = goo()|])
 }"
             );
         }
-
         #endregion
 
         [Fact]

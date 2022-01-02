@@ -53,12 +53,16 @@ unsafe class CdeclMemberFunctionNative
 
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern SizeF GetSizeFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern Width GetWidthFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern IntWrapper GetHeightAsIntFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern E GetEFromManaged(C* c);
+
     [DllImport(nameof(CdeclMemberFunctionNative))]
     public static extern CLong GetWidthAsLongFromManaged(C* c);
 }

@@ -160,7 +160,6 @@ namespace System.Linq.Expressions.Tests
                 }
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -335,7 +334,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f6(b));
             }
         }
-
         #endregion
 
 
@@ -449,7 +447,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(expected, f6(b));
         }
-
         #endregion
 
 
@@ -561,7 +558,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(expected, f6(b));
         }
-
         #endregion
 
 
@@ -745,7 +741,6 @@ namespace System.Linq.Expressions.Tests
                     break;
             }
         }
-
         #endregion
 
 
@@ -937,7 +932,6 @@ namespace System.Linq.Expressions.Tests
                     break;
             }
         }
-
         #endregion
 
 
@@ -1102,7 +1096,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f6(b));
             }
         }
-
         #endregion
 
 
@@ -1267,7 +1260,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f6(b));
             }
         }
-
         #endregion
 
 
@@ -1432,7 +1424,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f6(b));
             }
         }
-
         #endregion
 
 

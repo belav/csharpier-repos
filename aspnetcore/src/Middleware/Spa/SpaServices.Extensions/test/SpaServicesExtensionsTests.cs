@@ -21,6 +21,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests;
 
 public class SpaServicesExtensionsTests

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 internal class RazorPagesOptionsSetup : IConfigureOptions<RazorPagesOptions>

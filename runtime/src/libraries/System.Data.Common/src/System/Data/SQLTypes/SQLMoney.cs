@@ -414,6 +414,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlMoney Subtract(SqlMoney x, SqlMoney y)
         {

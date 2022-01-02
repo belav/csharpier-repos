@@ -162,6 +162,7 @@ namespace DoubLink
         internal DLinkNode Last;
         internal DLinkNode Next;
         internal int[] Size;
+
 #pragma warning restore 0414
 
         public static int FinalCount = 0;

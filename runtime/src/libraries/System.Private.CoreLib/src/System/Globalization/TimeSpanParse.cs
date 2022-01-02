@@ -490,6 +490,7 @@ namespace System.Globalization
                 _tokenCount++;
                 return true;
             }
+
             private bool AddNum(TimeSpanToken num, ref TimeSpanResult result)
             {
                 if (_numCount >= MaxNumericTokens || _tokenCount >= MaxTokens)

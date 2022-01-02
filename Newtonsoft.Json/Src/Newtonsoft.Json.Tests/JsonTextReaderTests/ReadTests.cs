@@ -93,7 +93,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Could not convert to decimal: 1.7976931348623157E+308. Path ''."
             );
         }
-
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void ReadAsInt32_BigIntegerValue_Success()
@@ -138,7 +137,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
                 "Unexpected character encountered while parsing value: u. Path '', line 1, position 1."
             );
         }
-
 #if !(PORTABLE || PORTABLE40 || NET35 || NET20) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void ReadAsBoolean()
@@ -321,7 +319,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.EndObject, reader.TokenType);
         }
-
 #if !(NET20 || NET35) && DEBUG
         [Test]
         public void ReadLargeObjects()
@@ -498,7 +495,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsNull(reader.ReadAsBytes());
             Assert.AreEqual(JsonToken.None, reader.TokenType);
         }
-
 #if !NET20
         [Test]
         public void ReadAsDateTimeOffsetNoContent()
@@ -986,7 +982,6 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(reader.Read());
             Assert.IsFalse(reader.Read());
         }
-
 #if !NET20
         [Test]
         public void ReadValue_EmptyString_Position()
@@ -1341,7 +1336,6 @@ third line",
                 jsonTextReader.Value
             );
         }
-
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void ReadBigInteger()

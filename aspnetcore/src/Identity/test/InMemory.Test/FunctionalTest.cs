@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Identity.InMemory;
 
 public class FunctionalTest

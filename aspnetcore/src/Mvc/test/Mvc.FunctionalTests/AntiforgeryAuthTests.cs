@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SecurityWebSite;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class AntiforgeryAuthTests : IClassFixture<MvcTestFixture<Startup>>

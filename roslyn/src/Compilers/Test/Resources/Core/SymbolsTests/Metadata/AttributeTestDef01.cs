@@ -14,23 +14,28 @@ namespace CustomAttribute
         {
             UIntField = 1;
         }
+
         public AllInheritMultipleAttribute(object p1, BindingFlags p2 = BindingFlags.Static)
         {
             UIntField = 2;
         }
+
         public AllInheritMultipleAttribute(object p1, byte p2, sbyte p3 = -1)
         {
             UIntField = 3;
         }
+
         public AllInheritMultipleAttribute(object p1, long p2, float p3 = 0.123f, short p4 = -2)
         {
             UIntField = 4;
         }
+
         // Char array
         public AllInheritMultipleAttribute(char[] ary1, params string[] ary2) { }
 
         public uint UIntField;
         public ulong[] AryField;
+
         // uint16 jagged array
         object[] propField;
         public object[] AryProp
@@ -48,6 +53,7 @@ namespace CustomAttribute
         {
             ObjectField = p;
         }
+
         public object ObjectField;
     }
 
@@ -56,6 +62,7 @@ namespace CustomAttribute
     public class DerivedAttribute : BaseAttribute
     {
         public DerivedAttribute(object p) : base(p) { }
+
         Type _prop;
         public Type TypeProp
         {

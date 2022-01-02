@@ -889,6 +889,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
         private class DelegateBinder : SerializationBinder
         {
             public Func<string, string, Type> BindToTypeDelegate = null;
+
             public override Type BindToType(string assemblyName, string typeName) =>
                 BindToTypeDelegate?.Invoke(assemblyName, typeName);
         }

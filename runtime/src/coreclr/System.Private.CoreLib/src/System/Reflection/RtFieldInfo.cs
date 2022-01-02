@@ -14,6 +14,7 @@ namespace System.Reflection
         // aggressive caching
         private IntPtr m_fieldHandle;
         private FieldAttributes m_fieldAttributes;
+
         // lazy caching
         private string? m_name;
         private RuntimeType? m_fieldType;
@@ -78,7 +79,6 @@ namespace System.Reflection
         #region Private Members
         RuntimeFieldHandleInternal IRuntimeFieldInfo.Value =>
             new RuntimeFieldHandleInternal(m_fieldHandle);
-
         #endregion
 
         #region Internal Members
@@ -113,7 +113,6 @@ namespace System.Reflection
         {
             return o is RtFieldInfo m && m.m_fieldHandle == m_fieldHandle;
         }
-
         #endregion
 
         #region MemberInfo Overrides
@@ -127,7 +126,6 @@ namespace System.Reflection
         {
             return RuntimeTypeHandle.GetModule(RuntimeFieldHandle.GetApproxDeclaringType(this));
         }
-
         #endregion
 
         #region FieldInfo Overrides

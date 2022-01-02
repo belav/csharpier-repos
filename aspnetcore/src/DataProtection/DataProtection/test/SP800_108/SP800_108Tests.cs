@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.DataProtection.Test.Shared;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.SP800_108;
 
 public unsafe class SP800_108Tests

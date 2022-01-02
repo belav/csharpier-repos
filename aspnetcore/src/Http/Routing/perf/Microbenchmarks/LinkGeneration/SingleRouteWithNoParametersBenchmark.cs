@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing.Tree;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Routing.LinkGeneration;
 
 public class SingleRouteWithNoParametersBenchmark : EndpointRoutingBenchmarkBase

@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
 public class CustomStateDataFormat : ISecureDataFormat<AuthenticationProperties>

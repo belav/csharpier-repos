@@ -4,6 +4,7 @@
 using Microsoft.Extensions.WebEncoders.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Routing;
 
 public class UriBuildingContextTest

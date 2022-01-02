@@ -30,7 +30,6 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 
 #nullable disable

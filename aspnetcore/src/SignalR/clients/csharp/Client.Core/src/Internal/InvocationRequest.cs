@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Internal;
 
 internal abstract class InvocationRequest : IDisposable
@@ -84,7 +85,9 @@ internal abstract class InvocationRequest : IDisposable
     }
 
     public abstract void Fail(Exception exception);
+
     public abstract void Complete(CompletionMessage message);
+
     public abstract ValueTask<bool> StreamItem(object? item);
 
     protected abstract void Cancel();

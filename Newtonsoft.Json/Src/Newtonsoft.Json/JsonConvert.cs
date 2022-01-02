@@ -38,6 +38,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
+
 #if HAVE_XLINQ
 using System.Xml.Linq;
 #endif
@@ -139,7 +140,6 @@ namespace Newtonsoft.Json
                 return writer.ToString();
             }
         }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Converts the <see cref="DateTimeOffset"/> to its JSON string representation.
@@ -256,7 +256,6 @@ namespace Newtonsoft.Json
         {
             return value.ToString(null, CultureInfo.InvariantCulture);
         }
-
 #if HAVE_BIG_INTEGER
         private static string ToStringInternal(BigInteger value)
         {
@@ -991,6 +990,7 @@ namespace Newtonsoft.Json
                 }
             }
         }
+
         #endregion
 
         #region Xml

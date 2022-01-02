@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class IdentityUIScriptsTest : IDisposable

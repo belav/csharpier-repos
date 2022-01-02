@@ -597,7 +597,6 @@ class C
 }";
             await TestMissingAsync<LocalFunctionStatementSyntax>(testText);
         }
-
         #endregion
 
         #region IsUnderselected
@@ -1159,7 +1158,6 @@ class C
 }";
             await TestMissingAsync<PropertyDeclarationSyntax>(testText);
         }
-
         #endregion
 
         #region Headers & holes
@@ -1547,7 +1545,6 @@ class CC
 }";
             await TestAsync<ParameterSyntax>(testText);
         }
-
         #endregion
 
         #region Test methods
@@ -1610,7 +1607,6 @@ class CC
 }";
             await TestAsync<MethodDeclarationSyntax>(testText);
         }
-
         #endregion
 
         #region TestLocalDeclaration
@@ -1755,7 +1751,6 @@ class C
 }"
             );
         }
-
         #endregion
 
         #region Test Deep in expression

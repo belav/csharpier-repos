@@ -45,11 +45,17 @@ namespace System.Web.Razor.Generator
         }
 
         public abstract void WriteParameterSeparator();
+
         public abstract void WriteReturn();
+
         public abstract void WriteLinePragma(int? lineNumber, string fileName);
+
         public abstract void WriteHelperHeaderPrefix(string templateTypeName, bool isStatic);
+
         public abstract void WriteSnippet(string snippet);
+
         public abstract void WriteStringLiteral(string literal);
+
         public abstract int WriteVariableDeclaration(string type, string name, string value);
 
         public virtual void WriteLinePragma()
@@ -169,8 +175,11 @@ namespace System.Web.Razor.Generator
         }
 
         protected internal abstract void EmitStartLambdaDelegate(string[] parameterNames);
+
         protected internal abstract void EmitStartLambdaExpression(string[] parameterNames);
+
         protected internal abstract void EmitStartConstructor(string typeName);
+
         protected internal abstract void EmitStartMethodInvoke(string methodName);
 
         protected internal virtual void EmitStartMethodInvoke(
@@ -182,8 +191,11 @@ namespace System.Web.Razor.Generator
         }
 
         protected internal abstract void EmitEndLambdaDelegate();
+
         protected internal abstract void EmitEndLambdaExpression();
+
         protected internal abstract void EmitEndConstructor();
+
         protected internal abstract void EmitEndMethodInvoke();
 
         protected virtual void Dispose(bool disposing)

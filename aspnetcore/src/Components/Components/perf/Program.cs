@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Components.Performance;
 
+
 namespace Microsoft.AspNetCore.BenchmarkDotNet.Runner;
 
 internal partial class Program

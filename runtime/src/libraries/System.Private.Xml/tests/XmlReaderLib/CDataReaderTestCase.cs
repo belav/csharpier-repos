@@ -24,10 +24,12 @@ namespace System.Xml.Tests
         {
             return base.Terminate(objParam);
         }
+
         public string WRONG_EXCEPTION
         {
             get { return _WRONG_EXCEPTION; }
         }
+
         protected int BoolToLTMResult(bool bResult)
         {
             if (bResult)

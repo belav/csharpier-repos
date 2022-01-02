@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis
         /// field.
         /// </summary>
         public static readonly string StringMissingValue = nameof(StringMissingValue);
+
 #pragma warning restore CA1802
 
 #if DEBUG

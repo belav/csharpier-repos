@@ -3,6 +3,7 @@
 
 using System.IO.Pipelines;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
 internal class MockDuplexPipe : IDuplexPipe

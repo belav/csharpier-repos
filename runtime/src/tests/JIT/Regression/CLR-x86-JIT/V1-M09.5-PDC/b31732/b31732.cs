@@ -9,6 +9,7 @@ namespace Test
     class AA
     {
         public object m_xField2 = null;
+
         public static float Method1(bool[] param1)
         {
             AA local7 = new AA();
@@ -23,6 +24,7 @@ namespace Test
             catch (Exception) { }
             return 0.0f;
         }
+
         static int Main()
         {
             Method1(new bool[3]);

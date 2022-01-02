@@ -31,6 +31,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 this.grfos = grfos;
                 this.fnkind = fnkind;
             }
+
             public PredefinedType pt1;
             public PredefinedType pt2;
             public BinOpMask mask;

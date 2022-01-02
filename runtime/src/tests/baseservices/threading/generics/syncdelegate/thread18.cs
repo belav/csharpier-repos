@@ -16,6 +16,7 @@ class Gen : IGen
         Test_thread18.Eval(typeof(U) != null);
         Interlocked.Increment(ref Test_thread18.Xcounter);
     }
+
     public static void DelegateTest<U>()
     {
         IGen obj = new Gen();
@@ -33,6 +34,7 @@ public class Test_thread18
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

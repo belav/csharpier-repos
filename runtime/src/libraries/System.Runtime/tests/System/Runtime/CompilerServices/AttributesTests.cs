@@ -148,6 +148,7 @@ namespace System.Runtime.CompilerServices.Tests
         {
             new DisablePrivateReflectionAttribute();
         }
+
 #pragma warning restore SYSLIB0015 // Obsolete: DisablePrivateReflectionAttribute
 
         [Fact]
@@ -267,6 +268,7 @@ namespace System.Runtime.CompilerServices.Tests
         {
             new SuppressIldasmAttribute();
         }
+
 #pragma warning restore SYSLIB0025 // Obsolete: SuppressIldasmAttribute
 
         [Fact]

@@ -19,6 +19,7 @@ namespace MS.Internal.Xml.XPath
             _elementStk = new StackNav();
             _parentStk = new List<XPathNavigator>();
         }
+
         private FollSiblingQuery(FollSiblingQuery other) : base(other)
         {
             _elementStk = other._elementStk.Clone();

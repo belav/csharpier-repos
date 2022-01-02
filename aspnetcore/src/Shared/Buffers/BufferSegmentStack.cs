@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
+
 namespace System.IO.Pipelines;
 
 // Copied from https://github.com/dotnet/corefx/blob/de3902bb56f1254ec1af4bf7d092fc2c048734cc/src/System.IO.Pipelines/src/System/IO/Pipelines/BufferSegmentStack.cs
@@ -78,9 +79,12 @@ internal struct BufferSegmentStack
     private readonly struct SegmentAsValueType
     {
         private readonly BufferSegment _value;
+
         private SegmentAsValueType(BufferSegment value) => _value = value;
+
         public static implicit operator SegmentAsValueType(BufferSegment s) =>
             new SegmentAsValueType(s);
+
         public static implicit operator BufferSegment(SegmentAsValueType s) => s._value;
     }
 }

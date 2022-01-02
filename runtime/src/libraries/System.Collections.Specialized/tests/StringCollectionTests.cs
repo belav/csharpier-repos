@@ -38,6 +38,7 @@ namespace System.Collections.Specialized.Tests
                 }
             }
         }
+
         /// <summary>
 
         /// Data used for testing with RemoveAt.

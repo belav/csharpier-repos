@@ -69,6 +69,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             }
 
             public abstract RemoveSuppressionCodeAction CloneForFixMultipleContext();
+
             public abstract SyntaxTree SyntaxTreeToModify { get; }
 
             public override string EquivalenceKey =>

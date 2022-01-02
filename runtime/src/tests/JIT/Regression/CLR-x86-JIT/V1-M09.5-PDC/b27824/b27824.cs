@@ -9,6 +9,7 @@ namespace Test
     class AA
     {
         static AA[] m_axForward3;
+
         static void GoToEnd()
         {
             throw new Exception();

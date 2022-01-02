@@ -19,12 +19,14 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectWriter writer,
             CancellationToken cancellationToken
         );
+
         public abstract void WriteTo(ParseOptions options, ObjectWriter writer);
 
         public abstract CompilationOptions ReadCompilationOptionsFrom(
             ObjectReader reader,
             CancellationToken cancellationToken
         );
+
         public abstract ParseOptions ReadParseOptionsFrom(
             ObjectReader reader,
             CancellationToken cancellationToken

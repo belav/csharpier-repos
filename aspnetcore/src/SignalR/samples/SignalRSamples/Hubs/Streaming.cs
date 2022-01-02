@@ -8,6 +8,7 @@ using System.Threading.Channels;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
+
 namespace SignalRSamples.Hubs;
 
 public class Streaming : Hub

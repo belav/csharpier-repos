@@ -83,6 +83,7 @@ public class LoaderClass
             }
         }
     }
+
 #pragma warning restore SYSLIB0012
 
     /// <summary>

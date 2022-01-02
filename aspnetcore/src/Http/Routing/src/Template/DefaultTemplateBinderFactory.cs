@@ -7,6 +7,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.ObjectPool;
 
+
 namespace Microsoft.AspNetCore.Routing.Template;
 
 internal sealed class DefaultTemplateBinderFactory : TemplateBinderFactory

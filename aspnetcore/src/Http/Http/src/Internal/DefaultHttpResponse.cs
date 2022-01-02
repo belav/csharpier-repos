@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Http;
 
 internal sealed class DefaultHttpResponse : HttpResponse

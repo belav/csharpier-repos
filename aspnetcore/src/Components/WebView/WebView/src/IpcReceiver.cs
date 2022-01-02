@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop.Infrastructure;
 
+
 // Sync vs Async APIs for this.
 // This mainly depends on the underlying support for the browser. Assuming that there is no synchronous API
 // communication is safer, since it's not guaranteed.

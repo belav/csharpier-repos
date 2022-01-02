@@ -98,7 +98,6 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Assert.IsTrue(o.IsValid(schema));
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40)
         [Test]
         public void Generate_DefaultValueAttributeTestClass()

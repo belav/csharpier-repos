@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         }
 
         protected abstract void ConnectToWorkspace(Workspace workspace);
+
         protected abstract void DisconnectFromWorkspace(Workspace workspace);
 
         public override void Connect()

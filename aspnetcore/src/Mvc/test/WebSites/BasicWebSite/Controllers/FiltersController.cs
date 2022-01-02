@@ -7,6 +7,7 @@ using BasicWebSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Controllers;
 
 public class FiltersController : Controller

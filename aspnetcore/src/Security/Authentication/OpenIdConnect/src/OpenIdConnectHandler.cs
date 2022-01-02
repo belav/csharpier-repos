@@ -24,6 +24,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 /// <summary>

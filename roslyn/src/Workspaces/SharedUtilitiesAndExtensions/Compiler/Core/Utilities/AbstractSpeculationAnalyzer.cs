@@ -370,6 +370,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SemanticModel model2,
             TExpressionSyntax expression2
         );
+
         protected abstract bool ConversionsAreCompatible(
             TExpressionSyntax originalExpression,
             ITypeSymbol originalTargetType,
@@ -584,7 +585,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             INamedTypeSymbol type1,
             INamedTypeSymbol type2
         ) => type1.IsEnumType() && type1.EnumUnderlyingType?.SpecialType == type2.SpecialType;
-
         #endregion
 
         /// <summary>
@@ -1301,6 +1301,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         protected abstract ImmutableArray<TArgumentSyntax> GetArguments(
             TExpressionSyntax expression
         );
+
         protected abstract TExpressionSyntax GetReceiver(TExpressionSyntax expression);
 
         private bool SymbolsHaveCompatibleParameterLists(
@@ -1328,6 +1329,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         protected abstract bool IsNamedArgument(TArgumentSyntax argument);
+
         protected abstract string GetNamedArgumentIdentifierValueText(TArgumentSyntax argument);
 
         private bool AreCompatibleParameterLists(
@@ -1526,6 +1528,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             TExpressionSyntax expression,
             ITypeSymbol targetType
         );
+
         protected abstract TConversion ClassifyConversion(
             SemanticModel model,
             ITypeSymbol originalType,

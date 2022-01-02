@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal sealed class GenericWebHostBuilder

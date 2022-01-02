@@ -15,6 +15,7 @@ class UTF8StringTests
         [In, Out] [MarshalAs(UnmanagedType.LPUTF8Str)] string s,
         int index
     );
+
     public static bool TestInOutStringParameter(string orgString, int index)
     {
         string passedString = orgString;
@@ -35,6 +36,7 @@ class UTF8StringTests
         [Out] [MarshalAs(UnmanagedType.LPUTF8Str)] string s,
         int index
     );
+
     public static bool TestOutStringParameter(string orgString, int index)
     {
         string passedString = orgString;
@@ -53,6 +55,7 @@ class UTF8StringTests
         [MarshalAs(UnmanagedType.LPUTF8Str)] out string s,
         int index
     );
+
     public static bool TestStringPassByOut(string orgString, int index)
     {
         // out string
@@ -71,6 +74,7 @@ class UTF8StringTests
         [MarshalAs(UnmanagedType.LPUTF8Str)] ref string s,
         int index
     );
+
     public static bool TestStringPassByRef(string orgString, int index)
     {
         string orgCopy = new string(orgString.ToCharArray());
@@ -99,6 +103,7 @@ class UTF8StringBuilderTests
         [In, Out] [MarshalAs(UnmanagedType.LPUTF8Str)] StringBuilder s,
         int index
     );
+
     public static bool TestInOutStringBuilderParameter(string expectedString, int index)
     {
         StringBuilder nativeStrBuilder = new StringBuilder(expectedString);
@@ -120,6 +125,7 @@ class UTF8StringBuilderTests
         [Out] [MarshalAs(UnmanagedType.LPUTF8Str)] StringBuilder s,
         int index
     );
+
     public static bool TestOutStringBuilderParameter(string expectedString, int index)
     {
         // string builder capacity
@@ -138,6 +144,7 @@ class UTF8StringBuilderTests
     [DllImport("libtest", CallingConvention = CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.LPUTF8Str, SizeConst = 512)]
     public static extern StringBuilder StringBuilderParameterReturn(int index);
+
     public static bool TestReturnStringBuilder(string expectedReturn, int index)
     {
         StringBuilder nativeString = StringBuilderParameterReturn(index);
@@ -168,6 +175,7 @@ class UTF8StructMarshalling
 
     [DllImport("libtest", CallingConvention = CallingConvention.Cdecl)]
     public static extern void TestStructWithUtf8Field(Utf8Struct utfStruct);
+
     public static bool TestUTF8StructMarshalling(string[] utf8Strings)
     {
         Utf8Struct utf8Struct = new Utf8Struct();
@@ -194,6 +202,7 @@ class UTF8DelegateMarshalling
     public static extern void Utf8DelegateAsParameter(DelegateUTF8Parameter param);
 
     static bool failed;
+
     public static bool TestUTF8DelegateMarshalling()
     {
         failed = false;

@@ -897,6 +897,7 @@ namespace System.Xml.Schema
                 _type = type;
                 _parentIndex = parentIndex;
             }
+
             public static explicit operator DatatypeImplementation(SchemaDatatypeMap sdm)
             {
                 return sdm._type;
@@ -1131,6 +1132,7 @@ namespace System.Xml.Schema
 
             return XmlListConverter.Create(listItemType.ValueConverter);
         }
+
         internal Datatype_List(DatatypeImplementation type, int minListSize)
         {
             _itemType = type;
@@ -1699,6 +1701,7 @@ namespace System.Xml.Schema
         {
             return XmlAnyConverter.AnyAtomic;
         }
+
         internal override XmlSchemaWhiteSpace BuiltInWhitespaceFacet
         {
             get { return XmlSchemaWhiteSpace.Preserve; }
@@ -1716,6 +1719,7 @@ namespace System.Xml.Schema
         {
             return XmlUntypedConverter.Untyped;
         }
+
         internal override XmlSchemaWhiteSpace BuiltInWhitespaceFacet
         {
             get { return XmlSchemaWhiteSpace.Preserve; }

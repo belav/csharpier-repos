@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Authentication.WebAssembly.Msal.Models;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.Authentication.WebAssembly.Msal;
 
 internal class MsalDefaultOptionsConfiguration

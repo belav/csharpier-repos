@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.Internal;
 
 /// <summary>

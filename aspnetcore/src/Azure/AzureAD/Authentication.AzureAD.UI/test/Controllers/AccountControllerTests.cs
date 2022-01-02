@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Internal;
 
 public class AccountControllerTests

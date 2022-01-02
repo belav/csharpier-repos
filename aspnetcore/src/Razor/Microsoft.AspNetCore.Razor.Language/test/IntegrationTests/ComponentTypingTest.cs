@@ -6,6 +6,7 @@ using System.Linq;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 // Similar to design time code generation tests, but goes a character at a time.

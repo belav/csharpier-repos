@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+
 namespace Microsoft.Net.Http.Headers;
 
 // List<T> allows 'null' values to be added. This is not what we want so we use a custom Collection<T> derived

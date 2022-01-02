@@ -61,6 +61,7 @@ namespace System.Net.Security
         X509Certificate2? remoteCertificate,
         string[] acceptableIssuers
     );
+
     internal delegate X509Certificate ServerCertSelectionCallback(string? hostName);
 
     public partial class SslStream : AuthenticatedStream

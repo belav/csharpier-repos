@@ -9,6 +9,7 @@ using System.Runtime.ExceptionServices;
 using Microsoft.AspNetCore.Components.HotReload;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Components.Routing;
 
 /// <summary>
@@ -17,6 +18,7 @@ namespace Microsoft.AspNetCore.Components.Routing;
 public partial class Router : IComponent, IHandleAfterRender, IDisposable
 {
     static readonly char[] _queryOrHashStartChar = new[] { '?', '#' };
+
     // Dictionary is intentionally used instead of ReadOnlyDictionary to reduce Blazor size
     static readonly IReadOnlyDictionary<string, object> _emptyParametersDictionary = new Dictionary<
         string,

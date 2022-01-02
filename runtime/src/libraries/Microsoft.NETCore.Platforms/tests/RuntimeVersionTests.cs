@@ -206,6 +206,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
                     break;
             }
         }
+
         public static IEnumerable<object[]> ValidVersions()
         {
             yield return new object[] { "0" };

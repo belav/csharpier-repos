@@ -30,7 +30,6 @@ namespace System.Speech.Internal.SrgsCompiler
             _endArc = _backend.EpsilonTransition(1.0f);
             _endArc.Start = _endState;
         }
-
         #endregion
 
         #region Internal Method
@@ -55,7 +54,6 @@ namespace System.Speech.Internal.SrgsCompiler
             // Connect the one-of to the parent
             base.PostParse((ParseElementCollection)parentElement);
         }
-
         #endregion
 
         #region Protected Method
@@ -103,7 +101,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 end.End = _endState;
             }
         }
-
         #endregion
 
         #region Protected Method

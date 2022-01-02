@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.DevServer.Server;
 
 // This project is a CLI tool, so we don't expect anyone to reference it

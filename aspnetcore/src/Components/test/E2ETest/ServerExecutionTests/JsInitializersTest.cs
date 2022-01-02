@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
 public class ServerJsInitializersTest : JsInitializersTest

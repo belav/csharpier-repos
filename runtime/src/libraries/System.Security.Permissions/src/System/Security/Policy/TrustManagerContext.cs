@@ -6,7 +6,9 @@ namespace System.Security.Policy
     public partial class TrustManagerContext
     {
         public TrustManagerContext() { }
+
         public TrustManagerContext(TrustManagerUIContext uiContext) { }
+
         public virtual bool IgnorePersistedDecision { get; set; }
         public virtual bool KeepAlive { get; set; }
         public virtual bool NoPrompt { get; set; }
@@ -14,6 +16,7 @@ namespace System.Security.Policy
         public virtual TrustManagerUIContext UIContext { get; set; }
         public virtual ApplicationIdentity PreviousApplicationIdentity { get; set; }
     }
+
     public enum TrustManagerUIContext
     {
         Install = 0,

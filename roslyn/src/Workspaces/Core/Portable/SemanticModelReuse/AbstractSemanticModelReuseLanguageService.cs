@@ -36,9 +36,11 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             SyntaxNode currentBodyNode,
             CancellationToken cancellationToken
         );
+
         protected abstract SyntaxList<TAccessorDeclarationSyntax> GetAccessors(
             TBasePropertyDeclarationSyntax baseProperty
         );
+
         protected abstract TBasePropertyDeclarationSyntax GetBasePropertyDeclaration(
             TAccessorDeclarationSyntax accessor
         );

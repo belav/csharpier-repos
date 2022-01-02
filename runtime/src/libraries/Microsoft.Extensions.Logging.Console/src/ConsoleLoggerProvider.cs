@@ -227,6 +227,7 @@ namespace Microsoft.Extensions.Logging.Console
                 };
             }
         }
+
 #pragma warning restore CS0618
 
         /// <inheritdoc />

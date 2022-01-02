@@ -14,7 +14,6 @@ namespace System.Net.Http
     public partial class HttpClientHandler : HttpMessageHandler
     {
         private static MethodInfo? _nativeHandlerMethod;
-
 #if TARGET_ANDROID
         private const string NativeHandlerType = "Xamarin.Android.Net.AndroidMessageHandler";
         private const string AssemblyName = "Mono.Android";

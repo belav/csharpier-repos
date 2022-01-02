@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 
+
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal class DateTimeSegment : PatternSegment

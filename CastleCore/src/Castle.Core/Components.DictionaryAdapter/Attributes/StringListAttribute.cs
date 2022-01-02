@@ -87,7 +87,6 @@ namespace Castle.Components.DictionaryAdapter
 
             return storedValue;
         }
-
 		#endregion
 
 		#region IDictionaryPropertySetter Members
@@ -106,7 +105,6 @@ namespace Castle.Components.DictionaryAdapter
             }
             return true;
         }
-
 		#endregion
 
         internal static string BuildString(IEnumerable enumerable, char separator)
@@ -183,7 +181,6 @@ namespace Castle.Components.DictionaryAdapter
                     SynchronizeDictionary();
                 }
             }
-
 			#endregion
 
 			#region ICollection<T> Members
@@ -229,7 +226,6 @@ namespace Castle.Components.DictionaryAdapter
                 }
                 return false;
             }
-
 			#endregion
 
 			#region IEnumerable<T> Members
@@ -238,7 +234,6 @@ namespace Castle.Components.DictionaryAdapter
             {
                 return inner.GetEnumerator();
             }
-
 			#endregion
 
 			#region IEnumerable Members
@@ -247,7 +242,6 @@ namespace Castle.Components.DictionaryAdapter
             {
                 return inner.GetEnumerator();
             }
-
 			#endregion
 
             private void ParseList(string list)

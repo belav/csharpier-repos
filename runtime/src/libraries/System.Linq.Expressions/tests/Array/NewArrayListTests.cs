@@ -939,7 +939,6 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.Equal("new [] {x, y}", e3.ToString());
         }
-
         #endregion
 
         #region Helper methods
@@ -1180,7 +1179,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyGenericWithStructRestrictionArrayList<Ts>(array[i], exprs[i], useInterpreter);
             }
         }
-
         #endregion
 
         #region  verifiers
@@ -1809,7 +1807,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(val[i], result[i]);
             }
         }
-
         #endregion
 
         [Fact]

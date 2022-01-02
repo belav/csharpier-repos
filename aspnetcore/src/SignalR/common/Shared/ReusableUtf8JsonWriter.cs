@@ -6,6 +6,7 @@ using System.Buffers;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal sealed class ReusableUtf8JsonWriter
@@ -14,7 +15,6 @@ internal sealed class ReusableUtf8JsonWriter
     private static ReusableUtf8JsonWriter? _cachedInstance;
 
     private readonly Utf8JsonWriter _writer;
-
 #if DEBUG
     private bool _inUse;
 #endif

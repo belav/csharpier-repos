@@ -4,6 +4,7 @@
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
+
 namespace FormatterWebSite;
 
 [KnownType(typeof(DerivedDummyClass))]

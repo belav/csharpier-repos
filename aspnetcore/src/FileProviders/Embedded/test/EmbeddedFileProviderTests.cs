@@ -7,6 +7,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Testing;
 using Xunit;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Tests;
 
 public class EmbeddedFileProviderTests

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 public class SimpleTypeModelBinderTest

@@ -14,6 +14,7 @@ namespace Span
     class BenchmarkAttribute : Attribute
     {
         public BenchmarkAttribute() { }
+
         private long _innerIterationsCount = 1;
         public long InnerIterationCount
         {
@@ -30,6 +31,7 @@ namespace Span
         {
             _data = data;
         }
+
         int _data;
         public int Data
         {
@@ -1184,7 +1186,6 @@ namespace Span
                 }
             }
         }
-
         #endregion
 
         #endregion // TestSpanAPIs

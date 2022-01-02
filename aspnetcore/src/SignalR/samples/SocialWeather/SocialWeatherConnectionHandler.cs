@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
 
+
 namespace SocialWeather;
 
 public class SocialWeatherConnectionHandler : ConnectionHandler

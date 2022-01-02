@@ -78,7 +78,6 @@ namespace Newtonsoft.Json.Linq
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
-
 #if HAVE_INOTIFY_PROPERTY_CHANGING
         /// <summary>
         /// Occurs when a property value is changing.
@@ -687,7 +686,6 @@ namespace Newtonsoft.Json.Linq
 
         ICollection<JToken?> IDictionary<string, JToken?>.Values =>
             throw new NotImplementedException();
-
         #endregion
 
         #region ICollection<KeyValuePair<string,JToken>> Members
@@ -793,7 +791,6 @@ namespace Newtonsoft.Json.Linq
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
 #if HAVE_INOTIFY_PROPERTY_CHANGING
         /// <summary>
         /// Raises the <see cref="PropertyChanging"/> event with the provided arguments.

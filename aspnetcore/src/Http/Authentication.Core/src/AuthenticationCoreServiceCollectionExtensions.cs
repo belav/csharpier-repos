@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

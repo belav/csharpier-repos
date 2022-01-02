@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public static class HubProtocolHelpers

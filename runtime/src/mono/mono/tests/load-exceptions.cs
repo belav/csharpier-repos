@@ -126,6 +126,7 @@ public class Tests : LoadMissing
     {
         return check_type_load(new TestDel(missing_external_type_reference_on_parameter));
     }
+
     public static int test_0_initobj()
     {
         return check_type_load(new TestDel(missing_initobj));
@@ -251,7 +252,6 @@ public class Tests : LoadMissing
     {
         return check_type_load(new TestDel(missing_unbox_any));
     }
-
 #if false
 	// Bummer: we regressed!   I should have put this before
 	public static int test_0_missing_assembly_in_fieldref () {
@@ -373,7 +373,6 @@ public class Tests : LoadMissing
 
         return 1;
     }
-
 #if FALSE
 	public static void missing_parent () {
 		new Miss1 ();

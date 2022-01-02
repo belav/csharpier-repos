@@ -30,9 +30,11 @@ using Newtonsoft.Json.Utilities;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
+
 #if HAVE_DYNAMIC
 using System.Dynamic;
 using System.Linq.Expressions;
+
 #endif
 #if HAVE_BIG_INTEGER
 using System.Numerics;
@@ -114,7 +116,6 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="value">The value.</param>
         public JValue(DateTime value) : this(value, JTokenType.Date) { }
-
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
@@ -181,7 +182,6 @@ namespace Newtonsoft.Json.Linq
         /// 	<c>true</c> if this token has child values; otherwise, <c>false</c>.
         /// </value>
         public override bool HasValues => false;
-
 #if HAVE_BIG_INTEGER
         private static int CompareBigInteger(BigInteger i1, object i2)
         {
@@ -387,7 +387,6 @@ namespace Newtonsoft.Json.Linq
 
             return d1.CompareTo(d2);
         }
-
 #if HAVE_EXPRESSIONS
         private static bool Operation(
             ExpressionType operation,
@@ -978,7 +977,6 @@ namespace Newtonsoft.Json.Linq
                 return _value.ToString();
             }
         }
-
 #if HAVE_DYNAMIC
         /// <summary>
         /// Returns the <see cref="DynamicMetaObject"/> responsible for binding operations performed on this object.

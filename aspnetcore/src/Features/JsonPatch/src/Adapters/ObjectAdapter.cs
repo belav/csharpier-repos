@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.JsonPatch.Internal;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Newtonsoft.Json.Serialization;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Adapters;
 
 /// <inheritdoc />

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 internal class AzureADB2CSchemeOptions

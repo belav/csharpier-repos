@@ -129,6 +129,7 @@ namespace System.Runtime.Serialization
             Save,
             Tron
         };
+
         private readonly CodeGenTrace _codeGenTrace;
         private LocalBuilder? _stringFormatArray;
 
@@ -449,6 +450,7 @@ namespace System.Runtime.Serialization
             Load(value2);
             If(cmpOp);
         }
+
         internal void Else()
         {
             IfState ifState = PopIfState();
@@ -1276,6 +1278,7 @@ namespace System.Runtime.Serialization
                 EmitStackTop(arrayElementType);
             }
         }
+
         internal void Ldelema(Type arrayElementType)
         {
             OpCode opCode = OpCodes.Ldelema;
@@ -1361,6 +1364,7 @@ namespace System.Runtime.Serialization
                 EmitSourceInstruction("And");
             _ilGen.Emit(OpCodes.And);
         }
+
         internal void Or()
         {
             if (_codeGenTrace != CodeGenTrace.None)
@@ -1587,6 +1591,7 @@ namespace System.Runtime.Serialization
             _blockStack.Push(switchState);
             return caseLabels;
         }
+
         internal void Case(Label caseLabel1, string caseLabelName)
         {
             if (_codeGenTrace != CodeGenTrace.None)
@@ -1621,6 +1626,7 @@ namespace System.Runtime.Serialization
         private static readonly MethodInfo s_stringLength = typeof(string).GetProperty(
             "Length"
         )!.GetMethod!;
+
         internal void ElseIfIsEmptyString(LocalBuilder strLocal)
         {
             IfState ifState = (IfState)_blockStack.Pop();
@@ -1695,6 +1701,7 @@ namespace System.Runtime.Serialization
     {
         internal int Index;
         internal Type ArgType;
+
         internal ArgBuilder(int index, Type argType)
         {
             this.Index = index;
@@ -1785,12 +1792,14 @@ namespace System.Runtime.Serialization
         private readonly Label _defaultLabel;
         private readonly Label _endOfSwitchLabel;
         private bool _defaultDefined;
+
         internal SwitchState(Label defaultLabel, Label endOfSwitchLabel)
         {
             _defaultLabel = defaultLabel;
             _endOfSwitchLabel = endOfSwitchLabel;
             _defaultDefined = false;
         }
+
         internal Label DefaultLabel
         {
             get { return _defaultLabel; }

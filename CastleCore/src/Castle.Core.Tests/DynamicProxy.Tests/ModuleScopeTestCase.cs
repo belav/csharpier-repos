@@ -68,7 +68,6 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreSame(one, three);
             Assert.AreSame(two, four);
         }
-
 #if FEATURE_ASSEMBLYBUILDER_SAVE
         [Test]
         [Platform(
@@ -408,7 +407,6 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreEqual("Strong", strong.Assembly.GetName().Name);
             Assert.AreEqual("Weak", weak.Assembly.GetName().Name);
         }
-
 #if FEATURE_ASSEMBLYBUILDER_SAVE
         [Test]
         public void ModuleScopeDoesntTryToDeleteFromCurrentDirectory()

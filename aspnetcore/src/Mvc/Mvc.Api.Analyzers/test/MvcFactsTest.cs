@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Analyzers;
 using Microsoft.CodeAnalysis;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class MvcFactsTest
@@ -114,7 +115,6 @@ public class MvcFactsTest
         // Assert
         Assert.True(isController);
     }
-
     #endregion
 
     #region IsControllerAction

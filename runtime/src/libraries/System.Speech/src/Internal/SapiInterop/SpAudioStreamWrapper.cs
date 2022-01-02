@@ -56,7 +56,6 @@ namespace System.Speech.Internal.SapiInterop
                 }
             }
         }
-
         #endregion
 
         #region public Methods
@@ -175,7 +174,6 @@ namespace System.Speech.Internal.SapiInterop
             internal uint _id; /* should be "fmt " or "data" */
             internal int _len; /* block size less header */
         }
-
         #endregion
 
         #region Private Fields

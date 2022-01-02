@@ -16,6 +16,7 @@ namespace MS.Internal.Xml.XPath
         {
             _child = child;
         }
+
         private MergeFilterQuery(MergeFilterQuery other) : base(other)
         {
             _child = Clone(other._child);

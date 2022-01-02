@@ -27,6 +27,7 @@ namespace Microsoft.EntityFrameworkCore
 #pragma warning disable CS0612 // Type or member is obsolete
             =>
             (LambdaExpression?)entityType[CoreAnnotationNames.DefiningQuery];
+
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
@@ -43,6 +44,7 @@ namespace Microsoft.EntityFrameworkCore
 #pragma warning disable EF1001 // Internal EF Core API usage.
 #pragma warning disable CS0612 // Type or member is obsolete
             .SetOrRemoveAnnotation(CoreAnnotationNames.DefiningQuery, inMemoryQuery);
+
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore EF1001 // Internal EF Core API usage.
 

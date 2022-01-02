@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public class RazorDirectivesTest : ParserTestBase
@@ -160,6 +161,7 @@ public class RazorDirectivesTest : ParserTestBase
         // Act & Assert
         ParseDocumentTest("@custom System<", new[] { descriptor });
     }
+
     [Fact]
     public void DirectiveDescriptor_CanHandleIncompleteNamespaceTokens()
     {

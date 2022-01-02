@@ -72,6 +72,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
         public virtual void Dispose() { }
 
         protected abstract dynamic CreateResultHandler();
+
         protected abstract void Execute(
             string operationName,
             object resultHandler,

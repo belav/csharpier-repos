@@ -43,11 +43,13 @@ namespace Microsoft.CodeAnalysis.Simplification
             SyntaxNode root,
             Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans
         );
+
         protected abstract SemanticModel GetSpeculativeSemanticModel(
             ref SyntaxNode nodeToSpeculate,
             SemanticModel originalSemanticModel,
             SyntaxNode originalNode
         );
+
         protected abstract bool NodeRequiresNonSpeculativeSemanticModel(SyntaxNode node);
 
         protected virtual SyntaxNode TransformReducedNode(
@@ -63,6 +65,7 @@ namespace Microsoft.CodeAnalysis.Simplification
             bool expandParameter,
             CancellationToken cancellationToken
         );
+
         public abstract SyntaxToken Expand(
             SyntaxToken token,
             SemanticModel semanticModel,

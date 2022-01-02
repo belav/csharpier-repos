@@ -16,6 +16,7 @@ namespace System.Runtime.Serialization
             out XmlDictionaryString? typeName,
             out XmlDictionaryString? typeNamespace
         );
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public abstract Type? ResolveName(
             string typeName,

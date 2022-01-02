@@ -20,6 +20,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 /// <summary>

@@ -101,7 +101,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         {
             return t;
         }
-
         // Multiple params
         // Constraints
         // Nesting
@@ -292,6 +291,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     {
         private static dynamic s_mc = new MemberClass<string>();
         private static float s_loc = (float)s_mc.Method_ReturnsFloat(null, 1);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -381,6 +381,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     public class Test
     {
         public int Field = 10;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -488,6 +489,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     {
         private static decimal s_dec = 0M;
         private static float s_result = 0f;
+
         static Test()
         {
             dynamic dy = new MemberClass<I>();

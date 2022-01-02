@@ -13,6 +13,7 @@ namespace System.Security.Cryptography
         protected AsymmetricSignatureFormatter() { }
 
         public abstract void SetKey(AsymmetricAlgorithm key);
+
         public abstract void SetHashAlgorithm(string strName);
 
         public virtual byte[] CreateSignature(HashAlgorithm hash)

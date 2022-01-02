@@ -27,6 +27,7 @@ using Xunit;
 [assembly: TypeForwardedTo(typeof(string))]
 [assembly: TypeForwardedTo(typeof(TypeInForwardedAssembly))]
 
+
 namespace System.Reflection.Tests
 {
     public class AssemblyTests : FileCleanupTestBase
@@ -334,6 +335,7 @@ namespace System.Reflection.Tests
         {
             Assert.False(typeof(AssemblyTests).Assembly.GlobalAssemblyCache);
         }
+
 #pragma warning restore SYSLIB0005 // Obsolete: GAC
 
         [Fact]
@@ -611,6 +613,7 @@ namespace System.Reflection.Tests
             );
             Assert.Null(Assembly.LoadWithPartialName("no such assembly"));
         }
+
 #pragma warning restore 618
 
         [Fact]
@@ -627,6 +630,7 @@ namespace System.Reflection.Tests
         {
             Assert.NotEmpty(Helpers.ExecutingAssembly.CodeBase);
         }
+
 #pragma warning restore SYSLIB0012
 
         [Fact]
@@ -1042,6 +1046,7 @@ namespace System.Reflection.Tests
                 () => Assembly.ReflectionOnlyLoad((byte[])null)
             );
         }
+
 #pragma warning restore SYSLIB0018
 
         public static IEnumerable<object[]> GetModules_TestData()
@@ -1183,6 +1188,7 @@ namespace System.Reflection.Tests
     }
 
     public class AssemblyGenericPublicClass<T> { }
+
     internal class AssemblyInternalClass { }
 
     public class AssemblyClassWithPrivateCtor

@@ -108,6 +108,7 @@ namespace DefaultNamespace
         public static int rlNodeCount = 0;
         internal static BNode[] rlNode = new BNode[rlNodeCapacity];
         public int[] mem;
+
         public BNode(int i)
         {
             icCreateNode++;

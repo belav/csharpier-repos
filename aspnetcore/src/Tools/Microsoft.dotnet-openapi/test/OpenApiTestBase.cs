@@ -9,6 +9,7 @@ using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.Extensions.Tools.Internal;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.DotNet.OpenApi.Tests;
 
 public class OpenApiTestBase : IDisposable

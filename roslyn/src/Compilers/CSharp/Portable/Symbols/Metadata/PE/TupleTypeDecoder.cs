@@ -63,6 +63,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     internal struct TupleTypeDecoder
     {
         private readonly ImmutableArray<string?> _elementNames;
+
         // Keep track of how many names we've "used" during decoding. Starts at
         // the back of the array and moves forward.
         private int _namesIndex;

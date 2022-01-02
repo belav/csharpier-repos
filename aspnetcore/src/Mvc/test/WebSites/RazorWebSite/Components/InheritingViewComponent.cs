@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace RazorWebSite.Components;
 
 [ViewComponent(Name = "InheritingViewComponent")]

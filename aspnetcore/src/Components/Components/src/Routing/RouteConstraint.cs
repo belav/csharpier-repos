@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Components.Routing;
 
 internal static class RouteConstraint

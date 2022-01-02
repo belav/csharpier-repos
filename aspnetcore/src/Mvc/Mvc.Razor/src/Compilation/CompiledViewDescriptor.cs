@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Hosting;
 using Microsoft.Extensions.Primitives;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 /// <summary>
@@ -87,6 +88,7 @@ public class CompiledViewDescriptor
         "Use Item instead. RazorViewAttribute has been superseded by RazorCompiledItem and will not be used by the runtime."
     )]
     public RazorViewAttribute? ViewAttribute { get; set; }
+
 #pragma warning restore CS0618 // Type or member is obsolete
 
     /// <summary>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace SecurityWebSite;
 
 public class StartupWithGlobalDenyAnonymousFilter

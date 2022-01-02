@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Globalization;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.JSInterop.Infrastructure;
 
 internal static class TaskGenericsUtil

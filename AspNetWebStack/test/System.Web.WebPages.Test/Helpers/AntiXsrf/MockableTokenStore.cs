@@ -8,7 +8,9 @@ namespace System.Web.Helpers.AntiXsrf.Test
     public abstract class MockableTokenStore : ITokenStore
     {
         public abstract object GetCookieToken(HttpContextBase httpContext);
+
         public abstract object GetFormToken(HttpContextBase httpContext);
+
         public abstract void SaveCookieToken(HttpContextBase httpContext, object token);
 
         AntiForgeryToken ITokenStore.GetCookieToken(HttpContextBase httpContext)

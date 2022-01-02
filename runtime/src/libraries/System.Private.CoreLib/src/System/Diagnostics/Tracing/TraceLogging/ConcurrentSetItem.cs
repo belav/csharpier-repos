@@ -17,6 +17,7 @@ namespace System.Diagnostics.Tracing
         where ItemType : ConcurrentSetItem<KeyType, ItemType>
     {
         public abstract int Compare(ItemType other);
+
         public abstract int Compare(KeyType key);
     }
 }

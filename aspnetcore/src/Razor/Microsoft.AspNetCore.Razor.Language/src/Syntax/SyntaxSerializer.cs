@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal class SyntaxSerializer

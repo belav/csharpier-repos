@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public sealed class ComponentRenderingTest : ComponentRenderingTestBase

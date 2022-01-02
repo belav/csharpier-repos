@@ -48,6 +48,7 @@ namespace System.Net.Test.Common
 
         public override int Read(byte[] buffer, int offset, int count) =>
             Read(new Span<byte>(buffer, offset, count));
+
         public override int Read(Span<byte> buffer)
         {
             if (buffer.Length > 0)
@@ -104,6 +105,7 @@ namespace System.Net.Test.Common
             int count,
             CancellationToken cancellationToken
         ) => WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count)).AsTask();
+
         public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default

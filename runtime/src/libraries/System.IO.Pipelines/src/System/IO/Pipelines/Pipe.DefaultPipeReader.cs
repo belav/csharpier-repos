@@ -46,6 +46,7 @@ namespace System.IO.Pipelines
                 Action<Exception?, object?> callback,
                 object? state
             ) => _pipe.OnWriterCompleted(callback, state);
+
 #pragma warning restore CS0672 // Member overrides obsolete member
 
             public ValueTaskSourceStatus GetStatus(short token) => _pipe.GetReadAsyncStatus();

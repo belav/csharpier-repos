@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using RazorPagesWebSite.Conventions;
 
+
 namespace RazorPagesWebSite;
 
 public class StartupWithoutEndpointRouting

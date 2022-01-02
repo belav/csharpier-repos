@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public static class ExceptionMessageExtensions

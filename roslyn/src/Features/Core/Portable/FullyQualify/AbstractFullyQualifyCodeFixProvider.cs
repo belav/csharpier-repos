@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         }
 
         protected abstract bool IgnoreCase { get; }
+
         protected abstract bool CanFullyQualify(Diagnostic diagnostic, ref SyntaxNode node);
+
         protected abstract Task<SyntaxNode> ReplaceNodeAsync(
             SyntaxNode node,
             string containerName,

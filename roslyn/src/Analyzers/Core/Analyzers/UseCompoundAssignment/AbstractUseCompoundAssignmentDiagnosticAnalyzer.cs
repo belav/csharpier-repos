@@ -74,7 +74,9 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         }
 
         protected abstract TSyntaxKind GetAnalysisKind();
+
         protected abstract bool IsSupported(TSyntaxKind assignmentKind, ParseOptions options);
+
         protected abstract int TryGetIncrementOrDecrement(TSyntaxKind opKind, object constantValue);
 
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>

@@ -1174,6 +1174,7 @@ namespace System.Text.Json.Serialization.Tests
 
         public void VerifyMinimal() => Assert.Equal(3.3m, MyDecimal);
     }
+
     public class Parameterless_ClassWithPrimitives
     {
         public int FirstInt { get; set; }

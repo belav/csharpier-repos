@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.Extensions.CommandLineUtils;
 
+
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
 /// <summary>

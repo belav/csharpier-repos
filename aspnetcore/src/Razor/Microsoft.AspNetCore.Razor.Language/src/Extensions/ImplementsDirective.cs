@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 internal static class ImplementsDirective

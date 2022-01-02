@@ -98,6 +98,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
+
         public static explicit operator int(Derived d = x)
         {
             if (d != null)
@@ -135,6 +136,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
+
         public static explicit operator int(Derived d = true ? x : x)
         {
             if (d != null)
@@ -256,6 +258,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
+
         public static implicit operator int(Derived d = x)
         {
             if (d != null)
@@ -293,6 +296,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     public class Derived
     {
         private const Derived x = null;
+
         public static implicit operator int(Derived d = true ? x : x)
         {
             if (d != null)

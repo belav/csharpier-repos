@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics;
 
 public class StatusCodeMiddlewareTest

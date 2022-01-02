@@ -5,6 +5,7 @@ using System;
 using System.Text;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class DirectiveTokenChunkGenerator : SpanChunkGenerator

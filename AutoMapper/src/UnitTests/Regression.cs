@@ -24,6 +24,7 @@ namespace AutoMapper.UnitTests
         {
             public Guid Id { get; set; }
         }
+
         public class automapper_fails_to_map_custom_mappings_when_mapping_collections_for_an_interface
             : AutoMapperSpecBase
         {
@@ -144,10 +145,12 @@ namespace AutoMapper.UnitTests
             public class People : IEnumerable
             {
                 private readonly Person[] people;
+
                 public People(Person[] people)
                 {
                     this.people = people;
                 }
+
                 public IEnumerator GetEnumerator()
                 {
                     foreach (var person in people)

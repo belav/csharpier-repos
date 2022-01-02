@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 internal static class CorsPolicyExtensions

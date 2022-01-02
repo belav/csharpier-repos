@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 internal abstract partial class SyntaxRewriter : SyntaxVisitor<SyntaxNode>

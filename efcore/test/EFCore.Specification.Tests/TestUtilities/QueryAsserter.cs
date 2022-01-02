@@ -1805,7 +1805,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             AssertEqual(expected, actual, asserter);
             Assert.Empty(context.ChangeTracker.Entries());
         }
-
         #endregion
 
         #region Helpers

@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
 /// <summary>

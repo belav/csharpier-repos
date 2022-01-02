@@ -202,13 +202,13 @@ namespace System.Reflection.Emit
 
             return null;
         }
-
         #endregion
 
         #region Data Members
         internal TypeKind m_typeKind;
         internal Type m_baseType = null!;
         internal int m_cRank; // count of dimension
+
         // If LowerBound and UpperBound is equal, that means one element.
         // If UpperBound is less than LowerBound, then the size is not specified.
         internal int[] m_iaLowerBound;
@@ -224,7 +224,6 @@ namespace System.Reflection.Emit
             m_iaLowerBound = new int[4];
             m_iaUpperBound = new int[4];
         }
-
         #endregion
 
         #region Internal Members

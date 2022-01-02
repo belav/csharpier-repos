@@ -33,7 +33,6 @@ namespace System.Net.Mail
         private Encoding? _subjectEncoding;
         private Encoding? _headersEncoding;
         private MailPriority _priority = (MailPriority)(-1);
-
         #endregion Fields
 
         #region Constructors
@@ -71,7 +70,6 @@ namespace System.Net.Mail
             _from = from;
             To.Add(to);
         }
-
         #endregion Constructors
 
         #region Properties
@@ -215,7 +213,6 @@ namespace System.Net.Mail
                 _content = value;
             }
         }
-
         #endregion Properties
 
         #region Sending

@@ -12,6 +12,7 @@ using AngleSharp.Dom.Html;
 using AngleSharp.Network;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public static class ResponseAssert

@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Log = Microsoft.AspNetCore.SignalR.HubConnectionHandlerLog;
 
+
 namespace Microsoft.AspNetCore.SignalR;
 
 /// <summary>

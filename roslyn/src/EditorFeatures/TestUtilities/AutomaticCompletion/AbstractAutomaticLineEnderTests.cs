@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
     public abstract class AbstractAutomaticLineEnderTests
     {
         protected abstract string Language { get; }
+
         protected abstract Action CreateNextHandler(TestWorkspace workspace);
 
         internal abstract IChainedCommandHandler<AutomaticLineEnderCommandArgs> GetCommandHandler(

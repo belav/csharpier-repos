@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>
@@ -180,6 +181,7 @@ public sealed class WebApplication
     public ValueTask DisposeAsync() => ((IAsyncDisposable)_host).DisposeAsync();
 
     internal RequestDelegate BuildRequestDelegate() => ApplicationBuilder.Build();
+
     RequestDelegate IApplicationBuilder.Build() => BuildRequestDelegate();
 
     // REVIEW: Should this be wrapping another type?

@@ -154,10 +154,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         }
 
         protected abstract bool IsRecordDeclaration(SyntaxNode node);
+
         protected abstract Location GetDefinitionLocationToFade(IOperation unusedDefinition);
+
         protected abstract bool SupportsDiscard(SyntaxTree tree);
+
         protected abstract bool MethodHasHandlesClause(IMethodSymbol method);
+
         protected abstract bool IsIfConditionalDirective(SyntaxNode node);
+
         private Option2<
             CodeStyleOption2<UnusedValuePreference>
         > UnusedValueExpressionStatementOption { get; }
@@ -368,6 +373,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             public ReportDiagnostic UnusedValueExpressionStatementSeverity { get; }
             public UnusedValuePreference UnusedValueAssignmentPreference { get; }
             public ReportDiagnostic UnusedValueAssignmentSeverity { get; }
+
             public bool IsComputingUnusedParams(ISymbol symbol) =>
                 ShouldReportUnusedParameters(
                     symbol,

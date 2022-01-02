@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.DataProtection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 public class ProtectedPrerenderComponentApplicationStateTest

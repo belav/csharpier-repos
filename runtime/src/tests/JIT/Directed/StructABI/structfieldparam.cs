@@ -9,6 +9,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 namespace structfieldparam
 {
     struct Inner1

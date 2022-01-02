@@ -15,6 +15,7 @@
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
     using System;
+
     public interface InterfaceWithMethodsWithAllKindsOfOptionalParameters
     {
         void MethodWithOptionalByteParameter(byte b = 0);

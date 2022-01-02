@@ -48,6 +48,7 @@ namespace Microsoft.Interop
         // since we always use a property initializer.
 #pragma warning disable 8618
         private DllImportStubContext() { }
+
 #pragma warning restore
 
         public ImmutableArray<TypePositionInfo> ElementTypeInformation { get; init; }

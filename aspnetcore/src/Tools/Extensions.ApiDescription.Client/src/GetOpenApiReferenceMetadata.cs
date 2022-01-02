@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
+
 namespace Microsoft.Extensions.ApiDescription.Client;
 
 /// <summary>

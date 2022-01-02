@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Localization;
 
+
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 internal class RegularExpressionAttributeAdapter : AttributeAdapterBase<RegularExpressionAttribute>

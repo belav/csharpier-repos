@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
     {
 #pragma warning disable 67
         public event EventHandler<OptionChangedEventArgs> OptionChanged;
+
 #pragma warning restore 67
 
         // Feel free to add other option storages

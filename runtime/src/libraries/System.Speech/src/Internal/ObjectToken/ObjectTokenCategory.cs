@@ -20,7 +20,6 @@ namespace System.Speech.Internal.ObjectTokens
             RegistryDataKey key = RegistryDataKey.Open(sCategoryId, true);
             return new ObjectTokenCategory(sCategoryId, key);
         }
-
         #endregion
 
         #region internal Methods

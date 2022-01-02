@@ -9,6 +9,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Localization.Test;
 
 public class HtmlLocalizerOfTTest

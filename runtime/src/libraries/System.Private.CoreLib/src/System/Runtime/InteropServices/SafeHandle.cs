@@ -22,10 +22,13 @@ namespace System.Runtime.InteropServices
 
         /// <summary>Specifies the handle to be wrapped.</summary>
         protected IntPtr handle;
+
         /// <summary>Combined ref count and closed/disposed flags (so we can atomically modify them).</summary>
         private volatile int _state;
+
         /// <summary>Whether we can release this handle.</summary>
         private readonly bool _ownsHandle;
+
         /// <summary>Whether constructor completed.</summary>
         private volatile bool _fullyInitialized;
 
@@ -63,7 +66,6 @@ namespace System.Runtime.InteropServices
 
             _fullyInitialized = true;
         }
-
 #if !CORERT // CoreRT doesn't correctly support CriticalFinalizerObject
         ~SafeHandle()
         {

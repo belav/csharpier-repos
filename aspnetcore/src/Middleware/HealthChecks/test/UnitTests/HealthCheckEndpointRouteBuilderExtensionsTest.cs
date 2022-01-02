@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 public class HealthCheckEndpointRouteBuilderExtensionsTest

@@ -4,6 +4,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public static class SyntaxNodeSerializer

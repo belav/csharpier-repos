@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Controllers;
 
 public class ReadFromThrowingRequestBodyController : Controller

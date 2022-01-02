@@ -16,15 +16,19 @@ namespace System.Threading.Channels
     {
         /// <summary>Task that indicates the channel has completed.</summary>
         private readonly TaskCompletionSource _completion;
+
         /// <summary>The items in the channel.</summary>
         private readonly ConcurrentQueue<T> _items = new ConcurrentQueue<T>();
+
         /// <summary>Readers blocked reading from the channel.</summary>
         private readonly Deque<AsyncOperation<T>> _blockedReaders = new Deque<AsyncOperation<T>>();
+
         /// <summary>Whether to force continuations to be executed asynchronously from producer writes.</summary>
         private readonly bool _runContinuationsAsynchronously;
 
         /// <summary>Readers waiting for a notification that data is available.</summary>
         private AsyncOperation<bool>? _waitingReadersTail;
+
         /// <summary>Set to non-null once Complete has been called.</summary>
         private Exception? _doneWriting;
 
@@ -214,6 +218,7 @@ namespace System.Threading.Channels
         private sealed class UnboundedChannelWriter : ChannelWriter<T>, IDebugEnumerable<T>
         {
             internal readonly UnboundedChannel<T> _parent;
+
             internal UnboundedChannelWriter(UnboundedChannel<T> parent) => _parent = parent;
 
             public override bool TryComplete(Exception? error)

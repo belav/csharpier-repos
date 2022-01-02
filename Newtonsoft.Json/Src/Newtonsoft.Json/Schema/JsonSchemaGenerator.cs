@@ -34,7 +34,6 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
-
 #endif
 
 #nullable disable
@@ -463,7 +462,6 @@ namespace Newtonsoft.Json.Schema
                 CurrentSchema.AllowAdditionalProperties = false;
             }
         }
-
 #if HAVE_BINARY_SERIALIZATION
         private void GenerateISerializableContract(Type type, JsonISerializableContract contract)
         {

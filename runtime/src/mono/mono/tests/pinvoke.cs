@@ -16,6 +16,7 @@ public class Test
         int i,
         int j
     );
+
     [DllImport("libtest", EntryPoint = "mono_test_many_short_arguments")]
     public static extern short mono_test_many_short_arguments(
         short a,
@@ -29,6 +30,7 @@ public class Test
         short i,
         short j
     );
+
     [DllImport("libtest", EntryPoint = "mono_test_many_byte_arguments")]
     public static extern sbyte mono_test_many_byte_arguments(
         sbyte a,
@@ -42,6 +44,7 @@ public class Test
         sbyte i,
         sbyte j
     );
+
     [DllImport("libtest", EntryPoint = "mono_test_many_float_arguments")]
     public static extern float mono_test_many_float_arguments(
         float a,
@@ -55,6 +58,7 @@ public class Test
         float i,
         float j
     );
+
     [DllImport("libtest", EntryPoint = "mono_test_many_double_arguments")]
     public static extern double mono_test_many_double_arguments(
         double a,
@@ -68,6 +72,7 @@ public class Test
         double i,
         double j
     );
+
     [DllImport("libtest", EntryPoint = "mono_test_split_double_arguments")]
     public static extern double mono_test_split_double_arguments(
         double a,

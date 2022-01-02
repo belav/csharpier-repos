@@ -76,6 +76,7 @@ namespace SharedTypes
         public byte b1;
         public byte b2;
         public byte b3;
+
         public BoolStructNative(BoolStruct bs)
         {
             b1 = (byte)(bs.b1 ? 1 : 0);
@@ -216,6 +217,7 @@ namespace SharedTypes
     public struct IntStructWrapperNative
     {
         public int value;
+
         public IntStructWrapperNative(IntStructWrapper managed)
         {
             value = managed.Value;

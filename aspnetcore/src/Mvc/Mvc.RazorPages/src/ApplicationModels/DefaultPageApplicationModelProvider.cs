@@ -13,6 +13,7 @@ using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Options;
 using Resources = Microsoft.AspNetCore.Mvc.RazorPages.Resources;
 
+
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvider

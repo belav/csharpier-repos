@@ -369,7 +369,6 @@ public class ArrayMarshal
             Assert.True(CStyle_Array_Object_In(oArr, ARRAY_SIZE));
         }
     }
-
     #endregion
 
     #region Marshal InOut ByVal
@@ -540,7 +539,6 @@ public class ArrayMarshal
 
         return array;
     }
-
     #endregion
 
     #region Marshal Out ByVal
@@ -640,7 +638,6 @@ public class ArrayMarshal
             Assert.True(Equals<object>(oArr, expectedOArr));
         }
     }
-
     #endregion
 
     private static void TestMultidimensional()

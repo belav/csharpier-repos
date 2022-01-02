@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis
         protected SourceReferenceResolver() { }
 
         public abstract override bool Equals(object? other);
+
         public abstract override int GetHashCode();
 
         /// <summary>

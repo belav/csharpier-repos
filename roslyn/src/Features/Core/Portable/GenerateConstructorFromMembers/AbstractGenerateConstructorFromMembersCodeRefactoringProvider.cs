@@ -55,10 +55,12 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
         protected abstract bool ContainingTypesOrSelfHasUnsafeKeyword(
             INamedTypeSymbol containingType
         );
+
         protected abstract string ToDisplayString(
             IParameterSymbol parameter,
             SymbolDisplayFormat format
         );
+
         protected abstract bool PrefersThrowExpression(DocumentOptionSet options);
 
         public override Task ComputeRefactoringsAsync(CodeRefactoringContext context)

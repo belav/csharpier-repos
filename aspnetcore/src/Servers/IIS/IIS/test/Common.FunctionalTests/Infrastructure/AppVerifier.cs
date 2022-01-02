@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
+
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
 public class AppVerifier

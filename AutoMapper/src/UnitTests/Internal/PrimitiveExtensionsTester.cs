@@ -41,6 +41,7 @@ namespace AutoMapper.UnitTests
                 new[] { "Date", "AddDays", "Date", "AddHours", "AddMinutes", "Date", "DayOfWeek" }
             );
         }
+
         [Fact]
         public void IsMemberPath()
         {

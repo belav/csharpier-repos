@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
 public class TestFixture<TStartup> : IDisposable

@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis.ConvertCast
         protected abstract string GetTitle();
 
         protected abstract int FromKind { get; }
+
         protected abstract TToExpression ConvertExpression(TFromExpression from);
+
         protected abstract TTypeNode GetTypeNode(TFromExpression from);
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)

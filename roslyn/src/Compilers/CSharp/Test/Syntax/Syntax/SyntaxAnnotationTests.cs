@@ -137,7 +137,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var annotatedTrivia = fromTrivia.CopyAnnotationsTo(toTrivia);
             Assert.Equal(annotatedTrivia, toTrivia); // Reference Equal
         }
-
         #endregion
 
         #region Negative Tests
@@ -168,7 +167,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var matchingTrivia = tree.GetCompilationUnitRoot().GetAnnotatedTrivia(annotation);
             Assert.Empty(matchingTrivia);
         }
-
         #endregion
 
         #region Other Functional Tests
@@ -390,7 +388,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             TestCopyAnnotations(tree1, tree2);
         }
-
         #endregion
 
         private void TestMultipleAnnotationsInTree(

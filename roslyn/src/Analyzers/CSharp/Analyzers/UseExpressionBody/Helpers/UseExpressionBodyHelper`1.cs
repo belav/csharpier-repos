@@ -333,10 +333,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             TDeclaration declaration,
             SyntaxToken token
         );
+
         protected abstract TDeclaration WithExpressionBody(
             TDeclaration declaration,
             ArrowExpressionClauseSyntax expressionBody
         );
+
         protected abstract TDeclaration WithBody(TDeclaration declaration, BlockSyntax body);
 
         protected virtual TDeclaration WithGenerateBody(

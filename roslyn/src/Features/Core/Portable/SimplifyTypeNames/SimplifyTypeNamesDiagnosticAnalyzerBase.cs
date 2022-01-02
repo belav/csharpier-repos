@@ -105,6 +105,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             );
 
         internal abstract bool IsCandidate(SyntaxNode node);
+
         internal abstract bool CanSimplifyTypeNameExpression(
             SemanticModel model,
             SyntaxNode node,
@@ -171,9 +172,11 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         /// blocks may be analyzed by <see cref="AnalyzeCodeBlock"/>, and any remaining spans can be analyzed by
         /// <see cref="AnalyzeSemanticModel"/>.</returns>
         protected abstract bool IsIgnoredCodeBlock(SyntaxNode codeBlock);
+
         protected abstract ImmutableArray<Diagnostic> AnalyzeCodeBlock(
             CodeBlockAnalysisContext context
         );
+
         protected abstract ImmutableArray<Diagnostic> AnalyzeSemanticModel(
             SemanticModelAnalysisContext context,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? codeBlockIntervalTree

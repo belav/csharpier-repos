@@ -4,6 +4,7 @@
 using System;
 using System.Text.RegularExpressions;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class HtmlConventions

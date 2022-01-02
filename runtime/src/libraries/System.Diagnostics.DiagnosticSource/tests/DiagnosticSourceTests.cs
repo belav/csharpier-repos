@@ -839,7 +839,9 @@ namespace System.Diagnostics.Tests
             {
                 _onCompleted();
             }
+
             public void OnError(Exception error) { }
+
             public void OnNext(T value)
             {
                 _onNext(value);

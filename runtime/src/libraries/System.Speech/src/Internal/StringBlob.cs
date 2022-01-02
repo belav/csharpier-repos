@@ -37,7 +37,6 @@ namespace System.Speech.Internal
                 }
             }
         }
-
         #endregion
 
         #region internal Methods
@@ -177,7 +176,6 @@ namespace System.Speech.Internal
 
             return 0;
         }
-
         #endregion
 
         #region internal Properties
@@ -186,7 +184,6 @@ namespace System.Speech.Internal
         {
             get { return _cWords; }
         }
-
         #endregion
 
         #region Private Fields

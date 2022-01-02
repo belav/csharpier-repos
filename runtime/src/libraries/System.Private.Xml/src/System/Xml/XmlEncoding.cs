@@ -278,6 +278,7 @@ namespace System.Xml
         {
             return null!; //ucs4Decoder.GetByteCount(chars, index, count);
         }
+
         public override int GetBytes(
             char[] chars,
             int charIndex,
@@ -288,6 +289,7 @@ namespace System.Xml
         {
             return 0;
         }
+
         public override int GetMaxByteCount(int charCount)
         {
             return 0;

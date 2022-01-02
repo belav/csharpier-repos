@@ -7,6 +7,7 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 public class TypeForwardingActivatorTests : MarshalByRefObject
@@ -154,6 +155,7 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
     private class MockTypeForwardingActivator : TypeForwardingActivator
     {
         public MockTypeForwardingActivator() : base(null) { }
+
         public string Parse(string typeName) => RemoveVersionFromAssemblyName(typeName);
     }
 

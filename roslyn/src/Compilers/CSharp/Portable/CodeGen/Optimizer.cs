@@ -2391,6 +2391,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 type
             );
         }
+
 #nullable disable
 
         public override BoundNode VisitCatchBlock(BoundCatchBlock node)

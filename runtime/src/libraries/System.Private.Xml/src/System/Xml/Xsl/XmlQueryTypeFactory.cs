@@ -137,7 +137,6 @@ namespace System.Xml.Xsl
                 left.Cardinality + right.Cardinality
             );
         }
-
 #if NEVER
         /// <summary>
         /// Construct the sequence of several XmlQueryTypes
@@ -596,6 +595,7 @@ namespace System.Xml.Xsl
                     NodeNotRtf
                 };
             }
+
 #pragma warning restore CA1810
 
             /// <summary>
@@ -1445,6 +1445,7 @@ namespace System.Xml.Xsl
                     return null;
             }
         }
+
         #endregion
 
 #if NEVER   // Remove from code since we don't use and FxCop complains.  May re-add later.
@@ -2368,6 +2369,7 @@ namespace System.Xml.Xsl
         {
             return AddFilteredPrime(list, source, filter, false);
         }
+
         private XmlQueryCardinality AddFilteredPrime(
             List<XmlQueryType> list,
             XmlQueryType source,

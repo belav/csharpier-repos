@@ -142,6 +142,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 IMethodSymbol localFunction,
                 CancellationToken cancellationToken
             );
+
             protected abstract BasicBlockAnalysisData AnalyzeLambdaInvocationCore(
                 IFlowAnonymousFunctionOperation lambda,
                 CancellationToken cancellationToken
@@ -149,26 +150,34 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
             // Methods specific to flow capture analysis for CFG based dataflow analysis.
             public abstract bool IsLValueFlowCapture(CaptureId captureId);
+
             public abstract bool IsRValueFlowCapture(CaptureId captureId);
+
             public abstract void OnLValueCaptureFound(
                 ISymbol symbol,
                 IOperation operation,
                 CaptureId captureId
             );
+
             public abstract void OnLValueDereferenceFound(CaptureId captureId);
 
             // Methods specific to delegate analysis to track potential delegate invocation targets for CFG based dataflow analysis.
             public abstract bool IsTrackingDelegateCreationTargets { get; }
+
             public abstract void SetTargetsFromSymbolForDelegate(IOperation write, ISymbol symbol);
+
             public abstract void SetLambdaTargetForDelegate(
                 IOperation write,
                 IFlowAnonymousFunctionOperation lambdaTarget
             );
+
             public abstract void SetLocalFunctionTargetForDelegate(
                 IOperation write,
                 IMethodReferenceOperation localFunctionTarget
             );
+
             public abstract void SetEmptyInvocationTargetsForDelegate(IOperation write);
+
             public abstract bool TryGetDelegateInvocationTargets(
                 IOperation write,
                 out ImmutableHashSet<IOperation> targets

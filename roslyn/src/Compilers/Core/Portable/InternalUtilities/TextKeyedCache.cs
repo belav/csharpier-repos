@@ -110,7 +110,6 @@ namespace Roslyn.Utilities
 
             _pool?.Free(this);
         }
-
         #endregion // Poolable
 
         internal T? FindItem(char[] chars, int start, int len, int hashCode)

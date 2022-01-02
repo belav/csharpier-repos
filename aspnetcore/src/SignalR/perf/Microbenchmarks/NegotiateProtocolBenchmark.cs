@@ -9,6 +9,7 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class NegotiateProtocolBenchmark

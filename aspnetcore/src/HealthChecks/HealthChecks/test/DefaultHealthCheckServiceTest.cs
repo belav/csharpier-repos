@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Microsoft.Extensions.Options;
 using Xunit;
 
+
 #nullable enable
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -785,6 +786,7 @@ public class DefaultHealthCheckServiceTest
     {
         private readonly object _lock = new();
         private bool _wasUsed;
+
         public void Check()
         {
             lock (_lock)

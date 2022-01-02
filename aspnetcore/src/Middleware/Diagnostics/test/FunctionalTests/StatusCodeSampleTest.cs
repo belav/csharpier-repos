@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
 public class StatusCodeSampleTest : IClassFixture<TestFixture<StatusCodePagesSample.Startup>>

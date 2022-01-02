@@ -361,6 +361,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         public class ClassWithExplicitOperator
         {
             public byte field;
+
             public static explicit operator ClassWithExplicitOperator(byte t1)
             {
                 dynamic dy = new MemberClass<int>();
@@ -769,6 +770,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -849,6 +851,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
     public class Test : C
     {
         private int _field;
+
         public Test()
         {
             _field = 11;

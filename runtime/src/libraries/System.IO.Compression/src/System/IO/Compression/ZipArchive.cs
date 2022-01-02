@@ -29,7 +29,6 @@ namespace System.IO.Compression
         private Stream? _backingStream;
         private byte[]? _archiveComment;
         private Encoding? _entryNameEncoding;
-
 #if DEBUG_FORCE_ZIP64
         public bool _forceZip64;
 #endif

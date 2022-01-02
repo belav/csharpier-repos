@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
         where TInvocationExpressionSyntax : TExpressionSyntax
     {
         protected abstract bool IsSimpleNameGeneration(SyntaxNode node);
+
         protected abstract bool IsExplicitInterfaceGeneration(SyntaxNode node);
+
         protected abstract bool TryInitializeExplicitInterfaceState(
             SemanticDocument document,
             SyntaxNode node,
@@ -46,6 +48,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             out IMethodSymbol methodSymbol,
             out INamedTypeSymbol typeToGenerateIn
         );
+
         protected abstract bool TryInitializeSimpleNameState(
             SemanticDocument document,
             TSimpleNameSyntax simpleName,
@@ -55,6 +58,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             out TInvocationExpressionSyntax invocationExpressionOpt,
             out bool isInConditionalExpression
         );
+
         protected abstract ITypeSymbol DetermineReturnTypeForSimpleNameOrMemberAccessExpression(
             ITypeInferenceService typeInferenceService,
             SemanticModel semanticModel,

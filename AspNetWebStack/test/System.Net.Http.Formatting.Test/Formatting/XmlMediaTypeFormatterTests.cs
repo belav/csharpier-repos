@@ -99,7 +99,6 @@ namespace System.Net.Http.Formatting
             Assert.NotNull(mediaType);
             Assert.Equal("application/xml", mediaType.MediaType);
         }
-
 #if !NETFX_CORE // We don't support MaxDepth in the portable library
         [Fact]
         public void MaxDepthReturnsCorrectValue()

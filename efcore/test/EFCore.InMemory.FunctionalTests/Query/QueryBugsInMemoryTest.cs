@@ -149,7 +149,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public long VehicleInspectionId { get; set; }
             public VehicleInspection Inspection { get; set; }
         }
-
         #endregion
 
         #region Bug3595
@@ -228,7 +227,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("3595");
             }
         }
-
         #endregion
 
         #region Bug3101
@@ -474,7 +472,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public int Id { get; set; }
             public string Name { get; set; }
         }
-
         #endregion
 
         #region Bug5456
@@ -684,7 +681,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public int Id { get; set; }
             public Post5456 Blog { get; set; }
         }
-
         #endregion
 
         #region Bug8282
@@ -728,7 +724,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             public int Id { get; set; }
         }
-
         #endregion
 
         #region Bug19708
@@ -858,7 +853,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public int? CustomerMembershipId { get; set; }
             public string CustomerMembershipName { get; set; }
         }
-
         #endregion
 
         #region Issue21768
@@ -984,7 +978,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("21768");
             }
         }
-
         #endregion
 
         #region Issue21803
@@ -1043,7 +1036,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("21803");
             }
         }
-
         #endregion
 
         #region Issue20729
@@ -1104,11 +1096,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             public int Value { get; set; }
         }
+
         [Owned]
         private class Owned220729
         {
             public Other20729 Other { get; set; }
         }
+
         private class Other20729
         {
             public int Id { get; set; }
@@ -1125,7 +1119,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("20729");
             }
         }
-
         #endregion
 
         #region Issue19253
@@ -1221,6 +1214,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Assert.Equal(3, query.Count);
             }
         }
+
         [ConditionalFact]
         public virtual void Except_combines_nullability_of_entity_shapers()
         {
@@ -1265,6 +1259,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Assert.Single(query);
             }
         }
+
         [ConditionalFact]
         public virtual void Intersect_combines_nullability_of_entity_shapers()
         {
@@ -1383,7 +1378,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             context.SaveChanges();
         }
-
         #endregion
 
         #region Issue23285
@@ -1449,7 +1443,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 modelBuilder.Entity<ChildB23285>().HasBaseType<Root23285>();
             }
         }
-
         #endregion
 
         #region Issue23687
@@ -1513,7 +1506,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 modelBuilder.Entity<Root23687>().HasKey(e => new { e.Id1, e.Id2 });
             }
         }
-
         #endregion
 
         #region Issue23593
@@ -1591,6 +1583,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             public StatusMapCode23593 Id { get; set; }
         }
+
         private class StatusMapEvent23593
         {
             public StatusMapCode23593 Id { get; set; }
@@ -1608,7 +1601,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("23593");
             }
         }
-
         #endregion
 
         #region Issue23926
@@ -1648,6 +1640,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             public UserTypes23926 Type { get; set; }
             public string Name { get; set; }
         }
+
         private enum UserTypes23926
         {
             User,
@@ -1679,7 +1672,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .HasValue<DerivedUser23926>(UserTypes23926.DerivedUser);
             }
         }
-
         #endregion
 
         #region Issue18435
@@ -1774,7 +1766,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("18435");
             }
         }
-
         #endregion
 
         #region Issue19425
@@ -1825,7 +1816,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("19425");
             }
         }
-
         #endregion
 
         #region Issue19667
@@ -1889,7 +1879,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("19667");
             }
         }
-
         #endregion
 
         #region Issue20359
@@ -1981,7 +1970,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
             }
         }
-
         #endregion
 
         #region Issue23360
@@ -2067,7 +2055,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("23360");
             }
         }
-
         #endregion
 
         #region Issue18394
@@ -2190,7 +2177,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("18394");
             }
         }
-
         #endregion
 
         #region Issue23934
@@ -2266,7 +2252,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .UseInMemoryDatabase("23934");
             }
         }
-
         #endregion
 
         #region SharedHelper

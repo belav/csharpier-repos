@@ -336,7 +336,6 @@ namespace System.Xml
                 _coreWriter.Dispose();
             }
         }
-
         #endregion
 
         #region Async Methods

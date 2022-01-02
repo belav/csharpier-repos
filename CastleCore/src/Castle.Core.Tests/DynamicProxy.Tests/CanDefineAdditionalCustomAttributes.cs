@@ -134,24 +134,31 @@ namespace Castle.DynamicProxy.Tests
         public AttributeWithEnumArrayArgument(
             params SomeByteEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }
+
         public AttributeWithEnumArrayArgument(
             params SomeSbyteEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }
+
         public AttributeWithEnumArrayArgument(
             params SomeShortEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }
+
         public AttributeWithEnumArrayArgument(
             params SomeUshortEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }
+
         public AttributeWithEnumArrayArgument(
             params SomeIntEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }
+
         public AttributeWithEnumArrayArgument(
             params SomeUintEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }
+
         public AttributeWithEnumArrayArgument(
             params SomeLongEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }
+
         public AttributeWithEnumArrayArgument(
             params SomeUlongEnumForAttributeWithEnumArrayArgument[] attributeEnums
         ) { }

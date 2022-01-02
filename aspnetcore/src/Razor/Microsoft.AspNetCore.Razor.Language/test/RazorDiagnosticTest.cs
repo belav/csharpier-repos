@@ -5,6 +5,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class RazorDiagnosticTest

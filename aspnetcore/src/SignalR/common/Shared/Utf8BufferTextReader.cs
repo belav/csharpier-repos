@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal sealed class Utf8BufferTextReader : TextReader
@@ -16,7 +17,6 @@ internal sealed class Utf8BufferTextReader : TextReader
 
     [ThreadStatic]
     private static Utf8BufferTextReader? _cachedInstance;
-
 #if DEBUG
     private bool _inUse;
 #endif

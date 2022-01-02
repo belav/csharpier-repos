@@ -563,7 +563,6 @@ namespace System.IO.Ports.Tests
                 VerifyReadLine(com1, com2, input, newLine);
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

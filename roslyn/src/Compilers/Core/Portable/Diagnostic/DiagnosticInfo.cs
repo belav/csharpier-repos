@@ -230,7 +230,6 @@ namespace Microsoft.CodeAnalysis
                 _arguments = Array.Empty<object>();
             }
         }
-
         #endregion
 
         /// <summary>

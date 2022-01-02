@@ -21,7 +21,6 @@ namespace System.Text.Encodings.Web
         {
             [FieldOffset(0)] // ensure same offset with AsVector field
             private fixed byte AsBytes[16];
-
 #if NETCOREAPP
 #if !TARGET_BROWSER
             [FieldOffset(0)] // ensure same offset with AsBytes field

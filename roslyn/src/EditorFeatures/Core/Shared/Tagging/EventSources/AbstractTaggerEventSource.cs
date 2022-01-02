@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         protected AbstractTaggerEventSource() { }
 
         public abstract void Connect();
+
         public abstract void Disconnect();
 
         public event EventHandler<TaggerEventArgs>? Changed;

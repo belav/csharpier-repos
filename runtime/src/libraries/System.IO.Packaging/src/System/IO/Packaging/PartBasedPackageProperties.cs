@@ -38,7 +38,6 @@ namespace System.IO.Packaging
             // No matter what happens during initialization, the dirty flag should not be set.
             _dirty = false;
         }
-
         #endregion Constructors
 
         #region Public Properties
@@ -206,7 +205,6 @@ namespace System.IO.Packaging
             get { return (string?)GetPropertyValue(PackageXmlEnum.Identifier); }
             set { RecordNewBinding(PackageXmlEnum.Identifier, value); }
         }
-
         #endregion Public Properties
 
         #region Internal Methods
@@ -237,7 +235,6 @@ namespace System.IO.Packaging
         {
             Flush();
         }
-
         #endregion Internal Methods
 
         #region Private Methods
@@ -883,7 +880,6 @@ namespace System.IO.Packaging
             // Make sure we know it's closed.
             _xmlWriter = null;
         }
-
         #endregion Private Methods
 
         #region Private Fields

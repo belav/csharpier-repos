@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public class TagHelperRewritingTestBase : ParserTestBase

@@ -85,7 +85,9 @@ namespace System.Text.RegularExpressions.Symbolic
         public bool IsExtensional => true;
         public bool HashCodesRespectEquivalence => true;
         public CharSetSolver CharSetProvider => throw new NotSupportedException();
+
         public bool AreEquivalent(BV predicate1, BV predicate2) => predicate1.Equals(predicate2);
+
         public List<BV> GenerateMinterms(IEnumerable<BV> constraints) =>
             _mintermGenerator.GenerateMinterms(constraints);
 
@@ -176,6 +178,7 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         public BV[] GetMinterms() => _minterms;
+
         public IEnumerable<char> GenerateAllCharacters(BV set) => throw new NotSupportedException();
 
         /// <summary>Pretty print the bitvector bv as the character set it represents.</summary>

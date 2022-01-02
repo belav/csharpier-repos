@@ -289,6 +289,7 @@ namespace System.Security.Principal
         //
 
         private IdentifierAuthority _identifierAuthority;
+
         // values guaranteed to be non-null on account of CreateFromParts()
         // method called by every constructor in this class.
         private int[] _subAuthorities;
@@ -301,7 +302,6 @@ namespace System.Security.Principal
         //
 
         private string? _sddlForm;
-
         #endregion
 
         #region Constructors
@@ -690,7 +690,6 @@ namespace System.Security.Principal
         {
             CreateFromParts(identifierAuthority, subAuthorities);
         }
-
 #endregion
 
 #region Static Properties
@@ -700,7 +699,6 @@ namespace System.Security.Principal
         //
 
         internal static byte Revision => 1;
-
 #endregion
 
 #region Non-static Properties
@@ -739,7 +737,6 @@ namespace System.Security.Principal
                 return _accountDomainSid;
             }
         }
-
 #endregion
 
 #region Inherited properties and methods
@@ -891,7 +888,6 @@ namespace System.Security.Principal
                 );
             }
         }
-
 #endregion
 
 #region Operators
@@ -919,7 +915,6 @@ namespace System.Security.Principal
         {
             return !(left == right);
         }
-
 #endregion
 
 #region IComparable implementation
@@ -963,7 +958,6 @@ namespace System.Security.Principal
 
             return 0;
         }
-
 #endregion
 
 #region Public Methods

@@ -9,22 +9,27 @@ public class FakeInjectedCode
     {
         return 0;
     }
+
     static bool WrongReturnType(String argument)
     {
         return false;
     }
+
     static int Return0(String argument)
     {
         return 0;
     }
+
     static int Return1(String argument)
     {
         return 1;
     }
+
     static int ThrowAnything(String argument)
     {
         throw new Exception("Throwing something");
     }
+
     static int ParseArgument(String argument)
     {
         return int.Parse(argument);

@@ -62,19 +62,26 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected abstract int GetAssemblyRefIndex();
 
             protected abstract IEnumerable<TFieldSymbol> GetFieldsToEmit();
+
             protected abstract IEnumerable<TMethodSymbol> GetMethodsToEmit();
+
             protected abstract IEnumerable<TEventSymbol> GetEventsToEmit();
+
             protected abstract IEnumerable<TPropertySymbol> GetPropertiesToEmit();
+
             protected abstract bool IsPublic { get; }
             protected abstract bool IsAbstract { get; }
+
             protected abstract Cci.ITypeReference GetBaseClass(
                 TPEModuleBuilder moduleBuilder,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
             );
+
             protected abstract IEnumerable<Cci.TypeReferenceWithAttributes> GetInterfaces(
                 EmitContext context
             );
+
             protected abstract bool IsBeforeFieldInit { get; }
             protected abstract bool IsComImport { get; }
             protected abstract bool IsInterface { get; }
@@ -83,21 +90,27 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected abstract bool IsSpecialName { get; }
             protected abstract bool IsWindowsRuntimeImport { get; }
             protected abstract bool IsSealed { get; }
+
             protected abstract TypeLayout? GetTypeLayoutIfStruct();
+
             protected abstract System.Runtime.InteropServices.CharSet StringFormat { get; }
+
             protected abstract TAttributeData CreateTypeIdentifierAttribute(
                 bool hasGuid,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
             );
+
             protected abstract void EmbedDefaultMembers(
                 string defaultMember,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
             );
+
             protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(
                 TPEModuleBuilder moduleBuilder
             );
+
             protected abstract void ReportMissingAttribute(
                 AttributeDescription description,
                 TSyntaxNode syntaxNodeOpt,

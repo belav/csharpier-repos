@@ -80,24 +80,34 @@ namespace System.Net
 
         protected virtual void OnDownloadStringCompleted(DownloadStringCompletedEventArgs e) =>
             DownloadStringCompleted?.Invoke(this, e);
+
         protected virtual void OnDownloadDataCompleted(DownloadDataCompletedEventArgs e) =>
             DownloadDataCompleted?.Invoke(this, e);
+
         protected virtual void OnDownloadFileCompleted(AsyncCompletedEventArgs e) =>
             DownloadFileCompleted?.Invoke(this, e);
+
         protected virtual void OnDownloadProgressChanged(DownloadProgressChangedEventArgs e) =>
             DownloadProgressChanged?.Invoke(this, e);
+
         protected virtual void OnUploadStringCompleted(UploadStringCompletedEventArgs e) =>
             UploadStringCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadDataCompleted(UploadDataCompletedEventArgs e) =>
             UploadDataCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadFileCompleted(UploadFileCompletedEventArgs e) =>
             UploadFileCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadValuesCompleted(UploadValuesCompletedEventArgs e) =>
             UploadValuesCompleted?.Invoke(this, e);
+
         protected virtual void OnUploadProgressChanged(UploadProgressChangedEventArgs e) =>
             UploadProgressChanged?.Invoke(this, e);
+
         protected virtual void OnOpenReadCompleted(OpenReadCompletedEventArgs e) =>
             OpenReadCompleted?.Invoke(this, e);
+
         protected virtual void OnOpenWriteCompleted(OpenWriteCompletedEventArgs e) =>
             OpenWriteCompleted?.Invoke(this, e);
 
@@ -2480,42 +2490,52 @@ namespace System.Net
 
     #region Delegates and supporting *CompletedEventArgs classes used by event-based async code
     public delegate void OpenReadCompletedEventHandler(object sender, OpenReadCompletedEventArgs e);
+
     public delegate void OpenWriteCompletedEventHandler(
         object sender,
         OpenWriteCompletedEventArgs e
     );
+
     public delegate void DownloadStringCompletedEventHandler(
         object sender,
         DownloadStringCompletedEventArgs e
     );
+
     public delegate void DownloadDataCompletedEventHandler(
         object sender,
         DownloadDataCompletedEventArgs e
     );
+
     public delegate void UploadStringCompletedEventHandler(
         object sender,
         UploadStringCompletedEventArgs e
     );
+
     public delegate void UploadDataCompletedEventHandler(
         object sender,
         UploadDataCompletedEventArgs e
     );
+
     public delegate void UploadFileCompletedEventHandler(
         object sender,
         UploadFileCompletedEventArgs e
     );
+
     public delegate void UploadValuesCompletedEventHandler(
         object sender,
         UploadValuesCompletedEventArgs e
     );
+
     public delegate void DownloadProgressChangedEventHandler(
         object sender,
         DownloadProgressChangedEventArgs e
     );
+
     public delegate void UploadProgressChangedEventHandler(
         object sender,
         UploadProgressChangedEventArgs e
     );
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public delegate void WriteStreamClosedEventHandler(object sender, WriteStreamClosedEventArgs e);
 

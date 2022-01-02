@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest;
 
 internal static class WebDriverExtensions

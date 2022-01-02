@@ -41,6 +41,7 @@ class Driver
         loops--;
         return true;
     }
+
     static void MonitorEnterInALoop(int loops)
     {
         while (Ok(ref loops))
@@ -115,6 +116,7 @@ class Driver
             }
         }
     }
+
     static Tuple<Action<int>, string>[] available_tests = new[]
     {
         Tuple.Create(new Action<int>(MonitorEnterInALoop), "monitor"),

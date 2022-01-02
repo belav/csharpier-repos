@@ -13,6 +13,7 @@ using Microsoft.Extensions.FileProviders;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Hosting.Tests.StaticWebAssets;
 
 public class ManifestStaticWebAssetsFileProviderTest

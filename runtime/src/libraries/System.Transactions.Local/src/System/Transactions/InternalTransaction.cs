@@ -412,7 +412,6 @@ namespace System.Transactions
                 eventHandlers(args._transaction, args);
             }
         }
-
         #endregion
 
 

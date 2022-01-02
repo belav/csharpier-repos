@@ -2186,6 +2186,7 @@ namespace Microsoft.CodeAnalysis
             attributeCtor = GetMethodSymbolForMethodDefOrMemberRef(ctor, attributeClass);
             return true;
         }
+
 #nullable disable
 
         internal bool GetCustomAttributeWellKnownType(
@@ -2227,7 +2228,6 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
         }
-
         #endregion
 
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
@@ -2749,6 +2749,7 @@ namespace Microsoft.CodeAnalysis
             TypeDefinitionHandle,
             TypeSymbol
         > GetTypeHandleToTypeMap();
+
         protected abstract ConcurrentDictionary<
             TypeReferenceHandle,
             TypeSymbol
@@ -2769,6 +2770,7 @@ namespace Microsoft.CodeAnalysis
         );
 
         protected abstract TypeSymbol GetGenericTypeParamSymbol(int position);
+
         protected abstract TypeSymbol GetGenericMethodTypeParamSymbol(int position);
 
         private static TypedConstant CreateArrayTypedConstant(

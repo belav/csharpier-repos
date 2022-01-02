@@ -5,6 +5,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
 /// <summary>

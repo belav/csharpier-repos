@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 public class DefaultDocumentWriterTest

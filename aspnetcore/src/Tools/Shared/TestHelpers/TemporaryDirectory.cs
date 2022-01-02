@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace Microsoft.Extensions.Tools.Internal;
 
 public class TemporaryDirectory : IDisposable

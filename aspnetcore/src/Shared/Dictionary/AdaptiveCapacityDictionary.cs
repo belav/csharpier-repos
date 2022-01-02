@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 /// <summary>
@@ -541,6 +542,7 @@ internal class AdaptiveCapacityDictionary<TKey, TValue>
             _arrayStorage = array;
         }
     }
+
     private Span<KeyValuePair<TKey, TValue>> ArrayStorageSpan
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -604,6 +606,7 @@ internal class AdaptiveCapacityDictionary<TKey, TValue>
     {
         private readonly AdaptiveCapacityDictionary<TKey, TValue> _dictionary;
         private int _index;
+
         // Don't mark this as readonly
         private Dictionary<TKey, TValue>.Enumerator? _dictionaryEnumerator;
 

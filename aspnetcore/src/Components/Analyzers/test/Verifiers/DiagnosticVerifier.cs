@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Xunit;
 
+
 namespace TestHelper;
 
 /// <summary>
@@ -116,7 +117,6 @@ public abstract partial class DiagnosticVerifier
         var diagnostics = GetSortedDiagnostics(sources, language, analyzer);
         VerifyDiagnosticResults(diagnostics, analyzer, expected);
     }
-
     #endregion
 
     #region Actual comparisons and verifications

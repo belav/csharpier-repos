@@ -136,8 +136,10 @@ namespace System.Net.Http.Headers
         {
             /// <summary>The wrapped enumerator for the underlying headers dictionary.</summary>
             private Dictionary<HeaderDescriptor, object>.Enumerator _headerStoreEnumerator;
+
             /// <summary>The current value.</summary>
             private KeyValuePair<string, HeaderStringValues> _current;
+
             /// <summary>true if the enumerator was constructed via the ctor; otherwise, false./</summary>
             private bool _valid;
 

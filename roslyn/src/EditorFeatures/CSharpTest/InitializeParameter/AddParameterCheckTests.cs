@@ -1688,6 +1688,7 @@ class C
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInitializeParameter)]
         public async Task TestNotOnIndexerParameters()
         {

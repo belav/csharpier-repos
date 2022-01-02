@@ -32,6 +32,7 @@ namespace System.Data.ProviderBase
                 Owner = owner;
                 Completion = completion;
             }
+
             public long DueTime { get; private set; }
             public DbConnection Owner { get; private set; }
             public TaskCompletionSource<DbConnectionInternal> Completion { get; private set; }

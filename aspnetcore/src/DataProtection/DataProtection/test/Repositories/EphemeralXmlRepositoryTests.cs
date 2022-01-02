@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
 public class EphemeralXmlRepositoryTests

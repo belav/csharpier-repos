@@ -155,7 +155,6 @@ namespace Microsoft.CodeAnalysis
         public virtual bool IsTrivia => false;
         public virtual bool IsSkippedTokensTrivia => false;
         public virtual bool IsDocumentationCommentTrivia => false;
-
         #endregion
 
         #region Slots
@@ -273,7 +272,6 @@ namespace Microsoft.CodeAnalysis
 
             return i;
         }
-
         #endregion
 
         #region Flags
@@ -454,7 +452,6 @@ namespace Microsoft.CodeAnalysis
                 writer.WriteUInt16(kindBits);
             }
         }
-
         #endregion
 
         #region Annotations
@@ -596,7 +593,6 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal abstract GreenNode SetAnnotations(SyntaxAnnotation[]? annotations);
-
         #endregion
 
         #region Diagnostics
@@ -740,7 +736,6 @@ namespace Microsoft.CodeAnalysis
         {
             throw new NotImplementedException();
         }
-
         #endregion
 
         #region Tokens
@@ -749,18 +744,22 @@ namespace Microsoft.CodeAnalysis
         {
             get { return this.RawKind; }
         }
+
         public virtual object? GetValue()
         {
             return null;
         }
+
         public virtual string GetValueText()
         {
             return string.Empty;
         }
+
         public virtual GreenNode? GetLeadingTriviaCore()
         {
             return null;
         }
+
         public virtual GreenNode? GetTrailingTriviaCore()
         {
             return null;
@@ -917,6 +916,7 @@ namespace Microsoft.CodeAnalysis
 
         public abstract SyntaxToken CreateSeparator<TNode>(SyntaxNode element)
             where TNode : SyntaxNode;
+
         public abstract bool IsTriviaWithEndOfLine(); // trivia node has end of line
 
         /*
@@ -991,7 +991,6 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal abstract SyntaxNode CreateRed(SyntaxNode? parent, int position);
-
         #endregion
 
         #region Caching

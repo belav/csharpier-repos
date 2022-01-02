@@ -33,7 +33,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SetDataStored();
             }
         }
-
         #endregion
 
         #region SkipLocalsInitAttribute

@@ -88,7 +88,6 @@ namespace Newtonsoft.Json.Tests.Linq
                 "Could not convert string to integer: two. Path 'IntList[1]', line 1, position 20."
             );
         }
-
 #if !NET20
         [Test]
         public void YahooFinance()
@@ -846,7 +845,6 @@ namespace Newtonsoft.Json.Tests.Linq
                 "Error reading date. Unexpected token: StartArray. Path ''."
             );
         }
-
 #if !NET20
         [Test]
         public void ReadAsDateTimeOffset_InvalidToken()
@@ -946,7 +944,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(1d, reader.ReadAsDouble());
         }
-
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
         public void ReadAsBoolean_BigInteger_Success()
@@ -1002,7 +999,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual(null, reader.ReadAsDateTime());
         }
-
 #if !NET20
         [Test]
         public void ReadAsDateTimeOffset_Null_Success()

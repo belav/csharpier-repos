@@ -68,7 +68,6 @@ namespace System.Security.AccessControl
         internal const int GroupFoundAt = 8;
         internal const int SaclFoundAt = 12;
         internal const int DaclFoundAt = 16;
-
         #endregion
 
         #region Private Methods
@@ -98,13 +97,11 @@ namespace System.Security.AccessControl
                 + (binaryForm[offset + 3] << 24)
             );
         }
-
         #endregion
 
         #region Constructors
 
         internal GenericSecurityDescriptor() { }
-
         #endregion
 
         #region Protected Properties
@@ -123,7 +120,6 @@ namespace System.Security.AccessControl
                 return (GenericDacl is DiscretionaryAcl dacl) && dacl.EveryOneFullAccessForNullDacl;
             }
         }
-
         #endregion
 
         #region Public Properties
@@ -194,7 +190,6 @@ namespace System.Security.AccessControl
                 return result;
             }
         }
-
         #endregion
 
         #region Public Methods
@@ -440,7 +435,6 @@ namespace System.Security.AccessControl
         {
             get { return _dacl; }
         }
-
         #endregion
 
         #region Private methods
@@ -460,7 +454,6 @@ namespace System.Security.AccessControl
             DiscretionaryAcl = discretionaryAcl;
             ResourceManagerControl = 0;
         }
-
         #endregion
 
         #region Constructors
@@ -646,7 +639,6 @@ namespace System.Security.AccessControl
                 ResourceManagerControl = rmControl;
             }
         }
-
         #endregion
 
         #region Static Methods
@@ -730,7 +722,6 @@ namespace System.Security.AccessControl
 
             return binaryForm;
         }
-
         #endregion
 
         #region Public Properties
@@ -799,7 +790,6 @@ namespace System.Security.AccessControl
             get { return _rmControl; }
             set { _rmControl = value; }
         }
-
         #endregion
 
         #region Public Methods
@@ -825,7 +815,6 @@ namespace System.Security.AccessControl
         private RawSecurityDescriptor _rawSd;
         private SystemAcl? _sacl;
         private DiscretionaryAcl? _dacl;
-
         #endregion
 
         #region Private Methods
@@ -934,7 +923,6 @@ namespace System.Security.AccessControl
                 discretionaryAcl.RawAcl
             );
         }
-
         #endregion
 
         #region Constructors
@@ -1028,7 +1016,6 @@ namespace System.Security.AccessControl
 
         public CommonSecurityDescriptor(bool isContainer, bool isDS, byte[] binaryForm, int offset)
             : this(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset), true) { }
-
         #endregion
 
         #region Protected Properties
@@ -1042,7 +1029,6 @@ namespace System.Security.AccessControl
         {
             get { return _dacl; }
         }
-
         #endregion
 
         #region Public Properties
@@ -1188,7 +1174,6 @@ namespace System.Security.AccessControl
         {
             get { return (DiscretionaryAcl == null || DiscretionaryAcl.IsCanonical); }
         }
-
         #endregion
 
         #region Public Methods
@@ -1273,7 +1258,6 @@ namespace System.Security.AccessControl
             this.SystemAcl = new SystemAcl(this.IsContainer, this.IsDS, revision, trusted);
             this.AddControlFlags(ControlFlags.SystemAclPresent);
         }
-
         #endregion
 
         #region internal Methods

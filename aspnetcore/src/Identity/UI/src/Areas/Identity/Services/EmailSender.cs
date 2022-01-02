@@ -3,6 +3,7 @@
 
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Identity.UI.Services;
 
 internal class EmailSender : IEmailSender

@@ -20,6 +20,7 @@ using Microsoft.Net.Http.Headers;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
 public class NegotiateHandlerTests
@@ -380,6 +381,7 @@ public class NegotiateHandlerTests
         );
         Assert.Equal("A test other error occurred", ex.Message);
     }
+
     private static async Task AuthenticateAndRetrieveRBACClaims(
         TestServer server,
         TestConnection testConnection

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
 public class LocalApiDescriptorTests

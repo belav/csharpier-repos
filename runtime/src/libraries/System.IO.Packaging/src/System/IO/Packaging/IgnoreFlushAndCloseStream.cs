@@ -24,7 +24,6 @@ namespace System.IO.Packaging
 
             _stream = stream;
         }
-
         #endregion Constructor
 
         #region Properties
@@ -86,7 +85,6 @@ namespace System.IO.Packaging
                 _stream.Position = value;
             }
         }
-
         #endregion Properties
 
         #region Methods
@@ -178,7 +176,6 @@ namespace System.IO.Packaging
             if (_disposed)
                 throw new ObjectDisposedException(null, SR.StreamObjectDisposed);
         }
-
         #endregion Private Methods
 
         #region Private Variables

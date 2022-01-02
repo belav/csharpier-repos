@@ -34,6 +34,7 @@ namespace System
         // instantiating another generic type in addition to ArraySegment<T> for new type parameters.
 #pragma warning disable CA1825
         public static ArraySegment<T> Empty { get; } = new ArraySegment<T>(new T[0]);
+
 #pragma warning restore CA1825
 
         private readonly T[]? _array; // Do not rename (binary serialization)

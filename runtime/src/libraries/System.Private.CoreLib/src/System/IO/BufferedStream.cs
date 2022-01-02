@@ -55,6 +55,7 @@ namespace System.IO
         private int _readLen; // Number of bytes read in buffer from _stream.
         private int _writePos; // Write pointer within shared buffer.
         private Task<int>? _lastSyncCompletedReadTask; // The last successful Task returned from ReadAsync
+
         // (perf optimization for successive reads of the same size)
         // Removing a private default constructor is a breaking change for the DataDebugSerializer.
         // Because this ctor was here previously we need to keep it around.

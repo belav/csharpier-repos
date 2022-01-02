@@ -716,7 +716,9 @@ namespace System.IO.Tests
             }
 
             public bool InvokeRequired => true;
+
             public object EndInvoke(IAsyncResult result) => null;
+
             public object Invoke(Delegate method, object[] args) => null;
         }
     }

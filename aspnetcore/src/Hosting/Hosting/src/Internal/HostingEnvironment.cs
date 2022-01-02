@@ -3,7 +3,9 @@
 
 using Microsoft.Extensions.FileProviders;
 
+
 namespace Microsoft.AspNetCore.Hosting;
+
 #pragma warning disable CS0618 // Type or member is obsolete
 internal class HostingEnvironment
     : IHostingEnvironment,

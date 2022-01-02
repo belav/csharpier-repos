@@ -37,6 +37,7 @@ namespace System.Xml.Tests
         }
 
         private static Dictionary<EREADER_TYPE, string> s_fileNameMap = null;
+
         public static string GetTestFileName(EREADER_TYPE eReaderType)
         {
             if (s_fileNameMap == null)

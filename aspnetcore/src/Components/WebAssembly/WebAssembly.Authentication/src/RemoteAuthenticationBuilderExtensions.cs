@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

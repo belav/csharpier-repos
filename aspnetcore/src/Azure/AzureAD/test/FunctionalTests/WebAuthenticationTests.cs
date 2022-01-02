@@ -17,6 +17,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests;
 
 public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startup>>

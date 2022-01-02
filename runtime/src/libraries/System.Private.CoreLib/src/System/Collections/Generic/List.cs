@@ -29,6 +29,7 @@ namespace System.Collections.Generic
         private int _version; // Do not rename (binary serialization)
 #pragma warning disable CA1825 // avoid the extra generic instantiation for Array.Empty<T>()
         private static readonly T[] s_emptyArray = new T[0];
+
 #pragma warning restore CA1825
 
         // Constructs a List. The list is initially empty and has a capacity

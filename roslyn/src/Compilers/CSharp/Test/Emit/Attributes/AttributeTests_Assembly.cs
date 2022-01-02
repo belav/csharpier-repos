@@ -1731,7 +1731,6 @@ public class C {}
                 //Assert.Equal((uint)0, row.PublicKey);
             }
         }
-
         #endregion
 
         #region NetModule Assembly attribute tests
@@ -1851,7 +1850,6 @@ public class C {}
                 }
             );
         }
-
         #endregion
 
         [Fact]
@@ -2890,7 +2888,6 @@ System.Reflection.AssemblyTrademarkAttribute(""Roslyn"")
                 AssertEx.GetAssertMessage(expectedStr, actualStr)
             );
         }
-
         #endregion
 
         #region CompilationRelaxationsAttribute, RuntimeCompatibilityAttribute
@@ -3290,7 +3287,6 @@ public class C { }
 
             assembly.VerifyDiagnostics();
         }
-
         #endregion
 
         [Fact, WorkItem(530579, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530579")]

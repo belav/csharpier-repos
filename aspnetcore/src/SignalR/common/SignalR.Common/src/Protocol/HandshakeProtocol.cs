@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
 /// <summary>

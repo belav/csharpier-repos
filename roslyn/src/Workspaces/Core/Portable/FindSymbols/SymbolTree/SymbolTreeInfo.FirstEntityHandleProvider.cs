@@ -52,6 +52,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 TypeDefinitionHandle handle,
                 byte rawTypeKind
             ) => handle;
+
             public EntityHandle GetTypeFromReference(
                 MetadataReader reader,
                 TypeReferenceHandle handle,
@@ -71,11 +72,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 EntityHandle unmodifiedType,
                 bool isRequired
             ) => unmodifiedType;
+
             public EntityHandle GetPinnedType(EntityHandle elementType) => elementType;
+
             public EntityHandle GetArrayType(EntityHandle elementType, ArrayShape shape) =>
                 elementType;
+
             public EntityHandle GetByReferenceType(EntityHandle elementType) => elementType;
+
             public EntityHandle GetPointerType(EntityHandle elementType) => elementType;
+
             public EntityHandle GetSZArrayType(EntityHandle elementType) => elementType;
 
             // We'll never get function pointer types in any types we care about, so we can
@@ -83,8 +89,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // there is no need to provide anything for the generic parameter names.
             public EntityHandle GetFunctionPointerType(MethodSignature<EntityHandle> signature) =>
                 default;
+
             public EntityHandle GetGenericMethodParameter(object genericContext, int index) =>
                 default;
+
             public EntityHandle GetGenericTypeParameter(object genericContext, int index) =>
                 default;
 

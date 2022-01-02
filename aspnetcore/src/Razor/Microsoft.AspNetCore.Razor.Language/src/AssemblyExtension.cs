@@ -4,6 +4,7 @@
 using System;
 using System.Reflection;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class AssemblyExtension : RazorExtension

@@ -29,18 +29,23 @@ namespace Microsoft.CodeAnalysis.ConvertAutoPropertyToFullProperty
             IPropertySymbol propertySymbol,
             CancellationToken cancellationToken
         );
+
         internal abstract (SyntaxNode newGetAccessor, SyntaxNode newSetAccessor) GetNewAccessors(
             DocumentOptionSet options,
             SyntaxNode property,
             string fieldName,
             SyntaxGenerator generator
         );
+
         internal abstract SyntaxNode GetPropertyWithoutInitializer(SyntaxNode property);
+
         internal abstract SyntaxNode GetInitializerValue(SyntaxNode property);
+
         internal abstract SyntaxNode ConvertPropertyToExpressionBodyIfDesired(
             DocumentOptionSet options,
             SyntaxNode fullProperty
         );
+
         internal abstract SyntaxNode GetTypeBlock(SyntaxNode syntaxNode);
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)

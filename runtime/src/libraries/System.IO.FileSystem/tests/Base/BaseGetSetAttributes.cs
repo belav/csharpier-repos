@@ -8,6 +8,7 @@ namespace System.IO.Tests
     public abstract class BaseGetSetAttributes : FileSystemTest
     {
         protected abstract FileAttributes GetAttributes(string path);
+
         protected abstract void SetAttributes(string path, FileAttributes attributes);
 
         /// <summary>

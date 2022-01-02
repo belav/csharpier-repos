@@ -678,7 +678,6 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         protected internal override int LabelCount => (int)Label.Count;
 
         protected internal override int TiedToAncestor(int label) => TiedToAncestor((Label)label);
-
         #endregion
 
         #region Comparisons

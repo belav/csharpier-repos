@@ -7,6 +7,7 @@ public class Pair<T>
 public class RList<T>
 {
     public class Nil : RList<T> { }
+
     public class Zero : RList<T>
     {
         public RList<Pair<T>> arg;
@@ -19,6 +20,7 @@ public class RList<T>
         else
             return 0;
     }
+
     public int Length
     {
         get { return _Length(this); }

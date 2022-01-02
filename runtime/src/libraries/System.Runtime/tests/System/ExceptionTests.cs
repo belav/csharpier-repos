@@ -298,6 +298,7 @@ namespace System.Tests
                         eventArgs.AddSerializedState(null)
             );
         }
+
 #pragma warning restore SYSLIB0011
 
         [Fact]

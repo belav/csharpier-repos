@@ -7,6 +7,7 @@ using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 internal sealed class ClientErrorResultFilterFactory : IFilterFactory, IOrderedFilter

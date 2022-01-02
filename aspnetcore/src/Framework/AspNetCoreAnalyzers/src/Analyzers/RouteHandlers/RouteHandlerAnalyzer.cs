@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
+
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]

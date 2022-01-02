@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.StaticFiles;
 
 public class DefaultFilesMiddlewareTests

@@ -56,6 +56,7 @@ namespace System.Net.Quic.Implementations.MsQuic
             public MsQuicListener.State? ListenerState;
 
             public TaskCompletionSource<uint>? ConnectTcs;
+
             // TODO: only allocate these when there is an outstanding shutdown.
             public readonly TaskCompletionSource<uint> ShutdownTcs = new TaskCompletionSource<uint>(
                 TaskCreationOptions.RunContinuationsAsynchronously

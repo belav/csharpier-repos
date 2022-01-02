@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Configuration;
 
+
 namespace Microsoft.AspNetCore.Builder;
 
 internal sealed class TrackingChainedConfigurationSource : IConfigurationSource

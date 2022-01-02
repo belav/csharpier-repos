@@ -35,7 +35,6 @@ namespace System.Collections.Tests
         {
             return new HashSet<T>();
         }
-
         #endregion
 
         #region Constructors
@@ -160,7 +159,6 @@ namespace System.Collections.Tests
             HashSet<T> set = new HashSet<T>(enumerable, GetIEqualityComparer());
             Assert.True(set.SetEquals(enumerable));
         }
-
         #endregion
 
         #region RemoveWhere
@@ -220,7 +218,6 @@ namespace System.Collections.Tests
             HashSet<T> set = (HashSet<T>)GenericISetFactory(setLength);
             Assert.Throws<ArgumentNullException>(() => set.RemoveWhere(null));
         }
-
         #endregion
 
         #region TrimExcess
@@ -299,7 +296,6 @@ namespace System.Collections.Tests
                 Assert.Equal(setLength, set.Count);
             }
         }
-
         #endregion
 
         #region CopyTo
@@ -327,7 +323,6 @@ namespace System.Collections.Tests
             set.CopyTo(arr2, 0);
             Assert.True(arr1.SequenceEqual(arr2));
         }
-
         #endregion
 
         #region CreateSetComparer
@@ -409,7 +404,6 @@ namespace System.Collections.Tests
             Assert.True(noComparerSet.SequenceEqual(set, HashSet<T>.CreateSetComparer()));
             Assert.False(comparerSet.SequenceEqual(set));
         }
-
         #endregion
 
         [Fact]
@@ -562,7 +556,6 @@ namespace System.Collections.Tests
             Assert.False(set.TryGetValue(equalValue, out actualValue));
             Assert.Equal(default(T), actualValue);
         }
-
         #endregion
 
         #region EnsureCapacity
@@ -724,7 +717,6 @@ namespace System.Collections.Tests
             int newCapacity = set.EnsureCapacity(currentCapacity + 1);
             Assert.True(newCapacity > currentCapacity);
         }
-
         #endregion
 
         #region Remove
@@ -748,7 +740,6 @@ namespace System.Collections.Tests
             Assert.InRange(c.EqualsCalls, 1, int.MaxValue);
             Assert.InRange(c.GetHashCodeCalls, 1, int.MaxValue);
         }
-
         #endregion
 
         #region Serialization

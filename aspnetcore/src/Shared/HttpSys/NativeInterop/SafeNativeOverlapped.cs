@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 
+
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
 internal class SafeNativeOverlapped : SafeHandle

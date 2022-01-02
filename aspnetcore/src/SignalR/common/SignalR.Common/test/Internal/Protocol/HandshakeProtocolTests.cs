@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
 public class HandshakeProtocolTests

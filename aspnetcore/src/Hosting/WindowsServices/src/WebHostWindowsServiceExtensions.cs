@@ -3,6 +3,7 @@
 
 using System.ServiceProcess;
 
+
 namespace Microsoft.AspNetCore.Hosting.WindowsServices;
 
 /// <summary>

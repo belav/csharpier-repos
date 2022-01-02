@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>

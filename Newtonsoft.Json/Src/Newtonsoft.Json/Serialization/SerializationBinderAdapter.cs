@@ -32,6 +32,7 @@ namespace Newtonsoft.Json.Serialization
     {
 #pragma warning disable 618
         public readonly SerializationBinder SerializationBinder;
+
 #pragma warning restore 618
 
 #pragma warning disable 618
@@ -39,6 +40,7 @@ namespace Newtonsoft.Json.Serialization
         {
             SerializationBinder = serializationBinder;
         }
+
 #pragma warning restore 618
 
         public Type BindToType(string? assemblyName, string typeName)

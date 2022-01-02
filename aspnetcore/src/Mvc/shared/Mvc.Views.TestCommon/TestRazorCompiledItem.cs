@@ -4,6 +4,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
 public class TestRazorCompiledItem : RazorCompiledItem

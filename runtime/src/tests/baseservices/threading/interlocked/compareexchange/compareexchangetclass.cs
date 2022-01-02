@@ -44,7 +44,9 @@ public class ThreadSafe
     ManualResetEvent signal;
     public KrisClass Val = new KrisClass("hello world! ");
     private int numberOfIterations;
+
     public ThreadSafe() : this(100) { }
+
     public ThreadSafe(int loops)
     {
         signal = new ManualResetEvent(false);
@@ -90,6 +92,7 @@ public class ThreadSafe
 public class KrisClass
 {
     string retVal = string.Empty;
+
     public KrisClass(string setVal)
     {
         retVal = setVal;

@@ -63,6 +63,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             }
 
             protected abstract ImmutableArray<TEmbeddedParameter> GetParameters();
+
             protected abstract bool IsRuntimeSpecial { get; }
             protected abstract bool IsSpecialName { get; }
             protected abstract Cci.ISignature UnderlyingPropertySignature { get; }

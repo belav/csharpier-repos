@@ -20,7 +20,6 @@ namespace System.Data.OleDb
         NOINTERFACE = 5,
         MULTIPLESTORAGE = 6
     }
-
 #if false
     typedef struct tagDBPARAMBINDINFO {
         LPOLESTR pwszDataSourceType;
@@ -93,7 +92,6 @@ namespace System.Data.OleDb
         }
 #endif
     }
-
 #if false
     typedef struct tagDBBINDING {
         DBORDINAL iOrdinal;
@@ -160,7 +158,6 @@ namespace System.Data.OleDb
         }
 #endif
     }
-
 #if false
     typedef struct tagDBCOLUMNACCESS {
         void *pData;
@@ -192,7 +189,6 @@ namespace System.Data.OleDb
         internal byte bPrecision;
         internal byte bScale;
     }
-
 #if false
     typedef struct tagDBID {
     /* [switch_is][switch_type] */ union {
@@ -232,7 +228,6 @@ namespace System.Data.OleDb
         internal int eKind;
         internal IntPtr ulPropid;
     }
-
 #if false
     typedef struct tagDBLITERALINFO {
         LPOLESTR pwszLiteralValue;
@@ -267,7 +262,6 @@ namespace System.Data.OleDb
 
         internal tagDBLITERALINFO() { }
     }
-
 #if false
     typedef struct tagDBPROPSET {
         /* [size_is] */ DBPROP *rgProperties;
@@ -294,7 +288,6 @@ namespace System.Data.OleDb
             guidPropertySet = propertySet;
         }
     }
-
 #if false
     typedef struct tagDBPROP {
         DBPROPID dwPropertyID;
@@ -368,7 +361,6 @@ namespace System.Data.OleDb
             vValue = value;
         }
     }
-
 #if false
     typedef struct tagDBPARAMS {
         void *pData;
@@ -389,7 +381,6 @@ namespace System.Data.OleDb
 
         internal tagDBPARAMS() { }
     }
-
 #if false
     typedef struct tagDBCOLUMNINFO {
         LPOLESTR pwszName;
@@ -431,6 +422,7 @@ namespace System.Data.OleDb
         internal tagDBIDX columnid;
 
         internal tagDBCOLUMNINFO() { }
+
 #if DEBUG
         public override string ToString()
         {
@@ -449,7 +441,6 @@ namespace System.Data.OleDb
         }
 #endif
     }
-
 #if false
     typedef struct tagDBPROPINFOSET {
         /* [size_is] */ PDBPROPINFO rgPropertyInfos;
@@ -470,7 +461,6 @@ namespace System.Data.OleDb
 
         internal tagDBPROPINFOSET() { }
     }
-
 #if false
     typedef struct tagDBPROPINFO {
         LPOLESTR pwszDescription;
@@ -529,6 +519,7 @@ namespace System.Data.OleDb
         object? ItagDBPROPINFO.vValue => this.vValue;
 
         string? ItagDBPROPINFO.pwszDescription => this.pwszDescription;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string? pwszDescription;
 
@@ -542,7 +533,6 @@ namespace System.Data.OleDb
 
         internal tagDBPROPINFO() { }
     }
-
 #if false
     typedef struct tagDBPROPIDSET {
         /* [size_is] */ DBPROPID *rgPropertyIDs;

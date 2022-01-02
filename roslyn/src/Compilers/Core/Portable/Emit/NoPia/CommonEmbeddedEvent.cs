@@ -66,11 +66,13 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             protected abstract bool IsRuntimeSpecial { get; }
             protected abstract bool IsSpecialName { get; }
+
             protected abstract Cci.ITypeReference GetType(
                 TPEModuleBuilder moduleBuilder,
                 TSyntaxNode syntaxNodeOpt,
                 DiagnosticBag diagnostics
             );
+
             protected abstract TEmbeddedType ContainingType { get; }
             protected abstract Cci.TypeMemberVisibility Visibility { get; }
             protected abstract string Name { get; }

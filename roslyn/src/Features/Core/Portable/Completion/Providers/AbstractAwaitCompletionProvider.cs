@@ -68,11 +68,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             SyntaxNode potentialAwaitableExpression,
             CancellationToken cancellationToken
         );
+
         protected abstract SyntaxNode? GetExpressionToPlaceAwaitInFrontOf(
             SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken
         );
+
         protected abstract SyntaxToken? GetDotTokenLeftOfPosition(
             SyntaxTree syntaxTree,
             int position,

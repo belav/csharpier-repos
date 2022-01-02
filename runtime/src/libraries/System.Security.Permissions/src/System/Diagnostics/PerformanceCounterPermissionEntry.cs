@@ -10,6 +10,7 @@ namespace System.Diagnostics
             string machineName,
             string categoryName
         ) { }
+
         public string CategoryName
         {
             get { return null; }

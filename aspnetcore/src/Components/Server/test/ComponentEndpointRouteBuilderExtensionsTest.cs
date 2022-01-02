@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Tests;
 
 public class ComponentEndpointRouteBuilderExtensionsTest

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal sealed partial class GenericWebHostService : IHostedService
@@ -52,6 +53,7 @@ internal sealed partial class GenericWebHostService : IHostedService
     public GenericWebHostServiceOptions Options { get; }
     public IServer Server { get; }
     public ILogger Logger { get; }
+
     // Only for high level lifetime events
     public ILogger LifetimeLogger { get; }
     public DiagnosticListener DiagnosticListener { get; }

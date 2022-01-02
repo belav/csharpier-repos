@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public abstract class AuthorizationTests<TStartup, TContext>

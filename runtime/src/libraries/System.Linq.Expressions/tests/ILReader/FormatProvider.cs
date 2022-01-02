@@ -26,9 +26,13 @@ namespace System.Linq.Expressions.Tests
         public static readonly DefaultFormatProvider Instance = new DefaultFormatProvider();
 
         public virtual string Int32ToHex(int int32) => int32.ToString("X8");
+
         public virtual string Int16ToHex(int int16) => int16.ToString("X4");
+
         public virtual string Int8ToHex(int int8) => int8.ToString("X2");
+
         public virtual string Argument(int ordinal) => string.Format("V_{0}", ordinal);
+
         public virtual string Label(int offset) => string.Format("IL_{0:x4}", offset);
 
         public virtual string MultipleLabels(int[] offsets)

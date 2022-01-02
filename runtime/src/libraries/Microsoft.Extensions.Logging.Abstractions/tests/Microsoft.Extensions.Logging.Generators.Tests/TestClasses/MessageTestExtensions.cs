@@ -12,7 +12,6 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 
         [LoggerMessage(EventId = 1, Level = LogLevel.Debug, Message = "")]
         public static partial void M1(ILogger logger);
-
 #if false
         // Diagnostics produced by source generators do not respect the /warnAsError or /noWarn compiler flags.
         // Disabled due to https://github.com/dotnet/roslyn/issues/52527

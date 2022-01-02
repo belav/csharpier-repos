@@ -202,7 +202,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
             }
         }
-
         #endregion
 
         public static void SeedData(QueryFilterFuncletizationContext context)
@@ -323,7 +322,6 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         public int BossId => 1;
     }
-
     #endregion
 
     #region EntityTypes

@@ -255,10 +255,12 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             SyntaxToken token,
             [NotNullWhen(returnValue: true)] out SyntaxNode? found
         );
+
         protected abstract bool GetBindableNodeForTokenIndicatingPossibleIndexerAccess(
             SyntaxToken token,
             [NotNullWhen(returnValue: true)] out SyntaxNode? found
         );
+
         protected abstract bool GetBindableNodeForTokenIndicatingMemberAccess(
             SyntaxToken token,
             out SyntaxToken found

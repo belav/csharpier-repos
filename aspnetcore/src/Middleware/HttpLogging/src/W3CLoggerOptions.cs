@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 /// <summary>
@@ -17,6 +18,7 @@ public sealed class W3CLoggerOptions
     private string _fileName = "w3clog-";
     private string _logDirectory = "";
     private TimeSpan _flushInterval = TimeSpan.FromSeconds(1);
+
     // Update the MaxFilesReached log message in FileLoggerProcessor if this value changes.
     internal const int MaxFileCount = 10000;
 

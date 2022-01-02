@@ -836,6 +836,7 @@ namespace System.Runtime.Serialization
             private bool _isISerializable;
             private bool _isKnownTypeAttributeChecked;
             private bool _isMethodChecked;
+
             /// <SecurityNote>
             /// in serialization/deserialization we base the decision whether to Demand SerializationFormatter permission on this value and hasDataContract
             /// </SecurityNote>
@@ -1975,6 +1976,7 @@ namespace System.Runtime.Serialization
                     this.ns = ns;
                     this.baseTypeIndex = baseTypeIndex;
                 }
+
                 internal DataMember member;
                 internal string ns;
                 internal int baseTypeIndex;

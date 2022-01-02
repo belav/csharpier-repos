@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace AuthSamples.PathSchemeSelection.Models;
 
 public class ErrorViewModel

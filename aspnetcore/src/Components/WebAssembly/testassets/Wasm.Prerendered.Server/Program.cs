@@ -3,6 +3,7 @@
 
 using System.Collections;
 
+
 namespace Wasm.Prerendered.Server;
 
 public class Program

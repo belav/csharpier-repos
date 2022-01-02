@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
@@ -136,6 +137,7 @@ internal sealed class ReferenceReadStream : Stream
     {
         throw new NotSupportedException();
     }
+
     public override Task WriteAsync(
         byte[] buffer,
         int offset,

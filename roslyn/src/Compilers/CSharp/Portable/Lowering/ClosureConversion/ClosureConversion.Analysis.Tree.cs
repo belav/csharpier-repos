@@ -620,6 +620,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _currentFunction = oldFunction;
                     return result;
                 }
+
 #nullable disable
 
                 private void AddIfCaptured(Symbol symbol, SyntaxNode syntax)

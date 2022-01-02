@@ -26,6 +26,7 @@ namespace System.Speech.Internal.Synthesis
         {
             Dispose(false);
         }
+
         public void Dispose()
         {
             Dispose(true);
@@ -46,7 +47,6 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
         }
-
         #endregion
 
         #region Internal Methods
@@ -58,7 +58,6 @@ namespace System.Speech.Internal.Synthesis
                 _gcHandle.Free();
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -85,7 +84,6 @@ namespace System.Speech.Internal.Synthesis
         {
             get { return Marshal.SizeOf(_waveHdr); }
         }
-
         #endregion
 
         #region Internal Fields
@@ -96,24 +94,28 @@ namespace System.Speech.Internal.Synthesis
         /// and is returning it to the application.
         /// </summary>
         internal const int WHDR_DONE = 0x00000001;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// Set by Windows to indicate that the buffer has been prepared with the
         /// waveInPrepareHeader or waveOutPrepareHeader function.
         /// </summary>
         internal const int WHDR_PREPARED = 0x00000002;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// This buffer is the first buffer in a loop. This flag is used only with
         /// output buffers.
         /// </summary>
         internal const int WHDR_BEGINLOOP = 0x00000004;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// This buffer is the last buffer in a loop. This flag is used only with
         /// output buffers.
         /// </summary>
         internal const int WHDR_ENDLOOP = 0x00000008;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// Set by Windows to indicate that the buffer is queued for playback.
@@ -124,7 +126,6 @@ namespace System.Speech.Internal.Synthesis
         /// Set in WaveFormat.wFormatTag to specify PCM data.
         /// </summary>
         internal const int WAVE_FORMAT_PCM = 1;
-
         #endregion
 
         #region private Fields

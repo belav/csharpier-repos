@@ -6,6 +6,7 @@ using BasicWebSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class ProducesWithMediaTypeParametersController : Controller

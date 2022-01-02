@@ -17,11 +17,13 @@ using Microsoft.AspNetCore.HttpSys.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal sealed class Request
 {
     private X509Certificate2? _clientCert;
+
     // TODO: https://github.com/aspnet/HttpSysServer/issues/231
     // private byte[] _providedTokenBindingId;
     // private byte[] _referredTokenBindingId;
@@ -426,6 +428,7 @@ internal sealed class Request
         }
         return _clientCert;
     }
+
     /* TODO: https://github.com/aspnet/WebListener/issues/231
     private byte[] GetProvidedTokenBindingId()
     {

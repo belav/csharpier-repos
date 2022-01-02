@@ -29,6 +29,7 @@ public class TypeGetHashCode
             return 0;
         }
     }
+
     public bool RunTests()
     {
         bool retVal = true;
@@ -37,6 +38,7 @@ public class TypeGetHashCode
         retVal = PosTest2() && retVal;
         return retVal;
     }
+
     #region PositiveTest
     public bool PosTest1()
     {
@@ -66,6 +68,7 @@ public class TypeGetHashCode
         }
         return retVal;
     }
+
     public bool PosTest2()
     {
         bool retVal = true;
@@ -102,15 +105,18 @@ public class TypeGetHashCode
     public class testClass : Object
     {
         int hashCode;
+
         public testClass(int intA)
         {
             hashCode = intA;
         }
+
         public override int GetHashCode()
         {
             return hashCode;
         }
     }
+
     public class Base : Object { }
     #endregion
 

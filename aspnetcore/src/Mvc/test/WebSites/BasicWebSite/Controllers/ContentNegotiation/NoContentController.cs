@@ -4,6 +4,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class NoContentController : Controller

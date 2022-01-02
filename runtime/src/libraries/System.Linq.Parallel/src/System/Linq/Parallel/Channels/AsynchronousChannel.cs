@@ -258,6 +258,7 @@ namespace System.Linq.Parallel
                 }
             }
         }
+
         //-----------------------------------------------------------------------------------
         // Enqueues a new element to the buffer, possibly blocking in the process.
         //

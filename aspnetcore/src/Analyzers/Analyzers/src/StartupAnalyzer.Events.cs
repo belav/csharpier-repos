@@ -5,6 +5,7 @@ using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
+
 namespace Microsoft.AspNetCore.Analyzers;
 
 // Events for testability. Allows us to unit test the data we gather from analysis.

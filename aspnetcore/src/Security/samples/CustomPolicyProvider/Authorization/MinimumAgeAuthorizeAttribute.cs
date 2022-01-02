@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace CustomPolicyProvider;
 
 // This attribute derives from the [Authorize] attribute, adding

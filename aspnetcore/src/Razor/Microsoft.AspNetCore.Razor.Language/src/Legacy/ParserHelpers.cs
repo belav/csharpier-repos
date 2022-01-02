@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal static class ParserHelpers

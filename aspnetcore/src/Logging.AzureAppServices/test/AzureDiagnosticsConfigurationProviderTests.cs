@@ -6,6 +6,7 @@ using System.IO;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
 public class AzureDiagnosticsConfigurationProviderTests

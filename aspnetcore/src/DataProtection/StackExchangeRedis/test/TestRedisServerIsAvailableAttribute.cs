@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Testing;
 using System;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 internal class TestRedisServerIsAvailableAttribute : Attribute, ITestCondition

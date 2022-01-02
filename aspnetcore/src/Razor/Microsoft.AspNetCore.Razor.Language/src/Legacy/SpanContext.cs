@@ -4,6 +4,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class SpanContext

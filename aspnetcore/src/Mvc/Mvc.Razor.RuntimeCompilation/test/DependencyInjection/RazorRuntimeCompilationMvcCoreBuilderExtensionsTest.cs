@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.AspNetCore.Routing;
 using Xunit;
 
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public class RazorRuntimeCompilationMvcCoreBuilderExtensionsTest

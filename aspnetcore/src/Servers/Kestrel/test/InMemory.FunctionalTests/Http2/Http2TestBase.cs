@@ -26,6 +26,7 @@ using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, IHttpHeadersHandler

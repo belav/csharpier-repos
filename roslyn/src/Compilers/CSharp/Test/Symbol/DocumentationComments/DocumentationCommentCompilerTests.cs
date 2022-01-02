@@ -308,7 +308,6 @@ public class C { }
 ".Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Single-line style
 
         #region Multi-line style
@@ -736,7 +735,6 @@ public class Point
 ".Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Multi-line style
 
         #region Partial types
@@ -863,7 +861,6 @@ public partial class C { }
 ".Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Partial types
 
         #region Partial methods
@@ -1659,7 +1656,6 @@ partial class C
                 AssertEx.Equal(expected, actual);
             }
         }
-
         #endregion Partial methods
 
         #region Crefs
@@ -1743,7 +1739,6 @@ public class D { }
 ".Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Crefs
 
         #region Output name
@@ -1805,7 +1800,6 @@ public class C
 ".Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Output name
 
         #region WRN_UnprocessedXMLComment
@@ -2746,7 +2740,6 @@ class MyClass
                 return newToken.WithLeadingTrivia(existingLeadingTrivia.Concat(newLeadingTrivia));
             }
         }
-
         #endregion WRN_UnprocessedXMLComment
 
         #region Invalid XML
@@ -2975,7 +2968,6 @@ class C4 {{ }}
                         )
                 );
         }
-
         #endregion Invalid XML
 
         #region Include
@@ -4382,7 +4374,6 @@ class A<T>
             ).Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Included crefs
 
         #region Included names
@@ -5059,7 +5050,6 @@ class OuterClass<X>
             ).Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Included names
 
         #endregion Include
@@ -5162,7 +5152,6 @@ class C
                 Assert.Equal(string.Format(expectedTextTemplate, xmlFilePath), actualText);
             }
         }
-
         #endregion
 
         #region Misc
@@ -7140,7 +7129,6 @@ class C<T>
 ".Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Misc
 
         #region Dev11 bugs
@@ -7500,7 +7488,6 @@ class C { }
                         .WithLocation(1, 1)
                 );
         }
-
         #endregion Dev11 bugs
 
         #region Dev10 bugs
@@ -7672,7 +7659,6 @@ class Module1
 ".Trim();
             Assert.Equal(expected, actual);
         }
-
         #endregion Dev10 bugs
 
         [ClrOnlyFact]

@@ -20,7 +20,6 @@ namespace System.Collections.Tests
 
         protected override Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         #region LinkedList<T> Helper Methods
@@ -599,7 +598,6 @@ namespace System.Collections.Tests
             InitialItems_Tests(linkedList, expected);
             linkedList.RemoveLast();
         }
-
         #endregion
 
         #region Constructor_IEnumerable

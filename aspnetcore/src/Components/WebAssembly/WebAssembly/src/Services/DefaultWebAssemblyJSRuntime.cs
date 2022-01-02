@@ -14,6 +14,7 @@ using Microsoft.JSInterop;
 using Microsoft.JSInterop.Infrastructure;
 using Microsoft.JSInterop.WebAssembly;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 internal sealed class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime

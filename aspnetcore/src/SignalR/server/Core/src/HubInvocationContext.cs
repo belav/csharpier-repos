@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.Internal;
 
+
 namespace Microsoft.AspNetCore.SignalR;
 
 /// <summary>

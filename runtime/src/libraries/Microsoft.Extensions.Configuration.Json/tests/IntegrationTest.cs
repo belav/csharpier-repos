@@ -101,6 +101,7 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
         private static string GetString(IConfigurationSection configurationSection) =>
             GetString(configurationSection.Key, configurationSection.Value);
+
         private static string GetString(string key, string value) =>
             $"\"{key}\":" + (value is null ? "null" : $"\"{value}\"");
     }

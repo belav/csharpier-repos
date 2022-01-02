@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
+
 namespace Swaggatherer;
 
 internal static class Template

@@ -3,6 +3,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
+
 namespace HealthChecksSample;
 
 public class MyContext : DbContext

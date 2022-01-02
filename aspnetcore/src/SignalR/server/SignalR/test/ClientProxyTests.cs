@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SignalR.Internal;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class ClientHubProxyTests

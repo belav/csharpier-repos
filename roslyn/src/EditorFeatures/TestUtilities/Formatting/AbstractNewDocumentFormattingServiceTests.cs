@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
     public abstract class AbstractNewDocumentFormattingServiceTests
     {
         protected abstract string Language { get; }
+
         protected abstract TestWorkspace CreateTestWorkspace(
             string testCode,
             ParseOptions? parseOptions

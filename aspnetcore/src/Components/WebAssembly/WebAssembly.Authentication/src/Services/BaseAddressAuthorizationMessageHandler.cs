@@ -3,6 +3,7 @@
 
 using System.Net.Http;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>

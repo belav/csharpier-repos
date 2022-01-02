@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public class MetadataAttributeTargetExtensionTest

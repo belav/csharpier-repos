@@ -23,7 +23,6 @@ namespace System.Threading
         //   - Bit 0: 1 if the lock is locked, 0 otherwise
         //   - Remaining bits: Number of threads waiting to acquire a lock
         private int _state;
-
 #if DEBUG
         private Thread? _ownerThread;
 #endif

@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
@@ -490,7 +491,6 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
         RunTimeTest();
     }
-
     #endregion
 
     #region DesignTime
@@ -979,7 +979,6 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
         DesignTimeTest();
     }
-
     #endregion
 
     private void DesignTimeTest()

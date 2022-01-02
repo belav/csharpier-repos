@@ -11,6 +11,7 @@ namespace System.Security.Cryptography.Rsa.Tests
     {
         protected override byte[] Encrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding) =>
             rsa.Encrypt(data, padding);
+
         protected override byte[] Decrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding) =>
             rsa.Decrypt(data, padding);
 
@@ -37,6 +38,7 @@ namespace System.Security.Cryptography.Rsa.Tests
         public static bool SupportsSha2Oaep => RSAFactory.SupportsSha2Oaep;
 
         protected abstract byte[] Encrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding);
+
         protected abstract byte[] Decrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding);
 
         [Fact]

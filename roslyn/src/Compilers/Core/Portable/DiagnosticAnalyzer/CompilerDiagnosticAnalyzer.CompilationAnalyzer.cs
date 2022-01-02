@@ -122,6 +122,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
 #pragma warning disable RS0013 // we are delegating so it is okay here
                 public override DiagnosticDescriptor Descriptor => _original.Descriptor;
+
 #pragma warning restore RS0013
 
                 internal override int Code => _original.Code;

@@ -108,7 +108,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// </summary>
         protected virtual Type ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowType =>
             typeof(ArgumentException);
-
         #endregion
 
         #region IEnumerable Helper Methods
@@ -119,7 +118,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override IEnumerable NonGenericIEnumerableFactory(int count) =>
             NonGenericICollectionFactory(count);
-
         #endregion
 
         #region Count
@@ -131,7 +129,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ICollection collection = NonGenericICollectionFactory(count);
             Assert.Equal(count, collection.Count);
         }
-
         #endregion
 
         #region IsSynchronized
@@ -143,7 +140,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ICollection collection = NonGenericICollectionFactory(count);
             Assert.Equal(ExpectedIsSynchronized, collection.IsSynchronized);
         }
-
         #endregion
 
         #region SyncRoot
@@ -175,7 +171,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.NotSame(collection1.SyncRoot, collection2.SyncRoot);
             }
         }
-
         #endregion
 
         #region CopyTo

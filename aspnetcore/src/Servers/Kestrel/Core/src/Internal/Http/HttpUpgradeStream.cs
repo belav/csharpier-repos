@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal sealed class HttpUpgradeStream : Stream

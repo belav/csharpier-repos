@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
 /// <summary>

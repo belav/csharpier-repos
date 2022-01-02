@@ -166,6 +166,7 @@ namespace Microsoft.CodeAnalysis
                 int end,
                 bool hasEmbeddedQuote
             );
+
             protected abstract TStringResult? CreateNullForString();
 
             private void EatDoubleQuote() => Eat(DoubleQuoteChar);
@@ -530,7 +531,6 @@ namespace Microsoft.CodeAnalysis
                 failureReason = null;
                 return result;
             }
-
             #endregion
 
             #region Strings
@@ -547,7 +547,6 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected override string? CreateNullForString() => null;
-
             #endregion
 
             #region Locations

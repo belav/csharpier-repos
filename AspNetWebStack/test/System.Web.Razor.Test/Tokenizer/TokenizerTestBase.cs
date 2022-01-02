@@ -15,6 +15,7 @@ namespace System.Web.Razor.Test.Tokenizer
         where TSymbol : SymbolBase<TSymbolType>
     {
         protected abstract TSymbol IgnoreRemaining { get; }
+
         protected abstract Tokenizer<TSymbol, TSymbolType> CreateTokenizer(ITextDocument source);
 
         protected void TestTokenizer(string input, params TSymbol[] expectedSymbols)

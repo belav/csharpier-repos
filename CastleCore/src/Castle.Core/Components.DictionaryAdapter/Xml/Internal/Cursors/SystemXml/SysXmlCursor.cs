@@ -359,6 +359,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         }
 
         public override event EventHandler Realized;
+
         protected virtual void OnRealized()
         {
             if (Realized != null)

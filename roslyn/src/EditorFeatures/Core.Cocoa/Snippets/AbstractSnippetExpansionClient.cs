@@ -56,6 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             XElement xmlFunctionNode,
             string fieldName
         );
+
         protected abstract ITrackingSpan? InsertEmptyCommentAndGetEndPositionTrackingSpan();
 
         public void FormatSpan(SnapshotSpan span)

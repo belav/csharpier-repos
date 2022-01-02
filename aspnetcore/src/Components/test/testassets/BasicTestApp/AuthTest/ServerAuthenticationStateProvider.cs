@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
+
 namespace BasicTestApp.AuthTest;
 
 // This is intended to be similar to the authentication stateprovider included by default

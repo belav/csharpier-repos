@@ -134,7 +134,6 @@ namespace System.Linq.Expressions.Tests
             UnaryExpression e = Expression.NegateChecked(Expression.Parameter(typeof(int), "x"));
             Assert.Equal("-x", e.ToString());
         }
-
         #endregion
 
         #region Test verifiers

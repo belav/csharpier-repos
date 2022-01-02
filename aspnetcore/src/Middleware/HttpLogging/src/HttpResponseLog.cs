@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 internal sealed class HttpResponseLog : IReadOnlyList<KeyValuePair<string, object?>>

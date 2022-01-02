@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 
+
 namespace Microsoft.Extensions.Tools.Internal;
 
 /// <summary>
@@ -49,6 +50,7 @@ public class ConsoleReporter : IReporter
 
     public virtual void Error(string message) =>
         WriteLine(Console.Error, message, ConsoleColor.Red);
+
     public virtual void Warn(string message) =>
         WriteLine(Console.Out, message, ConsoleColor.Yellow);
 

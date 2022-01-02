@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.SpaServices.Extensions.Proxy;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+
 namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>

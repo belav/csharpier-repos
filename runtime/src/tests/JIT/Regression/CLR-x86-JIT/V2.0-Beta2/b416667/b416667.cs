@@ -3,9 +3,11 @@
 //
 
 using System;
+
 public class CMain
 {
     public static int Count = 0;
+
     public static int Main(String[] args)
     {
         String s;
@@ -27,6 +29,7 @@ public class CMain
 public class Gen<T>
 {
     public static T x;
+
     static Gen()
     {
         CMain.Count++;

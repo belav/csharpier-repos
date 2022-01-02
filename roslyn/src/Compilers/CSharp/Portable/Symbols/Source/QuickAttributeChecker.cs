@@ -25,7 +25,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly Dictionary<string, QuickAttributes> _nameToAttributeMap;
         private static QuickAttributeChecker _lazyPredefinedQuickAttributeChecker;
-
 #if DEBUG
         private bool _sealed;
 #endif

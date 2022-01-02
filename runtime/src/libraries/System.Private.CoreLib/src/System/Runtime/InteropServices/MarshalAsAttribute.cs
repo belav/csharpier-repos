@@ -13,6 +13,7 @@ namespace System.Runtime.InteropServices
         {
             Value = unmanagedType;
         }
+
         public MarshalAsAttribute(short unmanagedType)
         {
             Value = (UnmanagedType)unmanagedType;

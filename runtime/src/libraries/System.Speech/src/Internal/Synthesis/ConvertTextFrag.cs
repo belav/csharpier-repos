@@ -154,7 +154,6 @@ namespace System.Speech.Internal.Synthesis
             sapiFrag.gcText.Free();
             fragment.Free();
         }
-
         #endregion
 
         #region Private Methods
@@ -386,7 +385,6 @@ namespace System.Speech.Internal.Synthesis
             }
             return rate;
         }
-
         #endregion
 
         #region Private Methods

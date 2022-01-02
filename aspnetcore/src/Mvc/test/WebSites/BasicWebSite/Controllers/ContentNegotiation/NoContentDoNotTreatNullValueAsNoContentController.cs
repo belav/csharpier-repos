@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class NoContentDoNotTreatNullValueAsNoContentController : Controller

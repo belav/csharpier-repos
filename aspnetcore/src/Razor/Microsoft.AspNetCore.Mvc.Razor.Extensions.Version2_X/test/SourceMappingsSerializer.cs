@@ -5,6 +5,7 @@ using System;
 using System.Text;
 using Microsoft.AspNetCore.Razor.Language;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public static class SourceMappingsSerializer

@@ -85,7 +85,6 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.AreEqual(TimeSpan.FromHours(1), dateTimeOffset.Offset);
             }
         }
-
 #if !PORTABLE
 
 #endif

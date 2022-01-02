@@ -958,7 +958,6 @@ namespace System.Xml.Tests
             0xA4,
             0xD7
         };
-
         #endregion
 
         #region Public Methods and Operators

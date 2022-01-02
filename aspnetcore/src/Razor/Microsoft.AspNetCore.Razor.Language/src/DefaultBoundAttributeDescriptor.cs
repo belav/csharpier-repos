@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal sealed class DefaultBoundAttributeDescriptor : BoundAttributeDescriptor

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json.Serialization;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class MethodHub : TestHub
@@ -828,8 +829,10 @@ public class StreamingHub : TestHub
         {
             /// <summary>The channel being enumerated.</summary>
             private readonly ChannelReader<T> _channel;
+
             /// <summary>Cancellation token used to cancel the enumeration.</summary>
             private readonly CancellationToken _cancellationToken;
+
             /// <summary>The current element of the enumeration.</summary>
             private T _current;
 

@@ -705,7 +705,6 @@ namespace System.Linq.Expressions
             return new ScopeWithType(ReuseOrValidateVariables(variables), args, Type);
         }
     }
-
     #endregion
 
     #region Block List Classes
@@ -777,7 +776,6 @@ namespace System.Linq.Expressions
             [ExcludeFromCodeCoverage(Justification = "Unreachable")]
             set { throw ContractUtils.Unreachable; }
         }
-
         #endregion
 
         #region ICollection<Expression> Members
@@ -834,7 +832,6 @@ namespace System.Linq.Expressions
         {
             throw ContractUtils.Unreachable;
         }
-
         #endregion
 
         #region IEnumerable<Expression> Members
@@ -848,7 +845,6 @@ namespace System.Linq.Expressions
                 yield return _block.GetExpression(i);
             }
         }
-
         #endregion
 
         #region IEnumerable Members
@@ -860,7 +856,6 @@ namespace System.Linq.Expressions
 
         #endregion
     }
-
     #endregion
 
     public partial class Expression

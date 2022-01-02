@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class StreamSourceDocumentTest

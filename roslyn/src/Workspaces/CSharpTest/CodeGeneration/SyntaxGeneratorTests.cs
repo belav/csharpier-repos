@@ -3450,7 +3450,6 @@ public class C { } // end"
 }"
             );
         }
-
         #endregion
 
         #region Add/Insert/Remove/Get declarations & members/elements
@@ -7312,7 +7311,6 @@ public class C : IDisposable
                 .ToFullString();
             Assert.Equal(expected, elasticOnlyFormatted);
         }
-
         #endregion
 
         #region DeclarationModifiers

@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class PropertyActivatorTest

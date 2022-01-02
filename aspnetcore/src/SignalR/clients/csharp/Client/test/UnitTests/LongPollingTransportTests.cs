@@ -19,6 +19,7 @@ using Moq;
 using Moq.Protected;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public class LongPollingTransportTests : VerifiableLoggedTest

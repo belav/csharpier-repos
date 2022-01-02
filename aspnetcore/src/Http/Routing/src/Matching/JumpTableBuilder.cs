@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
+
 namespace Microsoft.AspNetCore.Routing.Matching;
 
 internal static class JumpTableBuilder

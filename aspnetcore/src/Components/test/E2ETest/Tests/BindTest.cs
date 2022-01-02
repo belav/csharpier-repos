@@ -15,6 +15,7 @@ using OpenQA.Selenium.Support.UI;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>

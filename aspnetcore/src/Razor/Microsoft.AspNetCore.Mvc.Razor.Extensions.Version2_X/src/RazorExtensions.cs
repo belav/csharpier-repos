@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Razor;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public static class RazorExtensions

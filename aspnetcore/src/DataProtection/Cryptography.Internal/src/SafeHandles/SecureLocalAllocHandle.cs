@@ -5,6 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Runtime.ConstrainedExecution;
 
+
 namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 /// <summary>

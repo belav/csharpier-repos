@@ -144,6 +144,7 @@ namespace System.Xml
                     return false;
             }
         }
+
         internal override bool CanInsertAfter(XmlNode newChild, XmlNode? refChild)
         {
             Debug.Assert(newChild != null); //should be checked that newChild is not null before this function call

@@ -4078,7 +4078,6 @@ Block[B2] - Exit
                 expectedDiagnostics
             );
         }
-
         #endregion
 
         #region Explicit Conversion

@@ -6,6 +6,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
 /// <summary>

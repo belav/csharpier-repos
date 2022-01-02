@@ -56,7 +56,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 .Where(s => !arity.HasValue || arity == s.GetSymbol().GetMemberArity())
                 .ToList();
         }
-
         #endregion helpers
 
         #region tests
@@ -1675,7 +1674,6 @@ class C
                         .WithLocation(1, 1)
                 );
         }
-
         #endregion tests
 
         #region regressions

@@ -137,7 +137,6 @@ namespace System.Runtime.InteropServices.JavaScript
 
             return (IntPtr)jsHandle;
         }
-
         #endregion
 
 

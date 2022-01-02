@@ -7,6 +7,7 @@ using Moq;
 using Moq.Protected;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class DefaultHubActivatorTests

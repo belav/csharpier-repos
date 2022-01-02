@@ -40,6 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         public static Type Quote1(Expression<Action> e) => e.Body.Type;
+
         public static Type Quote2(Expression<Func<object>> e) => e.Body.Type;
 
         [Theory, ClassData(typeof(CompilationTypes))]

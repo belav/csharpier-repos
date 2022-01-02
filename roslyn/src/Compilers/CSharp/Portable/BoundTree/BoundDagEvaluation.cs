@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is BoundDagEvaluation other && this.Equals(other);
+
         public virtual bool Equals(BoundDagEvaluation other)
         {
             return this == other
@@ -19,6 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && this.Input.Equals(other.Input)
                     && this.Symbol.Equals(other.Symbol, TypeCompareKind.AllIgnoreOptions);
         }
+
         private Symbol Symbol
         {
             get
@@ -86,6 +88,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     partial class BoundDagIndexEvaluation
     {
         public override int GetHashCode() => base.GetHashCode() ^ this.Index;
+
         public override bool Equals(BoundDagEvaluation obj)
         {
             return this == obj

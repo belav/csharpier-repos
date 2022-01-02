@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Rewrite.Logging;
 
+
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
 internal class AbortAction : UrlAction

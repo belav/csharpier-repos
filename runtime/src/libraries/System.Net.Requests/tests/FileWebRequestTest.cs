@@ -90,6 +90,7 @@ namespace System.Net.Tests
     public abstract class FileWebRequestTestBase
     {
         public abstract Task<WebResponse> GetResponseAsync(WebRequest request);
+
         public abstract Task<Stream> GetRequestStreamAsync(WebRequest request);
 
         [Fact]
@@ -276,6 +277,7 @@ namespace System.Net.Tests
     {
         public override Task<WebResponse> GetResponseAsync(WebRequest request) =>
             Task.Run(() => request.GetResponse());
+
         public override Task<Stream> GetRequestStreamAsync(WebRequest request) =>
             Task.Run(() => request.GetRequestStream());
     }

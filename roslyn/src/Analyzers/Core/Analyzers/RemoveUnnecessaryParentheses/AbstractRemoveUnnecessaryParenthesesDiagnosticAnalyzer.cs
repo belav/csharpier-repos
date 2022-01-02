@@ -39,6 +39,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
             ) { }
 
         protected abstract TLanguageKindEnum GetSyntaxKind();
+
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
         public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>

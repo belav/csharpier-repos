@@ -406,6 +406,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
             return principal.EntityType.IsDocumentRoot() ? principal : GetRootDocument(principal);
         }
+
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         private Exception WrapUpdateException(Exception exception, IUpdateEntry entry)

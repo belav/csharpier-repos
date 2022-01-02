@@ -408,6 +408,7 @@ namespace System.Data.SqlTypes
 
             return ulValue;
         }
+
         // For hashing purpose
         public override int GetHashCode()
         {

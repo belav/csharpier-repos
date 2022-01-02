@@ -206,7 +206,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 yield return SyntaxFactory.ElasticMarker;
             }
         }
-
 #if false
         public static int Width(this SyntaxTrivia trivia)
         {

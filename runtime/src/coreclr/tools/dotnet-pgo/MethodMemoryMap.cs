@@ -33,6 +33,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             public readonly long ReJITID;
 
             public override int GetHashCode() => HashCode.Combine(MethodID, ReJITID);
+
             public override bool Equals([NotNullWhen(true)] object obj) =>
                 obj is JittedID id ? Equals(id) : false;
 

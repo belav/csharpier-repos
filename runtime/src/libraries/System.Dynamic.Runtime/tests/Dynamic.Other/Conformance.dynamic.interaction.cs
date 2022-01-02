@@ -44,6 +44,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
+
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined types which return dynamic used in test.
@@ -56,6 +57,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicClass
     {
         private static SecondClass s_secClass = new SecondClass();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -124,12 +126,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnDynamicStruct
     {
         private static SecondStruct s_secStruct = new SecondStruct();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -198,12 +200,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnDynamicInterface
     {
         private static SecondInterface s_secInterface = new SecondInterfaceImp();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -284,6 +286,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of class and return dynamic
@@ -506,6 +509,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of class and return dynamic
@@ -728,6 +732,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of class and return dynamic
@@ -949,6 +954,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of class and return dynamic
@@ -1170,6 +1176,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
+
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined generic types which return dynamic used in test.
@@ -1182,6 +1189,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnDynamicClass<T>
     {
         private static SecondClass<T> s_secClass = new SecondClass<T>();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -1250,12 +1258,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnDynamicStruct<T>
     {
         private static SecondStruct<T> s_secStruct = new SecondStruct<T>();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -1324,12 +1332,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnDynamicInterface<T>
     {
         private static SecondInterface<T> s_secInterface = new SecondInterfaceImp<T>();
+
         public dynamic InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -1410,6 +1418,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of generic class and return dynamic
@@ -1632,6 +1641,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of generic class and return dynamic
@@ -1854,6 +1864,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of generic class and return dynamic
@@ -2076,6 +2087,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of generic class and return dynamic
@@ -2298,6 +2310,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of class and return dynamic
@@ -2527,6 +2540,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondefretdym.commondefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of class and return dynamic
@@ -2756,6 +2770,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of generic class and return dynamic
@@ -2995,6 +3010,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendefretdym.commongendefretdym;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of generic class and return dynamic
@@ -3233,6 +3249,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
+
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined types used in test.
@@ -3245,6 +3262,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnClass
     {
         private static SecondClass s_secClass = new SecondClass();
+
         public SecondClass InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -3313,12 +3331,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnStruct
     {
         private static SecondStruct s_secStruct = new SecondStruct();
+
         public SecondStruct InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -3387,12 +3405,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnInterface
     {
         private static SecondInterface s_secInterface = new SecondInterfaceImp();
+
         public SecondInterface InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -3473,6 +3491,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of class
@@ -3695,6 +3714,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of class
@@ -3917,6 +3937,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of class
@@ -4139,6 +4160,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of class
@@ -4360,6 +4382,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
+
     // <Title> Dynamic and static interaction utility class </Title>
     // <Description>
     // Defined generic types used in test.
@@ -4372,6 +4395,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
     public class FirstClassReturnClass<T>
     {
         private static SecondClass<T> s_secClass = new SecondClass<T>();
+
         public SecondClass<T> InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -4440,12 +4464,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondStruct
     public class FirstClassReturnStruct<T>
     {
         private static SecondStruct<T> s_secStruct = new SecondStruct<T>();
+
         public SecondStruct<T> InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -4514,12 +4538,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             get { return true; }
         }
     }
-
     #endregion
     #region FirstClassWithSecondInterface
     public class FirstClassReturnInterface<T>
     {
         private static SecondInterface<T> s_secInterface = new SecondInterfaceImp<T>();
+
         public SecondInterface<T> InstanceMethod()
         {
             Verify.FirstCalled = true;
@@ -4600,6 +4624,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance method of generic class
@@ -4822,6 +4847,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is instance property of generic class
@@ -5044,6 +5070,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is operator of generic class
@@ -5266,6 +5293,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is indexer of generic class
@@ -5488,6 +5516,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of class
@@ -5727,6 +5756,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of class
@@ -5966,6 +5996,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static method of generic class
@@ -6205,6 +6236,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.sta
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Static context switch to dynamic context </Title>
     // <Description>
     // First is static property of generic class
@@ -6444,6 +6476,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance method of class
@@ -6510,7 +6543,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -6568,7 +6600,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -6616,7 +6647,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -6648,6 +6678,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance property of class
@@ -6714,7 +6745,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -6772,7 +6802,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -6820,7 +6849,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -6852,6 +6880,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is operator of class
@@ -6918,7 +6947,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -6976,7 +7004,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7020,7 +7047,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7052,6 +7078,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commondef.commondef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is indexer of class
@@ -7118,7 +7145,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7176,7 +7202,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7220,7 +7245,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7252,6 +7276,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance method of generic class
@@ -7324,7 +7349,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7388,7 +7412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7438,7 +7461,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7470,6 +7492,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is instance property of generic class
@@ -7542,7 +7565,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7606,7 +7628,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7656,7 +7677,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7688,6 +7708,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is operator of generic class
@@ -7754,7 +7775,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -7812,7 +7832,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -7856,7 +7875,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -7888,6 +7906,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.common.common;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.commongendef.commongendef;
+
     // <Title> Dynamic context switch to static context </Title>
     // <Description>
     // First is indexer of generic class
@@ -7954,7 +7973,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is struct
         private static bool CallSecondStructInstanceMethod()
@@ -8012,7 +8030,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         #region Second is interface
         private static bool CallSecondInterfaceInstanceMethod()
@@ -8056,7 +8073,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.dyn
 
             return failcount == 0;
         }
-
         #endregion
         [Fact]
         public static void DynamicCSharpRunTest()

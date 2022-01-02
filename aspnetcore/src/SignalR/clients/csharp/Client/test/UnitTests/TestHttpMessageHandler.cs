@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 delegate Task<HttpResponseMessage> RequestDelegate(
@@ -201,26 +202,32 @@ public class TestHttpMessageHandler : HttpMessageHandler
         string pathAndQuery,
         Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
     ) => OnRequest(HttpMethod.Get, pathAndQuery, handler);
+
     public void OnPost(
         string pathAndQuery,
         Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
     ) => OnRequest(HttpMethod.Post, pathAndQuery, handler);
+
     public void OnPut(
         string pathAndQuery,
         Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
     ) => OnRequest(HttpMethod.Put, pathAndQuery, handler);
+
     public void OnDelete(
         string pathAndQuery,
         Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
     ) => OnRequest(HttpMethod.Delete, pathAndQuery, handler);
+
     public void OnHead(
         string pathAndQuery,
         Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
     ) => OnRequest(HttpMethod.Head, pathAndQuery, handler);
+
     public void OnOptions(
         string pathAndQuery,
         Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
     ) => OnRequest(HttpMethod.Options, pathAndQuery, handler);
+
     public void OnTrace(
         string pathAndQuery,
         Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler

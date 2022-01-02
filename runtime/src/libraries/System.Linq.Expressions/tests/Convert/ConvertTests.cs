@@ -9366,7 +9366,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyNullableUShortToNullableUShort(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers
@@ -18933,7 +18932,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(value, f());
         }
-
         #endregion
 
         private class PerverselyNamedMembers

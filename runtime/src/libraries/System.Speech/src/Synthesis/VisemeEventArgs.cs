@@ -21,7 +21,6 @@ namespace System.Speech.Synthesis
             _emphasis = emphasis;
             _nextViseme = nextViseme;
         }
-
         #endregion
 
         #region Public Properties
@@ -45,7 +44,6 @@ namespace System.Speech.Synthesis
         {
             get { return _nextViseme; }
         }
-
         #endregion
 
         #region Private Fields

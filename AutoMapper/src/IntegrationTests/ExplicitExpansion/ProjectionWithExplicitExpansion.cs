@@ -14,8 +14,10 @@ namespace AutoMapper.IntegrationTests.ProjectionWithExplicitExpansionExtension
     {
         public static void SqlShouldSelectColumn(this string sqlSelect, string columnName) =>
             sqlSelect.ShouldContain($".[{columnName}] AS [{columnName}]");
+
         public static void SqlShouldNotSelectColumn(this string sqlSelect, string columnName) =>
             sqlSelect.ShouldNotContain(columnName);
+
         public static void SqlFromShouldStartWith(this string sqlSelect, string tableName)
         {
             Regex regex = new Regex($@"FROM(\s+)\[dbo\]\.\[{tableName}\](\s+)AS");
@@ -24,6 +26,7 @@ namespace AutoMapper.IntegrationTests.ProjectionWithExplicitExpansionExtension
         }
     }
 }
+
 namespace AutoMapper.IntegrationTests
 {
     using UnitTests;
@@ -43,6 +46,7 @@ namespace AutoMapper.IntegrationTests
             public DescSourceType Dide { get; set; }
             public DescSourceType Did1 { get; set; }
         }
+
         public class SourceInner
         {
             [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -50,6 +54,7 @@ namespace AutoMapper.IntegrationTests
             public DescSourceType Ide1 { get; set; }
             public SourceDeepInner Deep { get; set; }
         }
+
         public class Source
         {
             [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -57,6 +62,7 @@ namespace AutoMapper.IntegrationTests
             public NameSourceType Name { get; set; }
             public SourceInner Inner { get; set; }
         }
+
         public class Dto
         {
             public NameDtoType Name { get; set; }
@@ -69,6 +75,7 @@ namespace AutoMapper.IntegrationTests
         public class Context : DbContext
         {
             public List<string> Log = new List<string>();
+
             public Context()
             {
                 Database.SetInitializer<Context>(new DatabaseInitializer());
@@ -180,6 +187,7 @@ namespace AutoMapper.IntegrationTests
                 sqlSelect.SqlShouldNotSelectColumn(nameof(_iqf.Desc));
             }
         }
+
         [Fact]
         public void ProjectValueType()
         {
@@ -199,6 +207,7 @@ namespace AutoMapper.IntegrationTests
                 sqlSelect.ShouldNotContain(nameof(_iqf.Name));
             }
         }
+
         [Fact]
         public void ProjectBoth()
         {

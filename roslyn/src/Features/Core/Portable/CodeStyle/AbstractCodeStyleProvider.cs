@@ -74,6 +74,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         #region analysis
 
         protected abstract void DiagnosticAnalyzerInitialize(AnalysisContext context);
+
         protected abstract DiagnosticAnalyzerCategory GetAnalyzerCategory();
 
         protected DiagnosticDescriptor CreateDescriptorWithId(
@@ -90,7 +91,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 isEnabledByDefault: true
             );
         }
-
         #endregion
 
         #region fixing
@@ -135,7 +135,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     ),
                 cancellationToken
             );
-
         #endregion
 
         #region refactoring

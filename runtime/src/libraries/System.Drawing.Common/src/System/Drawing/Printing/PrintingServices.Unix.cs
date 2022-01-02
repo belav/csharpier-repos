@@ -75,7 +75,6 @@ namespace System.Drawing.Printing
         }
 
         internal static string DefaultPrinter => EnsurePrintersInitialized().Item1;
-
         #endregion
 
 
@@ -862,7 +861,6 @@ namespace System.Drawing.Printing
 
             return PaperKind.Custom;
         }
-
         #endregion
 
         #region Print job methods
@@ -1038,6 +1036,7 @@ namespace System.Drawing.Printing
         public struct PPD_SIZE
         {
             public int marked;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 42)]
             public string name;
             public float width;
@@ -1052,6 +1051,7 @@ namespace System.Drawing.Printing
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 40)]
             public string text;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 42)]
             public string name;
             public int num_options;
@@ -1063,10 +1063,13 @@ namespace System.Drawing.Printing
         public struct PPD_OPTION
         {
             public byte conflicted;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
             public string keyword;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
             public string defchoice;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 81)]
             public string text;
             public int ui;
@@ -1079,8 +1082,10 @@ namespace System.Drawing.Printing
         public struct PPD_CHOICE
         {
             public byte marked;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
             public string choice;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 81)]
             public string text;
             public IntPtr code;

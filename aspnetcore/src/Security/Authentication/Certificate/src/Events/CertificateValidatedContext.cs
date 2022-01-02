@@ -4,6 +4,7 @@
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
 /// <summary>

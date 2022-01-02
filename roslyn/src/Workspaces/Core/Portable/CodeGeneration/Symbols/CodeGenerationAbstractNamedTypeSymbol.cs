@@ -94,7 +94,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public abstract INamedTypeSymbol EnumUnderlyingType { get; }
         protected abstract CodeGenerationNamedTypeSymbol ConstructedFrom { get; }
         INamedTypeSymbol INamedTypeSymbol.ConstructedFrom => this.ConstructedFrom;
+
         public abstract INamedTypeSymbol ConstructUnboundGenericType();
+
         public abstract ImmutableArray<IMethodSymbol> InstanceConstructors { get; }
         public abstract ImmutableArray<IMethodSymbol> StaticConstructors { get; }
         public abstract ImmutableArray<IMethodSymbol> Constructors { get; }

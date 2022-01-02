@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
+
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 internal class CircuitClientProxy : IClientProxy

@@ -42,8 +42,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
         }
 
         public abstract string Identifier { get; }
+
         protected abstract TSnapshotFactory CreateSnapshotFactory(ISettingsProvider<T> data);
+
         protected abstract string[] GetFixedColumns();
+
         protected abstract IEnumerable<ColumnState2> GetInitialColumnStates();
 
         public string SourceTypeIdentifier => "EditorConfigSettings";

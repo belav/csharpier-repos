@@ -579,7 +579,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             tree.VerifySource();
             return tree;
         }
-
         #endregion
 
         #region Changes
@@ -691,7 +690,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return SyntaxDiffer.GetTextChanges(oldTree, this);
         }
-
         #endregion
 
         #region LinePositions and Locations
@@ -877,7 +875,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new SourceLocation(this, span);
         }
-
         #endregion
 
         #region Diagnostics
@@ -985,7 +982,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return this.GetDiagnostics(this.GetRoot(cancellationToken));
         }
-
         #endregion
 
         #region SyntaxTree
@@ -1020,7 +1016,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get { return this.Options; }
         }
-
         #endregion
 
         // 3.3 BACK COMPAT OVERLOAD -- DO NOT MODIFY

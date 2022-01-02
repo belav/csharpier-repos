@@ -13,6 +13,7 @@ using Microsoft.Net.Http.Headers;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HttpLogging;
 
 public class HttpLoggingMiddlewareTests : LoggedTest

@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace ClientSample;
 
 public class SocketAwaitable : ICriticalNotifyCompletion
@@ -29,6 +30,7 @@ public class SocketAwaitable : ICriticalNotifyCompletion
     }
 
     public SocketAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => ReferenceEquals(_callback, _callbackCompleted);
 
     public int GetResult()

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Extensions.Caching.Distributed;
 
+
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
 public static class RedisTestConfig

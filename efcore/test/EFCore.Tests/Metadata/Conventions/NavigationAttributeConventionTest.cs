@@ -132,7 +132,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 nav => nav.Name == nameof(BlogDetails.Blog)
             );
         }
-
         #endregion
 
         #region RequiredAttribute
@@ -334,7 +333,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Empty(ListLoggerFactory.Log);
         }
-
         #endregion
 
         #region InversePropertyAttribute
@@ -638,7 +636,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ).Message
             );
         }
-
         #endregion
 
         #region ForeignKeyAttribute
@@ -1325,7 +1322,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 context
             );
         }
-
         #endregion
 
         #region BackingFieldAttribute
@@ -1381,7 +1377,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ((IConventionNavigation)navigationBuilder.Metadata).GetFieldName()
             );
         }
-
         #endregion
 
         [ConditionalFact]
@@ -1557,6 +1552,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             [ForeignKey(nameof(AnotherPrincipalField))]
 #pragma warning disable 169
             private readonly int _principalFieldAnotherFk;
+
 #pragma warning restore 169
 
             public PrincipalField AnotherPrincipalField { get; set; }
@@ -1690,6 +1686,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 #pragma warning disable CS0169 // Field never used
             private PrincipalForNavWithBackingField _backingFieldFromAttribute;
             private PrincipalForNavWithBackingField _backingFieldFromFluentApi;
+
 #pragma warning restore CS0169 // Field never used
 #pragma warning restore IDE0044 // Add readonly modifier
 

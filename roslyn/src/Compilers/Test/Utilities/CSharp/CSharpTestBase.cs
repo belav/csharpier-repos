@@ -1014,7 +1014,6 @@ namespace System.Runtime.CompilerServices
             Assert.Equal(text, parsedText.ToFullString());
             return tree;
         }
-
         #endregion
 
         #region Compilation Factories
@@ -1813,7 +1812,6 @@ namespace System.Runtime.CompilerServices
 
             return null;
         }
-
         #endregion
 
         #region Semantic Model Helpers
@@ -2008,7 +2006,6 @@ namespace System.Runtime.CompilerServices
         {
             return attributes.Select(a => a.ToString());
         }
-
         #endregion
 
         #region Documentation Comments
@@ -2106,7 +2103,6 @@ namespace System.Runtime.CompilerServices
                 return text.Trim();
             }
         }
-
         #endregion
 
         #region IL Validation
@@ -2298,7 +2294,6 @@ namespace System.Runtime.CompilerServices
                     ?? type.ToString();
             }
         }
-
         #endregion
 
         #region IOperation tree validation
@@ -2628,7 +2623,6 @@ namespace System.Runtime.CompilerServices
             );
             return ilReference;
         }
-
         #endregion
 
         #region Span
@@ -3293,7 +3287,6 @@ namespace System.Runtime.CompilerServices
     }
 }
 ";
-
         #endregion
 
         #region Theory Helpers

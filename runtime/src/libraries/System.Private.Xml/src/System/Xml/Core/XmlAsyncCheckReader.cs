@@ -784,7 +784,6 @@ namespace System.Xml
                 return _coreReader.DtdInfo;
             }
         }
-
         #endregion
 
         #region Async Methods

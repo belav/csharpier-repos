@@ -320,6 +320,7 @@ namespace System.Security.Cryptography
                     Type xName = Type.GetType("System.Xml.Linq.XName" + XmlLinqAssemblyString)!;
                     s_nameNameProperty = xName.GetProperty("LocalName")!;
                 }
+
 #pragma warning restore CA1810
 
                 internal static object? ParseDocument(string xmlString) =>

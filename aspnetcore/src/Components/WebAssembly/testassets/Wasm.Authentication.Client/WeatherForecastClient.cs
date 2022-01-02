@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Wasm.Authentication.Shared;
 
+
 namespace Wasm.Authentication.Client;
 
 public class WeatherForecastClient : IDisposable

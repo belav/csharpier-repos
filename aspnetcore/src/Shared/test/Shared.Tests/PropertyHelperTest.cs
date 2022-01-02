@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Internal;
 
 public class PropertyHelperTest
@@ -154,7 +155,6 @@ public class PropertyHelperTest
         var helper = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()));
         Assert.Equal("Prop5", helper.Name);
     }
-
 #if NETSTANDARD || NETCOREAPP
     [Fact]
     public void PropertyHelper_RefStructProperties()
@@ -758,7 +758,6 @@ public class PropertyHelperTest
         public static int Prop2 { get; set; }
         public int Prop5 { get; set; }
     }
-
 #if NETSTANDARD || NETCOREAPP
     private class RefStructProperties
     {

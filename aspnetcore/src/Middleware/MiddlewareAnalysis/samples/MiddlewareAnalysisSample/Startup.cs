@@ -12,6 +12,7 @@ using Microsoft.Extensions.DiagnosticAdapter;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+
 namespace MiddlewareAnaysisSample;
 
 public class Startup

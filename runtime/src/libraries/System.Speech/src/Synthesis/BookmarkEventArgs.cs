@@ -12,7 +12,6 @@ namespace System.Speech.Synthesis
             _bookmark = bookmark;
             _audioPosition = audioPosition;
         }
-
         #endregion
 
         #region public Properties
@@ -24,7 +23,6 @@ namespace System.Speech.Synthesis
         {
             get { return _audioPosition; }
         }
-
         #endregion
 
         #region Private Fields

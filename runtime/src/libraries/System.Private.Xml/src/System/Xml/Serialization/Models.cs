@@ -100,6 +100,7 @@ namespace System.Xml.Serialization
     internal abstract class TypeModel
     {
         private readonly TypeDesc _typeDesc;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         private readonly Type _type;
         private readonly ModelScope _scope;
@@ -345,6 +346,7 @@ namespace System.Xml.Serialization
             bool checkSpecified,
             bool checkShouldPersist
         ) : this(name, fieldType, fieldTypeDesc, checkSpecified, checkShouldPersist, false) { }
+
         internal FieldModel(
             string name,
             Type fieldType,

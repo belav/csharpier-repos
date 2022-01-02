@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.E2ETesting;
 using OpenQA.Selenium;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class WebAssemblyPrerenderedTest : ServerTestBase<AspNetSiteServerFixture>

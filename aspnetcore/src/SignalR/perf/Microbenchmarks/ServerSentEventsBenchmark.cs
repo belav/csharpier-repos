@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http.Connections.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Newtonsoft.Json;
 
+
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
 public class ServerSentEventsBenchmark

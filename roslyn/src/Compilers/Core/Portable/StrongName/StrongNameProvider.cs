@@ -16,6 +16,7 @@ namespace Microsoft.CodeAnalysis
         protected StrongNameProvider() { }
 
         public abstract override int GetHashCode();
+
         public abstract override bool Equals(object? other);
 
         internal abstract StrongNameFileSystem FileSystem { get; }

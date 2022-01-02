@@ -89,7 +89,6 @@ namespace System.Net.Http.Formatting
         {
             get { return MediaTypeConstants.ApplicationJsonMediaType; }
         }
-
 #if !NETFX_CORE // DataContractJsonSerializer is not supported in portable library
         /// <summary>
         /// Gets or sets a value indicating whether to use <see cref="DataContractJsonSerializer"/> by default.
@@ -104,7 +103,6 @@ namespace System.Net.Http.Formatting
         /// Gets or sets a value indicating whether to indent elements when writing data. 
         /// </summary>
         public bool Indent { get; set; }
-
 #if !NETFX_CORE // MaxDepth not supported in portable library; no need to override there
         /// <inheritdoc/>
         public sealed override int MaxDepth

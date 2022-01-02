@@ -22,7 +22,9 @@ namespace System.IO.Hashing.Tests
         protected abstract NonCryptographicHashAlgorithm CreateInstance();
 
         protected abstract byte[] StaticOneShot(byte[] source);
+
         protected abstract byte[] StaticOneShot(ReadOnlySpan<byte> source);
+
         protected abstract int StaticOneShot(ReadOnlySpan<byte> source, Span<byte> destination);
 
         protected abstract bool TryStaticOneShot(

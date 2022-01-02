@@ -29,6 +29,7 @@ namespace System.Windows.Markup
     {
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private Type? _valueSerializerType;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private readonly string? _valueSerializerTypeName;
 

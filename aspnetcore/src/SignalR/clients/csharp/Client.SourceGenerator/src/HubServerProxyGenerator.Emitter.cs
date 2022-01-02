@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
+
 namespace Microsoft.AspNetCore.SignalR.Client.SourceGenerator;
 
 internal partial class HubServerProxyGenerator

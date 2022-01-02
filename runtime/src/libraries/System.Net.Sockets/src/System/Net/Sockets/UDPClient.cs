@@ -215,6 +215,7 @@ namespace System.Net.Sockets
         }
 
         private bool _isBroadcast;
+
         private void CheckForBroadcast(IPAddress ipAddress)
         {
             // Here we check to see if the user is trying to use a Broadcast IP address

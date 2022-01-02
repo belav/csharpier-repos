@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
+
 namespace Identity.DefaultUI.WebSite.Pages;
 
 [AllowAnonymous]

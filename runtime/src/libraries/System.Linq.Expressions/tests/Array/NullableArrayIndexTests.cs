@@ -33,7 +33,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionNullableBoolArrayIndex(GenerateNullableBoolArray(5), -1, useInterpreter);
             CheckExceptionNullableBoolArrayIndex(GenerateNullableBoolArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableByte tests
@@ -62,7 +61,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionNullableByteArrayIndex(GenerateNullableByteArray(5), -1, useInterpreter);
             CheckExceptionNullableByteArrayIndex(GenerateNullableByteArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableChar tests
@@ -91,7 +89,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionNullableCharArrayIndex(GenerateNullableCharArray(5), -1, useInterpreter);
             CheckExceptionNullableCharArrayIndex(GenerateNullableCharArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableDecimal tests
@@ -144,7 +141,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableDouble tests
@@ -197,7 +193,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableEnum tests
@@ -226,7 +221,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionNullableEnumArrayIndex(GenerateNullableEnumArray(5), -1, useInterpreter);
             CheckExceptionNullableEnumArrayIndex(GenerateNullableEnumArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableLongEnum tests
@@ -279,7 +273,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableFloat tests
@@ -320,7 +313,6 @@ namespace System.Linq.Expressions.Tests
             );
             CheckExceptionNullableFloatArrayIndex(GenerateNullableFloatArray(9), 9, useInterpreter);
         }
-
         #endregion
 
         #region NullableInt tests
@@ -349,7 +341,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionNullableIntArrayIndex(GenerateNullableIntArray(5), -1, useInterpreter);
             CheckExceptionNullableIntArrayIndex(GenerateNullableIntArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableLong tests
@@ -378,7 +369,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionNullableLongArrayIndex(GenerateNullableLongArray(5), -1, useInterpreter);
             CheckExceptionNullableLongArrayIndex(GenerateNullableLongArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableSByte tests
@@ -419,7 +409,6 @@ namespace System.Linq.Expressions.Tests
             );
             CheckExceptionNullableSByteArrayIndex(GenerateNullableSByteArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableShort tests
@@ -460,7 +449,6 @@ namespace System.Linq.Expressions.Tests
             );
             CheckExceptionNullableShortArrayIndex(GenerateNullableShortArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableStruct tests
@@ -513,7 +501,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableStructWithString tests
@@ -575,7 +562,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableStructWithStringAndValue tests
@@ -639,7 +625,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableStructWithTwoValues tests
@@ -703,7 +688,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableStructWithStruct tests
@@ -765,7 +749,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region NullableUInt tests
@@ -794,7 +777,6 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionNullableUIntArrayIndex(GenerateNullableUIntArray(5), -1, useInterpreter);
             CheckExceptionNullableUIntArrayIndex(GenerateNullableUIntArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableULong tests
@@ -835,7 +817,6 @@ namespace System.Linq.Expressions.Tests
             );
             CheckExceptionNullableULongArrayIndex(GenerateNullableULongArray(5), 5, useInterpreter);
         }
-
         #endregion
 
         #region NullableUShort tests
@@ -888,7 +869,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region Generic tests
@@ -928,7 +908,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckExceptionNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -1003,7 +982,6 @@ namespace System.Linq.Expressions.Tests
                 useInterpreter
             );
         }
-
         #endregion
 
         #region Generate array
@@ -1289,7 +1267,6 @@ namespace System.Linq.Expressions.Tests
 
             return result;
         }
-
         #endregion
 
         #region Check array index
@@ -1558,7 +1535,6 @@ namespace System.Linq.Expressions.Tests
 
             Assert.True(success);
         }
-
         #endregion
 
         #region Check index expression
@@ -1918,7 +1894,6 @@ namespace System.Linq.Expressions.Tests
             Func<Ts?> f = e.Compile(useInterpreter);
             return object.Equals(f(), array[index]);
         }
-
         #endregion
 
         #region Check exception array index

@@ -105,8 +105,10 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The source connected with this filter.</summary>
             private readonly ISourceBlock<T> _source;
+
             /// <summary>The target with which this block is associated.</summary>
             private readonly ITargetBlock<T> _target;
+
             /// <summary>The predicate provided by the user.</summary>
             private readonly Predicate<T> _userProvidedPredicate;
 
@@ -221,11 +223,13 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _source.Completion; }
             }
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
             void IDataflowBlock.Complete()
             {
                 _target.Complete();
             }
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
             void IDataflowBlock.Fault(Exception exception)
             {
@@ -251,6 +255,7 @@ namespace System.Threading.Tasks.Dataflow
                     return $"{Common.GetNameForDebugger(this)} Source=\"{(displaySource != null ? displaySource.Content : _source)}\", Target=\"{(displayTarget != null ? displayTarget.Content : _target)}\"";
                 }
             }
+
             /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
             object IDebuggerDisplay.Content
             {
@@ -441,13 +446,16 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The target to offer to.</summary>
             private readonly ITargetBlock<TOutput> _target;
+
             /// <summary>The buffered message.</summary>
             private readonly TOutput _messageValue;
 
             /// <summary>CancellationToken used to cancel the send.</summary>
             private CancellationToken _cancellationToken;
+
             /// <summary>Registration with the cancellation token.</summary>
             private CancellationTokenRegistration _cancellationRegistration;
+
             /// <summary>The cancellation/completion state of the source.</summary>
             private int _cancellationState; // one of the CANCELLATION_STATE_* constant values, defaulting to NONE
 
@@ -469,10 +477,13 @@ namespace System.Threading.Tasks.Dataflow
 
             /// <summary>No cancellation registration is used.</summary>
             private const int CANCELLATION_STATE_NONE = 0;
+
             /// <summary>A cancellation token has been registered.</summary>
             private const int CANCELLATION_STATE_REGISTERED = 1;
+
             /// <summary>The message has been reserved. Only used if a cancellation token is in play.</summary>
             private const int CANCELLATION_STATE_RESERVED = 2;
+
             /// <summary>Completion is now in progress. Only used if a cancellation token is in play.</summary>
             private const int CANCELLATION_STATE_COMPLETING = 3;
 
@@ -936,11 +947,13 @@ namespace System.Threading.Tasks.Dataflow
             {
                 throw new NotSupportedException(SR.NotSupported_MemberNotNeeded);
             }
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
             void IDataflowBlock.Complete()
             {
                 throw new NotSupportedException(SR.NotSupported_MemberNotNeeded);
             }
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
             void IDataflowBlock.Fault(Exception exception)
             {
@@ -956,6 +969,7 @@ namespace System.Threading.Tasks.Dataflow
                     return $"{Common.GetNameForDebugger(this)} Message={_messageValue}, Target=\"{(displayTarget != null ? displayTarget.Content : _target)}\"";
                 }
             }
+
             /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
             object IDebuggerDisplay.Content
             {
@@ -984,11 +998,13 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get { return _source._target; }
                 }
+
                 /// <summary>The message buffered by the source.</summary>
                 public TOutput Message
                 {
                     get { return _source._messageValue; }
                 }
+
                 /// <summary>The Task represented the posting of the message.</summary>
                 public Task<bool> Completion
                 {
@@ -1424,16 +1440,22 @@ namespace System.Threading.Tasks.Dataflow
 
             /// <summary>The cancellation token source representing both external and internal cancellation.</summary>
             internal readonly CancellationTokenSource _cts = new CancellationTokenSource();
+
             /// <summary>Indicates a code path is already on route to complete the target. 0 is false, 1 is true.</summary>
             internal bool _cleanupReserved; // must only be accessed under IncomingLock
+
             /// <summary>The external token that cancels the internal token.</summary>
             internal CancellationToken _externalCancellationToken;
+
             /// <summary>The registration on the external token that cancels the internal token.</summary>
             internal CancellationTokenRegistration _regFromExternalCancellationToken;
+
             /// <summary>The timer that fires when the timeout has been exceeded.</summary>
             internal Timer? _timer;
+
             /// <summary>The unlinker from removing this target from the source from which we're receiving.</summary>
             internal IDisposable? _unlink;
+
             /// <summary>The received exception if an error occurred.</summary>
             internal Exception? _receivedException;
 
@@ -1931,6 +1953,7 @@ namespace System.Threading.Tasks.Dataflow
 
             /// <summary>The IDisposable used to unlink this target from its source.</summary>
             internal IDisposable? _unlinker;
+
             /// <summary>The registration used to unregister this target from the cancellation token.</summary>
             internal CancellationTokenRegistration _ctr;
 
@@ -2022,6 +2045,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The target half.</summary>
             private readonly ITargetBlock<TInput> _target;
+
             /// <summary>The source half.</summary>
             private readonly ISourceBlock<TOutput> _source;
 
@@ -2056,6 +2080,7 @@ namespace System.Threading.Tasks.Dataflow
 
                 _target.Fault(exception);
             }
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
             public DataflowMessageStatus OfferMessage(
                 DataflowMessageHeader messageHeader,
@@ -2142,6 +2167,7 @@ namespace System.Threading.Tasks.Dataflow
                     return $"{Common.GetNameForDebugger(this)} Target=\"{(displayTarget != null ? displayTarget.Content : _target)}\", Source=\"{(displaySource != null ? displaySource.Content : _source)}\"";
                 }
             }
+
             /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
             object IDebuggerDisplay.Content
             {
@@ -2170,6 +2196,7 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get { return _propagator._target; }
                 }
+
                 /// <summary>The source.</summary>
                 public ISourceBlock<TOutput> Source
                 {
@@ -2930,8 +2957,10 @@ namespace System.Threading.Tasks.Dataflow
 
             /// <summary>Object used to synchronize all subscriptions, unsubscriptions, and propagations.</summary>
             private readonly object _SubscriptionLock = new object();
+
             /// <summary>The wrapped source.</summary>
             private readonly ISourceBlock<TOutput> _source;
+
             /// <summary>
             /// The current target.  We use the same target until the number of subscribers
             /// drops to 0, at which point we substitute in a new target.
@@ -3086,6 +3115,7 @@ namespace System.Threading.Tasks.Dataflow
                     return $"Observers={_observersState.Observers.Count}, Block=\"{(displaySource != null ? displaySource.Content : _source)}\"";
                 }
             }
+
             /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
             object IDebuggerDisplay.Content
             {
@@ -3122,18 +3152,23 @@ namespace System.Threading.Tasks.Dataflow
             {
                 /// <summary>The owning SourceObservable.</summary>
                 internal readonly SourceObservable<TOutput> Observable;
+
                 /// <summary>The ActionBlock that consumes data from a source and offers it to targets.</summary>
                 internal readonly ActionBlock<TOutput> Target;
+
                 /// <summary>Used to cancel continuations when they're no longer necessary.</summary>
                 internal readonly CancellationTokenSource Canceler = new CancellationTokenSource();
+
                 /// <summary>
                 /// A list of the observers currently registered with this target.  The list is immutable
                 /// to enable iteration through the list while the set of observers may be changing.
                 /// </summary>
                 internal ImmutableArray<IObserver<TOutput>> Observers =
                     ImmutableArray<IObserver<TOutput>>.Empty;
+
                 /// <summary>Used to unlink the source from this target when the last observer is unsubscribed.</summary>
                 internal IDisposable? Unlinker;
+
                 /// <summary>
                 /// Temporary list to keep track of SendAsync tasks to TargetObservers with back pressure.
                 /// This field gets instantiated on demand. It gets populated and cleared within an offering cycle.
@@ -3393,6 +3428,7 @@ namespace System.Threading.Tasks.Dataflow
                     return $"Block=\"{(displayTarget != null ? displayTarget.Content : _target)}\"";
                 }
             }
+
             /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
             object IDebuggerDisplay.Content
             {
@@ -3456,8 +3492,10 @@ namespace System.Threading.Tasks.Dataflow
 
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
             void IDataflowBlock.Complete() { } // No-op
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
             void IDataflowBlock.Fault(Exception exception) { } // No-op
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
             Task IDataflowBlock.Completion
             {

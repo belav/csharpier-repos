@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Razor.Language.Components;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class BoundAttributeDescriptorExtensions

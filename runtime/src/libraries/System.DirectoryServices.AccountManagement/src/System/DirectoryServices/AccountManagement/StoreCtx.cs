@@ -13,6 +13,7 @@ namespace System.DirectoryServices.AccountManagement
     {
         ChangePassword
     }
+
     internal abstract class StoreCtx : IDisposable
     {
         //
@@ -46,8 +47,11 @@ namespace System.DirectoryServices.AccountManagement
         // Insert() and Update() must check to make sure no properties not supported by this StoreCtx
         // have been set, prior to persisting the Principal.
         internal abstract void Insert(Principal p);
+
         internal abstract void Update(Principal p);
+
         internal abstract void Delete(Principal p);
+
         internal abstract void Move(StoreCtx originalStore, Principal p);
 
         //
@@ -82,6 +86,7 @@ namespace System.DirectoryServices.AccountManagement
 
         // Loads the store values from p.UnderlyingObject into p, performing schema mapping as needed.
         internal abstract void Load(Principal p);
+
         // Loads only the psecified property into the principal object.  The object should have already been persisted or searched for this to happen.
         internal abstract void Load(Principal p, string principalPropertyName);
 
@@ -108,17 +113,22 @@ namespace System.DirectoryServices.AccountManagement
 
         // methods for manipulating accounts
         internal abstract void InitializeUserAccountControl(AuthenticablePrincipal p);
+
         internal abstract bool IsLockedOut(AuthenticablePrincipal p);
+
         internal abstract void UnlockAccount(AuthenticablePrincipal p);
 
         // methods for manipulating passwords
         internal abstract void SetPassword(AuthenticablePrincipal p, string newPassword);
+
         internal abstract void ChangePassword(
             AuthenticablePrincipal p,
             string oldPassword,
             string newPassword
         );
+
         internal abstract void ExpirePassword(AuthenticablePrincipal p);
+
         internal abstract void UnexpirePassword(AuthenticablePrincipal p);
 
         internal abstract bool AccessCheck(Principal p, PrincipalAccessMask targetPermission);
@@ -129,21 +139,25 @@ namespace System.DirectoryServices.AccountManagement
             MatchType matchType,
             Type principalType
         );
+
         internal abstract ResultSet FindByLogonTime(
             DateTime dt,
             MatchType matchType,
             Type principalType
         );
+
         internal abstract ResultSet FindByPasswordSetTime(
             DateTime dt,
             MatchType matchType,
             Type principalType
         );
+
         internal abstract ResultSet FindByBadPasswordAttempt(
             DateTime dt,
             MatchType matchType,
             Type principalType
         );
+
         internal abstract ResultSet FindByExpirationTime(
             DateTime dt,
             MatchType matchType,
@@ -171,6 +185,7 @@ namespace System.DirectoryServices.AccountManagement
 
         // Is p a member of g in the store?
         internal abstract bool SupportsNativeMembershipTest { get; }
+
         internal abstract bool IsMemberOfInStore(GroupPrincipal g, Principal p);
 
         // Can a Clear() operation be performed on the specified group?  If not, also returns

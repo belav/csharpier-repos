@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.CommandLineUtils;
 
+
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
 internal class ProjectOptions

@@ -19,6 +19,7 @@ public class HelloWorld
         System.Console.WriteLine("FAIL");
         return -1;
     }
+
     public static string GetName()
     {
         throw new System.Exception();

@@ -5,6 +5,7 @@ using System;
 using AngleSharp.Dom;
 using AngleSharp.Dom.Html;
 
+
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public static class IHtmlDocumentExtensions

@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.Components.Web;
 
 // The reason this abstraction exists is that logging behaviors differ across hosting platforms.

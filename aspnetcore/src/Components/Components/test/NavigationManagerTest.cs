@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 public class NavigationManagerTest

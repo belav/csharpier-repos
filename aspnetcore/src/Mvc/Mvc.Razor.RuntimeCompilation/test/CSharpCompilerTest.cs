@@ -11,6 +11,7 @@ using Moq;
 using Xunit;
 using DependencyContextCompilationOptions = Microsoft.Extensions.DependencyModel.CompilationOptions;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 public class CSharpCompilerTest

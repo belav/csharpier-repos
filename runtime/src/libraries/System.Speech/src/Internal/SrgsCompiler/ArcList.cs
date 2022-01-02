@@ -31,7 +31,6 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             return Arc.CompareContentForKey((Arc)arc1, (Arc)arc2);
         }
-
         #endregion
 
         #region Internal Properties
@@ -66,6 +65,7 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 _item = item;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public Arc[] AKeys
             {

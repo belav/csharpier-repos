@@ -16,6 +16,7 @@ namespace System.Collections.Generic
         // public static EqualityComparer<T> Default is runtime-specific
 
         public abstract bool Equals(T? x, T? y);
+
         public abstract int GetHashCode([DisallowNull] T obj);
 
         int IEqualityComparer.GetHashCode(object? obj)

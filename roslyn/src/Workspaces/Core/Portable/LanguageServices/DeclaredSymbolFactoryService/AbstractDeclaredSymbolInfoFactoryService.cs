@@ -51,12 +51,15 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(
             TCompilationUnitSyntax node
         );
+
         protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(
             TNamespaceDeclarationSyntax node
         );
+
         protected abstract SyntaxList<TMemberDeclarationSyntax> GetChildren(
             TTypeDeclarationSyntax node
         );
+
         protected abstract IEnumerable<TMemberDeclarationSyntax> GetChildren(
             TEnumDeclarationSyntax node
         );
@@ -64,18 +67,23 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         protected abstract SyntaxList<TUsingDirectiveSyntax> GetUsingAliases(
             TCompilationUnitSyntax node
         );
+
         protected abstract SyntaxList<TUsingDirectiveSyntax> GetUsingAliases(
             TNamespaceDeclarationSyntax node
         );
 
         protected abstract TNameSyntax GetName(TNamespaceDeclarationSyntax node);
+
         protected abstract TNameSyntax GetLeft(TQualifiedNameSyntax node);
+
         protected abstract TNameSyntax GetRight(TQualifiedNameSyntax node);
+
         protected abstract SyntaxToken GetIdentifier(TIdentifierNameSyntax node);
 
         protected abstract string GetContainerDisplayName(
             TMemberDeclarationSyntax namespaceDeclaration
         );
+
         protected abstract string GetFullyQualifiedContainerName(
             TMemberDeclarationSyntax memberDeclaration,
             string rootNamespace
@@ -92,6 +100,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             string fullyQualifiedContainerName,
             CancellationToken cancellationToken
         );
+
         /// <summary>
         /// Get the name of the target type of specified extension method declaration. 
         /// The node provided must be an extension method declaration,  i.e. calling `TryGetDeclaredSymbolInfo()` 
@@ -99,10 +108,12 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// If the return value is null, then it means this is a "complex" method (as described at <see cref="SyntaxTreeIndex.ExtensionMethodInfo"/>).
         /// </summary>
         protected abstract string GetReceiverTypeName(TMemberDeclarationSyntax node);
+
         protected abstract bool TryGetAliasesFromUsingDirective(
             TUsingDirectiveSyntax node,
             out ImmutableArray<(string aliasName, string name)> aliases
         );
+
         protected abstract string GetRootNamespace(CompilationOptions compilationOptions);
 
         protected static List<Dictionary<string, string>> AllocateAliasMapList() =>

@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
+
 namespace WebAssembly.JSInterop;
 
 /// <summary>

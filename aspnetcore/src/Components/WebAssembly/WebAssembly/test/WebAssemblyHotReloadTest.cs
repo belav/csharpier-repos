@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.Extensions.HotReload;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload;
 
 public class WebAssemblyHotReloadTest

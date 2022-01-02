@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Extensions.Tools.Internal;
 
+
 namespace Microsoft.AspNetCore.DeveloperCertificates.Tools;
 
 internal class ReporterEventListener : EventListener

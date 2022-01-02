@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Authentication.Core.Test;
 
 public class AuthenticationTicketTests

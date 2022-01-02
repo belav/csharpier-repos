@@ -126,6 +126,7 @@ public class Test
     public static void Main() {}
 }
 ";
+
         private void CommonSourceValidatorForCondAttrType(ModuleSymbol module)
         {
             CommonValidatorForCondAttrType(module, isFromSource: true);
@@ -303,7 +304,6 @@ using System;
                 expectedOutput: ""
             );
         }
-
         #endregion
 
         #region Tests
@@ -435,7 +435,6 @@ using System;
 ";
             TestConditionAttributeType_DifferentSource(conditionalDefsDummy, conditionalDefs);
         }
-
         #endregion
 
         #endregion
@@ -548,7 +547,6 @@ using System;
                 expectedOutput: s_commonExpectedOutput_ConditionalMethodsTest
             );
         }
-
         #endregion
 
         #region Tests
@@ -669,7 +667,6 @@ class T5
                     .WithArguments("T1.Conditional()")
             );
         }
-
         #endregion
 
         #endregion

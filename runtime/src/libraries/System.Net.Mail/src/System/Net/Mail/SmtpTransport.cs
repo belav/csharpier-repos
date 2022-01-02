@@ -337,6 +337,7 @@ namespace System.Net.Mail
 
             return new MailWriter(thisPtr._stream!, encodeForTransport: true);
         }
+
         private void SendMailFrom()
         {
             IAsyncResult result = MailCommand.BeginSend(

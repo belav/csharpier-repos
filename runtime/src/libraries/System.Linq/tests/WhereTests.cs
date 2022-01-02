@@ -45,7 +45,6 @@ namespace System.Linq.Tests
                 () => source.Where(complexPredicate)
             );
         }
-
         #endregion
 
         #region Deferred execution
@@ -261,7 +260,6 @@ namespace System.Linq.Tests
             query = source.Where((value, index) => value());
             Assert.False(funcCalled);
         }
-
         #endregion
 
         #region Expected return value
@@ -873,7 +871,6 @@ namespace System.Linq.Tests
             Assert.Equal(4, result.ElementAt(1));
             Assert.Equal(6, result.ElementAt(2));
         }
-
         #endregion
 
         #region Exceptions
@@ -986,7 +983,6 @@ namespace System.Linq.Tests
             source.Add(6);
             Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
         }
-
         #endregion
 
         [Fact]

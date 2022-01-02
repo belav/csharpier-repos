@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 public class FloatingPointTypeModelBinderProviderTest

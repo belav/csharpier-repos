@@ -11,7 +11,6 @@ namespace System.Speech.Synthesis
             _state = state;
             _previousState = previousState;
         }
-
         #endregion
 
         #region public Properties
@@ -25,7 +24,6 @@ namespace System.Speech.Synthesis
         {
             get { return _previousState; }
         }
-
         #endregion
 
         #region Private Fields

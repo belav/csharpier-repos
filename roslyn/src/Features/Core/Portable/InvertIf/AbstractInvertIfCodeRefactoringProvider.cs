@@ -418,27 +418,37 @@ namespace Microsoft.CodeAnalysis.InvertIf
         protected abstract string GetTitle();
 
         protected abstract SyntaxList<TStatementSyntax> GetStatements(SyntaxNode node);
+
         protected abstract TStatementSyntax? GetNextStatement(TStatementSyntax node);
 
         protected abstract TStatementSyntax GetJumpStatement(int rawKind);
+
         protected abstract int GetJumpStatementRawKind(SyntaxNode node);
 
         protected abstract bool IsNoOpSyntaxNode(SyntaxNode node);
+
         protected abstract bool IsExecutableStatement(SyntaxNode node);
+
         protected abstract bool IsStatementContainer(SyntaxNode node);
+
         protected abstract bool IsSingleStatementStatementRange(StatementRange statementRange);
 
         protected abstract bool CanControlFlowOut(SyntaxNode node);
 
         protected abstract bool CanInvert(TIfStatementSyntax ifNode);
+
         protected abstract bool IsElseless(TIfStatementSyntax ifNode);
 
         protected abstract StatementRange GetIfBodyStatementRange(TIfStatementSyntax ifNode);
+
         protected abstract SyntaxNode GetCondition(TIfStatementSyntax ifNode);
 
         protected abstract IEnumerable<TStatementSyntax> UnwrapBlock(TEmbeddedStatement ifBody);
+
         protected abstract TEmbeddedStatement GetIfBody(TIfStatementSyntax ifNode);
+
         protected abstract TEmbeddedStatement GetElseBody(TIfStatementSyntax ifNode);
+
         protected abstract TEmbeddedStatement GetEmptyEmbeddedStatement();
 
         protected abstract TEmbeddedStatement AsEmbeddedStatement(

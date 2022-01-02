@@ -92,7 +92,6 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             protected override string ToString(IReadOnlyEntityType vertex) => vertex.DisplayName();
         }
-
         #endregion
 
         [ConditionalFact]

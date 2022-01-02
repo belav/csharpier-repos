@@ -413,11 +413,13 @@ namespace System.Xml.Xsl.Xslt
         {
             return _f.String(value);
         } // As argument of id() or key() function
+
         public QilNode Number(double value)
         {
             //Internal Error: Literal number is not allowed in XSLT pattern outside of predicate.
             throw new XmlException(SR.Xml_InternalError);
         }
+
         public QilNode Variable(string prefix, string name)
         {
             //Internal Error: Variable is not allowed in XSLT pattern outside of predicate.
@@ -519,6 +521,7 @@ namespace System.Xml.Xsl.Xslt
             {
                 return _baseEnvironment.ResolveVariable(prefix, name);
             }
+
             public QilNode ResolveFunction(
                 string prefix,
                 string name,
@@ -528,6 +531,7 @@ namespace System.Xml.Xsl.Xslt
             {
                 return _baseEnvironment.ResolveFunction(prefix, name, args, env);
             }
+
             public string ResolvePrefix(string prefix)
             {
                 return _baseEnvironment.ResolvePrefix(prefix);
@@ -538,11 +542,13 @@ namespace System.Xml.Xsl.Xslt
                 numFixupCurrent++;
                 return _fixupCurrent;
             }
+
             public QilNode GetPosition()
             {
                 numFixupPosition++;
                 return _fixupPosition;
             }
+
             public QilNode GetLast()
             {
                 numFixupLast++;

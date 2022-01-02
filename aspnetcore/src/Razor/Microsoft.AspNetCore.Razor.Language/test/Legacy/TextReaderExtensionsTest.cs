@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 public class TextReaderExtensionsTest

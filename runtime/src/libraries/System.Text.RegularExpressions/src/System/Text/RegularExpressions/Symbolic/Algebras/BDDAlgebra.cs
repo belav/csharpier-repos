@@ -249,7 +249,6 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Returns true if a and b represent equivalent BDDs.
         /// </summary>
         public bool AreEquivalent(BDD a, BDD b) => Xor(a, b) == False;
-
         #endregion
 
         /// <summary>
@@ -308,7 +307,6 @@ namespace System.Text.RegularExpressions.Symbolic
             }
             return res;
         }
-
         #endregion
 
         /// <summary>
@@ -497,7 +495,6 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <param name="set">the given nonempty set</param>
         /// <returns>the lexicographically smallest bitvector in the set</returns>
         public ulong GetMin(BDD set) => set.GetMin();
-
         #endregion
 
         /// <summary>

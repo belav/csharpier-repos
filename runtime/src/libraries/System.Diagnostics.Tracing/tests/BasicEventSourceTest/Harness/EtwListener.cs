@@ -175,17 +175,20 @@ namespace BasicEventSourceTests
             {
                 get { return _data.EventName; }
             }
+
             public override object PayloadValue(int propertyIndex, string propertyName)
             {
                 if (propertyName != null)
                     Assert.Equal(propertyName, _data.PayloadNames[propertyIndex]);
                 return _data.PayloadValue(propertyIndex);
             }
+
             public override string PayloadString(int propertyIndex, string propertyName)
             {
                 Assert.Equal(propertyName, _data.PayloadNames[propertyIndex]);
                 return _data.PayloadString(propertyIndex);
             }
+
             public override int PayloadCount
             {
                 get { return _data.PayloadNames.Length; }

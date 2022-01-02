@@ -5,6 +5,7 @@
 #if !NETCOREAPP
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
+
 namespace System
 {
     /// <summary>Represent a range has start and end indexes.</summary>

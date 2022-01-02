@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
 public class CngCbcAuthenticatedEncryptorDescriptorDeserializerTests

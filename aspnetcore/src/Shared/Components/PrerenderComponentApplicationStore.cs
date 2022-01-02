@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 internal class PrerenderComponentApplicationStore : IPersistentComponentStateStore
@@ -49,6 +50,7 @@ internal class PrerenderComponentApplicationStore : IPersistentComponentStateSto
 
 #nullable enable
     public string? PersistedState { get; private set; }
+
 #nullable disable
 
     public Dictionary<string, byte[]> ExistingState { get; protected set; }

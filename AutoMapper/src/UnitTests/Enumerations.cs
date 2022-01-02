@@ -418,6 +418,7 @@ namespace AutoMapper.Tests
             }
         }
     }
+
     public class When_mapping_from_a_null_object_with_an_enum : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
@@ -530,6 +531,7 @@ namespace AutoMapper.Tests
             dest.Values.ShouldBe(default(EnumValues));
         }
     }
+
     public class When_mapping_from_a_null_object_with_a_nullable_enum_as_string : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =

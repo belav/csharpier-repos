@@ -116,7 +116,6 @@ namespace System.Net.Http.Headers
                         thisRef
                     )
             );
-
         #endregion
 
         #region General Headers
@@ -179,7 +178,6 @@ namespace System.Net.Http.Headers
         {
             get { return GeneralHeaders.Warning; }
         }
-
         #endregion
 
         internal HttpResponseHeaders(bool containsTrailingHeaders = false)

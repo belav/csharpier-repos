@@ -233,9 +233,11 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         public class ClassWithInterface : INonGenericInterface { }
+
         public struct StructWithInterface : INonGenericInterface { }
 
         private static void NonGenericMethod(int i) { }
+
         public delegate void NonGenericDelegate(int i);
 
         public enum Int32Enum : int

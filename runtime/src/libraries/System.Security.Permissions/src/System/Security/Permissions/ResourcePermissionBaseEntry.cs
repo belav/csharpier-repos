@@ -13,7 +13,9 @@ namespace System.Security.Permissions
     public class ResourcePermissionBaseEntry
     {
         public ResourcePermissionBaseEntry() { }
+
         public ResourcePermissionBaseEntry(int permissionAccess, string[] permissionAccessPath) { }
+
         public int PermissionAccess { get; }
         public string[] PermissionAccessPath { get; }
     }

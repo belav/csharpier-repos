@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Diagnostics;
 
 public class ExceptionHandlerMiddlewareTest

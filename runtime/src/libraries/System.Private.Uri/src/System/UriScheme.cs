@@ -25,6 +25,7 @@ namespace System
         }
 
         private const UriSyntaxFlags SchemeOnlyFlags = UriSyntaxFlags.MayHavePath;
+
         // This is a "scheme-only" base parser, everything after the scheme is
         // returned as the path component.
         // The user parser will need to do the majority of the work itself.

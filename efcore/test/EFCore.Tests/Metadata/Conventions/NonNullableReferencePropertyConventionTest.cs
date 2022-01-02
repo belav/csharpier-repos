@@ -170,6 +170,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             [Required]
             public string? RequiredAndNullable { get; set; }
+
 #nullable disable
 
 #pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' context.
@@ -198,6 +199,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             public string? Nullable { get; set; }
         }
+
 #nullable disable
 
         private static ModelBuilder CreateModelBuilder() =>

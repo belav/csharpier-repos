@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         protected AbstractSignatureHelpProvider() { }
 
         public abstract bool IsTriggerCharacter(char ch);
+
         public abstract bool IsRetriggerCharacter(char ch);
+
         public abstract SignatureHelpState? GetCurrentArgumentState(
             SyntaxNode root,
             int position,

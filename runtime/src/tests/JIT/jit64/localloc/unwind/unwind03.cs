@@ -12,6 +12,7 @@ internal class LocallocTest
 {
     private static bool s_testFailed = false;
     private static int s_locallocSize = 0;
+
     public static unsafe int Main()
     {
         ulong local1 = Global.INITIAL_VALUE;

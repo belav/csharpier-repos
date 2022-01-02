@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         #region Helpers
 
         internal delegate int IndexOfDelegate(SegmentedList<T> list, T value);
+
         public enum IndexOfMethod
         {
             IndexOf_T,
@@ -108,7 +109,6 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             }
         }
-
         #endregion
 
         #region IndexOf

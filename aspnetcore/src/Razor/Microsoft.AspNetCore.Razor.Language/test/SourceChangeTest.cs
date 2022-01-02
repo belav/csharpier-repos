@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 public class SourceChangeTest

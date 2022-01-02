@@ -11,6 +11,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
 public class DefaultViewComponentHelperTest

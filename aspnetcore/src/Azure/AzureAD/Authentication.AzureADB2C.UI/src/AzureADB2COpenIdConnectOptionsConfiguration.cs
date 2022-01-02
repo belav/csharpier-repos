@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 [Obsolete(

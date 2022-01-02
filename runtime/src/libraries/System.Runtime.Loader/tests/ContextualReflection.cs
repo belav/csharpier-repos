@@ -53,6 +53,7 @@ namespace System.Runtime.Loader.Tests
         {
             return Assembly.LoadWithPartialName(name);
         }
+
 #pragma warning restore 618
 
         public Type TypeGetType(string typeName)
@@ -1065,7 +1066,6 @@ namespace System.Runtime.Loader.Tests
                 _fixture.isolatedAlcAssembly
             );
         }
-
 #endregion
 
 #region Assembly.GetType

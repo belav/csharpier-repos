@@ -22,6 +22,7 @@ namespace System.Runtime.Serialization.Json
         XmlDictionaryString emptyDictionaryString,
         XmlDictionaryString[]? memberNames
     );
+
     internal delegate object JsonFormatCollectionReaderDelegate(
         XmlReaderDelegator xmlReader,
         XmlObjectSerializerReadContextComplexJson context,
@@ -29,6 +30,7 @@ namespace System.Runtime.Serialization.Json
         XmlDictionaryString itemName,
         CollectionDataContract collectionContract
     );
+
     internal delegate void JsonFormatGetOnlyCollectionReaderDelegate(
         XmlReaderDelegator xmlReader,
         XmlObjectSerializerReadContextComplexJson context,

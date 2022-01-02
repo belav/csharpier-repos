@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Compression;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.ResponseCompression;
 
 /// <summary>

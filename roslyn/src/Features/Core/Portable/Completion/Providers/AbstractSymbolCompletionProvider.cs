@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionOptions options,
             CancellationToken cancellationToken
         );
+
         protected abstract (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
             ISymbol symbol,
             TSyntaxContext context

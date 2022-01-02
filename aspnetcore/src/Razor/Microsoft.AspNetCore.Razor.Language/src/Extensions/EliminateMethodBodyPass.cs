@@ -4,6 +4,7 @@
 using System;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
+
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 internal sealed class EliminateMethodBodyPass : IntermediateNodePassBase, IRazorOptimizationPass

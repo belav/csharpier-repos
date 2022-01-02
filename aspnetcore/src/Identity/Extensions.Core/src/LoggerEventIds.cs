@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.Extensions.Identity.Core;
 
 internal static class LoggerEventIds

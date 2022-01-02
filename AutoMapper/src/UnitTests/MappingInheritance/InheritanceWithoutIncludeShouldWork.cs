@@ -6,7 +6,9 @@
     public class InheritanceWithoutIncludeShouldWork : AutoMapperSpecBase
     {
         public class FooBase { }
+
         public class Foo : FooBase { }
+
         public class FooDto
         {
             public int Value { get; set; }

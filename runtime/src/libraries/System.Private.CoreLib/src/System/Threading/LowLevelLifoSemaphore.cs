@@ -277,12 +277,17 @@ namespace System.Threading
             private Counts(ulong data) => _data = data;
 
             private uint GetUInt32Value(byte shift) => (uint)(_data >> shift);
+
             private void SetUInt32Value(uint value, byte shift) =>
                 _data = (_data & ~((ulong)uint.MaxValue << shift)) | ((ulong)value << shift);
+
             private ushort GetUInt16Value(byte shift) => (ushort)(_data >> shift);
+
             private void SetUInt16Value(ushort value, byte shift) =>
                 _data = (_data & ~((ulong)ushort.MaxValue << shift)) | ((ulong)value << shift);
+
             private byte GetByteValue(byte shift) => (byte)(_data >> shift);
+
             private void SetByteValue(byte value, byte shift) =>
                 _data = (_data & ~((ulong)byte.MaxValue << shift)) | ((ulong)value << shift);
 
@@ -378,10 +383,12 @@ namespace System.Threading
                 );
 
             public static bool operator ==(Counts lhs, Counts rhs) => lhs._data == rhs._data;
+
             public static bool operator !=(Counts lhs, Counts rhs) => lhs._data != rhs._data;
 
             public override bool Equals([NotNullWhen(true)] object? obj) =>
                 obj is Counts counts && _data == counts._data;
+
             public override int GetHashCode() => (int)_data + (int)(_data >> 32);
         }
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Connections;
 
+
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
 [Authorize]

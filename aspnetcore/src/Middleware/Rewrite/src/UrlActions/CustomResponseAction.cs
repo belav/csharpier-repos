@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Rewrite.Logging;
 
+
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
 internal class CustomResponseAction : UrlAction

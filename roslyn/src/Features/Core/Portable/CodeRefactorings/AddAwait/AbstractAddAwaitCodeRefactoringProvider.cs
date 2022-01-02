@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
         : CodeRefactoringProvider where TExpressionSyntax : SyntaxNode
     {
         protected abstract string GetTitle();
+
         protected abstract string GetTitleWithConfigureAwait();
 
         protected abstract bool IsInAsyncContext(SyntaxNode node);

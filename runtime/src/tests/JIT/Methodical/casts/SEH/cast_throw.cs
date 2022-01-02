@@ -4,6 +4,7 @@
 using System;
 
 internal class BaseException : Exception { }
+
 internal class DerivedException : BaseException { }
 
 internal class Test_cast_throw

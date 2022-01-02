@@ -10,6 +10,7 @@ namespace MS.Internal.Xml.XPath
     internal sealed class IDQuery : CacheOutputQuery
     {
         public IDQuery(Query arg) : base(arg) { }
+
         private IDQuery(IDQuery other) : base(other) { }
 
         public override object Evaluate(XPathNodeIterator context)

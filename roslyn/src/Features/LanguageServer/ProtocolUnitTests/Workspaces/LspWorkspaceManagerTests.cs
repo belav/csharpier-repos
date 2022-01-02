@@ -18,6 +18,7 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Roslyn.Test.Utilities;
 using Xunit;
 
+
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Workspaces;
 
 public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests

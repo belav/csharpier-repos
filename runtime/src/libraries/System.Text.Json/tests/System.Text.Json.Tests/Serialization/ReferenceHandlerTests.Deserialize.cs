@@ -884,7 +884,6 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal("$.Contacts.$ref", ex.Path);
         }
-
         #endregion
 
         #region Throw cases
@@ -1534,7 +1533,6 @@ namespace System.Text.Json.Serialization.Tests
         {
             get { return TestData.ReadSuccessCases; }
         }
-
         #endregion
 
         #region Preserved objects ($id)
@@ -1958,6 +1956,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         private class Derived : Base { }
+
         private class Base { }
     }
 }

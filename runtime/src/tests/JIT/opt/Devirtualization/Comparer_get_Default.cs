@@ -263,6 +263,7 @@ class Program
             Comparer<Struct1>.Default.GetType().ToString()
         );
     }
+
     private static int GetHashCodeTests()
     {
         // Just to make sure it doesn't crash
@@ -288,6 +289,7 @@ public struct Struct1 : IComparable
 {
     public long a;
     public long b;
+
     public int CompareTo(object obj)
     {
         return b.CompareTo(((Struct1)obj).b);

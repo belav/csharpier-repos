@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Tokens.Saml;
 using Microsoft.IdentityModel.Tokens.Saml2;
 
+
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
 /// <summary>

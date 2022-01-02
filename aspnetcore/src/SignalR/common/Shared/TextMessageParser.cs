@@ -5,6 +5,7 @@ using System;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 
+
 namespace Microsoft.AspNetCore.Internal;
 
 internal static class TextMessageParser

@@ -362,14 +362,20 @@ namespace System.Reflection.Metadata.Decoding.Tests
             public int* Pointer;
             public int[] SZArray;
             public int[,] Array;
+
             public void ByReference(ref int i) { }
+
             public T GenericTypeParameter;
+
             public U GenericMethodParameter<U>()
             {
                 throw null;
             }
+
             public List<int> GenericInstantiation;
+
             public struct Nested { }
+
             public Nested Property
             {
                 get { throw null; }

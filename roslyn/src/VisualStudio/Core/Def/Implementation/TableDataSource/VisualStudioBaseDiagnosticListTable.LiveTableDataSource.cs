@@ -81,6 +81,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             public override string SourceTypeIdentifier =>
                 StandardTableDataSources.ErrorTableDataSource;
             public override string Identifier => _identifier;
+
             public override object GetItemKey(DiagnosticsUpdatedArgs data) => data.Id;
 
             private void ConnectToBuildUpdateSource(

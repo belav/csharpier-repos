@@ -80,6 +80,7 @@ namespace System.Xml.Schema
         public XmlQualifiedName QnDtMin;
         public XmlQualifiedName QnDtMinExclusive;
         public XmlQualifiedName QnDtMaxExclusive;
+
         // For XSD Schema
         public XmlQualifiedName QnTargetNamespace;
         public XmlQualifiedName QnVersion;

@@ -119,7 +119,6 @@ namespace System.IO.Packaging
 
             return readerCount;
         }
-
         #endregion Internal Methods
 
         /// <summary>

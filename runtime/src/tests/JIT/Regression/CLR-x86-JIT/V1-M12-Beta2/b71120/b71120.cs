@@ -36,6 +36,7 @@ namespace Test
             }
             return new double[] { 42.0 };
         }
+
         static int Main()
         {
             try

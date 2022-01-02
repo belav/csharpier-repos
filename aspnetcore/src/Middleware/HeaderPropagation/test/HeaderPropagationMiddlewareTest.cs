@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.HeaderPropagation.Tests;
 
 public class HeaderPropagationMiddlewareTest

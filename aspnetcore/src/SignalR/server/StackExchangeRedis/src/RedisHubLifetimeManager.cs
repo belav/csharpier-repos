@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 
+
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis;
 
 /// <summary>

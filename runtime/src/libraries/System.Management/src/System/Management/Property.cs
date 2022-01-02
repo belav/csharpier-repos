@@ -79,6 +79,7 @@ namespace System.Management
     public class PropertyData
     {
         private readonly ManagementBaseObject parent; //need access to IWbemClassObject pointer to be able to refresh property info
+
         //and get property qualifiers
         private readonly string propertyName;
 

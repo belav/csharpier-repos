@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 public sealed class UriHelpersTests

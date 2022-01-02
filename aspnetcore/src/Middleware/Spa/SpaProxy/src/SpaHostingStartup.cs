@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 
 [assembly: HostingStartup(typeof(Microsoft.AspNetCore.SpaProxy.SpaHostingStartup))]
 
+
+
 namespace Microsoft.AspNetCore.SpaProxy;
 
 internal class SpaHostingStartup : IHostingStartup

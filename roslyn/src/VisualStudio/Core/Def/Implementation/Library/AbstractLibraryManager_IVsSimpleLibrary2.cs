@@ -14,12 +14,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
     internal partial class AbstractLibraryManager : IVsSimpleLibrary2
     {
         public abstract uint GetLibraryFlags();
+
         protected abstract uint GetSupportedCategoryFields(uint category);
+
         protected abstract IVsSimpleObjectList2 GetList(
             uint listType,
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch
         );
+
         protected abstract uint GetUpdateCounter();
 
         protected virtual int CreateNavInfo(

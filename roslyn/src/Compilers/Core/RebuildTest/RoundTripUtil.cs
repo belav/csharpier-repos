@@ -319,6 +319,7 @@ Actual:
                 }
             }
         }
+
 #pragma warning restore 612
 
         private static void VerifyParseOptions(

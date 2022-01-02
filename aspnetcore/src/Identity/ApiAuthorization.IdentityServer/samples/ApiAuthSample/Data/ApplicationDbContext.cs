@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
+
 namespace ApiAuthSample.Data;
 
 public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>

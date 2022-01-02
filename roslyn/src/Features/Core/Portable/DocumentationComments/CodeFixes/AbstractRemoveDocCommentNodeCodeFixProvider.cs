@@ -32,7 +32,9 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         protected abstract SyntaxTriviaList GetRevisedDocCommentTrivia(string docCommentText);
 
         protected abstract SyntaxTokenList GetTextTokens(TXmlTextSyntax xmlText);
+
         protected abstract bool IsXmlNewLineToken(SyntaxToken token);
+
         protected abstract bool IsXmlWhitespaceToken(SyntaxToken token);
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)

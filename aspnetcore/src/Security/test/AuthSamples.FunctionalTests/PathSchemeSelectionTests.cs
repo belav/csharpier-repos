@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
+
 namespace AuthSamples.FunctionalTests;
 
 public class PathSchemeSelectionTests

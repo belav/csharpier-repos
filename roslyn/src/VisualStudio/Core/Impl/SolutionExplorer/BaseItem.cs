@@ -66,7 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public ImageSource? StateIcon => null;
         public virtual ImageMoniker StateIconMoniker => default;
         public string? StateToolTipText => null;
+
         public override string ToString() => Text;
+
         public string Text => _name;
         public object? ToolTipContent => null;
         public string ToolTipText => _name;

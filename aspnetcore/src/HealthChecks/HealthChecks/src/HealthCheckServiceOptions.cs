@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
 /// <summary>

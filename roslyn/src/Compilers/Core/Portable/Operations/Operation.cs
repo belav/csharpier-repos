@@ -133,6 +133,7 @@ namespace Microsoft.CodeAnalysis
         internal Operation.Enumerable ChildOperations => new Operation.Enumerable(this);
 
         protected abstract IOperation GetCurrent(int slot, int index);
+
         protected abstract (bool hasNext, int nextSlot, int nextIndex) MoveNext(
             int previousSlot,
             int previousIndex

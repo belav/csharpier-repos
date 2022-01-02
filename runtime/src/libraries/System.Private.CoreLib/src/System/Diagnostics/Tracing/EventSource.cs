@@ -179,6 +179,7 @@ using System.Threading.Tasks;
 
 #if ES_BUILD_STANDALONE
 using System.Security.Permissions;
+
 #endif
 
 #if ES_BUILD_STANDALONE
@@ -192,7 +193,6 @@ namespace System.Diagnostics.Tracing
     internal sealed class EventSourceAutoGenerateAttribute : Attribute
     {
     }
-
 #endif
     /// <summary>
     /// This class is meant to be inherited by a user-defined event source in order to define a managed
@@ -261,7 +261,6 @@ namespace System.Diagnostics.Tracing
             )
                 ? isSupported
                 : true;
-
 #if FEATURE_EVENTSOURCE_XPLAT
 #pragma warning disable CA1823 // field is used to keep listener alive
         private static readonly EventListener? persistent_Xplat_Listener = IsSupported
@@ -274,6 +273,7 @@ namespace System.Diagnostics.Tracing
         /// The human-friendly name of the eventSource.  It defaults to the simple name of the class
         /// </summary>
         public string Name => m_name;
+
         /// <summary>
         /// Every eventSource is assigned a GUID to uniquely identify it to the system.
         /// </summary>
@@ -371,6 +371,7 @@ namespace System.Diagnostics.Tracing
             }
             return GenerateGuidFromName(name.ToUpperInvariant()); // Make it case insensitive.
         }
+
         /// <summary>
         /// Returns the official ETW Provider name for the eventSource defined by 'eventSourceType'.
         /// This API allows you to compute this without actually creating an instance of the EventSource.
@@ -419,6 +420,7 @@ namespace System.Diagnostics.Tracing
                 EventManifestOptions.None
             );
         }
+
         /// <summary>
         /// Returns a string of the XML manifest associated with the eventSourceType. The scheme for this XML is
         /// documented at in EventManifest Schema https://docs.microsoft.com/en-us/windows/desktop/WES/eventmanifestschema-schema.
@@ -808,7 +810,6 @@ namespace System.Diagnostics.Tracing
                 Initialize(eventSourceGuid, eventSourceName, traits);
             }
         }
-
 #if FEATURE_PERFTRACING
         // Generate the serialized blobs that describe events for all strongly typed events (that is events that define strongly
         // typed event methods. Dynamically defined events (that use Write) hare defined on the fly and are handled elsewhere.
@@ -1641,7 +1642,6 @@ namespace System.Diagnostics.Tracing
         {
             WriteEventVarargs(eventId, &relatedActivityId, args);
         }
-
 #endregion
 
 #region IDisposable Members
@@ -1653,6 +1653,7 @@ namespace System.Diagnostics.Tracing
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         /// <summary>
         /// Disposes of an EventSource.
         /// </summary>
@@ -1705,6 +1706,7 @@ namespace System.Diagnostics.Tracing
             m_eventSourceEnabled = false;
             m_eventSourceDisposed = true;
         }
+
         /// <summary>
         /// Finalizer for EventSource
         /// </summary>
@@ -2822,6 +2824,7 @@ namespace System.Diagnostics.Tracing
             }
             return true;
         }
+
         [System.Runtime.CompilerServices.MethodImpl(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -2902,7 +2905,6 @@ namespace System.Diagnostics.Tracing
 
             return opcode;
         }
-
 #if FEATURE_MANAGED_ETW
         /// <summary>
         /// This class lets us hook the 'OnEventCommand' from the eventSource.
@@ -2915,6 +2917,7 @@ namespace System.Diagnostics.Tracing
                 this.m_eventSource = eventSource;
                 this.m_eventProviderType = providerType;
             }
+
             protected override void OnControllerCommand(
                 ControllerCommand command,
                 IDictionary<string, string?>? arguments,
@@ -2936,6 +2939,7 @@ namespace System.Diagnostics.Tracing
                     arguments
                 );
             }
+
             private readonly EventSource m_eventSource;
             private readonly EventProviderType m_eventProviderType;
         }
@@ -4992,6 +4996,7 @@ namespace System.Diagnostics.Tracing
                 Validate();
             }
         }
+
         // We don't expose a Dispose(bool), because the contract is that you don't have any non-syncronous
         // 'cleanup' associated with this object
 
@@ -5009,6 +5014,7 @@ namespace System.Diagnostics.Tracing
         {
             EnableEvents(eventSource, level, EventKeywords.None);
         }
+
         /// <summary>
         /// Enable all events from the eventSource identified by 'eventSource' to the current
         /// dispatcher that have a verbosity level of 'level' or lower and have a event keyword
@@ -5028,6 +5034,7 @@ namespace System.Diagnostics.Tracing
         {
             EnableEvents(eventSource, level, matchAnyKeyword, null);
         }
+
         /// <summary>
         /// Enable all events from the eventSource identified by 'eventSource' to the current
         /// dispatcher that have a verbosity level of 'level' or lower and have a event keyword
@@ -5077,6 +5084,7 @@ namespace System.Diagnostics.Tracing
             }
 #endif // FEATURE_PERFTRACING
         }
+
         /// <summary>
         /// Disables all events coming from eventSource identified by 'eventSource'.
         ///
@@ -5498,6 +5506,7 @@ namespace System.Diagnostics.Tracing
         /// from this list.   Note that EventSources point to their listener but NOT the reverse.
         /// </summary>
         internal static EventListener? s_Listeners;
+
         /// <summary>
         /// The list of all active eventSources in the appdomain.  Note that eventSources do NOT
         /// remove themselves from this list this is a weak list and the GC that removes them may
@@ -5746,7 +5755,6 @@ namespace System.Diagnostics.Tracing
             get => _moreInfo?.Message ?? (EventId <= 0 ? null : Metadata.Message);
             internal set => MoreInfo.Message = value;
         }
-
 #if FEATURE_MANAGED_ETW_CHANNELS
         /// <summary>
         /// Gets the channel for the event.
@@ -5902,10 +5910,13 @@ namespace System.Diagnostics.Tracing
 
         /// <summary>Event's ID</summary>
         public int EventId { get; private set; }
+
         /// <summary>Event's severity level: indicates the severity or verbosity of the event</summary>
         public EventLevel Level { get; set; }
+
         /// <summary>Event's keywords: allows classification of events by "categories"</summary>
         public EventKeywords Keywords { get; set; }
+
         /// <summary>Event's operation code: allows defining operations, generally used with Tasks</summary>
         public EventOpcode Opcode
         {
@@ -5965,7 +5976,6 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public NonEventAttribute() { }
     }
-
     // FUTURE we may want to expose this at some point once we have a partner that can help us validate the design.
 #if FEATURE_MANAGED_ETW_CHANNELS
     /// <summary>
@@ -6380,7 +6390,6 @@ namespace System.Diagnostics.Tracing
             keywordTab ??= new Dictionary<ulong, string>();
             keywordTab[value] = name;
         }
-
 #if FEATURE_MANAGED_ETW_CHANNELS
         /// <summary>
         /// Add a channel.  channelAttribute can be null
@@ -6466,7 +6475,6 @@ namespace System.Diagnostics.Tracing
 
             return channelMask;
         }
-
 #endif
         public void StartEvent(string eventName, EventAttribute eventAttribute)
         {
@@ -6573,6 +6581,7 @@ namespace System.Diagnostics.Tracing
 
             templates.AppendLine("/>");
         }
+
         public void EndEvent()
         {
             Debug.Assert(eventName != null);
@@ -6600,7 +6609,6 @@ namespace System.Diagnostics.Tracing
             numParams = 0;
             byteArrArgIndices = null;
         }
-
 #if FEATURE_MANAGED_ETW_CHANNELS
         // Channel keywords are generated one per channel to allow channel based filtering in event viewer. These keywords are autogenerated
         // by mc.exe for compiling a manifest and are based on the order of the channels (fields) in the Channels inner class (when advanced
@@ -6935,6 +6943,7 @@ namespace System.Diagnostics.Tracing
             stringBuilder.Append(" name=\"").Append(name).Append('"');
             WriteMessageAttrib(sb, elementName, name, name);
         }
+
         private void WriteMessageAttrib(
             StringBuilder stringBuilder,
             string elementName,
@@ -6969,6 +6978,7 @@ namespace System.Diagnostics.Tracing
 
             stringTab[key] = value;
         }
+
         internal string? GetLocalizedMessage(string key, CultureInfo ci, bool etwFormat)
         {
             string? value = null;
@@ -7011,7 +7021,6 @@ namespace System.Diagnostics.Tracing
                 }
             );
         }
-
 #if FEATURE_MANAGED_ETW_CHANNELS
         private string? GetChannelName(EventChannel channel, string eventName, string? eventMessage)
         {
@@ -7226,6 +7235,7 @@ namespace System.Diagnostics.Tracing
             "%n",
             "%t"
         };
+
         // Manifest messages use %N conventions for their message substitutions.   Translate from
         // .NET conventions.   We can't use RegEx for this (we are in mscorlib), so we do it 'by hand'
         private string TranslateToManifestConvention(string eventMessage, string evtName)
@@ -7354,7 +7364,6 @@ namespace System.Diagnostics.Tracing
             }
             return idx + 1;
         }
-
 #if FEATURE_MANAGED_ETW_CHANNELS
         private sealed class ChannelInfo
         {
@@ -7386,7 +7395,6 @@ namespace System.Diagnostics.Tracing
         private readonly StringBuilder sb; // Holds the provider information.
         private readonly StringBuilder events; // Holds the events.
         private readonly StringBuilder templates;
-
 #if FEATURE_MANAGED_ETW_CHANNELS
         private readonly string providerName;
 #endif
@@ -7408,6 +7416,7 @@ namespace System.Diagnostics.Tracing
     internal struct ManifestEnvelope
     {
         public const int MaxChunkSize = 0xFF00;
+
         public enum ManifestFormats : byte
         {
             SimpleXmlFormat = 1, // simply dump the XML manifest as UTF8

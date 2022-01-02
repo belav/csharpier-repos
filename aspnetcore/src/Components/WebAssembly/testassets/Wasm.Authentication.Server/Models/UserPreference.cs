@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+
 namespace Wasm.Authentication.Server.Models;
 
 public class UserPreference

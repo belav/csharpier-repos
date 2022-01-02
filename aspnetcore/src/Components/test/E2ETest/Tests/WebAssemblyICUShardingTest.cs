@@ -12,6 +12,7 @@ using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 // Blazor WebAssembly loads ICU (globalization) data for subset of cultures by default.

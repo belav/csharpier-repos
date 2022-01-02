@@ -87,6 +87,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 public override string SourceTypeIdentifier =>
                     StandardTableDataSources.ErrorTableDataSource;
                 public override string Identifier => IdentifierString;
+
                 public override object GetItemKey(object data) => data;
 
                 protected override object GetOrUpdateAggregationKey(object data) => data;

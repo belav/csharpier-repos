@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
+
 namespace BasicWebSite.Controllers;
 
 public class JsonResultWithNewtonsoftJsonController : Controller

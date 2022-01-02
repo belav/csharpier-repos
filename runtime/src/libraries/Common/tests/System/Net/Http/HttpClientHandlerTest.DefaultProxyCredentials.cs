@@ -99,7 +99,6 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
-
 #if !WINHTTPHANDLER_TEST
         [PlatformSpecific(TestPlatforms.AnyUnix)] // The default proxy is resolved via WinINet on Windows.
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

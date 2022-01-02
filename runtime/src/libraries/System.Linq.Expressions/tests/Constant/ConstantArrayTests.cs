@@ -629,7 +629,6 @@ namespace System.Linq.Expressions.Tests
         {
             CheckGenericWithSubClassAndNewRestrictionHelper<C>(useInterpreter);
         }
-
         #endregion
 
         #region Generic helpers
@@ -729,7 +728,6 @@ namespace System.Linq.Expressions.Tests
                 VerifyGenericWithSubClassAndNewRestrictionArray<TCn>(value, useInterpreter);
             }
         }
-
         #endregion
 
         #region Test verifiers

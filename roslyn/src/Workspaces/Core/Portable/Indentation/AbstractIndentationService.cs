@@ -100,6 +100,7 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// <paramref name="token"/> provided by this method.
         /// </summary>
         protected abstract bool ShouldUseTokenIndenter(Indenter indenter, out SyntaxToken token);
+
         protected abstract ISmartTokenFormatter CreateSmartTokenFormatter(Indenter indenter);
 
         protected abstract IndentationResult? GetDesiredIndentationWorker(

@@ -192,7 +192,6 @@ namespace System.Speech.Internal.SrgsCompiler
         void IElementFactory.AddElement(IRule rule, IElement value) { }
 
         void IElementFactory.AddElement(IItem item, IElement value) { }
-
         #endregion
 
         #region Internal Properties
@@ -397,7 +396,6 @@ namespace System.Speech.Internal.SrgsCompiler
             // null terminate and update string length
             return new string(achDest, 0, iDest);
         }
-
         #endregion
 
         #region Private Fields

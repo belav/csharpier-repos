@@ -27,6 +27,7 @@ using Wasm.Authentication.Server.Data;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class WebAssemblyAuthenticationTests : ServerTestBase<AspNetSiteServerFixture>

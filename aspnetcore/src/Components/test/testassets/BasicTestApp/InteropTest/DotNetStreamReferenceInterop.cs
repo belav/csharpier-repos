@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
+
 namespace BasicTestApp.InteropTest;
 
 public class DotNetStreamReferenceInterop

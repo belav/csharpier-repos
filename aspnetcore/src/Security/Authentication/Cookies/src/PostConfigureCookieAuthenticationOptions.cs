@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
 /// <summary>

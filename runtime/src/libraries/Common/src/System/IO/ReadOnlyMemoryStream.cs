@@ -97,7 +97,6 @@ namespace System.IO
             ValidateBufferArguments(buffer, offset, count);
             return ReadBuffer(new Span<byte>(buffer, offset, count));
         }
-
 #if !NETFRAMEWORK && !NETSTANDARD2_0
         public override int Read(Span<byte> buffer) => ReadBuffer(buffer);
 #endif
@@ -139,7 +138,6 @@ namespace System.IO
               ? Task.FromCanceled<int>(cancellationToken)
               : Task.FromResult(ReadBuffer(new Span<byte>(buffer, offset, count)));
         }
-
 #if !NETFRAMEWORK && !NETSTANDARD2_0
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
@@ -166,7 +164,6 @@ namespace System.IO
             EnsureNotClosed();
             return TaskToApm.End<int>(asyncResult);
         }
-
 #if !NETFRAMEWORK && !NETSTANDARD2_0
         public override void CopyTo(Stream destination, int bufferSize)
         {

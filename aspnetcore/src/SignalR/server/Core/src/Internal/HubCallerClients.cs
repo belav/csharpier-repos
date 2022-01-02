@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal class HubCallerClients : IHubCallerClients

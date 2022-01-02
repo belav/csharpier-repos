@@ -3,6 +3,7 @@
 
 using Microsoft.AspNetCore.Routing.Template;
 
+
 namespace Swaggatherer;
 
 internal class RouteEntry

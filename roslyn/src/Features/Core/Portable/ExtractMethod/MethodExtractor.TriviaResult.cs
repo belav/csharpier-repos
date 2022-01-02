@@ -40,6 +40,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SyntaxNode callsite,
                 SyntaxNode methodDefinition
             );
+
             protected abstract TriviaResolver GetTriviaResolver(SyntaxNode methodDefinition);
 
             public SemanticDocument SemanticDocument { get; }

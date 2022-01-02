@@ -215,7 +215,6 @@ namespace System.Linq.Expressions.Interpreter
                 }
             }
         }
-
 #if NO_FEATURE_STATIC_DELEGATE
         private static Func<LightLambda, Delegate> GetRunDelegateCtor(Type delegateType)
         {
@@ -434,7 +433,6 @@ namespace System.Linq.Expressions.Interpreter
         {
             return new InterpretedFrame(_interpreter, _closure);
         }
-
 #if NO_FEATURE_STATIC_DELEGATE
         internal void RunVoidRef2<T0, T1>(ref T0 arg0, ref T1 arg1)
         {

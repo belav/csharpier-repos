@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Testing;
 
 public class KestrelTestLoggerProvider : ILoggerProvider

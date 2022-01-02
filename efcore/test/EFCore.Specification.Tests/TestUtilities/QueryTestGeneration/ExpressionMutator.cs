@@ -140,6 +140,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
         protected bool IsEntityType(Type type) => Context.Model.FindEntityType(type) != null;
 
         public abstract bool IsValid(Expression expression);
+
         public abstract Expression Apply(Expression expression, Random random);
 
         protected class ExpressionInjector : ExpressionVisitor

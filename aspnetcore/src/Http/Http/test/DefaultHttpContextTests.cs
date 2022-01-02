@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Http;
 
 public class DefaultHttpContextTests
@@ -386,6 +387,7 @@ public class DefaultHttpContextTests
     private class DisposableThing : IDisposable
     {
         public bool Disposed { get; set; }
+
         public void Dispose()
         {
             Disposed = true;

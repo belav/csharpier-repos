@@ -23,6 +23,7 @@ namespace System.Drawing
                 || ex is IndexOutOfRangeException
                 || ex is AccessViolationException;
         }
+
 #pragma warning restore 618
 
         public static bool IsSecurityOrCriticalException(Exception ex)

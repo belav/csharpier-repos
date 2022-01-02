@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.Extensions.CommandLineUtils;
 
 internal class CommandParsingException : Exception

@@ -5,6 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
 
+
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 internal abstract partial class IISHttpContext

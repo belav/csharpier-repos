@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Identity.Core;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.Identity;
 
 /// <summary>
@@ -68,7 +69,6 @@ public class PasswordHasher<TUser> : IPasswordHasher<TUser> where TUser : class
 
         _rng = options.Rng;
     }
-
 #if NETSTANDARD2_0 || NETFRAMEWORK
     // Compares two byte arrays for equality. The method is specifically written so that the loop is not optimized.
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

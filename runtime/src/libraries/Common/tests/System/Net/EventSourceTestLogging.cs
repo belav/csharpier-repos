@@ -9,6 +9,7 @@ namespace System.Net.Test.Common
     internal class EventSourceTestLogging : EventSource
     {
         private static EventSourceTestLogging s_log = new EventSourceTestLogging();
+
         private EventSourceTestLogging() { }
 
         public static EventSourceTestLogging Log

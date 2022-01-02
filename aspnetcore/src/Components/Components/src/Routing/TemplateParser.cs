@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 
+
 namespace Microsoft.AspNetCore.Components.Routing;
 
 // This implementation is temporary, in the future we'll want to have

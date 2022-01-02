@@ -10,6 +10,7 @@ namespace System.Net.Security
     internal partial struct TlsCipherSuiteData
     {
         internal ExchangeAlgorithmType KeyExchangeAlgorithm;
+
         // The Key Exchange size isn't part of the CipherSuite
         internal CipherAlgorithmType CipherAlgorithm;
         internal int CipherAlgorithmStrength;

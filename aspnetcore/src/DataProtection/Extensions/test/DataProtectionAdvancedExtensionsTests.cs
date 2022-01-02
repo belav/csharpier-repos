@@ -7,6 +7,7 @@ using System.Text;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 public class DataProtectionAdvancedExtensionsTests

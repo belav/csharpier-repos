@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Xunit;
 
+
 namespace Microsoft.CodeAnalysis.Razor;
 
 public class BindTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTestBase

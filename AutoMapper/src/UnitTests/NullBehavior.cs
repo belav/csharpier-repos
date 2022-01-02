@@ -15,19 +15,23 @@ namespace AutoMapper.UnitTests.NullBehavior
             public InnerSource Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         public class InnerSource
         {
             public int Integer { get; set; }
         }
+
         class Destination
         {
             public InnerDestination Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         public class InnerDestination
         {
             public int Integer { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -38,6 +42,7 @@ namespace AutoMapper.UnitTests.NullBehavior
                     cfg.AllowNullCollections = true;
                 }
             );
+
         [Fact]
         public void Should_map_to_non_null()
         {
@@ -46,6 +51,7 @@ namespace AutoMapper.UnitTests.NullBehavior
             destination.Inner.ShouldNotBeNull();
         }
     }
+
     public class When_mappping_null_with_AllowNull : AutoMapperSpecBase
     {
         class Source
@@ -53,19 +59,23 @@ namespace AutoMapper.UnitTests.NullBehavior
             public InnerSource Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         public class InnerSource
         {
             public int Integer { get; set; }
         }
+
         class Destination
         {
             public InnerDestination Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         public class InnerDestination
         {
             public int Integer { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -76,6 +86,7 @@ namespace AutoMapper.UnitTests.NullBehavior
                     cfg.AllowNullCollections = false;
                 }
             );
+
         [Fact]
         public void Should_map_to_null()
         {
@@ -84,6 +95,7 @@ namespace AutoMapper.UnitTests.NullBehavior
             destination.Inner.ShouldBeNull();
         }
     }
+
     public class When_mappping_null_with_AllowNull_and_inheritance : AutoMapperSpecBase
     {
         class Source
@@ -91,25 +103,31 @@ namespace AutoMapper.UnitTests.NullBehavior
             public InnerSource Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         class SourceDerived : Source
         {
         }
+
         public class InnerSource
         {
             public int Integer { get; set; }
         }
+
         class Destination
         {
             public InnerDestination Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         class DestinationDerived : Destination
         {
         }
+
         public class InnerDestination
         {
             public int Integer { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -122,6 +140,7 @@ namespace AutoMapper.UnitTests.NullBehavior
                     cfg.AllowNullCollections = false;
                 }
             );
+
         [Fact]
         public void Should_map_to_null()
         {
@@ -130,6 +149,7 @@ namespace AutoMapper.UnitTests.NullBehavior
             destination.Inner.ShouldBeNull();
         }
     }
+
     public class When_mappping_null_with_DoNotAllowNull_and_inheritance : AutoMapperSpecBase
     {
         class Source
@@ -137,25 +157,31 @@ namespace AutoMapper.UnitTests.NullBehavior
             public InnerSource Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         class SourceDerived : Source
         {
         }
+
         public class InnerSource
         {
             public int Integer { get; set; }
         }
+
         class Destination
         {
             public InnerDestination Inner { get; set; }
             public int[] Collection { get; set; }
         }
+
         class DestinationDerived : Destination
         {
         }
+
         public class InnerDestination
         {
             public int Integer { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -169,6 +195,7 @@ namespace AutoMapper.UnitTests.NullBehavior
                     cfg.AllowNullCollections = true;
                 }
             );
+
         [Fact]
         public void Should_map_to_non_null()
         {
@@ -177,6 +204,7 @@ namespace AutoMapper.UnitTests.NullBehavior
             destination.Inner.ShouldNotBeNull();
         }
     }
+
     public class When_mappping_null_collection_with_AllowNullCollections_false : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => { });

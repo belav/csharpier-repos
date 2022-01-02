@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
 public class EchoHub : Hub

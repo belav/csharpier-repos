@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeQuality;
 
         protected abstract SyntaxNode GetInitializerNode(TSymbolSyntax declaration);
+
         protected abstract ImmutableList<TSymbolSyntax> GetVariableDeclarators(
             TFieldDeclarationSyntax declaration
         );

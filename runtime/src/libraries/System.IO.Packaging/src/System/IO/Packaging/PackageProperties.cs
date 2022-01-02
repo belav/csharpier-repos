@@ -50,7 +50,6 @@ namespace System.IO.Packaging
         /// make use of the IDisposable functionality.
         /// </summary>
         protected virtual void Dispose(bool disposing) { }
-
         #endregion IDisposable
 
         //------------------------------------------------------
@@ -122,7 +121,6 @@ namespace System.IO.Packaging
         /// The date and time of the last modification.
         /// </summary>
         public abstract Nullable<DateTime> Modified { get; set; }
-
         #endregion SummaryInformation properties
 
         #region DocumentSummaryInformation properties

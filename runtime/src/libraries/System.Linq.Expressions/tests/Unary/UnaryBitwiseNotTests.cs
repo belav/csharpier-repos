@@ -105,7 +105,6 @@ namespace System.Linq.Expressions.Tests
             UnaryExpression e = Expression.Not(Expression.Parameter(typeof(bool), "x"));
             Assert.Equal("Not(x)", e.ToString());
         }
-
         #endregion
 
         #region Test verifiers

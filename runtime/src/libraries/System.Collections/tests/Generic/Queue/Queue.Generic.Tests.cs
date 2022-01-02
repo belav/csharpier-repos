@@ -27,7 +27,6 @@ namespace System.Collections.Tests
                 queue.Enqueue(CreateT(seed++));
             return queue;
         }
-
         #endregion
 
         #region IGenericSharedAPI<T> Helper Methods
@@ -43,20 +42,25 @@ namespace System.Collections.Tests
         }
 
         protected override int Count(IEnumerable<T> enumerable) => ((Queue<T>)enumerable).Count;
+
         protected override void Add(IEnumerable<T> enumerable, T value) =>
             ((Queue<T>)enumerable).Enqueue(value);
+
         protected override void Clear(IEnumerable<T> enumerable) => ((Queue<T>)enumerable).Clear();
+
         protected override bool Contains(IEnumerable<T> enumerable, T value) =>
             ((Queue<T>)enumerable).Contains(value);
+
         protected override void CopyTo(IEnumerable<T> enumerable, T[] array, int index) =>
             ((Queue<T>)enumerable).CopyTo(array, index);
+
         protected override bool Remove(IEnumerable<T> enumerable) =>
             ((Queue<T>)enumerable).TryDequeue(out _);
+
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
         protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
-
         #endregion
 
         #region Constructor_IEnumerable
@@ -89,7 +93,6 @@ namespace System.Collections.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>("collection", () => new Queue<T>(null));
         }
-
         #endregion
 
         #region Constructor_Capacity
@@ -116,7 +119,6 @@ namespace System.Collections.Tests
                 () => new Queue<T>(int.MinValue)
             );
         }
-
         #endregion
 
         #region Dequeue
@@ -172,7 +174,6 @@ namespace System.Collections.Tests
             q.Enqueue(itemToAdd);
             Assert.Equal(itemToAdd, q.Dequeue());
         }
-
         #endregion
 
         #region ToArray
@@ -195,7 +196,6 @@ namespace System.Collections.Tests
             elements.Reverse();
             Assert.True(Enumerable.SequenceEqual(elements, collection.ToArray<T>()));
         }
-
         #endregion
 
         #region Peek
@@ -218,7 +218,6 @@ namespace System.Collections.Tests
         {
             Assert.Throws<InvalidOperationException>(() => new Queue<T>().Peek());
         }
-
         #endregion
 
         #region TrimExcess
@@ -295,7 +294,6 @@ namespace System.Collections.Tests
                 Assert.Equal(count, queue.Count);
             }
         }
-
         #endregion
 
         [Theory]

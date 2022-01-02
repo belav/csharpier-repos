@@ -85,12 +85,13 @@ using System.Dynamic;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 using Action = Newtonsoft.Json.Serialization.Action;
+
 #else
 using System.Linq;
+
 #endif
 #if !(DNXCORE50)
 using System.Drawing;
-
 #endif
 
 namespace Newtonsoft.Json.Tests.Serialization
@@ -703,7 +704,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual("Name!", c2.Name);
         }
-
 #if !(NET20 || NET35 || PORTABLE40)
         [Test]
         public void SerializeValueTuple()
@@ -752,7 +752,6 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             public string Value { get; }
         }
-
 #if !(DNXCORE50 || NET20)
         [Test]
         public void SerializeMetadataType()
@@ -3661,7 +3660,6 @@ keyword such as type of business.""
             Assert.AreEqual("id", n.FidOrder[0]);
             Assert.AreEqual("titleId", n.FidOrder[n.FidOrder.Count - 1]);
         }
-
 #if !(NET20 || DNXCORE50)
         [Test]
         public void OptInClassMetadataSerialization()
@@ -4074,7 +4072,6 @@ Path '', line 1, position 1."
                 @"Unexpected character encountered while parsing value: [. Path '', line 1, position 1."
             );
         }
-
 #if !(NET35 || NET20 || PORTABLE40)
         [Test]
         public void CannotDeserializeArrayIntoDynamic()
@@ -4811,7 +4808,6 @@ Path '', line 1, position 1."
             Assert.AreEqual(1, newModelStateDictionary.Count);
             Assert.AreEqual("value", newModelStateDictionary["key"]);
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
 #if DEBUG
         [Test]
@@ -5847,7 +5843,6 @@ Path '', line 1, position 1."
                 json
             );
         }
-
 #if !(NET35 || NET20 || PORTABLE40)
         [Test]
         public void SerializeExpandoObject()
@@ -7416,6 +7411,7 @@ Path '', line 1, position 1."
                 a.ToString()
             );
         }
+
 #pragma warning restore 618
 
         [Test]
@@ -7970,7 +7966,6 @@ lines.*/
                 "Additional text encountered after finished reading JSON content: {. Path '', line 7, position 0."
             );
         }
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40)
         [Test]
         public void DeserializeException()
@@ -8176,7 +8171,6 @@ This is just junk, though.";
 
             Assert.AreEqual("[1.1,0.0,0.0]", json);
         }
-
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0
         [Test]
@@ -8255,7 +8249,6 @@ This is just junk, though.";
             );
 #endif
         }
-
 #if DEBUG
         [Test]
         public void SerializeCustomTupleWithSerializableAttributeInPartialTrust()
@@ -8505,7 +8498,6 @@ This is just junk, though.";
                 "Cannot deserialize readonly or fixed size list: Newtonsoft.Json.Tests.TestObjects.NoConstructorReadOnlyCollection`1[System.Int32]. Path '', line 1, position 1."
             );
         }
-
 #if !(NET40 || NET35 || NET20 || PORTABLE40)
         [Test]
         public void NoConstructorReadOnlyDictionaryTest()
@@ -8836,7 +8828,6 @@ This is just junk, though.";
                 json
             );
         }
-
 #if !(PORTABLE || PORTABLE40 || DNXCORE50)
         [Test]
         public void SerializeDictionaryWithStructKey()

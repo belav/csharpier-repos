@@ -38,6 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public abstract string DisplayName { get; }
         protected abstract string ScopeDescription { get; }
         protected abstract FunctionId FunctionId { get; }
+
         protected abstract Task FindActionAsync(
             TLanguageService service,
             Document document,

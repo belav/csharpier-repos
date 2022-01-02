@@ -11,6 +11,7 @@ using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Options;
 
+
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
 /// <summary>

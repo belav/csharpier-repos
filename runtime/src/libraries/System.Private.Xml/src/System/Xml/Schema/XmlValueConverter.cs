@@ -155,72 +155,123 @@ namespace System.Xml.Schema
     internal abstract class XmlValueConverter
     {
         public abstract bool ToBoolean(long value);
+
         public abstract bool ToBoolean(int value);
+
         public abstract bool ToBoolean(double value);
+
         public abstract bool ToBoolean(DateTime value);
+
         public abstract bool ToBoolean(string value);
+
         public abstract bool ToBoolean(object value);
 
         public abstract int ToInt32(bool value);
+
         public abstract int ToInt32(long value);
+
         public abstract int ToInt32(double value);
+
         public abstract int ToInt32(DateTime value);
+
         public abstract int ToInt32(string value);
+
         public abstract int ToInt32(object value);
 
         public abstract long ToInt64(bool value);
+
         public abstract long ToInt64(int value);
+
         public abstract long ToInt64(double value);
+
         public abstract long ToInt64(DateTime value);
+
         public abstract long ToInt64(string value);
+
         public abstract long ToInt64(object value);
+
         public abstract decimal ToDecimal(string value);
+
         public abstract decimal ToDecimal(object value);
 
         public abstract double ToDouble(bool value);
+
         public abstract double ToDouble(int value);
+
         public abstract double ToDouble(long value);
+
         public abstract double ToDouble(DateTime value);
+
         public abstract double ToDouble(string value);
+
         public abstract double ToDouble(object value);
+
         public abstract float ToSingle(double value);
+
         public abstract float ToSingle(string value);
+
         public abstract float ToSingle(object value);
 
         public abstract DateTime ToDateTime(bool value);
+
         public abstract DateTime ToDateTime(int value);
+
         public abstract DateTime ToDateTime(long value);
+
         public abstract DateTime ToDateTime(double value);
+
         public abstract DateTime ToDateTime(DateTimeOffset value);
+
         public abstract DateTime ToDateTime(string value);
+
         public abstract DateTime ToDateTime(object value);
+
         public abstract DateTimeOffset ToDateTimeOffset(DateTime value);
+
         public abstract DateTimeOffset ToDateTimeOffset(string value);
+
         public abstract DateTimeOffset ToDateTimeOffset(object value);
 
         public abstract string ToString(bool value);
+
         public abstract string ToString(int value);
+
         public abstract string ToString(long value);
+
         public abstract string ToString(decimal value);
+
         public abstract string ToString(float value);
+
         public abstract string ToString(double value);
+
         public abstract string ToString(DateTime value);
+
         public abstract string ToString(DateTimeOffset value);
+
         public abstract string ToString(object value);
+
         public abstract string ToString(object value, IXmlNamespaceResolver? nsResolver);
 
         public abstract object ChangeType(bool value, Type destinationType);
+
         public abstract object ChangeType(int value, Type destinationType);
+
         public abstract object ChangeType(long value, Type destinationType);
+
         public abstract object ChangeType(decimal value, Type destinationType);
+
         public abstract object ChangeType(double value, Type destinationType);
+
         public abstract object ChangeType(DateTime value, Type destinationType);
+
         public abstract object ChangeType(
             string value,
             Type destinationType,
             IXmlNamespaceResolver? nsResolver
         );
+
         public abstract object ChangeType(object value, Type destinationType);
+
         public abstract object ChangeType(
             object value,
             Type destinationType,
@@ -330,26 +381,32 @@ namespace System.Xml.Schema
         protected static readonly Type UriType = typeof(Uri);
         protected static readonly Type TimeSpanType = typeof(TimeSpan);
         protected static readonly Type XPathNavigatorType = typeof(XPathNavigator);
+
         public override bool ToBoolean(DateTime value)
         {
             return (bool)ChangeType((object)value, BooleanType, null);
         }
+
         public override bool ToBoolean(double value)
         {
             return (bool)ChangeType((object)value, BooleanType, null);
         }
+
         public override bool ToBoolean(int value)
         {
             return (bool)ChangeType((object)value, BooleanType, null);
         }
+
         public override bool ToBoolean(long value)
         {
             return (bool)ChangeType((object)value, BooleanType, null);
         }
+
         public override bool ToBoolean(string value)
         {
             return (bool)ChangeType((object)value, BooleanType, null);
         }
+
         public override bool ToBoolean(object value)
         {
             return (bool)ChangeType((object)value, BooleanType, null);
@@ -359,46 +416,57 @@ namespace System.Xml.Schema
         {
             return (DateTime)ChangeType((object)value, DateTimeType, null);
         }
+
         public override DateTime ToDateTime(DateTimeOffset value)
         {
             return (DateTime)ChangeType((object)value, DateTimeType, null);
         }
+
         public override DateTime ToDateTime(double value)
         {
             return (DateTime)ChangeType((object)value, DateTimeType, null);
         }
+
         public override DateTime ToDateTime(int value)
         {
             return (DateTime)ChangeType((object)value, DateTimeType, null);
         }
+
         public override DateTime ToDateTime(long value)
         {
             return (DateTime)ChangeType((object)value, DateTimeType, null);
         }
+
         public override DateTime ToDateTime(string value)
         {
             return (DateTime)ChangeType((object)value, DateTimeType, null);
         }
+
         public override DateTime ToDateTime(object value)
         {
             return (DateTime)ChangeType((object)value, DateTimeType, null);
         }
+
         public override DateTimeOffset ToDateTimeOffset(DateTime value)
         {
             return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null);
         }
+
         public override DateTimeOffset ToDateTimeOffset(string value)
         {
             return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null);
         }
+
         public override DateTimeOffset ToDateTimeOffset(object value)
         {
             return (DateTimeOffset)ChangeType((object)value, DateTimeOffsetType, null);
         }
+
         public override decimal ToDecimal(string value)
         {
             return (decimal)ChangeType((object)value, DecimalType, null);
         }
+
         public override decimal ToDecimal(object value)
         {
             return (decimal)ChangeType((object)value, DecimalType, null);
@@ -408,22 +476,27 @@ namespace System.Xml.Schema
         {
             return (double)ChangeType((object)value, DoubleType, null);
         }
+
         public override double ToDouble(DateTime value)
         {
             return (double)ChangeType((object)value, DoubleType, null);
         }
+
         public override double ToDouble(int value)
         {
             return (double)ChangeType((object)value, DoubleType, null);
         }
+
         public override double ToDouble(long value)
         {
             return (double)ChangeType((object)value, DoubleType, null);
         }
+
         public override double ToDouble(string value)
         {
             return (double)ChangeType((object)value, DoubleType, null);
         }
+
         public override double ToDouble(object value)
         {
             return (double)ChangeType((object)value, DoubleType, null);
@@ -433,22 +506,27 @@ namespace System.Xml.Schema
         {
             return (int)ChangeType((object)value, Int32Type, null);
         }
+
         public override int ToInt32(DateTime value)
         {
             return (int)ChangeType((object)value, Int32Type, null);
         }
+
         public override int ToInt32(double value)
         {
             return (int)ChangeType((object)value, Int32Type, null);
         }
+
         public override int ToInt32(long value)
         {
             return (int)ChangeType((object)value, Int32Type, null);
         }
+
         public override int ToInt32(string value)
         {
             return (int)ChangeType((object)value, Int32Type, null);
         }
+
         public override int ToInt32(object value)
         {
             return (int)ChangeType((object)value, Int32Type, null);
@@ -458,34 +536,42 @@ namespace System.Xml.Schema
         {
             return (long)ChangeType((object)value, Int64Type, null);
         }
+
         public override long ToInt64(DateTime value)
         {
             return (long)ChangeType((object)value, Int64Type, null);
         }
+
         public override long ToInt64(double value)
         {
             return (long)ChangeType((object)value, Int64Type, null);
         }
+
         public override long ToInt64(int value)
         {
             return (long)ChangeType((object)value, Int64Type, null);
         }
+
         public override long ToInt64(string value)
         {
             return (long)ChangeType((object)value, Int64Type, null);
         }
+
         public override long ToInt64(object value)
         {
             return (long)ChangeType((object)value, Int64Type, null);
         }
+
         public override float ToSingle(double value)
         {
             return (float)ChangeType((object)value, SingleType, null);
         }
+
         public override float ToSingle(string value)
         {
             return (float)ChangeType((object)value, SingleType, null);
         }
+
         public override float ToSingle(object value)
         {
             return (float)ChangeType((object)value, SingleType, null);
@@ -495,38 +581,47 @@ namespace System.Xml.Schema
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(DateTime value)
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(DateTimeOffset value)
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(decimal value)
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(double value)
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(int value)
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(long value)
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(float value)
         {
             return (string)ChangeType((object)value, StringType, null);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             return (string)ChangeType((object)value, StringType, nsResolver);
         }
+
         public override string ToString(object value)
         {
             return this.ToString(value, null);
@@ -536,26 +631,32 @@ namespace System.Xml.Schema
         {
             return (object)ChangeType((object)value, destinationType, null);
         }
+
         public override object ChangeType(DateTime value, Type destinationType)
         {
             return (object)ChangeType((object)value, destinationType, null);
         }
+
         public override object ChangeType(decimal value, Type destinationType)
         {
             return (object)ChangeType((object)value, destinationType, null);
         }
+
         public override object ChangeType(double value, Type destinationType)
         {
             return (object)ChangeType((object)value, destinationType, null);
         }
+
         public override object ChangeType(int value, Type destinationType)
         {
             return (object)ChangeType((object)value, destinationType, null);
         }
+
         public override object ChangeType(long value, Type destinationType)
         {
             return (object)ChangeType((object)value, destinationType, null);
         }
+
         public override object ChangeType(
             string value,
             Type destinationType,
@@ -564,11 +665,11 @@ namespace System.Xml.Schema
         {
             return (object)ChangeType((object)value, destinationType, nsResolver);
         }
+
         public override object ChangeType(object value, Type destinationType)
         {
             return this.ChangeType(value, destinationType, null);
         }
-
         #endregion
 
         /// <summary>
@@ -1155,6 +1256,7 @@ namespace System.Xml.Schema
                 return XmlConvert.ToDecimal((string)value);
             return XmlConvert.ToInteger((string)value);
         }
+
         public override decimal ToDecimal(object value)
         {
             if (value == null)
@@ -1175,10 +1277,12 @@ namespace System.Xml.Schema
 
             return (decimal)ChangeTypeWildcardDestination(value, DecimalType, null);
         }
+
         public override int ToInt32(long value)
         {
             return Int64ToInt32((long)value);
         }
+
         public override int ToInt32(string value)
         {
             if (value == null)
@@ -1188,6 +1292,7 @@ namespace System.Xml.Schema
                 return DecimalToInt32(XmlConvert.ToDecimal((string)value));
             return XmlConvert.ToInt32((string)value);
         }
+
         public override int ToInt32(object value)
         {
             if (value == null)
@@ -1208,10 +1313,12 @@ namespace System.Xml.Schema
 
             return (int)ChangeTypeWildcardDestination(value, Int32Type, null);
         }
+
         public override long ToInt64(int value)
         {
             return ((long)(int)value);
         }
+
         public override long ToInt64(string value)
         {
             if (value == null)
@@ -1221,6 +1328,7 @@ namespace System.Xml.Schema
                 return DecimalToInt64(XmlConvert.ToDecimal((string)value));
             return XmlConvert.ToInt64((string)value);
         }
+
         public override long ToInt64(object value)
         {
             if (value == null)
@@ -1259,14 +1367,17 @@ namespace System.Xml.Schema
                 return XmlConvert.ToString((decimal)value);
             return XmlConvert.ToString(decimal.Truncate((decimal)value));
         }
+
         public override string ToString(int value)
         {
             return XmlConvert.ToString((int)value);
         }
+
         public override string ToString(long value)
         {
             return XmlConvert.ToString((long)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             if (value == null)
@@ -1494,6 +1605,7 @@ namespace System.Xml.Schema
 
             return ChangeListType(value, destinationType, nsResolver);
         }
+
         private object ChangeTypeWildcardSource(
             object value,
             Type destinationType,
@@ -1537,6 +1649,7 @@ namespace System.Xml.Schema
                 return ((double)XmlConvert.ToSingle((string)value));
             return XmlConvert.ToDouble((string)value);
         }
+
         public override double ToDouble(object value)
         {
             if (value == null)
@@ -1578,6 +1691,7 @@ namespace System.Xml.Schema
         {
             return ((float)(double)value);
         }
+
         public override float ToSingle(string value)
         {
             if (value == null)
@@ -1587,6 +1701,7 @@ namespace System.Xml.Schema
                 return XmlConvert.ToSingle((string)value);
             return ((float)XmlConvert.ToDouble((string)value));
         }
+
         public override float ToSingle(object value)
         {
             if (value == null)
@@ -1616,12 +1731,14 @@ namespace System.Xml.Schema
                 return XmlConvert.ToString(ToSingle((double)value));
             return XmlConvert.ToString((double)value);
         }
+
         public override string ToString(float value)
         {
             if (TypeCode == XmlTypeCode.Float)
                 return XmlConvert.ToString((float)value);
             return XmlConvert.ToString((double)(float)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             if (value == null)
@@ -1775,6 +1892,7 @@ namespace System.Xml.Schema
                 _ => StringToDateTime((string)value),
             };
         }
+
         public override DateTime ToDateTime(object value)
         {
             if (value == null)
@@ -2042,6 +2160,7 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToBoolean((string)value);
         }
+
         public override bool ToBoolean(object value)
         {
             if (value == null)
@@ -2109,6 +2228,7 @@ namespace System.Xml.Schema
         {
             return XmlConvert.ToString((bool)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             if (value == null)
@@ -2644,6 +2764,7 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToBoolean((string)value);
         }
+
         public override bool ToBoolean(object value)
         {
             if (value == null)
@@ -2668,6 +2789,7 @@ namespace System.Xml.Schema
 
             return UntypedAtomicToDateTime((string)value);
         }
+
         public override DateTime ToDateTime(object value)
         {
             if (value == null)
@@ -2717,6 +2839,7 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToDecimal((string)value);
         }
+
         public override decimal ToDecimal(object value)
         {
             if (value == null)
@@ -2741,6 +2864,7 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToDouble((string)value);
         }
+
         public override double ToDouble(object value)
         {
             if (value == null)
@@ -2765,6 +2889,7 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToInt32((string)value);
         }
+
         public override int ToInt32(object value)
         {
             if (value == null)
@@ -2789,6 +2914,7 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToInt64((string)value);
         }
+
         public override long ToInt64(object value)
         {
             if (value == null)
@@ -2813,6 +2939,7 @@ namespace System.Xml.Schema
 
             return XmlConvert.ToSingle((string)value);
         }
+
         public override float ToSingle(object value)
         {
             if (value == null)
@@ -2834,34 +2961,42 @@ namespace System.Xml.Schema
         {
             return XmlConvert.ToString((bool)value);
         }
+
         public override string ToString(DateTime value)
         {
             return DateTimeToString((DateTime)value);
         }
+
         public override string ToString(DateTimeOffset value)
         {
             return DateTimeOffsetToString((DateTimeOffset)value);
         }
+
         public override string ToString(decimal value)
         {
             return XmlConvert.ToString((decimal)value);
         }
+
         public override string ToString(double value)
         {
             return XmlConvert.ToString((double)value);
         }
+
         public override string ToString(int value)
         {
             return XmlConvert.ToString((int)value);
         }
+
         public override string ToString(long value)
         {
             return XmlConvert.ToString((long)value);
         }
+
         public override string ToString(float value)
         {
             return XmlConvert.ToString((float)value);
         }
+
         public override string ToString(object value, IXmlNamespaceResolver? nsResolver)
         {
             if (value == null)
@@ -3202,6 +3337,7 @@ namespace System.Xml.Schema
 
             return ChangeListType(value, destinationType, nsResolver);
         }
+
         private object ChangeTypeWildcardSource(
             object value,
             Type destinationType,
@@ -3817,6 +3953,7 @@ namespace System.Xml.Schema
 
             return ChangeListType(value, destinationType, nsResolver);
         }
+
         private object ChangeTypeWildcardSource(
             object value,
             Type destinationType,

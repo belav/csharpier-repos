@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TExpressionStatementSyntax expressionStatement,
             TextSpan span
         );
+
         protected abstract TLocalDeclarationStatementSyntax FixupLocalDeclaration(
             TExpressionStatementSyntax expressionStatement,
             TLocalDeclarationStatementSyntax localDeclaration

@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace RazorPagesWebSite.ViewDataSetInViewStart;
 
 public class Index : PageModel

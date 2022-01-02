@@ -18,9 +18,13 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         public class MySpecificDto : MyDto { }
+
         public class InformationDto { }
+
         public class ActivityBase { }
+
         public class InformationBase { }
+
         public class InformationClass { }
 
         [Fact]

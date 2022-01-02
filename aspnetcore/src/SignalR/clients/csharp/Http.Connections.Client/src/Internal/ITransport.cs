@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal interface ITransport : IDuplexPipe

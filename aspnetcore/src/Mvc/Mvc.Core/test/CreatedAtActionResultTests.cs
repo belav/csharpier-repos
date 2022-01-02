@@ -19,6 +19,7 @@ using Moq;
 using Newtonsoft.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc;
 
 public class CreatedAtActionResultTests
@@ -79,6 +80,7 @@ public class CreatedAtActionResultTests
 
         return new ActionContext(httpContext, routeData, new ActionDescriptor());
     }
+
     private static HttpContext GetHttpContext()
     {
         var httpContext = new DefaultHttpContext();

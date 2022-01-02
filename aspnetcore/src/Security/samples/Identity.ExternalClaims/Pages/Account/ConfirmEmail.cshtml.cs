@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace Identity.ExternalClaims.Pages.Account;
 
 public class ConfirmEmailModel : PageModel

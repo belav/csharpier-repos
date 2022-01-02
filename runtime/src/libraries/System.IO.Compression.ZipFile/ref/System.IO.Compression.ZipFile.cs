@@ -12,12 +12,14 @@ namespace System.IO.Compression
             string sourceDirectoryName,
             string destinationArchiveFileName
         ) { }
+
         public static void CreateFromDirectory(
             string sourceDirectoryName,
             string destinationArchiveFileName,
             System.IO.Compression.CompressionLevel compressionLevel,
             bool includeBaseDirectory
         ) { }
+
         public static void CreateFromDirectory(
             string sourceDirectoryName,
             string destinationArchiveFileName,
@@ -25,26 +27,31 @@ namespace System.IO.Compression
             bool includeBaseDirectory,
             System.Text.Encoding? entryNameEncoding
         ) { }
+
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName
         ) { }
+
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName,
             bool overwriteFiles
         ) { }
+
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName,
             System.Text.Encoding? entryNameEncoding
         ) { }
+
         public static void ExtractToDirectory(
             string sourceArchiveFileName,
             string destinationDirectoryName,
             System.Text.Encoding? entryNameEncoding,
             bool overwriteFiles
         ) { }
+
         public static System.IO.Compression.ZipArchive Open(
             string archiveFileName,
             System.IO.Compression.ZipArchiveMode mode
@@ -52,6 +59,7 @@ namespace System.IO.Compression
         {
             throw null;
         }
+
         public static System.IO.Compression.ZipArchive Open(
             string archiveFileName,
             System.IO.Compression.ZipArchiveMode mode,
@@ -60,11 +68,13 @@ namespace System.IO.Compression
         {
             throw null;
         }
+
         public static System.IO.Compression.ZipArchive OpenRead(string archiveFileName)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -78,6 +88,7 @@ namespace System.IO.Compression
         {
             throw null;
         }
+
         public static System.IO.Compression.ZipArchiveEntry CreateEntryFromFile(
             this System.IO.Compression.ZipArchive destination,
             string sourceFileName,
@@ -87,19 +98,23 @@ namespace System.IO.Compression
         {
             throw null;
         }
+
         public static void ExtractToDirectory(
             this System.IO.Compression.ZipArchive source,
             string destinationDirectoryName
         ) { }
+
         public static void ExtractToDirectory(
             this System.IO.Compression.ZipArchive source,
             string destinationDirectoryName,
             bool overwriteFiles
         ) { }
+
         public static void ExtractToFile(
             this System.IO.Compression.ZipArchiveEntry source,
             string destinationFileName
         ) { }
+
         public static void ExtractToFile(
             this System.IO.Compression.ZipArchiveEntry source,
             string destinationFileName,

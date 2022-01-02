@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 /// <summary>

@@ -97,6 +97,7 @@ namespace System.Collections.Tests
             public int CompareTo(object other, IComparer comparer) => other is string ? 5 : -5;
 
             public bool Equals(object other, IEqualityComparer comparer) => other is string;
+
             public int GetHashCode(IEqualityComparer comparer) => 5;
         }
     }

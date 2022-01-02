@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json;
 
+
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
 public class NormalController : Controller

@@ -779,7 +779,6 @@ namespace Microsoft.CSharp.RuntimeBinder
             );
             return field;
         }
-
         /////////////////////////////////////////////////////////////////////////////////
 
         #endregion
@@ -1254,7 +1253,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                     return OperatorKind.OP_PREDEC;
             }
         }
-
         /////////////////////////////////////////////////////////////////////////////////
 
         #endregion
@@ -1357,7 +1355,6 @@ namespace Microsoft.CSharp.RuntimeBinder
                     throw Error.InternalCompilerError();
             }
         }
-
         #endregion
 
         #region Casts
@@ -1421,7 +1418,6 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             return _binder.mustCast(argument, destinationType);
         }
-
         #endregion
 
         #region Assignments

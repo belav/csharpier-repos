@@ -21,8 +21,10 @@ namespace System.Runtime.Serialization
     {
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public abstract void WriteStartObject(XmlDictionaryWriter writer, object? graph);
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public abstract void WriteObjectContent(XmlDictionaryWriter writer, object? graph);
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public abstract void WriteEndObject(XmlDictionaryWriter writer);
 
@@ -145,6 +147,7 @@ namespace System.Runtime.Serialization
             );
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
         }
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         internal virtual void InternalWriteObjectContent(XmlWriterDelegator writer, object? graph)
         {
@@ -153,6 +156,7 @@ namespace System.Runtime.Serialization
             );
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
         }
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         internal virtual void InternalWriteEndObject(XmlWriterDelegator writer)
         {
@@ -587,6 +591,7 @@ namespace System.Runtime.Serialization
         {
             return new SerializationException(errorMessage, innerException);
         }
+
         internal static string GetTypeInfoError(
             string errorMessage,
             Type? type,

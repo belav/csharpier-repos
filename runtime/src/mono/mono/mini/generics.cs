@@ -1188,6 +1188,7 @@ class Tests
     struct Record : Foo2<Record>.IRecord
     {
         int counter;
+
         int Foo2<Record>.IRecord.DoSomething()
         {
             return counter++;
@@ -1277,7 +1278,6 @@ class Tests
         Volatile.Write(ref foo, "DEF");
         return Volatile.Read(ref foo) == "DEF" ? 0 : 1;
     }
-
     // FIXME: Doesn't work with --regression as Interlocked.Add(ref long) is only implemented as an intrinsic
 #if FALSE
 	public static async Task<T> FooAsync<T> (int i, int j) {

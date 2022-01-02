@@ -211,7 +211,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             var root = (Syntax.InternalSyntax.CSharpSyntaxNode)reader.ReadValue();
             return root.CreateRed();
         }
-
         #endregion
 
         /// <summary>
@@ -334,7 +333,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return null;
         }
-
         #endregion
 
         #region Token Lookup
@@ -468,7 +466,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return nonTriviaToken;
         }
-
         #endregion
 
         #region Trivia Lookup
@@ -497,7 +494,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return base.FindTrivia(position, findInsideTrivia);
         }
-
         #endregion
 
         #region SyntaxNode members
@@ -641,7 +637,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return false;
         }
-
         #endregion
 
         string IFormattable.ToString(string? format, IFormatProvider? formatProvider)

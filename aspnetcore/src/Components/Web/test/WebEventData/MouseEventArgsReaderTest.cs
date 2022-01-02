@@ -4,6 +4,7 @@
 using System.Text.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Web;
 
 public class MouseEventArgsReaderTest

@@ -82,15 +82,21 @@ namespace Microsoft.CodeAnalysis.Editing
         internal abstract bool RequiresLocalDeclarationType();
 
         internal abstract SyntaxToken InterpolatedStringTextToken(string content, string value);
+
         internal abstract SyntaxNode InterpolatedStringText(SyntaxToken textToken);
+
         internal abstract SyntaxNode Interpolation(SyntaxNode syntaxNode);
+
         internal abstract SyntaxNode InterpolatedStringExpression(
             SyntaxToken startToken,
             IEnumerable<SyntaxNode> content,
             SyntaxToken endToken
         );
+
         internal abstract SyntaxNode InterpolationAlignmentClause(SyntaxNode alignment);
+
         internal abstract SyntaxNode InterpolationFormatClause(string format);
+
         internal abstract SyntaxNode TypeParameterList(IEnumerable<string> typeParameterNames);
 
         /// <summary>
@@ -121,6 +127,7 @@ namespace Microsoft.CodeAnalysis.Editing
         #region Patterns
 
         internal abstract bool SupportsPatterns(ParseOptions options);
+
         internal abstract SyntaxNode IsPatternExpression(
             SyntaxNode expression,
             SyntaxToken isToken,
@@ -128,11 +135,17 @@ namespace Microsoft.CodeAnalysis.Editing
         );
 
         internal abstract SyntaxNode AndPattern(SyntaxNode left, SyntaxNode right);
+
         internal abstract SyntaxNode DeclarationPattern(INamedTypeSymbol type, string name);
+
         internal abstract SyntaxNode ConstantPattern(SyntaxNode expression);
+
         internal abstract SyntaxNode NotPattern(SyntaxNode pattern);
+
         internal abstract SyntaxNode OrPattern(SyntaxNode left, SyntaxNode right);
+
         internal abstract SyntaxNode ParenthesizedPattern(SyntaxNode pattern);
+
         internal abstract SyntaxNode TypePattern(SyntaxNode type);
 
         #endregion

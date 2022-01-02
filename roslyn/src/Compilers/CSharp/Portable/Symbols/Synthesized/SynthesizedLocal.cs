@@ -25,7 +25,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly SyntaxNode _syntaxOpt;
         private readonly bool _isPinned;
         private readonly RefKind _refKind;
-
 #if DEBUG
         private readonly int _createdAtLineNumber;
         private readonly string _createdAtFilePath;
@@ -198,6 +197,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #if DEBUG
         private static int _nextSequence = 0;
+
         // Produce a token that helps distinguish one variable from another when debugging
         private readonly int _sequence = System.Threading.Interlocked.Increment(ref _nextSequence);
 

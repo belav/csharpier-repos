@@ -24,6 +24,7 @@ public class Test_finalizedest
         // disabling unused variable warning
 #pragma warning disable 0414
         Dummy obj;
+
 #pragma warning restore 0414
 
         // No inline to ensure no stray refs to the Dummy object

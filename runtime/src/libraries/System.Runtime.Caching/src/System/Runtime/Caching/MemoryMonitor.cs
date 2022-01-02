@@ -38,6 +38,7 @@ namespace System.Runtime.Caching
 #pragma warning disable CA1802, CS0649 // some builds initialize these to other values in a static cctor
         private static readonly long s_totalPhysical;
         private static readonly long s_totalVirtual;
+
 #pragma warning restore CA1802, CS0649
 
         internal static long TotalPhysical => s_totalPhysical;

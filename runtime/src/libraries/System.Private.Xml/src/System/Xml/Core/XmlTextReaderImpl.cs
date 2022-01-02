@@ -145,7 +145,6 @@ namespace System.Xml
             TextReader,
             Invalid
         }
-
         #endregion
 
         // current parsing state (aka. scanner data)

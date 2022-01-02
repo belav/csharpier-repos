@@ -33,7 +33,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int SingleLineDocCommentTrivia { get; }
         int? MultiLineDocCommentTrivia { get; }
         int? ShebangDirectiveTrivia { get; }
-
         #endregion
 
         #region keywords
@@ -45,14 +44,12 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int? GlobalStatement { get; }
         int TrueKeyword { get; }
         int FalseKeyword { get; }
-
         #endregion
 
         #region literal tokens
 
         int CharacterLiteralToken { get; }
         int StringLiteralToken { get; }
-
         #endregion
 
         #region tokens
@@ -65,7 +62,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int IdentifierToken { get; }
         int InterpolatedStringTextToken { get; }
         int QuestionToken { get; }
-
         #endregion
 
         #region names
@@ -73,13 +69,11 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int GenericName { get; }
         int IdentifierName { get; }
         int QualifiedName { get; }
-
         #endregion
 
         #region types
 
         int TupleType { get; }
-
         #endregion
 
         #region literal expressions
@@ -91,7 +85,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int NumericLiteralExpression { get; }
         int StringLiteralExpression { get; }
         int TrueLiteralExpression { get; }
-
         #endregion
 
         #region expressions
@@ -117,7 +110,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int ThisExpression { get; }
         int? ThrowExpression { get; }
         int TupleExpression { get; }
-
         #endregion
 
         #region statements
@@ -130,7 +122,6 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int ReturnStatement { get; }
         int ThrowStatement { get; }
         int UsingStatement { get; }
-
         #endregion
 
         #region members/declarations
@@ -145,13 +136,11 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         int IncompleteMember { get; }
         int TypeArgumentList { get; }
         int ParameterList { get; }
-
         #endregion
 
         #region clauses
 
         int EqualsValueClause { get; }
-
         #endregion
 
         #region other

@@ -34,6 +34,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             }
 
             public abstract override bool Equals(object? obj);
+
             public abstract override int GetHashCode();
 
             public bool Equals(AbstractGenerateCodeItem? other) =>

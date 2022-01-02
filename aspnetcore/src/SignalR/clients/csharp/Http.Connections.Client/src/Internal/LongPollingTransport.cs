@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal partial class LongPollingTransport : ITransport
@@ -21,6 +22,7 @@ internal partial class LongPollingTransport : ITransport
     private readonly HttpConnectionOptions _httpConnectionOptions;
     private IDuplexPipe? _application;
     private IDuplexPipe? _transport;
+
     // Volatile so that the poll loop sees the updated value set from a different thread
     private volatile Exception? _error;
 

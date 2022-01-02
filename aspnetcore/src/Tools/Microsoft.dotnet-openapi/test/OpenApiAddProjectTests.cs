@@ -9,6 +9,7 @@ using Microsoft.Extensions.Tools.Internal;
 using Xunit;
 using Xunit.Abstractions;
 
+
 namespace Microsoft.DotNet.OpenApi.Add.Tests;
 
 public class OpenApiAddProjectTests : OpenApiTestBase

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
 public class CorsEndpointConventionBuilderExtensionsTests

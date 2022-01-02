@@ -12,6 +12,7 @@ public class WIPOrder
 #pragma warning disable 0414
     private ProductionContext _context;
     private WipOrderRow _wipOrder;
+
 #pragma warning restore 0414
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]

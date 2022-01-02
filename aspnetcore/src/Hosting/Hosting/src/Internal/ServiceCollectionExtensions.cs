@@ -3,6 +3,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Microsoft.AspNetCore.Hosting;
 
 internal static class ServiceCollectionExtensions

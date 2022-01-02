@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+
 namespace HotAddSample;
 
 // This sample shows how to dynamically add or remove prefixes for the underlying server.

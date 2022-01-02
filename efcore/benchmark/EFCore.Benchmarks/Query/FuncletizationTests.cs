@@ -17,6 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         private OrdersContextBase _context;
 
         protected virtual int FuncletizationIterationCount => 100;
+
         protected abstract OrdersFixtureBase CreateFixture();
 
         [GlobalSetup]

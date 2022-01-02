@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 // True-internal because this is a weird and tricky class to use :)
@@ -40,6 +41,7 @@ internal static class AsyncEnumerableAdapters
     {
         private readonly ChannelReader<T> _channel;
         private readonly CancellationToken _cancellationToken;
+
         public ChannelAsyncEnumerator(ChannelReader<T> channel, CancellationToken cancellationToken)
         {
             _channel = channel;

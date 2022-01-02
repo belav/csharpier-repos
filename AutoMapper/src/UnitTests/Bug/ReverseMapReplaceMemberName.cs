@@ -15,6 +15,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public string AccountId { get; set; }
         }
+
         class Destination
         {
             public string UserId { get; set; }

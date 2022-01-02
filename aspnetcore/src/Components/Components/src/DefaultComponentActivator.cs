@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
+
 namespace Microsoft.AspNetCore.Components;
 
 internal class DefaultComponentActivator : IComponentActivator

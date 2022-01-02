@@ -18,7 +18,6 @@ namespace Internal.Cryptography
     {
         private readonly SafeAppleCryptorHandle _cryptor;
         private readonly bool _canReset;
-
 #if DEBUG
         private bool _isFinalized;
 #endif

@@ -864,6 +864,7 @@ namespace System.Xml
         {
             get { return _schemaCollection; }
         }
+
 #pragma warning restore 618
 
         // Spefifies whether general entities should be automatically expanded or not

@@ -62,13 +62,13 @@ namespace Microsoft.CodeAnalysis.Options
             string,
             (IOption? option, IEditorConfigStorageLocation2? storageLocation)
         > _visualBasicEditorConfigKeysToOptions = s_emptyEditorConfigKeysToOptions;
+
 #pragma warning restore IDE0044 // Add readonly modifier
 
         private ImmutableArray<IOptionPersister> _lazyOptionPersisters;
 
         private ImmutableDictionary<OptionKey, object?> _currentValues;
         private ImmutableHashSet<OptionKey> _changedOptionKeys;
-
         #endregion
 
         [ImportingConstructor]

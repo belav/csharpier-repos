@@ -94,7 +94,9 @@ namespace System.Globalization
         }
 
         internal abstract int GetYearInfo(int LunarYear, int Index);
+
         internal abstract int GetYear(int year, DateTime time);
+
         internal abstract int GetGregorianYear(int year, int era);
 
         internal abstract int MinCalendarYear { get; }

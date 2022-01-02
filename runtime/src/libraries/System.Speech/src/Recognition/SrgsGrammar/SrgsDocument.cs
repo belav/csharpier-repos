@@ -37,12 +37,14 @@ namespace System.Speech.Recognition.SrgsGrammar
                 Load(reader);
             }
         }
+
         public SrgsDocument(XmlReader srgsGrammar)
         {
             Helpers.ThrowIfNull(srgsGrammar, nameof(srgsGrammar));
 
             Load(srgsGrammar);
         }
+
         public SrgsDocument(GrammarBuilder builder)
         {
             Helpers.ThrowIfNull(builder, nameof(builder));
@@ -69,7 +71,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             Root = grammarRootRule;
             Rules.Add(grammarRootRule);
         }
-
         #endregion
 
         #region public methods
@@ -83,7 +84,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             // Write the data.
             _grammar.WriteSrgs(srgsGrammar);
         }
-
         #endregion
 
         #region Public Properties
@@ -252,7 +252,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return _grammar.AssemblyReferences; }
         }
-
         #endregion
 
         #region Internal methods
@@ -327,7 +326,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
             return tagFormat;
         }
-
         #endregion
 
         #region Internal Properties
@@ -349,7 +347,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get { return _grammar; }
         }
-
         #endregion
 
         #region Private Fields
@@ -370,6 +367,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         Voice,
         Dtmf
     }
+
     // Grammar mode.  Voice, Dtmf
     public enum SrgsPhoneticAlphabet
     {

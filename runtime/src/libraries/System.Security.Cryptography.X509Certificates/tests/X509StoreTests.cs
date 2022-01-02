@@ -34,7 +34,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal("MY", store.Name);
             }
         }
-
 #if HAVE_STORE_ISOPEN
         [Fact]
         public static void Constructor_IsNotOpen()
@@ -107,7 +106,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             Assert.Throws<PlatformNotSupportedException>(() => new X509Chain(IntPtr.Zero));
         }
-
 #if HAVE_STORE_ISOPEN
         [Fact]
         public static void Constructor_OpenFlags()
@@ -208,7 +206,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
             }
         }
-
 #if HAVE_STORE_ISOPEN
         [Fact]
         public static void Open_IsOpenTrue()
@@ -574,6 +571,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(0, store.Certificates.Count);
             }
         }
+
 #if Unix
         [ConditionalFact(nameof(NotRunningAsRootAndRemoteExecutorSupported))] // root can read '2.pem'
         [PlatformSpecific(TestPlatforms.Linux)] // Windows/OSX doesn't use SSL_CERT_{DIR,FILE}.
@@ -623,6 +621,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [DllImport("libc")]
         private static extern int chmod(string path, int mode);
+
         [DllImport("libc")]
         private static extern uint geteuid();
 

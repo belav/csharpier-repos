@@ -37,6 +37,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 flags
             );
         }
+
         public static string Delete(string src, string marker)
         {
             while (true)

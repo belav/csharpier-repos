@@ -24,6 +24,7 @@ namespace System.ComponentModel
         /// </summary>
         public LicenseException(Type? type)
             : this(type, null, SR.Format(SR.LicExceptionTypeOnly, type?.FullName)) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
         /// specified type and instance.
@@ -38,6 +39,7 @@ namespace System.ComponentModel
                     instance?.GetType().FullName
                 )
             ) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
         /// specified type and instance with the specified message.

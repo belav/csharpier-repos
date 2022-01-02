@@ -47,7 +47,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             return new TypeLibMetaObject(parameter, this);
         }
-
         #endregion
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

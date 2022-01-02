@@ -6,5 +6,6 @@ namespace Microsoft.AspNetCore.Rewrite;
 internal abstract class UrlMatch
 {
     protected bool Negate { get; set; }
+
     public abstract MatchResults Evaluate(string input, RewriteContext context);
 }

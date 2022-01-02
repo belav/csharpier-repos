@@ -28,7 +28,6 @@ namespace System.Speech.Internal.SrgsCompiler
             Dynamic = ((attributes & SPCFGRULEATTRIBUTES.SPRAF_Dynamic) != 0);
             Import = ((attributes & SPCFGRULEATTRIBUTES.SPRAF_Import) != 0);
         }
-
         #endregion
 
         #region Internal Properties
@@ -177,7 +176,6 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
             }
         }
-
         #endregion
 
         #region Internal Fields

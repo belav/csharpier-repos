@@ -220,6 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsRecord => false;
         internal sealed override bool IsRecordStruct => false;
+
         internal sealed override bool HasPossibleWellKnownCloneMethod() => false;
 
         internal override bool Equals(TypeSymbol? other, TypeCompareKind comparison)
@@ -241,7 +242,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         public override int GetHashCode() => _underlyingType.GetHashCode();
-
 #if !DEBUG
         void Cci.IReference.Dispatch(Cci.MetadataVisitor visitor)
         {

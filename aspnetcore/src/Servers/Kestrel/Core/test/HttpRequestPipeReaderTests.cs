@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class HttpRequestPipeReaderTests
@@ -25,6 +26,7 @@ public class HttpRequestPipeReaderTests
             }
         );
     }
+
     [Fact]
     public async Task AbortCausesReadToCancel()
     {

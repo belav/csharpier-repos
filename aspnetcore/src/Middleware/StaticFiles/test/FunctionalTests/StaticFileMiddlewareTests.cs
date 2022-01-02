@@ -22,6 +22,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.StaticFiles;
 
 public class StaticFileMiddlewareTests : LoggedTest

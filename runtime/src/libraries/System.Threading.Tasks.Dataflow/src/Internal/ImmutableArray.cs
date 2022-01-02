@@ -27,6 +27,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>An empty array.</summary>
 #pragma warning disable CA1825 // Array.Empty<T>() doesn't exist in all configurations
         private static readonly ImmutableArray<T> s_empty = new ImmutableArray<T>(new T[0]);
+
 #pragma warning restore CA1825
         /// <summary>The immutable data in this array instance.</summary>
         private readonly T[] _array;

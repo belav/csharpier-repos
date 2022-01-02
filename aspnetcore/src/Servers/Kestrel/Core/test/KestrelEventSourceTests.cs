@@ -6,6 +6,7 @@ using System.Diagnostics.Tracing;
 using System.Reflection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
 public class KestrelEventSourceTests

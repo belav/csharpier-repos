@@ -455,7 +455,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(expectedHasPrivateKeys, actualHasPrivateKeys);
             }
         }
-
 #if !NO_EPHEMERALKEYSET_AVAILABLE
         [Fact]
         public static void InvalidStorageFlags()

@@ -81,7 +81,6 @@ public class BestFitMapping
     )]
     [return: MarshalAs(UnmanagedType.FunctionPtr)]
     public static extern DelegatePInvoke_Cdecl CLPStr_DelegatePInvoke();
-
     #endregion
 
     #region "StdCall"
@@ -171,7 +170,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate string CCallBackIn([In, MarshalAs(UnmanagedType.LPStr)] string str);
-
     #endregion
 
     #region "CCallBackOut"
@@ -185,7 +183,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate string CCallBackOut([Out, MarshalAs(UnmanagedType.LPStr)] StringBuilder str);
-
     #endregion
 
     #region "CCallBackInOut"
@@ -201,7 +198,6 @@ public class BestFitMapping
     public delegate string CCallBackInOut(
         [In, Out, MarshalAs(UnmanagedType.LPStr)] StringBuilder str
     );
-
     #endregion
 
     #region "CCallBackInByRef"
@@ -215,7 +211,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate string CCallBackInByRef([In, MarshalAs(UnmanagedType.LPStr)] ref string str);
-
     #endregion
 
     #region "CCallBackOutByRef"
@@ -229,7 +224,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate string CCallBackOutByRef([MarshalAs(UnmanagedType.LPStr)] out string str);
-
     #endregion
 
     #region "CCallBackInOutByRef"
@@ -245,7 +239,6 @@ public class BestFitMapping
     public delegate string CCallBackInOutByRef(
         [In, Out, MarshalAs(UnmanagedType.LPStr)] ref string str
     );
-
     #endregion
 
     #region "SCallBackIn"
@@ -259,7 +252,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate string SCallBackIn([In, MarshalAs(UnmanagedType.LPStr)] string str);
-
     #endregion
 
     #region "SCallBackOut"
@@ -273,7 +265,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate string SCallBackOut([Out, MarshalAs(UnmanagedType.LPStr)] StringBuilder str);
-
     #endregion
 
     #region "SCallBackInOut"
@@ -289,7 +280,6 @@ public class BestFitMapping
     public delegate string SCallBackInOut(
         [In, Out, MarshalAs(UnmanagedType.LPStr)] StringBuilder str
     );
-
     #endregion
 
     #region "SCallBackInByRef"
@@ -303,7 +293,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate string SCallBackInByRef([In, MarshalAs(UnmanagedType.LPStr)] ref string str);
-
     #endregion
 
     #region "SCallBackOutByRef"
@@ -317,7 +306,6 @@ public class BestFitMapping
     [return: MarshalAs(UnmanagedType.LPStr)]
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate string SCallBackOutByRef([MarshalAs(UnmanagedType.LPStr)] out string str);
-
     #endregion
 
     #region "SCallBackInOutByRef"
@@ -333,7 +321,6 @@ public class BestFitMapping
     public delegate string SCallBackInOutByRef(
         [In, Out, MarshalAs(UnmanagedType.LPStr)] ref string str
     );
-
     #endregion
 
     #endregion
@@ -396,6 +383,7 @@ public class BestFitMapping
     public static extern int GetResult();
 
     private static int Fails = 0;
+
     #region "TestMethod"
 
 
@@ -909,7 +897,6 @@ public class BestFitMapping
             );
         }
     }
-
     #endregion
 
     #region "Reverse Pinvoke"

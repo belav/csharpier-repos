@@ -13,6 +13,7 @@ namespace NStruct
             // disabling unused variable warning
 #pragma warning disable 0414
             private STRMAP Strmap;
+
 #pragma warning restore 0414
             public CreateObj(int Rep)
             {

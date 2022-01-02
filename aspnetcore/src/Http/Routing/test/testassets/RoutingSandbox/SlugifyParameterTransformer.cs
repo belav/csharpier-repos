@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Routing;
 
+
 namespace RoutingSandbox;
 
 public class SlugifyParameterTransformer : IOutboundParameterTransformer

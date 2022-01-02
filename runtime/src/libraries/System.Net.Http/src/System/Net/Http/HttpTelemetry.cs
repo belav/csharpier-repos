@@ -179,7 +179,6 @@ namespace System.Net.Http
             Debug.Assert(count >= 0);
             ConnectionClosed(versionMajor: 2, versionMinor: 0);
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -251,7 +250,6 @@ namespace System.Net.Http
                 }
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -274,7 +272,6 @@ namespace System.Net.Http
                 WriteEventCore(eventId, NumEventDatas, descrs);
             }
         }
-
 #if !ES_BUILD_STANDALONE
         [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
             "ReflectionAnalysis",

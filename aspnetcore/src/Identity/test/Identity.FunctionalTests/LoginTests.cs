@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Sdk;
 
+
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public abstract class LoginTests<TStartup, TContext>

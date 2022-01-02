@@ -51,6 +51,7 @@ using Test = Xunit.FactAttribute;
 using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
+
 #endif
 #if !NET20 && !PORTABLE40
 using System.Xml.Linq;
@@ -323,7 +324,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "Constructor for 'Newtonsoft.Json.Tests.Serialization.JsonSerializerCollectionsTests+TestCollectionBadIEnumerableParameter' must have no parameters or a single parameter that implements 'System.Collections.Generic.IEnumerable`1[System.Int32]'."
             );
         }
-
 #if !(DNXCORE50 || PORTABLE) || NETSTANDARD2_0
         public class TestCollectionNonGeneric : ArrayList
         {
@@ -428,7 +428,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "Constructor for 'Newtonsoft.Json.Tests.Serialization.JsonSerializerCollectionsTests+TestDictionaryBadIEnumerableParameter' must have no parameters or a single parameter that implements 'System.Collections.Generic.IEnumerable`1[System.Collections.Generic.KeyValuePair`2[System.String,System.Int32]]'."
             );
         }
-
 #if !(DNXCORE50 || PORTABLE) || NETSTANDARD2_0
         public class TestDictionaryNonGeneric : Hashtable
         {
@@ -783,7 +782,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(1, l.Count);
             Assert.AreEqual("string!", l[0]);
         }
-
 #if !(NET40 || NET35 || NET20 || PORTABLE40)
         [Test]
         public void DeserializeReadOnlyListInterface()
@@ -1184,7 +1182,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, v2["Second"]);
             Assert.AreEqual(3, v2["Third"]);
         }
-
 #if !(NET35 || NET20 || PORTABLE || PORTABLE40) || NETSTANDARD2_0
         [Test]
         public void DeserializeConcurrentDictionary()
@@ -1280,7 +1277,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "Cannot convert null value to KeyValuePair. Path '[0]', line 1, position 6."
             );
         }
-
 #if !(NET40 || NET35 || NET20 || PORTABLE40)
         public class PopulateReadOnlyTestClass
         {
@@ -2250,7 +2246,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(2, products.Count);
             Assert.AreEqual("Product 1", p1.Name);
         }
-
 #if !(NET40 || NET35 || NET20 || PORTABLE40)
         [Test]
         public void ReadOnlyIntegerList()
@@ -2313,7 +2308,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "Unable to find a constructor to use for type Newtonsoft.Json.Tests.Serialization.ReadOnlyCollectionWithArrayArgument`1[System.Double]. Path '', line 1, position 1."
             );
         }
-
 #if !NET20 && !PORTABLE40
         [Test]
         public void NonDefaultConstructor_DuplicateKeyInDictionary_Replace()
@@ -2338,7 +2332,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("monkey", deserialized[1]);
             Assert.AreEqual("goose", deserialized[2]);
         }
-
 #if !(PORTABLE || PORTABLE40)
         [Test]
         public void DeserializeCultureInfoKey()
@@ -2492,7 +2485,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
         }
     }
-
 #if !NET20 && !PORTABLE40
     public class CASResponce
     {
@@ -2771,6 +2763,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public int Count { get; }
         public bool IsReadOnly { get; }
+
         public int IndexOf(T item)
         {
             throw new NotImplementedException();
@@ -2792,7 +2785,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             set { throw new NotImplementedException(); }
         }
     }
-
 #if !(NET40 || NET35 || NET20 || PORTABLE40)
     public class ReadOnlyIntegerList : IReadOnlyCollection<int>
     {

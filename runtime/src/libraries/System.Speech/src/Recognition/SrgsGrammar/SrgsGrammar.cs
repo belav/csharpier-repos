@@ -24,7 +24,6 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             _rules = new SrgsRulesCollection();
         }
-
         #endregion
 
         #region Internal Methods
@@ -278,7 +277,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _scriptsForwardReference.Add(new XmlParser.ForwardReference(rule, code));
             }
         }
-
         #endregion
 
         #region Internal Properties
@@ -475,7 +473,6 @@ namespace System.Speech.Recognition.SrgsGrammar
             get { return _isSapiExtensionUsed; }
             set { _isSapiExtensionUsed = value; }
         }
-
         #endregion
 
         #region Private Methods

@@ -65,7 +65,6 @@ namespace ILCompiler
                 .Append(field.Name)
                 .ToString();
         }
-
 #if !READYTORUN
         public static string GetDisplayName(this PropertyPseudoDesc property)
         {

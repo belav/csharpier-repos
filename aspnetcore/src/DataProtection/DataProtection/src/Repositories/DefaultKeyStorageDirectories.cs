@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
+
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
 internal sealed class DefaultKeyStorageDirectories : IDefaultKeyStorageDirectories

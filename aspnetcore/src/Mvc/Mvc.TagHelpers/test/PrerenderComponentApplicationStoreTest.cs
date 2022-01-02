@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 public class PrerenderComponentApplicationStoreTest

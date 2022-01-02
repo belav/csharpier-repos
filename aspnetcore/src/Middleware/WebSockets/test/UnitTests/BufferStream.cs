@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
 // This steam accepts writes from one side, buffers them internally, and returns the data via Reads
@@ -70,7 +71,6 @@ public class BufferStream : Stream
     {
         throw new NotSupportedException();
     }
-
     #endregion NotSupported
 
     /// <summary>

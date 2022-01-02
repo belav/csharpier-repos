@@ -26,41 +26,49 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             bool fullHeader,
             [NotNullWhen(true)] out SyntaxNode? typeDeclaration
         );
+
         public abstract bool IsOnPropertyDeclarationHeader(
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? propertyDeclaration
         );
+
         public abstract bool IsOnParameterHeader(
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? parameter
         );
+
         public abstract bool IsOnMethodHeader(
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? method
         );
+
         public abstract bool IsOnLocalFunctionHeader(
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? localFunction
         );
+
         public abstract bool IsOnLocalDeclarationHeader(
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? localDeclaration
         );
+
         public abstract bool IsOnIfStatementHeader(
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? ifStatement
         );
+
         public abstract bool IsOnWhileStatementHeader(
             SyntaxNode root,
             int position,
             [NotNullWhen(true)] out SyntaxNode? whileStatement
         );
+
         public abstract bool IsOnForeachHeader(
             SyntaxNode root,
             int position,

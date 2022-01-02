@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Authorization;
 
 public class CascadingAuthenticationStateTest

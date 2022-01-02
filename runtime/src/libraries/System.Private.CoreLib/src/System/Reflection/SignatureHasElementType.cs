@@ -15,11 +15,17 @@ namespace System.Reflection
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => true;
+
         protected abstract override bool IsArrayImpl();
+
         protected abstract override bool IsByRefImpl();
+
         public sealed override bool IsByRefLike => false;
+
         protected abstract override bool IsPointerImpl();
+
         public abstract override bool IsSZArray { get; }
         public abstract override bool IsVariableBoundArray { get; }
         public sealed override bool IsConstructedGenericType => false;
@@ -30,10 +36,14 @@ namespace System.Reflection
             _elementType.ContainsGenericParameters;
 
         internal sealed override SignatureType? ElementType => _elementType;
+
         public abstract override int GetArrayRank();
+
         public sealed override Type GetGenericTypeDefinition() =>
             throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
+
         public sealed override Type[] GetGenericArguments() => Type.EmptyTypes;
+
         public sealed override Type[] GenericTypeArguments => Type.EmptyTypes;
         public sealed override int GenericParameterPosition =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);

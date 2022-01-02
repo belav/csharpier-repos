@@ -828,7 +828,6 @@ namespace System.Net.WebSockets
             private bool _shouldCloseOutput;
             private readonly WebSocketBase _webSocket;
             private readonly WebSocketHttpListenerDuplexStream _currentStream;
-
 #if DEBUG
             private volatile int _nativeOverlappedCounter;
             private volatile int _nativeOverlappedUsed;

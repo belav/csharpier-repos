@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
 public class ManagedAuthenticatedEncryptorDescriptorTests

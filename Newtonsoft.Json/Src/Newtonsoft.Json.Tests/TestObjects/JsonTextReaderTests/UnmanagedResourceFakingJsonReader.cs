@@ -66,7 +66,6 @@ namespace Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests
         {
             throw new NotImplementedException();
         }
-
 #if !NET20
         public override DateTimeOffset? ReadAsDateTimeOffset()
         {

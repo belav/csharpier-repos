@@ -141,7 +141,6 @@ namespace Microsoft.DiaSymReader
         );
         void DefineConstant(string name, object value, uint sig, byte* signature);
         void Abort();
-
         #endregion
 
         #region ISymUnmanagedWriter2
@@ -178,14 +177,12 @@ namespace Microsoft.DiaSymReader
             VariantStructure value,
             int constantSignatureToken
         );
-
         #endregion
 
         #region ISymUnmanagedWriter3
 
         void OpenMethod2(uint methodToken, int sectionIndex, int offsetRelativeOffset);
         void Commit();
-
         #endregion
 
         #region ISymUnmanagedWriter4
@@ -196,7 +193,6 @@ namespace Microsoft.DiaSymReader
             out uint dataCountPtr,
             byte* data
         );
-
         #endregion
 
         #region ISymUnmanagedWriter5

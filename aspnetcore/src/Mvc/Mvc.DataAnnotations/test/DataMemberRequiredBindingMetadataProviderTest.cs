@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class DataMemberRequiredBindingMetadataProviderTest

@@ -11,6 +11,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 
+
 namespace Microsoft.AspNetCore.StaticFiles;
 
 internal struct StaticFileContext

@@ -17,6 +17,7 @@ namespace System.Xml.Tests
         private string _xslFile = string.Empty;
 
         private ITestOutputHelper _output;
+
         public COutputSettings(ITestOutputHelper output) : base(output)
         {
             _output = output;

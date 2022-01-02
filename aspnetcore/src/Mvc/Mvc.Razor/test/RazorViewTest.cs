@@ -20,6 +20,7 @@ using Microsoft.Extensions.WebEncoders.Testing;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 public class RazorViewTest
@@ -28,6 +29,7 @@ public class RazorViewTest
 
 #pragma warning disable 1998
     private readonly RenderAsyncDelegate _nullRenderAsyncDelegate = async () => { };
+
 #pragma warning restore 1998
 
     [Fact]

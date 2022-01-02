@@ -4,6 +4,7 @@
 using System;
 using System.Net.WebSockets;
 
+
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
 internal class WebSocketPair

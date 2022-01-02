@@ -3,6 +3,7 @@
 
 using System;
 
+
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 // Tells SignalR not to add the IHubProtocol with this attribute to all hubs by default

@@ -176,7 +176,6 @@ namespace System.IO.Tests
             return Directory.EnumerateFileSystemEntries(dirName, searchPattern, option).ToArray();
         }
     }
-
     #endregion
 
     #region EnumerateDirectories

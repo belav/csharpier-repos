@@ -7,6 +7,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class LargeTextSourceDocument : RazorSourceDocument

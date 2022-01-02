@@ -262,7 +262,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             // Looks like something we can simplify.
             return true;
         }
-
         // Ensure that if we replace the invocation with its expression that its expression will
         // bind unambiguously.  This can happen with awesome cases like:
 #if false

@@ -52,7 +52,6 @@ namespace System.Collections.Tests
                 }
             );
         }
-
         #endregion
 
         #region Sort(IComparer)
@@ -89,7 +88,6 @@ namespace System.Collections.Tests
                 }
             );
         }
-
         #endregion
 
         #region Sort(Comparison)
@@ -138,7 +136,6 @@ namespace System.Collections.Tests
                 }
             );
         }
-
         #endregion
 
         #region Sort(int, int, IComparer<T>)

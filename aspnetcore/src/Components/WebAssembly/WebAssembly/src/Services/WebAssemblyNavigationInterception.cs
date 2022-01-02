@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInterop;
 
+
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 internal sealed class WebAssemblyNavigationInterception : INavigationInterception

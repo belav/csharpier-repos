@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
+
 namespace Microsoft.AspNetCore.DataProtection;
 
 internal class RegistryPolicy

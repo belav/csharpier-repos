@@ -24,15 +24,18 @@ namespace System.Data.Common
     public abstract class DBDataPermissionAttribute : CodeAccessSecurityAttribute
     {
         protected DBDataPermissionAttribute(SecurityAction action) : base(action) { }
+
         public bool AllowBlankPassword { get; set; }
         public string ConnectionString { get; set; }
         public KeyRestrictionBehavior KeyRestrictionBehavior { get; set; }
         public string KeyRestrictions { get; set; }
+
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool ShouldSerializeConnectionString()
         {
             return false;
         }
+
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         public bool ShouldSerializeKeyRestrictions()
         {

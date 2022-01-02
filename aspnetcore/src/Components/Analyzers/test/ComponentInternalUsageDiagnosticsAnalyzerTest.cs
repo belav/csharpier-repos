@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 using Microsoft.Extensions.Internal;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
 public class ComponentInternalUsageDiagnosticsAnalyzerTest : AnalyzerTestBase

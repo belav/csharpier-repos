@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundPseudoVariable variable,
             DiagnosticBag diagnostics
         );
+
         internal abstract BoundExpression GetAddress(BoundPseudoVariable variable);
     }
 }

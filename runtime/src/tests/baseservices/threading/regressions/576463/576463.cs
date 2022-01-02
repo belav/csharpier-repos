@@ -6,6 +6,7 @@ using System.Threading;
 class Test
 {
     bool _aRun = false;
+
     public void A()
     {
         _aRun = true;
@@ -13,6 +14,7 @@ class Test
     }
 
     bool _bRun = false;
+
     public void B()
     {
         _bRun = true;
@@ -20,6 +22,7 @@ class Test
     }
 
     volatile bool _cRun = false;
+
     public void C()
     {
         _cRun = true;
@@ -39,6 +42,7 @@ class Test
     }
 
     bool _dRun = false;
+
     public void D()
     {
         _dRun = true;

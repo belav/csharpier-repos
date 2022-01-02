@@ -4,6 +4,7 @@
 using System;
 using System.Security.Cryptography.Xml;
 
+
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 /// <summary>

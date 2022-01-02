@@ -200,6 +200,7 @@ class Tests
     }
 
     interface IFace { }
+
     class Face : IFace { }
 
     public static int test_0_stelemref_3()

@@ -406,6 +406,7 @@ namespace Moq.Tests
         }
 
         public class Bar { }
+
         public class Baz { }
 
         public interface IFoo

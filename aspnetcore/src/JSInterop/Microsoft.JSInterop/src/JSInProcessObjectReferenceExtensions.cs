@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.JSInterop.Infrastructure;
 
+
 namespace Microsoft.JSInterop;
 
 /// <summary>

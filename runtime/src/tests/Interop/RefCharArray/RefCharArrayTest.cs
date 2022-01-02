@@ -261,7 +261,6 @@ public class Test_RefCharArrayTest
         }
         return bresult;
     }
-
     #endregion
 
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
+
 namespace Microsoft.Extensions.Localization.RootNamespace.Tests;
 
 public class StringLocalizerOfTRootNamespaceTest

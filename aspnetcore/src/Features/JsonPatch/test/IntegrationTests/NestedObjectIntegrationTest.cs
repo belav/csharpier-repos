@@ -6,6 +6,7 @@ using System.Dynamic;
 using Newtonsoft.Json;
 using Xunit;
 
+
 namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests;
 
 public class NestedObjectIntegrationTest

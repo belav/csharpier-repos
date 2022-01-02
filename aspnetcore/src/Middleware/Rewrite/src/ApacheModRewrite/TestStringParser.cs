@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Rewrite.PatternSegments;
 
+
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 /// <summary>

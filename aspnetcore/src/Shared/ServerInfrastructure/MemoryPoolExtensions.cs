@@ -6,6 +6,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal static class MemoryPoolExtensions

@@ -120,7 +120,6 @@ namespace System.Web.Mvc
         {
             EndProcessRequest(result);
         }
-
         #endregion
 
         // Since UrlRoutingHandler.ProcessRequest() does the heavy lifting of looking at the RouteCollection for
