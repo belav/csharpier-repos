@@ -3,10 +3,8 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 #if !NETFX_CORE
 using System.Runtime.InteropServices;
-
 #endif
 
 // General Information about an assembly is controlled through the following
